@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 @export var speed: int = 40000
+@export var control: bool = false
 
 func press(primary: String, secondary: String) -> float:
 	var power: float = Input.get_action_strength(primary) - Input.get_action_strength(secondary)
@@ -12,4 +13,5 @@ func move(delta):
 	move_and_slide()
 
 func _physics_process(delta):
-	move(delta)
+	if (control):
+		move(delta)
