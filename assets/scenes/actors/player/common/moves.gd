@@ -5,10 +5,9 @@ extends CharacterBody2D
 
 @onready var size: Vector2 = $collision.shape.size
 
-var right: Vector2 : get = _calculate_right
+var rightpos: Vector2 : get = _get_rightpos
 
-func _calculate_right() -> Vector2:
-	return position + size
+func _get_rightpos() -> Vector2: return position + size
 
 func press(primary: String, secondary: String) -> float:
 	var power: float = Input.get_action_strength(primary) - Input.get_action_strength(secondary)
