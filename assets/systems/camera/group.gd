@@ -1,4 +1,4 @@
-extends Node
+extends Node2D
 
 @onready var camera: Camera2D = $camera
 @onready var heroes: Array = [$ray, $rock]

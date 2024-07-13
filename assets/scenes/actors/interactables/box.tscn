@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://esjdr0frox65"]
+
+[ext_resource type="Script" path="res://assets/systems/input/push.gd" id="1_bqmpc"]
+[ext_resource type="Texture2D" uid="uid://c0h8e5enepxj0" path="res://assets/resources/tiles/interactables/box.png" id="2_oswu3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1r0l8"]
+size = Vector2(64, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2antg"]
+size = Vector2(60, 60)
+
+[node name="box" type="Area2D"]
+collision_layer = 8
+collision_mask = 4
+script = ExtResource("1_bqmpc")
+
+[node name="view" type="Sprite2D" parent="."]
+position = Vector2(32, 32)
+texture = ExtResource("2_oswu3")
+
+[node name="interaction" type="CollisionShape2D" parent="."]
+position = Vector2(32, 32)
+shape = SubResource("RectangleShape2D_1r0l8")
+
+[node name="block" type="StaticBody2D" parent="."]
+position = Vector2(32, 32)
+collision_mask = 3
+
+[node name="collision" type="CollisionShape2D" parent="block"]
+shape = SubResource("RectangleShape2D_2antg")
+
+[connection signal="body_entered" from="." to="." method="_on_push" flags=18]

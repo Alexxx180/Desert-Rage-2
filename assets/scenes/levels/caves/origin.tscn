@@ -1,15 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://besonumxeyos4"]
+[gd_scene load_steps=4 format=3 uid="uid://besonumxeyos4"]
 
 [ext_resource type="TileSet" uid="uid://c8xuv5byhtufa" path="res://assets/scenes/levels/environment/caves/set.tres" id="1_m8yne"]
+[ext_resource type="PackedScene" uid="uid://esjdr0frox65" path="res://assets/scenes/actors/interactables/box.tscn" id="2_3b8lj"]
 [ext_resource type="PackedScene" uid="uid://b83b7oo2fmh5h" path="res://assets/scenes/actors/group.tscn" id="2_bvmv4"]
-[ext_resource type="Texture2D" uid="uid://c0h8e5enepxj0" path="res://assets/resources/tiles/interactables/box.png" id="2_n0auo"]
-[ext_resource type="Script" path="res://assets/systems/input/push.gd" id="2_nahi5"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1r0l8"]
-size = Vector2(64, 64)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2antg"]
-size = Vector2(56, 56)
 
 [node name="origin" type="Node2D"]
 
@@ -35,23 +28,7 @@ layer_2/y_sort_origin = 0
 layer_2/z_index = 0
 layer_2/tile_data = PackedInt32Array()
 
-[node name="box" type="Area2D" parent="environment"]
-position = Vector2(475, 206)
-collision_layer = 8
-collision_mask = 6
-script = ExtResource("2_nahi5")
+[node name="box" parent="environment" instance=ExtResource("2_3b8lj")]
+position = Vector2(400, 280)
 
-[node name="view" type="Sprite2D" parent="environment/box"]
-texture = ExtResource("2_n0auo")
-
-[node name="interaction" type="CollisionShape2D" parent="environment/box"]
-shape = SubResource("RectangleShape2D_1r0l8")
-
-[node name="shape" type="StaticBody2D" parent="environment/box"]
-
-[node name="collision" type="CollisionShape2D" parent="environment/box/shape"]
-shape = SubResource("RectangleShape2D_2antg")
-
-[node name="group" parent="." instance=ExtResource("2_bvmv4")]
-
-[connection signal="body_entered" from="environment/box" to="environment/box" method="_on_push"]
+[node name="group" parent="environment" instance=ExtResource("2_bvmv4")]

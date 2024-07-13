@@ -2,41 +2,27 @@ extends Area2D
 
 var power: int = 4
 var right: Vector2
-var left: Vector2
 
 func _ready():
-	var size: Vector2 = $interaction.shape.size
-	left = position - size
-	right = position + size
-
-func _push_vertical(tackle: int):
-	position.x += tackle
-	right.x += tackle
-	left.x += tackle
+	right = position + $interaction.shape.size
 
 func _push_horizontal(tackle: int):
+	position.x += tackle
+	right.x += tackle
+
+func _push_forward(tackle: int):
 	position.y += tackle
 	right.y += tackle
-	left.y += tackle
+
+func _push(vertical: Vector2, side: int):
+	if vertical.y > -power and vertical.y < power:
+		_push_forward(power * side)
+	elif vertical.x > -power and vertical.x < power:
+		_push_horizontal(power * side)
 
 func _on_push(hero: Node2D):
-	print('move')
-	if hero.position.x > right.x:
-		print('left')
-		position.x -= power
-		right.x -= power
-		left.x -= power
-	elif hero.position.x < left.x:
-		print('right')
-		position.x += power
-		left.x += power
+	var bottom: Vector2 = Vector2(right.x - hero.position.x, right.y - hero.position.y)
+	var top: Vector2 = Vector2(position.x - hero.right.x, position.y - hero.right.y)
 
-	if hero.position.y > right.y:
-		print('left')
-		position.y -= power
-	elif hero.position.y < left.y:
-		print('right')
-		position.y += power
-	#position.x += 10
-	#position = move_toward(Vector2(0, 200000), 15)
-	#move_and_collide(Vector2())
+	_push(bottom, -1)
+	_push(top, 1)
