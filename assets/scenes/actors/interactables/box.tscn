@@ -1,18 +1,27 @@
-[gd_scene load_steps=4 format=3 uid="uid://esjdr0frox65"]
+[gd_scene load_steps=5 format=3 uid="uid://esjdr0frox65"]
 
 [ext_resource type="Script" path="res://assets/systems/input/push.gd" id="1_bqmpc"]
-[ext_resource type="Texture2D" uid="uid://c0h8e5enepxj0" path="res://assets/resources/tiles/interactables/box.png" id="2_oswu3"]
-[ext_resource type="PackedScene" uid="uid://dtcb1h5lxv7rg" path="res://assets/scenes/actors/interactables/zones/zone.tscn" id="3_m7kxw"]
+[ext_resource type="PackedScene" uid="uid://dtcb1h5lxv7rg" path="res://assets/scenes/actors/interactables/zones/zone.tscn" id="2_cub6d"]
+[ext_resource type="Texture2D" uid="uid://bs2g1i7sc7mra" path="res://assets/resources/tiles/interactables/box2.png" id="2_ixfkr"]
+[ext_resource type="Script" path="res://assets/systems/input/push/moveable.gd" id="3_mv5rx"]
 
-[node name="box" type="Area2D"]
-collision_layer = 8
-collision_mask = 6
+[node name="box" type="Node2D" node_paths=PackedStringArray("collision")]
+z_index = 5
 script = ExtResource("1_bqmpc")
+collision = NodePath("placement/interaction")
 
 [node name="view" type="Sprite2D" parent="."]
-position = Vector2(32, 32)
-texture = ExtResource("2_oswu3")
+position = Vector2(0, -44)
+texture = ExtResource("2_ixfkr")
+centered = false
 
-[node name="interaction" parent="." instance=ExtResource("3_m7kxw")]
+[node name="placement" type="Area2D" parent="." node_paths=PackedStringArray("moveable")]
+collision_layer = 8
+collision_mask = 14
+script = ExtResource("3_mv5rx")
+moveable = NodePath("..")
 
-[connection signal="body_entered" from="." to="interaction" method="_on_push"]
+[node name="interaction" parent="placement" instance=ExtResource("2_cub6d")]
+
+[connection signal="area_entered" from="placement" to="placement/interaction" method="_on_interaction"]
+[connection signal="body_entered" from="placement" to="placement/interaction" method="_on_push"]

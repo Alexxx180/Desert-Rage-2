@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://jdgle11ik74y"]
+
+[ext_resource type="Script" path="res://assets/systems/input/push.gd" id="1_uoiew"]
+[ext_resource type="Texture2D" uid="uid://byjlxjjpmlmup" path="res://assets/resources/tiles/interactables/big-box2.png" id="2_aabik"]
+[ext_resource type="PackedScene" uid="uid://dtcb1h5lxv7rg" path="res://assets/scenes/actors/interactables/zones/zone.tscn" id="2_x20vn"]
+[ext_resource type="Script" path="res://assets/systems/input/push/moveable.gd" id="3_plnkr"]
+
+[node name="big-box" type="Node2D" node_paths=PackedStringArray("collision")]
+z_index = 6
+y_sort_enabled = true
+script = ExtResource("1_uoiew")
+collision = NodePath("placement/interaction")
+
+[node name="view" type="Sprite2D" parent="."]
+position = Vector2(0, -108)
+texture = ExtResource("2_aabik")
+centered = false
+
+[node name="placement" type="Area2D" parent="." node_paths=PackedStringArray("moveable")]
+collision_layer = 8
+collision_mask = 14
+script = ExtResource("3_plnkr")
+moveable = NodePath("..")
+
+[node name="interaction" parent="placement" instance=ExtResource("2_x20vn")]
+
+[connection signal="area_entered" from="placement" to="placement/interaction" method="_on_interaction"]
+[connection signal="body_entered" from="placement" to="placement/interaction" method="_on_push"]

@@ -1,6 +1,7 @@
-extends Area2D
+extends Node2D
 
-@onready var size: Vector2 = $interaction.shape.size
+@export var collision: CollisionShape2D
+
 var rightpos: Vector2 : get = _get_right
 
-func _get_right(): return position + size
+func _get_right(): return position + collision.shape.size

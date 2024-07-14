@@ -3,33 +3,33 @@
 [ext_resource type="Script" path="res://assets/systems/input/push/zone.gd" id="1_18er5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1r0l8"]
-size = Vector2(64, 64)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2antg"]
-size = Vector2(60, 60)
+size = Vector2(63.75, 19.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5ply3"]
-size = Vector2(64, 64)
+size = Vector2(64, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2antg"]
+size = Vector2(60, 16)
 
 [node name="interaction" type="CollisionShape2D"]
-position = Vector2(32, 32)
+position = Vector2(32, 10)
 shape = SubResource("RectangleShape2D_1r0l8")
 script = ExtResource("1_18er5")
+
+[node name="walls" type="StaticBody2D" parent="."]
+process_mode = 4
+position = Vector2(-32, 0)
+collision_mask = 2
+
+[node name="collision" type="CollisionShape2D" parent="walls"]
+position = Vector2(32, 0)
+shape = SubResource("RectangleShape2D_5ply3")
 
 [node name="block" type="StaticBody2D" parent="."]
 collision_mask = 4
 
 [node name="collision" type="CollisionShape2D" parent="block"]
 shape = SubResource("RectangleShape2D_2antg")
-
-[node name="walls" type="StaticBody2D" parent="."]
-process_mode = 4
-position = Vector2(-32, -32)
-collision_mask = 2
-
-[node name="collision" type="CollisionShape2D" parent="walls"]
-position = Vector2(32, 32)
-shape = SubResource("RectangleShape2D_5ply3")
 
 [node name="feedback" type="Timer" parent="."]
 wait_time = 0.5
