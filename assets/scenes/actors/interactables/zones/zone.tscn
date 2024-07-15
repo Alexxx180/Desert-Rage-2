@@ -1,12 +1,10 @@
 [gd_scene load_steps=5 format=3 uid="uid://dtcb1h5lxv7rg"]
 
 [ext_resource type="Script" path="res://assets/systems/input/push/zone.gd" id="1_18er5"]
+[ext_resource type="Shape2D" uid="uid://cqyj3i1vf3w47" path="res://assets/scenes/actors/interactables/shapes/box.tres" id="2_nc8ur"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1r0l8"]
 size = Vector2(63.75, 19.5)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_5ply3"]
-size = Vector2(64, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2antg"]
 size = Vector2(60, 16)
@@ -16,20 +14,32 @@ position = Vector2(32, 10)
 shape = SubResource("RectangleShape2D_1r0l8")
 script = ExtResource("1_18er5")
 
+[node name="borders" type="StaticBody2D" parent="."]
+collision_layer = 16
+collision_mask = 0
+
+[node name="collision" type="CollisionShape2D" parent="borders"]
+visible = false
+shape = ExtResource("2_nc8ur")
+debug_color = Color(0, 0.631373, 0.454902, 0.419608)
+
 [node name="walls" type="StaticBody2D" parent="."]
 process_mode = 4
 position = Vector2(-32, 0)
 collision_mask = 2
 
 [node name="collision" type="CollisionShape2D" parent="walls"]
+visible = false
 position = Vector2(32, 0)
-shape = SubResource("RectangleShape2D_5ply3")
+shape = ExtResource("2_nc8ur")
+debug_color = Color(0.509804, 0.580392, 0, 0.419608)
 
 [node name="block" type="StaticBody2D" parent="."]
 collision_mask = 4
 
 [node name="collision" type="CollisionShape2D" parent="block"]
 shape = SubResource("RectangleShape2D_2antg")
+debug_color = Color(0.917647, 0.168627, 0.576471, 0.419608)
 
 [node name="feedback" type="Timer" parent="."]
 wait_time = 0.5

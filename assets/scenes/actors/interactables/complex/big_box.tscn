@@ -17,12 +17,10 @@ texture = ExtResource("2_aabik")
 centered = false
 
 [node name="placement" type="Area2D" parent="." node_paths=PackedStringArray("moveable")]
-collision_layer = 8
-collision_mask = 14
+collision_mask = 30
 script = ExtResource("3_plnkr")
 moveable = NodePath("..")
 
 [node name="interaction" parent="placement" instance=ExtResource("2_x20vn")]
 
-[connection signal="area_entered" from="placement" to="placement/interaction" method="_on_interaction"]
 [connection signal="body_entered" from="placement" to="placement/interaction" method="_on_push"]

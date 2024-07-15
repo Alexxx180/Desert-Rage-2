@@ -1,9 +1,10 @@
 extends CollisionShape2D
 
+var is_pushing: bool = false
 var previous: Vector2
 var entity: Node2D
 
-@export var gap: Array = [[-2, 2], [-2, 2]]
+@export var gap: int = 2
 @onready var walls: StaticBody2D = $walls
 @onready var timer: Timer = $feedback
 
@@ -11,52 +12,45 @@ func _ready():
 	entity = get_parent()
 	while "moveable" in entity:
 		entity = entity.moveable
-	print(entity.position)
 	previous = entity.position
-	#print('entity: ', entity.name)
 
 func _come_off():
 	walls.process_mode = Node.PROCESS_MODE_DISABLED
 	timer.stop()
 
 func _push_forward(initial: Vector2, force: Vector2, velocity: int):
+	if is_pushing: return
+
 	var desk: Array = [initial.x, initial.y]
 	var hero: Array = [force.x, force.y]
+	var i: int = 0
 
-	for i in range(0, 2):
+	while i < 2 and not is_pushing:
 		var distance: float = desk[i] - hero[i]
-		"""
-		if i == 1:
-			print("Y-DISTANCE: ", distance)
-		if i == 0:
-			print("X-DISTANCE: ", distance)
-		"""
+		is_pushing = distance > -gap and distance < gap
+		i += 1
 		
-		if distance > gap[i][0] and distance < gap[i][1]:
-			previous = entity.position
-			match i:
-				0: entity.position.x += velocity
-				1: entity.position.y += velocity
-			#break
+	if is_pushing:
+		previous = entity.position
+		match i - 1:
+			0: entity.position.x += velocity
+			1: entity.position.y += velocity
 
 func _block_pushing():
 	walls.process_mode = Node.PROCESS_MODE_INHERIT
 	entity.position = previous
 	timer.start()
+	is_pushing = false
 
 func _on_push(hero: Node2D):
-	print("hmm x2")
 	if walls.process_mode == Node.PROCESS_MODE_INHERIT: return
 
-	if not hero is CharacterBody2D:
+	var is_hero: bool = hero is CharacterBody2D
+	
+	if not is_hero and is_pushing:
 		_block_pushing()
-	else:
+	elif is_hero:
+		is_pushing = false
 		var power: int = hero.push * hero.additional_force()
-		#print("RIGHT BOTTOM")
 		_push_forward(entity.rightpos, hero.position, -power)
-		#print("TOP LEFT")
 		_push_forward(entity.position, hero.rightpos, power)
-
-func _on_interaction(_block: Area2D):
-	print("hmm")
-	_block_pushing()
