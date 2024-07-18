@@ -15,11 +15,15 @@ func _is_floor(body: Node2D, access: int) -> bool:
 	return ledge
 
 func climb_floor(next: int): if floors[-1] != next: floors.append(next)
-func leave_floor(next: int): floors.pop_front()
+func leave_floor(): floors.pop_front()
 
-func _on_exit(body: Node2D): _is_floor(body, acessibility - 1)
+func _on_exit(body: Node2D):
+	if _is_floor(body, acessibility - 1):
+		pass
+
 func _on_step(body: Node2D):
-	#if _is_floor(body, acessibility + 1):
-		#climb_floor()
-	if not _is_floor(body, acessibility + 1) and box.compare(floors[-1]) and acessibility > 0:
+	if _is_floor(body, acessibility + 1):
+		climb_floor(body.floor)
+		return
+	if box.compare(floors[-1]) and acessibility > 0:
 		body.jump(direction)
