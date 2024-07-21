@@ -21,8 +21,8 @@ func _come_off():
 func _push_forward(initial: Vector2, force: Vector2, velocity: int):
 	if is_pushing: return
 
-	var desk: Array = [initial.x, initial.y]
-	var hero: Array = [force.x, force.y]
+	var desk: Array[float] = [initial.x, initial.y]
+	var hero: Array[float] = [force.x, force.y]
 	var i: int = 0
 
 	while i < 2 and not is_pushing:
@@ -51,6 +51,6 @@ func _on_push(hero: Node2D):
 		_block_pushing()
 	elif is_hero:
 		is_pushing = false
-		var power: int = hero.push * hero.additional_force()
+		var power: int = hero.push * hero.forced()
 		_push_forward(entity.rightpos, hero.position, -power)
 		_push_forward(entity.position, hero.rightpos, power)

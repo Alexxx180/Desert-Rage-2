@@ -1,7 +1,7 @@
 extends Node2D
 
 @onready var camera: Camera2D = $camera
-@onready var heroes: Array = [$ray, $rock]
+@onready var heroes: Array[CharacterBody2D] = [$ray, $rock]
 
 var count: int = 2
 var main: int = 0

@@ -3,7 +3,7 @@ extends CharacterBody2D
 @export var push: int = 2
 @export var speed: int = 10000
 @export var control: bool = false
-@export var far = 64
+@export var far = 128
 
 @onready var size: Vector2 = $collision.shape.size
 
@@ -14,20 +14,22 @@ func _get_rightpos() -> Vector2: return position + size
 func press(primary: String, secondary: String) -> float:
 	return Input.get_action_strength(primary) - Input.get_action_strength(secondary)
 
-func _force() -> int: return 4 if Input.is_action_pressed("run") else 1
+func forced() -> int: return 4 if Input.is_action_pressed("run") else 1
 
 func jump(direction: String):
-	if Input.is_action_just_pressed(direction):
+	print("JUMPED? ", direction)
+	if Input.is_action_pressed(direction):
 		match direction:
-			"backward": velocity.y += far
-			"forward": velocity.y -= far
-			"right": velocity.x += far
-			"left": velocity.x -= far
-		move_and_slide()
+			"backward": position.y += far
+			"forward": position.y -= far
+			"right": position.x += far
+			"left": position.x -= far
+		print("JUMPED!")
+		#move_and_slide()
 
 func move(delta):
-	var run: float = _force() * speed * delta
-	velocity.x = run * press("right", "ui_left")
+	var run: float = forced() * speed * delta
+	velocity.x = run * press("right", "left")
 	velocity.y = run * press("backward", "forward")
 	move_and_slide()
 
