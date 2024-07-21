@@ -17,5 +17,4 @@ func subtract(size: Node2D) -> Array[float]:
 
 func _ready():
 	subject = get_node(base)
-	print("NAMEEE ", get_node(form).name)
 	geometry = get_node(form)

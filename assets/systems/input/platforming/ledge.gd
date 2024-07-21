@@ -33,6 +33,8 @@ func _on_step(body: Node2D):
 	if _is_floor(body):
 		climb_floor(body.F)
 	elif is_same_floor():
+		print("IS ON THE PLATFORM")
+		var directions: Array[String] = [direction]
 		body.to_platforming()
-		body.platforming.jump() # direction
+		body.platforming.coordinate(directions)
 	#print("STEP")

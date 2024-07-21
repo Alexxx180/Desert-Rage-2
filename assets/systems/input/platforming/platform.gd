@@ -17,4 +17,4 @@ func _on_step(body: Node2D):
 			ledge.add_direction(directions)
 			
 		body.to_platforming()
-		body.platforming.directions = directions
+		body.platforming.coordinate(directions)
