@@ -1,7 +1,21 @@
 extends Node2D
 
-@export var collision: CollisionShape2D
+@export var form: String = "."
+@export var base: String = "."
 
-var rightpos: Vector2 : get = _get_right
+var subject: Node2D
+var geometry: CollisionShape2D
 
-func _get_right(): return position + collision.shape.size
+var basis: Vector2 : get = _get_basis
+var right: Vector2 : get = _get_right
+
+func _get_basis() -> Vector2: return subject.position
+func _get_right() -> Vector2: return basis + geometry.shape.size
+	
+func subtract(size: Node2D) -> Array[float]:
+	return [right.x - size.basis.x, right.y - size.basis.y]
+
+func _ready():
+	subject = get_node(base)
+	print("NAMEEE ", get_node(form).name)
+	geometry = get_node(form)

@@ -1,26 +1,29 @@
 [gd_scene load_steps=6 format=3 uid="uid://esjdr0frox65"]
 
+[ext_resource type="Script" path="res://assets/systems/boxes/box.gd" id="1_ac3bu"]
 [ext_resource type="Script" path="res://assets/systems/input/push/push.gd" id="1_il1mp"]
 [ext_resource type="PackedScene" uid="uid://dtcb1h5lxv7rg" path="res://assets/scenes/actors/interactables/zones/zone.tscn" id="2_cub6d"]
 [ext_resource type="Texture2D" uid="uid://bs2g1i7sc7mra" path="res://assets/resources/tiles/interactables/box2.png" id="2_ixfkr"]
-[ext_resource type="Script" path="res://assets/systems/input/push/moveable.gd" id="3_mv5rx"]
 [ext_resource type="PackedScene" uid="uid://cee058p7r80p7" path="res://assets/scenes/actors/interactables/zones/platform/platform.tscn" id="6_4h2fu"]
 
-[node name="box" type="Node2D" node_paths=PackedStringArray("collision")]
-script = ExtResource("1_il1mp")
-collision = NodePath("placement/interaction")
+[node name="box" type="Node2D"]
+script = ExtResource("1_ac3bu")
 
 [node name="view" type="Sprite2D" parent="."]
 position = Vector2(0, -44)
 texture = ExtResource("2_ixfkr")
 centered = false
 
-[node name="placement" type="Area2D" parent="." node_paths=PackedStringArray("moveable")]
+[node name="size" type="Node2D" parent="."]
+script = ExtResource("1_il1mp")
+form = "../placement/interaction"
+base = ".."
+
+[node name="placement" type="Area2D" parent="."]
 collision_mask = 30
-script = ExtResource("3_mv5rx")
-moveable = NodePath("..")
 
 [node name="interaction" parent="placement" instance=ExtResource("2_cub6d")]
+box = "../.."
 
 [node name="platform" parent="." instance=ExtResource("6_4h2fu")]
 

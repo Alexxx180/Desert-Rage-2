@@ -26,9 +26,13 @@ func _on_exit(body: Node2D):
 		print("Floor: ", floors[-1])
 		floors.pop_front()
 
+func add_direction(directions: Array[String]):
+	if is_same_floor(): directions.append(opposite)
+
 func _on_step(body: Node2D):
 	if _is_floor(body):
 		climb_floor(body.F)
 	elif is_same_floor():
-		body.jump(direction)
+		body.to_platforming()
+		body.platforming.jump() # direction
 	#print("STEP")

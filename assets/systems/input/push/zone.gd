@@ -4,53 +4,31 @@ var is_pushing: bool = false
 var previous: Vector2
 var entity: Node2D
 
+@export var box: String = "."
 @export var gap: int = 2
-@onready var walls: StaticBody2D = $walls
-@onready var timer: Timer = $feedback
+@onready var block: Timer = $blocker
 
 func _ready():
-	entity = get_parent()
-	while "moveable" in entity:
-		entity = entity.moveable
-	previous = entity.position
+	entity = get_node(box)
+	save()
 
-func _come_off():
-	walls.process_mode = Node.PROCESS_MODE_DISABLED
-	timer.stop()
+func check_distance(distance: float):
+	is_pushing = distance < gap
 
-func _push_forward(initial: Vector2, force: Vector2, velocity: int):
-	if is_pushing: return
+func save(): previous = entity.position
+func pull(): entity.position = previous
 
-	var desk: Array[float] = [initial.x, initial.y]
-	var hero: Array[float] = [force.x, force.y]
-	var i: int = 0
+func push(axis: int, velocity: int):
+	save()
+	match axis:
+		0: entity.position.x += velocity
+		1: entity.position.y += velocity
 
-	while i < 2 and not is_pushing:
-		var distance: float = desk[i] - hero[i]
-		is_pushing = distance > -gap and distance < gap
-		i += 1
-		
-	if is_pushing:
-		previous = entity.position
-		match i - 1:
-			0: entity.position.x += velocity
-			1: entity.position.y += velocity
-
-func _block_pushing():
-	walls.process_mode = Node.PROCESS_MODE_INHERIT
-	entity.position = previous
-	timer.start()
-	is_pushing = false
-
-func _on_push(hero: Node2D):
-	if walls.process_mode == Node.PROCESS_MODE_INHERIT: return
-
-	var is_hero: bool = hero is CharacterBody2D
+func _on_push(body: Node2D):
+	if not block.can_push(): return
 	
-	if not is_hero and is_pushing:
-		_block_pushing()
-	elif is_hero:
+	if not body is CharacterBody2D:
+		if is_pushing: block.cancel_push()
+	else:
 		is_pushing = false
-		var power: int = hero.push * hero.forced()
-		_push_forward(entity.rightpos, hero.position, -power)
-		_push_forward(entity.position, hero.rightpos, power)
+		body.interaction.push_objects(self)
