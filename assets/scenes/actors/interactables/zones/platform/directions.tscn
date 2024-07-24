@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://bar4jauuflsve"]
+
+[ext_resource type="Script" path="res://assets/systems/input/platforming/platform/directions.gd" id="1_snrop"]
+[ext_resource type="PackedScene" uid="uid://bo30rlr0npmxa" path="res://assets/scenes/actors/interactables/zones/platform/ledge.tscn" id="2_g4btg"]
+
+[node name="directions" type="Node2D"]
+script = ExtResource("1_snrop")
+
+[node name="backward" parent="." instance=ExtResource("2_g4btg")]
+position = Vector2(0, -128)
+opposite = "forward"
+
+[node name="left" parent="." instance=ExtResource("2_g4btg")]
+position = Vector2(128, 0)
+opposite = "right"
+
+[node name="right" parent="." instance=ExtResource("2_g4btg")]
+position = Vector2(-128, 0)
+opposite = "left"
+
+[node name="forward" parent="." instance=ExtResource("2_g4btg")]
+position = Vector2(0, 128)
+opposite = "backward"

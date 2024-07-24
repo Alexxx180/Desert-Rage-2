@@ -7,10 +7,8 @@ extends CharacterBody2D
 @onready var platforming: Node = $platforming
 @onready var movement: Node = $movement
 
-func to_platforming():
-	platforming.process_mode = Node.PROCESS_MODE_INHERIT
-	movement.process_mode = Node.PROCESS_MODE_DISABLED
+func set_platforming(mode: ProcessMode):
+	platforming.process_mode = mode
 
-func to_movement():
-	platforming.process_mode = Node.PROCESS_MODE_INHERIT
-	movement.process_mode = Node.PROCESS_MODE_DISABLED
+func set_movement(mode: ProcessMode):
+	movement.process_mode = mode

@@ -17,7 +17,7 @@ func move(delta):
 func _physics_process(delta):
 	if (hero.control): move(delta)
 
-func _input(event: InputEvent):
+func _input(_event: InputEvent):
 	if not Input.is_action_pressed("run"): return
 
 	for action in increase:
