@@ -13,8 +13,14 @@ func _ready():
 	else:
 		ledges = [false, has_center, false]
 
-func _intersect():
-	if use_y:
+func step_and_jump(hero: CharacterBody2D):
+	
+	hero.platforming.x
+	pass
+
+func _on_track(body: Node2D):
+	if body is CharacterBody2D:
 		pass
-	else:
+	elif body is CharacterBody2D:
+		track.intersect(body)
 		pass
