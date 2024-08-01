@@ -32,3 +32,5 @@ func _on_push(body: Node2D):
 	else:
 		is_pushing = false
 		body.interaction.push_objects(self)
+
+    if what then:
