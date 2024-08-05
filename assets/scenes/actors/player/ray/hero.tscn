@@ -1,48 +1,56 @@
-[gd_scene load_steps=9 format=3 uid="uid://wbjmq3n817nk"]
+[gd_scene load_steps=10 format=3 uid="uid://wbjmq3n817nk"]
 
 [ext_resource type="Script" path="res://assets/systems/input/character/character.gd" id="1_tbrg2"]
 [ext_resource type="Texture2D" uid="uid://cao2nqh8p8y4t" path="res://assets/resources/actors/player/ray/idle/ray2d-fallback.png" id="2_moe4v"]
-[ext_resource type="Shape2D" uid="uid://c4cpmbyjcd61r" path="res://assets/scenes/actors/player/common/shape.tres" id="3_cm7wy"]
-[ext_resource type="Script" path="res://assets/systems/input/push/push.gd" id="3_djtow"]
+[ext_resource type="Script" path="res://assets/systems/input/push/size.gd" id="4_m7aqi"]
 [ext_resource type="Shape2D" uid="uid://dfrgsivy7v7s2" path="res://assets/resources/shapes/interactables/interactable.tres" id="4_xg0w1"]
 [ext_resource type="Script" path="res://assets/systems/input/character/platforming.gd" id="5_bougs"]
 [ext_resource type="Script" path="res://assets/systems/input/character/interaction.gd" id="5_uswej"]
 [ext_resource type="Script" path="res://assets/systems/input/character/movement.gd" id="7_6hnvc"]
+[ext_resource type="PackedScene" uid="uid://bnf8qr722woiv" path="res://assets/scenes/actors/interactables/zones/platforming/shape/hero.tscn" id="7_q7jd2"]
+[ext_resource type="Shape2D" uid="uid://cqyj3i1vf3w47" path="res://assets/resources/shapes/interactables/box.tres" id="7_ymyh8"]
 
 [node name="ray" type="CharacterBody2D"]
 collision_layer = 4
-collision_mask = 32768
+collision_mask = 3
 script = ExtResource("1_tbrg2")
 
-[node name="view" type="Sprite2D" parent="."]
+[node name="shape" type="CollisionShape2D" parent="."]
+position = Vector2(32, 10)
+shape = ExtResource("7_ymyh8")
+debug_color = Color(1, 1, 1, 0.419608)
+
+[node name="base" type="Node2D" parent="."]
+
+[node name="view" type="Sprite2D" parent="base"]
 position = Vector2(-6, -108)
 scale = Vector2(0.855556, 0.914286)
 texture = ExtResource("2_moe4v")
 centered = false
 
-[node name="size" type="Node2D" parent="."]
-script = ExtResource("3_djtow")
-form = "../collision"
-base = ".."
+[node name="size" type="Node2D" parent="base"]
+script = ExtResource("4_m7aqi")
+form = "../../shape"
 
-[node name="collision" type="CollisionShape2D" parent="."]
-position = Vector2(32, 10)
-shape = ExtResource("3_cm7wy")
-debug_color = Color(1, 1, 1, 0.419608)
+[node name="detectors" type="Node2D" parent="."]
 
-[node name="interaction" type="StaticBody2D" parent="."]
+[node name="interaction" type="StaticBody2D" parent="detectors"]
 collision_layer = 16
 collision_mask = 0
 script = ExtResource("5_uswej")
 
-[node name="collision" type="CollisionShape2D" parent="interaction"]
+[node name="collision" type="CollisionShape2D" parent="detectors/interaction"]
 position = Vector2(32, 10)
 shape = ExtResource("4_xg0w1")
 debug_color = Color(1, 0.439216, 0.176471, 0.419608)
 
-[node name="platforming" type="Node" parent="."]
+[node name="floor" parent="detectors" instance=ExtResource("7_q7jd2")]
+
+[node name="processing" type="Node" parent="."]
+
+[node name="platforming" type="Node" parent="processing"]
 process_mode = 4
 script = ExtResource("5_bougs")
 
-[node name="movement" type="Node" parent="."]
+[node name="movement" type="Node" parent="processing"]
 script = ExtResource("7_6hnvc")

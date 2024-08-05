@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://bnf8qr722woiv"]
+
+[ext_resource type="Shape2D" uid="uid://cqyj3i1vf3w47" path="res://assets/resources/shapes/interactables/box.tres" id="1_yilua"]
+[ext_resource type="Script" path="res://assets/systems/input/platforming/floor/plain.gd" id="2_qoeil"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xtctl"]
+size = Vector2(256, 256)
+
+[node name="floor" type="Node2D"]
+
+[node name="platform" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 64
+
+[node name="shape" type="CollisionShape2D" parent="platform"]
+position = Vector2(32, 10)
+shape = ExtResource("1_yilua")
+debug_color = Color(0.290196, 0.631373, 0, 0.419608)
+
+[node name="ledge" type="Area2D" parent="."]
+
+[node name="shape" type="CollisionShape2D" parent="ledge"]
+position = Vector2(32, 10)
+shape = SubResource("RectangleShape2D_xtctl")
+debug_color = Color(1, 1, 1, 0.415686)
+
+[node name="plain" type="Node" parent="."]
+script = ExtResource("2_qoeil")
+
+[connection signal="body_entered" from="platform" to="plain" method="_at_new_floor"]
+[connection signal="body_exited" from="platform" to="plain" method="_at_old_floor"]

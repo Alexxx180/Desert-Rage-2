@@ -1,23 +1,14 @@
-extends CollisionShape2D
+extends Node
 
-@onready var track: Dictionary = { name: self }
-@onready var sides: Dictionary = { "left": front, "right": back }
+var sides: Dictionary
 
-func front(hero: float, box: float) -> bool: return hero > box
-func back(hero: float, box: float) -> bool: return hero < box
+func send_sides(front: Callable, back: Callable):
+	sides = { "left": front, "right": back }
 
-func jump(hero: CharacterBody2D) -> void:
-	if not sides.has(hero.direction):
-		return
-	var side = sides[hero.direction]
-	for box in track:
-		if ledge(side, hero, track[box]):
-			return
+func _can_jump(hero: Node2D, box: Vector2) -> bool:
+	return sides[hero.direction].call(hero.position.x, box.x)
 
-func ledge(side: Callable, hero: Node2D, box: Node2D) -> bool:
-	var can_jump: bool = side.call(hero.position.x, box.position.x)
-	if can_jump: hero.position.x = box.position.x
-	return can_jump
-
-func _parallel(body: StaticBody2D) -> void: track.erase(body.name)
-func intersect(body: StaticBody2D) -> void: track[body.name] = body
+func jump(hero: Node2D, box: Node2D) -> bool:
+	var reach: bool = _can_jump(hero, box.position)
+	if reach: hero.position.x = box.position.x
+	return reach

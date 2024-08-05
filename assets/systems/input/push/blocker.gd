@@ -1,6 +1,6 @@
 extends Timer
 
-@onready var interaction: CollisionShape2D = get_parent()
+@onready var interaction: Node = get_parent()
 @onready var walls: StaticBody2D = $walls
 
 func _come_off():

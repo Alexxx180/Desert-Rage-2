@@ -1,6 +1,14 @@
-extends "res://assets/systems/input/platforming/platforms/directions/horizontal.gd"
+extends Node
 
-func ledge(side: Callable, hero: Node2D, box: Node2D) -> bool:
-	var can_jump: bool = side.call(hero.position.y, box.position.y)
-	if can_jump: hero.position.y = box.position.y
-	return can_jump
+var sides: Dictionary
+
+func send_sides(front: Callable, back: Callable):
+	sides = { "forward": front, "backward": back }
+
+func _can_jump(hero: Node2D, box: Vector2) -> bool:
+	return sides[hero.direction].call(hero.position.y, box.y)
+
+func jump(hero: Node2D, box: Node2D) -> bool:
+	var reach: bool = _can_jump(hero, box.position)
+	if reach: hero.position.y = box.position.y
+	return reach

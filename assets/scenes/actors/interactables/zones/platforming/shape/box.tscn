@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://bcm7c5kgxcjd6"]
+
+[ext_resource type="PackedScene" uid="uid://bar4jauuflsve" path="res://assets/scenes/actors/interactables/zones/platforming/platforms/directions.tscn" id="1_2fy67"]
+[ext_resource type="PackedScene" uid="uid://j802q0skl6dn" path="res://assets/scenes/actors/interactables/zones/platforming/platforms/platform.tscn" id="2_nw4pu"]
+[ext_resource type="PackedScene" uid="uid://bqhcem2d36lpv" path="res://assets/scenes/actors/interactables/zones/platforming/floor/ledge.tscn" id="3_s2v2e"]
+
+[node name="platforming" type="Node2D"]
+position = Vector2(32, -30)
+
+[node name="directions" parent="." instance=ExtResource("1_2fy67")]
+
+[node name="platform" parent="." instance=ExtResource("2_nw4pu")]
+position = Vector2(0, 0)
+
+[node name="ledge" parent="." instance=ExtResource("3_s2v2e")]
+
+[connection signal="body_entered" from="platform" to="ledge" method="_at_new_floor"]
+[connection signal="body_exited" from="platform" to="ledge" method="_at_old_floor"]

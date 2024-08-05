@@ -17,7 +17,5 @@ func _input(event):
 		var next: int = (main + 1) % count
 		heroes[main].control = !heroes[main].control
 		heroes[next].control = !heroes[next].control
-		camera.change(heroes[main], hero[next])
+		camera.change(heroes[main], heroes[next])
 		main = next
-        problem
-        if what

@@ -1,30 +1,24 @@
-[gd_scene load_steps=6 format=3 uid="uid://esjdr0frox65"]
+[gd_scene load_steps=5 format=3 uid="uid://esjdr0frox65"]
 
-[ext_resource type="Script" path="res://assets/systems/boxes/box.gd" id="1_ac3bu"]
-[ext_resource type="Script" path="res://assets/systems/input/push/push.gd" id="1_il1mp"]
-[ext_resource type="PackedScene" uid="uid://dtcb1h5lxv7rg" path="res://assets/scenes/actors/interactables/zones/zone.tscn" id="2_cub6d"]
+[ext_resource type="Script" path="res://assets/systems/input/push/size.gd" id="2_ite8n"]
 [ext_resource type="Texture2D" uid="uid://bs2g1i7sc7mra" path="res://assets/resources/tiles/interactables/box2.png" id="2_ixfkr"]
-[ext_resource type="PackedScene" uid="uid://cee058p7r80p7" path="res://assets/scenes/actors/interactables/zones/platform/platform.tscn" id="6_4h2fu"]
+[ext_resource type="PackedScene" uid="uid://biosnl51cos0y" path="res://assets/scenes/actors/interactables/zones/push/shape/box.tscn" id="3_mmdk7"]
+[ext_resource type="PackedScene" uid="uid://bcm7c5kgxcjd6" path="res://assets/scenes/actors/interactables/zones/platforming/shape/box.tscn" id="4_i44eb"]
 
 [node name="box" type="Node2D"]
-script = ExtResource("1_ac3bu")
 
-[node name="view" type="Sprite2D" parent="."]
+[node name="base" type="Node2D" parent="."]
+
+[node name="view" type="Sprite2D" parent="base"]
 position = Vector2(0, -44)
 texture = ExtResource("2_ixfkr")
 centered = false
 
-[node name="size" type="Node2D" parent="."]
-script = ExtResource("1_il1mp")
-form = "../placement/interaction"
-base = ".."
+[node name="size" type="Node" parent="base"]
+script = ExtResource("2_ite8n")
 
-[node name="placement" type="Area2D" parent="."]
-collision_mask = 30
+[node name="interaction" type="Node2D" parent="."]
 
-[node name="interaction" parent="placement" instance=ExtResource("2_cub6d")]
-box = "../.."
+[node name="push" parent="interaction" instance=ExtResource("3_mmdk7")]
 
-[node name="platform" parent="." instance=ExtResource("6_4h2fu")]
-
-[connection signal="body_entered" from="placement" to="placement/interaction" method="_on_push"]
+[node name="platforming" parent="interaction" instance=ExtResource("4_i44eb")]

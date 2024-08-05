@@ -1,6 +1,6 @@
 extends Node
 
-@onready var hero: CharacterBody2D = get_parent()
+@onready var hero: CharacterBody2D = get_node("../..")
 
 @export var speed: int = 10000
 @export var increase: Dictionary = {

@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://bvvyrh6vj2vjr"]
+
+[ext_resource type="Script" path="res://assets/systems/input/platforming/platforms/platform.gd" id="1_7o2jj"]
+[ext_resource type="Shape2D" uid="uid://da2dp3f1pdtvj" path="res://assets/resources/shapes/interactables/platforms/horizontal.tres" id="1_rbmy2"]
+[ext_resource type="Script" path="res://assets/systems/input/platforming/platforms/directions/bridge.gd" id="3_5av1s"]
+[ext_resource type="Script" path="res://assets/systems/input/platforming/platforms/directions/horizontal.gd" id="3_8k7aq"]
+
+[node name="horizontal" type="Area2D"]
+collision_layer = 32
+collision_mask = 68
+script = ExtResource("1_7o2jj")
+ledge_path = "../../ledge"
+
+[node name="track" type="CollisionShape2D" parent="."]
+shape = ExtResource("1_rbmy2")
+script = ExtResource("3_5av1s")
+
+[node name="axis" type="Node" parent="track"]
+script = ExtResource("3_8k7aq")
+
+[connection signal="body_entered" from="." to="." method="_on_track"]
+[connection signal="body_exited" from="." to="." method="_on_untrack"]
