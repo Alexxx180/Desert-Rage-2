@@ -2,28 +2,49 @@ extends Node
 
 @onready var hero: CharacterBody2D = get_node("../..")
 
+const JUMP_FORCE = 128
+const NEUTRAL = 0
+const GAP = 4
+
+func inplace(ledge: float, subject: float) -> bool:
+	return ledge >= subject - GAP and ledge <= subject + GAP
+
+func regulation(axis: int) -> Array[Callable]:
+	return [
+		(func(ledge: Vector2): return inplace(ledge[axis], hero.position[axis])),
+		(func(ledge: Vector2): return ledge[axis] > hero.position[axis]),
+		(func(ledge: Vector2): return ledge[axis] < hero.position[axis])
+	]
+
+func check_place(axis: int, direction: Vector2i, ledge: Vector2):
+	directions[axis][direction[axis]].call(ledge)
+
 var ledges: Dictionary = {}
+var directions: Array[Array] = [
+	regulation(Vector2.AXIS_X), regulation(Vector2.AXIS_Y)
+]
+var y: Array[int] = [NEUTRAL, JUMP_FORCE, -JUMP_FORCE]
+var x: Array[int] = [NEUTRAL, JUMP_FORCE, -JUMP_FORCE]
 
-var _subject: Vector2:
-	get:
-		return hero.position
+func _jump_to_place(ledge: Node2D, direction: Vector2i):
+	if ledge.name == "ledge":
+		hero.position = ledge.position
+	else:
+		hero.position += Vector2(x[direction.x], y[direction.y])
 
-func left(ledge: Vector2) -> bool: return ledge.x < _subject.x
+func jump_to(direction: Vector2i):
+	if direction == Vector2i.ZERO: return
 
-func right(ledge: Vector2) -> bool: return _subject.x < ledge.x
+	var i: int = ledges.size() - 1
+	var jump: bool = false
 
-func forward(ledge: Vector2) -> bool: return ledge.y < _subject.y
+	while i > 0 and not jump:
+		i = i - 1
+		jump = true
+		for axis in [Vector2.AXIS_X, Vector2.AXIS_Y]:
+			jump = jump and check_place(axis, direction, ledges[i].position)
 
-func backward(ledge: Vector2) -> bool: return _subject.y < ledge.y
+	if jump: _jump_to_place(ledges[i], direction)
 
-func jump_to_direction(directions: Array[String]):
-	for ledge in ledges:
-		var i: int = directions.size()
-		var jump: bool = self.call(directions[i], ledge.position)
-		while i > 0 and jump:
-			i = i - 1
-			jump &= self.call(directions[i], ledge.position)
-		if jump: hero.position = ledge.position
-
-func append_ledge(ledge): ledges[ledge.get_instance_id()] = ledge
-func remove_ledge(ledge): ledges.erase(ledge)
+func append_ledge(ledge: Node2D): ledges[ledge.get_instance_id()] = ledge
+func remove_ledge(ledge: Node2D): ledges.erase(ledge)
