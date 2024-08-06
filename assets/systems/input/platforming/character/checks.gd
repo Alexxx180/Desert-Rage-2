@@ -1,6 +1,6 @@
 extends Node
 
-@onready var hero: CharacterBody2D = get_node("../..")
+var hero: CharacterBody2D
 
 const GAP: int = 4
 
@@ -15,7 +15,8 @@ func regulation(axis: int) -> Array[Callable]:
 	]
 
 func observe(axis: int, direction: Vector2i, ledge: Node2D):
-	directions[axis][direction[axis]].call(ledge.position)
+	var power: int = direction[axis]
+	directions[axis][power].call(ledge.position)
 
 var directions: Array[Array] = [
 	regulation(Vector2.AXIS_X), regulation(Vector2.AXIS_Y)

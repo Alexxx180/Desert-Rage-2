@@ -1,7 +1,7 @@
 extends Node
 
-@onready var _platforming: Node = $processing/platforming
-@onready var _movement: Node = $processing/movement
+@onready var _platforming: Node = $platforming
+@onready var _movement: Node = $movement
 
 var platforming: Node.ProcessMode:
 	set(mode):

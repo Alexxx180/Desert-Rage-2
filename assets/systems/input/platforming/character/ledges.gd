@@ -1,30 +1,25 @@
 extends Node
 
+const will: ProcessMode = Node.PROCESS_MODE_INHERIT
+const wont: ProcessMode = Node.PROCESS_MODE_DISABLED
+
 var hero: CharacterBody2D
 var ledges: Dictionary = {}
 var size: int = 0
 
-func update(next: int, ledge: Node2D, mode: ProcessMode):
+func update(next: int, ledge: Node2D, mode: ProcessMode, compare: Callable):
 	size = next
-	if ledge.name == "ledge":
+
+	if compare.call(size):
 		hero.processing.platforming = mode
+
+	if ledge.name != "ledge" and size > 0:
+		hero.processing.movement = mode
 
 func append(ledge: Node2D):
 	ledges[ledge.get_instance_id()] = ledge
-	update(size + 1, ledge, Node.PROCESS_MODE_INHERIT)
-
-	if size > 2:
-		hero.processing.platforming = Node.PROCESS_MODE_INHERIT
-
-	if ledge.name != "ledge" and size > 0:
-		hero.processing.movement = Node.PROCESS_MODE_INHERIT
+	update(size + 1, ledge, will, func(x): return x > 2)
 
 func remove(ledge: Node2D):
 	ledges.erase(ledge.get_instance_id())
-	update(size - 1, ledge, Node.PROCESS_MODE_DISABLED)
-
-	if size == 0:
-		hero.processing.platforming = Node.PROCESS_MODE_DISABLED
-
-	if ledge.name != "ledge" and size > 0:
-		hero.processing.movement = Node.PROCESS_MODE_DISABLED
+	update(size - 1, ledge, wont, func(x): return x == 0)

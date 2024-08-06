@@ -11,6 +11,7 @@ const NEUTRAL: int = 0
 func _ready():
 	hero = get_node("../../../..")
 	data.hero = hero
+	checks.hero = hero
 
 func _to_floor(direction: Vector2i) -> Vector2:
 	var jump: Array[int] = [NEUTRAL, JUMP_FORCE, -JUMP_FORCE]
@@ -29,8 +30,10 @@ func perform_jump(direction: Vector2i):
 
 	while i >= 0 and not jump:
 		i = i - 1
-		jump = true
-		for axis in [Vector2.AXIS_X, Vector2.AXIS_Y]:
-			jump = jump and checks.observe(axis, direction, ledges[i])
+		if hero.surface.F == ledges[i].F:
+			jump = true
+		
+			for axis in [Vector2.AXIS_X, Vector2.AXIS_Y]:
+				jump = jump and checks.observe(axis, direction, ledges[i])
 
 	if jump: _jump_to_place(ledges[i], direction)

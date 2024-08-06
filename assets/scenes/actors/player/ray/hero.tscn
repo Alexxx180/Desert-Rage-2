@@ -1,15 +1,16 @@
-[gd_scene load_steps=11 format=3 uid="uid://wbjmq3n817nk"]
+[gd_scene load_steps=12 format=3 uid="uid://wbjmq3n817nk"]
 
 [ext_resource type="Script" path="res://assets/systems/input/character/character.gd" id="1_tbrg2"]
 [ext_resource type="Texture2D" uid="uid://cao2nqh8p8y4t" path="res://assets/resources/actors/player/ray/idle/ray2d-fallback.png" id="2_moe4v"]
 [ext_resource type="Script" path="res://assets/systems/input/push/size.gd" id="4_m7aqi"]
 [ext_resource type="Shape2D" uid="uid://dfrgsivy7v7s2" path="res://assets/resources/shapes/interactables/interactable.tres" id="4_xg0w1"]
-[ext_resource type="Script" path="res://assets/systems/input/character/platforming.gd" id="5_bougs"]
+[ext_resource type="Script" path="res://assets/systems/input/character/processing/platforming.gd" id="5_bougs"]
 [ext_resource type="Script" path="res://assets/systems/input/character/interaction.gd" id="5_uswej"]
-[ext_resource type="Script" path="res://assets/systems/input/character/movement.gd" id="7_6hnvc"]
+[ext_resource type="Script" path="res://assets/systems/input/character/processing/movement.gd" id="7_6hnvc"]
 [ext_resource type="PackedScene" uid="uid://bnf8qr722woiv" path="res://assets/scenes/actors/interactables/zones/platforming/shape/hero.tscn" id="7_q7jd2"]
 [ext_resource type="Shape2D" uid="uid://cqyj3i1vf3w47" path="res://assets/resources/shapes/interactables/box.tres" id="7_ymyh8"]
 [ext_resource type="Script" path="res://assets/systems/input/character/processing.gd" id="8_hpdtd"]
+[ext_resource type="Script" path="res://assets/systems/input/character/processing/input.gd" id="9_b2eea"]
 
 [node name="ray" type="CharacterBody2D"]
 collision_layer = 4
@@ -49,6 +50,9 @@ debug_color = Color(1, 0.439216, 0.176471, 0.419608)
 
 [node name="processing" type="Node" parent="."]
 script = ExtResource("8_hpdtd")
+
+[node name="input" type="Node" parent="processing"]
+script = ExtResource("9_b2eea")
 
 [node name="platforming" type="Node" parent="processing"]
 process_mode = 4
