@@ -38,7 +38,6 @@ func observe(direction: Vector2i, ledge: Vector2) -> bool:
 	for axis in plane:
 		var try: bool =_observe_at(axis, direction, ledge) 
 		jump = jump or try
-		print("JUMP: ", jump, ", TRY: ", try)
 		# print(" - JUMP: ", jump, " - AXIS: ", axis)
 	if jump:
 		print("SHOULD JUMP")
