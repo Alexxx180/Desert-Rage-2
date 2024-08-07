@@ -9,7 +9,8 @@ const increase: Array[int] = [1, 4, 2]
 var mach: int = 1
 
 func move(delta):
-	hero.velocity = input.direction * mach * speed * delta
+	hero.velocity = input.direction(input.x, input.y)
+	hero.velocity *= mach * speed * delta
 	hero.move_and_slide()
 
 func _physics_process(delta):

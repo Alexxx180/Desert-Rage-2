@@ -8,6 +8,6 @@ var y: float:
 	get:
 		return Input.get_axis("forward", "backward")
 
-var direction: Vector2i:
-	get:
-		return Vector2(x, y).normalized()
+static func direction(ix: float, iy: float):
+	return Vector2(ix, iy).normalized()
+

@@ -1,6 +1,7 @@
 extends Node
 
-const GAP: int = 64
+const NEUTRAL: int = 0
+const GAP: int = 128
 
 var hero: CharacterBody2D
 var directions: Array[Array] = [
@@ -13,7 +14,7 @@ func inplace(ledge: float, subject: float) -> bool:
 func regulation(axis: int) -> Array[Callable]:
 	return [
 		(func(ledge: Vector2):
-			print(ledge[axis], " == ", hero.position[axis], " +- ", GAP)
+			# print(ledge[axis], " == ", hero.position[axis], " +- ", GAP)
 			return inplace(ledge[axis], hero.position[axis])),
 		(func(ledge: Vector2):
 			print(ledge[axis], " > ", hero.position[axis])
@@ -23,13 +24,22 @@ func regulation(axis: int) -> Array[Callable]:
 			return ledge[axis] < hero.position[axis])
 	]
 
-func _observe_at(axis: int, direction: Vector2i, ledge: Vector2):
+func _observe_at(axis: int, direction: Vector2i, ledge: Vector2) -> bool:
 	var power: int = direction[axis]
-	directions[axis][power].call(ledge)
+	return directions[axis][power].call(ledge)
 
 func observe(direction: Vector2i, ledge: Vector2) -> bool:
-	var jump = true
+	var jump: bool = false
+	var plane: Array[int] = []
 	for axis in [Vector2.AXIS_X, Vector2.AXIS_Y]:
-		jump = jump or _observe_at(axis, direction, ledge)
-		print(" - JUMP: ", jump, " - AXIS: ", axis)
+		if direction[axis] != NEUTRAL:
+			plane.push_back(axis)
+
+	for axis in plane:
+		var try: bool =_observe_at(axis, direction, ledge) 
+		jump = jump or try
+		print("JUMP: ", jump, ", TRY: ", try)
+		# print(" - JUMP: ", jump, " - AXIS: ", axis)
+	if jump:
+		print("SHOULD JUMP")
 	return jump
