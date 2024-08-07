@@ -2,6 +2,12 @@ extends StaticBody2D
 
 @export_range(0, 2) var height: int = 1
 
+@onready var size: Node = get_node("../../base/size")
+
+var pos: Vector2:
+	get:
+		return size.basis + position
+
 var floors: Array[int] = [0]
 var GF: int:
 	get: return floors[-1]

@@ -9,4 +9,3 @@ func _at_old_floor(_body: Node2D):
 
 func _at_new_floor(body: Node2D):
 	floors.push_back(body.F)
-	print("HERO AT FLOOR: ", F)

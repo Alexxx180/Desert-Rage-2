@@ -1,6 +1,7 @@
 extends Node
 
 var hero: CharacterBody2D
+var ledge: Node2D
 
 const JUMP_FORCE: int = 128
 const NEUTRAL: int = 0
@@ -17,23 +18,27 @@ func _to_floor(direction: Vector2i) -> Vector2:
 	var jump: Array[int] = [NEUTRAL, JUMP_FORCE, -JUMP_FORCE]
 	return Vector2(jump[direction.x], jump[direction.y])
 
-func _jump_to_place(ledge: Node2D, direction: Vector2i):
-	hero.position = (ledge.position if ledge.name
-		== "ledge" else _to_floor(direction))
+func _jump_to_place(direction: Vector2i):
+	if ledge.name == "ledge":
+		hero.position = ledge.position
+	else:
+		hero.position = _to_floor(direction)
+
+func get_ledge_to_jump(direction: Vector2i) -> bool:
+	var jump: bool = false
+	var ledges: Array = data.ledges.values()
+
+	var i: int = data.size
+	while i > 0 and not jump:
+		i = i - 1
+		print("Iteration: ", i)
+		ledge = ledges[i]
+		print("Ledge: ", ledge.name, ", Hero: ", hero.surface.F, " = Floor: ", ledge.F)
+		if hero.surface.F == ledge.F:
+			jump = checks.observe(direction, ledge.pos)
+
+	return jump
 
 func perform_jump(direction: Vector2i):
-	if direction == Vector2i.ZERO: return
-
-	var i: int = data.size - 1
-	var jump: bool = false
-	var ledges: Array[Node2D] = data.ledges.values()
-
-	while i >= 0 and not jump:
-		i = i - 1
-		if hero.surface.F == ledges[i].F:
-			jump = true
-		
-			for axis in [Vector2.AXIS_X, Vector2.AXIS_Y]:
-				jump = jump and checks.observe(axis, direction, ledges[i])
-
-	if jump: _jump_to_place(ledges[i], direction)
+	if direction == Vector2i.ZERO and get_ledge_to_jump(direction):
+		_jump_to_place(direction)
