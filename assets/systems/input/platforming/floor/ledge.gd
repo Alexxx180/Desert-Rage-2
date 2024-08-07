@@ -6,7 +6,7 @@ extends StaticBody2D
 
 var pos: Vector2:
 	get:
-		return size.basis + position
+		return Vector2(size.basis.x, size.basis.y + position.y)
 
 var floors: Array[int] = [0]
 var GF: int:

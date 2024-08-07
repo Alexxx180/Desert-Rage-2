@@ -20,7 +20,8 @@ func _to_floor(direction: Vector2i) -> Vector2:
 
 func _jump_to_place(direction: Vector2i):
 	if ledge.name == "ledge":
-		hero.position = ledge.position
+		print("Jump from : ", hero.position, " To: ", ledge.pos)
+		hero.position = ledge.pos
 	else:
 		hero.position = _to_floor(direction)
 
@@ -31,9 +32,9 @@ func get_ledge_to_jump(direction: Vector2i) -> bool:
 	var i: int = data.size
 	while i > 0 and not jump:
 		i = i - 1
-		print("Iteration: ", i)
+		print()
 		ledge = ledges[i]
-		print("Ledge: ", ledge.name, ", Hero: ", hero.surface.F, " = Floor: ", ledge.F)
+		# print("Iteration: ", i, ", Ledge: ", ledge.name, ", Hero: ", hero.surface.F, " = Floor: ", ledge.F)
 		if hero.surface.F == ledge.F:
 			jump = checks.observe(direction, ledge.pos)
 

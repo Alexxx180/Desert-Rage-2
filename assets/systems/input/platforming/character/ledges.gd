@@ -17,11 +17,11 @@ func update(next: int, ledge: Node2D, mode: ProcessMode, compare: Callable):
 		hero.processing.movement = mode
 
 func append(ledge: Node2D):
-	print("APPEND, ID: ", ledge.get_instance_id(), ", NAME: ", ledge.name)
+	# print("APPEND, ID: ", ledge.get_instance_id(), ", NAME: ", ledge.name)
 	ledges[ledge.get_instance_id()] = ledge
 	update(size + 1, ledge, will, func(x): return x > 2)
 
 func remove(ledge: Node2D):
-	print("REMOVE, ID: ", ledge.get_instance_id(), ", NAME: ", ledge.name)
+	# print("REMOVE, ID: ", ledge.get_instance_id(), ", NAME: ", ledge.name)
 	ledges.erase(ledge.get_instance_id())
 	update(size - 1, ledge, wont, func(x): return x == 0)
