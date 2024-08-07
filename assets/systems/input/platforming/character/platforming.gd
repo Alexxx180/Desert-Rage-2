@@ -20,10 +20,10 @@ func _to_floor(direction: Vector2i) -> Vector2:
 
 func _jump_to_place(direction: Vector2i):
 	if ledge.name == "ledge":
-		print("Jump from : ", hero.position, " To: ", ledge.pos)
+		# print("Jump from : ", hero.position, " To: ", ledge.pos)
 		hero.position = ledge.pos
 	else:
-		print("JUMPED TO FLOOR")
+		# print("JUMPED TO FLOOR")
 		hero.position += _to_floor(direction)
 
 func get_ledge_to_jump(direction: Vector2i) -> bool:
@@ -42,6 +42,6 @@ func get_ledge_to_jump(direction: Vector2i) -> bool:
 	return jump
 
 func perform_jump(direction: Vector2i):
-	if direction != Vector2i.ZERO and get_ledge_to_jump(direction):
-		print("JUMPED")
+	if get_ledge_to_jump(direction):
+		# print("JUMPED")
 		_jump_to_place(direction)

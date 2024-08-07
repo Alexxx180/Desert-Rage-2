@@ -58,5 +58,10 @@ script = ExtResource("9_b2eea")
 process_mode = 4
 script = ExtResource("5_bougs")
 
+[node name="combo" type="Timer" parent="processing/platforming"]
+wait_time = 0.03
+
 [node name="movement" type="Node" parent="processing"]
 script = ExtResource("7_6hnvc")
+
+[connection signal="timeout" from="processing/platforming/combo" to="processing/platforming" method="_platforming"]
