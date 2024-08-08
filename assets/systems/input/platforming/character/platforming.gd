@@ -8,27 +8,36 @@ const NEUTRAL: int = 0
 
 @onready var data: Node = $ledges
 @onready var checks: Node = $checks
+@onready var detector = get_node("../shape")
 
-func _ready():
-	hero = get_node("../../../..")
-	data.hero = hero
-	checks.hero = hero
+var target: Vector2
 
-func _to_floor(direction: Vector2i) -> Vector2:
-	var jump: Array[int] = [NEUTRAL, JUMP_FORCE, -JUMP_FORCE]
-	return Vector2(jump[direction.x], jump[direction.y])
+func set_hero(body: CharacterBody2D):
+	hero = body
+	data.hero = body
+	checks.hero = body
 
 func _jump_to_place(direction: Vector2i):
 	if ledge.name == "ledge":
 		# print("Jump from : ", hero.position, " To: ", ledge.pos)
 		hero.position = ledge.pos
 	else:
-		# print("JUMPED TO FLOOR")
-		hero.position += _to_floor(direction)
+		print("JUMPED TO FLOOR")
+		hero.position += target
+
+func _targeting(direction: Vector2i) -> void:
+	target = detector.shape.size / 2
+	target.x *= direction.x
+	target.y *= direction.y
 
 func get_ledge_to_jump(direction: Vector2i) -> bool:
 	var jump: bool = false
 	var ledges: Array = data.ledges.values()
+	var desc: String = "LEDGES: "
+	for l in ledges:
+		desc += l.name + ": " + str(l.F) + ", "
+	print(desc)
+	var previous: Node2D = ledge
 
 	var i: int = data.size
 	while i > 0 and not jump:
@@ -37,7 +46,14 @@ func get_ledge_to_jump(direction: Vector2i) -> bool:
 		# print("Iteration: ", i, ", Ledge: ", ledge.name, ", Hero: ", hero.surface.F, " = Floor: ", ledge.F)
 		# print(ledge.name)
 		if hero.surface.F == ledge.F:
-			jump = checks.observe(direction, ledge.pos)
+			var pos: Vector2 = ledge.pos
+			if pos == Vector2.ZERO:
+				pos = hero.position + _targeting(direction)
+				print("FLOOR FOUND! POS: ", pos)
+				print("HERO POS: ", hero.position)
+			jump = not previous == ledge and checks.observe(direction, pos)
+			# jump = checks.observe(direction, ledge.pos)
+	print("SELECTED: ", ledge.name, " - JUMP? ", jump)
 
 	return jump
 

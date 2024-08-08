@@ -2,10 +2,11 @@ extends Node
 
 const NEUTRAL: int = 0
 
-@onready var hero: CharacterBody2D = get_node("../..")
 @onready var input: Node = get_node("../input")
 @onready var platform = get_node("../../detectors/platform/ledge/platforming")
 @onready var combo: Timer = $combo
+
+var hero: CharacterBody2D
 
 """
 func _physics_process(_delta):
@@ -24,7 +25,7 @@ func _platforming():
 	combo.stop()
 	if direction == Vector2i.ZERO: return
 	#var act: Vector2i = direction #.normalized()
-	print("Act: ", direction)
+	# print("Act: ", direction)
 	platform.perform_jump(direction)
 	direction = Vector2.ZERO
 
@@ -34,7 +35,7 @@ func _input(_event):
 	var y: float = input.y
 	if x != NEUTRAL: direction.x = int(x)
 	if y != NEUTRAL: direction.y = int(y)
-	print("Direction: ", direction)
+	# print("Direction: ", direction)
 	combo.start() # diagonal jumps support
 	# _platforming() # straight jumps only
 # """

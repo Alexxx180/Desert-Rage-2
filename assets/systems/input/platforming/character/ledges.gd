@@ -7,21 +7,20 @@ var hero: CharacterBody2D
 var ledges: Dictionary = {}
 var size: int = 0
 
-func update(next: int, ledge: Node2D, mode: ProcessMode, compare: Callable):
+func _update(next: int, mode: ProcessMode, surface: Callable):
 	size = next
-
-	if compare.call(size):
+	if surface.call():
 		hero.processing.platforming = mode
 
-	if ledge.name != "ledge" and size > 0:
-		hero.processing.movement = mode
+func _last_surface() -> Node2D: return ledges.values()[0]
+
+func _on_floor():
+	return size == 1 and _last_surface().name != "ledge"
 
 func append(ledge: Node2D):
-	# print("APPEND, ID: ", ledge.get_instance_id(), ", NAME: ", ledge.name)
 	ledges[ledge.get_instance_id()] = ledge
-	update(size + 1, ledge, will, func(x): return x > 2)
+	_update(size + 1, will, func(): return size >= 2)
 
 func remove(ledge: Node2D):
-	# print("REMOVE, ID: ", ledge.get_instance_id(), ", NAME: ", ledge.name)
 	ledges.erase(ledge.get_instance_id())
-	update(size - 1, ledge, wont, func(x): return x == 0)
+	_update(size - 1, wont, _on_floor)

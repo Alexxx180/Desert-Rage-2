@@ -1,9 +1,10 @@
 extends Node
 
-@onready var hero: CharacterBody2D = get_node("../..")
 @onready var input: Node = get_node("../input")
 
 @export var speed: int = 10000
+
+var hero: CharacterBody2D
 
 const increase: Array[int] = [1, 4, 2]
 var mach: int = 1

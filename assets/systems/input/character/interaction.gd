@@ -1,7 +1,8 @@
 extends StaticBody2D
 
 @export var push: int = 2
-@onready var hero: CharacterBody2D = get_node("../..")
+
+var hero: CharacterBody2D
 
 func _push_forward(entity: Node2D, tracks: Array[float], velocity: int):
 	if entity.is_pushing: return

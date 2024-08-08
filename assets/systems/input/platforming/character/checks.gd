@@ -20,7 +20,7 @@ func regulation(axis: int) -> Array[Callable]:
 			# print(ledge[axis], " > ", hero.position[axis])
 			return ledge[axis] > hero.position[axis]),
 		(func(ledge: Vector2):
-			# print(ledge[axis], " < ", hero.position[axis])
+			print(ledge[axis], " < ", hero.position[axis])
 			return ledge[axis] < hero.position[axis])
 	]
 
