@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://qfq6ivu07v2l"]
+
+[ext_resource type="Script" path="res://assets/systems/entities/interactables/box/interaction/platform.gd" id="1_2nj02"]
+[ext_resource type="Shape2D" uid="uid://4vlyc8cvtjsy" path="res://assets/resources/shapes/interactables/jumping.tres" id="2_m1iw4"]
+[ext_resource type="PackedScene" uid="uid://car4au361lguc" path="res://assets/scenes/actors/common/floor/surface.tscn" id="3_b4es2"]
+[ext_resource type="PackedScene" uid="uid://cut4x6h78w413" path="res://assets/scenes/actors/interactables/box/interaction/platform/surface.tscn" id="4_7757k"]
+
+[node name="platform" type="StaticBody2D"]
+collision_layer = 64
+collision_mask = 0
+script = ExtResource("1_2nj02")
+
+[node name="geometry" type="CollisionShape2D" parent="."]
+shape = ExtResource("2_m1iw4")
+debug_color = Color(0.840899, 0.373924, 0.221188, 0.42)
+
+[node name="ground" parent="." instance=ExtResource("3_b4es2")]
+
+[node name="surface" parent="." instance=ExtResource("4_7757k")]

@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://c4w73m81q7mpn"]
+
+[ext_resource type="Script" path="res://assets/systems/entities/characters/hero/processing/platforming.gd" id="1_53hu4"]
+
+[node name="platforming" type="Node"]
+process_mode = 4
+script = ExtResource("1_53hu4")
+
+[node name="combo" type="Timer" parent="."]
+wait_time = 0.05
+
+[connection signal="timeout" from="combo" to="." method="_platforming"]
