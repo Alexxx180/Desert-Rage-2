@@ -1,12 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://1bn66otinni1"]
+[gd_scene load_steps=5 format=3 uid="uid://1bn66otinni1"]
 
+[ext_resource type="Script" path="res://assets/systems/entities/characters/hero/detectors/platform/floor.gd" id="1_0ls0f"]
 [ext_resource type="Shape2D" uid="uid://cqyj3i1vf3w47" path="res://assets/resources/shapes/interactables/box.tres" id="1_g2me5"]
 [ext_resource type="PackedScene" uid="uid://car4au361lguc" path="res://assets/scenes/actors/common/floor/surface.tscn" id="2_lthtt"]
 [ext_resource type="PackedScene" uid="uid://dtynl5gb2gues" path="res://assets/scenes/actors/player/ray/hero/detectors/platform/floor/position.tscn" id="3_2lmht"]
 
 [node name="floor" type="Area2D"]
 collision_layer = 32
-collision_mask = 64
+collision_mask = 192
+script = ExtResource("1_0ls0f")
 
 [node name="shape" type="CollisionShape2D" parent="."]
 position = Vector2(32, 10)
@@ -15,4 +17,8 @@ debug_color = Color(0.290196, 0.631373, 0, 0.419608)
 
 [node name="surface" parent="." instance=ExtResource("2_lthtt")]
 
-[node name="position" parent="." instance=ExtResource("3_2lmht")]
+[node name="stance" parent="." instance=ExtResource("3_2lmht")]
+
+[connection signal="body_entered" from="." to="surface" method="_at_new_floor"]
+[connection signal="body_entered" from="." to="stance" method="_should_stand_at"]
+[connection signal="body_exited" from="." to="surface" method="_at_old_floor"]

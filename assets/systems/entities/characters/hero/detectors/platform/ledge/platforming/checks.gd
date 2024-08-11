@@ -3,6 +3,7 @@ extends Node
 const NEUTRAL: int = 0
 const GAP: int = 4
 
+var previous: Node2D
 var hero: CharacterBody2D
 var directions: Array[Array] = [
 	regulation(Vector2.AXIS_X), regulation(Vector2.AXIS_Y)
@@ -13,15 +14,9 @@ func inplace(ledge: float, subject: float) -> bool:
 
 func regulation(axis: int) -> Array[Callable]:
 	return [
-		(func(ledge: Vector2):
-			# print(ledge[axis], " == ", hero.position[axis], " +- ", GAP)
-			return inplace(ledge[axis], hero.position[axis])),
-		(func(ledge: Vector2):
-			# print(ledge[axis], " > ", hero.position[axis])
-			return ledge[axis] > hero.position[axis]),
-		(func(ledge: Vector2):
-			print(ledge[axis], " < ", hero.position[axis])
-			return ledge[axis] < hero.position[axis])
+		(func(ledge: Vector2): return inplace(ledge[axis], hero.position[axis])),
+		(func(ledge: Vector2): return ledge[axis] > hero.position[axis]),
+		(func(ledge: Vector2): return ledge[axis] < hero.position[axis])
 	]
 
 func _observe_at(axis: int, direction: Vector2i, ledge: Vector2) -> bool:
@@ -43,8 +38,10 @@ func observe(direction: Vector2i, ledge: Vector2) -> bool:
 	for axis in plane:
 		var try: bool =_observe_at(axis, direction, ledge) 
 		jump = jump and try
-		# print("JUMP: ", jump, ", TRY: ", try)
-		# print(" - JUMP: ", jump, " - AXIS: ", axis)
-#	if jump:
-#		print("SHOULD JUMP")
 	return jump
+
+func can_jump(ledge: Node2D, direction: Vector2i) -> bool:
+	if previous == ledge: return false
+	var HF: int = hero.detectors.platform.floor.surface.F
+	var LF: int = ledge.surface.F
+	return (HF == LF and observe(direction, ledge.pos))

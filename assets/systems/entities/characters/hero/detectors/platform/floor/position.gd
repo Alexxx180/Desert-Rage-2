@@ -6,7 +6,7 @@ func _set_process(mode: ProcessMode):
 	hero.processing.movement.process_mode = mode
 
 func _should_stand_at(surface: Node2D) -> void:
-	if surface.name == "ledge":
+	if "surface" in surface:
 		_set_process(Node.PROCESS_MODE_DISABLED)
 	else:
 		_set_process(Node.PROCESS_MODE_INHERIT)

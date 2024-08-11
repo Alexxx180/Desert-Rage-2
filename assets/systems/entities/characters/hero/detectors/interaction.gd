@@ -16,8 +16,10 @@ func _push_forward(block: Timer, distance: Vector2, velocity: int):
 		block.transporter.push(i, velocity)
 
 func push_objects(body: Node2D):
-	var power: int = (hero.stats.push.value *
-		hero.processing.movement.mach.value * weight)
-	for track in [[body, hero, -1], [hero, body, 1]]:
-		var distance = track[0].stats.size.sub(track[1].stats.size)
-		_push_forward(body.block, distance, track[2] * power)
+	var power: int = hero.stats.impulse() * weight
+	var block: Node = body.stats.size
+	var mover: Node = hero.stats.size
+	for track in [[block, mover, -1], [mover, block, 1]]:
+		var distance: Vector2 = track[0].sub(track[1])
+		var velocity: int = track[2] * power
+		_push_forward(body.block, distance, velocity)
