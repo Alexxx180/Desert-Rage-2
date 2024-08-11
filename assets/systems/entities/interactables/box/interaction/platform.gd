@@ -1,5 +1,8 @@
 extends StaticBody2D
 
+const OFFSET: int = 15
+
+var box
 @onready var ground = $ground
 @onready var surface = $surface
 
@@ -11,13 +14,10 @@ var F: int:
 
 var pos: Vector2:
 	get:
-		return Vector2(size.basis.x, size.basis.y + position.y)
+		return box.stats.size.basis + Vector2(0, position.y - OFFSET)
 
 func _ready() -> void:
 	surface.ground = ground
 
-func set_control_entity(box: Node2D) -> void:
-	size = box.stats.size
-
-func grab(hero):
-	hero.position = pos
+func set_control_entity(entity: Node2D) -> void:
+	box = entity

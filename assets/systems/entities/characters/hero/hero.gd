@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 @export var control: bool = false
 
+@onready var stand: Sprite2D = $stand
 @onready var stats: Node = $stats
 @onready var detectors: Node2D = $detectors
 @onready var processing: Node = $processing
