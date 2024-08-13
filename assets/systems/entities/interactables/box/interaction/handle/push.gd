@@ -2,9 +2,10 @@ extends Node2D
 
 @onready var stats: Node
 @onready var block: Timer = $blocker
+@onready var transporter = $transporter
 
 func _ready():
-	block.transporter = $transporter
+	block.transporter = transporter
 
 func set_control_entity(box: Node2D):
 	stats = box.stats

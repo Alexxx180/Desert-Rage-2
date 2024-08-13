@@ -1,11 +1,11 @@
 extends Node
 
-const will: ProcessMode = Node.PROCESS_MODE_INHERIT
-const wont: ProcessMode = Node.PROCESS_MODE_DISABLED
-
-var platforming: Node
+var hero: CharacterBody2D
 var data: Dictionary = {}
 var size: int = 0
+var platforming: Node:
+	get:
+		return hero.processing.platforming
 
 func _update(next: int, mode: ProcessMode, surface: Callable):
 	size = next
@@ -13,8 +13,9 @@ func _update(next: int, mode: ProcessMode, surface: Callable):
 
 func append(ledge: Node2D):
 	data[ledge.get_instance_id()] = ledge
-	_update(size + 1, will, func(): return size >= 1)
+	_update(size + 1, hero.will, func(): return (size >= 1 and 
+		hero.detectors.platform.floor.stance.from_floor))
 
 func remove(ledge: Node2D):
 	data.erase(ledge.get_instance_id())
-	_update(size - 1, wont, func(): return size == 0)
+	_update(size - 1, hero.wont, func(): return size == 0)

@@ -2,7 +2,7 @@ extends StaticBody2D
 
 const OFFSET: int = 15
 
-var box
+var box: Node2D
 @onready var ground = $ground
 @onready var surface = $surface
 

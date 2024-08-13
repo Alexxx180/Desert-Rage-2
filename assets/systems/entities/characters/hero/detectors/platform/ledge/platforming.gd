@@ -3,7 +3,6 @@ extends Node
 var hero: CharacterBody2D
 var ledge: Node2D
 var distance: Node2D
-
 var on_floor: bool = true
 
 @onready var ledges: Node = $ledges
@@ -12,23 +11,24 @@ var on_floor: bool = true
 func set_control_entity(body: CharacterBody2D) -> void:
 	hero = body
 	checks.hero = body
-	ledges.platforming = hero.processing.platforming
+	ledges.hero = hero
+
+func _search(i: int, direction: Vector2i) -> bool:
+	var jump: bool = false
+	var platforms: Array = ledges.data.values()
+	while i > 0 and not jump:
+		i = i - 1
+		ledge = platforms[i]
+		jump = checks.can_jump(ledge, direction)
+	return jump
 
 func get_ledge_to_jump(direction: Vector2i) -> bool:
 	checks.previous = ledge
-	var jump: bool = false
-	var platform: Array = ledges.data.values()
-	for p in platform: print(p.name)
-	
-	var i: int = ledges.size
-	while i > 0 and not jump:
-		i = i - 1
-		ledge = platform[i]
-		jump = checks.can_jump(ledge, direction)
-	print("SELECTED: ", ledge.name, " - JUMP? ", jump)
-	return jump
+	return _search(ledges.size, direction)
 
 func _jump_to_place(next_position: Vector2, is_floor: bool):
+	if (is_floor != on_floor):
+		hero.processing.movement.process_mode = hero.decide(is_floor)
 	on_floor = is_floor
 	hero.position = next_position
 

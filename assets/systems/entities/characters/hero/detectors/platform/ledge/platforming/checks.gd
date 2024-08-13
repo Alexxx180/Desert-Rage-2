@@ -1,6 +1,5 @@
 extends Node
 
-const NEUTRAL: int = 0
 const GAP: int = 4
 
 var previous: Node2D
@@ -14,7 +13,8 @@ func inplace(ledge: float, subject: float) -> bool:
 
 func regulation(axis: int) -> Array[Callable]:
 	return [
-		(func(ledge: Vector2): return inplace(ledge[axis], hero.position[axis])),
+		(func(ledge: Vector2):
+			return inplace(ledge[axis], hero.position[axis])),
 		(func(ledge: Vector2): return ledge[axis] > hero.position[axis]),
 		(func(ledge: Vector2): return ledge[axis] < hero.position[axis])
 	]
@@ -25,23 +25,13 @@ func _observe_at(axis: int, direction: Vector2i, ledge: Vector2) -> bool:
 
 func observe(direction: Vector2i, ledge: Vector2) -> bool:
 	var jump: bool = true
-
-	"""
-	var plane: Array[int] = []
-	for axis in [Vector2.AXIS_X, Vector2.AXIS_Y]:
-		if direction[axis] != NEUTRAL:
-			plane.push_back(axis)
-	"""
-
 	var plane: Array[int] = [Vector2.AXIS_X, Vector2.AXIS_Y]
-
 	for axis in plane:
-		var try: bool =_observe_at(axis, direction, ledge) 
-		jump = jump and try
+		jump = jump and _observe_at(axis, direction, ledge)
 	return jump
 
 func can_jump(ledge: Node2D, direction: Vector2i) -> bool:
 	if previous == ledge: return false
 	var HF: int = hero.detectors.platform.floor.surface.F
 	var LF: int = ledge.surface.F
-	return (HF == LF and observe(direction, ledge.pos))
+	return HF == LF and observe(direction, ledge.pos)
