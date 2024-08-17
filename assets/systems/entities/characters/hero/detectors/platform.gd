@@ -1,8 +1,8 @@
 extends Node2D
 
 @onready var ledge: Area2D = $ledge
-@onready var floor: Area2D = $floor
+@onready var floors: Area2D = $floors
 
 func set_control_entity(hero: CharacterBody2D) -> void:
-	floor.stance.hero = hero
 	ledge.platforming.set_control_entity(hero)
+	floors.surface.set_control_entity(hero)

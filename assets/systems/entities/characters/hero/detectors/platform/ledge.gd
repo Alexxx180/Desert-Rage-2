@@ -5,5 +5,5 @@ extends Area2D
 
 func _ready():
 	platforming.distance = distance
-	self.body_entered.connect(platforming.ledges.append)
-	self.body_exited.connect(platforming.ledges.remove)
+	self.area_entered.connect(platforming.ledges.append)
+	self.area_exited.connect(platforming.ledges.remove)

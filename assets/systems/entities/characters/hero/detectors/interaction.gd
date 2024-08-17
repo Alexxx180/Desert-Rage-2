@@ -15,11 +15,14 @@ func _push_forward(block: Timer, distance: Vector2, velocity: int):
 	if block.is_pushing:
 		block.transporter.push(i, velocity)
 
-func push_objects(body: Node2D):
+func _push_along_the_trajectory(block: Timer, trajectory: Array):
 	var power: int = hero.stats.impulse() * weight
+	for track in trajectory:
+		var distance: Vector2 = track[0].sub(track[1])
+		_push_forward(block, distance, track[2] * power)
+
+func push_objects(body: Node2D):
 	var block: Node = body.stats.size
 	var mover: Node = hero.stats.size
-	for track in [[block, mover, -1], [mover, block, 1]]:
-		var distance: Vector2 = track[0].sub(track[1])
-		var velocity: int = track[2] * power
-		_push_forward(body.block, distance, velocity)
+	var tracks: Array = [[block, mover, -1], [mover, block, 1]]
+	_push_along_the_trajectory(body.block, tracks)

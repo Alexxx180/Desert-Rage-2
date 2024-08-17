@@ -14,7 +14,7 @@ func _update(next: int, mode: ProcessMode, surface: Callable):
 func append(ledge: Node2D):
 	data[ledge.get_instance_id()] = ledge
 	_update(size + 1, hero.will, func(): return (size >= 1 and 
-		hero.detectors.platform.floor.stance.from_floor))
+		hero.detectors.platform.ledge.platforming.on_floor))
 
 func remove(ledge: Node2D):
 	data.erase(ledge.get_instance_id())

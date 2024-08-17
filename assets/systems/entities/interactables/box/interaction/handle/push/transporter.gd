@@ -8,6 +8,7 @@ var seat: Node
 
 func set_control_entity(box: Node2D):
 	entity = box
+	seat = box.interaction.seat
 	remember_position()
 
 func remember_position():

@@ -32,6 +32,7 @@ func observe(direction: Vector2i, ledge: Vector2) -> bool:
 
 func can_jump(ledge: Node2D, direction: Vector2i) -> bool:
 	if previous == ledge: return false
-	var HF: int = hero.detectors.platform.floor.surface.F
+	if ledge.surface.seat.has_hero: return false
+	var HF: int = hero.detectors.platform.floors.surface.F
 	var LF: int = ledge.surface.F
 	return HF == LF and observe(direction, ledge.pos)

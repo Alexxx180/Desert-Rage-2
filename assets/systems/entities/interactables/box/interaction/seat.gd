@@ -11,6 +11,10 @@ var hero: CharacterBody2D:
 var has_hero: bool = false
 var previous: Vector2
 
+func set_floor(F: int):
+	if has_hero:
+		hero.detectors.platform.floors.surface.F = F
+
 func remember() -> void:
 	if has_hero: 
 		previous = hero.position
@@ -21,4 +25,5 @@ func rollback() -> void:
 
 func move(axis: int, velocity: float) -> void:
 	if has_hero:
+		print("MOVED: ", hero.position)
 		hero.position[axis] += velocity

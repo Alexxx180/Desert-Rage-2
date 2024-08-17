@@ -8,9 +8,9 @@ var F: int:
 func _is_same(body: Node2D) -> bool:
 	return body.get_instance_id() == get_instance_id()
 
-func _at_old_floor(body: Node2D):
+func at_old_floor(body: Node2D):
 	if not _is_same(body): floors.pop_back()
 
-func _at_new_floor(body: Node2D):
+func at_new_floor(body: Node2D):
 	#print(body.name)
 	if not _is_same(body): floors.push_back(body.F)
