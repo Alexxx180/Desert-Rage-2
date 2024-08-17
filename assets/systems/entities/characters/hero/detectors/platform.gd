@@ -4,5 +4,5 @@ extends Node2D
 @onready var floors: Area2D = $floors
 
 func set_control_entity(hero: CharacterBody2D) -> void:
-	ledge.platforming.set_control_entity(hero)
+	ledge.set_control_entity(hero)
 	floors.surface.set_control_entity(hero)

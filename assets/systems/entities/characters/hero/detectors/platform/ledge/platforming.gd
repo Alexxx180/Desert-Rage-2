@@ -13,7 +13,7 @@ func set_control_entity(body: CharacterBody2D) -> void:
 	checks.hero = body
 	ledges.hero = hero
 
-func _search(i: int, direction: Vector2i) -> bool:
+func get_ledge_to_jump(i: int, direction: Vector2i) -> bool:
 	var jump: bool = false
 	var platforms: Array = ledges.data.values()
 	while i > 0 and not jump:
@@ -22,10 +22,6 @@ func _search(i: int, direction: Vector2i) -> bool:
 		jump = checks.can_jump(ledge, direction)
 	return jump
 
-func get_ledge_to_jump(direction: Vector2i) -> bool:
-	checks.previous = ledge
-	return _search(ledges.size, direction)
-
 func _jump_to_place(next_position: Vector2, is_floor: bool):
 	if (is_floor != on_floor):
 		hero.processing.movement.process_mode = hero.decide(is_floor)
@@ -33,8 +29,14 @@ func _jump_to_place(next_position: Vector2, is_floor: bool):
 	hero.position = next_position
 
 func perform_jump(direction: Vector2i):
-	if get_ledge_to_jump(direction):
+	if get_ledge_to_jump(ledges.size, direction):
 		_jump_to_place(ledge.pos, false)
-	elif not on_floor and distance.detect_floor(direction):
+	elif not on_floor:
+		distance.detect_floor(direction)
+
+func jump_to_floor(surface: StaticBody2D):
+	var can = distance.floor_detected()
+	print("CAN JUMP: ", can)
+	if can and checks.same_floor(hero, surface):
 		var target: Vector2 = distance.ray.target_position
 		_jump_to_place(hero.position + target, true)
