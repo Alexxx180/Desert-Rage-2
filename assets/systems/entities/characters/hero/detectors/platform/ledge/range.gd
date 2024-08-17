@@ -15,7 +15,6 @@ func detect_floor(direction: Vector2i) -> void:
 	assert(direction != Vector2i.ZERO)
 	ray = rays[direction.x][direction.y]
 	if ray.is_colliding():
-		print("DETECING")
 		deployment.detect(ray.target_position)
 
 func floor_detected() -> bool:

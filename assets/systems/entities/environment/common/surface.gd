@@ -12,5 +12,4 @@ func at_old_floor(body: Node2D):
 	if not _is_same(body): floors.pop_back()
 
 func at_new_floor(body: Node2D):
-	#print(body.name)
 	if not _is_same(body): floors.push_back(body.F)

@@ -19,7 +19,6 @@ func _should_stand_at(surface: Node2D) -> void:
 
 func _disable_stand(surface: Node2D) -> void:
 	if "surface" in surface:
-		#print("MOVEMENT: ", movement == hero.will)
 		#if movement == hero.will:
 		surface.box.interaction.seat.has_hero = false
 		surface.box.switch_stand(hero, false)

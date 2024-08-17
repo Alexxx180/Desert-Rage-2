@@ -1,6 +1,6 @@
 extends Node
 
-const GAP: int = 4
+const GAP: int = 24
 
 var hero: CharacterBody2D
 var directions: Array[Array] = [
@@ -8,11 +8,14 @@ var directions: Array[Array] = [
 ]
 
 func inplace(ledge: float, subject: float) -> bool:
-	return ledge >= subject - GAP and ledge <= subject + GAP
+	# return ledge >= subject - GAP and ledge <= subject + GAP
+	return subject >= ledge - GAP and subject <= ledge + GAP
 
 func regulation(axis: int) -> Array[Callable]:
 	return [
-		(func(ledge: Vector2): return inplace(ledge[axis], hero.position[axis])),
+		(func(ledge: Vector2):
+			print("DOWN: ", inplace(ledge[axis], hero.position[axis]))
+			return inplace(ledge[axis], hero.position[axis])),
 		(func(ledge: Vector2): return ledge[axis] > hero.position[axis]),
 		(func(ledge: Vector2): return ledge[axis] < hero.position[axis])
 	]

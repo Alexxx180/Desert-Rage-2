@@ -35,8 +35,6 @@ func perform_jump(direction: Vector2i):
 		distance.detect_floor(direction)
 
 func jump_to_floor(surface: StaticBody2D):
-	var can = distance.floor_detected()
-	print("CAN JUMP: ", can)
-	if can and checks.same_floor(hero, surface):
+	if distance.floor_detected() and checks.same_floor(hero, surface):
 		var target: Vector2 = distance.ray.target_position
 		_jump_to_place(hero.position + target, true)

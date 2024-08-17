@@ -25,5 +25,4 @@ func rollback() -> void:
 
 func move(axis: int, velocity: float) -> void:
 	if has_hero:
-		print("MOVED: ", hero.position)
 		hero.position[axis] += velocity

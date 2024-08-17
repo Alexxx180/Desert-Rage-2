@@ -7,7 +7,6 @@ extends Node2D
 
 func switch_stand(hero: CharacterBody2D, status: bool) -> void:
 	hero.stand.visible = status
-	print("HERO: ", hero.stand.visible)
 	view.visible = !status
 
 func set_stand(hero: CharacterBody2D) -> void:
