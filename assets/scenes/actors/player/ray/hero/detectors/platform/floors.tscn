@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://assets/systems/entities/characters/hero/detectors/platform/floors.gd" id="1_k5m55"]
 [ext_resource type="Shape2D" uid="uid://cqyj3i1vf3w47" path="res://assets/resources/shapes/interactables/box.tres" id="2_lx0ch"]
 [ext_resource type="PackedScene" uid="uid://car4au361lguc" path="res://assets/scenes/actors/common/floor/surface.tscn" id="3_h3q01"]
-[ext_resource type="Script" path="res://assets/systems/entities/characters/hero/detectors/platform/floors/surface.gd" id="4_njbv4"]
+[ext_resource type="PackedScene" uid="uid://bnv3q4dsd1sno" path="res://assets/scenes/actors/player/ray/hero/detectors/platform/floors/surface.tscn" id="4_bduh6"]
 
 [node name="floors" type="Area2D"]
 collision_layer = 32
@@ -18,8 +18,7 @@ debug_color = Color(0.290196, 0.631373, 0, 0.419608)
 
 [node name="ground" parent="." instance=ExtResource("3_h3q01")]
 
-[node name="surface" type="Node" parent="."]
-script = ExtResource("4_njbv4")
+[node name="surface" parent="." instance=ExtResource("4_bduh6")]
 
 [connection signal="body_entered" from="." to="surface" method="append"]
 [connection signal="body_exited" from="." to="surface" method="remove"]

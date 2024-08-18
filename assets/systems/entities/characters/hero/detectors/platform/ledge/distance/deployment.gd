@@ -10,6 +10,4 @@ func disable():
 
 func detect(target: Vector2) -> void:
 	position = target
-	# floors.set_deffered("monitoring", true)
-	# floors.monitoring = true
 	floors.process_mode = Node.PROCESS_MODE_INHERIT

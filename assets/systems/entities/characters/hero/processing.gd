@@ -1,5 +1,6 @@
 extends Node
 
+@onready var decisions: Node = $decisions
 @onready var input: Node = $input
 @onready var platforming: Node = $platforming
 @onready var movement: Node = $movement

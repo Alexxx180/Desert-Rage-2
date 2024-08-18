@@ -11,18 +11,16 @@ var ray: RayCast2D
 	{ SIDE.x: $left/top, SIDE.y: $left/center, SIDE.z: $left/bottom },
 ]
 
-func detect_floor(direction: Vector2i) -> void:
+func route(hero: CharacterBody2D) -> Vector2:
+	return hero.position + ray.target_position
+
+func floor_search(direction: Vector2i) -> void:
 	assert(direction != Vector2i.ZERO)
 	ray = rays[direction.x][direction.y]
 	if ray.is_colliding():
 		deployment.detect(ray.target_position)
 
-func floor_detected() -> bool:
-
-#	deployment.floors.monitoring = false
-#	set_deffered("deployment.floors.monitoring", false)
-	# deployment.floors.set_deffered("monitoring", false)
-	# deployment.floors.process_mode = Node.PROCESS_MODE_DISABLED
+func reachable() -> bool:
 	deployment.call_deferred("disable")
 	return not deployment.walls.is_colliding()
 

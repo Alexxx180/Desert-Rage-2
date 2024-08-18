@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://b3hev1nf6r4th"]
 
-[ext_resource type="PackedScene" uid="uid://c1614nm5o7s5c" path="res://assets/scenes/actors/player/ray/hero/detectors/platform/ledge/platforming.tscn" id="1_lx565"]
 [ext_resource type="Script" path="res://assets/systems/entities/characters/hero/detectors/platform/ledge.gd" id="1_t2f5o"]
 [ext_resource type="PackedScene" uid="uid://bjaujyu04c1j1" path="res://assets/scenes/actors/player/ray/hero/detectors/platform/ledge/range.tscn" id="2_hf3wb"]
+[ext_resource type="PackedScene" uid="uid://dvohj2b04eehl" path="res://assets/scenes/actors/player/ray/hero/detectors/platform/ledge/ledges.tscn" id="3_kynlq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xtctl"]
 size = Vector2(256, 256)
@@ -17,7 +17,10 @@ position = Vector2(32, 10)
 shape = SubResource("RectangleShape2D_xtctl")
 debug_color = Color(1, 1, 1, 0.415686)
 
-[node name="platforming" parent="." instance=ExtResource("1_lx565")]
-
-[node name="range" parent="." instance=ExtResource("2_hf3wb")]
+[node name="distance" parent="." instance=ExtResource("2_hf3wb")]
 position = Vector2(32, 10)
+
+[node name="ledges" parent="." instance=ExtResource("3_kynlq")]
+
+[connection signal="area_entered" from="." to="ledges" method="append"]
+[connection signal="area_exited" from="." to="ledges" method="remove"]

@@ -12,17 +12,13 @@ var has_hero: bool = false
 var previous: Vector2
 
 func set_floor(F: int):
-	if has_hero:
-		hero.detectors.platform.floors.surface.F = F
+	if has_hero: hero.detectors.platform.floors.surface.F = F
 
 func remember() -> void:
-	if has_hero: 
-		previous = hero.position
+	if has_hero: previous = hero.position
 
 func rollback() -> void:
-	if has_hero:
-		hero.position = previous
+	if has_hero: hero.position = previous
 
 func move(axis: int, velocity: float) -> void:
-	if has_hero:
-		hero.position[axis] += velocity
+	if has_hero: hero.position[axis] += velocity

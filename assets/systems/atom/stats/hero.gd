@@ -11,7 +11,7 @@ func set_control_entity(hero: CharacterBody2D) -> void:
 func impulse() -> float: return mach.value * push.value
 
 func run(input: Node) -> Vector2:
-	return input.direction() * mach.value * speed.value
+	return input.direction * mach.value * speed.value
 
 func set_mach(increase: Array[int], x: Node, y: Node) -> void:
 	mach.value = 1
