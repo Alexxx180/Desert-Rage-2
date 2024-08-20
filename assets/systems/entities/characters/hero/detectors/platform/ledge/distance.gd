@@ -1,15 +1,10 @@
 extends Node2D
 
-const SIDE: Vector3i = Vector3i(-1, 0, 1)
-
 var ray: RayCast2D
 
 @onready var deployment = $deployment
 @onready var rays: Array[Dictionary] = [
-	{ SIDE.x: $center/top, SIDE.z: $center/bottom },
-	{ SIDE.x: $right/top, SIDE.y: $right/center, SIDE.z: $right/bottom },
-	{ SIDE.x: $left/top, SIDE.y: $left/center, SIDE.z: $left/bottom },
-]
+	$center.side, $right.side, $left.side]
 
 func route(hero: CharacterBody2D) -> Vector2:
 	return hero.position + ray.target_position
