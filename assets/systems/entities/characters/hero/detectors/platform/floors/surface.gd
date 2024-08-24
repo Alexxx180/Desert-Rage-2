@@ -4,11 +4,12 @@ var jump: Node
 var ground: Node
 var F: int = 0
 
-func append(surface: StaticBody2D) -> void:
+func append(surface) -> void:
+	print(surface.get_class())
 	ground.at_new_floor(surface)
 	if jump.feet.stable: F = ground.F
 
-func remove(surface: StaticBody2D) -> void:
+func remove(surface) -> void:
 	ground.at_old_floor(surface)
 	if jump.feet.stable: F = ground.F
 

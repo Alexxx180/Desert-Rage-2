@@ -5,4 +5,4 @@ extends Node2D
 
 func set_control_entity(hero: CharacterBody2D) -> void:
 	ledge.set_control_entity(hero)
-	floors.surface.set_control_entity(hero)
+	floors.set_control_entity(hero)
