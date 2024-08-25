@@ -13,8 +13,8 @@ func _update(next: int, mode: ProcessMode, surface: Callable) -> void:
 
 func append(next: Node2D) -> void:
 	data[next.get_instance_id()] = next
-	_update(size + 1, decisions.will, func():
-		return size >= 1 and platforming.jump.feet.stable)
+	#_update(size + 1, decisions.will, func(): return size >= 1 and platforming.jump.feet.stable)
+	_update(size + 1, decisions.will, func(): return size >= 1 and platforming.jump.feet.stable)
 
 func remove(previous: Node2D) -> void:
 	data.erase(previous.get_instance_id())

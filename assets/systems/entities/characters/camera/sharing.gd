@@ -5,3 +5,6 @@ func change(previous: Node, next: Node):
 	next.add_child(self)
 	self.set_owner(next)
 	position = Vector2.ZERO
+
+func _input(event):
+	pass

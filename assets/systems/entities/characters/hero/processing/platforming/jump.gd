@@ -16,16 +16,17 @@ func set_control_entity(entity: CharacterBody2D) -> void:
 
 func _jump(is_floor: bool, next: Vector2):
 	feet.stable = is_floor
-	hero.position = next 
+	hero.position = next
 
 func perform_jump(direction: Vector2i):
 	overview.direction = direction
 	if detectors.ledges.around(overview):
 		_jump(false, detectors.ledges.ledge.pos)
-	elif feet.unstable:
+	else:
 		detectors.distance.floor_search(direction)
 
-func jump_to_floor(surface: StaticBody2D) -> void:
+func jump_to_floor(surface: TileMap) -> void: # StaticBody2D
 	if not detectors.distance.reachable(): return
-	if overview.surface.F != surface.F: return
+	var F: int = hero.detectors.platform.floors.ground.tilemap.find_tile(surface)
+	if overview.surface.F != F: return
 	_jump(true, detectors.distance.route(hero))

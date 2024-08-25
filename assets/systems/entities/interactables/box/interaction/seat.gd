@@ -2,8 +2,7 @@ extends Node
 
 var _hero: CharacterBody2D
 var hero: CharacterBody2D:
-	get:
-		return _hero
+	get: return _hero
 	set(entity):
 		_hero = entity
 		has_hero = true
