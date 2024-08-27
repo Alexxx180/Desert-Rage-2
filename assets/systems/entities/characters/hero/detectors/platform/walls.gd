@@ -7,7 +7,7 @@ var decisions: Node
 func set_control_entity(hero: CharacterBody2D):
 	var pcs = hero.processing
 	decisions = pcs.decisions
-	platforming = pcs.platorming
+	platforming = pcs.platforming
 	movement = pcs.movement
 
 func on_ledge_encounter(_surface: TileMap):
