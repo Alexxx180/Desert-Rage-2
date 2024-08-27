@@ -7,9 +7,9 @@ var ledge: Node2D
 var platforming: Node
 var decisions: Node
 
-func _update(next: int, mode: ProcessMode, surface: Callable) -> void:
+func _update(next: int, _mode: ProcessMode, _surface: Callable) -> void:
 	size = next
-	if surface.call(): platforming.process_mode = mode
+	# if surface.call(): platforming.process_mode = mode
 
 func append(next: Node2D) -> void:
 	data[next.get_instance_id()] = next

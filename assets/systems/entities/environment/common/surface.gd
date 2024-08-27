@@ -29,7 +29,6 @@ func at_old_floor(body) -> void:
 		if not _is_same(body): floors.pop_back()
 	elif body is TileMap:
 		remove()
-	tilemap.tracking.entity.processing.platforming.process_mode = tilemap.tracking.entity.processing.decisions.decide(F != DEFAULT)
 		#tilemap.find_tile(body)
 
 func at_new_floor(body) -> void:
@@ -39,5 +38,4 @@ func at_new_floor(body) -> void:
 	elif body is TileMap:
 		tile = tilemap.find_tile(body)
 		append(tile)
-	tilemap.tracking.entity.processing.platforming.process_mode = tilemap.tracking.entity.processing.decisions.decide(F != DEFAULT)
 	print("Floors: ", F, ", DEF: ", DEFAULT)

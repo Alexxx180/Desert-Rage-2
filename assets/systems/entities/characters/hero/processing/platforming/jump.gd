@@ -26,7 +26,7 @@ func perform_jump(direction: Vector2i):
 		detectors.distance.floor_search(direction)
 
 func jump_to_floor(surface: TileMap) -> void: # StaticBody2D
-	if not detectors.distance.reachable(): return
+	if detectors.distance.unreachable(): return
 	var F: int = hero.detectors.platform.floors.ground.tilemap.find_tile(surface)
 	if overview.surface.F != F: return
 	_jump(true, detectors.distance.route(hero))
