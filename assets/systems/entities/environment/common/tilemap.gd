@@ -9,8 +9,11 @@ func set_control_entity(entity: Node2D, geometry: CollisionShape2D) -> void:
 	tracking.entity = entity
 	tracking.set_contacts(geometry.shape.size)
 
+func get_floor(tile: TileData) -> int:
+	return 0 if tile == null else tile.get_custom_data("F")
+
 func find_tile(map: TileMap) -> int:
-	assert(tracking.direction != Vector2i.ZERO)
-	var cell = map.local_to_map(tracking.contact)
-	var tile = map.get_cell_tile_data(FLOOR_LAYER, cell)
-	return tile.get_custom_data("F")
+	var cell: Vector2i = map.local_to_map(tracking.contact)
+	print("CELL: ", cell)
+	var tile: TileData = map.get_cell_tile_data(FLOOR_LAYER, cell)
+	return get_floor(tile)

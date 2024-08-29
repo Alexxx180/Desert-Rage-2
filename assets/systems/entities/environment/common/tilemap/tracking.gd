@@ -29,6 +29,7 @@ func set_contacts(right: Vector2) -> void:
 		BOTTOM_LEFT: _point(right, Vector2.DOWN),
 		TOP_RIGHT: _point(right, Vector2.RIGHT),
 		BOTTOM_RIGHT: _point(right, Vector2.ONE),
+		Vector2i.ZERO: _point(right, Vector2(CENTER, CENTER)),
 		Vector2i.UP: _point(right, Vector2(CENTER, NONE)),
 		Vector2i.DOWN: _point(right, Vector2(CENTER, FULL)),
 		Vector2i.LEFT: _point(right, Vector2(NONE, CENTER)),
