@@ -12,14 +12,14 @@ func route(hero: CharacterBody2D) -> Vector2:
 func floor_search(direction: Vector2i) -> void:
 	assert(direction != Vector2i.ZERO)
 	ray = rays[direction.x][direction.y]
-	print(direction, " - DIRECTION")
-	print("RAY: ", ray.target_position)
 	if ray.is_colliding():
 		deployment.detect(ray.target_position)
 
 func unreachable() -> bool:
+	var obstacles: bool = deployment.walls.is_colliding()
 	deployment.call_deferred("disable")
-	return deployment.walls.is_colliding()
+	print("OBSTACLES: ", obstacles)
+	return obstacles
 
 func set_control_entity(hero: CharacterBody2D) -> void:
 	deployment.set_control_entity(hero)

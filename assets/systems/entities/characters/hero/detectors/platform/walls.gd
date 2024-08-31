@@ -15,3 +15,4 @@ func on_ledge_encounter(_surface: TileMap):
 	print("TO JUMP: ", input.previous)
 	platforming.jump.perform_jump(input.previous)
 	platforming.process_mode = decisions.decide(platforming.jump.feet.unstable)
+	print("PROCESS MODE: ", platforming.process_mode)

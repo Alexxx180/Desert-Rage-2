@@ -1,7 +1,8 @@
 extends Node
 
 const NEUTRAL: int = 0
-const PERIOD: float = 0.05
+const PERIOD: float = 0.025
+const FREEZE: float = 0.075
 
 @onready var jump: Node = $jump
 
@@ -18,6 +19,7 @@ func _platforming() -> void:
 	var direction: Vector2i = input.direction
 	if direction != Vector2i.ZERO:
 		jump.perform_jump(direction)
+		time += FREEZE
 
 func _physics_process(delta) -> void:
 	if (not hero.control): return

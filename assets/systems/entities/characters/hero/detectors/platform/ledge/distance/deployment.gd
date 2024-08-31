@@ -10,13 +10,17 @@ var center: Vector2:
 @onready var floors: Area2D = $floors
 @onready var geometry: CollisionShape2D = floors.get_node("geometry")
 
+func set_mode(processing: ProcessMode):
+	walls.process_mode = processing
+	floors.process_mode = processing
+
 func disable():
+	set_mode(Node.PROCESS_MODE_DISABLED)
 	position = Vector2.ZERO
-	floors.process_mode = Node.PROCESS_MODE_DISABLED
 
 func detect(target: Vector2) -> void:
 	position = target
-	floors.process_mode = Node.PROCESS_MODE_INHERIT
+	set_mode(Node.PROCESS_MODE_INHERIT)
 
 func set_control_entity(entity: CharacterBody2D):
 	hero = entity
