@@ -1,5 +1,10 @@
 extends Node
 
+class_name Tracker
+
+static func pointing(position: Vector2, right: Vector2) -> Vector2:
+	return position + right
+
 var entity: Node2D
 var _contacts: Dictionary
 
@@ -7,10 +12,13 @@ var direction: Vector2i:
 	get: return entity.processing.input.previous
 
 var contact: Vector2:
-	get: return _contacts[direction].call()
+	get: return get_contact(direction)
+
+func get_contact(current: Vector2i):
+	return _contacts[current].call()
 
 func _point(right: Vector2, fill: Vector2) -> Callable:
-	return (func() -> Vector2: return entity.position + right * fill)
+	return (func(): return Tracker.pointing(entity.position, right * fill))
 
 func set_contacts(right: Vector2) -> void:
 	const FULL: int = 1

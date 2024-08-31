@@ -2,6 +2,7 @@ extends Node
 
 var hero: CharacterBody2D
 var detectors: Node2D
+var deployment: Node2D
 
 @onready var overview: Node = $overview
 @onready var feet: Node = $feet
@@ -11,8 +12,8 @@ func set_control_entity(entity: CharacterBody2D) -> void:
 	detectors = hero.detectors.platform.ledge
 	feet.set_control_entity(hero.processing)
 	overview.set_control_entity(hero)
-	var floors: Area2D = detectors.distance.deployment.floors
-	floors.body_entered.connect(jump_to_floor)
+	deployment = detectors.distance.deployment
+	deployment.floors.body_entered.connect(jump_to_floor)
 
 func _jump(is_floor: bool, next: Vector2):
 	feet.stable = is_floor
@@ -28,7 +29,8 @@ func perform_jump(direction: Vector2i):
 func jump_to_floor(surface: TileMap) -> void: # StaticBody2D
 	print("JUMP!!")
 	if detectors.distance.unreachable(): return
-	var F: int = hero.detectors.platform.floors.ground.tilemap.find_tile(surface)
+	# var F: int = hero.detectors.platform.floors.ground.tilemap.find_tile(surface)
+	var F: int = Tiler.get_tile(surface, deployment.center)
 	print("FLOOR IS: ", F)
 	print("PREVIOUS: ", overview.surface.F)
 	if overview.surface.F != F: return

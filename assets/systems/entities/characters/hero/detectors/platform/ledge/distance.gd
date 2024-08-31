@@ -22,4 +22,4 @@ func unreachable() -> bool:
 	return deployment.walls.is_colliding()
 
 func set_control_entity(hero: CharacterBody2D) -> void:
-	deployment.hero = hero
+	deployment.set_control_entity(hero)

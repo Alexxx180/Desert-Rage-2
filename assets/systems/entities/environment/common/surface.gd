@@ -29,7 +29,6 @@ func at_old_floor(body) -> void:
 		if not _is_same(body): floors.pop_back()
 	elif body is TileMap:
 		remove()
-		#tilemap.find_tile(body)
 
 func at_new_floor(body) -> void:
 	var tile
