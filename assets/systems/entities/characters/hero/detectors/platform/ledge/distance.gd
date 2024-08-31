@@ -18,7 +18,6 @@ func floor_search(direction: Vector2i) -> void:
 func unreachable() -> bool:
 	var obstacles: bool = deployment.walls.is_colliding()
 	deployment.call_deferred("disable")
-	print("OBSTACLES: ", obstacles)
 	return obstacles
 
 func set_control_entity(hero: CharacterBody2D) -> void:

@@ -12,12 +12,12 @@ func _update(next: int, _mode: ProcessMode, _surface: Callable) -> void:
 	# if surface.call(): platforming.process_mode = mode
 
 func append(next: Node2D) -> void:
-	data[next.get_instance_id()] = next
+	data[next.floors.get_instance_id()] = next.floors
 	#_update(size + 1, decisions.will, func(): return size >= 1 and platforming.jump.feet.stable)
 	_update(size + 1, decisions.will, func(): return size >= 1 and platforming.jump.feet.stable)
 
 func remove(previous: Node2D) -> void:
-	data.erase(previous.get_instance_id())
+	data.erase(previous.floors.get_instance_id())
 	_update(size - 1, decisions.wont, func(): return size == 0)
 
 func set_control_entity(hero: CharacterBody2D) -> void:

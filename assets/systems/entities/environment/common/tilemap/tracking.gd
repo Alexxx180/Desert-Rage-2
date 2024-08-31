@@ -3,13 +3,16 @@ extends Node
 class_name Tracker
 
 static func pointing(position: Vector2, right: Vector2) -> Vector2:
+	print("POS: ", position)
+	print("RHT: ", right)
 	return position + right
 
 var entity: Node2D
+var velocity: Node
 var _contacts: Dictionary
 
 var direction: Vector2i:
-	get: return entity.processing.input.previous
+	get: return velocity.get_direction()
 
 var contact: Vector2:
 	get: return get_contact(direction)

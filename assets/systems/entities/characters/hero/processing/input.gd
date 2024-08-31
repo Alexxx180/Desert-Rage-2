@@ -12,5 +12,8 @@ var direction: Vector2i:
 var previous: Vector2i:
 	get: return _direction
 
+func get_direction() -> Vector2:
+	return previous
+
 func direction8(ix: float, iy: float) -> Vector2:
 	return Vector2(ix, iy)
