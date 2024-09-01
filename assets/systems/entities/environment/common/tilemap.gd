@@ -16,10 +16,8 @@ func find_tile(map: TileMap) -> int:
 	# print("DIRECTION: ", tracking.direction)
 	var direction = tracking.direction
 	var contact = tracking.contact
-	
 	if fmod(contact.x, TILE_SIZE) == 0 or fmod(contact.y, TILE_SIZE) == 0:
 		contact += Vector2(direction.x * 0.1, direction.y * 0.1)
-
 	return Tiler.get_tile(map, contact)
 
 static func get_floor(tile: TileData) -> int:
@@ -33,5 +31,5 @@ static func print_c(contact, cell, tile) -> void:
 static func get_tile(map: TileMap, contact: Vector2) -> int:
 	var cell: Vector2i = map.local_to_map(contact)
 	var tile: TileData = map.get_cell_tile_data(FLOOR_LAYER, cell)
-	print_c(contact, cell, tile)
+	#print_c(contact, cell, tile)
 	return get_floor(tile)

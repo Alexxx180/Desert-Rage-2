@@ -13,7 +13,6 @@ func set_control_entity(entity: CharacterBody2D) -> void:
 	feet.set_control_entity(hero.processing)
 	overview.set_control_entity(hero)
 	deployment = detectors.distance.deployment
-	deployment.floors.body_entered.connect(jump_to_floor)
 
 func _jump(is_floor: bool, next: Vector2):
 	feet.stable = is_floor
@@ -25,13 +24,26 @@ func perform_jump(direction: Vector2i):
 		_jump(false, detectors.ledges.ledge.pos)
 	else:
 		detectors.distance.floor_search(direction)
+		if not detectors.distance.unreachable():
+			print("can reach")
+			jump_to_floor()
+		else:
+			print("can't reach")
+			deployment.disable()
 
-func jump_to_floor(surface: TileMap) -> void: # StaticBody2D
+func jump_to_floor() -> void: # StaticBody2D
 	print("JUMP!!")
-	if detectors.distance.unreachable(): return
-	# var F: int = hero.detectors.platform.floors.ground.tilemap.find_tile(surface)
-	var F: int = Tiler.get_tile(surface, deployment.center)
+	
+	var can_jump: bool = deployment.can_jump
+	var F: int = detectors.distance.F
+	print("CAN: ", can_jump)
 	print("FLOOR IS: ", F)
 	print("PREVIOUS: ", overview.surface.F)
-	if overview.surface.F != F: return
+	#deployment.call_deferred("disable")
+	deployment.disable()
+	if F == 0 or overview.surface.F != F: return
+	detectors.distance.F = 0
+
+	var is_box = feet.unstable
 	_jump(true, detectors.distance.route(hero))
+	if is_box: hero.processing.platforming.process_mode = Node.PROCESS_MODE_DISABLED

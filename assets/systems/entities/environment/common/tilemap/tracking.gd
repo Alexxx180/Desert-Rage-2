@@ -2,9 +2,12 @@ extends Node
 
 class_name Tracker
 
-static func pointing(position: Vector2, right: Vector2) -> Vector2:
+static func print_p(position: Vector2, right: Vector2) -> void:
 	print("POS: ", position)
 	print("RHT: ", right)
+
+static func pointing(position: Vector2, right: Vector2) -> Vector2:
+	#print_p(position, right)
 	return position + right
 
 var entity: Node2D
