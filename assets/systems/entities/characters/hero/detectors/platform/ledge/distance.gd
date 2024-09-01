@@ -17,7 +17,8 @@ func route(hero: CharacterBody2D) -> Vector2:
 	return hero.position + ray.target_position
 
 func floor_search(direction: Vector2i) -> void:
-	assert(direction != Vector2i.ZERO)
+	can_jump = direction != Vector2i.ZERO
+	if not can_jump: return
 	ray = rays[direction.x][direction.y]
 
 	can_jump = ray.is_colliding()
