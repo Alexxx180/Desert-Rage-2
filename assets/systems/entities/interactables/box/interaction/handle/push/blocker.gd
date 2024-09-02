@@ -5,7 +5,7 @@ var is_pushing: bool = false
 
 @onready var walls: StaticBody2D = $walls
 
-func check_distance(distance: float):
+func check_distance(distance: float) -> void:
 	is_pushing = distance < transporter.GAP
 
 func _switch_contact(mode: ProcessMode, feedback: Callable) -> void:
@@ -15,7 +15,7 @@ func _switch_contact(mode: ProcessMode, feedback: Callable) -> void:
 func _come_off() -> void:
 	_switch_contact(Node.PROCESS_MODE_DISABLED, stop)
 
-func stop_impulse():
+func stop_impulse() -> void:
 	if is_pushing:
 		_switch_contact(Node.PROCESS_MODE_INHERIT, start)
 		transporter.rollback_position()

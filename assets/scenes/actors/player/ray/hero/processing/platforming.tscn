@@ -1,12 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://c4w73m81q7mpn"]
+[gd_scene load_steps=3 format=3 uid="uid://c4w73m81q7mpn"]
 
 [ext_resource type="Script" path="res://assets/systems/entities/characters/hero/processing/platforming.gd" id="1_53hu4"]
+[ext_resource type="PackedScene" uid="uid://bndvguo3jw7p3" path="res://assets/scenes/actors/player/ray/hero/processing/platforming/jump.tscn" id="2_7eyfy"]
 
 [node name="platforming" type="Node"]
 process_mode = 4
 script = ExtResource("1_53hu4")
 
-[node name="combo" type="Timer" parent="."]
-wait_time = 0.05
-
-[connection signal="timeout" from="combo" to="." method="_platforming"]
+[node name="jump" parent="." instance=ExtResource("2_7eyfy")]

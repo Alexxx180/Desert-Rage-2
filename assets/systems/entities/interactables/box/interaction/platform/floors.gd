@@ -3,8 +3,8 @@ extends Area2D
 const OFFSET: int = -45
 
 var box: Node2D
-@onready var ground = $ground
-@onready var surface = $surface
+@onready var ground: Node = $ground
+@onready var surface: Node = $surface
 
 var size: Node
 
@@ -21,4 +21,6 @@ func _ready() -> void:
 
 func set_control_entity(entity: Node2D) -> void:
 	box = entity
+	var handle = box.interaction.handle
+	ground.set_control_entity(entity, handle.push.transporter, handle.placement)
 	surface.seat = box.interaction.seat

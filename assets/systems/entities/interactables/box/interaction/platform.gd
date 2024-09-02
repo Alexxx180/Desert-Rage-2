@@ -5,4 +5,4 @@ extends Node2D
 
 func set_control_entity(box: Node2D):
 	floors.set_control_entity(box)
-	stand.box = box
+	stand.set_control_entity(box)

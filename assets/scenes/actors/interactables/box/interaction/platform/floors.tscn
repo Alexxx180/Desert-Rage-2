@@ -1,33 +1,38 @@
-[gd_scene load_steps=7 format=3 uid="uid://byrdfryct5d0s"]
+[gd_scene load_steps=9 format=3 uid="uid://byrdfryct5d0s"]
 
 [ext_resource type="Script" path="res://assets/systems/entities/interactables/box/interaction/platform.gd" id="1_2nj02"]
 [ext_resource type="Script" path="res://assets/systems/entities/interactables/box/interaction/platform/floors.gd" id="1_au6vn"]
 [ext_resource type="Shape2D" uid="uid://4vlyc8cvtjsy" path="res://assets/resources/shapes/interactables/jumping.tres" id="2_m1iw4"]
 [ext_resource type="PackedScene" uid="uid://car4au361lguc" path="res://assets/scenes/actors/common/floor/surface.tscn" id="3_b4es2"]
+[ext_resource type="Shape2D" uid="uid://cqyj3i1vf3w47" path="res://assets/resources/shapes/interactables/box.tres" id="3_rfu0n"]
 [ext_resource type="PackedScene" uid="uid://cut4x6h78w413" path="res://assets/scenes/actors/interactables/box/interaction/platform/floors/surface.tscn" id="4_7757k"]
 [ext_resource type="PackedScene" uid="uid://c5x1eejbkiv1f" path="res://assets/scenes/actors/interactables/box/interaction/platform/stand/stance.tscn" id="5_8yxl1"]
+[ext_resource type="Script" path="res://assets/systems/entities/interactables/box/interaction/platform/stand.gd" id="6_pcxeo"]
 
 [node name="platform" type="Node2D"]
 script = ExtResource("1_2nj02")
 
 [node name="floors" type="Area2D" parent="."]
-collision_layer = 64
-collision_mask = 128
+collision_layer = 0
+collision_mask = 1536
 script = ExtResource("1_au6vn")
 
 [node name="geometry" type="CollisionShape2D" parent="floors"]
-shape = ExtResource("2_m1iw4")
-debug_color = Color(0.840899, 0.373924, 0.221188, 0.42)
+position = Vector2(32, 10)
+shape = ExtResource("3_rfu0n")
+debug_color = Color(0.4, 0.607843, 0, 0.419608)
 
 [node name="ground" parent="floors" instance=ExtResource("3_b4es2")]
 
 [node name="surface" parent="floors" instance=ExtResource("4_7757k")]
 
 [node name="stand" type="Area2D" parent="."]
-collision_layer = 0
+collision_layer = 64
 collision_mask = 4
+script = ExtResource("6_pcxeo")
 
 [node name="geometry" type="CollisionShape2D" parent="stand"]
+position = Vector2(32, -30)
 shape = ExtResource("2_m1iw4")
 debug_color = Color(0.840899, 0.373924, 0.221188, 0.42)
 

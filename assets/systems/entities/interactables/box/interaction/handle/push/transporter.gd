@@ -6,6 +6,10 @@ var previous: Vector2
 var entity: Node2D
 var seat: Node
 
+var direction: Vector2i
+
+func get_direction() -> Vector2i: return direction
+
 func set_control_entity(box: Node2D):
 	entity = box
 	seat = box.interaction.seat
@@ -21,5 +25,9 @@ func rollback_position():
 
 func push(axis: int, velocity: int):
 	remember_position()
+	direction = Vector2.ZERO
+	direction[axis] = clampi(velocity, -1, 1)
+	#print("PUSH: ", direction)
+	#print("VEL: ", velocity)
 	entity.position[axis] += velocity
 	seat.move(axis, velocity)
