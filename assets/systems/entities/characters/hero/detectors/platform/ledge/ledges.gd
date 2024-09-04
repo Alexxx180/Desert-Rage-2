@@ -1,28 +1,17 @@
 extends Node
 
-var data: Dictionary = {}
 var size: int = 0
-
+var data: Dictionary = {} # Node2D
 var ledge: Node2D
-var platforming: Node
-var decisions: Node
 
-func _update(next: int, _mode: ProcessMode, _surface: Callable) -> void:
-	size = next
-	# if surface.call(): platforming.process_mode = mode
-
+func surface(box: Node2D) -> int: return box.floors.get_instance_id()
 func append(next: Node2D) -> void:
-	data[next.floors.get_instance_id()] = next.floors
-	#_update(size + 1, decisions.will, func(): return size >= 1 and platforming.jump.feet.stable)
-	_update(size + 1, decisions.will, func(): return size >= 1 and platforming.jump.feet.stable)
+	data[surface(next)] = next.floors
+	size = size + 1
 
 func remove(previous: Node2D) -> void:
-	data.erase(previous.floors.get_instance_id())
-	_update(size - 1, decisions.wont, func(): return size == 0)
-
-func set_control_entity(hero: CharacterBody2D) -> void:
-	platforming = hero.processing.platforming
-	decisions = hero.processing.decisions
+	data.erase(surface(previous))
+	size = size - 1
 
 func around(overview: Node) -> bool:
 	var jump: bool = false

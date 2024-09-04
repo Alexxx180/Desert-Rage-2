@@ -5,7 +5,6 @@ var ground: Node
 var F: int = 0
 
 func append(surface) -> void:
-	print(surface.get_class())
 	ground.at_new_floor(surface)
 	if jump.feet.stable: F = ground.F
 
