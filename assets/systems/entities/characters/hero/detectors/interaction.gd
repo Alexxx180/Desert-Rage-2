@@ -1,4 +1,4 @@
-extends StaticBody2D
+extends Node
 
 @export_range(0.2, 2.0, 0.1) var weight: float = 1
 

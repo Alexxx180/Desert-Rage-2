@@ -1,29 +1,8 @@
 extends Node
 
-const NEUTRAL: int = 0
-const PERIOD: float = 0.025
-const FREEZE: float = 0.075
-
 @onready var jump: Node = $jump
 @onready var input: Node = $input
 
-func _ready():
-	jump.
-
-func set_control_entity(entity: CharacterBody2D) -> void:
-	hero = entity
-	input = hero.processing.input
-	jump.set_control_entity(entity)
-
-func _platforming() -> void:
-	var direction: Vector2i = input.direction
-	if direction != Vector2i.ZERO:
-		jump.perform_jump(direction)
-		time += FREEZE
-
-func _physics_process(delta) -> void:
-	if (not hero.control): return
-	time -= delta
-	if time <= NEUTRAL:
-		time = PERIOD
-		_platforming()
+func set_control_entity(hero: CharacterBody2D) -> void:
+	input.set_control_entity(hero)
+	jump.set_control_entity(hero)

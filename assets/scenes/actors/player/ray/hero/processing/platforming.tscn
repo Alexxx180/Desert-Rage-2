@@ -1,17 +1,22 @@
-[gd_scene load_steps=5 format=3 uid="uid://c4w73m81q7mpn"]
+[gd_scene load_steps=7 format=3 uid="uid://c4w73m81q7mpn"]
 
 [ext_resource type="Script" path="res://assets/systems/entities/characters/hero/processing/platforming.gd" id="1_53hu4"]
 [ext_resource type="PackedScene" uid="uid://bndvguo3jw7p3" path="res://assets/scenes/actors/player/ray/hero/processing/platforming/jump.tscn" id="2_7eyfy"]
+[ext_resource type="Script" path="res://assets/systems/entities/characters/hero/processing/platforming/input.gd" id="2_futjn"]
 [ext_resource type="PackedScene" uid="uid://bnv3q4dsd1sno" path="res://assets/scenes/actors/player/ray/hero/detectors/platform/floors/surface.tscn" id="3_i1ijb"]
 [ext_resource type="PackedScene" uid="uid://car4au361lguc" path="res://assets/scenes/actors/common/floor/surface.tscn" id="3_nnkv1"]
+[ext_resource type="PackedScene" uid="uid://b03i3nwq8ad4f" path="res://assets/scenes/actors/player/ray/hero/detectors/platform/ledge/ledges.tscn" id="4_coklr"]
 
 [node name="platforming" type="Node"]
 process_mode = 4
 script = ExtResource("1_53hu4")
 
 [node name="input" type="Node" parent="."]
+script = ExtResource("2_futjn")
 
 [node name="jump" parent="." instance=ExtResource("2_7eyfy")]
+
+[node name="ledges" parent="." instance=ExtResource("4_coklr")]
 
 [node name="surface" type="Node" parent="."]
 

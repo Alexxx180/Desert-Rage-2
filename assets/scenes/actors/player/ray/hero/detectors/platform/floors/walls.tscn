@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://dje5v8fv74oh6"]
+
+[ext_resource type="Script" path="res://assets/systems/entities/characters/hero/detectors/platform/walls.gd" id="1_kdxdi"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7cy6e"]
+size = Vector2(65, 21)
+
+[node name="walls" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_kdxdi")
+
+[node name="shape" type="CollisionShape2D" parent="."]
+position = Vector2(32, 10)
+shape = SubResource("RectangleShape2D_7cy6e")
+
+[connection signal="body_entered" from="." to="." method="on_ledge_encounter"]

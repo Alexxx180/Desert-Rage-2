@@ -1,7 +1,7 @@
 extends Node
 
 var size: int = 0
-var data: Dictionary = {} # Node2D
+var data: Dictionary = {} # int, Node2D
 var ledge: Node2D
 
 func surface(box: Node2D) -> int: return box.floors.get_instance_id()

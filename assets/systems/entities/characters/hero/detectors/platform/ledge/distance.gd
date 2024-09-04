@@ -2,33 +2,39 @@ extends Node2D
 
 var F: int = 0
 
-var ray: RayCast2D
+const DISTANCE: int = 128
+const CENTER: Vector2i = Vector2i.ZERO
+
 var tracking: Node
+
+var direction: Vector2 = Vector2.ZERO
+var half: Vector2
 var center: Vector2:
-	get: return (tracking.get_contact(Vector2i.ZERO)
-		+ (ray.target_position + deployment.shape.size / 2))
+	get: return tracking.get_contact(CENTER) + walls.position + half
 
-@onready var deployment = $deployment
-@onready var rays: Array[Dictionary] = [
-	$center.side, $right.side, $left.side]
+@onready var walls: ShapeCast2D = $walls
+@onready var surface: RayCast2D = $surface
 
-func route(hero: CharacterBody2D) -> Vector2:
-	return hero.position + ray.target_position
-
-func floor_search(direction: Vector2i) -> bool:
-	if direction == Vector2i.ZERO: return false
-
-	ray = rays[direction.x][direction.y]
-
-	var reach: bool = ray.is_colliding()
-	if reach:
-		deployment.position = ray.target_position
-		F = Tiler.get_tile(ray.get_collider(), center)
-	
-	reach = reach and not deployment.is_colliding()
-	deployment.position = Vector2.ZERO
-	
-	return reach
+func _ready(): half = walls.shape.size / 2
 
 func set_control_entity(hero: CharacterBody2D) -> void:
 	tracking = hero.detectors.platform.floors.ground.tilemap.tracking
+
+func route(hero: CharacterBody2D) -> Vector2:
+	return hero.position + surface.target_position
+
+func _set_floor() -> bool:
+	F = Tiler.get_tile(surface.get_collider(), center)
+	return true
+
+func _no_walls():
+	walls.position = surface.target_position + (half * direction)
+	return not walls.is_colliding()
+
+func _intersect() -> bool:
+	surface.target_position = direction * DISTANCE
+	return surface.is_colliding()
+
+func search(next: Vector2i) -> bool:
+	direction = next
+	return next != CENTER and _intersect() and _no_walls() and _set_floor()
