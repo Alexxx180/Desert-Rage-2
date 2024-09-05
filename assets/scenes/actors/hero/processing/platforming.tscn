@@ -1,0 +1,17 @@
+[gd_scene load_steps=5 format=3 uid="uid://c4w73m81q7mpn"]
+
+[ext_resource type="Script" path="res://assets/systems/entities/characters/hero/processors/platforming.gd" id="1_6urwp"]
+[ext_resource type="Script" path="res://assets/systems/entities/characters/hero/processors/platforming/input.gd" id="2_7km0c"]
+[ext_resource type="PackedScene" uid="uid://bndvguo3jw7p3" path="res://assets/scenes/actors/hero/processing/platforming/jump.tscn" id="2_rakjf"]
+[ext_resource type="PackedScene" uid="uid://b03i3nwq8ad4f" path="res://assets/scenes/actors/hero/detectors/platform/ledge/ledges.tscn" id="4_t48it"]
+
+[node name="platforming" type="Node"]
+process_mode = 4
+script = ExtResource("1_6urwp")
+
+[node name="input" type="Node" parent="."]
+script = ExtResource("2_7km0c")
+
+[node name="jump" parent="." instance=ExtResource("2_rakjf")]
+
+[node name="ledges" parent="." instance=ExtResource("4_t48it")]
