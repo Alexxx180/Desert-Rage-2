@@ -1,0 +1,17 @@
+[gd_scene load_steps=5 format=3 uid="uid://ye5g8w01sjkk"]
+
+[ext_resource type="Script" path="res://assets/systems/scripts/entities/characters/hero/detectors/platform/ledge/distance.gd" id="1_73jyu"]
+[ext_resource type="PackedScene" uid="uid://m8yyhkf7osqx" path="res://assets/systems/scenes/actors/hero/detectors/platform/ledge/distance/ray.tscn" id="2_pf37o"]
+[ext_resource type="PackedScene" uid="uid://bkebe58hbeadp" path="res://assets/systems/scenes/actors/hero/detectors/platform/floors/deployment.tscn" id="4_olihy"]
+[ext_resource type="PackedScene" uid="uid://dje5v8fv74oh6" path="res://assets/systems/scenes/actors/hero/detectors/platform/floors/walls.tscn" id="6_1gayl"]
+
+[node name="floors" type="Node2D"]
+
+[node name="deployment" type="Node2D" parent="."]
+script = ExtResource("1_73jyu")
+
+[node name="surface" parent="deployment" instance=ExtResource("2_pf37o")]
+
+[node name="walls" parent="deployment" instance=ExtResource("4_olihy")]
+
+[node name="overleap" parent="." instance=ExtResource("6_1gayl")]

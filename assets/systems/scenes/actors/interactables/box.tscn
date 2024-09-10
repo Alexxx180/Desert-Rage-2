@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://esjdr0frox65"]
+
+[ext_resource type="Script" path="res://assets/systems/scripts/entities/interactables/box/box.gd" id="1_d3puw"]
+[ext_resource type="Texture2D" uid="uid://bs2g1i7sc7mra" path="res://assets/resources/tiles/interactables/box2.png" id="2_ixfkr"]
+[ext_resource type="PackedScene" uid="uid://oichbyd76x3e" path="res://assets/systems/scenes/actors/interactables/box/stats.tscn" id="2_wbmha"]
+[ext_resource type="PackedScene" uid="uid://bwp6o61miepyj" path="res://assets/systems/scenes/actors/interactables/box/interaction.tscn" id="3_wj8m7"]
+
+[node name="box" type="Node2D"]
+script = ExtResource("1_d3puw")
+
+[node name="view" type="Sprite2D" parent="."]
+position = Vector2(0, -44)
+texture = ExtResource("2_ixfkr")
+centered = false
+
+[node name="stats" parent="." instance=ExtResource("2_wbmha")]
+
+[node name="interaction" parent="." instance=ExtResource("3_wj8m7")]
