@@ -4,7 +4,9 @@ var size: int = 0
 var data: Dictionary = {} # int, Node2D
 var ledge: Node2D
 
-func surface(box: Node2D) -> int: return box.floors.get_instance_id()
+func surface(box: Node2D) -> int:
+	return box.floors.get_instance_id()
+
 func append(next: Node2D) -> void:
 	data[surface(next)] = next.floors
 	size = size + 1

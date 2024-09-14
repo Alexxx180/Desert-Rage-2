@@ -5,6 +5,9 @@ var direction: Vector2i = Vector2i.ZERO
 
 @onready var directions: Node = $directions
 
+func redirect(next: Vector2i) -> void: direction = next
+func inplace() -> bool: return direction == Vector2i.ZERO
+
 func set_control_entity(hero: CharacterBody2D) -> void:
 	surface = hero.detectors.platform.floors.surface
 	directions.init(hero)

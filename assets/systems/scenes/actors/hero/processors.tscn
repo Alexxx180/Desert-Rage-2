@@ -1,19 +1,18 @@
 [gd_scene load_steps=6 format=3 uid="uid://cuhscjgk7bx18"]
 
-[ext_resource type="Script" path="res://assets/systems/scripts/entities/characters/hero/processors.gd" id="1_ptqxp"]
 [ext_resource type="Script" path="res://assets/systems/scripts/entities/characters/hero/processors.gd" id="2_bu25i"]
-[ext_resource type="PackedScene" uid="uid://dtibatxhubbff" path="res://assets/systems/scenes/actors/hero/processors/input.tscn" id="3_63tnx"]
-[ext_resource type="PackedScene" uid="uid://c4w73m81q7mpn" path="res://assets/systems/scenes/actors/hero/processors/platforming.tscn" id="4_ytput"]
+[ext_resource type="PackedScene" uid="uid://dqxhg7f8wohsj" path="res://assets/systems/scenes/actors/hero/processors/platforming.tscn" id="4_utohx"]
+[ext_resource type="PackedScene" uid="uid://dtibatxhubbff" path="res://assets/systems/scenes/actors/hero/processors/input.tscn" id="4_ytput"]
 [ext_resource type="PackedScene" uid="uid://cf3n6jqk372jc" path="res://assets/systems/scenes/actors/hero/processors/movement.tscn" id="5_fi5m6"]
+[ext_resource type="PackedScene" uid="uid://bcy4fb07vs5t8" path="res://assets/systems/scenes/actors/hero/processors/environment.tscn" id="5_xn7kp"]
 
 [node name="processors" type="Node"]
-script = ExtResource("1_ptqxp")
-
-[node name="decisions" type="Node" parent="."]
 script = ExtResource("2_bu25i")
 
-[node name="input" parent="." instance=ExtResource("3_63tnx")]
-
-[node name="platforming" parent="." instance=ExtResource("4_ytput")]
+[node name="input" parent="." instance=ExtResource("4_ytput")]
 
 [node name="movement" parent="." instance=ExtResource("5_fi5m6")]
+
+[node name="platforming" parent="." instance=ExtResource("4_utohx")]
+
+[node name="environment" parent="." instance=ExtResource("5_xn7kp")]

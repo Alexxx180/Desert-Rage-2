@@ -11,6 +11,6 @@ func set_control_entity(hero: CharacterBody2D):
 	input = pcs.input
 
 func on_ledge_encounter(_surface: TileMap):
-	platforming.process_mode = decisions.will
+	platforming.process_mode = Processors.will
 	platforming.jump.perform_jump(input.previous)
-	platforming.process_mode = decisions.decide(platforming.jump.feet.unstable)
+	Processors.turn(platforming, platforming.jump.feet.unstable)

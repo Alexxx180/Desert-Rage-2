@@ -1,34 +1,30 @@
 extends Node
 
+signal move(delta: float)
+signal accelerate(mach: int)
+
+enum STATE { WALK = 1, RUN = 2 }
+
 const PERIOD: float = 0.05
 
-var input: Node
-var hero: CharacterBody2D
-var time: float = 0
-
-func set_control_entity(entity: CharacterBody2D):
-	hero = entity
-	input = hero.processing.input
-
-func move(delta):
-	hero.velocity = hero.stats.run(input) * delta
-	hero.move_and_slide()
-	if time > 0: time -= delta
+var press_time: float = 0
+var walk: bool = true
 
 func _physics_process(delta):
-	if (hero.control):
-		move(delta)
-		if (hero.velocity == Vector2.ZERO):
-			hero.stats.mach.value = 1
+	move.emit(delta)
+
+	if press_time > 0:
+		press_time -= delta
+	if not walk:
+		walk = true
+		accelerate.emit(STATE.WALK)
 
 func _input(_event: InputEvent):
-	var hold = Input.is_action_pressed("run")
-	var toggle = Input.is_action_just_pressed("run")
+	const act: String = "run"
 
-	if toggle:
-		time = PERIOD
-	elif Input.is_action_just_released("run") and time > 0:
-		time = 0
-		hero.stats.mach.value = 1
-
-	if hold: hero.stats.mach.value = 2
+	if Processors.toggle(act):
+		press_time = PERIOD
+		accelerate.emit(STATE.RUN)
+	if Processors.release(act):
+		walk = press_time >= 0
+		if walk: accelerate.emit(STATE.WALK)

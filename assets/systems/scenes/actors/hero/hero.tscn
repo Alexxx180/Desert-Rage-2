@@ -1,30 +1,17 @@
-[gd_scene load_steps=9 format=3 uid="uid://wbjmq3n817nk"]
+[gd_scene load_steps=8 format=3 uid="uid://wbjmq3n817nk"]
 
 [ext_resource type="Script" path="res://assets/systems/scripts/entities/characters/hero/hero.gd" id="1_tbrg2"]
 [ext_resource type="Texture2D" uid="uid://cao2nqh8p8y4t" path="res://assets/resources/actors/player/ray/idle/ray2d-fallback.png" id="2_moe4v"]
 [ext_resource type="Texture2D" uid="uid://bs2g1i7sc7mra" path="res://assets/resources/tiles/interactables/box2.png" id="2_qjuhw"]
-[ext_resource type="Script" path="res://assets/systems/scripts/entities/characters/hero/stand.gd" id="3_i6tp4"]
+[ext_resource type="Script" path="res://assets/systems/scripts/entities/characters/hero/common/stand.gd" id="3_i6tp4"]
 [ext_resource type="PackedScene" uid="uid://bvcp473mjoo0s" path="res://assets/systems/scenes/actors/hero/detectors.tscn" id="4_sva3y"]
 [ext_resource type="Shape2D" uid="uid://cqyj3i1vf3w47" path="res://assets/resources/shapes/interactables/box.tres" id="7_ymyh8"]
 [ext_resource type="PackedScene" uid="uid://cuhscjgk7bx18" path="res://assets/systems/scenes/actors/hero/processors.tscn" id="8_0gp8j"]
-[ext_resource type="PackedScene" uid="uid://ddgvi2m1pbure" path="res://assets/systems/scenes/actors/hero/stats.tscn" id="8_jsg3f"]
 
 [node name="ray" type="CharacterBody2D"]
 collision_layer = 4
 collision_mask = 3
 script = ExtResource("1_tbrg2")
-
-[node name="stand" type="Sprite2D" parent="."]
-visible = false
-texture = ExtResource("2_qjuhw")
-centered = false
-script = ExtResource("3_i6tp4")
-
-[node name="view" type="Sprite2D" parent="."]
-position = Vector2(-6, -108)
-scale = Vector2(0.855556, 0.914286)
-texture = ExtResource("2_moe4v")
-centered = false
 
 [node name="geometry" type="CollisionShape2D" parent="."]
 visible = false
@@ -32,8 +19,20 @@ position = Vector2(32, 10)
 shape = ExtResource("7_ymyh8")
 debug_color = Color(1, 1, 1, 0.419608)
 
+[node name="view" type="Node2D" parent="."]
+
+[node name="stand" type="Sprite2D" parent="view"]
+visible = false
+texture = ExtResource("2_qjuhw")
+centered = false
+script = ExtResource("3_i6tp4")
+
+[node name="profile" type="Sprite2D" parent="view"]
+position = Vector2(-6, -108)
+scale = Vector2(0.855556, 0.914286)
+texture = ExtResource("2_moe4v")
+centered = false
+
 [node name="detectors" parent="." instance=ExtResource("4_sva3y")]
 
 [node name="processors" parent="." instance=ExtResource("8_0gp8j")]
-
-[node name="stats" parent="." instance=ExtResource("8_jsg3f")]

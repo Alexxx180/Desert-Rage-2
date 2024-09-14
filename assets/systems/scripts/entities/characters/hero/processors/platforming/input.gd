@@ -1,20 +1,21 @@
 extends Node
 
-signal jump(direction: Vector2i)
+signal jump()
 
 const NEUTRAL: int = 0
 const PERIOD: float = 0.025
 const FREEZE: float = 0.075
 
 var time: float = PERIOD
+var overview: Node
 
-func _platforming(input: Node) -> void:
-	if input.direction != Vector2i.ZERO:
-		jump.emit(input.direction)
+func _platforming() -> void:
+	if overview.direction != Vector2i.ZERO:
+		jump.emit()
 		time += FREEZE
 
-func _tick_jumps(input: Node) -> void:
-	time -= input.delta
+func _physics_process(delta: float) -> void:
+	time -= delta
 	if time <= NEUTRAL:
 		time = PERIOD
-		_platforming(input)
+		_platforming()
