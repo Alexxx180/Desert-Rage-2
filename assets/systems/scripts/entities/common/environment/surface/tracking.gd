@@ -2,18 +2,20 @@ extends Node
 
 class_name Tracker
 
-var entity: Node2D
-var direction: Vector2i
-
+var _position: Vector2 = Vector2.ZERO
+var _direction: Vector2i = Vector2i.ZERO
 var _contacts: Dictionary
-var contact: Vector2:
-	get: return get_contact(direction)
+var contact: Vector2: get = _get_current
 
-func set_direction(next: Vector2i): direction = next
-func get_contact(current: Vector2i): return _contacts[current].call()
+func set_position(next: Vector2) -> void: _position = next
+func set_direction(next: Vector2i) -> void: _direction = next
+func _get_current() -> Vector2: return get_contact(_direction)
+
+func get_contact(current: Vector2i) -> Vector2:
+	return _contacts[current].call()
 
 func _point(right: Vector2, fill: Vector2) -> Callable:
-	return (func(): return entity.position + right * fill)
+	return (func(): return _position + right * fill)
 
 func set_contacts(right: Vector2) -> void:
 	_contacts = {}

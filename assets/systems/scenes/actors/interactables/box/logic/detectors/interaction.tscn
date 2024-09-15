@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://biosnl51cos0y"]
+
+[ext_resource type="Script" path="res://assets/systems/scripts/entities/interactables/box/logic/detectors/interaction.gd" id="1_vil6p"]
+[ext_resource type="PackedScene" uid="uid://c2u04ld2id7t2" path="res://assets/systems/scenes/actors/interactables/box/logic/detectors/interaction/push.tscn" id="2_ts3da"]
+
+[node name="interaction" type="Area2D"]
+collision_mask = 30
+script = ExtResource("1_vil6p")
+
+[node name="push" parent="." instance=ExtResource("2_ts3da")]
+
+[connection signal="body_entered" from="." to="push" method="_on_push"]

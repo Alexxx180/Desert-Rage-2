@@ -5,8 +5,6 @@ extends Node
 @onready var floors: FloorsQueue = FloorsQueue.new()
 
 # func _is_same(body: Node2D) -> bool: return body.get_instance_id() == get_instance_id()
-func set_control_entity(entity: Node2D, velocity: Node, geometry: CollisionShape2D):
-	tilemap.set_control_entity(entity, velocity, geometry)
 
 func set_control_entity(entity: Node2D, velocity: Node, geometry: CollisionShape2D) -> void:
 	tracking.entity = entity

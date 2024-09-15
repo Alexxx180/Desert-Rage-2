@@ -1,40 +1,21 @@
-extends Node2D
+extends StaticBody2D
+
+signal move(next: Vector2)
 
 @onready var view: Sprite2D = $view
 @onready var stats: Node = $stats
-@onready var interaction: Node = $interaction
-@onready var geometry: Node = $interaction/handle/placement
+@onready var processors: Node = $processors
+@onready var geometry: Node = $placement
 
-func switch_stand(hero: CharacterBody2D, status: bool) -> void:
-	if hero.texture != view.texture:
-		hero.texture = view.texture
-	hero.visible = status
-	view.visible = !status
+var _delta: float = 0.0
 
 func _ready() -> void:
-	interaction.set_control_entity(self)
+	processors.set_control_entity(self)
 	stats.set_control_entity(self)
 
-signal update_view(hero: Sprite2D, has_hero: bool)
+func _physics_process(delta: float) -> void:
+	_delta = delta
 
-@export_range(0, 2) var height: int = 1
-
-var _hero: CharacterBody2D
-
-var has_hero: bool = false
-var previous: Vector2
-
-func set_floor(F: int):
-	if has_hero:
-		_hero.detectors.platform.floors.surface.F = F + height
-
-func remember() -> void:
-	if has_hero: previous = _hero.position
-
-func rollback() -> void:
-	if has_hero: _hero.position = previous
-
-func move(axis: int, velocity: float) -> void:
-	if has_hero: _hero.position[axis] += velocity
-
-# func _at_floor(hero: CharacterBody2D) -> bool: return hero.processing.platforming.jump.feet.stable
+func push(motion: Vector2):
+	move_and_collide(motion * _delta)
+	move.emit(position)

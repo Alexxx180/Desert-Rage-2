@@ -9,4 +9,7 @@ func remember() -> void:
 	placed = entity.position
 
 func rollback() -> void:
-	entity.position = placed
+	move(placed)
+
+func move(target: Vector2) -> void:
+	entity.position = target

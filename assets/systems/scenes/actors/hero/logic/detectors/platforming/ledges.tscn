@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://b3hev1nf6r4th"]
+
+[ext_resource type="Shape2D" uid="uid://nu8bajeuvt1w" path="res://assets/resources/shapes/ledges.tres" id="2_74vq5"]
+[ext_resource type="PackedScene" uid="uid://ye5g8w01sjkk" path="res://assets/systems/scenes/actors/hero/logic/detectors/platforming/ledge/floors.tscn" id="2_hf3wb"]
+
+[node name="ledges" type="Node2D"]
+
+[node name="floors" parent="." instance=ExtResource("2_hf3wb")]
+
+[node name="platforms" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 64
+
+[node name="shape" type="CollisionShape2D" parent="platforms"]
+position = Vector2(16, 10)
+shape = ExtResource("2_74vq5")
+debug_color = Color(1, 1, 1, 0.415686)
