@@ -19,8 +19,9 @@ func _jump(to_floor: bool, next: Vector2) -> void:
 	move.emit(next)
 	if feet.stable: disable.emit()
 
-func determine() -> void:
+func determine() -> bool:
 	if ledges.around(overview):
 		_jump(false, ledges.current.pos)
 	elif F != 0 and F == overview.surface.F:
 		_jump(true, deployment) # print("Jump from ", overview.surface.F, " floor to ", F)
+	return feet.unstable

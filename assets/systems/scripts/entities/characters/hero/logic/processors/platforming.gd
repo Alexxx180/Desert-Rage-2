@@ -7,4 +7,4 @@ func _ready() -> void:
 	jump.disable.connect(_disable_input)
 
 func _disable_input() -> void:
-	input.process_mode = Processors.wont
+	Processors.disable(input)

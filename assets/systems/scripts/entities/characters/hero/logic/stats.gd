@@ -8,6 +8,9 @@ extends Node
 func set_control_entity(hero: CharacterBody2D) -> void:
 	size.set_control_entity(hero)
 
+func accelerate(next: int) -> void:
+	mach.value = next
+
 func impulse() -> float:
 	return mach.value * push.value
 
