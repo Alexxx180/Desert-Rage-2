@@ -7,6 +7,9 @@ var _direction: Vector2i = Vector2i.ZERO
 var _contacts: Dictionary
 var contact: Vector2: get = _get_current
 
+func set_control_entity(box: Node2D) -> void:
+	set_contacts(box.geometry.shape.size)
+
 func set_position(next: Vector2) -> void: _position = next
 func set_direction(next: Vector2i) -> void: _direction = next
 func _get_current() -> Vector2: return get_contact(_direction)

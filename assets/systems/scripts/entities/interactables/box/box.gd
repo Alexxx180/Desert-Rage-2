@@ -1,6 +1,9 @@
 extends StaticBody2D
 
+signal directing(direction: Vector2i)
 signal move(next: Vector2)
+
+@export_range(0.2, 2.0, 0.1) var weight: float = 1
 
 @onready var view: Sprite2D = $view
 @onready var stats: Node = $stats

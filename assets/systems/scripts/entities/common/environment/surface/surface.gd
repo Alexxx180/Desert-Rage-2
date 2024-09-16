@@ -6,13 +6,11 @@ extends Node
 
 # func _is_same(body: Node2D) -> bool: return body.get_instance_id() == get_instance_id()
 
-func set_control_entity(entity: Node2D, velocity: Node, geometry: CollisionShape2D) -> void:
-	tracking.entity = entity
-	tracking.set_contacts(geometry.shape.size)
-	velocity.directing.connect(tracking.set_direction)
+func set_control_entity(entity: Node2D) -> void:
+	tracking.set_control_entity(entity)
 
 func at_old_floor(body) -> void:
-	if not (body == StaticBody2D or body != TileMap):
+	if body is StaticBody2D or body is TileMap:
 		floors.remove()
 
 func at_new_floor(body) -> void:

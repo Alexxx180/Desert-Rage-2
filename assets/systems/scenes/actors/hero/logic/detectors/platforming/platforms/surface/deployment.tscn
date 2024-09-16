@@ -1,0 +1,15 @@
+[gd_scene load_steps=5 format=3 uid="uid://c5osnbcikj60l"]
+
+[ext_resource type="Script" path="res://assets/systems/scripts/entities/characters/hero/logic/detectors/platforming/platform/ledge/distance.gd" id="1_slq1k"]
+[ext_resource type="PackedScene" uid="uid://m8yyhkf7osqx" path="res://assets/systems/scenes/actors/hero/logic/detectors/platforming/platforms/surface/deployment/surface.tscn" id="2_h1lk0"]
+[ext_resource type="PackedScene" uid="uid://bkebe58hbeadp" path="res://assets/systems/scenes/actors/hero/logic/detectors/platforming/platforms/surface/deployment/walls.tscn" id="3_kodjs"]
+[ext_resource type="Shape2D" uid="uid://do0s1n5uuqpof" path="res://assets/resources/shapes/character.tres" id="4_0p0l2"]
+
+[node name="deployment" type="Node2D"]
+position = Vector2(16, 10)
+script = ExtResource("1_slq1k")
+
+[node name="surface" parent="." instance=ExtResource("2_h1lk0")]
+
+[node name="walls" parent="." instance=ExtResource("3_kodjs")]
+shape = ExtResource("4_0p0l2")
