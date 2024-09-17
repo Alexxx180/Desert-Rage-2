@@ -1,5 +1,7 @@
 extends Node
 
+signal on_floors(F: int, position: Vector2)
+
 @onready var tracking: Node = $tracking
 @onready var tilemap: Node = $tilemap
 @onready var floors: FloorsQueue = FloorsQueue.new()
@@ -8,6 +10,12 @@ extends Node
 
 func set_control_entity(entity: Node2D) -> void:
 	tracking.set_control_entity(entity)
+
+func find_surface(at: Node) -> void:
+	var pos: Vector2 = at.walls.position
+	var center: Vector2 = tracking.center + pos + at.half
+	var f: int = Tiler.get_tile(at.surface.get_collider(), center)
+	on_floors.emit(f, pos)
 
 func at_old_floor(body) -> void:
 	if body is StaticBody2D or body is TileMap:
