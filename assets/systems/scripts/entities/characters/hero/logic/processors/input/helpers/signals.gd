@@ -10,6 +10,7 @@ func _init(input: Node, hero: CharacterBody2D) -> void:
 	var platforming: Node2D = detectors.platforming
 	var platforms: Node2D = platforming.platforms
 	var overleap: Area2D = platforms.surface.overleap
+	var deployment: Node2D = platforms.surface.deployment
 
 	overleap.body_entered.connect(input.on_ledge_encounter)
 
@@ -20,6 +21,9 @@ func _init(input: Node, hero: CharacterBody2D) -> void:
 
 	set_directing(input, [hero.set_direction,
 		surface.tracking.set_direction, jump.overview.redirect])
+
+	deployment.free_space.connect(surface.find_surface)
+	surface.on_floors.connect(jump.placement)
 
 	jump.feet.set_movement.connect(input.set_movement)
 	jump.move.connect(hero.teleport)

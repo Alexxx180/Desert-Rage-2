@@ -10,7 +10,7 @@ var deployment: Vector2 = Vector2.ZERO
 @onready var ledges: Node = $ledges
 @onready var feet: Node = $feet
 
-func _floors(number: int, position: Vector2) -> void:
+func placement(number: int, position: Vector2) -> void:
 	F = number
 	deployment = position
 
