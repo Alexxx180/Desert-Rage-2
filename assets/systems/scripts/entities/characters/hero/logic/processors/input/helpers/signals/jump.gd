@@ -9,9 +9,3 @@ static func apply(hero: CharacterBody2D) -> void:
 
 	jump.feet.set_movement.connect(input.set_movement)
 	jump.move.connect(hero.teleport)
-
-	var tracking: Node = processors.environment.surface.tracking
-
-	var events: Array[Callable] = [hero.set_direction,
-		tracking.set_direction, jump.overview.redirect]
-	for event in events: input.directing.connect(event)

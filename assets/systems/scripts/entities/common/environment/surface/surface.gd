@@ -11,10 +11,13 @@ signal on_floors(F: int, position: Vector2)
 func set_control_entity(entity: Node2D) -> void:
 	tracking.set_control_entity(entity)
 
-func find_surface(at: DeploymentRaycast) -> void:
-	var pos: Vector2 = at.walls.position
-	var center: Vector2 = tracking.center + pos + at.half
-	var f: int = Tiler.get_tile(at.surface.get_collider(), center)
+func find_surface(next: Vector2i, space: DeploymentRaycast) -> void:
+	var f: int = 0
+	var pos: Vector2 = next
+	if pos != Vector2.ZERO and space.can_deploy(next):
+		pos = space.walls.position
+		f = Tiler.get_tile(space.surface.get_collider(),
+			tracking.center + pos + space.half)
 	on_floors.emit(f, pos)
 
 func at_old_floor(body) -> void:

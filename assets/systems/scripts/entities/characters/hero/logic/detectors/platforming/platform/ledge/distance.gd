@@ -18,6 +18,8 @@ func _intersect(direction: Vector2) -> bool:
 	surface.target_position = direction * DISTANCE
 	return surface.is_colliding()
 
+func can_deploy(direction: Vector2i) -> bool:
+	return _intersect(direction) and _no_walls(direction)
+
 func search(next: Vector2i) -> void:
-	if next != Vector2i.ZERO and _intersect(next) and _no_walls(next):
-		free_space.emit(self)
+	free_space.emit(next, self)
