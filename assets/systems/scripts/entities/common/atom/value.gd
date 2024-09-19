@@ -1,3 +1,3 @@
 extends Node
 
-@export var value: int = 0
+@export var value: float = 0

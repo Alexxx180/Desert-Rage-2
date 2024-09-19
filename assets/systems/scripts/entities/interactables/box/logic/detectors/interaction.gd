@@ -1,4 +1,4 @@
-extends Area2D
+extends StaticBody2D
 
 @onready var push: Node2D = $push
 @onready var placement: CollisionShape2D = $placement

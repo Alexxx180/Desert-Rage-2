@@ -1,19 +1,19 @@
 extends Node
 
-var subject: Node2D
-var geometry: CollisionShape2D
+class_name EntitySize
 
-var basis: Vector2:
-	get:
-		return subject.position
+var _subject: Callable
+var shape: Vector2
 
-var right: Vector2:
-	get:
-		return basis + geometry.shape.size
+var basis: Vector2: get = _basis
+var right: Vector2: get = _right
 
-func sub(size: Node) -> Vector2:
+func _basis() -> Vector2: return _subject.call()
+func _right() -> Vector2: return basis + shape
+
+func sub(size: EntitySize) -> Vector2:
 	return right - size.basis
 
-func set_control_entity(entity: Node2D):
-	subject = entity
-	geometry = entity.geometry
+func set_control_entity(subject: Node2D) -> void:
+	_subject = func() -> Vector2: return subject.position
+	shape = subject.geometry.shape.size
