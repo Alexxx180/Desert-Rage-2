@@ -1,11 +1,15 @@
-extends RefCounted
+extends Node
 
-class_name HeroSignals
+@onready var environment: Node = $environment
+@onready var platforming: Node = $platforming
+@onready var interaction: Node = $interaction
+@onready var input: Node = $input
 
-static func apply(hero: CharacterBody2D) -> void:
-	var platforming: Node2D = hero.logic.detectors.platforming
+func apply(hero: CharacterBody2D) -> void:
+	var detectors: Node = hero.logic.detectors
 	var processors: Node = hero.logic.processors
 
-	HeroSignalsArea.apply(platforming, processors)
-	HeroSignalsDeployment.apply(platforming.platforms.surface, processors)
-	HeroSignalsJump.apply(hero)
+	platforming.set_control(detectors.platforming, processors)
+	environment.set_control(processors.environment, processors.input)
+	input.set_control(hero, processors.input)
+	interaction.set_control(detectors.interaction, processors.interaction)
