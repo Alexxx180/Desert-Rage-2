@@ -3,12 +3,9 @@ extends Node
 signal impulse(power: int)
 signal run(speed: int)
 
-@onready var size = $size
-@onready var speed = $speed
-@onready var push = $push
-
-func set_control_entity(hero: CharacterBody2D) -> void:
-	size.set_control_entity(hero)
+@onready var size: Node = $size
+@onready var speed: Node = $speed
+@onready var push: Node = $push
 
 func accelerate(mach: int) -> void:
 	impulse.emit(mach * push.value)

@@ -7,13 +7,12 @@ extends Node2D
 var direction: Vector2i = Vector2i.ZERO
 var velocity: int = 0
 
-func set_direction(next: Vector2i): direction = next
-func set_velocity(speed: int): velocity = speed
+func set_direction(next: Vector2i) -> void: direction = next
+func set_velocity(speed: int) -> void: velocity = speed
 
-func set_control_entity(hero: CharacterBody2D):
+func set_control_entity(hero: CharacterBody2D) -> void:
 	stats.run.connect(set_velocity)
-	stats.set_control_entity(hero)
-	detectors.set_control_entity(hero)
+	stats.size.set_control_entity(hero)
 	processors.set_control_entity(hero)
 
 func run(delta) -> Vector2:

@@ -10,8 +10,8 @@ var deployment: Vector2 = Vector2.ZERO
 @onready var ledges: Node = $ledges
 @onready var feet: Node = $feet
 
-func placement(number: int, position: Vector2) -> void:
-	F = number
+func placement(height: int, position: Vector2) -> void:
+	F = height
 	deployment = position
 
 func _jump(to_floor: bool, next: Vector2) -> void:

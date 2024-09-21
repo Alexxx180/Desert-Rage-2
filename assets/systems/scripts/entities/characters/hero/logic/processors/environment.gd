@@ -1,6 +1,6 @@
 extends Node
 
-@onready var interaction: Node = $interaction
+@onready var surface: Node = $surface
 
 func set_control_entity(hero: CharacterBody2D) -> void:
-	interaction.set_control_entity(hero)
+	surface.set_control_entity(hero)

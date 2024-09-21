@@ -2,6 +2,8 @@ extends Node
 
 class_name EntitySize
 
+@export var centered: bool = true
+
 var _subject: Callable
 var shape: Vector2
 
@@ -15,5 +17,8 @@ func sub(size: EntitySize) -> Vector2:
 	return right - size.basis
 
 func set_control_entity(subject: Node2D) -> void:
-	_subject = func() -> Vector2: return subject.position
 	shape = subject.geometry.shape.size
+	if centered:
+		_subject = func() -> Vector2: return subject.position - shape / 2
+	else:
+		_subject = func() -> Vector2: return subject.position

@@ -7,11 +7,11 @@ var _directions: OverviewDirections
 func redirect(next: Vector2i) -> void: direction = next
 func set_floor(f: int) -> void: F = f
 
-func set_floor_change(surface: Node) -> void:
-	surface.floors.on_floor_change.connect(set_floor)
-
 func set_control_entity(hero: CharacterBody2D) -> void:
-	set_floor_change(hero.logic.processors.environment.surface)
+	var environment: Node = hero.logic.processors.environment
+	var floors: Node = environment.surface.floors
+	
+	floors.on_floor_change.connect(set_floor)
 	_directions = OverviewDirections.new(hero)
 
 func _observe(ledge: Vector2) -> bool:

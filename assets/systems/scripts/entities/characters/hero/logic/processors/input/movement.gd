@@ -30,5 +30,5 @@ func _input(_event: InputEvent):
 
 func set_control_entity(hero: CharacterBody2D) -> void:
 	move.connect(hero.travel)
-	accelerate.connect(hero.stats.accelerate)
+	accelerate.connect(hero.logic.stats.accelerate)
 	accelerate.emit(STATE.WALK)
