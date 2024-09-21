@@ -1,9 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://bcy4fb07vs5t8"]
+[gd_scene load_steps=4 format=3 uid="uid://bcy4fb07vs5t8"]
 
 [ext_resource type="PackedScene" uid="uid://car4au361lguc" path="res://assets/systems/scenes/actors/common/surface.tscn" id="1_c8wa3"]
 [ext_resource type="Script" path="res://assets/systems/scripts/entities/characters/hero/logic/processors/environment.gd" id="1_etrf4"]
+[ext_resource type="Script" path="res://assets/systems/scripts/entities/characters/hero/logic/processors/environment/interaction/push.gd" id="3_jonc6"]
 
 [node name="environment" type="Node"]
 script = ExtResource("1_etrf4")
 
 [node name="surface" parent="." instance=ExtResource("1_c8wa3")]
+script = null
+
+[node name="push" type="Node" parent="."]
+script = ExtResource("3_jonc6")

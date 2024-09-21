@@ -10,6 +10,6 @@ func apply(hero: CharacterBody2D) -> void:
 	var processors: Node = hero.logic.processors
 
 	platforming.set_control(detectors.platforming, processors)
-	environment.set_control(processors.environment, processors.input)
+	environment.set_control(processors.environment, hero.logic)
 	input.set_control(hero, processors.input)
 	interaction.set_control(detectors.interaction, processors.interaction)
