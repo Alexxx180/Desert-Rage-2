@@ -1,6 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://2rt2ok77rsjp"]
+[gd_scene load_steps=5 format=3 uid="uid://2rt2ok77rsjp"]
 
 [ext_resource type="Script" path="res://assets/systems/scripts/entities/interactables/box/logic/processors/movement/seat/seat.gd" id="1_mxigw"]
+[ext_resource type="PackedScene" uid="uid://c3rlwi6qasfcn" path="res://assets/systems/scenes/actors/interactables/box/logic/processors/movement/seat/place.tscn" id="2_rrm78"]
+[ext_resource type="PackedScene" uid="uid://c4mdtm0428sln" path="res://assets/systems/scenes/common/primitives/scalar/atomic/export/height.tscn" id="3_5co37"]
+[ext_resource type="PackedScene" uid="uid://2khxl2rnv1i0" path="res://assets/systems/scenes/common/primitives/vector/export/offset.tscn" id="4_5c2wq"]
 
 [node name="seat" type="Node"]
 script = ExtResource("1_mxigw")
+
+[node name="place" parent="." instance=ExtResource("2_rrm78")]
+
+[node name="height" parent="." instance=ExtResource("3_5co37")]
+
+[node name="offset" parent="." instance=ExtResource("4_5c2wq")]

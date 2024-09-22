@@ -1,9 +1,9 @@
 extends Node
 
-func set_control(box: StaticBody2D, platforming: Node) -> void:
-	var floors: Area2D = box.logic.detectors.platforming.floors
+func set_control(box: StaticBody2D, surface: Node) -> void:
+	var floors: Area2D = box.logic.detectors.surface.floors
 
-	box.directing.connect(platforming.tracking.map.set_direction)
+	box.directing.connect(surface.tracking.map.set_direction)
 
-	floors.body_entered.connect(platforming.enable_stand)
-	floors.body_exited.connect(platforming.disable_stand)
+	floors.body_entered.connect(surface.at_new_floor)
+	floors.body_exited.connect(surface.at_old_floor)

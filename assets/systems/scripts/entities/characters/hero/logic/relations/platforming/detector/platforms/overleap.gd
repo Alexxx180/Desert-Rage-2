@@ -8,4 +8,3 @@ func set_control(detector: Area2D, platforming: Node) -> void:
 
 func _on_ledge_encounter(_surface: TileMap) -> void:
 	Processors.lazy(_platforming, _platforming.jump.determine)
-

@@ -10,4 +10,3 @@ func set_control(input: Node, logic: Node) -> void:
 	deployment.set_control(input, surface.deployment)
 	environment.set_control(input, logic.processors.environment)
 	overview.set_control(input, input.platforming.jump.overview)
-

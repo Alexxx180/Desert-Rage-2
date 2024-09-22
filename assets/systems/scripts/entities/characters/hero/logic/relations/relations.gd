@@ -15,4 +15,3 @@ func apply(hero: CharacterBody2D) -> void:
 	interaction.set_control(detectors.interaction, processors.environment)
 
 	hero.logic.stats.run.connect(hero.logic.set_velocity)
-
