@@ -3,7 +3,7 @@ extends Node
 signal move(delta: float)
 signal accelerate(mach: int)
 
-enum STATE { WALK = 1, RUN = 2 }
+enum { WALK = 1, RUN = 2 }
 
 var _timing: ActionTimer = ActionTimer.new(0.05)
 var _walk: bool = true
@@ -11,7 +11,7 @@ var _walk: bool = true
 func walk(condition: bool) -> void:
 	if condition:
 		_walk = condition
-		accelerate.emit(STATE.WALK)
+		accelerate.emit(WALK)
 
 func _physics_process(delta) -> void:
 	move.emit(delta)
@@ -23,12 +23,7 @@ func _input(_event: InputEvent):
 
 	if Prompters.toggle(act):
 		_timing.restart()
-		accelerate.emit(STATE.RUN)
+		accelerate.emit(RUN)
 
 	if Prompters.release(act):
 		walk(not _timing.finished())
-
-func set_control_entity(hero: CharacterBody2D) -> void:
-	move.connect(hero.travel)
-	accelerate.connect(hero.logic.stats.accelerate)
-	accelerate.emit(STATE.WALK)

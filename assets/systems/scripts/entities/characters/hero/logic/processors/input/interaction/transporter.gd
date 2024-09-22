@@ -6,8 +6,8 @@ func set_control_entity(_hero: Node2D):
 	pass
 	# pos.entity = box
 	# booking = box.interaction.seat.booking
-	# box.booking.rollback.connect(pos.rollback)
-	# box.booking.remember.connect(pos.remember)
+	# box.booking.rollback.con nect(pos.rollback)
+	# box.booking.remember.con nect(pos.remember)
 	# box.booking.remember.emit()
 
 func _direct(axis: int, motion: int) -> Vector2i:
@@ -21,7 +21,8 @@ func _move(axis: int, velocity: int) -> Vector2:
 	return motion
 
 func push(box: StaticBody2D, axis: int, velocity: int):
+	pass
 	#booking.remember.emit()
-	box.directing.emit(_direct(axis, velocity))
-	box.push(_move(axis, velocity))
+	# box.directing.emit(_direct(axis, velocity))
+	# box.push(_move(axis, velocity))
 	#booking.move.emit(axis, velocity)

@@ -6,12 +6,11 @@ extends Node2D
 var _size: Node
 var _impulse: int = 0
 
-func set_impulse(next: int) -> void: _impulse = next
+func set_impulse(next: int) -> void:
+	_impulse = next
 
 func set_control_entity(hero: Node2D) -> void:
-	var stats: Node = hero.logic.stats
-	_size = stats.size
-	stats.impulse.connect(set_impulse)
+	_size = hero.logic.stats.size
 	transporter.set_control_entity(hero)
 
 func _on_push(box: StaticBody2D) -> void:

@@ -11,7 +11,6 @@ func set_direction(next: Vector2i) -> void: direction = next
 func set_velocity(speed: int) -> void: velocity = speed
 
 func set_control_entity(hero: CharacterBody2D) -> void:
-	stats.run.connect(set_velocity)
 	stats.size.set_control_entity(hero)
 	processors.set_control_entity(hero)
 

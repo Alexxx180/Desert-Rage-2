@@ -7,3 +7,7 @@ func set_control(hero: CharacterBody2D, processor: Node) -> void:
 
 	processor.move.connect(hero.teleport)
 	feet.set_control(input, processor.feet)
+
+
+
+
