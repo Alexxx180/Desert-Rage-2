@@ -10,6 +10,6 @@ func _ready():
 func teleport(next: Vector2) -> void:
 	position = next
 
-func travel(delta: float) -> void:
-	velocity = logic.run(delta)
+func travel(motion: Vector2) -> void:
+	velocity = motion
 	move_and_slide()

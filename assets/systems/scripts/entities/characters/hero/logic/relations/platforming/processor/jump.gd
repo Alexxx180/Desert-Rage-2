@@ -6,8 +6,4 @@ func set_control(hero: CharacterBody2D, processor: Node) -> void:
 	var input: Node = hero.logic.processors.input
 
 	processor.move.connect(hero.teleport)
-	feet.set_control(input, processor.feet)
-
-
-
-
+	feet.set_control(processor.feet, input.movement)
