@@ -12,7 +12,7 @@ func apply(hero: CharacterBody2D) -> void:
 	platforming.set_control(detectors.platforming, processors)
 	environment.set_control(processors.environment, hero.logic)
 	input.set_control(hero, processors.input)
-	interaction.set_control(detectors.interaction, processors.interaction)
+	interaction.set_control(detectors.interaction, processors.environment)
 
 	hero.logic.stats.run.connect(hero.logic.set_velocity)
 

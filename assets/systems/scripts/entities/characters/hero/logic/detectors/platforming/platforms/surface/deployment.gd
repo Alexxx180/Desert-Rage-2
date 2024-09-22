@@ -2,7 +2,8 @@ extends Node2D
 
 class_name DeploymentRaycast
 
-signal free_space(deployment: DeploymentRaycast)
+signal prepare(deployment: DeploymentRaycast)
+signal deploy(F: int, position: Vector2)
 
 const DISTANCE: int = 128
 
@@ -22,8 +23,11 @@ func _intersect(direction: Vector2) -> bool:
 	surface.target_position = direction * DISTANCE
 	return surface.is_colliding()
 
-func can_deploy(direction: Vector2i) -> bool:
-	return _intersect(direction) and _no_walls(direction)
+func can_deploy(dir: Vector2i) -> bool:
+	return dir != Vector2i.ZERO and _intersect(dir) and _no_walls(dir)
 
-func search(next: Vector2i) -> void:
-	free_space.emit(next, self)
+func search(direction: Vector2i) -> void:
+	if can_deploy(direction):
+		prepare.emit(self)
+	else:
+		deploy.emit(0, direction)

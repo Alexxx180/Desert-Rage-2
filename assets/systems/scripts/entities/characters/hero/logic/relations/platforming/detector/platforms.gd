@@ -10,4 +10,4 @@ func set_control(platforms: Node2D, processors: Node) -> void:
 
 	overleap.set_control(platforms.overleap, input)
 	ledges.set_control(platforms.ledges, input.platforming.jump.ledges)
-	deployment.set_control(platforms.deployment, surface)
+	deployment.set_control(platforms.deployment, processors)

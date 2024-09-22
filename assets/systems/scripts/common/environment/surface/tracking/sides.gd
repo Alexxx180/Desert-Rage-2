@@ -8,7 +8,6 @@ const CENTER = Vector2i.ZERO
 
 static func _fill() -> Dictionary:
 	var SEMI: float = 0.5
-
 	return {
 		TOP_LEFT = [Vector2i(BACK, BACK), Vector2.ZERO],
 		TOP_RIGHT = [Vector2i(FULL, BACK), Vector2.RIGHT],
