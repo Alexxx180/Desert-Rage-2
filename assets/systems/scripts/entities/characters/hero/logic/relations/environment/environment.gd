@@ -3,8 +3,6 @@ extends Node
 @onready var surface: Node = $surface
 @onready var push: Node = $push
 
-func set_control(environment: Node, logic: Node) -> void:
-	var platforming: Node = logic.processors.input.platforming
-
-	surface.set_control(environment.surface, platforming.jump)
-	push.set_control(environment.push, logic.stats)
+func set_control(environment: Node, hero: CharacterBody2D) -> void:
+	surface.set_control(environment.surface, hero)
+	push.set_control(environment.push, hero.logic.stats)

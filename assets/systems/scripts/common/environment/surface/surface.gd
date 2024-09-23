@@ -4,12 +4,9 @@ extends Node
 @onready var tilemap: Node = $tilemap
 @onready var floors: FloorsQueue = FloorsQueue.new()
 
-func set_control_entity(entity: Node2D) -> void:
-	tracking.set_control_entity(entity)
-
 func find(space: DeploymentRaycast) -> void:
 	var surface = space.surface.get_collider()
-	var pos: Vector2 = tracking.center + space.walls.position
+	var pos: Vector2 = tracking.get_position(space)
 	var F: int = Tiler.get_tile(surface, pos)
 	space.deploy.emit(F, pos)
 
