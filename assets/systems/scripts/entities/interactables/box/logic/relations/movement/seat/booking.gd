@@ -15,9 +15,3 @@ func _on_stand(seat: Node, hero: CharacterBody2D) -> void:
 func _on_leave(seat: Node, hero: CharacterBody2D) -> void:
 	seat.climb.disconnect(_height(hero).set_floor)
 	seat.move.disconnect(hero.teleport)
-
-"""
-	signal move(target: Vector2)
-	signal on_floor_changed(F: int)
-	signal update_view(hero: Sprite2D, status: bool)
-"""

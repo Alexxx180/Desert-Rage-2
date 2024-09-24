@@ -1,0 +1,17 @@
+[gd_scene load_steps=5 format=3 uid="uid://esjdr0frox65"]
+
+[ext_resource type="Script" path="res://assets/systems/scripts/entities/interactables/box/box.gd" id="1_46h2s"]
+[ext_resource type="PackedScene" uid="uid://dkpwq1rqqn8ty" path="res://assets/systems/scenes/common/interactables/box/placement.tscn" id="2_l8kjb"]
+[ext_resource type="PackedScene" uid="uid://bg1vdh1e34mcm" path="res://assets/systems/scenes/common/interactables/box/view/small.tscn" id="3_pxqm8"]
+[ext_resource type="PackedScene" uid="uid://hxnrxxfrid4k" path="res://assets/systems/scenes/common/interactables/box/logic/logic.tscn" id="4_dbp8w"]
+
+[node name="box" type="StaticBody2D"]
+collision_layer = 16
+collision_mask = 30
+script = ExtResource("1_46h2s")
+
+[node name="placement" parent="." instance=ExtResource("2_l8kjb")]
+
+[node name="view" parent="." instance=ExtResource("3_pxqm8")]
+
+[node name="logic" parent="." instance=ExtResource("4_dbp8w")]

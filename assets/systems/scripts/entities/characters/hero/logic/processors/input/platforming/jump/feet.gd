@@ -22,5 +22,5 @@ func placement(f: int, next: Vector2) -> void:
 	height.set_floor(f)
 	deployment.set_position(next)
 
-func same_level(overview: Node) -> void:
-	height.F != 0 and height.F == overview.height.F
+func same_level(overview: Node) -> bool:
+	return height.F != 0 and height.F == overview.height.F

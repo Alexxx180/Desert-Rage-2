@@ -1,18 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://jdgle11ik74y"]
+[gd_scene load_steps=5 format=3 uid="uid://jdgle11ik74y"]
 
-[ext_resource type="PackedScene" uid="uid://oichbyd76x3e" path="res://assets/systems/scenes/actors/interactables/box/logic/stats.tscn" id="2_4f5tc"]
-[ext_resource type="Texture2D" uid="uid://byjlxjjpmlmup" path="res://assets/resources/tiles/interactables/big-box2.png" id="2_aabik"]
-[ext_resource type="PackedScene" uid="uid://biosnl51cos0y" path="res://assets/systems/scenes/actors/interactables/box/logic/detectors/interaction.tscn" id="4_f74rd"]
+[ext_resource type="PackedScene" uid="uid://dkpwq1rqqn8ty" path="res://assets/systems/scenes/common/interactables/box/placement.tscn" id="1_354n6"]
+[ext_resource type="Script" path="res://assets/systems/scripts/entities/interactables/box/box.gd" id="1_ru18r"]
+[ext_resource type="PackedScene" uid="uid://dd85ocvvgem05" path="res://assets/systems/scenes/common/interactables/box/view/big.tscn" id="2_iy1ei"]
+[ext_resource type="PackedScene" uid="uid://hxnrxxfrid4k" path="res://assets/systems/scenes/common/interactables/box/logic/logic.tscn" id="5_7e8oi"]
 
-[node name="big-box" type="Node2D"]
+[node name="big-box" type="StaticBody2D"]
+script = ExtResource("1_ru18r")
 
-[node name="view" type="Sprite2D" parent="."]
-position = Vector2(0, -108)
-texture = ExtResource("2_aabik")
-centered = false
+[node name="placement" parent="." instance=ExtResource("1_354n6")]
 
-[node name="stats" parent="." instance=ExtResource("2_4f5tc")]
+[node name="view" parent="." instance=ExtResource("2_iy1ei")]
+position = Vector2(-32, -118)
 
-[node name="interaction" type="Node2D" parent="."]
-
-[node name="push" parent="interaction" instance=ExtResource("4_f74rd")]
+[node name="logic" parent="." instance=ExtResource("5_7e8oi")]

@@ -12,4 +12,4 @@ func _observe(ledge: Vector2) -> bool:
 
 func reach(ledge: Node2D) -> bool:
 	var seat: Node = ledge.surface.seat
-	return not seat.has_hero and _observe(ledge.pos)
+	return not seat.place.stand() and _observe(ledge.pos)
