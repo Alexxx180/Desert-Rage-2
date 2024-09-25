@@ -1,3 +1,3 @@
-extends Node2D
+extends Node
 
 @onready var movement: Node = $movement

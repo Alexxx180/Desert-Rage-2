@@ -7,10 +7,11 @@ const PERIOD: float = 0.025
 const FREEZE: float = 0.075
 
 var time: float = PERIOD
-var overview: Node
+
+@onready var hero: Node = $direction
 
 func _platforming() -> void:
-	if overview.direction != Vector2i.ZERO:
+	if hero.direction != Vector2i.ZERO:
 		jump.emit()
 		time += FREEZE
 
