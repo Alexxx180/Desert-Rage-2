@@ -4,7 +4,13 @@ const zooming: float = 0.1
 const minimum: float = 0.5
 const maximum: float = 1.5
 
+func change(node: Node, hero: CharacterBody2D):
+	node.remove_child(self)
+	hero.add_child(self)
+	self.set_owner(hero)
+
 func reset(nodes: Array, main: int, next: int) -> void:
+	change(
 	nodes[main].remove_child(self)
 	nodes[next].add_child(self)
 	self.set_owner(nodes[next])
