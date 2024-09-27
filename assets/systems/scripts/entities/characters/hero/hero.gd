@@ -6,6 +6,9 @@ signal move(position: Vector2)
 @onready var view: Node2D = $view
 @onready var logic: Node = $logic
 
+func _ready() -> void:
+	logic.relations.apply(self)
+
 func teleport(next: Vector2) -> void:
 	position = next
 	move.emit(position)
