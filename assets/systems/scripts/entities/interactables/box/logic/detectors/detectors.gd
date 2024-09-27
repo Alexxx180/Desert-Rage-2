@@ -1,3 +1,3 @@
 extends Node2D
 
-@onready var platforming: Node2D = $platform
+@onready var platforming: Node2D = $platforming

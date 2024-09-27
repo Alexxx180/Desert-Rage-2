@@ -1,6 +1,7 @@
 extends Node
 
 @onready var inplace: Node = $inplace
+@onready var overview: Node = $direction
 
 var _plane: Array[Array] = []
 
@@ -10,6 +11,6 @@ func set_directions(hero: CharacterBody2D):
 		faced.axis = axis
 		_plane.push_back(inplace.decide(faced))
 
-func observe(axis: int, direction: Vector2i, ledge: Vector2) -> bool:
-	var faced: int = direction[axis]
+func observe(axis: int, ledge: Vector2) -> bool:
+	var faced: int = overview.direction[axis]
 	return _plane[axis][faced].call(ledge)
