@@ -1,4 +1,5 @@
 extends Node
 
-func set_control(interaction: Area2D, environment: Node) -> void:
-	interaction.push.body_entered.connect(environment.push.forward)
+func set_control(interaction: Node2D, environment: Node) -> void:
+	var push: Node = environment.interaction.push
+	interaction.push.body_entered.connect(push.forward)

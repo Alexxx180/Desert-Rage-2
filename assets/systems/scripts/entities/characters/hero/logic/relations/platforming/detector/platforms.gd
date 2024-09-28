@@ -6,7 +6,8 @@ extends Node
 
 func set_control(platforms: Node2D, processors: Node) -> void:
 	var input: Node = processors.input
+	var surface: Node = platforms.surface
 
-	overleap.set_control(platforms.overleap, input)
+	overleap.set_control(surface.overleap, input)
 	ledges.set_control(platforms.ledges, input.platforming.jump.ledges)
-	deployment.set_control(platforms.deployment, processors)
+	deployment.set_control(surface.deployment, processors)

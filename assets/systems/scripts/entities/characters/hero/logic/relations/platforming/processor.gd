@@ -5,12 +5,13 @@ extends Node
 var _input: Node
 
 func set_control(hero: CharacterBody2D, processors: Node) -> void:
-	var _jump: Node = processors.platforming.jump
-	_input = processors.platforming.input
-	processors.input.directing.connect(_input.hero.set_direction)
+	var input: Node = processors.input
+	var platforming: Node = input.platforming
+	_input = platforming.input
+	input.directing.connect(_input.hero.set_direction)
 
-	jump.set_control(hero, jump)
-	_jump.disable.connect(_disable_input)
+	jump.set_control(hero, platforming.jump)
+	platforming.jump.disable.connect(_disable_input)
 
 func _disable_input() -> void:
 	Processors.disable(_input)

@@ -4,6 +4,5 @@ extends Node
 @onready var movement: Node = $movement
 
 func set_control(hero: CharacterBody2D, input: Node) -> void:
-	input.directing.connect(hero.set_direction)
-	movement.set_control(input.movement, hero)
+	movement.set_control(input, hero)
 	logic.set_control(input, hero.logic)

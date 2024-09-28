@@ -5,4 +5,4 @@ extends Node
 
 func set_control(environment: Node, hero: CharacterBody2D) -> void:
 	surface.set_control(environment.surface, hero)
-	push.set_control(environment.push, hero.logic.stats)
+	push.set_control(environment.interaction.push, hero.logic.stats)

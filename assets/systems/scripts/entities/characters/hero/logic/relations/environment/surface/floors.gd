@@ -1,4 +1,4 @@
 extends Node
 
-func set_control(processor: Node, overview: Node) -> void:
-	processor.on_floor_change.connect(overview.set_floor)
+func set_control(processor: FloorsQueue, overview: Node) -> void:
+	processor.update.connect(overview.height.set_floor)

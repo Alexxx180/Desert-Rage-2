@@ -15,5 +15,7 @@ func reset(nodes: Array, main: int, next: int) -> void:
 
 func _input(_event):
 	var z: float = Input.get_axis("view_left", "view_right") * zooming
-	z = clampf(z, 0.5, 1.5)
-	zoom = Vector2(z, z)
+	if z != 0:
+		print("Z: ", z)
+		z = clampf(zoom.x + z, 0.5, 1.5)
+		zoom = Vector2(z, z)

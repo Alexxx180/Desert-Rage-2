@@ -23,6 +23,4 @@ func _physics_process(delta) -> void:
 	walk(not _walk)
 
 func _input(_event: InputEvent):
-	print("MOVE: ", feet.velocity)
-	print("DIRE: ", face.direction)
 	behavior.tick(self)
