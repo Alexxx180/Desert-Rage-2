@@ -10,8 +10,8 @@ func find(space: DeploymentRaycast) -> void:
 	var F: int = Tiler.get_tile(surface, pos)
 	space.deploy.emit(F, pos)
 
-func at_old_floor(_body: TileMap) -> void:
+func at_old_floor(_body: TileMapLayer) -> void:
 	floors.remove()
 
-func at_new_floor(body: TileMap) -> void:
-	floors.append(tilemap.find_tile(body, tracking))
+func at_new_floor(walls: TileMapLayer) -> void:
+	floors.append(tilemap.find_tile(walls.floors, tracking))
