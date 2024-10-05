@@ -6,12 +6,14 @@ signal prepare(deployment: DeploymentRaycast)
 signal deploy(F: int, position: Vector2)
 
 @onready var walls: ShapeCast2D = $walls
+@onready var ground: ShapeCast2D = $ground
 @onready var surface: RayCast2D = $surface
 
 func can_deploy(direction: Vector2i) -> bool:
 	if direction == Vector2i.ZERO: return false
 	if not surface.detected(direction): return false
-	return walls.freed(surface, direction)
+	if not ground.present(surface): return false
+	return not walls.present(surface)
 
 func search(direction: Vector2i) -> void:
 	if can_deploy(direction):
