@@ -10,6 +10,7 @@ func _ready() -> void:
 	logic.relations.apply(self)
 
 func teleport(next: Vector2) -> void:
+	print("FROM: ", position, "TO", next)
 	position = next
 	move.emit(position)
 

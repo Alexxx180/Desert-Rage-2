@@ -17,6 +17,6 @@ static func switch(holder: Node) -> void:
 static func turn(holder: Node, condition: bool) -> void:
 	_reset(holder, will if condition else wont)
 
-static func lazy(holder: Node, act: Callable) -> void:
+static func lazy(holder: Node, act: Callable, variant) -> void:
 	enable(holder)
-	turn(holder, act.call())
+	turn(holder, act.call(variant))

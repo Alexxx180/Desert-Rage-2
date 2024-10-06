@@ -1,12 +1,14 @@
 extends Node
 
+@onready var overleap: Node = $overleap
 @onready var environment: Node = $environment
-@onready var deployment: Node = $deployment
 @onready var overview: Node = $overview
 
 func set_control(input: Node, logic: Node) -> void:
-	var surface: Node = logic.detectors.platforming.platforms.surface
+	var platforms: Node = logic.detectors.platforming.platforms
 
-	deployment.set_control(input, surface.deployment)
+	overleap.set_control(input, platforms.surface.overleap)
+
 	environment.set_control(input, logic.processors.environment)
+
 	overview.set_control(input, input.platforming.jump.overview)

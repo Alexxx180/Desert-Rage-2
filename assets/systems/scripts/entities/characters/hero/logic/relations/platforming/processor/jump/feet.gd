@@ -2,9 +2,16 @@ extends Node
 
 var _movement: Node
 
-func set_control(processor: Node, hero: CharacterBody2D) -> void:
-	_movement = hero.logic.processors.input.movement
-	processor.set_movement.connect(_set_movement)
+func set_control(feet: Node, hero: CharacterBody2D) -> void:
+	var platforms: Node = hero.logic.detectors.platforming.platforms
+	var processors: Node = hero.logic.processors
+
+	_movement = processors.input.movement
+
+	feet.space = platforms.surface.deployment
+	feet.surface = processors.environment.surface
+
+	feet.balance.set_movement.connect(_set_movement)
 
 func _set_movement(control: bool) -> void:
 	Processors.turn(_movement, control)

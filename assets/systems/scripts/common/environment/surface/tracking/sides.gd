@@ -24,6 +24,8 @@ static func _point(right: Vector2, fill: Vector2) -> Callable:
 	return (func(pos: Vector2): return pos + right * fill)
 
 static func get_contacts(right: Vector2) -> Dictionary:
+	print("RIGHT: ", right)
+
 	var contacts: Dictionary = {}
 	for side in _fill().values():
 		contacts[side[0]] = _point(right, side[1])

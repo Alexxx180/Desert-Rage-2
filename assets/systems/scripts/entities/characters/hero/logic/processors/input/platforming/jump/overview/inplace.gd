@@ -10,7 +10,7 @@ func _less(x: float, y: float) -> bool: return x < y
 
 func _go(faced: Facing, align: Callable) -> Callable:
 	return (func(ledge: Vector2) -> bool:
-		return align.call(ledge[faced.axis], faced.subject())
+		return align.call(ledge[faced.axis], faced.subject)
 	)
 
 func decide(to: Facing) -> Array[Callable]:

@@ -1,4 +1,4 @@
 extends Node
 
-@onready var surface: Node = $surface
+@onready var surface: SurfaceTracker = $surface
 @onready var interaction: Node = $interaction

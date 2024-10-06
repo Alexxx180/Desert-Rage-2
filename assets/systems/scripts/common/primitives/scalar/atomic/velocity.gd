@@ -8,4 +8,3 @@ func _get_velocity() -> int:
 
 func set_velocity(next: int) -> void:
 	_velocity = next
-	print("VELIK: ", _velocity)
