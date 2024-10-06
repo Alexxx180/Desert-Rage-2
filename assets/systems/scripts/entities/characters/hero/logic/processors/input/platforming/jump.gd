@@ -8,7 +8,6 @@ signal dash(position: Vector2)
 @onready var feet: Node = $feet
 
 func _jump(to_floor: bool, next: Vector2, move) -> void:
-	print("NEXT: ", next)
 	move.emit(next)
 	feet.balance.stable = to_floor
 

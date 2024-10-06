@@ -14,7 +14,6 @@ func teleport(next: Vector2) -> void:
 	move.emit(position)
 
 func dash(force: Vector2) -> void:
-	print("FROM: ", position, "TO", force)
 	position += force
 	move.emit(position)
 
