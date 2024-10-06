@@ -5,5 +5,6 @@ extends Node
 
 func set_control(hero: CharacterBody2D, jump: Node) -> void:
 	overview.set_control(hero, jump.overview)
-	jump.move.connect(hero.teleport)
+	jump.dash.connect(hero.dash)
+	jump.teleport.connect(hero.teleport)
 	feet.set_control(jump.feet, hero)

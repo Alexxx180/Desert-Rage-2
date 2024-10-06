@@ -7,5 +7,5 @@ func set_control(surface: Node, hero: CharacterBody2D) -> void:
 	var tracking: Node = surface.tracking
 
 	tracking.set_contacts(hero.geometry.shape.size)
-	hero.move.connect(tracking.hero.set_position)
+	tracking.hero = hero
 	floors.set_control(surface.floors, jump.overview)

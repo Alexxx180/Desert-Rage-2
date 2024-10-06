@@ -11,7 +11,7 @@ func set_control(hero: CharacterBody2D, processors: Node) -> void:
 	input.directing.connect(_input.hero.set_direction)
 
 	jump.set_control(hero, platforming.jump)
-	platforming.jump.feet.balance.disable.connect(_disable_input)
+	#platforming.jump.feet.balance.disable.connect(_disable_input)
 
-func _disable_input() -> void:
-	Processors.disable(_input)
+#func _disable_input() -> void:
+	#Processors.disable(_input)

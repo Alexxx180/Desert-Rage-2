@@ -1,10 +1,9 @@
 extends ShapeCast2D
 
+const distance: int = 114
+const pos: Vector2 = Vector2(distance, distance)
+
 @onready var _half: Vector2 = shape.size / 2
 
-func contact() -> Vector2:
-	return position + _half
-
-func present(surface: RayCast2D) -> bool:
-	position = surface.head(_half)
-	return is_colliding()
+func set_direction(direction: Vector2) -> void:
+	position = direction * (pos + _half)

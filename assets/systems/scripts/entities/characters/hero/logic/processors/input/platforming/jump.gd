@@ -1,26 +1,31 @@
 extends Node
 
-signal move(position: Vector2)
+signal teleport(position: Vector2)
+signal dash(position: Vector2)
 
 @onready var overview: Node = $overview
 @onready var ledges: Node = $ledges
 @onready var feet: Node = $feet
 
-func _jump(to_floor: bool, next: Vector2) -> void:
+func _jump(to_floor: bool, next: Vector2, move) -> void:
+	print("NEXT: ", next)
 	move.emit(next)
 	feet.balance.stable = to_floor
 
-func _to_floor() -> void: _jump(true, feet.deployment.position)
-func _to_ledge() -> void: _jump(false, ledges.current.pos)
+func _to_floor() -> void:
+	_jump(true, feet.deployment.ground.position, dash)
 
-func floor_only(_floors: TileMapLayer) -> bool:
+func _to_ledge() -> void:
+	_jump(false, ledges.current.pos, teleport)
+
+func floor_only(control: Node, _floors: TileMapLayer) -> void:
 	if feet.free_space(overview):
 		_to_floor()
-	return feet.balance.unstable
+	control.available = false
 
-func determine(floors: TileMapLayer) -> bool:
+func determine(control: Node, floors: TileMapLayer) -> void:
 	if ledges.around(overview):
 		_to_ledge()
 	elif feet.can_deploy(floors, overview):
 		_to_floor()
-	return feet.balance.unstable
+	control.available = feet.balance.unstable

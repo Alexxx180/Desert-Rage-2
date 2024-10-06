@@ -10,8 +10,12 @@ func _ready() -> void:
 	logic.relations.apply(self)
 
 func teleport(next: Vector2) -> void:
-	print("FROM: ", position, "TO", next)
 	position = next
+	move.emit(position)
+
+func dash(force: Vector2) -> void:
+	print("FROM: ", position, "TO", force)
+	position += force
 	move.emit(position)
 
 func travel(motion: Vector2) -> void:

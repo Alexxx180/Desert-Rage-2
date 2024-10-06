@@ -8,7 +8,7 @@ func set_control(feet: Node, hero: CharacterBody2D) -> void:
 
 	_movement = processors.input.movement
 
-	feet.space = platforms.surface.deployment
+	feet.deployment = platforms.surface.deployment
 	feet.surface = processors.environment.surface
 
 	feet.balance.set_movement.connect(_set_movement)

@@ -9,6 +9,9 @@ func set_control(input: Node, logic: Node) -> void:
 
 	overleap.set_control(input, platforms.surface.overleap)
 
+	input.directing.connect(platforms.surface.deployment.walls.set_direction)
+	input.directing.connect(platforms.surface.deployment.ground.set_direction)
+
 	environment.set_control(input, logic.processors.environment)
 
 	overview.set_control(input, input.platforming.jump.overview)

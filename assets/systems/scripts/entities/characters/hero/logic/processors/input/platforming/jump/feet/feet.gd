@@ -1,10 +1,9 @@
 extends Node
 
 @onready var balance: Node = $balance
-@onready var deployment: Node = $position
 @onready var height: Node = $height
 
-var space: DeploymentRaycast
+var deployment: DeploymentRaycast
 var surface: SurfaceTracker
 
 func same_level(overview: Node) -> bool:
@@ -12,13 +11,11 @@ func same_level(overview: Node) -> bool:
 
 func free_space(overview: Node) -> bool:
 	var eyes: Node = overview.directions.eyes
-	if not space.can_deploy(eyes.direction): return false
-
-	deployment.set_position(surface.track(space.ground))
-	return true
+	return deployment.can_deploy(eyes.direction)
 
 func can_deploy(floors: TileMapLayer, overview: Node) -> bool:
 	if not free_space(overview): return false
 
-	height.set_floor(surface.find_floor(floors, deployment.position))
+	var tile: Vector2 = surface.track(deployment.ground)
+	height.set_floor(surface.find_floor(floors, tile))
 	return same_level(overview)
