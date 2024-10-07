@@ -14,5 +14,6 @@ func _physics_process(delta: float) -> void:
 	_delta = delta
 
 func push(motion: Vector2):
-	move_and_collide(motion * weight * _delta)
+	print("MOVING: ", motion * weight)
+	move_and_collide(motion * weight)
 	move.emit(position)

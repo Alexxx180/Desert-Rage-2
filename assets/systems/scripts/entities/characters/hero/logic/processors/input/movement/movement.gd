@@ -8,8 +8,8 @@ enum { WALK = 1, RUN = 2 }
 @onready var face: Node = $direction
 @onready var feet: Node = $velocity
 @onready var behavior: Node = $behavior
+@onready var timing: LazyTimer = $timing
 
-var timing: ActionTimer = ActionTimer.new(0.05)
 var _walk: bool = true
 
 func walk(condition: bool) -> void:
@@ -19,7 +19,6 @@ func walk(condition: bool) -> void:
 
 func _physics_process(delta) -> void:
 	move.emit(delta * face.direction * feet.velocity)
-	timing.play(delta)
 	walk(not _walk)
 
 func _input(_event: InputEvent):
