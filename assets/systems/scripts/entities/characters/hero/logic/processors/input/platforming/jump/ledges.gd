@@ -8,6 +8,7 @@ func surface(box: Node2D) -> int:
 	return box.floors.get_instance_id()
 
 func append(next: Node2D) -> void:
+	print("APPEND BOX: ", next.name)
 	data[surface(next)] = next.floors
 	size = size + 1
 
