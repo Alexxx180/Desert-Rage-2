@@ -14,10 +14,8 @@ func _ready() -> void:
 	tick.processor.play.connect(_play)
 
 func _play(delta: float) -> void:
-	print("time left: ", dial.time_left)
 	if dial.play(delta):
 		dial.restart(period)
-		print("TIMEOUT")
 		timeout.emit()
 
 func stop() -> void: tick.stop()

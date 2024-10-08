@@ -9,21 +9,26 @@ signal directing(direction: Vector2i)
 @onready var geometry: Node = $placement
 @onready var logic: Node2D = $logic
 
+@onready var _target: Vector2 = position
+
+const feedback: int = 2
+
 var _delta: float = 0.0
+var _impulse: float = 1
 
 func _ready() -> void:
 	logic.relations.set_control_entity(self)
 
 func _physics_process(delta: float) -> void:
 	_delta = delta
+	position = position.move_toward(_target, delta * _impulse)
 
 func push() -> void:
 	var handle: Node = logic.processors.movement.push
-	var direction: Vector2i = handle.box.direction
-	var impulse: float = handle.impulse
-	var motion: Vector2 = direction * impulse
+	_impulse = handle.impulse
+	var motion: Vector2 = handle.box.direction * (_impulse / feedback)
 	motion *= weight
 	print("MOVING: ", motion)
-	move_and_collide(motion)
+	_target = position + motion
 	move.emit(position)
-	directing.emit(direction)
+	directing.emit(handle.box.direction)
