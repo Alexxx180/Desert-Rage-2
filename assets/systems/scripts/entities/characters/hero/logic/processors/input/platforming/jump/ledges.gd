@@ -1,19 +1,19 @@
 extends Node
 
 var size: int = 0
-var data: Dictionary = {} # int, Node2D
-var ledge: Node2D
+var data: Dictionary = {} # int, Area2D
+var _current: Area2D
 
-func surface(box: Node2D) -> int:
-	return box.floors.get_instance_id()
-
-func append(next: Node2D) -> void:
-	print("APPEND BOX: ", next.name)
-	data[surface(next)] = next.floors
+func append(ledge) -> void:
+	print("APPEND BOX LEDGE: ", ledge.name, " BOX: ", ledge.box.name)
+	var id: int = ledge.get_instance_id()
+	data[id] = ledge
 	size = size + 1
 
-func remove(previous: Node2D) -> void:
-	data.erase(surface(previous))
+func remove(ledge: Area2D) -> void:
+	print("REMOVE BOX LEDGE: ", ledge.name, " BOX: ", ledge.box.name)
+	var id: int = ledge.get_instance_id()
+	data.erase(id)
 	size = size - 1
 
 func around(overview: Node) -> bool:
@@ -22,6 +22,6 @@ func around(overview: Node) -> bool:
 	var i: int = size
 	while i > 0 and not jump:
 		i = i - 1
-		ledge = platforms[i]
-		jump = overview.reach(ledge)
+		_current = platforms[i]
+		jump = overview.reach(_current)
 	return jump

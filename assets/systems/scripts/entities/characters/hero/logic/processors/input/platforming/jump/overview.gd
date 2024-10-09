@@ -9,6 +9,7 @@ func _observe(ledge: Vector2) -> bool:
 		try = try and directions.observe(axis, ledge)
 	return try
 
-func reach(ledge: Node2D) -> bool:
-	var seat: Node = ledge.surface.seat
-	return not seat.place.stand() and _observe(ledge.pos)
+func reach(stand: Area2D) -> bool:
+	var seat: Node = stand.box.logic.processors.movement.seat
+	var pos: Vector2 = stand.get_ledge_position()
+	return not seat.place.stand() and _observe(pos)
