@@ -15,4 +15,5 @@ func _on_ledge_encounter_gap(_surface: TileMapLayer) -> void:
 	_input.floors.available = true
 
 func _on_ledge_encounter_upland(_surface: TileMapLayer) -> void:
+	print("UPLAND")
 	_input.ledges.available = true

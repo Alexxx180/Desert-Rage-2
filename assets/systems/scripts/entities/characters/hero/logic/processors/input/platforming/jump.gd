@@ -23,7 +23,9 @@ func floor_only(control: Node, _floors: TileMapLayer) -> void:
 	control.available = false
 
 func determine(control: Node, floors: TileMapLayer) -> void:
+	print("YEEAH")
 	if ledges.around(overview):
+		print("YEEAH x2")
 		_to_ledge()
 	elif feet.can_deploy(floors, overview):
 		_to_floor()
