@@ -16,5 +16,7 @@ func find_floor(map: TileMapLayer, pos: Vector2) -> int:
 func at_old_floor(_body: TileMapLayer) -> void:
 	floors.remove()
 
-func at_new_floor(walls: TileMapLayer) -> void:
-	floors.append(tilemap.find_tile(walls.floors, tracking))
+func at_new_floor(surface: TileMapLayer) -> void:
+	#print("FLOOR NAME: ", walls.name)
+	print("NEW FLOOR: ", surface.name)
+	floors.append(tilemap.find_floor_tile(surface, tracking))

@@ -18,4 +18,5 @@ func can_deploy(floors: TileMapLayer, overview: Node) -> bool:
 
 	var tile: Vector2 = surface.track(deployment.ground)
 	height.set_floor(surface.find_floor(floors, tile))
+	print("HEIGHT: ", height.F, " - OVERVIEW: ", overview.height.F)
 	return same_level(overview)

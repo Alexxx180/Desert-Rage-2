@@ -2,7 +2,10 @@ extends Node
 
 var size: int = 0
 var data: Dictionary = {} # int, Area2D
+
 var _current: Area2D
+var current: Area2D:
+	get: return _current
 
 func append(ledge: Area2D) -> void:
 	var id: int = ledge.get_instance_id()
@@ -18,10 +21,8 @@ func around(overview: Node) -> bool:
 	var jump: bool = false
 	var platforms: Array = data.values()
 	var i: int = size
-	print("OVERVIEW DIR: ", overview.directions.eyes.direction)
 	while i > 0 and not jump:
 		i = i - 1
 		_current = platforms[i]
 		jump = overview.reach(_current)
-	print("JUMP? ", jump)
 	return jump
