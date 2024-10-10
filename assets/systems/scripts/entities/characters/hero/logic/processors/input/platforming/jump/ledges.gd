@@ -5,6 +5,7 @@ var data: Dictionary = {} # int, Area2D
 var _current: Area2D
 
 func append(ledge: Area2D) -> void:
+	print("APPEND: ", ledge.name)
 	var id: int = ledge.get_instance_id()
 	data[id] = ledge
 	size = size + 1
@@ -19,6 +20,8 @@ func around(overview: Node) -> bool:
 	var platforms: Array = data.values()
 	var i: int = size
 	print("OVERVIEW DIR: ", overview.directions.eyes.direction)
+	print("i > 0 = ", i > 0)
+	print("STAND? ", not jump)
 	while i > 0 and not jump:
 		i = i - 1
 		_current = platforms[i]
