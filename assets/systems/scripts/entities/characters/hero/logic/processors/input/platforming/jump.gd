@@ -17,16 +17,19 @@ func _to_floor() -> void:
 func _to_ledge() -> void:
 	_jump(false, ledges.current.get_ledge_position(), teleport)
 
-func floor_only(control: Node, _floors: TileMapLayer) -> void:
+func floor_only(control: Node, _gap: TileMapLayer) -> void:
 	if feet.free_space(overview):
 		_to_floor()
 	control.available = false
 
-func determine(control: Node, floors: TileMapLayer) -> void:
-	print("YEEAH")
+func determine(control: Node, upland: TileMapLayer) -> void:
+	print("JUMP DETERMINE")
 	if ledges.around(overview):
-		print("YEEAH x2")
+		print("TO LEDGE")
 		_to_ledge()
-	elif feet.can_deploy(floors, overview):
+	elif feet.can_deploy(upland.floors, overview):
+		print("TO FLOOR")
 		_to_floor()
+	print("CAN DEP? ", feet.can_deploy(upland.floors, overview))
+	print("JUMP PERFORMED")
 	control.available = feet.balance.unstable

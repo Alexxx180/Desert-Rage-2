@@ -11,7 +11,10 @@ func track(ground: Node2D) -> Vector2:
 	#tracking.get_position(ground)
 
 func find_floor(map: TileMapLayer, pos: Vector2) -> int:
+	print("MAP: ", map.name)
 	return Tiler.get_floor(map, pos)
+#func find_floor_tile(floors: TileMapLayer, tracking: Node) -> int:
+	#return Tiler.get_floor(map, pos)
 
 func at_old_floor(_body: TileMapLayer) -> void:
 	floors.remove()
