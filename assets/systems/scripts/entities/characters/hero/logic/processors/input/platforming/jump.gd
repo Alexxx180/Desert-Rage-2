@@ -15,7 +15,7 @@ func _to_floor() -> void:
 	_jump(true, feet.deployment.ground.position, dash)
 
 func _to_ledge() -> void:
-	_jump(false, ledges.current.pos, teleport)
+	_jump(false, ledges.current.get_ledge_position(), teleport)
 
 func floor_only(control: Node, _floors: TileMapLayer) -> void:
 	if feet.free_space(overview):

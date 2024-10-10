@@ -2,7 +2,10 @@ extends Node
 
 var size: int = 0
 var data: Dictionary = {} # int, Area2D
+
 var _current: Area2D
+var current: Area2D:
+	get: return _current
 
 func append(ledge: Area2D) -> void:
 	print("APPEND: ", ledge.name)

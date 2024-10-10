@@ -6,8 +6,9 @@ extends Node
 func _observe(ledge: Vector2) -> bool:
 	var try: bool = true
 	for axis in [Vector2.AXIS_X, Vector2.AXIS_Y]:
+		print(" - AXIS: ", axis)
 		try = try and directions.observe(axis, ledge)
-		print("TRY: ", try, " - AXIS: ", axis)
+		print("TRY: ", try)
 	return try
 
 func reach(stand: Area2D) -> bool:
