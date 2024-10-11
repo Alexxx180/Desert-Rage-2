@@ -17,6 +17,7 @@ func set_floor(F: int) -> void:
 
 func enable_stand(hero: CharacterBody2D) -> void:
 	if place.empty() and place.is_in_midair(hero):
+		print("GET HERO")
 		place.visit(hero, hero.get_instance_id())
 		stand.emit(self, hero)
 		# if _at_floor(hero): hero.stand.visible = false
