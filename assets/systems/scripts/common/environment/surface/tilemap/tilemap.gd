@@ -9,6 +9,8 @@ static func get_floor(floors: TileMapLayer, contact: Vector2) -> int:
 	var tile: TileData = floors.get_cell_tile_data(cell)
 	print(" - FLOORS: ", floors.name, " - CONTACT", contact, " - CELL: ", cell)
 	#print("CUSTOM DATA: ", tile.get_custom_data("F"))
+	print("TILE IS NULL? ", tile == null)
+
 	return 0 if tile == null else tile.get_custom_data("F")
 
 func find_floor_tile(floors: TileMapLayer, tracking: Node) -> int:

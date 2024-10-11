@@ -25,8 +25,11 @@ func floor_only(control: Node, _gap: TileMapLayer) -> void:
 func determine(control: Node, upland: TileMapLayer) -> void:
 	print("YEEAH: ", upland.name)
 	if ledges.around(overview):
-		print("YEEAH x2")
+		print("TO LEDGE")
 		_to_ledge()
 	elif feet.can_deploy(upland.floors, overview):
+		print("TO FLOOR")
 		_to_floor()
+	print("CAN DEP? ", feet.can_deploy(upland.floors, overview))
+	print("JUMP PERFORMED")
 	control.available = feet.balance.unstable
