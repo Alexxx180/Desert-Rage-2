@@ -10,16 +10,17 @@ func _next() -> int:
 	return (main + 1) % COUNT
 
 func _ready() -> void:
-	for hero in heroes:
-		hero.position = self.position
-	camera.change(self, heroes[main])
-	camera.switch(heroes, _next(), main)
+	for hero in heroes: hero.position = self.position
+	camera.regroup(self, heroes, Vector2i(main, _next()))
 	position = Vector2.ZERO
+
+func _enable(next: int) -> void:
+	for i in [main, next]:
+		Processors.switch(heroes[i].logic.processors)
 
 func _input(event) -> void:
 	if event.is_action_pressed("select"):
 		var next: int = _next()
-		for i in [main, next]:
-			Processors.switch(heroes[i].logic.processors)
+		_enable(next)
 		camera.reset(heroes, main, next)
 		main = next
