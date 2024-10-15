@@ -13,7 +13,8 @@ func _observe(ledge: Vector2) -> bool:
 
 func reach(stand: Area2D) -> bool:
 	var seat: Node = stand.box.logic.processors.movement.seat
-	var pos: Vector2 = stand.box.position #  stand.get_ledge_position()
+	#var pos: Vector2 = stand.box.position
+	var pos: Vector2 = stand.get_ledge_position()
 	var next: int = stand.get_instance_id()
 	var same: bool = _id == next # directions.eyes.direction == Vector2i.ZERO
 	print("SAME: ", same)
