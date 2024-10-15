@@ -1,19 +1,18 @@
 extends Camera2D
 
-const zooming: float = 0.1
-const minimum: float = 0.5
-const maximum: float = 1.5
-
 func change(node: Node, hero: CharacterBody2D):
 	node.remove_child(self)
 	hero.add_child(self)
 	self.set_owner(hero)
 
-func reset(nodes: Array, main: int, next: int) -> void:
-	change(nodes[main], nodes[next])
+func switch(nodes: Array, main: int, next: int) -> void:
+	Processors.switch_both(nodes[main], nodes[next])
 
-func _input(_event):
-	var z: float = Input.get_axis("view_left", "view_right") * zooming
-	if z != 0:
-		z = clampf(zoom.x + z, 0.5, 1.5)
-		zoom = Vector2(z, z)
+func reset(nodes: Array, main: int, next: int) -> void:
+	print("RESET")
+	change(nodes[main], nodes[next])
+	switch(nodes, main, next)
+
+func _input(_event) -> void:
+	var z: float = CameraZooming.zoom()
+	if z != 0: zoom = CameraZooming.new_zoom(zoom.x, z)

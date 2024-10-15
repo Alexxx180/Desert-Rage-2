@@ -17,6 +17,10 @@ static func switch(holder: Node) -> void:
 static func turn(holder: Node, condition: bool) -> void:
 	_reset(holder, will if condition else wont)
 
+static func switch_both(previous: Node, next: Node) -> void:
+	turn(previous, false)
+	turn(next, true)
+
 static func lazy(holder: Node, act: Callable, variant) -> void:
 	enable(holder)
 	turn(holder, act.call(variant))
