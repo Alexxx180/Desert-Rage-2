@@ -8,7 +8,7 @@ func change(node: Node, hero: CharacterBody2D):
 func switch(nodes: Array, main: int, next: int) -> void:
 	Processors.switch_both(nodes[main], nodes[next])
 
-func reset(group: Node, party: Array, hero: Vector2i) -> void:
+func initiate(group: Node, party: Array, hero: Vector2i) -> void:
 	change(group, party[hero[0]])
 	switch(party, hero[1], hero[0])
 

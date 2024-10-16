@@ -8,7 +8,7 @@ var _deploy: HeroDeploy = HeroDeploy.new()
 
 func _ready() -> void:
 	position = _heroes.locate(party, position)
-	camera.reset(self, party, _heroes.reorder())
+	camera.initiate(self, party, _heroes.reorder())
 
 func _input(event) -> void:
 	if event.is_action_pressed("select"):

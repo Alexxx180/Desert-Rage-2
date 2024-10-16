@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://b83b7oo2fmh5h"]
+[gd_scene load_steps=8 format=3 uid="uid://b83b7oo2fmh5h"]
 
 [ext_resource type="Script" path="res://assets/systems/scripts/entities/characters/group/group.gd" id="1_kivt0"]
 [ext_resource type="PackedScene" uid="uid://wbjmq3n817nk" path="res://assets/systems/scenes/actors/hero/hero.tscn" id="2_1wfvg"]
 [ext_resource type="Script" path="res://assets/systems/scripts/entities/characters/group/camera/sharing.gd" id="3_rk0fr"]
 [ext_resource type="Script" path="res://assets/systems/scripts/fullscreen.gd" id="4_7ybge"]
+[ext_resource type="Shape2D" uid="uid://67kqlop0bqsn" path="res://assets/resources/shapes/characters/camera/deploy.tres" id="4_xslos"]
 
 [sub_resource type="InputEventKey" id="InputEventKey_f4jfc"]
 device = -1
@@ -23,6 +24,11 @@ modulate = Color(0.443137, 0.796078, 0.839216, 1)
 
 [node name="camera" type="Camera2D" parent="."]
 script = ExtResource("3_rk0fr")
+
+[node name="deploy" type="Area2D" parent="camera"]
+
+[node name="zone" type="CollisionShape2D" parent="camera/deploy"]
+shape = ExtResource("4_xslos")
 
 [node name="hud" type="CanvasLayer" parent="camera"]
 
