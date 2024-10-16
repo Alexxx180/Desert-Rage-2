@@ -1,9 +1,5 @@
 extends Camera2D
 
-func regroup(group: Node, heroes: Array, hero: Vector2i) -> void:
-	change(group, heroes[hero.x])
-	switch(heroes, hero.y, hero.x)
-
 func change(node: Node, hero: CharacterBody2D):
 	node.remove_child(self)
 	hero.add_child(self)
@@ -12,8 +8,13 @@ func change(node: Node, hero: CharacterBody2D):
 func switch(nodes: Array, main: int, next: int) -> void:
 	Processors.switch_both(nodes[main], nodes[next])
 
-func reset(nodes: Array, main: int, next: int) -> void:
-	regroup(nodes[main], nodes, Vector2i(next, main))
+func reset(group: Node, party: Array, hero: Vector2i) -> void:
+	change(group, party[hero[0]])
+	switch(party, hero[1], hero[0])
+
+func regroup(party: Array, hero: Vector2i) -> void:
+	change(party[hero[0]], party[hero[1]])
+	switch(party, hero[0], hero[1])
 
 func _input(_event) -> void:
 	var z: float = CameraZooming.zoom()
