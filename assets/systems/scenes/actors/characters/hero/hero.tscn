@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://wbjmq3n817nk"]
+
+[ext_resource type="Script" path="res://assets/systems/scripts/entities/characters/hero/hero.gd" id="1_tbrg2"]
+[ext_resource type="Shape2D" uid="uid://do0s1n5uuqpof" path="res://assets/resources/shapes/characters/character.tres" id="2_iwxmv"]
+[ext_resource type="PackedScene" uid="uid://csra3penxclqe" path="res://assets/systems/scenes/actors/characters/hero/view.tscn" id="3_02cuy"]
+[ext_resource type="PackedScene" uid="uid://dr8rr0noso8m4" path="res://assets/systems/scenes/actors/characters/hero/logic.tscn" id="4_omuol"]
+
+[node name="ray" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 210
+script = ExtResource("1_tbrg2")
+
+[node name="geometry" type="CollisionShape2D" parent="."]
+shape = ExtResource("2_iwxmv")
+debug_color = Color(1, 1, 1, 0.419608)
+
+[node name="view" parent="." instance=ExtResource("3_02cuy")]
+
+[node name="logic" parent="." instance=ExtResource("4_omuol")]
