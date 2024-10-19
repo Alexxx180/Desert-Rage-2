@@ -10,7 +10,7 @@ var _hero: CharacterBody2D
 
 var subject: float:
 	get:
-		print("HERO AXIS: ", _axis)
+		#print("HERO AXIS: ", _axis)
 		return _hero.position[_axis]
 
 func _init(hero: CharacterBody2D, dir_axis: int) -> void:

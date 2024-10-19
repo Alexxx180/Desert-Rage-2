@@ -6,7 +6,8 @@ func set_control(box: StaticBody2D, seat: Node) -> void:
 	var stand: Node = box.logic.detectors.platforming.stand
 	var surface: Node = box.logic.processors.movement.surface
 
-	seat.place.refresh.connect(box.view.switch_stand)
+	seat.place.standing.connect(box.view.standing)
+	seat.place.leaving.connect(box.view.leaving)
 	booking.set_control(seat)
 
 	box.move.connect(seat.transport)

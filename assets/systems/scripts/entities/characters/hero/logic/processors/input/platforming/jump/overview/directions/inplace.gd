@@ -3,7 +3,7 @@ extends Node
 const GAP: int = 24
 
 func _between(ledge: float, subject: float) -> bool:
-	print("LEDGE: ", ledge, " - SUBJECT: ", subject)
+	#print("LEDGE: ", ledge, " - SUBJECT: ", subject)
 	return subject >= ledge - GAP and subject <= ledge + GAP
 
 func _more(x: float, y: float) -> bool: return x > y

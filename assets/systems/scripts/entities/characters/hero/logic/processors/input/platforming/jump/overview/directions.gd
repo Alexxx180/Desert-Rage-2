@@ -11,6 +11,6 @@ func set_directions(hero: CharacterBody2D):
 		_plane.push_back(inplace.decide(faced))
 
 func observe(axis: int, ledge: Vector2) -> bool:
-	print("REAL DIR: ", eyes.direction)
+	#print("REAL DIR: ", eyes.direction)
 	var faced: int = eyes.direction[axis]
 	return _plane[axis][faced].call(ledge)
