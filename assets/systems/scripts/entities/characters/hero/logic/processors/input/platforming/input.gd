@@ -13,10 +13,10 @@ var upland: TileMapLayer
 @onready var ledges: Node = $ledges
 
 func _platforming() -> void:
-	#if hero.direction != Vector2i.ZERO:
-	time += FREEZE
-	floors.perform(gap)
-	ledges.perform(upland)
+	if hero.direction != Vector2i.ZERO:
+		time += FREEZE
+		floors.perform(gap)
+		ledges.perform(upland)
 
 func _physics_process(delta: float) -> void:
 	time -= delta
