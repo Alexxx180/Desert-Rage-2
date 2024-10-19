@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://ddgvi2m1pbure"]
+
+[ext_resource type="Script" path="res://assets/systems/scripts/entities/characters/hero/logic/stats.gd" id="1_58m4j"]
+[ext_resource type="PackedScene" uid="uid://bjf4od6ipo4ah" path="res://assets/systems/scenes/common/primitives/vector/size.tscn" id="2_yt8ou"]
+[ext_resource type="PackedScene" uid="uid://dfo1crd0wevy5" path="res://assets/systems/scenes/actors/characters/hero/logic/stats/speed.tscn" id="3_vi3ol"]
+[ext_resource type="PackedScene" uid="uid://bsevlva6fh5et" path="res://assets/systems/scenes/actors/characters/hero/logic/stats/push.tscn" id="4_6jw65"]
+
+[node name="stats" type="Node"]
+script = ExtResource("1_58m4j")
+
+[node name="size" parent="." instance=ExtResource("2_yt8ou")]
+
+[node name="push" parent="." instance=ExtResource("4_6jw65")]
+value = 32.0
+start = 32.0
+factor = 0.1
+
+[node name="speed" parent="." instance=ExtResource("3_vi3ol")]
+start = 20000.0
+factor = 1000.0
