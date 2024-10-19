@@ -9,15 +9,19 @@ signal climb(F: int)
 @onready var height: Node = $height
 @onready var place: Node = $place
 
+var _f: int = 0
+
 func transport(target: Vector2) -> void:
 	move.emit(target + offset.value)
 
+func hero_climb():
+	climb.emit(_f + height.F)
+
 func set_floor(F: int) -> void:
-	climb.emit(F + height.F)
+	_f = F
 
 func enable_stand(hero: CharacterBody2D) -> void:
 	if place.empty() and place.is_in_midair(hero):
-		print("GET HERO")
 		place.visit(hero, hero.get_instance_id())
 		stand.emit(self, hero)
 		# if _at_floor(hero): hero.stand.visible = false

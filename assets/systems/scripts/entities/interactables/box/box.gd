@@ -28,7 +28,6 @@ func push() -> void:
 	_impulse = handle.impulse
 	var motion: Vector2 = handle.box.direction * (_impulse / feedback)
 	motion *= weight
-	print("MOVING: ", motion)
 	_target = position + motion
 	move.emit(position)
 	directing.emit(handle.box.direction)
