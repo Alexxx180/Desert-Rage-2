@@ -11,21 +11,29 @@ var anchored: bool:
 func set_available(can_deploy: bool) -> void:
 	_available = can_deploy
 
-func _anchor(group: Array[Node2D], next: CharacterBody2D) -> void:
-#	group[0].remove_child(next)
-#	group[1].add_child(next)
-#	next.set_owner(group[1])
-	next.visible = _anchored
+func _activate(hero: CharacterBody2D, condition: bool) -> void:
+	hero.visible = condition
+	Processors.turn(hero, condition)
 
-func determine(group: Node2D, party: Array, order: Vector2i) -> void:
+func _anchor(next: CharacterBody2D) -> void:
+	_anchored = !_anchored
+	_activate(next, !_anchored)
+
+func _sync(hero: CharacterBody2D, next: CharacterBody2D) -> void:
+	next.position = hero.position
+
+func select(party: Array[CharacterBody2D], order: Vector2i) -> void:
+	if not _anchored: return
 	var hero: CharacterBody2D = party[order[0]]
 	var next: CharacterBody2D = party[order[1]]
+	_sync(hero, next)
+	_activate(hero, false)
+	_activate(next, true)
 
+func determine(party: Array[CharacterBody2D], order: Vector2i) -> void:
+	var next: CharacterBody2D = party[order[1]]
 	if _anchored:
-		#_anchor([hero, group], next)
-		hero.move.disconnect(next.teleport)
+		_sync(party[order[0]], next)
+		_anchor(next)
 	elif _available:
-		#_anchor([group, hero], next)
-		hero.move.connect(next.teleport)
-
-	_anchored = !_anchored
+		_anchor(next)

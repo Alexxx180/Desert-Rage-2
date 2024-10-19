@@ -11,8 +11,16 @@ func _ready() -> void:
 	position = _heroes.locate(party, position)
 	camera.initiate(self, party, _heroes.reorder())
 
+func character_select(order: Vector2i) -> void:
+	#if _deploy.anchored:
+	#	pass
+	#else:
+	_deploy.select(party, order)
+	camera.regroup(party, order)
+
 func _input(event) -> void:
 	if event.is_action_pressed("select"):
-		camera.regroup(party, _heroes.traverse())
+		character_select(_heroes.traverse())
 	if event.is_action_pressed("deploy"):
-		_deploy.determine(self, party, _heroes.reorder())
+		var order: Vector2i = _heroes.reorder()
+		_deploy.determine(party, order)
