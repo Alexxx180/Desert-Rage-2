@@ -4,6 +4,8 @@ class_name HeroParty
 
 const COUNT: int = 2
 var _main: int = 0
+var main: int:
+	get: return _main
 
 func _get_next_hero() -> int:
 	return (_main + 1) % COUNT
@@ -17,7 +19,6 @@ func locate(party: Array, position: Vector2) -> Vector2:
 		hero.position = position
 	return Vector2.ZERO
 
-func traverse() -> Vector2i:
-	var order: Vector2i = reorder()
+func traverse(order: Vector2i) -> Vector2i:
 	_main = order.y
 	return order
