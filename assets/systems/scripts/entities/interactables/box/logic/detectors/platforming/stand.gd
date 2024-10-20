@@ -6,4 +6,5 @@ var box: StaticBody2D:
 	set(next): _box = next
 
 func get_ledge_position():
+	print("POS: ", _box.position + position)
 	return _box.position + position

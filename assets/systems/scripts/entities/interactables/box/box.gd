@@ -21,13 +21,18 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	_delta = delta
-	position = position.move_toward(_target, delta * _impulse)
+	var target: Vector2 = position.move_toward(_target, delta * _impulse)
+	if target != position: move.emit()
+	position = target
+	#logic.processors.movement.seat.transport()
+	# logic.processors.movement.seat.hero_climb()
 
 func push() -> void:
+	position = position.move_toward(_target, _delta * _impulse)
 	var handle: Node = logic.processors.movement.push
 	_impulse = handle.impulse
 	var motion: Vector2 = handle.box.direction * (_impulse / feedback)
 	motion *= weight
 	_target = position + motion
-	move.emit(position)
+	#move.emit() # position
 	directing.emit(handle.box.direction)

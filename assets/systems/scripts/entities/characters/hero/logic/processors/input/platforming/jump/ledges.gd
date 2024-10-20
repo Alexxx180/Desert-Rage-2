@@ -25,5 +25,4 @@ func around(overview: Node) -> bool:
 		i = i - 1
 		_current = platforms[i]
 		jump = overview.reach(_current)
-		print("CAN REACH? ", jump)
 	return jump

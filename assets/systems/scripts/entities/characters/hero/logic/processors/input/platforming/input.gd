@@ -20,7 +20,6 @@ func _platforming() -> void:
 
 func _physics_process(delta: float) -> void:
 	time -= delta
-	#print("TIME: ", time)
 	if time <= NEUTRAL:
 		time = PERIOD
 		_platforming()

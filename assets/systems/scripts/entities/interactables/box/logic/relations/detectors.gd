@@ -1,4 +1,7 @@
 extends Node
 
 func set_control(box: StaticBody2D, detectors: Node2D) -> void:
-	detectors.platforming.stand.box = box
+	var seat: Node = box.logic.processors.movement.seat
+	var stand: Area2D = detectors.platforming.stand
+	stand.box = box
+	seat.stand = stand

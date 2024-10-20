@@ -3,16 +3,18 @@ extends Node
 signal move(target: Vector2)
 signal climb(F: int)
 
-@onready var offset: Node = $offset
 @onready var height: Node = $height
 @onready var place: Node = $place
 
+var stand: Area2D
 var _f: int = 0
 
 const EMPTY_SEAT: int = 0
 
-func transport(target: Vector2) -> void:
-	move.emit(target + offset.value)
+func transport() -> void:
+	var target: Vector2 = stand.get_ledge_position()
+	print("TRANSPORTED: ", target)
+	move.emit(target)
 
 func hero_climb() -> void:
 	climb.emit(_f + height.F)
