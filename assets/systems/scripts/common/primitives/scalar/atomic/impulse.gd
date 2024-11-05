@@ -1,10 +1,10 @@
 extends Node
 
-var _impulse: int = 0
-var impulse: int: get = _get_impulse
+var _impulse: float = 0
+var impulse: float: get = _get_impulse
 
-func _get_impulse() -> int:
+func _get_impulse() -> float:
 	return _impulse
 
-func set_impulse(next: int) -> void:
+func set_impulse(next: float) -> void:
 	_impulse = next
