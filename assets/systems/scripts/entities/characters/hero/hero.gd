@@ -14,14 +14,17 @@ func teleport(next: Vector2) -> void:
 	print("REAL POS: ", next)
 	position = next
 	move.emit(position)
+	print("TELEPORT: ", position)
 
 func dash(force: Vector2) -> void:
 	position += force
 	move.emit(position)
+	print("DASHING: ", position)
 
 func travel(motion: Vector2) -> void:
 	velocity = motion
 	move_and_slide()
-	#print("MOTION: ", motion)
-	moving.emit(motion)
+	#if motion.y > 0 and motion.x == 0:
+	print("MOTION: ", motion)
+	moving.emit(velocity)
 	move.emit(position)

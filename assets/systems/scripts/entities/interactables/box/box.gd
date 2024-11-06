@@ -9,15 +9,10 @@ signal directing(direction: Vector2i)
 @onready var geometry: Node = $placement
 @onready var logic: Node2D = $logic
 
-# @onready var _target: Vector2 = position
-
 const feedback: int = 2
 
 func _ready() -> void:
 	logic.relations.set_control_entity(self)
-
-	#if velocity != Vector2.ZERO:
-	#directing.emit(velocity.normalized())
 
 func push() -> void:
 	var handle: Node = logic.processors.movement.push
