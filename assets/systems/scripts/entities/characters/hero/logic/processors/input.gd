@@ -1,6 +1,7 @@
 extends Node
 
 signal directing(direction: Vector2i)
+signal moving(velocity: Vector2)
 
 @onready var movement: Node = $movement
 @onready var platforming: Node = $platforming

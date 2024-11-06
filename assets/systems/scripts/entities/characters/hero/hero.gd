@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 signal move(position: Vector2)
+signal moving(velocity: Vector2)
 
 @onready var geometry: CollisionShape2D = $geometry
 @onready var view: Node2D = $view
@@ -21,4 +22,6 @@ func dash(force: Vector2) -> void:
 func travel(motion: Vector2) -> void:
 	velocity = motion
 	move_and_slide()
+	#print("MOTION: ", motion)
+	moving.emit(motion)
 	move.emit(position)

@@ -2,7 +2,7 @@ extends Node
 
 @onready var booking: Node = $booking
 
-func set_control(box: StaticBody2D, seat: Node) -> void:
+func set_control(box: CharacterBody2D, seat: Node) -> void:
 	var stand: Node = box.logic.detectors.platforming.stand
 	var surface: Node = box.logic.processors.movement.surface
 

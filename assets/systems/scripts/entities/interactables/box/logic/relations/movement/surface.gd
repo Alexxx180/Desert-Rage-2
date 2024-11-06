@@ -1,6 +1,6 @@
 extends Node
 
-func set_control(box: StaticBody2D, surface: Node) -> void:
+func set_control(box: CharacterBody2D, surface: Node) -> void:
 	var floors: Area2D = box.logic.detectors.platforming.floors
 
 	box.directing.connect(surface.tracking.map.set_direction)

@@ -1,7 +1,7 @@
 extends Area2D
 
-var _box: StaticBody2D
-var box: StaticBody2D:
+var _box: CharacterBody2D
+var box: CharacterBody2D:
 	get: return _box
 	set(next): _box = next
 

@@ -16,12 +16,13 @@ const feedback: int = 2
 func _ready() -> void:
 	logic.relations.set_control_entity(self)
 
-func _physics_process(_delta: float) -> void:
-	if velocity != Vector2.ZERO:
-		move_and_slide()
-		move.emit(position)
+	#if velocity != Vector2.ZERO:
+	#directing.emit(velocity.normalized())
 
 func push() -> void:
 	var handle: Node = logic.processors.movement.push
-	velocity = handle.box.velocity
-	directing.emit(handle.box.velocity.normalized())
+	velocity = handle.velocity.position
+	directing.emit(velocity.normalized())
+	move.emit(position)
+	print("box velocity: ", velocity)
+	move_and_slide()

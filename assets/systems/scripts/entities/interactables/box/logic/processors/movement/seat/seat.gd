@@ -11,7 +11,7 @@ var _f: int = 0
 
 const EMPTY_SEAT: int = 0
 
-func transport() -> void:
+func transport(_position: Vector2) -> void:
 	var target: Vector2 = stand.get_ledge_position()
 	print("TRANSPORTED: ", target)
 	move.emit(target)
