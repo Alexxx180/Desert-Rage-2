@@ -11,7 +11,6 @@ func _ready() -> void:
 	logic.relations.apply(self)
 
 func teleport(next: Vector2) -> void:
-	print("REAL POS: ", next)
 	position = next
 	move.emit(position)
 	print("TELEPORT: ", position)
@@ -25,6 +24,7 @@ func travel(motion: Vector2) -> void:
 	velocity = motion
 	move_and_slide()
 	#if motion.y > 0 and motion.x == 0:
-	print("MOTION: ", motion)
-	moving.emit(velocity)
+	#moving.emit(velocity)
+	print("BUT MOTION IS: ", motion)
+	moving.emit(motion)
 	move.emit(position)

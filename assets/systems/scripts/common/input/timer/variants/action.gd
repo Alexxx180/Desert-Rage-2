@@ -8,6 +8,10 @@ signal timeout()
 
 @onready var tick: Node = $tick
 
+var _ticking: bool = false
+var is_ticking: bool:
+	get: return _ticking
+
 var dial: TimerDial = TimerDial.new() 
 
 func _ready() -> void:
@@ -18,7 +22,11 @@ func _play(delta: float) -> void:
 		dial.restart(period)
 		timeout.emit()
 
-func stop() -> void: tick.stop()
+func stop() -> void:
+	_ticking = false
+	tick.stop()
+
 func start() -> void:
+	_ticking = true
 	dial.restart(period)
 	tick.start()

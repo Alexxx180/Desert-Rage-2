@@ -19,5 +19,5 @@ func push() -> void:
 	velocity = handle.velocity.position
 	directing.emit(velocity.normalized())
 	move.emit(position)
-	print("box velocity: ", velocity)
+	# print("box velocity: ", velocity)
 	move_and_slide()
