@@ -6,5 +6,4 @@ func set_control(ledges: Area2D, processor: Node) -> void:
 	ledges.area_exited.connect(processor.remove)
 
 func printing(ledge: Area2D) -> void:
-	print(ledge.name)
-	print("OOOPS")
+	print("ENTERED LEDGE: ", ledge.name)

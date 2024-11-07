@@ -25,9 +25,5 @@ func _physics_process(_delta: float) -> void:
 
 func travel(motion: Vector2) -> void:
 	velocity = motion
-	#move_and_slide()
-	#if motion.y > 0 and motion.x == 0:
-	#moving.emit(velocity)
-	print("BUT MOTION IS: ", motion)
 	moving.emit(motion)
 	move.emit(position)

@@ -13,7 +13,7 @@ const EMPTY_SEAT: int = 0
 
 func transport(_position: Vector2) -> void:
 	var target: Vector2 = stand.get_ledge_position()
-	print("TRANSPORTED: ", target)
+	#print("TRANSPORTED: ", target)
 	move.emit(target)
 
 func hero_climb() -> void:

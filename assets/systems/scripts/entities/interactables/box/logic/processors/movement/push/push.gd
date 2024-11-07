@@ -3,26 +3,20 @@ extends Node
 @onready var forward: ActionTimer = $forward
 @onready var velocity: Node = $velocity
 
-var _impulse: float = 1
+const FRICTION: float = 0.01
 
-func apply_impulse(impulse: float) -> void:
-	_impulse = impulse
+var _weight: float = 1
+var weight: float:
+	get: return _weight
+	set(value):
+		assert(value != 0)
+		_weight = value
 
-func apply_velocity(v: Vector2) -> void:
-	velocity.set_position(v)
-	if v == Vector2.ZERO:
-		print("STOP")
+func apply_velocity(next: Vector2) -> void:
+	velocity.set_position(next * FRICTION / weight)
+	print("VELOCITY NOW: ", velocity.position, "- NO FRICTION: ", next)
+
+	if next == Vector2.ZERO:
 		forward.stop()
 	elif not forward.is_ticking:
-		print("START")
 		forward.start()
-
-#func start_forward(target: Vector2, force: float) -> void:
-#	print("START")
-#	print("SET VELOCITY: ", target, "FORCE: ", force)
-#	velocity.set_position(target * force)
-#	forward.start()
-
-#func stop_forward() -> void:
-#	print("STOP")
-#	forward.stop()
