@@ -11,6 +11,7 @@ func _ready() -> void:
 	logic.relations.apply(self)
 
 func teleport(next: Vector2) -> void:
+	velocity = Vector2.ZERO
 	position = next
 	move.emit(position)
 	print("TELEPORT: ", position)

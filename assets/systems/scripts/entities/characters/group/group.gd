@@ -15,8 +15,6 @@ func _uncomfortable_position() -> bool:
 	return _deploy.anchored and party[_heroes.main].logic.processors.input.platforming.jump.feet.balance.unstable
 
 func character_select() -> void:
-#	if _deploy.anchored and party[_heroes.main].logic.processors.input.platforming.jump.feet.balance.unstable:
-		#return
 	var order: Vector2i = _heroes.traverse(_heroes.reorder())
 	_deploy.select(party, order)
 	camera.regroup(party, order)

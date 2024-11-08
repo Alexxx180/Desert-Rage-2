@@ -12,7 +12,7 @@ func _jump(to_floor: bool, next: Vector2, move) -> void:
 	feet.balance.stable = to_floor
 
 func _to_floor() -> void:
-	_jump(true, feet.deployment.ground.position, dash)
+	_jump(true, feet.deployment.walls.current.position, dash)
 
 func _to_ledge() -> void:
 	print("teleported")

@@ -1,9 +1,22 @@
-extends ShapeCast2D
+extends Node2D
 
-const distance: int = 114
-const pos: Vector2 = Vector2(distance, distance)
+@onready var walls: Array[ShapeCast2D] = [$left, $right, $center]
 
-@onready var _half: Vector2 = shape.size / 2
+var current: ShapeCast2D
+var F: int = 0
 
-func set_direction(direction: Vector2) -> void:
-	position = direction * (pos + _half)
+func set_direction(direction: Vector2i) -> void:
+	for wall in walls:
+		wall.set_direction(direction)
+
+func are_ledges(feet: Node, floors: TileMapLayer, overview: Node) -> bool:
+	var same_floor: bool = false
+	var i: int = walls.size()
+
+	while not same_floor and i > 0:
+		i -= 1
+		current = walls[i]
+		same_floor = (not current.is_colliding()
+			and feet.is_same_floor(floors, overview))
+
+	return same_floor
