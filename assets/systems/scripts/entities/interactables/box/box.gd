@@ -14,10 +14,13 @@ const feedback: int = 2
 func _ready() -> void:
 	logic.relations.set_control_entity(self)
 
-func push() -> void:
-	var handle: Node = logic.processors.movement.push
-	velocity = handle.velocity.position
+func _physics_process(_delta: float) -> void:
+	move_and_slide()
+
+func push(next: Vector2) -> void:
+	velocity = next
+	# var handle: Node = logic.processors.movement.push
+	#velocity = handle.velocity.position
+	# print("box velocity: ", velocity)
 	directing.emit(velocity.normalized())
 	move.emit(position)
-	# print("box velocity: ", velocity)
-	move_and_slide()

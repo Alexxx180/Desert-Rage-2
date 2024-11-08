@@ -1,5 +1,7 @@
 extends Node
 
+signal forwarding(velocity: Vector2)
+
 @onready var forward: ActionTimer = $forward
 @onready var velocity: Node = $velocity
 
@@ -13,10 +15,14 @@ var weight: float:
 		_weight = value
 
 func apply_velocity(next: Vector2) -> void:
-	velocity.set_position(next * FRICTION / weight)
-	print("VELOCITY NOW: ", velocity.position, "- NO FRICTION: ", next)
+	next = next * FRICTION / weight
+	#velocity.set_position(next * FRICTION / weight)
+	# print("VELOCITY NOW: ", velocity.position, "- NO FRICTION: ", next)
 
+	forwarding.emit(next)
+	"""
 	if next == Vector2.ZERO:
 		forward.stop()
 	elif not forward.is_ticking:
 		forward.start()
+	"""
