@@ -1,9 +1,13 @@
 extends Node2D
 
-@onready var walls: Array[ShapeCast2D] = [$left, $right, $center]
+@onready var center: ShapeCast2D = $center
+@onready var walls: Array[ShapeCast2D] = [$left, $right, center]
 
-var current: ShapeCast2D
+var current: ShapeCast2D = center
 var F: int = 0
+
+func set_center() -> void:
+	current = center
 
 func set_direction(direction: Vector2i) -> void:
 	for wall in walls:

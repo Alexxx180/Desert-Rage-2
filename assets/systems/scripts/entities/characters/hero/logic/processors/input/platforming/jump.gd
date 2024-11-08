@@ -19,7 +19,7 @@ func _to_ledge() -> void:
 	_jump(false, ledges.current.get_ledge_position(), teleport)
 
 func floor_only(control: Node, _gap: TileMapLayer) -> void:
-	if feet.free_space(overview):
+	if feet.can_land(overview):
 		_to_floor()
 	control.available = false
 
