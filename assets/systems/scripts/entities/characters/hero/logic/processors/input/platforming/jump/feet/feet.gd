@@ -7,7 +7,7 @@ var deployment: DeploymentRaycast
 var surface: SurfaceTracker
 
 func same_level(overview: Node, f: int) -> bool:
-	print("OVERVIEW: ", overview.height.F, " - F:", f)
+	# print("OVERVIEW: ", overview.height.F, " - F:", f)
 	return f != 0 and f == overview.height.F
 
 func is_same_floor(floors: TileMapLayer, overview: Node) -> bool:

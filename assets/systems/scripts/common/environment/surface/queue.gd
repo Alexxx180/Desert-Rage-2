@@ -19,11 +19,11 @@ func _update(next: int):
 	update.emit(_get_last_floor())
 
 func remove():
-	print("OLD F: ", _get_last_floor())
+	#print("OLD F: ", _get_last_floor())
 	floors.pop_front()
 	_update(count - 1)
 
 func append(f: int):
-	print("NEW F: ", f)
+	#print("NEW F: ", f)
 	floors.push_back(f)
 	_update(count + 1)

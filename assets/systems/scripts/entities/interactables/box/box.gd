@@ -19,8 +19,5 @@ func _physics_process(_delta: float) -> void:
 
 func push(next: Vector2) -> void:
 	velocity = next
-	# var handle: Node = logic.processors.movement.push
-	#velocity = handle.velocity.position
-	# print("box velocity: ", velocity)
-	directing.emit(velocity.normalized())
+	#directing.emit(velocity.normalized())
 	move.emit(position)

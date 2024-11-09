@@ -10,12 +10,8 @@ func _observe(ledge: Vector2) -> bool:
 	return try
 
 func reach(stand: Area2D, feet: Node) -> bool:
-	# var movement: Node = stand.box.logic.processors.movement
 	var pos: Vector2 = stand.get_ledge_position()
 	var seat: Node = stand.box.logic.processors.movement.seat
-
-	#print("DIR: ", directions.eyes.direction)
-	print("COMPARISON: ", feet.same_level(self, seat.F))
 
 	return (not seat.place.stand() and _observe(pos)
 		and feet.same_level(self, seat.F))

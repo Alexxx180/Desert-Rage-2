@@ -11,7 +11,6 @@ func _get_floor() -> int:
 func set_floor(next: int) -> void:
 	if (not freeze):
 		_F = next
-	print("FLOOR IS: ", _F, "BUT NEXT IS? ", next)
 
 func set_box_floor(next: int) -> void:
 	_F = next

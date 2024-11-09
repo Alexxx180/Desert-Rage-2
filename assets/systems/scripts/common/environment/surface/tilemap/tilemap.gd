@@ -5,7 +5,7 @@ class_name Tiler
 @onready var margin: Node = $margin
 
 static func get_floor(floors: TileMapLayer, contact: Vector2) -> int:
-	print("CONTACT: ", contact)
+	# print("CONTACT: ", contact)
 	var cell: Vector2i = floors.local_to_map(contact)
 	var tile: TileData = floors.get_cell_tile_data(cell)
 	return 0 if tile == null else tile.get_custom_data("F")
