@@ -6,10 +6,12 @@ class_name DeploymentRaycast
 @onready var ground: ShapeCast2D = $ground
 
 func available_ground(direction: Vector2i) -> bool:
-	#print("DIRECTION")
+	# print("DIRECTION")
 	if direction == Vector2i.ZERO: return false
-	#print("GROUND")
-	return ground.is_colliding() # not - return false
+	# print("GROUND")
+	if not ground.is_colliding(): return false
+	# print("BORDERS")
+	return not walls.borders.is_colliding()
 
 func can_deploy(direction: Vector2i) -> bool:
 	#print("WALLS")

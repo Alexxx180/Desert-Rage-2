@@ -1,5 +1,6 @@
 extends Node2D
 
+@onready var borders: RayCast2D = $borders
 @onready var center: ShapeCast2D = $center
 @onready var walls: Array[ShapeCast2D] = [$left, $right, center]
 
@@ -10,6 +11,7 @@ func set_center() -> void:
 	current = center
 
 func set_direction(direction: Vector2i) -> void:
+	borders.set_direction(direction)
 	for wall in walls:
 		wall.set_direction(direction)
 
