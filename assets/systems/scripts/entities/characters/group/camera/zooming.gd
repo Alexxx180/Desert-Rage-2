@@ -2,9 +2,9 @@ extends RefCounted
 
 class_name CameraZooming
 
-const zooming: float = 0.5
+const zooming: float = 0.1
 const minimum: float = 0.5
-const maximum: float = 5.0
+const maximum: float = 1.5
 
 static func zoom() -> float:
 	return Input.get_axis("view_left", "view_right") * zooming

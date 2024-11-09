@@ -15,14 +15,15 @@ func set_direction(direction: Vector2i) -> void:
 	for wall in walls:
 		wall.set_direction(direction)
 
-func are_ledges(feet: Node, floors: TileMapLayer, overview: Node) -> bool:
-	var same_floor: bool = false
+func are_ledges(feet: Node, overview: Node, floors: TileMapLayer = null) -> bool:
+	var gap: bool = floors == null
+	var ledge: bool = false
 	var i: int = walls.size()
 
-	while not same_floor and i > 0:
+	while not ledge and i > 0:
 		i -= 1
 		current = walls[i]
-		same_floor = (not current.is_colliding()
-			and feet.is_same_floor(floors, overview))
+		ledge = (not current.is_colliding() and
+			(gap or feet.is_same_floor(floors, overview)))
 
-	return same_floor
+	return ledge
