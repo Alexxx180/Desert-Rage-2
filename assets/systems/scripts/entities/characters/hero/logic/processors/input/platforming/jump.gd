@@ -28,7 +28,7 @@ func _set_midair(control: Node, is_in_midair: bool) -> void:
 	overview.height.freeze = is_in_midair
 
 func determine(control: Node, upland: TileMapLayer) -> void:
-	if ledges.around(overview):
+	if ledges.around(overview, feet):
 		_to_ledge()
 	elif feet.can_deploy(upland.floors, overview):
 		_to_floor()

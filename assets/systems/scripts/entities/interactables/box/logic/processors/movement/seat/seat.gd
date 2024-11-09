@@ -9,6 +9,9 @@ signal climb(F: int)
 var stand: Area2D
 var _f: int = 0
 
+var F: int:
+	get: return _f + height.F
+
 const EMPTY_SEAT: int = 0
 
 func transport(_position: Vector2) -> void:
@@ -17,10 +20,10 @@ func transport(_position: Vector2) -> void:
 	move.emit(target)
 
 func hero_climb() -> void:
-	climb.emit(_f + height.F)
+	climb.emit(F)
 
-func set_floor(F: int) -> void:
-	_f = F
+func set_floor(floor_level: int) -> void:
+	_f = floor_level
 
 func enable_stand(hero: CharacterBody2D) -> void:
 	if place.empty() and place.is_in_midair(hero):

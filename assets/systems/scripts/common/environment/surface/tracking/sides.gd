@@ -13,10 +13,10 @@ static func _fill() -> Dictionary:
 		TOP_RIGHT = [Vector2i(FULL, BACK), Vector2.RIGHT],
 		BOTTOM_LEFT = [Vector2i(BACK, FULL), Vector2.DOWN],
 		BOTTOM_RIGHT = [Vector2i.ONE, Vector2.ONE],
-		CENTER = [Vector2i.ZERO, Vector2(NONE, NONE)],
-		TOP = [Vector2i.UP, Vector2(SEMI, NONE)],
+		CENTER = [Vector2i.ZERO, Vector2.ZERO],
+		TOP = [Vector2i.UP, Vector2(SEMI, BACK)],
 		BOTTOM = [Vector2i.DOWN, Vector2(SEMI, FULL)],
-		LEFT = [Vector2i.LEFT, Vector2(NONE, SEMI)],
+		LEFT = [Vector2i.LEFT, Vector2(BACK, SEMI)],
 		RIGHT = [Vector2i.RIGHT, Vector2(FULL, SEMI)],
 	}
 

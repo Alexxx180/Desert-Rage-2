@@ -17,12 +17,12 @@ func remove(ledge: Area2D) -> void:
 	data.erase(id)
 	size = size - 1
 
-func around(overview: Node) -> bool:
+func around(overview: Node, feet: Node) -> bool:
 	var jump: bool = false
 	var platforms: Array = data.values()
 	var i: int = size
 	while i > 0 and not jump:
 		i = i - 1
 		_current = platforms[i]
-		jump = overview.reach(_current)
+		jump = overview.reach(_current, feet)
 	return jump

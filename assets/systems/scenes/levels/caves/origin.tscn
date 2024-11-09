@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://besonumxeyos4"]
 
 [ext_resource type="PackedScene" uid="uid://bfko3o18pnpav" path="res://assets/systems/scenes/levels/caves/origin/tilemap.tscn" id="1_mxyly"]
-[ext_resource type="PackedScene" uid="uid://7w6l4ceynlkv" path="res://assets/systems/scenes/levels/caves/origin/text.tscn" id="3_4v8to"]
+[ext_resource type="PackedScene" uid="uid://dryh46gyikikp" path="res://assets/systems/scenes/common/interactables/text.tscn" id="2_urinj"]
 
 [node name="origin" type="Node2D"]
 modulate = Color(0.862745, 0.862745, 0.862745, 1)
@@ -9,4 +9,28 @@ y_sort_enabled = true
 
 [node name="map" parent="." instance=ExtResource("1_mxyly")]
 
-[node name="text" parent="." instance=ExtResource("3_4v8to")]
+[node name="secrets" type="Node2D" parent="."]
+
+[node name="finish" parent="secrets" instance=ExtResource("2_urinj")]
+offset_left = 1516.0
+offset_top = 2731.0
+offset_right = 1600.0
+offset_bottom = 2765.0
+secret = "🏁 Финиш"
+opened = "🏆 Победа"
+
+[node name="desert" parent="secrets" instance=ExtResource("2_urinj")]
+offset_left = 2455.0
+offset_top = 7111.0
+offset_right = 2539.0
+offset_bottom = 7145.0
+secret = "Desert"
+opened = "⏳ Desert (Десёрт) с японского \"砂漠\" (Сабаку)"
+
+[node name="rage" parent="secrets" instance=ExtResource("2_urinj")]
+offset_left = 1213.0
+offset_top = 7004.0
+offset_right = 1297.0
+offset_bottom = 7038.0
+secret = "Rage"
+opened = "❤️‍🔥 Rage (Рейдж) c японского \"レイジ\" (Рейджи)"

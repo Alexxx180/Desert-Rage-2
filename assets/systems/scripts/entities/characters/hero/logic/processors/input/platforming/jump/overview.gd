@@ -9,9 +9,13 @@ func _observe(ledge: Vector2) -> bool:
 		try = try and directions.observe(axis, ledge)
 	return try
 
-func reach(stand: Area2D) -> bool:
-	var seat: Node = stand.box.logic.processors.movement.seat
+func reach(stand: Area2D, feet: Node) -> bool:
+	# var movement: Node = stand.box.logic.processors.movement
 	var pos: Vector2 = stand.get_ledge_position()
-	#print("DIR: ", directions.eyes.direction)
+	var seat: Node = stand.box.logic.processors.movement.seat
 
-	return not seat.place.stand() and _observe(pos)
+	#print("DIR: ", directions.eyes.direction)
+	print("COMPARISON: ", feet.same_level(self, seat.F))
+
+	return (not seat.place.stand() and _observe(pos)
+		and feet.same_level(self, seat.F))

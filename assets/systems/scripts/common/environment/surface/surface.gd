@@ -7,7 +7,7 @@ class_name SurfaceTracker
 @onready var floors: FloorsQueue = FloorsQueue.new()
 
 func track(ground: Node2D) -> Vector2:
-	return tracking.hero.position + ground.position
+	return tracking.entity.position + ground.position
 
 func find_floor(map: TileMapLayer, pos: Vector2) -> int:
 	return Tiler.get_floor(map, pos)

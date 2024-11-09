@@ -6,13 +6,14 @@ extends Node
 var deployment: DeploymentRaycast
 var surface: SurfaceTracker
 
-func _same_level(overview: Node) -> bool:
-	return height.F != 0 and height.F == overview.height.F
+func same_level(overview: Node, f: int) -> bool:
+	print("OVERVIEW: ", overview.height.F, " - F:", f)
+	return f != 0 and f == overview.height.F
 
 func is_same_floor(floors: TileMapLayer, overview: Node) -> bool:
 	var tile: Vector2 = surface.track(deployment.walls.current)
 	height.set_floor(surface.find_floor(floors, tile))
-	return _same_level(overview)
+	return same_level(overview, height.F)
 
 func _direct(overview: Node) -> Vector2i:
 	return overview.directions.eyes.direction
