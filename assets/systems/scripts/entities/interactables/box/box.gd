@@ -5,7 +5,7 @@ signal directing(direction: Vector2i)
 
 @export_range(0.2, 2.0, 0.1) var weight: float = 1
 
-@onready var view: Sprite2D = $view
+@onready var view: Node2D = $view
 @onready var geometry: Node = $placement
 @onready var logic: Node2D = $logic
 

@@ -21,5 +21,5 @@ func is_in_midair(hero: CharacterBody2D) -> bool:
 	return hero.logic.processors.input.platforming.jump.feet.balance.unstable
 
 func visit(hero: CharacterBody2D, id: int) -> void:
-	hero.view.stand.visible = is_in_midair(hero)
+	hero.view.visible = !is_in_midair(hero)
 	_hero_id = id

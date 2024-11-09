@@ -11,7 +11,7 @@ func set_velocity(velocity: Vector2) -> void:
 
 func set_impulse(impulse: float) -> void:
 	_impulse = impulse
-	print("SET IMPULSE TO: ", impulse)
+	#print("SET IMPULSE TO: ", impulse)
 
 func start_forward(box: CharacterBody2D) -> void:
 	var push: Node = box.logic.processors.movement.push

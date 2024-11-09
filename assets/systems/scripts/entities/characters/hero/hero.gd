@@ -14,12 +14,12 @@ func teleport(next: Vector2) -> void:
 	velocity = Vector2.ZERO
 	position = next
 	move.emit(position)
-	print("TELEPORT: ", position)
+	#print("TELEPORT: ", position)
 
 func dash(force: Vector2) -> void:
 	position += force
 	move.emit(position)
-	print("DASHING: ", position)
+	#print("DASHING: ", position)
 
 func _physics_process(_delta: float) -> void:
 	move_and_slide()
