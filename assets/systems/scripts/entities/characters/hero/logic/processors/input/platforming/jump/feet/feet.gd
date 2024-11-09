@@ -18,14 +18,7 @@ func _direct(overview: Node) -> Vector2i:
 	return overview.directions.eyes.direction
 
 func can_land(overview: Node) -> bool:
-	#deployment.walls.set_center()
-	#print("RESULT: ", deployment.can_deploy(_direct(overview)))
-	return deployment.walls.are_ledges(self, overview)
-	#deployment.can_deploy(_direct(overview))
+	return deployment.can_deploy(self, overview)
 
 func can_deploy(floors: TileMapLayer, overview: Node) -> bool:
-	return (deployment.available_ground(_direct(overview)) and
-		deployment.walls.are_ledges(self, overview, floors))
-	#var tile: Vector2 = surface.track(deployment.walls.current)
-	#height.set_floor(surface.find_floor(floors, tile))
-	#return same_level(overview)
+	return deployment.can_deploy(self, overview, floors)

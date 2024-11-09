@@ -17,6 +17,11 @@ func initiate(group: Node, party: Array, hero: Vector2i) -> void:
 	switch(party, hero[1], hero[0])
 
 func regroup(party: Array, hero: Vector2i) -> void:
+
+	#print("ACTIVATION: ", hero.name)
+	party[hero[0]].velocity = Vector2.ZERO
+	#hero.velocity = Vector2.ZERO
+
 	change(party[hero[0]], party[hero[1]])
 	switch(party, hero[0], hero[1])
 
