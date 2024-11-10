@@ -7,6 +7,6 @@ func set_control(input: Node, hero: CharacterBody2D) -> void:
 
 	hero.moving.connect(push.set_velocity)
 
-	input.directing.connect(face.set_direction)
+	input.moving.connect(face.set_position)
 	input.movement.move.connect(hero.travel)
 	input.movement.accelerate.connect(stats.accelerate)

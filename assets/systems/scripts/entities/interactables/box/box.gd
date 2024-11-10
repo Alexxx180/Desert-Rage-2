@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 signal move(next: Vector2)
-signal directing(direction: Vector2i)
+# signal directing(direction: Vector2i)
 
 @export_range(0.2, 2.0, 0.1) var weight: float = 1
 
