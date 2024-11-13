@@ -24,6 +24,6 @@ func remove():
 	_update(count - 1)
 
 func append(f: int):
-	#print("NEW F: ", f)
+	print("NEW F: ", f)
 	floors.push_back(f)
 	_update(count + 1)

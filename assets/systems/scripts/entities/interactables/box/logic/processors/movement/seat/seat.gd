@@ -20,10 +20,13 @@ func transport(_position: Vector2) -> void:
 	move.emit(target)
 
 func hero_climb() -> void:
+	#print("F: ", _f, " + HEIGHT: ", height.F, " = ", F)
 	climb.emit(F)
 
 func set_floor(floor_level: int) -> void:
+	#print("PASSED F: ", floor_level)
 	_f = floor_level
+	hero_climb()
 
 func enable_stand(hero: CharacterBody2D) -> void:
 	if place.empty() and place.is_in_midair(hero):

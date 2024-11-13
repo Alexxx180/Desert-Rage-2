@@ -14,3 +14,4 @@ func set_floor(next: int) -> void:
 
 func set_box_floor(next: int) -> void:
 	_F = next
+	print("ACTUAL HERO F: ", _F)
