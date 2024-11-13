@@ -1,5 +1,7 @@
 extends ShapeCast2D
 
+class_name AreaDetector
+
 @export var offset: int = 0
 
 const distance: int = 114

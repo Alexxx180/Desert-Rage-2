@@ -17,7 +17,7 @@ var weight: float:
 func apply_velocity(next: Vector2) -> void:
 	next = next * FRICTION / weight
 	#velocity.set_position(next * FRICTION / weight)
-	# print("VELOCITY NOW: ", velocity.position, "- NO FRICTION: ", next)
+	# print("APPLY VELOCITY: ", velocity.position, "- NO FRICTION: ", next)
 
 	forwarding.emit(next)
 	"""

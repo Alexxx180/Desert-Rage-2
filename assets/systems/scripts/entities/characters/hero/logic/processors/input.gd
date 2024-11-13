@@ -14,6 +14,6 @@ func get_input_vector() -> Vector2:
 
 func _input(_event: InputEvent) -> void:
 	var motion: Vector2 = get_input_vector()
-	print("motion: ", motion)
+	# print("motion: ", motion)
 	directing.emit(Vector2i(round(motion.x), round(motion.y)))
 	moving.emit(motion)

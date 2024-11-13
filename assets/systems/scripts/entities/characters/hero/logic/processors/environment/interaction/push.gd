@@ -18,9 +18,11 @@ func start_forward(box: CharacterBody2D) -> void:
 	apply_velocity.connect(push.apply_velocity)
 	#apply_impulse.connect(push.apply_impulse)
 	#push.apply_velocity(_velocity * _impulse)
+	#print("start forward")
 
 func stop_forward(box: CharacterBody2D) -> void:
 	var push: Node = box.logic.processors.movement.push
 	apply_velocity.disconnect(push.apply_velocity)
 	#apply_impulse.disconnect(push.apply_impulse)
+	#print("stop forward")
 	push.apply_velocity(Vector2.ZERO)

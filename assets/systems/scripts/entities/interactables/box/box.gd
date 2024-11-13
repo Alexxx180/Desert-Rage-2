@@ -15,9 +15,12 @@ func _ready() -> void:
 	logic.relations.set_control_entity(self)
 
 func _physics_process(_delta: float) -> void:
+	#print("BUT V : ", velocity)
 	move_and_slide()
 
 func push(next: Vector2) -> void:
 	velocity = next
+	#print("ACTUAL V: ", velocity)
+	#print("SPEED", speed)
 	#directing.emit(velocity.normalized())
 	move.emit(position)
