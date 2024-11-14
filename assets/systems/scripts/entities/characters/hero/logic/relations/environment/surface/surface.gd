@@ -14,8 +14,9 @@ func set_control(surface: Node, hero: CharacterBody2D) -> void:
 	tracking.set_contacts(hero.geometry.shape.size)
 	tracking.entity = hero
 	
+	"""
 	_contact = hero.get_node("../../contact")
-
 	surface.tilemap.margin.debug_contact.connect(_debug_contact)
+	#"""
 
 	floors.set_control(surface.floors, jump.overview)

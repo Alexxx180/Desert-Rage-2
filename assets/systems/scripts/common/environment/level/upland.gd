@@ -1,3 +1,3 @@
 extends TileMapLayer
 
-@export var floors: TileMapLayer
+@onready var floors: TileMapLayer = get_node("../floors")
