@@ -11,6 +11,7 @@ func _finish(_hero: CharacterBody2D) -> void:
 
 	var path: String = levels.complete_path()
 
+	print("PATH: ", path)
 	assert(ResourceLoader.exists(path))
 	get_tree().call_deferred("change_scene_to_file", path)
 

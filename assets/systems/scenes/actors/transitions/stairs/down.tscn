@@ -7,6 +7,8 @@
 [ext_resource type="Script" path="res://assets/systems/scripts/entities/transitions/stairs/interval.gd" id="3_w5mu5"]
 
 [node name="stairs" type="Area2D"]
+collision_layer = 0
+collision_mask = 4
 script = ExtResource("1_h5rmn")
 direction = -1
 
@@ -21,3 +23,5 @@ script = ExtResource("2_27cx5")
 
 [node name="interval" type="Node" parent="."]
 script = ExtResource("3_w5mu5")
+
+[connection signal="body_entered" from="." to="." method="_finish"]

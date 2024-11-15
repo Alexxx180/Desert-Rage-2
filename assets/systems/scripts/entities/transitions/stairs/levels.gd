@@ -1,15 +1,17 @@
 extends Node
 
-const assets: String = "res://assets/levels/%s/%s/%d/level.tscn"
+const assets: String = "res://assets/systems/scenes/levels/%s/%s/%d/level.tscn"
 
 func complete_path() -> String:
 	var level: Vector2i = Session.location["level"]
+	var caption: String = Session.location["name"]
 
-	var f: String = str(level.x)
+	var f: String = ""
 
 	if (level.x > 0):
-		f = '+/' + f
+		f = "+/"
 	elif (level.x < 0):
-		f = '-/' + f
+		f = "-/"
+		level.x = abs(level.x)
 
-	return assets % [Session.location["name"], f, level.y]
+	return assets % [caption, f + str(level.x), level.y]
