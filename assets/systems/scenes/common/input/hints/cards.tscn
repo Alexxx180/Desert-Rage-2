@@ -1,0 +1,111 @@
+[gd_scene load_steps=7 format=3 uid="uid://dbbt75750fc4"]
+
+[ext_resource type="Theme" uid="uid://ctsb6uh5t0n1l" path="res://assets/resources/themes/default.tres" id="1_xo3m3"]
+[ext_resource type="Theme" uid="uid://hmh3wpm730wh" path="res://assets/resources/themes/card.tres" id="2_no7sg"]
+[ext_resource type="Script" path="res://assets/systems/scripts/fullscreen.gd" id="2_tauni"]
+[ext_resource type="Theme" uid="uid://3dlumew5kqg8" path="res://assets/resources/themes/description.tres" id="4_e74l3"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_f4jfc"]
+device = -1
+keycode = 4194342
+
+[sub_resource type="Shortcut" id="Shortcut_b4j3q"]
+events = [SubResource("InputEventKey_f4jfc")]
+
+[node name="cards" type="CanvasLayer"]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_xo3m3")
+
+[node name="hstack" type="HBoxContainer" parent="Control"]
+layout_mode = 2
+offset_right = 1152.0
+offset_bottom = 648.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("1_xo3m3")
+
+[node name="MarginContainer" type="MarginContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="fullscreen" type="Button" parent="Control/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+toggle_mode = true
+button_pressed = true
+shortcut = SubResource("Shortcut_b4j3q")
+text = "Полный экран"
+script = ExtResource("2_tauni")
+
+[node name="vstack" type="VBoxContainer" parent="Control/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme = ExtResource("1_xo3m3")
+alignment = 2
+
+[node name="motion" type="VBoxContainer" parent="Control/MarginContainer/vstack"]
+layout_mode = 2
+
+[node name="header" type="PanelContainer" parent="Control/MarginContainer/vstack/motion"]
+layout_mode = 2
+theme = ExtResource("2_no7sg")
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/MarginContainer/vstack/motion/header"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/MarginContainer/vstack/motion/header/MarginContainer"]
+layout_mode = 2
+text = "👣 Движение 🏃"
+
+[node name="description" type="PanelContainer" parent="Control/MarginContainer/vstack/motion"]
+layout_mode = 2
+theme = ExtResource("4_e74l3")
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/MarginContainer/vstack/motion/description"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/MarginContainer/vstack/motion/description/MarginContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Используйте ⬅️⬆️⬇️➡️ для перемещения.
+"
+autowrap_mode = 2
+
+[node name="action" type="PanelContainer" parent="Control/MarginContainer/vstack"]
+visible = false
+layout_mode = 2
+theme = ExtResource("2_no7sg")
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/MarginContainer/vstack/action"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/MarginContainer/vstack/action/MarginContainer"]
+layout_mode = 2
+text = "✊ Действие 🙌"
+
+[node name="reason" type="PanelContainer" parent="Control/MarginContainer/vstack"]
+visible = false
+layout_mode = 2
+theme = ExtResource("2_no7sg")
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/MarginContainer/vstack/reason"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/MarginContainer/vstack/reason/MarginContainer"]
+layout_mode = 2
+text = "🔍 Сознание 🧭"
+
+[connection signal="pressed" from="Control/MarginContainer/fullscreen" to="Control/MarginContainer/fullscreen" method="_toggle_fullscreen"]

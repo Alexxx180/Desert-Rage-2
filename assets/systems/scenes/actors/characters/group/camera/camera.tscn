@@ -1,15 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://dwq2sbrb6d7xm"]
+[gd_scene load_steps=3 format=3 uid="uid://dwq2sbrb6d7xm"]
 
 [ext_resource type="Script" path="res://assets/systems/scripts/entities/characters/group/camera/camera.gd" id="1_vhcvo"]
 [ext_resource type="PackedScene" uid="uid://c75178jy2w4kb" path="res://assets/systems/scenes/actors/characters/group/camera/deploy.tscn" id="2_si5hy"]
-[ext_resource type="Script" path="res://assets/systems/scripts/fullscreen.gd" id="3_odyh5"]
-
-[sub_resource type="InputEventKey" id="InputEventKey_f4jfc"]
-device = -1
-keycode = 4194342
-
-[sub_resource type="Shortcut" id="Shortcut_h6gge"]
-events = [SubResource("InputEventKey_f4jfc")]
 
 [node name="camera" type="Camera2D"]
 script = ExtResource("1_vhcvo")
@@ -18,27 +10,3 @@ script = ExtResource("1_vhcvo")
 visible = false
 collision_layer = 0
 collision_mask = 4
-
-[node name="hud" type="CanvasLayer" parent="."]
-
-[node name="fullscreen" type="Button" parent="hud"]
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -139.0
-offset_top = -43.0
-offset_right = -14.0
-offset_bottom = -12.0
-grow_horizontal = 0
-grow_vertical = 0
-size_flags_horizontal = 8
-size_flags_vertical = 8
-toggle_mode = true
-button_pressed = true
-shortcut = SubResource("Shortcut_h6gge")
-text = "Полный экран"
-script = ExtResource("3_odyh5")
-
-[connection signal="pressed" from="hud/fullscreen" to="hud/fullscreen" method="_toggle_fullscreen"]
