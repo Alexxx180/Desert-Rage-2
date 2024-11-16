@@ -1,0 +1,76 @@
+[gd_scene load_steps=7 format=3 uid="uid://mdjk60h84tvs"]
+
+[ext_resource type="Theme" uid="uid://hmh3wpm730wh" path="res://assets/resources/runtime/themes/card.tres" id="1_0b1s0"]
+[ext_resource type="Script" path="res://assets/systems/scripts/common/input/hints/category/motion/motion.gd" id="1_ifhy3"]
+[ext_resource type="Theme" uid="uid://3dlumew5kqg8" path="res://assets/resources/runtime/themes/description.tres" id="2_l07nr"]
+[ext_resource type="AnimationLibrary" uid="uid://dstvodoselvte" path="res://assets/resources/media/animation/hint_appearance/hint_appearance.res" id="3_th6jo"]
+
+[sub_resource type="Animation" id="Animation_lfg47"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_x62or"]
+_data = {
+"RESET": SubResource("Animation_lfg47")
+}
+
+[node name="motion" type="VBoxContainer"]
+visible = false
+script = ExtResource("1_ifhy3")
+
+[node name="movement" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="header" type="PanelContainer" parent="movement"]
+layout_mode = 2
+theme = ExtResource("1_0b1s0")
+
+[node name="margin" type="MarginContainer" parent="movement/header"]
+layout_mode = 2
+
+[node name="caption" type="Label" parent="movement/header/margin"]
+layout_mode = 2
+text = "🏃 Движение 🧗‍♀️"
+
+[node name="description" type="PanelContainer" parent="movement"]
+layout_mode = 2
+theme = ExtResource("2_l07nr")
+
+[node name="margin" type="MarginContainer" parent="movement/description"]
+layout_mode = 2
+
+[node name="label" type="Label" parent="movement/description/margin"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Для перемещения используйте ⬅️⬆️⬇️➡️"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="animation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_x62or"),
+"hint_appearance": ExtResource("3_th6jo")
+}
