@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://bfko3o18pnpav"]
+[gd_scene load_steps=11 format=4 uid="uid://bfko3o18pnpav"]
 
 [ext_resource type="PackedScene" uid="uid://chabua7f4f7aj" path="res://assets/systems/scenes/levels/tilemap/walls/invisible.tscn" id="1_jvkr3"]
 [ext_resource type="PackedScene" uid="uid://d0i3jl2uefg53" path="res://assets/systems/scenes/levels/tilemap/walls/visible.tscn" id="2_p8in1"]
@@ -7,10 +7,12 @@
 [ext_resource type="PackedScene" uid="uid://tyaiesscqsxa" path="res://assets/systems/scenes/levels/tilemap/vertical/floors.tscn" id="5_ghmax"]
 [ext_resource type="PackedScene" uid="uid://cwtam67atkh12" path="res://assets/systems/scenes/levels/tilemap/vertical/interactables.tscn" id="6_0mknb"]
 [ext_resource type="PackedScene" uid="uid://c5rp72cd85owa" path="res://assets/systems/scenes/levels/tilemap/transitions.tscn" id="7_u17ne"]
+[ext_resource type="PackedScene" uid="uid://boai8pinslcme" path="res://assets/systems/scenes/common/environment/level/hint.tscn" id="8_2fry7"]
 [ext_resource type="PackedScene" uid="uid://b83b7oo2fmh5h" path="res://assets/systems/scenes/actors/characters/group/group.tscn" id="8_l5akn"]
 [ext_resource type="PackedScene" uid="uid://dbbt75750fc4" path="res://assets/systems/scenes/common/input/hints/cards.tscn" id="9_qn5y3"]
 
 [node name="map" type="Node2D"]
+y_sort_enabled = true
 
 [node name="invisible" parent="." instance=ExtResource("1_jvkr3")]
 tile_map_data = PackedByteArray("AAAaACAAAAABAAEAAAAZACAAAAABAAEAAAAYACAAAAABAAEAAAAXACAAAAABAAEAAAAWACAAAAABAAEAAAAVACAAAAABAAEAAAAUACAAAAABAAEAAAATACAAAAABAAEAAAASACAAAAABAAEAAAARACAAAAABAAEAAAAQACAAAAABAAEAAAAPACAAAAABAAEAAAAQACEAAAABAAIAAAAPACEAAAABAAIAAAAPAB8AAAABAAAAAAAQAB8AAAABAAAAAAARACEAAAABAAIAAAARAB8AAAABAAAAAAASACEAAAABAAIAAAASAB8AAAABAAAAAAATACEAAAABAAIAAAATAB8AAAABAAAAAAAUACEAAAABAAIAAAAUAB8AAAABAAAAAAAVACEAAAABAAIAAAAVAB8AAAABAAAAAAAWACEAAAABAAIAAAAWAB8AAAABAAAAAAAXACEAAAABAAIAAAAXAB8AAAABAAAAAAAYACEAAAABAAIAAAAYAB8AAAABAAAAAAAZACEAAAABAAIAAAAZAB8AAAABAAAAAAAaACEAAAABAAIAAAAaAB8AAAABAAAAAAD+/xYAAAABAAEAAAD9/xYAAAABAAEAAAD8/xYAAAABAAEAAAD7/xYAAAABAAEAAAD6/xYAAAABAAEAAAD5/xYAAAABAAEAAAD4/xYAAAABAAEAAAD3/xYAAAABAAEAAAD2/xYAAAABAAEAAAD1/xYAAAABAAEAAAD0/xYAAAABAAEAAADz/xYAAAABAAEAAADy/xYAAAABAAEAAADx/xYAAAABAAEAAADw/xYAAAABAAEAAADv/xYAAAABAAEAAADw/xcAAAABAAIAAADv/xcAAAABAAIAAADv/xUAAAABAAAAAADw/xUAAAABAAAAAADx/xcAAAABAAIAAADx/xUAAAABAAAAAADy/xcAAAABAAIAAADy/xUAAAABAAAAAADz/xcAAAABAAIAAADz/xUAAAABAAAAAAD0/xcAAAABAAIAAAD0/xUAAAABAAAAAAD1/xcAAAABAAIAAAD1/xUAAAABAAAAAAD2/xcAAAABAAIAAAD2/xUAAAABAAAAAAD3/xcAAAABAAIAAAD3/xUAAAABAAAAAAD4/xcAAAABAAIAAAD4/xUAAAABAAAAAAD5/xcAAAABAAIAAAD5/xUAAAABAAAAAAD6/xcAAAABAAIAAAD6/xUAAAABAAAAAAD7/xcAAAABAAIAAAD7/xUAAAABAAAAAAD8/xcAAAABAAIAAAD8/xUAAAABAAAAAAD9/xcAAAABAAIAAAD9/xUAAAABAAAAAAD+/xcAAAABAAIAAAD+/xUAAAABAAAAAAA=")
@@ -33,6 +35,36 @@ tile_map_data = PackedByteArray("AAACABwAAwAAAAAAAQAdACAAAAAAAAAAAQDp/xQAAAAAAAA
 
 [node name="transitions" parent="." instance=ExtResource("7_u17ne")]
 tile_map_data = PackedByteArray("AAANAAoAAAAAAAAAAQA=")
+
+[node name="motion" type="Node2D" parent="."]
+
+[node name="movement" type="Node2D" parent="motion"]
+
+[node name="disappear" parent="motion/movement" instance=ExtResource("8_2fry7")]
+
+[node name="jumping" type="Node2D" parent="motion"]
+
+[node name="appear" parent="motion/jumping" instance=ExtResource("8_2fry7")]
+position = Vector2(641, 2080)
+
+[node name="disappear" parent="motion/jumping" instance=ExtResource("8_2fry7")]
+position = Vector2(300, 2080)
+
+[node name="hill" type="Node2D" parent="motion"]
+
+[node name="appear" parent="motion/hill" instance=ExtResource("8_2fry7")]
+position = Vector2(160, 1612)
+
+[node name="disappear" parent="motion/hill" instance=ExtResource("8_2fry7")]
+position = Vector2(419, 1504)
+
+[node name="pushing" type="Node2D" parent="motion"]
+
+[node name="appear" parent="motion/pushing" instance=ExtResource("8_2fry7")]
+position = Vector2(160, 1941)
+
+[node name="disappear" parent="motion/pushing" instance=ExtResource("8_2fry7")]
+position = Vector2(160, 1696)
 
 [node name="group" parent="." instance=ExtResource("8_l5akn")]
 position = Vector2(806, 2728)

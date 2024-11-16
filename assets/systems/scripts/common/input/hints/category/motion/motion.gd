@@ -3,36 +3,40 @@ extends VBoxContainer
 signal on_hidden()
 
 @onready var animation: AnimationPlayer = $animation
+@onready var _acts = {
+	"movement": $movement, "hill": $hill,
+	"jumping": $jumping, "pushing": $pushing
+}
 
-enum { HIDDEN = 0, IN_PROCESS = 1, SHOWED = 2 }
-var status: int = HIDDEN
+var _progression: Array[String] = ["movement"]
+var _showed: int = 0
+var _in_progress: int = 0
 
-func start_progression() -> void:
-	show_full_hint()
+func _show_hint(act: String) -> void:
+	animation.play("hints_motion/" + act + "_appear")
+	_showed += 1
 
-func show_full_hint() -> void:
-	show_hint(IN_PROCESS, "appear")
+func show_progress(act: String) -> void:
+	if _in_progress:
+		for item in _progression:
+			_acts[item].hide()
+	_in_progress = _progression.size() != 4
+	_progression.append(act)
+	_show_hint(act)
+	
+func hide_progress(act: String) -> void:
+	if _acts[act].visible:
+		_in_progress = true
+		animation.play("hints_motion/" + act + "_disappear")
 
-func show_hint(next: int, anim_name: String):
-	status = next
-	animation.play("hint_appearance/" + anim_name)
+func show_hints() -> void:
+	for act in _progression: _show_hint(act)
 
-func on_showed() -> void:
-	status = SHOWED
+func hide_hints() -> void:
+	for act in _progression: hide_progress(act)
 
-func on_hide() -> void:
-	on_hidden.emit()
-
-func _hint_button_press() -> void:
-	show_full_hint()
-
-func _input(_event: InputEvent) -> void:
-	if not Prompters.moved(): return
-
-	match status:
-		IN_PROCESS:
-			status = HIDDEN
-			animation.stop()
-			on_hidden.emit()
-		SHOWED:
-			show_hint(HIDDEN, "disappear")
+func _on_hide() -> void:
+	_in_progress = false
+	_showed -= 1
+	print("SHOWED? ", _showed)
+	if _showed == 0: on_hidden.emit()

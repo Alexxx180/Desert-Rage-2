@@ -1,11 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://dbbt75750fc4"]
+[gd_scene load_steps=10 format=3 uid="uid://dbbt75750fc4"]
 
+[ext_resource type="Script" path="res://assets/systems/scripts/common/input/hints/cards.gd" id="1_7o4uc"]
 [ext_resource type="Theme" uid="uid://ctsb6uh5t0n1l" path="res://assets/resources/runtime/themes/default.tres" id="1_xo3m3"]
-[ext_resource type="Script" path="res://assets/systems/scripts/common/input/hints/hud.gd" id="2_4osuw"]
 [ext_resource type="Script" path="res://assets/systems/scripts/fullscreen.gd" id="2_tauni"]
+[ext_resource type="Script" path="res://assets/systems/scripts/common/input/hints/hints.gd" id="3_25j8c"]
 [ext_resource type="PackedScene" uid="uid://mdjk60h84tvs" path="res://assets/systems/scenes/common/input/hints/category/motion.tscn" id="3_fr63h"]
-[ext_resource type="PackedScene" uid="uid://cimkmbth3t0at" path="res://assets/systems/scenes/common/input/hints/category/action.tscn" id="6_adyrh"]
-[ext_resource type="PackedScene" uid="uid://pcadvttb4v3o" path="res://assets/systems/scenes/common/input/hints/category/reason.tscn" id="7_d1n00"]
 
 [sub_resource type="InputEventKey" id="InputEventKey_f4jfc"]
 device = -1
@@ -22,8 +21,9 @@ keycode = 4194332
 events = [SubResource("InputEventKey_k1l32")]
 
 [node name="cards" type="CanvasLayer"]
+script = ExtResource("1_7o4uc")
 
-[node name="Control" type="Control" parent="."]
+[node name="hud" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -32,49 +32,41 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_xo3m3")
 
-[node name="margin" type="MarginContainer" parent="Control"]
+[node name="margin" type="MarginContainer" parent="hud"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("2_4osuw")
 
-[node name="fullscreen" type="Button" parent="Control/margin"]
+[node name="fullscreen" type="Button" parent="hud/margin"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 toggle_mode = true
 button_pressed = true
 shortcut = SubResource("Shortcut_b4j3q")
-text = " [F11] Весь экран 🔳"
+text = " [F11] %s %s"
 script = ExtResource("2_tauni")
 
-[node name="help" type="Button" parent="Control/margin"]
+[node name="hints" type="VBoxContainer" parent="hud/margin"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme = ExtResource("1_xo3m3")
+alignment = 2
+script = ExtResource("3_25j8c")
+
+[node name="motion" parent="hud/margin/hints" instance=ExtResource("3_fr63h")]
+layout_mode = 2
+
+[node name="help" type="Button" parent="hud/margin/hints"]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
 shortcut = SubResource("Shortcut_qlbv2")
 text = " [F1] Справка ❔"
 
-[node name="hints" type="VBoxContainer" parent="Control/margin"]
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 8
-theme = ExtResource("1_xo3m3")
-alignment = 2
-
-[node name="motion" parent="Control/margin/hints" instance=ExtResource("3_fr63h")]
-layout_mode = 2
-
-[node name="action" parent="Control/margin/hints" instance=ExtResource("6_adyrh")]
-visible = false
-layout_mode = 2
-
-[node name="reason" parent="Control/margin/hints" instance=ExtResource("7_d1n00")]
-visible = false
-layout_mode = 2
-
-[connection signal="pressed" from="Control/margin/fullscreen" to="Control/margin/fullscreen" method="_toggle_fullscreen"]
-[connection signal="pressed" from="Control/margin/help" to="Control/margin" method="_on_help_press"]
+[connection signal="pressed" from="hud/margin/fullscreen" to="hud/margin/fullscreen" method="_toggle_fullscreen"]
+[connection signal="pressed" from="hud/margin/hints/help" to="hud/margin/hints" method="show_help"]
