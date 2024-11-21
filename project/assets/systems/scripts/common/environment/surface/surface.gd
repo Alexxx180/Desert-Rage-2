@@ -2,18 +2,16 @@ extends Node
 
 class_name SurfaceTracker
 
-@onready var tracking: Node = $tracking
-@onready var tilemap: Node = $tilemap
-@onready var floors: FloorsQueue = FloorsQueue.new()
+var entity: CharacterBody2D
+var contact_zone: Area2D
+
+var contact: Vector2:
+	get: return contact_zone.center
+
+static func get_var(map: TileMapLayer, target: Vector2, data: String, none: Variant) -> Variant:
+	var cell: Vector2i = map.local_to_map(target)
+	var tile: TileData = map.get_cell_tile_data(cell)
+	return none if tile == null else tile.get_custom_data(data)
 
 func track(ground: Node2D) -> Vector2:
-	return tracking.entity.position + ground.position
-
-func find_floor(map: TileMapLayer, pos: Vector2) -> int:
-	return Tiler.get_floor(map, pos)
-
-func at_old_floor(_body: TileMapLayer) -> void:
-	floors.remove()
-
-func at_new_floor(surface: TileMapLayer) -> void:
-	floors.append(tilemap.find_floor_tile(surface, tracking))
+	return entity.position + ground.position

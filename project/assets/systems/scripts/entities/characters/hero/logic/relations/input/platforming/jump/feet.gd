@@ -2,14 +2,13 @@ extends Node
 
 var _movement: Node
 
-func set_control(feet: Node, hero: CharacterBody2D) -> void:
-	var platforms: Node = hero.logic.detectors.platforming.platforms
+func controls(hero: CharacterBody2D, feet: Node, platforming: Node) -> void:
 	var processors: Node = hero.logic.processors
 
 	_movement = processors.input.movement
 
-	feet.deployment = platforms.surface.deployment
-	feet.surface = processors.environment.surface
+	feet.deployment = platforming.platforms.surface.deployment
+	feet.surface = processors.environment.floors.tracker
 
 	feet.balance.set_movement.connect(_set_movement)
 

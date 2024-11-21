@@ -1,8 +1,10 @@
 extends Node
 
-@onready var surface: Node = $surface
+@onready var floors: Node = $floors
 @onready var push: Node = $push
 
-func set_control(environment: Node, hero: CharacterBody2D) -> void:
-	surface.set_control(environment.surface, hero)
-	push.set_control(environment.interaction.push, hero.logic.stats)
+func controls(hero: CharacterBody2D, environment: Node) -> void:
+	var platforming: Node = hero.logic.detectors.platforming
+
+	floors.controls(hero, environment.floors, platforming.floors)
+	push.controls(hero, environment.interaction.push)
