@@ -12,7 +12,7 @@ signal move(next: Vector2)
 const feedback: int = 2
 
 func _ready() -> void:
-	logic.relations.set_control_entity(self)
+	logic.relations.controls(self)
 
 func _physics_process(_delta: float) -> void:
 	#print("BUT V : ", velocity)

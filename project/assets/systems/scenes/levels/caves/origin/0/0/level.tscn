@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://bfko3o18pnpav"]
+[gd_scene load_steps=13 format=4 uid="uid://bfko3o18pnpav"]
 
 [ext_resource type="PackedScene" uid="uid://chabua7f4f7aj" path="res://assets/systems/scenes/levels/tilemap/walls/invisible.tscn" id="1_jvkr3"]
 [ext_resource type="PackedScene" uid="uid://d0i3jl2uefg53" path="res://assets/systems/scenes/levels/tilemap/walls/visible.tscn" id="2_p8in1"]
@@ -10,6 +10,12 @@
 [ext_resource type="PackedScene" uid="uid://boai8pinslcme" path="res://assets/systems/scenes/common/environment/level/hint.tscn" id="8_2fry7"]
 [ext_resource type="PackedScene" uid="uid://b83b7oo2fmh5h" path="res://assets/systems/scenes/actors/characters/group/group.tscn" id="8_l5akn"]
 [ext_resource type="PackedScene" uid="uid://dbbt75750fc4" path="res://assets/systems/scenes/common/input/hints/cards.tscn" id="9_qn5y3"]
+
+[sub_resource type="Gradient" id="Gradient_5nyl8"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_wxlbm"]
+gradient = SubResource("Gradient_5nyl8")
+width = 1
 
 [node name="map" type="Node2D"]
 y_sort_enabled = true
@@ -73,3 +79,7 @@ position = Vector2(160, 1696)
 position = Vector2(806, 2728)
 
 [node name="cards" parent="." instance=ExtResource("9_qn5y3")]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(29.298, 1611.08)
+texture = SubResource("GradientTexture1D_wxlbm")

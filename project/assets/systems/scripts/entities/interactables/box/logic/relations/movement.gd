@@ -1,10 +1,10 @@
 extends Node
 
-@onready var surface: Node = $surface
+@onready var floors: Node = $floors
 @onready var seat: Node = $seat
 @onready var push: Node = $push
 
-func set_control(box: CharacterBody2D, movement: Node) -> void:
-	surface.set_control(box, movement.surface)
-	seat.set_control(box, movement.seat)
-	push.set_control(box, movement.push)
+func controls(box: CharacterBody2D, movement: Node) -> void:
+	floors.controls(box, movement.floors)
+	seat.controls(box, movement.seat)
+	push.controls(box, movement.push)

@@ -1,6 +1,6 @@
 extends Node
 
-const GAP: int = 24
+const GAP: int = 32
 
 func _between(ledge: float, subject: float) -> bool:
 	#print("LEDGE: ", ledge, " - SUBJECT: ", subject)

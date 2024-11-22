@@ -24,5 +24,6 @@ func around(overview: Node, feet: Node) -> bool:
 	while i > 0 and not jump:
 		i = i - 1
 		_current = platforms[i]
+		print("CURRENT NAME: ", _current.name)
 		jump = overview.reach(_current, feet)
 	return jump

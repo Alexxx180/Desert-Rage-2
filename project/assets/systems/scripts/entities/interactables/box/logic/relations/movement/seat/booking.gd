@@ -1,6 +1,6 @@
 extends Node
 
-func set_control(seat: Node) -> void:
+func controls(seat: Node) -> void:
 	seat.place.standing.connect(_on_stand)
 	seat.place.leaving.connect(_on_leave)
 

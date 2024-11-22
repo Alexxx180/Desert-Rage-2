@@ -1,25 +1,21 @@
 extends Node
 
-const NEUTRAL: int = 0
-const PERIOD: float = 0.025
-const FREEZE: float = 0.075
+const FRAME: float = 0.025
+const FREEZE: int = 3
 
-var time: float = PERIOD
-var gap: TileMapLayer
-var upland: TileMapLayer
-
-@onready var hero: Node = $direction
 @onready var floors: Node = $floors
 @onready var ledges: Node = $ledges
 
+var gap: TileMapLayer
+var upland: TileMapLayer
+var time: float = 0
+
 func _platforming() -> void:
-	if hero.direction != Vector2i.ZERO:
-		time += FREEZE
-		floors.perform(gap)
-		ledges.perform(upland)
+	time = 0
+	if (floors.perform(gap) or ledges.perform(upland)):
+		time -= FRAME * FREEZE
 
 func _physics_process(delta: float) -> void:
-	time -= delta
-	if time <= NEUTRAL:
-		time = PERIOD
+	time += delta
+	if time >= FRAME:
 		_platforming()
