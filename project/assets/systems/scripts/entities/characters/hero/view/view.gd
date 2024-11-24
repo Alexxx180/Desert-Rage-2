@@ -10,7 +10,8 @@ signal sync_view(hero: Node2D)
 func _ready() -> void: visible = is_hero
 
 func sync_image(hero: Node2D) -> void:
-	profile.texture = hero.profile.texture
+	animation.sync(hero.animation)
+	#profile.texture = hero.profile.texture
 
 func update_image() -> void:
 	sync_view.emit(self)
