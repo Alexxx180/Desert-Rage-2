@@ -1,6 +1,7 @@
 extends Node
 
 signal impulse(power: int)
+signal new_mach(mach: int)
 signal run(speed: int)
 
 @onready var size: Node = $size
@@ -12,4 +13,5 @@ func apply_impulse(mach: int) -> void:
 
 func accelerate(mach: int) -> void:
 	apply_impulse(mach)
+	new_mach.emit(mach)
 	run.emit(mach * speed.value)

@@ -4,7 +4,8 @@ signal sync_view(hero: Node2D)
 
 @export var is_hero: bool = false
 
-@onready var profile: Sprite2D = $profile
+@onready var profile: AnimatedSprite2D = $profile
+@onready var animation: AnimationTree = $animation
 
 func _ready() -> void: visible = is_hero
 
@@ -13,7 +14,7 @@ func sync_image(hero: Node2D) -> void:
 
 func update_image() -> void:
 	sync_view.emit(self)
-
+ 
 func enable_sync(_seat: Node, hero: CharacterBody2D) -> void:
 	visible = true
 	hero.view.sync_view.connect(sync_image)
