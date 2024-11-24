@@ -5,9 +5,11 @@ const SPEED: int = 4
 var scale: float = SPEED
 var pose: String = "idle"
 
-var _direction: Vector2 = Vector2.ZERO
+var _direction: Vector2 = Vector2(0, -1)
 var direction: Vector2:
 	get: return _direction
+
+func _ready() -> void: _direct()
 
 func sync(tree: AnimationTree) -> void:
 	_direction = tree.direction

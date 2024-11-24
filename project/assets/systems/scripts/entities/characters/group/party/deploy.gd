@@ -17,7 +17,9 @@ func _activate(hero: CharacterBody2D, condition: bool) -> void:
 
 func _anchor(next: CharacterBody2D) -> void:
 	_anchored = !_anchored
+	#print("INHERIT: ", _anchored, " - NAME: ", next.name)
 	_activate(next, !_anchored)
+	#next.view.animation.freeze = _anchored
 
 func _sync(hero: CharacterBody2D, next: CharacterBody2D) -> void:
 	next.position = hero.position

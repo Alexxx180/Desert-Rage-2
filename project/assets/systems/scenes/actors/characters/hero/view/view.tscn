@@ -1,4 +1,4 @@
-[gd_scene load_steps=305 format=3 uid="uid://csra3penxclqe"]
+[gd_scene load_steps=313 format=3 uid="uid://csra3penxclqe"]
 
 [ext_resource type="Script" path="res://assets/systems/scripts/entities/characters/hero/view/view.gd" id="1_535xf"]
 [ext_resource type="Texture2D" uid="uid://tgrro0265lbi" path="res://assets/resources/media/images/actors/player/ray/backward/0001.png" id="3_opmgq"]
@@ -1214,11 +1214,35 @@ animation = &"hero_motion/move_left"
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_q0lhk"]
 animation = &"hero_motion/move_right"
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_shxw4"]
+animation = &"hero_motion/move_right"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_cqyu8"]
+animation = &"hero_motion/move_right"
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_c78pq"]
 animation = &"hero_motion/move_forward"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_w7s1v"]
 animation = &"hero_motion/move_backward"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_u35wp"]
+animation = &"hero_motion/move_forward"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_62ro6"]
+animation = &"hero_motion/move_forward"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7mx2a"]
+animation = &"hero_motion/move_backward"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_e8mi8"]
+animation = &"hero_motion/move_backward"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_uj4vx"]
+animation = &"hero_motion/move_left"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_eocnl"]
+animation = &"hero_motion/move_left"
 
 [sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_3dwxe"]
 blend_point_0/node = SubResource("AnimationNodeAnimation_46wrm")
@@ -1229,12 +1253,28 @@ blend_point_2/node = SubResource("AnimationNodeAnimation_c78pq")
 blend_point_2/pos = Vector2(0, 1)
 blend_point_3/node = SubResource("AnimationNodeAnimation_w7s1v")
 blend_point_3/pos = Vector2(0, -1)
+blend_point_4/node = SubResource("AnimationNodeAnimation_u35wp")
+blend_point_4/pos = Vector2(-0.3, 0.7)
+blend_point_5/node = SubResource("AnimationNodeAnimation_62ro6")
+blend_point_5/pos = Vector2(0.3, 0.7)
+blend_point_6/node = SubResource("AnimationNodeAnimation_7mx2a")
+blend_point_6/pos = Vector2(0.3, -0.7)
+blend_point_7/node = SubResource("AnimationNodeAnimation_e8mi8")
+blend_point_7/pos = Vector2(-0.3, -0.7)
+blend_point_8/node = SubResource("AnimationNodeAnimation_uj4vx")
+blend_point_8/pos = Vector2(-0.6, 0.4)
+blend_point_9/node = SubResource("AnimationNodeAnimation_eocnl")
+blend_point_9/pos = Vector2(-0.6, -0.4)
+blend_point_10/node = SubResource("AnimationNodeAnimation_shxw4")
+blend_point_10/pos = Vector2(0.6, 0.4)
+blend_point_11/node = SubResource("AnimationNodeAnimation_cqyu8")
+blend_point_11/pos = Vector2(0.6, -0.4)
 blend_mode = 1
 
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_2aahy"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_4y3y8"]
-graph_offset = Vector2(-662.29, 41.9894)
+graph_offset = Vector2(-997, 107)
 nodes/active/node = SubResource("AnimationNodeTransition_0blof")
 nodes/active/position = Vector2(-400, -20)
 nodes/character/node = SubResource("AnimationNodeTransition_oe600")
@@ -1263,7 +1303,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [&"right"]
+"values": [&"backward"]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
