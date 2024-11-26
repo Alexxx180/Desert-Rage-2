@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=4 uid="uid://bfko3o18pnpav"]
+[gd_scene load_steps=18 format=4 uid="uid://bfko3o18pnpav"]
 
 [ext_resource type="PackedScene" uid="uid://chabua7f4f7aj" path="res://assets/systems/scenes/levels/tilemap/walls/invisible.tscn" id="1_itof0"]
 [ext_resource type="PackedScene" uid="uid://d0i3jl2uefg53" path="res://assets/systems/scenes/levels/tilemap/walls/visible.tscn" id="2_r7yuq"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://c5rp72cd85owa" path="res://assets/systems/scenes/levels/tilemap/transitions.tscn" id="7_0rlpg"]
 [ext_resource type="PackedScene" uid="uid://b83b7oo2fmh5h" path="res://assets/systems/scenes/actors/characters/group/group.tscn" id="7_hciwg"]
 [ext_resource type="PackedScene" uid="uid://dryh46gyikikp" path="res://assets/systems/scenes/common/interactables/text.tscn" id="9_okwvb"]
+[ext_resource type="PackedScene" uid="uid://dbbt75750fc4" path="res://assets/systems/scenes/common/input/hints/cards.tscn" id="10_rqs52"]
 
 [sub_resource type="Gradient" id="Gradient_evgj6"]
 
@@ -60,7 +61,7 @@ _data = {
 }
 
 [sub_resource type="Animation" id="Animation_tyufl"]
-step = 0.05
+step = 0.25
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -68,7 +69,7 @@ tracks/0/path = NodePath("ledge-3:color")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
+"times": PackedFloat32Array(0.5, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
@@ -92,7 +93,7 @@ tracks/2/path = NodePath("ledge-1:color")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0.5, 1),
+"times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
@@ -212,9 +213,12 @@ offset_bottom = 7038.0
 secret = "Rage"
 opened = "❤️‍🔥 Rage (Рейдж) c японского \"レイジ\" (Рейджи)"
 
-[node name="hud" type="CanvasLayer" parent="."]
+[node name="cards" parent="." instance=ExtResource("10_rqs52")]
+no_progress = true
 
-[node name="ledge-1" type="ColorRect" parent="hud"]
+[node name="transition" type="CanvasLayer" parent="."]
+
+[node name="ledge-1" type="ColorRect" parent="transition"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -223,19 +227,17 @@ grow_vertical = 2
 color = Color(0, 0, 0, 1)
 metadata/_edit_use_anchors_ = true
 
-[node name="ledge-2" type="ColorRect" parent="hud"]
+[node name="ledge-2" type="ColorRect" parent="transition"]
 anchors_preset = -1
-anchor_top = 0.338
+anchor_top = 0.35
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 2.0
-offset_top = -2.02402
+offset_top = 0.199982
 grow_horizontal = 2
-grow_vertical = 2
+grow_vertical = 0
 color = Color(0, 0, 0, 1)
-metadata/_edit_use_anchors_ = true
 
-[node name="ledge-3" type="ColorRect" parent="hud"]
+[node name="ledge-3" type="ColorRect" parent="transition"]
 anchors_preset = -1
 anchor_top = 0.696
 anchor_right = 1.0
@@ -247,7 +249,7 @@ grow_vertical = 2
 color = Color(0, 0, 0, 1)
 metadata/_edit_use_anchors_ = true
 
-[node name="transition" type="AnimationPlayer" parent="hud"]
+[node name="transition" type="AnimationPlayer" parent="transition"]
 libraries = {
 "": SubResource("AnimationLibrary_tirwj"),
 "level_transitions": SubResource("AnimationLibrary_6mmiv")
