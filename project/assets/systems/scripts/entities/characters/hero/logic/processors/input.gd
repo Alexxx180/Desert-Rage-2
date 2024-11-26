@@ -1,5 +1,6 @@
 extends Node
 
+signal action()
 signal directing(direction: Vector2i)
 signal moving(velocity: Vector2)
 
@@ -12,5 +13,7 @@ func get_input_vector() -> Vector2:
 func _input(_event: InputEvent) -> void:
 	var motion: Vector2 = get_input_vector()
 	# print("motion: ", motion)
+	if Input.is_action_just_pressed("action"):
+		action.emit()
 	directing.emit(Vector2i(round(motion.x), round(motion.y)))
 	moving.emit(motion)
