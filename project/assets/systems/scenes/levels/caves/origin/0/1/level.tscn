@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=4 uid="uid://dw2ojt7pcrfxa"]
+[gd_scene load_steps=10 format=4 uid="uid://dw2ojt7pcrfxa"]
 
 [ext_resource type="PackedScene" uid="uid://chabua7f4f7aj" path="res://assets/systems/scenes/levels/tilemap/walls/invisible.tscn" id="1_1nt80"]
 [ext_resource type="PackedScene" uid="uid://d0i3jl2uefg53" path="res://assets/systems/scenes/levels/tilemap/walls/visible.tscn" id="2_1ahu1"]
@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://tyaiesscqsxa" path="res://assets/systems/scenes/levels/tilemap/vertical/floors.tscn" id="5_x82ui"]
 [ext_resource type="PackedScene" uid="uid://cwtam67atkh12" path="res://assets/systems/scenes/levels/tilemap/vertical/interactables.tscn" id="6_cus85"]
 [ext_resource type="PackedScene" uid="uid://b83b7oo2fmh5h" path="res://assets/systems/scenes/actors/characters/group/group.tscn" id="7_emvn1"]
+[ext_resource type="PackedScene" uid="uid://ce2y76nymo6o4" path="res://assets/systems/scenes/levels/tilemap/logic.tscn" id="7_pu8b7"]
+[ext_resource type="PackedScene" uid="uid://ccyf3vr6amks7" path="res://assets/systems/scenes/actors/interactables/lock/lock.tscn" id="9_xkpsg"]
 
 [node name="map" type="Node2D"]
 y_sort_enabled = true
@@ -30,10 +32,12 @@ y_sort_enabled = true
 y_sort_enabled = true
 tile_map_data = PackedByteArray("AAAKAAcAAQAAAAAAAQAEAAcAAQAAAAAAAgAIAAcAAwAAAAAAAQA=")
 
-[node name="logic" type="TileMapLayer" parent="."]
+[node name="logic" parent="." instance=ExtResource("7_pu8b7")]
+y_sort_enabled = true
+tile_map_data = PackedByteArray("AAAEAAcAAQAAAAAAAAAKAAcAAQABAAAAAAA=")
 
 [node name="group" parent="." instance=ExtResource("7_emvn1")]
 position = Vector2(477, 403)
 
-[connection signal="body_entered" from="interactables/button" to="interactables/button" method="_on_press"]
-[connection signal="body_exited" from="interactables/button" to="interactables/button" method="_on_release"]
+[node name="lock" parent="." instance=ExtResource("9_xkpsg")]
+position = Vector2(610, 352)
