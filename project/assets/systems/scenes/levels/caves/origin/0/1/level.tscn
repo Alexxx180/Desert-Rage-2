@@ -34,6 +34,7 @@ tile_map_data = PackedByteArray("AAAKAAcAAQAAAAAAAQAEAAcAAQAAAAAAAgAIAAcAAwAAAAA
 
 [node name="logic" parent="." instance=ExtResource("7_pu8b7")]
 y_sort_enabled = true
+position = Vector2(0, 1)
 tile_map_data = PackedByteArray("AAAEAAcAAQAAAAAAAAAKAAcAAQABAAAAAAA=")
 
 [node name="group" parent="." instance=ExtResource("7_emvn1")]
@@ -41,3 +42,6 @@ position = Vector2(477, 403)
 
 [node name="lock" parent="." instance=ExtResource("9_xkpsg")]
 position = Vector2(610, 352)
+
+[connection signal="body_entered" from="interactables/button" to="interactables/button" method="_on_press"]
+[connection signal="body_exited" from="interactables/button" to="interactables/button" method="_on_release"]

@@ -9,9 +9,13 @@ var count: int = 0
 @onready var animation: AnimationPlayer = $animation
 
 func _ready() -> void:
-	var interactables: Node = get_node("../../logic/interactables")
+	var logic: TileMapLayer = get_node("../../logic")
+	var interactables: Node = logic.get_node("interactables")
 	pressed.connect(interactables.activate)
-	release.connect(interactables.activate)
+	release.connect(interactables.activate) # logic.local_to_map(position))
+	print("USED: ", logic.get_used_cells())
+	print("LOCAL: ", logic.local_to_map(position))
+	print("LOGIC POSITION :", logic.get_cell_atlas_coords(logic.local_to_map(position)))
 
 func _on_press(_entity: CharacterBody2D) -> void:
 	count += 1
