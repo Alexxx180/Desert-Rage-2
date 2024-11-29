@@ -1,6 +1,6 @@
 extends Area2D
 
-signal contact(pos: Vector2, dir: Vector2)
+signal contact(pos: Vector2)#, dir: Vector2)
 
 @onready var ray: RayCast2D = $ray
 @onready var target: Vector2 = ray.target_position

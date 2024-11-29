@@ -1,6 +1,7 @@
 extends Node
 
 signal forwarding(velocity: Vector2)
+signal directing(direction: Vector2)
 
 @onready var forward: ActionTimer = $forward
 @onready var velocity: Node = $velocity
@@ -20,6 +21,7 @@ func apply_velocity(next: Vector2) -> void:
 	# print("APPLY VELOCITY: ", velocity.position, "- NO FRICTION: ", next)
 
 	forwarding.emit(next)
+	directing.emit(next.normalized())
 	"""
 	if next == Vector2.ZERO:
 		forward.stop()
