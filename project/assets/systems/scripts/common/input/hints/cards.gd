@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-@onready var hints: VBoxContainer = $hud/margin/hints
+@onready var hints: VBoxContainer = $hud/hints
 
 @export var no_progress: bool = false
 

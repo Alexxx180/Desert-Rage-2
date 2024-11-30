@@ -12,14 +12,10 @@ enum { BEHIND = 30, ONSCENE = 255 }
 func _ready() -> void: visible = is_hero
 
 func _go_behind_scene(_invisible: TileMapLayer) -> void:
-	print("BEHIND")
 	modulate.a8 = BEHIND
-	#modulate.a = BEHIND
 
 func _go_on_scene(_invisible: TileMapLayer) -> void:
-	print("ON SCENE")
 	modulate.a8 = ONSCENE
-	#modulate.a = ONSCENE
 
 func sync_image(hero: Node2D) -> void: animation.sync(hero.animation)
 

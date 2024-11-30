@@ -1,0 +1,102 @@
+[gd_scene load_steps=5 format=3 uid="uid://hs7pndutk6on"]
+
+[ext_resource type="Script" path="res://assets/systems/scripts/common/input/hints/buttons/description/hotkeys.gd" id="1_auxjh"]
+[ext_resource type="Script" path="res://assets/systems/scripts/common/input/hints/buttons/description/modes.gd" id="2_8ou75"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_orqbs"]
+bg_color = Color(0.0253638, 0.0253638, 0.0253638, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.00949234, 0.00498996, 0, 1)
+
+[sub_resource type="Theme" id="Theme_eblqu"]
+MarginContainer/constants/margin_bottom = 3
+MarginContainer/constants/margin_left = 3
+MarginContainer/constants/margin_right = 3
+MarginContainer/constants/margin_top = 3
+Panel/styles/panel = SubResource("StyleBoxFlat_orqbs")
+
+[node name="description" type="HBoxContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="hotkeys" type="HBoxContainer" parent="."]
+layout_mode = 2
+mouse_filter = 2
+script = ExtResource("1_auxjh")
+
+[node name="keyboard" type="MarginContainer" parent="hotkeys"]
+visible = false
+custom_minimum_size = Vector2(50, 30)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme = SubResource("Theme_eblqu")
+
+[node name="back" type="Panel" parent="hotkeys/keyboard"]
+custom_minimum_size = Vector2(40, 30)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="key" type="Label" parent="hotkeys/keyboard/back"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "F11"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="gamepad" type="MarginContainer" parent="hotkeys"]
+visible = false
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme = SubResource("Theme_eblqu")
+
+[node name="back" type="Panel" parent="hotkeys/gamepad"]
+custom_minimum_size = Vector2(40, 30)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="key" type="Label" parent="hotkeys/gamepad/back"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "◀️"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="modes" type="HBoxContainer" parent="."]
+layout_mode = 2
+script = ExtResource("2_8ou75")
+
+[node name="window" type="Label" parent="modes"]
+layout_mode = 2
+text = "Окно 🔲"
+vertical_alignment = 1
+
+[node name="fullscreen" type="Label" parent="modes"]
+layout_mode = 2
+text = "Экран 🔳"
+vertical_alignment = 1
