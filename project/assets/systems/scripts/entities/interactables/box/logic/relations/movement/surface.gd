@@ -17,4 +17,3 @@ func controls(box: CharacterBody2D, floors: Node) -> void:
 	detector.body_entered.connect(floors.at_new_floor)
 	detector.body_exited.connect(floors.at_old_floor)
 	#floors.tracker.contact_zone = detector
-
