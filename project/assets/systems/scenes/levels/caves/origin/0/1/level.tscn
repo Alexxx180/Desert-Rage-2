@@ -33,10 +33,13 @@ tile_map_data = PackedByteArray("AAAEAAcAAQAAAAAAAAAKAAcAAQABAAAAAAAJAAUAAQAAAAA
 y_sort_enabled = true
 tile_map_data = PackedByteArray("AAAIAAcAAwAAAAAAAQA=")
 
-[node name="logic" parent="." instance=ExtResource("7_pu8b7")]
+[node name="activators" parent="." instance=ExtResource("7_pu8b7")]
 tile_map_data = PackedByteArray("AAAEAAcAAAAAAAAAAgAKAAcAAAAAAAAAAQAJAAUAAAAAAAAAAwAFAAUAAAAAAAAAAwA=")
 
-[node name="activators" type="TileMapLayer" parent="."]
+[node name="logic" type="TileMapLayer" parent="."]
 
 [node name="group" parent="." instance=ExtResource("7_emvn1")]
 position = Vector2(477, 403)
+
+[connection signal="body_entered" from="activators/button" to="activators/button" method="_on_press"]
+[connection signal="body_exited" from="activators/button" to="activators/button" method="_on_release"]
