@@ -3,16 +3,15 @@ extends Node
 const FRAME: float = 0.025
 const FREEZE: int = 3
 
-@onready var floors: Node = $floors
-@onready var ledges: Node = $ledges
+@onready var gap: Node = $gap
+@onready var upland: Node = $upland
 
-var gap: TileMapLayer
-var upland: TileMapLayer
+var ledges: TileMapLayer
 var time: float = 0
 
 func _platforming() -> void:
 	time = 0
-	if (floors.perform(gap) or ledges.perform(upland)):
+	if (gap.jump_on(ledges) or upland.jump_on(ledges)):
 		time -= FRAME * FREEZE
 
 func _physics_process(delta: float) -> void:
