@@ -10,6 +10,6 @@ func _ready() -> void:
 func _input(_event: InputEvent):
 	hotkeys.set_control_hint()
 
-func _on_help_show(open: bool) -> void:
-	state.set_state(open)
+func _on_help_show(closed: bool) -> void:
+	state.set_state(!closed)
 	hotkeys.set_control_hint()
