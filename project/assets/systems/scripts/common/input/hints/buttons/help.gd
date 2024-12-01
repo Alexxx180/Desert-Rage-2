@@ -1,7 +1,7 @@
 extends Button
 
-@onready var hotkeys: HBoxContainer = $description/hotkeys
-@onready var state: HBoxContainer = $description/state
+@onready var hotkeys: HBoxContainer = $description/stack/hotkeys
+@onready var state: HBoxContainer = $description/stack/state
 
 func _ready() -> void:
 	state.set_state(false)

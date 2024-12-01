@@ -1,7 +1,7 @@
 extends Button
 
-@onready var hotkeys: HBoxContainer = $description/hotkeys
-@onready var modes: HBoxContainer = $description/modes
+@onready var hotkeys: HBoxContainer = $margin/description/hotkeys
+@onready var modes: HBoxContainer = $margin/description/modes
 
 func is_full() -> bool:
 	var mode = DisplayServer.window_get_mode()
@@ -14,7 +14,7 @@ func _set_mode(fullscreen: bool) -> void:
 	DisplayServer.window_set_mode(mode)
 
 func _toggle_fullscreen(fullscreen: bool) -> void:
-	modes.set_window_mode(fullscreen)
+	modes.set_window_mode(!fullscreen)
 	hotkeys.set_control_hint()
 	_set_mode(fullscreen)
 

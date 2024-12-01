@@ -1,9 +1,8 @@
-[gd_scene load_steps=9 format=4 uid="uid://dw2ojt7pcrfxa"]
+[gd_scene load_steps=8 format=4 uid="uid://dw2ojt7pcrfxa"]
 
 [ext_resource type="PackedScene" uid="uid://chabua7f4f7aj" path="res://assets/systems/scenes/levels/tilemap/walls/invisible.tscn" id="1_1nt80"]
 [ext_resource type="PackedScene" uid="uid://d0i3jl2uefg53" path="res://assets/systems/scenes/levels/tilemap/walls/visible.tscn" id="2_1ahu1"]
-[ext_resource type="PackedScene" uid="uid://cutobjquw3tn1" path="res://assets/systems/scenes/levels/tilemap/ledges/gap.tscn" id="3_qmt0a"]
-[ext_resource type="PackedScene" uid="uid://cxatl662gp6ue" path="res://assets/systems/scenes/levels/tilemap/ledges/upland.tscn" id="4_5er0u"]
+[ext_resource type="PackedScene" uid="uid://rlwfnl6rvpkj" path="res://assets/systems/scenes/levels/tilemap/ledges.tscn" id="4_np12d"]
 [ext_resource type="PackedScene" uid="uid://tyaiesscqsxa" path="res://assets/systems/scenes/levels/tilemap/vertical/floors.tscn" id="5_x82ui"]
 [ext_resource type="PackedScene" uid="uid://cwtam67atkh12" path="res://assets/systems/scenes/levels/tilemap/vertical/interactables.tscn" id="6_cus85"]
 [ext_resource type="PackedScene" uid="uid://b83b7oo2fmh5h" path="res://assets/systems/scenes/actors/characters/group/group.tscn" id="7_emvn1"]
@@ -18,16 +17,11 @@ y_sort_enabled = true
 [node name="visible" parent="." instance=ExtResource("2_1ahu1")]
 tile_map_data = PackedByteArray("AAADAAIAAAADAAAAAAAEAAIAAAADAAAAAAAEAAMAAAABAAEAAAADAAMAAAABAAEAAAACAAMAAAAAAAEAAAACAAIAAAAAAAEAAAACAAEAAAAAAAEAAAADAAEAAAADAAAAAAAEAAEAAAADAAAAAAACAAAAAAAAAAAAAAADAAAAAAABAAAAAAAEAAAAAAABAAAAAAAFAAEAAAADAAAAAAAFAAIAAAADAAAAAAAFAAAAAAABAAAAAAAGAAIAAAADAAAAAAAGAAMAAAABAAEAAAAFAAMAAAABAAEAAAAGAAEAAAADAAAAAAAHAAIAAAADAAAAAAAHAAMAAAABAAEAAAAHAAEAAAADAAAAAAAIAAMAAAABAAEAAAAIAAQAAAABAAEAAAAHAAQAAAABAAEAAAAGAAQAAAABAAEAAAAIAAIAAAADAAAAAAAIAAUAAAABAAEAAAAHAAUAAAABAAEAAAAGAAUAAAABAAEAAAAIAAYAAAABAAEAAAAHAAYAAAABAAEAAAAGAAYAAAABAAEAAAAFAAYAAAABAAEAAAAFAAUAAAABAAEAAAAFAAQAAAABAAEAAAAEAAUAAAABAAEAAAAEAAQAAAABAAEAAAALAAkAAAABAAEAAAALAAgAAAABAAEAAAALAAcAAAABAAEAAAALAAYAAAABAAEAAAALAAUAAAABAAEAAAALAAQAAAABAAEAAAALAAMAAAABAAEAAAALAAIAAAADAAAAAAALAAEAAAADAAAAAAAKAAkAAAABAAEAAAAKAAgAAAABAAEAAAAKAAcAAAABAAEAAAAKAAYAAAABAAEAAAAKAAUAAAABAAEAAAAKAAQAAAABAAEAAAAKAAMAAAABAAEAAAAKAAIAAAADAAAAAAAKAAEAAAADAAAAAAAJAAkAAAABAAEAAAAJAAgAAAABAAEAAAAJAAcAAAABAAEAAAAJAAYAAAABAAEAAAAJAAUAAAABAAEAAAAJAAQAAAABAAEAAAAJAAMAAAABAAEAAAAJAAIAAAADAAAAAAAJAAEAAAADAAAAAAAIAAkAAAABAAEAAAAIAAgAAAABAAEAAAAIAAcAAAABAAEAAAAIAAEAAAADAAAAAAAHAAkAAAABAAEAAAAHAAgAAAABAAEAAAAHAAcAAAABAAEAAAAGAAkAAAABAAEAAAAGAAgAAAABAAEAAAAGAAcAAAABAAEAAAAFAAkAAAABAAEAAAAFAAgAAAABAAEAAAAFAAcAAAABAAEAAAAEAAkAAAABAAEAAAAEAAgAAAABAAEAAAAEAAcAAAABAAEAAAAEAAYAAAABAAEAAAADAAkAAAABAAEAAAADAAgAAAABAAEAAAADAAcAAAABAAEAAAADAAYAAAABAAEAAAADAAUAAAABAAEAAAADAAQAAAABAAEAAAACAAQAAAAAAAEAAAACAAUAAAAAAAEAAAACAAYAAAAAAAEAAAACAAcAAAAAAAEAAAACAAgAAAAAAAEAAAACAAkAAAAAAAEAAAAEAAoAAAABAAIAAAADAAoAAAABAAIAAAACAAoAAAAAAAIAAAAFAAoAAAABAAIAAAAGAAAAAAABAAAAAAAGAAoAAAABAAIAAAAHAAAAAAABAAAAAAAHAAoAAAABAAIAAAAIAAAAAAABAAAAAAAIAAoAAAABAAIAAAAJAAAAAAABAAAAAAAJAAoAAAABAAIAAAAKAAAAAAABAAAAAAAKAAoAAAABAAIAAAALAAAAAAABAAAAAAALAAoAAAABAAIAAAAMAAEAAAACAAEAAAAMAAIAAAACAAEAAAAMAAAAAAACAAAAAAAMAAMAAAACAAEAAAAMAAQAAAACAAEAAAAMAAUAAAACAAEAAAAMAAYAAAACAAEAAAAMAAcAAAACAAEAAAAMAAgAAAACAAEAAAAMAAkAAAACAAEAAAAMAAoAAAACAAIAAAA=")
 
-[node name="gap" parent="." instance=ExtResource("3_qmt0a")]
-y_sort_enabled = true
-
-[node name="upland" parent="." instance=ExtResource("4_5er0u")]
-y_sort_enabled = true
-
 [node name="floors" parent="." instance=ExtResource("5_x82ui")]
-visible = false
 y_sort_enabled = true
 tile_map_data = PackedByteArray("AAAEAAcAAQAAAAAAAAAKAAcAAQABAAAAAAAJAAUAAQAAAAAAAAAFAAUAAQABAAAAAAA=")
+
+[node name="ledges" parent="." instance=ExtResource("4_np12d")]
 
 [node name="interactables" parent="." instance=ExtResource("6_cus85")]
 y_sort_enabled = true
@@ -40,6 +34,3 @@ tile_map_data = PackedByteArray("AAAEAAcAAAAAAAAAAgAKAAcAAAAAAAAAAQAJAAUAAAAAAAA
 
 [node name="group" parent="." instance=ExtResource("7_emvn1")]
 position = Vector2(477, 403)
-
-[connection signal="body_entered" from="activators/button" to="activators/button" method="_on_press"]
-[connection signal="body_exited" from="activators/button" to="activators/button" method="_on_release"]
