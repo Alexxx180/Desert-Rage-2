@@ -2,6 +2,8 @@ extends Node2D
 
 signal sync_view(hero: Node2D)
 
+enum { BEHIND = 30, ONSCENE = 255 }
+
 @export var is_hero: bool = false
 
 @onready var profile: AnimatedSprite2D = $profile
@@ -9,22 +11,22 @@ signal sync_view(hero: Node2D)
 
 func _ready() -> void: visible = is_hero
 
-func sync_image(hero: Node2D) -> void:
-	animation.sync(hero.animation)
-	#profile.texture = hero.profile.texture
+func _go_behind_scene(_invisible: TileMapLayer) -> void:
+	modulate.a8 = BEHIND
 
-func update_image() -> void:
-	sync_view.emit(self)
+func _go_on_scene(_invisible: TileMapLayer) -> void:
+	modulate.a8 = ONSCENE
+
+func sync_image(hero: Node2D) -> void: animation.sync(hero.animation)
+
+func update_image() -> void: sync_view.emit(self)
  
 func enable_sync(_seat: Node, hero: CharacterBody2D) -> void:
 	visible = true
 	hero.view.sync_view.connect(sync_image)
 	hero.view.update_image()
-
-	#TODO: Comment or delete those lines:
-	# actual only for builds without character separation
+	#TODO: Comment: actual only for builds without character separation
 	profile.modulate = hero.modulate
-
 
 func disable_sync(_seat: Node, hero: CharacterBody2D) -> void:
 	visible = false

@@ -1,12 +1,23 @@
-[gd_scene load_steps=14 format=3 uid="uid://dbbt75750fc4"]
+[gd_scene load_steps=20 format=3 uid="uid://dbbt75750fc4"]
 
 [ext_resource type="Script" path="res://assets/systems/scripts/common/input/hints/cards.gd" id="1_7o4uc"]
 [ext_resource type="Theme" uid="uid://ctsb6uh5t0n1l" path="res://assets/resources/runtime/themes/default.tres" id="1_xo3m3"]
 [ext_resource type="Script" path="res://assets/systems/scripts/fullscreen.gd" id="2_tauni"]
 [ext_resource type="Script" path="res://assets/systems/scripts/common/input/hints/hints.gd" id="3_25j8c"]
 [ext_resource type="PackedScene" uid="uid://mdjk60h84tvs" path="res://assets/systems/scenes/common/input/hints/category/motion.tscn" id="3_fr63h"]
-[ext_resource type="Script" path="res://assets/systems/scripts/common/input/hints/buttons/hotkey.gd" id="4_rdjqd"]
+[ext_resource type="PackedScene" uid="uid://hs7pndutk6on" path="res://assets/systems/scenes/common/input/hints/fullscreen/description.tscn" id="4_jl5c8"]
 [ext_resource type="Script" path="res://assets/systems/scripts/common/input/hints/buttons/help.gd" id="7_ns8vc"]
+[ext_resource type="Theme" uid="uid://bdbjsuhahacjq" path="res://assets/resources/runtime/themes/button/button.tres" id="8_icn8b"]
+[ext_resource type="Script" path="res://assets/systems/scripts/common/input/hints/buttons/description/hotkeys.gd" id="9_lud7w"]
+[ext_resource type="Theme" uid="uid://d1pfbadffcr6h" path="res://assets/resources/runtime/themes/hotkeys/keyboard.tres" id="9_oklq7"]
+[ext_resource type="Theme" uid="uid://x1lquikc78v2" path="res://assets/resources/runtime/themes/hotkeys/gamepad.tres" id="10_b2yac"]
+[ext_resource type="Script" path="res://assets/systems/scripts/common/input/hints/buttons/help/state.gd" id="10_g812m"]
+
+[sub_resource type="Theme" id="Theme_2duya"]
+MarginContainer/constants/margin_bottom = 35
+MarginContainer/constants/margin_left = 35
+MarginContainer/constants/margin_right = 35
+MarginContainer/constants/margin_top = 35
 
 [sub_resource type="InputEventKey" id="InputEventKey_f4jfc"]
 device = -1
@@ -33,42 +44,41 @@ events = [SubResource("InputEventKey_k1l32"), SubResource("InputEventJoypadButto
 [node name="cards" type="CanvasLayer"]
 script = ExtResource("1_7o4uc")
 
-[node name="hud" type="Control" parent="."]
-layout_mode = 3
+[node name="hud" type="MarginContainer" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_xo3m3")
+mouse_filter = 0
+theme = SubResource("Theme_2duya")
 
-[node name="margin" type="MarginContainer" parent="hud"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="fullscreen" type="Button" parent="hud/margin"]
+[node name="fullscreen" type="Button" parent="hud"]
+custom_minimum_size = Vector2(185, 50)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
+tooltip_text = "Режим отображения окна игры"
 toggle_mode = true
-button_pressed = true
 shortcut = SubResource("Shortcut_b4j3q")
-text = " %s %s"
 script = ExtResource("2_tauni")
 
-[node name="hotkey" type="Control" parent="hud/margin/fullscreen"]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("4_rdjqd")
-keyboard = "[F11]"
-gamepad = "◀️"
+[node name="margin" parent="hud/fullscreen" instance=ExtResource("4_jl5c8")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -107.0
+offset_top = -20.0
+offset_right = 107.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 
-[node name="hints" type="VBoxContainer" parent="hud/margin"]
+[node name="hints" type="VBoxContainer" parent="hud"]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
@@ -76,28 +86,105 @@ theme = ExtResource("1_xo3m3")
 alignment = 2
 script = ExtResource("3_25j8c")
 
-[node name="motion" parent="hud/margin/hints" instance=ExtResource("3_fr63h")]
+[node name="motion" parent="hud/hints" instance=ExtResource("3_fr63h")]
 layout_mode = 2
 
-[node name="help" type="Button" parent="hud/margin/hints"]
+[node name="help" type="Button" parent="hud/hints"]
 visible = false
+clip_contents = true
+custom_minimum_size = Vector2(190, 50)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
+toggle_mode = true
+button_pressed = true
 shortcut = SubResource("Shortcut_qlbv2")
-text = " %s Справка ❔"
 script = ExtResource("7_ns8vc")
 
-[node name="hotkey" type="Control" parent="hud/margin/hints/help"]
+[node name="description" type="MarginContainer" parent="hud/hints/help"]
 layout_mode = 2
-anchors_preset = 0
-offset_left = -161.0
-offset_top = -1.0
-offset_right = 139.0
-offset_bottom = -1.0
-script = ExtResource("4_rdjqd")
-keyboard = "[F1]"
-gamepad = "▶️"
+offset_right = 40.0
+offset_bottom = 40.0
+theme = ExtResource("8_icn8b")
 
-[connection signal="pressed" from="hud/margin/fullscreen" to="hud/margin/fullscreen" method="_toggle_fullscreen"]
-[connection signal="pressed" from="hud/margin/hints/help" to="hud/margin/hints" method="show_help"]
+[node name="stack" type="HBoxContainer" parent="hud/hints/help/description"]
+layout_mode = 2
+
+[node name="hotkeys" type="HBoxContainer" parent="hud/hints/help/description/stack"]
+layout_mode = 2
+mouse_filter = 2
+script = ExtResource("9_lud7w")
+
+[node name="keyboard" type="MarginContainer" parent="hud/hints/help/description/stack/hotkeys"]
+visible = false
+custom_minimum_size = Vector2(47, 40)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme = ExtResource("9_oklq7")
+
+[node name="back" type="Panel" parent="hud/hints/help/description/stack/hotkeys/keyboard"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="key" type="Label" parent="hud/hints/help/description/stack/hotkeys/keyboard/back"]
+custom_minimum_size = Vector2(30, 25)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -15.0
+offset_top = -17.0
+offset_right = 15.0
+offset_bottom = 17.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "F1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="gamepad" type="MarginContainer" parent="hud/hints/help/description/stack/hotkeys"]
+visible = false
+custom_minimum_size = Vector2(45, 45)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme = ExtResource("10_b2yac")
+
+[node name="back" type="Panel" parent="hud/hints/help/description/stack/hotkeys/gamepad"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="key" type="Label" parent="hud/hints/help/description/stack/hotkeys/gamepad/back"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 22
+text = " ▶️"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="state" type="HBoxContainer" parent="hud/hints/help/description/stack"]
+layout_mode = 2
+script = ExtResource("10_g812m")
+
+[node name="opened" type="Label" parent="hud/hints/help/description/stack/state"]
+layout_mode = 2
+text = "Справка 📖"
+vertical_alignment = 1
+
+[node name="closed" type="Label" parent="hud/hints/help/description/stack/state"]
+layout_mode = 2
+text = "Справка 📘"
+vertical_alignment = 1
+
+[connection signal="toggled" from="hud/fullscreen" to="hud/fullscreen" method="_toggle_fullscreen"]
+[connection signal="pressed" from="hud/hints/help" to="hud/hints" method="show_help"]
+[connection signal="toggled" from="hud/hints/help" to="hud/hints/help" method="_on_help_show"]

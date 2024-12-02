@@ -7,7 +7,7 @@ func _on_hint_collected(_hero: CharacterBody2D) -> void:
 	var hints: VBoxContainer = get_node("../../../cards").hints
 	var help: VBoxContainer = hints.get_node(category)
 	
-	print("make progress: act '%s' - name '%s'" % [act, name])
+	#print("make progress: act '%s' - name '%s'" % [act, name])
 	
 	help.make_progress(act, name)
 	

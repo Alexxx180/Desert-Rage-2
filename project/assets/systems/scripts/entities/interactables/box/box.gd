@@ -11,6 +11,11 @@ signal move(next: Vector2)
 
 const feedback: int = 2
 
+@onready var half: Vector2 = geometry.shape.size / 2
+
+var center: Vector2:
+	get: return position + half
+
 func _ready() -> void:
 	logic.relations.controls(self)
 

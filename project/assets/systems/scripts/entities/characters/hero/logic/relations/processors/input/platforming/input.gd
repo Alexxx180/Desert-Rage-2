@@ -4,21 +4,24 @@ var _input: Node
 
 func controls(hero: CharacterBody2D, input: Node, overleap: Node2D) -> void:
 	var jump: Node = hero.logic.processors.input.platforming.jump
-	var map: Node2D = hero.get_node("../..") # = overleap.get_node("../../../../../../../..") #/../map
+	var map: Node2D = hero.get_node("../..")
 
 	_input = input
-	_input.gap = map.get_node("gap")
-	_input.upland = map.get_node("upland")
-	_input.floors.jump.connect(jump.floor_only)
-	_input.ledges.jump.connect(jump.determine)
+	_input.ledges = map.get_node("ledges")
+	_input.gap.jump.connect(jump.floor_only)
+	_input.upland.jump.connect(jump.determine)
 
 	overleap.gap.body_entered.connect(_on_ledge_encounter_gap)
 	overleap.upland.body_entered.connect(_on_ledge_encounter_upland)
 
+func _make_single_jump_response(gap: bool) -> void:
+	_input.gap.available = gap
+	_input.upland.available = !gap
+
 func _on_ledge_encounter_gap(_surface: TileMapLayer) -> void:
 	#print("GAP")
-	_input.floors.available = true
+	_make_single_jump_response(true)
 
 func _on_ledge_encounter_upland(_surface: TileMapLayer) -> void:
 	#print("UPLAND")
-	_input.ledges.available = true
+	_make_single_jump_response(false)

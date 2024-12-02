@@ -1,14 +1,15 @@
 extends Button
 
-var caption: String = ""
-@onready var hotkey: Control = $hotkey
+@onready var hotkeys: HBoxContainer = $description/stack/hotkeys
+@onready var state: HBoxContainer = $description/stack/state
 
 func _ready() -> void:
-	caption = text
-	set_button_text()
-
-func set_button_text():
-	text = caption % hotkey.get_text()
+	state.set_state(false)
+	hotkeys.set_control_hint()
 
 func _input(_event: InputEvent):
-	set_button_text()
+	hotkeys.set_control_hint()
+
+func _on_help_show(closed: bool) -> void:
+	state.set_state(!closed)
+	hotkeys.set_control_hint()

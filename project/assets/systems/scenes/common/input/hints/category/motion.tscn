@@ -35,7 +35,7 @@ input_3/reset = false
 input_0/name = "appear"
 input_0/auto_advance = false
 input_0/break_loop_at_end = false
-input_0/reset = false
+input_0/reset = true
 input_1/name = "disappear"
 input_1/auto_advance = false
 input_1/break_loop_at_end = false
@@ -157,7 +157,6 @@ input_1/reset = true
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_swxvf"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_w6jtb"]
-graph_offset = Vector2(1086.32, -18.4208)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_xc5f6")
 nodes/Animation/position = Vector2(1760, -160)
 nodes/TimeSeek/node = SubResource("AnimationNodeTimeSeek_rhp83")
@@ -342,7 +341,6 @@ theme = ExtResource("1_bf0xs")
 script = ExtResource("1_ifhy3")
 
 [node name="movement" parent="." instance=ExtResource("4_87m10")]
-visible = false
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
@@ -361,9 +359,11 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 
 [node name="hill" parent="." instance=ExtResource("2_tynbp")]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
+theme = ExtResource("1_bf0xs")
 
 [node name="animation" type="AnimationTree" parent="."]
 root_node = NodePath("../..")
@@ -385,9 +385,9 @@ parameters/hill/current_index = -1
 parameters/hint_jump_x_push_start/blend_amount = 0.5
 parameters/hint_move_x_jump_start/blend_amount = 0.5
 parameters/hint_push_x_hill_start/blend_amount = 0.5
-parameters/hints/current_state = ""
+parameters/hints/current_state = "movement"
 parameters/hints/transition_request = ""
-parameters/hints/current_index = -1
+parameters/hints/current_index = 0
 parameters/jumping/current_state = ""
 parameters/jumping/transition_request = ""
 parameters/jumping/current_index = -1

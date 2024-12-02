@@ -4,7 +4,7 @@ signal jump(control: Node, floors: TileMapLayer)
 
 var available: bool = false
 
-func perform(floors: TileMapLayer) -> bool:
+func jump_on(floors: TileMapLayer) -> bool:
 	if available:
 		jump.emit(self, floors)
 	return available

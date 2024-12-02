@@ -1,6 +1,8 @@
 extends Node
 
 signal set_movement(is_floor: bool)
+
+signal enable()
 signal disable()
 
 var unstable: bool:
@@ -14,4 +16,8 @@ func set_stable(is_floor: bool) -> void:
 	if (is_floor != _stable):
 		set_movement.emit(is_floor)
 		_stable = is_floor
-	if (is_floor): disable.emit()
+
+	if (is_floor):
+		disable.emit()
+	else:
+		enable.emit()
