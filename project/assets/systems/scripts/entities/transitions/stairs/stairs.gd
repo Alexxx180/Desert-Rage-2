@@ -8,7 +8,7 @@ var _is_finishing: bool = false
 @onready var interval: Node = $interval
 @onready var transition: CanvasLayer = $transition
 
-func _finish(hero: CharacterBody2D) -> void:
+func _finish(_hero: CharacterBody2D) -> void:
 	if _is_finishing: return
 	_is_finishing = true
 	
