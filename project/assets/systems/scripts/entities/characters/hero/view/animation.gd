@@ -29,8 +29,8 @@ func _direct() -> void:
 	for animation in ["idle-1", "run"]:
 		set("parameters/%s/blend_position" % animation, _direction)
 
-func _input(_event: InputEvent) -> void:
-	_direction = Input.get_vector("left", "right", "backward", "forward")
+func move(motion: Vector2) -> void:
+	_direction = motion
 	if (_direction == Vector2.ZERO):
 		_move_hero("idle")
 	else:
