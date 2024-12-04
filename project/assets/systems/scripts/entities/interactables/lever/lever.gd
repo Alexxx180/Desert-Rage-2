@@ -1,27 +1,20 @@
 extends StaticBody2D
 
-signal activate(id: int, activator: Vector2)
+signal activate(tile: Dictionary)
 
 @export var activated: bool = false
 
 @onready var animation: AnimationPlayer = $animation
-@onready var floors: TileMapLayer = get_node("../../floors")
-
-func _get_tile() -> Dictionary:
-	var coords: Vector2i = floors.local_to_map(position)
-	return {
-		'id': floors.get_cell_source_id(coords),
-		'cell': floors.get_cell_atlas_coords(coords)
-	}
+@onready var _atlas: Dictionary
 
 func _toggle_to(next: String) -> void:
-	var tile: Dictionary = _get_tile()
-	activate.emit(tile['id'], tile['cell'])
+	activate.emit(_atlas)
 	animation.play("levers/toggle_" + next)
 
 func _ready() -> void:
-	var activators: Node = floors.get_node("activators")
-	activate.connect(activators.activate)
+	var logic: TileMapLayer = get_node("../../logic")
+	activate.connect(logic.activators.activate)
+	_atlas = Tiling.atlas(logic, position)
 
 	if activated: _toggle_to("on")
 

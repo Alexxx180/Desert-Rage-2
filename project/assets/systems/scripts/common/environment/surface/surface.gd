@@ -9,11 +9,6 @@ var _contact: Vector2 = Vector2.ZERO
 var contact: Vector2:
 	get: return _contact
 
-static func get_var(map: TileMapLayer, target: Vector2, data: String, none: Variant) -> Variant:
-	var cell: Vector2i = map.local_to_map(target)
-	var tile: TileData = map.get_cell_tile_data(cell)
-	return none if tile == null else tile.get_custom_data(data)
-
 func set_contact(pos: Vector2) -> void:
 	"""
 	print("POS: ", entity.center)

@@ -11,8 +11,11 @@ func same_level(overview: Node, f: int) -> bool:
 	return f != 0 and f == overview.height.F
 
 func is_same_floor(floors: TileMapLayer, overview: Node) -> bool:
-	var tile: Vector2 = surface.track(deployment.walls.current)
-	var f: int = SurfaceTracker.get_var(floors, tile, "F", 0)
+	var ground: Node2D = deployment.walls.current
+	var tile: Vector2 = surface.entity.position + ground.position
+
+	var f: int = Tiling.extract(floors, Tiling.floor(tile))
+
 	height.set_floor(f)
 	return same_level(overview, height.F)
 
