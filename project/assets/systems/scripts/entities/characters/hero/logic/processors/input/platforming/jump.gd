@@ -20,10 +20,10 @@ func _to_ledge() -> void:
 
 func floor_only(control: Node, _gap: TileMapLayer) -> void:
 	if feet.can_land(overview):
-		#print("can jump")
+		print("can jump")
 		_to_floor()
-#	else:
-		#print("can't jump")
+	else:
+		print("can't jump")
 	control.available = false
 
 func _set_midair(control: Node, is_in_midair: bool) -> void:
@@ -31,9 +31,12 @@ func _set_midair(control: Node, is_in_midair: bool) -> void:
 	overview.height.freeze = is_in_midair
 
 func determine(control: Node, upland: TileMapLayer) -> void:
-	#print("upland encounter: jump determine")
+	print("upland encounter: jump determine")
 	if ledges.around(overview, feet):
 		_to_ledge()
 	elif feet.can_deploy(upland.floors, overview):
 		_to_floor()
+	else:
+		print("No jump")
+
 	_set_midair(control, feet.balance.unstable)

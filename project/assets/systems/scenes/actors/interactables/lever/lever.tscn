@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dgmexcad4fr8j"]
+[gd_scene load_steps=14 format=3 uid="uid://dgmexcad4fr8j"]
 
 [ext_resource type="Script" path="res://assets/systems/scripts/entities/interactables/lever/lever.gd" id="1_dk22o"]
 [ext_resource type="Shape2D" uid="uid://c42xv75yc83x1" path="res://assets/resources/runtime/shapes/map-tile.tres" id="2_un0p1"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cxjmiykqf2jpr" path="res://assets/resources/media/images/interactables/lever/plate.png" id="4_7hr7x"]
 [ext_resource type="Texture2D" uid="uid://cdmbet1nwaonb" path="res://assets/resources/media/images/interactables/lever/lever.png" id="5_apsyj"]
 [ext_resource type="Texture2D" uid="uid://c306ii3p7ahba" path="res://assets/resources/media/images/interactables/lever/border.png" id="6_kkt3l"]
+[ext_resource type="PackedScene" uid="uid://bocuu344hsqv" path="res://assets/systems/scenes/actors/sight/fov.tscn" id="7_x370w"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_278yb"]
 size = Vector2(196, 196)
@@ -133,6 +134,10 @@ texture = ExtResource("5_apsyj")
 
 [node name="border" type="Sprite2D" parent="view"]
 texture = ExtResource("6_kkt3l")
+
+[node name="fov" parent="." instance=ExtResource("7_x370w")]
+position = Vector2(9.53674e-07, 9.53674e-07)
+scale = Vector2(2, 2)
 
 [node name="animation" type="AnimationPlayer" parent="."]
 root_node = NodePath("../view")

@@ -9,6 +9,7 @@ func controls(hero: CharacterBody2D, input: Node) -> void:
 	var eyes: Node = input.platforming.jump.overview.directions.eyes
 
 	input.moving.connect(input.movement.face.set_position)
+	input.moving.connect(hero.view.animation.move)
 
 	movement.controls(hero, input.movement)
 	platforming.controls(hero, input.platforming)

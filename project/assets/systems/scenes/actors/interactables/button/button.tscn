@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://df354hu6v3oou"]
+[gd_scene load_steps=10 format=3 uid="uid://df354hu6v3oou"]
 
 [ext_resource type="Script" path="res://assets/systems/scripts/entities/interactables/button.gd" id="1_gqgwa"]
 [ext_resource type="Shape2D" uid="uid://c42xv75yc83x1" path="res://assets/resources/runtime/shapes/map-tile.tres" id="2_0ox7d"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://b847k7nl4gjg3" path="res://assets/resources/media/images/interactables/button/button.png" id="4_pebo7"]
 [ext_resource type="Texture2D" uid="uid://b4xfbdbychhjs" path="res://assets/resources/media/images/interactables/button/borders.png" id="5_33c0x"]
 [ext_resource type="AnimationLibrary" uid="uid://cabg3fvvgd48q" path="res://assets/resources/media/animation/interactables/buttons.res" id="6_qjpto"]
+[ext_resource type="PackedScene" uid="uid://bocuu344hsqv" path="res://assets/systems/scenes/actors/sight/fov.tscn" id="7_ohsbd"]
 
 [sub_resource type="Animation" id="Animation_svh5o"]
 length = 0.001
@@ -51,6 +52,10 @@ libraries = {
 "": SubResource("AnimationLibrary_7da7u"),
 "buttons": ExtResource("6_qjpto")
 }
+
+[node name="fov" parent="." instance=ExtResource("7_ohsbd")]
+position = Vector2(-1.90735e-06, 9.53674e-07)
+scale = Vector2(2, 2)
 
 [connection signal="body_entered" from="." to="." method="_on_press"]
 [connection signal="body_exited" from="." to="." method="_on_release"]

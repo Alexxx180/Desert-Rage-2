@@ -10,6 +10,7 @@ func _observe(ledge: Vector2) -> bool:
 	return try
 
 func reach(stand: Area2D) -> bool:
-	var seat: Node = stand.box.logic.processors.movement.seat
+	#var seat: Node = stand.box.logic.processors.movement.seat
+	var seat: Node = stand.seat
 	var box: Vector2 = stand.box.position
 	return not seat.place.stand() and _observe(box)

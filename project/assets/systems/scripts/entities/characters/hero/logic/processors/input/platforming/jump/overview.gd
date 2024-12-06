@@ -11,7 +11,8 @@ func _observe(ledge: Vector2) -> bool:
 
 func reach(stand: Area2D, feet: Node) -> bool:
 	var pos: Vector2 = stand.get_ledge_position()
-	var seat: Node = stand.box.logic.processors.movement.seat
+	var seat: Node = stand.seat
+	#var seat: Node = stand.box.logic.processors.movement.seat
 
 	return (not seat.place.stand() and _observe(pos)
 		and feet.same_level(self, seat.F))

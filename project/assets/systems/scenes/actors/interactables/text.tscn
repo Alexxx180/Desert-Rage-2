@@ -1,10 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://dryh46gyikikp"]
+[gd_scene load_steps=5 format=3 uid="uid://dryh46gyikikp"]
 
-[ext_resource type="LabelSettings" uid="uid://dajj5bo2dckei" path="res://assets/resources/runtime/themes/settings/ingame-text.tres" id="1_2cl8k"]
-[ext_resource type="Script" path="res://assets/systems/scripts/common/environment/level/text.gd" id="1_3upjm"]
+[ext_resource type="LabelSettings" uid="uid://dajj5bo2dckei" path="res://assets/resources/runtime/themes/settings/ingame-text.tres" id="1_hr2ua"]
+[ext_resource type="Script" path="res://assets/systems/scripts/common/environment/level/text.gd" id="2_srubo"]
+[ext_resource type="PackedScene" uid="uid://bocuu344hsqv" path="res://assets/systems/scenes/actors/sight/fov.tscn" id="3_xbbgx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_edb1k"]
-size = Vector2(96, 34)
+size = Vector2(128, 32)
 
 [node name="surprise" type="Label"]
 anchors_preset = 8
@@ -20,8 +21,8 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 text = "Секрет"
-label_settings = ExtResource("1_2cl8k")
-script = ExtResource("1_3upjm")
+label_settings = ExtResource("1_hr2ua")
+script = ExtResource("2_srubo")
 
 [node name="interaction" type="Area2D" parent="."]
 y_sort_enabled = true
@@ -31,5 +32,9 @@ collision_mask = 4
 
 [node name="shape" type="CollisionShape2D" parent="interaction"]
 shape = SubResource("RectangleShape2D_edb1k")
+
+[node name="fov" parent="." instance=ExtResource("3_xbbgx")]
+position = Vector2(41, 19)
+scale = Vector2(4, 0.999999)
 
 [connection signal="body_entered" from="interaction" to="." method="_on_open"]

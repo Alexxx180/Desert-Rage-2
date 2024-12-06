@@ -7,7 +7,7 @@ func controls(hero: CharacterBody2D, input: Node, overleap: Node2D) -> void:
 	var map: Node2D = hero.get_node("../..")
 
 	_input = input
-	_input.ledges = map.get_node("ledges")
+	_input.ledges = map.get_node("ledge")
 	_input.gap.jump.connect(jump.floor_only)
 	_input.upland.jump.connect(jump.determine)
 
