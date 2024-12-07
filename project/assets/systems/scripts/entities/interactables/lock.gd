@@ -22,5 +22,5 @@ func _ready() -> void:
 	stand.box = self
 	stand.seat = $seat
 
-	print("lock tile: ", tile)
+	#print("lock tile: ", tile)
 	activators.add_lock(tile, self)

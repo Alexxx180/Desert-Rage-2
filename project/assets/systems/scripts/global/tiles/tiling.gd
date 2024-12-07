@@ -5,6 +5,9 @@ class_name Tiling
 static func atlas(logic: TileMapLayer, pos: Vector2) -> Dictionary:
 	var coords: Vector2i = logic.local_to_map(pos)
 	var id: int = logic.get_cell_source_id(coords)
+	assert(id != -1, "Activator is not connected to logic")
+	#print("LAYER: ", logic.name)
+	#print("ID: ", id)
 	return {
 		"cell": logic.get_cell_atlas_coords(coords),
 		"name": logic.tile_set.get_source(id).resource_name
