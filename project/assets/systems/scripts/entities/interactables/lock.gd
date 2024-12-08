@@ -15,7 +15,7 @@ func activate() -> void:
 func _ready() -> void:
 	if activated: _toggle("open")
 
-	var logic: TileMapLayer = get_node("../../logic")
+	var logic: TileMapLayer = get_node("../../mark")
 	var activators: Node = logic.get_node("activators")
 	var tile: Dictionary = Tiling.atlas(logic, position)
 

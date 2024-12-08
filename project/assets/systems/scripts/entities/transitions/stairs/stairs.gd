@@ -1,8 +1,9 @@
 extends Area2D
 
 var _is_finishing: bool = false
+#var _is_fallback: bool = false
 
-@export var fallback_scene: String = ""
+@export_file var fallback_scene: String = ""
 
 @export var direction: int = 1
 
@@ -28,7 +29,14 @@ func _finish(_hero: CharacterBody2D) -> void:
 	transition.start_transition(path)
 
 func _ready() -> void:
+	#_is_fallback = ResourceLoader.exists(fallback_scene)
+	print("FALLBACK: ", !fallback_scene)
+	# """
 	if fallback_scene != "": return
 	
 	var level: Vector2i = Session.location["level"]
 	interval.set_stairs_position(level.y, position)
+	# """
+	#if fallback_scene != null: return
+	
+	
