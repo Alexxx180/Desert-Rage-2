@@ -1,10 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://cfj0mgkjkuak4"]
+[gd_scene load_steps=4 format=3 uid="uid://cfj0mgkjkuak4"]
 
-[ext_resource type="PackedScene" uid="uid://ckg7hrc8jnvj1" path="res://assets/systems/scenes/common/interactables/box/logic/detectors/platforming/floors/floors.tscn" id="1_gatxp"]
+[ext_resource type="Script" path="res://assets/systems/scripts/entities/interactables/box/logic/detectors/platforming.gd" id="1_woch4"]
 [ext_resource type="PackedScene" uid="uid://co0xd72biuduc" path="res://assets/systems/scenes/actors/interactables/box/large/logic/detectors/platforming/stand.tscn" id="2_nttwp"]
+[ext_resource type="PackedScene" uid="uid://c5gf5ucjxk682" path="res://assets/systems/scenes/common/environment/floors/detector.tscn" id="3_4xywm"]
 
 [node name="platforming" type="Node2D"]
-
-[node name="floors" parent="." instance=ExtResource("1_gatxp")]
+script = ExtResource("1_woch4")
 
 [node name="stand" parent="." instance=ExtResource("2_nttwp")]
+collision_layer = 32
+
+[node name="floors" parent="." instance=ExtResource("3_4xywm")]

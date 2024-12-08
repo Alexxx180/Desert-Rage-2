@@ -3,14 +3,15 @@ extends Node
 signal move(target: Vector2)
 signal climb(F: int)
 
-@onready var height: Node = $height
+#@onready var height: Node = $height
 @onready var place: Node = $place
 
+var height: int = 1
 var stand: Area2D
 var _f: int = 0
 
 var F: int:
-	get: return _f + height.F
+	get: return _f + height
 
 const EMPTY_SEAT: int = 0
 

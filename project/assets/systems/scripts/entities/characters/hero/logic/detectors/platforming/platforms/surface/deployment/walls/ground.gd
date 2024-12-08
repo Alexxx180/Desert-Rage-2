@@ -4,7 +4,7 @@ class_name AreaDetector
 
 @export var offset: int = 0
 
-const distance: int = 115
+const distance: int = 114
 const pos: Vector2 = Vector2(distance, distance)
 
 @onready var _half: Vector2 = shape.size / 2

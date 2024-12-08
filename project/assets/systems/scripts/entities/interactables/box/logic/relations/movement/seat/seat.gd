@@ -12,6 +12,7 @@ func controls(box: CharacterBody2D, seat: Node) -> void:
 	stand.box = box
 	stand.seat = seat
 	seat.stand = stand
+	seat.height = box.height
 
 	booking.controls(seat)
 
