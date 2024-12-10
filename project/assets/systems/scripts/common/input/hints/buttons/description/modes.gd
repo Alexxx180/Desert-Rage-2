@@ -1,4 +1,4 @@
-extends HBoxContainer
+extends Control
 
 @onready var window: Label = $window
 @onready var fullscreen: Label = $fullscreen

@@ -1,4 +1,4 @@
-extends HBoxContainer
+extends Control
 
 @onready var keyboard: MarginContainer = $keyboard
 @onready var gamepad: MarginContainer = $gamepad
