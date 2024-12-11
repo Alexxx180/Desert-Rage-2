@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://dbbt75750fc4"]
+[gd_scene load_steps=26 format=3 uid="uid://dbbt75750fc4"]
 
 [ext_resource type="Script" path="res://assets/systems/scripts/common/input/hints/cards.gd" id="1_7o4uc"]
 [ext_resource type="Theme" uid="uid://ctsb6uh5t0n1l" path="res://assets/resources/runtime/themes/default.tres" id="1_xo3m3"]
@@ -12,10 +12,13 @@
 [ext_resource type="Theme" uid="uid://bdbjsuhahacjq" path="res://assets/resources/runtime/themes/patterns/template/button.tres" id="8_icn8b"]
 [ext_resource type="Script" path="res://assets/systems/scripts/common/input/hints/buttons/description/hotkeys.gd" id="9_lud7w"]
 [ext_resource type="Theme" uid="uid://d1pfbadffcr6h" path="res://assets/resources/runtime/themes/patterns/hotkeys/keyboard.tres" id="9_oklq7"]
-[ext_resource type="Theme" uid="uid://x1lquikc78v2" path="res://assets/resources/runtime/themes/patterns/hotkeys/gamepad.tres" id="10_b2yac"]
 [ext_resource type="Script" path="res://assets/systems/scripts/common/input/hints/buttons/help/state.gd" id="10_g812m"]
 [ext_resource type="Theme" uid="uid://bt30yve6tq7yu" path="res://assets/resources/runtime/themes/patterns/template/text/caption.tres" id="11_yiwgf"]
+[ext_resource type="PackedScene" uid="uid://v12w3mb1hmgp" path="res://assets/systems/ui/hint/keyboard/symbolic/escape.tscn" id="12_hrgit"]
+[ext_resource type="PackedScene" uid="uid://csqnjtcnrg3yf" path="res://assets/systems/ui/hint/gamepad/signs/plus.tscn" id="12_m0plm"]
 [ext_resource type="Theme" uid="uid://cbqhl66rpxdvt" path="res://assets/resources/runtime/themes/patterns/template/icon.tres" id="14_28f5f"]
+[ext_resource type="PackedScene" uid="uid://cjxo1pcoo8a1r" path="res://assets/systems/ui/hint/keyboard/symbolic/f1.tscn" id="16_3bcnj"]
+[ext_resource type="PackedScene" uid="uid://cpkonfn8nefx1" path="res://assets/systems/ui/hint/gamepad/arrow/right.tscn" id="16_cdxw0"]
 
 [sub_resource type="InputEventKey" id="InputEventKey_f4jfc"]
 device = -1
@@ -59,7 +62,6 @@ size_flags_horizontal = 0
 size_flags_vertical = 8
 
 [node name="pause" type="Button" parent="hud/bottom"]
-visible = false
 custom_minimum_size = Vector2(135, 50)
 layout_mode = 1
 anchors_preset = 2
@@ -85,20 +87,21 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="hints" type="HBoxContainer" parent="hud/bottom"]
+visible = false
+custom_minimum_size = Vector2(70, 0)
 layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_top = -7.0
-offset_right = 105.0
-offset_bottom = 7.0
-grow_vertical = 2
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -46.0
+offset_right = 132.0
+grow_vertical = 0
 
 [node name="hotkeys" type="Control" parent="hud/bottom/hints"]
-custom_minimum_size = Vector2(70, 20)
+custom_minimum_size = Vector2(70, 0)
 layout_mode = 2
 size_flags_horizontal = 0
-size_flags_vertical = 4
+size_flags_vertical = 8
 mouse_filter = 2
 script = ExtResource("9_lud7w")
 
@@ -106,13 +109,12 @@ script = ExtResource("9_lud7w")
 visible = false
 custom_minimum_size = Vector2(70, 25)
 layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_top = -23.0
-offset_right = 47.0
-offset_bottom = 23.0
-grow_vertical = 2
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -46.0
+offset_right = 70.0
+grow_vertical = 0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme = ExtResource("9_oklq7")
@@ -143,14 +145,12 @@ vertical_alignment = 1
 [node name="gamepad" type="MarginContainer" parent="hud/bottom/hints/hotkeys"]
 custom_minimum_size = Vector2(70, 25)
 layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = -1.0
-offset_top = -23.0
-offset_right = 69.0
-offset_bottom = 23.0
-grow_vertical = 2
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -46.0
+offset_right = 70.0
+grow_vertical = 0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme = ExtResource("9_oklq7")
@@ -182,8 +182,8 @@ vertical_alignment = 1
 
 [node name="caption" type="Label" parent="hud/bottom/hints"]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 8
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 24
 text = "Выбор"
 vertical_alignment = 1
 
@@ -239,78 +239,18 @@ size_flags_vertical = 4
 mouse_filter = 2
 script = ExtResource("9_lud7w")
 
-[node name="keyboard" type="MarginContainer" parent="hud/menu/continue/margin/hotkeys"]
+[node name="keyboard" parent="hud/menu/continue/margin/hotkeys" instance=ExtResource("12_hrgit")]
 visible = false
-custom_minimum_size = Vector2(47, 40)
+layout_mode = 0
+anchors_preset = 0
+anchor_top = 0.0
+anchor_bottom = 0.0
+offset_top = 0.0
+offset_bottom = 46.0
+grow_vertical = 1
+
+[node name="gamepad" parent="hud/menu/continue/margin/hotkeys" instance=ExtResource("12_m0plm")]
 layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_top = -23.0
-offset_right = 47.0
-offset_bottom = 23.0
-grow_vertical = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme = ExtResource("9_oklq7")
-
-[node name="back" type="Panel" parent="hud/menu/continue/margin/hotkeys/keyboard"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-mouse_filter = 2
-
-[node name="key" type="Label" parent="hud/menu/continue/margin/hotkeys/keyboard/back"]
-custom_minimum_size = Vector2(30, 25)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -15.0
-offset_top = -17.0
-offset_right = 15.0
-offset_bottom = 17.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Esc"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="gamepad" type="MarginContainer" parent="hud/menu/continue/margin/hotkeys"]
-custom_minimum_size = Vector2(45, 45)
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_top = -23.0
-offset_right = 46.0
-offset_bottom = 23.0
-grow_vertical = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme = ExtResource("10_b2yac")
-
-[node name="back" type="Panel" parent="hud/menu/continue/margin/hotkeys/gamepad"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 4
-mouse_filter = 2
-
-[node name="key" type="Label" parent="hud/menu/continue/margin/hotkeys/gamepad/back"]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = -18.0
-offset_top = -15.0
-offset_right = 37.0
-offset_bottom = 13.0
-grow_vertical = 2
-theme = ExtResource("10_b2yac")
-theme_override_font_sizes/font_size = 22
-text = " ➕"
 
 [node name="caption" type="Label" parent="hud/menu/continue/margin"]
 layout_mode = 2
@@ -364,78 +304,18 @@ size_flags_vertical = 4
 mouse_filter = 2
 script = ExtResource("9_lud7w")
 
-[node name="keyboard" type="MarginContainer" parent="hud/menu/help/margin/hotkeys"]
+[node name="keyboard" parent="hud/menu/help/margin/hotkeys" instance=ExtResource("16_3bcnj")]
 visible = false
-custom_minimum_size = Vector2(47, 40)
+layout_mode = 0
+anchors_preset = 0
+anchor_top = 0.0
+anchor_bottom = 0.0
+offset_top = 0.0
+offset_bottom = 46.0
+grow_vertical = 1
+
+[node name="gamepad" parent="hud/menu/help/margin/hotkeys" instance=ExtResource("16_cdxw0")]
 layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_top = -23.0
-offset_right = 47.0
-offset_bottom = 23.0
-grow_vertical = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme = ExtResource("9_oklq7")
-
-[node name="back" type="Panel" parent="hud/menu/help/margin/hotkeys/keyboard"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-mouse_filter = 2
-
-[node name="key" type="Label" parent="hud/menu/help/margin/hotkeys/keyboard/back"]
-custom_minimum_size = Vector2(30, 25)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -15.0
-offset_top = -17.0
-offset_right = 15.0
-offset_bottom = 17.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "F1"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="gamepad" type="MarginContainer" parent="hud/menu/help/margin/hotkeys"]
-custom_minimum_size = Vector2(45, 45)
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_top = -23.0
-offset_right = 46.0
-offset_bottom = 23.0
-grow_vertical = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme = ExtResource("10_b2yac")
-
-[node name="back" type="Panel" parent="hud/menu/help/margin/hotkeys/gamepad"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-mouse_filter = 2
-
-[node name="key" type="Label" parent="hud/menu/help/margin/hotkeys/gamepad/back"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -38.0
-offset_top = -16.0
-offset_right = 17.0
-offset_bottom = 11.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 22
-text = " ▶️"
 
 [node name="caption" type="Label" parent="hud/menu/help/margin"]
 layout_mode = 2

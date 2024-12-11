@@ -3,8 +3,8 @@
 [ext_resource type="Script" path="res://assets/systems/scripts/common/input/hints/buttons/description/hotkeys.gd" id="1_auxjh"]
 [ext_resource type="Theme" uid="uid://bdbjsuhahacjq" path="res://assets/resources/runtime/themes/patterns/template/button.tres" id="1_m3hcs"]
 [ext_resource type="Script" path="res://assets/systems/scripts/common/input/hints/buttons/description/modes.gd" id="2_8ou75"]
-[ext_resource type="Theme" uid="uid://d1pfbadffcr6h" path="res://assets/resources/runtime/themes/patterns/hotkeys/keyboard.tres" id="3_3bnci"]
-[ext_resource type="Theme" uid="uid://x1lquikc78v2" path="res://assets/resources/runtime/themes/patterns/hotkeys/gamepad.tres" id="4_5iyoo"]
+[ext_resource type="PackedScene" uid="uid://csypg8478j7s2" path="res://assets/systems/ui/hint/keyboard/symbolic/f11.tscn" id="3_6ebbo"]
+[ext_resource type="PackedScene" uid="uid://7p1iowcss2h1" path="res://assets/systems/ui/hint/gamepad/arrow/left.tscn" id="4_kvrpq"]
 [ext_resource type="Theme" uid="uid://cbqhl66rpxdvt" path="res://assets/resources/runtime/themes/patterns/template/icon.tres" id="6_xepjb"]
 
 [node name="margin" type="MarginContainer"]
@@ -19,78 +19,12 @@ size_flags_vertical = 4
 mouse_filter = 2
 script = ExtResource("1_auxjh")
 
-[node name="keyboard" type="MarginContainer" parent="hotkeys"]
+[node name="keyboard" parent="hotkeys" instance=ExtResource("3_6ebbo")]
 visible = false
-custom_minimum_size = Vector2(65, 40)
 layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_top = -23.0
-offset_right = 65.0
-offset_bottom = 23.0
-grow_vertical = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme = ExtResource("3_3bnci")
 
-[node name="back" type="Panel" parent="hotkeys/keyboard"]
-custom_minimum_size = Vector2(45, 40)
-layout_mode = 2
-mouse_filter = 2
-
-[node name="key" type="Label" parent="hotkeys/keyboard/back"]
+[node name="gamepad" parent="hotkeys" instance=ExtResource("4_kvrpq")]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -11.5
-offset_right = 20.0
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
-text = "F11"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="gamepad" type="MarginContainer" parent="hotkeys"]
-custom_minimum_size = Vector2(45, 45)
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_top = -22.5
-offset_right = 46.0
-offset_bottom = 22.5
-grow_vertical = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme = ExtResource("4_5iyoo")
-
-[node name="back" type="Panel" parent="hotkeys/gamepad"]
-custom_minimum_size = Vector2(40, 30)
-layout_mode = 2
-mouse_filter = 2
-
-[node name="key" type="Label" parent="hotkeys/gamepad/back"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -17.0
-offset_top = -16.0
-offset_right = 23.0
-offset_bottom = 11.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "◀️"
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="modes" type="Control" parent="."]
 layout_mode = 2
