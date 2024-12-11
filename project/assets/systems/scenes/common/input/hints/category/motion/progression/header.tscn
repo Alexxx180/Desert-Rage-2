@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bfvmp26mw0vej"]
+[gd_scene load_steps=4 format=3 uid="uid://bfvmp26mw0vej"]
 
 [ext_resource type="Theme" uid="uid://hmh3wpm730wh" path="res://assets/resources/runtime/themes/patterns/template/card.tres" id="1_0fr8n"]
 [ext_resource type="Script" path="res://assets/systems/scripts/common/input/hints/category/motion/progression/header.gd" id="2_mpvdd"]
+[ext_resource type="Theme" uid="uid://ctsb6uh5t0n1l" path="res://assets/resources/runtime/themes/default.tres" id="3_i4uqt"]
 
 [node name="header" type="PanelContainer"]
 anchors_preset = 15
@@ -15,9 +16,24 @@ script = ExtResource("2_mpvdd")
 [node name="margin" type="MarginContainer" parent="."]
 layout_mode = 2
 
-[node name="caption" type="Label" parent="margin"]
-custom_minimum_size = Vector2(100, 0)
+[node name="description" type="HBoxContainer" parent="margin"]
 layout_mode = 2
-text = "🪧Sample Text🪧"
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="left" type="Label" parent="margin/description"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "🪧"
+
+[node name="caption" type="Label" parent="margin/description"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme = ExtResource("3_i4uqt")
+text = "Sample Text"
 horizontal_alignment = 1
 autowrap_mode = 2
+
+[node name="right" type="Label" parent="margin/description"]
+layout_mode = 2
+text = "🪧"
