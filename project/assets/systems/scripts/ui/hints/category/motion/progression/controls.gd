@@ -15,4 +15,3 @@ func _input(_event: InputEvent) -> void:
 		controls.text = caption % gamepad
 	else:
 		controls.text = caption % keyboard
-	
