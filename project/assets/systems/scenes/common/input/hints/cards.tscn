@@ -50,25 +50,27 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -1.0
+offset_top = -1.0
 offset_right = -1.0
+offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 0
 theme = ExtResource("2_nq6v7")
 
-[node name="bottom" type="Control" parent="hud"]
+[node name="game" type="Control" parent="hud"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 
-[node name="pause" type="Button" parent="hud/bottom"]
-custom_minimum_size = Vector2(135, 50)
+[node name="pause" type="Button" parent="hud/game"]
+custom_minimum_size = Vector2(110, 50)
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_top = -50.0
-offset_right = 135.0
+offset_right = 110.0
 grow_vertical = 0
 size_flags_horizontal = 0
 size_flags_vertical = 8
@@ -77,7 +79,7 @@ toggle_mode = true
 shortcut = SubResource("Shortcut_b4j3q")
 script = ExtResource("2_tauni")
 
-[node name="margin" parent="hud/bottom/pause" instance=ExtResource("4_mboaf")]
+[node name="margin" parent="hud/game/pause" instance=ExtResource("4_mboaf")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -86,7 +88,196 @@ offset_bottom = 0.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="hints" type="HBoxContainer" parent="hud/bottom"]
+[node name="hints" type="VBoxContainer" parent="hud/game"]
+layout_mode = 2
+offset_left = 682.0
+offset_top = -67.0
+offset_right = 1082.0
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme = ExtResource("1_xo3m3")
+alignment = 2
+script = ExtResource("3_25j8c")
+
+[node name="motion" parent="hud/game/hints" instance=ExtResource("3_fr63h")]
+layout_mode = 2
+
+[node name="pause" type="Control" parent="hud"]
+layout_mode = 2
+
+[node name="menu" type="VBoxContainer" parent="hud/pause"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -160.0
+offset_right = 250.0
+offset_bottom = 160.0
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+
+[node name="pause" type="MarginContainer" parent="hud/pause/menu"]
+layout_mode = 2
+theme = ExtResource("11_yiwgf")
+
+[node name="caption" type="Label" parent="hud/pause/menu/pause"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("11_yiwgf")
+text = "Пауза"
+
+[node name="game" type="Button" parent="hud/pause/menu"]
+custom_minimum_size = Vector2(250, 60)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+tooltip_text = "Режим отображения окна игры"
+toggle_mode = true
+shortcut = SubResource("Shortcut_b4j3q")
+script = ExtResource("2_tauni")
+
+[node name="margin" type="MarginContainer" parent="hud/pause/menu/game"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("8_icn8b")
+
+[node name="hotkeys" type="Control" parent="hud/pause/menu/game/margin"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+mouse_filter = 2
+script = ExtResource("9_lud7w")
+
+[node name="keyboard" parent="hud/pause/menu/game/margin/hotkeys" instance=ExtResource("12_hrgit")]
+visible = false
+layout_mode = 0
+anchors_preset = 0
+anchor_top = 0.0
+anchor_bottom = 0.0
+offset_top = 0.0
+offset_bottom = 46.0
+grow_vertical = 1
+
+[node name="gamepad" parent="hud/pause/menu/game/margin/hotkeys" instance=ExtResource("12_m0plm")]
+layout_mode = 1
+
+[node name="caption" type="Label" parent="hud/pause/menu/game/margin"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Продолжить"
+vertical_alignment = 1
+
+[node name="screen" type="Button" parent="hud/pause/menu"]
+custom_minimum_size = Vector2(250, 60)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+tooltip_text = "Режим отображения окна игры"
+toggle_mode = true
+shortcut = SubResource("Shortcut_b4j3q")
+script = ExtResource("2_tauni")
+
+[node name="margin" parent="hud/pause/menu/screen" instance=ExtResource("4_jl5c8")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="help" type="Button" parent="hud/pause/menu"]
+clip_contents = true
+custom_minimum_size = Vector2(250, 60)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+toggle_mode = true
+shortcut = SubResource("Shortcut_qlbv2")
+script = ExtResource("7_ns8vc")
+
+[node name="margin" type="MarginContainer" parent="hud/pause/menu/help"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("8_icn8b")
+
+[node name="hotkeys" type="Control" parent="hud/pause/menu/help/margin"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+mouse_filter = 2
+script = ExtResource("9_lud7w")
+
+[node name="keyboard" parent="hud/pause/menu/help/margin/hotkeys" instance=ExtResource("16_3bcnj")]
+visible = false
+layout_mode = 0
+anchors_preset = 0
+anchor_top = 0.0
+anchor_bottom = 0.0
+offset_top = 0.0
+offset_bottom = 46.0
+grow_vertical = 1
+
+[node name="gamepad" parent="hud/pause/menu/help/margin/hotkeys" instance=ExtResource("16_cdxw0")]
+layout_mode = 1
+
+[node name="caption" type="Label" parent="hud/pause/menu/help/margin"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Справка"
+vertical_alignment = 1
+
+[node name="status" type="Control" parent="hud/pause/menu/help/margin"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme = ExtResource("14_28f5f")
+script = ExtResource("10_g812m")
+
+[node name="opened" type="Label" parent="hud/pause/menu/help/margin/status"]
+visible = false
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -16.0
+offset_top = -9.5
+offset_bottom = 9.5
+grow_horizontal = 0
+grow_vertical = 2
+text = "📖"
+vertical_alignment = 1
+
+[node name="closed" type="Label" parent="hud/pause/menu/help/margin/status"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -25.0
+offset_top = -17.0
+offset_right = 2.0
+offset_bottom = 10.0
+grow_horizontal = 0
+grow_vertical = 2
+theme = ExtResource("14_28f5f")
+text = "📕"
+vertical_alignment = 1
+
+[node name="hints" type="HBoxContainer" parent="hud/pause"]
 visible = false
 custom_minimum_size = Vector2(70, 0)
 layout_mode = 1
@@ -97,7 +288,7 @@ offset_top = -46.0
 offset_right = 132.0
 grow_vertical = 0
 
-[node name="hotkeys" type="Control" parent="hud/bottom/hints"]
+[node name="hotkeys" type="Control" parent="hud/pause/hints"]
 custom_minimum_size = Vector2(70, 0)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -105,8 +296,7 @@ size_flags_vertical = 8
 mouse_filter = 2
 script = ExtResource("9_lud7w")
 
-[node name="keyboard" type="MarginContainer" parent="hud/bottom/hints/hotkeys"]
-visible = false
+[node name="keyboard" type="MarginContainer" parent="hud/pause/hints/hotkeys"]
 custom_minimum_size = Vector2(70, 25)
 layout_mode = 1
 anchors_preset = 2
@@ -119,12 +309,12 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 theme = ExtResource("9_oklq7")
 
-[node name="back" type="Panel" parent="hud/bottom/hints/hotkeys/keyboard"]
+[node name="back" type="Panel" parent="hud/pause/hints/hotkeys/keyboard"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="key" type="Label" parent="hud/bottom/hints/hotkeys/keyboard/back"]
+[node name="key" type="Label" parent="hud/pause/hints/hotkeys/keyboard/back"]
 custom_minimum_size = Vector2(30, 25)
 layout_mode = 1
 anchors_preset = 8
@@ -142,7 +332,8 @@ text = "0 - 9"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="gamepad" type="MarginContainer" parent="hud/bottom/hints/hotkeys"]
+[node name="gamepad" type="MarginContainer" parent="hud/pause/hints/hotkeys"]
+visible = false
 custom_minimum_size = Vector2(70, 25)
 layout_mode = 1
 anchors_preset = 2
@@ -155,12 +346,12 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 theme = ExtResource("9_oklq7")
 
-[node name="back" type="Panel" parent="hud/bottom/hints/hotkeys/gamepad"]
+[node name="back" type="Panel" parent="hud/pause/hints/hotkeys/gamepad"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="key" type="Label" parent="hud/bottom/hints/hotkeys/gamepad/back"]
+[node name="key" type="Label" parent="hud/pause/hints/hotkeys/gamepad/back"]
 custom_minimum_size = Vector2(30, 25)
 layout_mode = 1
 anchors_preset = 8
@@ -180,191 +371,22 @@ LS RS"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="caption" type="Label" parent="hud/bottom/hints"]
+[node name="caption" type="Label" parent="hud/pause/hints"]
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_font_sizes/font_size = 24
 text = "Выбор"
 vertical_alignment = 1
 
-[node name="hints" type="VBoxContainer" parent="hud"]
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 8
-theme = ExtResource("1_xo3m3")
-alignment = 2
-script = ExtResource("3_25j8c")
+[node name="ui" type="Node" parent="."]
 
-[node name="motion" parent="hud/hints" instance=ExtResource("3_fr63h")]
-layout_mode = 2
-
-[node name="menu" type="VBoxContainer" parent="hud"]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 4
-
-[node name="pause" type="MarginContainer" parent="hud/menu"]
-layout_mode = 2
-theme = ExtResource("11_yiwgf")
-
-[node name="caption" type="Label" parent="hud/menu/pause"]
-layout_mode = 2
-size_flags_horizontal = 4
-theme = ExtResource("11_yiwgf")
-text = "Пауза"
-
-[node name="continue" type="Button" parent="hud/menu"]
-custom_minimum_size = Vector2(250, 60)
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 4
-tooltip_text = "Режим отображения окна игры"
-toggle_mode = true
-shortcut = SubResource("Shortcut_b4j3q")
+[node name="fullscreen" type="Node" parent="ui"]
 script = ExtResource("2_tauni")
 
-[node name="margin" type="MarginContainer" parent="hud/menu/continue"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("8_icn8b")
+[node name="help" type="Node" parent="ui"]
 
-[node name="hotkeys" type="Control" parent="hud/menu/continue/margin"]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 4
-mouse_filter = 2
-script = ExtResource("9_lud7w")
-
-[node name="keyboard" parent="hud/menu/continue/margin/hotkeys" instance=ExtResource("12_hrgit")]
-visible = false
-layout_mode = 0
-anchors_preset = 0
-anchor_top = 0.0
-anchor_bottom = 0.0
-offset_top = 0.0
-offset_bottom = 46.0
-grow_vertical = 1
-
-[node name="gamepad" parent="hud/menu/continue/margin/hotkeys" instance=ExtResource("12_m0plm")]
-layout_mode = 1
-
-[node name="caption" type="Label" parent="hud/menu/continue/margin"]
-layout_mode = 2
-size_flags_horizontal = 4
-text = "Продолжить"
-vertical_alignment = 1
-
-[node name="fullscreen" type="Button" parent="hud/menu"]
-custom_minimum_size = Vector2(250, 60)
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 4
-tooltip_text = "Режим отображения окна игры"
-toggle_mode = true
-shortcut = SubResource("Shortcut_b4j3q")
-script = ExtResource("2_tauni")
-
-[node name="margin" parent="hud/menu/fullscreen" instance=ExtResource("4_jl5c8")]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_bottom = 0.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
-[node name="help" type="Button" parent="hud/menu"]
-clip_contents = true
-custom_minimum_size = Vector2(250, 60)
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 8
-toggle_mode = true
-shortcut = SubResource("Shortcut_qlbv2")
-script = ExtResource("7_ns8vc")
-
-[node name="margin" type="MarginContainer" parent="hud/menu/help"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("8_icn8b")
-
-[node name="hotkeys" type="Control" parent="hud/menu/help/margin"]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 4
-mouse_filter = 2
-script = ExtResource("9_lud7w")
-
-[node name="keyboard" parent="hud/menu/help/margin/hotkeys" instance=ExtResource("16_3bcnj")]
-visible = false
-layout_mode = 0
-anchors_preset = 0
-anchor_top = 0.0
-anchor_bottom = 0.0
-offset_top = 0.0
-offset_bottom = 46.0
-grow_vertical = 1
-
-[node name="gamepad" parent="hud/menu/help/margin/hotkeys" instance=ExtResource("16_cdxw0")]
-layout_mode = 1
-
-[node name="caption" type="Label" parent="hud/menu/help/margin"]
-layout_mode = 2
-size_flags_horizontal = 4
-text = "Справка"
-vertical_alignment = 1
-
-[node name="status" type="Control" parent="hud/menu/help/margin"]
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 4
-theme = ExtResource("14_28f5f")
-script = ExtResource("10_g812m")
-
-[node name="opened" type="Label" parent="hud/menu/help/margin/status"]
-visible = false
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -16.0
-offset_top = -9.5
-offset_bottom = 9.5
-grow_horizontal = 0
-grow_vertical = 2
-text = "📖"
-vertical_alignment = 1
-
-[node name="closed" type="Label" parent="hud/menu/help/margin/status"]
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -25.0
-offset_top = -17.0
-offset_right = 2.0
-offset_bottom = 10.0
-grow_horizontal = 0
-grow_vertical = 2
-theme = ExtResource("14_28f5f")
-text = "📕"
-vertical_alignment = 1
-
-[connection signal="toggled" from="hud/bottom/pause" to="hud/bottom/pause" method="_toggle_fullscreen"]
-[connection signal="toggled" from="hud/menu/continue" to="hud/menu/continue" method="_toggle_fullscreen"]
-[connection signal="toggled" from="hud/menu/fullscreen" to="hud/menu/fullscreen" method="_toggle_fullscreen"]
-[connection signal="pressed" from="hud/menu/help" to="hud/hints" method="show_help"]
-[connection signal="toggled" from="hud/menu/help" to="hud/menu/help" method="_on_help_show"]
+[connection signal="toggled" from="hud/game/pause" to="hud/game/pause" method="_toggle_fullscreen"]
+[connection signal="toggled" from="hud/pause/menu/game" to="hud/pause/menu/game" method="_toggle_fullscreen"]
+[connection signal="toggled" from="hud/pause/menu/screen" to="hud/pause/menu/screen" method="_toggle_fullscreen"]
+[connection signal="pressed" from="hud/pause/menu/help" to="hud/game/hints" method="show_help"]
+[connection signal="toggled" from="hud/pause/menu/help" to="hud/pause/menu/help" method="_on_help_show"]
