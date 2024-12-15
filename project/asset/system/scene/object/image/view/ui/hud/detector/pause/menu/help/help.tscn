@@ -1,24 +1,28 @@
-[gd_scene load_steps=5 format=3 uid="uid://lp8f4l2tw7ot"]
+[gd_scene load_steps=6 format=3 uid="uid://lp8f4l2tw7ot"]
 
-[ext_resource type="PackedScene" uid="uid://cmt8woivh1sy1" path="res://assets/systems/scenes/object/ui/hud/detector/pause/menu/help/content/content.tscn" id="1_ek84j"]
+[ext_resource type="PackedScene" uid="uid://cmt8woivh1sy1" path="res://asset/system/scene/object/image/view/ui/hud/detector/pause/menu/help/content/content.tscn" id="1_ek84j"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_dc18q"]
 
 [sub_resource type="InputEventKey" id="InputEventKey_k1l32"]
 device = -1
 keycode = 4194332
 
-[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_ls7cj"]
-button_index = 14
-pressed = true
+[sub_resource type="InputEventJoypadMotion" id="InputEventJoypadMotion_nwq04"]
+axis = 4
+axis_value = 1.0
 
 [sub_resource type="Shortcut" id="Shortcut_qlbv2"]
-events = [SubResource("InputEventKey_k1l32"), SubResource("InputEventJoypadButton_ls7cj")]
+events = [SubResource("InputEventKey_k1l32"), SubResource("InputEventJoypadMotion_nwq04")]
 
 [node name="help" type="Button"]
 clip_contents = true
 custom_minimum_size = Vector2(250, 60)
 size_flags_horizontal = 8
 size_flags_vertical = 8
+tooltip_text = "Перейти к игровому руководству"
 toggle_mode = true
+button_group = SubResource("ButtonGroup_dc18q")
 shortcut = SubResource("Shortcut_qlbv2")
 
 [node name="content" parent="." instance=ExtResource("1_ek84j")]

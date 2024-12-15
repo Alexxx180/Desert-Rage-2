@@ -11,11 +11,37 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="menu" parent="." instance=ExtResource("1_n3aae")]
+[node name="back" type="ColorRect" parent="."]
 layout_mode = 1
-offset_top = -146.0
-offset_bottom = 146.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.784314)
 
-[node name="hints" parent="." instance=ExtResource("2_50yht")]
+[node name="margin" type="MarginContainer" parent="."]
 layout_mode = 1
-offset_right = 154.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="stretch" type="HBoxContainer" parent="margin"]
+layout_mode = 2
+
+[node name="menu" parent="margin/stretch" instance=ExtResource("1_n3aae")]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.3
+
+[node name="space" type="Control" parent="margin/stretch"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="hints" parent="margin" instance=ExtResource("2_50yht")]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8

@@ -12,3 +12,6 @@ func _set_hint_visible(button: bool) -> void:
 
 func set_control_hint() -> void:
 	_set_hint_visible(is_gamepad_connected())
+
+func sync_control_hint(event: InputEvent) -> void:
+	_set_hint_visible(event is InputEventJoypadButton or event is InputEventJoypadMotion)

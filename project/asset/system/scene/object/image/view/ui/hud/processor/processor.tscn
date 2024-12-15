@@ -1,22 +1,18 @@
 [gd_scene load_steps=6 format=3 uid="uid://dviv8ympq1u8h"]
 
-[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/hud/processor/pause.gd" id="1_cbifh"]
 [ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/hud/processor/processor.gd" id="1_lf8hx"]
-[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/hud/processor/screen/screen.gd" id="2_1sdx8"]
-[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/hud/processor/screen/mode.gd" id="3_osicm"]
-[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/hud/processor/help.gd" id="4_ev6yf"]
+[ext_resource type="PackedScene" uid="uid://b80nbiu81d2li" path="res://asset/system/scene/object/image/view/ui/hud/processor/pause.tscn" id="2_l0112"]
+[ext_resource type="PackedScene" uid="uid://cn0rjpxhf8nt3" path="res://asset/system/scene/object/image/view/ui/hud/processor/screen/screen.tscn" id="3_cuvdr"]
+[ext_resource type="PackedScene" uid="uid://dhlb13mss1mp0" path="res://asset/system/scene/object/image/view/ui/hud/processor/help.tscn" id="4_qutgx"]
+[ext_resource type="PackedScene" uid="uid://boyyf4k56x4f0" path="res://asset/system/scene/object/image/view/ui/hud/processor/hints.tscn" id="5_yg6sf"]
 
 [node name="processor" type="Node"]
 script = ExtResource("1_lf8hx")
 
-[node name="pause" type="Node" parent="."]
-script = ExtResource("1_cbifh")
+[node name="pause" parent="." instance=ExtResource("2_l0112")]
 
-[node name="screen" type="Node" parent="."]
-script = ExtResource("2_1sdx8")
+[node name="screen" parent="." instance=ExtResource("3_cuvdr")]
 
-[node name="mode" type="Node" parent="screen"]
-script = ExtResource("3_osicm")
+[node name="help" parent="." instance=ExtResource("4_qutgx")]
 
-[node name="help" type="Node" parent="."]
-script = ExtResource("4_ev6yf")
+[node name="hints" parent="." instance=ExtResource("5_yg6sf")]

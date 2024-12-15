@@ -1,17 +1,20 @@
-[gd_scene load_steps=5 format=3 uid="uid://hvg28cmh6mji"]
+[gd_scene load_steps=6 format=3 uid="uid://hvg28cmh6mji"]
 
 [ext_resource type="PackedScene" uid="uid://b8a1vpsu5k0ct" path="res://asset/system/scene/object/image/view/ui/hud/detector/pause/menu/pause.tscn" id="1_8dw2w"]
 [ext_resource type="PackedScene" uid="uid://15t2xvow6yly" path="res://asset/system/scene/object/image/view/ui/hud/detector/pause/menu/resume/resume.tscn" id="2_8gyh0"]
 [ext_resource type="PackedScene" uid="uid://c4crchweyh45h" path="res://asset/system/scene/object/image/view/ui/hud/detector/pause/menu/screen/screen.tscn" id="3_yufy4"]
 [ext_resource type="PackedScene" uid="uid://lp8f4l2tw7ot" path="res://asset/system/scene/object/image/view/ui/hud/detector/pause/menu/help/help.tscn" id="4_gq82q"]
 
+[sub_resource type="ButtonGroup" id="ButtonGroup_khw4g"]
+
 [node name="menu" type="VBoxContainer"]
-anchors_preset = 4
+anchors_preset = 14
 anchor_top = 0.5
+anchor_right = 1.0
 anchor_bottom = 0.5
-offset_top = -160.0
-offset_right = 250.0
-offset_bottom = 160.0
+offset_top = -146.0
+offset_bottom = 146.0
+grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
@@ -21,9 +24,13 @@ layout_mode = 2
 
 [node name="resume" parent="." instance=ExtResource("2_8gyh0")]
 layout_mode = 2
+toggle_mode = false
 
 [node name="screen" parent="." instance=ExtResource("3_yufy4")]
 layout_mode = 2
+size_flags_horizontal = 1
 
 [node name="help" parent="." instance=ExtResource("4_gq82q")]
 layout_mode = 2
+size_flags_horizontal = 1
+button_group = SubResource("ButtonGroup_khw4g")

@@ -22,16 +22,18 @@ func _finish(_hero: CharacterBody2D) -> void:
 	#Processors.turn(hero.logic, false)
 	print("FALLBACK: ", fallback_scene)
 	
+	"""
 	Session.location["level"].x += direction
 	Session.location["level"].y = interval.part
 
 	var path: String = levels.complete_path()
 	transition.start_transition(path)
+	# """
 
 func _ready() -> void:
 	#_is_fallback = ResourceLoader.exists(fallback_scene)
 	print("FALLBACK: ", !fallback_scene)
-	# """
+	"""
 	if fallback_scene != "": return
 	
 	var level: Vector2i = Session.location["level"]

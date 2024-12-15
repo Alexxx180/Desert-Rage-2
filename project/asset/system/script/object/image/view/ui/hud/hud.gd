@@ -1,6 +1,6 @@
 extends Control
 
-@onready var detector: MarginContainer = $detector
+@onready var detector: Control = $detector
 @onready var processor: Node = $processor
 @onready var relation: Node = $relation
 
