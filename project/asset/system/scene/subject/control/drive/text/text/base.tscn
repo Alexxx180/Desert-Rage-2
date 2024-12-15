@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3 uid="uid://dmsl1kpysta4q"]
+
+[ext_resource type="LabelSettings" uid="uid://dajj5bo2dckei" path="res://assets/resources/runtime/themes/settings/ingame-text.tres" id="1_2cl8k"]
+[ext_resource type="Script" path="res://assets/systems/scripts/subject/control/drive/text/secret.gd" id="1_3upjm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_edb1k"]
+size = Vector2(96, 34)
+
+[node name="surprise" type="Label"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -42.0
+offset_top = -17.0
+offset_right = 42.0
+offset_bottom = 17.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+text = "Секрет"
+label_settings = ExtResource("1_2cl8k")
+script = ExtResource("1_3upjm")
+
+[node name="interaction" type="Area2D" parent="."]
+y_sort_enabled = true
+position = Vector2(41, 19)
+collision_layer = 0
+collision_mask = 4
+
+[node name="shape" type="CollisionShape2D" parent="interaction"]
+shape = SubResource("RectangleShape2D_edb1k")
+
+[connection signal="body_entered" from="interaction" to="." method="_on_open"]

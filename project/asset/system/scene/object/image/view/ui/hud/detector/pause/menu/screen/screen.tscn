@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://c4crchweyh45h"]
+
+[ext_resource type="PackedScene" uid="uid://hs7pndutk6on" path="res://asset/system/scene/object/image/view/ui/hud/detector/pause/menu/screen/content/content.tscn" id="1_gm5ns"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_f4jfc"]
+device = -1
+keycode = 4194342
+
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_ihwuv"]
+button_index = 13
+pressed = true
+
+[sub_resource type="Shortcut" id="Shortcut_b4j3q"]
+events = [SubResource("InputEventKey_f4jfc"), SubResource("InputEventJoypadButton_ihwuv")]
+
+[node name="screen" type="Button"]
+custom_minimum_size = Vector2(250, 60)
+size_flags_horizontal = 0
+size_flags_vertical = 4
+tooltip_text = "Режим отображения окна игры"
+toggle_mode = true
+shortcut = SubResource("Shortcut_b4j3q")
+
+[node name="content" parent="." instance=ExtResource("1_gm5ns")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2

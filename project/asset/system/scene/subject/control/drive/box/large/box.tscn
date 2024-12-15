@@ -1,0 +1,24 @@
+[gd_scene load_steps=6 format=3 uid="uid://jdgle11ik74y"]
+
+[ext_resource type="PackedScene" uid="uid://dkpwq1rqqn8ty" path="res://assets/systems/scenes/common/interactables/box/placement.tscn" id="1_354n6"]
+[ext_resource type="Script" path="res://assets/systems/scripts/subject/control/drive/box/box.gd" id="1_ru18r"]
+[ext_resource type="PackedScene" uid="uid://dekjgpdurors" path="res://assets/systems/scenes/actors/interactables/box/large/view/view.tscn" id="2_iy1ei"]
+[ext_resource type="PackedScene" uid="uid://dfv370jrbi47u" path="res://assets/systems/scenes/actors/interactables/box/large/logic/logic.tscn" id="4_vr5fw"]
+[ext_resource type="PackedScene" uid="uid://bocuu344hsqv" path="res://assets/systems/scenes/actors/sight/fov.tscn" id="5_fin2e"]
+
+[node name="large_box" type="CharacterBody2D"]
+collision_layer = 16
+collision_mask = 223
+script = ExtResource("1_ru18r")
+weight = 2.0
+height = 2
+
+[node name="placement" parent="." instance=ExtResource("1_354n6")]
+
+[node name="view" parent="." instance=ExtResource("2_iy1ei")]
+
+[node name="logic" parent="." instance=ExtResource("4_vr5fw")]
+
+[node name="fov" parent="." instance=ExtResource("5_fin2e")]
+position = Vector2(-9.53674e-07, -54)
+scale = Vector2(2, 4)

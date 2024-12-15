@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://d34l3acdhajbw"]
+
+[ext_resource type="Script" path="res://asset/system/script/subject/actor/group/hero/logic/detectors/platforming/platforms/surface/deployment/walls.gd" id="1_4wyeu"]
+[ext_resource type="Script" path="res://asset/system/script/subject/actor/group/hero/logic/detectors/platforming/platforms/surface/deployment/walls/borders.gd" id="2_pijtf"]
+[ext_resource type="PackedScene" uid="uid://bkebe58hbeadp" path="res://asset/system/scene/subject/actor/group/hero/logic/detectors/platforming/platforms/surface/deployment/ground.tscn" id="2_xcjv6"]
+[ext_resource type="Shape2D" uid="uid://do0s1n5uuqpof" path="res://asset/resource/engine/internal/shape/characters/character/character.tres" id="3_f2ok1"]
+
+[node name="walls" type="Node2D"]
+script = ExtResource("1_4wyeu")
+
+[node name="borders" type="RayCast2D" parent="."]
+target_position = Vector2(0, 0)
+collision_mask = 2
+script = ExtResource("2_pijtf")
+
+[node name="left" type="ShapeCast2D" parent="." instance=ExtResource("2_xcjv6")]
+shape = ExtResource("3_f2ok1")
+target_position = Vector2(0, 0)
+collision_mask = 195
+
+[node name="center" type="ShapeCast2D" parent="." instance=ExtResource("2_xcjv6")]
+shape = ExtResource("3_f2ok1")
+target_position = Vector2(0, 0)
+collision_mask = 195
+
+[node name="right" type="ShapeCast2D" parent="." instance=ExtResource("2_xcjv6")]
+shape = ExtResource("3_f2ok1")
+target_position = Vector2(0, 0)
+collision_mask = 195

@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://cmo8jhjujlsrv"]
+
+[ext_resource type="Theme" uid="uid://hmh3wpm730wh" path="res://asset/resource/engine/internal/theme/patterns/template/card.tres" id="1_dyeeh"]
+[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/hud/detector/hint.gd" id="2_ygjl1"]
+[ext_resource type="PackedScene" uid="uid://bfvmp26mw0vej" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/hints/category/header.tscn" id="3_wy37m"]
+[ext_resource type="Theme" uid="uid://ctsb6uh5t0n1l" path="res://asset/resource/engine/internal/theme/default.tres" id="4_gdr7w"]
+
+[node name="hint" type="VBoxContainer"]
+custom_minimum_size = Vector2(400, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_dyeeh")
+script = ExtResource("2_ygjl1")
+
+[node name="head" parent="." instance=ExtResource("3_wy37m")]
+layout_mode = 2
+theme = null
+
+[node name="body" parent="." instance=ExtResource("3_wy37m")]
+layout_mode = 2
+theme = ExtResource("4_gdr7w")

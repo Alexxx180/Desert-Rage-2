@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://cmt8woivh1sy1"]
+
+[ext_resource type="Theme" uid="uid://bdbjsuhahacjq" path="res://asset/resource/engine/internal/theme/patterns/template/button.tres" id="1_o6mgf"]
+[ext_resource type="PackedScene" uid="uid://bbh00xwvw6fau" path="res://asset/system/scene/object/image/view/ui/hud/detector/pause/menu/help/content/short.tscn" id="2_68f11"]
+[ext_resource type="PackedScene" uid="uid://bqsmdkusneydm" path="res://asset/system/scene/object/image/view/ui/hud/detector/pause/menu/help/content/mode/mode.tscn" id="3_3ir3p"]
+
+[node name="content" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_o6mgf")
+
+[node name="help" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="short" parent="help" instance=ExtResource("2_68f11")]
+custom_minimum_size = Vector2(46, 46)
+layout_mode = 2
+
+[node name="mode" parent="help" instance=ExtResource("3_3ir3p")]
+layout_mode = 2
+size_flags_vertical = 4
