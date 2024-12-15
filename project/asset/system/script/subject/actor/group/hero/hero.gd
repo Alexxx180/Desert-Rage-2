@@ -33,6 +33,7 @@ func _physics_process(_delta: float) -> void:
 	move_and_slide()
 
 func travel(motion: Vector2) -> void:
+	#print("MOTION IS: ", motion)
 	velocity = motion
 	moving.emit(motion)
 	move.emit(position)

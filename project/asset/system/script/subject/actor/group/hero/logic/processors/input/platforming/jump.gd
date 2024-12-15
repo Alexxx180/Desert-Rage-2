@@ -37,6 +37,6 @@ func determine(control: Node, upland: TileMapLayer) -> void:
 	elif feet.can_deploy(upland.floors, overview):
 		_to_floor()
 	else:
-		print("No jump")
+		print("No jump, upland: ", upland.name)
 
 	_set_midair(control, feet.balance.unstable)

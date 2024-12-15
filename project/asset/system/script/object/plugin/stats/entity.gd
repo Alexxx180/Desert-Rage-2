@@ -17,4 +17,4 @@ func apply_impulse(mach: int) -> void:
 func accelerate(mach: int) -> void:
 	apply_impulse(mach)
 	new_mach.emit(mach)
-	run.emit(mach * speed)
+	run.emit(mach * speed * STEP)

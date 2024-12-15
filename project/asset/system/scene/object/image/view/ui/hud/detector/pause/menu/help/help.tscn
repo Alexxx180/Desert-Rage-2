@@ -2,8 +2,6 @@
 
 [ext_resource type="PackedScene" uid="uid://cmt8woivh1sy1" path="res://asset/system/scene/object/image/view/ui/hud/detector/pause/menu/help/content/content.tscn" id="1_ek84j"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_dc18q"]
-
 [sub_resource type="InputEventKey" id="InputEventKey_k1l32"]
 device = -1
 keycode = 4194332
@@ -12,8 +10,13 @@ keycode = 4194332
 axis = 4
 axis_value = 1.0
 
+[sub_resource type="InputEventKey" id="InputEventKey_cehua"]
+device = -1
+keycode = 51
+unicode = 51
+
 [sub_resource type="Shortcut" id="Shortcut_qlbv2"]
-events = [SubResource("InputEventKey_k1l32"), SubResource("InputEventJoypadMotion_nwq04")]
+events = [SubResource("InputEventKey_k1l32"), SubResource("InputEventJoypadMotion_nwq04"), SubResource("InputEventKey_cehua")]
 
 [node name="help" type="Button"]
 clip_contents = true
@@ -22,7 +25,6 @@ size_flags_horizontal = 8
 size_flags_vertical = 8
 tooltip_text = "Перейти к игровому руководству"
 toggle_mode = true
-button_group = SubResource("ButtonGroup_dc18q")
 shortcut = SubResource("Shortcut_qlbv2")
 
 [node name="content" parent="." instance=ExtResource("1_ek84j")]

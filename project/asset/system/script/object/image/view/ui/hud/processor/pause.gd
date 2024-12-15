@@ -16,7 +16,7 @@ func _input(event: InputEvent):
 func toggle_pause() -> void:
 	paused = !paused
 
-	print("PAUSED: ", paused)
+	#print("PAUSED: ", paused)
 
 	game.visible = !paused
 	pause.visible = paused
