@@ -1,8 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://b01p37el432af"]
+[gd_scene load_steps=12 format=3 uid="uid://b01p37el432af"]
 
 [ext_resource type="Theme" uid="uid://ctsb6uh5t0n1l" path="res://asset/resource/engine/internal/theme/default.tres" id="1_lqfh0"]
-[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/hud/detector/hints.gd" id="2_wh6yj"]
+[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/hud/detector/hints/hints.gd" id="2_wh6yj"]
+[ext_resource type="Resource" uid="uid://clcinhwb42v46" path="res://asset/resource/engine/external/manual/preview/behavior/none.tres" id="3_b54mm"]
 [ext_resource type="PackedScene" uid="uid://mdjk60h84tvs" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/hints/motion.tscn" id="3_g22ml"]
+[ext_resource type="Script" path="res://addons/godot-behavior-tree-plugin/tree/tree.gd" id="4_5bxjs"]
+[ext_resource type="Script" path="res://addons/godot-behavior-tree-plugin/sequence/sequence.gd" id="5_ox1kg"]
+[ext_resource type="Script" path="res://addons/godot-behavior-tree-plugin/selector/selector.gd" id="6_3aqll"]
+[ext_resource type="Script" path="res://addons/godot-behavior-tree-plugin/blackboard/blackboard.gd" id="6_ad0wy"]
+[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/hud/detector/hints/behavior/hide.gd" id="6_d0k20"]
+[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/hud/detector/hints/behavior/show.gd" id="8_kc64f"]
+[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/hud/detector/hints/behavior/analyze.gd" id="9_2pumd"]
 
 [node name="hints" type="VBoxContainer"]
 anchors_preset = 3
@@ -19,6 +27,40 @@ size_flags_vertical = 8
 theme = ExtResource("1_lqfh0")
 alignment = 2
 script = ExtResource("2_wh6yj")
+preview = ExtResource("3_b54mm")
 
 [node name="motion" parent="." instance=ExtResource("3_g22ml")]
 layout_mode = 2
+
+[node name="behavior" type="Node" parent="."]
+script = ExtResource("4_5bxjs")
+
+[node name="hints" type="Node" parent="behavior"]
+script = ExtResource("6_3aqll")
+
+[node name="hide" type="Node" parent="behavior/hints"]
+script = ExtResource("6_d0k20")
+
+[node name="show" type="Node" parent="behavior/hints"]
+script = ExtResource("5_ox1kg")
+
+[node name="analyze" type="Node" parent="behavior/hints/show"]
+script = ExtResource("9_2pumd")
+
+[node name="motion" type="Node" parent="behavior/hints/show"]
+script = ExtResource("5_ox1kg")
+
+[node name="move" type="Node" parent="behavior/hints/show/motion"]
+script = ExtResource("8_kc64f")
+
+[node name="jump" type="Node" parent="behavior/hints/show/motion"]
+script = ExtResource("8_kc64f")
+
+[node name="push" type="Node" parent="behavior/hints/show/motion"]
+script = ExtResource("8_kc64f")
+
+[node name="land" type="Node" parent="behavior/hints/show/motion"]
+script = ExtResource("8_kc64f")
+
+[node name="blackboard" type="Node" parent="."]
+script = ExtResource("6_ad0wy")

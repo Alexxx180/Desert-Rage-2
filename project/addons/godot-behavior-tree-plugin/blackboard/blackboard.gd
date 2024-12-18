@@ -1,5 +1,7 @@
 extends Node
 
+class_name BehaviorBlackboard
+
 """ Behavior tree dictionary storage """
 
 var _base_memory: Dictionary # global info
@@ -19,13 +21,11 @@ func get_value(key, behavior_tree = null, node_scope = null) -> Variant:
 
 func _extract(behavior_tree: Variant, node_scope) -> Dictionary:
 	var memory: Dictionary = _get_tree_memory(behavior_tree)
-	if node_scope:
-		memory = _get_node_memory(memory, node_scope)
+	if node_scope: memory = _get_node_memory(memory, node_scope)
 	return memory
 
 func _get_memory(behavior_tree: Variant, node_scope) -> Dictionary:
-	if behavior_tree:
-		return _extract(behavior_tree, node_scope)
+	if behavior_tree: return _extract(behavior_tree, node_scope)
 	return _base_memory
 
 func _get_tree_memory(behavior_tree: Variant) -> Dictionary:

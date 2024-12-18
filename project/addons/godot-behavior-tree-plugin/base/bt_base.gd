@@ -1,6 +1,6 @@
 extends Node
 
-const Tick: GDScript = preload("res://addon/godot-behavior-tree-plugin/base/tick.gd")
+class_name BehaviorTreeBase
 
 func _execute(mark: Tick) -> int:
 	_enter(mark)

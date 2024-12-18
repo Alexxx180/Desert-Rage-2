@@ -1,5 +1,7 @@
 @tool
-extends "res://addon/godot-behavior-tree-plugin/base/bt_base.gd"
+extends BehaviorTreeBase
+
+class_name BehaviorDecorator
 
 func warn() -> String:
 	return "should have exactly one child"

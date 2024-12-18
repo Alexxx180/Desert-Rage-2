@@ -1,4 +1,6 @@
-extends "res://addon/godot-behavior-tree-plugin/base/bt_base.gd"
+extends BehaviorTreeBase
+
+class_name BehaviorMemSequence
 
 """
 	Compsite Node - ticks children until one returns FAILED,
@@ -12,15 +14,13 @@ func set_child(mark: Tick, i: int) -> void:
 func open(mark: Tick) -> void: set_child(mark, 0)
 
 func tick(mark: Tick) -> int:
+	var result: int = OK
 	var count: int = get_child_count()
 	var i: int = mark.blackboard.get_value("runningChild", mark.tree, self) - 1
 
-	var result: int = OK
-
-	while result == OK and i < count:
+	while i < count and result == OK:
 		i += 1
-		var child: Variant = get_child(i)
-		result = child._execute(tick)
+		result = get_child(i)._execute(mark)
 
 	if result == ERR_BUSY: set_child(mark, i)
 

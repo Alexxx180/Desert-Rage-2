@@ -1,12 +1,17 @@
 @tool
-extends "res://addon/godot-behavior-tree-plugin/base/decorator.gd"
+extends BehaviorDecorator
+
+class_name BehaviorSucceeder
 
 """ Decorator Node. Always returns OK if not running or errored """
 
 func tick(mark: Tick) -> int:
-	for child in get_children(): # 0..1 children
-		var result = child._execute(mark)
+	var busy: bool = false
+	var count: int = get_child_count()
+	var i: int = -1
+	
+	while i < count and not busy:
+		i += 1
+		busy = get_child(i)._execute(mark) == ERR_BUSY
 
-		if result == ERR_BUSY: return result
-
-	return OK
+	return ERR_BUSY if busy else OK 

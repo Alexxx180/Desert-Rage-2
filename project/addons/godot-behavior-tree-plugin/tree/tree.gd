@@ -1,8 +1,7 @@
 @tool
 extends Node
 
-const Tick = preload("res://addon/godot-behavior-tree-plugin/base/tick.gd")
-const BehaviorBlackboard: GDScript = preload("res://addon/godot-behavior-tree-plugin/blackboard/blackboard.gd")
+class_name BehaviorTree
 
 func warn() -> String:
 	return "should have exactly one child"
@@ -10,6 +9,19 @@ func warn() -> String:
 func _ready() -> void:
 	if not get_child_count() == 1:
 		push_error("BehaviorTree '%s' %s." % [name, warn()])
+
+func close_nodes(mark: Tick) -> Variant:
+	# Close nodes from last tick, if needed
+	var board: BehaviorBlackboard = mark.blackboard
+	var last_open_nodes: Array = board.get_value('openNodes', self)
+	var current_open_nodes := mark.open_nodes
+
+	# If node isn't currently open, but was open during last tick, close it
+	for node in last_open_nodes:
+		if (not current_open_nodes.has(node) and
+			board.get_value('isOpen', mark.tree, node)):
+			node._close(mark)
+	return current_open_nodes
 
 func tick(actor: Variant, blackboard: BehaviorBlackboard, debug = false) -> int:
 	var mark := Tick.new()
@@ -22,18 +34,8 @@ func tick(actor: Variant, blackboard: BehaviorBlackboard, debug = false) -> int:
 	for child in get_children():
 		result = child._execute(mark)
 
-	# Close nodes from last tick, if needed
-	var last_open_nodes: Array = mark.blackboard.get_value('openNodes', self)
-	var current_open_nodes := mark.open_nodes
-
-	# If node isn't currently open, but was open during last tick, close it
-	for node in last_open_nodes:
-		if (not current_open_nodes.has(node) 
-			and mark.blackboard.get_value('isOpen', mark.tree, node)):
-				node._close(mark)
-
 	# Populate the blackboard
-	blackboard.set_value('openNodes', current_open_nodes, self)
+	blackboard.set_value('openNodes', close_nodes(mark), self)
 	return result
 
 func _notification(code: int) -> void:

@@ -6,7 +6,7 @@
 	Can be extended to do nodeCount and send debug info.
 """
 
-const BehaviorBlackboard: GDScript = preload("res://addon/godot-behavior-tree-plugin/blackboard/blackboard.gd")
+class_name Tick
 
 var tree: Variant
 var open_nodes := []

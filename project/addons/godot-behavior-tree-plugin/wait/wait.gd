@@ -1,4 +1,6 @@
-extends "res://addon/godot-behavior-tree-plugin/base/decorator.gd"
+extends BehaviorDecorator
+
+class_name BehaviorWait
 
 @export var wait_time: float = 1.0
 

@@ -1,4 +1,6 @@
-extends "res://addon/godot-behavior-tree-plugin/base/bt_base.gd"
+extends BehaviorTreeBase
+
+class_name BehaviorSelector
 
 """
 	Composite Node. Ticks children until one
@@ -6,11 +8,12 @@ extends "res://addon/godot-behavior-tree-plugin/base/bt_base.gd"
 	children fail (return FAILED)
 """
 func tick(mark: Tick) -> int:
-	var result: int = OK
+	var code: int = FAILED
+	var count: int = get_child_count()
+	var i: int = -1
+	
+	while i < count and code == FAILED:
+		i += 1
+		code = get_child(i)._execute(mark)
 
-	for child in get_children():
-		result = child._execute(mark)
-
-		if not result == FAILED: break
-
-	return result
+	return OK if count == 0 else code

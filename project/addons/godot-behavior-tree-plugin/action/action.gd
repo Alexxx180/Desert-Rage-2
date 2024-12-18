@@ -1,4 +1,6 @@
-extends "res://addon/godot-behavior-tree-plugin/base/bt_base.gd"
+extends BehaviorTreeBase
+
+class_name BehaviorAction
 
 """ Leaf Node. Executes code then proceed. """
 

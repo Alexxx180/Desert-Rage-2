@@ -1,5 +1,7 @@
 @tool
-extends "res://addon/godot-behavior-tree-plugin/base/decorator.gd"
+extends BehaviorDecorator
+
+class_name BehaviorRepeater
 
 """
 	Decorator Node. Repeats the same node until we either
