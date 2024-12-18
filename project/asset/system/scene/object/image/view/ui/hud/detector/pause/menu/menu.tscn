@@ -1,11 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://hvg28cmh6mji"]
+[gd_scene load_steps=7 format=3 uid="uid://hvg28cmh6mji"]
 
 [ext_resource type="PackedScene" uid="uid://b8a1vpsu5k0ct" path="res://asset/system/scene/object/image/view/ui/hud/detector/pause/menu/pause.tscn" id="1_8dw2w"]
 [ext_resource type="PackedScene" uid="uid://15t2xvow6yly" path="res://asset/system/scene/object/image/view/ui/hud/detector/pause/menu/resume/resume.tscn" id="2_8gyh0"]
+[ext_resource type="Shortcut" uid="uid://brjhv1uiicoq4" path="res://asset/resource/engine/internal/short/cut/pause.tres" id="3_x185o"]
 [ext_resource type="PackedScene" uid="uid://c4crchweyh45h" path="res://asset/system/scene/object/image/view/ui/hud/detector/pause/menu/screen/screen.tscn" id="3_yufy4"]
 [ext_resource type="PackedScene" uid="uid://lp8f4l2tw7ot" path="res://asset/system/scene/object/image/view/ui/hud/detector/pause/menu/help/help.tscn" id="4_gq82q"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_7ucf7"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_d4tst"]
 
 [node name="menu" type="VBoxContainer"]
 anchors_preset = 14
@@ -25,12 +26,14 @@ layout_mode = 2
 [node name="resume" parent="." instance=ExtResource("2_8gyh0")]
 layout_mode = 2
 toggle_mode = false
+shortcut = ExtResource("3_x185o")
 
 [node name="screen" parent="." instance=ExtResource("3_yufy4")]
 layout_mode = 2
 size_flags_horizontal = 1
 
 [node name="help" parent="." instance=ExtResource("4_gq82q")]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 1
-button_group = SubResource("ButtonGroup_7ucf7")
+button_group = SubResource("ButtonGroup_d4tst")

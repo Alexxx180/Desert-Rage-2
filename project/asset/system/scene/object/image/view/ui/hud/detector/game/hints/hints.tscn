@@ -1,38 +1,51 @@
-[gd_scene load_steps=12 format=3 uid="uid://b01p37el432af"]
+[gd_scene load_steps=15 format=3 uid="uid://b01p37el432af"]
 
 [ext_resource type="Theme" uid="uid://ctsb6uh5t0n1l" path="res://asset/resource/engine/internal/theme/default.tres" id="1_lqfh0"]
 [ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/hud/detector/hints/hints.gd" id="2_wh6yj"]
 [ext_resource type="PackedScene" uid="uid://mdjk60h84tvs" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/hints/category/motion.tscn" id="3_g22ml"]
 [ext_resource type="Script" path="res://addons/godot-behavior-tree-plugin/tree/tree.gd" id="4_5bxjs"]
+[ext_resource type="InputEventKey" uid="uid://3kdo58jgrj1s" path="res://asset/resource/engine/internal/short/keyboard/fast/f1.tres" id="5_ar5c6"]
 [ext_resource type="Script" path="res://addons/godot-behavior-tree-plugin/sequence/sequence.gd" id="5_ox1kg"]
 [ext_resource type="PackedScene" uid="uid://bcldwsqs27to7" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/hints/analyze/analyze.tscn" id="5_u8371"]
 [ext_resource type="Script" path="res://addons/godot-behavior-tree-plugin/selector/selector.gd" id="6_3aqll"]
+[ext_resource type="InputEventJoypadButton" uid="uid://iq1qafpfj8xi" path="res://asset/resource/engine/internal/short/gamepad/signs/minus.tres" id="6_6hfgb"]
 [ext_resource type="Script" path="res://addons/godot-behavior-tree-plugin/blackboard/blackboard.gd" id="6_ad0wy"]
 [ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/hud/detector/hints/behavior/hide.gd" id="6_d0k20"]
 [ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/hud/detector/hints/behavior/show.gd" id="8_kc64f"]
 [ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/hud/detector/hints/behavior/analyze.gd" id="9_2pumd"]
 
+[sub_resource type="Shortcut" id="Shortcut_lguly"]
+events = [ExtResource("5_ar5c6"), ExtResource("6_6hfgb")]
+
 [node name="hints" type="VBoxContainer"]
-anchors_preset = 3
+anchors_preset = 11
 anchor_left = 1.0
-anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -400.0
-offset_top = -67.0
+offset_left = -408.0
 grow_horizontal = 0
-grow_vertical = 0
+grow_vertical = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
 theme = ExtResource("1_lqfh0")
 alignment = 2
 script = ExtResource("2_wh6yj")
 
-[node name="motion" parent="." instance=ExtResource("3_g22ml")]
+[node name="scroll" type="ScrollContainer" parent="."]
+custom_minimum_size = Vector2(320, 240)
 layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="motion" parent="scroll" instance=ExtResource("3_g22ml")]
+custom_minimum_size = Vector2(300, 140)
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 2
 
 [node name="analyze" parent="." instance=ExtResource("5_u8371")]
 layout_mode = 2
+shortcut = SubResource("Shortcut_lguly")
 
 [node name="behavior" type="Node" parent="."]
 script = ExtResource("4_5bxjs")

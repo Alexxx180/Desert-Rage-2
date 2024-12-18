@@ -1,11 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://bcldwsqs27to7"]
+[gd_scene load_steps=4 format=3 uid="uid://bcldwsqs27to7"]
 
+[ext_resource type="Theme" uid="uid://oio1oqqid0vo" path="res://asset/resource/engine/internal/theme/hud.tres" id="1_18l1r"]
 [ext_resource type="PackedScene" uid="uid://bifqxd4q16yu5" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/hints/analyze/content.tscn" id="1_umfxo"]
+[ext_resource type="PackedScene" uid="uid://d0sq1ex503flw" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/hide.tscn" id="2_ekla4"]
 
 [node name="analyze" type="Button"]
 custom_minimum_size = Vector2(146, 60)
 size_flags_horizontal = 8
 size_flags_vertical = 8
+tooltip_text = "Действия по ситуации"
+theme = ExtResource("1_18l1r")
+theme_override_font_sizes/font_size = 9
 
 [node name="content" parent="." instance=ExtResource("1_umfxo")]
 layout_mode = 1
@@ -16,3 +21,8 @@ offset_right = 0.0
 offset_bottom = 0.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="hide" parent="." instance=ExtResource("2_ekla4")]
+
+[connection signal="mouse_entered" from="." to="hide" method="_stop_hide"]
+[connection signal="mouse_exited" from="." to="hide" method="_start_hide"]

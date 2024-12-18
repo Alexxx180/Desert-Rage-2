@@ -3,7 +3,7 @@ extends VBoxContainer
 var preview: HelpPreview: set = set_preview
 
 #@onready var help: Button = $help
-@onready var motion: VBoxContainer = $motion
+@onready var motion: VBoxContainer = $scroll/motion
 @onready var behavior: BehaviorTree = $behavior
 @onready var blackboard: BehaviorBlackboard = $blackboard
 
