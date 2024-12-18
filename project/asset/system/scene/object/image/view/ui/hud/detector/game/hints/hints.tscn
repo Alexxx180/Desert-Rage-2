@@ -2,10 +2,10 @@
 
 [ext_resource type="Theme" uid="uid://ctsb6uh5t0n1l" path="res://asset/resource/engine/internal/theme/default.tres" id="1_lqfh0"]
 [ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/hud/detector/hints/hints.gd" id="2_wh6yj"]
-[ext_resource type="Resource" uid="uid://clcinhwb42v46" path="res://asset/resource/engine/external/manual/preview/behavior/none.tres" id="3_b54mm"]
-[ext_resource type="PackedScene" uid="uid://mdjk60h84tvs" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/hints/motion.tscn" id="3_g22ml"]
+[ext_resource type="PackedScene" uid="uid://mdjk60h84tvs" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/hints/category/motion.tscn" id="3_g22ml"]
 [ext_resource type="Script" path="res://addons/godot-behavior-tree-plugin/tree/tree.gd" id="4_5bxjs"]
 [ext_resource type="Script" path="res://addons/godot-behavior-tree-plugin/sequence/sequence.gd" id="5_ox1kg"]
+[ext_resource type="PackedScene" uid="uid://bcldwsqs27to7" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/hints/analyze/analyze.tscn" id="5_u8371"]
 [ext_resource type="Script" path="res://addons/godot-behavior-tree-plugin/selector/selector.gd" id="6_3aqll"]
 [ext_resource type="Script" path="res://addons/godot-behavior-tree-plugin/blackboard/blackboard.gd" id="6_ad0wy"]
 [ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/hud/detector/hints/behavior/hide.gd" id="6_d0k20"]
@@ -27,9 +27,11 @@ size_flags_vertical = 8
 theme = ExtResource("1_lqfh0")
 alignment = 2
 script = ExtResource("2_wh6yj")
-preview = ExtResource("3_b54mm")
 
 [node name="motion" parent="." instance=ExtResource("3_g22ml")]
+layout_mode = 2
+
+[node name="analyze" parent="." instance=ExtResource("5_u8371")]
 layout_mode = 2
 
 [node name="behavior" type="Node" parent="."]
@@ -64,3 +66,5 @@ script = ExtResource("8_kc64f")
 
 [node name="blackboard" type="Node" parent="."]
 script = ExtResource("6_ad0wy")
+
+[connection signal="pressed" from="analyze" to="." method="toggle_help"]

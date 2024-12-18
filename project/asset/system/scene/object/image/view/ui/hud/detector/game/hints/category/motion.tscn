@@ -1,17 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://mdjk60h84tvs"]
+[gd_scene load_steps=8 format=3 uid="uid://mdjk60h84tvs"]
 
 [ext_resource type="Theme" uid="uid://ctsb6uh5t0n1l" path="res://asset/resource/engine/internal/theme/default.tres" id="1_eorvr"]
 [ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/hud/detector/category/motion/motion.gd" id="2_sakrl"]
-[ext_resource type="PackedScene" uid="uid://cmo8jhjujlsrv" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/hints/category/hint.tscn" id="3_4x8d3"]
+[ext_resource type="PackedScene" uid="uid://cmo8jhjujlsrv" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/hints/hint/hint.tscn" id="3_4x8d3"]
+[ext_resource type="Resource" uid="uid://co4ybxow1lq4x" path="res://asset/resource/engine/external/manual/preview/content/motion/motion.tres" id="4_l4gcw"]
 [ext_resource type="Resource" uid="uid://b2o5w2bj6xcmn" path="res://asset/resource/engine/external/manual/preview/content/motion/jump.tres" id="5_tpgbm"]
-[ext_resource type="Script" path="res://asset/system/script/object/plugin/hints/hint.gd" id="6_0cogx"]
 [ext_resource type="Resource" uid="uid://byi51k7h80qme" path="res://asset/resource/engine/external/manual/preview/content/motion/push.tres" id="6_dj6fu"]
 [ext_resource type="Resource" uid="uid://cilu3h076h7x4" path="res://asset/resource/engine/external/manual/preview/content/motion/land.tres" id="7_yuu7f"]
-
-[sub_resource type="Resource" id="Resource_rgw12"]
-script = ExtResource("6_0cogx")
-head = "🏃 Движение 🧗‍♀️"
-body = "Для перемещения используйте ⬅️⬆️⬇️➡️. Чтобы ускориться нажмите Shift."
 
 [node name="motion" type="VBoxContainer"]
 anchors_preset = 15
@@ -23,10 +18,11 @@ theme = ExtResource("1_eorvr")
 script = ExtResource("2_sakrl")
 
 [node name="move" parent="." instance=ExtResource("3_4x8d3")]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
-help = SubResource("Resource_rgw12")
+help = ExtResource("4_l4gcw")
 
 [node name="jump" parent="." instance=ExtResource("3_4x8d3")]
 visible = false

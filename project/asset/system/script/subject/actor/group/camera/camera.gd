@@ -1,5 +1,6 @@
 extends Camera2D
 
+@onready var analyze: Node2D = $analyze
 @onready var deploy: Area2D = $deploy
 
 func change(node: Node, hero: CharacterBody2D):

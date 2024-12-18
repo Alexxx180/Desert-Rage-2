@@ -9,7 +9,7 @@ class_name BehaviorSequence
 """
 func tick(mark: Tick) -> int:
 	var code: int = OK
-	var count: int = get_child_count()
+	var count: int = get_child_count() - 1
 	var i: int = -1
 	
 	while i < count and code == OK:

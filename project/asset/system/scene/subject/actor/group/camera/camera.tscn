@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://asset/system/script/subject/actor/group/camera/camera.gd" id="1_vhcvo"]
 [ext_resource type="PackedScene" uid="uid://c75178jy2w4kb" path="res://asset/system/scene/subject/actor/group/camera/deploy.tscn" id="2_si5hy"]
-[ext_resource type="Shape2D" uid="uid://cfyhpw2i6hy4a" path="res://asset/resource/engine/internal/shape/characters/camera/analyze.tres" id="3_pr666"]
+[ext_resource type="PackedScene" uid="uid://dc5xsd2amc02" path="res://asset/system/scene/subject/actor/group/camera/analyze.tscn" id="3_vpa8q"]
 
 [node name="camera" type="Camera2D"]
 process_mode = 3
@@ -14,22 +14,5 @@ script = ExtResource("1_vhcvo")
 collision_layer = 0
 collision_mask = 4
 
-[node name="analyze" type="Node2D" parent="."]
-
-[node name="gap" type="ShapeCast2D" parent="analyze"]
-shape = ExtResource("3_pr666")
-target_position = Vector2(0, 0)
-max_results = 1
-collision_mask = 64
-
-[node name="upland" type="ShapeCast2D" parent="analyze"]
-shape = ExtResource("3_pr666")
-target_position = Vector2(0, 0)
-max_results = 1
-collision_mask = 128
-
-[node name="box" type="ShapeCast2D" parent="analyze"]
-shape = ExtResource("3_pr666")
-target_position = Vector2(0, 0)
-max_results = 1
-collision_mask = 128
+[node name="analyze" parent="." instance=ExtResource("3_vpa8q")]
+visible = false

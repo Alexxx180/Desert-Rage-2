@@ -1,5 +1,12 @@
 extends VBoxContainer
 
+func get_category() -> Dictionary:
+	var category: Dictionary = {}
+	for act in ["move", "jump", "land", "push"]:
+		category[act] = get_node(act)
+	return category
+
+"""
 signal show_help_button()
 
 var help: String: get = _get_help
@@ -25,3 +32,4 @@ func toggle_hints() -> void:
 func done_progress() -> void:
 	show_full_help()
 	show_help_button.emit()
+"""
