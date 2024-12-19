@@ -1,0 +1,36 @@
+[gd_scene load_steps=4 format=3 uid="uid://bjf0amweatrda"]
+
+[ext_resource type="Theme" uid="uid://bdbjsuhahacjq" path="res://asset/resource/engine/internal/theme/patterns/template/button.tres" id="1_g5x7k"]
+[ext_resource type="PackedScene" uid="uid://dgtk3x3a8i3uu" path="res://asset/system/scene/object/image/view/ui/hud/detector/pause/menu/exit/content/short/main.tscn" id="2_q6wsg"]
+[ext_resource type="PackedScene" uid="uid://b3vfnl1styer3" path="res://asset/system/scene/object/image/view/ui/hud/detector/pause/menu/exit/content/short/alt.tscn" id="3_flagi"]
+
+[node name="content" type="MarginContainer"]
+custom_minimum_size = Vector2(250, 60)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_g5x7k")
+
+[node name="exit" type="HBoxContainer" parent="."]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 10
+
+[node name="short" parent="exit" instance=ExtResource("2_q6wsg")]
+custom_minimum_size = Vector2(46, 46)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="caption" type="Label" parent="exit"]
+layout_mode = 2
+size_flags_horizontal = 2
+text = "Выход"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="alt" parent="exit" instance=ExtResource("3_flagi")]
+layout_mode = 2
+size_flags_horizontal = 8

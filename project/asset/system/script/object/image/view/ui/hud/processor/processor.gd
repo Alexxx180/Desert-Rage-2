@@ -4,3 +4,4 @@ extends Node
 @onready var screen: Node = $screen
 @onready var help: Node = $help
 @onready var hints: Node = $hints
+@onready var exit: Node = $exit

@@ -1,7 +1,7 @@
 extends Control
 
 @onready var keyboard: MarginContainer = $keyboard
-@onready var gamepad: MarginContainer = $gamepad
+@onready var gamepad: Control = $gamepad
 
 func is_gamepad_connected() -> bool:
 	return Input.get_connected_joypads().size() > 0
