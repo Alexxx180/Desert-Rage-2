@@ -10,7 +10,7 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
 	if fixed: return
-	if event is InputEventMouseMotion:
+	if event is InputEventMouseMotion or Input.get_axis("list_up", "list_down") != 0:
 		_show_pause()
 		start()
 

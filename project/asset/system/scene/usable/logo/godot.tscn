@@ -77,7 +77,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 script = ExtResource("1_3dm3r")
-scene = "res://assets/systems/logo/ex_digits.tscn"
+scene = "res://asset/system/scene/usable/logo/ex_digits.tscn"
 
 [node name="logo" type="TextureRect" parent="."]
 layout_mode = 1
@@ -94,3 +94,8 @@ libraries = {
 "": SubResource("AnimationLibrary_v3loh"),
 "logo": SubResource("AnimationLibrary_nob5c")
 }
+
+[node name="show" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="show" to="." method="_show"]

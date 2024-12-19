@@ -1,19 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://dugyepxewkmgo"]
+[gd_scene load_steps=5 format=3 uid="uid://dugyepxewkmgo"]
 
 [ext_resource type="Theme" uid="uid://oio1oqqid0vo" path="res://asset/resource/engine/internal/theme/hud.tres" id="1_mb1ob"]
 [ext_resource type="PackedScene" uid="uid://dvsup0moyqrkm" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/pause/content.tscn" id="1_y200j"]
+[ext_resource type="Shortcut" uid="uid://bgd4ocokxr1wj" path="res://asset/resource/engine/internal/short/cut/pause.tres" id="2_21uvd"]
 [ext_resource type="PackedScene" uid="uid://d0sq1ex503flw" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/hide.tscn" id="2_lxr78"]
-
-[sub_resource type="InputEventKey" id="InputEventKey_f4jfc"]
-device = -1
-keycode = 4194305
-
-[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_ihwuv"]
-button_index = 6
-pressed = true
-
-[sub_resource type="Shortcut" id="Shortcut_b4j3q"]
-events = [SubResource("InputEventKey_f4jfc"), SubResource("InputEventJoypadButton_ihwuv")]
 
 [node name="pause" type="Button"]
 custom_minimum_size = Vector2(137, 60)
@@ -27,7 +17,7 @@ size_flags_horizontal = 0
 size_flags_vertical = 8
 tooltip_text = "Приостановить игру"
 theme = ExtResource("1_mb1ob")
-shortcut = SubResource("Shortcut_b4j3q")
+shortcut = ExtResource("2_21uvd")
 
 [node name="content" parent="." instance=ExtResource("1_y200j")]
 layout_mode = 1

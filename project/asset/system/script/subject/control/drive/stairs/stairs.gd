@@ -20,6 +20,7 @@ func _finish(_hero: CharacterBody2D) -> void:
 		return
 	#Processors.turn(hero.view, false)
 	#Processors.turn(hero.logic, false)
+	get_tree().quit()
 	print("FALLBACK: ", fallback_scene)
 	
 	"""

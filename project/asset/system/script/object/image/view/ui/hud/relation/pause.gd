@@ -8,7 +8,7 @@ func controls(hud: Control) -> void:
 	suspend.short.push_back(pause.get_node("content/pause/short"))
 	pause.pressed.connect(suspend.toggle_pause)
 
-	var resume = hud.detector.get_node("pause/margin/stretch/menu/resume")
+	var resume = hud.detector.get_node("pause/margin/stretch/pause/menu/resume")
 	suspend.short.push_back(resume.get_node("content/resume/short"))
 	resume.pressed.connect(suspend.toggle_pause)
 

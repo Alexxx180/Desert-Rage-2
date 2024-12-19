@@ -1,12 +1,13 @@
-[gd_scene load_steps=8 format=4 uid="uid://d3x1s5nh0i6ts"]
+[gd_scene load_steps=9 format=4 uid="uid://d3x1s5nh0i6ts"]
 
-[ext_resource type="PackedScene" path="res://assets/systems/scenes/levels/tilemap/border.tscn" id="1_j3pv0"]
-[ext_resource type="PackedScene" path="res://assets/systems/scenes/levels/tilemap/ledge.tscn" id="2_75u1y"]
-[ext_resource type="PackedScene" uid="uid://bcwvkfu5bnj2j" path="res://assets/systems/scenes/levels/tilemap/logic.tscn" id="3_tl8y5"]
-[ext_resource type="PackedScene" uid="uid://b83b7oo2fmh5h" path="res://assets/systems/scenes/actors/characters/group/group.tscn" id="4_jhw04"]
-[ext_resource type="PackedScene" uid="uid://b3oh6t5q4y0ub" path="res://assets/systems/scenes/actors/sight/transition/stairs/down/end.tscn" id="4_mx55u"]
-[ext_resource type="PackedScene" uid="uid://dbbt75750fc4" path="res://assets/systems/scenes/object/ui/hud/cards.tscn" id="5_3dpf7"]
-[ext_resource type="LabelSettings" uid="uid://dajj5bo2dckei" path="res://assets/resources/runtime/themes/settings/ingame-text.tres" id="8_pgypb"]
+[ext_resource type="PackedScene" uid="uid://d0i3jl2uefg53" path="res://asset/system/scene/object/image/level/tilemap/border.tscn" id="1_j3pv0"]
+[ext_resource type="PackedScene" uid="uid://rlwfnl6rvpkj" path="res://asset/system/scene/object/image/level/tilemap/ledge.tscn" id="2_75u1y"]
+[ext_resource type="PackedScene" uid="uid://bcwvkfu5bnj2j" path="res://asset/system/scene/object/image/level/tilemap/logic.tscn" id="3_tl8y5"]
+[ext_resource type="PackedScene" uid="uid://b83b7oo2fmh5h" path="res://asset/system/scene/subject/actor/group/group.tscn" id="4_jhw04"]
+[ext_resource type="PackedScene" uid="uid://b3oh6t5q4y0ub" path="res://asset/system/scene/object/image/view/sight/transition/stairs/down/end.tscn" id="4_mx55u"]
+[ext_resource type="PackedScene" uid="uid://dbbt75750fc4" path="res://asset/system/scene/object/image/view/ui/hud/cards.tscn" id="5_3dpf7"]
+[ext_resource type="LabelSettings" uid="uid://dajj5bo2dckei" path="res://asset/resource/engine/internal/theme/settings/ingame-text.tres" id="8_pgypb"]
+[ext_resource type="PackedScene" uid="uid://g5swb5uoemix" path="res://asset/system/scene/subject/control/drive/stairs/down.tscn" id="8_qqeyc"]
 
 [node name="map" type="Node2D"]
 y_sort_enabled = true
@@ -24,10 +25,16 @@ tile_map_data = PackedByteArray("AAAHABAAAwAAAAAAAQA=")
 position = Vector2(486, 2077)
 
 [node name="cards" parent="." instance=ExtResource("5_3dpf7")]
-no_progress = true
 
 [node name="transition" parent="." instance=ExtResource("4_mx55u")]
 visible = false
+
+[node name="again" parent="." instance=ExtResource("8_qqeyc")]
+position = Vector2(352, 351)
+fallback_scene = "res://asset/system/scene/usable/logo/godot.tscn"
+
+[node name="exit" parent="." instance=ExtResource("8_qqeyc")]
+position = Vector2(608, 353)
 
 [node name="cast" type="Control" parent="."]
 layout_mode = 3
@@ -106,5 +113,25 @@ offset_right = 883.0
 offset_bottom = 330.0
 text = "Желаем новых
 свершений!"
+label_settings = ExtResource("8_pgypb")
+horizontal_alignment = 1
+
+[node name="again" type="Label" parent="cast"]
+layout_mode = 0
+offset_left = 208.0
+offset_top = 415.0
+offset_right = 394.0
+offset_bottom = 486.0
+text = "Пройти снова"
+label_settings = ExtResource("8_pgypb")
+horizontal_alignment = 1
+
+[node name="exit" type="Label" parent="cast"]
+layout_mode = 0
+offset_left = 558.0
+offset_top = 414.0
+offset_right = 744.0
+offset_bottom = 485.0
+text = "Выйти из игры"
 label_settings = ExtResource("8_pgypb")
 horizontal_alignment = 1
