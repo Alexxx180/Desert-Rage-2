@@ -1,29 +1,35 @@
 extends ColorRect
 
-@onready var player: AnimationPlayer = $player
-@onready var show: Timer = $show
+@onready var timer: Timer = $show
+@onready var state: TextureRect = $logo
+@onready var tree = get_tree()
 
 @export_file var scene: String = "res://asset/system/scene/usable/level/caves/origin/0/0/level.tscn"
+@export var i: int = -1
 
-var progress: Array[int] = [1, 3, 1]
-var events: Array = [
-	InputEventJoypadButton, InputEventMouseButton, InputEventKey
-]
+var time: Array[Vector2] = [Vector2(1.5, 2), Vector2(2.5, 1)]
+
+func _change_state(tint: Color) -> void:
+	create_tween().tween_property(state, "modulate", tint, time[i].x)
 
 func _input(event: InputEvent) -> void:
-	if event in events: _scene_change()
+	if not i in [0, 1]: return
+	var gamepad: bool = event is InputEventJoypadButton
+	var mouse: bool = event is InputEventMouseButton
+	
+	if (gamepad or mouse or event is InputEventKey) and event.pressed:
+		state.hide()
+		_scene_change()
 
-func _get_ip() -> String: return "logo/appear"
 func _scene_change() -> void:
-	show.stop()
-	print_debug(get_tree().change_scene_to_file(scene))
+	timer.stop()
+	print_debug(tree.change_scene_to_file(scene))
 
 func _show() -> void:
-	match progress[0]:
-		1: player.play(_get_ip())
-		2: player.play_backwards(_get_ip())
+	i += 1
+	match i:
+		0: _change_state(Color.WHITE)
+		1: _change_state(Color.BLACK)
 		_: _scene_change(); return
-
-	show.wait_time = progress[progress[0]]
-	show.start()
-	progress[0] += 1
+	timer.wait_time = time[i].x + time[i].y
+	timer.start()
