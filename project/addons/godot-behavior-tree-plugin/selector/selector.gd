@@ -10,10 +10,10 @@ class_name BehaviorSelector
 func tick(mark: Tick) -> int:
 	var code: int = FAILED
 	var count: int = get_child_count()
-	var i: int = -1
+	var i: int = 0
 	
 	while i < count and code == FAILED:
-		i += 1
 		code = get_child(i)._execute(mark)
+		i += 1
 
 	return OK if count == 0 else code
