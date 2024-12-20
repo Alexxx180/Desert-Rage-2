@@ -11,11 +11,9 @@ func toggle_help() -> void:
 	blackboard.toggle_value("hide")
 	behavior.tick(self, blackboard)
 
-func progress(hint: String, act: String) -> void:
-	blackboard.set_value("hide", true)
-	behavior.tick(self, blackboard)
-	blackboard.get_value("preview")[hint][act] = true
-	blackboard.set_value("hide", false)
+func progress(head: String, body: String) -> void:
+	blackboard.get_value("progress").push_back(head)
+	blackboard.get_value("progress").push_back(body)
 	behavior.tick(self, blackboard)
 
 func set_preview(prev: HelpPreview) -> void:
@@ -25,6 +23,6 @@ func set_preview(prev: HelpPreview) -> void:
 		"motion": motion.get_category()
 	}
 	blackboard.set_values(
-		["hide", "show", "preview", "analyze", "ref"],
-		[true, prev.clone(), prev.help, help, ref]
+		["hide", "show", "preview", "analyze", "ref", "progress"],
+		[true, prev.clone(), prev.help, help, ref, []]
 	)

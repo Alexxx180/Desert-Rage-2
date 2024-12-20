@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://b01p37el432af"]
+[gd_scene load_steps=15 format=3 uid="uid://b01p37el432af"]
 
 [ext_resource type="Theme" uid="uid://ctsb6uh5t0n1l" path="res://asset/resource/engine/internal/theme/default.tres" id="1_lqfh0"]
 [ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/hints/hints.gd" id="2_wh6yj"]
@@ -9,9 +9,10 @@
 [ext_resource type="PackedScene" uid="uid://bcldwsqs27to7" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/hints/analyze/analyze.tscn" id="5_u8371"]
 [ext_resource type="Script" path="res://addons/godot-behavior-tree-plugin/selector/selector.gd" id="6_3aqll"]
 [ext_resource type="Shortcut" uid="uid://b2haaq41erm0s" path="res://asset/resource/engine/internal/short/cut/game/analyze.tres" id="6_7mevl"]
-[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/hints/behavior/hide.gd" id="6_d0k20"]
-[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/hints/behavior/show.gd" id="8_kc64f"]
-[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/hints/behavior/analyze.gd" id="9_2pumd"]
+[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/hints/behavior/hints/hide.gd" id="6_d0k20"]
+[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/hints/behavior/hints/show.gd" id="8_kc64f"]
+[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/hints/behavior/analyze/analyze.gd" id="9_2pumd"]
+[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/hints/behavior/analyze/progress.gd" id="9_pvn5o"]
 [ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/hints/behavior/blackboard.gd" id="13_2a2v1"]
 
 [node name="hints" type="VBoxContainer"]
@@ -50,6 +51,9 @@ script = ExtResource("4_5bxjs")
 
 [node name="hints" type="Node" parent="behavior"]
 script = ExtResource("6_3aqll")
+
+[node name="progress" type="Node" parent="behavior/hints"]
+script = ExtResource("9_pvn5o")
 
 [node name="hide" type="Node" parent="behavior/hints"]
 script = ExtResource("6_d0k20")

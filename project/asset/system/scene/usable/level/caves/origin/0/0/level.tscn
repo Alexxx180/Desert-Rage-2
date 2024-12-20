@@ -35,6 +35,10 @@ fallback_scene = "res://asset/system/scene/usable/level/caves/origin/-/1/0/level
 
 [node name="show" type="Node2D" parent="motion"]
 
+[node name="move" parent="motion/show" node_paths=PackedStringArray("cards") instance=ExtResource("6_pkn1e")]
+position = Vector2(1440, 3165)
+cards = NodePath("../../../cards")
+
 [node name="jump" parent="motion/show" node_paths=PackedStringArray("cards") instance=ExtResource("6_pkn1e")]
 position = Vector2(1312, 2527)
 cards = NodePath("../../../cards")
@@ -47,8 +51,26 @@ cards = NodePath("../../../cards")
 position = Vector2(160, 1631)
 cards = NodePath("../../../cards")
 
+[node name="hide" type="Node2D" parent="motion"]
+
+[node name="move" parent="motion/hide" node_paths=PackedStringArray("cards") instance=ExtResource("6_pkn1e")]
+position = Vector2(1440, 2655)
+cards = NodePath("../../../cards")
+
+[node name="jump" parent="motion/hide" node_paths=PackedStringArray("cards") instance=ExtResource("6_pkn1e")]
+position = Vector2(288, 2527)
+cards = NodePath("../../../cards")
+
+[node name="push" parent="motion/hide" node_paths=PackedStringArray("cards") instance=ExtResource("6_pkn1e")]
+position = Vector2(160, 1811)
+cards = NodePath("../../../cards")
+
+[node name="land" parent="motion/hide" node_paths=PackedStringArray("cards") instance=ExtResource("6_pkn1e")]
+position = Vector2(481, 1439)
+cards = NodePath("../../../cards")
+
 [node name="group" parent="." instance=ExtResource("8_l5akn")]
-position = Vector2(1439, 3123)
+position = Vector2(1443, 3169)
 
 [node name="cards" parent="." instance=ExtResource("9_qn5y3")]
 progress = ExtResource("9_b2spe")
