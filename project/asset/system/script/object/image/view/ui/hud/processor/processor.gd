@@ -1,7 +1,4 @@
 extends Node
 
-@onready var suspend: Node = $pause
-@onready var screen: Node = $screen
-@onready var help: Node = $help
-@onready var hints: Node = $hints
-@onready var exit: Node = $exit
+@onready var game: Node = $game
+@onready var pause: Node = $pause

@@ -1,8 +1,24 @@
-[gd_resource type="Resource" script_class="HelpHint" load_steps=2 format=3 uid="uid://co4ybxow1lq4x"]
+[gd_resource type="Resource" script_class="HelpHint" load_steps=6 format=3 uid="uid://co4ybxow1lq4x"]
 
+[ext_resource type="Script" path="res://asset/system/script/object/plugin/hints/gamepad.gd" id="1_i2q3k"]
 [ext_resource type="Script" path="res://asset/system/script/object/plugin/hints/hint.gd" id="1_yyd0r"]
+
+[sub_resource type="Resource" id="Resource_sks2n"]
+script = ExtResource("1_i2q3k")
+hints = Array[String](["левый 🕹", "✖️"])
+
+[sub_resource type="Resource" id="Resource_wpclu"]
+script = ExtResource("1_i2q3k")
+hints = Array[String](["левый 🕹", "🅰️"])
+
+[sub_resource type="Resource" id="Resource_1hm72"]
+script = ExtResource("1_i2q3k")
+hints = Array[String](["левый 🕹", "🅱️"])
 
 [resource]
 script = ExtResource("1_yyd0r")
 head = "🏃 Движение 🧗‍♀️"
-body = "Для перемещения используйте ⬅️⬆️⬇️➡️. Чтобы ускориться нажмите Shift."
+body = "Для перемещения используйте %s. Чтобы ускориться нажмите %s."
+keyboard = Array[String](["⬅️⬆️⬇️➡️", "Shift"])
+gamepad = Array[ExtResource("1_i2q3k")]([SubResource("Resource_sks2n"), SubResource("Resource_wpclu"), SubResource("Resource_1hm72")])
+screen = Array[String]([])

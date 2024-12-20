@@ -5,7 +5,7 @@ extends CanvasLayer
 #@export var progress: bool = false
 
 func _ready() -> void:
-	$hud/detector/game/margin/hints.preview = progress
+	hud.detector.game.margin.hints.preview = progress
 	#pass
 	#var hints: VBoxContainer = detector.get_node("game/margin/hints")
 	

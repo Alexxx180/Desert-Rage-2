@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://v6stk7j8vyox"]
+[gd_scene load_steps=5 format=3 uid="uid://v6stk7j8vyox"]
 
+[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/hud/detector/pause/pause.gd" id="1_mkyw8"]
 [ext_resource type="PackedScene" uid="uid://hvg28cmh6mji" path="res://asset/system/scene/object/image/view/ui/hud/detector/pause/menu/menu.tscn" id="1_n3aae"]
 [ext_resource type="PackedScene" uid="uid://cwndvklt02erf" path="res://asset/system/scene/object/image/view/ui/hud/detector/pause/hints/hints.tscn" id="2_50yht"]
+[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/hud/detector/pause/options/options.gd" id="2_i4sx2"]
 
 [node name="pause" type="Control"]
 layout_mode = 3
@@ -10,6 +12,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_mkyw8")
 
 [node name="back" type="ColorRect" parent="."]
 layout_mode = 1
@@ -31,38 +34,39 @@ offset_right = 576.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="stretch" type="HBoxContainer" parent="margin"]
+[node name="content" type="HBoxContainer" parent="margin"]
 layout_mode = 2
 
-[node name="pause" type="VBoxContainer" parent="margin/stretch"]
+[node name="options" type="VBoxContainer" parent="margin/content"]
 custom_minimum_size = Vector2(250, 250)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.2
+script = ExtResource("2_i4sx2")
 
-[node name="split-1" type="Control" parent="margin/stretch/pause"]
+[node name="split-1" type="Control" parent="margin/content/options"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.25
 
-[node name="menu" parent="margin/stretch/pause" instance=ExtResource("1_n3aae")]
+[node name="menu" parent="margin/content/options" instance=ExtResource("1_n3aae")]
 custom_minimum_size = Vector2(300, 250)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.5
 
-[node name="split-2" type="Control" parent="margin/stretch/pause"]
+[node name="split-2" type="Control" parent="margin/content/options"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.25
 
-[node name="hints" parent="margin/stretch/pause" instance=ExtResource("2_50yht")]
+[node name="hints" parent="margin/content/options" instance=ExtResource("2_50yht")]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 
-[node name="character" type="Control" parent="margin/stretch"]
+[node name="character" type="Control" parent="margin/content"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.8
