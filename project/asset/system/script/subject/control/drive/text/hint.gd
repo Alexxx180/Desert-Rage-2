@@ -10,7 +10,7 @@ func _on_hint_collected(_hero: CharacterBody2D) -> void:
 	var act: Node2D = get_parent()
 	var category: Node2D = act.get_parent()
 	var hints: VBoxContainer = cards.hud.detector.game.margin.hints
-	
+
 	if head == "": head = category.name
 	if body == "": body = name
 

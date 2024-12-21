@@ -18,17 +18,22 @@ func show_delayed() -> void:
 	
 func hide_delayed() -> void:
 	_change_state(Color.TRANSPARENT)
-	await get_tree().create_timer(1.0).timeout
+	await get_tree().create_timer(1).timeout
 	hide()
 	modulate = Color.WHITE
-	#create_tween().tween_property(self, "visible", false, 1)
 
 func sync_control_hint(event: InputEvent) -> void:
 	var gamepad: bool = event is InputEventJoypadButton or event is InputEventJoypadMotion
 	var device: String = Input.get_joy_name(0).to_lower()
+	var hint: String = help.body
 	
 	if gamepad and device != "":
 		var i: int = help.get_gamepad_type(device)
-		caption.text = help.body % help.gamepad[i].hints
+		var hints: Array[String] = help.gamepad[i].hints
+		if help.gamepad.size() == 1:
+			hint = help.body % hints[0]
+		else:
+			hint = help.body % hints
 	else:
-		caption.text = help.body % help.keyboard
+		hint = help.body % help.keyboard
+	caption.text = hint

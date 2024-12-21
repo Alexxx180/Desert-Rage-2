@@ -5,7 +5,7 @@ func tick(mark: Tick) -> int:
 	
 	var show: Dictionary = mark.blackboard.get_value("ref")
 	
-	for head in ["motion"]:
+	for head in ["motion", "action", "reason"]:
 		for ref in show[head].values(): ref.hide()
 		
 	return OK

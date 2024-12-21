@@ -1,16 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://cimkmbth3t0at"]
+[gd_scene load_steps=4 format=3 uid="uid://cimkmbth3t0at"]
 
-[ext_resource type="Theme" uid="uid://hmh3wpm730wh" path="res://assets/resources/runtime/themes/patterns/template/card.tres" id="1_t7br4"]
+[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/hints/category/action.gd" id="1_sxiw8"]
+[ext_resource type="PackedScene" uid="uid://cmo8jhjujlsrv" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/hints/hint/hint.tscn" id="2_205ay"]
+[ext_resource type="Resource" uid="uid://c2ktudlok8m2v" path="res://asset/resource/engine/external/manual/preview/content/action/act.tres" id="3_aqrfh"]
 
 [node name="action" type="VBoxContainer"]
+script = ExtResource("1_sxiw8")
 
-[node name="header" type="PanelContainer" parent="."]
+[node name="act" parent="." instance=ExtResource("2_205ay")]
+visible = false
 layout_mode = 2
-theme = ExtResource("1_t7br4")
-
-[node name="margin" type="MarginContainer" parent="header"]
-layout_mode = 2
-
-[node name="caption" type="Label" parent="header/margin"]
-layout_mode = 2
-text = "✊ Действие 🙌"
+help = ExtResource("3_aqrfh")

@@ -8,9 +8,9 @@ func tick(mark: Tick) -> int:
 	var head: String = progress[0]
 	var body: String = progress[1]
 	
+	#print("IS AVAILABLE?  - HEAD: ", head, " - BODY: ", body)
 	var ref: VBoxContainer = mark.blackboard.get_value("ref")[head][body]
 	
-	#print("IS AVAILABLE? ", available, " - HEAD: ", head, " - BODY: ", body)
 	if progress.size() == 2:
 		ref.show_delayed()
 	else:

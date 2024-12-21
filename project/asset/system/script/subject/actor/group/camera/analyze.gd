@@ -6,5 +6,9 @@ func get_analyze() -> Dictionary:
 			"jump": $gap,
 			"land": $upland,
 			"push": $box,
-		}
+		},
+		"action": {
+			"act": $subject
+		},
+		"reason": {}
 	}

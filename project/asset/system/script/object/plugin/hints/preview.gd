@@ -7,7 +7,9 @@ class_name HelpPreview
 
 func _get_fields() -> Dictionary:
 	return {
-		"motion": ["move", "jump", "push", "land"]
+		"motion": ["move", "jump", "push", "land"],
+		"action": ["act"],
+		"reason": ["team", "group"]
 	}
 
 func _get_help(value: Callable) -> Dictionary:
