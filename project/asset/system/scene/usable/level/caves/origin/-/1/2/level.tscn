@@ -29,9 +29,16 @@ position = Vector2(4129, 4577)
 fallback_scene = "res://asset/system/scene/usable/level/caves/origin/0/1/level.tscn"
 
 [node name="group" parent="." instance=ExtResource("5_1mkvt")]
-position = Vector2(4069, 4693)
+position = Vector2(2911, 2846)
 
 [node name="cards" parent="." instance=ExtResource("7_w8adg")]
 
 [node name="transition" parent="." instance=ExtResource("8_qmwpy")]
 visible = false
+
+[connection signal="body_entered" from="border/button" to="border/button" method="_on_press"]
+[connection signal="body_exited" from="border/button" to="border/button" method="_on_release"]
+[connection signal="body_entered" from="border/@Area2D@192551" to="border/@Area2D@192551" method="_on_press"]
+[connection signal="body_exited" from="border/@Area2D@192551" to="border/@Area2D@192551" method="_on_release"]
+[connection signal="body_entered" from="border/@Area2D@192559" to="border/@Area2D@192559" method="_on_press"]
+[connection signal="body_exited" from="border/@Area2D@192559" to="border/@Area2D@192559" method="_on_release"]
