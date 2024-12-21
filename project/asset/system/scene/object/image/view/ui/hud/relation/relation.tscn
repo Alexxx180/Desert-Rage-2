@@ -1,0 +1,32 @@
+[gd_scene load_steps=10 format=3 uid="uid://dbkrincgd6l50"]
+
+[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/hud/relation/relation.gd" id="1_ny3sf"]
+[ext_resource type="PackedScene" uid="uid://bisnfriip5102" path="res://asset/system/scene/object/image/view/ui/hud/relation/pause/hints.tscn" id="2_kyivv"]
+[ext_resource type="PackedScene" uid="uid://1b42cubxgbsv" path="res://asset/system/scene/object/image/view/ui/hud/relation/game/pause.tscn" id="2_rswkn"]
+[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/hud/relation/game/game.gd" id="2_vf2x7"]
+[ext_resource type="PackedScene" uid="uid://b0snwsx66bqt2" path="res://asset/system/scene/object/image/view/ui/hud/relation/pause/screen.tscn" id="3_bvrf2"]
+[ext_resource type="PackedScene" uid="uid://b3wnhahmr4itc" path="res://asset/system/scene/object/image/view/ui/hud/relation/game/help.tscn" id="4_qir8c"]
+[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/hud/relation/pause/pause.gd" id="5_aqv51"]
+[ext_resource type="PackedScene" uid="uid://cul3waugsc4ib" path="res://asset/system/scene/object/image/view/ui/hud/relation/pause/exit.tscn" id="6_j1rcv"]
+[ext_resource type="PackedScene" uid="uid://crmw2u8x88m8i" path="res://asset/system/scene/object/image/view/ui/hud/relation/pause/resume.tscn" id="7_r8mtf"]
+
+[node name="relation" type="Node"]
+script = ExtResource("1_ny3sf")
+
+[node name="game" type="Node" parent="."]
+script = ExtResource("2_vf2x7")
+
+[node name="pause" parent="game" instance=ExtResource("2_rswkn")]
+
+[node name="help" parent="game" instance=ExtResource("4_qir8c")]
+
+[node name="pause" type="Node" parent="."]
+script = ExtResource("5_aqv51")
+
+[node name="hints" parent="pause" instance=ExtResource("2_kyivv")]
+
+[node name="resume" parent="pause" instance=ExtResource("7_r8mtf")]
+
+[node name="screen" parent="pause" instance=ExtResource("3_bvrf2")]
+
+[node name="exit" parent="pause" instance=ExtResource("6_j1rcv")]

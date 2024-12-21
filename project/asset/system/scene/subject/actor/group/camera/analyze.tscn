@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=3 uid="uid://dc5xsd2amc02"]
+
+[ext_resource type="Script" path="res://asset/system/script/subject/actor/group/camera/analyze.gd" id="1_mslkg"]
+[ext_resource type="Shape2D" uid="uid://cfyhpw2i6hy4a" path="res://asset/resource/engine/internal/shape/characters/camera/analyze.tres" id="2_yycpx"]
+
+[node name="analyze" type="Node2D"]
+script = ExtResource("1_mslkg")
+
+[node name="gap" type="ShapeCast2D" parent="."]
+visible = false
+shape = ExtResource("2_yycpx")
+target_position = Vector2(0, 0)
+max_results = 1
+collision_mask = 192
+
+[node name="upland" type="ShapeCast2D" parent="."]
+visible = false
+shape = ExtResource("2_yycpx")
+target_position = Vector2(0, 0)
+max_results = 1
+collision_mask = 128
+
+[node name="box" type="ShapeCast2D" parent="."]
+visible = false
+shape = ExtResource("2_yycpx")
+target_position = Vector2(0, 0)
+max_results = 1
+collision_mask = 16
+
+[node name="subject" type="ShapeCast2D" parent="."]
+visible = false
+shape = ExtResource("2_yycpx")
+target_position = Vector2(0, 0)
+max_results = 1
+collision_mask = 2048

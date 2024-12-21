@@ -1,0 +1,29 @@
+[gd_scene load_steps=7 format=3 uid="uid://dbbt75750fc4"]
+
+[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/hud/cards.gd" id="1_7o4uc"]
+[ext_resource type="PackedScene" uid="uid://c1yixupmo8miw" path="res://asset/system/scene/object/image/view/ui/hud/detector/detector.tscn" id="2_4iytc"]
+[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/hud/hud.gd" id="2_70yda"]
+[ext_resource type="Resource" uid="uid://dok754m36108s" path="res://asset/resource/engine/external/manual/preview/behavior/full.tres" id="2_v7864"]
+[ext_resource type="PackedScene" uid="uid://dbkrincgd6l50" path="res://asset/system/scene/object/image/view/ui/hud/relation/relation.tscn" id="5_4gy6p"]
+[ext_resource type="PackedScene" uid="uid://dviv8ympq1u8h" path="res://asset/system/scene/object/image/view/ui/hud/processor/processor.tscn" id="18_v3gro"]
+
+[node name="cards" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_7o4uc")
+progress = ExtResource("2_v7864")
+
+[node name="hud" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_70yda")
+
+[node name="detector" parent="hud" instance=ExtResource("2_4iytc")]
+layout_mode = 1
+
+[node name="processor" parent="hud" instance=ExtResource("18_v3gro")]
+
+[node name="relation" parent="hud" instance=ExtResource("5_4gy6p")]

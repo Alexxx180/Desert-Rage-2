@@ -1,0 +1,151 @@
+[gd_scene load_steps=14 format=3 uid="uid://dgmexcad4fr8j"]
+
+[ext_resource type="Script" path="res://asset/system/script/subject/control/gear/lever/lever.gd" id="1_dk22o"]
+[ext_resource type="Shape2D" uid="uid://c42xv75yc83x1" path="res://asset/resource/engine/internal/shape/map-tile.tres" id="2_un0p1"]
+[ext_resource type="Script" path="res://asset/system/script/subject/control/gear/lever/interaction.gd" id="3_a2hya"]
+[ext_resource type="Texture2D" uid="uid://cxjmiykqf2jpr" path="res://asset/resource/media/images/interactables/lever/plate.png" id="4_7hr7x"]
+[ext_resource type="Texture2D" uid="uid://cdmbet1nwaonb" path="res://asset/resource/media/images/interactables/lever/lever.png" id="5_apsyj"]
+[ext_resource type="Texture2D" uid="uid://c306ii3p7ahba" path="res://asset/resource/media/images/interactables/lever/border.png" id="6_kkt3l"]
+[ext_resource type="PackedScene" uid="uid://bocuu344hsqv" path="res://asset/system/scene/object/image/view/sight/fov.tscn" id="7_x370w"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_278yb"]
+size = Vector2(176, 176)
+
+[sub_resource type="Animation" id="Animation_7e27q"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("lever:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-0.523599]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("lever:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_h7k5g"]
+_data = {
+"RESET": SubResource("Animation_7e27q")
+}
+
+[sub_resource type="Animation" id="Animation_umdqs"]
+resource_name = "toggle_off"
+length = 0.1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("lever:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.523599, -0.523599]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("lever:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(7.5, 0), Vector2(-7.5, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_7mnx5"]
+resource_name = "toggle_on"
+length = 0.1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("lever:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-7.5, 0), Vector2(7.5, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("lever:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-0.523599, 0.523599]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1iawn"]
+_data = {
+"toggle_off": SubResource("Animation_umdqs"),
+"toggle_on": SubResource("Animation_7mnx5")
+}
+
+[node name="lever" type="StaticBody2D"]
+collision_layer = 2048
+collision_mask = 0
+script = ExtResource("1_dk22o")
+
+[node name="shape" type="CollisionShape2D" parent="."]
+shape = ExtResource("2_un0p1")
+
+[node name="interaction" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("3_a2hya")
+
+[node name="shape" type="CollisionShape2D" parent="interaction"]
+shape = SubResource("RectangleShape2D_278yb")
+
+[node name="view" type="Node2D" parent="."]
+
+[node name="plate" type="Sprite2D" parent="view"]
+texture = ExtResource("4_7hr7x")
+
+[node name="lever" type="Sprite2D" parent="view"]
+rotation = -0.523599
+texture = ExtResource("5_apsyj")
+
+[node name="border" type="Sprite2D" parent="view"]
+texture = ExtResource("6_kkt3l")
+
+[node name="fov" parent="." instance=ExtResource("7_x370w")]
+position = Vector2(9.53674e-07, 9.53674e-07)
+scale = Vector2(2, 2)
+
+[node name="animation" type="AnimationPlayer" parent="."]
+root_node = NodePath("../view")
+libraries = {
+"": SubResource("AnimationLibrary_h7k5g"),
+"levers": SubResource("AnimationLibrary_1iawn")
+}
+
+[connection signal="body_entered" from="interaction" to="interaction" method="_available"]
+[connection signal="body_exited" from="interaction" to="interaction" method="_unavailable"]
+[connection signal="feedback" from="interaction" to="." method="_toggle"]

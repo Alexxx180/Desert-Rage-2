@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://hs7pndutk6on"]
+
+[ext_resource type="Theme" uid="uid://bdbjsuhahacjq" path="res://asset/resource/engine/internal/theme/patterns/template/button.tres" id="1_48pn4"]
+[ext_resource type="PackedScene" uid="uid://bn6oofuklwxs5" path="res://asset/system/scene/object/image/view/ui/hud/detector/pause/menu/screen/content/short.tscn" id="2_p1fqf"]
+[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/hud/detector/pause/options/menu/screen/window.gd" id="2_ycgh7"]
+[ext_resource type="PackedScene" uid="uid://cm1c2p8lwfwe7" path="res://asset/system/scene/object/image/view/ui/hud/detector/pause/menu/screen/content/mode/mode.tscn" id="5_on8cr"]
+
+[node name="content" type="MarginContainer"]
+custom_minimum_size = Vector2(250, 60)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_48pn4")
+
+[node name="window" type="HBoxContainer" parent="."]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 10
+script = ExtResource("2_ycgh7")
+
+[node name="short" parent="window" instance=ExtResource("2_p1fqf")]
+custom_minimum_size = Vector2(46, 46)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="mode" parent="window" instance=ExtResource("5_on8cr")]
+layout_mode = 2
+size_flags_horizontal = 3

@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://dryh46gyikikp"]
+
+[ext_resource type="LabelSettings" uid="uid://dajj5bo2dckei" path="res://asset/resource/engine/internal/theme/settings/ingame-text.tres" id="1_hr2ua"]
+[ext_resource type="Script" path="res://asset/system/script/subject/control/drive/text/secret.gd" id="2_srubo"]
+[ext_resource type="PackedScene" uid="uid://bocuu344hsqv" path="res://asset/system/scene/object/image/view/sight/fov.tscn" id="3_xbbgx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_edb1k"]
+size = Vector2(128, 32)
+
+[node name="surprise" type="Label"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -42.0
+offset_top = -17.0
+offset_right = 42.0
+offset_bottom = 17.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+text = "Секрет"
+label_settings = ExtResource("1_hr2ua")
+script = ExtResource("2_srubo")
+
+[node name="interaction" type="Area2D" parent="."]
+y_sort_enabled = true
+position = Vector2(41, 19)
+collision_layer = 0
+collision_mask = 4
+
+[node name="shape" type="CollisionShape2D" parent="interaction"]
+shape = SubResource("RectangleShape2D_edb1k")
+
+[node name="fov" parent="." instance=ExtResource("3_xbbgx")]
+position = Vector2(41, 19)
+scale = Vector2(4, 0.999999)
+
+[connection signal="body_entered" from="interaction" to="." method="_on_open"]
