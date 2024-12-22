@@ -9,12 +9,6 @@ func is_gamepad_connected() -> bool:
 
 func _ready() -> void:
 	$head/margin/caption.text = help.head
-	"""
-	if is_gamepad_connected():
-		caption.text = get_gamepad_hint()
-	else:
-		caption.text = help.body % help.keyboard
-	"""
 	caption.text = help.body % help.keyboard
 
 func _change_state(color: Color) -> void:
