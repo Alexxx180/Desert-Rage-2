@@ -32,9 +32,11 @@ func _set_midair(control: Node, is_in_midair: bool) -> void:
 
 func determine(control: Node, upland: TileMapLayer) -> void:
 	print("upland encounter: jump determine")
+	var up: TileMapLayer = upland if upland.name == "border" else upland.floors
+
 	if ledges.around(overview, feet):
 		_to_ledge()
-	elif feet.can_deploy(upland.floors, overview):
+	elif feet.can_deploy(up, overview):
 		_to_floor()
 	else:
 		print("No jump, upland: ", upland.name)

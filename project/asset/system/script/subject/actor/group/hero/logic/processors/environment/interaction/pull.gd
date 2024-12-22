@@ -26,7 +26,8 @@ func start_forward(box: CharacterBody2D) -> void:
 	hero.pushing = _weight != 0
 	#apply_impulse.connect(push.apply_impulse)
 	#push.apply_velocity(_velocity * _impulse)
-	print("start forward: ", _weight)
+	#print("start forward: ", _weight)
+	#print("start forward")
 
 func stop_forward(box: CharacterBody2D) -> void:
 	var push: Node = box.logic.processors.movement.push
@@ -34,5 +35,6 @@ func stop_forward(box: CharacterBody2D) -> void:
 	_weight -= box.weight
 	hero.pushing = _weight != 0
 	#apply_impulse.disconnect(push.apply_impulse)
-	print("stop forward: ", _weight)
+	#print("stop forward: ", _weight)
+	#print("stop forward")
 	push.apply_velocity(Vector2.ZERO)
