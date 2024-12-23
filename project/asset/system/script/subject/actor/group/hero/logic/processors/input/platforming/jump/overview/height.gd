@@ -11,7 +11,10 @@ func _get_floor() -> int:
 func set_floor(next: int) -> void:
 	if (not freeze):
 		_F = next
+		print("but come back to: ", F)
+	else:
+		print("already set as: ", F)
 
 func set_box_floor(next: int) -> void:
 	_F = next
-	#print("ACTUAL HERO F: ", _F)
+	print("set box floor: ", F)

@@ -13,8 +13,7 @@ func available_ground(direction: Vector2i) -> bool:
 	#print("BORDERS")
 	return not walls.borders.is_colliding()
 
-func can_deploy(feet: Node, overview: Node, floors: TileMapLayer = null) -> bool:
-	var eyes: Node = overview.directions.eyes
+func can_deploy(jump: Node, floors: TileMapLayer = null) -> bool:
+	var dir: Vector2i = jump.overview.directions.eyes.direction
 
-	return (available_ground(eyes.direction) and
-		walls.are_ledges(feet, overview, floors))
+	return available_ground(dir) and walls.are_ledges(jump, floors)

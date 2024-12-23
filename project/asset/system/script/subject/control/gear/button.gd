@@ -11,7 +11,7 @@ func _toggle(next: String) -> Dictionary:
 	return _atlas
 
 func _ready() -> void:
-	var logic: TileMapLayer = get_node("../../mark")
+	var logic: TileMapLayer = get_node("../../tags")
 	_atlas = Tiling.atlas(logic, position)
 	pressed.connect(logic.activators.activate)
 	release.connect(logic.activators.activate)

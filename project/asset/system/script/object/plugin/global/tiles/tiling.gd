@@ -22,6 +22,8 @@ static func extract(map: TileMapLayer, options: Dictionary) -> Variant:
 	var cell: Vector2i = map.local_to_map(options.pos)
 	var tile: TileData = map.get_cell_tile_data(cell)
 
+	#print("orig pos: ", options.pos, ", local to map: ", cell)
+
 	if tile == null: return options["none"]
 
 	return tile.get_custom_data(options.data)
