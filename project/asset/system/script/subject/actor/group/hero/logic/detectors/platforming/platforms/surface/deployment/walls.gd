@@ -27,11 +27,13 @@ func is_ledge(i: int, jump: Node, floors: TileMapLayer = null) -> bool:
 		j -= 1
 		var current: ShapeCast2D = ground[i].walls[j]
 		target = get_target_pos(i, j)
+		print("target: ", target," - JUMP: ", gap or jump.is_same_floor(floors))
 		ledge = not current.is_colliding() and (gap or jump.is_same_floor(floors))
 
 	return ledge
 
 func are_ledges(jump: Node, floors: TileMapLayer = null) -> bool:
+	print("TRYING ")
 	var ledge: bool = false
 	var i: int = ground.size()
 	
@@ -39,4 +41,5 @@ func are_ledges(jump: Node, floors: TileMapLayer = null) -> bool:
 		i -= 1
 		ledge = is_ledge(i, jump, floors)
 
+	print("END UP TRYING")
 	return ledge
