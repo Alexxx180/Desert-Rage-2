@@ -1,0 +1,124 @@
+[gd_scene load_steps=14 format=3 uid="uid://dedq4jmv88so"]
+
+[ext_resource type="Script" path="res://asset/system/script/subject/actor/npc/governtoad.gd" id="1_4cgrs"]
+[ext_resource type="Texture2D" uid="uid://cnr06mls0bmn3" path="res://asset/resource/media/images/actors/npc/governtoad.png" id="2_8t3ad"]
+[ext_resource type="Shape2D" uid="uid://bm63pnn3dmmtf" path="res://asset/resource/engine/internal/shape/interactables/lever.tres" id="3_3vcar"]
+[ext_resource type="PackedScene" uid="uid://ct8xgb5201d3s" path="res://asset/system/scene/subject/actor/npc/dialog.tscn" id="4_iq0uh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_neucp"]
+size = Vector2(42, 44)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_clktx"]
+atlas = ExtResource("2_8t3ad")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0w7x4"]
+atlas = ExtResource("2_8t3ad")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gwsmv"]
+atlas = ExtResource("2_8t3ad")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hfp2i"]
+atlas = ExtResource("2_8t3ad")
+region = Rect2(64, 64, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7au8q"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_clktx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0w7x4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gwsmv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hfp2i")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_u5pao"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("profile:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"default"]
+}
+
+[sub_resource type="Animation" id="Animation_u8kjk"]
+resource_name = "toad_speech"
+length = 1.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("profile:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"default"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("profile:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.285714, 0.571429, 0.857143, 1.14286),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rl0sv"]
+_data = {
+"RESET": SubResource("Animation_u5pao"),
+"toad_speech": SubResource("Animation_u8kjk")
+}
+
+[node name="governtoad" type="StaticBody2D"]
+script = ExtResource("1_4cgrs")
+message = "Это мои чуваки!"
+
+[node name="shape" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_neucp")
+
+[node name="profile" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_7au8q")
+
+[node name="talk" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="shape" type="CollisionShape2D" parent="talk"]
+shape = ExtResource("3_3vcar")
+
+[node name="dialog" parent="." instance=ExtResource("4_iq0uh")]
+visible = false
+offset_top = -120.0
+offset_bottom = -80.0
+
+[node name="animation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_rl0sv")
+}
+
+[connection signal="body_entered" from="talk" to="." method="_talk"]
+[connection signal="body_exited" from="talk" to="." method="_idle"]
