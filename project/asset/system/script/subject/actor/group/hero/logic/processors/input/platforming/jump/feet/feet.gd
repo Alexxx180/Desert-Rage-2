@@ -14,7 +14,7 @@ func is_same_floor(floors: TileMapLayer, overview: Node) -> bool:
 	var ground: Vector2 = deployment.walls.target
 	var tile: Vector2 = surface.entity.position + ground
 
-	var f: int = Tiling.extract(floors, Tiling.floor(tile))
+	var f: int = Tiling.extract(floors, tile, Tiling.FLOOR)
 	#print("Detecting floor: ", f)
 
 	height.set_floor(f)

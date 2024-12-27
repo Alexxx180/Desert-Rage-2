@@ -1,8 +1,9 @@
 extends Node
 
-const assets: String = "res://assets/systems/scenes/levels/%s/%s/%d/level.tscn"
+const assets: String = "res://asset/system/scene/usable/level/%s/%s/%d/level.tscn"
 
 func complete_path() -> String:
+	
 	return """
 	var level: Vector2i = Session.location["level"]
 	var caption: String = Session.location["name"]

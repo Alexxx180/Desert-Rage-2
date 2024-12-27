@@ -8,5 +8,5 @@ func at_old_floor(_tiles: TileMapLayer) -> void:
 
 func at_new_floor(surface: TileMapLayer) -> void:
 	var contact: Vector2 = tracker.contact
-	var f: int = Tiling.extract(surface, Tiling.floor(contact))
+	var f: int = Tiling.extract(surface, contact, Tiling.FLOOR)
 	queue.append(f)
