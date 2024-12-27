@@ -6,7 +6,7 @@ extends TileMapLayer
 @onready var transition: Node = $transition
 @onready var curtain: Node = $curtain
 
-func _ready() -> void:
+func set_stats() -> void:
 	var path: String = get_parent().name.trim_prefix("map")
 	
 	var i: int = path.find("-", 1)
@@ -15,6 +15,12 @@ func _ready() -> void:
 	
 	SessionStats.location.level = Vector2i(level, part)
 	print("path: ", path, ", floor: ", level, ", part: ", part)
-	transition.tags = self
+
+func _ready() -> void:
+	set_stats()
+	
+	var level: Node = transition.level
+	level.next_level.connect(curtain.start_transition)
+	level.next_level.connect(transition.check.next_level_transition)
 	
 	if invisible: hide()

@@ -21,7 +21,7 @@ static func atlas(map: TileMapLayer, pos: Vector2) -> Dictionary:
 		result.name = map.tile_set.get_source(id).resource_name
 		result.cell = map.get_cell_atlas_coords(coords)
 	#assert(id != -1, "Activator is not connected to logic")
-	print("LAYER: ", map.name, " - ID: ", id, " - COORDS: ", coords)
+	#print("LAYER: ", map.name, " - ID: ", id, " - COORDS: ", coords)
 	return result
 
 #static func level(tile: Vector2) -> Dictionary:
@@ -35,12 +35,11 @@ static func logic(cell: Vector2i) -> int:
 static func custom(map: TileMapLayer, coords: Vector2i, option: int) -> Variant:
 	var tile: TileData = map.get_cell_tile_data(coords)
 	var t: int = map.get_cell_source_id(coords)
-	print("id: ", t)
-	print("layer: ", map.name, ", local to map: ", coords, ", data: ", tile)
+	print("id: ", t, ", layer: ", map.name, ", local to map: ", coords, ", data: ", tile)
 
 	return _none[option] if tile == null else tile.get_custom_data(_data[option])
 
 
 static func extract(map: TileMapLayer, pos: Vector2, option: int) -> Variant:
-	print("orig pos: ", pos)
+	#print("orig pos: ", pos)
 	return custom(map, map.local_to_map(pos), option)

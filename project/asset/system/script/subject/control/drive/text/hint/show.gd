@@ -14,7 +14,7 @@ func _on_hint_collected(_hero: CharacterBody2D) -> void:
 	if head == "": head = category.name
 	if body == "": body = name
 
-	print("make progress: act '%s' - name '%s'" % [head, body])
+	print("hide progress")
 
 	hints.progress(head, body)
 	act.call_deferred("remove_child", self)

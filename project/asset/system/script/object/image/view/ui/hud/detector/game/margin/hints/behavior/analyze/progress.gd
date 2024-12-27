@@ -10,13 +10,16 @@ func tick(mark: Tick) -> int:
 	
 	#print("IS AVAILABLE?  - HEAD: ", head, " - BODY: ", body)
 	var ref: VBoxContainer = mark.blackboard.get_value("ref")[head][body]
+	ref.show_delayed()
 	
+	"""
 	if progress.size() == 2:
 		ref.show_delayed()
 	else:
 		ref.hide_delayed()
 		progress.clear()
 		return OK
+	# """
 	
 	mark.blackboard.get_value("preview")[head][body] = true
 	return OK

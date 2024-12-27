@@ -4,4 +4,7 @@ var logic: TileMapLayer
 var hero: CharacterBody2D
 
 func encounter(execute: TileMapLayer) -> void:
-	logic.transition.transit(execute, hero)
+	var level: Dictionary = {
+		"tags": logic, "execute": execute, "hero": hero
+	}
+	logic.transition.transit(level)
