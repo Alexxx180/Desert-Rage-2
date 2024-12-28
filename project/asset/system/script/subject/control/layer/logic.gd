@@ -19,6 +19,8 @@ func set_stats() -> void:
 func _ready() -> void:
 	set_stats()
 	
+	transition.teleport.fill(self, get_node("../execute"))
+	
 	var level: Node = transition.level
 	level.next_level.connect(curtain.start_transition)
 	level.next_level.connect(transition.check.next_level_transition)
