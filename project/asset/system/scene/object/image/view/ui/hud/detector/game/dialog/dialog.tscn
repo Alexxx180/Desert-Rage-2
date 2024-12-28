@@ -1,0 +1,46 @@
+[gd_scene load_steps=2 format=3 uid="uid://cbd4idujs0m3k"]
+
+[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/dialog/dialog.gd" id="1_irn5c"]
+
+[node name="dialog" type="MarginContainer"]
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_constants/margin_bottom = 75
+
+[node name="chat" type="VBoxContainer" parent="."]
+layout_mode = 2
+script = ExtResource("1_irn5c")
+
+[node name="queued" type="PanelContainer" parent="chat"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="margin" type="MarginContainer" parent="chat/queued"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 5
+
+[node name="label" type="Label" parent="chat/queued/margin"]
+layout_mode = 2
+text = "Рей - Выглядит как большой купол с символом поклонения"
+
+[node name="answer" type="PanelContainer" parent="chat"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="margin" type="MarginContainer" parent="chat/answer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 5
+
+[node name="label" type="Label" parent="chat/answer/margin"]
+layout_mode = 2
+text = "Рок - Здесь также есть живые существа"
+
+[node name="timer" type="Timer" parent="chat"]
+
+[connection signal="timeout" from="chat/timer" to="chat" method="free_capacity"]
