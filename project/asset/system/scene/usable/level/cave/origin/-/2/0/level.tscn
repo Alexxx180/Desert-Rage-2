@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://doxs8rqj7hevh"]
+[gd_scene load_steps=12 format=4 uid="uid://doxs8rqj7hevh"]
 
 [ext_resource type="PackedScene" uid="uid://bcwvkfu5bnj2j" path="res://asset/system/scene/object/image/level/tilemap/push.tscn" id="1_4mro5"]
 [ext_resource type="PackedScene" uid="uid://dbbt75750fc4" path="res://asset/system/scene/object/image/view/ui/hud/cards.tscn" id="1_tdajh"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://ce2y76nymo6o4" path="res://asset/system/scene/object/image/level/tilemap/tags.tscn" id="4_6ywn6"]
 [ext_resource type="Resource" uid="uid://d1xyetb6pl1pw" path="res://asset/resource/engine/external/manual/preview/behavior/motion.tres" id="7_73m31"]
 [ext_resource type="PackedScene" uid="uid://boai8pinslcme" path="res://asset/system/scene/subject/control/drive/text/hint/show.tscn" id="9_33q1f"]
+[ext_resource type="PackedScene" uid="uid://582u4do5bi2h" path="res://asset/system/scene/subject/control/drive/text/plot.tscn" id="9_l317i"]
 [ext_resource type="PackedScene" uid="uid://cidkkfbh43l2u" path="res://asset/system/scene/subject/control/drive/text/hint/hide.tscn" id="10_g63vt"]
 
 [node name="map-2-0" type="Node2D"]
@@ -35,6 +36,21 @@ progress = ExtResource("7_73m31")
 
 [node name="transition" parent="." instance=ExtResource("2_a2a8f")]
 visible = false
+
+[node name="dialog" type="Node2D" parent="."]
+
+[node name="lever" parent="dialog" instance=ExtResource("9_l317i")]
+position = Vector2(1956, 2777)
+plot_text = Array[String](["*Щелчок*", "Дид - Что произошло?", "Рей - Переключили рычаг и перед нами открылась дверь", "Дид - Хм..."])
+
+[node name="bookshelf" parent="dialog" instance=ExtResource("9_l317i")]
+process_mode = 4
+position = Vector2(1954, 2142)
+plot_text = Array[String](["Рей - Это место выглядит как настоящая библиотека", "Рок - Этому есть объяснение?", "Дид - Похоже, что Древние построили сеть из головоломок", "Дид - Каждая из которых отделяет нас от бесценных знаний", "Дид - Продолжайте двигаться, нам нужно максимум информации"])
+
+[node name="group" parent="dialog" instance=ExtResource("9_l317i")]
+position = Vector2(2686, 1952)
+plot_text = Array[String](["Рей - Похоже мне не разорваться 😅", "Рок - Давай помогу, приятель. Постою здесь пока, рассчитываю на тебя"])
 
 [node name="show" type="Node2D" parent="."]
 
@@ -64,22 +80,3 @@ cards = NodePath("../../../cards")
 [node name="group" parent="reason/show" node_paths=PackedStringArray("cards") instance=ExtResource("9_33q1f")]
 position = Vector2(2396, 2592)
 cards = NodePath("../../../cards")
-
-[connection signal="body_entered" from="execute/button" to="execute/button" method="_on_press"]
-[connection signal="body_exited" from="execute/button" to="execute/button" method="_on_release"]
-[connection signal="body_entered" from="execute/@Area2D@288914" to="execute/@Area2D@288914" method="_on_press"]
-[connection signal="body_exited" from="execute/@Area2D@288914" to="execute/@Area2D@288914" method="_on_release"]
-[connection signal="body_entered" from="execute/@Area2D@288915" to="execute/@Area2D@288915" method="_on_press"]
-[connection signal="body_exited" from="execute/@Area2D@288915" to="execute/@Area2D@288915" method="_on_release"]
-[connection signal="body_entered" from="execute/@Area2D@288918" to="execute/@Area2D@288918" method="_on_press"]
-[connection signal="body_exited" from="execute/@Area2D@288918" to="execute/@Area2D@288918" method="_on_release"]
-[connection signal="body_entered" from="execute/@Area2D@288920" to="execute/@Area2D@288920" method="_on_press"]
-[connection signal="body_exited" from="execute/@Area2D@288920" to="execute/@Area2D@288920" method="_on_release"]
-[connection signal="body_entered" from="execute/@Area2D@288921" to="execute/@Area2D@288921" method="_on_press"]
-[connection signal="body_exited" from="execute/@Area2D@288921" to="execute/@Area2D@288921" method="_on_release"]
-[connection signal="body_entered" from="execute/@Area2D@288922" to="execute/@Area2D@288922" method="_on_press"]
-[connection signal="body_exited" from="execute/@Area2D@288922" to="execute/@Area2D@288922" method="_on_release"]
-[connection signal="body_entered" from="execute/@Area2D@288923" to="execute/@Area2D@288923" method="_on_press"]
-[connection signal="body_exited" from="execute/@Area2D@288923" to="execute/@Area2D@288923" method="_on_release"]
-[connection signal="body_entered" from="execute/@Area2D@288924" to="execute/@Area2D@288924" method="_on_press"]
-[connection signal="body_exited" from="execute/@Area2D@288924" to="execute/@Area2D@288924" method="_on_release"]

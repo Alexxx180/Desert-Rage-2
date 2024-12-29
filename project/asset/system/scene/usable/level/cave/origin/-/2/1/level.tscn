@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=4 uid="uid://de1feef6mt01d"]
+[gd_scene load_steps=9 format=4 uid="uid://de1feef6mt01d"]
 
 [ext_resource type="PackedScene" uid="uid://d0i3jl2uefg53" path="res://asset/system/scene/object/image/level/tilemap/border.tscn" id="1_cfjbr"]
 [ext_resource type="PackedScene" uid="uid://rlwfnl6rvpkj" path="res://asset/system/scene/object/image/level/tilemap/execute.tscn" id="2_j8bks"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://ce2y76nymo6o4" path="res://asset/system/scene/object/image/level/tilemap/tags.tscn" id="4_tmwpv"]
 [ext_resource type="PackedScene" uid="uid://b83b7oo2fmh5h" path="res://asset/system/scene/subject/actor/group/group.tscn" id="5_ykbgr"]
 [ext_resource type="PackedScene" uid="uid://dbbt75750fc4" path="res://asset/system/scene/object/image/view/ui/hud/cards.tscn" id="6_ke6ee"]
+[ext_resource type="PackedScene" uid="uid://582u4do5bi2h" path="res://asset/system/scene/subject/control/drive/text/plot.tscn" id="6_mm2i4"]
 [ext_resource type="PackedScene" uid="uid://b3oh6t5q4y0ub" path="res://asset/system/scene/object/image/view/sight/transition/stairs/down/end.tscn" id="7_5fqj2"]
 
 [node name="map-2-1" type="Node2D"]
@@ -25,6 +26,16 @@ tile_map_data = PackedByteArray("AAAGABkAAAABAAEAAAAGABoAAAABAAIAAAAFABoAAAABAAI
 
 [node name="group" parent="." instance=ExtResource("5_ykbgr")]
 position = Vector2(524, 390)
+
+[node name="dialog" type="Node2D" parent="."]
+
+[node name="lever" parent="dialog" instance=ExtResource("6_mm2i4")]
+position = Vector2(1248, 2009)
+plot_text = Array[String](["Рей - Есть!"])
+
+[node name="secret" parent="dialog" instance=ExtResource("6_mm2i4")]
+position = Vector2(3181, 266)
+plot_text = Array[String](["Рей - И как я до такого додумался?"])
 
 [node name="cards" parent="." instance=ExtResource("6_ke6ee")]
 

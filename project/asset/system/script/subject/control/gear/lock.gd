@@ -24,7 +24,7 @@ func _ready() -> void:
 	
 	var f: int = Tiling.extract(border, position, Tiling.FLOOR)
 	stand.seat.set_floor(f)
-	print("LOCK FLOOR: ", f)
+	#print("LOCK FLOOR: ", f)
 
 	#print("lock tile: ", tile)
 	logic.activators.add_lock(tile, self)

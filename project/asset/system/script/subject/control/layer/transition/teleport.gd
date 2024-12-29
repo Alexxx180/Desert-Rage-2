@@ -14,5 +14,7 @@ func fill(tags: TileMapLayer, execute: TileMapLayer) -> void:
 		teleporters[cell] = tags.map_to_local(coords)
 
 func transit(hero: CharacterBody2D, logic: Dictionary) -> void:
-	assert(logic.name != "none", "Teleporter is not connected!")
-	hero.teleport(teleporters[logic.cell])
+	var cell: Vector2i = logic.cell
+	var connected: bool = logic.name != "none" and teleporters.has(cell)
+	assert(connected, "Teleporter is not connected!")
+	hero.teleport(teleporters[cell])

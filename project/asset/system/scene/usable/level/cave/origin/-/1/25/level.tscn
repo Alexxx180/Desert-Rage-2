@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://d32rqxopwqvj8"]
+[gd_scene load_steps=11 format=4 uid="uid://d32rqxopwqvj8"]
 
 [ext_resource type="PackedScene" uid="uid://d0i3jl2uefg53" path="res://asset/system/scene/object/image/level/tilemap/border.tscn" id="1_076xq"]
 [ext_resource type="PackedScene" uid="uid://rlwfnl6rvpkj" path="res://asset/system/scene/object/image/level/tilemap/execute.tscn" id="2_2urcb"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://b83b7oo2fmh5h" path="res://asset/system/scene/subject/actor/group/group.tscn" id="5_47itr"]
 [ext_resource type="PackedScene" uid="uid://dedq4jmv88so" path="res://asset/system/scene/subject/actor/npc/governtoad.tscn" id="6_2u13y"]
 [ext_resource type="PackedScene" uid="uid://dbbt75750fc4" path="res://asset/system/scene/object/image/view/ui/hud/cards.tscn" id="6_peoli"]
+[ext_resource type="PackedScene" uid="uid://582u4do5bi2h" path="res://asset/system/scene/subject/control/drive/text/plot.tscn" id="6_xrfib"]
 [ext_resource type="Resource" uid="uid://d1xyetb6pl1pw" path="res://asset/resource/engine/external/manual/preview/behavior/motion.tres" id="7_u6lwu"]
 [ext_resource type="PackedScene" uid="uid://b3oh6t5q4y0ub" path="res://asset/system/scene/object/image/view/sight/transition/stairs/down/end.tscn" id="8_rqw85"]
 [ext_resource type="PackedScene" uid="uid://dry3fg6rcoow7" path="res://asset/system/scene/subject/actor/npc/toad.tscn" id="10_ym7ub"]
@@ -47,6 +48,16 @@ position = Vector2(2393, 3040)
 use_hero_name = true
 wednesday_text = "Чуваки"
 message = "Тебя зовут %s, чувак"
+
+[node name="dialog" type="Node2D" parent="."]
+
+[node name="temple" parent="dialog" instance=ExtResource("6_xrfib")]
+position = Vector2(2160, 3033)
+plot_text = Array[String](["Рок - Что это за место?", "Рей - Выглядит как большой купол с символом поклонения", "Рок - Здесь есть живые существа", "Дид - попробуйте поговорить с обитателями"])
+
+[node name="bye" parent="dialog" instance=ExtResource("6_xrfib")]
+position = Vector2(2142, 1950)
+plot_text = Array[String](["Рей - Что ж, это великая честь повстречать вас, но нам уже пора"])
 
 [node name="group" parent="." instance=ExtResource("5_47itr")]
 position = Vector2(2164, 3113)
