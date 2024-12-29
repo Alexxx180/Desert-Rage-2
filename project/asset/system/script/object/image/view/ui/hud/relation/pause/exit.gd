@@ -12,8 +12,8 @@ func controls(hud: Control, exit: Button) -> void:
 	_pause = hud.detector.pause
 	_pause.visibility_changed.connect(_shortcut_available)
 	_short = leave.shortcut
-	#_short.pressed.connect(leave.exit_the_game)
-	#exit.pressed.connect(leave.exit_the_game)
+	_short.pressed.connect(leave.exit_the_game)
+	exit.pressed.connect(leave.exit_the_game)
 
 	for short in exit.leave.short:
 		leave.input.connect(short.sync_control_hint)
