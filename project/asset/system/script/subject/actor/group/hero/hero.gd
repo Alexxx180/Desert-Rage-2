@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+signal plot(text: Array[String])
 signal move(position: Vector2)
 signal moving(velocity: Vector2)
 
@@ -14,6 +15,9 @@ var center: Vector2:
 
 var pushing: bool = false
 var push_velocity: Vector2
+
+func plot_unfolding(text: Array[String]) -> void:
+	plot.emit(text)
 
 func set_pushing(slowdown: bool, motion: Vector2) -> void:
 	pushing = slowdown

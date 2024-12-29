@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://cel3u88abrgv3"]
+[gd_scene load_steps=6 format=3 uid="uid://cel3u88abrgv3"]
 
 [ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/hud/detector/game/game.gd" id="1_o71r6"]
 [ext_resource type="PackedScene" uid="uid://dugyepxewkmgo" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/pause/pause.tscn" id="1_p1rgr"]
 [ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/margin.gd" id="2_m0xgs"]
 [ext_resource type="PackedScene" uid="uid://b01p37el432af" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/hints/hints.tscn" id="2_mf7wa"]
+[ext_resource type="PackedScene" uid="uid://cbd4idujs0m3k" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/dialog/dialog.tscn" id="5_x67kx"]
 
 [node name="game" type="Control"]
 layout_mode = 3
@@ -15,6 +16,14 @@ grow_vertical = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 script = ExtResource("1_o71r6")
+
+[node name="dialog" parent="." instance=ExtResource("5_x67kx")]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 75.0
+grow_horizontal = 2
+size_flags_vertical = 0
 
 [node name="margin" type="MarginContainer" parent="."]
 clip_contents = true
@@ -35,42 +44,3 @@ layout_mode = 2
 [node name="hints" parent="margin" instance=ExtResource("2_mf7wa")]
 layout_mode = 2
 size_flags_vertical = 1
-
-[node name="dialog" type="MarginContainer" parent="margin"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 8
-theme_override_constants/margin_bottom = 75
-
-[node name="chat" type="VBoxContainer" parent="margin/dialog"]
-layout_mode = 2
-
-[node name="queue" type="PanelContainer" parent="margin/dialog/chat"]
-layout_mode = 2
-size_flags_horizontal = 4
-
-[node name="margin" type="MarginContainer" parent="margin/dialog/chat/queue"]
-layout_mode = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 3
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 5
-
-[node name="label" type="Label" parent="margin/dialog/chat/queue/margin"]
-layout_mode = 2
-text = "Рей - Выглядит как большой купол с символом поклонения"
-
-[node name="current" type="PanelContainer" parent="margin/dialog/chat"]
-layout_mode = 2
-size_flags_horizontal = 4
-
-[node name="margin" type="MarginContainer" parent="margin/dialog/chat/current"]
-layout_mode = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 3
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 5
-
-[node name="label" type="Label" parent="margin/dialog/chat/current/margin"]
-layout_mode = 2
-text = "Рок - Здесь также есть живые существа"

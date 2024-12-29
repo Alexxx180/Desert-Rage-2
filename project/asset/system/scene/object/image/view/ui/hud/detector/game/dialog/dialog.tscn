@@ -1,44 +1,57 @@
-[gd_scene load_steps=2 format=3 uid="uid://cbd4idujs0m3k"]
+[gd_scene load_steps=4 format=3 uid="uid://cbd4idujs0m3k"]
 
 [ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/dialog/dialog.gd" id="1_irn5c"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aumo2"]
+bg_color = Color(0.0588235, 0.0588235, 0.0588235, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xg7gh"]
+bg_color = Color(0.0588235, 0.0588235, 0.0588235, 1)
 
 [node name="dialog" type="MarginContainer"]
 size_flags_horizontal = 4
 size_flags_vertical = 8
-theme_override_constants/margin_bottom = 75
+theme_override_constants/margin_top = 75
 
 [node name="chat" type="VBoxContainer" parent="."]
 layout_mode = 2
+theme_override_constants/separation = 2
 script = ExtResource("1_irn5c")
 
 [node name="queued" type="PanelContainer" parent="chat"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_aumo2")
 
 [node name="margin" type="MarginContainer" parent="chat/queued"]
 layout_mode = 2
 theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 3
+theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 5
 
 [node name="label" type="Label" parent="chat/queued/margin"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
 text = "Рей - Выглядит как большой купол с символом поклонения"
 
 [node name="answer" type="PanelContainer" parent="chat"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_xg7gh")
 
 [node name="margin" type="MarginContainer" parent="chat/answer"]
 layout_mode = 2
 theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 3
+theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 5
 
 [node name="label" type="Label" parent="chat/answer/margin"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
 text = "Рок - Здесь также есть живые существа"
 
 [node name="timer" type="Timer" parent="chat"]
