@@ -1,0 +1,138 @@
+[gd_scene load_steps=14 format=3 uid="uid://dry3fg6rcoow7"]
+
+[ext_resource type="Texture2D" uid="uid://64ccu3ll7p6o" path="res://asset/resource/media/images/actors/npc/toads.png" id="1_0px6e"]
+[ext_resource type="Script" path="res://asset/system/script/subject/actor/npc/toad.gd" id="1_kwbko"]
+[ext_resource type="Shape2D" uid="uid://bm63pnn3dmmtf" path="res://asset/resource/engine/internal/shape/interactables/lever.tres" id="2_v04yb"]
+[ext_resource type="PackedScene" uid="uid://ct8xgb5201d3s" path="res://asset/system/scene/subject/actor/npc/dialog.tscn" id="3_0i87u"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4gq3n"]
+size = Vector2(22, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b0svx"]
+atlas = ExtResource("1_0px6e")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d03ea"]
+atlas = ExtResource("1_0px6e")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m3b4d"]
+atlas = ExtResource("1_0px6e")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m70fg"]
+atlas = ExtResource("1_0px6e")
+region = Rect2(64, 64, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_y8qce"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b0svx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d03ea")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m3b4d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m70fg")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_x80my"]
+resource_name = "toad_speech"
+length = 1.2
+step = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("profile:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"default"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("profile:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.285714, 0.571429, 0.857143, 1.14286),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 0]
+}
+
+[sub_resource type="Animation" id="Animation_210ex"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("profile:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"default"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("profile:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cjtr7"]
+_data = {
+"RESET": SubResource("Animation_210ex"),
+"toad_speech": SubResource("Animation_x80my")
+}
+
+[node name="toad" type="StaticBody2D"]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_kwbko")
+
+[node name="shape" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_4gq3n")
+
+[node name="profile" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_y8qce")
+
+[node name="talk" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="shape" type="CollisionShape2D" parent="talk"]
+shape = ExtResource("2_v04yb")
+
+[node name="dialog" parent="." instance=ExtResource("3_0i87u")]
+visible = false
+offset_top = -120.0
+offset_bottom = -80.0
+
+[node name="animation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_cjtr7")
+}
+
+[connection signal="body_entered" from="talk" to="." method="_talk"]
+[connection signal="body_exited" from="talk" to="." method="_idle"]

@@ -15,12 +15,16 @@ func activate() -> void:
 func _ready() -> void:
 	if activated: _toggle("open")
 
-	var logic: TileMapLayer = get_node("../../mark")
-	var activators: Node = logic.get_node("activators")
+	var border: TileMapLayer = get_node("../../border")
+	var logic: TileMapLayer = get_node("../../tags")
 	var tile: Dictionary = Tiling.atlas(logic, position)
 
 	stand.box = self
 	stand.seat = $seat
+	
+	var f: int = Tiling.extract(border, position, Tiling.FLOOR)
+	stand.seat.set_floor(f)
+	#print("LOCK FLOOR: ", f)
 
 	#print("lock tile: ", tile)
-	activators.add_lock(tile, self)
+	logic.activators.add_lock(tile, self)

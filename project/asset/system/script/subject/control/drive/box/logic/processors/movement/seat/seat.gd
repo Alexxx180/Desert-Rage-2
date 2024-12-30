@@ -21,11 +21,11 @@ func transport(_position: Vector2) -> void:
 	move.emit(target)
 
 func hero_climb() -> void:
-	#print("F: ", _f, " + HEIGHT: ", height.F, " = ", F)
+	#print("F + HEIGHT: ", _f, " + ", height, " = ", F)
 	climb.emit(F)
 
 func set_floor(floor_level: int) -> void:
-	#print("PASSED F: ", floor_level)
+	#print("New Floor: ", floor_level, ", wait for climb...")
 	_f = floor_level
 	hero_climb()
 

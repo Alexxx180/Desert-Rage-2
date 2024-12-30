@@ -14,6 +14,6 @@ func controls(hud: Control, exit: Button) -> void:
 	_short = leave.shortcut
 	_short.pressed.connect(leave.exit_the_game)
 	exit.pressed.connect(leave.exit_the_game)
-	
+
 	for short in exit.leave.short:
 		leave.input.connect(short.sync_control_hint)

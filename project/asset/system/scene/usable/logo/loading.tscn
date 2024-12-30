@@ -1,6 +1,22 @@
-[gd_scene load_steps=2 format=3 uid="uid://dy1l76tuome6c"]
+[gd_scene load_steps=5 format=3 uid="uid://dy1l76tuome6c"]
 
 [ext_resource type="Script" path="res://asset/system/script/logo.gd" id="1_sblna"]
+[ext_resource type="Texture2D" uid="uid://bgwibgrt7ucwk" path="res://asset/resource/media/images/actors/loading/1.png" id="2_jro7c"]
+[ext_resource type="Texture2D" uid="uid://bm4mm2mwoen5x" path="res://asset/resource/media/images/actors/loading/2.png" id="3_ykj72"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rnmiv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_ykj72")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_jro7c")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
 
 [node name="loading" type="ColorRect"]
 anchors_preset = 15
@@ -10,6 +26,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 script = ExtResource("1_sblna")
+scene = "res://asset/system/scene/usable/level/cave/origin/0/0/level.tscn"
 i = 2
 
 [node name="logo" type="TextureRect" parent="."]
@@ -22,6 +39,24 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 expand_mode = 1
+
+[node name="loading" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -80.0
+offset_top = -80.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
+
+[node name="animation" type="AnimatedSprite2D" parent="loading"]
+sprite_frames = SubResource("SpriteFrames_rnmiv")
+autoplay = "default"
 
 [node name="show" type="Timer" parent="."]
 autostart = true

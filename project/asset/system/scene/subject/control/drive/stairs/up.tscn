@@ -1,0 +1,30 @@
+[gd_scene load_steps=7 format=3 uid="uid://cl63ad7hdstuv"]
+
+[ext_resource type="Script" path="res://asset/system/script/subject/control/drive/stairs/stairs.gd" id="1_lw4db"]
+[ext_resource type="Shape2D" uid="uid://c42xv75yc83x1" path="res://asset/resource/engine/internal/shape/map-tile.tres" id="2_xjkqk"]
+[ext_resource type="Texture2D" uid="uid://5jwffrhuchah" path="res://asset/resource/media/images/transitions/stairs/up.jpg" id="3_nlxw4"]
+[ext_resource type="Script" path="res://asset/system/script/subject/control/drive/stairs/levels.gd" id="4_7o2ga"]
+[ext_resource type="Script" path="res://asset/system/script/subject/control/drive/stairs/interval.gd" id="5_4jjad"]
+[ext_resource type="PackedScene" uid="uid://cpqefbx7xpeak" path="res://asset/system/scene/object/image/view/sight/transition/stairs/down/start.tscn" id="6_bsct5"]
+
+[node name="stairs" type="Area2D"]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("1_lw4db")
+direction = -1
+
+[node name="shape" type="CollisionShape2D" parent="."]
+shape = ExtResource("2_xjkqk")
+
+[node name="view" type="Sprite2D" parent="."]
+texture = ExtResource("3_nlxw4")
+
+[node name="levels" type="Node" parent="."]
+script = ExtResource("4_7o2ga")
+
+[node name="interval" type="Node" parent="."]
+script = ExtResource("5_4jjad")
+
+[node name="transition" parent="." instance=ExtResource("6_bsct5")]
+
+[connection signal="body_entered" from="." to="." method="_finish"]

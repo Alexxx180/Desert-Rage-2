@@ -9,7 +9,7 @@ var _contact: Vector2 = Vector2.ZERO
 var contact: Vector2:
 	get: return _contact
 
-func set_contact(pos: Vector2) -> void:
+func set_contact(_pos: Vector2) -> void:
 	"""
 	print("POS: ", entity.center)
 	print("ZONE - X: ",  pos.x, " - Y: ", pos.y)
@@ -21,7 +21,7 @@ func set_contact(pos: Vector2) -> void:
 	marker.position = entity.center + contact_zone.center
 	entity.get_node("../..").add_child(marker)
 	#"""
-	_contact = entity.center + pos# entity.get_contact(dir) + pos
+	_contact = entity.position #entity.center + pos# entity.get_contact(dir) + pos
 
 func track(ground: Node2D) -> Vector2:
 	return entity.position + ground.position

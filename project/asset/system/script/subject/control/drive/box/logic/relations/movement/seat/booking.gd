@@ -9,10 +9,12 @@ func _height(hero: CharacterBody2D) -> Node:
 	return input.platforming.jump.overview.height
 
 func _on_stand(seat: Node, hero: CharacterBody2D) -> void:
+	print("connected climb")
 	seat.climb.connect(_height(hero).set_box_floor)
 	seat.hero_climb()
 	seat.move.connect(hero.teleport)
 
 func _on_leave(seat: Node, hero: CharacterBody2D) -> void:
+	print("disconnected climb")
 	seat.climb.disconnect(_height(hero).set_box_floor)
 	seat.move.disconnect(hero.teleport)

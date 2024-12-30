@@ -26,7 +26,7 @@ func _move_hero(stand: String) -> void:
 	set("parameters/passive/transition_request", pose)
 
 func _direct() -> void:
-	for animation in ["idle-1", "run"]:
+	for animation in ["idle-1", "walk"]:
 		set("parameters/%s/blend_position" % animation, _direction)
 
 func move(motion: Vector2) -> void:
@@ -35,4 +35,4 @@ func move(motion: Vector2) -> void:
 		_move_hero("idle")
 	else:
 		_direct()
-		_move_hero("run")
+		_move_hero("move")

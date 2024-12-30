@@ -17,8 +17,24 @@ func _ready() -> void:
 		_deploy.set_available(true)
 		_deploy_heroes(order)
 
-func _uncomfortable_position() -> bool:
-	return _deploy.anchored and party[_heroes.main].logic.processors.input.platforming.jump.feet.balance.unstable
+func _get_feet(i: int) -> Node:
+	return party[i].logic.processors.input.platforming.jump.feet
+
+func _comfortable_position() -> bool:
+	#print("deploy anchored: ", _deploy.anchored)
+#	var stable: bool = true
+#	var i: int = 2
+	var f1: Node = _get_feet(0)
+	var f2: Node = _get_feet(1)
+
+	return f1.height.F == f2.height.F and f1.balance.stable and f2.balance.stable
+
+#	while i > 0 and stable:
+#		i -= 1
+#		stable = stable and _get_feet(i).balance.stable
+#	return stable
+	#return party[_heroes.main].logic.processors.input.platforming.jump.feet.balance.stable
+#	return _deploy.anchored and party[_heroes.main].logic.processors.input.platforming.jump.feet.balance.unstable
 
 func character_select() -> void:
 	var order: Vector2i = _heroes.traverse(_heroes.reorder())
@@ -29,9 +45,9 @@ func _deploy_heroes(order: Vector2i) -> void:
 	_deploy.determine(party, order)
 
 func _input(event) -> void:
-	if _uncomfortable_position(): return
+	#if _uncomfortable_position(): return
 
 	if event.is_action_pressed("select"):
 		character_select()
-	if event.is_action_pressed("deploy"):
+	if event.is_action_pressed("deploy") and _comfortable_position():
 		_deploy_heroes(_heroes.reorder())

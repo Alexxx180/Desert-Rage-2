@@ -12,7 +12,7 @@ func _toggle_to(next: String) -> void:
 	animation.play("levers/toggle_" + next)
 
 func _ready() -> void:
-	var logic: TileMapLayer = get_node("../../mark")
+	var logic: TileMapLayer = get_node("../../tags")
 	activate.connect(logic.activators.activate)
 	_atlas = Tiling.atlas(logic, position)
 
