@@ -15,12 +15,16 @@ static func atlas(map: TileMapLayer, pos: Vector2) -> Dictionary:
 	var coords: Vector2i = map.local_to_map(pos)
 	var id: int = map.get_cell_source_id(coords)
 	var result: Dictionary = {
-		"name": "none", "cell": Vector2(-1, -1), "coords": coords
+		"name": "none", "id": id,
+		"cell": Vector2(-1, -1), "coords": coords
 	}
 	if id != -1:
 		result.name = map.tile_set.get_source(id).resource_name
 		result.cell = source(map, coords)
 	return result
+
+static func retile(map: TileMapLayer, cells: Dictionary) -> void:
+	map.set_cell(cells["coords"], cells["id"], cells["cell"])
 
 
 static func logic(cell: Vector2i) -> int:
