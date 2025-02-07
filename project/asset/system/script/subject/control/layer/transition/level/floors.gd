@@ -8,4 +8,4 @@ func get_next(diff: int) -> String:
 	return path % abs(level)
 
 func differ(layer: TileMapLayer, passage: Dictionary) -> int:
-	return Tiling.custom(layer, passage.coords, Tiling.FLOOR)
+	return Tile.custom(layer, passage.coords, Tile.Atlas.FLOOR)

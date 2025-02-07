@@ -13,7 +13,7 @@ func credits() -> void:
 
 func elevate(execute: TileMapLayer, tiles: Dictionary) -> void:
 	var diff: int = floors.differ(execute, tiles.passage)
-	var part: int = 0 if tiles.none else Tiling.logic(tiles.connect.cell)
+	var part: int = 0 if tiles.none else Tile.logic(tiles.connect.cell)
 	
 	var F: String = floors.get_next(diff)
 	var caption: String = SessionStats.location.name

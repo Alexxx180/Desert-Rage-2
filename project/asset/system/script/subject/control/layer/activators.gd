@@ -1,50 +1,58 @@
 extends Node
 
-const SOURCE_ATLAS: String = "logic"
-const SOURCE: int = 2
+var locks: Dictionary = {} # String, Dictionary[Vector2i, Dictionary]
 
-var check: Node = $check
-
-#var locks: Dictionary = {} # Vector2, StaticBody2D
-var activators: Dictionary = { "button": {}, "lever": {} }
-
-func switch(type: String, map: Dictionary) -> void:
-	var offset: int = 2
-	var toggle: Dictionary = activators[type][map.pos]
-	toggle["state"] = !toggle["state"]
-	var on: int = 1 if toggle["state"] else 0
-	var execute: TileMapLayer
-
-	for lock in toggle["locks"]:
-		lock["cell"].x = on + offset
-		Tiling.retile(layer, lock)
-
-	Tiling.retile(execute, toggle[])
-
-func activate(transition: Dictionary) -> void:
+func activate(execute: TileMapLayer) -> void:
+	# transition: Dictionary) -> void:
 	var map: Dictionary = {}
 	if !check.available(map, transition): return
-	
-	match map.passage.cell:
-		Vector2i(0, 0), Vector2i(0, 1):
-			switch("button", map)
-		Vector2i(1, 0), Vector2i(1, 1):
-			switch("lever", map)
-		_: pass
+
+	var cell: Vector2i = map.passage.cell
+	if not locks["trigger"].has(cell):
+		print("no triggers found", cell)
+
+	var connector_cell: Vector2i = locks["trigger"][cell]["connector"]
+
+	for lock in locks["connector"][connector_cell]:
+		var machine: Dictionary = locks["machine"][lock]
+		var atlas_cell: Vector2i = machine["atlas"]
+
+		if atlas_cell.x % 2 == 0:
+			atlas_cell.x += 1
+		else:
+			atlas_cell.x -= 1
+
+		machine["atlas"] = atlas_cell
+		Tile.retile(execute, machine)
+
+func connect_activators(execute: TileMapLayer, connector_cell: Vector2i, used_cells: Array[Vector2i]) -> void:
+	var i: int = used_cells.size()
+	while i > 0:
+		i -= 1
+		var cell: Vector2i = used_cells[i]
+		var atlas_cell: Vector2i = get_cell_atlas_coords(cell)
+
+		match atlas_cell:
+			Vector2i(0, 0), Vector2i(1, 0), Vector2i(0, 1), Vector2i(1, 1):
+				var atlas: Dictionary = Tile.atlas_from_coords(execute, cell)
+				assert(atlas["name"] != "none", "Tags: no executable connection")
+
+				atlas["connector"] = connector_cell
+				locks["trigger"][cell] = atlas
+				used_cells.remove(i)
+			Vector2i(2, 0), Vector2i(3, 0), Vector2i(2, 1), Vector2i(3, 1):
+				locks["machine"][cell] = Tile.atlas_from_coords(execute, cell)
+				locks["machine"][cell]["atlas"] = atlas_cell
+			_: pass
+	locks["connector"][connector_cell] = used_cells
 
 func add_lock(execute: TileMapLayer, tags: TileMapLayer) -> void:
-	var cell: Vector2i
-	var activator: Array[Vector2i]
-	var lock: Array[Vector2i]
-
+	var used_cells: Array[Vector2i]
 	for x in range(5):
-		activator = []
-		lock = []
 		for y in range(5):
-			cell = tags.get_used_cells_by_id(SOURCE, Vector2i(x, y))
-			lock.add()
-			assert(activator.size() > 1, "Two activators connected to one bus!")
-	pass
+			var atlas_cell: Vector2i = Vector2i(x, y)
+			used_cells = tags.get_used_cells_by_id(SOURCE, atlas_cell)
+			connect_activators(execute, atlas_cell, used_cells)
 
 """
 func add_lock(tile: Dictionary, lock: StaticBody2D) -> void:
