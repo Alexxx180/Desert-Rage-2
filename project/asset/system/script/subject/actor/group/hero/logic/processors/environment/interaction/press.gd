@@ -9,4 +9,4 @@ func set_level(hero: CharacterBody2D, logic: TileMapLayer) -> void:
 func encounter(execute: TileMapLayer) -> void:
 	_level.pos = _level.hero.position
 	_level.execute = execute
-	_level.tags.transition.transit(_level)
+	_level.tags.activators.activate(_level)

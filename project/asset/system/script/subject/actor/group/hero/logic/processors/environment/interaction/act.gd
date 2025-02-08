@@ -7,6 +7,8 @@ func set_level(hero: CharacterBody2D, logic: TileMapLayer) -> void:
 	_level.tags = logic
 
 func encounter(execute: TileMapLayer) -> void:
-	_level.pos = _level.hero.position
+	var env: Node2D = _level.hero.logic.detectors.environment
+	var act: Vector2 = env.interaction.act.position
+	_level.pos = _level.hero.position + act
 	_level.execute = execute
-	_level.tags.transition.transit(_level)
+	_level.tags.activators.activate(_level)

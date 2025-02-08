@@ -1,22 +1,22 @@
 extends Node
 
-@onready var level: Node = $level
+@onready var levels: Node = $levels
 @onready var check: Node = $check
 @onready var teleport: Node = $teleport
 
-func transit(transition: Dictionary) -> void:
+func transit(level: Dictionary) -> void:
 	var map: Dictionary = {}
-	if !check.available(map, transition): return
+	if !check.available(map, level): return
 	
 	match map.passage.cell:
 		Vector2i(0, 2):
-			teleport.transit(transition.hero, map.connect)
+			teleport.transit(level.hero, map.connect)
 		Vector2i(2, 0):
 			print("credits: ", map.passage.cell)
-			level.credits()
+			levels.credits()
 		Vector2i(2, 1):
 			print("credits: ", map.passage.cell)
-			level.credits()
+			levels.credits()
 		_:
 			print("no credits: ", map.passage.cell)
-			level.elevate(transition.execute, map)
+			levels.elevate(level.execute, map)

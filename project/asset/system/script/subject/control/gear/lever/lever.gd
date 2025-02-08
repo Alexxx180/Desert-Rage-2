@@ -14,7 +14,7 @@ func _toggle_to(next: String) -> void:
 func _ready() -> void:
 	var logic: TileMapLayer = get_node("../../tags")
 	activate.connect(logic.activators.activate)
-	_atlas = Tiling.atlas(logic, position)
+	_atlas = Tile.atlas_from_pos(logic, position)
 
 	if activated: _toggle_to("on")
 

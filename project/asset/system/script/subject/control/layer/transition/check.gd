@@ -1,18 +1,15 @@
 extends Node
 
-const SOURCE_ATLAS: String = "transition"
-
 var _next: bool = false
 
 func next_level_transition(_path: String, _diff: int) -> void:
 	_next = true
 
-func available(map: Dictionary, transition: Dictionary) -> bool:
-	if _next: return false
-	var pos: Vector2 = transition.hero.position
-	map.connect = Tile.atlas_from_pos(transition.tags, pos)
-	map.none = map.connect.name == "none"
+func available(level: Dictionary) -> Dictionary:
+	if _next: return {}
+	var link: Dictionary = Tile.from_pos(level.tags, level.pos)
 
-	if !(map.none or map.connect.name == SOURCE_ATLAS): return false
-	map.passage = Tile.atlas_from_pos(transition.execute, pos)
-	return true
+	if !(link.name in ["none", "transition"]): return {}
+	var passage: Dictionary = Tile.from_pos(level.execute, level.pos)
+	
+	return { "link": link, "passage": passage }
