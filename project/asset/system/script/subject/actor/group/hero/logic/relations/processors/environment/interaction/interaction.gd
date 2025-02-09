@@ -7,7 +7,9 @@ extends Node
 
 func controls(hero: CharacterBody2D, interaction: Node) -> void:
 	var tags: TileMapLayer = hero.get_node("../../tags")
-	act.controls(hero, interaction.act, tags)
-	press.controls(hero, interaction.press, tags)
+	var activators: Node = tags.activators
+	#var execute: TileMapLayer = hero.get_node("../../execute")
+	act.controls(hero, interaction.act, activators.trigger)
+	press.controls(hero, interaction.press, activators.button)
 	transition.controls(hero, interaction.transition, tags)
 	pull.controls(hero, interaction.pull)

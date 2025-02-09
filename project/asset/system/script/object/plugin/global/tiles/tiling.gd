@@ -1,6 +1,6 @@
 extends RefCounted
 
-class_name Tile # Tile map Facade class
+class_name Tile # Map facade class
 
 enum Atlas { LEVEL = 0, FLOOR = 1, SIZE = 5 }
 
@@ -8,6 +8,9 @@ static var _options: Array[Array] = [["P", 0], ["F", 0]]
 
 static func find(layer: TileMapLayer, position: Vector2) -> Vector2i:
 	return layer.local_to_map(position)
+
+static func used_cells(layer: TileMapLayer, atlas_cell: Vector2i, id: int = -1) -> Array[Vector2i]:
+	return layer.get_used_cells_by_id(id, atlas_cell)
 
 static func atlas_coords(layer: TileMapLayer, map_coords: Vector2i) -> Vector2i:
 	return layer.get_cell_atlas_coords(map_coords)
@@ -36,10 +39,10 @@ static func from_pos(layer: TileMapLayer, pos: Vector2) -> Dictionary:
 
 
 static func logic(cell: Vector2i) -> int:
-	return cell.y * Atlas.FLOOR + cell.x + Atlas.SIZE
+	return cell.y * Atlas.SIZE + Atlas.FLOOR + cell.x
 
 static func extract(layer: TileMapLayer, map_coords: Vector2i, no: int) -> Variant:
 	var tile: TileData = layer.get_cell_tile_data(map_coords)
 	# print(", layer: ", map.name, ", map local: ", coords, ", data: ", tile)
-	if tile == null: return _options[no][0]
-	return tile.get_custom_data(_options[no][1])
+	if tile == null: return _options[no][1]
+	return tile.get_custom_data(_options[no][0])

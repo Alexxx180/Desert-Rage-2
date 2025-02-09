@@ -1,14 +1,26 @@
 extends Node
 
-var _level: Dictionary = {}
+signal activate(pos: Vector2)
 
-func set_level(hero: CharacterBody2D, logic: TileMapLayer) -> void:
-	_level.hero = hero
-	_level.tags = logic
+var _allow: bool = false
+var _last_position: Vector2
 
-func encounter(execute: TileMapLayer) -> void:
-	var env: Node2D = _level.hero.logic.detectors.environment
-	var act: Vector2 = env.interaction.act.position
-	_level.pos = _level.hero.position + act
-	_level.execute = execute
-	_level.tags.activators.activate(_level)
+var _act: Area2D
+var _hero: CharacterBody2D
+
+var hero: CharacterBody2D:
+	set(value):
+		_hero = value
+		_act = _hero.logic.detectors.interaction.act
+
+func encounter(_execute: TileMapLayer) -> void:
+	_last_position = _hero.position + _act.position
+	_allow = true
+	#print("ENCOUNTER! ", _hero.position + _act.position)
+
+func diverge(_execute: TileMapLayer) -> void:
+	_allow = false
+
+func _input(_event: InputEvent) -> void:
+	if _allow and Input.is_action_pressed("action"):
+		activate.emit(_last_position)

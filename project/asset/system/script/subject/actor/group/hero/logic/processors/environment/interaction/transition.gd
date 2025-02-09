@@ -1,12 +1,8 @@
 extends Node
 
-var _level: Dictionary = {}
+signal transit(hero: CharacterBody2D)
 
-func set_level(hero: CharacterBody2D, logic: TileMapLayer) -> void:
-	_level.hero = hero
-	_level.tags = logic
+var hero: CharacterBody2D
 
-func encounter(execute: TileMapLayer) -> void:
-	_level.pos = _level.hero.position
-	_level.execute = execute
-	_level.tags.transition.transit(_level)
+func encounter(_execute: TileMapLayer) -> void:
+	transit.emit(hero)

@@ -17,7 +17,7 @@ func _ready() -> void:
 
 	var border: TileMapLayer = get_node("../../border")
 	var logic: TileMapLayer = get_node("../../tags")
-	var tile: Dictionary = Tile.atlas(logic, position)
+	var tile: Dictionary = Tile.from_pos(logic, position)
 
 	stand.box = self
 	stand.seat = $seat
