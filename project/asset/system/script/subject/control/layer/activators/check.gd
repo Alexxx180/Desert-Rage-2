@@ -30,7 +30,7 @@ func connect_tiles(locks: Dictionary, tag: Vector2i, placement: Array[Vector2i])
 				tile_atlas.connector = tag
 				locks.trigger[map_coords] = tile_atlas
 				placement.remove_at(i)
-			Vector2i(2, 0), Vector2i(3, 0), Vector2i(2, 1), Vector2i(3, 1):
+			Vector2i(2, 0), Vector2i(3, 0), Vector2i(2, 2), Vector2i(3, 2), Vector2i(2, 3), Vector2i(3, 3):
 				locks.machine[map_coords] = tile_atlas
 			_: pass
 	locks.connector[tag] = placement
