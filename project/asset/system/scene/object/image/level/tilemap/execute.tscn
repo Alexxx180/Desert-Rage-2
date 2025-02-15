@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://rlwfnl6rvpkj"]
+[gd_scene load_steps=12 format=3 uid="uid://rlwfnl6rvpkj"]
 
 [ext_resource type="PackedScene" uid="uid://df354hu6v3oou" path="res://asset/system/scene/subject/control/gear/button/button.tscn" id="1_v1eg2"]
 [ext_resource type="PackedScene" uid="uid://dgmexcad4fr8j" path="res://asset/system/scene/subject/control/gear/lever/lever.tscn" id="2_r3c3x"]
 [ext_resource type="PackedScene" uid="uid://ccyf3vr6amks7" path="res://asset/system/scene/subject/control/gear/lock/lock.tscn" id="3_x5ua5"]
 [ext_resource type="PackedScene" uid="uid://dmsl1kpysta4q" path="res://asset/system/scene/subject/control/drive/text/text/secret.tscn" id="4_co3xi"]
 [ext_resource type="Texture2D" uid="uid://cx15ghmel6amf" path="res://asset/resource/media/images/transitions/transitions.jpg" id="5_hy02h"]
+[ext_resource type="Texture2D" uid="uid://bac80wkvd0x05" path="res://asset/resource/media/images/interactables/interactables.png" id="6_8wy4t"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_78vt2"]
 tile_data = PackedInt32Array(0, 196609, 1, 65536, 196609, 2, 131072, 196609, 0, 1, 262145, 1, 65537, 262145, 2, 131073, 196609, 0)
@@ -39,6 +40,34 @@ texture_region_size = Vector2i(64, 64)
 1:2/0 = 0
 2:2/0 = 0
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4qiw5"]
+texture = ExtResource("6_8wy4t")
+texture_region_size = Vector2i(64, 64)
+1:0/0 = 0
+1:0/0/physics_layer_5/polygon_0/points = PackedVector2Array(-28, -28, 28, -28, 28, 24, -28, 24)
+3:0/0 = 0
+3:0/0/physics_layer_2/polygon_0/points = PackedVector2Array(-32, -32, -30, -30, -30, 30, 30, 30, 30, -30, -30, -30, -32, -32, 32, -32, 32, 32, -32, 32)
+0:1/0 = 0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-24, -24, -24, 24, 24, 24, 24, -24)
+0:1/0/physics_layer_4/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+1:1/0 = 0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-24, -24, 24, -24, 24, 24, -24, 24)
+1:1/0/physics_layer_4/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+2:1/0 = 0
+2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
+3:1/0 = 0
+3:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
+2:0/0 = 0
+2:0/0/physics_layer_6/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
+3:2/0 = 0
+3:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
+2:2/0 = 0
+0:0/0 = 0
+0:0/0/physics_layer_5/polygon_0/points = PackedVector2Array(-28, -28, 28, -28, 28, 24, -28, 24)
+2:3/0 = 0
+3:3/0 = 0
+3:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
+
 [sub_resource type="TileSet" id="TileSet_tnb5i"]
 tile_size = Vector2i(64, 64)
 physics_layer_0/collision_layer = 1
@@ -49,6 +78,12 @@ physics_layer_2/collision_layer = 128
 physics_layer_2/collision_mask = 0
 physics_layer_3/collision_layer = 8192
 physics_layer_3/collision_mask = 0
+physics_layer_4/collision_layer = 16384
+physics_layer_4/collision_mask = 0
+physics_layer_5/collision_layer = 32768
+physics_layer_5/collision_mask = 0
+physics_layer_6/collision_layer = 65536
+physics_layer_6/collision_mask = 0
 terrain_set_0/mode = 0
 terrain_set_0/terrain_0/name = "Gap"
 terrain_set_0/terrain_0/color = Color(0.5, 0.4375, 0.25, 1)
@@ -62,6 +97,7 @@ custom_data_layer_0/name = "F"
 custom_data_layer_0/type = 2
 sources/0 = SubResource("TileSetScenesCollectionSource_omj6i")
 sources/1 = SubResource("TileSetAtlasSource_0dkq4")
+sources/2 = SubResource("TileSetAtlasSource_4qiw5")
 pattern_0 = SubResource("TileMapPattern_78vt2")
 
 [node name="execute" type="TileMapLayer"]

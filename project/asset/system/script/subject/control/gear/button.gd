@@ -12,7 +12,7 @@ func _toggle(next: String) -> Dictionary:
 
 func _ready() -> void:
 	var logic: TileMapLayer = get_node("../../tags")
-	_atlas = Tiling.atlas(logic, position)
+	_atlas = Tile.from_pos(logic, position)
 	pressed.connect(logic.activators.activate)
 	release.connect(logic.activators.activate)
 

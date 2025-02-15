@@ -16,7 +16,7 @@ func _jump(to_floor: bool, next: Vector2, move) -> void:
 	feet.balance.stable = to_floor
 
 func _to_floor() -> void:
-	print("Tried to jump...")
+	print("Tried to jump to floor...")
 	_jump(true, feet.deployment.walls.target, dash)
 
 func _to_ledge() -> void:

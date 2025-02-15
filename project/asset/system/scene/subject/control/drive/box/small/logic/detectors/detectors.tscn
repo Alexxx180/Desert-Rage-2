@@ -1,9 +1,20 @@
-[gd_scene load_steps=3 format=3 uid="uid://bwp6o61miepyj"]
+[gd_scene load_steps=4 format=3 uid="uid://bwp6o61miepyj"]
 
 [ext_resource type="Script" path="res://asset/system/script/subject/control/drive/box/logic/detectors/detectors.gd" id="1_cwjuy"]
 [ext_resource type="PackedScene" uid="uid://byrdfryct5d0s" path="res://asset/system/scene/subject/control/drive/box/small/logic/detectors/platforming/platforming.tscn" id="2_ywwm6"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_8n0ma"]
+a = Vector2(-4, 0)
+b = Vector2(4, 0)
 
 [node name="detectors" type="Node2D"]
 script = ExtResource("1_cwjuy")
 
 [node name="platforming" parent="." instance=ExtResource("2_ywwm6")]
+
+[node name="press" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 32768
+
+[node name="geometry" type="CollisionShape2D" parent="press"]
+shape = SubResource("SegmentShape2D_8n0ma")

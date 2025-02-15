@@ -1,10 +1,8 @@
 extends Node
 
-var logic: TileMapLayer
+signal transit(hero: CharacterBody2D)
+
 var hero: CharacterBody2D
 
-func encounter(execute: TileMapLayer) -> void:
-	var level: Dictionary = {
-		"tags": logic, "execute": execute, "hero": hero
-	}
-	logic.transition.transit(level)
+func encounter(_execute: TileMapLayer) -> void:
+	transit.emit(hero)

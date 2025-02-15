@@ -17,17 +17,17 @@ func _ready() -> void:
 		_deploy.set_available(true)
 		_deploy_heroes(order)
 
-func _get_feet(i: int) -> Node:
-	return party[i].logic.processors.input.platforming.jump.feet
+func _get_feet(i: int) -> int:
+	return party[i].logic.processors.environment.floors.queue.F
 
 func _comfortable_position() -> bool:
 	#print("deploy anchored: ", _deploy.anchored)
 #	var stable: bool = true
 #	var i: int = 2
-	var f1: Node = _get_feet(0)
-	var f2: Node = _get_feet(1)
+	var f1: int = _get_feet(0)
+	var f2: int = _get_feet(1)
 
-	return f1.height.F == f2.height.F and f1.balance.stable and f2.balance.stable
+	return f1 == f2 # and f1.balance.stable and f2.balance.stable
 
 #	while i > 0 and stable:
 #		i -= 1
