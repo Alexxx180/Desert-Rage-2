@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" path="res://asset/system/script/subject/actor/group/hero/view/view.gd" id="1_02nce"]
 [ext_resource type="PackedScene" uid="uid://c136xgt1v5vbl" path="res://asset/system/scene/subject/actor/group/hero/base/view/base/shadow.tscn" id="2_7whrg"]
-[ext_resource type="Texture2D" uid="uid://5njpv4q1vm6m" path="res://asset/resource/media/images/actors/player/ray/backward.png" id="4_svwue"]
-[ext_resource type="Texture2D" uid="uid://dq5eecako3vie" path="res://asset/resource/media/images/actors/player/ray/forward.png" id="5_as5vq"]
+[ext_resource type="Texture2D" uid="uid://5njpv4q1vm6m" path="res://asset/resource/media/images/actors/player/ray/move/backward.png" id="4_svwue"]
+[ext_resource type="Texture2D" uid="uid://dq5eecako3vie" path="res://asset/resource/media/images/actors/player/ray/move/forward.png" id="5_as5vq"]
 [ext_resource type="PackedScene" uid="uid://q5toei88qvfa" path="res://asset/system/scene/subject/actor/group/hero/base/view/base/behind.tscn" id="5_bqa0g"]
-[ext_resource type="Texture2D" uid="uid://cat3bvr85qg7r" path="res://asset/resource/media/images/actors/player/ray/left.png" id="6_blthx"]
-[ext_resource type="Texture2D" uid="uid://cptn6php62vt6" path="res://asset/resource/media/images/actors/player/ray/right.png" id="7_tavjl"]
+[ext_resource type="Texture2D" uid="uid://cat3bvr85qg7r" path="res://asset/resource/media/images/actors/player/ray/move/left.png" id="6_blthx"]
+[ext_resource type="Texture2D" uid="uid://cptn6php62vt6" path="res://asset/resource/media/images/actors/player/ray/move/right.png" id="7_tavjl"]
 [ext_resource type="Script" path="res://asset/system/script/subject/actor/group/hero/view/animation.gd" id="8_xpw0s"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_77ixu"]
@@ -692,7 +692,6 @@ blend_point_3/pos = Vector2(0, -1)
 blend_mode = 1
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_38alu"]
-graph_offset = Vector2(-676.394, -45.4933)
 nodes/character/node = SubResource("AnimationNodeTransition_66ogl")
 nodes/character/position = Vector2(220, 140)
 nodes/go/node = SubResource("AnimationNodeTransition_r3aat")
@@ -1006,10 +1005,11 @@ script = ExtResource("1_02nce")
 [node name="profile" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_ajgxq")
-animation = &"left"
+animation = &"backward"
 offset = Vector2(0, -103)
 
 [node name="animation" type="AnimationTree" parent="."]
+active = false
 tree_root = SubResource("AnimationNodeBlendTree_38alu")
 anim_player = NodePath("player")
 parameters/character/current_state = "passive"
