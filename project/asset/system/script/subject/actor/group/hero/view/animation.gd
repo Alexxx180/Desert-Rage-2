@@ -4,6 +4,7 @@ const SPEED: int = 4
 
 var scale: float = SPEED
 var pose: String = "idle"
+var go: Array[String] = ["walk", "run"]
 
 var _direction: Vector2 = Vector2(0, -1)
 var direction: Vector2:
@@ -19,14 +20,16 @@ func sync(tree: AnimationTree) -> void:
 
 func set_speed(mach: int) -> void:
 	scale = SPEED * mach
-	set("parameters/speed/scale", scale)
+	print("Mach is: ", mach)
+	#set("parameters/speed/scale", scale)
+	set("parameters/go/transition_request", go[min(mach - 1, 1)])
 
 func _move_hero(stand: String) -> void:
 	pose = stand
 	set("parameters/passive/transition_request", pose)
 
 func _direct() -> void:
-	for animation in ["idle-1", "walk"]:
+	for animation in ["idle-1", "walk", "run"]:
 		set("parameters/%s/blend_position" % animation, _direction)
 
 func move(motion: Vector2) -> void:

@@ -9,7 +9,7 @@ signal run(speed: int)
 const STEP: int = 1000
 
 @export_range(0, 255) var push: int = 2
-@export_range(0, 255) var speed: int = 20
+@export_range(0, 255) var speed: int = 33 # 20
 
 func apply_impulse(mach: int) -> void:
 	impulse.emit(mach * push)

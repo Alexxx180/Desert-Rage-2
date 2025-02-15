@@ -1,4 +1,4 @@
-[gd_scene load_steps=160 format=3 uid="uid://csra3penxclqe"]
+[gd_scene load_steps=168 format=3 uid="uid://csra3penxclqe"]
 
 [ext_resource type="Script" path="res://asset/system/script/subject/actor/group/hero/view/view.gd" id="1_02nce"]
 [ext_resource type="PackedScene" uid="uid://c136xgt1v5vbl" path="res://asset/system/scene/subject/actor/group/hero/base/view/base/shadow.tscn" id="2_7whrg"]
@@ -873,6 +873,8 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_ehyuf"]
+
 [sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_66ogl"]
 input_0/name = "active"
 input_0/auto_advance = false
@@ -942,7 +944,28 @@ input_1/auto_advance = false
 input_1/break_loop_at_end = false
 input_1/reset = true
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_lkaso"]
+animation = &"ray/ray_run_left"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0wgff"]
+animation = &"ray/ray_run_right"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_cdj28"]
+animation = &"ray/ray_run_backward"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5psox"]
+animation = &"ray/ray_run_forward"
+
 [sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_lrkwd"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_lkaso")
+blend_point_0/pos = Vector2(-1, 0)
+blend_point_1/node = SubResource("AnimationNodeAnimation_0wgff")
+blend_point_1/pos = Vector2(1, 0)
+blend_point_2/node = SubResource("AnimationNodeAnimation_cdj28")
+blend_point_2/pos = Vector2(0, 1)
+blend_point_3/node = SubResource("AnimationNodeAnimation_5psox")
+blend_point_3/pos = Vector2(0, -1)
+blend_mode = 1
 
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_wyk4c"]
 
@@ -970,7 +993,9 @@ blend_point_3/pos = Vector2(0, -1)
 blend_mode = 1
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_38alu"]
-graph_offset = Vector2(-860.24, -181.788)
+graph_offset = Vector2(-709.268, -227.333)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_ehyuf")
+nodes/TimeScale/position = Vector2(-660, -220)
 nodes/character/node = SubResource("AnimationNodeTransition_66ogl")
 nodes/character/position = Vector2(220, 140)
 nodes/go/node = SubResource("AnimationNodeTransition_r3aat")
@@ -989,8 +1014,8 @@ nodes/run/position = Vector2(-860, -60)
 nodes/speed/node = SubResource("AnimationNodeTimeScale_wyk4c")
 nodes/speed/position = Vector2(460, 180)
 nodes/walk/node = SubResource("AnimationNodeBlendSpace2D_wica3")
-nodes/walk/position = Vector2(-860, -260)
-node_connections = [&"character", 1, &"passive", &"go", 0, &"walk", &"go", 1, &"run", &"idle", 0, &"idle-1", &"move", 0, &"go", &"output", 0, &"speed", &"passive", 0, &"move", &"passive", 1, &"idle", &"speed", 0, &"character"]
+nodes/walk/position = Vector2(-920, -320)
+node_connections = [&"TimeScale", 0, &"walk", &"character", 1, &"passive", &"go", 0, &"TimeScale", &"go", 1, &"run", &"idle", 0, &"idle-1", &"move", 0, &"go", &"output", 0, &"speed", &"passive", 0, &"move", &"passive", 1, &"idle", &"speed", 0, &"character"]
 
 [sub_resource type="Animation" id="Animation_y5rs0"]
 length = 0.001
@@ -1266,8 +1291,9 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_hy6n8"]
 resource_name = "ray_run_backward"
-length = 0.75
+length = 0.6
 loop_mode = 1
+step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -1287,7 +1313,97 @@ tracks/1/path = NodePath("profile:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(7.45058e-09, 0.0666667, 0.133333, 0.2, 0.266667, 0.333333, 0.4, 0.466667, 0.533333, 0.6, 0.666667, 0.733333),
+"times": PackedFloat32Array(7.45058e-09, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [2, 3, 4, 5, 6, 7, 8, 7, 6, 5, 4, 3]
+}
+
+[sub_resource type="Animation" id="Animation_g1kqg"]
+resource_name = "ray_run_forward"
+length = 0.6
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("profile:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"forward_run"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("profile:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [2, 3, 4, 5, 6, 7, 8, 7, 6, 5, 4, 3]
+}
+
+[sub_resource type="Animation" id="Animation_j7aa8"]
+resource_name = "ray_run_left"
+length = 0.6
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("profile:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"left_run"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("profile:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [2, 3, 4, 5, 6, 7, 8, 7, 6, 5, 4, 3]
+}
+
+[sub_resource type="Animation" id="Animation_3lmyj"]
+resource_name = "ray_run_right"
+length = 0.6
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("profile:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"right_run"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("profile:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [2, 3, 4, 5, 6, 7, 8, 7, 6, 5, 4, 3]
@@ -1303,7 +1419,10 @@ _data = {
 "ray_move_forward": SubResource("Animation_mn6m2"),
 "ray_move_left": SubResource("Animation_bsq5q"),
 "ray_move_right": SubResource("Animation_6awj0"),
-"ray_run_backward": SubResource("Animation_hy6n8")
+"ray_run_backward": SubResource("Animation_hy6n8"),
+"ray_run_forward": SubResource("Animation_g1kqg"),
+"ray_run_left": SubResource("Animation_j7aa8"),
+"ray_run_right": SubResource("Animation_3lmyj")
 }
 
 [node name="view" type="Node2D"]
@@ -1316,13 +1435,13 @@ script = ExtResource("1_02nce")
 [node name="profile" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_ajgxq")
-animation = &"backward"
+animation = &"left"
 offset = Vector2(0, -103)
 
 [node name="animation" type="AnimationTree" parent="."]
-active = false
 tree_root = SubResource("AnimationNodeBlendTree_38alu")
 anim_player = NodePath("player")
+parameters/TimeScale/scale = 1.5
 parameters/character/current_state = "passive"
 parameters/character/transition_request = ""
 parameters/character/current_index = 1
