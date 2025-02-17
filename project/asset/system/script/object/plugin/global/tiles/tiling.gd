@@ -4,7 +4,7 @@ class_name Tile # Map facade class
 
 enum Atlas { LEVEL = 0, FLOOR = 1, SIZE = 5 }
 
-static var _options: Array[Array] = [["P", 0], ["F", 0]]
+static var _options: Array[Array] = [["P", 0], ["F", 0], ["B", 0]]
 
 static func find(layer: TileMapLayer, position: Vector2) -> Vector2i:
 	return layer.local_to_map(position)

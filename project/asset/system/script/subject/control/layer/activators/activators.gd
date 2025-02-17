@@ -5,6 +5,7 @@ const SOURCE: int = 2
 @onready var link = $link
 @onready var button = $button
 @onready var trigger = $trigger
+@onready var freeze = $freeze
 
 var locks: Dictionary = { "trigger": {}, "machine": {}, "connector": {} }
 
@@ -22,6 +23,7 @@ func setup(execute: TileMapLayer) -> void:
 	link.active_trigger = (func(c): return locks["trigger"].has(c))
 	button.tiles = self
 	trigger.tiles = self
+	freeze.execute = execute
 	
 	var used_cells: Array[Vector2i]
 	var tags: TileMapLayer = self.get_parent()
