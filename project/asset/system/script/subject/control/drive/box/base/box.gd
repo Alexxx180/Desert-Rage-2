@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 signal move(next: Vector2)
 
-@export_range(0.2, 2.0, 0.1) var weight: float = 1
+@export_range(1.5, 3.0, 0.1) var weight: float = 1
 @export_range(1, 2, 1) var height: int = 1
 
 @onready var view: Node2D = $view
@@ -25,3 +25,4 @@ func _physics_process(_delta: float) -> void:
 func push(next: Vector2) -> void:
 	velocity = next
 	move.emit(position)
+	print("CURRENT POS: ", position)
