@@ -1,6 +1,8 @@
 extends Node
 
-signal activate(pos: Vector2)
+signal activate(pos: Vector2, damage: int)
+
+const DAMAGE: int = 2
 
 var _burn: bool = false
 var _last_position: Vector2
@@ -37,4 +39,4 @@ func _input(_event: InputEvent) -> void:
 	if _has_box and !_torch.logic.relations.fire.on:
 		_torch.logic.processors.fire.ignite()
 
-	if _burn: activate.emit(_last_position)
+	if _burn: activate.emit(_last_position, DAMAGE)

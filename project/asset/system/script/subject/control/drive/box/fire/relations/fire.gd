@@ -1,6 +1,8 @@
 extends Node
 
-signal activate(position: Vector2)
+signal activate(position: Vector2, damage: int)
+
+const DAMAGE: int = 3
 
 var _fire: Area2D
 var _box: CharacterBody2D
@@ -9,7 +11,7 @@ var on: int:
 	get: return _fire.monitoring
 
 func _burn_fire(_execute: TileMapLayer):
-	activate.emit(_box.position + _fire.position)
+	activate.emit(_box.position + _fire.position, DAMAGE)
 
 func set_fire(next: bool):
 	_box.view.fire.emitting = next
