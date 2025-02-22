@@ -1,11 +1,11 @@
 extends Node
 
-signal grab(pull: Node)
-signal release(pull: Node)
+signal grab(hero: CharacterBody2D)
+signal release(hero: CharacterBody2D)
 
 @onready var push: Node = $push
 @onready var press: Node = $press
 @onready var fire: Node = $fire
 
-func grab_box(pull: Node) -> void: grab.emit(pull)
-func release_box(pull: Node) -> void: release.emit(pull)
+func grab_box(hero: CharacterBody2D) -> void: grab.emit(hero)
+func release_box(hero: CharacterBody2D) -> void: release.emit(hero)

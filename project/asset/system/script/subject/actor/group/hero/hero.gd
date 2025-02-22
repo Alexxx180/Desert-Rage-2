@@ -13,15 +13,11 @@ signal moving(velocity: Vector2)
 var center: Vector2:
 	get: return position + half
 
-var pushing: bool = false
-var push_velocity: Vector2
+var weight: int = 0
+#var pushing: bool = false
 
 func plot_unfolding(text: Array[String]) -> void:
 	plot.emit(text)
-
-func set_pushing(slowdown: bool, motion: Vector2) -> void:
-	pushing = slowdown
-	push_velocity = motion
 
 func get_contact(direction: Vector2) -> Vector2:
 	return position + half * (Vector2.ONE + direction)
@@ -42,7 +38,12 @@ func _physics_process(_delta: float) -> void:
 
 func travel(motion: Vector2) -> void:
 	#print("MOTION IS: ", motion)
-	if not pushing: velocity = motion
+	if weight != 0:
+		motion *= logic.stats.force / weight
+	else:
+		motion *= logic.stats.speed
+
+	velocity = motion
 	moving.emit(motion)
 	move.emit(position)
 

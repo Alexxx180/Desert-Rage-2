@@ -18,7 +18,7 @@ func walk(condition: bool) -> void:
 		accelerate.emit(WALK)
 
 func _physics_process(delta) -> void:
-	move.emit(delta * face.position * feet.velocity)
+	move.emit(delta * face.position) # * feet.velocity)
 	walk(not _walk)
 
 func _input(_event: InputEvent):
