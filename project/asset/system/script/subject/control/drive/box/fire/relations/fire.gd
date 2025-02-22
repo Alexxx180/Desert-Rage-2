@@ -15,7 +15,9 @@ func set_fire(next: bool):
 	_box.view.fire.emitting = next
 	_fire.monitoring = next
 
-func _ignite() -> void: set_fire(true)
+func _ignite() -> void:
+	print("SET!")
+	set_fire(true)
 func _freeze() -> void: set_fire(false)
 
 func controls(box: CharacterBody2D, fire: Node, trigger: Node) -> void:

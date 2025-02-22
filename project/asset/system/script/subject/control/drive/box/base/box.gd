@@ -25,4 +25,4 @@ func _physics_process(_delta: float) -> void:
 func push(next: Vector2) -> void:
 	velocity = next
 	move.emit(position)
-	print("CURRENT POS: ", position)
+	#print("CURRENT POS: ", position)

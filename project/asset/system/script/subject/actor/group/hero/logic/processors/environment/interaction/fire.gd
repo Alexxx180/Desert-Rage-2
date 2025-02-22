@@ -2,7 +2,7 @@ extends Node
 
 signal activate(pos: Vector2)
 
-var _allow: bool = false
+var _burn: bool = false
 var _last_position: Vector2
 
 var _act: Area2D
@@ -25,18 +25,16 @@ func stop_ignite(_box: CharacterBody2D) -> void:
 
 func breaking(_execute: TileMapLayer) -> void:
 	_last_position = _hero.position + _act.position
-	_allow = true
+	_burn = true
 
 func release(_execute: TileMapLayer) -> void:
-	_allow = false
+	_burn = false
 	_torch = null
 
 func _input(_event: InputEvent) -> void:
-	if _has_box and !_torch.logic.relations.fire.on:
-		_torch.ignite()
+	if not Input.is_action_pressed("skill_one"): return
 
-	if _allow and Input.is_action_pressed("skill_one"):
-	#	print("PRESS")
-		activate.emit(_last_position)
-	#else:
-	#	print("NOT PRESS, cause: ", _allow)
+	if _has_box and !_torch.logic.relations.fire.on:
+		_torch.logic.processors.fire.ignite()
+
+	if _burn: activate.emit(_last_position)
