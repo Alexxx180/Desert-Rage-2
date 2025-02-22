@@ -4,7 +4,6 @@ signal plot(text: Array[String])
 signal move(position: Vector2)
 signal moving(velocity: Vector2)
 
-#@onready var geometry: CollisionShape2D = $geometry
 @onready var view: Node2D = $view
 @onready var logic: Node = $logic
 
@@ -13,8 +12,11 @@ signal moving(velocity: Vector2)
 var center: Vector2:
 	get: return position + half
 
-var weight: int = 0
-#var pushing: bool = false
+var _weight: int = 0
+var weight: int:
+	get: return _weight
+	set(value):
+		_weight = max(0, value)
 
 func plot_unfolding(text: Array[String]) -> void:
 	plot.emit(text)
@@ -37,7 +39,6 @@ func _physics_process(_delta: float) -> void:
 	move_and_slide()
 
 func travel(motion: Vector2) -> void:
-	#print("MOTION IS: ", motion)
 	if weight != 0:
 		motion *= logic.stats.force / weight
 	else:
