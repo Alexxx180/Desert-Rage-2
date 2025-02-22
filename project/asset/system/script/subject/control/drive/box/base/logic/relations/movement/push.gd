@@ -1,16 +1,11 @@
 extends Node
 
 var _push: Node
-#var _grabbed: bool = false
 
 func _grab(pull: Node):
-	#if _grabbed: return
-	#_grabbed = true
 	pull.apply_velocity.connect(_push.apply_velocity)
 
 func _release(pull: Node):
-	#_grabbed = false
-	print("RELEASE")
 	pull.apply_velocity.disconnect(_push.apply_velocity)
 	_push.apply_velocity(Vector2.ZERO)
 

@@ -9,4 +9,4 @@ extends Node2D
 func set_direction(direction: Vector2i) -> void:
 	pull.set_direction(direction)
 	act.set_direction(direction)
-	fire.ice.set_direction(direction)
+	fire.set_direction(direction)

@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://cda88lhlfg85"]
+
+[ext_resource type="Script" path="res://asset/system/script/subject/control/drive/box/fire/detectors/fire.gd" id="1_8oi4p"]
+[ext_resource type="Shape2D" uid="uid://i0icy78wfk8i" path="res://asset/resource/engine/internal/shape/characters/character/levels.tres" id="1_oy38k"]
+
+[sub_resource type="Gradient" id="Gradient_bi2dk"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_kvbpx"]
+gradient = SubResource("Gradient_bi2dk")
+
+[node name="fire" type="Area2D"]
+collision_layer = 0
+collision_mask = 2048
+script = ExtResource("1_8oi4p")
+
+[node name="geometry" type="CollisionShape2D" parent="."]
+shape = ExtResource("1_oy38k")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-2.98023e-08, 0)
+scale = Vector2(0.0078125, 1)
+texture = SubResource("GradientTexture1D_kvbpx")

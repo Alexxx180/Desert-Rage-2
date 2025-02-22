@@ -1,9 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://3gtpqwa5afwd"]
+[gd_scene load_steps=4 format=3 uid="uid://3gtpqwa5afwd"]
 
+[ext_resource type="Script" path="res://asset/system/script/subject/control/drive/box/fire/view.gd" id="1_1wjir"]
 [ext_resource type="Texture2D" uid="uid://co5hxrpt4c6ha" path="res://asset/resource/media/images/interactables/box/fire-box.png" id="1_xtqw3"]
+[ext_resource type="Material" uid="uid://cbf2yw7c100kv" path="res://asset/resource/engine/internal/particle/torch.tres" id="3_nwxfl"]
 
 [node name="view" type="Node2D"]
+script = ExtResource("1_1wjir")
 
 [node name="stand" type="Sprite2D" parent="."]
 position = Vector2(0, -22)
 texture = ExtResource("1_xtqw3")
+
+[node name="fire" type="GPUParticles2D" parent="."]
+position = Vector2(0, -35)
+amount = 15
+process_material = ExtResource("3_nwxfl")
