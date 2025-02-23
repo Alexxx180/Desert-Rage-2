@@ -5,9 +5,8 @@ extends Node
 @onready var floors: Node = $floors
 
 func controls(hero: CharacterBody2D, world: Node) -> void:
-	var map: Node2D = hero.get_node("../..")
-	var tags: TileMapLayer = map.get_node("tags")
+	var tags: TileMapLayer = hero.get_node("../../tags")
 	
 	skills.controls(hero, world.skills, tags)
-	ability.controls(hero, world.ability, map)
+	ability.controls(hero, world.ability, tags.activators)
 	floors.controls(hero, world.floors)

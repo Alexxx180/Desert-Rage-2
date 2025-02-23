@@ -10,6 +10,6 @@ func controls(box: CharacterBody2D) -> void:
 	
 	push.controls(box, processor.push)
 	press.controls(box, processor.press, activators.button)
-	fire.controls(box, processor.fire, activators.freeze)
+	fire.controls(box, processor.fire, activators.ability.freeze)
 	
 	processor.push.directing.connect(box.logic.detectors.set_direction)

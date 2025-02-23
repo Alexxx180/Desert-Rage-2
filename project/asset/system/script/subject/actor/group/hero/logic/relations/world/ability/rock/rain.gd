@@ -1,20 +1,20 @@
 extends Node
 
-func set_ice(hero: CharacterBody2D, rain: Node) -> void:
-	var detector: Node2D = hero.logic.detectors.interaction.rain.ice
-	detector.body_entered.connect(rain.breaking)
+func get_rain(hero: CharacterBody2D) -> Node2D:
+	return hero.logic.detectors.world.ability.rain
+
+func set_puddle(hero: CharacterBody2D, rain: Node) -> void:
+	var detector: Node2D = get_rain(hero).puddle
+	detector.body_entered.connect(rain.watering)
 	detector.body_exited.connect(rain.release)
 	
 func set_torch(hero: CharacterBody2D, rain: Node) -> void:
-	var detector: Node2D = hero.logic.detectors.interaction.rain.torch
-	detector.body_entered.connect(rain.start_ignite)
-	detector.body_exited.connect(rain.stop_ignite)
+	var detector: Node2D = get_rain(hero).fire
+	detector.body_entered.connect(rain.start_freeze)
+	detector.body_exited.connect(rain.stop_freeze)
 
-func controls(hero: CharacterBody2D, rain: Node, trigger: Node) -> void:
-	return
-	"""
-	set_ice(hero, rain)
+func controls(hero: CharacterBody2D, rain: Node, puddle: Node) -> void:
+	set_puddle(hero, rain)
 	set_torch(hero, rain)
-	rain.activate.connect(trigger.activate)
+	rain.activate.connect(puddle.activate)
 	rain.hero = hero
-	# """

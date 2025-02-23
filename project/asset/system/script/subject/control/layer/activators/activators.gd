@@ -2,10 +2,10 @@ extends Node
 
 const SOURCE: int = 2
 
-@onready var link = $link
-@onready var button = $button
-@onready var trigger = $trigger
-@onready var freeze = $freeze
+@onready var link: Node = $link
+@onready var button: Node = $button
+@onready var trigger: Node = $trigger
+@onready var ability: Node = $ability
 
 var locks: Dictionary = { "trigger": {}, "machine": {}, "connector": {} }
 
@@ -21,13 +21,13 @@ func activate(map_coords: Vector2i) -> void:
 
 func setup(execute: TileMapLayer) -> void:
 	link.active_trigger = (func(c): return locks["trigger"].has(c))
+	link.execute = execute
 	button.tiles = self
 	trigger.tiles = self
-	freeze.execute = execute
+	ability.execute = execute
 	
 	var used_cells: Array[Vector2i]
 	var tags: TileMapLayer = self.get_parent()
-	link.execute = execute
 	for x in range(5):
 		for y in range(5):
 			var atlas_cell: Vector2i = Vector2i(x, y)
