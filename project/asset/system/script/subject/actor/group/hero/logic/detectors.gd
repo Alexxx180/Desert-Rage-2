@@ -1,4 +1,4 @@
 extends Node2D
 
-@onready var interaction = $interaction
-@onready var platforming = $platforming
+@onready var world: Node2D = $world
+@onready var platforming: Node2D = $platforming

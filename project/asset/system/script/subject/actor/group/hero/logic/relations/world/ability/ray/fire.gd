@@ -1,0 +1,20 @@
+extends Node
+
+func get_fire(hero: CharacterBody2D) -> Node2D:
+	return hero.logic.detectors.world.ability.fire
+
+func set_ice(hero: CharacterBody2D, fire: Node) -> void:
+	var detector: Node2D = get_fire(hero).ice
+	detector.body_entered.connect(fire.breaking)
+	detector.body_exited.connect(fire.release)
+	
+func set_torch(hero: CharacterBody2D, fire: Node) -> void:
+	var detector: Node2D = get_fire(hero).torch
+	detector.body_entered.connect(fire.start_ignite)
+	detector.body_exited.connect(fire.stop_ignite)
+
+func controls(hero: CharacterBody2D, fire: Node, trigger: Node) -> void:
+	set_ice(hero, fire)
+	set_torch(hero, fire)
+	fire.activate.connect(trigger.activate)
+	fire.hero = hero

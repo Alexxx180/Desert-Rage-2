@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://bxivw287086j3"]
+
+[ext_resource type="Script" path="res://asset/system/script/subject/actor/group/hero/logic/detectors/interaction/ability/one.gd" id="1_qr83q"]
+[ext_resource type="Shape2D" uid="uid://i0icy78wfk8i" path="res://asset/resource/engine/internal/shape/characters/character/levels.tres" id="2_yv47k"]
+
+[sub_resource type="Gradient" id="Gradient_bi2dk"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_2opmp"]
+gradient = SubResource("Gradient_bi2dk")
+
+[node name="torch" type="Area2D"]
+collision_layer = 0
+collision_mask = 131072
+script = ExtResource("1_qr83q")
+
+[node name="shape" type="CollisionShape2D" parent="."]
+shape = ExtResource("2_yv47k")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-2.98023e-08, 0)
+scale = Vector2(0.0078125, 1)
+texture = SubResource("GradientTexture1D_2opmp")

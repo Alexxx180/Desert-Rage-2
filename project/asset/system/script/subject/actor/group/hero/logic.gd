@@ -5,3 +5,5 @@ extends Node2D
 @onready var detectors: Node2D = $detectors
 @onready var processors: Node = $processors
 @onready var relations: Node = $relations
+
+func _ready() -> void: stats.update_stats()

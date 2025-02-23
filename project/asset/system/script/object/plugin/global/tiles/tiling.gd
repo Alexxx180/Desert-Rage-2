@@ -2,7 +2,7 @@ extends RefCounted
 
 class_name Tile # Map facade class
 
-enum Atlas { LEVEL = 0, FLOOR = 1, SIZE = 5 }
+enum { LEVEL = 0, FLOOR = 1, BREAK = 2, SIZE = 5 }
 
 static var _options: Array[Array] = [["P", 0], ["F", 0], ["B", 0]]
 
@@ -39,7 +39,7 @@ static func from_pos(layer: TileMapLayer, pos: Vector2) -> Dictionary:
 
 
 static func logic(cell: Vector2i) -> int:
-	return cell.y * Atlas.SIZE + Atlas.FLOOR + cell.x
+	return cell.y * SIZE + FLOOR + cell.x
 
 static func extract(layer: TileMapLayer, map_coords: Vector2i, no: int) -> Variant:
 	var tile: TileData = layer.get_cell_tile_data(map_coords)

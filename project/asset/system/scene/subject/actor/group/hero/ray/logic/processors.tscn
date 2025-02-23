@@ -1,0 +1,15 @@
+[gd_scene load_steps=5 format=3 uid="uid://cuhscjgk7bx18"]
+
+[ext_resource type="Script" path="res://asset/system/script/subject/actor/group/hero/logic/processors.gd" id="2_bu25i"]
+[ext_resource type="PackedScene" uid="uid://cfuq8pb82qi6e" path="res://asset/system/scene/subject/actor/group/hero/ray/logic/processors/world.tscn" id="3_q6jpi"]
+[ext_resource type="PackedScene" uid="uid://c8c2cb0sc1mwn" path="res://asset/system/scene/subject/actor/group/hero/base/logic/processors/hud.tscn" id="4_pgeb1"]
+[ext_resource type="PackedScene" uid="uid://dtibatxhubbff" path="res://asset/system/scene/subject/actor/group/hero/base/logic/processors/input.tscn" id="4_ytput"]
+
+[node name="processors" type="Node"]
+script = ExtResource("2_bu25i")
+
+[node name="input" parent="." instance=ExtResource("4_ytput")]
+
+[node name="world" parent="." instance=ExtResource("3_q6jpi")]
+
+[node name="hud" parent="." instance=ExtResource("4_pgeb1")]

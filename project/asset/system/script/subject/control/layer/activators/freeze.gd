@@ -4,10 +4,8 @@ var execute: TileMapLayer
 
 @onready var particle = preload("res://asset/system/scene/subject/control/drive/fire.tscn")
 
-const BREAKABLE: int = 2
-
 func break_ice(pos: Vector2, coords: Vector2i, damage: int) -> void:
-	var resistance: int = Tile.extract(execute, coords, BREAKABLE)
+	var resistance: int = Tile.extract(execute, coords, Tile.BREAK)
 	if resistance > damage: return
 
 	var fire = particle.instantiate()
