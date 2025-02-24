@@ -6,3 +6,4 @@ extends Node
 var execute: TileMapLayer:
 	set(value):
 		rain.execute = value
+		spark.execute = value

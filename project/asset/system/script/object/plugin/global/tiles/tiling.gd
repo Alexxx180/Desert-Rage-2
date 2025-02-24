@@ -30,12 +30,14 @@ static func modify(tile_basis: Dictionary, layer: TileMapLayer) -> Dictionary:
 
 static func from_coords(layer: TileMapLayer, map_coords: Vector2i) -> Dictionary:
 	var result: Dictionary = basis(layer, map_coords)
-	result["atlas"] = Vector2(-1, -1)
-	result["name"] = "none"
+	result.atlas = Vector2(-1, -1)
+	result.name = "none"
 	return modify(result, layer)
 
 static func from_pos(layer: TileMapLayer, pos: Vector2) -> Dictionary:
-	return from_coords(layer, find(layer, pos))
+	var result: Dictionary = from_coords(layer, find(layer, pos))
+	result.pos = pos
+	return result
 
 
 static func logic(cell: Vector2i) -> int:

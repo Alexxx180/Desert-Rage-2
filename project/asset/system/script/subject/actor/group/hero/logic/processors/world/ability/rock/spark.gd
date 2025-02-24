@@ -9,32 +9,32 @@ var _act: Area2D
 var _hero: CharacterBody2D
 
 var _has_box: bool = false
-var _torch: CharacterBody2D
+var _vessel: CharacterBody2D
 
 var hero: CharacterBody2D:
 	set(value):
 		_hero = value
-		_act = _hero.logic.detectors.world.ability.rain.puddle
+		_act = _hero.logic.detectors.world.ability.spark.puddle
 
-func start_freeze(box: CharacterBody2D) -> void:
-	_torch = box
+func box_near(box: CharacterBody2D) -> void:
+	_vessel = box
 	_has_box = true
 
-func stop_freeze(_box: CharacterBody2D) -> void:
+func box_far(_box: CharacterBody2D) -> void:
 	_has_box = false
 
-func watering(_execute: TileMapLayer) -> void:
+func map_near(_execute: TileMapLayer) -> void:
 	_last_position = _hero.position + _act.position
 	#_burn = true
 
-func release(_execute: TileMapLayer) -> void:
+func map_far(_execute: TileMapLayer) -> void:
+	pass
 	#_burn = false
-	_torch = null
 
 func _input(_event: InputEvent) -> void:
-	if not Input.is_action_pressed("skill_one"): return
+	if not Input.is_action_pressed("skill_two"): return
 
-	if _has_box and !_torch.logic.relations.fire.on:
-		_torch.logic.processors.fire.freeze()
+	if _has_box and !_vessel.logic.relations.spark.on:
+		_vessel.logic.processors.spark.charge()
 
 	activate.emit(_last_position, _act.direction)
