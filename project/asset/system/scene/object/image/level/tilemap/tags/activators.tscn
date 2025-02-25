@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cmunoj3ycrf8b"]
+[gd_scene load_steps=12 format=3 uid="uid://cmunoj3ycrf8b"]
 
 [ext_resource type="Script" path="res://asset/system/script/subject/control/layer/activators/activators.gd" id="1_htt4n"]
 [ext_resource type="Script" path="res://asset/system/script/subject/control/layer/activators/check.gd" id="2_8vm4g"]
@@ -8,7 +8,9 @@
 [ext_resource type="Script" path="res://asset/system/script/subject/control/layer/activators/ability/ability.gd" id="5_f1rlu"]
 [ext_resource type="Script" path="res://asset/system/script/subject/control/layer/activators/ability/puddle/puddle.gd" id="6_n0vg7"]
 [ext_resource type="Script" path="res://asset/system/script/subject/control/layer/activators/ability/puddle/rain.gd" id="8_iqivn"]
-[ext_resource type="Script" path="res://asset/system/script/subject/control/layer/activators/ability/puddle/spark.gd" id="9_e6snf"]
+[ext_resource type="Script" path="res://asset/system/script/subject/control/layer/activators/ability/puddle/spark/spark.gd" id="9_e6snf"]
+[ext_resource type="Script" path="res://asset/system/script/subject/control/layer/activators/ability/puddle/spark/current.gd" id="10_44rix"]
+[ext_resource type="Script" path="res://asset/system/script/subject/control/layer/activators/ability/puddle/spark/direct.gd" id="10_7688p"]
 
 [node name="activators" type="Node"]
 script = ExtResource("1_htt4n")
@@ -36,6 +38,12 @@ script = ExtResource("8_iqivn")
 
 [node name="spark" type="Node" parent="ability/puddle"]
 script = ExtResource("9_e6snf")
+
+[node name="current" type="Node" parent="ability/puddle/spark"]
+script = ExtResource("10_44rix")
+
+[node name="direct" type="Node" parent="ability/puddle/spark"]
+script = ExtResource("10_7688p")
 
 [node name="timer" type="Timer" parent="ability/puddle/spark"]
 
