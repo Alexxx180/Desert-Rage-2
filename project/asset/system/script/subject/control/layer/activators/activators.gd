@@ -24,7 +24,7 @@ func setup(execute: TileMapLayer) -> void:
 	link.execute = execute
 	button.tiles = self
 	trigger.tiles = self
-	ability.execute = execute
+	ability.execute = TileDecorator.new(execute)
 	
 	var used_cells: Array[Vector2i]
 	var tags: TileMapLayer = self.get_parent()

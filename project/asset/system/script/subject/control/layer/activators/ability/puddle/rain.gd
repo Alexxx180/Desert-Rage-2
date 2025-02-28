@@ -1,30 +1,22 @@
 extends Node
 
-var execute: TileMapLayer
+var execute: TileDecorator
 
 @onready var particle = preload("res://asset/system/scene/subject/control/drive/rain.tscn")
 
 const PUDDLE: Vector2i = Vector2i(0, 2)
 const ID: int = 2
 
-func watering(tile: Dictionary, direction: Vector2i) -> void:
+func watering(direction: Vector2i) -> void:
 	var rain = particle.instantiate()
-	rain.position = tile.pos
+	rain.position = execute.context.pos
 	rain.set_direction(direction)
-	execute.get_parent().add_child(rain)
-	
-	tile.atlas = PUDDLE
-	tile.id = ID
-	#print("TILE ATLAS: ", tile.atlas, " + COORDS: ", tile.coords)
-	Tile.paint(execute, tile)
+	execute.add_chip(rain).select(PUDDLE, ID).paint()
 
 func activate(pos: Vector2, direction: Vector2i) -> void:
-	var tile: Dictionary = Tile.from_pos(execute, pos) # print("FREEZE: ", tile.atlas, " + DAMAGE: ", damage)
-
-	match tile.atlas:
+	match execute.from_pos(pos).context.atlas:
 		Vector2(-1, -1): # Vector2i(2, 1), Vector2i(3, 1):
-			watering(tile, direction)
-			print("AND NOW WHAT? ", tile.atlas)
+			watering(direction)
+			print("RN| ATLAS IS (Y): ", execute.context.atlas)
 		_:
-			print("BUT ATLAS IS: ", tile.atlas)
-			pass
+			print("RN| ATLAS IS (N): ", execute.context.atlas)
