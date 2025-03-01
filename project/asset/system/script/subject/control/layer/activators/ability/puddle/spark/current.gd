@@ -1,9 +1,12 @@
 extends Node
 
-signal current_flow(map_coords: Vector2i)
+signal current_flow(pos: Vector2)
 
 const ID: int = 2
-const SPARK: Vector2i = Vector2i(1, 2)
+var tiles = {
+	"SPARK": [Vector2i(1, 2), Vector2i(1, 3)],
+	"SOURCE": Vector2i(2, 2)
+}
 
 var current: Array[Array] = [] # Vector2i
 var size: Array[int] = []
@@ -12,14 +15,18 @@ var execute: TileDecorator:
 	get: return _execute
 	set(value):
 		_execute = value
-		_execute.select(SPARK, ID)
+		charge.execute = value
+		for map_coords in execute.busy(tiles.SOURCE, ID):
+			initiate_source(map_coords)
 
 @onready var drain: Node = $drain
+@onready var charge: Node = $charge
 
 enum { A = -2, B = -1, LENGTH = 10 }
 
 func _ready() -> void:
 	drain.flow = self
+	charge.flow.connect(puddle)
 
 func at_edge(previous: Rect2i) -> bool:
 	return execute.context.coords + previous.size == previous.position
@@ -38,14 +45,18 @@ func search_path() -> int:
 	return i
 
 func get_delta(i: int) -> Vector2:
-	var path: Array[Vector2i] = current[i]
+	var path: Array = current[i]
 	return Vector2(path[B] - path[A])
 
 func get_track(i: int) -> Rect2:
 	return Rect2(current[i][B], get_delta(i))
 
-func connection(map_coords: Vector2i) -> void:
-	execute.target(map_coords)
+func puddle(map_coords: Vector2i, no: int = 0) -> void:
+	execute.select(tiles.SPARK[no], ID).target(map_coords)
+	connection()
+
+func connection() -> void:
+	var map_coords: Vector2i = execute.context.coords
 	var i: int = search_path()
 	var track: Rect2 = get_track(i)
 
@@ -62,12 +73,20 @@ func connection(map_coords: Vector2i) -> void:
 func release(direction: Vector2i, i: int, j: int) -> void:
 	var k: int = current[i].size()
 	while k > j:
+		k -= 1
 		execute.target(current[i][k]).paint()
 		current[i].remove_at(k)
-	current[i][j] += direction * -1
+	current[i][k - 1] += direction * -1 # i j
 
 	var track: Rect2 = get_track(i)
 	if track.size == Vector2.ZERO:
 		touch(track.position)
 
-func touch(map_coords: Vector2i) -> void: current_flow.emit(map_coords)
+func checking(charge: Node2D, conductor: Node2D) -> void:
+	current_flow.connect(charge.set_pos)
+	charge.flow.connect(puddle)
+	conductor.flow.connect(puddle)
+
+func touch(map_coords: Vector2i) -> void:
+	print("EXECUTING: ", map_coords)
+	charge.contact(map_coords)

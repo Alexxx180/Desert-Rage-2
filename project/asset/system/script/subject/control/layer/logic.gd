@@ -8,6 +8,6 @@ extends TileMapLayer
 
 func _ready() -> void:
 	var execute: TileMapLayer = get_node("../execute")
-	activators.setup(execute)
+	activators.setup(self, execute)
 	transition.setup(self, execute)
 	if invisible: hide()

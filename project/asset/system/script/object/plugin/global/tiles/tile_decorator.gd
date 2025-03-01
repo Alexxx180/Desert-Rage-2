@@ -6,6 +6,10 @@ var _layer: TileMapLayer
 var _context: Dictionary
 var context: Dictionary:
 	get: return _context
+	set(value):
+		_context.id = value.id
+		_context.coords = value.coords
+		_context.atlas = value.atlas
 
 func add_chip(node: Node, path = '.') -> TileDecorator:
 	_layer.get_node(path).add_child(node)
@@ -15,6 +19,9 @@ func _init(layer: TileMapLayer) -> void:
 	var no: Vector2i = Vector2i.ZERO
 	_layer = layer
 	_context = { "id": -1, "coords": no, "atlas": no }
+
+func get_pos(map_coords: Vector2i) -> Vector2:
+	return Tile.get_pos(_layer, map_coords)
 
 func find(position: Vector2) -> Vector2i:
 	return Tile.find(_layer, position)
@@ -55,6 +62,7 @@ func from_coords(map_coords: Vector2i) -> TileDecorator:
 
 func from_pos(pos: Vector2) -> TileDecorator:
 	context = Tile.from_pos(_layer, pos)
+	_context.pos = pos
 	return self
 
 func extract(no: int, map_coords: Vector2i = context.coords) -> Variant:

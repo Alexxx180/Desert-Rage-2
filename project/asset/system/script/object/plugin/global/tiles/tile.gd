@@ -6,6 +6,9 @@ enum { LEVEL = 0, FLOOR = 1, BREAK = 2, SIZE = 5 }
 
 static var _options: Array[Array] = [["P", 0], ["F", 0], ["B", 0]]
 
+static func get_pos(layer: TileMapLayer, map_coords: Vector2i) -> Vector2:
+	return layer.map_to_local(map_coords)
+
 static func find(layer: TileMapLayer, position: Vector2) -> Vector2i:
 	return layer.local_to_map(position)
 

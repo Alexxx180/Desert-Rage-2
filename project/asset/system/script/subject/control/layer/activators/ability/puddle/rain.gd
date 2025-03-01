@@ -1,17 +1,23 @@
 extends Node
 
-var execute: TileDecorator
+var _execute: TileDecorator
+var execute: TileDecorator:
+	get: return _execute
+	set(value):
+		_execute = value
+		conductor.execute = value
 
 @onready var particle = preload("res://asset/system/scene/subject/control/drive/rain.tscn")
+@onready var conductor: FlowConductor = $conductor
 
 const PUDDLE: Vector2i = Vector2i(0, 2)
 const ID: int = 2
 
 func watering(direction: Vector2i) -> void:
 	var rain = particle.instantiate()
-	rain.position = execute.context.pos
-	rain.set_direction(direction)
+	rain.set_pos(execute.context.pos).set_direction(direction)
 	execute.add_chip(rain).select(PUDDLE, ID).paint()
+	conductor.contact(execute.context.coords)
 
 func activate(pos: Vector2, direction: Vector2i) -> void:
 	match execute.from_pos(pos).context.atlas:

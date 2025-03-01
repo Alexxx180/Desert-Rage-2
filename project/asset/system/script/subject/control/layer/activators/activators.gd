@@ -19,15 +19,14 @@ func activate(map_coords: Vector2i) -> void:
 	for lock in locks.connector[activator.connector]:
 		switch_cell(locks.machine[lock])
 
-func setup(execute: TileMapLayer) -> void:
-	link.active_trigger = (func(c): return locks["trigger"].has(c))
+func setup(tags: TileMapLayer, execute: TileMapLayer) -> void:
+	link.active_trigger = (func(c): return locks.trigger.has(c))
 	link.execute = execute
 	button.tiles = self
 	trigger.tiles = self
 	ability.execute = TileDecorator.new(execute)
 	
 	var used_cells: Array[Vector2i]
-	var tags: TileMapLayer = self.get_parent()
 	for x in range(5):
 		for y in range(5):
 			var atlas_cell: Vector2i = Vector2i(x, y)

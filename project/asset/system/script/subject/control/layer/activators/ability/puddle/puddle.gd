@@ -7,3 +7,6 @@ var execute: TileDecorator:
 	set(value):
 		rain.execute = value
 		spark.execute = value
+
+func _ready() -> void:
+	rain.conductor.flow.connect(spark.puddle_charge)

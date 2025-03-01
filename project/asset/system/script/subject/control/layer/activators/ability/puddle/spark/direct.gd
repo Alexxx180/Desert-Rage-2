@@ -1,7 +1,5 @@
 extends Node
 
-var unstable: Dictionary = {} # Vector2i, int
-
 func by(map_coords: Vector2i, check: Callable) -> Vector2i:
 	var i: int = 2
 	var j: int

@@ -10,7 +10,7 @@ func evaporation(map_coords: Vector2i) -> void:
 	
 	while i > 0 and search:
 		i -= 1
-		var path: Array[Vector2i] = flow.current[i]
+		var path: Array = flow.current[i]
 		j = path.size()
 		while j > 2 and search:
 			j -= 1

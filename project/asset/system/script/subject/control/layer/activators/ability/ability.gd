@@ -7,3 +7,7 @@ var execute: TileDecorator:
 	set(value):
 		freeze.execute = value
 		puddle.execute = value
+
+func _ready() -> void:
+	var drain: Node = puddle.spark.current.drain
+	freeze.fire_drain.connect(drain.evaporation)
