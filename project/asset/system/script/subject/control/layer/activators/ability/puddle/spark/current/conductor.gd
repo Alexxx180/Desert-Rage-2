@@ -2,11 +2,13 @@ extends Node
 
 class_name FlowConductor
 
-signal flow(map_coords: Vector2i)
+signal flow(map_coords: Vector2i, no: int)
 
 static func get_offset() -> Array[Vector2i]:
 	return [Vector2i(0, -1), Vector2i(0, 1), 
 		Vector2i(-1, 0), Vector2i(1, 0)]
+
+const SPARK: int = 0
 
 var execute: TileDecorator
 var offset: Array[Vector2i] = get_offset()
@@ -24,6 +26,6 @@ func contact(map_coords: Vector2i) -> void:
 	
 	if charge:
 		print("A CONTACT!")
-		flow.emit(execute.context.coords)
+		flow.emit(map_coords, SPARK)
 	else:
 		print("FLOW CHECK: ", execute.context.atlas)

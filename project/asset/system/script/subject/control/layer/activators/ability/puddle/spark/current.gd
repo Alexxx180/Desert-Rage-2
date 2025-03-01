@@ -4,6 +4,7 @@ signal current_flow(pos: Vector2)
 
 const ID: int = 2
 var tiles = {
+	"PUDDLE": Vector2i(0, 2),
 	"SPARK": [Vector2i(1, 2), Vector2i(1, 3)],
 	"SOURCE": Vector2i(2, 2)
 }
@@ -28,8 +29,9 @@ func _ready() -> void:
 	drain.flow = self
 	charge.flow.connect(puddle)
 
-func at_edge(previous: Rect2i) -> bool:
-	return execute.context.coords + previous.size == previous.position
+func at_edge(previous: Rect2) -> bool:
+	print("EDGE: ", execute.context.coords, " - ", previous.position, " =? ", previous.size.normalized())
+	return Vector2(execute.context.coords) - previous.position == previous.size.normalized()
 
 func initiate_source(map_coords: Vector2i) -> void:
 	current.append([map_coords, map_coords])
@@ -46,6 +48,8 @@ func search_path() -> int:
 
 func get_delta(i: int) -> Vector2:
 	var path: Array = current[i]
+	print("PATH: A = ", path[A], ", B = ", path[B])
+	print("CURRENT IS: ", current)
 	return Vector2(path[B] - path[A])
 
 func get_track(i: int) -> Rect2:
@@ -62,9 +66,13 @@ func connection() -> void:
 
 	if track.size == Vector2.ZERO:
 		current[i][B] = map_coords
+		print("START!!")
+	#elif map_coords == current[i][B]:
+		#return
 	elif at_edge(track):
-		current[i][B] += track.size
-	else:
+		print("AT EDGE!!")
+		current[i][B] += Vector2i(track.size)
+	elif not map_coords == current[i][B]:
 		current[i].append(map_coords)
 
 	execute.paint()
@@ -72,9 +80,9 @@ func connection() -> void:
 
 func release(direction: Vector2i, i: int, j: int) -> void:
 	var k: int = current[i].size()
-	while k > j:
+	while k >= j:
 		k -= 1
-		execute.target(current[i][k]).paint()
+		execute.target(current[i][k]).select(tiles.PUDDLE).paint()
 		current[i].remove_at(k)
 	current[i][k - 1] += direction * -1 # i j
 
@@ -82,11 +90,6 @@ func release(direction: Vector2i, i: int, j: int) -> void:
 	if track.size == Vector2.ZERO:
 		touch(track.position)
 
-func checking(charge: Node2D, conductor: Node2D) -> void:
-	current_flow.connect(charge.set_pos)
-	charge.flow.connect(puddle)
-	conductor.flow.connect(puddle)
-
 func touch(map_coords: Vector2i) -> void:
-	print("EXECUTING: ", map_coords)
+	#print("EXECUTING: ", map_coords)
 	charge.contact(map_coords)

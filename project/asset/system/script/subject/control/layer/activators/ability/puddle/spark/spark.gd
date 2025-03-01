@@ -44,9 +44,9 @@ func sparking(_direction: Vector2i) -> void:
 		timing.append(coords)
 	if size == 1: timer.start()
 
-func puddle_charge(map_coords: Vector2i) -> void:
+func puddle_charge(map_coords: Vector2i, no: int) -> void:
 	if not map_coords in unstable:
-		current.puddle(map_coords)
+		current.puddle(map_coords, no)
 
 func activate(pos: Vector2, direction: Vector2i) -> void:
 	match execute.from_pos(pos).context.atlas:
