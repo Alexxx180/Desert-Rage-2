@@ -35,6 +35,9 @@ func puddle(map_coords: Vector2i, no: int = 0) -> void:
 func connection() -> void:
 	var map_coords: Vector2i = execute.context.coords
 	var chain: int = chains.search_path(map_coords)
+	if chain == -1:
+		return
+	
 	var track: Rect2 = chains.get_track(chain)
 
 	if track.size == Vector2.ZERO:
@@ -53,23 +56,23 @@ func connection() -> void:
 		touch(map_coords)
 
 func drop(track: Rect2i, target: Vector2i, chain: int) -> void:
-	print("[PAINT]")
+	#print("[PAINT]")
 	while track.position != target:
 		execute.erase(track.position)
 		# execute.target(current[chain][B]).select(tiles.PUDDLE).paint()
-		print("[PAINT]", track.position, " > ", track.size, " > ", target)
+		#print("[PAINT]", track.position, " > ", track.size, " > ", target)
 		track.position -= track.size
-	print("LOOP END 2")
+	#print("LOOP END 2")
 
 func release(map_coords: Vector2i, direction: Vector2i, chain: int, joint: int) -> void:
 	var track: Rect2i
 	
-	print("TRY [REMOVE]: CURRENT = ", chain, " UNIT = ", joint)
+	#print("TRY [REMOVE]: CURRENT = ", chain, " UNIT = ", joint)
 	while chains.length(chain) - 1 > joint:
 		track = chains.get_track(chain)
 		drop(track, chains.closing_unit(chain), chain)
 		chains.drop_unit(chain)
-	print("LOOP END")
+	#print("LOOP END")
 	
 	print("AFTER [REMOVE]: CURRENT = ", chain, " UNIT = ", joint)
 	track = chains.get_track(chain)
@@ -78,6 +81,10 @@ func release(map_coords: Vector2i, direction: Vector2i, chain: int, joint: int) 
 	var target_coords: Vector2i = map_coords - direction
 	if target_coords == chains.get_unit(chain, joint - 1) and chains.length(chain) > 2:
 		chains.drop_unit(chain)
+		print("CHAIN LEN: ", chains.length(chain))
+		if chains.length(chain) == 2:
+			direction = chains.get_direction(target_coords - chains.closing_unit(chain))
+			chains.set_unit(chain, target_coords - direction)
 	else:
 		chains.set_unit(chain, target_coords)
 

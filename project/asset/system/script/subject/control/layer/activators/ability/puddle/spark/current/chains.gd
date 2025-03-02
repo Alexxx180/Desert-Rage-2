@@ -36,6 +36,8 @@ func search_path(map_coords: Vector2i) -> int:
 	while chain > 0 and far:
 		chain -= 1
 		far = not is_near(last_delta(map_coords, chain))
+	print("IS NEAR: ", not far, " ! BUT CHAIN IS: ", chain)
+	if far: chain = -1
 	return chain
 
 func get_site(chain: int, unit: int, map_coords: Vector2i) -> Vector2i:
