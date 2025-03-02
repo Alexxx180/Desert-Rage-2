@@ -52,7 +52,7 @@ func activate(pos: Vector2, direction: Vector2i) -> void:
 	match execute.from_pos(pos).context.atlas:
 		Vector2i(0, 3):
 			execute.offset(Vector2i(1, 0)).paint()
-			current.initiate_source(execute.context.coords)
+			current.chains.initiate_source(execute.context.coords)
 			current.touch(execute.context.coords)
 			print("SK| ATLAS IS (S): ", execute.context.atlas)
 		Vector2i(0, 2):
