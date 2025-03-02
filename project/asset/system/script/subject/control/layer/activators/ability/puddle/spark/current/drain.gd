@@ -19,6 +19,6 @@ func evaporation(map_coords: Vector2i) -> void:
 	print("STUCK")
 
 	if not search:
-		var direction: Vector2i = flow.chains.get_site(chain, joint, map_coords)
+		var direction: Vector2i = flow.chains.get_site(chain, map_coords, joint)
 		print("FIND: ", chain, " - ", joint, " , DIRECTION: ", direction)
 		flow.release(map_coords, direction, chain, joint)

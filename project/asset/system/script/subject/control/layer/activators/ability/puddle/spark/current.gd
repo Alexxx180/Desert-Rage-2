@@ -27,17 +27,17 @@ func at_edge(previous: Rect2i) -> bool:
 	return execute.context.coords - previous.position == previous.size
 
 func puddle(map_coords: Vector2i, no: int = 0) -> void:
+	execute.select(tiles.SPARK[no], ID)
 	if no == 1:
 		chains.initiate_source(map_coords)
-	execute.select(tiles.SPARK[no], ID).target(map_coords)
-	connection()
-
-func connection() -> void:
-	var map_coords: Vector2i = execute.context.coords
-	var chain: int = chains.search_path(map_coords)
-	if chain == -1:
+		connection(chains.last_chain(), map_coords)
 		return
 	
+	var chain: int = chains.search_path(map_coords)
+	if chain != -1: connection(chain, map_coords)
+
+func connection(chain: int, map_coords: Vector2i) -> void:
+	execute.target(map_coords)
 	var track: Rect2 = chains.get_track(chain)
 
 	if track.size == Vector2.ZERO:
@@ -74,19 +74,58 @@ func release(map_coords: Vector2i, direction: Vector2i, chain: int, joint: int) 
 		chains.drop_unit(chain)
 	#print("LOOP END")
 	
-	print("AFTER [REMOVE]: CURRENT = ", chain, " UNIT = ", joint)
+	#print("AFTER [REMOVE]: CURRENT = ", chain, " UNIT = ", joint)
 	track = chains.get_track(chain)
 	drop(track, map_coords, chain)
-	print("MAP COORDS: ", map_coords, " + DIRECTION: ", direction)
+	
 	var target_coords: Vector2i = map_coords - direction
-	if target_coords == chains.get_unit(chain, joint - 1) and chains.length(chain) > 2:
-		chains.drop_unit(chain)
-		print("CHAIN LEN: ", chains.length(chain))
-		if chains.length(chain) == 2:
-			direction = chains.get_direction(target_coords - chains.closing_unit(chain))
-			chains.set_unit(chain, target_coords - direction)
-	else:
+	print("TARGET COORDS: ", target_coords, ", UNIT: ", chains.closing_unit(chain))
+	#chains.get_unit(chain, joint - 1))
+	
+	if chains.length(chain) == 2:
 		chains.set_unit(chain, target_coords)
+		"""
+		direction = chains.get_direction(target_coords - chains.closing_unit(chain))
+		chains.set_unit(chain, target_coords - direction)
+		"""
+	else:
+		#direction = chains.get_direction(map_coords - chains.last_unit(chain))
+		
+		#direction = Vector2i.ZERO
+		#chains.extend_chain(chain, direction)
+		#"""
+		#if map_coords == chains.last_unit(chain):
+	#		direction = chains.get_direction(chains.last_unit(chain) - chains.last_unit(chain))
+		if map_coords == chains.closing_unit(chain):
+			chains.drop_unit(chain)
+			direction = chains.get_site(chain, target_coords)
+			#direction = chains.get_direction(target_coords - chains.closing_unit(chain))
+			print("DIR > ", direction)
+			chains.extend_chain(chain, direction * -1)
+		else:
+			if target_coords == chains.closing_unit(chain):
+				chains.drop_unit(chain)
+			chains.set_unit(chain, target_coords)
+		#"""
+		#chains.set_unit(chain, target_coords - direction)
+		#chains.set_unit(chain, target_coords)
+	"""
+	elif target_coords == chains.closing_unit(chain): #chains.get_unit(chain, joint - 1)# and chains.length(chain) > 2:
+		print("CHAIN CLOSING: ", chains.closing_unit(chain))
+		#var cross: bool = target_coords == chains.closing_unit(chain)
+		chains.drop_unit(chain)
+		#print("CHAIN LEN: ", chains.length(chain))
+		#if chains.length(chain) == 2:
+		#if target_coords == 
+		#if cross:
+		direction = chains.get_direction(target_coords - chains.closing_unit(chain))
+		chains.set_unit(chain, target_coords - direction)
+		#chains.set_unit(chain, target_coords)
+		#else:
+		#	direction = chains.get_direction(target_coords - chains.closing_unit(chain))
+		#	chains.set_unit(chain, target_coords - direction)
+		"""
+
 
 	touch(chains.last_unit(chain))
 

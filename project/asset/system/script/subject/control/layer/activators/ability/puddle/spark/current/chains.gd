@@ -40,7 +40,8 @@ func search_path(map_coords: Vector2i) -> int:
 	if far: chain = -1
 	return chain
 
-func get_site(chain: int, unit: int, map_coords: Vector2i) -> Vector2i:
+func get_site(chain: int, map_coords: Vector2i, unit: int = B) -> Vector2i:
+	#return get_direction(current[chain][unit - 1] - map_coords)
 	return get_direction(map_coords - current[chain][unit - 1])
 
 func between(map_coords: Vector2i, chain: int, unit: int) -> bool:
@@ -75,6 +76,9 @@ func add_unit(chain: int, map_coords: Vector2i) -> void:
 
 func extend_chain(chain: int, map_coords: Vector2i) -> void:
 	set_unit(chain, last_unit(chain) + map_coords)
+
+func last_chain() -> int:
+	return current.size() - 1
 
 func drop_unit(chain: int) -> void:
 	current[chain].pop_back()
