@@ -12,15 +12,15 @@ func discharge(target: Vector2i, chain: int) -> void:
 		chains.charge.feedback(track.position, Raining.PUDDLE)
 		track.position -= track.size
 
-func diffuse_cross_unit(target_coords: Vector2i, chain: int) -> void:
+func diffuse_cross_unit(next_coords: Vector2i, chain: int) -> void:
 	chains.drop_unit(chain)
-	var direction: Vector2i = chains.get_site(chain, target_coords)
+	var direction: Vector2i = chains.get_site(chain, next_coords)
 	chains.extend_chain(chain, direction * -1)
 
-func diffuse_turned_unit(target_coords: Vector2i, chain: int) -> void:
-	if target_coords == chains.closing_unit(chain):
+func diffuse_turned_unit(next_coords: Vector2i, chain: int) -> void:
+	if next_coords == chains.closing_unit(chain):
 		chains.drop_unit(chain)
-	chains.set_unit(chain, target_coords)
+	chains.set_unit(chain, next_coords)
 
 func complex_diffuse(target: Rect2i, chain: int) -> void:
 	if target.position == chains.closing_unit(chain):

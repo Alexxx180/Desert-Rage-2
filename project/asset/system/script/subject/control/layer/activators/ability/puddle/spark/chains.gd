@@ -18,6 +18,11 @@ func _ready() -> void:
 	drain.chains = self
 	charge.chains = self
 
+func contact(map_coords: Vector2i) -> void:
+	initiate_source(map_coords)
+	charge.feedback(map_coords, Charger.SOURCE)
+	charge.contact(map_coords)
+
 func initiate(tiles: Array[Vector2i]) -> void:
 	for map_coords in tiles: initiate_source(map_coords)
 

@@ -9,11 +9,11 @@
 [ext_resource type="Script" path="res://asset/system/script/subject/control/layer/activators/ability/puddle/puddle.gd" id="6_n0vg7"]
 [ext_resource type="Script" path="res://asset/system/script/subject/control/layer/activators/ability/puddle/rain/rain.gd" id="8_iqivn"]
 [ext_resource type="Script" path="res://asset/system/script/subject/control/layer/activators/ability/puddle/spark/spark.gd" id="9_e6snf"]
-[ext_resource type="Script" path="res://asset/system/script/subject/control/layer/activators/ability/puddle/spark/direct.gd" id="10_7688p"]
-[ext_resource type="Script" path="res://asset/system/script/subject/control/layer/activators/ability/puddle/spark/current/drain.gd" id="12_g44ad"]
-[ext_resource type="Script" path="res://asset/system/script/subject/control/layer/activators/ability/puddle/spark/current/charge.gd" id="13_nvbwt"]
-[ext_resource type="Script" path="res://asset/system/script/subject/control/layer/activators/ability/puddle/spark/current/chains/chains.gd" id="15_seokb"]
-[ext_resource type="Script" path="res://asset/system/script/subject/control/layer/activators/ability/puddle/spark/current/chains/search.gd" id="16_hqmeh"]
+[ext_resource type="Script" path="res://asset/system/script/subject/control/layer/activators/ability/puddle/spark/alone.gd" id="10_7688p"]
+[ext_resource type="Script" path="res://asset/system/script/subject/control/layer/activators/ability/puddle/spark/chains/drain.gd" id="12_g44ad"]
+[ext_resource type="Script" path="res://asset/system/script/subject/control/layer/activators/ability/puddle/spark/chains/charge.gd" id="13_nvbwt"]
+[ext_resource type="Script" path="res://asset/system/script/subject/control/layer/activators/ability/puddle/spark/chains.gd" id="15_seokb"]
+[ext_resource type="Script" path="res://asset/system/script/subject/control/layer/activators/ability/puddle/spark/chains/search.gd" id="16_hqmeh"]
 
 [node name="activators" type="Node"]
 script = ExtResource("1_htt4n")
@@ -42,8 +42,10 @@ script = ExtResource("8_iqivn")
 [node name="spark" type="Node" parent="ability/puddle"]
 script = ExtResource("9_e6snf")
 
-[node name="direct" type="Node" parent="ability/puddle/spark"]
+[node name="alone" type="Node" parent="ability/puddle/spark"]
 script = ExtResource("10_7688p")
+
+[node name="diffuse" type="Timer" parent="ability/puddle/spark/alone"]
 
 [node name="chains" type="Node" parent="ability/puddle/spark"]
 script = ExtResource("15_seokb")
@@ -57,6 +59,4 @@ script = ExtResource("13_nvbwt")
 [node name="drain" type="Node" parent="ability/puddle/spark/chains"]
 script = ExtResource("12_g44ad")
 
-[node name="timer" type="Timer" parent="ability/puddle/spark"]
-
-[connection signal="timeout" from="ability/puddle/spark/timer" to="ability/puddle/spark" method="diffusion"]
+[connection signal="timeout" from="ability/puddle/spark/alone/diffuse" to="ability/puddle/spark/alone" method="lazy_diffusion"]
