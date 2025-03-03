@@ -9,4 +9,4 @@ var execute: TileDecorator:
 		spark.execute = value
 
 func _ready() -> void:
-	rain.conductor.flow.connect(spark.puddle_charge)
+	rain.flow.connect(spark.puddle_charge)

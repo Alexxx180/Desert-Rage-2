@@ -9,5 +9,5 @@ var execute: TileDecorator:
 		puddle.execute = value
 
 func _ready() -> void:
-	var drain: Node = puddle.spark.current.drain
+	var drain: Node = puddle.spark.chains.drain
 	freeze.fire_drain.connect(drain.evaporation)

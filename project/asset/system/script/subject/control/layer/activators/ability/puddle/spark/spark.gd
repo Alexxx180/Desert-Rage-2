@@ -1,13 +1,12 @@
 extends Node
 
 @onready var particle = preload("res://asset/system/scene/subject/control/drive/rain.tscn")
-@onready var current: Node = $current
+@onready var chains: Node = $chains
 @onready var direct: Node = $direct
 @onready var timer: Timer = $timer
 
 enum { DROP = 1, ID = 2, DIFFUSION = 5, LENGTH = 10 }
 
-const PUDDLE: Vector2i = Vector2i(0, 2)
 const SPARK: Vector2i = Vector2i(1, 2)
 
 var _execute: TileDecorator
@@ -15,7 +14,7 @@ var execute: TileDecorator:
 	get: return _execute
 	set(value):
 		_execute = value
-		current.execute = value
+		chains.execute = value
 
 var unstable: Dictionary = {}
 var timing: Array[Vector2i] = []
@@ -28,7 +27,7 @@ func diffusion() -> void:
 		var coords: Vector2i = timing[s]
 		unstable[coords] -= DROP
 		if unstable[coords] <= 0:
-			execute.select(PUDDLE, ID).target(coords).paint()
+			execute.select(Raining.PUDDLE, ID).target(coords).paint()
 			unstable.erase(coords)
 			timing.remove_at(s)
 			size -= 1
@@ -46,16 +45,18 @@ func sparking(_direction: Vector2i) -> void:
 
 func puddle_charge(map_coords: Vector2i, no: int) -> void:
 	if not map_coords in unstable:
-		current.puddle(map_coords, no)
+		print("CHARGE")
+		chains.charge.from_puddle(map_coords, no)
 
 func activate(pos: Vector2, direction: Vector2i) -> void:
 	match execute.from_pos(pos).context.atlas:
-		Vector2i(0, 3):
+		Raining.SOURCE:
 			execute.offset(Vector2i(1, 0)).paint()
-			current.chains.initiate_source(execute.context.coords)
-			current.touch(execute.context.coords)
+			chains.initiate_source(execute.context.coords)
+			chains.charge.contact(execute.context.coords)
+			#current.touch(execute.context.coords)
 			print("SK| ATLAS IS (S): ", execute.context.atlas)
-		Vector2i(0, 2):
+		Raining.PUDDLE:
 			sparking(direction)
 			print("SK| ATLAS IS (Y): ", execute.context.atlas)
 		_:

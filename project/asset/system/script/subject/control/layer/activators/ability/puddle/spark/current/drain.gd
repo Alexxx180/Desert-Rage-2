@@ -1,24 +1,44 @@
 extends Node
 
-var flow: Node
+var chains: Node
 
 func evaporation(map_coords: Vector2i) -> void:
-	var search: bool = true
-	var chain: int = flow.chains.current.size()
-	var joint: int
-	
-	print("SEARCHING")
-	while chain > 0 and search:
-		chain -= 1
-		joint = flow.chains.length(chain)
-		print("CHAIN: ", chain)
-		while joint > 1 and search:
-			joint -= 1
-			print("JOINT: ", joint)
-			search = not flow.chains.between(map_coords, chain, joint)
-	print("STUCK")
+	var tiles: Dictionary = chains.search.discharged_unit(chains, map_coords)
+	if tiles.search: path_discharge(tiles)
 
-	if not search:
-		var direction: Vector2i = flow.chains.get_site(chain, map_coords, joint)
-		print("FIND: ", chain, " - ", joint, " , DIRECTION: ", direction)
-		flow.release(map_coords, direction, chain, joint)
+func discharge(target: Vector2i, chain: int) -> void:
+	var track: Rect2i = chains.get_track(chain)
+	while track.position != target:
+		chains.charge.feedback(track.position, Raining.PUDDLE)
+		track.position -= track.size
+
+func diffuse_cross_unit(target_coords: Vector2i, chain: int) -> void:
+	chains.drop_unit(chain)
+	var direction: Vector2i = chains.get_site(chain, target_coords)
+	chains.extend_chain(chain, direction * -1)
+
+func diffuse_turned_unit(target_coords: Vector2i, chain: int) -> void:
+	if target_coords == chains.closing_unit(chain):
+		chains.drop_unit(chain)
+	chains.set_unit(chain, target_coords)
+
+func complex_diffuse(target: Rect2i, chain: int) -> void:
+	if target.position == chains.closing_unit(chain):
+		diffuse_cross_unit(target.size, chain)
+	else:
+		diffuse_turned_unit(target.size, chain)
+
+func path_discharge(tiles: Dictionary) -> void:
+	var chain: int = tiles.chain
+	while chains.length(chain) - 1 > tiles.joint:
+		discharge(chains.closing_unit(chain), chain)
+		chains.drop_unit(chain)
+	discharge(tiles.map_coords, chain)
+	
+	var target_coords: Vector2i = tiles.map_coords - tiles.direction
+	if chains.length(chain) == 2:
+		chains.set_unit(chain, target_coords)
+	else:
+		complex_diffuse(Rect2i(tiles.map_coords, target_coords), chain)
+
+	chains.charge.contact(chains.last_unit(chain))

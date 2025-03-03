@@ -18,7 +18,7 @@ func _ready() -> void:
 		_deploy_heroes(order)
 
 func _get_feet(i: int) -> int:
-	return party[i].logic.processors.environment.floors.queue.F
+	return party[i].logic.processors.world.floors.queue.F
 
 func _comfortable_position() -> bool:
 	#print("deploy anchored: ", _deploy.anchored)
