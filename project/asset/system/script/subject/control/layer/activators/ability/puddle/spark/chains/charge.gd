@@ -39,7 +39,8 @@ func feedback(map_coords: Vector2i, tile: Vector2i) -> void:
 	execute.target(map_coords).select(tile, ID).paint()
 
 func to_conductor(tile: Rect2i, chain: int) -> void:
-	if _connection(chain, tile.position):
+	if chains.can_extend(chain) and _connection(chain, tile.position):
+		chains.shrink_size(chain)
 		feedback(tile.position, tile.size)
 		contact(tile.position)
 

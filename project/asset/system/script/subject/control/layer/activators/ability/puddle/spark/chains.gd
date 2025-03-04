@@ -61,6 +61,12 @@ func set_unit(chain: int, map_coords: Vector2i) -> bool:
 	current[chain][B] = map_coords
 	return true
 
+func can_extend(chain) -> bool: return size[chain] > 0
+
+func extend_size(chain) -> void: size[chain] += 1
+
+func shrink_size(chain) -> void: size[chain] -= 1
+
 func add_unit(chain: int, map_coords: Vector2i) -> bool:
 	current[chain].append(map_coords)
 	return true
@@ -69,8 +75,13 @@ func extend_chain(chain: int, map_coords: Vector2i) -> bool:
 	set_unit(chain, last_unit(chain) + map_coords)
 	return true
 
+func shrink_chain(chain: int, direction: Vector2i) -> void:
+	set_unit(chain, last_unit(chain) + direction * -1)
+
+
 func last_chain() -> int: return current.size() - 1
 
-func drop_unit(chain: int) -> void: current[chain].pop_back()
+func drop_unit(chain: int) -> void:
+	current[chain].pop_back()
 
 func length(chain: int) -> int: return current[chain].size()
