@@ -1,8 +1,7 @@
 extends Node
 
-signal activate(pos: Vector2, dir: Vector2)
+signal activate(pos: Vector2)
 
-#var _burn: bool = false
 var _last_position: Vector2
 
 var _act: Area2D

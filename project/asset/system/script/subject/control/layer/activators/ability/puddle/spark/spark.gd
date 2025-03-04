@@ -13,7 +13,7 @@ func puddle_charge(map_coords: Vector2i, no: int) -> void:
 	if not map_coords in alone.spark:
 		chains.charge.from_puddle(map_coords, no)
 
-func activate(pos: Vector2, direction: Vector2i) -> void:
+func activate(pos: Vector2) -> void:
 	match alone.execute.from_pos(pos).context.atlas:
 		Raining.SOURCE:
 			chains.contact(alone.execute.context.coords)

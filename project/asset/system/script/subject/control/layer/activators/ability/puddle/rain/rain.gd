@@ -15,15 +15,14 @@ var execute: TileDecorator
 
 func diffusion(map_coords: Vector2i) -> void:
 	var tile: Dictionary = { "charge": false }
-	
+
 	FlowConductor.around(map_coords, tile,
 	(func(cell: Vector2i, context: Dictionary):
 		match execute.from_coords(cell).context.atlas:
 			Charger.PUDDLE: context.charge = true
-			Charger.SOURCE: context.charge = true; print("TRYING TO CHARGE: ", context.charge)
+			Charger.SOURCE: context.charge = true
 		return not context.charge))
 
-	print("TRYING TO CHARGE: ", tile.charge)
 	if tile.charge: flow.emit(map_coords, SPARK)
 
 func watering(direction: Vector2i) -> void:
