@@ -13,6 +13,7 @@ func is_same_floor(floors: TileMapLayer) -> bool:
 
 func _jump(to_floor: bool, next: Vector2, move) -> void:
 	move.emit(next)
+	#if not to_floor:
 	feet.balance.stable = to_floor
 
 func _to_floor() -> void:
@@ -34,6 +35,7 @@ func floor_only(control: Node, _gap: TileMapLayer) -> void:
 func _set_midair(control: Node, is_in_midair: bool) -> void:
 	control.available = is_in_midair
 	overview.height.freeze = is_in_midair
+	print("MIDAIR FREEZE: ", overview.height.freeze)
 
 func determine(control: Node, upland: TileMapLayer) -> void:
 	#print("upland encounter: jump determine")

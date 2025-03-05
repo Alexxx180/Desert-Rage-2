@@ -2,6 +2,8 @@ extends Node
 
 class_name Charger
 
+signal activate()
+
 enum { NONE = -1, ID = 2 }
 const SOURCE: Vector2i = Vector2i(1, 3)
 const PUDDLE: Vector2i = Vector2i(1, 2)
@@ -47,6 +49,7 @@ func to_conductor(tile: Rect2i, chain: int) -> void:
 func to_source(map_coords: Vector2i) -> void:
 	chains.initiate_source(map_coords)
 	to_conductor(Rect2i(map_coords, SOURCE), chains.last_chain())
+	activate.emit(map_coords)
 
 func to_puddle(map_coords: Vector2i) -> void:
 	var chain: int = chains.search_path(map_coords)

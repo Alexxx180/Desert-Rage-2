@@ -36,4 +36,4 @@ func _input(_event: InputEvent) -> void:
 	if _has_box and !_vessel.logic.relations.spark.on:
 		_vessel.logic.processors.spark.charge()
 
-	activate.emit(_last_position, _act.direction)
+	activate.emit(_last_position) #, _act.direction)
