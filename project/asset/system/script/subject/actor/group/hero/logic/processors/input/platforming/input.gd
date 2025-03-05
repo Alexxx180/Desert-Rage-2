@@ -15,6 +15,7 @@ func _platforming() -> void:
 		time -= FRAME * FREEZE
 
 func _physics_process(delta: float) -> void:
+# func _process(delta: float) -> void:
 	time += delta
 	if time >= FRAME:
 		_platforming()

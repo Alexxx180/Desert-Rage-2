@@ -15,7 +15,7 @@ var execute: TileDecorator
 
 func diffusion(map_coords: Vector2i) -> void:
 	var tile: Dictionary = { "charge": false }
-	
+
 	FlowConductor.around(map_coords, tile,
 	(func(cell: Vector2i, context: Dictionary):
 		match execute.from_coords(cell).context.atlas:

@@ -1,8 +1,7 @@
 extends Node
 
-signal activate(pos: Vector2, dir: Vector2)
+signal activate(pos: Vector2)
 
-#var _burn: bool = false
 var _last_position: Vector2
 
 var _act: Area2D
@@ -37,4 +36,4 @@ func _input(_event: InputEvent) -> void:
 	if _has_box and !_vessel.logic.relations.spark.on:
 		_vessel.logic.processors.spark.charge()
 
-	activate.emit(_last_position, _act.direction)
+	activate.emit(_last_position) #, _act.direction)

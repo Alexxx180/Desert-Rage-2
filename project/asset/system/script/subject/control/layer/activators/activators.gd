@@ -32,3 +32,5 @@ func setup(tags: TileMapLayer, execute: TileMapLayer) -> void:
 			var atlas_cell: Vector2i = Vector2i(x, y)
 			used_cells = Tile.used_cells(tags, atlas_cell, SOURCE)
 			link.connect_tiles(locks, atlas_cell, used_cells)
+
+	ability.puddle.spark.chains.charge.activate.connect(trigger.map_activate)

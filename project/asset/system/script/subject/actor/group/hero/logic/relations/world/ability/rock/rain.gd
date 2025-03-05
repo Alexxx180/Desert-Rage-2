@@ -6,7 +6,7 @@ func get_rain(hero: CharacterBody2D) -> Node2D:
 func set_puddle(hero: CharacterBody2D, rain: Node) -> void:
 	var detector: Node2D = get_rain(hero).puddle
 	detector.body_entered.connect(rain.watering)
-	detector.body_exited.connect(rain.release)
+	#detector.body_exited.connect(rain.release)
 	
 func set_torch(hero: CharacterBody2D, rain: Node) -> void:
 	var detector: Node2D = get_rain(hero).fire

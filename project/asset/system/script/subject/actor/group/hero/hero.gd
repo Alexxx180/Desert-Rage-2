@@ -19,7 +19,9 @@ func teleport(next: Vector2) -> void:
 	velocity = Vector2.ZERO
 	position = next
 
-func dash(force: Vector2) -> void: position += force
+func dash(force: Vector2) -> void:
+	print("JUMP: ", force)
+	position += force
 
 func travel(motion: Vector2) -> void:
 	if weight != 0:

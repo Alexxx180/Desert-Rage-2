@@ -21,8 +21,8 @@ func diffuse_puddle(item: int) -> void:
 		cells.remove_at(item)
 
 func lazy_sparking(map_coords: Vector2i) -> void:
-	var can_place: bool = FlowConductor._around(map_coords, {},
-		(func(cell: Vector2i, context: Dictionary):
+	var can_place: bool = FlowConductor.around(map_coords, {},
+		(func(cell: Vector2i, _context: Dictionary):
 			return not cell in spark))
 	if can_place:
 		set_puddle(map_coords, size + 1, Charger)

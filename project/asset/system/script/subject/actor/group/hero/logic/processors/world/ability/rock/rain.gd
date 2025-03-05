@@ -25,16 +25,11 @@ func stop_freeze(_box: CharacterBody2D) -> void:
 
 func watering(_execute: TileMapLayer) -> void:
 	_last_position = _hero.position + _act.position
-	#_burn = true
-
-func release(_execute: TileMapLayer) -> void:
-	#_burn = false
-	_torch = null
 
 func _input(_event: InputEvent) -> void:
 	if not Input.is_action_pressed("skill_one"): return
 
-	if _has_box and !_torch.logic.relations.fire.on:
+	if _has_box and _torch.logic.relations.fire.on:
 		_torch.logic.processors.fire.freeze()
 
 	activate.emit(_last_position, _act.direction)
