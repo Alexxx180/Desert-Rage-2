@@ -17,12 +17,6 @@ func transit(hero: CharacterBody2D) -> void:
 	match map.way.atlas:
 		Vector2i(0, 2):
 			teleport.transit(hero, map.link)
-		Vector2i(2, 0):
-			print("credits: ", map.way.atlas)
+		Vector2i(2, 0), Vector2i(2, 1):
 			levels.credits()
-		Vector2i(2, 1):
-			print("credits: ", map.way.atlas)
-			levels.credits()
-		_:
-			print("no credits: ", map.way.atlas)
-			levels.elevate(check.execute, map)
+		_: levels.elevate(check.execute, map)

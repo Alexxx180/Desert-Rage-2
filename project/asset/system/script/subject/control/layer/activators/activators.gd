@@ -20,8 +20,7 @@ func activate(map_coords: Vector2i) -> void:
 		switch_cell(locks.machine[lock])
 
 func setup(tags: TileMapLayer, execute: TileMapLayer) -> void:
-	link.active_trigger = (func(c): return locks.trigger.has(c))
-	link.execute = execute
+	link.setup(execute, func(c): return locks.trigger.has(c))
 	button.tiles = self
 	trigger.tiles = self
 	ability.execute = TileDecorator.new(execute)

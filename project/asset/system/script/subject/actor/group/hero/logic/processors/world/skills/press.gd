@@ -7,8 +7,7 @@ var _last_position: Vector2
 var _hero: CharacterBody2D
 
 var hero: CharacterBody2D:
-	set(value):
-		_hero = value
+	set(value): _hero = value
 
 func encounter(_execute: TileMapLayer) -> void:
 	_last_position = _hero.position

@@ -1,6 +1,5 @@
 extends Node
 
-@onready var particle = preload("res://asset/system/scene/subject/control/drive/rain.tscn")
 @onready var chains: Node = $chains
 @onready var alone: Node = $alone
 
@@ -14,10 +13,7 @@ func puddle_charge(map_coords: Vector2i, no: int) -> void:
 		chains.charge.from_puddle(map_coords, no)
 
 func activate(pos: Vector2) -> void:
-	match alone.execute.from_pos(pos).context.atlas:
-		Raining.SOURCE:
-			var map_coords: Vector2i = alone.execute.context.coords
-			chains.contact(map_coords)
-			chains.charge.activate.emit(map_coords)
-		Raining.PUDDLE:
-			alone.lazy_sparking(alone.execute.context.coords)
+	var context: Dictionary = alone.execute.from_pos(pos).context
+	match context.atlas:
+		Raining.SOURCE: chains.contact(context.coords)
+		Raining.PUDDLE: alone.lazy_sparking(context.coords)

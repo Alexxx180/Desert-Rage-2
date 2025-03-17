@@ -11,6 +11,11 @@ const PUDDLE: Vector2i = Vector2i(1, 2)
 var chains: Node
 var execute: TileDecorator
 
+func init(map_coords: Vector2i) -> void:
+	feedback(map_coords, Charger.SOURCE)
+	contact(map_coords)
+	activate.emit(map_coords)
+
 func contact(map_coords: Vector2i) -> void:
 	var tile: Dictionary = { "cell": NONE }
 

@@ -1,20 +1,13 @@
 extends Node
 
-func get_rain(hero: CharacterBody2D) -> Node2D:
-	return hero.logic.detectors.world.ability.rain
-
-func set_puddle(hero: CharacterBody2D, rain: Node) -> void:
-	var detector: Node2D = get_rain(hero).puddle
-	detector.body_entered.connect(rain.watering)
-	#detector.body_exited.connect(rain.release)
-	
-func set_torch(hero: CharacterBody2D, rain: Node) -> void:
-	var detector: Node2D = get_rain(hero).fire
-	detector.body_entered.connect(rain.start_freeze)
-	detector.body_exited.connect(rain.stop_freeze)
+func detection(detector: Node2D, near: Callable, far: Callable) -> void:
+	detector.body_entered.connect(near)
+	detector.body_exited.connect(far)
 
 func controls(hero: CharacterBody2D, rain: Node, puddle: Node) -> void:
-	set_puddle(hero, rain)
-	set_torch(hero, rain)
+	var detector: Node2D = hero.logic.detectors.world.ability.rain
+
+	detection(detector.fire, rain.near_box, rain.far_box)
+	detector.puddle.body_entered.connect(rain.near_map)
 	rain.activate.connect(puddle.activate)
 	rain.hero = hero

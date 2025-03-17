@@ -20,7 +20,6 @@ func teleport(next: Vector2) -> void:
 	position = next
 
 func dash(force: Vector2) -> void:
-	print("JUMP: ", force)
 	position += force
 
 func travel(motion: Vector2) -> void:

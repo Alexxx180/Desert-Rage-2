@@ -16,7 +16,6 @@ var hero: CharacterBody2D:
 func encounter(_execute: TileMapLayer) -> void:
 	_last_position = _hero.position + _act.position
 	_allow = true
-	#print("ENCOUNTER! ", _hero.position + _act.position)
 
 func diverge(_execute: TileMapLayer) -> void:
 	_allow = false

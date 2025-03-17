@@ -7,9 +7,10 @@ extends Node
 @onready var dialog: PanelContainer = $dialog
 @onready var animation: AnimationPlayer = $animation
 
-var names: Dictionary = { "ray": "Рэй", "rock": "Рок" }
+var names: Dictionary
 
 func _ready() -> void:
+	names = { "ray": "Рэй", "rock": "Рок" }
 	use_hero_name = use_hero_name and message.contains("%s")
 
 func _show_dialog() -> void:

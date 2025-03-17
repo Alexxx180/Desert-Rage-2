@@ -20,8 +20,7 @@ func _ready() -> void:
 
 func contact(map_coords: Vector2i) -> void:
 	initiate_source(map_coords)
-	charge.feedback(map_coords, Charger.SOURCE)
-	charge.contact(map_coords)
+	charge.init(map_coords)
 
 func initiate(tiles: Array[Vector2i]) -> void:
 	for map_coords in tiles: initiate_source(map_coords)
@@ -77,7 +76,6 @@ func extend_chain(chain: int, map_coords: Vector2i) -> bool:
 
 func shrink_chain(chain: int, direction: Vector2i) -> void:
 	set_unit(chain, last_unit(chain) + direction * -1)
-
 
 func last_chain() -> int: return current.size() - 1
 
