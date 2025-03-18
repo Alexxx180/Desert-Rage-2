@@ -2,7 +2,8 @@ extends AbilitySlot
 
 signal activate(pos: Vector2)
 
-func _get_action_name() -> String: return "skill_two"
+func _ready() -> void:
+	_act_name = "skill_two"
 
 func _set_hero(value: CharacterBody2D) -> void:
 	super._set_hero(value)
