@@ -23,6 +23,7 @@ func dash(force: Vector2) -> void:
 	position += force
 
 func travel(motion: Vector2) -> void:
+	#print("MOVE: ", motion)
 	if weight != 0:
 		motion *= logic.stats.force / weight
 	else:

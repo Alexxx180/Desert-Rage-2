@@ -1,5 +1,6 @@
 extends Node
 
+signal update_floor(f: int)
 #@onready var queue: FloorsQueue = FloorsQueue.new()
 @onready var tracker: SurfaceTracker = $tracker
 
@@ -12,3 +13,4 @@ var F: int:
 func at_new_floor(border: TileMapLayer) -> void:
 	var map_coords: Vector2i = Tile.find(border, tracker.contact)
 	_floor = Tile.extract(border, map_coords, Tile.FLOOR)
+	update_floor.emit(_floor)
