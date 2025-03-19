@@ -19,7 +19,6 @@ func select(hero: Node2D = party.leader) -> void:
 		party.show_heroes()
 	traverse_camera.emit(hero, party.follower)
 	party.set_next()
-#	party.forget_velocity()
 
 func group_heroes() -> void:
 	party.sync_pos()

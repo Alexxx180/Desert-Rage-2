@@ -22,9 +22,7 @@ func set_lockers(tag: Vector2i, map_coords: Array[Vector2i]) -> void:
 				storage.setup_trigger(tile)
 				map_coords.remove_at(i)
 			Vector2i(2, 0), Vector2i(3, 0), Vector2i(2, 2):
-				print("LOCK: ", tile)
 				storage.setup_lock(tile)
 			Vector2i(3, 2), Vector2i(2, 3), Vector2i(3, 3):
-				print("LOCK: ", tile)
 				storage.setup_lock(tile)
 	storage.locks.connector[tag] = map_coords

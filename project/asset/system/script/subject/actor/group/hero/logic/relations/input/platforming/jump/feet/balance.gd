@@ -5,18 +5,13 @@ enum { WORLD = 1, BORDERS = 2 }
 var _movement: Node
 var _hero: CharacterBody2D
 
-func controls(hero: CharacterBody2D, feet: Node, platforming: Node) -> void:
-	var processors: Node = hero.logic.processors
-
+func controls(hero: CharacterBody2D, balance: Node) -> void:
 	_hero = hero
-	_movement = processors.input.movement
+	_movement = hero.logic.processors.input.movement
 
-	feet.deployment = platforming.platforms.surface.deployment
-	feet.surface = processors.world.floors.tracker
-
-	feet.balance.set_movement.connect(_set_movement)
-	feet.balance.enable.connect(_disable_walls_collision)
-	feet.balance.disable.connect(_enable_walls_collision)
+	balance.set_movement.connect(_set_movement)
+	balance.enable.connect(_disable_walls_collision)
+	balance.disable.connect(_enable_walls_collision)
 
 func _set_movement(control: bool) -> void:
 	Processors.turn(_movement, control)

@@ -31,7 +31,6 @@ func forget_velocity() -> void:
 	view.animation.move(Vector2.ZERO)
 
 func travel(motion: Vector2) -> void:
-	#print("MOVE: ", motion)
 	if weight != 0:
 		motion *= logic.stats.force / weight
 	else:
