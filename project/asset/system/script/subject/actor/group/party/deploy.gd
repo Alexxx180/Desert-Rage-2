@@ -13,11 +13,13 @@ func set_anchor() -> void: _group[0] = !_group[0]
 
 func select(hero: Node2D = party.leader) -> void:
 	party.set_heroes()
+	party.forget_velocity()
 	if _group[0]:
 		party.sync_pos()
 		party.show_heroes()
 	traverse_camera.emit(hero, party.follower)
 	party.set_next()
+#	party.forget_velocity()
 
 func group_heroes() -> void:
 	party.sync_pos()

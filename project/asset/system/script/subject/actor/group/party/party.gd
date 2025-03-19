@@ -42,6 +42,9 @@ func set_hero(hero: int, visible: bool) -> void:
 func show_hero(hero: int, visible: bool) -> void:
 	heroes[hero].visible = visible
 
+func forget_velocity() -> void:
+	leader.forget_velocity()
+
 func sync_pos() -> void:
 	follower.position = leader.position
 

@@ -5,11 +5,11 @@ extends Node
 @onready var fire: Node = $fire
 
 func controls(box: CharacterBody2D) -> void:
-	var activators: Node = box.get_node("../../tags").activators
+	var behavior: Node = box.get_node("../../tags").lockers.behavior
 	var processor: Node = box.logic.processors
 	
 	push.controls(box, processor.push)
-	press.controls(box, processor.press, activators.button)
-	fire.controls(box, processor.fire, activators.ability.freeze)
+	press.controls(box, processor.press, behavior.activator.button)
+	fire.controls(box, processor.fire, behavior.ability.freeze)
 	
 	processor.push.directing.connect(box.logic.detectors.set_direction)

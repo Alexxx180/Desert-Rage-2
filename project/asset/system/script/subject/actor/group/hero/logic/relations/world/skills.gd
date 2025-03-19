@@ -6,8 +6,8 @@ extends Node
 @onready var pull: Node = $pull
 
 func controls(hero: CharacterBody2D, skills: Node, tags: TileMapLayer) -> void:
-	var activators: Node = tags.activators
-	act.controls(hero, skills.act, activators.trigger)
-	press.controls(hero, skills.press, activators.button)
+	var activator: Node = tags.lockers.behavior.activator
+	act.controls(hero, skills.act, activator.trigger)
+	press.controls(hero, skills.press, activator.button)
 	transition.controls(hero, skills.transition, tags)
 	pull.controls(hero, skills.pull)

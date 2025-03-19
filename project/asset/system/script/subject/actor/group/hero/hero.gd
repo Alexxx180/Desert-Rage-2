@@ -22,6 +22,14 @@ func teleport(next: Vector2) -> void:
 func dash(force: Vector2) -> void:
 	position += force
 
+func _set_velocity(motion: Vector2) -> void:
+	velocity = motion
+	moving.emit(motion)
+
+func forget_velocity() -> void:
+	_set_velocity(Vector2.ZERO)
+	view.animation.move(Vector2.ZERO)
+
 func travel(motion: Vector2) -> void:
 	#print("MOVE: ", motion)
 	if weight != 0:
@@ -29,5 +37,4 @@ func travel(motion: Vector2) -> void:
 	else:
 		motion *= logic.stats.speed
 
-	velocity = motion
-	moving.emit(motion)
+	_set_velocity(motion)

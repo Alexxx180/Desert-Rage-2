@@ -2,11 +2,20 @@ extends Node
 
 var active_trigger: Callable
 var _execute: TileMapLayer
-var locks: Dictionary = { "trigger": {}, "machine": {}, "connector": {} }
 
 func setup(execute: TileMapLayer, action: Callable) -> void:
 	active_trigger = action
 	_execute = execute
+
+func set_lock(lock: Dictionary) -> void:
+	lock.atlas.x += 1 if lock.atlas.x % 2 == 0 else -1
+	Tile.paint(_execute, lock)
+
+func activate(locks: Dictionary, map_coords: Vector2i) -> void:
+	var activator: Dictionary = locks.trigger[map_coords]
+	set_lock(activator)
+	for lock in locks.connector[activator.connector]:
+		set_lock(locks.machine[lock])
 
 func find_cell_by_coords(map_coords: Vector2i) -> Vector2i:
 	assert(active_trigger.call(map_coords), "no trigger found")
@@ -20,13 +29,3 @@ func get_atlas(map_coords: Vector2i, tag: Vector2i) -> Dictionary:
 	tile_atlas.connector = tag
 	assert(tile_atlas.name != "none", "no executable connection")
 	return tile_atlas
-
-func setup_plate(tile: Dictionary) -> void:
-	locks.trigger[tile.coords] = tile
-	locks.trigger[tile.coords].count = tile.atlas.x
-
-func setup_trigger(tile: Dictionary) -> void:
-	locks.trigger[tile.coords] = tile
-
-func setup_lock(tile: Dictionary) -> void:
-	locks.machine[tile.coords] = tile
