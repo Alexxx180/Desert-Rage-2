@@ -18,6 +18,7 @@ func activate(locks: Dictionary, map_coords: Vector2i) -> void:
 		set_lock(locks.machine[lock])
 
 func find_cell_by_coords(map_coords: Vector2i) -> Vector2i:
+	print("HAS: ", active_trigger.call(map_coords))
 	assert(active_trigger.call(map_coords), "no trigger found")
 	return map_coords
 

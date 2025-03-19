@@ -14,7 +14,7 @@ func set_atlas_tile(tags: TileDecorator, x: int) -> void:
 		location.set_lockers(atlas, tags.busy(atlas))
 
 func setup(tags: TileMapLayer, execute: TileMapLayer) -> void:
-	var _tags: TileDecorator = TileDecorator.new(tags)
+	var _tags: TileDecorator = TileDecorator.new(tags, SOURCE)
 	location.setup(execute)
 	behavior.setup(location, execute)
 

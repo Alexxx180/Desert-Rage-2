@@ -8,7 +8,7 @@ func switch(pos: Vector2, appendix: int) -> void:
 		location.activate(map_coords)
 
 func check_weight(map_coords: Vector2i, appendix: int) -> bool:
-	var trigger: Dictionary = location.locks.trigger[map_coords]
+	var trigger: Dictionary = location.storage.locks.trigger[map_coords]
 	trigger.count += appendix
 	return trigger.count == clamp(appendix, 0, 1)
 

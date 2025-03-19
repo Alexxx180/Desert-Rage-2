@@ -17,7 +17,7 @@ func add_chip(node: Node, path = '.') -> TileDecorator:
 	_layer.get_node(path).add_child(node)
 	return self
 
-func _init(layer: TileMapLayer, coords: Vector2i = no, atlas: Vector2i = no, id: int = -1) -> void:
+func _init(layer: TileMapLayer, id: int = -1, coords: Vector2i = no, atlas: Vector2i = no) -> void:
 	_layer = layer
 	_context = { "id": id, "coords": coords, "atlas": atlas }
 
