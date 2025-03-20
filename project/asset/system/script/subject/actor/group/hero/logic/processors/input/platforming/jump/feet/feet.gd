@@ -11,6 +11,7 @@ var _deployment: DeploymentRaycast
 var deployment: DeploymentRaycast:
 	get: return _deployment
 	set(value):
+		print("SET DEPLOYMENT")
 		_deployment = value
 		_deployment.walls.same_floor = same_floor
 

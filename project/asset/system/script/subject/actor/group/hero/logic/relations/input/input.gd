@@ -6,8 +6,9 @@ extends Node
 func controls(hero: CharacterBody2D, input: Node) -> void:
 	var detectors: Node2D = hero.logic.detectors
 	var surface: Node2D = detectors.platforming.platforms.surface
-	var directions: Node = input.platforming.jump.overview.directions
-	var deployment: Node = input.platforming.jump.overview.feet.deployment
+	var space: Node = input.platforming.jump.ledges.space
+	var deployment: DeploymentRaycast = input.platforming.jump.feet.deployment
+	print ("DEPLOYMENT GET")
 
 	input.moving.connect(input.movement.face.set_position)
 	input.moving.connect(hero.view.animation.move)
@@ -21,7 +22,7 @@ func controls(hero: CharacterBody2D, input: Node) -> void:
 
 	input.moving.connect(surface.deployment.walls.set_direction)
 	input.moving.connect(surface.deployment.ground.set_direction)
-	input.moving.connect(directions.set_direction)
+	input.moving.connect(space.set_direction)
 	input.moving.connect(deployment.set_direction)
 
 	input.moving.connect(detectors.world.set_direction)

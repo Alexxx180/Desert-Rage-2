@@ -7,10 +7,10 @@ func controls(hero: CharacterBody2D, jump: Node) -> void:
 	var platforming: Node2D = hero.logic.detectors.platforming
 	var ledges: Area2D = platforming.platforms.ledges
 
-	jump.dash.connect(hero.dash)
-	jump.teleport.connect(hero.teleport)
+	jump.feet.dash.connect(hero.dash)
+	jump.feet.teleport.connect(hero.teleport)
 
-	jump.overview.directions.set_directions(hero)
+	jump.ledges.space.setup(hero)
 
 	ledges.area_entered.connect(jump.ledges.append)
 	ledges.area_exited.connect(jump.ledges.remove)

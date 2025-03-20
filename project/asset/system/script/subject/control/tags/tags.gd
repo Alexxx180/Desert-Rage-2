@@ -3,7 +3,7 @@ extends TileMapLayer
 @export var invisible: bool = true
 
 @onready var transition: Node = $transition
-@onready var lockers: Node = $lockersW
+@onready var lockers: Node = $lockers
 @onready var curtain: Node = $curtain
 
 func _ready() -> void:

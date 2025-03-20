@@ -15,9 +15,7 @@ func at_new_floor(border: TileMapLayer) -> void:
 		return
 
 	var map_coords: Vector2i = Tile.find(border, tracker.contact)
-	_floor = Tile.extract(border, map_coords, Tile.FLOOR)
-	update_floor.emit(_floor)
-	print("Set Floor = ", _floor)
+	set_box_floor(Tile.extract(border, map_coords, Tile.FLOOR))
 
 func set_box_floor(next: int) -> void:
 	_floor = next
