@@ -7,7 +7,7 @@ func controls(hero: CharacterBody2D, input: Node) -> void:
 	var detectors: Node2D = hero.logic.detectors
 	var surface: Node2D = detectors.platforming.platforms.surface
 	var space: Node = input.platforming.jump.ledges.space
-	var deployment: DeploymentRaycast = input.platforming.jump.feet.deployment
+	var deployment: DeploymentRaycast = surface.deployment
 	print ("DEPLOYMENT GET")
 
 	input.moving.connect(input.movement.face.set_position)

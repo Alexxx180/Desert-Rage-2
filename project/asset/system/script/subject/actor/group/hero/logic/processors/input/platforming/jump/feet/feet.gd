@@ -13,7 +13,7 @@ var deployment: DeploymentRaycast:
 	set(value):
 		print("SET DEPLOYMENT")
 		_deployment = value
-		_deployment.walls.same_floor = same_floor
+		_deployment.walls.same_floor = same_level
 
 func same_floor(f: int) -> bool:
 	return f != 0 and f == floors.F
