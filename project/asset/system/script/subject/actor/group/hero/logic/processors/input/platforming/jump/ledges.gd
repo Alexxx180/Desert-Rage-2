@@ -8,22 +8,20 @@ var current: Area2D:
 	get: return _current
 
 func append(ledge: Area2D) -> void:
-	var id: int = ledge.get_instance_id()
-	data[id] = ledge
-	size = size + 1
+	data[ledge.get_instance_id()] = ledge
+	size += 1
 
 func remove(ledge: Area2D) -> void:
-	var id: int = ledge.get_instance_id()
-	data.erase(id)
-	size = size - 1
+	data.erase(ledge.get_instance_id())
+	size -= 1
 
-func around(overview: Node, feet: Node) -> bool:
+func _search(overview: Node, i: int, platforms: Array) -> bool:
 	var jump: bool = false
-	var platforms: Array = data.values()
-	var i: int = size
 	while i > 0 and not jump:
 		i = i - 1
 		_current = platforms[i]
-		#print("check ledge: ", _current.name)
-		jump = overview.reach(_current, feet)
+		jump = overview.reach(_current)
 	return jump
+
+func around(overview: Node, feet: Node) -> bool:
+	return _search(overview, size, data.values())

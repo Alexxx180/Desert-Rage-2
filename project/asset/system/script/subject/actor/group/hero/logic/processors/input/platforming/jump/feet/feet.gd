@@ -4,7 +4,6 @@ extends Node
 @onready var floors: Node = $floors
 
 var deployment: DeploymentRaycast
-# var surface: SurfaceTracker
 
 func same_level(f: int) -> bool:
 	print("F: SET = ", floors.F, ", GET = ", f)

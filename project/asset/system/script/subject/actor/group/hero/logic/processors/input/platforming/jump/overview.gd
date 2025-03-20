@@ -2,6 +2,7 @@ extends Node
 
 @onready var directions: Node = $directions
 @onready var height: Node = $height
+@onready var feet: Node = $feet
 
 func _observe(ledge: Vector2) -> bool:
 	var try: bool = true
@@ -9,7 +10,7 @@ func _observe(ledge: Vector2) -> bool:
 		try = try and directions.observe(axis, ledge)
 	return try
 
-func reach(stand: Area2D, feet: Node) -> bool:
+func reach(stand: Area2D) -> bool:
 	var pos: Vector2 = stand.get_ledge_position()
 	var seat: Node = stand.seat
 	#var seat: Node = stand.box.logic.processors.movement.seat

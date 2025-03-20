@@ -9,13 +9,15 @@ const FREEZE: int = 3
 var ledges: TileMapLayer
 var time: float = 0
 
+func can_jump() -> bool:
+	return gap.jump_on(ledges) or upland.jump_on(ledges)
+
 func _platforming() -> void:
 	time = 0
-	if (gap.jump_on(ledges) or upland.jump_on(ledges)):
+	if can_jump():
 		time -= FRAME * FREEZE
 
 func _physics_process(delta: float) -> void:
-# func _process(delta: float) -> void:
 	time += delta
 	if time >= FRAME:
 		_platforming()
