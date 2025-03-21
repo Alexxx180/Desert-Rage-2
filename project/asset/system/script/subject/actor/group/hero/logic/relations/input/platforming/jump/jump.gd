@@ -10,6 +10,7 @@ func controls(hero: CharacterBody2D, jump: Node) -> void:
 	jump.feet.dash.connect(hero.dash)
 	jump.feet.teleport.connect(hero.teleport)
 
+	jump.ledges.space.same_floor = jump.feet.same_floor
 	jump.ledges.space.setup(hero)
 
 	ledges.area_entered.connect(jump.ledges.append)

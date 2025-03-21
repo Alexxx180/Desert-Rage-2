@@ -9,7 +9,8 @@ var target: Vector2 = Vector2.ZERO
 var F: int = 0
 
 func get_target_pos(i: int, j: int) -> Vector2:
-	return ground[i].position + ground[i].walls[j].position
+	# return ground[i].position + ground[i].walls[j].position
+	return ground[i].position + ground[i].last_pos[j]
 
 func set_center() -> void:
 	target = get_target_pos(1, 2)
@@ -29,7 +30,7 @@ func is_ledge(i: int, floors: TileMapLayer = null) -> bool:
 		var current: ShapeCast2D = ground[i].walls[j]
 		target = get_target_pos(i, j)
 		# jump.is_same_floor
-		print("target: ", target," - JUMP: ", gap or same_floor.call(floors))
+		
 		ledge = not current.is_colliding() and (gap or same_floor.call(floors))
 
 	return ledge
@@ -43,5 +44,5 @@ func are_ledges(floors: TileMapLayer = null) -> bool:
 		i -= 1
 		ledge = is_ledge(i, floors)
 
-	print("END UP TRYING")
+	print("END UP TRYING, result: ", ledge)
 	return ledge

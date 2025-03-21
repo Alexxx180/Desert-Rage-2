@@ -1,7 +1,7 @@
 extends Node
 
-var same_level: Callable
-var place_decide: Callable
+var same_floor: Callable
+var place_decide: Callable # = func(a): print("same_level not set")
 
 var _direction: Vector2i = Vector2i.ZERO
 var _plane: Array[Array] = []
@@ -30,5 +30,6 @@ func reach(stand: Area2D) -> bool:
 	var pos: Vector2 = stand.get_ledge_position()
 	var place: Node = stand.seat.place
 	var _floor: int = stand.seat.F
+	print("SL: ", pos == null)
 
-	return place.empty() and _observe(pos) and same_level.call(_floor)
+	return place.empty() and _observe(pos) and same_floor.call(_floor)

@@ -23,7 +23,9 @@ func get_ground() -> Vector2:
 	return floors.tracker.entity.position + ground
 
 func same_level(border: TileMapLayer) -> bool:
-	var map_coords: Vector2i = Tile.find(border, get_ground())
+	var ground: Vector2 = get_ground()
+	print("Ground target: ", ground, " AND BORDER = NULL: ", border == null)
+	var map_coords: Vector2i = Tile.find(border, ground)
 	return same_floor(Tile.extract(border, map_coords, Tile.FLOOR))
 
 func deploy(border: TileMapLayer = null) -> void:
@@ -32,7 +34,7 @@ func deploy(border: TileMapLayer = null) -> void:
 
 func set_midair(control: Node, is_in_midair: bool = balance.unstable) -> void:
 	control.available = is_in_midair
-	# freeze = is_in_midair
+	floors.freeze = is_in_midair
 
 func jump(next: Vector2, to_floor: bool = false, move = teleport) -> void:
 	move.emit(next)

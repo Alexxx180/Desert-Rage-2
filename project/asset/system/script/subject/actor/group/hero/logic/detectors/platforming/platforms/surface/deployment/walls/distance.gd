@@ -5,6 +5,7 @@ extends Node2D
 
 @onready var center: ShapeCast2D = $center
 @onready var walls: Array[ShapeCast2D] = [$left, $right, center]
+@onready var last_pos: Array[Vector2] = [Vector2.ZERO, Vector2.ZERO, Vector2.ZERO]
 @onready var _half: Vector2 = center.shape.size / 2
 
 func set_direction(direction: Vector2) -> void:
@@ -15,4 +16,7 @@ func set_direction(direction: Vector2) -> void:
 	
 	while i > 0:
 		i -= 1
-		walls[i].position = norm * offset[i]
+		var pos: Vector2 = norm * offset[i]
+		walls[i].position = pos
+		if pos != Vector2.ZERO:
+			last_pos[i] = pos

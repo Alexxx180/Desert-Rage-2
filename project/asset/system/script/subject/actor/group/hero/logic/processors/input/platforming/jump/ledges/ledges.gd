@@ -7,7 +7,7 @@ var size: int = 0
 var data: Dictionary = {} # int, Area2D
 
 var _current: Area2D
-var pos: Area2D:
+var pos: Vector2:
 	get: return _current.get_ledge_position()
 
 func _ready() -> void:

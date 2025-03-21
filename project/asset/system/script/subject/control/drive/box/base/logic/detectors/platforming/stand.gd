@@ -7,6 +7,6 @@ var box: PhysicsBody2D:
 
 var seat: Node
 
-func get_ledge_position():
+func get_ledge_position() -> Vector2:
 	# print("POS: ", _box.position + position)
 	return _box.position + position

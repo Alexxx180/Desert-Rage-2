@@ -20,7 +20,16 @@ func teleport(next: Vector2) -> void:
 	position = next
 
 func dash(force: Vector2) -> void:
-	position += force
+	"""
+	print("force: ", force)
+	print("dash: ", position + force)
+	print("world: ", get_collision_mask_value(1))
+	print("borders: ", get_collision_mask_value(2))
+	print("movement: ", logic.processors.input.movement.process_mode)
+	print("platforming: ", logic.processors.input.platforming.process_mode)
+	"""
+	position = position + force
+	print("JUMPED: ", position)
 
 func _set_velocity(motion: Vector2) -> void:
 	velocity = motion
