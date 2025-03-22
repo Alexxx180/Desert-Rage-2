@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://cimkmbth3t0at"]
+[gd_scene load_steps=7 format=3 uid="uid://cimkmbth3t0at"]
 
 [ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/hints/category/action.gd" id="1_sxiw8"]
 [ext_resource type="PackedScene" uid="uid://cmo8jhjujlsrv" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/hints/hint/hint.tscn" id="2_205ay"]
 [ext_resource type="Resource" uid="uid://c2ktudlok8m2v" path="res://asset/resource/engine/external/manual/preview/content/action/act.tres" id="3_aqrfh"]
+[ext_resource type="Resource" uid="uid://klrhwk7r01wh" path="res://asset/resource/engine/external/manual/preview/content/action/water.tres" id="4_3n68o"]
+[ext_resource type="Resource" uid="uid://cv10n4uaro2sw" path="res://asset/resource/engine/external/manual/preview/content/action/spark.tres" id="4_epryl"]
+[ext_resource type="Resource" uid="uid://bvo4vqt78pypp" path="res://asset/resource/engine/external/manual/preview/content/action/fire.tres" id="4_kiuyx"]
 
 [node name="action" type="VBoxContainer"]
 script = ExtResource("1_sxiw8")
@@ -11,3 +14,18 @@ script = ExtResource("1_sxiw8")
 visible = false
 layout_mode = 2
 help = ExtResource("3_aqrfh")
+
+[node name="fire" parent="." instance=ExtResource("2_205ay")]
+visible = false
+layout_mode = 2
+help = ExtResource("4_kiuyx")
+
+[node name="water" parent="." instance=ExtResource("2_205ay")]
+visible = false
+layout_mode = 2
+help = ExtResource("4_3n68o")
+
+[node name="spark" parent="." instance=ExtResource("2_205ay")]
+visible = false
+layout_mode = 2
+help = ExtResource("4_epryl")

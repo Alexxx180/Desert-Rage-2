@@ -8,7 +8,7 @@ class_name HelpPreview
 func _get_fields() -> Dictionary:
 	return {
 		"motion": ["move", "jump", "push", "land"],
-		"action": ["act"],
+		"action": ["act", "fire", "water", "spark"],
 		"reason": ["team", "group"]
 	}
 
