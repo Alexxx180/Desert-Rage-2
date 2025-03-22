@@ -5,15 +5,19 @@ class_name DeploymentRaycast
 @onready var walls: Node2D = $walls
 @onready var ground: ShapeCast2D = $ground
 
-func available_ground(direction: Vector2i) -> bool:
-	print("DIRECTION")
-	if direction == Vector2i.ZERO: return false
-	print("GROUND")
-	if not ground.is_colliding(): return false
-	print("BORDERS")
-	return not walls.borders.is_colliding()
+var _direction: Vector2i = Vector2i.ZERO
 
-func can_deploy(jump: Node, floors: TileMapLayer = null) -> bool:
-	var dir: Vector2i = jump.overview.directions.eyes.direction
+func set_direction(direction: Vector2i) -> void:
+	_direction = direction
 
-	return available_ground(dir) and walls.are_ledges(jump, floors)
+func ic(condition: bool, desc: String) -> bool:
+	if not condition: print("[STOP] Deployment: ", desc)
+	return condition
+
+func available_ground() -> bool:
+	if ic(_direction == Vector2i.ZERO, "DIRECTION"): return false
+	if ic(not ground.is_colliding(), "GROUND"): return false
+	return ic(not walls.borders.is_colliding(), "BORDERS")
+
+func can_deploy(floors: TileMapLayer = null) -> bool:
+	return available_ground() and walls.are_ledges(floors)

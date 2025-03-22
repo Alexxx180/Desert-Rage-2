@@ -1,0 +1,24 @@
+[gd_scene load_steps=6 format=3 uid="uid://b2b504t0v7im2"]
+
+[ext_resource type="Script" path="res://asset/system/script/subject/control/drive/box/fire/box.gd" id="1_3tu8u"]
+[ext_resource type="PackedScene" uid="uid://dkpwq1rqqn8ty" path="res://asset/system/scene/subject/control/drive/box/base/placement.tscn" id="1_ldfky"]
+[ext_resource type="PackedScene" uid="uid://3gtpqwa5afwd" path="res://asset/system/scene/subject/control/drive/box/fire/view/view.tscn" id="2_qippy"]
+[ext_resource type="PackedScene" uid="uid://bocuu344hsqv" path="res://asset/system/scene/object/image/view/sight/fov.tscn" id="3_157j3"]
+[ext_resource type="PackedScene" uid="uid://dfb22mo4oqv7i" path="res://asset/system/scene/subject/control/drive/box/fire/logic/logic.tscn" id="3_utx41"]
+
+[node name="fire_box" type="CharacterBody2D"]
+position = Vector2(0, 22)
+collision_layer = 131088
+collision_mask = 223
+motion_mode = 1
+script = ExtResource("1_3tu8u")
+
+[node name="placement" parent="." instance=ExtResource("1_ldfky")]
+
+[node name="view" parent="." instance=ExtResource("2_qippy")]
+
+[node name="logic" parent="." instance=ExtResource("3_utx41")]
+
+[node name="fov" parent="." instance=ExtResource("3_157j3")]
+position = Vector2(9.53674e-07, -22)
+scale = Vector2(2, 2)

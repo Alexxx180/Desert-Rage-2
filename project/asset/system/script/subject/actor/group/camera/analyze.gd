@@ -8,7 +8,10 @@ func get_analyze() -> Dictionary:
 			"push": $box,
 		},
 		"action": {
-			"act": $subject
+			"act": $subject,
+			"fire": $fire,
+			"water": $water,
+			"spark": $spark,
 		},
 		"reason": {}
 	}

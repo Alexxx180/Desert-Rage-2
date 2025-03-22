@@ -1,0 +1,46 @@
+[gd_scene load_steps=7 format=3 uid="uid://douakkywvhnby"]
+
+[ext_resource type="Script" path="res://asset/system/script/subject/control/drive/fire.gd" id="1_oy81a"]
+
+[sub_resource type="Gradient" id="Gradient_ki07c"]
+offsets = PackedFloat32Array(0, 0.220238, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.913725, 0.533333, 0, 1, 0.92549, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_4lfl4"]
+gradient = SubResource("Gradient_ki07c")
+
+[sub_resource type="Curve" id="Curve_easpy"]
+_data = [Vector2(0, 0), 0.0, 6.56923, 0, 0, Vector2(0.0816327, 0.89011), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_iq6ia"]
+curve = SubResource("Curve_easpy")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_p5ohe"]
+particle_flag_disable_z = true
+angle_min = -45.0
+angle_max = 45.0
+velocity_pivot = Vector3(0, -1, 0)
+direction = Vector3(0, -1, 0)
+spread = 15.0
+flatness = 0.1
+initial_velocity_min = 50.0
+initial_velocity_max = 70.0
+gravity = Vector3(0, 0, 0)
+scale_min = 10.0
+scale_max = 10.0
+scale_curve = SubResource("CurveTexture_iq6ia")
+color_ramp = SubResource("GradientTexture1D_4lfl4")
+
+[node name="particle" type="GPUParticles2D"]
+position = Vector2(0, -15)
+amount = 9
+process_material = SubResource("ParticleProcessMaterial_p5ohe")
+lifetime = 0.5
+script = ExtResource("1_oy81a")
+
+[node name="timer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="timer" to="." method="dissapear"]

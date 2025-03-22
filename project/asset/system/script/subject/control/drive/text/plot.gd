@@ -8,6 +8,6 @@ func _plot_unfolding(hero: CharacterBody2D) -> void:
 	if completed: return
 	completed = true
 	print("encounter")
-	hero.plot_unfolding(plot_text)
+	hero.logic.processors.hud.dialog(plot_text)
 	get_parent().call_deferred("remove_child", self)
 	call_deferred("queue_free")

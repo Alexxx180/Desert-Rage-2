@@ -1,0 +1,78 @@
+[gd_scene load_steps=19 format=3 uid="uid://cmunoj3ycrf8b"]
+
+[ext_resource type="Script" path="res://asset/system/script/subject/control/tags/lockers/lockers.gd" id="1_oay2x"]
+[ext_resource type="Script" path="res://asset/system/script/subject/control/tags/lockers/location/location.gd" id="2_nlk6q"]
+[ext_resource type="Script" path="res://asset/system/script/subject/control/tags/lockers/location/storage.gd" id="3_d6w4r"]
+[ext_resource type="Script" path="res://asset/system/script/subject/control/tags/lockers/location/search.gd" id="4_lbegx"]
+[ext_resource type="Script" path="res://asset/system/script/subject/control/tags/lockers/behavior/behavior.gd" id="4_pppya"]
+[ext_resource type="Script" path="res://asset/system/script/subject/control/tags/lockers/behavior/ability/freeze.gd" id="5_145ax"]
+[ext_resource type="Script" path="res://asset/system/script/subject/control/tags/lockers/behavior/ability/ability.gd" id="5_f1rlu"]
+[ext_resource type="Script" path="res://asset/system/script/subject/control/tags/lockers/behavior/activator/activator.gd" id="5_ve4xk"]
+[ext_resource type="Script" path="res://asset/system/script/subject/control/tags/lockers/behavior/activator/button.gd" id="6_jm8jg"]
+[ext_resource type="Script" path="res://asset/system/script/subject/control/tags/lockers/behavior/ability/puddle/puddle.gd" id="6_n0vg7"]
+[ext_resource type="Script" path="res://asset/system/script/subject/control/tags/lockers/behavior/activator/trigger.gd" id="7_220hg"]
+[ext_resource type="Script" path="res://asset/system/script/subject/control/tags/lockers/behavior/ability/puddle/rain/rain.gd" id="8_iqivn"]
+[ext_resource type="Script" path="res://asset/system/script/subject/control/tags/lockers/behavior/ability/puddle/spark/spark.gd" id="9_e6snf"]
+[ext_resource type="Script" path="res://asset/system/script/subject/control/tags/lockers/behavior/ability/puddle/spark/alone.gd" id="10_7688p"]
+[ext_resource type="Script" path="res://asset/system/script/subject/control/tags/lockers/behavior/ability/puddle/spark/chains/drain.gd" id="12_g44ad"]
+[ext_resource type="Script" path="res://asset/system/script/subject/control/tags/lockers/behavior/ability/puddle/spark/chains/charge.gd" id="13_nvbwt"]
+[ext_resource type="Script" path="res://asset/system/script/subject/control/tags/lockers/behavior/ability/puddle/spark/chains.gd" id="15_seokb"]
+[ext_resource type="Script" path="res://asset/system/script/subject/control/tags/lockers/behavior/ability/puddle/spark/chains/search.gd" id="16_hqmeh"]
+
+[node name="lockers" type="Node"]
+script = ExtResource("1_oay2x")
+
+[node name="location" type="Node" parent="."]
+script = ExtResource("2_nlk6q")
+
+[node name="storage" type="Node" parent="location"]
+script = ExtResource("3_d6w4r")
+
+[node name="search" type="Node" parent="location"]
+script = ExtResource("4_lbegx")
+
+[node name="behavior" type="Node" parent="."]
+script = ExtResource("4_pppya")
+
+[node name="activator" type="Node" parent="behavior"]
+script = ExtResource("5_ve4xk")
+
+[node name="button" type="Node" parent="behavior/activator"]
+script = ExtResource("6_jm8jg")
+
+[node name="trigger" type="Node" parent="behavior/activator"]
+script = ExtResource("7_220hg")
+
+[node name="ability" type="Node" parent="behavior"]
+script = ExtResource("5_f1rlu")
+
+[node name="freeze" type="Node" parent="behavior/ability"]
+script = ExtResource("5_145ax")
+
+[node name="puddle" type="Node" parent="behavior/ability"]
+script = ExtResource("6_n0vg7")
+
+[node name="rain" type="Node" parent="behavior/ability/puddle"]
+script = ExtResource("8_iqivn")
+
+[node name="spark" type="Node" parent="behavior/ability/puddle"]
+script = ExtResource("9_e6snf")
+
+[node name="alone" type="Node" parent="behavior/ability/puddle/spark"]
+script = ExtResource("10_7688p")
+
+[node name="diffuse" type="Timer" parent="behavior/ability/puddle/spark/alone"]
+
+[node name="chains" type="Node" parent="behavior/ability/puddle/spark"]
+script = ExtResource("15_seokb")
+
+[node name="search" type="Node" parent="behavior/ability/puddle/spark/chains"]
+script = ExtResource("16_hqmeh")
+
+[node name="charge" type="Node" parent="behavior/ability/puddle/spark/chains"]
+script = ExtResource("13_nvbwt")
+
+[node name="drain" type="Node" parent="behavior/ability/puddle/spark/chains"]
+script = ExtResource("12_g44ad")
+
+[connection signal="timeout" from="behavior/ability/puddle/spark/alone/diffuse" to="behavior/ability/puddle/spark/alone" method="lazy_diffusion"]

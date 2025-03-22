@@ -3,22 +3,55 @@ extends RefCounted
 class_name HeroParty
 
 const COUNT: int = 2
-var _main: int = 0
-var main: int:
-	get: return _main
 
-func _get_next_hero() -> int:
-	return (_main + 1) % COUNT
+var heroes: Array[CharacterBody2D]
+var leader: CharacterBody2D: get = get_leader
+var follower: CharacterBody2D: get = get_follower
+var main: int = -1
+var next: int = 0
 
-func reorder() -> Vector2i:
-	var next: int = _get_next_hero()
-	return Vector2i(_main, next)
+func get_next() -> int:
+	return (main + 1) % COUNT
 
-func locate(party: Array, position: Vector2) -> Vector2:
-	for hero in party:
-		hero.position = position
-	return Vector2.ZERO
+func set_next() -> void:
+	main = get_next()
+	next = get_next()
 
-func traverse(order: Vector2i) -> Vector2i:
-	_main = order.y
-	return order
+func set_heroes() -> void:
+	set_hero(main, false)
+	set_hero(next, true)
+
+func show_heroes() -> void:
+	show_hero(main, false)
+	show_hero(next, true)
+
+func switch_hero(show: bool, process: bool) -> void:
+	show_hero(next, show)
+	set_hero(next, process)
+
+func regroup_hero(in_group: bool) -> void:
+	switch_hero(in_group, in_group)
+
+func get_leader() -> CharacterBody2D: return heroes[main]
+func get_follower() -> CharacterBody2D: return heroes[next]
+
+func set_hero(hero: int, visible: bool) -> void:
+	Processors.turn(heroes[hero].logic.processors, visible)
+
+func show_hero(hero: int, visible: bool) -> void:
+	heroes[hero].visible = visible
+
+func forget_velocity() -> void:
+	leader.forget_velocity()
+
+func sync_pos() -> void:
+	follower.position = leader.position
+
+func locate(position: Vector2) -> void:
+	for hero in heroes: hero.position = position
+
+func get_feet(hero: CharacterBody2D) -> int:
+	return hero.logic.processors.input.platforming.jump.feet.floors.F
+
+func same_ground() -> bool:
+	return get_feet(leader) == get_feet(follower)

@@ -23,7 +23,7 @@ func _ready() -> void:
 	stand.seat = $seat
 
 	var map_coords: Vector2i = Tile.find(border, position)
-	var f: int = Tile.extract(border, map_coords, Tile.Atlas.FLOOR)
+	var f: int = Tile.extract(border, map_coords, Tile.FLOOR)
 	stand.seat.set_floor(f)
 	#print("LOCK FLOOR: ", f)
 

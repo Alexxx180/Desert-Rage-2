@@ -27,7 +27,7 @@ func enable_sync(_seat: Node, hero: CharacterBody2D) -> void:
 	hero.view.sync_view.connect(sync_image)
 	hero.view.update_image()
 	#TODO: Comment: actual only for builds without character separation
-	profile.modulate = hero.modulate
+	#profile.modulate = hero.modulate
 
 func disable_sync(_seat: Node, hero: CharacterBody2D) -> void:
 	visible = false

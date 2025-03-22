@@ -10,19 +10,7 @@ var contact: Vector2:
 	get: return _contact
 
 func set_contact() -> void:
-#allow: int) -> void:
-	"""
-	print("POS: ", entity.center)
-	print("ZONE - X: ",  pos.x, " - Y: ", pos.y)
-	print("ALL: ", entity.center + pos)
-	# """
-	"""
-	var marker: Marker2D = Marker2D.new()
-	marker.name = "1234"
-	marker.position = entity.center + contact_zone.center
-	entity.get_node("../..").add_child(marker)
-	#"""
-	_contact = entity.position# * allow #entity.center + pos# entity.get_contact(dir) + pos
+	_contact = entity.position
 
 func track(ground: Node2D) -> Vector2:
 	return entity.position + ground.position

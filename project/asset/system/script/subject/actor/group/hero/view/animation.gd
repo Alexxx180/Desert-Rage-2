@@ -20,8 +20,6 @@ func sync(tree: AnimationTree) -> void:
 
 func set_speed(mach: int) -> void:
 	scale = SPEED * mach
-	print("Mach is: ", mach)
-	#set("parameters/speed/scale", scale)
 	set("parameters/go/transition_request", go[min(mach - 1, 1)])
 
 func _move_hero(stand: String) -> void:

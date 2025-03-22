@@ -1,0 +1,28 @@
+[gd_scene load_steps=7 format=3 uid="uid://mcm0vtwuyeii"]
+
+[ext_resource type="Script" path="res://asset/system/script/subject/actor/group/hero/hero.gd" id="1_jbo61"]
+[ext_resource type="Shape2D" uid="uid://do0s1n5uuqpof" path="res://asset/resource/engine/internal/shape/characters/character/character.tres" id="2_beh1q"]
+[ext_resource type="PackedScene" uid="uid://xh6k0wh1djy2" path="res://asset/system/scene/subject/actor/group/hero/base/view/rock.tscn" id="3_hg55u"]
+[ext_resource type="PackedScene" uid="uid://doiuvxvrvah2v" path="res://asset/system/scene/subject/actor/group/hero/rock/logic/logic.tscn" id="4_kswb1"]
+[ext_resource type="Resource" uid="uid://2etksyyn4awk" path="res://asset/resource/engine/external/stats/rock.tres" id="5_fcwck"]
+[ext_resource type="PackedScene" uid="uid://bocuu344hsqv" path="res://asset/system/scene/object/image/view/sight/fov.tscn" id="5_uajjp"]
+
+[node name="rock" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 2259
+motion_mode = 1
+script = ExtResource("1_jbo61")
+
+[node name="geometry" type="CollisionShape2D" parent="."]
+shape = ExtResource("2_beh1q")
+debug_color = Color(1, 1, 1, 0.419608)
+
+[node name="view" parent="." instance=ExtResource("3_hg55u")]
+is_hero = true
+
+[node name="logic" parent="." instance=ExtResource("4_kswb1")]
+stats = ExtResource("5_fcwck")
+
+[node name="fov" parent="." instance=ExtResource("5_uajjp")]
+position = Vector2(-0.500001, -52)
+scale = Vector2(1.90625, 3.875)

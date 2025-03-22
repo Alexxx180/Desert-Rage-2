@@ -1,13 +1,25 @@
 extends Node
 
-@onready var queue: FloorsQueue = FloorsQueue.new()
+signal update_floor(f: int)
+
 @onready var tracker: SurfaceTracker = $tracker
 
-func at_old_floor(_tiles: TileMapLayer) -> void:
-	queue.remove()
+var freeze: bool = false
+var _floor: int = 0
+var F: int:
+	get: return _floor
 
-func at_new_floor(surface: TileMapLayer) -> void:
-	var contact: Vector2 = tracker.contact
-	var map_coords: Vector2i = Tile.find(surface, contact)
-	var f: int = Tile.extract(surface, map_coords, Tile.Atlas.FLOOR)
-	queue.append(f)
+func at_new_floor(border: TileMapLayer) -> void:
+	if freeze: return
+
+	var map_coords: Vector2i = Tile.find(border, tracker.contact)
+	var next: int = Tile.extract(border, map_coords, Tile.FLOOR)
+	if _floor != next:
+		_floor = next
+		update_floor.emit(_floor)
+		print("Set Floor = ", _floor)
+
+func set_box_floor(next: int) -> void:
+	if _floor != next:
+		_floor = next
+		print("Set Floor [BOX] = ", _floor)

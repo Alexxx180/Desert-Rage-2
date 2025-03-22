@@ -2,40 +2,50 @@ extends RefCounted
 
 class_name HeroDeploy
 
-var _anchored: bool = false
-var _available: bool = false
+signal traverse_camera(node: Node2D, hero: CharacterBody2D)
 
-var anchored: bool:
-	get: return _anchored
+var party: HeroParty = HeroParty.new()
+var _group: Array[bool] = [false, false]
 
-func set_available(can_deploy: bool) -> void:
-	_available = can_deploy
+func set_deploy(able: bool) -> void: _group[1] = able
 
-func _activate(hero: CharacterBody2D, condition: bool) -> void:
-	hero.visible = condition
-	Processors.turn(hero, condition)
+func set_anchor() -> void: _group[0] = !_group[0]
 
-func _anchor(next: CharacterBody2D) -> void:
-	_anchored = !_anchored
-	#print("INHERIT: ", _anchored, " - NAME: ", next.name)
-	_activate(next, !_anchored)
-	#next.view.animation.freeze = _anchored
+func select(hero: Node2D = party.leader) -> void:
+	party.set_heroes()
+	party.forget_velocity()
+	if _group[0]:
+		party.sync_pos()
+		party.show_heroes()
+	traverse_camera.emit(hero, party.follower)
+	party.set_next()
 
-func _sync(hero: CharacterBody2D, next: CharacterBody2D) -> void:
-	next.position = hero.position
+func group_heroes() -> void:
+	party.sync_pos()
+	set_anchor()
+	party.switch_hero(true, false)
 
-func select(party: Array[CharacterBody2D], order: Vector2i) -> void:
-	if not _anchored: return
-	var hero: CharacterBody2D = party[order[0]]
-	var next: CharacterBody2D = party[order[1]]
-	_sync(hero, next)
-	_activate(hero, false)
-	_activate(next, true)
+func deploy_group() -> void:
+	set_anchor()
+	party.regroup_hero(!_group[0])
 
-func determine(party: Array[CharacterBody2D], order: Vector2i) -> void:
-	var next: CharacterBody2D = party[order[1]]
-	if _anchored:
-		_sync(party[order[0]], next)
-		_anchor(next)
-	elif _available:
-		_anchor(next)
+func regroup() -> void:
+	if not party.same_ground(): pass
+	elif _group[0]: group_heroes()
+	elif _group[1]: deploy_group()
+
+func setup_camera(camera: Camera2D) -> void:
+	traverse_camera.connect(camera.traverse)
+	camera.deploy.is_near.connect(set_deploy)
+
+func setup_location(group: Node2D) -> void:
+	setup_camera(group.camera)
+	party.locate(group.position)
+	group.position = Vector2.ZERO
+
+func init(group: Node2D, heroes: Array[CharacterBody2D], deployed: bool) -> void:
+	party.heroes = heroes
+	setup_location(group)
+	select(group)
+	set_deploy(deployed)
+	if deployed: regroup()
