@@ -5,11 +5,11 @@ extends Node2D
 @onready var box: Area2D = $box
 @onready var ledge: Node2D = $ledge
 
-var _allow_monitoring: bool = true
+#var _allow_monitoring: bool = true
 
 func reset_monitoring(allow: bool) -> void:
-	_allow_monitoring = allow
-	# box.monitoring = allow
+	#_allow_monitoring = allow
+	box.monitoring = allow
 
 func set_direction(direction: Vector2i) -> void:
 	if not Input.is_action_pressed("action") and direction != Vector2i.ZERO:

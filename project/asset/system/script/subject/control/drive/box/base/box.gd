@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+class_name PlatformingBox
+
 signal move(next: Vector2)
 
 @export_range(1.5, 3.0, 0.1) var weight: float = 1
@@ -18,6 +20,9 @@ var center: Vector2:
 
 func _ready() -> void:
 	logic.relations.controls(self)
+
+func compare_height(hero: CharacterBody2D) -> bool:
+	return logic.processors.movement.seat.compare(hero)
 
 func _physics_process(_delta: float) -> void:
 	move_and_slide()
