@@ -34,6 +34,7 @@ func deploy(border: TileMapLayer = null) -> void:
 
 func set_midair(control: Node, is_in_midair: bool = balance.unstable) -> void:
 	control.available = is_in_midair
+	#if not floors.freeze:
 	floors.freeze = is_in_midair
 
 func jump(next: Vector2, to_floor: bool = false, move = teleport) -> void:

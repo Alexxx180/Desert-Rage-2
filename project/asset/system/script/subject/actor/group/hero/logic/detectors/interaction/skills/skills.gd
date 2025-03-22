@@ -1,6 +1,6 @@
 extends Node2D
 
-@onready var pull: Area2D = $pull
+@onready var pull: Node2D = $pull
 @onready var press: Area2D = $press
 @onready var act: Area2D = $act
 @onready var transition: Area2D = $transition

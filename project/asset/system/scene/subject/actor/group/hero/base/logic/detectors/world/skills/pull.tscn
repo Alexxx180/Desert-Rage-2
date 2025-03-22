@@ -1,14 +1,35 @@
-[gd_scene load_steps=3 format=3 uid="uid://ce2doowddkex8"]
+[gd_scene load_steps=4 format=3 uid="uid://ce2doowddkex8"]
 
-[ext_resource type="Script" path="res://asset/system/script/subject/actor/group/hero/logic/detectors/interaction/skills/skill.gd" id="1_sybqh"]
+[ext_resource type="Script" path="res://asset/system/script/subject/actor/group/hero/logic/detectors/interaction/skills/pull/pull.gd" id="1_uck1a"]
 [ext_resource type="Shape2D" uid="uid://cijemnhgm8sg" path="res://asset/resource/engine/internal/shape/interactables/act/pull.tres" id="2_a4e3v"]
+[ext_resource type="Script" path="res://asset/system/script/subject/actor/group/hero/logic/detectors/interaction/skills/pull/ledge.gd" id="3_sgdss"]
 
-[node name="pull" type="Area2D"]
+[node name="pull" type="Node2D"]
+script = ExtResource("1_uck1a")
+
+[node name="box" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 16
-script = ExtResource("1_sybqh")
-distance = Vector2i(24, 24)
 
-[node name="geometry" type="CollisionShape2D" parent="."]
+[node name="geometry" type="CollisionShape2D" parent="box"]
 shape = ExtResource("2_a4e3v")
 debug_color = Color(0.607889, 1.545e-05, 0.438106, 0.42)
+
+[node name="ledge" type="Node2D" parent="."]
+script = ExtResource("3_sgdss")
+
+[node name="top" type="RayCast2D" parent="ledge"]
+target_position = Vector2(0, -48)
+collision_mask = 192
+
+[node name="left" type="RayCast2D" parent="ledge"]
+target_position = Vector2(-48, 0)
+collision_mask = 192
+
+[node name="right" type="RayCast2D" parent="ledge"]
+target_position = Vector2(48, 0)
+collision_mask = 192
+
+[node name="bottom" type="RayCast2D" parent="ledge"]
+target_position = Vector2(0, 64)
+collision_mask = 192

@@ -9,8 +9,8 @@ var target: Vector2 = Vector2.ZERO
 var F: int = 0
 
 func get_target_pos(i: int, j: int) -> Vector2:
-	# return ground[i].position + ground[i].walls[j].position
-	return ground[i].position + ground[i].last_pos[j]
+	return ground[i].position + ground[i].walls[j].position
+	# return ground[i].position + ground[i].last_pos[j]
 
 func set_center() -> void:
 	target = get_target_pos(1, 2)
@@ -32,6 +32,8 @@ func is_ledge(i: int, floors: TileMapLayer = null) -> bool:
 		# jump.is_same_floor
 		
 		ledge = not current.is_colliding() and (gap or same_floor.call(floors))
+	
+	print("LEDGE: ", i, ", ", j, " = ", get_target_pos(i, j))
 
 	return ledge
 

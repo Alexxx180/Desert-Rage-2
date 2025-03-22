@@ -9,4 +9,4 @@ var seat: Node
 
 func get_ledge_position() -> Vector2:
 	# print("POS: ", _box.position + position)
-	return _box.position + position
+	return _box.position + position # + Vector2(0, 30)

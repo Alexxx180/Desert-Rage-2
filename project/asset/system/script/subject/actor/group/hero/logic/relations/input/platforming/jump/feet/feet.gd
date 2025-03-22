@@ -1,7 +1,5 @@
 extends Node
 
-enum { WORLD = 1, BORDERS = 2 }
-
 @onready var floors: Node = $floors
 @onready var balance: Node = $balance
 
