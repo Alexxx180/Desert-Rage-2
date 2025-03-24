@@ -10,5 +10,8 @@ func setup(tags: TileMapLayer, execute: TileMapLayer) -> void:
 	for tag in tags.get_used_cells_by_id(SOURCE):
 		var tile: Dictionary = Tile.from_coords(execute, tag)
 		var message: int = get_message(tags, tag)
-		var manual: String = tags.manual.books[tile.atlas][message]
+		var manual: String
+		match tile.atlas:
+			Vector2i(2, 1): manual = tags.manual.pages[message]
+			_: manual = tags.manual.books[tile.atlas][message]
 		execute.books[tile.coords] = [tile.atlas, manual]
