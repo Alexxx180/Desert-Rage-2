@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://dht3dh33ed2vo"]
+[gd_scene load_steps=6 format=3 uid="uid://dht3dh33ed2vo"]
 
-[ext_resource type="Script" path="res://asset/system/script/subject/actor/group/hero/logic/detectors/interaction/interaction.gd" id="1_5sm44"]
+[ext_resource type="Script" path="res://asset/system/script/subject/actor/group/hero/logic/detectors/world/world.gd" id="1_5sm44"]
 [ext_resource type="PackedScene" uid="uid://bocjcbuk66c25" path="res://asset/system/scene/subject/actor/group/hero/base/logic/detectors/world/skills.tscn" id="2_yq5t1"]
 [ext_resource type="PackedScene" uid="uid://cv7eki3wbxa4h" path="res://asset/system/scene/subject/actor/group/hero/rock/logic/detectors/world/ability.tscn" id="3_y8srl"]
+[ext_resource type="Shape2D" uid="uid://i0icy78wfk8i" path="res://asset/resource/engine/internal/shape/characters/character/levels.tres" id="4_aomlo"]
+[ext_resource type="Script" path="res://asset/system/script/subject/actor/group/hero/logic/detectors/world/skills/skill.gd" id="4_yodsc"]
 
 [node name="interaction" type="Node2D"]
 script = ExtResource("1_5sm44")
@@ -10,3 +12,10 @@ script = ExtResource("1_5sm44")
 [node name="skills" parent="." instance=ExtResource("2_yq5t1")]
 
 [node name="ability" parent="." instance=ExtResource("3_y8srl")]
+
+[node name="unique" type="Area2D" parent="."]
+monitoring = false
+script = ExtResource("4_yodsc")
+
+[node name="geometry" type="CollisionShape2D" parent="unique"]
+shape = ExtResource("4_aomlo")
