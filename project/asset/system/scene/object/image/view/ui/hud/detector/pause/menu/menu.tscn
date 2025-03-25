@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://lp8f4l2tw7ot" path="res://asset/system/scene/object/image/view/ui/hud/detector/pause/menu/help/help.tscn" id="4_gq82q"]
 [ext_resource type="PackedScene" uid="uid://cvs8byy41xeo5" path="res://asset/system/scene/object/image/view/ui/hud/detector/pause/menu/exit/exit.tscn" id="5_8a5yd"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_kxt6w"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_muy57"]
 
 [node name="menu" type="VBoxContainer"]
 anchors_preset = 14
@@ -28,6 +28,12 @@ layout_mode = 2
 [node name="resume" parent="." instance=ExtResource("2_8gyh0")]
 layout_mode = 2
 tooltip_text = "Назад в игру"
+focus_neighbor_left = NodePath("../screen")
+focus_neighbor_top = NodePath("../exit")
+focus_neighbor_right = NodePath("../screen")
+focus_neighbor_bottom = NodePath("../help")
+focus_next = NodePath("../help")
+focus_previous = NodePath("../exit")
 toggle_mode = false
 shortcut_in_tooltip = false
 
@@ -36,14 +42,32 @@ visible = false
 layout_mode = 2
 size_flags_horizontal = 1
 tooltip_text = "Инфомация игры"
-button_group = SubResource("ButtonGroup_kxt6w")
+focus_neighbor_left = NodePath("../exit")
+focus_neighbor_top = NodePath("../resume")
+focus_neighbor_right = NodePath("../exit")
+focus_neighbor_bottom = NodePath("../screen")
+focus_next = NodePath("../screen")
+focus_previous = NodePath("../resume")
+button_group = SubResource("ButtonGroup_muy57")
 
 [node name="screen" parent="." instance=ExtResource("3_yufy4")]
 layout_mode = 2
 size_flags_horizontal = 1
+focus_neighbor_left = NodePath("../resume")
+focus_neighbor_top = NodePath("../help")
+focus_neighbor_right = NodePath("../resume")
+focus_neighbor_bottom = NodePath("../exit")
+focus_next = NodePath("../resume")
+focus_previous = NodePath(".")
 button_pressed = true
 shortcut_in_tooltip = false
 
 [node name="exit" parent="." instance=ExtResource("5_8a5yd")]
 layout_mode = 2
 size_flags_horizontal = 1
+focus_neighbor_left = NodePath("../help")
+focus_neighbor_top = NodePath("../screen")
+focus_neighbor_right = NodePath("../help")
+focus_neighbor_bottom = NodePath("../resume")
+focus_next = NodePath("../resume")
+focus_previous = NodePath("../screen")
