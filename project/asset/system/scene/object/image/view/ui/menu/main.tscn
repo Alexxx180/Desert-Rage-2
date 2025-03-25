@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://d2q6jjokb1yfr"]
+[gd_scene load_steps=14 format=3 uid="uid://d2q6jjokb1yfr"]
 
 [ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/hud/detector/pause/options/options.gd" id="1_dy125"]
 [ext_resource type="Theme" uid="uid://dfg873urxgnev" path="res://asset/resource/engine/internal/theme/patterns/template/text/title.tres" id="1_kxgut"]
@@ -6,6 +6,13 @@
 [ext_resource type="PackedScene" uid="uid://ds1p72mqshr4i" path="res://asset/system/scene/object/image/view/ui/menu/detector/main/load.tscn" id="2_2lbtu"]
 [ext_resource type="PackedScene" uid="uid://cvs8byy41xeo5" path="res://asset/system/scene/object/image/view/ui/hud/detector/pause/menu/exit/exit.tscn" id="2_xru45"]
 [ext_resource type="PackedScene" uid="uid://cybcj4tc11mdx" path="res://asset/system/scene/object/image/view/ui/menu/detector/main/new.tscn" id="3_h5kf1"]
+[ext_resource type="Shortcut" uid="uid://brjhv1uiicoq4" path="res://asset/resource/engine/internal/short/cut/pause/resume.tres" id="5_drmow"]
+[ext_resource type="Shortcut" uid="uid://b7qpkrdl5s1rd" path="res://asset/resource/engine/internal/short/cut/pause/exit.tres" id="8_yb07m"]
+[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/relation/relation.gd" id="9_7rcx5"]
+[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/processor/processor.gd" id="9_ljjug"]
+[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/processor/load.gd" id="10_lc2et"]
+[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/processor/new.gd" id="11_a0ecu"]
+[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/relation/exit.gd" id="11_oi6ff"]
 
 [node name="main" type="Node2D"]
 
@@ -101,6 +108,13 @@ layout_mode = 2
 
 [node name="load" parent="menu/hud/detector/main/margin/title/content/options/menu" instance=ExtResource("2_2lbtu")]
 layout_mode = 2
+focus_neighbor_left = NodePath("../new")
+focus_neighbor_top = NodePath("../exit")
+focus_neighbor_right = NodePath("../exit")
+focus_neighbor_bottom = NodePath("../new")
+focus_next = NodePath("../new")
+focus_previous = NodePath("../exit")
+shortcut = ExtResource("5_drmow")
 
 [node name="new" parent="menu/hud/detector/main/margin/title/content/options/menu" instance=ExtResource("3_h5kf1")]
 layout_mode = 2
@@ -114,6 +128,7 @@ focus_neighbor_right = NodePath("../help")
 focus_neighbor_bottom = NodePath("../resume")
 focus_next = NodePath("../resume")
 focus_previous = NodePath("../screen")
+shortcut = ExtResource("8_yb07m")
 
 [node name="split-2" type="Control" parent="menu/hud/detector/main/margin/title/content/options"]
 layout_mode = 2
@@ -126,5 +141,22 @@ size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.8
 
 [node name="processor" type="Node" parent="menu/hud"]
+script = ExtResource("9_ljjug")
+
+[node name="load" type="Node" parent="menu/hud/processor"]
+script = ExtResource("10_lc2et")
+
+[node name="new" type="Node" parent="menu/hud/processor"]
+script = ExtResource("11_a0ecu")
 
 [node name="relation" type="Node" parent="menu/hud"]
+script = ExtResource("9_7rcx5")
+
+[node name="load" type="Node" parent="menu/hud/relation"]
+script = ExtResource("10_lc2et")
+
+[node name="new" type="Node" parent="menu/hud/relation"]
+script = ExtResource("11_a0ecu")
+
+[node name="exit" type="Node" parent="menu/hud/relation"]
+script = ExtResource("11_oi6ff")

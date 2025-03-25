@@ -16,8 +16,9 @@ func _input(event: InputEvent) -> void:
 	if not i in [0, 1]: return
 	var gamepad: bool = event is InputEventJoypadButton
 	var mouse: bool = event is InputEventMouseButton
+	var keyboard: bool = event is InputEventKey
 	
-	if (gamepad or mouse or event is InputEventKey) and event.pressed:
+	if (gamepad or mouse or keyboard) and event.pressed:
 		state.hide()
 		_scene_change()
 
