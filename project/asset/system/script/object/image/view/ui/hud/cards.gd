@@ -3,7 +3,10 @@ extends CanvasLayer
 @export var progress: HelpPreview
 @onready var hud: Control = $hud
 
+const LEVEL: String = "%s/%s/%d"
+
 func _ready() -> void:
+	SessionStats.save_progress()
 	var group: Node2D = get_node("../group")
 	for hero in group.deploy.party.heroes:
 		hero.logic.processors.hud.display = hud
