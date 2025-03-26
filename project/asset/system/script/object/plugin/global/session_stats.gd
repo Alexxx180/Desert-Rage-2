@@ -33,7 +33,8 @@ func group_level() -> String:
 	return path % abs(_level)
 
 func load_progress() -> bool:
-	var valid: bool = ResourceLoader.exists(PATH)
+	var valid: bool = FileAccess.file_exists(PATH)
+	print("VALID: ", valid)
 	if valid:
 		var file = _get_file(FileAccess.READ)
 		var json = JSON.new()
