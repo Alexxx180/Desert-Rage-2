@@ -1,0 +1,226 @@
+[gd_scene load_steps=4 format=3 uid="uid://pexl48rcyqo7"]
+
+[ext_resource type="Theme" uid="uid://b4uvs3mj2kjx2" path="res://asset/resource/engine/internal/theme/patterns/template/button/sound.tres" id="1_2jgq6"]
+[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/hud/detector/buttons/toggle/short.gd" id="2_g1832"]
+[ext_resource type="PackedScene" uid="uid://bn854ux0aswd8" path="res://asset/system/scene/object/image/view/ui/short/gamepad/button/x.tscn" id="3_6pump"]
+
+[node name="sound" type="CanvasLayer"]
+
+[node name="detector" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="options" type="VBoxContainer" parent="detector"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="dropdown" type="VBoxContainer" parent="detector/options"]
+layout_mode = 2
+
+[node name="title" type="HBoxContainer" parent="detector/options/dropdown"]
+layout_mode = 2
+
+[node name="specific" type="Button" parent="detector/options/dropdown/title"]
+custom_minimum_size = Vector2(35, 35)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_2jgq6")
+alignment = 0
+
+[node name="margin" type="MarginContainer" parent="detector/options/dropdown/title/specific"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="caption" type="HBoxContainer" parent="detector/options/dropdown/title/specific/margin"]
+layout_mode = 2
+
+[node name="short" type="Label" parent="detector/options/dropdown/title/specific/margin/caption"]
+layout_mode = 2
+text = "E"
+
+[node name="description" type="Label" parent="detector/options/dropdown/title/specific/margin/caption"]
+layout_mode = 2
+text = "Caves"
+
+[node name="typical" type="Button" parent="detector/options/dropdown/title"]
+custom_minimum_size = Vector2(35, 35)
+layout_mode = 2
+theme = ExtResource("1_2jgq6")
+alignment = 2
+
+[node name="short" type="Control" parent="detector/options/dropdown/title/typical"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="open" type="Control" parent="detector/options/dropdown/title/typical/short"]
+layout_mode = 2
+anchors_preset = 0
+offset_right = 15.0
+offset_bottom = 26.0
+script = ExtResource("2_g1832")
+
+[node name="gamepad" parent="detector/options/dropdown/title/typical/short/open" instance=ExtResource("3_6pump")]
+layout_mode = 0
+
+[node name="typical" type="VBoxContainer" parent="detector/options/dropdown"]
+layout_mode = 2
+
+[node name="ambient" type="HBoxContainer" parent="detector/options/dropdown/typical"]
+layout_mode = 2
+
+[node name="specific" type="Button" parent="detector/options/dropdown/typical/ambient"]
+custom_minimum_size = Vector2(35, 35)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_2jgq6")
+alignment = 0
+
+[node name="margin" type="MarginContainer" parent="detector/options/dropdown/typical/ambient/specific"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="caption" type="HBoxContainer" parent="detector/options/dropdown/typical/ambient/specific/margin"]
+layout_mode = 2
+
+[node name="short" type="Label" parent="detector/options/dropdown/typical/ambient/specific/margin/caption"]
+layout_mode = 2
+text = "E"
+
+[node name="description" type="Label" parent="detector/options/dropdown/typical/ambient/specific/margin/caption"]
+layout_mode = 2
+text = "Ambient"
+
+[node name="typical" type="Button" parent="detector/options/dropdown/typical/ambient"]
+custom_minimum_size = Vector2(35, 35)
+layout_mode = 2
+theme = ExtResource("1_2jgq6")
+alignment = 2
+
+[node name="margin" type="MarginContainer" parent="detector/options/dropdown/typical/ambient/typical"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="description" type="Label" parent="detector/options/dropdown/typical/ambient/typical/margin"]
+layout_mode = 2
+text = "C"
+
+[node name="specific" type="VBoxContainer" parent="detector/options/dropdown"]
+layout_mode = 2
+
+[node name="origin" type="HBoxContainer" parent="detector/options/dropdown/specific"]
+layout_mode = 2
+
+[node name="specific" type="Button" parent="detector/options/dropdown/specific/origin"]
+custom_minimum_size = Vector2(35, 35)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_2jgq6")
+alignment = 0
+
+[node name="margin" type="MarginContainer" parent="detector/options/dropdown/specific/origin/specific"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="caption" type="HBoxContainer" parent="detector/options/dropdown/specific/origin/specific/margin"]
+layout_mode = 2
+
+[node name="short" type="Label" parent="detector/options/dropdown/specific/origin/specific/margin/caption"]
+layout_mode = 2
+text = "E"
+
+[node name="description" type="Label" parent="detector/options/dropdown/specific/origin/specific/margin/caption"]
+layout_mode = 2
+text = "Origin Cave"
+
+[node name="typical" type="Button" parent="detector/options/dropdown/specific/origin"]
+custom_minimum_size = Vector2(35, 35)
+layout_mode = 2
+theme = ExtResource("1_2jgq6")
+alignment = 2
+
+[node name="margin" type="MarginContainer" parent="detector/options/dropdown/specific/origin/typical"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="description" type="Label" parent="detector/options/dropdown/specific/origin/typical/margin"]
+layout_mode = 2
+text = "C"
+
+[node name="smoke" type="HBoxContainer" parent="detector/options/dropdown/specific"]
+layout_mode = 2
+
+[node name="specific" type="Button" parent="detector/options/dropdown/specific/smoke"]
+custom_minimum_size = Vector2(35, 35)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_2jgq6")
+alignment = 0
+
+[node name="margin" type="MarginContainer" parent="detector/options/dropdown/specific/smoke/specific"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="caption" type="HBoxContainer" parent="detector/options/dropdown/specific/smoke/specific/margin"]
+layout_mode = 2
+
+[node name="short" type="Label" parent="detector/options/dropdown/specific/smoke/specific/margin/caption"]
+layout_mode = 2
+text = "E"
+
+[node name="description" type="Label" parent="detector/options/dropdown/specific/smoke/specific/margin/caption"]
+layout_mode = 2
+text = "Smoke Cave"
+
+[node name="typical" type="Button" parent="detector/options/dropdown/specific/smoke"]
+custom_minimum_size = Vector2(35, 35)
+layout_mode = 2
+theme = ExtResource("1_2jgq6")
+alignment = 2
+
+[node name="margin" type="MarginContainer" parent="detector/options/dropdown/specific/smoke/typical"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="description" type="Label" parent="detector/options/dropdown/specific/smoke/typical/margin"]
+layout_mode = 2
+text = "C"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="detector"]

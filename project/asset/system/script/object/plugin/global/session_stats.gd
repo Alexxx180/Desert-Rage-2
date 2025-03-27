@@ -12,36 +12,39 @@ var location: Dictionary = {
 	"save": false
 }
 
-func _get_file(access: FileAccess.ModeFlags) -> FileAccess:
+func assign(path: String) -> void:
+	var i: int = path.find("-", 1)
+	location.level = int(path.substr(0, i))
+	location.part = int(path.substr(i + 1))
+	location.save = true
+	print("Session stats assign: ", location)
+
+func _file(access: FileAccess.ModeFlags) -> FileAccess:
 	return FileAccess.open(PATH, access)
 
 func load_scene(scene: String) -> void:
 	print_debug(get_tree().change_scene_to_file(scene))
 
 func save_progress() -> void:
-	if not SessionStats.location.save: return
+	if location.save:
+		_file(FileAccess.WRITE).store_string(JSON.stringify(location))
 
-	var file = _get_file(FileAccess.WRITE)
-	file.store_string(JSON.stringify(location))
-	print("SAVING: ", level)
-
-func group_level() -> String:
-	var _level: int = location.level
+func group_level(diff: int = 0) -> String:
+	var _level: int = location.level + diff
 	var path: String = "%d"
 	if _level > 0: path = "+/%d"
 	elif _level < 0: path = "-/%d"
 	return path % abs(_level)
 
+func _parseable(text: String) -> bool:
+	var processor: JSON = JSON.new()
+	var parsed: bool = processor.parse(text) == OK
+	if parsed:
+		location = processor.data
+		location.save = false
+		load_scene(level)
+	return parsed
+
 func load_progress() -> bool:
-	var valid: bool = FileAccess.file_exists(PATH)
-	print("VALID: ", valid)
-	if valid:
-		var file = _get_file(FileAccess.READ)
-		var json = JSON.new()
-		valid = json.parse(file.get_as_text()) == OK
-		if valid:
-			location = json.data
-			location.save = false
-			print("LOADING: ", level)
-			load_scene(level)
-	return valid
+	var exist: bool = FileAccess.file_exists(PATH)
+	return exist and _parseable(_file(FileAccess.READ).get_as_text())

@@ -8,7 +8,7 @@ func setup(tags: TileMapLayer, execute: TileMapLayer) -> void:
 	teleport.fill(tags, execute)
 	check.set_layers(execute, tags)
 	levels.connect_levels(tags.curtain, check)
-	levels.floors.assign(tags.get_parent().name.trim_prefix("map"))
+	SessionStats.assign(tags.get_parent().name.trim_prefix("map"))
 
 func transit(hero: CharacterBody2D) -> void:
 	var map: Dictionary = { "pos": hero.position }

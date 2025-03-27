@@ -24,8 +24,7 @@ func _input(event: InputEvent) -> void:
 
 func _scene_change() -> void:
 	timer.stop()
-	print_debug(tree.change_scene_to_file(scene))
-	#print_debug(tree.call_deferred("change_scene_to_file", scene))
+	SessionStats.load_scene(scene)
 
 func _show() -> void:
 	i += 1

@@ -18,7 +18,9 @@ func elevate(execute: TileMapLayer, tiles: Dictionary) -> void:
 	var part: int = 0
 	if tiles.link.name != "none": part = Tile.logic(tiles.link.atlas)
 	
-	var F: String = floors.get_next(diff)
+	# var F: String = floors.get_next(diff)
+	var F: String = SessionStats.group_level(diff)
+
 	var caption: String = SessionStats.location.name
 	
 	next_level.emit(LEVEL % [caption, F, part], diff)

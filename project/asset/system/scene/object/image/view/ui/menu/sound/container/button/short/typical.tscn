@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://drvafuccddeo5"]
+
+[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/hud/detector/buttons/toggle/short.gd" id="1_8nw7l"]
+[ext_resource type="PackedScene" uid="uid://bn854ux0aswd8" path="res://asset/system/scene/object/image/view/ui/short/gamepad/button/x.tscn" id="2_820ob"]
+[ext_resource type="PackedScene" uid="uid://dkp2jkcm36a0n" path="res://asset/system/scene/object/image/view/ui/short/keyboard/symbolic/latin/c.tscn" id="3_n6iu2"]
+
+[node name="short" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="open" type="Control" parent="."]
+layout_mode = 2
+anchors_preset = 0
+offset_right = 15.0
+offset_bottom = 26.0
+mouse_filter = 1
+script = ExtResource("1_8nw7l")
+
+[node name="gamepad" parent="open" instance=ExtResource("2_820ob")]
+visible = false
+layout_mode = 0
+
+[node name="keyboard" parent="open" instance=ExtResource("3_n6iu2")]
+layout_mode = 0
