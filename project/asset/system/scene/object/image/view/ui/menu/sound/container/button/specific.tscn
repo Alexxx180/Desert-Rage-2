@@ -1,13 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://cc8u4e20bj4c8"]
+[gd_scene load_steps=4 format=3 uid="uid://cc8u4e20bj4c8"]
 
 [ext_resource type="Theme" uid="uid://b4uvs3mj2kjx2" path="res://asset/resource/engine/internal/theme/patterns/template/button/sound.tres" id="1_1cr6r"]
 [ext_resource type="PackedScene" uid="uid://b4xqwtbfigjhy" path="res://asset/system/scene/object/image/view/ui/menu/sound/container/button/short/specific.tscn" id="2_5trif"]
+[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/sound/specific.gd" id="2_6iogn"]
 
 [node name="specific" type="Button"]
 custom_minimum_size = Vector2(200, 47)
 size_flags_horizontal = 3
 theme = ExtResource("1_1cr6r")
 alignment = 0
+script = ExtResource("2_6iogn")
 
 [node name="caption" type="HBoxContainer" parent="."]
 custom_minimum_size = Vector2(0, 47)
@@ -19,6 +21,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="short" parent="caption" instance=ExtResource("2_5trif")]
+visible = false
 layout_mode = 2
 
 [node name="margin" type="MarginContainer" parent="caption"]

@@ -1,36 +1,73 @@
-[gd_scene load_steps=2 format=3 uid="uid://cikgtgx0up07s"]
+[gd_scene load_steps=4 format=3 uid="uid://cikgtgx0up07s"]
 
+[ext_resource type="PackedScene" uid="uid://yvswc0dejdvh" path="res://asset/system/scene/object/image/view/ui/menu/sound/container/both/title-open.tscn" id="1_cld3k"]
 [ext_resource type="PackedScene" uid="uid://d4ajihpjurkjc" path="res://asset/system/scene/object/image/view/ui/menu/sound/container/both/title.tscn" id="1_rqi2a"]
+[ext_resource type="Theme" uid="uid://b4uvs3mj2kjx2" path="res://asset/resource/engine/internal/theme/patterns/template/button/sound.tres" id="1_tcb6j"]
 
 [node name="dropdown" type="VBoxContainer"]
 custom_minimum_size = Vector2(300, 200)
 
-[node name="title" parent="." instance=ExtResource("1_rqi2a")]
+[node name="caves" type="VBoxContainer" parent="."]
 layout_mode = 2
 
-[node name="typical" type="HBoxContainer" parent="."]
+[node name="typical" type="HBoxContainer" parent="caves"]
 layout_mode = 2
 
-[node name="content" type="VBoxContainer" parent="typical"]
+[node name="content" type="VBoxContainer" parent="caves/typical"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="ambient" parent="typical/content" instance=ExtResource("1_rqi2a")]
+[node name="caves" parent="caves/typical/content" instance=ExtResource("1_cld3k")]
 layout_mode = 2
 
-[node name="battle" parent="typical/content" instance=ExtResource("1_rqi2a")]
+[node name="HBoxContainer" type="HBoxContainer" parent="caves/typical/content"]
 layout_mode = 2
 
-[node name="link" type="ColorRect" parent="typical"]
+[node name="VBoxContainer" type="VBoxContainer" parent="caves/typical/content/HBoxContainer"]
+layout_mode = 2
+
+[node name="ambient" parent="caves/typical/content/HBoxContainer/VBoxContainer" instance=ExtResource("1_rqi2a")]
+layout_mode = 2
+
+[node name="ambient-theme-1" type="VBoxContainer" parent="caves/typical/content/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="button" type="Button" parent="caves/typical/content/HBoxContainer/VBoxContainer/ambient-theme-1"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme = ExtResource("1_tcb6j")
+
+[node name="margin" type="MarginContainer" parent="caves/typical/content/HBoxContainer/VBoxContainer/ambient-theme-1/button"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+
+[node name="description" type="Label" parent="caves/typical/content/HBoxContainer/VBoxContainer/ambient-theme-1/button/margin"]
+layout_mode = 2
+text = "Ambient theme 1"
+
+[node name="link" type="ColorRect" parent="caves/typical/content/HBoxContainer"]
 custom_minimum_size = Vector2(2, 0)
 layout_mode = 2
 color = Color(0.522635, 0.690267, 0.970436, 1)
 
-[node name="specific" type="VBoxContainer" parent="."]
+[node name="battle" parent="caves/typical/content" instance=ExtResource("1_rqi2a")]
 layout_mode = 2
 
-[node name="origin" parent="specific" instance=ExtResource("1_rqi2a")]
+[node name="link" type="ColorRect" parent="caves/typical"]
+custom_minimum_size = Vector2(2, 0)
+layout_mode = 2
+color = Color(0.522635, 0.690267, 0.970436, 1)
+
+[node name="specific" type="VBoxContainer" parent="caves"]
 layout_mode = 2
 
-[node name="smoke" parent="specific" instance=ExtResource("1_rqi2a")]
+[node name="origin" parent="caves/specific" instance=ExtResource("1_rqi2a")]
+layout_mode = 2
+
+[node name="smoke" parent="caves/specific" instance=ExtResource("1_rqi2a")]
 layout_mode = 2
