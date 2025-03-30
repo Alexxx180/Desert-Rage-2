@@ -1,10 +1,18 @@
 extends Button
 
 @onready var short: Control = $caption/short
+@onready var description: Label = $caption/margin/description
+
+var _ui_caption: String
 
 var title: Control
 var pad: Control
 var content: Control
+
+var caption: String:
+	set(value):
+		_ui_caption = value
+		description.text = value
 
 func _ready() -> void:
 	title = get_node("../../../..")

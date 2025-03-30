@@ -6,17 +6,14 @@ var _branch: Dictionary = {
 	"right": preload("res://asset/system/scene/object/image/view/ui/menu/sound/detector/dropdown/tree/branch/right.tscn")
 } 
 
-func _get_item(caption: String, item) -> HBoxContainer:
-	var trunk: Control = item.instantiate()
-	trunk.caption = caption
-	return trunk
-
 func set_trunk(list: VBoxContainer, caption: String) -> HBoxContainer:
-	var context: HBoxContainer = _get_item(caption, _trunk)
+	var context: HBoxContainer = _trunk.instantiate()
 	list.add_child(context)
+	context.caption = caption
 	return context
 
-func set_branch(list: VBoxContainer, caption: String, pad: String) -> HBoxContainer:
-	var context: HBoxContainer = _get_item(caption, _branch[pad])
+func set_branch(list: Container, caption: String, pad: String) -> HBoxContainer:
+	var context: HBoxContainer = _branch[pad].instantiate()
 	list.add_child(context)
+	context.caption = caption
 	return context
