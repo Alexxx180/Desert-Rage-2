@@ -1,10 +1,18 @@
 extends Button
 
-@export var expanded: bool = false
-
 @onready var short: Control = $caption/short
 @onready var description: Label = $caption/margin/description
 
+var pad: Control
+var content: Control
+
 func _ready() -> void:
-	if expanded: short.show()
-	description.text = get_parent().name
+	var title: Control = get_node("../../..")
+	description.text = title.name
+	pad = title.get_node("pad")
+	content = get_node("../../body")
+
+func _toggled(toggled_on: bool) -> void:
+	# short.visible = toggled_on
+	pad.visible = toggled_on
+	content.visible = toggled_on

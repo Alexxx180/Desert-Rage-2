@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://pexl48rcyqo7"]
 
-[ext_resource type="Theme" uid="uid://b4uvs3mj2kjx2" path="res://asset/resource/engine/internal/theme/patterns/template/button/sound.tres" id="1_2jgq6"]
-[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/hud/detector/buttons/toggle/short.gd" id="2_g1832"]
-[ext_resource type="PackedScene" uid="uid://bn854ux0aswd8" path="res://asset/system/scene/object/image/view/ui/short/gamepad/button/x.tscn" id="3_6pump"]
+[ext_resource type="PackedScene" uid="uid://dql7mce31xdjg" path="res://asset/system/scene/object/image/view/ui/menu/sound/track/settings/settings.tscn" id="1_1yo1r"]
+[ext_resource type="PackedScene" uid="uid://cikgtgx0up07s" path="res://asset/system/scene/object/image/view/ui/menu/sound/track/dropdown/tree/tree.tscn" id="1_v2fxn"]
+[ext_resource type="PackedScene" uid="uid://c85yu6373k7wr" path="res://asset/system/scene/object/image/view/ui/menu/sound/track/options/options.tscn" id="2_s3j2j"]
 
 [node name="sound" type="CanvasLayer"]
 
@@ -13,214 +13,31 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="options" type="VBoxContainer" parent="detector"]
-custom_minimum_size = Vector2(200, 0)
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="dropdown" type="VBoxContainer" parent="detector/options"]
-layout_mode = 2
-
-[node name="title" type="HBoxContainer" parent="detector/options/dropdown"]
-layout_mode = 2
-
-[node name="specific" type="Button" parent="detector/options/dropdown/title"]
-custom_minimum_size = Vector2(35, 35)
-layout_mode = 2
 size_flags_horizontal = 3
-theme = ExtResource("1_2jgq6")
-alignment = 0
 
-[node name="margin" type="MarginContainer" parent="detector/options/dropdown/title/specific"]
+[node name="margin" type="MarginContainer" parent="detector"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
 
-[node name="caption" type="HBoxContainer" parent="detector/options/dropdown/title/specific/margin"]
+[node name="soundtrack" type="VBoxContainer" parent="detector/margin"]
 layout_mode = 2
 
-[node name="short" type="Label" parent="detector/options/dropdown/title/specific/margin/caption"]
-layout_mode = 2
-text = "E"
-
-[node name="description" type="Label" parent="detector/options/dropdown/title/specific/margin/caption"]
-layout_mode = 2
-text = "Caves"
-
-[node name="typical" type="Button" parent="detector/options/dropdown/title"]
-custom_minimum_size = Vector2(35, 35)
-layout_mode = 2
-theme = ExtResource("1_2jgq6")
-alignment = 2
-
-[node name="short" type="Control" parent="detector/options/dropdown/title/typical"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="open" type="Control" parent="detector/options/dropdown/title/typical/short"]
-layout_mode = 2
-anchors_preset = 0
-offset_right = 15.0
-offset_bottom = 26.0
-script = ExtResource("2_g1832")
-
-[node name="gamepad" parent="detector/options/dropdown/title/typical/short/open" instance=ExtResource("3_6pump")]
-layout_mode = 0
-
-[node name="typical" type="VBoxContainer" parent="detector/options/dropdown"]
+[node name="settings" parent="detector/margin/soundtrack" instance=ExtResource("1_1yo1r")]
 layout_mode = 2
 
-[node name="ambient" type="HBoxContainer" parent="detector/options/dropdown/typical"]
+[node name="dropdown" parent="detector/margin/soundtrack" instance=ExtResource("1_v2fxn")]
+layout_mode = 2
+size_flags_vertical = 2
+
+[node name="options" parent="detector/margin/soundtrack" instance=ExtResource("2_s3j2j")]
 layout_mode = 2
 
-[node name="specific" type="Button" parent="detector/options/dropdown/typical/ambient"]
-custom_minimum_size = Vector2(35, 35)
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("1_2jgq6")
-alignment = 0
-
-[node name="margin" type="MarginContainer" parent="detector/options/dropdown/typical/ambient/specific"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="caption" type="HBoxContainer" parent="detector/options/dropdown/typical/ambient/specific/margin"]
-layout_mode = 2
-
-[node name="short" type="Label" parent="detector/options/dropdown/typical/ambient/specific/margin/caption"]
-layout_mode = 2
-text = "E"
-
-[node name="description" type="Label" parent="detector/options/dropdown/typical/ambient/specific/margin/caption"]
-layout_mode = 2
-text = "Ambient"
-
-[node name="typical" type="Button" parent="detector/options/dropdown/typical/ambient"]
-custom_minimum_size = Vector2(35, 35)
-layout_mode = 2
-theme = ExtResource("1_2jgq6")
-alignment = 2
-
-[node name="margin" type="MarginContainer" parent="detector/options/dropdown/typical/ambient/typical"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="description" type="Label" parent="detector/options/dropdown/typical/ambient/typical/margin"]
-layout_mode = 2
-text = "C"
-
-[node name="specific" type="VBoxContainer" parent="detector/options/dropdown"]
-layout_mode = 2
-
-[node name="origin" type="HBoxContainer" parent="detector/options/dropdown/specific"]
-layout_mode = 2
-
-[node name="specific" type="Button" parent="detector/options/dropdown/specific/origin"]
-custom_minimum_size = Vector2(35, 35)
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("1_2jgq6")
-alignment = 0
-
-[node name="margin" type="MarginContainer" parent="detector/options/dropdown/specific/origin/specific"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="caption" type="HBoxContainer" parent="detector/options/dropdown/specific/origin/specific/margin"]
-layout_mode = 2
-
-[node name="short" type="Label" parent="detector/options/dropdown/specific/origin/specific/margin/caption"]
-layout_mode = 2
-text = "E"
-
-[node name="description" type="Label" parent="detector/options/dropdown/specific/origin/specific/margin/caption"]
-layout_mode = 2
-text = "Origin Cave"
-
-[node name="typical" type="Button" parent="detector/options/dropdown/specific/origin"]
-custom_minimum_size = Vector2(35, 35)
-layout_mode = 2
-theme = ExtResource("1_2jgq6")
-alignment = 2
-
-[node name="margin" type="MarginContainer" parent="detector/options/dropdown/specific/origin/typical"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="description" type="Label" parent="detector/options/dropdown/specific/origin/typical/margin"]
-layout_mode = 2
-text = "C"
-
-[node name="smoke" type="HBoxContainer" parent="detector/options/dropdown/specific"]
-layout_mode = 2
-
-[node name="specific" type="Button" parent="detector/options/dropdown/specific/smoke"]
-custom_minimum_size = Vector2(35, 35)
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("1_2jgq6")
-alignment = 0
-
-[node name="margin" type="MarginContainer" parent="detector/options/dropdown/specific/smoke/specific"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="caption" type="HBoxContainer" parent="detector/options/dropdown/specific/smoke/specific/margin"]
-layout_mode = 2
-
-[node name="short" type="Label" parent="detector/options/dropdown/specific/smoke/specific/margin/caption"]
-layout_mode = 2
-text = "E"
-
-[node name="description" type="Label" parent="detector/options/dropdown/specific/smoke/specific/margin/caption"]
-layout_mode = 2
-text = "Smoke Cave"
-
-[node name="typical" type="Button" parent="detector/options/dropdown/specific/smoke"]
-custom_minimum_size = Vector2(35, 35)
-layout_mode = 2
-theme = ExtResource("1_2jgq6")
-alignment = 2
-
-[node name="margin" type="MarginContainer" parent="detector/options/dropdown/specific/smoke/typical"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="description" type="Label" parent="detector/options/dropdown/specific/smoke/typical/margin"]
-layout_mode = 2
-text = "C"
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="detector"]
+[node name="player" type="AudioStreamPlayer" parent="."]
