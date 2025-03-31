@@ -1,11 +1,23 @@
-[gd_scene load_steps=7 format=3 uid="uid://68ojve62yh1c"]
+[gd_scene load_steps=19 format=3 uid="uid://68ojve62yh1c"]
 
 [ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/sound/processor/setup/setup.gd" id="1_24lsr"]
 [ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/sound/processor/processor.gd" id="1_hr3w0"]
 [ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/sound/processor/setup/leaf/leaf.gd" id="2_cbtqc"]
 [ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/sound/processor/setup/leaf/asserter.gd" id="2_pe4qc"]
 [ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/sound/processor/setup/leaf/theme.gd" id="3_ompcv"]
+[ext_resource type="Script" path="res://addons/godot-behavior-tree-plugin/tree/tree.gd" id="3_ptis3"]
+[ext_resource type="Script" path="res://addons/godot-behavior-tree-plugin/selector/selector.gd" id="4_8fagt"]
+[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/sound/processor/setup/behavior/tree/crown.gd" id="5_4qsn6"]
 [ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/sound/processor/setup/leaf/trunk.gd" id="5_qnycr"]
+[ext_resource type="Script" path="res://addons/godot-behavior-tree-plugin/sequence/sequence.gd" id="6_l0j5n"]
+[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/sound/processor/setup/behavior/tree/leaf/typed/exist.gd" id="7_mhay1"]
+[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/sound/processor/setup/behavior/tree/branch.gd" id="8_ehpsi"]
+[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/sound/processor/setup/behavior/tree/leaf/typed/structure/strict/composed.gd" id="8_ex2wn"]
+[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/sound/processor/setup/behavior/tree/leaf/typed/structure/strict/themes/combat.gd" id="8_s3bch"]
+[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/sound/processor/setup/behavior/tree/leaf/typed/structure/strict/themes/separate.gd" id="9_c3lnw"]
+[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/sound/processor/setup/behavior/tree/leaf/typed/structure/blend.gd" id="10_v56j4"]
+[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/sound/processor/setup/behavior/tree/leaf/named.gd" id="11_24b7j"]
+[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/sound/processor/setup/behavior/tree/trunks.gd" id="13_kadw0"]
 
 [node name="processor" type="Node"]
 script = ExtResource("1_hr3w0")
@@ -26,6 +38,54 @@ script = ExtResource("1_hr3w0")
 
 [node name="setup" type="Node" parent="."]
 script = ExtResource("1_24lsr")
+
+[node name="behavior" type="Node" parent="setup"]
+script = ExtResource("3_ptis3")
+
+[node name="tree" type="Node" parent="setup/behavior"]
+script = ExtResource("4_8fagt")
+
+[node name="crown" type="Node" parent="setup/behavior/tree"]
+script = ExtResource("5_4qsn6")
+
+[node name="leaf" type="Node" parent="setup/behavior/tree"]
+script = ExtResource("4_8fagt")
+
+[node name="typed" type="Node" parent="setup/behavior/tree/leaf"]
+script = ExtResource("6_l0j5n")
+
+[node name="exist" type="Node" parent="setup/behavior/tree/leaf/typed"]
+script = ExtResource("7_mhay1")
+
+[node name="structure" type="Node" parent="setup/behavior/tree/leaf/typed"]
+script = ExtResource("4_8fagt")
+
+[node name="strict" type="Node" parent="setup/behavior/tree/leaf/typed/structure"]
+script = ExtResource("6_l0j5n")
+
+[node name="composed" type="Node" parent="setup/behavior/tree/leaf/typed/structure/strict"]
+script = ExtResource("8_ex2wn")
+
+[node name="themes" type="Node" parent="setup/behavior/tree/leaf/typed/structure/strict"]
+script = ExtResource("4_8fagt")
+
+[node name="combat" type="Node" parent="setup/behavior/tree/leaf/typed/structure/strict/themes"]
+script = ExtResource("8_s3bch")
+
+[node name="separate" type="Node" parent="setup/behavior/tree/leaf/typed/structure/strict/themes"]
+script = ExtResource("9_c3lnw")
+
+[node name="blend" type="Node" parent="setup/behavior/tree/leaf/typed/structure"]
+script = ExtResource("10_v56j4")
+
+[node name="named" type="Node" parent="setup/behavior/tree/leaf"]
+script = ExtResource("11_24b7j")
+
+[node name="trunk" type="Node" parent="setup/behavior/tree"]
+script = ExtResource("13_kadw0")
+
+[node name="branch" type="Node" parent="setup/behavior/tree"]
+script = ExtResource("8_ehpsi")
 
 [node name="asserter" type="Node" parent="setup"]
 script = ExtResource("2_pe4qc")
