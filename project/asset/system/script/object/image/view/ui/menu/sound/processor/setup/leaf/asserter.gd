@@ -17,3 +17,13 @@ func get_manifest() -> Dictionary:
 	if processor.parse(text) == OK:
 		return processor.data
 	return Defaults.DICT
+
+func select(branch: String) -> void:
+	pass
+	"""
+	var context: HBoxContainer = trunk.set_trunk(ui, caption)
+	var typed: Variant = asserter.decide("type", user, copy)
+	var named: Variant = asserter.decide("name", user, copy)
+	enumerate_group(context.content.head.content.body, copy.type, typed, "right")
+	enumerate_group(context.content.body, copy.name, named, "left")
+	"""

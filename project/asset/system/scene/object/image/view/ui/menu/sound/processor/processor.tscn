@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/sound/processor/setup/leaf/theme.gd" id="3_ompcv"]
 [ext_resource type="Script" path="res://addons/godot-behavior-tree-plugin/tree/tree.gd" id="3_ptis3"]
 [ext_resource type="Script" path="res://addons/godot-behavior-tree-plugin/selector/selector.gd" id="4_8fagt"]
-[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/sound/processor/setup/behavior/tree/crown.gd" id="5_4qsn6"]
+[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/sound/processor/setup/behavior/tree/leaf/alarm.gd" id="5_4qsn6"]
 [ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/sound/processor/setup/leaf/trunk.gd" id="5_qnycr"]
 [ext_resource type="Script" path="res://addons/godot-behavior-tree-plugin/sequence/sequence.gd" id="6_l0j5n"]
 [ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/sound/processor/setup/behavior/tree/leaf/typed/exist.gd" id="7_mhay1"]
@@ -45,11 +45,11 @@ script = ExtResource("3_ptis3")
 [node name="tree" type="Node" parent="setup/behavior"]
 script = ExtResource("4_8fagt")
 
-[node name="crown" type="Node" parent="setup/behavior/tree"]
-script = ExtResource("5_4qsn6")
-
 [node name="leaf" type="Node" parent="setup/behavior/tree"]
 script = ExtResource("4_8fagt")
+
+[node name="alarm" type="Node" parent="setup/behavior/tree/leaf"]
+script = ExtResource("5_4qsn6")
 
 [node name="typed" type="Node" parent="setup/behavior/tree/leaf"]
 script = ExtResource("6_l0j5n")
