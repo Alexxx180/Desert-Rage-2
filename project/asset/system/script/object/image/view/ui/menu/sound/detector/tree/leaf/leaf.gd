@@ -1,20 +1,16 @@
 extends Button
 
+class_name SountrackLeaf
+
 @onready var description: Label = $margin/caption/description
 @onready var metadata: Label = $margin/caption/metadata
 
-var caption: String:
-	set(value):
-		description.text = value
-
-var path: String:
-	set(value):
-		metadata.text = value
-
 func set_metadata(track: String) -> void:
-	path = track.replace("\\", "/")
-	caption = path.substr(track.rfind("/")).substr(track.rfind("."))
+	var slash: int = track.rfind("/")
+	var dot: int = track.rfind(".")
+	metadata.text = track.replace("\\", "/")
+	description.text = metadata.text.substr(slash).substr(dot)
 
 func set_track_authority(ui_track: String) -> void:
-	caption = ui_track
-	path = ui_track + "_metadata"
+	metadata.text = ui_track
+	description.text = ui_track + "_metadata"
