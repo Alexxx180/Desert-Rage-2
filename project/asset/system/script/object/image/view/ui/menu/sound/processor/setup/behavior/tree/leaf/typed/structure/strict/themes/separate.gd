@@ -1,10 +1,10 @@
 extends BehaviorAction
 
-func branch(setup: Node, context: Dictionary) -> int:
-	setup.leaf.set_themes(setup.ui, context)
+func branch(mark: Tick) -> int:
+	var setup: Node = mark.blackboard.get_value("setup")
+	var query: SoundtrackTreeQuery = mark.blackboard.get_value("query")
+	setup.leaf.set_themes(setup, query)
 	return OK
 
 func tick(mark: Tick) -> int:
-	var setup: Node = mark.blackboard.get_value("setup")
-	var context: Dictionary = mark.blackboard.get_value("context")
-	return branch(setup, context)
+	return branch(mark)

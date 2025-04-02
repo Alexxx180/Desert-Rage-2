@@ -1,7 +1,7 @@
 extends BehaviorAction
 
-func exist(context: Dictionary) -> bool:
-	return context.has("set")
+func exist(mark: Tick) -> bool:
+	return mark.blackboard.get_value("query").has("set")
 
 func tick(mark: Tick) -> int:
-	return OK if exist(mark.blackboard.get_value("context")) else FAILED
+	return OK if exist(mark) else FAILED

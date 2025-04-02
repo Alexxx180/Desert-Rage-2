@@ -1,10 +1,11 @@
 extends Node
 
+@onready var leafs: Node = $leafs
+
 var _theme = preload("res://asset/system/scene/object/image/view/ui/menu/sound/detector/dropdown/tree/leaf/leaf.tscn")
 var _alarm = preload("res://asset/system/scene/object/image/view/ui/menu/sound/detector/dropdown/tree/leaf/alarm.tscn")
 var _named = preload("res://asset/system/scene/object/image/view/ui/menu/sound/detector/dropdown/tree/leaf/named.tscn")
 var _fight = preload("res://asset/system/scene/object/image/view/ui/menu/sound/detector/dropdown/tree/leaf/combat.tscn")
-
 var _trunk = preload("res://asset/system/scene/object/image/view/ui/menu/sound/detector/dropdown/tree/trunk/trunk.tscn")
 var _branch: Dictionary = {
 	"left": preload("res://asset/system/scene/object/image/view/ui/menu/sound/detector/dropdown/tree/branch/left.tscn"),
@@ -12,59 +13,31 @@ var _branch: Dictionary = {
 }
 var _blend: Dictionary = {
 	"left": preload("res://asset/system/scene/object/image/view/ui/menu/sound/detector/dropdown/tree/blend/left.tscn"),
-	"right": preload("res://asset/system/scene/object/image/view/ui/menu/sound/detector/dropdown/tree/blend/left.tscn")
+	"right": preload("res://asset/system/scene/object/image/view/ui/menu/sound/detector/dropdown/tree/blend/right.tscn")
 }
 
-func _add_child(query: SoundtrackTreeQuery, child, recurse: bool = false) -> Control:
-	var branch: Control = child.instantiate()
-	query.add_child(branch, recurse)
-	return branch
+func set_blend(setup: Node, query: SoundtrackTreeQuery) -> void:
+	var mix: int = clampi(query.decide("mix"), 0, 100)
+	leafs.set_blend(query, _blend, mix)
+	leafs.include(query, _named, _set_titled, "set")
 
-func _set_child(query: SoundtrackTreeQuery, child) -> SoundtrackTreeQuery:
-	var caption: String = query.caption
-	_add_child(query, child, true).caption = caption 
-	return query
-
-func set_alarm(board: BehaviorBlackboard) -> void:
-	var query: SoundtrackTreeQuery = board.get_value("query")
-	var named: Dictionary = query.decide("name")
-	for track in named:
-		var path: String = named[track]
-		_add_child(query, _alarm).set_metadata(path) # THEME TO NAMED
-
-func set_blend(board: BehaviorBlackboard) -> void:
-	var query: SoundtrackTreeQuery = board.get_value("query")
-	var named: Dictionary = query.decide("set")
-	for track in named:
-		var path: String = named[track]
-		_add_child(query, _blend[query.pad]).set_metadata(path) # THEME TO NAMED
-
-func set_named(board: BehaviorBlackboard) -> void:
-	var query: SoundtrackTreeQuery = board.get_value("query")
-	var named: Dictionary = query.decide("name")
-	for track in named:
-		var path: String = named[track]
-		var branch: Button = _add_child(query, _named)
-		branch.set_metadata(path)
-		branch.set_title(track) # THEME TO NAMED
-
-func set_trunks(setup: Node, board: BehaviorBlackboard) -> void:
-	var query: SoundtrackTreeQuery = board.get_value("query")
-	setup.enumerate(_set_child(query, _trunk).copy("right").select("type"))
+func set_trunks(setup: Node, query: SoundtrackTreeQuery) -> void:
+	leafs.set_child(query, _trunk)
+	setup.enumerate(query.copy("right").select("type"))
 	setup.enumerate(query.copy("left").select("name"))
 
-func set_branch(setup: Node, board: BehaviorBlackboard) -> void:
-	var query: SoundtrackTreeQuery = board.get_value("query")
-	setup.enumerate(_set_child(query, _branch[query.pad]).select("type"))
+func set_branch(setup: Node, query: SoundtrackTreeQuery) -> void:
+	leafs.set_child(query, _branch[query.pad])
+	setup.enumerate(query)
 
-func set_themes(board: BehaviorBlackboard) -> void:
-	var query: SoundtrackTreeQuery = board.get_value("query")
-	for track in query.decide("set"):
-		_add_child(query, _theme).set_metadata(track)
+func set_alarm(query: SoundtrackTreeQuery) -> void:
+	leafs.set_alarm(query, _alarm)
 
-func set_combat(board: BehaviorBlackboard) -> void:
-	var query: SoundtrackTreeQuery = board.get_value("query")
-	for track in query.decide("set"):
-		var branch: Control = _add_child(query, _fight)
-		for status in track:
-			branch.content[status].set_metadata(track[status])
+func set_named(query: SoundtrackTreeQuery) -> void:
+	leafs.include(query, _named, leafs.set_titled)
+
+func set_themes(query: SoundtrackTreeQuery) -> void:
+	leafs.include(query, _theme, leafs.set_theme, "set")
+
+func set_combat(query: SoundtrackTreeQuery) -> void:
+	leafs.include(query, _fight, leafs.set_fight, "set")

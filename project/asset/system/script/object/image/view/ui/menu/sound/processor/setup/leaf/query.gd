@@ -4,15 +4,17 @@ class_name SoundtrackTreeQuery
 
 const PATH: String = "res://asset/resource/media/ost/manifest.json"
 
-var _user: Dictionary
-var _copy: Dictionary
+var _user: Variant
+var _copy: Variant
 var _ui: Control
 var pad: String = "left"
+var caption: String
+
+var context: Variant:
+	get: return _user
 
 func _decide(key: String) -> Variant:
 	return _user[key] if _user.has(key) else _copy[key]
-
-func get_context() -> Dictionary: return _copy
 
 func init_manifest() -> bool:
 	var text: String = FileAccess.open(PATH, FileAccess.READ).get_as_text()
@@ -48,4 +50,5 @@ func select(branch: String) -> SoundtrackTreeQuery:
 		"name": _ui = _ui.content.body
 	_user = _decide(branch)
 	_copy = _copy[branch]
+	caption = branch
 	return self
