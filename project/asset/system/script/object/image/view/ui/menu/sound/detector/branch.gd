@@ -3,6 +3,8 @@ extends Button
 @onready var short: Control = $caption/short
 @onready var description: Label = $caption/margin/description
 
+@export var path: String = "../../.."
+
 var _ui_caption: String
 
 var pad: Control
@@ -14,7 +16,7 @@ var caption: String:
 		description.text = _ui_caption
 
 func _ready() -> void:
-	var title: Control = get_node("../../..")
+	var title: Control = get_node(path)
 	pad = title.get_node("pad")
 	content = get_node("../../body")
 

@@ -35,4 +35,4 @@ func set_themes(query: SoundtrackTreeQuery) -> void:
 
 func set_combat(query: SoundtrackTreeQuery) -> void:
 	leafs.set_child(query, ui.mix[query.pad])
-	leafs.include(query, ui.fight, leafs.set_fight, "set")
+	leafs.include(query.nest_body(), ui.fight, leafs.set_fight, "set")

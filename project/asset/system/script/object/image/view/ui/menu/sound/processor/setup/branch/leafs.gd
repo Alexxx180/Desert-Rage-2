@@ -29,6 +29,7 @@ func set_titled(query, child, tracks, track) -> void:
 func set_blend(query, child, mix: int) -> void:
 	var branch: Control = set_child(query, child[query.pad])
 	branch.set_metadata(mix)
+	query.set_ui(branch.content.themes.body)
 
 func set_alarm(query: SoundtrackTreeQuery, child) -> void:
 	var branch: Control = append_child(query, child)

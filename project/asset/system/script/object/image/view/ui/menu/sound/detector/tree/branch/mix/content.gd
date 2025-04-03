@@ -1,6 +1,7 @@
 extends Node
 
 @onready var head: BoxContainer = $head
+@onready var body: BoxContainer = $body
 
 var caption: String:
 	set(value):
