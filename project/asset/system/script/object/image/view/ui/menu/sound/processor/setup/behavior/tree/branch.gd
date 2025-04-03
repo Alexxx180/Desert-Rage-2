@@ -1,7 +1,7 @@
 extends BehaviorAction
 
 func tick(mark: Tick) -> int:
-	var setup: Node = mark.blackboard.get_value("setup")
-	var query: Dictionary = mark.blackboard.get_value("query")
-	setup.leaf.set_branch(setup, query)
+	var query: SoundtrackTreeQuery = mark.blackboard.get_value("query")
+	print("Branch: ", query.caption)
+	mark.actor.branch.set_branch(mark.actor, query)
 	return OK

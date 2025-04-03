@@ -1,9 +1,11 @@
 extends HBoxContainer
 
-@onready var leaf: Label = $leaf
+@onready var leaf: Button = $leaf
+@onready var active: Button = $active
 
-func set_metadata(track: String) -> void:
-	leaf.set_metadata(track)
+func set_metadata(track: Array) -> void:
+	active.set_metadata(track[0])
+	leaf.set_metadata(track[1])
 
 func set_track_authority(ui_track: String) -> void:
 	leaf.set_track_authority(ui_track)

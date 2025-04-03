@@ -1,8 +1,9 @@
-[gd_scene load_steps=16 format=3 uid="uid://68ojve62yh1c"]
+[gd_scene load_steps=19 format=3 uid="uid://68ojve62yh1c"]
 
 [ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/sound/processor/setup/setup.gd" id="1_24lsr"]
 [ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/sound/processor/processor.gd" id="1_hr3w0"]
 [ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/sound/processor/setup/branch/branch.gd" id="2_cbtqc"]
+[ext_resource type="Script" path="res://addons/godot-behavior-tree-plugin/blackboard/blackboard.gd" id="3_gd3ba"]
 [ext_resource type="Script" path="res://addons/godot-behavior-tree-plugin/tree/tree.gd" id="3_ptis3"]
 [ext_resource type="Script" path="res://addons/godot-behavior-tree-plugin/selector/selector.gd" id="4_8fagt"]
 [ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/sound/processor/setup/behavior/tree/leaf/alarm.gd" id="5_4qsn6"]
@@ -15,6 +16,8 @@
 [ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/sound/processor/setup/behavior/tree/leaf/typed/structure/blend.gd" id="10_v56j4"]
 [ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/sound/processor/setup/behavior/tree/leaf/named.gd" id="11_24b7j"]
 [ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/sound/processor/setup/behavior/tree/trunks.gd" id="13_kadw0"]
+[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/sound/processor/setup/branch/leafs.gd" id="17_c50og"]
+[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/sound/processor/setup/branch/ui.gd" id="18_lepgy"]
 
 [node name="processor" type="Node"]
 script = ExtResource("1_hr3w0")
@@ -35,6 +38,9 @@ script = ExtResource("1_hr3w0")
 
 [node name="setup" type="Node" parent="."]
 script = ExtResource("1_24lsr")
+
+[node name="blackboard" type="Node" parent="setup"]
+script = ExtResource("3_gd3ba")
 
 [node name="behavior" type="Node" parent="setup"]
 script = ExtResource("3_ptis3")
@@ -84,5 +90,11 @@ script = ExtResource("13_kadw0")
 [node name="branch" type="Node" parent="setup/behavior/tree"]
 script = ExtResource("8_ehpsi")
 
-[node name="leaf" type="Node" parent="setup"]
+[node name="branch" type="Node" parent="setup"]
 script = ExtResource("2_cbtqc")
+
+[node name="leafs" type="Node" parent="setup/branch"]
+script = ExtResource("17_c50og")
+
+[node name="ui" type="Node" parent="setup/branch"]
+script = ExtResource("18_lepgy")

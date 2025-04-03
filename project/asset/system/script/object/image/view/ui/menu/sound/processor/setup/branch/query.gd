@@ -8,12 +8,12 @@ var _user: Variant
 var _copy: Variant
 var _ui: Control
 var pad: String = "left"
-var caption: String
+var caption: String = "initial"
 
 var context: Variant:
 	get: return _user
 
-func _decide(key: String) -> Variant:
+func decide(key: String) -> Variant:
 	return _user[key] if _user.has(key) else _copy[key]
 
 func init_manifest() -> bool:
@@ -35,7 +35,7 @@ func set_data(user: Dictionary, original: Dictionary) -> void:
 func add_child(element: Control, recurse: bool = false) -> void:
 	_ui.add_child(element)
 	if recurse:
-		_ui = element
+		set_ui(element)
 
 func copy(branch: String = pad) -> SoundtrackTreeQuery:
 	var query = SoundtrackTreeQuery.new()
@@ -43,12 +43,26 @@ func copy(branch: String = pad) -> SoundtrackTreeQuery:
 	query.set_ui(_ui)
 	query.pad = branch
 	return query
-
-func select(branch: String) -> SoundtrackTreeQuery:
+"""
+	print("PARENT: ", _ui.get_node("../..").name)
 	match branch:
 		"type": _ui = _ui.content.head.content.body
 		"name": _ui = _ui.content.body
-	_user = _decide(branch)
+"""
+func nest_head() -> SoundtrackTreeQuery:
+	_ui = _ui.content.head
+	return self
+
+func nest_body() -> SoundtrackTreeQuery:
+	_ui = _ui.content.body
+	return self
+
+func select(branch: String) -> SoundtrackTreeQuery:
+	#if caption != "initial":
+#		_nest_body()
+
+	_user = decide(branch)
 	_copy = _copy[branch]
+	# print("SELECTING: ", branch)
 	caption = branch
 	return self

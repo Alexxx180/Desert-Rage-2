@@ -1,10 +1,10 @@
 extends SountrackBranchBehavior
 
 func condition(data: Variant) -> bool:
-	return data.set is Dictionary and data.mix is int
+	return data.set is Dictionary and data.mix is float
 
 func branch(mark: Tick) -> int:
-	var setup: Node = mark.blackboard.get_value("setup")
 	var query: SoundtrackTreeQuery = mark.blackboard.get_value("query")
-	setup.leaf.set_blend(setup, query)
+	print("Blend: ", query.caption)
+	mark.actor.branch.set_blend(query)
 	return OK
