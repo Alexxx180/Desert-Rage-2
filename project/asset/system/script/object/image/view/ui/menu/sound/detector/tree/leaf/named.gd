@@ -1,4 +1,4 @@
-extends SountrackLeaf
+extends SoundtrackLeaf
 
 @onready var title: Label = $margin/title
 

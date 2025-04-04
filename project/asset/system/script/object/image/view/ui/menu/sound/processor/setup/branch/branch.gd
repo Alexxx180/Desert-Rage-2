@@ -31,7 +31,7 @@ func set_named(query: SoundtrackTreeQuery) -> void:
 
 func set_themes(query: SoundtrackTreeQuery) -> void:
 	leafs.set_child(query, ui.mix[query.pad])
-	leafs.include(query, ui.theme, leafs.set_theme, "set")
+	leafs.include(query.nest_body(), ui.theme, leafs.set_theme, "set")
 
 func set_combat(query: SoundtrackTreeQuery) -> void:
 	leafs.set_child(query, ui.mix[query.pad])
