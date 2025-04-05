@@ -4,16 +4,19 @@ extends Node
 @onready var board: BehaviorBlackboard = $blackboard
 @onready var branch: Node = $branch
 
-func selection(query: SoundtrackTreeQuery, key: String) -> void:
-	board.set_value("query", query.select(key))
+func selection(query: SoundtrackTreeQuery) -> void:
+	board.set_value("query", query)
 	behavior.tick(self, board)
 
 func enumerate(query: SoundtrackTreeQuery) -> void:
 	for key in query.context:
-		selection(query.copy(), key)
+		selection(query.copy().select(key))
 
 func set_soundtrack(ui: HFlowContainer) -> void:
-	var query: SoundtrackTreeQuery = SoundtrackTreeQuery.new()
-	if query.init_manifest():
+	if SoundtrackSystem.is_valid("music"):
+		var query: SoundtrackTreeQuery = SoundtrackTreeQuery.new()
+		var user: Dictionary = SoundtrackSystem.user.music
+		var copy: Dictionary = SoundtrackSystem.copy.music
+		query.set_data(user, copy)
 		query.set_ui(ui)
 		enumerate(query)

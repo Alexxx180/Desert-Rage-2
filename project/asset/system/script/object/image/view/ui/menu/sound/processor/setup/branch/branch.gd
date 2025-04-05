@@ -10,14 +10,8 @@ func set_blend(query: SoundtrackTreeQuery) -> void:
 
 func set_trunks(setup: Node, query: SoundtrackTreeQuery) -> void:
 	leafs.set_child(query, ui.trunk)
-	# var typed: Dictionary = 
-	#if typed.has("set"):
-		
-	#else:
-	setup.selection(query.copy("right").nest_head().nest_body(), "type")
-	setup.selection(query.copy("left").nest_body(), "name")
-	# setup.enumerate(query.copy("right").select("type"))
-	# setup.enumerate(query.copy("left").select("name"))
+	setup.selection(query.copy("right").nest_head().nest_body().select("type"))
+	setup.selection(query.copy("left").nest_body().select("name"))
 
 func set_branch(setup: Node, query: SoundtrackTreeQuery) -> void:
 	leafs.set_child(query, ui.branch[query.pad])

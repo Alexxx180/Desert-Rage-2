@@ -16,15 +16,6 @@ var context: Variant:
 func decide(key: String) -> Variant:
 	return _user[key] if _user.has(key) else _copy[key]
 
-func init_manifest() -> bool:
-	var text: String = FileAccess.open(PATH, FileAccess.READ).get_as_text()
-	var processor: JSON = JSON.new()
-	var valid: bool = processor.parse(text) == OK
-	if valid:
-		_copy = processor.data
-		_user = _copy
-	return valid
-
 func set_ui(ui: Control) -> void:
 	_ui = ui
 
@@ -43,12 +34,7 @@ func copy(branch: String = pad) -> SoundtrackTreeQuery:
 	query.set_ui(_ui)
 	query.pad = branch
 	return query
-"""
-	print("PARENT: ", _ui.get_node("../..").name)
-	match branch:
-		"type": _ui = _ui.content.head.content.body
-		"name": _ui = _ui.content.body
-"""
+
 func nest_head() -> SoundtrackTreeQuery:
 	_ui = _ui.content.head
 	return self
@@ -58,11 +44,7 @@ func nest_body() -> SoundtrackTreeQuery:
 	return self
 
 func select(branch: String) -> SoundtrackTreeQuery:
-	#if caption != "initial":
-#		_nest_body()
-
 	_user = decide(branch)
 	_copy = _copy[branch]
-	# print("SELECTING: ", branch)
 	caption = branch
 	return self

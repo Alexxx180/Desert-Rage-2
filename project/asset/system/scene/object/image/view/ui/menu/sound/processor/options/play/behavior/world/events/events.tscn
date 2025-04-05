@@ -1,0 +1,16 @@
+[gd_scene load_steps=5 format=3 uid="uid://dkvbyrp671tuf"]
+
+[ext_resource type="Script" path="res://addons/godot-behavior-tree-plugin/selector/selector.gd" id="1_80o4i"]
+[ext_resource type="Script" path="res://addons/godot-behavior-tree-plugin/action/action.gd" id="2_pdush"]
+[ext_resource type="PackedScene" uid="uid://cqswhqays07uw" path="res://asset/system/scene/object/image/view/ui/menu/sound/processor/options/play/behavior/world/events/town.tscn" id="3_8y47j"]
+[ext_resource type="PackedScene" uid="uid://dm8ntowj5l8x6" path="res://asset/system/scene/object/image/view/ui/menu/sound/processor/options/play/behavior/world/events/boss.tscn" id="4_aag0g"]
+
+[node name="events" type="Node"]
+script = ExtResource("1_80o4i")
+
+[node name="assert" type="Node" parent="."]
+script = ExtResource("2_pdush")
+
+[node name="boss" parent="." instance=ExtResource("4_aag0g")]
+
+[node name="town" parent="." instance=ExtResource("3_8y47j")]

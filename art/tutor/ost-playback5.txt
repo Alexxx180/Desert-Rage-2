@@ -1,0 +1,39 @@
+PLAYBACK TIMELINE = PROGRESS
+
+assert LEVEL_TYPES, LEVEL_NAMES
+
+if LOCATION = LEVEL
+
+set by LEVEL_TYPE, LEVEL_NAME
+
+RAMPAGE:
+1. ambient+heating - name / type
+2. rampage - name / type / hero (%)
+PROGRESS in HAS_BOSS:
+3. name / level type / type boss
+
+end:
+RAMPAGE = 0
+
+if (WORLD progress) town = TOWN_VALUE
+
+PROGRESS += 1
+
+else LOCATION = WORLD
+
+RAMPAGE:
+1. ambient - type
+2. rampage - type / hero (%)
+PROGRESS in HAS_BOSS:
+3. name / type boss
+
+end:
+RAMPAGE = 0
+
+if town == TOWN_VALUE
+-  town theme
+-  town = 0
+
+set LOCATION = LEVEL
+
+PROGRESS += 1
