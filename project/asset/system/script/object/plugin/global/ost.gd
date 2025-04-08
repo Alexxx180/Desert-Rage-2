@@ -17,11 +17,15 @@ var _valid: Dictionary = { "music": false, "sound": false }
 
 func is_valid(type: String) -> bool: return _valid[type]
 
-func get_value(keys: Array[String]) -> Variant:
+func update_ost() -> void:
+	update.emit()
+
+func get_value(ui: Dictionary, keys: Array[String]) -> Dictionary:
 	var context: Variant = user
 	for key in keys:
 		context = context[key]
-	return context
+		ui = ui[key]
+	return { "ui": ui, "user": context }
 
 func _ready() -> void:
 	init_manifest("music")

@@ -1,9 +1,8 @@
 extends BehaviorAction
 
-var rampage: int = 0
+var rampage: int = 4
 var has_boss: bool = false
-
-@onready var caption: String = get_parent().name
+var caption: String
 
 func _set_context(mark: Tick) -> void:
 	var context: Array = mark.blackboard.get_value("context")

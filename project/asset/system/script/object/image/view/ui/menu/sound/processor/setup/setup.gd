@@ -12,11 +12,12 @@ func enumerate(query: SoundtrackTreeQuery) -> void:
 	for key in query.context:
 		selection(query.copy().select(key))
 
-func set_soundtrack(ui: HFlowContainer) -> void:
+func set_soundtrack(options: Node, ui: HFlowContainer) -> void:
 	if SoundtrackSystem.is_valid("music"):
 		var query: SoundtrackTreeQuery = SoundtrackTreeQuery.new()
 		var user: Dictionary = SoundtrackSystem.user.music
 		var copy: Dictionary = SoundtrackSystem.copy.music
 		query.set_data(user, copy)
 		query.set_ui(ui)
+		query.set_ui_tree(options.ui)
 		enumerate(query)

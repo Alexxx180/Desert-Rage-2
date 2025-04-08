@@ -1,16 +1,17 @@
-[gd_scene load_steps=6 format=3 uid="uid://b72vjryp7gko3"]
+[gd_scene load_steps=7 format=3 uid="uid://b72vjryp7gko3"]
 
-[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/sound/processor/options/play/behavior/level/named/named.gd" id="1_t4umh"]
-[ext_resource type="Script" path="res://addons/godot-behavior-tree-plugin/action/action.gd" id="2_uklxi"]
+[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/sound/processor/options/play/behavior/level/typed/named/named.gd" id="1_t4umh"]
+[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/sound/processor/options/play/behavior/level/typed/named/assert.gd" id="2_1whc1"]
 [ext_resource type="PackedScene" uid="uid://x0h38exydwiy" path="res://asset/system/scene/object/image/view/ui/menu/sound/processor/options/play/behavior/level/named/ambient.tscn" id="3_l3n4c"]
 [ext_resource type="PackedScene" uid="uid://bqmdupn0v1oc8" path="res://asset/system/scene/object/image/view/ui/menu/sound/processor/options/play/behavior/level/named/fight/rampage.tscn" id="4_xqkkr"]
 [ext_resource type="PackedScene" uid="uid://c4y8cjl3may6k" path="res://asset/system/scene/object/image/view/ui/menu/sound/processor/options/play/behavior/level/named/fight/boss.tscn" id="5_rsyr3"]
+[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/sound/processor/options/play/behavior/level/typed/named/finish.gd" id="6_ltjjl"]
 
 [node name="origin" type="Node"]
 script = ExtResource("1_t4umh")
 
 [node name="assert" type="Node" parent="."]
-script = ExtResource("2_uklxi")
+script = ExtResource("2_1whc1")
 
 [node name="ambient" parent="." instance=ExtResource("3_l3n4c")]
 
@@ -23,4 +24,4 @@ rampage = 2
 [node name="boss" parent="." instance=ExtResource("5_rsyr3")]
 
 [node name="finish" type="Node" parent="."]
-script = ExtResource("2_uklxi")
+script = ExtResource("6_ltjjl")

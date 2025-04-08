@@ -6,6 +6,7 @@ const PATH: String = "res://asset/resource/media/ost/manifest.json"
 
 var _user: Variant
 var _copy: Variant
+var ui_tree: Dictionary
 var _ui: Control
 var pad: String = "left"
 var caption: String = "initial"
@@ -18,6 +19,9 @@ func decide(key: String) -> Variant:
 
 func set_ui(ui: Control) -> void:
 	_ui = ui
+
+func set_ui_tree(ui: Dictionary) -> void:
+	ui_tree = ui
 
 func set_data(user: Dictionary, original: Dictionary) -> void:
 	_user = user
@@ -32,6 +36,7 @@ func copy(branch: String = pad) -> SoundtrackTreeQuery:
 	var query = SoundtrackTreeQuery.new()
 	query.set_data(_user, _copy)
 	query.set_ui(_ui)
+	query.set_ui_tree(ui_tree)
 	query.pad = branch
 	return query
 
@@ -46,5 +51,7 @@ func nest_body() -> SoundtrackTreeQuery:
 func select(branch: String) -> SoundtrackTreeQuery:
 	_user = decide(branch)
 	_copy = _copy[branch]
+	ui_tree[branch] = {}
+	ui_tree = ui_tree[branch]
 	caption = branch
 	return self
