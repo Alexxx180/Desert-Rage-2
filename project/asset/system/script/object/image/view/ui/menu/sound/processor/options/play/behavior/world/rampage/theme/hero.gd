@@ -1,10 +1,6 @@
 extends BehaviorAction
 
-enum { MIN = 0, MAX = 100 }
-
-func set_rampage(board: BehaviorBlackboard) -> void:
-	var value: int = board.get_value("rampage")
-	board.set_value("rampage", value + 1)
+enum { MIN = 0, MAX = 100, RAMPAGE = 1 }
 
 func skip_track(mix: int) -> bool:
 	return mix == MIN or (mix != MAX and randi_range(mix, MAX) != MAX)
@@ -14,5 +10,13 @@ func tick(mark: Tick) -> int:
 	if skip_track(hero.mix): return FAILED
 	
 	mark.actor.player.load_music(hero.set.ray)
-	set_rampage(mark.blackboard)
+	mark.blackboard.set_value("rampage", RAMPAGE + 1)
 	return OK
+
+func set_playback(options: Node, progress: Dictionary) -> void:
+	progress.rampage = RAMPAGE
+	var named: Array[Node] = get_children()
+	var i: int = named.size()
+	while i > 1:
+		i -= 1
+		named[i].set_playback(options, progress.duplicate())

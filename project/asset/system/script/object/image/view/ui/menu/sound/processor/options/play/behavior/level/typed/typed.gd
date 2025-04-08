@@ -11,8 +11,8 @@ func set_playback(options: Node) -> void:
 	var named: Array[Node] = get_children()
 	var i: int = named.size()
 	var progress: Dictionary = {
-		"level": { "active": true, "type": _type },
-		"path": ["level", name]
+		"level": { "active": true, "type": _type, "name": 0 },
+		"rampage": 0, "event": 0, "path": ["level", name]
 	}
 	while i > 1:
 		i -= 1
