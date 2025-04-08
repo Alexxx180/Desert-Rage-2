@@ -10,6 +10,7 @@ var caption: int:
 
 func _ready() -> void: check.caption = name
 
-func set_playback(options: Node, path: Array[String]) -> void:
-	path.push_back(name)
-	theme.set_playback(options, path)
+func set_playback(options: Node, progress: Dictionary) -> void:
+	progress.path.push_back(name)
+	progress.rampage = check.rampage
+	theme.set_playback(options, progress)

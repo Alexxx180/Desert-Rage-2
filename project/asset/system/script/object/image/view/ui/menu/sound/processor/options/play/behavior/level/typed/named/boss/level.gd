@@ -1,13 +1,25 @@
 extends BehaviorAction
 
-func get_context(mark: Tick) -> Dictionary:
-	var context: Array[String] = mark.blackboard.get_value("context")
-	context[2] = "type"
-	return SoundtrackSystem.get_value(context)
+var _context: Dictionary
+
+func mod_path(path: Array[String]) -> Array[String]:
+	path[2] = "type"
+	return path
 
 func tick(mark: Tick) -> int:
-	var track: String = get_context(mark).boss.set[0]
+	var track: String = _context.boss.set[0]
 	if track != "":
 		mark.actor.player.load_music(track)
 		return OK
 	return FAILED
+
+func set_playback(options: Node, progress: Dictionary) -> void:
+	var path: Array[String] = mod_path(progress.path)
+	var context: Dictionary = SoundtrackSystem.get_value(options.ui, path)
+	
+	var ui: Dictionary = context.ui
+	_context = context.user
+	var i: int = ui.set.size()
+	while i > 0:
+		i -= 1
+		options.connect_ui(ui.set[i], _context.set[i], progress)
