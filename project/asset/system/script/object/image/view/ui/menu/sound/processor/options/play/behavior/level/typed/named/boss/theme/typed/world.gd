@@ -14,6 +14,10 @@ func set_playback(options: Node, progress: Dictionary) -> void:
 	_context = SoundtrackSystem.user.world.boss.type
 	var ui: Dictionary = options.ui.world.boss.type
 	var i: int = ui.set.size()
-	while i > 0:
-		i -= 1
-		options.connect_ui(ui.set[i], _context.set[i], progress)
+	var entry: Dictionary = {
+		"i": ui.size(), "ui": ui,
+		"ost": _context.set
+	}
+	while entry.i > 0:
+		entry.i -= 1
+		options.connect_ui(entry.duplicate(), progress)

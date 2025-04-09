@@ -7,8 +7,8 @@ extends Node
 func set_playback(options: Node) -> void:
 	behavior.set_playback(options)
 
-func play_theme(tracks: Array, i: int, progress: Dictionary) -> void:
-	player.load_music(tracks[i])
+func play_theme(entry: Dictionary, progress: Dictionary) -> void:
+	player.load_music(entry.ost[entry.i])
 	board.set_value("level", progress.level.active)
 	board.set_value("level_type", progress.level.type)
 	board.set_value("level_name", progress.level.name)

@@ -1,13 +1,25 @@
 extends Node
 
-var _leaf
+var enabled: bool = false
 
-func add_leaf(branch: Control) -> void:
-	var next: Control = _leaf.instantiate()
-	branch.add_child(next)
-
-func set_theme(group: Array, tracks: Array[String], i: int) -> void:
+func search_leaf(setter: Callable) -> void:
 	var metadata: Dictionary = {}
 	if SoundtrackSystem.get_file(metadata):
-		add_leaf(group[i].get_parent())
-		tracks.insert(i, metadata.track)
+		setter.call(metadata)
+
+func search_theme(entry: Dictionary) -> void:
+	if enabled:
+		search_leaf(func(metadata: Dictionary):
+			var i: int = entry.i
+			entry.ui[i].set_metadata(metadata)
+			entry.ost[i] = metadata.track
+		)
+
+func search_fight(entry: Dictionary, status: String) -> void:
+	if enabled:
+		search_leaf(func(metadata: Dictionary):
+			var i: int = entry.i
+			entry.ui[i].content[status].set_metadata(metadata)
+			entry.ost[i][status] = metadata.track
+		)
+

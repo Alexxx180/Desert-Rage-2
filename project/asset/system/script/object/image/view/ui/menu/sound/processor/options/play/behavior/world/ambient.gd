@@ -15,8 +15,11 @@ func tick(mark: Tick) -> int:
 func set_playback(options: Node, progress: Dictionary) -> void:
 	progress.rampage = 0
 	_context = SoundtrackSystem.user.world.ambient.type
-	var ui: Dictionary = options.ui.world.ambient.type
-	var i: int = ui.set.size()
-	while i > 0:
-		i -= 1
-		options.connect_ui(ui.set[i], _context.set[i], progress)
+	var ui: Array[String] = options.ui.world.ambient.type
+	var entry: Dictionary = {
+		"i": ui.size(), "ui": ui,
+		"tracks": _context.set
+	}
+	while entry.i > 0:
+		entry.i -= 1
+		options.connect_ui(entry.duplicate(), progress)

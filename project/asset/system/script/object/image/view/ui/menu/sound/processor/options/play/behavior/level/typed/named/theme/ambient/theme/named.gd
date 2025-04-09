@@ -21,7 +21,12 @@ func set_playback(options: Node, progress: Dictionary) -> void:
 	
 	var ui: Dictionary = context.ui
 	_context = context.user
-	var i: int = ui.set.size()
-	while i > 0:
-		i -= 1
-		options.connect_ui(ui.set[i], _context.set[i], progress)
+	var entry: Dictionary = {
+		"i": context.ui.set.size(),
+		"ui": context.ui.set,
+		"tracks": _context.set
+	}
+	while entry.i > 0:
+		entry.i -= 1
+		var leaf: HBoxContainer = entry.ui[entry.i]
+		leaf.set_actions(options, entry.duplicate, progress)

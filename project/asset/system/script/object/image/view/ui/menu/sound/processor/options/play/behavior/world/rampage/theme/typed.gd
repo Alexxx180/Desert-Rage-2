@@ -19,7 +19,10 @@ func set_playback(options: Node, progress: Dictionary) -> void:
 	progress.rampage = HeroBattleTheme.RAMPAGE
 	_context = SoundtrackSystem.user.world.rampage.type
 	var ui: Dictionary = options.ui.world.rampage.type
-	var i: int = ui.size()
-	while i > 1:
-		i -= 1
-		options.connect_ui(options.ui[i], _context[i], progress)
+	var entry: Dictionary = {
+		"i": ui.size(), "ui": ui,
+		"tracks": _context.set
+	}
+	while entry.i > 0:
+		entry.i -= 1
+		options.connect_ui(entry.duplicate(), progress)
