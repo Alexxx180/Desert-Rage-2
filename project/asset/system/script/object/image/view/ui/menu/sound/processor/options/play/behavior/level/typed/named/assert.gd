@@ -3,5 +3,5 @@ extends BehaviorAction
 var caption: int = 0
 
 func tick(mark: Tick) -> int:
-	var value = mark.blackboard.get_value("level_name")
-	return OK if value == caption else FAILED
+	var key: String = "level_name"
+	return OK if mark.blackboard.compare(key, caption) else FAILED

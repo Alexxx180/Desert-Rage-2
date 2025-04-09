@@ -8,10 +8,10 @@ func mod_path(path: Array[String]) -> Array[String]:
 	return path
 
 func tick(mark: Tick) -> int:
-	var value: int = mark.blackboard.get_value("level_name")
-	if value == caption:
+	var key: String = "level_name"
+	if mark.blackboard.compare(key, caption):
 		mark.actor.player.load_music(_context.set[0])
-		mark.blackboard.set_value("level_name", value + 1)
+		mark.blackboard.set_value(key, caption + 1)
 		return OK
 	return FAILED
 

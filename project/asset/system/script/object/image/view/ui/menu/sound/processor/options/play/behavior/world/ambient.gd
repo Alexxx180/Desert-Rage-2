@@ -5,10 +5,10 @@ const RAMPAGE: int = 0
 var _context: Dictionary
 
 func tick(mark: Tick) -> int:
-	var value: int = mark.blackboard.get_value("rampage")
-	if value == RAMPAGE:
+	var key: String = "rampage"
+	if mark.blackboard.compare(key, RAMPAGE):
 		mark.actor.player.load_music(_context.set[0])
-		mark.blackboard.set_value("rampage", value + 1)
+		mark.blackboard.set_value(key, RAMPAGE + 1)
 		return OK
 	return FAILED
 

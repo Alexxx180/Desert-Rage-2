@@ -1,22 +1,27 @@
 extends BehaviorAction
 
+class_name HeroBattleTheme
+
+var _context: Dictionary
+
 enum { MIN = 0, MAX = 100, RAMPAGE = 1 }
 
-func skip_track(mix: int) -> bool:
-	return mix == MIN or (mix != MAX and randi_range(mix, MAX) != MAX)
+func probable(mix: int) -> bool:
+	return randi_range(mix, MAX) == MAX
+
+func use_track(mix: int) -> bool:
+	return mix != MIN and (mix == MAX or probable(mix))
 
 func tick(mark: Tick) -> int:
-	var hero: Dictionary = SoundtrackSystem.user.world.rampage.name
-	if skip_track(hero.mix): return FAILED
-	
-	mark.actor.player.load_music(hero.set.ray)
-	mark.blackboard.set_value("rampage", RAMPAGE + 1)
-	return OK
+	if use_track(_context.mix):
+		mark.actor.player.load_music(_context.set.ray)
+		mark.blackboard.set_value("rampage", RAMPAGE + 1)
+		return OK
+	return FAILED
 
 func set_playback(options: Node, progress: Dictionary) -> void:
-	progress.rampage = RAMPAGE
-	var named: Array[Node] = get_children()
-	var i: int = named.size()
-	while i > 1:
-		i -= 1
-		named[i].set_playback(options, progress.duplicate())
+	progress.rampage = HeroBattleTheme.RAMPAGE
+	_context = SoundtrackSystem.user.world.rampage.name
+	var ui: Dictionary = options.ui.world.rampage.name
+	for hero in _context:
+		options.connect_ui(options.ui.set[hero], _context[hero], progress)

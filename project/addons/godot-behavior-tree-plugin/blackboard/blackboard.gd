@@ -19,6 +19,12 @@ func get_value(key, behavior_tree = null, node_scope = null) -> Variant:
 	var memory := _get_memory(behavior_tree, node_scope)
 	return memory[key] if memory.has(key) else null
 
+func add_value(key: String, value: int) -> void:
+	set_value(key, get_value(key) + value)
+
+func compare(key: Variant, value: Variant) -> bool:
+	return get_value(key) == value
+
 func _extract(behavior_tree: Variant, node_scope) -> Dictionary:
 	var memory: Dictionary = _get_tree_memory(behavior_tree)
 	if node_scope: memory = _get_node_memory(memory, node_scope)

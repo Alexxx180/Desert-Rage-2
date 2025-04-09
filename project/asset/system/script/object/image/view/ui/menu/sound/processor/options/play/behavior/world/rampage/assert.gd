@@ -3,5 +3,5 @@ extends BehaviorAction
 const RAMPAGE: int = 1
 
 func tick(mark: Tick) -> int:
-	var value: int = mark.blackboard.get_value("rampage")
-	return OK if value == RAMPAGE else FAILED
+	var key: String = "rampage"
+	return OK if mark.blackboard.compare(key, RAMPAGE) else FAILED
