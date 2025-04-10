@@ -21,11 +21,11 @@ func update_ost() -> void:
 	update.emit()
 
 func get_value(ui: Dictionary, keys: Array[String]) -> Dictionary:
-	var context: Variant = user
+	var context: Dictionary = { "ui": ui, "ost": user }
 	for key in keys:
-		context = context[key]
-		ui = ui[key]
-	return { "ui": ui, "user": context }
+		context.ost = context.ost[key]
+		context.ui = context.ui[key]
+	return context
 
 func _ready() -> void:
 	init_manifest("music")

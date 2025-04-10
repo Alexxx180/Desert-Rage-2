@@ -1,7 +1,13 @@
-extends BehaviorAction
+extends BehaviorActionPlayback
 
 var caption: String
-var _context: Dictionary
+
+func get_context(options: Node, progress: Dictionary) -> Dictionary:
+	return {
+		"ost": SoundtrackSystem.user.world.boss.name,
+		"ui": options.ui.world.boss.name,
+		"progress": progress
+	}
 
 func tick(mark: Tick) -> int:
 	var track: String = _context[caption]
@@ -9,11 +15,3 @@ func tick(mark: Tick) -> int:
 		mark.actor.player.load_music(track)
 		return OK
 	return FAILED
-
-func set_playback(options: Node, progress: Dictionary) -> void:
-	_context = SoundtrackSystem.user.world.boss.name
-	var ui: Dictionary = options.ui.world.boss.name
-	var i: int = ui.set.size()
-	while i > 0:
-		i -= 1
-		options.connect_ui(ui[i], _context[i], progress)

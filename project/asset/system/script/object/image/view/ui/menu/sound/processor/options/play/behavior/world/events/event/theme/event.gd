@@ -6,11 +6,11 @@ class_name BehaviorActionEvent
 
 var _key: String = "event"
 
-func _determine_track(player: AudioStreamPlayer, ost: Dictionary) -> void:
-	if ost.name[name] == "":
-		player.load_music(ost.type.set[0])
+func _determine_track(player: AudioStreamPlayer) -> void:
+	if _context.name[name] == "":
+		player.load_music(_context.type.set[0])
 	else:
-		player.load_music(ost.name[name])
+		player.load_music(_context.name[name])
 
 func set_track(mark: Tick) -> void:
 	set_progress(mark.blackboard)

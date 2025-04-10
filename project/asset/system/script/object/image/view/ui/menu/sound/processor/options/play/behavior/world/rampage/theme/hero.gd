@@ -1,10 +1,16 @@
-extends BehaviorAction
+extends BehaviorActionPlayback
 
 class_name HeroBattleTheme
 
-var _context: Dictionary
-
 enum { MIN = 0, MAX = 100, RAMPAGE = 1 }
+
+func get_context(options: Node, progress: Dictionary) -> Dictionary:
+	progress.rampage = HeroBattleTheme.RAMPAGE
+	return {
+		"ost": SoundtrackSystem.user.world.rampage.name,
+		"ui": options.ui.world.rampage.name.set,
+		"progress": progress
+	}
 
 func probable(mix: int) -> bool:
 	return randi_range(mix, MAX) == MAX
@@ -18,10 +24,3 @@ func tick(mark: Tick) -> int:
 		mark.blackboard.set_value("rampage", RAMPAGE + 1)
 		return OK
 	return FAILED
-
-func set_playback(options: Node, progress: Dictionary) -> void:
-	progress.rampage = HeroBattleTheme.RAMPAGE
-	_context = SoundtrackSystem.user.world.rampage.name
-	var ui: Dictionary = options.ui.world.rampage.name
-	for hero in _context:
-		options.connect_ui(options.ui.set[hero], _context[hero], progress)

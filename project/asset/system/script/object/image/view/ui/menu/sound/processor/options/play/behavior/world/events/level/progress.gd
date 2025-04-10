@@ -1,4 +1,4 @@
-extends BehaviorAction
+extends BehaviorActionPlayback
 
 class_name BehaviorLevelProgress
 
