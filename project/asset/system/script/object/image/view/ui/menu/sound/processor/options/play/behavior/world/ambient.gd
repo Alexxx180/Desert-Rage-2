@@ -6,8 +6,7 @@ func get_context(options: Node, progress: Dictionary) -> Dictionary:
 	progress.rampage = RAMPAGE
 	return {
 		"ost": SoundtrackSystem.user.world.ambient.type,
-		"ui": options.ui.world.ambient.type,
-		"progress": progress
+		"ui": options.ui.world.ambient.type
 	}
 
 func tick(mark: Tick) -> int:

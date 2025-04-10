@@ -10,7 +10,11 @@ var caption: int:
 
 func _ready() -> void: check.caption = name
 
-func set_playback(options: Node, progress: Dictionary) -> void:
+func get_context(options: Node, progress: Dictionary) -> Dictionary:
 	progress.path.push_back(name)
 	progress.rampage = check.rampage
-	theme.set_playback(options, progress)
+	# theme.set_playback(options, progress)
+	return SoundtrackSystem.get_value(options.ui, progress.path)
+
+func set_actions(options: Node, context: Dictionary) -> void:
+	options.set_ambient_theme(context.duplicate())

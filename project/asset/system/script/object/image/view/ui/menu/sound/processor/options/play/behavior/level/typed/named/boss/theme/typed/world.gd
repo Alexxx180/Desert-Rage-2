@@ -1,10 +1,9 @@
 extends BehaviorActionPlayback
 
-func get_context(options: Node, progress: Dictionary) -> Dictionary:
+func get_context(options: Node, _progress: Dictionary) -> Dictionary:
 	return {
 		"ost": SoundtrackSystem.user.world.boss.type,
-		"ui": options.ui.world.boss.type,
-		"progress": progress
+		"ui": options.ui.world.boss.type
 	}
 
 func _set_track(mark: Tick) -> void:

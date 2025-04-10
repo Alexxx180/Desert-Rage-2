@@ -9,8 +9,7 @@ func get_context(options: Node, progress: Dictionary) -> Dictionary:
 	var context: Dictionary = SoundtrackSystem.get_value(options.ui, path)
 	return {
 		"ost": context.user,
-		"ui": context.ui.set,
-		"progress": progress
+		"ui": context.ui.set
 	}
 
 func tick(mark: Tick) -> int:

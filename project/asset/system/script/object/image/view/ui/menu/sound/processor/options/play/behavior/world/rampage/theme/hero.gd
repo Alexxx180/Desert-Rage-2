@@ -8,18 +8,17 @@ func get_context(options: Node, progress: Dictionary) -> Dictionary:
 	progress.rampage = HeroBattleTheme.RAMPAGE
 	return {
 		"ost": SoundtrackSystem.user.world.rampage.name,
-		"ui": options.ui.world.rampage.name.set,
-		"progress": progress
+		"ui": options.ui.world.rampage.name.set
 	}
 
-func probable(mix: int) -> bool:
-	return randi_range(mix, MAX) == MAX
+func set_actions(options: Node, context: Dictionary) -> void:
+	options.set_named_theme(context.duplicate())
 
-func use_track(mix: int) -> bool:
-	return mix != MIN and (mix == MAX or probable(mix))
+func probable(mix: int) -> bool:
+	return mix != MIN and (mix == MAX or randi_range(mix, MAX) == MAX)
 
 func tick(mark: Tick) -> int:
-	if use_track(_context.mix):
+	if probable(_context.mix):
 		mark.actor.player.load_music(_context.set.ray)
 		mark.blackboard.set_value("rampage", RAMPAGE + 1)
 		return OK

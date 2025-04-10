@@ -6,11 +6,9 @@ func mod_path(path: Array[String]) -> Array[String]:
 	return path
 
 func get_context(options: Node, progress: Dictionary) -> Dictionary:
-	var path: Array[String] = mod_path(progress.path)
-	var context: Dictionary = SoundtrackSystem.get_value(options.ui, path)
 	progress.rampage = HeroBattleTheme.RAMPAGE
-	context.progress = progress
-	return context
+	var path: Array[String] = mod_path(progress.path)
+	return SoundtrackSystem.get_value(options.ui, path)
 
 func tick(mark: Tick) -> int:
 	mark.actor.player.load_music(_context.set[0])

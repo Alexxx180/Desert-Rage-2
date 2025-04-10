@@ -7,7 +7,7 @@ func search_leaf(setter: Callable) -> void:
 	if SoundtrackSystem.get_file(metadata):
 		setter.call(metadata)
 
-func search_theme(entry: Dictionary) -> void:
+func for_theme(entry: Dictionary) -> void:
 	if enabled:
 		search_leaf(func(metadata: Dictionary):
 			var i: int = entry.i
@@ -15,7 +15,7 @@ func search_theme(entry: Dictionary) -> void:
 			entry.ost[i] = metadata.track
 		)
 
-func search_fight(entry: Dictionary, status: String) -> void:
+func for_ambient(entry: Dictionary, status: String) -> void:
 	if enabled:
 		search_leaf(func(metadata: Dictionary):
 			var i: int = entry.i

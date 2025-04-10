@@ -4,8 +4,7 @@ func get_context(options: Node, progress: Dictionary) -> Dictionary:
 	progress.rampage = HeroBattleTheme.RAMPAGE
 	return {
 		"ost": SoundtrackSystem.user.world.rampage.type.set,
-		"ui": options.ui.world.rampage.type.set,
-		"progress": progress
+		"ui": options.ui.world.rampage.type.set
 	}
 
 func set_track(mark: Tick) -> void:

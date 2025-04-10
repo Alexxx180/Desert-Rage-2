@@ -6,6 +6,9 @@ class_name BehaviorActionEvent
 
 var _key: String = "event"
 
+func set_actions(options: Node, context: Dictionary) -> void:
+	options.set_event_theme(context.duplicate())
+
 func _determine_track(player: AudioStreamPlayer) -> void:
 	if _context.name[name] == "":
 		player.load_music(_context.type.set[0])

@@ -4,13 +4,30 @@ extends Node
 @onready var behavior: BehaviorTree = $behavior
 @onready var board: BehaviorBlackboard = $blackboard
 
+var enabled: bool = false
+
 func set_playback(options: Node) -> void:
 	behavior.set_playback(options)
 
-func play_theme(entry: Dictionary, progress: Dictionary) -> void:
+func _set_common(flags: Dictionary) -> void:
+	board.set_value("rampage", flags.rampage)
+	board.set_value("event", flags.event)
+
+func _set_level(flags: Dictionary) -> void:
+	board.set_value("level", flags.active)
+	board.set_value("level_type", flags.type)
+	board.set_value("level_name", flags.name)
+
+func _set_progress(progress: Dictionary) -> void:
+	_set_level(progress.level)
+	_set_common(progress)
+
+func as_theme(entry: Dictionary) -> void:
+	if not enabled: return
 	player.load_music(entry.ost[entry.i])
-	board.set_value("level", progress.level.active)
-	board.set_value("level_type", progress.level.type)
-	board.set_value("level_name", progress.level.name)
-	board.set_value("rampage", progress.rampage)
-	board.set_value("event", progress.event)
+	_set_progress(entry.progress)
+
+func as_ambient(entry: Dictionary, status: String) -> void:
+	if not enabled: return
+	player.load_music(entry.ost[entry.i][status])
+	_set_progress(entry.progress)

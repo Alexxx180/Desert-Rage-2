@@ -2,7 +2,7 @@ extends Node
 
 var enabled: bool = false
 
-func delete_theme(entry: Dictionary) -> void:
+func from_theme(entry: Dictionary) -> void:
 	if enabled and entry.ost.size() > 1:
 		var i: int = entry.i
 		var leaf: Control = entry.ui[i]
