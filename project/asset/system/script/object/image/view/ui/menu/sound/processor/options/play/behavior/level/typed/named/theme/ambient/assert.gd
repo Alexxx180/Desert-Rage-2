@@ -2,7 +2,6 @@ extends BehaviorAction
 
 var rampage: int = BossSoundtrack.RAMPAGE
 var has_boss: bool = false
-var caption: String
 
 func tick(mark: Tick) -> int:
 	var key: String = "rampage"

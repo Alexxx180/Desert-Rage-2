@@ -5,6 +5,10 @@ var fight: Resource = preload("res://asset/system/scene/object/image/view/ui/men
 
 var enabled: bool = false
 
+func on_toggle(toggled: bool) -> void:
+	enabled = toggled
+	print(name + " enabled: ", enabled)
+
 func _add_leaf(entry: Dictionary, kind: Resource) -> void:
 	var i: int = entry.i
 	var leaf: Control = kind.instatiate()
@@ -21,4 +25,3 @@ func to_ambient(entry: Dictionary) -> void:
 	if not enabled: return
 	_add_leaf(entry, fight)
 	entry.ost.insert(entry.i, { "ambient": "", "heating": "", "rampage": "" })
-

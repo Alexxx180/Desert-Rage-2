@@ -1,11 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://b44vswccd7un0"]
+[gd_scene load_steps=5 format=3 uid="uid://b44vswccd7un0"]
 
 [ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/sound/processor/options/play/play.gd" id="1_c1vfi"]
 [ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/sound/processor/options/play/player.gd" id="2_frttp"]
-[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/sound/processor/options/play/behavior/behavior.gd" id="3_4pln0"]
-[ext_resource type="Script" path="res://addons/godot-behavior-tree-plugin/selector/selector.gd" id="3_c3uej"]
-[ext_resource type="PackedScene" uid="uid://ck1q604rnidgx" path="res://asset/system/scene/object/image/view/ui/menu/sound/processor/options/play/behavior/level/level.tscn" id="4_x5772"]
-[ext_resource type="PackedScene" uid="uid://di78ig3lqhtlo" path="res://asset/system/scene/object/image/view/ui/menu/sound/processor/options/play/behavior/world/world.tscn" id="5_g3wfy"]
+[ext_resource type="PackedScene" uid="uid://d2amwe7fr8ig7" path="res://asset/system/scene/object/image/view/ui/menu/sound/processor/options/play/behavior/behavior.tscn" id="3_n50p8"]
 [ext_resource type="Script" path="res://addons/godot-behavior-tree-plugin/blackboard/blackboard.gd" id="6_ht8s2"]
 
 [node name="play" type="Node"]
@@ -14,15 +11,9 @@ script = ExtResource("1_c1vfi")
 [node name="player" type="AudioStreamPlayer" parent="."]
 script = ExtResource("2_frttp")
 
-[node name="behavior" type="Node" parent="."]
-script = ExtResource("3_4pln0")
-
-[node name="selector" type="Node" parent="behavior"]
-script = ExtResource("3_c3uej")
-
-[node name="level" parent="behavior/selector" instance=ExtResource("4_x5772")]
-
-[node name="world" parent="behavior/selector" instance=ExtResource("5_g3wfy")]
+[node name="behavior" parent="." instance=ExtResource("3_n50p8")]
 
 [node name="blackboard" type="Node" parent="."]
 script = ExtResource("6_ht8s2")
+
+[connection signal="finished" from="player" to="." method="play_progress"]

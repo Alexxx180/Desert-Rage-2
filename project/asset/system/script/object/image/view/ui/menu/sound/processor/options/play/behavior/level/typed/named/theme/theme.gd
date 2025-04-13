@@ -3,16 +3,13 @@ extends BehaviorSequence
 @onready var rampage: Array[BehaviorSequence] = [$ambient, $heating, $rampage]
 
 var caption: int:
-	set(value):
-		for status in rampage:
-			status.caption = value
+	set(value): set_ambient(func(a): a.caption = value)
+var type: int:
+	set(value): set_ambient(func(a): a.type = value)
 
-func set_playback(options: Node, progress: Dictionary) -> void:
+func set_ambient(feedback: Callable) -> void:
 	for status in rampage:
-		status.set_playback(options, progress.duplicate())
+		feedback.call(status)
 
-func get_context(options: Node, progress: Dictionary) -> Dictionary:
-	return SoundtrackSystem.get_value(options.ui, progress.path)
-
-func set_actions(options: Node, context: Dictionary) -> void:
-	options.set_ambient_theme(context.duplicate())
+func set_ost(music: Node) -> void:
+	set_ambient(func(a): a.set_ost(music))

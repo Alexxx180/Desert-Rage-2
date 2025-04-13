@@ -2,22 +2,20 @@ extends BehaviorAction
 
 class_name BehaviorActionPlayback
 
-var _context: Variant
+var _ost: Variant
 
-func get_context(_options: Node, _progress: Dictionary) -> Dictionary:
-	return Defaults.DICT
+static func get_default_progress() -> Dictionary:
+	return {
+		"level": { "active": false, "name": 0, "type": 0 },
+		"rampage": 0, "event": 0
+	}
 
-func set_playback(options: Node, progress: Dictionary) -> void:
-	var context: Dictionary = get_context(options, progress)
-	_context = context.ost
-	_set_options(options, context, progress)
-
-func set_actions(options: Node, context: Dictionary) -> void:
-	options.set_leaf_theme(context.duplicate())
-
-func _set_options(options: Node, context: Dictionary, progress: Dictionary) -> void:
-	context.progress = progress
-	context.i = context.ui.size()
-	while context.i > 0:
-		context.i -= 1
-		set_actions(options, context)
+func get_track() -> Variant:
+	var track: String = _ost.set[_ost.at]
+	var size: int = _ost.set.size()
+	if _ost.mix:
+		var next: int = randi_range(_ost.at, _ost.at + size - 1)
+		_ost.at = (next + 1) % size
+	else:
+		_ost.at = (_ost.at + 1) % size
+	return track

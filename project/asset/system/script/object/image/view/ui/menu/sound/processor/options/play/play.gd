@@ -6,6 +6,13 @@ extends Node
 
 var enabled: bool = false
 
+func play_progress() -> void:
+	behavior.tick(self, board)
+
+func on_toggle(toggled: bool) -> void:
+	enabled = toggled
+	print(name + " enabled: ", enabled)
+
 func set_playback(options: Node) -> void:
 	behavior.set_playback(options)
 

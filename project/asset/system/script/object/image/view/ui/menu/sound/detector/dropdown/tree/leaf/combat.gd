@@ -7,3 +7,6 @@ extends HBoxContainer
 }
 
 var i: int
+
+func set_options(options: Node, context: Dictionary) -> void:
+	options.set_ambient_theme(context)

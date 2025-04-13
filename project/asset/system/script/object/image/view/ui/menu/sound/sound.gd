@@ -1,5 +1,9 @@
 extends CanvasLayer
 
+@onready var detector: Control = $detector
+
 func _ready() -> void:
-	$processor.set_soundtrack($detector/margin/soundtrack/scroll/margin/dropdown)
+	#var dialog: FileDialog = FileDialog.new()
+#	print("OPTION: ", dialog.get_option_values(0))
+	$processor.set_soundtrack(detector.soundtrack)
  

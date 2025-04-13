@@ -1,14 +1,23 @@
-[gd_scene load_steps=5 format=3 uid="uid://dkvbyrp671tuf"]
+[gd_scene load_steps=7 format=3 uid="uid://dkvbyrp671tuf"]
 
-[ext_resource type="Script" path="res://addons/godot-behavior-tree-plugin/selector/selector.gd" id="1_80o4i"]
+[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/sound/processor/options/play/behavior/world/events/events.gd" id="1_7ahg1"]
+[ext_resource type="Script" path="res://addons/godot-behavior-tree-plugin/selector/selector.gd" id="2_pt1s1"]
+[ext_resource type="Script" path="res://addons/godot-behavior-tree-plugin/action/action.gd" id="3_7xw7q"]
 [ext_resource type="PackedScene" uid="uid://basggy5rqu74q" path="res://asset/system/scene/object/image/view/ui/menu/sound/processor/options/play/behavior/world/events/scene.tscn" id="4_582eo"]
 [ext_resource type="PackedScene" uid="uid://di2qg1usmgxqr" path="res://asset/system/scene/object/image/view/ui/menu/sound/processor/options/play/behavior/world/events/boss.tscn" id="4_aag0g"]
 [ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/sound/processor/options/play/behavior/world/events/level/level.gd" id="7_ls5o8"]
 
 [node name="events" type="Node"]
-script = ExtResource("1_80o4i")
+script = ExtResource("1_7ahg1")
 
-[node name="chaos" parent="." instance=ExtResource("4_582eo")]
+[node name="chaos" type="Node" parent="."]
+script = ExtResource("2_pt1s1")
+
+[node name="named" type="Node" parent="chaos"]
+script = ExtResource("3_7xw7q")
+
+[node name="typed" type="Node" parent="chaos"]
+script = ExtResource("3_7xw7q")
 
 [node name="sandworm" parent="." instance=ExtResource("4_aag0g")]
 event = 1

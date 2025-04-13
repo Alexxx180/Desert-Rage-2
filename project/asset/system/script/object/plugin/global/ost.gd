@@ -20,8 +20,13 @@ func is_valid(type: String) -> bool: return _valid[type]
 func update_ost() -> void:
 	update.emit()
 
-func get_value(ui: Dictionary, keys: Array[String]) -> Dictionary:
-	var context: Dictionary = { "ui": ui, "ost": user }
+func get_file(metadata: Dictionary) -> bool:
+	# var dialog: FileDialog = FileDialog.new()
+	metadata.track = "F:/media/ost/music/songs/group/english/p-t/t/Three_Days_Grace_-_I_Hate_Everything_About_You_47958582.mp3"
+	return true
+
+func get_value(ui: Dictionary, keys: Array) -> Dictionary:
+	var context: Dictionary = { "ui": ui, "ost": user["music"] }
 	for key in keys:
 		context.ost = context.ost[key]
 		context.ui = context.ui[key]

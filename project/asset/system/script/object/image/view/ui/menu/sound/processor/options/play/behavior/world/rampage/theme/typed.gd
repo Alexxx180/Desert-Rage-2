@@ -1,15 +1,10 @@
 extends BehaviorActionPlayback
 
-func get_context(options: Node, progress: Dictionary) -> Dictionary:
-	progress.rampage = HeroBattleTheme.RAMPAGE
-	return {
-		"ost": SoundtrackSystem.user.world.rampage.type.set,
-		"ui": options.ui.world.rampage.type.set
-	}
+func set_ost(music: Node) -> void:
+	_ost = music.world.typed.ost.rampage.theme
 
 func set_track(mark: Tick) -> void:
-	var track: String = _context[0]
-	mark.actor.player.load_music(track)
+	mark.actor.player.load_music(get_track())
 
 func set_fight(board: BehaviorBlackboard) -> void:
 	var value: int = HeroBattleTheme.RAMPAGE + 1

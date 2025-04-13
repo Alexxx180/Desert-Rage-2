@@ -1,15 +1,11 @@
 extends BehaviorActionPlayback
 
-func mod_path(path: Array[String]) -> Array[String]:
-	path[2] = "type"
-	path.push_back("theme")
-	return path
+var type: int = 0
+var status: String
 
-func get_context(options: Node, progress: Dictionary) -> Dictionary:
-	progress.rampage = HeroBattleTheme.RAMPAGE
-	var path: Array[String] = mod_path(progress.path)
-	return SoundtrackSystem.get_value(options.ui, path)
+func set_ost(music: Node) -> void:
+	_ost = music.level.typed.ost.theme[type]
 
 func tick(mark: Tick) -> int:
-	mark.actor.player.load_music(_context.set[0])
+	mark.actor.player.load_music(get_track()[status])
 	return OK

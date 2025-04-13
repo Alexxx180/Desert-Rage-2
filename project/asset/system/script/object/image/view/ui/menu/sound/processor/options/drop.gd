@@ -2,6 +2,10 @@ extends Node
 
 var enabled: bool = false
 
+func on_toggle(toggled: bool) -> void:
+	enabled = toggled
+	print(name + " enabled: ", enabled)
+
 func from_theme(entry: Dictionary) -> void:
 	if enabled and entry.ost.size() > 1:
 		var i: int = entry.i
@@ -13,4 +17,3 @@ func from_theme(entry: Dictionary) -> void:
 		while j > i:
 			j -= 1
 			entry.ui[j].i = j
-

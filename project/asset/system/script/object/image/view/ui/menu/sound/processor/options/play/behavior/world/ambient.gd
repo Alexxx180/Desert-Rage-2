@@ -2,17 +2,13 @@ extends BehaviorActionPlayback
 
 const RAMPAGE: int = 0
 
-func get_context(options: Node, progress: Dictionary) -> Dictionary:
-	progress.rampage = RAMPAGE
-	return {
-		"ost": SoundtrackSystem.user.world.ambient.type,
-		"ui": options.ui.world.ambient.type
-	}
+func set_ost(music: Node) -> void:
+	_ost = music.world.typed.ost.ambient
 
 func tick(mark: Tick) -> int:
 	var key: String = "rampage"
 	if mark.blackboard.compare(key, RAMPAGE):
-		mark.actor.player.load_music(_context[0])
+		mark.actor.player.load_music(get_track())
 		mark.blackboard.set_value(key, RAMPAGE + 1)
 		return OK
 	return FAILED

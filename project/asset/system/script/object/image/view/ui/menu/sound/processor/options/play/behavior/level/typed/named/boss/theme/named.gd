@@ -2,14 +2,11 @@ extends BehaviorActionPlayback
 
 var caption: String
 
-func get_context(options: Node, _progress: Dictionary) -> Dictionary:
-	return {
-		"ost": SoundtrackSystem.user.world.boss.name,
-		"ui": options.ui.world.boss.name
-	}
+func set_ost(music: Node) -> void:
+	_ost = music.world.named.boss[caption]
 
 func tick(mark: Tick) -> int:
-	var track: String = _context[caption]
+	var track: String = _ost[caption]
 	if track != "":
 		mark.actor.player.load_music(track)
 		return OK

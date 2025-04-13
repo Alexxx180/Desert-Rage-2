@@ -3,14 +3,16 @@ extends BehaviorSequence
 @onready var check: BehaviorAction = $assert
 
 @export var type: int:
-	set(value): check.type = value
+	set(value):
+		check.type = value
+		set_levels(func(l): l.type = value)
 
-func set_playback(options: Node, progress: Dictionary) -> void:
-	progress.type = check.type
-	progress.path.push_back(name)
-	var named: Array[Node] = get_children()
-	var i: int = named.size()
-
+func set_levels(feedback: Callable) -> void:
+	var levels: Array[Node] = get_children()
+	var i: int = levels.size()
 	while i > 1:
 		i -= 1
-		named[i].set_playback(options, progress.duplicate())
+		feedback.call(levels[i])
+
+func set_playback(music: Node) -> void:
+	set_levels(func(l): l.set_ost(music))

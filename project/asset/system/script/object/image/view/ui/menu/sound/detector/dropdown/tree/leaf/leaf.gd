@@ -15,3 +15,6 @@ func set_metadata(track: String) -> void:
 func set_track_authority(ui_track: String) -> void:
 	metadata.text = ui_track
 	description.text = ui_track + "_metadata"
+
+func set_options(options: Node, context: Dictionary) -> void:
+	options.set_leaf_theme(context)

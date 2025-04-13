@@ -1,19 +1,12 @@
 extends BehaviorActionPlayback
 
-func mod_path(path: Array[String]) -> Array[String]:
-	path[2] = "type"
-	return path
+var type: int = 0
 
-func get_context(options: Node, progress: Dictionary) -> Dictionary:
-	var path: Array[String] = mod_path(progress.path)
-	var context: Dictionary = SoundtrackSystem.get_value(options.ui, path)
-	return {
-		"ost": context.user,
-		"ui": context.ui.set
-	}
+func set_ost(music: Node) -> void:
+	_ost = music.level.typed.ost.boss[type]
 
 func tick(mark: Tick) -> int:
-	var track: String = _context.boss.set[0]
+	var track: String = _ost.get_track()
 	if track != "":
 		mark.actor.player.load_music(track)
 		return OK

@@ -1,20 +1,17 @@
 extends BehaviorSelector
 
 @onready var theme: BehaviorSequence = $theme
-@onready var boss_fight: BehaviorSequence = $boss
-
-var _name: int = 0
+@onready var boss: BehaviorSequence = $boss
 
 @export_category("Level")
 @export var caption: int:
-	set(value):
-		_name = value
-		theme.caption = value
-@export var boss: String:
-	set(value): boss_fight.level_boss = value
+	set(value): theme.caption = value
+@export var boss_fight: String:
+	set(value): $boss.level_boss = value
 
-func set_playback(options: Node, progress: Dictionary) -> void:
-	progress.path.push_back(name)
-	progress.level.name = _name
-	theme.set_playback(options, progress.duplicate())
-	boss_fight.set_playback(options, progress.duplicate())
+var type: int:
+	set(value): theme.type = value
+
+func set_ost(music: Node) -> void:
+	theme.set_ost(music)
+	boss.set_ost(music)
