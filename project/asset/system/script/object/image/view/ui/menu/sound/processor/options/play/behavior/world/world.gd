@@ -1,5 +1,5 @@
 extends BehaviorSelector
 
-func set_playback(options: Node, progress: Dictionary) -> void:
+func set_ost(music: Node) -> void:
 	for dungeon in get_children():
-		dungeon.set_playback(options, progress.duplicate())
+		dungeon.set_ost(music)

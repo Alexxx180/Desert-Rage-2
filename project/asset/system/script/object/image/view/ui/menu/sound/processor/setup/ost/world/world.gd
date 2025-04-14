@@ -5,6 +5,6 @@ extends Node
 @onready var weak: Node = $weak
 
 func setup(options: Node) -> void:
-	typed.setup(options)
-	named.setup(options)
-	weak.setup(options)
+	typed.set_ost(options)
+	named.set_ost(options)
+	weak.set_ost(options)

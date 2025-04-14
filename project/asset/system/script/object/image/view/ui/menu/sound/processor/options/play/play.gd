@@ -13,28 +13,23 @@ func on_toggle(toggled: bool) -> void:
 	enabled = toggled
 	print(name + " enabled: ", enabled)
 
-func set_playback(options: Node) -> void:
-	behavior.set_playback(options)
+func set_ost(ost: Node) -> void:
+	behavior.set_ost(ost)
 
-func _set_common(flags: Dictionary) -> void:
-	board.set_value("rampage", flags.rampage)
-	board.set_value("event", flags.event)
+func as_theme(entry: Dictionary, ui: Control) -> void:
+	if enabled:
+		entry.theme.at = ui.i
+		player.load_music(entry.theme.set[ui.i])
+		entry.play.call(board, ui)
 
-func _set_level(flags: Dictionary) -> void:
-	board.set_value("level", flags.active)
-	board.set_value("level_type", flags.type)
-	board.set_value("level_name", flags.name)
-
-func _set_progress(progress: Dictionary) -> void:
-	_set_level(progress.level)
-	_set_common(progress)
-
-func as_theme(entry: Dictionary) -> void:
-	if not enabled: return
-	player.load_music(entry.ost[entry.i])
-	_set_progress(entry.progress)
-
-func as_ambient(entry: Dictionary, status: String) -> void:
-	if not enabled: return
-	player.load_music(entry.ost[entry.i][status])
-	_set_progress(entry.progress)
+func as_ambient(entry: Dictionary, status: String, ui: Control) -> void:
+	if enabled:
+		entry.theme.at = ui.i
+		player.load_music(entry.theme.set[ui.i][status])
+		var rampage: int = 3
+		match status:
+			"ambient": rampage = 0
+			"heating": rampage = 1
+			"rampage": rampage = 2
+		board.set_value("rampage", rampage)
+		entry.play.call(board)

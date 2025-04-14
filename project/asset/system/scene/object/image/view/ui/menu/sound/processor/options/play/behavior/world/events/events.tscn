@@ -1,32 +1,20 @@
-[gd_scene load_steps=7 format=3 uid="uid://dkvbyrp671tuf"]
+[gd_scene load_steps=5 format=3 uid="uid://dkvbyrp671tuf"]
 
 [ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/sound/processor/options/play/behavior/world/events/events.gd" id="1_7ahg1"]
-[ext_resource type="Script" path="res://addons/godot-behavior-tree-plugin/selector/selector.gd" id="2_pt1s1"]
-[ext_resource type="Script" path="res://addons/godot-behavior-tree-plugin/action/action.gd" id="3_7xw7q"]
-[ext_resource type="PackedScene" uid="uid://basggy5rqu74q" path="res://asset/system/scene/object/image/view/ui/menu/sound/processor/options/play/behavior/world/events/scene.tscn" id="4_582eo"]
-[ext_resource type="PackedScene" uid="uid://di2qg1usmgxqr" path="res://asset/system/scene/object/image/view/ui/menu/sound/processor/options/play/behavior/world/events/boss.tscn" id="4_aag0g"]
+[ext_resource type="PackedScene" uid="uid://benr8tobs3p6x" path="res://asset/system/scene/object/image/view/ui/menu/sound/processor/options/play/behavior/world/events/theme/scene/scene.tscn" id="2_sxx5t"]
+[ext_resource type="PackedScene" uid="uid://ci3n3w2wqas10" path="res://asset/system/scene/object/image/view/ui/menu/sound/processor/options/play/behavior/world/events/theme/boss/boss.tscn" id="3_cutsd"]
 [ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/sound/processor/options/play/behavior/world/events/level/level.gd" id="7_ls5o8"]
 
 [node name="events" type="Node"]
 script = ExtResource("1_7ahg1")
 
-[node name="chaos" type="Node" parent="."]
-script = ExtResource("2_pt1s1")
+[node name="chaos" parent="." instance=ExtResource("2_sxx5t")]
 
-[node name="named" type="Node" parent="chaos"]
-script = ExtResource("3_7xw7q")
+[node name="sandworm" parent="." instance=ExtResource("3_cutsd")]
 
-[node name="typed" type="Node" parent="chaos"]
-script = ExtResource("3_7xw7q")
+[node name="campfire" parent="." instance=ExtResource("2_sxx5t")]
 
-[node name="sandworm" parent="." instance=ExtResource("4_aag0g")]
-event = 1
-
-[node name="campfire" parent="." instance=ExtResource("4_582eo")]
-event = 2
-
-[node name="intervention" parent="." instance=ExtResource("4_582eo")]
-event = 3
+[node name="intervention" parent="." instance=ExtResource("2_sxx5t")]
 
 [node name="level" type="Node" parent="."]
 script = ExtResource("7_ls5o8")

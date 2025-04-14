@@ -1,4 +1,4 @@
-extends BehaviorActionPlayback
+extends BehaviorAction
 
 class_name BehaviorLevelProgress
 
@@ -14,9 +14,9 @@ func set_dungeon(board: BehaviorBlackboard, dungeon: Vector2i) -> void:
 
 func set_progress(board: BehaviorBlackboard) -> void:
 	var dungeons: Array[Vector2i] = get_dungeons()
-	var progress: int = (board.get_value("progress") + 1) % dungeons.size()
+	var progress: int = (board.get_value("event") + 1) % dungeons.size()
 	
 	set_dungeon(board, dungeons[progress])
 	board.set_value("level", true)
-	board.set_value("progress", progress)
+	board.set_value("event", progress)
 	board.set_value("rampage", 0)

@@ -17,6 +17,5 @@ static func get_level_names() -> Dictionary:
 	}
 
 func setup(options: Node) -> void:
-	var locations: Dictionary = get_level_names()
-	typed.set_ost(locations, options)
-	named.set_ost(locations, options)
+	typed.set_ost(options)
+	named.set_ost(options)

@@ -9,19 +9,25 @@ func on_toggle(toggled: bool) -> void:
 	enabled = toggled
 	print(name + " enabled: ", enabled)
 
-func _add_leaf(entry: Dictionary, kind: Resource) -> void:
-	var i: int = entry.i
+func _add_leaf(entry: Dictionary, kind: Resource, ui: Control) -> Control:
 	var leaf: Control = kind.instatiate()
-	entry.ui[i].add_sibling(leaf)
+	ui.add_sibling(leaf)
+	var i: int = ui.i + 1
+	entry.ui.set.insert(i, leaf)
+	while i < entry.ui.size():
+		i += 1
+		entry.ui.set[i] = i
+	return leaf
 
-func to_theme(entry: Dictionary) -> void:
-	if not enabled: return
+func to_theme(options: Node, entry: Dictionary, ui: Control) -> void:
 	var metadata: Dictionary = {}
-	if SoundtrackSystem.get_file(metadata):
-		_add_leaf(entry, theme)
-		entry.ost.insert(entry.i, metadata.track)
+	if enabled and SoundtrackSystem.get_file(metadata):
+		var leaf: Control = _add_leaf(entry, theme, ui)
+		entry.theme.set.insert(leaf.i, metadata.track)
+		options.set_leaf_theme(entry, leaf)
 
-func to_ambient(entry: Dictionary) -> void:
-	if not enabled: return
-	_add_leaf(entry, fight)
-	entry.ost.insert(entry.i, { "ambient": "", "heating": "", "rampage": "" })
+func to_ambient(options: Node, entry: Dictionary, ui: Control) -> void:
+	if enabled:
+		var leaf: Control = _add_leaf(entry, fight, ui)
+		entry.theme.set.insert(leaf.i, { "ambient": "", "heating": "", "rampage": "" })
+		options.set_ambient_theme(entry, leaf)

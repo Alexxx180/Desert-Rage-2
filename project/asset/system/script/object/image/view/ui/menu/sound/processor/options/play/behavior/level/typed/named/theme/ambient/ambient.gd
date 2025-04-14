@@ -12,3 +12,6 @@ var caption: int:
 
 func _ready() -> void:
 	theme.status = name
+
+func set_ost(music: Node) -> void:
+	theme.set_ost(music)

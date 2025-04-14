@@ -1,13 +1,13 @@
 extends BehaviorActionPlayback
 
-var caption: String
+var _caption: String
 
-func set_ost(music: Node) -> void:
-	_ost = music.world.named.boss[caption]
+func set_ost(music: Node, caption: String) -> void:
+	_caption = caption
+	_ost = music.world.named.ost.boss.theme
 
 func tick(mark: Tick) -> int:
-	var track: String = _ost[caption]
-	if track != "":
-		mark.actor.player.load_music(track)
+	if _caption != "" and _ost[_caption] != "":
+		mark.actor.player.load_music(_ost[_caption])
 		return OK
 	return FAILED

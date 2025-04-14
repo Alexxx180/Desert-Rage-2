@@ -14,5 +14,5 @@ func set_levels(feedback: Callable) -> void:
 		i -= 1
 		feedback.call(levels[i])
 
-func set_playback(music: Node) -> void:
+func set_ost(music: Node) -> void:
 	set_levels(func(l): l.set_ost(music))

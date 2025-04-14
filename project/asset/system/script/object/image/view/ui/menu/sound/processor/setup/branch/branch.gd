@@ -6,7 +6,7 @@ extends Node
 func set_blend(query: SoundtrackTreeQuery) -> void:
 	var mix: int = clampi(query.decide("mix"), 0, 100)
 	leafs.set_blend(query, ui.blend, mix)
-	leafs.include(query, ui.named, leafs.set_titled, "set")
+	leafs.include(query, ui.named, leafs.set_titled, "set", {})
 
 func set_trunks(setup: Node, query: SoundtrackTreeQuery) -> void:
 	leafs.set_child(query, ui.trunk)
@@ -21,12 +21,12 @@ func set_alarm(query: SoundtrackTreeQuery) -> void:
 	leafs.set_alarm(query, ui.alarm)
 
 func set_named(query: SoundtrackTreeQuery) -> void:
-	leafs.include(query, ui.named, leafs.set_titled)
+	leafs.include(query, ui.named, leafs.set_titled, "", {})
 
 func set_themes(query: SoundtrackTreeQuery) -> void:
 	leafs.set_child(query, ui.mix[query.pad])
-	leafs.include(query.nest_body(), ui.theme, leafs.set_theme, "set")
+	leafs.include(query.nest_body(), ui.theme, leafs.set_theme, "set", [])
 
 func set_combat(query: SoundtrackTreeQuery) -> void:
 	leafs.set_child(query, ui.mix[query.pad])
-	leafs.include(query.nest_body(), ui.fight, leafs.set_fight, "set")
+	leafs.include(query.nest_body(), ui.fight, leafs.set_fight, "set", [])

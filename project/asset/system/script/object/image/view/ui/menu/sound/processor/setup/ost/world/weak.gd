@@ -1,5 +1,9 @@
 extends OSTLeaf
 
+func set_leaf(options: Node, context: Dictionary) -> void:
+	var ui: Dictionary = context.ui
+	ui.set.set_options(options, context)
+
 func set_ost(options: Node) -> void:
 	ost = { 
 		"ui": options.ui.world.weak,

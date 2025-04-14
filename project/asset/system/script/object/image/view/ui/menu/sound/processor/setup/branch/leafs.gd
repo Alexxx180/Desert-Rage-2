@@ -27,7 +27,7 @@ func set_titled(query, child, tracks, track) -> void:
 	var branch: Control = append_child(query, child)
 	branch.set_metadata(tracks[track])
 	branch.set_title(track)
-	query.ui_tree.set.push_back(branch)
+	query.ui_tree.set[track] = branch
 
 func set_blend(query, child, mix: int) -> void:
 	var branch: Control = set_child(query, child[query.pad])
@@ -39,8 +39,8 @@ func set_alarm(query: SoundtrackTreeQuery, child) -> void:
 	branch.set_metadata(query.context)
 	query.ui_tree.set = branch
 
-func include(query, child, setter, list = "") -> void:
+func include(query, child, setter, list, init) -> void:
 	var tracks: Variant = query.context if list == "" else query.decide(list)
-	query.ui_tree.set = []
+	query.ui_tree.set = init
 	for track in tracks:
 		setter.call(query, child, tracks, track)

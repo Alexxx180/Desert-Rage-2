@@ -8,6 +8,6 @@ var status: String:
 		named.status = value
 		typed.status = value
 
-func set_playback(options: Node, path: Array[String]) -> void:
-	named.set_playback(options, path)
-	typed.set_playback(options, path)
+func set_ost(music: Node) -> void:
+	named.set_ost(music)
+	typed.set_ost(music)

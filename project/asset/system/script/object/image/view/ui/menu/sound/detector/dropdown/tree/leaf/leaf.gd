@@ -5,6 +5,8 @@ class_name SoundtrackLeaf
 @onready var description: Label = $margin/caption/description
 @onready var metadata: Label = $margin/caption/metadata
 
+var i: int
+
 func set_metadata(track: String) -> void:
 	var slash: int = track.rfind("/") + 1
 	var path: String = track.replace("\\", "/").substr(slash)
@@ -17,4 +19,4 @@ func set_track_authority(ui_track: String) -> void:
 	description.text = ui_track + "_metadata"
 
 func set_options(options: Node, context: Dictionary) -> void:
-	options.set_leaf_theme(context)
+	options.set_leaf_theme(context, self)

@@ -1,22 +1,32 @@
 extends OSTLeaf
 
-func set_types(options: Node, types: Array[String], theme: String, i: int) -> void:
+@onready var _types: Array[String] = AmbientOST.get_level_types()
+
+func set_types(options: Node, theme: String, i: int, play: Callable) -> void:
+	var type: String = _types[i]
 	ost[theme][i] = {
-		"ui": options.ui.level[types[i]].type[theme],
-		"theme": SoundtrackSystem.user.music.level[types[i]].type[theme],
-		"play": func(board: BehaviorBlackboard):
-			board.set_value("level", true)
-			board.set_value("level_type", i)
+		"ui": options.ui.level[type].type[theme],
+		"theme": SoundtrackSystem.user.music.level[type].type[theme],
+		"play": play
 	}
 	set_leaf(options, ost[theme][i])
 
+func set_theme(options: Node, theme: String, play: Callable) -> void:
+	ost[theme] = {}
+	var i: int = _types.size()
+	while i > 0:
+		i -= 1
+		set_types(options, theme, i, func(b, u):
+			play.call(b, i)
+			b.set_value("level", true)
+			b.update_progress())
+
 func set_ost(options: Node) -> void:
 	ost = {}
-	var types: Array[String] = AmbientOST.get_level_types()
-	var size: int = types.size()
-	for theme in ["theme", "boss"]:
-		ost[theme] = {}
-		var i: int = size
-		while i > 0:
-			i -= 1
-			set_types(options, types, theme, i)
+	var play: Callable = func(board, i):
+		board.set_value("level_type", i)
+	set_theme(options, "theme", play)
+	play = func(board, i):
+		board.set_value("level_type", i)
+		board.set_value("rampage", 4)
+	set_theme(options, "boss", play)

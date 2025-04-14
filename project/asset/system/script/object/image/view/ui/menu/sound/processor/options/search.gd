@@ -11,18 +11,16 @@ func search_leaf(setter: Callable) -> void:
 	if SoundtrackSystem.get_file(metadata):
 		setter.call(metadata)
 
-func for_theme(entry: Dictionary) -> void:
+func for_theme(entry: Dictionary, ui: Control) -> void:
 	if enabled:
 		search_leaf(func(metadata: Dictionary):
-			var i: int = entry.i
-			entry.ui[i].set_metadata(metadata)
-			entry.ost[i] = metadata.track
+			entry.ui[ui.i].set_metadata(metadata)
+			entry.theme.set[ui.i] = metadata.track
 		)
 
-func for_ambient(entry: Dictionary, status: String) -> void:
+func for_ambient(entry: Dictionary, status: String, ui: Control) -> void:
 	if enabled:
 		search_leaf(func(metadata: Dictionary):
-			var i: int = entry.i
-			entry.ui[i].content[status].set_metadata(metadata)
-			entry.ost[i][status] = metadata.track
+			entry.ui[ui.i].content[status].set_metadata(metadata)
+			entry.theme.set[ui.i][status] = metadata.track
 		)

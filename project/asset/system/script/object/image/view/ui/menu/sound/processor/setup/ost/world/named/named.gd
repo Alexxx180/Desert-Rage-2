@@ -8,6 +8,7 @@ func set_types(options: Node, theme: String) -> void:
 		"theme": SoundtrackSystem.user.music.world[theme].name,
 		"play": func(board: BehaviorBlackboard):
 			board.set_value("level", false)
+			board.update_progress()
 	}
 	set_leaf(options, ost[theme])
 

@@ -5,6 +5,7 @@ func get_playback(type: int, level: int) -> Callable:
 		board.set_value("level", true)
 		board.set_value("level_type", type)
 		board.set_value("level_name", level)
+		board.update_progress()
 
 func set_names(options: Node, types: Array[String], i: int) -> void:
 	var locations: Dictionary = AmbientOST.get_level_names()
@@ -26,4 +27,5 @@ func set_ost(options: Node) -> void:
 	var i: int = types.size()
 	while i > 0:
 		i -= 1
+		ost[i] = {}
 		set_names(options, types, i)

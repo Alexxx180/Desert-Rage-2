@@ -6,14 +6,15 @@ func on_toggle(toggled: bool) -> void:
 	enabled = toggled
 	print(name + " enabled: ", enabled)
 
-func from_theme(entry: Dictionary) -> void:
-	if enabled and entry.ost.size() > 1:
-		var i: int = entry.i
-		var leaf: Control = entry.ui[i]
-		var branch: Control = leaf.get_parent()
-		branch.remove_child(leaf)
+func from_theme(entry: Dictionary, ui: Control) -> void:
+	if enabled and entry.theme.size() > 1:
+		var i: int = ui.i
+		var branch: Control = ui.get_parent()
 		entry.ui.remove_at(i)
-		var j: int = entry.ost.size()
+		entry.theme.remove_at(i)
+		var j: int = entry.theme.size()
 		while j > i:
 			j -= 1
 			entry.ui[j].i = j
+		branch.remove_child(ui)
+		

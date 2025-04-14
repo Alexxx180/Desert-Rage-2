@@ -1,4 +1,4 @@
-extends BehaviorSequence
+extends BehaviorSelector
 
 @onready var rampage: Array[BehaviorSequence] = [$ambient, $heating, $rampage]
 

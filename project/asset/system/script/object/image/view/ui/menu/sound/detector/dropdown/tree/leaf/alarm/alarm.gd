@@ -11,4 +11,7 @@ func set_track_authority(ui_track: String) -> void:
 	leaf.set_track_authority(ui_track)
 
 func set_options(options: Node, context: Dictionary) -> void:
-	options.set_named_theme(context)
+	options.set_named_theme(context, self)
+
+func set_feedback(feedback: Callable) -> void:
+	leaf.pressed.connect(feedback)

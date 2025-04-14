@@ -1,11 +1,6 @@
-extends BehaviorActionEvent
+extends BehaviorSequence
 
-func get_context(options: Node, _progress: Dictionary) -> Dictionary:
-	return {
-		"ost": SoundtrackSystem.user.world.ambient.name.scene,
-		"ui": options.ui.world.ambient.name.scene.set
-	}
+@onready var theme: BehaviorSelector = $theme
 
-func set_track(mark: Tick) -> void:
-	_determine_track(mark.actor.player)
-	super.set_track(mark)
+func set_ost(music: Node, event: int) -> void:
+	theme.set_ost(music, event, name)

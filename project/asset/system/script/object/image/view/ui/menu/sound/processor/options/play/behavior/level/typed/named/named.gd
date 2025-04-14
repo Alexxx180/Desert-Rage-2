@@ -1,6 +1,6 @@
 extends BehaviorSelector
 
-@onready var theme: BehaviorSequence = $theme
+@onready var theme: BehaviorSelector = $theme
 @onready var boss: BehaviorSequence = $boss
 
 @export_category("Level")
