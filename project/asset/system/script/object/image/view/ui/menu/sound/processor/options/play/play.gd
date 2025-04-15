@@ -12,17 +12,17 @@ func set_ost(ost: Node) -> void:
 	board.reset()
 
 func as_theme(entry: Dictionary, ui: Control) -> void:
-	print("PLAY START")
 	entry.theme.at = ui.i
 	player.load_music(entry.theme.set[ui.i])
 	entry.play.call(board, ui)
-	print("PLAY FINISH")
 
 func as_named(entry: Dictionary, ui: Control) -> void:
-	print("PLAY START")
 	player.load_music(entry.theme[ui.event.name])
 	entry.play.call(board, ui)
-	print("PLAY FINISH")
+
+func as_blend(entry: Dictionary, ui: Control) -> void:
+	player.load_music(entry.theme.set[ui.event.name])
+	entry.play.call(board, ui)
 
 func as_ambient(entry: Dictionary, status: String, ui: Control) -> void:
 	entry.theme.at = ui.i

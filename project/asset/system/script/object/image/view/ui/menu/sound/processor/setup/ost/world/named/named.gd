@@ -3,16 +3,18 @@ extends Node # OSTLeaf
 @onready var ambient: Node = $ambient
 
 var ost: Dictionary
+var feedback: Dictionary = {
+	"rampage": func(ui, options, context):
+		options.set_blend_theme(context, ui),
+	"boss": func(ui, options, context):
+		ui.set_options(options, context)
+}
 
-func set_leaf(options: Node, context: Dictionary) -> void:
+func set_leaf(options: Node, context: Dictionary, theme: String) -> void:
 	var ui: Dictionary = context.ui
-#	var i: int = ui.set.size()
 	for event in ui.set:
-#	while i > 0:
-#		i -= 1
-#		ui.set[i].i = i
 		ui.set[event].event.name = event
-		ui.set[event].set_options(options, context)
+		feedback[theme].call(ui.set[event], options, context)
 
 func set_types(options: Node, theme: String) -> void:
 	ost[theme] = {
@@ -22,11 +24,11 @@ func set_types(options: Node, theme: String) -> void:
 			board.set_value("level", false)
 			board.update_progress()
 	}
-	set_leaf(options, ost[theme])
+	set_leaf(options, ost[theme], theme)
 
 func set_ost(options: Node) -> void:
 	ambient.set_ost(options)
 	ost = {}
-	for theme in ["rampage", "boss"]:
+	for theme in feedback:
 		ost[theme] = {}
 		set_types(options, theme)
