@@ -2,6 +2,9 @@ extends SoundtrackLeaf
 
 @onready var title: Label = $margin/title
 
+#var event: String
+var event: int
+
 func set_title(entity: String) -> void:
 	title.text = entity
 

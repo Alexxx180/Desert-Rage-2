@@ -16,7 +16,7 @@ func set_theme(options: Node, theme: String, play: Callable) -> void:
 	var i: int = _types.size()
 	while i > 0:
 		i -= 1
-		set_types(options, theme, i, func(b, u):
+		set_types(options, theme, i, func(b, _u):
 			play.call(b, i)
 			b.set_value("level", true)
 			b.update_progress())

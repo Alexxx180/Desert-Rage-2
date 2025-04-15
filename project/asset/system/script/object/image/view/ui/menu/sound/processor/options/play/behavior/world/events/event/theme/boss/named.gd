@@ -4,7 +4,7 @@ var caption: String
 var _ost: Dictionary
 
 func set_ost(music: Node, event: int) -> void:
-	var boss: Dictionary = music.world.named.boss
+	var boss: Dictionary = music.world.named.ost.boss
 	boss.ui.set[caption].event = event
 	_ost = boss.theme
 

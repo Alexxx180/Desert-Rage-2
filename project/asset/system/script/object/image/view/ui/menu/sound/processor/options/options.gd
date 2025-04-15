@@ -28,12 +28,17 @@ func set_ambient_theme(entry: Dictionary, leaf: Control) -> void:
 func set_named_theme(entry: Dictionary, leaf: Control) -> void:
 	leaf.set_feedback(func():
 		search.for_theme(entry, leaf)
-		play.as_named(entry, leaf)
+		play.as_theme(entry, leaf)
+		# play.as_named(entry, leaf)
 	)
 
-func setup(options: HBoxContainer) -> void:
+func setup_search(options: HBoxContainer) -> void:
 	options.drop.toggled.connect(drop.on_toggle)
 	options.add.toggled.connect(add.on_toggle)
 	options.search.toggled.connect(search.on_toggle)
+
+func setup(options: Control) -> void:
+	setup_search(options.search)
+	options.play.toggled.connect(play.on_toggle)
 	ost.setup(self)
 	play.set_ost(ost)

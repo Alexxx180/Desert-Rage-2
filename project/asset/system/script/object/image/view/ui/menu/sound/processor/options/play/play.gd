@@ -18,9 +18,11 @@ func set_ost(ost: Node) -> void:
 
 func as_theme(entry: Dictionary, ui: Control) -> void:
 	if enabled:
+		print("PLAY START")
 		entry.theme.at = ui.i
 		player.load_music(entry.theme.set[ui.i])
 		entry.play.call(board, ui)
+		print("PLAY FINISH")
 
 func as_ambient(entry: Dictionary, status: String, ui: Control) -> void:
 	if enabled:

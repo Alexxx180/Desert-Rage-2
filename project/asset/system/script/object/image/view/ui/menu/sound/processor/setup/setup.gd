@@ -3,7 +3,6 @@ extends Node
 @onready var behavior: BehaviorTree = $behavior
 @onready var board: BehaviorBlackboard = $blackboard
 @onready var branch: Node = $branch
-@onready var ost: Node = $ost
 
 func selection(query: SoundtrackTreeQuery) -> void:
 	board.set_value("query", query)
@@ -22,4 +21,4 @@ func set_soundtrack(options: Node, ui: VBoxContainer) -> void:
 		query.set_ui(ui.dropdown)
 		query.set_ui_tree(options.ui)
 		enumerate(query)
-		options.setup(ui.options.search)
+		options.setup(ui.options)

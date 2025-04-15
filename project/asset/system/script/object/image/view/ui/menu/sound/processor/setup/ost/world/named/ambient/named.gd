@@ -1,4 +1,16 @@
-extends OSTLeaf
+extends Node # OSTLeaf
+
+var ost: Dictionary
+
+func set_leaf(options: Node, context: Dictionary) -> void:
+	var ui: Dictionary = context.ui
+#	var i: int = ui.set.size()
+	for event in ui.set:
+#	while i > 0:
+#		i -= 1
+#		ui.set[i].i = i
+#		ui.set[event].event = event
+		ui.set[event].set_options(options, context)
 
 func set_types(options: Node, event: String) -> void:
 	ost[event] = {

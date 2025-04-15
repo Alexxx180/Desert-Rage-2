@@ -1,3 +1,4 @@
 extends Control
 
-@onready var search: BoxContainer = $search
+@onready var search: HBoxContainer = $search
+@onready var play: Button = $play
