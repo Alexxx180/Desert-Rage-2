@@ -11,14 +11,14 @@ func set_leaf(options: Node, context: Dictionary) -> void:
 #	while i > 0:
 #		i -= 1
 #		ui.set[i].i = i
-#		ui.set[event].event = event
+		ui.set[event].event.name = event
 		ui.set[event].set_options(options, context)
 
 func set_types(options: Node, theme: String) -> void:
 	ost[theme] = {
 		"ui": options.ui.world[theme].name,
 		"theme": SoundtrackSystem.user.music.world[theme].name,
-		"play": func(board: BehaviorBlackboard):
+		"play": func(board: BehaviorBlackboard, _ui):
 			board.set_value("level", false)
 			board.update_progress()
 	}

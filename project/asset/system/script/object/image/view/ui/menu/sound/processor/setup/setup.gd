@@ -21,4 +21,4 @@ func set_soundtrack(options: Node, ui: VBoxContainer) -> void:
 		query.set_ui(ui.dropdown)
 		query.set_ui_tree(options.ui)
 		enumerate(query)
-		options.setup(ui.options)
+		options.setup(ui)

@@ -12,7 +12,7 @@ func set_leaf_theme(entry: Dictionary, leaf: Control) -> void:
 	leaf.pressed.connect(func():
 		drop.from_theme(entry, leaf)
 		play.as_theme(entry, leaf)
-		add.to_theme(entry, leaf)
+		add.to_theme(self, entry, leaf)
 		search.for_theme(entry, leaf)
 	)
 
@@ -21,15 +21,14 @@ func set_ambient_theme(entry: Dictionary, leaf: Control) -> void:
 		leaf.content[status].pressed.connect(func():
 			drop.from_theme(entry, leaf)
 			search.for_ambient(entry, status, leaf)
-			add.to_ambient(entry, leaf)
+			add.to_ambient(self, entry, leaf)
 			play.as_ambient(entry, leaf)
 		)
 
 func set_named_theme(entry: Dictionary, leaf: Control) -> void:
 	leaf.set_feedback(func():
-		search.for_theme(entry, leaf)
-		play.as_theme(entry, leaf)
-		# play.as_named(entry, leaf)
+		search.for_named(entry, leaf)
+		play.as_named(entry, leaf)
 	)
 
 func setup_search(options: HBoxContainer) -> void:
@@ -37,8 +36,10 @@ func setup_search(options: HBoxContainer) -> void:
 	options.add.toggled.connect(add.on_toggle)
 	options.search.toggled.connect(search.on_toggle)
 
-func setup(options: Control) -> void:
-	setup_search(options.search)
-	options.play.toggled.connect(play.on_toggle)
+func setup(menu: VBoxContainer) -> void:
+	setup_search(menu.options.search)
+	menu.options.play.toggled.connect(play.on_toggle)
 	ost.setup(self)
 	play.set_ost(ost)
+	play.board.progress.connect(func(value):
+		menu.progress.value = value)

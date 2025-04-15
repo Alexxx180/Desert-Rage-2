@@ -5,7 +5,7 @@ var _ost: Dictionary
 
 func set_ost(music: Node, event: int) -> void:
 	var boss: Dictionary = music.world.named.ost.boss
-	boss.ui.set[caption].event = event
+	boss.ui.set[caption].event.id = event
 	_ost = boss.theme
 
 func set_track(player: AudioStreamPlayer) -> void:

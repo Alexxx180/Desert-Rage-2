@@ -15,12 +15,21 @@ func on_toggle(toggled: bool) -> void:
 
 func set_ost(ost: Node) -> void:
 	behavior.set_ost(ost)
+	board.reset()
+
 
 func as_theme(entry: Dictionary, ui: Control) -> void:
 	if enabled:
 		print("PLAY START")
 		entry.theme.at = ui.i
 		player.load_music(entry.theme.set[ui.i])
+		entry.play.call(board, ui)
+		print("PLAY FINISH")
+
+func as_named(entry: Dictionary, ui: Control) -> void:
+	if enabled:
+		print("PLAY START")
+		player.load_music(entry.theme[ui.event.name])
 		entry.play.call(board, ui)
 		print("PLAY FINISH")
 

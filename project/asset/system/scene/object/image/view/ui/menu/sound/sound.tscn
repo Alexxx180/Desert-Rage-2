@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://pexl48rcyqo7"]
+[gd_scene load_steps=9 format=3 uid="uid://pexl48rcyqo7"]
 
 [ext_resource type="PackedScene" uid="uid://dql7mce31xdjg" path="res://asset/system/scene/object/image/view/ui/menu/sound/detector/settings/settings.tscn" id="1_1yo1r"]
 [ext_resource type="PackedScene" uid="uid://cikgtgx0up07s" path="res://asset/system/scene/object/image/view/ui/menu/sound/detector/dropdown/tree/tree.tscn" id="1_v2fxn"]
@@ -7,6 +7,9 @@
 [ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/sound/detector/detector.gd" id="2_swapw"]
 [ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/sound/detector/soundtrack.gd" id="3_6cqct"]
 [ext_resource type="PackedScene" uid="uid://68ojve62yh1c" path="res://asset/system/scene/object/image/view/ui/menu/sound/processor/processor.tscn" id="4_gw4ot"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fb1ce"]
+bg_color = Color(1, 1, 1, 1)
 
 [node name="sound" type="CanvasLayer"]
 script = ExtResource("1_xeo0l")
@@ -55,8 +58,17 @@ theme_override_constants/margin_right = 2
 theme_override_constants/margin_bottom = 2
 
 [node name="dropdown" parent="detector/margin/soundtrack/scroll/margin" instance=ExtResource("1_v2fxn")]
+custom_minimum_size = Vector2(150, 200)
 layout_mode = 2
 size_flags_vertical = 2
+
+[node name="progress" type="ProgressBar" parent="detector/margin/soundtrack"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_fb1ce")
+max_value = 64.0
+value = 10.0
+show_percentage = false
 
 [node name="options" parent="detector/margin/soundtrack" instance=ExtResource("2_s3j2j")]
 layout_mode = 2

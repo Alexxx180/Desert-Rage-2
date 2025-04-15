@@ -10,9 +10,10 @@ func on_toggle(toggled: bool) -> void:
 	print(name + " enabled: ", enabled)
 
 func _add_leaf(entry: Dictionary, kind: Resource, ui: Control) -> Control:
-	var leaf: Control = kind.instatiate()
+	var leaf: Control = kind.instantiate()
 	ui.add_sibling(leaf)
-	var i: int = ui.i + 1
+	leaf.i = ui.i + 1
+	var i: int = leaf.i
 	entry.ui.set.insert(i, leaf)
 	while i < entry.ui.size():
 		i += 1
