@@ -3,6 +3,7 @@ extends Node
 signal update()
 
 const MANIFEST: String = "res://asset/resource/media/ost/%s.json"
+const USER: String = "user://%.json"
 
 var _copy: Dictionary = { "music": Defaults.DICT }
 var _user: Dictionary
@@ -27,16 +28,20 @@ func get_value(ui: Dictionary, keys: Array) -> Dictionary:
 		context.ui = context.ui[key]
 	return context
 
-func reset() -> void:
+func _ready() -> void:
 	_set_vault("music")
 
+func reset() -> void:
+	_user.music = _copy.music
+
 func _set_vault(theme: String) -> void:
-	var to: String = "user://%.json" % theme
+	var dir: DirAccess = DirAccess.open("user://")
+	var to: String = theme + ".json"
 	_copy.music = _init_manifest(theme)
-	if not FileAccess.file_exists(to):
+	if not dir.file_exists(to):
 		var from: String = MANIFEST % theme
-		var dir: DirAccess = DirAccess.new()
-		DirAccess.copy(from, to)
+		dir.copy(from, to)
+	_user.music = _init_manifest(theme)
 
 func _init_manifest(type: String) -> Dictionary:
 	var path: String = MANIFEST % type
@@ -45,3 +50,12 @@ func _init_manifest(type: String) -> Dictionary:
 	var processor: JSON = JSON.new()
 	_valid[type] = processor.parse(text) == OK
 	return processor.data if _valid[type] else Defaults.DICT
+
+func _save_manifest(type: String) -> void:
+	var path: String = USER % type
+	var file: FileAccess = FileAccess.open(path, FileAccess.WRITE)
+	var json: String = JSON.stringify(_user[type])
+	file.story_string(json)
+
+func _exit_tree() -> void:
+	_save_manifest("music")

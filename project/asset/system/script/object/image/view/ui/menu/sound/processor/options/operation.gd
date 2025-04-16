@@ -21,7 +21,7 @@ func set_ambient_theme(options: Node, entry: Dictionary, leaf: Control) -> void:
 		leaf.content[status].pressed.connect(func():
 			match type:
 				DROP: options.drop.from_theme(entry, leaf)
-				ADD: options.add.to_ambient(self, entry, leaf)
+				ADD: options.add.to_ambient(options, entry, leaf)
 				SET: options.search.for_ambient(entry, status, leaf)
 				PLAY: options.play.as_ambient(entry, status, leaf)
 		)

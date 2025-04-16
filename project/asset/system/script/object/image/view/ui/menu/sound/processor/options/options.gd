@@ -28,8 +28,10 @@ func setup_search(options: Control) -> void:
 		i -= 1
 		group[i].pressed.connect(func(): operation.type = i)
 
-func setup(menu: VBoxContainer) -> void:
+func set_operations(menu: VBoxContainer) -> void:
 	setup_search(menu.options)
+	play.board.progress.connect(func(value): menu.progress.value = value)
+
+func setup() -> void:
 	ost.setup(self)
 	play.set_ost(ost)
-	play.board.progress.connect(func(value): menu.progress.value = value)
