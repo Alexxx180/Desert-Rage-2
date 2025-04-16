@@ -32,6 +32,9 @@ func setup_search(options: Control) -> void:
 		group[i].pressed.connect(func(): operation.type = i)
 
 func set_operations(menu: VBoxContainer) -> void:
+	var theme: OpenThemeDialog = $theme
+	add.context = theme
+	search.theme = theme
 	setup_search(menu.options)
 	play.board.progress.connect(func(value): menu.progress.value = value)
 

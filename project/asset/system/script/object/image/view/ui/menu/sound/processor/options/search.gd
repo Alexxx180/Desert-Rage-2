@@ -1,39 +1,35 @@
 extends Node
 
-func search_leaf(setter: Callable) -> void:
-	var metadata: Dictionary = {}
-	if SoundtrackSystem.get_file(metadata):
-		setter.call(metadata)
+var theme: OpenThemeDialog
 
 func for_theme(entry: Dictionary, ui: Control) -> void:
-	search_leaf(func(metadata: Dictionary):
-		entry.ui.set[ui.i].set_metadata(metadata.track)
-		entry.theme.set[ui.i] = metadata.track
+	theme.show_dialog(func(track: String):
+		entry.ui.set[ui.i].set_metadata(track)
+		entry.theme.set[ui.i] = track
 	)
 
 func for_named(entry: Dictionary, ui: Control) -> void:
-	search_leaf(func(metadata: Dictionary):
+	theme.show_dialog(func(track: String):
 		var event: String = ui.event.name
-		entry.ui.set[event].set_metadata(metadata.track)
-		entry.theme[event] = metadata.track
+		entry.ui.set[event].set_metadata(track)
+		entry.theme[event] = track
 	)
 
 func for_standalone(entry: Dictionary, ui: Control) -> void:
-	search_leaf(func(metadata: Dictionary):
-		var event: String = ui.event.name
-		entry.ui.set.set_track_metadata(metadata.track)
-		entry.theme[1] = metadata.track
+	theme.show_dialog(func(track: String):
+		entry.ui.set.set_track_metadata(track)
+		entry.theme[1] = track
 	)
 
 func for_blend(entry: Dictionary, ui: Control) -> void:
-	search_leaf(func(metadata: Dictionary):
+	theme.show_dialog(func(track: String):
 		var event: String = ui.event.name
-		entry.ui.set[event].set_metadata(metadata.track)
-		entry.theme.set[event] = metadata.track
+		entry.ui.set[event].set_metadata(track)
+		entry.theme.set[event] = track
 	)
 
 func for_ambient(entry: Dictionary, status: String, ui: Control) -> void:
-	search_leaf(func(metadata: Dictionary):
-		entry.ui.set[ui.i].content[status].set_metadata(metadata.track)
-		entry.theme.set[ui.i][status] = metadata.track
+	theme.show_dialog(func(track: String):
+		entry.ui.set[ui.i].content[status].set_metadata(track)
+		entry.theme.set[ui.i][status] = track
 	)
