@@ -33,6 +33,13 @@ func set_named_theme(options: Node, entry: Dictionary, leaf: Control) -> void:
 			PLAY: options.play.as_named(entry, leaf)
 	)
 
+func set_standalone(options: Node, entry: Dictionary, leaf: Control) -> void:
+	leaf.set_feedback(func():
+		match type:
+			SET: options.search.for_standalone(entry, leaf)
+			PLAY: options.play.as_named(entry, leaf)
+	)
+
 func set_blend_theme(options: Node, entry: Dictionary, leaf: Control) -> void:
 	leaf.set_feedback(func():
 		match type:

@@ -18,6 +18,9 @@ func set_ambient_theme(entry: Dictionary, leaf: Control) -> void:
 func set_named_theme(entry: Dictionary, leaf: Control) -> void:
 	operation.set_named_theme(self, entry, leaf)
 
+func set_standalone(entry: Dictionary, leaf: Control) -> void:
+	operation.set_standalone(self, entry, leaf)
+
 func set_blend_theme(entry: Dictionary, leaf: Control) -> void:
 	operation.set_blend_theme(self, entry, leaf)
 

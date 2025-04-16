@@ -18,6 +18,13 @@ func for_named(entry: Dictionary, ui: Control) -> void:
 		entry.theme[event] = metadata.track
 	)
 
+func for_standalone(entry: Dictionary, ui: Control) -> void:
+	search_leaf(func(metadata: Dictionary):
+		var event: String = ui.event.name
+		entry.ui.set.set_track_metadata(metadata.track)
+		entry.theme[1] = metadata.track
+	)
+
 func for_blend(entry: Dictionary, ui: Control) -> void:
 	search_leaf(func(metadata: Dictionary):
 		var event: String = ui.event.name
