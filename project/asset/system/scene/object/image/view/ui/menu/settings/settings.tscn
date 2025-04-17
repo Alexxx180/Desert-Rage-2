@@ -1,4 +1,7 @@
-[gd_scene format=3 uid="uid://b4x588yxrcok3"]
+[gd_scene load_steps=3 format=3 uid="uid://b4x588yxrcok3"]
+
+[ext_resource type="Theme" uid="uid://dfyi7rrcrweqx" path="res://asset/resource/engine/internal/theme/patterns/template/menu/settings.tres" id="1_vs08l"]
+[ext_resource type="Theme" uid="uid://0bwoefj0wlcw" path="res://asset/resource/engine/internal/theme/patterns/template/menu/text.tres" id="2_ull8j"]
 
 [node name="settings" type="CanvasLayer"]
 
@@ -11,8 +14,239 @@ offset_left = -1.0
 offset_right = -1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_vs08l")
 
-[node name="topic" type="VBoxContainer" parent="detector"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="margin" type="MarginContainer" parent="detector"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_vs08l")
+
+[node name="content" type="ScrollContainer" parent="detector/margin"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="topics" type="VBoxContainer" parent="detector/margin/content"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.35
+
+[node name="space" type="Control" parent="detector/margin/content/topics"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="experience" type="VBoxContainer" parent="detector/margin/content/topics"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 10
+
+[node name="options" type="HFlowContainer" parent="detector/margin/content/topics/experience"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 10
+theme = ExtResource("2_ull8j")
+
+[node name="narrative" type="Button" parent="detector/margin/content/topics/experience/options"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+
+[node name="margin" type="MarginContainer" parent="detector/margin/content/topics/experience/options/narrative"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="caption" type="Label" parent="detector/margin/content/topics/experience/options/narrative/margin"]
+layout_mode = 2
+text = "The Narrative"
+
+[node name="status" type="Label" parent="detector/margin/content/topics/experience/options/narrative/margin"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "On"
+
+[node name="emotions" type="Button" parent="detector/margin/content/topics/experience/options"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+
+[node name="margin" type="MarginContainer" parent="detector/margin/content/topics/experience/options/emotions"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="caption" type="Label" parent="detector/margin/content/topics/experience/options/emotions/margin"]
+layout_mode = 2
+text = "Emotions"
+
+[node name="status" type="Label" parent="detector/margin/content/topics/experience/options/emotions/margin"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "On"
+
+[node name="head" type="HFlowContainer" parent="detector/margin/content/topics/experience"]
+layout_mode = 2
+
+[node name="caption" type="Button" parent="detector/margin/content/topics/experience/head"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="margin" type="MarginContainer" parent="detector/margin/content/topics/experience/head/caption"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="label" type="Label" parent="detector/margin/content/topics/experience/head/caption/margin"]
+layout_mode = 2
+text = "Game Experience"
+
+[node name="exit" type="Button" parent="detector/margin/content/topics/experience/head"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="margin" type="MarginContainer" parent="detector/margin/content/topics/experience/head/exit"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="label" type="Label" parent="detector/margin/content/topics/experience/head/exit/margin"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.54902, 0.54902, 0.54902, 1)
+text = "Play"
+
+[node name="sound" type="VBoxContainer" parent="detector/margin/content/topics"]
+visible = false
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+
+[node name="options" type="HFlowContainer" parent="detector/margin/content/topics/sound"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 10
+theme = ExtResource("2_ull8j")
+
+[node name="music" type="Button" parent="detector/margin/content/topics/sound/options"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+
+[node name="margin" type="MarginContainer" parent="detector/margin/content/topics/sound/options/music"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="caption" type="Label" parent="detector/margin/content/topics/sound/options/music/margin"]
+layout_mode = 2
+text = "Music"
+
+[node name="status" type="Label" parent="detector/margin/content/topics/sound/options/music/margin"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "On"
+
+[node name="sound" type="Button" parent="detector/margin/content/topics/sound/options"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+
+[node name="margin" type="MarginContainer" parent="detector/margin/content/topics/sound/options/sound"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="caption" type="Label" parent="detector/margin/content/topics/sound/options/sound/margin"]
+layout_mode = 2
+text = "Sounds"
+
+[node name="status" type="Label" parent="detector/margin/content/topics/sound/options/sound/margin"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "On"
+
+[node name="system" type="Button" parent="detector/margin/content/topics/sound/options"]
+custom_minimum_size = Vector2(320, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+
+[node name="margin" type="MarginContainer" parent="detector/margin/content/topics/sound/options/system"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="caption" type="Label" parent="detector/margin/content/topics/sound/options/system/margin"]
+layout_mode = 2
+text = "Soundtrack System"
+
+[node name="head" type="Button" parent="detector/margin/content/topics/sound"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="margin" type="MarginContainer" parent="detector/margin/content/topics/sound/head"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="label" type="Label" parent="detector/margin/content/topics/sound/head/margin"]
+layout_mode = 2
+text = "Sound Preferences"
+
+[node name="controls" type="VBoxContainer" parent="detector/margin/content/topics"]
+visible = false
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="head" type="Button" parent="detector/margin/content/topics/controls"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="margin" type="MarginContainer" parent="detector/margin/content/topics/controls/head"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="label" type="Label" parent="detector/margin/content/topics/controls/head/margin"]
+layout_mode = 2
+text = "Controls Management"
