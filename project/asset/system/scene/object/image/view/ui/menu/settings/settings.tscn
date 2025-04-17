@@ -1,13 +1,31 @@
-[gd_scene load_steps=5 format=3 uid="uid://b4x588yxrcok3"]
+[gd_scene load_steps=13 format=3 uid="uid://b4x588yxrcok3"]
 
 [ext_resource type="Theme" uid="uid://dfyi7rrcrweqx" path="res://asset/resource/engine/internal/theme/patterns/template/menu/settings.tres" id="1_vs08l"]
 [ext_resource type="Theme" uid="uid://0bwoefj0wlcw" path="res://asset/resource/engine/internal/theme/patterns/template/menu/text.tres" id="2_ull8j"]
+[ext_resource type="StyleBox" uid="uid://belpqiw77873x" path="res://asset/resource/engine/internal/theme/slider/horizontal/area-grabber.tres" id="3_j0acm"]
+[ext_resource type="StyleBox" uid="uid://cjukg7l6l1urx" path="res://asset/resource/engine/internal/theme/slider/horizontal/area-slider.tres" id="4_ow36w"]
+[ext_resource type="StyleBox" uid="uid://dfwghdfkosy7u" path="res://asset/resource/engine/internal/theme/slider/horizontal/area-highlight.tres" id="5_thq8p"]
 
 [sub_resource type="Gradient" id="Gradient_n1w43"]
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_o3d5i"]
 gradient = SubResource("Gradient_n1w43")
 width = 1
+
+[sub_resource type="Gradient" id="Gradient_fo1a0"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_36r8i"]
+gradient = SubResource("Gradient_fo1a0")
+width = 1
+
+[sub_resource type="Gradient" id="Gradient_c1lch"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ktnei"]
+gradient = SubResource("Gradient_c1lch")
+width = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_71y6s"]
+bg_color = Color(0.0687983, 0.0687983, 0.0687982, 1)
 
 [node name="settings" type="CanvasLayer"]
 
@@ -158,13 +176,66 @@ size_flags_horizontal = 3
 size_flags_vertical = 10
 theme = ExtResource("2_ull8j")
 
-[node name="music" type="Button" parent="detector/margin/content/topics/sound/options/loudness"]
+[node name="slider" type="HSlider" parent="detector/margin/content/topics/sound/options/loudness"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.35
+size_flags_vertical = 8
+theme_override_icons/grabber = SubResource("GradientTexture1D_o3d5i")
+theme_override_icons/grabber_highlight = SubResource("GradientTexture1D_36r8i")
+theme_override_icons/grabber_disabled = SubResource("GradientTexture1D_ktnei")
+theme_override_styles/slider = ExtResource("4_ow36w")
+theme_override_styles/grabber_area = ExtResource("3_j0acm")
+theme_override_styles/grabber_area_highlight = ExtResource("5_thq8p")
+value = 50.0
 
-[node name="margin" type="MarginContainer" parent="detector/margin/content/topics/sound/options/loudness/music"]
+[node name="margin" type="MarginContainer" parent="detector/margin/content/topics/sound/options/loudness/slider"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 7
+
+[node name="music" type="Panel" parent="detector/margin/content/topics/sound/options/loudness/slider/margin"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_71y6s")
+
+[node name="volume" type="VBoxContainer" parent="detector/margin/content/topics/sound/options/loudness/slider/margin/music"]
+layout_mode = 2
+offset_right = 544.0
+offset_bottom = 40.0
+theme_override_constants/separation = 4
+
+[node name="state" type="MarginContainer" parent="detector/margin/content/topics/sound/options/loudness/slider/margin/music/volume"]
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 7
+
+[node name="caption" type="Label" parent="detector/margin/content/topics/sound/options/loudness/slider/margin/music/volume/state"]
+layout_mode = 2
+text = "Music"
+
+[node name="status" type="Label" parent="detector/margin/content/topics/sound/options/loudness/slider/margin/music/volume/state"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "100%"
+
+[node name="sound" type="Panel" parent="detector/margin/content/topics/sound/options/loudness"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="margin" type="MarginContainer" parent="detector/margin/content/topics/sound/options/loudness/sound"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -176,50 +247,32 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 
-[node name="volume" type="VBoxContainer" parent="detector/margin/content/topics/sound/options/loudness/music/margin"]
+[node name="volume" type="VBoxContainer" parent="detector/margin/content/topics/sound/options/loudness/sound/margin"]
 layout_mode = 2
 theme_override_constants/separation = 4
 
-[node name="state" type="MarginContainer" parent="detector/margin/content/topics/sound/options/loudness/music/margin/volume"]
+[node name="state" type="MarginContainer" parent="detector/margin/content/topics/sound/options/loudness/sound/margin/volume"]
 layout_mode = 2
 theme_override_constants/margin_left = 25
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 25
 theme_override_constants/margin_bottom = 7
 
-[node name="caption" type="Label" parent="detector/margin/content/topics/sound/options/loudness/music/margin/volume/state"]
+[node name="caption" type="Label" parent="detector/margin/content/topics/sound/options/loudness/sound/margin/volume/state"]
 layout_mode = 2
-text = "Music"
+text = "Sound"
 
-[node name="status" type="Label" parent="detector/margin/content/topics/sound/options/loudness/music/margin/volume/state"]
+[node name="status" type="Label" parent="detector/margin/content/topics/sound/options/loudness/sound/margin/volume/state"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "100%"
 
-[node name="slider" type="HSlider" parent="detector/margin/content/topics/sound/options/loudness/music/margin/volume"]
+[node name="slider" type="HSlider" parent="detector/margin/content/topics/sound/options/loudness/sound/margin/volume"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_vertical = 8
 theme_override_icons/grabber = SubResource("GradientTexture1D_o3d5i")
 value = 50.0
-
-[node name="sound" type="Button" parent="detector/margin/content/topics/sound/options/loudness"]
-custom_minimum_size = Vector2(300, 60)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.35
-
-[node name="margin" type="MarginContainer" parent="detector/margin/content/topics/sound/options/loudness/sound"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="caption" type="Label" parent="detector/margin/content/topics/sound/options/loudness/sound/margin"]
-layout_mode = 2
-text = "Sounds"
 
 [node name="system" type="Button" parent="detector/margin/content/topics/sound/options"]
 custom_minimum_size = Vector2(320, 60)
