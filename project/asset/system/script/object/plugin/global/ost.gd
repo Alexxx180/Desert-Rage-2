@@ -52,10 +52,13 @@ func _init_manifest(type: String) -> Dictionary:
 	return processor.data if _valid[type] else Defaults.DICT
 
 func _save_manifest(type: String) -> void:
+	pass
+	"""
 	var path: String = USER % type
 	var file: FileAccess = FileAccess.open(path, FileAccess.WRITE)
 	var json: String = JSON.stringify(_user[type])
-	file.story_string(json)
+	file.store_string(json)
+	"""
 
 func _exit_tree() -> void:
 	_save_manifest("music")

@@ -7,17 +7,17 @@ extends Node
 var _ui: VBoxContainer
 var _options: Node
 
-func selection(query: SoundtrackTreeQuery) -> void:
+func selection(query: TreeOST) -> void:
 	board.set_value("query", query)
 	behavior.tick(self, board)
 
-func enumerate(query: SoundtrackTreeQuery) -> void:
+func enumerate(query: TreeOST) -> void:
 	for key in query.context:
 		selection(query.copy().select(key))
 
 func setup() -> void:
 	if SoundtrackSystem.is_valid("music"):
-		var query: SoundtrackTreeQuery = SoundtrackTreeQuery.new()
+		var query: TreeOST = TreeOST.new()
 		var user: Dictionary = SoundtrackSystem.user.music
 		var copy: Dictionary = SoundtrackSystem.copy.music
 		query.set_data(user, copy)

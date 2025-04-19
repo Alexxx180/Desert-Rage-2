@@ -1,11 +1,11 @@
 extends Node
 
-func append_child(query: SoundtrackTreeQuery, child, recurse: bool = false) -> Control:
+func append_child(query: TreeOST, child, recurse: bool = false) -> Control:
 	var branch: Control = child.instantiate()
 	query.add_child(branch, recurse)
 	return branch
 
-func set_child(query: SoundtrackTreeQuery, child) -> Control:
+func set_child(query: TreeOST, child) -> Control:
 	var caption: String = query.caption
 	var branch: Control = append_child(query, child, true)
 	branch.name = caption
@@ -34,7 +34,7 @@ func set_blend(query, child, mix: int) -> void:
 	branch.set_metadata(mix)
 	query.set_ui(branch.content.themes.body)
 
-func set_alarm(query: SoundtrackTreeQuery, child) -> void:
+func set_alarm(query: TreeOST, child) -> void:
 	var branch: Control = append_child(query, child)
 	branch.set_metadata(query.context)
 	query.ui_tree.set = branch
