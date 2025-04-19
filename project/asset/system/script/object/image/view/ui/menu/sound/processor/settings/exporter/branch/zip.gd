@@ -4,8 +4,10 @@ extends Node
 
 func manifest(result: Dictionary) -> void:
 	print("RESULT: ", result)
+	var real: String = JSON.stringify(result, "\t")
+	print("REAL: ", real)
 	_writer.start_file("music.json")
-	_writer.write_file(JSON.stringify(result, "\t").to_utf8_buffer())
+	_writer.write_file(real.to_utf8_buffer())
 	_writer.close_file()
 
 func write(source: String, destination: String) -> void:
@@ -14,7 +16,7 @@ func write(source: String, destination: String) -> void:
 	if FileAccess.file_exists(source):
 		print("FILE EXISTS!!!")
 		var file: FileAccess = FileAccess.open(source, FileAccess.READ)
-		_writer.start_file(destination)
+		_writer.start_file(destination.replace("user://", ""))
 		_writer.write_file(file.get_buffer(file.get_length()))
 		_writer.close_file()
 		file.close()

@@ -2,8 +2,10 @@ extends Node
 
 signal update()
 
-const MANIFEST: String = "res://asset/resource/media/ost/%s.json"
-const USER: String = "user://%.json"
+var _json: Dictionary = {
+	"COPY": "res://asset/resource/media/ost/%s.json",
+	"USER": "user://%s.json"
+}
 
 var _copy: Dictionary = { "music": Defaults.DICT }
 var _user: Dictionary
@@ -12,9 +14,13 @@ var user: Dictionary:
 var copy: Dictionary:
 	get: return _copy
 
-var _valid: Dictionary = { "music": false, "sound": false }
+var _valid: Dictionary = {
+	"music": { "copy": false, "user": false }
+}
 
-func is_valid(type: String) -> bool: return _valid[type]
+func is_valid(type: String) -> bool:
+	return _valid[type].copy and _valid[type].user
+
 func update_ost() -> void: update.emit()
 
 func get_file(metadata: Dictionary) -> bool:
@@ -29,36 +35,24 @@ func get_value(ui: Dictionary, keys: Array) -> Dictionary:
 	return context
 
 func _ready() -> void:
-	_set_vault("music")
+	_init_vault("music")
 
 func reset() -> void:
-	_user.music = _copy.music
+	_init_vault("music", true)
 
-func _set_vault(theme: String) -> void:
-	var dir: DirAccess = DirAccess.open("user://")
-	var to: String = theme + ".json"
-	_copy.music = _init_manifest(theme)
-	if not dir.file_exists(to):
-		var from: String = MANIFEST % theme
-		dir.copy(from, to)
-	_user.music = _init_manifest(theme)
+func reimport() -> void:
+	_init_vault("music")
 
-func _init_manifest(type: String) -> Dictionary:
-	var path: String = MANIFEST % type
-	var file: FileAccess = FileAccess.open(path, FileAccess.READ)
-	var text: String = file.get_as_text()
-	var processor: JSON = JSON.new()
-	_valid[type] = processor.parse(text) == OK
-	return processor.data if _valid[type] else Defaults.DICT
+func _set_vault(from: String, to: String, force: bool = false) -> void:
+	Vault.copy(from, to, force)
+	_copy.music = Vault.get_json(from, func(s): _valid.music.copy = s)
+	_user.music = Vault.get_json(to, func(s): _valid.music.user = s)
+
+func _init_vault(type: String, force: bool = false) -> void:
+	_set_vault(_json.COPY % type, _json.USER % type, force)
 
 func _save_manifest(type: String) -> void:
-	pass
-	"""
-	var path: String = USER % type
-	var file: FileAccess = FileAccess.open(path, FileAccess.WRITE)
-	var json: String = JSON.stringify(_user[type])
-	file.store_string(json)
-	"""
+	Vault.set_json(_json.USER % type, _user[type])
 
 func _exit_tree() -> void:
 	_save_manifest("music")

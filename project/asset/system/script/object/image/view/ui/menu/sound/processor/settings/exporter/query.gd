@@ -20,7 +20,7 @@ func copy() -> ExportOST:
 	#return self
 
 func get_path(track: String) -> String:
-	return path + track.substr(track.rfind("/") + 1) #  + "/"
+	return "user://" + path + track.substr(track.rfind("/") + 1) #  + "/"
 
 func set_alarm() -> ExportOST:
 	result[caption] = []

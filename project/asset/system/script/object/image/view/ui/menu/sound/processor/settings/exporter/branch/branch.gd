@@ -3,8 +3,8 @@ extends Node
 @onready var zip: Node = $zip
 
 func set_trunks(exporter: Node, query: ExportOST) -> void:
-	exporter.selection(query.set_branch().copy().select("type").set_branch())
-	exporter.selection(query.set_branch().copy().select("name").set_branch())
+	exporter.selection(query.set_branch().copy().select("type"))#.set_branch())
+	exporter.selection(query.copy().select("name"))#.set_branch())
 
 func set_branch(exporter: Node, query: ExportOST) -> void:
 	exporter.enumerate(query.set_branch())

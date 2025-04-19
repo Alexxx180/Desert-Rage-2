@@ -26,12 +26,19 @@ func setup() -> void:
 		enumerate(query)
 		_options.setup()
 
-func reset() -> void:
+func _reload() -> void:
 	for leaf in _ui.dropdown.get_children():
 		_ui.dropdown.remove_child(leaf)
 		leaf.queue_free()
-	SoundtrackSystem.reset()
 	setup()
+
+func reset() -> void:
+	SoundtrackSystem.reset()
+	_reload()
+
+func reimport() -> void:
+	SoundtrackSystem.reimport()
+	_reload()
 
 func set_soundtrack(options: Node, ui: VBoxContainer) -> void:
 	_options = options
