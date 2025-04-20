@@ -4,8 +4,12 @@ class_name Vault
 
 static func copy(from: String, to: String, force: bool = false) -> void:
 	var dir: DirAccess = DirAccess.open("user://")
-	if force or not dir.file_exists(to):
-		dir.copy(from, to)
+	print("COPY FROM? ", from)
+	if force:
+		print("FORCE DELETE: ", to, " = ", dir.remove(to))
+		#print("COPY! ", to, " = ", dir.copy(from, to))
+	if not dir.file_exists(to):
+		print("COPY! ", to, " = ", dir.copy(from, to))
 
 static func get_json(path: String, feedback: Callable) -> Dictionary:
 	if not FileAccess.file_exists(path):

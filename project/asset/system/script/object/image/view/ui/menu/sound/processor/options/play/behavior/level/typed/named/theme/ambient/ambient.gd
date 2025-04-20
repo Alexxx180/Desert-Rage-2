@@ -1,17 +1,15 @@
-extends BehaviorSequence
+extends BehaviorSelector
 
-@onready var check: BehaviorAction = $assert
-@onready var theme: BehaviorSelector = $theme
+@onready var rampage: Array[BehaviorSequence] = [$ambient, $heating, $rampage]
 
-@export var rampage: int:
-	set(value): $assert.rampage = value
-var type: int:
-	set(value): theme.named.type = value
 var caption: int:
-	set(value): theme.named.caption = value
+	set(value): set_ambient(func(a): a.caption = value)
+var type: int:
+	set(value): set_ambient(func(a): a.type = value)
 
-func _ready() -> void:
-	theme.status = name
+func set_ambient(feedback: Callable) -> void:
+	for status in rampage:
+		feedback.call(status)
 
 func set_ost(music: Node) -> void:
-	theme.set_ost(music)
+	set_ambient(func(a): a.set_ost(music))

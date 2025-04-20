@@ -8,7 +8,8 @@ func set_ost(music: Node) -> void:
 func tick(mark: Tick) -> int:
 	var key: String = "rampage"
 	if mark.blackboard.compare(key, RAMPAGE):
-		mark.actor.player.load_music(get_track())
+		mark.actor.as_theme(_ost, get_track())
+		# mark.actor.player.load_music(get_track())
 		mark.blackboard.set_value(key, RAMPAGE + 1)
 		return OK
 	return FAILED

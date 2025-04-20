@@ -1,18 +1,13 @@
 extends BehaviorSequence
 
 @onready var check: BehaviorAction = $assert
+@onready var levels: BehaviorSelector = $levels
 
-@export var type: int:
-	set(value):
-		check.type = value
-		set_levels(func(l): l.type = value)
+@export var type: int = 0
 
-func set_levels(feedback: Callable) -> void:
-	var levels: Array[Node] = get_children()
-	var i: int = levels.size()
-	while i > 1:
-		i -= 1
-		feedback.call(levels[i])
+func _ready() -> void:
+	check.type = type
+	levels.set_dungeons(func(l): l.type = type)
 
 func set_ost(music: Node) -> void:
-	set_levels(func(l): l.set_ost(music))
+	levels.set_dungeons(func(l): l.set_ost(music))

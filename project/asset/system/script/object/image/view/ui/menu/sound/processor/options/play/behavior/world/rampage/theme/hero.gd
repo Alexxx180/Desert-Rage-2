@@ -2,17 +2,20 @@ extends BehaviorActionPlayback
 
 class_name HeroBattleTheme
 
-enum { MIN = 0, MAX = 100, RAMPAGE = 1 }
+signal progress(mark: Tick)
+
+enum { MIN = 0, MAX = 100 }
 
 func set_ost(music: Node) -> void:
-	_ost = music.world.named.ost.rampage.theme
+	_ost = music.world.named.ost.rampage
 
 func probable(mix: int) -> bool:
 	return mix != MIN and (mix == MAX or randi_range(mix, MAX) == MAX)
 
 func tick(mark: Tick) -> int:
-	if probable(_ost.mix):
-		mark.actor.player.load_music(_ost.set.values().pick_random())
-		mark.blackboard.set_value("rampage", RAMPAGE + 1)
-		return OK
+	if probable(_ost.theme.mix):
+		#mark.actor.player.load_music(_ost.set.values().pick_random())
+		var result = super.tick(mark)
+		progress.emit(mark)
+		return result
 	return FAILED

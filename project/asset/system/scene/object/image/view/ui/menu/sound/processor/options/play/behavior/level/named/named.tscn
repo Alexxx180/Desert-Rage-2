@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://b72vjryp7gko3"]
+[gd_scene load_steps=8 format=3 uid="uid://b72vjryp7gko3"]
 
 [ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/sound/processor/options/play/behavior/level/typed/named/named.gd" id="1_t4umh"]
 [ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/sound/processor/options/play/behavior/level/typed/named/assert.gd" id="2_1whc1"]
 [ext_resource type="PackedScene" uid="uid://x0h38exydwiy" path="res://asset/system/scene/object/image/view/ui/menu/sound/processor/options/play/behavior/level/named/ambient.tscn" id="3_l3n4c"]
 [ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/sound/processor/options/play/behavior/level/typed/named/theme/theme.gd" id="3_sek0s"]
+[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/sound/processor/options/play/behavior/level/typed/named/theme/ambient/ambient.gd" id="4_rbocp"]
 [ext_resource type="PackedScene" uid="uid://c4y8cjl3may6k" path="res://asset/system/scene/object/image/view/ui/menu/sound/processor/options/play/behavior/level/named/fight/boss.tscn" id="5_rsyr3"]
 [ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/sound/processor/options/play/behavior/level/typed/named/finish.gd" id="6_ltjjl"]
 
@@ -16,15 +17,18 @@ script = ExtResource("2_1whc1")
 [node name="theme" type="Node" parent="."]
 script = ExtResource("3_sek0s")
 
-[node name="ambient" parent="theme" instance=ExtResource("3_l3n4c")]
+[node name="ambient" type="Node" parent="theme"]
+script = ExtResource("4_rbocp")
 
-[node name="heating" parent="theme" instance=ExtResource("3_l3n4c")]
+[node name="ambient" parent="theme/ambient" instance=ExtResource("3_l3n4c")]
+
+[node name="heating" parent="theme/ambient" instance=ExtResource("3_l3n4c")]
 rampage = 1
 
-[node name="rampage" parent="theme" instance=ExtResource("3_l3n4c")]
+[node name="rampage" parent="theme/ambient" instance=ExtResource("3_l3n4c")]
 rampage = 2
 
-[node name="boss" parent="." instance=ExtResource("5_rsyr3")]
+[node name="boss" parent="theme" instance=ExtResource("5_rsyr3")]
 
-[node name="finish" type="Node" parent="."]
+[node name="finish" type="Node" parent="theme"]
 script = ExtResource("6_ltjjl")

@@ -11,6 +11,7 @@ func reset() -> void:
 	set_value("level_name", 0)
 	set_value("event", 0)
 	set_value("rampage", 0)
+	update_progress()
 
 func update_progress() -> void:
 	var event: int = get_value("event")

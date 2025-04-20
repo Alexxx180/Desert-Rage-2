@@ -4,5 +4,5 @@ extends HBoxContainer
 @onready var add: Button = $add
 @onready var search: Button = $search
 
-func get_options(play: Button) -> Array[Button]:
-	return [drop, add, search, play]
+var options: Array[Button]:
+	get: return [drop, add, search]

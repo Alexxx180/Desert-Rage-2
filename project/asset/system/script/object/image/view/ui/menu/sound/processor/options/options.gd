@@ -25,17 +25,25 @@ func set_blend_theme(entry: Dictionary, leaf: Control) -> void:
 	operation.set_blend_theme(self, entry, leaf)
 
 func setup_search(options: Control) -> void:
-	var group: Array[Button] = options.search.get_options(options.play)
+	var group: Array[Button] = options.search.options
 	var i: int = group.size()
 	while i > 0:
 		i -= 1
-		group[i].pressed.connect(func(): operation.type = i)
+		group[i].pressed.connect(func():
+			operation.type = i
+			options.switch_skip())
+	options.play.pressed.connect(func():
+		play.play_progress()
+		operation.type = 3
+		options.switch_play())
+	options.skip.pressed.connect(play.play_progress)
 
 func set_operations(menu: VBoxContainer) -> void:
 	var theme: OpenThemeDialog = $theme
 	add.context = theme
 	search.theme = theme
 	setup_search(menu.options)
+	play.playback.connect(func(status): menu.playback.text = status)
 	play.board.progress.connect(func(value): menu.progress.value = value)
 
 func setup() -> void:

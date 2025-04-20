@@ -1,17 +1,18 @@
-extends BehaviorSelector
+extends BehaviorSequence
 
 @onready var theme: BehaviorSelector = $theme
-@onready var boss: BehaviorSequence = $boss
 
 @export_category("Level")
-@export var caption: int:
-	set(value): theme.caption = value
-@export var boss_fight: String:
-	set(value): $boss.level_boss = value
+@export var caption: int = 0
+@export var boss_fight: String = ""
 
 var type: int:
-	set(value): theme.type = value
+	set(value): theme.ambient.type = value
+
+func _ready() -> void:
+	$assert.caption = caption
+	theme.ambient.caption = caption
+	theme.boss.level_boss = boss_fight
 
 func set_ost(music: Node) -> void:
 	theme.set_ost(music)
-	boss.set_ost(music)

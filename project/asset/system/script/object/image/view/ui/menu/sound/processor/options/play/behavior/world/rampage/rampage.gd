@@ -5,3 +5,6 @@ extends BehaviorSequence
 
 func set_ost(music: Node) -> void:
 	theme.set_ost(music)
+
+func _ready() -> void:
+	theme.connect_rampage(check)

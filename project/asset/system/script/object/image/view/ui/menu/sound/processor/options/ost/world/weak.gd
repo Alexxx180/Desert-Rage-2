@@ -9,6 +9,6 @@ func set_ost(options: Node) -> void:
 	ost = { 
 		"ui": options.ui.world.weak,
 		"theme": SoundtrackSystem.user.music.world.weak,
-		"play": func(_b): pass
+		"play": func(_b, _u): pass
 	}
 	set_leaf(options, ost)

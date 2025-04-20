@@ -5,6 +5,6 @@ extends Node
 @onready var setup: Node = $setup
 
 func set_soundtrack(detector: VBoxContainer) -> void:
-	settings.setup = setup
-	settings.set_info(detector.settings.info)
+	settings.set_info(detector.settings.info, setup)
+	settings.set_tabs(detector.settings.tabs, options)
 	setup.set_soundtrack(options, detector)

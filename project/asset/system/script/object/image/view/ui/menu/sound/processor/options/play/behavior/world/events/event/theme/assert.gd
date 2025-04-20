@@ -2,12 +2,15 @@ extends BehaviorLevelProgress
 
 class_name BehaviorActionEvent
 
-@export var event: int = 0
+var event: int = 0
+var key: String = "event"
+
+func add_rampage(mark: Tick) -> void:
+	set_progress(mark.blackboard)
+	mark.blackboard.add_value(key, 1)
 
 func tick(mark: Tick) -> int:
-	var key: String = "event"
+	print("EVENT: ", get_parent().name)
 	if mark.blackboard.compare(key, event):
-		set_progress(mark.blackboard)
-		mark.blackboard.add_value(key, 1)
 		return OK
 	return FAILED

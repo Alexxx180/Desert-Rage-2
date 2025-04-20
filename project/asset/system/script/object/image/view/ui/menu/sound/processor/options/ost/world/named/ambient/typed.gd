@@ -4,7 +4,7 @@ func set_types(options: Node, event: String) -> void:
 	ost[event] = {
 		"ui": options.ui.world.ambient.name[event].type,
 		"theme": SoundtrackSystem.user.music.world.ambient.name[event].type,
-		"play": func(board: BehaviorBlackboard):
+		"play": func(board: BehaviorBlackboard, _ui):
 			board.set_value("level", false)
 			board.update_progress()
 	}

@@ -37,6 +37,7 @@ theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
 [node name="soundtrack" type="VBoxContainer" parent="detector/margin"]
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 script = ExtResource("3_6cqct")
 
@@ -62,10 +63,23 @@ custom_minimum_size = Vector2(150, 200)
 layout_mode = 2
 size_flags_vertical = 2
 
-[node name="playback" type="Label" parent="detector/margin/soundtrack"]
+[node name="playback" type="Control" parent="detector/margin/soundtrack"]
+custom_minimum_size = Vector2(200, 25)
 layout_mode = 2
+
+[node name="status" type="Label" parent="detector/margin/soundtrack/playback"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 4
-text = "Opening"
+size_flags_vertical = 8
+horizontal_alignment = 1
+clip_text = true
+text_overrun_behavior = 3
+text_direction = 2
 
 [node name="progress" type="ProgressBar" parent="detector/margin/soundtrack"]
 custom_minimum_size = Vector2(0, 2)
@@ -73,8 +87,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8
 theme_override_styles/fill = SubResource("StyleBoxFlat_fb1ce")
-max_value = 26.0
-value = 10.0
+max_value = 30.0
 show_percentage = false
 
 [node name="options" parent="detector/margin/soundtrack" instance=ExtResource("2_s3j2j")]

@@ -13,7 +13,7 @@ static func get_level_types() -> Array[String]:
 
 static func get_level_names() -> Dictionary:
 	return {
-		"caves": ["origin", "smoke", "sparkling"]
+		"caves": ["origin", "smoke", "sparkling", "ghost"]
 	}
 
 func setup(options: Node) -> void:

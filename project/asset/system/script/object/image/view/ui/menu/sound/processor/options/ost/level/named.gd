@@ -1,7 +1,7 @@
 extends OSTLeaf
 
 func get_playback(type: int, level: int) -> Callable:
-	return func(board: BehaviorBlackboard):
+	return func(board: BehaviorBlackboard, _ui):
 		board.set_value("level", true)
 		board.set_value("level_type", type)
 		board.set_value("level_name", level)
@@ -19,6 +19,7 @@ func set_names(options: Node, types: Array[String], i: int) -> void:
 			"theme": SoundtrackSystem.user.music.level[type].name[level],
 			"play": get_playback(i, j)
 		}
+		#print("LOCATION: ", j, " & ", locations[type][j])
 		set_leaf(options, ost[i][j])
 
 func set_ost(options: Node) -> void:
