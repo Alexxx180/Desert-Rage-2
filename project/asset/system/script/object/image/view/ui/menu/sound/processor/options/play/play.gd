@@ -6,9 +6,19 @@ signal playback(status: String)
 @onready var behavior: BehaviorTree = $behavior
 @onready var board: BehaviorBlackboard = $blackboard
 
+var started = false
+
 func play_progress() -> void:
 	behavior.tick(self, board)
 	board.update_progress()
+
+func start_play() -> void:
+	if started:
+		player.stream_paused = false
+		#player.play()
+	else:
+		play_progress()
+		started = true
 
 func set_ost(ost: Node) -> void:
 	behavior.set_ost(ost)

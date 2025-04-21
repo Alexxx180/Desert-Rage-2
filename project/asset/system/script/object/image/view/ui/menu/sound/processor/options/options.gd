@@ -31,10 +31,10 @@ func setup_search(options: Control) -> void:
 		i -= 1
 		group[i].pressed.connect(func():
 			operation.type = i
-			play.player.stop()
+			play.player.stream_paused = true
 			options.switch_skip())
 	options.play.pressed.connect(func():
-		play.play_progress()
+		play.start_play()
 		operation.type = 3
 		options.switch_play())
 	options.skip.pressed.connect(play.play_progress)
