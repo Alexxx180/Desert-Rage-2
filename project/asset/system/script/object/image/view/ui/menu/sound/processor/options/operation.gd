@@ -11,7 +11,7 @@ func set_leaf_theme(options: Node, entry: Dictionary, leaf: Control) -> void:
 	leaf.pressed.connect(func():
 		match type:
 			DROP: options.drop.from_theme(entry, leaf)
-			ADD: options.add.to_theme(self, entry, leaf)
+			ADD: options.add.to_theme(options, entry, leaf)
 			SET: options.search.for_theme(entry, leaf)
 			PLAY: options.play.as_theme(entry, leaf)
 	)

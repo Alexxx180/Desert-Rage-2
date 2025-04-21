@@ -7,6 +7,7 @@ var _json: Dictionary = {
 	"USER": "user://%s.json"
 }
 
+var save: bool = false
 var _copy: Dictionary = { "music": Defaults.DICT }
 var _user: Dictionary
 var user: Dictionary:
@@ -54,5 +55,10 @@ func _init_vault(type: String, force: bool = false) -> void:
 func _save_manifest(type: String) -> void:
 	Vault.set_json(_json.USER % type, _user[type])
 
+func save_changes() -> void:
+	if save:
+		_save_manifest("music")
+	save = false
+
 func _exit_tree() -> void:
-	_save_manifest("music")
+	save_changes()

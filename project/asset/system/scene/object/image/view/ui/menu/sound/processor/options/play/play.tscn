@@ -11,9 +11,14 @@ script = ExtResource("1_c1vfi")
 [node name="player" type="AudioStreamPlayer" parent="."]
 script = ExtResource("2_frttp")
 
+[node name="timer" type="Timer" parent="player"]
+wait_time = 0.5
+one_shot = true
+
 [node name="behavior" parent="." instance=ExtResource("3_n50p8")]
 
 [node name="blackboard" type="Node" parent="."]
 script = ExtResource("4_s2u2e")
 
 [connection signal="finished" from="player" to="." method="play_progress"]
+[connection signal="timeout" from="player/timer" to="player" method="_load_music"]

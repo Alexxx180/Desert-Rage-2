@@ -20,3 +20,4 @@ func set_progress(board: BehaviorBlackboard) -> void:
 	board.set_value("level", true)
 	board.set_value("event", progress)
 	board.set_value("rampage", 0)
+	board.set_value("level_rampage", 0)

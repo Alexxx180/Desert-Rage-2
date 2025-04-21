@@ -1,6 +1,7 @@
 extends Control
 
 @onready var search: HBoxContainer = $search
+@onready var back: Button = $back
 @onready var play: Button = $play/play
 @onready var skip: Button = $play/skip
 

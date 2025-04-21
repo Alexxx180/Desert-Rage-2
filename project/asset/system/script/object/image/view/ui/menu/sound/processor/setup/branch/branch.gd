@@ -4,8 +4,7 @@ extends Node
 @onready var ui: Node = $ui
 
 func set_blend(query: TreeOST) -> void:
-	var mix: int = clampi(query.decide("mix"), 0, 100)
-	leafs.set_blend(query, ui.blend, mix)
+	leafs.set_blend(query, ui.blend)
 	leafs.include(query, ui.named, leafs.set_titled, "set", {})
 
 func set_trunks(setup: Node, query: TreeOST) -> void:
@@ -24,9 +23,9 @@ func set_named(query: TreeOST) -> void:
 	leafs.include(query, ui.named, leafs.set_titled, "", {})
 
 func set_themes(query: TreeOST) -> void:
-	leafs.set_child(query, ui.mix[query.pad])
+	leafs.set_mix(query, ui.mix)
 	leafs.include(query.nest_body(), ui.theme, leafs.set_theme, "set", [])
 
 func set_combat(query: TreeOST) -> void:
-	leafs.set_child(query, ui.mix[query.pad])
+	leafs.set_mix(query, ui.mix)
 	leafs.include(query.nest_body(), ui.fight, leafs.set_fight, "set", [])

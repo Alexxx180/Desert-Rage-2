@@ -6,6 +6,7 @@ var fight: Resource = preload("res://asset/system/scene/object/image/view/ui/men
 var context: OpenThemeDialog
 
 func _add_leaf(entry: Dictionary, kind: Resource, ui: Control) -> Control:
+	SoundtrackSystem.save = true
 	var list: Array = entry.ui.set
 	var leaf: Control = kind.instantiate()
 	var i: int = ui.i + 1

@@ -12,7 +12,7 @@ var _caption: String
 var level_boss: String:
 	set(value):
 		_caption = value
-		$assert.has_boss = true
+		$assert.has_boss = value != ""
 		$assert.rampage = RAMPAGE
 
 func set_ost(music: Node) -> void:

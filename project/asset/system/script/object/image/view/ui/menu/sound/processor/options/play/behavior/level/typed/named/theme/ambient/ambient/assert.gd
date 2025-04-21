@@ -3,7 +3,7 @@ extends BehaviorAction
 class_name AmbientPlaybackAssert
 
 var rampage: int = 0
-var key: String = "rampage"
+var key: String = "level_rampage"
 
 func compare(board: BehaviorBlackboard) -> bool:
 	return board.compare(key, rampage)

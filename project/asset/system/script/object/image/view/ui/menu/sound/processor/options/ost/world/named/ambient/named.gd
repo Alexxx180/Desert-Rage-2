@@ -18,6 +18,7 @@ func set_types(options: Node, event: String) -> void:
 		"theme": SoundtrackSystem.user.music.world.ambient.name[event].name,
 		"play": func(board: BehaviorBlackboard, ui: Control):
 			board.set_value("level", false)
+			board.set_value("rampage", 0)
 			board.set_value("event", ui.event.id)
 			board.update_progress()
 	}

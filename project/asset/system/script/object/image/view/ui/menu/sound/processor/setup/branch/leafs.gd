@@ -29,9 +29,16 @@ func set_titled(query, child, tracks, track) -> void:
 	branch.set_title(track)
 	query.ui_tree.set[track] = branch
 
-func set_blend(query, child, mix: int) -> void:
+func set_mix(query, child) -> void:
 	var branch: Control = set_child(query, child[query.pad])
-	branch.set_metadata(mix)
+	#branch.set_metadata(mix)
+	branch.connect_mix(query.context)
+	# query.set_ui(branch.content.themes.body)
+
+func set_blend(query, child) -> void:
+	var branch: Control = set_child(query, child[query.pad])
+	#branch.set_metadata(mix)
+	branch.connect_mix(query.context)
 	query.set_ui(branch.content.themes.body)
 
 func set_alarm(query: TreeOST, child) -> void:

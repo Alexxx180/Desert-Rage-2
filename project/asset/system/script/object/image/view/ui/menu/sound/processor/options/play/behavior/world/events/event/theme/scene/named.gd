@@ -16,7 +16,7 @@ func _has_access(track: String) -> bool:
 	return track != "" and FileAccess.file_exists(track)
 
 func tick(mark: Tick) -> int:
-	if _ost.has(caption) and _has_access(_ost[caption]):
+	if _ost.theme.has(caption) and _has_access(_ost.theme[caption]):
 		set_track(mark)
 		progress.emit(mark)
 		return OK

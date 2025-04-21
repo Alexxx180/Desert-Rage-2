@@ -44,6 +44,6 @@ func as_ambient(entry: Dictionary, status: String, ui: Control) -> void:
 		"ambient": rampage = 0
 		"heating": rampage = 1
 		"rampage": rampage = 2
-	board.set_value("rampage", rampage)
+	board.set_value("level_rampage", rampage)
 	entry.play.call(board, ui)
 	set_status({ "caption": ui.content[status].caption, "name": status, "track": entry.theme.set[ui.i][status] })

@@ -5,8 +5,8 @@ extends BehaviorSequence
 
 @export var event: int = 0
 
-func set_ost(music: Node, event: int) -> void:
-	theme.set_ost(music, event, name)
+func set_ost(music: Node, _event: int) -> void:
+	theme.set_ost(music, _event, name)
 
 func _ready() -> void:
 	check.event = event

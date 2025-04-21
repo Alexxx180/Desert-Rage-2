@@ -1,6 +1,7 @@
 extends Node
 
 func from_theme(entry: Dictionary, ui: Control) -> void:
+	SoundtrackSystem.save = true
 	var themes: Array = entry.theme.set
 	if themes.size() > 1:
 		var i: int = ui.i

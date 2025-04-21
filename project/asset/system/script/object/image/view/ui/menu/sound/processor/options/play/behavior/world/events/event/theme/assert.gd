@@ -7,7 +7,6 @@ var key: String = "event"
 
 func add_rampage(mark: Tick) -> void:
 	set_progress(mark.blackboard)
-	mark.blackboard.add_value(key, 1)
 
 func tick(mark: Tick) -> int:
 	print("EVENT: ", get_parent().name)

@@ -28,7 +28,7 @@ func stop_write() -> void:
 	_writer.close()
 
 func append(query: ExportOST, from: Array, to: Array, i: int) -> void:
-	to.push_front(query.get_path(from[i]))
+	to.push_back(query.get_path(from[i]))
 	write(from[i], to[i])
 
 func insert(query: ExportOST, from: Dictionary, to: Dictionary, key: String) -> void:
@@ -38,7 +38,7 @@ func insert(query: ExportOST, from: Dictionary, to: Dictionary, key: String) -> 
 func iterate(query: ExportOST, feedback: Callable) -> void:
 	query.result.mix = query.context.mix
 	query.result.set = []
-	var i: int = query.context.set.size()
-	while i > 0:
-		i -= 1
+	var i: int = 0
+	while i < query.context.set.size():
 		feedback.call(i)
+		i += 1

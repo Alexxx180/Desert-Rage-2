@@ -31,12 +31,14 @@ func setup_search(options: Control) -> void:
 		i -= 1
 		group[i].pressed.connect(func():
 			operation.type = i
+			play.player.stop()
 			options.switch_skip())
 	options.play.pressed.connect(func():
 		play.play_progress()
 		operation.type = 3
 		options.switch_play())
 	options.skip.pressed.connect(play.play_progress)
+	options.back.pressed.connect(SoundtrackSystem.save_changes)
 
 func set_operations(menu: VBoxContainer) -> void:
 	var theme: OpenThemeDialog = $theme

@@ -28,5 +28,5 @@ func set_ost(options: Node) -> void:
 	set_theme(options, "theme", play)
 	play = func(board, i):
 		board.set_value("level_type", i)
-		board.set_value("rampage", 4)
+		board.set_value("level_rampage", 4)
 	set_theme(options, "boss", play)
