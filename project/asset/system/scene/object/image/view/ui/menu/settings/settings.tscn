@@ -49,136 +49,59 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_vs08l")
 
-[node name="content" type="ScrollContainer" parent="detector/margin"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="topics" type="VBoxContainer" parent="detector/margin/content"]
+[node name="topics" type="VBoxContainer" parent="detector/margin"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.35
 
-[node name="space" type="Control" parent="detector/margin/content/topics"]
+[node name="help" type="MarginContainer" parent="detector/margin/topics"]
+custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
-size_flags_vertical = 3
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_bottom = 10
 
-[node name="experience" type="VBoxContainer" parent="detector/margin/content/topics"]
+[node name="description" type="Label" parent="detector/margin/topics/help"]
 visible = false
-custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Get some help"
+
+[node name="content" type="ScrollContainer" parent="detector/margin/topics"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="options" type="VBoxContainer" parent="detector/margin/topics/content"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 10
+size_flags_vertical = 6
 
-[node name="options" type="HFlowContainer" parent="detector/margin/content/topics/experience"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 10
-theme = ExtResource("2_ull8j")
-
-[node name="narrative" type="Button" parent="detector/margin/content/topics/experience/options"]
-custom_minimum_size = Vector2(300, 60)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.35
-
-[node name="margin" type="MarginContainer" parent="detector/margin/content/topics/experience/options/narrative"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="caption" type="Label" parent="detector/margin/content/topics/experience/options/narrative/margin"]
-layout_mode = 2
-text = "The Narrative"
-
-[node name="status" type="Label" parent="detector/margin/content/topics/experience/options/narrative/margin"]
-layout_mode = 2
-size_flags_horizontal = 8
-text = "On"
-
-[node name="emotions" type="Button" parent="detector/margin/content/topics/experience/options"]
-custom_minimum_size = Vector2(300, 60)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.35
-
-[node name="margin" type="MarginContainer" parent="detector/margin/content/topics/experience/options/emotions"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="caption" type="Label" parent="detector/margin/content/topics/experience/options/emotions/margin"]
-layout_mode = 2
-text = "Emotions"
-
-[node name="status" type="Label" parent="detector/margin/content/topics/experience/options/emotions/margin"]
-layout_mode = 2
-size_flags_horizontal = 8
-text = "On"
-
-[node name="head" type="HFlowContainer" parent="detector/margin/content/topics/experience"]
-layout_mode = 2
-
-[node name="exit" type="Button" parent="detector/margin/content/topics/experience/head"]
-custom_minimum_size = Vector2(300, 60)
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="margin" type="MarginContainer" parent="detector/margin/content/topics/experience/head/exit"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="label" type="Label" parent="detector/margin/content/topics/experience/head/exit/margin"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.54902, 0.54902, 0.54902, 1)
-text = "Play"
-
-[node name="caption" type="Button" parent="detector/margin/content/topics/experience/head"]
-custom_minimum_size = Vector2(300, 60)
-layout_mode = 2
-size_flags_horizontal = 3
-toggle_mode = true
-
-[node name="margin" type="MarginContainer" parent="detector/margin/content/topics/experience/head/caption"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="label" type="Label" parent="detector/margin/content/topics/experience/head/caption/margin"]
-layout_mode = 2
-text = "Game Experience"
-
-[node name="sound" type="VBoxContainer" parent="detector/margin/content/topics"]
-visible = false
+[node name="sound" type="VBoxContainer" parent="detector/margin/topics/content/options"]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8
 
-[node name="options" type="VBoxContainer" parent="detector/margin/content/topics/sound"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/sound"]
+layout_mode = 2
+theme_override_constants/margin_top = 0
+
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/sound/margin"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "Sound"
+
+[node name="options" type="VBoxContainer" parent="detector/margin/topics/content/options/sound"]
 layout_mode = 2
 theme = ExtResource("2_ull8j")
 
-[node name="loudness" type="HFlowContainer" parent="detector/margin/content/topics/sound/options"]
+[node name="loudness" type="HFlowContainer" parent="detector/margin/topics/content/options/sound/options"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 10
 theme = ExtResource("2_ull8j")
 
-[node name="music" type="HSlider" parent="detector/margin/content/topics/sound/options/loudness"]
+[node name="music" type="HSlider" parent="detector/margin/topics/content/options/sound/options/loudness"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -191,7 +114,7 @@ theme_override_styles/grabber_area = ExtResource("3_j0acm")
 theme_override_styles/grabber_area_highlight = ExtResource("5_thq8p")
 value = 50.0
 
-[node name="margin" type="MarginContainer" parent="detector/margin/content/topics/sound/options/loudness/music"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/sound/options/loudness/music"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -203,14 +126,14 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 7
 
-[node name="music" type="Panel" parent="detector/margin/content/topics/sound/options/loudness/music/margin"]
+[node name="music" type="Panel" parent="detector/margin/topics/content/options/sound/options/loudness/music/margin"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.35
 mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_71y6s")
 
-[node name="volume" type="VBoxContainer" parent="detector/margin/content/topics/sound/options/loudness/music/margin/music"]
+[node name="volume" type="VBoxContainer" parent="detector/margin/topics/content/options/sound/options/loudness/music/margin/music"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -219,23 +142,23 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 4
 
-[node name="state" type="MarginContainer" parent="detector/margin/content/topics/sound/options/loudness/music/margin/music/volume"]
+[node name="state" type="MarginContainer" parent="detector/margin/topics/content/options/sound/options/loudness/music/margin/music/volume"]
 layout_mode = 2
 theme_override_constants/margin_left = 25
-theme_override_constants/margin_top = 20
+theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 25
 theme_override_constants/margin_bottom = 7
 
-[node name="caption" type="Label" parent="detector/margin/content/topics/sound/options/loudness/music/margin/music/volume/state"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/sound/options/loudness/music/margin/music/volume/state"]
 layout_mode = 2
 text = "Music"
 
-[node name="status" type="Label" parent="detector/margin/content/topics/sound/options/loudness/music/margin/music/volume/state"]
+[node name="status" type="Label" parent="detector/margin/topics/content/options/sound/options/loudness/music/margin/music/volume/state"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "100%"
 
-[node name="sound" type="HSlider" parent="detector/margin/content/topics/sound/options/loudness"]
+[node name="sound" type="HSlider" parent="detector/margin/topics/content/options/sound/options/loudness"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -248,7 +171,7 @@ theme_override_styles/grabber_area = ExtResource("3_j0acm")
 theme_override_styles/grabber_area_highlight = ExtResource("5_thq8p")
 value = 50.0
 
-[node name="margin" type="MarginContainer" parent="detector/margin/content/topics/sound/options/loudness/sound"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/sound/options/loudness/sound"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -260,14 +183,14 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 7
 
-[node name="music" type="Panel" parent="detector/margin/content/topics/sound/options/loudness/sound/margin"]
+[node name="music" type="Panel" parent="detector/margin/topics/content/options/sound/options/loudness/sound/margin"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.35
 mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_71y6s")
 
-[node name="volume" type="VBoxContainer" parent="detector/margin/content/topics/sound/options/loudness/sound/margin/music"]
+[node name="volume" type="VBoxContainer" parent="detector/margin/topics/content/options/sound/options/loudness/sound/margin/music"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -276,49 +199,28 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 4
 
-[node name="state" type="MarginContainer" parent="detector/margin/content/topics/sound/options/loudness/sound/margin/music/volume"]
+[node name="state" type="MarginContainer" parent="detector/margin/topics/content/options/sound/options/loudness/sound/margin/music/volume"]
 layout_mode = 2
 theme_override_constants/margin_left = 25
-theme_override_constants/margin_top = 20
+theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 25
 theme_override_constants/margin_bottom = 7
 
-[node name="caption" type="Label" parent="detector/margin/content/topics/sound/options/loudness/sound/margin/music/volume/state"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/sound/options/loudness/sound/margin/music/volume/state"]
 layout_mode = 2
 text = "Sound"
 
-[node name="status" type="Label" parent="detector/margin/content/topics/sound/options/loudness/sound/margin/music/volume/state"]
+[node name="status" type="Label" parent="detector/margin/topics/content/options/sound/options/loudness/sound/margin/music/volume/state"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "100%"
 
-[node name="system" type="Button" parent="detector/margin/content/topics/sound/options"]
-custom_minimum_size = Vector2(320, 60)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.35
-
-[node name="margin" type="MarginContainer" parent="detector/margin/content/topics/sound/options/system"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="caption" type="Label" parent="detector/margin/content/topics/sound/options/system/margin"]
-layout_mode = 2
-text = "Soundtrack System"
-
-[node name="head" type="HFlowContainer" parent="detector/margin/content/topics/sound"]
-layout_mode = 2
-
-[node name="exit" type="Button" parent="detector/margin/content/topics/sound/head"]
+[node name="system" type="Button" parent="detector/margin/topics/content/options/sound/options/loudness"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="margin" type="MarginContainer" parent="detector/margin/content/topics/sound/head/exit"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/sound/options/loudness/system"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -326,19 +228,40 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="label" type="Label" parent="detector/margin/content/topics/sound/head/exit/margin"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/sound/options/loudness/system/margin"]
+layout_mode = 2
+text = "Soundtrack System"
+
+[node name="head" type="HFlowContainer" parent="detector/margin/topics/content/options/sound"]
+visible = false
+layout_mode = 2
+
+[node name="exit" type="Button" parent="detector/margin/topics/content/options/sound/head"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/sound/head/exit"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="label" type="Label" parent="detector/margin/topics/content/options/sound/head/exit/margin"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.54902, 0.54902, 0.54902, 1)
 text = "Play"
 
-[node name="caption" type="Button" parent="detector/margin/content/topics/sound/head"]
+[node name="caption" type="Button" parent="detector/margin/topics/content/options/sound/head"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8
 toggle_mode = true
 
-[node name="margin" type="MarginContainer" parent="detector/margin/content/topics/sound/head/caption"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/sound/head/caption"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -346,17 +269,253 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="label" type="Label" parent="detector/margin/content/topics/sound/head/caption/margin"]
+[node name="label" type="Label" parent="detector/margin/topics/content/options/sound/head/caption/margin"]
 layout_mode = 2
 text = "Sound Preferences"
 
-[node name="controls" type="VBoxContainer" parent="detector/margin/content/topics"]
+[node name="experience" type="VBoxContainer" parent="detector/margin/topics/content/options"]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 8
+
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/experience"]
+layout_mode = 2
+
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/experience/margin"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "Game"
+
+[node name="options" type="HFlowContainer" parent="detector/margin/topics/content/options/experience"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 10
 theme = ExtResource("2_ull8j")
 
-[node name="mouse" type="HSlider" parent="detector/margin/content/topics/controls"]
+[node name="narrative" type="Button" parent="detector/margin/topics/content/options/experience/options"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/experience/options/narrative"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/experience/options/narrative/margin"]
+layout_mode = 2
+text = "The Narrative"
+
+[node name="status" type="Label" parent="detector/margin/topics/content/options/experience/options/narrative/margin"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "On"
+
+[node name="emotions" type="Button" parent="detector/margin/topics/content/options/experience/options"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/experience/options/emotions"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/experience/options/emotions/margin"]
+layout_mode = 2
+text = "Emotions"
+
+[node name="status" type="Label" parent="detector/margin/topics/content/options/experience/options/emotions/margin"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "On"
+
+[node name="fullscreen" type="Button" parent="detector/margin/topics/content/options/experience/options"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/experience/options/fullscreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/experience/options/fullscreen/margin"]
+layout_mode = 2
+text = "Fullscreen"
+
+[node name="status" type="Label" parent="detector/margin/topics/content/options/experience/options/fullscreen/margin"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "On"
+
+[node name="language" type="Button" parent="detector/margin/topics/content/options/experience/options"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/experience/options/language"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/experience/options/language/margin"]
+layout_mode = 2
+text = "Language"
+
+[node name="status" type="Label" parent="detector/margin/topics/content/options/experience/options/language/margin"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "English"
+
+[node name="stats" type="VBoxContainer" parent="detector/margin/topics/content/options"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/stats"]
+layout_mode = 2
+
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/stats/margin"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "Stats"
+
+[node name="options" type="VBoxContainer" parent="detector/margin/topics/content/options/stats"]
+layout_mode = 2
+theme = ExtResource("2_ull8j")
+
+[node name="stats" type="HFlowContainer" parent="detector/margin/topics/content/options/stats/options"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 10
+theme = ExtResource("2_ull8j")
+
+[node name="difficulty" type="MarginContainer" parent="detector/margin/topics/content/options/stats/options/stats"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="detector/margin/topics/content/options/stats/options/stats/difficulty"]
+layout_mode = 2
+
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/stats/options/stats/difficulty/VBoxContainer"]
+layout_mode = 2
+text = "Difficulty"
+
+[node name="value" type="Label" parent="detector/margin/topics/content/options/stats/options/stats/difficulty/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "Impossible"
+
+[node name="ProgressBar" type="ProgressBar" parent="detector/margin/topics/content/options/stats/options/stats/difficulty/VBoxContainer"]
+layout_mode = 2
+max_value = 5.0
+value = 5.0
+show_percentage = false
+
+[node name="playtime" type="MarginContainer" parent="detector/margin/topics/content/options/stats/options/stats"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="detector/margin/topics/content/options/stats/options/stats/playtime"]
+layout_mode = 2
+
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/stats/options/stats/playtime/VBoxContainer"]
+layout_mode = 2
+text = "Playtime"
+
+[node name="value" type="Label" parent="detector/margin/topics/content/options/stats/options/stats/playtime/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "5 hours"
+
+[node name="mocked" type="MarginContainer" parent="detector/margin/topics/content/options/stats/options/stats"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="detector/margin/topics/content/options/stats/options/stats/mocked"]
+layout_mode = 2
+
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/stats/options/stats/mocked/VBoxContainer"]
+layout_mode = 2
+text = "Mocked"
+
+[node name="value" type="Label" parent="detector/margin/topics/content/options/stats/options/stats/mocked/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "467"
+
+[node name="annihilated" type="MarginContainer" parent="detector/margin/topics/content/options/stats/options/stats"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="detector/margin/topics/content/options/stats/options/stats/annihilated"]
+layout_mode = 2
+
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/stats/options/stats/annihilated/VBoxContainer"]
+layout_mode = 2
+text = "Annihilated"
+
+[node name="value" type="Label" parent="detector/margin/topics/content/options/stats/options/stats/annihilated/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "123"
+
+[node name="deaths" type="MarginContainer" parent="detector/margin/topics/content/options/stats/options/stats"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="detector/margin/topics/content/options/stats/options/stats/deaths"]
+layout_mode = 2
+
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/stats/options/stats/deaths/VBoxContainer"]
+layout_mode = 2
+text = "Deaths"
+
+[node name="value" type="Label" parent="detector/margin/topics/content/options/stats/options/stats/deaths/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "23"
+
+[node name="saves" type="MarginContainer" parent="detector/margin/topics/content/options/stats/options/stats"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="detector/margin/topics/content/options/stats/options/stats/saves"]
+layout_mode = 2
+
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/stats/options/stats/saves/VBoxContainer"]
+layout_mode = 2
+text = "Saves"
+
+[node name="value" type="Label" parent="detector/margin/topics/content/options/stats/options/stats/saves/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "5"
+
+[node name="controls" type="VBoxContainer" parent="detector/margin/topics/content/options"]
+visible = false
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+theme = ExtResource("2_ull8j")
+
+[node name="mouse" type="HSlider" parent="detector/margin/topics/content/options/controls"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -369,7 +528,7 @@ theme_override_styles/grabber_area = ExtResource("3_j0acm")
 theme_override_styles/grabber_area_highlight = ExtResource("5_thq8p")
 value = 50.0
 
-[node name="margin" type="MarginContainer" parent="detector/margin/content/topics/controls/mouse"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/mouse"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -381,14 +540,14 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 7
 
-[node name="music" type="Panel" parent="detector/margin/content/topics/controls/mouse/margin"]
+[node name="music" type="Panel" parent="detector/margin/topics/content/options/controls/mouse/margin"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.35
 mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_71y6s")
 
-[node name="volume" type="VBoxContainer" parent="detector/margin/content/topics/controls/mouse/margin/music"]
+[node name="volume" type="VBoxContainer" parent="detector/margin/topics/content/options/controls/mouse/margin/music"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -397,58 +556,47 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 4
 
-[node name="state" type="MarginContainer" parent="detector/margin/content/topics/controls/mouse/margin/music/volume"]
+[node name="state" type="MarginContainer" parent="detector/margin/topics/content/options/controls/mouse/margin/music/volume"]
 layout_mode = 2
 theme_override_constants/margin_left = 25
-theme_override_constants/margin_top = 20
+theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 25
 theme_override_constants/margin_bottom = 7
 
-[node name="caption" type="Label" parent="detector/margin/content/topics/controls/mouse/margin/music/volume/state"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/mouse/margin/music/volume/state"]
 layout_mode = 2
 text = "Mouse Sensitivity"
 
-[node name="status" type="Label" parent="detector/margin/content/topics/controls/mouse/margin/music/volume/state"]
+[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/mouse/margin/music/volume/state"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "10"
 
-[node name="keyboard" type="VBoxContainer" parent="detector/margin/content/topics/controls"]
+[node name="keyboard" type="VBoxContainer" parent="detector/margin/topics/content/options/controls"]
 layout_mode = 2
 
-[node name="skills" type="HFlowContainer" parent="detector/margin/content/topics/controls/keyboard"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/keyboard"]
 layout_mode = 2
+theme = ExtResource("2_ull8j")
 
-[node name="hands" type="Button" parent="detector/margin/content/topics/controls/keyboard/skills"]
-custom_minimum_size = Vector2(300, 60)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.35
-
-[node name="margin" type="MarginContainer" parent="detector/margin/content/topics/controls/keyboard/skills/hands"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="caption" type="Label" parent="detector/margin/content/topics/controls/keyboard/skills/hands/margin"]
-layout_mode = 2
-text = "Hands"
-
-[node name="status" type="Label" parent="detector/margin/content/topics/controls/keyboard/skills/hands/margin"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/keyboard/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
-text = "E"
+text = "Keyboard"
 
-[node name="legs" type="Button" parent="detector/margin/content/topics/controls/keyboard/skills"]
+[node name="movement" type="VBoxContainer" parent="detector/margin/topics/content/options/controls/keyboard"]
+layout_mode = 2
+
+[node name="vertical" type="HFlowContainer" parent="detector/margin/topics/content/options/controls/keyboard/movement"]
+layout_mode = 2
+
+[node name="preset" type="Button" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.35
 
-[node name="margin" type="MarginContainer" parent="detector/margin/content/topics/controls/keyboard/skills/legs"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical/preset"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -456,203 +604,22 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="caption" type="Label" parent="detector/margin/content/topics/controls/keyboard/skills/legs/margin"]
-layout_mode = 2
-text = "Legs"
-
-[node name="status" type="Label" parent="detector/margin/content/topics/controls/keyboard/skills/legs/margin"]
-layout_mode = 2
-size_flags_horizontal = 8
-text = "X"
-
-[node name="ability" type="HFlowContainer" parent="detector/margin/content/topics/controls/keyboard"]
-layout_mode = 2
-
-[node name="one" type="Button" parent="detector/margin/content/topics/controls/keyboard/ability"]
-custom_minimum_size = Vector2(300, 60)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.35
-
-[node name="margin" type="MarginContainer" parent="detector/margin/content/topics/controls/keyboard/ability/one"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="caption" type="Label" parent="detector/margin/content/topics/controls/keyboard/ability/one/margin"]
-layout_mode = 2
-text = "Action #1"
-
-[node name="status" type="Label" parent="detector/margin/content/topics/controls/keyboard/ability/one/margin"]
-layout_mode = 2
-size_flags_horizontal = 8
-text = "C"
-
-[node name="two" type="Button" parent="detector/margin/content/topics/controls/keyboard/ability"]
-custom_minimum_size = Vector2(300, 60)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.35
-
-[node name="margin" type="MarginContainer" parent="detector/margin/content/topics/controls/keyboard/ability/two"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="caption" type="Label" parent="detector/margin/content/topics/controls/keyboard/ability/two/margin"]
-layout_mode = 2
-text = "Action #2"
-
-[node name="status" type="Label" parent="detector/margin/content/topics/controls/keyboard/ability/two/margin"]
-layout_mode = 2
-size_flags_horizontal = 8
-text = "V"
-
-[node name="movement" type="VBoxContainer" parent="detector/margin/content/topics/controls/keyboard"]
-visible = false
-layout_mode = 2
-
-[node name="vertical" type="HFlowContainer" parent="detector/margin/content/topics/controls/keyboard/movement"]
-layout_mode = 2
-
-[node name="forward" type="Button" parent="detector/margin/content/topics/controls/keyboard/movement/vertical"]
-custom_minimum_size = Vector2(300, 60)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.35
-
-[node name="margin" type="MarginContainer" parent="detector/margin/content/topics/controls/keyboard/movement/vertical/forward"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="caption" type="Label" parent="detector/margin/content/topics/controls/keyboard/movement/vertical/forward/margin"]
-layout_mode = 2
-text = "Forward"
-
-[node name="status" type="Label" parent="detector/margin/content/topics/controls/keyboard/movement/vertical/forward/margin"]
-layout_mode = 2
-size_flags_horizontal = 8
-text = "W"
-
-[node name="backward" type="Button" parent="detector/margin/content/topics/controls/keyboard/movement/vertical"]
-custom_minimum_size = Vector2(300, 60)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.35
-
-[node name="margin" type="MarginContainer" parent="detector/margin/content/topics/controls/keyboard/movement/vertical/backward"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="caption" type="Label" parent="detector/margin/content/topics/controls/keyboard/movement/vertical/backward/margin"]
-layout_mode = 2
-text = "Backward"
-
-[node name="status" type="Label" parent="detector/margin/content/topics/controls/keyboard/movement/vertical/backward/margin"]
-layout_mode = 2
-size_flags_horizontal = 8
-text = "S"
-
-[node name="horizontal" type="HFlowContainer" parent="detector/margin/content/topics/controls/keyboard/movement"]
-layout_mode = 2
-
-[node name="left" type="Button" parent="detector/margin/content/topics/controls/keyboard/movement/horizontal"]
-custom_minimum_size = Vector2(300, 60)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.35
-
-[node name="margin" type="MarginContainer" parent="detector/margin/content/topics/controls/keyboard/movement/horizontal/left"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="caption" type="Label" parent="detector/margin/content/topics/controls/keyboard/movement/horizontal/left/margin"]
-layout_mode = 2
-text = "Left"
-
-[node name="status" type="Label" parent="detector/margin/content/topics/controls/keyboard/movement/horizontal/left/margin"]
-layout_mode = 2
-size_flags_horizontal = 8
-text = "A"
-
-[node name="right" type="Button" parent="detector/margin/content/topics/controls/keyboard/movement/horizontal"]
-custom_minimum_size = Vector2(300, 60)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.35
-
-[node name="margin" type="MarginContainer" parent="detector/margin/content/topics/controls/keyboard/movement/horizontal/right"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="caption" type="Label" parent="detector/margin/content/topics/controls/keyboard/movement/horizontal/right/margin"]
-layout_mode = 2
-text = "Right"
-
-[node name="status" type="Label" parent="detector/margin/content/topics/controls/keyboard/movement/horizontal/right/margin"]
-layout_mode = 2
-size_flags_horizontal = 8
-text = "D"
-
-[node name="mv-preset" type="Button" parent="detector/margin/content/topics/controls/keyboard"]
-custom_minimum_size = Vector2(300, 60)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.35
-
-[node name="margin" type="MarginContainer" parent="detector/margin/content/topics/controls/keyboard/mv-preset"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="caption" type="Label" parent="detector/margin/content/topics/controls/keyboard/mv-preset/margin"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical/preset/margin"]
 layout_mode = 2
 text = "Movement"
 
-[node name="status" type="Label" parent="detector/margin/content/topics/controls/keyboard/mv-preset/margin"]
+[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical/preset/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "WASD"
 
-[node name="gamepad" type="VBoxContainer" parent="detector/margin/content/topics/controls"]
-visible = false
-layout_mode = 2
-
-[node name="order" type="HFlowContainer" parent="detector/margin/content/topics/controls/gamepad"]
-layout_mode = 2
-
-[node name="ab" type="Button" parent="detector/margin/content/topics/controls/gamepad/order"]
+[node name="forward" type="Button" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.35
 
-[node name="margin" type="MarginContainer" parent="detector/margin/content/topics/controls/gamepad/order/ab"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical/forward"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -660,22 +627,22 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="caption" type="Label" parent="detector/margin/content/topics/controls/gamepad/order/ab/margin"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical/forward/margin"]
 layout_mode = 2
-text = "A&B Order"
+text = "Forward"
 
-[node name="status" type="Label" parent="detector/margin/content/topics/controls/gamepad/order/ab/margin"]
+[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical/forward/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
-text = "AB"
+text = "W"
 
-[node name="xy" type="Button" parent="detector/margin/content/topics/controls/gamepad/order"]
+[node name="backward" type="Button" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.35
 
-[node name="margin" type="MarginContainer" parent="detector/margin/content/topics/controls/gamepad/order/xy"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical/backward"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -683,25 +650,22 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="caption" type="Label" parent="detector/margin/content/topics/controls/gamepad/order/xy/margin"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical/backward/margin"]
 layout_mode = 2
-text = "X&Y Order"
+text = "Backward"
 
-[node name="status" type="Label" parent="detector/margin/content/topics/controls/gamepad/order/xy/margin"]
+[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical/backward/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
-text = "XY"
+text = "S"
 
-[node name="left" type="HFlowContainer" parent="detector/margin/content/topics/controls/gamepad"]
-layout_mode = 2
-
-[node name="inventory" type="Button" parent="detector/margin/content/topics/controls/gamepad/left"]
+[node name="left" type="Button" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.35
 
-[node name="margin" type="MarginContainer" parent="detector/margin/content/topics/controls/gamepad/left/inventory"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical/left"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -709,22 +673,588 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="caption" type="Label" parent="detector/margin/content/topics/controls/gamepad/left/inventory/margin"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical/left/margin"]
+layout_mode = 2
+text = "Left"
+
+[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical/left/margin"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "A"
+
+[node name="right" type="Button" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical/right"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical/right/margin"]
+layout_mode = 2
+text = "Right"
+
+[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical/right/margin"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "D"
+
+[node name="hands" type="Button" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical/hands"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical/hands/margin"]
+layout_mode = 2
+text = "Hands"
+
+[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical/hands/margin"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "E"
+
+[node name="legs" type="Button" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical/legs"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical/legs/margin"]
+layout_mode = 2
+text = "Legs"
+
+[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical/legs/margin"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "X"
+
+[node name="action-one" type="Button" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical/action-one"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical/action-one/margin"]
+layout_mode = 2
+text = "Action #1"
+
+[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical/action-one/margin"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "C"
+
+[node name="action-two" type="Button" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical/action-two"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical/action-two/margin"]
+layout_mode = 2
+text = "Action #2"
+
+[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical/action-two/margin"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "V"
+
+[node name="team" type="Button" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical/team"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical/team/margin"]
+layout_mode = 2
+text = "Team"
+
+[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical/team/margin"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "T"
+
+[node name="group" type="Button" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical/group"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical/group/margin"]
+layout_mode = 2
+text = "Group"
+
+[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical/group/margin"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "G"
+
+[node name="heal" type="Button" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical/heal"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical/heal/margin"]
+layout_mode = 2
+text = "Quick Heal"
+
+[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical/heal/margin"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "R"
+
+[node name="refresh" type="Button" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical/refresh"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical/refresh/margin"]
+layout_mode = 2
+text = "Refresh"
+
+[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical/refresh/margin"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "R"
+
+[node name="analyze" type="Button" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical/analyze"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical/analyze/margin"]
+layout_mode = 2
+text = "Analyze"
+
+[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical/analyze/margin"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "F1"
+
+[node name="information" type="Button" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical/information"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical/information/margin"]
+layout_mode = 2
+text = "Information"
+
+[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical/information/margin"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "F2"
+
+[node name="settings" type="Button" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical/settings"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical/settings/margin"]
+layout_mode = 2
+text = "Settings"
+
+[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical/settings/margin"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "F3"
+
+[node name="main-menu" type="Button" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical/main-menu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical/main-menu/margin"]
+layout_mode = 2
+text = "Main menu"
+
+[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical/main-menu/margin"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "F4"
+
+[node name="soundtrack" type="Button" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical/soundtrack"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical/soundtrack/margin"]
+layout_mode = 2
+text = "Soundtrack system"
+
+[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical/soundtrack/margin"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "F5"
+
+[node name="checkpoint" type="Button" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical/checkpoint"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical/checkpoint/margin"]
+layout_mode = 2
+text = "Load checkpoint"
+
+[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical/checkpoint/margin"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "F6"
+
+[node name="fast-save" type="Button" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical/fast-save"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical/fast-save/margin"]
+layout_mode = 2
+text = "Load / Fast save"
+
+[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical/fast-save/margin"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "F7"
+
+[node name="fast-load" type="Button" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical/fast-load"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical/fast-load/margin"]
+layout_mode = 2
+text = "Fast load"
+
+[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical/fast-load/margin"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "F8"
+
+[node name="export-progress" type="Button" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical/export-progress"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical/export-progress/margin"]
+layout_mode = 2
+text = "Export progress"
+
+[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical/export-progress/margin"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "F9"
+
+[node name="import-progress" type="Button" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical/import-progress"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical/import-progress/margin"]
+layout_mode = 2
+text = "Import progress"
+
+[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical/import-progress/margin"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "F10"
+
+[node name="fullscreen" type="Button" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical/fullscreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical/fullscreen/margin"]
+layout_mode = 2
+text = "Fullscreen"
+
+[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical/fullscreen/margin"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "F11"
+
+[node name="photo-mode" type="Button" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical/photo-mode"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical/photo-mode/margin"]
+layout_mode = 2
+text = "Photo mode"
+
+[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/keyboard/movement/vertical/photo-mode/margin"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "F12"
+
+[node name="gamepad" type="VBoxContainer" parent="detector/margin/topics/content/options/controls"]
+layout_mode = 2
+
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/gamepad"]
+layout_mode = 2
+
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/gamepad/margin"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "Gamepad"
+
+[node name="order" type="HFlowContainer" parent="detector/margin/topics/content/options/controls/gamepad"]
+layout_mode = 2
+
+[node name="preset" type="Button" parent="detector/margin/topics/content/options/controls/gamepad/order"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/gamepad/order/preset"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/gamepad/order/preset/margin"]
+layout_mode = 2
+text = "Preset"
+
+[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/gamepad/order/preset/margin"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "Left"
+
+[node name="movement" type="Button" parent="detector/margin/topics/content/options/controls/gamepad/order"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/gamepad/order/movement"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/gamepad/order/movement/margin"]
+layout_mode = 2
+text = "Movement"
+
+[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/gamepad/order/movement/margin"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "LS"
+
+[node name="inventory" type="Button" parent="detector/margin/topics/content/options/controls/gamepad/order"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/gamepad/order/inventory"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/gamepad/order/inventory/margin"]
 layout_mode = 2
 text = "Inventory"
 
-[node name="status" type="Label" parent="detector/margin/content/topics/controls/gamepad/left/inventory/margin"]
+[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/gamepad/order/inventory/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "Cross"
 
-[node name="targeting" type="Button" parent="detector/margin/content/topics/controls/gamepad/left"]
+[node name="targeting" type="Button" parent="detector/margin/topics/content/options/controls/gamepad/order"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.35
 
-[node name="margin" type="MarginContainer" parent="detector/margin/content/topics/controls/gamepad/left/targeting"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/gamepad/order/targeting"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -732,25 +1262,22 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="caption" type="Label" parent="detector/margin/content/topics/controls/gamepad/left/targeting/margin"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/gamepad/order/targeting/margin"]
 layout_mode = 2
 text = "Targeting"
 
-[node name="status" type="Label" parent="detector/margin/content/topics/controls/gamepad/left/targeting/margin"]
+[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/gamepad/order/targeting/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
-text = "LB+LT"
+text = "LT"
 
-[node name="head" type="HFlowContainer" parent="detector/margin/content/topics/controls"]
-layout_mode = 2
-theme = ExtResource("1_vs08l")
-
-[node name="exit" type="Button" parent="detector/margin/content/topics/controls/head"]
+[node name="ability" type="Button" parent="detector/margin/topics/content/options/controls/gamepad/order"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
 
-[node name="margin" type="MarginContainer" parent="detector/margin/content/topics/controls/head/exit"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/gamepad/order/ability"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -758,18 +1285,188 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="label" type="Label" parent="detector/margin/content/topics/controls/head/exit/margin"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/gamepad/order/ability/margin"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.54902, 0.54902, 0.54902, 1)
-text = "Play"
+text = "Swipe"
 
-[node name="caption" type="Button" parent="detector/margin/content/topics/controls/head"]
+[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/gamepad/order/ability/margin"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "LB"
+
+[node name="ab" type="Button" parent="detector/margin/topics/content/options/controls/gamepad/order"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/gamepad/order/ab"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/gamepad/order/ab/margin"]
+layout_mode = 2
+text = "A&B Order"
+
+[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/gamepad/order/ab/margin"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "AB"
+
+[node name="xy" type="Button" parent="detector/margin/topics/content/options/controls/gamepad/order"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/gamepad/order/xy"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/gamepad/order/xy/margin"]
+layout_mode = 2
+text = "X&Y Order"
+
+[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/gamepad/order/xy/margin"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "XY"
+
+[node name="abxy" type="Button" parent="detector/margin/topics/content/options/controls/gamepad/order"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/gamepad/order/abxy"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/gamepad/order/abxy/margin"]
+layout_mode = 2
+text = "Buttons"
+
+[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/gamepad/order/abxy/margin"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "ABXY"
+
+[node name="preview" type="Button" parent="detector/margin/topics/content/options/controls/gamepad/order"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/gamepad/order/preview"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/gamepad/order/preview/margin"]
+layout_mode = 2
+text = "Preview"
+
+[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/gamepad/order/preview/margin"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "On"
+
+[node name="controls" type="MarginContainer" parent="detector/margin/topics"]
+visible = false
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 5
+
+[node name="confirm" type="Label" parent="detector/margin/topics/controls"]
+layout_mode = 2
+text = "Enter - confirm / change"
+
+[node name="edit" type="Label" parent="detector/margin/topics/controls"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "🔼 ±10 🔽 ◀️ ±1 ▶️"
+
+[node name="tabs" type="HFlowContainer" parent="detector/margin/topics"]
+layout_mode = 2
+
+[node name="exit" type="Button" parent="detector/margin/topics/tabs"]
+custom_minimum_size = Vector2(90, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.1
+
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/tabs/exit"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="label" type="Label" parent="detector/margin/topics/tabs/exit/margin"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.54902, 0.54902, 0.54902, 1)
+text = "Back"
+
+[node name="caption" type="Control" parent="detector/margin/topics/tabs"]
+custom_minimum_size = Vector2(240, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.9
+
+[node name="experience" type="Button" parent="detector/margin/topics/tabs/caption"]
+visible = false
+custom_minimum_size = Vector2(240, 60)
+layout_mode = 2
+offset_left = 4.0
+offset_right = 922.0
+offset_bottom = 60.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.9
+toggle_mode = true
+
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/tabs/caption/experience"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="label" type="Label" parent="detector/margin/topics/tabs/caption/experience/margin"]
+layout_mode = 2
+text = "Game Experience"
+
+[node name="caption" type="Button" parent="detector/margin/topics/tabs/caption"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 3
 toggle_mode = true
 
-[node name="margin" type="MarginContainer" parent="detector/margin/content/topics/controls/head/caption"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/tabs/caption/caption"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -777,6 +1474,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="label" type="Label" parent="detector/margin/content/topics/controls/head/caption/margin"]
+[node name="label" type="Label" parent="detector/margin/topics/tabs/caption/caption/margin"]
 layout_mode = 2
 text = "Controls Management"
