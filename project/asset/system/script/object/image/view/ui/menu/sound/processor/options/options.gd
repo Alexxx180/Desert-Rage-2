@@ -38,13 +38,19 @@ func setup_search(options: Control) -> void:
 		operation.type = 3
 		options.switch_play())
 	options.skip.pressed.connect(play.play_progress)
-	options.back.pressed.connect(SoundtrackSystem.save_changes)
 
 func set_operations(menu: VBoxContainer) -> void:
 	var theme: OpenThemeDialog = $theme
 	add.context = theme
 	search.theme = theme
 	setup_search(menu.options)
+	menu.options.back.pressed.connect(func():
+		play.started = false
+		play.player.stop()
+		play.board.reset()
+		menu.playback.reset()
+		SoundtrackSystem.save_changes()
+	)
 	play.playback.connect(func(status): menu.playback.text = status)
 	play.board.progress.connect(func(value): menu.progress.value = value)
 
