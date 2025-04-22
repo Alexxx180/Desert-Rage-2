@@ -84,6 +84,7 @@ size_flags_vertical = 8
 
 [node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/sound"]
 layout_mode = 2
+size_flags_horizontal = 0
 theme_override_constants/margin_top = 0
 
 [node name="caption" type="Label" parent="detector/margin/topics/content/options/sound/margin"]
@@ -91,17 +92,13 @@ layout_mode = 2
 size_flags_horizontal = 8
 text = "Sound"
 
-[node name="options" type="VBoxContainer" parent="detector/margin/topics/content/options/sound"]
-layout_mode = 2
-theme = ExtResource("2_ull8j")
-
-[node name="loudness" type="HFlowContainer" parent="detector/margin/topics/content/options/sound/options"]
+[node name="options" type="HFlowContainer" parent="detector/margin/topics/content/options/sound"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 10
 theme = ExtResource("2_ull8j")
 
-[node name="music" type="HSlider" parent="detector/margin/topics/content/options/sound/options/loudness"]
+[node name="music" type="HSlider" parent="detector/margin/topics/content/options/sound/options"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -114,7 +111,7 @@ theme_override_styles/grabber_area = ExtResource("3_j0acm")
 theme_override_styles/grabber_area_highlight = ExtResource("5_thq8p")
 value = 50.0
 
-[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/sound/options/loudness/music"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/sound/options/music"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -126,14 +123,14 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 7
 
-[node name="music" type="Panel" parent="detector/margin/topics/content/options/sound/options/loudness/music/margin"]
+[node name="music" type="Panel" parent="detector/margin/topics/content/options/sound/options/music/margin"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.35
 mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_71y6s")
 
-[node name="volume" type="VBoxContainer" parent="detector/margin/topics/content/options/sound/options/loudness/music/margin/music"]
+[node name="volume" type="VBoxContainer" parent="detector/margin/topics/content/options/sound/options/music/margin/music"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -142,23 +139,23 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 4
 
-[node name="state" type="MarginContainer" parent="detector/margin/topics/content/options/sound/options/loudness/music/margin/music/volume"]
+[node name="state" type="MarginContainer" parent="detector/margin/topics/content/options/sound/options/music/margin/music/volume"]
 layout_mode = 2
 theme_override_constants/margin_left = 25
 theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 25
 theme_override_constants/margin_bottom = 7
 
-[node name="caption" type="Label" parent="detector/margin/topics/content/options/sound/options/loudness/music/margin/music/volume/state"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/sound/options/music/margin/music/volume/state"]
 layout_mode = 2
 text = "Music"
 
-[node name="status" type="Label" parent="detector/margin/topics/content/options/sound/options/loudness/music/margin/music/volume/state"]
+[node name="status" type="Label" parent="detector/margin/topics/content/options/sound/options/music/margin/music/volume/state"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "100%"
 
-[node name="sound" type="HSlider" parent="detector/margin/topics/content/options/sound/options/loudness"]
+[node name="sound" type="HSlider" parent="detector/margin/topics/content/options/sound/options"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -171,7 +168,7 @@ theme_override_styles/grabber_area = ExtResource("3_j0acm")
 theme_override_styles/grabber_area_highlight = ExtResource("5_thq8p")
 value = 50.0
 
-[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/sound/options/loudness/sound"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/sound/options/sound"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -183,14 +180,14 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 7
 
-[node name="music" type="Panel" parent="detector/margin/topics/content/options/sound/options/loudness/sound/margin"]
+[node name="music" type="Panel" parent="detector/margin/topics/content/options/sound/options/sound/margin"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.35
 mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_71y6s")
 
-[node name="volume" type="VBoxContainer" parent="detector/margin/topics/content/options/sound/options/loudness/sound/margin/music"]
+[node name="volume" type="VBoxContainer" parent="detector/margin/topics/content/options/sound/options/sound/margin/music"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -199,69 +196,85 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 4
 
-[node name="state" type="MarginContainer" parent="detector/margin/topics/content/options/sound/options/loudness/sound/margin/music/volume"]
+[node name="state" type="MarginContainer" parent="detector/margin/topics/content/options/sound/options/sound/margin/music/volume"]
 layout_mode = 2
 theme_override_constants/margin_left = 25
 theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 25
 theme_override_constants/margin_bottom = 7
 
-[node name="caption" type="Label" parent="detector/margin/topics/content/options/sound/options/loudness/sound/margin/music/volume/state"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/sound/options/sound/margin/music/volume/state"]
 layout_mode = 2
 text = "Sound"
 
-[node name="status" type="Label" parent="detector/margin/topics/content/options/sound/options/loudness/sound/margin/music/volume/state"]
+[node name="status" type="Label" parent="detector/margin/topics/content/options/sound/options/sound/margin/music/volume/state"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "100%"
 
-[node name="system" type="Button" parent="detector/margin/topics/content/options/sound/options/loudness"]
-custom_minimum_size = Vector2(300, 60)
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/sound/options/loudness/system"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="caption" type="Label" parent="detector/margin/topics/content/options/sound/options/loudness/system/margin"]
-layout_mode = 2
-text = "Soundtrack System"
-
-[node name="head" type="HFlowContainer" parent="detector/margin/topics/content/options/sound"]
-visible = false
-layout_mode = 2
-
-[node name="exit" type="Button" parent="detector/margin/topics/content/options/sound/head"]
-custom_minimum_size = Vector2(300, 60)
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/sound/head/exit"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="label" type="Label" parent="detector/margin/topics/content/options/sound/head/exit/margin"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.54902, 0.54902, 0.54902, 1)
-text = "Play"
-
-[node name="caption" type="Button" parent="detector/margin/topics/content/options/sound/head"]
+[node name="interface" type="HSlider" parent="detector/margin/topics/content/options/sound/options"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8
-toggle_mode = true
+theme_override_icons/grabber = SubResource("GradientTexture1D_o3d5i")
+theme_override_icons/grabber_highlight = SubResource("GradientTexture1D_36r8i")
+theme_override_icons/grabber_disabled = SubResource("GradientTexture1D_ktnei")
+theme_override_styles/slider = ExtResource("4_ow36w")
+theme_override_styles/grabber_area = ExtResource("3_j0acm")
+theme_override_styles/grabber_area_highlight = ExtResource("5_thq8p")
+value = 50.0
 
-[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/sound/head/caption"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/sound/options/interface"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 7
+
+[node name="music" type="Panel" parent="detector/margin/topics/content/options/sound/options/interface/margin"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_71y6s")
+
+[node name="volume" type="VBoxContainer" parent="detector/margin/topics/content/options/sound/options/interface/margin/music"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 4
+
+[node name="state" type="MarginContainer" parent="detector/margin/topics/content/options/sound/options/interface/margin/music/volume"]
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 7
+
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/sound/options/interface/margin/music/volume/state"]
+layout_mode = 2
+text = "Interface"
+
+[node name="status" type="Label" parent="detector/margin/topics/content/options/sound/options/interface/margin/music/volume/state"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "100%"
+
+[node name="system" type="Button" parent="detector/margin/topics/content/options/sound/options"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/sound/options/system"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -269,9 +282,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="label" type="Label" parent="detector/margin/topics/content/options/sound/head/caption/margin"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/sound/options/system/margin"]
 layout_mode = 2
-text = "Sound Preferences"
+text = "Soundtrack System"
 
 [node name="experience" type="VBoxContainer" parent="detector/margin/topics/content/options"]
 custom_minimum_size = Vector2(250, 0)
@@ -281,6 +294,7 @@ size_flags_vertical = 8
 
 [node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/experience"]
 layout_mode = 2
+size_flags_horizontal = 0
 
 [node name="caption" type="Label" parent="detector/margin/topics/content/options/experience/margin"]
 layout_mode = 2
@@ -337,12 +351,33 @@ layout_mode = 2
 size_flags_horizontal = 8
 text = "On"
 
-[node name="fullscreen" type="Button" parent="detector/margin/topics/content/options/experience/options"]
+[node name="interface" type="VBoxContainer" parent="detector/margin/topics/content/options"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/interface"]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/interface/margin"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "Interface"
+
+[node name="options" type="HFlowContainer" parent="detector/margin/topics/content/options/interface"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 10
+theme = ExtResource("2_ull8j")
+
+[node name="language" type="Button" parent="detector/margin/topics/content/options/interface/options"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/experience/options/fullscreen"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/interface/options/language"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -350,21 +385,43 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="caption" type="Label" parent="detector/margin/topics/content/options/experience/options/fullscreen/margin"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/interface/options/language/margin"]
+layout_mode = 2
+text = "Language"
+
+[node name="status" type="Label" parent="detector/margin/topics/content/options/interface/options/language/margin"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "English"
+
+[node name="fullscreen" type="Button" parent="detector/margin/topics/content/options/interface/options"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/interface/options/fullscreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/interface/options/fullscreen/margin"]
 layout_mode = 2
 text = "Fullscreen"
 
-[node name="status" type="Label" parent="detector/margin/topics/content/options/experience/options/fullscreen/margin"]
+[node name="status" type="Label" parent="detector/margin/topics/content/options/interface/options/fullscreen/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "On"
 
-[node name="language" type="Button" parent="detector/margin/topics/content/options/experience/options"]
+[node name="counters" type="Button" parent="detector/margin/topics/content/options/interface/options"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/experience/options/language"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/interface/options/counters"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -372,14 +429,102 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="caption" type="Label" parent="detector/margin/topics/content/options/experience/options/language/margin"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/interface/options/counters/margin"]
 layout_mode = 2
-text = "Language"
+text = "Counters"
 
-[node name="status" type="Label" parent="detector/margin/topics/content/options/experience/options/language/margin"]
+[node name="status" type="Label" parent="detector/margin/topics/content/options/interface/options/counters/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
-text = "English"
+text = "Both"
+
+[node name="health" type="Button" parent="detector/margin/topics/content/options/interface/options"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/interface/options/health"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/interface/options/health/margin"]
+layout_mode = 2
+text = "Health"
+
+[node name="status" type="Label" parent="detector/margin/topics/content/options/interface/options/health/margin"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "Aura"
+
+[node name="influence" type="Button" parent="detector/margin/topics/content/options/interface/options"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/interface/options/influence"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/interface/options/influence/margin"]
+layout_mode = 2
+text = "Influence"
+
+[node name="status" type="Label" parent="detector/margin/topics/content/options/interface/options/influence/margin"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "Vessel"
+
+[node name="damage" type="Button" parent="detector/margin/topics/content/options/interface/options"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/interface/options/damage"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/interface/options/damage/margin"]
+layout_mode = 2
+text = "Damage"
+
+[node name="status" type="Label" parent="detector/margin/topics/content/options/interface/options/damage/margin"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "On"
+
+[node name="adaptive" type="Button" parent="detector/margin/topics/content/options/interface/options"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/interface/options/adaptive"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/interface/options/adaptive/margin"]
+layout_mode = 2
+text = "Options"
+
+[node name="status" type="Label" parent="detector/margin/topics/content/options/interface/options/adaptive/margin"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "Adaptive"
 
 [node name="stats" type="VBoxContainer" parent="detector/margin/topics/content/options"]
 custom_minimum_size = Vector2(250, 0)
@@ -389,120 +534,117 @@ size_flags_vertical = 8
 
 [node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/stats"]
 layout_mode = 2
+size_flags_horizontal = 0
 
 [node name="caption" type="Label" parent="detector/margin/topics/content/options/stats/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "Stats"
 
-[node name="options" type="VBoxContainer" parent="detector/margin/topics/content/options/stats"]
-layout_mode = 2
-theme = ExtResource("2_ull8j")
-
-[node name="stats" type="HFlowContainer" parent="detector/margin/topics/content/options/stats/options"]
+[node name="options" type="HFlowContainer" parent="detector/margin/topics/content/options/stats"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 10
 theme = ExtResource("2_ull8j")
 
-[node name="difficulty" type="MarginContainer" parent="detector/margin/topics/content/options/stats/options/stats"]
+[node name="difficulty" type="MarginContainer" parent="detector/margin/topics/content/options/stats/options"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="detector/margin/topics/content/options/stats/options/stats/difficulty"]
+[node name="VBoxContainer" type="VBoxContainer" parent="detector/margin/topics/content/options/stats/options/difficulty"]
 layout_mode = 2
 
-[node name="caption" type="Label" parent="detector/margin/topics/content/options/stats/options/stats/difficulty/VBoxContainer"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/stats/options/difficulty/VBoxContainer"]
 layout_mode = 2
 text = "Difficulty"
 
-[node name="value" type="Label" parent="detector/margin/topics/content/options/stats/options/stats/difficulty/VBoxContainer"]
+[node name="value" type="Label" parent="detector/margin/topics/content/options/stats/options/difficulty/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
-text = "Impossible"
+text = "Unbearable"
 
-[node name="ProgressBar" type="ProgressBar" parent="detector/margin/topics/content/options/stats/options/stats/difficulty/VBoxContainer"]
+[node name="ProgressBar" type="ProgressBar" parent="detector/margin/topics/content/options/stats/options/difficulty/VBoxContainer"]
 layout_mode = 2
 max_value = 5.0
 value = 5.0
 show_percentage = false
 
-[node name="playtime" type="MarginContainer" parent="detector/margin/topics/content/options/stats/options/stats"]
+[node name="playtime" type="MarginContainer" parent="detector/margin/topics/content/options/stats/options"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="detector/margin/topics/content/options/stats/options/stats/playtime"]
+[node name="VBoxContainer" type="VBoxContainer" parent="detector/margin/topics/content/options/stats/options/playtime"]
 layout_mode = 2
 
-[node name="caption" type="Label" parent="detector/margin/topics/content/options/stats/options/stats/playtime/VBoxContainer"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/stats/options/playtime/VBoxContainer"]
 layout_mode = 2
 text = "Playtime"
 
-[node name="value" type="Label" parent="detector/margin/topics/content/options/stats/options/stats/playtime/VBoxContainer"]
+[node name="value" type="Label" parent="detector/margin/topics/content/options/stats/options/playtime/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "5 hours"
 
-[node name="mocked" type="MarginContainer" parent="detector/margin/topics/content/options/stats/options/stats"]
+[node name="mocked" type="MarginContainer" parent="detector/margin/topics/content/options/stats/options"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="detector/margin/topics/content/options/stats/options/stats/mocked"]
+[node name="VBoxContainer" type="VBoxContainer" parent="detector/margin/topics/content/options/stats/options/mocked"]
 layout_mode = 2
 
-[node name="caption" type="Label" parent="detector/margin/topics/content/options/stats/options/stats/mocked/VBoxContainer"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/stats/options/mocked/VBoxContainer"]
 layout_mode = 2
 text = "Mocked"
 
-[node name="value" type="Label" parent="detector/margin/topics/content/options/stats/options/stats/mocked/VBoxContainer"]
+[node name="value" type="Label" parent="detector/margin/topics/content/options/stats/options/mocked/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "467"
 
-[node name="annihilated" type="MarginContainer" parent="detector/margin/topics/content/options/stats/options/stats"]
+[node name="annihilated" type="MarginContainer" parent="detector/margin/topics/content/options/stats/options"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="detector/margin/topics/content/options/stats/options/stats/annihilated"]
+[node name="VBoxContainer" type="VBoxContainer" parent="detector/margin/topics/content/options/stats/options/annihilated"]
 layout_mode = 2
 
-[node name="caption" type="Label" parent="detector/margin/topics/content/options/stats/options/stats/annihilated/VBoxContainer"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/stats/options/annihilated/VBoxContainer"]
 layout_mode = 2
 text = "Annihilated"
 
-[node name="value" type="Label" parent="detector/margin/topics/content/options/stats/options/stats/annihilated/VBoxContainer"]
+[node name="value" type="Label" parent="detector/margin/topics/content/options/stats/options/annihilated/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "123"
 
-[node name="deaths" type="MarginContainer" parent="detector/margin/topics/content/options/stats/options/stats"]
+[node name="deaths" type="MarginContainer" parent="detector/margin/topics/content/options/stats/options"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="detector/margin/topics/content/options/stats/options/stats/deaths"]
+[node name="VBoxContainer" type="VBoxContainer" parent="detector/margin/topics/content/options/stats/options/deaths"]
 layout_mode = 2
 
-[node name="caption" type="Label" parent="detector/margin/topics/content/options/stats/options/stats/deaths/VBoxContainer"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/stats/options/deaths/VBoxContainer"]
 layout_mode = 2
 text = "Deaths"
 
-[node name="value" type="Label" parent="detector/margin/topics/content/options/stats/options/stats/deaths/VBoxContainer"]
+[node name="value" type="Label" parent="detector/margin/topics/content/options/stats/options/deaths/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "23"
 
-[node name="saves" type="MarginContainer" parent="detector/margin/topics/content/options/stats/options/stats"]
+[node name="saves" type="MarginContainer" parent="detector/margin/topics/content/options/stats/options"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="detector/margin/topics/content/options/stats/options/stats/saves"]
+[node name="VBoxContainer" type="VBoxContainer" parent="detector/margin/topics/content/options/stats/options/saves"]
 layout_mode = 2
 
-[node name="caption" type="Label" parent="detector/margin/topics/content/options/stats/options/stats/saves/VBoxContainer"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/stats/options/saves/VBoxContainer"]
 layout_mode = 2
 text = "Saves"
 
-[node name="value" type="Label" parent="detector/margin/topics/content/options/stats/options/stats/saves/VBoxContainer"]
+[node name="value" type="Label" parent="detector/margin/topics/content/options/stats/options/saves/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "5"
