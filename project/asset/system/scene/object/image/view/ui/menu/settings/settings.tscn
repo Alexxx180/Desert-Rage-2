@@ -1,10 +1,12 @@
-[gd_scene load_steps=13 format=3 uid="uid://b4x588yxrcok3"]
+[gd_scene load_steps=19 format=3 uid="uid://b4x588yxrcok3"]
 
 [ext_resource type="Theme" uid="uid://dfyi7rrcrweqx" path="res://asset/resource/engine/internal/theme/patterns/template/menu/settings.tres" id="1_vs08l"]
 [ext_resource type="Theme" uid="uid://0bwoefj0wlcw" path="res://asset/resource/engine/internal/theme/patterns/template/menu/text.tres" id="2_ull8j"]
 [ext_resource type="StyleBox" uid="uid://belpqiw77873x" path="res://asset/resource/engine/internal/theme/slider/horizontal/area-grabber.tres" id="3_j0acm"]
 [ext_resource type="StyleBox" uid="uid://cjukg7l6l1urx" path="res://asset/resource/engine/internal/theme/slider/horizontal/area-slider.tres" id="4_ow36w"]
 [ext_resource type="StyleBox" uid="uid://dfwghdfkosy7u" path="res://asset/resource/engine/internal/theme/slider/horizontal/area-highlight.tres" id="5_thq8p"]
+[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/settings/topics/options/header.gd" id="6_w727q"]
+[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/settings/topics/options/footer.gd" id="6_wolhp"]
 
 [sub_resource type="Gradient" id="Gradient_n1w43"]
 
@@ -26,6 +28,14 @@ width = 1
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_71y6s"]
 bg_color = Color(0.0687983, 0.0687983, 0.0687982, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bhi44"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ngnso"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_iak5i"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tkepy"]
 
 [node name="settings" type="CanvasLayer"]
 
@@ -763,6 +773,7 @@ size_flags_horizontal = 8
 text = "10"
 
 [node name="keyboard" type="VBoxContainer" parent="detector/margin/scroll/topics/content/options/controls"]
+visible = false
 layout_mode = 2
 
 [node name="margin" type="MarginContainer" parent="detector/margin/scroll/topics/content/options/controls/keyboard"]
@@ -1372,11 +1383,25 @@ text = "Key mappings"
 [node name="gamepad" type="VBoxContainer" parent="detector/margin/scroll/topics/content/options/controls"]
 layout_mode = 2
 
-[node name="margin" type="MarginContainer" parent="detector/margin/scroll/topics/content/options/controls/gamepad"]
+[node name="header" type="Button" parent="detector/margin/scroll/topics/content/options/controls/gamepad"]
+custom_minimum_size = Vector2(0, 45)
 layout_mode = 2
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_bhi44")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ngnso")
+script = ExtResource("6_w727q")
+
+[node name="margin" type="MarginContainer" parent="detector/margin/scroll/topics/content/options/controls/gamepad/header"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -34.0
+offset_right = 151.0
+offset_bottom = 34.0
+grow_vertical = 2
 size_flags_horizontal = 0
 
-[node name="caption" type="Label" parent="detector/margin/scroll/topics/content/options/controls/gamepad/margin"]
+[node name="caption" type="Label" parent="detector/margin/scroll/topics/content/options/controls/gamepad/header/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "Gamepad"
@@ -1594,13 +1619,25 @@ layout_mode = 2
 size_flags_horizontal = 8
 text = "On"
 
-[node name="margin" type="MarginContainer" parent="detector/margin/scroll/topics/content/options/controls/gamepad/content"]
+[node name="footer" type="Button" parent="detector/margin/scroll/topics/content/options/controls/gamepad/content"]
+custom_minimum_size = Vector2(0, 45)
 layout_mode = 2
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_iak5i")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_tkepy")
+script = ExtResource("6_wolhp")
+
+[node name="margin" type="MarginContainer" parent="detector/margin/scroll/topics/content/options/controls/gamepad/content/footer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 8
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_bottom = 0
 
-[node name="caption" type="Label" parent="detector/margin/scroll/topics/content/options/controls/gamepad/content/margin"]
+[node name="caption" type="Label" parent="detector/margin/scroll/topics/content/options/controls/gamepad/content/footer/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
 theme_override_colors/font_color = Color(0.313726, 0.313726, 0.313726, 1)
@@ -1715,3 +1752,6 @@ theme_override_constants/margin_bottom = 0
 layout_mode = 2
 theme_override_font_sizes/font_size = 22
 text = "Controls Management"
+
+[connection signal="pressed" from="detector/margin/scroll/topics/content/options/controls/gamepad/header" to="detector/margin/scroll/topics/content/options/controls/gamepad/header" method="_toggle_content"]
+[connection signal="pressed" from="detector/margin/scroll/topics/content/options/controls/gamepad/content/footer" to="detector/margin/scroll/topics/content/options/controls/gamepad/content/footer" method="_hide_topic"]
