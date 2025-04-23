@@ -12,6 +12,3 @@ func set_transition(options: VBoxContainer) -> void:
 	experience.pressed.connect(toggle_buttons)
 	controls.pressed.connect(options.switch_experience)
 	controls.pressed.connect(toggle_buttons)
-
-func set_back(menu: CanvasLayer) -> void:
-	menu

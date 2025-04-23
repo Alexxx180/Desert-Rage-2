@@ -1,9 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://v6stk7j8vyox"]
+[gd_scene load_steps=8 format=3 uid="uid://v6stk7j8vyox"]
 
+[ext_resource type="Theme" uid="uid://p2br8b6ea3n6" path="res://asset/resource/engine/internal/theme/patterns/template/menu/hud/pause/pause.tres" id="1_j33m5"]
 [ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/hud/detector/pause/pause.gd" id="1_mkyw8"]
 [ext_resource type="PackedScene" uid="uid://hvg28cmh6mji" path="res://asset/system/scene/object/image/view/ui/hud/detector/pause/menu/menu.tscn" id="1_n3aae"]
 [ext_resource type="PackedScene" uid="uid://cwndvklt02erf" path="res://asset/system/scene/object/image/view/ui/hud/detector/pause/hints/hints.tscn" id="2_50yht"]
 [ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/hud/detector/pause/options/options.gd" id="2_i4sx2"]
+[ext_resource type="Theme" uid="uid://y1o83ldh4al2" path="res://asset/resource/engine/internal/theme/patterns/template/menu/settings/topic/header.tres" id="6_55a30"]
+[ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://asset/resource/engine/internal/theme/patterns/template/menu/settings/topic/footer.tres" id="7_fhjs6"]
 
 [node name="pause" type="Control"]
 layout_mode = 3
@@ -12,6 +15,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_j33m5")
 script = ExtResource("1_mkyw8")
 
 [node name="back" type="ColorRect" parent="."]
@@ -33,14 +37,17 @@ offset_top = -324.0
 offset_right = 576.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_left = 35
 
-[node name="content" type="HBoxContainer" parent="margin"]
+[node name="content" type="HFlowContainer" parent="margin"]
 layout_mode = 2
+size_flags_vertical = 4
 
 [node name="options" type="VBoxContainer" parent="margin/content"]
 custom_minimum_size = Vector2(250, 250)
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 4
 size_flags_stretch_ratio = 0.2
 script = ExtResource("2_i4sx2")
 
@@ -51,6 +58,7 @@ size_flags_stretch_ratio = 0.25
 
 [node name="menu" parent="margin/content/options" instance=ExtResource("1_n3aae")]
 layout_mode = 2
+size_flags_horizontal = 1
 
 [node name="split-2" type="Control" parent="margin/content/options"]
 layout_mode = 2
@@ -58,14 +66,109 @@ size_flags_vertical = 3
 size_flags_stretch_ratio = 0.25
 
 [node name="hints" parent="margin/content/options" instance=ExtResource("2_50yht")]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 
-[node name="menu2" type="VBoxContainer" parent="margin/content/options"]
+[node name="Control" type="Control" parent="margin/content"]
+custom_minimum_size = Vector2(25, 0)
 layout_mode = 2
 
-[node name="character" type="Control" parent="margin/content"]
+[node name="navigation" type="VBoxContainer" parent="margin/content"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.8
+
+[node name="head" type="Label" parent="margin/content/navigation"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "Навигация"
+
+[node name="keyboard" type="VBoxContainer" parent="margin/content/navigation"]
+layout_mode = 2
+
+[node name="focus" type="Label" parent="margin/content/navigation/keyboard"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme = ExtResource("6_55a30")
+text = "Клавиши WASD, Home, End, Page Up-Down, Стрелки передвигают фокус"
+autowrap_mode = 2
+
+[node name="selection" type="Label" parent="margin/content/navigation/keyboard"]
+layout_mode = 2
+theme = ExtResource("6_55a30")
+text = "Клавиши 0-9 используются для быстрого выбора опций"
+
+[node name="hot" type="VBoxContainer" parent="margin/content/navigation/keyboard"]
+layout_mode = 2
+
+[node name="head" type="Label" parent="margin/content/navigation/keyboard/hot"]
+layout_mode = 2
+text = "Горячие клавиши"
+
+[node name="keys" type="HFlowContainer" parent="margin/content/navigation/keyboard/hot"]
+layout_mode = 2
+theme = ExtResource("7_fhjs6")
+theme_override_constants/h_separation = 15
+
+[node name="analyze" type="Label" parent="margin/content/navigation/keyboard/hot/keys"]
+layout_mode = 2
+text = "F1 - Анализ"
+
+[node name="information" type="Label" parent="margin/content/navigation/keyboard/hot/keys"]
+layout_mode = 2
+text = "F2 - Сведения"
+
+[node name="settings" type="Label" parent="margin/content/navigation/keyboard/hot/keys"]
+layout_mode = 2
+text = "F3 - Настройки"
+
+[node name="main-menu" type="Label" parent="margin/content/navigation/keyboard/hot/keys"]
+layout_mode = 2
+text = "F4 - Главное меню"
+
+[node name="soundtrack" type="Label" parent="margin/content/navigation/keyboard/hot/keys"]
+layout_mode = 2
+text = "F5 - Система саундтрека"
+
+[node name="checkpoint" type="Label" parent="margin/content/navigation/keyboard/hot/keys"]
+layout_mode = 2
+text = "F6 - Последний чекпоинт"
+
+[node name="fast-save" type="Label" parent="margin/content/navigation/keyboard/hot/keys"]
+layout_mode = 2
+text = "F7 - Быстрое сохранение"
+
+[node name="fast-load" type="Label" parent="margin/content/navigation/keyboard/hot/keys"]
+layout_mode = 2
+text = "F8 - Быстрая загрузка"
+
+[node name="export-progress" type="Label" parent="margin/content/navigation/keyboard/hot/keys"]
+layout_mode = 2
+text = "F9 - Экспорт прогресса"
+
+[node name="import-progress" type="Label" parent="margin/content/navigation/keyboard/hot/keys"]
+layout_mode = 2
+text = "F10 - Импорт прогресса"
+
+[node name="fullscreen" type="Label" parent="margin/content/navigation/keyboard/hot/keys"]
+layout_mode = 2
+text = "F11 - Полный экран"
+
+[node name="fullscreen2" type="Label" parent="margin/content/navigation/keyboard/hot/keys"]
+layout_mode = 2
+text = "F12 - Фоторежим"
+
+[node name="gamepad" type="VBoxContainer" parent="margin/content/navigation"]
+layout_mode = 2
+
+[node name="focus" type="Label" parent="margin/content/navigation/gamepad"]
+layout_mode = 2
+theme = ExtResource("6_55a30")
+text = "Кнопки X, Y и правый стик передвигают фокус"
+
+[node name="selection" type="Label" parent="margin/content/navigation/gamepad"]
+layout_mode = 2
+theme = ExtResource("6_55a30")
+text = "Выбор: 1, 2 бамперы  3, 4 триггеры  5, 6 стики 7, 8 плюс-минус 9, 0 переферия"
