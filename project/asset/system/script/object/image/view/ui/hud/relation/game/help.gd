@@ -7,7 +7,7 @@ func controls(hud: Control, analyze: Button) -> void:
 	var hint: InputObserver = hud.processor.game.help
 	var hints: VBoxContainer = hud.detector.game.margin.hints
 
-	hint.input.connect(analyze.short.sync_control_hint)
+	# hint.input.connect(analyze.short.sync_control_hint)
 	connect_hint(hint, hints.action, "act")
 	for act in ["move", "push"]:
 		connect_hint(hint, hints.motion, act)

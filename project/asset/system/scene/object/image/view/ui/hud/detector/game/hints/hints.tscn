@@ -39,15 +39,23 @@ horizontal_scroll_mode = 0
 script = ExtResource("3_jogvt")
 
 [node name="category" type="VBoxContainer" parent="scroll"]
-custom_minimum_size = Vector2(300, 140)
+custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 size_flags_horizontal = 10
-size_flags_vertical = 3
+size_flags_vertical = 10
+
+[node name="margin" type="MarginContainer" parent="scroll/category"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 20
+
+[node name="hotkey" type="Label" parent="scroll/category/margin"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+text = "F1 - Переключить"
 
 [node name="motion" parent="scroll/category" instance=ExtResource("3_g22ml")]
-custom_minimum_size = Vector2(300, 140)
 layout_mode = 2
-size_flags_vertical = 3
 alignment = 2
 
 [node name="action" parent="scroll/category" instance=ExtResource("5_kvclq")]

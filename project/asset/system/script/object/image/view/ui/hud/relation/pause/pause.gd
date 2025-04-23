@@ -7,6 +7,6 @@ extends Node
 
 func controls(hud: Control, menu: VBoxContainer) -> void:
 	resume.controls(hud, menu.resume)
-	screen.controls(hud, menu.screen)
+	screen.controls(hud, menu.settings)
 	exit.controls(hud, menu.exit)
 	hints.controls(hud)

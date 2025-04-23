@@ -13,7 +13,7 @@ func _ready() -> void:
 		hero.logic.processors.hud.display = hud
 		#hero.plot.connect(hud.detector.game.chat.add_blocks)
 	hud.detector.game.margin.hints.preview = progress
-	hud.detector.pause.options.menu.screen.pressed.connect(func():
+	hud.detector.pause.options.menu.settings.pressed.connect(func():
 		self.hide()
 		settings.show()
 	)

@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://lp8f4l2tw7ot" path="res://asset/system/scene/object/image/view/ui/hud/detector/pause/menu/help/help.tscn" id="4_gq82q"]
 [ext_resource type="PackedScene" uid="uid://cvs8byy41xeo5" path="res://asset/system/scene/object/image/view/ui/hud/detector/pause/menu/exit/exit.tscn" id="5_8a5yd"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_f1qec"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_sa2h1"]
 
 [node name="menu" type="VBoxContainer"]
 anchors_preset = 14
@@ -25,6 +25,7 @@ script = ExtResource("1_447re")
 
 [node name="pause" parent="." instance=ExtResource("1_8dw2w")]
 layout_mode = 2
+theme_override_constants/margin_bottom = 20
 
 [node name="resume" parent="." instance=ExtResource("2_8gyh0")]
 layout_mode = 2
@@ -44,7 +45,25 @@ focus_neighbor_left = NodePath("../exit")
 focus_neighbor_top = NodePath("../resume")
 focus_neighbor_right = NodePath("../exit")
 focus_previous = NodePath("../resume")
-button_group = SubResource("ButtonGroup_f1qec")
+button_group = SubResource("ButtonGroup_sa2h1")
+
+[node name="settings" type="Button" parent="."]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="margin" type="MarginContainer" parent="settings"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -49.0
+offset_right = 165.0
+offset_bottom = 49.0
+grow_vertical = 2
+
+[node name="caption" type="Label" parent="settings/margin"]
+layout_mode = 2
+text = "Настройки"
 
 [node name="exit" parent="." instance=ExtResource("5_8a5yd")]
 layout_mode = 2

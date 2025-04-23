@@ -14,4 +14,5 @@ func toggle(fullscreen: bool) -> void:
 	mode.toggle(fullscreen)
 
 func _input(event: InputEvent) -> void:
-	short.sync_control_hint(event)
+	pass
+	# short.sync_control_hint(event)

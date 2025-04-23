@@ -1,3 +1,3 @@
 extends Button
 
-@onready var short: Control = $content/pause/short
+# @onready var short: Control = $content/pause/short
