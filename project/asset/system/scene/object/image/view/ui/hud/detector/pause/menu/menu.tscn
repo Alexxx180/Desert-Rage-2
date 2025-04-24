@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://lp8f4l2tw7ot" path="res://asset/system/scene/object/image/view/ui/hud/detector/pause/menu/help/help.tscn" id="4_gq82q"]
 [ext_resource type="PackedScene" uid="uid://cvs8byy41xeo5" path="res://asset/system/scene/object/image/view/ui/hud/detector/pause/menu/exit/exit.tscn" id="5_8a5yd"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_sa2h1"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_jtd12"]
 
 [node name="menu" type="VBoxContainer"]
 anchors_preset = 14
@@ -28,6 +28,7 @@ layout_mode = 2
 theme_override_constants/margin_bottom = 20
 
 [node name="resume" parent="." instance=ExtResource("2_8gyh0")]
+custom_minimum_size = Vector2(160, 60)
 layout_mode = 2
 tooltip_text = "Назад в игру"
 focus_neighbor_top = NodePath("../exit")
@@ -38,6 +39,7 @@ toggle_mode = false
 shortcut_in_tooltip = false
 
 [node name="help" parent="." instance=ExtResource("4_gq82q")]
+custom_minimum_size = Vector2(160, 60)
 layout_mode = 2
 size_flags_horizontal = 1
 tooltip_text = "Инфомация игры"
@@ -45,10 +47,10 @@ focus_neighbor_left = NodePath("../exit")
 focus_neighbor_top = NodePath("../resume")
 focus_neighbor_right = NodePath("../exit")
 focus_previous = NodePath("../resume")
-button_group = SubResource("ButtonGroup_sa2h1")
+button_group = SubResource("ButtonGroup_jtd12")
 
 [node name="settings" type="Button" parent="."]
-custom_minimum_size = Vector2(0, 60)
+custom_minimum_size = Vector2(160, 60)
 layout_mode = 2
 
 [node name="margin" type="MarginContainer" parent="settings"]
@@ -66,6 +68,7 @@ layout_mode = 2
 text = "Настройки"
 
 [node name="exit" parent="." instance=ExtResource("5_8a5yd")]
+custom_minimum_size = Vector2(160, 60)
 layout_mode = 2
 size_flags_horizontal = 1
 focus_neighbor_left = NodePath("../help")

@@ -1,10 +1,11 @@
-[gd_scene load_steps=17 format=3 uid="uid://b01p37el432af"]
+[gd_scene load_steps=18 format=3 uid="uid://b01p37el432af"]
 
 [ext_resource type="Theme" uid="uid://ctsb6uh5t0n1l" path="res://asset/resource/engine/internal/theme/default.tres" id="1_lqfh0"]
 [ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/hints/hints.gd" id="2_wh6yj"]
 [ext_resource type="PackedScene" uid="uid://mdjk60h84tvs" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/hints/category/motion.tscn" id="3_g22ml"]
 [ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/hints/scroll.gd" id="3_jogvt"]
 [ext_resource type="Script" path="res://addons/godot-behavior-tree-plugin/tree/tree.gd" id="4_5bxjs"]
+[ext_resource type="PackedScene" uid="uid://d0sq1ex503flw" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/hide.tscn" id="4_7ih0x"]
 [ext_resource type="PackedScene" uid="uid://cimkmbth3t0at" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/hints/category/action.tscn" id="5_kvclq"]
 [ext_resource type="Script" path="res://addons/godot-behavior-tree-plugin/sequence/sequence.gd" id="5_ox1kg"]
 [ext_resource type="PackedScene" uid="uid://bcldwsqs27to7" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/hints/analyze/analyze.tscn" id="5_u8371"]
@@ -31,6 +32,9 @@ theme = ExtResource("1_lqfh0")
 alignment = 2
 script = ExtResource("2_wh6yj")
 
+[node name="Control" type="Control" parent="."]
+layout_mode = 2
+
 [node name="scroll" type="ScrollContainer" parent="."]
 custom_minimum_size = Vector2(320, 240)
 layout_mode = 2
@@ -39,20 +43,9 @@ horizontal_scroll_mode = 0
 script = ExtResource("3_jogvt")
 
 [node name="category" type="VBoxContainer" parent="scroll"]
-custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 10
-
-[node name="margin" type="MarginContainer" parent="scroll/category"]
-layout_mode = 2
-theme_override_constants/margin_bottom = 20
-
-[node name="hotkey" type="Label" parent="scroll/category/margin"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 8
-text = "F1 - Переключить"
 
 [node name="motion" parent="scroll/category" instance=ExtResource("3_g22ml")]
 layout_mode = 2
@@ -64,9 +57,27 @@ layout_mode = 2
 [node name="reason" parent="scroll/category" instance=ExtResource("6_7ljf1")]
 layout_mode = 2
 
-[node name="analyze" parent="." instance=ExtResource("5_u8371")]
+[node name="analyze" type="HBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="margin" type="MarginContainer" parent="analyze"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 10
+theme_override_constants/margin_bottom = 20
+
+[node name="hotkey" type="Label" parent="analyze/margin"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+text = "F1"
+
+[node name="analyze" parent="analyze" instance=ExtResource("5_u8371")]
 layout_mode = 2
 shortcut = ExtResource("6_7mevl")
+
+[node name="hide" parent="analyze" instance=ExtResource("4_7ih0x")]
 
 [node name="behavior" type="Node" parent="."]
 script = ExtResource("4_5bxjs")
@@ -128,4 +139,4 @@ script = ExtResource("8_kc64f")
 [node name="blackboard" type="Node" parent="."]
 script = ExtResource("13_2a2v1")
 
-[connection signal="pressed" from="analyze" to="." method="toggle_help"]
+[connection signal="pressed" from="analyze/analyze" to="." method="toggle_help"]

@@ -1,3 +1,3 @@
 extends Control
 
-@onready var options: VBoxContainer = $margin/content/options
+@onready var options: VBoxContainer = $scroll/margin/content/options
