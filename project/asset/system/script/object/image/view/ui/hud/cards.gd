@@ -12,7 +12,7 @@ func _ready() -> void:
 	for hero in group.deploy.party.heroes:
 		hero.logic.processors.hud.display = hud
 		#hero.plot.connect(hud.detector.game.chat.add_blocks)
-	hud.detector.game.hints.preview = progress
+	hud.detector.game.hints.set_preview(group, progress)
 	hud.detector.pause.options.menu.settings.pressed.connect(func():
 		self.hide()
 		settings.show()
