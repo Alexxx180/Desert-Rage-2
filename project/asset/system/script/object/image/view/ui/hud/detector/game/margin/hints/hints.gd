@@ -6,7 +6,7 @@ var preview: HelpPreview: set = set_preview
 @onready var action: VBoxContainer = $scroll/category/action
 @onready var reason: VBoxContainer = $scroll/category/reason
 
-@onready var analyze: Button = $analyze/button
+@onready var analyze: Button = $analyze/analyze
 @onready var behavior: BehaviorTree = $behavior
 @onready var blackboard: BehaviorBlackboard = $blackboard
 

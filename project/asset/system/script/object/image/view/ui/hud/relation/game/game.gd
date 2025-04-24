@@ -5,4 +5,4 @@ extends Node
 
 func controls(hud: Control, margin: MarginContainer) -> void:
 	pause.controls(hud, margin.pause)
-	help.controls(hud, margin.hints.analyze)
+	help.controls(hud, margin.analyze)

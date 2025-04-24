@@ -5,7 +5,7 @@ func connect_hint(hint: InputObserver, hints, act: String) -> void:
 
 func controls(hud: Control, analyze: Button) -> void:
 	var hint: InputObserver = hud.processor.game.help
-	var hints: VBoxContainer = hud.detector.game.margin.hints
+	var hints: VBoxContainer = hud.detector.game.hints
 
 	# hint.input.connect(analyze.short.sync_control_hint)
 	connect_hint(hint, hints.action, "act")
@@ -13,4 +13,4 @@ func controls(hud: Control, analyze: Button) -> void:
 		connect_hint(hint, hints.motion, act)
 	for act in ["team", "group"]:
 		connect_hint(hint, hints.reason, act)
-	#hint.show_help(true)
+	#hint.show_help(true)0.1

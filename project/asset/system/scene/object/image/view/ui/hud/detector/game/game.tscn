@@ -1,10 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://cel3u88abrgv3"]
+[gd_scene load_steps=9 format=3 uid="uid://cel3u88abrgv3"]
 
 [ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/hud/detector/game/game.gd" id="1_o71r6"]
 [ext_resource type="PackedScene" uid="uid://dugyepxewkmgo" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/pause/pause.tscn" id="1_p1rgr"]
 [ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/margin.gd" id="2_m0xgs"]
 [ext_resource type="PackedScene" uid="uid://b01p37el432af" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/hints/hints.tscn" id="2_mf7wa"]
+[ext_resource type="PackedScene" uid="uid://bcldwsqs27to7" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/hints/analyze/analyze.tscn" id="5_m2hjb"]
 [ext_resource type="PackedScene" uid="uid://cbd4idujs0m3k" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/dialog/dialog.tscn" id="5_x67kx"]
+[ext_resource type="Shortcut" uid="uid://b2haaq41erm0s" path="res://asset/resource/engine/internal/short/cut/game/analyze.tres" id="6_ijgny"]
+[ext_resource type="PackedScene" uid="uid://d0sq1ex503flw" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/hide.tscn" id="7_koglg"]
 
 [node name="game" type="Control"]
 layout_mode = 3
@@ -25,22 +28,346 @@ offset_bottom = 75.0
 grow_horizontal = 2
 size_flags_vertical = 0
 
-[node name="margin" type="MarginContainer" parent="."]
+[node name="options" type="MarginContainer" parent="."]
 clip_contents = true
 custom_minimum_size = Vector2(0, 200)
 layout_mode = 1
-anchors_preset = 12
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_m0xgs")
+
+[node name="menu" type="Control" parent="options"]
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="selection" type="Button" parent="options/menu"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+offset_right = 60.0
+offset_bottom = 60.0
+
+[node name="margin" type="MarginContainer" parent="options/menu/selection"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="caption" type="Label" parent="options/menu/selection/margin"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "="
+
+[node name="margin" type="MarginContainer" parent="options/menu"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -648.0
-grow_horizontal = 2
+offset_left = -22.0
+offset_top = -43.0
+grow_horizontal = 0
 grow_vertical = 0
-script = ExtResource("2_m0xgs")
+size_flags_horizontal = 8
+size_flags_vertical = 10
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
 
-[node name="pause" parent="margin" instance=ExtResource("1_p1rgr")]
+[node name="hotkey" type="Label" parent="options/menu/margin"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+text = "Alt"
+
+[node name="hide" parent="options/menu" instance=ExtResource("7_koglg")]
+
+[node name="ability" type="Control" parent="options"]
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+
+[node name="selection" type="Button" parent="options/ability"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -60.0
+offset_bottom = 60.0
+grow_horizontal = 0
+
+[node name="margin" type="MarginContainer" parent="options/ability/selection"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="caption" type="Label" parent="options/ability/selection/margin"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "S"
+
+[node name="margin" type="MarginContainer" parent="options/ability"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -43.0
+offset_right = 18.0
+grow_vertical = 0
+size_flags_horizontal = 8
+size_flags_vertical = 10
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_bottom = 30
+
+[node name="hotkey" type="Label" parent="options/ability/margin"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+text = "F1"
+
+[node name="hide" parent="options/ability" instance=ExtResource("7_koglg")]
+
+[node name="pause" type="Control" parent="options"]
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+
+[node name="option" parent="options/pause" instance=ExtResource("1_p1rgr")]
+layout_mode = 1
+
+[node name="margin" type="MarginContainer" parent="options/pause"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -25.0
+offset_bottom = 43.0
+grow_horizontal = 0
+size_flags_horizontal = 8
+size_flags_vertical = 10
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 30
+
+[node name="hotkey" type="Label" parent="options/pause/margin"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+text = "Esc"
+
+[node name="hide" parent="options/pause" instance=ExtResource("7_koglg")]
+
+[node name="analyze" type="Control" parent="options"]
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+
+[node name="help" parent="options/analyze" instance=ExtResource("5_m2hjb")]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -60.0
+offset_top = -60.0
+grow_horizontal = 0
+grow_vertical = 0
+shortcut = ExtResource("6_ijgny")
+
+[node name="margin" type="MarginContainer" parent="options/analyze"]
+layout_mode = 1
+offset_right = 18.0
+offset_bottom = 43.0
+size_flags_horizontal = 8
+size_flags_vertical = 10
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+
+[node name="hotkey" type="Label" parent="options/analyze/margin"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "F1"
+
+[node name="hide" parent="options/analyze" instance=ExtResource("7_koglg")]
+
+[node name="hud" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="inventory" type="VBoxContainer" parent="hud"]
 layout_mode = 2
 
-[node name="hints" parent="margin" instance=ExtResource("2_mf7wa")]
+[node name="content" type="HFlowContainer" parent="hud/inventory"]
 layout_mode = 2
+
+[node name="options" type="HBoxContainer" parent="hud/inventory"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="space-1" type="Control" parent="hud/inventory/options"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="tab" type="Button" parent="hud/inventory/options"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="space-2" type="Control" parent="hud/inventory/options"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="metrics" type="Control" parent="hud"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="stats" type="HBoxContainer" parent="hud/metrics"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 25.0
+grow_vertical = 2
+size_flags_vertical = 3
+
+[node name="content" type="VBoxContainer" parent="hud/metrics/stats"]
+layout_mode = 2
+
+[node name="options" type="VBoxContainer" parent="hud/metrics/stats"]
+layout_mode = 2
+
+[node name="space-1" type="Control" parent="hud/metrics/stats/options"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+
+[node name="tab" type="Button" parent="hud/metrics/stats/options"]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="space-2" type="Control" parent="hud/metrics/stats/options"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+
+[node name="priority" type="HBoxContainer" parent="hud/metrics"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -29.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_vertical = 3
+
+[node name="content" type="VBoxContainer" parent="hud/metrics/priority"]
+layout_mode = 2
+
+[node name="options" type="VBoxContainer" parent="hud/metrics/priority"]
+layout_mode = 2
+
+[node name="space-1" type="Control" parent="hud/metrics/priority/options"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+
+[node name="tab" type="Button" parent="hud/metrics/priority/options"]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="space-2" type="Control" parent="hud/metrics/priority/options"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+
+[node name="ability" type="VBoxContainer" parent="hud"]
+layout_mode = 2
+
+[node name="content" type="HFlowContainer" parent="hud/ability"]
+layout_mode = 2
+
+[node name="options" type="HBoxContainer" parent="hud/ability"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="space-1" type="Control" parent="hud/ability/options"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="tab" type="Button" parent="hud/ability/options"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "v"
+
+[node name="space-2" type="Control" parent="hud/ability/options"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="preview" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="books" type="VBoxContainer" parent="preview"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="space" type="Control" parent="preview"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.6
+
+[node name="hints" parent="preview" instance=ExtResource("2_mf7wa")]
+layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 1
+size_flags_stretch_ratio = 0.2
