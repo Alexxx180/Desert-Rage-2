@@ -12,7 +12,7 @@ func _input(_event: InputEvent) -> void:
 
 	var pressed: bool = focused
 	var acts: Array[String] = ["down", "up", "left", "right", "focus_next", "focus_prev"]
-	var options: Array[Button] = [exit, resume, resume, resume, exit, resume] # right help
+	var options: Array[Button] = [exit, resume, exit, resume, exit, resume] # right help
 	var i: int = acts.size()
 
 	while i > 0 and not (pressed or focused):

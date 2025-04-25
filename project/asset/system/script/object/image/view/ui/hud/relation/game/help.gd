@@ -3,7 +3,7 @@ extends Node
 func connect_hint(hint: InputObserver, hints, act: String) -> void:
 	hint.input.connect(hints.get_node(act).sync_control_hint)
 
-func controls(hud: Control, analyze: Button) -> void:
+func controls(hud: CanvasLayer, analyze: Button) -> void:
 	var hint: InputObserver = hud.processor.game.help
 	var hints: VBoxContainer = hud.detector.game.hints
 

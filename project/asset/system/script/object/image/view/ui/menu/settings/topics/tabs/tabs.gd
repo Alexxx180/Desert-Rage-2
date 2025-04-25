@@ -1,4 +1,4 @@
-extends HBoxContainer
+extends HFlowContainer
 
 @onready var caption: Control = $caption
 @onready var exit: Control = $exit

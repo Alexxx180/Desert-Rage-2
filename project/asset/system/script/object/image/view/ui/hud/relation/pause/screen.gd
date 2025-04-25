@@ -1,6 +1,6 @@
 extends Node
 
-func controls(hud: Control, screen: Button) -> void:
+func controls(hud: CanvasLayer, screen: Button) -> void:
 	"""
 	var mode: Node = hud.processor.pause.screen
 	screen.toggled.connect(mode.toggle)

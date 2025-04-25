@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://b4x588yxrcok3"]
+[gd_scene load_steps=25 format=3 uid="uid://b4x588yxrcok3"]
 
 [ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/settings/settings.gd" id="1_apf6u"]
 [ext_resource type="Theme" uid="uid://dfyi7rrcrweqx" path="res://asset/resource/engine/internal/theme/patterns/template/menu/settings/settings.tres" id="1_vs08l"]
@@ -14,6 +14,11 @@
 [ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://asset/resource/engine/internal/theme/patterns/template/menu/settings/topic/footer.tres" id="8_j2b4r"]
 [ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/settings/topics/tabs/tabs.gd" id="13_cumtp"]
 [ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/settings/topics/tabs/caption/caption.gd" id="13_rpxmq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vndxt"]
+bg_color = Color(0.0196078, 0.0196078, 0.0196078, 1)
+border_width_top = 1
+border_color = Color(0.588235, 0.588235, 0.588235, 1)
 
 [sub_resource type="Gradient" id="Gradient_n1w43"]
 
@@ -36,10 +41,21 @@ width = 1
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_71y6s"]
 bg_color = Color(0.0687983, 0.0687983, 0.0687982, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_okge3"]
+bg_color = Color(0.0196078, 0.0196078, 0.0196078, 1)
+border_width_bottom = 1
+border_color = Color(0.588235, 0.588235, 0.588235, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n7dsu"]
+bg_color = Color(0.0196078, 0.0196078, 0.0196078, 1)
+border_width_bottom = 1
+border_color = Color(0.588235, 0.588235, 0.588235, 1)
+
 [node name="settings" type="CanvasLayer"]
 script = ExtResource("1_apf6u")
 
 [node name="detector" type="Panel" parent="."]
+process_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -62,62 +78,45 @@ theme_override_constants/margin_top = 30
 theme_override_constants/margin_right = 35
 theme_override_constants/margin_bottom = 30
 
-[node name="scroll" type="ScrollContainer" parent="detector/margin"]
+[node name="topics" type="VBoxContainer" parent="detector/margin"]
 layout_mode = 2
-vertical_scroll_mode = 0
-
-[node name="margin" type="MarginContainer" parent="detector/margin/scroll"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_constants/margin_left = 2
-theme_override_constants/margin_top = 2
-theme_override_constants/margin_right = 2
-theme_override_constants/margin_bottom = 2
-
-[node name="topics" type="VBoxContainer" parent="detector/margin/scroll/margin"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.35
 script = ExtResource("3_dcp6l")
 
-[node name="content" type="ScrollContainer" parent="detector/margin/scroll/margin/topics"]
+[node name="content" type="ScrollContainer" parent="detector/margin/topics"]
 layout_mode = 2
 size_flags_vertical = 3
-horizontal_scroll_mode = 0
+follow_focus = true
 
-[node name="margin" type="MarginContainer" parent="detector/margin/scroll/margin/topics/content"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_constants/margin_left = 2
-theme_override_constants/margin_top = 2
-theme_override_constants/margin_right = 2
-theme_override_constants/margin_bottom = 2
-
-[node name="options" type="VBoxContainer" parent="detector/margin/scroll/margin/topics/content/margin"]
+[node name="options" type="VBoxContainer" parent="detector/margin/topics/content"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 6
 script = ExtResource("4_2i1li")
 
-[node name="game" type="VBoxContainer" parent="detector/margin/scroll/margin/topics/content/margin/options"]
+[node name="game" type="MarginContainer" parent="detector/margin/topics/content/options"]
+layout_mode = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="experience" type="VBoxContainer" parent="detector/margin/topics/content/options/game"]
 layout_mode = 2
 
-[node name="sound" type="VBoxContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/game"]
+[node name="sound" type="VBoxContainer" parent="detector/margin/topics/content/options/game/experience"]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8
 
-[node name="header" type="Button" parent="detector/margin/scroll/margin/topics/content/margin/options/game/sound"]
+[node name="header" type="Button" parent="detector/margin/topics/content/options/game/experience/sound"]
 custom_minimum_size = Vector2(0, 45)
 layout_mode = 2
 theme = ExtResource("6_kbam3")
+theme_override_styles/normal = SubResource("StyleBoxFlat_vndxt")
 script = ExtResource("6_w727q")
 
-[node name="margin" type="MarginContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/game/sound/header"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/game/experience/sound/header"]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -128,21 +127,21 @@ offset_bottom = 21.0
 grow_vertical = 2
 size_flags_horizontal = 0
 
-[node name="caption" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/game/sound/header/margin"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/game/experience/sound/header/margin"]
 layout_mode = 2
 size_flags_horizontal = 0
 text = "Sound"
 
-[node name="content" type="VBoxContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/game/sound"]
+[node name="content" type="VBoxContainer" parent="detector/margin/topics/content/options/game/experience/sound"]
 layout_mode = 2
 
-[node name="options" type="HFlowContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/game/sound/content"]
+[node name="options" type="HFlowContainer" parent="detector/margin/topics/content/options/game/experience/sound/content"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 10
 theme = ExtResource("2_ull8j")
 
-[node name="music" type="HSlider" parent="detector/margin/scroll/margin/topics/content/margin/options/game/sound/content/options"]
+[node name="music" type="HSlider" parent="detector/margin/topics/content/options/game/experience/sound/content/options"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -155,7 +154,7 @@ theme_override_styles/grabber_area = ExtResource("3_j0acm")
 theme_override_styles/grabber_area_highlight = ExtResource("5_thq8p")
 value = 50.0
 
-[node name="margin" type="MarginContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/game/sound/content/options/music"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/game/experience/sound/content/options/music"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -167,14 +166,14 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 7
 
-[node name="music" type="Panel" parent="detector/margin/scroll/margin/topics/content/margin/options/game/sound/content/options/music/margin"]
+[node name="music" type="Panel" parent="detector/margin/topics/content/options/game/experience/sound/content/options/music/margin"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.35
 mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_71y6s")
 
-[node name="volume" type="VBoxContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/game/sound/content/options/music/margin/music"]
+[node name="volume" type="VBoxContainer" parent="detector/margin/topics/content/options/game/experience/sound/content/options/music/margin/music"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -183,23 +182,23 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 4
 
-[node name="state" type="MarginContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/game/sound/content/options/music/margin/music/volume"]
+[node name="state" type="MarginContainer" parent="detector/margin/topics/content/options/game/experience/sound/content/options/music/margin/music/volume"]
 layout_mode = 2
 theme_override_constants/margin_left = 25
 theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 25
 theme_override_constants/margin_bottom = 7
 
-[node name="caption" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/game/sound/content/options/music/margin/music/volume/state"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/game/experience/sound/content/options/music/margin/music/volume/state"]
 layout_mode = 2
 text = "Music"
 
-[node name="status" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/game/sound/content/options/music/margin/music/volume/state"]
+[node name="status" type="Label" parent="detector/margin/topics/content/options/game/experience/sound/content/options/music/margin/music/volume/state"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "100%"
 
-[node name="sound" type="HSlider" parent="detector/margin/scroll/margin/topics/content/margin/options/game/sound/content/options"]
+[node name="sound" type="HSlider" parent="detector/margin/topics/content/options/game/experience/sound/content/options"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -212,7 +211,7 @@ theme_override_styles/grabber_area = ExtResource("3_j0acm")
 theme_override_styles/grabber_area_highlight = ExtResource("5_thq8p")
 value = 50.0
 
-[node name="margin" type="MarginContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/game/sound/content/options/sound"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/game/experience/sound/content/options/sound"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -224,14 +223,14 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 7
 
-[node name="music" type="Panel" parent="detector/margin/scroll/margin/topics/content/margin/options/game/sound/content/options/sound/margin"]
+[node name="music" type="Panel" parent="detector/margin/topics/content/options/game/experience/sound/content/options/sound/margin"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.35
 mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_71y6s")
 
-[node name="volume" type="VBoxContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/game/sound/content/options/sound/margin/music"]
+[node name="volume" type="VBoxContainer" parent="detector/margin/topics/content/options/game/experience/sound/content/options/sound/margin/music"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -240,23 +239,23 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 4
 
-[node name="state" type="MarginContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/game/sound/content/options/sound/margin/music/volume"]
+[node name="state" type="MarginContainer" parent="detector/margin/topics/content/options/game/experience/sound/content/options/sound/margin/music/volume"]
 layout_mode = 2
 theme_override_constants/margin_left = 25
 theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 25
 theme_override_constants/margin_bottom = 7
 
-[node name="caption" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/game/sound/content/options/sound/margin/music/volume/state"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/game/experience/sound/content/options/sound/margin/music/volume/state"]
 layout_mode = 2
 text = "Sound"
 
-[node name="status" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/game/sound/content/options/sound/margin/music/volume/state"]
+[node name="status" type="Label" parent="detector/margin/topics/content/options/game/experience/sound/content/options/sound/margin/music/volume/state"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "100%"
 
-[node name="interface" type="HSlider" parent="detector/margin/scroll/margin/topics/content/margin/options/game/sound/content/options"]
+[node name="interface" type="HSlider" parent="detector/margin/topics/content/options/game/experience/sound/content/options"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -269,7 +268,7 @@ theme_override_styles/grabber_area = ExtResource("3_j0acm")
 theme_override_styles/grabber_area_highlight = ExtResource("5_thq8p")
 value = 50.0
 
-[node name="margin" type="MarginContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/game/sound/content/options/interface"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/game/experience/sound/content/options/interface"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -281,14 +280,14 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 7
 
-[node name="music" type="Panel" parent="detector/margin/scroll/margin/topics/content/margin/options/game/sound/content/options/interface/margin"]
+[node name="music" type="Panel" parent="detector/margin/topics/content/options/game/experience/sound/content/options/interface/margin"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.35
 mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_71y6s")
 
-[node name="volume" type="VBoxContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/game/sound/content/options/interface/margin/music"]
+[node name="volume" type="VBoxContainer" parent="detector/margin/topics/content/options/game/experience/sound/content/options/interface/margin/music"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -297,28 +296,28 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 4
 
-[node name="state" type="MarginContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/game/sound/content/options/interface/margin/music/volume"]
+[node name="state" type="MarginContainer" parent="detector/margin/topics/content/options/game/experience/sound/content/options/interface/margin/music/volume"]
 layout_mode = 2
 theme_override_constants/margin_left = 25
 theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 25
 theme_override_constants/margin_bottom = 7
 
-[node name="caption" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/game/sound/content/options/interface/margin/music/volume/state"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/game/experience/sound/content/options/interface/margin/music/volume/state"]
 layout_mode = 2
 text = "Interface"
 
-[node name="status" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/game/sound/content/options/interface/margin/music/volume/state"]
+[node name="status" type="Label" parent="detector/margin/topics/content/options/game/experience/sound/content/options/interface/margin/music/volume/state"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "100%"
 
-[node name="system" type="Button" parent="detector/margin/scroll/margin/topics/content/margin/options/game/sound/content/options"]
+[node name="system" type="Button" parent="detector/margin/topics/content/options/game/experience/sound/content/options"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="margin" type="MarginContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/game/sound/content/options/system"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/game/experience/sound/content/options/system"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -326,17 +325,17 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="caption" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/game/sound/content/options/system/margin"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/game/experience/sound/content/options/system/margin"]
 layout_mode = 2
 text = "Soundtrack System"
 
-[node name="footer" type="Button" parent="detector/margin/scroll/margin/topics/content/margin/options/game/sound/content"]
+[node name="footer" type="Button" parent="detector/margin/topics/content/options/game/experience/sound/content"]
 custom_minimum_size = Vector2(0, 45)
 layout_mode = 2
 theme = ExtResource("8_j2b4r")
 script = ExtResource("6_wolhp")
 
-[node name="margin" type="MarginContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/game/sound/content/footer"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/game/experience/sound/content/footer"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -350,26 +349,26 @@ grow_horizontal = 0
 grow_vertical = 2
 size_flags_horizontal = 8
 
-[node name="caption" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/game/sound/content/footer/margin"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/game/experience/sound/content/footer/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
 theme_override_colors/font_color = Color(0.313726, 0.313726, 0.313726, 1)
 theme_override_font_sizes/font_size = 18
 text = "Music and sound settings"
 
-[node name="experience" type="VBoxContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/game"]
+[node name="experience" type="VBoxContainer" parent="detector/margin/topics/content/options/game/experience"]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8
 
-[node name="header" type="Button" parent="detector/margin/scroll/margin/topics/content/margin/options/game/experience"]
+[node name="header" type="Button" parent="detector/margin/topics/content/options/game/experience/experience"]
 custom_minimum_size = Vector2(0, 45)
 layout_mode = 2
 theme = ExtResource("6_kbam3")
 script = ExtResource("6_w727q")
 
-[node name="margin" type="MarginContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/game/experience/header"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/game/experience/experience/header"]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -380,26 +379,26 @@ offset_bottom = 21.0
 grow_vertical = 2
 size_flags_horizontal = 0
 
-[node name="caption" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/game/experience/header/margin"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/game/experience/experience/header/margin"]
 layout_mode = 2
 size_flags_horizontal = 0
 text = "Game"
 
-[node name="content" type="VBoxContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/game/experience"]
+[node name="content" type="VBoxContainer" parent="detector/margin/topics/content/options/game/experience/experience"]
 layout_mode = 2
 
-[node name="options" type="HFlowContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/game/experience/content"]
+[node name="options" type="HFlowContainer" parent="detector/margin/topics/content/options/game/experience/experience/content"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 10
 theme = ExtResource("2_ull8j")
 
-[node name="narrative" type="Button" parent="detector/margin/scroll/margin/topics/content/margin/options/game/experience/content/options"]
+[node name="narrative" type="Button" parent="detector/margin/topics/content/options/game/experience/experience/content/options"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="margin" type="MarginContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/game/experience/content/options/narrative"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/game/experience/experience/content/options/narrative"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -407,21 +406,21 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="caption" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/game/experience/content/options/narrative/margin"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/game/experience/experience/content/options/narrative/margin"]
 layout_mode = 2
 text = "The Narrative"
 
-[node name="status" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/game/experience/content/options/narrative/margin"]
+[node name="status" type="Label" parent="detector/margin/topics/content/options/game/experience/experience/content/options/narrative/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "On"
 
-[node name="emotions" type="Button" parent="detector/margin/scroll/margin/topics/content/margin/options/game/experience/content/options"]
+[node name="emotions" type="Button" parent="detector/margin/topics/content/options/game/experience/experience/content/options"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="margin" type="MarginContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/game/experience/content/options/emotions"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/game/experience/experience/content/options/emotions"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -429,22 +428,22 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="caption" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/game/experience/content/options/emotions/margin"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/game/experience/experience/content/options/emotions/margin"]
 layout_mode = 2
 text = "Emotions"
 
-[node name="status" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/game/experience/content/options/emotions/margin"]
+[node name="status" type="Label" parent="detector/margin/topics/content/options/game/experience/experience/content/options/emotions/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "On"
 
-[node name="footer" type="Button" parent="detector/margin/scroll/margin/topics/content/margin/options/game/experience/content"]
+[node name="footer" type="Button" parent="detector/margin/topics/content/options/game/experience/experience/content"]
 custom_minimum_size = Vector2(0, 45)
 layout_mode = 2
 theme = ExtResource("8_j2b4r")
 script = ExtResource("6_wolhp")
 
-[node name="margin" type="MarginContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/game/experience/content/footer"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/game/experience/experience/content/footer"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -460,26 +459,26 @@ size_flags_horizontal = 8
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_bottom = 0
 
-[node name="caption" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/game/experience/content/footer/margin"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/game/experience/experience/content/footer/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
 theme_override_colors/font_color = Color(0.313726, 0.313726, 0.313726, 1)
 theme_override_font_sizes/font_size = 18
 text = "Common game experience"
 
-[node name="interface" type="VBoxContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/game"]
+[node name="interface" type="VBoxContainer" parent="detector/margin/topics/content/options/game/experience"]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8
 
-[node name="header" type="Button" parent="detector/margin/scroll/margin/topics/content/margin/options/game/interface"]
+[node name="header" type="Button" parent="detector/margin/topics/content/options/game/experience/interface"]
 custom_minimum_size = Vector2(0, 45)
 layout_mode = 2
 theme = ExtResource("6_kbam3")
 script = ExtResource("6_w727q")
 
-[node name="margin" type="MarginContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/game/interface/header"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/game/experience/interface/header"]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -490,26 +489,26 @@ offset_bottom = 21.0
 grow_vertical = 2
 size_flags_horizontal = 0
 
-[node name="caption" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/game/interface/header/margin"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/game/experience/interface/header/margin"]
 layout_mode = 2
 size_flags_horizontal = 0
 text = "Interface"
 
-[node name="content" type="VBoxContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/game/interface"]
+[node name="content" type="VBoxContainer" parent="detector/margin/topics/content/options/game/experience/interface"]
 layout_mode = 2
 
-[node name="options" type="HFlowContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/game/interface/content"]
+[node name="options" type="HFlowContainer" parent="detector/margin/topics/content/options/game/experience/interface/content"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 10
 theme = ExtResource("2_ull8j")
 
-[node name="language" type="Button" parent="detector/margin/scroll/margin/topics/content/margin/options/game/interface/content/options"]
+[node name="language" type="Button" parent="detector/margin/topics/content/options/game/experience/interface/content/options"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="margin" type="MarginContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/game/interface/content/options/language"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/game/experience/interface/content/options/language"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -517,21 +516,21 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="caption" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/game/interface/content/options/language/margin"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/game/experience/interface/content/options/language/margin"]
 layout_mode = 2
 text = "Language"
 
-[node name="status" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/game/interface/content/options/language/margin"]
+[node name="status" type="Label" parent="detector/margin/topics/content/options/game/experience/interface/content/options/language/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "English"
 
-[node name="fullscreen" type="Button" parent="detector/margin/scroll/margin/topics/content/margin/options/game/interface/content/options"]
+[node name="fullscreen" type="Button" parent="detector/margin/topics/content/options/game/experience/interface/content/options"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="margin" type="MarginContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/game/interface/content/options/fullscreen"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/game/experience/interface/content/options/fullscreen"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -539,21 +538,21 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="caption" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/game/interface/content/options/fullscreen/margin"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/game/experience/interface/content/options/fullscreen/margin"]
 layout_mode = 2
 text = "Fullscreen"
 
-[node name="status" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/game/interface/content/options/fullscreen/margin"]
+[node name="status" type="Label" parent="detector/margin/topics/content/options/game/experience/interface/content/options/fullscreen/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "On"
 
-[node name="counters" type="Button" parent="detector/margin/scroll/margin/topics/content/margin/options/game/interface/content/options"]
+[node name="counters" type="Button" parent="detector/margin/topics/content/options/game/experience/interface/content/options"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="margin" type="MarginContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/game/interface/content/options/counters"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/game/experience/interface/content/options/counters"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -561,21 +560,21 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="caption" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/game/interface/content/options/counters/margin"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/game/experience/interface/content/options/counters/margin"]
 layout_mode = 2
 text = "Counters"
 
-[node name="status" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/game/interface/content/options/counters/margin"]
+[node name="status" type="Label" parent="detector/margin/topics/content/options/game/experience/interface/content/options/counters/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "Both"
 
-[node name="health" type="Button" parent="detector/margin/scroll/margin/topics/content/margin/options/game/interface/content/options"]
+[node name="health" type="Button" parent="detector/margin/topics/content/options/game/experience/interface/content/options"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="margin" type="MarginContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/game/interface/content/options/health"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/game/experience/interface/content/options/health"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -583,21 +582,21 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="caption" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/game/interface/content/options/health/margin"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/game/experience/interface/content/options/health/margin"]
 layout_mode = 2
 text = "Health"
 
-[node name="status" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/game/interface/content/options/health/margin"]
+[node name="status" type="Label" parent="detector/margin/topics/content/options/game/experience/interface/content/options/health/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "Aura"
 
-[node name="influence" type="Button" parent="detector/margin/scroll/margin/topics/content/margin/options/game/interface/content/options"]
+[node name="influence" type="Button" parent="detector/margin/topics/content/options/game/experience/interface/content/options"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="margin" type="MarginContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/game/interface/content/options/influence"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/game/experience/interface/content/options/influence"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -605,21 +604,21 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="caption" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/game/interface/content/options/influence/margin"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/game/experience/interface/content/options/influence/margin"]
 layout_mode = 2
 text = "Influence"
 
-[node name="status" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/game/interface/content/options/influence/margin"]
+[node name="status" type="Label" parent="detector/margin/topics/content/options/game/experience/interface/content/options/influence/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "Vessel"
 
-[node name="damage" type="Button" parent="detector/margin/scroll/margin/topics/content/margin/options/game/interface/content/options"]
+[node name="damage" type="Button" parent="detector/margin/topics/content/options/game/experience/interface/content/options"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="margin" type="MarginContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/game/interface/content/options/damage"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/game/experience/interface/content/options/damage"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -627,21 +626,21 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="caption" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/game/interface/content/options/damage/margin"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/game/experience/interface/content/options/damage/margin"]
 layout_mode = 2
 text = "Damage"
 
-[node name="status" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/game/interface/content/options/damage/margin"]
+[node name="status" type="Label" parent="detector/margin/topics/content/options/game/experience/interface/content/options/damage/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "On"
 
-[node name="adaptive" type="Button" parent="detector/margin/scroll/margin/topics/content/margin/options/game/interface/content/options"]
+[node name="adaptive" type="Button" parent="detector/margin/topics/content/options/game/experience/interface/content/options"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="margin" type="MarginContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/game/interface/content/options/adaptive"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/game/experience/interface/content/options/adaptive"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -649,22 +648,22 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="caption" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/game/interface/content/options/adaptive/margin"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/game/experience/interface/content/options/adaptive/margin"]
 layout_mode = 2
 text = "Options"
 
-[node name="status" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/game/interface/content/options/adaptive/margin"]
+[node name="status" type="Label" parent="detector/margin/topics/content/options/game/experience/interface/content/options/adaptive/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "Adaptive"
 
-[node name="footer" type="Button" parent="detector/margin/scroll/margin/topics/content/margin/options/game/interface/content"]
+[node name="footer" type="Button" parent="detector/margin/topics/content/options/game/experience/interface/content"]
 custom_minimum_size = Vector2(0, 45)
 layout_mode = 2
 theme = ExtResource("8_j2b4r")
 script = ExtResource("6_wolhp")
 
-[node name="margin" type="MarginContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/game/interface/content/footer"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/game/experience/interface/content/footer"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -680,26 +679,27 @@ size_flags_horizontal = 8
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_bottom = 0
 
-[node name="caption" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/game/interface/content/footer/margin"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/game/experience/interface/content/footer/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
 theme_override_colors/font_color = Color(0.313726, 0.313726, 0.313726, 1)
 theme_override_font_sizes/font_size = 18
 text = "Visual preferences"
 
-[node name="stats" type="VBoxContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/game"]
+[node name="stats" type="VBoxContainer" parent="detector/margin/topics/content/options/game/experience"]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8
 
-[node name="header" type="Button" parent="detector/margin/scroll/margin/topics/content/margin/options/game/stats"]
+[node name="header" type="Button" parent="detector/margin/topics/content/options/game/experience/stats"]
 custom_minimum_size = Vector2(0, 45)
 layout_mode = 2
 theme = ExtResource("6_kbam3")
+theme_override_styles/normal = SubResource("StyleBoxFlat_okge3")
 script = ExtResource("6_w727q")
 
-[node name="margin" type="MarginContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/game/stats/header"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/game/experience/stats/header"]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -710,129 +710,129 @@ offset_bottom = 21.0
 grow_vertical = 2
 size_flags_horizontal = 0
 
-[node name="caption" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/game/stats/header/margin"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/game/experience/stats/header/margin"]
 layout_mode = 2
 size_flags_horizontal = 0
 text = "Stats"
 
-[node name="content" type="VBoxContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/game/stats"]
+[node name="content" type="VBoxContainer" parent="detector/margin/topics/content/options/game/experience/stats"]
 layout_mode = 2
 
-[node name="options" type="HFlowContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/game/stats/content"]
+[node name="options" type="HFlowContainer" parent="detector/margin/topics/content/options/game/experience/stats/content"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 10
 theme = ExtResource("2_ull8j")
 
-[node name="difficulty" type="MarginContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/game/stats/content/options"]
+[node name="difficulty" type="MarginContainer" parent="detector/margin/topics/content/options/game/experience/stats/content/options"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/game/stats/content/options/difficulty"]
+[node name="stats" type="VBoxContainer" parent="detector/margin/topics/content/options/game/experience/stats/content/options/difficulty"]
 layout_mode = 2
 
-[node name="caption" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/game/stats/content/options/difficulty/VBoxContainer"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/game/experience/stats/content/options/difficulty/stats"]
 layout_mode = 2
 text = "Difficulty"
 
-[node name="value" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/game/stats/content/options/difficulty/VBoxContainer"]
+[node name="value" type="Label" parent="detector/margin/topics/content/options/game/experience/stats/content/options/difficulty/stats"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "Unbearable"
 
-[node name="ProgressBar" type="ProgressBar" parent="detector/margin/scroll/margin/topics/content/margin/options/game/stats/content/options/difficulty/VBoxContainer"]
+[node name="ProgressBar" type="ProgressBar" parent="detector/margin/topics/content/options/game/experience/stats/content/options/difficulty/stats"]
 layout_mode = 2
 max_value = 5.0
 value = 5.0
 show_percentage = false
 
-[node name="playtime" type="MarginContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/game/stats/content/options"]
+[node name="playtime" type="MarginContainer" parent="detector/margin/topics/content/options/game/experience/stats/content/options"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/game/stats/content/options/playtime"]
+[node name="stats" type="VBoxContainer" parent="detector/margin/topics/content/options/game/experience/stats/content/options/playtime"]
 layout_mode = 2
 
-[node name="caption" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/game/stats/content/options/playtime/VBoxContainer"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/game/experience/stats/content/options/playtime/stats"]
 layout_mode = 2
 text = "Playtime"
 
-[node name="value" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/game/stats/content/options/playtime/VBoxContainer"]
+[node name="value" type="Label" parent="detector/margin/topics/content/options/game/experience/stats/content/options/playtime/stats"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "5 hours"
 
-[node name="mocked" type="MarginContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/game/stats/content/options"]
+[node name="mocked" type="MarginContainer" parent="detector/margin/topics/content/options/game/experience/stats/content/options"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/game/stats/content/options/mocked"]
+[node name="stats" type="VBoxContainer" parent="detector/margin/topics/content/options/game/experience/stats/content/options/mocked"]
 layout_mode = 2
 
-[node name="caption" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/game/stats/content/options/mocked/VBoxContainer"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/game/experience/stats/content/options/mocked/stats"]
 layout_mode = 2
 text = "Mocked"
 
-[node name="value" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/game/stats/content/options/mocked/VBoxContainer"]
+[node name="value" type="Label" parent="detector/margin/topics/content/options/game/experience/stats/content/options/mocked/stats"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "467"
 
-[node name="annihilated" type="MarginContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/game/stats/content/options"]
+[node name="annihilated" type="MarginContainer" parent="detector/margin/topics/content/options/game/experience/stats/content/options"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/game/stats/content/options/annihilated"]
+[node name="stats" type="VBoxContainer" parent="detector/margin/topics/content/options/game/experience/stats/content/options/annihilated"]
 layout_mode = 2
 
-[node name="caption" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/game/stats/content/options/annihilated/VBoxContainer"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/game/experience/stats/content/options/annihilated/stats"]
 layout_mode = 2
 text = "Annihilated"
 
-[node name="value" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/game/stats/content/options/annihilated/VBoxContainer"]
+[node name="value" type="Label" parent="detector/margin/topics/content/options/game/experience/stats/content/options/annihilated/stats"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "123"
 
-[node name="deaths" type="MarginContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/game/stats/content/options"]
+[node name="deaths" type="MarginContainer" parent="detector/margin/topics/content/options/game/experience/stats/content/options"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/game/stats/content/options/deaths"]
+[node name="stats" type="VBoxContainer" parent="detector/margin/topics/content/options/game/experience/stats/content/options/deaths"]
 layout_mode = 2
 
-[node name="caption" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/game/stats/content/options/deaths/VBoxContainer"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/game/experience/stats/content/options/deaths/stats"]
 layout_mode = 2
 text = "Deaths"
 
-[node name="value" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/game/stats/content/options/deaths/VBoxContainer"]
+[node name="value" type="Label" parent="detector/margin/topics/content/options/game/experience/stats/content/options/deaths/stats"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "23"
 
-[node name="saves" type="MarginContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/game/stats/content/options"]
+[node name="saves" type="MarginContainer" parent="detector/margin/topics/content/options/game/experience/stats/content/options"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/game/stats/content/options/saves"]
+[node name="stats" type="VBoxContainer" parent="detector/margin/topics/content/options/game/experience/stats/content/options/saves"]
 layout_mode = 2
 
-[node name="caption" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/game/stats/content/options/saves/VBoxContainer"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/game/experience/stats/content/options/saves/stats"]
 layout_mode = 2
 text = "Saves"
 
-[node name="value" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/game/stats/content/options/saves/VBoxContainer"]
+[node name="value" type="Label" parent="detector/margin/topics/content/options/game/experience/stats/content/options/saves/stats"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "5"
 
-[node name="footer" type="Button" parent="detector/margin/scroll/margin/topics/content/margin/options/game/stats/content"]
+[node name="footer" type="Button" parent="detector/margin/topics/content/options/game/experience/stats/content"]
 custom_minimum_size = Vector2(0, 45)
 layout_mode = 2
 theme = ExtResource("8_j2b4r")
 script = ExtResource("6_wolhp")
 
-[node name="margin" type="MarginContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/game/stats/content/footer"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/game/experience/stats/content/footer"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -848,22 +848,29 @@ size_flags_horizontal = 8
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_bottom = 0
 
-[node name="caption" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/game/stats/content/footer/margin"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/game/experience/stats/content/footer/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
 theme_override_colors/font_color = Color(0.313726, 0.313726, 0.313726, 1)
 theme_override_font_sizes/font_size = 18
 text = "Overall stats summary"
 
-[node name="controls" type="VBoxContainer" parent="detector/margin/scroll/margin/topics/content/margin/options"]
+[node name="controls" type="MarginContainer" parent="detector/margin/topics/content/options"]
 visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="management" type="VBoxContainer" parent="detector/margin/topics/content/options/controls"]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8
 theme = ExtResource("2_ull8j")
 
-[node name="mouse" type="HSlider" parent="detector/margin/scroll/margin/topics/content/margin/options/controls"]
+[node name="mouse" type="HSlider" parent="detector/margin/topics/content/options/controls/management"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -876,7 +883,7 @@ theme_override_styles/grabber_area = ExtResource("3_j0acm")
 theme_override_styles/grabber_area_highlight = ExtResource("5_thq8p")
 value = 50.0
 
-[node name="margin" type="MarginContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/mouse"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/management/mouse"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -888,14 +895,14 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 7
 
-[node name="music" type="Panel" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/mouse/margin"]
+[node name="music" type="Panel" parent="detector/margin/topics/content/options/controls/management/mouse/margin"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.35
 mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_71y6s")
 
-[node name="volume" type="VBoxContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/mouse/margin/music"]
+[node name="volume" type="VBoxContainer" parent="detector/margin/topics/content/options/controls/management/mouse/margin/music"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -904,32 +911,32 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 4
 
-[node name="state" type="MarginContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/mouse/margin/music/volume"]
+[node name="state" type="MarginContainer" parent="detector/margin/topics/content/options/controls/management/mouse/margin/music/volume"]
 layout_mode = 2
 theme_override_constants/margin_left = 25
 theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 25
 theme_override_constants/margin_bottom = 7
 
-[node name="caption" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/mouse/margin/music/volume/state"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/management/mouse/margin/music/volume/state"]
 layout_mode = 2
 text = "Mouse Sensitivity"
 
-[node name="status" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/mouse/margin/music/volume/state"]
+[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/management/mouse/margin/music/volume/state"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "10"
 
-[node name="keyboard" type="VBoxContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/controls"]
+[node name="keyboard" type="VBoxContainer" parent="detector/margin/topics/content/options/controls/management"]
 layout_mode = 2
 
-[node name="header" type="Button" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard"]
+[node name="header" type="Button" parent="detector/margin/topics/content/options/controls/management/keyboard"]
 custom_minimum_size = Vector2(0, 45)
 layout_mode = 2
 theme = ExtResource("6_kbam3")
 script = ExtResource("6_w727q")
 
-[node name="margin" type="MarginContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/header"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/management/keyboard/header"]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -941,24 +948,24 @@ grow_vertical = 2
 size_flags_horizontal = 0
 theme = ExtResource("2_ull8j")
 
-[node name="caption" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/header/margin"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/management/keyboard/header/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "Keyboard"
 
-[node name="content" type="VBoxContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard"]
+[node name="content" type="VBoxContainer" parent="detector/margin/topics/content/options/controls/management/keyboard"]
 layout_mode = 2
 
-[node name="options" type="HFlowContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content"]
+[node name="options" type="HFlowContainer" parent="detector/margin/topics/content/options/controls/management/keyboard/content"]
 layout_mode = 2
 
-[node name="preset" type="Button" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options"]
+[node name="preset" type="Button" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.35
 
-[node name="margin" type="MarginContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options/preset"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/preset"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -966,22 +973,22 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="caption" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options/preset/margin"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/preset/margin"]
 layout_mode = 2
 text = "Movement"
 
-[node name="status" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options/preset/margin"]
+[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/preset/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "WASD"
 
-[node name="forward" type="Button" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options"]
+[node name="forward" type="Button" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.35
 
-[node name="margin" type="MarginContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options/forward"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/forward"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -989,22 +996,22 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="caption" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options/forward/margin"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/forward/margin"]
 layout_mode = 2
 text = "Forward"
 
-[node name="status" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options/forward/margin"]
+[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/forward/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "W"
 
-[node name="backward" type="Button" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options"]
+[node name="backward" type="Button" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.35
 
-[node name="margin" type="MarginContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options/backward"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/backward"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1012,22 +1019,22 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="caption" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options/backward/margin"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/backward/margin"]
 layout_mode = 2
 text = "Backward"
 
-[node name="status" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options/backward/margin"]
+[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/backward/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "S"
 
-[node name="left" type="Button" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options"]
+[node name="left" type="Button" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.35
 
-[node name="margin" type="MarginContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options/left"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/left"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1035,22 +1042,22 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="caption" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options/left/margin"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/left/margin"]
 layout_mode = 2
 text = "Left"
 
-[node name="status" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options/left/margin"]
+[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/left/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "A"
 
-[node name="right" type="Button" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options"]
+[node name="right" type="Button" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.35
 
-[node name="margin" type="MarginContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options/right"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/right"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1058,22 +1065,22 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="caption" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options/right/margin"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/right/margin"]
 layout_mode = 2
 text = "Right"
 
-[node name="status" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options/right/margin"]
+[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/right/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "D"
 
-[node name="hands" type="Button" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options"]
+[node name="hands" type="Button" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.35
 
-[node name="margin" type="MarginContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options/hands"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/hands"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1081,22 +1088,22 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="caption" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options/hands/margin"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/hands/margin"]
 layout_mode = 2
 text = "Hands"
 
-[node name="status" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options/hands/margin"]
+[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/hands/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "E"
 
-[node name="legs" type="Button" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options"]
+[node name="legs" type="Button" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.35
 
-[node name="margin" type="MarginContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options/legs"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/legs"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1104,22 +1111,22 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="caption" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options/legs/margin"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/legs/margin"]
 layout_mode = 2
 text = "Legs"
 
-[node name="status" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options/legs/margin"]
+[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/legs/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "X"
 
-[node name="action-one" type="Button" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options"]
+[node name="action-one" type="Button" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.35
 
-[node name="margin" type="MarginContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options/action-one"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/action-one"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1127,22 +1134,22 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="caption" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options/action-one/margin"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/action-one/margin"]
 layout_mode = 2
 text = "Action #1"
 
-[node name="status" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options/action-one/margin"]
+[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/action-one/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "C"
 
-[node name="action-two" type="Button" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options"]
+[node name="action-two" type="Button" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.35
 
-[node name="margin" type="MarginContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options/action-two"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/action-two"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1150,22 +1157,22 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="caption" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options/action-two/margin"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/action-two/margin"]
 layout_mode = 2
 text = "Action #2"
 
-[node name="status" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options/action-two/margin"]
+[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/action-two/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "V"
 
-[node name="team" type="Button" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options"]
+[node name="team" type="Button" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.35
 
-[node name="margin" type="MarginContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options/team"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/team"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1173,22 +1180,22 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="caption" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options/team/margin"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/team/margin"]
 layout_mode = 2
 text = "Team"
 
-[node name="status" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options/team/margin"]
+[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/team/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "T"
 
-[node name="group" type="Button" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options"]
+[node name="group" type="Button" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.35
 
-[node name="margin" type="MarginContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options/group"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/group"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1196,22 +1203,22 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="caption" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options/group/margin"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/group/margin"]
 layout_mode = 2
 text = "Group"
 
-[node name="status" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options/group/margin"]
+[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/group/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "G"
 
-[node name="heal" type="Button" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options"]
+[node name="heal" type="Button" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.35
 
-[node name="margin" type="MarginContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options/heal"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/heal"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1219,22 +1226,22 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="caption" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options/heal/margin"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/heal/margin"]
 layout_mode = 2
 text = "Quick Heal"
 
-[node name="status" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options/heal/margin"]
+[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/heal/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "R"
 
-[node name="refresh" type="Button" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options"]
+[node name="refresh" type="Button" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.35
 
-[node name="margin" type="MarginContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options/refresh"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/refresh"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1242,22 +1249,22 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="caption" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options/refresh/margin"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/refresh/margin"]
 layout_mode = 2
 text = "Refresh"
 
-[node name="status" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options/refresh/margin"]
+[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/refresh/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "R"
 
-[node name="analyze" type="Button" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options"]
+[node name="analyze" type="Button" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.35
 
-[node name="margin" type="MarginContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options/analyze"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/analyze"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1265,22 +1272,22 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="caption" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options/analyze/margin"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/analyze/margin"]
 layout_mode = 2
 text = "Analyze"
 
-[node name="status" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options/analyze/margin"]
+[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/analyze/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "F1"
 
-[node name="information" type="Button" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options"]
+[node name="information" type="Button" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.35
 
-[node name="margin" type="MarginContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options/information"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/information"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1288,22 +1295,22 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="caption" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options/information/margin"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/information/margin"]
 layout_mode = 2
 text = "Information"
 
-[node name="status" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options/information/margin"]
+[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/information/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "F2"
 
-[node name="settings" type="Button" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options"]
+[node name="settings" type="Button" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.35
 
-[node name="margin" type="MarginContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options/settings"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/settings"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1311,22 +1318,22 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="caption" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options/settings/margin"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/settings/margin"]
 layout_mode = 2
 text = "Settings"
 
-[node name="status" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options/settings/margin"]
+[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/settings/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "F3"
 
-[node name="main-menu" type="Button" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options"]
+[node name="main-menu" type="Button" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.35
 
-[node name="margin" type="MarginContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options/main-menu"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/main-menu"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1334,22 +1341,22 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="caption" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options/main-menu/margin"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/main-menu/margin"]
 layout_mode = 2
 text = "Main menu"
 
-[node name="status" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options/main-menu/margin"]
+[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/main-menu/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "F4"
 
-[node name="soundtrack" type="Button" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options"]
+[node name="soundtrack" type="Button" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.35
 
-[node name="margin" type="MarginContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options/soundtrack"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/soundtrack"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1357,22 +1364,22 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="caption" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options/soundtrack/margin"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/soundtrack/margin"]
 layout_mode = 2
 text = "Soundtrack system"
 
-[node name="status" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options/soundtrack/margin"]
+[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/soundtrack/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "F5"
 
-[node name="checkpoint" type="Button" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options"]
+[node name="checkpoint" type="Button" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.35
 
-[node name="margin" type="MarginContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options/checkpoint"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/checkpoint"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1380,22 +1387,22 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="caption" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options/checkpoint/margin"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/checkpoint/margin"]
 layout_mode = 2
 text = "Load checkpoint"
 
-[node name="status" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options/checkpoint/margin"]
+[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/checkpoint/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "F6"
 
-[node name="fast-save" type="Button" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options"]
+[node name="fast-save" type="Button" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.35
 
-[node name="margin" type="MarginContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options/fast-save"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/fast-save"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1403,22 +1410,22 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="caption" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options/fast-save/margin"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/fast-save/margin"]
 layout_mode = 2
 text = "Load / Fast save"
 
-[node name="status" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options/fast-save/margin"]
+[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/fast-save/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "F7"
 
-[node name="fast-load" type="Button" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options"]
+[node name="fast-load" type="Button" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.35
 
-[node name="margin" type="MarginContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options/fast-load"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/fast-load"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1426,22 +1433,22 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="caption" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options/fast-load/margin"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/fast-load/margin"]
 layout_mode = 2
 text = "Fast load"
 
-[node name="status" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options/fast-load/margin"]
+[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/fast-load/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "F8"
 
-[node name="export-progress" type="Button" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options"]
+[node name="export-progress" type="Button" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.35
 
-[node name="margin" type="MarginContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options/export-progress"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/export-progress"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1449,22 +1456,22 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="caption" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options/export-progress/margin"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/export-progress/margin"]
 layout_mode = 2
 text = "Export progress"
 
-[node name="status" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options/export-progress/margin"]
+[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/export-progress/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "F9"
 
-[node name="import-progress" type="Button" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options"]
+[node name="import-progress" type="Button" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.35
 
-[node name="margin" type="MarginContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options/import-progress"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/import-progress"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1472,22 +1479,22 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="caption" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options/import-progress/margin"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/import-progress/margin"]
 layout_mode = 2
 text = "Import progress"
 
-[node name="status" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options/import-progress/margin"]
+[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/import-progress/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "F10"
 
-[node name="fullscreen" type="Button" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options"]
+[node name="fullscreen" type="Button" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.35
 
-[node name="margin" type="MarginContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options/fullscreen"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/fullscreen"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1495,22 +1502,22 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="caption" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options/fullscreen/margin"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/fullscreen/margin"]
 layout_mode = 2
 text = "Fullscreen"
 
-[node name="status" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options/fullscreen/margin"]
+[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/fullscreen/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "F11"
 
-[node name="photo-mode" type="Button" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options"]
+[node name="photo-mode" type="Button" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.35
 
-[node name="margin" type="MarginContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options/photo-mode"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/photo-mode"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1518,22 +1525,22 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="caption" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options/photo-mode/margin"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/photo-mode/margin"]
 layout_mode = 2
 text = "Photo mode"
 
-[node name="status" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/options/photo-mode/margin"]
+[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/photo-mode/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "F12"
 
-[node name="footer" type="Button" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content"]
+[node name="footer" type="Button" parent="detector/margin/topics/content/options/controls/management/keyboard/content"]
 custom_minimum_size = Vector2(0, 45)
 layout_mode = 2
 theme = ExtResource("8_j2b4r")
 script = ExtResource("6_wolhp")
 
-[node name="margin" type="MarginContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/footer"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/management/keyboard/content/footer"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -1549,23 +1556,24 @@ size_flags_horizontal = 8
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_bottom = 0
 
-[node name="caption" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/footer/margin"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/management/keyboard/content/footer/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
 theme_override_colors/font_color = Color(0.313726, 0.313726, 0.313726, 1)
 theme_override_font_sizes/font_size = 18
 text = "Key mappings"
 
-[node name="gamepad" type="VBoxContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/controls"]
+[node name="gamepad" type="VBoxContainer" parent="detector/margin/topics/content/options/controls/management"]
 layout_mode = 2
 
-[node name="header" type="Button" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/gamepad"]
+[node name="header" type="Button" parent="detector/margin/topics/content/options/controls/management/gamepad"]
 custom_minimum_size = Vector2(0, 45)
 layout_mode = 2
 theme = ExtResource("6_kbam3")
+theme_override_styles/normal = SubResource("StyleBoxFlat_n7dsu")
 script = ExtResource("6_w727q")
 
-[node name="margin" type="MarginContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/gamepad/header"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/management/gamepad/header"]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -1576,24 +1584,24 @@ offset_bottom = 34.0
 grow_vertical = 2
 size_flags_horizontal = 0
 
-[node name="caption" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/gamepad/header/margin"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/management/gamepad/header/margin"]
 layout_mode = 2
 size_flags_horizontal = 0
 text = "Gamepad"
 
-[node name="content" type="VBoxContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/gamepad"]
+[node name="content" type="VBoxContainer" parent="detector/margin/topics/content/options/controls/management/gamepad"]
 layout_mode = 2
 
-[node name="order" type="HFlowContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/gamepad/content"]
+[node name="order" type="HFlowContainer" parent="detector/margin/topics/content/options/controls/management/gamepad/content"]
 layout_mode = 2
 
-[node name="preset" type="Button" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/gamepad/content/order"]
+[node name="preset" type="Button" parent="detector/margin/topics/content/options/controls/management/gamepad/content/order"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.35
 
-[node name="margin" type="MarginContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/gamepad/content/order/preset"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/management/gamepad/content/order/preset"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1601,22 +1609,22 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="caption" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/gamepad/content/order/preset/margin"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/management/gamepad/content/order/preset/margin"]
 layout_mode = 2
 text = "Preset"
 
-[node name="status" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/gamepad/content/order/preset/margin"]
+[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/management/gamepad/content/order/preset/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "Left"
 
-[node name="movement" type="Button" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/gamepad/content/order"]
+[node name="movement" type="Button" parent="detector/margin/topics/content/options/controls/management/gamepad/content/order"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.35
 
-[node name="margin" type="MarginContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/gamepad/content/order/movement"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/management/gamepad/content/order/movement"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1624,22 +1632,22 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="caption" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/gamepad/content/order/movement/margin"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/management/gamepad/content/order/movement/margin"]
 layout_mode = 2
 text = "Movement"
 
-[node name="status" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/gamepad/content/order/movement/margin"]
+[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/management/gamepad/content/order/movement/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "LS"
 
-[node name="inventory" type="Button" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/gamepad/content/order"]
+[node name="inventory" type="Button" parent="detector/margin/topics/content/options/controls/management/gamepad/content/order"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.35
 
-[node name="margin" type="MarginContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/gamepad/content/order/inventory"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/management/gamepad/content/order/inventory"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1647,22 +1655,22 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="caption" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/gamepad/content/order/inventory/margin"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/management/gamepad/content/order/inventory/margin"]
 layout_mode = 2
 text = "Inventory"
 
-[node name="status" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/gamepad/content/order/inventory/margin"]
+[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/management/gamepad/content/order/inventory/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "Cross"
 
-[node name="targeting" type="Button" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/gamepad/content/order"]
+[node name="targeting" type="Button" parent="detector/margin/topics/content/options/controls/management/gamepad/content/order"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.35
 
-[node name="margin" type="MarginContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/gamepad/content/order/targeting"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/management/gamepad/content/order/targeting"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1670,22 +1678,22 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="caption" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/gamepad/content/order/targeting/margin"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/management/gamepad/content/order/targeting/margin"]
 layout_mode = 2
 text = "Targeting"
 
-[node name="status" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/gamepad/content/order/targeting/margin"]
+[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/management/gamepad/content/order/targeting/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "LT"
 
-[node name="ability" type="Button" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/gamepad/content/order"]
+[node name="ability" type="Button" parent="detector/margin/topics/content/options/controls/management/gamepad/content/order"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.35
 
-[node name="margin" type="MarginContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/gamepad/content/order/ability"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/management/gamepad/content/order/ability"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1693,22 +1701,22 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="caption" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/gamepad/content/order/ability/margin"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/management/gamepad/content/order/ability/margin"]
 layout_mode = 2
 text = "Swipe"
 
-[node name="status" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/gamepad/content/order/ability/margin"]
+[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/management/gamepad/content/order/ability/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "LB"
 
-[node name="ab" type="Button" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/gamepad/content/order"]
+[node name="ab" type="Button" parent="detector/margin/topics/content/options/controls/management/gamepad/content/order"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.35
 
-[node name="margin" type="MarginContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/gamepad/content/order/ab"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/management/gamepad/content/order/ab"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1716,22 +1724,22 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="caption" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/gamepad/content/order/ab/margin"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/management/gamepad/content/order/ab/margin"]
 layout_mode = 2
 text = "A&B Order"
 
-[node name="status" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/gamepad/content/order/ab/margin"]
+[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/management/gamepad/content/order/ab/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "AB"
 
-[node name="xy" type="Button" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/gamepad/content/order"]
+[node name="xy" type="Button" parent="detector/margin/topics/content/options/controls/management/gamepad/content/order"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.35
 
-[node name="margin" type="MarginContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/gamepad/content/order/xy"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/management/gamepad/content/order/xy"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1739,22 +1747,22 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="caption" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/gamepad/content/order/xy/margin"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/management/gamepad/content/order/xy/margin"]
 layout_mode = 2
 text = "X&Y Order"
 
-[node name="status" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/gamepad/content/order/xy/margin"]
+[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/management/gamepad/content/order/xy/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "XY"
 
-[node name="abxy" type="Button" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/gamepad/content/order"]
+[node name="abxy" type="Button" parent="detector/margin/topics/content/options/controls/management/gamepad/content/order"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.35
 
-[node name="margin" type="MarginContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/gamepad/content/order/abxy"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/management/gamepad/content/order/abxy"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1762,22 +1770,22 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="caption" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/gamepad/content/order/abxy/margin"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/management/gamepad/content/order/abxy/margin"]
 layout_mode = 2
 text = "Buttons"
 
-[node name="status" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/gamepad/content/order/abxy/margin"]
+[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/management/gamepad/content/order/abxy/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "ABXY"
 
-[node name="preview" type="Button" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/gamepad/content/order"]
+[node name="preview" type="Button" parent="detector/margin/topics/content/options/controls/management/gamepad/content/order"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.35
 
-[node name="margin" type="MarginContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/gamepad/content/order/preview"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/management/gamepad/content/order/preview"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1785,22 +1793,22 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="caption" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/gamepad/content/order/preview/margin"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/management/gamepad/content/order/preview/margin"]
 layout_mode = 2
 text = "Preview"
 
-[node name="status" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/gamepad/content/order/preview/margin"]
+[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/management/gamepad/content/order/preview/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "On"
 
-[node name="footer" type="Button" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/gamepad/content"]
+[node name="footer" type="Button" parent="detector/margin/topics/content/options/controls/management/gamepad/content"]
 custom_minimum_size = Vector2(0, 45)
 layout_mode = 2
 theme = ExtResource("8_j2b4r")
 script = ExtResource("6_wolhp")
 
-[node name="margin" type="MarginContainer" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/gamepad/content/footer"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/management/gamepad/content/footer"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1809,13 +1817,13 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 8
 
-[node name="caption" type="Label" parent="detector/margin/scroll/margin/topics/content/margin/options/controls/gamepad/content/footer/margin"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/management/gamepad/content/footer/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
 theme_override_colors/font_color = Color(0.313726, 0.313726, 0.313726, 1)
 text = "Button mappings"
 
-[node name="controls" type="MarginContainer" parent="detector/margin/scroll/margin/topics"]
+[node name="controls" type="MarginContainer" parent="detector/margin/topics"]
 visible = false
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
@@ -1824,26 +1832,33 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 5
 
-[node name="confirm" type="Label" parent="detector/margin/scroll/margin/topics/controls"]
+[node name="confirm" type="Label" parent="detector/margin/topics/controls"]
 layout_mode = 2
 text = "Enter - confirm / change"
 
-[node name="edit" type="Label" parent="detector/margin/scroll/margin/topics/controls"]
+[node name="edit" type="Label" parent="detector/margin/topics/controls"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "^ ±10 v ◀️ ±1 ▶️"
 
-[node name="tabs" type="HBoxContainer" parent="detector/margin/scroll/margin/topics"]
+[node name="tabs" type="MarginContainer" parent="detector/margin/topics"]
+layout_mode = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="options" type="HFlowContainer" parent="detector/margin/topics/tabs"]
 layout_mode = 2
 script = ExtResource("13_cumtp")
 
-[node name="exit" type="Button" parent="detector/margin/scroll/margin/topics/tabs"]
-custom_minimum_size = Vector2(80, 60)
+[node name="exit" type="Button" parent="detector/margin/topics/tabs/options"]
+custom_minimum_size = Vector2(60, 45)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.05
 
-[node name="margin" type="MarginContainer" parent="detector/margin/scroll/margin/topics/tabs/exit"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/tabs/options/exit"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1854,21 +1869,20 @@ theme_override_constants/margin_left = 15
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 15
 
-[node name="label" type="Label" parent="detector/margin/scroll/margin/topics/tabs/exit/margin"]
+[node name="label" type="Label" parent="detector/margin/topics/tabs/options/exit/margin"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.54902, 0.54902, 0.54902, 1)
-theme_override_font_sizes/font_size = 22
+theme_override_font_sizes/font_size = 20
 text = "Back"
 
-[node name="caption" type="Control" parent="detector/margin/scroll/margin/topics/tabs"]
-custom_minimum_size = Vector2(270, 0)
+[node name="caption" type="Control" parent="detector/margin/topics/tabs/options"]
+custom_minimum_size = Vector2(170, 45)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.95
 script = ExtResource("13_rpxmq")
 
-[node name="experience" type="Button" parent="detector/margin/scroll/margin/topics/tabs/caption"]
-custom_minimum_size = Vector2(270, 60)
+[node name="experience" type="Button" parent="detector/margin/topics/tabs/options/caption"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1879,7 +1893,7 @@ size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.9
 toggle_mode = true
 
-[node name="margin" type="MarginContainer" parent="detector/margin/scroll/margin/topics/tabs/caption/experience"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/tabs/options/caption/experience"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1891,14 +1905,13 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 0
 
-[node name="label" type="Label" parent="detector/margin/scroll/margin/topics/tabs/caption/experience/margin"]
+[node name="label" type="Label" parent="detector/margin/topics/tabs/options/caption/experience/margin"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 22
+theme_override_font_sizes/font_size = 20
 text = "Game Experience"
 
-[node name="controls" type="Button" parent="detector/margin/scroll/margin/topics/tabs/caption"]
+[node name="controls" type="Button" parent="detector/margin/topics/tabs/options/caption"]
 visible = false
-custom_minimum_size = Vector2(270, 60)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1907,9 +1920,10 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.9
+theme_override_font_sizes/font_size = 22
 toggle_mode = true
 
-[node name="margin" type="MarginContainer" parent="detector/margin/scroll/margin/topics/tabs/caption/controls"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/tabs/options/caption/controls"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1921,20 +1935,20 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 0
 
-[node name="label" type="Label" parent="detector/margin/scroll/margin/topics/tabs/caption/controls/margin"]
+[node name="label" type="Label" parent="detector/margin/topics/tabs/options/caption/controls/margin"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 22
-text = "Controls Management"
+theme_override_font_sizes/font_size = 20
+text = "Manage Controls"
 
-[connection signal="pressed" from="detector/margin/scroll/margin/topics/content/margin/options/game/sound/header" to="detector/margin/scroll/margin/topics/content/margin/options/game/sound/header" method="_toggle_content"]
-[connection signal="pressed" from="detector/margin/scroll/margin/topics/content/margin/options/game/sound/content/footer" to="detector/margin/scroll/margin/topics/content/margin/options/game/sound/content/footer" method="_hide_topic"]
-[connection signal="pressed" from="detector/margin/scroll/margin/topics/content/margin/options/game/experience/header" to="detector/margin/scroll/margin/topics/content/margin/options/game/experience/header" method="_toggle_content"]
-[connection signal="pressed" from="detector/margin/scroll/margin/topics/content/margin/options/game/experience/content/footer" to="detector/margin/scroll/margin/topics/content/margin/options/game/experience/content/footer" method="_hide_topic"]
-[connection signal="pressed" from="detector/margin/scroll/margin/topics/content/margin/options/game/interface/header" to="detector/margin/scroll/margin/topics/content/margin/options/game/interface/header" method="_toggle_content"]
-[connection signal="pressed" from="detector/margin/scroll/margin/topics/content/margin/options/game/interface/content/footer" to="detector/margin/scroll/margin/topics/content/margin/options/game/interface/content/footer" method="_hide_topic"]
-[connection signal="pressed" from="detector/margin/scroll/margin/topics/content/margin/options/game/stats/header" to="detector/margin/scroll/margin/topics/content/margin/options/game/stats/header" method="_toggle_content"]
-[connection signal="pressed" from="detector/margin/scroll/margin/topics/content/margin/options/game/stats/content/footer" to="detector/margin/scroll/margin/topics/content/margin/options/game/stats/content/footer" method="_hide_topic"]
-[connection signal="pressed" from="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/header" to="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/header" method="_toggle_content"]
-[connection signal="pressed" from="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/footer" to="detector/margin/scroll/margin/topics/content/margin/options/controls/keyboard/content/footer" method="_hide_topic"]
-[connection signal="pressed" from="detector/margin/scroll/margin/topics/content/margin/options/controls/gamepad/header" to="detector/margin/scroll/margin/topics/content/margin/options/controls/gamepad/header" method="_toggle_content"]
-[connection signal="pressed" from="detector/margin/scroll/margin/topics/content/margin/options/controls/gamepad/content/footer" to="detector/margin/scroll/margin/topics/content/margin/options/controls/gamepad/content/footer" method="_hide_topic"]
+[connection signal="pressed" from="detector/margin/topics/content/options/game/experience/sound/header" to="detector/margin/topics/content/options/game/experience/sound/header" method="_toggle_content"]
+[connection signal="pressed" from="detector/margin/topics/content/options/game/experience/sound/content/footer" to="detector/margin/topics/content/options/game/experience/sound/content/footer" method="_hide_topic"]
+[connection signal="pressed" from="detector/margin/topics/content/options/game/experience/experience/header" to="detector/margin/topics/content/options/game/experience/experience/header" method="_toggle_content"]
+[connection signal="pressed" from="detector/margin/topics/content/options/game/experience/experience/content/footer" to="detector/margin/topics/content/options/game/experience/experience/content/footer" method="_hide_topic"]
+[connection signal="pressed" from="detector/margin/topics/content/options/game/experience/interface/header" to="detector/margin/topics/content/options/game/experience/interface/header" method="_toggle_content"]
+[connection signal="pressed" from="detector/margin/topics/content/options/game/experience/interface/content/footer" to="detector/margin/topics/content/options/game/experience/interface/content/footer" method="_hide_topic"]
+[connection signal="pressed" from="detector/margin/topics/content/options/game/experience/stats/header" to="detector/margin/topics/content/options/game/experience/stats/header" method="_toggle_content"]
+[connection signal="pressed" from="detector/margin/topics/content/options/game/experience/stats/content/footer" to="detector/margin/topics/content/options/game/experience/stats/content/footer" method="_hide_topic"]
+[connection signal="pressed" from="detector/margin/topics/content/options/controls/management/keyboard/header" to="detector/margin/topics/content/options/controls/management/keyboard/header" method="_toggle_content"]
+[connection signal="pressed" from="detector/margin/topics/content/options/controls/management/keyboard/content/footer" to="detector/margin/topics/content/options/controls/management/keyboard/content/footer" method="_hide_topic"]
+[connection signal="pressed" from="detector/margin/topics/content/options/controls/management/gamepad/header" to="detector/margin/topics/content/options/controls/management/gamepad/header" method="_toggle_content"]
+[connection signal="pressed" from="detector/margin/topics/content/options/controls/management/gamepad/content/footer" to="detector/margin/topics/content/options/controls/management/gamepad/content/footer" method="_hide_topic"]

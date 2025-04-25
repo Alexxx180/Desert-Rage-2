@@ -6,7 +6,7 @@ var _short: Node
 func _shortcut_available() -> void:
 	Processors.turn(_short, _pause.visible)
 
-func controls(hud: Control, exit: Button) -> void:
+func controls(hud: CanvasLayer, exit: Button) -> void:
 	var leave: InputObserver = hud.processor.pause.exit
 
 	_pause = hud.detector.pause

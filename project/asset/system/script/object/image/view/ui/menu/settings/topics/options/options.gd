@@ -1,7 +1,7 @@
 extends VBoxContainer
 
-@onready var game: VBoxContainer = $game
-@onready var controls: VBoxContainer = $controls
+@onready var game: MarginContainer = $game
+@onready var controls: MarginContainer = $controls
 
 func switch_controls() -> void:
 	game.hide()
