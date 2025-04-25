@@ -1,4 +1,4 @@
 extends HBoxContainer
 
-@onready var pause: Button = $pause/option
-@onready var analyze: Button = $analyze/help
+@onready var pause: Button = $pause
+@onready var analyze: Button = $help
