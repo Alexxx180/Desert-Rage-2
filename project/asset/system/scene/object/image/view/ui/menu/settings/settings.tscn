@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://b4x588yxrcok3"]
+[gd_scene load_steps=37 format=3 uid="uid://b4x588yxrcok3"]
 
 [ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/settings/settings.gd" id="1_apf6u"]
 [ext_resource type="Theme" uid="uid://dfyi7rrcrweqx" path="res://asset/resource/engine/internal/theme/patterns/template/menu/settings/settings.tres" id="1_vs08l"]
@@ -12,12 +12,27 @@
 [ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/settings/topics/options/header.gd" id="6_w727q"]
 [ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/settings/topics/options/footer.gd" id="6_wolhp"]
 [ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://asset/resource/engine/internal/theme/patterns/template/menu/settings/topic/footer.tres" id="8_j2b4r"]
+[ext_resource type="PackedScene" uid="uid://bqsegj237ygi0" path="res://asset/system/scene/object/image/view/ui/menu/settings/sound/music.tscn" id="8_tby3j"]
+[ext_resource type="PackedScene" uid="uid://hoxnejr2ne7q" path="res://asset/system/scene/object/image/view/ui/menu/settings/sound/sound.tscn" id="9_fgij5"]
+[ext_resource type="PackedScene" uid="uid://bwxmswjunrdab" path="res://asset/system/scene/object/image/view/ui/menu/settings/sound/interface.tscn" id="10_bgvfr"]
 [ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/settings/topics/tabs/tabs.gd" id="13_cumtp"]
 [ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/settings/topics/tabs/caption/caption.gd" id="13_rpxmq"]
+[ext_resource type="Shortcut" uid="uid://bgd4ocokxr1wj" path="res://asset/resource/engine/internal/short/cut/pause.tres" id="14_n4pyq"]
+[ext_resource type="InputEventKey" uid="uid://cjlyrqdxoernq" path="res://asset/resource/engine/internal/short/device/keyboard/key/ctrl/tab.tres" id="16_yw7xu"]
+[ext_resource type="InputEventKey" uid="uid://d24fadfa7hd1w" path="res://asset/resource/engine/internal/short/device/keyboard/key/alt/two.tres" id="17_wy3ld"]
+[ext_resource type="InputEventJoypadMotion" uid="uid://lythe86smbls" path="res://asset/resource/engine/internal/short/device/gamepad/stick/right/right.tres" id="18_5iaie"]
+[ext_resource type="InputEventKey" uid="uid://ch54tip20nskb" path="res://asset/resource/engine/internal/short/device/keyboard/key/alt/one.tres" id="18_ynqjn"]
+[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/hud/processor/pause/exit/shortcut.gd" id="19_eqfhs"]
+[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/settings/topics/tabs/caption/short.gd" id="19_fobve"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vndxt"]
 bg_color = Color(0.0196078, 0.0196078, 0.0196078, 1)
 border_width_top = 1
+border_color = Color(0.588235, 0.588235, 0.588235, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_okge3"]
+bg_color = Color(0.0196078, 0.0196078, 0.0196078, 1)
+border_width_bottom = 1
 border_color = Color(0.588235, 0.588235, 0.588235, 1)
 
 [sub_resource type="Gradient" id="Gradient_n1w43"]
@@ -41,15 +56,16 @@ width = 1
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_71y6s"]
 bg_color = Color(0.0687983, 0.0687983, 0.0687982, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_okge3"]
-bg_color = Color(0.0196078, 0.0196078, 0.0196078, 1)
-border_width_bottom = 1
-border_color = Color(0.588235, 0.588235, 0.588235, 1)
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n7dsu"]
 bg_color = Color(0.0196078, 0.0196078, 0.0196078, 1)
 border_width_bottom = 1
 border_color = Color(0.588235, 0.588235, 0.588235, 1)
+
+[sub_resource type="Shortcut" id="Shortcut_xycy2"]
+events = [ExtResource("16_yw7xu"), ExtResource("17_wy3ld"), ExtResource("18_5iaie")]
+
+[sub_resource type="Shortcut" id="Shortcut_5q5w7"]
+events = [ExtResource("16_yw7xu"), ExtResource("18_ynqjn")]
 
 [node name="settings" type="CanvasLayer"]
 script = ExtResource("1_apf6u")
@@ -141,176 +157,14 @@ size_flags_horizontal = 3
 size_flags_vertical = 10
 theme = ExtResource("2_ull8j")
 
-[node name="music" type="HSlider" parent="detector/margin/topics/content/options/game/experience/sound/content/options"]
-custom_minimum_size = Vector2(300, 60)
+[node name="music" parent="detector/margin/topics/content/options/game/experience/sound/content/options" instance=ExtResource("8_tby3j")]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 8
-theme_override_icons/grabber = SubResource("GradientTexture1D_o3d5i")
-theme_override_icons/grabber_highlight = SubResource("GradientTexture1D_36r8i")
-theme_override_icons/grabber_disabled = SubResource("GradientTexture1D_ktnei")
-theme_override_styles/slider = ExtResource("4_ow36w")
-theme_override_styles/grabber_area = ExtResource("3_j0acm")
-theme_override_styles/grabber_area_highlight = ExtResource("5_thq8p")
-value = 50.0
 
-[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/game/experience/sound/content/options/music"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 0
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 7
-
-[node name="music" type="Panel" parent="detector/margin/topics/content/options/game/experience/sound/content/options/music/margin"]
+[node name="sound" parent="detector/margin/topics/content/options/game/experience/sound/content/options" instance=ExtResource("9_fgij5")]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.35
-mouse_filter = 1
-theme_override_styles/panel = SubResource("StyleBoxFlat_71y6s")
 
-[node name="volume" type="VBoxContainer" parent="detector/margin/topics/content/options/game/experience/sound/content/options/music/margin/music"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 4
-
-[node name="state" type="MarginContainer" parent="detector/margin/topics/content/options/game/experience/sound/content/options/music/margin/music/volume"]
+[node name="interface" parent="detector/margin/topics/content/options/game/experience/sound/content/options" instance=ExtResource("10_bgvfr")]
 layout_mode = 2
-theme_override_constants/margin_left = 25
-theme_override_constants/margin_top = 15
-theme_override_constants/margin_right = 25
-theme_override_constants/margin_bottom = 7
-
-[node name="caption" type="Label" parent="detector/margin/topics/content/options/game/experience/sound/content/options/music/margin/music/volume/state"]
-layout_mode = 2
-text = "Music"
-
-[node name="status" type="Label" parent="detector/margin/topics/content/options/game/experience/sound/content/options/music/margin/music/volume/state"]
-layout_mode = 2
-size_flags_horizontal = 8
-text = "100%"
-
-[node name="sound" type="HSlider" parent="detector/margin/topics/content/options/game/experience/sound/content/options"]
-custom_minimum_size = Vector2(300, 60)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 8
-theme_override_icons/grabber = SubResource("GradientTexture1D_o3d5i")
-theme_override_icons/grabber_highlight = SubResource("GradientTexture1D_36r8i")
-theme_override_icons/grabber_disabled = SubResource("GradientTexture1D_ktnei")
-theme_override_styles/slider = ExtResource("4_ow36w")
-theme_override_styles/grabber_area = ExtResource("3_j0acm")
-theme_override_styles/grabber_area_highlight = ExtResource("5_thq8p")
-value = 50.0
-
-[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/game/experience/sound/content/options/sound"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 0
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 7
-
-[node name="music" type="Panel" parent="detector/margin/topics/content/options/game/experience/sound/content/options/sound/margin"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.35
-mouse_filter = 1
-theme_override_styles/panel = SubResource("StyleBoxFlat_71y6s")
-
-[node name="volume" type="VBoxContainer" parent="detector/margin/topics/content/options/game/experience/sound/content/options/sound/margin/music"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 4
-
-[node name="state" type="MarginContainer" parent="detector/margin/topics/content/options/game/experience/sound/content/options/sound/margin/music/volume"]
-layout_mode = 2
-theme_override_constants/margin_left = 25
-theme_override_constants/margin_top = 15
-theme_override_constants/margin_right = 25
-theme_override_constants/margin_bottom = 7
-
-[node name="caption" type="Label" parent="detector/margin/topics/content/options/game/experience/sound/content/options/sound/margin/music/volume/state"]
-layout_mode = 2
-text = "Sound"
-
-[node name="status" type="Label" parent="detector/margin/topics/content/options/game/experience/sound/content/options/sound/margin/music/volume/state"]
-layout_mode = 2
-size_flags_horizontal = 8
-text = "100%"
-
-[node name="interface" type="HSlider" parent="detector/margin/topics/content/options/game/experience/sound/content/options"]
-custom_minimum_size = Vector2(300, 60)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 8
-theme_override_icons/grabber = SubResource("GradientTexture1D_o3d5i")
-theme_override_icons/grabber_highlight = SubResource("GradientTexture1D_36r8i")
-theme_override_icons/grabber_disabled = SubResource("GradientTexture1D_ktnei")
-theme_override_styles/slider = ExtResource("4_ow36w")
-theme_override_styles/grabber_area = ExtResource("3_j0acm")
-theme_override_styles/grabber_area_highlight = ExtResource("5_thq8p")
-value = 50.0
-
-[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/game/experience/sound/content/options/interface"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 0
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 7
-
-[node name="music" type="Panel" parent="detector/margin/topics/content/options/game/experience/sound/content/options/interface/margin"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.35
-mouse_filter = 1
-theme_override_styles/panel = SubResource("StyleBoxFlat_71y6s")
-
-[node name="volume" type="VBoxContainer" parent="detector/margin/topics/content/options/game/experience/sound/content/options/interface/margin/music"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 4
-
-[node name="state" type="MarginContainer" parent="detector/margin/topics/content/options/game/experience/sound/content/options/interface/margin/music/volume"]
-layout_mode = 2
-theme_override_constants/margin_left = 25
-theme_override_constants/margin_top = 15
-theme_override_constants/margin_right = 25
-theme_override_constants/margin_bottom = 7
-
-[node name="caption" type="Label" parent="detector/margin/topics/content/options/game/experience/sound/content/options/interface/margin/music/volume/state"]
-layout_mode = 2
-text = "Interface"
-
-[node name="status" type="Label" parent="detector/margin/topics/content/options/game/experience/sound/content/options/interface/margin/music/volume/state"]
-layout_mode = 2
-size_flags_horizontal = 8
-text = "100%"
 
 [node name="system" type="Button" parent="detector/margin/topics/content/options/game/experience/sound/content/options"]
 custom_minimum_size = Vector2(300, 60)
@@ -456,8 +310,6 @@ offset_bottom = 15.5
 grow_horizontal = 0
 grow_vertical = 2
 size_flags_horizontal = 8
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_bottom = 0
 
 [node name="caption" type="Label" parent="detector/margin/topics/content/options/game/experience/experience/content/footer/margin"]
 layout_mode = 2
@@ -518,12 +370,12 @@ grow_vertical = 2
 
 [node name="caption" type="Label" parent="detector/margin/topics/content/options/game/experience/interface/content/options/language/margin"]
 layout_mode = 2
-text = "Language"
+text = "English"
 
 [node name="status" type="Label" parent="detector/margin/topics/content/options/game/experience/interface/content/options/language/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
-text = "English"
+text = "language"
 
 [node name="fullscreen" type="Button" parent="detector/margin/topics/content/options/game/experience/interface/content/options"]
 custom_minimum_size = Vector2(300, 60)
@@ -541,11 +393,6 @@ grow_vertical = 2
 [node name="caption" type="Label" parent="detector/margin/topics/content/options/game/experience/interface/content/options/fullscreen/margin"]
 layout_mode = 2
 text = "Fullscreen"
-
-[node name="status" type="Label" parent="detector/margin/topics/content/options/game/experience/interface/content/options/fullscreen/margin"]
-layout_mode = 2
-size_flags_horizontal = 8
-text = "On"
 
 [node name="counters" type="Button" parent="detector/margin/topics/content/options/game/experience/interface/content/options"]
 custom_minimum_size = Vector2(300, 60)
@@ -567,7 +414,7 @@ text = "Counters"
 [node name="status" type="Label" parent="detector/margin/topics/content/options/game/experience/interface/content/options/counters/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
-text = "Both"
+text = "On"
 
 [node name="health" type="Button" parent="detector/margin/topics/content/options/game/experience/interface/content/options"]
 custom_minimum_size = Vector2(300, 60)
@@ -676,8 +523,6 @@ offset_bottom = 15.5
 grow_horizontal = 0
 grow_vertical = 2
 size_flags_horizontal = 8
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_bottom = 0
 
 [node name="caption" type="Label" parent="detector/margin/topics/content/options/game/experience/interface/content/footer/margin"]
 layout_mode = 2
@@ -845,8 +690,6 @@ offset_bottom = 15.5
 grow_horizontal = 0
 grow_vertical = 2
 size_flags_horizontal = 8
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_bottom = 0
 
 [node name="caption" type="Label" parent="detector/margin/topics/content/options/game/experience/stats/content/footer/margin"]
 layout_mode = 2
@@ -1857,6 +1700,7 @@ custom_minimum_size = Vector2(60, 45)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.05
+shortcut = ExtResource("14_n4pyq")
 
 [node name="margin" type="MarginContainer" parent="detector/margin/topics/tabs/options/exit"]
 layout_mode = 1
@@ -1891,7 +1735,8 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.9
-toggle_mode = true
+shortcut = SubResource("Shortcut_xycy2")
+script = ExtResource("19_fobve")
 
 [node name="margin" type="MarginContainer" parent="detector/margin/topics/tabs/options/caption/experience"]
 layout_mode = 1
@@ -1910,6 +1755,11 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Game Experience"
 
+[node name="shortcut" type="Node" parent="detector/margin/topics/tabs/options/caption/experience"]
+process_mode = 4
+script = ExtResource("19_eqfhs")
+action = "list_right"
+
 [node name="controls" type="Button" parent="detector/margin/topics/tabs/options/caption"]
 visible = false
 layout_mode = 1
@@ -1921,7 +1771,8 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.9
 theme_override_font_sizes/font_size = 22
-toggle_mode = true
+shortcut = SubResource("Shortcut_5q5w7")
+script = ExtResource("19_fobve")
 
 [node name="margin" type="MarginContainer" parent="detector/margin/topics/tabs/options/caption/controls"]
 layout_mode = 1
@@ -1939,6 +1790,11 @@ theme_override_constants/margin_bottom = 0
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Manage Controls"
+
+[node name="shortcut" type="Node" parent="detector/margin/topics/tabs/options/caption/controls"]
+process_mode = 4
+script = ExtResource("19_eqfhs")
+action = "list_left"
 
 [connection signal="pressed" from="detector/margin/topics/content/options/game/experience/sound/header" to="detector/margin/topics/content/options/game/experience/sound/header" method="_toggle_content"]
 [connection signal="pressed" from="detector/margin/topics/content/options/game/experience/sound/content/footer" to="detector/margin/topics/content/options/game/experience/sound/content/footer" method="_hide_topic"]

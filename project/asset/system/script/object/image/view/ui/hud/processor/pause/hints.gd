@@ -1,1 +1,1 @@
-extends InputObserver
+extends Node

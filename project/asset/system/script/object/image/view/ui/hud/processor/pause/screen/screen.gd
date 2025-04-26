@@ -1,4 +1,4 @@
-extends InputObserver
+extends Node
 
 @onready var mode: Node = $mode
 

@@ -6,5 +6,5 @@ extends HFlowContainer
 func set_back(settings: CanvasLayer, menu: CanvasLayer) -> void:
 	exit.pressed.connect(func():
 		settings.hide()
-		menu.show()
+		menu.detector.pause.show()
 	)

@@ -1,6 +1,6 @@
 extends Node
 
-@onready var hints: InputObserver = $hints
-@onready var resume: InputObserver = $resume
-@onready var screen: InputObserver = $screen
-@onready var exit: InputObserver = $exit
+@onready var resume: Node = $resume
+@onready var info: Node = $info
+@onready var settings: Node = $settings
+@onready var exit: Node = $exit

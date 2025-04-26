@@ -1,6 +1,5 @@
-extends InputObserver
+extends Node
 
-@onready var shortcut: Node = $shortcut
+@onready var short: Node = $shortcut
 
-func exit_the_game() -> void:
-	get_tree().quit()
+func feedback() -> void: get_tree().quit()

@@ -5,3 +5,6 @@ extends CanvasLayer
 
 func set_back(menu: CanvasLayer) -> void:
 	topics.tabs.set_back(self, menu)
+
+func _ready() -> void:
+	topics.tabs.caption.set_shortcut(self)

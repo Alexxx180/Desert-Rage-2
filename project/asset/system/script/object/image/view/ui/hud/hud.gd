@@ -13,6 +13,11 @@ func set_group() -> void:
 	game.set_preview(group, progress)
 
 func _ready() -> void:
-	#set_group()
+	set_group()
 	game.set_settings_transition(settings)
 	settings.set_back(game)
+
+func reset() -> void:
+	game.detector.game.show()
+	game.detector.pause.hide()
+	settings.hide()
