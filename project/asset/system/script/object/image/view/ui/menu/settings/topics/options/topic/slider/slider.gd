@@ -1,5 +1,7 @@
 extends HSlider
 
+signal hold_focus(status: bool)
+
 @onready var submit: Button = $margin/music/volume/state/info/manual
 @onready var manual: Node = $manual
 
@@ -26,11 +28,12 @@ func append(tick: int) -> void:
 
 func focus_manual() -> void:
 	set_manual(true)
+	submit.release_focus()
 
 func set_manual(next: bool) -> void:
 	_manual = next
 	Processors.turn(manual, _manual)
-	submit.release_focus()
+	hold_focus.emit(!next)
 
 func _input(event: InputEvent) -> void:
 	if not _manual: return
@@ -41,6 +44,9 @@ func _input(event: InputEvent) -> void:
 	for action in ["ui_cancel", "ui_accept", "list_right", "list_left", "list_up", "list_down"]:
 		if Input.is_action_just_pressed(action):
 			set_manual(false)
-			submit.grab_focus()
+			if action == "ui_accept":
+				submit.find_next_valid_focus()
+			else:
+				submit.grab_focus()
 			return
 	

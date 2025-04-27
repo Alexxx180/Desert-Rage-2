@@ -17,6 +17,10 @@ var dial: TimerDial = TimerDial.new()
 func _ready() -> void:
 	tick.processor.play.connect(_play)
 
+func set_period(event: Callable, _period: float) -> void:
+	timeout.connect(event)
+	period = _period
+
 func _play(delta: float) -> void:
 	if dial.play(delta):
 		dial.restart(period)
