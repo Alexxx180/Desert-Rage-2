@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://b4x588yxrcok3"]
+[gd_scene load_steps=39 format=3 uid="uid://b4x588yxrcok3"]
 
 [ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/settings/settings.gd" id="1_apf6u"]
 [ext_resource type="Theme" uid="uid://dfyi7rrcrweqx" path="res://asset/resource/engine/internal/theme/patterns/template/menu/settings/settings.tres" id="1_vs08l"]
@@ -9,10 +9,12 @@
 [ext_resource type="StyleBox" uid="uid://cjukg7l6l1urx" path="res://asset/resource/engine/internal/theme/slider/horizontal/area-slider.tres" id="4_ow36w"]
 [ext_resource type="StyleBox" uid="uid://dfwghdfkosy7u" path="res://asset/resource/engine/internal/theme/slider/horizontal/area-highlight.tres" id="5_thq8p"]
 [ext_resource type="Theme" uid="uid://y1o83ldh4al2" path="res://asset/resource/engine/internal/theme/patterns/template/menu/settings/topic/header.tres" id="6_kbam3"]
-[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/settings/topics/options/header.gd" id="6_w727q"]
-[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/settings/topics/options/footer.gd" id="6_wolhp"]
+[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/settings/topics/options/topic/header.gd" id="6_w727q"]
+[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/settings/topics/options/topic/footer.gd" id="6_wolhp"]
 [ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://asset/resource/engine/internal/theme/patterns/template/menu/settings/topic/footer.tres" id="8_j2b4r"]
+[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/settings/topics/options/topic/focus.gd" id="8_r1jfr"]
 [ext_resource type="PackedScene" uid="uid://bqsegj237ygi0" path="res://asset/system/scene/object/image/view/ui/menu/settings/sound/music.tscn" id="8_tby3j"]
+[ext_resource type="PackedScene" uid="uid://dga0coql425dk" path="res://asset/system/scene/object/calculus/timer/variants/action.tscn" id="9_e2fa0"]
 [ext_resource type="PackedScene" uid="uid://hoxnejr2ne7q" path="res://asset/system/scene/object/image/view/ui/menu/settings/sound/sound.tscn" id="9_fgij5"]
 [ext_resource type="PackedScene" uid="uid://bwxmswjunrdab" path="res://asset/system/scene/object/image/view/ui/menu/settings/sound/interface.tscn" id="10_bgvfr"]
 [ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/settings/topics/tabs/tabs.gd" id="13_cumtp"]
@@ -156,6 +158,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 10
 theme = ExtResource("2_ull8j")
+script = ExtResource("8_r1jfr")
 
 [node name="music" parent="detector/margin/topics/content/options/game/experience/sound/content/options" instance=ExtResource("8_tby3j")]
 layout_mode = 2
@@ -182,6 +185,12 @@ grow_vertical = 2
 [node name="caption" type="Label" parent="detector/margin/topics/content/options/game/experience/sound/content/options/system/margin"]
 layout_mode = 2
 text = "Soundtrack System"
+
+[node name="timer" type="Timer" parent="detector/margin/topics/content/options/game/experience/sound/content/options"]
+wait_time = 0.5
+one_shot = true
+
+[node name="action" parent="detector/margin/topics/content/options/game/experience/sound/content/options" instance=ExtResource("9_e2fa0")]
 
 [node name="footer" type="Button" parent="detector/margin/topics/content/options/game/experience/sound/content"]
 custom_minimum_size = Vector2(0, 45)
@@ -1396,8 +1405,6 @@ offset_bottom = 15.5
 grow_horizontal = 0
 grow_vertical = 2
 size_flags_horizontal = 8
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_bottom = 0
 
 [node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/management/keyboard/content/footer/margin"]
 layout_mode = 2
@@ -1797,6 +1804,7 @@ script = ExtResource("19_eqfhs")
 action = "list_left"
 
 [connection signal="pressed" from="detector/margin/topics/content/options/game/experience/sound/header" to="detector/margin/topics/content/options/game/experience/sound/header" method="_toggle_content"]
+[connection signal="timeout" from="detector/margin/topics/content/options/game/experience/sound/content/options/timer" to="detector/margin/topics/content/options/game/experience/sound/content/options" method="_reset"]
 [connection signal="pressed" from="detector/margin/topics/content/options/game/experience/sound/content/footer" to="detector/margin/topics/content/options/game/experience/sound/content/footer" method="_hide_topic"]
 [connection signal="pressed" from="detector/margin/topics/content/options/game/experience/experience/header" to="detector/margin/topics/content/options/game/experience/experience/header" method="_toggle_content"]
 [connection signal="pressed" from="detector/margin/topics/content/options/game/experience/experience/content/footer" to="detector/margin/topics/content/options/game/experience/experience/content/footer" method="_hide_topic"]
