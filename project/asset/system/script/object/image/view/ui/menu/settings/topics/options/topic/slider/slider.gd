@@ -19,6 +19,14 @@ func _ready() -> void:
 			add_theme_icon_override("grabber", Defaults.TEXTURE)
 	)
 
+func get_neighbor() -> String:
+	return "../" + name + "/margin/music/volume/state/info/manual"
+
+func set_neighbor(left: String, right: String) -> void:
+	var root: String = "../../../../../../"
+	submit.focus_neighbor_left = root + left
+	submit.focus_neighbor_right = root + right
+
 func focus() -> void: manual.grab_focus()
 
 func set_to(next: int) -> void:

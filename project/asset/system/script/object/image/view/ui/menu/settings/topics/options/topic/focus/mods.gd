@@ -10,7 +10,7 @@ enum LEFT { ACTIVE = 1, PRESSED = 3 }
 enum RIGHT { ACTIVE = 2, PRESSED = 4 }
 
 func _ready() -> void:
-	_modifier.create(Vector2i(5, 1))
+	_modifier.create(Vector2i(6, 1))
 	allow_input()
 
 func get_bit(pos: int) -> bool:
@@ -24,15 +24,20 @@ func allow_input() -> void:
 	check_spaces()
 
 func check_spaces() -> void:
-	if not get_bit(LEFT.ACTIVE) and get_bit(LEFT.PRESSED):
-		space_trigger.emit(3, system)
-	elif not get_bit(RIGHT.ACTIVE) and get_bit(RIGHT.PRESSED):
-		space_trigger.emit(4, system)
-	elif space != 0:
+	"""
+	print("LEFT: active - ", get_bit(LEFT.ACTIVE), ", PRESSED - ", get_bit(LEFT.PRESSED))
+	print("RIGHT: active - ", get_bit(RIGHT.ACTIVE), ", PRESSED - ", get_bit(RIGHT.PRESSED))
+	if get_bit(5):
+		if get_bit(LEFT.PRESSED): # not get_bit(LEFT.ACTIVE) and 
+			space_trigger.emit(3, system)
+			set_bit(LEFT.PRESSED, 0)
+		elif get_bit(RIGHT.PRESSED): # not get_bit(RIGHT.ACTIVE) and 
+			space_trigger.emit(4, system)
+			set_bit(RIGHT.PRESSED, 0)
+	"""
+	if space != 0:
 		space_trigger.emit(space, system)
 		space = 0
-	set_bit(LEFT.PRESSED, 0)
-	set_bit(RIGHT.PRESSED, 0)
 
 func get_trigger() -> int:
 	if get_bit(LEFT.ACTIVE): return 0

@@ -5,4 +5,6 @@ func _ready() -> void:
 	var space: VBoxContainer = game.get_node("experience")
 	_items.push_back(space.sound.options.get_items(self))
 	_items.push_back(space.experience.options.get_items())
+	_items.push_back(space.interface.options.get_items())
+	_items.push_back(space.stats.get_items())
 	setup(game)

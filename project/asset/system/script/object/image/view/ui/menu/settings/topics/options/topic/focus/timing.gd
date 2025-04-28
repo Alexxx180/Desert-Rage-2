@@ -17,6 +17,7 @@ func next_digit() -> int: return _value * 10
 func set_number(no: int) -> void:
 	_value = next_digit() + no
 	mods.set_bit(0, false)
+	#mods.set_bit(5, false)
 	mods.space = 0
 	preview.emit(_value)
 
@@ -30,7 +31,11 @@ func set_focus(no: int) -> void:
 		start_timers()
 
 func _ready() -> void:
-	action.timeout.connect(mods.allow_input)
+	action.timeout.connect(_continue_input)
+
+func _continue_input() -> void:
+	action.stop()
+	mods.allow_input()
 
 func _reset() -> void:
 	print("VALUE: ", _value)
