@@ -10,3 +10,7 @@ func controls(hud: CanvasLayer, menu: VBoxContainer) -> void:
 	settings.controls(hud, menu.settings)
 	exit.controls(hud, menu.exit)
 	hints.controls(hud)
+	var pause: Control = hud.detector.pause
+	pause.visibility_changed.connect(func():
+		if pause.visible: pause.options.menu.focused = false
+	)

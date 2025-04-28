@@ -2,6 +2,7 @@ extends Node
 
 class_name FocusedItems
 
+var _topics: Array[Control] = []
 var grabbed: Array[HSlider] = []
 var _items: Array[Array] = []
 var _focus: Node
@@ -28,6 +29,8 @@ func last() -> void: _grab_focus(-1)
 
 func set_space(selection: int, _system: int) -> void:
 	_space = clampi(selection - 1, 0, _items.size() - 1)
+	if _space < _topics.size() and not _topics[_space].visible:
+		_topics[space].show()
 	first()
 
 func setup(game: Control) -> void:
@@ -37,9 +40,11 @@ func setup(game: Control) -> void:
 
 func set_transition(hud: CanvasLayer, topic: Control) -> void:
 	hud.visibility_changed.connect(func():
+		if hud.visible and topic.visible: _grab_focus(0)
 		Processors.turn(_focus, hud.visible and topic.visible)
 	)
 	topic.visibility_changed.connect(func():
+		if hud.visible and topic.visible: _grab_focus(0)
 		Processors.turn(_focus, hud.visible and topic.visible)
 	)
 	for slider in grabbed:
