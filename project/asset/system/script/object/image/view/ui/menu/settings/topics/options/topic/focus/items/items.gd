@@ -26,13 +26,14 @@ func set_focus(selection: int) -> void:
 func first() -> void: _grab_focus(0)
 func last() -> void: _grab_focus(-1)
 
-func set_space(selection: int) -> void:
+func set_space(selection: int, _system: int) -> void:
 	_space = clampi(selection - 1, 0, _items.size() - 1)
 	first()
 
 func setup(game: Control) -> void:
 	_focus = game.get_node("focus")
 	_focus.setup_items(self)
+	_focus.timing.select.connect(set_focus)
 
 func set_transition(hud: CanvasLayer, topic: Control) -> void:
 	hud.visibility_changed.connect(func():

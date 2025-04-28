@@ -1,46 +1,44 @@
 extends Node
 
-@onready var timer: Timer = $timer
 @onready var loudness: HSlider = get_parent()
-@onready var timing: ActionTimer = $action
+@onready var focus: Node = $focus
+#@onready var timer: Timer = $timer
+#@onready var timing: ActionTimer = $action
 
 enum { TICK = 1, CLOCK = 10, MIN = 0, MAX = 100 }
 
 var _value: String = ""
-var _numbers: bool = true
+var _freeze: float = 0
 
 func _reset() -> void: _value = ""
 
-func _continue_input() -> void:
-	_numbers = true
-
 func _ready() -> void:
-	timing.period = 0.1
-	timing.timeout.connect(_continue_input)
+	focus.setup_items(self)
+	focus.timing.MAX = 1000
+	focus.timing.preview.connect(set_preview)
+	focus.gamepad.special = true
+	focus.timing.finish.wait_time = 1
+	#focus.timing.action.period = 0.15
 
-func manual_value() -> void:
-	if Input.is_action_just_pressed("ui_home"):
-		loudness.reset(0)
-	elif Input.is_action_just_pressed("ui_end"):
-		loudness.reset(100)
-	else:
-		var tick: float = Input.get_axis("ui_left", "ui_right")
-		var clock: float = Input.get_axis("ui_down", "ui_up")
-		loudness.append(tick * TICK + clock * CLOCK)
+func first() -> void: loudness.set_to(MIN)
+func last() -> void: loudness.set_to(MAX)
 
-func keyed_value(event: InputEvent) -> void:
-	var text: String = event.as_text().replace("Kp ", "")
-	if text.is_valid_int() and _value.length() < 3:
-		_value += text
-		loudness.reset(int(_value))
-		_numbers = false
-		timer.start()
-		timing.start()
-	else:
-		manual_value()
+func set_space(point: float, system: float) -> void:
+	var proportion: float = (point / system) * MAX
+	loudness.safe_set(proportion)
 
-func _input(event: InputEvent) -> void:
-	if event is InputEventKey and _numbers:
-		keyed_value(event)
+func set_preview(value: int) -> void:
+	loudness.safe_set(value)
+
+func set_slider_value() -> void:
+	var tick: float = Input.get_axis("ui_left", "ui_right")
+	var clock: float = Input.get_axis("ui_down", "ui_up")
+	if clock != 0 or tick != 0:
+		loudness.append(clock * CLOCK + tick * TICK)
+		_freeze = 0.05
+
+func _physics_process(delta: float) -> void:
+	if _freeze > 0:
+		_freeze -= delta
 	else:
-		manual_value()
+		set_slider_value()

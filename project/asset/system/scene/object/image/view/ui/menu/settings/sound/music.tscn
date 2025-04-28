@@ -7,7 +7,7 @@
 [ext_resource type="StyleBox" uid="uid://dfwghdfkosy7u" path="res://asset/resource/engine/internal/theme/slider/horizontal/area-highlight.tres" id="3_itvsd"]
 [ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/settings/topics/options/topic/slider/slider.gd" id="4_6ynh1"]
 [ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/settings/topics/options/topic/slider/manual.gd" id="5_gpfg3"]
-[ext_resource type="PackedScene" uid="uid://dga0coql425dk" path="res://asset/system/scene/object/calculus/timer/variants/action.tscn" id="6_kh46n"]
+[ext_resource type="PackedScene" uid="uid://cqd4givbuukr7" path="res://asset/system/scene/object/image/view/ui/menu/focus.tscn" id="8_umsvy"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_71y6s"]
 bg_color = Color(0.0687983, 0.0687983, 0.0687982, 1)
@@ -81,11 +81,6 @@ text = "50"
 process_mode = 4
 script = ExtResource("5_gpfg3")
 
-[node name="action" parent="manual" instance=ExtResource("6_kh46n")]
-
-[node name="timer" type="Timer" parent="manual"]
-wait_time = 0.5
-one_shot = true
+[node name="focus" parent="manual" instance=ExtResource("8_umsvy")]
 
 [connection signal="pressed" from="margin/music/volume/state/info/manual" to="." method="focus_manual"]
-[connection signal="timeout" from="manual/timer" to="manual" method="_reset"]

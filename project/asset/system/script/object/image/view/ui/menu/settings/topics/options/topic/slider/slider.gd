@@ -21,12 +21,15 @@ func _ready() -> void:
 
 func focus() -> void: manual.grab_focus()
 
-func reset(next: int) -> void:
-	value = clampi(next, 0, 100)
+func set_to(next: int) -> void:
+	value = next
 	value_changed.emit(value)
 
+func safe_set(next: int) -> void:
+	set_value(clampi(next, 0, 100))
+
 func append(tick: int) -> void:
-	reset(value + tick)
+	safe_set(value + tick)
 
 func focus_manual() -> void:
 	set_manual(true)
