@@ -10,3 +10,6 @@ func switch_controls() -> void:
 func switch_experience() -> void:
 	controls.hide()
 	game.show()
+
+func set_transition(hud: CanvasLayer) -> void:
+	game.items.set_transition(hud, game)

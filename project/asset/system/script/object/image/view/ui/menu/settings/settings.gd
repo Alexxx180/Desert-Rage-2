@@ -8,3 +8,4 @@ func set_back(menu: CanvasLayer) -> void:
 
 func _ready() -> void:
 	topics.tabs.caption.set_shortcut(self)
+	topics.options.set_transition(self)

@@ -6,6 +6,8 @@ signal hold_focus(status: bool)
 @onready var manual: Node = $manual
 
 var _manual: bool = false
+var released: bool:
+	get: return not _manual
 var _grabber: Texture2D = preload("res://asset/resource/engine/internal/shape/texture/grabber.tres")
 
 func _ready() -> void:
@@ -45,7 +47,7 @@ func _input(event: InputEvent) -> void:
 		if Input.is_action_just_pressed(action):
 			set_manual(false)
 			if action == "ui_accept":
-				submit.find_next_valid_focus()
+				submit.find_next_valid_focus().grab_focus()
 			else:
 				submit.grab_focus()
 			return
