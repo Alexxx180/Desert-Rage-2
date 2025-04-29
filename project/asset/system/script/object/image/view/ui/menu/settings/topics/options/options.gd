@@ -13,3 +13,4 @@ func switch_experience() -> void:
 
 func set_transition(hud: CanvasLayer) -> void:
 	game.items.set_transition(hud, game)
+	controls.items.set_transition(hud, controls)

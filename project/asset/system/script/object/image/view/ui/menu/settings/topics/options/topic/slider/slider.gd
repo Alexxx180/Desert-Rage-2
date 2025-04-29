@@ -13,7 +13,7 @@ var _grabber: Texture2D = preload("res://asset/resource/engine/internal/shape/te
 func _ready() -> void:
 	value_changed.connect(func(v):
 		submit.text = str(v)#str(v, "%")
-		if v == 100:
+		if v == max_value:
 			add_theme_icon_override("grabber", _grabber)
 		else:
 			add_theme_icon_override("grabber", Defaults.TEXTURE)
@@ -34,7 +34,7 @@ func set_to(next: int) -> void:
 	value_changed.emit(value)
 
 func safe_set(next: int) -> void:
-	set_value(clampi(next, 0, 100))
+	set_value(clampi(next, min_value, max_value))
 
 func append(tick: int) -> void:
 	safe_set(value + tick)

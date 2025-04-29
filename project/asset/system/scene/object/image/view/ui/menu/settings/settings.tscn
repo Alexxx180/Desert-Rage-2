@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://b4x588yxrcok3"]
+[gd_scene load_steps=54 format=3 uid="uid://b4x588yxrcok3"]
 
 [ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/settings/settings.gd" id="1_apf6u"]
 [ext_resource type="Theme" uid="uid://dfyi7rrcrweqx" path="res://asset/resource/engine/internal/theme/patterns/template/menu/settings/settings.tres" id="1_vs08l"]
@@ -21,19 +21,25 @@
 [ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/settings/topics/options/topic/named/topics/experience.gd" id="9_7pxvf"]
 [ext_resource type="PackedScene" uid="uid://hoxnejr2ne7q" path="res://asset/system/scene/object/image/view/ui/menu/settings/sound/sound.tscn" id="9_fgij5"]
 [ext_resource type="PackedScene" uid="uid://bwxmswjunrdab" path="res://asset/system/scene/object/image/view/ui/menu/settings/sound/interface.tscn" id="10_bgvfr"]
-[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/settings/topics/options/topic/named/options/sound.gd" id="11_n6v6j"]
+[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/settings/topics/options/topic/named/options/experience/sound.gd" id="11_n6v6j"]
 [ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/settings/topics/tabs/tabs.gd" id="13_cumtp"]
 [ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/settings/topics/tabs/caption/caption.gd" id="13_rpxmq"]
 [ext_resource type="Shortcut" uid="uid://bgd4ocokxr1wj" path="res://asset/resource/engine/internal/short/cut/pause.tres" id="14_n4pyq"]
-[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/settings/topics/options/topic/named/options/experience.gd" id="16_4tgnu"]
+[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/settings/topics/options/topic/named/options/experience/experience.gd" id="16_4tgnu"]
 [ext_resource type="InputEventKey" uid="uid://cjlyrqdxoernq" path="res://asset/resource/engine/internal/short/device/keyboard/key/ctrl/tab.tres" id="16_yw7xu"]
 [ext_resource type="InputEventKey" uid="uid://d24fadfa7hd1w" path="res://asset/resource/engine/internal/short/device/keyboard/key/alt/two.tres" id="17_wy3ld"]
 [ext_resource type="InputEventJoypadMotion" uid="uid://lythe86smbls" path="res://asset/resource/engine/internal/short/device/gamepad/stick/right/right.tres" id="18_5iaie"]
-[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/settings/topics/options/topic/named/options/interface.gd" id="18_6ai1k"]
-[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/settings/topics/options/topic/named/options/stats.gd" id="18_h1png"]
+[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/settings/topics/options/topic/named/options/experience/interface.gd" id="18_6ai1k"]
+[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/settings/topics/options/topic/named/options/experience/stats.gd" id="18_h1png"]
 [ext_resource type="InputEventKey" uid="uid://ch54tip20nskb" path="res://asset/resource/engine/internal/short/device/keyboard/key/alt/one.tres" id="18_ynqjn"]
 [ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/hud/processor/pause/exit/shortcut.gd" id="19_eqfhs"]
 [ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/settings/topics/tabs/caption/short.gd" id="19_fobve"]
+[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/settings/topics/options/topic/named/topics/management.gd" id="23_7s0gm"]
+[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/settings/topics/options/topic/slider/slider.gd" id="27_2k8ae"]
+[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/settings/topics/options/topic/named/options/management/keyboard.gd" id="27_06o0n"]
+[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/settings/topics/options/topic/focus/items/management.gd" id="27_bq0bq"]
+[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/settings/topics/options/topic/slider/manual.gd" id="27_g800x"]
+[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/settings/topics/options/topic/named/options/management/gamepad.gd" id="28_6l1og"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vndxt"]
 bg_color = Color(0.0196078, 0.0196078, 0.0196078, 1)
@@ -65,6 +71,8 @@ width = 1
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_71y6s"]
 bg_color = Color(0.0687983, 0.0687983, 0.0687982, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1821x"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n7dsu"]
 bg_color = Color(0.0196078, 0.0196078, 0.0196078, 1)
@@ -722,6 +730,7 @@ theme_override_font_sizes/font_size = 18
 text = "Overall stats summary"
 
 [node name="focus" parent="detector/margin/topics/content/options/game" instance=ExtResource("6_ar8gi")]
+process_mode = 4
 
 [node name="items" type="Node" parent="detector/margin/topics/content/options/game"]
 script = ExtResource("8_lfymp")
@@ -733,6 +742,7 @@ theme_override_constants/margin_left = 2
 theme_override_constants/margin_top = 2
 theme_override_constants/margin_right = 2
 theme_override_constants/margin_bottom = 2
+script = ExtResource("5_scc36")
 
 [node name="management" type="VBoxContainer" parent="detector/margin/topics/content/options/controls"]
 custom_minimum_size = Vector2(250, 0)
@@ -740,6 +750,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8
 theme = ExtResource("2_ull8j")
+script = ExtResource("23_7s0gm")
 
 [node name="mouse" type="HSlider" parent="detector/margin/topics/content/options/controls/management"]
 custom_minimum_size = Vector2(300, 60)
@@ -752,7 +763,9 @@ theme_override_icons/grabber_disabled = SubResource("GradientTexture1D_ktnei")
 theme_override_styles/slider = ExtResource("4_ow36w")
 theme_override_styles/grabber_area = ExtResource("3_j0acm")
 theme_override_styles/grabber_area_highlight = ExtResource("5_thq8p")
-value = 50.0
+max_value = 20.0
+value = 10.0
+script = ExtResource("27_2k8ae")
 
 [node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/management/mouse"]
 layout_mode = 1
@@ -789,17 +802,30 @@ theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 25
 theme_override_constants/margin_bottom = 7
 
-[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/management/mouse/margin/music/volume/state"]
+[node name="info" type="HBoxContainer" parent="detector/margin/topics/content/options/controls/management/mouse/margin/music/volume/state"]
 layout_mode = 2
-text = "Mouse Sensitivity"
 
-[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/management/mouse/margin/music/volume/state"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/management/mouse/margin/music/volume/state/info"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Sensitivity"
+
+[node name="manual" type="Button" parent="detector/margin/topics/content/options/controls/management/mouse/margin/music/volume/state/info"]
+custom_minimum_size = Vector2(50, 20)
 layout_mode = 2
 size_flags_horizontal = 8
+theme_override_styles/normal = SubResource("StyleBoxEmpty_1821x")
 text = "10"
+
+[node name="manual" type="Node" parent="detector/margin/topics/content/options/controls/management/mouse"]
+process_mode = 4
+script = ExtResource("27_g800x")
+
+[node name="focus" parent="detector/margin/topics/content/options/controls/management/mouse/manual" instance=ExtResource("6_ar8gi")]
 
 [node name="keyboard" type="VBoxContainer" parent="detector/margin/topics/content/options/controls/management"]
 layout_mode = 2
+script = ExtResource("8_1w8km")
 
 [node name="header" type="Button" parent="detector/margin/topics/content/options/controls/management/keyboard"]
 custom_minimum_size = Vector2(0, 45)
@@ -829,6 +855,7 @@ layout_mode = 2
 
 [node name="options" type="HFlowContainer" parent="detector/margin/topics/content/options/controls/management/keyboard/content"]
 layout_mode = 2
+script = ExtResource("27_06o0n")
 
 [node name="preset" type="Button" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options"]
 custom_minimum_size = Vector2(300, 60)
@@ -991,13 +1018,13 @@ layout_mode = 2
 size_flags_horizontal = 8
 text = "X"
 
-[node name="action-one" type="Button" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options"]
+[node name="action_one" type="Button" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.35
 
-[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/action-one"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/action_one"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1005,22 +1032,22 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/action-one/margin"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/action_one/margin"]
 layout_mode = 2
 text = "Action #1"
 
-[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/action-one/margin"]
+[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/action_one/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "C"
 
-[node name="action-two" type="Button" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options"]
+[node name="action_two" type="Button" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.35
 
-[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/action-two"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/action_two"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1028,11 +1055,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/action-two/margin"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/action_two/margin"]
 layout_mode = 2
 text = "Action #2"
 
-[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/action-two/margin"]
+[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/action_two/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "V"
@@ -1198,13 +1225,13 @@ layout_mode = 2
 size_flags_horizontal = 8
 text = "F3"
 
-[node name="main-menu" type="Button" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options"]
+[node name="main_menu" type="Button" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.35
 
-[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/main-menu"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/main_menu"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1212,11 +1239,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/main-menu/margin"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/main_menu/margin"]
 layout_mode = 2
 text = "Main menu"
 
-[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/main-menu/margin"]
+[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/main_menu/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "F4"
@@ -1267,13 +1294,13 @@ layout_mode = 2
 size_flags_horizontal = 8
 text = "F6"
 
-[node name="fast-save" type="Button" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options"]
+[node name="fast_save" type="Button" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.35
 
-[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/fast-save"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/fast_save"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1281,22 +1308,22 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/fast-save/margin"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/fast_save/margin"]
 layout_mode = 2
 text = "Load / Fast save"
 
-[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/fast-save/margin"]
+[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/fast_save/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "F7"
 
-[node name="fast-load" type="Button" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options"]
+[node name="fast_load" type="Button" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.35
 
-[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/fast-load"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/fast_load"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1304,22 +1331,22 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/fast-load/margin"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/fast_load/margin"]
 layout_mode = 2
 text = "Fast load"
 
-[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/fast-load/margin"]
+[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/fast_load/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "F8"
 
-[node name="export-progress" type="Button" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options"]
+[node name="export_progress" type="Button" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.35
 
-[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/export-progress"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/export_progress"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1327,22 +1354,22 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/export-progress/margin"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/export_progress/margin"]
 layout_mode = 2
 text = "Export progress"
 
-[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/export-progress/margin"]
+[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/export_progress/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "F9"
 
-[node name="import-progress" type="Button" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options"]
+[node name="import_progress" type="Button" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.35
 
-[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/import-progress"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/import_progress"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1350,11 +1377,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/import-progress/margin"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/import_progress/margin"]
 layout_mode = 2
 text = "Import progress"
 
-[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/import-progress/margin"]
+[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/import_progress/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "F10"
@@ -1382,13 +1409,13 @@ layout_mode = 2
 size_flags_horizontal = 8
 text = "F11"
 
-[node name="photo-mode" type="Button" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options"]
+[node name="photo_mode" type="Button" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.35
 
-[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/photo-mode"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/photo_mode"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1396,11 +1423,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/photo-mode/margin"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/photo_mode/margin"]
 layout_mode = 2
 text = "Photo mode"
 
-[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/photo-mode/margin"]
+[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options/photo_mode/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "F12"
@@ -1434,6 +1461,7 @@ text = "Key mappings"
 
 [node name="gamepad" type="VBoxContainer" parent="detector/margin/topics/content/options/controls/management"]
 layout_mode = 2
+script = ExtResource("8_1w8km")
 
 [node name="header" type="Button" parent="detector/margin/topics/content/options/controls/management/gamepad"]
 custom_minimum_size = Vector2(0, 45)
@@ -1461,16 +1489,17 @@ text = "Gamepad"
 [node name="content" type="VBoxContainer" parent="detector/margin/topics/content/options/controls/management/gamepad"]
 layout_mode = 2
 
-[node name="order" type="HFlowContainer" parent="detector/margin/topics/content/options/controls/management/gamepad/content"]
+[node name="options" type="HFlowContainer" parent="detector/margin/topics/content/options/controls/management/gamepad/content"]
 layout_mode = 2
+script = ExtResource("28_6l1og")
 
-[node name="preset" type="Button" parent="detector/margin/topics/content/options/controls/management/gamepad/content/order"]
+[node name="preset" type="Button" parent="detector/margin/topics/content/options/controls/management/gamepad/content/options"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.35
 
-[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/management/gamepad/content/order/preset"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/management/gamepad/content/options/preset"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1478,22 +1507,22 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/management/gamepad/content/order/preset/margin"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/management/gamepad/content/options/preset/margin"]
 layout_mode = 2
 text = "Preset"
 
-[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/management/gamepad/content/order/preset/margin"]
+[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/management/gamepad/content/options/preset/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "Left"
 
-[node name="movement" type="Button" parent="detector/margin/topics/content/options/controls/management/gamepad/content/order"]
+[node name="movement" type="Button" parent="detector/margin/topics/content/options/controls/management/gamepad/content/options"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.35
 
-[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/management/gamepad/content/order/movement"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/management/gamepad/content/options/movement"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1501,22 +1530,22 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/management/gamepad/content/order/movement/margin"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/management/gamepad/content/options/movement/margin"]
 layout_mode = 2
 text = "Movement"
 
-[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/management/gamepad/content/order/movement/margin"]
+[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/management/gamepad/content/options/movement/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "LS"
 
-[node name="inventory" type="Button" parent="detector/margin/topics/content/options/controls/management/gamepad/content/order"]
+[node name="inventory" type="Button" parent="detector/margin/topics/content/options/controls/management/gamepad/content/options"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.35
 
-[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/management/gamepad/content/order/inventory"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/management/gamepad/content/options/inventory"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1524,22 +1553,22 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/management/gamepad/content/order/inventory/margin"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/management/gamepad/content/options/inventory/margin"]
 layout_mode = 2
 text = "Inventory"
 
-[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/management/gamepad/content/order/inventory/margin"]
+[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/management/gamepad/content/options/inventory/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "Cross"
 
-[node name="targeting" type="Button" parent="detector/margin/topics/content/options/controls/management/gamepad/content/order"]
+[node name="targeting" type="Button" parent="detector/margin/topics/content/options/controls/management/gamepad/content/options"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.35
 
-[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/management/gamepad/content/order/targeting"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/management/gamepad/content/options/targeting"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1547,22 +1576,22 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/management/gamepad/content/order/targeting/margin"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/management/gamepad/content/options/targeting/margin"]
 layout_mode = 2
 text = "Targeting"
 
-[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/management/gamepad/content/order/targeting/margin"]
+[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/management/gamepad/content/options/targeting/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "LT"
 
-[node name="ability" type="Button" parent="detector/margin/topics/content/options/controls/management/gamepad/content/order"]
+[node name="ability" type="Button" parent="detector/margin/topics/content/options/controls/management/gamepad/content/options"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.35
 
-[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/management/gamepad/content/order/ability"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/management/gamepad/content/options/ability"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1570,22 +1599,22 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/management/gamepad/content/order/ability/margin"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/management/gamepad/content/options/ability/margin"]
 layout_mode = 2
 text = "Swipe"
 
-[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/management/gamepad/content/order/ability/margin"]
+[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/management/gamepad/content/options/ability/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "LB"
 
-[node name="ab" type="Button" parent="detector/margin/topics/content/options/controls/management/gamepad/content/order"]
+[node name="ab" type="Button" parent="detector/margin/topics/content/options/controls/management/gamepad/content/options"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.35
 
-[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/management/gamepad/content/order/ab"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/management/gamepad/content/options/ab"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1593,22 +1622,22 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/management/gamepad/content/order/ab/margin"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/management/gamepad/content/options/ab/margin"]
 layout_mode = 2
 text = "A&B Order"
 
-[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/management/gamepad/content/order/ab/margin"]
+[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/management/gamepad/content/options/ab/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "AB"
 
-[node name="xy" type="Button" parent="detector/margin/topics/content/options/controls/management/gamepad/content/order"]
+[node name="xy" type="Button" parent="detector/margin/topics/content/options/controls/management/gamepad/content/options"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.35
 
-[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/management/gamepad/content/order/xy"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/management/gamepad/content/options/xy"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1616,22 +1645,22 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/management/gamepad/content/order/xy/margin"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/management/gamepad/content/options/xy/margin"]
 layout_mode = 2
 text = "X&Y Order"
 
-[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/management/gamepad/content/order/xy/margin"]
+[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/management/gamepad/content/options/xy/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "XY"
 
-[node name="abxy" type="Button" parent="detector/margin/topics/content/options/controls/management/gamepad/content/order"]
+[node name="abxy" type="Button" parent="detector/margin/topics/content/options/controls/management/gamepad/content/options"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.35
 
-[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/management/gamepad/content/order/abxy"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/management/gamepad/content/options/abxy"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1639,22 +1668,22 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/management/gamepad/content/order/abxy/margin"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/management/gamepad/content/options/abxy/margin"]
 layout_mode = 2
 text = "Buttons"
 
-[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/management/gamepad/content/order/abxy/margin"]
+[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/management/gamepad/content/options/abxy/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "ABXY"
 
-[node name="preview" type="Button" parent="detector/margin/topics/content/options/controls/management/gamepad/content/order"]
+[node name="preview" type="Button" parent="detector/margin/topics/content/options/controls/management/gamepad/content/options"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.35
 
-[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/management/gamepad/content/order/preview"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/management/gamepad/content/options/preview"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1662,11 +1691,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/management/gamepad/content/order/preview/margin"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/management/gamepad/content/options/preview/margin"]
 layout_mode = 2
 text = "Preview"
 
-[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/management/gamepad/content/order/preview/margin"]
+[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/management/gamepad/content/options/preview/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "On"
@@ -1691,6 +1720,12 @@ layout_mode = 2
 size_flags_horizontal = 8
 theme_override_colors/font_color = Color(0.313726, 0.313726, 0.313726, 1)
 text = "Button mappings"
+
+[node name="focus" parent="detector/margin/topics/content/options/controls" instance=ExtResource("6_ar8gi")]
+process_mode = 4
+
+[node name="items" type="Node" parent="detector/margin/topics/content/options/controls"]
+script = ExtResource("27_bq0bq")
 
 [node name="controls" type="MarginContainer" parent="detector/margin/topics"]
 visible = false
@@ -1830,6 +1865,7 @@ action = "list_left"
 [connection signal="pressed" from="detector/margin/topics/content/options/game/experience/interface/content/footer" to="detector/margin/topics/content/options/game/experience/interface/content/footer" method="_hide_topic"]
 [connection signal="pressed" from="detector/margin/topics/content/options/game/experience/stats/header" to="detector/margin/topics/content/options/game/experience/stats/header" method="_toggle_content"]
 [connection signal="pressed" from="detector/margin/topics/content/options/game/experience/stats/content/footer" to="detector/margin/topics/content/options/game/experience/stats/content/footer" method="_hide_topic"]
+[connection signal="pressed" from="detector/margin/topics/content/options/controls/management/mouse/margin/music/volume/state/info/manual" to="detector/margin/topics/content/options/controls/management/mouse" method="focus_manual"]
 [connection signal="pressed" from="detector/margin/topics/content/options/controls/management/keyboard/header" to="detector/margin/topics/content/options/controls/management/keyboard/header" method="_toggle_content"]
 [connection signal="pressed" from="detector/margin/topics/content/options/controls/management/keyboard/content/footer" to="detector/margin/topics/content/options/controls/management/keyboard/content/footer" method="_hide_topic"]
 [connection signal="pressed" from="detector/margin/topics/content/options/controls/management/gamepad/header" to="detector/margin/topics/content/options/controls/management/gamepad/header" method="_toggle_content"]
