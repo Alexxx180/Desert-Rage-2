@@ -6,6 +6,6 @@ func set_ost(music: Node) -> void:
 	_ost = music.world.typed.ost.boss
 
 func tick(mark: Tick) -> int:
-	var result = super.tick(mark)
+	super.tick(mark)
 	progress.emit(mark)
 	return OK

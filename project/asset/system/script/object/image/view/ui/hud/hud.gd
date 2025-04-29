@@ -4,6 +4,7 @@ extends Node
 
 @onready var game: CanvasLayer = $game
 @onready var settings: CanvasLayer = $settings
+@onready var sound: CanvasLayer = $sound
 
 func set_group() -> void:
 	SessionStats.save_progress()
@@ -15,7 +16,8 @@ func set_group() -> void:
 func _ready() -> void:
 	set_group()
 	game.set_settings_transition(settings)
-	settings.set_back(game)
+	sound.set_settings_transition(settings)
+	settings.set_transitions(game, sound)
 
 func reset() -> void:
 	game.detector.game.show()

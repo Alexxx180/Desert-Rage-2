@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://pexl48rcyqo7"]
+[gd_scene load_steps=11 format=3 uid="uid://pexl48rcyqo7"]
 
 [ext_resource type="PackedScene" uid="uid://dql7mce31xdjg" path="res://asset/system/scene/object/image/view/ui/menu/sound/detector/settings/settings.tscn" id="1_1yo1r"]
 [ext_resource type="PackedScene" uid="uid://cikgtgx0up07s" path="res://asset/system/scene/object/image/view/ui/menu/sound/detector/dropdown/tree/tree.tscn" id="1_v2fxn"]
 [ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/sound/sound.gd" id="1_xeo0l"]
+[ext_resource type="Theme" uid="uid://cnhvv2uiofw3t" path="res://asset/resource/engine/internal/theme/patterns/template/menu/sound/sound.tres" id="2_me7fv"]
 [ext_resource type="PackedScene" uid="uid://c85yu6373k7wr" path="res://asset/system/scene/object/image/view/ui/menu/sound/detector/options/options.tscn" id="2_s3j2j"]
 [ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/sound/detector/detector.gd" id="2_swapw"]
 [ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/sound/detector/soundtrack.gd" id="3_6cqct"]
@@ -15,15 +16,15 @@ bg_color = Color(1, 1, 1, 1)
 [node name="sound" type="CanvasLayer"]
 script = ExtResource("1_xeo0l")
 
-[node name="detector" type="Control" parent="."]
+[node name="detector" type="Panel" parent="."]
 process_mode = 3
-layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
+theme = ExtResource("2_me7fv")
 script = ExtResource("2_swapw")
 
 [node name="margin" type="MarginContainer" parent="detector"]
@@ -82,7 +83,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
-text = "Press ▶️ to start and 🏳️ to reset playback"
+text = "Press ▶️ to start and P to reset playback"
 horizontal_alignment = 1
 clip_text = true
 text_overrun_behavior = 3

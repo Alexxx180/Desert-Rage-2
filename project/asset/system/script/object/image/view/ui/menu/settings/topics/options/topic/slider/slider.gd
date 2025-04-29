@@ -34,10 +34,10 @@ func set_to(next: int) -> void:
 	value_changed.emit(value)
 
 func safe_set(next: int) -> void:
-	set_value(clampi(next, min_value, max_value))
+	set_to(clampi(next, int(min_value), int(max_value)))
 
 func append(tick: int) -> void:
-	safe_set(value + tick)
+	safe_set(int(value) + tick)
 
 func focus_manual() -> void:
 	set_manual(true)

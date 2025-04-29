@@ -14,3 +14,7 @@ func switch_experience() -> void:
 func set_transition(hud: CanvasLayer) -> void:
 	game.items.set_transition(hud, game)
 	controls.items.set_transition(hud, controls)
+
+func set_soundtrack_transition(settings: CanvasLayer, sound: CanvasLayer) -> void:
+	var experience: VBoxContainer = game.get_node("experience")
+	experience.sound.options.set_soundtrack_transition(settings, sound)
