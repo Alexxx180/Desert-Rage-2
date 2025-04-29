@@ -3,7 +3,7 @@ extends OSTPlayer
 @export var caption: String = "origin"
 
 var i: int = 0
-var _set: Array[Dictionary]
+var _set: Array
 var _mixed: bool = false
 
 func _ready() -> void:
@@ -13,10 +13,10 @@ func _has_level(ost: Dictionary) -> bool:
 	return ost.name.has(caption) and ost.name[caption].mix
 
 func set_tracks() -> void:
-	var ost: Dictionary = SoundtrackSystem.context.level.caves
-	_mixed = ost.caves.type.theme.mix
+	var ost: Dictionary = SoundtrackSystem.user.music.level.caves
+	_mixed = ost.type.theme.mix
 	if _has_level(ost):
-		_set = ost.name[caption]
+		_set = ost.name[caption].set
 	else:
 		_set = ost.type.theme
 	set_playback()
