@@ -1,6 +1,6 @@
 extends AudioStreamPlayer
 
-@onready var timing: Timer = $timer
+class_name OSTPlayer
 
 var _track: String = ""
 var _method: Callable
@@ -26,15 +26,17 @@ func _get_extension(track: String) -> String:
 	var period: int = track.rfind(".")
 	return track.substr(period + 1)
 
+func stop_timing() -> void: stop()
+func start_timing() -> void: pass
+
 func load_music(track: String) -> int:
 	_track = track
-	timing.stop()
-	stop()
+	stop_timing()
 	match _get_extension(track).to_lower():
 		"mp3": _method = _load_mp3
 		"ogg": _method = _load_ogg
 		_: return ERR_BUSY
 	if not FileAccess.file_exists(track):
 		return FAILED
-	timing.start()
+	start_timing()
 	return OK
