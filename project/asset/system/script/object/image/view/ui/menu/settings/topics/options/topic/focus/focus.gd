@@ -5,7 +5,7 @@ extends Node
 @onready var gamepad: Node = $gamepad
 
 func setup_items(items: Node) -> void:
-	timing.mods.space_trigger.connect(items.set_space)
+	timing.space_trigger.connect(items.set_space)
 	timing.first.connect(items.first)
 	timing.last.connect(items.last)
 

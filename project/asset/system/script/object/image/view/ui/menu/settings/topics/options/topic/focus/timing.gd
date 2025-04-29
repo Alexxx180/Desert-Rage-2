@@ -1,5 +1,6 @@
 extends Node
 
+signal space_trigger(selection: int, system: int)
 signal select(value: int)
 signal preview(value: int)
 signal first()
@@ -13,12 +14,16 @@ var MAX: int = 100
 var _value: int = 0
 
 func next_digit() -> int: return _value * 10
+func set_first() -> void: first.emit()
+func set_last() -> void: last.emit()
+func set_space(selection: int, system: int) -> void:
+	space_trigger.emit(selection, system)
 
 func set_number(no: int) -> void:
 	_value = next_digit() + no
 	mods.set_bit(0, false)
 	#mods.set_bit(5, false)
-	mods.space = 0
+	#mods.space = 0
 	preview.emit(_value)
 
 func start_timers() -> void:
