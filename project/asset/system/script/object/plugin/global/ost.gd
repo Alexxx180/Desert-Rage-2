@@ -57,6 +57,7 @@ func _save_manifest(type: String) -> void:
 
 func save_changes() -> void:
 	if save:
+		update_ost()
 		_save_manifest("music")
 	save = false
 

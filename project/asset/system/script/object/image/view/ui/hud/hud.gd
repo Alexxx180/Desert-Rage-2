@@ -15,7 +15,7 @@ func set_group() -> void:
 
 func _ready() -> void:
 	set_group()
-	game.set_settings_transition(settings)
+	game.set_settings_transition(settings, get_node("../ost"))
 	sound.set_settings_transition(settings)
 	settings.set_transitions(game, sound)
 

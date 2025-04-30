@@ -23,11 +23,13 @@ func set_tracks() -> void:
 
 func stop_timing() -> void: pass
 func start_timing() -> void:
+	var paused: bool = stream_paused
 	stop()
 	_load_music()
+	if paused: stream_paused = true
 
 func set_playback() -> void:
-	i = i + 1 % _set.size()
+	i = (i + 1) % _set.size()
 	load_music(_set[i].ambient)
 
 func _finished() -> void:

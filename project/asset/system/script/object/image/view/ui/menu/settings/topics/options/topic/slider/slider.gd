@@ -1,5 +1,7 @@
 extends HSlider
 
+class_name FocusedSlider
+
 signal hold_focus(status: bool)
 
 @onready var submit: Button = $margin/music/volume/state/info/manual
