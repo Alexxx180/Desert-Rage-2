@@ -1,12 +1,9 @@
 extends VBoxContainer
 
-var preview: HelpPreview: set = set_preview
-
 @onready var motion: VBoxContainer = $scroll/category/motion
 @onready var action: VBoxContainer = $scroll/category/action
 @onready var reason: VBoxContainer = $scroll/category/reason
 
-@onready var analyze: Button = $analyze
 @onready var behavior: BehaviorTree = $behavior
 @onready var blackboard: BehaviorBlackboard = $blackboard
 
@@ -25,8 +22,7 @@ func progress(head: String, body: String) -> void:
 	behavior.tick(self, blackboard)
 	blackboard.get_value("progress").clear()
 
-func set_preview(prev: HelpPreview) -> void:
-	var group: Node2D = get_node("../../../../../../group")
+func set_preview(group: Node2D, prev: HelpPreview) -> void:
 	var help: Dictionary = group.camera.analyze.get_analyze()
 	var ref: Dictionary = {
 		"motion": motion.get_category(),
@@ -37,5 +33,3 @@ func set_preview(prev: HelpPreview) -> void:
 		["hide", "show", "preview", "analyze", "ref", "progress"],
 		[true, prev.clone(), prev.help, help, ref, []]
 	)
-	#print("HELP - 2: ", prev.clone())
-	#print("HELP: ", ref)

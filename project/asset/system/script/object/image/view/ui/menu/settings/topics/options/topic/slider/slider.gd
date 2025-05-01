@@ -1,0 +1,67 @@
+extends HSlider
+
+class_name FocusedSlider
+
+signal hold_focus(status: bool)
+
+@onready var submit: Button = $margin/music/volume/state/info/manual
+@onready var manual: Node = $manual
+
+var _manual: bool = false
+var released: bool:
+	get: return not _manual
+var _grabber: Texture2D = preload("res://asset/resource/engine/internal/shape/texture/grabber.tres")
+
+func _ready() -> void:
+	value_changed.connect(func(v):
+		submit.text = str(v)#str(v, "%")
+		if v == max_value:
+			add_theme_icon_override("grabber", _grabber)
+		else:
+			add_theme_icon_override("grabber", Defaults.TEXTURE)
+	)
+
+func get_neighbor() -> String:
+	return "../" + name + "/margin/music/volume/state/info/manual"
+
+func set_neighbor(left: String, right: String) -> void:
+	var root: String = "../../../../../../"
+	submit.focus_neighbor_left = root + left
+	submit.focus_neighbor_right = root + right
+
+func focus() -> void: manual.grab_focus()
+
+func set_to(next: int) -> void:
+	value = next
+	value_changed.emit(value)
+
+func safe_set(next: int) -> void:
+	set_to(clampi(next, int(min_value), int(max_value)))
+
+func append(tick: int) -> void:
+	safe_set(int(value) + tick)
+
+func focus_manual() -> void:
+	set_manual(true)
+	submit.release_focus()
+
+func set_manual(next: bool) -> void:
+	_manual = next
+	Processors.turn(manual, _manual)
+	hold_focus.emit(!next)
+
+func _input(event: InputEvent) -> void:
+	if not _manual: return
+	if event is InputEventMouseButton:
+		set_manual(false)
+		return
+	
+	for action in ["ui_cancel", "ui_accept", "list_right", "list_left", "list_up", "list_down"]:
+		if Input.is_action_just_pressed(action):
+			set_manual(false)
+			if action == "ui_accept":
+				submit.find_next_valid_focus().grab_focus()
+			else:
+				submit.grab_focus()
+			return
+	

@@ -1,12 +1,16 @@
 extends Node
 
 @onready var resume: Node = $resume
-@onready var screen: Node = $screen
+@onready var settings: Node = $settings
 @onready var exit: Node = $exit
 @onready var hints: Node = $hints
 
-func controls(hud: Control, menu: VBoxContainer) -> void:
+func controls(hud: CanvasLayer, menu: VBoxContainer) -> void:
 	resume.controls(hud, menu.resume)
-	screen.controls(hud, menu.screen)
+	settings.controls(hud, menu.settings)
 	exit.controls(hud, menu.exit)
 	hints.controls(hud)
+	var pause: Control = hud.detector.pause
+	pause.visibility_changed.connect(func():
+		if pause.visible: pause.options.menu.focused = false
+	)

@@ -1,6 +1,6 @@
 extends Area2D
 
-@export var cards: CanvasLayer
+@export var hud: Node
 
 @export_group("Hint preview location")
 @export var head: String = ""
@@ -9,7 +9,7 @@ extends Area2D
 func _on_hint_collected(_hero: CharacterBody2D) -> void:
 	var act: Node2D = get_parent()
 	var category: Node2D = act.get_parent()
-	var hints: VBoxContainer = cards.hud.detector.game.margin.hints
+	var hints: VBoxContainer = hud.game.detector.game.hints
 
 	if head == "": head = category.name
 	if body == "": body = name

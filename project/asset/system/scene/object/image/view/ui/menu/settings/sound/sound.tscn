@@ -1,0 +1,86 @@
+[gd_scene load_steps=11 format=3 uid="uid://hoxnejr2ne7q"]
+
+[ext_resource type="Texture2D" uid="uid://du3gs78ig4h1u" path="res://asset/resource/engine/internal/shape/texture/highlight.tres" id="1_1eg7c"]
+[ext_resource type="StyleBox" uid="uid://cjukg7l6l1urx" path="res://asset/resource/engine/internal/theme/slider/horizontal/area-slider.tres" id="1_280qy"]
+[ext_resource type="Texture2D" uid="uid://ctesdxx5kyp0k" path="res://asset/resource/engine/internal/shape/texture/disabled.tres" id="2_037cb"]
+[ext_resource type="StyleBox" uid="uid://belpqiw77873x" path="res://asset/resource/engine/internal/theme/slider/horizontal/area-grabber.tres" id="2_atobb"]
+[ext_resource type="StyleBox" uid="uid://dfwghdfkosy7u" path="res://asset/resource/engine/internal/theme/slider/horizontal/area-highlight.tres" id="3_dav0v"]
+[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/settings/topics/options/topic/slider/slider.gd" id="4_xnxk6"]
+[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/settings/topics/options/topic/slider/manual.gd" id="5_j14e8"]
+[ext_resource type="PackedScene" uid="uid://cqd4givbuukr7" path="res://asset/system/scene/object/image/view/ui/menu/focus.tscn" id="8_u22ni"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_71y6s"]
+bg_color = Color(0.0687983, 0.0687983, 0.0687982, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kb2oe"]
+
+[node name="sound" type="HSlider"]
+custom_minimum_size = Vector2(300, 60)
+size_flags_horizontal = 3
+size_flags_vertical = 8
+focus_mode = 1
+theme_override_icons/grabber_highlight = ExtResource("1_1eg7c")
+theme_override_icons/grabber_disabled = ExtResource("2_037cb")
+theme_override_styles/slider = ExtResource("1_280qy")
+theme_override_styles/grabber_area = ExtResource("2_atobb")
+theme_override_styles/grabber_area_highlight = ExtResource("3_dav0v")
+value = 50.0
+script = ExtResource("4_xnxk6")
+
+[node name="margin" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 7
+
+[node name="music" type="Panel" parent="margin"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_71y6s")
+
+[node name="volume" type="VBoxContainer" parent="margin/music"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 4
+
+[node name="state" type="MarginContainer" parent="margin/music/volume"]
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 23
+theme_override_constants/margin_bottom = 15
+
+[node name="info" type="HBoxContainer" parent="margin/music/volume/state"]
+layout_mode = 2
+
+[node name="caption" type="Label" parent="margin/music/volume/state/info"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Sound"
+
+[node name="manual" type="Button" parent="margin/music/volume/state/info"]
+custom_minimum_size = Vector2(50, 20)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_styles/normal = SubResource("StyleBoxEmpty_kb2oe")
+text = "50"
+
+[node name="manual" type="Node" parent="."]
+process_mode = 4
+script = ExtResource("5_j14e8")
+
+[node name="focus" parent="manual" instance=ExtResource("8_u22ni")]
+
+[connection signal="pressed" from="margin/music/volume/state/info/manual" to="." method="focus_manual"]

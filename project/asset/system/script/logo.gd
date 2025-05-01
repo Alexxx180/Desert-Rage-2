@@ -16,15 +16,15 @@ func _input(event: InputEvent) -> void:
 	if not i in [0, 1]: return
 	var gamepad: bool = event is InputEventJoypadButton
 	var mouse: bool = event is InputEventMouseButton
+	var keyboard: bool = event is InputEventKey
 	
-	if (gamepad or mouse or event is InputEventKey) and event.pressed:
+	if (gamepad or mouse or keyboard) and event.pressed:
 		state.hide()
 		_scene_change()
 
 func _scene_change() -> void:
 	timer.stop()
-	print_debug(tree.change_scene_to_file(scene))
-	#print_debug(tree.call_deferred("change_scene_to_file", scene))
+	SessionStats.load_scene(scene)
 
 func _show() -> void:
 	i += 1

@@ -1,34 +1,64 @@
-[gd_scene load_steps=6 format=3 uid="uid://dugyepxewkmgo"]
+[gd_scene load_steps=5 format=3 uid="uid://dugyepxewkmgo"]
 
-[ext_resource type="Theme" uid="uid://oio1oqqid0vo" path="res://asset/resource/engine/internal/theme/hud.tres" id="1_mb1ob"]
-[ext_resource type="PackedScene" uid="uid://dvsup0moyqrkm" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/pause/content.tscn" id="1_y200j"]
+[ext_resource type="Theme" uid="uid://p2br8b6ea3n6" path="res://asset/resource/engine/internal/theme/patterns/template/menu/hud/pause/pause.tres" id="1_5deg3"]
 [ext_resource type="Shortcut" uid="uid://bgd4ocokxr1wj" path="res://asset/resource/engine/internal/short/cut/pause.tres" id="2_21uvd"]
 [ext_resource type="PackedScene" uid="uid://d0sq1ex503flw" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/hide.tscn" id="2_lxr78"]
 [ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/pause.gd" id="3_7tvtn"]
 
 [node name="pause" type="Button"]
-custom_minimum_size = Vector2(137, 60)
+custom_minimum_size = Vector2(60, 60)
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -50.0
-offset_right = 110.0
+offset_top = -60.0
+offset_right = 60.0
 grow_vertical = 0
 size_flags_horizontal = 0
 size_flags_vertical = 8
 tooltip_text = "Приостановить игру"
-theme = ExtResource("1_mb1ob")
+theme = ExtResource("1_5deg3")
 shortcut = ExtResource("2_21uvd")
 script = ExtResource("3_7tvtn")
 
-[node name="content" parent="." instance=ExtResource("1_y200j")]
+[node name="margin" type="MarginContainer" parent="."]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_bottom = 0.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.5
+offset_top = -20.0
+offset_right = 28.5
+offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="caption" type="Label" parent="margin"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "I I"
+
+[node name="hotkey" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -16.0
+offset_bottom = 28.0
+grow_horizontal = 0
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 10
+
+[node name="caption" type="Label" parent="hotkey"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0.588235, 0.588235, 0.588235, 1)
+theme_override_font_sizes/font_size = 12
+text = "Esc"
 
 [node name="hide" parent="." instance=ExtResource("2_lxr78")]
 

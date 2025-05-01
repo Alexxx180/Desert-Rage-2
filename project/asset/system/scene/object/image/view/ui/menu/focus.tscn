@@ -1,0 +1,32 @@
+[gd_scene load_steps=7 format=3 uid="uid://cqd4givbuukr7"]
+
+[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/settings/topics/options/topic/focus/focus.gd" id="1_ek0td"]
+[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/settings/topics/options/topic/focus/timing.gd" id="2_ufysn"]
+[ext_resource type="PackedScene" uid="uid://dga0coql425dk" path="res://asset/system/scene/object/calculus/timer/variants/action.tscn" id="3_ovvoi"]
+[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/settings/topics/options/topic/focus/mods.gd" id="4_k8yxk"]
+[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/settings/topics/options/topic/focus/keyboard.gd" id="5_4o6k1"]
+[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/settings/topics/options/topic/focus/gamepad.gd" id="6_eb5uc"]
+
+[node name="focus" type="Node"]
+script = ExtResource("1_ek0td")
+
+[node name="timing" type="Node" parent="."]
+script = ExtResource("2_ufysn")
+
+[node name="finish" type="Timer" parent="timing"]
+wait_time = 0.3
+one_shot = true
+
+[node name="action" parent="timing" instance=ExtResource("3_ovvoi")]
+period = 0.15
+
+[node name="mods" type="Node" parent="timing"]
+script = ExtResource("4_k8yxk")
+
+[node name="keyboard" type="Node" parent="."]
+script = ExtResource("5_4o6k1")
+
+[node name="gamepad" type="Node" parent="."]
+script = ExtResource("6_eb5uc")
+
+[connection signal="timeout" from="timing/finish" to="timing" method="_reset"]

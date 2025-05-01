@@ -1,0 +1,19 @@
+[gd_scene load_steps=6 format=3 uid="uid://cffwkfo0pxyg"]
+
+[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/hud/hud.gd" id="1_rgp2d"]
+[ext_resource type="PackedScene" uid="uid://dbbt75750fc4" path="res://asset/system/scene/object/image/view/ui/hud/game.tscn" id="1_rx8cy"]
+[ext_resource type="PackedScene" uid="uid://b4x588yxrcok3" path="res://asset/system/scene/object/image/view/ui/menu/settings/settings.tscn" id="2_pmpmr"]
+[ext_resource type="Resource" uid="uid://dok754m36108s" path="res://asset/resource/engine/external/manual/preview/behavior/full.tres" id="2_xamy8"]
+[ext_resource type="PackedScene" uid="uid://pexl48rcyqo7" path="res://asset/system/scene/object/image/view/ui/menu/sound/sound.tscn" id="5_yrrj2"]
+
+[node name="hud" type="Node"]
+script = ExtResource("1_rgp2d")
+progress = ExtResource("2_xamy8")
+
+[node name="game" parent="." instance=ExtResource("1_rx8cy")]
+
+[node name="settings" parent="." instance=ExtResource("2_pmpmr")]
+visible = false
+
+[node name="sound" parent="." instance=ExtResource("5_yrrj2")]
+visible = false

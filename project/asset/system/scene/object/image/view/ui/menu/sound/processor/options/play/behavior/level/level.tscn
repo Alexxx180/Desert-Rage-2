@@ -1,0 +1,20 @@
+[gd_scene load_steps=6 format=3 uid="uid://ck1q604rnidgx"]
+
+[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/sound/processor/options/play/behavior/level/level.gd" id="1_taac2"]
+[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/sound/processor/options/play/behavior/level/assert.gd" id="2_uec7k"]
+[ext_resource type="PackedScene" uid="uid://cwd8yo0un3h0k" path="res://asset/system/scene/object/image/view/ui/menu/sound/processor/options/play/behavior/level/typed/caves.tscn" id="3_nq1an"]
+[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/sound/processor/options/play/behavior/level/dungeon.gd" id="3_xo78u"]
+[ext_resource type="PackedScene" uid="uid://5ar2mf3ji27k" path="res://asset/system/scene/object/image/view/ui/menu/sound/processor/options/play/behavior/level/typed/temple.tscn" id="4_oywjg"]
+
+[node name="level" type="Node"]
+script = ExtResource("1_taac2")
+
+[node name="assert" type="Node" parent="."]
+script = ExtResource("2_uec7k")
+
+[node name="dungeon" type="Node" parent="."]
+script = ExtResource("3_xo78u")
+
+[node name="caves" parent="dungeon" instance=ExtResource("3_nq1an")]
+
+[node name="temple" parent="dungeon" instance=ExtResource("4_oywjg")]

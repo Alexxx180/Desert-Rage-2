@@ -1,4 +1,4 @@
-extends InputObserver
+extends Node
 
 @onready var tree: SceneTree = get_tree()
 

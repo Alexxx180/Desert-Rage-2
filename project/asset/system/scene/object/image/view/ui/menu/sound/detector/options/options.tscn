@@ -1,0 +1,105 @@
+[gd_scene load_steps=7 format=3 uid="uid://c85yu6373k7wr"]
+
+[ext_resource type="Theme" uid="uid://b4uvs3mj2kjx2" path="res://asset/resource/engine/internal/theme/patterns/template/button/sound.tres" id="1_pxwqc"]
+[ext_resource type="PackedScene" uid="uid://c5eqytdlesbjp" path="res://asset/system/scene/object/image/view/ui/menu/sound/detector/options/backspace/back.tscn" id="2_dtpe2"]
+[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/sound/detector/options/options.gd" id="2_ot2k7"]
+[ext_resource type="PackedScene" uid="uid://7cht3lf53hy5" path="res://asset/system/scene/object/image/view/ui/menu/sound/detector/options/play.tscn" id="3_sc6x6"]
+[ext_resource type="PackedScene" uid="uid://cl6v1poaywpn8" path="res://asset/system/scene/object/image/view/ui/menu/sound/detector/options/search/search.tscn" id="4_pgl6e"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_7wxd5"]
+
+[node name="options" type="Control"]
+custom_minimum_size = Vector2(0, 45)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 8
+theme = ExtResource("1_pxwqc")
+script = ExtResource("2_ot2k7")
+
+[node name="back" parent="." instance=ExtResource("2_dtpe2")]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -45.0
+offset_right = 45.0
+grow_vertical = 0
+
+[node name="search" parent="." instance=ExtResource("4_pgl6e")]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -77.5
+offset_top = -45.0
+offset_right = 77.5
+grow_horizontal = 2
+
+[node name="play" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="play" parent="play" instance=ExtResource("3_sc6x6")]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -45.0
+offset_top = -45.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 0
+grow_vertical = 0
+button_group = SubResource("ButtonGroup_7wxd5")
+
+[node name="skip" type="Button" parent="play"]
+visible = false
+custom_minimum_size = Vector2(45, 45)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -45.0
+offset_top = -45.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="margin" type="MarginContainer" parent="play/skip"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.5
+offset_top = -27.0
+offset_right = 10.5
+offset_bottom = 27.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 3
+
+[node name="text" type="Label" parent="play/skip/margin"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0.176471, 0.658824, 0.294118, 1)
+theme_override_constants/outline_size = 10
+text = "I▶️"

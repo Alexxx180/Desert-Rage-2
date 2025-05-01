@@ -1,0 +1,36 @@
+PLAYBACK
+
+assert LEVEL_TYPES, LEVEL_NAMES
+
+if LOCATION = LEVEL
+
+set by LEVEL_TYPE, LEVEL_NAME
+
+RAMPAGE:
+1. ambient+heating+rampage - (named / type) / hero theme
+LEVEL_NAME in HAS_BOSS[LEVEL_TYPE]:
+2. named boss / level type boss / type boss
+
+end:
+RAMPAGE = 0
+
+if (WORLD progress) town = TOWN_VALUE
+
+else LOCATION = WORLD
+
+RAMPAGE:
+1. ambient - type
+2. rampage - type / hero
+LEVEL_NAME in HAS_BOSS[LEVEL_TYPE]:
+3. named boss / type boss
+
+end:
+RAMPAGE = 0
+
+if town == TOWN_VALUE
+-  town theme
+-  town = 0
+
+set LOCATION = LEVEL
+
+PROGRESS = SUM

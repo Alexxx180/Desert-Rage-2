@@ -1,13 +1,22 @@
-[gd_scene load_steps=8 format=3 uid="uid://hvg28cmh6mji"]
+[gd_scene load_steps=14 format=3 uid="uid://hvg28cmh6mji"]
 
 [ext_resource type="PackedScene" uid="uid://b8a1vpsu5k0ct" path="res://asset/system/scene/object/image/view/ui/hud/detector/pause/menu/pause.tscn" id="1_8dw2w"]
 [ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/hud/detector/pause/options/menu/menu.gd" id="1_447re"]
+[ext_resource type="Theme" uid="uid://p2br8b6ea3n6" path="res://asset/resource/engine/internal/theme/patterns/template/menu/hud/pause/pause.tres" id="1_cpv6m"]
 [ext_resource type="PackedScene" uid="uid://15t2xvow6yly" path="res://asset/system/scene/object/image/view/ui/hud/detector/pause/menu/resume/resume.tscn" id="2_8gyh0"]
-[ext_resource type="PackedScene" uid="uid://c4crchweyh45h" path="res://asset/system/scene/object/image/view/ui/hud/detector/pause/menu/screen/screen.tscn" id="3_yufy4"]
-[ext_resource type="PackedScene" uid="uid://lp8f4l2tw7ot" path="res://asset/system/scene/object/image/view/ui/hud/detector/pause/menu/help/help.tscn" id="4_gq82q"]
+[ext_resource type="Shortcut" uid="uid://3f4gd42nvfmx" path="res://asset/resource/engine/internal/short/cut/manual.tres" id="5_0cwon"]
 [ext_resource type="PackedScene" uid="uid://cvs8byy41xeo5" path="res://asset/system/scene/object/image/view/ui/hud/detector/pause/menu/exit/exit.tscn" id="5_8a5yd"]
+[ext_resource type="InputEventKey" uid="uid://du8qgit35q7vo" path="res://asset/resource/engine/internal/short/device/keyboard/fast/f3.tres" id="6_kyek1"]
+[ext_resource type="InputEventJoypadMotion" uid="uid://63e0opsahun8" path="res://asset/resource/engine/internal/short/device/gamepad/periphery/trigger/left.tres" id="7_uttei"]
+[ext_resource type="InputEventKey" uid="uid://b781lxbqi155j" path="res://asset/resource/engine/internal/short/device/keyboard/numeric/3.tres" id="8_854iv"]
+[ext_resource type="InputEventKey" uid="uid://bsu0mw75d73w5" path="res://asset/resource/engine/internal/short/device/keyboard/numeric/4.tres" id="10_bx4hh"]
+[ext_resource type="InputEventKey" uid="uid://b6kfs327b46p5" path="res://asset/resource/engine/internal/short/device/keyboard/fast/f4.tres" id="12_3axi8"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_kxt6w"]
+[sub_resource type="Shortcut" id="Shortcut_lsiya"]
+events = [ExtResource("6_kyek1"), ExtResource("8_854iv"), ExtResource("7_uttei")]
+
+[sub_resource type="Shortcut" id="Shortcut_4ohgc"]
+events = [ExtResource("10_bx4hh"), ExtResource("12_3axi8")]
 
 [node name="menu" type="VBoxContainer"]
 anchors_preset = 14
@@ -20,30 +29,80 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
+theme = ExtResource("1_cpv6m")
 script = ExtResource("1_447re")
 
 [node name="pause" parent="." instance=ExtResource("1_8dw2w")]
 layout_mode = 2
+theme_override_constants/margin_bottom = 20
 
 [node name="resume" parent="." instance=ExtResource("2_8gyh0")]
+custom_minimum_size = Vector2(160, 60)
 layout_mode = 2
 tooltip_text = "Назад в игру"
+focus_neighbor_left = NodePath("../settings")
+focus_neighbor_top = NodePath("../exit")
+focus_neighbor_right = NodePath("../settings")
+focus_previous = NodePath("../exit")
 toggle_mode = false
 shortcut_in_tooltip = false
 
-[node name="help" parent="." instance=ExtResource("4_gq82q")]
-visible = false
+[node name="help" type="Button" parent="."]
+custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
-size_flags_horizontal = 1
-tooltip_text = "Инфомация игры"
-button_group = SubResource("ButtonGroup_kxt6w")
+focus_neighbor_left = NodePath("../exit")
+focus_neighbor_top = NodePath("../resume")
+focus_neighbor_right = NodePath("../exit")
+focus_neighbor_bottom = NodePath("../settings")
+focus_next = NodePath("../settings")
+focus_previous = NodePath("../resume")
+shortcut = ExtResource("5_0cwon")
 
-[node name="screen" parent="." instance=ExtResource("3_yufy4")]
+[node name="margin" type="MarginContainer" parent="help"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -20.0
+offset_right = 103.0
+offset_bottom = 20.0
+grow_vertical = 2
+
+[node name="caption" type="Label" parent="help/margin"]
 layout_mode = 2
-size_flags_horizontal = 1
-button_pressed = true
-shortcut_in_tooltip = false
+text = "Сведения"
+
+[node name="settings" type="Button" parent="."]
+custom_minimum_size = Vector2(160, 60)
+layout_mode = 2
+focus_neighbor_left = NodePath("../resume")
+focus_neighbor_right = NodePath("../resume")
+focus_neighbor_bottom = NodePath("../exit")
+focus_next = NodePath("../exit")
+shortcut = SubResource("Shortcut_lsiya")
+
+[node name="margin" type="MarginContainer" parent="settings"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -49.0
+offset_right = 165.0
+offset_bottom = 49.0
+grow_vertical = 2
+
+[node name="caption" type="Label" parent="settings/margin"]
+layout_mode = 2
+text = "Настройки"
 
 [node name="exit" parent="." instance=ExtResource("5_8a5yd")]
+custom_minimum_size = Vector2(160, 60)
 layout_mode = 2
 size_flags_horizontal = 1
+focus_neighbor_left = NodePath("../help")
+focus_neighbor_top = NodePath("../settings")
+focus_neighbor_right = NodePath("../help")
+focus_neighbor_bottom = NodePath("../resume")
+focus_next = NodePath("../resume")
+focus_previous = NodePath("../settings")
+shortcut = SubResource("Shortcut_4ohgc")

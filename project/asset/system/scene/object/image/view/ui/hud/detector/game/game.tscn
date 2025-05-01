@@ -1,10 +1,15 @@
-[gd_scene load_steps=6 format=3 uid="uid://cel3u88abrgv3"]
+[gd_scene load_steps=11 format=3 uid="uid://cel3u88abrgv3"]
 
+[ext_resource type="Theme" uid="uid://p2br8b6ea3n6" path="res://asset/resource/engine/internal/theme/patterns/template/menu/hud/pause/pause.tres" id="1_klae1"]
 [ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/hud/detector/game/game.gd" id="1_o71r6"]
 [ext_resource type="PackedScene" uid="uid://dugyepxewkmgo" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/pause/pause.tscn" id="1_p1rgr"]
 [ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/margin.gd" id="2_m0xgs"]
 [ext_resource type="PackedScene" uid="uid://b01p37el432af" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/hints/hints.tscn" id="2_mf7wa"]
+[ext_resource type="FontFile" uid="uid://b37js8y80ak1k" path="res://asset/resource/font/NotoColorEmoji-Regular.ttf" id="4_42m6k"]
+[ext_resource type="PackedScene" uid="uid://bcldwsqs27to7" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/hints/analyze/analyze.tscn" id="5_m2hjb"]
 [ext_resource type="PackedScene" uid="uid://cbd4idujs0m3k" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/dialog/dialog.tscn" id="5_x67kx"]
+[ext_resource type="Shortcut" uid="uid://b2haaq41erm0s" path="res://asset/resource/engine/internal/short/cut/game/analyze.tres" id="6_ijgny"]
+[ext_resource type="PackedScene" uid="uid://d0sq1ex503flw" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/hide.tscn" id="7_koglg"]
 
 [node name="game" type="Control"]
 layout_mode = 3
@@ -15,6 +20,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
+theme = ExtResource("1_klae1")
 script = ExtResource("1_o71r6")
 
 [node name="dialog" parent="." instance=ExtResource("5_x67kx")]
@@ -25,22 +31,211 @@ offset_bottom = 75.0
 grow_horizontal = 2
 size_flags_vertical = 0
 
-[node name="margin" type="MarginContainer" parent="."]
-clip_contents = true
-custom_minimum_size = Vector2(320, 200)
+[node name="menu" type="MarginContainer" parent="."]
 layout_mode = 1
-anchors_preset = 12
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="hud" type="VBoxContainer" parent="menu"]
+layout_mode = 2
+
+[node name="inventory" type="VBoxContainer" parent="menu/hud"]
+layout_mode = 2
+
+[node name="content" type="HFlowContainer" parent="menu/hud/inventory"]
+visible = false
+layout_mode = 2
+
+[node name="options" type="HBoxContainer" parent="menu/hud/inventory"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="menu" type="Button" parent="menu/hud/inventory/options"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+
+[node name="content" type="MarginContainer" parent="menu/hud/inventory/options/menu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="caption" type="Label" parent="menu/hud/inventory/options/menu/content"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "="
+
+[node name="hotkey" type="MarginContainer" parent="menu/hud/inventory/options/menu"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -648.0
+offset_left = -14.0
+offset_top = -23.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 0
+
+[node name="caption" type="Label" parent="menu/hud/inventory/options/menu/hotkey"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0.588235, 0.588235, 0.588235, 1)
+theme_override_font_sizes/font_size = 12
+text = "Alt"
+
+[node name="tab" type="Button" parent="menu/hud/inventory/options"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+
+[node name="ability" type="Button" parent="menu/hud/inventory/options"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+
+[node name="content" type="MarginContainer" parent="menu/hud/inventory/options/ability"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -22.5
+offset_top = -63.0
+offset_right = 22.5
 grow_horizontal = 2
 grow_vertical = 0
+theme_override_constants/margin_left = 17
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 5
+
+[node name="caption" type="Label" parent="menu/hud/inventory/options/ability/content"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("4_42m6k")
+theme_override_font_sizes/font_size = 36
+text = "🔥"
+
+[node name="hotkey" type="MarginContainer" parent="menu/hud/inventory/options/ability"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+offset_right = 14.0
+grow_vertical = 0
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="caption" type="Label" parent="menu/hud/inventory/options/ability/hotkey"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0.588235, 0.588235, 0.588235, 1)
+theme_override_font_sizes/font_size = 12
+text = "Y"
+
+[node name="hide" parent="menu/hud/inventory/options" instance=ExtResource("7_koglg")]
+
+[node name="metrics" type="HBoxContainer" parent="menu/hud"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="stats" type="HBoxContainer" parent="menu/hud/metrics"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="content" type="VBoxContainer" parent="menu/hud/metrics/stats"]
+visible = false
+layout_mode = 2
+
+[node name="tab" type="Button" parent="menu/hud/metrics/stats"]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="books" type="VBoxContainer" parent="menu/hud/metrics/stats"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="priority" type="HBoxContainer" parent="menu/hud/metrics"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="scroll" type="ScrollContainer" parent="menu/hud/metrics/priority"]
+layout_mode = 2
+size_flags_horizontal = 3
+vertical_scroll_mode = 0
+
+[node name="hints" parent="menu/hud/metrics/priority/scroll" instance=ExtResource("2_mf7wa")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="content" type="VBoxContainer" parent="menu/hud/metrics/priority"]
+layout_mode = 2
+
+[node name="tab" type="Button" parent="menu/hud/metrics/priority"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ability" type="VBoxContainer" parent="menu/hud"]
+layout_mode = 2
+
+[node name="content" type="HFlowContainer" parent="menu/hud/ability"]
+visible = false
+layout_mode = 2
+
+[node name="options" type="HBoxContainer" parent="menu/hud/ability"]
+layout_mode = 2
+size_flags_vertical = 3
 script = ExtResource("2_m0xgs")
 
-[node name="pause" parent="margin" instance=ExtResource("1_p1rgr")]
+[node name="pause" parent="menu/hud/ability/options" instance=ExtResource("1_p1rgr")]
 layout_mode = 2
 
-[node name="hints" parent="margin" instance=ExtResource("2_mf7wa")]
+[node name="tab" type="Button" parent="menu/hud/ability/options"]
+custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
-size_flags_vertical = 1
+size_flags_horizontal = 3
+size_flags_vertical = 8
+
+[node name="help" parent="menu/hud/ability/options" instance=ExtResource("5_m2hjb")]
+layout_mode = 2
+shortcut = ExtResource("6_ijgny")
+
+[node name="hide" parent="menu/hud" instance=ExtResource("7_koglg")]

@@ -1,6 +1,6 @@
 extends Timer
 
-@onready var state: Button
+var state: Control
 
 var fixed: bool = false
 

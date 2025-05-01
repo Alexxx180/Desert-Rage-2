@@ -1,4 +1,5 @@
 extends Control
 
-@onready var margin: MarginContainer = $margin
+@onready var options: HBoxContainer = $menu/hud/ability/options
 @onready var chat: VBoxContainer = $dialog/chat
+@onready var hints: VBoxContainer = $menu/hud/metrics/priority/scroll/hints
