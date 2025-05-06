@@ -3,7 +3,7 @@ extends RefCounted
 class_name BackendResponses
 
 var buffer: StreamPeerBuffer
-var responses
+var responses: PackedByteArray
 var length: int
 
 func put_data(seek: int) -> void:
@@ -19,8 +19,18 @@ func reverse(start: int, end: int, seek: int):
 func slice(start: int, end: int):
 	return responses.slice(start, end)
 
-func split_byte(start: int, appendix: int):
-	return split_pool_byte_array(slice(start, length + appendix), 0)
+func split_byte(start: int, appendix: int, delimiter: int = 0) -> Array:
+	var pool: PackedByteArray = slice(start, length + appendix)
+	var result: Array = []
+	var from: int = 0
+	var to: int = 0
+	
+	for byte in pool:
+		if byte == delimiter:
+			result.append(slice(from, to + 1))
+			from = to + 1
+		to += 1
+	return array
 
 # The server response can be fragmented and contain several messages, we read the first fragment then we delete it from the buffer to read the next one in the loop.
 func next_fragment() -> void

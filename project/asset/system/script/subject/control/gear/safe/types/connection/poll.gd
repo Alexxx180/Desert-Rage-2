@@ -1,6 +1,13 @@
 extends RefCounted
 
 var status_ssl: bool = false
+var peers: TransferPeers
+var _status: ConnectionMetadata
+
+func x_request() -> return request('X', PackedByteArray())
+
+func no_connection() -> void:
+	push_error(pclient + " The frontend is not connected to backend.")
 
 func ssl_deconnection(clean: bool) -> void:
 	if clean:
@@ -25,16 +32,14 @@ func close(clean_closure := true) -> void:
 			ssl_deconnection(clean_closure)
 		else:
 			client_disconnect(clean_closure)
-		
-		parameter_status = safe_dictionary()
-		error_object = safe_dictionary()
-		
+	
+		_status.reset()
 		status = Status.DISCONNECTED
 		status_ssl = 0
 		next_etape = false
 		busy = false # alpha
 		
-		emit_signal("connection_closed", clean_closure)
+		connection_closed.emit()
 	else:
 		push_warning(pclient + " The frontend was already disconnected from the backend when calling 'close'.")
 
@@ -46,14 +51,60 @@ func set_crypto() -> void:
 	# stream_peer_tls.blocking_handshake = false
 	status_ssl = 2
 
-func _get_storage():
-	return peer if status_ssl == 0 else stream_peer_tls
-
 func check_response(response, storage) -> void:
 	var text = response[1]
 	if response[0] == OK and text.size():
 		var servire = reponce_parser(text)
 		if servire: storage.put_data(servire)
+
+func set_buffered_data(request: int, before: Callable, after: Callable) -> void:
+	var buffer := StreamPeerBuffer.new()
+	before.call(buffer)
+	buffer.put_data(get_32byte_reverse(request))
+	after.call(buffer)
+
+func set_connection(client, request: int) -> void:
+	if client.get_status() == StreamPeerTCP.STATUS_CONNECTED:
+		set_buffered_data(request,
+			func(b): b.put_data(get_32ubyte_reverse(8)), # Message length bytes with self.
+			func(b): peer.put_data(b.data_array)
+		)
+	else:
+		no_connection()
+
+func set_ssl_connection() -> void: # Upgrade the connection to SSL.
+	if handshaking(stream_peer_tls):
+		push_warning(pclient + " Connection already secured with TLS/SSL.")
+	else:
+		set_connection(client, SSL) ### SSLRequest ###
+
+func set_gssapi_connection() -> void: # No use. Upgrade the connection to GSSAPI.
+	set_connection(client, GSSAPI) ### GSSENCRequest ###
+
+func set_buffered_data(request: int, before: Callable, after: Callable) -> void:
+	var buffer := StreamPeerBuffer.new()
+	before.call(buffer)
+	buffer.put_data(get_32byte_reverse(request))
+	after.call(buffer)
+
+func reverse_length(data) -> void:
+	var message_length := data
+	message_length.reverse()
+	return message_length
+
+## This function undoes all changes made to the database since the last Commit.
+func rollback(process_id: int, process_key: int, _method: int = SecureConnectionMethod.NONE) -> void:
+	if status != Status.CONNECTED: no_connection(); return
+	### CancelRequest ###
+	set_buffered_data(CANCEL,
+	func(b):
+		b.put_u32(16) # Message length bytes with self.
+		b.put_data(reverse_length(b.data_array))
+	func(b):
+		b.put_u32(process_id) # The process ID of
+		b.put_u32(process_key) # The secret key for
+		peer.put_data(b.data_array.slice(4)) # ... the target backend
+	)
 
 ## Poll the connection to check for incoming messages. Should be called before "execute" for it to work properly and called frequently in a loop.
 func poll() -> void:
@@ -107,6 +158,6 @@ func poll() -> void:
 			status_ssl = 3
 		
 		if status_ssl != 1 and status_ssl != 2 and not status == Status.CONNECTED:
-			var storage = _get_storage()
+			var storage = peers.by_ssl(status_ssl)
 			var reponce: Array = storage.get_data(storage.get_available_bytes())
 			check_response(reponce, storage)

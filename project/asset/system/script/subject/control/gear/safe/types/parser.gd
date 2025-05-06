@@ -5,15 +5,33 @@ class_name PostgreSQLClientResponseParser
 #var buffer ARE responses
 #var response_buffer
 var message_length: int
-var parameter_status # total
+var _status: ConnectionMetadata
+var note: PostgreClientNotify
 
 var responses: BackendResponses
 
-var query_result # in total
-var datas_command_sql # total
+var query_result: PostgreSQLQueryResult = PostgreSQLQueryResult.new()
+var datas_command_sql: Array = []
 
 func get_utf8(data: Array, i: int) -> String:
 	return data[i].get_string_from_utf8()
+
+func _match_response(data, value, field, keys: Dictionary, feedback: Dictionary) -> void:
+	if feedback.has(field):
+		feedback[field].call()
+	elif keys.has(field):
+		data[keys[field]] = value
+	# More field types might be added in future - unrecognized should be silently ignored.
+
+func _get_match_fields() -> Dictionary:
+	return {
+		'V': "severity_no_localized", 'C': "SQLSTATE_code",
+		'D': "detail", 'H': "hint", 'P': "position",
+		'p': "internal_position", 'q': "internal_query",
+		'W': "where", 's': "schema_name", 't': "table_name",
+		'c': "column_name", 'd': "constraint_name", 'n': "constraint_name",
+		'F': "file", 'L': "line", 'R': "routine"
+	}
 
 # Message identifiers below
 func notification_response() -> void: # Get the process ID of the notifying backend process.
@@ -66,23 +84,44 @@ func error_response() -> void: # Error body consists of one or more identified f
 		return {
 			'S': func():
 				if field.value == "FATAL":
-					parameter_status = safe_dictionary()
-					error_object = safe_dictionary()
+					_status.reset()
 					status = Status.DISCONNECTED
 					status_ssl = 0
 					connection_closed.emit() # true
 				error_object["severity"] = field.value
 			'M': func():
 				error_object["message"] = field.value
-				push_error(pclient + " " + field.value)
+				note.fail(" " + field.value)
 		}
 	)
 	
 	if error_object["severity"] == "FATAL":
-		status = Status.ERROR
-		
-		if status != Status.CONNECTED:
-			authentication_error.emit(error_object.duplicate())
+		status = Status.ERROR # Check unnessary
+		authentication_error.emit(error_object.duplicate()) # if status != Status.CONNECTED
+
+# Get the format codes to be used for each column.
+# Each must presently be zero (text) or one (binary). All must be zero if the overall copy format is textual.
+func format_column_codes(buffer, response, columns) -> void:
+	for index in columns:
+		var format_code = _reverse_response(buffer, response.slice(10, 13), 2 * index + 3)
+		format_code = buffer.get_16()
+		print(format_code) # The result.
+
+func copy_type_response(type: String) -> void:# The message "CopyResponse" identifies the message as a Start Copy response. This message will be followed by copy data.
+	responses.buffer = StreamPeerBuffer.new()
+	var overall_copy_format_code = responses.reverse(5, 7, 0)
+	overall_copy_format_code = responses.buffer.get_8() # Get overall copy format code. 0 indicates the overall COPY format is text (rows separated by newlines, columns separated by separator characters, etc). 1 indicates the overall copy format is binary (similar to DataRow format). See COPY for more information.	
+	var number_of_columns = responses.reverse(7, 10, 1)
+	number_of_columns = responses.buffer.get_16() # Get the number of columns in the data to be copied.
+	format_column_codes(buffer, response_buffer, number_of_columns)
+	
+	note.warn(" Copy" + type + "Response, no support.")
+
+func copy_data() -> void:# Identifies the message as COPY data. Get data that forms part of a COPY data stream. Messages sent from the backend will always correspond to single data rows.
+	print(responses.slice(5, message_length + 1))
+
+func copy_done() -> void: print("CopyDone")
+# Identifies the message as a COPY-complete indicator.
 
 func cancel_response() -> void: # Cancellation key data. The frontend must save these values if it wishes to be able to issue CancelRequest messages later.
 	# Get the process ID of this backend.
@@ -97,10 +136,10 @@ func status_report() -> void:
 	### ParameterStatus ### Identifies the message as a run-time parameter status report.
 	var situation_report_data := responses.split_byte(5, 1)
 	# Get the name and the value of the run-time parameter being reported.
-	var parameter: String = situation_report_data[0].get_string_from_utf8()
+	var key: String = situation_report_data[0].get_string_from_utf8()
 	var value: String = situation_report_data[1].get_string_from_utf8()
 	
-	parameter_status[parameter] = value # The result
+	_status.parameter[key] = value # The result
 
 func row_description_response() -> void: # Get the number of fields in a row (can be zero).
 	var number_of_fields_in_a_row := responses.reverse(5, 7), 4)
@@ -122,43 +161,33 @@ func row_description_response() -> void: # Get the number of fields in a row (ca
 		cursor += len(field_name)
 		
 		buffer = StreamPeerBuffer.new()
-		
+		var fields: Dictionary = {}
 		# Get the object ID of the table. If the field can be identified as a column of a specific table, the object ID of the table; otherwise zero.
-		var table_object_id = responses.reverse(cursor, cursor + 5), 0)
-		table_object_id = buffer.get_u32()
+		var table_object_id = responses.reverse(cursor, cursor + 5, 0)
+		fields.table_object_id = buffer.get_u32()
 		
 		# Get the attribute number of the column. If the field can be identified as a column of a specific table, the attribute number of the column; otherwise zero.
-		var column_index = responses.reverse(cursor + 5, cursor + 7), 4)
-		column_index = buffer.get_u16()
+		var column_index = responses.reverse(cursor + 5, cursor + 7, 4)
+		fields.column_index = buffer.get_u16()
 		
 		# Get the object ID of the field's data type.
-		var type_object_id = responses.reverse(cursor + 7, cursor + 11), 6)
-		type_object_id = buffer.get_u32()
+		var type_object_id = responses.reverse(cursor + 7, cursor + 11, 6)
+		fields.type_object_id = buffer.get_u32()
 		
 		# Get the data type size (see pg_type.typlen). Note that negative values denote variable-width types.
-		var data_type_size = responses.reverse(cursor + 11, cursor + 13), 10)
-		data_type_size = buffer.get_u16()
+		var data_type_size = responses.reverse(cursor + 11, cursor + 13, 10)
+		fields.data_type_size = buffer.get_u16()
 		
 		# Get the type modifier (see pg_attribute.atttypmod). The meaning of the modifier is type-specific.
-		var type_modifier = responses.reverse(cursor + 13, cursor + 17), 12)
-		type_modifier = buffer.get_u32()
+		var type_modifier = responses.reverse(cursor + 13, cursor + 17, 12)
+		fields.type_modifier = buffer.get_u32()
 		
 		# Get the format code being used for the field. Currently will be zero (text) or one (binary). In a RowDescription returned from the statement variant of Describe, the format code is not yet known and will always be zero.
-		var format_code = responses.reverse(cursor + 17, cursor + 19), 16)
-		format_code = buffer.get_u16()
+		var format_code = responses.reverse(cursor + 17, cursor + 19, 16)
+		fields.format_code = buffer.get_u16()
 		
 		cursor += 19
-		
-		# The result.
-		query_result.row_description.append({
-			"field_name": field_name,
-			"table_object_id": table_object_id,
-			"column_index": column_index,
-			"type_object_id": type_object_id,
-			"data_type_size": data_type_size,
-			"type_modifier": type_modifier,
-			"format_code": format_code
-		})
+		query_result.row_description.append(fields)# The result.
 
 func ready_for_query(): # Identifies the message type. ReadyForQuery is sent whenever the backend is ready for a new query cycle. Get current backend transaction status indicator.
 	var transaction_status: TransactionStatus
@@ -222,51 +251,55 @@ func negotiate_version_response() -> void:# Identifies the message as a protocol
 func no_data() -> void: pass # As no-data indicator.
 func ready_for_query_suspended() -> void: pass # Portal-suspended indicator. Appears only if an Execute message's row-count limit was reached.
 func empty_query_response() -> void: pass # Identifies the message as a response to an empty query string. (This substitutes for CommandComplete.)
+func parse_complete() -> void: pass # Identifies the message as a Parse-complete indicator.# Identifies the message as a Parse-complete indicator.
+func bind_complete() -> void: pass # Identifies the message as a Bind-complete indicator.
+func close_complete() -> void: pass # Identifies the message as a Close-complete indicator.
+
+func function_call_response() -> void:# Identifies the message as a function call result.
+	print("FunctionCallResponse no implemented.")
 
 func unrecognized_response() -> void: # Close the backend connection if message type unrecognized.
 	status = Status.ERROR
 	types.add._end_response(response_buffer, " The type of message sent by the backend is not recognized: " + message_type)
 
+func get_response_length() -> bool:
+	responses.buffer := StreamPeerBuffer.new()
+	var data_length = _get_reverse_response(buffer, response_buffer, 1, 5)
+	message_length = buffer.get_u32()
+	return responses.size() < message_length + 1
+
+func client_connected() -> bool:
+	return client.get_status() == StreamPeerTCP.STATUS_CONNECTED
+
 func response_parser(fragmented_answer: PackedByteArray):
 	#response_buffer += fragmented_answer
 	responses.responses += fragmented_answer
-	
-	while response_buffer.size() > 4:
-		# Get the length of the response.
-		responses.buffer := StreamPeerBuffer.new()
-		var data_length = _get_reverse_response(buffer, response_buffer, 1, 5)
-		message_length = buffer.get_u32()
-		
-		# If the size of the buffer is not equal to the length of the message, the request is not processed immediately. The server may send a fragmented response. We must therefore wait to receive the full response.
-		if response_buffer.size() < message_length + 1: break
-		
+	while responses.size() > 4 and client_connected() and get_response_length(): # If the size of the buffer is not equal to the length of the message, the request is not processed immediately. The server may send a fragmented response. We must therefore wait to receive the full response.
 		var message_type = char(response_buffer[0])
 		match message_type:
 			'A': notification_response()
 			'C': command_complete()
 			'D': data.row_response()
 			'E': error_response()
-			'G': copy_type_response(buffer, response_buffer, "In")
-			'H': copy_type_response(buffer, response_buffer, "Out")
+			'G': copy_type_response("In")
+			'H': copy_type_response("Out")
 			'N': notice_response()
 			'I': empty_query_response()
 			'K': cancel_response()
 			'R': auth._response()
 			'S': status_report()
 			'T': row_description_response()
-			'V': push_error("FunctionCallResponse no implemented.")### FunctionCallResponse ### Identifies the message as a function call result.
-			'W': copy_type_response(buffer, response_buffer, "Both")
+			'V': function_call_response()
+			'W': copy_type_response("Both")
 			'Z': return ready_for_query()
-			'c': print("CopyDone") ### CopyDone ### Identifies the message as a COPY-complete indicator.
-			'd': print(responses.slice(5, message_length + 1)) ### CopyData ### Identifies the message as COPY data. Get data that forms part of a COPY data stream. Messages sent from the backend will always correspond to single data rows.
+			'c': copy_done()
+			'd': copy_data()
 			'n': no_data()
 			's': ready_for_query_suspended()
 			't': parameter_description_response()
 			'v': negotiate_version_response()
-			'1': pass ### ParseComplete ### Identifies the message as a Parse-complete indicator.
-			'2': pass ### BindComplete ### Identifies the message as a Bind-complete indicator.
-			'3': pass ### CloseComplete ### Identifies the message as a Close-complete indicator.
-			_:
-		if not 
+			'1': parse_complete()
+			'2': bind_complete()
+			'3': close_complete()
+			_: unrecognized_response()
 		responses.next_fragment()
-		if client.get_status() != StreamPeerTCP.STATUS_CONNECTED: break

@@ -2,22 +2,18 @@ extends RefCounted
 
 class_name PostgreSQLTypeRecognize
 
+var note: PostgreClientNotify
+
+func to_float(resultg no: int): return result.strings[no].to_float()
+
 func get_number_from_hex(hex, i) -> int:
 	return (hex[i + 1] + hex[i + 2]).hex_to_int()
 
-func _force_close(message: String) -> void:
-	push_error(pclient + message)
-	close(false)
-
-func _end_response(response, message: String) -> void:
-	_force_close(message)
-	response.resize(0)
-
 func _end_regex_response(response, error, type: String) -> void:
-	_end_response(response, str(" RegEx compilation of ", type, " object failed. Error: ", error))
+	note.end_response(response, str(" RegEx compilation of ", type, " object failed. Error: ", error))
 
 func _end_invalid_response(response, type: String, postfix: String = "") -> void:
-	_end_response(response, " The backend sent an invalid " + type + " object." + postfix)
+	note.end_response(response, " The backend sent an invalid " + type + " object." + postfix)
 
 func _boolean(row, unhandled_input) -> bool:
 	var _stop: bool = false
@@ -26,7 +22,7 @@ func _boolean(row, unhandled_input) -> bool:
 		't': row.append(true) ### TRUE ###
 		'f': row.append(false) ### FALSE ###
 		_:
-			_force_close(" The backend sent an invalid BOOLEAN object. Column value is not recognized: '%c'." % value)
+			note.force_close(" The backend sent an invalid BOOLEAN object. Column value is not recognized: '%c'." % value)
 			_stop = true
 	return _stop
 
@@ -75,7 +71,7 @@ func _json(row: Array, value_data, response, type: String = "JSON") -> bool: # R
 	var _stop = json_error != OK
 	
 	if _stop:
-		_end_response(response, " The backend sent an invalid %s object: %s (Error line: %d, Error code: %d)." % [type, json.get_error_message(), json.get_error_line(), json_error])
+		note.end_response(response, " The backend sent an invalid %s object: %s (Error line: %d, Error code: %d)." % [type, json.get_error_message(), json.get_error_line(), json_error])
 	else: # The result.
 		row.append(json_string)
 	return _stop
@@ -86,7 +82,7 @@ func _json_binary(row: Array, value_data, response) -> void: # Returns String as
 func _ip_address(row: Array, value_data) -> void:
 	var text = value_data.get_string_from_ascii()
 	if not text.is_valid_ip_address():
-		push_warning(pclient + " IP address present isn't valid: " + text)
+		note.warn(" IP address present isn't valid: " + text)
 	row.append(text)
 
 func _latin(row: Array, value_data, response) -> void:
