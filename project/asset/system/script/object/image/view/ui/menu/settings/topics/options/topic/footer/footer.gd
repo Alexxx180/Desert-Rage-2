@@ -1,5 +1,7 @@
 extends Button
 
+class_name TopicFooter
+
 @onready var topic: VBoxContainer = get_parent()
 @onready var header: Button = topic.get_node("../header")
 

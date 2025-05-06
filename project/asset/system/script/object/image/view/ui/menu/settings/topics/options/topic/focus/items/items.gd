@@ -40,11 +40,13 @@ func setup(game: Control) -> void:
 
 func set_transition(hud: CanvasLayer, topic: Control) -> void:
 	hud.visibility_changed.connect(func():
-		if hud.visible and topic.visible: _grab_focus(0)
+		if hud.visible and topic.visible: topic.topic.focused = false
+			#_grab_focus(0)
 		Processors.turn(_focus, hud.visible and topic.visible)
 	)
 	topic.visibility_changed.connect(func():
-		if hud.visible and topic.visible: _grab_focus(0)
+		if hud.visible and topic.visible: topic.topic.focused = false
+			#_grab_focus(0)
 		Processors.turn(_focus, hud.visible and topic.visible)
 	)
 	for slider in grabbed:

@@ -21,11 +21,13 @@ func _ready() -> void:
 			add_theme_icon_override("grabber", Defaults.TEXTURE)
 	)
 
+func get_root() -> String: return "../../../../../../"
+
 func get_neighbor() -> String:
 	return "../" + name + "/margin/music/volume/state/info/manual"
 
 func set_neighbor(left: String, right: String) -> void:
-	var root: String = "../../../../../../"
+	var root: String = get_root()
 	submit.focus_neighbor_left = root + left
 	submit.focus_neighbor_right = root + right
 
@@ -50,18 +52,24 @@ func set_manual(next: bool) -> void:
 	Processors.turn(manual, _manual)
 	hold_focus.emit(!next)
 
+func check_actions(event: InputEvent) -> void:
+	var actions: Array[String] = ["ui_cancel", "ui_accept", "list_right",
+		"list_left", "list_up", "list_down", "ui_focus_next", "ui_focus_prev"]
+	var i: int = actions.size() - 1
+	var minimum: int = -1
+	while i > minimum and not Input.is_action_just_pressed(actions[i]):
+		i -= 1
+	if i > minimum:
+		set_manual(false)
+		match actions[i]:
+			"ui_accept": submit.find_next_valid_focus().grab_focus()
+			#"ui_focus_next": submit.find_next_valid_focus().grab_focus()
+			#"ui_focus_prev": submit.find_prev_valid_focus().grab_focus()
+			_: submit.grab_focus()
+
 func _input(event: InputEvent) -> void:
 	if not _manual: return
 	if event is InputEventMouseButton:
 		set_manual(false)
-		return
-	
-	for action in ["ui_cancel", "ui_accept", "list_right", "list_left", "list_up", "list_down"]:
-		if Input.is_action_just_pressed(action):
-			set_manual(false)
-			if action == "ui_accept":
-				submit.find_next_valid_focus().grab_focus()
-			else:
-				submit.grab_focus()
-			return
-	
+	else:
+		check_actions(event)

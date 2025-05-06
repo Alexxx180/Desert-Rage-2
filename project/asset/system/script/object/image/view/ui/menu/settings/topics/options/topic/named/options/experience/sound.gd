@@ -16,6 +16,9 @@ func get_sound(items: FocusedItems) -> void:
 	items.grabbed.push_back(music)
 	items.grabbed.push_back(sound)
 	items.grabbed.push_back(interface)
+	var footer: Button = get_node("../footer")
+	for slider in items.grabbed:
+		slider.hold_focus.connect(footer.set_controls)
 	music.set_neighbor("../../../header", sound.get_neighbor())
 	sound.set_neighbor(music.get_neighbor(), interface.get_neighbor())
 	interface.set_neighbor(sound.get_neighbor(), "../system")

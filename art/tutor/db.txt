@@ -1,0 +1,64 @@
+1-2. Выбор темы & Согласовать тему
+
+Разработка функционала облачного сохранения прогресса для ролевой видеоигры
+
+3-4. Проектирование & Утверждение БД
+
+Таблицы - 7 штук
+
+Игрок:
+- id primary UUID
+- Имя string
+- Создан datetime
+- Последний сеанс datetime
+- Сведения foreign UUID
+- Команда foreign UUID
+- Настройки foreign UUID
+- Статистика foreign UUID
+
+Команда:
+- id primary UUID
+- Рей id foreign
+- Рок id foreign
+- Локация int
+- Местоположение Vector2
+
+Герой:
+- id primary UUID
+- Имя string
+- Самочувствие json
+- Инвентарь json
+
+Локация:
+- id primary UUID
+- Команда id foreign
+- Название string
+- Уровень json
+- Карта json
+
+Настройки:
+- id primary UUID
+- Предпочтения json
+- Управление json
+
+Статистика:
+- id primary UUID
+- Сложность int
+- Время date
+- Побед int
+- Поражений int
+- Сохранений int
+- Макс. комбо int
+- Метаданные json
+
+Сведения:
+- id primary UUID
+- Книги json
+- Записки json
+- Бестиарий json
+- Способности json
+
+
+5-6. БД PostgreSQL + Приложение
+
+Godot + adapter - "сейф" в игровом исполнении, облачное хранилище игровых данных

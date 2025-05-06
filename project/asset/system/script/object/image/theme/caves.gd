@@ -17,8 +17,10 @@ func set_tracks() -> void:
 	_mixed = ost.type.theme.mix
 	if _has_level(ost):
 		_set = ost.name[caption].set
+		i = ost.name[caption].at
 	else:
-		_set = ost.type.theme
+		_set = ost.type.theme.set
+		i = ost.type.theme.at
 	set_playback()
 
 func stop_timing() -> void: pass

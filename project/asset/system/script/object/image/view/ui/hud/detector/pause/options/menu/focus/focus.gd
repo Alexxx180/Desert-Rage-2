@@ -1,18 +1,18 @@
-extends VBoxContainer
+extends Node
 
-@onready var resume: Button = $resume
-@onready var help: Button = $help
-@onready var settings: Button = $settings
-@onready var exit: Button = $exit
-
+var options: Array#[Control]
 var focused: bool = true
+var mouse_check: bool = false
 
-func _input(_event: InputEvent) -> void:
+func _input(event: InputEvent) -> void:
 	if focused: return
+
+	if mouse_check and event is InputEventMouseButton:
+		focused = false
+		return
 
 	var pressed: bool = focused
 	var acts: Array[String] = ["down", "up", "left", "right", "focus_next", "focus_prev"]
-	var options: Array[Button] = [exit, resume, exit, resume, exit, resume] # right help
 	var i: int = acts.size()
 
 	while i > 0 and not (pressed or focused):

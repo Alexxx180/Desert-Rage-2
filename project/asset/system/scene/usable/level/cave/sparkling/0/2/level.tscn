@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://diym5yp6qvcno"]
+[gd_scene load_steps=11 format=4 uid="uid://diym5yp6qvcno"]
 
 [ext_resource type="PackedScene" uid="uid://d0i3jl2uefg53" path="res://asset/system/scene/object/image/level/tilemap/border.tscn" id="1_2sa2h"]
 [ext_resource type="PackedScene" uid="uid://rlwfnl6rvpkj" path="res://asset/system/scene/object/image/level/tilemap/execute.tscn" id="2_o3ps3"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://cffwkfo0pxyg" path="res://asset/system/scene/object/image/view/ui/hud/hud.tscn" id="7_2afkj"]
 [ext_resource type="PackedScene" uid="uid://b3oh6t5q4y0ub" path="res://asset/system/scene/object/image/view/sight/transition/stairs/down/end.tscn" id="7_vnhea"]
 [ext_resource type="PackedScene" uid="uid://bsumfxiuy47r" path="res://asset/system/scene/object/image/level/theme/caves.tscn" id="8_7ie5e"]
+[ext_resource type="Script" path="res://asset/system/script/subject/control/gear/safe/database.gd" id="10_hr0ed"]
 
 [node name="level" type="Node2D"]
 y_sort_enabled = true
@@ -36,5 +37,8 @@ process_mode = 3
 
 [node name="transition" parent="." instance=ExtResource("7_vnhea")]
 visible = false
+
+[node name="database" type="Node" parent="."]
+script = ExtResource("10_hr0ed")
 
 [connection signal="finished" from="ost" to="ost" method="_finished"]
