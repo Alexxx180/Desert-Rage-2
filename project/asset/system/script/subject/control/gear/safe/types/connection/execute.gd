@@ -3,6 +3,10 @@ extends RefCounted
 class_name ExecutePostgreRequest
 
 var note: PostgreClientNotify
+var credit: EncryptionCredentials
+var op: BufferOperations
+
+var _status: ConnectionMetadata
 
 func decide_port(port: String) -> int:
 	return port.to_int() if port else PORT
@@ -14,32 +18,25 @@ func _process_url_string(url: String):
 	return regex.search(url)
 	#'port=5432 dbname=test_database user=tester password=test_password';
 
-func _set_main_connect() -> void:
+func _set_main_connect(result) -> void:
 	if stream_peer_ssl.get_status() == stream_peer_ssl.STATUS_CONNECTED:
-		stream_peer_ssl.put_data(startup_message)
+		stream_peer_ssl.put_data(op.startup_message)
 	elif not client.is_connected_to_host() and client.get_status() == StreamPeerTCP.STATUS_NONE:
 		error = client.connect_to_host(result.strings[3], port)
 
-func to_utf8(result, no: int): return result.strings[no].to_utf8_buffer()
-
-func ascii(source: String): return source.to_ascii_buffer()
-
-func byte() -> PackedByteArray: return PackedByteArray([0])
-
 ## Allows you to connect to a Postgresql backend at the specified url.
 func connect_to_host(url: String, method: SecureConnectionMethod = SecureConnectionMethod.NONE, _connect_timeout := 30) -> int:
-	global_url = url
+	credit.url = url
 	secure_connection_method_buffer = method# secure_connection_method
 	var error := 1
 	
 	if status == Status.CONNECTED: close(false) # Disconnect if already connected.
 
 	var result = _process_url_string(url)
-	if result: ### StartupMessage ### "postgres" is the database and user by default.
-		startup_message = request("", ascii("user") + byte() + to_utf8(result, 1) + byte() + ascii("database") + byte() + to_utf8(result, 5) + PackedByteArray([0, 0]))
-		
-		password_global = result.strings[2]
-		user_global = result.strings[1]
+	if result: # "postgres" is the database and user by default.
+		op.startup_message(result.strings)
+
+		credit.set_data(result.strings)
 		var port: int = decide_port(result.strings[4])
 		
 		# _set_main_connect()
@@ -47,12 +44,12 @@ func connect_to_host(url: String, method: SecureConnectionMethod = SecureConnect
 			error = client.connect_to_host(result.strings[3], port)
 		
 		if error == OK: # Get the fist message of server.
-			next_etape = true
+			_status.next_etape = true
 		else:
-			note.fail("Invalid host Postgres.")
+			note.fail("no_host")
 	else:
 		status = Status.ERROR
-		note.fail("Invalid Postgres URL.")
+		note.fail("no_url")
 	
 	return error
 
@@ -71,11 +68,11 @@ func client_active(client) -> bool:
 ## Send SQL query to run on the backend. "sql" contains one or more valid SQL statements.
 func execute(sql: String) -> Variant:
 	if status == Status.CONNECTED:
-		if not busy: # alpha
-			var request_result := request('Q', sql.to_utf8_buffer() + byte())
+		if not _status.busy: # alpha
+			var request_result := credit.request('Q', sql.to_utf8_buffer() + byte())
 			
 			determine_data(stream_peer_tls, request_result)
-			busy = true
+			_status.busy = true
 			determine_data(stream_peer_tls, request_result)
 
 			var result = null
@@ -96,11 +93,11 @@ func execute(sql: String) -> Variant:
 				if response[0] == OK:
 					result = response_parser(response[1])
 				else:
-					note.warn(" Backend didn't send any data / a problem encountered while the backend sent a response to the request.")
+					note.warn("no_data")
 			return [] if result == null else result
 			#return OK
 			#return ERR_BUSY
 	else:
-		note.fail(" No connection to backend.")
+		note.fail("no_connection")
 	return []
 	#return ERR_CONNECTION_ERROR

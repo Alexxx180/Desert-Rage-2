@@ -2,7 +2,15 @@ extends RefCounted
 
 var status_ssl: bool = false
 var peers: TransferPeers
-var _status: ConnectionMetadata
+var _connection: ConnectionMetadata
+
+enum SecureConnectionMethod { NONE, SSL, GSSAPI } ## Secure: insecure, SSL/TLS, GSSAPI
+
+enum { # Significant pair of 16 bits: 1234 the most;
+	CANCEL = 80877102 # Cancel request code. 5678 the least
+	SSL = 80877103 # SSL request code. 5679 the least.
+	GSSAPI = 80877104 # GSSAPI Encryption code. 5680 the least
+} # To avoid confusion codes aren't same as any protocol ver. number.
 
 func x_request() -> return request('X', PackedByteArray())
 
@@ -15,8 +23,7 @@ func ssl_deconnection(clean: bool) -> void:
 	stream_peer_tls.disconnect_from_stream()
 
 func client_disconnect(clean: bool) -> void:
-	if clean:
-		peer.put_data(x_request())
+	if clean: peer.put_data(x_request())
 	client.disconnect_from_host()
 
 func _set_bad_connection_status(message: String) -> void:
@@ -33,11 +40,10 @@ func close(clean_closure := true) -> void:
 		else:
 			client_disconnect(clean_closure)
 	
-		_status.reset()
+		_connection.reset()
 		status = Status.DISCONNECTED
 		status_ssl = 0
-		next_etape = false
-		busy = false # alpha
+		_connection.not_busy()
 		
 		connection_closed.emit()
 	else:
@@ -114,14 +120,14 @@ func poll() -> void:
 		if handshaking(stream_peer_tls):
 			stream_peer_tls.poll()
 		
-		if next_etape:
+		if _status.next_etape:
 			if secure_connection_method_buffer == SecureConnectionMethod.SSL:
 				set_ssl_connection() ### SSLRequest ###
 			else:
 				peer.put_data(startup_message)
 				startup_message = PackedByteArray()
 			
-			next_etape = false
+			_connection.next_etape = false
 		
 		if status_ssl == 1:
 			var response = peer.get_data(peer.get_available_bytes())
@@ -138,7 +144,7 @@ func poll() -> void:
 			else:
 				push_warning(pclient + " The backend did not send any data or there must have been a problem while the backend sent a response to the request.")
 		
-		if status == Status.CONNECTED and busy:
+		if status == Status.CONNECTED and _status.busy:
 			var response: Array = [OK, PackedByteArray()]
 			
 			if stream_peer_tls.get_status() == stream_peer_tls.CONNECTED:

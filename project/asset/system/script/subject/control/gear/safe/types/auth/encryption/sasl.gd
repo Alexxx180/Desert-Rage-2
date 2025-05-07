@@ -4,45 +4,49 @@ class_name EncryptionSASL
 
 var _stop: bool = false
 var peers: TransferPeers
+var credit: EncryptionCredentials
 # Authentication SASL
 var client_first_message: String 
 var salted_password: PackedByteArray
 var auth_message: String
 
+func dig_key2(key_1: PackedByteArray) -> void:
+	for index in key_1.size():
+		key_2[index] ^= key_1[index]
+
+func dig_key1(hash_type: int, password: PackedByteArray, key_1: PackedByteArray) -> void:
+	for _index in iterations - 1:
+		key_1 = crypto.hmac_digest(hash_type, password, key_1)
+		dig_key2(key1)
+
 func pbkdf2(hash_type: int, password: PackedByteArray, salt: PackedByteArray, iterations := 4096, length := 0) -> PackedByteArray:
 	const END = 0xFF
-	var crypto := Crypto.new()
-	var hash_length := len(crypto.hmac_digest(hash_type, salt, password))
+	var crypto: Crypto = Crypto.new()
+	var hash_length: int = len(crypto.hmac_digest(hash_type, salt, password))
 
 	if length == 0: length = hash_length
 	
-	var output := PackedByteArray()
+	var output: PackedByteArray = PackedByteArray()
 	var block_count: int = ceil(length / float(hash_length))
 	
-	var buffer := PackedByteArray()
+	var buffer: PackedByteArray = PackedByteArray()
 	buffer.resize(4)
 	
 	for block in block_count:
-		for i in 3:
-			buffer[i] = (int(block + 1) >> (24 - 8 * i)) & END
+		for i in 3: buffer[i] = (int(block + 1) >> (24 - 8 * i)) & END
 		buffer[3] = int(block + 1) & END
 		
 		var key_1 := crypto.hmac_digest(hash_type, password, salt + buffer)
 		var key_2 := key_1
-		
-		for _index in iterations - 1:
-			key_1 = crypto.hmac_digest(hash_type, password, key_1)
-			
-			for index in key_1.size():
-				key_2[index] ^= key_1[index]
-		
+		dig_key1(hash_type, password, key_1)
+
 		output += key_2
 	
 	return output.slice(0, hash_length)
 
 func _get_reversed(buffer, method: Callable) -> PackedByteArray:
 	method.call(buffer)
-	var bytes := buffer.data_array
+	var bytes: = buffer.data_array
 	bytes.reverse()
 	return bytes
 
@@ -59,34 +63,18 @@ func parse_version(buffer) -> void:# Version parsing
 	for char_number in str(major).pad_zeros(zeros) + str(minor).pad_zeros(zeros):
 		buffer.put_data(PackedByteArray([char_number.to_int()]))
 
-func request(type_message: String, message := PackedByteArray()) -> PackedByteArray:
-	# Get the size of message.
-	var buffer := StreamPeerBuffer.new()
-	var message_length := _get_reversed(buffer, func(b): b.put_u32(message.size() + (4 if type_message else 8)))
-	
-	# If the message is not StartupMessage...
-	if type_message: buffer.put_8(type_message.unicode_at(0))
-	
-	buffer.put_data(message_length)
-	
-	# If the message is StartupMessage...
-	if type_message.is_empty(): parse_version(buffer)
-	
-	buffer.put_data(message)
-	error_object = {}
-	
-	return buffer.data_array.slice(4)
+func _get_sha_256_hex(postfix: String) -> PackedByteArray:
+	return ("SCRAM-SHA-256" + postfix).to_ascii_buffer()
 
-func scram_sha_256(type = 'n', postfix = ""):# Identifies the message as an initial SASL response. Note that this is also used for GSSAPI, SSPI and no_implementation(name)word response messages. The exact message type is deduced from the context.
-	var crypto := Crypto.new()
+func scram_sha_256(type: String = 'n', postfix: String = ""): # SASL. Also used for GSSAPI, SSPI and not implemented messages.
+	var crypto := Crypto.new() # The exact message type is deduced from the context.
 	var nonce = Marshalls.raw_to_base64(crypto.generate_random_bytes(24))
 	
 	client_first_message = "%c,,n=%s,r=%s" % [type, "", nonce] # When SCRAM-SHA-256 is used in PostgreSQL, the server will ignore the user name that the client sends in the client-first-message. The user name that was already sent in the startup message is used instead.
 	
 	var len_client_first_message := get_32ubyte_reverse(len(client_first_message))
-	var sasl_initial_response := request('p', ("SCRAM-SHA-256" + postfix).to_ascii_buffer() + byte() + len_client_first_message + client_first_message.to_utf8_buffer())
-	peers.by_connection().put_data(sasl_initial_response)
-	responses.resize(0)
+	var sasl_initial_response := op.p(responses, _get_sha_256_hex(postfix) + byte() + len_client_first_message + client_first_message.to_utf8_buffer())
+	peers.by_connection().put_data(sasl_initial_response) # responses.resize(0)
 
 func scram_sha_256_plus() -> void:# Not done implementing SCRAM-SHA-256-PLUS
 	_stop = false
@@ -117,11 +105,10 @@ func encryption_continue() -> bool:# Specifies that this message contains a SASL
 	
 	var client_final_message := "c=biws,r=%s" % [server_nonce]
 	
-	# On devrait passer le mot de passe (password_global) dans la fonction SASLprep (rfc7613) (or SASLprep, rfc4013) non implémenté si desous...
-	salted_password = pbkdf2(HashingContext.HASH_SHA256, password_global.to_utf8_buffer(), server_salt, server_iterations)
-	
+	# On devrait passer le mot de passe (credit.word) dans la fonction SASLprep (rfc7613) (or SASLprep, rfc4013) non implémenté si desous...
+	salted_password = pbkdf2(HashingContext.HASH_SHA256, credit.word.to_utf8_buffer(), server_salt, server_iterations)
+
 	var crypto = Crypto.new()
-	
 	var client_key = crypto.hmac_digest(HashingContext.HASH_SHA256, salted_password, "Client Key".to_ascii_buffer())
 	
 	var hashing_context = HashingContext.new()
@@ -131,7 +118,6 @@ func encryption_continue() -> bool:# Specifies that this message contains a SASL
 	
 	# AuthMessage is just a concatenation of the initial client message, server challenge, and client response (without ClientProof).
 	var client_first_message_bare = client_first_message.substr(3)
-	
 	client_first_message = ""
 	
 	auth_message = client_first_message_bare + ',' + server_first_message + ',' + client_final_message
@@ -162,7 +148,6 @@ func encryption_end() -> bool:# Specifies that SASL authentication has completed
 	salted_password.resize(0)
 	
 	var server_signature = crypto.hmac_digest(HashingContext.HASH_SHA256, server_key, auth_message.to_utf8_buffer())
-	
 	auth_message = ""
 	
 	var server_proof := PackedByteArray()
@@ -170,7 +155,5 @@ func encryption_end() -> bool:# Specifies that SASL authentication has completed
 		server_proof.append(server_key[index] ^ server_signature[index])
 	
 	_stop = get_server_proof(server_signature)
-	if _stop:
-		# /!\ We should normally trigger the "authentication_error" signal but it is still not implemented... /!\
-		types.add._end_response(" An error occurred during SASL authentication. The SCRAM dialogue between the frontend and the backend does not end as expected. The server could not prove that it was in possession of ServerKey. The backend does not seem reliable for the frontend. The authentication attempt failed. Connection between frontend and backend interrupted.")
+	if _stop:  note.end_response("sasl_auth_error") # /!\ "authentication_error" signal not properly implemented...
 	return _stop

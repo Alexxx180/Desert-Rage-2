@@ -4,22 +4,25 @@ class_name PostgreClientNotify
 
 signal close(clean: bool)
 
-var busy: bool = false
+var message: BackendMessage = BackendMessage.new()
 
 var unique_id: int
 var client: String:
 	get: return "[PostgreSQLClient:%d]" % unique_id
 
-func fail(message: String) -> void:
-	push_error(client + message)
+func check(key: String) -> String:
+	return client + message.backend[key] if message.backend.has(key) else key
 
-func warn(message: String) -> void:
-	push_warning(client + message)
+func fail(message: String, postfix: String = "") -> void:
+	push_error(check(message) + postfix)
 
-func force_close(message: String) -> void:
-	note.fail(message)
+func warn(message: String, postfix: String = "") -> void:
+	push_warning(check(message) + postfix)
+
+func force_close(message: String, postfix: String = "") -> void:
+	fail(message, postfix)
 	close.emit(false)
 
-func end_response(response: BackendResponses, message: String) -> void:
-	force_close(message)
-	response.resize(0
+func end_response(response: BackendResponses, message: String, postfix: String = "") -> void:
+	force_close(message, postfix)
+	response.resize(0)
