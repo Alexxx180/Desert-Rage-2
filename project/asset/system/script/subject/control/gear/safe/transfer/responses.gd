@@ -3,50 +3,47 @@ extends RefCounted
 class_name BackendResponses
 
 var buffer: StreamPeerBuffer
-var responses: PackedByteArray
-var length: int
-var cursor: int
+var responses: PackedByteArray #var length: int #var cursor: int
+var message: Dictionary = { "length": 0, "cursor": 0, "start": 0, "end": 0 }
 
 func put_data(seek: int) -> void:
 	buffer.put_data(responses)
 	buffer.seek(seek)
 
-func get_current() -> int:
-	return responses[length]
+func get_first() -> int: return responses[0]
+func get_current() -> int: return responses[length]
+func resize(next: int = 0) -> void: responses.resize(next)
+func _range(start: int, end: int) -> void:
+	message.end = end; message.start = start
+
+func _appendix(basis: int, a: int = -1, b: int = -1) -> void:
+	if b == -1: 
+		_range(message.cursor, basis + a)
+		if basis == message.cursor: message.cursor = end
+	else: _range(a, b)
 
 func reverse(seek: int, start: int = -1, end: int = -1):
-	if end == -1:
-		end = cursor + (2 if start == -1 else start)
-		start = cursor
-		cursor = end
-	var response = slice(start, end)
+	_appendix(message.cursor, start, end)
+	var response = responses.slice(message.start, message.end)
 	response.reverse()
 	put_data(seek)
 	return buffer
 
 func slice(start: int = -1, end: int = -1):
-	if end == -1:
-		end = length
-		if start != -1: end += start
-		start = cursor
-	return responses.slice(start, end)
+	_appendix(message.length, start, end)
+	return responses.slice(message.start, message.end)
 
 func split_byte(start: int, appendix: int, delimiter: int = 0) -> Array:
-	var pool: PackedByteArray = slice(start, length + appendix)
-	var result: Array = []
-	var from: int = 0
-	var to: int = 0
-	
+	var pool: PackedByteArray = slice(start, message.length + appendix)
+	var split: Dictionary = { "result": [], "from": 0, "to": 0 }
 	for byte in pool:
 		if byte == delimiter:
-			result.append(slice(from, to + 1))
-			from = to + 1
-		to += 1
-	return array
+			split.result.append(slice(split.from, split.to + 1))
+			split.from = split.to + 1
+		split.to += 1
+	return result
 
-# Server response can be fragmented and contain several messages, we read the first then we delete it from the buffer to read the next one in the loop.
-func next_fragment() -> void
-	if responses.size() != length + 1:
-		responses = responses.slice(length + 1)
-	else:
-		responses.resize(0)
+func next_fragment() -> void # There may be several messages - read first,
+	var next: int = length + 1 # delete from buffer to read next in the loop.
+	if responses.size() == next: resize(0)
+	else: responses = responses.slice(next)

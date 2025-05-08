@@ -34,7 +34,6 @@ var user_global: String
 
 var client := StreamPeerTCP.new()
 var peerstream := PacketPeerStream.new()
-var stream_peer_ssl = StreamPeerSSL.new()
 
 var peer: StreamPeer
 func _init() -> void:

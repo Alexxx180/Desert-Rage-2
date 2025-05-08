@@ -6,11 +6,6 @@ class_name PostgreSQLClient
 
 ## Version number (minor.major) of the PostgreSQL protocol used when connecting to the backend.
 const PROTOCOL_VERSION := 3.0
-const PORT: int = 5432 # Default PostgreSQL port
-
-enum Status { DISCONNECTED, CONNECTING, CONNECTED, ERROR } ## Connection presentation
-
-var status = Status.DISCONNECTED # The status of the connection.
 
 var secure_connection_method_buffer: SecureConnectionMethod = SecureConnectionMethod.NONE
 
@@ -20,7 +15,6 @@ enum TransactionStatus { ## One or more queries [Q] transaction state.
 	IN_A_FAILED_TRANSACTION_BLOCK ## [Q] in error transaction.
 }
 
-var client := StreamPeerTCP.new()
 var peers: TransferPeers = TransferPeers.new()
 
 func _init(): peers.set_stream(client)

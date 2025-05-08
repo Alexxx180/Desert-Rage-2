@@ -6,17 +6,16 @@ var add: PostgreSQLTypeRecognize = PostgreSQLTypeRecognize.new()
 var query_result: PostgreSQLQueryResult = PostgreSQLQueryResult.new()
 
 enum { # Sorted data types
-	BOOLEAN = 16,
-	SMALLINT = 21, INTEGER = 23, BIGINT = 20,
-	REAL = 700, DOUBLE_PRECISION = 701,
-	TEXT = 25, CHARACTER = 1042, CHARACTER_VARYING = 1043, # CHARacter # VARyingCHARacter
-	JSON_ = 114, JSONB = 3802,
-	XML = 142,
-	BITEA = 17,
-	CIDR = 650, INET = 869, MACADDR = 829, MACADDR8 = 774,
-	BIT = 1560, BIT_VARYING = 1562,
-	UUID = 2950,
+	BOOLEAN = 16, SMALLINT = 21, INTEGER = 23, BIGINT = 20, REAL = 700, DOUBLE_PRECISION = 701,
+	# Boolean # Integer # Floating point value
+	TEXT = 25, CHARACTER = 1042, CHARACTER_VARYING = 1043, JSON_ = 114, JSONB = 3802, XML = 142,
+	# String - CHARacter, VARyingCHARacter # Schemas: JSON # XML
+	BITEA = 17, CIDR = 650, INET = 869, MACADDR = 829, MACADDR8 = 774,
+	# Byte array # Network masks #
+	BIT = 1560, BIT_VARYING = 1562, UUID = 2950,
+	# Bit # Universal Unique IDentifier
 	POINT = 600, BOX = 603, LSEG = 601, LINE = 628, CIRCLE = 718,
+	# Geometry
 	DATE = 1082, TIME = 1266
 }
 
@@ -67,7 +66,7 @@ func _match_types(i: int) -> bool:
 		TIME: add.latin(row, value_data)
 		_: row.append(value_data) # PackedByteArray
 
-func data_row_response() -> bool: # Identifies the message as a data row. Number of column values that follow (can be zero).
+func data_row_response() -> bool: # Identifies the message as a data row. Number of column values that follow - can be 0.
 	var _stop: bool = false
 	var number_of_columns = responses.reverse(5, 7, 4)
 	number_of_columns = buffer.get_16()

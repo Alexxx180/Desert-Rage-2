@@ -3,26 +3,23 @@ extends RefCounted
 class_name TransferPeers
 
 var packet_stream: PacketPeerStream = PacketPeerStream.new()
-var stream_tls: StreamPeerTLS = StreamPeerTLS.new()
+var stream: Dictionary = { "tls": StreamPeerTLS.new(), "ssl": StreamPeerSSL.new() }
 var peer: StreamPeer
 
 func set_stream(client) -> void:
 	packet_stream.set_stream(client)
 	peer = packet_stream.stream
 
-func _storage(condition: bool):
-	return stream_tls if condition else peer
+func _storage(condition: bool, protocol: String = "tls"):
+	return stream[protocol] if condition else peer
 
-func by_connection():
-	return _storage(stream_tls.get_status() == StreamPeerTLS.STATUS_CONNECTED)
+func by_connection(protocol: String): return _storage(connected(protocol), protocol)
+func by_ssl(ssl: int, protocol: String = "tls"): return _storage(ssl == 0, protocol)
 
-func by_ssl(ssl: int):
-	return _storage(ssl == 0)
+func connected(protocol: String = "tls") -> bool:
+	return stream[protocol].get_status() == stream[protocol].STATUS_CONNECTED
 
-func connected() -> bool:
-	return stream_tls.get_status() == stream_peer_tls.STATUS_CONNECTED
-
-func handshakes() -> bool:
-	var _status = stream_tls.get_status()
-	return (_status == stream_tls.STATUS_HANDSHAKING and
-		_status = stream_tls.STATUS_CONNECTED)
+func handshakes(protocol: String = "tls") -> bool:
+	var _status = stream[protocol].get_status()
+	return (_status == stream[protocol].STATUS_HANDSHAKING and
+		_status = stream[protocol].STATUS_CONNECTED)

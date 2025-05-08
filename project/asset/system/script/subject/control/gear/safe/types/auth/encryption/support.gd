@@ -36,3 +36,5 @@ func _md5_encryption(): # Specifies that an MD5-encrypted password is required.
 func no_response() -> bool:
 	note.end_response("no_auth_support")
 	return true
+
+func cancel() -> void: credit.cancel(responses)
