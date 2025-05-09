@@ -19,9 +19,12 @@ func fail(message: String, postfix: String = "") -> void:
 func warn(message: String, postfix: String = "") -> void:
 	push_warning(check(message) + postfix)
 
+func ask_for_closure(clean: bool) -> void:
+	close.emit(clean)
+
 func force_close(message: String, postfix: String = "") -> void:
 	fail(message, postfix)
-	close.emit(false)
+	ask_for_closure(false)
 
 func end_response(response: BackendResponses, message: String, postfix: String = "") -> void:
 	force_close(message, postfix)

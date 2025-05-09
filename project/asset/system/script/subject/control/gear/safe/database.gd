@@ -44,7 +44,7 @@ func connection_established() -> void:
 	""" # 3.x version code
 	#database.close()
 
-func receive(errors: Dictionary, transaction: PostgreSQLClient.TransactionStatus, datas: Array) -> void:
+func receive(errors: Dictionary, transaction: int, datas: Array) -> void:
 	print("TRANSACTED: ", datas)
 	database.close()
 

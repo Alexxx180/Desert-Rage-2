@@ -9,9 +9,20 @@ enum { DISCONNECTED, CONNECTING, CONNECTED, ERROR } ## Status presentation
 const PORT: int = 5432 # Default PostgreSQL port
 var port: int
 
+var peers: TransferPeers = TransferPeers.new()
+var note: PostgreClientNotify = PostgreClientNotify.new()
 var client: StreamPeerTCP = StreamPeerTCP.new()
+var data: Array = []
+
 var state: Dictionary = { "busy": false, "next_etape": false, "code": ERR_BUSY, "ssl": 0 }
 var status: Dictionary = { "link": DISCONNECTED, "data": [], "param": {}, "error": {} }
+
+func _init(): peers.set_stream(client)
+
+func renew_data() -> Array:
+	var data: Array = connection.data
+	connection.data = []
+	return data
 
 func safe() -> Dictionary: return {} ## Secure dictionary as empty if backend disconnected - updates once connection is established.
 
@@ -40,7 +51,9 @@ func fail_auth() -> void:
 	fail() ## Check unnessary if status != Status.CONNECTED
 	auth_error.emit(error.duplicate())
 
-func fail() -> void: status.link = ERROR
+func fail(message: String = "", value: String = "") -> void:
+	status.link = ERROR
+	if message != "": note.fail(message, value)
 
 func succeed() -> void: status.link = CONNECTED
 
@@ -48,7 +61,13 @@ func in_progress() -> bool: return status.link == CONNECTING
 func present() -> bool: return status.link == CONNECTED
 
 func connected() -> bool: return client.get_status() == StreamPeerTCP.Status.STATUS_CONNECTED
-
 func hosted() -> bool: return client.is_connected_to_host()
-
 func active() -> bool: return hosted() and connected() and present()
+
+func poll() -> bool:
+	client.poll()
+	return not connected()
+
+func ssl_ready() -> bool: return not (state.ssl in [1, 2] or present())
+func ssl_peers(): return peers.by_ssl(state.ssl)
+func startup_ready(): return state.ssl == 2 and peers.connected()

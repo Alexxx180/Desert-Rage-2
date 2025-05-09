@@ -5,6 +5,7 @@ class_name BackendResponses
 var buffer: StreamPeerBuffer
 var responses: PackedByteArray #var length: int #var cursor: int
 var message: Dictionary = { "length": 0, "cursor": 0, "start": 0, "end": 0 }
+var result: PostgreSQLQueryResult = PostgreSQLQueryResult.new()
 
 func put_data(seek: int) -> void:
 	buffer.put_data(responses)
@@ -22,16 +23,22 @@ func _appendix(basis: int, a: int = -1, b: int = -1) -> void:
 		if basis == message.cursor: message.cursor = end
 	else: _range(a, b)
 
+static func reverse_data(data) -> void:
+	data.reverse()
+	return data
+
 func reverse(seek: int, start: int = -1, end: int = -1):
 	_appendix(message.cursor, start, end)
-	var response = responses.slice(message.start, message.end)
-	response.reverse()
+	var response = reverse_data(responses.slice(message.start, message.end))
 	put_data(seek)
 	return buffer
 
 func slice(start: int = -1, end: int = -1):
 	_appendix(message.length, start, end)
 	return responses.slice(message.start, message.end)
+
+func slice_word(start: int):
+	return responses.slice(start, message.length + 1)
 
 func split_byte(start: int, appendix: int, delimiter: int = 0) -> Array:
 	var pool: PackedByteArray = slice(start, message.length + appendix)

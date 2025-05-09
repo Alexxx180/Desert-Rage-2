@@ -1,12 +1,11 @@
 extends RefCounted
 
-class_name PostgreSQLClientResponseParser
+class_name ResponseParser
 
 const DEFAULT: Array = []
 
-var _connection: ConnectionMetadata
+var connection: ConnectionMetadata
 
-var responses: BackendResponses
 var notice: NoticeResponses
 var copy: CopyTypeResponses
 var field: FieldDescriptionReponses
@@ -15,13 +14,13 @@ var indicator: MessageIndicators
 var auth: AuthResponse
 
 func available() -> bool:
-	return responses.size() > 4 and _connection.connected() and meta.length()
+	return meta.enough() and connection.connected() and meta.fragment_check()
 
 func parse(fragmented_answer: PackedByteArray):
 	var result: Array = DEFAULT
-	responses.responses += fragmented_answer
+	meta.add_answer(fragmented_answer)
 	while result == DEFAULT and available():
-		var message: int = responses.get_first()
+		var message: int = meta.responses.get_first()
 		var type: String = str(message) # char
 		match type:
 			'A': indicator.notification()
@@ -50,3 +49,4 @@ func parse(fragmented_answer: PackedByteArray):
 			'3': complete.close()
 			_: complete.unrecognized.response(type)
 		responses.next_fragment()
+	return result

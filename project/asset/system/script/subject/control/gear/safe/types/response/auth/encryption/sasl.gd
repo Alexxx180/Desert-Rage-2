@@ -2,6 +2,8 @@ extends RefCounted
 
 class_name EncryptionSASL
 
+const PROTOCOL_VERSION := 3.0 ## PostgreSQL protocol ver. number (minor.major) for backend connection.
+
 var _stop: bool = false
 var peers: TransferPeers
 var credit: EncryptionCredentials
@@ -19,8 +21,8 @@ func dig_key1(hash_type: int, password: PackedByteArray, key_1: PackedByteArray)
 		key_1 = crypto.hmac_digest(hash_type, password, key_1)
 		dig_key2(key1)
 
-func pbkdf2(hash_type: int, password: PackedByteArray, salt: PackedByteArray, iterations := 4096, length := 0) -> PackedByteArray:
-	const END = 0xFF
+func pbkdf2(hash_type: int, password: PackedByteArray, salt: PackedByteArray, iterations: int = 4096, length: int = 0) -> PackedByteArray:
+	const END: int = 0xFF
 	var crypto: Crypto = Crypto.new()
 	var hash_length: int = len(crypto.hmac_digest(hash_type, salt, password))
 
@@ -93,11 +95,11 @@ func encryption_start() -> bool:# Specifies that SASL authentication is required
 			"SCRAM-SHA-1-PLUS": no_implementation(name)
 			"CRAM-MD5": no_implementation(name)
 			"CRAM-MD5-PLUS": no_implementation(name)
-	types.add._end_response(response_buffer, " No SASL mechanism offered by the backend is supported by the frontend for SASL authentication.")
+	types.add._end_response(responses, " No SASL mechanism offered by the backend is supported by the frontend for SASL authentication.")
 	return _stop
 
 func encryption_continue() -> bool:# Specifies that this message contains a SASL challenge. SCRAM-SHA-256
-	var server_first_message = response_buffer.slice(9, message_length + 1).get_string_from_ascii()
+	var server_first_message = responses.slice(9, message_length + 1).get_string_from_ascii()
 	
 	var server_nonce = server_first_message.split(',')[0].substr(2)
 	var server_salt = Marshalls.base64_to_raw(server_first_message.split(',')[1].substr(2))
@@ -139,7 +141,7 @@ func get_server_proof(signature) -> bool:# Get server proof response
 	return server_final_message.substr(2) != Marshalls.raw_to_base64(signature)
 
 func encryption_end() -> bool:# Specifies that SASL authentication has completed.
-	var server_final_message = response_buffer.slice(9, message_length + 1).get_string_from_ascii()
+	var server_final_message = responses.slice(9, message_length + 1).get_string_from_ascii()
 	
 	# The client verifies the proof from the server by calculating the ServerKey and the ServerSignature, then comparing its ServerSignature to that received from the server. If they are the same, the client has proof that the server has access to the ServerKey.
 	var crypto = Crypto.new()
