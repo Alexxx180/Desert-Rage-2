@@ -6,12 +6,12 @@ const DEFAULT: Array = []
 
 var connection: ConnectionMetadata
 
-var notice: NoticeResponses
-var copy: CopyTypeResponses
-var field: FieldDescriptionReponses
-var meta: MetaResponses
-var indicator: MessageIndicators
-var auth: AuthResponse
+var notice: NoticeResponses = NoticeResponses.new()
+var copy: CopyTypeResponses = CopyTypeResponses.new()
+var field: FieldDescriptionReponses = FieldDescriptionReponses.new()
+var meta: MetaResponses = MetaResponses.new()
+var indicator: MessageIndicators = MessageIndicators.new()
+var auth: AuthResponse = AuthResponse.new()
 
 func available() -> bool:
 	return meta.enough() and connection.connected() and meta.fragment_check()
@@ -23,10 +23,10 @@ func parse(fragmented_answer: PackedByteArray):
 		var message: int = meta.responses.get_first()
 		var type: String = str(message) # char
 		match type:
-			'A': indicator.notification()
-			'C': complete.command()
-			'D': data.row_response()
-			'E': notice.error()
+			'A': indicator.notification(object)
+			'C': complete.command(object)
+			'D': data.row_response(object)
+			'E': notice.error(object)
 			'G': copy.response("In")
 			'H': copy.response("Out")
 			'N': notice.response()

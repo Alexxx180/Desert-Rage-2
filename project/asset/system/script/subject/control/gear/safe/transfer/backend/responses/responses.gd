@@ -37,8 +37,7 @@ func slice(start: int = -1, end: int = -1):
 	_appendix(message.length, start, end)
 	return responses.slice(message.start, message.end)
 
-func slice_word(start: int):
-	return responses.slice(start, message.length + 1)
+func slice_word(start: int): return responses.slice(start, message.length + 1)
 
 func split_byte(start: int, appendix: int, delimiter: int = 0) -> Array:
 	var pool: PackedByteArray = slice(start, message.length + appendix)

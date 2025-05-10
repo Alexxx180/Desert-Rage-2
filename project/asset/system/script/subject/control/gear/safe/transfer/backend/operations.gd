@@ -2,6 +2,8 @@ extends RefCounted
 
 class_name BufferOperations
 
+signal reset_error()
+
 const STARTUP: String = ""
 
 var startup: PackedByteArray
@@ -33,10 +35,10 @@ func reverse(value: int, method: Callable) -> void:
 	return _get_reversed(StreamPeerBuffer.new(), value, method)
 
 func query(sql: String) -> PackedByteArray: return request('Q', sql.to_utf8_buffer() + byte)
-func x() -> PackedByteArray: return request('X', PackedByteArray())
+func x() -> PackedByteArray: return request('X', empty)
 
-func p(responses, message := PackedByteArray()) -> PackedByteArray:
-	responses.resize(0)
+func p(responses: BackendResponses, message: PackedByteArray = empty) -> PackedByteArray:
+	responses.resize()
 	return request('p', message)
 
 func get_message_size(type: String, message: PackedByteArray) -> PackedByteArray:
@@ -51,5 +53,5 @@ func request(type: String, message: PackedByteArray = empty) -> PackedByteArray:
 	if type == STARTUP: parse_version(buffer)
 	
 	buffer.put_data(message)
-	error_object = {}
+	reset_error.emit()
 	return buffer.data_array.slice(4)

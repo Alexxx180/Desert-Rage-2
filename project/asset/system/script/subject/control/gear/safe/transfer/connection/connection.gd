@@ -26,9 +26,12 @@ func renew_data() -> Array:
 
 func safe() -> Dictionary: return {} ## Secure dictionary as empty if backend disconnected - updates once connection is established.
 
+func reset_error() -> void:
+	status.error = safe()
+
 func reset() -> void:## Backend runtime parameters. Information about server state.
 	status.param = safe()
-	status.error = safe()
+	reset_error()
 	status.link = DISCONNECTED
 	state.ssl = 0
 

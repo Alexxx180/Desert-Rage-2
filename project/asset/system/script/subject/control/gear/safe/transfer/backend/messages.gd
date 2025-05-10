@@ -2,6 +2,8 @@ extends RefCounted
 
 class_name BackendMessage
 
+var client: String = "[PostgreSQLClient:%d]"
+
 var backend: Dictionary = {
 	"no_host": "Invalid Postgres host.",
 	"no_url": "Invalid Postgres URL.",
@@ -17,6 +19,7 @@ var backend: Dictionary = {
 	"ssl_unrecognized": "The backend sent an unknown response to the request to establish a secure connection. Unrecognized response: ",
 	"already_disconnected": "The frontend was already disconnected from the backend when calling 'close'.",
 	"invalid_value": "The backend sent an invalid object. Column value is not recognized: ",
-	"invalid_ip": " IP address present isn't valid: ",
-	"regex_failed": " RegEx compilation of object failed. Error: "
+	"invalid_ip": "IP address present isn't valid: ",
+	"regex_failed": "RegEx compilation of object failed. Error: ",
+	"no_sasl": "No SASL mechanism offered by the backend is supported by the frontend for SASL authentication."
 }

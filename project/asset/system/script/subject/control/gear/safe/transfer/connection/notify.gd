@@ -6,9 +6,9 @@ signal close(clean: bool)
 
 var message: BackendMessage = BackendMessage.new()
 
-var unique_id: int
+var unique_id: int = -1
 var client: String:
-	get: return "[PostgreSQLClient:%d]" % unique_id
+	get: return message.client % unique_id
 
 func check(key: String) -> String:
 	return client + message.backend[key] if message.backend.has(key) else key

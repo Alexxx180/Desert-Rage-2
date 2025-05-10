@@ -5,12 +5,11 @@ class_name AuthResponse
 var sasl: EncryptionSASL = EncryptionSASL.new()
 var base: EncryptionAuth = AuthSupport.new()
 
-func response() -> bool: # Identifies the message as an authentication request.
-	var authentication_type_data := responses.reverse(5, 10, 5)
-	var authentication_type := buffer.get_32()
-	var stop: bool = auth.check_support(authentication_type)
+func response(object: Dictionary) -> bool: # Identifies the message as an authentication request.
+	var type: int = object.responses.reverse(5, 10, 5).get_32()
+	var stop: bool = auth.check_support(type)
 	if not stop:
-		match authentication_type:
+		match type:
 			0: base.successful()
 			3: base.clear_text()
 			5: base.md5_encryption()

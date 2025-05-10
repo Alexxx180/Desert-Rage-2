@@ -6,17 +6,12 @@ enum CURSOR { ADD = 4, START = 7, NEXT = 11 }
 
 var _matcher: PostgresDataTypes = PostgresDataTypes.new()
 var _stop: bool
-var responses: BackendResponses:
-	get: return _matcher.object.responses
-	set(value): _matcher.object.responses = value
-var note: PostgreClientNotify:
-	set(value): _matcher.object.note = value
 
 func get_number_of_columns() -> int: # Number of column values that follow - can be 0.
-	return responses.reverse(4, 5, 7).get_16()
+	return _matcher.object.responses.reverse(4, 5, 7).get_16()
 
 func get_message_length(cursor: int, next: int) -> int:
-	return responses.reverse(0, cursor + CURSOR.START, next).get_32()
+	return _matcher.object.responses.reverse(0, cursor + CURSOR.START, next).get_32()
 
 func data_row_response() -> bool: 
 	var _stop: bool = false
@@ -46,5 +41,5 @@ func data_row_response() -> bool:
 		i += 1
 	if not _stop:
 		_matcher.object.reponses.result.data_row.append(row)# The result.
-		reponses.result.raw_data.append(raw)
+		_matcher.object.responses.result.raw_data.append(raw)
 	return _stop

@@ -2,26 +2,27 @@ extends RefCounted
 
 class_name MessageIndicators
 
-var connection: ConnectionMetadata
+enum { KEY = 0, VALUE = 1 }
 
-func no_data() -> void: pass
-func ready_suspended() -> void: pass # Portal-suspended. Appears only if an Execute row-count limit was reached.
-func empty_query() -> void: pass # Empty query string response. Substitutes for CommandComplete.
+func no_data(object) -> void: pass
+func ready_suspended(object) -> void: pass # Portal-suspended. Appears only if an Execute row-count limit was reached.
+func empty_query(object) -> void: pass # Empty query string response. Substitutes for CommandComplete.
 
-func function_call() -> void: # Identifies the message as a function call result.
-	note.warn("no_implementation", "FunctionCallResponse")
+func function_call(object: Dictionary) -> void: # Identifies the message as a function call result.
+	object.note.warn("no_implementation", "FunctionCallResponse")
 
-func status_report() -> void: # Identifies the message as a run-time parameter status report.
-	var report := responses.split_byte(5, 1) # Get name and value of the run-time parameter being reported.
-	var key: String = report[0].get_string_from_utf8()
-	var value: String = report[1].get_string_from_utf8()
-	connection.parameter[key] = value # The result
-
-func notification() -> void: # Message identifiers below
-	var report: Array = responses.split_byte(0, 5, 1) # Get the ...
-	var process_id: int = responses.reverse(0, 5, 9).get_32() # ... of notifying backend process.
-	var channel: Dictionary = { # ... notified
-		"name": report[0].get_string_from_utf8()
-		"payload": report[1].get_string_from_utf8()
+func _get_result(responses: BackendResponses, field: String) -> Dictionary:
+	var report: Array = responses.split_byte(5, 1)
+	return {
+		"name": report[KEY].get_string_from_utf8()
+		field: report[VALUE].get_string_from_utf8()
 	}
+
+func status_report(object: Dictionary) -> void: # Identifies the message as a run-time parameter status report.
+	var param: Dictionary = _get_result(object.responses, "value") # Get name and value of the run-time parameter being reported.
+	object.connection.parameter[param.name] = param.value # The result
+
+func notification(object: Dictionary) -> void: # Message identifiers below
+	var process_id: int = object.responses.reverse(0, 5, 9).get_32() # Get the ID of notifying backend process.
+	var channel: Dictionary = _get_result(object.responses, "payload") # notified
 	prints(process_id, channel.name, channel.payload)
