@@ -15,13 +15,13 @@ func dig_key2(keys: Dictionary) -> void:
 
 func dig_key1(hash: Dictionary, password: PackedByteArray, keys: Dictionary, iterations: int = 4096) -> void:
 	for _index in iterations - 1:
-		keys[1] = hmac(hash.crypto, password, keys[1])
+		keys[1] = hmac(hash.crypto, hash.word, keys[1])
 		dig_key2(keys)
 
-func dig_keys(hash: Dictionary) -> PackedByteArray:
+func dig_keys(hash: Dictionary, iterations: int) -> PackedByteArray:
 	var keys: Dictionary = { 1: hmac(hash.crypto, hash.word, hash.key) }
 	var keys[2] = keys[1]
-	dig_key1(hash, password, keys, server.iterations)
+	dig_key1(hash, keys, iterations)
 	return keys[2]
 
 func _shift(block: int, i: int) -> int:
@@ -34,7 +34,6 @@ func pbkdf2(password: PackedByteArray, server: Dictionary, length: int = 0) -> v
 	# On devrait passer le mot de passe (credit.word) dans la fonction SASLprep (rfc7613) (or SASLprep, rfc4013) non implémenté si desous...
 	var hash: Dictionary = { "crypto": Crypto.new(), "word": password }
 	var hash.length = len(hmac(hash.crypto, server.salt, hash.word))
-
 	var buffer: PackedByteArray = op.empty
 	buffer.resize(4)
 
@@ -42,7 +41,7 @@ func pbkdf2(password: PackedByteArray, server: Dictionary, length: int = 0) -> v
 		for i in 3: buffer[i] = _shift(block, i)
 		buffer[3] = (block + 1) & END
 		hash.key = server.salt + buffer
-		output += dig_keys(hash)
+		output += dig_keys(hash, server.iterations)
 
 	output = output.slice(0, hash.length)
 

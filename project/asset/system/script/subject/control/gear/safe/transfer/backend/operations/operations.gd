@@ -15,10 +15,8 @@ func bytes(count: Array[int]) -> PackedByteArray:
 
 func startup_message(result: Array) -> void:
 	var c: Dictionary = {
-		"user": "user".to_ascii_buffer(),
-		"one": result[1].to_utf8_buffer(),
-		"db": "database".to_ascii_buffer(),
-		"two": result[5].to_utf8_buffer()
+		"user": "user".to_ascii_buffer(), "one": result[1].to_utf8_buffer(),
+		"db": "database".to_ascii_buffer(), "two": result[5].to_utf8_buffer()
 		"end": bytes([0, 0])
 	}
 	startup = request(STARTUP, c.user + byte + c.one + byte + c.db + byte + c.two + c.end)
@@ -36,7 +34,6 @@ func reverse(value: int, method: Callable) -> void:
 
 func query(sql: String) -> PackedByteArray: return request('Q', sql.to_utf8_buffer() + byte)
 func x() -> PackedByteArray: return request('X', empty)
-
 func p(responses: BackendResponses, message: PackedByteArray = empty) -> PackedByteArray:
 	responses.resize()
 	return request('p', message)
@@ -48,9 +45,12 @@ func request(type: String, message: PackedByteArray = empty) -> PackedByteArray:
 	var buffer: StreamPeerBuffer = StreamPeerBuffer.new()
 	var length: PackedByteArray = get_message_size(type, message)
 	
-	if type != STARTUP: buffer.put_8(type.unicode_at(0))
-	buffer.put_data(length)
-	if type == STARTUP: parse_version(buffer)
+	if type != STARTUP:
+		buffer.put_8(type.unicode_at(0))
+		buffer.put_data(length)
+	else:
+		buffer.put_data(length)
+		PostgreProtocolVersion.parse(buffer, self)
 	
 	buffer.put_data(message)
 	reset_error.emit()

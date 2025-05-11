@@ -7,7 +7,15 @@ var op: BufferOperations
 var credit: EncryptionCredentials
 var note: PostgreClientNotify
 
+var salt: EncryptionSalt = EncryptionSalt.new()
+
 var message: Dictionary = { "client": "", "auth": "" }
+
+func get_server_message() -> String:
+	return responses.slice_word(9).get_string_from_ascii()
+
+func put_ssl_initial(response: PackedByteArray) -> void: # A 0 byte is required as terminator after the last authentication mechanism name.
+	stats.peers.by_connection().put_data(response) # responses.resize(0)
 
 func get_client_message_length() -> PackedByteArray:
 	return op.reverse(len(client), op.put_u32)

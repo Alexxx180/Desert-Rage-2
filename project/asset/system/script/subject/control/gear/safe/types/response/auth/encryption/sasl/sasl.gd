@@ -2,16 +2,14 @@ extends RefCounted
 
 class_name EncryptionSASL
 
-signal stop()
+var start: AuthMechanismDetermination
+var main: SaslChallenge
+var end: AuthGetProof
 
-var _stop: bool = false
-var peers: TransferPeers
-var credit: EncryptionCredentials
-var op: BufferOperations
-# Authentication SASL
-var client_first_message: String 
-var salted_password: PackedByteArray
-var auth_message: String
-
-var salt: EncryptionSalt = EncryptionSalt.new()
-var version: PostgreProtocolVersion = PostgreProtocolVersion.new()
+func encryption(object: Dictionary) -> bool:
+	match type:
+		10: start.require_auth()
+		11: main.encryption()
+		12: end.verify_proof()
+		_: return false
+	return true
