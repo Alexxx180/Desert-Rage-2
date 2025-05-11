@@ -3,6 +3,8 @@ extends RefCounted
 class_name ConnectionMetadata
 
 signal auth_error(object: Dictionary)
+signal established()
+signal data_received(error_object, transaction_status, datas)
 
 enum { DISCONNECTED, CONNECTING, CONNECTED, ERROR } ## Status presentation
 
@@ -17,19 +19,20 @@ var data: Array = []
 var state: Dictionary = { "busy": false, "next_etape": false, "code": ERR_BUSY, "ssl": 0 }
 var status: Dictionary = { "link": DISCONNECTED, "data": [], "param": {}, "error": {} }
 
-func _init(): peers.set_stream(client)
-
 func renew_data() -> Array:
 	var data: Array = connection.data
 	connection.data = []
 	return data
 
+func _init(): peers.set_stream(client)
 func safe() -> Dictionary: return {} ## Secure dictionary as empty if backend disconnected - updates once connection is established.
+func reset_error() -> void: status.error = safe()
+func decide_port(other: String) -> int: port = other.to_int() if other else PORT
 
-func reset_error() -> void:
-	status.error = safe()
+func establish() -> void: established.emit()
+func raise_data(error, transact, data) -> void: data_received.emit(error, transact, data)
 
-func reset() -> void:## Backend runtime parameters. Information about server state.
+func reset() -> void: ## Backend runtime parameters. Information about server state.
 	status.param = safe()
 	reset_error()
 	status.link = DISCONNECTED
@@ -38,8 +41,6 @@ func reset() -> void:## Backend runtime parameters. Information about server sta
 func not_busy() -> void:
 	state.busy = false
 	state.next_etape = false
-
-func decide_port(other: String) -> int: port = other.to_int() if other else PORT
 
 func first_message() -> bool: # Get the fist message of server.
 	var ok: bool = state.code == OK

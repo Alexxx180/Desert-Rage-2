@@ -2,9 +2,7 @@ extends RefCounted
 
 class_name EncryptionCredentials
 
-################ The process ID and secret of this backend.
-var backend: Dictionary = { "id": 0, "secret": 0 }
-################ No use at the moment
+var backend: Dictionary = { "id": 0, "secret": 0 } # No use at the moment
 
 var word: String
 var user: String
