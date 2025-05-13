@@ -26,7 +26,7 @@ var complete: CompleteResponses = CompleteResponses.new()
 func set_stop() -> void: _stop = true
 
 func _init() -> void:
-	for response in [field.row]:
+	for response in [field.data]:
 		response.stop.connect(set_stop)
 
 func available() -> bool:

@@ -20,7 +20,7 @@ enum Status {
 }
 
 # The status of the connection.
-var status = Status.STATUS_DISCONNECTED setget set_status, get_status
+var status: Status = Status.STATUS_DISCONNECTED: get = get_status, set = set_status
 
 ## Returns the status of the connection (see the Status enumeration).
 func get_status() -> int: return status

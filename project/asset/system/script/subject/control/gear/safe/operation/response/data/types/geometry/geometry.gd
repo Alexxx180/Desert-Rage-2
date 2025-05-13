@@ -4,18 +4,18 @@ class_name PostgresGeometryTypes
 
 enum { POINT = 600, BOX = 603, LSEG = 601, LINE = 628, CIRCLE = 718 } # Universal Unique IDentifier # Geometry # Date-time
 
-var add: PostgresGeometryRecognize = PostgresGeometryRecognize.new()
+var recognize: PostgresGeometryRecognize = PostgresGeometryRecognize.new()
 
 func resolve(object: Dictionary) -> bool:
 	match object.type_id:
-		"tsvector": add.tsvector(object)
-		"tsquery": add.tsquery(object)
-		POINT: add.point(object)
-		BOX: add.box(object)
-		LSEG: add.lseg(object)
-		"POLYGON": add.path(object)
-		"PATH": add.path(object)
-		LINE: add.line(object)
-		CIRCLE: add.circle(object)
+		"tsvector": recognize.tsvector(object)
+		"tsquery": recognize.tsquery(object)
+		POINT: recognize.point(object)
+		BOX: recognize.box(object)
+		LSEG: recognize.lseg(object)
+		"POLYGON": recognize.path(object)
+		"PATH": recognize.path(object)
+		LINE: recognize.line(object)
+		CIRCLE: recognize.circle(object)
 		_: return false
 	return true

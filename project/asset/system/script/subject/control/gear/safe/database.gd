@@ -28,7 +28,7 @@ func on_load_user_data() -> void:
 	database.connection_error.connect(connection_error)
 	database.connection_closed.connect(connection_closed)
 	database.data_received.connect(receive)
-	database.op.connect.to_host(PREFIX + _get_connection_string(), TransactionRollback.SSL)
+	database.op.connection.to_host(PREFIX + _get_connection_string(), TransactionRollback.SSL)
 
 func connection_established() -> void:
 	print("HAVE CONNECTION")

@@ -4,20 +4,20 @@ class_name PostgresNumberTypes
 
 enum { BOOLEAN = 16, SMALLINT = 21, INTEGER = 23, BIGINT = 20, REAL = 700, DOUBLE_PRECISION = 701 } # Boolean # Integer # Floating point value
 
-var add: PostgresNumberRecognize = PostgresNumberRecognize.new()
+var recognize: PostgresNumberRecognize = PostgresNumberRecognize.new()
 
 func resolve(object: Dictionary) -> bool:
 	match object.type_id:
-		BOOLEAN: add.boolean(object)
-		SMALLINT: add.integer(object)
-		INTEGER: add.integer(object)
-		BIGINT: add.integer(object)
-		"DECIMAL": add.floating(object)
-		"NUMERIC": add.floating(object)
-		REAL: add.floating(object)
-		DOUBLE_PRECISION: add.floating(object)
-		"SMALLSERIAL": add.integer(object)
-		"SERIAL": add.integer(object)
-		"BIGSERIAL": add.integer(object)
+		BOOLEAN: recognize.boolean(object)
+		SMALLINT: recognize.integer(object)
+		INTEGER: recognize.integer(object)
+		BIGINT: recognize.integer(object)
+		"DECIMAL": recognize.floating(object)
+		"NUMERIC": recognize.floating(object)
+		REAL: recognize.floating(object)
+		DOUBLE_PRECISION: recognize.floating(object)
+		"SMALLSERIAL": recognize.integer(object)
+		"SERIAL": recognize.integer(object)
+		"BIGSERIAL": recognize.integer(object)
 		_: return false
 	return true

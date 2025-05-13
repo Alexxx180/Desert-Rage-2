@@ -4,7 +4,7 @@ class_name PostgresClientOperation
 
 var poll: PollConnection = PollConnection.new()
 var close: CloseConnection = CloseConnection.new()
-var connect: PostgresHostConnect = PostgresHostConnect.new()
+var connection: PostgresHostConnect = PostgresHostConnect.new()
 var execute: ExecutePostgreRequest = ExecutePostgreRequest.new()
 
 func _init() -> void:
@@ -17,5 +17,5 @@ func _init() -> void:
 	}
 	backend.responser.object = backend
 	backend.connection.note.end.connect(backend.responses.resize)
-	for operation in [poll, close, connect, execute]:
+	for operation in [poll, close, connection, execute]:
 		operation.backend = backend

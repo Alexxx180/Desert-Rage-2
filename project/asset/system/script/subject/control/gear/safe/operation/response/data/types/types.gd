@@ -13,7 +13,7 @@ var geometry: PostgresGeometryTypes = PostgresGeometryTypes.new()
 func set_stop() -> void: stop = true
 
 func _init() -> void:
-	for type in [number, text, geometry]:
+	for type in [number.recognize, text.recognize, geometry.recognize]:
 		type.stop.connect(set_stop)
 
 func simple(object: Dictionary) -> bool:

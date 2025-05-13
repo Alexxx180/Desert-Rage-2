@@ -16,10 +16,11 @@ func establish_connection() -> void: connection_established.emit()
 func close_connection(clean: bool) -> void: connection_closed.emit(clean)
 func error_auth(object) -> void: authentication_error.emit(object)
 func raise_data(error, transact, data) -> void: data_received.emit(error, transact, data)
-func error_connection() -> void: pass
+func error_connection() -> void: connection_error.emit()
 
 func _init() -> void:
-	op.connection.note.close.connect(close_connection)
-	op.connection.auth_error.connect(error_auth)
-	op.connection.established.connect(establish_connection)
-	op.connection.data_received.connect(raise_data)
+	var c: ConnectionMetadata = op.connection.backend.connection 
+	c.note.close.connect(close_connection)
+	c.auth_error.connect(error_auth)
+	c.established.connect(establish_connection)
+	c.data_received.connect(raise_data)

@@ -12,7 +12,7 @@ var client: String:
 	get: return message.client % unique_id
 
 func check(key: String) -> String:
-	return client + message.backend[key] if message.backend.has(key) else key
+	return client + " " + message.backend[key] if message.backend.has(key) else key
 
 func fail(message: String, postfix: String = "") -> void:
 	push_error(check(message) + postfix)

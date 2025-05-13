@@ -12,15 +12,18 @@ func _ready() -> void:
 func _has_level(ost: Dictionary) -> bool:
 	return ost.name.has(caption) and ost.name[caption].mix
 
+func _set_number(tracks: Dictionary) -> void:
+	i = tracks.at if tracks.has("at") else 0
+
 func set_tracks() -> void:
 	var ost: Dictionary = SoundtrackSystem.user.music.level.caves
 	_mixed = ost.type.theme.mix
 	if _has_level(ost):
 		_set = ost.name[caption].set
-		i = ost.name[caption].at
+		_set_number(ost.name[caption])
 	else:
 		_set = ost.type.theme.set
-		i = ost.type.theme.at
+		_set_number(ost.type.theme)
 	set_playback()
 
 func stop_timing() -> void: pass
