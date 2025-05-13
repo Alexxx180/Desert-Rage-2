@@ -14,7 +14,7 @@ func get_number_of_columns() -> int: # Number of column values that follow - can
 func get_message_length(cursor: int, next: int) -> int:
 	return _matcher.backend.responses.reverse(0, cursor + CURSOR.START, next).get_32()
 
-func resolve(rows: Array, next: int, length: int) -> bool:
+func resolve(rows: Array, next: int, length: int, i: int) -> int:
 	if length == -1:
 		for row in rows: row.append(null)
 		return 0 ### NULL ### The result
@@ -22,7 +22,7 @@ func resolve(rows: Array, next: int, length: int) -> bool:
 		_matcher.backend.value = _matcher.backend.responses.slice(next, next + length) # var error: int
 		_matcher.resolve(i)
 		if not _matcher.stop:
-			rows[RAW].append(_matcher.backend.responses.result.verify())
+			rows[CURSOR.RAW].append(_matcher.backend.responses.result.verify())
 	return length
 
 func row() -> void:
@@ -41,9 +41,9 @@ func row() -> void:
 		var next: int = cursor + CURSOR.NEXT
 		var length: int = get_message_length(cursor, next)
 
-		cursor += resolve([row, raw], next, length) + CURSOR.ADD
+		_matcher.backend.responses.cursor += resolve([row, raw], next, length, i) + CURSOR.ADD
 		i += 1
-	if not _stop:
+	if not _matcher.stop:
 		_matcher.backend.responses.result.data_row.append(row)# The result.
 		_matcher.backend.responses.result.raw_data.append(raw)
 	else:

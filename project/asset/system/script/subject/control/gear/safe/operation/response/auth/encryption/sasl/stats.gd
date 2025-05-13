@@ -14,9 +14,9 @@ func put_ssl_initial(response: PackedByteArray) -> void: # A 0 byte is required 
 	backend.connection.peers.by_connection().put_data(response) # responses.resize(0)
 
 func get_client_message_length() -> PackedByteArray:
-	return backend.op.reverse(len(client), backend.op.put_u32)
+	return backend.op.reverse(len(message.client), backend.op.put_u32)
 
-func set_client_first_message(type: String, nonce: PackedByteArray) -> void:
+func set_client_first_message(type: String, nonce: String) -> void:
 	message.client = "%c,,n=%s,r=%s" % [type, "", nonce] # When SCRAM-SHA-256 is used in PostgreSQL, the server will ignore the user name that the client sends in the client-first-message. The user name that was already sent in the startup message is used instead.
 
 func get_proof(side: Dictionary) -> PackedByteArray:

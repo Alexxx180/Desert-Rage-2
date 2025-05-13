@@ -3,7 +3,7 @@ extends RefCounted
 class_name PollConnection
 
 var response: PollResponse = PollResponse.new()
-var rollback: TransactionRollback = RollbackTransaction.new()
+var rollback: TransactionRollback = TransactionRollback.new()
 var crypto: CryptoConnection = CryptoConnection.new()
 var backend: Dictionary: set = _set_backend
 

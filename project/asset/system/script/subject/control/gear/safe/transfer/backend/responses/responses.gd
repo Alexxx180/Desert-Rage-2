@@ -12,7 +12,7 @@ func put_data(seek: int) -> void:
 	buffer.seek(seek)
 
 func get_first() -> int: return responses[0]
-func get_current() -> int: return responses[length]
+func get_current() -> int: return responses[message.length]
 func resize(next: int = 0) -> void: responses.resize(next)
 func _range(start: int, end: int) -> void:
 	message.end = end; message.start = start
@@ -20,10 +20,10 @@ func _range(start: int, end: int) -> void:
 func _appendix(basis: int, a: int = -1, b: int = -1) -> void:
 	if b == -1: 
 		_range(message.cursor, basis + a)
-		if basis == message.cursor: message.cursor = end
+		if basis == message.cursor: message.cursor = b
 	else: _range(a, b)
 
-static func reverse_data(data) -> void:
+static func reverse_data(data) -> PackedByteArray:
 	data.reverse()
 	return data
 
@@ -47,9 +47,9 @@ func split_byte(start: int, appendix: int, delimiter: int = 0) -> Array:
 			split.result.append(slice(split.from, split.to + 1))
 			split.from = split.to + 1
 		split.to += 1
-	return result
+	return split.result
 
-func next_fragment() -> void # There may be several messages - read first,
-	var next: int = length + 1 # delete from buffer to read next in the loop.
+func next_fragment() -> void: # There may be several messages - read first,
+	var next: int = message.length + 1 # delete from buffer to read next in the loop.
 	if responses.size() == next: resize(0)
 	else: responses = responses.slice(next)

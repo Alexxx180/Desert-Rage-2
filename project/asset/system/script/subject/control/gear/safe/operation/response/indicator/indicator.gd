@@ -14,7 +14,7 @@ func function_call(object: Dictionary) -> void: # Identifies the message as a fu
 func _get_result(responses: BackendResponses, field: String) -> Dictionary:
 	var report: Array = responses.split_byte(5, 1)
 	return {
-		"name": report[KEY].get_string_from_utf8()
+		"name": report[KEY].get_string_from_utf8(),
 		field: report[VALUE].get_string_from_utf8()
 	}
 
@@ -22,7 +22,7 @@ func status_report(object: Dictionary) -> void: # Identifies the message as a ru
 	var param: Dictionary = _get_result(object.responses, "value") # Get name and value of the run-time parameter being reported.
 	object.connection.status.param[param.name] = param.value # The result
 
-func notification(object: Dictionary) -> void: # Message identifiers below
+func notify(object: Dictionary) -> void: # Message identifiers below
 	var process_id: int = object.responses.reverse(0, 5, 9).get_32() # Get the ID of notifying backend process.
 	var channel: Dictionary = _get_result(object.responses, "payload") # notified
 	prints(process_id, channel.name, channel.payload)

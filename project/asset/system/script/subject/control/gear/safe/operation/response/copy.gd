@@ -1,6 +1,6 @@
 extends RefCounted
 
-class_name CopyTypeResponse
+class_name CopyTypeResponses
 
 var backend: Dictionary
 
@@ -23,7 +23,7 @@ func response(type: String) -> void: # Followed by copy data.
 	format_column_codes()
 	backend.connection.note.warn("no_support", " Copy" + type + "Response")
 
-func get_stream_data_part() -> PackedByteArray: return responses.slice_word(5)
+func get_stream_data_part() -> PackedByteArray: return backend.responses.slice_word(5)
 func copy_complete_indicator() -> String: return "CopyDone"
 
 func data() -> void: print(get_stream_data_part()) # Backend messages correspond single data rows.

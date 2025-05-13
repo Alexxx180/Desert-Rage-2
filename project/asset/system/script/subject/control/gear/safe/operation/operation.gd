@@ -12,7 +12,7 @@ func _init() -> void:
 		"connection": ConnectionMetadata.new(),
 		"responses": BackendResponses.new(),
 		"op": BufferOperations.new(),
-		"credit": EncryptionCredentials.new()
+		"credit": EncryptionCredentials.new(),
 		"responser": ResponseParser.new()
 	}
 	backend.responser.object = backend

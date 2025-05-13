@@ -16,7 +16,7 @@ func bytes(count: Array[int]) -> PackedByteArray:
 func startup_message(result: Array) -> void:
 	var c: Dictionary = {
 		"user": "user".to_ascii_buffer(), "one": result[1].to_utf8_buffer(),
-		"db": "database".to_ascii_buffer(), "two": result[5].to_utf8_buffer()
+		"db": "database".to_ascii_buffer(), "two": result[5].to_utf8_buffer(),
 		"end": bytes([0, 0])
 	}
 	startup = request(STARTUP, c.user + byte + c.one + byte + c.db + byte + c.two + c.end)
@@ -29,7 +29,7 @@ func _get_reversed(buffer: StreamPeerBuffer, value: int, method: Callable) -> Pa
 
 func put_u32(buffer: StreamPeerBuffer, value: int) -> void: buffer.put_u32(value)
 func put_32(buffer: StreamPeerBuffer, value: int) -> void: buffer.put_32(value)
-func reverse(value: int, method: Callable) -> void:
+func reverse(value: int, method: Callable) -> PackedByteArray:
 	return _get_reversed(StreamPeerBuffer.new(), value, method)
 
 func query(sql: String) -> PackedByteArray: return request('Q', sql.to_utf8_buffer() + byte)
@@ -38,12 +38,12 @@ func p(responses: BackendResponses, message: PackedByteArray = empty) -> PackedB
 	responses.resize()
 	return request('p', message)
 
-func get_message_size(type: String, message: PackedByteArray) -> PackedByteArray:
+func get_message_size(buffer: StreamPeerBuffer, type: String, message: PackedByteArray) -> PackedByteArray:
 	return _get_reversed(buffer, message.size() + (4 if type else 8), put_u32)
 
 func request(type: String, message: PackedByteArray = empty) -> PackedByteArray:
 	var buffer: StreamPeerBuffer = StreamPeerBuffer.new()
-	var length: PackedByteArray = get_message_size(type, message)
+	var length: PackedByteArray = get_message_size(buffer, type, message)
 	
 	if type != STARTUP:
 		buffer.put_8(type.unicode_at(0))

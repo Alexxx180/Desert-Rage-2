@@ -11,11 +11,11 @@ func _compare_server_proof(server: Dictionary) -> bool: # If same, the client ha
 	var final: String = stats.get_server_message()
 	return final.substr(2) != Marshalls.raw_to_base64(proof) # server.signature
 
-func verify_proof(object: Dictionary) -> bool: # Complete auth - compare server key and signature to received from the server
+func verify_proof() -> void: # Complete auth - compare server key and signature to received from the server
 	var crypto: Crypto = Crypto.new() #
 	var server: Dictionary = { "key": stats.salt.hmac(crypto, stats.salt.output_safe(), stats.key("Server")) }
-	server.signature: PackedByteArray = stats.salt.hmac(crypto, server.key, stats.auth_safe())
+	server.signature = stats.salt.hmac(crypto, server.key, stats.auth_safe())
 	
 	if _compare_server_proof(server):
-		object.note.end_response("sasl_auth_error") # /!\ "authentication_error" signal not properly implemented...
+		stats.connection.note.end_response("sasl_auth_error") # /!\ "authentication_error" signal not properly implemented...
 		stop.emit()

@@ -2,9 +2,9 @@ extends RefCounted
 
 class_name EncryptionSASL
 
-var start: AuthMechanismDetermination
-var main: SaslChallenge
-var end: AuthGetProof
+var start: AuthMechanismDetermination = AuthMechanismDetermination.new()
+var main: SaslChallenge = SaslChallenge.new()
+var end: AuthGetProof = AuthGetProof.new()
 
 func set_backend(backend: Dictionary) -> void:
 	var stats: SaslAuthenticationStats = SaslAuthenticationStats.new()
@@ -12,7 +12,7 @@ func set_backend(backend: Dictionary) -> void:
 	for stage in [start, main, end]:
 		stage.stats = stats
 
-func encryption() -> bool:
+func encryption(type: int) -> bool:
 	match type:
 		10: start.require_auth()
 		11: main.encryption()

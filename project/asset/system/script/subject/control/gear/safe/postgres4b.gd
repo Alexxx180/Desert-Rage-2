@@ -2,7 +2,7 @@ extends RefCounted
 # License MIT. Written by Samuel MARZIN. Edit by Tatarintsev Aleksandr. Detailed documentation: https://github.com/Marzin-bot/PostgreSQLClient/wiki/Documentation
 
 ## Godot PostgreSQL Client - GDscript script/class allowing to connect and run SQL commands with Postgres backend. Able to send and receive data from the backend. Useful for managing multiplayer game, by saving a large amount of data on a dedicated Postgres server. Written in pure GDScript to not depend on GDNative for portability reasons.
-class_name PostgreSQLClient
+class_name PostgreSQLClientB
 
 ## Version number (minor.major) of the PostgreSQL protocol used when connecting to the backend.
 const PROTOCOL_VERSION := 3.0

@@ -20,12 +20,12 @@ func _number16(seek: int, start: int) -> int:
 func _number32(seek: int, start: int) -> int:
 	return responses.reverse(seek, start).get_u32()
 
-func get_fields_number(responses: BackendResponses) -> int: # can be 0
+func get_fields_number() -> int: # can be 0
 	responses.message.cursor = CURSOR.START
 	return responses.reverse(4, 5, 7).get_u16()
 
 func row() -> void:
-	responses.result.fields_number = get_fields_number(responses)
+	responses.result.fields_number = get_fields_number()
 	for _index in responses.result.fields_number:
 		responses.message.cursor += _find_field_name_length(responses.slice(1))
 		responses.buffer = StreamPeerBuffer.new()
@@ -44,5 +44,5 @@ func parameter() -> void:
 	for index in get_fields_number(): # used by the statement
 		var seek: int = responses.message.cursor + index - 1
 		types.append(responses.reverse(seek, CURSOR.ADD).get_32()) # Get object ID of the parameter data type.
-		cursor += CURSOR.ADD
+		responses.cursor += CURSOR.ADD
 	print(types) # The result.

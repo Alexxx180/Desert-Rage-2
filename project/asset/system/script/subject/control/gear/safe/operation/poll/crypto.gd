@@ -6,7 +6,7 @@ var connection: ConnectionMetadata
 
 func set_crypto() -> void:
 	#var crypto = Crypto.new() ; var ssl_key = crypto.generate_rsa(4096) ; var ssl_cert = crypto.generate_self_signed_certificate(ssl_key)
-	connection.peers.connect("") # stream_peer_tls.blocking_handshake = false
+	connection.peers.connect_to("") # stream_peer_tls.blocking_handshake = false
 	connection.state.ssl = 2
 
 func bad_status(message: String, postfix: String = "") -> void:
@@ -27,4 +27,4 @@ func update() -> void:
 	match type:
 		'S': set_crypto()
 		'N': bad_status("ssl_fail")
-		_: bad_status("ssl_unrecognized", value)
+		_: bad_status("ssl_unrecognized", type)

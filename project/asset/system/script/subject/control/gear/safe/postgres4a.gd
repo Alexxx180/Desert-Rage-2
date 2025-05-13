@@ -16,7 +16,7 @@ func establish_connection() -> void: connection_established.emit()
 func close_connection(clean: bool) -> void: connection_closed.emit(clean)
 func error_auth(object) -> void: authentication_error.emit(object)
 func raise_data(error, transact, data) -> void: data_received.emit(error, transact, data)
-func connection_error() -> void: pass
+func error_connection() -> void: pass
 
 func _init() -> void:
 	op.connection.note.close.connect(close_connection)

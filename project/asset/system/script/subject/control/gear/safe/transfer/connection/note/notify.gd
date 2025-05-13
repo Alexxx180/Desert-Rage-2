@@ -29,4 +29,4 @@ func force_close(message: String, postfix: String = "") -> void:
 
 func end_response(message: String, postfix: String = "") -> void:
 	force_close(message, postfix)
-	end_response.emit()
+	end.emit()

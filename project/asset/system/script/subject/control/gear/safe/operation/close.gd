@@ -13,7 +13,7 @@ func client_disconnect(clean: bool) -> void:
 	if clean: backend.connection.peers.peer.put_data(backend.op.x())
 	backend.connection.client.disconnect_from_host()
 
-func disconnect(clean: bool) -> void:
+func determine_disconnect(clean: bool) -> void:
 	if backend.connection.peers.handshakes():
 		ssl_deconnection(clean)
 	else:
@@ -25,7 +25,7 @@ func reset_connection() -> void:
 	backend.connection.note.ask_for_closure(true)
 
 func end_dialog(clean) -> void:
-	disconnect(clean)
+	determine_disconnect(clean)
 	reset_connection()
 
 func the_connection(clean: bool = true) -> void: ## If "clean", notify backend to close connection. Otherwise don't, which isn't recommended.

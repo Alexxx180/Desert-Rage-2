@@ -37,5 +37,5 @@ func start() -> void:
 
 func set_data() -> void:
 	if backend.connection.startup_ready():
-		backend.connection.peers.put_data(op.startup)
+		backend.connection.peers.put_data(backend.op.startup)
 		backend.connection.state.ssl = SSL

@@ -2,6 +2,14 @@ extends RefCounted
 
 class_name PostgresBytesRecognize
 
+signal stop()
+
+const HEX: int = 2
+
+func _end(object: Dictionary, type: String) -> void:
+	object.note.end_response(object.responses, type)
+	stop.emit()
+
 func get_number_from_hex(hex: Array, i) -> int:
 	return (hex[i + 1] + hex[i + 2]).hex_to_int()
 
@@ -18,14 +26,14 @@ func bitea(object: Dictionary) -> void: # Support isn't complete
 	var values: String = object.value.get_string_from_ascii()
 	if values.substr(HEX).is_valid_hex_number():
 		_add_bite_array(object)
-	else:_end(object, "BITEA")
+	else: _end(object, "BITEA")
 
 func ip_address(object: Dictionary) -> void:
-	var text = value_data.get_string_from_ascii()
+	var text = object.value.get_string_from_ascii()
 	if not text.is_valid_ip_address():
-		note.warn( + text)
-	row.append(text)
+		object.connection.note.warn( + text)
+	object.row.append(text)
 
 func _todo(type: String) -> void: print("TODO '%s' type implementation" % type)
-func timestamp(_row: Array, _value_data, _response) -> void: _todo("TIMESTAMP")
-func interval(_row: Array, _value_data, _response) -> void: _todo("INTERVAL")
+func timestamp(_object: Dictionary) -> void: _todo("TIMESTAMP")
+func interval(_object: Dictionary) -> void: _todo("INTERVAL")

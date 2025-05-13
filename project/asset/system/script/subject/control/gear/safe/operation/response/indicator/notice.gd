@@ -26,16 +26,16 @@ func _iterate_fields(object: Dictionary, set_feedback: Callable) -> Dictionary:
 		var keys: Dictionary = _get_match_fields()
 		var field: Dictionary = _get_field(champ_data.get_string_from_ascii())
 		var feedback: Dictionary = set_feedback.call(keys, field)
-		_match(notice, field.value, field.type, keys, feedback)
+		_match(notice, field, keys, feedback)
 	return notice
 
 func response(object: Dictionary) -> void:
-	var notice: Dictionary = iterate_fields(object,
+	var notice: Dictionary = _iterate_fields(object,
 	func(keys, _f):
 		keys['S'] = "severity"
 		keys['M'] = "message"
 		return Defaults.DICT)
-	var last = connection.data.back()
+	var last = object.connection.data.back()
 	if last: last.notice = notice
 
 func _severity(object: Dictionary, field: Dictionary) -> void:
@@ -49,6 +49,6 @@ func _message(object: Dictionary, field: Dictionary) -> void:
 	object.connection.note.fail(field.value)
 
 func error(object: Dictionary) -> void: 
-	iterate_fields(object, func(_k, field): return {
+	_iterate_fields(object, func(_k, field): return {
 		'S': func(f): _severity(object, f), 'M': func(f): _message(object, f)})
-	if error_object["severity"] == "FATAL": connection.fail_auth()
+	if object.connection.status.error["severity"] == "FATAL": object.connection.fail_auth()

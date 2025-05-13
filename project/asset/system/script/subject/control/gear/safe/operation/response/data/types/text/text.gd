@@ -16,4 +16,3 @@ func resolve(object: Dictionary) -> bool:
 		JSONB: add.binary_json(object)
 		_: return false
 	return true
-

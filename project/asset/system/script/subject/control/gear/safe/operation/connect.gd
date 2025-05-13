@@ -16,7 +16,7 @@ func _process_url_string(url: String) -> RegExMatch:
 func _set_main_connect(result) -> void: # "postgres" is the database and user by default.
 	var peers: TransferPeers = backend.connection.peers
 	if peers.connected("ssl"):
-		peers.stream.ssl.put_data(op.startup)
+		peers.stream.ssl.put_data(backend.op.startup)
 	elif not backend.connection.present():
 		backend.connection.attempt(result)
 

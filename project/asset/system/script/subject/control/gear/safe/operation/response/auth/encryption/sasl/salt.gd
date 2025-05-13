@@ -4,23 +4,23 @@ class_name EncryptionSalt
 
 const END: int = 0xFF
 
-var context: HashType = HashingContext.HASH_SHA256
+var context: HashingContext.HashType = HashingContext.HASH_SHA256
 var output: PackedByteArray = PackedByteArray()
 
 func hmac(crypto: Crypto, word: PackedByteArray, key: PackedByteArray) -> PackedByteArray:
-	return crypto.hmac_digest(context, password, key)
+	return crypto.hmac_digest(context, word, key)
 
 func dig_key2(keys: Dictionary) -> void:
 	for index in keys[1].size(): keys[2][index] ^= keys[1][index]
 
-func dig_key1(hash: Dictionary, password: PackedByteArray, keys: Dictionary, iterations: int = 4096) -> void:
+func dig_key1(hash: Dictionary, keys: Dictionary, iterations: int = 4096) -> void:
 	for _index in iterations - 1:
 		keys[1] = hmac(hash.crypto, hash.word, keys[1])
 		dig_key2(keys)
 
 func dig_keys(hash: Dictionary, iterations: int) -> PackedByteArray:
 	var keys: Dictionary = { 1: hmac(hash.crypto, hash.word, hash.key) }
-	var keys[2] = keys[1]
+	keys[2] = keys[1]
 	dig_key1(hash, keys, iterations)
 	return keys[2]
 
@@ -33,7 +33,7 @@ func _get_block_count(length: int, hash: int) -> int:
 func pbkdf2(password: PackedByteArray, server: Dictionary, length: int = 0) -> void:
 	# On devrait passer le mot de passe (credit.word) dans la fonction SASLprep (rfc7613) (or SASLprep, rfc4013) non implémenté si desous...
 	var hash: Dictionary = { "crypto": Crypto.new(), "word": password }
-	var hash.length = len(hmac(hash.crypto, server.salt, hash.word))
+	hash.length = len(hmac(hash.crypto, server.salt, hash.word))
 	var buffer: PackedByteArray = PackedByteArray()
 	buffer.resize(4)
 

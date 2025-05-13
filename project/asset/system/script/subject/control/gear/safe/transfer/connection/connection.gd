@@ -20,14 +20,14 @@ var state: Dictionary = { "busy": false, "next_etape": false, "code": ERR_BUSY, 
 var status: Dictionary = { "link": DISCONNECTED, "data": [], "param": {}, "error": {} }
 
 func renew_data() -> Array:
-	var data: Array = connection.data
-	connection.data = []
-	return data
+	var result: Array = data
+	data = []
+	return result
 
 func _init(): peers.set_stream(client)
 func safe() -> Dictionary: return {} ## Secure dictionary as empty if backend disconnected - updates once connection is established.
 func reset_error() -> void: status.error = safe()
-func decide_port(other: String) -> int: port = other.to_int() if other else PORT
+func decide_port(other: String) -> void: port = other.to_int() if other else PORT
 
 func establish() -> void: established.emit()
 func raise_data(error, transact, data) -> void: data_received.emit(error, transact, data)
@@ -44,16 +44,16 @@ func not_busy() -> void:
 
 func first_message() -> bool: # Get the fist message of server.
 	var ok: bool = state.code == OK
-	if ok: next_etape = true
+	if ok: state.next_etape = true
 	return ok
 
-func attempt(result) -> bool:
+func attempt(result) -> void:
 	if client.get_status() == StreamPeerTCP.Status.STATUS_NONE:
 		status.code = client.connect_to_host(result.strings[3], port)
 
 func fail_auth() -> void:
 	fail() ## Check unnessary if status != Status.CONNECTED
-	auth_error.emit(error.duplicate())
+	auth_error.emit(status.error.duplicate())
 
 func fail(message: String = "", value: String = "") -> void:
 	status.link = ERROR

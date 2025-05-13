@@ -2,7 +2,7 @@ extends RefCounted
 
 class_name PostgresGeometryTypes
 
-enum { UUID = 2950, POINT = 600, BOX = 603, LSEG = 601, LINE = 628, CIRCLE = 718 } # Universal Unique IDentifier # Geometry # Date-time
+enum { POINT = 600, BOX = 603, LSEG = 601, LINE = 628, CIRCLE = 718 } # Universal Unique IDentifier # Geometry # Date-time
 
 var add: PostgresGeometryRecognize = PostgresGeometryRecognize.new()
 

@@ -12,10 +12,10 @@ func force_stop(object: Dictionary) -> void:
 	object.note.force_close("invalid_value", object.value)
 	stop.emit()
 
-func _boolean(object: Dictionary) -> bool:
+func boolean(object: Dictionary) -> void:
 	match str(object.value[BOOLEAN_CHAR]):
-		't': row.append(true)
-		'f': row.append(false)
+		't': object.row.append(true)
+		'f': object.row.append(false)
 		_: force_stop(object)
 
 func integer(object: Dictionary) -> void:
@@ -23,4 +23,3 @@ func integer(object: Dictionary) -> void:
 
 func floating(object: Dictionary) -> void:
 	object.row.append(object.value.get_string_from_ascii().to_float())
-

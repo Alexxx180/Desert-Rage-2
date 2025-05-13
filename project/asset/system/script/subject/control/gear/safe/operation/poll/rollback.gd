@@ -42,13 +42,13 @@ func rollback(process: Dictionary, _method: int) -> void: ## Abort changes made 
 	set_buffered_data(CANCEL, before_rollback, func(b):
 		b.put_u32(process.id) # The process ID of ...
 		b.put_u32(process.key) # The secret key for ...
-		backend.connection.peers.peer.put_data(b.data_array.slice(4))) # ... the target backend
+		connection.peers.peer.put_data(b.data_array.slice(4))) # ... the target backend
 
 func next_etape() -> void:
-	if not connection.next_etape: return
+	if not connection.state.next_etape: return
 	if methods.has(secure):
 		methods[secure].call()
 	else:
 		connection.peers.put_data(op.startup)
 		op.startup = op.empty
-	connection.next_etape = false
+	connection.state.next_etape = false

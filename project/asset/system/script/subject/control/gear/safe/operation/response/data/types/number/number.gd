@@ -6,7 +6,7 @@ enum { BOOLEAN = 16, SMALLINT = 21, INTEGER = 23, BIGINT = 20, REAL = 700, DOUBL
 
 var add: PostgresNumberRecognize = PostgresNumberRecognize.new()
 
-func resolve(object: Dictionary) -> void:
+func resolve(object: Dictionary) -> bool:
 	match object.type_id:
 		BOOLEAN: add.boolean(object)
 		SMALLINT: add.integer(object)

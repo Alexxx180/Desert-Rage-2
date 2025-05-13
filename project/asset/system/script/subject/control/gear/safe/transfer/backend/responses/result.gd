@@ -19,7 +19,7 @@ var command_tag: String ## Complete SQL command word identifier
 
 var notice: Dictionary = {} ## Represents various information about the execution status of the query notified by the backend. Can be empty.
 
-func _compare_field(name: String, i: int) -> void:
+func _compare_field(name: String, i: int) -> bool:
 	return row_description[i]["field_name"] == name
 
 func _set_values_data(values: Array, fields_index: int) -> void:

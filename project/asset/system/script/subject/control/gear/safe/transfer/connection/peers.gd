@@ -5,12 +5,12 @@ class_name TransferPeers
 const PROTOCOL: String = "tls"
 
 var packet_stream: PacketPeerStream = PacketPeerStream.new()
-var stream: Dictionary = { "tls": StreamPeerTLS.new(), "ssl": StreamPeerSSL.new() }
+var stream: Dictionary = { "tls": StreamPeerTLS.new() } #, "ssl": StreamPeerSSL.new()
 var peer: StreamPeer
 
 func set_stream(client) -> void:
-	packet_stream.set_stream(client)
-	peer = packet_stream.stream
+	packet_stream.set_stream_peer(client)
+	peer = packet_stream.stream_peer
 
 func _storage(condition: bool, protocol: String = PROTOCOL):
 	return stream[protocol] if condition else peer
@@ -33,7 +33,7 @@ func get_response(protocol: String = "") -> Array:
 func put_data(data: PackedByteArray) -> void:
 	stream[PROTOCOL].put_data(data)
 
-func connect(message: String, protocol: String = PROTOCOL) -> void:
+func connect_to(message: String, protocol: String = PROTOCOL) -> void:
 	stream[protocol].connect_to_stream(peer, message)
 
 func connected(protocol: String = PROTOCOL) -> bool:

@@ -21,6 +21,7 @@ var field: FieldDescriptionResponses = FieldDescriptionResponses.new()
 var meta: MetaResponses = MetaResponses.new()
 var indicator: MessageIndicators = MessageIndicators.new()
 var auth: AuthResponse = AuthResponse.new()
+var complete: CompleteResponses = CompleteResponses.new()
 
 func set_stop() -> void: _stop = true
 
@@ -39,7 +40,7 @@ func parse(fragmented_answer: PackedByteArray):
 		var message: int = meta.responses.get_first()
 		var type: String = str(message) # char
 		match type:
-			'A': indicator.notification(object)
+			'A': indicator.notify(object)
 			'C': complete.command(object)
 			'D': field.data.row_response(object)
 			'E': notice.error(object)
@@ -48,9 +49,9 @@ func parse(fragmented_answer: PackedByteArray):
 			'N': notice.response(object)
 			'I': indicator.empty_query(object)
 			'K': auth.base.cancel()
-			'R': auth.response(object)
+			'R': auth.response()
 			'S': indicator.status_report(object)
-			'T': field.row(object)
+			'T': field.row()
 			'V': indicator.function_call(object)
 			'W': copy.response("Both")
 			'Z': result = complete.ready_for_query(object)
@@ -58,11 +59,11 @@ func parse(fragmented_answer: PackedByteArray):
 			'd': copy.data()
 			'n': indicator.no_data(object)
 			's': indicator.ready_suspended(object)
-			't': field.parameter(object)
+			't': field.parameter()
 			'v': meta.negotiate_version()
 			'1': complete.parse(object)
 			'2': complete.bind(object)
 			'3': complete.close(object)
 			_: complete.unrecognized.response(object, type)
-		responses.next_fragment()
+		object.responses.next_fragment()
 	return result

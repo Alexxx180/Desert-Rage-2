@@ -9,7 +9,7 @@ var stats: SaslAuthenticationStats
 
 func scram_sha_256(type: String = 'n', suffix: String = ""): # SASL. Also used for GSSAPI, SSPI, not implemented...
 	var crypto: Crypto = Crypto.new() # The exact message type is deduced from the context.
-	var nonce: PackedByteArray = Marshalls.raw_to_base64(crypto.generate_random_bytes(24))
+	var nonce: String = Marshalls.raw_to_base64(crypto.generate_random_bytes(24))
 
 	stats.set_client_first_message(type, nonce)
 
@@ -20,11 +20,11 @@ func scram_sha_256(type: String = 'n', suffix: String = ""): # SASL. Also used f
 
 func scram_sha_256_plus() -> void: # Not done implementing SCRAM-SHA-256-PLUS
 	_stop = false
-	if _stop: scram_sha_256(object, 'y', '-PLUS') # /!\ Not end /!\
+	if _stop: scram_sha_256('y', '-PLUS') # /!\ Not end /!\
 
 func no_implementation(name: String): print("No implementation: " + name)
 
-func require_auth(object: Dictionary) -> void: # Get the message body is a list of SASL authentication mechanisms, in the server's order of preference.
+func require_auth() -> void: # Get the message body is a list of SASL authentication mechanisms, in the server's order of preference.
 	_stop = true
 	for mechanism in stats.backend.responses.split_byte(9, 0):
 		var name: String = mechanism.get_string_from_ascii()

@@ -11,7 +11,7 @@ func supports(type: int) -> bool:
 		backend.connection.note.end_response("no_support", "Authentication" + types[type])
 	return stop
 
-func successful_auth() -> void:
+func _successful_auth() -> void:
 	backend.connection.status.link = ConnectionMetadata.CONNECTING
 
 func _clear_text() -> PackedByteArray:
@@ -34,7 +34,7 @@ func no_response() -> bool:
 	backend.connection.note.end_response("no_auth_support")
 	return true
 
-func cancel() -> void: backend.credit.cancel(responses)
+func cancel() -> void: backend.credit.cancel(backend.responses)
 
 func encryption(type: int) -> bool:
 	match type:

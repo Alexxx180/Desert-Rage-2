@@ -17,10 +17,10 @@ func _get_server_params(message: String, first: int = 2) -> Dictionary:
 		"nonce": params[0].substr(first) }
 
 func _set_auth_message(client: Dictionary, server: String) -> void: # initial client message, server challenge, client response without proof.
-	client.first = stats.message.client_safe()
+	client.first = stats.client_safe()
 	stats.message.auth = client.first + ',' + server + ',' + client.final
 
-func _get_proof() -> void:
+func _get_proof() -> PackedByteArray:
 	var crypto: Crypto = Crypto.new()
 	var client: Dictionary = { "key": stats.salt.hmac(crypto, stats.salt.output, stats.key("Client")) }
 	client.signature = stats.salt.hmac(crypto, _stored_key_from(client.key), stats.message.auth.to_utf8_buffer())
@@ -36,7 +36,7 @@ func _get_final_client_message() -> String:
 
 	return message.client.final + ",p=" + Marshalls.raw_to_base64(_get_proof())
 
-func encryption(object: Dictionary) -> bool: # Specifies that this message contains a SASL challenge. SCRAM-SHA-256
-	var final: String = _get_final_client_message(message)
+func encryption() -> void: # Specifies that this message contains a SASL challenge. SCRAM-SHA-256
+	var final: String = _get_final_client_message()
 	var auth: PackedByteArray = stats.backend.op.request('p', final.to_ascii_buffer())
 	stats.put_ssl_initial(auth)
