@@ -30,7 +30,7 @@ func _init() -> void:
 		response.stop.connect(set_stop)
 
 func available() -> bool:
-	return meta.enough() and object.connection.connected() and meta.fragment_check()
+	return meta.enough() and object.connection.client.connected() and meta.fragment_check()
 
 func parse(fragmented_answer: PackedByteArray):
 	_stop = false

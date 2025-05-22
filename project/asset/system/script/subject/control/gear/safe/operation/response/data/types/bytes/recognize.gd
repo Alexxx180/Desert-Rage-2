@@ -17,10 +17,10 @@ func latin(object: Dictionary) -> void:
 	object.row.append(object.value.get_string_from_ascii())
 
 func _add_bite_array(object: Dictionary) -> void:
-	var bitea: PackedByteArray = PackedByteArray()
+	var value: PackedByteArray = PackedByteArray()
 	for ihex in object.value.size() * 0.5 - 1:
-		bitea.append(get_number_from_hex(object.value, ihex))
-	object.row.append(bitea)
+		value.append(get_number_from_hex(object.value, ihex))
+	object.row.append(value)
 
 func bitea(object: Dictionary) -> void: # Support isn't complete
 	var values: String = object.value.get_string_from_ascii()

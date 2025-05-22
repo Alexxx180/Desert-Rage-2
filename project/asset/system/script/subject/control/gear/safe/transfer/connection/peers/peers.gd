@@ -4,11 +4,14 @@ class_name TransferPeers
 
 const PROTOCOL: String = "tls"
 
-var packet_stream: PacketPeerStream = PacketPeerStream.new()
-var stream: Dictionary = { "tls": StreamPeerTLS.new() } #, "ssl": StreamPeerSSL.new()
-var peer: StreamPeer
+enum { START = 0, CRYPTO = 1, CONNECTING = 2, FINISH = 3 }
 
-func set_stream(client) -> void:
+var packet_stream: PacketPeerStream = PacketPeerStream.new()
+var stream: Dictionary = { "tls": StreamPeerTLS.new() }
+var peer: StreamPeer
+var ssl: int = 0
+
+func set_stream(client: StreamPeerTCP) -> void:
 	packet_stream.set_stream_peer(client)
 	peer = packet_stream.stream_peer
 
@@ -17,7 +20,7 @@ func _storage(condition: bool, protocol: String = PROTOCOL):
 
 func by_stream(protocol: String = PROTOCOL): return stream[protocol]
 func by_connection(protocol: String): return _storage(connected(protocol), protocol)
-func by_ssl(ssl: int, protocol: String = "tls"): return _storage(ssl == 0, protocol)
+func by_ssl(protocol: String = PROTOCOL): return _storage(ssl == START, protocol)
 
 func available(protocol: String = ""):
 	var p = _storage(protocol != "", protocol)
@@ -45,3 +48,6 @@ func handshakes(protocol: String = PROTOCOL) -> bool:
 	return (_status == s.STATUS_HANDSHAKING or _status == s.STATUS_CONNECTED)
 
 func poll() -> void: if handshakes(): by_stream().poll()
+func crypto_ready() -> bool: return ssl == CRYPTO
+func ssl_ready() -> bool: return not ssl in [CRYPTO, CONNECTING]
+func startup_ready() -> bool: return ssl == CONNECTING and connected()

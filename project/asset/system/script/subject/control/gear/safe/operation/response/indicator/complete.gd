@@ -35,7 +35,7 @@ func ready_for_query(object: Dictionary) -> Array: # Sent whenever backend ready
 	var data: Array = object.connection.renew_data()
 	object.responses.resize()
 	if object.connection.in_progress(): _establish_connection(object)
-	elif object.connection.connected(): _retrieve_data(object, status, data)
+	elif object.connection.client.connected(): _retrieve_data(object, status, data)
 	return data
 
 func parse(_object) -> void: pass

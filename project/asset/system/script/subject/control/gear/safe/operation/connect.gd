@@ -4,6 +4,8 @@ class_name PostgresHostConnect
 
 signal change_security(method: int)
 
+enum { USER = 1, WORD = 2, HOST = 3, PORT = 4, DB = 5 }
+
 const URL: String = "^(?:postgresql|postgres)://(.+):(.+)@(.+):(\\d*)/(.+)"
 
 var backend: Dictionary
@@ -13,21 +15,21 @@ func _process_url_string(url: String) -> RegExMatch:
 	regex.compile(URL)
 	return regex.search(url) #'port=5432 dbname=test_database user=tester password=test_password';
 
-func _set_main_connect(result) -> void: # "postgres" is the database and user by default.
+func _set_main_connect(host: String) -> void: # "postgres" is the database and user by default.
 	var peers: TransferPeers = backend.connection.peers
-	if peers.connected("ssl"):
-		peers.stream.ssl.put_data(backend.op.startup)
+	if peers.connected():
+		peers.by_stream().put_data(backend.op.startup)
 	elif not backend.connection.present():
-		backend.connection.attempt(result)
+		backend.connection.client.attempt(host)
 
-
-func to_host(url: String, method: int, timeout: int = 30) -> int: ## Connect to PostgreSQL backend at specified url.
+func to_host(url: String, method: int, _timeout: int = 30) -> int:
+	## Connect to PostgreSQL backend at specified url.
 	var connection: ConnectionMetadata = backend.connection
 	backend.credit.url = url
 	change_security.emit(method)
-	connection.status.code = 1
+	connection.state.code = 1
 
-	if connection.present():
+	if connection.status.present():
 		connection.note.ask_for_closure(false)
 
 	var result: RegExMatch = _process_url_string(url)
@@ -36,10 +38,12 @@ func to_host(url: String, method: int, timeout: int = 30) -> int: ## Connect to 
 		return connection.status.code
 
 	var text: Array = result.strings
-	backend.op.startup_message(text)
-	backend.credit.set_data(text)
-	connection.decide_port(text[4]) # _set_main_connect()
-	connection.attempt(result)
+	backend.op.startup_message(text[USER], text[DB])
+	backend.credit.set_data(text[USER], text[WORD])
+	connection.client.decide_port(text[PORT])
+	#_set_main_connect(text[HOST])
+	connection.client.attempt(text[HOST])
 	
-	if not connection.first_message(): connection.note.fail("no_host")
-	return connection.status.code
+	if not connection.first_message():
+		connection.note.fail("no_host")
+	return connection.state.code

@@ -4,9 +4,9 @@ class_name MessageIndicators
 
 enum { KEY = 0, VALUE = 1 }
 
-func no_data(object) -> void: pass
-func ready_suspended(object) -> void: pass # Portal-suspended. Appears only if an Execute row-count limit was reached.
-func empty_query(object) -> void: pass # Empty query string response. Substitutes for CommandComplete.
+func no_data(_object) -> void: pass
+func ready_suspended(_object) -> void: pass # Portal-suspended. Appears only if an Execute row-count limit was reached.
+func empty_query(_object) -> void: pass # Empty query string response. Substitutes for CommandComplete.
 
 func function_call(object: Dictionary) -> void: # Identifies the message as a function call result.
 	object.connection.note.warn("no_implementation", "FunctionCallResponse")

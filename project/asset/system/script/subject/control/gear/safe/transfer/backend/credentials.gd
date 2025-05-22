@@ -16,6 +16,6 @@ func cancel(responses: BackendResponses) -> void: # Must have values to be able 
 	backend.id = responses.reverse(4, 5, 9).get_u32()# ... process ID of this backend.
 	backend.secret = responses.reverse(0, 9, responses.length + 1).get_u32()# ... secret key of this backend.
 
-func set_data(result: Array) -> void:
-	word = result[2]
-	user = result[1]
+func set_data(name: String, password: String) -> void:
+	word = password
+	user = name

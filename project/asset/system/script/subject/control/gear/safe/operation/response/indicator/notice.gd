@@ -50,5 +50,5 @@ func _message(object: Dictionary, field: Dictionary) -> void:
 
 func error(object: Dictionary) -> void: 
 	_iterate_fields(object, func(_k, field): return {
-		'S': func(f): _severity(object, f), 'M': func(f): _message(object, f)})
+		'S': func(): _severity(object, field), 'M': func(): _message(object, field)})
 	if object.connection.status.error["severity"] == "FATAL": object.connection.fail_auth()

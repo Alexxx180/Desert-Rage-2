@@ -24,11 +24,11 @@ func _ready() -> void:
 
 func on_load_user_data() -> void:
 	new_session()
-	database.connection_established.connect(connection_established)
-	database.connection_error.connect(connection_error)
-	database.connection_closed.connect(connection_closed)
-	database.data_received.connect(receive)
+	database.connect_signals(self)
 	database.op.connection.to_host(PREFIX + _get_connection_string(), TransactionRollback.SSL)
+
+func _physics_process(_delta: float) -> void:
+	database.op.poll.poll()
 
 func connection_established() -> void:
 	print("HAVE CONNECTION")
@@ -44,7 +44,10 @@ func connection_established() -> void:
 	""" # 3.x version code
 	#database.close()
 
-func receive(errors: Dictionary, transaction: int, datas: Array) -> void:
+func auth_error(_object: Dictionary) -> void:
+	pass
+
+func data_received(_errors: Dictionary, _transaction: int, datas: Array) -> void:
 	print("TRANSACTED: ", datas)
 	database.close()
 

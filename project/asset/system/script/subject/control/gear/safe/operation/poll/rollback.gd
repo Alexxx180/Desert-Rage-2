@@ -13,10 +13,10 @@ var secure: int = CANCEL
 var connection: ConnectionMetadata
 var op: BufferOperations
 
-func set_transfer(method: int) -> void: secure = method
+func change_security(method: int) -> void: secure = method
 
 func set_buffered_data(request: int, before: Callable, after: Callable) -> void:
-	if not connection.connected(): connection.note.fail("no_connection"); return
+	if not connection.client.connected(): connection.note.fail("no_connection"); return
 	var buffer: StreamPeerBuffer = StreamPeerBuffer.new()
 	before.call(buffer) # Message length bytes with self.
 	buffer.put_data(op.reverse(request, op.put_32))

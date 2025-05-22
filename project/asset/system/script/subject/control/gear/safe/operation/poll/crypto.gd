@@ -7,14 +7,14 @@ var connection: ConnectionMetadata
 func set_crypto() -> void:
 	#var crypto = Crypto.new() ; var ssl_key = crypto.generate_rsa(4096) ; var ssl_cert = crypto.generate_self_signed_certificate(ssl_key)
 	connection.peers.connect_to("") # stream_peer_tls.blocking_handshake = false
-	connection.state.ssl = 2
+	connection.peers.ssl = TransferPeers.CONNECTING
 
 func bad_status(message: String, postfix: String = "") -> void:
 	connection.fail(message, postfix)
 	connection.note.ask_for_closure(false)
 
 func update() -> void:
-	if connection.state.ssl != 1: return
+	if not connection.is_crypto(): return
 
 	var response: Array = connection.peers.get_response()
 	var _status: int = response[PollResponse.STATUS]

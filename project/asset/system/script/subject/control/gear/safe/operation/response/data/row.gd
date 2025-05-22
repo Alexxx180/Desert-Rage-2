@@ -16,7 +16,7 @@ func get_message_length(cursor: int, next: int) -> int:
 
 func resolve(rows: Array, next: int, length: int, i: int) -> int:
 	if length == -1:
-		for row in rows: row.append(null)
+		for r in rows: r.append(null)
 		return 0 ### NULL ### The result
 	else:
 		_matcher.backend.value = _matcher.backend.responses.slice(next, next + length) # var error: int
@@ -30,8 +30,8 @@ func row() -> void:
 	var columns: int = get_number_of_columns()
 
 	var raw: Array = []
-	var row: Array = []
-	_matcher.backend.row = row
+	var result: Array = []
+	_matcher.backend.row = result
 
 	var cursor: int = 0
 	var i: int = 0
@@ -41,10 +41,10 @@ func row() -> void:
 		var next: int = cursor + CURSOR.NEXT
 		var length: int = get_message_length(cursor, next)
 
-		_matcher.backend.responses.cursor += resolve([row, raw], next, length, i) + CURSOR.ADD
+		_matcher.backend.responses.cursor += resolve([result, raw], next, length, i) + CURSOR.ADD
 		i += 1
 	if not _matcher.stop:
-		_matcher.backend.responses.result.data_row.append(row)# The result.
+		_matcher.backend.responses.result.data_row.append(result)# The result.
 		_matcher.backend.responses.result.raw_data.append(raw)
 	else:
 		stop.emit()

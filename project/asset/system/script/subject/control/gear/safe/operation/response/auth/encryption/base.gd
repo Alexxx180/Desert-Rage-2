@@ -12,7 +12,7 @@ func supports(type: int) -> bool:
 	return stop
 
 func _successful_auth() -> void:
-	backend.connection.status.link = ConnectionMetadata.CONNECTING
+	backend.connection.status.state = ConnectionStatus.CONNECTING
 
 func _clear_text() -> PackedByteArray:
 	return backend.op.p(backend.responses, backend.credit.word.to_utf8_buffer())

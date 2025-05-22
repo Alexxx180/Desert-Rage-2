@@ -29,7 +29,7 @@ static func reverse_data(data) -> PackedByteArray:
 
 func reverse(seek: int, start: int = -1, end: int = -1):
 	_appendix(message.cursor, start, end)
-	var response = reverse_data(responses.slice(message.start, message.end))
+	var _response: PackedByteArray = reverse_data(responses.slice(message.start, message.end))
 	put_data(seek)
 	return buffer
 

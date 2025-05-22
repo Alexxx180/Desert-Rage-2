@@ -16,14 +16,13 @@ func _init() -> void:
 	for type in [number.recognize, text.recognize, geometry.recognize]:
 		type.stop.connect(set_stop)
 
-func simple(object: Dictionary) -> bool:
+func simple() -> bool:
 	return number.resolve(object) or text.resolve(object)
 
-func complex(object: Dictionary) -> bool:
+func complex() -> bool:
 	return bytes.resolve(object) or geometry.resolve(object)
 
 func resolve(i: int) -> void:
 	object.type_id = object.responses.result.get_type_object_id(i)
-	if simple(object) or complex(object):
-		return
+	if simple() or complex(): return
 	object.row.append(object.value) # PackedByteArray

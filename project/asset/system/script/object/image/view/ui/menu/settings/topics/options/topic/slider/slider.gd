@@ -52,7 +52,7 @@ func set_manual(next: bool) -> void:
 	Processors.turn(manual, _manual)
 	hold_focus.emit(!next)
 
-func check_actions(event: InputEvent) -> void:
+func check_actions(_event: InputEvent) -> void:
 	var actions: Array[String] = ["ui_cancel", "ui_accept", "list_right",
 		"list_left", "list_up", "list_down", "ui_focus_next", "ui_focus_prev"]
 	var i: int = actions.size() - 1

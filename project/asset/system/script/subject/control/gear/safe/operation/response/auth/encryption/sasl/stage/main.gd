@@ -5,10 +5,10 @@ class_name SaslChallenge
 var stats: SaslAuthenticationStats
 
 func _stored_key_from(key: PackedByteArray) -> PackedByteArray:
-	var hash: HashingContext = HashingContext.new()
-	hash.start(stats.salt.type)
-	hash.update(key)
-	return hash.finish()
+	var hashes: HashingContext = HashingContext.new()
+	hashes.start(stats.salt.type)
+	hashes.update(key)
+	return hashes.finish()
 
 func _get_server_params(message: String, first: int = 2) -> Dictionary:
 	var params: Array = message.split(',')

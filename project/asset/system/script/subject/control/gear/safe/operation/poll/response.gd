@@ -7,9 +7,10 @@ enum { STATUS = 0, VALUE = 1, SSL = 3 }
 var backend: Dictionary
 
 func poll() -> bool:
-	var status: bool = backend.connection.poll()
-	if not status: backend.connection.peers.poll()
-	return status
+	backend.connection.client.poll()
+	var connected: bool = backend.connection.client.connected()
+	if connected: backend.connection.peers.poll()
+	return connected
 
 func check() -> void:
 	if not backend.connection.ssl_ready(): return
@@ -23,7 +24,9 @@ func check() -> void:
 		if service: storage.put_data(service)
 
 func start() -> void:
-	if not (backend.connection.present() and backend.connection.state.busy): return
+	var present: bool = backend.connection.present()
+	var busy: bool = backend.connection.state.busy
+	if not (present and busy): return
 
 	var peers: TransferPeers = backend.connection.peers
 	var response: Array = [OK, backend.op.empty]
