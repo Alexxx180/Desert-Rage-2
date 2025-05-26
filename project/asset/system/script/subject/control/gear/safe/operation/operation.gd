@@ -15,8 +15,8 @@ func _init() -> void:
 		"credit": EncryptionCredentials.new(),
 		"responser": ResponseParser.new()
 	}
-	connection.change_security.connect(poll.rollback.change_security)
 	backend.responser.object = backend
 	backend.connection.note.end.connect(backend.responses.resize)
 	for operation in [poll, close, connection, execute]:
 		operation.backend = backend
+	connection.change_security.connect(poll.response.buffer.change_security)

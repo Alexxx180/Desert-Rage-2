@@ -5,10 +5,6 @@ class_name MetaResponses
 var responses: BackendResponses
 
 func get_the_option_name(number: int) -> void: for _option in number: pass # not recognized by the server...
-
-func add_answer(fragment) -> void:
-	responses.responses += fragment
-
 func _number(seek: int, start: int, end: int) -> int:
 	return responses.reverse(seek, start, end).get_u32()
 
@@ -18,10 +14,8 @@ func negotiate_version() -> void: # protocol negotiation message:
 	get_the_option_name(options)
 	prints(minor_v) # The result.
 
-func enough() -> bool: return responses.size() > 4
-
 func fragment_check() -> bool: # Wait to receive full response.
 	responses.buffer = StreamPeerBuffer.new()
 	# var data_length: int = _number(0, 1, 5)
 	responses.message.length = _number(0, 1, 5) # buffer.size()
-	return responses.size() < responses.message.length + 1 # Fragmentary check
+	return responses.has_words() # Fragmentary check

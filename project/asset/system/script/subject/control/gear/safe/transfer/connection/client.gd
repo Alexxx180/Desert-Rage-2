@@ -9,6 +9,7 @@ var state: int = FAILED
 var port: int = PORT
 
 func poll() -> void: tcp.poll()
+func reset() -> void: state = FAILED
 
 func decide_port(other: String) -> void:
 	if other: port = other.to_int()
@@ -16,6 +17,7 @@ func decide_port(other: String) -> void:
 func attempt(host: String) -> void:
 	if no_connection():
 		state = tcp.connect_to_host(host, port)
+		tcp.poll()
 		print("CLIENT STATE: ", state)
 	else:
 		print("CLIENT ALREADY CONNECTED")
@@ -23,11 +25,11 @@ func attempt(host: String) -> void:
 func no_connection() -> bool:
 	return tcp.get_status() == StreamPeerTCP.Status.STATUS_NONE
 
-func connected() -> bool:
-	return tcp.get_status() == StreamPeerTCP.Status.STATUS_CONNECTED
+static func connection_present(client) -> bool:
+	return client.get_status() == client.STATUS_CONNECTED  # StreamPeerTCP.Status.STATUS_CONNECTED
 
-func hosted() -> bool:
-	return tcp.is_connected_to_host()
+func connected() -> bool: return connection_present(tcp)
 
-func all_set() -> bool:
-	return hosted() and connected()
+func first_message() -> bool: # Get the fist message of server.
+	return state == OK
+	

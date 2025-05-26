@@ -3,13 +3,19 @@ extends RefCounted
 class_name BackendResponses
 
 var buffer: StreamPeerBuffer
-var responses: PackedByteArray #var length: int #var cursor: int
+#var _responses: PackedByteArray
+var responses: PackedByteArray#: #var length: int #var cursor: int
+#	get: return _responses
+#	set(value): _responses = value
 var message: Dictionary = { "length": 0, "cursor": 0, "start": 0, "end": 0 }
 var result: PostgreSQLQueryResult = PostgreSQLQueryResult.new()
 
 func put_data(seek: int) -> void:
 	buffer.put_data(responses)
 	buffer.seek(seek)
+
+func add_answer(fragment) -> void:
+	responses += fragment
 
 func get_first() -> int: return responses[0]
 func get_current() -> int: return responses[message.length]
@@ -32,6 +38,9 @@ func reverse(seek: int, start: int = -1, end: int = -1):
 	var _response: PackedByteArray = reverse_data(responses.slice(message.start, message.end))
 	put_data(seek)
 	return buffer
+
+func enough() -> bool: return 4 < responses.size()
+func has_words() -> bool: return responses.size() < message.length + 1
 
 func slice(start: int = -1, end: int = -1):
 	_appendix(message.length, start, end)

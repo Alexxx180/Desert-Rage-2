@@ -10,44 +10,42 @@ var peers: TransferPeers = TransferPeers.new()
 var note: PostgreClientNotify = PostgreClientNotify.new()
 var client: ConnectionClient = ConnectionClient.new()
 var status: ConnectionStatus = ConnectionStatus.new()
+var meta: ConnectionParameters = ConnectionParameters.new()
 
-var state: Dictionary = { "busy": false, "next_etape": false }
-var result: Dictionary = { "data": [], "param": {}, "error": {} }
-
-func renew_data() -> Array:
-	var next: Array = result.data
-	result.data = []
-	return next
-
-func _init(): peers.set_stream(client.tcp)
-func safe() -> Dictionary: return {} ## Secure dictionary as empty if backend disconnected - updates once connection is established.
-func reset_error() -> void: result.error = safe()
+func _init(): peers.stream.set_client(client.tcp)
 
 func establish() -> void: established.emit()
-func raise_data(error, transact, d) -> void: data_received.emit(error, transact, d)
+
+func raise_data(error, transact, d) -> void:
+	data_received.emit(error, transact, d)
 
 func reset() -> void: ## Backend runtime parameters. Information about server state.
-	status.param = safe()
-	reset_error()
+	meta.reset()
 	status.reset()
-	peers.ssl = 0
+	peers.ssl.set_start()
 
-func not_busy() -> void:
-	state.busy = false
-	state.next_etape = false
+func fail_task(task: Callable) -> void:
+	status.fail()
+	task.call()
 
-func first_message() -> bool: # Get the fist message of server.
-	var ok: bool = client.state == OK
-	if ok: state.next_etape = true
-	return ok
-
-func fail_auth() -> void:
-	status.fail() ## Check unnessary if status != Status.CONNECTED
-	auth_error.emit(status.error.duplicate())
+func fail_auth() -> void: ## Check unnessary if status != Status.CONNECTED
+	fail_task(func(): auth_error.emit(status.error.duplicate()))
 
 func fail(message: String = "", value: String = "") -> void:
-	status.fail()
-	if message != "": note.fail(message, value)
+	fail_task(func(): if message != "": note.fail(message, value))
 
-func active() -> bool: return client.all_set() and status.present()
-func ssl_ready() -> bool: return peers.ssl_ready() and not status.present()
+func active() -> bool:
+	var c = client.connected()
+	var p = status.present()
+	print(c, p)
+	return c and p
+
+func poll() -> bool:
+	client.poll()
+	var connected: bool = client.connected()
+	if connected: peers.poll()
+	return connected
+
+func is_busy() -> bool: return status.present() and meta.state.busy
+
+func ssl_ready() -> bool: return peers.stream.ssl.is_ready() and not (status.present() or client.connected())

@@ -19,31 +19,32 @@ func _set_main_connect(host: String) -> void: # "postgres" is the database and u
 	var peers: TransferPeers = backend.connection.peers
 	if peers.connected():
 		peers.by_stream().put_data(backend.op.startup)
-	elif not backend.connection.present():
+	elif not backend.connection.status.present():
 		backend.connection.client.attempt(host)
 
-func to_host(url: String, method: int, _timeout: int = 30) -> int:
-	## Connect to PostgreSQL backend at specified url.
+func to_host(config: Dictionary, _timeout: int = 30) -> int: ## Connect Postgres with url.
 	var connection: ConnectionMetadata = backend.connection
-	backend.credit.url = url
-	change_security.emit(method)
-	connection.state.code = 1
+	var client: ConnectionClient = connection.client
+	backend.credit.url = config.url
+	change_security.emit(config.secure)
+	client.reset()
 
 	if connection.status.present():
 		connection.note.ask_for_closure(false)
 
-	var result: RegExMatch = _process_url_string(url)
+	var result: RegExMatch = _process_url_string(config.url)
 	if not result:
 		connection.fail("no_url")
-		return connection.status.code
+		return connection.status.state
 
 	var text: Array = result.strings
 	backend.op.startup_message(text[USER], text[DB])
 	backend.credit.set_data(text[USER], text[WORD])
-	connection.client.decide_port(text[PORT])
+	client.decide_port(text[PORT])
 	#_set_main_connect(text[HOST])
-	connection.client.attempt(text[HOST])
+	client.attempt(text[HOST])
+	#backend.connection.peers.stream.peer.connect_to_host(text[HOST], client.port)
 	
-	if not connection.first_message():
+	if not Transfer.define(client.first_message(), connection.meta.set_etape):
 		connection.note.fail("no_host")
-	return connection.state.code
+	return connection.client.state

@@ -30,15 +30,15 @@ func _init() -> void:
 		response.stop.connect(set_stop)
 
 func available() -> bool:
-	return meta.enough() and object.connection.client.connected() and meta.fragment_check()
+	return meta.responses.enough() and object.connection.client.connected() and meta.fragment_check()
 
 func parse(fragmented_answer: PackedByteArray):
 	_stop = false
 	var result: Array = DEFAULT
-	meta.add_answer(fragmented_answer)
+	meta.responses.add_answer(fragmented_answer)
 	while not _stop and result == DEFAULT and available():
 		var message: int = meta.responses.get_first()
-		var type: String = str(message) # char
+		var type: String = char(message)
 		match type:
 			'A': indicator.notify(object)
 			'C': complete.command(object)

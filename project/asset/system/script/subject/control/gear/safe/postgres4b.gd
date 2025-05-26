@@ -166,6 +166,7 @@ func close(clean_closure := true) -> void:
 ## Returns an Array of PostgreSQLQueryResult. (Can be empty)
 ## There are as many PostgreSQLQueryResult elements in the array as there are SQL statements in sql (sof in exceptional cases).
 func execute(sql: String) -> Array:
+	print("EXECUTE QUERY [BIN]: ", sql)
 	if status == Status.STATUS_CONNECTED:
 		var _unused
 		var request := request('Q', sql.to_utf8() + PoolByteArray([0]))
@@ -481,7 +482,7 @@ enum DataTypePostgreSQL {
 ## The PostgreSQLQueryResult class is a subclass of PostgreSQLClient which is not intended to be created manually.
 ## It represents the result of an SQL query and provides an information and method report to use the result of the query.
 ## It is usually returned by the PostgreSQLClient.execute() method in an array of PostgreSQLQueryResult.
-class PostgreSQLQueryResult:
+class PostgreSQLQueryResultB:
 	## Specifies the number of fields in a row (can be zero).
 	var number_of_fields_in_a_row := 0
 	

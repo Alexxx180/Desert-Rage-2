@@ -25,14 +25,14 @@ func _retrieve_data(object: Dictionary, status: int, data: Array) -> void:
 func ready_for_query(object: Dictionary) -> Array: # Sent whenever backend ready for a new query cycle.
 	var status: int
 	var message: int = object.responses.get_current()
-	var type: String = str(message)
+	var type: String = char(message)
 	match type: # Get current backend transaction status indicator.
 		'I': status = NOT_IN_A_TRANSACTION_BLOCK # If idle (if not in a transaction block).
 		'T': status = IN_A_TRANSACTION_BLOCK # If in a transaction block.
 		'E': status = IN_A_FAILED_TRANSACTION_BLOCK # If failed block (queries rejected until end).
 		_: unrecognized.status(object)
 	
-	var data: Array = object.connection.renew_data()
+	var data: Array = Transfer.renew(object.connection.result.data, [])
 	object.responses.resize()
 	if object.connection.in_progress(): _establish_connection(object)
 	elif object.connection.client.connected(): _retrieve_data(object, status, data)

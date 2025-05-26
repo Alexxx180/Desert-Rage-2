@@ -2,52 +2,32 @@ extends RefCounted
 
 class_name TransferPeers
 
-const PROTOCOL: String = "tls"
+var stream: PeerStreams = PeerStreams.new()
 
-enum { START = 0, CRYPTO = 1, CONNECTING = 2, FINISH = 3 }
-
-var packet_stream: PacketPeerStream = PacketPeerStream.new()
-var stream: Dictionary = { "tls": StreamPeerTLS.new() }
-var peer: StreamPeer
-var ssl: int = 0
-
-func set_stream(client: StreamPeerTCP) -> void:
-	packet_stream.set_stream_peer(client)
-	peer = packet_stream.stream_peer
-
-func _storage(condition: bool, protocol: String = PROTOCOL):
-	return stream[protocol] if condition else peer
-
-func by_stream(protocol: String = PROTOCOL): return stream[protocol]
-func by_connection(protocol: String): return _storage(connected(protocol), protocol)
-func by_ssl(protocol: String = PROTOCOL): return _storage(ssl == START, protocol)
-
-func available(protocol: String = ""):
-	var p = _storage(protocol != "", protocol)
-	return p.get_available_bytes()
+func available(protocol: String = PeerStreams.PROTOCOL):
+	return stream.with_protocol(protocol).get_available_bytes()
 
 func get_from(peers) -> Array:
 	return peers.get_data(peers.get_available_bytes())
 
-func get_response(protocol: String = "") -> Array:
-	var p = _storage(protocol != "", protocol)
-	return get_from(p)
+func get_response(protocol: String = PeerStreams.PROTOCOL) -> Array:
+	return get_from(stream.with_protocol(protocol))
 
 func put_data(data: PackedByteArray) -> void:
-	stream[PROTOCOL].put_data(data)
+	stream.by().put_data(data)
 
-func connect_to(message: String, protocol: String = PROTOCOL) -> void:
-	stream[protocol].connect_to_stream(peer, message)
+func connect_to(message: String) -> void:
+	stream.by().connect_to_stream(stream.peer, message)
 
-func connected(protocol: String = PROTOCOL) -> bool:
-	return stream[protocol].get_status() == stream[protocol].STATUS_CONNECTED
+func connected() -> bool:
+	return ConnectionClient.connection_present(stream.by())
 
-func handshakes(protocol: String = PROTOCOL) -> bool:
-	var s = stream[protocol]
-	var _status = s.get_status()
-	return (_status == s.STATUS_HANDSHAKING or _status == s.STATUS_CONNECTED)
+func handshakes() -> bool:
+	var s = stream.by()
+	return s.get_status() in [s.STATUS_HANDSHAKING, s.STATUS_CONNECTED]
 
-func poll() -> void: if handshakes(): by_stream().poll()
-func crypto_ready() -> bool: return ssl == CRYPTO
-func ssl_ready() -> bool: return not ssl in [CRYPTO, CONNECTING]
-func startup_ready() -> bool: return ssl == CONNECTING and connected()
+func poll() -> void:
+	if handshakes(): stream.by().poll()
+
+func startup_ready() -> bool:
+	return stream.ssl.is_connecting() and connected()
