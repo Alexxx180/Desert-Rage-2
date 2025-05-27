@@ -29,5 +29,7 @@ func end_dialog(clean) -> void:
 	reset_connection()
 
 func the_connection(clean: bool = true) -> void: ## If "clean", notify backend to close connection. Otherwise don't, which isn't recommended.
-	if backend.connection.status.present(): end_dialog(clean)
-	else: backend.connection.note.warn("no_connection")
+	if backend.connection.status.present():
+		end_dialog(clean)
+	else:
+		backend.connection.note.warn("no_connection")

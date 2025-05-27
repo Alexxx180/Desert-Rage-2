@@ -1,26 +1,36 @@
 [gd_scene load_steps=7 format=3 uid="uid://bqmdupn0v1oc8"]
 
-[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/sound/processor/options/play/behavior/level/typed/named/ambient/ambient.gd" id="1_pfohk"]
-[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/sound/processor/options/play/behavior/level/typed/named/ambient/assert.gd" id="2_rkkkf"]
-[ext_resource type="Script" path="res://addons/godot-behavior-tree-plugin/selector/selector.gd" id="3_qdjk6"]
-[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/sound/processor/options/play/behavior/level/typed/named/ambient/theme/hero.gd" id="4_y4s8j"]
-[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/sound/processor/options/play/behavior/level/typed/named/ambient/theme/named.gd" id="5_k14tq"]
-[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/sound/processor/options/play/behavior/level/typed/named/ambient/theme/typed.gd" id="6_cayas"]
+[ext_resource type="Script" uid="uid://b2eukqcbuq556" path="res://addons/godot-behavior-tree-plugin/selector/selector.gd" id="3_qdjk6"]
+
+[sub_resource type="Resource" id="Resource_ppbx4"]
+metadata/__load_path__ = "res://asset/system/script/object/image/view/ui/menu/sound/processor/options/play/behavior/level/typed/named/ambient/ambient.gd"
+
+[sub_resource type="Resource" id="Resource_guc1y"]
+metadata/__load_path__ = "res://asset/system/script/object/image/view/ui/menu/sound/processor/options/play/behavior/level/typed/named/ambient/assert.gd"
+
+[sub_resource type="Resource" id="Resource_lggum"]
+metadata/__load_path__ = "res://asset/system/script/object/image/view/ui/menu/sound/processor/options/play/behavior/level/typed/named/ambient/theme/hero.gd"
+
+[sub_resource type="Resource" id="Resource_37ggb"]
+metadata/__load_path__ = "res://asset/system/script/object/image/view/ui/menu/sound/processor/options/play/behavior/level/typed/named/ambient/theme/named.gd"
+
+[sub_resource type="Resource" id="Resource_tkgah"]
+metadata/__load_path__ = "res://asset/system/script/object/image/view/ui/menu/sound/processor/options/play/behavior/level/typed/named/ambient/theme/typed.gd"
 
 [node name="rampage" type="Node"]
-script = ExtResource("1_pfohk")
+script = SubResource("Resource_ppbx4")
 
 [node name="assert" type="Node" parent="."]
-script = ExtResource("2_rkkkf")
+script = SubResource("Resource_guc1y")
 
 [node name="theme" type="Node" parent="."]
 script = ExtResource("3_qdjk6")
 
 [node name="hero" type="Node" parent="theme"]
-script = ExtResource("4_y4s8j")
+script = SubResource("Resource_lggum")
 
 [node name="named" type="Node" parent="theme"]
-script = ExtResource("5_k14tq")
+script = SubResource("Resource_37ggb")
 
 [node name="typed" type="Node" parent="theme"]
-script = ExtResource("6_cayas")
+script = SubResource("Resource_tkgah")

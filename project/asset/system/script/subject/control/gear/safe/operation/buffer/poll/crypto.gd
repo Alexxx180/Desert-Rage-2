@@ -15,10 +15,17 @@ func bad_status(message: String, postfix: String = "") -> void:
 
 func determine(message: int) -> void:
 	var type: String = char(message)
+	print("TRY DETERMINE CONNECTION: ", type)
 	match type:
-		'S': set_crypto()
-		'N': bad_status("ssl_fail")
-		_: bad_status("ssl_unrecognized", type)
+		'S':
+			print("OK")
+			set_crypto()
+		'N':
+			print("FAILED")
+			bad_status("ssl_fail")
+		_:
+			print("???")
+			bad_status("ssl_unrecognized", type)
 
 func update() -> void:
 	var response: Array = connection.peers.get_response()

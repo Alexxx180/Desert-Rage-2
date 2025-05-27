@@ -18,4 +18,6 @@ func is_finished() -> bool: return state == FINISH
 
 func set_start() -> void: state = START
 
+func set_crypto() -> void: state = CRYPTO
+
 func set_connecting() -> void: state = CONNECTING
