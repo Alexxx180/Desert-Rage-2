@@ -41,7 +41,7 @@ func set_ssl_connection() -> void:
 	if backend.connection.peers.handshakes():
 		backend.connection.note.warn("already_secure")
 	else:
-		backend.connection.peers.stream.ssl.set_crypto()
+		# backend.connection.peers.stream.ssl.set_crypto()
 		set_connection(SSL)
 
 func set_gssapi_connection() -> void:

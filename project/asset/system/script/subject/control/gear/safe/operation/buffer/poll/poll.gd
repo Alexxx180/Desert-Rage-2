@@ -33,4 +33,3 @@ func poll() -> void: ## Poll connection to check incoming messages. Called frequ
 
 	if backend.connection.ssl_ready():
 		response.start()
-

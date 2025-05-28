@@ -5,7 +5,9 @@ class_name TransferPeers
 var stream: PeerStreams = PeerStreams.new()
 
 func available(protocol: String = PeerStreams.PROTOCOL):
-	return stream.by("protocol", protocol).get_available_bytes()
+	var peers = stream.by("protocol", protocol)
+	print("PEERS: ", peers)
+	return peers.get_available_bytes()
 
 func get_from(peers) -> Array:
 	return peers.get_data(peers.get_available_bytes())

@@ -18,7 +18,7 @@ func get_data() -> void:
 	print("STREAM STATUS: ", s.get_status())
 	#s.connect_to_host("postgres", 5432)
 	#s.connect_to_stream(peers.stream.peer, "postgres")
-	s.poll()
+	# s.poll()
 	if peers.available(protocol): # Crash avoidance (stream_peer_tls.get_available_bytes() = 0)
 		process(peers.get_response(protocol))
 	
