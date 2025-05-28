@@ -22,7 +22,7 @@ func _set_main_connect(host: String) -> void: # "postgres" is the database and u
 	elif not backend.connection.status.present():
 		backend.connection.client.attempt(host)
 
-func to_host(config: Dictionary, _timeout: int = 30) -> int: ## Connect Postgres with url.
+func to_host(config: Dictionary, _timeout: int = 30) -> int: # Connect Postgres with url.
 	var connection: ConnectionMetadata = backend.connection
 	var client: ConnectionClient = connection.client
 	backend.credit.url = config.url
@@ -40,9 +40,8 @@ func to_host(config: Dictionary, _timeout: int = 30) -> int: ## Connect Postgres
 	var text: Array = result.strings
 	backend.op.startup_message(text[USER], text[DB])
 	backend.credit.set_data(text[USER], text[WORD])
-	client.decide_port(text[PORT])
+	client.attempt(text[HOST], text[PORT])
 	#_set_main_connect(text[HOST])
-	client.attempt(text[HOST])
 	#backend.connection.peers.stream.peer.connect_to_host(text[HOST], client.port)
 	
 	if not Transfer.define(client.first_message(), connection.meta.set_etape):

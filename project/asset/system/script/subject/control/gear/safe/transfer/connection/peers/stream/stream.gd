@@ -13,7 +13,8 @@ var ssl: PeerStreamsStatus = PeerStreamsStatus.new()
 var with: Dictionary = {
 	"stream": func(protocol): return _protocols[protocol],
 	"connection": func(protocol): return storage(_connection(protocol), protocol),
-	"ssl": func(protocol): return storage(ssl.is_start(), protocol)
+	"ssl": func(protocol): return storage(ssl.is_start(), protocol),
+	"protocol": func(protocol): return storage(protocol != "", protocol)
 }
 
 func set_client(client: StreamPeerTCP) -> void:
@@ -26,8 +27,5 @@ func _connection(name: String) -> bool:
 func storage(condition: bool, protocol: String = PROTOCOL):
 	return _protocols[protocol] if condition else peer
 
-func with_protocol(protocol: String = ""):
-	return storage(protocol != "", protocol)
-
-func by(kind: String = "stream"):
-	return with[kind].call(PROTOCOL)
+func by(kind: String = "stream", protocol: String = PROTOCOL):
+	return with[kind].call(protocol)

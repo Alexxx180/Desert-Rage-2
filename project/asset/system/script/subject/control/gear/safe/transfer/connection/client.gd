@@ -14,7 +14,8 @@ func reset() -> void: state = FAILED
 func decide_port(other: String) -> void:
 	if other: port = other.to_int()
 
-func attempt(host: String) -> void:
+func attempt(host: String, next_port: String) -> void:
+	decide_port(next_port)
 	if no_connection():
 		state = tcp.connect_to_host(host, port)
 		tcp.poll()

@@ -43,9 +43,11 @@ func active() -> bool:
 func poll() -> bool:
 	client.poll()
 	var connected: bool = client.connected()
-	if connected: peers.poll()
+	if connected and peers.handshakes():
+		peers.poll()
 	return connected
 
 func is_busy() -> bool: return status.present() and meta.state.busy
 
-func ssl_ready() -> bool: return peers.stream.ssl.is_ready() and not (status.present() or client.connected())
+func ssl_ready() -> bool:
+	return not (peers.stream.ssl.is_intermediate() or status.present())

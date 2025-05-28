@@ -19,17 +19,18 @@ func _set_backend(value: Dictionary) -> void:
 func poll() -> void: ## Poll connection to check incoming messages. Called frequently in a loop before "execute"
 	if not backend.connection.poll(): return
 
+	if backend.connection.meta.state.next_etape:
+		response.next_etape()
+
 	if backend.connection.peers.stream.ssl.is_crypto():
 		crypto.update()
 
-	if backend.connection.meta.state.next_etape:
-		response.next_etape()
+	if backend.connection.is_busy():
+		response.check()
+
+	if backend.connection.peers.startup_ready():
+		response.put_startup_message()
 
 	if backend.connection.ssl_ready():
 		response.start()
 
-	if backend.connection.peers.startup_ready():
-		response.put_startup_message()
-	
-	if backend.connection.is_busy():
-		response.check()
