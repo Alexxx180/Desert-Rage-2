@@ -42,10 +42,7 @@ func active() -> bool:
 
 func poll() -> bool:
 	client.poll()
-	var connected: bool = client.connected()
-	if connected and peers.handshakes():
-		peers.poll()
-	return connected
+	return client.connected()
 
 func is_busy() -> bool: return status.present() and meta.state.busy
 

@@ -25,13 +25,16 @@ func on_load_user_data() -> void:
 	new_session()
 	database.connect_signals(self)
 	var config: Dictionary = {
-		"url": PREFIX + _get_connection_string(),
-		"secure": SecureDataBuffer.SSL
+		"url": "postgresql://postgres:l1F3tpI9geR@localhost:5432/postgres",
+			#PREFIX + _get_connection_string(),
+		#"secure": SecureDataBuffer.SSL
+		"secure": SecureDataBuffer.CANCEL
 	}
 	if database.op.connection.to_host(config) == OK:
-		database.op.poll.poll()
-		database.op.connection.backend.connection.status.succeed()
-		connection_established()
+		#database.op.poll.poll()
+		#database.op.connection.backend.connection.status.succeed()
+		print("START CONNECTION")
+		#connection_established()
 
 func _physics_process(_delta: float) -> void:
 	database.op.poll.poll()
@@ -45,7 +48,7 @@ func connection_established() -> void:
 	
 	#"""
 	#var peer = database.op.connection.backend.connection.peers.stream.peer
-	for d in database.op.execute.data: # peer.get_data(32):
+	for d in database.op.execute.data[1].data_row: # peer.get_data(32):
 		print("DATA: ", d)
 	#print("SOME DATA: ", peer)
 	#var data = database.peer

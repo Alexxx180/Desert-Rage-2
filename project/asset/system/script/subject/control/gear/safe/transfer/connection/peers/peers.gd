@@ -9,11 +9,11 @@ func available(protocol: String = PeerStreams.PROTOCOL):
 	print("PEERS: ", peers)
 	return peers.get_available_bytes()
 
-func get_from(peers) -> Array:
+func get_response(peers) -> Array:
 	return peers.get_data(peers.get_available_bytes())
 
-func get_response(protocol: String = PeerStreams.PROTOCOL) -> Array:
-	return get_from(stream.by("protocol", protocol))
+func get_response_by(kind: String = "protocol", protocol: String = PeerStreams.PROTOCOL) -> Array:
+	return get_response(stream.by(kind, protocol))
 
 func put_data(data: PackedByteArray) -> void:
 	stream.by().put_data(data)

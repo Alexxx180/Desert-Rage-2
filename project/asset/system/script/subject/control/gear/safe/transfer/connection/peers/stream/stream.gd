@@ -13,7 +13,7 @@ var ssl: PeerStreamsStatus = PeerStreamsStatus.new()
 var with: Dictionary = {
 	"stream": func(protocol): return _protocols[protocol],
 	"connection": func(protocol): return storage(_connection(protocol), protocol),
-	"ssl": func(protocol): return storage(ssl.is_start(), protocol),
+	"ssl": func(protocol): return storage(not ssl.is_start(), protocol),
 	"protocol": func(protocol): return storage(protocol != "", protocol)
 }
 

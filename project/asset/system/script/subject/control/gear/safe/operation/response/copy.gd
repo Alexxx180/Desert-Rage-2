@@ -28,3 +28,13 @@ func copy_complete_indicator() -> String: return "CopyDone"
 
 func data() -> void: print(get_stream_data_part()) # Backend messages correspond single data rows.
 func done() -> void: print(copy_complete_indicator()) # COPY-complete indicator.
+
+func parse(type: String, _object: Dictionary) -> bool:
+	match type:
+		'G': response("In")
+		'H': response("Out")
+		'W': response("Both")
+		'c': done()
+		'd': data()
+		_: return false
+	return true

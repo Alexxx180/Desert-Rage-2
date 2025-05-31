@@ -8,7 +8,7 @@ enum { NOT_IN_A_TRANSACTION_BLOCK, IN_A_TRANSACTION_BLOCK, IN_A_FAILED_TRANSACTI
 
 var unrecognized: UnrecognizedResponses = UnrecognizedResponses.new()
 
-func command_complete(object: Dictionary) -> void: # .. usually a completed SQL command identifier.
+func command(object: Dictionary) -> void: # .. usually a completed SQL command identifier.
 	object.responses.result.command_tag = object.responses.slice_word(5).get_string_from_ascii()
 	object.connection.data.append(object.responses.result)
 	object.responses.result = PostgreSQLQueryResult.new() # Setup object for next request
@@ -30,7 +30,7 @@ func ready_for_query(object: Dictionary) -> Array: # Sent whenever backend ready
 		'I': status = NOT_IN_A_TRANSACTION_BLOCK # If idle (if not in a transaction block).
 		'T': status = IN_A_TRANSACTION_BLOCK # If in a transaction block.
 		'E': status = IN_A_FAILED_TRANSACTION_BLOCK # If failed block (queries rejected until end).
-		_: unrecognized.status(object)
+		_: unrecognized.status(type, object)
 	
 	var data: Array = Transfer.renew(object.connection.result.data, [])
 	object.responses.resize()
@@ -38,6 +38,15 @@ func ready_for_query(object: Dictionary) -> Array: # Sent whenever backend ready
 	elif object.connection.client.connected(): _retrieve_data(object, status, data)
 	return data
 
-func parse(_object) -> void: pass
+func parsing(_object) -> void: pass
 func bind(_object) -> void: pass
 func close(_object) -> void: pass
+func parse(type: String, object: Dictionary) -> bool:
+	match type:
+		'C': command(object)
+		'Z': object.result = ready_for_query(object)
+		'1': parsing(object)
+		'2': bind(object)
+		'3': close(object)
+		_: return false
+	return true

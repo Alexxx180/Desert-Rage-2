@@ -12,7 +12,7 @@ func is_crypto() -> bool: return state == CRYPTO
 
 func is_connecting() -> bool: return state == CONNECTING
 
-func is_intermediate() -> bool: return not state in [CRYPTO, CONNECTING]
+func is_intermediate() -> bool: return state in [CRYPTO, CONNECTING]
 
 func is_finished() -> bool: return state == FINISH
 

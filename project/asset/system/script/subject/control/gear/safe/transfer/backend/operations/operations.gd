@@ -12,6 +12,8 @@ static func bytes(count: Array[int]) -> PackedByteArray:
 	return PackedByteArray(count)
 
 func reset_startup() -> void: startup = empty
+func renew_startup() -> PackedByteArray:
+	return Transfer.renew(startup, empty)
 
 func startup_message(user: String, db: String) -> void:
 	var c: Dictionary = {
