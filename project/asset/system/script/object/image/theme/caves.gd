@@ -24,7 +24,7 @@ func set_tracks() -> void:
 	else:
 		_set = ost.type.theme.set
 		_set_number(ost.type.theme)
-	set_playback()
+	# set_playback() # TODO - enable
 
 func stop_timing() -> void: pass
 func start_timing() -> void:

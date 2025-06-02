@@ -6,11 +6,11 @@ var backend: Dictionary
 
 func ssl_deconnection(clean: bool) -> void:
 	var stream = backend.connection.peers.by_stream()
-	if clean: stream.put_data(backend.op.x())
+	if clean: stream.put_data(backend.op.requests.x())
 	stream.disconnect_from_stream()
 
 func client_disconnect(clean: bool) -> void:
-	if clean: backend.connection.peers.peer.put_data(backend.op.x())
+	if clean: backend.connection.peers.peer.put_data(backend.op.requests.x())
 	backend.connection.client.disconnect_from_host()
 
 func determine_disconnect(clean: bool) -> void:

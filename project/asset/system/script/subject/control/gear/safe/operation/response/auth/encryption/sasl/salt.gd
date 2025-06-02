@@ -38,7 +38,9 @@ func pbkdf2(password: PackedByteArray, server: Dictionary, length: int = 0) -> v
 	buffer.resize(4)
 
 	for block in _get_block_count(length, hashes.length):
-		for i in 3: buffer[i] = _shift(block, i)
+		for i in 3:
+			print("i: ", i)
+			buffer[i] = _shift(block, i)
 		buffer[3] = (block + 1) & END
 		hashes.key = server.salt + buffer
 		output += dig_keys(hashes, server.iterations)
@@ -46,6 +48,6 @@ func pbkdf2(password: PackedByteArray, server: Dictionary, length: int = 0) -> v
 	output = output.slice(0, hashes.length)
 
 func output_safe() -> PackedByteArray:
-	var clone: PackedByteArray = output
-	output.resize(0)
-	return clone
+	#var clone: PackedByteArray = output.duplicate()
+	#output.resize(0)
+	return output #clone

@@ -14,8 +14,7 @@ func query(sql: String) -> PackedByteArray:
 func x() -> PackedByteArray:
 	return request('X', empty)
 
-func p(responses: BackendResponses, message: PackedByteArray = empty) -> PackedByteArray:
-	responses.resize()
+func p(message: PackedByteArray = empty) -> PackedByteArray:
 	return request('p', message)
 
 func request_base(type: String, message: PackedByteArray, feedback: Callable) -> PackedByteArray:

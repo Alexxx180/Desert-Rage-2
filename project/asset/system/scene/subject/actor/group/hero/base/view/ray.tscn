@@ -1,7 +1,8 @@
-[gd_scene load_steps=168 format=3 uid="uid://csra3penxclqe"]
+[gd_scene load_steps=170 format=3 uid="uid://csra3penxclqe"]
 
 [ext_resource type="Script" uid="uid://djhgknvw72ya6" path="res://asset/system/script/subject/actor/group/hero/view/view.gd" id="1_02nce"]
 [ext_resource type="PackedScene" uid="uid://c136xgt1v5vbl" path="res://asset/system/scene/subject/actor/group/hero/base/view/base/shadow.tscn" id="2_7whrg"]
+[ext_resource type="Shader" uid="uid://dbon4qjo2ew5s" path="res://asset/resource/engine/internal/shape/shader/outline.gdshader" id="4_7805c"]
 [ext_resource type="Texture2D" uid="uid://5njpv4q1vm6m" path="res://asset/resource/media/images/actors/player/ray/move/backward.png" id="4_svwue"]
 [ext_resource type="Texture2D" uid="uid://dq5eecako3vie" path="res://asset/resource/media/images/actors/player/ray/move/forward.png" id="5_as5vq"]
 [ext_resource type="PackedScene" uid="uid://q5toei88qvfa" path="res://asset/system/scene/subject/actor/group/hero/base/view/base/behind.tscn" id="5_bqa0g"]
@@ -12,6 +13,11 @@
 [ext_resource type="Script" uid="uid://daejkosc15od" path="res://asset/system/script/subject/actor/group/hero/view/animation.gd" id="8_xpw0s"]
 [ext_resource type="Texture2D" uid="uid://hqsn3pf5sshb" path="res://asset/resource/media/images/actors/player/ray/run/left.png" id="9_me3cl"]
 [ext_resource type="Texture2D" uid="uid://23x5x8jd1fe6" path="res://asset/resource/media/images/actors/player/ray/run/right.png" id="11_3q50n"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_n7tfv"]
+shader = ExtResource("4_7805c")
+shader_parameter/line_color = Color(0, 1, 0, 1)
+shader_parameter/line_thickness = 4.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_77ixu"]
 atlas = ExtResource("4_svwue")
@@ -1433,6 +1439,7 @@ script = ExtResource("1_02nce")
 [node name="shadow" parent="." instance=ExtResource("2_7whrg")]
 
 [node name="profile" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_n7tfv")
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_ajgxq")
 animation = &"left"
@@ -1466,8 +1473,8 @@ script = ExtResource("8_xpw0s")
 [node name="player" type="AnimationPlayer" parent="animation"]
 root_node = NodePath("../..")
 libraries = {
-"": SubResource("AnimationLibrary_04x2l"),
-"ray": SubResource("AnimationLibrary_sal4s")
+&"": SubResource("AnimationLibrary_04x2l"),
+&"ray": SubResource("AnimationLibrary_sal4s")
 }
 
 [connection signal="body_entered" from="behind" to="." method="_go_behind_scene"]

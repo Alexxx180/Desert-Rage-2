@@ -1,3 +1,4 @@
+@tool
 extends BehaviorTree
 
 @onready var level: BehaviorSequence = $location/level

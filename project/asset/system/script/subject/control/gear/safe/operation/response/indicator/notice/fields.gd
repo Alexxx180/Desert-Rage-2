@@ -25,7 +25,7 @@ func _match(data: Dictionary, field: Dictionary, keys: Dictionary, feedback: Dic
 
 func iterate(object: Dictionary, set_feedback: Callable) -> Dictionary:
 	var notice: Dictionary = {}
-	for champ_data in object.responses.split_byte(START, END):
+	for champ_data in object.responses.fragments.bytes(START, END):
 		var keys: Dictionary = _get_match_fields()
 		var field: Dictionary = _get_field(ascii(champ_data))
 		var feedback: Dictionary = set_feedback.call(keys, field)

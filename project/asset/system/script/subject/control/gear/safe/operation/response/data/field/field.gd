@@ -14,7 +14,7 @@ func _find_name_length(octets: PackedByteArray) -> int:
 
 func row() -> void:
 	for _index in specific.get_fields_number(true):
-		specific.add_fields(_find_name_length(specific.responses.slice(1)))
+		specific.add_fields(_find_name_length(specific.responses.fragments.islice(1)))
 
 func parameter() -> void:
 	var types: Array = []

@@ -14,7 +14,7 @@ func function_call(object: Dictionary) -> void: # Identifies the message as a fu
 func _utf8(report: PackedByteArray) -> String: return report.get_string_from_utf8()
 
 func _get_result(responses: BackendResponses, field: String) -> Dictionary:
-	var report: Array = responses.split_byte(5, 1)
+	var report: Array = responses.fragments.bytes(5, 1)
 	return { "name": _utf8(report[KEY]), field: _utf8(report[VALUE]) }
 
 func status_report(object: Dictionary) -> void: # Identifies the message as a run-time parameter status report.

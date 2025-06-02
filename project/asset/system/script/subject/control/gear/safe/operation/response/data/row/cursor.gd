@@ -14,7 +14,7 @@ func get_message_length(cursor: int, next: int) -> int:
 	return _matcher.backend.responses.reverse(0, cursor + START, next).get_32()
 
 func resolution(rows: Array, next: int, length: int, i: int) -> void:
-	_matcher.backend.value = _matcher.backend.responses.slice(next, next + length)
+	_matcher.backend.value = _matcher.backend.responses.fragments.slice(next, next + length)
 	_matcher.resolve(i)
 	if not _matcher.stop:
 		rows[RAW].append(_matcher.backend.responses.result.verify())
@@ -31,7 +31,7 @@ func start(result: Array) -> void:
 
 func fields_column(i: int, result: Array, raw: Array, resolve: Callable) -> void:
 	var responses: BackendResponses = _matcher.backend.responses
-	responses.buffer = StreamPeerBuffer.new()
+	responses.buffer.renew()
 
 	var next: int = responses.cursor + NEXT
 	var length: int = get_message_length(responses.cursor, next)

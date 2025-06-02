@@ -1,31 +1,31 @@
-CREATE TABLE settings (
+CREATE TABLE atatarintsev.settings (
 	id UUID CONSTRAINT settings_pid PRIMARY KEY,
 	experience JSON, controls JSON);
 
-CREATE TABLE stats (
+CREATE TABLE atatarintsev.stats (
 	id UUID CONSTRAINT stats_pid PRIMARY KEY,
 	rampage JSON, walkthrough JSON, metadata JSON);
 
-CREATE TABLE information (
+CREATE TABLE atatarintsev.information (
 	id UUID CONSTRAINT information_pid PRIMARY KEY,
 	books JSON, pages JSON, bestiary JSON, skills JSON);
 
-CREATE TABLE team (
+CREATE TABLE atatarintsev.team (
 	id UUID CONSTRAINT team_pid PRIMARY KEY,
 	location UUID, last_seen TIMESTAMP,
 	info UUID CONSTRAINT info_id REFERENCES information (id));
 
-CREATE TABLE hero (
+CREATE TABLE atatarintsev.hero (
 	id UUID CONSTRAINT hero_pid PRIMARY KEY,
 	name INTEGER, status JSON, inventory JSON,
 	team UUID CONSTRAINT team_id REFERENCES team (id));
 
-CREATE TABLE location (
+CREATE TABLE atatarintsev.location (
 	id UUID CONSTRAINT info_id PRIMARY KEY,
 	name VARCHAR(20), level JSON, map JSON,
 	team UUID CONSTRAINT team_id REFERENCES team (id));
 
-CREATE TABLE player (
+CREATE TABLE atatarintsev.player (
 	id UUID CONSTRAINT player_id PRIMARY KEY,
 	name VARCHAR(20), created TIMESTAMP,
 	info UUID CONSTRAINT info_id REFERENCES information (id),
@@ -36,114 +36,114 @@ CREATE TABLE player (
 CREATE PROCEDURE append_settings(id UUID, experience JSON, controls JSON)
 LANGUAGE SQL
 BEGIN ATOMIC
- INSERT INTO settings (id, experience, controls) VALUES (id, experience, controls);
+ INSERT INTO atatarintsev.settings (id, experience, controls) VALUES (id, experience, controls);
 END;
 
 CREATE PROCEDURE update_settings(id UUID, experience JSON, controls JSON)
 LANGUAGE SQL
 BEGIN ATOMIC
- UPDATE settings SET experience = experience, controls = controls WHERE id = id;
+ UPDATE atatarintsev.settings SET experience = experience, controls = controls WHERE id = id;
 END;
 
 CREATE PROCEDURE delete_settings(id UUID)
 LANGUAGE SQL
 BEGIN ATOMIC
- DELETE FROM settings WHERE id = id;
+ DELETE FROM atatarintsev.settings WHERE id = id;
 END;
 
 
 CREATE PROCEDURE append_stats(id UUID, rampage JSON, walkthrough JSON, metadata JSON)
 LANGUAGE SQL
 BEGIN ATOMIC
- INSERT INTO stats (id, rampage, walkthrough, metadata) VALUES (id, rampage, walkthrough, metadata);
+ INSERT INTO atatarintsev.stats (id, rampage, walkthrough, metadata) VALUES (id, rampage, walkthrough, metadata);
 END;
 
 CREATE PROCEDURE update_stats(id UUID, rampage JSON, walkthrough JSON, metadata JSON)
 LANGUAGE SQL
 BEGIN ATOMIC
- UPDATE stats SET rampage = rampage, walkthrough = walkthrough, metadata = metadata WHERE id = id;
+ UPDATE atatarintsev.stats SET rampage = rampage, walkthrough = walkthrough, metadata = metadata WHERE id = id;
 END;
 
 CREATE PROCEDURE delete_stats(id UUID)
 LANGUAGE SQL
 BEGIN ATOMIC
- DELETE FROM stats WHERE id = id;
+ DELETE FROM atatarintsev.stats WHERE id = id;
 END;
 
 
 CREATE PROCEDURE append_information(id UUID, books JSON, pages JSON, bestiary JSON, skills JSON)
 LANGUAGE SQL
 BEGIN ATOMIC
- INSERT INTO information (id, books, pages, bestiary, skills) VALUES (id, books, pages, bestiary, skills);
+ INSERT INTO atatarintsev.information (id, books, pages, bestiary, skills) VALUES (id, books, pages, bestiary, skills);
 END;
 
 CREATE PROCEDURE update_information(id UUID, books JSON, pages JSON, bestiary JSON, skills JSON)
 LANGUAGE SQL
 BEGIN ATOMIC
- UPDATE information SET books = books, pages = pages, bestiary = bestiary, skills = skills WHERE id = id;
+ UPDATE atatarintsev.information SET books = books, pages = pages, bestiary = bestiary, skills = skills WHERE id = id;
 END;
 
 CREATE PROCEDURE delete_information(id UUID)
 LANGUAGE SQL
 BEGIN ATOMIC
- DELETE FROM information WHERE id = id;
+ DELETE FROM atatarintsev.information WHERE id = id;
 END;
 
 
 CREATE PROCEDURE append_team(id UUID, location UUID, last_seen TIMESTAMP, info UUID)
 LANGUAGE SQL
 BEGIN ATOMIC
- INSERT INTO team (id, location, last_seen, info) VALUES (id, location, last_seen, info);
+ INSERT INTO atatarintsev.team (id, location, last_seen, info) VALUES (id, location, last_seen, info);
 END;
 
 CREATE PROCEDURE update_team(id UUID, location UUID, last_seen TIMESTAMP, info UUID)
 LANGUAGE SQL
 BEGIN ATOMIC
- UPDATE team SET location = location, last_seen = last_seen, info = info WHERE id = id;
+ UPDATE atatarintsev.team SET location = location, last_seen = last_seen, info = info WHERE id = id;
 END;
 
 CREATE PROCEDURE delete_team(id UUID)
 LANGUAGE SQL
 BEGIN ATOMIC
- DELETE FROM team WHERE id = id;
+ DELETE FROM atatarintsev.team WHERE id = id;
 END;
 
 
 CREATE PROCEDURE append_hero(id UUID, name INTEGER, status JSON, inventory JSON, team UUID)
 LANGUAGE SQL
 BEGIN ATOMIC
- INSERT INTO hero (id, name, status, inventory, team) VALUES (id, name, status, inventory, team);
+ INSERT INTO atatarintsev.hero (id, name, status, inventory, team) VALUES (id, name, status, inventory, team);
 END;
 
 CREATE PROCEDURE update_hero(id UUID, name INTEGER, status JSON, inventory JSON, team UUID)
 LANGUAGE SQL
 BEGIN ATOMIC
- UPDATE hero SET name = name, status = status, inventory = inventory, team = team WHERE id = id;
+ UPDATE atatarintsev.hero SET name = name, status = status, inventory = inventory, team = team WHERE id = id;
 END;
 
 CREATE PROCEDURE delete_hero(id UUID)
 LANGUAGE SQL
 BEGIN ATOMIC
- DELETE FROM hero WHERE id = id;
+ DELETE FROM atatarintsev.hero WHERE id = id;
 END;
 
 
 CREATE PROCEDURE append_location(id UUID, name VARCHAR(20), level JSON, map JSON, team UUID)
 LANGUAGE SQL
 BEGIN ATOMIC
- INSERT INTO location (id, name, level, map, team) VALUES (id, name, level, map, team);
+ INSERT INTO atatarintsev.location (id, name, level, map, team) VALUES (id, name, level, map, team);
 END;
 
 CREATE PROCEDURE update_location(id UUID, name VARCHAR(20), level JSON, map JSON, team UUID)
 LANGUAGE SQL
 BEGIN ATOMIC
- UPDATE location SET name = name, level = level, map = map, team = team WHERE id = id;
+ UPDATE atatarintsev.location SET name = name, level = level, map = map, team = team WHERE id = id;
 END;
 
 CREATE PROCEDURE delete_location(id UUID)
 LANGUAGE SQL
 BEGIN ATOMIC
- DELETE FROM location WHERE id = id;
+ DELETE FROM atatarintsev.location WHERE id = id;
 END;
 
 
@@ -155,7 +155,7 @@ BEGIN
 END;
 $fix_settings$ LANGUAGE plpgsql;
 
-CREATE TRIGGER check_settings BEFORE INSERT OR UPDATE ON settings
+CREATE TRIGGER check_settings BEFORE INSERT OR UPDATE ON atatarintsev.settings
 FOR EACH ROW EXECUTE PROCEDURE fix_settings();
 
 
@@ -168,7 +168,7 @@ BEGIN
 END;
 $fix_stats$ LANGUAGE plpgsql;
 
-CREATE TRIGGER check_stats BEFORE INSERT OR UPDATE ON stats
+CREATE TRIGGER check_stats BEFORE INSERT OR UPDATE ON atatarintsev.stats
 FOR EACH ROW EXECUTE PROCEDURE fix_stats();
 
 
@@ -182,7 +182,7 @@ BEGIN
 END;
 $fix_information$ LANGUAGE plpgsql;
 
-CREATE TRIGGER check_information BEFORE INSERT OR UPDATE ON information
+CREATE TRIGGER check_information BEFORE INSERT OR UPDATE ON atatarintsev.information
 FOR EACH ROW EXECUTE PROCEDURE fix_information();
 
 
@@ -193,7 +193,7 @@ BEGIN
 END;
 $fix_team$ LANGUAGE plpgsql;
 
-CREATE TRIGGER check_team BEFORE INSERT OR UPDATE ON team
+CREATE TRIGGER check_team BEFORE INSERT OR UPDATE ON atatarintsev.team
 FOR EACH ROW EXECUTE PROCEDURE fix_team();
 
 
@@ -205,7 +205,7 @@ BEGIN
 END;
 $fix_hero$ LANGUAGE plpgsql;
 
-CREATE TRIGGER check_hero BEFORE INSERT OR UPDATE ON hero
+CREATE TRIGGER check_hero BEFORE INSERT OR UPDATE ON atatarintsev.hero
 FOR EACH ROW EXECUTE PROCEDURE fix_hero();
 
 
@@ -218,5 +218,5 @@ BEGIN
 END;
 $fix_location$ LANGUAGE plpgsql;
 
-CREATE TRIGGER check_location BEFORE INSERT OR UPDATE ON location
+CREATE TRIGGER check_location BEFORE INSERT OR UPDATE ON atatarintsev.location
 FOR EACH ROW EXECUTE PROCEDURE fix_location();

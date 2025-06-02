@@ -17,7 +17,7 @@ func get_fields_number(overwrite: bool = false) -> int: # can be 0
 
 func add_fields(field_name_length: int) -> void:
 	no.responses.message.cursor += field_name_length
-	no.responses.buffer = StreamPeerBuffer.new()
+	no.responses.buffer.renew()
 	no.responses.result.row_description.append(no.get_fields()) # The result.
 
 func add_parameter(types: Array, index: int) -> void:

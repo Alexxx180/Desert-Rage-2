@@ -9,7 +9,7 @@ enum { NOT_IN_A_TRANSACTION_BLOCK, IN_A_TRANSACTION_BLOCK, IN_A_FAILED_TRANSACTI
 var unrecognized: UnrecognizedResponses = UnrecognizedResponses.new()
 
 func command(object: Dictionary) -> void: # .. usually a completed SQL command identifier.
-	object.responses.result.command_tag = object.responses.slice_word(5).get_string_from_ascii()
+	object.responses.result.command_tag = object.responses.fragments.word(5).get_string_from_ascii()
 	object.connection.data.append(object.responses.result)
 	object.responses.result = PostgreSQLQueryResult.new() # Setup object for next request
 
