@@ -13,7 +13,6 @@ func _set_backend(value: Dictionary) -> void:
 	buffer.backend = value
 	for type in [response, rollback]:
 		type.buffer = buffer
-	# #rollback.op = value.op
 
 func poll() -> void: ## Poll connection to check incoming messages. Called frequently in a loop before "execute"
 	if not backend.connection.poll(): return

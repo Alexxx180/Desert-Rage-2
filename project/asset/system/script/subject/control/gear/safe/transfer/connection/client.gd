@@ -36,4 +36,3 @@ func disconnect_from_host() -> void:
 
 func first_message() -> bool: # Get the fist message of server.
 	return state == OK
-	

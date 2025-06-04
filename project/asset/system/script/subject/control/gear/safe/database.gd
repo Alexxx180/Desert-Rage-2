@@ -38,9 +38,27 @@ func on_load_user_data() -> void:
 func _physics_process(_delta: float) -> void:
 	database.op.poll.poll()
 
+func _create_query() -> String:
+	return """
+	BEGIN;
+	CREATE TABLE hero (id UUID CONSTRAINT hero_pid PRIMARY KEY, name INTEGER, status JSON, inventory JSON);
+	"""
+
+func _insert_query() -> String:
+	return """
+	BEGIN;
+	INSERT INTO hero (id, name, status, inventory) VALUES ('73ff36dc-8898-4b0e-b9b3-d1d769c87ede', 0, '{}', '{}')
+	"""
+
 func connection_established() -> void:
 	print("HAVE CONNECTION")
+	"""
+	var query: String = _create_query()
+	#var query: String = _insert_query()
+	var status = database.op.execute.query(query)
+	"""
 	var status = database.op.execute.query("BEGIN; SELECT * FROM hero;")
+	#"""
 	print("STATUS: ", status)
 	# for d in status: print(d)
 	# var data = database.op.connection.backend.connection.peers.stream.by("connection")
@@ -60,14 +78,12 @@ func auth_error(_object: Dictionary) -> void:
 
 func data_received(_error: int, _transaction: int, datas: Array) -> void:
 	print("TRANSACTED: ", datas)
-	for d in datas[1].data_row: # peer.get_data(32):
-		print("DATA: ", d)
+#	for d in datas[1].data_row: # peer.get_data(32):
+#		print("DATA: ", d)
 	database.op.close.the_connection()
 
 func connection_error() -> void:
 	print("BANNED")
-	pass
 
 func connection_closed(_clean: bool) -> void:
 	print("CLOSED")
-	pass

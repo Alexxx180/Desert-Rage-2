@@ -6,7 +6,6 @@ var stream: PeerStreams = PeerStreams.new()
 
 func available(protocol: String = PeerStreams.PROTOCOL):
 	var peers = stream.by("protocol", protocol)
-	print("PEERS: ", peers)
 	return peers.get_available_bytes()
 
 func get_response(peers) -> Array:

@@ -39,10 +39,14 @@ func _set_service(peers: TransferPeers, service: Variant) -> void:
 	if service:
 		peers.stream.by("ssl").put_data(service)
 
-func listen_connection() -> void:
-	var peers: TransferPeers = crypto.connection.peers
-	var response: Array = peers.get_response_by("ssl") # ssl_peers()
+func _process_response(peers: TransferPeers, response: Array) -> void:
 	var message: PackedByteArray = response[VALUE]
 
 	if response[STATUS] == OK and 0 < message.size():
 		_set_service(peers, buffer.backend.responser.parse(message))
+
+func listen_connection() -> void:
+	var peers: TransferPeers = crypto.connection.peers
+	var stream: Variant = peers.stream.by("ssl")
+	var bytes: int = stream.get_available_bytes()
+	if bytes > 0: _process_response(peers, stream.get_data(bytes)) # ssl_peers()

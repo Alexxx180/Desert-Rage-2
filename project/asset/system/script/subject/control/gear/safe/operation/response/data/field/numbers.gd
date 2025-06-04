@@ -9,16 +9,18 @@ var fields_number: int:
 func buffer(appendix: int, seek: int) -> StreamPeerBuffer:
 	return responses.cursor_reverse(appendix, seek)
 
+func get_type_object_id() -> int:
+	var r = buffer(4, 6).get_u32()
+	print("TYPE OBJECT ID! ", r)
+	return r
+
 # Get the ... if field is specific table column: otherwise 0
 var table_object_id: int:
 	get: return buffer(5, 0).get_u16()
 var column_attribute_number: int:
 	get: return buffer(2, 4).get_u16()
 var type_object_id: int:
-	get: 
-		var r = buffer(4, 6).get_u32()
-		print("TYPE OBJECT ID! ", r)
-		return r
+	get: return buffer(4, 6).get_u32()
 var data_type_size: int:
 	get: return buffer(2, 10).get_u16()
 var type_modifier: int:
@@ -31,7 +33,7 @@ func get_fields() -> Dictionary:
 	return { 
 		"table_object_id": table_object_id,
 		"column_index": column_attribute_number,
-		"type_object_id": type_object_id,
+		"type_object_id": get_type_object_id(),
 		"data_type_size": data_type_size,
 		"type_modifier": type_modifier,
 		"format_code": format_code
