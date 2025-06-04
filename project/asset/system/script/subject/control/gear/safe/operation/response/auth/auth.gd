@@ -14,9 +14,9 @@ func encrypted(type: int) -> bool:
 	return base.no_support(type) or encryption(type) or base.no_response()
 
 func response() -> void: # Identifies the message as an authentication request.
-	var buffer: StreamPeerBuffer = sasl.main.stats.backend.responses.reverse(ResponsesBuffer.AUTH, START, END)
-	var type: int = buffer.get_32()
-	encrypted(type)
+	var responses: BackendResponses = sasl.main.params.stats.backend.responses
+	var buffer: StreamPeerBuffer = responses.reverse(ResponsesBuffer.AUTH, START, END)
+	encrypted(buffer.get_32())
 
 func parse(type: String, _object: Dictionary) -> bool:
 	match type:

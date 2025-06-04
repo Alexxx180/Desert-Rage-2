@@ -52,13 +52,16 @@ func _execute(sql: String) -> int:
 	else:
 		peers.stream.peer.put_data(result)
 	backend.connection.meta.state.busy = true
-	get_data()
+	#get_data()
 	return OK
 
 func query(sql: String) -> Variant: ## Send query to run the backend. "sql" contains 1+ valid SQL statements.
 	var active: bool = backend.connection.active()
-	if active:
-		return ERR_BUSY if backend.connection.meta.state.busy else _execute(sql)
-
-	backend.connection.note.fail("no_connection")
-	return ERR_CONNECTION_ERROR
+	if not active:
+		backend.connection.note.fail("no_connection")
+		return ERR_CONNECTION_ERROR
+	
+	if backend.connection.meta.state.busy:
+		return ERR_BUSY
+	
+	return _execute(sql)

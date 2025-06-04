@@ -4,7 +4,7 @@ class_name ConnectionMetadata
 
 signal auth_error(object: Dictionary)
 signal established()
-signal data_received(error_object, transaction_status, datas)
+signal data_received(code: int, status: int, data: Array)
 
 var peers: TransferPeers = TransferPeers.new()
 var note: PostgreClientNotify = PostgreClientNotify.new()
@@ -16,13 +16,13 @@ func _init(): peers.stream.set_client(client.tcp)
 
 func establish() -> void: established.emit()
 
-func raise_data(error, transact, d) -> void:
-	data_received.emit(error, transact, d)
+func raise_data(transact_status: int, data: Array) -> void:
+	data_received.emit(status.state, transact_status, data)
 
 func reset() -> void: ## Backend runtime parameters. Information about server state.
 	meta.reset()
 	status.reset()
-	peers.ssl.set_start()
+	peers.stream.ssl.set_start()
 
 func fail_task(task: Callable) -> void:
 	status.fail()

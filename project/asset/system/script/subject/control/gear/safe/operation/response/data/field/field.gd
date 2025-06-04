@@ -2,19 +2,24 @@ extends RefCounted
 
 class_name FieldDescriptionResponses
 
+const TERMINATOR: int = 0
+
 var data: DataRowResponse = DataRowResponse.new()
 var specific: FieldSpecific = FieldSpecific.new()
 
-func _find_name_length(octets: PackedByteArray) -> int:
-	var field: Dictionary = { "name": "", "octet": 0 }
-	while field.octet < octets.size():
-		field.name += char(octets[field.octet])
-		field.octet += 1
-	return len(field)
+func _measure_name() -> int:
+	var octets: PackedByteArray = specific.no.responses.fragments.word()
+	var field_name: String = ""
+	for octet in octets:
+		field_name += char(octet)
+		if octet == TERMINATOR: break
+	return len(field_name)
 
 func row() -> void:
 	for _index in specific.get_fields_number(true):
-		specific.add_fields(_find_name_length(specific.responses.fragments.islice(1)))
+		var length: int = _measure_name()
+		specific.add_fields(length)
+	print("RESULT FIELDS: ", specific.no.responses.buffer.result.row_description)
 
 func parameter() -> void:
 	var types: Array = []

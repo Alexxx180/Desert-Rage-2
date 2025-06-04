@@ -9,7 +9,7 @@ func ready_suspended(_object) -> void: pass # Portal-suspended. Appears only if 
 func empty_query(_object) -> void: pass # Empty query string response. Substitutes for CommandComplete.
 
 func function_call(object: Dictionary) -> void: # Identifies the message as a function call result.
-	object.connection.note.warn("no_implementation", "FunctionCallResponse")
+	object.backend.connection.note.warn("no_implementation", "FunctionCallResponse")
 
 func _utf8(report: PackedByteArray) -> String: return report.get_string_from_utf8()
 
@@ -18,12 +18,12 @@ func _get_result(responses: BackendResponses, field: String) -> Dictionary:
 	return { "name": _utf8(report[KEY]), field: _utf8(report[VALUE]) }
 
 func status_report(object: Dictionary) -> void: # Identifies the message as a run-time parameter status report.
-	var param: Dictionary = _get_result(object.responses, "value") # Get name and value of the run-time parameter being reported.
-	object.connection.status.param[param.name] = param.value # The result
+	var param: Dictionary = _get_result(object.backend.responses, "value") # Get name and value of the run-time parameter being reported.
+	object.backend.connection.meta.result.param[param.name] = param.value # The result
 
 func notify(object: Dictionary) -> void: # Message identifiers below
-	var process_id: int = object.responses.reverse(0, 5, 9).get_32() # Get the ID of notifying backend process.
-	var channel: Dictionary = _get_result(object.responses, "payload") # notified
+	var process_id: int = object.backend.responses.reverse(0, 5, 9).get_32() # Get the ID of notifying backend process.
+	var channel: Dictionary = _get_result(object.backend.responses, "payload") # notified
 	prints(process_id, channel.name, channel.payload)
 
 func parse(type: String, object: Dictionary) -> bool:

@@ -15,16 +15,18 @@ var first: int:
 func add_answer(fragment) -> void:
 	responses += fragment
 
-func islice(start: int = -1):
-	var cursor: int = message.cursor
-	if cursor == message.length: message.cursor = -1
-	return responses.slice(cursor, cursor + start)
+func set_cursor(to: int) -> void:
+	message.cursor = to
+
+func move_cursor(appendix: int) -> void:
+	set_cursor(message.cursor + appendix)
 
 func slice(start: int = -1, end: int = -1):
 	return responses.slice(start, end)
 
-func word(start: int):
-	return responses.slice(start, next)
+func word(start: int = message.cursor):
+	var n: int = next
+	return responses.slice(start, n)
 
 static func split_byte(pool: PackedByteArray, delimiter: int) -> Array:
 	var split: Dictionary = { "result": [], "from": 0, "to": 0 }

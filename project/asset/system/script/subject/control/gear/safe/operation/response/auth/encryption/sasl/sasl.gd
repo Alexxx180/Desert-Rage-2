@@ -2,6 +2,7 @@ extends RefCounted
 
 class_name EncryptionSASL
 
+const HASH: HashingContext.HashType = HashingContext.HASH_SHA256
 var start: AuthMechanismDetermination = AuthMechanismDetermination.new()
 var main: SaslChallenge = SaslChallenge.new()
 var end: AuthGetProof = AuthGetProof.new()
@@ -11,7 +12,7 @@ var backend: Dictionary: set = set_backend
 func set_backend(value: Dictionary) -> void:
 	var stats: SaslAuthenticationStats = SaslAuthenticationStats.new()
 	stats.backend = value
-	for stage in [start, main, end]:
+	for stage in [start.sha256, main.params, end]:
 		stage.stats = stats
 
 func encryption(type: int) -> bool:

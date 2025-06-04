@@ -20,6 +20,8 @@ func fragmented() -> bool: # Wait to receive full response.
 	var responses: BackendResponses = backend.responses
 	responses.buffer.renew()
 	responses.fragments.message.length = _number(ResponsesBuffer.LENGTH, 1, 5)
+	var leng: int = responses.fragments.message.length
+	#print("MESSAGE LEN: ", leng)
 	return responses.fragmented
 
 func available() -> bool:

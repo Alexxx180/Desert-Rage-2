@@ -2,38 +2,29 @@ extends RefCounted
 
 class_name DataRowCursor
 
-enum { NULL = -1, RAW = 1, ADD = 4, START = 7, NEXT = 11 }
+enum { NULL = -1, ADD = 4, START = 7, NEXT = 11 }
 
-var _matcher: PostgresDataTypes = PostgresDataTypes.new()
+var fragment: DataRowFragment = DataRowFragment.new()
 var columns: int:
-	get: return _matcher.backend.responses.reverse(4, 5, 7).get_16()
+	get: return fragment.responses.reverse(4, 5, 7).get_16()
 var searching: bool:
-	get: return not _matcher.stop
+	get: return not fragment.matcher.stop
 
 func get_message_length(cursor: int, next: int) -> int:
-	return _matcher.backend.responses.reverse(0, cursor + START, next).get_32()
+	return fragment.responses.reverse(0, cursor + START, next).get_32()
 
-func resolution(rows: Array, next: int, length: int, i: int) -> void:
-	_matcher.backend.value = _matcher.backend.responses.fragments.slice(next, next + length)
-	_matcher.resolve(i)
-	if not _matcher.stop:
-		rows[RAW].append(_matcher.backend.responses.result.verify())
+func _next_offset(cursor: int) -> Dictionary:
+	var next: int = cursor + NEXT
+	return { "next": next, "length": get_message_length(cursor, next) }
 
-func add_row(data_row: Array, raw_data: Array) -> void:
-	var result = _matcher.backend.responses.result
-	result.data_row.append(data_row) # The result.
-	result.raw_data.append(raw_data)
+func resolve(fragments: ResponseFragments, rows: Array, i: int) -> void:
+	var offset: Dictionary = _next_offset(fragments.message.cursor)
+	if offset.length == NULL:
+		fragments.move_cursor(fragment.null_the_result(rows))
+	else:
+		fragment.resolution(rows, offset, i)
+		fragments.move_cursor(offset.length + ADD)
 
-func start(result: Array) -> void:
-	_matcher.stop = false
-	_matcher.backend.responses.cursor = 0
-	_matcher.backend.row = result
-
-func fields_column(i: int, result: Array, raw: Array, resolve: Callable) -> void:
-	var responses: BackendResponses = _matcher.backend.responses
-	responses.buffer.renew()
-
-	var next: int = responses.cursor + NEXT
-	var length: int = get_message_length(responses.cursor, next)
-
-	responses.cursor += resolve.call([result, raw], next, length, i) + ADD
+func fields_column(i: int, result: Array, raw: Array) -> void:
+	fragment.responses.buffer.renew()
+	resolve(fragment.responses.fragments, [result, raw], i)

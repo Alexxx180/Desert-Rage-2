@@ -12,7 +12,7 @@ func no_support(type: int) -> bool:
 	return stop
 
 func _successful_auth() -> void:
-	backend.connection.status.succeed()
+	backend.connection.status.start_connecting()
 
 func _clear_text() -> PackedByteArray:
 	backend.responses.resize()

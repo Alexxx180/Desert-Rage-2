@@ -31,6 +31,9 @@ static func connection_present(client) -> bool:
 
 func connected() -> bool: return connection_present(tcp)
 
+func disconnect_from_host() -> void:
+	tcp.disconnect_from_host()
+
 func first_message() -> bool: # Get the fist message of server.
 	return state == OK
 	

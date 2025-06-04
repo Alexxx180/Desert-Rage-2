@@ -13,7 +13,7 @@ var row_description: Array = [] ## An array that contains dictionaries. These di
 var data_row: Array = [] ## These elements are native GDscript types that represent the data resulting from the query.
 
 ## Note that the frontend does not check the validity of the data, so you have to check the data manually. Sub-array data types are of type String if row_description.["format_code"] is 0 and of type PackedByteArray if 1.
-var raw_data_row: Array = [] ## Unlike data_row which contains elements of native GDscript types, raw_data_row contains the raw data sent by the backend which represents the raw data resulting from the query instead of converting it to a native GDScript type.
+var raw_data: Array = [] ## Unlike data_row which contains elements of native GDscript types, raw_data_row contains the raw data sent by the backend which represents the raw data resulting from the query instead of converting it to a native GDScript type.
 
 var command_tag: String ## Complete SQL command word identifier
 
@@ -36,9 +36,6 @@ func get_field_values(field_name: String) -> Array:
 	if i != fields_number: _set_values_data(values, i)
 
 	return values
-
-func verify(i: int, data):
-	return data.get_string_from_utf8() if get_type_object_id(i) else data
 
 func get_type_object_id(i: int): return row_description[i]["type_object_id"]
 

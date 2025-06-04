@@ -44,6 +44,5 @@ func listen_connection() -> void:
 	var response: Array = peers.get_response_by("ssl") # ssl_peers()
 	var message: PackedByteArray = response[VALUE]
 
-	print("MESSAGING: ", response[STATUS] == OK, " - SIZE: ", 0 < message.size())
 	if response[STATUS] == OK and 0 < message.size():
 		_set_service(peers, buffer.backend.responser.parse(message))

@@ -8,7 +8,8 @@ enum { AUTH = 0, COMPLETE = 2, COPY = 3, META = 4, FIELD = 5 }
 var _stop: bool
 var object: Dictionary:
 	set(value):
-		for type in [types[META], types[COPY], types[AUTH].base, types[AUTH].sasl]:
+		for type in [types[META], types[COPY], types[AUTH].base,
+			types[AUTH].sasl, types[FIELD].data.cursor.fragment.matcher]:
 			type.backend = value
 		for type in [types[FIELD].specific.no]:
 			type.responses = value.responses

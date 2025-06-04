@@ -5,12 +5,12 @@ class_name CloseConnection
 var backend: Dictionary
 
 func ssl_deconnection(clean: bool) -> void:
-	var stream = backend.connection.peers.by_stream()
+	var stream = backend.connection.peers.stream.by()
 	if clean: stream.put_data(backend.op.requests.x())
 	stream.disconnect_from_stream()
 
 func client_disconnect(clean: bool) -> void:
-	if clean: backend.connection.peers.peer.put_data(backend.op.requests.x())
+	if clean: backend.connection.peers.stream.peer.put_data(backend.op.requests.x())
 	backend.connection.client.disconnect_from_host()
 
 func determine_disconnect(clean: bool) -> void:
@@ -21,7 +21,7 @@ func determine_disconnect(clean: bool) -> void:
 
 func reset_connection() -> void:
 	backend.connection.reset()
-	backend.connection.not_busy()
+	backend.connection.meta.not_busy()
 	backend.connection.note.ask_for_closure(true)
 
 func end_dialog(clean) -> void:

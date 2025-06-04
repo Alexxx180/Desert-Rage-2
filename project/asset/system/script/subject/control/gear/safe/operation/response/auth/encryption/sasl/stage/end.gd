@@ -7,15 +7,20 @@ signal stop()
 var stats: SaslAuthenticationStats
 
 func _compare_server_proof(server: Dictionary) -> bool: # If same, the client has proof about server access to server key.
-	var proof: PackedByteArray = stats.get_proof(server)
-	var final: String = stats.get_server_message().substr(SaslChallenge.QUERY_SKIP)
-	var generated: String = Marshalls.raw_to_base64(proof)
-	return final != generated # server.signature
+	var message: String = stats.get_server_message()
+	stats.get_proof(server) # 
+	var proof: String = Marshalls.raw_to_base64(server.signature)
+	var final: String = message.substr(SaslChallengeParameters.QUERY_SKIP)
+	return final != proof # server.signature
+
+func _get_server_side(type: HashingContext.HashType, salted_pass: PackedByteArray) -> Dictionary:
+	var crypto: Crypto = Crypto.new()
+	var key: PackedByteArray = crypto.hmac_digest(type, salted_pass, stats.key("Server"))
+	return { "key": key, "signature": crypto.hmac_digest(type, key, stats.auth_safe()) }
 
 func verify_proof() -> void: # Complete auth - compare server key and signature to received from the server
-	var crypto: Crypto = Crypto.new() #
-	var server: Dictionary = { "key": stats.salt.hmac(crypto, stats.salt.output_safe(), stats.key("Server")) }
-	server.signature = stats.salt.hmac(crypto, server.key, stats.auth_safe())
+	var server: Dictionary = _get_server_side(EncryptionSASL.HASH, stats.salt.output)
+	stats.salt.clean()
 	
 	if _compare_server_proof(server):
 		stats.backend.connection.note.end_response("sasl_auth_error") # /!\ "authentication_error" signal not properly implemented...

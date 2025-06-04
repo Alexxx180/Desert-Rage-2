@@ -2,9 +2,8 @@ extends RefCounted
 
 class_name SaslAuthenticationStats
 
-var backend: Dictionary
 var salt: EncryptionSalt = EncryptionSalt.new()
-
+var backend: Dictionary
 var message: Dictionary = { "client": "", "auth": "" }
 
 func get_server_message() -> String:

@@ -2,7 +2,7 @@ extends RefCounted
 
 class_name ConnectionStatus
 
-enum { DISCONNECTED, CONNECTING, CONNECTED, ERROR } ## Status presentation
+enum { DISCONNECTED = 0, CONNECTING = 1, CONNECTED = 2, ERROR = 3 } ## Status presentation
 
 var state: int = DISCONNECTED
 
@@ -11,6 +11,9 @@ func reset() -> void:
 
 func fail() -> void:
 	state = ERROR
+
+func start_connecting() -> void:
+	state = CONNECTING
 
 func succeed() -> void:
 	state = CONNECTED

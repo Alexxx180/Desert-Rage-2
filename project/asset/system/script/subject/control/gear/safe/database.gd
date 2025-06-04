@@ -4,7 +4,6 @@ const PREFIX: String = "postgresql://"
 
 #@onready var database: Node = $client
 var database: PostgreSQLClient = PostgreSQLClient.new()
-
 var session: Dictionary = {
 	"user": "postgres", "word": "l1F3tpI9geR", "port": 5432, "database": "postgres"
 }
@@ -48,8 +47,7 @@ func connection_established() -> void:
 	
 	#"""
 	#var peer = database.op.connection.backend.connection.peers.stream.peer
-	for d in database.op.execute.data[1].data_row: # peer.get_data(32):
-		print("DATA: ", d)
+	
 	#print("SOME DATA: ", peer)
 	#var data = database.peer
 	#for d in data[1].data.row:
@@ -60,14 +58,16 @@ func connection_established() -> void:
 func auth_error(_object: Dictionary) -> void:
 	pass
 
-func data_received(_errors: Dictionary, _transaction: int, datas: Array) -> void:
+func data_received(_error: int, _transaction: int, datas: Array) -> void:
 	print("TRANSACTED: ", datas)
-	database.close()
+	for d in datas[1].data_row: # peer.get_data(32):
+		print("DATA: ", d)
+	database.op.close.the_connection()
 
 func connection_error() -> void:
 	print("BANNED")
 	pass
 
-func connection_closed() -> void:
+func connection_closed(_clean: bool) -> void:
 	print("CLOSED")
 	pass

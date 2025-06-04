@@ -11,18 +11,19 @@ func response(object: Dictionary) -> void:
 	if last: last.notice = notice
 
 func _severity(object: Dictionary, field: Dictionary) -> void:
-	object.connection.status.error["severity"] = field.value
+	object.backend.connection.meta.result.error["severity"] = field.value
 	if fields.is_fatal(field.value):
-		object.connection.reset()
-		object.connection.note.ask_for_closure(true)
+		object.backend.connection.reset()
+		object.backend.connection.note.ask_for_closure(true)
 
 func _message(object: Dictionary, field: Dictionary) -> void:
-	object.connection.status.error["message"] = field.value
-	object.connection.note.fail(field.value)
+	object.backend.connection.meta.result.error["message"] = field.value
+	object.backend.connection.note.fail(field.value)
 
 func error(object: Dictionary) -> void: 
+	var failure: Dictionary = object.backend.connection.meta.result.error
 	fields.iterate(object, fields.error(self, object))
-	if fields.is_fatal(object.connection.status.error["severity"]):
+	if failure.has("severity") and fields.is_fatal(failure["severity"]):
 		object.connection.fail_auth()
 
 func parse(type: String, object: Dictionary) -> bool:

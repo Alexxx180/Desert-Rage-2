@@ -6,26 +6,21 @@ signal stop()
 
 var cursor: DataRowCursor = DataRowCursor.new()
 
-func null_the_result(rows: Array) -> int:
-	for row in rows:
-		row.append(null)
-	return 0
+func _last_row(result: Array, raw: Array) -> void:
+	if cursor.searching:
+		cursor.fragment.add_row(result, raw)
+	else:
+		stop.emit()
 
-func resolve(rows: Array, next: int, length: int, i: int) -> int:
-	if length == cursor.NULL: return null_the_result(rows)
-	cursor.resolution(rows, next, length, i)
-	return length
+func _search_rows(result: Array, raw: Array) -> void:
+	var i: int = 0
+	while i < cursor.columns and cursor.searching:
+		cursor.fields_column(i, result, raw)
+		i += 1
 
 func row_response() -> void:
 	var raw: Array = []
 	var result: Array = []
-	
-	cursor.start(result)
-	var i: int = 0
-	while i < cursor.columns and cursor.searching:
-		cursor.fields_column(i, result, raw, resolve)
-		i += 1
-	if cursor.searching:
-		cursor.add_row(result, raw)
-	else:
-		stop.emit()
+	cursor.fragment.start(result)
+	_search_rows(result, raw)
+	_last_row(result, raw)

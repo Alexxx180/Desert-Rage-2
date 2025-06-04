@@ -13,25 +13,56 @@ CREATE TABLE atatarintsev.information (
 CREATE TABLE atatarintsev.team (
 	id UUID CONSTRAINT team_pid PRIMARY KEY,
 	location UUID, last_seen TIMESTAMP,
-	info UUID CONSTRAINT info_id REFERENCES information (id));
+	info UUID CONSTRAINT info_id REFERENCES atatarintsev.information (id));
 
 CREATE TABLE atatarintsev.hero (
 	id UUID CONSTRAINT hero_pid PRIMARY KEY,
 	name INTEGER, status JSON, inventory JSON,
-	team UUID CONSTRAINT team_id REFERENCES team (id));
+	team UUID CONSTRAINT team_hero_id REFERENCES atatarintsev.team (id));
 
 CREATE TABLE atatarintsev.location (
-	id UUID CONSTRAINT info_id PRIMARY KEY,
+	id UUID CONSTRAINT location_pid PRIMARY KEY,
 	name VARCHAR(20), level JSON, map JSON,
-	team UUID CONSTRAINT team_id REFERENCES team (id));
+	team UUID CONSTRAINT team_location_id REFERENCES atatarintsev.team (id));
 
 CREATE TABLE atatarintsev.player (
-	id UUID CONSTRAINT player_id PRIMARY KEY,
+	id UUID CONSTRAINT player_pid PRIMARY KEY,
 	name VARCHAR(20), created TIMESTAMP,
-	info UUID CONSTRAINT info_id REFERENCES information (id),
-	team UUID CONSTRAINT team_id REFERENCES team (id),
-	stats UUID CONSTRAINT stats_id REFERENCES stats (id));
+	settings UUID CONSTRAINT settings_id REFERENCES atatarintsev.settings (id),
+	team UUID CONSTRAINT team_player_id REFERENCES atatarintsev.team (id),
+	stats UUID CONSTRAINT stats_id REFERENCES atatarintsev.stats (id));
 
+CREATE VIEW atatarintsev.player_info AS (
+	SELECT * FROM atatarintsev.player
+	LEFT JOIN atatarintsev.settings
+	ON atatarintsev.player.settings = atatarintsev.settings.id
+	LEFT JOIN atatarintsev.team
+	ON atatarintsev.player.team = atatarintsev.team.id
+	LEFT JOIN atatarintsev.information
+	ON atatarintsev.team.info = atatarintsev.information.id
+	LEFT JOIN atatarintsev.stats
+	ON atatarintsev.player.stats = atatarintsev.stats.id
+	LEFT JOIN atatarintsev.location
+	ON atatarintsev.location.team = atatarintsev.team.id
+);
+
+CREATE OR REPLACE PROCEDURE append_player(id UUID, IN name VARCHAR(20), settings UUID, team UUID, stats UUID)
+LANGUAGE SQL
+BEGIN ATOMIC
+ INSERT INTO atatarintsev.player(id, name, created, settings, team, stats) VALUES (id, name, NOW(), settings, team, stats);
+END;
+
+CREATE PROCEDURE update_player(id UUID, IN name VARCHAR(20))
+LANGUAGE SQL
+BEGIN ATOMIC
+ UPDATE atatarintsev.player SET name = name WHERE id = id;
+END;
+
+CREATE PROCEDURE delete_player(id UUID)
+LANGUAGE SQL
+BEGIN ATOMIC
+ DELETE FROM atatarintsev.player WHERE id = id;
+END;
 
 CREATE PROCEDURE append_settings(id UUID, experience JSON, controls JSON)
 LANGUAGE SQL
