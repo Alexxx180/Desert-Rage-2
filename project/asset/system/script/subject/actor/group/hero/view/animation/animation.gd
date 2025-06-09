@@ -11,17 +11,11 @@ func sync(tree: AnimationTree) -> void:
 	_move_hero(tree.pose)
 
 func set_position(proportion: float) -> void: hero.move(proportion)
-func start_dash() -> void:
-	hero.turn_walls_collision(false)
-	Processors.turn(hero.logic.processors.input, false)
-	#hero.forget_velocity()
-	
+
+func start_dash() -> void: hero.logic.jump_sequence(true)
 func stop_dash() -> void:
-	Processors.turn(hero.logic.processors.input, true)
-	hero.logic.processors.input.perform_motion()
-	hero.turn_walls_collision(true)
+	hero.logic.jump_sequence(false)
 	action_move("go")
-	#hero.forget_velocity()
 
 func action_move(stand: String) -> void: request("move", stand)
 
