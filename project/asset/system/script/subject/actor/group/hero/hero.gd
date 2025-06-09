@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-enum { WORLD = 1, BORDERS = 2, BOX = 5, GAP = 7, UPLAND = 8 }
+enum { WORLD = 1, BORDERS = 2, CHARACTER = 3, BOX = 5, GAP = 7, UPLAND = 8 }
 
 signal moving(velocity: Vector2)
 
@@ -24,6 +24,10 @@ func _physics_process(_delta: float) -> void:
 func turn_walls_collision(value: bool) -> void:
 	for mask in [WORLD, BORDERS, BOX, GAP, UPLAND]:
 		set_collision_mask_value(mask, value)
+	set_hero_collision(value)
+
+func set_hero_collision(value: bool) -> void:
+	set_collision_layer_value(CHARACTER, value)
 
 func teleport(next: Vector2) -> void:
 	velocity = Vector2.ZERO

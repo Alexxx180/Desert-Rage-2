@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://chf3wtyobsvlq"]
+[gd_scene load_steps=6 format=3 uid="uid://chf3wtyobsvlq"]
 
 [ext_resource type="Script" uid="uid://d02ln3jqeo2p3" path="res://asset/system/script/subject/actor/group/hero/logic/detectors/platforming/platforming.gd" id="1_wrdvi"]
 [ext_resource type="PackedScene" uid="uid://b3hev1nf6r4th" path="res://asset/system/scene/subject/actor/group/hero/base/logic/detectors/platforming/platforms.tscn" id="3_4faw7"]
 [ext_resource type="PackedScene" uid="uid://c5gf5ucjxk682" path="res://asset/system/scene/object/image/level/floors/detector.tscn" id="3_m5qx4"]
+[ext_resource type="Shape2D" uid="uid://do0s1n5uuqpof" path="res://asset/resource/engine/internal/shape/geometry/characters/character/character.tres" id="4_5ci2x"]
+[ext_resource type="Script" uid="uid://7to27lv1mbl4" path="res://asset/system/script/subject/actor/group/hero/logic/detectors/platforming/stand.gd" id="4_jgdf2"]
 
 [node name="platforming" type="Node2D"]
 script = ExtResource("1_wrdvi")
@@ -11,3 +13,14 @@ script = ExtResource("1_wrdvi")
 
 [node name="floors" parent="." instance=ExtResource("3_m5qx4")]
 visible = false
+
+[node name="stand" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 32
+script = ExtResource("4_jgdf2")
+
+[node name="shape" type="CollisionShape2D" parent="stand"]
+shape = ExtResource("4_5ci2x")
+
+[connection signal="area_entered" from="stand" to="stand" method="_enter_stand"]
+[connection signal="area_exited" from="stand" to="stand" method="_exit_stand"]

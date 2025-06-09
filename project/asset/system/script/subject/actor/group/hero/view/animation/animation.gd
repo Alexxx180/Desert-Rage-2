@@ -2,22 +2,31 @@ extends AdvancedCharacterAnimation
 
 var hero: CharacterBody2D
 var pose: String = "idle"
+var maze: String = "go"
 var go: Array[String] = ["walk", "run"]
 
 func _ready() -> void: _direct()
 func sync(tree: AnimationTree) -> void:
-	super.sync(tree)
+	var d = tree.direction
+	_direction = d
 	set_speed(tree.scale)
-	_move_hero(tree.pose)
+	_move_hero("idle") # tree.pose
+	#action_move(tree.maze)
+	_direct()
+	#super.sync(tree)
 
 func set_position(proportion: float) -> void: hero.move(proportion)
 
 func start_dash() -> void: hero.logic.jump_sequence(true)
 func stop_dash() -> void:
+	var direction = _direction
 	hero.logic.jump_sequence(false)
 	action_move("go")
+	_direction = direction
 
-func action_move(stand: String) -> void: request("move", stand)
+func action_move(stand: String) -> void:
+	maze = stand
+	request("move", stand)
 
 func set_speed(mach: int) -> void:
 	scale = SPEED * mach

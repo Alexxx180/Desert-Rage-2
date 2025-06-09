@@ -19,5 +19,5 @@ func controls(box: CharacterBody2D, seat: Node) -> void:
 	box.move.connect(seat.transport)
 	floors.update_floor.connect(seat.set_floor)
 
-	stand.body_entered.connect(seat.enable_stand)
-	stand.body_exited.connect(seat.disable_stand)
+	stand.entered.connect(seat.enable_stand)
+	stand.exited.connect(seat.disable_stand)
