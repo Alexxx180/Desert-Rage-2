@@ -4,7 +4,7 @@ class_name PostgresStringTypes
 
 enum { TEXT = 25, CHARACTER = 1042, CHARACTER_VARYING = 1043, JSON_ = 114, JSONB = 3802, XML = 142 } # VARying, CHARacter # Schemas: JSON, XML
 
-var recognize: PostgresStringRecognize = PostgresStringRecognize.new()
+var recognize: TextPostgres = TextPostgres.new()
 
 func resolve(object: Dictionary) -> bool:
 	match object.type_id:

@@ -12,6 +12,7 @@ func controls(hero: CharacterBody2D, input: Node) -> void:
 
 	input.moving.connect(input.movement.face.set_position)
 	input.moving.connect(hero.view.animation.move)
+#	hero.action_move.connect(hero.view.animation.action_move)
 
 	movement.controls(hero, input.movement)
 	platforming.controls(hero, input.platforming)

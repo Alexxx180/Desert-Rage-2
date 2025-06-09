@@ -1,8 +1,5 @@
 extends Node
 
-enum { WORLD = 1, BORDERS = 2, BOX = 5 }
-
-
 var _movement: Node
 # var _platforming: Node
 var _hero: CharacterBody2D
@@ -23,6 +20,4 @@ func _set_movement(control: bool) -> void:
 	# Processors.turn(_platforming, !control)
 
 func _turn_walls_collision(value: bool) -> void:
-	print("TURN MOVEMENT TO: ", value)
-	for mask in [WORLD, BORDERS, BOX]:
-		_hero.set_collision_mask_value(mask, value)
+	_hero.turn_walls_collision(value)

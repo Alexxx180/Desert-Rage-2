@@ -17,8 +17,8 @@ func _get_connection_string() -> String:
 func new_session() -> void:
 	session.host = "localhost"
 
-func _ready() -> void:
-	on_load_user_data()
+func _ready() -> void: pass
+	#on_load_user_data()
 
 func on_load_user_data() -> void:
 	new_session()
@@ -38,48 +38,16 @@ func on_load_user_data() -> void:
 func _physics_process(_delta: float) -> void:
 	database.op.poll.poll()
 
-func _create_query() -> String:
-	return """
-	BEGIN;
-	CREATE TABLE hero (id UUID CONSTRAINT hero_pid PRIMARY KEY, name INTEGER, status JSON, inventory JSON);
-	"""
-
-func _insert_query() -> String:
-	return """
-	BEGIN;
-	INSERT INTO hero (id, name, status, inventory) VALUES ('73ff36dc-8898-4b0e-b9b3-d1d769c87ede', 0, '{}', '{}')
-	"""
-
 func connection_established() -> void:
-	print("HAVE CONNECTION")
-	"""
-	var query: String = _create_query()
-	#var query: String = _insert_query()
-	var status = database.op.execute.query(query)
-	"""
 	var status = database.op.execute.query("BEGIN; SELECT * FROM hero;")
-	#"""
 	print("STATUS: ", status)
-	# for d in status: print(d)
-	# var data = database.op.connection.backend.connection.peers.stream.by("connection")
-	
-	#"""
-	#var peer = database.op.connection.backend.connection.peers.stream.peer
-	
-	#print("SOME DATA: ", peer)
-	#var data = database.peer
-	#for d in data[1].data.row:
-	#	print(d)
-	#""" # 3.x version code
-	#database.close()
 
-func auth_error(_object: Dictionary) -> void:
-	pass
+func auth_error(_object: Dictionary) -> void: pass
 
 func data_received(_error: int, _transaction: int, datas: Array) -> void:
-	print("TRANSACTED: ", datas)
-#	for d in datas[1].data_row: # peer.get_data(32):
-#		print("DATA: ", d)
+	print("TRANSACTION")
+	for row in datas[1].data_row: # peer.get_data(32):
+		print("DATA: ", row)
 	database.op.close.the_connection()
 
 func connection_error() -> void:

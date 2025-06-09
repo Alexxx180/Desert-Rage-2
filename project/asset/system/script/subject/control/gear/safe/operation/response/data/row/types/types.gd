@@ -23,6 +23,6 @@ func complex(object: Dictionary) -> bool:
 	return bytes.resolve(object) or geometry.resolve(object)
 
 func resolve(i: int) -> void:
-	backend.tgpe_id = backend.responses.buffer.result.get_type_object_id(i)
+	backend.type_id = backend.responses.buffer.result.get_type_object_id(i)
 	if simple(backend) or complex(backend): return
 	backend.row.append(backend.value) # PackedByteArray

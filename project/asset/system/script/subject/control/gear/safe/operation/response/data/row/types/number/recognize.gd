@@ -1,6 +1,6 @@
 extends RefCounted
 
-class_name PostgresNumberRecognize
+class_name NumberPostgres
 
 signal stop()
 
@@ -19,7 +19,7 @@ func boolean(object: Dictionary) -> void:
 		_: force_stop(object)
 
 func integer(object: Dictionary) -> void:
-	object.row.append(object.value.get_string_from_ascii().to_int())
+	object.row.append(TextPostgres.ascii(object).to_int())
 
 func floating(object: Dictionary) -> void:
-	object.row.append(object.value.get_string_from_ascii().to_float())
+	object.row.append(TextPostgres.ascii(object).to_float())

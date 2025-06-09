@@ -1,69 +1,59 @@
 extends CharacterBody2D
 
+enum { WORLD = 1, BORDERS = 2, BOX = 5, GAP = 7, UPLAND = 8 }
+
 signal moving(velocity: Vector2)
+#signal action_move(caption: String)
 
 @onready var view: Node2D = $view
 @onready var logic: Node = $logic
 
-# var _delta_count: float = 0
 var _weight: int = 0
 var weight: int:
 	get: return _weight
 	set(value): _weight = max(0, value)
 
-# @onready var target: Vector2 = Vector2.ZERO
+var target: Rect2
 
-func _ready() -> void: logic.relations.controls(self)
+func _ready() -> void:
+	view.animation.hero = self
+	logic.relations.controls(self)
 
 func _physics_process(_delta: float) -> void:
-# func _process(_delta: float) -> void:
-#	if target != Vector2.ZERO:
-		# target = Vector2.ZERO
-#	else:
-	"""
-	if target != Vector2.ZERO:
-		position = target
-		print("TARGET: ", position)
-		target = Vector2.ZERO
-		_delta_count = 4
-	elif _delta_count > 0:
-		_delta_count -= _delta
-		print("TARGET POS: ", position)
-	else:
-	"""
-	#if velocity != Vector2.ZERO:
 	move_and_slide()
-	# print("TARGET: ", position)
+
+func turn_walls_collision(value: bool) -> void:
+	for mask in [WORLD, BORDERS, BOX, GAP, UPLAND]:
+		set_collision_mask_value(mask, value)
 
 func teleport(next: Vector2) -> void:
 	velocity = Vector2.ZERO
-	position = next
+	target.position = position
+	target.size = next - position
 	print("SET TARGET: ", position)
+	view.animation.action_move("jump")
+	#action_move.emit("jump")
 
 func dash(force: Vector2) -> void:
-	"""
-	print("force: ", force)
-	print("dash: ", position + force)
-	print("world: ", get_collision_mask_value(1))
-	print("borders: ", get_collision_mask_value(2))
-	print("box: ", get_collision_mask_value(5))
-	print("movement: ", logic.processors.input.movement.process_mode)
-	print("platforming: ", logic.processors.input.platforming.process_mode)
-	# """
-	#target = force
-	#target = 
-	#position += force #target
 	teleport(position + force)
-	#velocity = Vector2.ZERO
-	# position = position + force
 	print("JUMPED: ", position)
+
+func move(proportion: float) -> void:
+	var next: Vector2 = target.position + target.size * proportion
+	var p: Vector2 = position
+	print("POS: ", p, " - NEXT: ", next)
+	position = next
 
 func _set_velocity(motion: Vector2) -> void:
 	velocity = motion
 	moving.emit(motion)
 
 func forget_velocity() -> void:
+	var v = velocity
+	print("VELOCITY: ", v)
 	_set_velocity(Vector2.ZERO)
+	v = velocity
+	print("VELOCITY: ", v)
 	view.animation.move(Vector2.ZERO)
 
 func travel(motion: Vector2) -> void:

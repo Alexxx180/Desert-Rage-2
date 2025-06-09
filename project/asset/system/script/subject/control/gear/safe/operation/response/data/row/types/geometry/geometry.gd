@@ -4,7 +4,7 @@ class_name PostgresGeometryTypes
 
 enum { POINT = 600, BOX = 603, LSEG = 601, LINE = 628, CIRCLE = 718 } # Universal Unique IDentifier # Geometry # Date-time
 
-var recognize: PostgresGeometryRecognize = PostgresGeometryRecognize.new()
+var recognize: GeometryPostgres = GeometryPostgres.new()
 
 func resolve(object: Dictionary) -> bool:
 	match object.type_id:

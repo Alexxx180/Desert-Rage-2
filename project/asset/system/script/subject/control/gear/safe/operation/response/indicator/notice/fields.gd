@@ -35,7 +35,7 @@ func iterate(object: Dictionary, set_feedback: Callable) -> Dictionary:
 func response(keys: Dictionary, _field: Dictionary) -> Dictionary:
 	keys['S'] = "severity"
 	keys['M'] = "message"
-	return Defaults.DICT
+	return {}
 
 func error(notice: NoticeResponses, object: Dictionary) -> Callable:
 	return func(_keys, field): return {

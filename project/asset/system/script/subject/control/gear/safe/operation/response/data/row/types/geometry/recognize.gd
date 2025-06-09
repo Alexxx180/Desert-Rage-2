@@ -1,6 +1,6 @@
 extends RefCounted
 
-class_name PostgresGeometryRecognize
+class_name GeometryPostgres
 
 signal stop()
 

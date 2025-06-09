@@ -1,6 +1,6 @@
 extends RefCounted
 
-class_name PostgresBytesRecognize
+class_name BytesPostgres
 
 signal stop()
 
@@ -14,7 +14,8 @@ func get_number_from_hex(hex: Array, i) -> int:
 	return (hex[i + 1] + hex[i + 2]).hex_to_int()
 
 func latin(object: Dictionary) -> void:
-	object.row.append(object.value.get_string_from_ascii())
+	var value: String = object.value.get_string_from_ascii()
+	object.row.append(value)
 
 func _add_bite_array(object: Dictionary) -> void:
 	var value: PackedByteArray = PackedByteArray()
