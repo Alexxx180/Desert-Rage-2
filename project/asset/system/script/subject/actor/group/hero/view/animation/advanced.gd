@@ -18,7 +18,7 @@ func sync(tree: AnimationTree) -> void:
 	_direct()
 
 func _direct() -> void:
-	for animation in ["idle-1", "walk", "run", "jump"]:
+	for animation in ["idle-1", "walk", "run", "jump", "pull_forward"]:
 		set("parameters/%s/blend_position" % animation, _direction)
 
 func turn_direction() -> void: _direct()

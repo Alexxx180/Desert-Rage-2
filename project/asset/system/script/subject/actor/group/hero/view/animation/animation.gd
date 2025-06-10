@@ -21,10 +21,10 @@ func start_dash() -> void: hero.logic.jump_sequence(true)
 func stop_dash() -> void:
 	var direction = _direction
 	hero.logic.jump_sequence(false)
-	action_move("go")
+	action_move()
 	_direction = direction
 
-func action_move(stand: String) -> void:
+func action_move(stand: String = "go") -> void:
 	maze = stand
 	request("move", stand)
 
