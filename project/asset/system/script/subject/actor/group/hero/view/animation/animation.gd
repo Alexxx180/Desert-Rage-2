@@ -15,6 +15,11 @@ func sync(tree: AnimationTree) -> void:
 	_direct()
 	#super.sync(tree)
 
+func _direct() -> void:
+	super._direct()
+	if not Input.is_action_pressed("action"):
+		set("parameters/pull_forward/blend_position", _direction)
+
 func set_position(proportion: float) -> void: hero.move(proportion)
 
 func start_dash() -> void: hero.logic.jump_sequence(true)
