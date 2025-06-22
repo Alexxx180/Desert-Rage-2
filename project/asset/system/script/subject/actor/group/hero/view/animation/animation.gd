@@ -7,11 +7,12 @@ var go: Array[String] = ["walk", "run"]
 
 func _ready() -> void: _direct()
 func sync(tree: AnimationTree) -> void:
+	hero = tree.hero
 	var d = tree.direction
 	_direction = d
 	set_speed(tree.scale)
 	_move_hero("idle") # tree.pose
-	#action_move(tree.maze)
+	action_move(tree.maze)
 	_direct()
 	#super.sync(tree)
 
@@ -24,10 +25,10 @@ func set_position(proportion: float) -> void: hero.move(proportion)
 
 func start_dash() -> void: hero.logic.jump_sequence(true)
 func stop_dash() -> void:
-	var direction = _direction
+	var temp: Vector2i = _direction
 	hero.logic.jump_sequence(false)
 	action_move()
-	_direction = direction
+	_direction = temp
 
 func action_move(stand: String = "go") -> void:
 	maze = stand
