@@ -1,31 +1,40 @@
 extends CharacterBody2D
 
-enum { SPEED = 200, RANGE = 600 }
+enum { SPEED = 200, RANGE = 200 }
 
 @onready var view: Node2D = $view
+@onready var hitbox: StaticBody2D = $hitbox
+@onready var timer: Timer = $timer
 
-var target: Vector2 # Rect2
+var target: Rect2
 var direction: float = -1.0
+var transport_index: int = 0
 
-func _ready() -> void:
-	target.x = position.y + RANGE
-	target.y = position.y - RANGE
+#func init() -> void:
+#	target.x = position.y + RANGE
+#	target.y = position.y - RANGE
 
 func _physics_process(_delta: float) -> void:
-	if position.y > target.x:
-		direction = -1.0
-	elif position.y < target.y:
-		direction = 1.0
 	var motion: Vector2 = Vector2(0, direction * SPEED)
+	# print("MOTION: ", motion)
 	view.animation.move(motion)
 	velocity = motion
 	move_and_slide()
 
-func teleport(_next: Vector2) -> void:
+func ally_obstacle(_body) -> void:
+	timer.start()
+	# if timer.seek > 0:
+	#	direction *= -1
+
+func avoid_obstale() -> void:
+	direction *= -1
+
+func teleport(next: Vector2) -> void:
 	velocity = Vector2.ZERO
+	position = next
 	#target.position = position
 	#target.size = next - position
-	view.animation.action_move("jump")
+	# view.animation.action_move("jump")
 
 func dash(force: Vector2) -> void: teleport(position + force)
 

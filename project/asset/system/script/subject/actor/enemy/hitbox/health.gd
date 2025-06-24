@@ -1,5 +1,7 @@
 extends Node
 
+signal transport()
+
 enum { THICKNESS = 2, MAX = 100, SET = 255 }
 
 var points: float = MAX
@@ -32,13 +34,19 @@ func set_color(portion: float) -> void:
 	else: # ORANGE
 		material.set(property, Color.from_rgba8(SET, int(red(portion) * SET), 0))
 
-func hit(damage: int = 1) -> void:
-	if points <= 0: return
-	points = max(points - damage, 0)
+func update_aura() -> void:
 	var portion: float = points / MAX
 	material.set(param.thick, portion * THICKNESS + 3)
 	set_color(portion)
-	if points <= 0 and entity.name == "eye-seeker": entity.queue_free()
+
+func hit(damage: int = 1) -> void:
+	if points <= 0: return
+	points = max(points - damage, 0)
+	update_aura()
+	if points <= 0 and not entity.name in ["ray", "rock"]:
+		points = MAX
+		transport.emit()
+		# entity.queue_free()
 	timer.start()
 
 func aura_diffusion() -> void:
