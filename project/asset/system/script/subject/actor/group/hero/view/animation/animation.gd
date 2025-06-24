@@ -36,16 +36,18 @@ func set_position(proportion: float) -> void: hero.move(proportion)
 func action_move(stand: String = "go") -> void: request("move", stand)
 func _move_hero(stand: String) -> void: request("passive", stand)
 func fight_body(stand: String) -> void:
+	# var previous: String = ask("active")
+	var combo_act: String = "punch_combo" if stand == "hands" else "kick_combo"
+	var combo: int = (int(ask(combo_act)) + 1) % DOUBLE_COMBO
+	request(combo_act, combo)
 	request("active", stand)
-	if stand == "hands":
-		var combo: int = (int(ask("punch_combo")) + 1) % DOUBLE_COMBO
-		request("punch_combo", combo)
 	
 func start_fight(stand: String) -> void:
 	request("character", stand)
 	stance.start()
 
-func end_fight() -> void: request("character", "passive")
+func end_fight() -> void:
+	request("character", "passive")
 
 func set_damage(points: int = 5) -> void: close_damage.emit(points)
 

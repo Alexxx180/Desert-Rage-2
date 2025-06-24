@@ -3,7 +3,6 @@ extends CharacterBody2D
 enum { SPEED = 200, RANGE = 600 }
 
 @onready var view: Node2D = $view
-@onready var health: Node = $health
 
 var target: Vector2 # Rect2
 var direction: float = -1.0
@@ -22,7 +21,7 @@ func _physics_process(_delta: float) -> void:
 	velocity = motion
 	move_and_slide()
 
-func teleport(next: Vector2) -> void:
+func teleport(_next: Vector2) -> void:
 	velocity = Vector2.ZERO
 	#target.position = position
 	#target.size = next - position

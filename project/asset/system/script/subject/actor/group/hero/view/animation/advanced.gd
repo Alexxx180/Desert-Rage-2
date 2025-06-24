@@ -24,7 +24,7 @@ func sync(tree: AnimationTree) -> void:
 	_direct()
 
 func direct_animations() -> Array[String]:
-	return ["idle-1", "walk", "run", "jump", "kick_1", "punch_1", "punch_2"]
+	return ["idle-1", "walk", "run", "jump", "kick_0", "kick_1", "punch_0", "punch_1"]
 
 func _direct() -> void:
 	for animation in direct_animations():

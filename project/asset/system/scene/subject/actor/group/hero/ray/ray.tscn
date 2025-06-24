@@ -29,7 +29,7 @@ is_hero = true
 stats = ExtResource("5_yriep")
 
 [node name="hitbox" type="StaticBody2D" parent="."]
-collision_layer = 4
+collision_layer = 4194304
 collision_mask = 0
 script = ExtResource("6_bs5eb")
 
@@ -41,6 +41,12 @@ debug_color = Color(0.965055, 1.92523e-07, 0.489026, 0.42)
 [node name="health" type="Node" parent="hitbox"]
 script = ExtResource("7_pfs1f")
 
+[node name="timer" type="Timer" parent="hitbox/health"]
+wait_time = 0.6
+one_shot = true
+
 [node name="fov" parent="." instance=ExtResource("6_1p510")]
 position = Vector2(-0.500001, -52)
 scale = Vector2(1.90625, 3.875)
+
+[connection signal="timeout" from="hitbox/health/timer" to="hitbox/health" method="aura_diffusion"]

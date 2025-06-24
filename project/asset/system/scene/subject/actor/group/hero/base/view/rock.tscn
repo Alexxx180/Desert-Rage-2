@@ -1,4 +1,4 @@
-[gd_scene load_steps=354 format=3 uid="uid://xh6k0wh1djy2"]
+[gd_scene load_steps=370 format=3 uid="uid://xh6k0wh1djy2"]
 
 [ext_resource type="Script" uid="uid://djhgknvw72ya6" path="res://asset/system/script/subject/actor/group/hero/view/view.gd" id="1_f3u3w"]
 [ext_resource type="PackedScene" uid="uid://c136xgt1v5vbl" path="res://asset/system/scene/subject/actor/group/hero/base/view/base/shadow.tscn" id="2_cqm6d"]
@@ -1907,7 +1907,7 @@ input_1/reset = true
 
 [sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_kq8tf"]
 input_0/name = "active"
-input_0/auto_advance = true
+input_0/auto_advance = false
 input_0/break_loop_at_end = false
 input_0/reset = false
 input_1/name = "passive"
@@ -1999,6 +1999,39 @@ blend_point_3/node = SubResource("AnimationNodeAnimation_gdk28")
 blend_point_3/pos = Vector2(0, -1)
 blend_mode = 1
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_poypw"]
+animation = &"rock/rock_kick_left"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_juq0f"]
+animation = &"rock/rock_kick_right"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_q58dw"]
+animation = &"rock/rock_kick_backward"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3hjy3"]
+animation = &"rock/rock_kick_forward"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_arpyd"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_poypw")
+blend_point_0/pos = Vector2(-1, 0)
+blend_point_1/node = SubResource("AnimationNodeAnimation_juq0f")
+blend_point_1/pos = Vector2(1, 0)
+blend_point_2/node = SubResource("AnimationNodeAnimation_q58dw")
+blend_point_2/pos = Vector2(0, 1)
+blend_point_3/node = SubResource("AnimationNodeAnimation_3hjy3")
+blend_point_3/pos = Vector2(0, -1)
+blend_mode = 1
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_c2g57"]
+input_0/name = "0"
+input_0/auto_advance = false
+input_0/break_loop_at_end = false
+input_0/reset = true
+input_1/name = "1"
+input_1/auto_advance = false
+input_1/break_loop_at_end = false
+input_1/reset = true
+
 [sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_op77x"]
 input_0/name = "go"
 input_0/auto_advance = false
@@ -2079,6 +2112,39 @@ blend_point_3/node = SubResource("AnimationNodeAnimation_qksj7")
 blend_point_3/pos = Vector2(0, 1)
 blend_mode = 1
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_mjr0d"]
+animation = &"rock/rock_punch_left_2"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8pdv2"]
+animation = &"rock/rock_punch_right_2"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_i3tht"]
+animation = &"rock/rock_punch_backward_2"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xbra3"]
+animation = &"rock/rock_punch_forward_2"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_4o1wx"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_mjr0d")
+blend_point_0/pos = Vector2(-1, 0)
+blend_point_1/node = SubResource("AnimationNodeAnimation_8pdv2")
+blend_point_1/pos = Vector2(1, 0)
+blend_point_2/node = SubResource("AnimationNodeAnimation_i3tht")
+blend_point_2/pos = Vector2(0, 1)
+blend_point_3/node = SubResource("AnimationNodeAnimation_xbra3")
+blend_point_3/pos = Vector2(0, -1)
+blend_mode = 1
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_yrun7"]
+input_0/name = "0"
+input_0/auto_advance = false
+input_0/break_loop_at_end = false
+input_0/reset = true
+input_1/name = "1"
+input_1/auto_advance = false
+input_1/break_loop_at_end = false
+input_1/reset = true
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_llbma"]
 animation = &"rock/rock_run_left"
 
@@ -2128,13 +2194,13 @@ blend_point_3/pos = Vector2(0, -1)
 blend_mode = 1
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_thqop"]
-graph_offset = Vector2(-797.637, -306.533)
+graph_offset = Vector2(-445.125, -187.698)
 nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_bwgxx")
 nodes/TimeScale/position = Vector2(-860, -360)
 nodes/active/node = SubResource("AnimationNodeTransition_4o1wx")
-nodes/active/position = Vector2(-100, -380)
+nodes/active/position = Vector2(220, -520)
 nodes/character/node = SubResource("AnimationNodeTransition_kq8tf")
-nodes/character/position = Vector2(140, -240)
+nodes/character/position = Vector2(580, -140)
 nodes/go/node = SubResource("AnimationNodeTransition_adr0w")
 nodes/go/position = Vector2(-700, -180)
 nodes/idle/node = SubResource("AnimationNodeTransition_e6pft")
@@ -2143,26 +2209,34 @@ nodes/idle-1/node = SubResource("AnimationNodeBlendSpace2D_gedvj")
 nodes/idle-1/position = Vector2(-740, 460)
 nodes/jump/node = SubResource("AnimationNodeBlendSpace2D_xtkps")
 nodes/jump/position = Vector2(-700, 200)
-nodes/kick_1/node = SubResource("AnimationNodeBlendSpace2D_ju68e")
-nodes/kick_1/position = Vector2(-400, -240)
+nodes/kick_0/node = SubResource("AnimationNodeBlendSpace2D_ju68e")
+nodes/kick_0/position = Vector2(-320, -440)
+nodes/kick_1/node = SubResource("AnimationNodeBlendSpace2D_arpyd")
+nodes/kick_1/position = Vector2(-320, -200)
+nodes/kick_combo/node = SubResource("AnimationNodeTransition_c2g57")
+nodes/kick_combo/position = Vector2(-20, -380)
 nodes/move/node = SubResource("AnimationNodeTransition_op77x")
 nodes/move/position = Vector2(-500, 20)
-nodes/output/position = Vector2(540, -160)
+nodes/output/position = Vector2(980, -60)
 nodes/passive/node = SubResource("AnimationNodeTransition_hwxyx")
 nodes/passive/position = Vector2(-320, 180)
 nodes/pull/node = SubResource("AnimationNodeTransition_xtkps")
 nodes/pull/position = Vector2(-880, 80)
 nodes/pull_forward/node = SubResource("AnimationNodeBlendSpace2D_omnyj")
 nodes/pull_forward/position = Vector2(-1160, 80)
-nodes/punch_1/node = SubResource("AnimationNodeBlendSpace2D_mjr0d")
-nodes/punch_1/position = Vector2(-400, -480)
+nodes/punch_0/node = SubResource("AnimationNodeBlendSpace2D_mjr0d")
+nodes/punch_0/position = Vector2(-320, -920)
+nodes/punch_1/node = SubResource("AnimationNodeBlendSpace2D_4o1wx")
+nodes/punch_1/position = Vector2(-320, -680)
+nodes/punch_combo/node = SubResource("AnimationNodeTransition_yrun7")
+nodes/punch_combo/position = Vector2(-20, -680)
 nodes/run/node = SubResource("AnimationNodeBlendSpace2D_rmqa6")
 nodes/run/position = Vector2(-1020, -160)
 nodes/speed/node = SubResource("AnimationNodeTimeScale_rnfp1")
-nodes/speed/position = Vector2(360, -200)
+nodes/speed/position = Vector2(800, -100)
 nodes/walk/node = SubResource("AnimationNodeBlendSpace2D_7pjmh")
 nodes/walk/position = Vector2(-1080, -400)
-node_connections = [&"TimeScale", 0, &"walk", &"active", 0, &"punch_1", &"active", 1, &"kick_1", &"character", 0, &"active", &"character", 1, &"passive", &"go", 0, &"TimeScale", &"go", 1, &"run", &"idle", 0, &"idle-1", &"move", 0, &"go", &"move", 1, &"pull", &"move", 2, &"jump", &"output", 0, &"speed", &"passive", 0, &"move", &"passive", 1, &"idle", &"pull", 0, &"pull_forward", &"speed", 0, &"character"]
+node_connections = [&"TimeScale", 0, &"walk", &"active", 0, &"punch_combo", &"active", 1, &"kick_combo", &"character", 0, &"active", &"character", 1, &"passive", &"go", 0, &"TimeScale", &"go", 1, &"run", &"idle", 0, &"idle-1", &"kick_combo", 0, &"kick_0", &"kick_combo", 1, &"kick_1", &"move", 0, &"go", &"move", 1, &"pull", &"move", 2, &"jump", &"output", 0, &"speed", &"passive", 0, &"move", &"passive", 1, &"idle", &"pull", 0, &"pull_forward", &"punch_combo", 0, &"punch_0", &"punch_combo", 1, &"punch_1", &"speed", 0, &"character"]
 
 [sub_resource type="Animation" id="Animation_osu37"]
 length = 0.001
@@ -2662,7 +2736,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [&"right_kick"]
+"values": [&"forward_kick"]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -2857,7 +2931,8 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_nphcs"]
 resource_name = "rock_punch_backward"
-length = 0.25
+length = 0.35
+step = 0.025
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -2877,15 +2952,30 @@ tracks/1/path = NodePath("profile:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.152092, 0.2),
+"times": PackedFloat32Array(0, 0.075, 0.15, 0.225, 0.3),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [2, 1, 0, 0, 1]
+"values": [1, 2, 0, 0, 1]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("animation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.15),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [5],
+"method": &"set_damage"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_aset2"]
 resource_name = "rock_punch_forward"
-length = 0.25
+length = 0.35
+step = 0.025
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -2905,15 +2995,29 @@ tracks/1/path = NodePath("profile:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.152092, 0.2),
+"times": PackedFloat32Array(0, 0.075, 0.15, 0.225, 0.3),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [2, 1, 0, 0, 1]
+"values": [1, 2, 0, 0, 1]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("animation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.15),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [5],
+"method": &"set_damage"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_gdk28"]
 resource_name = "rock_punch_left"
-length = 0.25
+length = 0.35
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -2933,15 +3037,16 @@ tracks/1/path = NodePath("profile:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.152092, 0.2),
+"times": PackedFloat32Array(0, 0.075, 0.15, 0.225, 0.3),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [2, 1, 0, 0, 1]
+"values": [1, 2, 0, 0, 1]
 }
 
 [sub_resource type="Animation" id="Animation_ju68e"]
 resource_name = "rock_punch_right"
-length = 0.25
+length = 0.35
+step = 0.025
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -2961,10 +3066,24 @@ tracks/1/path = NodePath("profile:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.152092, 0.2),
+"times": PackedFloat32Array(0, 0.075, 0.15, 0.233333, 0.3),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [2, 1, 0, 0, 1]
+"values": [1, 2, 0, 0, 1]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("animation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.15),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [5],
+"method": &"set_damage"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_8ps7u"]
@@ -3201,6 +3320,178 @@ tracks/1/keys = {
 "values": [2, 3, 4, 5, 6, 7, 8, 7, 6, 5, 4, 3]
 }
 
+[sub_resource type="Animation" id="Animation_qksj7"]
+resource_name = "rock_punch_left_2"
+length = 0.35
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("profile:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"left_punch"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("profile:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.075, 0.15, 0.225, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [2, 1, 3, 3, 2]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("animation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [5],
+"method": &"set_damage"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_mjr0d"]
+resource_name = "rock_punch_right_2"
+length = 0.35
+step = 0.025
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("profile:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"right_punch"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("profile:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.075, 0.15, 0.225, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [2, 1, 3, 3, 2]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("animation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.15),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [5],
+"method": &"set_damage"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_8pdv2"]
+resource_name = "rock_punch_forward_2"
+length = 0.35
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("profile:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"forward_punch"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("profile:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.075, 0.15, 0.225, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [2, 1, 3, 3, 2]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("animation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [5],
+"method": &"set_damage"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_i3tht"]
+resource_name = "rock_punch_backward_2"
+length = 0.35
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("profile:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"backward_punch"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("profile:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.075, 0.15, 0.225, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [2, 1, 3, 3, 2]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("animation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [5],
+"method": &"set_damage"
+}]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_vg0c2"]
 _data = {
 &"rock_idle_backward": SubResource("Animation_qr0bg"),
@@ -3220,9 +3511,13 @@ _data = {
 &"rock_move_left": SubResource("Animation_4aw2t"),
 &"rock_move_right": SubResource("Animation_4h0og"),
 &"rock_punch_backward": SubResource("Animation_nphcs"),
+&"rock_punch_backward_2": SubResource("Animation_i3tht"),
 &"rock_punch_forward": SubResource("Animation_aset2"),
+&"rock_punch_forward_2": SubResource("Animation_8pdv2"),
 &"rock_punch_left": SubResource("Animation_gdk28"),
+&"rock_punch_left_2": SubResource("Animation_qksj7"),
 &"rock_punch_right": SubResource("Animation_ju68e"),
+&"rock_punch_right_2": SubResource("Animation_mjr0d"),
 &"rock_push_backward": SubResource("Animation_8ps7u"),
 &"rock_push_forward": SubResource("Animation_ujhuw"),
 &"rock_push_left": SubResource("Animation_10x42"),
@@ -3244,7 +3539,8 @@ scale = Vector2(0.6, 0.72)
 [node name="profile" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_bd13v")
-animation = &"left"
+animation = &"left_punch"
+frame = 2
 offset = Vector2(0, -103)
 
 [node name="animation" type="AnimationTree" parent="."]
@@ -3265,10 +3561,14 @@ parameters/idle/transition_request = ""
 parameters/idle/current_index = 0
 parameters/idle-1/blend_position = Vector2(0, 0)
 parameters/jump/blend_position = Vector2(0, 0)
+parameters/kick_0/blend_position = Vector2(0, 0)
 parameters/kick_1/blend_position = Vector2(0, 0)
-parameters/move/current_state = "pull"
-parameters/move/transition_request = "go"
-parameters/move/current_index = 1
+parameters/kick_combo/current_state = ""
+parameters/kick_combo/transition_request = "0"
+parameters/kick_combo/current_index = -1
+parameters/move/current_state = "go"
+parameters/move/transition_request = ""
+parameters/move/current_index = 0
 parameters/passive/current_state = "idle"
 parameters/passive/transition_request = ""
 parameters/passive/current_index = 1
@@ -3276,7 +3576,11 @@ parameters/pull/current_state = "forward"
 parameters/pull/transition_request = ""
 parameters/pull/current_index = 0
 parameters/pull_forward/blend_position = Vector2(0, 0)
+parameters/punch_0/blend_position = Vector2(0, 0)
 parameters/punch_1/blend_position = Vector2(0, 0)
+parameters/punch_combo/current_state = ""
+parameters/punch_combo/transition_request = "0"
+parameters/punch_combo/current_index = -1
 parameters/run/blend_position = Vector2(0, 0)
 parameters/speed/scale = 2.0
 parameters/walk/blend_position = Vector2(0, 0)
@@ -3289,5 +3593,10 @@ libraries = {
 &"rock": SubResource("AnimationLibrary_vg0c2")
 }
 
+[node name="stance" type="Timer" parent="animation"]
+wait_time = 0.4
+one_shot = true
+
 [connection signal="body_entered" from="behind" to="." method="_go_behind_scene"]
 [connection signal="body_exited" from="behind" to="." method="_go_on_scene"]
+[connection signal="timeout" from="animation/stance" to="animation" method="end_fight"]
