@@ -1,6 +1,7 @@
 extends Node
 
 signal action()
+signal kick()
 signal moving(velocity: Vector2)
 
 @onready var movement: Node = $movement
@@ -12,6 +13,8 @@ var motion: Vector2:
 func _input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("action"):
 		action.emit()
+	if Input.is_action_just_pressed("run"):
+		kick.emit()
 	perform_motion()
 
 func perform_motion() -> void:

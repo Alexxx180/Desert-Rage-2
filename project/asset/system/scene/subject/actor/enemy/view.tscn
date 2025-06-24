@@ -1,0 +1,273 @@
+[gd_scene load_steps=22 format=3 uid="uid://betuc6opsy7to"]
+
+[ext_resource type="SpriteFrames" uid="uid://bgbew7tx6q3gs" path="res://asset/resource/engine/internal/shape/image/sprite/frames/eye-seeker.tres" id="1_7mawb"]
+[ext_resource type="Shader" uid="uid://dbon4qjo2ew5s" path="res://asset/resource/engine/internal/shape/image/sprite/shader/outline.gdshader" id="1_yhlpl"]
+[ext_resource type="Script" uid="uid://gyrinvb3u4c7" path="res://asset/system/script/subject/actor/enemy/view/view.gd" id="1_yj335"]
+[ext_resource type="Script" uid="uid://c6yuymm1u7mmn" path="res://asset/system/script/subject/actor/enemy/view/animation.gd" id="4_qjxeh"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yj335"]
+shader = ExtResource("1_yhlpl")
+shader_parameter/line_color = Color(0, 1, 1, 1)
+shader_parameter/line_thickness = 7.0
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_v1tmw"]
+input_0/name = "active"
+input_0/auto_advance = false
+input_0/break_loop_at_end = false
+input_0/reset = true
+input_1/name = "passive"
+input_1/auto_advance = false
+input_1/break_loop_at_end = false
+input_1/reset = true
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_v1tmw"]
+animation = &"eye-seeker/eye_backward_idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_11afu"]
+animation = &"eye-seeker/eye_left"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hied7"]
+animation = &"eye-seeker/eye_right"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1whyy"]
+animation = &"eye-seeker/eye_backward"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8egfw"]
+animation = &"eye-seeker/eye_forward"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_e30m2"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_11afu")
+blend_point_0/pos = Vector2(-1, 0)
+blend_point_1/node = SubResource("AnimationNodeAnimation_hied7")
+blend_point_1/pos = Vector2(1, 0)
+blend_point_2/node = SubResource("AnimationNodeAnimation_1whyy")
+blend_point_2/pos = Vector2(0, 1)
+blend_point_3/node = SubResource("AnimationNodeAnimation_8egfw")
+blend_point_3/pos = Vector2(0, -1)
+blend_mode = 1
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_hi651"]
+graph_offset = Vector2(-644.268, -95.8948)
+nodes/enemy/node = SubResource("AnimationNodeTransition_v1tmw")
+nodes/enemy/position = Vector2(60, 100)
+nodes/idle/node = SubResource("AnimationNodeAnimation_v1tmw")
+nodes/idle/position = Vector2(-280, 220)
+nodes/rolling/node = SubResource("AnimationNodeBlendSpace2D_e30m2")
+nodes/rolling/position = Vector2(-260, -40)
+node_connections = [&"enemy", 0, &"rolling", &"enemy", 1, &"idle", &"output", 0, &"enemy"]
+
+[sub_resource type="Animation" id="Animation_v1tmw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("profile:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"forward"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("profile:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_11afu"]
+_data = {
+&"RESET": SubResource("Animation_v1tmw")
+}
+
+[sub_resource type="Animation" id="Animation_hied7"]
+resource_name = "eye_backward"
+length = 0.4
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("profile:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"backward"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("profile:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+
+[sub_resource type="Animation" id="Animation_e30m2"]
+resource_name = "eye_backward_idle"
+length = 0.01
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("profile:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"backward"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("profile:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_11afu"]
+resource_name = "eye_forward"
+length = 0.4
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("profile:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"forward"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("profile:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+
+[sub_resource type="Animation" id="Animation_1whyy"]
+resource_name = "eye_left"
+length = 0.4
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("profile:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"left"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("profile:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+
+[sub_resource type="Animation" id="Animation_8egfw"]
+resource_name = "eye_right"
+length = 0.4
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("profile:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"right"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("profile:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1whyy"]
+_data = {
+&"eye_backward": SubResource("Animation_hied7"),
+&"eye_backward_idle": SubResource("Animation_e30m2"),
+&"eye_forward": SubResource("Animation_11afu"),
+&"eye_left": SubResource("Animation_1whyy"),
+&"eye_right": SubResource("Animation_8egfw")
+}
+
+[node name="view" type="Node2D"]
+script = ExtResource("1_yj335")
+
+[node name="profile" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_yj335")
+scale = Vector2(0.5, 0.5)
+sprite_frames = ExtResource("1_7mawb")
+animation = &"forward"
+offset = Vector2(0, -50)
+
+[node name="animation" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeBlendTree_hi651")
+anim_player = NodePath("player")
+parameters/enemy/current_state = "active"
+parameters/enemy/transition_request = ""
+parameters/enemy/current_index = 0
+parameters/rolling/blend_position = Vector2(0, 0)
+script = ExtResource("4_qjxeh")
+
+[node name="player" type="AnimationPlayer" parent="animation"]
+root_node = NodePath("../..")
+libraries = {
+&"": SubResource("AnimationLibrary_11afu"),
+&"eye-seeker": SubResource("AnimationLibrary_1whyy")
+}

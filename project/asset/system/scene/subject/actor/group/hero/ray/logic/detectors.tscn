@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://bvcp473mjoo0s"]
+[gd_scene load_steps=7 format=3 uid="uid://bvcp473mjoo0s"]
 
 [ext_resource type="PackedScene" uid="uid://drenendoaby3e" path="res://asset/system/scene/subject/actor/group/hero/ray/logic/detectors/world.tscn" id="1_lo2lu"]
 [ext_resource type="Script" uid="uid://b1f5rlsrl40f2" path="res://asset/system/script/subject/actor/group/hero/logic/detectors.gd" id="1_xlu08"]
 [ext_resource type="PackedScene" uid="uid://chf3wtyobsvlq" path="res://asset/system/scene/subject/actor/group/hero/base/logic/detectors/platforming.tscn" id="2_b7na6"]
+[ext_resource type="Shape2D" uid="uid://cijemnhgm8sg" path="res://asset/resource/engine/internal/shape/geometry/interactables/act/pull.tres" id="4_hfe7s"]
+[ext_resource type="Script" uid="uid://dyappsdv3nhlg" path="res://asset/system/script/subject/actor/group/hero/logic/detectors/fight/direction.gd" id="4_ji8u4"]
+[ext_resource type="Script" uid="uid://dae033qb76xqu" path="res://asset/system/script/subject/actor/group/hero/logic/detectors/fight/fight.gd" id="4_rrsda"]
 
 [node name="detectors" type="Node2D"]
 script = ExtResource("1_xlu08")
@@ -11,3 +14,14 @@ script = ExtResource("1_xlu08")
 
 [node name="platforming" parent="." instance=ExtResource("2_b7na6")]
 visible = false
+
+[node name="fight" type="Node2D" parent="."]
+script = ExtResource("4_rrsda")
+
+[node name="close" type="Area2D" parent="fight"]
+collision_layer = 0
+collision_mask = 8
+script = ExtResource("4_ji8u4")
+
+[node name="shape" type="CollisionShape2D" parent="fight/close"]
+shape = ExtResource("4_hfe7s")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://diym5yp6qvcno"]
+[gd_scene load_steps=12 format=4 uid="uid://diym5yp6qvcno"]
 
 [ext_resource type="PackedScene" uid="uid://d0i3jl2uefg53" path="res://asset/system/scene/object/image/level/tilemap/border.tscn" id="1_2sa2h"]
 [ext_resource type="PackedScene" uid="uid://rlwfnl6rvpkj" path="res://asset/system/scene/object/image/level/tilemap/execute.tscn" id="2_o3ps3"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://b3oh6t5q4y0ub" path="res://asset/system/scene/object/image/view/sight/transition/stairs/down/end.tscn" id="7_vnhea"]
 [ext_resource type="PackedScene" uid="uid://bsumfxiuy47r" path="res://asset/system/scene/object/image/level/theme/caves.tscn" id="8_7ie5e"]
 [ext_resource type="Script" uid="uid://kqsx3uji4d8r" path="res://asset/system/script/subject/control/gear/safe/database.gd" id="10_hr0ed"]
+[ext_resource type="PackedScene" uid="uid://chvprd662tx56" path="res://asset/system/scene/subject/actor/enemy/eye-seeker.tscn" id="11_e2bjw"]
 
 [node name="level" type="Node2D"]
 y_sort_enabled = true
@@ -28,7 +29,7 @@ tile_map_data = PackedByteArray("AAAVAEMAAQAEAAAAAAAQAEMAAQABAAAAAAADAEIAAQACAAA
 manual = ExtResource("5_gmq1i")
 
 [node name="group" parent="." instance=ExtResource("5_ahdkm")]
-position = Vector2(1520, 3275)
+position = Vector2(2590, 3367)
 
 [node name="ost" parent="." instance=ExtResource("8_7ie5e")]
 
@@ -39,5 +40,8 @@ visible = false
 
 [node name="database" type="Node" parent="."]
 script = ExtResource("10_hr0ed")
+
+[node name="eye-seeker" parent="." instance=ExtResource("11_e2bjw")]
+position = Vector2(2453, 2866)
 
 [connection signal="finished" from="ost" to="ost" method="_finished"]

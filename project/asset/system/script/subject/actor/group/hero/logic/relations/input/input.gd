@@ -26,8 +26,16 @@ func controls(hero: CharacterBody2D, input: Node) -> void:
 	input.moving.connect(space.set_direction)
 	input.moving.connect(deployment.set_direction)
 
-	input.moving.connect(detectors.world.set_direction)
+	input.moving.connect(detectors.set_direction)
 	input.moving.connect(detectors.platforming.floors.set_direction)
+	
+	input.action.connect(func():
+		hero.view.animation.start_fight("active")
+		hero.view.animation.fight_body("hands"))
+
+	input.kick.connect(func():
+		hero.view.animation.start_fight("active")
+		hero.view.animation.fight_body("legs"))
 
 	# hero.logic.processors.environment
 	# input.directing.connect(environment.surface.tracking.map.set_direction)
