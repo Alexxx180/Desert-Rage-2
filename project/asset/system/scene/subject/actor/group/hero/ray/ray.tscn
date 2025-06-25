@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://wbjmq3n817nk"]
+[gd_scene load_steps=7 format=3 uid="uid://wbjmq3n817nk"]
 
 [ext_resource type="Script" uid="uid://peulau0a74dn" path="res://asset/system/script/subject/actor/group/hero/hero.gd" id="1_jytaa"]
 [ext_resource type="Shape2D" uid="uid://do0s1n5uuqpof" path="res://asset/resource/engine/internal/shape/geometry/characters/character/character.tres" id="2_3j6ex"]
@@ -6,11 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://dr8rr0noso8m4" path="res://asset/system/scene/subject/actor/group/hero/base/logic.tscn" id="4_etyqi"]
 [ext_resource type="Resource" uid="uid://cop68mhy5yup4" path="res://asset/resource/engine/external/stats/ray.tres" id="5_yriep"]
 [ext_resource type="PackedScene" uid="uid://bocuu344hsqv" path="res://asset/system/scene/object/image/view/sight/fov.tscn" id="6_1p510"]
-[ext_resource type="Script" uid="uid://dom6yvvb5krlc" path="res://asset/system/script/subject/actor/enemy/hitbox/hitbox.gd" id="6_bs5eb"]
-[ext_resource type="Script" uid="uid://b4nfdlipsumsu" path="res://asset/system/script/subject/actor/enemy/hitbox/health.gd" id="7_pfs1f"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_y0t4a"]
-size = Vector2(45, 20)
 
 [node name="ray" type="CharacterBody2D"]
 collision_layer = 4
@@ -28,25 +23,6 @@ is_hero = true
 [node name="logic" parent="." instance=ExtResource("4_etyqi")]
 stats = ExtResource("5_yriep")
 
-[node name="hitbox" type="StaticBody2D" parent="."]
-collision_layer = 4194304
-collision_mask = 0
-script = ExtResource("6_bs5eb")
-
-[node name="geometry" type="CollisionShape2D" parent="hitbox"]
-position = Vector2(-0.5, 0)
-shape = SubResource("RectangleShape2D_y0t4a")
-debug_color = Color(0.965055, 1.92523e-07, 0.489026, 0.42)
-
-[node name="health" type="Node" parent="hitbox"]
-script = ExtResource("7_pfs1f")
-
-[node name="timer" type="Timer" parent="hitbox/health"]
-wait_time = 0.6
-one_shot = true
-
 [node name="fov" parent="." instance=ExtResource("6_1p510")]
 position = Vector2(-0.500001, -52)
 scale = Vector2(1.90625, 3.875)
-
-[connection signal="timeout" from="hitbox/health/timer" to="hitbox/health" method="aura_diffusion"]

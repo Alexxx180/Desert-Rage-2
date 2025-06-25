@@ -1,0 +1,48 @@
+[gd_scene load_steps=7 format=3 uid="uid://18yjilbfmwhk"]
+
+[ext_resource type="Script" uid="uid://c0ovke4shqn7o" path="res://asset/system/script/subject/actor/enemy/logic/fight.gd" id="1_lraox"]
+[ext_resource type="Script" uid="uid://dom6yvvb5krlc" path="res://asset/system/script/subject/actor/hitbox/hitbox.gd" id="1_lxkjm"]
+[ext_resource type="Script" uid="uid://b4nfdlipsumsu" path="res://asset/system/script/subject/actor/hitbox/health/health.gd" id="2_nn5jk"]
+[ext_resource type="Script" uid="uid://51lvqa3nbyew" path="res://asset/system/script/subject/actor/enemy/damagebox.gd" id="3_lraox"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hied7"]
+radius = 40.0125
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8egfw"]
+size = Vector2(52, 21)
+
+[node name="fight" type="Node2D"]
+script = ExtResource("1_lraox")
+
+[node name="hitbox" type="StaticBody2D" parent="."]
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("1_lxkjm")
+
+[node name="geometry" type="CollisionShape2D" parent="hitbox"]
+position = Vector2(0, -25)
+shape = SubResource("CircleShape2D_hied7")
+
+[node name="health" type="Node" parent="hitbox"]
+script = ExtResource("2_nn5jk")
+
+[node name="timer" type="Timer" parent="hitbox/health"]
+wait_time = 0.6
+one_shot = true
+
+[node name="damagebox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4194304
+script = ExtResource("3_lraox")
+
+[node name="geometry" type="CollisionShape2D" parent="damagebox"]
+position = Vector2(0, 5.5)
+shape = SubResource("RectangleShape2D_8egfw")
+debug_color = Color(0.849194, 0.346041, 0.381317, 0.42)
+
+[node name="timer" type="Timer" parent="damagebox"]
+wait_time = 0.5
+
+[connection signal="timeout" from="hitbox/health/timer" to="hitbox/health" method="aura_diffusion"]
+[connection signal="body_entered" from="damagebox" to="damagebox" method="hero_enter"]
+[connection signal="body_exited" from="damagebox" to="damagebox" method="hero_exit"]

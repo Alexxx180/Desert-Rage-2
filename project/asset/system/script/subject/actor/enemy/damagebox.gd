@@ -1,18 +1,17 @@
 extends Area2D
 
 @onready var timer: Timer = $timer
-
-const DAMAGE: int = 5
+@export var damage: int = 5
 
 var close: FightRange = FightRange.new()
 var count: int = 0
 
 func _ready() -> void:
-	timer.timeout.connect(func(): close.hit(DAMAGE))
+	timer.timeout.connect(func(): close.hit(damage))
 
 func hero_enter(body: StaticBody2D) -> void:
 	close.enter_range(body)
-	close.hit_initial(body, DAMAGE)
+	close.hit_initial(body, damage)
 	count += 1
 	if count == 1: timer.start()
 	

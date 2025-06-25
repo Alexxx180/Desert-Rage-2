@@ -17,7 +17,7 @@ func setup(tags: TileMapLayer, execute: TileMapLayer) -> void:
 		execute.add_child(enemy)
 		enemy.teleport(Tile.get_pos(execute, tag))
 		enemy.transport_index = i
-		enemy.hitbox.health.transport.connect(func(): transport_foe(execute, enemy))
+		enemy.view.animation.dead.transport.connect(func(): transport_foe(execute, enemy))
 		i += 1
 		
 
@@ -26,5 +26,5 @@ func transport_foe(execute: TileMapLayer, enemy: CharacterBody2D) -> void:
 	enemy.teleport(Tile.get_pos(execute, places[enemy.transport_index]))
 
 var foe: Dictionary = {
-	"eye-seeker": preload("res://asset/system/scene/subject/actor/enemy/eye-seeker.tscn")
+	"eye-seeker": preload("res://asset/system/scene/subject/actor/enemy/asset/eye-seeker/eye-seeker.tscn")
 }

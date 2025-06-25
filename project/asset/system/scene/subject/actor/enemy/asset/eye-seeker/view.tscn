@@ -1,14 +1,18 @@
-[gd_scene load_steps=22 format=3 uid="uid://betuc6opsy7to"]
+[gd_scene load_steps=25 format=3 uid="uid://betuc6opsy7to"]
 
 [ext_resource type="SpriteFrames" uid="uid://bgbew7tx6q3gs" path="res://asset/resource/engine/internal/shape/image/sprite/frames/eye-seeker.tres" id="1_7mawb"]
 [ext_resource type="Shader" uid="uid://dbon4qjo2ew5s" path="res://asset/resource/engine/internal/shape/image/sprite/shader/outline.gdshader" id="1_yhlpl"]
 [ext_resource type="Script" uid="uid://gyrinvb3u4c7" path="res://asset/system/script/subject/actor/enemy/view/view.gd" id="1_yj335"]
 [ext_resource type="Script" uid="uid://c6yuymm1u7mmn" path="res://asset/system/script/subject/actor/enemy/view/animation.gd" id="4_qjxeh"]
+[ext_resource type="Script" uid="uid://cmks4b1pxwoak" path="res://asset/system/script/subject/actor/hitbox/health/dead/transfer.gd" id="5_ldo7a"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yj335"]
 shader = ExtResource("1_yhlpl")
 shader_parameter/line_color = Color(0, 1, 1, 0)
-shader_parameter/line_thickness = 1.0
+shader_parameter/line_thickness = 0.0
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ldo7a"]
+animation = &"turn_to_dust"
 
 [sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_v1tmw"]
 input_0/name = "active"
@@ -19,6 +23,10 @@ input_1/name = "passive"
 input_1/auto_advance = false
 input_1/break_loop_at_end = false
 input_1/reset = true
+input_2/name = "dead"
+input_2/auto_advance = false
+input_2/break_loop_at_end = false
+input_2/reset = true
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_v1tmw"]
 animation = &"eye-seeker/eye_backward_idle"
@@ -47,14 +55,17 @@ blend_point_3/pos = Vector2(0, -1)
 blend_mode = 1
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_hi651"]
-graph_offset = Vector2(-644.268, -95.8948)
+graph_offset = Vector2(-453.162, -63.3764)
+nodes/dead/node = SubResource("AnimationNodeAnimation_ldo7a")
+nodes/dead/position = Vector2(-220, 280)
 nodes/enemy/node = SubResource("AnimationNodeTransition_v1tmw")
-nodes/enemy/position = Vector2(60, 100)
+nodes/enemy/position = Vector2(120, 20)
 nodes/idle/node = SubResource("AnimationNodeAnimation_v1tmw")
-nodes/idle/position = Vector2(-280, 220)
+nodes/idle/position = Vector2(-320, 80)
+nodes/output/position = Vector2(340, 160)
 nodes/rolling/node = SubResource("AnimationNodeBlendSpace2D_e30m2")
-nodes/rolling/position = Vector2(-260, -40)
-node_connections = [&"enemy", 0, &"rolling", &"enemy", 1, &"idle", &"output", 0, &"enemy"]
+nodes/rolling/position = Vector2(-240, -180)
+node_connections = [&"enemy", 0, &"rolling", &"enemy", 1, &"idle", &"enemy", 2, &"dead", &"output", 0, &"enemy"]
 
 [sub_resource type="Animation" id="Animation_v1tmw"]
 length = 0.001
@@ -83,9 +94,53 @@ tracks/1/keys = {
 "values": [0]
 }
 
+[sub_resource type="Animation" id="Animation_g4mn8"]
+resource_name = "turn_to_dust"
+length = 0.75
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("profile:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"dust"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("profile:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("animation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.7),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"dead_animation_end"
+}]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_11afu"]
 _data = {
-&"RESET": SubResource("Animation_v1tmw")
+&"RESET": SubResource("Animation_v1tmw"),
+&"turn_to_dust": SubResource("Animation_g4mn8")
 }
 
 [sub_resource type="Animation" id="Animation_hied7"]
@@ -248,22 +303,22 @@ _data = {
 
 [node name="view" type="Node2D"]
 script = ExtResource("1_yj335")
+outline = ExtResource("1_yhlpl")
 
 [node name="profile" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_yj335")
 scale = Vector2(0.5, 0.5)
 sprite_frames = ExtResource("1_7mawb")
-animation = &"left"
-frame = 3
+animation = &"forward"
 offset = Vector2(0, -50)
 
 [node name="animation" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeBlendTree_hi651")
 anim_player = NodePath("player")
 parameters/enemy/current_state = "active"
-parameters/enemy/transition_request = ""
-parameters/enemy/current_index = 0
-parameters/rolling/blend_position = Vector2(0, 0)
+parameters/enemy/transition_request = 0.4
+parameters/enemy/current_index = 0.113851
+parameters/rolling/blend_position = 0.006902
 script = ExtResource("4_qjxeh")
 
 [node name="player" type="AnimationPlayer" parent="animation"]
@@ -272,3 +327,6 @@ libraries = {
 &"": SubResource("AnimationLibrary_11afu"),
 &"eye-seeker": SubResource("AnimationLibrary_1whyy")
 }
+
+[node name="dead" type="Node" parent="animation"]
+script = ExtResource("5_ldo7a")

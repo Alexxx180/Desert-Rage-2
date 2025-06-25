@@ -1,0 +1,28 @@
+[gd_scene load_steps=7 format=3 uid="uid://chvprd662tx56"]
+
+[ext_resource type="Script" uid="uid://cx2ai5ggi1bfv" path="res://asset/system/script/subject/actor/enemy/enemy.gd" id="1_v86le"]
+[ext_resource type="PackedScene" uid="uid://betuc6opsy7to" path="res://asset/system/scene/subject/actor/enemy/asset/eye-seeker/view.tscn" id="2_8d7r5"]
+[ext_resource type="Script" uid="uid://bc7flucmcsdk1" path="res://asset/system/script/subject/actor/enemy/logic/logic.gd" id="3_1yw0t"]
+[ext_resource type="PackedScene" uid="uid://18yjilbfmwhk" path="res://asset/system/scene/subject/actor/enemy/fight/fight.tscn" id="3_tlpbn"]
+[ext_resource type="PackedScene" uid="uid://ehv6yrrtue21" path="res://asset/system/scene/subject/actor/enemy/path/single_dimension.tscn" id="6_u88kt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1whyy"]
+size = Vector2(60, 9)
+
+[node name="eye-seeker" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 1050835
+script = ExtResource("1_v86le")
+
+[node name="geometry" type="CollisionShape2D" parent="."]
+position = Vector2(0, 9.5)
+shape = SubResource("RectangleShape2D_1whyy")
+
+[node name="view" parent="." instance=ExtResource("2_8d7r5")]
+
+[node name="logic" type="Node2D" parent="."]
+script = ExtResource("3_1yw0t")
+
+[node name="fight" parent="logic" instance=ExtResource("3_tlpbn")]
+
+[node name="path" parent="logic" instance=ExtResource("6_u88kt")]

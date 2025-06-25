@@ -11,10 +11,11 @@ extends TileMapLayer
 @onready var enemy: Node = $enemy
 @onready var curtain: Node = $curtain
 @onready var execute: TileMapLayer = get_node("../execute")
+@onready var push: TileMapLayer = get_node("../push")
 
 func _ready() -> void:
 	lockers.setup(self, execute)
 	transition.setup(self, execute)
 	books.setup(self, execute)
-	enemy.setup(self, execute)
+	enemy.setup(self, push)
 	if invisible: hide()

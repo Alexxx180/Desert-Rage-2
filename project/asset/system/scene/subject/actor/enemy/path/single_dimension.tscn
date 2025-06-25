@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://ehv6yrrtue21"]
+
+[ext_resource type="Script" uid="uid://gkxpk6vu4v3b" path="res://asset/system/script/subject/actor/enemy/path/path.gd" id="1_ij0cj"]
+[ext_resource type="Script" uid="uid://j857t83a8fy1" path="res://asset/system/script/subject/actor/enemy/path/single-dimension.gd" id="2_srwpe"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e30m2"]
+size = Vector2(52, 22)
+
+[node name="path" type="Node2D"]
+script = ExtResource("1_ij0cj")
+
+[node name="obstacle" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 1329363
+
+[node name="shape" type="CollisionShape2D" parent="obstacle"]
+position = Vector2(0, 11)
+shape = SubResource("RectangleShape2D_e30m2")
+debug_color = Color(0, 0.6, 0.0901961, 0.419608)
+
+[node name="target" type="Node" parent="."]
+script = ExtResource("2_srwpe")
+
+[node name="obstacle" type="Timer" parent="target"]
+wait_time = 0.5
+one_shot = true
+
+[connection signal="body_entered" from="obstacle" to="target" method="enter_obstacle"]
+[connection signal="body_exited" from="obstacle" to="target" method="exit_obstacle"]
+[connection signal="timeout" from="target/obstacle" to="target" method="avoid_obstale"]
