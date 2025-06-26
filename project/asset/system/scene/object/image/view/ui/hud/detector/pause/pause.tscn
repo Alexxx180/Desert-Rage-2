@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://v6stk7j8vyox"]
+[gd_scene load_steps=10 format=3 uid="uid://v6stk7j8vyox"]
 
 [ext_resource type="Theme" uid="uid://p2br8b6ea3n6" path="res://asset/resource/engine/internal/theme/patterns/template/menu/hud/pause/pause.tres" id="1_j33m5"]
 [ext_resource type="Script" uid="uid://cw5ky6kde3o8c" path="res://asset/system/script/object/image/view/ui/hud/detector/pause/pause.gd" id="1_mkyw8"]
@@ -8,6 +8,8 @@
 [ext_resource type="Script" uid="uid://cineqyu52scdk" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/hints/scroll.gd" id="3_rk80b"]
 [ext_resource type="Theme" uid="uid://y1o83ldh4al2" path="res://asset/resource/engine/internal/theme/patterns/template/menu/settings/topic/header/header.tres" id="6_55a30"]
 [ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://asset/resource/engine/internal/theme/patterns/template/menu/settings/topic/footer.tres" id="7_fhjs6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bc3vp"]
 
 [node name="pause" type="Control"]
 layout_mode = 3
@@ -77,85 +79,405 @@ layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 
-[node name="navigation" type="VBoxContainer" parent="scroll/margin/content"]
+[node name="navigate" type="Button" parent="scroll/margin/content/options"]
+custom_minimum_size = Vector2(160, 45)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_bc3vp")
+
+[node name="margin" type="MarginContainer" parent="scroll/margin/content/options/navigate"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="text" type="Label" parent="scroll/margin/content/options/navigate/margin"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.385493, 0.385492, 0.385492, 1)
+theme_override_font_sizes/font_size = 14
+text = "Псс... Хочешь перемещаться быстрее?"
+
+[node name="Panel" type="PanelContainer" parent="scroll/margin/content"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="scroll/margin/content/Panel"]
+layout_mode = 2
+
+[node name="navigation" type="VBoxContainer" parent="scroll/margin/content/Panel/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 size_flags_stretch_ratio = 0.8
 
-[node name="head" type="Label" parent="scroll/margin/content/navigation"]
+[node name="head" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 26
 text = "Навигация"
 
-[node name="keyboard" type="Label" parent="scroll/margin/content/navigation"]
+[node name="key-flow" type="HFlowContainer" parent="scroll/margin/content/Panel/MarginContainer/navigation"]
+layout_mode = 2
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 5
+
+[node name="keys" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation/key-flow"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("6_55a30")
+text = "WASD, Стрелки"
+
+[node name="name" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation/key-flow"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("6_55a30")
+text = "Перемещение"
+
+[node name="VSeparator" type="VSeparator" parent="scroll/margin/content/Panel/MarginContainer/navigation/key-flow"]
+layout_mode = 2
+
+[node name="keys2" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation/key-flow"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("6_55a30")
+text = "P. Up, P. Down"
+
+[node name="name2" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation/key-flow"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("6_55a30")
+text = "Пролистывание"
+
+[node name="VSeparator2" type="VSeparator" parent="scroll/margin/content/Panel/MarginContainer/navigation/key-flow"]
+layout_mode = 2
+
+[node name="keys3" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation/key-flow"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("6_55a30")
+text = "Z, E, Enter"
+
+[node name="name3" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation/key-flow"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme = ExtResource("6_55a30")
+text = "Да"
+
+[node name="VSeparator3" type="VSeparator" parent="scroll/margin/content/Panel/MarginContainer/navigation/key-flow"]
+layout_mode = 2
+
+[node name="keys4" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation/key-flow"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("6_55a30")
+text = "X, Esc"
+
+[node name="name4" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation/key-flow"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme = ExtResource("6_55a30")
+text = "Нет"
+
+[node name="VSeparator4" type="VSeparator" parent="scroll/margin/content/Panel/MarginContainer/navigation/key-flow"]
+layout_mode = 2
+
+[node name="keys5" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation/key-flow"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("6_55a30")
+text = "Home, End"
+
+[node name="name5" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation/key-flow"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("6_55a30")
+text = "Крайний"
+
+[node name="VSeparator5" type="VSeparator" parent="scroll/margin/content/Panel/MarginContainer/navigation/key-flow"]
+layout_mode = 2
+
+[node name="keys6" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation/key-flow"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("6_55a30")
+text = "Tab, Shift"
+
+[node name="name6" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation/key-flow"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme = ExtResource("6_55a30")
+text = "Фокус"
+
+[node name="HFlowContainer7" type="HBoxContainer" parent="scroll/margin/content/Panel/MarginContainer/navigation/key-flow"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="VBoxContainer" type="VBoxContainer" parent="scroll/margin/content/Panel/MarginContainer/navigation/key-flow"]
+visible = false
+layout_mode = 2
+
+[node name="Control" type="Control" parent="scroll/margin/content/Panel/MarginContainer/navigation/key-flow"]
+visible = false
+layout_mode = 2
+
+[node name="HFlowContainer" type="VBoxContainer" parent="scroll/margin/content/Panel/MarginContainer/navigation/key-flow"]
+visible = false
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="scroll/margin/content/Panel/MarginContainer/navigation/key-flow"]
+visible = false
+layout_mode = 2
+
+[node name="keyboard" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation"]
+visible = false
 custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
 theme = ExtResource("6_55a30")
 text = "Клавиатура. Фокус: WASD, Home, End, Page Up-Down, Стрелки, Tab, Shift. Далее: Z, E, Enter. Назад: X, Esc. Выбор. Пространства: Alt + 0-9. Разделы: Ctrl + 0-9. Опции: 0-9."
 autowrap_mode = 2
 
-[node name="hot" type="VBoxContainer" parent="scroll/margin/content/navigation"]
+[node name="HSeparator2" type="HSeparator" parent="scroll/margin/content/Panel/MarginContainer/navigation"]
 layout_mode = 2
 
-[node name="head" type="Label" parent="scroll/margin/content/navigation/hot"]
+[node name="hot" type="VBoxContainer" parent="scroll/margin/content/Panel/MarginContainer/navigation"]
+layout_mode = 2
+
+[node name="head" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation/hot"]
 layout_mode = 2
 text = "Горячие клавиши"
 
-[node name="keys" type="HFlowContainer" parent="scroll/margin/content/navigation/hot"]
+[node name="key-flow" type="HFlowContainer" parent="scroll/margin/content/Panel/MarginContainer/navigation/hot"]
+custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
+size_flags_vertical = 3
 theme = ExtResource("7_fhjs6")
-theme_override_constants/h_separation = 15
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 12
 
-[node name="analyze" type="Label" parent="scroll/margin/content/navigation/hot/keys"]
+[node name="f1" type="HBoxContainer" parent="scroll/margin/content/Panel/MarginContainer/navigation/hot/key-flow"]
 layout_mode = 2
-text = "F1 - Анализ"
 
-[node name="information" type="Label" parent="scroll/margin/content/navigation/hot/keys"]
+[node name="keys" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation/hot/key-flow/f1"]
 layout_mode = 2
-text = "F2 - Сведения"
+text = "F1"
 
-[node name="settings" type="Label" parent="scroll/margin/content/navigation/hot/keys"]
+[node name="name" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation/hot/key-flow/f1"]
 layout_mode = 2
-text = "F3 - Настройки"
+size_flags_horizontal = 2
+text = "Анализ"
 
-[node name="main-menu" type="Label" parent="scroll/margin/content/navigation/hot/keys"]
+[node name="f2" type="HBoxContainer" parent="scroll/margin/content/Panel/MarginContainer/navigation/hot/key-flow"]
 layout_mode = 2
-text = "F4 - Главное меню"
 
-[node name="soundtrack" type="Label" parent="scroll/margin/content/navigation/hot/keys"]
+[node name="keys" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation/hot/key-flow/f2"]
 layout_mode = 2
-text = "F5 - Система саундтрека"
+text = "F2"
 
-[node name="checkpoint" type="Label" parent="scroll/margin/content/navigation/hot/keys"]
+[node name="name" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation/hot/key-flow/f2"]
 layout_mode = 2
-text = "F6 - Последний чекпоинт"
+size_flags_horizontal = 2
+text = "Сведения"
 
-[node name="fast-save" type="Label" parent="scroll/margin/content/navigation/hot/keys"]
+[node name="f3" type="HBoxContainer" parent="scroll/margin/content/Panel/MarginContainer/navigation/hot/key-flow"]
 layout_mode = 2
-text = "F7 - Быстрое сохранение"
 
-[node name="fast-load" type="Label" parent="scroll/margin/content/navigation/hot/keys"]
+[node name="keys" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation/hot/key-flow/f3"]
 layout_mode = 2
-text = "F8 - Быстрая загрузка"
+text = "F3"
 
-[node name="export-progress" type="Label" parent="scroll/margin/content/navigation/hot/keys"]
+[node name="name" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation/hot/key-flow/f3"]
 layout_mode = 2
-text = "F9 - Экспорт прогресса"
+size_flags_horizontal = 2
+text = "Настройки"
 
-[node name="import-progress" type="Label" parent="scroll/margin/content/navigation/hot/keys"]
+[node name="f4" type="HBoxContainer" parent="scroll/margin/content/Panel/MarginContainer/navigation/hot/key-flow"]
 layout_mode = 2
-text = "F10 - Импорт прогресса"
 
-[node name="fullscreen" type="Label" parent="scroll/margin/content/navigation/hot/keys"]
+[node name="keys" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation/hot/key-flow/f4"]
 layout_mode = 2
-text = "F11 - Полный экран"
+text = "F4"
 
-[node name="fullscreen2" type="Label" parent="scroll/margin/content/navigation/hot/keys"]
+[node name="name" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation/hot/key-flow/f4"]
 layout_mode = 2
-text = "F12 - Фоторежим"
+size_flags_horizontal = 2
+text = "В меню"
 
-[node name="gamepad" type="Label" parent="scroll/margin/content/navigation"]
+[node name="f5" type="HBoxContainer" parent="scroll/margin/content/Panel/MarginContainer/navigation/hot/key-flow"]
+layout_mode = 2
+
+[node name="keys" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation/hot/key-flow/f5"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "F5"
+
+[node name="name" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation/hot/key-flow/f5"]
+layout_mode = 2
+size_flags_horizontal = 2
+text = "Саундтрек"
+
+[node name="f6" type="HBoxContainer" parent="scroll/margin/content/Panel/MarginContainer/navigation/hot/key-flow"]
+layout_mode = 2
+
+[node name="keys" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation/hot/key-flow/f6"]
+layout_mode = 2
+text = "F6"
+
+[node name="name" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation/hot/key-flow/f6"]
+layout_mode = 2
+size_flags_horizontal = 2
+text = "Чекпоинт"
+
+[node name="f7" type="HBoxContainer" parent="scroll/margin/content/Panel/MarginContainer/navigation/hot/key-flow"]
+layout_mode = 2
+
+[node name="keys" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation/hot/key-flow/f7"]
+layout_mode = 2
+text = "F7"
+
+[node name="name" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation/hot/key-flow/f7"]
+layout_mode = 2
+size_flags_horizontal = 2
+text = "Б. Сохранить"
+
+[node name="f8" type="HBoxContainer" parent="scroll/margin/content/Panel/MarginContainer/navigation/hot/key-flow"]
+layout_mode = 2
+
+[node name="keys" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation/hot/key-flow/f8"]
+layout_mode = 2
+text = "F8"
+
+[node name="name" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation/hot/key-flow/f8"]
+layout_mode = 2
+size_flags_horizontal = 2
+text = "Б. Загрузить"
+
+[node name="f9" type="HBoxContainer" parent="scroll/margin/content/Panel/MarginContainer/navigation/hot/key-flow"]
+layout_mode = 2
+
+[node name="keys" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation/hot/key-flow/f9"]
+layout_mode = 2
+text = "F9"
+
+[node name="name" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation/hot/key-flow/f9"]
+layout_mode = 2
+size_flags_horizontal = 2
+text = "Экспорт игры"
+
+[node name="f10" type="HBoxContainer" parent="scroll/margin/content/Panel/MarginContainer/navigation/hot/key-flow"]
+layout_mode = 2
+
+[node name="keys" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation/hot/key-flow/f10"]
+layout_mode = 2
+text = "F10"
+
+[node name="name" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation/hot/key-flow/f10"]
+layout_mode = 2
+size_flags_horizontal = 2
+text = "Импорт"
+
+[node name="f11" type="HBoxContainer" parent="scroll/margin/content/Panel/MarginContainer/navigation/hot/key-flow"]
+layout_mode = 2
+
+[node name="keys" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation/hot/key-flow/f11"]
+layout_mode = 2
+text = "F11"
+
+[node name="name" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation/hot/key-flow/f11"]
+layout_mode = 2
+size_flags_horizontal = 2
+text = "Вид "
+
+[node name="f12" type="HBoxContainer" parent="scroll/margin/content/Panel/MarginContainer/navigation/hot/key-flow"]
+layout_mode = 2
+
+[node name="keys" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation/hot/key-flow/f12"]
+layout_mode = 2
+text = "F12"
+
+[node name="name" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation/hot/key-flow/f12"]
+layout_mode = 2
+size_flags_horizontal = 2
+text = "Фоторежим"
+
+[node name="HBoxContainer" type="VBoxContainer" parent="scroll/margin/content/Panel/MarginContainer/navigation/hot/key-flow"]
+visible = false
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="scroll/margin/content/Panel/MarginContainer/navigation/hot/key-flow"]
+visible = false
+layout_mode = 2
+
+[node name="HBoxContainer2" type="VBoxContainer" parent="scroll/margin/content/Panel/MarginContainer/navigation/hot/key-flow"]
+visible = false
+layout_mode = 2
+
+[node name="HBoxContainer3" type="VBoxContainer" parent="scroll/margin/content/Panel/MarginContainer/navigation/hot/key-flow"]
+visible = false
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="scroll/margin/content/Panel/MarginContainer/navigation"]
+layout_mode = 2
+
+[node name="HFlowContainer" type="HFlowContainer" parent="scroll/margin/content/Panel/MarginContainer/navigation"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_constants/h_separation = 25
+
+[node name="spaces" type="HBoxContainer" parent="scroll/margin/content/Panel/MarginContainer/navigation/HFlowContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="keys" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation/HFlowContainer/spaces"]
+layout_mode = 2
+theme = ExtResource("6_55a30")
+text = "Alt + 0-9"
+
+[node name="name" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation/HFlowContainer/spaces"]
+layout_mode = 2
+size_flags_horizontal = 10
+theme = ExtResource("6_55a30")
+text = "Пространства"
+
+[node name="VSeparator" type="VSeparator" parent="scroll/margin/content/Panel/MarginContainer/navigation/HFlowContainer"]
+layout_mode = 2
+
+[node name="topics" type="HBoxContainer" parent="scroll/margin/content/Panel/MarginContainer/navigation/HFlowContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="keys" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation/HFlowContainer/topics"]
+layout_mode = 2
+theme = ExtResource("6_55a30")
+text = "Ctrl + 0-9"
+
+[node name="name" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation/HFlowContainer/topics"]
+layout_mode = 2
+size_flags_horizontal = 10
+theme = ExtResource("6_55a30")
+text = "Разделы"
+
+[node name="VSeparator2" type="VSeparator" parent="scroll/margin/content/Panel/MarginContainer/navigation/HFlowContainer"]
+layout_mode = 2
+
+[node name="options" type="HBoxContainer" parent="scroll/margin/content/Panel/MarginContainer/navigation/HFlowContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="keys" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation/HFlowContainer/options"]
+layout_mode = 2
+theme = ExtResource("6_55a30")
+text = "0-9"
+
+[node name="name" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation/HFlowContainer/options"]
+layout_mode = 2
+size_flags_horizontal = 10
+theme = ExtResource("6_55a30")
+text = "Опции"
+
+[node name="gamepad" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation"]
+visible = false
 custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
 theme = ExtResource("6_55a30")
