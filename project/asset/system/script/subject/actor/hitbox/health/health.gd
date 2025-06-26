@@ -17,7 +17,7 @@ var max_points: int
 var material: ShaderMaterial:
 	get: return entity.view.profile.material
 
-func _ready() -> void: max_points = points
+func _ready() -> void: max_points = int(points)
 func revive() -> void: points = max_points
 
 func update_aura() -> void:

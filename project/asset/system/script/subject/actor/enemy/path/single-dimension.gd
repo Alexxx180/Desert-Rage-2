@@ -11,7 +11,7 @@ var obstacles_counter: int = 0
 
 func update_movement():
 	motion = _motion_path.call()
-	print("MOTION: ", motion)
+	# print("MOTION: ", motion)
 
 func _ready() -> void: ignite_motion()
 

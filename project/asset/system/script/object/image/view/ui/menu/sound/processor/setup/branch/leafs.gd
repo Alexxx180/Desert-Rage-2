@@ -20,7 +20,8 @@ func set_theme(query, child, _tracks, track) -> void:
 func set_fight(query, child, _tracks, track) -> void:
 	var branch: Control = append_child(query, child)
 	for status in track:
-		branch.content[status].set_metadata(track[status])
+		var theme: String = track[status].track if track[status] is Dictionary else track[status]
+		branch.content[status].set_metadata(theme)
 	query.ui_tree.set.push_back(branch)
 
 func set_titled(query, child, tracks, track) -> void:

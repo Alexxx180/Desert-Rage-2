@@ -1,16 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://l5up1nj5do8a"]
+[gd_scene load_steps=5 format=3 uid="uid://l5up1nj5do8a"]
 
 [ext_resource type="Script" uid="uid://b1f5rlsrl40f2" path="res://asset/system/script/subject/actor/group/hero/logic/detectors.gd" id="1_1ouft"]
 [ext_resource type="PackedScene" uid="uid://dht3dh33ed2vo" path="res://asset/system/scene/subject/actor/group/hero/rock/logic/detectors/world.tscn" id="1_c156b"]
 [ext_resource type="PackedScene" uid="uid://chf3wtyobsvlq" path="res://asset/system/scene/subject/actor/group/hero/base/logic/detectors/platforming.tscn" id="2_wc4s0"]
-[ext_resource type="Script" uid="uid://dae033qb76xqu" path="res://asset/system/script/subject/actor/group/hero/logic/detectors/fight/fight.gd" id="4_8jmdr"]
-[ext_resource type="Script" uid="uid://dyappsdv3nhlg" path="res://asset/system/script/subject/actor/group/hero/logic/detectors/fight/direction.gd" id="5_l2jok"]
-[ext_resource type="Shape2D" uid="uid://cijemnhgm8sg" path="res://asset/resource/engine/internal/shape/geometry/interactables/act/pull.tres" id="6_je4ag"]
-[ext_resource type="Script" uid="uid://dom6yvvb5krlc" path="res://asset/system/script/subject/actor/hitbox/hitbox.gd" id="7_je4ag"]
-[ext_resource type="Script" uid="uid://b4nfdlipsumsu" path="res://asset/system/script/subject/actor/hitbox/health/health.gd" id="8_r2p2q"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_jqa6m"]
-size = Vector2(46, 22)
+[ext_resource type="PackedScene" uid="uid://dnymdlflme67b" path="res://asset/system/scene/subject/actor/group/hero/ray/logic/detectors/fight/fight.tscn" id="4_fyig4"]
 
 [node name="detectors" type="Node2D"]
 script = ExtResource("1_1ouft")
@@ -19,33 +12,4 @@ script = ExtResource("1_1ouft")
 
 [node name="platforming" parent="." instance=ExtResource("2_wc4s0")]
 
-[node name="fight" type="Node2D" parent="."]
-script = ExtResource("4_8jmdr")
-
-[node name="close" type="Area2D" parent="fight"]
-collision_layer = 0
-collision_mask = 8
-script = ExtResource("5_l2jok")
-
-[node name="shape" type="CollisionShape2D" parent="fight/close"]
-shape = ExtResource("6_je4ag")
-
-[node name="hitbox" type="StaticBody2D" parent="fight"]
-collision_layer = 4194304
-collision_mask = 0
-script = ExtResource("7_je4ag")
-
-[node name="geometry" type="CollisionShape2D" parent="fight/hitbox"]
-position = Vector2(-1, -1)
-shape = SubResource("RectangleShape2D_jqa6m")
-debug_color = Color(0.965055, 1.92523e-07, 0.489026, 0.42)
-
-[node name="health" type="Node" parent="fight/hitbox"]
-script = ExtResource("8_r2p2q")
-entity_path = "../../../../.."
-
-[node name="timer" type="Timer" parent="fight/hitbox/health"]
-wait_time = 0.6
-one_shot = true
-
-[connection signal="timeout" from="fight/hitbox/health/timer" to="fight/hitbox/health" method="aura_diffusion"]
+[node name="fight" parent="." instance=ExtResource("4_fyig4")]
