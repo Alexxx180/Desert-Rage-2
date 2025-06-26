@@ -13,7 +13,11 @@ func far_map(_execute: TileMapLayer) -> void:
 
 func ability() -> void:
 	if _vessel != Defaults.CHARACTER and !_vessel.logic.relations.fire.on:
+		_hero.view.animation.start_fight("active")
+		_hero.view.animation.fight_body("hands")
 		_vessel.logic.processors.fire.ignite()
 
 	if _last_position != Vector2.ZERO:
 		activate.emit(_last_position, DAMAGE)
+		_hero.view.animation.start_fight("active")
+		_hero.view.animation.fight_body("hands")

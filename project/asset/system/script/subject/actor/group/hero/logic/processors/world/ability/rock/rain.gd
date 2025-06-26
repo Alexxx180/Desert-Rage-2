@@ -7,7 +7,9 @@ func _set_hero(value: CharacterBody2D) -> void:
 	_act = _hero.logic.detectors.world.ability.rain.puddle
 
 func ability() -> void:
-	if _vessel != Defaults.CHARACTER and !_vessel.logic.relations.fire.on:
+	if _vessel != Defaults.CHARACTER and _vessel.logic.relations.fire.on:
 		_vessel.logic.processors.fire.freeze()
 	
 	activate.emit(_last_position, _act.direction)
+	_hero.view.animation.start_fight("active")
+	_hero.view.animation.fight_body("hands")

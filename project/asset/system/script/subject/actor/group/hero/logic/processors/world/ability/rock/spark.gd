@@ -17,4 +17,6 @@ func ability() -> void:
 		_vessel.logic.processors.spark.charge()
 	
 	if _last_position != Vector2.ZERO:
+		_hero.view.animation.start_fight("active")
+		_hero.view.animation.fight_body("hands")
 		activate.emit(_last_position)
