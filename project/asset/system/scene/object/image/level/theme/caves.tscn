@@ -1,10 +1,198 @@
-[gd_scene load_steps=3 format=3 uid="uid://bsumfxiuy47r"]
+[gd_scene load_steps=9 format=3 uid="uid://bsumfxiuy47r"]
 
 [ext_resource type="Script" uid="uid://ce8nj8av5lft8" path="res://asset/system/script/object/image/theme/kind/caves.gd" id="1_2s53y"]
+[ext_resource type="Script" uid="uid://de6dwyt4d4uyp" path="res://asset/system/script/object/image/theme/ost.gd" id="1_vowpq"]
 [ext_resource type="Script" uid="uid://dv88o6psoqr41" path="res://asset/system/script/object/image/theme/tension.gd" id="2_tejgr"]
+[ext_resource type="Script" uid="uid://c5vriyr0n2ome" path="res://asset/system/script/object/image/theme/mixer.gd" id="3_ls3fr"]
 
-[node name="ost" type="AudioStreamPlayer"]
-script = ExtResource("1_2s53y")
+[sub_resource type="Animation" id="Animation_affui"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("a:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("b:volume_db")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-80.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("b:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("a:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_ls3fr"]
+resource_name = "fade_a"
+length = 0.5
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("a:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(5.66, 1),
+"update": 0,
+"values": [0.0, -80.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("b:volume_db")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(5.66, 1),
+"update": 0,
+"values": [-80.0, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("a:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_end_fade"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_gbhnt"]
+resource_name = "fade_b"
+length = 0.5
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("a:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(5.66, 1),
+"update": 0,
+"values": [-80.0, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("b:volume_db")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(5.66, 1),
+"update": 0,
+"values": [0.0, -80.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("b:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_end_fade"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_affui"]
+_data = {
+&"RESET": SubResource("Animation_affui"),
+&"fade_a": SubResource("Animation_ls3fr"),
+&"fade_b": SubResource("Animation_gbhnt")
+}
+
+[node name="ost" type="Node"]
+script = ExtResource("1_vowpq")
 
 [node name="tension" type="Node" parent="."]
 script = ExtResource("2_tejgr")
+
+[node name="mixer" type="Node" parent="."]
+script = ExtResource("3_ls3fr")
+
+[node name="a" type="AudioStreamPlayer" parent="."]
+script = ExtResource("1_2s53y")
+
+[node name="b" type="AudioStreamPlayer" parent="."]
+volume_db = -80.0
+script = ExtResource("1_2s53y")
+
+[node name="fade" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_affui")
+}
+
+[connection signal="finished" from="a" to="." method="_finished"]
+[connection signal="finished" from="b" to="." method="_finished"]

@@ -29,10 +29,12 @@ func set_status(metadata: Dictionary) -> void:
 	var status: String = metadata.caption
 	if metadata.has("name"):
 		status = metadata.name + " - " + status
-	match player.load_music(metadata.track):
+	var track: String = metadata.track.track if metadata.track is Dictionary else metadata.track
+	
+	match player.load_music(track):
 		OK: playback.emit(status)
-		FAILED: playback.emit(metadata.track + "? Missing: " + status)
-		ERR_BUSY: playback.emit(metadata.track + " ≠ .mp3, .ogg: " + status)
+		FAILED: playback.emit(track + "? Missing: " + status)
+		ERR_BUSY: playback.emit(track + " ≠ .mp3, .ogg: " + status)
 
 func as_theme(entry: Dictionary, ui: Control) -> void:
 	entry.theme.at = ui.i

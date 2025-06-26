@@ -1,6 +1,6 @@
 extends Node
 
-signal change_danger()
+signal change_danger(finished: bool)
 
 var environment: Array[String] = ["ambient", "heating", "rampage"]
 var _enemies: int = 0
@@ -31,4 +31,4 @@ func match_enemy() -> void:
 		1, 2, 3: _selection = 1
 		_: _selection = 2 if _spawn else 1
 	if _selection != _previous:
-		change_danger.emit()
+		change_danger.emit(false)
