@@ -9,6 +9,14 @@ size = Vector2(52, 22)
 [node name="path" type="Node2D"]
 script = ExtResource("1_ij0cj")
 
+[node name="spark" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 16777216
+
+[node name="shape" type="CollisionShape2D" parent="spark"]
+position = Vector2(0, 11)
+shape = SubResource("RectangleShape2D_e30m2")
+
 [node name="obstacle" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 1329363
@@ -21,10 +29,12 @@ debug_color = Color(0, 0.6, 0.0901961, 0.419608)
 [node name="target" type="Node" parent="."]
 script = ExtResource("2_srwpe")
 
-[node name="obstacle" type="Timer" parent="target"]
-wait_time = 0.5
+[node name="hit" type="Timer" parent="target"]
+wait_time = 0.2
 one_shot = true
 
+[connection signal="body_entered" from="spark" to="target" method="paralyze"]
+[connection signal="body_exited" from="spark" to="target" method="stop_paralyze"]
 [connection signal="body_entered" from="obstacle" to="target" method="enter_obstacle"]
 [connection signal="body_exited" from="obstacle" to="target" method="exit_obstacle"]
-[connection signal="timeout" from="target/obstacle" to="target" method="avoid_obstale"]
+[connection signal="timeout" from="target/hit" to="target" method="ignite_motion"]

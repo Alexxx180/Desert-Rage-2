@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://dnymdlflme67b"]
+[gd_scene load_steps=9 format=3 uid="uid://dnymdlflme67b"]
 
 [ext_resource type="Script" uid="uid://dae033qb76xqu" path="res://asset/system/script/subject/actor/group/hero/logic/detectors/fight/fight.gd" id="1_6qsty"]
 [ext_resource type="Script" uid="uid://dom6yvvb5krlc" path="res://asset/system/script/subject/actor/hitbox/hitbox.gd" id="2_80kk7"]
 [ext_resource type="Script" uid="uid://b4nfdlipsumsu" path="res://asset/system/script/subject/actor/hitbox/health/health.gd" id="3_ngvye"]
 [ext_resource type="Script" uid="uid://dyappsdv3nhlg" path="res://asset/system/script/subject/actor/group/hero/logic/detectors/fight/direction.gd" id="4_7eekj"]
+[ext_resource type="Script" uid="uid://ohq15xrqxnor" path="res://asset/system/script/subject/actor/enemy/logic/burn.gd" id="4_e5d7e"]
 [ext_resource type="Shape2D" uid="uid://cijemnhgm8sg" path="res://asset/resource/engine/internal/shape/geometry/interactables/act/pull.tres" id="5_4uyev"]
 [ext_resource type="PackedScene" uid="uid://ca0iqf1nta0c" path="res://asset/system/scene/subject/actor/group/hero/ray/logic/detectors/fight/music.tscn" id="6_jvs4q"]
 
@@ -32,6 +33,10 @@ points = 9.0
 wait_time = 0.6
 one_shot = true
 
+[node name="burn" type="Timer" parent="hitbox/health"]
+wait_time = 0.2
+script = ExtResource("4_e5d7e")
+
 [node name="close" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 8
@@ -43,3 +48,4 @@ shape = ExtResource("5_4uyev")
 [node name="music" parent="." instance=ExtResource("6_jvs4q")]
 
 [connection signal="timeout" from="hitbox/health/timer" to="hitbox/health" method="aura_diffusion"]
+[connection signal="timeout" from="hitbox/health/burn" to="hitbox/health/burn" method="burns"]

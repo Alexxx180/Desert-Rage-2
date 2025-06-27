@@ -1,6 +1,7 @@
 extends Node
 
 signal dead()
+signal freeze()
 
 const THICKNESS: int = 2
 
@@ -13,6 +14,7 @@ var max_points: int
 
 @onready var entity: CharacterBody2D = get_node(entity_path)
 @onready var timer: Timer = $timer
+@onready var burn: Timer = $burn
 
 var material: ShaderMaterial:
 	get: return entity.view.profile.material
@@ -27,11 +29,16 @@ func update_aura() -> void:
 
 func hit(damage: int = 1) -> void:
 	if points <= 0: return
+	if not burning(damage): freeze.emit()
+
+func burning(damage: int = 1) -> bool:
+	if points <= 0: return true
 	points = max(points - damage, 0)
 	update_aura()
-	
-	if points <= 0: dead.emit()
+	var is_dead: bool = points <= 0
+	if is_dead: dead.emit()
 	timer.start()
+	return is_dead
 
 func aura_diffusion() -> void:
 	material.set(param.color, aura.diffuse())

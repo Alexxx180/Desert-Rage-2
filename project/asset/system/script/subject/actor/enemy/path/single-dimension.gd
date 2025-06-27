@@ -2,8 +2,9 @@ extends Node
 
 @export var speed: int = 200
 @export var vertical: bool = false
-@onready var obstacle: Timer = $obstacle
+@onready var hit: Timer = $hit
 
+var paralyzed: bool = false
 var direction: float = -1.0
 var _motion_path: Callable
 var motion: Vector2
@@ -27,19 +28,26 @@ func _no_motion() -> Vector2: return Vector2.ZERO
 func _horizontal_motion() -> Vector2: return Vector2(0, direction * speed)
 func _vertical_motion() -> Vector2: return Vector2(direction * speed, 0)
 
-#func _physics_process(_delta: float) -> void:
-#	update_movement()
+func temporary_freeze() -> void:
+	if not paralyzed:
+		freeze_motion()
+		hit.start()
+
+func paralyze(_body) -> void:
+	paralyzed = true
+	freeze_motion()
+
+func stop_paralyze(_body) -> void:
+	ignite_motion()
+	paralyzed = false
 
 func enter_obstacle(_body) -> void:
 	obstacles_counter += 1
 	if obstacles_counter == 1:
 		avoid_obstale()
-	#push_error("OBSTACLES COUNTER: ", obstacles_counter, " - ", _body.name)
-	#obstacle.start()
 
 func exit_obstacle(_body) -> void:
 	obstacles_counter -= 1
-	#push_error("OBSTACLES COUNTER: ", obstacles_counter, " - ", _body.name)
 
 func avoid_obstale() -> void:
 	direction *= -1

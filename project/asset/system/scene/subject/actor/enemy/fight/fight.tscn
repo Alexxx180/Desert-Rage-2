@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://18yjilbfmwhk"]
+[gd_scene load_steps=8 format=3 uid="uid://18yjilbfmwhk"]
 
 [ext_resource type="Script" uid="uid://c0ovke4shqn7o" path="res://asset/system/script/subject/actor/enemy/logic/fight.gd" id="1_lraox"]
 [ext_resource type="Script" uid="uid://dom6yvvb5krlc" path="res://asset/system/script/subject/actor/hitbox/hitbox.gd" id="1_lxkjm"]
 [ext_resource type="Script" uid="uid://b4nfdlipsumsu" path="res://asset/system/script/subject/actor/hitbox/health/health.gd" id="2_nn5jk"]
 [ext_resource type="Script" uid="uid://51lvqa3nbyew" path="res://asset/system/script/subject/actor/enemy/damagebox.gd" id="3_lraox"]
+[ext_resource type="Script" uid="uid://ohq15xrqxnor" path="res://asset/system/script/subject/actor/enemy/logic/burn.gd" id="4_lraox"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hied7"]
 radius = 40.0125
@@ -31,6 +32,10 @@ points = 15.0
 wait_time = 0.6
 one_shot = true
 
+[node name="burn" type="Timer" parent="hitbox/health"]
+wait_time = 0.4
+script = ExtResource("4_lraox")
+
 [node name="damagebox" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 4194304
@@ -45,6 +50,9 @@ debug_color = Color(0.849194, 0.346041, 0.381317, 0.42)
 [node name="timer" type="Timer" parent="damagebox"]
 wait_time = 0.5
 
+[connection signal="dead" from="hitbox/health" to="hitbox/health/burn" method="dead"]
 [connection signal="timeout" from="hitbox/health/timer" to="hitbox/health" method="aura_diffusion"]
+[connection signal="hit" from="hitbox/health/burn" to="hitbox/health" method="burning"]
+[connection signal="timeout" from="hitbox/health/burn" to="hitbox/health/burn" method="burns"]
 [connection signal="body_entered" from="damagebox" to="damagebox" method="hero_enter"]
 [connection signal="body_exited" from="damagebox" to="damagebox" method="hero_exit"]
