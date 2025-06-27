@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://v6stk7j8vyox"]
+[gd_scene load_steps=12 format=3 uid="uid://v6stk7j8vyox"]
 
 [ext_resource type="Theme" uid="uid://p2br8b6ea3n6" path="res://asset/resource/engine/internal/theme/patterns/template/menu/hud/pause/pause.tres" id="1_j33m5"]
 [ext_resource type="Script" uid="uid://cw5ky6kde3o8c" path="res://asset/system/script/object/image/view/ui/hud/detector/pause/pause.gd" id="1_mkyw8"]
@@ -8,8 +8,16 @@
 [ext_resource type="Script" uid="uid://cineqyu52scdk" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/hints/scroll.gd" id="3_rk80b"]
 [ext_resource type="Theme" uid="uid://y1o83ldh4al2" path="res://asset/resource/engine/internal/theme/patterns/template/menu/settings/topic/header/header.tres" id="6_55a30"]
 [ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://asset/resource/engine/internal/theme/patterns/template/menu/settings/topic/footer.tres" id="7_fhjs6"]
+[ext_resource type="StyleBox" uid="uid://cn70ampniaar3" path="res://asset/resource/engine/internal/theme/patterns/pause/gamepad-button.tres" id="9_0wkgj"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bc3vp"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bc3vp"]
+bg_color = Color(0.0295066, 0.0295066, 0.0295065, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
 
 [node name="pause" type="Control"]
 layout_mode = 3
@@ -98,157 +106,134 @@ theme_override_colors/font_color = Color(0.385493, 0.385492, 0.385492, 1)
 theme_override_font_sizes/font_size = 14
 text = "Псс... Хочешь перемещаться быстрее?"
 
-[node name="Panel" type="PanelContainer" parent="scroll/margin/content"]
+[node name="navigation" type="PanelContainer" parent="scroll/margin/content"]
 custom_minimum_size = Vector2(70, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="scroll/margin/content/Panel"]
+[node name="margin" type="MarginContainer" parent="scroll/margin/content/navigation"]
 layout_mode = 2
 
-[node name="navigation" type="VBoxContainer" parent="scroll/margin/content/Panel/MarginContainer"]
+[node name="description" type="VBoxContainer" parent="scroll/margin/content/navigation/margin"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 size_flags_stretch_ratio = 0.8
 
-[node name="head" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation"]
+[node name="head" type="Label" parent="scroll/margin/content/navigation/margin/description"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 26
 text = "Навигация"
 
-[node name="key-flow" type="HFlowContainer" parent="scroll/margin/content/Panel/MarginContainer/navigation"]
+[node name="keyboard" type="VBoxContainer" parent="scroll/margin/content/navigation/margin/description"]
+layout_mode = 2
+
+[node name="keys" type="HFlowContainer" parent="scroll/margin/content/navigation/margin/description/keyboard"]
 layout_mode = 2
 theme_override_constants/h_separation = 20
 theme_override_constants/v_separation = 5
 
-[node name="keys" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation/key-flow"]
+[node name="wasd" type="Label" parent="scroll/margin/content/navigation/margin/description/keyboard/keys"]
 layout_mode = 2
 size_flags_horizontal = 0
 theme = ExtResource("6_55a30")
 text = "WASD, Стрелки"
 
-[node name="name" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation/key-flow"]
+[node name="move" type="Label" parent="scroll/margin/content/navigation/margin/description/keyboard/keys"]
 layout_mode = 2
 size_flags_horizontal = 0
 theme = ExtResource("6_55a30")
 text = "Перемещение"
 
-[node name="VSeparator" type="VSeparator" parent="scroll/margin/content/Panel/MarginContainer/navigation/key-flow"]
+[node name="VSeparator" type="VSeparator" parent="scroll/margin/content/navigation/margin/description/keyboard/keys"]
 layout_mode = 2
 
-[node name="keys2" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation/key-flow"]
+[node name="page-up-down" type="Label" parent="scroll/margin/content/navigation/margin/description/keyboard/keys"]
 layout_mode = 2
 size_flags_horizontal = 0
 theme = ExtResource("6_55a30")
 text = "P. Up, P. Down"
 
-[node name="name2" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation/key-flow"]
+[node name="listing" type="Label" parent="scroll/margin/content/navigation/margin/description/keyboard/keys"]
 layout_mode = 2
 size_flags_horizontal = 0
 theme = ExtResource("6_55a30")
 text = "Пролистывание"
 
-[node name="VSeparator2" type="VSeparator" parent="scroll/margin/content/Panel/MarginContainer/navigation/key-flow"]
+[node name="VSeparator2" type="VSeparator" parent="scroll/margin/content/navigation/margin/description/keyboard/keys"]
 layout_mode = 2
 
-[node name="keys3" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation/key-flow"]
+[node name="enter" type="Label" parent="scroll/margin/content/navigation/margin/description/keyboard/keys"]
 layout_mode = 2
 size_flags_horizontal = 0
 theme = ExtResource("6_55a30")
 text = "Z, E, Enter"
 
-[node name="name3" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation/key-flow"]
+[node name="yes" type="Label" parent="scroll/margin/content/navigation/margin/description/keyboard/keys"]
 layout_mode = 2
 size_flags_horizontal = 8
 theme = ExtResource("6_55a30")
 text = "Да"
 
-[node name="VSeparator3" type="VSeparator" parent="scroll/margin/content/Panel/MarginContainer/navigation/key-flow"]
+[node name="VSeparator3" type="VSeparator" parent="scroll/margin/content/navigation/margin/description/keyboard/keys"]
 layout_mode = 2
 
-[node name="keys4" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation/key-flow"]
+[node name="esc" type="Label" parent="scroll/margin/content/navigation/margin/description/keyboard/keys"]
 layout_mode = 2
 size_flags_horizontal = 0
 theme = ExtResource("6_55a30")
 text = "X, Esc"
 
-[node name="name4" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation/key-flow"]
+[node name="no" type="Label" parent="scroll/margin/content/navigation/margin/description/keyboard/keys"]
 layout_mode = 2
 size_flags_horizontal = 8
 theme = ExtResource("6_55a30")
 text = "Нет"
 
-[node name="VSeparator4" type="VSeparator" parent="scroll/margin/content/Panel/MarginContainer/navigation/key-flow"]
+[node name="VSeparator4" type="VSeparator" parent="scroll/margin/content/navigation/margin/description/keyboard/keys"]
 layout_mode = 2
 
-[node name="keys5" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation/key-flow"]
+[node name="home-end" type="Label" parent="scroll/margin/content/navigation/margin/description/keyboard/keys"]
 layout_mode = 2
 size_flags_horizontal = 0
 theme = ExtResource("6_55a30")
 text = "Home, End"
 
-[node name="name5" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation/key-flow"]
+[node name="ends" type="Label" parent="scroll/margin/content/navigation/margin/description/keyboard/keys"]
 layout_mode = 2
 size_flags_horizontal = 0
 theme = ExtResource("6_55a30")
 text = "Крайний"
 
-[node name="VSeparator5" type="VSeparator" parent="scroll/margin/content/Panel/MarginContainer/navigation/key-flow"]
+[node name="VSeparator5" type="VSeparator" parent="scroll/margin/content/navigation/margin/description/keyboard/keys"]
 layout_mode = 2
 
-[node name="keys6" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation/key-flow"]
+[node name="tab" type="Label" parent="scroll/margin/content/navigation/margin/description/keyboard/keys"]
 layout_mode = 2
 size_flags_horizontal = 0
 theme = ExtResource("6_55a30")
 text = "Tab, Shift"
 
-[node name="name6" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation/key-flow"]
+[node name="focus" type="Label" parent="scroll/margin/content/navigation/margin/description/keyboard/keys"]
 layout_mode = 2
 size_flags_horizontal = 8
 theme = ExtResource("6_55a30")
-text = "Фокус"
+text = "Следующий"
 
-[node name="HFlowContainer7" type="HBoxContainer" parent="scroll/margin/content/Panel/MarginContainer/navigation/key-flow"]
-layout_mode = 2
-theme_override_constants/separation = 30
-
-[node name="VBoxContainer" type="VBoxContainer" parent="scroll/margin/content/Panel/MarginContainer/navigation/key-flow"]
-visible = false
+[node name="hot" type="VBoxContainer" parent="scroll/margin/content/navigation/margin/description/keyboard"]
 layout_mode = 2
 
-[node name="Control" type="Control" parent="scroll/margin/content/Panel/MarginContainer/navigation/key-flow"]
-visible = false
+[node name="upper" type="HSeparator" parent="scroll/margin/content/navigation/margin/description/keyboard/hot"]
 layout_mode = 2
 
-[node name="HFlowContainer" type="VBoxContainer" parent="scroll/margin/content/Panel/MarginContainer/navigation/key-flow"]
-visible = false
-custom_minimum_size = Vector2(160, 0)
+[node name="keys" type="VBoxContainer" parent="scroll/margin/content/navigation/margin/description/keyboard/hot"]
 layout_mode = 2
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="scroll/margin/content/Panel/MarginContainer/navigation/key-flow"]
-visible = false
-layout_mode = 2
-
-[node name="keyboard" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation"]
-visible = false
-custom_minimum_size = Vector2(160, 0)
-layout_mode = 2
-theme = ExtResource("6_55a30")
-text = "Клавиатура. Фокус: WASD, Home, End, Page Up-Down, Стрелки, Tab, Shift. Далее: Z, E, Enter. Назад: X, Esc. Выбор. Пространства: Alt + 0-9. Разделы: Ctrl + 0-9. Опции: 0-9."
-autowrap_mode = 2
-
-[node name="HSeparator2" type="HSeparator" parent="scroll/margin/content/Panel/MarginContainer/navigation"]
-layout_mode = 2
-
-[node name="hot" type="VBoxContainer" parent="scroll/margin/content/Panel/MarginContainer/navigation"]
-layout_mode = 2
-
-[node name="head" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation/hot"]
+[node name="head" type="Label" parent="scroll/margin/content/navigation/margin/description/keyboard/hot/keys"]
 layout_mode = 2
 text = "Горячие клавиши"
 
-[node name="key-flow" type="HFlowContainer" parent="scroll/margin/content/Panel/MarginContainer/navigation/hot"]
+[node name="flow" type="HFlowContainer" parent="scroll/margin/content/navigation/margin/description/keyboard/hot/keys"]
 custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
 size_flags_vertical = 3
@@ -256,230 +241,1112 @@ theme = ExtResource("7_fhjs6")
 theme_override_constants/h_separation = 20
 theme_override_constants/v_separation = 12
 
-[node name="f1" type="HBoxContainer" parent="scroll/margin/content/Panel/MarginContainer/navigation/hot/key-flow"]
+[node name="f1" type="HBoxContainer" parent="scroll/margin/content/navigation/margin/description/keyboard/hot/keys/flow"]
 layout_mode = 2
 
-[node name="keys" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation/hot/key-flow/f1"]
+[node name="keys" type="Label" parent="scroll/margin/content/navigation/margin/description/keyboard/hot/keys/flow/f1"]
 layout_mode = 2
 text = "F1"
 
-[node name="name" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation/hot/key-flow/f1"]
+[node name="name" type="Label" parent="scroll/margin/content/navigation/margin/description/keyboard/hot/keys/flow/f1"]
 layout_mode = 2
 size_flags_horizontal = 2
 text = "Анализ"
 
-[node name="f2" type="HBoxContainer" parent="scroll/margin/content/Panel/MarginContainer/navigation/hot/key-flow"]
+[node name="f2" type="HBoxContainer" parent="scroll/margin/content/navigation/margin/description/keyboard/hot/keys/flow"]
 layout_mode = 2
 
-[node name="keys" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation/hot/key-flow/f2"]
+[node name="keys" type="Label" parent="scroll/margin/content/navigation/margin/description/keyboard/hot/keys/flow/f2"]
 layout_mode = 2
 text = "F2"
 
-[node name="name" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation/hot/key-flow/f2"]
+[node name="name" type="Label" parent="scroll/margin/content/navigation/margin/description/keyboard/hot/keys/flow/f2"]
 layout_mode = 2
 size_flags_horizontal = 2
 text = "Сведения"
 
-[node name="f3" type="HBoxContainer" parent="scroll/margin/content/Panel/MarginContainer/navigation/hot/key-flow"]
+[node name="f3" type="HBoxContainer" parent="scroll/margin/content/navigation/margin/description/keyboard/hot/keys/flow"]
 layout_mode = 2
 
-[node name="keys" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation/hot/key-flow/f3"]
+[node name="keys" type="Label" parent="scroll/margin/content/navigation/margin/description/keyboard/hot/keys/flow/f3"]
 layout_mode = 2
 text = "F3"
 
-[node name="name" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation/hot/key-flow/f3"]
+[node name="name" type="Label" parent="scroll/margin/content/navigation/margin/description/keyboard/hot/keys/flow/f3"]
 layout_mode = 2
 size_flags_horizontal = 2
 text = "Настройки"
 
-[node name="f4" type="HBoxContainer" parent="scroll/margin/content/Panel/MarginContainer/navigation/hot/key-flow"]
+[node name="f4" type="HBoxContainer" parent="scroll/margin/content/navigation/margin/description/keyboard/hot/keys/flow"]
 layout_mode = 2
 
-[node name="keys" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation/hot/key-flow/f4"]
+[node name="keys" type="Label" parent="scroll/margin/content/navigation/margin/description/keyboard/hot/keys/flow/f4"]
 layout_mode = 2
 text = "F4"
 
-[node name="name" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation/hot/key-flow/f4"]
+[node name="name" type="Label" parent="scroll/margin/content/navigation/margin/description/keyboard/hot/keys/flow/f4"]
 layout_mode = 2
 size_flags_horizontal = 2
 text = "В меню"
 
-[node name="f5" type="HBoxContainer" parent="scroll/margin/content/Panel/MarginContainer/navigation/hot/key-flow"]
+[node name="f5" type="HBoxContainer" parent="scroll/margin/content/navigation/margin/description/keyboard/hot/keys/flow"]
 layout_mode = 2
 
-[node name="keys" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation/hot/key-flow/f5"]
+[node name="keys" type="Label" parent="scroll/margin/content/navigation/margin/description/keyboard/hot/keys/flow/f5"]
 layout_mode = 2
 size_flags_horizontal = 0
 text = "F5"
 
-[node name="name" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation/hot/key-flow/f5"]
+[node name="name" type="Label" parent="scroll/margin/content/navigation/margin/description/keyboard/hot/keys/flow/f5"]
 layout_mode = 2
 size_flags_horizontal = 2
 text = "Саундтрек"
 
-[node name="f6" type="HBoxContainer" parent="scroll/margin/content/Panel/MarginContainer/navigation/hot/key-flow"]
+[node name="f6" type="HBoxContainer" parent="scroll/margin/content/navigation/margin/description/keyboard/hot/keys/flow"]
 layout_mode = 2
 
-[node name="keys" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation/hot/key-flow/f6"]
+[node name="keys" type="Label" parent="scroll/margin/content/navigation/margin/description/keyboard/hot/keys/flow/f6"]
 layout_mode = 2
 text = "F6"
 
-[node name="name" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation/hot/key-flow/f6"]
+[node name="name" type="Label" parent="scroll/margin/content/navigation/margin/description/keyboard/hot/keys/flow/f6"]
 layout_mode = 2
 size_flags_horizontal = 2
 text = "Чекпоинт"
 
-[node name="f7" type="HBoxContainer" parent="scroll/margin/content/Panel/MarginContainer/navigation/hot/key-flow"]
+[node name="f7" type="HBoxContainer" parent="scroll/margin/content/navigation/margin/description/keyboard/hot/keys/flow"]
 layout_mode = 2
 
-[node name="keys" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation/hot/key-flow/f7"]
+[node name="keys" type="Label" parent="scroll/margin/content/navigation/margin/description/keyboard/hot/keys/flow/f7"]
 layout_mode = 2
 text = "F7"
 
-[node name="name" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation/hot/key-flow/f7"]
+[node name="name" type="Label" parent="scroll/margin/content/navigation/margin/description/keyboard/hot/keys/flow/f7"]
 layout_mode = 2
 size_flags_horizontal = 2
 text = "Б. Сохранить"
 
-[node name="f8" type="HBoxContainer" parent="scroll/margin/content/Panel/MarginContainer/navigation/hot/key-flow"]
+[node name="f8" type="HBoxContainer" parent="scroll/margin/content/navigation/margin/description/keyboard/hot/keys/flow"]
 layout_mode = 2
 
-[node name="keys" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation/hot/key-flow/f8"]
+[node name="keys" type="Label" parent="scroll/margin/content/navigation/margin/description/keyboard/hot/keys/flow/f8"]
 layout_mode = 2
 text = "F8"
 
-[node name="name" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation/hot/key-flow/f8"]
+[node name="name" type="Label" parent="scroll/margin/content/navigation/margin/description/keyboard/hot/keys/flow/f8"]
 layout_mode = 2
 size_flags_horizontal = 2
 text = "Б. Загрузить"
 
-[node name="f9" type="HBoxContainer" parent="scroll/margin/content/Panel/MarginContainer/navigation/hot/key-flow"]
+[node name="f9" type="HBoxContainer" parent="scroll/margin/content/navigation/margin/description/keyboard/hot/keys/flow"]
 layout_mode = 2
 
-[node name="keys" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation/hot/key-flow/f9"]
+[node name="keys" type="Label" parent="scroll/margin/content/navigation/margin/description/keyboard/hot/keys/flow/f9"]
 layout_mode = 2
 text = "F9"
 
-[node name="name" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation/hot/key-flow/f9"]
+[node name="name" type="Label" parent="scroll/margin/content/navigation/margin/description/keyboard/hot/keys/flow/f9"]
 layout_mode = 2
 size_flags_horizontal = 2
 text = "Экспорт игры"
 
-[node name="f10" type="HBoxContainer" parent="scroll/margin/content/Panel/MarginContainer/navigation/hot/key-flow"]
+[node name="f10" type="HBoxContainer" parent="scroll/margin/content/navigation/margin/description/keyboard/hot/keys/flow"]
 layout_mode = 2
 
-[node name="keys" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation/hot/key-flow/f10"]
+[node name="keys" type="Label" parent="scroll/margin/content/navigation/margin/description/keyboard/hot/keys/flow/f10"]
 layout_mode = 2
 text = "F10"
 
-[node name="name" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation/hot/key-flow/f10"]
+[node name="name" type="Label" parent="scroll/margin/content/navigation/margin/description/keyboard/hot/keys/flow/f10"]
 layout_mode = 2
 size_flags_horizontal = 2
 text = "Импорт"
 
-[node name="f11" type="HBoxContainer" parent="scroll/margin/content/Panel/MarginContainer/navigation/hot/key-flow"]
+[node name="f11" type="HBoxContainer" parent="scroll/margin/content/navigation/margin/description/keyboard/hot/keys/flow"]
 layout_mode = 2
 
-[node name="keys" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation/hot/key-flow/f11"]
+[node name="keys" type="Label" parent="scroll/margin/content/navigation/margin/description/keyboard/hot/keys/flow/f11"]
 layout_mode = 2
 text = "F11"
 
-[node name="name" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation/hot/key-flow/f11"]
+[node name="name" type="Label" parent="scroll/margin/content/navigation/margin/description/keyboard/hot/keys/flow/f11"]
 layout_mode = 2
 size_flags_horizontal = 2
 text = "Вид "
 
-[node name="f12" type="HBoxContainer" parent="scroll/margin/content/Panel/MarginContainer/navigation/hot/key-flow"]
+[node name="f12" type="HBoxContainer" parent="scroll/margin/content/navigation/margin/description/keyboard/hot/keys/flow"]
 layout_mode = 2
 
-[node name="keys" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation/hot/key-flow/f12"]
+[node name="keys" type="Label" parent="scroll/margin/content/navigation/margin/description/keyboard/hot/keys/flow/f12"]
 layout_mode = 2
 text = "F12"
 
-[node name="name" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation/hot/key-flow/f12"]
+[node name="name" type="Label" parent="scroll/margin/content/navigation/margin/description/keyboard/hot/keys/flow/f12"]
 layout_mode = 2
 size_flags_horizontal = 2
 text = "Фоторежим"
 
-[node name="HBoxContainer" type="VBoxContainer" parent="scroll/margin/content/Panel/MarginContainer/navigation/hot/key-flow"]
-visible = false
+[node name="lower" type="HSeparator" parent="scroll/margin/content/navigation/margin/description/keyboard/hot"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="scroll/margin/content/Panel/MarginContainer/navigation/hot/key-flow"]
-visible = false
-layout_mode = 2
-
-[node name="HBoxContainer2" type="VBoxContainer" parent="scroll/margin/content/Panel/MarginContainer/navigation/hot/key-flow"]
-visible = false
-layout_mode = 2
-
-[node name="HBoxContainer3" type="VBoxContainer" parent="scroll/margin/content/Panel/MarginContainer/navigation/hot/key-flow"]
-visible = false
-layout_mode = 2
-
-[node name="HSeparator" type="HSeparator" parent="scroll/margin/content/Panel/MarginContainer/navigation"]
-layout_mode = 2
-
-[node name="HFlowContainer" type="HFlowContainer" parent="scroll/margin/content/Panel/MarginContainer/navigation"]
+[node name="topics" type="HFlowContainer" parent="scroll/margin/content/navigation/margin/description/keyboard"]
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 theme_override_constants/h_separation = 25
 
-[node name="spaces" type="HBoxContainer" parent="scroll/margin/content/Panel/MarginContainer/navigation/HFlowContainer"]
+[node name="spaces" type="HBoxContainer" parent="scroll/margin/content/navigation/margin/description/keyboard/topics"]
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="keys" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation/HFlowContainer/spaces"]
+[node name="keys" type="Label" parent="scroll/margin/content/navigation/margin/description/keyboard/topics/spaces"]
 layout_mode = 2
 theme = ExtResource("6_55a30")
 text = "Alt + 0-9"
 
-[node name="name" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation/HFlowContainer/spaces"]
+[node name="name" type="Label" parent="scroll/margin/content/navigation/margin/description/keyboard/topics/spaces"]
 layout_mode = 2
 size_flags_horizontal = 10
 theme = ExtResource("6_55a30")
 text = "Пространства"
 
-[node name="VSeparator" type="VSeparator" parent="scroll/margin/content/Panel/MarginContainer/navigation/HFlowContainer"]
+[node name="left" type="VSeparator" parent="scroll/margin/content/navigation/margin/description/keyboard/topics"]
 layout_mode = 2
 
-[node name="topics" type="HBoxContainer" parent="scroll/margin/content/Panel/MarginContainer/navigation/HFlowContainer"]
+[node name="topics" type="HBoxContainer" parent="scroll/margin/content/navigation/margin/description/keyboard/topics"]
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="keys" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation/HFlowContainer/topics"]
+[node name="keys" type="Label" parent="scroll/margin/content/navigation/margin/description/keyboard/topics/topics"]
 layout_mode = 2
 theme = ExtResource("6_55a30")
 text = "Ctrl + 0-9"
 
-[node name="name" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation/HFlowContainer/topics"]
+[node name="name" type="Label" parent="scroll/margin/content/navigation/margin/description/keyboard/topics/topics"]
 layout_mode = 2
 size_flags_horizontal = 10
 theme = ExtResource("6_55a30")
 text = "Разделы"
 
-[node name="VSeparator2" type="VSeparator" parent="scroll/margin/content/Panel/MarginContainer/navigation/HFlowContainer"]
+[node name="right" type="VSeparator" parent="scroll/margin/content/navigation/margin/description/keyboard/topics"]
 layout_mode = 2
 
-[node name="options" type="HBoxContainer" parent="scroll/margin/content/Panel/MarginContainer/navigation/HFlowContainer"]
+[node name="options" type="HBoxContainer" parent="scroll/margin/content/navigation/margin/description/keyboard/topics"]
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="keys" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation/HFlowContainer/options"]
+[node name="keys" type="Label" parent="scroll/margin/content/navigation/margin/description/keyboard/topics/options"]
 layout_mode = 2
 theme = ExtResource("6_55a30")
 text = "0-9"
 
-[node name="name" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation/HFlowContainer/options"]
+[node name="name" type="Label" parent="scroll/margin/content/navigation/margin/description/keyboard/topics/options"]
 layout_mode = 2
 size_flags_horizontal = 10
 theme = ExtResource("6_55a30")
 text = "Опции"
 
-[node name="gamepad" type="Label" parent="scroll/margin/content/Panel/MarginContainer/navigation"]
+[node name="gamepad" type="VBoxContainer" parent="scroll/margin/content/navigation/margin/description"]
 visible = false
-custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+
+[node name="keys" type="HFlowContainer" parent="scroll/margin/content/navigation/margin/description/gamepad"]
+layout_mode = 2
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 5
+
+[node name="wasd" type="Label" parent="scroll/margin/content/navigation/margin/description/gamepad/keys"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("6_55a30")
+text = "Левый стик, Крестовина"
+
+[node name="move" type="Label" parent="scroll/margin/content/navigation/margin/description/gamepad/keys"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("6_55a30")
+text = "Перемещение"
+
+[node name="VSeparator" type="VSeparator" parent="scroll/margin/content/navigation/margin/description/gamepad/keys"]
+layout_mode = 2
+
+[node name="page-up-down" type="Label" parent="scroll/margin/content/navigation/margin/description/gamepad/keys"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("6_55a30")
+text = "Правый стик"
+
+[node name="listing" type="Label" parent="scroll/margin/content/navigation/margin/description/gamepad/keys"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("6_55a30")
+text = "Пролистывание"
+
+[node name="VSeparator2" type="VSeparator" parent="scroll/margin/content/navigation/margin/description/gamepad/keys"]
+layout_mode = 2
+
+[node name="enter" type="Label" parent="scroll/margin/content/navigation/margin/description/gamepad/keys"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("6_55a30")
+text = "A"
+
+[node name="yes" type="Label" parent="scroll/margin/content/navigation/margin/description/gamepad/keys"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme = ExtResource("6_55a30")
+text = "Да"
+
+[node name="VSeparator3" type="VSeparator" parent="scroll/margin/content/navigation/margin/description/gamepad/keys"]
+layout_mode = 2
+
+[node name="esc" type="Label" parent="scroll/margin/content/navigation/margin/description/gamepad/keys"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("6_55a30")
+text = "B"
+
+[node name="no" type="Label" parent="scroll/margin/content/navigation/margin/description/gamepad/keys"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme = ExtResource("6_55a30")
+text = "Нет"
+
+[node name="view" type="VBoxContainer" parent="scroll/margin/content/navigation/margin/description/gamepad"]
+layout_mode = 2
+
+[node name="upper" type="HSeparator" parent="scroll/margin/content/navigation/margin/description/gamepad/view"]
+layout_mode = 2
+
+[node name="buttons" type="HFlowContainer" parent="scroll/margin/content/navigation/margin/description/gamepad/view"]
+layout_mode = 2
+theme_override_constants/h_separation = 35
+theme_override_constants/v_separation = 35
+
+[node name="topics" type="VBoxContainer" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons"]
+layout_mode = 2
+theme_override_constants/separation = 3
+
+[node name="caption" type="Label" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/topics"]
+layout_mode = 2
+text = "Разделы"
+
+[node name="space" type="Control" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/topics"]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+
+[node name="top" type="HBoxContainer" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/topics"]
+layout_mode = 2
+theme_override_constants/separation = 3
+
+[node name="left-bamper" type="Panel" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/topics/top"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+
+[node name="center" type="CenterContainer" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/topics/top/left-bamper"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="number" type="Label" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/topics/top/left-bamper/center"]
+layout_mode = 2
+text = "1"
+
+[node name="right-bamper" type="Panel" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/topics/top"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+
+[node name="center" type="CenterContainer" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/topics/top/right-bamper"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="number" type="Label" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/topics/top/right-bamper/center"]
+layout_mode = 2
+text = "2"
+
+[node name="space" type="Control" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/topics/top"]
+custom_minimum_size = Vector2(55, 0)
+layout_mode = 2
+
+[node name="x" type="Panel" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/topics/top"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("9_0wkgj")
+
+[node name="center" type="Control" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/topics/top/x"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="margin" type="MarginContainer" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/topics/top/x/center"]
+layout_mode = 2
+offset_right = 40.0
+offset_bottom = 13.0
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="name" type="Label" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/topics/top/x/center/margin"]
+layout_mode = 2
+theme = ExtResource("7_fhjs6")
+theme_override_colors/font_color = Color(0.525101, 0.525101, 0.525101, 1)
+theme_override_font_sizes/font_size = 9
+text = "X"
+
+[node name="number" type="Label" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/topics/top/x/center"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -5.0
+offset_top = -11.5
+offset_right = 5.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 10
+text = "5"
+
+[node name="bottom" type="HBoxContainer" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/topics"]
+layout_mode = 2
+theme_override_constants/separation = 3
+
+[node name="left-trigger" type="Panel" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/topics/bottom"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+
+[node name="center" type="CenterContainer" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/topics/bottom/left-trigger"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="number" type="Label" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/topics/bottom/left-trigger/center"]
+layout_mode = 2
+text = "3"
+
+[node name="right-trigger" type="Panel" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/topics/bottom"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+
+[node name="center" type="CenterContainer" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/topics/bottom/right-trigger"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="number" type="Label" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/topics/bottom/right-trigger/center"]
+layout_mode = 2
+text = "4"
+
+[node name="space" type="Control" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/topics/bottom"]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+
+[node name="y" type="Panel" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/topics/bottom"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("9_0wkgj")
+
+[node name="center" type="Control" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/topics/bottom/y"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="margin" type="MarginContainer" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/topics/bottom/y/center"]
+layout_mode = 2
+offset_right = 40.0
+offset_bottom = 13.0
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="name" type="Label" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/topics/bottom/y/center/margin"]
+layout_mode = 2
+theme = ExtResource("7_fhjs6")
+theme_override_colors/font_color = Color(0.525101, 0.525101, 0.525101, 1)
+theme_override_font_sizes/font_size = 9
+text = "Y"
+
+[node name="number" type="Label" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/topics/bottom/y/center"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -5.0
+offset_top = -11.5
+offset_right = 5.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 10
+text = "6"
+
+[node name="description" type="HBoxContainer" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/topics"]
+layout_mode = 2
+theme = ExtResource("7_fhjs6")
+
+[node name="periphery" type="Label" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/topics/description"]
+layout_mode = 2
+text = "Периферия"
+
+[node name="space" type="Control" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/topics/description"]
+layout_mode = 2
+
+[node name="buttons" type="Label" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/topics/description"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "Кнопки"
+
+[node name="options-1-5" type="VBoxContainer" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons"]
+layout_mode = 2
+theme_override_constants/separation = 3
+
+[node name="caption" type="Label" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/options-1-5"]
+layout_mode = 2
+text = "Опции 1-5"
+
+[node name="space" type="Control" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/options-1-5"]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+
+[node name="top" type="HBoxContainer" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/options-1-5"]
+layout_mode = 2
+theme_override_constants/separation = 3
+
+[node name="left-bamper" type="Panel" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/options-1-5/top"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+
+[node name="center" type="CenterContainer" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/options-1-5/top/left-bamper"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/options-1-5/top/left-bamper/center"]
+layout_mode = 2
+text = "1"
+
+[node name="right-bamper" type="Panel" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/options-1-5/top"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+
+[node name="center" type="CenterContainer" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/options-1-5/top/right-bamper"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/options-1-5/top/right-bamper/center"]
+layout_mode = 2
+text = "2"
+
+[node name="space" type="Control" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/options-1-5/top"]
+custom_minimum_size = Vector2(55, 0)
+layout_mode = 2
+
+[node name="x" type="Panel" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/options-1-5/top"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("9_0wkgj")
+
+[node name="center" type="Control" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/options-1-5/top/x"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="margin" type="MarginContainer" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/options-1-5/top/x/center"]
+layout_mode = 2
+offset_right = 40.0
+offset_bottom = 13.0
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="name" type="Label" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/options-1-5/top/x/center/margin"]
+layout_mode = 2
+theme = ExtResource("7_fhjs6")
+theme_override_colors/font_color = Color(0.525101, 0.525101, 0.525101, 1)
+theme_override_font_sizes/font_size = 9
+text = "X"
+
+[node name="number" type="Label" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/options-1-5/top/x/center"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -5.0
+offset_top = -11.5
+offset_right = 5.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 10
+text = "4"
+
+[node name="bottom" type="HBoxContainer" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/options-1-5"]
+layout_mode = 2
+theme_override_constants/separation = 3
+
+[node name="left-trigger" type="Panel" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/options-1-5/bottom"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bc3vp")
+
+[node name="center" type="VBoxContainer" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/options-1-5/bottom/left-trigger"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="name" type="Label" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/options-1-5/bottom/left-trigger/center"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 10
+theme_override_font_sizes/font_size = 16
+text = "LT"
+
+[node name="press" type="Label" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/options-1-5/bottom/left-trigger/center"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("7_fhjs6")
+theme_override_font_sizes/font_size = 9
+text = "Зажать"
+
+[node name="right-trigger" type="Panel" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/options-1-5/bottom"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+
+[node name="center" type="CenterContainer" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/options-1-5/bottom/right-trigger"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/options-1-5/bottom/right-trigger/center"]
+layout_mode = 2
+text = "3"
+
+[node name="space" type="Control" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/options-1-5/bottom"]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+
+[node name="y" type="Panel" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/options-1-5/bottom"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("9_0wkgj")
+
+[node name="center" type="Control" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/options-1-5/bottom/y"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="margin" type="MarginContainer" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/options-1-5/bottom/y/center"]
+layout_mode = 2
+offset_right = 40.0
+offset_bottom = 13.0
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="name" type="Label" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/options-1-5/bottom/y/center/margin"]
+layout_mode = 2
+theme = ExtResource("7_fhjs6")
+theme_override_colors/font_color = Color(0.525101, 0.525101, 0.525101, 1)
+theme_override_font_sizes/font_size = 9
+text = "Y"
+
+[node name="number" type="Label" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/options-1-5/bottom/y/center"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -5.0
+offset_top = -11.5
+offset_right = 5.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 10
+text = "5"
+
+[node name="description" type="HBoxContainer" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/options-1-5"]
+layout_mode = 2
+theme = ExtResource("7_fhjs6")
+
+[node name="periphery" type="Label" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/options-1-5/description"]
+layout_mode = 2
+text = "Периферия"
+
+[node name="space" type="Control" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/options-1-5/description"]
+layout_mode = 2
+
+[node name="buttons" type="Label" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/options-1-5/description"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "Кнопки"
+
+[node name="options-6-10" type="VBoxContainer" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons"]
+layout_mode = 2
+theme_override_constants/separation = 3
+
+[node name="caption" type="Label" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/options-6-10"]
+layout_mode = 2
+text = "Опции 6-10"
+
+[node name="space" type="Control" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/options-6-10"]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+
+[node name="top" type="HBoxContainer" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/options-6-10"]
+layout_mode = 2
+theme_override_constants/separation = 3
+
+[node name="left-bamper" type="Panel" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/options-6-10/top"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+
+[node name="center" type="CenterContainer" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/options-6-10/top/left-bamper"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="number" type="Label" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/options-6-10/top/left-bamper/center"]
+layout_mode = 2
+text = "6"
+
+[node name="right-bamper" type="Panel" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/options-6-10/top"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+
+[node name="center" type="CenterContainer" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/options-6-10/top/right-bamper"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="number" type="Label" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/options-6-10/top/right-bamper/center"]
+layout_mode = 2
+text = "7"
+
+[node name="space" type="Control" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/options-6-10/top"]
+custom_minimum_size = Vector2(55, 0)
+layout_mode = 2
+
+[node name="x" type="Panel" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/options-6-10/top"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("9_0wkgj")
+
+[node name="center" type="Control" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/options-6-10/top/x"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="margin" type="MarginContainer" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/options-6-10/top/x/center"]
+layout_mode = 2
+offset_right = 40.0
+offset_bottom = 13.0
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="name" type="Label" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/options-6-10/top/x/center/margin"]
+layout_mode = 2
+theme = ExtResource("7_fhjs6")
+theme_override_colors/font_color = Color(0.525101, 0.525101, 0.525101, 1)
+theme_override_font_sizes/font_size = 9
+text = "X"
+
+[node name="number" type="Label" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/options-6-10/top/x/center"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -5.0
+offset_top = -11.5
+offset_right = 5.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 10
+text = "9"
+
+[node name="bottom" type="HBoxContainer" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/options-6-10"]
+layout_mode = 2
+theme_override_constants/separation = 3
+
+[node name="left-trigger" type="Panel" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/options-6-10/bottom"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+
+[node name="center" type="CenterContainer" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/options-6-10/bottom/left-trigger"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="number" type="Label" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/options-6-10/bottom/left-trigger/center"]
+layout_mode = 2
+text = "8"
+
+[node name="right-trigger" type="Panel" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/options-6-10/bottom"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bc3vp")
+
+[node name="center" type="VBoxContainer" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/options-6-10/bottom/right-trigger"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="name" type="Label" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/options-6-10/bottom/right-trigger/center"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 10
+theme_override_font_sizes/font_size = 16
+text = "RT"
+
+[node name="press" type="Label" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/options-6-10/bottom/right-trigger/center"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("7_fhjs6")
+theme_override_font_sizes/font_size = 9
+text = "Зажать"
+
+[node name="space" type="Control" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/options-6-10/bottom"]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+
+[node name="y" type="Panel" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/options-6-10/bottom"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("9_0wkgj")
+
+[node name="center" type="Control" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/options-6-10/bottom/y"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="margin" type="MarginContainer" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/options-6-10/bottom/y/center"]
+layout_mode = 2
+offset_right = 40.0
+offset_bottom = 13.0
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="name" type="Label" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/options-6-10/bottom/y/center/margin"]
+layout_mode = 2
+theme = ExtResource("7_fhjs6")
+theme_override_colors/font_color = Color(0.525101, 0.525101, 0.525101, 1)
+theme_override_font_sizes/font_size = 9
+text = "Y"
+
+[node name="number" type="Label" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/options-6-10/bottom/y/center"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -5.0
+offset_top = -11.5
+offset_right = 5.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 10
+text = "10"
+
+[node name="description" type="HBoxContainer" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/options-6-10"]
+layout_mode = 2
+theme = ExtResource("7_fhjs6")
+
+[node name="periphery" type="Label" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/options-6-10/description"]
+layout_mode = 2
+text = "Переферия"
+
+[node name="space" type="Control" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/options-6-10/description"]
+layout_mode = 2
+
+[node name="buttons" type="Label" parent="scroll/margin/content/navigation/margin/description/gamepad/view/buttons/options-6-10/description"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "Кнопки"
+
+[node name="lower" type="HSeparator" parent="scroll/margin/content/navigation/margin/description/gamepad/view"]
+layout_mode = 2
+
+[node name="topics" type="HFlowContainer" parent="scroll/margin/content/navigation/margin/description/gamepad"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_constants/h_separation = 15
+
+[node name="topic-1" type="Label" parent="scroll/margin/content/navigation/margin/description/gamepad/topics"]
 layout_mode = 2
 theme = ExtResource("6_55a30")
-text = "Геймпад. Фокус: Левый стик, Крестовина. Пролистывание: Правый стик. Далее-назад: A-B. Выбор. Разделы: 1. LB / 2. RB / 3. LT / 4. RT / 5-6. X-Y. Опции 1-5: LT + 1. LB / 2. RB / 3. RT / 4-5. X-Y. Опции 6-10: RT + 6. LB / 7. RB / 8. RT / 9-10. X-Y."
-autowrap_mode = 2
+text = "1. LB"
+
+[node name="topic-1-2" type="Label" parent="scroll/margin/content/navigation/margin/description/gamepad/topics"]
+layout_mode = 2
+theme = ExtResource("6_55a30")
+text = "/"
+
+[node name="topic-2" type="Label" parent="scroll/margin/content/navigation/margin/description/gamepad/topics"]
+layout_mode = 2
+theme = ExtResource("6_55a30")
+text = "2. RB"
+
+[node name="topic-2-3" type="Label" parent="scroll/margin/content/navigation/margin/description/gamepad/topics"]
+layout_mode = 2
+theme = ExtResource("6_55a30")
+text = "/"
+
+[node name="topic-3" type="Label" parent="scroll/margin/content/navigation/margin/description/gamepad/topics"]
+layout_mode = 2
+theme = ExtResource("6_55a30")
+text = "3. LT"
+
+[node name="topic-3-4" type="Label" parent="scroll/margin/content/navigation/margin/description/gamepad/topics"]
+layout_mode = 2
+theme = ExtResource("6_55a30")
+text = "/"
+
+[node name="topic-4" type="Label" parent="scroll/margin/content/navigation/margin/description/gamepad/topics"]
+layout_mode = 2
+theme = ExtResource("6_55a30")
+text = "4. RT"
+
+[node name="topic-4-5" type="Label" parent="scroll/margin/content/navigation/margin/description/gamepad/topics"]
+layout_mode = 2
+theme = ExtResource("6_55a30")
+text = "/"
+
+[node name="topic-5" type="Label" parent="scroll/margin/content/navigation/margin/description/gamepad/topics"]
+layout_mode = 2
+theme = ExtResource("6_55a30")
+text = "5. X"
+
+[node name="topic-5-6" type="Label" parent="scroll/margin/content/navigation/margin/description/gamepad/topics"]
+layout_mode = 2
+theme = ExtResource("6_55a30")
+text = "/"
+
+[node name="topic-6" type="Label" parent="scroll/margin/content/navigation/margin/description/gamepad/topics"]
+layout_mode = 2
+theme = ExtResource("6_55a30")
+text = "6. Y"
+
+[node name="topics" type="Label" parent="scroll/margin/content/navigation/margin/description/gamepad/topics"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme = ExtResource("6_55a30")
+text = "Разделы"
+
+[node name="topics-to-options" type="VSeparator" parent="scroll/margin/content/navigation/margin/description/gamepad/topics"]
+layout_mode = 2
+
+[node name="caption-0" type="Label" parent="scroll/margin/content/navigation/margin/description/gamepad/topics"]
+visible = false
+layout_mode = 2
+theme = ExtResource("6_55a30")
+text = "1 - 5"
+
+[node name="options-1-5" type="VSeparator" parent="scroll/margin/content/navigation/margin/description/gamepad/topics"]
+visible = false
+layout_mode = 2
+
+[node name="left-trigger" type="Label" parent="scroll/margin/content/navigation/margin/description/gamepad/topics"]
+layout_mode = 2
+theme = ExtResource("6_55a30")
+text = "LT"
+
+[node name="left-plus" type="Label" parent="scroll/margin/content/navigation/margin/description/gamepad/topics"]
+layout_mode = 2
+theme = ExtResource("6_55a30")
+text = "+"
+
+[node name="option-1" type="Label" parent="scroll/margin/content/navigation/margin/description/gamepad/topics"]
+layout_mode = 2
+theme = ExtResource("6_55a30")
+text = "1. LB"
+
+[node name="option-1-2" type="Label" parent="scroll/margin/content/navigation/margin/description/gamepad/topics"]
+layout_mode = 2
+theme = ExtResource("6_55a30")
+text = "/"
+
+[node name="option-2" type="Label" parent="scroll/margin/content/navigation/margin/description/gamepad/topics"]
+layout_mode = 2
+theme = ExtResource("6_55a30")
+text = "2. RB"
+
+[node name="option-2-3" type="Label" parent="scroll/margin/content/navigation/margin/description/gamepad/topics"]
+layout_mode = 2
+theme = ExtResource("6_55a30")
+text = "/"
+
+[node name="option-3" type="Label" parent="scroll/margin/content/navigation/margin/description/gamepad/topics"]
+layout_mode = 2
+theme = ExtResource("6_55a30")
+text = "3. RT"
+
+[node name="option-3-4" type="Label" parent="scroll/margin/content/navigation/margin/description/gamepad/topics"]
+layout_mode = 2
+theme = ExtResource("6_55a30")
+text = "/"
+
+[node name="option-4" type="Label" parent="scroll/margin/content/navigation/margin/description/gamepad/topics"]
+layout_mode = 2
+theme = ExtResource("6_55a30")
+text = "4. X"
+
+[node name="option-4-5" type="Label" parent="scroll/margin/content/navigation/margin/description/gamepad/topics"]
+layout_mode = 2
+theme = ExtResource("6_55a30")
+text = "/"
+
+[node name="option-5" type="Label" parent="scroll/margin/content/navigation/margin/description/gamepad/topics"]
+layout_mode = 2
+theme = ExtResource("6_55a30")
+text = "5. Y"
+
+[node name="options-5-6" type="VSeparator" parent="scroll/margin/content/navigation/margin/description/gamepad/topics"]
+visible = false
+layout_mode = 2
+
+[node name="options-6-10" type="VSeparator" parent="scroll/margin/content/navigation/margin/description/gamepad/topics"]
+layout_mode = 2
+
+[node name="right-trigger" type="Label" parent="scroll/margin/content/navigation/margin/description/gamepad/topics"]
+layout_mode = 2
+theme = ExtResource("6_55a30")
+text = "RT"
+
+[node name="right-plus" type="Label" parent="scroll/margin/content/navigation/margin/description/gamepad/topics"]
+layout_mode = 2
+theme = ExtResource("6_55a30")
+text = "+"
+
+[node name="option-6" type="Label" parent="scroll/margin/content/navigation/margin/description/gamepad/topics"]
+layout_mode = 2
+theme = ExtResource("6_55a30")
+text = "6. LB"
+
+[node name="option-6-7" type="Label" parent="scroll/margin/content/navigation/margin/description/gamepad/topics"]
+layout_mode = 2
+theme = ExtResource("6_55a30")
+text = "/"
+
+[node name="option-7" type="Label" parent="scroll/margin/content/navigation/margin/description/gamepad/topics"]
+layout_mode = 2
+theme = ExtResource("6_55a30")
+text = "7. RB"
+
+[node name="option-7-8" type="Label" parent="scroll/margin/content/navigation/margin/description/gamepad/topics"]
+layout_mode = 2
+theme = ExtResource("6_55a30")
+text = "/"
+
+[node name="option-8" type="Label" parent="scroll/margin/content/navigation/margin/description/gamepad/topics"]
+layout_mode = 2
+theme = ExtResource("6_55a30")
+text = "8. RT"
+
+[node name="option-8-9" type="Label" parent="scroll/margin/content/navigation/margin/description/gamepad/topics"]
+layout_mode = 2
+theme = ExtResource("6_55a30")
+text = "/"
+
+[node name="option-9" type="Label" parent="scroll/margin/content/navigation/margin/description/gamepad/topics"]
+layout_mode = 2
+theme = ExtResource("6_55a30")
+text = "9. X"
+
+[node name="option-9-10" type="Label" parent="scroll/margin/content/navigation/margin/description/gamepad/topics"]
+layout_mode = 2
+theme = ExtResource("6_55a30")
+text = "/"
+
+[node name="option-10" type="Label" parent="scroll/margin/content/navigation/margin/description/gamepad/topics"]
+layout_mode = 2
+theme = ExtResource("6_55a30")
+text = "10. Y"
+
+[node name="options" type="Label" parent="scroll/margin/content/navigation/margin/description/gamepad/topics"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme = ExtResource("6_55a30")
+text = "Опции"
