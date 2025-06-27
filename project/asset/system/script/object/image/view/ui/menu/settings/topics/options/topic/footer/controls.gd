@@ -1,6 +1,6 @@
 extends TopicFooter
 
-@onready var controls: Label = $margin/controls
+@onready var controls: HBoxContainer = $margin/controls
 @onready var caption: Label = $margin/caption
 
 func set_controls(focus: bool) -> void:

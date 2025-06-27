@@ -1,0 +1,23 @@
+extends Node
+
+var keyboard: Control
+var gamepad: Control
+
+func _ready() -> void:
+	keyboard = get_node("../keyboard")
+	gamepad = get_node("../gamepad")
+
+func is_gamepad_connected() -> bool:
+	return Input.get_connected_joypads().size() > 0
+
+func _set_hint_visible(button: bool) -> void:
+	gamepad.visible = button
+	keyboard.visible = !button
+
+func set_control_hint() -> void:
+	_set_hint_visible(is_gamepad_connected())
+
+func sync_control_hint(event: InputEvent) -> void:
+	_set_hint_visible(event is InputEventJoypadButton or event is InputEventJoypadMotion)
+
+func _input(event: InputEvent) -> void: sync_control_hint(event)

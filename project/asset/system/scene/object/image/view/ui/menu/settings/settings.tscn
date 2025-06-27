@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://b4x588yxrcok3"]
+[gd_scene load_steps=59 format=3 uid="uid://b4x588yxrcok3"]
 
 [ext_resource type="Script" uid="uid://d05jnr6xe41se" path="res://asset/system/script/object/image/view/ui/menu/settings/settings.gd" id="1_apf6u"]
 [ext_resource type="Theme" uid="uid://dfyi7rrcrweqx" path="res://asset/resource/engine/internal/theme/patterns/template/menu/settings/settings.tres" id="1_vs08l"]
@@ -34,6 +34,7 @@
 [ext_resource type="Script" uid="uid://be3xefka0jpp6" path="res://asset/system/script/object/image/view/ui/menu/settings/topics/options/topic/named/options/experience/stats.gd" id="18_h1png"]
 [ext_resource type="Script" uid="uid://b04alpp5rvxa" path="res://asset/system/script/object/image/view/ui/menu/settings/topics/options/topic/footer/controls.gd" id="18_xgvxx"]
 [ext_resource type="InputEventKey" uid="uid://ch54tip20nskb" path="res://asset/resource/engine/internal/short/device/keyboard/key/alt/one.tres" id="18_ynqjn"]
+[ext_resource type="PackedScene" uid="uid://4r2vf63qf30e" path="res://asset/system/scene/object/image/view/ui/hud/detector/hints-detection.tscn" id="19_ayoyv"]
 [ext_resource type="Script" uid="uid://chw3gy3exeat5" path="res://asset/system/script/object/image/view/ui/hud/processor/pause/exit/shortcut.gd" id="19_eqfhs"]
 [ext_resource type="Script" uid="uid://bhnfok60v3ala" path="res://asset/system/script/object/image/view/ui/menu/settings/topics/tabs/caption/short.gd" id="19_fobve"]
 [ext_resource type="Script" uid="uid://6776vxi24p5o" path="res://asset/system/script/object/image/view/ui/menu/settings/options/experience/interface/fullscreen.gd" id="20_hxo5s"]
@@ -232,10 +233,21 @@ theme_override_colors/font_color = Color(0.313726, 0.313726, 0.313726, 1)
 theme_override_font_sizes/font_size = 18
 text = "Music and sound settings"
 
-[node name="controls" type="Label" parent="detector/margin/topics/content/options/game/experience/sound/content/footer/margin"]
+[node name="controls" type="HBoxContainer" parent="detector/margin/topics/content/options/game/experience/sound/content/footer/margin"]
 visible = false
 layout_mode = 2
-text = "Arrows adjust. Digits set. Enter - next. Esc - back."
+
+[node name="keyboard" type="Label" parent="detector/margin/topics/content/options/game/experience/sound/content/footer/margin/controls"]
+visible = false
+layout_mode = 2
+text = "Arrows  adjust | Digits  set | Enter  next | Esc  back"
+
+[node name="gamepad" type="Label" parent="detector/margin/topics/content/options/game/experience/sound/content/footer/margin/controls"]
+visible = false
+layout_mode = 2
+text = "Left stick  adjust | Periphery  set | A  next | B  back."
+
+[node name="detection" parent="detector/margin/topics/content/options/game/experience/sound/content/footer/margin/controls" instance=ExtResource("19_ayoyv")]
 
 [node name="experience" type="VBoxContainer" parent="detector/margin/topics/content/options/game/experience"]
 custom_minimum_size = Vector2(250, 0)
@@ -1111,10 +1123,21 @@ theme_override_colors/font_color = Color(0.313726, 0.313726, 0.313726, 1)
 theme_override_font_sizes/font_size = 18
 text = "Mouse gestures"
 
-[node name="controls" type="Label" parent="detector/margin/topics/content/options/controls/management/mouse/content/footer/margin"]
+[node name="controls" type="HBoxContainer" parent="detector/margin/topics/content/options/controls/management/mouse/content/footer/margin"]
 visible = false
 layout_mode = 2
-text = "Arrows adjust. Digits set. Home min. End max."
+
+[node name="keyboard" type="Label" parent="detector/margin/topics/content/options/controls/management/mouse/content/footer/margin/controls"]
+visible = false
+layout_mode = 2
+text = "Arrows  adjust | Digits  set | Enter  next | Esc back"
+
+[node name="gamepad" type="Label" parent="detector/margin/topics/content/options/controls/management/mouse/content/footer/margin/controls"]
+visible = false
+layout_mode = 2
+text = "Left stick  adjust | Periphery  set | A  next | B  back"
+
+[node name="detection" parent="detector/margin/topics/content/options/controls/management/mouse/content/footer/margin/controls" instance=ExtResource("19_ayoyv")]
 
 [node name="keyboard" type="VBoxContainer" parent="detector/margin/topics/content/options/controls/management"]
 layout_mode = 2

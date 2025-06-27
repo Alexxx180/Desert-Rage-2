@@ -18,7 +18,7 @@ func _set_axis_pressed(timing: Node, active: Vector2i, base: int) -> void:
 	if is_based:
 		timing.set_focus(base + 3)
 	else:
-		timing.mods.set_bit(active, true)
+		timing.mods.set_bit(active.x, true)
 		timing.start_timers()
 	timing.mods.set_bit(5, !is_based)
 
