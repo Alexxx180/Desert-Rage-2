@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cel3u88abrgv3"]
+[gd_scene load_steps=17 format=3 uid="uid://cel3u88abrgv3"]
 
 [ext_resource type="Theme" uid="uid://p2br8b6ea3n6" path="res://asset/resource/engine/internal/theme/patterns/template/menu/hud/pause/pause.tres" id="1_klae1"]
 [ext_resource type="Script" uid="uid://81xdi4771u0a" path="res://asset/system/script/object/image/view/ui/hud/detector/game/game.gd" id="1_o71r6"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://dommedweskvsj" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/margin.gd" id="2_m0xgs"]
 [ext_resource type="PackedScene" uid="uid://b01p37el432af" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/hints/hints.tscn" id="2_mf7wa"]
 [ext_resource type="FontFile" uid="uid://b37js8y80ak1k" path="res://asset/resource/font/NotoColorEmoji-Regular.ttf" id="4_42m6k"]
+[ext_resource type="Script" uid="uid://e0hw6usabyvx" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/menu/horizontal.gd" id="4_j1gc2"]
 [ext_resource type="PackedScene" uid="uid://bcldwsqs27to7" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/hints/analyze/analyze.tscn" id="5_m2hjb"]
 [ext_resource type="PackedScene" uid="uid://cbd4idujs0m3k" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/dialog/dialog.tscn" id="5_x67kx"]
 [ext_resource type="Shortcut" uid="uid://b2haaq41erm0s" path="res://asset/resource/engine/internal/short/cut/game/analyze.tres" id="6_ijgny"]
@@ -52,11 +53,15 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 split_offset = 2000
+script = ExtResource("4_j1gc2")
+node_paths = Array[String](["stats/inventory/topic/scroll/margin/flow/status", "stats/inventory/ability/topic/scroll/margin/flow/perks"])
 
 [node name="stats" type="HSplitContainer" parent="menu"]
 layout_mode = 2
 size_flags_horizontal = 3
 split_offset = -2000
+script = ExtResource("4_j1gc2")
+node_paths = Array[String](["inventory/topic/scroll/margin/flow/items"])
 
 [node name="topic" parent="menu/stats" instance=ExtResource("12_jdj2p")]
 layout_mode = 2
@@ -199,3 +204,6 @@ layout_mode = 2
 
 [node name="priorities" parent="menu" instance=ExtResource("13_iexbr")]
 layout_mode = 2
+
+[connection signal="drag_ended" from="menu" to="menu" method="on_drag_end"]
+[connection signal="drag_ended" from="menu/stats" to="menu/stats" method="on_drag_end"]
