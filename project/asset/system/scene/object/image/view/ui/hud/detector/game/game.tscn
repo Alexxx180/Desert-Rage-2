@@ -44,254 +44,67 @@ offset_bottom = 75.0
 grow_horizontal = 2
 size_flags_vertical = 0
 
-[node name="menu" type="MarginContainer" parent="."]
+[node name="menu" type="HSplitContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
-
-[node name="hud" type="VBoxContainer" parent="menu"]
-visible = false
-layout_mode = 2
-
-[node name="inventory" type="VBoxContainer" parent="menu/hud"]
-layout_mode = 2
-
-[node name="options" type="HBoxContainer" parent="menu/hud/inventory"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="menu" type="Button" parent="menu/hud/inventory/options"]
-custom_minimum_size = Vector2(60, 60)
-layout_mode = 2
-
-[node name="content" type="MarginContainer" parent="menu/hud/inventory/options/menu"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 0
-
-[node name="caption" type="Label" parent="menu/hud/inventory/options/menu/content"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 36
-text = "="
-
-[node name="hotkey" type="MarginContainer" parent="menu/hud/inventory/options/menu"]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -14.0
-offset_top = -23.0
-grow_horizontal = 0
-grow_vertical = 0
-theme_override_constants/margin_left = 0
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 4
-theme_override_constants/margin_bottom = 0
-
-[node name="caption" type="Label" parent="menu/hud/inventory/options/menu/hotkey"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 8
-theme_override_colors/font_color = Color(0.588235, 0.588235, 0.588235, 1)
-theme_override_font_sizes/font_size = 12
-text = "Alt"
-
-[node name="tab" type="Control" parent="menu/hud/inventory/options"]
-custom_minimum_size = Vector2(0, 25)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 0
-
-[node name="ability" type="Button" parent="menu/hud/inventory/options"]
-custom_minimum_size = Vector2(60, 60)
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 0
-
-[node name="content" type="MarginContainer" parent="menu/hud/inventory/options/ability"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -22.5
-offset_top = -63.0
-offset_right = 22.5
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_constants/margin_left = 17
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 5
-
-[node name="caption" type="Label" parent="menu/hud/inventory/options/ability/content"]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_fonts/font = ExtResource("4_42m6k")
-theme_override_font_sizes/font_size = 36
-text = "🔥"
-
-[node name="hotkey" type="MarginContainer" parent="menu/hud/inventory/options/ability"]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -23.0
-offset_right = 14.0
-grow_vertical = 0
-theme_override_constants/margin_left = 4
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 0
-
-[node name="caption" type="Label" parent="menu/hud/inventory/options/ability/hotkey"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 8
-theme_override_colors/font_color = Color(0.588235, 0.588235, 0.588235, 1)
-theme_override_font_sizes/font_size = 12
-text = "Y"
-
-[node name="metrics" type="HBoxContainer" parent="menu/hud"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="stats" type="HBoxContainer" parent="menu/hud/metrics"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="content" type="VBoxContainer" parent="menu/hud/metrics/stats"]
-visible = false
-layout_mode = 2
-
-[node name="tab" type="Control" parent="menu/hud/metrics/stats"]
-custom_minimum_size = Vector2(25, 0)
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="books" type="VBoxContainer" parent="menu/hud/metrics/stats"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.2
-
-[node name="priority" type="HBoxContainer" parent="menu/hud/metrics"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="content" type="VBoxContainer" parent="menu/hud/metrics/priority"]
-layout_mode = 2
-
-[node name="tab" type="Control" parent="menu/hud/metrics/priority"]
-custom_minimum_size = Vector2(20, 0)
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="ability" type="VBoxContainer" parent="menu/hud"]
-layout_mode = 2
-
-[node name="content" type="HFlowContainer" parent="menu/hud/ability"]
-visible = false
-layout_mode = 2
-
-[node name="options" type="HBoxContainer" parent="menu/hud/ability"]
-layout_mode = 2
-size_flags_vertical = 3
-script = ExtResource("2_m0xgs")
-
-[node name="pause" parent="menu/hud/ability/options" instance=ExtResource("1_p1rgr")]
-layout_mode = 2
-
-[node name="tab" type="Control" parent="menu/hud/ability/options"]
-custom_minimum_size = Vector2(0, 25)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 8
-
-[node name="help" parent="menu/hud/ability/options" instance=ExtResource("5_m2hjb")]
-layout_mode = 2
-shortcut = ExtResource("6_ijgny")
-
-[node name="hide" parent="menu/hud" instance=ExtResource("7_koglg")]
-
-[node name="priorities" type="HSplitContainer" parent="menu"]
-layout_mode = 2
 split_offset = 2000
 
-[node name="stats" type="HSplitContainer" parent="menu/priorities"]
+[node name="stats" type="HSplitContainer" parent="menu"]
 layout_mode = 2
 size_flags_horizontal = 3
 split_offset = -2000
 
-[node name="topic" parent="menu/priorities/stats" instance=ExtResource("12_jdj2p")]
+[node name="topic" parent="menu/stats" instance=ExtResource("12_jdj2p")]
 layout_mode = 2
 
-[node name="inventory" type="VSplitContainer" parent="menu/priorities/stats"]
+[node name="inventory" type="VSplitContainer" parent="menu/stats"]
 layout_mode = 2
 size_flags_vertical = 3
 split_offset = -2000
 
-[node name="topic" parent="menu/priorities/stats/inventory" instance=ExtResource("11_1y8ov")]
+[node name="topic" parent="menu/stats/inventory" instance=ExtResource("11_1y8ov")]
 layout_mode = 2
 
-[node name="ability" type="VSplitContainer" parent="menu/priorities/stats/inventory"]
+[node name="ability" type="VSplitContainer" parent="menu/stats/inventory"]
 layout_mode = 2
 size_flags_vertical = 3
 split_offset = 2000
 
-[node name="controls" type="VBoxContainer" parent="menu/priorities/stats/inventory/ability"]
+[node name="controls" type="VBoxContainer" parent="menu/stats/inventory/ability"]
 layout_mode = 2
 
-[node name="hints" type="HBoxContainer" parent="menu/priorities/stats/inventory/ability/controls"]
+[node name="hints" type="HBoxContainer" parent="menu/stats/inventory/ability/controls"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="control" type="Control" parent="menu/priorities/stats/inventory/ability/controls/hints"]
+[node name="control" type="Control" parent="menu/stats/inventory/ability/controls/hints"]
+layout_mode = 2
+
+[node name="scroll" type="ScrollContainer" parent="menu/stats/inventory/ability/controls/hints"]
 layout_mode = 2
 size_flags_horizontal = 3
-
-[node name="scroll" type="ScrollContainer" parent="menu/priorities/stats/inventory/ability/controls/hints"]
-layout_mode = 2
 size_flags_vertical = 3
 vertical_scroll_mode = 0
 
-[node name="hints" parent="menu/priorities/stats/inventory/ability/controls/hints/scroll" instance=ExtResource("2_mf7wa")]
+[node name="hints" parent="menu/stats/inventory/ability/controls/hints/scroll" instance=ExtResource("2_mf7wa")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.2
 
-[node name="controls" type="HFlowContainer" parent="menu/priorities/stats/inventory/ability/controls"]
+[node name="topic" type="HFlowContainer" parent="menu/stats/inventory/ability/controls"]
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
+script = ExtResource("2_m0xgs")
 
-[node name="pause" parent="menu/priorities/stats/inventory/ability/controls/controls" instance=ExtResource("1_p1rgr")]
+[node name="pause" parent="menu/stats/inventory/ability/controls/topic" instance=ExtResource("1_p1rgr")]
 layout_mode = 2
 
-[node name="ability" type="Button" parent="menu/priorities/stats/inventory/ability/controls/controls"]
+[node name="ability" type="Button" parent="menu/stats/inventory/ability/controls/topic"]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 size_flags_horizontal = 2
@@ -301,7 +114,7 @@ theme_override_font_sizes/font_size = 36
 theme_override_styles/normal = SubResource("StyleBoxFlat_joidv")
 text = "🔥"
 
-[node name="hotkey" type="MarginContainer" parent="menu/priorities/stats/inventory/ability/controls/controls/ability"]
+[node name="hotkey" type="MarginContainer" parent="menu/stats/inventory/ability/controls/topic/ability"]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -314,7 +127,7 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 4
 
-[node name="caption" type="Label" parent="menu/priorities/stats/inventory/ability/controls/controls/ability/hotkey"]
+[node name="caption" type="Label" parent="menu/stats/inventory/ability/controls/topic/ability/hotkey"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
@@ -322,13 +135,13 @@ theme_override_colors/font_color = Color(0.588235, 0.588235, 0.588235, 1)
 theme_override_font_sizes/font_size = 12
 text = "Y"
 
-[node name="menu" type="Button" parent="menu/priorities/stats/inventory/ability/controls/controls"]
+[node name="menu" type="Button" parent="menu/stats/inventory/ability/controls/topic"]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
-[node name="content" type="MarginContainer" parent="menu/priorities/stats/inventory/ability/controls/controls/menu"]
+[node name="content" type="MarginContainer" parent="menu/stats/inventory/ability/controls/topic/menu"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -346,12 +159,12 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 
-[node name="caption" type="Label" parent="menu/priorities/stats/inventory/ability/controls/controls/menu/content"]
+[node name="caption" type="Label" parent="menu/stats/inventory/ability/controls/topic/menu/content"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 36
 text = "="
 
-[node name="hotkey" type="MarginContainer" parent="menu/priorities/stats/inventory/ability/controls/controls/menu"]
+[node name="hotkey" type="MarginContainer" parent="menu/stats/inventory/ability/controls/topic/menu"]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -367,7 +180,7 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 0
 
-[node name="caption" type="Label" parent="menu/priorities/stats/inventory/ability/controls/controls/menu/hotkey"]
+[node name="caption" type="Label" parent="menu/stats/inventory/ability/controls/topic/menu/hotkey"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
@@ -375,19 +188,14 @@ theme_override_colors/font_color = Color(0.588235, 0.588235, 0.588235, 1)
 theme_override_font_sizes/font_size = 12
 text = "Alt"
 
-[node name="help" parent="menu/priorities/stats/inventory/ability/controls/controls" instance=ExtResource("5_m2hjb")]
+[node name="help" parent="menu/stats/inventory/ability/controls/topic" instance=ExtResource("5_m2hjb")]
 layout_mode = 2
 shortcut = ExtResource("6_ijgny")
 
-[node name="hide" parent="menu/priorities/stats/inventory/ability/controls/controls" instance=ExtResource("7_koglg")]
+[node name="hide" parent="menu/stats/inventory/ability/controls/topic" instance=ExtResource("7_koglg")]
 
-[node name="topic" parent="menu/priorities/stats/inventory/ability" instance=ExtResource("14_joidv")]
+[node name="topic" parent="menu/stats/inventory/ability" instance=ExtResource("14_joidv")]
 layout_mode = 2
 
-[node name="topic" parent="menu/priorities" instance=ExtResource("13_iexbr")]
+[node name="priorities" parent="menu" instance=ExtResource("13_iexbr")]
 layout_mode = 2
-
-[node name="transitions" type="AnimationTree" parent="menu"]
-
-[node name="player" type="AnimationPlayer" parent="menu/transitions"]
-root_node = NodePath("../..")

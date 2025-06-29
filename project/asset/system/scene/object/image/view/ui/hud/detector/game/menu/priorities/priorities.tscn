@@ -108,10 +108,32 @@ size_flags_horizontal = 8
 theme_override_font_sizes/font_size = 14
 text = "Атлант"
 
-[node name="power" type="HBoxContainer" parent="scroll/margin/stack/priority"]
+[node name="determination" type="HBoxContainer" parent="scroll/margin/stack/priority"]
 layout_mode = 2
 
-[node name="caption" type="Label" parent="scroll/margin/stack/priority/power"]
+[node name="number" type="HBoxContainer" parent="scroll/margin/stack/priority/determination"]
+layout_mode = 2
+
+[node name="selected" type="Label" parent="scroll/margin/stack/priority/determination/number"]
+custom_minimum_size = Vector2(35, 0)
+layout_mode = 2
+size_flags_stretch_ratio = 2.0
+theme = ExtResource("2_xvq4b")
+theme_override_colors/font_color = Color(0.784314, 0.784314, 0.784314, 1)
+text = "10"
+horizontal_alignment = 2
+
+[node name="normal" type="Label" parent="scroll/margin/stack/priority/determination/number"]
+visible = false
+custom_minimum_size = Vector2(35, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_stretch_ratio = 0.5
+theme = ExtResource("2_xvq4b")
+text = "10"
+horizontal_alignment = 2
+
+[node name="caption" type="Label" parent="scroll/margin/stack/priority/determination"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
@@ -119,35 +141,21 @@ theme = ExtResource("2_xvq4b")
 theme_override_colors/font_color = Color(0.783523, 0.783523, 0.783523, 1)
 text = "📈 Целеустремленность"
 
-[node name="number" type="Label" parent="scroll/margin/stack/priority/power"]
-visible = false
+[node name="progress" type="HBoxContainer" parent="scroll/margin/stack/priority/determination"]
 layout_mode = 2
-size_flags_horizontal = 10
-size_flags_stretch_ratio = 0.5
-theme = ExtResource("2_xvq4b")
-text = "10"
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 6.0
 
-[node name="selection" type="HBoxContainer" parent="scroll/margin/stack/priority"]
-layout_mode = 2
-
-[node name="caption" type="Label" parent="scroll/margin/stack/priority/selection"]
-layout_mode = 2
-size_flags_stretch_ratio = 2.0
-theme = ExtResource("2_xvq4b")
-theme_override_colors/font_color = Color(0.784314, 0.784314, 0.784314, 1)
-text = "10"
-
-[node name="margin" type="MarginContainer" parent="scroll/margin/stack/priority/selection"]
+[node name="margin" type="MarginContainer" parent="scroll/margin/stack/priority/determination/progress"]
 custom_minimum_size = Vector2(0, 15)
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 4.0
 theme_override_constants/margin_left = 0
 theme_override_constants/margin_top = 6
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 4
 
-[node name="progress" type="ProgressBar" parent="scroll/margin/stack/priority/selection/margin"]
+[node name="bar" type="ProgressBar" parent="scroll/margin/stack/priority/determination/progress/margin"]
 custom_minimum_size = Vector2(0, 15)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -158,60 +166,245 @@ step = 1.0
 value = 50.0
 show_percentage = false
 
-[node name="number" type="Label" parent="scroll/margin/stack/priority/selection"]
+[node name="next" type="Label" parent="scroll/margin/stack/priority/determination/progress"]
+custom_minimum_size = Vector2(35, 0)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_stretch_ratio = 0.5
 theme = ExtResource("2_xvq4b")
 text = "11"
+horizontal_alignment = 2
 
-[node name="influence" type="HBoxContainer" parent="scroll/margin/stack/priority"]
+[node name="level-up" type="HBoxContainer" parent="scroll/margin/stack/priority/determination"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="caption" type="Label" parent="scroll/margin/stack/priority/determination/level-up"]
+layout_mode = 2
+theme = ExtResource("2_xvq4b")
+text = "Новый уровень"
+
+[node name="separator" type="VSeparator" parent="scroll/margin/stack/priority/determination/level-up"]
 layout_mode = 2
 
-[node name="caption" type="Label" parent="scroll/margin/stack/priority/influence"]
+[node name="power" type="HBoxContainer" parent="scroll/margin/stack/priority/determination/level-up"]
+layout_mode = 2
+
+[node name="caption" type="Label" parent="scroll/margin/stack/priority/determination/level-up/power"]
+layout_mode = 2
+theme = ExtResource("2_xvq4b")
+text = "Мощь"
+
+[node name="plus" type="Label" parent="scroll/margin/stack/priority/determination/level-up/power"]
+layout_mode = 2
+theme = ExtResource("2_xvq4b")
+text = "+"
+
+[node name="number" type="Label" parent="scroll/margin/stack/priority/determination/level-up/power"]
+layout_mode = 2
+theme = ExtResource("2_xvq4b")
+text = "2"
+
+[node name="influence" type="HBoxContainer" parent="scroll/margin/stack/priority/determination/level-up"]
+layout_mode = 2
+
+[node name="caption" type="Label" parent="scroll/margin/stack/priority/determination/level-up/influence"]
+layout_mode = 2
+theme = ExtResource("2_xvq4b")
+text = "Влияние"
+
+[node name="plus" type="Label" parent="scroll/margin/stack/priority/determination/level-up/influence"]
+layout_mode = 2
+theme = ExtResource("2_xvq4b")
+text = "+"
+
+[node name="number" type="Label" parent="scroll/margin/stack/priority/determination/level-up/influence"]
+layout_mode = 2
+theme = ExtResource("2_xvq4b")
+text = "1"
+
+[node name="self-control" type="HBoxContainer" parent="scroll/margin/stack/priority"]
+layout_mode = 2
+
+[node name="number" type="Label" parent="scroll/margin/stack/priority/self-control"]
+custom_minimum_size = Vector2(35, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_stretch_ratio = 0.5
+theme = ExtResource("2_xvq4b")
+text = "5"
+horizontal_alignment = 2
+
+[node name="caption" type="Label" parent="scroll/margin/stack/priority/self-control"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
 theme = ExtResource("2_xvq4b")
 text = "⚖️ Самообладание"
 
-[node name="number" type="Label" parent="scroll/margin/stack/priority/influence"]
+[node name="progress" type="HBoxContainer" parent="scroll/margin/stack/priority/self-control"]
+visible = false
 layout_mode = 2
-size_flags_horizontal = 10
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 6.0
+
+[node name="margin" type="MarginContainer" parent="scroll/margin/stack/priority/self-control/progress"]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 4
+
+[node name="bar" type="ProgressBar" parent="scroll/margin/stack/priority/self-control/progress/margin"]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+size_flags_stretch_ratio = 4.0
+max_value = 90.0
+step = 1.0
+value = 50.0
+show_percentage = false
+
+[node name="next" type="Label" parent="scroll/margin/stack/priority/self-control/progress"]
+custom_minimum_size = Vector2(35, 0)
+layout_mode = 2
+size_flags_horizontal = 8
 size_flags_stretch_ratio = 0.5
 theme = ExtResource("2_xvq4b")
-text = "5"
+text = "6"
+horizontal_alignment = 2
 
-[node name="vitality" type="HBoxContainer" parent="scroll/margin/stack/priority"]
+[node name="level-up" type="HBoxContainer" parent="scroll/margin/stack/priority/self-control"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="caption" type="Label" parent="scroll/margin/stack/priority/self-control/level-up"]
+layout_mode = 2
+theme = ExtResource("2_xvq4b")
+text = "Новый уровень:"
+
+[node name="influence" type="HBoxContainer" parent="scroll/margin/stack/priority/self-control/level-up"]
 layout_mode = 2
 
-[node name="caption" type="Label" parent="scroll/margin/stack/priority/vitality"]
+[node name="caption" type="Label" parent="scroll/margin/stack/priority/self-control/level-up/influence"]
+layout_mode = 2
+theme = ExtResource("2_xvq4b")
+text = "Влияние"
+
+[node name="plus" type="Label" parent="scroll/margin/stack/priority/self-control/level-up/influence"]
+layout_mode = 2
+theme = ExtResource("2_xvq4b")
+text = "+"
+
+[node name="number" type="Label" parent="scroll/margin/stack/priority/self-control/level-up/influence"]
+layout_mode = 2
+theme = ExtResource("2_xvq4b")
+text = "1"
+
+[node name="reaction" type="HBoxContainer" parent="scroll/margin/stack/priority/self-control/level-up"]
+layout_mode = 2
+
+[node name="caption" type="Label" parent="scroll/margin/stack/priority/self-control/level-up/reaction"]
+layout_mode = 2
+theme = ExtResource("2_xvq4b")
+text = "Реакция"
+
+[node name="plus" type="Label" parent="scroll/margin/stack/priority/self-control/level-up/reaction"]
+layout_mode = 2
+theme = ExtResource("2_xvq4b")
+text = "+"
+
+[node name="number" type="Label" parent="scroll/margin/stack/priority/self-control/level-up/reaction"]
+layout_mode = 2
+theme = ExtResource("2_xvq4b")
+text = "1"
+
+[node name="tenacity" type="HBoxContainer" parent="scroll/margin/stack/priority"]
+layout_mode = 2
+
+[node name="number" type="Label" parent="scroll/margin/stack/priority/tenacity"]
+custom_minimum_size = Vector2(35, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_stretch_ratio = 0.5
+theme = ExtResource("2_xvq4b")
+text = "2"
+horizontal_alignment = 2
+
+[node name="caption" type="Label" parent="scroll/margin/stack/priority/tenacity"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
 theme = ExtResource("2_xvq4b")
 text = "💪 Стойкость"
 
-[node name="number" type="Label" parent="scroll/margin/stack/priority/vitality"]
+[node name="level-up" type="HBoxContainer" parent="scroll/margin/stack/priority/tenacity"]
+visible = false
 layout_mode = 2
-size_flags_horizontal = 10
-size_flags_stretch_ratio = 0.5
+theme_override_constants/separation = 20
+
+[node name="caption" type="Label" parent="scroll/margin/stack/priority/tenacity/level-up"]
+layout_mode = 2
+theme = ExtResource("2_xvq4b")
+text = "Новый уровень:"
+
+[node name="influence" type="HBoxContainer" parent="scroll/margin/stack/priority/tenacity/level-up"]
+layout_mode = 2
+
+[node name="caption" type="Label" parent="scroll/margin/stack/priority/tenacity/level-up/influence"]
+layout_mode = 2
+theme = ExtResource("2_xvq4b")
+text = "Живучесть"
+
+[node name="plus" type="Label" parent="scroll/margin/stack/priority/tenacity/level-up/influence"]
+layout_mode = 2
+theme = ExtResource("2_xvq4b")
+text = "+"
+
+[node name="number" type="Label" parent="scroll/margin/stack/priority/tenacity/level-up/influence"]
+layout_mode = 2
 theme = ExtResource("2_xvq4b")
 text = "2"
 
-[node name="passive" type="VBoxContainer" parent="scroll/margin/stack/priority"]
-visible = false
+[node name="reaction" type="HBoxContainer" parent="scroll/margin/stack/priority/tenacity/level-up"]
 layout_mode = 2
+
+[node name="caption" type="Label" parent="scroll/margin/stack/priority/tenacity/level-up/reaction"]
+layout_mode = 2
+theme = ExtResource("2_xvq4b")
+text = "Реакция"
+
+[node name="plus" type="Label" parent="scroll/margin/stack/priority/tenacity/level-up/reaction"]
+layout_mode = 2
+theme = ExtResource("2_xvq4b")
+text = "+"
+
+[node name="number" type="Label" parent="scroll/margin/stack/priority/tenacity/level-up/reaction"]
+layout_mode = 2
+theme = ExtResource("2_xvq4b")
+text = "1"
+
+[node name="passive" type="VBoxContainer" parent="scroll/margin/stack/priority"]
+layout_mode = 2
+size_flags_horizontal = 8
 size_flags_vertical = 3
 
-[node name="determination" type="HFlowContainer" parent="scroll/margin/stack/priority/passive"]
+[node name="determination" type="HBoxContainer" parent="scroll/margin/stack/priority/passive"]
 layout_mode = 2
-theme_override_constants/h_separation = 15
+theme_override_constants/separation = 20
 
 [node name="caption" type="Label" parent="scroll/margin/stack/priority/passive/determination"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.737255, 0.737255, 0.737255, 1)
 text = "Прирост"
+
+[node name="separator" type="VSeparator" parent="scroll/margin/stack/priority/passive/determination"]
+layout_mode = 2
 
 [node name="power" type="HBoxContainer" parent="scroll/margin/stack/priority/passive/determination"]
 layout_mode = 2
@@ -249,15 +442,18 @@ layout_mode = 2
 theme = ExtResource("2_xvq4b")
 text = "1"
 
-[node name="self-control" type="HFlowContainer" parent="scroll/margin/stack/priority/passive"]
+[node name="self-control" type="HBoxContainer" parent="scroll/margin/stack/priority/passive"]
 visible = false
 layout_mode = 2
-theme_override_constants/h_separation = 15
+theme_override_constants/separation = 20
 
 [node name="caption" type="Label" parent="scroll/margin/stack/priority/passive/self-control"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.737255, 0.737255, 0.737255, 1)
 text = "Прирост"
+
+[node name="separator" type="VSeparator" parent="scroll/margin/stack/priority/passive/self-control"]
+layout_mode = 2
 
 [node name="influence" type="HBoxContainer" parent="scroll/margin/stack/priority/passive/self-control"]
 layout_mode = 2
@@ -295,15 +491,19 @@ layout_mode = 2
 theme = ExtResource("2_xvq4b")
 text = "1"
 
-[node name="tenacity" type="HFlowContainer" parent="scroll/margin/stack/priority/passive"]
+[node name="tenacity" type="HBoxContainer" parent="scroll/margin/stack/priority/passive"]
 visible = false
 layout_mode = 2
-theme_override_constants/h_separation = 15
+theme_override_constants/separation = 20
 
 [node name="caption" type="Label" parent="scroll/margin/stack/priority/passive/tenacity"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.737255, 0.737255, 0.737255, 1)
+theme_override_font_sizes/font_size = 18
 text = "Прирост"
+
+[node name="separator" type="VSeparator" parent="scroll/margin/stack/priority/passive/tenacity"]
+layout_mode = 2
 
 [node name="influence" type="HBoxContainer" parent="scroll/margin/stack/priority/passive/tenacity"]
 layout_mode = 2
