@@ -1,4 +1,4 @@
-extends HSplitContainer
+extends VSplitContainer
 
 @export var reserve: int = 6
 
@@ -18,7 +18,7 @@ func _ready() -> void:
 	operation = bigger if direction < 0.0 else lesser
 
 func get_proportion() -> float:
-	return get_window().size.x * direction
+	return get_window().size.y * direction
 
 func on_drag_end() -> void:
 	# print("CURRENT: ", split_offset + reserve, "WIND: ", get_proportion())
