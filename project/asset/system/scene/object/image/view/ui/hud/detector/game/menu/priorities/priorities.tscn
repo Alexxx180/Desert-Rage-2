@@ -1,0 +1,345 @@
+[gd_scene load_steps=6 format=3 uid="uid://sloxw12np1ch"]
+
+[ext_resource type="PackedScene" uid="uid://bky5mu10x2da3" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/menu/inventory/status.tscn" id="1_2h7wb"]
+[ext_resource type="StyleBox" uid="uid://cvfnqancophme" path="res://asset/resource/engine/internal/theme/style/solid-color-panel.tres" id="1_xvq4b"]
+[ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://asset/resource/engine/internal/theme/patterns/template/menu/settings/topic/footer.tres" id="2_xvq4b"]
+[ext_resource type="PackedScene" uid="uid://l7thqkrsol4m" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/menu/priorities/perks.tscn" id="3_2h7wb"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_joidv"]
+bg_color = Color(0.231373, 0.231373, 0.231373, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.0183228, 0.240907, 0.125767, 1)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+
+[node name="panel" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("1_xvq4b")
+
+[node name="scroll" type="ScrollContainer" parent="."]
+layout_mode = 2
+
+[node name="margin" type="MarginContainer" parent="scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="stack" type="VBoxContainer" parent="scroll/margin"]
+layout_mode = 2
+
+[node name="status" parent="scroll/margin/stack" instance=ExtResource("1_2h7wb")]
+layout_mode = 2
+
+[node name="priority" type="VBoxContainer" parent="scroll/margin/stack"]
+layout_mode = 2
+
+[node name="title" type="HBoxContainer" parent="scroll/margin/stack/priority"]
+layout_mode = 2
+
+[node name="caption" type="Label" parent="scroll/margin/stack/priority/title"]
+layout_mode = 2
+text = "Волевые качества"
+
+[node name="space" type="Control" parent="scroll/margin/stack/priority/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="rank" type="Label" parent="scroll/margin/stack/priority/title"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.258824, 0.258824, 0.258824, 1)
+text = "Ранг"
+
+[node name="status" type="Panel" parent="scroll/margin/stack/priority/title"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_joidv")
+
+[node name="center" type="MarginContainer" parent="scroll/margin/stack/priority/title/status"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 1
+
+[node name="letter" type="Label" parent="scroll/margin/stack/priority/title/status/center"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "А"
+horizontal_alignment = 1
+
+[node name="rank-summary" type="HFlowContainer" parent="scroll/margin/stack/priority"]
+visible = false
+layout_mode = 2
+theme_override_constants/h_separation = 15
+
+[node name="description" type="Label" parent="scroll/margin/stack/priority/rank-summary"]
+layout_mode = 2
+size_flags_horizontal = 10
+theme = ExtResource("2_xvq4b")
+theme_override_font_sizes/font_size = 14
+text = "Способен одолеть любого на уровне"
+
+[node name="separator" type="VSeparator" parent="scroll/margin/stack/priority/rank-summary"]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="caption" type="Label" parent="scroll/margin/stack/priority/rank-summary"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_font_sizes/font_size = 14
+text = "Атлант"
+
+[node name="power" type="HBoxContainer" parent="scroll/margin/stack/priority"]
+layout_mode = 2
+
+[node name="caption" type="Label" parent="scroll/margin/stack/priority/power"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+theme = ExtResource("2_xvq4b")
+theme_override_colors/font_color = Color(0.783523, 0.783523, 0.783523, 1)
+text = "📈 Целеустремленность"
+
+[node name="number" type="Label" parent="scroll/margin/stack/priority/power"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_stretch_ratio = 0.5
+theme = ExtResource("2_xvq4b")
+text = "10"
+
+[node name="selection" type="HBoxContainer" parent="scroll/margin/stack/priority"]
+layout_mode = 2
+
+[node name="caption" type="Label" parent="scroll/margin/stack/priority/selection"]
+layout_mode = 2
+size_flags_stretch_ratio = 2.0
+theme = ExtResource("2_xvq4b")
+theme_override_colors/font_color = Color(0.784314, 0.784314, 0.784314, 1)
+text = "10"
+
+[node name="margin" type="MarginContainer" parent="scroll/margin/stack/priority/selection"]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 4.0
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 4
+
+[node name="progress" type="ProgressBar" parent="scroll/margin/stack/priority/selection/margin"]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+size_flags_stretch_ratio = 4.0
+max_value = 90.0
+step = 1.0
+value = 50.0
+show_percentage = false
+
+[node name="number" type="Label" parent="scroll/margin/stack/priority/selection"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_stretch_ratio = 0.5
+theme = ExtResource("2_xvq4b")
+text = "11"
+
+[node name="influence" type="HBoxContainer" parent="scroll/margin/stack/priority"]
+layout_mode = 2
+
+[node name="caption" type="Label" parent="scroll/margin/stack/priority/influence"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+theme = ExtResource("2_xvq4b")
+text = "⚖️ Самообладание"
+
+[node name="number" type="Label" parent="scroll/margin/stack/priority/influence"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_stretch_ratio = 0.5
+theme = ExtResource("2_xvq4b")
+text = "5"
+
+[node name="vitality" type="HBoxContainer" parent="scroll/margin/stack/priority"]
+layout_mode = 2
+
+[node name="caption" type="Label" parent="scroll/margin/stack/priority/vitality"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+theme = ExtResource("2_xvq4b")
+text = "💪 Стойкость"
+
+[node name="number" type="Label" parent="scroll/margin/stack/priority/vitality"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_stretch_ratio = 0.5
+theme = ExtResource("2_xvq4b")
+text = "2"
+
+[node name="passive" type="VBoxContainer" parent="scroll/margin/stack/priority"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="determination" type="HFlowContainer" parent="scroll/margin/stack/priority/passive"]
+layout_mode = 2
+theme_override_constants/h_separation = 15
+
+[node name="caption" type="Label" parent="scroll/margin/stack/priority/passive/determination"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.737255, 0.737255, 0.737255, 1)
+text = "Прирост"
+
+[node name="power" type="HBoxContainer" parent="scroll/margin/stack/priority/passive/determination"]
+layout_mode = 2
+
+[node name="caption" type="Label" parent="scroll/margin/stack/priority/passive/determination/power"]
+layout_mode = 2
+theme = ExtResource("2_xvq4b")
+text = "Мощь"
+
+[node name="plus" type="Label" parent="scroll/margin/stack/priority/passive/determination/power"]
+layout_mode = 2
+theme = ExtResource("2_xvq4b")
+text = "+"
+
+[node name="number" type="Label" parent="scroll/margin/stack/priority/passive/determination/power"]
+layout_mode = 2
+theme = ExtResource("2_xvq4b")
+text = "2"
+
+[node name="influence" type="HBoxContainer" parent="scroll/margin/stack/priority/passive/determination"]
+layout_mode = 2
+
+[node name="caption" type="Label" parent="scroll/margin/stack/priority/passive/determination/influence"]
+layout_mode = 2
+theme = ExtResource("2_xvq4b")
+text = "Влияние"
+
+[node name="plus" type="Label" parent="scroll/margin/stack/priority/passive/determination/influence"]
+layout_mode = 2
+theme = ExtResource("2_xvq4b")
+text = "+"
+
+[node name="number" type="Label" parent="scroll/margin/stack/priority/passive/determination/influence"]
+layout_mode = 2
+theme = ExtResource("2_xvq4b")
+text = "1"
+
+[node name="self-control" type="HFlowContainer" parent="scroll/margin/stack/priority/passive"]
+visible = false
+layout_mode = 2
+theme_override_constants/h_separation = 15
+
+[node name="caption" type="Label" parent="scroll/margin/stack/priority/passive/self-control"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.737255, 0.737255, 0.737255, 1)
+text = "Прирост"
+
+[node name="influence" type="HBoxContainer" parent="scroll/margin/stack/priority/passive/self-control"]
+layout_mode = 2
+
+[node name="caption" type="Label" parent="scroll/margin/stack/priority/passive/self-control/influence"]
+layout_mode = 2
+theme = ExtResource("2_xvq4b")
+text = "Влияние"
+
+[node name="plus" type="Label" parent="scroll/margin/stack/priority/passive/self-control/influence"]
+layout_mode = 2
+theme = ExtResource("2_xvq4b")
+text = "+"
+
+[node name="number" type="Label" parent="scroll/margin/stack/priority/passive/self-control/influence"]
+layout_mode = 2
+theme = ExtResource("2_xvq4b")
+text = "1"
+
+[node name="reaction" type="HBoxContainer" parent="scroll/margin/stack/priority/passive/self-control"]
+layout_mode = 2
+
+[node name="caption" type="Label" parent="scroll/margin/stack/priority/passive/self-control/reaction"]
+layout_mode = 2
+theme = ExtResource("2_xvq4b")
+text = "Реакция"
+
+[node name="plus" type="Label" parent="scroll/margin/stack/priority/passive/self-control/reaction"]
+layout_mode = 2
+theme = ExtResource("2_xvq4b")
+text = "+"
+
+[node name="number" type="Label" parent="scroll/margin/stack/priority/passive/self-control/reaction"]
+layout_mode = 2
+theme = ExtResource("2_xvq4b")
+text = "1"
+
+[node name="tenacity" type="HFlowContainer" parent="scroll/margin/stack/priority/passive"]
+visible = false
+layout_mode = 2
+theme_override_constants/h_separation = 15
+
+[node name="caption" type="Label" parent="scroll/margin/stack/priority/passive/tenacity"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.737255, 0.737255, 0.737255, 1)
+text = "Прирост"
+
+[node name="influence" type="HBoxContainer" parent="scroll/margin/stack/priority/passive/tenacity"]
+layout_mode = 2
+
+[node name="caption" type="Label" parent="scroll/margin/stack/priority/passive/tenacity/influence"]
+layout_mode = 2
+theme = ExtResource("2_xvq4b")
+text = "Живучесть"
+
+[node name="plus" type="Label" parent="scroll/margin/stack/priority/passive/tenacity/influence"]
+layout_mode = 2
+theme = ExtResource("2_xvq4b")
+text = "+"
+
+[node name="number" type="Label" parent="scroll/margin/stack/priority/passive/tenacity/influence"]
+layout_mode = 2
+theme = ExtResource("2_xvq4b")
+text = "2"
+
+[node name="reaction" type="HBoxContainer" parent="scroll/margin/stack/priority/passive/tenacity"]
+layout_mode = 2
+
+[node name="caption" type="Label" parent="scroll/margin/stack/priority/passive/tenacity/reaction"]
+layout_mode = 2
+theme = ExtResource("2_xvq4b")
+text = "Реакция"
+
+[node name="plus" type="Label" parent="scroll/margin/stack/priority/passive/tenacity/reaction"]
+layout_mode = 2
+theme = ExtResource("2_xvq4b")
+text = "+"
+
+[node name="number" type="Label" parent="scroll/margin/stack/priority/passive/tenacity/reaction"]
+layout_mode = 2
+theme = ExtResource("2_xvq4b")
+text = "1"
+
+[node name="perks" parent="scroll/margin/stack" instance=ExtResource("3_2h7wb")]
+layout_mode = 2

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cel3u88abrgv3"]
+[gd_scene load_steps=16 format=3 uid="uid://cel3u88abrgv3"]
 
 [ext_resource type="Theme" uid="uid://p2br8b6ea3n6" path="res://asset/resource/engine/internal/theme/patterns/template/menu/hud/pause/pause.tres" id="1_klae1"]
 [ext_resource type="Script" uid="uid://81xdi4771u0a" path="res://asset/system/script/object/image/view/ui/hud/detector/game/game.gd" id="1_o71r6"]
@@ -10,35 +10,19 @@
 [ext_resource type="PackedScene" uid="uid://cbd4idujs0m3k" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/dialog/dialog.tscn" id="5_x67kx"]
 [ext_resource type="Shortcut" uid="uid://b2haaq41erm0s" path="res://asset/resource/engine/internal/short/cut/game/analyze.tres" id="6_ijgny"]
 [ext_resource type="PackedScene" uid="uid://d0sq1ex503flw" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/hide.tscn" id="7_koglg"]
-[ext_resource type="Theme" uid="uid://dfg873urxgnev" path="res://asset/resource/engine/internal/theme/patterns/template/text/title/title.tres" id="11_1y8ov"]
-[ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://asset/resource/engine/internal/theme/patterns/template/menu/settings/topic/footer.tres" id="12_jdj2p"]
+[ext_resource type="PackedScene" uid="uid://b1cenupqm80wx" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/menu/inventory/inventory.tscn" id="11_1y8ov"]
+[ext_resource type="PackedScene" uid="uid://c3dwvtm5ivwwp" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/menu/stats.tscn" id="12_jdj2p"]
+[ext_resource type="PackedScene" uid="uid://sloxw12np1ch" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/menu/priorities/priorities.tscn" id="13_iexbr"]
+[ext_resource type="PackedScene" uid="uid://6b0ydfrtbu38" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/menu/ability.tscn" id="14_joidv"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jdj2p"]
-bg_color = Color(0.877616, 0.877616, 0.877616, 0.196078)
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-border_color = Color(1, 1, 1, 0.196078)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ippj8"]
-bg_color = Color(0.329412, 0.690196, 0.435294, 0.392157)
-border_width_left = 4
-border_width_top = 4
-border_width_bottom = 4
-border_color = Color(1, 1, 1, 0)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1y8ov"]
-bg_color = Color(0.100247, 0.100417, 0.0962017, 1)
-border_color = Color(0.243137, 0.243137, 0.243137, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iexbr"]
-bg_color = Color(0.223529, 0.588235, 0.721569, 0.392157)
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-border_color = Color(1, 1, 1, 0)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_joidv"]
+content_margin_left = 12.0
+content_margin_top = 12.0
+bg_color = Color(0.0588235, 0.0588235, 0.0588235, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
 
 [node name="game" type="Control"]
 layout_mode = 3
@@ -77,10 +61,6 @@ visible = false
 layout_mode = 2
 
 [node name="inventory" type="VBoxContainer" parent="menu/hud"]
-layout_mode = 2
-
-[node name="content" type="HFlowContainer" parent="menu/hud/inventory"]
-visible = false
 layout_mode = 2
 
 [node name="options" type="HBoxContainer" parent="menu/hud/inventory"]
@@ -138,7 +118,7 @@ theme_override_colors/font_color = Color(0.588235, 0.588235, 0.588235, 1)
 theme_override_font_sizes/font_size = 12
 text = "Alt"
 
-[node name="tab" type="Button" parent="menu/hud/inventory/options"]
+[node name="tab" type="Control" parent="menu/hud/inventory/options"]
 custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -195,8 +175,6 @@ theme_override_colors/font_color = Color(0.588235, 0.588235, 0.588235, 1)
 theme_override_font_sizes/font_size = 12
 text = "Y"
 
-[node name="hide" parent="menu/hud/inventory/options" instance=ExtResource("7_koglg")]
-
 [node name="metrics" type="HBoxContainer" parent="menu/hud"]
 layout_mode = 2
 size_flags_vertical = 3
@@ -209,7 +187,7 @@ size_flags_vertical = 3
 visible = false
 layout_mode = 2
 
-[node name="tab" type="Button" parent="menu/hud/metrics/stats"]
+[node name="tab" type="Control" parent="menu/hud/metrics/stats"]
 custom_minimum_size = Vector2(25, 0)
 layout_mode = 2
 size_flags_vertical = 3
@@ -224,21 +202,10 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="scroll" type="ScrollContainer" parent="menu/hud/metrics/priority"]
-layout_mode = 2
-size_flags_horizontal = 3
-vertical_scroll_mode = 0
-
-[node name="hints" parent="menu/hud/metrics/priority/scroll" instance=ExtResource("2_mf7wa")]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.2
-
 [node name="content" type="VBoxContainer" parent="menu/hud/metrics/priority"]
 layout_mode = 2
 
-[node name="tab" type="Button" parent="menu/hud/metrics/priority"]
+[node name="tab" type="Control" parent="menu/hud/metrics/priority"]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 size_flags_vertical = 3
@@ -258,7 +225,7 @@ script = ExtResource("2_m0xgs")
 [node name="pause" parent="menu/hud/ability/options" instance=ExtResource("1_p1rgr")]
 layout_mode = 2
 
-[node name="tab" type="Button" parent="menu/hud/ability/options"]
+[node name="tab" type="Control" parent="menu/hud/ability/options"]
 custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -270,491 +237,155 @@ shortcut = ExtResource("6_ijgny")
 
 [node name="hide" parent="menu/hud" instance=ExtResource("7_koglg")]
 
-[node name="inventory" type="VBoxContainer" parent="menu"]
+[node name="priorities" type="HSplitContainer" parent="menu"]
 layout_mode = 2
+split_offset = 2000
 
-[node name="panel" type="PanelContainer" parent="menu/inventory"]
-layout_mode = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.3
-
-[node name="margin" type="MarginContainer" parent="menu/inventory/panel"]
-layout_mode = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
-
-[node name="flow" type="HFlowContainer" parent="menu/inventory/panel/margin"]
-layout_mode = 2
-
-[node name="items" type="GridContainer" parent="menu/inventory/panel/margin/flow"]
-custom_minimum_size = Vector2(120, 200)
+[node name="stats" type="HSplitContainer" parent="menu/priorities"]
 layout_mode = 2
 size_flags_horizontal = 3
-columns = 6
+split_offset = -2000
 
-[node name="PanelContainer" type="PanelContainer" parent="menu/inventory/panel/margin/flow/items"]
+[node name="topic" parent="menu/priorities/stats" instance=ExtResource("12_jdj2p")]
 layout_mode = 2
-size_flags_horizontal = 3
+
+[node name="inventory" type="VSplitContainer" parent="menu/priorities/stats"]
+layout_mode = 2
+size_flags_vertical = 3
+split_offset = -2000
+
+[node name="topic" parent="menu/priorities/stats/inventory" instance=ExtResource("11_1y8ov")]
+layout_mode = 2
+
+[node name="ability" type="VSplitContainer" parent="menu/priorities/stats/inventory"]
+layout_mode = 2
+size_flags_vertical = 3
+split_offset = 2000
+
+[node name="controls" type="VBoxContainer" parent="menu/priorities/stats/inventory/ability"]
+layout_mode = 2
+
+[node name="hints" type="HBoxContainer" parent="menu/priorities/stats/inventory/ability/controls"]
+layout_mode = 2
 size_flags_vertical = 3
 
-[node name="PanelContainer2" type="PanelContainer" parent="menu/inventory/panel/margin/flow/items"]
+[node name="control" type="Control" parent="menu/priorities/stats/inventory/ability/controls/hints"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 3
 
-[node name="PanelContainer3" type="PanelContainer" parent="menu/inventory/panel/margin/flow/items"]
+[node name="scroll" type="ScrollContainer" parent="menu/priorities/stats/inventory/ability/controls/hints"]
 layout_mode = 2
-size_flags_horizontal = 3
 size_flags_vertical = 3
+vertical_scroll_mode = 0
 
-[node name="PanelContainer4" type="PanelContainer" parent="menu/inventory/panel/margin/flow/items"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="PanelContainer5" type="PanelContainer" parent="menu/inventory/panel/margin/flow/items"]
+[node name="hints" parent="menu/priorities/stats/inventory/ability/controls/hints/scroll" instance=ExtResource("2_mf7wa")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+size_flags_stretch_ratio = 0.2
 
-[node name="PanelContainer6" type="PanelContainer" parent="menu/inventory/panel/margin/flow/items"]
+[node name="controls" type="HFlowContainer" parent="menu/priorities/stats/inventory/ability/controls"]
+custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
 
-[node name="PanelContainer7" type="PanelContainer" parent="menu/inventory/panel/margin/flow/items"]
+[node name="pause" parent="menu/priorities/stats/inventory/ability/controls/controls" instance=ExtResource("1_p1rgr")]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
 
-[node name="PanelContainer8" type="PanelContainer" parent="menu/inventory/panel/margin/flow/items"]
+[node name="ability" type="Button" parent="menu/priorities/stats/inventory/ability/controls/controls"]
+custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
+size_flags_horizontal = 2
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("4_42m6k")
+theme_override_font_sizes/font_size = 36
+theme_override_styles/normal = SubResource("StyleBoxFlat_joidv")
+text = "🔥"
 
-[node name="PanelContainer9" type="PanelContainer" parent="menu/inventory/panel/margin/flow/items"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="PanelContainer10" type="PanelContainer" parent="menu/inventory/panel/margin/flow/items"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="PanelContainer11" type="PanelContainer" parent="menu/inventory/panel/margin/flow/items"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="PanelContainer12" type="PanelContainer" parent="menu/inventory/panel/margin/flow/items"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="PanelContainer13" type="PanelContainer" parent="menu/inventory/panel/margin/flow/items"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="PanelContainer14" type="PanelContainer" parent="menu/inventory/panel/margin/flow/items"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="PanelContainer15" type="PanelContainer" parent="menu/inventory/panel/margin/flow/items"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="PanelContainer16" type="PanelContainer" parent="menu/inventory/panel/margin/flow/items"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="PanelContainer17" type="PanelContainer" parent="menu/inventory/panel/margin/flow/items"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="PanelContainer18" type="PanelContainer" parent="menu/inventory/panel/margin/flow/items"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="PanelContainer19" type="PanelContainer" parent="menu/inventory/panel/margin/flow/items"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="PanelContainer20" type="PanelContainer" parent="menu/inventory/panel/margin/flow/items"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="PanelContainer21" type="PanelContainer" parent="menu/inventory/panel/margin/flow/items"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="PanelContainer22" type="PanelContainer" parent="menu/inventory/panel/margin/flow/items"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="PanelContainer23" type="PanelContainer" parent="menu/inventory/panel/margin/flow/items"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="PanelContainer24" type="PanelContainer" parent="menu/inventory/panel/margin/flow/items"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="selection" type="MarginContainer" parent="menu/inventory/panel/margin/flow"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/margin_left = 20
+[node name="hotkey" type="MarginContainer" parent="menu/priorities/stats/inventory/ability/controls/controls/ability"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -14.0
+offset_bottom = 23.0
+grow_horizontal = 0
+theme_override_constants/margin_left = 0
 theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 0
-
-[node name="item" type="VBoxContainer" parent="menu/inventory/panel/margin/flow/selection"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.4
-
-[node name="caption" type="Label" parent="menu/inventory/panel/margin/flow/selection/item"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 26
-text = "Чучело"
-
-[node name="content" type="HBoxContainer" parent="menu/inventory/panel/margin/flow/selection/item"]
-layout_mode = 2
-
-[node name="preview" type="VBoxContainer" parent="menu/inventory/panel/margin/flow/selection/item/content"]
-layout_mode = 2
-
-[node name="image" type="Panel" parent="menu/inventory/panel/margin/flow/selection/item/content/preview"]
-custom_minimum_size = Vector2(120, 120)
-layout_mode = 2
-
-[node name="description" type="Label" parent="menu/inventory/panel/margin/flow/selection/item/content/preview"]
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_stretch_ratio = 0.25
-theme = ExtResource("12_jdj2p")
-theme_override_font_sizes/font_size = 18
-text = "Без врагов
-1 минута"
-horizontal_alignment = 1
-
-[node name="description" type="VBoxContainer" parent="menu/inventory/panel/margin/flow/selection/item/content"]
-layout_mode = 2
-
-[node name="effect" type="Label" parent="menu/inventory/panel/margin/flow/selection/item/content/description"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.724643, 0.724643, 0.724643, 1)
-text = "Отвлекает противников"
-
-[node name="description" type="Label" parent="menu/inventory/panel/margin/flow/selection/item/content/description"]
-layout_mode = 2
-theme = ExtResource("12_jdj2p")
-theme_override_font_sizes/font_size = 18
-text = "Образец собранный из подручных
-материалов, позволяет избежать
-сражения на определенное время."
-
-[node name="buff" type="HBoxContainer" parent="menu/inventory/panel/margin/flow/selection/item/content/description"]
-layout_mode = 2
-
-[node name="recipe" type="VBoxContainer" parent="menu/inventory/panel/margin/flow/selection/item/content/description/buff"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="caption" type="Label" parent="menu/inventory/panel/margin/flow/selection/item/content/description/buff/recipe"]
-layout_mode = 2
-size_flags_horizontal = 2
-size_flags_stretch_ratio = 0.75
-theme = ExtResource("12_jdj2p")
-theme_override_colors/font_color = Color(0.601223, 0.601223, 0.601223, 1)
-theme_override_font_sizes/font_size = 18
-text = "Рецепт"
-horizontal_alignment = 2
-
-[node name="ingredients" type="Label" parent="menu/inventory/panel/margin/flow/selection/item/content/description/buff/recipe"]
-layout_mode = 2
-size_flags_horizontal = 2
-size_flags_stretch_ratio = 0.75
-theme = ExtResource("12_jdj2p")
-theme_override_font_sizes/font_size = 18
-text = "Глаз + Кость + Бинт"
-horizontal_alignment = 2
-
-[node name="image" type="Panel" parent="menu/inventory/panel/margin/flow/selection/item/content/description/buff"]
-custom_minimum_size = Vector2(45, 45)
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 4
-
-[node name="status" type="VBoxContainer" parent="menu/inventory/panel/margin/flow"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="health" type="HBoxContainer" parent="menu/inventory/panel/margin/flow/status"]
-layout_mode = 2
-theme_override_constants/separation = -4
-
-[node name="bar" type="ProgressBar" parent="menu/inventory/panel/margin/flow/status/health"]
-custom_minimum_size = Vector2(0, 39)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_styles/background = SubResource("StyleBoxFlat_jdj2p")
-theme_override_styles/fill = SubResource("StyleBoxFlat_ippj8")
-step = 1.0
-value = 100.0
-show_percentage = false
-
-[node name="merge" type="HBoxContainer" parent="menu/inventory/panel/margin/flow/status/health"]
-layout_mode = 2
-theme_override_constants/separation = -45
-
-[node name="space" type="ColorRect" parent="menu/inventory/panel/margin/flow/status/health/merge"]
-custom_minimum_size = Vector2(45, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-color = Color(0.243137, 0.243137, 0.243137, 1)
-
-[node name="margin" type="MarginContainer" parent="menu/inventory/panel/margin/flow/status/health/merge"]
-layout_mode = 2
-theme_override_constants/margin_left = 0
-theme_override_constants/margin_top = 4
-theme_override_constants/margin_right = 0
+theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 4
 
-[node name="cork" type="Panel" parent="menu/inventory/panel/margin/flow/status/health/merge/margin"]
-custom_minimum_size = Vector2(90, 29)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_1y8ov")
-
-[node name="margin" type="MarginContainer" parent="menu/inventory/panel/margin/flow/status/health/merge/margin/cork"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 6
-theme_override_constants/margin_top = 1
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 0
-
-[node name="current" type="Label" parent="menu/inventory/panel/margin/flow/status/health/merge/margin/cork/margin"]
+[node name="caption" type="Label" parent="menu/priorities/stats/inventory/ability/controls/controls/ability/hotkey"]
 layout_mode = 2
 size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0.588235, 0.588235, 0.588235, 1)
+theme_override_font_sizes/font_size = 12
+text = "Y"
+
+[node name="menu" type="Button" parent="menu/priorities/stats/inventory/ability/controls/controls"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+size_flags_horizontal = 0
 size_flags_vertical = 0
-theme = ExtResource("11_1y8ov")
-theme_override_font_sizes/font_size = 20
-text = "75"
 
-[node name="description" type="HBoxContainer" parent="menu/inventory/panel/margin/flow/status/health/merge/margin/cork/margin"]
-layout_mode = 2
-theme_override_constants/separation = 10
-
-[node name="max" type="Label" parent="menu/inventory/panel/margin/flow/status/health/merge/margin/cork/margin/description"]
-layout_mode = 2
-size_flags_horizontal = 10
-size_flags_vertical = 8
-theme = ExtResource("11_1y8ov")
-theme_override_colors/font_color = Color(0.481789, 0.481789, 0.481789, 1)
-theme_override_font_sizes/font_size = 11
-text = "100"
-
-[node name="caption" type="Label" parent="menu/inventory/panel/margin/flow/status/health/merge/margin/cork/margin/description"]
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 8
-theme = ExtResource("11_1y8ov")
-theme_override_colors/font_color = Color(0.482353, 0.482353, 0.482353, 1)
-theme_override_font_sizes/font_size = 11
-text = "ЖЗ"
-
-[node name="aura-influence" type="HBoxContainer" parent="menu/inventory/panel/margin/flow/status"]
-layout_mode = 2
-theme_override_constants/separation = -4
-
-[node name="bar" type="ProgressBar" parent="menu/inventory/panel/margin/flow/status/aura-influence"]
-custom_minimum_size = Vector2(0, 39)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_styles/background = SubResource("StyleBoxFlat_jdj2p")
-theme_override_styles/fill = SubResource("StyleBoxFlat_iexbr")
-max_value = 20.0
-step = 1.0
-value = 20.0
-show_percentage = false
-
-[node name="merge" type="HBoxContainer" parent="menu/inventory/panel/margin/flow/status/aura-influence"]
-layout_mode = 2
-theme_override_constants/separation = -45
-
-[node name="space" type="ColorRect" parent="menu/inventory/panel/margin/flow/status/aura-influence/merge"]
-custom_minimum_size = Vector2(45, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-color = Color(0.243137, 0.243137, 0.243137, 1)
-
-[node name="margin" type="MarginContainer" parent="menu/inventory/panel/margin/flow/status/aura-influence/merge"]
-layout_mode = 2
-theme_override_constants/margin_left = 0
-theme_override_constants/margin_top = 4
+[node name="content" type="MarginContainer" parent="menu/priorities/stats/inventory/ability/controls/controls/menu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 4
-
-[node name="cork" type="Panel" parent="menu/inventory/panel/margin/flow/status/aura-influence/merge/margin"]
-custom_minimum_size = Vector2(90, 29)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_1y8ov")
-
-[node name="margin" type="MarginContainer" parent="menu/inventory/panel/margin/flow/status/aura-influence/merge/margin/cork"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 6
-theme_override_constants/margin_top = 1
-theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 0
 
-[node name="current" type="Label" parent="menu/inventory/panel/margin/flow/status/aura-influence/merge/margin/cork/margin"]
+[node name="caption" type="Label" parent="menu/priorities/stats/inventory/ability/controls/controls/menu/content"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "="
+
+[node name="hotkey" type="MarginContainer" parent="menu/priorities/stats/inventory/ability/controls/controls/menu"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -14.0
+offset_top = -23.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 0
+
+[node name="caption" type="Label" parent="menu/priorities/stats/inventory/ability/controls/controls/menu/hotkey"]
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 0
-theme = ExtResource("11_1y8ov")
-theme_override_font_sizes/font_size = 20
-text = "5"
-
-[node name="description" type="HBoxContainer" parent="menu/inventory/panel/margin/flow/status/aura-influence/merge/margin/cork/margin"]
-layout_mode = 2
-theme_override_constants/separation = 10
-
-[node name="max" type="Label" parent="menu/inventory/panel/margin/flow/status/aura-influence/merge/margin/cork/margin/description"]
-layout_mode = 2
-size_flags_horizontal = 10
 size_flags_vertical = 8
-theme = ExtResource("11_1y8ov")
-theme_override_colors/font_color = Color(0.481789, 0.481789, 0.481789, 1)
-theme_override_font_sizes/font_size = 11
-text = "20"
+theme_override_colors/font_color = Color(0.588235, 0.588235, 0.588235, 1)
+theme_override_font_sizes/font_size = 12
+text = "Alt"
 
-[node name="caption" type="Label" parent="menu/inventory/panel/margin/flow/status/aura-influence/merge/margin/cork/margin/description"]
+[node name="help" parent="menu/priorities/stats/inventory/ability/controls/controls" instance=ExtResource("5_m2hjb")]
 layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 8
-theme = ExtResource("11_1y8ov")
-theme_override_colors/font_color = Color(0.482353, 0.482353, 0.482353, 1)
-theme_override_font_sizes/font_size = 11
-text = "ДА"
+shortcut = ExtResource("6_ijgny")
 
-[node name="ailments" type="VBoxContainer" parent="menu/inventory/panel/margin/flow/status"]
+[node name="hide" parent="menu/priorities/stats/inventory/ability/controls/controls" instance=ExtResource("7_koglg")]
+
+[node name="topic" parent="menu/priorities/stats/inventory/ability" instance=ExtResource("14_joidv")]
 layout_mode = 2
 
-[node name="effects" type="HFlowContainer" parent="menu/inventory/panel/margin/flow/status/ailments"]
+[node name="topic" parent="menu/priorities" instance=ExtResource("13_iexbr")]
 layout_mode = 2
-
-[node name="Panel" type="Panel" parent="menu/inventory/panel/margin/flow/status/ailments/effects"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-
-[node name="Panel2" type="Panel" parent="menu/inventory/panel/margin/flow/status/ailments/effects"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-
-[node name="Panel3" type="Panel" parent="menu/inventory/panel/margin/flow/status/ailments/effects"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-
-[node name="Panel4" type="Panel" parent="menu/inventory/panel/margin/flow/status/ailments/effects"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-
-[node name="Panel5" type="Panel" parent="menu/inventory/panel/margin/flow/status/ailments/effects"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-
-[node name="Panel6" type="Panel" parent="menu/inventory/panel/margin/flow/status/ailments/effects"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-
-[node name="Panel7" type="Panel" parent="menu/inventory/panel/margin/flow/status/ailments/effects"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-
-[node name="Panel8" type="Panel" parent="menu/inventory/panel/margin/flow/status/ailments/effects"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-
-[node name="Panel9" type="Panel" parent="menu/inventory/panel/margin/flow/status/ailments/effects"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-
-[node name="Panel10" type="Panel" parent="menu/inventory/panel/margin/flow/status/ailments/effects"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-
-[node name="Panel11" type="Panel" parent="menu/inventory/panel/margin/flow/status/ailments/effects"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-
-[node name="Panel12" type="Panel" parent="menu/inventory/panel/margin/flow/status/ailments/effects"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-
-[node name="Panel13" type="Panel" parent="menu/inventory/panel/margin/flow/status/ailments/effects"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-
-[node name="Panel14" type="Panel" parent="menu/inventory/panel/margin/flow/status/ailments/effects"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-
-[node name="Panel15" type="Panel" parent="menu/inventory/panel/margin/flow/status/ailments/effects"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-
-[node name="Panel16" type="Panel" parent="menu/inventory/panel/margin/flow/status/ailments/effects"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-
-[node name="footer" type="HBoxContainer" parent="menu/inventory/panel/margin/flow/status/ailments"]
-layout_mode = 2
-theme_override_constants/separation = 20
-
-[node name="caption" type="Label" parent="menu/inventory/panel/margin/flow/status/ailments/footer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 6
-theme = ExtResource("12_jdj2p")
-theme_override_font_sizes/font_size = 14
-text = "Статус"
-
-[node name="summary" type="Label" parent="menu/inventory/panel/margin/flow/status/ailments/footer"]
-layout_mode = 2
-size_flags_horizontal = 2
-size_flags_vertical = 6
-theme = ExtResource("12_jdj2p")
-theme_override_font_sizes/font_size = 14
-text = "в порядке"
-
-[node name="Control" type="Control" parent="menu/inventory"]
-layout_mode = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.7
 
 [node name="transitions" type="AnimationTree" parent="menu"]
 

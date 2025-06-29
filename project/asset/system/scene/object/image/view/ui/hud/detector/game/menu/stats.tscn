@@ -1,0 +1,259 @@
+[gd_scene load_steps=6 format=3 uid="uid://c3dwvtm5ivwwp"]
+
+[ext_resource type="PackedScene" uid="uid://dqlgy3l13bibl" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/menu/inventory/items.tscn" id="1_3h27n"]
+[ext_resource type="StyleBox" uid="uid://cvfnqancophme" path="res://asset/resource/engine/internal/theme/style/solid-color-panel.tres" id="1_j4734"]
+[ext_resource type="PackedScene" uid="uid://scs1xlb7x0d6" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/menu/inventory/selection.tscn" id="2_e11u2"]
+[ext_resource type="StyleBox" uid="uid://cht8hrroa75bg" path="res://asset/resource/engine/internal/theme/style/tag-button.tres" id="2_j4734"]
+[ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://asset/resource/engine/internal/theme/patterns/template/menu/settings/topic/footer.tres" id="3_j4734"]
+
+[node name="panel" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("1_j4734")
+
+[node name="scroll" type="ScrollContainer" parent="."]
+layout_mode = 2
+
+[node name="margin" type="MarginContainer" parent="scroll"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="stack" type="VBoxContainer" parent="scroll/margin"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="items" parent="scroll/margin/stack" instance=ExtResource("1_3h27n")]
+layout_mode = 2
+
+[node name="stats" type="VBoxContainer" parent="scroll/margin/stack"]
+layout_mode = 2
+
+[node name="title" type="HBoxContainer" parent="scroll/margin/stack/stats"]
+layout_mode = 2
+
+[node name="caption" type="Label" parent="scroll/margin/stack/stats/title"]
+layout_mode = 2
+text = "Показатели"
+
+[node name="space" type="Control" parent="scroll/margin/stack/stats/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="equip" type="Button" parent="scroll/margin/stack/stats/title"]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("2_j4734")
+text = "С экипировкой"
+
+[node name="power" type="HBoxContainer" parent="scroll/margin/stack/stats"]
+layout_mode = 2
+
+[node name="caption" type="Label" parent="scroll/margin/stack/stats/power"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+theme = ExtResource("3_j4734")
+text = "⚔️ Мощь"
+
+[node name="margin" type="MarginContainer" parent="scroll/margin/stack/stats/power"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 4.0
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 4
+
+[node name="progress" type="ProgressBar" parent="scroll/margin/stack/stats/power/margin"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+size_flags_stretch_ratio = 4.0
+max_value = 90.0
+step = 1.0
+value = 50.0
+show_percentage = false
+
+[node name="number" type="Label" parent="scroll/margin/stack/stats/power"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_stretch_ratio = 0.5
+theme = ExtResource("3_j4734")
+text = "255"
+
+[node name="plus" type="Label" parent="scroll/margin/stack/stats/power"]
+visible = false
+layout_mode = 2
+size_flags_stretch_ratio = 0.5
+theme = ExtResource("3_j4734")
+text = "+"
+
+[node name="plus-number" type="Label" parent="scroll/margin/stack/stats/power"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_stretch_ratio = 0.5
+theme = ExtResource("3_j4734")
+text = "3"
+
+[node name="influence" type="HBoxContainer" parent="scroll/margin/stack/stats"]
+layout_mode = 2
+
+[node name="caption" type="Label" parent="scroll/margin/stack/stats/influence"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+theme = ExtResource("3_j4734")
+text = "🔥 Влияние"
+
+[node name="margin" type="MarginContainer" parent="scroll/margin/stack/stats/influence"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 4.0
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 4
+
+[node name="progress" type="ProgressBar" parent="scroll/margin/stack/stats/influence/margin"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+size_flags_stretch_ratio = 4.0
+max_value = 90.0
+step = 1.0
+value = 50.0
+show_percentage = false
+
+[node name="number" type="Label" parent="scroll/margin/stack/stats/influence"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_stretch_ratio = 0.5
+theme = ExtResource("3_j4734")
+text = "255"
+
+[node name="plus" type="Label" parent="scroll/margin/stack/stats/influence"]
+visible = false
+layout_mode = 2
+size_flags_stretch_ratio = 0.5
+theme = ExtResource("3_j4734")
+text = "+"
+
+[node name="plus-number" type="Label" parent="scroll/margin/stack/stats/influence"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_stretch_ratio = 0.5
+theme = ExtResource("3_j4734")
+text = "3"
+
+[node name="vitality" type="HBoxContainer" parent="scroll/margin/stack/stats"]
+layout_mode = 2
+
+[node name="caption" type="Label" parent="scroll/margin/stack/stats/vitality"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+theme = ExtResource("3_j4734")
+text = "🛡 Живучесть"
+
+[node name="margin" type="MarginContainer" parent="scroll/margin/stack/stats/vitality"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 4.0
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 4
+
+[node name="progress" type="ProgressBar" parent="scroll/margin/stack/stats/vitality/margin"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+size_flags_stretch_ratio = 4.0
+max_value = 90.0
+step = 1.0
+value = 50.0
+show_percentage = false
+
+[node name="number" type="Label" parent="scroll/margin/stack/stats/vitality"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_stretch_ratio = 0.5
+theme = ExtResource("3_j4734")
+text = "255"
+
+[node name="plus" type="Label" parent="scroll/margin/stack/stats/vitality"]
+visible = false
+layout_mode = 2
+size_flags_stretch_ratio = 0.5
+theme = ExtResource("3_j4734")
+text = "+"
+
+[node name="plus-number" type="Label" parent="scroll/margin/stack/stats/vitality"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_stretch_ratio = 0.5
+theme = ExtResource("3_j4734")
+text = "3"
+
+[node name="reaction" type="HBoxContainer" parent="scroll/margin/stack/stats"]
+layout_mode = 2
+
+[node name="caption" type="Label" parent="scroll/margin/stack/stats/reaction"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+theme = ExtResource("3_j4734")
+text = "🫧 Реакция"
+
+[node name="margin" type="MarginContainer" parent="scroll/margin/stack/stats/reaction"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 4.0
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 4
+
+[node name="progress" type="ProgressBar" parent="scroll/margin/stack/stats/reaction/margin"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+size_flags_stretch_ratio = 4.0
+max_value = 90.0
+step = 1.0
+value = 50.0
+show_percentage = false
+
+[node name="number" type="Label" parent="scroll/margin/stack/stats/reaction"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_stretch_ratio = 0.5
+theme = ExtResource("3_j4734")
+text = "255"
+
+[node name="plus" type="Label" parent="scroll/margin/stack/stats/reaction"]
+visible = false
+layout_mode = 2
+size_flags_stretch_ratio = 0.5
+theme = ExtResource("3_j4734")
+text = "+"
+
+[node name="plus-number" type="Label" parent="scroll/margin/stack/stats/reaction"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_stretch_ratio = 0.5
+theme = ExtResource("3_j4734")
+text = "3"
+
+[node name="selection" parent="scroll/margin/stack" instance=ExtResource("2_e11u2")]
+layout_mode = 2
