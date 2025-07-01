@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dbkrincgd6l50"]
+[gd_scene load_steps=11 format=3 uid="uid://dbkrincgd6l50"]
 
 [ext_resource type="Script" uid="uid://dv3ea7oqn3rav" path="res://asset/system/script/object/image/view/ui/hud/relation/relation.gd" id="1_ny3sf"]
 [ext_resource type="PackedScene" uid="uid://bisnfriip5102" path="res://asset/system/scene/object/image/view/ui/hud/relation/pause/hints.tscn" id="2_kyivv"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://bve0jyve1ujru" path="res://asset/system/script/object/image/view/ui/hud/relation/pause/pause.gd" id="5_aqv51"]
 [ext_resource type="PackedScene" uid="uid://cul3waugsc4ib" path="res://asset/system/scene/object/image/view/ui/hud/relation/pause/exit.tscn" id="6_j1rcv"]
 [ext_resource type="PackedScene" uid="uid://crmw2u8x88m8i" path="res://asset/system/scene/object/image/view/ui/hud/relation/pause/resume.tscn" id="7_r8mtf"]
+[ext_resource type="Script" uid="uid://drfq8w54lv52r" path="res://asset/system/script/object/image/view/ui/hud/relation/pause/information.gd" id="7_u0en7"]
 
 [node name="relation" type="Node"]
 script = ExtResource("1_ny3sf")
@@ -23,10 +24,13 @@ script = ExtResource("2_vf2x7")
 [node name="pause" type="Node" parent="."]
 script = ExtResource("5_aqv51")
 
-[node name="hints" parent="pause" instance=ExtResource("2_kyivv")]
-
 [node name="resume" parent="pause" instance=ExtResource("7_r8mtf")]
+
+[node name="information" type="Node" parent="pause"]
+script = ExtResource("7_u0en7")
 
 [node name="settings" parent="pause" instance=ExtResource("3_bvrf2")]
 
 [node name="exit" parent="pause" instance=ExtResource("6_j1rcv")]
+
+[node name="hints" parent="pause" instance=ExtResource("2_kyivv")]

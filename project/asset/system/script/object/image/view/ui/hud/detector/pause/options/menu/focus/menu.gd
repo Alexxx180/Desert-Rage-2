@@ -1,7 +1,7 @@
 extends VBoxContainer
 
 @onready var resume: Button = $resume
-@onready var help: Button = $help
+@onready var information: Button = $information
 @onready var settings: Button = $settings
 @onready var exit: Button = $exit
 @onready var focus: Node = $focus

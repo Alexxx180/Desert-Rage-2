@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://6b0ydfrtbu38"]
+[gd_scene load_steps=6 format=3 uid="uid://6b0ydfrtbu38"]
 
 [ext_resource type="PackedScene" uid="uid://scs1xlb7x0d6" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/menu/inventory/selection.tscn" id="1_7touf"]
 [ext_resource type="StyleBox" uid="uid://cvfnqancophme" path="res://asset/resource/engine/internal/theme/style/solid-color-panel.tres" id="1_r0sy2"]
 [ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://asset/resource/engine/internal/theme/patterns/template/menu/settings/topic/footer.tres" id="2_r0sy2"]
+[ext_resource type="FontFile" uid="uid://b37js8y80ak1k" path="res://asset/resource/font/NotoColorEmoji-Regular.ttf" id="3_5obb3"]
 [ext_resource type="PackedScene" uid="uid://l7thqkrsol4m" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/menu/priorities/perks.tscn" id="3_h2uo5"]
 
 [node name="panel" type="PanelContainer"]
@@ -25,53 +26,128 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="flow" type="HFlowContainer" parent="scroll/margin"]
+[node name="stack" type="VBoxContainer" parent="scroll/margin"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="flow" type="HFlowContainer" parent="scroll/margin/stack"]
 layout_mode = 2
 theme_override_constants/h_separation = 25
 
-[node name="selection" parent="scroll/margin/flow" instance=ExtResource("1_7touf")]
+[node name="selection" parent="scroll/margin/stack/flow" instance=ExtResource("1_7touf")]
+visible = false
 layout_mode = 2
-size_flags_horizontal = 1
 
-[node name="ability" type="VBoxContainer" parent="scroll/margin/flow"]
+[node name="item" type="VBoxContainer" parent="scroll/margin/stack/flow"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="caption" type="Label" parent="scroll/margin/flow/ability"]
+[node name="main" type="HBoxContainer" parent="scroll/margin/stack/flow/item"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 20
+
+[node name="caption" type="Label" parent="scroll/margin/stack/flow/item/main"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Факел"
+
+[node name="preview" type="PanelContainer" parent="scroll/margin/stack/flow/item/main"]
+custom_minimum_size = Vector2(45, 45)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+
+[node name="margin" type="MarginContainer" parent="scroll/margin/stack/flow/item/main/preview"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 2
+
+[node name="icon" type="Label" parent="scroll/margin/stack/flow/item/main/preview/margin"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("3_5obb3")
+theme_override_font_sizes/font_size = 28
+text = "🔥"
+
+[node name="effect" type="Label" parent="scroll/margin/stack/flow/item"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_stretch_ratio = 0.25
+theme = ExtResource("2_r0sy2")
+theme_override_font_sizes/font_size = 18
+text = "Сила, дарованная людям с незапамятных времен. Может как помочь, так и навредить. Позволяет убирать помехи на пути, выступает источником энергии."
+autowrap_mode = 2
+
+[node name="ability" type="VBoxContainer" parent="scroll/margin/stack/flow"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.3
+
+[node name="caption" type="Label" parent="scroll/margin/stack/flow/ability"]
 layout_mode = 2
 text = "Умения"
 
-[node name="fire" type="HBoxContainer" parent="scroll/margin/flow/ability"]
+[node name="fire" type="HBoxContainer" parent="scroll/margin/stack/flow/ability"]
 layout_mode = 2
 
-[node name="caption" type="Label" parent="scroll/margin/flow/ability/fire"]
+[node name="icon" type="MarginContainer" parent="scroll/margin/stack/flow/ability/fire"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="text" type="Label" parent="scroll/margin/stack/flow/ability/fire/icon"]
+layout_mode = 2
+theme = ExtResource("2_r0sy2")
+theme_override_fonts/font = ExtResource("3_5obb3")
+text = "🔥"
+
+[node name="caption" type="Label" parent="scroll/margin/stack/flow/ability/fire"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("2_r0sy2")
-text = "🔥 Факел"
+text = "Факел"
 
-[node name="key" type="Label" parent="scroll/margin/flow/ability/fire"]
+[node name="key" type="Label" parent="scroll/margin/stack/flow/ability/fire"]
 layout_mode = 2
 theme = ExtResource("2_r0sy2")
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "X"
 
-[node name="whip" type="HBoxContainer" parent="scroll/margin/flow/ability"]
+[node name="whip" type="HBoxContainer" parent="scroll/margin/stack/flow/ability"]
 layout_mode = 2
 
-[node name="whip" type="Label" parent="scroll/margin/flow/ability/whip"]
+[node name="icon" type="MarginContainer" parent="scroll/margin/stack/flow/ability/whip"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="text" type="Label" parent="scroll/margin/stack/flow/ability/whip/icon"]
+layout_mode = 2
+theme = ExtResource("2_r0sy2")
+theme_override_fonts/font = ExtResource("3_5obb3")
+text = "🎣"
+
+[node name="caption" type="Label" parent="scroll/margin/stack/flow/ability/whip"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("2_r0sy2")
-text = "🎣 Кнут"
+text = "Кнут"
 
-[node name="key" type="Label" parent="scroll/margin/flow/ability/whip"]
+[node name="key" type="Label" parent="scroll/margin/stack/flow/ability/whip"]
 layout_mode = 2
 theme = ExtResource("2_r0sy2")
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "Y"
 
-[node name="fire-description" type="Label" parent="scroll/margin/flow/ability"]
+[node name="fire-description" type="Label" parent="scroll/margin/stack/flow/ability"]
 visible = false
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
@@ -81,7 +157,7 @@ text = "Топит лед и оставляет ожоги, медленно с�
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="whip-description" type="Label" parent="scroll/margin/flow/ability"]
+[node name="whip-description" type="Label" parent="scroll/margin/stack/flow/ability"]
 visible = false
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
@@ -91,6 +167,150 @@ text = "Подтягивает объекты и наносит урон вра�
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="perks" parent="scroll/margin/flow" instance=ExtResource("3_h2uo5")]
+[node name="perks" parent="scroll/margin/stack/flow" instance=ExtResource("3_h2uo5")]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="usage" type="HFlowContainer" parent="scroll/margin/stack"]
+layout_mode = 2
+theme_override_constants/h_separation = 25
+theme_override_constants/v_separation = 15
+
+[node name="world" type="HBoxContainer" parent="scroll/margin/stack/usage"]
+layout_mode = 2
+
+[node name="summary" type="VBoxContainer" parent="scroll/margin/stack/usage/world"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="caption" type="Label" parent="scroll/margin/stack/usage/world/summary"]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_stretch_ratio = 0.75
+theme = ExtResource("2_r0sy2")
+theme_override_colors/font_color = Color(0.601223, 0.601223, 0.601223, 1)
+theme_override_font_sizes/font_size = 18
+text = "Основная польза"
+horizontal_alignment = 2
+
+[node name="ingredients" type="Label" parent="scroll/margin/stack/usage/world/summary"]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_stretch_ratio = 0.75
+theme = ExtResource("2_r0sy2")
+theme_override_font_sizes/font_size = 18
+text = "Переводит 💧в💨"
+horizontal_alignment = 2
+
+[node name="preview" type="PanelContainer" parent="scroll/margin/stack/usage/world"]
+custom_minimum_size = Vector2(45, 45)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+
+[node name="margin" type="MarginContainer" parent="scroll/margin/stack/usage/world/preview"]
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="icon" type="Label" parent="scroll/margin/stack/usage/world/preview/margin"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 28
+text = "🧊"
+
+[node name="fight-cure" type="HBoxContainer" parent="scroll/margin/stack/usage"]
+layout_mode = 2
+
+[node name="summary" type="VBoxContainer" parent="scroll/margin/stack/usage/fight-cure"]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 4
+
+[node name="caption" type="Label" parent="scroll/margin/stack/usage/fight-cure/summary"]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_stretch_ratio = 0.75
+theme = ExtResource("2_r0sy2")
+theme_override_colors/font_color = Color(0.601223, 0.601223, 0.601223, 1)
+theme_override_font_sizes/font_size = 18
+text = "Польза в бою"
+horizontal_alignment = 2
+
+[node name="ingredients" type="Label" parent="scroll/margin/stack/usage/fight-cure/summary"]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_stretch_ratio = 0.75
+theme = ExtResource("2_r0sy2")
+theme_override_font_sizes/font_size = 18
+text = "Прижигает раны"
+horizontal_alignment = 2
+
+[node name="preview" type="PanelContainer" parent="scroll/margin/stack/usage/fight-cure"]
+custom_minimum_size = Vector2(45, 45)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+
+[node name="margin" type="MarginContainer" parent="scroll/margin/stack/usage/fight-cure/preview"]
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="icon" type="Label" parent="scroll/margin/stack/usage/fight-cure/preview/margin"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 28
+text = "🩹"
+
+[node name="fight-stream" type="HBoxContainer" parent="scroll/margin/stack/usage"]
+layout_mode = 2
+
+[node name="summary" type="VBoxContainer" parent="scroll/margin/stack/usage/fight-stream"]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 4
+
+[node name="caption" type="Label" parent="scroll/margin/stack/usage/fight-stream/summary"]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_stretch_ratio = 0.75
+theme = ExtResource("2_r0sy2")
+theme_override_colors/font_color = Color(0.601223, 0.601223, 0.601223, 1)
+theme_override_font_sizes/font_size = 18
+text = "Эффект в бою"
+horizontal_alignment = 2
+
+[node name="ingredients" type="Label" parent="scroll/margin/stack/usage/fight-stream/summary"]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_stretch_ratio = 0.75
+theme = ExtResource("2_r0sy2")
+theme_override_font_sizes/font_size = 18
+text = "Обжигает 3 раза"
+horizontal_alignment = 2
+
+[node name="preview" type="PanelContainer" parent="scroll/margin/stack/usage/fight-stream"]
+custom_minimum_size = Vector2(45, 45)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+
+[node name="margin" type="MarginContainer" parent="scroll/margin/stack/usage/fight-stream/preview"]
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="icon" type="Label" parent="scroll/margin/stack/usage/fight-stream/preview/margin"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 28
+text = "🩸"
