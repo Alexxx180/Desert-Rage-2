@@ -11,7 +11,7 @@ func set_group() -> void:
 	SessionStats.save_progress()
 	var group: Node2D = get_node("../group")
 	for hero in group.deploy.party.heroes:
-		hero.logic.processors.hud.display = game
+		hero.logic.processors.ui.hud.display = game
 	game.set_preview(group, progress)
 
 func _ready() -> void:

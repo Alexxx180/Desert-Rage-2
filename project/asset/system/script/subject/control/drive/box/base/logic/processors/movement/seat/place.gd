@@ -18,7 +18,7 @@ func same(hero: CharacterBody2D) -> bool:
 	return _hero_id == hero.get_instance_id()
 
 func is_in_midair(hero: CharacterBody2D) -> bool:
-	return hero.logic.processors.input.platforming.jump.feet.balance.unstable
+	return hero.logic.processors.ui.input.platforming.jump.feet.balance.unstable
 
 func visit(hero: CharacterBody2D, id: int) -> void:
 	hero.view.visible = !is_in_midair(hero)

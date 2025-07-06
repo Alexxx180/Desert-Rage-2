@@ -1,0 +1,19 @@
+extends AbilitySlot
+
+signal activate(pos: Vector2, dir: Vector2)
+
+func _set_hero(value: CharacterBody2D) -> void:
+	super._set_hero(value)
+	_act = _hero.logic.detectors.world.ability.rain.puddle
+
+func _act_sync() -> void:
+	activate.emit(_last_position, _act.direction)
+	_hero.view.animation.start_fight("active")
+	_hero.view.animation.fight_body("hands")
+
+func ability() -> void:
+	if _vessel != Defaults.CHARACTER and _vessel.logic.relations.fire.on and aura.use(cost):
+		_vessel.logic.processors.fire.freeze()
+		_act_sync()
+	elif aura.use(cost):
+		_act_sync()

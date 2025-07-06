@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://bky5mu10x2da3"]
+[gd_scene load_steps=8 format=3 uid="uid://bky5mu10x2da3"]
 
 [ext_resource type="Theme" uid="uid://dfg873urxgnev" path="res://asset/resource/engine/internal/theme/patterns/template/text/title/title.tres" id="1_4olfv"]
+[ext_resource type="Script" uid="uid://b0w4sm6u15i34" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/menu/status/health.gd" id="1_s8rf2"]
 [ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://asset/resource/engine/internal/theme/patterns/template/menu/settings/topic/footer.tres" id="2_s8rf2"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jdj2p"]
@@ -43,6 +44,7 @@ size_flags_horizontal = 3
 [node name="health" type="HBoxContainer" parent="."]
 layout_mode = 2
 theme_override_constants/separation = -4
+script = ExtResource("1_s8rf2")
 
 [node name="bar" type="ProgressBar" parent="health"]
 custom_minimum_size = Vector2(0, 39)
@@ -118,11 +120,12 @@ theme_override_colors/font_color = Color(0.482353, 0.482353, 0.482353, 1)
 theme_override_font_sizes/font_size = 11
 text = "ЖЗ"
 
-[node name="aura-influence" type="HBoxContainer" parent="."]
+[node name="influence" type="HBoxContainer" parent="."]
 layout_mode = 2
 theme_override_constants/separation = -4
+script = ExtResource("1_s8rf2")
 
-[node name="bar" type="ProgressBar" parent="aura-influence"]
+[node name="bar" type="ProgressBar" parent="influence"]
 custom_minimum_size = Vector2(0, 39)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -133,29 +136,29 @@ step = 1.0
 value = 20.0
 show_percentage = false
 
-[node name="merge" type="HBoxContainer" parent="aura-influence"]
+[node name="merge" type="HBoxContainer" parent="influence"]
 layout_mode = 2
 theme_override_constants/separation = -45
 
-[node name="space" type="ColorRect" parent="aura-influence/merge"]
+[node name="space" type="ColorRect" parent="influence/merge"]
 custom_minimum_size = Vector2(45, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 color = Color(0.243137, 0.243137, 0.243137, 1)
 
-[node name="margin" type="MarginContainer" parent="aura-influence/merge"]
+[node name="margin" type="MarginContainer" parent="influence/merge"]
 layout_mode = 2
 theme_override_constants/margin_left = 0
 theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 4
 
-[node name="cork" type="Panel" parent="aura-influence/merge/margin"]
+[node name="cork" type="Panel" parent="influence/merge/margin"]
 custom_minimum_size = Vector2(90, 29)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_1y8ov")
 
-[node name="margin" type="MarginContainer" parent="aura-influence/merge/margin/cork"]
+[node name="margin" type="MarginContainer" parent="influence/merge/margin/cork"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -167,7 +170,7 @@ theme_override_constants/margin_top = 1
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 0
 
-[node name="current" type="Label" parent="aura-influence/merge/margin/cork/margin"]
+[node name="current" type="Label" parent="influence/merge/margin/cork/margin"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
@@ -175,11 +178,11 @@ theme = ExtResource("1_4olfv")
 theme_override_font_sizes/font_size = 20
 text = "20"
 
-[node name="description" type="HBoxContainer" parent="aura-influence/merge/margin/cork/margin"]
+[node name="description" type="HBoxContainer" parent="influence/merge/margin/cork/margin"]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="max" type="Label" parent="aura-influence/merge/margin/cork/margin/description"]
+[node name="max" type="Label" parent="influence/merge/margin/cork/margin/description"]
 layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 8
@@ -188,7 +191,7 @@ theme_override_colors/font_color = Color(0.481789, 0.481789, 0.481789, 1)
 theme_override_font_sizes/font_size = 11
 text = "20"
 
-[node name="caption" type="Label" parent="aura-influence/merge/margin/cork/margin/description"]
+[node name="caption" type="Label" parent="influence/merge/margin/cork/margin/description"]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8

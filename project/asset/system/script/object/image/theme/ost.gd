@@ -8,7 +8,7 @@ extends Node
 var current: int = 0
 var animation: Array[String] = ["fade_b", "fade_a"]
 var record: Variant:
-	get: return mixer.record[tension.state]
+	get: return mixer.record#[tension.state]
 var player: AudioStreamPlayer:
 	get: return players[current]
 
@@ -17,6 +17,7 @@ func _ready() -> void:
 	tension.change_danger.connect(set_playback)
 
 func set_tracks() -> void:
+	# SoundtrackSystem.user.music.world.ambient.type.peace
 	mixer.set_tracks(SoundtrackSystem.user.music.level.caves)
 	next_playback(true)
 
@@ -27,10 +28,12 @@ func next_playback(finished: bool = false) -> void:
 func load_music(track: String) -> void: player.load_music(track)
 
 func _set_previous() -> void:
-	var previous = mixer.record[tension.previous_state]
+	# var previous = mixer.record[tension.previous_state] # FOR CAVES
+	var previous = mixer.record
 	if not previous is Dictionary:
-		mixer.record[tension.previous_state] = {
-			"track": previous, "position": player.get_playback_position() }
+		pass
+		# mixer.record[tension.previous_state] = {
+		#	"track": previous, "position": player.get_playback_position() }
 	else:
 		previous.position = player.get_playback_position()
 

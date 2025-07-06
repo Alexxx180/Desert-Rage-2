@@ -16,7 +16,7 @@ var F: int:
 const EMPTY_SEAT: int = 0
 
 func compare(hero: CharacterBody2D) -> bool:
-	return hero.logic.processors.input.platforming.jump.feet.floors.F + height == F
+	return hero.logic.processors.ui.input.platforming.jump.feet.floors.F + height == F
 
 func transport(_position: Vector2) -> void:
 	var target: Vector2 = stand.get_ledge_position()

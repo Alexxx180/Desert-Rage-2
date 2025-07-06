@@ -19,12 +19,14 @@ func _has_level(ost: Dictionary) -> bool:
 	return ost.name.has(caption) and ost.name[caption].mix
 	
 func set_tracks(ost: Dictionary) -> void:
+	set_track(SoundtrackSystem.user.music.world.ambient.type)
 	_mixed = ost.type.theme.mix
-	
+	"""
 	if _has_level(ost):
 		set_track(ost.name[caption])
 	else:
 		set_track(ost.type.theme)
+	"""
 
 func next_track() -> void:
 	i = (i + 1) % music.size()
