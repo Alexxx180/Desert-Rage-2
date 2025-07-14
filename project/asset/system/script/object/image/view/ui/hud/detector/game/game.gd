@@ -2,7 +2,7 @@ extends Control
 
 @onready var options: HFlowContainer = $menu/stats/inventory/ability/controls/topic
 @onready var chat: VBoxContainer = $dialog/chat
-@onready var hints: VBoxContainer = $menu/stats/inventory/ability/controls/hints/scroll/hints
+@onready var hints: VBoxContainer = $menu/stats/inventory/ability/controls/hints/scroll/stack/hints
 
 @onready var hp: Array[HBoxContainer] = [
 	$menu/stats/inventory/topic/scroll/margin/flow/status/health,
