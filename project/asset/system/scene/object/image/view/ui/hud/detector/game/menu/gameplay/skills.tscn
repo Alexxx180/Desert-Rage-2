@@ -98,48 +98,63 @@ text = "🦶"
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
-theme_override_constants/v_separation = -3
 
-[node name="caption" type="Label" parent="margin/ray/left/weapon/knuckles/kick/description/margin/stack/content"]
+[node name="details" type="HBoxContainer" parent="margin/ray/left/weapon/knuckles/kick/description/margin/stack/content"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="margin/ray/left/weapon/knuckles/kick/description/margin/stack/content/details"]
 custom_minimum_size = Vector2(110, 0)
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.25
 theme_override_font_sizes/font_size = 18
 text = "Пинок"
-vertical_alignment = 1
 text_overrun_behavior = 3
 
-[node name="ability" type="Label" parent="margin/ray/left/weapon/knuckles/kick/description/margin/stack/content"]
-custom_minimum_size = Vector2(200, 0)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("1_w1r1c")
-theme_override_font_sizes/font_size = 18
-theme_override_styles/normal = ExtResource("4_e8epa")
-text = "🦶"
-
-[node name="postfix" type="HBoxContainer" parent="margin/ray/left/weapon/knuckles/kick/description/margin/stack"]
-layout_mode = 2
-
-[node name="zone" type="Label" parent="margin/ray/left/weapon/knuckles/kick/description/margin/stack/postfix"]
+[node name="zone" type="Label" parent="margin/ray/left/weapon/knuckles/kick/description/margin/stack/content/details"]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
+size_flags_horizontal = 8
 theme_override_font_sizes/font_size = 18
 text = "|"
 horizontal_alignment = 1
 
-[node name="cost" type="HBoxContainer" parent="margin/ray/left/weapon/knuckles/kick/description/margin/stack/postfix"]
+[node name="ability" type="HBoxContainer" parent="margin/ray/left/weapon/knuckles/kick/description/margin/stack/content"]
 layout_mode = 2
+size_flags_horizontal = 10
+size_flags_stretch_ratio = 0.25
+theme_override_constants/separation = 0
 
-[node name="ap" type="Label" parent="margin/ray/left/weapon/knuckles/kick/description/margin/stack/postfix/cost"]
-visible = false
-custom_minimum_size = Vector2(28, 0)
+[node name="help" type="HBoxContainer" parent="margin/ray/left/weapon/knuckles/kick/description/margin/stack/content/ability"]
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-text = "99"
+size_flags_horizontal = 6
+
+[node name="slot-1" type="Label" parent="margin/ray/left/weapon/knuckles/kick/description/margin/stack/content/ability/help"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("1_w1r1c")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = ExtResource("4_e8epa")
+text = "🦶"
+vertical_alignment = 1
+
+[node name="cost" type="HBoxContainer" parent="margin/ray/left/weapon/knuckles/kick/description/margin/stack/content/ability"]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="ap" type="Label" parent="margin/ray/left/weapon/knuckles/kick/description/margin/stack/content/ability/cost"]
+visible = false
+custom_minimum_size = Vector2(22, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "1"
 horizontal_alignment = 2
 
-[node name="no" type="Control" parent="margin/ray/left/weapon/knuckles/kick/description/margin/stack/postfix/cost"]
-custom_minimum_size = Vector2(28, 0)
+[node name="no" type="Control" parent="margin/ray/left/weapon/knuckles/kick/description/margin/stack/content/ability/cost"]
+custom_minimum_size = Vector2(22, 0)
 layout_mode = 2
 
 [node name="aura-cost-separator" type="ProgressBar" parent="margin/ray/left/weapon/knuckles/kick/description"]
@@ -205,53 +220,62 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 
-[node name="caption" type="Label" parent="margin/ray/left/weapon/knuckles/slap/description/margin/stack/content"]
+[node name="details" type="HBoxContainer" parent="margin/ray/left/weapon/knuckles/slap/description/margin/stack/content"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="margin/ray/left/weapon/knuckles/slap/description/margin/stack/content/details"]
 custom_minimum_size = Vector2(110, 0)
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.25
 theme_override_font_sizes/font_size = 18
 text = "Хлопок"
-vertical_alignment = 1
 text_overrun_behavior = 3
 
-[node name="margin" type="MarginContainer" parent="margin/ray/left/weapon/knuckles/slap/description/margin/stack/content"]
-layout_mode = 2
-theme_override_constants/margin_left = 0
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 0
-
-[node name="ability" type="Label" parent="margin/ray/left/weapon/knuckles/slap/description/margin/stack/content/margin"]
-custom_minimum_size = Vector2(200, 0)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("1_w1r1c")
-theme_override_font_sizes/font_size = 18
-theme_override_styles/normal = ExtResource("4_e8epa")
-text = "✊"
-
-[node name="postfix" type="HBoxContainer" parent="margin/ray/left/weapon/knuckles/slap/description/margin/stack"]
-layout_mode = 2
-
-[node name="zone" type="Label" parent="margin/ray/left/weapon/knuckles/slap/description/margin/stack/postfix"]
+[node name="zone" type="Label" parent="margin/ray/left/weapon/knuckles/slap/description/margin/stack/content/details"]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
+size_flags_horizontal = 8
 theme_override_font_sizes/font_size = 18
 text = "|"
 horizontal_alignment = 1
 
-[node name="cost" type="HBoxContainer" parent="margin/ray/left/weapon/knuckles/slap/description/margin/stack/postfix"]
+[node name="ability" type="HBoxContainer" parent="margin/ray/left/weapon/knuckles/slap/description/margin/stack/content"]
 layout_mode = 2
+size_flags_horizontal = 10
+size_flags_stretch_ratio = 0.25
+theme_override_constants/separation = 0
 
-[node name="ap" type="Label" parent="margin/ray/left/weapon/knuckles/slap/description/margin/stack/postfix/cost"]
-visible = false
-custom_minimum_size = Vector2(28, 0)
+[node name="help" type="HBoxContainer" parent="margin/ray/left/weapon/knuckles/slap/description/margin/stack/content/ability"]
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-text = "99"
+size_flags_horizontal = 6
+
+[node name="slot-1" type="Label" parent="margin/ray/left/weapon/knuckles/slap/description/margin/stack/content/ability/help"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("1_w1r1c")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = ExtResource("4_e8epa")
+text = "✊"
+vertical_alignment = 1
+
+[node name="cost" type="HBoxContainer" parent="margin/ray/left/weapon/knuckles/slap/description/margin/stack/content/ability"]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="ap" type="Label" parent="margin/ray/left/weapon/knuckles/slap/description/margin/stack/content/ability/cost"]
+visible = false
+custom_minimum_size = Vector2(22, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "1"
 horizontal_alignment = 2
 
-[node name="no" type="Control" parent="margin/ray/left/weapon/knuckles/slap/description/margin/stack/postfix/cost"]
-custom_minimum_size = Vector2(28, 0)
+[node name="no" type="Control" parent="margin/ray/left/weapon/knuckles/slap/description/margin/stack/content/ability/cost"]
+custom_minimum_size = Vector2(22, 0)
 layout_mode = 2
 
 [node name="aura-cost-separator" type="ProgressBar" parent="margin/ray/left/weapon/knuckles/slap/description"]
@@ -323,24 +347,41 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 
-[node name="caption" type="Label" parent="margin/ray/left/weapon/knuckles/double/description/margin/stack/content"]
+[node name="details" type="HBoxContainer" parent="margin/ray/left/weapon/knuckles/double/description/margin/stack/content"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="margin/ray/left/weapon/knuckles/double/description/margin/stack/content/details"]
 custom_minimum_size = Vector2(110, 0)
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.25
 theme_override_font_sizes/font_size = 18
 text = "Двоечка"
-vertical_alignment = 1
 text_overrun_behavior = 3
 
+[node name="zone" type="Label" parent="margin/ray/left/weapon/knuckles/double/description/margin/stack/content/details"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "|"
+horizontal_alignment = 1
+
 [node name="ability" type="HBoxContainer" parent="margin/ray/left/weapon/knuckles/double/description/margin/stack/content"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_stretch_ratio = 0.25
+theme_override_constants/separation = 0
+
+[node name="help" type="HBoxContainer" parent="margin/ray/left/weapon/knuckles/double/description/margin/stack/content/ability"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
+size_flags_horizontal = 6
 theme_override_constants/separation = -3
 
-[node name="slot-1" type="Label" parent="margin/ray/left/weapon/knuckles/double/description/margin/stack/content/ability"]
+[node name="slot-1" type="Label" parent="margin/ray/left/weapon/knuckles/double/description/margin/stack/content/ability/help"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
+size_flags_horizontal = 10
 size_flags_stretch_ratio = 0.25
 theme_override_fonts/font = ExtResource("1_w1r1c")
 theme_override_font_sizes/font_size = 18
@@ -348,7 +389,7 @@ theme_override_styles/normal = ExtResource("4_e8epa")
 text = "🦶"
 vertical_alignment = 1
 
-[node name="dot" type="Label" parent="margin/ray/left/weapon/knuckles/double/description/margin/stack/content/ability"]
+[node name="dot" type="Label" parent="margin/ray/left/weapon/knuckles/double/description/margin/stack/content/ability/help"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 size_flags_stretch_ratio = 0.25
@@ -358,7 +399,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_1chk7")
 text = "⋅"
 vertical_alignment = 1
 
-[node name="slot-2" type="Label" parent="margin/ray/left/weapon/knuckles/double/description/margin/stack/content/ability"]
+[node name="slot-2" type="Label" parent="margin/ray/left/weapon/knuckles/double/description/margin/stack/content/ability/help"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 size_flags_stretch_ratio = 0.25
@@ -368,7 +409,7 @@ theme_override_styles/normal = ExtResource("4_e8epa")
 text = "✊"
 vertical_alignment = 1
 
-[node name="dot2" type="Label" parent="margin/ray/left/weapon/knuckles/double/description/margin/stack/content/ability"]
+[node name="dot2" type="Label" parent="margin/ray/left/weapon/knuckles/double/description/margin/stack/content/ability/help"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 size_flags_stretch_ratio = 0.25
@@ -378,9 +419,10 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_1chk7")
 text = "⋅"
 vertical_alignment = 1
 
-[node name="slot-3" type="Label" parent="margin/ray/left/weapon/knuckles/double/description/margin/stack/content/ability"]
+[node name="slot-3" type="Label" parent="margin/ray/left/weapon/knuckles/double/description/margin/stack/content/ability/help"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
+size_flags_horizontal = 2
 size_flags_stretch_ratio = 0.25
 theme_override_fonts/font = ExtResource("1_w1r1c")
 theme_override_font_sizes/font_size = 18
@@ -388,28 +430,19 @@ theme_override_styles/normal = ExtResource("4_e8epa")
 text = "✊"
 vertical_alignment = 1
 
-[node name="postfix" type="HBoxContainer" parent="margin/ray/left/weapon/knuckles/double/description/margin/stack"]
+[node name="cost" type="HBoxContainer" parent="margin/ray/left/weapon/knuckles/double/description/margin/stack/content/ability"]
 layout_mode = 2
 
-[node name="zone" type="Label" parent="margin/ray/left/weapon/knuckles/double/description/margin/stack/postfix"]
-custom_minimum_size = Vector2(60, 0)
-layout_mode = 2
-theme_override_font_sizes/font_size = 18
-text = "|"
-horizontal_alignment = 1
-
-[node name="cost" type="HBoxContainer" parent="margin/ray/left/weapon/knuckles/double/description/margin/stack/postfix"]
-layout_mode = 2
-
-[node name="ap" type="Label" parent="margin/ray/left/weapon/knuckles/double/description/margin/stack/postfix/cost"]
+[node name="ap" type="Label" parent="margin/ray/left/weapon/knuckles/double/description/margin/stack/content/ability/cost"]
 visible = false
-custom_minimum_size = Vector2(28, 0)
+custom_minimum_size = Vector2(22, 0)
 layout_mode = 2
-text = "99"
+theme_override_font_sizes/font_size = 18
+text = "2"
 horizontal_alignment = 2
 
-[node name="no" type="Control" parent="margin/ray/left/weapon/knuckles/double/description/margin/stack/postfix/cost"]
-custom_minimum_size = Vector2(28, 0)
+[node name="no" type="Control" parent="margin/ray/left/weapon/knuckles/double/description/margin/stack/content/ability/cost"]
+custom_minimum_size = Vector2(22, 0)
 layout_mode = 2
 
 [node name="aura-cost-separator" type="ProgressBar" parent="margin/ray/left/weapon/knuckles/double/description"]
@@ -478,48 +511,63 @@ text = "🦶"
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
-theme_override_constants/v_separation = -3
 
-[node name="caption" type="Label" parent="margin/ray/left/weapon/knife/kick/description/margin/stack/content"]
+[node name="details" type="HBoxContainer" parent="margin/ray/left/weapon/knife/kick/description/margin/stack/content"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="margin/ray/left/weapon/knife/kick/description/margin/stack/content/details"]
 custom_minimum_size = Vector2(110, 0)
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.25
 theme_override_font_sizes/font_size = 18
 text = "Пинок"
-vertical_alignment = 1
 text_overrun_behavior = 3
 
-[node name="ability" type="Label" parent="margin/ray/left/weapon/knife/kick/description/margin/stack/content"]
-custom_minimum_size = Vector2(200, 0)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("1_w1r1c")
-theme_override_font_sizes/font_size = 18
-theme_override_styles/normal = ExtResource("4_e8epa")
-text = "🦶"
-
-[node name="postfix" type="HBoxContainer" parent="margin/ray/left/weapon/knife/kick/description/margin/stack"]
-layout_mode = 2
-
-[node name="zone" type="Label" parent="margin/ray/left/weapon/knife/kick/description/margin/stack/postfix"]
+[node name="zone" type="Label" parent="margin/ray/left/weapon/knife/kick/description/margin/stack/content/details"]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
+size_flags_horizontal = 8
 theme_override_font_sizes/font_size = 18
 text = "|"
 horizontal_alignment = 1
 
-[node name="cost" type="HBoxContainer" parent="margin/ray/left/weapon/knife/kick/description/margin/stack/postfix"]
+[node name="ability" type="HBoxContainer" parent="margin/ray/left/weapon/knife/kick/description/margin/stack/content"]
 layout_mode = 2
+size_flags_horizontal = 10
+size_flags_stretch_ratio = 0.25
+theme_override_constants/separation = 0
 
-[node name="ap" type="Label" parent="margin/ray/left/weapon/knife/kick/description/margin/stack/postfix/cost"]
-visible = false
-custom_minimum_size = Vector2(28, 0)
+[node name="help" type="HBoxContainer" parent="margin/ray/left/weapon/knife/kick/description/margin/stack/content/ability"]
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-text = "99"
+size_flags_horizontal = 6
+
+[node name="slot-1" type="Label" parent="margin/ray/left/weapon/knife/kick/description/margin/stack/content/ability/help"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("1_w1r1c")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = ExtResource("4_e8epa")
+text = "🦶"
+vertical_alignment = 1
+
+[node name="cost" type="HBoxContainer" parent="margin/ray/left/weapon/knife/kick/description/margin/stack/content/ability"]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="ap" type="Label" parent="margin/ray/left/weapon/knife/kick/description/margin/stack/content/ability/cost"]
+visible = false
+custom_minimum_size = Vector2(22, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "1"
 horizontal_alignment = 2
 
-[node name="no" type="Control" parent="margin/ray/left/weapon/knife/kick/description/margin/stack/postfix/cost"]
-custom_minimum_size = Vector2(28, 0)
+[node name="no" type="Control" parent="margin/ray/left/weapon/knife/kick/description/margin/stack/content/ability/cost"]
+custom_minimum_size = Vector2(22, 0)
 layout_mode = 2
 
 [node name="aura-cost-separator" type="ProgressBar" parent="margin/ray/left/weapon/knife/kick/description"]
@@ -586,46 +634,62 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 
-[node name="caption" type="Label" parent="margin/ray/left/weapon/knife/cut/description/margin/stack/content"]
+[node name="details" type="HBoxContainer" parent="margin/ray/left/weapon/knife/cut/description/margin/stack/content"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="margin/ray/left/weapon/knife/cut/description/margin/stack/content/details"]
 custom_minimum_size = Vector2(110, 0)
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.25
 theme_override_font_sizes/font_size = 18
 text = "Порез"
-vertical_alignment = 1
 text_overrun_behavior = 3
 
-[node name="ability" type="Label" parent="margin/ray/left/weapon/knife/cut/description/margin/stack/content"]
-custom_minimum_size = Vector2(200, 0)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("1_w1r1c")
-theme_override_font_sizes/font_size = 18
-theme_override_styles/normal = ExtResource("4_e8epa")
-text = "🔪"
-
-[node name="postfix" type="HBoxContainer" parent="margin/ray/left/weapon/knife/cut/description/margin/stack"]
-layout_mode = 2
-
-[node name="zone" type="Label" parent="margin/ray/left/weapon/knife/cut/description/margin/stack/postfix"]
+[node name="zone" type="Label" parent="margin/ray/left/weapon/knife/cut/description/margin/stack/content/details"]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
+size_flags_horizontal = 8
 theme_override_font_sizes/font_size = 18
 text = "|"
 horizontal_alignment = 1
 
-[node name="cost" type="HBoxContainer" parent="margin/ray/left/weapon/knife/cut/description/margin/stack/postfix"]
+[node name="ability" type="HBoxContainer" parent="margin/ray/left/weapon/knife/cut/description/margin/stack/content"]
 layout_mode = 2
+size_flags_horizontal = 10
+size_flags_stretch_ratio = 0.25
+theme_override_constants/separation = 0
 
-[node name="ap" type="Label" parent="margin/ray/left/weapon/knife/cut/description/margin/stack/postfix/cost"]
-visible = false
-custom_minimum_size = Vector2(28, 0)
+[node name="help" type="HBoxContainer" parent="margin/ray/left/weapon/knife/cut/description/margin/stack/content/ability"]
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-text = "99"
+size_flags_horizontal = 6
+
+[node name="slot-1" type="Label" parent="margin/ray/left/weapon/knife/cut/description/margin/stack/content/ability/help"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("1_w1r1c")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = ExtResource("4_e8epa")
+text = "🔪"
+vertical_alignment = 1
+
+[node name="cost" type="HBoxContainer" parent="margin/ray/left/weapon/knife/cut/description/margin/stack/content/ability"]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="ap" type="Label" parent="margin/ray/left/weapon/knife/cut/description/margin/stack/content/ability/cost"]
+visible = false
+custom_minimum_size = Vector2(22, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "1"
 horizontal_alignment = 2
 
-[node name="no" type="Control" parent="margin/ray/left/weapon/knife/cut/description/margin/stack/postfix/cost"]
-custom_minimum_size = Vector2(28, 0)
+[node name="no" type="Control" parent="margin/ray/left/weapon/knife/cut/description/margin/stack/content/ability/cost"]
+custom_minimum_size = Vector2(22, 0)
 layout_mode = 2
 
 [node name="aura-cost-separator" type="ProgressBar" parent="margin/ray/left/weapon/knife/cut/description"]
@@ -657,6 +721,7 @@ grow_vertical = 2
 theme_override_constants/separation = 0
 
 [node name="margin" type="MarginContainer" parent="margin/ray/left/distance/colts/single-shot/description"]
+custom_minimum_size = Vector2(264, 0)
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/margin_left = 10
@@ -678,7 +743,7 @@ layout_mode = 2
 offset_right = 42.0
 offset_bottom = 42.0
 theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 7
+theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 
@@ -693,7 +758,11 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 
-[node name="caption" type="Label" parent="margin/ray/left/distance/colts/single-shot/description/margin/stack/content"]
+[node name="details" type="HBoxContainer" parent="margin/ray/left/distance/colts/single-shot/description/margin/stack/content"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="margin/ray/left/distance/colts/single-shot/description/margin/stack/content/details"]
 custom_minimum_size = Vector2(110, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -701,9 +770,29 @@ theme_override_font_sizes/font_size = 18
 text = "Выстрел"
 text_overrun_behavior = 3
 
-[node name="ability" type="Label" parent="margin/ray/left/distance/colts/single-shot/description/margin/stack/content"]
+[node name="zone" type="Label" parent="margin/ray/left/distance/colts/single-shot/description/margin/stack/content/details"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_font_sizes/font_size = 18
+text = "|"
+horizontal_alignment = 1
+
+[node name="ability" type="HBoxContainer" parent="margin/ray/left/distance/colts/single-shot/description/margin/stack/content"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_stretch_ratio = 0.25
+theme_override_constants/separation = 0
+
+[node name="help" type="HBoxContainer" parent="margin/ray/left/distance/colts/single-shot/description/margin/stack/content/ability"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="slot-1" type="Label" parent="margin/ray/left/distance/colts/single-shot/description/margin/stack/content/ability/help"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_horizontal = 6
 size_flags_stretch_ratio = 0.25
 theme_override_fonts/font = ExtResource("1_w1r1c")
 theme_override_font_sizes/font_size = 18
@@ -711,29 +800,20 @@ theme_override_styles/normal = ExtResource("4_e8epa")
 text = "🎯"
 vertical_alignment = 1
 
-[node name="postfix" type="HBoxContainer" parent="margin/ray/left/distance/colts/single-shot/description/margin/stack"]
+[node name="cost" type="HBoxContainer" parent="margin/ray/left/distance/colts/single-shot/description/margin/stack/content/ability"]
 layout_mode = 2
+size_flags_horizontal = 8
 
-[node name="zone" type="Label" parent="margin/ray/left/distance/colts/single-shot/description/margin/stack/postfix"]
-custom_minimum_size = Vector2(60, 0)
-layout_mode = 2
-theme_override_font_sizes/font_size = 18
-text = "|"
-horizontal_alignment = 1
-
-[node name="cost" type="HBoxContainer" parent="margin/ray/left/distance/colts/single-shot/description/margin/stack/postfix"]
-layout_mode = 2
-
-[node name="ap" type="Label" parent="margin/ray/left/distance/colts/single-shot/description/margin/stack/postfix/cost"]
+[node name="ap" type="Label" parent="margin/ray/left/distance/colts/single-shot/description/margin/stack/content/ability/cost"]
 custom_minimum_size = Vector2(22, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
 text = "1"
 horizontal_alignment = 2
 
-[node name="no" type="Control" parent="margin/ray/left/distance/colts/single-shot/description/margin/stack/postfix/cost"]
+[node name="no" type="Control" parent="margin/ray/left/distance/colts/single-shot/description/margin/stack/content/ability/cost"]
 visible = false
-custom_minimum_size = Vector2(28, 0)
+custom_minimum_size = Vector2(22, 0)
 layout_mode = 2
 
 [node name="aura-cost-separator" type="ProgressBar" parent="margin/ray/left/distance/colts/single-shot/description"]
@@ -908,10 +988,189 @@ horizontal_alignment = 2
 
 [node name="no" type="Control" parent="margin/ray/left/distance/colts/air-fight/description/margin/stack/content/ability/cost"]
 visible = false
-custom_minimum_size = Vector2(28, 0)
+custom_minimum_size = Vector2(22, 0)
 layout_mode = 2
 
 [node name="aura-cost-separator" type="ProgressBar" parent="margin/ray/left/distance/colts/air-fight/description"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+max_value = 5.0
+step = 1.0
+value = 2.0
+show_percentage = false
+
+[node name="aid" type="Button" parent="margin/ray/left/distance/colts"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="description" type="VBoxContainer" parent="margin/ray/left/distance/colts/aid"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="margin" type="MarginContainer" parent="margin/ray/left/distance/colts/aid/description"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 0
+
+[node name="stack" type="HBoxContainer" parent="margin/ray/left/distance/colts/aid/description/margin"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+
+[node name="view" type="Control" parent="margin/ray/left/distance/colts/aid/description/margin/stack"]
+custom_minimum_size = Vector2(42, 42)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="margin" type="MarginContainer" parent="margin/ray/left/distance/colts/aid/description/margin/stack/view"]
+layout_mode = 2
+offset_left = 7.0
+offset_top = 9.0
+offset_right = 42.0
+offset_bottom = 42.0
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="fire" type="Label" parent="margin/ray/left/distance/colts/aid/description/margin/stack/view/margin"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("1_w1r1c")
+theme_override_font_sizes/font_size = 28
+text = "🎯"
+
+[node name="bandage" type="Label" parent="margin/ray/left/distance/colts/aid/description/margin/stack/view/margin"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("1_w1r1c")
+theme_override_font_sizes/font_size = 18
+text = "🩹"
+
+[node name="content" type="HFlowContainer" parent="margin/ray/left/distance/colts/aid/description/margin/stack"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+
+[node name="details" type="HBoxContainer" parent="margin/ray/left/distance/colts/aid/description/margin/stack/content"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="margin/ray/left/distance/colts/aid/description/margin/stack/content/details"]
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.560784, 1, 0.529412, 1)
+theme_override_font_sizes/font_size = 18
+text = "Подкрепление"
+text_overrun_behavior = 3
+
+[node name="zone" type="Label" parent="margin/ray/left/distance/colts/aid/description/margin/stack/content/details"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/font_color = Color(0.560784, 1, 0.529412, 1)
+theme_override_font_sizes/font_size = 18
+text = "|"
+horizontal_alignment = 1
+
+[node name="ability" type="HBoxContainer" parent="margin/ray/left/distance/colts/aid/description/margin/stack/content"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_stretch_ratio = 0.25
+theme_override_constants/separation = 0
+
+[node name="help" type="HBoxContainer" parent="margin/ray/left/distance/colts/aid/description/margin/stack/content/ability"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_constants/separation = -3
+
+[node name="slot-1" type="Label" parent="margin/ray/left/distance/colts/aid/description/margin/stack/content/ability/help"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("1_w1r1c")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = ExtResource("4_e8epa")
+text = "🎯"
+vertical_alignment = 1
+
+[node name="dot" type="Label" parent="margin/ray/left/distance/colts/aid/description/margin/stack/content/ability/help"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("5_50ghp")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_1chk7")
+text = "⋅"
+vertical_alignment = 1
+
+[node name="slot-2" type="Label" parent="margin/ray/left/distance/colts/aid/description/margin/stack/content/ability/help"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("1_w1r1c")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = ExtResource("4_e8epa")
+text = "🔥"
+vertical_alignment = 1
+
+[node name="dot2" type="Label" parent="margin/ray/left/distance/colts/aid/description/margin/stack/content/ability/help"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("5_50ghp")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_1chk7")
+text = "⋅"
+vertical_alignment = 1
+
+[node name="slot-3" type="Label" parent="margin/ray/left/distance/colts/aid/description/margin/stack/content/ability/help"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("1_w1r1c")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = ExtResource("4_e8epa")
+text = "🔥"
+vertical_alignment = 1
+
+[node name="cost" type="HBoxContainer" parent="margin/ray/left/distance/colts/aid/description/margin/stack/content/ability"]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="ap" type="Label" parent="margin/ray/left/distance/colts/aid/description/margin/stack/content/ability/cost"]
+custom_minimum_size = Vector2(22, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.560784, 1, 0.529412, 1)
+theme_override_font_sizes/font_size = 18
+text = "2"
+horizontal_alignment = 2
+
+[node name="no" type="Control" parent="margin/ray/left/distance/colts/aid/description/margin/stack/content/ability/cost"]
+visible = false
+custom_minimum_size = Vector2(22, 0)
+layout_mode = 2
+
+[node name="aura-cost-separator" type="ProgressBar" parent="margin/ray/left/distance/colts/aid/description"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8
@@ -960,7 +1219,7 @@ layout_mode = 2
 offset_right = 42.0
 offset_bottom = 42.0
 theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 7
+theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 
@@ -992,7 +1251,7 @@ custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 size_flags_horizontal = 8
 theme_override_font_sizes/font_size = 18
-text = "|"
+text = "¦|¦"
 horizontal_alignment = 1
 
 [node name="ability" type="HBoxContainer" parent="margin/ray/left/distance/shotgun/single-shot/description/margin/stack/content"]
@@ -1025,12 +1284,12 @@ size_flags_horizontal = 8
 custom_minimum_size = Vector2(22, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
-text = "1"
+text = "3"
 horizontal_alignment = 2
 
 [node name="no" type="Control" parent="margin/ray/left/distance/shotgun/single-shot/description/margin/stack/content/ability/cost"]
 visible = false
-custom_minimum_size = Vector2(28, 0)
+custom_minimum_size = Vector2(22, 0)
 layout_mode = 2
 
 [node name="aura-cost-separator" type="ProgressBar" parent="margin/ray/left/distance/shotgun/single-shot/description"]
@@ -1039,7 +1298,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 8
 max_value = 5.0
 step = 1.0
-value = 1.0
+value = 3.0
 show_percentage = false
 
 [node name="shrapnel" type="Button" parent="margin/ray/left/distance/shotgun"]
@@ -1205,7 +1464,7 @@ horizontal_alignment = 2
 
 [node name="no" type="Control" parent="margin/ray/left/distance/shotgun/shrapnel/description/margin/stack/content/ability/cost"]
 visible = false
-custom_minimum_size = Vector2(28, 0)
+custom_minimum_size = Vector2(22, 0)
 layout_mode = 2
 
 [node name="aura-cost-separator" type="ProgressBar" parent="margin/ray/left/distance/shotgun/shrapnel/description"]
@@ -1275,48 +1534,62 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 
-[node name="caption" type="Label" parent="margin/ray/left/torch/fire/description/margin/stack/content"]
+[node name="details" type="HBoxContainer" parent="margin/ray/left/torch/fire/description/margin/stack/content"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="margin/ray/left/torch/fire/description/margin/stack/content/details"]
 custom_minimum_size = Vector2(110, 0)
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.25
 theme_override_font_sizes/font_size = 18
 text = "Факел"
-vertical_alignment = 1
 text_overrun_behavior = 3
 
-[node name="ability" type="Label" parent="margin/ray/left/torch/fire/description/margin/stack/content"]
-custom_minimum_size = Vector2(200, 0)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("1_w1r1c")
-theme_override_styles/normal = ExtResource("4_e8epa")
-text = "🔥 "
-vertical_alignment = 1
-
-[node name="postfix" type="HBoxContainer" parent="margin/ray/left/torch/fire/description/margin/stack"]
-layout_mode = 2
-size_flags_horizontal = 8
-
-[node name="zone" type="Label" parent="margin/ray/left/torch/fire/description/margin/stack/postfix"]
+[node name="zone" type="Label" parent="margin/ray/left/torch/fire/description/margin/stack/content/details"]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
+size_flags_horizontal = 8
 theme_override_font_sizes/font_size = 18
 text = "¦|¦"
 horizontal_alignment = 1
 
-[node name="cost" type="HBoxContainer" parent="margin/ray/left/torch/fire/description/margin/stack/postfix"]
+[node name="ability" type="HBoxContainer" parent="margin/ray/left/torch/fire/description/margin/stack/content"]
 layout_mode = 2
+size_flags_horizontal = 10
+size_flags_stretch_ratio = 0.25
+theme_override_constants/separation = 0
 
-[node name="ap" type="Label" parent="margin/ray/left/torch/fire/description/margin/stack/postfix/cost"]
+[node name="help" type="HBoxContainer" parent="margin/ray/left/torch/fire/description/margin/stack/content/ability"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="slot-1" type="Label" parent="margin/ray/left/torch/fire/description/margin/stack/content/ability/help"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("1_w1r1c")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = ExtResource("4_e8epa")
+text = "🔥"
+vertical_alignment = 1
+
+[node name="cost" type="HBoxContainer" parent="margin/ray/left/torch/fire/description/margin/stack/content/ability"]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="ap" type="Label" parent="margin/ray/left/torch/fire/description/margin/stack/content/ability/cost"]
 custom_minimum_size = Vector2(22, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
 text = "1"
 horizontal_alignment = 2
 
-[node name="no" type="Control" parent="margin/ray/left/torch/fire/description/margin/stack/postfix/cost"]
+[node name="no" type="Control" parent="margin/ray/left/torch/fire/description/margin/stack/content/ability/cost"]
 visible = false
-custom_minimum_size = Vector2(28, 0)
+custom_minimum_size = Vector2(22, 0)
 layout_mode = 2
 
 [node name="aura-cost-separator" type="ProgressBar" parent="margin/ray/left/torch/fire/description"]
@@ -1391,25 +1664,44 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 
-[node name="caption" type="Label" parent="margin/ray/left/torch/cure/description/margin/stack/content"]
+[node name="details" type="HBoxContainer" parent="margin/ray/left/torch/cure/description/margin/stack/content"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="margin/ray/left/torch/cure/description/margin/stack/content/details"]
 custom_minimum_size = Vector2(110, 0)
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.25
 theme_override_colors/font_color = Color(0.560784, 1, 0.529412, 1)
 theme_override_font_sizes/font_size = 18
 text = "Лечение"
-vertical_alignment = 1
 text_overrun_behavior = 3
 
+[node name="zone" type="Label" parent="margin/ray/left/torch/cure/description/margin/stack/content/details"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/font_color = Color(0.560784, 1, 0.529412, 1)
+theme_override_font_sizes/font_size = 18
+text = "|"
+horizontal_alignment = 1
+
 [node name="ability" type="HBoxContainer" parent="margin/ray/left/torch/cure/description/margin/stack/content"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_stretch_ratio = 0.25
+theme_override_constants/separation = 0
+
+[node name="help" type="HBoxContainer" parent="margin/ray/left/torch/cure/description/margin/stack/content/ability"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
+size_flags_horizontal = 6
 theme_override_constants/separation = -3
 
-[node name="slot-1" type="Label" parent="margin/ray/left/torch/cure/description/margin/stack/content/ability"]
+[node name="slot-1" type="Label" parent="margin/ray/left/torch/cure/description/margin/stack/content/ability/help"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
+size_flags_horizontal = 10
 size_flags_stretch_ratio = 0.25
 theme_override_fonts/font = ExtResource("1_w1r1c")
 theme_override_font_sizes/font_size = 18
@@ -1417,9 +1709,10 @@ theme_override_styles/normal = ExtResource("4_e8epa")
 text = "✊"
 vertical_alignment = 1
 
-[node name="dot" type="Label" parent="margin/ray/left/torch/cure/description/margin/stack/content/ability"]
+[node name="dot" type="Label" parent="margin/ray/left/torch/cure/description/margin/stack/content/ability/help"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
+size_flags_horizontal = 8
 size_flags_stretch_ratio = 0.25
 theme_override_fonts/font = ExtResource("5_50ghp")
 theme_override_font_sizes/font_size = 18
@@ -1427,9 +1720,10 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_1chk7")
 text = "⋅"
 vertical_alignment = 1
 
-[node name="slot-2" type="Label" parent="margin/ray/left/torch/cure/description/margin/stack/content/ability"]
+[node name="slot-2" type="Label" parent="margin/ray/left/torch/cure/description/margin/stack/content/ability/help"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
+size_flags_horizontal = 8
 size_flags_stretch_ratio = 0.25
 theme_override_fonts/font = ExtResource("1_w1r1c")
 theme_override_font_sizes/font_size = 18
@@ -1437,9 +1731,10 @@ theme_override_styles/normal = ExtResource("4_e8epa")
 text = "🔥"
 vertical_alignment = 1
 
-[node name="dot2" type="Label" parent="margin/ray/left/torch/cure/description/margin/stack/content/ability"]
+[node name="dot2" type="Label" parent="margin/ray/left/torch/cure/description/margin/stack/content/ability/help"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
+size_flags_horizontal = 8
 size_flags_stretch_ratio = 0.25
 theme_override_fonts/font = ExtResource("5_50ghp")
 theme_override_font_sizes/font_size = 18
@@ -1447,9 +1742,10 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_1chk7")
 text = "⋅"
 vertical_alignment = 1
 
-[node name="slot-3" type="Label" parent="margin/ray/left/torch/cure/description/margin/stack/content/ability"]
+[node name="slot-3" type="Label" parent="margin/ray/left/torch/cure/description/margin/stack/content/ability/help"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
+size_flags_horizontal = 2
 size_flags_stretch_ratio = 0.25
 theme_override_fonts/font = ExtResource("1_w1r1c")
 theme_override_font_sizes/font_size = 18
@@ -1457,30 +1753,21 @@ theme_override_styles/normal = ExtResource("4_e8epa")
 text = "🔥"
 vertical_alignment = 1
 
-[node name="postfix" type="HBoxContainer" parent="margin/ray/left/torch/cure/description/margin/stack"]
+[node name="cost" type="HBoxContainer" parent="margin/ray/left/torch/cure/description/margin/stack/content/ability"]
 layout_mode = 2
+size_flags_horizontal = 8
 
-[node name="zone" type="Label" parent="margin/ray/left/torch/cure/description/margin/stack/postfix"]
-custom_minimum_size = Vector2(60, 0)
-layout_mode = 2
-theme_override_colors/font_color = Color(0.560784, 1, 0.529412, 1)
-theme_override_font_sizes/font_size = 18
-text = "|"
-horizontal_alignment = 1
-
-[node name="cost" type="HBoxContainer" parent="margin/ray/left/torch/cure/description/margin/stack/postfix"]
-layout_mode = 2
-
-[node name="ap" type="Label" parent="margin/ray/left/torch/cure/description/margin/stack/postfix/cost"]
+[node name="ap" type="Label" parent="margin/ray/left/torch/cure/description/margin/stack/content/ability/cost"]
 custom_minimum_size = Vector2(22, 0)
 layout_mode = 2
+theme_override_colors/font_color = Color(0.560784, 1, 0.529412, 1)
 theme_override_font_sizes/font_size = 18
 text = "2"
 horizontal_alignment = 2
 
-[node name="no" type="Control" parent="margin/ray/left/torch/cure/description/margin/stack/postfix/cost"]
+[node name="no" type="Control" parent="margin/ray/left/torch/cure/description/margin/stack/content/ability/cost"]
 visible = false
-custom_minimum_size = Vector2(28, 0)
+custom_minimum_size = Vector2(22, 0)
 layout_mode = 2
 
 [node name="aura-cost-separator" type="ProgressBar" parent="margin/ray/left/torch/cure/description"]
@@ -1547,7 +1834,11 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 
-[node name="caption" type="Label" parent="margin/ray/left/whip/description/margin/stack/content"]
+[node name="details" type="HBoxContainer" parent="margin/ray/left/whip/description/margin/stack/content"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="margin/ray/left/whip/description/margin/stack/content/details"]
 custom_minimum_size = Vector2(110, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -1555,39 +1846,50 @@ theme_override_font_sizes/font_size = 18
 text = "Кнут"
 text_overrun_behavior = 3
 
-[node name="ability" type="Label" parent="margin/ray/left/whip/description/margin/stack/content"]
+[node name="zone" type="Label" parent="margin/ray/left/whip/description/margin/stack/content/details"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_font_sizes/font_size = 24
+text = "↟"
+horizontal_alignment = 1
+
+[node name="ability" type="HBoxContainer" parent="margin/ray/left/whip/description/margin/stack/content"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_stretch_ratio = 0.25
+theme_override_constants/separation = 0
+
+[node name="help" type="HBoxContainer" parent="margin/ray/left/whip/description/margin/stack/content/ability"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="slot-1" type="Label" parent="margin/ray/left/whip/description/margin/stack/content/ability/help"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_horizontal = 6
 size_flags_stretch_ratio = 0.25
 theme_override_fonts/font = ExtResource("1_w1r1c")
 theme_override_font_sizes/font_size = 18
 theme_override_styles/normal = ExtResource("4_e8epa")
-text = "🎣 "
+text = "🎣"
 vertical_alignment = 1
 
-[node name="postfix" type="HBoxContainer" parent="margin/ray/left/whip/description/margin/stack"]
+[node name="cost" type="HBoxContainer" parent="margin/ray/left/whip/description/margin/stack/content/ability"]
 layout_mode = 2
+size_flags_horizontal = 8
 
-[node name="zone" type="Label" parent="margin/ray/left/whip/description/margin/stack/postfix"]
-custom_minimum_size = Vector2(60, 0)
-layout_mode = 2
-theme_override_font_sizes/font_size = 18
-text = "|"
-horizontal_alignment = 1
-
-[node name="cost" type="HBoxContainer" parent="margin/ray/left/whip/description/margin/stack/postfix"]
-layout_mode = 2
-
-[node name="ap" type="Label" parent="margin/ray/left/whip/description/margin/stack/postfix/cost"]
+[node name="ap" type="Label" parent="margin/ray/left/whip/description/margin/stack/content/ability/cost"]
 custom_minimum_size = Vector2(22, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
 text = "1"
 horizontal_alignment = 2
 
-[node name="no" type="Control" parent="margin/ray/left/whip/description/margin/stack/postfix/cost"]
+[node name="no" type="Control" parent="margin/ray/left/whip/description/margin/stack/content/ability/cost"]
 visible = false
-custom_minimum_size = Vector2(28, 0)
+custom_minimum_size = Vector2(22, 0)
 layout_mode = 2
 
 [node name="aura-cost-separator" type="ProgressBar" parent="margin/ray/left/whip/description"]
@@ -1672,24 +1974,41 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 
-[node name="caption" type="Label" parent="margin/ray/right/weapon/knuckles/spit-kick/description/margin/stack/content"]
+[node name="details" type="HBoxContainer" parent="margin/ray/right/weapon/knuckles/spit-kick/description/margin/stack/content"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="margin/ray/right/weapon/knuckles/spit-kick/description/margin/stack/content/details"]
 custom_minimum_size = Vector2(110, 0)
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.25
 theme_override_font_sizes/font_size = 18
 text = "Косой удар"
-vertical_alignment = 1
 text_overrun_behavior = 3
 
-[node name="ability2" type="HBoxContainer" parent="margin/ray/right/weapon/knuckles/spit-kick/description/margin/stack/content"]
+[node name="zone" type="Label" parent="margin/ray/right/weapon/knuckles/spit-kick/description/margin/stack/content/details"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "|"
+horizontal_alignment = 1
+
+[node name="ability" type="HBoxContainer" parent="margin/ray/right/weapon/knuckles/spit-kick/description/margin/stack/content"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_stretch_ratio = 0.25
+theme_override_constants/separation = 0
+
+[node name="help" type="HBoxContainer" parent="margin/ray/right/weapon/knuckles/spit-kick/description/margin/stack/content/ability"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
+size_flags_horizontal = 6
 theme_override_constants/separation = -3
 
-[node name="slot-1" type="Label" parent="margin/ray/right/weapon/knuckles/spit-kick/description/margin/stack/content/ability2"]
+[node name="slot-1" type="Label" parent="margin/ray/right/weapon/knuckles/spit-kick/description/margin/stack/content/ability/help"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
+size_flags_horizontal = 10
 size_flags_stretch_ratio = 0.25
 theme_override_fonts/font = ExtResource("1_w1r1c")
 theme_override_font_sizes/font_size = 18
@@ -1697,7 +2016,7 @@ theme_override_styles/normal = ExtResource("4_e8epa")
 text = "🦶"
 vertical_alignment = 1
 
-[node name="dot" type="Label" parent="margin/ray/right/weapon/knuckles/spit-kick/description/margin/stack/content/ability2"]
+[node name="dot" type="Label" parent="margin/ray/right/weapon/knuckles/spit-kick/description/margin/stack/content/ability/help"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 size_flags_stretch_ratio = 0.25
@@ -1707,7 +2026,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_1chk7")
 text = "⋅"
 vertical_alignment = 1
 
-[node name="slot-2" type="Label" parent="margin/ray/right/weapon/knuckles/spit-kick/description/margin/stack/content/ability2"]
+[node name="slot-2" type="Label" parent="margin/ray/right/weapon/knuckles/spit-kick/description/margin/stack/content/ability/help"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 size_flags_stretch_ratio = 0.25
@@ -1717,7 +2036,7 @@ theme_override_styles/normal = ExtResource("4_e8epa")
 text = "✊"
 vertical_alignment = 1
 
-[node name="dot2" type="Label" parent="margin/ray/right/weapon/knuckles/spit-kick/description/margin/stack/content/ability2"]
+[node name="dot2" type="Label" parent="margin/ray/right/weapon/knuckles/spit-kick/description/margin/stack/content/ability/help"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 size_flags_stretch_ratio = 0.25
@@ -1727,9 +2046,10 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_1chk7")
 text = "⋅"
 vertical_alignment = 1
 
-[node name="slot-3" type="Label" parent="margin/ray/right/weapon/knuckles/spit-kick/description/margin/stack/content/ability2"]
+[node name="slot-3" type="Label" parent="margin/ray/right/weapon/knuckles/spit-kick/description/margin/stack/content/ability/help"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
+size_flags_horizontal = 2
 size_flags_stretch_ratio = 0.25
 theme_override_fonts/font = ExtResource("1_w1r1c")
 theme_override_font_sizes/font_size = 18
@@ -1737,28 +2057,19 @@ theme_override_styles/normal = ExtResource("4_e8epa")
 text = "🦶"
 vertical_alignment = 1
 
-[node name="postfix" type="HBoxContainer" parent="margin/ray/right/weapon/knuckles/spit-kick/description/margin/stack"]
+[node name="cost" type="HBoxContainer" parent="margin/ray/right/weapon/knuckles/spit-kick/description/margin/stack/content/ability"]
 layout_mode = 2
 
-[node name="zone" type="Label" parent="margin/ray/right/weapon/knuckles/spit-kick/description/margin/stack/postfix"]
-custom_minimum_size = Vector2(60, 0)
+[node name="ap" type="Label" parent="margin/ray/right/weapon/knuckles/spit-kick/description/margin/stack/content/ability/cost"]
+visible = false
+custom_minimum_size = Vector2(22, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
-text = "|"
-horizontal_alignment = 1
-
-[node name="cost" type="HBoxContainer" parent="margin/ray/right/weapon/knuckles/spit-kick/description/margin/stack/postfix"]
-layout_mode = 2
-
-[node name="ap" type="Label" parent="margin/ray/right/weapon/knuckles/spit-kick/description/margin/stack/postfix/cost"]
-visible = false
-custom_minimum_size = Vector2(28, 0)
-layout_mode = 2
-text = "99"
+text = "2"
 horizontal_alignment = 2
 
-[node name="no" type="Control" parent="margin/ray/right/weapon/knuckles/spit-kick/description/margin/stack/postfix/cost"]
-custom_minimum_size = Vector2(28, 0)
+[node name="no" type="Control" parent="margin/ray/right/weapon/knuckles/spit-kick/description/margin/stack/content/ability/cost"]
+custom_minimum_size = Vector2(22, 0)
 layout_mode = 2
 
 [node name="aura-cost-separator" type="ProgressBar" parent="margin/ray/right/weapon/knuckles/spit-kick/description"]
@@ -1819,24 +2130,46 @@ theme_override_fonts/font = ExtResource("1_w1r1c")
 theme_override_font_sizes/font_size = 28
 text = "🏓"
 
-[node name="caption" type="Label" parent="margin/ray/right/weapon/knuckles/two-punch/description/margin/stack"]
+[node name="content" type="HFlowContainer" parent="margin/ray/right/weapon/knuckles/two-punch/description/margin/stack"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+
+[node name="details" type="HBoxContainer" parent="margin/ray/right/weapon/knuckles/two-punch/description/margin/stack/content"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="margin/ray/right/weapon/knuckles/two-punch/description/margin/stack/content/details"]
 custom_minimum_size = Vector2(110, 0)
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.25
 theme_override_font_sizes/font_size = 18
 text = "Выпад"
-vertical_alignment = 1
 text_overrun_behavior = 3
 
-[node name="ability" type="HBoxContainer" parent="margin/ray/right/weapon/knuckles/two-punch/description/margin/stack"]
+[node name="zone" type="Label" parent="margin/ray/right/weapon/knuckles/two-punch/description/margin/stack/content/details"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "|"
+horizontal_alignment = 1
+
+[node name="ability" type="HBoxContainer" parent="margin/ray/right/weapon/knuckles/two-punch/description/margin/stack/content"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_stretch_ratio = 0.25
+theme_override_constants/separation = 0
+
+[node name="help" type="HBoxContainer" parent="margin/ray/right/weapon/knuckles/two-punch/description/margin/stack/content/ability"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
+size_flags_horizontal = 6
 theme_override_constants/separation = -3
 
-[node name="slot-1" type="Label" parent="margin/ray/right/weapon/knuckles/two-punch/description/margin/stack/ability"]
+[node name="slot-1" type="Label" parent="margin/ray/right/weapon/knuckles/two-punch/description/margin/stack/content/ability/help"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
+size_flags_horizontal = 10
 size_flags_stretch_ratio = 0.25
 theme_override_fonts/font = ExtResource("1_w1r1c")
 theme_override_font_sizes/font_size = 18
@@ -1844,7 +2177,7 @@ theme_override_styles/normal = ExtResource("4_e8epa")
 text = "🦶"
 vertical_alignment = 1
 
-[node name="dot" type="Label" parent="margin/ray/right/weapon/knuckles/two-punch/description/margin/stack/ability"]
+[node name="dot" type="Label" parent="margin/ray/right/weapon/knuckles/two-punch/description/margin/stack/content/ability/help"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 size_flags_stretch_ratio = 0.25
@@ -1854,7 +2187,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_1chk7")
 text = "⋅"
 vertical_alignment = 1
 
-[node name="slot-2" type="Label" parent="margin/ray/right/weapon/knuckles/two-punch/description/margin/stack/ability"]
+[node name="slot-2" type="Label" parent="margin/ray/right/weapon/knuckles/two-punch/description/margin/stack/content/ability/help"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 size_flags_stretch_ratio = 0.25
@@ -1864,7 +2197,7 @@ theme_override_styles/normal = ExtResource("4_e8epa")
 text = "✊"
 vertical_alignment = 1
 
-[node name="dot2" type="Label" parent="margin/ray/right/weapon/knuckles/two-punch/description/margin/stack/ability"]
+[node name="dot2" type="Label" parent="margin/ray/right/weapon/knuckles/two-punch/description/margin/stack/content/ability/help"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 size_flags_stretch_ratio = 0.25
@@ -1874,9 +2207,10 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_1chk7")
 text = "⋅"
 vertical_alignment = 1
 
-[node name="slot-3" type="Label" parent="margin/ray/right/weapon/knuckles/two-punch/description/margin/stack/ability"]
+[node name="slot-3" type="Label" parent="margin/ray/right/weapon/knuckles/two-punch/description/margin/stack/content/ability/help"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
+size_flags_horizontal = 2
 size_flags_stretch_ratio = 0.25
 theme_override_fonts/font = ExtResource("1_w1r1c")
 theme_override_font_sizes/font_size = 18
@@ -1884,28 +2218,19 @@ theme_override_styles/normal = ExtResource("4_e8epa")
 text = "✊"
 vertical_alignment = 1
 
-[node name="postfix" type="HBoxContainer" parent="margin/ray/right/weapon/knuckles/two-punch/description/margin/stack"]
+[node name="cost" type="HBoxContainer" parent="margin/ray/right/weapon/knuckles/two-punch/description/margin/stack/content/ability"]
 layout_mode = 2
 
-[node name="zone" type="Label" parent="margin/ray/right/weapon/knuckles/two-punch/description/margin/stack/postfix"]
-custom_minimum_size = Vector2(60, 0)
-layout_mode = 2
-theme_override_font_sizes/font_size = 18
-text = "|"
-horizontal_alignment = 1
-
-[node name="cost" type="HBoxContainer" parent="margin/ray/right/weapon/knuckles/two-punch/description/margin/stack/postfix"]
-layout_mode = 2
-
-[node name="ap" type="Label" parent="margin/ray/right/weapon/knuckles/two-punch/description/margin/stack/postfix/cost"]
+[node name="ap" type="Label" parent="margin/ray/right/weapon/knuckles/two-punch/description/margin/stack/content/ability/cost"]
 visible = false
-custom_minimum_size = Vector2(28, 0)
+custom_minimum_size = Vector2(22, 0)
 layout_mode = 2
-text = "99"
+theme_override_font_sizes/font_size = 18
+text = "2"
 horizontal_alignment = 2
 
-[node name="no" type="Control" parent="margin/ray/right/weapon/knuckles/two-punch/description/margin/stack/postfix/cost"]
-custom_minimum_size = Vector2(28, 0)
+[node name="no" type="Control" parent="margin/ray/right/weapon/knuckles/two-punch/description/margin/stack/content/ability/cost"]
+custom_minimum_size = Vector2(22, 0)
 layout_mode = 2
 
 [node name="aura-cost-separator" type="ProgressBar" parent="margin/ray/right/weapon/knuckles/two-punch/description"]
@@ -1978,113 +2303,123 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 
-[node name="caption" type="Label" parent="margin/ray/right/weapon/knuckles/back-spit-kick/description/margin/stack/content"]
+[node name="details" type="HBoxContainer" parent="margin/ray/right/weapon/knuckles/back-spit-kick/description/margin/stack/content"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="margin/ray/right/weapon/knuckles/back-spit-kick/description/margin/stack/content/details"]
 custom_minimum_size = Vector2(110, 0)
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.25
 theme_override_font_sizes/font_size = 18
 text = "Вертушка"
-vertical_alignment = 1
 text_overrun_behavior = 3
 
-[node name="ability" type="HBoxContainer" parent="margin/ray/right/weapon/knuckles/back-spit-kick/description/margin/stack/content"]
-custom_minimum_size = Vector2(200, 0)
-layout_mode = 2
-theme_override_constants/separation = -3
-
-[node name="slot-1" type="Label" parent="margin/ray/right/weapon/knuckles/back-spit-kick/description/margin/stack/content/ability"]
-custom_minimum_size = Vector2(10, 0)
-layout_mode = 2
-size_flags_stretch_ratio = 0.25
-theme_override_fonts/font = ExtResource("1_w1r1c")
-theme_override_font_sizes/font_size = 18
-theme_override_styles/normal = ExtResource("4_e8epa")
-text = "🦶"
-vertical_alignment = 1
-
-[node name="dot" type="Label" parent="margin/ray/right/weapon/knuckles/back-spit-kick/description/margin/stack/content/ability"]
-custom_minimum_size = Vector2(10, 0)
-layout_mode = 2
-size_flags_stretch_ratio = 0.25
-theme_override_fonts/font = ExtResource("5_50ghp")
-theme_override_font_sizes/font_size = 18
-theme_override_styles/normal = SubResource("StyleBoxFlat_1chk7")
-text = "⋅"
-vertical_alignment = 1
-
-[node name="slot-2" type="Label" parent="margin/ray/right/weapon/knuckles/back-spit-kick/description/margin/stack/content/ability"]
-custom_minimum_size = Vector2(10, 0)
-layout_mode = 2
-size_flags_stretch_ratio = 0.25
-theme_override_fonts/font = ExtResource("1_w1r1c")
-theme_override_font_sizes/font_size = 18
-theme_override_styles/normal = ExtResource("4_e8epa")
-text = "✊"
-vertical_alignment = 1
-
-[node name="dot2" type="Label" parent="margin/ray/right/weapon/knuckles/back-spit-kick/description/margin/stack/content/ability"]
-custom_minimum_size = Vector2(10, 0)
-layout_mode = 2
-size_flags_stretch_ratio = 0.25
-theme_override_fonts/font = ExtResource("5_50ghp")
-theme_override_font_sizes/font_size = 18
-theme_override_styles/normal = SubResource("StyleBoxFlat_1chk7")
-text = "⋅"
-vertical_alignment = 1
-
-[node name="slot-3" type="Label" parent="margin/ray/right/weapon/knuckles/back-spit-kick/description/margin/stack/content/ability"]
-custom_minimum_size = Vector2(10, 0)
-layout_mode = 2
-size_flags_stretch_ratio = 0.25
-theme_override_fonts/font = ExtResource("1_w1r1c")
-theme_override_font_sizes/font_size = 18
-theme_override_styles/normal = ExtResource("4_e8epa")
-text = "✊"
-vertical_alignment = 1
-
-[node name="dot3" type="Label" parent="margin/ray/right/weapon/knuckles/back-spit-kick/description/margin/stack/content/ability"]
-custom_minimum_size = Vector2(10, 0)
-layout_mode = 2
-size_flags_stretch_ratio = 0.25
-theme_override_fonts/font = ExtResource("5_50ghp")
-theme_override_font_sizes/font_size = 18
-theme_override_styles/normal = SubResource("StyleBoxFlat_1chk7")
-text = "⋅"
-vertical_alignment = 1
-
-[node name="slot-4" type="Label" parent="margin/ray/right/weapon/knuckles/back-spit-kick/description/margin/stack/content/ability"]
-custom_minimum_size = Vector2(10, 0)
-layout_mode = 2
-size_flags_stretch_ratio = 0.25
-theme_override_fonts/font = ExtResource("1_w1r1c")
-theme_override_font_sizes/font_size = 18
-theme_override_styles/normal = ExtResource("4_e8epa")
-text = "🦶"
-vertical_alignment = 1
-
-[node name="postfix" type="HBoxContainer" parent="margin/ray/right/weapon/knuckles/back-spit-kick/description/margin/stack"]
-layout_mode = 2
-
-[node name="zone" type="Label" parent="margin/ray/right/weapon/knuckles/back-spit-kick/description/margin/stack/postfix"]
+[node name="zone" type="Label" parent="margin/ray/right/weapon/knuckles/back-spit-kick/description/margin/stack/content/details"]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
 text = "|"
 horizontal_alignment = 1
 
-[node name="cost" type="HBoxContainer" parent="margin/ray/right/weapon/knuckles/back-spit-kick/description/margin/stack/postfix"]
+[node name="ability" type="HBoxContainer" parent="margin/ray/right/weapon/knuckles/back-spit-kick/description/margin/stack/content"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_stretch_ratio = 0.25
+theme_override_constants/separation = 0
+
+[node name="help" type="HBoxContainer" parent="margin/ray/right/weapon/knuckles/back-spit-kick/description/margin/stack/content/ability"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_constants/separation = -3
+
+[node name="slot-1" type="Label" parent="margin/ray/right/weapon/knuckles/back-spit-kick/description/margin/stack/content/ability/help"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("1_w1r1c")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = ExtResource("4_e8epa")
+text = "🦶"
+vertical_alignment = 1
+
+[node name="dot" type="Label" parent="margin/ray/right/weapon/knuckles/back-spit-kick/description/margin/stack/content/ability/help"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("5_50ghp")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_1chk7")
+text = "⋅"
+vertical_alignment = 1
+
+[node name="slot-2" type="Label" parent="margin/ray/right/weapon/knuckles/back-spit-kick/description/margin/stack/content/ability/help"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("1_w1r1c")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = ExtResource("4_e8epa")
+text = "✊"
+vertical_alignment = 1
+
+[node name="dot2" type="Label" parent="margin/ray/right/weapon/knuckles/back-spit-kick/description/margin/stack/content/ability/help"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("5_50ghp")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_1chk7")
+text = "⋅"
+vertical_alignment = 1
+
+[node name="slot-3" type="Label" parent="margin/ray/right/weapon/knuckles/back-spit-kick/description/margin/stack/content/ability/help"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("1_w1r1c")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = ExtResource("4_e8epa")
+text = "✊"
+vertical_alignment = 1
+
+[node name="dot3" type="Label" parent="margin/ray/right/weapon/knuckles/back-spit-kick/description/margin/stack/content/ability/help"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("5_50ghp")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_1chk7")
+text = "⋅"
+vertical_alignment = 1
+
+[node name="slot-4" type="Label" parent="margin/ray/right/weapon/knuckles/back-spit-kick/description/margin/stack/content/ability/help"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("1_w1r1c")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = ExtResource("4_e8epa")
+text = "🦶"
+vertical_alignment = 1
+
+[node name="cost" type="HBoxContainer" parent="margin/ray/right/weapon/knuckles/back-spit-kick/description/margin/stack/content/ability"]
 layout_mode = 2
 
-[node name="ap" type="Label" parent="margin/ray/right/weapon/knuckles/back-spit-kick/description/margin/stack/postfix/cost"]
+[node name="ap" type="Label" parent="margin/ray/right/weapon/knuckles/back-spit-kick/description/margin/stack/content/ability/cost"]
 visible = false
-custom_minimum_size = Vector2(28, 0)
+custom_minimum_size = Vector2(22, 0)
 layout_mode = 2
-text = "99"
+theme_override_font_sizes/font_size = 18
+text = "2"
 horizontal_alignment = 2
 
-[node name="no" type="Control" parent="margin/ray/right/weapon/knuckles/back-spit-kick/description/margin/stack/postfix/cost"]
-custom_minimum_size = Vector2(28, 0)
+[node name="no" type="Control" parent="margin/ray/right/weapon/knuckles/back-spit-kick/description/margin/stack/content/ability/cost"]
+custom_minimum_size = Vector2(22, 0)
 layout_mode = 2
 
 [node name="aura-cost-separator" type="ProgressBar" parent="margin/ray/right/weapon/knuckles/back-spit-kick/description"]
@@ -2162,26 +2497,42 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
-theme_override_constants/v_separation = -3
 
-[node name="caption" type="Label" parent="margin/ray/right/weapon/knife/backstab/description/margin/stack/content"]
+[node name="details" type="HBoxContainer" parent="margin/ray/right/weapon/knife/backstab/description/margin/stack/content"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="margin/ray/right/weapon/knife/backstab/description/margin/stack/content/details"]
 custom_minimum_size = Vector2(110, 0)
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.25
 theme_override_font_sizes/font_size = 18
 text = "Удар сзади"
-vertical_alignment = 1
 text_overrun_behavior = 3
 
+[node name="zone" type="Label" parent="margin/ray/right/weapon/knife/backstab/description/margin/stack/content/details"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "|"
+horizontal_alignment = 1
+
 [node name="ability" type="HBoxContainer" parent="margin/ray/right/weapon/knife/backstab/description/margin/stack/content"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_stretch_ratio = 0.25
+theme_override_constants/separation = 0
+
+[node name="help" type="HBoxContainer" parent="margin/ray/right/weapon/knife/backstab/description/margin/stack/content/ability"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
+size_flags_horizontal = 6
 theme_override_constants/separation = -3
 
-[node name="slot-1" type="Label" parent="margin/ray/right/weapon/knife/backstab/description/margin/stack/content/ability"]
+[node name="slot-1" type="Label" parent="margin/ray/right/weapon/knife/backstab/description/margin/stack/content/ability/help"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
+size_flags_horizontal = 10
 size_flags_stretch_ratio = 0.25
 theme_override_fonts/font = ExtResource("1_w1r1c")
 theme_override_font_sizes/font_size = 18
@@ -2189,7 +2540,7 @@ theme_override_styles/normal = ExtResource("4_e8epa")
 text = "🦶"
 vertical_alignment = 1
 
-[node name="dot" type="Label" parent="margin/ray/right/weapon/knife/backstab/description/margin/stack/content/ability"]
+[node name="dot" type="Label" parent="margin/ray/right/weapon/knife/backstab/description/margin/stack/content/ability/help"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 size_flags_stretch_ratio = 0.25
@@ -2199,7 +2550,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_1chk7")
 text = "⋅"
 vertical_alignment = 1
 
-[node name="slot-2" type="Label" parent="margin/ray/right/weapon/knife/backstab/description/margin/stack/content/ability"]
+[node name="slot-2" type="Label" parent="margin/ray/right/weapon/knife/backstab/description/margin/stack/content/ability/help"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 size_flags_stretch_ratio = 0.25
@@ -2209,7 +2560,7 @@ theme_override_styles/normal = ExtResource("4_e8epa")
 text = "🦶"
 vertical_alignment = 1
 
-[node name="dot2" type="Label" parent="margin/ray/right/weapon/knife/backstab/description/margin/stack/content/ability"]
+[node name="dot2" type="Label" parent="margin/ray/right/weapon/knife/backstab/description/margin/stack/content/ability/help"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 size_flags_stretch_ratio = 0.25
@@ -2219,9 +2570,10 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_1chk7")
 text = "⋅"
 vertical_alignment = 1
 
-[node name="slot-3" type="Label" parent="margin/ray/right/weapon/knife/backstab/description/margin/stack/content/ability"]
+[node name="slot-3" type="Label" parent="margin/ray/right/weapon/knife/backstab/description/margin/stack/content/ability/help"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
+size_flags_horizontal = 2
 size_flags_stretch_ratio = 0.25
 theme_override_fonts/font = ExtResource("1_w1r1c")
 theme_override_font_sizes/font_size = 18
@@ -2229,28 +2581,19 @@ theme_override_styles/normal = ExtResource("4_e8epa")
 text = "🔪"
 vertical_alignment = 1
 
-[node name="postfix" type="HBoxContainer" parent="margin/ray/right/weapon/knife/backstab/description/margin/stack"]
+[node name="cost" type="HBoxContainer" parent="margin/ray/right/weapon/knife/backstab/description/margin/stack/content/ability"]
 layout_mode = 2
 
-[node name="zone" type="Label" parent="margin/ray/right/weapon/knife/backstab/description/margin/stack/postfix"]
-custom_minimum_size = Vector2(60, 0)
+[node name="ap" type="Label" parent="margin/ray/right/weapon/knife/backstab/description/margin/stack/content/ability/cost"]
+visible = false
+custom_minimum_size = Vector2(22, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
-text = "|"
-horizontal_alignment = 1
-
-[node name="cost" type="HBoxContainer" parent="margin/ray/right/weapon/knife/backstab/description/margin/stack/postfix"]
-layout_mode = 2
-
-[node name="ap" type="Label" parent="margin/ray/right/weapon/knife/backstab/description/margin/stack/postfix/cost"]
-visible = false
-custom_minimum_size = Vector2(28, 0)
-layout_mode = 2
-text = "99"
+text = "2"
 horizontal_alignment = 2
 
-[node name="no" type="Control" parent="margin/ray/right/weapon/knife/backstab/description/margin/stack/postfix/cost"]
-custom_minimum_size = Vector2(28, 0)
+[node name="no" type="Control" parent="margin/ray/right/weapon/knife/backstab/description/margin/stack/content/ability/cost"]
+custom_minimum_size = Vector2(22, 0)
 layout_mode = 2
 
 [node name="aura-cost-separator" type="ProgressBar" parent="margin/ray/right/weapon/knife/backstab/description"]
@@ -2310,112 +2653,128 @@ text = "🏒"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="caption" type="Label" parent="margin/ray/right/weapon/knife/knock-down/description/margin/stack"]
+[node name="content" type="HFlowContainer" parent="margin/ray/right/weapon/knife/knock-down/description/margin/stack"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+
+[node name="details" type="HBoxContainer" parent="margin/ray/right/weapon/knife/knock-down/description/margin/stack/content"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="margin/ray/right/weapon/knife/knock-down/description/margin/stack/content/details"]
 custom_minimum_size = Vector2(110, 0)
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.25
 theme_override_font_sizes/font_size = 18
 text = "Сбитие с ног"
-vertical_alignment = 1
 text_overrun_behavior = 3
 
-[node name="ability" type="HBoxContainer" parent="margin/ray/right/weapon/knife/knock-down/description/margin/stack"]
-custom_minimum_size = Vector2(200, 0)
-layout_mode = 2
-theme_override_constants/separation = -3
-
-[node name="slot-1" type="Label" parent="margin/ray/right/weapon/knife/knock-down/description/margin/stack/ability"]
-custom_minimum_size = Vector2(10, 0)
-layout_mode = 2
-size_flags_stretch_ratio = 0.25
-theme_override_fonts/font = ExtResource("1_w1r1c")
-theme_override_font_sizes/font_size = 18
-theme_override_styles/normal = ExtResource("4_e8epa")
-text = "🔪"
-vertical_alignment = 1
-
-[node name="dot" type="Label" parent="margin/ray/right/weapon/knife/knock-down/description/margin/stack/ability"]
-custom_minimum_size = Vector2(10, 0)
-layout_mode = 2
-size_flags_stretch_ratio = 0.25
-theme_override_fonts/font = ExtResource("5_50ghp")
-theme_override_font_sizes/font_size = 18
-theme_override_styles/normal = SubResource("StyleBoxFlat_1chk7")
-text = "⋅"
-vertical_alignment = 1
-
-[node name="slot-2" type="Label" parent="margin/ray/right/weapon/knife/knock-down/description/margin/stack/ability"]
-custom_minimum_size = Vector2(10, 0)
-layout_mode = 2
-size_flags_stretch_ratio = 0.25
-theme_override_fonts/font = ExtResource("1_w1r1c")
-theme_override_font_sizes/font_size = 18
-theme_override_styles/normal = ExtResource("4_e8epa")
-text = "🦶"
-vertical_alignment = 1
-
-[node name="dot2" type="Label" parent="margin/ray/right/weapon/knife/knock-down/description/margin/stack/ability"]
-custom_minimum_size = Vector2(10, 0)
-layout_mode = 2
-size_flags_stretch_ratio = 0.25
-theme_override_fonts/font = ExtResource("5_50ghp")
-theme_override_font_sizes/font_size = 18
-theme_override_styles/normal = SubResource("StyleBoxFlat_1chk7")
-text = "⋅"
-vertical_alignment = 1
-
-[node name="slot-3" type="Label" parent="margin/ray/right/weapon/knife/knock-down/description/margin/stack/ability"]
-custom_minimum_size = Vector2(10, 0)
-layout_mode = 2
-size_flags_stretch_ratio = 0.25
-theme_override_fonts/font = ExtResource("1_w1r1c")
-theme_override_font_sizes/font_size = 18
-theme_override_styles/normal = ExtResource("4_e8epa")
-text = "🔪"
-vertical_alignment = 1
-
-[node name="dot3" type="Label" parent="margin/ray/right/weapon/knife/knock-down/description/margin/stack/ability"]
-custom_minimum_size = Vector2(10, 0)
-layout_mode = 2
-size_flags_stretch_ratio = 0.25
-theme_override_fonts/font = ExtResource("5_50ghp")
-theme_override_font_sizes/font_size = 18
-theme_override_styles/normal = SubResource("StyleBoxFlat_1chk7")
-text = "⋅"
-vertical_alignment = 1
-
-[node name="slot-4" type="Label" parent="margin/ray/right/weapon/knife/knock-down/description/margin/stack/ability"]
-custom_minimum_size = Vector2(10, 0)
-layout_mode = 2
-size_flags_stretch_ratio = 0.25
-theme_override_fonts/font = ExtResource("1_w1r1c")
-theme_override_font_sizes/font_size = 18
-theme_override_styles/normal = ExtResource("4_e8epa")
-text = "🦶"
-vertical_alignment = 1
-
-[node name="postfix" type="HBoxContainer" parent="margin/ray/right/weapon/knife/knock-down/description/margin/stack"]
-layout_mode = 2
-
-[node name="zone" type="Label" parent="margin/ray/right/weapon/knife/knock-down/description/margin/stack/postfix"]
+[node name="zone" type="Label" parent="margin/ray/right/weapon/knife/knock-down/description/margin/stack/content/details"]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
+theme_override_font_sizes/font_size = 18
 text = "|"
 horizontal_alignment = 1
 
-[node name="cost" type="HBoxContainer" parent="margin/ray/right/weapon/knife/knock-down/description/margin/stack/postfix"]
+[node name="ability" type="HBoxContainer" parent="margin/ray/right/weapon/knife/knock-down/description/margin/stack/content"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_stretch_ratio = 0.25
+theme_override_constants/separation = 0
+
+[node name="help" type="HBoxContainer" parent="margin/ray/right/weapon/knife/knock-down/description/margin/stack/content/ability"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_constants/separation = -3
+
+[node name="slot-1" type="Label" parent="margin/ray/right/weapon/knife/knock-down/description/margin/stack/content/ability/help"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("1_w1r1c")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = ExtResource("4_e8epa")
+text = "🔪"
+vertical_alignment = 1
+
+[node name="dot" type="Label" parent="margin/ray/right/weapon/knife/knock-down/description/margin/stack/content/ability/help"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("5_50ghp")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_1chk7")
+text = "⋅"
+vertical_alignment = 1
+
+[node name="slot-2" type="Label" parent="margin/ray/right/weapon/knife/knock-down/description/margin/stack/content/ability/help"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("1_w1r1c")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = ExtResource("4_e8epa")
+text = "🦶"
+vertical_alignment = 1
+
+[node name="dot2" type="Label" parent="margin/ray/right/weapon/knife/knock-down/description/margin/stack/content/ability/help"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("5_50ghp")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_1chk7")
+text = "⋅"
+vertical_alignment = 1
+
+[node name="slot-3" type="Label" parent="margin/ray/right/weapon/knife/knock-down/description/margin/stack/content/ability/help"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("1_w1r1c")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = ExtResource("4_e8epa")
+text = "🔪"
+vertical_alignment = 1
+
+[node name="dot3" type="Label" parent="margin/ray/right/weapon/knife/knock-down/description/margin/stack/content/ability/help"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("5_50ghp")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_1chk7")
+text = "⋅"
+vertical_alignment = 1
+
+[node name="slot-4" type="Label" parent="margin/ray/right/weapon/knife/knock-down/description/margin/stack/content/ability/help"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("1_w1r1c")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = ExtResource("4_e8epa")
+text = "🦶"
+vertical_alignment = 1
+
+[node name="cost" type="HBoxContainer" parent="margin/ray/right/weapon/knife/knock-down/description/margin/stack/content/ability"]
 layout_mode = 2
 
-[node name="ap" type="Label" parent="margin/ray/right/weapon/knife/knock-down/description/margin/stack/postfix/cost"]
+[node name="ap" type="Label" parent="margin/ray/right/weapon/knife/knock-down/description/margin/stack/content/ability/cost"]
 visible = false
-custom_minimum_size = Vector2(28, 0)
+custom_minimum_size = Vector2(22, 0)
 layout_mode = 2
-text = "99"
+theme_override_font_sizes/font_size = 18
+text = "2"
 horizontal_alignment = 2
 
-[node name="no" type="Control" parent="margin/ray/right/weapon/knife/knock-down/description/margin/stack/postfix/cost"]
-custom_minimum_size = Vector2(28, 0)
+[node name="no" type="Control" parent="margin/ray/right/weapon/knife/knock-down/description/margin/stack/content/ability/cost"]
+custom_minimum_size = Vector2(22, 0)
 layout_mode = 2
 
 [node name="aura-cost-separator" type="ProgressBar" parent="margin/ray/right/weapon/knife/knock-down/description"]
@@ -2494,9 +2853,12 @@ text = "⚫"
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
-theme_override_constants/v_separation = -5
 
-[node name="caption" type="Label" parent="margin/ray/right/distance/colts/greek-fire/description/margin/stack/content"]
+[node name="details" type="HBoxContainer" parent="margin/ray/right/distance/colts/greek-fire/description/margin/stack/content"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="margin/ray/right/distance/colts/greek-fire/description/margin/stack/content/details"]
 custom_minimum_size = Vector2(110, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -2504,14 +2866,29 @@ theme_override_font_sizes/font_size = 18
 text = "Греческий огонь"
 text_overrun_behavior = 3
 
+[node name="zone" type="Label" parent="margin/ray/right/distance/colts/greek-fire/description/margin/stack/content/details"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "|"
+horizontal_alignment = 1
+
 [node name="ability" type="HBoxContainer" parent="margin/ray/right/distance/colts/greek-fire/description/margin/stack/content"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_stretch_ratio = 0.25
+theme_override_constants/separation = 0
+
+[node name="help" type="HBoxContainer" parent="margin/ray/right/distance/colts/greek-fire/description/margin/stack/content/ability"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
+size_flags_horizontal = 6
 theme_override_constants/separation = -3
 
-[node name="slot-1" type="Label" parent="margin/ray/right/distance/colts/greek-fire/description/margin/stack/content/ability"]
+[node name="slot-1" type="Label" parent="margin/ray/right/distance/colts/greek-fire/description/margin/stack/content/ability/help"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
+size_flags_horizontal = 10
 size_flags_stretch_ratio = 0.25
 theme_override_fonts/font = ExtResource("1_w1r1c")
 theme_override_font_sizes/font_size = 18
@@ -2519,7 +2896,7 @@ theme_override_styles/normal = ExtResource("4_e8epa")
 text = "🔥"
 vertical_alignment = 1
 
-[node name="dot" type="Label" parent="margin/ray/right/distance/colts/greek-fire/description/margin/stack/content/ability"]
+[node name="dot" type="Label" parent="margin/ray/right/distance/colts/greek-fire/description/margin/stack/content/ability/help"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 size_flags_stretch_ratio = 0.25
@@ -2529,9 +2906,10 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_1chk7")
 text = "⋅"
 vertical_alignment = 1
 
-[node name="slot-2" type="Label" parent="margin/ray/right/distance/colts/greek-fire/description/margin/stack/content/ability"]
+[node name="slot-2" type="Label" parent="margin/ray/right/distance/colts/greek-fire/description/margin/stack/content/ability/help"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
+size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.25
 theme_override_fonts/font = ExtResource("1_w1r1c")
 theme_override_font_sizes/font_size = 18
@@ -2539,29 +2917,19 @@ theme_override_styles/normal = ExtResource("4_e8epa")
 text = "🎯"
 vertical_alignment = 1
 
-[node name="postfix" type="HBoxContainer" parent="margin/ray/right/distance/colts/greek-fire/description/margin/stack"]
+[node name="cost" type="HBoxContainer" parent="margin/ray/right/distance/colts/greek-fire/description/margin/stack/content/ability"]
 layout_mode = 2
 
-[node name="zone" type="Label" parent="margin/ray/right/distance/colts/greek-fire/description/margin/stack/postfix"]
-custom_minimum_size = Vector2(60, 0)
-layout_mode = 2
-theme_override_font_sizes/font_size = 18
-text = "|"
-horizontal_alignment = 1
-
-[node name="cost" type="HBoxContainer" parent="margin/ray/right/distance/colts/greek-fire/description/margin/stack/postfix"]
-layout_mode = 2
-
-[node name="ap" type="Label" parent="margin/ray/right/distance/colts/greek-fire/description/margin/stack/postfix/cost"]
+[node name="ap" type="Label" parent="margin/ray/right/distance/colts/greek-fire/description/margin/stack/content/ability/cost"]
 custom_minimum_size = Vector2(22, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
 text = "2"
 horizontal_alignment = 2
 
-[node name="no" type="Control" parent="margin/ray/right/distance/colts/greek-fire/description/margin/stack/postfix/cost"]
+[node name="no" type="Control" parent="margin/ray/right/distance/colts/greek-fire/description/margin/stack/content/ability/cost"]
 visible = false
-custom_minimum_size = Vector2(28, 0)
+custom_minimum_size = Vector2(22, 0)
 layout_mode = 2
 
 [node name="aura-cost-separator" type="ProgressBar" parent="margin/ray/right/distance/colts/greek-fire/description"]
@@ -2635,7 +3003,11 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 
-[node name="caption" type="Label" parent="margin/ray/right/distance/colts/stray-bullet/description/margin/stack/content"]
+[node name="details" type="HBoxContainer" parent="margin/ray/right/distance/colts/stray-bullet/description/margin/stack/content"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="margin/ray/right/distance/colts/stray-bullet/description/margin/stack/content/details"]
 custom_minimum_size = Vector2(110, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -2643,14 +3015,29 @@ theme_override_font_sizes/font_size = 18
 text = "Шальная пуля"
 text_overrun_behavior = 3
 
+[node name="zone" type="Label" parent="margin/ray/right/distance/colts/stray-bullet/description/margin/stack/content/details"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "|"
+horizontal_alignment = 1
+
 [node name="ability" type="HBoxContainer" parent="margin/ray/right/distance/colts/stray-bullet/description/margin/stack/content"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_stretch_ratio = 0.25
+theme_override_constants/separation = 0
+
+[node name="help" type="HBoxContainer" parent="margin/ray/right/distance/colts/stray-bullet/description/margin/stack/content/ability"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
+size_flags_horizontal = 6
 theme_override_constants/separation = -3
 
-[node name="slot-1" type="Label" parent="margin/ray/right/distance/colts/stray-bullet/description/margin/stack/content/ability"]
+[node name="slot-1" type="Label" parent="margin/ray/right/distance/colts/stray-bullet/description/margin/stack/content/ability/help"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
+size_flags_horizontal = 10
 size_flags_stretch_ratio = 0.25
 theme_override_fonts/font = ExtResource("1_w1r1c")
 theme_override_font_sizes/font_size = 18
@@ -2658,7 +3045,7 @@ theme_override_styles/normal = ExtResource("4_e8epa")
 text = "🎣"
 vertical_alignment = 1
 
-[node name="dot" type="Label" parent="margin/ray/right/distance/colts/stray-bullet/description/margin/stack/content/ability"]
+[node name="dot" type="Label" parent="margin/ray/right/distance/colts/stray-bullet/description/margin/stack/content/ability/help"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 size_flags_stretch_ratio = 0.25
@@ -2668,9 +3055,10 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_1chk7")
 text = "⋅"
 vertical_alignment = 1
 
-[node name="slot-2" type="Label" parent="margin/ray/right/distance/colts/stray-bullet/description/margin/stack/content/ability"]
+[node name="slot-2" type="Label" parent="margin/ray/right/distance/colts/stray-bullet/description/margin/stack/content/ability/help"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
+size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.25
 theme_override_fonts/font = ExtResource("1_w1r1c")
 theme_override_font_sizes/font_size = 18
@@ -2678,29 +3066,19 @@ theme_override_styles/normal = ExtResource("4_e8epa")
 text = "🎯"
 vertical_alignment = 1
 
-[node name="postfix" type="HBoxContainer" parent="margin/ray/right/distance/colts/stray-bullet/description/margin/stack"]
+[node name="cost" type="HBoxContainer" parent="margin/ray/right/distance/colts/stray-bullet/description/margin/stack/content/ability"]
 layout_mode = 2
 
-[node name="zone" type="Label" parent="margin/ray/right/distance/colts/stray-bullet/description/margin/stack/postfix"]
-custom_minimum_size = Vector2(60, 0)
-layout_mode = 2
-theme_override_font_sizes/font_size = 18
-text = "|"
-horizontal_alignment = 1
-
-[node name="cost" type="HBoxContainer" parent="margin/ray/right/distance/colts/stray-bullet/description/margin/stack/postfix"]
-layout_mode = 2
-
-[node name="ap" type="Label" parent="margin/ray/right/distance/colts/stray-bullet/description/margin/stack/postfix/cost"]
+[node name="ap" type="Label" parent="margin/ray/right/distance/colts/stray-bullet/description/margin/stack/content/ability/cost"]
 custom_minimum_size = Vector2(22, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
 text = "2"
 horizontal_alignment = 2
 
-[node name="no" type="Control" parent="margin/ray/right/distance/colts/stray-bullet/description/margin/stack/postfix/cost"]
+[node name="no" type="Control" parent="margin/ray/right/distance/colts/stray-bullet/description/margin/stack/content/ability/cost"]
 visible = false
-custom_minimum_size = Vector2(28, 0)
+custom_minimum_size = Vector2(22, 0)
 layout_mode = 2
 
 [node name="aura-cost-separator" type="ProgressBar" parent="margin/ray/right/distance/colts/stray-bullet/description"]
@@ -2775,21 +3153,41 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 
-[node name="caption" type="Label" parent="margin/ray/right/distance/shotgun-breakfly/description/margin/stack/content"]
+[node name="details" type="HBoxContainer" parent="margin/ray/right/distance/shotgun-breakfly/description/margin/stack/content"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="margin/ray/right/distance/shotgun-breakfly/description/margin/stack/content/details"]
 custom_minimum_size = Vector2(110, 0)
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 18
 text = "Отбойный молоток"
 text_overrun_behavior = 3
 
-[node name="ability2" type="HBoxContainer" parent="margin/ray/right/distance/shotgun-breakfly/description/margin/stack/content"]
+[node name="zone" type="Label" parent="margin/ray/right/distance/shotgun-breakfly/description/margin/stack/content/details"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "|"
+horizontal_alignment = 1
+
+[node name="ability" type="HBoxContainer" parent="margin/ray/right/distance/shotgun-breakfly/description/margin/stack/content"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_stretch_ratio = 0.25
+theme_override_constants/separation = 0
+
+[node name="help" type="HBoxContainer" parent="margin/ray/right/distance/shotgun-breakfly/description/margin/stack/content/ability"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
+size_flags_horizontal = 6
 theme_override_constants/separation = -3
 
-[node name="slot-1" type="Label" parent="margin/ray/right/distance/shotgun-breakfly/description/margin/stack/content/ability2"]
+[node name="slot-1" type="Label" parent="margin/ray/right/distance/shotgun-breakfly/description/margin/stack/content/ability/help"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
+size_flags_horizontal = 10
 size_flags_stretch_ratio = 0.25
 theme_override_fonts/font = ExtResource("1_w1r1c")
 theme_override_font_sizes/font_size = 18
@@ -2797,7 +3195,7 @@ theme_override_styles/normal = ExtResource("4_e8epa")
 text = "✊"
 vertical_alignment = 1
 
-[node name="dot" type="Label" parent="margin/ray/right/distance/shotgun-breakfly/description/margin/stack/content/ability2"]
+[node name="dot" type="Label" parent="margin/ray/right/distance/shotgun-breakfly/description/margin/stack/content/ability/help"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 size_flags_stretch_ratio = 0.25
@@ -2807,9 +3205,10 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_1chk7")
 text = "⋅"
 vertical_alignment = 1
 
-[node name="slot-2" type="Label" parent="margin/ray/right/distance/shotgun-breakfly/description/margin/stack/content/ability2"]
+[node name="slot-2" type="Label" parent="margin/ray/right/distance/shotgun-breakfly/description/margin/stack/content/ability/help"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
+size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.25
 theme_override_fonts/font = ExtResource("1_w1r1c")
 theme_override_font_sizes/font_size = 18
@@ -2817,27 +3216,19 @@ theme_override_styles/normal = ExtResource("4_e8epa")
 text = "🎯"
 vertical_alignment = 1
 
-[node name="postfix" type="HBoxContainer" parent="margin/ray/right/distance/shotgun-breakfly/description/margin/stack"]
+[node name="cost" type="HBoxContainer" parent="margin/ray/right/distance/shotgun-breakfly/description/margin/stack/content/ability"]
 layout_mode = 2
 
-[node name="zone" type="Label" parent="margin/ray/right/distance/shotgun-breakfly/description/margin/stack/postfix"]
-custom_minimum_size = Vector2(60, 0)
-layout_mode = 2
-text = "|"
-horizontal_alignment = 1
-
-[node name="cost" type="HBoxContainer" parent="margin/ray/right/distance/shotgun-breakfly/description/margin/stack/postfix"]
-layout_mode = 2
-
-[node name="ap" type="Label" parent="margin/ray/right/distance/shotgun-breakfly/description/margin/stack/postfix/cost"]
+[node name="ap" type="Label" parent="margin/ray/right/distance/shotgun-breakfly/description/margin/stack/content/ability/cost"]
 custom_minimum_size = Vector2(22, 0)
 layout_mode = 2
+theme_override_font_sizes/font_size = 18
 text = "3"
 horizontal_alignment = 2
 
-[node name="no" type="Control" parent="margin/ray/right/distance/shotgun-breakfly/description/margin/stack/postfix/cost"]
+[node name="no" type="Control" parent="margin/ray/right/distance/shotgun-breakfly/description/margin/stack/content/ability/cost"]
 visible = false
-custom_minimum_size = Vector2(28, 0)
+custom_minimum_size = Vector2(22, 0)
 layout_mode = 2
 
 [node name="aura-cost-separator" type="ProgressBar" parent="margin/ray/right/distance/shotgun-breakfly/description"]
@@ -2926,29 +3317,42 @@ text = "🔥"
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
-theme_override_constants/v_separation = -4
 
-[node name="caption" type="Label" parent="margin/ray/right/skills/torch/dance/description/margin/stack/content"]
+[node name="details" type="HBoxContainer" parent="margin/ray/right/skills/torch/dance/description/margin/stack/content"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="margin/ray/right/skills/torch/dance/description/margin/stack/content/details"]
 custom_minimum_size = Vector2(110, 0)
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.25
 theme_override_font_sizes/font_size = 18
 text = "Танец огня"
-vertical_alignment = 1
 text_overrun_behavior = 3
 
-[node name="ability" type="HBoxContainer" parent="margin/ray/right/skills/torch/dance/description/margin/stack/content"]
-custom_minimum_size = Vector2(200, 0)
+[node name="zone" type="Label" parent="margin/ray/right/skills/torch/dance/description/margin/stack/content/details"]
+custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
-theme_override_constants/separation = -3
+theme_override_font_sizes/font_size = 18
+text = "|¦|"
+horizontal_alignment = 1
+
+[node name="ability" type="HBoxContainer" parent="margin/ray/right/skills/torch/dance/description/margin/stack/content"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_stretch_ratio = 0.25
+theme_override_constants/separation = 0
 
 [node name="help" type="HBoxContainer" parent="margin/ray/right/skills/torch/dance/description/margin/stack/content/ability"]
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
+size_flags_horizontal = 6
+theme_override_constants/separation = -3
 
 [node name="slot-1" type="Label" parent="margin/ray/right/skills/torch/dance/description/margin/stack/content/ability/help"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
+size_flags_horizontal = 10
 size_flags_stretch_ratio = 0.25
 theme_override_fonts/font = ExtResource("1_w1r1c")
 theme_override_font_sizes/font_size = 18
@@ -2989,6 +3393,7 @@ vertical_alignment = 1
 [node name="slot-3" type="Label" parent="margin/ray/right/skills/torch/dance/description/margin/stack/content/ability/help"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
+size_flags_horizontal = 0
 size_flags_stretch_ratio = 0.25
 theme_override_fonts/font = ExtResource("1_w1r1c")
 theme_override_font_sizes/font_size = 18
@@ -3009,6 +3414,7 @@ vertical_alignment = 1
 [node name="slot-4" type="Label" parent="margin/ray/right/skills/torch/dance/description/margin/stack/content/ability/help"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
+size_flags_horizontal = 2
 size_flags_stretch_ratio = 0.25
 theme_override_fonts/font = ExtResource("1_w1r1c")
 theme_override_font_sizes/font_size = 18
@@ -3016,29 +3422,19 @@ theme_override_styles/normal = ExtResource("4_e8epa")
 text = "🔥"
 vertical_alignment = 1
 
-[node name="postfix" type="HBoxContainer" parent="margin/ray/right/skills/torch/dance/description/margin/stack"]
+[node name="cost" type="HBoxContainer" parent="margin/ray/right/skills/torch/dance/description/margin/stack/content/ability"]
 layout_mode = 2
 
-[node name="zone" type="Label" parent="margin/ray/right/skills/torch/dance/description/margin/stack/postfix"]
-custom_minimum_size = Vector2(60, 0)
-layout_mode = 2
-theme_override_font_sizes/font_size = 18
-text = "|¦|"
-horizontal_alignment = 1
-
-[node name="cost" type="HBoxContainer" parent="margin/ray/right/skills/torch/dance/description/margin/stack/postfix"]
-layout_mode = 2
-
-[node name="ap" type="Label" parent="margin/ray/right/skills/torch/dance/description/margin/stack/postfix/cost"]
+[node name="ap" type="Label" parent="margin/ray/right/skills/torch/dance/description/margin/stack/content/ability/cost"]
 custom_minimum_size = Vector2(22, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
 text = "4"
 horizontal_alignment = 2
 
-[node name="no" type="Control" parent="margin/ray/right/skills/torch/dance/description/margin/stack/postfix/cost"]
+[node name="no" type="Control" parent="margin/ray/right/skills/torch/dance/description/margin/stack/content/ability/cost"]
 visible = false
-custom_minimum_size = Vector2(28, 0)
+custom_minimum_size = Vector2(22, 0)
 layout_mode = 2
 
 [node name="aura-cost-separator" type="ProgressBar" parent="margin/ray/right/skills/torch/dance/description"]
@@ -3112,26 +3508,42 @@ text = "🦶"
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
-theme_override_constants/v_separation = -6
 
-[node name="caption" type="Label" parent="margin/ray/right/skills/torch/kick/description/margin/stack/content"]
+[node name="details" type="HBoxContainer" parent="margin/ray/right/skills/torch/kick/description/margin/stack/content"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="margin/ray/right/skills/torch/kick/description/margin/stack/content/details"]
 custom_minimum_size = Vector2(110, 0)
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.25
 theme_override_font_sizes/font_size = 18
 text = "Ноги-гриль"
-vertical_alignment = 1
 text_overrun_behavior = 3
 
+[node name="zone" type="Label" parent="margin/ray/right/skills/torch/kick/description/margin/stack/content/details"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "¦|¦"
+horizontal_alignment = 1
+
 [node name="ability" type="HBoxContainer" parent="margin/ray/right/skills/torch/kick/description/margin/stack/content"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_stretch_ratio = 0.25
+theme_override_constants/separation = 0
+
+[node name="help" type="HBoxContainer" parent="margin/ray/right/skills/torch/kick/description/margin/stack/content/ability"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
+size_flags_horizontal = 6
 theme_override_constants/separation = -3
 
-[node name="slot-1" type="Label" parent="margin/ray/right/skills/torch/kick/description/margin/stack/content/ability"]
+[node name="slot-1" type="Label" parent="margin/ray/right/skills/torch/kick/description/margin/stack/content/ability/help"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
+size_flags_horizontal = 10
 size_flags_stretch_ratio = 0.25
 theme_override_fonts/font = ExtResource("1_w1r1c")
 theme_override_font_sizes/font_size = 18
@@ -3139,7 +3551,7 @@ theme_override_styles/normal = ExtResource("4_e8epa")
 text = "🔥"
 vertical_alignment = 1
 
-[node name="dot" type="Label" parent="margin/ray/right/skills/torch/kick/description/margin/stack/content/ability"]
+[node name="dot" type="Label" parent="margin/ray/right/skills/torch/kick/description/margin/stack/content/ability/help"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 size_flags_stretch_ratio = 0.25
@@ -3149,7 +3561,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_1chk7")
 text = "⋅"
 vertical_alignment = 1
 
-[node name="slot-2" type="Label" parent="margin/ray/right/skills/torch/kick/description/margin/stack/content/ability"]
+[node name="slot-2" type="Label" parent="margin/ray/right/skills/torch/kick/description/margin/stack/content/ability/help"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 size_flags_stretch_ratio = 0.25
@@ -3159,7 +3571,7 @@ theme_override_styles/normal = ExtResource("4_e8epa")
 text = "🦶"
 vertical_alignment = 1
 
-[node name="dot2" type="Label" parent="margin/ray/right/skills/torch/kick/description/margin/stack/content/ability"]
+[node name="dot2" type="Label" parent="margin/ray/right/skills/torch/kick/description/margin/stack/content/ability/help"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 size_flags_stretch_ratio = 0.25
@@ -3169,9 +3581,10 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_1chk7")
 text = "⋅"
 vertical_alignment = 1
 
-[node name="slot-3" type="Label" parent="margin/ray/right/skills/torch/kick/description/margin/stack/content/ability"]
+[node name="slot-3" type="Label" parent="margin/ray/right/skills/torch/kick/description/margin/stack/content/ability/help"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
+size_flags_horizontal = 2
 size_flags_stretch_ratio = 0.25
 theme_override_fonts/font = ExtResource("1_w1r1c")
 theme_override_font_sizes/font_size = 18
@@ -3179,29 +3592,19 @@ theme_override_styles/normal = ExtResource("4_e8epa")
 text = "🔥"
 vertical_alignment = 1
 
-[node name="postfix" type="HBoxContainer" parent="margin/ray/right/skills/torch/kick/description/margin/stack"]
+[node name="cost" type="HBoxContainer" parent="margin/ray/right/skills/torch/kick/description/margin/stack/content/ability"]
 layout_mode = 2
 
-[node name="zone" type="Label" parent="margin/ray/right/skills/torch/kick/description/margin/stack/postfix"]
-custom_minimum_size = Vector2(60, 0)
-layout_mode = 2
-theme_override_font_sizes/font_size = 18
-text = "¦|¦"
-horizontal_alignment = 1
-
-[node name="cost" type="HBoxContainer" parent="margin/ray/right/skills/torch/kick/description/margin/stack/postfix"]
-layout_mode = 2
-
-[node name="ap" type="Label" parent="margin/ray/right/skills/torch/kick/description/margin/stack/postfix/cost"]
+[node name="ap" type="Label" parent="margin/ray/right/skills/torch/kick/description/margin/stack/content/ability/cost"]
 custom_minimum_size = Vector2(22, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
-text = "1"
+text = "4"
 horizontal_alignment = 2
 
-[node name="no" type="Control" parent="margin/ray/right/skills/torch/kick/description/margin/stack/postfix/cost"]
+[node name="no" type="Control" parent="margin/ray/right/skills/torch/kick/description/margin/stack/content/ability/cost"]
 visible = false
-custom_minimum_size = Vector2(28, 0)
+custom_minimum_size = Vector2(22, 0)
 layout_mode = 2
 
 [node name="aura-cost-separator" type="ProgressBar" parent="margin/ray/right/skills/torch/kick/description"]
@@ -3284,9 +3687,12 @@ vertical_alignment = 2
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
-theme_override_constants/v_separation = -3
 
-[node name="caption" type="Label" parent="margin/ray/right/skills/whip/dead-grip/description/margin/stack/content"]
+[node name="details" type="HBoxContainer" parent="margin/ray/right/skills/whip/dead-grip/description/margin/stack/content"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="margin/ray/right/skills/whip/dead-grip/description/margin/stack/content/details"]
 custom_minimum_size = Vector2(110, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -3294,14 +3700,29 @@ theme_override_font_sizes/font_size = 18
 text = "Мертвая хватка"
 text_overrun_behavior = 3
 
+[node name="zone" type="Label" parent="margin/ray/right/skills/whip/dead-grip/description/margin/stack/content/details"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "|"
+horizontal_alignment = 1
+
 [node name="ability" type="HBoxContainer" parent="margin/ray/right/skills/whip/dead-grip/description/margin/stack/content"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_stretch_ratio = 0.25
+theme_override_constants/separation = 0
+
+[node name="help" type="HBoxContainer" parent="margin/ray/right/skills/whip/dead-grip/description/margin/stack/content/ability"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
+size_flags_horizontal = 6
 theme_override_constants/separation = -3
 
-[node name="slot-1" type="Label" parent="margin/ray/right/skills/whip/dead-grip/description/margin/stack/content/ability"]
+[node name="slot-1" type="Label" parent="margin/ray/right/skills/whip/dead-grip/description/margin/stack/content/ability/help"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
+size_flags_horizontal = 10
 size_flags_stretch_ratio = 0.25
 theme_override_fonts/font = ExtResource("1_w1r1c")
 theme_override_font_sizes/font_size = 18
@@ -3309,7 +3730,7 @@ theme_override_styles/normal = ExtResource("4_e8epa")
 text = "✊"
 vertical_alignment = 1
 
-[node name="dot" type="Label" parent="margin/ray/right/skills/whip/dead-grip/description/margin/stack/content/ability"]
+[node name="dot" type="Label" parent="margin/ray/right/skills/whip/dead-grip/description/margin/stack/content/ability/help"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 size_flags_stretch_ratio = 0.25
@@ -3319,7 +3740,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_1chk7")
 text = "⋅"
 vertical_alignment = 1
 
-[node name="slot-2" type="Label" parent="margin/ray/right/skills/whip/dead-grip/description/margin/stack/content/ability"]
+[node name="slot-2" type="Label" parent="margin/ray/right/skills/whip/dead-grip/description/margin/stack/content/ability/help"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 size_flags_stretch_ratio = 0.25
@@ -3329,7 +3750,7 @@ theme_override_styles/normal = ExtResource("4_e8epa")
 text = "🎣"
 vertical_alignment = 1
 
-[node name="dot2" type="Label" parent="margin/ray/right/skills/whip/dead-grip/description/margin/stack/content/ability"]
+[node name="dot2" type="Label" parent="margin/ray/right/skills/whip/dead-grip/description/margin/stack/content/ability/help"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 size_flags_stretch_ratio = 0.25
@@ -3339,9 +3760,10 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_1chk7")
 text = "⋅"
 vertical_alignment = 1
 
-[node name="slot-3" type="Label" parent="margin/ray/right/skills/whip/dead-grip/description/margin/stack/content/ability"]
+[node name="slot-3" type="Label" parent="margin/ray/right/skills/whip/dead-grip/description/margin/stack/content/ability/help"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
+size_flags_horizontal = 2
 size_flags_stretch_ratio = 0.25
 theme_override_fonts/font = ExtResource("1_w1r1c")
 theme_override_font_sizes/font_size = 18
@@ -3349,29 +3771,19 @@ theme_override_styles/normal = ExtResource("4_e8epa")
 text = "✊"
 vertical_alignment = 1
 
-[node name="postfix" type="HBoxContainer" parent="margin/ray/right/skills/whip/dead-grip/description/margin/stack"]
+[node name="cost" type="HBoxContainer" parent="margin/ray/right/skills/whip/dead-grip/description/margin/stack/content/ability"]
 layout_mode = 2
 
-[node name="zone" type="Label" parent="margin/ray/right/skills/whip/dead-grip/description/margin/stack/postfix"]
-custom_minimum_size = Vector2(60, 0)
-layout_mode = 2
-theme_override_font_sizes/font_size = 18
-text = "|"
-horizontal_alignment = 1
-
-[node name="cost" type="HBoxContainer" parent="margin/ray/right/skills/whip/dead-grip/description/margin/stack/postfix"]
-layout_mode = 2
-
-[node name="ap" type="Label" parent="margin/ray/right/skills/whip/dead-grip/description/margin/stack/postfix/cost"]
+[node name="ap" type="Label" parent="margin/ray/right/skills/whip/dead-grip/description/margin/stack/content/ability/cost"]
 custom_minimum_size = Vector2(22, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
 text = "1"
 horizontal_alignment = 2
 
-[node name="no" type="Control" parent="margin/ray/right/skills/whip/dead-grip/description/margin/stack/postfix/cost"]
+[node name="no" type="Control" parent="margin/ray/right/skills/whip/dead-grip/description/margin/stack/content/ability/cost"]
 visible = false
-custom_minimum_size = Vector2(28, 0)
+custom_minimum_size = Vector2(22, 0)
 layout_mode = 2
 
 [node name="aura-cost-separator" type="ProgressBar" parent="margin/ray/right/skills/whip/dead-grip/description"]
@@ -3455,7 +3867,11 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 
-[node name="caption" type="Label" parent="margin/ray/right/skills/whip/spanking/description/margin/stack/content"]
+[node name="details" type="HBoxContainer" parent="margin/ray/right/skills/whip/spanking/description/margin/stack/content"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="margin/ray/right/skills/whip/spanking/description/margin/stack/content/details"]
 custom_minimum_size = Vector2(110, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -3463,14 +3879,29 @@ theme_override_font_sizes/font_size = 18
 text = "Порка"
 text_overrun_behavior = 3
 
+[node name="zone" type="Label" parent="margin/ray/right/skills/whip/spanking/description/margin/stack/content/details"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "|¦|"
+horizontal_alignment = 1
+
 [node name="ability" type="HBoxContainer" parent="margin/ray/right/skills/whip/spanking/description/margin/stack/content"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_stretch_ratio = 0.25
+theme_override_constants/separation = 0
+
+[node name="help" type="HBoxContainer" parent="margin/ray/right/skills/whip/spanking/description/margin/stack/content/ability"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
+size_flags_horizontal = 6
 theme_override_constants/separation = -3
 
-[node name="slot-1" type="Label" parent="margin/ray/right/skills/whip/spanking/description/margin/stack/content/ability"]
+[node name="slot-1" type="Label" parent="margin/ray/right/skills/whip/spanking/description/margin/stack/content/ability/help"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
+size_flags_horizontal = 10
 size_flags_stretch_ratio = 0.25
 theme_override_fonts/font = ExtResource("1_w1r1c")
 theme_override_font_sizes/font_size = 18
@@ -3478,7 +3909,7 @@ theme_override_styles/normal = ExtResource("4_e8epa")
 text = "🦶"
 vertical_alignment = 1
 
-[node name="dot" type="Label" parent="margin/ray/right/skills/whip/spanking/description/margin/stack/content/ability"]
+[node name="dot" type="Label" parent="margin/ray/right/skills/whip/spanking/description/margin/stack/content/ability/help"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 size_flags_stretch_ratio = 0.25
@@ -3488,7 +3919,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_1chk7")
 text = "⋅"
 vertical_alignment = 1
 
-[node name="slot-2" type="Label" parent="margin/ray/right/skills/whip/spanking/description/margin/stack/content/ability"]
+[node name="slot-2" type="Label" parent="margin/ray/right/skills/whip/spanking/description/margin/stack/content/ability/help"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 size_flags_stretch_ratio = 0.25
@@ -3498,7 +3929,7 @@ theme_override_styles/normal = ExtResource("4_e8epa")
 text = "🎣"
 vertical_alignment = 1
 
-[node name="dot2" type="Label" parent="margin/ray/right/skills/whip/spanking/description/margin/stack/content/ability"]
+[node name="dot2" type="Label" parent="margin/ray/right/skills/whip/spanking/description/margin/stack/content/ability/help"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 size_flags_stretch_ratio = 0.25
@@ -3508,9 +3939,10 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_1chk7")
 text = "⋅"
 vertical_alignment = 1
 
-[node name="slot-3" type="Label" parent="margin/ray/right/skills/whip/spanking/description/margin/stack/content/ability"]
+[node name="slot-3" type="Label" parent="margin/ray/right/skills/whip/spanking/description/margin/stack/content/ability/help"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
+size_flags_horizontal = 0
 size_flags_stretch_ratio = 0.25
 theme_override_fonts/font = ExtResource("1_w1r1c")
 theme_override_font_sizes/font_size = 18
@@ -3518,7 +3950,7 @@ theme_override_styles/normal = ExtResource("4_e8epa")
 text = "✊"
 vertical_alignment = 1
 
-[node name="dot3" type="Label" parent="margin/ray/right/skills/whip/spanking/description/margin/stack/content/ability"]
+[node name="dot3" type="Label" parent="margin/ray/right/skills/whip/spanking/description/margin/stack/content/ability/help"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 size_flags_stretch_ratio = 0.25
@@ -3528,9 +3960,10 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_1chk7")
 text = "⋅"
 vertical_alignment = 1
 
-[node name="slot-4" type="Label" parent="margin/ray/right/skills/whip/spanking/description/margin/stack/content/ability"]
+[node name="slot-4" type="Label" parent="margin/ray/right/skills/whip/spanking/description/margin/stack/content/ability/help"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
+size_flags_horizontal = 2
 size_flags_stretch_ratio = 0.25
 theme_override_fonts/font = ExtResource("1_w1r1c")
 theme_override_font_sizes/font_size = 18
@@ -3538,29 +3971,19 @@ theme_override_styles/normal = ExtResource("4_e8epa")
 text = "🎣"
 vertical_alignment = 1
 
-[node name="postfix" type="HBoxContainer" parent="margin/ray/right/skills/whip/spanking/description/margin/stack"]
+[node name="cost" type="HBoxContainer" parent="margin/ray/right/skills/whip/spanking/description/margin/stack/content/ability"]
 layout_mode = 2
 
-[node name="zone" type="Label" parent="margin/ray/right/skills/whip/spanking/description/margin/stack/postfix"]
-custom_minimum_size = Vector2(60, 0)
-layout_mode = 2
-theme_override_font_sizes/font_size = 18
-text = "|"
-horizontal_alignment = 1
-
-[node name="cost" type="HBoxContainer" parent="margin/ray/right/skills/whip/spanking/description/margin/stack/postfix"]
-layout_mode = 2
-
-[node name="ap" type="Label" parent="margin/ray/right/skills/whip/spanking/description/margin/stack/postfix/cost"]
+[node name="ap" type="Label" parent="margin/ray/right/skills/whip/spanking/description/margin/stack/content/ability/cost"]
 custom_minimum_size = Vector2(22, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
 text = "2"
 horizontal_alignment = 2
 
-[node name="no" type="Control" parent="margin/ray/right/skills/whip/spanking/description/margin/stack/postfix/cost"]
+[node name="no" type="Control" parent="margin/ray/right/skills/whip/spanking/description/margin/stack/content/ability/cost"]
 visible = false
-custom_minimum_size = Vector2(28, 0)
+custom_minimum_size = Vector2(22, 0)
 layout_mode = 2
 
 [node name="aura-cost-separator" type="ProgressBar" parent="margin/ray/right/skills/whip/spanking/description"]
