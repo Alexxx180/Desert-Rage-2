@@ -813,7 +813,11 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 
-[node name="caption" type="Label" parent="margin/ray/left/distance/colts/air-fight/description/margin/stack/content"]
+[node name="details" type="HBoxContainer" parent="margin/ray/left/distance/colts/air-fight/description/margin/stack/content"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="margin/ray/left/distance/colts/air-fight/description/margin/stack/content/details"]
 custom_minimum_size = Vector2(110, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -821,14 +825,29 @@ theme_override_font_sizes/font_size = 18
 text = "Стрельбище"
 text_overrun_behavior = 3
 
+[node name="zone" type="Label" parent="margin/ray/left/distance/colts/air-fight/description/margin/stack/content/details"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "| |"
+horizontal_alignment = 1
+
 [node name="ability" type="HBoxContainer" parent="margin/ray/left/distance/colts/air-fight/description/margin/stack/content"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_stretch_ratio = 0.25
+theme_override_constants/separation = 0
+
+[node name="help" type="HBoxContainer" parent="margin/ray/left/distance/colts/air-fight/description/margin/stack/content/ability"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
+size_flags_horizontal = 6
 theme_override_constants/separation = -3
 
-[node name="slot-1" type="Label" parent="margin/ray/left/distance/colts/air-fight/description/margin/stack/content/ability"]
+[node name="slot-1" type="Label" parent="margin/ray/left/distance/colts/air-fight/description/margin/stack/content/ability/help"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
+size_flags_horizontal = 10
 size_flags_stretch_ratio = 0.25
 theme_override_fonts/font = ExtResource("1_w1r1c")
 theme_override_font_sizes/font_size = 18
@@ -836,7 +855,7 @@ theme_override_styles/normal = ExtResource("4_e8epa")
 text = "🎯"
 vertical_alignment = 1
 
-[node name="dot" type="Label" parent="margin/ray/left/distance/colts/air-fight/description/margin/stack/content/ability"]
+[node name="dot" type="Label" parent="margin/ray/left/distance/colts/air-fight/description/margin/stack/content/ability/help"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 size_flags_stretch_ratio = 0.25
@@ -846,7 +865,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_1chk7")
 text = "⋅"
 vertical_alignment = 1
 
-[node name="slot-2" type="Label" parent="margin/ray/left/distance/colts/air-fight/description/margin/stack/content/ability"]
+[node name="slot-2" type="Label" parent="margin/ray/left/distance/colts/air-fight/description/margin/stack/content/ability/help"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 size_flags_stretch_ratio = 0.25
@@ -856,7 +875,7 @@ theme_override_styles/normal = ExtResource("4_e8epa")
 text = "🦶"
 vertical_alignment = 1
 
-[node name="dot2" type="Label" parent="margin/ray/left/distance/colts/air-fight/description/margin/stack/content/ability"]
+[node name="dot2" type="Label" parent="margin/ray/left/distance/colts/air-fight/description/margin/stack/content/ability/help"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 size_flags_stretch_ratio = 0.25
@@ -866,9 +885,10 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_1chk7")
 text = "⋅"
 vertical_alignment = 1
 
-[node name="slot-3" type="Label" parent="margin/ray/left/distance/colts/air-fight/description/margin/stack/content/ability"]
+[node name="slot-3" type="Label" parent="margin/ray/left/distance/colts/air-fight/description/margin/stack/content/ability/help"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
+size_flags_horizontal = 2
 size_flags_stretch_ratio = 0.25
 theme_override_fonts/font = ExtResource("1_w1r1c")
 theme_override_font_sizes/font_size = 18
@@ -876,27 +896,17 @@ theme_override_styles/normal = ExtResource("4_e8epa")
 text = "🎯"
 vertical_alignment = 1
 
-[node name="postfix" type="HBoxContainer" parent="margin/ray/left/distance/colts/air-fight/description/margin/stack"]
+[node name="cost" type="HBoxContainer" parent="margin/ray/left/distance/colts/air-fight/description/margin/stack/content/ability"]
 layout_mode = 2
 
-[node name="zone" type="Label" parent="margin/ray/left/distance/colts/air-fight/description/margin/stack/postfix"]
-custom_minimum_size = Vector2(60, 0)
-layout_mode = 2
-theme_override_font_sizes/font_size = 18
-text = "| |"
-horizontal_alignment = 1
-
-[node name="cost" type="HBoxContainer" parent="margin/ray/left/distance/colts/air-fight/description/margin/stack/postfix"]
-layout_mode = 2
-
-[node name="ap" type="Label" parent="margin/ray/left/distance/colts/air-fight/description/margin/stack/postfix/cost"]
+[node name="ap" type="Label" parent="margin/ray/left/distance/colts/air-fight/description/margin/stack/content/ability/cost"]
 custom_minimum_size = Vector2(22, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
 text = "2"
 horizontal_alignment = 2
 
-[node name="no" type="Control" parent="margin/ray/left/distance/colts/air-fight/description/margin/stack/postfix/cost"]
+[node name="no" type="Control" parent="margin/ray/left/distance/colts/air-fight/description/margin/stack/content/ability/cost"]
 visible = false
 custom_minimum_size = Vector2(28, 0)
 layout_mode = 2
@@ -1125,6 +1135,7 @@ theme_override_constants/separation = 0
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 6
+theme_override_constants/separation = -3
 
 [node name="slot-1" type="Label" parent="margin/ray/left/distance/shotgun/shrapnel/description/margin/stack/content/ability/help"]
 custom_minimum_size = Vector2(10, 0)
