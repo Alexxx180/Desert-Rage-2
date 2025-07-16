@@ -10,6 +10,7 @@ var options: HFlowContainer
 func _set_visible() -> void:
 	_actions = !_actions
 	options.skills.visible = _actions
+	options.skills.init_focus()
 
 func _set_process() -> void:
 	tree.paused = _actions
