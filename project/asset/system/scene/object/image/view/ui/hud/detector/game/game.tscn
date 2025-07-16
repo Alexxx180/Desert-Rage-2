@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cel3u88abrgv3"]
+[gd_scene load_steps=20 format=3 uid="uid://cel3u88abrgv3"]
 
 [ext_resource type="Theme" uid="uid://p2br8b6ea3n6" path="res://asset/resource/engine/internal/theme/patterns/template/menu/hud/pause/pause.tres" id="1_klae1"]
 [ext_resource type="Script" uid="uid://81xdi4771u0a" path="res://asset/system/script/object/image/view/ui/hud/detector/game/game.gd" id="1_o71r6"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://br061ue566x82" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/menu/gameplay/skills.tscn" id="9_ehml2"]
 [ext_resource type="PackedScene" uid="uid://b1cenupqm80wx" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/menu/inventory/inventory.tscn" id="11_1y8ov"]
 [ext_resource type="PackedScene" uid="uid://c3dwvtm5ivwwp" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/menu/stats.tscn" id="12_jdj2p"]
+[ext_resource type="Shortcut" uid="uid://ucetbklb6n0q" path="res://asset/resource/engine/internal/short/cut/game/gameplay-menu.tres" id="13_1chk7"]
 [ext_resource type="PackedScene" uid="uid://sloxw12np1ch" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/menu/priorities/priorities.tscn" id="13_iexbr"]
 [ext_resource type="PackedScene" uid="uid://6b0ydfrtbu38" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/menu/ability.tscn" id="14_joidv"]
 
@@ -106,7 +107,7 @@ follow_focus = true
 [node name="stack" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/hints/scroll"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 3
+size_flags_vertical = 10
 
 [node name="hints" parent="menu/stats/inventory/ability/controls/hints/scroll/stack" instance=ExtResource("2_mf7wa")]
 visible = false
@@ -116,7 +117,9 @@ size_flags_vertical = 3
 size_flags_stretch_ratio = 0.2
 
 [node name="skills" parent="menu/stats/inventory/ability/controls/hints/scroll/stack" instance=ExtResource("9_ehml2")]
+visible = false
 layout_mode = 2
+size_flags_vertical = 8
 
 [node name="topic" type="HFlowContainer" parent="menu/stats/inventory/ability/controls"]
 custom_minimum_size = Vector2(10, 10)
@@ -225,6 +228,7 @@ custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
+shortcut = ExtResource("13_1chk7")
 
 [node name="content" type="MarginContainer" parent="menu/stats/inventory/ability/controls/topic/menu"]
 layout_mode = 1
