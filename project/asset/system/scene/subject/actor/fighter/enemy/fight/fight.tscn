@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://18yjilbfmwhk"]
+[gd_scene load_steps=7 format=3 uid="uid://18yjilbfmwhk"]
 
 [ext_resource type="Script" uid="uid://c0ovke4shqn7o" path="res://asset/system/script/subject/actor/fighter/enemy/logic/detector/fight.gd" id="1_buf2d"]
 [ext_resource type="Script" uid="uid://dom6yvvb5krlc" path="res://asset/system/script/subject/actor/fighter/hitbox/hitbox.gd" id="2_a5sts"]
 [ext_resource type="Script" uid="uid://51lvqa3nbyew" path="res://asset/system/script/subject/actor/fighter/enemy/damagebox.gd" id="3_jtfqg"]
+[ext_resource type="FontFile" uid="uid://b37js8y80ak1k" path="res://asset/resource/font/NotoColorEmoji-Regular.ttf" id="4_a5sts"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hied7"]
 radius = 40.0125
@@ -31,3 +32,60 @@ script = ExtResource("3_jtfqg")
 position = Vector2(0, 5.5)
 shape = SubResource("RectangleShape2D_8egfw")
 debug_color = Color(0.849194, 0.346041, 0.381317, 0.42)
+
+[node name="aim" type="Button" parent="."]
+process_mode = 3
+custom_minimum_size = Vector2(100, 100)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -51.0
+offset_top = -75.0
+offset_right = 49.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_hover_pressed_color = Color(0.678944, 0.678944, 0.678944, 1)
+theme_override_colors/font_hover_color = Color(0.273873, 0.273873, 0.273873, 1)
+
+[node name="corners" type="MarginContainer" parent="aim"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="top-left" type="Label" parent="aim/corners"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("4_a5sts")
+text = "┌"
+
+[node name="top-right" type="Label" parent="aim/corners"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("4_a5sts")
+text = "┐"
+
+[node name="bottom-left" type="Label" parent="aim/corners"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("4_a5sts")
+text = "└"
+
+[node name="bottom-right" type="Label" parent="aim/corners"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("4_a5sts")
+text = "┘"
