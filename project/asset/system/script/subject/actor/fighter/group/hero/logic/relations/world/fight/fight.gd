@@ -5,6 +5,9 @@ func controls(hero: CharacterBody2D, fight: Node) -> void:
 	
 	detector.close.body_entered.connect(fight.close.enter_range)
 	detector.close.body_exited.connect(fight.close.exit_range)
+
+	detector.zone.body_entered.connect(fight.zone.enter_range)
+	detector.zone.body_exited.connect(fight.zone.exit_range)
 	
 	var tension: Node = hero.get_node("../../ost").tension
 	

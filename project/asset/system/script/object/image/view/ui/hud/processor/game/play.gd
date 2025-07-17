@@ -5,6 +5,7 @@ var _actions: bool = false
 var hud: CanvasLayer
 var options: HFlowContainer
 
+@onready var skills: Node = $skills
 @onready var tree: SceneTree = get_tree()
 
 func _set_visible() -> void:
@@ -16,5 +17,9 @@ func _set_process() -> void:
 	tree.paused = _actions
 
 func pressed() -> void:
-	_set_visible()
-	_set_process()
+	if skills.selection:
+		skills.hide_aims()
+		skills.panel.show()
+	else:
+		_set_visible()
+		_set_process()
