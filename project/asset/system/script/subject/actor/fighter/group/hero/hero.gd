@@ -1,11 +1,20 @@
 extends CharacterBody2D
 
-enum { WORLD = 1, BORDERS = 2, CHARACTER = 3, BOX = 5, GAP = 7, UPLAND = 8 }
+enum { WORLD = 1, BORDERS = 2, CHARACTER = 3, BOX = 5, GAP = 7, UPLAND = 8, DISTANCE = 90, MULTIPLIER = 50 }
 
 signal moving(velocity: Vector2)
 
 @onready var view: Node2D = $view
 @onready var logic: Node = $logic
+@onready var _enemy: CharacterBody2D = Defaults.CHARACTER
+
+var _movement: Callable = usual_movement
+
+var enemy: CharacterBody2D:
+	get: return _enemy
+	set(value):
+		_enemy = value
+		_movement = usual_movement if value == Defaults.CHARACTER else targeted_movement
 
 var _weight: int = 0
 var weight: int:
@@ -13,13 +22,24 @@ var weight: int:
 	set(value): _weight = max(0, value)
 
 var target: Rect2
+var targeted: bool = false
 
 func _ready() -> void:
 	view.animation.hero = self
 	logic.relations.controls(self)
 
-func _physics_process(_delta: float) -> void:
+func targeted_movement() -> void:
+	velocity = position.direction_to(enemy.position) * (logic.stats.speed / MULTIPLIER) # 400
+	if position.distance_to(enemy.position) > DISTANCE:
+		move_and_slide()
+	else:
+		enemy = Defaults.CHARACTER
+
+func usual_movement() -> void:
 	move_and_slide()
+
+func _physics_process(_delta: float) -> void:
+	_movement.call()
 
 func turn_walls_collision(value: bool) -> void:
 	for mask in [WORLD, BORDERS, BOX, GAP, UPLAND]:
@@ -43,8 +63,14 @@ func move(proportion: float) -> void:
 	position = target.position + target.size * proportion
 
 func reset_velocity(motion: Vector2 = Vector2.ZERO) -> void:
-	velocity = motion
+	make_velocity(motion)
 	moving.emit(motion)
+
+func make_velocity(motion: Vector2) -> void:
+	velocity = motion
+
+func directed_to(target: Vector2) -> Vector2:
+	return position.direction_to(target)
 
 func forget_velocity() -> void:
 	reset_velocity()

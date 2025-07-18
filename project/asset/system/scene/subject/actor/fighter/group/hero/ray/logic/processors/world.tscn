@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://cfuq8pb82qi6e"]
+[gd_scene load_steps=6 format=3 uid="uid://cfuq8pb82qi6e"]
 
 [ext_resource type="Script" uid="uid://bfsb4gbi0xvg6" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/processors/world/world.gd" id="1_6mehg"]
 [ext_resource type="PackedScene" uid="uid://ukraj3jxlsmc" path="res://asset/system/scene/subject/actor/fighter/group/hero/base/logic/processors/world/skills.tscn" id="2_ekox6"]
 [ext_resource type="PackedScene" uid="uid://5yvltqhghbrv" path="res://asset/system/scene/subject/actor/fighter/group/hero/ray/logic/processors/world/ability.tscn" id="3_uscll"]
 [ext_resource type="Script" uid="uid://cwww5clpwrqbe" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/processors/world/fight/fight.gd" id="4_8ngs8"]
+[ext_resource type="Script" uid="uid://qloabw78ufqd" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/processors/world/fight/movement.gd" id="5_j5dtq"]
 
 [node name="world" type="Node"]
 script = ExtResource("1_6mehg")
@@ -14,3 +15,7 @@ script = ExtResource("1_6mehg")
 
 [node name="fight" type="Node" parent="."]
 script = ExtResource("4_8ngs8")
+
+[node name="movement" type="Node" parent="fight"]
+process_mode = 4
+script = ExtResource("5_j5dtq")

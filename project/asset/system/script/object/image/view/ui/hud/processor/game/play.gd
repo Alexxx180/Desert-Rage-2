@@ -16,10 +16,18 @@ func _set_visible() -> void:
 func _set_process() -> void:
 	tree.paused = _actions
 
+func set_target(_enemy) -> void:
+	skills.hide_aims()
+	_switch_gameplay()
+
+func _switch_gameplay() -> void:
+	_set_visible()
+	_set_process()
+
 func pressed() -> void:
 	if skills.selection:
 		skills.hide_aims()
 		skills.panel.show()
+		options.skills.init_focus()
 	else:
-		_set_visible()
-		_set_process()
+		_switch_gameplay()

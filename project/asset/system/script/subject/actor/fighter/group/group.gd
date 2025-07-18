@@ -3,7 +3,8 @@ extends Node2D
 @export var is_overworld: bool = false
 @export var deployed: bool = true
 @onready var camera: Camera2D = $camera
-@onready var deploy: HeroDeploy = HeroDeploy.new()
+# @onready 
+var deploy: HeroDeploy = HeroDeploy.new()
 
 func _ready() -> void:
 	deploy.init(self, [$ray, $rock], deployed)
