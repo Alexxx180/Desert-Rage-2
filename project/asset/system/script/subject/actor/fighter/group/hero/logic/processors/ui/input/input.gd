@@ -3,6 +3,7 @@ extends Node
 signal action()
 signal kick()
 signal moving(velocity: Vector2)
+signal controlling(velocity: Vector2)
 
 @onready var movement: Node = $movement
 @onready var platforming: Node = $platforming
@@ -19,3 +20,7 @@ func _input(_event: InputEvent) -> void:
 
 func perform_motion() -> void:
 	moving.emit(motion)
+	controlling.emit(motion)
+
+func imitate_motion(target_motion: Vector2) -> void:
+	moving.emit(target_motion)

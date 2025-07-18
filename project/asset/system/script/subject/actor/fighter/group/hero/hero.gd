@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-enum { WORLD = 1, BORDERS = 2, CHARACTER = 3, BOX = 5, GAP = 7, UPLAND = 8, DISTANCE = 90, MULTIPLIER = 50 }
+enum { WORLD = 1, BORDERS = 2, CHARACTER = 3, BOX = 5, GAP = 7, UPLAND = 8, DISTANCE = 50, MULTIPLIER = 50 }
 
 signal moving(velocity: Vector2)
 
@@ -29,11 +29,18 @@ func _ready() -> void:
 	logic.relations.controls(self)
 
 func targeted_movement() -> void:
-	velocity = position.direction_to(enemy.position) * (logic.stats.speed / MULTIPLIER) # 400
+	var motion: Vector2 = position.direction_to(enemy.position) * (logic.stats.speed / MULTIPLIER)
+	velocity = motion # 400
+	moving.emit(motion)
+	view.animation.move(motion)
+	logic.processors.ui.input.imitate_motion(position.direction_to(enemy.position)) #.normalized()
 	if position.distance_to(enemy.position) > DISTANCE:
 		move_and_slide()
 	else:
 		enemy = Defaults.CHARACTER
+		view.animation.start_fight("active")
+		view.animation.fight_body("hands")
+		forget_velocity()
 
 func usual_movement() -> void:
 	move_and_slide()

@@ -32,7 +32,7 @@ func reveal_aims() -> void:
 		entity.logic.detector.fight.reveal_aim()
 		add_assignee(entity, party.leader))
 	iterate_enemy(targets, func(entity):
-		entity.logic.detector.fight.aim.grab_focus())
+		entity.logic.detector.fight.aim.grab_focus(), true)
 
 func hide_aims() -> void:
 	iterate_enemy(zone.area.values(), func(entity):
