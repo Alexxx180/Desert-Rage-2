@@ -9,4 +9,4 @@ func controls(hero: CharacterBody2D, fight: Node) -> void:
 	detector.zone.body_entered.connect(fight.zone.enter_range)
 	detector.zone.body_exited.connect(fight.zone.exit_range)
 	
-	hero.view.animation.close_damage.connect(fight.close.hit)
+	hero.view.animation.effect.close_damage.connect(fight.close.hit)

@@ -3,12 +3,12 @@ extends Node
 @onready var feet: Node = $feet
 @onready var ledges: Node = $ledges
 
-func floor_only(control: Node, _gap: TileMapLayer) -> void:
+func floor_only(control: JumpTarget, _gap: TileMapLayer) -> void:
 	print("floor jump")
 	feet.deploy()
 	control.available = false
 
-func determine(control: Node, border: TileMapLayer) -> void:
+func determine(control: JumpTarget, border: TileMapLayer) -> void:
 	print("determine jump")
 	if ledges.around():
 		feet.jump(ledges.pos)

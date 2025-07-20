@@ -6,5 +6,6 @@ extends Node
 func controls(hero: CharacterBody2D, platforming: Node) -> void:
 	var platforms: Node2D = hero.logic.detectors.platforming.platforms
 
+	hero.logic.detectors.platforming.stand.hero = hero
 	jump.controls(hero, platforming.jump)
-	input.controls(hero, platforming.input, platforms.surface.overleap)
+	input.controls(hero, platforming, platforms.surface.overleap)

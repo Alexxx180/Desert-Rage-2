@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://cel3u88abrgv3"]
+[gd_scene load_steps=23 format=3 uid="uid://cel3u88abrgv3"]
 
 [ext_resource type="Theme" uid="uid://p2br8b6ea3n6" path="res://asset/resource/engine/internal/theme/patterns/template/menu/hud/pause/pause.tres" id="1_klae1"]
 [ext_resource type="Script" uid="uid://81xdi4771u0a" path="res://asset/system/script/object/image/view/ui/hud/detector/game/game.gd" id="1_o71r6"]
@@ -13,11 +13,20 @@
 [ext_resource type="Shortcut" uid="uid://b2haaq41erm0s" path="res://asset/resource/engine/internal/short/cut/game/analyze.tres" id="6_ijgny"]
 [ext_resource type="PackedScene" uid="uid://d0sq1ex503flw" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/hide.tscn" id="7_koglg"]
 [ext_resource type="PackedScene" uid="uid://br061ue566x82" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/menu/gameplay/skills.tscn" id="9_ehml2"]
+[ext_resource type="StyleBox" uid="uid://c5qf02s45xwn" path="res://asset/resource/engine/internal/theme/style/noto-color.tres" id="9_veudi"]
 [ext_resource type="PackedScene" uid="uid://b1cenupqm80wx" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/menu/inventory/inventory.tscn" id="11_1y8ov"]
 [ext_resource type="PackedScene" uid="uid://c3dwvtm5ivwwp" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/menu/stats.tscn" id="12_jdj2p"]
 [ext_resource type="Shortcut" uid="uid://ucetbklb6n0q" path="res://asset/resource/engine/internal/short/cut/game/gameplay-menu.tres" id="13_1chk7"]
 [ext_resource type="PackedScene" uid="uid://sloxw12np1ch" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/menu/priorities/priorities.tscn" id="13_iexbr"]
 [ext_resource type="PackedScene" uid="uid://6b0ydfrtbu38" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/menu/ability.tscn" id="14_joidv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kumfx"]
+content_margin_top = 2.0
+content_margin_bottom = 1.0
+bg_color = Color(0.184314, 0.184314, 0.184314, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2uuwx"]
+bg_color = Color(0.329412, 0.690196, 0.435294, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_joidv"]
 content_margin_left = 12.0
@@ -97,6 +106,76 @@ split_offset = 2000
 [node name="controls" type="VBoxContainer" parent="menu/stats/inventory/ability"]
 layout_mode = 2
 mouse_filter = 2
+
+[node name="markers" type="HFlowContainer" parent="menu/stats/inventory/ability/controls"]
+visible = false
+layout_mode = 2
+
+[node name="item-1" type="ColorRect" parent="menu/stats/inventory/ability/controls/markers"]
+custom_minimum_size = Vector2(60, 3)
+layout_mode = 2
+size_flags_vertical = 0
+color = Color(0.18359, 0.18359, 0.18359, 1)
+
+[node name="item-2" type="ColorRect" parent="menu/stats/inventory/ability/controls/markers"]
+custom_minimum_size = Vector2(60, 3)
+layout_mode = 2
+size_flags_vertical = 0
+color = Color(0.184314, 0.184314, 0.72549, 1)
+
+[node name="item-3" type="ColorRect" parent="menu/stats/inventory/ability/controls/markers"]
+custom_minimum_size = Vector2(60, 3)
+layout_mode = 2
+size_flags_vertical = 0
+color = Color(0.18359, 0.18359, 0.18359, 1)
+
+[node name="item-4" type="ColorRect" parent="menu/stats/inventory/ability/controls/markers"]
+custom_minimum_size = Vector2(60, 3)
+layout_mode = 2
+size_flags_vertical = 0
+color = Color(0.18359, 0.18359, 0.18359, 1)
+
+[node name="item-5" type="ColorRect" parent="menu/stats/inventory/ability/controls/markers"]
+custom_minimum_size = Vector2(60, 3)
+layout_mode = 2
+size_flags_vertical = 0
+color = Color(0.18359, 0.18359, 0.18359, 1)
+
+[node name="rock" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/markers"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="health" type="ProgressBar" parent="menu/stats/inventory/ability/controls/markers/rock"]
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_kumfx")
+theme_override_styles/fill = SubResource("StyleBoxFlat_2uuwx")
+max_value = 11.0
+value = 6.0
+show_percentage = false
+
+[node name="margin" type="MarginContainer" parent="menu/stats/inventory/ability/controls/markers/rock"]
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 7
+theme_override_constants/margin_bottom = 0
+
+[node name="status" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/markers/rock/margin"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+
+[node name="icon" type="Label" parent="menu/stats/inventory/ability/controls/markers/rock/margin/status"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("4_42m6k")
+theme_override_styles/normal = ExtResource("9_veudi")
+text = "💛"
+
+[node name="name" type="Label" parent="menu/stats/inventory/ability/controls/markers/rock/margin/status"]
+layout_mode = 2
+size_flags_vertical = 0
+text = "Рок"
 
 [node name="hints" type="HBoxContainer" parent="menu/stats/inventory/ability/controls"]
 layout_mode = 2

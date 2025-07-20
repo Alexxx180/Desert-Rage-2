@@ -179,6 +179,9 @@ script = ExtResource("1_vowpq")
 [node name="tension" type="Node" parent="."]
 script = ExtResource("2_tejgr")
 
+[node name="reorder" type="Timer" parent="tension"]
+wait_time = 0.25
+
 [node name="mixer" type="Node" parent="."]
 script = ExtResource("3_ls3fr")
 
@@ -194,5 +197,6 @@ libraries = {
 &"": SubResource("AnimationLibrary_affui")
 }
 
+[connection signal="timeout" from="tension/reorder" to="tension" method="sync_enemy_music"]
 [connection signal="finished" from="a" to="." method="_finished"]
 [connection signal="finished" from="b" to="." method="_finished"]

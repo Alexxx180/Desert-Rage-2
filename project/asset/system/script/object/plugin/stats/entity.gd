@@ -29,3 +29,6 @@ func update_stats():
 func accelerate(mach: int) -> void:
 	_mach = mach
 	update_stats()
+
+func decide_travel(weight: int, motion: Vector2) -> Vector2:
+	return motion * speed if weight == 0 else motion * force / weight

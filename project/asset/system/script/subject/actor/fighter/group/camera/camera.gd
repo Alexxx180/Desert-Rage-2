@@ -2,8 +2,11 @@ extends Camera2D
 
 @onready var analyze: Node2D = $analyze
 @onready var deploy: Area2D = $deploy
+@onready var music: Node2D = $music
 
 var zooming: CameraZooming = CameraZooming.new()
+
+func _ready() -> void: music.controls(self)
 
 func traverse(node: Node, hero: CharacterBody2D):
 	node.remove_child(self)

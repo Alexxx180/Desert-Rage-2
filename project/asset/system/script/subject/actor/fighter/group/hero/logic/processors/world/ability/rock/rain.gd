@@ -8,8 +8,8 @@ func _set_hero(value: CharacterBody2D) -> void:
 
 func _act_sync() -> void:
 	activate.emit(_last_position, _act.direction)
-	_hero.view.animation.start_fight("active")
-	_hero.view.animation.fight_body("hands")
+	_hero.view.animation.moves.set_fight_start("active")
+	_hero.view.animation.moves.set_fighting("hands")
 
 func ability() -> void:
 	if _vessel != Defaults.CHARACTER and _vessel.logic.relations.fire.on and aura.use(cost):

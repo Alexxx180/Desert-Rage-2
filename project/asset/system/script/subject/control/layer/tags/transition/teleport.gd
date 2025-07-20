@@ -17,4 +17,4 @@ func transit(hero: CharacterBody2D, logic: Dictionary) -> void:
 	var cell: Vector2i = logic.atlas
 	var connected: bool = logic.name != "none" and teleporters.has(cell)
 	assert(connected, "Teleporter is not connected!")
-	hero.teleport(teleporters[cell])
+	hero.logic.processors.ui.input.movement.mode.type.teleport(teleporters[cell])

@@ -1,6 +1,8 @@
-extends Node
+extends RefCounted
 
-signal jump(control: Node, border: TileMapLayer)
+class_name JumpTarget
+
+signal jump(control: JumpTarget, border: TileMapLayer)
 
 var available: bool = false
 

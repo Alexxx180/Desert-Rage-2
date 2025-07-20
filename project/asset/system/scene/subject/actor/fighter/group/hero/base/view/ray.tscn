@@ -1,4 +1,4 @@
-[gd_scene load_steps=373 format=3 uid="uid://csra3penxclqe"]
+[gd_scene load_steps=378 format=3 uid="uid://csra3penxclqe"]
 
 [ext_resource type="Script" uid="uid://djhgknvw72ya6" path="res://asset/system/script/subject/actor/fighter/group/hero/view/view.gd" id="1_02nce"]
 [ext_resource type="PackedScene" uid="uid://c136xgt1v5vbl" path="res://asset/system/scene/subject/actor/fighter/group/hero/base/view/base/shadow.tscn" id="2_7whrg"]
@@ -30,6 +30,11 @@
 [ext_resource type="Texture2D" uid="uid://cdmfgloeijtj6" path="res://asset/resource/media/images/actors/player/ray/fight/kick/right.png" id="22_l2h5n"]
 [ext_resource type="Texture2D" uid="uid://3pbey6k088ah" path="res://asset/resource/media/images/actors/player/ray/fight/punch/right.png" id="26_364hg"]
 [ext_resource type="PackedScene" uid="uid://bqdyu2d6o0sab" path="res://asset/system/scene/subject/actor/fighter/group/hero/base/view/base/influence.tscn" id="30_elnie"]
+[ext_resource type="Script" uid="uid://y1gi0fsbgjr1" path="res://asset/system/script/subject/actor/fighter/group/hero/view/animation/actions/move.gd" id="30_ue1fo"]
+[ext_resource type="Script" uid="uid://b3wu30ik45duc" path="res://asset/system/script/subject/actor/fighter/group/hero/view/animation/actions/jump.gd" id="31_3ofum"]
+[ext_resource type="Script" uid="uid://ddv0445sykqk6" path="res://asset/system/script/subject/actor/fighter/group/hero/view/animation/actions/combo/combo.gd" id="32_3ofum"]
+[ext_resource type="Script" uid="uid://bgbg16p7sy43u" path="res://asset/system/script/subject/actor/fighter/group/hero/view/animation/actions/combo/processor.gd" id="33_mef5b"]
+[ext_resource type="Script" uid="uid://b4qjyy7wesr0b" path="res://asset/system/script/subject/actor/fighter/group/hero/view/animation/actions/syncer.gd" id="34_o5svw"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_n7tfv"]
 shader = ExtResource("4_7805c")
@@ -2202,6 +2207,7 @@ blend_point_3/pos = Vector2(0, -1)
 blend_mode = 1
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_38alu"]
+graph_offset = Vector2(-475.488, -278.815)
 nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_ehyuf")
 nodes/TimeScale/position = Vector2(-680, -600)
 nodes/active/node = SubResource("AnimationNodeTransition_wec0r")
@@ -2211,11 +2217,11 @@ nodes/character/position = Vector2(1040, -160)
 nodes/go/node = SubResource("AnimationNodeTransition_r3aat")
 nodes/go/position = Vector2(-500, -460)
 nodes/idle/node = SubResource("AnimationNodeTransition_ju56s")
-nodes/idle/position = Vector2(-280, 300)
+nodes/idle/position = Vector2(-260, 180)
 nodes/idle-1/node = SubResource("AnimationNodeBlendSpace2D_3ds5m")
-nodes/idle-1/position = Vector2(-560, 460)
+nodes/idle-1/position = Vector2(-560, 260)
 nodes/jump/node = SubResource("AnimationNodeBlendSpace2D_7805c")
-nodes/jump/position = Vector2(-640, 140)
+nodes/jump/position = Vector2(-540, -80)
 nodes/kick_0/node = SubResource("AnimationNodeBlendSpace2D_chlf1")
 nodes/kick_0/position = Vector2(60, -440)
 nodes/kick_1/node = SubResource("AnimationNodeBlendSpace2D_g8tgo")
@@ -2228,9 +2234,9 @@ nodes/output/position = Vector2(1480, -100)
 nodes/passive/node = SubResource("AnimationNodeTransition_0dtxp")
 nodes/passive/position = Vector2(-20, 140)
 nodes/pull/node = SubResource("AnimationNodeTransition_q3deo")
-nodes/pull/position = Vector2(-560, -200)
+nodes/pull/position = Vector2(-720, -180)
 nodes/pull_forward/node = SubResource("AnimationNodeBlendSpace2D_q3deo")
-nodes/pull_forward/position = Vector2(-760, -160)
+nodes/pull_forward/position = Vector2(-980, -160)
 nodes/punch_0/node = SubResource("AnimationNodeBlendSpace2D_wec0r")
 nodes/punch_0/position = Vector2(60, -960)
 nodes/punch_1/node = SubResource("AnimationNodeBlendSpace2D_sj8xw")
@@ -2238,7 +2244,7 @@ nodes/punch_1/position = Vector2(60, -700)
 nodes/punch_combo/node = SubResource("AnimationNodeTransition_hgewq")
 nodes/punch_combo/position = Vector2(340, -780)
 nodes/run/node = SubResource("AnimationNodeBlendSpace2D_lrkwd")
-nodes/run/position = Vector2(-740, -400)
+nodes/run/position = Vector2(-800, -400)
 nodes/speed/node = SubResource("AnimationNodeTimeScale_wyk4c")
 nodes/speed/position = Vector2(1280, -120)
 nodes/walk/node = SubResource("AnimationNodeBlendSpace2D_wica3")
@@ -2429,16 +2435,30 @@ tracks/1/keys = {
 tracks/2/type = "method"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("animation")
+tracks/2/path = NodePath("animation/moves")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.015, 0.03, 0.045, 0.06, 0.075, 0.09, 0.105, 0.125, 0.15, 0.175, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.21),
+"transitions": PackedFloat32Array(1, 1),
 "values": [{
 "args": [],
-"method": &"start_dash"
+"method": &"set_jump_start"
 }, {
+"args": [],
+"method": &"set_jump_end"
+}]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("animation/effect")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.015, 0.03, 0.045, 0.06, 0.075, 0.09, 0.105, 0.12, 0.15, 0.175),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"values": [{
 "args": [0.1],
 "method": &"set_position"
 }, {
@@ -2468,16 +2488,13 @@ tracks/2/keys = {
 }, {
 "args": [1.0],
 "method": &"set_position"
-}, {
-"args": [],
-"method": &"stop_dash"
 }]
 }
 
 [sub_resource type="Animation" id="Animation_xg0bt"]
 resource_name = "ray_jump_forward"
 length = 0.21
-step = 0.025
+step = 0.005
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -2505,16 +2522,30 @@ tracks/1/keys = {
 tracks/2/type = "method"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("animation")
+tracks/2/path = NodePath("animation/moves")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.015, 0.03, 0.045, 0.06, 0.075, 0.09, 0.105, 0.125, 0.15, 0.175, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
 "values": [{
 "args": [],
-"method": &"start_dash"
+"method": &"set_jump_start"
 }, {
+"args": [],
+"method": &"set_jump_end"
+}]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("animation/effect")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.015, 0.03, 0.045, 0.06, 0.075, 0.09, 0.105, 0.125, 0.15, 0.175),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"values": [{
 "args": [0.1],
 "method": &"set_position"
 }, {
@@ -2544,9 +2575,6 @@ tracks/2/keys = {
 }, {
 "args": [1.0],
 "method": &"set_position"
-}, {
-"args": [],
-"method": &"stop_dash"
 }]
 }
 
@@ -2581,16 +2609,30 @@ tracks/1/keys = {
 tracks/2/type = "method"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("animation")
+tracks/2/path = NodePath("animation/moves")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.015, 0.03, 0.045, 0.06, 0.075, 0.09, 0.105, 0.125, 0.15, 0.175, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
 "values": [{
 "args": [],
-"method": &"start_dash"
+"method": &"set_jump_start"
 }, {
+"args": [],
+"method": &"set_jump_end"
+}]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("animation/effect")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.015, 0.03, 0.045, 0.06, 0.075, 0.09, 0.105, 0.125, 0.15, 0.175),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"values": [{
 "args": [0.1],
 "method": &"set_position"
 }, {
@@ -2620,9 +2662,6 @@ tracks/2/keys = {
 }, {
 "args": [1.0],
 "method": &"set_position"
-}, {
-"args": [],
-"method": &"stop_dash"
 }]
 }
 
@@ -2657,16 +2696,30 @@ tracks/1/keys = {
 tracks/2/type = "method"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("animation")
+tracks/2/path = NodePath("animation/moves")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.015, 0.03, 0.045, 0.06, 0.075, 0.09, 0.105, 0.125, 0.15, 0.175, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
 "values": [{
 "args": [],
-"method": &"start_dash"
+"method": &"set_jump_start"
 }, {
+"args": [],
+"method": &"set_jump_end"
+}]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("animation/effect")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.015, 0.03, 0.045, 0.06, 0.075, 0.09, 0.105, 0.125, 0.15, 0.175),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"values": [{
 "args": [0.1],
 "method": &"set_position"
 }, {
@@ -2696,9 +2749,6 @@ tracks/2/keys = {
 }, {
 "args": [1.0],
 "method": &"set_position"
-}, {
-"args": [],
-"method": &"stop_dash"
 }]
 }
 
@@ -2733,15 +2783,29 @@ tracks/1/keys = {
 tracks/2/type = "method"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("animation")
+tracks/2/path = NodePath("animation/effect")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "values": [{
-"args": [10],
+"args": [5],
 "method": &"set_damage"
+}]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("animation/moves")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.35),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"set_fight_end"
 }]
 }
 
@@ -2776,15 +2840,29 @@ tracks/1/keys = {
 tracks/2/type = "method"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("animation")
+tracks/2/path = NodePath("animation/effect")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "values": [{
-"args": [10],
+"args": [5],
 "method": &"set_damage"
+}]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("animation/moves")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.35),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"set_fight_end"
 }]
 }
 
@@ -2819,15 +2897,29 @@ tracks/1/keys = {
 tracks/2/type = "method"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("animation")
+tracks/2/path = NodePath("animation/effect")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "values": [{
-"args": [10],
+"args": [5],
 "method": &"set_damage"
+}]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("animation/moves")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.35),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"set_fight_end"
 }]
 }
 
@@ -2862,15 +2954,29 @@ tracks/1/keys = {
 tracks/2/type = "method"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("animation")
+tracks/2/path = NodePath("animation/effect")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "values": [{
-"args": [10],
+"args": [5],
 "method": &"set_damage"
+}]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("animation/moves")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.35),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"set_fight_end"
 }]
 }
 
@@ -3024,7 +3130,7 @@ tracks/1/keys = {
 tracks/2/type = "method"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("animation")
+tracks/2/path = NodePath("animation/effect")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -3033,6 +3139,20 @@ tracks/2/keys = {
 "values": [{
 "args": [5],
 "method": &"set_damage"
+}]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("animation/moves")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.35),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"set_fight_end"
 }]
 }
 
@@ -3067,7 +3187,7 @@ tracks/1/keys = {
 tracks/2/type = "method"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("animation")
+tracks/2/path = NodePath("animation/effect")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -3076,6 +3196,20 @@ tracks/2/keys = {
 "values": [{
 "args": [5],
 "method": &"set_damage"
+}]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("animation/moves")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.35),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"set_fight_end"
 }]
 }
 
@@ -3110,7 +3244,7 @@ tracks/1/keys = {
 tracks/2/type = "method"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("animation")
+tracks/2/path = NodePath("animation/effect")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -3119,6 +3253,20 @@ tracks/2/keys = {
 "values": [{
 "args": [5],
 "method": &"set_damage"
+}]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("animation/moves")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.35),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"set_fight_end"
 }]
 }
 
@@ -3153,7 +3301,7 @@ tracks/1/keys = {
 tracks/2/type = "method"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("animation")
+tracks/2/path = NodePath("animation/effect")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -3162,6 +3310,20 @@ tracks/2/keys = {
 "values": [{
 "args": [5],
 "method": &"set_damage"
+}]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("animation/moves")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.35),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"set_fight_end"
 }]
 }
 
@@ -3196,7 +3358,7 @@ tracks/1/keys = {
 tracks/2/type = "method"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("animation")
+tracks/2/path = NodePath("animation/effect")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -3205,6 +3367,20 @@ tracks/2/keys = {
 "values": [{
 "args": [5],
 "method": &"set_damage"
+}]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("animation/moves")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.35),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"set_fight_end"
 }]
 }
 
@@ -3239,7 +3415,7 @@ tracks/1/keys = {
 tracks/2/type = "method"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("animation")
+tracks/2/path = NodePath("animation/effect")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -3248,6 +3424,20 @@ tracks/2/keys = {
 "values": [{
 "args": [5],
 "method": &"set_damage"
+}]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("animation/moves")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.35),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"set_fight_end"
 }]
 }
 
@@ -3282,7 +3472,7 @@ tracks/1/keys = {
 tracks/2/type = "method"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("animation")
+tracks/2/path = NodePath("animation/effect")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -3291,6 +3481,20 @@ tracks/2/keys = {
 "values": [{
 "args": [5],
 "method": &"set_damage"
+}]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("animation/moves")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.35),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"set_fight_end"
 }]
 }
 
@@ -3325,7 +3529,7 @@ tracks/1/keys = {
 tracks/2/type = "method"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("animation")
+tracks/2/path = NodePath("animation/effect")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -3334,6 +3538,20 @@ tracks/2/keys = {
 "values": [{
 "args": [5],
 "method": &"set_damage"
+}]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("animation/moves")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.35),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"set_fight_end"
 }]
 }
 
@@ -3624,7 +3842,7 @@ script = ExtResource("1_02nce")
 material = SubResource("ShaderMaterial_n7tfv")
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_ajgxq")
-animation = &"backward"
+animation = &"left"
 offset = Vector2(0, -103)
 
 [node name="animation" type="AnimationTree" parent="."]
@@ -3677,12 +3895,27 @@ libraries = {
 &"ray": SubResource("AnimationLibrary_sal4s")
 }
 
-[node name="stance" type="Timer" parent="animation"]
+[node name="moves" type="Node" parent="animation"]
+script = ExtResource("30_ue1fo")
+
+[node name="stance" type="Timer" parent="animation/moves"]
 wait_time = 0.4
 one_shot = true
+
+[node name="jump" type="Node" parent="animation/moves"]
+script = ExtResource("31_3ofum")
+
+[node name="combo" type="Node" parent="animation/moves"]
+script = ExtResource("32_3ofum")
+
+[node name="effect" type="Node" parent="animation"]
+script = ExtResource("33_mef5b")
+
+[node name="syncer" type="Node" parent="animation"]
+script = ExtResource("34_o5svw")
 
 [node name="influence" parent="." instance=ExtResource("30_elnie")]
 
 [connection signal="body_entered" from="behind" to="." method="_go_behind_scene"]
 [connection signal="body_exited" from="behind" to="." method="_go_on_scene"]
-[connection signal="timeout" from="animation/stance" to="animation" method="end_fight"]
+[connection signal="timeout" from="animation/moves/stance" to="animation" method="end_fight"]

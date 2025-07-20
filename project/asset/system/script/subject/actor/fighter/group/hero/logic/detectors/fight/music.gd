@@ -2,3 +2,12 @@ extends Node2D
 
 @onready var nearby: Area2D = $nearby
 @onready var spawn: Area2D = $spawn
+
+func controls(group: Node2D) -> void:
+	var tension: Node = group.get_node("../../ost").tension
+	
+	nearby.body_entered.connect(tension.add_enemy)
+	nearby.body_exited.connect(tension.drop_enemy)
+
+	spawn.body_entered.connect(tension.add_spawn)
+	spawn.body_exited.connect(tension.drop_spawn)

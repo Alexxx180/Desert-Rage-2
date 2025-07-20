@@ -2,7 +2,7 @@ extends AdvancedCharacterAnimation
 
 @onready var dead: Node = $dead
 
-func _ready() -> void: _direct()
+func _ready() -> void: direct()
 
 func direct_animations() -> Array[String]:
 	return ["rolling"]

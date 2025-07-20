@@ -16,6 +16,8 @@ func set_transitions(ui: Dictionary, ost: Node) -> void:
 	
 	relation.pause.settings.switch.transit_settings = func():
 		detector.pause.hide(); ui.settings.show()
+		ui.settings.first_focus()
+		
 	relation.pause.information.switch.transit_info = func():
 		detector.pause.hide(); ui.information.show()
 

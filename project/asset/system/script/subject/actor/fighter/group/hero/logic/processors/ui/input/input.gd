@@ -1,26 +1,13 @@
 extends Node
 
-signal action()
-signal kick()
-signal moving(velocity: Vector2)
-signal controlling(velocity: Vector2)
-
 @onready var movement: Node = $movement
 @onready var platforming: Node = $platforming
-
-var motion: Vector2:
-	get: return Input.get_vector("left", "right", "forward", "backward")
+@onready var gravity: Node = $gravity
+@onready var actions: BehaviorTree = $actions
+@onready var board: BehaviorBlackboard = $board
 
 func _input(_event: InputEvent) -> void:
-	if Input.is_action_just_pressed("action"):
-		action.emit()
-	if Input.is_action_just_pressed("run"):
-		kick.emit()
-	perform_motion()
-
-func perform_motion() -> void:
-	moving.emit(motion)
-	controlling.emit(motion)
-
-func imitate_motion(target_motion: Vector2) -> void:
-	moving.emit(target_motion)
+	if platforming.animation: return
+	platforming.perform_jump()
+	movement.perform_motion()
+	actions.tick(self, board)

@@ -21,8 +21,8 @@ func far_enemy(_hitbox: StaticBody2D) -> void:
 	enemy = Defaults.STATIC
 
 func animation() -> void:
-	_hero.view.animation.start_fight("active")
-	_hero.view.animation.fight_body("hands")
+	_hero.view.animation.moves.set_fight_start("active")
+	_hero.view.animation.moves.set_fighting("hands")
 
 func ability() -> void:
 	if enemy != Defaults.STATIC and aura.use(cost):

@@ -32,7 +32,7 @@ func deploy(border: TileMapLayer = null) -> void:
 	if deployment.can_deploy(border):
 		jump(deployment.walls.target, true, dash)
 
-func set_midair(control: Node, is_in_midair: bool = balance.unstable) -> void:
+func set_midair(control: JumpTarget, is_in_midair: bool = balance.unstable) -> void:
 	control.available = is_in_midair
 	#if not floors.freeze:
 	floors.freeze = is_in_midair

@@ -1,4 +1,4 @@
-[gd_scene load_steps=374 format=3 uid="uid://xh6k0wh1djy2"]
+[gd_scene load_steps=379 format=3 uid="uid://xh6k0wh1djy2"]
 
 [ext_resource type="Script" uid="uid://djhgknvw72ya6" path="res://asset/system/script/subject/actor/fighter/group/hero/view/view.gd" id="1_f3u3w"]
 [ext_resource type="PackedScene" uid="uid://c136xgt1v5vbl" path="res://asset/system/scene/subject/actor/fighter/group/hero/base/view/base/shadow.tscn" id="2_cqm6d"]
@@ -29,7 +29,12 @@
 [ext_resource type="Texture2D" uid="uid://djfjsybrbajub" path="res://asset/resource/media/images/actors/player/rock/fight/punch/left.png" id="19_6do5e"]
 [ext_resource type="Texture2D" uid="uid://drymp1a7ff27g" path="res://asset/resource/media/images/actors/player/rock/fight/kick/right.png" id="21_2kt37"]
 [ext_resource type="Texture2D" uid="uid://diklbbgu5mvpu" path="res://asset/resource/media/images/actors/player/rock/fight/punch/right.png" id="25_gdk28"]
+[ext_resource type="Script" uid="uid://y1gi0fsbgjr1" path="res://asset/system/script/subject/actor/fighter/group/hero/view/animation/actions/move.gd" id="30_3ktcr"]
 [ext_resource type="PackedScene" uid="uid://bqdyu2d6o0sab" path="res://asset/system/scene/subject/actor/fighter/group/hero/base/view/base/influence.tscn" id="30_ol4r3"]
+[ext_resource type="Script" uid="uid://b3wu30ik45duc" path="res://asset/system/script/subject/actor/fighter/group/hero/view/animation/actions/jump.gd" id="31_0vuin"]
+[ext_resource type="Script" uid="uid://ddv0445sykqk6" path="res://asset/system/script/subject/actor/fighter/group/hero/view/animation/actions/combo/combo.gd" id="32_1wnep"]
+[ext_resource type="Script" uid="uid://bgbg16p7sy43u" path="res://asset/system/script/subject/actor/fighter/group/hero/view/animation/actions/combo/processor.gd" id="33_ux61i"]
+[ext_resource type="Script" uid="uid://b4qjyy7wesr0b" path="res://asset/system/script/subject/actor/fighter/group/hero/view/animation/actions/syncer.gd" id="34_hg14t"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ol4r3"]
 light_mode = 2
@@ -1919,11 +1924,11 @@ input_1/reset = true
 input_0/name = "active"
 input_0/auto_advance = false
 input_0/break_loop_at_end = false
-input_0/reset = false
+input_0/reset = true
 input_1/name = "passive"
 input_1/auto_advance = false
 input_1/break_loop_at_end = false
-input_1/reset = false
+input_1/reset = true
 
 [sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_adr0w"]
 input_0/name = "walk"
@@ -2047,11 +2052,11 @@ input_1/reset = true
 input_0/name = "go"
 input_0/auto_advance = false
 input_0/break_loop_at_end = false
-input_0/reset = false
+input_0/reset = true
 input_1/name = "pull"
 input_1/auto_advance = false
 input_1/break_loop_at_end = false
-input_1/reset = false
+input_1/reset = true
 input_2/name = "jump"
 input_2/auto_advance = false
 input_2/break_loop_at_end = false
@@ -2061,11 +2066,11 @@ input_2/reset = true
 input_0/name = "move"
 input_0/auto_advance = false
 input_0/break_loop_at_end = false
-input_0/reset = false
+input_0/reset = true
 input_1/name = "idle"
 input_1/auto_advance = false
 input_1/break_loop_at_end = false
-input_1/reset = false
+input_1/reset = true
 
 [sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_xtkps"]
 input_0/name = "forward"
@@ -2205,6 +2210,7 @@ blend_point_3/pos = Vector2(0, -1)
 blend_mode = 1
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_thqop"]
+graph_offset = Vector2(-923.317, -226.994)
 nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_bwgxx")
 nodes/TimeScale/position = Vector2(-860, -360)
 nodes/active/node = SubResource("AnimationNodeTransition_4o1wx")
@@ -2399,8 +2405,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_omnyj"]
 resource_name = "rock_jump_backward"
-length = 0.45
-loop_mode = 1
+length = 0.22
 step = 0.15
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -2421,7 +2426,7 @@ tracks/1/path = NodePath("profile:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4),
+"times": PackedFloat32Array(0, 0.025, 0.05, 0.075, 0.1, 0.125, 0.15, 0.175, 0.2),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
@@ -2429,16 +2434,30 @@ tracks/1/keys = {
 tracks/2/type = "method"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("animation")
+tracks/2/path = NodePath("animation/moves")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.04, 0.08, 0.12, 0.16, 0.2, 0.24, 0.28, 0.32, 0.36, 0.4, 0.44),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
 "values": [{
 "args": [],
-"method": &"start_dash"
+"method": &"set_jump_start"
 }, {
+"args": [],
+"method": &"set_jump_end"
+}]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("animation/effect")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.015, 0.03, 0.045, 0.06, 0.075, 0.09, 0.105, 0.125, 0.15, 0.175),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"values": [{
 "args": [0.1],
 "method": &"set_position"
 }, {
@@ -2468,17 +2487,13 @@ tracks/2/keys = {
 }, {
 "args": [1.0],
 "method": &"set_position"
-}, {
-"args": [],
-"method": &"stop_dash"
 }]
 }
 
 [sub_resource type="Animation" id="Animation_xtkps"]
 resource_name = "rock_jump_forward"
-length = 0.45
-loop_mode = 1
-step = 0.15
+length = 0.22
+step = 0.005
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -2498,7 +2513,7 @@ tracks/1/path = NodePath("profile:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4),
+"times": PackedFloat32Array(0, 0.025, 0.05, 0.075, 0.1, 0.125, 0.15, 0.175, 0.2),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
@@ -2506,16 +2521,30 @@ tracks/1/keys = {
 tracks/2/type = "method"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("animation")
+tracks/2/path = NodePath("animation/moves")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.04, 0.08, 0.12, 0.16, 0.2, 0.24, 0.28, 0.32, 0.36, 0.4, 0.44),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
 "values": [{
 "args": [],
-"method": &"start_dash"
+"method": &"set_jump_start"
 }, {
+"args": [],
+"method": &"set_jump_end"
+}]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("animation/effect")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.015, 0.03, 0.045, 0.06, 0.075, 0.09, 0.105, 0.125, 0.15, 0.175),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"values": [{
 "args": [0.1],
 "method": &"set_position"
 }, {
@@ -2545,16 +2574,12 @@ tracks/2/keys = {
 }, {
 "args": [1.0],
 "method": &"set_position"
-}, {
-"args": [],
-"method": &"stop_dash"
 }]
 }
 
 [sub_resource type="Animation" id="Animation_tdsd2"]
 resource_name = "rock_jump_left"
-length = 0.45
-loop_mode = 1
+length = 0.22
 step = 0.15
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -2575,7 +2600,7 @@ tracks/1/path = NodePath("profile:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4),
+"times": PackedFloat32Array(0, 0.025, 0.05, 0.075, 0.1, 0.125, 0.15, 0.175, 0.2),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
@@ -2583,16 +2608,30 @@ tracks/1/keys = {
 tracks/2/type = "method"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("animation")
+tracks/2/path = NodePath("animation/moves")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.04, 0.08, 0.12, 0.16, 0.2, 0.24, 0.28, 0.32, 0.36, 0.4, 0.44),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
 "values": [{
 "args": [],
-"method": &"start_dash"
+"method": &"set_jump_start"
 }, {
+"args": [],
+"method": &"set_jump_end"
+}]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("animation/effect")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.015, 0.03, 0.045, 0.06, 0.075, 0.09, 0.105, 0.125, 0.15, 0.175),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"values": [{
 "args": [0.1],
 "method": &"set_position"
 }, {
@@ -2622,15 +2661,12 @@ tracks/2/keys = {
 }, {
 "args": [1.0],
 "method": &"set_position"
-}, {
-"args": [],
-"method": &"stop_dash"
 }]
 }
 
 [sub_resource type="Animation" id="Animation_uvtgg"]
 resource_name = "rock_jump_right"
-length = 0.45
+length = 0.22
 step = 0.15
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -2651,7 +2687,7 @@ tracks/1/path = NodePath("profile:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4),
+"times": PackedFloat32Array(0, 0.025, 0.05, 0.075, 0.1, 0.125, 0.15, 0.175, 0.2),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
@@ -2659,16 +2695,30 @@ tracks/1/keys = {
 tracks/2/type = "method"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("animation")
+tracks/2/path = NodePath("animation/moves")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.04, 0.08, 0.12, 0.16, 0.2, 0.24, 0.28, 0.32, 0.36, 0.4, 0.44),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
 "values": [{
 "args": [],
-"method": &"start_dash"
+"method": &"set_jump_start"
 }, {
+"args": [],
+"method": &"set_jump_end"
+}]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("animation/effect")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.015, 0.03, 0.045, 0.06, 0.075, 0.09, 0.105, 0.125, 0.15, 0.175),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"values": [{
 "args": [0.1],
 "method": &"set_position"
 }, {
@@ -2698,15 +2748,13 @@ tracks/2/keys = {
 }, {
 "args": [1.0],
 "method": &"set_position"
-}, {
-"args": [],
-"method": &"stop_dash"
 }]
 }
 
 [sub_resource type="Animation" id="Animation_6do5e"]
 resource_name = "rock_kick_backward"
 length = 0.35
+step = 0.025
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -2730,6 +2778,34 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 3, 2, 1]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("animation/effect")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.15),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [5],
+"method": &"set_damage"
+}]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("animation/moves")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.35),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"set_fight_end"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_yrun7"]
@@ -2760,6 +2836,34 @@ tracks/1/keys = {
 "update": 1,
 "values": [0, 1, 2, 3, 3, 2, 1]
 }
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("animation/effect")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.15),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [5],
+"method": &"set_damage"
+}]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("animation/moves")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.35),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"set_fight_end"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_0821w"]
 resource_name = "rock_kick_left"
@@ -2789,6 +2893,34 @@ tracks/1/keys = {
 "update": 1,
 "values": [0, 1, 2, 3, 3, 2, 1]
 }
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("animation/effect")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.15),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [5],
+"method": &"set_damage"
+}]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("animation/moves")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.35),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"set_fight_end"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_4o1wx"]
 resource_name = "rock_kick_right"
@@ -2817,6 +2949,34 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 3, 2, 1]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("animation/effect")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.15),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [5],
+"method": &"set_damage"
+}]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("animation/moves")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.35),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"set_fight_end"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_nlotw"]
@@ -2970,7 +3130,7 @@ tracks/1/keys = {
 tracks/2/type = "method"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("animation")
+tracks/2/path = NodePath("animation/effect")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -2979,6 +3139,20 @@ tracks/2/keys = {
 "values": [{
 "args": [5],
 "method": &"set_damage"
+}]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("animation/moves")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.35),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"set_fight_end"
 }]
 }
 
@@ -3013,15 +3187,29 @@ tracks/1/keys = {
 tracks/2/type = "method"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("animation")
+tracks/2/path = NodePath("animation/effect")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0.1),
+"times": PackedFloat32Array(0.15),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [5],
 "method": &"set_damage"
+}]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("animation/moves")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.35),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"set_fight_end"
 }]
 }
 
@@ -3056,7 +3244,7 @@ tracks/1/keys = {
 tracks/2/type = "method"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("animation")
+tracks/2/path = NodePath("animation/effect")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -3065,6 +3253,20 @@ tracks/2/keys = {
 "values": [{
 "args": [5],
 "method": &"set_damage"
+}]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("animation/moves")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.35),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"set_fight_end"
 }]
 }
 
@@ -3099,21 +3301,36 @@ tracks/1/keys = {
 tracks/2/type = "method"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("animation")
+tracks/2/path = NodePath("animation/effect")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0.1),
+"times": PackedFloat32Array(0.15),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [5],
 "method": &"set_damage"
 }]
 }
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("animation/moves")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.35),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"set_fight_end"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_gdk28"]
 resource_name = "rock_punch_left"
 length = 0.35
+step = 0.025
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -3137,6 +3354,34 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
 "values": [1, 2, 0, 0, 1]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("animation/effect")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.15),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [5],
+"method": &"set_damage"
+}]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("animation/moves")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.35),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"set_fight_end"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_qksj7"]
@@ -3170,11 +3415,25 @@ tracks/1/keys = {
 tracks/2/type = "method"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("animation")
+tracks/2/path = NodePath("animation/moves")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0.1),
+"times": PackedFloat32Array(0.35),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"set_fight_end"
+}]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("animation/effect")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.15),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [5],
@@ -3213,7 +3472,7 @@ tracks/1/keys = {
 tracks/2/type = "method"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("animation")
+tracks/2/path = NodePath("animation/moves")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -3222,6 +3481,20 @@ tracks/2/keys = {
 "values": [{
 "args": [5],
 "method": &"set_damage"
+}]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("animation/effect")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.35),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"set_fight_end"
 }]
 }
 
@@ -3256,7 +3529,7 @@ tracks/1/keys = {
 tracks/2/type = "method"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("animation")
+tracks/2/path = NodePath("animation/effect")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -3265,6 +3538,20 @@ tracks/2/keys = {
 "values": [{
 "args": [5],
 "method": &"set_damage"
+}]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("animation/moves")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.35),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"set_fight_end"
 }]
 }
 
@@ -3607,6 +3894,25 @@ libraries = {
 [node name="stance" type="Timer" parent="animation"]
 wait_time = 0.4
 one_shot = true
+
+[node name="moves" type="Node" parent="animation"]
+script = ExtResource("30_3ktcr")
+
+[node name="stance" type="Timer" parent="animation/moves"]
+wait_time = 0.4
+one_shot = true
+
+[node name="jump" type="Node" parent="animation/moves"]
+script = ExtResource("31_0vuin")
+
+[node name="combo" type="Node" parent="animation/moves"]
+script = ExtResource("32_1wnep")
+
+[node name="effect" type="Node" parent="animation"]
+script = ExtResource("33_ux61i")
+
+[node name="syncer" type="Node" parent="animation"]
+script = ExtResource("34_hg14t")
 
 [node name="influence" parent="." instance=ExtResource("30_ol4r3")]
 

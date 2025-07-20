@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://dtibatxhubbff"]
+[gd_scene load_steps=7 format=3 uid="uid://dtibatxhubbff"]
 
 [ext_resource type="Script" uid="uid://chyqd202d6so4" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/processors/ui/input/input.gd" id="1_n780q"]
 [ext_resource type="PackedScene" uid="uid://cf3n6jqk372jc" path="res://asset/system/scene/subject/actor/fighter/group/hero/base/logic/processors/input/movement.tscn" id="2_paa2o"]
 [ext_resource type="PackedScene" uid="uid://dqxhg7f8wohsj" path="res://asset/system/scene/subject/actor/fighter/group/hero/base/logic/processors/input/platforming.tscn" id="3_alqks"]
+[ext_resource type="Script" uid="uid://bgjjfddk8wgmk" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/processors/ui/input/gravity.gd" id="4_ctrvw"]
+[ext_resource type="PackedScene" uid="uid://b51o5v35cj5m8" path="res://asset/system/scene/subject/actor/fighter/group/hero/base/logic/processors/input/actions/actions.tscn" id="5_xi04g"]
+[ext_resource type="Script" uid="uid://6ruw0ycrqlbq" path="res://addons/godot-behavior-tree-plugin/blackboard/blackboard.gd" id="6_xi04g"]
 
 [node name="input" type="Node"]
 script = ExtResource("1_n780q")
@@ -10,3 +13,12 @@ script = ExtResource("1_n780q")
 [node name="movement" parent="." instance=ExtResource("2_paa2o")]
 
 [node name="platforming" parent="." instance=ExtResource("3_alqks")]
+
+[node name="gravity" type="Node" parent="."]
+script = ExtResource("4_ctrvw")
+
+[node name="actions" parent="." instance=ExtResource("5_xi04g")]
+
+[node name="board" type="Node" parent="."]
+script = ExtResource("6_xi04g")
+metadata/_custom_type_script = "uid://6ruw0ycrqlbq"

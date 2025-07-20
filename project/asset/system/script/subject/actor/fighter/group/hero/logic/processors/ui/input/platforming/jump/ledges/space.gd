@@ -11,8 +11,7 @@ func set_direction(direction: Vector2i) -> void:
 	_direction = direction
 
 func _for_direction(action: Callable) -> void:
-	for axis in [Vector2.AXIS_X, Vector2.AXIS_Y]:
-		action.call(axis)
+	for axis in [Vector2.AXIS_X, Vector2.AXIS_Y]: action.call(axis)
 
 func _observe_ledge(axis: int, ledge: Vector2) -> void:
 	var faced: int = _direction[axis]
@@ -29,7 +28,5 @@ func _observe(ledge: Vector2) -> bool:
 func reach(stand: Area2D) -> bool:
 	var pos: Vector2 = stand.get_ledge_position()
 	var place: Node = stand.seat.place
-	var _floor: int = stand.seat.F
-	print("SL: ", pos == null)
-
+	var _floor: int = stand.seat.F # print("SL: ", pos == null)
 	return place.empty() and _observe(pos) and same_floor.call(_floor)

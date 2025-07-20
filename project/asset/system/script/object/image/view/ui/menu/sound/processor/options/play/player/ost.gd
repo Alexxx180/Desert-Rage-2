@@ -18,7 +18,7 @@ func _load_ogg() -> void:
 	stream = AudioStreamOggVorbis.load_from_file(_track)
 
 func _load_music() -> void:
-	print("LOAD MUSIC")
+	# print("LOAD MUSIC")
 	_method.call()
 	play()
 
