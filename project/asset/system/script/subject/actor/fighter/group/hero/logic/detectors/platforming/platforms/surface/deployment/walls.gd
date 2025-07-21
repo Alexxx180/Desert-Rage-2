@@ -17,9 +17,11 @@ func get_target_pos(i: int, j: int) -> Vector2:
 func set_center() -> void:
 	target = get_target_pos(1, 2)
 
-func set_direction(direction: Vector2i) -> void:
-	borders.set_direction(direction)
-	distance.set_direction(direction)
+func set_direction(direction: Vector2) -> void:
+	var next: Vector2i = Vector2i(roundi(direction.x), roundi(direction.y))
+
+	borders.set_direction(next)
+	distance.set_direction(next)
 
 func is_ledge(i: int, floors: TileMapLayer = null) -> bool:
 	var gap: bool = floors == null

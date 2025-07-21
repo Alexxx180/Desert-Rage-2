@@ -2,11 +2,12 @@ extends RefCounted
 
 class_name JumpTarget
 
-signal jump(control: JumpTarget, border: TileMapLayer)
+var _available: bool = false
+var available: bool:
+	get: return _available
+	set(value): _available = value
 
-var available: bool = false
-
-func jump_on(border: TileMapLayer) -> bool:
+func decide(ledge: Callable) -> bool:
 	if available:
-		jump.emit(self, border)
+		ledge.call(self)
 	return available

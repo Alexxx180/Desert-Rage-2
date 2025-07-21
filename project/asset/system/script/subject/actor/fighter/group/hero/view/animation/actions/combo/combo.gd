@@ -20,4 +20,6 @@ func start_fight(stand: String) -> void:
 	moves.set_aggressive(stand)
 	moves.stance.start()
 
-func end_fight() -> void: moves.set_aggressive("passive")
+func end_fight() -> void:
+	moves.set_aggressive("passive")
+	moves.hero.logic.processors.ui.input.movement.mode.end_fight()

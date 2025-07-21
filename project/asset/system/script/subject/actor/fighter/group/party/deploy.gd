@@ -8,6 +8,9 @@ signal select_hero(hero: CharacterBody2D)
 var party: HeroParty = HeroParty.new()
 var _group: Array[bool] = [false, false]
 
+var anchored: bool:
+	get: return _group[0]
+
 func set_deploy(able: bool) -> void: _group[1] = able
 
 func set_anchor() -> void: _group[0] = !_group[0]

@@ -9,7 +9,6 @@ var options: HFlowContainer
 @onready var tree: SceneTree = get_tree()
 
 func _set_visible() -> void:
-	_actions = !_actions
 	options.skills.visible = _actions
 	options.skills.init_focus()
 
@@ -21,6 +20,9 @@ func set_target(_enemy) -> void:
 	_switch_gameplay()
 
 func _switch_gameplay() -> void:
+	_actions = !_actions
+# 	if !_actions and !skills.selection:
+# 		skills.hero.logic.processors.ui.input.movement.mode.reset()
 	_set_visible()
 	_set_process()
 

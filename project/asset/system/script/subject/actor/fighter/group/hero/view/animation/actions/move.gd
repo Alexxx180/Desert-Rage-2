@@ -26,7 +26,7 @@ func set_fighting(stand: String) -> void: combo.fight_body(stand)
 
 func set_fight_start(stand: String) -> void: combo.start_fight(stand)
 
-func set_fight_end() -> void: set_aggressive("passive")
+func set_fight_end() -> void: combo.end_fight()
 
 func set_jump_start() -> void: jump.sequence(true)
 

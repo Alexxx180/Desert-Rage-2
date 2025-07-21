@@ -6,8 +6,13 @@ extends Node
 @onready var actions: BehaviorTree = $actions
 @onready var board: BehaviorBlackboard = $board
 
-func _input(_event: InputEvent) -> void:
+var _motion: Vector2:
+	get: return Input.get_vector("left", "right", "forward", "backward")
+
+func _input(_event: InputEvent) -> void: imitate(_motion)
+
+func imitate(motion: Vector2) -> void:
 	if platforming.animation: return
 	platforming.perform_jump()
-	movement.perform_motion()
+	movement.perform_motion(motion)
 	actions.tick(self, board)

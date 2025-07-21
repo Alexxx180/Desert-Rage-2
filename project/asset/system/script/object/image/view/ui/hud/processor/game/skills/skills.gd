@@ -7,7 +7,10 @@ var _selection: bool = false
 var selection: bool:
 	get: return _selection
 
-func set_fight(hero: CharacterBody2D) -> void:
+var hero: CharacterBody2D
+
+func set_fight(next: CharacterBody2D) -> void:
+	hero = next
 	fight = hero.logic.processors.world.fight
 
 func reveal_aims() -> void:

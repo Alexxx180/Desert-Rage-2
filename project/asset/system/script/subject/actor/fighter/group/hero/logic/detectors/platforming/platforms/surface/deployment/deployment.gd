@@ -7,11 +7,22 @@ class_name DeploymentRaycast
 
 var _direction: Vector2i = Vector2i.ZERO
 
-func set_direction(direction: Vector2i) -> void:
-	_direction = direction
+func reset_direction() -> void:
+	_direction = Vector2i.ZERO
+
+func set_direction(direction: Vector2) -> void:
+	var next: Vector2i = Vector2i(roundi(direction.x), roundi(direction.y))
+	if next != Vector2i.ZERO:
+		_direction = next
+	# _direction.x = roundi(direction.x)
+	# _direction.y = roundi(direction.y)
+
+	print("DIRECTION SET: ", _direction)
+	# print("X DIRECTION SET: ", roundi(direction.x))
+	# print("Y DIRECTION SET: ", roundi(direction.y))
 
 func ic(condition: bool, desc: String) -> bool:
-	if not condition: print("[STOP] Deployment: ", desc)
+	if condition: print("[STOP] Deployment: ", desc)
 	return condition
 
 func available_ground() -> bool:

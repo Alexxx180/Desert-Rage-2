@@ -17,7 +17,8 @@ func target_accepted(enemy: CharacterBody2D) -> void:
 	Processors.turn(movement, true)
 	movement.set_target(enemy)
 	target_accept.emit(enemy)
-	if auto_switch: deploy.select()
+	if auto_switch and !deploy.anchored:
+		deploy.select()
 
 func _detector(entity: PhysicsBody2D) -> Node:
 	return entity.logic.detector.fight
