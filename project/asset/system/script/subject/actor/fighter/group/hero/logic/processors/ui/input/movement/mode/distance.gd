@@ -16,4 +16,4 @@ func perform_motion(hero: CharacterBody2D, enemy: CharacterBody2D) -> void:
 	input.movement.mode.velocity.set_moving(motion)
 	hero.view.animation.move(motion)
 	hero.make_velocity(motion)
-	input.imitate_motion(direction)
+	input.movement.imitate_motion(direction)

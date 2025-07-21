@@ -11,8 +11,7 @@ func set_preview(group: Node2D, progress: HelpPreview) -> void:
 
 func set_transitions(ui: Dictionary, ost: Node) -> void:
 	detector.game.visibility_changed.connect(func():
-		ost.player.stream_paused = !detector.game.visible
-	)
+		ost.player.stream_paused = !detector.game.visible)
 	
 	relation.pause.settings.switch.transit_settings = func():
 		detector.pause.hide(); ui.settings.show()

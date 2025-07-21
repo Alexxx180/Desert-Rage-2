@@ -7,12 +7,17 @@ var zone: FightRange = FightRange.new()
 # var all: FightRange = FightRange.new() - simply enemies list
 @onready var movement: Node = $movement
 
-var party: HeroParty
+var auto_switch: bool = true
+
+var deploy: HeroDeploy
+var party: HeroParty:
+	get: return deploy.party
 
 func target_accepted(enemy: CharacterBody2D) -> void:
 	Processors.turn(movement, true)
 	movement.set_target(enemy)
 	target_accept.emit(enemy)
+	if auto_switch: deploy.select()
 
 func _detector(entity: PhysicsBody2D) -> Node:
 	return entity.logic.detector.fight

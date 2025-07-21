@@ -3,6 +3,7 @@ extends RefCounted
 class_name HeroDeploy
 
 signal traverse_camera(node: Node2D, hero: CharacterBody2D)
+signal select_hero(hero: CharacterBody2D)
 
 var party: HeroParty = HeroParty.new()
 var _group: Array[bool] = [false, false]
@@ -19,6 +20,7 @@ func select(hero: Node2D = party.leader) -> void:
 		party.show_heroes()
 	traverse_camera.emit(hero, party.follower)
 	party.set_next()
+	select_hero.emit(party.leader)
 
 func group_heroes() -> void:
 	party.sync_pos()

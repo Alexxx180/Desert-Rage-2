@@ -8,4 +8,4 @@ func controls(hero: CharacterBody2D, fight: Node) -> void:
 	range.controls(hero, fight)
 	fight.movement.hero = hero
 	var group: Node2D = hero.get_parent()
-	fight.party = group.deploy.party
+	fight.deploy = group.deploy
