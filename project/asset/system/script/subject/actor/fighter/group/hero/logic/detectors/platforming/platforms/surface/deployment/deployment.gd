@@ -17,7 +17,7 @@ func set_direction(direction: Vector2) -> void:
 	# _direction.x = roundi(direction.x)
 	# _direction.y = roundi(direction.y)
 
-	print("DIRECTION SET: ", _direction)
+	# print("DIRECTION SET: ", _direction)
 	# print("X DIRECTION SET: ", roundi(direction.x))
 	# print("Y DIRECTION SET: ", roundi(direction.y))
 

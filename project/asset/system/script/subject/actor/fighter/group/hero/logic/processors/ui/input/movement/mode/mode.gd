@@ -26,14 +26,20 @@ func select_mode(entity: CharacterBody2D) -> void:
 		hero.movement = targeted_movement
 
 func targeted_movement() -> void:
-	if distance.is_safe(hero, _enemy):
-		distance.perform_motion(hero, _enemy)
+	distance.perform_motion(hero, _enemy)
+	if distance.is_safe(hero, _enemy) and not locked:
+		print("MOVING!")
 		hero.move_and_slide()
-	elif not locked:
+	elif not locked: # if not locked:
+		print("LOCKED!")
+		# velocity.forget_velocity()
 		locked = true
+		# enemy = Defaults.CHARACTER
 		fight.use_selection(hero)
 
 func end_fight() -> void:
+	print("ENDED!")
+	distance.perform_motion(hero, hero)
 	enemy = Defaults.CHARACTER
 	locked = false
 
