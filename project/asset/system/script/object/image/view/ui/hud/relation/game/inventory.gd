@@ -2,5 +2,7 @@ extends Node
 
 func controls(hud: CanvasLayer, inventory: VSplitContainer) -> void:
 	var processor: Node = hud.processor.game.inventory
-	processor.inventory = inventory.get_node("topic")
-	processor.markers = inventory.get_node("ability/controls/markers")
+	processor.inventory.append(inventory.get_node("topic/scroll/margin/flow/items"))
+	processor.inventory.append(hud.detector.game.get_node("menu/stats/topic/scroll/margin/stack/items"))
+	processor.markers = hud.detector.game.get_node("margin/markers")
+	# processor.markers = inventory.get_node("ability/controls/markers")

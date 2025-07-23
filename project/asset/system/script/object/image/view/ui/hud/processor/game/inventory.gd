@@ -5,7 +5,7 @@ enum { EMPTY = 0, KNIFE = 1 }
 @onready var preview: Timer = $preview
 @onready var panel: Timer = $panel
 
-var inventory: PanelContainer
+var inventory: Array[HFlowContainer] = []
 var markers: HFlowContainer
 
 var showed: bool = false
@@ -19,8 +19,9 @@ static func cline(value: int, length: int) -> int:
 func _toggle_selection(a: int, b: int) -> void:
 	markers.items[a].hide_item()
 	markers.items[b].show_item()
-	inventory.items.primary[a].selection.hide()
-	inventory.items.primary[b].selection.show()
+	for element in inventory:
+		element.primary[a].selection.hide()
+		element.primary[b].selection.show()
 
 func _fast_panel_selection(offset: int) -> void:
 	if not showed:
