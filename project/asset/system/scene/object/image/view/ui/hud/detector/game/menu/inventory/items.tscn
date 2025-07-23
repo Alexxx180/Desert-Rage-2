@@ -1,6 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://dqlgy3l13bibl"]
+[gd_scene load_steps=7 format=3 uid="uid://dqlgy3l13bibl"]
 
+[ext_resource type="Script" uid="uid://bmdahhw0xgfv8" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/menu/inventory/items.gd" id="1_bn4qj"]
 [ext_resource type="FontFile" uid="uid://b2wbdbnkxcqv1" path="res://asset/resource/font/NotoEmoji-VariableFont_wght.ttf" id="1_i8tg8"]
+[ext_resource type="Script" uid="uid://ckwy3qb2rie2m" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/menu/inventory/primary.gd" id="2_ayboh"]
+[ext_resource type="FontFile" uid="uid://b37js8y80ak1k" path="res://asset/resource/font/NotoColorEmoji-Regular.ttf" id="3_374m3"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dfp1u"]
 bg_color = Color(0.20871, 0.20871, 0.20871, 1)
@@ -8,6 +11,9 @@ corner_radius_top_left = 3
 corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vb3xh"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [node name="items" type="HFlowContainer"]
 anchors_preset = 15
@@ -19,31 +25,87 @@ size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.0
 theme_override_constants/h_separation = 7
 theme_override_constants/v_separation = 7
+script = ExtResource("1_bn4qj")
 
-[node name="primary-slot-0" type="PanelContainer" parent="."]
+[node name="primary_0" type="PanelContainer" parent="."]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_dfp1u")
+script = ExtResource("2_ayboh")
 
-[node name="primary-slot-1" type="PanelContainer" parent="."]
+[node name="selection" type="ColorRect" parent="primary_0"]
+custom_minimum_size = Vector2(0, 3)
+layout_mode = 2
+size_flags_vertical = 8
+color = Color(0.184314, 0.184314, 0.72549, 1)
+
+[node name="primary_1" type="PanelContainer" parent="."]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_dfp1u")
+script = ExtResource("2_ayboh")
 
-[node name="primary-slot-2" type="PanelContainer" parent="."]
+[node name="selection" type="ColorRect" parent="primary_1"]
+visible = false
+custom_minimum_size = Vector2(0, 3)
+layout_mode = 2
+size_flags_vertical = 8
+color = Color(0.184314, 0.184314, 0.72549, 1)
+
+[node name="primary_2" type="PanelContainer" parent="."]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_dfp1u")
+script = ExtResource("2_ayboh")
 
-[node name="primary-slot-3" type="PanelContainer" parent="."]
+[node name="margin" type="MarginContainer" parent="primary_2"]
+layout_mode = 2
+theme_override_constants/margin_left = 9
+theme_override_constants/margin_top = 9
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="text-icon" type="Label" parent="primary_2/margin"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("3_374m3")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_vb3xh")
+text = "🔪"
+horizontal_alignment = 1
+
+[node name="selection" type="ColorRect" parent="primary_2"]
+visible = false
+custom_minimum_size = Vector2(0, 3)
+layout_mode = 2
+size_flags_vertical = 8
+color = Color(0.184314, 0.184314, 0.72549, 1)
+
+[node name="primary_3" type="PanelContainer" parent="."]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_dfp1u")
+script = ExtResource("2_ayboh")
 
-[node name="primary-slot-4" type="PanelContainer" parent="."]
+[node name="selection" type="ColorRect" parent="primary_3"]
+visible = false
+custom_minimum_size = Vector2(0, 3)
+layout_mode = 2
+size_flags_vertical = 8
+color = Color(0.184314, 0.184314, 0.72549, 1)
+
+[node name="primary_4" type="PanelContainer" parent="."]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_dfp1u")
+script = ExtResource("2_ayboh")
+
+[node name="selection" type="ColorRect" parent="primary_4"]
+visible = false
+custom_minimum_size = Vector2(0, 3)
+layout_mode = 2
+size_flags_vertical = 8
+color = Color(0.184314, 0.184314, 0.72549, 1)
 
 [node name="slot-0" type="PanelContainer" parent="."]
 custom_minimum_size = Vector2(60, 60)

@@ -5,7 +5,7 @@ enum { EMPTY = 0, KNIFE = 1 }
 @onready var preview: Timer = $preview
 @onready var panel: Timer = $panel
 
-var inventory: VSplitContainer
+var inventory: PanelContainer
 var markers: HFlowContainer
 
 var showed: bool = false
@@ -16,6 +16,12 @@ var items: Array[int] = [EMPTY, EMPTY, KNIFE, EMPTY, EMPTY]
 static func cline(value: int, length: int) -> int:
 	return length + value if value < 0 else value % length
 
+func _toggle_selection(a: int, b: int) -> void:
+	markers.items[a].hide_item()
+	markers.items[b].show_item()
+	inventory.items.primary[a].selection.hide()
+	inventory.items.primary[b].selection.show()
+
 func _fast_panel_selection(offset: int) -> void:
 	if not showed:
 		showed = true
@@ -24,8 +30,7 @@ func _fast_panel_selection(offset: int) -> void:
 	var length: int = mask.size()
 	var next: int = cline(selection + offset, length)
 
-	markers.items[mask[selection]].hide_item()
-	markers.items[mask[next]].show_item()
+	_toggle_selection(mask[selection], mask[next])
 	preview.start()
 	panel.start()
 	selection = next
