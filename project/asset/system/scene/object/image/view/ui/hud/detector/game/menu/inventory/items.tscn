@@ -1,4 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://dqlgy3l13bibl"]
+[gd_scene load_steps=3 format=3 uid="uid://dqlgy3l13bibl"]
+
+[ext_resource type="FontFile" uid="uid://b2wbdbnkxcqv1" path="res://asset/resource/font/NotoEmoji-VariableFont_wght.ttf" id="1_i8tg8"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dfp1u"]
 bg_color = Color(0.20871, 0.20871, 0.20871, 1)
@@ -103,27 +105,98 @@ layout_mode = 2
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 
-[node name="equipment-0" type="PanelContainer" parent="."]
+[node name="weapon" type="PanelContainer" parent="."]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_dfp1u")
 
-[node name="equipment-1" type="PanelContainer" parent="."]
+[node name="icon" type="Label" parent="weapon"]
+modulate = Color(1, 1, 1, 0.294118)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_i8tg8")
+theme_override_font_sizes/font_size = 32
+text = "🗡"
+horizontal_alignment = 1
+
+[node name="artifact" type="PanelContainer" parent="."]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_dfp1u")
 
-[node name="equipment-2" type="PanelContainer" parent="."]
+[node name="icon" type="Label" parent="artifact"]
+modulate = Color(1, 1, 1, 0.294118)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_i8tg8")
+theme_override_font_sizes/font_size = 32
+text = "🛡"
+horizontal_alignment = 1
+
+[node name="armor" type="PanelContainer" parent="."]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_dfp1u")
 
-[node name="equipment-3" type="PanelContainer" parent="."]
+[node name="icon" type="Label" parent="armor"]
+modulate = Color(1, 1, 1, 0.294118)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_i8tg8")
+theme_override_font_sizes/font_size = 32
+text = "🧥"
+horizontal_alignment = 1
+
+[node name="legs" type="PanelContainer" parent="."]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_dfp1u")
 
-[node name="equipment-4" type="PanelContainer" parent="."]
+[node name="icon" type="Label" parent="legs"]
+modulate = Color(1, 1, 1, 0.294118)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_i8tg8")
+theme_override_font_sizes/font_size = 32
+text = "👖"
+horizontal_alignment = 1
+
+[node name="boots" type="PanelContainer" parent="."]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_dfp1u")
+
+[node name="icon" type="Control" parent="boots"]
+layout_mode = 2
+
+[node name="boot-1" type="MarginContainer" parent="boots/icon"]
+layout_mode = 2
+offset_right = 60.0
+offset_bottom = 60.0
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 9
+
+[node name="icon" type="Label" parent="boots/icon/boot-1"]
+modulate = Color(1, 1, 1, 0.294118)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_fonts/font = ExtResource("1_i8tg8")
+theme_override_font_sizes/font_size = 24
+text = "🥾"
+horizontal_alignment = 1
+
+[node name="boot-2" type="MarginContainer" parent="boots/icon"]
+layout_mode = 2
+offset_right = 60.0
+offset_bottom = 60.0
+theme_override_constants/margin_left = 9
+theme_override_constants/margin_top = 9
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="icon" type="Label" parent="boots/icon/boot-2"]
+modulate = Color(1, 1, 1, 0.294118)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_fonts/font = ExtResource("1_i8tg8")
+theme_override_font_sizes/font_size = 24
+text = "🥾"
+horizontal_alignment = 1
