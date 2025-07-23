@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://6b0ydfrtbu38"]
+[gd_scene load_steps=7 format=3 uid="uid://6b0ydfrtbu38"]
 
 [ext_resource type="PackedScene" uid="uid://scs1xlb7x0d6" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/menu/inventory/selection.tscn" id="1_7touf"]
 [ext_resource type="StyleBox" uid="uid://cvfnqancophme" path="res://asset/resource/engine/internal/theme/style/solid-color-panel.tres" id="1_r0sy2"]
 [ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://asset/resource/engine/internal/theme/patterns/template/menu/settings/topic/footer.tres" id="2_r0sy2"]
 [ext_resource type="FontFile" uid="uid://b37js8y80ak1k" path="res://asset/resource/font/NotoColorEmoji-Regular.ttf" id="3_5obb3"]
 [ext_resource type="PackedScene" uid="uid://l7thqkrsol4m" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/menu/priorities/perks.tscn" id="3_h2uo5"]
+[ext_resource type="StyleBox" uid="uid://c5qf02s45xwn" path="res://asset/resource/engine/internal/theme/style/noto-color.tres" id="6_5obb3"]
 
 [node name="panel" type="PanelContainer"]
 anchors_preset = 15
@@ -179,11 +180,34 @@ theme_override_constants/v_separation = 15
 
 [node name="world" type="HBoxContainer" parent="scroll/margin/stack/usage"]
 layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="preview" type="PanelContainer" parent="scroll/margin/stack/usage/world"]
+custom_minimum_size = Vector2(45, 45)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+
+[node name="margin" type="MarginContainer" parent="scroll/margin/stack/usage/world/preview"]
+layout_mode = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="icon" type="Label" parent="scroll/margin/stack/usage/world/preview/margin"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("3_5obb3")
+theme_override_font_sizes/font_size = 28
+theme_override_styles/normal = ExtResource("6_5obb3")
+text = "🧊"
 
 [node name="summary" type="VBoxContainer" parent="scroll/margin/stack/usage/world"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+theme_override_constants/separation = -3
 
 [node name="caption" type="Label" parent="scroll/margin/stack/usage/world/summary"]
 layout_mode = 2
@@ -201,35 +225,39 @@ size_flags_horizontal = 2
 size_flags_stretch_ratio = 0.75
 theme = ExtResource("2_r0sy2")
 theme_override_font_sizes/font_size = 18
-text = "Переводит 💧в💨"
+text = "Агрегатные состояния"
 horizontal_alignment = 2
 
-[node name="preview" type="PanelContainer" parent="scroll/margin/stack/usage/world"]
+[node name="fight-cure" type="HBoxContainer" parent="scroll/margin/stack/usage"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="preview" type="PanelContainer" parent="scroll/margin/stack/usage/fight-cure"]
 custom_minimum_size = Vector2(45, 45)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 
-[node name="margin" type="MarginContainer" parent="scroll/margin/stack/usage/world/preview"]
+[node name="margin" type="MarginContainer" parent="scroll/margin/stack/usage/fight-cure/preview"]
 layout_mode = 2
-theme_override_constants/margin_left = 0
-theme_override_constants/margin_top = 5
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 
-[node name="icon" type="Label" parent="scroll/margin/stack/usage/world/preview/margin"]
+[node name="icon" type="Label" parent="scroll/margin/stack/usage/fight-cure/preview/margin"]
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("3_5obb3")
 theme_override_font_sizes/font_size = 28
-text = "🧊"
-
-[node name="fight-cure" type="HBoxContainer" parent="scroll/margin/stack/usage"]
-layout_mode = 2
+theme_override_styles/normal = ExtResource("6_5obb3")
+text = "🩹"
 
 [node name="summary" type="VBoxContainer" parent="scroll/margin/stack/usage/fight-cure"]
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 4
+theme_override_constants/separation = -3
 
 [node name="caption" type="Label" parent="scroll/margin/stack/usage/fight-cure/summary"]
 layout_mode = 2
@@ -250,32 +278,36 @@ theme_override_font_sizes/font_size = 18
 text = "Прижигает раны"
 horizontal_alignment = 2
 
-[node name="preview" type="PanelContainer" parent="scroll/margin/stack/usage/fight-cure"]
+[node name="fight-stream" type="HBoxContainer" parent="scroll/margin/stack/usage"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="preview" type="PanelContainer" parent="scroll/margin/stack/usage/fight-stream"]
 custom_minimum_size = Vector2(45, 45)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 
-[node name="margin" type="MarginContainer" parent="scroll/margin/stack/usage/fight-cure/preview"]
+[node name="margin" type="MarginContainer" parent="scroll/margin/stack/usage/fight-stream/preview"]
 layout_mode = 2
-theme_override_constants/margin_left = 0
-theme_override_constants/margin_top = 5
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 
-[node name="icon" type="Label" parent="scroll/margin/stack/usage/fight-cure/preview/margin"]
+[node name="icon" type="Label" parent="scroll/margin/stack/usage/fight-stream/preview/margin"]
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("3_5obb3")
 theme_override_font_sizes/font_size = 28
-text = "🩹"
-
-[node name="fight-stream" type="HBoxContainer" parent="scroll/margin/stack/usage"]
-layout_mode = 2
+theme_override_styles/normal = ExtResource("6_5obb3")
+text = "🩸"
 
 [node name="summary" type="VBoxContainer" parent="scroll/margin/stack/usage/fight-stream"]
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 4
+theme_override_constants/separation = -3
 
 [node name="caption" type="Label" parent="scroll/margin/stack/usage/fight-stream/summary"]
 layout_mode = 2
@@ -295,22 +327,3 @@ theme = ExtResource("2_r0sy2")
 theme_override_font_sizes/font_size = 18
 text = "Обжигает 3 раза"
 horizontal_alignment = 2
-
-[node name="preview" type="PanelContainer" parent="scroll/margin/stack/usage/fight-stream"]
-custom_minimum_size = Vector2(45, 45)
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 4
-
-[node name="margin" type="MarginContainer" parent="scroll/margin/stack/usage/fight-stream/preview"]
-layout_mode = 2
-theme_override_constants/margin_left = 0
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 0
-
-[node name="icon" type="Label" parent="scroll/margin/stack/usage/fight-stream/preview/margin"]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 28
-text = "🩸"

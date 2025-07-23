@@ -1,21 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://sloxw12np1ch"]
+[gd_scene load_steps=7 format=3 uid="uid://sloxw12np1ch"]
 
 [ext_resource type="PackedScene" uid="uid://bky5mu10x2da3" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/menu/inventory/status.tscn" id="1_2h7wb"]
 [ext_resource type="StyleBox" uid="uid://cvfnqancophme" path="res://asset/resource/engine/internal/theme/style/solid-color-panel.tres" id="1_xvq4b"]
 [ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://asset/resource/engine/internal/theme/patterns/template/menu/settings/topic/footer.tres" id="2_xvq4b"]
 [ext_resource type="PackedScene" uid="uid://l7thqkrsol4m" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/menu/priorities/perks.tscn" id="3_2h7wb"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_joidv"]
-bg_color = Color(0.231373, 0.231373, 0.231373, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.0183228, 0.240907, 0.125767, 1)
-corner_radius_top_left = 18
-corner_radius_top_right = 18
-corner_radius_bottom_right = 18
-corner_radius_bottom_left = 18
+[ext_resource type="FontFile" uid="uid://b37js8y80ak1k" path="res://asset/resource/font/NotoColorEmoji-Regular.ttf" id="4_f2xkq"]
+[ext_resource type="StyleBox" uid="uid://c5qf02s45xwn" path="res://asset/resource/engine/internal/theme/style/noto-color.tres" id="5_i4ulf"]
 
 [node name="panel" type="PanelContainer"]
 anchors_preset = 15
@@ -63,28 +53,20 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.258824, 0.258824, 0.258824, 1)
 text = "Ранг"
 
-[node name="status" type="Panel" parent="scroll/margin/stack/priority/title"]
-custom_minimum_size = Vector2(40, 40)
+[node name="status" type="VBoxContainer" parent="scroll/margin/stack/priority/title"]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_joidv")
+theme_override_constants/separation = -3
 
-[node name="center" type="MarginContainer" parent="scroll/margin/stack/priority/title/status"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 0
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 1
-
-[node name="letter" type="Label" parent="scroll/margin/stack/priority/title/status/center"]
+[node name="letter" type="Label" parent="scroll/margin/stack/priority/title/status"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 26
 text = "А"
 horizontal_alignment = 1
+
+[node name="underline" type="ColorRect" parent="scroll/margin/stack/priority/title/status"]
+custom_minimum_size = Vector2(25, 2)
+layout_mode = 2
+color = Color(0.258824, 0.258824, 0.258824, 1)
 
 [node name="rank-summary" type="HFlowContainer" parent="scroll/margin/stack/priority"]
 visible = false
@@ -133,13 +115,22 @@ theme = ExtResource("2_xvq4b")
 text = "10"
 horizontal_alignment = 2
 
+[node name="icon" type="Label" parent="scroll/margin/stack/priority/determination"]
+layout_mode = 2
+size_flags_stretch_ratio = 2.0
+theme = ExtResource("2_xvq4b")
+theme_override_colors/font_color = Color(0.783523, 0.783523, 0.783523, 1)
+theme_override_fonts/font = ExtResource("4_f2xkq")
+theme_override_styles/normal = ExtResource("5_i4ulf")
+text = "📈"
+
 [node name="caption" type="Label" parent="scroll/margin/stack/priority/determination"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
 theme = ExtResource("2_xvq4b")
 theme_override_colors/font_color = Color(0.783523, 0.783523, 0.783523, 1)
-text = "📈 Целеустремленность"
+text = "Целеустремленность"
 
 [node name="progress" type="HBoxContainer" parent="scroll/margin/stack/priority/determination"]
 layout_mode = 2
@@ -236,12 +227,21 @@ theme = ExtResource("2_xvq4b")
 text = "5"
 horizontal_alignment = 2
 
+[node name="icon" type="Label" parent="scroll/margin/stack/priority/self-control"]
+layout_mode = 2
+size_flags_stretch_ratio = 2.0
+theme = ExtResource("2_xvq4b")
+theme_override_colors/font_color = Color(0.783523, 0.783523, 0.783523, 1)
+theme_override_fonts/font = ExtResource("4_f2xkq")
+theme_override_styles/normal = ExtResource("5_i4ulf")
+text = "⚖️"
+
 [node name="caption" type="Label" parent="scroll/margin/stack/priority/self-control"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
 theme = ExtResource("2_xvq4b")
-text = "⚖️ Самообладание"
+text = "Самообладание"
 
 [node name="progress" type="HBoxContainer" parent="scroll/margin/stack/priority/self-control"]
 visible = false
@@ -336,12 +336,21 @@ theme = ExtResource("2_xvq4b")
 text = "2"
 horizontal_alignment = 2
 
+[node name="icon" type="Label" parent="scroll/margin/stack/priority/tenacity"]
+layout_mode = 2
+size_flags_stretch_ratio = 2.0
+theme = ExtResource("2_xvq4b")
+theme_override_colors/font_color = Color(0.783523, 0.783523, 0.783523, 1)
+theme_override_fonts/font = ExtResource("4_f2xkq")
+theme_override_styles/normal = ExtResource("5_i4ulf")
+text = "💪"
+
 [node name="caption" type="Label" parent="scroll/margin/stack/priority/tenacity"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
 theme = ExtResource("2_xvq4b")
-text = "💪 Стойкость"
+text = "Стойкость"
 
 [node name="level-up" type="HBoxContainer" parent="scroll/margin/stack/priority/tenacity"]
 visible = false

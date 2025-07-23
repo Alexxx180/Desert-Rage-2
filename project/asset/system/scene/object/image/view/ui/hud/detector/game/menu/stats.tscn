@@ -1,22 +1,16 @@
-[gd_scene load_steps=7 format=3 uid="uid://c3dwvtm5ivwwp"]
+[gd_scene load_steps=8 format=3 uid="uid://c3dwvtm5ivwwp"]
 
 [ext_resource type="PackedScene" uid="uid://dqlgy3l13bibl" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/menu/inventory/items.tscn" id="1_3h27n"]
 [ext_resource type="StyleBox" uid="uid://cvfnqancophme" path="res://asset/resource/engine/internal/theme/style/solid-color-panel.tres" id="1_j4734"]
 [ext_resource type="PackedScene" uid="uid://scs1xlb7x0d6" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/menu/inventory/selection.tscn" id="2_e11u2"]
 [ext_resource type="StyleBox" uid="uid://cht8hrroa75bg" path="res://asset/resource/engine/internal/theme/style/tag-button.tres" id="2_j4734"]
 [ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://asset/resource/engine/internal/theme/patterns/template/menu/settings/topic/footer.tres" id="3_j4734"]
+[ext_resource type="FontFile" uid="uid://b37js8y80ak1k" path="res://asset/resource/font/NotoColorEmoji-Regular.ttf" id="6_drayd"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j4734"]
-bg_color = Color(0.231373, 0.231373, 0.231373, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.0183228, 0.240907, 0.125767, 1)
-corner_radius_top_left = 18
-corner_radius_top_right = 18
-corner_radius_bottom_right = 18
-corner_radius_bottom_left = 18
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_drayd"]
+content_margin_left = 7.0
+content_margin_top = 5.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [node name="panel" type="PanelContainer"]
 anchors_preset = 15
@@ -80,12 +74,20 @@ theme = ExtResource("3_j4734")
 text = "255"
 horizontal_alignment = 2
 
+[node name="icon" type="Label" parent="scroll/margin/stack/stats/power"]
+layout_mode = 2
+size_flags_stretch_ratio = 2.0
+theme = ExtResource("3_j4734")
+theme_override_fonts/font = ExtResource("6_drayd")
+theme_override_styles/normal = SubResource("StyleBoxFlat_drayd")
+text = "⚔️"
+
 [node name="caption" type="Label" parent="scroll/margin/stack/stats/power"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
 theme = ExtResource("3_j4734")
-text = "⚔️ Мощь"
+text = "Мощь"
 
 [node name="margin" type="MarginContainer" parent="scroll/margin/stack/stats/power"]
 layout_mode = 2
@@ -104,7 +106,6 @@ size_flags_stretch_ratio = 4.0
 max_value = 90.0
 step = 1.0
 value = 50.0
-fill_mode = 1
 show_percentage = false
 
 [node name="plus" type="Label" parent="scroll/margin/stack/stats/power"]
@@ -134,12 +135,20 @@ theme = ExtResource("3_j4734")
 text = "255"
 horizontal_alignment = 2
 
+[node name="icon" type="Label" parent="scroll/margin/stack/stats/influence"]
+layout_mode = 2
+size_flags_stretch_ratio = 2.0
+theme = ExtResource("3_j4734")
+theme_override_fonts/font = ExtResource("6_drayd")
+theme_override_styles/normal = SubResource("StyleBoxFlat_drayd")
+text = "🔥"
+
 [node name="caption" type="Label" parent="scroll/margin/stack/stats/influence"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
 theme = ExtResource("3_j4734")
-text = "🔥 Влияние"
+text = "Влияние"
 
 [node name="margin" type="MarginContainer" parent="scroll/margin/stack/stats/influence"]
 layout_mode = 2
@@ -158,7 +167,6 @@ size_flags_stretch_ratio = 4.0
 max_value = 90.0
 step = 1.0
 value = 50.0
-fill_mode = 1
 show_percentage = false
 
 [node name="plus" type="Label" parent="scroll/margin/stack/stats/influence"]
@@ -188,12 +196,20 @@ theme = ExtResource("3_j4734")
 text = "255"
 horizontal_alignment = 2
 
+[node name="icon" type="Label" parent="scroll/margin/stack/stats/vitality"]
+layout_mode = 2
+size_flags_stretch_ratio = 2.0
+theme = ExtResource("3_j4734")
+theme_override_fonts/font = ExtResource("6_drayd")
+theme_override_styles/normal = SubResource("StyleBoxFlat_drayd")
+text = "🛡"
+
 [node name="caption" type="Label" parent="scroll/margin/stack/stats/vitality"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
 theme = ExtResource("3_j4734")
-text = "🛡 Живучесть"
+text = "Живучесть"
 
 [node name="margin" type="MarginContainer" parent="scroll/margin/stack/stats/vitality"]
 layout_mode = 2
@@ -212,7 +228,6 @@ size_flags_stretch_ratio = 4.0
 max_value = 90.0
 step = 1.0
 value = 50.0
-fill_mode = 1
 show_percentage = false
 
 [node name="plus" type="Label" parent="scroll/margin/stack/stats/vitality"]
@@ -242,12 +257,20 @@ theme = ExtResource("3_j4734")
 text = "255"
 horizontal_alignment = 2
 
+[node name="icon" type="Label" parent="scroll/margin/stack/stats/reaction"]
+layout_mode = 2
+size_flags_stretch_ratio = 2.0
+theme = ExtResource("3_j4734")
+theme_override_fonts/font = ExtResource("6_drayd")
+theme_override_styles/normal = SubResource("StyleBoxFlat_drayd")
+text = "🫧"
+
 [node name="caption" type="Label" parent="scroll/margin/stack/stats/reaction"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
 theme = ExtResource("3_j4734")
-text = "🫧 Реакция"
+text = "Реакция"
 
 [node name="margin" type="MarginContainer" parent="scroll/margin/stack/stats/reaction"]
 layout_mode = 2
@@ -266,7 +289,6 @@ size_flags_stretch_ratio = 4.0
 max_value = 90.0
 step = 1.0
 value = 50.0
-fill_mode = 1
 show_percentage = false
 
 [node name="plus" type="Label" parent="scroll/margin/stack/stats/reaction"]
@@ -313,28 +335,20 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.258824, 0.258824, 0.258824, 1)
 text = "Ранг"
 
-[node name="status" type="Panel" parent="scroll/margin/stack/level/title"]
-custom_minimum_size = Vector2(40, 40)
+[node name="status" type="VBoxContainer" parent="scroll/margin/stack/level/title"]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_j4734")
+theme_override_constants/separation = -3
 
-[node name="center" type="MarginContainer" parent="scroll/margin/stack/level/title/status"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 0
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 1
-
-[node name="letter" type="Label" parent="scroll/margin/stack/level/title/status/center"]
+[node name="letter" type="Label" parent="scroll/margin/stack/level/title/status"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 26
 text = "А"
 horizontal_alignment = 1
+
+[node name="underline" type="ColorRect" parent="scroll/margin/stack/level/title/status"]
+custom_minimum_size = Vector2(25, 2)
+layout_mode = 2
+color = Color(0.258824, 0.258824, 0.258824, 1)
 
 [node name="rank-summary" type="HFlowContainer" parent="scroll/margin/stack/level"]
 visible = false
@@ -414,6 +428,7 @@ layout_mode = 2
 size_flags_horizontal = 2
 size_flags_stretch_ratio = 0.5
 theme = ExtResource("3_j4734")
+theme_override_fonts/font = ExtResource("6_drayd")
 text = "📖"
 
 [node name="incomplete" type="Label" parent="scroll/margin/stack/level/progress/books"]
@@ -423,6 +438,7 @@ layout_mode = 2
 size_flags_horizontal = 2
 size_flags_stretch_ratio = 0.5
 theme = ExtResource("3_j4734")
+theme_override_fonts/font = ExtResource("6_drayd")
 text = "📖"
 
 [node name="pages" type="HBoxContainer" parent="scroll/margin/stack/level/progress"]
@@ -434,6 +450,7 @@ layout_mode = 2
 size_flags_horizontal = 2
 size_flags_stretch_ratio = 0.5
 theme = ExtResource("3_j4734")
+theme_override_fonts/font = ExtResource("6_drayd")
 text = "📜"
 
 [node name="incomplete" type="Label" parent="scroll/margin/stack/level/progress/pages"]
@@ -442,6 +459,7 @@ layout_mode = 2
 size_flags_horizontal = 2
 size_flags_stretch_ratio = 0.5
 theme = ExtResource("3_j4734")
+theme_override_fonts/font = ExtResource("6_drayd")
 text = "📜"
 
 [node name="monsters" type="HBoxContainer" parent="scroll/margin/stack/level/progress"]
@@ -452,6 +470,7 @@ layout_mode = 2
 size_flags_horizontal = 2
 size_flags_stretch_ratio = 0.5
 theme = ExtResource("3_j4734")
+theme_override_fonts/font = ExtResource("6_drayd")
 text = "👻"
 
 [node name="incomplete" type="Label" parent="scroll/margin/stack/level/progress/monsters"]
@@ -461,6 +480,7 @@ layout_mode = 2
 size_flags_horizontal = 2
 size_flags_stretch_ratio = 0.5
 theme = ExtResource("3_j4734")
+theme_override_fonts/font = ExtResource("6_drayd")
 text = "👻"
 
 [node name="dangers-caption" type="Label" parent="scroll/margin/stack/level"]
