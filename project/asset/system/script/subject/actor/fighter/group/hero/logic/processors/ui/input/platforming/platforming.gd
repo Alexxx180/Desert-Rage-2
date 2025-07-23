@@ -9,6 +9,4 @@ var animation: bool = false
 var jumped: bool = false
 
 func perform_jump() -> void:
-	print("GAP IS AVAILABLE! ", gap.available)
-	print("UPLAND IS AVAILABLE! ", upland.available)
 	jumped = gap.decide(jump.floor_only) or upland.decide(jump.determine)

@@ -30,7 +30,7 @@ func targeted_movement() -> void:
 	if distance.is_safe(hero, _enemy) and not locked:
 		hero.move_and_slide() # print("MOVING!")
 	elif not locked:
-		locked = true # print("LOCKED!") 
+		locked = true # print("LOCKED!")
 		fight.use_selection(hero)
 
 func end_fight() -> void:

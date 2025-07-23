@@ -13,7 +13,7 @@ func perform_motion(hero: CharacterBody2D, enemy: CharacterBody2D) -> void:
 	var input: Node = hero.logic.processors.ui.input
 	var direction: Vector2 = direct(hero, enemy)
 	# print("ORIG DIRECTION: ", direction)
-	"""
+	# """
 	if hero.logic.detectors.fight.stuck.x.is_colliding():
 		direction.x = 0
 		direction.y *= 2
