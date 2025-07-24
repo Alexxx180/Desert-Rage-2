@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://rlwfnl6rvpkj"]
+[gd_scene load_steps=19 format=3 uid="uid://rlwfnl6rvpkj"]
 
 [ext_resource type="PackedScene" uid="uid://df354hu6v3oou" path="res://asset/system/scene/subject/control/gear/button/button.tscn" id="1_v1eg2"]
 [ext_resource type="PackedScene" uid="uid://dgmexcad4fr8j" path="res://asset/system/scene/subject/control/gear/lever/lever.tscn" id="2_r3c3x"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://bac80wkvd0x05" path="res://asset/resource/media/images/interactables/interactables.png" id="6_8wy4t"]
 [ext_resource type="Texture2D" uid="uid://c6pm0ipeh1nva" path="res://asset/resource/media/images/decorations/decorations.png" id="7_5vo87"]
 [ext_resource type="Script" uid="uid://0sumolct2lmf" path="res://asset/system/script/subject/control/layer/execute/execute.gd" id="8_2uxvu"]
+[ext_resource type="Texture2D" uid="uid://0ymh7q73fep5" path="res://asset/resource/media/images/hookups/hookups.png" id="8_5jn51"]
 [ext_resource type="PackedScene" uid="uid://ct8xgb5201d3s" path="res://asset/system/scene/subject/actor/npc/dialog.tscn" id="8_bgvc4"]
 [ext_resource type="Script" uid="uid://bkg1v81127vdy" path="res://asset/system/script/subject/control/layer/execute/recovery.gd" id="10_4ohqp"]
 
@@ -128,6 +129,21 @@ texture_region_size = Vector2i(64, 64)
 3:3/0 = 0
 3:3/0/physics_layer_9/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ap4cl"]
+texture = ExtResource("8_5jn51")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+0:0/0/physics_layer_11/polygon_0/points = PackedVector2Array(5.33334, -26.6667, 32, -26.6667, 32, -16, 5.33334, -16)
+0:0/0/physics_layer_12/polygon_0/points = PackedVector2Array(-8, -26, 8, -26, 8, 32, -8, 32)
+1:0/0 = 0
+1:0/0/physics_layer_11/polygon_0/points = PackedVector2Array(-5.33334, -26.6667, -32, -26.6667, -32, -16, -5.33334, -16)
+1:0/0/physics_layer_12/polygon_0/points = PackedVector2Array(-8, -26, 8, -26, 8, 32, -8, 32)
+0:1/0 = 0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, 31, -32, 32, 32, 32, 32, 31)
+0:1/0/physics_layer_12/polygon_0/points = PackedVector2Array(-8, 26, 8, 26, 8, -32, -8, -32)
+1:1/0 = 0
+1:1/0/physics_layer_11/polygon_0/points = PackedVector2Array(5.33334, -26.6667, 32, -26.6667, 32, -16, 5.33334, -16)
+
 [sub_resource type="TileSet" id="TileSet_tnb5i"]
 tile_size = Vector2i(64, 64)
 physics_layer_0/collision_layer = 1
@@ -152,6 +168,10 @@ physics_layer_9/collision_layer = 2097152
 physics_layer_9/collision_mask = 0
 physics_layer_10/collision_layer = 16777216
 physics_layer_10/collision_mask = 0
+physics_layer_11/collision_layer = 33554432
+physics_layer_11/collision_mask = 0
+physics_layer_12/collision_layer = 67108864
+physics_layer_12/collision_mask = 0
 terrain_set_0/mode = 0
 terrain_set_0/terrain_0/name = "Gap"
 terrain_set_0/terrain_0/color = Color(0.5, 0.4375, 0.25, 1)
@@ -169,6 +189,7 @@ sources/0 = SubResource("TileSetScenesCollectionSource_omj6i")
 sources/1 = SubResource("TileSetAtlasSource_0dkq4")
 sources/2 = SubResource("TileSetAtlasSource_4qiw5")
 sources/3 = SubResource("TileSetAtlasSource_cuqbe")
+sources/4 = SubResource("TileSetAtlasSource_ap4cl")
 pattern_0 = SubResource("TileMapPattern_78vt2")
 
 [node name="execute" type="TileMapLayer"]

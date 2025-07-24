@@ -1,6 +1,7 @@
 extends Node
 
 @onready var jump: Node = $jump
+@onready var chains: Node = $chains
 
 var gap: JumpTarget = JumpTarget.new()
 var upland: JumpTarget = JumpTarget.new()
