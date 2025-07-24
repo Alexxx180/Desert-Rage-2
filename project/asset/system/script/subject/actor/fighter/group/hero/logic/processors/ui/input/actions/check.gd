@@ -1,9 +1,12 @@
 extends BehaviorAction
 
+signal skill_two()
 signal action()
 signal kick()
 
-var actions: Dictionary = { "action": action, "run": kick }
+var actions: Dictionary = {
+	"action": action, "run": kick, "skill_two": skill_two
+}
 
 func tick(_mark: Tick) -> int:
 	for key in actions:

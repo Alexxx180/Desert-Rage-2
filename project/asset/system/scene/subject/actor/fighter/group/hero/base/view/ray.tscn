@@ -1,4 +1,4 @@
-[gd_scene load_steps=378 format=3 uid="uid://csra3penxclqe"]
+[gd_scene load_steps=380 format=3 uid="uid://csra3penxclqe"]
 
 [ext_resource type="Script" uid="uid://djhgknvw72ya6" path="res://asset/system/script/subject/actor/fighter/group/hero/view/view.gd" id="1_02nce"]
 [ext_resource type="PackedScene" uid="uid://c136xgt1v5vbl" path="res://asset/system/scene/subject/actor/fighter/group/hero/base/view/base/shadow.tscn" id="2_7whrg"]
@@ -1904,6 +1904,14 @@ animations = [{
 "name": &"right_run",
 "speed": 5.0
 }]
+
+[sub_resource type="Gradient" id="Gradient_o5svw"]
+colors = PackedColorArray(0.325441, 0.325441, 0.325441, 1, 0.568973, 0.568973, 0.568973, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_8gmvd"]
+gradient = SubResource("Gradient_o5svw")
+width = 320
+height = 3
 
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_ehyuf"]
 
@@ -3844,6 +3852,11 @@ scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_ajgxq")
 animation = &"left"
 offset = Vector2(0, -103)
+
+[node name="whip" type="Sprite2D" parent="."]
+rotation = 4.71239
+texture = SubResource("GradientTexture2D_8gmvd")
+offset = Vector2(160, 0)
 
 [node name="animation" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeBlendTree_38alu")

@@ -3,6 +3,7 @@ extends Node
 @onready var jump: Node = $jump
 @onready var input: Node = $input
 @onready var chains: Node = $chains
+@onready var pillar: Node = $pillar
 
 func controls(hero: CharacterBody2D, platforming: Node) -> void:
 	var platforms: Node2D = hero.logic.detectors.platforming.platforms
@@ -11,3 +12,4 @@ func controls(hero: CharacterBody2D, platforming: Node) -> void:
 	jump.controls(hero, platforming.jump)
 	input.controls(hero, platforming, platforms.surface.overleap)
 	chains.controls(hero, platforming.chains)
+	pillar.controls(hero, platforming.pillar)

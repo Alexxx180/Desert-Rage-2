@@ -34,6 +34,9 @@ func controls(hero: CharacterBody2D, input: Node) -> void:
 		hero.view.animation.moves.set_fight_start("active")
 		hero.view.animation.moves.set_fighting("hands"))
 
+	input.actions.check.skill_two.connect(
+		hero.logic.processors.ui.input.platforming.pillar.dash_on_whip)
+
 	input.actions.check.kick.connect(func():
 		hero.view.animation.moves.set_fight_start("active")
 		hero.view.animation.moves.set_fighting("legs"))

@@ -9,6 +9,7 @@ enum { BEHIND = 60, ONSCENE = 255 }
 @onready var profile: AnimatedSprite2D = $profile
 @onready var animation: AnimationTree = $animation
 @onready var ap: TextureProgressBar = $influence
+@onready var whip: Sprite2D = $whip
 
 func _ready() -> void: visible = is_hero
 
