@@ -4,14 +4,13 @@ extends Node2D
 @onready var floors: Area2D = $floors
 @onready var stand: Area2D = $stand
 @onready var chains: Node2D = $chains
-@onready var pillar: Area2D = $pillar
+@onready var pillar: Node2D = $pillar
 
-enum { CELL = 64, CELLS = 5 }
-
-var direction: Vector2i
+var direction: Vector2i # enum { CELL = 64, CELLS = 5 }
 
 func set_direction(direct: Vector2i) -> void:
 	floors.set_direction(direct)
 	if direct != Vector2i.ZERO:
 		direction = direct
-		pillar.position = CELL * CELLS * direction
+		pillar.set_direction(direction)
+		# pillar.position = CELL * CELLS * direction

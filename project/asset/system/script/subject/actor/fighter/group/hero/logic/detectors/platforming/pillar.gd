@@ -3,15 +3,14 @@ extends Node
 var hero: CharacterBody2D
 var gravity: Node:
 	get: return hero.logic.processors.ui.input.gravity
+var pillars: Node2D:
+	get: return hero.logic.detectors.platforming.pillar
 
 var dashed: bool = false
 var caught: bool = false
 
 var rotation: Dictionary = {
-	Vector2i(1, 0): 0,
-	Vector2i(0, 1): 90,
-	Vector2i(-1, 0): 180,
-	Vector2i(0, -1): -90,
+	Vector2i(1, 0): 0, Vector2i(0, 1): 90, Vector2i(-1, 0): 180, Vector2i(0, -1): -180,
 }
 
 func _turn_collision(state: bool) -> void:
@@ -26,14 +25,18 @@ func whip_left(_execute: TileMapLayer) -> void:
 
 func whip_dashed() -> void: _turn_collision(true)
 
-func dash_on_whip() -> void:
-	print("TRY DASH")
-	if not caught: return
-	print("DASH: ", hero.position)
+func _perform_dash(pos: Vector2) -> void:
+	#print("DASH: ", hero.position)
 	var detector: Node2D = hero.logic.detectors.platforming
-	var pos: Vector2 = detector.pillar.position
-	hero.view.whip.rotation = rotation[detector.direction]
+	#var pos: Vector2 = detector.pillar.position
+	hero.view.whip.rotation_degrees = rotation[detector.direction]
 	_turn_collision(false)
 	hero.logic.processors.ui.input.movement.mode.type.dash(pos)
 	print("DASHED: ", hero.position)
 	# _turn_collision(true)
+
+func dash_on_whip() -> void:
+	for pillar in pillars.jump_zone.walls:
+		if pillar.is_colliding():
+			_perform_dash(pillars.jump_zone.position + pillar.position)
+			return
