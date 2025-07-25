@@ -3,6 +3,7 @@ extends Node
 var _movement: Node
 # var _platforming: Node
 var _hero: CharacterBody2D
+var collision_on: bool = true
 
 func controls(hero: CharacterBody2D, balance: Node) -> void:
 	_hero = hero
@@ -21,3 +22,4 @@ func _set_movement(control: bool) -> void:
 
 func _turn_walls_collision(value: bool) -> void:
 	_hero.turn_walls_collision(value)
+	collision_on = value

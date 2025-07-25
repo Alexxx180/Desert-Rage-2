@@ -13,4 +13,5 @@ func set_direction(direct: Vector2i) -> void:
 	if direct != Vector2i.ZERO:
 		direction = direct
 		pillar.set_direction(direction)
+		chains.whip.set_direction(direction)
 		# pillar.position = CELL * CELLS * direction

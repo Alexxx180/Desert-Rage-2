@@ -11,3 +11,5 @@ func controls(hero: CharacterBody2D, chains: Node) -> void:
 	detector.unit.body_exited.connect(chains.move_under)
 
 	chains.input = input
+	chains.chained.connect(hero.logic.processors.ui.input.platforming.pillar.set_ledge)
+	chains.velocity = hero.logic.processors.ui.input.movement.mode.velocity

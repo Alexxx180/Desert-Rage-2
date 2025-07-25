@@ -5,15 +5,16 @@
 [ext_resource type="PackedScene" uid="uid://c5gf5ucjxk682" path="res://asset/system/scene/object/image/level/floors/detector.tscn" id="3_m5qx4"]
 [ext_resource type="Shape2D" uid="uid://do0s1n5uuqpof" path="res://asset/resource/engine/internal/shape/geometry/characters/character/character.tres" id="4_5ci2x"]
 [ext_resource type="Script" uid="uid://7to27lv1mbl4" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/detectors/platforming/stand.gd" id="4_jgdf2"]
-[ext_resource type="Script" uid="uid://4gkjnm6qhrm6" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/detectors/platforming/chains.gd" id="6_6nnn5"]
-[ext_resource type="Shape2D" uid="uid://i0icy78wfk8i" path="res://asset/resource/engine/internal/shape/geometry/characters/character/levels.tres" id="7_s3b3t"]
+[ext_resource type="Script" uid="uid://4gkjnm6qhrm6" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/detectors/platforming/chains/chains.gd" id="6_6nnn5"]
+[ext_resource type="Script" uid="uid://bol6xsgbfnkbo" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/detectors/platforming/chains/whip.gd" id="7_urn3e"]
 [ext_resource type="Script" uid="uid://dywan2rrypqv8" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/detectors/platforming/platforms/surface/deployment/walls/unit.gd" id="8_dsde4"]
 [ext_resource type="Script" uid="uid://cwuy8y0rqwdt" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/detectors/platforming/platforms/surface/deployment/walls/distance.gd" id="8_urn3e"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_s3b3t"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n6gc1"]
+size = Vector2(8, 8)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_dsde4"]
-size = Vector2(64, 64)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_urn3e"]
+size = Vector2(17, 17)
 
 [node name="platforming" type="Node2D"]
 script = ExtResource("1_wrdvi")
@@ -42,24 +43,69 @@ collision_layer = 0
 collision_mask = 67108864
 
 [node name="shape" type="CollisionShape2D" parent="chains/pillar"]
-shape = ExtResource("7_s3b3t")
+shape = SubResource("RectangleShape2D_n6gc1")
 
 [node name="unit" type="Area2D" parent="chains"]
 collision_layer = 0
 collision_mask = 33554432
 
 [node name="shape" type="CollisionShape2D" parent="chains/unit"]
-shape = ExtResource("7_s3b3t")
+shape = SubResource("RectangleShape2D_n6gc1")
 
-[node name="pillar-back" type="Area2D" parent="."]
-visible = false
-collision_layer = 0
-collision_mask = 67108864
+[node name="whip" type="Node2D" parent="chains"]
+script = ExtResource("7_urn3e")
 
-[node name="shape" type="CollisionShape2D" parent="pillar-back"]
-shape = SubResource("RectangleShape2D_s3b3t")
+[node name="top_center" type="Node2D" parent="chains/whip"]
+position = Vector2(0, -320)
+script = ExtResource("8_dsde4")
+
+[node name="left" type="ShapeCast2D" parent="chains/whip/top_center"]
+position = Vector2(0, -64)
+shape = SubResource("RectangleShape2D_urn3e")
+target_position = Vector2(0, 0)
+max_results = 1
+collision_mask = 33554432
+
+[node name="center" type="ShapeCast2D" parent="chains/whip/top_center"]
+shape = SubResource("RectangleShape2D_urn3e")
+target_position = Vector2(0, 0)
+max_results = 1
+collision_mask = 33554432
+
+[node name="right" type="ShapeCast2D" parent="chains/whip/top_center"]
+position = Vector2(0, 64)
+shape = SubResource("RectangleShape2D_urn3e")
+target_position = Vector2(0, 0)
+max_results = 1
+collision_mask = 33554432
+
+[node name="bottom_center" type="Node2D" parent="chains/whip"]
+position = Vector2(0, 320)
+script = ExtResource("8_dsde4")
+
+[node name="left" type="ShapeCast2D" parent="chains/whip/bottom_center"]
+position = Vector2(0, -64)
+shape = SubResource("RectangleShape2D_urn3e")
+target_position = Vector2(0, 0)
+max_results = 1
+collision_mask = 33554432
+
+[node name="center" type="ShapeCast2D" parent="chains/whip/bottom_center"]
+shape = SubResource("RectangleShape2D_urn3e")
+target_position = Vector2(0, 0)
+max_results = 1
+collision_mask = 33554432
+
+[node name="right" type="ShapeCast2D" parent="chains/whip/bottom_center"]
+position = Vector2(0, 64)
+shape = SubResource("RectangleShape2D_urn3e")
+target_position = Vector2(0, 0)
+max_results = 1
+collision_mask = 33554432
 
 [node name="pillar" type="Node2D" parent="."]
+visible = false
+position = Vector2(0, -26)
 script = ExtResource("8_urn3e")
 
 [node name="top_left" type="Node2D" parent="pillar"]
@@ -68,20 +114,23 @@ script = ExtResource("8_dsde4")
 
 [node name="left" type="ShapeCast2D" parent="pillar/top_left"]
 position = Vector2(-64, -64)
-shape = SubResource("RectangleShape2D_dsde4")
+shape = SubResource("RectangleShape2D_urn3e")
 target_position = Vector2(0, 0)
 max_results = 1
+collision_mask = 100663296
 
 [node name="center" type="ShapeCast2D" parent="pillar/top_left"]
-shape = SubResource("RectangleShape2D_dsde4")
+shape = SubResource("RectangleShape2D_urn3e")
 target_position = Vector2(0, 0)
 max_results = 1
+collision_mask = 100663296
 
 [node name="right" type="ShapeCast2D" parent="pillar/top_left"]
 position = Vector2(64, 64)
-shape = SubResource("RectangleShape2D_dsde4")
+shape = SubResource("RectangleShape2D_urn3e")
 target_position = Vector2(0, 0)
 max_results = 1
+collision_mask = 100663296
 
 [node name="top_center" type="Node2D" parent="pillar"]
 position = Vector2(0, -320)
@@ -89,20 +138,23 @@ script = ExtResource("8_dsde4")
 
 [node name="left" type="ShapeCast2D" parent="pillar/top_center"]
 position = Vector2(0, -64)
-shape = SubResource("RectangleShape2D_dsde4")
+shape = SubResource("RectangleShape2D_urn3e")
 target_position = Vector2(0, 0)
 max_results = 1
+collision_mask = 100663296
 
 [node name="center" type="ShapeCast2D" parent="pillar/top_center"]
-shape = SubResource("RectangleShape2D_dsde4")
+shape = SubResource("RectangleShape2D_urn3e")
 target_position = Vector2(0, 0)
 max_results = 1
+collision_mask = 100663296
 
 [node name="right" type="ShapeCast2D" parent="pillar/top_center"]
 position = Vector2(0, 64)
-shape = SubResource("RectangleShape2D_dsde4")
+shape = SubResource("RectangleShape2D_urn3e")
 target_position = Vector2(0, 0)
 max_results = 1
+collision_mask = 100663296
 
 [node name="top_right" type="Node2D" parent="pillar"]
 position = Vector2(320, -320)
@@ -110,20 +162,23 @@ script = ExtResource("8_dsde4")
 
 [node name="left" type="ShapeCast2D" parent="pillar/top_right"]
 position = Vector2(64, -64)
-shape = SubResource("RectangleShape2D_dsde4")
+shape = SubResource("RectangleShape2D_urn3e")
 target_position = Vector2(0, 0)
 max_results = 1
+collision_mask = 100663296
 
 [node name="center" type="ShapeCast2D" parent="pillar/top_right"]
-shape = SubResource("RectangleShape2D_dsde4")
+shape = SubResource("RectangleShape2D_urn3e")
 target_position = Vector2(0, 0)
 max_results = 1
+collision_mask = 100663296
 
 [node name="right" type="ShapeCast2D" parent="pillar/top_right"]
 position = Vector2(-64, 64)
-shape = SubResource("RectangleShape2D_dsde4")
+shape = SubResource("RectangleShape2D_urn3e")
 target_position = Vector2(0, 0)
 max_results = 1
+collision_mask = 100663296
 
 [node name="left_center" type="Node2D" parent="pillar"]
 position = Vector2(-320, 0)
@@ -131,20 +186,23 @@ script = ExtResource("8_dsde4")
 
 [node name="left" type="ShapeCast2D" parent="pillar/left_center"]
 position = Vector2(-64, 0)
-shape = SubResource("RectangleShape2D_dsde4")
+shape = SubResource("RectangleShape2D_urn3e")
 target_position = Vector2(0, 0)
 max_results = 1
+collision_mask = 100663296
 
 [node name="center" type="ShapeCast2D" parent="pillar/left_center"]
-shape = SubResource("RectangleShape2D_dsde4")
+shape = SubResource("RectangleShape2D_urn3e")
 target_position = Vector2(0, 0)
 max_results = 1
+collision_mask = 100663296
 
 [node name="right" type="ShapeCast2D" parent="pillar/left_center"]
 position = Vector2(64, 0)
-shape = SubResource("RectangleShape2D_dsde4")
+shape = SubResource("RectangleShape2D_urn3e")
 target_position = Vector2(0, 0)
 max_results = 1
+collision_mask = 100663296
 
 [node name="right_center" type="Node2D" parent="pillar"]
 position = Vector2(320, 0)
@@ -152,20 +210,23 @@ script = ExtResource("8_dsde4")
 
 [node name="left" type="ShapeCast2D" parent="pillar/right_center"]
 position = Vector2(-64, 0)
-shape = SubResource("RectangleShape2D_dsde4")
+shape = SubResource("RectangleShape2D_urn3e")
 target_position = Vector2(0, 0)
 max_results = 1
+collision_mask = 100663296
 
 [node name="center" type="ShapeCast2D" parent="pillar/right_center"]
-shape = SubResource("RectangleShape2D_dsde4")
+shape = SubResource("RectangleShape2D_urn3e")
 target_position = Vector2(0, 0)
 max_results = 1
+collision_mask = 100663296
 
 [node name="right" type="ShapeCast2D" parent="pillar/right_center"]
 position = Vector2(64, 0)
-shape = SubResource("RectangleShape2D_dsde4")
+shape = SubResource("RectangleShape2D_urn3e")
 target_position = Vector2(0, 0)
 max_results = 1
+collision_mask = 100663296
 
 [node name="bottom_left" type="Node2D" parent="pillar"]
 position = Vector2(-320, 320)
@@ -173,20 +234,23 @@ script = ExtResource("8_dsde4")
 
 [node name="left" type="ShapeCast2D" parent="pillar/bottom_left"]
 position = Vector2(64, -64)
-shape = SubResource("RectangleShape2D_dsde4")
+shape = SubResource("RectangleShape2D_urn3e")
 target_position = Vector2(0, 0)
 max_results = 1
+collision_mask = 100663296
 
 [node name="center" type="ShapeCast2D" parent="pillar/bottom_left"]
-shape = SubResource("RectangleShape2D_dsde4")
+shape = SubResource("RectangleShape2D_urn3e")
 target_position = Vector2(0, 0)
 max_results = 1
+collision_mask = 100663296
 
 [node name="right" type="ShapeCast2D" parent="pillar/bottom_left"]
 position = Vector2(-64, 64)
-shape = SubResource("RectangleShape2D_dsde4")
+shape = SubResource("RectangleShape2D_urn3e")
 target_position = Vector2(0, 0)
 max_results = 1
+collision_mask = 100663296
 
 [node name="bottom_center" type="Node2D" parent="pillar"]
 position = Vector2(0, 320)
@@ -194,20 +258,23 @@ script = ExtResource("8_dsde4")
 
 [node name="left" type="ShapeCast2D" parent="pillar/bottom_center"]
 position = Vector2(0, -64)
-shape = SubResource("RectangleShape2D_dsde4")
+shape = SubResource("RectangleShape2D_urn3e")
 target_position = Vector2(0, 0)
 max_results = 1
+collision_mask = 100663296
 
 [node name="center" type="ShapeCast2D" parent="pillar/bottom_center"]
-shape = SubResource("RectangleShape2D_dsde4")
+shape = SubResource("RectangleShape2D_urn3e")
 target_position = Vector2(0, 0)
 max_results = 1
+collision_mask = 100663296
 
 [node name="right" type="ShapeCast2D" parent="pillar/bottom_center"]
 position = Vector2(0, 64)
-shape = SubResource("RectangleShape2D_dsde4")
+shape = SubResource("RectangleShape2D_urn3e")
 target_position = Vector2(0, 0)
 max_results = 1
+collision_mask = 100663296
 
 [node name="bottom_right" type="Node2D" parent="pillar"]
 position = Vector2(320, 320)
@@ -215,20 +282,23 @@ script = ExtResource("8_dsde4")
 
 [node name="left" type="ShapeCast2D" parent="pillar/bottom_right"]
 position = Vector2(-64, -64)
-shape = SubResource("RectangleShape2D_dsde4")
+shape = SubResource("RectangleShape2D_urn3e")
 target_position = Vector2(0, 0)
 max_results = 1
+collision_mask = 100663296
 
 [node name="center" type="ShapeCast2D" parent="pillar/bottom_right"]
-shape = SubResource("RectangleShape2D_dsde4")
+shape = SubResource("RectangleShape2D_urn3e")
 target_position = Vector2(0, 0)
 max_results = 1
+collision_mask = 100663296
 
 [node name="right" type="ShapeCast2D" parent="pillar/bottom_right"]
 position = Vector2(64, 64)
-shape = SubResource("RectangleShape2D_dsde4")
+shape = SubResource("RectangleShape2D_urn3e")
 target_position = Vector2(0, 0)
 max_results = 1
+collision_mask = 100663296
 
 [connection signal="area_entered" from="stand" to="stand" method="_enter_stand"]
 [connection signal="area_exited" from="stand" to="stand" method="_exit_stand"]
