@@ -4,6 +4,7 @@ extends Node
 @onready var input: Node = $input
 @onready var chains: Node = $chains
 @onready var pillar: Node = $pillar
+@onready var spring: Node = $spring
 
 func controls(hero: CharacterBody2D, platforming: Node) -> void:
 	var platforms: Node2D = hero.logic.detectors.platforming.platforms
@@ -13,3 +14,4 @@ func controls(hero: CharacterBody2D, platforming: Node) -> void:
 	input.controls(hero, platforming, platforms.surface.overleap)
 	chains.controls(hero, platforming.chains)
 	pillar.controls(hero, platforming.pillar)
+	spring.controls(hero, platforming.spring)

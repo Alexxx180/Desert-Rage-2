@@ -8,4 +8,4 @@ func set_damage(points: int = 5) -> void:
 	close_damage.emit(points)
 
 func set_position(proportion: float) -> void:
-	moves.hero.logic.processors.ui.input.movement.mode.type.move(proportion)
+	moves.hero.logic.processors.ui.input.movement.type.move.move(proportion)

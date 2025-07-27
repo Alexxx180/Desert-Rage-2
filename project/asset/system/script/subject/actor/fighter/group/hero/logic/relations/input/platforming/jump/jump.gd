@@ -7,8 +7,8 @@ func controls(hero: CharacterBody2D, jump: Node) -> void:
 	var platforming: Node2D = hero.logic.detectors.platforming
 	var ledges: Area2D = platforming.platforms.ledges
 
-	jump.feet.dash.connect(hero.logic.processors.ui.input.movement.mode.type.dash)
-	jump.feet.teleport.connect(hero.logic.processors.ui.input.movement.mode.type.teleport)
+	jump.feet.dash.connect(hero.logic.processors.ui.input.movement.type.move.dash)
+	jump.feet.teleport.connect(hero.logic.processors.ui.input.movement.type.move.teleport)
 
 	jump.ledges.space.same_floor = jump.feet.same_floor
 	jump.ledges.space.setup(hero)

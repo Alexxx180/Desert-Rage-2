@@ -1,7 +1,6 @@
 extends Node
 
 var hero: CharacterBody2D
-
 var target: Rect2
 
 func teleport(next: Vector2, action: String = "jump") -> void:
@@ -14,11 +13,13 @@ func teleport(next: Vector2, action: String = "jump") -> void:
 	hero.logic.processors.ui.input.platforming.jump.feet.deployment.reset_direction()
 
 func dash(force: Vector2, action: String = "jump") -> void:
-	# hero.view.animation.direction = force.normalized()
-	# hero.view.animation.direct()
-	print("FORCE: ", force)
 	teleport(hero.position + force, action)
-	# print("JUMPED: ", hero.position)
+	"""
+	print("FORCE: ", force)
+	hero.view.animation.direction = force.normalized()
+	hero.view.animation.direct()
+	print("JUMPED: ", hero.position)
+	# """
 
 func move(proportion: float) -> void:
 	hero.position = target.position + target.size * proportion

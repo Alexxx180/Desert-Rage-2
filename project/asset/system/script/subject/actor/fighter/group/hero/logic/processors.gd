@@ -6,7 +6,7 @@ extends Node
 
 @onready var freeze_input: Dictionary = {
 	true: func() -> void:
-		ui.input.movement.face.reset()
+		ui.input.movement.behavior.move.reset()
 		Processors.turn(ui.input, false),
 	false: func() -> void:
 		Processors.turn(ui.input, true)

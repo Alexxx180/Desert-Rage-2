@@ -42,7 +42,7 @@ func show_hero(hero: int, visible: bool) -> void:
 	heroes[hero].visible = visible
 
 func forget_velocity() -> void:
-	leader.logic.processors.ui.input.movement.mode.velocity.forget_velocity()
+	leader.logic.processors.ui.input.movement.type.velocity.forget_velocity()
 
 func sync_pos() -> void:
 	follower.position = leader.position

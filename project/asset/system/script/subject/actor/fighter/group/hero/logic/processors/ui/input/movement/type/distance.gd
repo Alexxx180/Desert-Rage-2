@@ -2,16 +2,16 @@ extends Node
 
 enum { DISTANCE = 60, MULTIPLIER = 50 }
 
-func direct(hero: CharacterBody2D, enemy: CharacterBody2D) -> Vector2:
-	return hero.position.direction_to(enemy.position)
+func direct(hero: CharacterBody2D, pos: Vector2) -> Vector2:
+	return hero.position.direction_to(pos)
 
-func is_safe(hero: CharacterBody2D, enemy: CharacterBody2D) -> bool:
+func is_safe(hero: CharacterBody2D, pos: Vector2) -> bool:
 	# print("DISTANCE: ", hero.position.distance_to(enemy.position))
-	return hero.position.distance_to(enemy.position) > DISTANCE
+	return hero.position.distance_to(pos) > DISTANCE
 
 func perform_motion(hero: CharacterBody2D, enemy: CharacterBody2D) -> void:
 	var input: Node = hero.logic.processors.ui.input
-	var direction: Vector2 = direct(hero, enemy)
+	var direction: Vector2 = direct(hero, enemy.position)
 	# print("ORIG DIRECTION: ", direction)
 	# """
 	if hero.logic.detectors.fight.stuck.x.is_colliding():
@@ -23,9 +23,9 @@ func perform_motion(hero: CharacterBody2D, enemy: CharacterBody2D) -> void:
 	# """
 		
 	var motion: Vector2 = direction * (hero.logic.stats.speed / MULTIPLIER)
-	input.movement.mode.velocity.set_moving(motion)
+	input.movement.type.velocity.set_moving(motion)
 	hero.view.animation.move(motion)
 	# hero.make_velocity(motion)
-	input.imitate(direction.normalized())
+	input.modes.current.access(direction.normalized())
 	# if direction != Vector2.ZERO:
 	# 	input.platforming.jump.feet.deployment.set_direction(direction.normalized())

@@ -5,6 +5,7 @@ extends Node2D
 @onready var stand: Area2D = $stand
 @onready var chains: Node2D = $chains
 @onready var pillar: Node2D = $pillar
+@onready var spring: Node2D = $spring
 
 var direction: Vector2i # enum { CELL = 64, CELLS = 5 }
 

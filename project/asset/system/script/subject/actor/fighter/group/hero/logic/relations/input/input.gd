@@ -9,26 +9,26 @@ func controls(hero: CharacterBody2D, input: Node) -> void:
 	var space: Node = input.platforming.jump.ledges.space
 	var deployment: DeploymentRaycast = surface.deployment
 	print ("DEPLOYMENT GET")
+	var move: Node = input.movement.behavior.move
 
-	input.movement.controlling.connect(input.movement.face.set_position)
-	input.movement.moving.connect(hero.view.animation.move)
-	input.movement.moving.connect(hero.view.ap.set_direction)
+	move.moving.connect(hero.view.animation.move)
+	move.moving.connect(hero.view.ap.set_direction)
 #	hero.action_move.connect(hero.view.animation.action_move)
 
 	movement.controls(hero, input.movement)
 	platforming.controls(hero, input.platforming)
 
 	# directing
-	input.movement.moving.connect(surface.overleap.gap.set_direction)
-	input.movement.moving.connect(surface.overleap.upland.set_direction)
+	move.moving.connect(surface.overleap.gap.set_direction)
+	move.moving.connect(surface.overleap.upland.set_direction)
 
-	input.movement.moving.connect(surface.deployment.walls.set_direction)
-	input.movement.moving.connect(surface.deployment.ground.set_direction)
-	input.movement.moving.connect(space.set_direction)
-	input.movement.moving.connect(deployment.set_direction)
+	move.moving.connect(surface.deployment.walls.set_direction)
+	move.moving.connect(surface.deployment.ground.set_direction)
+	move.moving.connect(space.set_direction)
+	move.moving.connect(deployment.set_direction)
 
-	input.movement.moving.connect(detectors.set_direction)
-	input.movement.moving.connect(detectors.platforming.floors.set_direction)
+	move.moving.connect(detectors.set_direction)
+	move.moving.connect(detectors.platforming.floors.set_direction)
 	
 	input.actions.check.action.connect(func():
 		hero.view.animation.moves.set_fight_start("active")

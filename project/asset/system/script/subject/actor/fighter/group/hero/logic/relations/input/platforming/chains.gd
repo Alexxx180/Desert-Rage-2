@@ -12,4 +12,4 @@ func controls(hero: CharacterBody2D, chains: Node) -> void:
 
 	chains.input = input
 	chains.chained.connect(hero.logic.processors.ui.input.platforming.pillar.set_ledge)
-	chains.velocity = hero.logic.processors.ui.input.movement.mode.velocity
+	chains.velocity = hero.logic.processors.ui.input.movement.type.velocity

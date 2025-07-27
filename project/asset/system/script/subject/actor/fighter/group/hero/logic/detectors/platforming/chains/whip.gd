@@ -7,4 +7,5 @@ extends Node2D
 
 func set_direction(direction: Vector2) -> void:
 	if direction.x == 0 and direction.y != 0:
+		direction.y = clampf(direction.y, -1, 1)
 		jump_zone = directions[Vector2i(direction)]
