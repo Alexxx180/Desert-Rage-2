@@ -10,14 +10,13 @@
 [ext_resource type="Script" uid="uid://dywan2rrypqv8" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/detectors/platforming/platforms/surface/deployment/walls/unit.gd" id="8_dsde4"]
 [ext_resource type="Script" uid="uid://cwuy8y0rqwdt" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/detectors/platforming/platforms/surface/deployment/walls/distance.gd" id="8_urn3e"]
 [ext_resource type="Script" uid="uid://rew8x338rodj" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/detectors/platforming/spring.gd" id="10_n6gc1"]
+[ext_resource type="Shape2D" uid="uid://i0icy78wfk8i" path="res://asset/resource/engine/internal/shape/geometry/characters/character/levels.tres" id="11_mccx8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n6gc1"]
 size = Vector2(8, 8)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_urn3e"]
 size = Vector2(17, 17)
-
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_urn3e"]
 
 [node name="platforming" type="Node2D"]
 script = ExtResource("1_wrdvi")
@@ -38,7 +37,6 @@ script = ExtResource("4_jgdf2")
 shape = ExtResource("4_5ci2x")
 
 [node name="chains" type="Node2D" parent="."]
-visible = false
 position = Vector2(0, -128)
 script = ExtResource("6_6nnn5")
 
@@ -305,21 +303,28 @@ max_results = 1
 collision_mask = 100663296
 
 [node name="spring" type="Node2D" parent="."]
+visible = false
 script = ExtResource("10_n6gc1")
 
 [node name="ground" type="Area2D" parent="spring"]
+visible = false
 collision_layer = 0
 collision_mask = 134217728
 
 [node name="shape" type="CollisionShape2D" parent="spring/ground"]
-shape = SubResource("WorldBoundaryShape2D_urn3e")
+shape = ExtResource("11_mccx8")
 
-[node name="platform" type="Area2D" parent="spring"]
-collision_layer = 0
+[node name="platform" type="ShapeCast2D" parent="spring"]
+shape = ExtResource("4_5ci2x")
+target_position = Vector2(0, 0)
+max_results = 1
 collision_mask = 129
 
-[node name="shape" type="CollisionShape2D" parent="spring/platform"]
+[node name="slide" type="ShapeCast2D" parent="spring"]
 shape = ExtResource("4_5ci2x")
+target_position = Vector2(0, 0)
+max_results = 1
+collision_mask = 268435456
 
 [connection signal="area_entered" from="stand" to="stand" method="_enter_stand"]
 [connection signal="area_exited" from="stand" to="stand" method="_exit_stand"]

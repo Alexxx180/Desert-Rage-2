@@ -24,37 +24,27 @@ var rotation: Dictionary = { Vector2i(1, 0): 0, Vector2i(0, 1): 90,
 	Vector2i(-1, 0): 180, Vector2i(0, -1): -90 }
 
 func set_ledge(is_chains: bool) -> void:
-	if is_chains:
-		ledge = chains
-		jump_offset = 0
-	else:
-		ledge = pillars
-		jump_offset = BORDERS / 2
+	if is_chains: _set_ledge_offset(chains, 0)
+	else: _set_ledge_offset(pillars, BORDERS / 2)
+
+func _set_ledge_offset(next: Node, offset: float) -> void:
+	ledge = next
+	jump_offset = offset
 
 func _turn_collision(state: bool) -> void:
 	gravity.turn_walls_collision(state)
 	dashed = !state
 
-func whip_caught(_execute: TileMapLayer) -> void:
-	caught = true
-
-func whip_left(_execute: TileMapLayer) -> void:
-	caught = false
-
+func whip_caught(_execute: TileMapLayer) -> void: caught = true
+func whip_left(_execute: TileMapLayer) -> void: caught = false
 func whip_dashed() -> void: _turn_collision(true)
 
 func _perform_dash(pos: Vector2) -> void:
-	#print("DASH: ", hero.position)
 	var detector: Node2D = hero.logic.detectors.platforming
-	#var pos: Vector2 = detector.pillar.position
 	hero.view.whip.rotation_degrees = rotation[detector.direction]
-	#pos += BORDERS / 2 * detector.direction
 	pos += jump_offset * detector.direction
-	#pos.y += jump_offset
 	_turn_collision(false)
-	hero.logic.processors.ui.input.movement.mode.type.dash(pos, "whip_dash")
-	print("DASHED: ", hero.position)
-	# _turn_collision(true)
+	hero.logic.processors.ui.input.movement.type.move.dash(pos, "whip_dash")
 
 func dash_on_whip() -> void:
 	for pillar in ledge.jump_zone.walls:

@@ -2,7 +2,7 @@ extends Node
 
 var moves: Node
 
-func sync(tree: AnimationTree) -> void:
+func sync(tree: AdvancedCharacterAnimation) -> void:
 	moves.hero = tree.moves.hero
 	moves.tree.direction = tree.direction
 	moves.tree.request("go", tree.ask("go")) # set_speed(tree.scale)

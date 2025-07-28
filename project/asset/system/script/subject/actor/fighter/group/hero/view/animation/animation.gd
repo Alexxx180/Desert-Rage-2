@@ -2,10 +2,12 @@ extends AdvancedCharacterAnimation
 
 @onready var moves: Node = $moves
 @onready var effect: Node = $effect
+@onready var syncer: Node = $syncer
 
 func _ready() -> void:
 	direct()
 	effect.moves = moves
+	syncer.moves = moves
 
 func direct() -> void:
 	super.direct()

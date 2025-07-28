@@ -10,26 +10,29 @@ var gravity: Node:
 var mode: Node:
 	get: return hero.logic.processors.ui.input.movement.mode
 
-func spring_enter(execute: TileMapLayer) -> void:
+func spring_enter(_execute: TileMapLayer) -> void:
 	match state:
 		JUMPED:
 			if hero.position.y <= ground: return_input()
 		OUTREACH:
-			var cell: Dictionary = Tile.from_pos(execute, hero.position)
-			if cell.id == ID and cell.atlas in [Vector2i(0, 2), Vector2i(0, 3)]:
-				ground = cell.pos.y - 10
-				state = READY
+			# var cell: Dictionary = Tile.from_pos(execute, hero.position)
+			mode.control.ground = hero.position.y
+			# hero.position.y += 1
+			state = READY
+# 			if cell.id == ID and cell.atlas in [Vector2i(0, 2), Vector2i(0, 3)]:
+#				mode.control.ground = cell.pos.y + 20
+#				state = READY
 
 func spring_exit(_execute: TileMapLayer) -> void:
 	if state != JUMPED: state = OUTREACH
 
 func return_input() -> void:
+	mode.control.land()
 	print("STOP RIGHT THERE")
 	state = OUTREACH # hero.motion_mode = CharacterBody2D.MOTION_MODE_FLOATING
 	gravity.turn_walls_collision(true, true)
 	hero.logic.processors.ui.input.modes.select(false)
 	# mode.control.jumped = false
-	mode.control.land()
 
 func perform_jump(_force: float) -> void:
 	state = JUMPED
@@ -39,8 +42,9 @@ func perform_jump(_force: float) -> void:
 	# mode.control.height = -TRY
 	# mode.control.jumped = true
 
-func successfully_landed(_execute: TileMapLayer) -> void:
-	if state == JUMPED: return_input()
+func successfully_landed() -> void:
+	return_input()
+	# if state == JUMPED: return_input()
 
 func _input(_event: InputEvent) -> void:
 	if state == READY:

@@ -18,14 +18,14 @@ func _go_behind_scene(_curtain: TileMapLayer) -> void: _mod(BEHIND)
 func _go_on_scene(_curtain: TileMapLayer) -> void: _mod(ONSCENE)
 
 func sync_image(hero: Node2D) -> void:
-	animation.sync(hero.animation)
+	animation.syncer.sync(hero.animation)
 
 func update_image() -> void:
 	sync_view.emit(self)
  
 func enable_sync(_seat: Node, hero: CharacterBody2D) -> void:
 	visible = true
-	hero.logic.processors.ui.input.moving.connect(animation.move)
+	hero.logic.processors.ui.input.movement.behavior.move.moving.connect(animation.move)
 	hero.view.sync_view.connect(sync_image)
 	hero.view.update_image()
 	#TODO: Comment: actual only for builds without character separation

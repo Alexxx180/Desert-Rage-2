@@ -21,5 +21,5 @@ func _set_movement(control: bool) -> void:
 	# Processors.turn(_platforming, !control)
 
 func _turn_walls_collision(value: bool) -> void:
-	_hero.turn_walls_collision(value)
+	_hero.logic.processors.ui.input.gravity.turn_walls_collision(value)
 	collision_on = value
