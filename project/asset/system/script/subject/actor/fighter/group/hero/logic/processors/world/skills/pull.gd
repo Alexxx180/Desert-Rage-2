@@ -4,7 +4,7 @@ var hero: CharacterBody2D
 var _grab: bool = false
 
 var velocity: Node:
-	get: return hero.logic.processors.ui.input.movement.mode.velocity
+	get: return hero.logic.processors.ui.input.movement.type.velocity
 
 func start_forward(box: CharacterBody2D) -> void:
 	_grab = box.compare_height(hero)

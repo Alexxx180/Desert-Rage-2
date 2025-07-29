@@ -9,7 +9,7 @@ func _height(hero: CharacterBody2D) -> Callable:
 	return input.platforming.jump.feet.floors.set_box_floor
 
 func _get_teleport(hero: CharacterBody2D) -> Callable:
-	return hero.logic.processors.ui.input.movement.type.move.teleport
+	return func(pos: Vector2): hero.position = pos #hero.logic.processors.ui.input.movement.type.move.teleport
 
 func _on_stand(seat: Node, hero: CharacterBody2D) -> void:
 	print("connected ride")

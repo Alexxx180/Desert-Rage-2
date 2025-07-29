@@ -4,14 +4,24 @@ signal forwarding(velocity: Vector2)
 signal directing(direction: Vector2)
 
 #@onready var forward: ActionTimer = $forward
+@onready var platform: CharacterBody2D = get_node("../../../..")
 @onready var surface: Node = $surface
 
-var _weight: float = 1
-var weight: float:
-	get: return _weight
-	set(value):
-		assert(value != 0)
-		_weight = value
+@export var track: Vector2 = Vector2(-50000, 0)
+
+var busy: bool = false
+
+func _ready() -> void:
+	surface.platform = platform
+
+func _physics_process(_delta: float) -> void:
+	platform.move_and_slide()
+	if (busy):
+		surface.push(track)
+		var ledge: Node2D = platform.logic.detectors.ledge
+		if ledge.x.is_colliding() or ledge.y.is_colliding():
+			print("NOT BUSY!")
+			busy = false
 
 func apply_velocity(next: Vector2) -> void:
 	forwarding.emit(next)

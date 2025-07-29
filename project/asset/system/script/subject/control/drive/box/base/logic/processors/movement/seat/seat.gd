@@ -28,7 +28,7 @@ func hero_climb() -> void:
 	climb.emit(F)
 
 func set_floor(floor_level: int) -> void:
-	#print("New Floor: ", floor_level, ", wait for climb...")
+	#print("New Fgoor: ", floor_level, ", wait for climb...")
 	_f = floor_level
 	hero_climb()
 

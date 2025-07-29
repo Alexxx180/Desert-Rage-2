@@ -2,12 +2,15 @@ extends Node
 
 var _push: Node
 
+func _get_moving(hero: CharacterBody2D) -> Variant:
+	return hero.logic.processors.ui.input.movement.type.velocity.moving
+
 func _grab(hero: CharacterBody2D) -> void:
-	hero.logic.processors.ui.input.movement.mode.velocity.moving.connect(_push.apply_velocity)
+	_get_moving(hero).connect(_push.apply_velocity)
 	hero.view.animation.moves.set_move_action("pull")
 
 func _release(hero: CharacterBody2D) -> void:
-	hero.logic.processors.ui.input.movement.mode.velocity.moving.disconnect(_push.apply_velocity)
+	_get_moving(hero).disconnect(_push.apply_velocity)
 	hero.view.animation.moves.set_move_action("go")
 	_push.apply_velocity(Vector2.ZERO)
 
