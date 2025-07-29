@@ -26,3 +26,4 @@ func stop_dash() -> void:
 	sequence(false)
 	moves.set_move_action("go")
 	moves.tree.direction = temp
+	print("DASH STOPPED")
