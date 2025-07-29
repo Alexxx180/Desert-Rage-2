@@ -34,4 +34,4 @@ func enable_sync(_seat: Node, hero: CharacterBody2D) -> void:
 func disable_sync(_seat: Node, hero: CharacterBody2D) -> void:
 	visible = false
 	hero.view.sync_view.disconnect(sync_image)
-	hero.logic.processors.ui.input.moving.disconnect(animation.move)
+	hero.logic.processors.ui.input.movement.behavior.move.moving.disconnect(animation.move)

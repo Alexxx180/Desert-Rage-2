@@ -2,21 +2,21 @@ extends Node
 
 @onready var booking: Node = $booking
 
-func controls(box: CharacterBody2D, seat: Node) -> void:
-	var stand: Node = box.logic.detectors.stand
-	var floors: Node = box.logic.processors.floors
+func controls(platform: CharacterBody2D, seat: Node) -> void:
+	var stand: Area2D = platform.logic.detectors.stand
+	var floors: Node = platform.logic.processors.floors
 
-	seat.place.standing.connect(box.view.enable_sync)
-	seat.place.leaving.connect(box.view.disable_sync)
+	seat.place.standing.connect(platform.view.enable_sync)
+	seat.place.leaving.connect(platform.view.disable_sync)
 
-	stand.box = box
+	stand.box = platform
 	stand.seat = seat
 	seat.stand = stand
-	seat.height = box.height
+	seat.height = platform.logic.processors.ride.surface.height
 
 	booking.controls(seat)
 
-	box.move.connect(seat.transport)
+	platform.logic.processors.ride.surface.move.connect(seat.transport)
 	floors.update_floor.connect(seat.set_floor)
 
 	stand.entered.connect(seat.enable_stand)

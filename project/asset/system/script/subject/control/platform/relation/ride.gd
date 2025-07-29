@@ -21,4 +21,4 @@ func controls(platform: CharacterBody2D, ride: Node) -> void:
 	#  processor.release.connect(_release)
 	
 	# ride.directing.connect(processor.press.set_direction)
-	_ride.forwarding.connect(platform.push)
+	_ride.forwarding.connect(platform.logic.processors.ride.surface.push)
