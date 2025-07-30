@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://d4bal0kbea3fh" path="res://asset/system/scene/object/image/level/floors/processor.tscn" id="3_ukmh5"]
 [ext_resource type="PackedScene" uid="uid://xh6k0wh1djy2" path="res://asset/system/scene/subject/actor/fighter/group/hero/base/view/rock.tscn" id="4_8mx21"]
 [ext_resource type="Script" uid="uid://dc8e4vuove4d8" path="res://asset/system/script/subject/control/platform/processor/processor.gd" id="5_62lxg"]
-[ext_resource type="Script" uid="uid://0taw381j3o66" path="res://asset/system/script/subject/control/platform/processor/ride.gd" id="6_3rhc8"]
+[ext_resource type="Script" uid="uid://0taw381j3o66" path="res://asset/system/script/subject/control/platform/processor/ride/ride.gd" id="6_3rhc8"]
 [ext_resource type="Script" uid="uid://dk3mhpgjtv8ca" path="res://asset/system/script/subject/control/platform/relation/floors.gd" id="6_5xo3k"]
 [ext_resource type="Script" uid="uid://dijt0sfg4rwdp" path="res://asset/system/script/subject/control/platform/relation/relations.gd" id="7_1b46u"]
 [ext_resource type="Script" uid="uid://v772lx0homec" path="res://asset/system/script/subject/control/platform/relation/seat/seat.gd" id="7_i65cp"]
@@ -97,6 +97,10 @@ script = ExtResource("6_3rhc8")
 [node name="surface" type="Node" parent="logic/processors/ride"]
 script = ExtResource("14_qorl4")
 
+[node name="igniting" type="Timer" parent="logic/processors/ride"]
+wait_time = 0.5
+one_shot = true
+
 [node name="relations" type="Node" parent="logic"]
 script = ExtResource("7_1b46u")
 
@@ -111,3 +115,5 @@ script = ExtResource("6_5xo3k")
 
 [node name="ride" type="Node" parent="logic/relations"]
 script = ExtResource("10_y0gxe")
+
+[connection signal="timeout" from="logic/processors/ride/igniting" to="logic/processors/ride/surface" method="busy_engine"]

@@ -22,8 +22,10 @@ func controls(platform: CharacterBody2D, seat: Node) -> void:
 
 	stand.entered.connect(seat.enable_stand)
 	stand.entered.connect(func(hero):
-		ride.busy = true
-		hero.logic.processors.ui.input.movement.type.velocity.forget_velocity())
+		ride.surface.ignite_engine()
+		hero.logic.processors.ui.input.movement.type.velocity.forget_velocity()
+		# hero.logic.detectors.platforming.direction # FOR DIRECTED PLATFORMS
+		)
 	stand.exited.connect(seat.disable_stand)
 	stand.exited.connect(func(hero):
-		ride.busy = false)
+		ride.surface.free_engine())
