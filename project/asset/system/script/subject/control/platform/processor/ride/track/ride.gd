@@ -16,16 +16,14 @@ func _ready() -> void:
 
 func _physics_process(_delta: float) -> void:
 	platform.move_and_slide()
-	match surface.engine:
-		surface.IGNITING:
-			surface.push(track)
-		surface.BUSY:
-			surface.push(track)
-			var ledge: Node2D = platform.logic.detectors.ledge
-			if ledge.x.is_colliding() or ledge.y.is_colliding():
-				surface.push(Vector2.ZERO)
-				track *= INVERSE
-				surface.free_engine()
+	surface.check_engine(self)
+
+func busy_feedback() -> void: track *= INVERSE
+func hero_entered(hero: CharacterBody2D) -> void:
+	surface.ignite_engine()
+
+func ledge_stop(ledge: Node2D) -> bool:
+	return (track.y == 0 and ledge.x.is_colliding()) or (track.x == 0 and ledge.y.is_colliding())
 
 func apply_velocity(next: Vector2) -> void:
 	forwarding.emit(next)

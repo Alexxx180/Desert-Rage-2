@@ -8,8 +8,8 @@ enum { height = 1, feedback = 2 }
 var platform: CharacterBody2D
 var half: Vector2:
 	get: return platform.geometry.shape.size / 2
-var center: Vector2:
-	get: return platform.position#  + half
+#var center: Vector2:
+	#get: return platform.position#  + half
 
 var engine: int = FREE
 var igniting: Timer
@@ -26,4 +26,18 @@ func compare_height(hero: CharacterBody2D) -> bool:
 func push(next: Vector2) -> void:
 	platform.velocity = next
 	move.emit(platform.position)
-	#print("CURRENT POS: ", position)
+
+func check_engine(ride: Node) -> void:
+	match engine:
+		IGNITING:
+			push(ride.track)
+		BUSY:
+			push(ride.track)
+			_set_ledge(ride)
+
+func _set_ledge(ride: Node) -> void:
+	var ledge: Node2D = platform.logic.detectors.ledge
+	if ride.ledge_stop(ledge):
+		push(Vector2.ZERO)
+		free_engine()
+		ride.busy_feedback()

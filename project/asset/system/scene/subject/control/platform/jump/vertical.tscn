@@ -13,7 +13,7 @@
 [ext_resource type="Script" uid="uid://dc8e4vuove4d8" path="res://asset/system/script/subject/control/platform/processor/processor.gd" id="10_ajnil"]
 [ext_resource type="PackedScene" uid="uid://2rt2ok77rsjp" path="res://asset/system/scene/subject/control/drive/box/base/logic/processors/movement/seat.tscn" id="11_0lk2j"]
 [ext_resource type="PackedScene" uid="uid://d4bal0kbea3fh" path="res://asset/system/scene/object/image/level/floors/processor.tscn" id="12_rjg3b"]
-[ext_resource type="Script" uid="uid://0taw381j3o66" path="res://asset/system/script/subject/control/platform/processor/ride/ride.gd" id="13_2bbqa"]
+[ext_resource type="Script" uid="uid://0taw381j3o66" path="res://asset/system/script/subject/control/platform/processor/ride/track/ride.gd" id="13_2bbqa"]
 [ext_resource type="Script" uid="uid://caeriauowkkit" path="res://asset/system/script/subject/control/platform/processor/ride/surface.gd" id="14_fc81p"]
 [ext_resource type="Script" uid="uid://dijt0sfg4rwdp" path="res://asset/system/script/subject/control/platform/relation/relations.gd" id="15_eymhe"]
 [ext_resource type="Script" uid="uid://v772lx0homec" path="res://asset/system/script/subject/control/platform/relation/seat/seat.gd" id="16_q5x1n"]
@@ -22,21 +22,22 @@
 [ext_resource type="Script" uid="uid://d3l371kvoqndv" path="res://asset/system/script/subject/control/platform/relation/ride.gd" id="19_yylct"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2s3n0"]
-size = Vector2(64, 64)
+size = Vector2(60, 60)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lhcqy"]
-size = Vector2(90, 62)
+size = Vector2(70, 60)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jcqc5"]
-size = Vector2(62, 70)
+size = Vector2(60, 70)
 
 [node name="jump" type="CharacterBody2D"]
+position = Vector2(0, 22)
 collision_layer = 2
 collision_mask = 128
 script = ExtResource("1_b2wmg")
 
 [node name="placement" type="CollisionShape2D" parent="."]
-visible = false
+position = Vector2(0, -22)
 shape = SubResource("RectangleShape2D_2s3n0")
 
 [node name="view" type="Node2D" parent="."]
@@ -75,12 +76,14 @@ script = ExtResource("9_45jud")
 position = Vector2(0, -22)
 shape = SubResource("RectangleShape2D_lhcqy")
 target_position = Vector2(0, 0)
+max_results = 1
 collision_mask = 128
 
 [node name="y" type="ShapeCast2D" parent="logic/detectors/ledge"]
 position = Vector2(0, -22)
 shape = SubResource("RectangleShape2D_jcqc5")
 target_position = Vector2(0, 0)
+max_results = 1
 collision_mask = 128
 
 [node name="processors" type="Node" parent="logic"]
