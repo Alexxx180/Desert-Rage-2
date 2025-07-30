@@ -18,4 +18,3 @@ func _on_leave(seat: Node, hero: CharacterBody2D) -> void:
 	print("disconnected ride")
 	seat.climb.disconnect(_height(hero))
 	seat.move.disconnect(hero.make_position)
-
