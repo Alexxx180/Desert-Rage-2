@@ -1,0 +1,343 @@
+[gd_scene load_steps=24 format=3 uid="uid://dga3pow6aicuy"]
+
+[ext_resource type="Script" uid="uid://b0ewoovd3p162" path="res://asset/system/script/subject/control/platform/cargo/cargo.gd" id="1_77gmp"]
+[ext_resource type="Script" uid="uid://0yhelrea4dwl" path="res://asset/system/script/subject/control/platform/cargo/detector/detector.gd" id="2_76kgg"]
+[ext_resource type="Script" uid="uid://bgp2d2igey6gv" path="res://asset/system/script/subject/control/platform/cargo/detector/ledges/ledges.gd" id="4_77gmp"]
+[ext_resource type="Script" uid="uid://dq2hl31pamoio" path="res://asset/system/script/subject/control/platform/cargo/detector/ledge.gd" id="4_l2bi4"]
+[ext_resource type="Script" uid="uid://bryqr3bw7bnw8" path="res://asset/system/script/subject/control/platform/cargo/detector/plane.gd" id="4_todwb"]
+[ext_resource type="Script" uid="uid://lqooxyu7rwjh" path="res://asset/system/script/subject/control/platform/cargo/relation.gd" id="7_76kgg"]
+[ext_resource type="Script" uid="uid://c3snlbfgpyuf4" path="res://asset/system/script/subject/control/platform/cargo/processor/railed.gd" id="7_bmykf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iwfq7"]
+size = Vector2(194, 191)
+
+[sub_resource type="Gradient" id="Gradient_1v738"]
+colors = PackedColorArray(0, 0.270588, 0, 1, 0, 0.270588, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_4b6c4"]
+gradient = SubResource("Gradient_1v738")
+width = 192
+height = 192
+fill_from = Vector2(0.517094, 0)
+fill_to = Vector2(0.495726, 0.508547)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bi0gf"]
+size = Vector2(64, 5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yr6e3"]
+size = Vector2(4, 7)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t1wxs"]
+size = Vector2(4, 7)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_77gmp"]
+size = Vector2(5, 5)
+
+[sub_resource type="Gradient" id="Gradient_dyk5d"]
+colors = PackedColorArray(0, 0.270588, 0, 1, 0, 0.380392, 0.00392157, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_bmykf"]
+gradient = SubResource("Gradient_dyk5d")
+fill_from = Vector2(0.512821, 0)
+fill_to = Vector2(0.517094, 0.504274)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4b6c4"]
+size = Vector2(5, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xt4hv"]
+size = Vector2(7, 4)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j5fjb"]
+size = Vector2(5, 5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sgkfr"]
+size = Vector2(5, 5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e725l"]
+size = Vector2(5, 5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d7cg2"]
+size = Vector2(64, 5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hnvri"]
+size = Vector2(5, 64)
+
+[node name="cargo" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 130
+script = ExtResource("1_77gmp")
+
+[node name="placement" type="CollisionShape2D" parent="."]
+position = Vector2(0, -22.5)
+shape = SubResource("RectangleShape2D_iwfq7")
+
+[node name="detectors" type="Node2D" parent="."]
+script = ExtResource("2_76kgg")
+
+[node name="view" type="Sprite2D" parent="detectors"]
+position = Vector2(-32, -54)
+texture = SubResource("GradientTexture2D_4b6c4")
+offset = Vector2(32, 32)
+region_rect = Rect2(0, 0, 192, 192)
+
+[node name="stand" type="Area2D" parent="detectors"]
+collision_layer = 0
+collision_mask = 4
+
+[node name="shape" type="CollisionPolygon2D" parent="detectors/stand"]
+polygon = PackedVector2Array(-96, -118, -32, -118, -32, -148, 32, -148, 32, -118, 96, -118, 96, -52, 126, -52, 126, 10, 96, 10, 96, 74, 32, 74, 32, 104, -32, 104, -32, 74, -96, 74, -96, 10, -126, 10, -126, -52, -96, -52)
+
+[node name="ledge" type="Node2D" parent="detectors"]
+script = ExtResource("4_77gmp")
+
+[node name="top" type="Node2D" parent="detectors/ledge"]
+position = Vector2(0, -115)
+script = ExtResource("4_l2bi4")
+
+[node name="wall" type="StaticBody2D" parent="detectors/ledge/top"]
+collision_layer = 536870912
+collision_mask = 0
+
+[node name="shape" type="CollisionShape2D" parent="detectors/ledge/top/wall"]
+shape = SubResource("RectangleShape2D_bi0gf")
+
+[node name="plane" type="Node2D" parent="detectors/ledge/top"]
+script = ExtResource("4_todwb")
+
+[node name="axis_a" type="ShapeCast2D" parent="detectors/ledge/top/plane"]
+position = Vector2(-28, -5)
+shape = SubResource("RectangleShape2D_yr6e3")
+target_position = Vector2(0, 0)
+max_results = 1
+collision_mask = 128
+
+[node name="axis_b" type="ShapeCast2D" parent="detectors/ledge/top/plane"]
+position = Vector2(30, -5)
+shape = SubResource("RectangleShape2D_t1wxs")
+target_position = Vector2(0, 0)
+max_results = 1
+collision_mask = 128
+
+[node name="hero" type="ShapeCast2D" parent="detectors/ledge/top"]
+position = Vector2(0, 5)
+shape = SubResource("RectangleShape2D_bi0gf")
+target_position = Vector2(0, 0)
+max_results = 1
+collision_mask = 4
+
+[node name="current" type="ShapeCast2D" parent="detectors/ledge/top"]
+position = Vector2(0, 64)
+shape = SubResource("RectangleShape2D_77gmp")
+target_position = Vector2(0, 0)
+max_results = 1
+collision_mask = 16777216
+
+[node name="trap" type="Sprite2D" parent="detectors/ledge/top"]
+visible = false
+position = Vector2(0, -2)
+texture = SubResource("GradientTexture2D_bmykf")
+
+[node name="left" type="Node2D" parent="detectors/ledge"]
+position = Vector2(-94, -22)
+script = ExtResource("4_l2bi4")
+
+[node name="wall" type="StaticBody2D" parent="detectors/ledge/left"]
+collision_layer = 536870912
+collision_mask = 0
+
+[node name="shape" type="CollisionShape2D" parent="detectors/ledge/left/wall"]
+shape = SubResource("RectangleShape2D_4b6c4")
+
+[node name="plane" type="Node2D" parent="detectors/ledge/left"]
+script = ExtResource("4_todwb")
+
+[node name="axis_a" type="ShapeCast2D" parent="detectors/ledge/left/plane"]
+position = Vector2(-5, -28)
+shape = SubResource("RectangleShape2D_xt4hv")
+target_position = Vector2(0, 0)
+max_results = 1
+collision_mask = 128
+
+[node name="axis_b" type="ShapeCast2D" parent="detectors/ledge/left/plane"]
+position = Vector2(-5, 30)
+shape = SubResource("RectangleShape2D_xt4hv")
+target_position = Vector2(0, 0)
+max_results = 1
+collision_mask = 128
+
+[node name="hero" type="ShapeCast2D" parent="detectors/ledge/left"]
+position = Vector2(5, 0)
+shape = SubResource("RectangleShape2D_4b6c4")
+target_position = Vector2(0, 0)
+max_results = 1
+collision_mask = 4
+
+[node name="current" type="ShapeCast2D" parent="detectors/ledge/left"]
+position = Vector2(64, 0)
+shape = SubResource("RectangleShape2D_j5fjb")
+target_position = Vector2(0, 0)
+max_results = 1
+collision_mask = 16777216
+
+[node name="trap" type="Sprite2D" parent="detectors/ledge/left"]
+visible = false
+position = Vector2(-2, 0)
+texture = SubResource("GradientTexture2D_bmykf")
+
+[node name="right" type="Node2D" parent="detectors/ledge"]
+position = Vector2(94, -22)
+script = ExtResource("4_l2bi4")
+
+[node name="wall" type="StaticBody2D" parent="detectors/ledge/right"]
+collision_layer = 536870912
+collision_mask = 0
+
+[node name="shape" type="CollisionShape2D" parent="detectors/ledge/right/wall"]
+shape = SubResource("RectangleShape2D_4b6c4")
+
+[node name="plane" type="Node2D" parent="detectors/ledge/right"]
+script = ExtResource("4_todwb")
+
+[node name="axis_a" type="ShapeCast2D" parent="detectors/ledge/right/plane"]
+position = Vector2(5, -28)
+shape = SubResource("RectangleShape2D_xt4hv")
+target_position = Vector2(0, 0)
+max_results = 1
+collision_mask = 128
+
+[node name="axis_b" type="ShapeCast2D" parent="detectors/ledge/right/plane"]
+position = Vector2(5, 30)
+shape = SubResource("RectangleShape2D_xt4hv")
+target_position = Vector2(0, 0)
+max_results = 1
+collision_mask = 128
+
+[node name="hero" type="ShapeCast2D" parent="detectors/ledge/right"]
+position = Vector2(-5, 0)
+shape = SubResource("RectangleShape2D_4b6c4")
+target_position = Vector2(0, 0)
+max_results = 1
+collision_mask = 4
+
+[node name="current" type="ShapeCast2D" parent="detectors/ledge/right"]
+position = Vector2(-64, 0)
+shape = SubResource("RectangleShape2D_sgkfr")
+target_position = Vector2(0, 0)
+max_results = 1
+collision_mask = 16777216
+
+[node name="trap" type="Sprite2D" parent="detectors/ledge/right"]
+visible = false
+position = Vector2(2, 0)
+texture = SubResource("GradientTexture2D_bmykf")
+
+[node name="bottom" type="Node2D" parent="detectors/ledge"]
+position = Vector2(0, 71)
+script = ExtResource("4_l2bi4")
+
+[node name="wall" type="StaticBody2D" parent="detectors/ledge/bottom"]
+collision_layer = 536870912
+collision_mask = 0
+
+[node name="shape" type="CollisionShape2D" parent="detectors/ledge/bottom/wall"]
+shape = SubResource("RectangleShape2D_bi0gf")
+
+[node name="plane" type="Node2D" parent="detectors/ledge/bottom"]
+script = ExtResource("4_todwb")
+
+[node name="axis_a" type="ShapeCast2D" parent="detectors/ledge/bottom/plane"]
+position = Vector2(-28, 5)
+shape = SubResource("RectangleShape2D_yr6e3")
+target_position = Vector2(0, 0)
+max_results = 1
+collision_mask = 128
+
+[node name="axis_b" type="ShapeCast2D" parent="detectors/ledge/bottom/plane"]
+position = Vector2(30, 5)
+shape = SubResource("RectangleShape2D_t1wxs")
+target_position = Vector2(0, 0)
+max_results = 1
+collision_mask = 128
+
+[node name="hero" type="ShapeCast2D" parent="detectors/ledge/bottom"]
+position = Vector2(0, -5)
+shape = SubResource("RectangleShape2D_bi0gf")
+target_position = Vector2(0, 0)
+max_results = 1
+collision_mask = 4
+
+[node name="current" type="ShapeCast2D" parent="detectors/ledge/bottom"]
+position = Vector2(0, -64)
+shape = SubResource("RectangleShape2D_e725l")
+target_position = Vector2(0, 0)
+max_results = 1
+collision_mask = 16777216
+
+[node name="trap" type="Sprite2D" parent="detectors/ledge/bottom"]
+visible = false
+position = Vector2(0, 3)
+texture = SubResource("GradientTexture2D_bmykf")
+
+[node name="corners" type="Node2D" parent="detectors"]
+visible = false
+
+[node name="top-left" type="StaticBody2D" parent="detectors/corners"]
+position = Vector2(-65, -115)
+collision_layer = 536870912
+collision_mask = 0
+
+[node name="shape1" type="CollisionShape2D" parent="detectors/corners/top-left"]
+shape = SubResource("RectangleShape2D_d7cg2")
+
+[node name="shape2" type="CollisionShape2D" parent="detectors/corners/top-left"]
+position = Vector2(-29.5, 29.5)
+shape = SubResource("RectangleShape2D_hnvri")
+
+[node name="top-right" type="StaticBody2D" parent="detectors/corners"]
+position = Vector2(95, -86)
+rotation = 1.5708
+collision_layer = 536870912
+collision_mask = 0
+
+[node name="shape1" type="CollisionShape2D" parent="detectors/corners/top-right"]
+shape = SubResource("RectangleShape2D_d7cg2")
+
+[node name="shape2" type="CollisionShape2D" parent="detectors/corners/top-right"]
+position = Vector2(-29.5, 29.5)
+shape = SubResource("RectangleShape2D_hnvri")
+
+[node name="bottom-right" type="StaticBody2D" parent="detectors/corners"]
+position = Vector2(65, 71)
+rotation = 3.14159
+collision_layer = 536870912
+collision_mask = 0
+
+[node name="shape1" type="CollisionShape2D" parent="detectors/corners/bottom-right"]
+shape = SubResource("RectangleShape2D_d7cg2")
+
+[node name="shape2" type="CollisionShape2D" parent="detectors/corners/bottom-right"]
+position = Vector2(-29.5, 29.5)
+shape = SubResource("RectangleShape2D_hnvri")
+
+[node name="bottom-left" type="StaticBody2D" parent="detectors/corners"]
+position = Vector2(-94, 41)
+rotation = -1.5708
+collision_layer = 536870912
+collision_mask = 0
+
+[node name="shape1" type="CollisionShape2D" parent="detectors/corners/bottom-left"]
+shape = SubResource("RectangleShape2D_d7cg2")
+
+[node name="shape2" type="CollisionShape2D" parent="detectors/corners/bottom-left"]
+position = Vector2(-29.5, 29.5)
+shape = SubResource("RectangleShape2D_hnvri")
+
+[node name="processor" type="Node" parent="."]
+script = ExtResource("7_bmykf")
+
+[node name="relation" type="Node" parent="."]
+script = ExtResource("7_76kgg")
+
+[node name="timer" type="Timer" parent="relation"]
+wait_time = 0.25
+one_shot = true
