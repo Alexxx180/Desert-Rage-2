@@ -6,13 +6,13 @@ var hero: CharacterBody2D
 var collision_on: bool = true
 var height: float = 0
 
-func turn_walls_collision(value: bool, borders: bool = false) -> void:
+func turn_walls_collision(value: bool, borders: bool = false, hero_layer: bool = false) -> void:
 	collision_on = value
 	var colliders: Array[int] = [WORLD, BOX, GAP, UPLAND]
 	if not borders: colliders.push_front(BORDERS)
 	for mask in colliders:
 		hero.set_collision_mask_value(mask, value)
-	set_hero_collision(value)
+	set_hero_collision(hero_layer or value)
 
 func set_hero_collision(value: bool) -> void:
 	hero.set_collision_layer_value(CHARACTER, value)

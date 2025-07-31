@@ -4,7 +4,8 @@ const SOURCE: int = 4
 
 var places: Array[Vector2i]
 
-func setup(tags: TileMapLayer, execute: TileMapLayer) -> void:
+func setup(tags: TileMapLayer, execute: TileMapLayer, casual_mode: bool) -> void:
+	if casual_mode: return
 	places = tags.get_used_cells_by_id(SOURCE)
 	var i: int = 0
 	while i < places.size() - 1:

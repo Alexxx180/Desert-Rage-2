@@ -4,6 +4,7 @@ extends TileMapLayer
 @export var manual: BooksManual
 @export var foe: Array[String] = [""]
 @export var boss: String = ""
+@export var casual_mode: bool = false
 
 @onready var transition: Node = $transition
 @onready var lockers: Node = $lockers
@@ -17,5 +18,5 @@ func _ready() -> void:
 	lockers.setup(self, execute)
 	transition.setup(self, execute)
 	books.setup(self, execute)
-	enemy.setup(self, push)
+	enemy.setup(self, push, casual_mode)
 	if invisible: hide()
