@@ -27,5 +27,5 @@ func controls(platform: CharacterBody2D, seat: Node) -> void:
 		#  # FOR DIRECTED PLATFORMS
 		)
 	stand.exited.connect(seat.disable_stand)
-	stand.exited.connect(func(hero):
+	stand.exited.connect(func(_hero):
 		ride.surface.free_engine())

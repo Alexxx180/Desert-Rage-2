@@ -8,15 +8,15 @@ extends Node2D
 
 var open: bool
 
-func sync_trap() -> void:
+func sync_trap() -> bool:
 	open = plane.is_colliding()
 	# wall.visible = not open
 	Processors.turn(wall, not open)
 	trap.visible = open
+	return open
 
 func move() -> bool:
-	sync_trap()
-	return not open and hero.is_colliding()
+	return not sync_trap() and hero.is_colliding()
 
 func rail() -> bool:
 	return current.is_colliding()

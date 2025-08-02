@@ -22,7 +22,7 @@ func busy_feedback() -> void: pass
 func hero_entered(hero: CharacterBody2D) -> void:
 	surface.ignite_engine()
 	var direction: Vector2 = hero.logic.detectors.platforming.direction
-	var x: int = direction.x
+	var x: int = int(direction.x)
 	track = Vector2(POWER * x, 0) if x != 0 else Vector2(0, POWER * direction.y)
 
 func ledge_stop(ledge: Node2D) -> bool:

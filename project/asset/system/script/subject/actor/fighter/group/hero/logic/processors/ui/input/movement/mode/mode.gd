@@ -11,6 +11,6 @@ func _ready() -> void:
 	control.mode = self
 
 func end_fight() -> void:
-	print("ENDED!")
+	# print("ENDED!")
 	type.distance.perform_motion(hero, hero)
 	target.reset_target()

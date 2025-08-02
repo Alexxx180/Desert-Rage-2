@@ -22,12 +22,3 @@ func during_jump(sequence: bool, stable_ground: bool) -> void:
 		turn_walls_collision(false)
 	elif stable_ground:
 		turn_walls_collision(true)
-
-"""
-func gravity(delta: float) -> void:
-	hero.velocity.y += delta * height
-	if height < GRAVITY:
-		height += delta * (GRAVITY + JUMP)
-	print("HEIGHT: ", height)
-	floating(delta)
-"""

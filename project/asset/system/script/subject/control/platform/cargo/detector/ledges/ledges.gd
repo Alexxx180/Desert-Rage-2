@@ -4,6 +4,7 @@ extends Node2D
 @onready var left: Node2D = $left
 @onready var right: Node2D = $right
 @onready var bottom: Node2D = $bottom
+@onready var caution: ShapeCast2D = $caution
 
 func get_directions() -> Array:
 	return [
@@ -11,9 +12,11 @@ func get_directions() -> Array:
 		[left, Vector2(-1, 0)], [right, Vector2(1, 0)]
 	]
 
-func sync_traps() -> void:
+func sync_traps() -> bool:
+	var open: bool = false
 	for direction in [top, left, right, bottom]:
-		direction.sync_trap()
+		open = open or direction.sync_trap()
+	return open
 
 func move() -> Vector2:
 	var directions: Array = get_directions()
@@ -21,5 +24,3 @@ func move() -> Vector2:
 		if motion[0].move() and motion[0].rail():
 			return motion[1]
 	return Vector2.ZERO
-
-# 004500 - 006101

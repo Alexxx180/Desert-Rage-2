@@ -4,16 +4,17 @@ extends Node
 @onready var search: Node = $search
 
 func setup(execute: TileMapLayer) -> void:
-	search.setup(execute, func(c) -> bool: return storage.locks.trigger.has(c))
+	search.setup(execute, storage)
 
 func activate(map_coords: Vector2i) -> void:
-	search.activate(storage.locks, map_coords)
+	search.activate(map_coords)
 
 func set_lockers(tag: Vector2i, map_coords: Array[Vector2i]) -> void:
 	var i: int = map_coords.size()
+	print("TAG: ", tag)
 	while i > 0:
 		i -= 1
-		var tile: Dictionary = search.get_atlas(map_coords[i], tag)
+		var tile: Dictionary = search.atlas.get_atlas(map_coords[i], tag)
 		match tile.atlas:
 			Vector2i.ZERO, Vector2i(1, 0):
 				storage.setup_plate(tile)
@@ -25,4 +26,4 @@ func set_lockers(tag: Vector2i, map_coords: Array[Vector2i]) -> void:
 				storage.setup_lock(tile)
 			Vector2i(3, 2), Vector2i(2, 3), Vector2i(3, 3):
 				storage.setup_lock(tile)
-	storage.locks.connector[tag] = map_coords
+	storage.logic.connector[tag] = map_coords

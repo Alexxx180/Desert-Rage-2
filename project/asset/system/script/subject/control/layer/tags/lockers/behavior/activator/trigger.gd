@@ -3,7 +3,7 @@ extends Node
 var location: Node
 
 func activate(pos: Vector2) -> void:
-	map_check(location.search.find_cell(pos))
+	map_check(location.search.atlas.find_cell(pos))
 
 func map_check(map_coords: Vector2i) -> void:
 	if map_coords != Lockers.EMPTY:

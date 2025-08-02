@@ -19,7 +19,7 @@ func _physics_process(_delta: float) -> void:
 	surface.check_engine(self)
 
 func busy_feedback() -> void: track *= INVERSE
-func hero_entered(hero: CharacterBody2D) -> void:
+func hero_entered(_hero: CharacterBody2D) -> void:
 	surface.ignite_engine()
 
 func ledge_stop(ledge: Node2D) -> bool:

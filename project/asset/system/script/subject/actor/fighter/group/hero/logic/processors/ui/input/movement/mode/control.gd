@@ -26,7 +26,7 @@ func floating(delta: float) -> void:
 
 func gravity(delta: float) -> void: # if score > HEIGHT * CELL:	hero.velocity.y -= delta * TRY; score += delta * TRY # else:
 	if slide.is_colliding():
-		mode.hero.velocity.y = delta * (JUMP / 2) #
+		mode.hero.velocity.y = delta * (JUMP / 2.0) #
 		print("SLIDING")
 	else:
 		mode.hero.velocity.y += delta * height
