@@ -1,0 +1,565 @@
+[gd_scene load_steps=12 format=3 uid="uid://dlyjgt6r4npio"]
+
+[ext_resource type="Script" uid="uid://cmm8nk2huc4mb" path="res://addons/godot-behavior-tree-plugin/tree/tree.gd" id="1_ohmyc"]
+[ext_resource type="Script" uid="uid://jk74h2qmaqu6" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/processors/ui/input/actions/check.gd" id="2_83e8c"]
+[ext_resource type="Script" uid="uid://b2eukqcbuq556" path="res://addons/godot-behavior-tree-plugin/selector/selector.gd" id="3_m0q0f"]
+[ext_resource type="Script" uid="uid://xyxwk1uhmmqa" path="res://addons/godot-behavior-tree-plugin/sequence/sequence.gd" id="4_1y5mg"]
+[ext_resource type="Script" uid="uid://c28asuataqv3u" path="res://addons/godot-behavior-tree-plugin/action/action.gd" id="5_qw31g"]
+[ext_resource type="Script" uid="uid://2emwmpqnf28y" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/processors/ui/input/actions/skills/punch/action.gd" id="6_um4dc"]
+[ext_resource type="Script" uid="uid://cmwixa7o3lh67" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/processors/ui/input/actions/skills/punch/fight/combo/single.gd" id="7_losqe"]
+[ext_resource type="Script" uid="uid://v04m7nyj0wkk" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/processors/ui/input/actions/skills/punch/fight/tools/lever.gd" id="8_bipwd"]
+[ext_resource type="Script" uid="uid://clesi76l5ylfx" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/processors/ui/input/actions/skills/punch/fight/tools/book.gd" id="9_jwuqp"]
+[ext_resource type="Script" uid="uid://rtrqbcmp4ykj" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/processors/ui/input/actions/skills/punch/fight/tools/box.gd" id="10_phha4"]
+[ext_resource type="Script" uid="uid://br65d4ob8ahym" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/processors/ui/input/actions/skills/kick/fight/tools/run.gd" id="11_pw8oj"]
+
+[node name="actions" type="Node"]
+script = ExtResource("1_ohmyc")
+metadata/_custom_type_script = "uid://cmm8nk2huc4mb"
+
+[node name="check" type="Node" parent="."]
+script = ExtResource("2_83e8c")
+metadata/_custom_type_script = "uid://c28asuataqv3u"
+
+[node name="skills" type="Node" parent="."]
+script = ExtResource("3_m0q0f")
+metadata/_custom_type_script = "uid://b2eukqcbuq556"
+
+[node name="equipment" type="Node" parent="skills"]
+script = ExtResource("3_m0q0f")
+metadata/_custom_type_script = "uid://b2eukqcbuq556"
+
+[node name="hands" type="Node" parent="skills/equipment"]
+script = ExtResource("4_1y5mg")
+metadata/_custom_type_script = "uid://xyxwk1uhmmqa"
+
+[node name="equip" type="Node" parent="skills/equipment/hands"]
+script = ExtResource("5_qw31g")
+metadata/_custom_type_script = "uid://c28asuataqv3u"
+
+[node name="slots" type="Node" parent="skills/equipment/hands"]
+script = ExtResource("3_m0q0f")
+metadata/_custom_type_script = "uid://b2eukqcbuq556"
+
+[node name="punch" type="Node" parent="skills/equipment/hands/slots"]
+script = ExtResource("4_1y5mg")
+metadata/_custom_type_script = "uid://xyxwk1uhmmqa"
+
+[node name="action" type="Node" parent="skills/equipment/hands/slots/punch"]
+script = ExtResource("6_um4dc")
+metadata/_custom_type_script = "uid://c28asuataqv3u"
+
+[node name="fight" type="Node" parent="skills/equipment/hands/slots/punch"]
+script = ExtResource("3_m0q0f")
+metadata/_custom_type_script = "uid://b2eukqcbuq556"
+
+[node name="combo" type="Node" parent="skills/equipment/hands/slots/punch/fight"]
+script = ExtResource("3_m0q0f")
+metadata/_custom_type_script = "uid://b2eukqcbuq556"
+
+[node name="double" type="Node" parent="skills/equipment/hands/slots/punch/fight/combo"]
+script = ExtResource("3_m0q0f")
+metadata/_custom_type_script = "uid://b2eukqcbuq556"
+
+[node name="double-punch" type="Node" parent="skills/equipment/hands/slots/punch/fight/combo/double"]
+script = ExtResource("4_1y5mg")
+metadata/_custom_type_script = "uid://xyxwk1uhmmqa"
+
+[node name="action" type="Node" parent="skills/equipment/hands/slots/punch/fight/combo/double/double-punch"]
+script = ExtResource("5_qw31g")
+metadata/_custom_type_script = "uid://c28asuataqv3u"
+
+[node name="triple" type="Node" parent="skills/equipment/hands/slots/punch/fight/combo/double/double-punch"]
+script = ExtResource("3_m0q0f")
+metadata/_custom_type_script = "uid://b2eukqcbuq556"
+
+[node name="lunge" type="Node" parent="skills/equipment/hands/slots/punch/fight/combo/double/double-punch/triple"]
+script = ExtResource("5_qw31g")
+metadata/_custom_type_script = "uid://c28asuataqv3u"
+
+[node name="finish" type="Node" parent="skills/equipment/hands/slots/punch/fight/combo/double"]
+script = ExtResource("5_qw31g")
+metadata/_custom_type_script = "uid://c28asuataqv3u"
+
+[node name="triple" type="Node" parent="skills/equipment/hands/slots/punch/fight/combo"]
+script = ExtResource("3_m0q0f")
+metadata/_custom_type_script = "uid://b2eukqcbuq556"
+
+[node name="lunge" type="Node" parent="skills/equipment/hands/slots/punch/fight/combo/triple"]
+script = ExtResource("5_qw31g")
+metadata/_custom_type_script = "uid://c28asuataqv3u"
+
+[node name="dead-grip" type="Node" parent="skills/equipment/hands/slots/punch/fight/combo/triple"]
+script = ExtResource("5_qw31g")
+metadata/_custom_type_script = "uid://c28asuataqv3u"
+
+[node name="single" type="Node" parent="skills/equipment/hands/slots/punch/fight/combo"]
+script = ExtResource("7_losqe")
+metadata/_custom_type_script = "uid://c28asuataqv3u"
+
+[node name="tools" type="Node" parent="skills/equipment/hands/slots/punch/fight"]
+script = ExtResource("3_m0q0f")
+metadata/_custom_type_script = "uid://b2eukqcbuq556"
+
+[node name="lever" type="Node" parent="skills/equipment/hands/slots/punch/fight/tools"]
+script = ExtResource("8_bipwd")
+metadata/_custom_type_script = "uid://c28asuataqv3u"
+
+[node name="book" type="Node" parent="skills/equipment/hands/slots/punch/fight/tools"]
+script = ExtResource("9_jwuqp")
+metadata/_custom_type_script = "uid://c28asuataqv3u"
+
+[node name="box" type="Node" parent="skills/equipment/hands/slots/punch/fight/tools"]
+script = ExtResource("10_phha4")
+metadata/_custom_type_script = "uid://c28asuataqv3u"
+
+[node name="kick" type="Node" parent="skills/equipment/hands/slots"]
+script = ExtResource("4_1y5mg")
+metadata/_custom_type_script = "uid://xyxwk1uhmmqa"
+
+[node name="action" type="Node" parent="skills/equipment/hands/slots/kick"]
+script = ExtResource("5_qw31g")
+metadata/_custom_type_script = "uid://c28asuataqv3u"
+
+[node name="fight" type="Node" parent="skills/equipment/hands/slots/kick"]
+script = ExtResource("3_m0q0f")
+metadata/_custom_type_script = "uid://b2eukqcbuq556"
+
+[node name="combo" type="Node" parent="skills/equipment/hands/slots/kick/fight"]
+script = ExtResource("3_m0q0f")
+metadata/_custom_type_script = "uid://b2eukqcbuq556"
+
+[node name="triple" type="Node" parent="skills/equipment/hands/slots/kick/fight/combo"]
+script = ExtResource("3_m0q0f")
+metadata/_custom_type_script = "uid://b2eukqcbuq556"
+
+[node name="spit-kick" type="Node" parent="skills/equipment/hands/slots/kick/fight/combo/triple"]
+script = ExtResource("5_qw31g")
+metadata/_custom_type_script = "uid://c28asuataqv3u"
+
+[node name="two-cloud-shoes" type="Node" parent="skills/equipment/hands/slots/kick/fight/combo/triple"]
+script = ExtResource("5_qw31g")
+metadata/_custom_type_script = "uid://c28asuataqv3u"
+
+[node name="fourth" type="Node" parent="skills/equipment/hands/slots/kick/fight/combo"]
+script = ExtResource("3_m0q0f")
+metadata/_custom_type_script = "uid://b2eukqcbuq556"
+
+[node name="back-spit" type="Node" parent="skills/equipment/hands/slots/kick/fight/combo/fourth"]
+script = ExtResource("5_qw31g")
+metadata/_custom_type_script = "uid://c28asuataqv3u"
+
+[node name="single" type="Node" parent="skills/equipment/hands/slots/kick/fight/combo"]
+script = ExtResource("5_qw31g")
+metadata/_custom_type_script = "uid://c28asuataqv3u"
+
+[node name="tools" type="Node" parent="skills/equipment/hands/slots/kick/fight"]
+script = ExtResource("3_m0q0f")
+metadata/_custom_type_script = "uid://b2eukqcbuq556"
+
+[node name="plate" type="Node" parent="skills/equipment/hands/slots/kick/fight/tools"]
+script = ExtResource("5_qw31g")
+metadata/_custom_type_script = "uid://c28asuataqv3u"
+
+[node name="sand" type="Node" parent="skills/equipment/hands/slots/kick/fight/tools"]
+script = ExtResource("5_qw31g")
+metadata/_custom_type_script = "uid://c28asuataqv3u"
+
+[node name="jump" type="Node" parent="skills/equipment/hands/slots/kick/fight/tools"]
+script = ExtResource("5_qw31g")
+metadata/_custom_type_script = "uid://c28asuataqv3u"
+
+[node name="run" type="Node" parent="skills/equipment/hands/slots/kick/fight/tools"]
+script = ExtResource("11_pw8oj")
+metadata/_custom_type_script = "uid://c28asuataqv3u"
+
+[node name="boomerang" type="Node" parent="skills/equipment/hands/slots"]
+script = ExtResource("4_1y5mg")
+metadata/_custom_type_script = "uid://xyxwk1uhmmqa"
+
+[node name="action" type="Node" parent="skills/equipment/hands/slots/boomerang"]
+script = ExtResource("6_um4dc")
+metadata/_custom_type_script = "uid://c28asuataqv3u"
+
+[node name="combo" type="Node" parent="skills/equipment/hands/slots/boomerang"]
+script = ExtResource("3_m0q0f")
+metadata/_custom_type_script = "uid://b2eukqcbuq556"
+
+[node name="triple" type="Node" parent="skills/equipment/hands/slots/boomerang/combo"]
+script = ExtResource("3_m0q0f")
+metadata/_custom_type_script = "uid://b2eukqcbuq556"
+
+[node name="round-attack" type="Node" parent="skills/equipment/hands/slots/boomerang/combo/triple"]
+script = ExtResource("5_qw31g")
+metadata/_custom_type_script = "uid://c28asuataqv3u"
+
+[node name="fourth" type="Node" parent="skills/equipment/hands/slots/boomerang/combo"]
+script = ExtResource("3_m0q0f")
+metadata/_custom_type_script = "uid://b2eukqcbuq556"
+
+[node name="air-strike" type="Node" parent="skills/equipment/hands/slots/boomerang/combo/fourth"]
+script = ExtResource("5_qw31g")
+metadata/_custom_type_script = "uid://c28asuataqv3u"
+
+[node name="rain" type="Node" parent="skills/equipment/hands/slots"]
+script = ExtResource("4_1y5mg")
+metadata/_custom_type_script = "uid://xyxwk1uhmmqa"
+
+[node name="action" type="Node" parent="skills/equipment/hands/slots/rain"]
+script = ExtResource("5_qw31g")
+metadata/_custom_type_script = "uid://c28asuataqv3u"
+
+[node name="combo" type="Node" parent="skills/equipment/hands/slots/rain"]
+script = ExtResource("3_m0q0f")
+metadata/_custom_type_script = "uid://b2eukqcbuq556"
+
+[node name="double" type="Node" parent="skills/equipment/hands/slots/rain/combo"]
+script = ExtResource("3_m0q0f")
+metadata/_custom_type_script = "uid://b2eukqcbuq556"
+
+[node name="washing-out" type="Node" parent="skills/equipment/hands/slots/rain/combo/double"]
+script = ExtResource("5_qw31g")
+metadata/_custom_type_script = "uid://c28asuataqv3u"
+
+[node name="triple" type="Node" parent="skills/equipment/hands/slots/rain/combo"]
+script = ExtResource("3_m0q0f")
+metadata/_custom_type_script = "uid://b2eukqcbuq556"
+
+[node name="air-strike" type="Node" parent="skills/equipment/hands/slots/rain/combo/triple"]
+script = ExtResource("5_qw31g")
+metadata/_custom_type_script = "uid://c28asuataqv3u"
+
+[node name="spark" type="Node" parent="skills/equipment/hands/slots"]
+script = ExtResource("4_1y5mg")
+metadata/_custom_type_script = "uid://xyxwk1uhmmqa"
+
+[node name="action" type="Node" parent="skills/equipment/hands/slots/spark"]
+script = ExtResource("5_qw31g")
+metadata/_custom_type_script = "uid://c28asuataqv3u"
+
+[node name="combo" type="Node" parent="skills/equipment/hands/slots/spark"]
+script = ExtResource("3_m0q0f")
+metadata/_custom_type_script = "uid://b2eukqcbuq556"
+
+[node name="double" type="Node" parent="skills/equipment/hands/slots/spark/combo"]
+script = ExtResource("3_m0q0f")
+metadata/_custom_type_script = "uid://b2eukqcbuq556"
+
+[node name="conductor" type="Node" parent="skills/equipment/hands/slots/spark/combo/double"]
+script = ExtResource("5_qw31g")
+metadata/_custom_type_script = "uid://c28asuataqv3u"
+
+[node name="triple" type="Node" parent="skills/equipment/hands/slots/spark/combo"]
+script = ExtResource("3_m0q0f")
+metadata/_custom_type_script = "uid://b2eukqcbuq556"
+
+[node name="shock" type="Node" parent="skills/equipment/hands/slots/spark/combo/triple"]
+script = ExtResource("5_qw31g")
+metadata/_custom_type_script = "uid://c28asuataqv3u"
+
+[node name="sword" type="Node" parent="skills/equipment"]
+script = ExtResource("3_m0q0f")
+metadata/_custom_type_script = "uid://b2eukqcbuq556"
+
+[node name="single" type="Node" parent="skills/equipment/sword"]
+script = ExtResource("4_1y5mg")
+metadata/_custom_type_script = "uid://xyxwk1uhmmqa"
+
+[node name="equip" type="Node" parent="skills/equipment/sword/single"]
+script = ExtResource("5_qw31g")
+metadata/_custom_type_script = "uid://c28asuataqv3u"
+
+[node name="slots" type="Node" parent="skills/equipment/sword/single"]
+script = ExtResource("3_m0q0f")
+metadata/_custom_type_script = "uid://b2eukqcbuq556"
+
+[node name="cut" type="Node" parent="skills/equipment/sword/single/slots"]
+script = ExtResource("4_1y5mg")
+metadata/_custom_type_script = "uid://xyxwk1uhmmqa"
+
+[node name="action" type="Node" parent="skills/equipment/sword/single/slots/cut"]
+script = ExtResource("6_um4dc")
+metadata/_custom_type_script = "uid://c28asuataqv3u"
+
+[node name="fight" type="Node" parent="skills/equipment/sword/single/slots/cut"]
+script = ExtResource("3_m0q0f")
+metadata/_custom_type_script = "uid://b2eukqcbuq556"
+
+[node name="combo" type="Node" parent="skills/equipment/sword/single/slots/cut/fight"]
+script = ExtResource("3_m0q0f")
+metadata/_custom_type_script = "uid://b2eukqcbuq556"
+
+[node name="double" type="Node" parent="skills/equipment/sword/single/slots/cut/fight/combo"]
+script = ExtResource("3_m0q0f")
+metadata/_custom_type_script = "uid://b2eukqcbuq556"
+
+[node name="slash" type="Node" parent="skills/equipment/sword/single/slots/cut/fight/combo/double"]
+script = ExtResource("5_qw31g")
+metadata/_custom_type_script = "uid://c28asuataqv3u"
+
+[node name="triple" type="Node" parent="skills/equipment/sword/single/slots/cut/fight/combo"]
+script = ExtResource("3_m0q0f")
+metadata/_custom_type_script = "uid://b2eukqcbuq556"
+
+[node name="round-attack" type="Node" parent="skills/equipment/sword/single/slots/cut/fight/combo/triple"]
+script = ExtResource("5_qw31g")
+metadata/_custom_type_script = "uid://c28asuataqv3u"
+
+[node name="washing-out" type="Node" parent="skills/equipment/sword/single/slots/cut/fight/combo/triple"]
+script = ExtResource("5_qw31g")
+metadata/_custom_type_script = "uid://c28asuataqv3u"
+
+[node name="fourth" type="Node" parent="skills/equipment/sword/single/slots/cut/fight/combo"]
+script = ExtResource("3_m0q0f")
+metadata/_custom_type_script = "uid://b2eukqcbuq556"
+
+[node name="poaching" type="Node" parent="skills/equipment/sword/single/slots/cut/fight/combo/fourth"]
+script = ExtResource("5_qw31g")
+metadata/_custom_type_script = "uid://c28asuataqv3u"
+
+[node name="single" type="Node" parent="skills/equipment/sword/single/slots/cut/fight/combo"]
+script = ExtResource("7_losqe")
+metadata/_custom_type_script = "uid://c28asuataqv3u"
+
+[node name="tools" type="Node" parent="skills/equipment/sword/single/slots/cut/fight"]
+script = ExtResource("3_m0q0f")
+metadata/_custom_type_script = "uid://b2eukqcbuq556"
+
+[node name="lever" type="Node" parent="skills/equipment/sword/single/slots/cut/fight/tools"]
+script = ExtResource("8_bipwd")
+metadata/_custom_type_script = "uid://c28asuataqv3u"
+
+[node name="book" type="Node" parent="skills/equipment/sword/single/slots/cut/fight/tools"]
+script = ExtResource("9_jwuqp")
+metadata/_custom_type_script = "uid://c28asuataqv3u"
+
+[node name="box" type="Node" parent="skills/equipment/sword/single/slots/cut/fight/tools"]
+script = ExtResource("10_phha4")
+metadata/_custom_type_script = "uid://c28asuataqv3u"
+
+[node name="cross" type="Node" parent="skills/equipment/sword/single/slots"]
+script = ExtResource("4_1y5mg")
+metadata/_custom_type_script = "uid://xyxwk1uhmmqa"
+
+[node name="action" type="Node" parent="skills/equipment/sword/single/slots/cross"]
+script = ExtResource("5_qw31g")
+metadata/_custom_type_script = "uid://c28asuataqv3u"
+
+[node name="fight" type="Node" parent="skills/equipment/sword/single/slots/cross"]
+script = ExtResource("3_m0q0f")
+metadata/_custom_type_script = "uid://b2eukqcbuq556"
+
+[node name="combo" type="Node" parent="skills/equipment/sword/single/slots/cross/fight"]
+script = ExtResource("3_m0q0f")
+metadata/_custom_type_script = "uid://b2eukqcbuq556"
+
+[node name="double" type="Node" parent="skills/equipment/sword/single/slots/cross/fight/combo"]
+script = ExtResource("3_m0q0f")
+metadata/_custom_type_script = "uid://b2eukqcbuq556"
+
+[node name="transfusion" type="Node" parent="skills/equipment/sword/single/slots/cross/fight/combo/double"]
+script = ExtResource("5_qw31g")
+metadata/_custom_type_script = "uid://c28asuataqv3u"
+
+[node name="single" type="Node" parent="skills/equipment/sword/single/slots/cross/fight/combo"]
+script = ExtResource("5_qw31g")
+metadata/_custom_type_script = "uid://c28asuataqv3u"
+
+[node name="tools" type="Node" parent="skills/equipment/sword/single/slots/cross/fight"]
+script = ExtResource("3_m0q0f")
+metadata/_custom_type_script = "uid://b2eukqcbuq556"
+
+[node name="plate" type="Node" parent="skills/equipment/sword/single/slots/cross/fight/tools"]
+script = ExtResource("5_qw31g")
+metadata/_custom_type_script = "uid://c28asuataqv3u"
+
+[node name="sand" type="Node" parent="skills/equipment/sword/single/slots/cross/fight/tools"]
+script = ExtResource("5_qw31g")
+metadata/_custom_type_script = "uid://c28asuataqv3u"
+
+[node name="jump" type="Node" parent="skills/equipment/sword/single/slots/cross/fight/tools"]
+script = ExtResource("5_qw31g")
+metadata/_custom_type_script = "uid://c28asuataqv3u"
+
+[node name="run" type="Node" parent="skills/equipment/sword/single/slots/cross/fight/tools"]
+script = ExtResource("11_pw8oj")
+metadata/_custom_type_script = "uid://c28asuataqv3u"
+
+[node name="boomerang" type="Node" parent="skills/equipment/sword/single/slots"]
+script = ExtResource("4_1y5mg")
+metadata/_custom_type_script = "uid://xyxwk1uhmmqa"
+
+[node name="action" type="Node" parent="skills/equipment/sword/single/slots/boomerang"]
+script = ExtResource("6_um4dc")
+metadata/_custom_type_script = "uid://c28asuataqv3u"
+
+[node name="combo" type="Node" parent="skills/equipment/sword/single/slots/boomerang"]
+script = ExtResource("3_m0q0f")
+metadata/_custom_type_script = "uid://b2eukqcbuq556"
+
+[node name="triple" type="Node" parent="skills/equipment/sword/single/slots/boomerang/combo"]
+script = ExtResource("3_m0q0f")
+metadata/_custom_type_script = "uid://b2eukqcbuq556"
+
+[node name="round-attack" type="Node" parent="skills/equipment/sword/single/slots/boomerang/combo/triple"]
+script = ExtResource("5_qw31g")
+metadata/_custom_type_script = "uid://c28asuataqv3u"
+
+[node name="fourth" type="Node" parent="skills/equipment/sword/single/slots/boomerang/combo"]
+script = ExtResource("3_m0q0f")
+metadata/_custom_type_script = "uid://b2eukqcbuq556"
+
+[node name="air-strike" type="Node" parent="skills/equipment/sword/single/slots/boomerang/combo/fourth"]
+script = ExtResource("5_qw31g")
+metadata/_custom_type_script = "uid://c28asuataqv3u"
+
+[node name="rain" type="Node" parent="skills/equipment/sword/single/slots"]
+script = ExtResource("4_1y5mg")
+metadata/_custom_type_script = "uid://xyxwk1uhmmqa"
+
+[node name="action" type="Node" parent="skills/equipment/sword/single/slots/rain"]
+script = ExtResource("5_qw31g")
+metadata/_custom_type_script = "uid://c28asuataqv3u"
+
+[node name="combo" type="Node" parent="skills/equipment/sword/single/slots/rain"]
+script = ExtResource("3_m0q0f")
+metadata/_custom_type_script = "uid://b2eukqcbuq556"
+
+[node name="double" type="Node" parent="skills/equipment/sword/single/slots/rain/combo"]
+script = ExtResource("3_m0q0f")
+metadata/_custom_type_script = "uid://b2eukqcbuq556"
+
+[node name="washing-out" type="Node" parent="skills/equipment/sword/single/slots/rain/combo/double"]
+script = ExtResource("5_qw31g")
+metadata/_custom_type_script = "uid://c28asuataqv3u"
+
+[node name="triple" type="Node" parent="skills/equipment/sword/single/slots/rain/combo"]
+script = ExtResource("3_m0q0f")
+metadata/_custom_type_script = "uid://b2eukqcbuq556"
+
+[node name="air-strike" type="Node" parent="skills/equipment/sword/single/slots/rain/combo/triple"]
+script = ExtResource("5_qw31g")
+metadata/_custom_type_script = "uid://c28asuataqv3u"
+
+[node name="spark" type="Node" parent="skills/equipment/sword/single/slots"]
+script = ExtResource("4_1y5mg")
+metadata/_custom_type_script = "uid://xyxwk1uhmmqa"
+
+[node name="action" type="Node" parent="skills/equipment/sword/single/slots/spark"]
+script = ExtResource("5_qw31g")
+metadata/_custom_type_script = "uid://c28asuataqv3u"
+
+[node name="combo" type="Node" parent="skills/equipment/sword/single/slots/spark"]
+script = ExtResource("3_m0q0f")
+metadata/_custom_type_script = "uid://b2eukqcbuq556"
+
+[node name="double" type="Node" parent="skills/equipment/sword/single/slots/spark/combo"]
+script = ExtResource("3_m0q0f")
+metadata/_custom_type_script = "uid://b2eukqcbuq556"
+
+[node name="conductor" type="Node" parent="skills/equipment/sword/single/slots/spark/combo/double"]
+script = ExtResource("5_qw31g")
+metadata/_custom_type_script = "uid://c28asuataqv3u"
+
+[node name="triple" type="Node" parent="skills/equipment/sword/single/slots/spark/combo"]
+script = ExtResource("3_m0q0f")
+metadata/_custom_type_script = "uid://b2eukqcbuq556"
+
+[node name="shock" type="Node" parent="skills/equipment/sword/single/slots/spark/combo/triple"]
+script = ExtResource("5_qw31g")
+metadata/_custom_type_script = "uid://c28asuataqv3u"
+
+[node name="rain" type="Node" parent="skills"]
+script = ExtResource("4_1y5mg")
+metadata/_custom_type_script = "uid://xyxwk1uhmmqa"
+
+[node name="action" type="Node" parent="skills/rain"]
+script = ExtResource("5_qw31g")
+metadata/_custom_type_script = "uid://c28asuataqv3u"
+
+[node name="fight" type="Node" parent="skills/rain"]
+script = ExtResource("3_m0q0f")
+metadata/_custom_type_script = "uid://b2eukqcbuq556"
+
+[node name="combo" type="Node" parent="skills/rain/fight"]
+script = ExtResource("3_m0q0f")
+metadata/_custom_type_script = "uid://b2eukqcbuq556"
+
+[node name="double" type="Node" parent="skills/rain/fight/combo"]
+script = ExtResource("3_m0q0f")
+metadata/_custom_type_script = "uid://b2eukqcbuq556"
+
+[node name="triple" type="Node" parent="skills/rain/fight/combo"]
+script = ExtResource("3_m0q0f")
+metadata/_custom_type_script = "uid://b2eukqcbuq556"
+
+[node name="fourth" type="Node" parent="skills/rain/fight/combo"]
+script = ExtResource("3_m0q0f")
+metadata/_custom_type_script = "uid://b2eukqcbuq556"
+
+[node name="single" type="Node" parent="skills/rain/fight/combo"]
+script = ExtResource("5_qw31g")
+metadata/_custom_type_script = "uid://c28asuataqv3u"
+
+[node name="tools" type="Node" parent="skills/rain/fight"]
+script = ExtResource("3_m0q0f")
+metadata/_custom_type_script = "uid://b2eukqcbuq556"
+
+[node name="torch" type="Node" parent="skills/rain/fight/tools"]
+script = ExtResource("5_qw31g")
+metadata/_custom_type_script = "uid://c28asuataqv3u"
+
+[node name="dispenser" type="Node" parent="skills/rain/fight/tools"]
+script = ExtResource("5_qw31g")
+metadata/_custom_type_script = "uid://c28asuataqv3u"
+
+[node name="puddle" type="Node" parent="skills/rain/fight/tools"]
+script = ExtResource("5_qw31g")
+metadata/_custom_type_script = "uid://c28asuataqv3u"
+
+[node name="spark" type="Node" parent="skills"]
+script = ExtResource("4_1y5mg")
+metadata/_custom_type_script = "uid://xyxwk1uhmmqa"
+
+[node name="action" type="Node" parent="skills/spark"]
+script = ExtResource("5_qw31g")
+metadata/_custom_type_script = "uid://c28asuataqv3u"
+
+[node name="fight" type="Node" parent="skills/spark"]
+script = ExtResource("3_m0q0f")
+metadata/_custom_type_script = "uid://b2eukqcbuq556"
+
+[node name="combo" type="Node" parent="skills/spark/fight"]
+script = ExtResource("4_1y5mg")
+metadata/_custom_type_script = "uid://xyxwk1uhmmqa"
+
+[node name="electro" type="Node" parent="skills/spark/fight/combo"]
+script = ExtResource("5_qw31g")
+metadata/_custom_type_script = "uid://c28asuataqv3u"
+
+[node name="chained" type="Node" parent="skills/spark/fight/combo"]
+script = ExtResource("3_m0q0f")
+metadata/_custom_type_script = "uid://b2eukqcbuq556"
+
+[node name="double" type="Node" parent="skills/spark/fight/combo/chained"]
+script = ExtResource("3_m0q0f")
+metadata/_custom_type_script = "uid://b2eukqcbuq556"
+
+[node name="triple" type="Node" parent="skills/spark/fight/combo/chained"]
+script = ExtResource("3_m0q0f")
+metadata/_custom_type_script = "uid://b2eukqcbuq556"
+
+[node name="fourth" type="Node" parent="skills/spark/fight/combo/chained"]
+script = ExtResource("3_m0q0f")
+metadata/_custom_type_script = "uid://b2eukqcbuq556"
+
+[node name="tools" type="Node" parent="skills/spark/fight"]
+script = ExtResource("3_m0q0f")
+metadata/_custom_type_script = "uid://b2eukqcbuq556"
+
+[node name="accumulator" type="Node" parent="skills/spark/fight/tools"]
+script = ExtResource("5_qw31g")
+metadata/_custom_type_script = "uid://c28asuataqv3u"
+
+[node name="puddle" type="Node" parent="skills/spark/fight/tools"]
+script = ExtResource("5_qw31g")
+metadata/_custom_type_script = "uid://c28asuataqv3u"

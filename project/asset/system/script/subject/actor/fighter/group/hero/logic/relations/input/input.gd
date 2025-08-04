@@ -2,6 +2,7 @@ extends Node
 
 @onready var platforming: Node = $platforming
 @onready var movement: Node = $movement
+@onready var actions: Node = $actions
 
 func controls(hero: CharacterBody2D, input: Node) -> void:
 	var detectors: Node2D = hero.logic.detectors
@@ -10,6 +11,8 @@ func controls(hero: CharacterBody2D, input: Node) -> void:
 	var deployment: DeploymentRaycast = surface.deployment
 	print ("DEPLOYMENT GET")
 	var move: Node = input.movement.behavior.move
+	
+	#actions.control(hero, input)
 
 	move.moving.connect(hero.view.animation.move)
 	move.moving.connect(hero.view.ap.set_direction)

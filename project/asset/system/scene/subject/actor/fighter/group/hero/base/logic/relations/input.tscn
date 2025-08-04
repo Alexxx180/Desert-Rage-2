@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://bi2swxyykik1e"]
+[gd_scene load_steps=7 format=3 uid="uid://bi2swxyykik1e"]
 
 [ext_resource type="Script" uid="uid://kd6ac1yiald1" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/relations/input/input.gd" id="1_tfsur"]
 [ext_resource type="PackedScene" uid="uid://cmam0hmoa0iuk" path="res://asset/system/scene/subject/actor/fighter/group/hero/base/logic/relations/input/movement.tscn" id="2_fq6n3"]
 [ext_resource type="PackedScene" uid="uid://cs7uf81q8nj27" path="res://asset/system/scene/subject/actor/fighter/group/hero/base/logic/relations/input/platforming/platforming.tscn" id="3_waeaa"]
+[ext_resource type="Script" uid="uid://6mhqlubh53v7" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/relations/input/actions/actions.gd" id="4_uvfe0"]
+[ext_resource type="Script" uid="uid://b1c8cnafyj0kl" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/relations/input/actions/punch.gd" id="5_1nghp"]
+[ext_resource type="Script" uid="uid://d3728uix1acqw" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/relations/input/actions/kick.gd" id="6_8rtjm"]
 
 [node name="input" type="Node"]
 script = ExtResource("1_tfsur")
@@ -10,3 +13,12 @@ script = ExtResource("1_tfsur")
 [node name="platforming" parent="." instance=ExtResource("3_waeaa")]
 
 [node name="movement" parent="." instance=ExtResource("2_fq6n3")]
+
+[node name="actions" type="Node" parent="."]
+script = ExtResource("4_uvfe0")
+
+[node name="punch" type="Node" parent="actions"]
+script = ExtResource("5_1nghp")
+
+[node name="kick" type="Node" parent="actions"]
+script = ExtResource("6_8rtjm")
