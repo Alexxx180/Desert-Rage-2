@@ -41,7 +41,6 @@ theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 15
 
 [node name="ray" type="HFlowContainer" parent="margin"]
-visible = false
 layout_mode = 2
 theme_override_constants/h_separation = 4
 theme_override_constants/v_separation = 0
@@ -4186,6 +4185,7 @@ value = 1.0
 show_percentage = false
 
 [node name="rock" type="HFlowContainer" parent="margin"]
+visible = false
 layout_mode = 2
 theme_override_constants/h_separation = 5
 theme_override_constants/v_separation = 0
@@ -5009,6 +5009,137 @@ layout_mode = 2
 [node name="single" type="VBoxContainer" parent="margin/rock/left/weapon/sword"]
 layout_mode = 2
 
+[node name="piercing" type="Button" parent="margin/rock/left/weapon/sword/single"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="description" type="VBoxContainer" parent="margin/rock/left/weapon/sword/single/piercing"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="margin" type="MarginContainer" parent="margin/rock/left/weapon/sword/single/piercing/description"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 0
+
+[node name="stack" type="HBoxContainer" parent="margin/rock/left/weapon/sword/single/piercing/description/margin"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+
+[node name="view" type="Control" parent="margin/rock/left/weapon/sword/single/piercing/description/margin/stack"]
+custom_minimum_size = Vector2(42, 42)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+
+[node name="margin" type="MarginContainer" parent="margin/rock/left/weapon/sword/single/piercing/description/margin/stack/view"]
+layout_mode = 2
+offset_right = 42.0
+offset_bottom = 42.0
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 0
+
+[node name="slash-2" type="Label" parent="margin/rock/left/weapon/sword/single/piercing/description/margin/stack/view/margin"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_outline_color = Color(0.325479, 0.322641, 0.304519, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("6_w153l")
+theme_override_font_sizes/font_size = 28
+theme_override_styles/normal = SubResource("StyleBoxFlat_w1r1c")
+text = "|="
+
+[node name="slash-3" type="Label" parent="margin/rock/left/weapon/sword/single/piercing/description/margin/stack/view/margin"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/font_outline_color = Color(0.325479, 0.322641, 0.304519, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("6_w153l")
+theme_override_font_sizes/font_size = 28
+theme_override_styles/normal = SubResource("StyleBoxFlat_w1r1c")
+text = "-"
+
+[node name="content" type="HFlowContainer" parent="margin/rock/left/weapon/sword/single/piercing/description/margin/stack"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+
+[node name="details" type="HBoxContainer" parent="margin/rock/left/weapon/sword/single/piercing/description/margin/stack/content"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="margin/rock/left/weapon/sword/single/piercing/description/margin/stack/content/details"]
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 18
+text = "Протыкание"
+text_overrun_behavior = 3
+
+[node name="zone" type="Label" parent="margin/rock/left/weapon/sword/single/piercing/description/margin/stack/content/details"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "¦|¦"
+horizontal_alignment = 1
+
+[node name="ability" type="HBoxContainer" parent="margin/rock/left/weapon/sword/single/piercing/description/margin/stack/content"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_stretch_ratio = 0.25
+theme_override_constants/separation = 0
+
+[node name="help" type="HBoxContainer" parent="margin/rock/left/weapon/sword/single/piercing/description/margin/stack/content/ability"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_constants/separation = -3
+
+[node name="slot-1" type="Label" parent="margin/rock/left/weapon/sword/single/piercing/description/margin/stack/content/ability/help"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("1_w1r1c")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = ExtResource("4_e8epa")
+text = "⚔️"
+vertical_alignment = 1
+
+[node name="cost" type="HBoxContainer" parent="margin/rock/left/weapon/sword/single/piercing/description/margin/stack/content/ability"]
+layout_mode = 2
+
+[node name="ap" type="Label" parent="margin/rock/left/weapon/sword/single/piercing/description/margin/stack/content/ability/cost"]
+visible = false
+custom_minimum_size = Vector2(22, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "2"
+horizontal_alignment = 2
+
+[node name="no" type="Control" parent="margin/rock/left/weapon/sword/single/piercing/description/margin/stack/content/ability/cost"]
+custom_minimum_size = Vector2(22, 0)
+layout_mode = 2
+
+[node name="aura-cost-separator" type="ProgressBar" parent="margin/rock/left/weapon/sword/single/piercing/description"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+max_value = 5.0
+step = 1.0
+show_percentage = false
+
 [node name="cut" type="Button" parent="margin/rock/left/weapon/sword/single"]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
@@ -5053,6 +5184,7 @@ theme_override_constants/margin_bottom = 0
 [node name="slash-1" type="Label" parent="margin/rock/left/weapon/sword/single/cut/description/margin/stack/view/margin"]
 layout_mode = 2
 size_flags_horizontal = 0
+theme_override_colors/font_color = Color(1, 0.548798, 0.484859, 1)
 theme_override_colors/font_outline_color = Color(0.310617, 0.310617, 0.310617, 1)
 theme_override_constants/outline_size = 5
 theme_override_fonts/font = ExtResource("6_w153l")
@@ -5108,28 +5240,7 @@ theme_override_constants/separation = -3
 [node name="slot-1" type="Label" parent="margin/rock/left/weapon/sword/single/cut/description/margin/stack/content/ability/help"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
-size_flags_horizontal = 10
-size_flags_stretch_ratio = 0.25
-theme_override_fonts/font = ExtResource("1_w1r1c")
-theme_override_font_sizes/font_size = 18
-theme_override_styles/normal = ExtResource("4_e8epa")
-text = "🗡"
-vertical_alignment = 1
-
-[node name="dot" type="Label" parent="margin/rock/left/weapon/sword/single/cut/description/margin/stack/content/ability/help"]
-custom_minimum_size = Vector2(10, 0)
-layout_mode = 2
-size_flags_stretch_ratio = 0.25
-theme_override_fonts/font = ExtResource("5_50ghp")
-theme_override_font_sizes/font_size = 18
-theme_override_styles/normal = SubResource("StyleBoxFlat_1chk7")
-text = "⋅"
-vertical_alignment = 1
-
-[node name="slot-2" type="Label" parent="margin/rock/left/weapon/sword/single/cut/description/margin/stack/content/ability/help"]
-custom_minimum_size = Vector2(10, 0)
-layout_mode = 2
-size_flags_horizontal = 2
+size_flags_horizontal = 6
 size_flags_stretch_ratio = 0.25
 theme_override_fonts/font = ExtResource("1_w1r1c")
 theme_override_font_sizes/font_size = 18
@@ -5259,48 +5370,6 @@ text = "🪃"
 vertical_alignment = 1
 
 [node name="dot" type="Label" parent="margin/rock/left/weapon/sword/single/poaching/description/margin/stack/content/ability/help"]
-custom_minimum_size = Vector2(10, 0)
-layout_mode = 2
-size_flags_stretch_ratio = 0.25
-theme_override_fonts/font = ExtResource("5_50ghp")
-theme_override_font_sizes/font_size = 18
-theme_override_styles/normal = SubResource("StyleBoxFlat_1chk7")
-text = "⋅"
-vertical_alignment = 1
-
-[node name="slot-2" type="Label" parent="margin/rock/left/weapon/sword/single/poaching/description/margin/stack/content/ability/help"]
-custom_minimum_size = Vector2(10, 0)
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_stretch_ratio = 0.25
-theme_override_fonts/font = ExtResource("1_w1r1c")
-theme_override_font_sizes/font_size = 18
-theme_override_styles/normal = ExtResource("4_e8epa")
-text = "⚔️"
-vertical_alignment = 1
-
-[node name="dot2" type="Label" parent="margin/rock/left/weapon/sword/single/poaching/description/margin/stack/content/ability/help"]
-custom_minimum_size = Vector2(10, 0)
-layout_mode = 2
-size_flags_stretch_ratio = 0.25
-theme_override_fonts/font = ExtResource("5_50ghp")
-theme_override_font_sizes/font_size = 18
-theme_override_styles/normal = SubResource("StyleBoxFlat_1chk7")
-text = "⋅"
-vertical_alignment = 1
-
-[node name="slot-4" type="Label" parent="margin/rock/left/weapon/sword/single/poaching/description/margin/stack/content/ability/help"]
-custom_minimum_size = Vector2(10, 0)
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_stretch_ratio = 0.25
-theme_override_fonts/font = ExtResource("1_w1r1c")
-theme_override_font_sizes/font_size = 18
-theme_override_styles/normal = ExtResource("4_e8epa")
-text = "🗡"
-vertical_alignment = 1
-
-[node name="dot3" type="Label" parent="margin/rock/left/weapon/sword/single/poaching/description/margin/stack/content/ability/help"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 size_flags_stretch_ratio = 0.25
@@ -5697,6 +5766,137 @@ show_percentage = false
 [node name="double" type="VBoxContainer" parent="margin/rock/left/weapon/sword"]
 layout_mode = 2
 
+[node name="piercing" type="Button" parent="margin/rock/left/weapon/sword/double"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="description" type="VBoxContainer" parent="margin/rock/left/weapon/sword/double/piercing"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="margin" type="MarginContainer" parent="margin/rock/left/weapon/sword/double/piercing/description"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 0
+
+[node name="stack" type="HBoxContainer" parent="margin/rock/left/weapon/sword/double/piercing/description/margin"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+
+[node name="view" type="Control" parent="margin/rock/left/weapon/sword/double/piercing/description/margin/stack"]
+custom_minimum_size = Vector2(42, 42)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+
+[node name="margin" type="MarginContainer" parent="margin/rock/left/weapon/sword/double/piercing/description/margin/stack/view"]
+layout_mode = 2
+offset_right = 42.0
+offset_bottom = 42.0
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 0
+
+[node name="slash-2" type="Label" parent="margin/rock/left/weapon/sword/double/piercing/description/margin/stack/view/margin"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_outline_color = Color(0.325479, 0.322641, 0.304519, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("6_w153l")
+theme_override_font_sizes/font_size = 28
+theme_override_styles/normal = SubResource("StyleBoxFlat_w1r1c")
+text = "|="
+
+[node name="slash-3" type="Label" parent="margin/rock/left/weapon/sword/double/piercing/description/margin/stack/view/margin"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/font_outline_color = Color(0.325479, 0.322641, 0.304519, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("6_w153l")
+theme_override_font_sizes/font_size = 28
+theme_override_styles/normal = SubResource("StyleBoxFlat_w1r1c")
+text = "-"
+
+[node name="content" type="HFlowContainer" parent="margin/rock/left/weapon/sword/double/piercing/description/margin/stack"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+
+[node name="details" type="HBoxContainer" parent="margin/rock/left/weapon/sword/double/piercing/description/margin/stack/content"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="margin/rock/left/weapon/sword/double/piercing/description/margin/stack/content/details"]
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 18
+text = "Протыкание"
+text_overrun_behavior = 3
+
+[node name="zone" type="Label" parent="margin/rock/left/weapon/sword/double/piercing/description/margin/stack/content/details"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "¦|¦"
+horizontal_alignment = 1
+
+[node name="ability" type="HBoxContainer" parent="margin/rock/left/weapon/sword/double/piercing/description/margin/stack/content"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_stretch_ratio = 0.25
+theme_override_constants/separation = 0
+
+[node name="help" type="HBoxContainer" parent="margin/rock/left/weapon/sword/double/piercing/description/margin/stack/content/ability"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_constants/separation = -3
+
+[node name="slot-1" type="Label" parent="margin/rock/left/weapon/sword/double/piercing/description/margin/stack/content/ability/help"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("1_w1r1c")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = ExtResource("4_e8epa")
+text = "⚔️"
+vertical_alignment = 1
+
+[node name="cost" type="HBoxContainer" parent="margin/rock/left/weapon/sword/double/piercing/description/margin/stack/content/ability"]
+layout_mode = 2
+
+[node name="ap" type="Label" parent="margin/rock/left/weapon/sword/double/piercing/description/margin/stack/content/ability/cost"]
+visible = false
+custom_minimum_size = Vector2(22, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "2"
+horizontal_alignment = 2
+
+[node name="no" type="Control" parent="margin/rock/left/weapon/sword/double/piercing/description/margin/stack/content/ability/cost"]
+custom_minimum_size = Vector2(22, 0)
+layout_mode = 2
+
+[node name="aura-cost-separator" type="ProgressBar" parent="margin/rock/left/weapon/sword/double/piercing/description"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+max_value = 5.0
+step = 1.0
+show_percentage = false
+
 [node name="cut" type="Button" parent="margin/rock/left/weapon/sword/double"]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
@@ -5815,33 +6015,12 @@ theme_override_constants/separation = -3
 [node name="slot-1" type="Label" parent="margin/rock/left/weapon/sword/double/cut/description/margin/stack/content/ability/help"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
-size_flags_horizontal = 10
+size_flags_horizontal = 6
 size_flags_stretch_ratio = 0.25
 theme_override_fonts/font = ExtResource("1_w1r1c")
 theme_override_font_sizes/font_size = 18
 theme_override_styles/normal = ExtResource("4_e8epa")
 text = "🗡"
-vertical_alignment = 1
-
-[node name="dot" type="Label" parent="margin/rock/left/weapon/sword/double/cut/description/margin/stack/content/ability/help"]
-custom_minimum_size = Vector2(10, 0)
-layout_mode = 2
-size_flags_stretch_ratio = 0.25
-theme_override_fonts/font = ExtResource("5_50ghp")
-theme_override_font_sizes/font_size = 18
-theme_override_styles/normal = SubResource("StyleBoxFlat_1chk7")
-text = "⋅"
-vertical_alignment = 1
-
-[node name="slot-2" type="Label" parent="margin/rock/left/weapon/sword/double/cut/description/margin/stack/content/ability/help"]
-custom_minimum_size = Vector2(10, 0)
-layout_mode = 2
-size_flags_horizontal = 2
-size_flags_stretch_ratio = 0.25
-theme_override_fonts/font = ExtResource("1_w1r1c")
-theme_override_font_sizes/font_size = 18
-theme_override_styles/normal = ExtResource("4_e8epa")
-text = "⚔️"
 vertical_alignment = 1
 
 [node name="cost" type="HBoxContainer" parent="margin/rock/left/weapon/sword/double/cut/description/margin/stack/content/ability"]
@@ -5974,48 +6153,6 @@ text = "⚔️"
 vertical_alignment = 1
 
 [node name="dot" type="Label" parent="margin/rock/left/weapon/sword/double/leeching/description/margin/stack/content/ability/help"]
-custom_minimum_size = Vector2(10, 0)
-layout_mode = 2
-size_flags_stretch_ratio = 0.25
-theme_override_fonts/font = ExtResource("5_50ghp")
-theme_override_font_sizes/font_size = 18
-theme_override_styles/normal = SubResource("StyleBoxFlat_1chk7")
-text = "⋅"
-vertical_alignment = 1
-
-[node name="slot-2" type="Label" parent="margin/rock/left/weapon/sword/double/leeching/description/margin/stack/content/ability/help"]
-custom_minimum_size = Vector2(10, 0)
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_stretch_ratio = 0.25
-theme_override_fonts/font = ExtResource("1_w1r1c")
-theme_override_font_sizes/font_size = 18
-theme_override_styles/normal = ExtResource("4_e8epa")
-text = "🗡"
-vertical_alignment = 1
-
-[node name="dot2" type="Label" parent="margin/rock/left/weapon/sword/double/leeching/description/margin/stack/content/ability/help"]
-custom_minimum_size = Vector2(10, 0)
-layout_mode = 2
-size_flags_stretch_ratio = 0.25
-theme_override_fonts/font = ExtResource("5_50ghp")
-theme_override_font_sizes/font_size = 18
-theme_override_styles/normal = SubResource("StyleBoxFlat_1chk7")
-text = "⋅"
-vertical_alignment = 1
-
-[node name="slot-4" type="Label" parent="margin/rock/left/weapon/sword/double/leeching/description/margin/stack/content/ability/help"]
-custom_minimum_size = Vector2(10, 0)
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_stretch_ratio = 0.25
-theme_override_fonts/font = ExtResource("1_w1r1c")
-theme_override_font_sizes/font_size = 18
-theme_override_styles/normal = ExtResource("4_e8epa")
-text = "⚔️"
-vertical_alignment = 1
-
-[node name="dot3" type="Label" parent="margin/rock/left/weapon/sword/double/leeching/description/margin/stack/content/ability/help"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 size_flags_stretch_ratio = 0.25
@@ -8259,7 +8396,6 @@ theme_override_constants/margin_bottom = 0
 [node name="o" type="Label" parent="margin/rock/right/weapon/sword/double/great-round/description/margin/stack/view/margin"]
 layout_mode = 2
 size_flags_horizontal = 0
-size_flags_vertical = 8
 theme_override_colors/font_color = Color(0.32549, 0.321569, 0.305882, 1)
 theme_override_colors/font_outline_color = Color(0.428127, 0.424747, 0.403116, 1)
 theme_override_constants/outline_size = 5
@@ -8271,6 +8407,7 @@ text = "O"
 [node name="sword" type="Label" parent="margin/rock/right/weapon/sword/double/great-round/description/margin/stack/view/margin"]
 layout_mode = 2
 size_flags_horizontal = 4
+size_flags_vertical = 8
 theme_override_colors/font_outline_color = Color(0.325479, 0.322641, 0.304519, 1)
 theme_override_constants/outline_size = 5
 theme_override_fonts/font = ExtResource("1_w1r1c")
