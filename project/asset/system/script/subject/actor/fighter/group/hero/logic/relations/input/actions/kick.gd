@@ -1,12 +1,9 @@
 extends Node
 
 func controls(hero: CharacterBody2D, meta: Dictionary) -> void:
+	var press: Node = meta.act.skills.press
+	# var act: Node = meta.act.skills.act
+	# act.book.hero = hero
+	meta.tools.plate = press
+	meta.tools.stomp = { "plate": press.stomp, "box": press.throw }
 	meta.board.set_value("kick", { "pressed": false, "toggled": false })
-	return
-	"""
-	var stomp: Dictionary = {
-		"plate": act.skills.act.strike,
-		"box": act.skills.act.bash
-	}
-	board.set_value("stomp", stomp)
-	"""
