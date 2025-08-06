@@ -8,5 +8,13 @@ func controls(hero: CharacterBody2D, fight: Node) -> void:
 
 	detector.zone.body_entered.connect(fight.zone.enter_range)
 	detector.zone.body_exited.connect(fight.zone.exit_range)
-	
+
+	var act: Node = hero.logic.processors.world.skills.act
+
+	detector.after_tile.body_entered.connect(act.lever.after_tile.enter_range)
+	detector.after_tile.body_exited.connect(act.lever.after_tile.exit_range)
+
+	detector.sided.body_entered.connect(act.book.sided.enter_range)
+	detector.sided.body_exited.connect(act.book.sided.exit_range)
+
 	hero.view.animation.effect.close_damage.connect(fight.close.hit)

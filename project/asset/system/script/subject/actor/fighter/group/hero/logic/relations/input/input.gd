@@ -12,7 +12,7 @@ func controls(hero: CharacterBody2D, input: Node) -> void:
 	print ("DEPLOYMENT GET")
 	var move: Node = input.movement.behavior.move
 	
-	#actions.control(hero, input)
+	actions.controls(hero, input)
 
 	move.moving.connect(hero.view.animation.move)
 	move.moving.connect(hero.view.ap.set_direction)
@@ -33,6 +33,7 @@ func controls(hero: CharacterBody2D, input: Node) -> void:
 	move.moving.connect(detectors.set_direction)
 	move.moving.connect(detectors.platforming.floors.set_direction)
 	
+	"""
 	input.actions.check.action.connect(func():
 		hero.view.animation.moves.set_fight_start("active")
 		hero.view.animation.moves.set_fighting("hands"))
@@ -43,6 +44,7 @@ func controls(hero: CharacterBody2D, input: Node) -> void:
 	input.actions.check.kick.connect(func():
 		hero.view.animation.moves.set_fight_start("active")
 		hero.view.animation.moves.set_fighting("legs"))
+	"""
 
 	# hero.logic.processors.environment
 	# input.directing.connect(environment.surface.tracking.map.set_direction)

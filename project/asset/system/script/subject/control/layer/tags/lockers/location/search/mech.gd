@@ -7,8 +7,8 @@ func set_tile(static_mech: Dictionary) -> void:
 	Tile.paint(search.execute, static_mech)
 
 func set_mechs(tag: Vector2i) -> void:
-	print("LOG: ", search.storage.logic.connector)
-	print("TAG: ", tag)
+	# print("LOG: ", search.storage.logic.connector)
+	# print("TAG: ", tag)
 	for tile in search.storage.logic.connector[tag]:
 		var mech: Dictionary = search.storage.logic.machine[tile]
 		match mech.type:

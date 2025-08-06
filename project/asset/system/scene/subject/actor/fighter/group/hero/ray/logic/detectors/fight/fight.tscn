@@ -1,14 +1,25 @@
-[gd_scene load_steps=10 format=3 uid="uid://dnymdlflme67b"]
+[gd_scene load_steps=15 format=3 uid="uid://dnymdlflme67b"]
 
 [ext_resource type="Script" uid="uid://dae033qb76xqu" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/detectors/fight/fight.gd" id="1_6qsty"]
 [ext_resource type="Script" uid="uid://dom6yvvb5krlc" path="res://asset/system/script/subject/actor/fighter/hitbox/hitbox.gd" id="2_80kk7"]
 [ext_resource type="Script" uid="uid://dyappsdv3nhlg" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/detectors/fight/direction.gd" id="4_7eekj"]
 [ext_resource type="Shape2D" uid="uid://cijemnhgm8sg" path="res://asset/resource/engine/internal/shape/geometry/interactables/act/pull.tres" id="5_4uyev"]
+[ext_resource type="Shape2D" uid="uid://ckug03wa1l8us" path="res://asset/resource/engine/internal/shape/geometry/characters/fight/fireplace.tres" id="5_6xdbm"]
 [ext_resource type="Shape2D" uid="uid://v38hhour14va" path="res://asset/resource/engine/internal/shape/geometry/characters/music.tres" id="5_qjjsd"]
+[ext_resource type="Shape2D" uid="uid://wkstsrw5kvvh" path="res://asset/resource/engine/internal/shape/geometry/characters/fight/straight.tres" id="5_xnygs"]
 [ext_resource type="Script" uid="uid://dxaegufjxvi75" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/detectors/fight/stuck.gd" id="6_qjjsd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8k0dl"]
 size = Vector2(45, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_210ea"]
+size = Vector2(64, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xnygs"]
+size = Vector2(120, 20)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qjjsd"]
+radius = 120.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sedkw"]
 size = Vector2(32, 20)
@@ -20,6 +31,7 @@ size = Vector2(26, 26)
 script = ExtResource("1_6qsty")
 
 [node name="hitbox" type="StaticBody2D" parent="."]
+visible = false
 collision_layer = 4194304
 collision_mask = 0
 script = ExtResource("2_80kk7")
@@ -30,6 +42,7 @@ shape = SubResource("RectangleShape2D_8k0dl")
 debug_color = Color(0.965055, 1.92523e-07, 0.489026, 0.42)
 
 [node name="close" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 8
 script = ExtResource("4_7eekj")
@@ -37,7 +50,54 @@ script = ExtResource("4_7eekj")
 [node name="shape" type="CollisionShape2D" parent="close"]
 shape = ExtResource("5_4uyev")
 
+[node name="after_tile" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+script = ExtResource("4_7eekj")
+distance = Vector2i(94, 90)
+
+[node name="shape" type="CollisionShape2D" parent="after_tile"]
+shape = SubResource("RectangleShape2D_210ea")
+
+[node name="straight" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 8
+script = ExtResource("4_7eekj")
+distance = Vector2i(94, 90)
+
+[node name="shape" type="CollisionShape2D" parent="straight"]
+position = Vector2(0, -79.5)
+shape = ExtResource("5_xnygs")
+
+[node name="sided" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 8
+
+[node name="shape" type="CollisionShape2D" parent="sided"]
+shape = SubResource("RectangleShape2D_xnygs")
+
+[node name="fireplace" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 8
+script = ExtResource("4_7eekj")
+distance = Vector2i(94, 90)
+
+[node name="shape" type="CollisionShape2D" parent="fireplace"]
+shape = ExtResource("5_6xdbm")
+
+[node name="circle" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 8
+
+[node name="shape" type="CollisionShape2D" parent="circle"]
+shape = SubResource("CircleShape2D_qjjsd")
+
 [node name="zone" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 4
 
@@ -45,6 +105,7 @@ collision_mask = 4
 shape = ExtResource("5_qjjsd")
 
 [node name="stuck" type="Node2D" parent="."]
+visible = false
 script = ExtResource("6_qjjsd")
 
 [node name="x" type="ShapeCast2D" parent="stuck"]

@@ -1,9 +1,7 @@
 extends Node
 
-func controls(hero: CharacterBody2D, board: BehaviorBlackboard, act: Node) -> void:
-	var strike: Dictionary = {
-		"lever": act.skills.act.strike,
-		"book": act.skills.act.bash
-	}
-	board.set_value("lever", act.skills.act)
-	board.set_value("strike", strike)
+func controls(hero: CharacterBody2D, meta: Dictionary) -> void:
+	var act: Node = meta.act.skills.act
+	meta.tools.lever = act
+	meta.tools.strike = { "lever": act.lever, "book": act.book }
+	meta.board.set_value("punch", { "pressed": false, "toggled": false })
