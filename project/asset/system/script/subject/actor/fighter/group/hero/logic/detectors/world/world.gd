@@ -3,6 +3,7 @@ extends Node2D
 @onready var skills: Node2D = $skills
 @onready var ability: Node2D = $ability
 @onready var unique: Area2D = $unique
+@onready var book: ShapeCast2D = $book
 
 func set_direction(direction: Vector2i) -> void:
 	skills.set_direction(direction)

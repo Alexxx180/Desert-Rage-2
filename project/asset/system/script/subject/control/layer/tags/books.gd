@@ -13,5 +13,7 @@ func setup(tags: TileMapLayer, execute: TileMapLayer) -> void:
 		var manual: String
 		match tile.atlas:
 			Vector2i(2, 1): manual = tags.manual.pages[message]
-			_: manual = tags.manual.books[tile.atlas][message]
+			_: 
+				if (tags.manual.books[tile.atlas].size() > 0):
+					manual = tags.manual.books[tile.atlas][0]#[message]
 		execute.books[tile.coords] = [tile.atlas, manual]

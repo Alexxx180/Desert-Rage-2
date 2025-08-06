@@ -1,10 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://drenendoaby3e"]
+[gd_scene load_steps=7 format=3 uid="uid://drenendoaby3e"]
 
 [ext_resource type="Script" uid="uid://bxiq1tuyhthv3" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/detectors/world/world.gd" id="1_takck"]
 [ext_resource type="PackedScene" uid="uid://bocjcbuk66c25" path="res://asset/system/scene/subject/actor/fighter/group/hero/base/logic/detectors/world/skills.tscn" id="2_atcx5"]
 [ext_resource type="PackedScene" uid="uid://uyqui5q40f3c" path="res://asset/system/scene/subject/actor/fighter/group/hero/ray/logic/detectors/world/ability.tscn" id="3_hcvih"]
 [ext_resource type="Shape2D" uid="uid://i0icy78wfk8i" path="res://asset/resource/engine/internal/shape/geometry/characters/character/levels.tres" id="4_1jmey"]
 [ext_resource type="Script" uid="uid://cwijybsv8qfx1" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/detectors/world/skills/skill.gd" id="4_p60fr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x3h6s"]
+size = Vector2(32, 26)
 
 [node name="world" type="Node2D"]
 script = ExtResource("1_takck")
@@ -21,3 +24,9 @@ script = ExtResource("4_p60fr")
 
 [node name="geometry" type="CollisionShape2D" parent="unique"]
 shape = ExtResource("4_1jmey")
+
+[node name="book" type="ShapeCast2D" parent="."]
+shape = SubResource("RectangleShape2D_x3h6s")
+target_position = Vector2(0, 0)
+max_results = 1
+collision_mask = 2097152
