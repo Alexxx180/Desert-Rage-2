@@ -18,8 +18,7 @@ const feedback: int = 2
 var center: Vector2:
 	get: return position + half
 
-func _ready() -> void:
-	logic.relations.controls(self)
+func _ready() -> void: logic.relations.controls(self)
 
 func compare_height(hero: CharacterBody2D) -> bool:
 	return logic.processors.movement.seat.compare(hero)

@@ -16,7 +16,7 @@ func start_forward(box: CharacterBody2D) -> void:
 		velocity.weight += box.weight
 
 func stop_forward(box: CharacterBody2D) -> void:
-	boxes.remove(box)
+	boxes.erase(box)
 	if _grab:
 		box.logic.processors.release_box(hero)
 		velocity.weight -= box.weight

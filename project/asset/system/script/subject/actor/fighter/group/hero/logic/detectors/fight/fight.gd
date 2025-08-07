@@ -6,6 +6,7 @@ extends Node2D
 @onready var straight: Area2D = $straight
 @onready var fireplace: Area2D = $fireplace
 @onready var circle: Area2D = $circle
+@onready var small_circle: Area2D = $small_circle
 @onready var sided: Area2D = $sided
 
 @onready var zone: Area2D = $zone

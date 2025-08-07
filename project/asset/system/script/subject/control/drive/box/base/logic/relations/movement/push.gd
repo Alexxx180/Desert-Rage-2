@@ -16,6 +16,7 @@ func _release(hero: CharacterBody2D) -> void:
 
 func controls(box: CharacterBody2D, push: Node) -> void:
 	_push = push
+	_push.box = box
 	var processor: Node = box.logic.processors
 	processor.grab.connect(_grab)
 	processor.release.connect(_release)

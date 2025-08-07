@@ -10,3 +10,8 @@ script = ExtResource("1_336w2")
 [node name="velocity" parent="." instance=ExtResource("3_k5jlt")]
 
 [node name="forward" parent="." instance=ExtResource("2_jc7ce")]
+
+[node name="duration" type="Timer" parent="."]
+wait_time = 0.5
+
+[connection signal="timeout" from="duration" to="." method="throw_velocity_stop"]

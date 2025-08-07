@@ -2,14 +2,11 @@ extends Node
 
 const DAMAGE: int = 5
 
-var box: Area2D:
-	get: return _hero.logic.detectors.
-
-var _hero: CharacterBody2D
-var hero: CharacterBody2D:
-	set(value):
-		_hero = value
+@onready var press: Node = get_parent()
+var is_near: bool:
+	get: return press.standing
+var small_circle: FightRange = FightRange.new()
 
 func take_effect() -> void:
-	after_tile.hit(DAMAGE)
+	small_circle.hit(DAMAGE)
 	# box logic
