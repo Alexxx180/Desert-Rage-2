@@ -1,6 +1,6 @@
 extends BehaviorAction
 
-enum SkillBank { PUNCH = 0, KICK = 1, FIRE = 2, WHIP = 3, PUDDLE = 4, SPARK = 5 }
+# enum SkillBank { PUNCH = 0, KICK = 1, FIRE = 2, WHIP = 3, PUDDLE = 4, SPARK = 5 }
 
 signal skill_two()
 signal action()

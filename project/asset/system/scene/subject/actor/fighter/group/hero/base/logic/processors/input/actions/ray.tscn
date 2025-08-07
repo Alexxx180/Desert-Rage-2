@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://b51o5v35cj5m8"]
+[gd_scene load_steps=20 format=3 uid="uid://b51o5v35cj5m8"]
 
 [ext_resource type="Script" uid="uid://dexewxmovq81m" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/processors/ui/input/actions/actions.gd" id="1_7ccas"]
 [ext_resource type="Script" uid="uid://b2eukqcbuq556" path="res://addons/godot-behavior-tree-plugin/selector/selector.gd" id="3_qgc7s"]
@@ -8,11 +8,17 @@
 [ext_resource type="Script" uid="uid://cmwixa7o3lh67" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/processors/ui/input/actions/skills/punch/fight/combo/single.gd" id="7_eiwwh"]
 [ext_resource type="Script" uid="uid://v04m7nyj0wkk" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/processors/ui/input/actions/skills/punch/fight/tools/lever.gd" id="8_lvj14"]
 [ext_resource type="Script" uid="uid://clesi76l5ylfx" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/processors/ui/input/actions/skills/punch/fight/tools/book.gd" id="9_47iya"]
+[ext_resource type="Script" uid="uid://ccjxoye3nkkmn" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/processors/ui/input/actions/skills/combo/create/punch.gd" id="9_ln7tu"]
 [ext_resource type="Script" uid="uid://rtrqbcmp4ykj" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/processors/ui/input/actions/skills/punch/fight/tools/box.gd" id="10_nti5y"]
+[ext_resource type="Script" uid="uid://b500umay7t7sf" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/processors/ui/input/actions/skills/punch/fight/combo/double/punch.gd" id="10_w0q1x"]
 [ext_resource type="Script" uid="uid://br65d4ob8ahym" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/processors/ui/input/actions/skills/kick/fight/tools/run.gd" id="11_mqh2g"]
+[ext_resource type="Script" uid="uid://cjusbmt7w00rn" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/processors/ui/input/actions/skills/punch/fight/combo/triple/lunge.gd" id="11_obw4v"]
 [ext_resource type="Script" uid="uid://bfqan27fnjwjy" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/processors/ui/input/actions/skills/kick/fight/tools/plate.gd" id="11_xqc1p"]
 [ext_resource type="Script" uid="uid://b3s7ecblvgmdv" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/processors/ui/input/actions/skills/kick/fight/tools/box.gd" id="12_qgc7s"]
-[ext_resource type="Script" uid="uid://d142f2qhty4op" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/processors/ui/input/actions/skills/na.gd" id="12_xqc1p"]
+[ext_resource type="Script" uid="uid://d142f2qhty4op" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/processors/ui/input/actions/skills/combo/na.gd" id="12_xqc1p"]
+[ext_resource type="Script" uid="uid://c88ykil8i6ym8" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/processors/ui/input/actions/skills/combo/create/kick.gd" id="16_eiwwh"]
+[ext_resource type="Script" uid="uid://bi377lf5ckrp5" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/processors/ui/input/actions/skills/kick/fight/combo/triple/spit-kick.gd" id="17_47iya"]
+[ext_resource type="Script" uid="uid://d2hkugmx82we3" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/processors/ui/input/actions/skills/kick/fight/combo/fourth/back-spit.gd" id="17_lvj14"]
 
 [node name="actions" type="Node"]
 script = ExtResource("1_7ccas")
@@ -54,9 +60,29 @@ metadata/_custom_type_script = "uid://c28asuataqv3u"
 script = ExtResource("3_qgc7s")
 metadata/_custom_type_script = "uid://b2eukqcbuq556"
 
+[node name="tools" type="Node" parent="skills/equipment/melee/hands/slots/punch/fight"]
+script = ExtResource("3_qgc7s")
+metadata/_custom_type_script = "uid://b2eukqcbuq556"
+
+[node name="lever" type="Node" parent="skills/equipment/melee/hands/slots/punch/fight/tools"]
+script = ExtResource("8_lvj14")
+metadata/_custom_type_script = "uid://c28asuataqv3u"
+
+[node name="book" type="Node" parent="skills/equipment/melee/hands/slots/punch/fight/tools"]
+script = ExtResource("9_47iya")
+metadata/_custom_type_script = "uid://c28asuataqv3u"
+
+[node name="box" type="Node" parent="skills/equipment/melee/hands/slots/punch/fight/tools"]
+script = ExtResource("10_nti5y")
+metadata/_custom_type_script = "uid://c28asuataqv3u"
+
 [node name="combo" type="Node" parent="skills/equipment/melee/hands/slots/punch/fight"]
 script = ExtResource("3_qgc7s")
 metadata/_custom_type_script = "uid://b2eukqcbuq556"
+
+[node name="create" type="Node" parent="skills/equipment/melee/hands/slots/punch/fight/combo"]
+script = ExtResource("9_ln7tu")
+metadata/_custom_type_script = "uid://c28asuataqv3u"
 
 [node name="double" type="Node" parent="skills/equipment/melee/hands/slots/punch/fight/combo"]
 script = ExtResource("3_qgc7s")
@@ -71,7 +97,7 @@ script = ExtResource("4_ln7tu")
 metadata/_custom_type_script = "uid://xyxwk1uhmmqa"
 
 [node name="action" type="Node" parent="skills/equipment/melee/hands/slots/punch/fight/combo/double/punch/sequence"]
-script = ExtResource("12_xqc1p")
+script = ExtResource("10_w0q1x")
 metadata/_custom_type_script = "uid://c28asuataqv3u"
 
 [node name="triple" type="Node" parent="skills/equipment/melee/hands/slots/punch/fight/combo/double/punch/sequence"]
@@ -79,7 +105,7 @@ script = ExtResource("3_qgc7s")
 metadata/_custom_type_script = "uid://b2eukqcbuq556"
 
 [node name="lunge" type="Node" parent="skills/equipment/melee/hands/slots/punch/fight/combo/double/punch/sequence/triple"]
-script = ExtResource("12_xqc1p")
+script = ExtResource("11_obw4v")
 metadata/_custom_type_script = "uid://c28asuataqv3u"
 
 [node name="complete" type="Node" parent="skills/equipment/melee/hands/slots/punch/fight/combo/double/punch"]
@@ -98,22 +124,6 @@ metadata/_custom_type_script = "uid://c28asuataqv3u"
 script = ExtResource("7_eiwwh")
 metadata/_custom_type_script = "uid://c28asuataqv3u"
 
-[node name="tools" type="Node" parent="skills/equipment/melee/hands/slots/punch/fight"]
-script = ExtResource("3_qgc7s")
-metadata/_custom_type_script = "uid://b2eukqcbuq556"
-
-[node name="lever" type="Node" parent="skills/equipment/melee/hands/slots/punch/fight/tools"]
-script = ExtResource("8_lvj14")
-metadata/_custom_type_script = "uid://c28asuataqv3u"
-
-[node name="book" type="Node" parent="skills/equipment/melee/hands/slots/punch/fight/tools"]
-script = ExtResource("9_47iya")
-metadata/_custom_type_script = "uid://c28asuataqv3u"
-
-[node name="box" type="Node" parent="skills/equipment/melee/hands/slots/punch/fight/tools"]
-script = ExtResource("10_nti5y")
-metadata/_custom_type_script = "uid://c28asuataqv3u"
-
 [node name="kick" type="Node" parent="skills/equipment/melee/hands/slots"]
 script = ExtResource("4_ln7tu")
 metadata/_custom_type_script = "uid://xyxwk1uhmmqa"
@@ -125,30 +135,6 @@ metadata/_custom_type_script = "uid://c28asuataqv3u"
 [node name="fight" type="Node" parent="skills/equipment/melee/hands/slots/kick"]
 script = ExtResource("3_qgc7s")
 metadata/_custom_type_script = "uid://b2eukqcbuq556"
-
-[node name="combo" type="Node" parent="skills/equipment/melee/hands/slots/kick/fight"]
-script = ExtResource("3_qgc7s")
-metadata/_custom_type_script = "uid://b2eukqcbuq556"
-
-[node name="triple" type="Node" parent="skills/equipment/melee/hands/slots/kick/fight/combo"]
-script = ExtResource("3_qgc7s")
-metadata/_custom_type_script = "uid://b2eukqcbuq556"
-
-[node name="spit-kick" type="Node" parent="skills/equipment/melee/hands/slots/kick/fight/combo/triple"]
-script = ExtResource("12_xqc1p")
-metadata/_custom_type_script = "uid://c28asuataqv3u"
-
-[node name="fourth" type="Node" parent="skills/equipment/melee/hands/slots/kick/fight/combo"]
-script = ExtResource("3_qgc7s")
-metadata/_custom_type_script = "uid://b2eukqcbuq556"
-
-[node name="back-spit" type="Node" parent="skills/equipment/melee/hands/slots/kick/fight/combo/fourth"]
-script = ExtResource("12_xqc1p")
-metadata/_custom_type_script = "uid://c28asuataqv3u"
-
-[node name="single" type="Node" parent="skills/equipment/melee/hands/slots/kick/fight/combo"]
-script = ExtResource("12_xqc1p")
-metadata/_custom_type_script = "uid://c28asuataqv3u"
 
 [node name="tools" type="Node" parent="skills/equipment/melee/hands/slots/kick/fight"]
 script = ExtResource("3_qgc7s")
@@ -163,15 +149,43 @@ script = ExtResource("12_qgc7s")
 metadata/_custom_type_script = "uid://c28asuataqv3u"
 
 [node name="sand" type="Node" parent="skills/equipment/melee/hands/slots/kick/fight/tools"]
-script = ExtResource("5_w0q1x")
+script = ExtResource("12_xqc1p")
 metadata/_custom_type_script = "uid://c28asuataqv3u"
 
 [node name="jump" type="Node" parent="skills/equipment/melee/hands/slots/kick/fight/tools"]
-script = ExtResource("5_w0q1x")
+script = ExtResource("12_xqc1p")
 metadata/_custom_type_script = "uid://c28asuataqv3u"
 
 [node name="run" type="Node" parent="skills/equipment/melee/hands/slots/kick/fight/tools"]
-script = ExtResource("11_mqh2g")
+script = ExtResource("12_xqc1p")
+metadata/_custom_type_script = "uid://c28asuataqv3u"
+
+[node name="combo" type="Node" parent="skills/equipment/melee/hands/slots/kick/fight"]
+script = ExtResource("3_qgc7s")
+metadata/_custom_type_script = "uid://b2eukqcbuq556"
+
+[node name="create" type="Node" parent="skills/equipment/melee/hands/slots/kick/fight/combo"]
+script = ExtResource("16_eiwwh")
+metadata/_custom_type_script = "uid://c28asuataqv3u"
+
+[node name="triple" type="Node" parent="skills/equipment/melee/hands/slots/kick/fight/combo"]
+script = ExtResource("3_qgc7s")
+metadata/_custom_type_script = "uid://b2eukqcbuq556"
+
+[node name="spit-kick" type="Node" parent="skills/equipment/melee/hands/slots/kick/fight/combo/triple"]
+script = ExtResource("17_47iya")
+metadata/_custom_type_script = "uid://c28asuataqv3u"
+
+[node name="fourth" type="Node" parent="skills/equipment/melee/hands/slots/kick/fight/combo"]
+script = ExtResource("3_qgc7s")
+metadata/_custom_type_script = "uid://b2eukqcbuq556"
+
+[node name="back-spit" type="Node" parent="skills/equipment/melee/hands/slots/kick/fight/combo/fourth"]
+script = ExtResource("17_lvj14")
+metadata/_custom_type_script = "uid://c28asuataqv3u"
+
+[node name="single" type="Node" parent="skills/equipment/melee/hands/slots/kick/fight/combo"]
+script = ExtResource("7_eiwwh")
 metadata/_custom_type_script = "uid://c28asuataqv3u"
 
 [node name="fire" type="Node" parent="skills/equipment/melee/hands/slots"]

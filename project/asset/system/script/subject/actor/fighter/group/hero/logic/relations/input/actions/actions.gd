@@ -4,12 +4,17 @@ extends Node
 @onready var kick: Node = $kick
 @onready var fire: Node = $fire
 @onready var whip: Node = $whip
+@onready var combo: Node = $combo
 
 func controls(hero: CharacterBody2D, input: Node) -> void:
 	var act: Node = hero.logic.processors.world
-	input.board.set_value("combo", {})
-	var meta: Dictionary = {
-		"tools": {}, "board": input.board, "act": act }
-	for skill in [punch, kick, fire, whip]:
+	var meta: Dictionary = { "tools": {},
+		"combo": {}, "input": input, "act": act }
+
+	for skill in [punch, kick, fire, whip, combo]:
 		skill.controls(hero, meta)
-	input.board.set_value("tools", meta.tools)
+
+	for key in ["tools", "combo"]:
+		input.board.set_value(key, meta[key])
+	
+	input.combo.timeout.connect(input.reset_combo)

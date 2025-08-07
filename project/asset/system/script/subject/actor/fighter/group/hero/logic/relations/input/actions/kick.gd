@@ -6,4 +6,4 @@ func controls(hero: CharacterBody2D, meta: Dictionary) -> void:
 	# act.book.hero = hero
 	# meta.tools.plate = press
 	meta.tools.stomp = { "plate": press.stomp, "box": press.throw }
-	meta.board.set_value("kick", { "pressed": false, "toggled": false })
+	meta.input.board.set_value("kick", { "pressed": false, "toggled": false })
