@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://chvprd662tx56"]
+[gd_scene load_steps=15 format=3 uid="uid://chvprd662tx56"]
 
 [ext_resource type="Script" uid="uid://cx2ai5ggi1bfv" path="res://asset/system/script/subject/actor/fighter/enemy/enemy.gd" id="1_v86le"]
 [ext_resource type="PackedScene" uid="uid://betuc6opsy7to" path="res://asset/system/scene/subject/actor/fighter/enemy/asset/eye-seeker/view.tscn" id="2_8d7r5"]
@@ -15,6 +15,9 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1whyy"]
 size = Vector2(60, 9)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iv0jw"]
+size = Vector2(64, 49)
 
 [node name="eye-seeker" type="CharacterBody2D" groups=["enemy"]]
 collision_layer = 4
@@ -37,6 +40,15 @@ script = ExtResource("4_yicoo")
 [node name="fight" parent="logic/detector" instance=ExtResource("3_tlpbn")]
 
 [node name="path" parent="logic/detector" instance=ExtResource("6_u88kt")]
+
+[node name="box" type="Area2D" parent="logic/detector"]
+collision_layer = 0
+collision_mask = 16
+
+[node name="geometry" type="CollisionShape2D" parent="logic/detector/box"]
+position = Vector2(0, 9.5)
+shape = SubResource("RectangleShape2D_iv0jw")
+debug_color = Color(0.628918, 0.427086, 0.81446, 0.42)
 
 [node name="processor" type="Node" parent="logic"]
 script = ExtResource("7_xh31r")

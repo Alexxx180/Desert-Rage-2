@@ -5,6 +5,10 @@ extends Node
 @onready var timer: Timer = $timer
 @onready var burn: Timer = $burn
 
+func thrown(box: CharacterBody2D) -> void:
+	if box.logic.processors.movement.push.flying:
+		hit(10)
+
 func hit(amount: int = 1) -> void:
 	if points.alive and not _apply_damage(amount): points.hit()
 
