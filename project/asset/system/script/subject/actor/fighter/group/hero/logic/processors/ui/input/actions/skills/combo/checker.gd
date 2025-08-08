@@ -2,22 +2,22 @@ extends RefCounted
 
 class_name ComboBasis
 
-func check_combo(mark: Tick, slots: Array[int]) -> bool:
+func check_combo(mark: Tick, slots: Array) -> bool:
 	var combo: Dictionary = mark.blackboard.get_value("combo")
 	var border: int = slots.size()
 	if combo.query.size() < border: return false
 
-	const n: int = -1
-
 	var got: bool = true
-	for i in range(border - 1, n, n):
-		got = got and combo.query[i] == slots[i]
-		print("SLOT: ", i, " - ", combo.query[i], " = ", slots[i])
+	var count: int = combo.query.size()
+	var offset: int = count - border
+	for i in range(0, border):
+		var j: int = offset + i
+		got = got and combo.query[j] == slots[i]
+		print("SLOT: ", i, " - ", combo.query[j], " = ", slots[i])
 
 	Skills.view_actions(combo.query)
-	print("SLOTS: ", slots)
-	if got:
-		# 
+	# print("SLOTS: ", slots)
+	if got: # 
 		combo.completed = true
 		
 	return got
@@ -32,9 +32,11 @@ func tick(mark: Tick, act: BehaviorAction) -> int:
 static func standalone(mark: Tick, slot: int) -> int:
 	var combo: Dictionary = mark.blackboard.get_value("combo")
 	
-	combo.query.push_front(slot)
+	#combo.query.push_front(slot)
+	combo.query.push_back(slot)
 	if combo.query.size() > combo.max:
 		combo.query.pop_front()
+		#combo.query.pop_back()
 	combo.timer.start()
 	combo.completed = false
 	Skills.view_actions(combo.query)
