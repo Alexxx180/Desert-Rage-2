@@ -13,7 +13,7 @@ function Restore-FrameSheets([string] $sheet) {
 	if (Get-ChildItem $temp) { Remove-Item $temp }
 }
 
-[int] $export = 256
+[int] $export = 128
 [string] $project = Get-YankLocationString "Desert-Rage-2"
 $project += "/project/asset/resource/media/images/actors/player"
 $word = 'frames'
