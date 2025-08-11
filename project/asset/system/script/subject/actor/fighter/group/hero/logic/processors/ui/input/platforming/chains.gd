@@ -3,6 +3,7 @@ extends Node
 signal chained(state: bool)
 
 var input: Node
+var view: Node2D
 var velocity: Node
 var above: bool = false
 var climbing: bool = false
@@ -12,8 +13,9 @@ var spring: Node:
 func _catch_ledge() -> void:
 	input.modes.select(true)
 	chained.emit(true)
-	#velocity.forget_velocity()
 	input.gravity.turn_walls_collision(false)
+	view.shadow.hang()
+	view.animation.moves.set_environment("chains")
 
 func _decide_moving() -> void:
 	if above and climbing: _catch_ledge()
@@ -39,3 +41,5 @@ func climbing_stop(_execute: TileMapLayer) -> void:
 		input.modes.select(false)
 		input.gravity.turn_walls_collision(true)
 		chained.emit(false)
+		view.shadow.stand()
+		view.animation.moves.set_environment("ground")

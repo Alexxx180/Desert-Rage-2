@@ -18,9 +18,13 @@ func set_walk_speed(mach: int) -> void: tree.request("go", go[min(mach - 1, 1)])
 
 func set_move_action(stand: String) -> void: tree.request("move", stand)
 
-func set_base_stance(stand: String) -> void: tree.request("passive", stand)
+func set_base_stance(stand: String) -> void:
+	for pose in ["hang", "stand"]: tree.request(pose, stand)
 
-func set_aggressive(stand: String) -> void: tree.request("character", stand)
+func set_aggressive(stand: String) -> void:
+	for env in ["ground", "chains"]: tree.request(env, stand)
+
+func set_environment(stand: String) -> void: tree.request("environment", stand)
 
 func set_fighting(stand: String) -> void: combo.fight_body(stand)
 

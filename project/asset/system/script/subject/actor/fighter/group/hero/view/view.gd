@@ -7,6 +7,7 @@ enum { BEHIND = 60, ONSCENE = 255 }
 @export var is_hero: bool = false
 
 @onready var profile: AnimatedSprite2D = $profile
+@onready var shadow: Sprite2D = $shadow
 @onready var animation: AnimationTree = $animation
 @onready var ap: TextureProgressBar = $influence
 @onready var whip: Sprite2D = $whip
