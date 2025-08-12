@@ -19,7 +19,7 @@ func blend(caption: String) -> void:
 func direct_animations() -> Array[String]:
 	return ["idle-1", "walk", "run", "jump", "kick_0", "kick_1",
 		"punch_0", "punch_1", "whip_dash", "hang-move", "hang-idle",
-		"bash", "stomp"]
+		"bash", "stomp", "fire"]
 
 func direct() -> void: for animation in direct_animations(): blend(animation)
 

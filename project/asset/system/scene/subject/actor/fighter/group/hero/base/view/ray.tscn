@@ -1,4 +1,4 @@
-[gd_scene load_steps=1064 format=3 uid="uid://csra3penxclqe"]
+[gd_scene load_steps=1080 format=3 uid="uid://csra3penxclqe"]
 
 [ext_resource type="Script" uid="uid://djhgknvw72ya6" path="res://asset/system/script/subject/actor/fighter/group/hero/view/view.gd" id="1_02nce"]
 [ext_resource type="PackedScene" uid="uid://c136xgt1v5vbl" path="res://asset/system/scene/subject/actor/fighter/group/hero/base/view/base/shadow.tscn" id="2_7whrg"]
@@ -6074,7 +6074,48 @@ input_1/auto_advance = false
 input_1/break_loop_at_end = false
 input_1/reset = true
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_h840q"]
+animation = &"ray/fire_left"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_se3rh"]
+animation = &"ray/fire_backward"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_npj5t"]
+animation = &"ray/fire_forward"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_fx5o4"]
+animation = &"ray/fire_right"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ynd6q"]
+animation = &"ray/fire_backward_left"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0fsm4"]
+animation = &"ray/fire_backward_right"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_dpqdm"]
+animation = &"ray/fire_forward_left"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7e0gf"]
+animation = &"ray/bash_forward_right"
+
 [sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_4xu38"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_h840q")
+blend_point_0/pos = Vector2(-1, 0)
+blend_point_1/node = SubResource("AnimationNodeAnimation_se3rh")
+blend_point_1/pos = Vector2(0, 1)
+blend_point_2/node = SubResource("AnimationNodeAnimation_npj5t")
+blend_point_2/pos = Vector2(0, -1)
+blend_point_3/node = SubResource("AnimationNodeAnimation_fx5o4")
+blend_point_3/pos = Vector2(1, 0)
+blend_point_4/node = SubResource("AnimationNodeAnimation_ynd6q")
+blend_point_4/pos = Vector2(-0.5, 0.5)
+blend_point_5/node = SubResource("AnimationNodeAnimation_0fsm4")
+blend_point_5/pos = Vector2(0.5, 0.5)
+blend_point_6/node = SubResource("AnimationNodeAnimation_dpqdm")
+blend_point_6/pos = Vector2(-0.5, -0.5)
+blend_point_7/node = SubResource("AnimationNodeAnimation_7e0gf")
+blend_point_7/pos = Vector2(0.5, -0.5)
+blend_mode = 1
 
 [sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_r3aat"]
 input_0/name = "walk"
@@ -6574,7 +6615,7 @@ blend_point_3/pos = Vector2(0, -1)
 blend_mode = 1
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_38alu"]
-graph_offset = Vector2(22.7442, -474.915)
+graph_offset = Vector2(-77.6784, -925.805)
 nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_ehyuf")
 nodes/TimeScale/position = Vector2(-680, -600)
 nodes/active/node = SubResource("AnimationNodeTransition_wec0r")
@@ -9471,7 +9512,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_jsq44"]
 resource_name = "stomp_forward"
-length = 0.25
+length = 0.35
 step = 0.025
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -9492,10 +9533,10 @@ tracks/1/path = NodePath("profile:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.0666667, 0.133333, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.275, 0.325),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3]
+"values": [0, 1, 2, 2, 3]
 }
 tracks/2/type = "method"
 tracks/2/imported = false
@@ -9504,7 +9545,7 @@ tracks/2/path = NodePath("animation/moves")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0.25),
+"times": PackedFloat32Array(0.35),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
@@ -9557,7 +9598,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_uvi1r"]
 resource_name = "stomp_left"
-length = 0.25
+length = 0.35
 step = 0.025
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -9578,10 +9619,10 @@ tracks/1/path = NodePath("profile:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.0666667, 0.133333, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.275, 0.325),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3]
+"values": [0, 1, 2, 2, 3]
 }
 tracks/2/type = "method"
 tracks/2/imported = false
@@ -9590,7 +9631,7 @@ tracks/2/path = NodePath("animation/moves")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0.25),
+"times": PackedFloat32Array(0.35),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
@@ -9600,7 +9641,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_sncgc"]
 resource_name = "stomp_right"
-length = 0.25
+length = 0.35
 step = 0.025
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -9621,10 +9662,10 @@ tracks/1/path = NodePath("profile:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.0666667, 0.133333, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.275, 0.325),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3]
+"values": [0, 1, 2, 2, 3]
 }
 tracks/2/type = "method"
 tracks/2/imported = false
@@ -9633,7 +9674,7 @@ tracks/2/path = NodePath("animation/moves")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0.25),
+"times": PackedFloat32Array(0.35),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
@@ -9643,7 +9684,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_yrnag"]
 resource_name = "stomp_forward_left"
-length = 0.25
+length = 0.35
 step = 0.025
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -9664,10 +9705,10 @@ tracks/1/path = NodePath("profile:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.0666667, 0.133333, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.275, 0.325),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3]
+"values": [0, 1, 2, 2, 3]
 }
 tracks/2/type = "method"
 tracks/2/imported = false
@@ -9676,7 +9717,7 @@ tracks/2/path = NodePath("animation/moves")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0.25),
+"times": PackedFloat32Array(0.35),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
@@ -9686,7 +9727,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_8u47b"]
 resource_name = "stomp_forward_right"
-length = 0.25
+length = 0.35
 step = 0.025
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -9707,10 +9748,10 @@ tracks/1/path = NodePath("profile:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.0666667, 0.133333, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.275, 0.325),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3]
+"values": [0, 1, 2, 2, 3]
 }
 tracks/2/type = "method"
 tracks/2/imported = false
@@ -9719,7 +9760,7 @@ tracks/2/path = NodePath("animation/moves")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0.25),
+"times": PackedFloat32Array(0.35),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
@@ -9729,7 +9770,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_nffd2"]
 resource_name = "stomp_backward_left"
-length = 0.25
+length = 0.35
 step = 0.025
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -9750,10 +9791,10 @@ tracks/1/path = NodePath("profile:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.0666667, 0.133333, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.275, 0.325),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3]
+"values": [0, 1, 2, 2, 3]
 }
 tracks/2/type = "method"
 tracks/2/imported = false
@@ -9762,7 +9803,7 @@ tracks/2/path = NodePath("animation/moves")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0.25),
+"times": PackedFloat32Array(0.35),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
@@ -9772,7 +9813,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_o0k7t"]
 resource_name = "stomp_backward_right"
-length = 0.25
+length = 0.35
 step = 0.025
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -9793,10 +9834,10 @@ tracks/1/path = NodePath("profile:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.0666667, 0.133333, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.275, 0.325),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3]
+"values": [0, 1, 2, 2, 3]
 }
 tracks/2/type = "method"
 tracks/2/imported = false
@@ -9805,7 +9846,7 @@ tracks/2/path = NodePath("animation/moves")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0.25),
+"times": PackedFloat32Array(0.35),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
@@ -9985,6 +10026,350 @@ tracks/2/keys = {
 }]
 }
 
+[sub_resource type="Animation" id="Animation_h840q"]
+resource_name = "fire_left"
+length = 0.56
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("profile:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"left_fire"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("profile:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.06, 0.15, 0.21, 0.29, 0.35, 0.44, 0.5, 0.55),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 0, 1, 0, 1, 0, 2, 3]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("animation/moves")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.56),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"set_fight_end"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_se3rh"]
+resource_name = "fire_right"
+length = 0.56
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("profile:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"right_fire"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("profile:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.06, 0.15, 0.21, 0.29, 0.35, 0.44, 0.5, 0.55),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 0, 1, 0, 1, 0, 2, 3]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("animation/moves")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.56),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"set_fight_end"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_npj5t"]
+resource_name = "fire_forward"
+length = 0.56
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("profile:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"forward_fire"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("profile:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.06, 0.15, 0.21, 0.29, 0.35, 0.44, 0.5, 0.55),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 0, 1, 0, 1, 0, 2, 3]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("animation/moves")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.56),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"set_fight_end"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_fx5o4"]
+resource_name = "fire_backward"
+length = 0.56
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("profile:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"backward_fire"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("profile:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.06, 0.15, 0.21, 0.29, 0.35, 0.44, 0.5, 0.55),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 0, 1, 0, 1, 0, 2, 3]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("animation/moves")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.56),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"set_fight_end"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_ynd6q"]
+resource_name = "fire_forward_left"
+length = 0.56
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("profile:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"backward_fire"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("profile:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.06, 0.15, 0.21, 0.29, 0.35, 0.44, 0.5, 0.55),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 0, 1, 0, 1, 0, 2, 3]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("animation/moves")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.56),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"set_fight_end"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_0fsm4"]
+resource_name = "fire_forward_right"
+length = 0.56
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("profile:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"backward_fire"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("profile:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.06, 0.15, 0.21, 0.29, 0.35, 0.44, 0.5, 0.55),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 0, 1, 0, 1, 0, 2, 3]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("animation/moves")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.56),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"set_fight_end"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_dpqdm"]
+resource_name = "fire_backward_left"
+length = 0.56
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("profile:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"backward_fire"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("profile:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.06, 0.15, 0.21, 0.29, 0.35, 0.44, 0.5, 0.55),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 0, 1, 0, 1, 0, 2, 3]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("animation/moves")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.56),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"set_fight_end"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_7e0gf"]
+resource_name = "fire_backward_right"
+length = 0.56
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("profile:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"backward_right_fire"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("profile:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.06, 0.15, 0.21, 0.29, 0.35, 0.44, 0.5, 0.55),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 0, 1, 0, 1, 0, 2, 3]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("animation/moves")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.56),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"set_fight_end"
+}]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_sal4s"]
 _data = {
 &"bash_backward": SubResource("Animation_8uo7m"),
@@ -10005,6 +10390,14 @@ _data = {
 &"chains_idle_right": SubResource("Animation_7eglv"),
 &"chains_move_left": SubResource("Animation_dverb"),
 &"chains_move_right": SubResource("Animation_7skxo"),
+&"fire_backward": SubResource("Animation_fx5o4"),
+&"fire_backward_left": SubResource("Animation_dpqdm"),
+&"fire_backward_right": SubResource("Animation_7e0gf"),
+&"fire_forward": SubResource("Animation_npj5t"),
+&"fire_forward_left": SubResource("Animation_ynd6q"),
+&"fire_forward_right": SubResource("Animation_0fsm4"),
+&"fire_left": SubResource("Animation_h840q"),
+&"fire_right": SubResource("Animation_se3rh"),
 &"idle_backward": SubResource("Animation_6u153"),
 &"idle_forward": SubResource("Animation_mwirt"),
 &"idle_left": SubResource("Animation_1nxl2"),
@@ -10075,7 +10468,7 @@ metadata/_edit_horizontal_guides_ = [-324.0]
 material = SubResource("ShaderMaterial_n7tfv")
 position = Vector2(0, 1)
 sprite_frames = SubResource("SpriteFrames_ajgxq")
-animation = &"backward_bash"
+animation = &"left"
 offset = Vector2(0, -51.5)
 
 [node name="whip" type="Sprite2D" parent="."]
