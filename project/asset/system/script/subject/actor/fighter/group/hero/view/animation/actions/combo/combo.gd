@@ -16,10 +16,15 @@ func fight_body(stand: String) -> void:
 	moves.tree.request(combo, act)
 	moves.tree.request("active", stand)
 
+func fight_tool(stand: String) -> void:
+	moves.set_tools("external")
+	moves.tree.request("external", stand)
+
 func start_fight(stand: String) -> void:
 	moves.set_aggressive(stand)
 	moves.stance.start()
 
 func end_fight() -> void:
 	moves.set_aggressive("passive")
+	moves.set_tools("internal")
 	moves.hero.logic.processors.ui.input.movement.mode.end_fight()

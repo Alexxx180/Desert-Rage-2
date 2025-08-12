@@ -35,3 +35,5 @@ func set_fight_end() -> void: combo.end_fight()
 func set_jump_start() -> void: jump.sequence(true)
 
 func set_jump_end() -> void: jump.stop_dash()
+
+func set_tools(stand: String) -> void: tree.request("tools", stand)
