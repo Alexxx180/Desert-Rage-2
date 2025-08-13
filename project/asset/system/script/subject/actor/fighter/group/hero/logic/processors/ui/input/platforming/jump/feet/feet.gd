@@ -15,8 +15,8 @@ var deployment: DeploymentRaycast:
 		_deployment = value
 		_deployment.walls.same_floor = same_level
 
-func same_floor(f: int) -> bool:
-	return f != 0 and f == floors.F
+func same_floor(f: int, ignore_ground: bool = false) -> bool:
+	return (f != 0 or ignore_ground) and f == floors.F
 
 func get_ground() -> Vector2:
 	var ground: Vector2 = deployment.walls.target
