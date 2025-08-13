@@ -25,5 +25,6 @@ func stop_dash() -> void:
 	var temp: Vector2i = moves.tree.direction
 	sequence(false)
 	moves.set_move_action("go")
+	moves.set_hang_move("go")
 	moves.tree.direction = temp
 	print("DASH STOPPED")

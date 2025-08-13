@@ -26,6 +26,8 @@ func set_aggressive(stand: String) -> void:
 
 func set_environment(stand: String) -> void: tree.request("environment", stand)
 
+func set_hang_move(stand: String) -> void: tree.request("hang_move", stand)
+
 func set_fighting(stand: String) -> void: combo.fight_body(stand)
 
 func set_fight_start(stand: String) -> void: combo.start_fight(stand)

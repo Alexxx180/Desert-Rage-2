@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://b51o5v35cj5m8"]
+[gd_scene load_steps=21 format=3 uid="uid://b51o5v35cj5m8"]
 
 [ext_resource type="Script" uid="uid://dexewxmovq81m" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/processors/ui/input/actions/actions.gd" id="1_7ccas"]
 [ext_resource type="Script" uid="uid://b2eukqcbuq556" path="res://addons/godot-behavior-tree-plugin/selector/selector.gd" id="3_qgc7s"]
@@ -19,6 +19,7 @@
 [ext_resource type="Script" uid="uid://c88ykil8i6ym8" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/processors/ui/input/actions/skills/combo/create/kick.gd" id="16_eiwwh"]
 [ext_resource type="Script" uid="uid://bi377lf5ckrp5" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/processors/ui/input/actions/skills/kick/fight/combo/triple/spit-kick.gd" id="17_47iya"]
 [ext_resource type="Script" uid="uid://d2hkugmx82we3" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/processors/ui/input/actions/skills/kick/fight/combo/fourth/back-spit.gd" id="17_lvj14"]
+[ext_resource type="Script" uid="uid://dt4b5hrhuffx8" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/processors/ui/input/actions/skills/whip/fight/tools/pillar.gd" id="19_nti5y"]
 
 [node name="actions" type="Node"]
 script = ExtResource("1_7ccas")
@@ -216,15 +217,27 @@ metadata/_custom_type_script = "uid://xyxwk1uhmmqa"
 script = ExtResource("6_obw4v")
 metadata/_custom_type_script = "uid://c28asuataqv3u"
 
-[node name="combo" type="Node" parent="skills/equipment/melee/hands/slots/whip"]
+[node name="fight" type="Node" parent="skills/equipment/melee/hands/slots/whip"]
 script = ExtResource("3_qgc7s")
 metadata/_custom_type_script = "uid://b2eukqcbuq556"
 
-[node name="fourth" type="Node" parent="skills/equipment/melee/hands/slots/whip/combo"]
+[node name="tools" type="Node" parent="skills/equipment/melee/hands/slots/whip/fight"]
 script = ExtResource("3_qgc7s")
 metadata/_custom_type_script = "uid://b2eukqcbuq556"
 
-[node name="poaching" type="Node" parent="skills/equipment/melee/hands/slots/whip/combo/fourth"]
+[node name="pillar" type="Node" parent="skills/equipment/melee/hands/slots/whip/fight/tools"]
+script = ExtResource("19_nti5y")
+metadata/_custom_type_script = "uid://c28asuataqv3u"
+
+[node name="combo" type="Node" parent="skills/equipment/melee/hands/slots/whip/fight"]
+script = ExtResource("3_qgc7s")
+metadata/_custom_type_script = "uid://b2eukqcbuq556"
+
+[node name="fourth" type="Node" parent="skills/equipment/melee/hands/slots/whip/fight/combo"]
+script = ExtResource("3_qgc7s")
+metadata/_custom_type_script = "uid://b2eukqcbuq556"
+
+[node name="poaching" type="Node" parent="skills/equipment/melee/hands/slots/whip/fight/combo/fourth"]
 script = ExtResource("5_w0q1x")
 metadata/_custom_type_script = "uid://c28asuataqv3u"
 

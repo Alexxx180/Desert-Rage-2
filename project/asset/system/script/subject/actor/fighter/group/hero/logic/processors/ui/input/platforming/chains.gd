@@ -9,6 +9,8 @@ var above: bool = false
 var climbing: bool = false
 var spring: Node:
 	get: return input.platforming.spring
+var hanging: bool:
+	get: return above and climbing
 
 func _catch_ledge() -> void:
 	input.modes.select(true)
@@ -18,7 +20,7 @@ func _catch_ledge() -> void:
 	view.animation.moves.set_environment("chains")
 
 func _decide_moving() -> void:
-	if above and climbing: _catch_ledge()
+	if hanging: _catch_ledge()
 
 func move_above(_execute: TileMapLayer) -> void:
 	above = true

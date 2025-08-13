@@ -4,3 +4,4 @@ extends Node
 
 func controls(hero: CharacterBody2D, ability: Node, behavior: Node) -> void:
 	fire.controls(hero, ability.fire, behavior.ability.freeze)
+	ability.whip.hero = hero

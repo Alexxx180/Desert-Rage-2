@@ -17,6 +17,14 @@ var ledge: Node
 var dashed: bool = false
 var caught: bool = false
 var jump_offset: float = 0
+var target_pos: Vector2
+var is_near: bool:
+	get:
+		for pillar in ledge.jump_zone.walls:
+			if pillar.is_colliding():
+				target_pos = pillars.jump_zone.position + pillar.position
+				return true
+		return false
 
 const BORDERS: float = 17.0
 
@@ -39,15 +47,19 @@ func whip_caught(_execute: TileMapLayer) -> void: caught = true
 func whip_left(_execute: TileMapLayer) -> void: caught = false
 func whip_dashed() -> void: _turn_collision(true)
 
+func _selective_dash(input: Node, pos: Vector2) -> void:
+	if input.platforming.chains.hanging:
+		input.movement.type.move.dash(pos, "go")
+		hero.view.animation.moves.set_hang_move("whip_dash")
+	else:
+		input.movement.type.move.dash(pos, "whip_dash")
+
 func _perform_dash(pos: Vector2) -> void:
 	var detector: Node2D = hero.logic.detectors.platforming
 	hero.view.whip.rotation_degrees = rotation[detector.direction]
 	pos += jump_offset * detector.direction
 	_turn_collision(false)
-	hero.logic.processors.ui.input.movement.type.move.dash(pos, "whip_dash")
+	_selective_dash(hero.logic.processors.ui.input, pos)
 
 func dash_on_whip() -> void:
-	for pillar in ledge.jump_zone.walls:
-		if pillar.is_colliding():
-			_perform_dash(pillars.jump_zone.position + pillar.position)
-			return
+	_perform_dash(target_pos)
