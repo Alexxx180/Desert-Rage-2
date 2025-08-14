@@ -58,7 +58,8 @@ func whip_left(_execute: TileMapLayer) -> void: caught = false
 func whip_dashed() -> void: _turn_collision(true)
 
 func _selective_dash(input: Node, pos: Vector2) -> void:
-	if input.platforming.chains.hanging:
+	if input.platforming.chains.above:
+		if pos.x != 0: return
 		input.movement.type.move.dash(pos, "go")
 		hero.view.animation.moves.set_hang_move("whip_dash")
 	else:
