@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://dymgcb0x81jhc"]
+[gd_scene load_steps=25 format=3 uid="uid://dymgcb0x81jhc"]
 
 [ext_resource type="Script" uid="uid://ctkxvtr3os1lt" path="res://asset/system/script/subject/control/platform/jump/jump.gd" id="1_62meb"]
 [ext_resource type="Script" uid="uid://bwq032jyu8u10" path="res://asset/system/script/subject/control/drive/box/base/view/view.gd" id="1_ffec7"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://q4sox4o54611" path="res://asset/system/script/subject/control/platform/jump/detector/detector.gd" id="6_m6gti"]
 [ext_resource type="PackedScene" uid="uid://c5gf5ucjxk682" path="res://asset/system/scene/object/image/level/floors/detector.tscn" id="7_lqemq"]
 [ext_resource type="PackedScene" uid="uid://wadgmfub4bhi" path="res://asset/system/scene/subject/control/drive/box/small/logic/detectors/platforming/stand.tscn" id="8_d6u1x"]
+[ext_resource type="Shape2D" uid="uid://cmlykhkjbkx1x" path="res://asset/resource/engine/internal/shape/geometry/interactables/platform/jump.tres" id="8_ggnph"]
 [ext_resource type="Script" uid="uid://buv51uglm2evx" path="res://asset/system/script/subject/control/platform/jump/detector/ledge.gd" id="9_v0lse"]
 [ext_resource type="Script" uid="uid://dc8e4vuove4d8" path="res://asset/system/script/subject/control/platform/jump/processor/processor.gd" id="10_tuiw4"]
 [ext_resource type="PackedScene" uid="uid://2rt2ok77rsjp" path="res://asset/system/scene/subject/control/drive/box/base/logic/processors/movement/seat.tscn" id="11_jn7du"]
@@ -62,7 +63,14 @@ script = ExtResource("5_jx5lw")
 [node name="detectors" type="Node2D" parent="logic"]
 script = ExtResource("6_m6gti")
 
+[node name="border" type="StaticBody2D" parent="logic/detectors"]
+collision_mask = 0
+
+[node name="shape" type="CollisionShape2D" parent="logic/detectors/border"]
+shape = ExtResource("8_ggnph")
+
 [node name="floors" parent="logic/detectors" instance=ExtResource("7_lqemq")]
+visible = false
 position = Vector2(0, -22)
 
 [node name="stand" parent="logic/detectors" instance=ExtResource("8_d6u1x")]
@@ -70,6 +78,7 @@ position = Vector2(0, -26)
 collision_mask = 0
 
 [node name="ledge" type="Node2D" parent="logic/detectors"]
+visible = false
 script = ExtResource("9_v0lse")
 
 [node name="x" type="ShapeCast2D" parent="logic/detectors/ledge"]

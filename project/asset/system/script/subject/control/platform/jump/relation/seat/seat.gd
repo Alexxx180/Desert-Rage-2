@@ -28,4 +28,5 @@ func controls(platform: CharacterBody2D, seat: Node) -> void:
 		)
 	stand.exited.connect(seat.disable_stand)
 	stand.exited.connect(func(_hero):
+		ride.surface.push(Vector2.ZERO)
 		ride.surface.free_engine())
