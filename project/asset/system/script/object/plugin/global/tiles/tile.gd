@@ -25,6 +25,11 @@ static func paint(layer: TileMapLayer, cells: Dictionary) -> void:
 static func basis(layer: TileMapLayer, map_coords: Vector2i) -> Dictionary:
 	return { "coords": map_coords, "id": layer.get_cell_source_id(map_coords) }
 
+static func switch(from: Dictionary, to: Vector2i, layer: TileMapLayer) -> void:
+	if to.x != 0: from.atlas.x += to.x if from.atlas.x % (to.x + 1) == 0 else -to.x
+	if to.y != 0: from.atlas.y += to.y if from.atlas.y % (to.y + 1) == 0 else -to.y
+	paint(layer, from)
+
 static func modify(tile_basis: Dictionary, layer: TileMapLayer) -> Dictionary:
 	if tile_basis["id"] == -1: return tile_basis
 	tile_basis.name = layer.tile_set.get_source(tile_basis["id"]).resource_name
