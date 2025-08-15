@@ -1,7 +1,11 @@
-extends Label
+extends Node2D
 
-@export var secret: String = "Секрет"
-@export var opened: String = ""
+@onready var secret: Label = $secret
+@onready var view: Sprite2D = $view
+
+enum { SHOW = 1, HIDE = 2 }
+
+const TIME: int = 1
 
 const OPENED: Array[String] = [
 	"Неплохо 👍", "Так держать! 🥳", "Ловко придумано 🌠", "Мощно 💪",
@@ -17,14 +21,18 @@ const OPENED: Array[String] = [
 	"Отлично идем 📈", "Это кто-то читает? 📖", "Во закинул ⚓️", "Ракета 🚀",
 	"Ну и везунчик 🎲", "Все встало на свои места 🧩", "Продолжаем 🎬",
 	"Вручаю медаль 🎖", "Вам грамота 🧧", "Остро-актуальная мысль 🌶",
-	"Перекус? 🍏", "Вот это изюминка 🍇", "🫑", "Надо бы прибрать тут 🪣",
-	"Варит котелок ведь 🧭", "Тонко 🔬", "Жду свершений 🔭"
+	"Перекус? 🍏", "Вот это изюминка 🍇", "По сути вкусно 🫑", "Прибрать бы тут 🪣",
+	"Варит котелок ведь 🧭", "Тонко 🔬", "Жду свершений 🔭", "Растем 🌱", "Секрет 🕵️‍♂️"
 ]
 
-func _ready():
-	text = secret
-	if opened == "":
-		opened = OPENED.pick_random()
+func _on_open(_body: CharacterBody2D) -> void:
+	if secret.text == "":
+		secret.text = OPENED.pick_random()
+		_change_state(view, Color.TRANSPARENT)
+	_change_state(secret, Color.WHITE)
 
-func _on_open(_body: CharacterBody2D):
-	text = opened
+func _on_close(_body: CharacterBody2D) -> void:
+	_change_state(secret, Color.BLACK)
+
+func _change_state(subject: CanvasItem, tint: Color) -> void:
+	create_tween().tween_property(subject, "modulate", tint, TIME)
