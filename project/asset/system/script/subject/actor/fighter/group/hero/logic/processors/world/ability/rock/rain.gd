@@ -6,10 +6,13 @@ func _set_hero(value: CharacterBody2D) -> void:
 	super._set_hero(value)
 	_act = _hero.logic.detectors.world.ability.rain.puddle
 
+func animation() -> void:
+	_hero.view.animation.moves.set_fight_start("active")
+	_hero.view.animation.moves.set_fighting("skill_one")
+
 func _act_sync() -> void:
 	activate.emit(_last_position, _act.direction)
-	_hero.view.animation.moves.set_fight_start("active")
-	_hero.view.animation.moves.set_fighting("hands")
+	animation()
 
 func ability() -> void:
 	if _vessel != Defaults.CHARACTER and _vessel.logic.relations.fire.on and aura.use(cost):

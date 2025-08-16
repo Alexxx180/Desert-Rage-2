@@ -9,8 +9,12 @@ func _ready() -> void:
 	effect.moves = moves
 	syncer.moves = moves
 
+func unique_animations() -> Array[String]:
+	return ["whip_dash", "fire", "whip", "hang_whip_dash"]
+
 func direct() -> void:
 	super.direct()
+	for animation in unique_animations(): blend(animation)
 	if not Input.is_action_pressed("action"): blend("pull_forward")
 
 func move(motion: Vector2) -> bool:

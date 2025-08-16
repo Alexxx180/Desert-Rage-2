@@ -1,0 +1,35 @@
+[gd_scene load_steps=9 format=3 uid="uid://cpa1re12bhlrv"]
+
+[ext_resource type="Script" uid="uid://yyr1m8t4jjew" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/processors.gd" id="1_vgnmu"]
+[ext_resource type="Script" uid="uid://mii602r0bske" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/processors/ui/ui.gd" id="2_a6gvy"]
+[ext_resource type="PackedScene" uid="uid://sxbplp4jth8i" path="res://asset/system/scene/subject/actor/fighter/group/hero/rock/logic/processors/input/input.tscn" id="3_vgnmu"]
+[ext_resource type="PackedScene" uid="uid://c8c2cb0sc1mwn" path="res://asset/system/scene/subject/actor/fighter/group/hero/base/logic/processors/hud.tscn" id="4_e8ui5"]
+[ext_resource type="PackedScene" uid="uid://cy3ejmnjfhyac" path="res://asset/system/scene/subject/actor/fighter/group/hero/rock/logic/processors/world/world.tscn" id="5_g2bep"]
+[ext_resource type="Script" uid="uid://b8jyala3bra50" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/processors/stats.gd" id="6_kpkyc"]
+[ext_resource type="PackedScene" uid="uid://b460ne4ouhshc" path="res://asset/system/scene/subject/actor/fighter/hitbox/health.tscn" id="7_c4t4g"]
+[ext_resource type="Script" uid="uid://bkln45vw5evrl" path="res://asset/system/script/subject/actor/fighter/hitbox/aura.gd" id="8_6i0b3"]
+
+[node name="processors" type="Node"]
+script = ExtResource("1_vgnmu")
+
+[node name="ui" type="Node" parent="."]
+script = ExtResource("2_a6gvy")
+
+[node name="input" parent="ui" instance=ExtResource("3_vgnmu")]
+
+[node name="hud" parent="ui" instance=ExtResource("4_e8ui5")]
+
+[node name="world" parent="." instance=ExtResource("5_g2bep")]
+
+[node name="stats" type="Node" parent="."]
+script = ExtResource("6_kpkyc")
+
+[node name="health" parent="stats" instance=ExtResource("7_c4t4g")]
+
+[node name="aura" type="Node" parent="stats"]
+script = ExtResource("8_6i0b3")
+
+[node name="timer" type="Timer" parent="stats/aura"]
+one_shot = true
+
+[connection signal="timeout" from="stats/aura/timer" to="stats/aura" method="diffusion"]

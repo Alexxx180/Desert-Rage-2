@@ -12,11 +12,14 @@ func _set_hero(value: CharacterBody2D) -> void:
 func far_map(_execute: TileMapLayer) -> void:
 	_last_position = Vector2.ZERO
 
+func animation() -> void:
+	_hero.view.animation.moves.set_fight_start("active")
+	_hero.view.animation.moves.set_fighting("skill_two")
+
 func ability() -> void:
 	if _vessel != Defaults.CHARACTER and !_vessel.logic.relations.spark.on and aura.use(cost):
 		_vessel.logic.processors.spark.charge()
 	
 	if _last_position != Vector2.ZERO and aura.use(cost):
-		_hero.view.animation.moves.set_fight_start("active")
-		_hero.view.animation.moves.set_fighting("hands")
 		activate.emit(_last_position)
+		animation()
