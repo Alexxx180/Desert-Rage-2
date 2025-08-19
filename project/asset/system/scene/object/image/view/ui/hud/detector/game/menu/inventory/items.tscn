@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://dqlgy3l13bibl"]
+[gd_scene load_steps=10 format=3 uid="uid://dqlgy3l13bibl"]
 
 [ext_resource type="Script" uid="uid://bmdahhw0xgfv8" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/menu/inventory/items.gd" id="1_bn4qj"]
 [ext_resource type="FontFile" uid="uid://b2wbdbnkxcqv1" path="res://asset/resource/font/NotoEmoji-VariableFont_wght.ttf" id="1_i8tg8"]
 [ext_resource type="Script" uid="uid://ckwy3qb2rie2m" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/menu/inventory/item/primary.gd" id="2_ayboh"]
 [ext_resource type="FontFile" uid="uid://b37js8y80ak1k" path="res://asset/resource/font/NotoColorEmoji-Regular.ttf" id="3_374m3"]
 [ext_resource type="Script" uid="uid://bb0iykbgs3tpv" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/menu/inventory/item/item.gd" id="4_vb3xh"]
+[ext_resource type="Script" uid="uid://e3s47evggk2s" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/menu/inventory/item/equip.gd" id="5_1tuns"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dfp1u"]
 bg_color = Color(0.20871, 0.20871, 0.20871, 1)
@@ -13,7 +14,14 @@ corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1tuns"]
+content_margin_top = 6.0
+content_margin_right = 12.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vb3xh"]
+content_margin_right = 10.0
+content_margin_bottom = 2.0
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [node name="items" type="HFlowContainer"]
@@ -34,17 +42,101 @@ layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_dfp1u")
 script = ExtResource("2_ayboh")
 
+[node name="image" type="TextureRect" parent="slot_0"]
+layout_mode = 2
+
+[node name="icon" type="Label" parent="slot_0"]
+visible = false
+modulate = Color(1, 1, 1, 0.294118)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_fonts/font = ExtResource("3_374m3")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_1tuns")
+text = "🫙"
+horizontal_alignment = 1
+
 [node name="selection" type="ColorRect" parent="slot_0"]
 custom_minimum_size = Vector2(0, 3)
 layout_mode = 2
 size_flags_vertical = 8
 color = Color(0.184314, 0.184314, 0.72549, 1)
 
+[node name="count" type="Label" parent="slot_0"]
+visible = false
+modulate = Color(1, 1, 1, 0.294118)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxFlat_vb3xh")
+text = "30"
+horizontal_alignment = 1
+
+[node name="margin" type="MarginContainer" parent="slot_0"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 7
+
+[node name="upgrades" type="HBoxContainer" parent="slot_0/margin"]
+visible = false
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 2
+
+[node name="a" type="HBoxContainer" parent="slot_0/margin/upgrades"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="on" type="ColorRect" parent="slot_0/margin/upgrades/a"]
+visible = false
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.428704, 0.323724, 0, 1)
+
+[node name="off" type="ColorRect" parent="slot_0/margin/upgrades/a"]
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.17081, 0.121802, 0, 1)
+
+[node name="b" type="HBoxContainer" parent="slot_0/margin/upgrades"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="on" type="ColorRect" parent="slot_0/margin/upgrades/b"]
+visible = false
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.956863, 0.737255, 0, 1)
+
+[node name="off" type="ColorRect" parent="slot_0/margin/upgrades/b"]
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.17081, 0.121802, 0, 1)
+
 [node name="slot_1" type="PanelContainer" parent="."]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_dfp1u")
 script = ExtResource("2_ayboh")
+
+[node name="image" type="TextureRect" parent="slot_1"]
+layout_mode = 2
+
+[node name="icon" type="Label" parent="slot_1"]
+visible = false
+modulate = Color(1, 1, 1, 0.294118)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_fonts/font = ExtResource("3_374m3")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_1tuns")
+text = "🫙"
+horizontal_alignment = 1
 
 [node name="selection" type="ColorRect" parent="slot_1"]
 visible = false
@@ -53,25 +145,79 @@ layout_mode = 2
 size_flags_vertical = 8
 color = Color(0.184314, 0.184314, 0.72549, 1)
 
+[node name="count" type="Label" parent="slot_1"]
+visible = false
+modulate = Color(1, 1, 1, 0.294118)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxFlat_vb3xh")
+text = "30"
+horizontal_alignment = 1
+
+[node name="margin" type="MarginContainer" parent="slot_1"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 7
+
+[node name="upgrades" type="HBoxContainer" parent="slot_1/margin"]
+visible = false
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 2
+
+[node name="a" type="HBoxContainer" parent="slot_1/margin/upgrades"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="on" type="ColorRect" parent="slot_1/margin/upgrades/a"]
+visible = false
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.428704, 0.323724, 0, 1)
+
+[node name="off" type="ColorRect" parent="slot_1/margin/upgrades/a"]
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.17081, 0.121802, 0, 1)
+
+[node name="b" type="HBoxContainer" parent="slot_1/margin/upgrades"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="on" type="ColorRect" parent="slot_1/margin/upgrades/b"]
+visible = false
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.956863, 0.737255, 0, 1)
+
+[node name="off" type="ColorRect" parent="slot_1/margin/upgrades/b"]
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.17081, 0.121802, 0, 1)
+
 [node name="slot_2" type="PanelContainer" parent="."]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_dfp1u")
 script = ExtResource("2_ayboh")
 
-[node name="margin" type="MarginContainer" parent="slot_2"]
+[node name="image" type="TextureRect" parent="slot_2"]
 layout_mode = 2
-theme_override_constants/margin_left = 9
-theme_override_constants/margin_top = 9
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 0
 
-[node name="text-icon" type="Label" parent="slot_2/margin"]
+[node name="icon" type="Label" parent="slot_2"]
+modulate = Color(1, 1, 1, 0.294118)
 layout_mode = 2
-size_flags_horizontal = 4
+size_flags_horizontal = 8
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("3_374m3")
 theme_override_font_sizes/font_size = 32
-theme_override_styles/normal = SubResource("StyleBoxFlat_vb3xh")
+theme_override_styles/normal = SubResource("StyleBoxFlat_1tuns")
 text = "🔪"
 horizontal_alignment = 1
 
@@ -82,11 +228,81 @@ layout_mode = 2
 size_flags_vertical = 8
 color = Color(0.184314, 0.184314, 0.72549, 1)
 
+[node name="count" type="Label" parent="slot_2"]
+visible = false
+modulate = Color(1, 1, 1, 0.294118)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxFlat_vb3xh")
+text = "30"
+horizontal_alignment = 1
+
+[node name="margin" type="MarginContainer" parent="slot_2"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 7
+
+[node name="upgrades" type="HBoxContainer" parent="slot_2/margin"]
+visible = false
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 2
+
+[node name="a" type="HBoxContainer" parent="slot_2/margin/upgrades"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="on" type="ColorRect" parent="slot_2/margin/upgrades/a"]
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.428704, 0.323724, 0, 1)
+
+[node name="off" type="ColorRect" parent="slot_2/margin/upgrades/a"]
+visible = false
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.17081, 0.121802, 0, 1)
+
+[node name="b" type="HBoxContainer" parent="slot_2/margin/upgrades"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="on" type="ColorRect" parent="slot_2/margin/upgrades/b"]
+visible = false
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.956863, 0.737255, 0, 1)
+
+[node name="off" type="ColorRect" parent="slot_2/margin/upgrades/b"]
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.17081, 0.121802, 0, 1)
+
 [node name="slot_3" type="PanelContainer" parent="."]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_dfp1u")
 script = ExtResource("2_ayboh")
+
+[node name="image" type="TextureRect" parent="slot_3"]
+layout_mode = 2
+
+[node name="icon" type="Label" parent="slot_3"]
+visible = false
+modulate = Color(1, 1, 1, 0.294118)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_fonts/font = ExtResource("3_374m3")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_1tuns")
+text = "🫙"
+horizontal_alignment = 1
 
 [node name="selection" type="ColorRect" parent="slot_3"]
 visible = false
@@ -95,11 +311,81 @@ layout_mode = 2
 size_flags_vertical = 8
 color = Color(0.184314, 0.184314, 0.72549, 1)
 
+[node name="count" type="Label" parent="slot_3"]
+visible = false
+modulate = Color(1, 1, 1, 0.294118)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxFlat_vb3xh")
+text = "30"
+horizontal_alignment = 1
+
+[node name="margin" type="MarginContainer" parent="slot_3"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 7
+
+[node name="upgrades" type="HBoxContainer" parent="slot_3/margin"]
+visible = false
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 2
+
+[node name="a" type="HBoxContainer" parent="slot_3/margin/upgrades"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="on" type="ColorRect" parent="slot_3/margin/upgrades/a"]
+visible = false
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.428704, 0.323724, 0, 1)
+
+[node name="off" type="ColorRect" parent="slot_3/margin/upgrades/a"]
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.17081, 0.121802, 0, 1)
+
+[node name="b" type="HBoxContainer" parent="slot_3/margin/upgrades"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="on" type="ColorRect" parent="slot_3/margin/upgrades/b"]
+visible = false
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.956863, 0.737255, 0, 1)
+
+[node name="off" type="ColorRect" parent="slot_3/margin/upgrades/b"]
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.17081, 0.121802, 0, 1)
+
 [node name="slot_4" type="PanelContainer" parent="."]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_dfp1u")
 script = ExtResource("2_ayboh")
+
+[node name="image" type="TextureRect" parent="slot_4"]
+layout_mode = 2
+
+[node name="icon" type="Label" parent="slot_4"]
+visible = false
+modulate = Color(1, 1, 1, 0.294118)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_fonts/font = ExtResource("3_374m3")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_1tuns")
+text = "🫙"
+horizontal_alignment = 1
 
 [node name="selection" type="ColorRect" parent="slot_4"]
 visible = false
@@ -108,96 +394,1196 @@ layout_mode = 2
 size_flags_vertical = 8
 color = Color(0.184314, 0.184314, 0.72549, 1)
 
+[node name="count" type="Label" parent="slot_4"]
+visible = false
+modulate = Color(1, 1, 1, 0.294118)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxFlat_vb3xh")
+text = "30"
+horizontal_alignment = 1
+
+[node name="margin" type="MarginContainer" parent="slot_4"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 7
+
+[node name="upgrades" type="HBoxContainer" parent="slot_4/margin"]
+visible = false
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 2
+
+[node name="a" type="HBoxContainer" parent="slot_4/margin/upgrades"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="on" type="ColorRect" parent="slot_4/margin/upgrades/a"]
+visible = false
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.428704, 0.323724, 0, 1)
+
+[node name="off" type="ColorRect" parent="slot_4/margin/upgrades/a"]
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.17081, 0.121802, 0, 1)
+
+[node name="b" type="HBoxContainer" parent="slot_4/margin/upgrades"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="on" type="ColorRect" parent="slot_4/margin/upgrades/b"]
+visible = false
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.956863, 0.737255, 0, 1)
+
+[node name="off" type="ColorRect" parent="slot_4/margin/upgrades/b"]
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.17081, 0.121802, 0, 1)
+
 [node name="0" type="PanelContainer" parent="."]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 script = ExtResource("4_vb3xh")
+
+[node name="image" type="TextureRect" parent="0"]
+layout_mode = 2
+
+[node name="icon" type="Label" parent="0"]
+visible = false
+modulate = Color(1, 1, 1, 0.294118)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_fonts/font = ExtResource("3_374m3")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_1tuns")
+text = "🫙"
+horizontal_alignment = 1
+
+[node name="count" type="Label" parent="0"]
+visible = false
+modulate = Color(1, 1, 1, 0.294118)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxFlat_vb3xh")
+text = "30"
+horizontal_alignment = 1
+
+[node name="margin" type="MarginContainer" parent="0"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 7
+
+[node name="upgrades" type="HBoxContainer" parent="0/margin"]
+visible = false
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 2
+
+[node name="a" type="HBoxContainer" parent="0/margin/upgrades"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="on" type="ColorRect" parent="0/margin/upgrades/a"]
+visible = false
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.428704, 0.323724, 0, 1)
+
+[node name="off" type="ColorRect" parent="0/margin/upgrades/a"]
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.17081, 0.121802, 0, 1)
+
+[node name="b" type="HBoxContainer" parent="0/margin/upgrades"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="on" type="ColorRect" parent="0/margin/upgrades/b"]
+visible = false
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.956863, 0.737255, 0, 1)
+
+[node name="off" type="ColorRect" parent="0/margin/upgrades/b"]
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.17081, 0.121802, 0, 1)
 
 [node name="1" type="PanelContainer" parent="."]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 script = ExtResource("4_vb3xh")
 
+[node name="image" type="TextureRect" parent="1"]
+layout_mode = 2
+
+[node name="icon" type="Label" parent="1"]
+visible = false
+modulate = Color(1, 1, 1, 0.294118)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_fonts/font = ExtResource("3_374m3")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_1tuns")
+text = "🫙"
+horizontal_alignment = 1
+
+[node name="count" type="Label" parent="1"]
+visible = false
+modulate = Color(1, 1, 1, 0.294118)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxFlat_vb3xh")
+text = "30"
+horizontal_alignment = 1
+
+[node name="margin" type="MarginContainer" parent="1"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 7
+
+[node name="upgrades" type="HBoxContainer" parent="1/margin"]
+visible = false
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 2
+
+[node name="a" type="HBoxContainer" parent="1/margin/upgrades"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="on" type="ColorRect" parent="1/margin/upgrades/a"]
+visible = false
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.428704, 0.323724, 0, 1)
+
+[node name="off" type="ColorRect" parent="1/margin/upgrades/a"]
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.17081, 0.121802, 0, 1)
+
+[node name="b" type="HBoxContainer" parent="1/margin/upgrades"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="on" type="ColorRect" parent="1/margin/upgrades/b"]
+visible = false
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.956863, 0.737255, 0, 1)
+
+[node name="off" type="ColorRect" parent="1/margin/upgrades/b"]
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.17081, 0.121802, 0, 1)
+
 [node name="2" type="PanelContainer" parent="."]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 script = ExtResource("4_vb3xh")
+
+[node name="image" type="TextureRect" parent="2"]
+layout_mode = 2
+
+[node name="icon" type="Label" parent="2"]
+modulate = Color(1, 1, 1, 0.294118)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_fonts/font = ExtResource("3_374m3")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_1tuns")
+text = "🫙"
+horizontal_alignment = 1
+
+[node name="count" type="Label" parent="2"]
+visible = false
+modulate = Color(1, 1, 1, 0.294118)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxFlat_vb3xh")
+text = "30"
+horizontal_alignment = 1
+
+[node name="margin" type="MarginContainer" parent="2"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 7
+
+[node name="upgrades" type="HBoxContainer" parent="2/margin"]
+visible = false
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 2
+
+[node name="a" type="HBoxContainer" parent="2/margin/upgrades"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="on" type="ColorRect" parent="2/margin/upgrades/a"]
+visible = false
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.428704, 0.323724, 0, 1)
+
+[node name="off" type="ColorRect" parent="2/margin/upgrades/a"]
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.17081, 0.121802, 0, 1)
+
+[node name="b" type="HBoxContainer" parent="2/margin/upgrades"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="on" type="ColorRect" parent="2/margin/upgrades/b"]
+visible = false
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.956863, 0.737255, 0, 1)
+
+[node name="off" type="ColorRect" parent="2/margin/upgrades/b"]
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.17081, 0.121802, 0, 1)
 
 [node name="3" type="PanelContainer" parent="."]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 script = ExtResource("4_vb3xh")
 
+[node name="image" type="TextureRect" parent="3"]
+layout_mode = 2
+
+[node name="icon" type="Label" parent="3"]
+visible = false
+modulate = Color(1, 1, 1, 0.294118)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_fonts/font = ExtResource("3_374m3")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_1tuns")
+text = "🫙"
+horizontal_alignment = 1
+
+[node name="count" type="Label" parent="3"]
+visible = false
+modulate = Color(1, 1, 1, 0.294118)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxFlat_vb3xh")
+text = "30"
+horizontal_alignment = 1
+
+[node name="margin" type="MarginContainer" parent="3"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 7
+
+[node name="upgrades" type="HBoxContainer" parent="3/margin"]
+visible = false
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 2
+
+[node name="a" type="HBoxContainer" parent="3/margin/upgrades"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="on" type="ColorRect" parent="3/margin/upgrades/a"]
+visible = false
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.428704, 0.323724, 0, 1)
+
+[node name="off" type="ColorRect" parent="3/margin/upgrades/a"]
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.17081, 0.121802, 0, 1)
+
+[node name="b" type="HBoxContainer" parent="3/margin/upgrades"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="on" type="ColorRect" parent="3/margin/upgrades/b"]
+visible = false
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.956863, 0.737255, 0, 1)
+
+[node name="off" type="ColorRect" parent="3/margin/upgrades/b"]
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.17081, 0.121802, 0, 1)
+
 [node name="4" type="PanelContainer" parent="."]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 script = ExtResource("4_vb3xh")
+
+[node name="image" type="TextureRect" parent="4"]
+layout_mode = 2
+
+[node name="icon" type="Label" parent="4"]
+visible = false
+modulate = Color(1, 1, 1, 0.294118)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_fonts/font = ExtResource("3_374m3")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_1tuns")
+text = "🫙"
+horizontal_alignment = 1
+
+[node name="count" type="Label" parent="4"]
+visible = false
+modulate = Color(1, 1, 1, 0.294118)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxFlat_vb3xh")
+text = "30"
+horizontal_alignment = 1
+
+[node name="margin" type="MarginContainer" parent="4"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 7
+
+[node name="upgrades" type="HBoxContainer" parent="4/margin"]
+visible = false
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 2
+
+[node name="a" type="HBoxContainer" parent="4/margin/upgrades"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="on" type="ColorRect" parent="4/margin/upgrades/a"]
+visible = false
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.428704, 0.323724, 0, 1)
+
+[node name="off" type="ColorRect" parent="4/margin/upgrades/a"]
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.17081, 0.121802, 0, 1)
+
+[node name="b" type="HBoxContainer" parent="4/margin/upgrades"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="on" type="ColorRect" parent="4/margin/upgrades/b"]
+visible = false
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.956863, 0.737255, 0, 1)
+
+[node name="off" type="ColorRect" parent="4/margin/upgrades/b"]
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.17081, 0.121802, 0, 1)
 
 [node name="5" type="PanelContainer" parent="."]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 script = ExtResource("4_vb3xh")
 
+[node name="image" type="TextureRect" parent="5"]
+layout_mode = 2
+
+[node name="icon" type="Label" parent="5"]
+visible = false
+modulate = Color(1, 1, 1, 0.294118)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_fonts/font = ExtResource("3_374m3")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_1tuns")
+text = "🫙"
+horizontal_alignment = 1
+
+[node name="count" type="Label" parent="5"]
+visible = false
+modulate = Color(1, 1, 1, 0.294118)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxFlat_vb3xh")
+text = "30"
+horizontal_alignment = 1
+
+[node name="margin" type="MarginContainer" parent="5"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 7
+
+[node name="upgrades" type="HBoxContainer" parent="5/margin"]
+visible = false
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 2
+
+[node name="a" type="HBoxContainer" parent="5/margin/upgrades"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="on" type="ColorRect" parent="5/margin/upgrades/a"]
+visible = false
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.428704, 0.323724, 0, 1)
+
+[node name="off" type="ColorRect" parent="5/margin/upgrades/a"]
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.17081, 0.121802, 0, 1)
+
+[node name="b" type="HBoxContainer" parent="5/margin/upgrades"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="on" type="ColorRect" parent="5/margin/upgrades/b"]
+visible = false
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.956863, 0.737255, 0, 1)
+
+[node name="off" type="ColorRect" parent="5/margin/upgrades/b"]
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.17081, 0.121802, 0, 1)
+
 [node name="6" type="PanelContainer" parent="."]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 script = ExtResource("4_vb3xh")
+
+[node name="image" type="TextureRect" parent="6"]
+layout_mode = 2
+
+[node name="icon" type="Label" parent="6"]
+visible = false
+modulate = Color(1, 1, 1, 0.294118)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_fonts/font = ExtResource("3_374m3")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_1tuns")
+text = "🫙"
+horizontal_alignment = 1
+
+[node name="count" type="Label" parent="6"]
+visible = false
+modulate = Color(1, 1, 1, 0.294118)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxFlat_vb3xh")
+text = "30"
+horizontal_alignment = 1
+
+[node name="margin" type="MarginContainer" parent="6"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 7
+
+[node name="upgrades" type="HBoxContainer" parent="6/margin"]
+visible = false
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 2
+
+[node name="a" type="HBoxContainer" parent="6/margin/upgrades"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="on" type="ColorRect" parent="6/margin/upgrades/a"]
+visible = false
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.428704, 0.323724, 0, 1)
+
+[node name="off" type="ColorRect" parent="6/margin/upgrades/a"]
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.17081, 0.121802, 0, 1)
+
+[node name="b" type="HBoxContainer" parent="6/margin/upgrades"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="on" type="ColorRect" parent="6/margin/upgrades/b"]
+visible = false
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.956863, 0.737255, 0, 1)
+
+[node name="off" type="ColorRect" parent="6/margin/upgrades/b"]
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.17081, 0.121802, 0, 1)
 
 [node name="7" type="PanelContainer" parent="."]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 script = ExtResource("4_vb3xh")
 
+[node name="image" type="TextureRect" parent="7"]
+layout_mode = 2
+
+[node name="icon" type="Label" parent="7"]
+visible = false
+modulate = Color(1, 1, 1, 0.294118)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_fonts/font = ExtResource("3_374m3")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_1tuns")
+text = "🫙"
+horizontal_alignment = 1
+
+[node name="count" type="Label" parent="7"]
+visible = false
+modulate = Color(1, 1, 1, 0.294118)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxFlat_vb3xh")
+text = "30"
+horizontal_alignment = 1
+
+[node name="margin" type="MarginContainer" parent="7"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 7
+
+[node name="upgrades" type="HBoxContainer" parent="7/margin"]
+visible = false
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 2
+
+[node name="a" type="HBoxContainer" parent="7/margin/upgrades"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="on" type="ColorRect" parent="7/margin/upgrades/a"]
+visible = false
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.428704, 0.323724, 0, 1)
+
+[node name="off" type="ColorRect" parent="7/margin/upgrades/a"]
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.17081, 0.121802, 0, 1)
+
+[node name="b" type="HBoxContainer" parent="7/margin/upgrades"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="on" type="ColorRect" parent="7/margin/upgrades/b"]
+visible = false
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.956863, 0.737255, 0, 1)
+
+[node name="off" type="ColorRect" parent="7/margin/upgrades/b"]
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.17081, 0.121802, 0, 1)
+
 [node name="8" type="PanelContainer" parent="."]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 script = ExtResource("4_vb3xh")
+
+[node name="image" type="TextureRect" parent="8"]
+layout_mode = 2
+
+[node name="icon" type="Label" parent="8"]
+visible = false
+modulate = Color(1, 1, 1, 0.294118)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_fonts/font = ExtResource("3_374m3")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_1tuns")
+text = "🫙"
+horizontal_alignment = 1
+
+[node name="count" type="Label" parent="8"]
+visible = false
+modulate = Color(1, 1, 1, 0.294118)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxFlat_vb3xh")
+text = "30"
+horizontal_alignment = 1
+
+[node name="margin" type="MarginContainer" parent="8"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 7
+
+[node name="upgrades" type="HBoxContainer" parent="8/margin"]
+visible = false
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 2
+
+[node name="a" type="HBoxContainer" parent="8/margin/upgrades"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="on" type="ColorRect" parent="8/margin/upgrades/a"]
+visible = false
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.428704, 0.323724, 0, 1)
+
+[node name="off" type="ColorRect" parent="8/margin/upgrades/a"]
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.17081, 0.121802, 0, 1)
+
+[node name="b" type="HBoxContainer" parent="8/margin/upgrades"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="on" type="ColorRect" parent="8/margin/upgrades/b"]
+visible = false
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.956863, 0.737255, 0, 1)
+
+[node name="off" type="ColorRect" parent="8/margin/upgrades/b"]
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.17081, 0.121802, 0, 1)
 
 [node name="9" type="PanelContainer" parent="."]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 script = ExtResource("4_vb3xh")
 
+[node name="image" type="TextureRect" parent="9"]
+layout_mode = 2
+
+[node name="icon" type="Label" parent="9"]
+visible = false
+modulate = Color(1, 1, 1, 0.294118)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_fonts/font = ExtResource("3_374m3")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_1tuns")
+text = "🫙"
+horizontal_alignment = 1
+
+[node name="count" type="Label" parent="9"]
+visible = false
+modulate = Color(1, 1, 1, 0.294118)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxFlat_vb3xh")
+text = "30"
+horizontal_alignment = 1
+
+[node name="margin" type="MarginContainer" parent="9"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 7
+
+[node name="upgrades" type="HBoxContainer" parent="9/margin"]
+visible = false
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 2
+
+[node name="a" type="HBoxContainer" parent="9/margin/upgrades"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="on" type="ColorRect" parent="9/margin/upgrades/a"]
+visible = false
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.428704, 0.323724, 0, 1)
+
+[node name="off" type="ColorRect" parent="9/margin/upgrades/a"]
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.17081, 0.121802, 0, 1)
+
+[node name="b" type="HBoxContainer" parent="9/margin/upgrades"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="on" type="ColorRect" parent="9/margin/upgrades/b"]
+visible = false
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.956863, 0.737255, 0, 1)
+
+[node name="off" type="ColorRect" parent="9/margin/upgrades/b"]
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.17081, 0.121802, 0, 1)
+
 [node name="10" type="PanelContainer" parent="."]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 script = ExtResource("4_vb3xh")
+
+[node name="image" type="TextureRect" parent="10"]
+layout_mode = 2
+
+[node name="icon" type="Label" parent="10"]
+visible = false
+modulate = Color(1, 1, 1, 0.294118)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_fonts/font = ExtResource("3_374m3")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_1tuns")
+text = "🫙"
+horizontal_alignment = 1
+
+[node name="count" type="Label" parent="10"]
+visible = false
+modulate = Color(1, 1, 1, 0.294118)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxFlat_vb3xh")
+text = "30"
+horizontal_alignment = 1
+
+[node name="margin" type="MarginContainer" parent="10"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 7
+
+[node name="upgrades" type="HBoxContainer" parent="10/margin"]
+visible = false
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 2
+
+[node name="a" type="HBoxContainer" parent="10/margin/upgrades"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="on" type="ColorRect" parent="10/margin/upgrades/a"]
+visible = false
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.428704, 0.323724, 0, 1)
+
+[node name="off" type="ColorRect" parent="10/margin/upgrades/a"]
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.17081, 0.121802, 0, 1)
+
+[node name="b" type="HBoxContainer" parent="10/margin/upgrades"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="on" type="ColorRect" parent="10/margin/upgrades/b"]
+visible = false
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.956863, 0.737255, 0, 1)
+
+[node name="off" type="ColorRect" parent="10/margin/upgrades/b"]
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.17081, 0.121802, 0, 1)
 
 [node name="11" type="PanelContainer" parent="."]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 script = ExtResource("4_vb3xh")
 
+[node name="image" type="TextureRect" parent="11"]
+layout_mode = 2
+
+[node name="icon" type="Label" parent="11"]
+visible = false
+modulate = Color(1, 1, 1, 0.294118)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_fonts/font = ExtResource("3_374m3")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_1tuns")
+text = "🫙"
+horizontal_alignment = 1
+
+[node name="count" type="Label" parent="11"]
+visible = false
+modulate = Color(1, 1, 1, 0.294118)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxFlat_vb3xh")
+text = "30"
+horizontal_alignment = 1
+
+[node name="margin" type="MarginContainer" parent="11"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 7
+
+[node name="upgrades" type="HBoxContainer" parent="11/margin"]
+visible = false
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 2
+
+[node name="a" type="HBoxContainer" parent="11/margin/upgrades"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="on" type="ColorRect" parent="11/margin/upgrades/a"]
+visible = false
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.428704, 0.323724, 0, 1)
+
+[node name="off" type="ColorRect" parent="11/margin/upgrades/a"]
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.17081, 0.121802, 0, 1)
+
+[node name="b" type="HBoxContainer" parent="11/margin/upgrades"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="on" type="ColorRect" parent="11/margin/upgrades/b"]
+visible = false
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.956863, 0.737255, 0, 1)
+
+[node name="off" type="ColorRect" parent="11/margin/upgrades/b"]
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.17081, 0.121802, 0, 1)
+
 [node name="12" type="PanelContainer" parent="."]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 script = ExtResource("4_vb3xh")
+
+[node name="image" type="TextureRect" parent="12"]
+layout_mode = 2
+
+[node name="icon" type="Label" parent="12"]
+visible = false
+modulate = Color(1, 1, 1, 0.294118)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_fonts/font = ExtResource("3_374m3")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_1tuns")
+text = "🫙"
+horizontal_alignment = 1
+
+[node name="count" type="Label" parent="12"]
+visible = false
+modulate = Color(1, 1, 1, 0.294118)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxFlat_vb3xh")
+text = "30"
+horizontal_alignment = 1
+
+[node name="margin" type="MarginContainer" parent="12"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 7
+
+[node name="upgrades" type="HBoxContainer" parent="12/margin"]
+visible = false
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 2
+
+[node name="a" type="HBoxContainer" parent="12/margin/upgrades"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="on" type="ColorRect" parent="12/margin/upgrades/a"]
+visible = false
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.428704, 0.323724, 0, 1)
+
+[node name="off" type="ColorRect" parent="12/margin/upgrades/a"]
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.17081, 0.121802, 0, 1)
+
+[node name="b" type="HBoxContainer" parent="12/margin/upgrades"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="on" type="ColorRect" parent="12/margin/upgrades/b"]
+visible = false
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.956863, 0.737255, 0, 1)
+
+[node name="off" type="ColorRect" parent="12/margin/upgrades/b"]
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.17081, 0.121802, 0, 1)
 
 [node name="13" type="PanelContainer" parent="."]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 script = ExtResource("4_vb3xh")
 
+[node name="image" type="TextureRect" parent="13"]
+layout_mode = 2
+
+[node name="icon" type="Label" parent="13"]
+visible = false
+modulate = Color(1, 1, 1, 0.294118)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_fonts/font = ExtResource("3_374m3")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_1tuns")
+text = "🫙"
+horizontal_alignment = 1
+
+[node name="count" type="Label" parent="13"]
+visible = false
+modulate = Color(1, 1, 1, 0.294118)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxFlat_vb3xh")
+text = "30"
+horizontal_alignment = 1
+
+[node name="margin" type="MarginContainer" parent="13"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 7
+
+[node name="upgrades" type="HBoxContainer" parent="13/margin"]
+visible = false
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 2
+
+[node name="a" type="HBoxContainer" parent="13/margin/upgrades"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="on" type="ColorRect" parent="13/margin/upgrades/a"]
+visible = false
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.428704, 0.323724, 0, 1)
+
+[node name="off" type="ColorRect" parent="13/margin/upgrades/a"]
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.17081, 0.121802, 0, 1)
+
+[node name="b" type="HBoxContainer" parent="13/margin/upgrades"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="on" type="ColorRect" parent="13/margin/upgrades/b"]
+visible = false
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.956863, 0.737255, 0, 1)
+
+[node name="off" type="ColorRect" parent="13/margin/upgrades/b"]
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.17081, 0.121802, 0, 1)
+
 [node name="14" type="PanelContainer" parent="."]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 script = ExtResource("4_vb3xh")
 
+[node name="image" type="TextureRect" parent="14"]
+layout_mode = 2
+
 [node name="icon" type="Label" parent="14"]
+visible = false
 modulate = Color(1, 1, 1, 0.294118)
 layout_mode = 2
-theme_override_fonts/font = ExtResource("1_i8tg8")
+size_flags_horizontal = 8
+theme_override_fonts/font = ExtResource("3_374m3")
 theme_override_font_sizes/font_size = 32
-text = "🗡"
+theme_override_styles/normal = SubResource("StyleBoxFlat_1tuns")
+text = "🫙"
 horizontal_alignment = 1
+
+[node name="count" type="Label" parent="14"]
+visible = false
+modulate = Color(1, 1, 1, 0.294118)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxFlat_vb3xh")
+text = "30"
+horizontal_alignment = 1
+
+[node name="margin" type="MarginContainer" parent="14"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 7
+
+[node name="upgrades" type="HBoxContainer" parent="14/margin"]
+visible = false
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 2
+
+[node name="a" type="HBoxContainer" parent="14/margin/upgrades"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="on" type="ColorRect" parent="14/margin/upgrades/a"]
+visible = false
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.428704, 0.323724, 0, 1)
+
+[node name="off" type="ColorRect" parent="14/margin/upgrades/a"]
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.17081, 0.121802, 0, 1)
+
+[node name="b" type="HBoxContainer" parent="14/margin/upgrades"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="on" type="ColorRect" parent="14/margin/upgrades/b"]
+visible = false
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.956863, 0.737255, 0, 1)
+
+[node name="off" type="ColorRect" parent="14/margin/upgrades/b"]
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.17081, 0.121802, 0, 1)
 
 [node name="weapon" type="PanelContainer" parent="."]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_dfp1u")
-script = ExtResource("4_vb3xh")
+script = ExtResource("5_1tuns")
 
-[node name="icon" type="Label" parent="weapon"]
+[node name="image" type="TextureRect" parent="weapon"]
+layout_mode = 2
+
+[node name="default" type="Label" parent="weapon"]
 modulate = Color(1, 1, 1, 0.294118)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_i8tg8")
@@ -205,13 +1591,83 @@ theme_override_font_sizes/font_size = 32
 text = "🗡"
 horizontal_alignment = 1
 
+[node name="icon" type="Label" parent="weapon"]
+visible = false
+modulate = Color(1, 1, 1, 0.294118)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_fonts/font = ExtResource("3_374m3")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_1tuns")
+text = "🫙"
+horizontal_alignment = 1
+
+[node name="count" type="Label" parent="weapon"]
+visible = false
+modulate = Color(1, 1, 1, 0.294118)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxFlat_vb3xh")
+text = "30"
+horizontal_alignment = 1
+
+[node name="margin" type="MarginContainer" parent="weapon"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 7
+
+[node name="upgrades" type="HBoxContainer" parent="weapon/margin"]
+visible = false
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 2
+
+[node name="a" type="HBoxContainer" parent="weapon/margin/upgrades"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="on" type="ColorRect" parent="weapon/margin/upgrades/a"]
+visible = false
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.428704, 0.323724, 0, 1)
+
+[node name="off" type="ColorRect" parent="weapon/margin/upgrades/a"]
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.17081, 0.121802, 0, 1)
+
+[node name="b" type="HBoxContainer" parent="weapon/margin/upgrades"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="on" type="ColorRect" parent="weapon/margin/upgrades/b"]
+visible = false
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.956863, 0.737255, 0, 1)
+
+[node name="off" type="ColorRect" parent="weapon/margin/upgrades/b"]
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.17081, 0.121802, 0, 1)
+
 [node name="artifact" type="PanelContainer" parent="."]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_dfp1u")
-script = ExtResource("4_vb3xh")
+script = ExtResource("5_1tuns")
 
-[node name="icon" type="Label" parent="artifact"]
+[node name="image" type="TextureRect" parent="artifact"]
+layout_mode = 2
+
+[node name="default" type="Label" parent="artifact"]
 modulate = Color(1, 1, 1, 0.294118)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_i8tg8")
@@ -219,13 +1675,83 @@ theme_override_font_sizes/font_size = 32
 text = "🛡"
 horizontal_alignment = 1
 
+[node name="icon" type="Label" parent="artifact"]
+visible = false
+modulate = Color(1, 1, 1, 0.294118)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_fonts/font = ExtResource("3_374m3")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_1tuns")
+text = "🫙"
+horizontal_alignment = 1
+
+[node name="count" type="Label" parent="artifact"]
+visible = false
+modulate = Color(1, 1, 1, 0.294118)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxFlat_vb3xh")
+text = "30"
+horizontal_alignment = 1
+
+[node name="margin" type="MarginContainer" parent="artifact"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 7
+
+[node name="upgrades" type="HBoxContainer" parent="artifact/margin"]
+visible = false
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 2
+
+[node name="a" type="HBoxContainer" parent="artifact/margin/upgrades"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="on" type="ColorRect" parent="artifact/margin/upgrades/a"]
+visible = false
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.428704, 0.323724, 0, 1)
+
+[node name="off" type="ColorRect" parent="artifact/margin/upgrades/a"]
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.17081, 0.121802, 0, 1)
+
+[node name="b" type="HBoxContainer" parent="artifact/margin/upgrades"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="on" type="ColorRect" parent="artifact/margin/upgrades/b"]
+visible = false
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.956863, 0.737255, 0, 1)
+
+[node name="off" type="ColorRect" parent="artifact/margin/upgrades/b"]
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.17081, 0.121802, 0, 1)
+
 [node name="armor" type="PanelContainer" parent="."]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_dfp1u")
-script = ExtResource("4_vb3xh")
+script = ExtResource("5_1tuns")
 
-[node name="icon" type="Label" parent="armor"]
+[node name="image" type="TextureRect" parent="armor"]
+layout_mode = 2
+
+[node name="default" type="Label" parent="armor"]
 modulate = Color(1, 1, 1, 0.294118)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_i8tg8")
@@ -233,13 +1759,83 @@ theme_override_font_sizes/font_size = 32
 text = "🧥"
 horizontal_alignment = 1
 
+[node name="icon" type="Label" parent="armor"]
+visible = false
+modulate = Color(1, 1, 1, 0.294118)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_fonts/font = ExtResource("3_374m3")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_1tuns")
+text = "🫙"
+horizontal_alignment = 1
+
+[node name="count" type="Label" parent="armor"]
+visible = false
+modulate = Color(1, 1, 1, 0.294118)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxFlat_vb3xh")
+text = "30"
+horizontal_alignment = 1
+
+[node name="margin" type="MarginContainer" parent="armor"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 7
+
+[node name="upgrades" type="HBoxContainer" parent="armor/margin"]
+visible = false
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 2
+
+[node name="a" type="HBoxContainer" parent="armor/margin/upgrades"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="on" type="ColorRect" parent="armor/margin/upgrades/a"]
+visible = false
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.428704, 0.323724, 0, 1)
+
+[node name="off" type="ColorRect" parent="armor/margin/upgrades/a"]
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.17081, 0.121802, 0, 1)
+
+[node name="b" type="HBoxContainer" parent="armor/margin/upgrades"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="on" type="ColorRect" parent="armor/margin/upgrades/b"]
+visible = false
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.956863, 0.737255, 0, 1)
+
+[node name="off" type="ColorRect" parent="armor/margin/upgrades/b"]
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.17081, 0.121802, 0, 1)
+
 [node name="legs" type="PanelContainer" parent="."]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_dfp1u")
-script = ExtResource("4_vb3xh")
+script = ExtResource("5_1tuns")
 
-[node name="icon" type="Label" parent="legs"]
+[node name="image" type="TextureRect" parent="legs"]
+layout_mode = 2
+
+[node name="default" type="Label" parent="legs"]
 modulate = Color(1, 1, 1, 0.294118)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_i8tg8")
@@ -247,16 +1843,86 @@ theme_override_font_sizes/font_size = 32
 text = "👖"
 horizontal_alignment = 1
 
+[node name="icon" type="Label" parent="legs"]
+visible = false
+modulate = Color(1, 1, 1, 0.294118)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_fonts/font = ExtResource("3_374m3")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_1tuns")
+text = "🫙"
+horizontal_alignment = 1
+
+[node name="count" type="Label" parent="legs"]
+visible = false
+modulate = Color(1, 1, 1, 0.294118)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxFlat_vb3xh")
+text = "30"
+horizontal_alignment = 1
+
+[node name="margin" type="MarginContainer" parent="legs"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 7
+
+[node name="upgrades" type="HBoxContainer" parent="legs/margin"]
+visible = false
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 2
+
+[node name="a" type="HBoxContainer" parent="legs/margin/upgrades"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="on" type="ColorRect" parent="legs/margin/upgrades/a"]
+visible = false
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.428704, 0.323724, 0, 1)
+
+[node name="off" type="ColorRect" parent="legs/margin/upgrades/a"]
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.17081, 0.121802, 0, 1)
+
+[node name="b" type="HBoxContainer" parent="legs/margin/upgrades"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="on" type="ColorRect" parent="legs/margin/upgrades/b"]
+visible = false
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.956863, 0.737255, 0, 1)
+
+[node name="off" type="ColorRect" parent="legs/margin/upgrades/b"]
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.17081, 0.121802, 0, 1)
+
 [node name="boots" type="PanelContainer" parent="."]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_dfp1u")
-script = ExtResource("4_vb3xh")
+script = ExtResource("5_1tuns")
 
-[node name="icon" type="Control" parent="boots"]
+[node name="image" type="TextureRect" parent="boots"]
 layout_mode = 2
 
-[node name="boot-1" type="MarginContainer" parent="boots/icon"]
+[node name="default" type="Control" parent="boots"]
+layout_mode = 2
+
+[node name="boot-1" type="MarginContainer" parent="boots/default"]
 layout_mode = 2
 offset_right = 60.0
 offset_bottom = 60.0
@@ -265,7 +1931,7 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 9
 
-[node name="icon" type="Label" parent="boots/icon/boot-1"]
+[node name="icon" type="Label" parent="boots/default/boot-1"]
 modulate = Color(1, 1, 1, 0.294118)
 layout_mode = 2
 size_flags_horizontal = 8
@@ -274,7 +1940,7 @@ theme_override_font_sizes/font_size = 24
 text = "🥾"
 horizontal_alignment = 1
 
-[node name="boot-2" type="MarginContainer" parent="boots/icon"]
+[node name="boot-2" type="MarginContainer" parent="boots/default"]
 layout_mode = 2
 offset_right = 60.0
 offset_bottom = 60.0
@@ -283,7 +1949,7 @@ theme_override_constants/margin_top = 9
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 
-[node name="icon" type="Label" parent="boots/icon/boot-2"]
+[node name="icon" type="Label" parent="boots/default/boot-2"]
 modulate = Color(1, 1, 1, 0.294118)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -291,3 +1957,70 @@ theme_override_fonts/font = ExtResource("1_i8tg8")
 theme_override_font_sizes/font_size = 24
 text = "🥾"
 horizontal_alignment = 1
+
+[node name="icon" type="Label" parent="boots"]
+visible = false
+modulate = Color(1, 1, 1, 0.294118)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_fonts/font = ExtResource("3_374m3")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_1tuns")
+text = "🫙"
+horizontal_alignment = 1
+
+[node name="count" type="Label" parent="boots"]
+visible = false
+modulate = Color(1, 1, 1, 0.294118)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxFlat_vb3xh")
+text = "30"
+horizontal_alignment = 1
+
+[node name="margin" type="MarginContainer" parent="boots"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 7
+
+[node name="upgrades" type="HBoxContainer" parent="boots/margin"]
+visible = false
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 2
+
+[node name="a" type="HBoxContainer" parent="boots/margin/upgrades"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="on" type="ColorRect" parent="boots/margin/upgrades/a"]
+visible = false
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.428704, 0.323724, 0, 1)
+
+[node name="off" type="ColorRect" parent="boots/margin/upgrades/a"]
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.17081, 0.121802, 0, 1)
+
+[node name="b" type="HBoxContainer" parent="boots/margin/upgrades"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="on" type="ColorRect" parent="boots/margin/upgrades/b"]
+visible = false
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.956863, 0.737255, 0, 1)
+
+[node name="off" type="ColorRect" parent="boots/margin/upgrades/b"]
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.17081, 0.121802, 0, 1)
