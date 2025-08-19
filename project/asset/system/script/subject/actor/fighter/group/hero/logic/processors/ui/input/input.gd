@@ -11,12 +11,6 @@ extends Node
 var motion: Vector2:
 	get: return Input.get_vector("left", "right", "forward", "backward")
 
-"""
-func _ready() -> void:
-	for act in ["punch", "kick", "fire", "whip"]:
-		board.set_value(act, {})
-"""
-
 func _input(_event: InputEvent) -> void: modes.current.access(motion)
 
 func _physics_process(delta) -> void: modes.current.process_physics(delta)

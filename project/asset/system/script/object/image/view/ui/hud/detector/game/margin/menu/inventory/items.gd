@@ -1,5 +1,6 @@
 extends HFlowContainer
 
-@onready var primary: Array[PanelContainer] = [
-	 $primary_0, $primary_1, $primary_2, $primary_3, $primary_4
-]
+@onready var primary: Array[PanelContainer] = [$slot_0, $slot_1, $slot_2, $slot_3, $slot_4]
+@onready var equipment: Array[PanelContainer] = [$weapon, $artifact, $armor, $legs, $boots]
+
+@onready var items: Array[Node] = get_children()
