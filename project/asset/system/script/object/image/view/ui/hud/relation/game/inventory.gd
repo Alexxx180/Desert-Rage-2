@@ -9,6 +9,6 @@ func controls(hud: CanvasLayer, inventory: VSplitContainer) -> void:
 	# """
 	for hero in hud.get_node("../../group").deploy.party.heroes:
 		var ui: Node = hero.logic.processors.ui
-		ui.inventory.logic.inventory = hud.detector.game.inventory.items
+		ui.inventory.logic.items.inventory = hud.detector.game.inventory.items
 		ui.inventory.logic.update_inventory_storage()
 	# """
