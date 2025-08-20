@@ -30,7 +30,7 @@ func fill_the_jar() -> void:
 		var jar: int = items.find_same_item(storage, 0)
 		if items.have(jar):
 			items.use_item(jar, storage[jar])
-			items.add_item(water, storage[water])
+			items.put_item(water, storage[water], 1)
 
 func remember_inventory(no: int) -> void:
 	pass
