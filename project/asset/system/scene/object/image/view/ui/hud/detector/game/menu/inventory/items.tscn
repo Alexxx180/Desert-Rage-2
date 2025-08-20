@@ -1,11 +1,13 @@
-[gd_scene load_steps=10 format=3 uid="uid://dqlgy3l13bibl"]
+[gd_scene load_steps=14 format=3 uid="uid://dqlgy3l13bibl"]
 
 [ext_resource type="Script" uid="uid://bmdahhw0xgfv8" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/menu/inventory/items.gd" id="1_bn4qj"]
 [ext_resource type="FontFile" uid="uid://b2wbdbnkxcqv1" path="res://asset/resource/font/NotoEmoji-VariableFont_wght.ttf" id="1_i8tg8"]
 [ext_resource type="Script" uid="uid://ckwy3qb2rie2m" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/menu/inventory/item/primary.gd" id="2_ayboh"]
 [ext_resource type="FontFile" uid="uid://b37js8y80ak1k" path="res://asset/resource/font/NotoColorEmoji-Regular.ttf" id="3_374m3"]
+[ext_resource type="Script" uid="uid://bdu6kwvinxtnx" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/menu/inventory/item/count.gd" id="4_8ovpw"]
 [ext_resource type="Script" uid="uid://bb0iykbgs3tpv" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/menu/inventory/item/item.gd" id="4_vb3xh"]
 [ext_resource type="Script" uid="uid://e3s47evggk2s" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/menu/inventory/item/equip.gd" id="5_1tuns"]
+[ext_resource type="FontFile" uid="uid://dxg5wbmrewk2p" path="res://asset/resource/font/Lato-Regular.ttf" id="5_mg8rv"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dfp1u"]
 bg_color = Color(0.20871, 0.20871, 0.20871, 1)
@@ -20,9 +22,12 @@ content_margin_right = 12.0
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vb3xh"]
-content_margin_right = 10.0
-content_margin_bottom = 2.0
+content_margin_bottom = 1.0
 bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1tuns"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lrum8"]
 
 [node name="items" type="HFlowContainer"]
 anchors_preset = 15
@@ -56,65 +61,98 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_1tuns")
 text = "🫙"
 horizontal_alignment = 1
 
-[node name="selection" type="ColorRect" parent="slot_0"]
-custom_minimum_size = Vector2(0, 3)
+[node name="count" type="MarginContainer" parent="slot_0"]
 layout_mode = 2
 size_flags_vertical = 8
-color = Color(0.184314, 0.184314, 0.72549, 1)
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 2
+script = ExtResource("4_8ovpw")
 
-[node name="count" type="Label" parent="slot_0"]
-visible = false
+[node name="progress" type="VBoxContainer" parent="slot_0/count"]
+layout_mode = 2
+theme_override_constants/separation = -3
+
+[node name="number" type="Label" parent="slot_0/count/progress"]
 modulate = Color(1, 1, 1, 0.294118)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
-theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("5_mg8rv")
+theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_vb3xh")
-text = "30"
 horizontal_alignment = 1
 
-[node name="margin" type="MarginContainer" parent="slot_0"]
+[node name="bar" type="ProgressBar" parent="slot_0/count/progress"]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 8
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 7
+theme_override_styles/background = SubResource("StyleBoxEmpty_1tuns")
+theme_override_styles/fill = SubResource("StyleBoxFlat_lrum8")
+max_value = 30.0
+step = 1.0
+fill_mode = 1
+show_percentage = false
 
-[node name="upgrades" type="HBoxContainer" parent="slot_0/margin"]
+[node name="selection" type="MarginContainer" parent="slot_0"]
 visible = false
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 0
+
+[node name="color" type="ColorRect" parent="slot_0/selection"]
 custom_minimum_size = Vector2(0, 2)
 layout_mode = 2
 size_flags_vertical = 8
+color = Color(0.184314, 0.184314, 0.72549, 1)
+
+[node name="upgrades" type="MarginContainer" parent="slot_0"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 7
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 7
+
+[node name="equipment" type="VBoxContainer" parent="slot_0/upgrades"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
 theme_override_constants/separation = 2
 
-[node name="a" type="HBoxContainer" parent="slot_0/margin/upgrades"]
+[node name="a" type="VBoxContainer" parent="slot_0/upgrades/equipment"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="on" type="ColorRect" parent="slot_0/margin/upgrades/a"]
-visible = false
-custom_minimum_size = Vector2(4, 0)
+[node name="on" type="ColorRect" parent="slot_0/upgrades/equipment/a"]
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
-color = Color(0.428704, 0.323724, 0, 1)
+color = Color(0.69863, 0.535067, 0, 1)
 
-[node name="off" type="ColorRect" parent="slot_0/margin/upgrades/a"]
-custom_minimum_size = Vector2(4, 0)
+[node name="off" type="ColorRect" parent="slot_0/upgrades/equipment/a"]
+visible = false
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
 color = Color(0.17081, 0.121802, 0, 1)
 
-[node name="b" type="HBoxContainer" parent="slot_0/margin/upgrades"]
+[node name="b" type="VBoxContainer" parent="slot_0/upgrades/equipment"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="on" type="ColorRect" parent="slot_0/margin/upgrades/b"]
-visible = false
-custom_minimum_size = Vector2(4, 0)
+[node name="on" type="ColorRect" parent="slot_0/upgrades/equipment/b"]
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
-color = Color(0.956863, 0.737255, 0, 1)
+color = Color(0.698039, 0.533333, 0, 1)
 
-[node name="off" type="ColorRect" parent="slot_0/margin/upgrades/b"]
-custom_minimum_size = Vector2(4, 0)
+[node name="off" type="ColorRect" parent="slot_0/upgrades/equipment/b"]
+visible = false
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
 color = Color(0.17081, 0.121802, 0, 1)
 
@@ -138,66 +176,98 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_1tuns")
 text = "🫙"
 horizontal_alignment = 1
 
-[node name="selection" type="ColorRect" parent="slot_1"]
-visible = false
-custom_minimum_size = Vector2(0, 3)
+[node name="count" type="MarginContainer" parent="slot_1"]
 layout_mode = 2
 size_flags_vertical = 8
-color = Color(0.184314, 0.184314, 0.72549, 1)
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 2
+script = ExtResource("4_8ovpw")
 
-[node name="count" type="Label" parent="slot_1"]
-visible = false
+[node name="progress" type="VBoxContainer" parent="slot_1/count"]
+layout_mode = 2
+theme_override_constants/separation = -3
+
+[node name="number" type="Label" parent="slot_1/count/progress"]
 modulate = Color(1, 1, 1, 0.294118)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
-theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("5_mg8rv")
+theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_vb3xh")
-text = "30"
 horizontal_alignment = 1
 
-[node name="margin" type="MarginContainer" parent="slot_1"]
+[node name="bar" type="ProgressBar" parent="slot_1/count/progress"]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 8
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 7
+theme_override_styles/background = SubResource("StyleBoxEmpty_1tuns")
+theme_override_styles/fill = SubResource("StyleBoxFlat_lrum8")
+max_value = 30.0
+step = 1.0
+fill_mode = 1
+show_percentage = false
 
-[node name="upgrades" type="HBoxContainer" parent="slot_1/margin"]
+[node name="selection" type="MarginContainer" parent="slot_1"]
 visible = false
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 0
+
+[node name="color" type="ColorRect" parent="slot_1/selection"]
 custom_minimum_size = Vector2(0, 2)
 layout_mode = 2
 size_flags_vertical = 8
+color = Color(0.184314, 0.184314, 0.72549, 1)
+
+[node name="upgrades" type="MarginContainer" parent="slot_1"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 7
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 7
+
+[node name="equipment" type="VBoxContainer" parent="slot_1/upgrades"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
 theme_override_constants/separation = 2
 
-[node name="a" type="HBoxContainer" parent="slot_1/margin/upgrades"]
+[node name="a" type="VBoxContainer" parent="slot_1/upgrades/equipment"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="on" type="ColorRect" parent="slot_1/margin/upgrades/a"]
-visible = false
-custom_minimum_size = Vector2(4, 0)
+[node name="on" type="ColorRect" parent="slot_1/upgrades/equipment/a"]
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
-color = Color(0.428704, 0.323724, 0, 1)
+color = Color(0.69863, 0.535067, 0, 1)
 
-[node name="off" type="ColorRect" parent="slot_1/margin/upgrades/a"]
-custom_minimum_size = Vector2(4, 0)
+[node name="off" type="ColorRect" parent="slot_1/upgrades/equipment/a"]
+visible = false
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
 color = Color(0.17081, 0.121802, 0, 1)
 
-[node name="b" type="HBoxContainer" parent="slot_1/margin/upgrades"]
+[node name="b" type="VBoxContainer" parent="slot_1/upgrades/equipment"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="on" type="ColorRect" parent="slot_1/margin/upgrades/b"]
-visible = false
-custom_minimum_size = Vector2(4, 0)
+[node name="on" type="ColorRect" parent="slot_1/upgrades/equipment/b"]
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
-color = Color(0.956863, 0.737255, 0, 1)
+color = Color(0.698039, 0.533333, 0, 1)
 
-[node name="off" type="ColorRect" parent="slot_1/margin/upgrades/b"]
-custom_minimum_size = Vector2(4, 0)
+[node name="off" type="ColorRect" parent="slot_1/upgrades/equipment/b"]
+visible = false
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
 color = Color(0.17081, 0.121802, 0, 1)
 
@@ -211,76 +281,108 @@ script = ExtResource("2_ayboh")
 layout_mode = 2
 
 [node name="icon" type="Label" parent="slot_2"]
+visible = false
 modulate = Color(1, 1, 1, 0.294118)
 layout_mode = 2
 size_flags_horizontal = 8
-theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("3_374m3")
 theme_override_font_sizes/font_size = 32
 theme_override_styles/normal = SubResource("StyleBoxFlat_1tuns")
-text = "🔪"
+text = "🫙"
 horizontal_alignment = 1
 
-[node name="selection" type="ColorRect" parent="slot_2"]
+[node name="count" type="MarginContainer" parent="slot_2"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 2
+script = ExtResource("4_8ovpw")
+
+[node name="progress" type="VBoxContainer" parent="slot_2/count"]
+layout_mode = 2
+theme_override_constants/separation = -3
+
+[node name="number" type="Label" parent="slot_2/count/progress"]
+modulate = Color(1, 1, 1, 0.294118)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("5_mg8rv")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_vb3xh")
+horizontal_alignment = 1
+
+[node name="bar" type="ProgressBar" parent="slot_2/count/progress"]
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxEmpty_1tuns")
+theme_override_styles/fill = SubResource("StyleBoxFlat_lrum8")
+max_value = 30.0
+step = 1.0
+fill_mode = 1
+show_percentage = false
+
+[node name="selection" type="MarginContainer" parent="slot_2"]
 visible = false
-custom_minimum_size = Vector2(0, 3)
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 0
+
+[node name="color" type="ColorRect" parent="slot_2/selection"]
+custom_minimum_size = Vector2(0, 2)
 layout_mode = 2
 size_flags_vertical = 8
 color = Color(0.184314, 0.184314, 0.72549, 1)
 
-[node name="count" type="Label" parent="slot_2"]
+[node name="upgrades" type="MarginContainer" parent="slot_2"]
 visible = false
-modulate = Color(1, 1, 1, 0.294118)
 layout_mode = 2
 size_flags_horizontal = 8
-size_flags_vertical = 8
-theme_override_font_sizes/font_size = 14
-theme_override_styles/normal = SubResource("StyleBoxFlat_vb3xh")
-text = "30"
-horizontal_alignment = 1
-
-[node name="margin" type="MarginContainer" parent="slot_2"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 8
+size_flags_vertical = 4
 theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 7
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 7
 
-[node name="upgrades" type="HBoxContainer" parent="slot_2/margin"]
-visible = false
+[node name="equipment" type="VBoxContainer" parent="slot_2/upgrades"]
 custom_minimum_size = Vector2(0, 2)
 layout_mode = 2
-size_flags_vertical = 8
+size_flags_horizontal = 8
+size_flags_vertical = 4
 theme_override_constants/separation = 2
 
-[node name="a" type="HBoxContainer" parent="slot_2/margin/upgrades"]
+[node name="a" type="VBoxContainer" parent="slot_2/upgrades/equipment"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="on" type="ColorRect" parent="slot_2/margin/upgrades/a"]
-custom_minimum_size = Vector2(4, 0)
+[node name="on" type="ColorRect" parent="slot_2/upgrades/equipment/a"]
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
-color = Color(0.428704, 0.323724, 0, 1)
+color = Color(0.69863, 0.535067, 0, 1)
 
-[node name="off" type="ColorRect" parent="slot_2/margin/upgrades/a"]
+[node name="off" type="ColorRect" parent="slot_2/upgrades/equipment/a"]
 visible = false
-custom_minimum_size = Vector2(4, 0)
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
 color = Color(0.17081, 0.121802, 0, 1)
 
-[node name="b" type="HBoxContainer" parent="slot_2/margin/upgrades"]
+[node name="b" type="VBoxContainer" parent="slot_2/upgrades/equipment"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="on" type="ColorRect" parent="slot_2/margin/upgrades/b"]
-visible = false
-custom_minimum_size = Vector2(4, 0)
+[node name="on" type="ColorRect" parent="slot_2/upgrades/equipment/b"]
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
-color = Color(0.956863, 0.737255, 0, 1)
+color = Color(0.698039, 0.533333, 0, 1)
 
-[node name="off" type="ColorRect" parent="slot_2/margin/upgrades/b"]
-custom_minimum_size = Vector2(4, 0)
+[node name="off" type="ColorRect" parent="slot_2/upgrades/equipment/b"]
+visible = false
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
 color = Color(0.17081, 0.121802, 0, 1)
 
@@ -304,66 +406,98 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_1tuns")
 text = "🫙"
 horizontal_alignment = 1
 
-[node name="selection" type="ColorRect" parent="slot_3"]
-visible = false
-custom_minimum_size = Vector2(0, 3)
+[node name="count" type="MarginContainer" parent="slot_3"]
 layout_mode = 2
 size_flags_vertical = 8
-color = Color(0.184314, 0.184314, 0.72549, 1)
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 2
+script = ExtResource("4_8ovpw")
 
-[node name="count" type="Label" parent="slot_3"]
-visible = false
+[node name="progress" type="VBoxContainer" parent="slot_3/count"]
+layout_mode = 2
+theme_override_constants/separation = -3
+
+[node name="number" type="Label" parent="slot_3/count/progress"]
 modulate = Color(1, 1, 1, 0.294118)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
-theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("5_mg8rv")
+theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_vb3xh")
-text = "30"
 horizontal_alignment = 1
 
-[node name="margin" type="MarginContainer" parent="slot_3"]
+[node name="bar" type="ProgressBar" parent="slot_3/count/progress"]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 8
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 7
+theme_override_styles/background = SubResource("StyleBoxEmpty_1tuns")
+theme_override_styles/fill = SubResource("StyleBoxFlat_lrum8")
+max_value = 30.0
+step = 1.0
+fill_mode = 1
+show_percentage = false
 
-[node name="upgrades" type="HBoxContainer" parent="slot_3/margin"]
+[node name="selection" type="MarginContainer" parent="slot_3"]
 visible = false
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 0
+
+[node name="color" type="ColorRect" parent="slot_3/selection"]
 custom_minimum_size = Vector2(0, 2)
 layout_mode = 2
 size_flags_vertical = 8
+color = Color(0.184314, 0.184314, 0.72549, 1)
+
+[node name="upgrades" type="MarginContainer" parent="slot_3"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 7
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 7
+
+[node name="equipment" type="VBoxContainer" parent="slot_3/upgrades"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
 theme_override_constants/separation = 2
 
-[node name="a" type="HBoxContainer" parent="slot_3/margin/upgrades"]
+[node name="a" type="VBoxContainer" parent="slot_3/upgrades/equipment"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="on" type="ColorRect" parent="slot_3/margin/upgrades/a"]
-visible = false
-custom_minimum_size = Vector2(4, 0)
+[node name="on" type="ColorRect" parent="slot_3/upgrades/equipment/a"]
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
-color = Color(0.428704, 0.323724, 0, 1)
+color = Color(0.69863, 0.535067, 0, 1)
 
-[node name="off" type="ColorRect" parent="slot_3/margin/upgrades/a"]
-custom_minimum_size = Vector2(4, 0)
+[node name="off" type="ColorRect" parent="slot_3/upgrades/equipment/a"]
+visible = false
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
 color = Color(0.17081, 0.121802, 0, 1)
 
-[node name="b" type="HBoxContainer" parent="slot_3/margin/upgrades"]
+[node name="b" type="VBoxContainer" parent="slot_3/upgrades/equipment"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="on" type="ColorRect" parent="slot_3/margin/upgrades/b"]
-visible = false
-custom_minimum_size = Vector2(4, 0)
+[node name="on" type="ColorRect" parent="slot_3/upgrades/equipment/b"]
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
-color = Color(0.956863, 0.737255, 0, 1)
+color = Color(0.698039, 0.533333, 0, 1)
 
-[node name="off" type="ColorRect" parent="slot_3/margin/upgrades/b"]
-custom_minimum_size = Vector2(4, 0)
+[node name="off" type="ColorRect" parent="slot_3/upgrades/equipment/b"]
+visible = false
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
 color = Color(0.17081, 0.121802, 0, 1)
 
@@ -387,66 +521,98 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_1tuns")
 text = "🫙"
 horizontal_alignment = 1
 
-[node name="selection" type="ColorRect" parent="slot_4"]
-visible = false
-custom_minimum_size = Vector2(0, 3)
+[node name="count" type="MarginContainer" parent="slot_4"]
 layout_mode = 2
 size_flags_vertical = 8
-color = Color(0.184314, 0.184314, 0.72549, 1)
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 2
+script = ExtResource("4_8ovpw")
 
-[node name="count" type="Label" parent="slot_4"]
-visible = false
+[node name="progress" type="VBoxContainer" parent="slot_4/count"]
+layout_mode = 2
+theme_override_constants/separation = -3
+
+[node name="number" type="Label" parent="slot_4/count/progress"]
 modulate = Color(1, 1, 1, 0.294118)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
-theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("5_mg8rv")
+theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_vb3xh")
-text = "30"
 horizontal_alignment = 1
 
-[node name="margin" type="MarginContainer" parent="slot_4"]
+[node name="bar" type="ProgressBar" parent="slot_4/count/progress"]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 8
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 7
+theme_override_styles/background = SubResource("StyleBoxEmpty_1tuns")
+theme_override_styles/fill = SubResource("StyleBoxFlat_lrum8")
+max_value = 30.0
+step = 1.0
+fill_mode = 1
+show_percentage = false
 
-[node name="upgrades" type="HBoxContainer" parent="slot_4/margin"]
+[node name="selection" type="MarginContainer" parent="slot_4"]
 visible = false
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 0
+
+[node name="color" type="ColorRect" parent="slot_4/selection"]
 custom_minimum_size = Vector2(0, 2)
 layout_mode = 2
 size_flags_vertical = 8
+color = Color(0.184314, 0.184314, 0.72549, 1)
+
+[node name="upgrades" type="MarginContainer" parent="slot_4"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 7
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 7
+
+[node name="equipment" type="VBoxContainer" parent="slot_4/upgrades"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
 theme_override_constants/separation = 2
 
-[node name="a" type="HBoxContainer" parent="slot_4/margin/upgrades"]
+[node name="a" type="VBoxContainer" parent="slot_4/upgrades/equipment"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="on" type="ColorRect" parent="slot_4/margin/upgrades/a"]
-visible = false
-custom_minimum_size = Vector2(4, 0)
+[node name="on" type="ColorRect" parent="slot_4/upgrades/equipment/a"]
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
-color = Color(0.428704, 0.323724, 0, 1)
+color = Color(0.69863, 0.535067, 0, 1)
 
-[node name="off" type="ColorRect" parent="slot_4/margin/upgrades/a"]
-custom_minimum_size = Vector2(4, 0)
+[node name="off" type="ColorRect" parent="slot_4/upgrades/equipment/a"]
+visible = false
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
 color = Color(0.17081, 0.121802, 0, 1)
 
-[node name="b" type="HBoxContainer" parent="slot_4/margin/upgrades"]
+[node name="b" type="VBoxContainer" parent="slot_4/upgrades/equipment"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="on" type="ColorRect" parent="slot_4/margin/upgrades/b"]
-visible = false
-custom_minimum_size = Vector2(4, 0)
+[node name="on" type="ColorRect" parent="slot_4/upgrades/equipment/b"]
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
-color = Color(0.956863, 0.737255, 0, 1)
+color = Color(0.698039, 0.533333, 0, 1)
 
-[node name="off" type="ColorRect" parent="slot_4/margin/upgrades/b"]
-custom_minimum_size = Vector2(4, 0)
+[node name="off" type="ColorRect" parent="slot_4/upgrades/equipment/b"]
+visible = false
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
 color = Color(0.17081, 0.121802, 0, 1)
 
@@ -469,59 +635,98 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_1tuns")
 text = "🫙"
 horizontal_alignment = 1
 
-[node name="count" type="Label" parent="0"]
-visible = false
+[node name="count" type="MarginContainer" parent="0"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 2
+script = ExtResource("4_8ovpw")
+
+[node name="progress" type="VBoxContainer" parent="0/count"]
+layout_mode = 2
+theme_override_constants/separation = -3
+
+[node name="number" type="Label" parent="0/count/progress"]
 modulate = Color(1, 1, 1, 0.294118)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
-theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("5_mg8rv")
+theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_vb3xh")
-text = "30"
 horizontal_alignment = 1
 
-[node name="margin" type="MarginContainer" parent="0"]
+[node name="bar" type="ProgressBar" parent="0/count/progress"]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 8
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 7
+theme_override_styles/background = SubResource("StyleBoxEmpty_1tuns")
+theme_override_styles/fill = SubResource("StyleBoxFlat_lrum8")
+max_value = 30.0
+step = 1.0
+fill_mode = 1
+show_percentage = false
 
-[node name="upgrades" type="HBoxContainer" parent="0/margin"]
+[node name="selection" type="MarginContainer" parent="0"]
 visible = false
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 0
+
+[node name="color" type="ColorRect" parent="0/selection"]
 custom_minimum_size = Vector2(0, 2)
 layout_mode = 2
 size_flags_vertical = 8
+color = Color(0.184314, 0.184314, 0.72549, 1)
+
+[node name="upgrades" type="MarginContainer" parent="0"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 7
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 7
+
+[node name="equipment" type="VBoxContainer" parent="0/upgrades"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
 theme_override_constants/separation = 2
 
-[node name="a" type="HBoxContainer" parent="0/margin/upgrades"]
+[node name="a" type="VBoxContainer" parent="0/upgrades/equipment"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="on" type="ColorRect" parent="0/margin/upgrades/a"]
-visible = false
-custom_minimum_size = Vector2(4, 0)
+[node name="on" type="ColorRect" parent="0/upgrades/equipment/a"]
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
-color = Color(0.428704, 0.323724, 0, 1)
+color = Color(0.69863, 0.535067, 0, 1)
 
-[node name="off" type="ColorRect" parent="0/margin/upgrades/a"]
-custom_minimum_size = Vector2(4, 0)
+[node name="off" type="ColorRect" parent="0/upgrades/equipment/a"]
+visible = false
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
 color = Color(0.17081, 0.121802, 0, 1)
 
-[node name="b" type="HBoxContainer" parent="0/margin/upgrades"]
+[node name="b" type="VBoxContainer" parent="0/upgrades/equipment"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="on" type="ColorRect" parent="0/margin/upgrades/b"]
-visible = false
-custom_minimum_size = Vector2(4, 0)
+[node name="on" type="ColorRect" parent="0/upgrades/equipment/b"]
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
-color = Color(0.956863, 0.737255, 0, 1)
+color = Color(0.698039, 0.533333, 0, 1)
 
-[node name="off" type="ColorRect" parent="0/margin/upgrades/b"]
-custom_minimum_size = Vector2(4, 0)
+[node name="off" type="ColorRect" parent="0/upgrades/equipment/b"]
+visible = false
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
 color = Color(0.17081, 0.121802, 0, 1)
 
@@ -544,59 +749,98 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_1tuns")
 text = "🫙"
 horizontal_alignment = 1
 
-[node name="count" type="Label" parent="1"]
-visible = false
+[node name="count" type="MarginContainer" parent="1"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 2
+script = ExtResource("4_8ovpw")
+
+[node name="progress" type="VBoxContainer" parent="1/count"]
+layout_mode = 2
+theme_override_constants/separation = -3
+
+[node name="number" type="Label" parent="1/count/progress"]
 modulate = Color(1, 1, 1, 0.294118)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
-theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("5_mg8rv")
+theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_vb3xh")
-text = "30"
 horizontal_alignment = 1
 
-[node name="margin" type="MarginContainer" parent="1"]
+[node name="bar" type="ProgressBar" parent="1/count/progress"]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 8
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 7
+theme_override_styles/background = SubResource("StyleBoxEmpty_1tuns")
+theme_override_styles/fill = SubResource("StyleBoxFlat_lrum8")
+max_value = 30.0
+step = 1.0
+fill_mode = 1
+show_percentage = false
 
-[node name="upgrades" type="HBoxContainer" parent="1/margin"]
+[node name="selection" type="MarginContainer" parent="1"]
 visible = false
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 0
+
+[node name="color" type="ColorRect" parent="1/selection"]
 custom_minimum_size = Vector2(0, 2)
 layout_mode = 2
 size_flags_vertical = 8
+color = Color(0.184314, 0.184314, 0.72549, 1)
+
+[node name="upgrades" type="MarginContainer" parent="1"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 7
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 7
+
+[node name="equipment" type="VBoxContainer" parent="1/upgrades"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
 theme_override_constants/separation = 2
 
-[node name="a" type="HBoxContainer" parent="1/margin/upgrades"]
+[node name="a" type="VBoxContainer" parent="1/upgrades/equipment"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="on" type="ColorRect" parent="1/margin/upgrades/a"]
-visible = false
-custom_minimum_size = Vector2(4, 0)
+[node name="on" type="ColorRect" parent="1/upgrades/equipment/a"]
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
-color = Color(0.428704, 0.323724, 0, 1)
+color = Color(0.69863, 0.535067, 0, 1)
 
-[node name="off" type="ColorRect" parent="1/margin/upgrades/a"]
-custom_minimum_size = Vector2(4, 0)
+[node name="off" type="ColorRect" parent="1/upgrades/equipment/a"]
+visible = false
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
 color = Color(0.17081, 0.121802, 0, 1)
 
-[node name="b" type="HBoxContainer" parent="1/margin/upgrades"]
+[node name="b" type="VBoxContainer" parent="1/upgrades/equipment"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="on" type="ColorRect" parent="1/margin/upgrades/b"]
-visible = false
-custom_minimum_size = Vector2(4, 0)
+[node name="on" type="ColorRect" parent="1/upgrades/equipment/b"]
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
-color = Color(0.956863, 0.737255, 0, 1)
+color = Color(0.698039, 0.533333, 0, 1)
 
-[node name="off" type="ColorRect" parent="1/margin/upgrades/b"]
-custom_minimum_size = Vector2(4, 0)
+[node name="off" type="ColorRect" parent="1/upgrades/equipment/b"]
+visible = false
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
 color = Color(0.17081, 0.121802, 0, 1)
 
@@ -609,6 +853,7 @@ script = ExtResource("4_vb3xh")
 layout_mode = 2
 
 [node name="icon" type="Label" parent="2"]
+visible = false
 modulate = Color(1, 1, 1, 0.294118)
 layout_mode = 2
 size_flags_horizontal = 8
@@ -618,59 +863,98 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_1tuns")
 text = "🫙"
 horizontal_alignment = 1
 
-[node name="count" type="Label" parent="2"]
-visible = false
+[node name="count" type="MarginContainer" parent="2"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 2
+script = ExtResource("4_8ovpw")
+
+[node name="progress" type="VBoxContainer" parent="2/count"]
+layout_mode = 2
+theme_override_constants/separation = -3
+
+[node name="number" type="Label" parent="2/count/progress"]
 modulate = Color(1, 1, 1, 0.294118)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
-theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("5_mg8rv")
+theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_vb3xh")
-text = "30"
 horizontal_alignment = 1
 
-[node name="margin" type="MarginContainer" parent="2"]
+[node name="bar" type="ProgressBar" parent="2/count/progress"]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 8
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 7
+theme_override_styles/background = SubResource("StyleBoxEmpty_1tuns")
+theme_override_styles/fill = SubResource("StyleBoxFlat_lrum8")
+max_value = 30.0
+step = 1.0
+fill_mode = 1
+show_percentage = false
 
-[node name="upgrades" type="HBoxContainer" parent="2/margin"]
+[node name="selection" type="MarginContainer" parent="2"]
 visible = false
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 0
+
+[node name="color" type="ColorRect" parent="2/selection"]
 custom_minimum_size = Vector2(0, 2)
 layout_mode = 2
 size_flags_vertical = 8
+color = Color(0.184314, 0.184314, 0.72549, 1)
+
+[node name="upgrades" type="MarginContainer" parent="2"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 7
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 7
+
+[node name="equipment" type="VBoxContainer" parent="2/upgrades"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
 theme_override_constants/separation = 2
 
-[node name="a" type="HBoxContainer" parent="2/margin/upgrades"]
+[node name="a" type="VBoxContainer" parent="2/upgrades/equipment"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="on" type="ColorRect" parent="2/margin/upgrades/a"]
-visible = false
-custom_minimum_size = Vector2(4, 0)
+[node name="on" type="ColorRect" parent="2/upgrades/equipment/a"]
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
-color = Color(0.428704, 0.323724, 0, 1)
+color = Color(0.69863, 0.535067, 0, 1)
 
-[node name="off" type="ColorRect" parent="2/margin/upgrades/a"]
-custom_minimum_size = Vector2(4, 0)
+[node name="off" type="ColorRect" parent="2/upgrades/equipment/a"]
+visible = false
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
 color = Color(0.17081, 0.121802, 0, 1)
 
-[node name="b" type="HBoxContainer" parent="2/margin/upgrades"]
+[node name="b" type="VBoxContainer" parent="2/upgrades/equipment"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="on" type="ColorRect" parent="2/margin/upgrades/b"]
-visible = false
-custom_minimum_size = Vector2(4, 0)
+[node name="on" type="ColorRect" parent="2/upgrades/equipment/b"]
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
-color = Color(0.956863, 0.737255, 0, 1)
+color = Color(0.698039, 0.533333, 0, 1)
 
-[node name="off" type="ColorRect" parent="2/margin/upgrades/b"]
-custom_minimum_size = Vector2(4, 0)
+[node name="off" type="ColorRect" parent="2/upgrades/equipment/b"]
+visible = false
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
 color = Color(0.17081, 0.121802, 0, 1)
 
@@ -693,59 +977,98 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_1tuns")
 text = "🫙"
 horizontal_alignment = 1
 
-[node name="count" type="Label" parent="3"]
-visible = false
+[node name="count" type="MarginContainer" parent="3"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 2
+script = ExtResource("4_8ovpw")
+
+[node name="progress" type="VBoxContainer" parent="3/count"]
+layout_mode = 2
+theme_override_constants/separation = -3
+
+[node name="number" type="Label" parent="3/count/progress"]
 modulate = Color(1, 1, 1, 0.294118)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
-theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("5_mg8rv")
+theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_vb3xh")
-text = "30"
 horizontal_alignment = 1
 
-[node name="margin" type="MarginContainer" parent="3"]
+[node name="bar" type="ProgressBar" parent="3/count/progress"]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 8
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 7
+theme_override_styles/background = SubResource("StyleBoxEmpty_1tuns")
+theme_override_styles/fill = SubResource("StyleBoxFlat_lrum8")
+max_value = 30.0
+step = 1.0
+fill_mode = 1
+show_percentage = false
 
-[node name="upgrades" type="HBoxContainer" parent="3/margin"]
+[node name="selection" type="MarginContainer" parent="3"]
 visible = false
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 0
+
+[node name="color" type="ColorRect" parent="3/selection"]
 custom_minimum_size = Vector2(0, 2)
 layout_mode = 2
 size_flags_vertical = 8
+color = Color(0.184314, 0.184314, 0.72549, 1)
+
+[node name="upgrades" type="MarginContainer" parent="3"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 7
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 7
+
+[node name="equipment" type="VBoxContainer" parent="3/upgrades"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
 theme_override_constants/separation = 2
 
-[node name="a" type="HBoxContainer" parent="3/margin/upgrades"]
+[node name="a" type="VBoxContainer" parent="3/upgrades/equipment"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="on" type="ColorRect" parent="3/margin/upgrades/a"]
-visible = false
-custom_minimum_size = Vector2(4, 0)
+[node name="on" type="ColorRect" parent="3/upgrades/equipment/a"]
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
-color = Color(0.428704, 0.323724, 0, 1)
+color = Color(0.69863, 0.535067, 0, 1)
 
-[node name="off" type="ColorRect" parent="3/margin/upgrades/a"]
-custom_minimum_size = Vector2(4, 0)
+[node name="off" type="ColorRect" parent="3/upgrades/equipment/a"]
+visible = false
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
 color = Color(0.17081, 0.121802, 0, 1)
 
-[node name="b" type="HBoxContainer" parent="3/margin/upgrades"]
+[node name="b" type="VBoxContainer" parent="3/upgrades/equipment"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="on" type="ColorRect" parent="3/margin/upgrades/b"]
-visible = false
-custom_minimum_size = Vector2(4, 0)
+[node name="on" type="ColorRect" parent="3/upgrades/equipment/b"]
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
-color = Color(0.956863, 0.737255, 0, 1)
+color = Color(0.698039, 0.533333, 0, 1)
 
-[node name="off" type="ColorRect" parent="3/margin/upgrades/b"]
-custom_minimum_size = Vector2(4, 0)
+[node name="off" type="ColorRect" parent="3/upgrades/equipment/b"]
+visible = false
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
 color = Color(0.17081, 0.121802, 0, 1)
 
@@ -768,59 +1091,98 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_1tuns")
 text = "🫙"
 horizontal_alignment = 1
 
-[node name="count" type="Label" parent="4"]
-visible = false
+[node name="count" type="MarginContainer" parent="4"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 2
+script = ExtResource("4_8ovpw")
+
+[node name="progress" type="VBoxContainer" parent="4/count"]
+layout_mode = 2
+theme_override_constants/separation = -3
+
+[node name="number" type="Label" parent="4/count/progress"]
 modulate = Color(1, 1, 1, 0.294118)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
-theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("5_mg8rv")
+theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_vb3xh")
-text = "30"
 horizontal_alignment = 1
 
-[node name="margin" type="MarginContainer" parent="4"]
+[node name="bar" type="ProgressBar" parent="4/count/progress"]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 8
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 7
+theme_override_styles/background = SubResource("StyleBoxEmpty_1tuns")
+theme_override_styles/fill = SubResource("StyleBoxFlat_lrum8")
+max_value = 30.0
+step = 1.0
+fill_mode = 1
+show_percentage = false
 
-[node name="upgrades" type="HBoxContainer" parent="4/margin"]
+[node name="selection" type="MarginContainer" parent="4"]
 visible = false
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 0
+
+[node name="color" type="ColorRect" parent="4/selection"]
 custom_minimum_size = Vector2(0, 2)
 layout_mode = 2
 size_flags_vertical = 8
+color = Color(0.184314, 0.184314, 0.72549, 1)
+
+[node name="upgrades" type="MarginContainer" parent="4"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 7
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 7
+
+[node name="equipment" type="VBoxContainer" parent="4/upgrades"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
 theme_override_constants/separation = 2
 
-[node name="a" type="HBoxContainer" parent="4/margin/upgrades"]
+[node name="a" type="VBoxContainer" parent="4/upgrades/equipment"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="on" type="ColorRect" parent="4/margin/upgrades/a"]
-visible = false
-custom_minimum_size = Vector2(4, 0)
+[node name="on" type="ColorRect" parent="4/upgrades/equipment/a"]
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
-color = Color(0.428704, 0.323724, 0, 1)
+color = Color(0.69863, 0.535067, 0, 1)
 
-[node name="off" type="ColorRect" parent="4/margin/upgrades/a"]
-custom_minimum_size = Vector2(4, 0)
+[node name="off" type="ColorRect" parent="4/upgrades/equipment/a"]
+visible = false
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
 color = Color(0.17081, 0.121802, 0, 1)
 
-[node name="b" type="HBoxContainer" parent="4/margin/upgrades"]
+[node name="b" type="VBoxContainer" parent="4/upgrades/equipment"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="on" type="ColorRect" parent="4/margin/upgrades/b"]
-visible = false
-custom_minimum_size = Vector2(4, 0)
+[node name="on" type="ColorRect" parent="4/upgrades/equipment/b"]
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
-color = Color(0.956863, 0.737255, 0, 1)
+color = Color(0.698039, 0.533333, 0, 1)
 
-[node name="off" type="ColorRect" parent="4/margin/upgrades/b"]
-custom_minimum_size = Vector2(4, 0)
+[node name="off" type="ColorRect" parent="4/upgrades/equipment/b"]
+visible = false
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
 color = Color(0.17081, 0.121802, 0, 1)
 
@@ -843,59 +1205,98 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_1tuns")
 text = "🫙"
 horizontal_alignment = 1
 
-[node name="count" type="Label" parent="5"]
-visible = false
+[node name="count" type="MarginContainer" parent="5"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 2
+script = ExtResource("4_8ovpw")
+
+[node name="progress" type="VBoxContainer" parent="5/count"]
+layout_mode = 2
+theme_override_constants/separation = -3
+
+[node name="number" type="Label" parent="5/count/progress"]
 modulate = Color(1, 1, 1, 0.294118)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
-theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("5_mg8rv")
+theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_vb3xh")
-text = "30"
 horizontal_alignment = 1
 
-[node name="margin" type="MarginContainer" parent="5"]
+[node name="bar" type="ProgressBar" parent="5/count/progress"]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 8
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 7
+theme_override_styles/background = SubResource("StyleBoxEmpty_1tuns")
+theme_override_styles/fill = SubResource("StyleBoxFlat_lrum8")
+max_value = 30.0
+step = 1.0
+fill_mode = 1
+show_percentage = false
 
-[node name="upgrades" type="HBoxContainer" parent="5/margin"]
+[node name="selection" type="MarginContainer" parent="5"]
 visible = false
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 0
+
+[node name="color" type="ColorRect" parent="5/selection"]
 custom_minimum_size = Vector2(0, 2)
 layout_mode = 2
 size_flags_vertical = 8
+color = Color(0.184314, 0.184314, 0.72549, 1)
+
+[node name="upgrades" type="MarginContainer" parent="5"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 7
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 7
+
+[node name="equipment" type="VBoxContainer" parent="5/upgrades"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
 theme_override_constants/separation = 2
 
-[node name="a" type="HBoxContainer" parent="5/margin/upgrades"]
+[node name="a" type="VBoxContainer" parent="5/upgrades/equipment"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="on" type="ColorRect" parent="5/margin/upgrades/a"]
-visible = false
-custom_minimum_size = Vector2(4, 0)
+[node name="on" type="ColorRect" parent="5/upgrades/equipment/a"]
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
-color = Color(0.428704, 0.323724, 0, 1)
+color = Color(0.69863, 0.535067, 0, 1)
 
-[node name="off" type="ColorRect" parent="5/margin/upgrades/a"]
-custom_minimum_size = Vector2(4, 0)
+[node name="off" type="ColorRect" parent="5/upgrades/equipment/a"]
+visible = false
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
 color = Color(0.17081, 0.121802, 0, 1)
 
-[node name="b" type="HBoxContainer" parent="5/margin/upgrades"]
+[node name="b" type="VBoxContainer" parent="5/upgrades/equipment"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="on" type="ColorRect" parent="5/margin/upgrades/b"]
-visible = false
-custom_minimum_size = Vector2(4, 0)
+[node name="on" type="ColorRect" parent="5/upgrades/equipment/b"]
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
-color = Color(0.956863, 0.737255, 0, 1)
+color = Color(0.698039, 0.533333, 0, 1)
 
-[node name="off" type="ColorRect" parent="5/margin/upgrades/b"]
-custom_minimum_size = Vector2(4, 0)
+[node name="off" type="ColorRect" parent="5/upgrades/equipment/b"]
+visible = false
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
 color = Color(0.17081, 0.121802, 0, 1)
 
@@ -918,59 +1319,98 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_1tuns")
 text = "🫙"
 horizontal_alignment = 1
 
-[node name="count" type="Label" parent="6"]
-visible = false
+[node name="count" type="MarginContainer" parent="6"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 2
+script = ExtResource("4_8ovpw")
+
+[node name="progress" type="VBoxContainer" parent="6/count"]
+layout_mode = 2
+theme_override_constants/separation = -3
+
+[node name="number" type="Label" parent="6/count/progress"]
 modulate = Color(1, 1, 1, 0.294118)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
-theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("5_mg8rv")
+theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_vb3xh")
-text = "30"
 horizontal_alignment = 1
 
-[node name="margin" type="MarginContainer" parent="6"]
+[node name="bar" type="ProgressBar" parent="6/count/progress"]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 8
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 7
+theme_override_styles/background = SubResource("StyleBoxEmpty_1tuns")
+theme_override_styles/fill = SubResource("StyleBoxFlat_lrum8")
+max_value = 30.0
+step = 1.0
+fill_mode = 1
+show_percentage = false
 
-[node name="upgrades" type="HBoxContainer" parent="6/margin"]
+[node name="selection" type="MarginContainer" parent="6"]
 visible = false
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 0
+
+[node name="color" type="ColorRect" parent="6/selection"]
 custom_minimum_size = Vector2(0, 2)
 layout_mode = 2
 size_flags_vertical = 8
+color = Color(0.184314, 0.184314, 0.72549, 1)
+
+[node name="upgrades" type="MarginContainer" parent="6"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 7
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 7
+
+[node name="equipment" type="VBoxContainer" parent="6/upgrades"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
 theme_override_constants/separation = 2
 
-[node name="a" type="HBoxContainer" parent="6/margin/upgrades"]
+[node name="a" type="VBoxContainer" parent="6/upgrades/equipment"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="on" type="ColorRect" parent="6/margin/upgrades/a"]
-visible = false
-custom_minimum_size = Vector2(4, 0)
+[node name="on" type="ColorRect" parent="6/upgrades/equipment/a"]
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
-color = Color(0.428704, 0.323724, 0, 1)
+color = Color(0.69863, 0.535067, 0, 1)
 
-[node name="off" type="ColorRect" parent="6/margin/upgrades/a"]
-custom_minimum_size = Vector2(4, 0)
+[node name="off" type="ColorRect" parent="6/upgrades/equipment/a"]
+visible = false
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
 color = Color(0.17081, 0.121802, 0, 1)
 
-[node name="b" type="HBoxContainer" parent="6/margin/upgrades"]
+[node name="b" type="VBoxContainer" parent="6/upgrades/equipment"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="on" type="ColorRect" parent="6/margin/upgrades/b"]
-visible = false
-custom_minimum_size = Vector2(4, 0)
+[node name="on" type="ColorRect" parent="6/upgrades/equipment/b"]
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
-color = Color(0.956863, 0.737255, 0, 1)
+color = Color(0.698039, 0.533333, 0, 1)
 
-[node name="off" type="ColorRect" parent="6/margin/upgrades/b"]
-custom_minimum_size = Vector2(4, 0)
+[node name="off" type="ColorRect" parent="6/upgrades/equipment/b"]
+visible = false
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
 color = Color(0.17081, 0.121802, 0, 1)
 
@@ -993,59 +1433,98 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_1tuns")
 text = "🫙"
 horizontal_alignment = 1
 
-[node name="count" type="Label" parent="7"]
-visible = false
+[node name="count" type="MarginContainer" parent="7"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 2
+script = ExtResource("4_8ovpw")
+
+[node name="progress" type="VBoxContainer" parent="7/count"]
+layout_mode = 2
+theme_override_constants/separation = -3
+
+[node name="number" type="Label" parent="7/count/progress"]
 modulate = Color(1, 1, 1, 0.294118)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
-theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("5_mg8rv")
+theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_vb3xh")
-text = "30"
 horizontal_alignment = 1
 
-[node name="margin" type="MarginContainer" parent="7"]
+[node name="bar" type="ProgressBar" parent="7/count/progress"]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 8
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 7
+theme_override_styles/background = SubResource("StyleBoxEmpty_1tuns")
+theme_override_styles/fill = SubResource("StyleBoxFlat_lrum8")
+max_value = 30.0
+step = 1.0
+fill_mode = 1
+show_percentage = false
 
-[node name="upgrades" type="HBoxContainer" parent="7/margin"]
+[node name="selection" type="MarginContainer" parent="7"]
 visible = false
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 0
+
+[node name="color" type="ColorRect" parent="7/selection"]
 custom_minimum_size = Vector2(0, 2)
 layout_mode = 2
 size_flags_vertical = 8
+color = Color(0.184314, 0.184314, 0.72549, 1)
+
+[node name="upgrades" type="MarginContainer" parent="7"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 7
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 7
+
+[node name="equipment" type="VBoxContainer" parent="7/upgrades"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
 theme_override_constants/separation = 2
 
-[node name="a" type="HBoxContainer" parent="7/margin/upgrades"]
+[node name="a" type="VBoxContainer" parent="7/upgrades/equipment"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="on" type="ColorRect" parent="7/margin/upgrades/a"]
-visible = false
-custom_minimum_size = Vector2(4, 0)
+[node name="on" type="ColorRect" parent="7/upgrades/equipment/a"]
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
-color = Color(0.428704, 0.323724, 0, 1)
+color = Color(0.69863, 0.535067, 0, 1)
 
-[node name="off" type="ColorRect" parent="7/margin/upgrades/a"]
-custom_minimum_size = Vector2(4, 0)
+[node name="off" type="ColorRect" parent="7/upgrades/equipment/a"]
+visible = false
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
 color = Color(0.17081, 0.121802, 0, 1)
 
-[node name="b" type="HBoxContainer" parent="7/margin/upgrades"]
+[node name="b" type="VBoxContainer" parent="7/upgrades/equipment"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="on" type="ColorRect" parent="7/margin/upgrades/b"]
-visible = false
-custom_minimum_size = Vector2(4, 0)
+[node name="on" type="ColorRect" parent="7/upgrades/equipment/b"]
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
-color = Color(0.956863, 0.737255, 0, 1)
+color = Color(0.698039, 0.533333, 0, 1)
 
-[node name="off" type="ColorRect" parent="7/margin/upgrades/b"]
-custom_minimum_size = Vector2(4, 0)
+[node name="off" type="ColorRect" parent="7/upgrades/equipment/b"]
+visible = false
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
 color = Color(0.17081, 0.121802, 0, 1)
 
@@ -1068,59 +1547,98 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_1tuns")
 text = "🫙"
 horizontal_alignment = 1
 
-[node name="count" type="Label" parent="8"]
-visible = false
+[node name="count" type="MarginContainer" parent="8"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 2
+script = ExtResource("4_8ovpw")
+
+[node name="progress" type="VBoxContainer" parent="8/count"]
+layout_mode = 2
+theme_override_constants/separation = -3
+
+[node name="number" type="Label" parent="8/count/progress"]
 modulate = Color(1, 1, 1, 0.294118)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
-theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("5_mg8rv")
+theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_vb3xh")
-text = "30"
 horizontal_alignment = 1
 
-[node name="margin" type="MarginContainer" parent="8"]
+[node name="bar" type="ProgressBar" parent="8/count/progress"]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 8
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 7
+theme_override_styles/background = SubResource("StyleBoxEmpty_1tuns")
+theme_override_styles/fill = SubResource("StyleBoxFlat_lrum8")
+max_value = 30.0
+step = 1.0
+fill_mode = 1
+show_percentage = false
 
-[node name="upgrades" type="HBoxContainer" parent="8/margin"]
+[node name="selection" type="MarginContainer" parent="8"]
 visible = false
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 0
+
+[node name="color" type="ColorRect" parent="8/selection"]
 custom_minimum_size = Vector2(0, 2)
 layout_mode = 2
 size_flags_vertical = 8
+color = Color(0.184314, 0.184314, 0.72549, 1)
+
+[node name="upgrades" type="MarginContainer" parent="8"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 7
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 7
+
+[node name="equipment" type="VBoxContainer" parent="8/upgrades"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
 theme_override_constants/separation = 2
 
-[node name="a" type="HBoxContainer" parent="8/margin/upgrades"]
+[node name="a" type="VBoxContainer" parent="8/upgrades/equipment"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="on" type="ColorRect" parent="8/margin/upgrades/a"]
-visible = false
-custom_minimum_size = Vector2(4, 0)
+[node name="on" type="ColorRect" parent="8/upgrades/equipment/a"]
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
-color = Color(0.428704, 0.323724, 0, 1)
+color = Color(0.69863, 0.535067, 0, 1)
 
-[node name="off" type="ColorRect" parent="8/margin/upgrades/a"]
-custom_minimum_size = Vector2(4, 0)
+[node name="off" type="ColorRect" parent="8/upgrades/equipment/a"]
+visible = false
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
 color = Color(0.17081, 0.121802, 0, 1)
 
-[node name="b" type="HBoxContainer" parent="8/margin/upgrades"]
+[node name="b" type="VBoxContainer" parent="8/upgrades/equipment"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="on" type="ColorRect" parent="8/margin/upgrades/b"]
-visible = false
-custom_minimum_size = Vector2(4, 0)
+[node name="on" type="ColorRect" parent="8/upgrades/equipment/b"]
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
-color = Color(0.956863, 0.737255, 0, 1)
+color = Color(0.698039, 0.533333, 0, 1)
 
-[node name="off" type="ColorRect" parent="8/margin/upgrades/b"]
-custom_minimum_size = Vector2(4, 0)
+[node name="off" type="ColorRect" parent="8/upgrades/equipment/b"]
+visible = false
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
 color = Color(0.17081, 0.121802, 0, 1)
 
@@ -1143,59 +1661,98 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_1tuns")
 text = "🫙"
 horizontal_alignment = 1
 
-[node name="count" type="Label" parent="9"]
-visible = false
+[node name="count" type="MarginContainer" parent="9"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 2
+script = ExtResource("4_8ovpw")
+
+[node name="progress" type="VBoxContainer" parent="9/count"]
+layout_mode = 2
+theme_override_constants/separation = -3
+
+[node name="number" type="Label" parent="9/count/progress"]
 modulate = Color(1, 1, 1, 0.294118)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
-theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("5_mg8rv")
+theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_vb3xh")
-text = "30"
 horizontal_alignment = 1
 
-[node name="margin" type="MarginContainer" parent="9"]
+[node name="bar" type="ProgressBar" parent="9/count/progress"]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 8
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 7
+theme_override_styles/background = SubResource("StyleBoxEmpty_1tuns")
+theme_override_styles/fill = SubResource("StyleBoxFlat_lrum8")
+max_value = 30.0
+step = 1.0
+fill_mode = 1
+show_percentage = false
 
-[node name="upgrades" type="HBoxContainer" parent="9/margin"]
+[node name="selection" type="MarginContainer" parent="9"]
 visible = false
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 0
+
+[node name="color" type="ColorRect" parent="9/selection"]
 custom_minimum_size = Vector2(0, 2)
 layout_mode = 2
 size_flags_vertical = 8
+color = Color(0.184314, 0.184314, 0.72549, 1)
+
+[node name="upgrades" type="MarginContainer" parent="9"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 7
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 7
+
+[node name="equipment" type="VBoxContainer" parent="9/upgrades"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
 theme_override_constants/separation = 2
 
-[node name="a" type="HBoxContainer" parent="9/margin/upgrades"]
+[node name="a" type="VBoxContainer" parent="9/upgrades/equipment"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="on" type="ColorRect" parent="9/margin/upgrades/a"]
-visible = false
-custom_minimum_size = Vector2(4, 0)
+[node name="on" type="ColorRect" parent="9/upgrades/equipment/a"]
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
-color = Color(0.428704, 0.323724, 0, 1)
+color = Color(0.69863, 0.535067, 0, 1)
 
-[node name="off" type="ColorRect" parent="9/margin/upgrades/a"]
-custom_minimum_size = Vector2(4, 0)
+[node name="off" type="ColorRect" parent="9/upgrades/equipment/a"]
+visible = false
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
 color = Color(0.17081, 0.121802, 0, 1)
 
-[node name="b" type="HBoxContainer" parent="9/margin/upgrades"]
+[node name="b" type="VBoxContainer" parent="9/upgrades/equipment"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="on" type="ColorRect" parent="9/margin/upgrades/b"]
-visible = false
-custom_minimum_size = Vector2(4, 0)
+[node name="on" type="ColorRect" parent="9/upgrades/equipment/b"]
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
-color = Color(0.956863, 0.737255, 0, 1)
+color = Color(0.698039, 0.533333, 0, 1)
 
-[node name="off" type="ColorRect" parent="9/margin/upgrades/b"]
-custom_minimum_size = Vector2(4, 0)
+[node name="off" type="ColorRect" parent="9/upgrades/equipment/b"]
+visible = false
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
 color = Color(0.17081, 0.121802, 0, 1)
 
@@ -1218,59 +1775,98 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_1tuns")
 text = "🫙"
 horizontal_alignment = 1
 
-[node name="count" type="Label" parent="10"]
-visible = false
+[node name="count" type="MarginContainer" parent="10"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 2
+script = ExtResource("4_8ovpw")
+
+[node name="progress" type="VBoxContainer" parent="10/count"]
+layout_mode = 2
+theme_override_constants/separation = -3
+
+[node name="number" type="Label" parent="10/count/progress"]
 modulate = Color(1, 1, 1, 0.294118)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
-theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("5_mg8rv")
+theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_vb3xh")
-text = "30"
 horizontal_alignment = 1
 
-[node name="margin" type="MarginContainer" parent="10"]
+[node name="bar" type="ProgressBar" parent="10/count/progress"]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 8
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 7
+theme_override_styles/background = SubResource("StyleBoxEmpty_1tuns")
+theme_override_styles/fill = SubResource("StyleBoxFlat_lrum8")
+max_value = 30.0
+step = 1.0
+fill_mode = 1
+show_percentage = false
 
-[node name="upgrades" type="HBoxContainer" parent="10/margin"]
+[node name="selection" type="MarginContainer" parent="10"]
 visible = false
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 0
+
+[node name="color" type="ColorRect" parent="10/selection"]
 custom_minimum_size = Vector2(0, 2)
 layout_mode = 2
 size_flags_vertical = 8
+color = Color(0.184314, 0.184314, 0.72549, 1)
+
+[node name="upgrades" type="MarginContainer" parent="10"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 7
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 7
+
+[node name="equipment" type="VBoxContainer" parent="10/upgrades"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
 theme_override_constants/separation = 2
 
-[node name="a" type="HBoxContainer" parent="10/margin/upgrades"]
+[node name="a" type="VBoxContainer" parent="10/upgrades/equipment"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="on" type="ColorRect" parent="10/margin/upgrades/a"]
-visible = false
-custom_minimum_size = Vector2(4, 0)
+[node name="on" type="ColorRect" parent="10/upgrades/equipment/a"]
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
-color = Color(0.428704, 0.323724, 0, 1)
+color = Color(0.69863, 0.535067, 0, 1)
 
-[node name="off" type="ColorRect" parent="10/margin/upgrades/a"]
-custom_minimum_size = Vector2(4, 0)
+[node name="off" type="ColorRect" parent="10/upgrades/equipment/a"]
+visible = false
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
 color = Color(0.17081, 0.121802, 0, 1)
 
-[node name="b" type="HBoxContainer" parent="10/margin/upgrades"]
+[node name="b" type="VBoxContainer" parent="10/upgrades/equipment"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="on" type="ColorRect" parent="10/margin/upgrades/b"]
-visible = false
-custom_minimum_size = Vector2(4, 0)
+[node name="on" type="ColorRect" parent="10/upgrades/equipment/b"]
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
-color = Color(0.956863, 0.737255, 0, 1)
+color = Color(0.698039, 0.533333, 0, 1)
 
-[node name="off" type="ColorRect" parent="10/margin/upgrades/b"]
-custom_minimum_size = Vector2(4, 0)
+[node name="off" type="ColorRect" parent="10/upgrades/equipment/b"]
+visible = false
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
 color = Color(0.17081, 0.121802, 0, 1)
 
@@ -1293,59 +1889,98 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_1tuns")
 text = "🫙"
 horizontal_alignment = 1
 
-[node name="count" type="Label" parent="11"]
-visible = false
+[node name="count" type="MarginContainer" parent="11"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 2
+script = ExtResource("4_8ovpw")
+
+[node name="progress" type="VBoxContainer" parent="11/count"]
+layout_mode = 2
+theme_override_constants/separation = -3
+
+[node name="number" type="Label" parent="11/count/progress"]
 modulate = Color(1, 1, 1, 0.294118)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
-theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("5_mg8rv")
+theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_vb3xh")
-text = "30"
 horizontal_alignment = 1
 
-[node name="margin" type="MarginContainer" parent="11"]
+[node name="bar" type="ProgressBar" parent="11/count/progress"]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 8
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 7
+theme_override_styles/background = SubResource("StyleBoxEmpty_1tuns")
+theme_override_styles/fill = SubResource("StyleBoxFlat_lrum8")
+max_value = 30.0
+step = 1.0
+fill_mode = 1
+show_percentage = false
 
-[node name="upgrades" type="HBoxContainer" parent="11/margin"]
+[node name="selection" type="MarginContainer" parent="11"]
 visible = false
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 0
+
+[node name="color" type="ColorRect" parent="11/selection"]
 custom_minimum_size = Vector2(0, 2)
 layout_mode = 2
 size_flags_vertical = 8
+color = Color(0.184314, 0.184314, 0.72549, 1)
+
+[node name="upgrades" type="MarginContainer" parent="11"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 7
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 7
+
+[node name="equipment" type="VBoxContainer" parent="11/upgrades"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
 theme_override_constants/separation = 2
 
-[node name="a" type="HBoxContainer" parent="11/margin/upgrades"]
+[node name="a" type="VBoxContainer" parent="11/upgrades/equipment"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="on" type="ColorRect" parent="11/margin/upgrades/a"]
-visible = false
-custom_minimum_size = Vector2(4, 0)
+[node name="on" type="ColorRect" parent="11/upgrades/equipment/a"]
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
-color = Color(0.428704, 0.323724, 0, 1)
+color = Color(0.69863, 0.535067, 0, 1)
 
-[node name="off" type="ColorRect" parent="11/margin/upgrades/a"]
-custom_minimum_size = Vector2(4, 0)
+[node name="off" type="ColorRect" parent="11/upgrades/equipment/a"]
+visible = false
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
 color = Color(0.17081, 0.121802, 0, 1)
 
-[node name="b" type="HBoxContainer" parent="11/margin/upgrades"]
+[node name="b" type="VBoxContainer" parent="11/upgrades/equipment"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="on" type="ColorRect" parent="11/margin/upgrades/b"]
-visible = false
-custom_minimum_size = Vector2(4, 0)
+[node name="on" type="ColorRect" parent="11/upgrades/equipment/b"]
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
-color = Color(0.956863, 0.737255, 0, 1)
+color = Color(0.698039, 0.533333, 0, 1)
 
-[node name="off" type="ColorRect" parent="11/margin/upgrades/b"]
-custom_minimum_size = Vector2(4, 0)
+[node name="off" type="ColorRect" parent="11/upgrades/equipment/b"]
+visible = false
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
 color = Color(0.17081, 0.121802, 0, 1)
 
@@ -1368,59 +2003,98 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_1tuns")
 text = "🫙"
 horizontal_alignment = 1
 
-[node name="count" type="Label" parent="12"]
-visible = false
+[node name="count" type="MarginContainer" parent="12"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 2
+script = ExtResource("4_8ovpw")
+
+[node name="progress" type="VBoxContainer" parent="12/count"]
+layout_mode = 2
+theme_override_constants/separation = -3
+
+[node name="number" type="Label" parent="12/count/progress"]
 modulate = Color(1, 1, 1, 0.294118)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
-theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("5_mg8rv")
+theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_vb3xh")
-text = "30"
 horizontal_alignment = 1
 
-[node name="margin" type="MarginContainer" parent="12"]
+[node name="bar" type="ProgressBar" parent="12/count/progress"]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 8
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 7
+theme_override_styles/background = SubResource("StyleBoxEmpty_1tuns")
+theme_override_styles/fill = SubResource("StyleBoxFlat_lrum8")
+max_value = 30.0
+step = 1.0
+fill_mode = 1
+show_percentage = false
 
-[node name="upgrades" type="HBoxContainer" parent="12/margin"]
+[node name="selection" type="MarginContainer" parent="12"]
 visible = false
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 0
+
+[node name="color" type="ColorRect" parent="12/selection"]
 custom_minimum_size = Vector2(0, 2)
 layout_mode = 2
 size_flags_vertical = 8
+color = Color(0.184314, 0.184314, 0.72549, 1)
+
+[node name="upgrades" type="MarginContainer" parent="12"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 7
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 7
+
+[node name="equipment" type="VBoxContainer" parent="12/upgrades"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
 theme_override_constants/separation = 2
 
-[node name="a" type="HBoxContainer" parent="12/margin/upgrades"]
+[node name="a" type="VBoxContainer" parent="12/upgrades/equipment"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="on" type="ColorRect" parent="12/margin/upgrades/a"]
-visible = false
-custom_minimum_size = Vector2(4, 0)
+[node name="on" type="ColorRect" parent="12/upgrades/equipment/a"]
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
-color = Color(0.428704, 0.323724, 0, 1)
+color = Color(0.69863, 0.535067, 0, 1)
 
-[node name="off" type="ColorRect" parent="12/margin/upgrades/a"]
-custom_minimum_size = Vector2(4, 0)
+[node name="off" type="ColorRect" parent="12/upgrades/equipment/a"]
+visible = false
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
 color = Color(0.17081, 0.121802, 0, 1)
 
-[node name="b" type="HBoxContainer" parent="12/margin/upgrades"]
+[node name="b" type="VBoxContainer" parent="12/upgrades/equipment"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="on" type="ColorRect" parent="12/margin/upgrades/b"]
-visible = false
-custom_minimum_size = Vector2(4, 0)
+[node name="on" type="ColorRect" parent="12/upgrades/equipment/b"]
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
-color = Color(0.956863, 0.737255, 0, 1)
+color = Color(0.698039, 0.533333, 0, 1)
 
-[node name="off" type="ColorRect" parent="12/margin/upgrades/b"]
-custom_minimum_size = Vector2(4, 0)
+[node name="off" type="ColorRect" parent="12/upgrades/equipment/b"]
+visible = false
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
 color = Color(0.17081, 0.121802, 0, 1)
 
@@ -1443,59 +2117,98 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_1tuns")
 text = "🫙"
 horizontal_alignment = 1
 
-[node name="count" type="Label" parent="13"]
-visible = false
+[node name="count" type="MarginContainer" parent="13"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 2
+script = ExtResource("4_8ovpw")
+
+[node name="progress" type="VBoxContainer" parent="13/count"]
+layout_mode = 2
+theme_override_constants/separation = -3
+
+[node name="number" type="Label" parent="13/count/progress"]
 modulate = Color(1, 1, 1, 0.294118)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
-theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("5_mg8rv")
+theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_vb3xh")
-text = "30"
 horizontal_alignment = 1
 
-[node name="margin" type="MarginContainer" parent="13"]
+[node name="bar" type="ProgressBar" parent="13/count/progress"]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 8
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 7
+theme_override_styles/background = SubResource("StyleBoxEmpty_1tuns")
+theme_override_styles/fill = SubResource("StyleBoxFlat_lrum8")
+max_value = 30.0
+step = 1.0
+fill_mode = 1
+show_percentage = false
 
-[node name="upgrades" type="HBoxContainer" parent="13/margin"]
+[node name="selection" type="MarginContainer" parent="13"]
 visible = false
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 0
+
+[node name="color" type="ColorRect" parent="13/selection"]
 custom_minimum_size = Vector2(0, 2)
 layout_mode = 2
 size_flags_vertical = 8
+color = Color(0.184314, 0.184314, 0.72549, 1)
+
+[node name="upgrades" type="MarginContainer" parent="13"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 7
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 7
+
+[node name="equipment" type="VBoxContainer" parent="13/upgrades"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
 theme_override_constants/separation = 2
 
-[node name="a" type="HBoxContainer" parent="13/margin/upgrades"]
+[node name="a" type="VBoxContainer" parent="13/upgrades/equipment"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="on" type="ColorRect" parent="13/margin/upgrades/a"]
-visible = false
-custom_minimum_size = Vector2(4, 0)
+[node name="on" type="ColorRect" parent="13/upgrades/equipment/a"]
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
-color = Color(0.428704, 0.323724, 0, 1)
+color = Color(0.69863, 0.535067, 0, 1)
 
-[node name="off" type="ColorRect" parent="13/margin/upgrades/a"]
-custom_minimum_size = Vector2(4, 0)
+[node name="off" type="ColorRect" parent="13/upgrades/equipment/a"]
+visible = false
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
 color = Color(0.17081, 0.121802, 0, 1)
 
-[node name="b" type="HBoxContainer" parent="13/margin/upgrades"]
+[node name="b" type="VBoxContainer" parent="13/upgrades/equipment"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="on" type="ColorRect" parent="13/margin/upgrades/b"]
-visible = false
-custom_minimum_size = Vector2(4, 0)
+[node name="on" type="ColorRect" parent="13/upgrades/equipment/b"]
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
-color = Color(0.956863, 0.737255, 0, 1)
+color = Color(0.698039, 0.533333, 0, 1)
 
-[node name="off" type="ColorRect" parent="13/margin/upgrades/b"]
-custom_minimum_size = Vector2(4, 0)
+[node name="off" type="ColorRect" parent="13/upgrades/equipment/b"]
+visible = false
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
 color = Color(0.17081, 0.121802, 0, 1)
 
@@ -1518,59 +2231,98 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_1tuns")
 text = "🫙"
 horizontal_alignment = 1
 
-[node name="count" type="Label" parent="14"]
-visible = false
+[node name="count" type="MarginContainer" parent="14"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 2
+script = ExtResource("4_8ovpw")
+
+[node name="progress" type="VBoxContainer" parent="14/count"]
+layout_mode = 2
+theme_override_constants/separation = -3
+
+[node name="number" type="Label" parent="14/count/progress"]
 modulate = Color(1, 1, 1, 0.294118)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
-theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("5_mg8rv")
+theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_vb3xh")
-text = "30"
 horizontal_alignment = 1
 
-[node name="margin" type="MarginContainer" parent="14"]
+[node name="bar" type="ProgressBar" parent="14/count/progress"]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 8
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 7
+theme_override_styles/background = SubResource("StyleBoxEmpty_1tuns")
+theme_override_styles/fill = SubResource("StyleBoxFlat_lrum8")
+max_value = 30.0
+step = 1.0
+fill_mode = 1
+show_percentage = false
 
-[node name="upgrades" type="HBoxContainer" parent="14/margin"]
+[node name="selection" type="MarginContainer" parent="14"]
 visible = false
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 0
+
+[node name="color" type="ColorRect" parent="14/selection"]
 custom_minimum_size = Vector2(0, 2)
 layout_mode = 2
 size_flags_vertical = 8
+color = Color(0.184314, 0.184314, 0.72549, 1)
+
+[node name="upgrades" type="MarginContainer" parent="14"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 7
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 7
+
+[node name="equipment" type="VBoxContainer" parent="14/upgrades"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
 theme_override_constants/separation = 2
 
-[node name="a" type="HBoxContainer" parent="14/margin/upgrades"]
+[node name="a" type="VBoxContainer" parent="14/upgrades/equipment"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="on" type="ColorRect" parent="14/margin/upgrades/a"]
-visible = false
-custom_minimum_size = Vector2(4, 0)
+[node name="on" type="ColorRect" parent="14/upgrades/equipment/a"]
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
-color = Color(0.428704, 0.323724, 0, 1)
+color = Color(0.69863, 0.535067, 0, 1)
 
-[node name="off" type="ColorRect" parent="14/margin/upgrades/a"]
-custom_minimum_size = Vector2(4, 0)
+[node name="off" type="ColorRect" parent="14/upgrades/equipment/a"]
+visible = false
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
 color = Color(0.17081, 0.121802, 0, 1)
 
-[node name="b" type="HBoxContainer" parent="14/margin/upgrades"]
+[node name="b" type="VBoxContainer" parent="14/upgrades/equipment"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="on" type="ColorRect" parent="14/margin/upgrades/b"]
-visible = false
-custom_minimum_size = Vector2(4, 0)
+[node name="on" type="ColorRect" parent="14/upgrades/equipment/b"]
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
-color = Color(0.956863, 0.737255, 0, 1)
+color = Color(0.698039, 0.533333, 0, 1)
 
-[node name="off" type="ColorRect" parent="14/margin/upgrades/b"]
-custom_minimum_size = Vector2(4, 0)
+[node name="off" type="ColorRect" parent="14/upgrades/equipment/b"]
+visible = false
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
 color = Color(0.17081, 0.121802, 0, 1)
 
@@ -1602,59 +2354,98 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_1tuns")
 text = "🫙"
 horizontal_alignment = 1
 
-[node name="count" type="Label" parent="weapon"]
-visible = false
+[node name="count" type="MarginContainer" parent="weapon"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 2
+script = ExtResource("4_8ovpw")
+
+[node name="progress" type="VBoxContainer" parent="weapon/count"]
+layout_mode = 2
+theme_override_constants/separation = -3
+
+[node name="number" type="Label" parent="weapon/count/progress"]
 modulate = Color(1, 1, 1, 0.294118)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
-theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("5_mg8rv")
+theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_vb3xh")
-text = "30"
 horizontal_alignment = 1
 
-[node name="margin" type="MarginContainer" parent="weapon"]
+[node name="bar" type="ProgressBar" parent="weapon/count/progress"]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 8
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 7
+theme_override_styles/background = SubResource("StyleBoxEmpty_1tuns")
+theme_override_styles/fill = SubResource("StyleBoxFlat_lrum8")
+max_value = 30.0
+step = 1.0
+fill_mode = 1
+show_percentage = false
 
-[node name="upgrades" type="HBoxContainer" parent="weapon/margin"]
+[node name="selection" type="MarginContainer" parent="weapon"]
 visible = false
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 0
+
+[node name="color" type="ColorRect" parent="weapon/selection"]
 custom_minimum_size = Vector2(0, 2)
 layout_mode = 2
 size_flags_vertical = 8
+color = Color(0.184314, 0.184314, 0.72549, 1)
+
+[node name="upgrades" type="MarginContainer" parent="weapon"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 7
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 7
+
+[node name="equipment" type="VBoxContainer" parent="weapon/upgrades"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
 theme_override_constants/separation = 2
 
-[node name="a" type="HBoxContainer" parent="weapon/margin/upgrades"]
+[node name="a" type="VBoxContainer" parent="weapon/upgrades/equipment"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="on" type="ColorRect" parent="weapon/margin/upgrades/a"]
-visible = false
-custom_minimum_size = Vector2(4, 0)
+[node name="on" type="ColorRect" parent="weapon/upgrades/equipment/a"]
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
-color = Color(0.428704, 0.323724, 0, 1)
+color = Color(0.69863, 0.535067, 0, 1)
 
-[node name="off" type="ColorRect" parent="weapon/margin/upgrades/a"]
-custom_minimum_size = Vector2(4, 0)
+[node name="off" type="ColorRect" parent="weapon/upgrades/equipment/a"]
+visible = false
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
 color = Color(0.17081, 0.121802, 0, 1)
 
-[node name="b" type="HBoxContainer" parent="weapon/margin/upgrades"]
+[node name="b" type="VBoxContainer" parent="weapon/upgrades/equipment"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="on" type="ColorRect" parent="weapon/margin/upgrades/b"]
-visible = false
-custom_minimum_size = Vector2(4, 0)
+[node name="on" type="ColorRect" parent="weapon/upgrades/equipment/b"]
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
-color = Color(0.956863, 0.737255, 0, 1)
+color = Color(0.698039, 0.533333, 0, 1)
 
-[node name="off" type="ColorRect" parent="weapon/margin/upgrades/b"]
-custom_minimum_size = Vector2(4, 0)
+[node name="off" type="ColorRect" parent="weapon/upgrades/equipment/b"]
+visible = false
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
 color = Color(0.17081, 0.121802, 0, 1)
 
@@ -1686,59 +2477,98 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_1tuns")
 text = "🫙"
 horizontal_alignment = 1
 
-[node name="count" type="Label" parent="artifact"]
-visible = false
+[node name="count" type="MarginContainer" parent="artifact"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 2
+script = ExtResource("4_8ovpw")
+
+[node name="progress" type="VBoxContainer" parent="artifact/count"]
+layout_mode = 2
+theme_override_constants/separation = -3
+
+[node name="number" type="Label" parent="artifact/count/progress"]
 modulate = Color(1, 1, 1, 0.294118)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
-theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("5_mg8rv")
+theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_vb3xh")
-text = "30"
 horizontal_alignment = 1
 
-[node name="margin" type="MarginContainer" parent="artifact"]
+[node name="bar" type="ProgressBar" parent="artifact/count/progress"]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 8
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 7
+theme_override_styles/background = SubResource("StyleBoxEmpty_1tuns")
+theme_override_styles/fill = SubResource("StyleBoxFlat_lrum8")
+max_value = 30.0
+step = 1.0
+fill_mode = 1
+show_percentage = false
 
-[node name="upgrades" type="HBoxContainer" parent="artifact/margin"]
+[node name="selection" type="MarginContainer" parent="artifact"]
 visible = false
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 0
+
+[node name="color" type="ColorRect" parent="artifact/selection"]
 custom_minimum_size = Vector2(0, 2)
 layout_mode = 2
 size_flags_vertical = 8
+color = Color(0.184314, 0.184314, 0.72549, 1)
+
+[node name="upgrades" type="MarginContainer" parent="artifact"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 7
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 7
+
+[node name="equipment" type="VBoxContainer" parent="artifact/upgrades"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
 theme_override_constants/separation = 2
 
-[node name="a" type="HBoxContainer" parent="artifact/margin/upgrades"]
+[node name="a" type="VBoxContainer" parent="artifact/upgrades/equipment"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="on" type="ColorRect" parent="artifact/margin/upgrades/a"]
-visible = false
-custom_minimum_size = Vector2(4, 0)
+[node name="on" type="ColorRect" parent="artifact/upgrades/equipment/a"]
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
-color = Color(0.428704, 0.323724, 0, 1)
+color = Color(0.69863, 0.535067, 0, 1)
 
-[node name="off" type="ColorRect" parent="artifact/margin/upgrades/a"]
-custom_minimum_size = Vector2(4, 0)
+[node name="off" type="ColorRect" parent="artifact/upgrades/equipment/a"]
+visible = false
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
 color = Color(0.17081, 0.121802, 0, 1)
 
-[node name="b" type="HBoxContainer" parent="artifact/margin/upgrades"]
+[node name="b" type="VBoxContainer" parent="artifact/upgrades/equipment"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="on" type="ColorRect" parent="artifact/margin/upgrades/b"]
-visible = false
-custom_minimum_size = Vector2(4, 0)
+[node name="on" type="ColorRect" parent="artifact/upgrades/equipment/b"]
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
-color = Color(0.956863, 0.737255, 0, 1)
+color = Color(0.698039, 0.533333, 0, 1)
 
-[node name="off" type="ColorRect" parent="artifact/margin/upgrades/b"]
-custom_minimum_size = Vector2(4, 0)
+[node name="off" type="ColorRect" parent="artifact/upgrades/equipment/b"]
+visible = false
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
 color = Color(0.17081, 0.121802, 0, 1)
 
@@ -1770,59 +2600,98 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_1tuns")
 text = "🫙"
 horizontal_alignment = 1
 
-[node name="count" type="Label" parent="armor"]
-visible = false
+[node name="count" type="MarginContainer" parent="armor"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 2
+script = ExtResource("4_8ovpw")
+
+[node name="progress" type="VBoxContainer" parent="armor/count"]
+layout_mode = 2
+theme_override_constants/separation = -3
+
+[node name="number" type="Label" parent="armor/count/progress"]
 modulate = Color(1, 1, 1, 0.294118)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
-theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("5_mg8rv")
+theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_vb3xh")
-text = "30"
 horizontal_alignment = 1
 
-[node name="margin" type="MarginContainer" parent="armor"]
+[node name="bar" type="ProgressBar" parent="armor/count/progress"]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 8
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 7
+theme_override_styles/background = SubResource("StyleBoxEmpty_1tuns")
+theme_override_styles/fill = SubResource("StyleBoxFlat_lrum8")
+max_value = 30.0
+step = 1.0
+fill_mode = 1
+show_percentage = false
 
-[node name="upgrades" type="HBoxContainer" parent="armor/margin"]
+[node name="selection" type="MarginContainer" parent="armor"]
 visible = false
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 0
+
+[node name="color" type="ColorRect" parent="armor/selection"]
 custom_minimum_size = Vector2(0, 2)
 layout_mode = 2
 size_flags_vertical = 8
+color = Color(0.184314, 0.184314, 0.72549, 1)
+
+[node name="upgrades" type="MarginContainer" parent="armor"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 7
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 7
+
+[node name="equipment" type="VBoxContainer" parent="armor/upgrades"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
 theme_override_constants/separation = 2
 
-[node name="a" type="HBoxContainer" parent="armor/margin/upgrades"]
+[node name="a" type="VBoxContainer" parent="armor/upgrades/equipment"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="on" type="ColorRect" parent="armor/margin/upgrades/a"]
-visible = false
-custom_minimum_size = Vector2(4, 0)
+[node name="on" type="ColorRect" parent="armor/upgrades/equipment/a"]
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
-color = Color(0.428704, 0.323724, 0, 1)
+color = Color(0.69863, 0.535067, 0, 1)
 
-[node name="off" type="ColorRect" parent="armor/margin/upgrades/a"]
-custom_minimum_size = Vector2(4, 0)
+[node name="off" type="ColorRect" parent="armor/upgrades/equipment/a"]
+visible = false
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
 color = Color(0.17081, 0.121802, 0, 1)
 
-[node name="b" type="HBoxContainer" parent="armor/margin/upgrades"]
+[node name="b" type="VBoxContainer" parent="armor/upgrades/equipment"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="on" type="ColorRect" parent="armor/margin/upgrades/b"]
-visible = false
-custom_minimum_size = Vector2(4, 0)
+[node name="on" type="ColorRect" parent="armor/upgrades/equipment/b"]
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
-color = Color(0.956863, 0.737255, 0, 1)
+color = Color(0.698039, 0.533333, 0, 1)
 
-[node name="off" type="ColorRect" parent="armor/margin/upgrades/b"]
-custom_minimum_size = Vector2(4, 0)
+[node name="off" type="ColorRect" parent="armor/upgrades/equipment/b"]
+visible = false
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
 color = Color(0.17081, 0.121802, 0, 1)
 
@@ -1854,59 +2723,98 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_1tuns")
 text = "🫙"
 horizontal_alignment = 1
 
-[node name="count" type="Label" parent="legs"]
-visible = false
+[node name="count" type="MarginContainer" parent="legs"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 2
+script = ExtResource("4_8ovpw")
+
+[node name="progress" type="VBoxContainer" parent="legs/count"]
+layout_mode = 2
+theme_override_constants/separation = -3
+
+[node name="number" type="Label" parent="legs/count/progress"]
 modulate = Color(1, 1, 1, 0.294118)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
-theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("5_mg8rv")
+theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_vb3xh")
-text = "30"
 horizontal_alignment = 1
 
-[node name="margin" type="MarginContainer" parent="legs"]
+[node name="bar" type="ProgressBar" parent="legs/count/progress"]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 8
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 7
+theme_override_styles/background = SubResource("StyleBoxEmpty_1tuns")
+theme_override_styles/fill = SubResource("StyleBoxFlat_lrum8")
+max_value = 30.0
+step = 1.0
+fill_mode = 1
+show_percentage = false
 
-[node name="upgrades" type="HBoxContainer" parent="legs/margin"]
+[node name="selection" type="MarginContainer" parent="legs"]
 visible = false
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 0
+
+[node name="color" type="ColorRect" parent="legs/selection"]
 custom_minimum_size = Vector2(0, 2)
 layout_mode = 2
 size_flags_vertical = 8
+color = Color(0.184314, 0.184314, 0.72549, 1)
+
+[node name="upgrades" type="MarginContainer" parent="legs"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 7
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 7
+
+[node name="equipment" type="VBoxContainer" parent="legs/upgrades"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
 theme_override_constants/separation = 2
 
-[node name="a" type="HBoxContainer" parent="legs/margin/upgrades"]
+[node name="a" type="VBoxContainer" parent="legs/upgrades/equipment"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="on" type="ColorRect" parent="legs/margin/upgrades/a"]
-visible = false
-custom_minimum_size = Vector2(4, 0)
+[node name="on" type="ColorRect" parent="legs/upgrades/equipment/a"]
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
-color = Color(0.428704, 0.323724, 0, 1)
+color = Color(0.69863, 0.535067, 0, 1)
 
-[node name="off" type="ColorRect" parent="legs/margin/upgrades/a"]
-custom_minimum_size = Vector2(4, 0)
+[node name="off" type="ColorRect" parent="legs/upgrades/equipment/a"]
+visible = false
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
 color = Color(0.17081, 0.121802, 0, 1)
 
-[node name="b" type="HBoxContainer" parent="legs/margin/upgrades"]
+[node name="b" type="VBoxContainer" parent="legs/upgrades/equipment"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="on" type="ColorRect" parent="legs/margin/upgrades/b"]
-visible = false
-custom_minimum_size = Vector2(4, 0)
+[node name="on" type="ColorRect" parent="legs/upgrades/equipment/b"]
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
-color = Color(0.956863, 0.737255, 0, 1)
+color = Color(0.698039, 0.533333, 0, 1)
 
-[node name="off" type="ColorRect" parent="legs/margin/upgrades/b"]
-custom_minimum_size = Vector2(4, 0)
+[node name="off" type="ColorRect" parent="legs/upgrades/equipment/b"]
+visible = false
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
 color = Color(0.17081, 0.121802, 0, 1)
 
@@ -1969,58 +2877,97 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_1tuns")
 text = "🫙"
 horizontal_alignment = 1
 
-[node name="count" type="Label" parent="boots"]
-visible = false
+[node name="count" type="MarginContainer" parent="boots"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 2
+script = ExtResource("4_8ovpw")
+
+[node name="progress" type="VBoxContainer" parent="boots/count"]
+layout_mode = 2
+theme_override_constants/separation = -3
+
+[node name="number" type="Label" parent="boots/count/progress"]
 modulate = Color(1, 1, 1, 0.294118)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
-theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("5_mg8rv")
+theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_vb3xh")
-text = "30"
 horizontal_alignment = 1
 
-[node name="margin" type="MarginContainer" parent="boots"]
+[node name="bar" type="ProgressBar" parent="boots/count/progress"]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 8
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 7
+theme_override_styles/background = SubResource("StyleBoxEmpty_1tuns")
+theme_override_styles/fill = SubResource("StyleBoxFlat_lrum8")
+max_value = 30.0
+step = 1.0
+fill_mode = 1
+show_percentage = false
 
-[node name="upgrades" type="HBoxContainer" parent="boots/margin"]
+[node name="selection" type="MarginContainer" parent="boots"]
 visible = false
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 0
+
+[node name="color" type="ColorRect" parent="boots/selection"]
 custom_minimum_size = Vector2(0, 2)
 layout_mode = 2
 size_flags_vertical = 8
+color = Color(0.184314, 0.184314, 0.72549, 1)
+
+[node name="upgrades" type="MarginContainer" parent="boots"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 7
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 7
+
+[node name="equipment" type="VBoxContainer" parent="boots/upgrades"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
 theme_override_constants/separation = 2
 
-[node name="a" type="HBoxContainer" parent="boots/margin/upgrades"]
+[node name="a" type="VBoxContainer" parent="boots/upgrades/equipment"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="on" type="ColorRect" parent="boots/margin/upgrades/a"]
-visible = false
-custom_minimum_size = Vector2(4, 0)
+[node name="on" type="ColorRect" parent="boots/upgrades/equipment/a"]
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
-color = Color(0.428704, 0.323724, 0, 1)
+color = Color(0.69863, 0.535067, 0, 1)
 
-[node name="off" type="ColorRect" parent="boots/margin/upgrades/a"]
-custom_minimum_size = Vector2(4, 0)
+[node name="off" type="ColorRect" parent="boots/upgrades/equipment/a"]
+visible = false
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
 color = Color(0.17081, 0.121802, 0, 1)
 
-[node name="b" type="HBoxContainer" parent="boots/margin/upgrades"]
+[node name="b" type="VBoxContainer" parent="boots/upgrades/equipment"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="on" type="ColorRect" parent="boots/margin/upgrades/b"]
-visible = false
-custom_minimum_size = Vector2(4, 0)
+[node name="on" type="ColorRect" parent="boots/upgrades/equipment/b"]
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
-color = Color(0.956863, 0.737255, 0, 1)
+color = Color(0.698039, 0.533333, 0, 1)
 
-[node name="off" type="ColorRect" parent="boots/margin/upgrades/b"]
-custom_minimum_size = Vector2(4, 0)
+[node name="off" type="ColorRect" parent="boots/upgrades/equipment/b"]
+visible = false
+custom_minimum_size = Vector2(4, 4)
 layout_mode = 2
 color = Color(0.17081, 0.121802, 0, 1)

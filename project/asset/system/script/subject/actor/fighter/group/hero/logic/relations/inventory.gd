@@ -1,5 +1,12 @@
 extends Node
 
 func controls(hero: CharacterBody2D, inventory: Node) -> void:
-	inventory.logic.inventory = hero.get_node("../..").hud.game.detector.menu.stats.inventory.topic.items.storage
-	inventory.logic.update_inventory_storage()
+	var chest: Area2D = hero.logic.detectors.world.skills.chest
+	var level: Node2D = hero.get_node("../..")
+
+	inventory.chest.hero = hero
+	inventory.chest.logic = inventory.logic
+	inventory.chest.chests = level.get_node("tags").chests
+
+	chest.body_entered.connect(inventory.chest.enter_chest)
+	chest.body_exited.connect(inventory.chest.exit_chest)

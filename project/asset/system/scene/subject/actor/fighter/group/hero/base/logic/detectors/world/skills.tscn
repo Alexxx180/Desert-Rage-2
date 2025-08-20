@@ -1,15 +1,23 @@
-[gd_scene load_steps=6 format=3 uid="uid://bocjcbuk66c25"]
+[gd_scene load_steps=9 format=3 uid="uid://bocjcbuk66c25"]
 
 [ext_resource type="Script" uid="uid://ce2nahqftn3k6" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/detectors/world/skills/skills.gd" id="1_dx1ji"]
 [ext_resource type="PackedScene" uid="uid://ce2doowddkex8" path="res://asset/system/scene/subject/actor/fighter/group/hero/base/logic/detectors/world/skills/pull.tscn" id="2_el7h4"]
 [ext_resource type="PackedScene" uid="uid://b314ua5ln1uw8" path="res://asset/system/scene/subject/actor/fighter/group/hero/base/logic/detectors/world/skills/transition.tscn" id="3_2t4ev"]
 [ext_resource type="PackedScene" uid="uid://bbaxmclsf3tvc" path="res://asset/system/scene/subject/actor/fighter/group/hero/base/logic/detectors/world/skills/press.tscn" id="4_pnu1p"]
 [ext_resource type="PackedScene" uid="uid://bjrd8syjhn6bg" path="res://asset/system/scene/subject/actor/fighter/group/hero/base/logic/detectors/world/skills/act.tscn" id="5_y3cdy"]
+[ext_resource type="Shape2D" uid="uid://i0icy78wfk8i" path="res://asset/resource/engine/internal/shape/geometry/characters/character/levels.tres" id="6_5poyo"]
+
+[sub_resource type="Gradient" id="Gradient_5poyo"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_xxc3s"]
+gradient = SubResource("Gradient_5poyo")
+width = 1
 
 [node name="skills" type="Node2D"]
 script = ExtResource("1_dx1ji")
 
 [node name="pull" parent="." instance=ExtResource("2_el7h4")]
+visible = false
 
 [node name="transition" parent="." instance=ExtResource("3_2t4ev")]
 visible = false
@@ -19,3 +27,13 @@ visible = false
 
 [node name="act" parent="." instance=ExtResource("5_y3cdy")]
 visible = false
+
+[node name="chest" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 1073741824
+
+[node name="shape" type="CollisionShape2D" parent="chest"]
+shape = ExtResource("6_5poyo")
+
+[node name="Sprite2D" type="Sprite2D" parent="chest"]
+texture = SubResource("GradientTexture1D_xxc3s")

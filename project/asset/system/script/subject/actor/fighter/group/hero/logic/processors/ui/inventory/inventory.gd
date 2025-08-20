@@ -3,6 +3,7 @@ extends Node
 class_name HeroInventory
 
 @onready var logic: Node = $logic
+@onready var chest: Node = $chest
 
 static func get_items_bank() -> Dictionary:
 	return {

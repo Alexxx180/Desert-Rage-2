@@ -3,7 +3,7 @@ extends PanelContainer
 class_name InventoryItem
 
 @onready var icon: Label = $icon
-@onready var count: Label = $count
+@onready var count: MarginContainer = $count
 @onready var image: TextureRect = $image
 
 func remove_item() -> void:
@@ -17,11 +17,11 @@ func replace_item(next: Dictionary, prev: Dictionary) -> void:
 	put_item(next)
 	put_item(prev)
 
-func put_item(selection: Dictionary) -> void:
-	var item: Dictionary = HeroInventory.get_items_bank()[selection.item]
+func put_item(slot: Dictionary) -> void:
+	var item: Dictionary = HeroInventory.get_items_bank()[slot.id]
 	if item.icon.contains("/"):
 		image.texture = ImageTexture.create_from_image(Image.load_from_file(image.icon))
 		image.show()
 	else:
 		_show_text(icon, item.icon)
-	_show_text(count, "" if item.count == 1 else str(item.count))
+	count.set_value(slot.x)

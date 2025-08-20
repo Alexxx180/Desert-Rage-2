@@ -1,3 +1,3 @@
 extends InventoryItem
 
-@onready var selection: ColorRect = $selection
+@onready var selection: MarginContainer = $selection
