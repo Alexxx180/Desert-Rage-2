@@ -1,13 +1,13 @@
-extends PanelContainer
+extends Button
 
 class_name InventoryItem
 
-@onready var icon: Label = $icon
+@onready var ticon: Label = $icon
 @onready var count: MarginContainer = $count
 @onready var image: TextureRect = $image
 
 func remove_item() -> void:
-	for ui in [icon, image, count]: ui.hide()
+	for ui in [ticon, image, count]: ui.hide()
 
 func _show_text(caption: Label, next: String) -> void:
 	caption.text = next
@@ -23,5 +23,5 @@ func put_item(slot: Dictionary) -> void:
 		image.texture = ImageTexture.create_from_image(Image.load_from_file(image.icon))
 		image.show()
 	else:
-		_show_text(icon, item.icon)
+		_show_text(ticon, item.icon)
 	count.set_value(slot.x)

@@ -1,6 +1,7 @@
 extends Node
 
 var inventory: HFlowContainer
+var description: Label
 
 enum { NONE = -1, EMPTY = 0, UNIT = 1, MAX = 30 }
 

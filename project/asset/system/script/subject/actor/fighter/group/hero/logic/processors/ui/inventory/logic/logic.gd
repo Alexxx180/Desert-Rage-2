@@ -24,13 +24,16 @@ func put_to_inventory(no: int) -> bool:
 		return true
 	return false
 
+func use_the_jar(source: int, product: int, id: int) -> void:
+	if items.have(product):
+		items.use_item(source, storage[source])
+		items.put_item(product, storage[product], id)
+
 func fill_the_jar() -> void:
-	var water: int = items.find_item_or_slot(storage, 1)
-	if items.have(water):
-		var jar: int = items.find_same_item(storage, 0)
-		if items.have(jar):
-			items.use_item(jar, storage[jar])
-			items.put_item(water, storage[water], 1)
+	var jar: int = items.find_same_item(storage, 0)
+	if items.have(jar):
+		var water: int = items.find_item_or_slot(storage, 1)
+		use_the_jar(jar, water, 1)
 
 func remember_inventory(no: int) -> void:
 	pass
