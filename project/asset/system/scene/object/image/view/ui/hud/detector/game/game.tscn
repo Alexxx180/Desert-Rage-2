@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://cel3u88abrgv3"]
+[gd_scene load_steps=41 format=3 uid="uid://cel3u88abrgv3"]
 
 [ext_resource type="Theme" uid="uid://p2br8b6ea3n6" path="res://asset/resource/engine/internal/theme/patterns/template/menu/hud/pause/pause.tres" id="1_klae1"]
 [ext_resource type="Script" uid="uid://81xdi4771u0a" path="res://asset/system/script/object/image/view/ui/hud/detector/game/game.gd" id="1_o71r6"]
@@ -21,6 +21,8 @@
 [ext_resource type="Shortcut" uid="uid://ucetbklb6n0q" path="res://asset/resource/engine/internal/short/cut/game/gameplay-menu.tres" id="13_1chk7"]
 [ext_resource type="PackedScene" uid="uid://sloxw12np1ch" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/menu/priorities/priorities.tscn" id="13_iexbr"]
 [ext_resource type="PackedScene" uid="uid://6b0ydfrtbu38" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/menu/ability.tscn" id="14_joidv"]
+[ext_resource type="FontFile" uid="uid://bghvysgyoj1y7" path="res://asset/resource/font/title/Equilibrist Semibold.ttf" id="16_blc53"]
+[ext_resource type="FontFile" uid="uid://dxg5wbmrewk2p" path="res://asset/resource/font/Lato-Regular.ttf" id="16_g3c1s"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_veudi"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -33,9 +35,63 @@ bg_color = Color(0.184314, 0.184314, 0.184314, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2uuwx"]
 bg_color = Color(0.329412, 0.690196, 0.435294, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6gnce"]
+content_margin_left = 7.0
+content_margin_top = 6.0
+bg_color = Color(0.0588235, 0.0588235, 0.0588235, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jj441"]
+bg_color = Color(0.0588235, 0.0588235, 0.0588235, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2uuwx"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_blc53"]
+bg_color = Color(0.739789, 2.00946e-06, 5.77569e-07, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_blc53"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g3c1s"]
+bg_color = Color(0.804743, 0.804743, 0.804743, 1)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_joidv"]
-content_margin_left = 12.0
-content_margin_top = 12.0
+content_margin_left = 4.0
+content_margin_top = 6.0
+bg_color = Color(0.0588235, 0.0588235, 0.0588235, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_g3c1s"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o4lum"]
+bg_color = Color(0.903757, 0.3704, 0.761759, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uhig6"]
+bg_color = Color(0.358457, 0.418219, 1, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_o4lum"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xf68l"]
+bg_color = Color(0.177773, 0.50171, 1.92523e-07, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jn2xb"]
+content_margin_left = 8.0
+bg_color = Color(0.0588235, 0.0588235, 0.0588235, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fuh2f"]
 bg_color = Color(0.0588235, 0.0588235, 0.0588235, 1)
 corner_radius_top_left = 3
 corner_radius_top_right = 3
@@ -369,6 +425,28 @@ layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
 
+[node name="VBoxContainer" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/hints"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="game-log" type="Button" parent="menu/stats/inventory/ability/controls/hints/VBoxContainer"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_42m6k")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_6gnce")
+text = "📊"
+alignment = 0
+
+[node name="chat" type="Button" parent="menu/stats/inventory/ability/controls/hints/VBoxContainer"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_42m6k")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_6gnce")
+text = "💬"
+alignment = 0
+
 [node name="control" type="Control" parent="menu/stats/inventory/ability/controls/hints"]
 layout_mode = 2
 mouse_filter = 2
@@ -398,6 +476,28 @@ layout_mode = 2
 size_flags_vertical = 8
 mouse_filter = 2
 
+[node name="VBoxContainer2" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/hints"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="analyze" type="Button" parent="menu/stats/inventory/ability/controls/hints/VBoxContainer2"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_42m6k")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_6gnce")
+text = "❔"
+alignment = 0
+
+[node name="books" type="Button" parent="menu/stats/inventory/ability/controls/hints/VBoxContainer2"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_42m6k")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_6gnce")
+text = "📖"
+alignment = 0
+
 [node name="topic" type="HFlowContainer" parent="menu/stats/inventory/ability/controls"]
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
@@ -406,94 +506,645 @@ script = ExtResource("2_m0xgs")
 [node name="pause" parent="menu/stats/inventory/ability/controls/topic" instance=ExtResource("1_p1rgr")]
 layout_mode = 2
 
-[node name="ability" type="Button" parent="menu/stats/inventory/ability/controls/topic"]
-custom_minimum_size = Vector2(60, 60)
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 8
-theme_override_fonts/font = ExtResource("4_42m6k")
-theme_override_font_sizes/font_size = 36
-theme_override_styles/normal = SubResource("StyleBoxFlat_joidv")
-text = "🔥🎣"
-
-[node name="y" type="MarginContainer" parent="menu/stats/inventory/ability/controls/topic/ability"]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -14.0
-offset_bottom = 23.0
-grow_horizontal = 0
-theme_override_constants/margin_left = 0
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 4
-theme_override_constants/margin_bottom = 4
-
-[node name="caption" type="Label" parent="menu/stats/inventory/ability/controls/topic/ability/y"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 8
-theme_override_colors/font_color = Color(0.588235, 0.588235, 0.588235, 1)
-theme_override_font_sizes/font_size = 12
-text = "Y"
-
-[node name="x" type="MarginContainer" parent="menu/stats/inventory/ability/controls/topic/ability"]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -23.0
-offset_right = 14.0
-grow_vertical = 0
-theme_override_constants/margin_left = 4
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 4
-
-[node name="caption" type="Label" parent="menu/stats/inventory/ability/controls/topic/ability/x"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 8
-theme_override_colors/font_color = Color(0.588235, 0.588235, 0.588235, 1)
-theme_override_font_sizes/font_size = 12
-text = "X"
-
 [node name="left-space" type="Control" parent="menu/stats/inventory/ability/controls/topic"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.25
 
-[node name="background" type="PanelContainer" parent="menu/stats/inventory/ability/controls/topic"]
+[node name="VBoxContainer" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/topic"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+theme_override_constants/separation = 0
+
+[node name="background" type="PanelContainer" parent="menu/stats/inventory/ability/controls/topic/VBoxContainer"]
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_jj441")
 
-[node name="margin" type="MarginContainer" parent="menu/stats/inventory/ability/controls/topic/background"]
+[node name="HBoxContainer" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/topic/VBoxContainer/background"]
 layout_mode = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 5
+theme_override_constants/separation = 2
 
-[node name="label" type="Label" parent="menu/stats/inventory/ability/controls/topic/background/margin"]
+[node name="VBoxContainer" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/topic/VBoxContainer/background/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/topic/VBoxContainer/background/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 7
+
+[node name="margin2" type="MarginContainer" parent="menu/stats/inventory/ability/controls/topic/VBoxContainer/background/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 2
+
+[node name="label" type="Label" parent="menu/stats/inventory/ability/controls/topic/VBoxContainer/background/HBoxContainer/VBoxContainer/HBoxContainer/margin2"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Балбес"
+
+[node name="health" type="ProgressBar" parent="menu/stats/inventory/ability/controls/topic/VBoxContainer/background/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxEmpty_2uuwx")
+theme_override_styles/fill = SubResource("StyleBoxFlat_blc53")
+max_value = 15.0
+step = 1.0
+value = 15.0
+show_percentage = false
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/topic/VBoxContainer/background/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/topic/VBoxContainer/background/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 7
+
+[node name="margin2" type="MarginContainer" parent="menu/stats/inventory/ability/controls/topic/VBoxContainer/background/HBoxContainer/VBoxContainer2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 2
+
+[node name="label" type="Label" parent="menu/stats/inventory/ability/controls/topic/VBoxContainer/background/HBoxContainer/VBoxContainer2/HBoxContainer/margin2"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Ослик-Суслик-Паукан"
+
+[node name="MarginContainer" type="MarginContainer" parent="menu/stats/inventory/ability/controls/topic/VBoxContainer/background/HBoxContainer/VBoxContainer2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 0
+
+[node name="label2" type="Label" parent="menu/stats/inventory/ability/controls/topic/VBoxContainer/background/HBoxContainer/VBoxContainer2/HBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(35, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_fonts/font = ExtResource("16_g3c1s")
+theme_override_font_sizes/font_size = 16
+text = "200"
+horizontal_alignment = 2
+autowrap_mode = 2
+
+[node name="skills" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/topic/VBoxContainer/background/HBoxContainer/VBoxContainer2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_constants/separation = 10
+
+[node name="ray" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/topic/VBoxContainer/background/HBoxContainer/VBoxContainer2/HBoxContainer/skills"]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+theme_override_constants/separation = -10
+alignment = 2
+
+[node name="slot-1" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/topic/VBoxContainer/background/HBoxContainer/VBoxContainer2/HBoxContainer/skills/ray"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="slot-1" type="Label" parent="menu/stats/inventory/ability/controls/topic/VBoxContainer/background/HBoxContainer/VBoxContainer2/HBoxContainer/skills/ray/slot-1"]
 visible = false
+modulate = Color(0.252028, 0.252028, 0.252028, 1)
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("4_42m6k")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = ExtResource("9_veudi")
+text = "✊"
+vertical_alignment = 1
+
+[node name="slot-2" type="Label" parent="menu/stats/inventory/ability/controls/topic/VBoxContainer/background/HBoxContainer/VBoxContainer2/HBoxContainer/skills/ray/slot-1"]
+modulate = Color(0.633757, 0.633757, 0.633757, 1)
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("4_42m6k")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = ExtResource("9_veudi")
+text = "✊"
+vertical_alignment = 1
+
+[node name="slot-2" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/topic/VBoxContainer/background/HBoxContainer/VBoxContainer2/HBoxContainer/skills/ray"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="slot-1" type="Label" parent="menu/stats/inventory/ability/controls/topic/VBoxContainer/background/HBoxContainer/VBoxContainer2/HBoxContainer/skills/ray/slot-2"]
+modulate = Color(0.252028, 0.252028, 0.252028, 1)
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("4_42m6k")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = ExtResource("9_veudi")
+text = "🦶"
+vertical_alignment = 1
+
+[node name="slot-2" type="Label" parent="menu/stats/inventory/ability/controls/topic/VBoxContainer/background/HBoxContainer/VBoxContainer2/HBoxContainer/skills/ray/slot-2"]
+visible = false
+modulate = Color(0.633757, 0.633757, 0.633757, 1)
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("4_42m6k")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = ExtResource("9_veudi")
+text = "🦶"
+vertical_alignment = 1
+
+[node name="slot-3" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/topic/VBoxContainer/background/HBoxContainer/VBoxContainer2/HBoxContainer/skills/ray"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="slot-1" type="Label" parent="menu/stats/inventory/ability/controls/topic/VBoxContainer/background/HBoxContainer/VBoxContainer2/HBoxContainer/skills/ray/slot-3"]
+modulate = Color(0.252028, 0.252028, 0.252028, 1)
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("4_42m6k")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = ExtResource("9_veudi")
+text = "🔥"
+vertical_alignment = 1
+
+[node name="slot-2" type="Label" parent="menu/stats/inventory/ability/controls/topic/VBoxContainer/background/HBoxContainer/VBoxContainer2/HBoxContainer/skills/ray/slot-3"]
+visible = false
+modulate = Color(0.633757, 0.633757, 0.633757, 1)
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("4_42m6k")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = ExtResource("9_veudi")
+text = "🔥"
+vertical_alignment = 1
+
+[node name="slot-4" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/topic/VBoxContainer/background/HBoxContainer/VBoxContainer2/HBoxContainer/skills/ray"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="slot-1" type="Label" parent="menu/stats/inventory/ability/controls/topic/VBoxContainer/background/HBoxContainer/VBoxContainer2/HBoxContainer/skills/ray/slot-4"]
+visible = false
+modulate = Color(0.252028, 0.252028, 0.252028, 1)
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("4_42m6k")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = ExtResource("9_veudi")
+text = "🎣"
+vertical_alignment = 1
+
+[node name="slot-2" type="Label" parent="menu/stats/inventory/ability/controls/topic/VBoxContainer/background/HBoxContainer/VBoxContainer2/HBoxContainer/skills/ray/slot-4"]
+modulate = Color(0.633757, 0.633757, 0.633757, 1)
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("4_42m6k")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = ExtResource("9_veudi")
+text = "🎣"
+vertical_alignment = 1
+
+[node name="rock" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/topic/VBoxContainer/background/HBoxContainer/VBoxContainer2/HBoxContainer/skills"]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+theme_override_constants/separation = -10
+alignment = 2
+
+[node name="slot-1" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/topic/VBoxContainer/background/HBoxContainer/VBoxContainer2/HBoxContainer/skills/rock"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="slot-1" type="Label" parent="menu/stats/inventory/ability/controls/topic/VBoxContainer/background/HBoxContainer/VBoxContainer2/HBoxContainer/skills/rock/slot-1"]
+visible = false
+modulate = Color(0.252028, 0.252028, 0.252028, 1)
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("4_42m6k")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = ExtResource("9_veudi")
+text = "🗡"
+vertical_alignment = 1
+
+[node name="slot-2" type="Label" parent="menu/stats/inventory/ability/controls/topic/VBoxContainer/background/HBoxContainer/VBoxContainer2/HBoxContainer/skills/rock/slot-1"]
+modulate = Color(0.633757, 0.633757, 0.633757, 1)
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("4_42m6k")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = ExtResource("9_veudi")
+text = "🗡"
+vertical_alignment = 1
+
+[node name="slot-2" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/topic/VBoxContainer/background/HBoxContainer/VBoxContainer2/HBoxContainer/skills/rock"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="slot-1" type="Label" parent="menu/stats/inventory/ability/controls/topic/VBoxContainer/background/HBoxContainer/VBoxContainer2/HBoxContainer/skills/rock/slot-2"]
+modulate = Color(0.252028, 0.252028, 0.252028, 1)
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("4_42m6k")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = ExtResource("9_veudi")
+text = "⚔️"
+vertical_alignment = 1
+
+[node name="slot-2" type="Label" parent="menu/stats/inventory/ability/controls/topic/VBoxContainer/background/HBoxContainer/VBoxContainer2/HBoxContainer/skills/rock/slot-2"]
+visible = false
+modulate = Color(0.633757, 0.633757, 0.633757, 1)
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("4_42m6k")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = ExtResource("9_veudi")
+text = "⚔️"
+vertical_alignment = 1
+
+[node name="slot-3" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/topic/VBoxContainer/background/HBoxContainer/VBoxContainer2/HBoxContainer/skills/rock"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="slot-1" type="Label" parent="menu/stats/inventory/ability/controls/topic/VBoxContainer/background/HBoxContainer/VBoxContainer2/HBoxContainer/skills/rock/slot-3"]
+modulate = Color(0.252028, 0.252028, 0.252028, 1)
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("4_42m6k")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = ExtResource("9_veudi")
+text = "💧"
+vertical_alignment = 1
+
+[node name="slot-2" type="Label" parent="menu/stats/inventory/ability/controls/topic/VBoxContainer/background/HBoxContainer/VBoxContainer2/HBoxContainer/skills/rock/slot-3"]
+visible = false
+modulate = Color(0.633757, 0.633757, 0.633757, 1)
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("4_42m6k")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = ExtResource("9_veudi")
+text = "💧"
+vertical_alignment = 1
+
+[node name="slot-4" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/topic/VBoxContainer/background/HBoxContainer/VBoxContainer2/HBoxContainer/skills/rock"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="slot-1" type="Label" parent="menu/stats/inventory/ability/controls/topic/VBoxContainer/background/HBoxContainer/VBoxContainer2/HBoxContainer/skills/rock/slot-4"]
+visible = false
+modulate = Color(0.252028, 0.252028, 0.252028, 1)
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("4_42m6k")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = ExtResource("9_veudi")
+text = "⚡"
+vertical_alignment = 1
+
+[node name="slot-2" type="Label" parent="menu/stats/inventory/ability/controls/topic/VBoxContainer/background/HBoxContainer/VBoxContainer2/HBoxContainer/skills/rock/slot-4"]
+modulate = Color(0.633757, 0.633757, 0.633757, 1)
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("4_42m6k")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = ExtResource("9_veudi")
+text = "⚡"
+vertical_alignment = 1
+
+[node name="health" type="ProgressBar" parent="menu/stats/inventory/ability/controls/topic/VBoxContainer/background/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxEmpty_2uuwx")
+theme_override_styles/fill = SubResource("StyleBoxFlat_blc53")
+max_value = 15.0
+step = 1.0
+value = 15.0
+show_percentage = false
+
+[node name="fast-access" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/topic/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="score" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/topic/VBoxContainer/fast-access"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/separation = 0
+
+[node name="caption" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/topic/VBoxContainer/fast-access/score"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 7
+
+[node name="score" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/topic/VBoxContainer/fast-access/score/caption"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/topic/VBoxContainer/fast-access/score/caption/score"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="combo" type="ProgressBar" parent="menu/stats/inventory/ability/controls/topic/VBoxContainer/fast-access/score/caption/score/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 1
+theme_override_styles/background = SubResource("StyleBoxEmpty_blc53")
+theme_override_styles/fill = SubResource("StyleBoxFlat_g3c1s")
+max_value = 1.0
+step = 0.1
+value = 0.6
+fill_mode = 3
+show_percentage = false
+
+[node name="ColorRect" type="ColorRect" parent="menu/stats/inventory/ability/controls/topic/VBoxContainer/fast-access/score/caption/score/HBoxContainer"]
+custom_minimum_size = Vector2(1, 0)
+layout_mode = 2
+color = Color(0.0588235, 0.0588235, 0.0588235, 1)
+
+[node name="ability" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/topic/VBoxContainer/fast-access/score/caption/score"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="x" type="Button" parent="menu/stats/inventory/ability/controls/topic/VBoxContainer/fast-access/score/caption/score/ability"]
+custom_minimum_size = Vector2(39, 25)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("4_42m6k")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_joidv")
+text = "🔥"
+alignment = 0
+
+[node name="hint" type="MarginContainer" parent="menu/stats/inventory/ability/controls/topic/VBoxContainer/fast-access/score/caption/score/ability/x"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -11.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 0
+
+[node name="caption" type="Label" parent="menu/stats/inventory/ability/controls/topic/VBoxContainer/fast-access/score/caption/score/ability/x/hint"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/font_color = Color(0.588235, 0.588235, 0.588235, 1)
+theme_override_font_sizes/font_size = 16
+text = "X"
+
+[node name="y" type="Button" parent="menu/stats/inventory/ability/controls/topic/VBoxContainer/fast-access/score/caption/score/ability"]
+custom_minimum_size = Vector2(39, 25)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("4_42m6k")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_joidv")
+text = "🎣"
+alignment = 0
+
+[node name="hint" type="MarginContainer" parent="menu/stats/inventory/ability/controls/topic/VBoxContainer/fast-access/score/caption/score/ability/y"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -11.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 0
+
+[node name="caption" type="Label" parent="menu/stats/inventory/ability/controls/topic/VBoxContainer/fast-access/score/caption/score/ability/y/hint"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/font_color = Color(0.588235, 0.588235, 0.588235, 1)
+theme_override_font_sizes/font_size = 16
+text = "Y"
+
+[node name="MarginContainer" type="MarginContainer" parent="menu/stats/inventory/ability/controls/topic/VBoxContainer/fast-access/score/caption/score"]
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="count" type="Label" parent="menu/stats/inventory/ability/controls/topic/VBoxContainer/fast-access/score/caption/score/MarginContainer"]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 10
+theme_override_fonts/font = ExtResource("16_blc53")
+text = "25000"
+vertical_alignment = 2
+
+[node name="multiplier" type="Label" parent="menu/stats/inventory/ability/controls/topic/VBoxContainer/fast-access/score/caption"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.767135, 0.588769, 0.0712476, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 10
+theme_override_fonts/font = ExtResource("16_blc53")
+theme_override_font_sizes/font_size = 14
+text = "x2.5"
+
+[node name="MarginContainer2" type="MarginContainer" parent="menu/stats/inventory/ability/controls/topic/VBoxContainer/fast-access/score"]
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 1
+theme_override_constants/margin_bottom = 0
+
+[node name="progress" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/topic/VBoxContainer/fast-access/score/MarginContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="experience" type="ProgressBar" parent="menu/stats/inventory/ability/controls/topic/VBoxContainer/fast-access/score/MarginContainer2/progress"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/background = SubResource("StyleBoxEmpty_g3c1s")
+theme_override_styles/fill = SubResource("StyleBoxFlat_o4lum")
+step = 1.0
+value = 50.0
+show_percentage = false
+
+[node name="next-level" type="ColorRect" parent="menu/stats/inventory/ability/controls/topic/VBoxContainer/fast-access/score/MarginContainer2/progress"]
+custom_minimum_size = Vector2(2, 1)
+layout_mode = 2
+color = Color(0.835294, 0.513726, 0.168627, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="menu/stats/inventory/ability/controls/topic/VBoxContainer/fast-access/score"]
+layout_mode = 2
+theme_override_constants/margin_left = 1
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="Panel" type="ColorRect" parent="menu/stats/inventory/ability/controls/topic/VBoxContainer/fast-access/score/MarginContainer"]
+custom_minimum_size = Vector2(0, 1)
+layout_mode = 2
+color = Color(0.0588235, 0.0588235, 0.0588235, 1)
+
+[node name="HBoxContainer" type="PanelContainer" parent="menu/stats/inventory/ability/controls/topic/VBoxContainer/fast-access"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_jj441")
+
+[node name="aura" type="ProgressBar" parent="menu/stats/inventory/ability/controls/topic/VBoxContainer/fast-access/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 1
+theme_override_styles/background = SubResource("StyleBoxEmpty_blc53")
+theme_override_styles/fill = SubResource("StyleBoxFlat_uhig6")
+max_value = 1.0
+step = 0.1
+value = 0.6
+fill_mode = 3
+show_percentage = false
+
+[node name="VBoxContainer" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/topic/VBoxContainer/fast-access/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+theme_override_constants/separation = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="menu/stats/inventory/ability/controls/topic/VBoxContainer/fast-access/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 7
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="description" type="Label" parent="menu/stats/inventory/ability/controls/topic/VBoxContainer/fast-access/HBoxContainer/VBoxContainer/MarginContainer"]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
-size_flags_vertical = 1
+size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 18
-text = "Новая находка \"Повесть временных лет\""
-horizontal_alignment = 1
+text = "Рей"
 autowrap_mode = 2
 
-[node name="label2" type="Label" parent="menu/stats/inventory/ability/controls/topic/background/margin"]
-custom_minimum_size = Vector2(50, 0)
+[node name="health" type="ProgressBar" parent="menu/stats/inventory/ability/controls/topic/VBoxContainer/fast-access/HBoxContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxEmpty_o4lum")
+theme_override_styles/fill = SubResource("StyleBoxFlat_xf68l")
+step = 1.0
+value = 50.0
+show_percentage = false
+
+[node name="slot-1" type="Label" parent="menu/stats/inventory/ability/controls/topic/VBoxContainer/fast-access/HBoxContainer"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 0
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("4_42m6k")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = ExtResource("9_veudi")
+text = "✊"
+vertical_alignment = 1
+
+[node name="characters" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/topic/VBoxContainer/fast-access"]
+layout_mode = 2
+
+[node name="rock" type="Button" parent="menu/stats/inventory/ability/controls/topic/VBoxContainer/fast-access/characters"]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_jn2xb")
+text = "Рок"
+alignment = 0
+
+[node name="aura" type="ProgressBar" parent="menu/stats/inventory/ability/controls/topic/VBoxContainer/fast-access/characters/rock"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 1.0
+grow_vertical = 2
 size_flags_vertical = 1
-theme_override_font_sizes/font_size = 18
-text = "+12% урона"
-horizontal_alignment = 1
-autowrap_mode = 2
+theme_override_styles/background = SubResource("StyleBoxEmpty_blc53")
+theme_override_styles/fill = SubResource("StyleBoxFlat_uhig6")
+max_value = 1.0
+step = 0.1
+value = 0.6
+fill_mode = 3
+show_percentage = false
+
+[node name="health" type="ProgressBar" parent="menu/stats/inventory/ability/controls/topic/VBoxContainer/fast-access/characters/rock"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -1.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/background = SubResource("StyleBoxEmpty_o4lum")
+theme_override_styles/fill = SubResource("StyleBoxFlat_xf68l")
+step = 1.0
+value = 50.0
+show_percentage = false
+
+[node name="slot-1" type="Label" parent="menu/stats/inventory/ability/controls/topic/VBoxContainer/fast-access/characters/rock"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -30.0
+offset_bottom = 26.0
+grow_horizontal = 0
+size_flags_horizontal = 10
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("4_42m6k")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = ExtResource("9_veudi")
+text = "✊"
+vertical_alignment = 1
 
 [node name="right-space" type="Control" parent="menu/stats/inventory/ability/controls/topic"]
 layout_mode = 2
@@ -505,6 +1156,7 @@ custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
+theme_override_styles/normal = SubResource("StyleBoxFlat_fuh2f")
 shortcut = ExtResource("13_1chk7")
 
 [node name="content" type="MarginContainer" parent="menu/stats/inventory/ability/controls/topic/menu"]
@@ -555,6 +1207,7 @@ theme_override_font_sizes/font_size = 12
 text = "Alt"
 
 [node name="help" parent="menu/stats/inventory/ability/controls/topic" instance=ExtResource("5_m2hjb")]
+visible = false
 layout_mode = 2
 shortcut = ExtResource("6_ijgny")
 

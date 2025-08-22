@@ -23,6 +23,7 @@ func is_dead(no_points: bool) -> bool:
 func refill(amount: int = 1) -> void:
 	points.refill(amount)
 	aura.react(points.segment)
+	timer.start()
 
 func _apply_damage(amount: int = 1) -> bool:
 	points.damage(amount)

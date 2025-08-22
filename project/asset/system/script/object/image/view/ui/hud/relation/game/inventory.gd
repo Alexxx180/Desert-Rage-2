@@ -8,7 +8,11 @@ func controls(hud: CanvasLayer, inventory: VSplitContainer) -> void:
 	# processor.markers = inventory.get_node("ability/controls/markers")
 	# """
 	for hero in hud.get_node("../../group").deploy.party.heroes:
-		var ui: Node = hero.logic.processors.ui
-		ui.inventory.logic.items.inventory = hud.detector.game.inventory.items
-		ui.inventory.logic.update_inventory_storage()
+		var ui: Node = hero.logic.processors.ui.inventory.logic
+		ui.items.inventory = hud.detector.game.inventory.items
+		ui.update_inventory_storage()
+		for i in range(0, len(ui.items.inventory.items)):
+		# for button in ui.items.inventory.items:
+			ui.items.inventory.items[i].pressed.connect(func():
+				ui.effect.use_item(i, ui.storage[i]))
 	# """

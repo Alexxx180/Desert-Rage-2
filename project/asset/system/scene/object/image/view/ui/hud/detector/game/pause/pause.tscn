@@ -1,9 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://dugyepxewkmgo"]
+[gd_scene load_steps=6 format=3 uid="uid://dugyepxewkmgo"]
 
 [ext_resource type="Theme" uid="uid://p2br8b6ea3n6" path="res://asset/resource/engine/internal/theme/patterns/template/menu/hud/pause/pause.tres" id="1_5deg3"]
 [ext_resource type="Shortcut" uid="uid://bgd4ocokxr1wj" path="res://asset/resource/engine/internal/short/cut/pause.tres" id="2_21uvd"]
 [ext_resource type="PackedScene" uid="uid://d0sq1ex503flw" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/hide.tscn" id="2_lxr78"]
 [ext_resource type="Script" uid="uid://c64ox6llkepp4" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/pause.gd" id="3_7tvtn"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3rbdo"]
+bg_color = Color(0.0588235, 0.0588235, 0.0588235, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
 
 [node name="pause" type="Button"]
 custom_minimum_size = Vector2(60, 60)
@@ -18,6 +25,7 @@ size_flags_vertical = 8
 tooltip_text = "Приостановить игру"
 theme = ExtResource("1_5deg3")
 theme_override_font_sizes/font_size = 36
+theme_override_styles/normal = SubResource("StyleBoxFlat_3rbdo")
 shortcut = ExtResource("2_21uvd")
 text = "I I"
 script = ExtResource("3_7tvtn")

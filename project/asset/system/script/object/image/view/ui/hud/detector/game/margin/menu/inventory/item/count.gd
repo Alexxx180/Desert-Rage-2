@@ -1,7 +1,7 @@
-extends MarginContainer
+extends VBoxContainer
 
-@onready var bar: ProgressBar = $progress/bar
-@onready var number: Label = $progress/number
+@onready var bar: ProgressBar = $bar
+@onready var number: Label = $number
 
 func set_value(next: int) -> void:
 	show()

@@ -2,6 +2,7 @@ extends Node
 
 var storage: Array
 @onready var items: Node = $items
+@onready var effect: Node = $effect
 
 func update_inventory_storage() -> void:
 	var slot = len(storage)

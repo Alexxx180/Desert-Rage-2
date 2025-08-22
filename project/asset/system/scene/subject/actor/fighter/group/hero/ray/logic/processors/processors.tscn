@@ -1,15 +1,12 @@
-[gd_scene load_steps=13 format=3 uid="uid://cuhscjgk7bx18"]
+[gd_scene load_steps=10 format=3 uid="uid://cuhscjgk7bx18"]
 
 [ext_resource type="Script" uid="uid://yyr1m8t4jjew" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/processors.gd" id="2_bu25i"]
 [ext_resource type="Script" uid="uid://mii602r0bske" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/processors/ui/ui.gd" id="2_bwrsk"]
 [ext_resource type="PackedScene" uid="uid://cfuq8pb82qi6e" path="res://asset/system/scene/subject/actor/fighter/group/hero/ray/logic/processors/world/world.tscn" id="3_q6jpi"]
 [ext_resource type="PackedScene" uid="uid://c8c2cb0sc1mwn" path="res://asset/system/scene/subject/actor/fighter/group/hero/base/logic/processors/hud.tscn" id="4_pgeb1"]
 [ext_resource type="PackedScene" uid="uid://dtibatxhubbff" path="res://asset/system/scene/subject/actor/fighter/group/hero/ray/logic/processors/input/input.tscn" id="4_ytput"]
-[ext_resource type="Script" uid="uid://bnsc5n176lhi0" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/processors/ui/inventory/inventory.gd" id="5_hoxgm"]
+[ext_resource type="PackedScene" uid="uid://c0ggcc8w7lmmd" path="res://asset/system/scene/subject/actor/fighter/group/hero/ray/logic/processors/input/inventory.tscn" id="5_hoxgm"]
 [ext_resource type="Script" uid="uid://b8jyala3bra50" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/processors/stats.gd" id="5_tb7qo"]
-[ext_resource type="Script" uid="uid://d14xeg3g25gvd" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/processors/ui/inventory/logic/logic.gd" id="6_ov16b"]
-[ext_resource type="Script" uid="uid://6h6iouom0uhw" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/processors/ui/inventory/chest.gd" id="7_8m4rb"]
-[ext_resource type="Script" uid="uid://d1706bhhrr60h" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/processors/ui/inventory/logic/items.gd" id="7_ov16b"]
 [ext_resource type="PackedScene" uid="uid://b460ne4ouhshc" path="res://asset/system/scene/subject/actor/fighter/hitbox/health.tscn" id="7_rx01m"]
 [ext_resource type="Script" uid="uid://bkln45vw5evrl" path="res://asset/system/script/subject/actor/fighter/hitbox/aura.gd" id="8_tac03"]
 
@@ -23,17 +20,7 @@ script = ExtResource("2_bwrsk")
 
 [node name="hud" parent="ui" instance=ExtResource("4_pgeb1")]
 
-[node name="inventory" type="Node" parent="ui"]
-script = ExtResource("5_hoxgm")
-
-[node name="logic" type="Node" parent="ui/inventory"]
-script = ExtResource("6_ov16b")
-
-[node name="items" type="Node" parent="ui/inventory/logic"]
-script = ExtResource("7_ov16b")
-
-[node name="chest" type="Node" parent="ui/inventory"]
-script = ExtResource("7_8m4rb")
+[node name="inventory" parent="ui" instance=ExtResource("5_hoxgm")]
 
 [node name="world" parent="." instance=ExtResource("3_q6jpi")]
 

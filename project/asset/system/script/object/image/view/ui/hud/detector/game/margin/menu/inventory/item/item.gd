@@ -2,26 +2,11 @@ extends Button
 
 class_name InventoryItem
 
-@onready var ticon: Label = $icon
-@onready var count: MarginContainer = $count
-@onready var image: TextureRect = $image
+@onready var margin: MarginContainer = $margin
 
-func remove_item() -> void:
-	for ui in [ticon, image, count]: ui.hide()
-
-func _show_text(caption: Label, next: String) -> void:
-	caption.text = next
-	caption.show()
+func remove_item() -> void: margin.remove_item()
 
 func replace_item(next: Dictionary, prev: Dictionary) -> void:
-	put_item(next)
-	put_item(prev)
+	margin.replace_item(next, prev)
 
-func put_item(slot: Dictionary) -> void:
-	var item: Dictionary = HeroInventory.get_items_bank()[slot.id]
-	if item.icon.contains("/"):
-		image.texture = ImageTexture.create_from_image(Image.load_from_file(image.icon))
-		image.show()
-	else:
-		_show_text(ticon, item.icon)
-	count.set_value(slot.x)
+func put_item(slot: Dictionary) -> void: margin.put_item(slot)
