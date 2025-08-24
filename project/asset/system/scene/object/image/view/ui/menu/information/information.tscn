@@ -1,22 +1,19 @@
-[gd_scene load_steps=18 format=3 uid="uid://ce8kdx2kkhrxj"]
+[gd_scene load_steps=19 format=3 uid="uid://ce8kdx2kkhrxj"]
 
-[ext_resource type="Script" uid="uid://cppftbc2k00nt" path="res://asset/system/script/object/image/view/ui/menu/information.gd" id="1_3n4lk"]
+[ext_resource type="Script" uid="uid://cppftbc2k00nt" path="res://asset/system/script/object/image/view/ui/menu/information/information.gd" id="1_3n4lk"]
 [ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://asset/resource/engine/internal/theme/patterns/template/menu/settings/topic/footer.tres" id="1_fnw42"]
 [ext_resource type="PackedScene" uid="uid://dkkdejo26syrt" path="res://asset/system/scene/object/image/view/ui/menu/information/preview.tscn" id="2_fnw42"]
 [ext_resource type="StyleBox" uid="uid://cht8hrroa75bg" path="res://asset/resource/engine/internal/theme/style/tag-button.tres" id="3_3n4lk"]
 [ext_resource type="PackedScene" uid="uid://scs1xlb7x0d6" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/menu/inventory/selection.tscn" id="4_vwlpw"]
+[ext_resource type="StyleBox" uid="uid://chr58r7ok2alt" path="res://asset/resource/engine/internal/theme/style/panel/accent.tres" id="5_bfn3g"]
+[ext_resource type="Script" uid="uid://b06ntftlpr38h" path="res://asset/system/script/object/image/view/ui/menu/information/card.gd" id="5_ux7gx"]
+[ext_resource type="StyleBox" uid="uid://c8hy4gq5uksdh" path="res://asset/resource/engine/internal/theme/style/panel/complex/hover.tres" id="6_jiab0"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3n4lk"]
 bg_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bfn3g"]
 bg_color = Color(0.458011, 0.591248, 0.902475, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ux7gx"]
-bg_color = Color(0.1386, 0.152963, 0.202406, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jiab0"]
-bg_color = Color(0.1386, 0.152963, 0.202406, 1)
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_jiab0"]
 color = Color(0, 0.490135, 0, 1)
@@ -696,265 +693,2330 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 5
 
-[node name="description" type="Label" parent="detector/content/🗺/map/Карта/panel/margin/panel/margin"]
+[node name="HFlowContainer" type="HFlowContainer" parent="detector/content/🗺/map/Карта/panel/margin/panel/margin"]
+layout_mode = 2
+
+[node name="description" type="Label" parent="detector/content/🗺/map/Карта/panel/margin/panel/margin/HFlowContainer"]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
-text = "Пещера истоков - Иголка в стоге сена   2 Этаж   👻 2 / 3   📖 3 / 6   📜 1 / 2"
+size_flags_horizontal = 3
+text = "Пещера истоков - Иголка в стоге сена"
 autowrap_mode = 2
 
-[node name="Умения" type="MarginContainer" parent="detector/content/🗺/map"]
+[node name="progress" type="Label" parent="detector/content/🗺/map/Карта/panel/margin/panel/margin/HFlowContainer"]
 layout_mode = 2
+size_flags_horizontal = 8
+text = " 2 Этаж   👻 2 / 3   📖 3 / 6   📜 1 / 2"
+
+[node name="Помощь" type="MarginContainer" parent="detector/content/🗺/map"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
 metadata/_tab_index = 1
 
-[node name="scroll" type="ScrollContainer" parent="detector/content/🗺/map/Умения"]
+[node name="scroll" type="ScrollContainer" parent="detector/content/🗺/map/Помощь"]
 layout_mode = 2
 
-[node name="cards" type="HFlowContainer" parent="detector/content/🗺/map/Умения/scroll"]
+[node name="cards" type="HFlowContainer" parent="detector/content/🗺/map/Помощь/scroll"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="movement-collapsed" type="PanelContainer" parent="detector/content/🗺/map/Умения/scroll/cards"]
+[node name="motion" type="Control" parent="detector/content/🗺/map/Помощь/scroll/cards"]
+visible = false
 custom_minimum_size = Vector2(260, 356)
 layout_mode = 2
+script = ExtResource("5_ux7gx")
 
-[node name="margin" type="MarginContainer" parent="detector/content/🗺/map/Умения/scroll/cards/movement-collapsed"]
+[node name="collapsed" type="Button" parent="detector/content/🗺/map/Помощь/scroll/cards/motion"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(130, 0)
+theme_override_styles/hover_pressed = ExtResource("6_jiab0")
+theme_override_styles/hover = ExtResource("6_jiab0")
+theme_override_styles/normal = ExtResource("5_bfn3g")
+
+[node name="margin" type="MarginContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/motion/collapsed"]
 layout_mode = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
+offset_right = 260.0
+offset_bottom = 356.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 10
 
-[node name="content" type="VBoxContainer" parent="detector/content/🗺/map/Умения/scroll/cards/movement-collapsed/margin"]
+[node name="content" type="VBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/motion/collapsed/margin"]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="image" type="Panel" parent="detector/content/🗺/map/Умения/scroll/cards/movement-collapsed/margin/content"]
+[node name="image" type="TextureRect" parent="detector/content/🗺/map/Помощь/scroll/cards/motion/collapsed/margin/content"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_ux7gx")
 
-[node name="title" type="HBoxContainer" parent="detector/content/🗺/map/Умения/scroll/cards/movement-collapsed/margin/content"]
+[node name="title" type="HBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/motion/collapsed/margin/content"]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="left" type="HSeparator" parent="detector/content/🗺/map/Умения/scroll/cards/movement-collapsed/margin/content/title"]
+[node name="left" type="HSeparator" parent="detector/content/🗺/map/Помощь/scroll/cards/motion/collapsed/margin/content/title"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="caption" type="Label" parent="detector/content/🗺/map/Умения/scroll/cards/movement-collapsed/margin/content/title"]
+[node name="caption" type="Label" parent="detector/content/🗺/map/Помощь/scroll/cards/motion/collapsed/margin/content/title"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 14
 text = "Движение"
 
-[node name="right" type="HSeparator" parent="detector/content/🗺/map/Умения/scroll/cards/movement-collapsed/margin/content/title"]
+[node name="right" type="HSeparator" parent="detector/content/🗺/map/Помощь/scroll/cards/motion/collapsed/margin/content/title"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="movement-showcase" type="PanelContainer" parent="detector/content/🗺/map/Умения/scroll/cards"]
+[node name="showcase" type="Button" parent="detector/content/🗺/map/Помощь/scroll/cards/motion"]
 custom_minimum_size = Vector2(260, 356)
-layout_mode = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(131, 0)
+theme_override_styles/hover_pressed = ExtResource("6_jiab0")
+theme_override_styles/hover = ExtResource("6_jiab0")
+theme_override_styles/normal = ExtResource("5_bfn3g")
 
-[node name="margin" type="MarginContainer" parent="detector/content/🗺/map/Умения/scroll/cards/movement-showcase"]
+[node name="margin" type="MarginContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/motion/showcase"]
 layout_mode = 2
+offset_right = 260.0
+offset_bottom = 356.0
 theme_override_constants/margin_left = 15
 theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 15
-theme_override_constants/margin_bottom = 15
+theme_override_constants/margin_bottom = 10
 
-[node name="content" type="VBoxContainer" parent="detector/content/🗺/map/Умения/scroll/cards/movement-showcase/margin"]
+[node name="content" type="VBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/motion/showcase/margin"]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="description" type="Label" parent="detector/content/🗺/map/Умения/scroll/cards/movement-showcase/margin/content"]
+[node name="description" type="Label" parent="detector/content/🗺/map/Помощь/scroll/cards/motion/showcase/margin/content"]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
-size_flags_vertical = 3
+size_flags_vertical = 6
 theme = ExtResource("1_fnw42")
-text = "🏃 Для перемещения используйте %s. Чтобы ускориться нажмите %s.
+text = "🏃 Для перемещения используйте %s. Чтобы ускориться нажмите %s
 
-🦶 Позволяет герою ходить и использовать приемы с ногами.
+🦶 Позволяет герою ходить и использовать приемы с ногами
 
 🚫 Можно потерять"
 autowrap_mode = 2
 
-[node name="title" type="HBoxContainer" parent="detector/content/🗺/map/Умения/scroll/cards/movement-showcase/margin/content"]
+[node name="title" type="HBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/motion/showcase/margin/content"]
 layout_mode = 2
+size_flags_vertical = 8
 theme_override_constants/separation = 10
 
-[node name="left" type="HSeparator" parent="detector/content/🗺/map/Умения/scroll/cards/movement-showcase/margin/content/title"]
+[node name="left" type="HSeparator" parent="detector/content/🗺/map/Помощь/scroll/cards/motion/showcase/margin/content/title"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="caption" type="Label" parent="detector/content/🗺/map/Умения/scroll/cards/movement-showcase/margin/content/title"]
+[node name="caption" type="Label" parent="detector/content/🗺/map/Помощь/scroll/cards/motion/showcase/margin/content/title"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 14
 text = "Движение"
 
-[node name="right" type="HSeparator" parent="detector/content/🗺/map/Умения/scroll/cards/movement-showcase/margin/content/title"]
+[node name="right" type="HSeparator" parent="detector/content/🗺/map/Помощь/scroll/cards/motion/showcase/margin/content/title"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="action-collapsed" type="PanelContainer" parent="detector/content/🗺/map/Умения/scroll/cards"]
+[node name="jump" type="Control" parent="detector/content/🗺/map/Помощь/scroll/cards"]
+visible = false
 custom_minimum_size = Vector2(260, 356)
 layout_mode = 2
+script = ExtResource("5_ux7gx")
 
-[node name="margin" type="MarginContainer" parent="detector/content/🗺/map/Умения/scroll/cards/action-collapsed"]
+[node name="collapsed" type="Button" parent="detector/content/🗺/map/Помощь/scroll/cards/jump"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(130, 0)
+theme_override_styles/hover_pressed = ExtResource("6_jiab0")
+theme_override_styles/hover = ExtResource("6_jiab0")
+theme_override_styles/normal = ExtResource("5_bfn3g")
+
+[node name="margin" type="MarginContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/jump/collapsed"]
 layout_mode = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
+offset_right = 260.0
+offset_bottom = 356.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 10
 
-[node name="content" type="VBoxContainer" parent="detector/content/🗺/map/Умения/scroll/cards/action-collapsed/margin"]
+[node name="content" type="VBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/jump/collapsed/margin"]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="image" type="Panel" parent="detector/content/🗺/map/Умения/scroll/cards/action-collapsed/margin/content"]
+[node name="image" type="TextureRect" parent="detector/content/🗺/map/Помощь/scroll/cards/jump/collapsed/margin/content"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_jiab0")
 
-[node name="title" type="HBoxContainer" parent="detector/content/🗺/map/Умения/scroll/cards/action-collapsed/margin/content"]
+[node name="title" type="HBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/jump/collapsed/margin/content"]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="left" type="HSeparator" parent="detector/content/🗺/map/Умения/scroll/cards/action-collapsed/margin/content/title"]
+[node name="left" type="HSeparator" parent="detector/content/🗺/map/Помощь/scroll/cards/jump/collapsed/margin/content/title"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="caption" type="Label" parent="detector/content/🗺/map/Умения/scroll/cards/action-collapsed/margin/content/title"]
+[node name="caption" type="Label" parent="detector/content/🗺/map/Помощь/scroll/cards/jump/collapsed/margin/content/title"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Прыжки"
+
+[node name="right" type="HSeparator" parent="detector/content/🗺/map/Помощь/scroll/cards/jump/collapsed/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="showcase" type="Button" parent="detector/content/🗺/map/Помощь/scroll/cards/jump"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(131, 0)
+theme_override_styles/hover_pressed = ExtResource("6_jiab0")
+theme_override_styles/hover = ExtResource("6_jiab0")
+theme_override_styles/normal = ExtResource("5_bfn3g")
+
+[node name="margin" type="MarginContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/jump/showcase"]
+layout_mode = 2
+offset_right = 260.0
+offset_bottom = 356.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="content" type="VBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/jump/showcase/margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="description" type="Label" parent="detector/content/🗺/map/Помощь/scroll/cards/jump/showcase/margin/content"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_vertical = 6
+theme = ExtResource("1_fnw42")
+text = "🕳 Для прыжка подойдите к выступу вплотную, затем продолжайте идти
+
+⛳️ Обратите внимание: вы должны быть на той же высоте, что и место для приземления"
+autowrap_mode = 2
+
+[node name="title" type="HBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/jump/showcase/margin/content"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 10
+
+[node name="left" type="HSeparator" parent="detector/content/🗺/map/Помощь/scroll/cards/jump/showcase/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="detector/content/🗺/map/Помощь/scroll/cards/jump/showcase/margin/content/title"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Прыжки"
+
+[node name="right" type="HSeparator" parent="detector/content/🗺/map/Помощь/scroll/cards/jump/showcase/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="push" type="Control" parent="detector/content/🗺/map/Помощь/scroll/cards"]
+visible = false
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 2
+script = ExtResource("5_ux7gx")
+
+[node name="collapsed" type="Button" parent="detector/content/🗺/map/Помощь/scroll/cards/push"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(130, 0)
+theme_override_styles/hover_pressed = ExtResource("6_jiab0")
+theme_override_styles/hover = ExtResource("6_jiab0")
+theme_override_styles/normal = ExtResource("5_bfn3g")
+
+[node name="margin" type="MarginContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/push/collapsed"]
+layout_mode = 2
+offset_right = 260.0
+offset_bottom = 356.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="content" type="VBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/push/collapsed/margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="image" type="TextureRect" parent="detector/content/🗺/map/Помощь/scroll/cards/push/collapsed/margin/content"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="title" type="HBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/push/collapsed/margin/content"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="left" type="HSeparator" parent="detector/content/🗺/map/Помощь/scroll/cards/push/collapsed/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="detector/content/🗺/map/Помощь/scroll/cards/push/collapsed/margin/content/title"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Ящики"
+
+[node name="right" type="HSeparator" parent="detector/content/🗺/map/Помощь/scroll/cards/push/collapsed/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="showcase" type="Button" parent="detector/content/🗺/map/Помощь/scroll/cards/push"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(131, 0)
+theme_override_styles/hover_pressed = ExtResource("6_jiab0")
+theme_override_styles/hover = ExtResource("6_jiab0")
+theme_override_styles/normal = ExtResource("5_bfn3g")
+
+[node name="margin" type="MarginContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/push/showcase"]
+layout_mode = 2
+offset_right = 260.0
+offset_bottom = 356.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="content" type="VBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/push/showcase/margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="description" type="Label" parent="detector/content/🗺/map/Помощь/scroll/cards/push/showcase/margin/content"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_vertical = 6
+theme = ExtResource("1_fnw42")
+text = "🙇 Для перемещения перед собой встаньте около предмета и идите
+
+👐 Чтобы начать тащить зажмите %s у ящика и идите
+
+📦 Сзади ящика можно пройти"
+autowrap_mode = 2
+
+[node name="title" type="HBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/push/showcase/margin/content"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 10
+
+[node name="left" type="HSeparator" parent="detector/content/🗺/map/Помощь/scroll/cards/push/showcase/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="detector/content/🗺/map/Помощь/scroll/cards/push/showcase/margin/content/title"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Ящики"
+
+[node name="right" type="HSeparator" parent="detector/content/🗺/map/Помощь/scroll/cards/push/showcase/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="land" type="Control" parent="detector/content/🗺/map/Помощь/scroll/cards"]
+visible = false
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 2
+script = ExtResource("5_ux7gx")
+
+[node name="collapsed" type="Button" parent="detector/content/🗺/map/Помощь/scroll/cards/land"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(130, 0)
+theme_override_styles/hover_pressed = ExtResource("6_jiab0")
+theme_override_styles/hover = ExtResource("6_jiab0")
+theme_override_styles/normal = ExtResource("5_bfn3g")
+
+[node name="margin" type="MarginContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/land/collapsed"]
+layout_mode = 2
+offset_right = 260.0
+offset_bottom = 356.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="content" type="VBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/land/collapsed/margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="image" type="TextureRect" parent="detector/content/🗺/map/Помощь/scroll/cards/land/collapsed/margin/content"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="title" type="HBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/land/collapsed/margin/content"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="left" type="HSeparator" parent="detector/content/🗺/map/Помощь/scroll/cards/land/collapsed/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="detector/content/🗺/map/Помощь/scroll/cards/land/collapsed/margin/content/title"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Возвышенность"
+
+[node name="right" type="HSeparator" parent="detector/content/🗺/map/Помощь/scroll/cards/land/collapsed/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="showcase" type="Button" parent="detector/content/🗺/map/Помощь/scroll/cards/land"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(131, 0)
+theme_override_styles/hover_pressed = ExtResource("6_jiab0")
+theme_override_styles/hover = ExtResource("6_jiab0")
+theme_override_styles/normal = ExtResource("5_bfn3g")
+
+[node name="margin" type="MarginContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/land/showcase"]
+layout_mode = 2
+offset_right = 260.0
+offset_bottom = 356.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="content" type="VBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/land/showcase/margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="description" type="Label" parent="detector/content/🗺/map/Помощь/scroll/cards/land/showcase/margin/content"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_vertical = 6
+theme = ExtResource("1_fnw42")
+text = "🕋 Для прыжка на ящик или выступ, вы должны быть на уровне с ними
+
+🗻Чем светлее область, тем на более высоком уровне вы находитесь
+
+𓀪 Помогайте себе исследовать предметами"
+autowrap_mode = 2
+
+[node name="title" type="HBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/land/showcase/margin/content"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 10
+
+[node name="left" type="HSeparator" parent="detector/content/🗺/map/Помощь/scroll/cards/land/showcase/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="detector/content/🗺/map/Помощь/scroll/cards/land/showcase/margin/content/title"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Возвышенность"
+
+[node name="right" type="HSeparator" parent="detector/content/🗺/map/Помощь/scroll/cards/land/showcase/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="action" type="Control" parent="detector/content/🗺/map/Помощь/scroll/cards"]
+visible = false
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 2
+script = ExtResource("5_ux7gx")
+
+[node name="collapsed" type="Button" parent="detector/content/🗺/map/Помощь/scroll/cards/action"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(130, 0)
+theme_override_styles/hover_pressed = ExtResource("6_jiab0")
+theme_override_styles/hover = ExtResource("6_jiab0")
+theme_override_styles/normal = ExtResource("5_bfn3g")
+
+[node name="margin" type="MarginContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/action/collapsed"]
+layout_mode = 2
+offset_right = 260.0
+offset_bottom = 356.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="content" type="VBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/action/collapsed/margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="image" type="TextureRect" parent="detector/content/🗺/map/Помощь/scroll/cards/action/collapsed/margin/content"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="title" type="HBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/action/collapsed/margin/content"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="left" type="HSeparator" parent="detector/content/🗺/map/Помощь/scroll/cards/action/collapsed/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="detector/content/🗺/map/Помощь/scroll/cards/action/collapsed/margin/content/title"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 14
 text = "Действие"
 
-[node name="right" type="HSeparator" parent="detector/content/🗺/map/Умения/scroll/cards/action-collapsed/margin/content/title"]
+[node name="right" type="HSeparator" parent="detector/content/🗺/map/Помощь/scroll/cards/action/collapsed/margin/content/title"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="action-showcase" type="PanelContainer" parent="detector/content/🗺/map/Умения/scroll/cards"]
+[node name="showcase" type="Button" parent="detector/content/🗺/map/Помощь/scroll/cards/action"]
 custom_minimum_size = Vector2(260, 356)
-layout_mode = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(131, 0)
+theme_override_styles/hover_pressed = ExtResource("6_jiab0")
+theme_override_styles/hover = ExtResource("6_jiab0")
+theme_override_styles/normal = ExtResource("5_bfn3g")
 
-[node name="margin" type="MarginContainer" parent="detector/content/🗺/map/Умения/scroll/cards/action-showcase"]
+[node name="margin" type="MarginContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/action/showcase"]
 layout_mode = 2
+offset_right = 260.0
+offset_bottom = 356.0
 theme_override_constants/margin_left = 15
 theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 15
-theme_override_constants/margin_bottom = 15
+theme_override_constants/margin_bottom = 10
 
-[node name="content" type="VBoxContainer" parent="detector/content/🗺/map/Умения/scroll/cards/action-showcase/margin"]
+[node name="content" type="VBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/action/showcase/margin"]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="description" type="Label" parent="detector/content/🗺/map/Умения/scroll/cards/action-showcase/margin/content"]
+[node name="description" type="Label" parent="detector/content/🗺/map/Помощь/scroll/cards/action/showcase/margin/content"]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
-size_flags_vertical = 3
+size_flags_vertical = 6
 theme = ExtResource("1_fnw42")
-text = "🙌 Для ручного взаимо-действия подойдите к предмету и нажмите %s.
+text = "🙌 Для ручного взаимо-действия подойдите к предмету и нажмите %s
 
-👊 Позволяет герою использовать приемы с руками и действовать.
+👊 Позволяет герою использовать приемы с руками и действовать
 
 🚫 Можно потерять"
 autowrap_mode = 2
 
-[node name="title" type="HBoxContainer" parent="detector/content/🗺/map/Умения/scroll/cards/action-showcase/margin/content"]
+[node name="title" type="HBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/action/showcase/margin/content"]
 layout_mode = 2
+size_flags_vertical = 8
 theme_override_constants/separation = 10
 
-[node name="left" type="HSeparator" parent="detector/content/🗺/map/Умения/scroll/cards/action-showcase/margin/content/title"]
+[node name="left" type="HSeparator" parent="detector/content/🗺/map/Помощь/scroll/cards/action/showcase/margin/content/title"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="caption" type="Label" parent="detector/content/🗺/map/Умения/scroll/cards/action-showcase/margin/content/title"]
+[node name="caption" type="Label" parent="detector/content/🗺/map/Помощь/scroll/cards/action/showcase/margin/content/title"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 14
 text = "Действие"
 
-[node name="right" type="HSeparator" parent="detector/content/🗺/map/Умения/scroll/cards/action-showcase/margin/content/title"]
+[node name="right" type="HSeparator" parent="detector/content/🗺/map/Помощь/scroll/cards/action/showcase/margin/content/title"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="reason-collapsed" type="PanelContainer" parent="detector/content/🗺/map/Умения/scroll/cards"]
+[node name="fire" type="Control" parent="detector/content/🗺/map/Помощь/scroll/cards"]
+visible = false
 custom_minimum_size = Vector2(260, 356)
 layout_mode = 2
+script = ExtResource("5_ux7gx")
 
-[node name="margin" type="MarginContainer" parent="detector/content/🗺/map/Умения/scroll/cards/reason-collapsed"]
+[node name="collapsed" type="Button" parent="detector/content/🗺/map/Помощь/scroll/cards/fire"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(130, 0)
+theme_override_styles/hover_pressed = ExtResource("6_jiab0")
+theme_override_styles/hover = ExtResource("6_jiab0")
+theme_override_styles/normal = ExtResource("5_bfn3g")
+
+[node name="margin" type="MarginContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/fire/collapsed"]
 layout_mode = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
+offset_right = 260.0
+offset_bottom = 356.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 10
 
-[node name="content" type="VBoxContainer" parent="detector/content/🗺/map/Умения/scroll/cards/reason-collapsed/margin"]
+[node name="content" type="VBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/fire/collapsed/margin"]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="image" type="Panel" parent="detector/content/🗺/map/Умения/scroll/cards/reason-collapsed/margin/content"]
+[node name="image" type="TextureRect" parent="detector/content/🗺/map/Помощь/scroll/cards/fire/collapsed/margin/content"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_ux7gx")
 
-[node name="title" type="HBoxContainer" parent="detector/content/🗺/map/Умения/scroll/cards/reason-collapsed/margin/content"]
+[node name="title" type="HBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/fire/collapsed/margin/content"]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="left" type="HSeparator" parent="detector/content/🗺/map/Умения/scroll/cards/reason-collapsed/margin/content/title"]
+[node name="left" type="HSeparator" parent="detector/content/🗺/map/Помощь/scroll/cards/fire/collapsed/margin/content/title"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="caption" type="Label" parent="detector/content/🗺/map/Умения/scroll/cards/reason-collapsed/margin/content/title"]
+[node name="caption" type="Label" parent="detector/content/🗺/map/Помощь/scroll/cards/fire/collapsed/margin/content/title"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Пламя"
+
+[node name="right" type="HSeparator" parent="detector/content/🗺/map/Помощь/scroll/cards/fire/collapsed/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="showcase" type="Button" parent="detector/content/🗺/map/Помощь/scroll/cards/fire"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(131, 0)
+theme_override_styles/hover_pressed = ExtResource("6_jiab0")
+theme_override_styles/hover = ExtResource("6_jiab0")
+theme_override_styles/normal = ExtResource("5_bfn3g")
+
+[node name="margin" type="MarginContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/fire/showcase"]
+layout_mode = 2
+offset_right = 260.0
+offset_bottom = 356.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="content" type="VBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/fire/showcase/margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="description" type="Label" parent="detector/content/🗺/map/Помощь/scroll/cards/fire/showcase/margin/content"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_vertical = 6
+theme = ExtResource("1_fnw42")
+text = "🧊 Для зажигания подойдите к предмету и нажмите %s
+
+❄️ Чистит путь ото льда, зажигает фитили
+
+🔥 Открывает приемы стихии огня"
+autowrap_mode = 2
+
+[node name="title" type="HBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/fire/showcase/margin/content"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 10
+
+[node name="left" type="HSeparator" parent="detector/content/🗺/map/Помощь/scroll/cards/fire/showcase/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="detector/content/🗺/map/Помощь/scroll/cards/fire/showcase/margin/content/title"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Пламя"
+
+[node name="right" type="HSeparator" parent="detector/content/🗺/map/Помощь/scroll/cards/fire/showcase/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="whip" type="Control" parent="detector/content/🗺/map/Помощь/scroll/cards"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 2
+script = ExtResource("5_ux7gx")
+
+[node name="collapsed" type="Button" parent="detector/content/🗺/map/Помощь/scroll/cards/whip"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(130, 0)
+theme_override_styles/hover_pressed = ExtResource("6_jiab0")
+theme_override_styles/hover = ExtResource("6_jiab0")
+theme_override_styles/normal = ExtResource("5_bfn3g")
+
+[node name="margin" type="MarginContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/whip/collapsed"]
+layout_mode = 2
+offset_right = 260.0
+offset_bottom = 356.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="content" type="VBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/whip/collapsed/margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="image" type="TextureRect" parent="detector/content/🗺/map/Помощь/scroll/cards/whip/collapsed/margin/content"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="title" type="HBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/whip/collapsed/margin/content"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="left" type="HSeparator" parent="detector/content/🗺/map/Помощь/scroll/cards/whip/collapsed/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="detector/content/🗺/map/Помощь/scroll/cards/whip/collapsed/margin/content/title"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Кнут"
+
+[node name="right" type="HSeparator" parent="detector/content/🗺/map/Помощь/scroll/cards/whip/collapsed/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="showcase" type="Button" parent="detector/content/🗺/map/Помощь/scroll/cards/whip"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(131, 0)
+theme_override_styles/hover_pressed = ExtResource("6_jiab0")
+theme_override_styles/hover = ExtResource("6_jiab0")
+theme_override_styles/normal = ExtResource("5_bfn3g")
+
+[node name="margin" type="MarginContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/whip/showcase"]
+layout_mode = 2
+offset_right = 260.0
+offset_bottom = 356.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="content" type="VBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/whip/showcase/margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="description" type="Label" parent="detector/content/🗺/map/Помощь/scroll/cards/whip/showcase/margin/content"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_vertical = 6
+theme = ExtResource("1_fnw42")
+text = "🎣 Вы можете под-тянуться нажав %s перед столбом или крюком
+
+⛓️ Для подтягивания к цепи нужно висеть на цепи лицом к ней
+
+🎚 Задетые кнутом рычаги переключаются."
+autowrap_mode = 2
+
+[node name="title" type="HBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/whip/showcase/margin/content"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 10
+
+[node name="left" type="HSeparator" parent="detector/content/🗺/map/Помощь/scroll/cards/whip/showcase/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="detector/content/🗺/map/Помощь/scroll/cards/whip/showcase/margin/content/title"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Кнут"
+
+[node name="right" type="HSeparator" parent="detector/content/🗺/map/Помощь/scroll/cards/whip/showcase/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="explosion" type="Control" parent="detector/content/🗺/map/Помощь/scroll/cards"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 2
+script = ExtResource("5_ux7gx")
+
+[node name="collapsed" type="Button" parent="detector/content/🗺/map/Помощь/scroll/cards/explosion"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(130, 0)
+theme_override_styles/hover_pressed = ExtResource("6_jiab0")
+theme_override_styles/hover = ExtResource("6_jiab0")
+theme_override_styles/normal = ExtResource("5_bfn3g")
+
+[node name="margin" type="MarginContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/explosion/collapsed"]
+layout_mode = 2
+offset_right = 260.0
+offset_bottom = 356.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="content" type="VBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/explosion/collapsed/margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="image" type="TextureRect" parent="detector/content/🗺/map/Помощь/scroll/cards/explosion/collapsed/margin/content"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="title" type="HBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/explosion/collapsed/margin/content"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="left" type="HSeparator" parent="detector/content/🗺/map/Помощь/scroll/cards/explosion/collapsed/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="detector/content/🗺/map/Помощь/scroll/cards/explosion/collapsed/margin/content/title"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Взрыв"
+
+[node name="right" type="HSeparator" parent="detector/content/🗺/map/Помощь/scroll/cards/explosion/collapsed/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="showcase" type="Button" parent="detector/content/🗺/map/Помощь/scroll/cards/explosion"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(131, 0)
+theme_override_styles/hover_pressed = ExtResource("6_jiab0")
+theme_override_styles/hover = ExtResource("6_jiab0")
+theme_override_styles/normal = ExtResource("5_bfn3g")
+
+[node name="margin" type="MarginContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/explosion/showcase"]
+layout_mode = 2
+offset_right = 260.0
+offset_bottom = 356.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="content" type="VBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/explosion/showcase/margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="description" type="Label" parent="detector/content/🗺/map/Помощь/scroll/cards/explosion/showcase/margin/content"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_vertical = 6
+theme = ExtResource("1_fnw42")
+text = "🎣 Вы можете под-тянуться нажав %s перед столбом или крюком
+
+⛓️ Для подтягивания к цепи нужно висеть на цепи лицом к ней
+
+🎚 Задетые кнутом рычаги переключаются."
+autowrap_mode = 2
+
+[node name="title" type="HBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/explosion/showcase/margin/content"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 10
+
+[node name="left" type="HSeparator" parent="detector/content/🗺/map/Помощь/scroll/cards/explosion/showcase/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="detector/content/🗺/map/Помощь/scroll/cards/explosion/showcase/margin/content/title"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Взрыв"
+
+[node name="right" type="HSeparator" parent="detector/content/🗺/map/Помощь/scroll/cards/explosion/showcase/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="water" type="Control" parent="detector/content/🗺/map/Помощь/scroll/cards"]
+visible = false
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 2
+script = ExtResource("5_ux7gx")
+
+[node name="collapsed" type="Button" parent="detector/content/🗺/map/Помощь/scroll/cards/water"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(130, 0)
+theme_override_styles/hover_pressed = ExtResource("6_jiab0")
+theme_override_styles/hover = ExtResource("6_jiab0")
+theme_override_styles/normal = ExtResource("5_bfn3g")
+
+[node name="margin" type="MarginContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/water/collapsed"]
+layout_mode = 2
+offset_right = 260.0
+offset_bottom = 356.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="content" type="VBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/water/collapsed/margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="image" type="TextureRect" parent="detector/content/🗺/map/Помощь/scroll/cards/water/collapsed/margin/content"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="title" type="HBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/water/collapsed/margin/content"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="left" type="HSeparator" parent="detector/content/🗺/map/Помощь/scroll/cards/water/collapsed/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="detector/content/🗺/map/Помощь/scroll/cards/water/collapsed/margin/content/title"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Вода"
+
+[node name="right" type="HSeparator" parent="detector/content/🗺/map/Помощь/scroll/cards/water/collapsed/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="showcase" type="Button" parent="detector/content/🗺/map/Помощь/scroll/cards/water"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(131, 0)
+theme_override_styles/hover_pressed = ExtResource("6_jiab0")
+theme_override_styles/hover = ExtResource("6_jiab0")
+theme_override_styles/normal = ExtResource("5_bfn3g")
+
+[node name="margin" type="MarginContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/water/showcase"]
+layout_mode = 2
+offset_right = 260.0
+offset_bottom = 356.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="content" type="VBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/water/showcase/margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="description" type="Label" parent="detector/content/🗺/map/Помощь/scroll/cards/water/showcase/margin/content"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_vertical = 6
+theme = ExtResource("1_fnw42")
+text = "🌧 Для призыва тучи остановитесь на нужном месте и нажмите %s
+
+🪫 Проводит ток и держит заряд, сковывает движения
+ 
+💧 Открывает приемы стихии воды"
+autowrap_mode = 2
+
+[node name="title" type="HBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/water/showcase/margin/content"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 10
+
+[node name="left" type="HSeparator" parent="detector/content/🗺/map/Помощь/scroll/cards/water/showcase/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="detector/content/🗺/map/Помощь/scroll/cards/water/showcase/margin/content/title"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Вода"
+
+[node name="right" type="HSeparator" parent="detector/content/🗺/map/Помощь/scroll/cards/water/showcase/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="spark" type="Control" parent="detector/content/🗺/map/Помощь/scroll/cards"]
+visible = false
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 2
+script = ExtResource("5_ux7gx")
+
+[node name="collapsed" type="Button" parent="detector/content/🗺/map/Помощь/scroll/cards/spark"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(130, 0)
+theme_override_styles/hover_pressed = ExtResource("6_jiab0")
+theme_override_styles/hover = ExtResource("6_jiab0")
+theme_override_styles/normal = ExtResource("5_bfn3g")
+
+[node name="margin" type="MarginContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/spark/collapsed"]
+layout_mode = 2
+offset_right = 260.0
+offset_bottom = 356.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="content" type="VBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/spark/collapsed/margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="image" type="TextureRect" parent="detector/content/🗺/map/Помощь/scroll/cards/spark/collapsed/margin/content"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="title" type="HBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/spark/collapsed/margin/content"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="left" type="HSeparator" parent="detector/content/🗺/map/Помощь/scroll/cards/spark/collapsed/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="detector/content/🗺/map/Помощь/scroll/cards/spark/collapsed/margin/content/title"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Вода"
+
+[node name="right" type="HSeparator" parent="detector/content/🗺/map/Помощь/scroll/cards/spark/collapsed/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="showcase" type="Button" parent="detector/content/🗺/map/Помощь/scroll/cards/spark"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(131, 0)
+theme_override_styles/hover_pressed = ExtResource("6_jiab0")
+theme_override_styles/hover = ExtResource("6_jiab0")
+theme_override_styles/normal = ExtResource("5_bfn3g")
+
+[node name="margin" type="MarginContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/spark/showcase"]
+layout_mode = 2
+offset_right = 260.0
+offset_bottom = 356.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="content" type="VBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/spark/showcase/margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="description" type="Label" parent="detector/content/🗺/map/Помощь/scroll/cards/spark/showcase/margin/content"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_vertical = 6
+theme = ExtResource("1_fnw42")
+text = "🌩 Для передачи тока встаньте около аппара-туры и нажмите %s
+
+💡 Заряжает источники, шокирует врагов
+ 
+⚡️ Открывает приемы стихии молнии"
+autowrap_mode = 2
+
+[node name="title" type="HBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/spark/showcase/margin/content"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 10
+
+[node name="left" type="HSeparator" parent="detector/content/🗺/map/Помощь/scroll/cards/spark/showcase/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="detector/content/🗺/map/Помощь/scroll/cards/spark/showcase/margin/content/title"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Искра"
+
+[node name="right" type="HSeparator" parent="detector/content/🗺/map/Помощь/scroll/cards/spark/showcase/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="reason" type="Control" parent="detector/content/🗺/map/Помощь/scroll/cards"]
+visible = false
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 2
+script = ExtResource("5_ux7gx")
+
+[node name="collapsed" type="Button" parent="detector/content/🗺/map/Помощь/scroll/cards/reason"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(130, 0)
+theme_override_styles/hover_pressed = ExtResource("6_jiab0")
+theme_override_styles/hover = ExtResource("6_jiab0")
+theme_override_styles/normal = ExtResource("5_bfn3g")
+
+[node name="margin" type="MarginContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/reason/collapsed"]
+layout_mode = 2
+offset_right = 260.0
+offset_bottom = 356.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="content" type="VBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/reason/collapsed/margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="image" type="TextureRect" parent="detector/content/🗺/map/Помощь/scroll/cards/reason/collapsed/margin/content"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="title" type="HBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/reason/collapsed/margin/content"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="left" type="HSeparator" parent="detector/content/🗺/map/Помощь/scroll/cards/reason/collapsed/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="detector/content/🗺/map/Помощь/scroll/cards/reason/collapsed/margin/content/title"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 14
 text = "Сознание"
 
-[node name="right" type="HSeparator" parent="detector/content/🗺/map/Умения/scroll/cards/reason-collapsed/margin/content/title"]
+[node name="right" type="HSeparator" parent="detector/content/🗺/map/Помощь/scroll/cards/reason/collapsed/margin/content/title"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="reason-showcase" type="PanelContainer" parent="detector/content/🗺/map/Умения/scroll/cards"]
+[node name="showcase" type="Button" parent="detector/content/🗺/map/Помощь/scroll/cards/reason"]
 custom_minimum_size = Vector2(260, 356)
-layout_mode = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(131, 0)
+theme_override_styles/hover_pressed = ExtResource("6_jiab0")
+theme_override_styles/hover = ExtResource("6_jiab0")
+theme_override_styles/normal = ExtResource("5_bfn3g")
 
-[node name="margin" type="MarginContainer" parent="detector/content/🗺/map/Умения/scroll/cards/reason-showcase"]
+[node name="margin" type="MarginContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/reason/showcase"]
 layout_mode = 2
+offset_right = 260.0
+offset_bottom = 356.0
 theme_override_constants/margin_left = 15
 theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 15
-theme_override_constants/margin_bottom = 15
+theme_override_constants/margin_bottom = 10
 
-[node name="content" type="VBoxContainer" parent="detector/content/🗺/map/Умения/scroll/cards/reason-showcase/margin"]
+[node name="content" type="VBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/reason/showcase/margin"]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="description" type="Label" parent="detector/content/🗺/map/Умения/scroll/cards/reason-showcase/margin/content"]
+[node name="description" type="Label" parent="detector/content/🗺/map/Помощь/scroll/cards/reason/showcase/margin/content"]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
-size_flags_vertical = 3
+size_flags_vertical = 6
 theme = ExtResource("1_fnw42")
-text = "🙌 Чтобы сменить сокомандника, нажмите %s.
+text = "🤝 Чтобы сменить сокомандника, нажмите %s
 
-🫡 Позволяет управлять героем и его способно-стями.
+🫡 Позволяет управлять героем и его способно-стями
 
 💫 Можно потерять"
 autowrap_mode = 2
 
-[node name="title" type="HBoxContainer" parent="detector/content/🗺/map/Умения/scroll/cards/reason-showcase/margin/content"]
+[node name="title" type="HBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/reason/showcase/margin/content"]
 layout_mode = 2
+size_flags_vertical = 8
 theme_override_constants/separation = 10
 
-[node name="left" type="HSeparator" parent="detector/content/🗺/map/Умения/scroll/cards/reason-showcase/margin/content/title"]
+[node name="left" type="HSeparator" parent="detector/content/🗺/map/Помощь/scroll/cards/reason/showcase/margin/content/title"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="caption" type="Label" parent="detector/content/🗺/map/Умения/scroll/cards/reason-showcase/margin/content/title"]
+[node name="caption" type="Label" parent="detector/content/🗺/map/Помощь/scroll/cards/reason/showcase/margin/content/title"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 14
 text = "Сознание"
 
-[node name="right" type="HSeparator" parent="detector/content/🗺/map/Умения/scroll/cards/reason-showcase/margin/content/title"]
+[node name="right" type="HSeparator" parent="detector/content/🗺/map/Помощь/scroll/cards/reason/showcase/margin/content/title"]
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="group" type="Control" parent="detector/content/🗺/map/Помощь/scroll/cards"]
+visible = false
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 2
+script = ExtResource("5_ux7gx")
+
+[node name="collapsed" type="Button" parent="detector/content/🗺/map/Помощь/scroll/cards/group"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(130, 0)
+theme_override_styles/hover_pressed = ExtResource("6_jiab0")
+theme_override_styles/hover = ExtResource("6_jiab0")
+theme_override_styles/normal = ExtResource("5_bfn3g")
+
+[node name="margin" type="MarginContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/group/collapsed"]
+layout_mode = 2
+offset_right = 260.0
+offset_bottom = 356.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="content" type="VBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/group/collapsed/margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="image" type="TextureRect" parent="detector/content/🗺/map/Помощь/scroll/cards/group/collapsed/margin/content"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="title" type="HBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/group/collapsed/margin/content"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="left" type="HSeparator" parent="detector/content/🗺/map/Помощь/scroll/cards/group/collapsed/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="detector/content/🗺/map/Помощь/scroll/cards/group/collapsed/margin/content/title"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Группа"
+
+[node name="right" type="HSeparator" parent="detector/content/🗺/map/Помощь/scroll/cards/group/collapsed/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="showcase" type="Button" parent="detector/content/🗺/map/Помощь/scroll/cards/group"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(131, 0)
+theme_override_styles/hover_pressed = ExtResource("6_jiab0")
+theme_override_styles/hover = ExtResource("6_jiab0")
+theme_override_styles/normal = ExtResource("5_bfn3g")
+
+[node name="margin" type="MarginContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/group/showcase"]
+layout_mode = 2
+offset_right = 260.0
+offset_bottom = 356.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="content" type="VBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/group/showcase/margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="description" type="Label" parent="detector/content/🗺/map/Помощь/scroll/cards/group/showcase/margin/content"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_vertical = 6
+theme = ExtResource("1_fnw42")
+text = "🕵️‍♂️ Для разделения нажмите %s на той же высоте
+
+🤜🤛 Для сбора встаньте рядом с членами коман-ды и нажмите %s снова.
+
+ℹ️ Полезно в развилках"
+autowrap_mode = 2
+
+[node name="title" type="HBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/group/showcase/margin/content"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 10
+
+[node name="left" type="HSeparator" parent="detector/content/🗺/map/Помощь/scroll/cards/group/showcase/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="detector/content/🗺/map/Помощь/scroll/cards/group/showcase/margin/content/title"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Группа"
+
+[node name="right" type="HSeparator" parent="detector/content/🗺/map/Помощь/scroll/cards/group/showcase/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="aura" type="Control" parent="detector/content/🗺/map/Помощь/scroll/cards"]
+visible = false
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 2
+script = ExtResource("5_ux7gx")
+
+[node name="collapsed" type="Button" parent="detector/content/🗺/map/Помощь/scroll/cards/aura"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(130, 0)
+theme_override_styles/hover_pressed = ExtResource("6_jiab0")
+theme_override_styles/hover = ExtResource("6_jiab0")
+theme_override_styles/normal = ExtResource("5_bfn3g")
+
+[node name="margin" type="MarginContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/aura/collapsed"]
+layout_mode = 2
+offset_right = 260.0
+offset_bottom = 356.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="content" type="VBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/aura/collapsed/margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="image" type="TextureRect" parent="detector/content/🗺/map/Помощь/scroll/cards/aura/collapsed/margin/content"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="title" type="HBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/aura/collapsed/margin/content"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="left" type="HSeparator" parent="detector/content/🗺/map/Помощь/scroll/cards/aura/collapsed/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="detector/content/🗺/map/Помощь/scroll/cards/aura/collapsed/margin/content/title"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Аура"
+
+[node name="right" type="HSeparator" parent="detector/content/🗺/map/Помощь/scroll/cards/aura/collapsed/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="showcase" type="Button" parent="detector/content/🗺/map/Помощь/scroll/cards/aura"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(131, 0)
+theme_override_styles/hover_pressed = ExtResource("6_jiab0")
+theme_override_styles/hover = ExtResource("6_jiab0")
+theme_override_styles/normal = ExtResource("5_bfn3g")
+
+[node name="margin" type="MarginContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/aura/showcase"]
+layout_mode = 2
+offset_right = 260.0
+offset_bottom = 356.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="content" type="VBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/aura/showcase/margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="description" type="Label" parent="detector/content/🗺/map/Помощь/scroll/cards/aura/showcase/margin/content"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_vertical = 6
+theme = ExtResource("1_fnw42")
+text = "🎣 Вы можете под-тянуться нажав %s перед столбом или крюком.
+
+⛓️ Для подтягивания к цепи нужно висеть на цепи лицом к ней
+
+🎚 Задетые кнутом рычаги переключаются."
+autowrap_mode = 2
+
+[node name="title" type="HBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/aura/showcase/margin/content"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 10
+
+[node name="left" type="HSeparator" parent="detector/content/🗺/map/Помощь/scroll/cards/aura/showcase/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="detector/content/🗺/map/Помощь/scroll/cards/aura/showcase/margin/content/title"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Аура"
+
+[node name="right" type="HSeparator" parent="detector/content/🗺/map/Помощь/scroll/cards/aura/showcase/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="priorities" type="Control" parent="detector/content/🗺/map/Помощь/scroll/cards"]
+visible = false
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 2
+script = ExtResource("5_ux7gx")
+
+[node name="collapsed" type="Button" parent="detector/content/🗺/map/Помощь/scroll/cards/priorities"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(130, 0)
+theme_override_styles/hover_pressed = ExtResource("6_jiab0")
+theme_override_styles/hover = ExtResource("6_jiab0")
+theme_override_styles/normal = ExtResource("5_bfn3g")
+
+[node name="margin" type="MarginContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/priorities/collapsed"]
+layout_mode = 2
+offset_right = 260.0
+offset_bottom = 356.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="content" type="VBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/priorities/collapsed/margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="image" type="TextureRect" parent="detector/content/🗺/map/Помощь/scroll/cards/priorities/collapsed/margin/content"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="title" type="HBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/priorities/collapsed/margin/content"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="left" type="HSeparator" parent="detector/content/🗺/map/Помощь/scroll/cards/priorities/collapsed/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="detector/content/🗺/map/Помощь/scroll/cards/priorities/collapsed/margin/content/title"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Приоритеты"
+
+[node name="right" type="HSeparator" parent="detector/content/🗺/map/Помощь/scroll/cards/priorities/collapsed/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="showcase" type="Button" parent="detector/content/🗺/map/Помощь/scroll/cards/priorities"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(131, 0)
+theme_override_styles/hover_pressed = ExtResource("6_jiab0")
+theme_override_styles/hover = ExtResource("6_jiab0")
+theme_override_styles/normal = ExtResource("5_bfn3g")
+
+[node name="margin" type="MarginContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/priorities/showcase"]
+layout_mode = 2
+offset_right = 260.0
+offset_bottom = 356.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="content" type="VBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/priorities/showcase/margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="description" type="Label" parent="detector/content/🗺/map/Помощь/scroll/cards/priorities/showcase/margin/content"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_vertical = 6
+theme = ExtResource("1_fnw42")
+text = "🎣 Вы можете под-тянуться нажав %s перед столбом или крюком.
+
+⛓️ Для подтягивания к цепи нужно висеть на цепи лицом к ней
+
+🎚 Задетые кнутом рычаги переключаются."
+autowrap_mode = 2
+
+[node name="title" type="HBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/priorities/showcase/margin/content"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 10
+
+[node name="left" type="HSeparator" parent="detector/content/🗺/map/Помощь/scroll/cards/priorities/showcase/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="detector/content/🗺/map/Помощь/scroll/cards/priorities/showcase/margin/content/title"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Приоритеты"
+
+[node name="right" type="HSeparator" parent="detector/content/🗺/map/Помощь/scroll/cards/priorities/showcase/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="stats" type="Control" parent="detector/content/🗺/map/Помощь/scroll/cards"]
+visible = false
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 2
+script = ExtResource("5_ux7gx")
+
+[node name="collapsed" type="Button" parent="detector/content/🗺/map/Помощь/scroll/cards/stats"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(130, 0)
+theme_override_styles/hover_pressed = ExtResource("6_jiab0")
+theme_override_styles/hover = ExtResource("6_jiab0")
+theme_override_styles/normal = ExtResource("5_bfn3g")
+
+[node name="margin" type="MarginContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/stats/collapsed"]
+layout_mode = 2
+offset_right = 260.0
+offset_bottom = 356.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="content" type="VBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/stats/collapsed/margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="image" type="TextureRect" parent="detector/content/🗺/map/Помощь/scroll/cards/stats/collapsed/margin/content"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="title" type="HBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/stats/collapsed/margin/content"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="left" type="HSeparator" parent="detector/content/🗺/map/Помощь/scroll/cards/stats/collapsed/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="detector/content/🗺/map/Помощь/scroll/cards/stats/collapsed/margin/content/title"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Показатели"
+
+[node name="right" type="HSeparator" parent="detector/content/🗺/map/Помощь/scroll/cards/stats/collapsed/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="showcase" type="Button" parent="detector/content/🗺/map/Помощь/scroll/cards/stats"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(131, 0)
+theme_override_styles/hover_pressed = ExtResource("6_jiab0")
+theme_override_styles/hover = ExtResource("6_jiab0")
+theme_override_styles/normal = ExtResource("5_bfn3g")
+
+[node name="margin" type="MarginContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/stats/showcase"]
+layout_mode = 2
+offset_right = 260.0
+offset_bottom = 356.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="content" type="VBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/stats/showcase/margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="description" type="Label" parent="detector/content/🗺/map/Помощь/scroll/cards/stats/showcase/margin/content"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_vertical = 6
+theme = ExtResource("1_fnw42")
+text = "🎣 Вы можете под-тянуться нажав %s перед столбом или крюком.
+
+⛓️ Для подтягивания к цепи нужно висеть на цепи лицом к ней
+
+🎚 Задетые кнутом рычаги переключаются."
+autowrap_mode = 2
+
+[node name="title" type="HBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/stats/showcase/margin/content"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 10
+
+[node name="left" type="HSeparator" parent="detector/content/🗺/map/Помощь/scroll/cards/stats/showcase/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="detector/content/🗺/map/Помощь/scroll/cards/stats/showcase/margin/content/title"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Показатели"
+
+[node name="right" type="HSeparator" parent="detector/content/🗺/map/Помощь/scroll/cards/stats/showcase/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="items" type="Control" parent="detector/content/🗺/map/Помощь/scroll/cards"]
+visible = false
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 2
+script = ExtResource("5_ux7gx")
+
+[node name="collapsed" type="Button" parent="detector/content/🗺/map/Помощь/scroll/cards/items"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(130, 0)
+theme_override_styles/hover_pressed = ExtResource("6_jiab0")
+theme_override_styles/hover = ExtResource("6_jiab0")
+theme_override_styles/normal = ExtResource("5_bfn3g")
+
+[node name="margin" type="MarginContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/items/collapsed"]
+layout_mode = 2
+offset_right = 260.0
+offset_bottom = 356.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="content" type="VBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/items/collapsed/margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="image" type="TextureRect" parent="detector/content/🗺/map/Помощь/scroll/cards/items/collapsed/margin/content"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="title" type="HBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/items/collapsed/margin/content"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="left" type="HSeparator" parent="detector/content/🗺/map/Помощь/scroll/cards/items/collapsed/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="detector/content/🗺/map/Помощь/scroll/cards/items/collapsed/margin/content/title"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Предметы"
+
+[node name="right" type="HSeparator" parent="detector/content/🗺/map/Помощь/scroll/cards/items/collapsed/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="showcase" type="Button" parent="detector/content/🗺/map/Помощь/scroll/cards/items"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(131, 0)
+theme_override_styles/hover_pressed = ExtResource("6_jiab0")
+theme_override_styles/hover = ExtResource("6_jiab0")
+theme_override_styles/normal = ExtResource("5_bfn3g")
+
+[node name="margin" type="MarginContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/items/showcase"]
+layout_mode = 2
+offset_right = 260.0
+offset_bottom = 356.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="content" type="VBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/items/showcase/margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="description" type="Label" parent="detector/content/🗺/map/Помощь/scroll/cards/items/showcase/margin/content"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_vertical = 6
+theme = ExtResource("1_fnw42")
+text = "🎣 Вы можете под-тянуться нажав %s перед столбом или крюком.
+
+⛓️ Для подтягивания к цепи нужно висеть на цепи лицом к ней
+
+🎚 Задетые кнутом рычаги переключаются."
+autowrap_mode = 2
+
+[node name="title" type="HBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/items/showcase/margin/content"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 10
+
+[node name="left" type="HSeparator" parent="detector/content/🗺/map/Помощь/scroll/cards/items/showcase/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="detector/content/🗺/map/Помощь/scroll/cards/items/showcase/margin/content/title"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Предметы"
+
+[node name="right" type="HSeparator" parent="detector/content/🗺/map/Помощь/scroll/cards/items/showcase/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="equipment" type="Control" parent="detector/content/🗺/map/Помощь/scroll/cards"]
+visible = false
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 2
+script = ExtResource("5_ux7gx")
+
+[node name="collapsed" type="Button" parent="detector/content/🗺/map/Помощь/scroll/cards/equipment"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(130, 0)
+theme_override_styles/hover_pressed = ExtResource("6_jiab0")
+theme_override_styles/hover = ExtResource("6_jiab0")
+theme_override_styles/normal = ExtResource("5_bfn3g")
+
+[node name="margin" type="MarginContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/equipment/collapsed"]
+layout_mode = 2
+offset_right = 260.0
+offset_bottom = 356.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="content" type="VBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/equipment/collapsed/margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="image" type="TextureRect" parent="detector/content/🗺/map/Помощь/scroll/cards/equipment/collapsed/margin/content"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="title" type="HBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/equipment/collapsed/margin/content"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="left" type="HSeparator" parent="detector/content/🗺/map/Помощь/scroll/cards/equipment/collapsed/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="detector/content/🗺/map/Помощь/scroll/cards/equipment/collapsed/margin/content/title"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Экипировка"
+
+[node name="right" type="HSeparator" parent="detector/content/🗺/map/Помощь/scroll/cards/equipment/collapsed/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="showcase" type="Button" parent="detector/content/🗺/map/Помощь/scroll/cards/equipment"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(131, 0)
+theme_override_styles/hover_pressed = ExtResource("6_jiab0")
+theme_override_styles/hover = ExtResource("6_jiab0")
+theme_override_styles/normal = ExtResource("5_bfn3g")
+
+[node name="margin" type="MarginContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/equipment/showcase"]
+layout_mode = 2
+offset_right = 260.0
+offset_bottom = 356.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="content" type="VBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/equipment/showcase/margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="description" type="Label" parent="detector/content/🗺/map/Помощь/scroll/cards/equipment/showcase/margin/content"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_vertical = 6
+theme = ExtResource("1_fnw42")
+text = "🎣 Вы можете под-тянуться нажав %s перед столбом или крюком.
+
+⛓️ Для подтягивания к цепи нужно висеть на цепи лицом к ней
+
+🎚 Задетые кнутом рычаги переключаются."
+autowrap_mode = 2
+
+[node name="title" type="HBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/equipment/showcase/margin/content"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 10
+
+[node name="left" type="HSeparator" parent="detector/content/🗺/map/Помощь/scroll/cards/equipment/showcase/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="detector/content/🗺/map/Помощь/scroll/cards/equipment/showcase/margin/content/title"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Экипировка"
+
+[node name="right" type="HSeparator" parent="detector/content/🗺/map/Помощь/scroll/cards/equipment/showcase/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="accessory" type="Control" parent="detector/content/🗺/map/Помощь/scroll/cards"]
+visible = false
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 2
+script = ExtResource("5_ux7gx")
+
+[node name="collapsed" type="Button" parent="detector/content/🗺/map/Помощь/scroll/cards/accessory"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(130, 0)
+theme_override_styles/hover_pressed = ExtResource("6_jiab0")
+theme_override_styles/hover = ExtResource("6_jiab0")
+theme_override_styles/normal = ExtResource("5_bfn3g")
+
+[node name="margin" type="MarginContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/accessory/collapsed"]
+layout_mode = 2
+offset_right = 260.0
+offset_bottom = 356.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="content" type="VBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/accessory/collapsed/margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="image" type="TextureRect" parent="detector/content/🗺/map/Помощь/scroll/cards/accessory/collapsed/margin/content"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="title" type="HBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/accessory/collapsed/margin/content"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="left" type="HSeparator" parent="detector/content/🗺/map/Помощь/scroll/cards/accessory/collapsed/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="detector/content/🗺/map/Помощь/scroll/cards/accessory/collapsed/margin/content/title"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Оснастка"
+
+[node name="right" type="HSeparator" parent="detector/content/🗺/map/Помощь/scroll/cards/accessory/collapsed/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="showcase" type="Button" parent="detector/content/🗺/map/Помощь/scroll/cards/accessory"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(131, 0)
+theme_override_styles/hover_pressed = ExtResource("6_jiab0")
+theme_override_styles/hover = ExtResource("6_jiab0")
+theme_override_styles/normal = ExtResource("5_bfn3g")
+
+[node name="margin" type="MarginContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/accessory/showcase"]
+layout_mode = 2
+offset_right = 260.0
+offset_bottom = 356.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="content" type="VBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/accessory/showcase/margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="description" type="Label" parent="detector/content/🗺/map/Помощь/scroll/cards/accessory/showcase/margin/content"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_vertical = 6
+theme = ExtResource("1_fnw42")
+text = "🎣 Вы можете под-тянуться нажав %s перед столбом или крюком.
+
+⛓️ Для подтягивания к цепи нужно висеть на цепи лицом к ней
+
+🎚 Задетые кнутом рычаги переключаются."
+autowrap_mode = 2
+
+[node name="title" type="HBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/accessory/showcase/margin/content"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 10
+
+[node name="left" type="HSeparator" parent="detector/content/🗺/map/Помощь/scroll/cards/accessory/showcase/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="detector/content/🗺/map/Помощь/scroll/cards/accessory/showcase/margin/content/title"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Оснастка"
+
+[node name="right" type="HSeparator" parent="detector/content/🗺/map/Помощь/scroll/cards/accessory/showcase/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="mazes" type="Control" parent="detector/content/🗺/map/Помощь/scroll/cards"]
+visible = false
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 2
+script = ExtResource("5_ux7gx")
+
+[node name="collapsed" type="Button" parent="detector/content/🗺/map/Помощь/scroll/cards/mazes"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(130, 0)
+theme_override_styles/hover_pressed = ExtResource("6_jiab0")
+theme_override_styles/hover = ExtResource("6_jiab0")
+theme_override_styles/normal = ExtResource("5_bfn3g")
+
+[node name="margin" type="MarginContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/mazes/collapsed"]
+layout_mode = 2
+offset_right = 260.0
+offset_bottom = 356.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="content" type="VBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/mazes/collapsed/margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="image" type="TextureRect" parent="detector/content/🗺/map/Помощь/scroll/cards/mazes/collapsed/margin/content"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="title" type="HBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/mazes/collapsed/margin/content"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="left" type="HSeparator" parent="detector/content/🗺/map/Помощь/scroll/cards/mazes/collapsed/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="detector/content/🗺/map/Помощь/scroll/cards/mazes/collapsed/margin/content/title"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Лабиринты"
+
+[node name="right" type="HSeparator" parent="detector/content/🗺/map/Помощь/scroll/cards/mazes/collapsed/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="showcase" type="Button" parent="detector/content/🗺/map/Помощь/scroll/cards/mazes"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(131, 0)
+theme_override_styles/hover_pressed = ExtResource("6_jiab0")
+theme_override_styles/hover = ExtResource("6_jiab0")
+theme_override_styles/normal = ExtResource("5_bfn3g")
+
+[node name="margin" type="MarginContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/mazes/showcase"]
+layout_mode = 2
+offset_right = 260.0
+offset_bottom = 356.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="content" type="VBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/mazes/showcase/margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="description" type="Label" parent="detector/content/🗺/map/Помощь/scroll/cards/mazes/showcase/margin/content"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_vertical = 6
+theme = ExtResource("1_fnw42")
+text = "🎣 Вы можете под-тянуться нажав %s перед столбом или крюком.
+
+⛓️ Для подтягивания к цепи нужно висеть на цепи лицом к ней
+
+🎚 Задетые кнутом рычаги переключаются."
+autowrap_mode = 2
+
+[node name="title" type="HBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/mazes/showcase/margin/content"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 10
+
+[node name="left" type="HSeparator" parent="detector/content/🗺/map/Помощь/scroll/cards/mazes/showcase/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="detector/content/🗺/map/Помощь/scroll/cards/mazes/showcase/margin/content/title"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Лабиринты"
+
+[node name="right" type="HSeparator" parent="detector/content/🗺/map/Помощь/scroll/cards/mazes/showcase/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="fight" type="Control" parent="detector/content/🗺/map/Помощь/scroll/cards"]
+visible = false
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 2
+script = ExtResource("5_ux7gx")
+
+[node name="collapsed" type="Button" parent="detector/content/🗺/map/Помощь/scroll/cards/fight"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(130, 0)
+theme_override_styles/hover_pressed = ExtResource("6_jiab0")
+theme_override_styles/hover = ExtResource("6_jiab0")
+theme_override_styles/normal = ExtResource("5_bfn3g")
+
+[node name="margin" type="MarginContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/fight/collapsed"]
+layout_mode = 2
+offset_right = 260.0
+offset_bottom = 356.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="content" type="VBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/fight/collapsed/margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="image" type="TextureRect" parent="detector/content/🗺/map/Помощь/scroll/cards/fight/collapsed/margin/content"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="title" type="HBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/fight/collapsed/margin/content"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="left" type="HSeparator" parent="detector/content/🗺/map/Помощь/scroll/cards/fight/collapsed/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="detector/content/🗺/map/Помощь/scroll/cards/fight/collapsed/margin/content/title"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Сражение"
+
+[node name="right" type="HSeparator" parent="detector/content/🗺/map/Помощь/scroll/cards/fight/collapsed/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="showcase" type="Button" parent="detector/content/🗺/map/Помощь/scroll/cards/fight"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(131, 0)
+theme_override_styles/hover_pressed = ExtResource("6_jiab0")
+theme_override_styles/hover = ExtResource("6_jiab0")
+theme_override_styles/normal = ExtResource("5_bfn3g")
+
+[node name="margin" type="MarginContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/fight/showcase"]
+layout_mode = 2
+offset_right = 260.0
+offset_bottom = 356.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="content" type="VBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/fight/showcase/margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="description" type="Label" parent="detector/content/🗺/map/Помощь/scroll/cards/fight/showcase/margin/content"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_vertical = 6
+theme = ExtResource("1_fnw42")
+text = "🎣 Вы можете под-тянуться нажав %s перед столбом или крюком.
+
+⛓️ Для подтягивания к цепи нужно висеть на цепи лицом к ней
+
+🎚 Задетые кнутом рычаги переключаются."
+autowrap_mode = 2
+
+[node name="title" type="HBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/fight/showcase/margin/content"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 10
+
+[node name="left" type="HSeparator" parent="detector/content/🗺/map/Помощь/scroll/cards/fight/showcase/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="detector/content/🗺/map/Помощь/scroll/cards/fight/showcase/margin/content/title"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Сражение"
+
+[node name="right" type="HSeparator" parent="detector/content/🗺/map/Помощь/scroll/cards/fight/showcase/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="foes" type="Control" parent="detector/content/🗺/map/Помощь/scroll/cards"]
+visible = false
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 2
+script = ExtResource("5_ux7gx")
+
+[node name="collapsed" type="Button" parent="detector/content/🗺/map/Помощь/scroll/cards/foes"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(130, 0)
+theme_override_styles/hover_pressed = ExtResource("6_jiab0")
+theme_override_styles/hover = ExtResource("6_jiab0")
+theme_override_styles/normal = ExtResource("5_bfn3g")
+
+[node name="margin" type="MarginContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/foes/collapsed"]
+layout_mode = 2
+offset_right = 260.0
+offset_bottom = 356.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="content" type="VBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/foes/collapsed/margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="image" type="TextureRect" parent="detector/content/🗺/map/Помощь/scroll/cards/foes/collapsed/margin/content"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="title" type="HBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/foes/collapsed/margin/content"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="left" type="HSeparator" parent="detector/content/🗺/map/Помощь/scroll/cards/foes/collapsed/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="detector/content/🗺/map/Помощь/scroll/cards/foes/collapsed/margin/content/title"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Противники"
+
+[node name="right" type="HSeparator" parent="detector/content/🗺/map/Помощь/scroll/cards/foes/collapsed/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="showcase" type="Button" parent="detector/content/🗺/map/Помощь/scroll/cards/foes"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(131, 0)
+theme_override_styles/hover_pressed = ExtResource("6_jiab0")
+theme_override_styles/hover = ExtResource("6_jiab0")
+theme_override_styles/normal = ExtResource("5_bfn3g")
+
+[node name="margin" type="MarginContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/foes/showcase"]
+layout_mode = 2
+offset_right = 260.0
+offset_bottom = 356.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="content" type="VBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/foes/showcase/margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="description" type="Label" parent="detector/content/🗺/map/Помощь/scroll/cards/foes/showcase/margin/content"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_vertical = 6
+theme = ExtResource("1_fnw42")
+text = "🎣 Вы можете под-тянуться нажав %s перед столбом или крюком.
+
+⛓️ Для подтягивания к цепи нужно висеть на цепи лицом к ней
+
+🎚 Задетые кнутом рычаги переключаются."
+autowrap_mode = 2
+
+[node name="title" type="HBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/foes/showcase/margin/content"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 10
+
+[node name="left" type="HSeparator" parent="detector/content/🗺/map/Помощь/scroll/cards/foes/showcase/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="detector/content/🗺/map/Помощь/scroll/cards/foes/showcase/margin/content/title"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Противники"
+
+[node name="right" type="HSeparator" parent="detector/content/🗺/map/Помощь/scroll/cards/foes/showcase/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="hint" type="MarginContainer" parent="detector/content/🗺"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+
+[node name="caption" type="Label" parent="detector/content/🗺/hint"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.351563, 0.351563, 0.351563, 1)
+text = "Нажмите на картинку для чтения содержимого"
 
 [node name="📜" type="MarginContainer" parent="detector/content"]
 visible = false
