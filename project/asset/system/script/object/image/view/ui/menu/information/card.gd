@@ -12,10 +12,10 @@ func _ready() -> void:
 func flip_the_card() -> void:
 	# collapsed.visible = showcase.visible
 	# showcase.visible = !showcase.visible
-	if showcase.scale == Vector2.ONE:
-		_change_states(collapsed, showcase)
-	else:
+	if collapsed.scale == Vector2.ONE:
 		_change_states(showcase, collapsed)
+	else:
+		_change_states(collapsed, showcase)
 
 func _change_states(prev: CanvasItem, next: CanvasItem) -> void:
 	_change_state(prev, 1.0, true)

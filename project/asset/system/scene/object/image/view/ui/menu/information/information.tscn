@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://ce8kdx2kkhrxj"]
+[gd_scene load_steps=39 format=3 uid="uid://ce8kdx2kkhrxj"]
 
 [ext_resource type="Script" uid="uid://cppftbc2k00nt" path="res://asset/system/script/object/image/view/ui/menu/information/information.gd" id="1_3n4lk"]
 [ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://asset/resource/engine/internal/theme/patterns/template/menu/settings/topic/footer.tres" id="1_fnw42"]
@@ -8,6 +8,26 @@
 [ext_resource type="StyleBox" uid="uid://chr58r7ok2alt" path="res://asset/resource/engine/internal/theme/style/panel/accent.tres" id="5_bfn3g"]
 [ext_resource type="Script" uid="uid://b06ntftlpr38h" path="res://asset/system/script/object/image/view/ui/menu/information/card.gd" id="5_ux7gx"]
 [ext_resource type="StyleBox" uid="uid://c8hy4gq5uksdh" path="res://asset/resource/engine/internal/theme/style/panel/complex/hover.tres" id="6_jiab0"]
+[ext_resource type="Texture2D" uid="uid://c23wy3keigqvs" path="res://asset/resource/media/images/hints/motion.svg" id="8_hfgsm"]
+[ext_resource type="Texture2D" uid="uid://dfuu0d7o46rsx" path="res://asset/resource/media/images/hints/jump.svg" id="9_ukisd"]
+[ext_resource type="Texture2D" uid="uid://b14cmwjsig788" path="res://asset/resource/media/images/hints/push.svg" id="10_o84oy"]
+[ext_resource type="Texture2D" uid="uid://d012ckp28xixl" path="res://asset/resource/media/images/hints/land.svg" id="11_r5gj8"]
+[ext_resource type="Texture2D" uid="uid://dmvqe8j7qqwnl" path="res://asset/resource/media/images/hints/action.svg" id="12_owg2g"]
+[ext_resource type="Texture2D" uid="uid://fddwxbvnupnb" path="res://asset/resource/media/images/hints/action/fire.svg" id="13_nyvn2"]
+[ext_resource type="Texture2D" uid="uid://d0mlboi8womp5" path="res://asset/resource/media/images/hints/action/whip.svg" id="14_0cm0i"]
+[ext_resource type="Texture2D" uid="uid://bliopmbpp0dgs" path="res://asset/resource/media/images/hints/action/water.svg" id="15_nqhwq"]
+[ext_resource type="Texture2D" uid="uid://bjn1a1dv8fgrc" path="res://asset/resource/media/images/hints/action/spark.svg" id="16_0qg0b"]
+[ext_resource type="Texture2D" uid="uid://d1bpjvixpyfm2" path="res://asset/resource/media/images/hints/action/explosion.svg" id="17_pjkvo"]
+[ext_resource type="Texture2D" uid="uid://b30ydisjlktx6" path="res://asset/resource/media/images/hints/reason/reason.svg" id="18_yr64b"]
+[ext_resource type="Texture2D" uid="uid://lc173jqalxoo" path="res://asset/resource/media/images/hints/reason/group.svg" id="19_adxel"]
+[ext_resource type="Texture2D" uid="uid://c10ecsn6ao1ef" path="res://asset/resource/media/images/hints/reason/aura.svg" id="20_d64nu"]
+[ext_resource type="Texture2D" uid="uid://dayfjrsaxga0e" path="res://asset/resource/media/images/hints/reason/equipment.svg" id="21_8g60g"]
+[ext_resource type="Texture2D" uid="uid://c235aiy60lonn" path="res://asset/resource/media/images/hints/reason/stats.svg" id="21_54r33"]
+[ext_resource type="Texture2D" uid="uid://dn7j0dp2homah" path="res://asset/resource/media/images/hints/reason/accessory.svg" id="21_ktujq"]
+[ext_resource type="Texture2D" uid="uid://bmbe2xea6iafh" path="res://asset/resource/media/images/hints/reason/priorities.svg" id="21_y32nn"]
+[ext_resource type="Texture2D" uid="uid://cxlt276bxyfd3" path="res://asset/resource/media/images/hints/reason/items.svg" id="23_kwdok"]
+[ext_resource type="Texture2D" uid="uid://bndvjaq0r5q0" path="res://asset/resource/media/images/hints/reason/fight.svg" id="23_w8pj0"]
+[ext_resource type="Texture2D" uid="uid://blnu86plm0asl" path="res://asset/resource/media/images/hints/reason/enemies.svg" id="24_s6p70"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3n4lk"]
 bg_color = Color(0, 0, 0, 1)
@@ -726,6 +746,7 @@ size_flags_horizontal = 3
 [node name="motion" type="Control" parent="detector/content/🗺/map/Помощь/scroll/cards"]
 custom_minimum_size = Vector2(260, 356)
 layout_mode = 2
+size_flags_horizontal = 4
 script = ExtResource("5_ux7gx")
 
 [node name="collapsed" type="Button" parent="detector/content/🗺/map/Помощь/scroll/cards/motion"]
@@ -734,6 +755,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = -1.0
+offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(130, 0)
@@ -757,6 +780,8 @@ theme_override_constants/separation = 10
 [node name="image" type="TextureRect" parent="detector/content/🗺/map/Помощь/scroll/cards/motion/collapsed/margin/content"]
 layout_mode = 2
 size_flags_vertical = 3
+texture = ExtResource("8_hfgsm")
+expand_mode = 1
 
 [node name="title" type="HBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/motion/collapsed/margin/content"]
 layout_mode = 2
@@ -783,6 +808,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(1e-05, 1)
 pivot_offset = Vector2(131, 0)
 theme_override_styles/hover_pressed = ExtResource("6_jiab0")
 theme_override_styles/hover = ExtResource("6_jiab0")
@@ -834,6 +860,7 @@ size_flags_horizontal = 3
 [node name="jump" type="Control" parent="detector/content/🗺/map/Помощь/scroll/cards"]
 custom_minimum_size = Vector2(260, 356)
 layout_mode = 2
+size_flags_horizontal = 4
 script = ExtResource("5_ux7gx")
 
 [node name="collapsed" type="Button" parent="detector/content/🗺/map/Помощь/scroll/cards/jump"]
@@ -865,6 +892,8 @@ theme_override_constants/separation = 10
 [node name="image" type="TextureRect" parent="detector/content/🗺/map/Помощь/scroll/cards/jump/collapsed/margin/content"]
 layout_mode = 2
 size_flags_vertical = 3
+texture = ExtResource("9_ukisd")
+expand_mode = 1
 
 [node name="title" type="HBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/jump/collapsed/margin/content"]
 layout_mode = 2
@@ -891,6 +920,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(1e-05, 1)
 pivot_offset = Vector2(131, 0)
 theme_override_styles/hover_pressed = ExtResource("6_jiab0")
 theme_override_styles/hover = ExtResource("6_jiab0")
@@ -940,6 +970,7 @@ size_flags_horizontal = 3
 [node name="push" type="Control" parent="detector/content/🗺/map/Помощь/scroll/cards"]
 custom_minimum_size = Vector2(260, 356)
 layout_mode = 2
+size_flags_horizontal = 4
 script = ExtResource("5_ux7gx")
 
 [node name="collapsed" type="Button" parent="detector/content/🗺/map/Помощь/scroll/cards/push"]
@@ -971,6 +1002,8 @@ theme_override_constants/separation = 10
 [node name="image" type="TextureRect" parent="detector/content/🗺/map/Помощь/scroll/cards/push/collapsed/margin/content"]
 layout_mode = 2
 size_flags_vertical = 3
+texture = ExtResource("10_o84oy")
+expand_mode = 1
 
 [node name="title" type="HBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/push/collapsed/margin/content"]
 layout_mode = 2
@@ -997,6 +1030,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(1e-05, 1)
 pivot_offset = Vector2(131, 0)
 theme_override_styles/hover_pressed = ExtResource("6_jiab0")
 theme_override_styles/hover = ExtResource("6_jiab0")
@@ -1048,6 +1082,7 @@ size_flags_horizontal = 3
 [node name="land" type="Control" parent="detector/content/🗺/map/Помощь/scroll/cards"]
 custom_minimum_size = Vector2(260, 356)
 layout_mode = 2
+size_flags_horizontal = 4
 script = ExtResource("5_ux7gx")
 
 [node name="collapsed" type="Button" parent="detector/content/🗺/map/Помощь/scroll/cards/land"]
@@ -1079,6 +1114,8 @@ theme_override_constants/separation = 10
 [node name="image" type="TextureRect" parent="detector/content/🗺/map/Помощь/scroll/cards/land/collapsed/margin/content"]
 layout_mode = 2
 size_flags_vertical = 3
+texture = ExtResource("11_r5gj8")
+expand_mode = 1
 
 [node name="title" type="HBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/land/collapsed/margin/content"]
 layout_mode = 2
@@ -1105,6 +1142,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(1e-05, 1)
 pivot_offset = Vector2(131, 0)
 theme_override_styles/hover_pressed = ExtResource("6_jiab0")
 theme_override_styles/hover = ExtResource("6_jiab0")
@@ -1156,6 +1194,7 @@ size_flags_horizontal = 3
 [node name="action" type="Control" parent="detector/content/🗺/map/Помощь/scroll/cards"]
 custom_minimum_size = Vector2(260, 356)
 layout_mode = 2
+size_flags_horizontal = 4
 script = ExtResource("5_ux7gx")
 
 [node name="collapsed" type="Button" parent="detector/content/🗺/map/Помощь/scroll/cards/action"]
@@ -1187,6 +1226,8 @@ theme_override_constants/separation = 10
 [node name="image" type="TextureRect" parent="detector/content/🗺/map/Помощь/scroll/cards/action/collapsed/margin/content"]
 layout_mode = 2
 size_flags_vertical = 3
+texture = ExtResource("12_owg2g")
+expand_mode = 1
 
 [node name="title" type="HBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/action/collapsed/margin/content"]
 layout_mode = 2
@@ -1213,6 +1254,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(1e-05, 1)
 pivot_offset = Vector2(131, 0)
 theme_override_styles/hover_pressed = ExtResource("6_jiab0")
 theme_override_styles/hover = ExtResource("6_jiab0")
@@ -1264,6 +1306,7 @@ size_flags_horizontal = 3
 [node name="fire" type="Control" parent="detector/content/🗺/map/Помощь/scroll/cards"]
 custom_minimum_size = Vector2(260, 356)
 layout_mode = 2
+size_flags_horizontal = 4
 script = ExtResource("5_ux7gx")
 
 [node name="collapsed" type="Button" parent="detector/content/🗺/map/Помощь/scroll/cards/fire"]
@@ -1295,6 +1338,8 @@ theme_override_constants/separation = 10
 [node name="image" type="TextureRect" parent="detector/content/🗺/map/Помощь/scroll/cards/fire/collapsed/margin/content"]
 layout_mode = 2
 size_flags_vertical = 3
+texture = ExtResource("13_nyvn2")
+expand_mode = 1
 
 [node name="title" type="HBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/fire/collapsed/margin/content"]
 layout_mode = 2
@@ -1321,6 +1366,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(1e-05, 1)
 pivot_offset = Vector2(131, 0)
 theme_override_styles/hover_pressed = ExtResource("6_jiab0")
 theme_override_styles/hover = ExtResource("6_jiab0")
@@ -1372,6 +1418,7 @@ size_flags_horizontal = 3
 [node name="whip" type="Control" parent="detector/content/🗺/map/Помощь/scroll/cards"]
 custom_minimum_size = Vector2(260, 356)
 layout_mode = 2
+size_flags_horizontal = 4
 script = ExtResource("5_ux7gx")
 
 [node name="collapsed" type="Button" parent="detector/content/🗺/map/Помощь/scroll/cards/whip"]
@@ -1403,6 +1450,8 @@ theme_override_constants/separation = 10
 [node name="image" type="TextureRect" parent="detector/content/🗺/map/Помощь/scroll/cards/whip/collapsed/margin/content"]
 layout_mode = 2
 size_flags_vertical = 3
+texture = ExtResource("14_0cm0i")
+expand_mode = 1
 
 [node name="title" type="HBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/whip/collapsed/margin/content"]
 layout_mode = 2
@@ -1429,6 +1478,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(1e-05, 1)
 pivot_offset = Vector2(131, 0)
 theme_override_styles/hover_pressed = ExtResource("6_jiab0")
 theme_override_styles/hover = ExtResource("6_jiab0")
@@ -1480,6 +1530,7 @@ size_flags_horizontal = 3
 [node name="water" type="Control" parent="detector/content/🗺/map/Помощь/scroll/cards"]
 custom_minimum_size = Vector2(260, 356)
 layout_mode = 2
+size_flags_horizontal = 4
 script = ExtResource("5_ux7gx")
 
 [node name="collapsed" type="Button" parent="detector/content/🗺/map/Помощь/scroll/cards/water"]
@@ -1511,6 +1562,8 @@ theme_override_constants/separation = 10
 [node name="image" type="TextureRect" parent="detector/content/🗺/map/Помощь/scroll/cards/water/collapsed/margin/content"]
 layout_mode = 2
 size_flags_vertical = 3
+texture = ExtResource("15_nqhwq")
+expand_mode = 1
 
 [node name="title" type="HBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/water/collapsed/margin/content"]
 layout_mode = 2
@@ -1537,6 +1590,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(1e-05, 1)
 pivot_offset = Vector2(131, 0)
 theme_override_styles/hover_pressed = ExtResource("6_jiab0")
 theme_override_styles/hover = ExtResource("6_jiab0")
@@ -1588,6 +1642,7 @@ size_flags_horizontal = 3
 [node name="spark" type="Control" parent="detector/content/🗺/map/Помощь/scroll/cards"]
 custom_minimum_size = Vector2(260, 356)
 layout_mode = 2
+size_flags_horizontal = 4
 script = ExtResource("5_ux7gx")
 
 [node name="collapsed" type="Button" parent="detector/content/🗺/map/Помощь/scroll/cards/spark"]
@@ -1619,6 +1674,8 @@ theme_override_constants/separation = 10
 [node name="image" type="TextureRect" parent="detector/content/🗺/map/Помощь/scroll/cards/spark/collapsed/margin/content"]
 layout_mode = 2
 size_flags_vertical = 3
+texture = ExtResource("16_0qg0b")
+expand_mode = 1
 
 [node name="title" type="HBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/spark/collapsed/margin/content"]
 layout_mode = 2
@@ -1645,6 +1702,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(1e-05, 1)
 pivot_offset = Vector2(131, 0)
 theme_override_styles/hover_pressed = ExtResource("6_jiab0")
 theme_override_styles/hover = ExtResource("6_jiab0")
@@ -1696,6 +1754,7 @@ size_flags_horizontal = 3
 [node name="explosion" type="Control" parent="detector/content/🗺/map/Помощь/scroll/cards"]
 custom_minimum_size = Vector2(260, 356)
 layout_mode = 2
+size_flags_horizontal = 4
 script = ExtResource("5_ux7gx")
 
 [node name="collapsed" type="Button" parent="detector/content/🗺/map/Помощь/scroll/cards/explosion"]
@@ -1727,6 +1786,8 @@ theme_override_constants/separation = 10
 [node name="image" type="TextureRect" parent="detector/content/🗺/map/Помощь/scroll/cards/explosion/collapsed/margin/content"]
 layout_mode = 2
 size_flags_vertical = 3
+texture = ExtResource("17_pjkvo")
+expand_mode = 1
 
 [node name="title" type="HBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/explosion/collapsed/margin/content"]
 layout_mode = 2
@@ -1753,6 +1814,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(1e-05, 1)
 pivot_offset = Vector2(131, 0)
 theme_override_styles/hover_pressed = ExtResource("6_jiab0")
 theme_override_styles/hover = ExtResource("6_jiab0")
@@ -1804,6 +1866,7 @@ size_flags_horizontal = 3
 [node name="reason" type="Control" parent="detector/content/🗺/map/Помощь/scroll/cards"]
 custom_minimum_size = Vector2(260, 356)
 layout_mode = 2
+size_flags_horizontal = 4
 script = ExtResource("5_ux7gx")
 
 [node name="collapsed" type="Button" parent="detector/content/🗺/map/Помощь/scroll/cards/reason"]
@@ -1835,6 +1898,8 @@ theme_override_constants/separation = 10
 [node name="image" type="TextureRect" parent="detector/content/🗺/map/Помощь/scroll/cards/reason/collapsed/margin/content"]
 layout_mode = 2
 size_flags_vertical = 3
+texture = ExtResource("18_yr64b")
+expand_mode = 1
 
 [node name="title" type="HBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/reason/collapsed/margin/content"]
 layout_mode = 2
@@ -1861,6 +1926,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(1e-05, 1)
 pivot_offset = Vector2(131, 0)
 theme_override_styles/hover_pressed = ExtResource("6_jiab0")
 theme_override_styles/hover = ExtResource("6_jiab0")
@@ -1912,6 +1978,7 @@ size_flags_horizontal = 3
 [node name="group" type="Control" parent="detector/content/🗺/map/Помощь/scroll/cards"]
 custom_minimum_size = Vector2(260, 356)
 layout_mode = 2
+size_flags_horizontal = 4
 script = ExtResource("5_ux7gx")
 
 [node name="collapsed" type="Button" parent="detector/content/🗺/map/Помощь/scroll/cards/group"]
@@ -1943,6 +2010,8 @@ theme_override_constants/separation = 10
 [node name="image" type="TextureRect" parent="detector/content/🗺/map/Помощь/scroll/cards/group/collapsed/margin/content"]
 layout_mode = 2
 size_flags_vertical = 3
+texture = ExtResource("19_adxel")
+expand_mode = 1
 
 [node name="title" type="HBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/group/collapsed/margin/content"]
 layout_mode = 2
@@ -1969,6 +2038,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(1e-05, 1)
 pivot_offset = Vector2(131, 0)
 theme_override_styles/hover_pressed = ExtResource("6_jiab0")
 theme_override_styles/hover = ExtResource("6_jiab0")
@@ -2020,6 +2090,7 @@ size_flags_horizontal = 3
 [node name="aura" type="Control" parent="detector/content/🗺/map/Помощь/scroll/cards"]
 custom_minimum_size = Vector2(260, 356)
 layout_mode = 2
+size_flags_horizontal = 4
 script = ExtResource("5_ux7gx")
 
 [node name="collapsed" type="Button" parent="detector/content/🗺/map/Помощь/scroll/cards/aura"]
@@ -2051,6 +2122,8 @@ theme_override_constants/separation = 10
 [node name="image" type="TextureRect" parent="detector/content/🗺/map/Помощь/scroll/cards/aura/collapsed/margin/content"]
 layout_mode = 2
 size_flags_vertical = 3
+texture = ExtResource("20_d64nu")
+expand_mode = 1
 
 [node name="title" type="HBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/aura/collapsed/margin/content"]
 layout_mode = 2
@@ -2077,6 +2150,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(1e-05, 1)
 pivot_offset = Vector2(131, 0)
 theme_override_styles/hover_pressed = ExtResource("6_jiab0")
 theme_override_styles/hover = ExtResource("6_jiab0")
@@ -2128,6 +2202,7 @@ size_flags_horizontal = 3
 [node name="priorities" type="Control" parent="detector/content/🗺/map/Помощь/scroll/cards"]
 custom_minimum_size = Vector2(260, 356)
 layout_mode = 2
+size_flags_horizontal = 4
 script = ExtResource("5_ux7gx")
 
 [node name="collapsed" type="Button" parent="detector/content/🗺/map/Помощь/scroll/cards/priorities"]
@@ -2159,6 +2234,8 @@ theme_override_constants/separation = 10
 [node name="image" type="TextureRect" parent="detector/content/🗺/map/Помощь/scroll/cards/priorities/collapsed/margin/content"]
 layout_mode = 2
 size_flags_vertical = 3
+texture = ExtResource("21_y32nn")
+expand_mode = 1
 
 [node name="title" type="HBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/priorities/collapsed/margin/content"]
 layout_mode = 2
@@ -2185,6 +2262,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(1e-05, 1)
 pivot_offset = Vector2(131, 0)
 theme_override_styles/hover_pressed = ExtResource("6_jiab0")
 theme_override_styles/hover = ExtResource("6_jiab0")
@@ -2236,6 +2314,7 @@ size_flags_horizontal = 3
 [node name="stats" type="Control" parent="detector/content/🗺/map/Помощь/scroll/cards"]
 custom_minimum_size = Vector2(260, 356)
 layout_mode = 2
+size_flags_horizontal = 4
 script = ExtResource("5_ux7gx")
 
 [node name="collapsed" type="Button" parent="detector/content/🗺/map/Помощь/scroll/cards/stats"]
@@ -2267,6 +2346,8 @@ theme_override_constants/separation = 10
 [node name="image" type="TextureRect" parent="detector/content/🗺/map/Помощь/scroll/cards/stats/collapsed/margin/content"]
 layout_mode = 2
 size_flags_vertical = 3
+texture = ExtResource("21_54r33")
+expand_mode = 1
 
 [node name="title" type="HBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/stats/collapsed/margin/content"]
 layout_mode = 2
@@ -2293,6 +2374,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(1e-05, 1)
 pivot_offset = Vector2(131, 0)
 theme_override_styles/hover_pressed = ExtResource("6_jiab0")
 theme_override_styles/hover = ExtResource("6_jiab0")
@@ -2344,6 +2426,7 @@ size_flags_horizontal = 3
 [node name="items" type="Control" parent="detector/content/🗺/map/Помощь/scroll/cards"]
 custom_minimum_size = Vector2(260, 356)
 layout_mode = 2
+size_flags_horizontal = 4
 script = ExtResource("5_ux7gx")
 
 [node name="collapsed" type="Button" parent="detector/content/🗺/map/Помощь/scroll/cards/items"]
@@ -2375,6 +2458,8 @@ theme_override_constants/separation = 10
 [node name="image" type="TextureRect" parent="detector/content/🗺/map/Помощь/scroll/cards/items/collapsed/margin/content"]
 layout_mode = 2
 size_flags_vertical = 3
+texture = ExtResource("23_kwdok")
+expand_mode = 1
 
 [node name="title" type="HBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/items/collapsed/margin/content"]
 layout_mode = 2
@@ -2401,6 +2486,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(1e-05, 1)
 pivot_offset = Vector2(131, 0)
 theme_override_styles/hover_pressed = ExtResource("6_jiab0")
 theme_override_styles/hover = ExtResource("6_jiab0")
@@ -2452,6 +2538,7 @@ size_flags_horizontal = 3
 [node name="equipment" type="Control" parent="detector/content/🗺/map/Помощь/scroll/cards"]
 custom_minimum_size = Vector2(260, 356)
 layout_mode = 2
+size_flags_horizontal = 4
 script = ExtResource("5_ux7gx")
 
 [node name="collapsed" type="Button" parent="detector/content/🗺/map/Помощь/scroll/cards/equipment"]
@@ -2483,6 +2570,8 @@ theme_override_constants/separation = 10
 [node name="image" type="TextureRect" parent="detector/content/🗺/map/Помощь/scroll/cards/equipment/collapsed/margin/content"]
 layout_mode = 2
 size_flags_vertical = 3
+texture = ExtResource("21_8g60g")
+expand_mode = 1
 
 [node name="title" type="HBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/equipment/collapsed/margin/content"]
 layout_mode = 2
@@ -2509,6 +2598,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(1e-05, 1)
 pivot_offset = Vector2(131, 0)
 theme_override_styles/hover_pressed = ExtResource("6_jiab0")
 theme_override_styles/hover = ExtResource("6_jiab0")
@@ -2560,6 +2650,7 @@ size_flags_horizontal = 3
 [node name="accessory" type="Control" parent="detector/content/🗺/map/Помощь/scroll/cards"]
 custom_minimum_size = Vector2(260, 356)
 layout_mode = 2
+size_flags_horizontal = 4
 script = ExtResource("5_ux7gx")
 
 [node name="collapsed" type="Button" parent="detector/content/🗺/map/Помощь/scroll/cards/accessory"]
@@ -2591,6 +2682,8 @@ theme_override_constants/separation = 10
 [node name="image" type="TextureRect" parent="detector/content/🗺/map/Помощь/scroll/cards/accessory/collapsed/margin/content"]
 layout_mode = 2
 size_flags_vertical = 3
+texture = ExtResource("21_ktujq")
+expand_mode = 1
 
 [node name="title" type="HBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/accessory/collapsed/margin/content"]
 layout_mode = 2
@@ -2617,6 +2710,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(1e-05, 1)
 pivot_offset = Vector2(131, 0)
 theme_override_styles/hover_pressed = ExtResource("6_jiab0")
 theme_override_styles/hover = ExtResource("6_jiab0")
@@ -2666,6 +2760,7 @@ size_flags_horizontal = 3
 [node name="fight" type="Control" parent="detector/content/🗺/map/Помощь/scroll/cards"]
 custom_minimum_size = Vector2(260, 356)
 layout_mode = 2
+size_flags_horizontal = 4
 script = ExtResource("5_ux7gx")
 
 [node name="collapsed" type="Button" parent="detector/content/🗺/map/Помощь/scroll/cards/fight"]
@@ -2697,6 +2792,8 @@ theme_override_constants/separation = 10
 [node name="image" type="TextureRect" parent="detector/content/🗺/map/Помощь/scroll/cards/fight/collapsed/margin/content"]
 layout_mode = 2
 size_flags_vertical = 3
+texture = ExtResource("23_w8pj0")
+expand_mode = 1
 
 [node name="title" type="HBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/fight/collapsed/margin/content"]
 layout_mode = 2
@@ -2723,6 +2820,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(1e-05, 1)
 pivot_offset = Vector2(131, 0)
 theme_override_styles/hover_pressed = ExtResource("6_jiab0")
 theme_override_styles/hover = ExtResource("6_jiab0")
@@ -2774,6 +2872,7 @@ size_flags_horizontal = 3
 [node name="foes" type="Control" parent="detector/content/🗺/map/Помощь/scroll/cards"]
 custom_minimum_size = Vector2(260, 356)
 layout_mode = 2
+size_flags_horizontal = 4
 script = ExtResource("5_ux7gx")
 
 [node name="collapsed" type="Button" parent="detector/content/🗺/map/Помощь/scroll/cards/foes"]
@@ -2805,6 +2904,8 @@ theme_override_constants/separation = 10
 [node name="image" type="TextureRect" parent="detector/content/🗺/map/Помощь/scroll/cards/foes/collapsed/margin/content"]
 layout_mode = 2
 size_flags_vertical = 3
+texture = ExtResource("24_s6p70")
+expand_mode = 1
 
 [node name="title" type="HBoxContainer" parent="detector/content/🗺/map/Помощь/scroll/cards/foes/collapsed/margin/content"]
 layout_mode = 2
@@ -2831,6 +2932,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(1e-05, 1)
 pivot_offset = Vector2(131, 0)
 theme_override_styles/hover_pressed = ExtResource("6_jiab0")
 theme_override_styles/hover = ExtResource("6_jiab0")
