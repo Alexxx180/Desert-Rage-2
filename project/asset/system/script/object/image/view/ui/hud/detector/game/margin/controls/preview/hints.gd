@@ -1,6 +1,6 @@
-extends HBoxContainer
+extends BoxContainer
 
-@onready var tabs: VBoxContainer = $tabs
+@onready var tabs: BoxContainer = $tabs
 @onready var help: PanelContainer = $content/help
 @onready var books: PanelContainer = $content/books
 
