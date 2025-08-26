@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://ce8kdx2kkhrxj"]
+[gd_scene load_steps=44 format=3 uid="uid://ce8kdx2kkhrxj"]
 
 [ext_resource type="Script" uid="uid://cppftbc2k00nt" path="res://asset/system/script/object/image/view/ui/menu/information/information.gd" id="1_3n4lk"]
 [ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://asset/resource/engine/internal/theme/patterns/template/menu/settings/topic/footer.tres" id="1_fnw42"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://scs1xlb7x0d6" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/menu/inventory/selection.tscn" id="4_vwlpw"]
 [ext_resource type="StyleBox" uid="uid://chr58r7ok2alt" path="res://asset/resource/engine/internal/theme/style/panel/accent.tres" id="5_bfn3g"]
 [ext_resource type="Script" uid="uid://b06ntftlpr38h" path="res://asset/system/script/object/image/view/ui/menu/information/card.gd" id="5_ux7gx"]
+[ext_resource type="StyleBox" uid="uid://c5qf02s45xwn" path="res://asset/resource/engine/internal/theme/style/noto-color.tres" id="6_au5bm"]
 [ext_resource type="StyleBox" uid="uid://c8hy4gq5uksdh" path="res://asset/resource/engine/internal/theme/style/panel/complex/hover.tres" id="6_jiab0"]
 [ext_resource type="Texture2D" uid="uid://c23wy3keigqvs" path="res://asset/resource/media/images/hints/motion.svg" id="8_hfgsm"]
 [ext_resource type="Texture2D" uid="uid://dfuu0d7o46rsx" path="res://asset/resource/media/images/hints/jump.svg" id="9_ukisd"]
@@ -102,12 +103,12 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_3n4lk")
 
 [node name="content" type="TabContainer" parent="detector"]
 layout_mode = 2
-theme_override_constants/side_margin = 60
+theme_override_constants/side_margin = 62
 theme_override_fonts/font = ExtResource("2_wr3od")
 theme_override_font_sizes/font_size = 36
 theme_override_styles/tab_selected = SubResource("StyleBoxFlat_y6mkc")
 theme_override_styles/tab_unselected = SubResource("StyleBoxFlat_wr3od")
-current_tab = 1
+current_tab = 4
 tabs_position = 1
 
 [node name="💾" type="MarginContainer" parent="detector/content"]
@@ -682,6 +683,7 @@ theme_override_styles/normal = ExtResource("3_3n4lk")
 text = "Экспорт"
 
 [node name="🗺" type="MarginContainer" parent="detector/content"]
+visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
@@ -691,10 +693,9 @@ metadata/_tab_index = 1
 
 [node name="map" type="TabContainer" parent="detector/content/🗺"]
 layout_mode = 2
-current_tab = 1
+current_tab = 0
 
 [node name="Карта" type="MarginContainer" parent="detector/content/🗺/map"]
-visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
@@ -724,22 +725,82 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 5
 
-[node name="HFlowContainer" type="HFlowContainer" parent="detector/content/🗺/map/Карта/panel/margin/panel/margin"]
+[node name="status" type="HFlowContainer" parent="detector/content/🗺/map/Карта/panel/margin/panel/margin"]
 layout_mode = 2
+theme_override_constants/h_separation = 10
 
-[node name="description" type="Label" parent="detector/content/🗺/map/Карта/panel/margin/panel/margin/HFlowContainer"]
-custom_minimum_size = Vector2(50, 0)
+[node name="description" type="Label" parent="detector/content/🗺/map/Карта/panel/margin/panel/margin/status"]
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Пещера истоков - Иголка в стоге сена"
-autowrap_mode = 2
+text_overrun_behavior = 3
 
-[node name="progress" type="Label" parent="detector/content/🗺/map/Карта/panel/margin/panel/margin/HFlowContainer"]
+[node name="level" type="Label" parent="detector/content/🗺/map/Карта/panel/margin/panel/margin/status"]
+custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
-size_flags_horizontal = 8
-text = " 2 Этаж   👻 2 / 3   📖 3 / 6   📜 1 / 2"
+size_flags_horizontal = 10
+text = " 2 Этаж"
+horizontal_alignment = 2
+
+[node name="enemy" type="HBoxContainer" parent="detector/content/🗺/map/Карта/panel/margin/panel/margin/status"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+
+[node name="icon" type="Label" parent="detector/content/🗺/map/Карта/panel/margin/panel/margin/status/enemy"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_wr3od")
+theme_override_styles/normal = ExtResource("6_au5bm")
+text = "👻"
+
+[node name="progress" type="Label" parent="detector/content/🗺/map/Карта/panel/margin/panel/margin/status/enemy"]
+layout_mode = 2
+text = "2 / 3"
+
+[node name="books" type="HBoxContainer" parent="detector/content/🗺/map/Карта/panel/margin/panel/margin/status"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+
+[node name="icon" type="Label" parent="detector/content/🗺/map/Карта/panel/margin/panel/margin/status/books"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_wr3od")
+theme_override_styles/normal = ExtResource("6_au5bm")
+text = "📖"
+
+[node name="progress" type="Label" parent="detector/content/🗺/map/Карта/panel/margin/panel/margin/status/books"]
+layout_mode = 2
+text = "3 / 6"
+
+[node name="pages" type="HBoxContainer" parent="detector/content/🗺/map/Карта/panel/margin/panel/margin/status"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+
+[node name="icon" type="Label" parent="detector/content/🗺/map/Карта/panel/margin/panel/margin/status/pages"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_wr3od")
+theme_override_styles/normal = ExtResource("6_au5bm")
+text = "📜"
+
+[node name="progress" type="Label" parent="detector/content/🗺/map/Карта/panel/margin/panel/margin/status/pages"]
+layout_mode = 2
+text = "1 / 2"
+
+[node name="secrets" type="HBoxContainer" parent="detector/content/🗺/map/Карта/panel/margin/panel/margin/status"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+
+[node name="icon" type="Label" parent="detector/content/🗺/map/Карта/panel/margin/panel/margin/status/secrets"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_wr3od")
+theme_override_styles/normal = ExtResource("6_au5bm")
+text = "🔍"
+
+[node name="progress" type="Label" parent="detector/content/🗺/map/Карта/panel/margin/panel/margin/status/secrets"]
+layout_mode = 2
+text = "2 / 7"
 
 [node name="Помощь" type="MarginContainer" parent="detector/content/🗺/map"]
+visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
@@ -4078,13 +4139,13 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="detector/content/👁/scroll/stack"]
+[node name="content" type="VBoxContainer" parent="detector/content/👁/scroll/stack"]
 layout_mode = 2
 
-[node name="title" type="HBoxContainer" parent="detector/content/👁/scroll/stack/VBoxContainer"]
+[node name="title" type="HBoxContainer" parent="detector/content/👁/scroll/stack/content"]
 layout_mode = 2
 
-[node name="margin" type="MarginContainer" parent="detector/content/👁/scroll/stack/VBoxContainer/title"]
+[node name="margin" type="MarginContainer" parent="detector/content/👁/scroll/stack/content/title"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/margin_left = 0
@@ -4092,71 +4153,139 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 
-[node name="caption" type="Label" parent="detector/content/👁/scroll/stack/VBoxContainer/title/margin"]
+[node name="caption" type="Label" parent="detector/content/👁/scroll/stack/content/title/margin"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 24
 text = "Слизень"
 
-[node name="height-en" type="Label" parent="detector/content/👁/scroll/stack/VBoxContainer/title"]
+[node name="height-en" type="Label" parent="detector/content/👁/scroll/stack/content/title"]
 visible = false
 layout_mode = 2
 theme = ExtResource("1_fnw42")
 theme_override_font_sizes/font_size = 20
 text = "1'0.9\""
 
-[node name="height-ru" type="Label" parent="detector/content/👁/scroll/stack/VBoxContainer/title"]
+[node name="height-ru" type="Label" parent="detector/content/👁/scroll/stack/content/title"]
 layout_mode = 2
 theme = ExtResource("1_fnw42")
 theme_override_font_sizes/font_size = 20
 text = "33 см"
 
-[node name="count" type="Label" parent="detector/content/👁/scroll/stack/VBoxContainer/title"]
+[node name="count" type="Label" parent="detector/content/👁/scroll/stack/content/title"]
 layout_mode = 2
 theme = ExtResource("1_fnw42")
 theme_override_font_sizes/font_size = 20
 text = "🎖1"
 
-[node name="preview" type="HBoxContainer" parent="detector/content/👁/scroll/stack/VBoxContainer"]
+[node name="preview" type="HBoxContainer" parent="detector/content/👁/scroll/stack/content"]
 layout_mode = 2
 theme_override_constants/separation = 5
 
-[node name="image" type="Panel" parent="detector/content/👁/scroll/stack/VBoxContainer/preview"]
+[node name="image" type="Panel" parent="detector/content/👁/scroll/stack/content/preview"]
 custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="content" type="VBoxContainer" parent="detector/content/👁/scroll/stack/VBoxContainer/preview"]
+[node name="content" type="VBoxContainer" parent="detector/content/👁/scroll/stack/content/preview"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 5
 
-[node name="description" type="HBoxContainer" parent="detector/content/👁/scroll/stack/VBoxContainer/preview/content"]
+[node name="description" type="HBoxContainer" parent="detector/content/👁/scroll/stack/content/preview/content"]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="stats" type="Label" parent="detector/content/👁/scroll/stack/VBoxContainer/preview/content/description"]
-custom_minimum_size = Vector2(60, 0)
+[node name="stats" type="VBoxContainer" parent="detector/content/👁/scroll/stack/content/preview/content/description"]
+custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
-text = "7 ⚔️
-2 🔥
-1 🛡
-0 🫧"
-horizontal_alignment = 2
+size_flags_vertical = 4
 
-[node name="data" type="VBoxContainer" parent="detector/content/👁/scroll/stack/VBoxContainer/preview/content/description"]
+[node name="power" type="HBoxContainer" parent="detector/content/👁/scroll/stack/content/preview/content/description/stats"]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="value" type="Label" parent="detector/content/👁/scroll/stack/content/preview/content/description/stats/power"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "227"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="icon" type="Label" parent="detector/content/👁/scroll/stack/content/preview/content/description/stats/power"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_wr3od")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = ExtResource("6_au5bm")
+text = "⚔️"
+
+[node name="influence" type="HBoxContainer" parent="detector/content/👁/scroll/stack/content/preview/content/description/stats"]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="value" type="Label" parent="detector/content/👁/scroll/stack/content/preview/content/description/stats/influence"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "2"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="icon" type="Label" parent="detector/content/👁/scroll/stack/content/preview/content/description/stats/influence"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_wr3od")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = ExtResource("6_au5bm")
+text = "🔥"
+
+[node name="defence" type="HBoxContainer" parent="detector/content/👁/scroll/stack/content/preview/content/description/stats"]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="value" type="Label" parent="detector/content/👁/scroll/stack/content/preview/content/description/stats/defence"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "1"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="icon" type="Label" parent="detector/content/👁/scroll/stack/content/preview/content/description/stats/defence"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_wr3od")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = ExtResource("6_au5bm")
+text = "🛡"
+
+[node name="reaction" type="HBoxContainer" parent="detector/content/👁/scroll/stack/content/preview/content/description/stats"]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="value" type="Label" parent="detector/content/👁/scroll/stack/content/preview/content/description/stats/reaction"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "0"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="icon" type="Label" parent="detector/content/👁/scroll/stack/content/preview/content/description/stats/reaction"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_wr3od")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = ExtResource("6_au5bm")
+text = "🫧"
+
+[node name="data" type="VBoxContainer" parent="detector/content/👁/scroll/stack/content/preview/content/description"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 7
 
-[node name="common" type="Label" parent="detector/content/👁/scroll/stack/VBoxContainer/preview/content/description/data"]
+[node name="common" type="Label" parent="detector/content/👁/scroll/stack/content/preview/content/description/data"]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 theme = ExtResource("1_fnw42")
 text = "Крайне полезный противник для приключений."
 autowrap_mode = 2
 
-[node name="found" type="Label" parent="detector/content/👁/scroll/stack/VBoxContainer/preview/content/description/data"]
+[node name="found" type="Label" parent="detector/content/👁/scroll/stack/content/preview/content/description/data"]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -4164,7 +4293,7 @@ theme = ExtResource("1_fnw42")
 text = "Обитает: Пещера истоков"
 autowrap_mode = 2
 
-[node name="drop" type="Label" parent="detector/content/👁/scroll/stack/VBoxContainer/preview/content/description/data"]
+[node name="drop" type="Label" parent="detector/content/👁/scroll/stack/content/preview/content/description/data"]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -4173,13 +4302,13 @@ theme = ExtResource("1_fnw42")
 text = "Держит: Сгусток слизи"
 autowrap_mode = 2
 
-[node name="weakness" type="Label" parent="detector/content/👁/scroll/stack/VBoxContainer/preview/content/description/data"]
+[node name="weakness" type="Label" parent="detector/content/👁/scroll/stack/content/preview/content/description/data"]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 theme = ExtResource("1_fnw42")
-text = "Слабости: 🔥 Факел"
+text = "Слабости: Факел"
 autowrap_mode = 2
 
 [node name="enemy" type="VBoxContainer" parent="detector/content/👁/scroll/stack"]
@@ -4303,7 +4432,6 @@ layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_fnw42")
 
 [node name="🧪" type="MarginContainer" parent="detector/content"]
-visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
