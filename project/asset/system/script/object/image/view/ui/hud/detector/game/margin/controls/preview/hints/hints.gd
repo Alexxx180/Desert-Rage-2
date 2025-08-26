@@ -7,6 +7,8 @@ extends VBoxContainer
 @onready var behavior: BehaviorTree = $behavior
 @onready var blackboard: BehaviorBlackboard = $blackboard
 
+@onready var help: Dictionary = { "motion": motion, "action": action, "reason": reason }
+
 func toggle_help() -> void:
 	blackboard.toggle_value("hide")
 	behavior.tick(self, blackboard)
