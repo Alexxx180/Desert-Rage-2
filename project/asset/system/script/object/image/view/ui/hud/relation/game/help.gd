@@ -3,18 +3,18 @@ extends Node
 func connect_hint(hint: InputObserver, hints, act: String) -> void:
 	hint.input.connect(hints.get_node(act).sync_control_hint)
 
-func controls(hud: CanvasLayer, analyze: Button) -> void:
+func controls(hud: CanvasLayer, game: Control) -> void:
 	var hint: InputObserver = hud.processor.game.help
-	var hints: VBoxContainer = hud.detector.game.hints
+	# var hints: VBoxContainer = hud.detector.game.hints
 
 	# hint.input.connect(analyze.short.sync_control_hint)
-	# TODO FIX THE ANALYZE
-	"""
-	analyze.pressed.connect(hints.toggle_help)
-	connect_hint(hint, hints.action, "act")
+	var analyze: Button = game.preview.get_node("help/tabs/analyze")
+	# """
+	analyze.pressed.connect(game.hints.toggle_help)
+	connect_hint(hint, game.hints.action, "act")
 	for act in ["move", "push"]:
-		connect_hint(hint, hints.motion, act)
+		connect_hint(hint, game.hints.motion, act)
 	for act in ["team", "group"]:
-		connect_hint(hint, hints.reason, act)
-	"""
+		connect_hint(hint, game.hints.reason, act)
+	# """
 	#hint.show_help(true)0.1

@@ -4,5 +4,5 @@ extends Node
 @onready var pause: Node = $pause
 
 func controls(hud: CanvasLayer) -> void:
-	game.controls(hud, hud.detector.game.options)
+	game.controls(hud, hud.detector.game)
 	pause.controls(hud, hud.detector.pause.options.menu)

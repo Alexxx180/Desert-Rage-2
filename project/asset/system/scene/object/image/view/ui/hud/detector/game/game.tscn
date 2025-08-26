@@ -7,10 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://b01p37el432af" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/preview/hints/hints.tscn" id="2_mf7wa"]
 [ext_resource type="FontFile" uid="uid://b37js8y80ak1k" path="res://asset/resource/font/NotoColorEmoji-Regular.ttf" id="4_42m6k"]
 [ext_resource type="Script" uid="uid://e0hw6usabyvx" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/menu/horizontal.gd" id="4_j1gc2"]
-[ext_resource type="PackedScene" uid="uid://bcldwsqs27to7" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/preview/hints/analyze/analyze.tscn" id="5_m2hjb"]
 [ext_resource type="PackedScene" uid="uid://cbd4idujs0m3k" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/dialog/dialog.tscn" id="5_x67kx"]
 [ext_resource type="Script" uid="uid://b15hdwi7xixe4" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/menu/vertical.gd" id="6_0lb01"]
-[ext_resource type="Shortcut" uid="uid://b2haaq41erm0s" path="res://asset/resource/engine/internal/short/cut/game/analyze.tres" id="6_ijgny"]
 [ext_resource type="PackedScene" uid="uid://d0sq1ex503flw" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/hide.tscn" id="7_koglg"]
 [ext_resource type="Script" uid="uid://dw6r0use77qqc" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/menu/inventory/markers/markers.gd" id="8_2uuwx"]
 [ext_resource type="Script" uid="uid://t52wbbj1shib" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/menu/inventory/markers/item.gd" id="8_kumfx"]
@@ -28,6 +26,8 @@
 [ext_resource type="FontFile" uid="uid://bghvysgyoj1y7" path="res://asset/resource/font/title/Equilibrist Semibold.ttf" id="16_blc53"]
 [ext_resource type="FontFile" uid="uid://dxg5wbmrewk2p" path="res://asset/resource/font/Lato-Regular.ttf" id="16_g3c1s"]
 [ext_resource type="FontFile" uid="uid://c6xnr3551fg10" path="res://asset/resource/font/Izuver.otf" id="17_jn2xb"]
+[ext_resource type="StyleBox" uid="uid://vtasw48vidxj" path="res://asset/resource/engine/internal/theme/style/noto-color/noto-color-left.tres" id="20_6gnce"]
+[ext_resource type="Script" uid="uid://hb6avc0h2sag" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/controls/preview/hints.gd" id="21_fuh2f"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_veudi"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -536,6 +536,8 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_6gnce")
 text = "💬"
 alignment = 0
 
+[node name="hide" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/tabs" instance=ExtResource("7_koglg")]
+
 [node name="scroll" type="ScrollContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats"]
 custom_minimum_size = Vector2(0, 120)
 layout_mode = 2
@@ -897,7 +899,7 @@ theme_override_constants/margin_bottom = 3
 
 [node name="stats" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/stats/margin"]
 layout_mode = 2
-theme_override_constants/separation = 3
+theme_override_constants/separation = 5
 
 [node name="a" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/stats/margin/stats"]
 layout_mode = 2
@@ -906,18 +908,32 @@ theme_override_constants/separation = 0
 [node name="health" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/stats/margin/stats/a"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/separation = 3
+theme_override_constants/separation = 0
 
-[node name="caption" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/stats/margin/stats/a/health"]
+[node name="status" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/stats/margin/stats/a/health"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="icon" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/stats/margin/stats/a/health/status"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
-size_flags_horizontal = 3
 size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.627451, 0.627451, 0.627451, 1)
+theme_override_constants/line_spacing = -2
+theme_override_fonts/font = ExtResource("4_42m6k")
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = ExtResource("20_6gnce")
+text = "🩸"
+
+[node name="caption" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/stats/margin/stats/a/health/status"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_vertical = 0
 theme_override_colors/font_color = Color(0.627451, 0.627451, 0.627451, 1)
 theme_override_constants/line_spacing = -2
 theme_override_fonts/font = ExtResource("16_g3c1s")
 theme_override_font_sizes/font_size = 14
-text = "🩸 10 + 2"
+text = "10 + 2"
 
 [node name="progress" type="Control" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/stats/margin/stats/a/health"]
 custom_minimum_size = Vector2(0, 1)
@@ -953,18 +969,32 @@ show_percentage = false
 [node name="aura" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/stats/margin/stats/a"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/separation = 3
+theme_override_constants/separation = 0
 
-[node name="caption" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/stats/margin/stats/a/aura"]
+[node name="status" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/stats/margin/stats/a/aura"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="icon" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/stats/margin/stats/a/aura/status"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
-size_flags_horizontal = 3
 size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.627451, 0.627451, 0.627451, 1)
+theme_override_constants/line_spacing = -2
+theme_override_fonts/font = ExtResource("4_42m6k")
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = ExtResource("20_6gnce")
+text = "💧"
+
+[node name="caption" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/stats/margin/stats/a/aura/status"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_vertical = 0
 theme_override_colors/font_color = Color(0.627451, 0.627451, 0.627451, 1)
 theme_override_constants/line_spacing = -2
 theme_override_fonts/font = ExtResource("16_g3c1s")
 theme_override_font_sizes/font_size = 14
-text = "💧 9 + 1"
+text = "9 + 1"
 
 [node name="progress" type="Control" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/stats/margin/stats/a/aura"]
 custom_minimum_size = Vector2(0, 1)
@@ -998,18 +1028,32 @@ theme_override_constants/separation = 0
 [node name="power" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/stats/margin/stats/b"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/separation = 3
+theme_override_constants/separation = 0
 
-[node name="caption" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/stats/margin/stats/b/power"]
+[node name="status" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/stats/margin/stats/b/power"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="icon" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/stats/margin/stats/b/power/status"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
-size_flags_horizontal = 3
 size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.627451, 0.627451, 0.627451, 1)
+theme_override_constants/line_spacing = -2
+theme_override_fonts/font = ExtResource("4_42m6k")
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = ExtResource("20_6gnce")
+text = "⚔"
+
+[node name="caption" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/stats/margin/stats/b/power/status"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_vertical = 0
 theme_override_colors/font_color = Color(0.627451, 0.627451, 0.627451, 1)
 theme_override_constants/line_spacing = -2
 theme_override_fonts/font = ExtResource("16_g3c1s")
 theme_override_font_sizes/font_size = 14
-text = "⚔ 5 + 1"
+text = "5 + 1"
 
 [node name="progress" type="Control" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/stats/margin/stats/b/power"]
 custom_minimum_size = Vector2(0, 1)
@@ -1039,18 +1083,32 @@ show_percentage = false
 [node name="influence" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/stats/margin/stats/b"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/separation = 3
+theme_override_constants/separation = 0
 
-[node name="caption" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/stats/margin/stats/b/influence"]
+[node name="status" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/stats/margin/stats/b/influence"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="icon" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/stats/margin/stats/b/influence/status"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
-size_flags_horizontal = 3
 size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.627451, 0.627451, 0.627451, 1)
+theme_override_constants/line_spacing = -2
+theme_override_fonts/font = ExtResource("4_42m6k")
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = ExtResource("20_6gnce")
+text = "🔥"
+
+[node name="caption" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/stats/margin/stats/b/influence/status"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_vertical = 0
 theme_override_colors/font_color = Color(0.627451, 0.627451, 0.627451, 1)
 theme_override_constants/line_spacing = -2
 theme_override_fonts/font = ExtResource("16_g3c1s")
 theme_override_font_sizes/font_size = 14
-text = "🔥 5 + 2"
+text = "5 + 2"
 
 [node name="progress" type="Control" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/stats/margin/stats/b/influence"]
 layout_mode = 2
@@ -1083,18 +1141,32 @@ theme_override_constants/separation = 0
 [node name="power" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/stats/margin/stats/c"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/separation = 3
+theme_override_constants/separation = 0
 
-[node name="caption" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/stats/margin/stats/c/power"]
+[node name="status" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/stats/margin/stats/c/power"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="icon" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/stats/margin/stats/c/power/status"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
-size_flags_horizontal = 3
 size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.627451, 0.627451, 0.627451, 1)
+theme_override_constants/line_spacing = -2
+theme_override_fonts/font = ExtResource("4_42m6k")
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = ExtResource("20_6gnce")
+text = "🛡"
+
+[node name="caption" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/stats/margin/stats/c/power/status"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_vertical = 0
 theme_override_colors/font_color = Color(0.627451, 0.627451, 0.627451, 1)
 theme_override_constants/line_spacing = -2
 theme_override_fonts/font = ExtResource("16_g3c1s")
 theme_override_font_sizes/font_size = 14
-text = "🛡 2 + 1"
+text = "2 + 1"
 
 [node name="progress" type="Control" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/stats/margin/stats/c/power"]
 custom_minimum_size = Vector2(0, 1)
@@ -1124,18 +1196,32 @@ show_percentage = false
 [node name="influence" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/stats/margin/stats/c"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/separation = 3
+theme_override_constants/separation = 0
 
-[node name="caption" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/stats/margin/stats/c/influence"]
+[node name="status" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/stats/margin/stats/c/influence"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="icon" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/stats/margin/stats/c/influence/status"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
-size_flags_horizontal = 3
 size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.627451, 0.627451, 0.627451, 1)
+theme_override_constants/line_spacing = -2
+theme_override_fonts/font = ExtResource("4_42m6k")
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = ExtResource("20_6gnce")
+text = "🫧"
+
+[node name="caption" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/stats/margin/stats/c/influence/status"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_vertical = 0
 theme_override_colors/font_color = Color(0.627451, 0.627451, 0.627451, 1)
 theme_override_constants/line_spacing = -2
 theme_override_fonts/font = ExtResource("16_g3c1s")
 theme_override_font_sizes/font_size = 14
-text = "🫧 4 + 2"
+text = "4 + 2"
 
 [node name="progress" type="Control" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/stats/margin/stats/c/influence"]
 layout_mode = 2
@@ -1258,34 +1344,40 @@ size_flags_stretch_ratio = 0.5
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.25
+script = ExtResource("21_fuh2f")
 
 [node name="content" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/help"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 8
 
-[node name="hints" parent="menu/stats/inventory/ability/controls/hints/space/preview/help/content" instance=ExtResource("2_mf7wa")]
+[node name="help" type="PanelContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/help/content"]
 visible = false
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("14_jj441")
+
+[node name="hints" parent="menu/stats/inventory/ability/controls/hints/space/preview/help/content/help" instance=ExtResource("2_mf7wa")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.2
 
-[node name="log" type="PanelContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/help/content"]
+[node name="books" type="PanelContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/help/content"]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = ExtResource("14_jj441")
 
-[node name="books" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/help/content/log"]
+[node name="books" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/help/content/books"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 5
 
-[node name="tabs" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/help/content/log/books"]
+[node name="tabs" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/help/content/books/books"]
 layout_mode = 2
 theme_override_constants/separation = 2
 
-[node name="blue" type="Button" parent="menu/stats/inventory/ability/controls/hints/space/preview/help/content/log/books/tabs"]
+[node name="blue" type="Button" parent="menu/stats/inventory/ability/controls/hints/space/preview/help/content/books/books/tabs"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_42m6k")
@@ -1294,7 +1386,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_6gnce")
 text = "📘"
 alignment = 0
 
-[node name="green" type="Button" parent="menu/stats/inventory/ability/controls/hints/space/preview/help/content/log/books/tabs"]
+[node name="green" type="Button" parent="menu/stats/inventory/ability/controls/hints/space/preview/help/content/books/books/tabs"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_42m6k")
@@ -1303,7 +1395,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_6gnce")
 text = "📗"
 alignment = 0
 
-[node name="red" type="Button" parent="menu/stats/inventory/ability/controls/hints/space/preview/help/content/log/books/tabs"]
+[node name="red" type="Button" parent="menu/stats/inventory/ability/controls/hints/space/preview/help/content/books/books/tabs"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_42m6k")
@@ -1312,7 +1404,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_6gnce")
 text = "📕"
 alignment = 0
 
-[node name="white" type="Button" parent="menu/stats/inventory/ability/controls/hints/space/preview/help/content/log/books/tabs"]
+[node name="white" type="Button" parent="menu/stats/inventory/ability/controls/hints/space/preview/help/content/books/books/tabs"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_42m6k")
@@ -1321,7 +1413,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_6gnce")
 text = "📔"
 alignment = 0
 
-[node name="black" type="Button" parent="menu/stats/inventory/ability/controls/hints/space/preview/help/content/log/books/tabs"]
+[node name="black" type="Button" parent="menu/stats/inventory/ability/controls/hints/space/preview/help/content/books/books/tabs"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_42m6k")
@@ -1330,7 +1422,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_6gnce")
 text = "📓"
 alignment = 0
 
-[node name="open" type="Button" parent="menu/stats/inventory/ability/controls/hints/space/preview/help/content/log/books/tabs"]
+[node name="open" type="Button" parent="menu/stats/inventory/ability/controls/hints/space/preview/help/content/books/books/tabs"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_42m6k")
@@ -1339,34 +1431,34 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_6gnce")
 text = "📖"
 alignment = 0
 
-[node name="Label" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/help/content/log/books"]
+[node name="caption" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/help/content/books/books"]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Настой на кактусе"
 
-[node name="margin" type="MarginContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/help/content/log/books"]
+[node name="margin" type="MarginContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/help/content/books/books"]
 layout_mode = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="text" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/help/content/log/books/margin"]
+[node name="text" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/help/content/books/books/margin"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="green-1" type="PanelContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/help/content/log/books/margin/text"]
+[node name="green-1" type="PanelContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/help/content/books/books/margin/text"]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_tya2d")
 
-[node name="margin" type="MarginContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/help/content/log/books/margin/text/green-1"]
+[node name="margin" type="MarginContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/help/content/books/books/margin/text/green-1"]
 layout_mode = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 3
 
-[node name="chat" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/help/content/log/books/margin/text/green-1/margin"]
+[node name="chat" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/help/content/books/books/margin/text/green-1/margin"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 size_flags_vertical = 1
@@ -1398,6 +1490,8 @@ theme_override_font_sizes/font_size = 16
 theme_override_styles/normal = SubResource("StyleBoxFlat_6gnce")
 text = "📖"
 alignment = 0
+
+[node name="hide" parent="menu/stats/inventory/ability/controls/hints/space/preview/help/tabs" instance=ExtResource("7_koglg")]
 
 [node name="bottom" type="Control" parent="menu/stats/inventory/ability/controls/hints"]
 layout_mode = 2
@@ -1945,6 +2039,7 @@ layout_mode = 2
 color = Color(0.0588235, 0.0588235, 0.0588235, 1)
 
 [node name="hero" type="PanelContainer" parent="menu/stats/inventory/ability/controls/topic/status/fast-access"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_jj441")
@@ -2000,10 +2095,12 @@ vertical_alignment = 1
 
 [node name="characters" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/topic/status/fast-access"]
 layout_mode = 2
+size_flags_horizontal = 10
 
 [node name="rock" type="Button" parent="menu/stats/inventory/ability/controls/topic/status/fast-access/characters"]
 custom_minimum_size = Vector2(90, 0)
 layout_mode = 2
+size_flags_horizontal = 10
 theme_override_font_sizes/font_size = 16
 theme_override_styles/normal = SubResource("StyleBoxFlat_jn2xb")
 text = "Рок"
@@ -2116,11 +2213,6 @@ size_flags_vertical = 8
 theme_override_colors/font_color = Color(0.588235, 0.588235, 0.588235, 1)
 theme_override_font_sizes/font_size = 12
 text = "Alt"
-
-[node name="help" parent="menu/stats/inventory/ability/controls/topic" instance=ExtResource("5_m2hjb")]
-visible = false
-layout_mode = 2
-shortcut = ExtResource("6_ijgny")
 
 [node name="hide" parent="menu/stats/inventory/ability/controls/topic" instance=ExtResource("7_koglg")]
 

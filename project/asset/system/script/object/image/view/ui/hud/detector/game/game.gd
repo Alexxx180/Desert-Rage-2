@@ -2,7 +2,8 @@ extends Control
 
 @onready var options: HFlowContainer = $menu/stats/inventory/ability/controls/topic
 @onready var chat: VBoxContainer = $dialog/chat
-@onready var hints: VBoxContainer = $menu/stats/inventory/ability/controls/hints/scroll/stack/hints
+@onready var preview: HBoxContainer = $menu/stats/inventory/ability/controls/hints/space/preview
+@onready var hints: VBoxContainer = preview.get_node("help/content/help/hints")
 @onready var inventory: PanelContainer = $menu/stats/inventory/topic
 
 @onready var hp: Array[HBoxContainer] = _get_point_bars("health")

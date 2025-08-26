@@ -1,8 +1,8 @@
 extends HBoxContainer
 
 @onready var tabs: VBoxContainer = $tabs
-@onready var chat: PanelContainer = $scroll/list/chat
-@onready var log: PanelContainer = $scroll/list/log
+@onready var help: PanelContainer = $content/help
+@onready var books: PanelContainer = $content/books
 
 enum { NONE = -1, FIRST = 0, SECOND = 1 }
 
@@ -13,15 +13,15 @@ func toggle(prev: Control, next: Control) -> void:
 	next.show()
 
 func _ready() -> void:
-	tabs.get_node("game").pressed.connect(func():
+	tabs.get_node("analyze").pressed.connect(func():
 		if opened == SECOND:
-			log.visible = !log.visible
+			help.visible = !help.visible
 		else:
-			toggle(chat, log)
+			toggle(books, help)
 			opened = SECOND)
-	tabs.get_node("chat").pressed.connect(func():
+	tabs.get_node("books").pressed.connect(func():
 		if opened == FIRST:
-			chat.visible = !chat.visible
+			books.visible = !books.visible
 		else:
-			toggle(log, chat)
+			toggle(help, books)
 			opened = FIRST)
