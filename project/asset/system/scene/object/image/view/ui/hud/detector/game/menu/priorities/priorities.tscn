@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://sloxw12np1ch"]
+[gd_scene load_steps=13 format=3 uid="uid://sloxw12np1ch"]
 
 [ext_resource type="PackedScene" uid="uid://bky5mu10x2da3" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/menu/inventory/status.tscn" id="1_2h7wb"]
 [ext_resource type="StyleBox" uid="uid://cvfnqancophme" path="res://asset/resource/engine/internal/theme/style/solid-color-panel.tres" id="1_xvq4b"]
@@ -6,6 +6,26 @@
 [ext_resource type="PackedScene" uid="uid://l7thqkrsol4m" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/menu/priorities/perks.tscn" id="3_2h7wb"]
 [ext_resource type="FontFile" uid="uid://b37js8y80ak1k" path="res://asset/resource/font/NotoColorEmoji-Regular.ttf" id="4_f2xkq"]
 [ext_resource type="StyleBox" uid="uid://c5qf02s45xwn" path="res://asset/resource/engine/internal/theme/style/noto-color.tres" id="5_i4ulf"]
+[ext_resource type="Script" uid="uid://hb6avc0h2sag" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/controls/preview/hints.gd" id="7_tlufy"]
+[ext_resource type="StyleBox" uid="uid://bsggnr5c3uk7o" path="res://asset/resource/engine/internal/theme/style/panel/preview.tres" id="8_gprs2"]
+[ext_resource type="PackedScene" uid="uid://b01p37el432af" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/preview/hints/hints.tscn" id="9_ph3re"]
+[ext_resource type="FontFile" uid="uid://dxg5wbmrewk2p" path="res://asset/resource/font/Lato-Regular.ttf" id="10_ighkc"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kf4b8"]
+content_margin_left = 7.0
+content_margin_top = 6.0
+bg_color = Color(0.0588235, 0.0588235, 0.0588235, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rvj6d"]
+bg_color = Color(0.0196078, 0.0196078, 0.0196078, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
 
 [node name="panel" type="PanelContainer"]
 anchors_preset = 15
@@ -551,4 +571,168 @@ theme = ExtResource("2_xvq4b")
 text = "1"
 
 [node name="perks" parent="scroll/margin/stack" instance=ExtResource("3_2h7wb")]
+visible = false
 layout_mode = 2
+
+[node name="help" type="VBoxContainer" parent="scroll/margin/stack"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.25
+script = ExtResource("7_tlufy")
+
+[node name="tabs" type="HBoxContainer" parent="scroll/margin/stack/help"]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="toggle" type="Button" parent="scroll/margin/stack/help/tabs"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_f2xkq")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_kf4b8")
+text = "⬅️"
+alignment = 0
+
+[node name="space" type="Control" parent="scroll/margin/stack/help/tabs"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="analyze" type="Button" parent="scroll/margin/stack/help/tabs"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_f2xkq")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_kf4b8")
+text = "❔"
+alignment = 0
+
+[node name="books" type="Button" parent="scroll/margin/stack/help/tabs"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_f2xkq")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_kf4b8")
+text = "📖"
+alignment = 0
+
+[node name="content" type="VBoxContainer" parent="scroll/margin/stack/help"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="help" type="PanelContainer" parent="scroll/margin/stack/help/content"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("8_gprs2")
+
+[node name="hints" parent="scroll/margin/stack/help/content/help" instance=ExtResource("9_ph3re")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="books" type="PanelContainer" parent="scroll/margin/stack/help/content"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("8_gprs2")
+
+[node name="books" type="VBoxContainer" parent="scroll/margin/stack/help/content/books"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 5
+
+[node name="tabs" type="HBoxContainer" parent="scroll/margin/stack/help/content/books/books"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="blue" type="Button" parent="scroll/margin/stack/help/content/books/books/tabs"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_f2xkq")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_kf4b8")
+text = "📘"
+alignment = 0
+
+[node name="green" type="Button" parent="scroll/margin/stack/help/content/books/books/tabs"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_f2xkq")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_kf4b8")
+text = "📗"
+alignment = 0
+
+[node name="red" type="Button" parent="scroll/margin/stack/help/content/books/books/tabs"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_f2xkq")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_kf4b8")
+text = "📕"
+alignment = 0
+
+[node name="white" type="Button" parent="scroll/margin/stack/help/content/books/books/tabs"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_f2xkq")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_kf4b8")
+text = "📔"
+alignment = 0
+
+[node name="black" type="Button" parent="scroll/margin/stack/help/content/books/books/tabs"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_f2xkq")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_kf4b8")
+text = "📓"
+alignment = 0
+
+[node name="open" type="Button" parent="scroll/margin/stack/help/content/books/books/tabs"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_f2xkq")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_kf4b8")
+text = "📖"
+alignment = 0
+
+[node name="caption" type="Label" parent="scroll/margin/stack/help/content/books/books"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Настой на кактусе"
+
+[node name="margin" type="MarginContainer" parent="scroll/margin/stack/help/content/books/books"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="text" type="VBoxContainer" parent="scroll/margin/stack/help/content/books/books/margin"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="green-1" type="PanelContainer" parent="scroll/margin/stack/help/content/books/books/margin/text"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_rvj6d")
+
+[node name="margin" type="MarginContainer" parent="scroll/margin/stack/help/content/books/books/margin/text/green-1"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 3
+
+[node name="chat" type="Label" parent="scroll/margin/stack/help/content/books/books/margin/text/green-1/margin"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.627451, 0.627451, 0.627451, 1)
+theme_override_constants/line_spacing = -2
+theme_override_fonts/font = ExtResource("10_ighkc")
+theme_override_font_sizes/font_size = 18
+text = "Истинно говорю вам, что время на приготовление сего отвара будет более чем компенсировано. Для этого нужен простой древний..."
+autowrap_mode = 2

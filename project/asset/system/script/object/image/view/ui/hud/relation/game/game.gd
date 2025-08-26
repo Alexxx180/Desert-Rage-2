@@ -5,8 +5,8 @@ extends Node
 @onready var gameplay: Node = $gameplay
 @onready var inventory: Node = $inventory
 
-func controls(hud: CanvasLayer, options: HFlowContainer) -> void:
-	pause.controls(hud, options.pause)
-	help.controls(hud, options.analyze)
-	gameplay.controls(hud, options)
-	inventory.controls(hud, hud.detector.game.get_node("menu/stats/inventory"))
+func controls(hud: CanvasLayer, game: Control) -> void:
+	pause.controls(hud, game.options.pause)
+	help.controls(hud, game)
+	gameplay.controls(hud, game.options)
+	inventory.controls(hud, game.get_node("menu/stats/inventory"))
