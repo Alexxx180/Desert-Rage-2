@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://cel3u88abrgv3"]
+[gd_scene load_steps=55 format=3 uid="uid://cel3u88abrgv3"]
 
 [ext_resource type="Theme" uid="uid://p2br8b6ea3n6" path="res://asset/resource/engine/internal/theme/patterns/template/menu/hud/pause/pause.tres" id="1_klae1"]
 [ext_resource type="Script" uid="uid://81xdi4771u0a" path="res://asset/system/script/object/image/view/ui/hud/detector/game/game.gd" id="1_o71r6"]
@@ -28,6 +28,8 @@
 [ext_resource type="FontFile" uid="uid://c6xnr3551fg10" path="res://asset/resource/font/Izuver.otf" id="17_jn2xb"]
 [ext_resource type="StyleBox" uid="uid://vtasw48vidxj" path="res://asset/resource/engine/internal/theme/style/noto-color/noto-color-left.tres" id="20_6gnce"]
 [ext_resource type="Script" uid="uid://hb6avc0h2sag" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/controls/preview/hints.gd" id="21_fuh2f"]
+[ext_resource type="Script" uid="uid://b2ugt042kmpr0" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/menu/topic/status.gd" id="26_6gnce"]
+[ext_resource type="Script" uid="uid://33526xfgujtg" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/menu/topic/hero.gd" id="27_fuh2f"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_veudi"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -1537,6 +1539,8 @@ script = ExtResource("2_m0xgs")
 [node name="pause" parent="menu/stats/inventory/ability/controls/topic" instance=ExtResource("1_p1rgr")]
 layout_mode = 2
 
+[node name="hide2" parent="menu/stats/inventory/ability/controls/topic/pause" instance=ExtResource("7_koglg")]
+
 [node name="left-space" type="Control" parent="menu/stats/inventory/ability/controls/topic"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -1547,6 +1551,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8
 theme_override_constants/separation = 0
+script = ExtResource("26_6gnce")
 
 [node name="enemy" type="PanelContainer" parent="menu/stats/inventory/ability/controls/topic/status"]
 visible = false
@@ -1894,30 +1899,30 @@ step = 1.0
 value = 15.0
 show_percentage = false
 
-[node name="fast-access" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/topic/status"]
+[node name="fast" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/topic/status"]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="experience" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/topic/status/fast-access"]
+[node name="experience" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/topic/status/fast"]
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_constants/separation = 0
 
-[node name="caption" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/topic/status/fast-access/experience"]
+[node name="caption" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/topic/status/fast/experience"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 7
 
-[node name="main" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/topic/status/fast-access/experience/caption"]
+[node name="main" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/topic/status/fast/experience/caption"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="combo" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/topic/status/fast-access/experience/caption/main"]
+[node name="combo" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/topic/status/fast/experience/caption/main"]
 visible = false
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="meter" type="ProgressBar" parent="menu/stats/inventory/ability/controls/topic/status/fast-access/experience/caption/main/combo"]
+[node name="meter" type="ProgressBar" parent="menu/stats/inventory/ability/controls/topic/status/fast/experience/caption/main/combo"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 1
@@ -1929,16 +1934,16 @@ value = 0.6
 fill_mode = 3
 show_percentage = false
 
-[node name="shadow" type="ColorRect" parent="menu/stats/inventory/ability/controls/topic/status/fast-access/experience/caption/main/combo"]
+[node name="shadow" type="ColorRect" parent="menu/stats/inventory/ability/controls/topic/status/fast/experience/caption/main/combo"]
 custom_minimum_size = Vector2(1, 0)
 layout_mode = 2
 color = Color(0.0588235, 0.0588235, 0.0588235, 1)
 
-[node name="ability" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/topic/status/fast-access/experience/caption/main"]
+[node name="ability" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/topic/status/fast/experience/caption/main"]
 layout_mode = 2
 theme_override_constants/separation = 2
 
-[node name="x" type="Button" parent="menu/stats/inventory/ability/controls/topic/status/fast-access/experience/caption/main/ability"]
+[node name="x" type="Button" parent="menu/stats/inventory/ability/controls/topic/status/fast/experience/caption/main/ability"]
 custom_minimum_size = Vector2(39, 25)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -1949,7 +1954,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_joidv")
 text = "🔥"
 alignment = 0
 
-[node name="hint" type="MarginContainer" parent="menu/stats/inventory/ability/controls/topic/status/fast-access/experience/caption/main/ability/x"]
+[node name="hint" type="MarginContainer" parent="menu/stats/inventory/ability/controls/topic/status/fast/experience/caption/main/ability/x"]
 layout_mode = 1
 anchors_preset = 11
 anchor_left = 1.0
@@ -1963,14 +1968,14 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 0
 
-[node name="caption" type="Label" parent="menu/stats/inventory/ability/controls/topic/status/fast-access/experience/caption/main/ability/x/hint"]
+[node name="caption" type="Label" parent="menu/stats/inventory/ability/controls/topic/status/fast/experience/caption/main/ability/x/hint"]
 layout_mode = 2
 size_flags_horizontal = 8
 theme_override_colors/font_color = Color(0.588235, 0.588235, 0.588235, 1)
 theme_override_font_sizes/font_size = 16
 text = "X"
 
-[node name="y" type="Button" parent="menu/stats/inventory/ability/controls/topic/status/fast-access/experience/caption/main/ability"]
+[node name="y" type="Button" parent="menu/stats/inventory/ability/controls/topic/status/fast/experience/caption/main/ability"]
 custom_minimum_size = Vector2(39, 25)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -1981,7 +1986,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_joidv")
 text = "🎣"
 alignment = 0
 
-[node name="hint" type="MarginContainer" parent="menu/stats/inventory/ability/controls/topic/status/fast-access/experience/caption/main/ability/y"]
+[node name="hint" type="MarginContainer" parent="menu/stats/inventory/ability/controls/topic/status/fast/experience/caption/main/ability/y"]
 layout_mode = 1
 anchors_preset = 11
 anchor_left = 1.0
@@ -1995,14 +2000,16 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 0
 
-[node name="caption" type="Label" parent="menu/stats/inventory/ability/controls/topic/status/fast-access/experience/caption/main/ability/y/hint"]
+[node name="caption" type="Label" parent="menu/stats/inventory/ability/controls/topic/status/fast/experience/caption/main/ability/y/hint"]
 layout_mode = 2
 size_flags_horizontal = 8
 theme_override_colors/font_color = Color(0.588235, 0.588235, 0.588235, 1)
 theme_override_font_sizes/font_size = 16
 text = "Y"
 
-[node name="score" type="MarginContainer" parent="menu/stats/inventory/ability/controls/topic/status/fast-access/experience/caption/main"]
+[node name="hide" parent="menu/stats/inventory/ability/controls/topic/status/fast/experience/caption/main/ability" instance=ExtResource("7_koglg")]
+
+[node name="score" type="MarginContainer" parent="menu/stats/inventory/ability/controls/topic/status/fast/experience/caption/main"]
 visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 3
@@ -2010,7 +2017,7 @@ theme_override_constants/margin_top = 3
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 
-[node name="count" type="Label" parent="menu/stats/inventory/ability/controls/topic/status/fast-access/experience/caption/main/score"]
+[node name="count" type="Label" parent="menu/stats/inventory/ability/controls/topic/status/fast/experience/caption/main/score"]
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_outline_size = 10
@@ -2018,7 +2025,7 @@ theme_override_fonts/font = ExtResource("16_blc53")
 text = "25000"
 vertical_alignment = 2
 
-[node name="multiplier" type="Label" parent="menu/stats/inventory/ability/controls/topic/status/fast-access/experience/caption"]
+[node name="multiplier" type="Label" parent="menu/stats/inventory/ability/controls/topic/status/fast/experience/caption"]
 visible = false
 layout_mode = 2
 theme_override_colors/font_color = Color(0.767135, 0.588769, 0.0712476, 1)
@@ -2028,22 +2035,22 @@ theme_override_fonts/font = ExtResource("16_blc53")
 theme_override_font_sizes/font_size = 14
 text = "x2.5"
 
-[node name="meter" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/topic/status/fast-access/experience"]
+[node name="meter" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/topic/status/fast/experience"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="main" type="MarginContainer" parent="menu/stats/inventory/ability/controls/topic/status/fast-access/experience/meter"]
+[node name="main" type="MarginContainer" parent="menu/stats/inventory/ability/controls/topic/status/fast/experience/meter"]
 layout_mode = 2
 theme_override_constants/margin_left = 0
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 1
 theme_override_constants/margin_bottom = 0
 
-[node name="next" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/topic/status/fast-access/experience/meter/main"]
+[node name="next" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/topic/status/fast/experience/meter/main"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="score" type="ProgressBar" parent="menu/stats/inventory/ability/controls/topic/status/fast-access/experience/meter/main/next"]
+[node name="score" type="ProgressBar" parent="menu/stats/inventory/ability/controls/topic/status/fast/experience/meter/main/next"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/background = SubResource("StyleBoxEmpty_g3c1s")
@@ -2052,30 +2059,32 @@ step = 1.0
 value = 50.0
 show_percentage = false
 
-[node name="level" type="ColorRect" parent="menu/stats/inventory/ability/controls/topic/status/fast-access/experience/meter/main/next"]
+[node name="level" type="ColorRect" parent="menu/stats/inventory/ability/controls/topic/status/fast/experience/meter/main/next"]
 custom_minimum_size = Vector2(2, 1)
 layout_mode = 2
 color = Color(0.835294, 0.513726, 0.168627, 1)
 
-[node name="shadow" type="MarginContainer" parent="menu/stats/inventory/ability/controls/topic/status/fast-access/experience/meter"]
+[node name="shadow" type="MarginContainer" parent="menu/stats/inventory/ability/controls/topic/status/fast/experience/meter"]
 layout_mode = 2
 theme_override_constants/margin_left = 1
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 
-[node name="color" type="ColorRect" parent="menu/stats/inventory/ability/controls/topic/status/fast-access/experience/meter/shadow"]
+[node name="color" type="ColorRect" parent="menu/stats/inventory/ability/controls/topic/status/fast/experience/meter/shadow"]
 custom_minimum_size = Vector2(0, 1)
 layout_mode = 2
 color = Color(0.0588235, 0.0588235, 0.0588235, 1)
 
-[node name="hero" type="PanelContainer" parent="menu/stats/inventory/ability/controls/topic/status/fast-access"]
-visible = false
+[node name="hero" type="PanelContainer" parent="menu/stats/inventory/ability/controls/topic/status/fast"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_jj441")
+script = ExtResource("27_fuh2f")
 
-[node name="aura" type="ProgressBar" parent="menu/stats/inventory/ability/controls/topic/status/fast-access/hero"]
+[node name="hiding" type="Timer" parent="menu/stats/inventory/ability/controls/topic/status/fast/hero"]
+
+[node name="aura" type="ProgressBar" parent="menu/stats/inventory/ability/controls/topic/status/fast/hero"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 1
@@ -2087,14 +2096,14 @@ value = 0.6
 fill_mode = 3
 show_percentage = false
 
-[node name="margin" type="MarginContainer" parent="menu/stats/inventory/ability/controls/topic/status/fast-access/hero"]
+[node name="margin" type="MarginContainer" parent="menu/stats/inventory/ability/controls/topic/status/fast/hero"]
 layout_mode = 2
 theme_override_constants/margin_left = 7
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 
-[node name="description" type="Label" parent="menu/stats/inventory/ability/controls/topic/status/fast-access/hero/margin"]
+[node name="description" type="Label" parent="menu/stats/inventory/ability/controls/topic/status/fast/hero/margin"]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -2102,7 +2111,7 @@ theme_override_font_sizes/font_size = 18
 text = "Рей"
 autowrap_mode = 2
 
-[node name="health" type="ProgressBar" parent="menu/stats/inventory/ability/controls/topic/status/fast-access/hero"]
+[node name="health" type="ProgressBar" parent="menu/stats/inventory/ability/controls/topic/status/fast/hero"]
 layout_mode = 2
 size_flags_vertical = 8
 theme_override_styles/background = SubResource("StyleBoxEmpty_o4lum")
@@ -2111,8 +2120,8 @@ step = 1.0
 value = 50.0
 show_percentage = false
 
-[node name="slot" type="Label" parent="menu/stats/inventory/ability/controls/topic/status/fast-access/hero"]
-visible = false
+[node name="slot" type="Label" parent="menu/stats/inventory/ability/controls/topic/status/fast/hero"]
+modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 size_flags_horizontal = 10
@@ -2124,11 +2133,11 @@ theme_override_styles/normal = ExtResource("9_veudi")
 text = "✊"
 vertical_alignment = 1
 
-[node name="characters" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/topic/status/fast-access"]
+[node name="characters" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/topic/status/fast"]
 layout_mode = 2
 size_flags_horizontal = 10
 
-[node name="rock" type="Button" parent="menu/stats/inventory/ability/controls/topic/status/fast-access/characters"]
+[node name="rock" type="Button" parent="menu/stats/inventory/ability/controls/topic/status/fast/characters"]
 custom_minimum_size = Vector2(90, 0)
 layout_mode = 2
 size_flags_horizontal = 10
@@ -2137,7 +2146,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_jn2xb")
 text = "Рок"
 alignment = 0
 
-[node name="aura" type="ProgressBar" parent="menu/stats/inventory/ability/controls/topic/status/fast-access/characters/rock"]
+[node name="aura" type="ProgressBar" parent="menu/stats/inventory/ability/controls/topic/status/fast/characters/rock"]
 layout_mode = 1
 anchors_preset = 9
 anchor_bottom = 1.0
@@ -2152,7 +2161,7 @@ value = 0.6
 fill_mode = 3
 show_percentage = false
 
-[node name="health" type="ProgressBar" parent="menu/stats/inventory/ability/controls/topic/status/fast-access/characters/rock"]
+[node name="health" type="ProgressBar" parent="menu/stats/inventory/ability/controls/topic/status/fast/characters/rock"]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -2167,7 +2176,7 @@ step = 1.0
 value = 50.0
 show_percentage = false
 
-[node name="slot-1" type="Label" parent="menu/stats/inventory/ability/controls/topic/status/fast-access/characters/rock"]
+[node name="slot-1" type="Label" parent="menu/stats/inventory/ability/controls/topic/status/fast/characters/rock"]
 visible = false
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 1
@@ -2185,6 +2194,8 @@ theme_override_styles/normal = ExtResource("9_veudi")
 text = "✊"
 vertical_alignment = 1
 
+[node name="hide" parent="menu/stats/inventory/ability/controls/topic/status/fast/characters" instance=ExtResource("7_koglg")]
+
 [node name="right-space" type="Control" parent="menu/stats/inventory/ability/controls/topic"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -2200,7 +2211,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_fuh2f")
 shortcut = ExtResource("13_1chk7")
 text = "Alt"
 
-[node name="hide" parent="menu/stats/inventory/ability/controls/topic" instance=ExtResource("7_koglg")]
+[node name="hide" parent="menu/stats/inventory/ability/controls/topic/menu" instance=ExtResource("7_koglg")]
 
 [node name="topic" parent="menu/stats/inventory/ability" instance=ExtResource("14_joidv")]
 layout_mode = 2
