@@ -12,6 +12,9 @@ func toggle(prev: Control, next: Control) -> void:
 	prev.hide()
 	next.show()
 
+func hide_to_panel() -> void:
+	pass
+
 func _ready() -> void:
 	tabs.get_node("game").pressed.connect(func():
 		if opened == SECOND:

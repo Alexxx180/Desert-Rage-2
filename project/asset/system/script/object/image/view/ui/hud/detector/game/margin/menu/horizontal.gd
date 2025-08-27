@@ -1,5 +1,8 @@
 extends HSplitContainer
 
+signal hide_node()
+signal show_node()
+
 @export var reserve: int = 6
 
 @export var direction: float = 0.5
