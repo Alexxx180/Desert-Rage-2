@@ -7,5 +7,6 @@ func tick(mark: Tick) -> int:
 	action.pressed = Input.is_action_pressed(name)
 	action.toggled = Input.is_action_just_pressed(name)
 	if action.toggled or action.pressed:
+		mark.blackboard.get_value("ui").notify("Умение")
 		return OK
 	return FAILED
