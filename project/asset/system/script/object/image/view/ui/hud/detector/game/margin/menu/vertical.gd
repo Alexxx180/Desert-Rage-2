@@ -21,7 +21,7 @@ func get_proportion() -> float:
 	return get_window().size.y * direction
 
 func on_drag_end() -> void:
-	# print("CURRENT: ", split_offset + reserve, "WIND: ", get_proportion())
+	print("CURRENT: ", split_offset + reserve, "WIND: ", get_proportion())
 	var current: bool = operation.call(split_offset + reserve, get_proportion())
 	if current:
 		for node in ui_nodes: node.hide()
