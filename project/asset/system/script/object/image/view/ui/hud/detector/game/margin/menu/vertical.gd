@@ -20,11 +20,19 @@ func _ready() -> void:
 func get_proportion() -> float:
 	return get_window().size.y * direction
 
+func hide_nodes() -> void:
+	for node in ui_nodes:
+		if "hides" in node: node.hides()
+		else: node.hide()
+
+func show_nodes() -> void:
+	for node in ui_nodes:
+		if "shows" in node: node.shows()
+		else: node.show()
+
 func on_drag_end() -> void:
-	print("CURRENT: ", split_offset + reserve, "WIND: ", get_proportion())
+	# print("CURRENT: ", split_offset + reserve, "WIND: ", get_proportion())
 	var current: bool = operation.call(split_offset + reserve, get_proportion())
-	if current:
-		for node in ui_nodes: node.hide()
-	elif previous:
-		for node in ui_nodes: node.show()
+	if current: hide_nodes()
+	elif previous: show_nodes()
 	previous = current
