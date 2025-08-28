@@ -22,10 +22,14 @@ func set_slots(mark: Tick):
 	var hero: CharacterBody2D = mark.blackboard.get_value("tools").hero
 	var combo: Dictionary = mark.blackboard.get_value("combo")
 	var hint: HBoxContainer = markers.combo.heroes[hero.name]
+	var count: int = len(combo.query)
 	hint.show()
-	for i in range(0, len(combo.query)):
-		hint.slots.slots[i].text = Skills.unicode[combo.query[i]]
-		hint.slots.slots[i].show()
+	for i in range(0, count):
+		var j: int = count - i - 1
+		hint.slots.slots[j].text = Skills.unicode[combo.query[j]]
+		hint.slots.slots[j].show()
+	for i in range(count, len(hint.slots.slots)):
+		hint.slots.slots[i].hide()
 	hiding.start()
 	return self
 

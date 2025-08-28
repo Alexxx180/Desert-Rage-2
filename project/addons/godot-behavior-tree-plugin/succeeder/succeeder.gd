@@ -8,10 +8,10 @@ class_name BehaviorSucceeder
 func tick(mark: Tick) -> int:
 	var busy: bool = false
 	var count: int = get_child_count()
-	var i: int = -1
+	var i: int = 0
 	
 	while i < count and not busy:
-		i += 1
 		busy = get_child(i)._execute(mark) == ERR_BUSY
+		i += 1
 
 	return ERR_BUSY if busy else OK 
