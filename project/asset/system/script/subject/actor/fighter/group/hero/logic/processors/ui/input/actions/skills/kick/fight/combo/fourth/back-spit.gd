@@ -14,7 +14,7 @@ func fight_combo(combo: Node) -> void:
 func take_effect(mark: Tick) -> void:
 	var tools: Dictionary = mark.blackboard.get_value("tools")
 	fight_combo(tools.hero.view.animation.moves.combo)
-	mark.blackboard.get_value("ui").notify("Обраточка")
+	mark.blackboard.get_value("ui").notify("Обраточка").set_slots(mark)
 
 func tick(mark: Tick) -> int:
 	return basis.tick(mark, self)
