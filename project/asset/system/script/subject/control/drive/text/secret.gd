@@ -25,14 +25,17 @@ const OPENED: Array[String] = [
 	"Варит котелок ведь 🧭", "Тонко 🔬", "Жду свершений 🔭", "Растем 🌱", "Секрет 🕵️‍♂️"
 ]
 
-func _on_open(_body: CharacterBody2D) -> void:
+func _on_open(body: PhysicsBody2D) -> void:
+	if body.is_in_group("enemy"): return
+
 	if secret.text == "":
 		secret.text = OPENED.pick_random()
 		_change_state(view, Color.TRANSPARENT)
 	_change_state(secret, Color.WHITE)
 
-func _on_close(_body: CharacterBody2D) -> void:
-	_change_state(secret, Color.BLACK)
+func _on_close(body: PhysicsBody2D) -> void:
+	if not body.is_in_group("enemy"):
+		_change_state(secret, Color.BLACK)
 
 func _change_state(subject: CanvasItem, tint: Color) -> void:
 	create_tween().tween_property(subject, "modulate", tint, TIME)

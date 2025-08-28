@@ -2,7 +2,6 @@ extends Node2D
 
 signal assign(enemy: CharacterBody2D)
 
-@onready var hitbox: StaticBody2D = $hitbox
 @onready var damagebox: Area2D = $damagebox
 @onready var aim: Button = $aim
 @onready var enemy: CharacterBody2D = get_node("../../..")

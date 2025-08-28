@@ -1,14 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://18yjilbfmwhk"]
+[gd_scene load_steps=8 format=3 uid="uid://18yjilbfmwhk"]
 
 [ext_resource type="Script" uid="uid://c0ovke4shqn7o" path="res://asset/system/script/subject/actor/fighter/enemy/logic/detector/fight.gd" id="1_buf2d"]
-[ext_resource type="Script" uid="uid://dom6yvvb5krlc" path="res://asset/system/script/subject/actor/fighter/hitbox/hitbox.gd" id="2_a5sts"]
 [ext_resource type="Script" uid="uid://51lvqa3nbyew" path="res://asset/system/script/subject/actor/fighter/enemy/damagebox.gd" id="3_jtfqg"]
 [ext_resource type="FontFile" uid="uid://b37js8y80ak1k" path="res://asset/resource/font/NotoColorEmoji-Regular.ttf" id="4_a5sts"]
 [ext_resource type="FontFile" uid="uid://o0rgn7d13mr3" path="res://asset/resource/font/OpenSans-VariableFont_wdth,wght.ttf" id="4_jtfqg"]
 [ext_resource type="FontFile" uid="uid://dmctrlrnfxaie" path="res://asset/resource/font/Roboto-Regular-Emoji.ttf" id="5_yj7s8"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_hied7"]
-radius = 40.0125
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8egfw"]
 size = Vector2(52, 21)
@@ -18,15 +14,6 @@ bg_color = Color(0, 0, 0, 0.392157)
 
 [node name="fight" type="Node2D"]
 script = ExtResource("1_buf2d")
-
-[node name="hitbox" type="StaticBody2D" parent="."]
-collision_layer = 8
-collision_mask = 0
-script = ExtResource("2_a5sts")
-
-[node name="geometry" type="CollisionShape2D" parent="hitbox"]
-position = Vector2(0, -25)
-shape = SubResource("CircleShape2D_hied7")
 
 [node name="damagebox" type="Area2D" parent="."]
 collision_layer = 0

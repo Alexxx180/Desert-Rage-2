@@ -15,6 +15,6 @@ extends Node2D
 @onready var stuck: Node2D = $stuck
 
 func set_direction(direction: Vector2) -> void:
-	close.set_direction(direction)
 	if direction != Vector2.ZERO:
+		close.set_direction(direction)
 		after_tile.set_direction(direction)

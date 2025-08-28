@@ -2,7 +2,7 @@ extends VBoxContainer
 
 @onready var collapsed: Control = $collapsed
 @onready var selected: Control = $selected
-@onready var preview: Control = $selected/margin
+@onready var preview: Control = $selected/icon/margin
 
 func toggle(selection: bool) -> void:
 	collapsed.visible = !selection

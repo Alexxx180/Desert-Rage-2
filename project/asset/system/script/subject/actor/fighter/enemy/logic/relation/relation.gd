@@ -27,6 +27,7 @@ func controls(entity: CharacterBody2D) -> void:
 	logic.processor.health.aura.entity = entity
 	logic.processor.health.points.setup(logic.stats.health)
 	logic.processor.damagebox.setup(logic.stats.power)
+	logic.processor.target.enemy = entity
 	logic.detector.box.body_entered.connect(logic.processor.health.thrown)
 	_connect_damagebox(logic.detector.fight.damagebox, logic.processor.damagebox)
 	_connect_hitbox(logic.detector.fight.hitbox, logic.processor.health)
