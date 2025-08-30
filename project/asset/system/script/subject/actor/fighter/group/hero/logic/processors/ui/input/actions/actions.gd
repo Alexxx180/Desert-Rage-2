@@ -12,9 +12,7 @@ static var _mask: Dictionary:
 static var unicode: Dictionary:
 	get: return { PUNCH: "✊", KICK: "🦶", WHIP: "🎣", FIRE: "🔥", PUDDLE: "💧", SPARK: "🦶" }
 
-static func view_action(slot: int) -> void:
-	print(_mask[slot])
-
+static func view_action(slot: int) -> void: print(_mask[slot])
 static func view_actions(skills: Array) -> void:
 	var text: String = ""
 	var mask: Dictionary = _mask

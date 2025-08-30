@@ -18,7 +18,8 @@ func exit_range(enemy: PhysicsBody2D) -> void:
 		exit.emit(enemy)
 
 func hit_initial(enemy: PhysicsBody2D, damage: int) -> void:
-	enemy.bash(damage)
+	print("ENEMY: ", enemy.name)
+	enemy.hit(damage)
 
 func hit(damage: int) -> void:
 	for enemy in area.values(): hit_initial(enemy, damage)

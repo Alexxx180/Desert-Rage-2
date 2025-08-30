@@ -9,12 +9,13 @@ func _connect_hitbox(hitbox: StaticBody2D, health: Node) -> void:
 	hitbox.burn.connect(health.burns)
 
 func _connect_health(processor: Node, animation: AnimationTree) -> void:
-	processor.health.points.freeze.connect(processor.target.temporary_freeze)
+	processor.health.interrogation.connect(animation.interrogate)
+	processor.health.points.freeze.connect(processor.path.track.temporary_freeze)
 	processor.health.points.dead.connect(func():
-		processor.target.hit.stop(); animation.dead_animation())
+		processor.path.track.hit.stop(); animation.dead_animation())
 	
 	animation.dead.health = processor.health
-	animation.dead.path = processor.target
+	animation.dead.path = processor.path.track
 
 func _connect_target_path(path: Node2D, target: Node) -> void:
 	path.obstacle.body_entered.connect(target.enter_obstacle)
@@ -26,10 +27,11 @@ func controls(entity: CharacterBody2D) -> void:
 	var logic: Node2D = entity.logic
 	logic.processor.health.aura.entity = entity
 	logic.processor.health.points.setup(logic.stats.health)
+
 	logic.processor.damagebox.setup(logic.stats.power)
-	logic.processor.target.enemy = entity
+
 	logic.detector.box.body_entered.connect(logic.processor.health.thrown)
 	_connect_damagebox(logic.detector.fight.damagebox, logic.processor.damagebox)
-	_connect_hitbox(logic.detector.fight.hitbox, logic.processor.health)
-	_connect_target_path(logic.detector.path, logic.processor.target)
+	# _connect_hitbox(logic.detector.fight.hitbox, logic.processor.health)
+	_connect_target_path(logic.detector.path, logic.processor.path.track)
 	_connect_health(logic.processor, entity.view.animation)

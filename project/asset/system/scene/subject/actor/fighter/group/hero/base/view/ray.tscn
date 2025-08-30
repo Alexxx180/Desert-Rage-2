@@ -1,4 +1,4 @@
-[gd_scene load_steps=1090 format=3 uid="uid://csra3penxclqe"]
+[gd_scene load_steps=1098 format=3 uid="uid://csra3penxclqe"]
 
 [ext_resource type="Script" uid="uid://djhgknvw72ya6" path="res://asset/system/script/subject/actor/fighter/group/hero/view/view.gd" id="1_02nce"]
 [ext_resource type="PackedScene" uid="uid://c136xgt1v5vbl" path="res://asset/system/scene/subject/actor/fighter/group/hero/base/view/base/shadow.tscn" id="2_7whrg"]
@@ -72,7 +72,7 @@
 [ext_resource type="Texture2D" uid="uid://wwomxcxj5qlp" path="res://asset/resource/media/images/actors/player/ray/fight/stomp/backward.png" id="32_klxix"]
 [ext_resource type="Texture2D" uid="uid://ckp4j2bjjk3o3" path="res://asset/resource/media/images/actors/player/ray/chains/whip/forward-left.png" id="32_vv3nh"]
 [ext_resource type="Texture2D" uid="uid://dsu5vy1f1ussv" path="res://asset/resource/media/images/actors/player/ray/fight/punch/forward-right.png" id="33_afalw"]
-[ext_resource type="Script" uid="uid://bgbg16p7sy43u" path="res://asset/system/script/subject/actor/fighter/group/hero/view/animation/actions/combo/processor.gd" id="33_mef5b"]
+[ext_resource type="Script" uid="uid://bgbg16p7sy43u" path="res://asset/system/script/subject/actor/fighter/group/hero/view/animation/actions/effect.gd" id="33_mef5b"]
 [ext_resource type="Texture2D" uid="uid://cwery47j0rhgn" path="res://asset/resource/media/images/actors/player/ray/fight/fire/forward.png" id="34_jc0s5"]
 [ext_resource type="Script" uid="uid://b4qjyy7wesr0b" path="res://asset/system/script/subject/actor/fighter/group/hero/view/animation/actions/syncer.gd" id="34_o5svw"]
 [ext_resource type="Texture2D" uid="uid://5lo5r8x2pvxy" path="res://asset/resource/media/images/actors/player/ray/skills/push/forward-right.png" id="34_vv3nh"]
@@ -6622,7 +6622,28 @@ blend_point_7/node = SubResource("AnimationNodeAnimation_8ydit")
 blend_point_7/pos = Vector2(0.5, -0.5)
 blend_mode = 1
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_p126f"]
+animation = &"ray/whip_left"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_26elm"]
+animation = &"ray/whip_right"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_bqvtt"]
+animation = &"ray/whip_backward"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_yhe60"]
+animation = &"ray/whip_forward"
+
 [sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_6ym1g"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_p126f")
+blend_point_0/pos = Vector2(-1, 0)
+blend_point_1/node = SubResource("AnimationNodeAnimation_26elm")
+blend_point_1/pos = Vector2(1, 0)
+blend_point_2/node = SubResource("AnimationNodeAnimation_bqvtt")
+blend_point_2/pos = Vector2(0, 1)
+blend_point_3/node = SubResource("AnimationNodeAnimation_yhe60")
+blend_point_3/pos = Vector2(0, -1)
+blend_mode = 1
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_o5svw"]
 animation = &"ray/whip_dash_left"
@@ -6648,6 +6669,7 @@ blend_point_3/pos = Vector2(0, -1)
 blend_mode = 1
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_38alu"]
+graph_offset = Vector2(-499.689, -608.932)
 nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_ehyuf")
 nodes/TimeScale/position = Vector2(-680, -600)
 nodes/active/node = SubResource("AnimationNodeTransition_wec0r")
@@ -10403,6 +10425,49 @@ tracks/2/keys = {
 }]
 }
 
+[sub_resource type="Animation" id="Animation_yhe60"]
+resource_name = "whip_backward"
+length = 0.325
+step = 0.025
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("profile:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"backward_whip"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("profile:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 2, 1, 0]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("animation/moves")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.325),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"set_fight_end"
+}]
+}
+
 [sub_resource type="Animation" id="Animation_o5svw"]
 resource_name = "ray_whip_backward"
 length = 0.65
@@ -10850,6 +10915,135 @@ tracks/5/keys = {
 "values": [false, true, false]
 }
 
+[sub_resource type="Animation" id="Animation_p126f"]
+resource_name = "whip_forward"
+length = 0.325
+step = 0.025
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("profile:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"forward_whip"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("profile:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 2, 1, 0]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("animation/moves")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.325),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"set_fight_end"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_26elm"]
+resource_name = "whip_left"
+length = 0.325
+step = 0.025
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("profile:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"left_whip"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("profile:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 2, 1, 0]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("animation/moves")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.325),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"set_fight_end"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_bqvtt"]
+resource_name = "whip_right"
+length = 0.325
+step = 0.025
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("profile:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"right_whip"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("profile:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 2, 1, 0]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("animation/moves")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.325),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"set_fight_end"
+}]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_sal4s"]
 _data = {
 &"bash_backward": SubResource("Animation_8uo7m"),
@@ -10934,10 +11128,14 @@ _data = {
 &"stomp_forward_right": SubResource("Animation_8u47b"),
 &"stomp_left": SubResource("Animation_uvi1r"),
 &"stomp_right": SubResource("Animation_sncgc"),
+&"whip_backward": SubResource("Animation_yhe60"),
 &"whip_dash_backward": SubResource("Animation_o5svw"),
 &"whip_dash_forward": SubResource("Animation_8gmvd"),
 &"whip_dash_left": SubResource("Animation_udpqt"),
-&"whip_dash_right": SubResource("Animation_evaev")
+&"whip_dash_right": SubResource("Animation_evaev"),
+&"whip_forward": SubResource("Animation_p126f"),
+&"whip_left": SubResource("Animation_26elm"),
+&"whip_right": SubResource("Animation_bqvtt")
 }
 
 [node name="view" type="Node2D"]
@@ -10952,8 +11150,7 @@ metadata/_edit_horizontal_guides_ = [-324.0]
 material = SubResource("ShaderMaterial_n7tfv")
 position = Vector2(0, 1)
 sprite_frames = SubResource("SpriteFrames_ajgxq")
-animation = &"backward_punch"
-frame = 2
+animation = &"left"
 offset = Vector2(0, -51.5)
 
 [node name="whip" type="Sprite2D" parent="."]

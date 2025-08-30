@@ -1,8 +1,9 @@
-[gd_scene load_steps=25 format=3 uid="uid://betuc6opsy7to"]
+[gd_scene load_steps=26 format=3 uid="uid://betuc6opsy7to"]
 
 [ext_resource type="SpriteFrames" uid="uid://bgbew7tx6q3gs" path="res://asset/resource/engine/internal/shape/image/sprite/frames/eye-seeker.tres" id="1_7mawb"]
 [ext_resource type="Shader" uid="uid://dbon4qjo2ew5s" path="res://asset/resource/engine/internal/shape/image/sprite/shader/outline.gdshader" id="1_yhlpl"]
 [ext_resource type="Script" uid="uid://gyrinvb3u4c7" path="res://asset/system/script/subject/actor/fighter/enemy/view/view.gd" id="1_yj335"]
+[ext_resource type="PackedScene" uid="uid://cb1yrr2g1a1bf" path="res://asset/system/scene/subject/control/drive/sand.tscn" id="4_hj2r2"]
 [ext_resource type="Script" uid="uid://c6yuymm1u7mmn" path="res://asset/system/script/subject/actor/fighter/enemy/view/animation.gd" id="4_qjxeh"]
 [ext_resource type="Script" uid="uid://cmks4b1pxwoak" path="res://asset/system/script/subject/actor/fighter/hitbox/health/dead/transfer.gd" id="5_ldo7a"]
 
@@ -55,7 +56,6 @@ blend_point_3/pos = Vector2(0, -1)
 blend_mode = 1
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_hi651"]
-graph_offset = Vector2(-453.162, -63.3764)
 nodes/dead/node = SubResource("AnimationNodeAnimation_ldo7a")
 nodes/dead/position = Vector2(-220, 280)
 nodes/enemy/node = SubResource("AnimationNodeTransition_v1tmw")
@@ -305,18 +305,26 @@ _data = {
 script = ExtResource("1_yj335")
 outline = ExtResource("1_yhlpl")
 
+[node name="timer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
 [node name="profile" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_yj335")
 scale = Vector2(0.5, 0.5)
 sprite_frames = ExtResource("1_7mawb")
-animation = &"forward"
+animation = &"left"
+frame = 6
 offset = Vector2(0, -50)
+
+[node name="particle" parent="." instance=ExtResource("4_hj2r2")]
+position = Vector2(0, -35)
 
 [node name="animation" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeBlendTree_hi651")
 anim_player = NodePath("player")
 parameters/enemy/current_state = "active"
-parameters/enemy/transition_request = 0.4
+parameters/enemy/transition_request = ""
 parameters/enemy/current_index = 0.113851
 parameters/rolling/blend_position = 0.006902
 script = ExtResource("4_qjxeh")
@@ -330,3 +338,10 @@ libraries = {
 
 [node name="dead" type="Node" parent="animation"]
 script = ExtResource("5_ldo7a")
+
+[node name="timer" type="Timer" parent="animation"]
+wait_time = 4.0
+one_shot = true
+
+[connection signal="timeout" from="timer" to="." method="normalize_skew"]
+[connection signal="timeout" from="animation/timer" to="animation" method="interrogation_end"]

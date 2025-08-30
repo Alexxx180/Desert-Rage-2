@@ -1,7 +1,7 @@
 extends StaticBody2D
 
-signal hit(damage: int)
-signal burn(damage: int)
+signal bash(damage: int)
+signal fire(damage: int)
 
-func bash(damage: int) -> void: hit.emit(damage)
-func fire(damage: int) -> void: burn.emit(damage)
+func hit(damage: int) -> void: bash.emit(damage)
+func burn(damage: int) -> void: fire.emit(damage)

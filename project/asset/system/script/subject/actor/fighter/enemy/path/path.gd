@@ -1,8 +1,9 @@
 extends Node
 
-var enemy: CharacterBody2D
+@onready var track: Node = $track
+@onready var enemy: CharacterBody2D = get_node("../../..")
+
 var target: Rect2
-var transport_index: int = 0
 
 func teleport(next: Vector2) -> void:
 	enemy.velocity = Vector2.ZERO
@@ -19,11 +20,11 @@ func forget_velocity() -> void:
 	enemy.view.animation.move(Vector2.ZERO)
 
 func travel(motion: Vector2) -> void:
-	motion *= enemy.logic.processor.target.speed
+	motion *= track.speed
 	reset_velocity(motion)
 
 func _physics_process(_delta: float) -> void:
-	var motion: Vector2 = enemy.logic.processor.target.motion 
+	var motion: Vector2 = track.motion
 	enemy.view.animation.move(motion)
 	reset_velocity(motion)
 	enemy.move_and_slide()

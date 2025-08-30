@@ -1,5 +1,7 @@
 extends Node
 
+signal interrogation()
+
 @onready var points: Node = $points
 @onready var aura: Node = $aura
 @onready var timer: Timer = $timer
@@ -10,7 +12,15 @@ func thrown(box: CharacterBody2D) -> void:
 		hit(10)
 
 func hit(amount: int = 1) -> void:
-	if points.alive and not _apply_damage(amount): points.hit()
+	print("points alive: ", points.alive)
+	if points.alive:
+		if not _apply_damage(amount): points.hit()
+	else:
+		interrogate()
+
+func interrogate() -> void:
+	timer.start()
+	interrogation.emit()
 
 func burns(amount: int = 1) -> void:
 	if points.alive: _apply_damage(amount)

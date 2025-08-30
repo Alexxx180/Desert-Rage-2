@@ -16,7 +16,7 @@ var segment: float:
 
 func setup(next: int) -> void:
 	maximum = next
-	points = maximum - 50 # TODO TEST JARS
+	points = next # maximum - 50 # TODO TEST JARS
 #	update_bar.emit(points)
 
 func revive() -> void: points = maximum

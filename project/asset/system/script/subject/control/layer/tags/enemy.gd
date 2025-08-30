@@ -17,14 +17,14 @@ func setup(tags: TileMapLayer, execute: TileMapLayer, casual_mode: bool) -> void
 			_: enemy = foe[tags.foe.pick_random()].instantiate()
 		execute.add_child(enemy)
 		enemy.teleport(Tile.get_pos(execute, tag))
-		enemy.transport_index = i
+		enemy.spawn_transport_index = i
 		enemy.view.animation.dead.transport.connect(func(): transport_foe(execute, enemy))
 		i += 1
 		
 
 func transport_foe(execute: TileMapLayer, enemy: CharacterBody2D) -> void:
-	enemy.transport_index = (enemy.transport_index + 1) % places.size()
-	enemy.teleport(Tile.get_pos(execute, places[enemy.transport_index]))
+	enemy.spawn_transport_index = (enemy.spawn_transport_index + 1) % places.size()
+	enemy.teleport(Tile.get_pos(execute, places[enemy.spawn_transport_index]))
 
 var foe: Dictionary = {
 	"eye-seeker": preload("res://asset/system/scene/subject/actor/fighter/enemy/asset/eye-seeker/eye-seeker.tscn")

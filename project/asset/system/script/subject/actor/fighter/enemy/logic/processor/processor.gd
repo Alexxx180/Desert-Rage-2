@@ -1,5 +1,5 @@
 extends Node
 
 @onready var health: Node = $health
-@onready var target: Node = $target
+@onready var path: Node = $path
 @onready var damagebox: Node = $damagebox
