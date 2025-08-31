@@ -1,8 +1,15 @@
-[gd_scene load_steps=8 format=3 uid="uid://bky5mu10x2da3"]
+[gd_scene load_steps=39 format=3 uid="uid://bky5mu10x2da3"]
 
 [ext_resource type="Theme" uid="uid://dfg873urxgnev" path="res://asset/resource/engine/internal/theme/patterns/template/text/title/title.tres" id="1_4olfv"]
 [ext_resource type="Script" uid="uid://b0w4sm6u15i34" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/menu/status/health.gd" id="1_s8rf2"]
 [ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://asset/resource/engine/internal/theme/patterns/template/menu/settings/topic/footer.tres" id="2_s8rf2"]
+[ext_resource type="FontFile" uid="uid://tledodlx6okb" path="res://asset/resource/font/LTSuperiorMono-Semibold.otf" id="3_ik8mr"]
+[ext_resource type="FontFile" uid="uid://b2wbdbnkxcqv1" path="res://asset/resource/font/NotoEmoji-VariableFont_wght.ttf" id="4_morf8"]
+[ext_resource type="Script" uid="uid://dahdrwveei3g3" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/menu/inventory/markers/combos/slots.gd" id="5_ivhdv"]
+[ext_resource type="Script" uid="uid://bu17w7o55vqhq" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/menu/inventory/markers/combos/slot.gd" id="6_h3sd6"]
+[ext_resource type="FontFile" uid="uid://b37js8y80ak1k" path="res://asset/resource/font/NotoColorEmoji-Regular.ttf" id="7_imbbu"]
+[ext_resource type="StyleBox" uid="uid://c5qf02s45xwn" path="res://asset/resource/engine/internal/theme/style/noto-color.tres" id="8_8phgr"]
+[ext_resource type="FontFile" uid="uid://cwksbiskkcf5d" path="res://asset/resource/font/NotoSansMath-Regular.ttf" id="9_6sjbn"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jdj2p"]
 bg_color = Color(0.877616, 0.877616, 0.877616, 0.196078)
@@ -11,8 +18,8 @@ border_width_top = 4
 border_width_right = 4
 border_width_bottom = 4
 border_color = Color(1, 1, 1, 0.196078)
-corner_radius_top_left = 18
-corner_radius_bottom_left = 18
+corner_radius_top_left = 12
+corner_radius_bottom_left = 12
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ippj8"]
 bg_color = Color(0.329412, 0.690196, 0.435294, 0.392157)
@@ -20,8 +27,25 @@ border_width_left = 4
 border_width_top = 4
 border_width_bottom = 4
 border_color = Color(1, 1, 1, 0)
-corner_radius_top_left = 18
-corner_radius_bottom_left = 18
+corner_radius_top_left = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s8rf2"]
+content_margin_left = 3.0
+content_margin_top = 2.0
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ik8mr"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1y8ov"]
 bg_color = Color(0.100247, 0.100417, 0.0962017, 1)
@@ -35,20 +59,118 @@ border_width_top = 4
 border_width_right = 4
 border_width_bottom = 4
 border_color = Color(1, 1, 1, 0)
-corner_radius_top_left = 18
-corner_radius_bottom_left = 18
+corner_radius_top_left = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mfso5"]
+content_margin_left = 2.0
+content_margin_bottom = 4.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_morf8"]
+bg_color = Color(0.0295066, 0.0295066, 0.0295065, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_olk23"]
+content_margin_left = 4.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j6nt1"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_31u67"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gbntm"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ivhdv"]
+content_margin_left = 2.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h3sd6"]
+bg_color = Color(0.0295066, 0.0295066, 0.0295065, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_imbbu"]
+content_margin_left = 2.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8phgr"]
+content_margin_left = 3.0
+content_margin_top = 5.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6sjbn"]
+content_margin_left = 3.0
+content_margin_bottom = 4.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ea51t"]
+bg_color = Color(0.0295066, 0.0295066, 0.0295065, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0k1ae"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j2u6p"]
+content_margin_left = 5.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0lf0h"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7t28e"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e4tjx"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kuune"]
+content_margin_left = 5.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ivhdv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0lf0h"]
+bg_color = Color(0.177773, 0.50171, 1.92523e-07, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_h3sd6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m7tjy"]
+bg_color = Color(0.358457, 0.418219, 1, 1)
 
 [node name="status" type="VBoxContainer"]
 size_flags_horizontal = 3
+theme_override_constants/separation = 3
 
-[node name="health" type="HBoxContainer" parent="."]
+[node name="HFlowContainer" type="HFlowContainer" parent="."]
 layout_mode = 2
+
+[node name="health" type="HBoxContainer" parent="HFlowContainer"]
+custom_minimum_size = Vector2(90, 25)
+layout_mode = 2
+size_flags_horizontal = 3
 theme_override_constants/separation = -4
 script = ExtResource("1_s8rf2")
 
-[node name="bar" type="ProgressBar" parent="health"]
-custom_minimum_size = Vector2(0, 39)
+[node name="space" type="Control" parent="HFlowContainer/health"]
 layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="bar" type="ProgressBar" parent="HFlowContainer/health/space"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 3
 theme_override_styles/background = SubResource("StyleBoxFlat_jdj2p")
 theme_override_styles/fill = SubResource("StyleBoxFlat_ippj8")
@@ -56,237 +178,1260 @@ step = 1.0
 value = 100.0
 show_percentage = false
 
-[node name="merge" type="HBoxContainer" parent="health"]
+[node name="margin" type="MarginContainer" parent="HFlowContainer/health/space"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -20.0
+offset_right = 40.0
+offset_bottom = 20.0
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+
+[node name="label" type="HBoxContainer" parent="HFlowContainer/health/space/margin"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = -2
+
+[node name="caption" type="Label" parent="HFlowContainer/health/space/margin/label"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("1_4olfv")
+theme_override_colors/font_color = Color(0.103744, 0.103744, 0.103744, 1)
+theme_override_font_sizes/font_size = 11
+theme_override_styles/normal = SubResource("StyleBoxFlat_s8rf2")
+text = "ЖЗ"
+
+[node name="max" type="Label" parent="HFlowContainer/health/space/margin/label"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("1_4olfv")
+theme_override_colors/font_color = Color(0.103744, 0.103744, 0.103744, 1)
+theme_override_fonts/font = ExtResource("3_ik8mr")
+theme_override_font_sizes/font_size = 11
+theme_override_styles/normal = SubResource("StyleBoxFlat_ik8mr")
+text = "9999"
+
+[node name="merge" type="HBoxContainer" parent="HFlowContainer/health"]
 layout_mode = 2
 theme_override_constants/separation = -45
 
-[node name="space" type="ColorRect" parent="health/merge"]
+[node name="space" type="ColorRect" parent="HFlowContainer/health/merge"]
 custom_minimum_size = Vector2(45, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 color = Color(0.243137, 0.243137, 0.243137, 1)
 
-[node name="margin" type="MarginContainer" parent="health/merge"]
+[node name="flash" type="MarginContainer" parent="HFlowContainer/health/merge"]
 layout_mode = 2
 theme_override_constants/margin_left = 0
 theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 4
 
-[node name="cork" type="Panel" parent="health/merge/margin"]
-custom_minimum_size = Vector2(90, 29)
+[node name="cork" type="PanelContainer" parent="HFlowContainer/health/merge/flash"]
+custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
+size_flags_horizontal = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_1y8ov")
 
-[node name="margin" type="MarginContainer" parent="health/merge/margin/cork"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="margin" type="MarginContainer" parent="HFlowContainer/health/merge/flash/cork"]
+layout_mode = 2
 theme_override_constants/margin_left = 6
 theme_override_constants/margin_top = 1
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 0
 
-[node name="current" type="Label" parent="health/merge/margin/cork/margin"]
+[node name="current" type="Label" parent="HFlowContainer/health/merge/flash/cork/margin"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 theme = ExtResource("1_4olfv")
-theme_override_font_sizes/font_size = 20
+theme_override_fonts/font = ExtResource("3_ik8mr")
+theme_override_font_sizes/font_size = 16
 text = "100"
 
-[node name="description" type="HBoxContainer" parent="health/merge/margin/cork/margin"]
+[node name="influence" type="HBoxContainer" parent="HFlowContainer"]
+custom_minimum_size = Vector2(90, 25)
 layout_mode = 2
-theme_override_constants/separation = 10
-
-[node name="max" type="Label" parent="health/merge/margin/cork/margin/description"]
-layout_mode = 2
-size_flags_horizontal = 10
-size_flags_vertical = 8
-theme = ExtResource("1_4olfv")
-theme_override_colors/font_color = Color(0.481789, 0.481789, 0.481789, 1)
-theme_override_font_sizes/font_size = 11
-text = "100"
-
-[node name="caption" type="Label" parent="health/merge/margin/cork/margin/description"]
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 8
-theme = ExtResource("1_4olfv")
-theme_override_colors/font_color = Color(0.482353, 0.482353, 0.482353, 1)
-theme_override_font_sizes/font_size = 11
-text = "ЖЗ"
-
-[node name="influence" type="HBoxContainer" parent="."]
-layout_mode = 2
+size_flags_horizontal = 3
 theme_override_constants/separation = -4
 script = ExtResource("1_s8rf2")
 
-[node name="bar" type="ProgressBar" parent="influence"]
-custom_minimum_size = Vector2(0, 39)
+[node name="space" type="Control" parent="HFlowContainer/influence"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_styles/background = SubResource("StyleBoxFlat_jdj2p")
-theme_override_styles/fill = SubResource("StyleBoxFlat_iexbr")
-max_value = 20.0
-step = 1.0
-value = 20.0
-show_percentage = false
 
-[node name="merge" type="HBoxContainer" parent="influence"]
-layout_mode = 2
-theme_override_constants/separation = -45
-
-[node name="space" type="ColorRect" parent="influence/merge"]
-custom_minimum_size = Vector2(45, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-color = Color(0.243137, 0.243137, 0.243137, 1)
-
-[node name="margin" type="MarginContainer" parent="influence/merge"]
-layout_mode = 2
-theme_override_constants/margin_left = 0
-theme_override_constants/margin_top = 4
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 4
-
-[node name="cork" type="Panel" parent="influence/merge/margin"]
-custom_minimum_size = Vector2(90, 29)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_1y8ov")
-
-[node name="margin" type="MarginContainer" parent="influence/merge/margin/cork"]
+[node name="bar" type="ProgressBar" parent="HFlowContainer/influence/space"]
+custom_minimum_size = Vector2(0, 25)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 3
+theme_override_styles/background = SubResource("StyleBoxFlat_jdj2p")
+theme_override_styles/fill = SubResource("StyleBoxFlat_iexbr")
+step = 1.0
+value = 100.0
+show_percentage = false
+
+[node name="margin" type="MarginContainer" parent="HFlowContainer/influence/space"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -20.0
+offset_right = 40.0
+offset_bottom = 20.0
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+
+[node name="label" type="HBoxContainer" parent="HFlowContainer/influence/space/margin"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = -2
+
+[node name="caption" type="Label" parent="HFlowContainer/influence/space/margin/label"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("1_4olfv")
+theme_override_colors/font_color = Color(0.103744, 0.103744, 0.103744, 1)
+theme_override_font_sizes/font_size = 11
+theme_override_styles/normal = SubResource("StyleBoxFlat_s8rf2")
+text = "ДА"
+
+[node name="max" type="Label" parent="HFlowContainer/influence/space/margin/label"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("1_4olfv")
+theme_override_colors/font_color = Color(0.103744, 0.103744, 0.103744, 1)
+theme_override_fonts/font = ExtResource("3_ik8mr")
+theme_override_font_sizes/font_size = 11
+theme_override_styles/normal = SubResource("StyleBoxFlat_ik8mr")
+text = "9999"
+
+[node name="merge" type="HBoxContainer" parent="HFlowContainer/influence"]
+layout_mode = 2
+theme_override_constants/separation = -45
+
+[node name="space" type="ColorRect" parent="HFlowContainer/influence/merge"]
+custom_minimum_size = Vector2(45, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+color = Color(0.243137, 0.243137, 0.243137, 1)
+
+[node name="flash" type="MarginContainer" parent="HFlowContainer/influence/merge"]
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 4
+
+[node name="cork" type="PanelContainer" parent="HFlowContainer/influence/merge/flash"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_1y8ov")
+
+[node name="margin" type="MarginContainer" parent="HFlowContainer/influence/merge/flash/cork"]
+layout_mode = 2
 theme_override_constants/margin_left = 6
 theme_override_constants/margin_top = 1
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 0
 
-[node name="current" type="Label" parent="influence/merge/margin/cork/margin"]
+[node name="current" type="Label" parent="HFlowContainer/influence/merge/flash/cork/margin"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 theme = ExtResource("1_4olfv")
-theme_override_font_sizes/font_size = 20
+theme_override_fonts/font = ExtResource("3_ik8mr")
+theme_override_font_sizes/font_size = 16
 text = "20"
-
-[node name="description" type="HBoxContainer" parent="influence/merge/margin/cork/margin"]
-layout_mode = 2
-theme_override_constants/separation = 10
-
-[node name="max" type="Label" parent="influence/merge/margin/cork/margin/description"]
-layout_mode = 2
-size_flags_horizontal = 10
-size_flags_vertical = 8
-theme = ExtResource("1_4olfv")
-theme_override_colors/font_color = Color(0.481789, 0.481789, 0.481789, 1)
-theme_override_font_sizes/font_size = 11
-text = "20"
-
-[node name="caption" type="Label" parent="influence/merge/margin/cork/margin/description"]
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 8
-theme = ExtResource("1_4olfv")
-theme_override_colors/font_color = Color(0.482353, 0.482353, 0.482353, 1)
-theme_override_font_sizes/font_size = 11
-text = "ДА"
 
 [node name="ailments" type="VBoxContainer" parent="."]
 layout_mode = 2
+theme_override_constants/separation = 5
 
-[node name="effects" type="HFlowContainer" parent="ailments"]
+[node name="ray" type="HFlowContainer" parent="ailments"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ailments/ray"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="caption" type="Label" parent="ailments/ray/HBoxContainer"]
+layout_mode = 2
+text = "Рей"
+
+[node name="combo" type="HBoxContainer" parent="ailments/ray/HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_constants/separation = -3
+script = ExtResource("5_ivhdv")
+
+[node name="slot_1" type="HBoxContainer" parent="ailments/ray/HBoxContainer/combo"]
+layout_mode = 2
+theme_override_constants/separation = -3
+script = ExtResource("6_h3sd6")
+
+[node name="slot" type="Label" parent="ailments/ray/HBoxContainer/combo/slot_1"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("7_imbbu")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = ExtResource("8_8phgr")
+text = "🦶"
+vertical_alignment = 1
+
+[node name="slot_2" type="HBoxContainer" parent="ailments/ray/HBoxContainer/combo"]
+layout_mode = 2
+theme_override_constants/separation = -3
+script = ExtResource("6_h3sd6")
+
+[node name="dot" type="Label" parent="ailments/ray/HBoxContainer/combo/slot_2"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("9_6sjbn")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_mfso5")
+text = "⋅"
+vertical_alignment = 1
+
+[node name="slot" type="Label" parent="ailments/ray/HBoxContainer/combo/slot_2"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("7_imbbu")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = ExtResource("8_8phgr")
+text = "✊"
+vertical_alignment = 1
+
+[node name="slot_3" type="HBoxContainer" parent="ailments/ray/HBoxContainer/combo"]
+layout_mode = 2
+theme_override_constants/separation = -3
+script = ExtResource("6_h3sd6")
+
+[node name="dot" type="Label" parent="ailments/ray/HBoxContainer/combo/slot_3"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("9_6sjbn")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_mfso5")
+text = "⋅"
+vertical_alignment = 1
+
+[node name="slot" type="Label" parent="ailments/ray/HBoxContainer/combo/slot_3"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("7_imbbu")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = ExtResource("8_8phgr")
+text = "✊"
+vertical_alignment = 1
+
+[node name="slot_4" type="HBoxContainer" parent="ailments/ray/HBoxContainer/combo"]
 visible = false
 layout_mode = 2
+theme_override_constants/separation = -3
+script = ExtResource("6_h3sd6")
 
-[node name="Panel" type="Panel" parent="ailments/effects"]
-custom_minimum_size = Vector2(40, 40)
+[node name="dot" type="Label" parent="ailments/ray/HBoxContainer/combo/slot_4"]
+custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("9_6sjbn")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_mfso5")
+text = "⋅"
+vertical_alignment = 1
 
-[node name="Panel2" type="Panel" parent="ailments/effects"]
-custom_minimum_size = Vector2(40, 40)
+[node name="slot" type="Label" parent="ailments/ray/HBoxContainer/combo/slot_4"]
+custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
+size_flags_horizontal = 8
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("7_imbbu")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = ExtResource("8_8phgr")
+text = "✊"
+vertical_alignment = 1
 
-[node name="Panel3" type="Panel" parent="ailments/effects"]
-custom_minimum_size = Vector2(40, 40)
+[node name="suggestions" type="HBoxContainer" parent="ailments/ray/HBoxContainer/combo"]
+visible = false
+custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
+theme_override_constants/separation = -3
 
-[node name="Panel4" type="Panel" parent="ailments/effects"]
-custom_minimum_size = Vector2(40, 40)
+[node name="legs" type="HBoxContainer" parent="ailments/ray/HBoxContainer/combo/suggestions"]
 layout_mode = 2
+theme_override_constants/separation = -3
 
-[node name="Panel5" type="Panel" parent="ailments/effects"]
-custom_minimum_size = Vector2(40, 40)
+[node name="dot" type="Label" parent="ailments/ray/HBoxContainer/combo/suggestions/legs"]
+custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("9_6sjbn")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_mfso5")
+text = "⋅"
+vertical_alignment = 1
 
-[node name="Panel6" type="Panel" parent="ailments/effects"]
-custom_minimum_size = Vector2(40, 40)
+[node name="slot" type="Label" parent="ailments/ray/HBoxContainer/combo/suggestions/legs"]
+modulate = Color(0.498039, 0.498039, 0.498039, 1)
+custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
+size_flags_horizontal = 8
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("7_imbbu")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = ExtResource("8_8phgr")
+text = "🦶"
+vertical_alignment = 1
 
-[node name="Panel7" type="Panel" parent="ailments/effects"]
-custom_minimum_size = Vector2(40, 40)
+[node name="hands" type="HBoxContainer" parent="ailments/ray/HBoxContainer/combo/suggestions"]
+visible = false
 layout_mode = 2
+theme_override_constants/separation = -3
 
-[node name="Panel8" type="Panel" parent="ailments/effects"]
-custom_minimum_size = Vector2(40, 40)
+[node name="dot" type="Label" parent="ailments/ray/HBoxContainer/combo/suggestions/hands"]
+custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("9_6sjbn")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_mfso5")
+text = "⋅"
+vertical_alignment = 1
 
-[node name="Panel9" type="Panel" parent="ailments/effects"]
-custom_minimum_size = Vector2(40, 40)
+[node name="slot" type="Label" parent="ailments/ray/HBoxContainer/combo/suggestions/hands"]
+modulate = Color(0.498039, 0.498039, 0.498039, 1)
+custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
+size_flags_horizontal = 8
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("7_imbbu")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = ExtResource("8_8phgr")
+text = "✊"
+vertical_alignment = 1
 
-[node name="Panel10" type="Panel" parent="ailments/effects"]
-custom_minimum_size = Vector2(40, 40)
+[node name="fire" type="HBoxContainer" parent="ailments/ray/HBoxContainer/combo/suggestions"]
 layout_mode = 2
+theme_override_constants/separation = -3
 
-[node name="Panel11" type="Panel" parent="ailments/effects"]
-custom_minimum_size = Vector2(40, 40)
+[node name="dot6" type="Label" parent="ailments/ray/HBoxContainer/combo/suggestions/fire"]
+custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("9_6sjbn")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_mfso5")
+text = "⋅"
+vertical_alignment = 1
 
-[node name="Panel12" type="Panel" parent="ailments/effects"]
-custom_minimum_size = Vector2(40, 40)
+[node name="slot-3" type="Label" parent="ailments/ray/HBoxContainer/combo/suggestions/fire"]
+modulate = Color(0.498039, 0.498039, 0.498039, 1)
+custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
+size_flags_horizontal = 8
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("7_imbbu")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = ExtResource("8_8phgr")
+text = "🔥"
+vertical_alignment = 1
 
-[node name="Panel13" type="Panel" parent="ailments/effects"]
-custom_minimum_size = Vector2(40, 40)
+[node name="whip" type="HBoxContainer" parent="ailments/ray/HBoxContainer/combo/suggestions"]
+visible = false
 layout_mode = 2
+theme_override_constants/separation = -3
 
-[node name="Panel14" type="Panel" parent="ailments/effects"]
-custom_minimum_size = Vector2(40, 40)
+[node name="dot" type="Label" parent="ailments/ray/HBoxContainer/combo/suggestions/whip"]
+custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("9_6sjbn")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_mfso5")
+text = "⋅"
+vertical_alignment = 1
 
-[node name="Panel15" type="Panel" parent="ailments/effects"]
-custom_minimum_size = Vector2(40, 40)
+[node name="slot" type="Label" parent="ailments/ray/HBoxContainer/combo/suggestions/whip"]
+modulate = Color(0.498039, 0.498039, 0.498039, 1)
+custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
+size_flags_horizontal = 8
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("7_imbbu")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = ExtResource("8_8phgr")
+text = "🎣"
+vertical_alignment = 1
 
-[node name="Panel16" type="Panel" parent="ailments/effects"]
-custom_minimum_size = Vector2(40, 40)
+[node name="shot" type="HBoxContainer" parent="ailments/ray/HBoxContainer/combo/suggestions"]
 layout_mode = 2
+theme_override_constants/separation = -3
 
-[node name="footer" type="HBoxContainer" parent="ailments"]
+[node name="dot" type="Label" parent="ailments/ray/HBoxContainer/combo/suggestions/shot"]
+custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
-theme_override_constants/separation = 20
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("9_6sjbn")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_mfso5")
+text = "⋅"
+vertical_alignment = 1
 
-[node name="caption" type="Label" parent="ailments/footer"]
+[node name="slot" type="Label" parent="ailments/ray/HBoxContainer/combo/suggestions/shot"]
+modulate = Color(0.498039, 0.498039, 0.498039, 1)
+custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
-size_flags_horizontal = 4
+size_flags_horizontal = 8
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("7_imbbu")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = ExtResource("8_8phgr")
+text = "🎯"
+vertical_alignment = 1
+
+[node name="poison" type="PanelContainer" parent="ailments/ray"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_morf8")
+
+[node name="cancel" type="Label" parent="ailments/ray/poison"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_morf8")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_olk23")
+text = "💀"
+
+[node name="category" type="Label" parent="ailments/ray/poison"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_morf8")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_j6nt1")
+text = "🩸"
+
+[node name="margin" type="MarginContainer" parent="ailments/ray/poison"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 0
+
+[node name="time" type="ProgressBar" parent="ailments/ray/poison/margin"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_styles/background = SubResource("StyleBoxEmpty_31u67")
+theme_override_styles/fill = SubResource("StyleBoxFlat_gbntm")
+max_value = 10.0
+step = 1.0
+value = 10.0
+show_percentage = false
+
+[node name="cough" type="PanelContainer" parent="ailments/ray"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_morf8")
+
+[node name="category" type="Label" parent="ailments/ray/cough"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_morf8")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_ivhdv")
+text = "🤧"
+
+[node name="margin" type="MarginContainer" parent="ailments/ray/cough"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 0
+
+[node name="time" type="ProgressBar" parent="ailments/ray/cough/margin"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_styles/background = SubResource("StyleBoxEmpty_31u67")
+theme_override_styles/fill = SubResource("StyleBoxFlat_gbntm")
+max_value = 10.0
+step = 1.0
+value = 10.0
+show_percentage = false
+
+[node name="freeze" type="PanelContainer" parent="ailments/ray"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_h3sd6")
+
+[node name="category" type="Label" parent="ailments/ray/freeze"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_morf8")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_imbbu")
+text = "🥶"
+
+[node name="margin" type="MarginContainer" parent="ailments/ray/freeze"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 0
+
+[node name="time" type="ProgressBar" parent="ailments/ray/freeze/margin"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_styles/background = SubResource("StyleBoxEmpty_31u67")
+theme_override_styles/fill = SubResource("StyleBoxFlat_gbntm")
+max_value = 10.0
+step = 1.0
+value = 10.0
+show_percentage = false
+
+[node name="burn" type="PanelContainer" parent="ailments/ray"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_h3sd6")
+
+[node name="skull" type="Label" parent="ailments/ray/burn"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_morf8")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_8phgr")
+text = "☠️"
+
+[node name="category" type="Label" parent="ailments/ray/burn"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_morf8")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_6sjbn")
+text = "🔥"
+
+[node name="margin" type="MarginContainer" parent="ailments/ray/burn"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 0
+
+[node name="time" type="ProgressBar" parent="ailments/ray/burn/margin"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_styles/background = SubResource("StyleBoxEmpty_31u67")
+theme_override_styles/fill = SubResource("StyleBoxFlat_gbntm")
+max_value = 10.0
+step = 1.0
+value = 10.0
+show_percentage = false
+
+[node name="dizzy" type="PanelContainer" parent="ailments/ray"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_morf8")
+
+[node name="category" type="Label" parent="ailments/ray/dizzy"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_morf8")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_ivhdv")
+text = "💫"
+
+[node name="margin" type="MarginContainer" parent="ailments/ray/dizzy"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 0
+
+[node name="time" type="ProgressBar" parent="ailments/ray/dizzy/margin"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_styles/background = SubResource("StyleBoxEmpty_31u67")
+theme_override_styles/fill = SubResource("StyleBoxFlat_gbntm")
+max_value = 10.0
+step = 1.0
+value = 10.0
+show_percentage = false
+
+[node name="no_reason" type="PanelContainer" parent="ailments/ray"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_morf8")
+
+[node name="category" type="Label" parent="ailments/ray/no_reason"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_morf8")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_ivhdv")
+text = "🥴"
+
+[node name="margin" type="MarginContainer" parent="ailments/ray/no_reason"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 0
+
+[node name="time" type="ProgressBar" parent="ailments/ray/no_reason/margin"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_styles/background = SubResource("StyleBoxEmpty_31u67")
+theme_override_styles/fill = SubResource("StyleBoxFlat_gbntm")
+max_value = 10.0
+step = 1.0
+value = 10.0
+show_percentage = false
+
+[node name="no_motion" type="PanelContainer" parent="ailments/ray"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ea51t")
+
+[node name="cancel" type="Label" parent="ailments/ray/no_motion"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_morf8")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_0k1ae")
+text = "🚫"
+
+[node name="category" type="Label" parent="ailments/ray/no_motion"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_morf8")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_j2u6p")
+text = "🦶"
+
+[node name="margin" type="MarginContainer" parent="ailments/ray/no_motion"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 0
+
+[node name="time" type="ProgressBar" parent="ailments/ray/no_motion/margin"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_styles/background = SubResource("StyleBoxEmpty_0lf0h")
+theme_override_styles/fill = SubResource("StyleBoxFlat_7t28e")
+max_value = 10.0
+step = 1.0
+value = 10.0
+show_percentage = false
+
+[node name="no_action" type="PanelContainer" parent="ailments/ray"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_morf8")
+
+[node name="cancel" type="Label" parent="ailments/ray/no_action"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_morf8")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_e4tjx")
+text = "🚫"
+
+[node name="category" type="Label" parent="ailments/ray/no_action"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_morf8")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_kuune")
+text = "✊"
+
+[node name="margin" type="MarginContainer" parent="ailments/ray/no_action"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 0
+
+[node name="time" type="ProgressBar" parent="ailments/ray/no_action/margin"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_styles/background = SubResource("StyleBoxEmpty_31u67")
+theme_override_styles/fill = SubResource("StyleBoxFlat_gbntm")
+max_value = 10.0
+step = 1.0
+value = 10.0
+show_percentage = false
+
+[node name="summary" type="Label" parent="ailments/ray"]
+layout_mode = 2
+size_flags_horizontal = 10
 size_flags_vertical = 6
 theme = ExtResource("2_s8rf2")
 theme_override_font_sizes/font_size = 14
-text = "Статус"
+text = "В порядке"
 
-[node name="summary" type="Label" parent="ailments/footer"]
+[node name="rock" type="HFlowContainer" parent="ailments"]
 layout_mode = 2
-size_flags_horizontal = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ailments/rock"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ailments/rock/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="health" type="ProgressBar" parent="ailments/rock/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxEmpty_ivhdv")
+theme_override_styles/fill = SubResource("StyleBoxFlat_0lf0h")
+step = 1.0
+value = 50.0
+show_percentage = false
+
+[node name="caption" type="Label" parent="ailments/rock/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Рок"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="ailments/rock/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="aura" type="ProgressBar" parent="ailments/rock/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxEmpty_h3sd6")
+theme_override_styles/fill = SubResource("StyleBoxFlat_m7tjy")
+step = 1.0
+value = 50.0
+show_percentage = false
+
+[node name="combo" type="HBoxContainer" parent="ailments/rock/HBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_constants/separation = -3
+script = ExtResource("5_ivhdv")
+
+[node name="slot_1" type="HBoxContainer" parent="ailments/rock/HBoxContainer/VBoxContainer2/combo"]
+layout_mode = 2
+theme_override_constants/separation = -3
+script = ExtResource("6_h3sd6")
+
+[node name="slot" type="Label" parent="ailments/rock/HBoxContainer/VBoxContainer2/combo/slot_1"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("7_imbbu")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = ExtResource("8_8phgr")
+text = "🦶"
+vertical_alignment = 1
+
+[node name="slot_2" type="HBoxContainer" parent="ailments/rock/HBoxContainer/VBoxContainer2/combo"]
+layout_mode = 2
+theme_override_constants/separation = -3
+script = ExtResource("6_h3sd6")
+
+[node name="dot" type="Label" parent="ailments/rock/HBoxContainer/VBoxContainer2/combo/slot_2"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("9_6sjbn")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_mfso5")
+text = "⋅"
+vertical_alignment = 1
+
+[node name="slot" type="Label" parent="ailments/rock/HBoxContainer/VBoxContainer2/combo/slot_2"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("7_imbbu")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = ExtResource("8_8phgr")
+text = "✊"
+vertical_alignment = 1
+
+[node name="slot_3" type="HBoxContainer" parent="ailments/rock/HBoxContainer/VBoxContainer2/combo"]
+layout_mode = 2
+theme_override_constants/separation = -3
+script = ExtResource("6_h3sd6")
+
+[node name="dot" type="Label" parent="ailments/rock/HBoxContainer/VBoxContainer2/combo/slot_3"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("9_6sjbn")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_mfso5")
+text = "⋅"
+vertical_alignment = 1
+
+[node name="slot" type="Label" parent="ailments/rock/HBoxContainer/VBoxContainer2/combo/slot_3"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("7_imbbu")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = ExtResource("8_8phgr")
+text = "✊"
+vertical_alignment = 1
+
+[node name="slot_4" type="HBoxContainer" parent="ailments/rock/HBoxContainer/VBoxContainer2/combo"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = -3
+script = ExtResource("6_h3sd6")
+
+[node name="dot" type="Label" parent="ailments/rock/HBoxContainer/VBoxContainer2/combo/slot_4"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("9_6sjbn")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_mfso5")
+text = "⋅"
+vertical_alignment = 1
+
+[node name="slot" type="Label" parent="ailments/rock/HBoxContainer/VBoxContainer2/combo/slot_4"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("7_imbbu")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = ExtResource("8_8phgr")
+text = "✊"
+vertical_alignment = 1
+
+[node name="suggestions" type="HBoxContainer" parent="ailments/rock/HBoxContainer/VBoxContainer2/combo"]
+visible = false
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+theme_override_constants/separation = -3
+
+[node name="legs" type="HBoxContainer" parent="ailments/rock/HBoxContainer/VBoxContainer2/combo/suggestions"]
+layout_mode = 2
+theme_override_constants/separation = -3
+
+[node name="dot" type="Label" parent="ailments/rock/HBoxContainer/VBoxContainer2/combo/suggestions/legs"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("9_6sjbn")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_mfso5")
+text = "⋅"
+vertical_alignment = 1
+
+[node name="slot" type="Label" parent="ailments/rock/HBoxContainer/VBoxContainer2/combo/suggestions/legs"]
+modulate = Color(0.498039, 0.498039, 0.498039, 1)
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("7_imbbu")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = ExtResource("8_8phgr")
+text = "🦶"
+vertical_alignment = 1
+
+[node name="hands" type="HBoxContainer" parent="ailments/rock/HBoxContainer/VBoxContainer2/combo/suggestions"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = -3
+
+[node name="dot" type="Label" parent="ailments/rock/HBoxContainer/VBoxContainer2/combo/suggestions/hands"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("9_6sjbn")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_mfso5")
+text = "⋅"
+vertical_alignment = 1
+
+[node name="slot" type="Label" parent="ailments/rock/HBoxContainer/VBoxContainer2/combo/suggestions/hands"]
+modulate = Color(0.498039, 0.498039, 0.498039, 1)
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("7_imbbu")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = ExtResource("8_8phgr")
+text = "✊"
+vertical_alignment = 1
+
+[node name="fire" type="HBoxContainer" parent="ailments/rock/HBoxContainer/VBoxContainer2/combo/suggestions"]
+layout_mode = 2
+theme_override_constants/separation = -3
+
+[node name="dot6" type="Label" parent="ailments/rock/HBoxContainer/VBoxContainer2/combo/suggestions/fire"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("9_6sjbn")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_mfso5")
+text = "⋅"
+vertical_alignment = 1
+
+[node name="slot-3" type="Label" parent="ailments/rock/HBoxContainer/VBoxContainer2/combo/suggestions/fire"]
+modulate = Color(0.498039, 0.498039, 0.498039, 1)
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("7_imbbu")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = ExtResource("8_8phgr")
+text = "🔥"
+vertical_alignment = 1
+
+[node name="whip" type="HBoxContainer" parent="ailments/rock/HBoxContainer/VBoxContainer2/combo/suggestions"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = -3
+
+[node name="dot" type="Label" parent="ailments/rock/HBoxContainer/VBoxContainer2/combo/suggestions/whip"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("9_6sjbn")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_mfso5")
+text = "⋅"
+vertical_alignment = 1
+
+[node name="slot" type="Label" parent="ailments/rock/HBoxContainer/VBoxContainer2/combo/suggestions/whip"]
+modulate = Color(0.498039, 0.498039, 0.498039, 1)
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("7_imbbu")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = ExtResource("8_8phgr")
+text = "🎣"
+vertical_alignment = 1
+
+[node name="shot" type="HBoxContainer" parent="ailments/rock/HBoxContainer/VBoxContainer2/combo/suggestions"]
+layout_mode = 2
+theme_override_constants/separation = -3
+
+[node name="dot" type="Label" parent="ailments/rock/HBoxContainer/VBoxContainer2/combo/suggestions/shot"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("9_6sjbn")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_mfso5")
+text = "⋅"
+vertical_alignment = 1
+
+[node name="slot" type="Label" parent="ailments/rock/HBoxContainer/VBoxContainer2/combo/suggestions/shot"]
+modulate = Color(0.498039, 0.498039, 0.498039, 1)
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("7_imbbu")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = ExtResource("8_8phgr")
+text = "🎯"
+vertical_alignment = 1
+
+[node name="poison" type="PanelContainer" parent="ailments/rock"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_morf8")
+
+[node name="cancel" type="Label" parent="ailments/rock/poison"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_morf8")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_olk23")
+text = "💀"
+
+[node name="category" type="Label" parent="ailments/rock/poison"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_morf8")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_j6nt1")
+text = "🩸"
+
+[node name="margin" type="MarginContainer" parent="ailments/rock/poison"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 0
+
+[node name="time" type="ProgressBar" parent="ailments/rock/poison/margin"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_styles/background = SubResource("StyleBoxEmpty_31u67")
+theme_override_styles/fill = SubResource("StyleBoxFlat_gbntm")
+max_value = 10.0
+step = 1.0
+value = 10.0
+show_percentage = false
+
+[node name="cough" type="PanelContainer" parent="ailments/rock"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_morf8")
+
+[node name="category" type="Label" parent="ailments/rock/cough"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_morf8")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_ivhdv")
+text = "🤧"
+
+[node name="margin" type="MarginContainer" parent="ailments/rock/cough"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 0
+
+[node name="time" type="ProgressBar" parent="ailments/rock/cough/margin"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_styles/background = SubResource("StyleBoxEmpty_31u67")
+theme_override_styles/fill = SubResource("StyleBoxFlat_gbntm")
+max_value = 10.0
+step = 1.0
+value = 10.0
+show_percentage = false
+
+[node name="freeze" type="PanelContainer" parent="ailments/rock"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_h3sd6")
+
+[node name="category" type="Label" parent="ailments/rock/freeze"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_morf8")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_imbbu")
+text = "🥶"
+
+[node name="margin" type="MarginContainer" parent="ailments/rock/freeze"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 0
+
+[node name="time" type="ProgressBar" parent="ailments/rock/freeze/margin"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_styles/background = SubResource("StyleBoxEmpty_31u67")
+theme_override_styles/fill = SubResource("StyleBoxFlat_gbntm")
+max_value = 10.0
+step = 1.0
+value = 10.0
+show_percentage = false
+
+[node name="burn" type="PanelContainer" parent="ailments/rock"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_h3sd6")
+
+[node name="skull" type="Label" parent="ailments/rock/burn"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_morf8")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_8phgr")
+text = "☠️"
+
+[node name="category" type="Label" parent="ailments/rock/burn"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_morf8")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_6sjbn")
+text = "🔥"
+
+[node name="margin" type="MarginContainer" parent="ailments/rock/burn"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 0
+
+[node name="time" type="ProgressBar" parent="ailments/rock/burn/margin"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_styles/background = SubResource("StyleBoxEmpty_31u67")
+theme_override_styles/fill = SubResource("StyleBoxFlat_gbntm")
+max_value = 10.0
+step = 1.0
+value = 10.0
+show_percentage = false
+
+[node name="dizzy" type="PanelContainer" parent="ailments/rock"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_morf8")
+
+[node name="category" type="Label" parent="ailments/rock/dizzy"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_morf8")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_ivhdv")
+text = "💫"
+
+[node name="margin" type="MarginContainer" parent="ailments/rock/dizzy"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 0
+
+[node name="time" type="ProgressBar" parent="ailments/rock/dizzy/margin"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_styles/background = SubResource("StyleBoxEmpty_31u67")
+theme_override_styles/fill = SubResource("StyleBoxFlat_gbntm")
+max_value = 10.0
+step = 1.0
+value = 10.0
+show_percentage = false
+
+[node name="no_reason" type="PanelContainer" parent="ailments/rock"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_morf8")
+
+[node name="category" type="Label" parent="ailments/rock/no_reason"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_morf8")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_ivhdv")
+text = "🥴"
+
+[node name="margin" type="MarginContainer" parent="ailments/rock/no_reason"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 0
+
+[node name="time" type="ProgressBar" parent="ailments/rock/no_reason/margin"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_styles/background = SubResource("StyleBoxEmpty_31u67")
+theme_override_styles/fill = SubResource("StyleBoxFlat_gbntm")
+max_value = 10.0
+step = 1.0
+value = 10.0
+show_percentage = false
+
+[node name="no_motion" type="PanelContainer" parent="ailments/rock"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ea51t")
+
+[node name="cancel" type="Label" parent="ailments/rock/no_motion"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_morf8")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_0k1ae")
+text = "🚫"
+
+[node name="category" type="Label" parent="ailments/rock/no_motion"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_morf8")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_j2u6p")
+text = "🦶"
+
+[node name="margin" type="MarginContainer" parent="ailments/rock/no_motion"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 0
+
+[node name="time" type="ProgressBar" parent="ailments/rock/no_motion/margin"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_styles/background = SubResource("StyleBoxEmpty_0lf0h")
+theme_override_styles/fill = SubResource("StyleBoxFlat_7t28e")
+max_value = 10.0
+step = 1.0
+value = 10.0
+show_percentage = false
+
+[node name="no_action" type="PanelContainer" parent="ailments/rock"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_morf8")
+
+[node name="cancel" type="Label" parent="ailments/rock/no_action"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_morf8")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_e4tjx")
+text = "🚫"
+
+[node name="category" type="Label" parent="ailments/rock/no_action"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_morf8")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_kuune")
+text = "✊"
+
+[node name="margin" type="MarginContainer" parent="ailments/rock/no_action"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 0
+
+[node name="time" type="ProgressBar" parent="ailments/rock/no_action/margin"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_styles/background = SubResource("StyleBoxEmpty_31u67")
+theme_override_styles/fill = SubResource("StyleBoxFlat_gbntm")
+max_value = 10.0
+step = 1.0
+value = 10.0
+show_percentage = false
+
+[node name="summary" type="Label" parent="ailments/rock"]
+layout_mode = 2
+size_flags_horizontal = 10
 size_flags_vertical = 6
 theme = ExtResource("2_s8rf2")
 theme_override_font_sizes/font_size = 14
-text = "в порядке"
+text = "В порядке"

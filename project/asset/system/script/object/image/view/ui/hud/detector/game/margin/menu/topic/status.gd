@@ -1,3 +1,3 @@
-extends VBoxContainer
+extends HBoxContainer
 
-@onready var hero: PanelContainer = $fast/hero
+@onready var hero: PanelContainer = $hero

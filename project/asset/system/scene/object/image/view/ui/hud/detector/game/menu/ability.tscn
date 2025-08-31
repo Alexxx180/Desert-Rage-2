@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://6b0ydfrtbu38"]
+[gd_scene load_steps=20 format=3 uid="uid://6b0ydfrtbu38"]
 
 [ext_resource type="PackedScene" uid="uid://scs1xlb7x0d6" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/menu/inventory/selection.tscn" id="1_7touf"]
 [ext_resource type="StyleBox" uid="uid://cvfnqancophme" path="res://asset/resource/engine/internal/theme/style/solid-color-panel.tres" id="1_r0sy2"]
@@ -7,6 +7,7 @@
 [ext_resource type="FontFile" uid="uid://b37js8y80ak1k" path="res://asset/resource/font/NotoColorEmoji-Regular.ttf" id="3_5obb3"]
 [ext_resource type="PackedScene" uid="uid://l7thqkrsol4m" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/menu/priorities/perks.tscn" id="3_h2uo5"]
 [ext_resource type="FontFile" uid="uid://bghvysgyoj1y7" path="res://asset/resource/font/title/Equilibrist Semibold.ttf" id="3_plxo8"]
+[ext_resource type="Script" uid="uid://33526xfgujtg" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/menu/topic/hero.gd" id="4_0gbwx"]
 [ext_resource type="StyleBox" uid="uid://c5qf02s45xwn" path="res://asset/resource/engine/internal/theme/style/noto-color.tres" id="6_5obb3"]
 [ext_resource type="Shortcut" uid="uid://ucetbklb6n0q" path="res://asset/resource/engine/internal/short/cut/game/gameplay-menu.tres" id="6_xd2oj"]
 
@@ -36,21 +37,10 @@ corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ywq7x"]
-bg_color = Color(0.358457, 0.418219, 1, 1)
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ywq7x"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oq1iv"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tdkka"]
-bg_color = Color(0.177773, 0.50171, 1.92523e-07, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2a0ln"]
-content_margin_left = 8.0
-bg_color = Color(0.0588235, 0.0588235, 0.0588235, 1)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oq1iv"]
+bg_color = Color(0.739789, 2.00946e-06, 5.77569e-07, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nilgw"]
 bg_color = Color(0.0588235, 0.0588235, 0.0588235, 1)
@@ -240,122 +230,48 @@ custom_minimum_size = Vector2(0, 1)
 layout_mode = 2
 color = Color(0.0588235, 0.0588235, 0.0588235, 1)
 
-[node name="hero" type="PanelContainer" parent="scroll/margin/stack/menu/fast-access"]
+[node name="enemy-1" type="PanelContainer" parent="scroll/margin/stack/menu/fast-access"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 8
 theme_override_styles/panel = SubResource("StyleBoxFlat_5p2ax")
+script = ExtResource("4_0gbwx")
 
-[node name="aura" type="ProgressBar" parent="scroll/margin/stack/menu/fast-access/hero"]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 1
-theme_override_styles/background = SubResource("StyleBoxEmpty_l0mxd")
-theme_override_styles/fill = SubResource("StyleBoxFlat_ywq7x")
-max_value = 1.0
-step = 0.1
-value = 0.6
-fill_mode = 3
-show_percentage = false
+[node name="hiding" type="Timer" parent="scroll/margin/stack/menu/fast-access/enemy-1"]
 
-[node name="margin" type="MarginContainer" parent="scroll/margin/stack/menu/fast-access/hero"]
+[node name="margin" type="MarginContainer" parent="scroll/margin/stack/menu/fast-access/enemy-1"]
 layout_mode = 2
 theme_override_constants/margin_left = 7
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 0
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 7
+theme_override_constants/margin_bottom = 4
 
-[node name="description" type="Label" parent="scroll/margin/stack/menu/fast-access/hero/margin"]
+[node name="description" type="Label" parent="scroll/margin/stack/menu/fast-access/enemy-1/margin"]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 18
-text = "Рей"
+theme_override_font_sizes/font_size = 16
+text = "Ослик-Суслик-Паукан"
 autowrap_mode = 2
 
-[node name="health" type="ProgressBar" parent="scroll/margin/stack/menu/fast-access/hero"]
-visible = false
+[node name="hits" type="Label" parent="scroll/margin/stack/menu/fast-access/enemy-1/margin"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_font_sizes/font_size = 16
+text = "200"
+horizontal_alignment = 2
+autowrap_mode = 2
+
+[node name="health" type="ProgressBar" parent="scroll/margin/stack/menu/fast-access/enemy-1"]
 layout_mode = 2
 size_flags_vertical = 8
-theme_override_styles/background = SubResource("StyleBoxEmpty_oq1iv")
-theme_override_styles/fill = SubResource("StyleBoxFlat_tdkka")
+theme_override_styles/background = SubResource("StyleBoxEmpty_ywq7x")
+theme_override_styles/fill = SubResource("StyleBoxFlat_oq1iv")
+max_value = 15.0
 step = 1.0
-value = 50.0
+value = 5.0
 show_percentage = false
-
-[node name="slot" type="Label" parent="scroll/margin/stack/menu/fast-access/hero"]
-visible = false
-custom_minimum_size = Vector2(10, 0)
-layout_mode = 2
-size_flags_horizontal = 10
-size_flags_vertical = 0
-size_flags_stretch_ratio = 0.25
-theme_override_fonts/font = ExtResource("3_5obb3")
-theme_override_font_sizes/font_size = 16
-theme_override_styles/normal = ExtResource("6_5obb3")
-text = "✊"
-vertical_alignment = 1
-
-[node name="characters" type="HBoxContainer" parent="scroll/margin/stack/menu/fast-access"]
-layout_mode = 2
-size_flags_horizontal = 10
-
-[node name="rock" type="Button" parent="scroll/margin/stack/menu/fast-access/characters"]
-custom_minimum_size = Vector2(90, 0)
-layout_mode = 2
-size_flags_horizontal = 10
-theme_override_font_sizes/font_size = 16
-theme_override_styles/normal = SubResource("StyleBoxFlat_2a0ln")
-text = "Рок"
-alignment = 0
-
-[node name="aura" type="ProgressBar" parent="scroll/margin/stack/menu/fast-access/characters/rock"]
-layout_mode = 1
-anchors_preset = 9
-anchor_bottom = 1.0
-offset_right = 1.0
-grow_vertical = 2
-size_flags_vertical = 1
-theme_override_styles/background = SubResource("StyleBoxEmpty_l0mxd")
-theme_override_styles/fill = SubResource("StyleBoxFlat_ywq7x")
-max_value = 1.0
-step = 0.1
-value = 0.6
-fill_mode = 3
-show_percentage = false
-
-[node name="health" type="ProgressBar" parent="scroll/margin/stack/menu/fast-access/characters/rock"]
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -1.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_styles/background = SubResource("StyleBoxEmpty_oq1iv")
-theme_override_styles/fill = SubResource("StyleBoxFlat_tdkka")
-step = 1.0
-value = 50.0
-show_percentage = false
-
-[node name="slot-1" type="Label" parent="scroll/margin/stack/menu/fast-access/characters/rock"]
-visible = false
-custom_minimum_size = Vector2(10, 0)
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -30.0
-offset_bottom = 26.0
-grow_horizontal = 0
-size_flags_horizontal = 10
-size_flags_stretch_ratio = 0.25
-theme_override_fonts/font = ExtResource("3_5obb3")
-theme_override_font_sizes/font_size = 16
-theme_override_styles/normal = ExtResource("6_5obb3")
-text = "✊"
-vertical_alignment = 1
 
 [node name="menu" type="Button" parent="scroll/margin/stack/menu"]
 custom_minimum_size = Vector2(40, 30)
