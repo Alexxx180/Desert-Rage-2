@@ -15,11 +15,6 @@
 [ext_resource type="FontFile" uid="uid://c6xnr3551fg10" path="res://asset/resource/font/Izuver.otf" id="13_s8vpp"]
 [ext_resource type="StyleBox" uid="uid://vtasw48vidxj" path="res://asset/resource/engine/internal/theme/style/noto-color/noto-color-left.tres" id="14_mad31"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_drayd"]
-content_margin_left = 7.0
-content_margin_top = 5.0
-bg_color = Color(0.6, 0.6, 0.6, 0)
-
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r7fgi"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r7fgi"]
@@ -27,6 +22,11 @@ bg_color = Color(0.435192, 0.435192, 0.435192, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bieb6"]
 bg_color = Color(0.89059, 0.89059, 0.89059, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_drayd"]
+content_margin_left = 7.0
+content_margin_top = 5.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c036o"]
 content_margin_left = 7.0
@@ -86,10 +86,32 @@ theme_override_constants/margin_bottom = 10
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="items" parent="scroll/margin/stack" instance=ExtResource("1_3h27n")]
+[node name="items" type="VBoxContainer" parent="scroll/margin/stack"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="ray" parent="scroll/margin/stack/items" instance=ExtResource("1_3h27n")]
 layout_mode = 2
 
-[node name="selection" parent="scroll/margin/stack" instance=ExtResource("2_e11u2")]
+[node name="switch" type="Button" parent="scroll/margin/stack/items"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+text = "Рок"
+
+[node name="rock" parent="scroll/margin/stack/items" instance=ExtResource("1_3h27n")]
+visible = false
+layout_mode = 2
+
+[node name="selection" type="HFlowContainer" parent="scroll/margin/stack"]
+layout_mode = 2
+
+[node name="ray" parent="scroll/margin/stack/selection" instance=ExtResource("2_e11u2")]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+
+[node name="rock" parent="scroll/margin/stack/selection" instance=ExtResource("2_e11u2")]
+visible = false
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 
@@ -112,13 +134,18 @@ layout_mode = 2
 theme_override_styles/normal = ExtResource("2_j4734")
 text = "С экипировкой"
 
-[node name="power" type="VBoxContainer" parent="scroll/margin/stack/stats"]
+[node name="power" type="HBoxContainer" parent="scroll/margin/stack/stats"]
+layout_mode = 2
+theme_override_constants/separation = -3
+
+[node name="rock" type="VBoxContainer" parent="scroll/margin/stack/stats/power"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="description" type="HBoxContainer" parent="scroll/margin/stack/stats/power/rock"]
 layout_mode = 2
 
-[node name="description" type="HBoxContainer" parent="scroll/margin/stack/stats/power"]
-layout_mode = 2
-
-[node name="number" type="Label" parent="scroll/margin/stack/stats/power/description"]
+[node name="number" type="Label" parent="scroll/margin/stack/stats/power/rock/description"]
 custom_minimum_size = Vector2(40, 0)
 layout_mode = 2
 size_flags_horizontal = 8
@@ -127,7 +154,55 @@ theme = ExtResource("3_j4734")
 text = "255"
 horizontal_alignment = 2
 
-[node name="icon" type="Label" parent="scroll/margin/stack/stats/power/description"]
+[node name="margin" type="MarginContainer" parent="scroll/margin/stack/stats/power/rock"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="equipment" type="ProgressBar" parent="scroll/margin/stack/stats/power/rock/margin"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+size_flags_stretch_ratio = 4.0
+theme_override_styles/background = SubResource("StyleBoxEmpty_r7fgi")
+theme_override_styles/fill = SubResource("StyleBoxFlat_r7fgi")
+max_value = 90.0
+step = 1.0
+value = 70.0
+show_percentage = false
+
+[node name="base" type="ProgressBar" parent="scroll/margin/stack/stats/power/rock/margin"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+size_flags_stretch_ratio = 4.0
+theme_override_styles/background = SubResource("StyleBoxEmpty_r7fgi")
+theme_override_styles/fill = SubResource("StyleBoxFlat_bieb6")
+max_value = 90.0
+step = 1.0
+value = 50.0
+show_percentage = false
+
+[node name="ray" type="VBoxContainer" parent="scroll/margin/stack/stats/power"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 5
+
+[node name="description" type="HBoxContainer" parent="scroll/margin/stack/stats/power/ray"]
+layout_mode = 2
+
+[node name="number" type="Label" parent="scroll/margin/stack/stats/power/ray/description"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_stretch_ratio = 0.5
+theme = ExtResource("3_j4734")
+text = "255"
+horizontal_alignment = 2
+
+[node name="icon" type="Label" parent="scroll/margin/stack/stats/power/ray/description"]
 layout_mode = 2
 size_flags_stretch_ratio = 2.0
 theme = ExtResource("3_j4734")
@@ -135,28 +210,28 @@ theme_override_fonts/font = ExtResource("6_drayd")
 theme_override_styles/normal = SubResource("StyleBoxFlat_drayd")
 text = "⚔️"
 
-[node name="caption" type="Label" parent="scroll/margin/stack/stats/power/description"]
+[node name="caption" type="Label" parent="scroll/margin/stack/stats/power/ray/description"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
 theme = ExtResource("3_j4734")
 text = "Мощь"
 
-[node name="base" type="Label" parent="scroll/margin/stack/stats/power/description"]
+[node name="base" type="Label" parent="scroll/margin/stack/stats/power/ray/description"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_stretch_ratio = 0.5
 theme = ExtResource("3_j4734")
 text = "( 197 )"
 
-[node name="margin" type="MarginContainer" parent="scroll/margin/stack/stats/power"]
+[node name="margin" type="MarginContainer" parent="scroll/margin/stack/stats/power/ray"]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 0
 
-[node name="equipment" type="ProgressBar" parent="scroll/margin/stack/stats/power/margin"]
+[node name="equipment" type="ProgressBar" parent="scroll/margin/stack/stats/power/ray/margin"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -168,7 +243,7 @@ step = 1.0
 value = 70.0
 show_percentage = false
 
-[node name="base" type="ProgressBar" parent="scroll/margin/stack/stats/power/margin"]
+[node name="base" type="ProgressBar" parent="scroll/margin/stack/stats/power/ray/margin"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -180,13 +255,18 @@ step = 1.0
 value = 50.0
 show_percentage = false
 
-[node name="influence" type="VBoxContainer" parent="scroll/margin/stack/stats"]
+[node name="influence" type="HBoxContainer" parent="scroll/margin/stack/stats"]
+layout_mode = 2
+theme_override_constants/separation = -3
+
+[node name="rock" type="VBoxContainer" parent="scroll/margin/stack/stats/influence"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="description" type="HBoxContainer" parent="scroll/margin/stack/stats/influence/rock"]
 layout_mode = 2
 
-[node name="description" type="HBoxContainer" parent="scroll/margin/stack/stats/influence"]
-layout_mode = 2
-
-[node name="number" type="Label" parent="scroll/margin/stack/stats/influence/description"]
+[node name="number" type="Label" parent="scroll/margin/stack/stats/influence/rock/description"]
 custom_minimum_size = Vector2(40, 0)
 layout_mode = 2
 size_flags_horizontal = 8
@@ -195,7 +275,55 @@ theme = ExtResource("3_j4734")
 text = "255"
 horizontal_alignment = 2
 
-[node name="icon" type="Label" parent="scroll/margin/stack/stats/influence/description"]
+[node name="margin" type="MarginContainer" parent="scroll/margin/stack/stats/influence/rock"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="equipment" type="ProgressBar" parent="scroll/margin/stack/stats/influence/rock/margin"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+size_flags_stretch_ratio = 4.0
+theme_override_styles/background = SubResource("StyleBoxEmpty_r7fgi")
+theme_override_styles/fill = SubResource("StyleBoxFlat_r7fgi")
+max_value = 90.0
+step = 1.0
+value = 70.0
+show_percentage = false
+
+[node name="base" type="ProgressBar" parent="scroll/margin/stack/stats/influence/rock/margin"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+size_flags_stretch_ratio = 4.0
+theme_override_styles/background = SubResource("StyleBoxEmpty_r7fgi")
+theme_override_styles/fill = SubResource("StyleBoxFlat_bieb6")
+max_value = 90.0
+step = 1.0
+value = 50.0
+show_percentage = false
+
+[node name="ray" type="VBoxContainer" parent="scroll/margin/stack/stats/influence"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 5
+
+[node name="description" type="HBoxContainer" parent="scroll/margin/stack/stats/influence/ray"]
+layout_mode = 2
+
+[node name="number" type="Label" parent="scroll/margin/stack/stats/influence/ray/description"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_stretch_ratio = 0.5
+theme = ExtResource("3_j4734")
+text = "255"
+horizontal_alignment = 2
+
+[node name="icon" type="Label" parent="scroll/margin/stack/stats/influence/ray/description"]
 layout_mode = 2
 size_flags_stretch_ratio = 2.0
 theme = ExtResource("3_j4734")
@@ -203,14 +331,14 @@ theme_override_fonts/font = ExtResource("6_drayd")
 theme_override_styles/normal = SubResource("StyleBoxFlat_drayd")
 text = "🔥"
 
-[node name="caption" type="Label" parent="scroll/margin/stack/stats/influence/description"]
+[node name="caption" type="Label" parent="scroll/margin/stack/stats/influence/ray/description"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
 theme = ExtResource("3_j4734")
 text = "Влияние"
 
-[node name="base" type="Label" parent="scroll/margin/stack/stats/influence/description"]
+[node name="base" type="Label" parent="scroll/margin/stack/stats/influence/ray/description"]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 0
@@ -218,14 +346,14 @@ size_flags_stretch_ratio = 0.5
 theme = ExtResource("3_j4734")
 text = "( 197 )"
 
-[node name="margin" type="MarginContainer" parent="scroll/margin/stack/stats/influence"]
+[node name="margin" type="MarginContainer" parent="scroll/margin/stack/stats/influence/ray"]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 0
 
-[node name="equipment" type="ProgressBar" parent="scroll/margin/stack/stats/influence/margin"]
+[node name="equipment" type="ProgressBar" parent="scroll/margin/stack/stats/influence/ray/margin"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -237,7 +365,7 @@ step = 1.0
 value = 70.0
 show_percentage = false
 
-[node name="base" type="ProgressBar" parent="scroll/margin/stack/stats/influence/margin"]
+[node name="base" type="ProgressBar" parent="scroll/margin/stack/stats/influence/ray/margin"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -249,13 +377,18 @@ step = 1.0
 value = 50.0
 show_percentage = false
 
-[node name="vitality" type="VBoxContainer" parent="scroll/margin/stack/stats"]
+[node name="vitality" type="HBoxContainer" parent="scroll/margin/stack/stats"]
+layout_mode = 2
+theme_override_constants/separation = -3
+
+[node name="rock" type="VBoxContainer" parent="scroll/margin/stack/stats/vitality"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="description" type="HBoxContainer" parent="scroll/margin/stack/stats/vitality/rock"]
 layout_mode = 2
 
-[node name="description" type="HBoxContainer" parent="scroll/margin/stack/stats/vitality"]
-layout_mode = 2
-
-[node name="number" type="Label" parent="scroll/margin/stack/stats/vitality/description"]
+[node name="number" type="Label" parent="scroll/margin/stack/stats/vitality/rock/description"]
 custom_minimum_size = Vector2(40, 0)
 layout_mode = 2
 size_flags_horizontal = 8
@@ -264,7 +397,55 @@ theme = ExtResource("3_j4734")
 text = "255"
 horizontal_alignment = 2
 
-[node name="icon" type="Label" parent="scroll/margin/stack/stats/vitality/description"]
+[node name="margin" type="MarginContainer" parent="scroll/margin/stack/stats/vitality/rock"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="equipment" type="ProgressBar" parent="scroll/margin/stack/stats/vitality/rock/margin"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+size_flags_stretch_ratio = 4.0
+theme_override_styles/background = SubResource("StyleBoxEmpty_r7fgi")
+theme_override_styles/fill = SubResource("StyleBoxFlat_r7fgi")
+max_value = 90.0
+step = 1.0
+value = 70.0
+show_percentage = false
+
+[node name="base" type="ProgressBar" parent="scroll/margin/stack/stats/vitality/rock/margin"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+size_flags_stretch_ratio = 4.0
+theme_override_styles/background = SubResource("StyleBoxEmpty_r7fgi")
+theme_override_styles/fill = SubResource("StyleBoxFlat_bieb6")
+max_value = 90.0
+step = 1.0
+value = 50.0
+show_percentage = false
+
+[node name="ray" type="VBoxContainer" parent="scroll/margin/stack/stats/vitality"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 5
+
+[node name="description" type="HBoxContainer" parent="scroll/margin/stack/stats/vitality/ray"]
+layout_mode = 2
+
+[node name="number" type="Label" parent="scroll/margin/stack/stats/vitality/ray/description"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_stretch_ratio = 0.5
+theme = ExtResource("3_j4734")
+text = "255"
+horizontal_alignment = 2
+
+[node name="icon" type="Label" parent="scroll/margin/stack/stats/vitality/ray/description"]
 layout_mode = 2
 size_flags_stretch_ratio = 2.0
 theme = ExtResource("3_j4734")
@@ -272,14 +453,14 @@ theme_override_fonts/font = ExtResource("6_drayd")
 theme_override_styles/normal = SubResource("StyleBoxFlat_drayd")
 text = "🛡"
 
-[node name="caption" type="Label" parent="scroll/margin/stack/stats/vitality/description"]
+[node name="caption" type="Label" parent="scroll/margin/stack/stats/vitality/ray/description"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
 theme = ExtResource("3_j4734")
 text = "Живучесть"
 
-[node name="base" type="Label" parent="scroll/margin/stack/stats/vitality/description"]
+[node name="base" type="Label" parent="scroll/margin/stack/stats/vitality/ray/description"]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 0
@@ -287,14 +468,14 @@ size_flags_stretch_ratio = 0.5
 theme = ExtResource("3_j4734")
 text = "( 197 )"
 
-[node name="margin" type="MarginContainer" parent="scroll/margin/stack/stats/vitality"]
+[node name="margin" type="MarginContainer" parent="scroll/margin/stack/stats/vitality/ray"]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 0
 
-[node name="equipment" type="ProgressBar" parent="scroll/margin/stack/stats/vitality/margin"]
+[node name="equipment" type="ProgressBar" parent="scroll/margin/stack/stats/vitality/ray/margin"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -306,7 +487,7 @@ step = 1.0
 value = 70.0
 show_percentage = false
 
-[node name="base" type="ProgressBar" parent="scroll/margin/stack/stats/vitality/margin"]
+[node name="base" type="ProgressBar" parent="scroll/margin/stack/stats/vitality/ray/margin"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -318,13 +499,18 @@ step = 1.0
 value = 50.0
 show_percentage = false
 
-[node name="reaction" type="VBoxContainer" parent="scroll/margin/stack/stats"]
+[node name="reaction" type="HBoxContainer" parent="scroll/margin/stack/stats"]
+layout_mode = 2
+theme_override_constants/separation = -3
+
+[node name="rock" type="VBoxContainer" parent="scroll/margin/stack/stats/reaction"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="description" type="HBoxContainer" parent="scroll/margin/stack/stats/reaction/rock"]
 layout_mode = 2
 
-[node name="description" type="HBoxContainer" parent="scroll/margin/stack/stats/reaction"]
-layout_mode = 2
-
-[node name="number" type="Label" parent="scroll/margin/stack/stats/reaction/description"]
+[node name="number" type="Label" parent="scroll/margin/stack/stats/reaction/rock/description"]
 custom_minimum_size = Vector2(40, 0)
 layout_mode = 2
 size_flags_horizontal = 8
@@ -333,37 +519,14 @@ theme = ExtResource("3_j4734")
 text = "255"
 horizontal_alignment = 2
 
-[node name="icon" type="Label" parent="scroll/margin/stack/stats/reaction/description"]
-layout_mode = 2
-size_flags_stretch_ratio = 2.0
-theme = ExtResource("3_j4734")
-theme_override_fonts/font = ExtResource("6_drayd")
-theme_override_styles/normal = SubResource("StyleBoxFlat_drayd")
-text = "🫧"
-
-[node name="caption" type="Label" parent="scroll/margin/stack/stats/reaction/description"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 2.0
-theme = ExtResource("3_j4734")
-text = "Реакция"
-
-[node name="base" type="Label" parent="scroll/margin/stack/stats/reaction/description"]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_stretch_ratio = 0.5
-theme = ExtResource("3_j4734")
-text = "( 197 )"
-
-[node name="margin" type="MarginContainer" parent="scroll/margin/stack/stats/reaction"]
+[node name="margin" type="MarginContainer" parent="scroll/margin/stack/stats/reaction/rock"]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 10
+theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 
-[node name="equipment" type="ProgressBar" parent="scroll/margin/stack/stats/reaction/margin"]
+[node name="equipment" type="ProgressBar" parent="scroll/margin/stack/stats/reaction/rock/margin"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -375,7 +538,7 @@ step = 1.0
 value = 70.0
 show_percentage = false
 
-[node name="base" type="ProgressBar" parent="scroll/margin/stack/stats/reaction/margin"]
+[node name="base" type="ProgressBar" parent="scroll/margin/stack/stats/reaction/rock/margin"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -387,14 +550,96 @@ step = 1.0
 value = 50.0
 show_percentage = false
 
-[node name="description" type="Label" parent="scroll/margin/stack/stats"]
+[node name="ray" type="VBoxContainer" parent="scroll/margin/stack/stats/reaction"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 5
+
+[node name="description" type="HBoxContainer" parent="scroll/margin/stack/stats/reaction/ray"]
+layout_mode = 2
+
+[node name="number" type="Label" parent="scroll/margin/stack/stats/reaction/ray/description"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_stretch_ratio = 0.5
+theme = ExtResource("3_j4734")
+text = "255"
+horizontal_alignment = 2
+
+[node name="icon" type="Label" parent="scroll/margin/stack/stats/reaction/ray/description"]
+layout_mode = 2
+size_flags_stretch_ratio = 2.0
+theme = ExtResource("3_j4734")
+theme_override_fonts/font = ExtResource("6_drayd")
+theme_override_styles/normal = SubResource("StyleBoxFlat_drayd")
+text = "🫧"
+
+[node name="caption" type="Label" parent="scroll/margin/stack/stats/reaction/ray/description"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+theme = ExtResource("3_j4734")
+text = "Реакция"
+
+[node name="base" type="Label" parent="scroll/margin/stack/stats/reaction/ray/description"]
 visible = false
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_stretch_ratio = 0.5
+theme = ExtResource("3_j4734")
+text = "( 197 )"
+
+[node name="margin" type="MarginContainer" parent="scroll/margin/stack/stats/reaction/ray"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 0
+
+[node name="equipment" type="ProgressBar" parent="scroll/margin/stack/stats/reaction/ray/margin"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+size_flags_stretch_ratio = 4.0
+theme_override_styles/background = SubResource("StyleBoxEmpty_r7fgi")
+theme_override_styles/fill = SubResource("StyleBoxFlat_r7fgi")
+max_value = 90.0
+step = 1.0
+value = 70.0
+show_percentage = false
+
+[node name="base" type="ProgressBar" parent="scroll/margin/stack/stats/reaction/ray/margin"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+size_flags_stretch_ratio = 4.0
+theme_override_styles/background = SubResource("StyleBoxEmpty_r7fgi")
+theme_override_styles/fill = SubResource("StyleBoxFlat_bieb6")
+max_value = 90.0
+step = 1.0
+value = 50.0
+show_percentage = false
+
+[node name="status" type="HFlowContainer" parent="scroll/margin/stack/stats"]
+layout_mode = 2
+
+[node name="rock" type="Label" parent="scroll/margin/stack/stats/status"]
+custom_minimum_size = Vector2(35, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("3_j4734")
+text = "Рок"
+horizontal_alignment = 2
+
+[node name="description" type="Label" parent="scroll/margin/stack/stats/status"]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
 theme = ExtResource("3_j4734")
-text = "Определяет урон от физических атак и контр-атак"
+text = "Определяет урон от физических атак"
+horizontal_alignment = 2
 autowrap_mode = 2
 
 [node name="level" type="VBoxContainer" parent="scroll/margin/stack"]

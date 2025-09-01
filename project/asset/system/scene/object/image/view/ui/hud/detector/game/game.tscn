@@ -1,4 +1,4 @@
-[gd_scene load_steps=73 format=3 uid="uid://cel3u88abrgv3"]
+[gd_scene load_steps=74 format=3 uid="uid://cel3u88abrgv3"]
 
 [ext_resource type="Theme" uid="uid://p2br8b6ea3n6" path="res://asset/resource/engine/internal/theme/patterns/template/menu/hud/pause/pause.tres" id="1_klae1"]
 [ext_resource type="Script" uid="uid://81xdi4771u0a" path="res://asset/system/script/object/image/view/ui/hud/detector/game/game.gd" id="1_o71r6"]
@@ -8,7 +8,8 @@
 [ext_resource type="FontFile" uid="uid://b37js8y80ak1k" path="res://asset/resource/font/NotoColorEmoji-Regular.ttf" id="4_42m6k"]
 [ext_resource type="Script" uid="uid://e0hw6usabyvx" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/menu/horizontal.gd" id="4_j1gc2"]
 [ext_resource type="PackedScene" uid="uid://cbd4idujs0m3k" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/dialog/dialog.tscn" id="5_x67kx"]
-[ext_resource type="Script" uid="uid://b15hdwi7xixe4" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/menu/vertical.gd" id="6_0lb01"]
+[ext_resource type="Script" uid="uid://b15hdwi7xixe4" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/menu/vertical/vertical.gd" id="6_0lb01"]
+[ext_resource type="Script" uid="uid://bbf7hgtvtayvj" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/menu/vertical/multiple.gd" id="6_3tqp8"]
 [ext_resource type="PackedScene" uid="uid://d0sq1ex503flw" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/hide.tscn" id="7_koglg"]
 [ext_resource type="Script" uid="uid://dw6r0use77qqc" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/menu/inventory/markers/markers.gd" id="8_2uuwx"]
 [ext_resource type="Script" uid="uid://t52wbbj1shib" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/menu/inventory/markers/item.gd" id="8_kumfx"]
@@ -223,7 +224,7 @@ grow_vertical = 2
 mouse_filter = 2
 split_offset = 2000
 script = ExtResource("4_j1gc2")
-node_paths = Array[String](["stats/inventory/topic/scroll/margin/flow/status", "stats/inventory/ability/topic/scroll/margin/stack/flow/perks", "stats/inventory/ability/controls/hints/space/preview/help"])
+node_paths = Array[String](["stats/inventory/topic/scroll/margin/flow/status", "stats/inventory/ability/topic/scroll/margin/stack/flow/perks", "stats/inventory/ability/controls/hints/space/preview/help", "stats/inventory/ability/controls/markers/combos/margin/stack"])
 
 [node name="stats" type="HSplitContainer" parent="menu"]
 layout_mode = 2
@@ -243,10 +244,7 @@ layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
 split_offset = -2000
-script = ExtResource("6_0lb01")
-reserve = -6
-direction = -0.5
-node_paths = Array[String](["../topic/scroll/margin/stack/selection"])
+script = ExtResource("6_3tqp8")
 
 [node name="topic" parent="menu/stats/inventory" instance=ExtResource("11_1y8ov")]
 layout_mode = 2
@@ -911,7 +909,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="ray" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/markers/combos/margin/stack"]
-visible = false
 layout_mode = 2
 size_flags_horizontal = 8
 script = ExtResource("13_tya2d")
@@ -931,6 +928,8 @@ show_percentage = false
 [node name="caption" type="Label" parent="menu/stats/inventory/ability/controls/markers/combos/margin/stack/ray/hero"]
 layout_mode = 2
 text = "Рей"
+
+[node name="hide" parent="menu/stats/inventory/ability/controls/markers/combos/margin/stack/ray/hero/caption" instance=ExtResource("7_koglg")]
 
 [node name="combo" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/markers/combos/margin/stack/ray"]
 layout_mode = 2
@@ -1184,6 +1183,8 @@ theme_override_font_sizes/font_size = 18
 theme_override_styles/normal = ExtResource("9_veudi")
 text = "🎯"
 vertical_alignment = 1
+
+[node name="hide" parent="menu/stats/inventory/ability/controls/markers/combos/margin/stack/ray/combo/slots" instance=ExtResource("7_koglg")]
 
 [node name="ailments" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/markers/combos/margin/stack/ray"]
 layout_mode = 2
@@ -1466,6 +1467,7 @@ value = 10.0
 show_percentage = false
 
 [node name="ko" type="PanelContainer" parent="menu/stats/inventory/ability/controls/markers/combos/margin/stack/ray/ailments"]
+visible = false
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_aco5m")
@@ -1515,6 +1517,8 @@ show_percentage = false
 [node name="caption" type="Label" parent="menu/stats/inventory/ability/controls/markers/combos/margin/stack/rock/hero"]
 layout_mode = 2
 text = "Рок"
+
+[node name="hide" parent="menu/stats/inventory/ability/controls/markers/combos/margin/stack/rock/hero/caption" instance=ExtResource("7_koglg")]
 
 [node name="combo" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/markers/combos/margin/stack/rock"]
 layout_mode = 2
@@ -1768,6 +1772,8 @@ theme_override_font_sizes/font_size = 18
 theme_override_styles/normal = ExtResource("9_veudi")
 text = "🎯"
 vertical_alignment = 1
+
+[node name="hide" parent="menu/stats/inventory/ability/controls/markers/combos/margin/stack/rock/combo/slots" instance=ExtResource("7_koglg")]
 
 [node name="ailments" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/markers/combos/margin/stack/rock"]
 layout_mode = 2
@@ -2050,6 +2056,7 @@ value = 10.0
 show_percentage = false
 
 [node name="ko" type="PanelContainer" parent="menu/stats/inventory/ability/controls/markers/combos/margin/stack/rock/ailments"]
+visible = false
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_aco5m")
@@ -3341,6 +3348,7 @@ layout_mode = 2
 color = Color(0.0588235, 0.0588235, 0.0588235, 1)
 
 [node name="enemy-1" type="PanelContainer" parent="menu/stats/inventory/ability/controls/topic/status"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8

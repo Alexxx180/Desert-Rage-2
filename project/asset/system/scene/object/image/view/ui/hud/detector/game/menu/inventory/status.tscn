@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://bky5mu10x2da3"]
+[gd_scene load_steps=43 format=3 uid="uid://bky5mu10x2da3"]
 
 [ext_resource type="Theme" uid="uid://dfg873urxgnev" path="res://asset/resource/engine/internal/theme/patterns/template/text/title/title.tres" id="1_4olfv"]
 [ext_resource type="Script" uid="uid://b0w4sm6u15i34" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/menu/status/health.gd" id="1_s8rf2"]
@@ -134,6 +134,21 @@ bg_color = Color(0.6, 0.6, 0.6, 0)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kuune"]
 content_margin_left = 5.0
 bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bo1iq"]
+bg_color = Color(0.0295066, 0.0295066, 0.0295065, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gwrrj"]
+content_margin_left = 2.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oe7pf"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5w8dg"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ivhdv"]
 
@@ -354,12 +369,14 @@ theme_override_fonts/font = ExtResource("3_ik8mr")
 theme_override_font_sizes/font_size = 16
 text = "20"
 
-[node name="ailments" type="VBoxContainer" parent="."]
+[node name="ailments" type="HFlowContainer" parent="."]
 layout_mode = 2
-theme_override_constants/separation = 5
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 5
 
 [node name="ray" type="HFlowContainer" parent="ailments"]
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ailments/ray"]
 layout_mode = 2
@@ -610,6 +627,7 @@ text = "🎯"
 vertical_alignment = 1
 
 [node name="poison" type="PanelContainer" parent="ailments/ray"]
+visible = false
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_morf8")
@@ -630,7 +648,7 @@ text = "🩸"
 
 [node name="margin" type="MarginContainer" parent="ailments/ray/poison"]
 layout_mode = 2
-size_flags_vertical = 8
+size_flags_vertical = 0
 theme_override_constants/margin_left = 3
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 3
@@ -647,6 +665,7 @@ value = 10.0
 show_percentage = false
 
 [node name="cough" type="PanelContainer" parent="ailments/ray"]
+visible = false
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_morf8")
@@ -660,7 +679,7 @@ text = "🤧"
 
 [node name="margin" type="MarginContainer" parent="ailments/ray/cough"]
 layout_mode = 2
-size_flags_vertical = 8
+size_flags_vertical = 0
 theme_override_constants/margin_left = 3
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 3
@@ -677,6 +696,7 @@ value = 10.0
 show_percentage = false
 
 [node name="freeze" type="PanelContainer" parent="ailments/ray"]
+visible = false
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_h3sd6")
@@ -690,7 +710,7 @@ text = "🥶"
 
 [node name="margin" type="MarginContainer" parent="ailments/ray/freeze"]
 layout_mode = 2
-size_flags_vertical = 8
+size_flags_vertical = 0
 theme_override_constants/margin_left = 3
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 3
@@ -707,6 +727,7 @@ value = 10.0
 show_percentage = false
 
 [node name="burn" type="PanelContainer" parent="ailments/ray"]
+visible = false
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_h3sd6")
@@ -727,7 +748,7 @@ text = "🔥"
 
 [node name="margin" type="MarginContainer" parent="ailments/ray/burn"]
 layout_mode = 2
-size_flags_vertical = 8
+size_flags_vertical = 0
 theme_override_constants/margin_left = 3
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 3
@@ -744,6 +765,7 @@ value = 10.0
 show_percentage = false
 
 [node name="dizzy" type="PanelContainer" parent="ailments/ray"]
+visible = false
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_morf8")
@@ -757,7 +779,7 @@ text = "💫"
 
 [node name="margin" type="MarginContainer" parent="ailments/ray/dizzy"]
 layout_mode = 2
-size_flags_vertical = 8
+size_flags_vertical = 0
 theme_override_constants/margin_left = 3
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 3
@@ -774,6 +796,7 @@ value = 10.0
 show_percentage = false
 
 [node name="no_reason" type="PanelContainer" parent="ailments/ray"]
+visible = false
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_morf8")
@@ -787,7 +810,7 @@ text = "🥴"
 
 [node name="margin" type="MarginContainer" parent="ailments/ray/no_reason"]
 layout_mode = 2
-size_flags_vertical = 8
+size_flags_vertical = 0
 theme_override_constants/margin_left = 3
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 3
@@ -804,6 +827,7 @@ value = 10.0
 show_percentage = false
 
 [node name="no_motion" type="PanelContainer" parent="ailments/ray"]
+visible = false
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_ea51t")
@@ -824,7 +848,7 @@ text = "🦶"
 
 [node name="margin" type="MarginContainer" parent="ailments/ray/no_motion"]
 layout_mode = 2
-size_flags_vertical = 8
+size_flags_vertical = 0
 theme_override_constants/margin_left = 3
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 3
@@ -841,6 +865,7 @@ value = 10.0
 show_percentage = false
 
 [node name="no_action" type="PanelContainer" parent="ailments/ray"]
+visible = false
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_morf8")
@@ -861,7 +886,7 @@ text = "✊"
 
 [node name="margin" type="MarginContainer" parent="ailments/ray/no_action"]
 layout_mode = 2
-size_flags_vertical = 8
+size_flags_vertical = 0
 theme_override_constants/margin_left = 3
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 3
@@ -877,6 +902,36 @@ step = 1.0
 value = 10.0
 show_percentage = false
 
+[node name="ko" type="PanelContainer" parent="ailments/ray"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bo1iq")
+
+[node name="category" type="Label" parent="ailments/ray/ko"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_morf8")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_gwrrj")
+text = "😵"
+
+[node name="margin" type="MarginContainer" parent="ailments/ray/ko"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 0
+
+[node name="time" type="ProgressBar" parent="ailments/ray/ko/margin"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_styles/background = SubResource("StyleBoxEmpty_oe7pf")
+theme_override_styles/fill = SubResource("StyleBoxFlat_5w8dg")
+max_value = 10.0
+step = 1.0
+value = 10.0
+show_percentage = false
+
 [node name="summary" type="Label" parent="ailments/ray"]
 layout_mode = 2
 size_flags_horizontal = 10
@@ -887,6 +942,7 @@ text = "В порядке"
 
 [node name="rock" type="HFlowContainer" parent="ailments"]
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ailments/rock"]
 layout_mode = 2
@@ -1161,6 +1217,7 @@ text = "🎯"
 vertical_alignment = 1
 
 [node name="poison" type="PanelContainer" parent="ailments/rock"]
+visible = false
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_morf8")
@@ -1181,7 +1238,7 @@ text = "🩸"
 
 [node name="margin" type="MarginContainer" parent="ailments/rock/poison"]
 layout_mode = 2
-size_flags_vertical = 8
+size_flags_vertical = 0
 theme_override_constants/margin_left = 3
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 3
@@ -1198,6 +1255,7 @@ value = 10.0
 show_percentage = false
 
 [node name="cough" type="PanelContainer" parent="ailments/rock"]
+visible = false
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_morf8")
@@ -1211,7 +1269,7 @@ text = "🤧"
 
 [node name="margin" type="MarginContainer" parent="ailments/rock/cough"]
 layout_mode = 2
-size_flags_vertical = 8
+size_flags_vertical = 0
 theme_override_constants/margin_left = 3
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 3
@@ -1228,6 +1286,7 @@ value = 10.0
 show_percentage = false
 
 [node name="freeze" type="PanelContainer" parent="ailments/rock"]
+visible = false
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_h3sd6")
@@ -1241,7 +1300,7 @@ text = "🥶"
 
 [node name="margin" type="MarginContainer" parent="ailments/rock/freeze"]
 layout_mode = 2
-size_flags_vertical = 8
+size_flags_vertical = 0
 theme_override_constants/margin_left = 3
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 3
@@ -1258,6 +1317,7 @@ value = 10.0
 show_percentage = false
 
 [node name="burn" type="PanelContainer" parent="ailments/rock"]
+visible = false
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_h3sd6")
@@ -1278,7 +1338,7 @@ text = "🔥"
 
 [node name="margin" type="MarginContainer" parent="ailments/rock/burn"]
 layout_mode = 2
-size_flags_vertical = 8
+size_flags_vertical = 0
 theme_override_constants/margin_left = 3
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 3
@@ -1295,6 +1355,7 @@ value = 10.0
 show_percentage = false
 
 [node name="dizzy" type="PanelContainer" parent="ailments/rock"]
+visible = false
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_morf8")
@@ -1308,7 +1369,7 @@ text = "💫"
 
 [node name="margin" type="MarginContainer" parent="ailments/rock/dizzy"]
 layout_mode = 2
-size_flags_vertical = 8
+size_flags_vertical = 0
 theme_override_constants/margin_left = 3
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 3
@@ -1325,6 +1386,7 @@ value = 10.0
 show_percentage = false
 
 [node name="no_reason" type="PanelContainer" parent="ailments/rock"]
+visible = false
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_morf8")
@@ -1338,7 +1400,7 @@ text = "🥴"
 
 [node name="margin" type="MarginContainer" parent="ailments/rock/no_reason"]
 layout_mode = 2
-size_flags_vertical = 8
+size_flags_vertical = 0
 theme_override_constants/margin_left = 3
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 3
@@ -1355,6 +1417,7 @@ value = 10.0
 show_percentage = false
 
 [node name="no_motion" type="PanelContainer" parent="ailments/rock"]
+visible = false
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_ea51t")
@@ -1375,7 +1438,7 @@ text = "🦶"
 
 [node name="margin" type="MarginContainer" parent="ailments/rock/no_motion"]
 layout_mode = 2
-size_flags_vertical = 8
+size_flags_vertical = 0
 theme_override_constants/margin_left = 3
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 3
@@ -1392,6 +1455,7 @@ value = 10.0
 show_percentage = false
 
 [node name="no_action" type="PanelContainer" parent="ailments/rock"]
+visible = false
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_morf8")
@@ -1412,7 +1476,7 @@ text = "✊"
 
 [node name="margin" type="MarginContainer" parent="ailments/rock/no_action"]
 layout_mode = 2
-size_flags_vertical = 8
+size_flags_vertical = 0
 theme_override_constants/margin_left = 3
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 3
@@ -1423,6 +1487,36 @@ layout_mode = 2
 size_flags_vertical = 8
 theme_override_styles/background = SubResource("StyleBoxEmpty_31u67")
 theme_override_styles/fill = SubResource("StyleBoxFlat_gbntm")
+max_value = 10.0
+step = 1.0
+value = 10.0
+show_percentage = false
+
+[node name="ko" type="PanelContainer" parent="ailments/rock"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bo1iq")
+
+[node name="category" type="Label" parent="ailments/rock/ko"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_morf8")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_gwrrj")
+text = "😵"
+
+[node name="margin" type="MarginContainer" parent="ailments/rock/ko"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 0
+
+[node name="time" type="ProgressBar" parent="ailments/rock/ko/margin"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_styles/background = SubResource("StyleBoxEmpty_oe7pf")
+theme_override_styles/fill = SubResource("StyleBoxFlat_5w8dg")
 max_value = 10.0
 step = 1.0
 value = 10.0

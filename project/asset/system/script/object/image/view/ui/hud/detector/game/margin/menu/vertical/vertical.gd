@@ -9,13 +9,13 @@ var ui_nodes: Array[Control] = []
 var previous: bool = false
 var operation: Callable
 
-func bigger(a: float, b: float) -> bool: return a > b
-func lesser(a: float, b: float) -> bool: return a < b
+func bigger(a: float, b: float) -> bool: return a >= b
+func lesser(a: float, b: float) -> bool: return a <= b
 
 func _ready() -> void:
 	for path in node_paths:
 		ui_nodes.append(get_node(path))
-	operation = bigger if direction < 0.0 else lesser
+	# operation = bigger if direction < 0.0 else lesser
 
 func get_proportion() -> float:
 	return get_window().size.y * direction
@@ -30,9 +30,30 @@ func show_nodes() -> void:
 		if "shows" in node: node.shows()
 		else: node.show()
 
+func positive_toggle(a: float, b: float) -> void:
+	if a >= b: show_nodes()
+	elif a < b: hide_nodes()
+
+func negative_toggle(a: float, b: float) -> void:
+	if a <= b:
+		print("GOT IT")
+		show_nodes()
+	elif a > b:
+		hide_nodes()
+		print("NAH")
+
 func on_drag_end() -> void:
-	# print("CURRENT: ", split_offset + reserve, "WIND: ", get_proportion())
+	var next: float = float(split_offset + reserve)
+	print("CURRENT: ", next, "- WIND: ", get_proportion())
+	if direction < 0:
+		negative_toggle(next, get_proportion())
+	else:
+		positive_toggle(next, get_proportion())
+"""
+func on_drag_end() -> void:
+	print("CURRENT: ", split_offset + reserve, "WIND: ", get_proportion())
 	var current: bool = operation.call(split_offset + reserve, get_proportion())
 	if current: hide_nodes()
 	elif previous: show_nodes()
 	previous = current
+"""
