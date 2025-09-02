@@ -44,5 +44,7 @@ func hide_items() -> void:
 	for item in markers.items: item.hide()
 
 func _input(_event: InputEvent) -> void:
+	if not Input.is_action_pressed("item_select"):
+		return
 	var axis: float = Input.get_axis("item_left", "item_right")
 	if axis != 0: _fast_panel_selection(roundi(axis))
