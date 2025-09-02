@@ -9,6 +9,6 @@ func tick(mark: Tick) -> int:
 	action.released = Input.is_action_just_pressed(name)
 	if action.released:
 		print("action: ", action)
-		mark.blackboard.get_value("ui").notify("Умение")
+		# mark.blackboard.get_value("ui").notify("Умение")
 		return OK
 	return FAILED

@@ -2,9 +2,9 @@ extends Node
 
 @onready var hiding: Timer = $preview
 
-var display: CanvasLayer #Control
-var status: VBoxContainer:
-	get: return display.detector.game.status
+var display: CanvasLayer
+var status: HBoxContainer:
+	get: return display.detzector.game.status
 var markers: HFlowContainer:
 	get: return display.detector.game.markers
 
@@ -15,7 +15,11 @@ func dialog(text: Array[String]) -> void:
 	display.detector.game.chat.add_blocks(text)
 
 func notify(text: String):
-	status.hero.notify(text)
+	status.enemy[0].notify(text)
+	return self
+
+func set_slot_combo(caption):
+	markers.combo.heroes.ray.status.text = caption
 	return self
 
 func set_slots(mark: Tick):
@@ -28,6 +32,7 @@ func set_slots(mark: Tick):
 		var j: int = count - i - 1
 		hint.slots.slots[j].text = Skills.unicode[combo.query[j]]
 		hint.slots.slots[j].show()
+		
 	for i in range(count, len(hint.slots.slots)):
 		hint.slots.slots[i].hide()
 	hiding.start()

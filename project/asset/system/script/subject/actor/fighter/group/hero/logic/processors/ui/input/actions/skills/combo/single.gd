@@ -21,7 +21,7 @@ func tick(mark: Tick, act: BehaviorAction) -> int:
 	return FAILED
 
 func notify(mark: Tick, caption: String) -> void:
-	mark.blackboard.get_value("ui").notify(caption)
+	mark.blackboard.get_value("ui").set_slot_combo(caption)
 
 static func standalone(mark: Tick, slot: int) -> int:
 	var combo: Dictionary = mark.blackboard.get_value("combo")

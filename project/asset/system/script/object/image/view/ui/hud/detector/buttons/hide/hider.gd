@@ -1,7 +1,9 @@
 extends Timer
 
-var state: Control
+class_name ControlTimeHider
 
+const TIME: float = 0.5
+var state: Control
 var fixed: bool = false
 
 func _ready() -> void:
@@ -14,9 +16,10 @@ func _input(event: InputEvent) -> void:
 		_show_pause()
 		start()
 
-func _change_state(color: Color) -> void:
-	var change: Tween = create_tween()
-	change.tween_property(state, "modulate", color, 0.5)
+func _tween_property(caption: String, value: Variant) -> void:
+	create_tween().tween_property(state, caption, value, TIME)
+
+func _change_state(color: Color) -> void: _tween_property("modulate", color)
 
 func _show_pause() -> void:
 	if time_left == 0: _change_state(Color.WHITE)

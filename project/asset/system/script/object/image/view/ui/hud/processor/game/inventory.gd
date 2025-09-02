@@ -5,7 +5,7 @@ enum { EMPTY = 0, KNIFE = 1 }
 @onready var preview: Timer = $preview
 @onready var panel: Timer = $panel
 
-var inventory: Array[HFlowContainer] = []
+var inventory: Array = []
 var markers: HFlowContainer
 
 var showed: bool = false

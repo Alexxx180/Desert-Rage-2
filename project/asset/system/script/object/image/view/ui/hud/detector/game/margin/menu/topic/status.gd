@@ -1,3 +1,3 @@
 extends HBoxContainer
 
-@onready var hero: PanelContainer = $hero
+@onready var enemy: Array[PanelContainer] = [$enemy_1, $enemy_2]

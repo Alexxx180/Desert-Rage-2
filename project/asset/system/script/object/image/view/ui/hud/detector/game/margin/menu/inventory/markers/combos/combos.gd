@@ -1,6 +1,6 @@
-extends PanelContainer
+extends MarginContainer
 
 @onready var heroes: Dictionary = {
-	"ray": $margin/stack/ray, "rock": $margin/stack/rock
+	"ray": $stack/ray/margin/stack,
+	"rock": $stack/rock/margin/stack
 }
-# comb

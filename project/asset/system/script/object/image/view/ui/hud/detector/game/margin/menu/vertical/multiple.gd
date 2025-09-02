@@ -1,9 +1,10 @@
 extends VSplitContainer
 
+var stack: String = "ability/controls/markers/margin/stack/"
+
 @export var reserve: Array[PackedFloat32Array] = [[-6, -0.5], [-70, -0.5], [-106, -0.5]]
 @export var node_paths: Array[Array] = [["../topic/scroll/margin/stack/selection"],
-	["ability/controls/markers/combos/margin/stack/ray", "ability/controls/markers/combos/margin/stack/rock"],
-	["ability/controls/markers/combos/margin/stack/rock"]]
+	[stack + "ray", stack + "rock"], [stack + "rock"]]
 
 var ui_nodes: Array[Array] = []
 var previous: bool = false

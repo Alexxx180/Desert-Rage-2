@@ -13,8 +13,8 @@ extends Control
 @onready var ap: Array[HBoxContainer] = _get_point_bars("influence")
 func _get_point_bars(caption: String) -> Array[HBoxContainer]:
 	return [
-		get_node("menu/stats/inventory/topic/scroll/margin/flow/status/" + caption),
-		get_node("menu/priorities/scroll/margin/stack/status/" + caption)
+		get_node("menu/stats/inventory/topic/scroll/margin/flow/status/base/" + caption),
+		get_node("menu/priorities/scroll/margin/stack/status/base/" + caption)
 	]
 
 func set_hp_value(value: int) -> void: for bar in hp: bar.set_value(value)

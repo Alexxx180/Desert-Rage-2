@@ -1,7 +1,7 @@
 extends HBoxContainer
 
-@onready var bar: ProgressBar = $bar
-@onready var current: Label = $merge/margin/cork/margin/current
+@onready var bar: ProgressBar = $space/bar
+@onready var current: Label = $merge/flash/cork/margin/current
 
 func set_value(actual: int) -> void:
 	bar.value = actual
