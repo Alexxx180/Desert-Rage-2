@@ -6,11 +6,20 @@ var stack: String = "ability/controls/markers/margin/stack/"
 @export var node_paths: Array[Array] = [["../topic/scroll/margin/stack/selection"],
 	[stack + "ray", stack + "rock"], [stack + "rock"]]
 
+@onready var instant: Node = $instant
+@onready var smooth: Dictionary = {
+	"direct": $smooth_direct, "back": $smooth_back
+}
+
 var logic: SplitToggleLogic = SplitToggleLogic.new()
 var ui_nodes: Array[Array] = []
+var direction: float:
+	get: return reserve[0][1]
+var proportion: float:
+	get: return get_proportion(direction)
 
-func get_proportion(direction: float) -> float:
-	return get_window().size.y * direction
+func get_proportion(dir: float) -> float:
+	return get_window().size.y * dir
 
 func _ready() -> void:
 	for i in range(0, len(node_paths)):
@@ -23,3 +32,13 @@ func on_drag_end() -> void:
 		var dir: float = reserve[i][1]
 		var next: float = float(reserve[i][0] + split_offset)
 		logic.drag_feedback(dir, get_proportion(dir), next, ui_nodes[i])
+
+func _input(event: InputEvent) -> void:
+	if smooth.back.listen(event):
+		logic.smooth_back_drag(self)
+		return
+	if smooth.direct.listen(event):
+		logic.smooth_direct_drag(self)
+		return
+	if instant.listen(event):
+		logic.instant_drag(self)
