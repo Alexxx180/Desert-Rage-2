@@ -1,13 +1,11 @@
-extends RefCounted
+extends Resource
 
 class_name ActionButtonGroup
 
 ## Provide an interface to Manage Game Controls
 ## Used to be AND in-game condition
 
-var group: Array[ActionButton] = [
-	ActionButton.new(), ActionButton.new()
-]
+@export var group: Array[ActionButton] = []
 
 var count: int:
 	get: return group.size()

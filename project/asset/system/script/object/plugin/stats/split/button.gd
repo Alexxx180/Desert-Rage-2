@@ -1,8 +1,8 @@
-extends RefCounted
+extends Resource
 
 class_name ActionButton
 
 enum ActionButtonState { PRESSED = 0, TOGGLED = 1, RELEASED = 2 }
 
-var state: ActionButtonState = PRESSED
-var id: int
+@export var state: ActionButtonState = ActionButtonState.PRESSED
+@export var id: int

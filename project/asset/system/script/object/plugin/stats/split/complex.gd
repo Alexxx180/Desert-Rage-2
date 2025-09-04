@@ -1,13 +1,12 @@
-extends RefCounted
+extends Resource
 
 class_name ActionButtonComplex
 
 ## Provide an interface to Manage Game Controls
 ## Used to be AND in-game condition
 
-var complex: Array[ActionButtonGroup] = [
-	ActionButtonGroup.new()
-]
+@export var action: String
+@export var complex: Array[ActionButtonGroup] = []
 
 var count: int:
 	get: return complex.size()
@@ -16,5 +15,8 @@ var max_button_count: int: get = _get_max_button_count
 
 func _get_max_button_count() -> int:
 	var i: int = 0
-	for i in range():
-		pass
+	for group in complex:
+		var j: int = group.count
+		if j > i:
+			i = j
+	return i

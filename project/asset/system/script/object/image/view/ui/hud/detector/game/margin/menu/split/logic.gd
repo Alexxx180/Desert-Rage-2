@@ -57,9 +57,8 @@ func instant_drag(container: SplitContainer) -> void:
 	open_menu(container, 0 if invariant else container.proportion)
 	focus_element(container)
 
-func focus_element(c: SplitContainer) -> void:
-	var nodes: Array = c.focus_nodes
-	if nodes.size() > 1 and is_opened(c.direction, c.split_offset, c.proportion):
-		nodes[1].grab_focus()
-	else:
-		nodes[0].grab_focus()
+func focus_element_back(c: SplitContainer) -> void:
+	c.focus_nodes[1].grab_focus()
+
+func focus_element_direct(c: SplitContainer) -> void:
+	c.focus_nodes[0].grab_focus()
