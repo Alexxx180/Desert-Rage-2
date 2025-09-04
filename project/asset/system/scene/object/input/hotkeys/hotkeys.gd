@@ -1,5 +1,7 @@
 extends Node
 
+signal feedback()
+
 @export var main: String = "drag_up"
 @export var events: Array[Array] = [
 	[[true, 0], [false, 2]]
@@ -24,4 +26,5 @@ func listen(event: InputEvent) -> bool:
 	while (not result) and (i > 0):
 		i -= 1
 		result = linked_events(events[i])
+	if result: feedback.emit()
 	return result

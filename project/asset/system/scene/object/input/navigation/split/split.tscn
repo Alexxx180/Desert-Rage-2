@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://ph1bka3pi2g5"]
+
+[ext_resource type="Script" uid="uid://dyglon46lwd4j" path="res://asset/system/scene/object/input/navigation/split/split.gd" id="1_0jfel"]
+[ext_resource type="PackedScene" uid="uid://bmf26ewu2u0l0" path="res://asset/system/scene/object/input/hotkeys/hotkeys.tscn" id="1_dp4dc"]
+
+[node name="navigation" type="Node"]
+script = ExtResource("1_0jfel")
+
+[node name="instant" parent="." instance=ExtResource("1_dp4dc")]
+main = "drag_left"
+
+[node name="tab_focus" parent="." instance=ExtResource("1_dp4dc")]
+main = "drag_smooth_direct_right"
+
+[node name="smooth_direct" parent="." instance=ExtResource("1_dp4dc")]
+main = "drag_smooth_direct_right"
+events = Array[Array]([[[true, 0], [true, 2]]])
+
+[node name="smooth_back" parent="." instance=ExtResource("1_dp4dc")]
+main = "drag_smooth_back_right"
+events = Array[Array]([[[true, 0], [true, 2], [true, 3]]])
