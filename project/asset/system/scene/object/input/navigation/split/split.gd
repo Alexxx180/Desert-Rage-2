@@ -16,7 +16,7 @@ func swap_array_slot(result: Array, j: int, slot: int) -> void:
 func bubble_sort(result: Array) -> Array:
 	var n: int = result.size()
 	for i in range(0, n):
-		for j in range(0, n - i):
+		for j in range(0, n - i - 1):
 			if result[j][1] < result[j + 1][1]:
 				swap_array_slot(result, j, 0)
 				swap_array_slot(result, j, 1)
@@ -59,6 +59,8 @@ func _ready() -> void:
 	set_input_order()
 
 func _input(event: InputEvent) -> void:
+	print("MASK: ", mask)
 	for i in mask:
+		print("I: ", i)
 		if actions[i].listen(event):
 			return

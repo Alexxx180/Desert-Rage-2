@@ -5,17 +5,10 @@ var stack: String = "ability/controls/markers/margin/stack/"
 @export var reserve: Array[PackedFloat32Array] = [[-6, -0.5], [-70, -0.5], [-106, -0.5]]
 @export var node_paths: Array[Array] = [["../topic/scroll/margin/stack/selection"],
 	[stack + "ray", stack + "rock"], [stack + "rock"]]
-@export var focus_paths: Array[String] = ["", ""]
-
-@onready var instant: Node = $instant
-@onready var tab_focus: Node = $tab_focus
-@onready var smooth: Dictionary = {
-	"direct": $smooth_direct, "back": $smooth_back
-}
+@onready var navigation: Node = $navigation
 
 var logic: SplitToggleLogic = SplitToggleLogic.new()
 var ui_nodes: Array[Array] = []
-var focus_nodes: Array[Control] = []
 var direction: float:
 	get: return reserve[0][1]
 var proportion: float:
@@ -29,24 +22,9 @@ func _ready() -> void:
 		ui_nodes.append([])
 		for path in node_paths[i]:
 			ui_nodes[i].append(get_node(path))
-	for path in focus_paths:
-		focus_nodes.append(get_node(path))
 
 func on_drag_end() -> void:
 	for i in range(0, len(reserve)):
 		var dir: float = reserve[i][1]
 		var next: float = float(reserve[i][0] + split_offset)
 		logic.drag_feedback(dir, get_proportion(dir), next, ui_nodes[i])
-
-func _input(event: InputEvent) -> void:
-	if tab_focus.listen(event):
-		logic.focus_element(self)
-		return
-	if smooth.back.listen(event):
-		logic.smooth_back_drag(self)
-		return
-	if smooth.direct.listen(event):
-		logic.smooth_direct_drag(self)
-		return
-	if instant.listen(event):
-		logic.instant_drag(self)

@@ -2,14 +2,12 @@ extends Node
 
 signal feedback()
 
-@export var main: String = "drag_up"
-@export var events: Array[Array] = [
-	[[true, 0], [false, 2]]
-]
 var actions: ActionButtonComplex
 
 func build_caption(act: int) -> String:
-	return main if act == 0 else str(main, "_", act)
+	var caption: String = actions.action if act == 0 else str(actions.action, "_", act)
+	print("CAPTION: ", caption)
+	return caption
 
 func linked_events(acts: ActionButtonGroup) -> bool:
 	var result: bool = true

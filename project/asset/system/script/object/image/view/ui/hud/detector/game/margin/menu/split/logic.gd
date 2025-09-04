@@ -54,11 +54,15 @@ func smooth_back_drag(container: SplitContainer) -> void:
 
 func instant_drag(container: SplitContainer) -> void:
 	invariant = !invariant
-	open_menu(container, 0 if invariant else container.proportion)
-	focus_element(container)
+	if invariant:
+		open_menu(container, 0)
+		focus_element_direct(container)
+	else:
+		open_menu(container, container.proportion)
+		focus_element_back(container)
 
 func focus_element_back(c: SplitContainer) -> void:
-	c.focus_nodes[1].grab_focus()
+	c.navigation.focus_nodes[1].grab_focus()
 
 func focus_element_direct(c: SplitContainer) -> void:
-	c.focus_nodes[0].grab_focus()
+	c.navigation.focus_nodes[0].grab_focus()
