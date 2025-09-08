@@ -1,10 +1,74 @@
-[gd_scene load_steps=6 format=3 uid="uid://b1cenupqm80wx"]
+[gd_scene load_steps=25 format=3 uid="uid://b1cenupqm80wx"]
 
 [ext_resource type="StyleBox" uid="uid://cvfnqancophme" path="res://asset/resource/engine/internal/theme/style/solid-color-panel.tres" id="1_0hiii"]
 [ext_resource type="PackedScene" uid="uid://dqlgy3l13bibl" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/menu/inventory/items/items.tscn" id="1_res6x"]
 [ext_resource type="PackedScene" uid="uid://scs1xlb7x0d6" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/menu/inventory/selection.tscn" id="2_0hiii"]
 [ext_resource type="Script" uid="uid://dkebrycycbfkp" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/menu/inventory/inventory.gd" id="2_t0gma"]
 [ext_resource type="PackedScene" uid="uid://bky5mu10x2da3" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/menu/inventory/status.tscn" id="3_res6x"]
+[ext_resource type="FontFile" uid="uid://b2wbdbnkxcqv1" path="res://asset/resource/font/NotoEmoji-VariableFont_wght.ttf" id="6_qw21b"]
+[ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://asset/resource/engine/internal/theme/patterns/template/menu/settings/topic/footer.tres" id="7_sa53d"]
+[ext_resource type="FontFile" uid="uid://b37js8y80ak1k" path="res://asset/resource/font/NotoColorEmoji-Regular.ttf" id="8_sa53d"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7hlt0"]
+bg_color = Color(0.0295066, 0.0295066, 0.0295065, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qw21b"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sa53d"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2q1v8"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mqja2"]
+content_margin_left = 5.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7hlt0"]
+content_margin_left = 2.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_sa53d"]
+content_margin_left = 9.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qw21b"]
+bg_color = Color(0.0295066, 0.0295066, 0.0295065, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pfkb7"]
+content_margin_left = 4.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qym62"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xul1w"]
+content_margin_left = 8.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xul1w"]
+bg_color = Color(0.0295066, 0.0295066, 0.0295065, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vwhuc"]
+content_margin_left = 2.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2q1v8"]
+content_margin_left = 7.0
+content_margin_top = 5.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mqja2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2wauf"]
+bg_color = Color(0.435192, 0.435192, 0.435192, 1)
 
 [node name="panel" type="PanelContainer"]
 anchors_preset = 15
@@ -67,22 +131,37 @@ layout_mode = 2
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 
-[node name="flow" type="HFlowContainer" parent="scroll/margin"]
+[node name="stack" type="VBoxContainer" parent="scroll/margin"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="flow" type="HFlowContainer" parent="scroll/margin/stack"]
 layout_mode = 2
 theme_override_constants/v_separation = 25
 
-[node name="items" parent="scroll/margin/flow" instance=ExtResource("1_res6x")]
-custom_minimum_size = Vector2(200, 0)
+[node name="ray" parent="scroll/margin/stack/flow" instance=ExtResource("1_res6x")]
+custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 size_flags_vertical = 0
 size_flags_stretch_ratio = 1.0
 
-[node name="selection" parent="scroll/margin/flow" instance=ExtResource("2_0hiii")]
-custom_minimum_size = Vector2(200, 0)
+[node name="rock" parent="scroll/margin/stack/flow" instance=ExtResource("1_res6x")]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_vertical = 0
+size_flags_stretch_ratio = 1.0
+
+[node name="ray_selection" parent="scroll/margin/stack/flow" instance=ExtResource("2_0hiii")]
+custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 size_flags_stretch_ratio = 0.5
 
-[node name="margin" type="MarginContainer" parent="scroll/margin/flow"]
+[node name="rock_selection" parent="scroll/margin/stack/flow" instance=ExtResource("2_0hiii")]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_stretch_ratio = 0.5
+
+[node name="margin" type="MarginContainer" parent="scroll/margin/stack/flow"]
 visible = false
 layout_mode = 2
 size_flags_vertical = 0
@@ -91,19 +170,562 @@ theme_override_constants/margin_top = -5
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 0
 
-[node name="stack" type="VBoxContainer" parent="scroll/margin/flow/margin"]
+[node name="stack" type="VBoxContainer" parent="scroll/margin/stack/flow/margin"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="caption" type="Label" parent="scroll/margin/flow/margin/stack"]
+[node name="caption" type="Label" parent="scroll/margin/stack/flow/margin/stack"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Вода"
 
-[node name="effect" type="Label" parent="scroll/margin/flow/margin/stack"]
+[node name="effect" type="Label" parent="scroll/margin/stack/flow/margin/stack"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.724643, 0.724643, 0.724643, 1)
 text = "Восстанавливает ЖЗ и ДА"
 
-[node name="status" parent="scroll/margin/flow" instance=ExtResource("3_res6x")]
+[node name="controls" type="VBoxContainer" parent="scroll/margin/stack/flow"]
 layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="status" parent="scroll/margin/stack/flow/controls" instance=ExtResource("3_res6x")]
+layout_mode = 2
+
+[node name="ray" type="VBoxContainer" parent="scroll/margin/stack/flow/controls"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.4
+
+[node name="margin" type="MarginContainer" parent="scroll/margin/stack/flow/controls/ray"]
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="items" type="HBoxContainer" parent="scroll/margin/stack/flow/controls/ray/margin"]
+layout_mode = 2
+theme_override_constants/separation = 7
+
+[node name="effects" type="HBoxContainer" parent="scroll/margin/stack/flow/controls/ray/margin/items"]
+layout_mode = 2
+
+[node name="no_enemy" type="PanelContainer" parent="scroll/margin/stack/flow/controls/ray/margin/items/effects"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_7hlt0")
+
+[node name="margin" type="MarginContainer" parent="scroll/margin/stack/flow/controls/ray/margin/items/effects/no_enemy"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 0
+
+[node name="time" type="ProgressBar" parent="scroll/margin/stack/flow/controls/ray/margin/items/effects/no_enemy/margin"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_styles/background = SubResource("StyleBoxEmpty_qw21b")
+theme_override_styles/fill = SubResource("StyleBoxFlat_sa53d")
+max_value = 60.0
+step = 1.0
+value = 10.0
+show_percentage = false
+
+[node name="cancel" type="Label" parent="scroll/margin/stack/flow/controls/ray/margin/items/effects/no_enemy"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_qw21b")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_2q1v8")
+text = "🚫"
+
+[node name="category" type="Label" parent="scroll/margin/stack/flow/controls/ray/margin/items/effects/no_enemy"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_qw21b")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_mqja2")
+text = "👿"
+
+[node name="health" type="PanelContainer" parent="scroll/margin/stack/flow/controls/ray/margin/items/effects"]
+visible = false
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_7hlt0")
+
+[node name="margin" type="MarginContainer" parent="scroll/margin/stack/flow/controls/ray/margin/items/effects/health"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 0
+
+[node name="time" type="ProgressBar" parent="scroll/margin/stack/flow/controls/ray/margin/items/effects/health/margin"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_styles/background = SubResource("StyleBoxEmpty_qw21b")
+theme_override_styles/fill = SubResource("StyleBoxFlat_sa53d")
+max_value = 60.0
+step = 1.0
+value = 10.0
+show_percentage = false
+
+[node name="category" type="Label" parent="scroll/margin/stack/flow/controls/ray/margin/items/effects/health"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_qw21b")
+theme_override_font_sizes/font_size = 21
+theme_override_styles/normal = SubResource("StyleBoxEmpty_7hlt0")
+text = "🩸"
+
+[node name="plus" type="Label" parent="scroll/margin/stack/flow/controls/ray/margin/items/effects/health"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_qw21b")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxEmpty_sa53d")
+text = "+"
+
+[node name="influence" type="PanelContainer" parent="scroll/margin/stack/flow/controls/ray/margin/items/effects"]
+visible = false
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_7hlt0")
+
+[node name="margin" type="MarginContainer" parent="scroll/margin/stack/flow/controls/ray/margin/items/effects/influence"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 0
+
+[node name="time" type="ProgressBar" parent="scroll/margin/stack/flow/controls/ray/margin/items/effects/influence/margin"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_styles/background = SubResource("StyleBoxEmpty_qw21b")
+theme_override_styles/fill = SubResource("StyleBoxFlat_sa53d")
+max_value = 60.0
+step = 1.0
+value = 10.0
+show_percentage = false
+
+[node name="category" type="Label" parent="scroll/margin/stack/flow/controls/ray/margin/items/effects/influence"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_qw21b")
+theme_override_font_sizes/font_size = 21
+theme_override_styles/normal = SubResource("StyleBoxEmpty_7hlt0")
+text = "💧"
+
+[node name="plus" type="Label" parent="scroll/margin/stack/flow/controls/ray/margin/items/effects/influence"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("6_qw21b")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxEmpty_sa53d")
+text = "+"
+
+[node name="no_poison" type="PanelContainer" parent="scroll/margin/stack/flow/controls/ray/margin/items/effects"]
+visible = false
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_qw21b")
+
+[node name="cancel" type="Label" parent="scroll/margin/stack/flow/controls/ray/margin/items/effects/no_poison"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_qw21b")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_pfkb7")
+text = "💀"
+
+[node name="category" type="Label" parent="scroll/margin/stack/flow/controls/ray/margin/items/effects/no_poison"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_qw21b")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_qym62")
+text = "🩸"
+
+[node name="minus" type="Label" parent="scroll/margin/stack/flow/controls/ray/margin/items/effects/no_poison"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_qw21b")
+theme_override_font_sizes/font_size = 22
+theme_override_styles/normal = SubResource("StyleBoxEmpty_xul1w")
+text = "-"
+
+[node name="no_cough" type="PanelContainer" parent="scroll/margin/stack/flow/controls/ray/margin/items/effects"]
+visible = false
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_xul1w")
+
+[node name="category" type="Label" parent="scroll/margin/stack/flow/controls/ray/margin/items/effects/no_cough"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_qw21b")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_vwhuc")
+text = "🤧"
+
+[node name="minus" type="MarginContainer" parent="scroll/margin/stack/flow/controls/ray/margin/items/effects/no_cough"]
+layout_mode = 2
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = -14
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="caption" type="Label" parent="scroll/margin/stack/flow/controls/ray/margin/items/effects/no_cough/minus"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_qw21b")
+theme_override_font_sizes/font_size = 22
+theme_override_styles/normal = SubResource("StyleBoxEmpty_xul1w")
+text = "-"
+
+[node name="caption" type="Label" parent="scroll/margin/stack/flow/controls/ray/margin/items"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 24
+text = "Чучело"
+text_overrun_behavior = 3
+
+[node name="craft" type="PanelContainer" parent="scroll/margin/stack/flow/controls/ray/margin/items"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_7hlt0")
+
+[node name="category" type="Label" parent="scroll/margin/stack/flow/controls/ray/margin/items/craft"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_qw21b")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_mqja2")
+text = "⚒️"
+
+[node name="caption" type="HBoxContainer" parent="scroll/margin/stack/flow/controls/ray"]
+layout_mode = 2
+theme_override_constants/separation = 7
+
+[node name="effect" type="Label" parent="scroll/margin/stack/flow/controls/ray/caption"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme = ExtResource("7_sa53d")
+theme_override_constants/line_spacing = -7
+theme_override_font_sizes/font_size = 18
+text = "Отвлекает противников"
+autowrap_mode = 2
+
+[node name="craft" type="Label" parent="scroll/margin/stack/flow/controls/ray/caption"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("7_sa53d")
+theme_override_constants/line_spacing = -7
+theme_override_font_sizes/font_size = 18
+text = "Глаз / Кость / Бинт x3"
+horizontal_alignment = 2
+autowrap_mode = 2
+
+[node name="rock" type="VBoxContainer" parent="scroll/margin/stack/flow/controls"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.4
+
+[node name="margin" type="MarginContainer" parent="scroll/margin/stack/flow/controls/rock"]
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="items" type="HBoxContainer" parent="scroll/margin/stack/flow/controls/rock/margin"]
+layout_mode = 2
+theme_override_constants/separation = 7
+
+[node name="effects" type="HBoxContainer" parent="scroll/margin/stack/flow/controls/rock/margin/items"]
+layout_mode = 2
+
+[node name="power" type="PanelContainer" parent="scroll/margin/stack/flow/controls/rock/margin/items/effects"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_7hlt0")
+
+[node name="category" type="Label" parent="scroll/margin/stack/flow/controls/rock/margin/items/effects/power"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("8_sa53d")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxEmpty_2q1v8")
+text = "⚔️"
+
+[node name="reaction" type="PanelContainer" parent="scroll/margin/stack/flow/controls/rock/margin/items/effects"]
+visible = false
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_7hlt0")
+
+[node name="category" type="Label" parent="scroll/margin/stack/flow/controls/rock/margin/items/effects/reaction"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("8_sa53d")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxEmpty_2q1v8")
+text = "🛡"
+
+[node name="health" type="PanelContainer" parent="scroll/margin/stack/flow/controls/rock/margin/items/effects"]
+visible = false
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_7hlt0")
+
+[node name="margin" type="MarginContainer" parent="scroll/margin/stack/flow/controls/rock/margin/items/effects/health"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 0
+
+[node name="time" type="ProgressBar" parent="scroll/margin/stack/flow/controls/rock/margin/items/effects/health/margin"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_styles/background = SubResource("StyleBoxEmpty_qw21b")
+theme_override_styles/fill = SubResource("StyleBoxFlat_sa53d")
+max_value = 60.0
+step = 1.0
+value = 10.0
+show_percentage = false
+
+[node name="category" type="Label" parent="scroll/margin/stack/flow/controls/rock/margin/items/effects/health"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_qw21b")
+theme_override_font_sizes/font_size = 21
+theme_override_styles/normal = SubResource("StyleBoxEmpty_7hlt0")
+text = "🩸"
+
+[node name="plus" type="Label" parent="scroll/margin/stack/flow/controls/rock/margin/items/effects/health"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_qw21b")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxEmpty_sa53d")
+text = "+"
+
+[node name="influence" type="PanelContainer" parent="scroll/margin/stack/flow/controls/rock/margin/items/effects"]
+visible = false
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_7hlt0")
+
+[node name="margin" type="MarginContainer" parent="scroll/margin/stack/flow/controls/rock/margin/items/effects/influence"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 0
+
+[node name="time" type="ProgressBar" parent="scroll/margin/stack/flow/controls/rock/margin/items/effects/influence/margin"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_styles/background = SubResource("StyleBoxEmpty_qw21b")
+theme_override_styles/fill = SubResource("StyleBoxFlat_sa53d")
+max_value = 60.0
+step = 1.0
+value = 10.0
+show_percentage = false
+
+[node name="category" type="Label" parent="scroll/margin/stack/flow/controls/rock/margin/items/effects/influence"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_qw21b")
+theme_override_font_sizes/font_size = 21
+theme_override_styles/normal = SubResource("StyleBoxEmpty_7hlt0")
+text = "💧"
+
+[node name="plus" type="Label" parent="scroll/margin/stack/flow/controls/rock/margin/items/effects/influence"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("6_qw21b")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxEmpty_sa53d")
+text = "+"
+
+[node name="no_poison" type="PanelContainer" parent="scroll/margin/stack/flow/controls/rock/margin/items/effects"]
+visible = false
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_qw21b")
+
+[node name="cancel" type="Label" parent="scroll/margin/stack/flow/controls/rock/margin/items/effects/no_poison"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_qw21b")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_pfkb7")
+text = "💀"
+
+[node name="category" type="Label" parent="scroll/margin/stack/flow/controls/rock/margin/items/effects/no_poison"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_qw21b")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_qym62")
+text = "🩸"
+
+[node name="minus" type="Label" parent="scroll/margin/stack/flow/controls/rock/margin/items/effects/no_poison"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_qw21b")
+theme_override_font_sizes/font_size = 22
+theme_override_styles/normal = SubResource("StyleBoxEmpty_xul1w")
+text = "-"
+
+[node name="no_cough" type="PanelContainer" parent="scroll/margin/stack/flow/controls/rock/margin/items/effects"]
+visible = false
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_xul1w")
+
+[node name="category" type="Label" parent="scroll/margin/stack/flow/controls/rock/margin/items/effects/no_cough"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_qw21b")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_vwhuc")
+text = "🤧"
+
+[node name="minus" type="MarginContainer" parent="scroll/margin/stack/flow/controls/rock/margin/items/effects/no_cough"]
+layout_mode = 2
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = -14
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="caption" type="Label" parent="scroll/margin/stack/flow/controls/rock/margin/items/effects/no_cough/minus"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_qw21b")
+theme_override_font_sizes/font_size = 22
+theme_override_styles/normal = SubResource("StyleBoxEmpty_xul1w")
+text = "-"
+
+[node name="caption" type="Label" parent="scroll/margin/stack/flow/controls/rock/margin/items"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 24
+text = "Чучело"
+text_overrun_behavior = 3
+
+[node name="additional" type="HBoxContainer" parent="scroll/margin/stack/flow/controls/rock/margin/items"]
+layout_mode = 2
+
+[node name="craft" type="PanelContainer" parent="scroll/margin/stack/flow/controls/rock/margin/items/additional"]
+visible = false
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_7hlt0")
+
+[node name="category" type="Label" parent="scroll/margin/stack/flow/controls/rock/margin/items/additional/craft"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_qw21b")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_mqja2")
+text = "⚒️"
+
+[node name="influence" type="PanelContainer" parent="scroll/margin/stack/flow/controls/rock/margin/items/additional"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_7hlt0")
+
+[node name="category" type="Label" parent="scroll/margin/stack/flow/controls/rock/margin/items/additional/influence"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("8_sa53d")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxEmpty_2q1v8")
+text = "🔥"
+
+[node name="reaction" type="PanelContainer" parent="scroll/margin/stack/flow/controls/rock/margin/items/additional"]
+visible = false
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_7hlt0")
+
+[node name="category" type="Label" parent="scroll/margin/stack/flow/controls/rock/margin/items/additional/reaction"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("8_sa53d")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxEmpty_2q1v8")
+text = "🫧"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="scroll/margin/stack/flow/controls/rock"]
+layout_mode = 2
+
+[node name="main" type="VBoxContainer" parent="scroll/margin/stack/flow/controls/rock/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 7
+
+[node name="effect" type="Label" parent="scroll/margin/stack/flow/controls/rock/HBoxContainer/main"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme = ExtResource("7_sa53d")
+theme_override_constants/line_spacing = -7
+theme_override_font_sizes/font_size = 18
+text = "+25 к мощи"
+autowrap_mode = 2
+
+[node name="equipment" type="ProgressBar" parent="scroll/margin/stack/flow/controls/rock/HBoxContainer/main"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+size_flags_stretch_ratio = 4.0
+theme_override_styles/background = SubResource("StyleBoxEmpty_mqja2")
+theme_override_styles/fill = SubResource("StyleBoxFlat_2wauf")
+max_value = 90.0
+step = 1.0
+value = 70.0
+show_percentage = false
+
+[node name="addon" type="VBoxContainer" parent="scroll/margin/stack/flow/controls/rock/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 7
+
+[node name="craft" type="Label" parent="scroll/margin/stack/flow/controls/rock/HBoxContainer/addon"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("7_sa53d")
+theme_override_constants/line_spacing = -7
+theme_override_font_sizes/font_size = 18
+text = "+25 к влиянию"
+horizontal_alignment = 2
+autowrap_mode = 2
+
+[node name="equipment" type="ProgressBar" parent="scroll/margin/stack/flow/controls/rock/HBoxContainer/addon"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+size_flags_stretch_ratio = 4.0
+theme_override_styles/background = SubResource("StyleBoxEmpty_mqja2")
+theme_override_styles/fill = SubResource("StyleBoxFlat_2wauf")
+max_value = 90.0
+step = 1.0
+value = 70.0
+show_percentage = false

@@ -1,4 +1,4 @@
-[gd_scene load_steps=84 format=3 uid="uid://cel3u88abrgv3"]
+[gd_scene load_steps=81 format=3 uid="uid://cel3u88abrgv3"]
 
 [ext_resource type="Theme" uid="uid://p2br8b6ea3n6" path="res://asset/resource/engine/internal/theme/patterns/template/menu/hud/pause/pause.tres" id="1_klae1"]
 [ext_resource type="Script" uid="uid://81xdi4771u0a" path="res://asset/system/script/object/image/view/ui/hud/detector/game/game.gd" id="1_o71r6"]
@@ -6,11 +6,8 @@
 [ext_resource type="Script" uid="uid://dommedweskvsj" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/margin.gd" id="2_m0xgs"]
 [ext_resource type="PackedScene" uid="uid://b01p37el432af" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/preview/hints/hints.tscn" id="2_mf7wa"]
 [ext_resource type="FontFile" uid="uid://b37js8y80ak1k" path="res://asset/resource/font/NotoColorEmoji-Regular.ttf" id="4_42m6k"]
-[ext_resource type="Script" uid="uid://e0hw6usabyvx" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/menu/split/horizontal.gd" id="4_j1gc2"]
 [ext_resource type="PackedScene" uid="uid://ph1bka3pi2g5" path="res://asset/system/scene/object/input/navigation/split/split.tscn" id="5_dhhqb"]
 [ext_resource type="PackedScene" uid="uid://cbd4idujs0m3k" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/dialog/dialog.tscn" id="5_x67kx"]
-[ext_resource type="Script" uid="uid://b15hdwi7xixe4" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/menu/split/vertical/vertical.gd" id="6_0lb01"]
-[ext_resource type="Script" uid="uid://bbf7hgtvtayvj" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/menu/split/vertical/multiple.gd" id="6_3tqp8"]
 [ext_resource type="Resource" uid="uid://ckt8qtx3k763i" path="res://asset/resource/engine/external/controls/split/priorities.tres" id="6_hrbpv"]
 [ext_resource type="Resource" uid="uid://crjf8gs0qa35w" path="res://asset/resource/engine/external/controls/split/stats.tres" id="7_ccxqt"]
 [ext_resource type="PackedScene" uid="uid://d0sq1ex503flw" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/hide.tscn" id="7_koglg"]
@@ -247,10 +244,11 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 split_offset = 2000
-script = ExtResource("4_j1gc2")
-node_paths = Array[String](["stats/inventory/topic/scroll/margin/flow/status", "stats/inventory/ability/topic/scroll/margin/stack/flow/perks", "stats/inventory/ability/controls/hints/space/preview/help", "stats/inventory/ability/controls/markers/margin/stack"])
 
 [node name="navigation" parent="menu" instance=ExtResource("5_dhhqb")]
+direction = 0.5
+reserve = Array[float]([6.0])
+node_paths = Array[Array]([["../stats/inventory/topic/scroll/margin/stack/flow/status", "../stats/inventory/ability/topic/scroll/margin/stack/flow/perks", "../stats/inventory/ability/controls/hints/space/preview/help", "../stats/inventory/ability/controls/markers/margin/stack"]])
 focus_paths = Array[String](["../priorities/scroll/margin/stack/status/base/health/merge/flash/cork", "../stats/inventory/ability/controls/hints/space/preview/help/tabs/books"])
 controls = ExtResource("6_hrbpv")
 
@@ -259,12 +257,11 @@ layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 split_offset = -2000
-script = ExtResource("4_j1gc2")
-reserve = -24
-direction = -1.0
-node_paths = Array[String](["inventory/topic/scroll/margin/flow/items", "inventory/ability/controls/hints/space/preview/chats"])
 
 [node name="navigation" parent="menu/stats" instance=ExtResource("5_dhhqb")]
+direction = -1.0
+reserve = Array[float]([-24.0])
+node_paths = Array[Array]([["../inventory/topic/scroll/margin/stack/flow/items", "../inventory/ability/controls/hints/space/preview/chats"]])
 focus_paths = Array[String](["../topic/scroll/margin/stack/items/ray/slot_0", "../inventory/ability/controls/hints/space/preview/chats/tabs/chat"])
 controls = ExtResource("7_ccxqt")
 
@@ -276,10 +273,11 @@ layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
 split_offset = -2000
-script = ExtResource("6_3tqp8")
 
 [node name="navigation" parent="menu/stats/inventory" instance=ExtResource("5_dhhqb")]
-focus_paths = Array[String](["../topic/scroll/margin/flow/items/slot_0", "../ability/controls/markers/margin/stack/ray/margin/stack/hero/caption"])
+reserve = Array[float]([-6.0, -74.0])
+node_paths = Array[Array]([["../topic/scroll/margin/stack/flow/items/slot_0"], ["../ability/controls/markers/margin/stack/ray", "../ability/controls/markers/margin/stack/rock"]])
+focus_paths = Array[String](["../topic/scroll/margin/stack/flow/items/slot_0", "../ability/controls/markers/margin/stack/ray/margin/stack/hero/caption"])
 controls = ExtResource("10_u412m")
 
 [node name="topic" parent="menu/stats/inventory" instance=ExtResource("11_1y8ov")]
@@ -290,13 +288,12 @@ layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
 split_offset = 2000
-script = ExtResource("6_0lb01")
-reserve = 24
-direction = 1.0
-node_paths = Array[String](["controls/topic/status", "controls/topic/menu", "controls/topic/pause"])
 
 [node name="navigation" parent="menu/stats/inventory/ability" instance=ExtResource("5_dhhqb")]
-focus_paths = Array[String](["../topic/scroll/margin/stack/menu/pause", "../controls/topic/status/experience/caption/main/ability/x"])
+direction = 1.0
+reserve = Array[float]([24.0])
+node_paths = Array[Array]([["../controls/topic/status", "../controls/topic/menu", "../controls/topic/pause"]])
+focus_paths = Array[String](["../topic/scroll/margin/stack/menu/fast-access/experience/caption/main/ability/x", "../controls/topic/status/experience/caption/main/ability/x"])
 controls = ExtResource("13_xe00t")
 
 [node name="controls" type="VBoxContainer" parent="menu/stats/inventory/ability"]
@@ -1867,7 +1864,6 @@ theme_override_font_sizes/font_size = 14
 [node name="collapse" parent="menu/stats/inventory/ability/controls/markers/margin/stack/rock/margin/stack/combo/status" instance=ExtResource("21_2ftas")]
 
 [node name="ailments" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/markers/margin/stack/rock/margin/stack"]
-visible = false
 layout_mode = 2
 theme_override_constants/separation = 2
 
@@ -1972,9 +1968,9 @@ value = 10.0
 show_percentage = false
 
 [node name="burn" type="PanelContainer" parent="menu/stats/inventory/ability/controls/markers/margin/stack/rock/margin/stack/ailments"]
-visible = false
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
+size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_xe00t")
 
 [node name="skull" type="Label" parent="menu/stats/inventory/ability/controls/markers/margin/stack/rock/margin/stack/ailments/burn"]
@@ -1993,7 +1989,7 @@ text = "🔥"
 
 [node name="margin" type="MarginContainer" parent="menu/stats/inventory/ability/controls/markers/margin/stack/rock/margin/stack/ailments/burn"]
 layout_mode = 2
-size_flags_vertical = 8
+size_flags_vertical = 0
 theme_override_constants/margin_left = 3
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 3
@@ -3585,8 +3581,3 @@ layout_mode = 2
 
 [node name="priorities" parent="menu" instance=ExtResource("13_iexbr")]
 layout_mode = 2
-
-[connection signal="drag_ended" from="menu" to="menu" method="on_drag_end"]
-[connection signal="drag_ended" from="menu/stats" to="menu/stats" method="on_drag_end"]
-[connection signal="drag_ended" from="menu/stats/inventory" to="menu/stats/inventory" method="on_drag_end"]
-[connection signal="drag_ended" from="menu/stats/inventory/ability" to="menu/stats/inventory/ability" method="on_drag_end"]

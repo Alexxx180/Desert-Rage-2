@@ -7,6 +7,7 @@ class_name ActionButtonComplex
 
 @export var action: String
 @export var complex: Array[ActionButtonGroup] = []
+# @export var passthru: bool
 
 var count: int:
 	get: return complex.size()
