@@ -2,6 +2,9 @@ extends RefCounted
 
 class_name SplitToggleLogic
 
+signal resume_input()
+signal suspend_input()
+
 var toggled: bool = false
 var focus: Array
 var navigation: Node
@@ -21,17 +24,17 @@ func hide(nodes: Array) -> void: toggle(nodes, "hides", func(n): n.hides(), func
 func show(nodes: Array) -> void: toggle(nodes, "shows", func(n): n.shows(), func(n): n.show())
 
 func open_condition(direction: float) -> Callable:
-	return (func(a, b): return a <= b) if direction < 0 else (func(a, b): return a >= b)
+	return (func(a, b): return a >= b) if direction < 0 else (func(a, b): return a <= b)
 
 func is_opened_at(item: int) -> bool:
 	var n: Node = navigation
 	var offset: float = float(n.reserve[item] + n.ui.split_offset)
-	print("OFFSET: ", offset, " - PORTION: ", n.proportion)
+	#print("OFFSET: ", offset, " - PORTION: ", n.proportion)
 	return open_condition(n.direction).call(offset, n.proportion)
 
 func drag_feedback(opened: bool, nodes: Array) -> void:
-	if opened: show(nodes)
-	else: hide(nodes)
+	if opened: hide(nodes)
+	else: show(nodes)
 
 func open_menu(next: int) -> void:
 	navigation.ui.split_offset = next
@@ -44,13 +47,13 @@ func out_screen_drag(condition: bool, offset: float, portion: float) -> void:
 	open_menu(portion if condition else offset)
 
 func straight_drag() -> void:
-	var move: float = _get_move(1, -1, navigation.ui.direction)
+	var move: float = _get_move(1, -1, navigation.direction)
 	var offset: float = navigation.ui.split_offset + move
-	var portion: float = navigation.ui.proportion
+	var portion: float = navigation.proportion
 	out_screen_drag(offset > portion if move < 0 else offset < portion, offset, portion)
 
 func backward_drag() -> void:
-	var move: float = _get_move(-1, 1, navigation.ui.direction)
+	var move: float = _get_move(-1, 1, navigation.direction)
 	open_menu(navigation.ui.split_offset + move)
 
 func set_effect(offset: int, focus: int) -> void:

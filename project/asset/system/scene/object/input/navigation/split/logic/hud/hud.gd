@@ -19,5 +19,5 @@ func on_drag_start() -> void:
 func on_drag_end() -> void:
 	for i in range(0, len(logic.navigation.reserve)):
 		logic.drag_feedback(logic.is_opened_at(i), ui_nodes[i])
-	if not logic.is_opened_last:
-		resume_input.emit()
+	#if not logic.is_opened_last:
+	resume_input.emit()
