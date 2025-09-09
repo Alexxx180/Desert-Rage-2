@@ -1,11 +1,13 @@
 extends Node
 
 signal feedback()
+signal strength_input(power: float)
 
 @export var delay: bool = false
 @onready var timer: Timer = $timer
 
 var actions: ActionButtonComplex
+var power: Vector2
 
 func _ready() -> void:
 	timer.timeout.connect(give_feedback)
@@ -18,6 +20,10 @@ func build_caption(act: int) -> String:
 	# print("CAPTION: ", caption)
 	return caption
 
+func check_strength(is_power: bool, caption: String) -> void:
+	if is_power:
+		Input.get_action_strength(caption)
+
 func linked_events(acts: ActionButtonGroup) -> bool:
 	var result: bool = true
 	for act in acts.group:
@@ -29,9 +35,11 @@ func linked_events(acts: ActionButtonGroup) -> bool:
 				result = result and Input.is_action_just_released(caption)
 			_:
 				result = result and Input.is_action_pressed(caption)
+				check_strength(act.state, caption)
 	return result
 
 func listen(event: InputEvent) -> bool:
+	power = Vector2.ZERO
 	var result: bool = false
 	var i: int = len(actions.complex)
 	while (not result) and (i > 0):
@@ -40,5 +48,7 @@ func listen(event: InputEvent) -> bool:
 	if result:
 		if delay: pass # timer.start()
 		else: give_feedback()
-	# if actions.passthru: return false
+	if power != Vector2.ZERO:
+		strength_input.emit(power.x / power.y)
+		return false
 	return result

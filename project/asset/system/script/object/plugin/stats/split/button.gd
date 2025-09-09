@@ -6,3 +6,4 @@ enum ActionButtonState { PRESSED = 0, TOGGLED = 1, RELEASED = 2 }
 
 @export var state: ActionButtonState = ActionButtonState.PRESSED
 @export var id: int
+@export var power: bool
