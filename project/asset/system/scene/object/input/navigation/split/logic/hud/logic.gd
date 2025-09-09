@@ -20,12 +20,13 @@ func open_condition(direction: float) -> Callable:
 	return (func(a, b): return a <= b) if direction < 0 else (func(a, b): return a >= b)
 
 func drag_feedback(direction: float, proportion: float, offset: float, nodes: Array) -> void:
+	print("OFFSET: ", offset, " - PORTION: ", proportion)
 	if open_condition(direction).call(offset, proportion): show(nodes)
 	else: hide(nodes)
 
 func open_menu(next: int) -> void:
 	navigation.ui.split_offset = next
-	navigation.ui.on_drag_end()
+	navigation.hud.on_drag_end()
 
 func _get_move(a: int, b: int, dir: float) -> float:
 	return MOVE * (a if dir < 0 else b)

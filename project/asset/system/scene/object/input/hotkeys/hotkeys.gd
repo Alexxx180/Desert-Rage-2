@@ -4,25 +4,26 @@ signal feedback()
 signal strength_input(power: float)
 
 @export var delay: bool = false
-@onready var timer: Timer = $timer
+"""
+@onready var timer: Timer = $timer  # delay implementation
+func _ready() -> void: timer.timeout.connect(give_feedback)
+func restart_delay() -> void: if not timer.is_stopped(): timer.start()
+# """
+
+const FIXED_POWER: float = 1.0
 
 var actions: ActionButtonComplex
 var power: Vector2
-
-func _ready() -> void:
-	timer.timeout.connect(give_feedback)
+var fixed: bool = false
 
 func give_feedback() -> void: feedback.emit()
-func restart_delay() -> void: if not timer.is_stopped(): timer.start()
-
 func build_caption(act: int) -> String:
 	var caption: String = actions.action if act == 0 else str(actions.action, "_", act)
 	# print("CAPTION: ", caption)
 	return caption
 
-func check_strength(is_power: bool, caption: String) -> void:
-	if is_power:
-		Input.get_action_strength(caption)
+func set_strength(strength: float) -> void:
+	power += Vector2(strength, 1)
 
 func linked_events(acts: ActionButtonGroup) -> bool:
 	var result: bool = true
@@ -31,11 +32,13 @@ func linked_events(acts: ActionButtonGroup) -> bool:
 		match act.state:
 			ActionButton.ActionButtonState.TOGGLED:
 				result = result and Input.is_action_just_pressed(caption)
+				if act.power: set_strength(FIXED_POWER)
 			ActionButton.ActionButtonState.RELEASED:
 				result = result and Input.is_action_just_released(caption)
+				if act.power: set_strength(FIXED_POWER)
 			_:
 				result = result and Input.is_action_pressed(caption)
-				check_strength(act.state, caption)
+				if act.power: set_strength(FIXED_POWER if fixed else Input.get_action_strength(caption))
 	return result
 
 func listen(event: InputEvent) -> bool:
@@ -45,10 +48,8 @@ func listen(event: InputEvent) -> bool:
 	while (not result) and (i > 0):
 		i -= 1
 		result = linked_events(actions.complex[i])
-	if result:
-		if delay: pass # timer.start()
-		else: give_feedback()
 	if power != Vector2.ZERO:
 		strength_input.emit(power.x / power.y)
-		return false
+	if result: give_feedback() # delay implementation
+	if actions.passthru: return false
 	return result

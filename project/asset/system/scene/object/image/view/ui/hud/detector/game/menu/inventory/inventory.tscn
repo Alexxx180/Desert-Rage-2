@@ -146,17 +146,239 @@ size_flags_vertical = 0
 size_flags_stretch_ratio = 1.0
 
 [node name="rock" parent="scroll/margin/stack/flow" instance=ExtResource("1_res6x")]
+visible = false
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 size_flags_vertical = 0
 size_flags_stretch_ratio = 1.0
 
-[node name="ray_selection" parent="scroll/margin/stack/flow" instance=ExtResource("2_0hiii")]
+[node name="ray_selection" type="VBoxContainer" parent="scroll/margin/stack/flow"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+
+[node name="short" type="VBoxContainer" parent="scroll/margin/stack/flow/ray_selection"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.4
+theme_override_constants/separation = -3
+
+[node name="margin" type="MarginContainer" parent="scroll/margin/stack/flow/ray_selection/short"]
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="items" type="HBoxContainer" parent="scroll/margin/stack/flow/ray_selection/short/margin"]
+layout_mode = 2
+theme_override_constants/separation = 7
+
+[node name="effects" type="HBoxContainer" parent="scroll/margin/stack/flow/ray_selection/short/margin/items"]
+layout_mode = 2
+
+[node name="no_enemy" type="PanelContainer" parent="scroll/margin/stack/flow/ray_selection/short/margin/items/effects"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_7hlt0")
+
+[node name="margin" type="MarginContainer" parent="scroll/margin/stack/flow/ray_selection/short/margin/items/effects/no_enemy"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 0
+
+[node name="time" type="ProgressBar" parent="scroll/margin/stack/flow/ray_selection/short/margin/items/effects/no_enemy/margin"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_styles/background = SubResource("StyleBoxEmpty_qw21b")
+theme_override_styles/fill = SubResource("StyleBoxFlat_sa53d")
+max_value = 60.0
+step = 1.0
+value = 10.0
+show_percentage = false
+
+[node name="cancel" type="Label" parent="scroll/margin/stack/flow/ray_selection/short/margin/items/effects/no_enemy"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_qw21b")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_2q1v8")
+text = "🚫"
+
+[node name="category" type="Label" parent="scroll/margin/stack/flow/ray_selection/short/margin/items/effects/no_enemy"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_qw21b")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_mqja2")
+text = "👿"
+
+[node name="health" type="PanelContainer" parent="scroll/margin/stack/flow/ray_selection/short/margin/items/effects"]
+visible = false
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_7hlt0")
+
+[node name="margin" type="MarginContainer" parent="scroll/margin/stack/flow/ray_selection/short/margin/items/effects/health"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 0
+
+[node name="time" type="ProgressBar" parent="scroll/margin/stack/flow/ray_selection/short/margin/items/effects/health/margin"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_styles/background = SubResource("StyleBoxEmpty_qw21b")
+theme_override_styles/fill = SubResource("StyleBoxFlat_sa53d")
+max_value = 60.0
+step = 1.0
+value = 10.0
+show_percentage = false
+
+[node name="category" type="Label" parent="scroll/margin/stack/flow/ray_selection/short/margin/items/effects/health"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_qw21b")
+theme_override_font_sizes/font_size = 21
+theme_override_styles/normal = SubResource("StyleBoxEmpty_7hlt0")
+text = "🩸"
+
+[node name="plus" type="Label" parent="scroll/margin/stack/flow/ray_selection/short/margin/items/effects/health"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_qw21b")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxEmpty_sa53d")
+text = "+"
+
+[node name="influence" type="PanelContainer" parent="scroll/margin/stack/flow/ray_selection/short/margin/items/effects"]
+visible = false
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_7hlt0")
+
+[node name="margin" type="MarginContainer" parent="scroll/margin/stack/flow/ray_selection/short/margin/items/effects/influence"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 0
+
+[node name="time" type="ProgressBar" parent="scroll/margin/stack/flow/ray_selection/short/margin/items/effects/influence/margin"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_styles/background = SubResource("StyleBoxEmpty_qw21b")
+theme_override_styles/fill = SubResource("StyleBoxFlat_sa53d")
+max_value = 60.0
+step = 1.0
+value = 10.0
+show_percentage = false
+
+[node name="category" type="Label" parent="scroll/margin/stack/flow/ray_selection/short/margin/items/effects/influence"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_qw21b")
+theme_override_font_sizes/font_size = 21
+theme_override_styles/normal = SubResource("StyleBoxEmpty_7hlt0")
+text = "💧"
+
+[node name="plus" type="Label" parent="scroll/margin/stack/flow/ray_selection/short/margin/items/effects/influence"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("6_qw21b")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxEmpty_sa53d")
+text = "+"
+
+[node name="no_poison" type="PanelContainer" parent="scroll/margin/stack/flow/ray_selection/short/margin/items/effects"]
+visible = false
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_qw21b")
+
+[node name="cancel" type="Label" parent="scroll/margin/stack/flow/ray_selection/short/margin/items/effects/no_poison"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_qw21b")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_pfkb7")
+text = "💀"
+
+[node name="category" type="Label" parent="scroll/margin/stack/flow/ray_selection/short/margin/items/effects/no_poison"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_qw21b")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_qym62")
+text = "🩸"
+
+[node name="minus" type="Label" parent="scroll/margin/stack/flow/ray_selection/short/margin/items/effects/no_poison"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_qw21b")
+theme_override_font_sizes/font_size = 22
+theme_override_styles/normal = SubResource("StyleBoxEmpty_xul1w")
+text = "-"
+
+[node name="no_cough" type="PanelContainer" parent="scroll/margin/stack/flow/ray_selection/short/margin/items/effects"]
+visible = false
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_xul1w")
+
+[node name="category" type="Label" parent="scroll/margin/stack/flow/ray_selection/short/margin/items/effects/no_cough"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_qw21b")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_vwhuc")
+text = "🤧"
+
+[node name="minus" type="MarginContainer" parent="scroll/margin/stack/flow/ray_selection/short/margin/items/effects/no_cough"]
+layout_mode = 2
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = -14
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="caption" type="Label" parent="scroll/margin/stack/flow/ray_selection/short/margin/items/effects/no_cough/minus"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_qw21b")
+theme_override_font_sizes/font_size = 22
+theme_override_styles/normal = SubResource("StyleBoxEmpty_xul1w")
+text = "-"
+
+[node name="caption" type="Label" parent="scroll/margin/stack/flow/ray_selection/short/margin/items"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 24
+text = "Чучело"
+text_overrun_behavior = 3
+
+[node name="effect" type="Label" parent="scroll/margin/stack/flow/ray_selection/short"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme = ExtResource("7_sa53d")
+theme_override_constants/line_spacing = -7
+theme_override_font_sizes/font_size = 18
+text = "Отвлекает противников"
+autowrap_mode = 2
+
+[node name="long" parent="scroll/margin/stack/flow/ray_selection" instance=ExtResource("2_0hiii")]
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 size_flags_stretch_ratio = 0.5
 
 [node name="rock_selection" parent="scroll/margin/stack/flow" instance=ExtResource("2_0hiii")]
+visible = false
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 size_flags_stretch_ratio = 0.5
@@ -192,6 +414,7 @@ size_flags_horizontal = 3
 layout_mode = 2
 
 [node name="ray" type="VBoxContainer" parent="scroll/margin/stack/flow/controls"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.4
@@ -435,6 +658,7 @@ horizontal_alignment = 2
 autowrap_mode = 2
 
 [node name="rock" type="VBoxContainer" parent="scroll/margin/stack/flow/controls"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.4
@@ -729,3 +953,6 @@ max_value = 90.0
 step = 1.0
 value = 70.0
 show_percentage = false
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="scroll/margin/stack/flow"]
+layout_mode = 2
