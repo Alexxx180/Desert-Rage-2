@@ -5,6 +5,10 @@ class_name SplitToggleLogic
 var toggled: bool = false
 var focus: Array
 var navigation: Node
+var is_opened_last: int:
+	get: return is_opened_at(-1)
+var is_opened_first: int:
+	get: return is_opened_at(0)
 
 enum { STRAIGHT = 0, BACKWARD = 1, MOVE = 3 }
 
@@ -19,9 +23,14 @@ func show(nodes: Array) -> void: toggle(nodes, "shows", func(n): n.shows(), func
 func open_condition(direction: float) -> Callable:
 	return (func(a, b): return a <= b) if direction < 0 else (func(a, b): return a >= b)
 
-func drag_feedback(direction: float, proportion: float, offset: float, nodes: Array) -> void:
-	print("OFFSET: ", offset, " - PORTION: ", proportion)
-	if open_condition(direction).call(offset, proportion): show(nodes)
+func is_opened_at(item: int) -> bool:
+	var n: Node = navigation
+	var offset: float = float(n.reserve[item] + n.ui.split_offset)
+	print("OFFSET: ", offset, " - PORTION: ", n.proportion)
+	return open_condition(n.direction).call(offset, n.proportion)
+
+func drag_feedback(opened: bool, nodes: Array) -> void:
+	if opened: show(nodes)
 	else: hide(nodes)
 
 func open_menu(next: int) -> void:
@@ -54,5 +63,10 @@ func instant_drag() -> void:
 	else: set_effect(navigation.ui.proportion, BACKWARD)
 
 func _set_focus(no: int) -> void: focus[no].grab_focus()
-func focus_backward() -> void: _set_focus(BACKWARD)
-func focus_straight() -> void: _set_focus(STRAIGHT)
+func focus_backward() -> void:
+	if not is_opened_first:
+		_set_focus(BACKWARD)
+
+func focus_straight() -> void:
+	if is_opened_last:
+		_set_focus(STRAIGHT)

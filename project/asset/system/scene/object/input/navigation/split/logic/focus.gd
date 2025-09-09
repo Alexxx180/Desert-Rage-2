@@ -2,8 +2,8 @@ extends Node
 
 enum { LOGIC = 0, HOTKEY = 1 }
 
-func restart_focus(actions: Array[Node]) -> void:
-	for i in range(0, 2): actions[i].restart_delay()
+#func restart_focus(actions: Array[Node]) -> void:
+	#for i in range(0, 2): actions[i].restart_delay()
 
 func get_controls_focus(l: SplitToggleLogic, controls: SplitNavigation) -> Array:
 	return [[l.focus_straight, controls.panel_focus], [l.focus_backward, controls.tab_focus],
@@ -19,7 +19,7 @@ func setup(navigation: Node) -> void:
 	for i in range(0, len(logic)):
 		actions[i].actions = logic[i][HOTKEY]
 		actions[i].feedback.connect(func(): logic[i][LOGIC].call())
-	for i in range(2, 5):
-		actions[i].feedback.connect(func(): restart_focus(actions))
+	# for i in range(2, 5):
+		# actions[i].feedback.connect(func(): restart_focus(actions))
 	
 	navigation.input.actions = actions

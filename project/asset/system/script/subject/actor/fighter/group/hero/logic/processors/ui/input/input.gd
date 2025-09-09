@@ -14,6 +14,7 @@ var motion: Vector2:
 var target: Vector2
 var mouse: Vector2
 var go_for_target: bool = false
+var allow_input: bool = true
 
 func check_delta(delta: Vector2, d: int) -> bool:
 	#const d: int = 32
@@ -23,7 +24,11 @@ func check_delta(delta: Vector2, d: int) -> bool:
 		return true
 	return false
 
+func resume_input() -> void: allow_input = true
+func suspend_input() -> void: allow_input = false
+
 func _input(_event: InputEvent) -> void:
+	if not allow_input: return
 	# var next: Vector2
 	# target = Vector2.ZERO
 	"""

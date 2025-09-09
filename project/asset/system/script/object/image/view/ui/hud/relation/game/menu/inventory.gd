@@ -1,13 +1,13 @@
 extends Node
 
-func controls(hud: CanvasLayer, inventory: VSplitContainer) -> void:
+func controls(hud: CanvasLayer, group: Node2D, inventory: VSplitContainer) -> void:
 	var processor: Node = hud.processor.game.inventory
 	processor.inventory.append(inventory.get_node("topic/scroll/margin/stack/flow/ray"))
 	processor.inventory.append(hud.detector.game.get_node("menu/stats/topic/scroll/margin/stack/items/ray"))
 	processor.markers = hud.detector.game.markers
 	# processor.markers = inventory.get_node("ability/controls/markers")
 	# """
-	for hero in hud.get_node("../../group").deploy.party.heroes:
+	for hero in group.deploy.party.heroes:
 		var ui: Node = hero.logic.processors.ui.inventory.logic
 		ui.items.inventory = hud.detector.game.inventory.items
 		ui.update_inventory_storage()
