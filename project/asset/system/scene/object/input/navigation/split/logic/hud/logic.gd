@@ -2,9 +2,6 @@ extends RefCounted
 
 class_name SplitToggleLogic
 
-signal resume_input()
-signal suspend_input()
-
 var toggled: bool = false
 var focus: Array
 var navigation: Node
@@ -51,10 +48,12 @@ func straight_drag() -> void:
 	var offset: float = navigation.ui.split_offset + move
 	var portion: float = navigation.proportion
 	out_screen_drag(offset > portion if move < 0 else offset < portion, offset, portion)
+	navigation.hud.delay_feedback()
 
 func backward_drag() -> void:
 	var move: float = _get_move(-1, 1, navigation.direction)
 	open_menu(navigation.ui.split_offset + move)
+	navigation.hud.delay_feedback()
 
 func set_effect(offset: int, focus: int) -> void:
 	open_menu(offset)
@@ -63,7 +62,7 @@ func set_effect(offset: int, focus: int) -> void:
 func instant_drag() -> void:
 	toggled = !toggled
 	if toggled: set_effect(0, STRAIGHT)
-	else: set_effect(navigation.ui.proportion, BACKWARD)
+	else: set_effect(navigation.proportion, BACKWARD)
 
 func _set_focus(no: int) -> void: focus[no].grab_focus()
 func focus_backward() -> void:

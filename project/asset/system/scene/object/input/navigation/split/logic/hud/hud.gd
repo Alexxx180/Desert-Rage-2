@@ -3,8 +3,13 @@ extends Node
 signal resume_input()
 signal suspend_input()
 
+@onready var timer: Timer = $suspend
+
 var logic: SplitToggleLogic = SplitToggleLogic.new()
 var ui_nodes: Array[Array] = []
+
+func _ready() -> void:
+	timer.timeout.connect(drag_feedback)
 
 func setup(navigation: Node) -> void:
 	logic.navigation = navigation
@@ -16,8 +21,15 @@ func setup(navigation: Node) -> void:
 func on_drag_start() -> void:
 	suspend_input.emit()
 
+func drag_feedback() -> void:
+	resume_input.emit()
+
+func delay_feedback() -> void:
+	timer.start()
+	on_drag_start()
+
 func on_drag_end() -> void:
 	for i in range(0, len(logic.navigation.reserve)):
 		logic.drag_feedback(logic.is_opened_at(i), ui_nodes[i])
 	#if not logic.is_opened_last:
-	resume_input.emit()
+	drag_feedback()

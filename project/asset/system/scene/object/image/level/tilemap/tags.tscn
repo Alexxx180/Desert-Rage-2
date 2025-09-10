@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dcc6j8xwa8sja" path="res://asset/system/scene/object/image/level/tilemap/tags/transition/transition.tscn" id="4_f0jtv"]
 [ext_resource type="PackedScene" uid="uid://cpqefbx7xpeak" path="res://asset/system/scene/object/image/view/sight/transition/stairs/down/start.tscn" id="5_an07y"]
 [ext_resource type="Script" uid="uid://dre3qbh03iqv6" path="res://asset/system/script/subject/control/layer/tags/books.gd" id="6_ihebp"]
-[ext_resource type="Script" uid="uid://bkn34ceoc57km" path="res://asset/system/script/subject/control/layer/tags/enemy.gd" id="7_qamm0"]
+[ext_resource type="Script" uid="uid://dity0j0peo32f" path="res://asset/system/script/subject/control/layer/tags/enemy/enemy.gd" id="7_qamm0"]
 [ext_resource type="Script" uid="uid://st2a8frk86n3" path="res://asset/system/script/subject/control/layer/tags/chests.gd" id="8_lj802"]
 
 [sub_resource type="Resource" id="Resource_3doij"]
@@ -36,6 +36,10 @@ script = ExtResource("6_ihebp")
 
 [node name="enemy" type="Node" parent="."]
 script = ExtResource("7_qamm0")
+
+[node name="hud" type="Timer" parent="enemy"]
+wait_time = 2.0
+one_shot = true
 
 [node name="chests" type="Node" parent="."]
 script = ExtResource("8_lj802")

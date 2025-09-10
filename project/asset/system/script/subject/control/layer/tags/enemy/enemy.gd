@@ -2,9 +2,13 @@ extends Node
 
 const SOURCE: int = 4
 
+@onready var hud_reseter: Timer = $hud
+
 var places: Array[Vector2i]
+var hud: EnemyHUD = EnemyHUD.new()
 
 func setup(tags: TileMapLayer, execute: TileMapLayer, casual_mode: bool) -> void:
+	hud.set_timer(self)
 	if casual_mode: return
 	places = tags.get_used_cells_by_id(SOURCE)
 	var i: int = 0
@@ -19,8 +23,8 @@ func setup(tags: TileMapLayer, execute: TileMapLayer, casual_mode: bool) -> void
 		enemy.teleport(Tile.get_pos(execute, tag))
 		enemy.spawn_transport_index = i
 		enemy.view.animation.dead.transport.connect(func(): transport_foe(execute, enemy))
+		hud.setup(enemy)
 		i += 1
-		
 
 func transport_foe(execute: TileMapLayer, enemy: CharacterBody2D) -> void:
 	enemy.spawn_transport_index = (enemy.spawn_transport_index + 1) % places.size()

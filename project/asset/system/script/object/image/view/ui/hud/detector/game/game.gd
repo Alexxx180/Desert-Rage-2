@@ -8,9 +8,14 @@ extends Control
 @onready var preview: HBoxContainer = controls.get_node("hints/space/preview")
 @onready var hints: VBoxContainer = preview.get_node("help/content/help/hints")
 @onready var inventory: PanelContainer = $menu/stats/inventory/topic
+@onready var ability: PanelContainer = $menu/stats/inventory/ability/topic
 
 @onready var hp: Array[HBoxContainer] = _get_point_bars("health")
 @onready var ap: Array[HBoxContainer] = _get_point_bars("influence")
+
+func get_enemy_cards() -> Array:
+	return [status.get_node("enemy_1"), ability.get_node("scroll/margin/stack/menu/fast-access/enemy_1")]
+
 func _get_point_bars(caption: String) -> Array[HBoxContainer]:
 	return [
 		get_node("menu/stats/inventory/topic/scroll/margin/stack/flow/controls/status/ray/" + caption),

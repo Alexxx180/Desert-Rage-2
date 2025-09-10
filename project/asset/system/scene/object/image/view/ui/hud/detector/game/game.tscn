@@ -1,4 +1,4 @@
-[gd_scene load_steps=91 format=3 uid="uid://cel3u88abrgv3"]
+[gd_scene load_steps=97 format=3 uid="uid://cel3u88abrgv3"]
 
 [ext_resource type="Theme" uid="uid://p2br8b6ea3n6" path="res://asset/resource/engine/internal/theme/patterns/template/menu/hud/pause/pause.tres" id="1_klae1"]
 [ext_resource type="Script" uid="uid://81xdi4771u0a" path="res://asset/system/script/object/image/view/ui/hud/detector/game/game.gd" id="1_o71r6"]
@@ -41,6 +41,9 @@
 [ext_resource type="Script" uid="uid://hb6avc0h2sag" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/controls/preview/hints.gd" id="21_fuh2f"]
 [ext_resource type="Script" uid="uid://b2ugt042kmpr0" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/menu/topic/status.gd" id="26_6gnce"]
 [ext_resource type="FontFile" uid="uid://dqpftcx1b6r8j" path="res://asset/resource/font/LTStopwatch-Regular.ttf" id="34_3tqp8"]
+[ext_resource type="Script" uid="uid://cuqygsqpgrd75" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/menu/status/enemy/enemy.gd" id="38_ql3o6"]
+[ext_resource type="Script" uid="uid://cfaxt6ng6ftvc" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/menu/status/enemy/damage.gd" id="39_xe00t"]
+[ext_resource type="Script" uid="uid://buq442yndfae8" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/menu/status/enemy/hits.gd" id="40_u412m"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fuh2f"]
 
@@ -213,6 +216,15 @@ corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dhhqb"]
+content_margin_left = 7.0
+content_margin_top = 6.0
+bg_color = Color(0.0588235, 0.0588235, 0.0588235, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_g3c1s"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o4lum"]
@@ -224,6 +236,10 @@ corner_radius_top_left = 3
 corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kdjwi"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lvc3v"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2uuwx"]
 
@@ -331,7 +347,7 @@ split_offset = 2000
 controls = ExtResource("13_xe00t")
 axis = 1
 direction = 1.0
-reserve = Array[float]([24.0, 124.0])
+reserve = Array[float]([32.0, 109.0])
 node_paths = Array[Array]([["../controls/topic/status", "../controls/topic/menu", "../controls/topic/pause"], ["../topic/scroll/margin/stack/menu/fast-access/experience"]])
 focus_paths = Array[String](["../topic/scroll/margin/stack/menu/fast-access/experience/caption/main/ability/x", "../controls/topic/status/experience/caption/main/ability/x"])
 
@@ -3453,6 +3469,34 @@ theme_override_colors/font_color = Color(0.588235, 0.588235, 0.588235, 1)
 theme_override_font_sizes/font_size = 16
 text = "X"
 
+[node name="x-set" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/topic/status/experience/caption/main/ability"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 1
+
+[node name="sun" type="Button" parent="menu/stats/inventory/ability/controls/topic/status/experience/caption/main/ability/x-set"]
+custom_minimum_size = Vector2(31, 25)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("4_42m6k")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_dhhqb")
+text = "☀️"
+alignment = 0
+
+[node name="sun2" type="Button" parent="menu/stats/inventory/ability/controls/topic/status/experience/caption/main/ability/x-set"]
+custom_minimum_size = Vector2(31, 25)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("4_42m6k")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_dhhqb")
+text = "☀️"
+alignment = 0
+
 [node name="y" type="Button" parent="menu/stats/inventory/ability/controls/topic/status/experience/caption/main/ability"]
 custom_minimum_size = Vector2(39, 25)
 layout_mode = 2
@@ -3484,6 +3528,34 @@ size_flags_horizontal = 8
 theme_override_colors/font_color = Color(0.588235, 0.588235, 0.588235, 1)
 theme_override_font_sizes/font_size = 16
 text = "Y"
+
+[node name="y-set" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/topic/status/experience/caption/main/ability"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 1
+
+[node name="sun" type="Button" parent="menu/stats/inventory/ability/controls/topic/status/experience/caption/main/ability/y-set"]
+custom_minimum_size = Vector2(31, 25)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("4_42m6k")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_dhhqb")
+text = "☀️"
+alignment = 0
+
+[node name="sun2" type="Button" parent="menu/stats/inventory/ability/controls/topic/status/experience/caption/main/ability/y-set"]
+custom_minimum_size = Vector2(31, 25)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("4_42m6k")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_dhhqb")
+text = "☀️"
+alignment = 0
 
 [node name="hide" parent="menu/stats/inventory/ability/controls/topic/status/experience/caption/main/ability" instance=ExtResource("7_koglg")]
 
@@ -3560,8 +3632,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8
 theme_override_styles/panel = SubResource("StyleBoxFlat_jj441")
-
-[node name="hiding" type="Timer" parent="menu/stats/inventory/ability/controls/topic/status/enemy_1"]
+script = ExtResource("38_ql3o6")
 
 [node name="margin" type="MarginContainer" parent="menu/stats/inventory/ability/controls/topic/status/enemy_1"]
 layout_mode = 2
@@ -3570,23 +3641,86 @@ theme_override_constants/margin_top = 3
 theme_override_constants/margin_right = 7
 theme_override_constants/margin_bottom = 4
 
-[node name="description" type="Label" parent="menu/stats/inventory/ability/controls/topic/status/enemy_1/margin"]
+[node name="contents" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/topic/status/enemy_1/margin"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="caption" type="Label" parent="menu/stats/inventory/ability/controls/topic/status/enemy_1/margin/contents"]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 16
-text = "Ослик-Суслик-Паукан"
+text = "Гляделкинс"
 autowrap_mode = 2
 
-[node name="hits" type="Label" parent="menu/stats/inventory/ability/controls/topic/status/enemy_1/margin"]
+[node name="damage" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/topic/status/enemy_1/margin/contents"]
 visible = false
-custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
-size_flags_horizontal = 10
+theme_override_constants/separation = 4
+script = ExtResource("39_xe00t")
+
+[node name="health" type="Label" parent="menu/stats/inventory/ability/controls/topic/status/enemy_1/margin/contents/damage"]
+custom_minimum_size = Vector2(36, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/font_color = Color(0.588235, 0.588235, 0.588235, 1)
 theme_override_font_sizes/font_size = 16
-text = "200"
+text = "150"
 horizontal_alignment = 2
 autowrap_mode = 2
+
+[node name="minus" type="Label" parent="menu/stats/inventory/ability/controls/topic/status/enemy_1/margin/contents/damage"]
+custom_minimum_size = Vector2(7, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/font_color = Color(0.588235, 0.588235, 0.588235, 1)
+theme_override_fonts/font = ExtResource("18_3tqp8")
+theme_override_font_sizes/font_size = 10
+text = "➖"
+horizontal_alignment = 1
+vertical_alignment = 2
+autowrap_mode = 2
+
+[node name="value" type="Label" parent="menu/stats/inventory/ability/controls/topic/status/enemy_1/margin/contents/damage"]
+custom_minimum_size = Vector2(36, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(0.588235, 0.588235, 0.588235, 1)
+theme_override_font_sizes/font_size = 16
+text = "15"
+autowrap_mode = 2
+
+[node name="hits" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/topic/status/enemy_1/margin/contents"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 3
+script = ExtResource("40_u412m")
+
+[node name="x" type="Label" parent="menu/stats/inventory/ability/controls/topic/status/enemy_1/margin/contents/hits"]
+custom_minimum_size = Vector2(8, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_font_sizes/font_size = 14
+text = "x"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="count" type="Label" parent="menu/stats/inventory/ability/controls/topic/status/enemy_1/margin/contents/hits"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_font_sizes/font_size = 16
+autowrap_mode = 2
+
+[node name="contested" type="ProgressBar" parent="menu/stats/inventory/ability/controls/topic/status/enemy_1"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_styles/background = SubResource("StyleBoxEmpty_kdjwi")
+theme_override_styles/fill = SubResource("StyleBoxFlat_lvc3v")
+max_value = 15.0
+step = 1.0
+value = 10.0
+show_percentage = false
 
 [node name="health" type="ProgressBar" parent="menu/stats/inventory/ability/controls/topic/status/enemy_1"]
 layout_mode = 2
@@ -3595,7 +3729,7 @@ theme_override_styles/background = SubResource("StyleBoxEmpty_2uuwx")
 theme_override_styles/fill = SubResource("StyleBoxFlat_blc53")
 max_value = 15.0
 step = 1.0
-value = 5.0
+value = 15.0
 show_percentage = false
 
 [node name="enemy_2" type="PanelContainer" parent="menu/stats/inventory/ability/controls/topic/status"]
