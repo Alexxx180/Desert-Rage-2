@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 @onready var view: Node2D = $view
 @onready var logic: Node2D = $logic
+@export var caption: String = "eye-seeker"
 
 var spawn_transport_index: int = 0
 
