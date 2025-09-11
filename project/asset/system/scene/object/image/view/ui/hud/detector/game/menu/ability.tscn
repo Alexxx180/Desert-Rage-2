@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://6b0ydfrtbu38"]
+[gd_scene load_steps=31 format=3 uid="uid://6b0ydfrtbu38"]
 
 [ext_resource type="PackedScene" uid="uid://scs1xlb7x0d6" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/menu/inventory/selection.tscn" id="1_7touf"]
 [ext_resource type="StyleBox" uid="uid://cvfnqancophme" path="res://asset/resource/engine/internal/theme/style/solid-color-panel.tres" id="1_r0sy2"]
@@ -51,9 +51,11 @@ corner_radius_bottom_left = 3
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ywq7x"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tdkka"]
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oq1iv"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2a0ln"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_srpuw"]
 bg_color = Color(0.739789, 2.00946e-06, 5.77569e-07, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nilgw"]
@@ -412,24 +414,32 @@ size_flags_horizontal = 8
 theme_override_font_sizes/font_size = 16
 autowrap_mode = 2
 
-[node name="contested" type="ProgressBar" parent="scroll/margin/stack/menu/fast-access/enemy_1"]
+[node name="hp" type="MarginContainer" parent="scroll/margin/stack/menu/fast-access/enemy_1"]
 layout_mode = 2
 size_flags_vertical = 8
-theme_override_styles/background = SubResource("StyleBoxEmpty_ywq7x")
-theme_override_styles/fill = SubResource("StyleBoxFlat_tdkka")
-max_value = 15.0
-step = 1.0
-value = 10.0
-show_percentage = false
+theme_override_constants/margin_left = 1
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 1
+theme_override_constants/margin_bottom = 1
 
-[node name="health" type="ProgressBar" parent="scroll/margin/stack/menu/fast-access/enemy_1"]
+[node name="contested" type="ProgressBar" parent="scroll/margin/stack/menu/fast-access/enemy_1/hp"]
 layout_mode = 2
 size_flags_vertical = 8
 theme_override_styles/background = SubResource("StyleBoxEmpty_ywq7x")
 theme_override_styles/fill = SubResource("StyleBoxFlat_oq1iv")
 max_value = 15.0
 step = 1.0
-value = 5.0
+value = 10.0
+show_percentage = false
+
+[node name="health" type="ProgressBar" parent="scroll/margin/stack/menu/fast-access/enemy_1/hp"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_styles/background = SubResource("StyleBoxEmpty_2a0ln")
+theme_override_styles/fill = SubResource("StyleBoxFlat_srpuw")
+max_value = 15.0
+step = 1.0
+value = 15.0
 show_percentage = false
 
 [node name="menu" type="Button" parent="scroll/margin/stack/menu"]

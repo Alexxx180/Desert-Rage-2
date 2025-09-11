@@ -3747,22 +3747,31 @@ theme_override_constants/margin_right = 1
 theme_override_constants/margin_bottom = 0
 
 [node name="level" type="ColorRect" parent="menu/stats/inventory/ability/controls/topic/status/experience/meter/main"]
-custom_minimum_size = Vector2(2, 1)
+custom_minimum_size = Vector2(2, 2)
 layout_mode = 2
 color = Color(0, 0, 0, 1)
 
-[node name="next" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/topic/status/experience/meter/main"]
+[node name="margin" type="MarginContainer" parent="menu/stats/inventory/ability/controls/topic/status/experience/meter/main"]
+layout_mode = 2
+theme_override_constants/margin_left = 1
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 1
+theme_override_constants/margin_bottom = 0
+
+[node name="next" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/topic/status/experience/meter/main/margin"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="level" type="ColorRect" parent="menu/stats/inventory/ability/controls/topic/status/experience/meter/main/next"]
-custom_minimum_size = Vector2(2, 1)
+[node name="level" type="ColorRect" parent="menu/stats/inventory/ability/controls/topic/status/experience/meter/main/margin/next"]
+custom_minimum_size = Vector2(1, 1)
 layout_mode = 2
+size_flags_vertical = 8
 color = Color(0.835294, 0.513726, 0.168627, 1)
 
-[node name="score" type="ProgressBar" parent="menu/stats/inventory/ability/controls/topic/status/experience/meter/main/next"]
+[node name="score" type="ProgressBar" parent="menu/stats/inventory/ability/controls/topic/status/experience/meter/main/margin/next"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 8
 theme_override_styles/background = SubResource("StyleBoxEmpty_g3c1s")
 theme_override_styles/fill = SubResource("StyleBoxFlat_o4lum")
 step = 1.0
@@ -3774,7 +3783,7 @@ show_percentage = false
 layout_mode = 2
 theme_override_constants/margin_left = 1
 theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 0
+theme_override_constants/margin_right = 1
 theme_override_constants/margin_bottom = 0
 
 [node name="color" type="ColorRect" parent="menu/stats/inventory/ability/controls/topic/status/experience/meter/shadow"]
@@ -3783,7 +3792,6 @@ layout_mode = 2
 color = Color(0.0588235, 0.0588235, 0.0588235, 1)
 
 [node name="enemy_1" type="PanelContainer" parent="menu/stats/inventory/ability/controls/topic/status"]
-visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8
@@ -3879,7 +3887,15 @@ size_flags_horizontal = 8
 theme_override_font_sizes/font_size = 16
 autowrap_mode = 2
 
-[node name="contested" type="ProgressBar" parent="menu/stats/inventory/ability/controls/topic/status/enemy_1"]
+[node name="hp" type="MarginContainer" parent="menu/stats/inventory/ability/controls/topic/status/enemy_1"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_left = 1
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 1
+theme_override_constants/margin_bottom = 1
+
+[node name="contested" type="ProgressBar" parent="menu/stats/inventory/ability/controls/topic/status/enemy_1/hp"]
 layout_mode = 2
 size_flags_vertical = 8
 theme_override_styles/background = SubResource("StyleBoxEmpty_kdjwi")
@@ -3889,7 +3905,7 @@ step = 1.0
 value = 10.0
 show_percentage = false
 
-[node name="health" type="ProgressBar" parent="menu/stats/inventory/ability/controls/topic/status/enemy_1"]
+[node name="health" type="ProgressBar" parent="menu/stats/inventory/ability/controls/topic/status/enemy_1/hp"]
 layout_mode = 2
 size_flags_vertical = 8
 theme_override_styles/background = SubResource("StyleBoxEmpty_2uuwx")
