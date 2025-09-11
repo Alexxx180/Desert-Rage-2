@@ -1,16 +1,22 @@
-[gd_scene load_steps=5 format=3 uid="uid://b83b7oo2fmh5h"]
+[gd_scene load_steps=6 format=3 uid="uid://b83b7oo2fmh5h"]
 
 [ext_resource type="Script" uid="uid://8eppp7nw4off" path="res://asset/system/script/subject/actor/fighter/group/group.gd" id="1_kivt0"]
 [ext_resource type="PackedScene" uid="uid://wbjmq3n817nk" path="res://asset/system/scene/subject/actor/fighter/group/hero/ray/ray.tscn" id="2_1wfvg"]
 [ext_resource type="PackedScene" uid="uid://mcm0vtwuyeii" path="res://asset/system/scene/subject/actor/fighter/group/hero/rock/rock.tscn" id="2_70x6q"]
 [ext_resource type="PackedScene" uid="uid://dwq2sbrb6d7xm" path="res://asset/system/scene/subject/actor/fighter/group/camera/camera.tscn" id="3_2mawu"]
+[ext_resource type="Script" uid="uid://drky58idh8lgy" path="res://asset/system/script/subject/actor/fighter/group/party/xp.gd" id="5_slnxt"]
 
 [node name="group" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_kivt0")
+is_overworld = null
+deployed = null
 
 [node name="rock" parent="." instance=ExtResource("2_70x6q")]
 
 [node name="ray" parent="." instance=ExtResource("2_1wfvg")]
 
 [node name="camera" parent="." instance=ExtResource("3_2mawu")]
+
+[node name="xp" type="Node" parent="."]
+script = ExtResource("5_slnxt")
