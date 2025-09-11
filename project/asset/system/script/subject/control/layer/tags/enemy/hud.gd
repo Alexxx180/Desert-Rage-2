@@ -9,6 +9,7 @@ var cards: Array
 var hits: int = 0
 
 const CONTEST_TIME: float = 1.5
+const DELAY: float = 0.2
 
 var tween: Dictionary = {}
 
@@ -32,15 +33,8 @@ func set_health(card: PanelContainer, hp: Node) -> void:
 	if tween.has(id):
 		tween[id].kill()
 	tween[id] = foe.create_tween()
-
-	if hp.points == 0:
-		card.contested.value = hp.maximum
-		print("HP SET TO MAX")
-		# foe.create_tween().tween_property(card.contested, "value", hp.points, CONTEST_TIME)
-		tween[id].tween_property(card.contested, "value", hp.points, CONTEST_TIME)
-	else:
-		card.contested.value = hp.contested
-		tween[id].tween_property(card.contested, "value", hp.points, CONTEST_TIME)
+	card.contested.value = hp.maximum if hp.points == 0 else hp.contested
+	tween[id].tween_property(card.contested, "value", hp.points, CONTEST_TIME).set_delay(DELAY)
 
 
 func set_damage(card: PanelContainer, hp: Node) -> void:

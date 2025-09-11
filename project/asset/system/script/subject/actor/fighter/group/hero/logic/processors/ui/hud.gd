@@ -19,7 +19,8 @@ func notify(text: String):
 	return self
 
 func set_slot_combo(caption):
-	markers.combo.heroes.ray.status.text = caption
+	markers.combo.heroes.ray.status.show()
+	markers.combo.heroes.ray.status_caption.text = caption
 	return self
 
 func set_slots(mark: Tick):
@@ -27,20 +28,25 @@ func set_slots(mark: Tick):
 	var combo: Dictionary = mark.blackboard.get_value("combo")
 	var hint: HBoxContainer = markers.combo.heroes[hero.name]
 	var count: int = len(combo.query)
-	hint.show()
+	hint.slots.show()
 	for i in range(0, count):
 		var j: int = count - i - 1
 		hint.slots.slots[j].text = Skills.unicode[combo.query[j]]
 		hint.slots.slots[j].show()
-		
+	
 	for i in range(count, len(hint.slots.slots)):
 		hint.slots.slots[i].hide()
+	if count == 0:
+		hint.status.hide()
 	hiding.start()
 	return self
 
 func hide_slots() -> void:
 	print("HIDING!")
 	for hero in markers.combo.heroes.values():
-		hero.hide()
+		# hero.hide()
+		hero.slots.hide()
+		hero.status.hide()
+		#hero.status_caption.text = ""
 		for slot in hero.slots.slots:
 			slot.hide()
