@@ -21,12 +21,12 @@ func hide(nodes: Array) -> void: toggle(nodes, "hides", func(n): n.hides(), func
 func show(nodes: Array) -> void: toggle(nodes, "shows", func(n): n.shows(), func(n): n.show())
 
 func open_condition(direction: float) -> Callable:
-	return (func(a, b): return a >= b) if direction < 0 else (func(a, b): return a <= b)
+	return (func(a, b): return a > b) if direction < 0 else (func(a, b): return a < b)
 
 func is_opened_at(item: int) -> bool:
 	var n: Node = navigation
 	var offset: float = float(n.reserve[item] + n.ui.split_offset)
-	#print("OFFSET: ", offset, " - PORTION: ", n.proportion)
+	print("OFFSET: ", offset, " - PORTION: ", n.proportion)
 	return open_condition(n.direction).call(offset, n.proportion)
 
 func drag_feedback(opened: bool, nodes: Array) -> void:

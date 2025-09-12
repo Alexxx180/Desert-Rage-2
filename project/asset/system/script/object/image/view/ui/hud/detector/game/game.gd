@@ -3,12 +3,13 @@ extends Control
 @onready var options: HFlowContainer = $menu/stats/inventory/ability/controls/topic
 @onready var chat: VBoxContainer = $dialog/chat
 @onready var controls: VBoxContainer = $menu/stats/inventory/ability/controls
-@onready var status: HBoxContainer = controls.get_node("topic/status")
+@onready var status: HBoxContainer = controls.get_node("topic/items/status")
 @onready var markers: HFlowContainer = controls.get_node("markers")
 @onready var preview: HBoxContainer = controls.get_node("hints/space/preview")
 @onready var hints: VBoxContainer = preview.get_node("help/content/help/hints")
 @onready var inventory: PanelContainer = $menu/stats/inventory/topic
 @onready var ability: PanelContainer = $menu/stats/inventory/ability/topic
+@onready var stats: PanelContainer = $menu/stats/topic
 
 @onready var hp: Array[HBoxContainer] = _get_point_bars("health")
 @onready var ap: Array[HBoxContainer] = _get_point_bars("influence")

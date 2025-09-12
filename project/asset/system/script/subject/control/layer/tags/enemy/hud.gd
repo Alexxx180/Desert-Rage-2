@@ -7,9 +7,11 @@ var boss_fight: bool = false
 var foe: Node
 var cards: Array
 var hits: int = 0
+var xp: Node
 
 const CONTEST_TIME: float = 1.5
 const DELAY: float = 0.2
+const EXP: int = 1
 
 var tween: Dictionary = {}
 
@@ -22,20 +24,23 @@ func set_achievement() -> void: if hits >= 100: pass # set after 100 hits in a r
 func setup(enemy: CharacterBody2D) -> void:
 	var health: Node = enemy.logic.processor.health
 	var hp: Node = health.points
-	hp.update_bar.connect(func(v): set_cards(in_game[enemy.caption], hp))
+	hp.update_bar.connect(func(_v): set_cards(in_game[enemy.caption], hp))
 	health.interrogation.connect(func(): set_cards(in_game[enemy.caption], hp))
+
+func _set_contested_health(id: int, health: ProgressBar, hp: Node) -> void:
+	if tween.has(id): tween[id].kill()
+	tween[id] = foe.create_tween()
+	if hp.points == 0:
+		health.value = hp.maximum
+	else:
+		health.value = hp.contested
+	tween[id].tween_property(health, "value", hp.points, CONTEST_TIME).set_delay(DELAY)
 
 func set_health(card: PanelContainer, hp: Node) -> void:
 	for bar in [card.health, card.contested]:
 		bar.max_value = hp.maximum
 	card.health.value = hp.points
-	var id: int = card.get_instance_id()
-	if tween.has(id):
-		tween[id].kill()
-	tween[id] = foe.create_tween()
-	card.contested.value = hp.maximum if hp.points == 0 else hp.contested
-	tween[id].tween_property(card.contested, "value", hp.points, CONTEST_TIME).set_delay(DELAY)
-
+	_set_contested_health(card.get_instance_id(), card.contested, hp)
 
 func set_damage(card: PanelContainer, hp: Node) -> void:
 	card.damage.health.text = str(int(hp.contested))
@@ -60,6 +65,7 @@ func set_stats(card: PanelContainer, enemy: String, hp: Node) -> void:
 
 func set_cards(enemy: String, hp: Node):
 	hits += 1
+	if hp.points != 0: xp.add_exp(EXP)
 	for card in cards: set_stats(card, enemy, hp)
 
 func reset_stats() -> void:

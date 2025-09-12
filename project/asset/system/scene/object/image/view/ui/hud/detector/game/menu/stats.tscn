@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://c3dwvtm5ivwwp"]
+[gd_scene load_steps=47 format=3 uid="uid://c3dwvtm5ivwwp"]
 
 [ext_resource type="PackedScene" uid="uid://dqlgy3l13bibl" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/menu/inventory/items/items.tscn" id="1_3h27n"]
 [ext_resource type="StyleBox" uid="uid://cvfnqancophme" path="res://asset/resource/engine/internal/theme/style/solid-color-panel.tres" id="1_j4734"]
@@ -7,9 +7,12 @@
 [ext_resource type="FontFile" uid="uid://b2wbdbnkxcqv1" path="res://asset/resource/font/NotoEmoji-VariableFont_wght.ttf" id="3_bieb6"]
 [ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://asset/resource/engine/internal/theme/patterns/template/menu/settings/topic/footer.tres" id="3_j4734"]
 [ext_resource type="FontFile" uid="uid://b37js8y80ak1k" path="res://asset/resource/font/NotoColorEmoji-Regular.ttf" id="6_drayd"]
+[ext_resource type="Script" uid="uid://dgr6idneegayx" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/menu/inventory/equipment/stats.gd" id="7_i41dc"]
 [ext_resource type="StyleBox" uid="uid://bsggnr5c3uk7o" path="res://asset/resource/engine/internal/theme/style/panel/preview.tres" id="8_bieb6"]
 [ext_resource type="Script" uid="uid://cmeppk3ealnv8" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/controls/preview/toggle.gd" id="8_i41dc"]
 [ext_resource type="FontFile" uid="uid://o0rgn7d13mr3" path="res://asset/resource/font/OpenSans-VariableFont_wdth,wght.ttf" id="9_i41dc"]
+[ext_resource type="Script" uid="uid://c5k8wgipwd250" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/menu/inventory/equipment/stat.gd" id="9_m30tj"]
+[ext_resource type="Script" uid="uid://dyygb0pfdburj" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/menu/inventory/equipment/hero.gd" id="9_qp3tb"]
 [ext_resource type="FontFile" uid="uid://dxg5wbmrewk2p" path="res://asset/resource/font/Lato-Regular.ttf" id="10_m30tj"]
 [ext_resource type="FontFile" uid="uid://tiyy3ojddt81" path="res://asset/resource/font/title/TASAExplorerVF.woff2" id="11_qp3tb"]
 [ext_resource type="FontFile" uid="uid://bghvysgyoj1y7" path="res://asset/resource/font/title/Equilibrist Semibold.ttf" id="12_hrdl7"]
@@ -786,6 +789,7 @@ layout_mode = 2
 
 [node name="stats" type="VBoxContainer" parent="scroll/margin/stack"]
 layout_mode = 2
+script = ExtResource("7_i41dc")
 
 [node name="title" type="HBoxContainer" parent="scroll/margin/stack/stats"]
 layout_mode = 2
@@ -1009,11 +1013,13 @@ horizontal_alignment = 2
 [node name="ray" type="VBoxContainer" parent="scroll/margin/stack/stats/heroes"]
 layout_mode = 2
 size_flags_horizontal = 3
+script = ExtResource("9_qp3tb")
 
 [node name="power" type="VBoxContainer" parent="scroll/margin/stack/stats/heroes/ray"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 5
+script = ExtResource("9_m30tj")
 
 [node name="description" type="HBoxContainer" parent="scroll/margin/stack/stats/heroes/ray/power"]
 layout_mode = 2
@@ -1024,7 +1030,7 @@ layout_mode = 2
 size_flags_horizontal = 8
 size_flags_stretch_ratio = 0.5
 theme = ExtResource("3_j4734")
-text = "255"
+text = "0"
 horizontal_alignment = 2
 
 [node name="icon" type="Label" parent="scroll/margin/stack/stats/heroes/ray/power/description"]
@@ -1042,7 +1048,7 @@ size_flags_stretch_ratio = 2.0
 theme = ExtResource("3_j4734")
 text = "Мощь"
 
-[node name="base" type="Label" parent="scroll/margin/stack/stats/heroes/ray/power/description"]
+[node name="alternate" type="Label" parent="scroll/margin/stack/stats/heroes/ray/power/description"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_stretch_ratio = 0.5
@@ -1063,9 +1069,8 @@ size_flags_vertical = 1
 size_flags_stretch_ratio = 4.0
 theme_override_styles/background = SubResource("StyleBoxEmpty_r7fgi")
 theme_override_styles/fill = SubResource("StyleBoxFlat_r7fgi")
-max_value = 90.0
+max_value = 75.0
 step = 1.0
-value = 70.0
 show_percentage = false
 
 [node name="base" type="ProgressBar" parent="scroll/margin/stack/stats/heroes/ray/power/margin"]
@@ -1075,15 +1080,15 @@ size_flags_vertical = 1
 size_flags_stretch_ratio = 4.0
 theme_override_styles/background = SubResource("StyleBoxEmpty_r7fgi")
 theme_override_styles/fill = SubResource("StyleBoxFlat_bieb6")
-max_value = 90.0
+max_value = 75.0
 step = 1.0
-value = 50.0
 show_percentage = false
 
 [node name="influence" type="VBoxContainer" parent="scroll/margin/stack/stats/heroes/ray"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 5
+script = ExtResource("9_m30tj")
 
 [node name="description" type="HBoxContainer" parent="scroll/margin/stack/stats/heroes/ray/influence"]
 layout_mode = 2
@@ -1094,7 +1099,7 @@ layout_mode = 2
 size_flags_horizontal = 8
 size_flags_stretch_ratio = 0.5
 theme = ExtResource("3_j4734")
-text = "255"
+text = "0"
 horizontal_alignment = 2
 
 [node name="icon" type="Label" parent="scroll/margin/stack/stats/heroes/ray/influence/description"]
@@ -1112,7 +1117,7 @@ size_flags_stretch_ratio = 2.0
 theme = ExtResource("3_j4734")
 text = "Влияние"
 
-[node name="base" type="Label" parent="scroll/margin/stack/stats/heroes/ray/influence/description"]
+[node name="alternate" type="Label" parent="scroll/margin/stack/stats/heroes/ray/influence/description"]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 0
@@ -1134,9 +1139,8 @@ size_flags_vertical = 1
 size_flags_stretch_ratio = 4.0
 theme_override_styles/background = SubResource("StyleBoxEmpty_r7fgi")
 theme_override_styles/fill = SubResource("StyleBoxFlat_r7fgi")
-max_value = 90.0
+max_value = 75.0
 step = 1.0
-value = 70.0
 show_percentage = false
 
 [node name="base" type="ProgressBar" parent="scroll/margin/stack/stats/heroes/ray/influence/margin"]
@@ -1146,15 +1150,15 @@ size_flags_vertical = 1
 size_flags_stretch_ratio = 4.0
 theme_override_styles/background = SubResource("StyleBoxEmpty_r7fgi")
 theme_override_styles/fill = SubResource("StyleBoxFlat_bieb6")
-max_value = 90.0
+max_value = 75.0
 step = 1.0
-value = 50.0
 show_percentage = false
 
 [node name="vitality" type="VBoxContainer" parent="scroll/margin/stack/stats/heroes/ray"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 5
+script = ExtResource("9_m30tj")
 
 [node name="description" type="HBoxContainer" parent="scroll/margin/stack/stats/heroes/ray/vitality"]
 layout_mode = 2
@@ -1165,7 +1169,7 @@ layout_mode = 2
 size_flags_horizontal = 8
 size_flags_stretch_ratio = 0.5
 theme = ExtResource("3_j4734")
-text = "255"
+text = "0"
 horizontal_alignment = 2
 
 [node name="icon" type="Label" parent="scroll/margin/stack/stats/heroes/ray/vitality/description"]
@@ -1183,7 +1187,7 @@ size_flags_stretch_ratio = 2.0
 theme = ExtResource("3_j4734")
 text = "Живучесть"
 
-[node name="base" type="Label" parent="scroll/margin/stack/stats/heroes/ray/vitality/description"]
+[node name="alternate" type="Label" parent="scroll/margin/stack/stats/heroes/ray/vitality/description"]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 0
@@ -1205,9 +1209,8 @@ size_flags_vertical = 1
 size_flags_stretch_ratio = 4.0
 theme_override_styles/background = SubResource("StyleBoxEmpty_r7fgi")
 theme_override_styles/fill = SubResource("StyleBoxFlat_r7fgi")
-max_value = 90.0
+max_value = 75.0
 step = 1.0
-value = 70.0
 show_percentage = false
 
 [node name="base" type="ProgressBar" parent="scroll/margin/stack/stats/heroes/ray/vitality/margin"]
@@ -1217,15 +1220,15 @@ size_flags_vertical = 1
 size_flags_stretch_ratio = 4.0
 theme_override_styles/background = SubResource("StyleBoxEmpty_r7fgi")
 theme_override_styles/fill = SubResource("StyleBoxFlat_bieb6")
-max_value = 90.0
+max_value = 75.0
 step = 1.0
-value = 50.0
 show_percentage = false
 
 [node name="reaction" type="VBoxContainer" parent="scroll/margin/stack/stats/heroes/ray"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 5
+script = ExtResource("9_m30tj")
 
 [node name="description" type="HBoxContainer" parent="scroll/margin/stack/stats/heroes/ray/reaction"]
 layout_mode = 2
@@ -1236,7 +1239,7 @@ layout_mode = 2
 size_flags_horizontal = 8
 size_flags_stretch_ratio = 0.5
 theme = ExtResource("3_j4734")
-text = "255"
+text = "0"
 horizontal_alignment = 2
 
 [node name="icon" type="Label" parent="scroll/margin/stack/stats/heroes/ray/reaction/description"]
@@ -1254,7 +1257,7 @@ size_flags_stretch_ratio = 2.0
 theme = ExtResource("3_j4734")
 text = "Реакция"
 
-[node name="base" type="Label" parent="scroll/margin/stack/stats/heroes/ray/reaction/description"]
+[node name="alternate" type="Label" parent="scroll/margin/stack/stats/heroes/ray/reaction/description"]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 0
@@ -1276,9 +1279,8 @@ size_flags_vertical = 1
 size_flags_stretch_ratio = 4.0
 theme_override_styles/background = SubResource("StyleBoxEmpty_r7fgi")
 theme_override_styles/fill = SubResource("StyleBoxFlat_r7fgi")
-max_value = 90.0
+max_value = 75.0
 step = 1.0
-value = 70.0
 show_percentage = false
 
 [node name="base" type="ProgressBar" parent="scroll/margin/stack/stats/heroes/ray/reaction/margin"]
@@ -1288,9 +1290,8 @@ size_flags_vertical = 1
 size_flags_stretch_ratio = 4.0
 theme_override_styles/background = SubResource("StyleBoxEmpty_r7fgi")
 theme_override_styles/fill = SubResource("StyleBoxFlat_bieb6")
-max_value = 90.0
+max_value = 75.0
 step = 1.0
-value = 50.0
 show_percentage = false
 
 [node name="description" type="Label" parent="scroll/margin/stack/stats/heroes/ray"]
