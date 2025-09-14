@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://b83b7oo2fmh5h"]
+[gd_scene load_steps=8 format=3 uid="uid://b83b7oo2fmh5h"]
 
 [ext_resource type="Script" uid="uid://8eppp7nw4off" path="res://asset/system/script/subject/actor/fighter/group/group.gd" id="1_kivt0"]
 [ext_resource type="PackedScene" uid="uid://wbjmq3n817nk" path="res://asset/system/scene/subject/actor/fighter/group/hero/ray/ray.tscn" id="2_1wfvg"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dwq2sbrb6d7xm" path="res://asset/system/scene/subject/actor/fighter/group/camera/camera.tscn" id="3_2mawu"]
 [ext_resource type="Script" uid="uid://drky58idh8lgy" path="res://asset/system/script/subject/actor/fighter/group/party/xp/xp.gd" id="5_slnxt"]
 [ext_resource type="Script" uid="uid://576btgbn77m0" path="res://asset/system/script/subject/actor/fighter/group/party/xp/stats.gd" id="6_unf1n"]
+[ext_resource type="Script" uid="uid://bhyos1rsfkryv" path="res://asset/system/script/subject/actor/fighter/group/party/xp/multiply.gd" id="7_t4urm"]
 
 [node name="group" type="Node2D"]
 y_sort_enabled = true
@@ -22,3 +23,7 @@ script = ExtResource("5_slnxt")
 
 [node name="stats" type="Node" parent="xp"]
 script = ExtResource("6_unf1n")
+
+[node name="multiply" type="Timer" parent="xp"]
+wait_time = 0.05
+script = ExtResource("7_t4urm")

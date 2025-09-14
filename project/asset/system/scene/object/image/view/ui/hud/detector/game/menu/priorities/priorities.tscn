@@ -1,15 +1,29 @@
-[gd_scene load_steps=16 format=3 uid="uid://sloxw12np1ch"]
+[gd_scene load_steps=20 format=3 uid="uid://sloxw12np1ch"]
 
 [ext_resource type="PackedScene" uid="uid://bky5mu10x2da3" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/menu/inventory/status.tscn" id="1_2h7wb"]
 [ext_resource type="StyleBox" uid="uid://cvfnqancophme" path="res://asset/resource/engine/internal/theme/style/solid-color-panel.tres" id="1_xvq4b"]
+[ext_resource type="Script" uid="uid://creg8v0kuegg7" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/menu/summary/summary.gd" id="2_gprs2"]
 [ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://asset/resource/engine/internal/theme/patterns/template/menu/settings/topic/footer.tres" id="2_xvq4b"]
 [ext_resource type="PackedScene" uid="uid://l7thqkrsol4m" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/menu/priorities/perks.tscn" id="3_2h7wb"]
 [ext_resource type="FontFile" uid="uid://b37js8y80ak1k" path="res://asset/resource/font/NotoColorEmoji-Regular.ttf" id="4_f2xkq"]
 [ext_resource type="StyleBox" uid="uid://c5qf02s45xwn" path="res://asset/resource/engine/internal/theme/style/noto-color.tres" id="5_i4ulf"]
+[ext_resource type="Script" uid="uid://cmatnxt7nxxbw" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/menu/summary/priority.gd" id="5_ph3re"]
 [ext_resource type="StyleBox" uid="uid://bsggnr5c3uk7o" path="res://asset/resource/engine/internal/theme/style/panel/preview.tres" id="8_gprs2"]
 [ext_resource type="Script" uid="uid://cmeppk3ealnv8" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/controls/preview/toggle.gd" id="8_ph3re"]
 [ext_resource type="PackedScene" uid="uid://b01p37el432af" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/preview/hints/hints.tscn" id="9_ph3re"]
 [ext_resource type="FontFile" uid="uid://dxg5wbmrewk2p" path="res://asset/resource/font/Lato-Regular.ttf" id="10_ighkc"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ph3re"]
+content_margin_right = 1.0
+content_margin_bottom = 1.0
+bg_color = Color(0.0588235, 0.0588235, 0.0588235, 1)
+expand_margin_left = 1.0
+expand_margin_top = 1.0
+expand_margin_right = 1.0
+expand_margin_bottom = 1.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ighkc"]
+bg_color = Color(0.953292, 0.415199, 9.62615e-07, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tlufy"]
 
@@ -45,6 +59,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 theme_override_styles/panel = ExtResource("1_xvq4b")
+script = ExtResource("2_gprs2")
 
 [node name="scroll" type="ScrollContainer" parent="."]
 layout_mode = 2
@@ -61,8 +76,30 @@ theme_override_constants/margin_bottom = 20
 [node name="stack" type="VBoxContainer" parent="scroll/margin"]
 layout_mode = 2
 
-[node name="status" parent="scroll/margin/stack" instance=ExtResource("1_2h7wb")]
+[node name="summary" type="HBoxContainer" parent="scroll/margin/stack"]
 layout_mode = 2
+
+[node name="status" parent="scroll/margin/stack/summary" instance=ExtResource("1_2h7wb")]
+layout_mode = 2
+
+[node name="synergy" type="MarginContainer" parent="scroll/margin/stack/summary"]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 1
+theme_override_constants/margin_top = 1
+theme_override_constants/margin_right = 1
+theme_override_constants/margin_bottom = 1
+
+[node name="points" type="ProgressBar" parent="scroll/margin/stack/summary/synergy"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 1
+theme_override_styles/background = SubResource("StyleBoxFlat_ph3re")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ighkc")
+step = 1.0
+value = 20.0
+fill_mode = 2
+show_percentage = false
 
 [node name="priority" type="VBoxContainer" parent="scroll/margin/stack"]
 layout_mode = 2
@@ -72,7 +109,7 @@ layout_mode = 2
 
 [node name="caption" type="Label" parent="scroll/margin/stack/priority/title"]
 layout_mode = 2
-text = "Приоритеты"
+text = "Досье"
 
 [node name="space" type="Control" parent="scroll/margin/stack/priority/title"]
 layout_mode = 2
@@ -120,20 +157,21 @@ size_flags_horizontal = 8
 theme_override_font_sizes/font_size = 14
 text = "Атлант"
 
-[node name="determination" type="VBoxContainer" parent="scroll/margin/stack/priority"]
+[node name="pursuit" type="VBoxContainer" parent="scroll/margin/stack/priority"]
+layout_mode = 2
+script = ExtResource("5_ph3re")
+
+[node name="description" type="HBoxContainer" parent="scroll/margin/stack/priority/pursuit"]
 layout_mode = 2
 
-[node name="description" type="HBoxContainer" parent="scroll/margin/stack/priority/determination"]
+[node name="number" type="HBoxContainer" parent="scroll/margin/stack/priority/pursuit/description"]
 layout_mode = 2
 
-[node name="number" type="HBoxContainer" parent="scroll/margin/stack/priority/determination/description"]
-layout_mode = 2
-
-[node name="rock" type="HBoxContainer" parent="scroll/margin/stack/priority/determination/description/number"]
+[node name="rock" type="HBoxContainer" parent="scroll/margin/stack/priority/pursuit/description/number"]
 visible = false
 layout_mode = 2
 
-[node name="selected" type="Label" parent="scroll/margin/stack/priority/determination/description/number/rock"]
+[node name="selected" type="Label" parent="scroll/margin/stack/priority/pursuit/description/number/rock"]
 visible = false
 custom_minimum_size = Vector2(35, 0)
 layout_mode = 2
@@ -143,7 +181,7 @@ theme_override_colors/font_color = Color(0.784314, 0.784314, 0.784314, 1)
 text = "10"
 horizontal_alignment = 2
 
-[node name="normal" type="Label" parent="scroll/margin/stack/priority/determination/description/number/rock"]
+[node name="normal" type="Label" parent="scroll/margin/stack/priority/pursuit/description/number/rock"]
 custom_minimum_size = Vector2(35, 0)
 layout_mode = 2
 size_flags_horizontal = 8
@@ -152,10 +190,10 @@ theme = ExtResource("2_xvq4b")
 text = "10"
 horizontal_alignment = 2
 
-[node name="ray" type="HBoxContainer" parent="scroll/margin/stack/priority/determination/description/number"]
+[node name="ray" type="HBoxContainer" parent="scroll/margin/stack/priority/pursuit/description/number"]
 layout_mode = 2
 
-[node name="selected" type="Label" parent="scroll/margin/stack/priority/determination/description/number/ray"]
+[node name="selected" type="Label" parent="scroll/margin/stack/priority/pursuit/description/number/ray"]
 visible = false
 custom_minimum_size = Vector2(35, 0)
 layout_mode = 2
@@ -165,7 +203,7 @@ theme_override_colors/font_color = Color(0.784314, 0.784314, 0.784314, 1)
 text = "10"
 horizontal_alignment = 2
 
-[node name="normal" type="Label" parent="scroll/margin/stack/priority/determination/description/number/ray"]
+[node name="normal" type="Label" parent="scroll/margin/stack/priority/pursuit/description/number/ray"]
 custom_minimum_size = Vector2(35, 0)
 layout_mode = 2
 size_flags_horizontal = 8
@@ -174,7 +212,7 @@ theme = ExtResource("2_xvq4b")
 text = "0"
 horizontal_alignment = 2
 
-[node name="icon" type="Label" parent="scroll/margin/stack/priority/determination/description"]
+[node name="icon" type="Label" parent="scroll/margin/stack/priority/pursuit/description"]
 layout_mode = 2
 size_flags_stretch_ratio = 2.0
 theme = ExtResource("2_xvq4b")
@@ -183,7 +221,7 @@ theme_override_fonts/font = ExtResource("4_f2xkq")
 theme_override_styles/normal = ExtResource("5_i4ulf")
 text = "📈"
 
-[node name="caption" type="Label" parent="scroll/margin/stack/priority/determination/description"]
+[node name="caption" type="Label" parent="scroll/margin/stack/priority/pursuit/description"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
@@ -191,7 +229,7 @@ theme = ExtResource("2_xvq4b")
 theme_override_colors/font_color = Color(0.783523, 0.783523, 0.783523, 1)
 text = "Стремление"
 
-[node name="next" type="Label" parent="scroll/margin/stack/priority/determination/description"]
+[node name="next" type="Label" parent="scroll/margin/stack/priority/pursuit/description"]
 custom_minimum_size = Vector2(35, 0)
 layout_mode = 2
 size_flags_horizontal = 8
@@ -199,35 +237,35 @@ size_flags_stretch_ratio = 0.5
 theme = ExtResource("2_xvq4b")
 text = "1"
 
-[node name="margin" type="MarginContainer" parent="scroll/margin/stack/priority/determination"]
+[node name="margin" type="MarginContainer" parent="scroll/margin/stack/priority/pursuit"]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 0
 
-[node name="level" type="HBoxContainer" parent="scroll/margin/stack/priority/determination/margin"]
+[node name="level" type="HBoxContainer" parent="scroll/margin/stack/priority/pursuit/margin"]
 layout_mode = 2
 
-[node name="progress" type="ProgressBar" parent="scroll/margin/stack/priority/determination/margin/level"]
+[node name="progress" type="ProgressBar" parent="scroll/margin/stack/priority/pursuit/margin/level"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 size_flags_stretch_ratio = 4.0
 theme_override_styles/background = SubResource("StyleBoxEmpty_tlufy")
 theme_override_styles/fill = SubResource("StyleBoxFlat_gprs2")
-max_value = 90.0
+max_value = 10.0
 step = 1.0
-value = 50.0
 show_percentage = false
 
-[node name="next" type="ColorRect" parent="scroll/margin/stack/priority/determination/margin/level"]
+[node name="next" type="ColorRect" parent="scroll/margin/stack/priority/pursuit/margin/level"]
 custom_minimum_size = Vector2(1, 1)
 layout_mode = 2
 color = Color(0.435294, 0.435294, 0.435294, 1)
 
 [node name="self_control" type="VBoxContainer" parent="scroll/margin/stack/priority"]
 layout_mode = 2
+script = ExtResource("5_ph3re")
 
 [node name="description" type="HBoxContainer" parent="scroll/margin/stack/priority/self_control"]
 layout_mode = 2
@@ -296,84 +334,12 @@ size_flags_stretch_ratio = 2.0
 theme = ExtResource("2_xvq4b")
 text = "Выдержка"
 
-[node name="progress" type="HBoxContainer" parent="scroll/margin/stack/priority/self_control/description"]
+[node name="next" type="Label" parent="scroll/margin/stack/priority/self_control/description"]
 visible = false
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 6.0
-
-[node name="margin" type="MarginContainer" parent="scroll/margin/stack/priority/self_control/description/progress"]
-custom_minimum_size = Vector2(0, 15)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/margin_left = 0
-theme_override_constants/margin_top = 6
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 4
-
-[node name="bar" type="ProgressBar" parent="scroll/margin/stack/priority/self_control/description/progress/margin"]
-custom_minimum_size = Vector2(0, 15)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 1
-size_flags_stretch_ratio = 4.0
-max_value = 90.0
-step = 1.0
-value = 50.0
-show_percentage = false
-
-[node name="next" type="Label" parent="scroll/margin/stack/priority/self_control/description/progress"]
 custom_minimum_size = Vector2(35, 0)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_stretch_ratio = 0.5
-theme = ExtResource("2_xvq4b")
-text = "6"
-horizontal_alignment = 2
-
-[node name="level-up" type="HBoxContainer" parent="scroll/margin/stack/priority/self_control/description"]
-visible = false
-layout_mode = 2
-theme_override_constants/separation = 20
-
-[node name="caption" type="Label" parent="scroll/margin/stack/priority/self_control/description/level-up"]
-layout_mode = 2
-theme = ExtResource("2_xvq4b")
-text = "Новый уровень:"
-
-[node name="influence" type="HBoxContainer" parent="scroll/margin/stack/priority/self_control/description/level-up"]
-layout_mode = 2
-
-[node name="caption" type="Label" parent="scroll/margin/stack/priority/self_control/description/level-up/influence"]
-layout_mode = 2
-theme = ExtResource("2_xvq4b")
-text = "Влияние"
-
-[node name="plus" type="Label" parent="scroll/margin/stack/priority/self_control/description/level-up/influence"]
-layout_mode = 2
-theme = ExtResource("2_xvq4b")
-text = "+"
-
-[node name="number" type="Label" parent="scroll/margin/stack/priority/self_control/description/level-up/influence"]
-layout_mode = 2
-theme = ExtResource("2_xvq4b")
-text = "1"
-
-[node name="reaction" type="HBoxContainer" parent="scroll/margin/stack/priority/self_control/description/level-up"]
-layout_mode = 2
-
-[node name="caption" type="Label" parent="scroll/margin/stack/priority/self_control/description/level-up/reaction"]
-layout_mode = 2
-theme = ExtResource("2_xvq4b")
-text = "Реакция"
-
-[node name="plus" type="Label" parent="scroll/margin/stack/priority/self_control/description/level-up/reaction"]
-layout_mode = 2
-theme = ExtResource("2_xvq4b")
-text = "+"
-
-[node name="number" type="Label" parent="scroll/margin/stack/priority/self_control/description/level-up/reaction"]
-layout_mode = 2
 theme = ExtResource("2_xvq4b")
 text = "1"
 
@@ -407,6 +373,7 @@ color = Color(0.435294, 0.435294, 0.435294, 1)
 
 [node name="tenacity" type="VBoxContainer" parent="scroll/margin/stack/priority"]
 layout_mode = 2
+script = ExtResource("5_ph3re")
 
 [node name="description" type="HBoxContainer" parent="scroll/margin/stack/priority/tenacity"]
 layout_mode = 2
@@ -513,6 +480,7 @@ layout_mode = 2
 color = Color(0.435294, 0.435294, 0.435294, 1)
 
 [node name="rock" type="Label" parent="scroll/margin/stack/priority"]
+visible = false
 custom_minimum_size = Vector2(35, 0)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -544,57 +512,57 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.737255, 0.737255, 0.737255, 1)
 text = "Прирост"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="scroll/margin/stack/priority/passive/purpose/passive"]
+[node name="add" type="HBoxContainer" parent="scroll/margin/stack/priority/passive/purpose/passive"]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="rock" type="VBoxContainer" parent="scroll/margin/stack/priority/passive/purpose/passive/HBoxContainer"]
+[node name="rock" type="VBoxContainer" parent="scroll/margin/stack/priority/passive/purpose/passive/add"]
 visible = false
 layout_mode = 2
 
-[node name="power" type="HBoxContainer" parent="scroll/margin/stack/priority/passive/purpose/passive/HBoxContainer/rock"]
+[node name="power" type="HBoxContainer" parent="scroll/margin/stack/priority/passive/purpose/passive/add/rock"]
 layout_mode = 2
 size_flags_horizontal = 8
 
-[node name="caption" type="Label" parent="scroll/margin/stack/priority/passive/purpose/passive/HBoxContainer/rock/power"]
+[node name="caption" type="Label" parent="scroll/margin/stack/priority/passive/purpose/passive/add/rock/power"]
 layout_mode = 2
 theme = ExtResource("2_xvq4b")
 theme_override_fonts/font = ExtResource("4_f2xkq")
 theme_override_styles/normal = SubResource("StyleBoxFlat_tlufy")
 text = "🛡"
 
-[node name="plus" type="Label" parent="scroll/margin/stack/priority/passive/purpose/passive/HBoxContainer/rock/power"]
+[node name="plus" type="Label" parent="scroll/margin/stack/priority/passive/purpose/passive/add/rock/power"]
 layout_mode = 2
 theme = ExtResource("2_xvq4b")
 text = "+"
 
-[node name="number" type="Label" parent="scroll/margin/stack/priority/passive/purpose/passive/HBoxContainer/rock/power"]
+[node name="number" type="Label" parent="scroll/margin/stack/priority/passive/purpose/passive/add/rock/power"]
 layout_mode = 2
 theme = ExtResource("2_xvq4b")
 text = "2"
 
-[node name="influence" type="HBoxContainer" parent="scroll/margin/stack/priority/passive/purpose/passive/HBoxContainer/rock"]
+[node name="influence" type="HBoxContainer" parent="scroll/margin/stack/priority/passive/purpose/passive/add/rock"]
 layout_mode = 2
 size_flags_horizontal = 8
 
-[node name="caption" type="Label" parent="scroll/margin/stack/priority/passive/purpose/passive/HBoxContainer/rock/influence"]
+[node name="caption" type="Label" parent="scroll/margin/stack/priority/passive/purpose/passive/add/rock/influence"]
 layout_mode = 2
 theme = ExtResource("2_xvq4b")
 theme_override_fonts/font = ExtResource("4_f2xkq")
 theme_override_styles/normal = SubResource("StyleBoxFlat_tlufy")
 text = "🫧"
 
-[node name="plus" type="Label" parent="scroll/margin/stack/priority/passive/purpose/passive/HBoxContainer/rock/influence"]
+[node name="plus" type="Label" parent="scroll/margin/stack/priority/passive/purpose/passive/add/rock/influence"]
 layout_mode = 2
 theme = ExtResource("2_xvq4b")
 text = "+"
 
-[node name="number" type="Label" parent="scroll/margin/stack/priority/passive/purpose/passive/HBoxContainer/rock/influence"]
+[node name="number" type="Label" parent="scroll/margin/stack/priority/passive/purpose/passive/add/rock/influence"]
 layout_mode = 2
 theme = ExtResource("2_xvq4b")
 text = "1"
 
-[node name="rock" type="Label" parent="scroll/margin/stack/priority/passive/purpose/passive/HBoxContainer/rock"]
+[node name="rock" type="Label" parent="scroll/margin/stack/priority/passive/purpose/passive/add/rock"]
 custom_minimum_size = Vector2(35, 0)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -602,47 +570,47 @@ theme = ExtResource("2_xvq4b")
 text = "Рок"
 horizontal_alignment = 2
 
-[node name="ray" type="VBoxContainer" parent="scroll/margin/stack/priority/passive/purpose/passive/HBoxContainer"]
+[node name="ray" type="VBoxContainer" parent="scroll/margin/stack/priority/passive/purpose/passive/add"]
 layout_mode = 2
 
-[node name="power" type="HBoxContainer" parent="scroll/margin/stack/priority/passive/purpose/passive/HBoxContainer/ray"]
+[node name="power" type="HBoxContainer" parent="scroll/margin/stack/priority/passive/purpose/passive/add/ray"]
 layout_mode = 2
 size_flags_horizontal = 8
 
-[node name="caption" type="Label" parent="scroll/margin/stack/priority/passive/purpose/passive/HBoxContainer/ray/power"]
+[node name="caption" type="Label" parent="scroll/margin/stack/priority/passive/purpose/passive/add/ray/power"]
 layout_mode = 2
 theme = ExtResource("2_xvq4b")
 theme_override_fonts/font = ExtResource("4_f2xkq")
 theme_override_styles/normal = SubResource("StyleBoxFlat_tlufy")
 text = "⚔️"
 
-[node name="plus" type="Label" parent="scroll/margin/stack/priority/passive/purpose/passive/HBoxContainer/ray/power"]
+[node name="plus" type="Label" parent="scroll/margin/stack/priority/passive/purpose/passive/add/ray/power"]
 layout_mode = 2
 theme = ExtResource("2_xvq4b")
 text = "+"
 
-[node name="number" type="Label" parent="scroll/margin/stack/priority/passive/purpose/passive/HBoxContainer/ray/power"]
+[node name="number" type="Label" parent="scroll/margin/stack/priority/passive/purpose/passive/add/ray/power"]
 layout_mode = 2
 theme = ExtResource("2_xvq4b")
 text = "2"
 
-[node name="influence" type="HBoxContainer" parent="scroll/margin/stack/priority/passive/purpose/passive/HBoxContainer/ray"]
+[node name="influence" type="HBoxContainer" parent="scroll/margin/stack/priority/passive/purpose/passive/add/ray"]
 layout_mode = 2
 size_flags_horizontal = 8
 
-[node name="caption" type="Label" parent="scroll/margin/stack/priority/passive/purpose/passive/HBoxContainer/ray/influence"]
+[node name="caption" type="Label" parent="scroll/margin/stack/priority/passive/purpose/passive/add/ray/influence"]
 layout_mode = 2
 theme = ExtResource("2_xvq4b")
 theme_override_fonts/font = ExtResource("4_f2xkq")
 theme_override_styles/normal = SubResource("StyleBoxFlat_tlufy")
 text = "🔥"
 
-[node name="plus" type="Label" parent="scroll/margin/stack/priority/passive/purpose/passive/HBoxContainer/ray/influence"]
+[node name="plus" type="Label" parent="scroll/margin/stack/priority/passive/purpose/passive/add/ray/influence"]
 layout_mode = 2
 theme = ExtResource("2_xvq4b")
 text = "+"
 
-[node name="number" type="Label" parent="scroll/margin/stack/priority/passive/purpose/passive/HBoxContainer/ray/influence"]
+[node name="number" type="Label" parent="scroll/margin/stack/priority/passive/purpose/passive/add/ray/influence"]
 layout_mode = 2
 theme = ExtResource("2_xvq4b")
 text = "1"

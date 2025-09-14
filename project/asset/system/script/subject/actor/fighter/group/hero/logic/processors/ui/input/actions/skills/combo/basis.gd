@@ -4,6 +4,10 @@ class_name ComboBasis
 
 func _continue_process() -> int: return OK
 
+func x(mark: Tick, slots: int) -> ComboBasis:
+	mark.blackboard.get_value("group").xp.multiply.by_slots(slots)
+	return self
+
 func check_combo(mark: Tick, slots: Array) -> bool:
 	var combo: Dictionary = mark.blackboard.get_value("combo")
 	var border: int = slots.size()

@@ -12,6 +12,9 @@ var points: float
 var maximum: int
 var contested: int
 
+var is_just_dead: bool = false
+var is_dead: bool = false
+
 var alive: bool:
 	get: return points > LIFE_BORDER
 var segment: float:
@@ -34,8 +37,11 @@ func hit() -> void: freeze.emit()
 func refill(amount: int = 1) -> void:
 	points = min(points + amount, maximum)
 	update_bar.emit(points)
+	is_dead = points == LIFE_BORDER
 
 func damage(amount: int = 1) -> void:
 	points = max(points - amount, LIFE_BORDER)
+	is_just_dead = points == LIFE_BORDER and not is_dead
+	if is_just_dead: is_dead = true
 	update_bar.emit(points)
 	contest.start()

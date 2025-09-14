@@ -10,7 +10,7 @@ static var _mask: Dictionary:
 	get: return { PUNCH: "P", KICK: "K", WHIP: "W", FIRE: "F", PUDDLE: "D", SPARK: "S" }
 
 static var unicode: Dictionary:
-	get: return { PUNCH: "✊", KICK: "🦶", WHIP: "🎣", FIRE: "🔥", PUDDLE: "💧", SPARK: "🦶" }
+	get: return { PUNCH: "✊", KICK: "🦶", WHIP: "🎣", FIRE: "🔥", PUDDLE: "💧", SPARK: "⚡️" }
 
 static func view_action(slot: int) -> void: print(_mask[slot])
 static func view_actions(skills: Array) -> void:

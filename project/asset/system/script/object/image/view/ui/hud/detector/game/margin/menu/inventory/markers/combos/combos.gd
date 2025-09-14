@@ -1,6 +1,4 @@
 extends MarginContainer
 
-@onready var heroes: Dictionary = {
-	"ray": $stack/ray,
-	"rock": $stack/rock
-}
+@onready var stack: HFlowContainer = $score/stack
+@onready var heroes: Dictionary = { "ray": stack.get_node("ray"), "rock": stack.get_node("rock") }

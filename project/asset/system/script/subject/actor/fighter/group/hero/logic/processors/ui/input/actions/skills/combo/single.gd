@@ -20,6 +20,10 @@ func tick(mark: Tick, act: BehaviorAction) -> int:
 		return _continue_process()
 	return FAILED
 
+func x1(mark: Tick) -> SkillBasis:
+	mark.blackboard.get_value("group").xp.multiply.hit()
+	return self
+
 func notify(mark: Tick, caption: String) -> void:
 	mark.blackboard.get_value("ui").set_slot_combo(caption)
 

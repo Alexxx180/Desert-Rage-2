@@ -1,15 +1,19 @@
 extends Node
 
+class_name PlayerXP
+
 signal update_exp(value: Vector2i, base: int)
+signal update_priorities(summary: Dictionary)
 
 enum { PRIORITY = 3, MAX_LV = 7, BASE_NEXT = 10 }
 
 const MULTIPLIER: float = 1.2
 
 @onready var stats: Node = $stats
+@onready var multiply: Timer = $multiply
 
 var next: int
-var base_xp: int
+var base_xp: int = 0
 var summary: Dictionary
 
 func sync_points(hero: String, kind: String, value: int) -> void:
@@ -36,6 +40,10 @@ func _circle_level_up() -> void:
 func sync() -> void:
 	sync_exp()
 	sync_stats()
+	sync_priorities()
+
+func sync_priorities() -> void:
+	update_priorities.emit(summary)
 
 func sync_stats() -> void:
 	stats.calculate(summary.hero)
@@ -44,15 +52,17 @@ func sync_exp() -> void:
 	update_exp.emit(Vector2i(summary.xp, next), base_xp)
 
 func add_exp(amount: int) -> void:
-	summary.xp += amount
+	# print("XP: ", amount, " x %.2f" % multiply.last.y, " = ", roundi(amount * multiply.last.y))
+	summary.xp += roundi(amount * multiply.last.y) # amount
 	if next != 0 and summary.xp >= next:
 		_circle_level_up()
+		sync_priorities()
 		sync_stats()
 	sync_exp()
 
 func next_level() -> void:
-	next *= MULTIPLIER
 	base_xp += next
+	next *= MULTIPLIER
 
 func _remember_priority_as_max(i: int) -> bool:
 	var priority: int = summary.hero.ray.of[i]

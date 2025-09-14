@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://b1cenupqm80wx"]
+[gd_scene load_steps=27 format=3 uid="uid://b1cenupqm80wx"]
 
 [ext_resource type="StyleBox" uid="uid://cvfnqancophme" path="res://asset/resource/engine/internal/theme/style/solid-color-panel.tres" id="1_0hiii"]
 [ext_resource type="PackedScene" uid="uid://dqlgy3l13bibl" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/menu/inventory/items/items.tscn" id="1_res6x"]
@@ -60,6 +60,18 @@ corner_radius_bottom_left = 3
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vwhuc"]
 content_margin_left = 2.0
 bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_huhft"]
+content_margin_right = 1.0
+content_margin_bottom = 1.0
+bg_color = Color(0.0588235, 0.0588235, 0.0588235, 1)
+expand_margin_left = 1.0
+expand_margin_top = 1.0
+expand_margin_right = 1.0
+expand_margin_bottom = 1.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rfmay"]
+bg_color = Color(0.953292, 0.415199, 9.62615e-07, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2q1v8"]
 content_margin_left = 7.0
@@ -410,8 +422,30 @@ text = "Восстанавливает ЖЗ и ДА"
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="status" parent="scroll/margin/stack/flow/controls" instance=ExtResource("3_res6x")]
+[node name="summary" type="HBoxContainer" parent="scroll/margin/stack/flow/controls"]
 layout_mode = 2
+
+[node name="status" parent="scroll/margin/stack/flow/controls/summary" instance=ExtResource("3_res6x")]
+layout_mode = 2
+
+[node name="synergy" type="MarginContainer" parent="scroll/margin/stack/flow/controls/summary"]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 1
+theme_override_constants/margin_top = 1
+theme_override_constants/margin_right = 1
+theme_override_constants/margin_bottom = 1
+
+[node name="points" type="ProgressBar" parent="scroll/margin/stack/flow/controls/summary/synergy"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 1
+theme_override_styles/background = SubResource("StyleBoxFlat_huhft")
+theme_override_styles/fill = SubResource("StyleBoxFlat_rfmay")
+step = 1.0
+value = 20.0
+fill_mode = 2
+show_percentage = false
 
 [node name="ray" type="VBoxContainer" parent="scroll/margin/stack/flow/controls"]
 visible = false
@@ -953,6 +987,3 @@ max_value = 90.0
 step = 1.0
 value = 70.0
 show_percentage = false
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="scroll/margin/stack/flow"]
-layout_mode = 2

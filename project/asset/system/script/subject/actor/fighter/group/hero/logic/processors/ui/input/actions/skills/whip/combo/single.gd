@@ -7,7 +7,8 @@ func get_metadata() -> Array[String]: return ["whip"]
 func take_effect(mark: Tick) -> void:
 	mark.blackboard.get_value("tools").hero.view.animation.effect.set_damage(7)
 	basis.fight_combo(mark).fight_body("skill_two")
-	basis.notify(mark, "Удар кнутом")
+	basis.x1(mark)
+	# basis.notify(mark, "Удар кнутом")
 
 func tick(mark: Tick) -> int:
 	return basis.tick(mark, self)
