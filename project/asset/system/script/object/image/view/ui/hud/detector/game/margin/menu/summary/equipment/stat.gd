@@ -1,4 +1,4 @@
-extends VBoxContainer
+extends Button
 
 @onready var count: Array[Label] = [$description/number, $description/alternate]
 @onready var base: ProgressBar = $margin/base
@@ -21,8 +21,7 @@ func add_equip(add: int) -> void:
 	set_equip(base.value, base.value + add)
 
 func _set_counts(stats: Array) -> void:
-	for i in range(0, len(count)):
-		count[i].text = str(stats[i])
+	for i in range(0, len(count)): count[i].text = str(stats[i])
 
 func _set_base_count(value: int, stats: Array) -> void:
 	base.max_value = value
@@ -30,9 +29,7 @@ func _set_base_count(value: int, stats: Array) -> void:
 
 func set_view_type(with: bool) -> void:
 	equipped = with
-	if with:
-		_set_base_count(equipment.max_value, [equipment.value, base.value])
-	else:
-		_set_base_count(BASE_MAX, [base.value, equipment.value])
+	if with: _set_base_count(equipment.max_value, [equipment.value, base.value])
+	else: _set_base_count(BASE_MAX, [base.value, equipment.value])
 	equipment.visible = equipped
 	

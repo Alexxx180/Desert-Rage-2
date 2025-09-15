@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://br061ue566x82"]
+[gd_scene load_steps=17 format=3 uid="uid://br061ue566x82"]
 
 [ext_resource type="StyleBox" uid="uid://bsggnr5c3uk7o" path="res://asset/resource/engine/internal/theme/style/panel/preview.tres" id="1_e8epa"]
 [ext_resource type="Script" uid="uid://ct0gm416r5nna" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/controls/skills.gd" id="1_g5mgg"]
@@ -27,6 +27,11 @@ bg_color = Color(0.6, 0.6, 0.6, 0)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w1r1c"]
 content_margin_left = 2.0
 bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_e8epa"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_50ghp"]
+content_margin_left = 5.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w153l"]
 content_margin_left = 1.0
@@ -4426,30 +4431,10 @@ layout_mode = 2
 size_flags_horizontal = 6
 theme_override_constants/separation = -3
 
-[node name="slot-1" type="Label" parent="margin/rock/left/weapon/knuckles/double/description/margin/stack/content/ability/help"]
-custom_minimum_size = Vector2(10, 0)
-layout_mode = 2
-size_flags_horizontal = 10
-size_flags_stretch_ratio = 0.25
-theme_override_fonts/font = ExtResource("1_w1r1c")
-theme_override_font_sizes/font_size = 18
-theme_override_styles/normal = ExtResource("4_e8epa")
-text = "🦶"
-vertical_alignment = 1
-
-[node name="dot" type="Label" parent="margin/rock/left/weapon/knuckles/double/description/margin/stack/content/ability/help"]
-custom_minimum_size = Vector2(10, 0)
-layout_mode = 2
-size_flags_stretch_ratio = 0.25
-theme_override_fonts/font = ExtResource("5_50ghp")
-theme_override_font_sizes/font_size = 18
-theme_override_styles/normal = SubResource("StyleBoxFlat_1chk7")
-text = "⋅"
-vertical_alignment = 1
-
 [node name="slot-2" type="Label" parent="margin/rock/left/weapon/knuckles/double/description/margin/stack/content/ability/help"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
+size_flags_horizontal = 10
 size_flags_stretch_ratio = 0.25
 theme_override_fonts/font = ExtResource("1_w1r1c")
 theme_override_font_sizes/font_size = 18
@@ -4501,12 +4486,12 @@ max_value = 5.0
 step = 1.0
 show_percentage = false
 
-[node name="two-punch" type="Button" parent="margin/rock/left/weapon/knuckles"]
+[node name="lunge" type="Button" parent="margin/rock/left/weapon/knuckles"]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="description" type="VBoxContainer" parent="margin/rock/left/weapon/knuckles/two-punch"]
+[node name="description" type="VBoxContainer" parent="margin/rock/left/weapon/knuckles/lunge"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -4515,7 +4500,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 0
 
-[node name="margin" type="MarginContainer" parent="margin/rock/left/weapon/knuckles/two-punch/description"]
+[node name="margin" type="MarginContainer" parent="margin/rock/left/weapon/knuckles/lunge/description"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/margin_left = 10
@@ -4523,17 +4508,17 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 0
 
-[node name="stack" type="HBoxContainer" parent="margin/rock/left/weapon/knuckles/two-punch/description/margin"]
+[node name="stack" type="HBoxContainer" parent="margin/rock/left/weapon/knuckles/lunge/description/margin"]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 
-[node name="view" type="Control" parent="margin/rock/left/weapon/knuckles/two-punch/description/margin/stack"]
+[node name="view" type="Control" parent="margin/rock/left/weapon/knuckles/lunge/description/margin/stack"]
 custom_minimum_size = Vector2(42, 42)
 layout_mode = 2
 size_flags_vertical = 4
 mouse_filter = 2
 
-[node name="margin" type="MarginContainer" parent="margin/rock/left/weapon/knuckles/two-punch/description/margin/stack/view"]
+[node name="margin" type="MarginContainer" parent="margin/rock/left/weapon/knuckles/lunge/description/margin/stack/view"]
 layout_mode = 2
 offset_left = 7.0
 offset_top = 9.0
@@ -4546,22 +4531,22 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 
-[node name="man" type="Label" parent="margin/rock/left/weapon/knuckles/two-punch/description/margin/stack/view/margin"]
+[node name="man" type="Label" parent="margin/rock/left/weapon/knuckles/lunge/description/margin/stack/view/margin"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_w1r1c")
 theme_override_font_sizes/font_size = 28
 text = "🏓"
 
-[node name="content" type="HFlowContainer" parent="margin/rock/left/weapon/knuckles/two-punch/description/margin/stack"]
+[node name="content" type="HFlowContainer" parent="margin/rock/left/weapon/knuckles/lunge/description/margin/stack"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 
-[node name="details" type="HBoxContainer" parent="margin/rock/left/weapon/knuckles/two-punch/description/margin/stack/content"]
+[node name="details" type="HBoxContainer" parent="margin/rock/left/weapon/knuckles/lunge/description/margin/stack/content"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="caption" type="Label" parent="margin/rock/left/weapon/knuckles/two-punch/description/margin/stack/content/details"]
+[node name="caption" type="Label" parent="margin/rock/left/weapon/knuckles/lunge/description/margin/stack/content/details"]
 custom_minimum_size = Vector2(110, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -4569,26 +4554,26 @@ theme_override_font_sizes/font_size = 18
 text = "Выпад"
 text_overrun_behavior = 3
 
-[node name="zone" type="Label" parent="margin/rock/left/weapon/knuckles/two-punch/description/margin/stack/content/details"]
+[node name="zone" type="Label" parent="margin/rock/left/weapon/knuckles/lunge/description/margin/stack/content/details"]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
 text = "|"
 horizontal_alignment = 1
 
-[node name="ability" type="HBoxContainer" parent="margin/rock/left/weapon/knuckles/two-punch/description/margin/stack/content"]
+[node name="ability" type="HBoxContainer" parent="margin/rock/left/weapon/knuckles/lunge/description/margin/stack/content"]
 layout_mode = 2
 size_flags_horizontal = 10
 size_flags_stretch_ratio = 0.25
 theme_override_constants/separation = 0
 
-[node name="help" type="HBoxContainer" parent="margin/rock/left/weapon/knuckles/two-punch/description/margin/stack/content/ability"]
+[node name="help" type="HBoxContainer" parent="margin/rock/left/weapon/knuckles/lunge/description/margin/stack/content/ability"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 6
 theme_override_constants/separation = -3
 
-[node name="slot-1" type="Label" parent="margin/rock/left/weapon/knuckles/two-punch/description/margin/stack/content/ability/help"]
+[node name="slot-1" type="Label" parent="margin/rock/left/weapon/knuckles/lunge/description/margin/stack/content/ability/help"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 size_flags_horizontal = 10
@@ -4599,7 +4584,7 @@ theme_override_styles/normal = ExtResource("4_e8epa")
 text = "🦶"
 vertical_alignment = 1
 
-[node name="dot" type="Label" parent="margin/rock/left/weapon/knuckles/two-punch/description/margin/stack/content/ability/help"]
+[node name="dot" type="Label" parent="margin/rock/left/weapon/knuckles/lunge/description/margin/stack/content/ability/help"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 size_flags_stretch_ratio = 0.25
@@ -4609,7 +4594,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_1chk7")
 text = "⋅"
 vertical_alignment = 1
 
-[node name="slot-2" type="Label" parent="margin/rock/left/weapon/knuckles/two-punch/description/margin/stack/content/ability/help"]
+[node name="slot-2" type="Label" parent="margin/rock/left/weapon/knuckles/lunge/description/margin/stack/content/ability/help"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 size_flags_stretch_ratio = 0.25
@@ -4619,7 +4604,7 @@ theme_override_styles/normal = ExtResource("4_e8epa")
 text = "✊"
 vertical_alignment = 1
 
-[node name="dot2" type="Label" parent="margin/rock/left/weapon/knuckles/two-punch/description/margin/stack/content/ability/help"]
+[node name="dot2" type="Label" parent="margin/rock/left/weapon/knuckles/lunge/description/margin/stack/content/ability/help"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 size_flags_stretch_ratio = 0.25
@@ -4629,7 +4614,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_1chk7")
 text = "⋅"
 vertical_alignment = 1
 
-[node name="slot-3" type="Label" parent="margin/rock/left/weapon/knuckles/two-punch/description/margin/stack/content/ability/help"]
+[node name="slot-3" type="Label" parent="margin/rock/left/weapon/knuckles/lunge/description/margin/stack/content/ability/help"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 size_flags_horizontal = 2
@@ -4640,10 +4625,10 @@ theme_override_styles/normal = ExtResource("4_e8epa")
 text = "✊"
 vertical_alignment = 1
 
-[node name="cost" type="HBoxContainer" parent="margin/rock/left/weapon/knuckles/two-punch/description/margin/stack/content/ability"]
+[node name="cost" type="HBoxContainer" parent="margin/rock/left/weapon/knuckles/lunge/description/margin/stack/content/ability"]
 layout_mode = 2
 
-[node name="ap" type="Label" parent="margin/rock/left/weapon/knuckles/two-punch/description/margin/stack/content/ability/cost"]
+[node name="ap" type="Label" parent="margin/rock/left/weapon/knuckles/lunge/description/margin/stack/content/ability/cost"]
 visible = false
 custom_minimum_size = Vector2(22, 0)
 layout_mode = 2
@@ -4651,11 +4636,11 @@ theme_override_font_sizes/font_size = 18
 text = "2"
 horizontal_alignment = 2
 
-[node name="no" type="Control" parent="margin/rock/left/weapon/knuckles/two-punch/description/margin/stack/content/ability/cost"]
+[node name="no" type="Control" parent="margin/rock/left/weapon/knuckles/lunge/description/margin/stack/content/ability/cost"]
 custom_minimum_size = Vector2(22, 0)
 layout_mode = 2
 
-[node name="aura-cost-separator" type="ProgressBar" parent="margin/rock/left/weapon/knuckles/two-punch/description"]
+[node name="aura-cost-separator" type="ProgressBar" parent="margin/rock/left/weapon/knuckles/lunge/description"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8
@@ -5281,12 +5266,12 @@ max_value = 5.0
 step = 1.0
 show_percentage = false
 
-[node name="poaching" type="Button" parent="margin/rock/left/weapon/sword/single"]
+[node name="soft_boil" type="Button" parent="margin/rock/left/weapon/sword/single"]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="description" type="VBoxContainer" parent="margin/rock/left/weapon/sword/single/poaching"]
+[node name="description" type="VBoxContainer" parent="margin/rock/left/weapon/sword/single/soft_boil"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -5295,7 +5280,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 0
 
-[node name="margin" type="MarginContainer" parent="margin/rock/left/weapon/sword/single/poaching/description"]
+[node name="margin" type="MarginContainer" parent="margin/rock/left/weapon/sword/single/soft_boil/description"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/margin_left = 10
@@ -5303,17 +5288,17 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 0
 
-[node name="stack" type="HBoxContainer" parent="margin/rock/left/weapon/sword/single/poaching/description/margin"]
+[node name="stack" type="HBoxContainer" parent="margin/rock/left/weapon/sword/single/soft_boil/description/margin"]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 
-[node name="view" type="Control" parent="margin/rock/left/weapon/sword/single/poaching/description/margin/stack"]
+[node name="view" type="Control" parent="margin/rock/left/weapon/sword/single/soft_boil/description/margin/stack"]
 custom_minimum_size = Vector2(42, 42)
 layout_mode = 2
 size_flags_vertical = 4
 mouse_filter = 2
 
-[node name="margin" type="MarginContainer" parent="margin/rock/left/weapon/sword/single/poaching/description/margin/stack/view"]
+[node name="margin" type="MarginContainer" parent="margin/rock/left/weapon/sword/single/soft_boil/description/margin/stack/view"]
 layout_mode = 2
 offset_right = 42.0
 offset_bottom = 42.0
@@ -5322,7 +5307,7 @@ theme_override_constants/margin_top = 9
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 
-[node name="cricket-bat-ball" type="Label" parent="margin/rock/left/weapon/sword/single/poaching/description/margin/stack/view/margin"]
+[node name="cricket-bat-ball" type="Label" parent="margin/rock/left/weapon/sword/single/soft_boil/description/margin/stack/view/margin"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_colors/font_outline_color = Color(0.325479, 0.322641, 0.304519, 1)
@@ -5332,16 +5317,16 @@ theme_override_font_sizes/font_size = 28
 theme_override_styles/normal = SubResource("StyleBoxFlat_w1r1c")
 text = "🏏"
 
-[node name="content" type="HFlowContainer" parent="margin/rock/left/weapon/sword/single/poaching/description/margin/stack"]
+[node name="content" type="HFlowContainer" parent="margin/rock/left/weapon/sword/single/soft_boil/description/margin/stack"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 
-[node name="details" type="HBoxContainer" parent="margin/rock/left/weapon/sword/single/poaching/description/margin/stack/content"]
+[node name="details" type="HBoxContainer" parent="margin/rock/left/weapon/sword/single/soft_boil/description/margin/stack/content"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="caption" type="Label" parent="margin/rock/left/weapon/sword/single/poaching/description/margin/stack/content/details"]
+[node name="caption" type="Label" parent="margin/rock/left/weapon/sword/single/soft_boil/description/margin/stack/content/details"]
 custom_minimum_size = Vector2(110, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -5349,26 +5334,26 @@ theme_override_font_sizes/font_size = 18
 text = "Всмятку"
 text_overrun_behavior = 3
 
-[node name="zone" type="Label" parent="margin/rock/left/weapon/sword/single/poaching/description/margin/stack/content/details"]
+[node name="zone" type="Label" parent="margin/rock/left/weapon/sword/single/soft_boil/description/margin/stack/content/details"]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
 text = "|"
 horizontal_alignment = 1
 
-[node name="ability" type="HBoxContainer" parent="margin/rock/left/weapon/sword/single/poaching/description/margin/stack/content"]
+[node name="ability" type="HBoxContainer" parent="margin/rock/left/weapon/sword/single/soft_boil/description/margin/stack/content"]
 layout_mode = 2
 size_flags_horizontal = 10
 size_flags_stretch_ratio = 0.25
 theme_override_constants/separation = 0
 
-[node name="help" type="HBoxContainer" parent="margin/rock/left/weapon/sword/single/poaching/description/margin/stack/content/ability"]
+[node name="help" type="HBoxContainer" parent="margin/rock/left/weapon/sword/single/soft_boil/description/margin/stack/content/ability"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 6
 theme_override_constants/separation = -3
 
-[node name="slot-1" type="Label" parent="margin/rock/left/weapon/sword/single/poaching/description/margin/stack/content/ability/help"]
+[node name="slot-1" type="Label" parent="margin/rock/left/weapon/sword/single/soft_boil/description/margin/stack/content/ability/help"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 size_flags_horizontal = 10
@@ -5379,7 +5364,7 @@ theme_override_styles/normal = ExtResource("4_e8epa")
 text = "🪃"
 vertical_alignment = 1
 
-[node name="dot" type="Label" parent="margin/rock/left/weapon/sword/single/poaching/description/margin/stack/content/ability/help"]
+[node name="dot" type="Label" parent="margin/rock/left/weapon/sword/single/soft_boil/description/margin/stack/content/ability/help"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 size_flags_stretch_ratio = 0.25
@@ -5389,7 +5374,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_1chk7")
 text = "⋅"
 vertical_alignment = 1
 
-[node name="slot-3" type="Label" parent="margin/rock/left/weapon/sword/single/poaching/description/margin/stack/content/ability/help"]
+[node name="slot-3" type="Label" parent="margin/rock/left/weapon/sword/single/soft_boil/description/margin/stack/content/ability/help"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 size_flags_horizontal = 2
@@ -5400,10 +5385,10 @@ theme_override_styles/normal = ExtResource("4_e8epa")
 text = "🗡"
 vertical_alignment = 1
 
-[node name="cost" type="HBoxContainer" parent="margin/rock/left/weapon/sword/single/poaching/description/margin/stack/content/ability"]
+[node name="cost" type="HBoxContainer" parent="margin/rock/left/weapon/sword/single/soft_boil/description/margin/stack/content/ability"]
 layout_mode = 2
 
-[node name="ap" type="Label" parent="margin/rock/left/weapon/sword/single/poaching/description/margin/stack/content/ability/cost"]
+[node name="ap" type="Label" parent="margin/rock/left/weapon/sword/single/soft_boil/description/margin/stack/content/ability/cost"]
 visible = false
 custom_minimum_size = Vector2(22, 0)
 layout_mode = 2
@@ -5411,11 +5396,11 @@ theme_override_font_sizes/font_size = 18
 text = "2"
 horizontal_alignment = 2
 
-[node name="no" type="Control" parent="margin/rock/left/weapon/sword/single/poaching/description/margin/stack/content/ability/cost"]
+[node name="no" type="Control" parent="margin/rock/left/weapon/sword/single/soft_boil/description/margin/stack/content/ability/cost"]
 custom_minimum_size = Vector2(22, 0)
 layout_mode = 2
 
-[node name="aura-cost-separator" type="ProgressBar" parent="margin/rock/left/weapon/sword/single/poaching/description"]
+[node name="aura-cost-separator" type="ProgressBar" parent="margin/rock/left/weapon/sword/single/soft_boil/description"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8
@@ -7717,20 +7702,20 @@ layout_mode = 2
 offset_right = 42.0
 offset_bottom = 42.0
 theme_override_constants/margin_left = 4
-theme_override_constants/margin_top = 5
+theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 
 [node name="o" type="Label" parent="margin/rock/right/weapon/sword/single/round-attack/description/margin/stack/view/margin"]
 layout_mode = 2
 size_flags_horizontal = 0
-size_flags_vertical = 8
+size_flags_vertical = 0
 theme_override_colors/font_color = Color(0.32549, 0.321569, 0.305882, 1)
 theme_override_colors/font_outline_color = Color(0.428127, 0.424747, 0.403116, 1)
 theme_override_constants/outline_size = 5
 theme_override_fonts/font = ExtResource("1_w1r1c")
 theme_override_font_sizes/font_size = 36
-theme_override_styles/normal = SubResource("StyleBoxFlat_w1r1c")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_e8epa")
 text = "O"
 
 [node name="sword" type="Label" parent="margin/rock/right/weapon/sword/single/round-attack/description/margin/stack/view/margin"]
@@ -7740,7 +7725,7 @@ theme_override_colors/font_outline_color = Color(0.325479, 0.322641, 0.304519, 1
 theme_override_constants/outline_size = 5
 theme_override_fonts/font = ExtResource("1_w1r1c")
 theme_override_font_sizes/font_size = 28
-theme_override_styles/normal = SubResource("StyleBoxFlat_w1r1c")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_50ghp")
 text = "🗡"
 
 [node name="content" type="HFlowContainer" parent="margin/rock/right/weapon/sword/single/round-attack/description/margin/stack"]
@@ -8399,7 +8384,7 @@ layout_mode = 0
 offset_right = 42.0
 offset_bottom = 42.0
 theme_override_constants/margin_left = 4
-theme_override_constants/margin_top = 5
+theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 

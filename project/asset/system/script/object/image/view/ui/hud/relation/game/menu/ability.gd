@@ -27,6 +27,7 @@ func controls(hud: CanvasLayer, group: Node2D, game: Control) -> void:
 			group.get_node(hero).view.animation.effect.set_stats(s[hero]))
 	
 	group.xp.update_priorities.connect(game.priorities.set_priorities)
+	game.priorities.connect_priority_select(group.xp.summary)
 	group.xp.update_exp.connect(game.priorities.update_exp)
 	group.xp.update_exp.connect(func(value: Vector2i, base_xp: int):
 		score.count.text = str(base_xp + value.x)
