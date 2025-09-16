@@ -19,5 +19,9 @@ func _setup_machine(data: Dictionary, type: String) -> void:
 func setup_lock(data: Dictionary) -> void:
 	_setup_machine(data, "tile")
 
+func setup_eraser_lock(data: Dictionary) -> void:
+	data.eraser = { "erase": false, "tile": data.atlas }
+	setup_lock(data)
+
 func setup_mech(data: Dictionary) -> void:
 	_setup_machine(data, "mech")

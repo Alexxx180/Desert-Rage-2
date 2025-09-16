@@ -4,13 +4,14 @@ class_name Raining
 
 signal flow(map_coords: Vector2i, no: int)
 
-enum { SPARK = 0, ID = 2 }
+enum { SPARK = 0, PUDDLE_ID = 4, SOURCE_ID = 2 }
 
 @onready var particle = preload("res://asset/system/scene/subject/control/drive/rain.tscn")
 
-const PUDDLE: Vector2i = Vector2i(0, 2)
-const SOURCE: Vector2i = Vector2i(0, 3)
+const PUDDLE: Vector2i = Vector2i(2, 2) # 3, 2
+const SOURCE: Vector2i = Vector2i(3, 4) 
 
+var border: TileDecorator
 var execute: TileDecorator
 
 func diffusion(map_coords: Vector2i) -> void:
@@ -28,7 +29,7 @@ func diffusion(map_coords: Vector2i) -> void:
 func watering(direction: Vector2i) -> void:
 	var rain = particle.instantiate()
 	rain.set_pos(execute.context.pos).set_direction(direction)
-	execute.add_chip(rain, "..").select(PUDDLE, ID).paint()
+	execute.add_chip(rain, "..").select(PUDDLE, PUDDLE_ID).paint()
 	diffusion(execute.context.coords)
 
 func activate(pos: Vector2, direction: Vector2i) -> void:

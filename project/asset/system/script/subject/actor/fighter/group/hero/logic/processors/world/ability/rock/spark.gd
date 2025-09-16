@@ -20,6 +20,8 @@ func ability() -> void:
 	if _vessel != Defaults.CHARACTER and !_vessel.logic.relations.spark.on and aura.use(cost):
 		_vessel.logic.processors.spark.charge()
 	
+	print("ROCK SPARK, ", _last_position != Vector2.ZERO)
 	if _last_position != Vector2.ZERO and aura.use(cost):
 		activate.emit(_last_position)
+		print("USED")
 		animation()

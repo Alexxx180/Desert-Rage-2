@@ -2,7 +2,7 @@ extends Node
 
 var teleporters: Dictionary = {} # int, Node2D
 
-const SOURCE_ID = 1
+const SOURCE_ID = 2
 
 func get_target(execute: TileMapLayer) -> Array[Vector2i]:
 	return execute.get_used_cells_by_id(SOURCE_ID, Vector2(2, 2))

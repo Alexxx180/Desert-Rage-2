@@ -4,9 +4,9 @@ extends Node
 @onready var check: Node = $check
 @onready var teleport: Node = $teleport
 
-func setup(tags: TileMapLayer, execute: TileMapLayer) -> void:
-	teleport.fill(tags, execute)
-	check.set_layers(execute, tags)
+func setup(tags: TileMapLayer, border: TileMapLayer) -> void:
+	teleport.fill(tags, border)
+	check.set_layers(border, tags)
 	levels.connect_levels(tags.curtain, check)
 	SessionStats.assign(tags.get_parent().name.trim_prefix("map"))
 

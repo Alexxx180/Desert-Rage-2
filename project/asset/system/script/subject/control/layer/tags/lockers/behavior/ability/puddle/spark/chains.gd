@@ -9,10 +9,14 @@ var size: Array[int] = []
 @onready var charge: Node = $charge
 @onready var drain: Node = $drain
 
+var border: TileDecorator:
+	set(layer):
+		charge.border = layer
+		initiate(layer.busy(Charger.SOURCE, Charger.SOURCE_ID))
+
 var execute: TileDecorator:
 	set(layer):
 		charge.execute = layer
-		initiate(layer.busy(Charger.SOURCE, Charger.ID))
 
 func _ready() -> void:
 	drain.chains = self
