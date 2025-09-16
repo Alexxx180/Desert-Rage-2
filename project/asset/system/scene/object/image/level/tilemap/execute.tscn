@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://rlwfnl6rvpkj"]
+[gd_scene load_steps=23 format=3 uid="uid://rlwfnl6rvpkj"]
 
 [ext_resource type="PackedScene" uid="uid://djsxo43syvb5e" path="res://asset/system/scene/subject/control/platform/cargo/horizontal.tscn" id="2_5jn51"]
 [ext_resource type="PackedScene" uid="uid://y37ppwq8k2ti" path="res://asset/system/scene/subject/control/platform/cargo/vertical.tscn" id="3_ap4cl"]
@@ -10,7 +10,10 @@
 [ext_resource type="Script" uid="uid://0sumolct2lmf" path="res://asset/system/script/subject/control/layer/execute/execute.gd" id="8_2uxvu"]
 [ext_resource type="Texture2D" uid="uid://0ymh7q73fep5" path="res://asset/resource/media/images/hookups/hookups.png" id="8_5jn51"]
 [ext_resource type="PackedScene" uid="uid://ct8xgb5201d3s" path="res://asset/system/scene/subject/actor/npc/dialog.tscn" id="8_bgvc4"]
+[ext_resource type="PackedScene" uid="uid://esjdr0frox65" path="res://asset/system/scene/subject/control/drive/box/small/box.tscn" id="9_ap4cl"]
 [ext_resource type="Script" uid="uid://bkg1v81127vdy" path="res://asset/system/script/subject/control/layer/execute/recovery.gd" id="10_4ohqp"]
+[ext_resource type="PackedScene" uid="uid://jdgle11ik74y" path="res://asset/system/scene/subject/control/drive/box/large/box.tscn" id="10_h5j0a"]
+[ext_resource type="PackedScene" uid="uid://b2b504t0v7im2" path="res://asset/system/scene/subject/control/drive/box/fire/box.tscn" id="11_2cl7a"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_78vt2"]
 tile_data = PackedInt32Array(0, 196609, 1, 65536, 196609, 2, 131072, 196609, 0, 1, 262145, 1, 65537, 262145, 2, 131073, 196609, 0)
@@ -44,6 +47,27 @@ texture_region_size = Vector2i(64, 64)
 0:2/0/physics_layer_3/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
 1:2/0 = 0
 2:2/0 = 0
+0:3/0 = 0
+0:4/0 = 0
+0:5/0 = 0
+1:5/0 = 0
+1:4/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+2:4/0 = 0
+2:5/0 = 0
+3:5/0 = 0
+3:4/0 = 0
+3:3/0 = 0
+4:3/0 = 0
+4:4/0 = 0
+4:5/0 = 0
+3:2/0 = 0
+3:1/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+4:1/0 = 0
+4:2/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4qiw5"]
 texture = ExtResource("6_8wy4t")
@@ -153,6 +177,27 @@ texture_region_size = Vector2i(64, 64)
 0:3/0/physics_layer_13/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
 2:0/0 = 0
 2:0/0/physics_layer_14/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
+2:3/0 = 0
+3:3/0 = 0
+3:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -20, 20, -20, 20, 16, -16, 16)
+3:4/0 = 0
+3:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -20, 20, -20, 20, 16, -16, 16)
+3:4/0/physics_layer_9/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
+2:4/0 = 0
+2:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -20, 20, -20, 20, 16, -16, 16)
+2:4/0/physics_layer_9/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
+1:4/0 = 0
+1:4/0/physics_layer_9/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
+2:2/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+3:2/0 = 0
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_5jn51"]
+resource_name = "boxes"
+scenes/1/scene = ExtResource("9_ap4cl")
+scenes/2/scene = ExtResource("10_h5j0a")
+scenes/3/scene = ExtResource("11_2cl7a")
 
 [sub_resource type="TileSet" id="TileSet_tnb5i"]
 tile_size = Vector2i(64, 64)
@@ -204,6 +249,7 @@ sources/1 = SubResource("TileSetAtlasSource_0dkq4")
 sources/2 = SubResource("TileSetAtlasSource_4qiw5")
 sources/3 = SubResource("TileSetAtlasSource_cuqbe")
 sources/4 = SubResource("TileSetAtlasSource_ap4cl")
+sources/5 = SubResource("TileSetScenesCollectionSource_5jn51")
 pattern_0 = SubResource("TileMapPattern_78vt2")
 
 [node name="execute" type="TileMapLayer"]

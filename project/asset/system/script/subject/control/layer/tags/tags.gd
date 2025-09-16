@@ -12,14 +12,15 @@ extends TileMapLayer
 @onready var enemy: Node = $enemy
 @onready var curtain: Node = $curtain
 @onready var chests: Node = $chests
-@onready var border: TileMapLayer = get_node("../border")
-@onready var execute: TileMapLayer = get_node("../execute")
+@onready var level: Dictionary = {
+	"border": get_node("../border"), "execute": get_node("../execute"), "tags": self
+}
 @onready var push: TileMapLayer = get_node("../push")
 
 func _ready() -> void:
-	lockers.setup(self, execute)
-	transition.setup(self, execute)
-	books.setup(self, execute)
+	lockers.setup(self, level.execute)
+	transition.setup(self, level.execute)
+	books.setup(level)
 	enemy.setup(self, push, casual_mode)
 	chests.setup(self, casual_mode)
 	if invisible: hide()
