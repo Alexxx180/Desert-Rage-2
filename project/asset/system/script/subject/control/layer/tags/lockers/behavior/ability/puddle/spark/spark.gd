@@ -14,7 +14,6 @@ var execute: TileDecorator:
 
 func puddle_charge(map_coords: Vector2i, no: int) -> void:
 	if not map_coords in alone.spark:
-		print("CHARGING THE PUDDLE...")
 		chains.charge.from_puddle(map_coords, no)
 
 func activate_source(pos: Vector2) -> void:

@@ -18,9 +18,7 @@ func diffuse_source(cell: Vector2i, tile: Dictionary) -> void:
 
 func diffuse_puddle(cell: Vector2i, tile: Dictionary) -> bool:
 	match execute.from_coords(cell).context.atlas:
-		FlowConductor.TILE.PUDDLE.OFF:
-			tile.cell = FlowConductor.SPARK
-			print("DIFFUSE PUDDLE !")
+		FlowConductor.TILE.PUDDLE.OFF: tile.cell = FlowConductor.SPARK
 		_: diffuse_source(cell, tile)
 	return tile.cell == FlowConductor.NONE # ==
 
@@ -59,7 +57,7 @@ func draw_puddle(map_coords: Vector2i, status: String) -> void:
 func to_conductor(map_coords: Vector2i, chain: int, draw: Callable) -> void:
 	if chains.can_extend(chain) and _connection(chain, map_coords):
 		draw.call(map_coords, "ON")
-		chains.shrink_size(chain) # feedback(tile.position, tile.size)
+		chains.shrink_size(chain)
 		contact(map_coords)
 
 func to_source(map_coords: Vector2i) -> void:
@@ -69,16 +67,11 @@ func to_source(map_coords: Vector2i) -> void:
 
 func to_puddle(map_coords: Vector2i) -> void:
 	var chain: int = chains.search_path(map_coords)
-	if chain == -1:
-		print("CHAIN PATH NOT FOUND")
-		return
-	print("CHAIN PATH: ", chain)
+	if chain == -1: return
 	to_conductor(map_coords, chain, draw_puddle)
 
 func from_puddle(map_coords: Vector2i, no: int) -> void:
 	match no:
 		FlowConductor.SOURCE: to_source(map_coords)
-		FlowConductor.SPARK:
-			print("FROM PUDDLE: ", map_coords)
-			to_puddle(map_coords)
+		FlowConductor.SPARK: to_puddle(map_coords)
 		_: push_error("invalid electricity connection number")

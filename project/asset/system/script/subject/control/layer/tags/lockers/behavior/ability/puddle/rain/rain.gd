@@ -12,18 +12,13 @@ func _atlas(layer: TileDecorator, coords: Vector2i) -> Vector2i:
 
 func diffuse_source(cell: Vector2i, context: Dictionary) -> void:
 	var atlas = _atlas(border, cell)
-	print("DIFFUSE SOURCE ATLAS: ", atlas)
 	match atlas:
 		FlowConductor.TILE.SOURCE.ON: context.charge = true
-	print("CHARGED SOURCE: ", context.charge)
 
 func diffuse_puddle(cell: Vector2i, context: Dictionary) -> bool:
 	var atlas = _atlas(execute, cell)
-	print("DIFFUSE PUDDLE ATLAS: ", atlas)
 	match execute.from_coords(cell).context.atlas:
-		FlowConductor.TILE.PUDDLE.ON:
-			context.charge = true
-			print("CHARGED PUDDLE: ", context.charge)
+		FlowConductor.TILE.PUDDLE.ON: context.charge = true
 		_: diffuse_source(cell, context)
 	return not context.charge
 
@@ -41,4 +36,8 @@ func watering(direction: Vector2i) -> void:
 
 func activate(pos: Vector2, direction: Vector2i) -> void:
 	match execute.from_pos(pos).context.atlas:
-		Vector2(-1, -1): watering(direction)
+		Vector2(-1, -1):
+			print("WATERING")
+			watering(direction)
+		_: 
+			print("CANT WATERING")
