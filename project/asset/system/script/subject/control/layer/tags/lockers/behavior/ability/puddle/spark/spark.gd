@@ -19,20 +19,16 @@ func puddle_charge(map_coords: Vector2i, no: int) -> void:
 func activate_puddle(pos: Vector2) -> void:
 	var context: Dictionary = alone.execute.from_pos(pos).context
 	match context.atlas:
-		# Raining.PUDDLE_SOURCE: chains.contact(context.coords)
-		Raining.PUDDLE: alone.lazy_sparking(context.coords)
+		FlowConductor.TILE.PUDDLE.OFF: alone.lazy_sparking(context.coords)
 
 func activate_source(pos: Vector2) -> void:
 	var context: Dictionary = chains.charge.border.from_pos(pos).context
+	print("TRY CONTACT")
 	match context.atlas:
-		Raining.SOURCE: chains.contact(context.coords)
+		FlowConductor.TILE.SOURCE.OFF:
+			print("CONTACT!")
+			chains.contact(context.coords)
 
 func activate(pos: Vector2) -> void:
 	activate_puddle(pos)
 	activate_source(pos)
-	"""
-	var context: Dictionary = alone.execute.from_pos(pos).context
-	match context.atlas:
-		Raining.SOURCE: chains.contact(context.coords)
-		Raining.PUDDLE: alone.lazy_sparking(context.coords)
-	"""

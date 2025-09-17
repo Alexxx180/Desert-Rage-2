@@ -8,9 +8,11 @@ func smart_erase(mech: Dictionary, config: Dictionary) -> void:
 	Tile.paint(search.execute, mech)
 	config.erase = !config.erase
 
-func set_tile(static_mech: Dictionary) -> void:
-	static_mech.atlas.x += 1 if static_mech.atlas.x % 2 == 0 else -1
-	Tile.paint(search.execute, static_mech)
+func set_tile(mech: Dictionary) -> void:
+	var x: int = mech.offset.x
+	var axis: int = mech.offset.y
+	mech.atlas[axis] += x if mech.atlas[axis] % 2 == 0 else -x
+	Tile.paint(search.execute, mech)
 
 func check_tile(mech: Dictionary) -> void:
 	if not mech.has("eraser"): set_tile(mech)

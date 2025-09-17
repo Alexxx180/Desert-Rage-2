@@ -11,8 +11,9 @@ var size: Array[int] = []
 
 var border: TileDecorator:
 	set(layer):
+		var t: Dictionary = FlowConductor.TILE.SOURCE
 		charge.border = layer
-		initiate(layer.busy(Charger.SOURCE, Charger.SOURCE_ID))
+		initiate(layer.busy(t.ON, t.ID))
 
 var execute: TileDecorator:
 	set(layer):

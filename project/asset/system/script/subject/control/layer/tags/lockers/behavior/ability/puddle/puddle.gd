@@ -5,6 +5,7 @@ extends Node
 
 var border: TileDecorator:
 	set(value):
+		rain.border = value
 		spark.border = value
 
 var execute: TileDecorator:

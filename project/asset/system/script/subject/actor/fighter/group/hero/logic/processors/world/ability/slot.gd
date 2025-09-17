@@ -24,6 +24,7 @@ func far_box(_box: CharacterBody2D) -> void:
 
 func near_map(_execute: TileMapLayer) -> void:
 	_last_position = _hero.position + _act.position
+	print("HERO USING: ", _last_position)
 
 func _input(_event: InputEvent) -> void:
 	if Input.is_action_pressed(_act_name):

@@ -19,7 +19,7 @@ func direct() -> void:
 
 func move(motion: Vector2) -> bool:
 	var turned: bool = super.move(motion)
-	print("ANIMATE MOTION: ", motion)
+	# print("ANIMATE MOTION: ", motion)
 	if turned: moves.set_base_stance("move")
 	else: moves.set_base_stance("idle")
 	return turned

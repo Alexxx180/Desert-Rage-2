@@ -2,6 +2,13 @@ extends RefCounted
 
 class_name FlowConductor
 
+enum { NONE = -1, SPARK = 0 }
+
+const TILE: Dictionary = {
+	"PUDDLE": { "OFF": Vector2i(2, 2), "ON": Vector2i(3, 2), "ID": 4 },
+	"SOURCE": { "OFF": Vector2i(3, 5), "ON": Vector2i(4, 5), "ID": 2 }
+}
+
 static func around(map_coords: Vector2i, context: Dictionary, check: Callable) -> bool:
 	var search: bool = true
 	var axis: int = Vector2.AXIS_Y

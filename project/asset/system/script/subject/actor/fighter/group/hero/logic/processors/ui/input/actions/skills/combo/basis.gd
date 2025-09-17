@@ -19,7 +19,7 @@ func check_combo(mark: Tick, slots: Array) -> bool:
 	for i in range(0, border):
 		var j: int = offset + i
 		got = got and combo.query[j] == slots[i]
-		print("SLOT: ", i, " - ", combo.query[j], " = ", slots[i])
+		# print("SLOT: ", i, " - ", combo.query[j], " = ", slots[i])
 
 	Skills.view_actions(combo.query)
 	if got: combo.completed = true

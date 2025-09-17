@@ -10,7 +10,8 @@ func _set_hero(value: CharacterBody2D) -> void:
 	_act = _hero.logic.detectors.world.ability.spark.puddle
 
 func far_map(_execute: TileMapLayer) -> void:
-	_last_position = Vector2.ZERO
+	# _last_position = Vector2.ZERO
+	print("HERO STOP USING: ", _last_position)
 
 func animation() -> void:
 	_hero.view.animation.moves.set_fight_start("active")

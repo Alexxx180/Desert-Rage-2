@@ -1,35 +1,33 @@
 extends Node
 
-class_name Raining
-
 signal flow(map_coords: Vector2i, no: int)
 
-enum { SPARK = 0, PUDDLE_ID = 4, SOURCE_ID = 2 }
-
 @onready var particle = preload("res://asset/system/scene/subject/control/drive/rain.tscn")
-
-const PUDDLE: Vector2i = Vector2i(2, 2) # 3, 2
-const SOURCE: Vector2i = Vector2i(3, 4) 
 
 var border: TileDecorator
 var execute: TileDecorator
 
+func diffuse_source(cell: Vector2i, context: Dictionary) -> void:
+	print("DIFFUSE ATLAS: ", border.from_coords(cell).context.atlas)
+	match border.from_coords(cell).context.atlas:
+		FlowConductor.TILE.SOURCE.ON: context.charge = true
+
+func diffuse_puddle(cell: Vector2i, context: Dictionary) -> bool:
+	match execute.from_coords(cell).context.atlas:
+		FlowConductor.TILE.PUDDLE.ON: context.charge = true
+		_: diffuse_source(cell, context)
+	return not context.charge
+
 func diffusion(map_coords: Vector2i) -> void:
 	var tile: Dictionary = { "charge": false }
-
-	FlowConductor.around(map_coords, tile,
-	(func(cell: Vector2i, context: Dictionary):
-		match execute.from_coords(cell).context.atlas:
-			Charger.PUDDLE: context.charge = true
-			Charger.SOURCE: context.charge = true
-		return not context.charge))
-
-	if tile.charge: flow.emit(map_coords, SPARK)
+	FlowConductor.around(map_coords, tile, diffuse_puddle)
+	if tile.charge: flow.emit(map_coords, FlowConductor.SPARK)
 
 func watering(direction: Vector2i) -> void:
+	var t: Dictionary = FlowConductor.TILE.PUDDLE
 	var rain = particle.instantiate()
 	rain.set_pos(execute.context.pos).set_direction(direction)
-	execute.add_chip(rain, "..").select(PUDDLE, PUDDLE_ID).paint()
+	execute.add_chip(rain, "..").select(t.OFF, t.ID).paint()
 	diffusion(execute.context.coords)
 
 func activate(pos: Vector2, direction: Vector2i) -> void:
