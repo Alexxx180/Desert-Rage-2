@@ -7,14 +7,23 @@ signal flow(map_coords: Vector2i, no: int)
 var border: TileDecorator
 var execute: TileDecorator
 
+func _atlas(layer: TileDecorator, coords: Vector2i) -> Vector2i:
+	return layer.from_coords(coords).context.atlas
+
 func diffuse_source(cell: Vector2i, context: Dictionary) -> void:
-	print("DIFFUSE ATLAS: ", border.from_coords(cell).context.atlas)
-	match border.from_coords(cell).context.atlas:
+	var atlas = _atlas(border, cell)
+	print("DIFFUSE SOURCE ATLAS: ", atlas)
+	match atlas:
 		FlowConductor.TILE.SOURCE.ON: context.charge = true
+	print("CHARGED SOURCE: ", context.charge)
 
 func diffuse_puddle(cell: Vector2i, context: Dictionary) -> bool:
+	var atlas = _atlas(execute, cell)
+	print("DIFFUSE PUDDLE ATLAS: ", atlas)
 	match execute.from_coords(cell).context.atlas:
-		FlowConductor.TILE.PUDDLE.ON: context.charge = true
+		FlowConductor.TILE.PUDDLE.ON:
+			context.charge = true
+			print("CHARGED PUDDLE: ", context.charge)
 		_: diffuse_source(cell, context)
 	return not context.charge
 

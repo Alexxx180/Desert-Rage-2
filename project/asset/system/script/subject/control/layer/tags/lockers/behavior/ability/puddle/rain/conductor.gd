@@ -2,7 +2,7 @@ extends RefCounted
 
 class_name FlowConductor
 
-enum { NONE = -1, SPARK = 0 }
+enum { NONE = -1, SPARK = 0, SOURCE = 1 }
 
 const TILE: Dictionary = {
 	"PUDDLE": { "OFF": Vector2i(2, 2), "ON": Vector2i(3, 2), "ID": 4 },

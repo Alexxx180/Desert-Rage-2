@@ -10,7 +10,7 @@ func discharge(target: Vector2i, chain: int) -> void:
 	var track: Rect2i = chains.get_track(chain)
 	while track.position != target:
 		chains.extend_size(chain)
-		chains.charge.feedback(track.position, FlowConductor.TILE.PUDDLE.OFF)
+		chains.charge.draw_puddle(track.position, "OFF") # FlowConductor.TILE.PUDDLE.OFF
 		track.position -= track.size
 
 func diffuse_cross_unit(next_coords: Vector2i, chain: int) -> void:

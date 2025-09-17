@@ -14,21 +14,19 @@ var execute: TileDecorator:
 
 func puddle_charge(map_coords: Vector2i, no: int) -> void:
 	if not map_coords in alone.spark:
+		print("CHARGING THE PUDDLE...")
 		chains.charge.from_puddle(map_coords, no)
+
+func activate_source(pos: Vector2) -> void:
+	var context: Dictionary = chains.charge.border.from_pos(pos).context
+	match context.atlas:
+		FlowConductor.TILE.SOURCE.OFF:
+			chains.contact(context.coords)
 
 func activate_puddle(pos: Vector2) -> void:
 	var context: Dictionary = alone.execute.from_pos(pos).context
 	match context.atlas:
 		FlowConductor.TILE.PUDDLE.OFF: alone.lazy_sparking(context.coords)
+		_: activate_source(pos)
 
-func activate_source(pos: Vector2) -> void:
-	var context: Dictionary = chains.charge.border.from_pos(pos).context
-	print("TRY CONTACT")
-	match context.atlas:
-		FlowConductor.TILE.SOURCE.OFF:
-			print("CONTACT!")
-			chains.contact(context.coords)
-
-func activate(pos: Vector2) -> void:
-	activate_puddle(pos)
-	activate_source(pos)
+func activate(pos: Vector2) -> void: activate_puddle(pos)
