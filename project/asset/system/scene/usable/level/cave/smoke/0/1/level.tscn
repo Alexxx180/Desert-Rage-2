@@ -1,0 +1,35 @@
+[gd_scene load_steps=9 format=3 uid="uid://c043krvoek0im"]
+
+[ext_resource type="PackedScene" uid="uid://d0i3jl2uefg53" path="res://asset/system/scene/object/image/level/tilemap/border.tscn" id="1_34uad"]
+[ext_resource type="PackedScene" uid="uid://bsumfxiuy47r" path="res://asset/system/scene/object/image/level/theme/caves.tscn" id="1_x6aip"]
+[ext_resource type="PackedScene" uid="uid://b83b7oo2fmh5h" path="res://asset/system/scene/subject/actor/fighter/group/group.tscn" id="2_1yps1"]
+[ext_resource type="PackedScene" uid="uid://rlwfnl6rvpkj" path="res://asset/system/scene/object/image/level/tilemap/execute.tscn" id="2_7ryhs"]
+[ext_resource type="PackedScene" uid="uid://ce2y76nymo6o4" path="res://asset/system/scene/object/image/level/tilemap/tags.tscn" id="3_ctaqj"]
+[ext_resource type="Script" uid="uid://kqsx3uji4d8r" path="res://asset/system/script/subject/control/gear/safe/database.gd" id="3_mqnhl"]
+[ext_resource type="PackedScene" uid="uid://cffwkfo0pxyg" path="res://asset/system/scene/object/image/view/ui/hud/hud.tscn" id="4_34uad"]
+[ext_resource type="PackedScene" uid="uid://b3oh6t5q4y0ub" path="res://asset/system/scene/object/image/view/sight/transition/stairs/down/end.tscn" id="5_7ryhs"]
+
+[node name="level" type="Node2D"]
+
+[node name="border" parent="." instance=ExtResource("1_34uad")]
+position = Vector2(4184.26, 2984.22)
+
+[node name="execute" parent="." instance=ExtResource("2_7ryhs")]
+position = Vector2(4184.26, 2984.22)
+
+[node name="tags" parent="." instance=ExtResource("3_ctaqj")]
+position = Vector2(4184.26, 2984.22)
+
+[node name="ost" parent="." instance=ExtResource("1_x6aip")]
+process_mode = 3
+
+[node name="group" parent="." instance=ExtResource("2_1yps1")]
+position = Vector2(1372, 1363)
+
+[node name="database" type="Node" parent="."]
+script = ExtResource("3_mqnhl")
+
+[node name="hud" parent="." instance=ExtResource("4_34uad")]
+
+[node name="transition" parent="." instance=ExtResource("5_7ryhs")]
+visible = false
