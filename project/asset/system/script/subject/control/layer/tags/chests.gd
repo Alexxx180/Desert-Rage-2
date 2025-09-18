@@ -1,6 +1,6 @@
 extends Node
 
-enum { GROUND = 1, INTERACTION = 4 }
+enum { GROUND = 1, ENEMY = 4 }
 
 var tags: TileMapLayer
 
@@ -10,8 +10,8 @@ func _paint(places: Array[Vector2i]) -> void:
 
 func _set_casual_mode(casual_mode: bool) -> void:
 	if not casual_mode: return
-	for chest in [0, 1, 2]:
-		_paint(tags.get_used_cells_by_id(INTERACTION, Vector2i(0, chest)))
+	# for chest in [0, 1, 2]:
+		# _paint(tags.get_used_cells_by_id(ENEMY, Vector2i(0, chest)))
 
 func setup(_tags: TileMapLayer, casual_mode: bool) -> void:
 	tags = _tags

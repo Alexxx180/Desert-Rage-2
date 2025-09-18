@@ -1,7 +1,7 @@
 extends Node
 
 var search: Node
-const LOCKER_DEFAULT_TILE: Vector2i = Vector2i(2, 2)
+const LOCKER_DEFAULT_TILE: Vector2i = Vector2i(3, 6)
 
 func smart_erase(mech: Dictionary, config: Dictionary) -> void:
 	mech.atlas = config.tile if config.erase else LOCKER_DEFAULT_TILE
