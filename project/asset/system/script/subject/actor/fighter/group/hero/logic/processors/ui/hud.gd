@@ -26,6 +26,7 @@ func set_slot_combo(caption):
 func set_slots(mark: Tick):
 	var hero: CharacterBody2D = mark.blackboard.get_value("tools").hero
 	var combo: Dictionary = mark.blackboard.get_value("combo")
+	if not display: return
 	var hint: HBoxContainer = markers.combo.heroes[hero.name]
 	var count: int = len(combo.query)
 	hint.slots.show()

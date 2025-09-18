@@ -4,6 +4,7 @@ extends Node2D
 @onready var spawn: Area2D = $spawn
 
 func controls(group: Node2D) -> void:
+	if not group.has_node("../../ost"): return
 	var tension: Node = group.get_node("../../ost").tension
 	
 	nearby.body_entered.connect(tension.add_enemy)
