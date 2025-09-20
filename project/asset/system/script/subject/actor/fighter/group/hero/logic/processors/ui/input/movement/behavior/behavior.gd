@@ -1,6 +1,5 @@
 extends Node
 
-@onready var timing: Node = $timing
 @onready var move: Node = $move
 @onready var run: Node = $run
 

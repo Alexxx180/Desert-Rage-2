@@ -4,13 +4,14 @@ extends Node2D
 @export var deployed: bool = true
 @onready var camera: Camera2D = $camera
 @onready var xp: Node = $xp
+@onready var ray: CharacterBody2D = $ray
+@onready var rock: CharacterBody2D = $rock
 
 var navigation: Array
 var deploy: HeroDeploy = HeroDeploy.new()
 
 func _ready() -> void:
-	var ray: CharacterBody2D = $ray
-	deploy.init(self, [ray, $rock], deployed)
+	deploy.init(self, [ray, rock], deployed)
 	if is_overworld: camera.set_overworld()
 	ray.logic.processors.ui.input.board.set_value("group", self)
 

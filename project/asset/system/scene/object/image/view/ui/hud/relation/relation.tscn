@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dbkrincgd6l50"]
+[gd_scene load_steps=18 format=3 uid="uid://dbkrincgd6l50"]
 
 [ext_resource type="Script" uid="uid://dv3ea7oqn3rav" path="res://asset/system/script/object/image/view/ui/hud/relation/relation.gd" id="1_ny3sf"]
 [ext_resource type="PackedScene" uid="uid://bisnfriip5102" path="res://asset/system/scene/object/image/view/ui/hud/relation/pause/hints.tscn" id="2_kyivv"]
@@ -14,6 +14,9 @@
 [ext_resource type="Script" uid="uid://drfq8w54lv52r" path="res://asset/system/script/object/image/view/ui/hud/relation/pause/information.gd" id="7_u0en7"]
 [ext_resource type="Script" uid="uid://cfgi6pedio522" path="res://asset/system/script/object/image/view/ui/hud/relation/game/menu/inventory.gd" id="7_xrgkb"]
 [ext_resource type="Script" uid="uid://dnwmbx7le4xxt" path="res://asset/system/script/object/image/view/ui/hud/relation/game/menu/ability.gd" id="8_kdl5j"]
+[ext_resource type="Script" uid="uid://ckosl6hpq7ew4" path="res://asset/system/script/object/image/view/ui/hud/relation/game/hud/xp.gd" id="9_8eyfs"]
+[ext_resource type="Script" uid="uid://b1nbmi5cqcppl" path="res://asset/system/script/object/image/view/ui/hud/relation/game/hud/hud.gd" id="9_dcfxn"]
+[ext_resource type="Script" uid="uid://cp18p8kgaahp6" path="res://asset/system/script/object/image/view/ui/hud/relation/game/hud/hp.gd" id="11_87y6j"]
 
 [node name="relation" type="Node"]
 script = ExtResource("1_ny3sf")
@@ -36,6 +39,15 @@ script = ExtResource("7_xrgkb")
 
 [node name="ability" type="Node" parent="game"]
 script = ExtResource("8_kdl5j")
+
+[node name="hud" type="Node" parent="game"]
+script = ExtResource("9_dcfxn")
+
+[node name="xp" type="Node" parent="game/hud"]
+script = ExtResource("9_8eyfs")
+
+[node name="hp" type="Node" parent="game/hud"]
+script = ExtResource("11_87y6j")
 
 [node name="pause" type="Node" parent="."]
 script = ExtResource("5_aqv51")

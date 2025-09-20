@@ -1,17 +1,17 @@
 [gd_scene load_steps=5 format=3 uid="uid://b7v637wmhaoam"]
 
 [ext_resource type="Script" uid="uid://cxd6185q3eajm" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/processors/ui/input/movement/behavior/behavior.gd" id="1_1kqs7"]
-[ext_resource type="PackedScene" uid="uid://vebklnsa3y5d" path="res://asset/system/scene/object/calculus/timer/variants/lazy.tscn" id="2_hhw7g"]
 [ext_resource type="Script" uid="uid://0slkvjoew8p3" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/processors/ui/input/movement/behavior/move.gd" id="2_k6ht2"]
+[ext_resource type="PackedScene" uid="uid://dga0coql425dk" path="res://asset/system/scene/object/calculus/timer/variants/action.tscn" id="2_mnk35"]
 [ext_resource type="Script" uid="uid://dgx2e5bc2sjv2" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/processors/ui/input/movement/behavior/run.gd" id="4_f5hb4"]
 
 [node name="behavior" type="Node"]
 script = ExtResource("1_1kqs7")
-
-[node name="timing" parent="." instance=ExtResource("2_hhw7g")]
 
 [node name="move" type="Node" parent="."]
 script = ExtResource("2_k6ht2")
 
 [node name="run" type="Node" parent="."]
 script = ExtResource("4_f5hb4")
+
+[node name="timing" parent="run" instance=ExtResource("2_mnk35")]

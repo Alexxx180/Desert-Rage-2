@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://6b0ydfrtbu38"]
+[gd_scene load_steps=39 format=3 uid="uid://6b0ydfrtbu38"]
 
 [ext_resource type="PackedScene" uid="uid://scs1xlb7x0d6" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/menu/inventory/selection.tscn" id="1_7touf"]
 [ext_resource type="StyleBox" uid="uid://cvfnqancophme" path="res://asset/resource/engine/internal/theme/style/solid-color-panel.tres" id="1_r0sy2"]
@@ -6,6 +6,7 @@
 [ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://asset/resource/engine/internal/theme/patterns/template/menu/settings/topic/footer.tres" id="2_r0sy2"]
 [ext_resource type="FontFile" uid="uid://b37js8y80ak1k" path="res://asset/resource/font/NotoColorEmoji-Regular.ttf" id="3_5obb3"]
 [ext_resource type="PackedScene" uid="uid://l7thqkrsol4m" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/menu/priorities/perks.tscn" id="3_h2uo5"]
+[ext_resource type="Script" uid="uid://crmcb7sw51vpd" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/menu/inventory/ability/xp/short.gd" id="3_oq1iv"]
 [ext_resource type="FontFile" uid="uid://bghvysgyoj1y7" path="res://asset/resource/font/title/Equilibrist Semibold.ttf" id="3_plxo8"]
 [ext_resource type="Script" uid="uid://cuqygsqpgrd75" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/menu/status/enemy/enemy.gd" id="4_5p2ax"]
 [ext_resource type="Script" uid="uid://cfaxt6ng6ftvc" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/menu/status/enemy/damage.gd" id="5_ywq7x"]
@@ -13,19 +14,25 @@
 [ext_resource type="Shortcut" uid="uid://ucetbklb6n0q" path="res://asset/resource/engine/internal/short/cut/game/gameplay-menu.tres" id="6_xd2oj"]
 [ext_resource type="Script" uid="uid://buq442yndfae8" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/menu/status/enemy/hits.gd" id="8_oq1iv"]
 [ext_resource type="FontFile" uid="uid://b2wbdbnkxcqv1" path="res://asset/resource/font/NotoEmoji-VariableFont_wght.ttf" id="10_0gbwx"]
+[ext_resource type="Script" uid="uid://ck11vtlkgauqb" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/menu/inventory/ability/xp/long.gd" id="10_ywq7x"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_l0mxd"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xd2oj"]
 bg_color = Color(0.804743, 0.804743, 0.804743, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0gbwx"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_04un8"]
 content_margin_left = 4.0
 content_margin_top = 6.0
-bg_color = Color(0.0588235, 0.0588235, 0.0588235, 1)
+bg_color = Color(0.0196078, 0.0196078, 0.0588235, 1)
 corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jsbek"]
+content_margin_left = 4.0
+content_margin_top = 6.0
+bg_color = Color(0.0196078, 0.0196078, 0.0196078, 1)
+corner_radius_top_left = 3
 corner_radius_bottom_left = 3
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ywq7x"]
@@ -36,6 +43,20 @@ corner_radius_top_left = 3
 corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3cwxo"]
+content_margin_left = 4.0
+content_margin_top = 6.0
+bg_color = Color(0.0196078, 0.0196078, 0.0588235, 1)
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_puk17"]
+content_margin_left = 4.0
+content_margin_top = 6.0
+bg_color = Color(0.0196078, 0.0196078, 0.0196078, 1)
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nilgw"]
 
@@ -65,12 +86,15 @@ corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o7ewd"]
+bg_color = Color(0.0196078, 0.0196078, 0.0588235, 1)
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oq1iv"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tdkka"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2a0ln"]
-bg_color = Color(0.0980392, 0.0980392, 0.196078, 1)
+bg_color = Color(0.392157, 0.392157, 0.686275, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5p2ax"]
 
@@ -126,6 +150,7 @@ theme_override_constants/separation = 10
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_constants/separation = 0
+script = ExtResource("3_oq1iv")
 
 [node name="caption" type="HBoxContainer" parent="scroll/margin/stack/menu/fast-access/experience"]
 layout_mode = 2
@@ -137,6 +162,7 @@ layout_mode = 2
 theme_override_constants/separation = 0
 
 [node name="combo" type="HBoxContainer" parent="scroll/margin/stack/menu/fast-access/experience/caption/main"]
+visible = false
 layout_mode = 2
 theme_override_constants/separation = 0
 
@@ -158,9 +184,9 @@ layout_mode = 2
 color = Color(0.0196078, 0.0196078, 0.0196078, 1)
 
 [node name="ability" type="HBoxContainer" parent="scroll/margin/stack/menu/fast-access/experience/caption/main"]
-custom_minimum_size = Vector2(80, 0)
+custom_minimum_size = Vector2(78, 0)
 layout_mode = 2
-theme_override_constants/separation = 2
+theme_override_constants/separation = 0
 
 [node name="x" type="Button" parent="scroll/margin/stack/menu/fast-access/experience/caption/main/ability"]
 custom_minimum_size = Vector2(39, 25)
@@ -169,7 +195,8 @@ size_flags_horizontal = 0
 size_flags_vertical = 8
 theme_override_fonts/font = ExtResource("3_5obb3")
 theme_override_font_sizes/font_size = 18
-theme_override_styles/normal = SubResource("StyleBoxFlat_0gbwx")
+theme_override_styles/hover = SubResource("StyleBoxFlat_04un8")
+theme_override_styles/normal = SubResource("StyleBoxFlat_jsbek")
 text = "🔥"
 alignment = 0
 
@@ -229,7 +256,8 @@ size_flags_horizontal = 0
 size_flags_vertical = 8
 theme_override_fonts/font = ExtResource("3_5obb3")
 theme_override_font_sizes/font_size = 18
-theme_override_styles/normal = SubResource("StyleBoxFlat_0gbwx")
+theme_override_styles/hover = SubResource("StyleBoxFlat_3cwxo")
+theme_override_styles/normal = SubResource("StyleBoxFlat_puk17")
 text = "🎣"
 alignment = 0
 
@@ -282,6 +310,16 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_ywq7x")
 text = "☀️"
 alignment = 0
 
+[node name="multiplier" type="Label" parent="scroll/margin/stack/menu/fast-access/experience/caption"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(0.767135, 0.588769, 0.0712476, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 10
+theme_override_fonts/font = ExtResource("3_plxo8")
+theme_override_font_sizes/font_size = 14
+text = "x2.5"
+
 [node name="meter" type="VBoxContainer" parent="scroll/margin/stack/menu/fast-access/experience"]
 layout_mode = 2
 theme_override_constants/separation = 0
@@ -303,7 +341,6 @@ size_flags_horizontal = 3
 theme_override_styles/background = SubResource("StyleBoxEmpty_nilgw")
 theme_override_styles/fill = SubResource("StyleBoxFlat_wn3ua")
 step = 1.0
-value = 50.0
 show_percentage = false
 
 [node name="level" type="ColorRect" parent="scroll/margin/stack/menu/fast-access/experience/meter/main/next"]
@@ -483,6 +520,9 @@ custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("10_0gbwx")
 theme_override_font_sizes/font_size = 24
+theme_override_styles/focus = SubResource("StyleBoxFlat_o7ewd")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_oq1iv")
+theme_override_styles/hover = SubResource("StyleBoxFlat_o7ewd")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_oq1iv")
 text = "🔥"
 autowrap_mode = 2
@@ -503,6 +543,9 @@ custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("10_0gbwx")
 theme_override_font_sizes/font_size = 24
+theme_override_styles/focus = SubResource("StyleBoxFlat_o7ewd")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_oq1iv")
+theme_override_styles/hover = SubResource("StyleBoxFlat_o7ewd")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_tdkka")
 text = "🎣"
 autowrap_mode = 2
@@ -523,6 +566,9 @@ custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("10_0gbwx")
 theme_override_font_sizes/font_size = 24
+theme_override_styles/focus = SubResource("StyleBoxFlat_o7ewd")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_oq1iv")
+theme_override_styles/hover = SubResource("StyleBoxFlat_o7ewd")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_tdkka")
 text = "✊"
 autowrap_mode = 2
@@ -543,6 +589,9 @@ custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("10_0gbwx")
 theme_override_font_sizes/font_size = 24
+theme_override_styles/focus = SubResource("StyleBoxFlat_o7ewd")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_oq1iv")
+theme_override_styles/hover = SubResource("StyleBoxFlat_o7ewd")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_tdkka")
 text = "🦶"
 autowrap_mode = 2
@@ -635,20 +684,22 @@ layout_mode = 2
 [node name="score" type="VBoxContainer" parent="scroll/margin/stack/ability"]
 layout_mode = 2
 theme_override_constants/separation = 0
+script = ExtResource("10_ywq7x")
 
-[node name="exp" type="HBoxContainer" parent="scroll/margin/stack/ability/score"]
+[node name="experience" type="HBoxContainer" parent="scroll/margin/stack/ability/score"]
 layout_mode = 2
 size_flags_horizontal = 8
 
-[node name="total" type="HBoxContainer" parent="scroll/margin/stack/ability/score/exp"]
+[node name="total" type="HBoxContainer" parent="scroll/margin/stack/ability/score/experience"]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="combo" type="HBoxContainer" parent="scroll/margin/stack/ability/score/exp/total"]
+[node name="combo" type="HBoxContainer" parent="scroll/margin/stack/ability/score/experience/total"]
+visible = false
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="meter" type="ProgressBar" parent="scroll/margin/stack/ability/score/exp/total/combo"]
+[node name="meter" type="ProgressBar" parent="scroll/margin/stack/ability/score/experience/total/combo"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 1
@@ -660,33 +711,34 @@ value = 0.6
 fill_mode = 3
 show_percentage = false
 
-[node name="shadow" type="ColorRect" parent="scroll/margin/stack/ability/score/exp/total/combo"]
+[node name="shadow" type="ColorRect" parent="scroll/margin/stack/ability/score/experience/total/combo"]
 custom_minimum_size = Vector2(1, 0)
 layout_mode = 2
 color = Color(0.0196078, 0.0196078, 0.0196078, 1)
 
-[node name="caption" type="Label" parent="scroll/margin/stack/ability/score/exp/total"]
+[node name="caption" type="Label" parent="scroll/margin/stack/ability/score/experience/total"]
 layout_mode = 2
 theme = ExtResource("2_r0sy2")
 theme_override_font_sizes/font_size = 18
 text = "Очки"
 
-[node name="score" type="MarginContainer" parent="scroll/margin/stack/ability/score/exp/total"]
+[node name="score" type="MarginContainer" parent="scroll/margin/stack/ability/score/experience/total"]
 layout_mode = 2
 theme_override_constants/margin_left = 3
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 
-[node name="count" type="Label" parent="scroll/margin/stack/ability/score/exp/total/score"]
+[node name="count" type="Label" parent="scroll/margin/stack/ability/score/experience/total/score"]
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_outline_size = 10
 theme_override_fonts/font = ExtResource("3_plxo8")
-text = "25000"
+text = "0"
 vertical_alignment = 2
 
-[node name="multiplier" type="Label" parent="scroll/margin/stack/ability/score/exp"]
+[node name="multiplier" type="Label" parent="scroll/margin/stack/ability/score/experience"]
+visible = false
 layout_mode = 2
 theme_override_colors/font_color = Color(0.767135, 0.588769, 0.0712476, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -695,17 +747,17 @@ theme_override_fonts/font = ExtResource("3_plxo8")
 theme_override_font_sizes/font_size = 14
 text = "x2.5"
 
-[node name="space" type="Control" parent="scroll/margin/stack/ability/score/exp"]
+[node name="space" type="Control" parent="scroll/margin/stack/ability/score/experience"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 
-[node name="next" type="Label" parent="scroll/margin/stack/ability/score/exp"]
+[node name="next" type="Label" parent="scroll/margin/stack/ability/score/experience"]
 layout_mode = 2
 theme = ExtResource("2_r0sy2")
 theme_override_font_sizes/font_size = 18
 text = "До ур."
 
-[node name="next-score" type="MarginContainer" parent="scroll/margin/stack/ability/score/exp"]
+[node name="next_score" type="MarginContainer" parent="scroll/margin/stack/ability/score/experience"]
 layout_mode = 2
 theme = ExtResource("2_r0sy2")
 theme_override_constants/margin_left = 3
@@ -713,12 +765,12 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 
-[node name="count" type="Label" parent="scroll/margin/stack/ability/score/exp/next-score"]
+[node name="count" type="Label" parent="scroll/margin/stack/ability/score/experience/next_score"]
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_outline_size = 10
 theme_override_fonts/font = ExtResource("3_plxo8")
-text = "500"
+text = "10"
 vertical_alignment = 2
 
 [node name="meter" type="VBoxContainer" parent="scroll/margin/stack/ability/score"]

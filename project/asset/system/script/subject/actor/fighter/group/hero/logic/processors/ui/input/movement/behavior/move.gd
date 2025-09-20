@@ -16,9 +16,14 @@ func walk(condition: bool) -> void:
 		behavior.run.to_walk()
 
 func process_physics(delta: float) -> void:
+	for action in ["action", "run", "skill_one", "skill_two"]:
+		if Input.is_action_just_pressed(action):
+			behavior.run.reset_run()
+	
 	move.emit(delta * motion)
 	walk(not _walk)
 
 func turn_around(target_motion: Vector2) -> void:
 	moving.emit(target_motion)
-	behavior.run.tick()
+	behavior.run.set_direction(target_motion)
+	# behavior.run.tick()

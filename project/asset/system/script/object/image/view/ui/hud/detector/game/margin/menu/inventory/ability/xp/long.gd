@@ -1,22 +1,23 @@
-extends HBoxContainer
+extends VBoxContainer
 
-@onready var enemy: Array[PanelContainer] = [$enemy_1] # , $enemy_2
-@onready var combo_node: Array[MarginContainer] = [
-	$experience/caption/main/combo, $experience/caption/main/margin
+@onready var next_score: MarginContainer = $experience/next_score
+@onready var combo_node: Array = [
+	$experience/total/combo, $experience/multiplier
 ]
 @onready var combo: Dictionary = {
 	"meter": combo_node[0].get_node("meter"),
-	"score": combo_node[1].get_node("multiplier")
+	"score": combo_node[1],
+	"next": next_score.get_node("count")
 }
 
-# var meter: ProgressBar# scroll/margin/stack/ability/score/exp/total/combo/meter
-
 func set_xp_score(group_xp: Node) -> void:
-	var count: Label = $experience/caption/main/space/margin/count
-	var score: ProgressBar = $experience/meter/margin/next/score
+	var count: Label = $experience/total/score/count
+	var score: ProgressBar = $meter/main/next/score
 	group_xp.update_exp.connect(
 		func(value: Vector2i, base_xp: int):
 			count.text = str(base_xp + value.x)
+			print("NEXT XP: ", value.y - value.x)
+			combo.next.text = str(value.y - value.x)
 			score.max_value = value.y
 			score.value = value.x)
 

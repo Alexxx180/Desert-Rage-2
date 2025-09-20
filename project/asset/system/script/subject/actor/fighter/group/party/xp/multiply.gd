@@ -7,6 +7,8 @@ signal finish()
 const MAX: int = 1.0 # Progress to 2-3 with hero sum of reaction later
 const BASE: int = 1.0
 
+@onready var delay: Timer = $delay
+
 var drop: Dictionary = {
 	Skills.DOUBLE: 0.05, Skills.TRIPLE: 0.1, Skills.FOURTH: 0.2 }
 var multiplier: Dictionary = {
@@ -14,7 +16,9 @@ var multiplier: Dictionary = {
 var last: Vector2 = Vector2.ONE
 var duration: float = MAX
 
-func _ready() -> void: timeout.connect(meter_feedback)
+func _ready() -> void:
+	timeout.connect(meter_feedback)
+	delay.timeout.connect(_start_timer)
 
 func stop_meter() -> void:
 	stop()
@@ -42,7 +46,15 @@ func by_slots(slots: int) -> void:
 	if multiplier[slots] > last.y:
 		last = Vector2(slots, multiplier[slots])
 	_update()
+	_start_delay()
+	# start()
+
+func _start_timer() -> void:
 	start()
+
+func _start_delay() -> void:
+	stop()
+	delay.start()
 
 func hit() -> void:
 	if last.y <= BASE: return
@@ -52,3 +64,4 @@ func hit() -> void:
 		stop_meter()
 	else:
 		update_multiplier()
+		_start_delay()
