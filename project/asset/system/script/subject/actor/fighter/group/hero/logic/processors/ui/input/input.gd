@@ -19,7 +19,7 @@ var allow_input: bool = true
 func check_delta(delta: Vector2, d: int) -> bool:
 	#const d: int = 32
 	if abs(delta.x) < d and abs(delta.y) < d:
-		print("MOUSE DELTA: ", delta)
+		# print("MOUSE DELTA: ", delta)
 		go_for_target = false
 		return true
 	return false
@@ -52,11 +52,12 @@ func _input(_event: InputEvent) -> void:
 		# target = motion
 	# if target != Vector2.ZERO:
 	if target != Vector2.ZERO:
-		print("TARGET MOUSE DIR: ", target)
+		pass
+		# print("TARGET MOUSE DIR: ", target)
 
 func _physics_process(delta) -> void:
 	if go_for_target:
-		print("TARGET MOUSE DELTA: ", mouse - gravity.hero.position)
+		# print("TARGET MOUSE DELTA: ", mouse - gravity.hero.position)
 		if check_delta(mouse - gravity.hero.position, 32): return
 		modes.current.access(target)
 	#	if Input.is_action_pressed("mouse_move"):

@@ -9,7 +9,7 @@ var books: Dictionary = {}
 
 func show_text(map_coords: Vector2i) -> void:
 	dialog.position = map_to_local(map_coords + Vector2i(-3, -3))
-	dialog.set_text(books[map_coords][MANUAL])
+	dialog.set_tdext(books[map_coords][MANUAL])
 	dialog.show()
 
 func hide_text() -> void:

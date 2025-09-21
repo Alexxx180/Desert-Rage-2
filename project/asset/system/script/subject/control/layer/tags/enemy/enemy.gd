@@ -18,7 +18,7 @@ func setup(tags: TileMapLayer, execute: TileMapLayer, casual_mode: bool) -> void
 		var enemy: CharacterBody2D
 		match tile.atlas:
 			Vector2i(1, 0): enemy = foe[tags.boss].instantiate()
-			_: enemy = foe[tags.foe.pick_random()].instantiate()
+			_: enemy = foe["eye-seeker"].instantiate() # tags.foe.pick_random()
 		execute.add_child(enemy)
 		enemy.teleport(Tile.get_pos(execute, tag))
 		enemy.spawn_transport_index = i

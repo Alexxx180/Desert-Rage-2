@@ -9,13 +9,17 @@ signal stop_mach()
 var walking: bool = true
 var behavior: Node
 var mach: Vector2i = Vector2i(ACTION, MIN)
+var action_x: int
 
 @export var available_bar: bool = true
 @onready var timing: ActionTimer = $timing
 
 func set_direction(motion: Vector2) -> void:
-	mach.y = STAND if motion == Vector2.ZERO else WALK
-	if mach.x == ACTION and mach.y != STAND:
+	if motion == Vector2.ZERO:
+		mach.y = STAND 
+	else:
+		mach.y = WALK
+	if mach.x == ACTION and mach.y == WALK: #  and mach.y != STAND
 		timing.start()
 
 func set_mach(next: int) -> void:
@@ -36,8 +40,7 @@ func _set_running() -> void:
 	walking = false
 	accelerate.emit(RUN)
 
-func _set_walking() -> void:
-	# walking = not walking or blackboard.timing.finished
+func _set_walking() -> void: # walking = not walking or blackboard.timing.finished
 	walking = true
 	behavior.move.walk(walking)
 
@@ -45,15 +48,15 @@ func is_delayed(next) -> bool:
 	return available_bar and next >= DELAY
 
 func tick() -> void:
-	# const act: String = "run"
+	# print("MACH Y: ", mach.x + mach.y)
 	set_mach(clampi(mach.x + mach.y, ACTION, MAX) if mach.x >= ACTION else (mach.x + 1))
-	# print("MACH X: ", mach.x)
 	
 	if mach.x == MACH:
 		_set_running()
 	elif not walking and mach.x < MACH:
 		_set_walking()
 
-	if mach.x == ACTION and mach.y == STAND:
+	if mach.x == ACTION and mach.y != WALK:
+		# print("MACH Y: ", mach.y)
 		stop_mach.emit()
 		timing.stop()

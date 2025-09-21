@@ -2,8 +2,6 @@ extends Node2D
 
 signal sync_view(hero: Node2D)
 
-enum { BEHIND = 60, ONSCENE = 255 }
-
 @export var is_hero: bool = false
 
 @onready var profile: AnimatedSprite2D = $profile
@@ -12,11 +10,25 @@ enum { BEHIND = 60, ONSCENE = 255 }
 @onready var ap: TextureProgressBar = $influence
 @onready var whip: Sprite2D = $whip
 
+var param: Dictionary = {
+	"thick": "shader_parameter/line_thickness",
+	"color": "shader_parameter/line_color",
+	"invis": "shader_parameter/invisible"
+}
+
 func _ready() -> void: visible = is_hero
 
-func _mod(transparency: int) -> void: modulate.a8 = transparency
-func _go_behind_scene(_curtain: TileMapLayer) -> void: _mod(BEHIND)
-func _go_on_scene(_curtain: TileMapLayer) -> void: _mod(ONSCENE)
+func set_aura(next_color: Color, thickness: float) -> void:
+	profile.material.set(param.thick, thickness)
+	profile.material.set(param.color, next_color)
+
+func _set_invis(invisible: bool) -> void:
+	profile.material.set(param.invis, invisible)
+	if invisible: set_aura(Color("FFFFFFFF"), 3)
+	else: set_aura(Color("FFFFFF00"), 0)
+	
+func _go_behind_scene(_curtain: TileMapLayer) -> void: _set_invis(true)
+func _go_on_scene(_curtain: TileMapLayer) -> void: _set_invis(false)
 
 func sync_image(hero: Node2D) -> void:
 	animation.syncer.sync(hero.animation)
