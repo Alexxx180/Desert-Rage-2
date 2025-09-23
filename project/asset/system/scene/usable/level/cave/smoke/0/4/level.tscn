@@ -1,8 +1,12 @@
-[gd_scene load_steps=4 format=4 uid="uid://ddey877ajxllj"]
+[gd_scene load_steps=8 format=4 uid="uid://ddey877ajxllj"]
 
 [ext_resource type="PackedScene" uid="uid://d0i3jl2uefg53" path="res://asset/system/scene/object/image/level/tilemap/border.tscn" id="1_bsymc"]
 [ext_resource type="PackedScene" uid="uid://rlwfnl6rvpkj" path="res://asset/system/scene/object/image/level/tilemap/execute.tscn" id="2_0e7f4"]
 [ext_resource type="PackedScene" uid="uid://ce2y76nymo6o4" path="res://asset/system/scene/object/image/level/tilemap/tags.tscn" id="3_yjye7"]
+[ext_resource type="PackedScene" uid="uid://bsumfxiuy47r" path="res://asset/system/scene/object/image/level/theme/caves.tscn" id="4_arf25"]
+[ext_resource type="PackedScene" uid="uid://b83b7oo2fmh5h" path="res://asset/system/scene/subject/actor/fighter/group/group.tscn" id="5_bgyrv"]
+[ext_resource type="PackedScene" uid="uid://cffwkfo0pxyg" path="res://asset/system/scene/object/image/view/ui/hud/hud.tscn" id="6_mj2yb"]
+[ext_resource type="PackedScene" uid="uid://b3oh6t5q4y0ub" path="res://asset/system/scene/object/image/view/sight/transition/stairs/down/end.tscn" id="7_vjfxn"]
 
 [node name="level" type="Node2D"]
 y_sort_enabled = true
@@ -15,3 +19,14 @@ tile_map_data = PackedByteArray("AAALAC0AAAAAAAAABABYAEUABQAAAAAAAQAHAAsAAAAAAAA
 
 [node name="tags" parent="." instance=ExtResource("3_yjye7")]
 tile_map_data = PackedByteArray("AAAaAGgAAAABAAEAAAAaAGcAAAABAAEAAAAaAGYAAAABAAEAAAAaAGUAAAABAAEAAAAaAGQAAAABAAEAAAAaAGMAAAABAAEAAAAaAGIAAAABAAEAAAAbAGIAAAACAAEAAAAbAGMAAAACAAEAAAAZAGMAAAAAAAEAAAAZAGIAAAAAAAEAAAAbAGQAAAACAAEAAAAZAGQAAAAAAAEAAAAbAGUAAAACAAEAAAAZAGUAAAAAAAEAAAAbAGYAAAACAAEAAAAZAGYAAAAAAAEAAAAbAGcAAAACAAEAAAAZAGcAAAAAAAEAAAAbAGgAAAACAAEAAAAZAGgAAAAAAAEAAAAbAGkAAAACAAEAAAAaAGkAAAABAAEAAAAZAGkAAAAAAAEAAAAaAGoAAAABAAEAAAAbAGoAAAACAAEAAAAZAGoAAAAAAAEAAAAaAGEAAgAAAAAAAAA7AC8AAgAAAAAAAAAOAA8ABAAAAAAAAAAvACYABAAAAAAAAABZAEgABAAAAAAAAAAdAEEABAAAAAAAAAAmAGEABAAAAAAAAAA2AFIABAAAAAAAAAAoAGEAAQAAAAEAAAAPADIAAQAAAAEAAAALADIAAQABAAEAAABUAGcAAQABAAEAAAAPAEsAAgACAAAAAABPABoAAgACAAAAAABUABkAAgABAAAAAAAyAEwAAgABAAAAAAAzAEwAAgABAAAAAAA0AEwAAgABAAAAAAA1AEwAAgABAAAAAAA2AEwAAgABAAAAAAA3AEwAAgABAAAAAAA4AEwAAgABAAAAAAA5AEwAAgABAAAAAAA5AE0AAgABAAAAAAA4AE0AAgABAAAAAAA3AE0AAgABAAAAAAA2AE0AAgABAAAAAAA1AE0AAgABAAAAAAA0AE0AAgABAAAAAAAzAE0AAgABAAAAAAAyAE0AAgABAAAAAAA0AE4AAgABAAAAAAA1AE4AAgABAAAAAAA2AE4AAgABAAAAAAA3AE4AAgABAAAAAAA4AE4AAgABAAAAAAA5AE4AAgABAAAAAAAzAE4AAgABAAAAAAAyAE4AAgABAAAAAABBAA4ABAAAAAAAAAA+AA0AAQAAAAAAAABWAGIAAQAAAAAAAABUAB8AAQABAAAAAAARAGMAAQABAAAAAAA7AGgAAQABAAAAAAANAE4AAQABAAAAAAAnAFIAAQACAAAAAAAHAAgAAQACAAAAAAANAAcAAgADAAAAAAAOAAcAAgADAAAAAAA2AEcAAgADAAAAAAANAGEAAQADAAAAAAA1AEkAAQADAAAAAAA5AFIAAQABAAAAAAA=")
+
+[node name="ost" parent="." instance=ExtResource("4_arf25")]
+process_mode = 3
+
+[node name="group" parent="." instance=ExtResource("5_bgyrv")]
+position = Vector2(4115, 6504)
+
+[node name="hud" parent="." instance=ExtResource("6_mj2yb")]
+
+[node name="transition" parent="." instance=ExtResource("7_vjfxn")]
+visible = false
