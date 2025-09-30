@@ -2,7 +2,7 @@ extends Node
 
 func _get_xp_score(exp: VBoxContainer) -> Dictionary:
 	return {
-		"bar": exp.get_node("meter/margin/next/score"),
+		"bar": exp.get_node("meter/margin/next/space/score"),
 		"count": exp.get_node("caption/main/space/margin/count")
 	}
 

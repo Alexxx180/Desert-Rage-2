@@ -1,4 +1,4 @@
-[gd_scene load_steps=103 format=3 uid="uid://cel3u88abrgv3"]
+[gd_scene load_steps=104 format=3 uid="uid://cel3u88abrgv3"]
 
 [ext_resource type="Theme" uid="uid://p2br8b6ea3n6" path="res://asset/resource/engine/internal/theme/patterns/template/menu/hud/pause/pause.tres" id="1_klae1"]
 [ext_resource type="Script" uid="uid://81xdi4771u0a" path="res://asset/system/script/object/image/view/ui/hud/detector/game/game.gd" id="1_o71r6"]
@@ -268,14 +268,16 @@ content_margin_left = 4.0
 content_margin_top = 6.0
 bg_color = Color(0, 0, 0, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g3c1s"]
-content_margin_right = 1.0
-bg_color = Color(0.804743, 0.804743, 0.804743, 1)
-
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_g3c1s"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o4lum"]
 bg_color = Color(0.392157, 0.392157, 0.686275, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xe00t"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g3c1s"]
+content_margin_right = 1.0
+bg_color = Color(0.803922, 0.803922, 0.803922, 0.784314)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jj441"]
 bg_color = Color(0.0196078, 0.0196078, 0.0196078, 1)
@@ -3912,26 +3914,6 @@ theme_override_fonts/font = ExtResource("16_blc53")
 theme_override_font_sizes/font_size = 14
 text = "x2.5"
 
-[node name="combo" type="MarginContainer" parent="menu/stats/inventory/ability/controls/topic/items/status/experience/caption/main"]
-visible = false
-layout_mode = 2
-theme_override_constants/margin_left = 1
-theme_override_constants/margin_top = 1
-theme_override_constants/margin_right = 1
-theme_override_constants/margin_bottom = 0
-
-[node name="meter" type="ProgressBar" parent="menu/stats/inventory/ability/controls/topic/items/status/experience/caption/main/combo"]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 1
-theme_override_styles/background = SubResource("StyleBoxFlat_x6rox")
-theme_override_styles/fill = SubResource("StyleBoxFlat_g3c1s")
-max_value = 1.0
-step = 0.1
-value = 1.0
-fill_mode = 3
-show_percentage = false
-
 [node name="meter" type="Control" parent="menu/stats/inventory/ability/controls/topic/items/status/experience"]
 custom_minimum_size = Vector2(0, 3)
 layout_mode = 2
@@ -3969,8 +3951,17 @@ layout_mode = 2
 size_flags_vertical = 8
 color = Color(0.835294, 0.513726, 0.168627, 1)
 
-[node name="score" type="ProgressBar" parent="menu/stats/inventory/ability/controls/topic/items/status/experience/meter/margin/next"]
+[node name="space" type="Control" parent="menu/stats/inventory/ability/controls/topic/items/status/experience/meter/margin/next"]
 layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="score" type="ProgressBar" parent="menu/stats/inventory/ability/controls/topic/items/status/experience/meter/margin/next/space"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8
 theme_override_styles/background = SubResource("StyleBoxEmpty_g3c1s")
@@ -3978,6 +3969,22 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_o4lum")
 max_value = 10.0
 step = 1.0
 value = 5.0
+fill_mode = 1
+show_percentage = false
+
+[node name="meter" type="ProgressBar" parent="menu/stats/inventory/ability/controls/topic/items/status/experience/meter/margin/next/space"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 1
+theme_override_styles/background = SubResource("StyleBoxEmpty_xe00t")
+theme_override_styles/fill = SubResource("StyleBoxFlat_g3c1s")
+max_value = 1.0
+step = 0.1
 fill_mode = 1
 show_percentage = false
 
@@ -4154,7 +4161,7 @@ value = 600.0
 show_percentage = false
 
 [node name="hide_xp" type="Timer" parent="menu/stats/inventory/ability/controls/topic/items/status"]
-wait_time = 2.0
+wait_time = 3.0
 one_shot = true
 
 [node name="right-space" type="Control" parent="menu/stats/inventory/ability/controls/topic"]
