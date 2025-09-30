@@ -1,6 +1,6 @@
 extends Node
 
-func controls(hero: CharacterBody2D, meta: Dictionary) -> void:
+func controls(meta: Dictionary) -> void:
 	meta.combo.timer = meta.input.combo
 	meta.combo.query = []
 	meta.combo.max = 3

@@ -10,7 +10,7 @@ var stats: Array
 func set_stats(next: Array) -> void: stats = next
 
 func set_damage(multiplier: float = 1) -> void:
-	close_damage.emit(stats[POWER])# * multiplier)
+	close_damage.emit(5)# * multiplier) # stats[POWER]
 
 func set_position(proportion: float) -> void:
 	moves.hero.logic.processors.ui.input.movement.type.move.move(proportion)

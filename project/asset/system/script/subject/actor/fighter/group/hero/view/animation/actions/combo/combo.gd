@@ -15,6 +15,7 @@ func fight_body(stand: String) -> void:
 	var act: int = _get_act(combo)
 	moves.tree.request(combo, act)
 	moves.tree.request("active", stand)
+	pass
 
 func fight_tool(stand: String) -> void:
 	moves.set_tools("external")
@@ -23,6 +24,7 @@ func fight_tool(stand: String) -> void:
 func start_fight(stand: String) -> void:
 	moves.set_aggressive(stand)
 	moves.stance.start()
+	pass
 
 func end_fight() -> void:
 	moves.set_aggressive("passive")

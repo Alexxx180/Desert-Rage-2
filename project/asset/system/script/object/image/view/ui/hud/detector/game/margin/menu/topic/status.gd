@@ -8,15 +8,18 @@ extends HBoxContainer
 	"meter": combo_node[0].get_node("meter"),
 	"score": combo_node[1].get_node("multiplier")
 }
+@onready var count: Label = $experience/caption/main/space/margin/count
 
 # var meter: ProgressBar# scroll/margin/stack/ability/score/exp/total/combo/meter
-
 func set_xp_score(group_xp: Node) -> void:
-	var count: Label = $experience/caption/main/space/margin/count
+	var timer: Timer = $hide_xp
 	var score: ProgressBar = $experience/meter/margin/next/score
+	timer.timeout.connect(func(): count.hide())
 	group_xp.update_exp.connect(
 		func(value: Vector2i, base_xp: int):
 			count.text = str(base_xp + value.x)
+			count.show()
+			timer.start()
 			score.max_value = value.y
 			score.value = value.x)
 

@@ -1,19 +1,11 @@
 extends Node
 
-@onready var punch: Node = $punch
-@onready var kick: Node = $kick
-@onready var fire: Node = $fire
-@onready var whip: Node = $whip
-@onready var combo: Node = $combo
-
 func controls(hero: CharacterBody2D, input: Node) -> void:
 	var act: Node = hero.logic.processors.world
-	var meta: Dictionary = { "tools": {},
-		"combo": {}, "input": input, "act": act,
-		"ui": hero.logic.processors.ui.hud }
+	var meta: Dictionary = { "tools": { "hero": hero }, "combo": {},
+		"input": input, "act": act, "ui": hero.logic.processors.ui.hud }
 
-	for skill in [punch, kick, fire, whip, combo]:
-		skill.controls(hero, meta)
+	for skill in get_children(): skill.controls(meta)
 
 	for key in ["tools", "combo", "ui"]:
 		input.board.set_value(key, meta[key])
