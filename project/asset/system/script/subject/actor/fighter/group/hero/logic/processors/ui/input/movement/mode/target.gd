@@ -3,7 +3,7 @@ extends Node
 var mode: Node
 var locked: bool = false
 
-@onready var _enemy: CharacterBody2D = Defaults.CHARACTER
+@onready var _enemy: CharacterBody2D = Defaults.ENTITY
 var enemy: CharacterBody2D:
 	set(value): _enemy = value; select_mode(!no_target())
 
@@ -11,9 +11,9 @@ var _target_pos: Vector2 = Vector2.ZERO
 var target_pos: Vector2:
 	set(value): _target_pos = value; select_mode(value != Vector2.ZERO)
 
-func no_target() -> bool: return _enemy == Defaults.CHARACTER
+func no_target() -> bool: return _enemy == Defaults.ENTITY
 func reset_target() -> void:
-	enemy = Defaults.CHARACTER
+	enemy = Defaults.ENTITY
 	locked = false
 
 func select_mode(state: bool) -> void:

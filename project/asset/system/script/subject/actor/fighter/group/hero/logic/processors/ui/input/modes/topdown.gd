@@ -4,7 +4,7 @@ var input: Node
 
 func access(motion: Vector2) -> void:
 	if input.platforming.jump.animation: return
-	input.platforming.jump.perform()
+	input.platforming.jump.perform(motion)
 	input.movement.behavior.move.turn_around(motion)
 	input.movement.behavior.move.motion = motion
 	input.actions.tick(self, input.board)

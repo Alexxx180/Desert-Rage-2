@@ -26,7 +26,7 @@ func _toggle_selection(a: int, b: int) -> void:
 func _fast_panel_selection(offset: int) -> void:
 	if not showed:
 		showed = true
-		for item in markers.items: item.show()
+		for item in markers.items: item.stand.show()
 
 	var length: int = mask.size()
 	var next: int = cline(selection + offset, length)

@@ -22,4 +22,5 @@ func is_in_midair(hero: CharacterBody2D) -> bool:
 
 func visit(hero: CharacterBody2D, id: int) -> void:
 	hero.view.visible = !is_in_midair(hero)
+	print("VISIBLE HERO: ", hero.view.visible)
 	_hero_id = id

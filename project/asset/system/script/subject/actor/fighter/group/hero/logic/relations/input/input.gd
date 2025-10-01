@@ -22,8 +22,8 @@ func controls(hero: CharacterBody2D, input: Node) -> void:
 	platforming.controls(hero, input.platforming)
 
 	# directing
-	move.moving.connect(surface.overleap.gap.set_direction)
-	move.moving.connect(surface.overleap.upland.set_direction)
+	# move.moving.connect(surface.overleap.gap.set_direction)
+	# move.moving.connect(surface.overleap.upland.set_direction)
 
 	move.moving.connect(surface.deployment.walls.set_direction)
 	move.moving.connect(surface.deployment.ground.set_direction)

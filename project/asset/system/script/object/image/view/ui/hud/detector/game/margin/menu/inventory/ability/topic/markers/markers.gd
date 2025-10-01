@@ -1,6 +1,8 @@
 extends Node
 
-@onready var items: Array = [
-	$item_1, $item_2, $item_3, $item_4, $item_5,
-]
 @onready var combo: MarginContainer = $margin
+var items: Array
+
+func _ready() -> void:
+	for i in range(1, 11):
+		items.append(get_node("item_" + str(i % 10)))

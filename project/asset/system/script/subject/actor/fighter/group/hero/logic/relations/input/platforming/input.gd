@@ -11,8 +11,8 @@ func controls(hero: CharacterBody2D, input: Node, overleap: Node2D) -> void:
 
 	_overleap = overleap
 
-	overleap.gap.body_entered.connect(_on_ledge_encounter_gap)
-	overleap.upland.body_entered.connect(_on_ledge_encounter_upland)
+	# overleap.gap.body_entered.connect(_on_ledge_encounter_gap)
+	# overleap.upland.body_entered.connect(_on_ledge_encounter_upland)
 
 func _make_single_jump_response(gap: bool) -> void:
 	print("JUMP THROUGH GAP: ", gap)

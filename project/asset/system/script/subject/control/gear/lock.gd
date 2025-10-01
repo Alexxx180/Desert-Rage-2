@@ -22,9 +22,7 @@ func _ready() -> void:
 	stand.box = self
 	stand.seat = $seat
 
-	var map_coords: Vector2i = Tile.find(border, position)
-	var f: int = Tile.extract(border, map_coords, Tile.FLOOR)
-	stand.seat.set_floor(f)
+	stand.seat.set_floor(Tile.extract_at_pos(border, position, Tile.FLOOR))
 	#print("LOCK FLOOR: ", f)
 
 	#print("lock tile: ", tile)

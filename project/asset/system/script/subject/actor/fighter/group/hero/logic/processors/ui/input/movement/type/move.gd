@@ -23,3 +23,4 @@ func dash(force: Vector2, action: String = "jump") -> void:
 
 func move(proportion: float) -> void:
 	hero.position = target.position + target.size * proportion
+	print("TP MOVE: ", target.position + target.size)

@@ -15,7 +15,7 @@ func _act_sync() -> void:
 	animation()
 
 func ability() -> void:
-	if _vessel != Defaults.CHARACTER and _vessel.logic.relations.fire.on and aura.use(cost):
+	if _vessel != Defaults.ENTITY and _vessel.logic.relations.fire.on and aura.use(cost):
 		_vessel.logic.processors.fire.freeze()
 		_act_sync()
 	elif aura.use(cost):

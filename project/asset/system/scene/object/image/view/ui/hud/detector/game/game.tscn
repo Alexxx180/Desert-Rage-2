@@ -1,4 +1,4 @@
-[gd_scene load_steps=104 format=3 uid="uid://cel3u88abrgv3"]
+[gd_scene load_steps=108 format=3 uid="uid://cel3u88abrgv3"]
 
 [ext_resource type="Theme" uid="uid://p2br8b6ea3n6" path="res://asset/resource/engine/internal/theme/patterns/template/menu/hud/pause/pause.tres" id="1_klae1"]
 [ext_resource type="Script" uid="uid://81xdi4771u0a" path="res://asset/system/script/object/image/view/ui/hud/detector/game/game.gd" id="1_o71r6"]
@@ -28,6 +28,7 @@
 [ext_resource type="StyleBox" uid="uid://bsggnr5c3uk7o" path="res://asset/resource/engine/internal/theme/style/panel/preview.tres" id="14_jj441"]
 [ext_resource type="PackedScene" uid="uid://6b0ydfrtbu38" path="res://asset/system/scene/object/image/view/ui/hud/detector/game/menu/ability.tscn" id="14_joidv"]
 [ext_resource type="Script" uid="uid://dahdrwveei3g3" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/menu/inventory/ability/topic/markers/combos/slots.gd" id="14_s7cq3"]
+[ext_resource type="Texture2D" uid="uid://rdsdp3be1k17" path="res://asset/resource/media/images/inventory/weapon/schofield45-colt.svg" id="14_u412m"]
 [ext_resource type="FontFile" uid="uid://bghvysgyoj1y7" path="res://asset/resource/font/title/Equilibrist Semibold.ttf" id="16_blc53"]
 [ext_resource type="FontFile" uid="uid://dxg5wbmrewk2p" path="res://asset/resource/font/Lato-Regular.ttf" id="16_g3c1s"]
 [ext_resource type="FontFile" uid="uid://c6xnr3551fg10" path="res://asset/resource/font/Izuver.otf" id="17_jn2xb"]
@@ -44,15 +45,27 @@
 [ext_resource type="Script" uid="uid://buq442yndfae8" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/menu/status/enemy/hits.gd" id="40_u412m"]
 [ext_resource type="PackedScene" uid="uid://dvdimdxij23df" path="res://asset/system/scene/object/calculus/timer/hide/hider/hover/hooder.tscn" id="43_xe00t"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ccxqt"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bqnbo"]
+bg_color = Color(0.666667, 0.666667, 0.666667, 0.588235)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.870588, 0.870588, 0.870588, 0.686275)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lvc3v"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0kgs0"]
+bg_color = Color(0.184314, 0.184314, 0.184314, 1)
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fuh2f"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3tqp8"]
 content_margin_top = 1.0
 content_margin_bottom = 1.0
 bg_color = Color(0.184314, 0.184314, 0.72549, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_veudi"]
-bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u412m"]
 bg_color = Color(0.0196078, 0.0196078, 0.0196078, 1)
@@ -408,25 +421,43 @@ mouse_filter = 2
 layout_mode = 2
 script = ExtResource("8_2uuwx")
 
-[node name="item_1" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/markers"]
-visible = false
+[node name="item_1" type="Button" parent="menu/stats/inventory/ability/controls/markers"]
+custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
-theme_override_constants/separation = 0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ccxqt")
 script = ExtResource("8_kumfx")
 
-[node name="collapsed" type="ColorRect" parent="menu/stats/inventory/ability/controls/markers/item_1"]
-visible = false
-custom_minimum_size = Vector2(60, 2)
-layout_mode = 2
-size_flags_vertical = 0
-color = Color(0.18359, 0.18359, 0.18359, 1)
-
-[node name="selected" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/markers/item_1"]
+[node name="stand" type="PanelContainer" parent="menu/stats/inventory/ability/controls/markers/item_1"]
 custom_minimum_size = Vector2(60, 0)
-layout_mode = 2
-theme_override_constants/separation = 5
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 4.0
+grow_horizontal = 2
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_bqnbo")
 
-[node name="count" type="ProgressBar" parent="menu/stats/inventory/ability/controls/markers/item_1/selected"]
+[node name="content" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/markers/item_1/stand"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="collapsed" type="ProgressBar" parent="menu/stats/inventory/ability/controls/markers/item_1/stand/content"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxEmpty_lvc3v")
+theme_override_styles/fill = SubResource("StyleBoxFlat_0kgs0")
+max_value = 30.0
+value = 15.0
+show_percentage = false
+
+[node name="selected" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/markers/item_1/stand/content"]
+visible = false
+custom_minimum_size = Vector2(58, 0)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 2
+
+[node name="count" type="ProgressBar" parent="menu/stats/inventory/ability/controls/markers/item_1/stand/content/selected"]
 layout_mode = 2
 theme_override_styles/background = SubResource("StyleBoxEmpty_fuh2f")
 theme_override_styles/fill = SubResource("StyleBoxFlat_3tqp8")
@@ -435,60 +466,50 @@ step = 1.0
 value = 15.0
 show_percentage = false
 
-[node name="icon" type="Control" parent="menu/stats/inventory/ability/controls/markers/item_1/selected"]
-custom_minimum_size = Vector2(0, 60)
+[node name="image" type="TextureRect" parent="menu/stats/inventory/ability/controls/markers/item_1/stand/content/selected"]
+custom_minimum_size = Vector2(0, 58)
 layout_mode = 2
 size_flags_vertical = 3
-
-[node name="image" type="TextureRect" parent="menu/stats/inventory/ability/controls/markers/item_1/selected/icon"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+texture = ExtResource("14_u412m")
 expand_mode = 1
 
-[node name="margin" type="MarginContainer" parent="menu/stats/inventory/ability/controls/markers/item_1/selected/icon"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 7
-theme_override_constants/margin_top = 7
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 0
-
-[node name="unicode" type="Label" parent="menu/stats/inventory/ability/controls/markers/item_1/selected/icon/margin"]
+[node name="item_2" type="Button" parent="menu/stats/inventory/ability/controls/markers"]
+custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
-size_flags_horizontal = 4
-theme_override_fonts/font = ExtResource("4_42m6k")
-theme_override_font_sizes/font_size = 32
-theme_override_styles/normal = SubResource("StyleBoxFlat_veudi")
-text = "👊"
-horizontal_alignment = 1
-
-[node name="item_2" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/markers"]
-visible = false
-layout_mode = 2
-theme_override_constants/separation = 0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ccxqt")
 script = ExtResource("8_kumfx")
 
-[node name="collapsed" type="ColorRect" parent="menu/stats/inventory/ability/controls/markers/item_2"]
-custom_minimum_size = Vector2(60, 2)
-layout_mode = 2
-size_flags_vertical = 0
-color = Color(0.18359, 0.18359, 0.18359, 1)
-
-[node name="selected" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/markers/item_2"]
-visible = false
+[node name="stand" type="PanelContainer" parent="menu/stats/inventory/ability/controls/markers/item_2"]
 custom_minimum_size = Vector2(60, 0)
-layout_mode = 2
-theme_override_constants/separation = 5
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 4.0
+grow_horizontal = 2
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_bqnbo")
 
-[node name="count" type="ProgressBar" parent="menu/stats/inventory/ability/controls/markers/item_2/selected"]
+[node name="content" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/markers/item_2/stand"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="collapsed" type="ProgressBar" parent="menu/stats/inventory/ability/controls/markers/item_2/stand/content"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxEmpty_lvc3v")
+theme_override_styles/fill = SubResource("StyleBoxFlat_0kgs0")
+max_value = 30.0
+value = 15.0
+show_percentage = false
+
+[node name="selected" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/markers/item_2/stand/content"]
+visible = false
+custom_minimum_size = Vector2(58, 0)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 2
+
+[node name="count" type="ProgressBar" parent="menu/stats/inventory/ability/controls/markers/item_2/stand/content/selected"]
 layout_mode = 2
 theme_override_styles/background = SubResource("StyleBoxEmpty_fuh2f")
 theme_override_styles/fill = SubResource("StyleBoxFlat_3tqp8")
@@ -497,60 +518,50 @@ step = 1.0
 value = 15.0
 show_percentage = false
 
-[node name="icon" type="Control" parent="menu/stats/inventory/ability/controls/markers/item_2/selected"]
-custom_minimum_size = Vector2(0, 60)
+[node name="image" type="TextureRect" parent="menu/stats/inventory/ability/controls/markers/item_2/stand/content/selected"]
+custom_minimum_size = Vector2(0, 58)
 layout_mode = 2
 size_flags_vertical = 3
-
-[node name="image" type="TextureRect" parent="menu/stats/inventory/ability/controls/markers/item_2/selected/icon"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+texture = ExtResource("14_u412m")
 expand_mode = 1
 
-[node name="margin" type="MarginContainer" parent="menu/stats/inventory/ability/controls/markers/item_2/selected/icon"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 7
-theme_override_constants/margin_top = 7
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 0
-
-[node name="unicode" type="Label" parent="menu/stats/inventory/ability/controls/markers/item_2/selected/icon/margin"]
+[node name="item_3" type="Button" parent="menu/stats/inventory/ability/controls/markers"]
+custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
-size_flags_horizontal = 4
-theme_override_fonts/font = ExtResource("4_42m6k")
-theme_override_font_sizes/font_size = 32
-theme_override_styles/normal = SubResource("StyleBoxFlat_veudi")
-text = "👊"
-horizontal_alignment = 1
-
-[node name="item_3" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/markers"]
-visible = false
-layout_mode = 2
-theme_override_constants/separation = 0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ccxqt")
 script = ExtResource("8_kumfx")
 
-[node name="collapsed" type="ColorRect" parent="menu/stats/inventory/ability/controls/markers/item_3"]
-visible = false
-custom_minimum_size = Vector2(60, 2)
-layout_mode = 2
-size_flags_vertical = 0
-color = Color(0.18359, 0.18359, 0.18359, 1)
-
-[node name="selected" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/markers/item_3"]
+[node name="stand" type="PanelContainer" parent="menu/stats/inventory/ability/controls/markers/item_3"]
 custom_minimum_size = Vector2(60, 0)
-layout_mode = 2
-theme_override_constants/separation = 5
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 4.0
+grow_horizontal = 2
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_bqnbo")
 
-[node name="count" type="ProgressBar" parent="menu/stats/inventory/ability/controls/markers/item_3/selected"]
+[node name="content" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/markers/item_3/stand"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="collapsed" type="ProgressBar" parent="menu/stats/inventory/ability/controls/markers/item_3/stand/content"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxEmpty_lvc3v")
+theme_override_styles/fill = SubResource("StyleBoxFlat_0kgs0")
+max_value = 30.0
+value = 15.0
+show_percentage = false
+
+[node name="selected" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/markers/item_3/stand/content"]
+visible = false
+custom_minimum_size = Vector2(58, 0)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 2
+
+[node name="count" type="ProgressBar" parent="menu/stats/inventory/ability/controls/markers/item_3/stand/content/selected"]
 layout_mode = 2
 theme_override_styles/background = SubResource("StyleBoxEmpty_fuh2f")
 theme_override_styles/fill = SubResource("StyleBoxFlat_3tqp8")
@@ -559,60 +570,50 @@ step = 1.0
 value = 15.0
 show_percentage = false
 
-[node name="icon" type="Control" parent="menu/stats/inventory/ability/controls/markers/item_3/selected"]
-custom_minimum_size = Vector2(0, 60)
+[node name="image" type="TextureRect" parent="menu/stats/inventory/ability/controls/markers/item_3/stand/content/selected"]
+custom_minimum_size = Vector2(0, 58)
 layout_mode = 2
 size_flags_vertical = 3
-
-[node name="image" type="TextureRect" parent="menu/stats/inventory/ability/controls/markers/item_3/selected/icon"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+texture = ExtResource("14_u412m")
 expand_mode = 1
 
-[node name="margin" type="MarginContainer" parent="menu/stats/inventory/ability/controls/markers/item_3/selected/icon"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 7
-theme_override_constants/margin_top = 7
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 0
-
-[node name="unicode" type="Label" parent="menu/stats/inventory/ability/controls/markers/item_3/selected/icon/margin"]
+[node name="item_4" type="Button" parent="menu/stats/inventory/ability/controls/markers"]
+custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
-size_flags_horizontal = 4
-theme_override_fonts/font = ExtResource("4_42m6k")
-theme_override_font_sizes/font_size = 32
-theme_override_styles/normal = SubResource("StyleBoxFlat_veudi")
-text = "👊"
-horizontal_alignment = 1
-
-[node name="item_4" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/markers"]
-visible = false
-layout_mode = 2
-theme_override_constants/separation = 0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ccxqt")
 script = ExtResource("8_kumfx")
 
-[node name="collapsed" type="ColorRect" parent="menu/stats/inventory/ability/controls/markers/item_4"]
-visible = false
-custom_minimum_size = Vector2(60, 2)
-layout_mode = 2
-size_flags_vertical = 0
-color = Color(0.18359, 0.18359, 0.18359, 1)
-
-[node name="selected" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/markers/item_4"]
+[node name="stand" type="PanelContainer" parent="menu/stats/inventory/ability/controls/markers/item_4"]
 custom_minimum_size = Vector2(60, 0)
-layout_mode = 2
-theme_override_constants/separation = 5
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 4.0
+grow_horizontal = 2
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_bqnbo")
 
-[node name="count" type="ProgressBar" parent="menu/stats/inventory/ability/controls/markers/item_4/selected"]
+[node name="content" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/markers/item_4/stand"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="collapsed" type="ProgressBar" parent="menu/stats/inventory/ability/controls/markers/item_4/stand/content"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxEmpty_lvc3v")
+theme_override_styles/fill = SubResource("StyleBoxFlat_0kgs0")
+max_value = 30.0
+value = 15.0
+show_percentage = false
+
+[node name="selected" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/markers/item_4/stand/content"]
+visible = false
+custom_minimum_size = Vector2(58, 0)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 2
+
+[node name="count" type="ProgressBar" parent="menu/stats/inventory/ability/controls/markers/item_4/stand/content/selected"]
 layout_mode = 2
 theme_override_styles/background = SubResource("StyleBoxEmpty_fuh2f")
 theme_override_styles/fill = SubResource("StyleBoxFlat_3tqp8")
@@ -621,412 +622,324 @@ step = 1.0
 value = 15.0
 show_percentage = false
 
-[node name="icon" type="Control" parent="menu/stats/inventory/ability/controls/markers/item_4/selected"]
-custom_minimum_size = Vector2(0, 60)
+[node name="image" type="TextureRect" parent="menu/stats/inventory/ability/controls/markers/item_4/stand/content/selected"]
+custom_minimum_size = Vector2(0, 58)
 layout_mode = 2
 size_flags_vertical = 3
-
-[node name="image" type="TextureRect" parent="menu/stats/inventory/ability/controls/markers/item_4/selected/icon"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+texture = ExtResource("14_u412m")
 expand_mode = 1
 
-[node name="margin" type="MarginContainer" parent="menu/stats/inventory/ability/controls/markers/item_4/selected/icon"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 7
-theme_override_constants/margin_top = 7
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 0
-
-[node name="unicode" type="Label" parent="menu/stats/inventory/ability/controls/markers/item_4/selected/icon/margin"]
+[node name="item_5" type="Button" parent="menu/stats/inventory/ability/controls/markers"]
+custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
-size_flags_horizontal = 4
-theme_override_fonts/font = ExtResource("4_42m6k")
-theme_override_font_sizes/font_size = 32
-theme_override_styles/normal = SubResource("StyleBoxFlat_veudi")
-text = "👊"
-horizontal_alignment = 1
-
-[node name="item_5" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/markers"]
-visible = false
-layout_mode = 2
-theme_override_constants/separation = 0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ccxqt")
 script = ExtResource("8_kumfx")
 
-[node name="collapsed" type="ColorRect" parent="menu/stats/inventory/ability/controls/markers/item_5"]
-visible = false
-custom_minimum_size = Vector2(60, 2)
-layout_mode = 2
-size_flags_vertical = 0
-color = Color(0.18359, 0.18359, 0.18359, 1)
-
-[node name="selected" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/markers/item_5"]
+[node name="stand" type="PanelContainer" parent="menu/stats/inventory/ability/controls/markers/item_5"]
 custom_minimum_size = Vector2(60, 0)
-layout_mode = 2
-theme_override_constants/separation = 5
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 4.0
+grow_horizontal = 2
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_bqnbo")
 
-[node name="count" type="ProgressBar" parent="menu/stats/inventory/ability/controls/markers/item_5/selected"]
+[node name="content" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/markers/item_5/stand"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="collapsed" type="ProgressBar" parent="menu/stats/inventory/ability/controls/markers/item_5/stand/content"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxEmpty_lvc3v")
+theme_override_styles/fill = SubResource("StyleBoxFlat_0kgs0")
+max_value = 30.0
+value = 15.0
+show_percentage = false
+
+[node name="selected" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/markers/item_5/stand/content"]
+visible = false
+custom_minimum_size = Vector2(58, 0)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 2
+
+[node name="count" type="ProgressBar" parent="menu/stats/inventory/ability/controls/markers/item_5/stand/content/selected"]
 layout_mode = 2
 theme_override_styles/background = SubResource("StyleBoxEmpty_fuh2f")
 theme_override_styles/fill = SubResource("StyleBoxFlat_3tqp8")
 max_value = 30.0
 step = 1.0
-value = 30.0
+value = 15.0
 show_percentage = false
 
-[node name="icon" type="Control" parent="menu/stats/inventory/ability/controls/markers/item_5/selected"]
-custom_minimum_size = Vector2(0, 60)
+[node name="image" type="TextureRect" parent="menu/stats/inventory/ability/controls/markers/item_5/stand/content/selected"]
+custom_minimum_size = Vector2(0, 58)
 layout_mode = 2
 size_flags_vertical = 3
-
-[node name="image" type="TextureRect" parent="menu/stats/inventory/ability/controls/markers/item_5/selected/icon"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+texture = ExtResource("14_u412m")
 expand_mode = 1
 
-[node name="margin" type="MarginContainer" parent="menu/stats/inventory/ability/controls/markers/item_5/selected/icon"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 7
-theme_override_constants/margin_top = 7
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 0
-
-[node name="unicode" type="Label" parent="menu/stats/inventory/ability/controls/markers/item_5/selected/icon/margin"]
+[node name="item_6" type="Button" parent="menu/stats/inventory/ability/controls/markers"]
+custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
-size_flags_horizontal = 4
-theme_override_fonts/font = ExtResource("4_42m6k")
-theme_override_font_sizes/font_size = 32
-theme_override_styles/normal = SubResource("StyleBoxFlat_veudi")
-text = "👊"
-horizontal_alignment = 1
-
-[node name="item_6" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/markers"]
-visible = false
-layout_mode = 2
-theme_override_constants/separation = 0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ccxqt")
 script = ExtResource("8_kumfx")
 
-[node name="collapsed" type="ColorRect" parent="menu/stats/inventory/ability/controls/markers/item_6"]
-visible = false
-custom_minimum_size = Vector2(60, 2)
-layout_mode = 2
-size_flags_vertical = 0
-color = Color(0.18359, 0.18359, 0.18359, 1)
-
-[node name="selected" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/markers/item_6"]
+[node name="stand" type="PanelContainer" parent="menu/stats/inventory/ability/controls/markers/item_6"]
 custom_minimum_size = Vector2(60, 0)
-layout_mode = 2
-theme_override_constants/separation = 5
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 4.0
+grow_horizontal = 2
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_bqnbo")
 
-[node name="count" type="ProgressBar" parent="menu/stats/inventory/ability/controls/markers/item_6/selected"]
+[node name="content" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/markers/item_6/stand"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="collapsed" type="ProgressBar" parent="menu/stats/inventory/ability/controls/markers/item_6/stand/content"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxEmpty_lvc3v")
+theme_override_styles/fill = SubResource("StyleBoxFlat_0kgs0")
+max_value = 30.0
+value = 15.0
+show_percentage = false
+
+[node name="selected" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/markers/item_6/stand/content"]
+visible = false
+custom_minimum_size = Vector2(58, 0)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 2
+
+[node name="count" type="ProgressBar" parent="menu/stats/inventory/ability/controls/markers/item_6/stand/content/selected"]
 layout_mode = 2
 theme_override_styles/background = SubResource("StyleBoxEmpty_fuh2f")
 theme_override_styles/fill = SubResource("StyleBoxFlat_3tqp8")
 max_value = 30.0
 step = 1.0
-value = 30.0
+value = 15.0
 show_percentage = false
 
-[node name="icon" type="Control" parent="menu/stats/inventory/ability/controls/markers/item_6/selected"]
-custom_minimum_size = Vector2(0, 60)
+[node name="image" type="TextureRect" parent="menu/stats/inventory/ability/controls/markers/item_6/stand/content/selected"]
+custom_minimum_size = Vector2(0, 58)
 layout_mode = 2
 size_flags_vertical = 3
-
-[node name="image" type="TextureRect" parent="menu/stats/inventory/ability/controls/markers/item_6/selected/icon"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+texture = ExtResource("14_u412m")
 expand_mode = 1
 
-[node name="margin" type="MarginContainer" parent="menu/stats/inventory/ability/controls/markers/item_6/selected/icon"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 7
-theme_override_constants/margin_top = 7
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 0
-
-[node name="unicode" type="Label" parent="menu/stats/inventory/ability/controls/markers/item_6/selected/icon/margin"]
+[node name="item_7" type="Button" parent="menu/stats/inventory/ability/controls/markers"]
+custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
-size_flags_horizontal = 4
-theme_override_fonts/font = ExtResource("4_42m6k")
-theme_override_font_sizes/font_size = 32
-theme_override_styles/normal = SubResource("StyleBoxFlat_veudi")
-text = "👊"
-horizontal_alignment = 1
-
-[node name="item_7" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/markers"]
-visible = false
-layout_mode = 2
-theme_override_constants/separation = 0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ccxqt")
 script = ExtResource("8_kumfx")
 
-[node name="collapsed" type="ColorRect" parent="menu/stats/inventory/ability/controls/markers/item_7"]
-visible = false
-custom_minimum_size = Vector2(60, 2)
-layout_mode = 2
-size_flags_vertical = 0
-color = Color(0.18359, 0.18359, 0.18359, 1)
-
-[node name="selected" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/markers/item_7"]
+[node name="stand" type="PanelContainer" parent="menu/stats/inventory/ability/controls/markers/item_7"]
 custom_minimum_size = Vector2(60, 0)
-layout_mode = 2
-theme_override_constants/separation = 5
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 4.0
+grow_horizontal = 2
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_bqnbo")
 
-[node name="count" type="ProgressBar" parent="menu/stats/inventory/ability/controls/markers/item_7/selected"]
+[node name="content" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/markers/item_7/stand"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="collapsed" type="ProgressBar" parent="menu/stats/inventory/ability/controls/markers/item_7/stand/content"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxEmpty_lvc3v")
+theme_override_styles/fill = SubResource("StyleBoxFlat_0kgs0")
+max_value = 30.0
+value = 15.0
+show_percentage = false
+
+[node name="selected" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/markers/item_7/stand/content"]
+visible = false
+custom_minimum_size = Vector2(58, 0)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 2
+
+[node name="count" type="ProgressBar" parent="menu/stats/inventory/ability/controls/markers/item_7/stand/content/selected"]
 layout_mode = 2
 theme_override_styles/background = SubResource("StyleBoxEmpty_fuh2f")
 theme_override_styles/fill = SubResource("StyleBoxFlat_3tqp8")
 max_value = 30.0
 step = 1.0
-value = 30.0
+value = 15.0
 show_percentage = false
 
-[node name="icon" type="Control" parent="menu/stats/inventory/ability/controls/markers/item_7/selected"]
-custom_minimum_size = Vector2(0, 60)
+[node name="image" type="TextureRect" parent="menu/stats/inventory/ability/controls/markers/item_7/stand/content/selected"]
+custom_minimum_size = Vector2(0, 58)
 layout_mode = 2
 size_flags_vertical = 3
-
-[node name="image" type="TextureRect" parent="menu/stats/inventory/ability/controls/markers/item_7/selected/icon"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+texture = ExtResource("14_u412m")
 expand_mode = 1
 
-[node name="margin" type="MarginContainer" parent="menu/stats/inventory/ability/controls/markers/item_7/selected/icon"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 7
-theme_override_constants/margin_top = 7
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 0
-
-[node name="unicode" type="Label" parent="menu/stats/inventory/ability/controls/markers/item_7/selected/icon/margin"]
+[node name="item_8" type="Button" parent="menu/stats/inventory/ability/controls/markers"]
+custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
-size_flags_horizontal = 4
-theme_override_fonts/font = ExtResource("4_42m6k")
-theme_override_font_sizes/font_size = 32
-theme_override_styles/normal = SubResource("StyleBoxFlat_veudi")
-text = "👊"
-horizontal_alignment = 1
-
-[node name="item_8" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/markers"]
-visible = false
-layout_mode = 2
-theme_override_constants/separation = 0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ccxqt")
 script = ExtResource("8_kumfx")
 
-[node name="collapsed" type="ColorRect" parent="menu/stats/inventory/ability/controls/markers/item_8"]
-visible = false
-custom_minimum_size = Vector2(60, 2)
-layout_mode = 2
-size_flags_vertical = 0
-color = Color(0.18359, 0.18359, 0.18359, 1)
-
-[node name="selected" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/markers/item_8"]
+[node name="stand" type="PanelContainer" parent="menu/stats/inventory/ability/controls/markers/item_8"]
 custom_minimum_size = Vector2(60, 0)
-layout_mode = 2
-theme_override_constants/separation = 5
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 4.0
+grow_horizontal = 2
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_bqnbo")
 
-[node name="count" type="ProgressBar" parent="menu/stats/inventory/ability/controls/markers/item_8/selected"]
+[node name="content" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/markers/item_8/stand"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="collapsed" type="ProgressBar" parent="menu/stats/inventory/ability/controls/markers/item_8/stand/content"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxEmpty_lvc3v")
+theme_override_styles/fill = SubResource("StyleBoxFlat_0kgs0")
+max_value = 30.0
+value = 15.0
+show_percentage = false
+
+[node name="selected" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/markers/item_8/stand/content"]
+visible = false
+custom_minimum_size = Vector2(58, 0)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 2
+
+[node name="count" type="ProgressBar" parent="menu/stats/inventory/ability/controls/markers/item_8/stand/content/selected"]
 layout_mode = 2
 theme_override_styles/background = SubResource("StyleBoxEmpty_fuh2f")
 theme_override_styles/fill = SubResource("StyleBoxFlat_3tqp8")
 max_value = 30.0
 step = 1.0
-value = 30.0
+value = 15.0
 show_percentage = false
 
-[node name="icon" type="Control" parent="menu/stats/inventory/ability/controls/markers/item_8/selected"]
-custom_minimum_size = Vector2(0, 60)
+[node name="image" type="TextureRect" parent="menu/stats/inventory/ability/controls/markers/item_8/stand/content/selected"]
+custom_minimum_size = Vector2(0, 58)
 layout_mode = 2
 size_flags_vertical = 3
-
-[node name="image" type="TextureRect" parent="menu/stats/inventory/ability/controls/markers/item_8/selected/icon"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+texture = ExtResource("14_u412m")
 expand_mode = 1
 
-[node name="margin" type="MarginContainer" parent="menu/stats/inventory/ability/controls/markers/item_8/selected/icon"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 7
-theme_override_constants/margin_top = 7
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 0
-
-[node name="unicode" type="Label" parent="menu/stats/inventory/ability/controls/markers/item_8/selected/icon/margin"]
+[node name="item_9" type="Button" parent="menu/stats/inventory/ability/controls/markers"]
+custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
-size_flags_horizontal = 4
-theme_override_fonts/font = ExtResource("4_42m6k")
-theme_override_font_sizes/font_size = 32
-theme_override_styles/normal = SubResource("StyleBoxFlat_veudi")
-text = "👊"
-horizontal_alignment = 1
-
-[node name="item_9" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/markers"]
-visible = false
-layout_mode = 2
-theme_override_constants/separation = 0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ccxqt")
 script = ExtResource("8_kumfx")
 
-[node name="collapsed" type="ColorRect" parent="menu/stats/inventory/ability/controls/markers/item_9"]
-visible = false
-custom_minimum_size = Vector2(60, 2)
-layout_mode = 2
-size_flags_vertical = 0
-color = Color(0.18359, 0.18359, 0.18359, 1)
-
-[node name="selected" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/markers/item_9"]
+[node name="stand" type="PanelContainer" parent="menu/stats/inventory/ability/controls/markers/item_9"]
 custom_minimum_size = Vector2(60, 0)
-layout_mode = 2
-theme_override_constants/separation = 5
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 4.0
+grow_horizontal = 2
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_bqnbo")
 
-[node name="count" type="ProgressBar" parent="menu/stats/inventory/ability/controls/markers/item_9/selected"]
+[node name="content" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/markers/item_9/stand"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="collapsed" type="ProgressBar" parent="menu/stats/inventory/ability/controls/markers/item_9/stand/content"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxEmpty_lvc3v")
+theme_override_styles/fill = SubResource("StyleBoxFlat_0kgs0")
+max_value = 30.0
+value = 15.0
+show_percentage = false
+
+[node name="selected" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/markers/item_9/stand/content"]
+visible = false
+custom_minimum_size = Vector2(58, 0)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 2
+
+[node name="count" type="ProgressBar" parent="menu/stats/inventory/ability/controls/markers/item_9/stand/content/selected"]
 layout_mode = 2
 theme_override_styles/background = SubResource("StyleBoxEmpty_fuh2f")
 theme_override_styles/fill = SubResource("StyleBoxFlat_3tqp8")
 max_value = 30.0
 step = 1.0
-value = 30.0
+value = 15.0
 show_percentage = false
 
-[node name="icon" type="Control" parent="menu/stats/inventory/ability/controls/markers/item_9/selected"]
-custom_minimum_size = Vector2(0, 60)
+[node name="image" type="TextureRect" parent="menu/stats/inventory/ability/controls/markers/item_9/stand/content/selected"]
+custom_minimum_size = Vector2(0, 58)
 layout_mode = 2
 size_flags_vertical = 3
-
-[node name="image" type="TextureRect" parent="menu/stats/inventory/ability/controls/markers/item_9/selected/icon"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+texture = ExtResource("14_u412m")
 expand_mode = 1
 
-[node name="margin" type="MarginContainer" parent="menu/stats/inventory/ability/controls/markers/item_9/selected/icon"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 7
-theme_override_constants/margin_top = 7
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 0
-
-[node name="unicode" type="Label" parent="menu/stats/inventory/ability/controls/markers/item_9/selected/icon/margin"]
+[node name="item_0" type="Button" parent="menu/stats/inventory/ability/controls/markers"]
+custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
-size_flags_horizontal = 4
-theme_override_fonts/font = ExtResource("4_42m6k")
-theme_override_font_sizes/font_size = 32
-theme_override_styles/normal = SubResource("StyleBoxFlat_veudi")
-text = "👊"
-horizontal_alignment = 1
-
-[node name="item_0" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/markers"]
-visible = false
-layout_mode = 2
-theme_override_constants/separation = 0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ccxqt")
 script = ExtResource("8_kumfx")
 
-[node name="collapsed" type="ColorRect" parent="menu/stats/inventory/ability/controls/markers/item_0"]
-visible = false
-custom_minimum_size = Vector2(60, 2)
-layout_mode = 2
-size_flags_vertical = 0
-color = Color(0.18359, 0.18359, 0.18359, 1)
-
-[node name="selected" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/markers/item_0"]
+[node name="stand" type="PanelContainer" parent="menu/stats/inventory/ability/controls/markers/item_0"]
 custom_minimum_size = Vector2(60, 0)
-layout_mode = 2
-theme_override_constants/separation = 5
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 4.0
+grow_horizontal = 2
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_bqnbo")
 
-[node name="count" type="ProgressBar" parent="menu/stats/inventory/ability/controls/markers/item_0/selected"]
+[node name="content" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/markers/item_0/stand"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="collapsed" type="ProgressBar" parent="menu/stats/inventory/ability/controls/markers/item_0/stand/content"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxEmpty_lvc3v")
+theme_override_styles/fill = SubResource("StyleBoxFlat_0kgs0")
+max_value = 30.0
+value = 15.0
+show_percentage = false
+
+[node name="selected" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/markers/item_0/stand/content"]
+visible = false
+custom_minimum_size = Vector2(58, 0)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 2
+
+[node name="count" type="ProgressBar" parent="menu/stats/inventory/ability/controls/markers/item_0/stand/content/selected"]
 layout_mode = 2
 theme_override_styles/background = SubResource("StyleBoxEmpty_fuh2f")
 theme_override_styles/fill = SubResource("StyleBoxFlat_3tqp8")
 max_value = 30.0
 step = 1.0
-value = 30.0
+value = 15.0
 show_percentage = false
 
-[node name="icon" type="Control" parent="menu/stats/inventory/ability/controls/markers/item_0/selected"]
-custom_minimum_size = Vector2(0, 60)
+[node name="image" type="TextureRect" parent="menu/stats/inventory/ability/controls/markers/item_0/stand/content/selected"]
+custom_minimum_size = Vector2(0, 58)
 layout_mode = 2
 size_flags_vertical = 3
-
-[node name="image" type="TextureRect" parent="menu/stats/inventory/ability/controls/markers/item_0/selected/icon"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+texture = ExtResource("14_u412m")
 expand_mode = 1
-
-[node name="margin" type="MarginContainer" parent="menu/stats/inventory/ability/controls/markers/item_0/selected/icon"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 7
-theme_override_constants/margin_top = 7
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 0
-
-[node name="unicode" type="Label" parent="menu/stats/inventory/ability/controls/markers/item_0/selected/icon/margin"]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_fonts/font = ExtResource("4_42m6k")
-theme_override_font_sizes/font_size = 32
-theme_override_styles/normal = SubResource("StyleBoxFlat_veudi")
-text = "👊"
-horizontal_alignment = 1
 
 [node name="margin" type="MarginContainer" parent="menu/stats/inventory/ability/controls/markers"]
 layout_mode = 2

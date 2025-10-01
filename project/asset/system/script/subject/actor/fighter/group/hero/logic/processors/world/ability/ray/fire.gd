@@ -29,7 +29,7 @@ func ability() -> void:
 		animation()
 		enemy.fire(_hero.logic.stats.influence)
 	
-	if _vessel != Defaults.CHARACTER and !_vessel.logic.relations.fire.on and aura.use(cost):
+	if _vessel != Defaults.ENTITY and !_vessel.logic.relations.fire.on and aura.use(cost):
 		animation()
 		_vessel.logic.processors.fire.ignite()
 

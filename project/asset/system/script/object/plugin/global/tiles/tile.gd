@@ -51,6 +51,10 @@ static func from_pos(layer: TileMapLayer, pos: Vector2) -> Dictionary:
 static func logic(cell: Vector2i) -> int:
 	return cell.y * SIZE + FLOOR + cell.x
 
+static func extract_at_pos(layer: TileMapLayer, pos: Vector2, no: int) -> Variant:
+	var map_coords: Vector2i = Tile.find(layer, pos)
+	return Tile.extract(layer, map_coords, no)
+
 static func extract(layer: TileMapLayer, map_coords: Vector2i, no: int) -> Variant:
 	var tile: TileData = layer.get_cell_tile_data(map_coords)
 	# print(", layer: ", map.name, ", map local: ", coords, ", data: ", tile)

@@ -1,12 +1,52 @@
-[gd_scene load_steps=4 format=3 uid="uid://bph5gk3muj1yw"]
+[gd_scene load_steps=3 format=3 uid="uid://bph5gk3muj1yw"]
 
-[ext_resource type="PackedScene" uid="uid://dje5v8fv74oh6" path="res://asset/system/scene/subject/actor/fighter/group/hero/base/logic/detectors/platforming/platforms/surface/overleap/gap.tscn" id="1_8epmr"]
 [ext_resource type="Script" uid="uid://dr287a1vbujum" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/detectors/platforming/platforms/surface/overleap/overleap.gd" id="1_cyuxv"]
-[ext_resource type="PackedScene" uid="uid://cht5o2q3er5ou" path="res://asset/system/scene/subject/actor/fighter/group/hero/base/logic/detectors/platforming/platforms/surface/overleap/upland.tscn" id="2_42n2j"]
+[ext_resource type="Script" uid="uid://bm7idlnbkyi2d" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/detectors/platforming/platforms/surface/overleap/rays.gd" id="4_fwwr0"]
 
 [node name="overleap" type="Node2D"]
 script = ExtResource("1_cyuxv")
 
-[node name="gap" parent="." instance=ExtResource("1_8epmr")]
+[node name="left" type="Node2D" parent="."]
+script = ExtResource("4_fwwr0")
 
-[node name="upland" parent="." instance=ExtResource("2_42n2j")]
+[node name="left" type="RayCast2D" parent="left"]
+target_position = Vector2(-40, -30)
+collision_mask = 192
+
+[node name="mid" type="RayCast2D" parent="left"]
+target_position = Vector2(0, -30)
+collision_mask = 192
+
+[node name="right" type="RayCast2D" parent="left"]
+target_position = Vector2(40, -30)
+collision_mask = 192
+
+[node name="mid" type="Node2D" parent="."]
+script = ExtResource("4_fwwr0")
+
+[node name="left" type="RayCast2D" parent="mid"]
+target_position = Vector2(-40, 0)
+collision_mask = 192
+
+[node name="mid" type="RayCast2D" parent="mid"]
+target_position = Vector2(0, 0)
+collision_mask = 192
+
+[node name="right" type="RayCast2D" parent="mid"]
+target_position = Vector2(40, 0)
+collision_mask = 192
+
+[node name="right" type="Node2D" parent="."]
+script = ExtResource("4_fwwr0")
+
+[node name="left" type="RayCast2D" parent="right"]
+target_position = Vector2(-40, 30)
+collision_mask = 192
+
+[node name="mid" type="RayCast2D" parent="right"]
+target_position = Vector2(0, 30)
+collision_mask = 192
+
+[node name="right" type="RayCast2D" parent="right"]
+target_position = Vector2(40, 30)
+collision_mask = 192

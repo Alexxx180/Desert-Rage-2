@@ -28,8 +28,7 @@ var is_near: bool:
 		for pillar in ledge.jump_zone.walls:
 			if pillar.is_colliding():
 				target_pos = walls.jump_zone.position + pillar.position
-				var map_coords: Vector2i = Tile.find(border, hero.position + target_pos)
-				var f: int = Tile.extract(border, map_coords, Tile.FLOOR)
+				var f: int = Tile.extract_at_pos(border, hero.position + target_pos, Tile.FLOOR)
 				print("WHIP FLOOR: ", f)
 				var ignore_ground: bool = true
 

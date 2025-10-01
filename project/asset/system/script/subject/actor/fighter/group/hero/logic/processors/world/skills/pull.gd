@@ -9,8 +9,8 @@ var velocity: Node:
 
 func start_forward(box: CharacterBody2D) -> void:
 	boxes.push_back(box)
-	_grab = box.compare_height(hero)
-	_grab = _grab or not hero.logic.detectors.world.skills.pull.ledge.is_colliding()
+	# _grab = box.compare_height(hero) DEPRECATED
+	_grab = not hero.logic.detectors.world.skills.pull.ledge.is_colliding() # _grab or
 	if _grab:
 		box.logic.processors.grab_box(hero)
 		velocity.weight += box.weight

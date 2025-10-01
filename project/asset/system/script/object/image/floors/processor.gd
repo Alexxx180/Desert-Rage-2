@@ -1,25 +1,15 @@
 extends Node
 
-signal update_floor(f: int)
+# signal update_floor(f: int)
+# @onready var tracker: SurfaceTracker = $tracker
+@onready var entity: CharacterBody2D = Defaults.ENTITY
 
-@onready var tracker: SurfaceTracker = $tracker
+var border: TileMapLayer
+var hero: CharacterBody2D # var freeze: bool = false
+var F: int: get = get_floor
 
-var freeze: bool = false
-var _floor: int = 0
-var F: int:
-	get: return _floor
+func get_floor() -> int:
+	if entity == Defaults.ENTITY:
+		return Tile.extract_at_pos(border, hero.position, Tile.FLOOR)
 
-func at_new_floor(border: TileMapLayer) -> void:
-	if freeze: return
-
-	var map_coords: Vector2i = Tile.find(border, tracker.contact)
-	var next: int = Tile.extract(border, map_coords, Tile.FLOOR)
-	if _floor != next:
-		_floor = next
-		update_floor.emit(_floor)
-		print("Set Floor = ", _floor)
-
-func set_box_floor(next: int) -> void:
-	if _floor != next:
-		_floor = next
-		print("Set Floor [BOX] = ", _floor)
+	return Tile.extract_at_pos(border, entity.position, Tile.FLOOR) + entity.height
