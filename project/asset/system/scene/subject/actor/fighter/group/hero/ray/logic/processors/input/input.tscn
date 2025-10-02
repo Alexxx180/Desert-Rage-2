@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dtibatxhubbff"]
+[gd_scene load_steps=12 format=3 uid="uid://dtibatxhubbff"]
 
 [ext_resource type="Script" uid="uid://chyqd202d6so4" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/processors/ui/input/input.gd" id="1_n780q"]
 [ext_resource type="Script" uid="uid://ctu6vokmil1h0" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/processors/ui/input/modes/modes.gd" id="2_ous42"]
@@ -7,7 +7,9 @@
 [ext_resource type="Script" uid="uid://dw2tfm70swerb" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/processors/ui/input/modes/topdown.gd" id="3_xqgwn"]
 [ext_resource type="Script" uid="uid://bgjjfddk8wgmk" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/processors/ui/input/gravity.gd" id="4_ctrvw"]
 [ext_resource type="Script" uid="uid://bohl4j55eetkb" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/processors/ui/input/modes/platformer.gd" id="4_mjvgb"]
+[ext_resource type="Script" uid="uid://cgc44dvua0jb7" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/processors/ui/input/platforming/chains.gd" id="5_ujhpr"]
 [ext_resource type="PackedScene" uid="uid://b51o5v35cj5m8" path="res://asset/system/scene/subject/actor/fighter/group/hero/ray/logic/processors/input/actions.tscn" id="5_xi04g"]
+[ext_resource type="Script" uid="uid://4nmet7l2bswx" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/processors/ui/input/platforming/spring.gd" id="6_sf2vl"]
 [ext_resource type="Script" uid="uid://6ruw0ycrqlbq" path="res://addons/godot-behavior-tree-plugin/blackboard/blackboard.gd" id="6_xi04g"]
 
 [node name="input" type="Node"]
@@ -21,6 +23,16 @@ script = ExtResource("3_xqgwn")
 
 [node name="platformer" type="Node" parent="modes"]
 script = ExtResource("4_mjvgb")
+
+[node name="chains" type="Node" parent="modes/platformer"]
+script = ExtResource("5_ujhpr")
+
+[node name="spring" type="Node" parent="modes/platformer"]
+script = ExtResource("6_sf2vl")
+
+[node name="deactivation" type="Timer" parent="modes/platformer/spring"]
+wait_time = 0.3
+one_shot = true
 
 [node name="movement" parent="." instance=ExtResource("2_paa2o")]
 
@@ -36,3 +48,5 @@ script = ExtResource("6_xi04g")
 metadata/_custom_type_script = "uid://6ruw0ycrqlbq"
 
 [node name="actions" parent="." instance=ExtResource("5_xi04g")]
+
+[connection signal="timeout" from="modes/platformer/spring/deactivation" to="modes/platformer/spring" method="deactivate_spring"]

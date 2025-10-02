@@ -1,15 +1,16 @@
 extends Node
 
-# signal update_floor(f: int)
-# @onready var tracker: SurfaceTracker = $tracker
 @onready var entity: CharacterBody2D = Defaults.ENTITY
 
 var border: TileMapLayer
-var hero: CharacterBody2D # var freeze: bool = false
+var hero: CharacterBody2D
 var F: int: get = get_floor
 
 func extract(pos: Vector2, height: int = 0) -> int:
 	return Tile.extract_at_pos(border, pos, Tile.FLOOR) + height
+
+func extract_at_hero(ground: Vector2) -> int:
+	return extract(hero.position + ground)
 
 func get_floor() -> int:
 	if entity == Defaults.ENTITY:

@@ -1,13 +1,16 @@
 extends Node
 
+const BORDERS: float = 17.0
+
 var _hero: CharacterBody2D
 var hero: CharacterBody2D:
 	get: return _hero
 	set(value):
-		_hero = value
 		ledge = walls
-		border = hero.get_node("../../border")
-var border: TileMapLayer
+		_hero = value
+
+var floors: Node:
+	get: return hero.logic.processors.ui.input.platforming.jump.feet.floors
 var gravity: Node:
 	get: return hero.logic.processors.ui.input.gravity
 var walls: Node2D:
@@ -20,22 +23,17 @@ var dashed: bool = false
 var caught: bool = false
 var jump_offset: float = 0
 var target_pos: Vector2
-var is_near: bool:
-	get:
-		if ledge.jump_zone.border.is_colliding():
-			return false
+var is_near: bool: get = get_near
 
-		for pillar in ledge.jump_zone.walls:
-			if pillar.is_colliding():
-				target_pos = walls.jump_zone.position + pillar.position
-				var f: int = Tile.extract_at_pos(border, hero.position + target_pos, Tile.FLOOR)
-				print("WHIP FLOOR: ", f)
-				var ignore_ground: bool = true
+func get_near() -> bool:
+	if walls.jump_zone.border.is_colliding(): return false
 
-				return hero.logic.processors.ui.input.platforming.jump.feet.same_floor(f, ignore_ground)
-		return false
+	for pillar in walls.jump_zone.walls:
+		if pillar.is_colliding():
+			target_pos = walls.jump_zone.position + pillar.position
+			return floors.same_to_hero(target_pos)
 
-const BORDERS: float = 17.0
+	return false
 
 var rotation: Dictionary = { Vector2i(1, 0): 0, Vector2i(0, 1): 90,
 	Vector2i(-1, 0): 180, Vector2i(0, -1): -90 }
