@@ -1,54 +1,30 @@
 extends Node2D
 
-@onready var borders: RayCast2D = $borders
-# @onready var center: Node2D = $center
+@onready var borders: RayCast2D = $borders # @onready var center: Node2D = $center
 @onready var distance: Node2D = $distance
 
-var same_floor: Callable
-var target: Vector2 = Vector2.ZERO
-var F: int = 0
-
-func get_target_pos(i: int, j: int) -> Vector2:
-	print("JUMP ZONE IS: ", distance.jump_zone.name)
-	var jump_zone: Node2D = distance.jump_zone
-	return jump_zone.position + jump_zone.ground[i].walls[j].position
-	# return ground[i].position + ground[i].last_pos[j]
-
-func set_center() -> void:
-	target = get_target_pos(1, 2)
+var target_ground: Vector2 = Vector2.ZERO
+var floors: Node
 
 func set_direction(direction: Vector2) -> void:
 	var next: Vector2i = Vector2i(roundi(direction.x), roundi(direction.y))
+	for env in [borders, distance]: env.set_direction(next)
 
-	borders.set_direction(next)
-	distance.set_direction(next)
+func same_ground(ground_offset: ShapeCast2D) -> bool:
+	target_ground = distance.jump_zone.position + ground_offset.position
+	return not ground_offset.is_colliding() and floors.same_to_hero(target_ground)
 
-func is_ledge(i: int, floors: TileMapLayer = null) -> bool:
-	var gap: bool = floors == null
+func _is_ledge(ledges: Variant, check: Callable) -> bool:
 	var ledge: bool = false
-	
-	var j: int = distance.jump_zone.ground[i].walls.size()
+	var j: int = ledges.size()
 	
 	while not ledge and j > 0:
 		j -= 1
-		var current: ShapeCast2D = distance.jump_zone.ground[i].walls[j]
-		target = get_target_pos(i, j)
-		# jump.is_same_floor
-		
-		ledge = not current.is_colliding() and (gap or same_floor.call(floors))
+		ledge = check.call(ledges[j])
 	
-	print("LEDGE: ", i, ", ", j, " = ", get_target_pos(i, j))
-
 	return ledge
 
-func are_ledges(floors: TileMapLayer = null) -> bool:
-	print("TRYING ")
-	var ledge: bool = false
-	var i: int = distance.jump_zone.ground.size()
-	
-	while not ledge and i > 0:
-		i -= 1
-		ledge = is_ledge(i, floors)
-
-	print("END UP TRYING, result: ", "JUMPED" if ledge else "STAY")
+func are_ledges() -> bool:
+	var ledge: bool = _is_ledge(distance.jump_zone.ground, func(env): _is_ledge(env.walls, same_ground))
+	print("Jumped to" if ledge else "Stayed at", " ledge", (" = " + str(target_ground)) if ledge else "")
 	return ledge

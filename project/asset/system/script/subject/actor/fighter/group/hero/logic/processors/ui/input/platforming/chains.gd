@@ -15,7 +15,7 @@ var hanging: bool:
 func _catch_ledge() -> void:
 	input.modes.select(true)
 	chained.emit(true)
-	input.gravity.turn_walls_collision(false)
+	input.gravity.context(false).collide_main()
 	view.shadow.hang()
 	view.animation.moves.set_environment("chains")
 
@@ -41,7 +41,7 @@ func climbing_stop(_execute: TileMapLayer) -> void:
 	if not above:
 		climbing = false
 		input.modes.select(false)
-		input.gravity.turn_walls_collision(true)
+		input.gravity.context(true).collide_main()
 		chained.emit(false)
 		view.shadow.stand()
 		view.animation.moves.set_environment("ground")

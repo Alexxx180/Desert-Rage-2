@@ -8,8 +8,19 @@ var border: TileMapLayer
 var hero: CharacterBody2D # var freeze: bool = false
 var F: int: get = get_floor
 
+func extract(pos: Vector2, height: int = 0) -> int:
+	return Tile.extract_at_pos(border, pos, Tile.FLOOR) + height
+
 func get_floor() -> int:
 	if entity == Defaults.ENTITY:
-		return Tile.extract_at_pos(border, hero.position, Tile.FLOOR)
+		return extract(hero.position)
+	else:
+		return extract(entity.position, entity.height)
 
-	return Tile.extract_at_pos(border, entity.position, Tile.FLOOR) + entity.height
+func same(pos: Vector2, height: int = 0) -> bool:
+	var f: int = extract(pos, height)
+	print("F: ", f, " ", "=" if f == F else ("<" if f < F else ">"), F, " ")
+	return f == F
+
+func same_to_hero(ground: Vector2) -> bool:
+	return same(hero.position + ground)

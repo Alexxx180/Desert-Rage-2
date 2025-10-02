@@ -1,12 +1,11 @@
 extends Node
 
-var same_floor: Callable
-var place_decide: Callable # = func(a): print("same_level not set")
-
 var _direction: Vector2i = Vector2i.ZERO
 var _plane: Array[Array] = []
 var _try: bool = false
+
 var floors: Node
+var place: Node
 
 func set_direction(direction: Vector2i) -> void:
 	_direction = direction
@@ -19,7 +18,7 @@ func _observe_ledge(axis: int, ledge: Vector2) -> void:
 	_try = _try and _plane[axis][faced].call(ledge)
 
 func setup(hero: CharacterBody2D):
-	_for_direction(func(a): _plane.push_back(place_decide.call(hero, a)))
+	_for_direction(func(a): _plane.push_back(place.decide(hero, a)))
 
 func _observe(ledge: Vector2) -> bool:
 	_try = true
@@ -29,8 +28,8 @@ func _observe(ledge: Vector2) -> bool:
 func reach(stand: Area2D) -> bool:
 	var pos: Vector2 = stand.get_ledge_position()
 	var place: Node = stand.seat.place
+	var box: CharacterBody2D = stand.box
 	# var unique: bool = stand.box.get_instance_id() != floors.entity.get_instance_id() unique and 
 	print(" EMPTY PLACE: ", place.empty()) # "UNIQUE: ", unique, 
 	# var _floor: int = stand.seat.F # print("SL: ", pos == null) DEPRECATED
-	return place.empty() and _observe(pos) and same_floor.call(
-		floors.border, stand.box.position, stand.box.height)
+	return place.empty() and _observe(pos) and floors.same(box.position, box.height)

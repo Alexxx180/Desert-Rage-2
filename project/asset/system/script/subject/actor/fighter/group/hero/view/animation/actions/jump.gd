@@ -8,10 +8,10 @@ func _switch_monitoring(sequence_ended: bool) -> void:
 
 func _set_input(processors: Node, started_sequence: bool) -> void:
 	var input: Node = processors.ui.input
-	var balance: Node = input.platforming.jump.feet.balance
+	var feet: Node = input.platforming.jump.feet
 	
 	input.platforming.jump.jumped = started_sequence
-	input.gravity.during_jump(started_sequence, balance.stable)
+	input.gravity.during_jump(started_sequence, feet.stable)
 
 	if !started_sequence: input.movement.type.velocity.forget_velocity()
 	processors.freeze_input[started_sequence].call()

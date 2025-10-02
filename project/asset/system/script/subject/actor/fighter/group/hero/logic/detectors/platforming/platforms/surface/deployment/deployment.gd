@@ -30,5 +30,5 @@ func available_ground() -> bool:
 	if ic(not ground.is_colliding(), "GROUND"): return false
 	return ic(not walls.borders.is_colliding(), "BORDERS")
 
-func can_deploy(floors: TileMapLayer = null) -> bool:
-	return available_ground() and walls.are_ledges(floors)
+func can_deploy() -> bool:
+	return available_ground() and walls.are_ledges()

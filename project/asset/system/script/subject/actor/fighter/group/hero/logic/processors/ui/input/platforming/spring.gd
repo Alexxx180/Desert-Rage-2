@@ -36,7 +36,7 @@ func spring_exit(_execute: TileMapLayer) -> void:
 
 func return_input() -> void:
 	mode.control.land()
-	gravity.turn_walls_collision(true, true)
+	gravity.context(true).collide_main().collide(Lay.BORDERS)
 	hero.logic.processors.ui.input.modes.select(false)
 
 func perform_jump(_force: float) -> void:
@@ -45,7 +45,7 @@ func perform_jump(_force: float) -> void:
 		Tile.switch(_last_spring, Vector2i(1, 0), execute)
 		deactivation.start()
 	state = JUMPED
-	gravity.turn_walls_collision(false, true)
+	gravity.context(false).collide_main().collide(Lay.BORDERS)
 	hero.logic.processors.ui.input.modes.select(true)
 	mode.control.jump()
 

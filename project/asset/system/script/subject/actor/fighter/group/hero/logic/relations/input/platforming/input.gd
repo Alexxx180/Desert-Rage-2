@@ -7,7 +7,6 @@ func controls(hero: CharacterBody2D, input: Node, overleap: Node2D) -> void:
 	var jump: Node = hero.logic.processors.ui.input.platforming.jump
 
 	_platforming = hero.logic.processors.ui.input.platforming
-	_platforming.jump.border = hero.get_node("../../border")
 
 	_overleap = overleap
 

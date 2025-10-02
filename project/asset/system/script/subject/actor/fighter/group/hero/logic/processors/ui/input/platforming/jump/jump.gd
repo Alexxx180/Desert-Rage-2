@@ -5,7 +5,6 @@ extends Node
 
 var jumped: bool = false
 var surface: Node2D
-var border: TileMapLayer
 
 func determine() -> void:
 	print("determine jump")
@@ -14,9 +13,9 @@ func determine() -> void:
 		feet.jump(ledges.pos)
 	else:
 		print("jump on the floor")
-		feet.deploy(border)
+		feet.deploy()
 
 func perform(motion: Vector2) -> void:
 	surface.deployment.set_direction(motion)
-	if feet.balance.unstable or surface.overleap.is_colliding(motion):
+	if feet.unstable or surface.overleap.is_colliding(motion):
 		determine()

@@ -20,21 +20,27 @@ func free_cargo(cargo: CharacterBody2D) -> void:
 
 func toggle_platforming(hero: CharacterBody2D, state: bool) -> void:
 	var leap: Node2D = hero.logic.detectors.platforming.platforms.surface.overleap
-	leap.upland.monitoring = state
-	leap.gap.monitoring = state
+	leap.turn_monitoring(state)
+
+func disable_mask(gravity) -> Lay:
+	return gravity.context(false).collide_main().collide(Lay.BORDERS)
+
+func enable_mask(gravity) -> Lay:
+	return gravity.context(true).collide_main()
 
 func disable_collision(cargo: CharacterBody2D) -> void:
+	var gravity: Lay = cargo.logic.processors.movement.gravity
 	if cargo is PlatformingBox:
-		cargo.logic.processors.movement.gravity.turn_walls_collision(false, false)
+		disable_mask(cargo.logic.processors.movement.gravity)
 	else:
-		cargo.logic.processors.ui.input.gravity.turn_walls_collision(false, false, true)
+		disable_mask(cargo.logic.processors.ui.input.gravity).hero_collide(true)
 		toggle_platforming(cargo, false)
 
 func enable_collision(cargo: CharacterBody2D) -> void:
 	if cargo is PlatformingBox:
-		cargo.logic.processors.movement.gravity.turn_walls_collision(true)
+		enable_mask(cargo.logic.processors.movement.gravity)
 	else:
-		cargo.logic.processors.ui.input.gravity.turn_walls_collision(true)
+		enable_mask(cargo.logic.processors.ui.input.gravity)
 		toggle_platforming(cargo, true)
 
 func _move_certain(box: CharacterBody2D, motion: Vector2) -> void:

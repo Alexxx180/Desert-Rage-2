@@ -49,7 +49,7 @@ func _set_ledge_offset(next: Node, offset: float) -> void:
 	jump_offset = offset
 
 func _turn_collision(state: bool) -> void:
-	gravity.turn_walls_collision(state)
+	gravity.context(state).collide_main()
 	dashed = !state
 
 func whip_caught(_execute: TileMapLayer) -> void: caught = true
