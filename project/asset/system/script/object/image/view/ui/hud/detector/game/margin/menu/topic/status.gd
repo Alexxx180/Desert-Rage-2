@@ -2,7 +2,8 @@ extends HBoxContainer
 
 @onready var enemy: Array[PanelContainer] = [$enemy_1] # , $enemy_2
 @onready var margin: MarginContainer = $experience/caption/main/margin
-@onready var space: Control = $experience/meter/margin/next/space
+@onready var meter: Control = $experience/meter
+@onready var space: Control = meter.get_node("margin/next/space")
 @onready var combo: Dictionary = {
 	"meter": space.get_node("meter"),
 	"score": margin.get_node("multiplier")
@@ -13,11 +14,14 @@ extends HBoxContainer
 func set_xp_score(group_xp: Node) -> void:
 	var timer: Timer = $hide_xp
 	var score: ProgressBar = space.get_node("score")
-	timer.timeout.connect(func(): count.hide())
+	timer.timeout.connect(func():
+		meter.hide()
+		count.hide())
 	group_xp.update_exp.connect(
 		func(value: Vector2i, base_xp: int):
 			count.text = str(base_xp + value.x)
 			count.show()
+			meter.show()
 			timer.start()
 			score.max_value = value.y
 			score.value = value.x)

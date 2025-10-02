@@ -7,7 +7,7 @@ func sync(tree: AdvancedCharacterAnimation) -> void:
 	moves.tree.direction = tree.direction
 	moves.tree.request("go", tree.ask("go")) # set_speed(tree.scale)
 	 # tree.pose
-	if moves.hero.logic.processors.ui.input.platforming.jump.animation:
+	if moves.hero.logic.processors.ui.input.platforming.jump.jumped:
 		moves.set_jump_end()
 	# moves.set_base_stance("idle")
 	moves.set_move_action(tree.ask("move")) # maze

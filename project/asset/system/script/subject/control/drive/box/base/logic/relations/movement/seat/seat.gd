@@ -6,6 +6,7 @@ func controls(box: CharacterBody2D, seat: Node) -> void:
 	var stand: Node = box.logic.detectors.platforming.stand
 	var floors: Node = box.logic.processors.movement.floors
 
+	seat.entity = box
 	seat.place.standing.connect(box.view.enable_sync)
 	seat.place.leaving.connect(box.view.disable_sync)
 

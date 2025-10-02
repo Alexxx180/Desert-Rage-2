@@ -10,7 +10,7 @@ func _set_input(processors: Node, started_sequence: bool) -> void:
 	var input: Node = processors.ui.input
 	var balance: Node = input.platforming.jump.feet.balance
 	
-	input.platforming.jump.animation = started_sequence
+	input.platforming.jump.jumped = started_sequence
 	input.gravity.during_jump(started_sequence, balance.stable)
 
 	if !started_sequence: input.movement.type.velocity.forget_velocity()
