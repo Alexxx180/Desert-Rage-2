@@ -1,41 +1,29 @@
-[gd_scene load_steps=11 format=3 uid="uid://cf3n6jqk372jc"]
+[gd_scene load_steps=8 format=3 uid="uid://cf3n6jqk372jc"]
 
 [ext_resource type="Script" uid="uid://c60f67hinhx4y" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/processors/ui/input/movement/movement.gd" id="1_2mk0w"]
 [ext_resource type="PackedScene" uid="uid://b7v637wmhaoam" path="res://asset/system/scene/subject/actor/fighter/group/hero/base/logic/processors/input/movement/behavior.tscn" id="4_3tnhx"]
-[ext_resource type="Script" uid="uid://2603x0in3otk" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/processors/ui/input/movement/type/move.gd" id="4_beq7d"]
-[ext_resource type="Script" uid="uid://deu4d8k815al4" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/processors/ui/input/movement/mode/control.gd" id="6_beq7d"]
-[ext_resource type="Script" uid="uid://dymegm2ytijud" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/processors/ui/input/movement/mode/mode.gd" id="6_wb5xw"]
-[ext_resource type="Script" uid="uid://be4ellj5w8bbn" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/processors/ui/input/movement/type/fight.gd" id="7_jtvc0"]
 [ext_resource type="Script" uid="uid://cg4lnjctp4das" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/processors/ui/input/movement/mode/target.gd" id="7_obf41"]
 [ext_resource type="Script" uid="uid://c2w0dnsrewcdf" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/processors/ui/input/movement/type/distance.gd" id="8_6oqkf"]
-[ext_resource type="Script" uid="uid://bxkera6nc86jm" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/processors/ui/input/movement/type/velocity.gd" id="8_beq7d"]
-[ext_resource type="Script" uid="uid://cmjvnirdgwg6q" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/processors/ui/input/movement/type/type.gd" id="8_ummch"]
+[ext_resource type="Script" uid="uid://bocb1songpf12" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/processors/ui/input/movement/device.gd" id="11_0g4wr"]
+[ext_resource type="Script" uid="uid://bjrammjyghldy" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/processors/ui/input/movement/device/mouse.gd" id="11_lcr8h"]
+[ext_resource type="Script" uid="uid://dcjbac20e7fq7" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/processors/ui/input/movement/device/keyboard.gd" id="12_lcr8h"]
 
 [node name="movement" type="Node"]
 script = ExtResource("1_2mk0w")
 
-[node name="behavior" parent="." instance=ExtResource("4_3tnhx")]
+[node name="move" parent="." instance=ExtResource("4_3tnhx")]
 
-[node name="type" type="Node" parent="."]
-script = ExtResource("8_ummch")
+[node name="device" type="Node" parent="."]
+script = ExtResource("11_0g4wr")
 
-[node name="move" type="Node" parent="type"]
-script = ExtResource("4_beq7d")
+[node name="mouse" type="Node" parent="device"]
+script = ExtResource("11_lcr8h")
 
-[node name="velocity" type="Node" parent="type"]
-script = ExtResource("8_beq7d")
-
-[node name="distance" type="Node" parent="type"]
-script = ExtResource("8_6oqkf")
-
-[node name="fight" type="Node" parent="type"]
-script = ExtResource("7_jtvc0")
-
-[node name="mode" type="Node" parent="."]
-script = ExtResource("6_wb5xw")
-
-[node name="target" type="Node" parent="mode"]
+[node name="target" type="Node" parent="device/mouse"]
 script = ExtResource("7_obf41")
 
-[node name="control" type="Node" parent="mode"]
-script = ExtResource("6_beq7d")
+[node name="antistuck" type="Node" parent="device/mouse/target"]
+script = ExtResource("8_6oqkf")
+
+[node name="keyboard" type="Node" parent="device"]
+script = ExtResource("12_lcr8h")

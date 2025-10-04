@@ -5,22 +5,14 @@ var target: Rect2
 
 func teleport(next: Vector2, action: String = "jump") -> void:
 	hero.velocity = Vector2.ZERO
-	target.position = hero.position
-	target.size = next - hero.position
-	print("JUMP TARGET POS: ", target.position, " + SIZE: ", target.size)
+	target = Rect2(hero.position, next - hero.position)
 	hero.view.animation.moves.set_move_action(action)
 	hero.view.animation.moves.set_base_stance("move")
-	hero.logic.processors.ui.input.platforming.jump.feet.deployment.reset_direction()
+	hero.logic.work.input.platforming.jump.feet.deployment.reset_direction()
 
 func dash(force: Vector2, action: String = "jump") -> void:
 	teleport(hero.position + force, action)
-	"""
-	print("FORCE: ", force)
-	hero.view.animation.direction = force.normalized()
-	hero.view.animation.direct()
-	print("JUMPED: ", hero.position)
-	# """
 
 func move(proportion: float) -> void:
 	hero.position = target.position + target.size * proportion
-	print("TP MOVE: ", target.position + target.size)
+	print("TP MOVE: ", target.position + target.size) # print("JUMP TARGET POS: ", target.position, " + SIZE: ", target.size)

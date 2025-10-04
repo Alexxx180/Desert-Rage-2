@@ -2,6 +2,10 @@ extends Node
 
 var input: Node
 
+@onready var movement: Node = $movement
+@onready var platforming: Node = $platforming
+@onready var actions: Node = $actions
+
 func access(motion: Vector2) -> void:
 	if input.platforming.jump.jumped: return
 	input.platforming.jump.perform(motion)
@@ -10,7 +14,7 @@ func access(motion: Vector2) -> void:
 	input.actions.tick(self, input.board)
 
 func process_physics(delta: float) -> void:
-	if input.movement.mode.hero.logic.processors.ui.input.platforming.jump.feet.stable:
+	if input.movement.mode.hero.logic.work.input.platforming.jump.feet.stable:
 		input.movement.behavior.move.process_physics(delta)
 	else:
 		print("HERO ON THE BOX")

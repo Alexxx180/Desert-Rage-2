@@ -1,0 +1,68 @@
+[gd_scene load_steps=16 format=3 uid="uid://dtibatxhubbff"]
+
+[ext_resource type="Script" uid="uid://chyqd202d6so4" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/processors/ui/input/input.gd" id="1_n780q"]
+[ext_resource type="PackedScene" uid="uid://cf3n6jqk372jc" path="res://asset/system/scene/subject/actor/fighter/group/hero/base/logic/processors/input/movement/movement.tscn" id="2_paa2o"]
+[ext_resource type="PackedScene" uid="uid://dqxhg7f8wohsj" path="res://asset/system/scene/subject/actor/fighter/group/hero/base/logic/processors/input/platforming/platforming.tscn" id="3_alqks"]
+[ext_resource type="Script" uid="uid://dw2tfm70swerb" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/processors/ui/input/modes/topdown.gd" id="3_xqgwn"]
+[ext_resource type="Script" uid="uid://bohl4j55eetkb" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/processors/ui/input/modes/platformer.gd" id="4_mjvgb"]
+[ext_resource type="Script" uid="uid://cgc44dvua0jb7" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/processors/ui/input/platforming/chains/chains.gd" id="5_ujhpr"]
+[ext_resource type="PackedScene" uid="uid://b51o5v35cj5m8" path="res://asset/system/scene/subject/actor/fighter/group/hero/ray/logic/work/input/actions.tscn" id="5_xi04g"]
+[ext_resource type="Script" uid="uid://m1bf74xh1hia" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/processors/ui/input/topdown/actions.gd" id="6_0ve4s"]
+[ext_resource type="Script" uid="uid://4nmet7l2bswx" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/processors/ui/input/platforming/spring.gd" id="6_sf2vl"]
+[ext_resource type="Script" uid="uid://6ruw0ycrqlbq" path="res://addons/godot-behavior-tree-plugin/blackboard/blackboard.gd" id="6_xi04g"]
+[ext_resource type="Script" uid="uid://cxrdadx5a8gxc" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/processors/ui/input/platforming/chains/catch.gd" id="10_scduw"]
+[ext_resource type="Script" uid="uid://deu4d8k815al4" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/processors/ui/input/movement/mode/control.gd" id="11_p1exb"]
+[ext_resource type="Script" uid="uid://bbb5nspgj74q8" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/processors/ui/input/platformer/jump.gd" id="11_sy3qj"]
+[ext_resource type="Script" uid="uid://cacg0uo42xuy6" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/processors/ui/input/platformer/slide.gd" id="12_d8pvu"]
+[ext_resource type="Script" uid="uid://d4efp8vhmy5s5" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/processors/ui/input/platformer/spring/ground.gd" id="15_35qtk"]
+
+[node name="input" type="Node"]
+script = ExtResource("1_n780q")
+
+[node name="topdown" type="Node" parent="."]
+script = ExtResource("3_xqgwn")
+
+[node name="movement" parent="topdown" instance=ExtResource("2_paa2o")]
+
+[node name="levels" parent="topdown" instance=ExtResource("3_alqks")]
+
+[node name="actions" type="Node" parent="topdown"]
+script = ExtResource("6_0ve4s")
+
+[node name="board" type="Node" parent="topdown/actions"]
+script = ExtResource("6_xi04g")
+metadata/_custom_type_script = "uid://6ruw0ycrqlbq"
+
+[node name="behavior" parent="topdown/actions" instance=ExtResource("5_xi04g")]
+
+[node name="combo" type="Timer" parent="topdown/actions"]
+
+[node name="platformer" type="Node" parent="."]
+script = ExtResource("4_mjvgb")
+
+[node name="chains" type="Node" parent="platformer"]
+script = ExtResource("5_ujhpr")
+
+[node name="catch" type="Node" parent="platformer/chains"]
+script = ExtResource("10_scduw")
+
+[node name="jump" type="Node" parent="platformer"]
+script = ExtResource("11_sy3qj")
+
+[node name="slide" type="Node" parent="platformer/jump"]
+script = ExtResource("12_d8pvu")
+
+[node name="spring" type="Node" parent="platformer/jump"]
+script = ExtResource("6_sf2vl")
+
+[node name="control" type="Node" parent="platformer/jump/spring"]
+script = ExtResource("11_p1exb")
+
+[node name="ground" type="Node" parent="platformer/jump/spring"]
+script = ExtResource("15_35qtk")
+
+[node name="deactivation" type="Timer" parent="platformer/jump/spring/ground"]
+wait_time = 0.3
+one_shot = true
+
+[connection signal="timeout" from="platformer/jump/spring/ground/deactivation" to="platformer/jump/spring" method="deactivate_spring"]

@@ -5,7 +5,6 @@ class_name ActionTimer
 signal timeout()
 
 @export var period: float = 0.05
-
 @onready var tick: Node = $tick
 
 var _ticking: bool = false

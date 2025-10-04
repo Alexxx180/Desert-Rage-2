@@ -1,5 +1,8 @@
 extends Node
 
+@onready var chains: Node = $chains
+@onready var spring: Node = $spring
+
 var input: Node
 
 func access(motion: Vector2) -> void:
@@ -10,6 +13,9 @@ func access(motion: Vector2) -> void:
 
 func process_physics(delta: float) -> void:
 	input.movement.behavior.move.process_physics(delta)
+
+func move() -> void:
+	pass
 
 func on_select() -> void:
 	var motion: Vector2 = Vector2(input.motion.x, 0)

@@ -6,26 +6,26 @@ func direct(hero: CharacterBody2D, pos: Vector2) -> Vector2:
 	return hero.position.direction_to(pos)
 
 func is_safe(hero: CharacterBody2D, pos: Vector2) -> bool:
-	# print("DISTANCE: ", hero.position.distance_to(enemy.position))
 	return hero.position.distance_to(pos) > DISTANCE
 
-func perform_motion(hero: CharacterBody2D, enemy: CharacterBody2D) -> void:
-	var input: Node = hero.logic.processors.ui.input
-	var direction: Vector2 = direct(hero, enemy.position)
-	# print("ORIG DIRECTION: ", direction)
-	# """
-	if hero.logic.detectors.fight.stuck.x.is_colliding():
-		direction.x = 0
-		direction.y *= 2
-	elif hero.logic.detectors.fight.stuck.y.is_colliding():
-		direction.y = 0
-		direction.x *= 2
-	# """
-		
+func lock_attack(hero: CharacterBody2D) -> void:
+	hero.view.animation.moves.set_fight_start("active")
+	hero.view.animation.moves.set_fighting("hands")
+	hero.logic.work.input.movement.mode.velocity.forget_velocity()
+
+func set_moving(hero: CharacterBody2D, direction: Vector2) -> void:
 	var motion: Vector2 = direction * (hero.logic.stats.speed / MULTIPLIER)
-	input.movement.type.velocity.set_moving(motion)
+	hero.logic.work.input.movement.type.velocity.set_moving(motion)
+	hero.logic.work.input.modes.current.access(direction.normalized())
 	hero.view.animation.move(motion)
-	# hero.make_velocity(motion)
-	input.modes.current.access(direction.normalized())
-	# if direction != Vector2.ZERO:
-	# 	input.platforming.jump.feet.deployment.set_direction(direction.normalized())
+
+func perform_motion(hero: CharacterBody2D, enemy: CharacterBody2D) -> void:
+	var direction: Vector2 = direct(hero, enemy.position)
+	
+	for i in range(0, 2):
+		if hero.logic.see.fight.stuck[i].is_colliding():
+			direction[i] = 0
+			direction[(i + 1) % 2] *= 2
+			break
+	
+	set_moving(hero, direction)

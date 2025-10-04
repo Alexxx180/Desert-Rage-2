@@ -3,7 +3,7 @@ extends Node
 var _push: Node
 
 func _get_moving(hero: CharacterBody2D) -> Variant:
-	return hero.logic.processors.ui.input.movement.type.velocity.moving
+	return hero.logic.processors.ui.input.movement.move.moving
 
 func _grab(hero: CharacterBody2D) -> void:
 	_get_moving(hero).connect(_push.apply_velocity)
