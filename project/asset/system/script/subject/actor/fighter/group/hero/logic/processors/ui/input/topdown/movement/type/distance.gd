@@ -11,13 +11,14 @@ func is_safe(hero: CharacterBody2D, pos: Vector2) -> bool:
 func lock_attack(hero: CharacterBody2D) -> void:
 	hero.view.animation.moves.set_fight_start("active")
 	hero.view.animation.moves.set_fighting("hands")
-	hero.logic.work.input.movement.mode.velocity.forget_velocity()
+	hero.logic.work.input.move.act.velocity.forget()
 
 func set_moving(hero: CharacterBody2D, direction: Vector2) -> void:
 	var motion: Vector2 = direction * (hero.logic.stats.speed / MULTIPLIER)
-	hero.logic.work.input.movement.type.velocity.set_moving(motion)
-	hero.logic.work.input.modes.current.access(direction.normalized())
-	hero.view.animation.move(motion)
+	hero.logic.work.input.movement.move.turn_around(motion)
+	# hero.logic.work.input.movement.move.velocity.set_moving(motion)
+	# hero.logic.work.input.modes.current.access(direction.normalized())
+	# hero.view.animation.move(motion)
 
 func perform_motion(hero: CharacterBody2D, enemy: CharacterBody2D) -> void:
 	var direction: Vector2 = direct(hero, enemy.position)

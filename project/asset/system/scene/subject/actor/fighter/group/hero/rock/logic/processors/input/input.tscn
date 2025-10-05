@@ -1,25 +1,21 @@
-[gd_scene load_steps=10 format=3 uid="uid://sxbplp4jth8i"]
+[gd_scene load_steps=9 format=3 uid="uid://sxbplp4jth8i"]
 
 [ext_resource type="Script" uid="uid://chyqd202d6so4" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/processors/ui/input/input.gd" id="1_3116p"]
-[ext_resource type="Script" uid="uid://ctu6vokmil1h0" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/processors/ui/input/modes/modes.gd" id="1_siqfg"]
-[ext_resource type="Script" uid="uid://dw2tfm70swerb" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/processors/ui/input/modes/topdown.gd" id="2_3116p"]
-[ext_resource type="Script" uid="uid://bohl4j55eetkb" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/processors/ui/input/modes/platformer.gd" id="3_f00jc"]
-[ext_resource type="PackedScene" uid="uid://cf3n6jqk372jc" path="res://asset/system/scene/subject/actor/fighter/group/hero/base/logic/processors/input/movement/movement.tscn" id="4_3n426"]
+[ext_resource type="Script" uid="uid://dw2tfm70swerb" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/processors/ui/input/topdown/topdown.gd" id="2_3116p"]
+[ext_resource type="Script" uid="uid://bohl4j55eetkb" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/processors/ui/input/platformer/platformer.gd" id="3_f00jc"]
+[ext_resource type="PackedScene" uid="uid://cf3n6jqk372jc" path="res://asset/system/scene/subject/actor/fighter/group/hero/base/logic/processors/input/movement/move.tscn" id="4_3n426"]
 [ext_resource type="PackedScene" uid="uid://dqxhg7f8wohsj" path="res://asset/system/scene/subject/actor/fighter/group/hero/base/logic/processors/input/platforming/platforming.tscn" id="5_2kup8"]
-[ext_resource type="Script" uid="uid://bgjjfddk8wgmk" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/processors/ui/input/gravity.gd" id="6_6gdfu"]
+[ext_resource type="Script" uid="uid://bgjjfddk8wgmk" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/processors/world/layers.gd" id="6_6gdfu"]
 [ext_resource type="Script" uid="uid://6ruw0ycrqlbq" path="res://addons/godot-behavior-tree-plugin/blackboard/blackboard.gd" id="7_hrf0v"]
 [ext_resource type="PackedScene" uid="uid://dlyjgt6r4npio" path="res://asset/system/scene/subject/actor/fighter/group/hero/rock/logic/processors/input/actions.tscn" id="9_f00jc"]
 
 [node name="input" type="Node"]
 script = ExtResource("1_3116p")
 
-[node name="modes" type="Node" parent="."]
-script = ExtResource("1_siqfg")
-
-[node name="topdown" type="Node" parent="modes"]
+[node name="topdown" type="Node" parent="."]
 script = ExtResource("2_3116p")
 
-[node name="platformer" type="Node" parent="modes"]
+[node name="platformer" type="Node" parent="."]
 script = ExtResource("3_f00jc")
 
 [node name="movement" parent="." instance=ExtResource("4_3n426")]

@@ -7,4 +7,6 @@ extends Node2D
 @onready var work: Node = $work
 @onready var link: Node = $link
 
-func _ready() -> void: stats.update_stats()
+func _ready() -> void:
+	link.controls(hero)
+	stats.update_stats()

@@ -6,3 +6,6 @@ extends Node
 
 func reset_combo() -> void:
 	board.get_value("combo").query.clear()
+
+func tick() -> void:
+	behavior.tick(self, board)

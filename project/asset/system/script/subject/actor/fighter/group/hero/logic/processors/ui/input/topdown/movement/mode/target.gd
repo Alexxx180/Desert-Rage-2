@@ -21,17 +21,20 @@ func no_target() -> bool: return _enemy == Defaults.ENTITY
 func reset_target() -> void:
 	enemy = Defaults.ENTITY
 	locked = false
-# func select_mode(state: bool) -> void: hero.movement = targeted if state else mode.control.floating
+
 func hero_lock_move() -> void: hero.move_and_slide()
 
 func hero_lock_attack() -> void:
 	locked = true # print("locked to target")
 	antistuck.lock_attack()
 
-func targeted(delta: float) -> void:
-	var pos: Vector2 = _target_pos if no_target() else _enemy.position
-	antistuck.perform_motion(hero, pos)
+func hero_choice(pos: Vector2) -> void:
 	if antistuck.is_safe(hero, pos) and not locked:
 		hero_lock_move() # print("MOVING!")
 	elif not locked:
 		hero_lock_attack()
+
+func targeted(delta: float) -> void:
+	var pos: Vector2 = _target_pos if no_target() else _enemy.position
+	antistuck.perform_motion(hero, pos)
+	hero_choice(pos)

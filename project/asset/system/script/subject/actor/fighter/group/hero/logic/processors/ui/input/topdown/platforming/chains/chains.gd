@@ -30,3 +30,6 @@ func climbing_stop(_execute: TileMapLayer) -> void:
 	if not above:
 		climbing = false
 		catch.encounter_ledge(false)
+
+func process_physics(delta: float) -> void:
+	pass

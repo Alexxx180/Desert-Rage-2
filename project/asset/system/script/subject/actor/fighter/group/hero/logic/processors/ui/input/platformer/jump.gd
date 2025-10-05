@@ -6,7 +6,7 @@ extends Node
 func _ready() -> void:
 	spring.control.slide = slide
 
-func control(delta: float) -> void:
+func process_physics(delta: float) -> void:
 	slide.gravity(delta)
 	spring.gravity(delta)
 	slide.hero.move_and_slide()
