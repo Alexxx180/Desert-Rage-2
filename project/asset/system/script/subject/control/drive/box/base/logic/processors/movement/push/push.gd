@@ -1,6 +1,6 @@
 extends Node
 
-signal forwarding(velocity: Vector2)
+# signal forwarding(velocity: Vector2)
 signal directing(direction: Vector2)
 
 @onready var duration: Timer = $duration
@@ -17,7 +17,9 @@ var weight: float:
 		_weight = value
 
 func make_velocity(next: Vector2) -> void:
-	forwarding.emit(next)
+	# forwarding.emit(next)
+	box.push(next)
+	print("PUSH BOX: ", next)
 	directing.emit(next.normalized())
 
 func apply_velocity(next: Vector2) -> void:

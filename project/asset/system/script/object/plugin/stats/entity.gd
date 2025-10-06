@@ -32,6 +32,6 @@ func accelerate(mach: int) -> void:
 	update_stats()
 
 func decide_travel(weight: int, move: Vector2) -> Vector2:
-	motion = move * speed if weight == 0 else move * force / weight
+	motion = move * speed if weight == 0 else move * force / (weight + 1) / STEP
 	# print("VELOCITY: ", move * force, " - W: ", weight)
 	return motion

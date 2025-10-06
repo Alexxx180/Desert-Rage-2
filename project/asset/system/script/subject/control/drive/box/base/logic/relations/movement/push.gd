@@ -31,5 +31,5 @@ func controls(box: CharacterBody2D, push: Node) -> void:
 	processor.release.connect(_release)
 	
 	push.directing.connect(processor.press.set_direction)
-	push.forwarding.connect(box.push)
+	# push.forwarding.connect(box.push)
 	push.weight = box.weight

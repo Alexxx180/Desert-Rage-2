@@ -45,7 +45,6 @@ func enable_collision(cargo: CharacterBody2D) -> void:
 
 func _move_certain(box: CharacterBody2D, motion: Vector2) -> void:
 	box.velocity = motion
-	box.move_and_slide()
 
 func _move_objects(motion: Vector2) -> void:
 	_move_certain(platform, motion)
