@@ -1,17 +1,20 @@
 extends Node
 
 @onready var move: Node = $move
-@onready var spring: Node = $spring
-
-var input: Node
+@onready var tools: Node = $tools
+@onready var actions: Node = $actions
 
 func access(motion: Vector2) -> void:
 	move.act.turn_around(motion)
-	input.actions.tick(self, input.board) # TEMP disable for jumping
+	actions.tick() # TEMP disable for jumping
 
 func process_physics(delta: float) -> void:
-	input.movement.behavior.move.process_physics(delta)
+	move.act.process_physics(delta)
 
+func input(event: InputEvent) -> void:
+	move.device.input(event)
+"""
 func on_select() -> void: #input.gravity.turn_walls_collision(false) # FOR WHIP
 	move.act.velocity.forget()
 	move.act.turn_around(input.motion)
+"""

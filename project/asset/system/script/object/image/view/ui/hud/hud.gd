@@ -13,7 +13,7 @@ func set_group() -> void:
 	SessionStats.save_progress()
 	#group
 	for hero in group.deploy.party.heroes:
-		hero.logic.processors.ui.hud.display = game
+		hero.logic.work.stats.hud.display = game
 	game.set_preview(group, progress)
 
 func _ready() -> void:

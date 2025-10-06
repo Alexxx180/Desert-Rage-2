@@ -6,9 +6,9 @@ extends Node
 @onready var stats: Node = $stats
 
 func controls(hero: CharacterBody2D) -> void:
-	var processor: Node = hero.logic.processors
+	var work: Node = hero.logic.work
 	hero.view.animation.moves.hero = hero
-	input.controls(hero, processor.ui.input)
-	inventory.controls(hero, processor.ui.inventory)
-	world.controls(hero, processor.world)
-	stats.controls(hero, processor.stats)
+	input.controls(hero, work.input)
+	inventory.controls(hero, work.world.inventory)
+	world.controls(hero, work.world)
+	stats.controls(hero, work.stats)

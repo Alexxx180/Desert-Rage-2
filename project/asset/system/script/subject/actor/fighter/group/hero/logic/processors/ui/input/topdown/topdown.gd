@@ -15,6 +15,6 @@ func input(event: InputEvent) -> void:
 
 func process_physics(delta: float) -> void:
 	if levels.jump.feet.stable:
-		move.process_physics(delta)
+		move.act.process_physics(delta)
 
 func on_select() -> void: pass

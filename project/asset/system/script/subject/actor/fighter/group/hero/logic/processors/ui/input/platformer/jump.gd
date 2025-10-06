@@ -9,4 +9,3 @@ func _ready() -> void:
 func process_physics(delta: float) -> void:
 	slide.gravity(delta)
 	spring.gravity(delta)
-	slide.hero.move_and_slide()

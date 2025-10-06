@@ -1,7 +1,5 @@
 extends Node
 
-signal landing()
-
 enum { ACCELERATION = 45000, GRAVITY = 700000 }
 
 var slide: ShapeCast2D
@@ -30,4 +28,3 @@ func falls(delta: float) -> void:
 func land() -> void:
 	falling = false
 	height = 0
-	landing.emit()

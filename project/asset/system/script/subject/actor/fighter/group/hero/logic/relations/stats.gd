@@ -1,15 +1,9 @@
 extends Node
 
 func controls(hero: CharacterBody2D, stats: Node) -> void:
-	hero.logic.detectors.fight.hitbox.bash.connect(stats.health.hit)
-	hero.logic.processors.stats.health.aura.entity = hero
-	hero.logic.processors.stats.aura.bar = hero.view.ap
-	
-	hero.logic.processors.stats.health.points.update_bar.connect(func(v: int):
-		hero.get_node("../../hud").game.detector.game.set_hp_value(v))
-	hero.logic.processors.stats.aura.update_bar.connect(func(v: int):
-		hero.get_node("../../hud").game.detector.game.set_ap_value(v))
+	hero.logic.see.fight.hitbox.bash.connect(stats.health.hit)
+	stats.health.aura.entity = hero
+	stats.aura.bar = hero.view.ap
 
 	stats.health.points.setup(hero.logic.stats.health)
 	stats.aura.setup(hero.logic.stats.aura)
-	

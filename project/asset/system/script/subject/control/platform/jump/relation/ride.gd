@@ -1,16 +1,23 @@
 extends Node
 
 var _ride: Node
+var _hero
 
 func _get_velocity(hero: CharacterBody2D) -> Node:
-	return hero.logic.processors.ui.input.movement.mode.velocity
+	return hero.logic.work.input.movement.mode.velocity
+
+func rides(_m):
+	print("MOVING BOX: ", _hero.logic.stats.motion)
+	_ride.apply_velocity(_hero.logic.stats.motion)
 
 func _grab(hero: CharacterBody2D) -> void:
-	_get_velocity(hero).moving.connect(_ride.apply_velocity)
+	# _get_velocity(hero).moving.connect(_ride.apply_velocity)
+	_hero = hero
+	_get_velocity(hero).moving.connect(rides)
 	hero.view.animation.moves.set_move_action("pull")
 
 func _release(hero: CharacterBody2D) -> void:
-	_get_velocity(hero).moving.disconnect(_ride.apply_velocity)
+	_get_velocity(hero).moving.disconnect(rides)
 	hero.view.animation.moves.set_move_action("go")
 	_ride.apply_velocity(Vector2.ZERO)
 

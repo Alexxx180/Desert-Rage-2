@@ -6,4 +6,4 @@ func controls(meta: Dictionary) -> void:
 	# act.book.hero = hero
 	# meta.tools.plate = press
 	meta.tools.stomp = { "plate": press.stomp, "box": press.throw }
-	meta.input.board.set_value("kick", { "pressed": false, "toggled": false })
+	meta.actions.board.set_value("kick", { "pressed": false, "toggled": false })

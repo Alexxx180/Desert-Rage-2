@@ -1,9 +1,9 @@
 extends Node
 
 func controls(hero: CharacterBody2D, act: Node, trigger: Node) -> void:
-	var detector: Node2D = hero.logic.detectors.world.skills.act
+	var see: Node2D = hero.logic.see.world.skills.act
 
-	detector.body_entered.connect(act.encounter)
-	detector.body_exited.connect(act.diverge)
+	see.body_entered.connect(act.encounter)
+	see.body_exited.connect(act.diverge)
 	act.activate.connect(trigger.activate)
 	act.hero = hero

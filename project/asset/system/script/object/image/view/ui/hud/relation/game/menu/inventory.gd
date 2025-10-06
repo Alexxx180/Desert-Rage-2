@@ -8,7 +8,7 @@ func controls(hud: CanvasLayer, group: Node2D, inventory: VSplitContainer) -> vo
 	# processor.markers = inventory.get_node("ability/controls/markers")
 	# """
 	for hero in group.deploy.party.heroes:
-		var ui: Node = hero.logic.processors.ui.inventory.logic
+		var ui: Node = hero.logic.work.world.inventory.logic
 		ui.items.inventory = hud.detector.game.inventory.items
 		ui.update_inventory_storage()
 		for i in range(0, len(ui.items.inventory.items)):

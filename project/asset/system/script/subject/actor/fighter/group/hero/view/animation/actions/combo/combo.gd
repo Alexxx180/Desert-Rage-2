@@ -29,4 +29,7 @@ func start_fight(stand: String) -> void:
 func end_fight() -> void:
 	moves.set_aggressive("passive")
 	moves.set_tools("internal")
-	moves.hero.logic.processors.ui.input.movement.mode.end_fight()
+	#hero.view.animation.moves.set_fight_start("active")
+	#hero.view.animation.moves.set_fighting("hands")
+	#hero.logic.work.input.movement.mode.velocity.forget_velocity()
+	#moves.hero.logic.work.input.topdown.move.act.end_fight()

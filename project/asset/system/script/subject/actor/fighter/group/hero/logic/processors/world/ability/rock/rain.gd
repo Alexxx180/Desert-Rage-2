@@ -4,7 +4,7 @@ signal activate(pos: Vector2, dir: Vector2)
 
 func _set_hero(value: CharacterBody2D) -> void:
 	super._set_hero(value)
-	_act = _hero.logic.detectors.world.ability.rain.puddle
+	_act = _hero.logic.see.world.ability.rain.puddle
 
 func animation() -> void:
 	_hero.view.animation.moves.set_fight_start("active")

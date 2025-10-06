@@ -7,7 +7,7 @@ func _ready() -> void:
 
 func _set_hero(value: CharacterBody2D) -> void:
 	super._set_hero(value)
-	_act = _hero.logic.detectors.world.ability.spark.puddle
+	_act = _hero.logic.see.world.ability.spark.puddle
 
 func far_map(_execute: TileMapLayer) -> void:
 	# _last_position = Vector2.ZERO

@@ -2,7 +2,7 @@ extends Resource
 
 class_name EntityStats
 
-const STEP: int = 1000
+const STEP: int = 20#00
 
 @export_group("Survival")
 @export_range(1, 500, 1, "HP") var health: float = 100
@@ -21,6 +21,7 @@ const STEP: int = 1000
 var _mach: int = 1
 var speed: float = 0
 var force: float = 0
+var motion: Vector2
 
 func update_stats():
 	speed = _mach * STEP * run
@@ -30,5 +31,7 @@ func accelerate(mach: int) -> void:
 	_mach = mach
 	update_stats()
 
-func decide_travel(weight: int, motion: Vector2) -> Vector2:
-	return motion * speed if weight == 0 else motion * force / weight
+func decide_travel(weight: int, move: Vector2) -> Vector2:
+	motion = move * speed if weight == 0 else move * force / weight
+	# print("VELOCITY: ", move * force, " - W: ", weight)
+	return motion

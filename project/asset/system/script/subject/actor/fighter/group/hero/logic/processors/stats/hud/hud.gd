@@ -2,13 +2,16 @@ extends Node
 
 @onready var slots: Node = $slots
 
+var _display: CanvasLayer
 var display: CanvasLayer:
-	set(value): slots.markers = display.detector.game.markers
+	set(value):
+		_display = value
+		slots.markers = value.detector.game.markers
 var status: HBoxContainer:
-	get: return display.detector.game.status
+	get: return _display.detector.game.status
 
 func dialog(text: Array[String]) -> void:
-	display.detector.game.chat.add_blocks(text)
+	_display.detector.game.chat.add_blocks(text)
 
 func notify(text: String):
 	status.enemy[0].notify(text)

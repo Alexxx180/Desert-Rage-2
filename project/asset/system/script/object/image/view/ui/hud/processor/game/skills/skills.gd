@@ -11,7 +11,7 @@ var hero: CharacterBody2D
 
 func set_fight(next: CharacterBody2D) -> void:
 	hero = next
-	fight = hero.logic.processors.world.fight
+	fight = hero.logic.work.world.fight
 
 func reveal_aims() -> void:
 	fight.reveal_aims()

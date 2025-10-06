@@ -5,7 +5,7 @@ extends Node
 
 func _ready() -> void:
 	device.keyboard.act = act
-	device.mouse.device = device
+	device.mouse.act = act
 
 var hero: CharacterBody2D:
 	set(value):

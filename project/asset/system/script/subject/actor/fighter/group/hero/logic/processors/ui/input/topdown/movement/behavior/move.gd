@@ -7,9 +7,11 @@ signal moving(velocity: Vector2)
 @onready var teleport: Node = $teleport
 
 func process_physics(delta: float) -> void:
-	run.process_physics(delta)
+	pass
+	# run.process_physics(delta)
 
 func turn_around(target_motion: Vector2) -> void:
+	print("MOTION: ", target_motion)
 	moving.emit(target_motion)
 	run.set_direction(target_motion)
-	velocity.make_velocity(target_motion)
+	velocity.travel(target_motion)

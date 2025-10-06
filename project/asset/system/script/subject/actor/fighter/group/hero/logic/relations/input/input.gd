@@ -5,33 +5,11 @@ extends Node
 @onready var actions: Node = $actions
 
 func controls(hero: CharacterBody2D, input: Node) -> void:
-	var detectors: Node2D = hero.logic.detectors
-	var surface: Node2D = detectors.platforming.platforms.surface
-	var space: Node = input.platforming.jump.ledges.space
-	var deployment: DeploymentRaycast = surface.deployment
-	print ("DEPLOYMENT GET")
-	var move: Node = input.movement.behavior.move
-	
+	# hero.action_move.connect(hero.view.animation.action_move)
+
 	actions.controls(hero, input)
-
-	move.moving.connect(hero.view.animation.move)
-	move.moving.connect(hero.view.ap.set_direction)
-#	hero.action_move.connect(hero.view.animation.action_move)
-
-	movement.controls(hero, input.movement)
-	platforming.controls(hero, input.platforming)
-
-	# directing
-	# move.moving.connect(surface.overleap.gap.set_direction)
-	# move.moving.connect(surface.overleap.upland.set_direction)
-
-	move.moving.connect(surface.deployment.walls.set_direction)
-	move.moving.connect(surface.deployment.ground.set_direction)
-	move.moving.connect(space.set_direction)
-	move.moving.connect(deployment.set_direction)
-
-	move.moving.connect(detectors.set_direction)
-	move.moving.connect(detectors.platforming.floors.set_direction)
+	movement.controls(hero, input.topdown.move)
+	platforming.controls(hero, input.topdown.levels)
 	
 	"""
 	input.actions.check.action.connect(func():

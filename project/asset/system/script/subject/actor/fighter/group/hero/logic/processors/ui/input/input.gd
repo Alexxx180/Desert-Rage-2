@@ -5,16 +5,13 @@ extends Node
 
 var is_platformer: bool = false
 
-func _ready() -> void:
-	topdown.input = self
-	platformer.input = self
-
 func _input(event: InputEvent) -> void:
 	if is_platformer:
-		platformer.access(event)
+		platformer.input(event)
 	else:
-		topdown.access(event)
+		topdown.input(event)
 
 func _physics_process(delta: float) -> void:
 	topdown.process_physics(delta)
 	platformer.process_physics(delta)
+	topdown.move.act.run.state.hero.move_and_slide()

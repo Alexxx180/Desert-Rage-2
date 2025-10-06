@@ -18,7 +18,7 @@ size = Vector2(8, 8)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_urn3e"]
 size = Vector2(17, 17)
 
-[node name="platforming" type="Node2D"]
+[node name="levels" type="Node2D"]
 script = ExtResource("1_wrdvi")
 
 [node name="platforms" parent="." instance=ExtResource("3_4faw7")]
@@ -342,7 +342,6 @@ target_position = Vector2(-320, -320)
 collision_mask = 2
 
 [node name="spring" type="Node2D" parent="."]
-visible = false
 script = ExtResource("10_n6gc1")
 
 [node name="ground" type="Area2D" parent="spring"]
@@ -364,6 +363,12 @@ shape = ExtResource("4_5ci2x")
 target_position = Vector2(0, 0)
 max_results = 1
 collision_mask = 268435456
+
+[node name="spring" type="ShapeCast2D" parent="spring"]
+shape = ExtResource("11_mccx8")
+target_position = Vector2(0, 0)
+max_results = 1
+collision_mask = 134217728
 
 [connection signal="area_entered" from="stand" to="stand" method="_enter_stand"]
 [connection signal="area_exited" from="stand" to="stand" method="_exit_stand"]

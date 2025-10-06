@@ -36,13 +36,13 @@ func get_leader() -> CharacterBody2D: return heroes[main]
 func get_follower() -> CharacterBody2D: return heroes[next]
 
 func set_hero(hero: int, visible: bool) -> void:
-	Processors.turn(heroes[hero].logic.processors, visible)
+	Processors.turn(heroes[hero].logic.work, visible)
 
 func show_hero(hero: int, visible: bool) -> void:
 	heroes[hero].visible = visible
 
 func forget_velocity() -> void:
-	leader.logic.processors.ui.input.movement.type.velocity.forget_velocity()
+	leader.logic.work.input.topdown.move.act.velocity.forget()
 
 func sync_pos() -> void:
 	follower.position = leader.position
@@ -51,7 +51,7 @@ func locate(position: Vector2) -> void:
 	for hero in heroes: hero.position = position
 
 func get_feet(hero: CharacterBody2D) -> int:
-	return hero.logic.processors.ui.input.platforming.jump.feet.floors.F
+	return hero.logic.work.input.topdown.levels.jump.feet.floors.F
 
 func same_ground() -> bool:
 	return get_feet(leader) == get_feet(follower)

@@ -12,6 +12,8 @@ func build_caption(act: int) -> String:
 	return actions.action if act == 0 else str(actions.action, "_", act)
 
 func listen_events(acts: ActionButtonGroup) -> void:
+	switch.reset_time(true)
+	switch.reset_power()
 	for act in acts.group:
 		var key: String = build_caption(act.id)
 		match act.state:
@@ -20,14 +22,14 @@ func listen_events(acts: ActionButtonGroup) -> void:
 			ActionButton.STATE.PRESSED: switch.press(not fixed and act.power, key)
 
 func listen_groups() -> void:
+	switch.reset_time(false)
 	var i: int = len(actions.complex)
-	while switch.timed and (i > 0):
+	while (not switch.timed) and (i > 0):
 		i -= 1
 		listen_events(actions.complex[i])
 	switch.calculate_power(fixed)
 
 func listen() -> bool:
-	switch.reset()
 	listen_groups()
-	switch.give_feedback()
+	switch.give_feedback(fixed)
 	return switch.timed

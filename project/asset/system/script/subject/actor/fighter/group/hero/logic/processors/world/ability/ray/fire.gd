@@ -9,7 +9,7 @@ const DAMAGE: int = 2
 
 func _set_hero(value: CharacterBody2D) -> void:
 	super._set_hero(value)
-	_act = _hero.logic.detectors.world.ability.fire.ice
+	_act = _hero.logic.see.world.ability.fire.ice
 
 func far_map(_execute: TileMapLayer) -> void:
 	_last_position = Vector2.ZERO

@@ -15,7 +15,7 @@ func _ready() -> void:
 	deploy.init(self, party, deployed)
 	if is_overworld: camera.set_overworld()
 	for hero in party:
-		hero.logic.processors.ui.input.board.set_value("group", self)
+		hero.logic.work.input.topdown.actions.board.set_value("group", self)
 
 func is_hud_opened() -> bool:
 	var result: bool = true

@@ -20,3 +20,10 @@ func controls(ui: CanvasLayer, game: Control) -> void:
 	inventory.controls(ui, group, game.get_node("menu/stats/inventory"))
 	ability.controls(ui, group, game) #game.get_node("menu/stats/inventory/ability")
 	hud.controls(ui, group, game)
+
+	for hero in group.deploy.party.heroes:
+		var stats: Node = hero.logic.work.stats
+		stats.health.points.update_bar.connect(func(v: int): game.set_hp_value(hero.name, v))
+		stats.aura.update_bar.connect(func(v: int): game.set_ap_value(hero.name, v))
+	
+	

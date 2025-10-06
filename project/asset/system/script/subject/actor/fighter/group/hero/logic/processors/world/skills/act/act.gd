@@ -16,7 +16,7 @@ var _hero: CharacterBody2D
 var hero: CharacterBody2D:
 	set(value):
 		_hero = value
-		_act = _hero.logic.detectors.world.skills.act
+		_act = _hero.logic.see.world.skills.act
 
 func encounter(_execute: TileMapLayer) -> void:
 	_last_position = _hero.position + _act.position

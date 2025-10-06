@@ -1,7 +1,7 @@
 extends Node
 
-@export var left: Node
-@export var right: Node
+@onready var left: Node = $left
+@onready var right: Node = $right
 
 func get_axis() -> float:
 	left.listen()

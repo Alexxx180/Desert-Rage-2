@@ -3,7 +3,8 @@ extends Node
 func _set_stamina(hero: CharacterBody2D, ui: HBoxContainer) -> void:
 	var stamina: Control = ui.get_node("health/hp/margin/health/stamina")
 	var bar: ProgressBar = stamina.get_node("amount")
-	var run: Node = hero.logic.processors.ui.input.movement.behavior.run
+	var run: Node = hero.logic.work.input.topdown.move.act.run.state
+	run.hero = hero
 	run.new_mach.connect(func(next: int):
 		bar.value = next; if run.is_delayed(next): stamina.show())
 	run.stop_mach.connect(func(): stamina.hide())
@@ -17,7 +18,7 @@ func _set_health(stats: Node, ui: HBoxContainer) -> void:
 	stats.health.points.update_bar.connect(func(v): amount.value = v)
 
 func _set_stats(hero: CharacterBody2D, ui: HBoxContainer) -> void:
-	var stats: Node = hero.logic.processors.stats
+	var stats: Node = hero.logic.work.stats
 	_set_health(stats, ui)
 	_set_ability(stats, ui)
 

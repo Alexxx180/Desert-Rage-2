@@ -7,7 +7,7 @@ var is_near: bool:
 var pillar: Node
 var hero: CharacterBody2D:
 	set(value):
-		pillar = value.logic.processors.ui.input.platforming.pillar
+		pillar = value.logic.work.input.topdown.levels.pillar
 
 func take_effect() -> void:
 	pillar.dash_on_whip()

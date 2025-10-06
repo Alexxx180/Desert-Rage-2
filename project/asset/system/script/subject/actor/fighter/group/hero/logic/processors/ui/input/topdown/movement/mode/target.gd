@@ -22,7 +22,9 @@ func reset_target() -> void:
 	enemy = Defaults.ENTITY
 	locked = false
 
-func hero_lock_move() -> void: hero.move_and_slide()
+func hero_lock_move() -> void:
+	pass
+	# hero.move_and_slide()
 
 func hero_lock_attack() -> void:
 	locked = true # print("locked to target")
@@ -34,7 +36,7 @@ func hero_choice(pos: Vector2) -> void:
 	elif not locked:
 		hero_lock_attack()
 
-func targeted(delta: float) -> void:
+func targeted(_delta: float) -> void:
 	var pos: Vector2 = _target_pos if no_target() else _enemy.position
 	antistuck.perform_motion(hero, pos)
 	hero_choice(pos)

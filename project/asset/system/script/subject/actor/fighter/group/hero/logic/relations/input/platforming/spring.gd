@@ -1,16 +1,20 @@
 extends Node
 
-func controls(hero: CharacterBody2D, spring: Node) -> void:
-	var detector: Node2D = hero.logic.detectors.platforming.spring
-	var control: Node = hero.logic.processors.ui.input.movement.mode.control
+func controls(hero: CharacterBody2D, jump: Node) -> void:
+	var see: Node2D = hero.logic.see.levels.spring
+	var control: Node = jump.spring.control
+	# var jump: Node = hero.logic.work.input.platformer.tools.jump
+	# var control: Node = hero.logic.work.input.platformer.tools.spring.control
 
-	spring.hero = hero
 	
-	detector.ground.body_entered.connect(spring.spring_enter)
-	detector.ground.body_exited.connect(spring.spring_exit)
+	# see.ground.body_entered.connect(spring.spring_enter)
+	# see.ground.body_exited.connect(spring.spring_exit)
 
-	control.platform = detector.platform
-	control.slide = detector.slide
-	control.landing.connect(spring.successfully_landed)
+	jump.slide.slide = see.slide
+	control.hero = hero
+	control.platform = see.platform
+	control.slide = jump.slide
+	jump.spring.spring = see.spring
+	# jump.spring.control.landing.connect(jump.spring.successfully_landed)
 
 	# detector.platform.body_exited.connect(spring.successfully_landed)

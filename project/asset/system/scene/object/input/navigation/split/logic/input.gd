@@ -29,5 +29,5 @@ func set_order() -> void:
 
 func _input(event: InputEvent) -> void:
 	for i in mask:
-		if actions[i].listen(event):
+		if actions[i].listen(): # event
 			break

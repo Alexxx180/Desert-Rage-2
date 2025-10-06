@@ -9,8 +9,10 @@ var _power_count: Vector2
 var timed: bool = false
 var power: float = 0.0
 
-func reset() -> void:
-	timed = true
+func reset_time(state: bool) -> void:
+	timed = state
+
+func reset_power() -> void:
 	_power_count = Vector2.ZERO
 
 func add_power(key: String) -> void:

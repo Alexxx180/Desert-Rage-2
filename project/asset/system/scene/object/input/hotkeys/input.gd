@@ -1,7 +1,7 @@
 extends Node
 
-@export var x: Node
-@export var y: Node
+@onready var x: Node = $x
+@onready var y: Node = $y
 
-func get_axis() -> Vector2:
-	return Vector2(x.get_axis(), y.listen())
+func get_vector() -> Vector2:
+	return Vector2(x.get_axis(), y.get_axis())

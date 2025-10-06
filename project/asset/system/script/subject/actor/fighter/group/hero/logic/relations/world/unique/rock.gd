@@ -22,6 +22,6 @@ func distract(execute: TileMapLayer) -> void:
 
 func controls(hero: CharacterBody2D) -> void:
 	_hero = hero
-	_detector = hero.logic.detectors.world.unique
+	_detector = hero.logic.see.world.unique
 	_detector.body_entered.connect(determine_static)
 	_detector.body_exited.connect(distract)

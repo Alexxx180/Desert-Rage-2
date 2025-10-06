@@ -6,12 +6,15 @@ extends Node
 @onready var pillar: Node = $pillar
 @onready var spring: Node = $spring
 
-func controls(hero: CharacterBody2D, platforming: Node) -> void:
-	var platforms: Node2D = hero.logic.detectors.platforming.platforms
+func controls(hero: CharacterBody2D, levels: Node) -> void:
+	var platforms: Node2D = hero.logic.see.levels.platforms
 
-	hero.logic.detectors.platforming.stand.hero = hero
-	jump.controls(hero, platforming.jump)
-	input.controls(hero, platforming, platforms.surface.overleap)
-	chains.controls(hero, platforming.chains)
-	pillar.controls(hero, platforming.pillar)
-	spring.controls(hero, platforming.spring)
+	hero.logic.see.levels.stand.hero = hero
+	jump.controls(hero, levels.jump)
+	input.controls(hero, levels, platforms.surface.overleap)
+	pillar.controls(hero, levels.pillar)
+	
+	var tools: Node = hero.logic.work.input.platformer.tools
+	
+	chains.controls(hero, tools.chains)
+	spring.controls(hero, tools.jump)

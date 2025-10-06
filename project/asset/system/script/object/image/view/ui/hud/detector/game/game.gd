@@ -12,17 +12,23 @@ extends Control
 @onready var stats: PanelContainer = $menu/stats/topic
 @onready var priorities: PanelContainer = $menu/priorities
 
-@onready var hp: Array[Button] = _get_point_bars("health")
-@onready var ap: Array[Button] = _get_point_bars("ability")
+@onready var hp: Dictionary = _get_points("health")
+@onready var ap: Dictionary = _get_points("ability")
 
 func get_enemy_cards() -> Array:
 	return [status.get_node("enemy_1"), ability.get_node("scroll/margin/stack/menu/fast-access/enemy_1")]
 
-func _get_point_bars(caption: String) -> Array[Button]:
+func _get_points(caption: String) -> Dictionary:
+	return {
+		"ray": _get_point_bars("ray", caption),
+		"rock": _get_point_bars("rock", caption),
+	}
+
+func _get_point_bars(hero: String, caption: String) -> Array[Button]:
 	return [
-		get_node("menu/stats/inventory/topic/scroll/margin/stack/flow/controls/summary/status/ray/" + caption),
-		get_node("menu/priorities/scroll/margin/stack/summary/status/ray/" + caption)
+		get_node("menu/stats/inventory/topic/scroll/margin/stack/flow/controls/summary/status/" + hero + "/" + caption),
+		get_node("menu/priorities/scroll/margin/stack/summary/status/" + hero + "/" + caption)
 	]
 
-func set_hp_value(value: int) -> void: for bar in hp: bar.set_value(value)
-func set_ap_value(value: int) -> void: for bar in ap: bar.set_value(value)
+func set_hp_value(hero: String, value: int) -> void: for bar in hp[hero]: bar.set_value(value)
+func set_ap_value(hero: String, value: int) -> void: for bar in ap[hero]: bar.set_value(value)

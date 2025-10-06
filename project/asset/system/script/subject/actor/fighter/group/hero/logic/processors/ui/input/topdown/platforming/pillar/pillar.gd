@@ -7,10 +7,10 @@ const BORDERS: float = 17.0
 var hero: CharacterBody2D:
 	set(value):
 		dash.hero = value
-		dash.ledge = dash.hero.logic.see.platforming.pillar
+		dash.ledge = dash.hero.logic.see.levels.pillar
 
 var chains: Node2D:
-	get: return dash.hero.logic.see.platforming.chains.whip
+	get: return dash.hero.logic.see.levels.chains.whip
 var dashed: bool = false
 
 func whip_dashed() -> void: _turn_collision(true)

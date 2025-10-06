@@ -2,7 +2,6 @@ extends Node
 
 enum { ID = 4, HEIGHT = 5, CELL = 64, TRY = 75000 } # 0
 
-@onready var deactivation: Timer = $deactivation
 @onready var ground: Node = $ground
 @onready var control: Node = $control
 

@@ -1,9 +1,9 @@
 extends Node2D
 
 @onready var world: Node2D = $world
-@onready var platforming: Node2D = $platforming
+@onready var levels: Node2D = $levels
 @onready var fight: Node2D = $fight
 
 func set_direction(direction: Vector2i) -> void:
-	for area in [world, platforming, fight]:
+	for area in [world, levels, fight]:
 		area.set_direction(direction)
