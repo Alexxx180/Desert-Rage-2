@@ -5,8 +5,8 @@ func controls(seat: Node) -> void:
 	seat.place.leaving.connect(_on_leave)
 
 func _height(hero: CharacterBody2D) -> Node:
-	var input: Node = hero.logic.processors.ui.input
-	return input.platforming.jump.feet.floors
+	var input: Node = hero.logic.work.input
+	return input.topdown.levels.jump.feet.floors
 
 func _on_stand(seat: Node, hero: CharacterBody2D) -> void:
 	print("connected climb")

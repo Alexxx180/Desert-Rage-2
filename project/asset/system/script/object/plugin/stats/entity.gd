@@ -20,8 +20,7 @@ const STEP: int = 20#00
 
 var _mach: int = 1
 var speed: float = 0
-var force: float = 0
-var motion: Vector2
+var force: float = 0# var motion: Vector2
 
 func update_stats():
 	speed = _mach * STEP * run
@@ -32,6 +31,5 @@ func accelerate(mach: int) -> void:
 	update_stats()
 
 func decide_travel(weight: int, move: Vector2) -> Vector2:
-	motion = move * speed if weight == 0 else move * force / (weight + 1) / STEP
-	# print("VELOCITY: ", move * force, " - W: ", weight)
-	return motion
+	# print("VELOCITY: ", move * force, " - W: ", weight) # motion =
+	return move * speed if weight == 0 else move * force / (weight + 1)#  / STEP #return motion

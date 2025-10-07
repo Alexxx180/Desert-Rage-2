@@ -27,8 +27,8 @@ func controls(box: CharacterBody2D, push: Node) -> void:
 	_push = push
 	_push.box = box
 	var processor: Node = box.logic.processors
-	processor.grab.connect(_grab)
-	processor.release.connect(_release)
+	# processor.grab.connect(_grab)
+# 	processor.release.connect(_release)
 	
 	push.directing.connect(processor.press.set_direction)
 	# push.forwarding.connect(box.push)

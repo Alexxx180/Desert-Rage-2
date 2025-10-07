@@ -38,7 +38,7 @@ func update_image() -> void:
  
 func enable_sync(_seat: Node, hero: CharacterBody2D) -> void:
 	visible = true
-	hero.logic.processors.ui.input.movement.behavior.move.moving.connect(animation.move)
+	hero.logic.work.input.topdown.move.act.moving.connect(animation.move)
 	hero.view.sync_view.connect(sync_image)
 	hero.view.update_image()
 	#TODO: Comment: actual only for builds without character separation
@@ -47,4 +47,4 @@ func enable_sync(_seat: Node, hero: CharacterBody2D) -> void:
 func disable_sync(_seat: Node, hero: CharacterBody2D) -> void:
 	visible = false
 	hero.view.sync_view.disconnect(sync_image)
-	hero.logic.processors.ui.input.movement.behavior.move.moving.disconnect(animation.move)
+	hero.logic.work.input.topdown.move.act.moving.disconnect(animation.move)

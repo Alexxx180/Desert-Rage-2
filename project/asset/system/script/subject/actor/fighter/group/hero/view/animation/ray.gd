@@ -2,12 +2,12 @@ extends AdvancedCharacterAnimation
 
 @onready var moves: Node = $moves
 @onready var effect: Node = $effect
-@onready var syncer: Node = $syncer
+# @onready var syncer: Node = $syncer
 
 func _ready() -> void:
 	direct()
 	effect.moves = moves
-	syncer.moves = moves
+	# syncer.moves = moves
 
 func unique_animations() -> Array[String]:
 	return ["whip_dash", "fire", "whip", "hang_whip_dash"]

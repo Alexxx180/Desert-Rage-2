@@ -19,13 +19,13 @@ var weight: float:
 func make_velocity(next: Vector2) -> void:
 	# forwarding.emit(next)
 	box.push(next)
-	print("PUSH BOX: ", next)
+	# print("PUSH BOX: ", next)
 	directing.emit(next.normalized())
 
 func apply_velocity(next: Vector2) -> void:
 	if flying: return
-	if next != Vector2.ZERO:
-		last_velocity = next
+	# if next != Vector2.ZERO:
+	last_velocity = next
 	make_velocity(next)
 
 func throw_velocity(power: int) -> void:
