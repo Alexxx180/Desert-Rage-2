@@ -7,7 +7,7 @@ const FILE: String = "user://settings.json"
 
 var bus_index: int
 
-# TODOT
+# Sound Slider Focus
 
 func _ready() -> void:
 	super._ready()

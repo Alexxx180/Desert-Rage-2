@@ -6,35 +6,29 @@ signal set_movement(is_floor: bool)
 
 @onready var floors: Node = $floors
 
-var _stable: bool = true
-var stable: bool:
-	get: return _stable
+var stable: bool = true
 var unstable: bool:
-	get: return not _stable
+	get: return not stable
+var _deploy: DeploymentRaycast
 
 func set_stable(is_floor: bool) -> void:
-	if is_floor != _stable:
+	if is_floor != stable:
 		set_movement.emit(is_floor)
-		_stable = is_floor
+		stable = is_floor
 
-var _deployment: DeploymentRaycast
-var deployment: DeploymentRaycast:
-	get: return _deployment
-	set(value):
-		print("SET DEPLOYMENT")
-		_deployment = value
-		_deployment.walls.floors = floors
+func set_deploy(next) -> void:
+	_deploy = next #; print("SET deploy")
+	_deploy.walls.floors = floors
 
 func get_ground() -> Vector2:
-	var ground: Vector2 = deployment.walls.target
-	return floors.hero.position + ground
+	return floors.hero.position + _deploy.walls.target
 
 func same_level(pos: Vector2 = get_ground(), height: int = 0) -> bool:
 	return floors.same(pos, height)
 
 func deploy() -> void:
-	if deployment.can_deploy():
-		jump(deployment.walls.target_ground, true, dash)
+	if _deploy.can_deploy():
+		jump(_deploy.walls.target_ground, true, dash)
 
 func jump(next: Vector2, to_floor: bool = false, move = teleport) -> void:
 	move.emit(next)

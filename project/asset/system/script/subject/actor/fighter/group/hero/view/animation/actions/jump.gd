@@ -3,21 +3,19 @@ extends Node
 var moves: Node
 
 func _switch_monitoring(sequence_ended: bool) -> void:
-	var platforms: Node2D = moves.hero.logic.see.levels.platforms
-	platforms.surface.overleap.turn_monitoring(sequence_ended)
+	moves.hero.to.platform.surface.border.turn_monitoring(sequence_ended)
 
-func _set_input(work: Node, started_sequence: bool) -> void:
-	var input: Node = work.input
-	var feet: Node = input.topdown.levels.jump.feet
+func _set_input(topdown: Node, started_sequence: bool) -> void:
+	var jump: Node = topdown.levels.jump
 	
-	input.topdown.levels.jump.jumped = started_sequence
-	work.world.layers.during_jump(started_sequence, feet.stable)
+	jump.jumped = started_sequence
+	moves.hero.to.layers.during_jump(started_sequence, jump.feet.stable)
 
-	if !started_sequence: input.topdown.move.act.velocity.forget()
-	work.freeze_input[started_sequence].call()
+	if !started_sequence: topdown.move.act.velocity.forget()
+	# work.freeze_input[started_sequence].call() IMPORTANT
 
 func sequence(started: bool) -> void:
-	_set_input(moves.hero.logic.work, started)
+	_set_input(moves.hero.to.topdown, started)
 	_switch_monitoring(!started)
 #	else: for state in [true, false]: hero.set_hero_collision(true)
 

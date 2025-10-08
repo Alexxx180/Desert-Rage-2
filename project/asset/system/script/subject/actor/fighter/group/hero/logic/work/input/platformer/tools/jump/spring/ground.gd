@@ -1,26 +1,25 @@
 extends Node
 
-var _last_spring: Dictionary = Defaults.DICT
-var execute: TileMapLayer
-var ground: float = 0.0
-
-var is_pressed: bool:
-	get: return _last_spring != Defaults.DICT
+var is_pressed: bool = false
+var execute: TileDecorator
+var world_y: float = 0.0
 
 @onready var deactivation: Timer = $deactivation
 
-func switch_spring_tile() -> void:
-	Tile.switch(_last_spring, Vector2i(1, 0), execute)
+func switch_spring_tile() -> void: execute.switch(Vector2i(1, 0))
+
+func press(condition: bool) -> bool:
+	if condition: is_pressed = !is_pressed
+	return condition
 
 func activate_spring(hero_pos: Vector2) -> void:
-	if not is_pressed:
-		_last_spring = Tile.from_pos(execute, hero_pos)
+	if press(not is_pressed):
+		execute.from_pos(hero_pos)
 		switch_spring_tile()
 		deactivation.start()
 
 func deactivate_spring() -> void:
-	if is_pressed:
+	if press(is_pressed):
 		switch_spring_tile()
-		_last_spring = Defaults.DICT
 
-func save(hero_y: float) -> void: ground = hero_y
+func save(hero_y: float) -> void: world_y = hero_y

@@ -6,6 +6,7 @@ extends Node2D
 @onready var xp: Node = $xp
 @onready var ray: CharacterBody2D = $ray
 @onready var rock: CharacterBody2D = $rock
+@onready var group: Node2D = get_parent()
 
 var navigation: Array
 var deploy: HeroDeploy = HeroDeploy.new()
@@ -15,7 +16,7 @@ func _ready() -> void:
 	deploy.init(self, party, deployed)
 	if is_overworld: camera.set_overworld()
 	for hero in party:
-		hero.logic.work.input.topdown.actions.board.set_value("group", self)
+		hero.to.topdown.actions.board.set_value("group", self)
 
 func is_hud_opened() -> bool:
 	var result: bool = true

@@ -8,4 +8,4 @@ func _ready() -> void:
 
 func process_physics(delta: float) -> void:
 	slide.gravity(delta)
-#	spring.gravity(delta)
+	spring.gravity(delta)

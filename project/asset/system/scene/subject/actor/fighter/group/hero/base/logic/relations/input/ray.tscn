@@ -1,36 +1,52 @@
-[gd_scene load_steps=10 format=3 uid="uid://bi2swxyykik1e"]
+[gd_scene load_steps=14 format=3 uid="uid://bi2swxyykik1e"]
 
 [ext_resource type="Script" uid="uid://kd6ac1yiald1" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/link/input/input.gd" id="1_tfsur"]
-[ext_resource type="PackedScene" uid="uid://cmam0hmoa0iuk" path="res://asset/system/scene/subject/actor/fighter/group/hero/base/logic/relations/input/movement.tscn" id="2_fq6n3"]
-[ext_resource type="PackedScene" uid="uid://cs7uf81q8nj27" path="res://asset/system/scene/subject/actor/fighter/group/hero/base/logic/relations/input/platforming/platforming.tscn" id="3_waeaa"]
-[ext_resource type="Script" uid="uid://6mhqlubh53v7" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/link/input/actions/actions.gd" id="4_uvfe0"]
-[ext_resource type="Script" uid="uid://b1c8cnafyj0kl" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/link/input/actions/punch.gd" id="5_1nghp"]
-[ext_resource type="Script" uid="uid://d3728uix1acqw" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/link/input/actions/kick.gd" id="6_8rtjm"]
-[ext_resource type="Script" uid="uid://dpfj3e47c24ej" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/link/input/actions/ray/fire.gd" id="7_jro2w"]
-[ext_resource type="Script" uid="uid://da3kbyn04h1r3" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/link/input/actions/ray/whip.gd" id="8_fvi57"]
-[ext_resource type="Script" uid="uid://btlc12jnp7wvu" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/link/input/actions/combo.gd" id="9_gr2fy"]
+[ext_resource type="Script" uid="uid://bdsy7nm40bhka" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/link/input/topdown/topdown.gd" id="2_7m1s6"]
+[ext_resource type="PackedScene" uid="uid://cmam0hmoa0iuk" path="res://asset/system/scene/subject/actor/fighter/group/hero/base/logic/relations/input/move.tscn" id="2_fq6n3"]
+[ext_resource type="PackedScene" uid="uid://cs7uf81q8nj27" path="res://asset/system/scene/subject/actor/fighter/group/hero/base/logic/relations/input/levels/levels.tscn" id="3_waeaa"]
+[ext_resource type="Script" uid="uid://6mhqlubh53v7" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/link/input/topdown/actions/actions.gd" id="4_uvfe0"]
+[ext_resource type="Script" uid="uid://b1c8cnafyj0kl" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/link/input/topdown/actions/punch.gd" id="5_1nghp"]
+[ext_resource type="Script" uid="uid://d3728uix1acqw" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/link/input/topdown/actions/kick.gd" id="6_8rtjm"]
+[ext_resource type="Script" uid="uid://dpfj3e47c24ej" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/link/input/topdown/actions/ray/fire.gd" id="7_jro2w"]
+[ext_resource type="Script" uid="uid://da3kbyn04h1r3" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/link/input/topdown/actions/ray/whip.gd" id="8_fvi57"]
+[ext_resource type="Script" uid="uid://btlc12jnp7wvu" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/link/input/topdown/actions/combo.gd" id="9_gr2fy"]
+[ext_resource type="Script" uid="uid://cp6wu6vdlt36x" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/link/input/platformer/platformer.gd" id="10_oc7e7"]
+[ext_resource type="Script" uid="uid://tth1omleck05" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/link/input/platformer/chains.gd" id="10_or0i0"]
+[ext_resource type="Script" uid="uid://b4aj5cqxacy0j" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/link/input/platformer/spring.gd" id="11_oc7e7"]
 
 [node name="input" type="Node"]
 script = ExtResource("1_tfsur")
 
-[node name="platforming" parent="." instance=ExtResource("3_waeaa")]
+[node name="topdown" type="Node" parent="."]
+script = ExtResource("2_7m1s6")
 
-[node name="movement" parent="." instance=ExtResource("2_fq6n3")]
+[node name="levels" parent="topdown" instance=ExtResource("3_waeaa")]
 
-[node name="actions" type="Node" parent="."]
+[node name="move" parent="topdown" instance=ExtResource("2_fq6n3")]
+
+[node name="actions" type="Node" parent="topdown"]
 script = ExtResource("4_uvfe0")
 
-[node name="punch" type="Node" parent="actions"]
+[node name="punch" type="Node" parent="topdown/actions"]
 script = ExtResource("5_1nghp")
 
-[node name="kick" type="Node" parent="actions"]
+[node name="kick" type="Node" parent="topdown/actions"]
 script = ExtResource("6_8rtjm")
 
-[node name="fire" type="Node" parent="actions"]
+[node name="fire" type="Node" parent="topdown/actions"]
 script = ExtResource("7_jro2w")
 
-[node name="whip" type="Node" parent="actions"]
+[node name="whip" type="Node" parent="topdown/actions"]
 script = ExtResource("8_fvi57")
 
-[node name="combo" type="Node" parent="actions"]
+[node name="combo" type="Node" parent="topdown/actions"]
 script = ExtResource("9_gr2fy")
+
+[node name="platformer" type="Node" parent="."]
+script = ExtResource("10_oc7e7")
+
+[node name="chains" type="Node" parent="platformer"]
+script = ExtResource("10_or0i0")
+
+[node name="spring" type="Node" parent="platformer"]
+script = ExtResource("11_oc7e7")

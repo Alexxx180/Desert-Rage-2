@@ -1,7 +1,7 @@
 extends Node
 
 func controls(hero: CharacterBody2D, inventory: Node) -> void:
-	var chest: Area2D = hero.logic.see.world.skills.chest
+	var chest: Area2D = hero.to.skills.chest
 	var level: Node2D = hero.get_node("../..")
 
 	inventory.chest.hero = hero

@@ -12,7 +12,7 @@ var stand: Area2D
 var F: int:
 	get: return get_floor() + height
 var entity: CharacterBody2D
-var border: TileMapLayer
+var border: TileDecorator
 
 func get_floor() -> int: # var coords: Vector2i = Tile.find(border, )
 	return Tile.extract_at_pos(border, entity.position, Tile.FLOOR)

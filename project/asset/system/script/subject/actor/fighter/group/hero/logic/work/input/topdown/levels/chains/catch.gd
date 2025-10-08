@@ -3,19 +3,15 @@ extends Node
 signal chained(state: bool)
 
 var input: Node
-var spring: Node:
-	get: return input.platforming.spring
-
+var control: Node
 var view: Node2D
 
-func hero_in_midair() -> bool:
-	return spring.state == spring.JUMPED
+func hero_in_midair() -> bool: return control.slide.falling
 
-func ledge() -> void:
-	encounter_ledge(true)
+func ledge() -> void: encounter_ledge(true)
 
 func ledge_in_midair() -> void:
-	spring.successfully_landed()
+	control.land()
 	ledge()
 
 func encounter_ledge(active: bool) -> void:
@@ -27,6 +23,6 @@ func chains_animation(active: bool) -> void:
 	view.animation.moves.set_environment("chains" if active else "ground")
 
 func disable_collision(active: bool) -> void:
-	input.modes.select(active)
+	input.is_platformer = active
 	chained.emit(active)
-	input.gravity.context(!active).collide_main()
+	control.layers.context(!active).collide_main()

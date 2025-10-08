@@ -5,7 +5,7 @@ const SOURCE: int = 3
 func get_message(tags: TileMapLayer, map_coords: Vector2i) -> int:
 	var tile: Dictionary = Tile.from_coords(tags, map_coords)
 	return Tile.logic(tile.atlas) - 1
-# TODOT BOOKS
+# TODO BOOKS
 func set_book(level: Dictionary, atlas: Vector2i, coords: Vector2i) -> void:
 	var books: Dictionary = level.tags.manual.books
 	if (books[atlas].size() > 0):

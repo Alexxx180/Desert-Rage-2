@@ -20,18 +20,14 @@ func start_forward(box: CharacterBody2D) -> void:
 
 	_grab = not ledge.is_colliding() # _grab or
 	if _grab:
-		# box.logic.processors.grab_box(hero)
 		velocity.weight += box.weight
-#		set_animation(has_boxes, "pull")
 
 func stop_forward(box: CharacterBody2D) -> void:
 	boxes.erase(box)
 	print("STOP FORWARD")
 	if _grab:
-		# box.logic.processors.release_box(hero)
 		velocity.weight = max(0, velocity.weight - box.weight)
 		box.logic.processors.movement.push.apply_velocity(Vector2.ZERO)
-#	set_animation(not has_boxes, "go")
 
 func apply_velocity(velocity: Vector2) -> void:
 	for box in boxes:

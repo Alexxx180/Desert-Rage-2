@@ -16,7 +16,7 @@ func determine() -> void:
 		feet.deploy()
 
 func perform(motion: Vector2) -> void:
-	surface.deployment.set_direction(motion)
+	surface.deploy.set_direction(motion)
 	# print("overleaping: ", surface.overleap.is_colliding(motion))
-	if feet.unstable or surface.overleap.is_colliding(motion):
+	if feet.unstable or surface.border.is_colliding(motion):
 		determine()

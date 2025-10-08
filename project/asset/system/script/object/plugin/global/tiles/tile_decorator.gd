@@ -68,3 +68,10 @@ func from_pos(pos: Vector2) -> TileDecorator:
 
 func extract(number: int, map_coords: Vector2i = context.coords) -> Variant:
 	return Tile.extract(_layer, map_coords, number)
+
+static func extract_at_pos(pos: Vector2, no: int) -> Variant:
+	return extract(no, find(_layer, pos))
+
+func switch(to: Vector2i) -> TileDecorator:
+	Tile.switch(context, to, _layer)
+	return self

@@ -2,12 +2,12 @@ extends Node
 
 @onready var entity: CharacterBody2D = Defaults.ENTITY
 
-var border: TileMapLayer
+var border: TileDecorator
 var hero: CharacterBody2D
 var F: int: get = get_floor
 
 func extract(pos: Vector2, height: int = 0) -> int:
-	return Tile.extract_at_pos(border, pos, Tile.FLOOR) + height
+	return border.extract_at_pos(pos, Tile.FLOOR) + height
 
 func extract_at_hero(ground: Vector2) -> int:
 	return extract(hero.position + ground)

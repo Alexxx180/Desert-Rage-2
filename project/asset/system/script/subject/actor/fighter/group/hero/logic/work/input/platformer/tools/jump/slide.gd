@@ -20,6 +20,9 @@ func gravity(delta: float) -> void:
 func slides(delta: float) -> void:
 	hero.velocity.y = delta * ACCELERATION
 
+func above(ground_y: float) -> bool:
+	return hero.position.y <= ground_y - 1
+
 func falls(delta: float) -> void:
 	height -= delta * GRAVITY # delta * slide.height
 	slides(hero.velocity.y + delta * height)
