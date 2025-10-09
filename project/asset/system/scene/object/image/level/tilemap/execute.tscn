@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://rlwfnl6rvpkj"]
+[gd_scene load_steps=18 format=3 uid="uid://rlwfnl6rvpkj"]
 
 [ext_resource type="PackedScene" uid="uid://djsxo43syvb5e" path="res://asset/system/scene/subject/control/platform/cargo/horizontal.tscn" id="2_5jn51"]
 [ext_resource type="PackedScene" uid="uid://y37ppwq8k2ti" path="res://asset/system/scene/subject/control/platform/cargo/vertical.tscn" id="3_ap4cl"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://bkg1v81127vdy" path="res://asset/system/script/subject/control/layer/execute/recovery.gd" id="10_4ohqp"]
 [ext_resource type="PackedScene" uid="uid://jdgle11ik74y" path="res://asset/system/scene/subject/control/drive/box/large/box.tscn" id="10_h5j0a"]
 [ext_resource type="PackedScene" uid="uid://b2b504t0v7im2" path="res://asset/system/scene/subject/control/drive/box/fire/box.tscn" id="11_2cl7a"]
+[ext_resource type="Script" uid="uid://dxotdyecwsis5" path="res://asset/system/script/subject/control/layer/execute/stats.gd" id="12_ap4cl"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_78vt2"]
 tile_data = PackedInt32Array(0, 196609, 1, 65536, 196609, 2, 131072, 196609, 0, 1, 262145, 1, 65537, 262145, 2, 131073, 196609, 0)
@@ -139,6 +140,9 @@ offset_bottom = -80.0
 
 [node name="recovery" type="Node" parent="."]
 script = ExtResource("10_4ohqp")
+
+[node name="stats" type="Node" parent="recovery"]
+script = ExtResource("12_ap4cl")
 
 [node name="period" type="Timer" parent="recovery"]
 wait_time = 0.15

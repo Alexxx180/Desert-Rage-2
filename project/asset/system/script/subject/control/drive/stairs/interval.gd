@@ -5,10 +5,10 @@ var part: int:
 	get: return _part
 
 func set_stairs_position(level: int, next: Vector2) -> void:
-	var transit: TileMapLayer = get_node("../..")
-	var contact: Vector2 = next + Vector2.ONE
-	_part = Tile.extract_at_pos(transit, contact, Tile.LEVEL)
+	var group: Node2D = get_node("../../../group")
+	var transit: TileMapLayer = hero.group.lay.tags
 
-	if (_part == level):
-		var group: Node2D = get_node("../../../group")
-		group.position = next
+	var contact: Vector2 = next + Vector2.ONE
+	_part = transit.extract_at_pos(contact, Tile.LEVEL)
+
+	if (_part == level): group.position = next

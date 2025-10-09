@@ -12,6 +12,8 @@ var context: Dictionary:
 		_context.atlas = value.atlas
 var no: Vector2i:
 	get: return Vector2i.ZERO
+var logic_no: int:
+	get: return Tile.logic_no(context.atlas)
 
 func add_chip(node: Node, path = '.') -> TileDecorator:
 	_layer.get_node(path).add_child(node)
@@ -69,8 +71,8 @@ func from_pos(pos: Vector2) -> TileDecorator:
 func extract(number: int, map_coords: Vector2i = context.coords) -> Variant:
 	return Tile.extract(_layer, map_coords, number)
 
-static func extract_at_pos(pos: Vector2, no: int) -> Variant:
-	return extract(no, find(_layer, pos))
+func extract_at_pos(pos: Vector2, no: int) -> Variant:
+	return extract(no, find(pos))
 
 func switch(to: Vector2i) -> TileDecorator:
 	Tile.switch(context, to, _layer)

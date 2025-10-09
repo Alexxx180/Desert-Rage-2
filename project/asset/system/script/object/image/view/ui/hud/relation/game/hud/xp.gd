@@ -13,8 +13,7 @@ func _get_navigation(game: Control) -> Array:
 		game.get_node("menu/stats/inventory/ability/navigation")]
 
 func _bind_enemy_xp(group: Node2D) -> void:
-	var tags: TileMapLayer = group.get_node("../tags")
-	tags.enemy.hud.xp = group.xp
+	group.lay.tags.enemy.hud.xp = group.xp
 
 func _set_stats(group: Node2D, game: Control) -> void:
 	var stats: VBoxContainer = game.stats.get_node("scroll/margin/stack/stats")

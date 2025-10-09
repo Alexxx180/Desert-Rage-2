@@ -12,18 +12,18 @@ func activate() -> void:
 	activated = !activated
 	_toggle("open" if activated else "close")
 
+func _set_seat(border: TileDecorator) -> void:
+	stand.box = self
+	stand.seat = $seat
+	stand.seat.set_floor(border.extract_at_pos(position, Tile.FLOOR))
+
+func _set_tags(tags: TileDecorator) -> void:
+	var tile: Dictionary = tags.from_pos(position)
+	tags.layer.activators.add_lock(tile, self)
+
 func _ready() -> void:
 	if activated: _toggle("open")
 
-	var border: TileMapLayer = get_node("../../border")
-	var logic: TileMapLayer = get_node("../../tags")
-	var tile: Dictionary = Tile.from_pos(logic, position)
-
-	stand.box = self
-	stand.seat = $seat
-
-	stand.seat.set_floor(Tile.extract_at_pos(border, position, Tile.FLOOR))
-	#print("LOCK FLOOR: ", f)
-
-	#print("lock tile: ", tile)
-	logic.activators.add_lock(tile, self)
+	var lay: Node2D = get_node("../group").lay
+	_set_seat(lay.border)
+	_set_tags(lay.tags)

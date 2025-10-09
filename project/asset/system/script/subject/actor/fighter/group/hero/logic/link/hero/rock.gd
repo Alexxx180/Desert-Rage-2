@@ -6,7 +6,7 @@ extends Node
 @onready var fight: Node = $fight
 
 func controls(hero: CharacterBody2D, world: Node) -> void:
-	var tags: TileMapLayer = hero.get_node("../../tags")
+	var tags: TileMapLayer = hero.group.lay.tags
 	if tags != null:
 		skills.controls(hero, world.skills, tags)
 		ability.controls(hero, world.ability, tags.lockers.behavior)

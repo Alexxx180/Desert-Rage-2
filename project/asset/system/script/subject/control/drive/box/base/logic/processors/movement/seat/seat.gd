@@ -15,7 +15,7 @@ var entity: CharacterBody2D
 var border: TileDecorator
 
 func get_floor() -> int: # var coords: Vector2i = Tile.find(border, )
-	return Tile.extract_at_pos(border, entity.position, Tile.FLOOR)
+	return border.extract_at_pos(entity.position, Tile.FLOOR)
 
 const EMPTY_SEAT: int = 0
 
