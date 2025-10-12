@@ -12,6 +12,7 @@ func perform_jump(_force: float) -> void:
 	control.jump(true)
 
 func return_input() -> void:
+#	ground.deactivate_spring()
 	control.jump(false)
 
 func gravity(delta: float) -> void:

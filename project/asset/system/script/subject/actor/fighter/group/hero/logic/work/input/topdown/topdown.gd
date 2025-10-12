@@ -27,7 +27,11 @@ func input(event: InputEvent) -> void:
 	move.device.input(event)
 
 func process_physics(delta: float) -> void:
+	# print("HERO VEL: ", move.act.run.state.hero.velocity)
 	if levels.jump.feet.stable:
 		move.act.process_physics(delta)
+	#else:
+		#var p = move.act.run.state.hero.view.profile
+		#print("profile. Animation: ", p.animation, " - frame: ", p.frame)
 
 func on_select() -> void: pass

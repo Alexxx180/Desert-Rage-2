@@ -8,8 +8,8 @@ func controls(box: CharacterBody2D) -> void:
 	var lockers: Node = box.get_node("../../tags").lockers
 	var work: Node = box.logic.work
 	
-	push.controls(box, work.push)
+	push.controls(box, work.move)
 	press.controls(box, work.press, lockers.location.activator.button)
 	fire.controls(box, work.fire, lockers.ability.freeze)
 	
-	work.push.directing.connect(box.logic.see.set_direction)
+	work.move.directing.connect(box.logic.see.set_direction)

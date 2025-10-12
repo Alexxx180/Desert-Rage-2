@@ -23,9 +23,9 @@ func _release(hero: CharacterBody2D) -> void:
 
 func controls(platform: CharacterBody2D, ride: Node) -> void:
 	_ride = ride
-	var processor: Node = platform.logic.processors
+	var processor: Node = platform.logic.work
 	# processor.grab.connect(_grab)
 	#  processor.release.connect(_release)
 	
 	# ride.directing.connect(processor.press.set_direction)
-	_ride.forwarding.connect(platform.logic.processors.ride.surface.push)
+	_ride.forwarding.connect(platform.logic.work.ride.surface.push)

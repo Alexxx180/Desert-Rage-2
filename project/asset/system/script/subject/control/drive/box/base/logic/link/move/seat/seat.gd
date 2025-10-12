@@ -3,7 +3,7 @@ extends Node
 @onready var booking: Node = $booking
 
 func controls(box: CharacterBody2D, seat: Node) -> void:
-	var stand: Node = box.logic.see.stand
+	var stand: Area2D = box.logic.see.stand
 
 	seat.place.entity = box
 	seat.place.standing.connect(box.view.enable_sync)
@@ -11,7 +11,7 @@ func controls(box: CharacterBody2D, seat: Node) -> void:
 
 	stand.box = box
 	stand.seat = seat
-	seat.stand = stand
+	seat.place.stand = stand
 	seat.height = box.height
 
 	booking.controls(seat)

@@ -13,6 +13,7 @@ func controls(hero: CharacterBody2D, move: Node) -> void:
 		a.run.state.hero = hero
 		a.velocity.hero = hero
 		a.teleport.hero = hero
+		a.chains = hero.to.platformer.tools.chains
 	
 	act.levels = hero.to.topdown.levels
 	act.actions = hero.to.topdown.actions

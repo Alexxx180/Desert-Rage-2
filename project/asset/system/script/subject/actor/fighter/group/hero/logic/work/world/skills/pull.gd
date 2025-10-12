@@ -4,35 +4,23 @@ var hero: CharacterBody2D
 var _grab: bool = false
 var boxes: Array[CharacterBody2D] = []
 
-var velocity: Node:
-	get: return hero.logic.work.input.topdown.move.act.velocity
-var has_boxes: bool:
-	get: return boxes.size() > 0
-
-func set_animation(condition: bool, animation: String) -> void:
-	if has_boxes: hero.view.animation.moves.set_move_action(animation)
-
 func start_forward(box: CharacterBody2D) -> void:
-	print("START FORWARD")
-	boxes.push_back(box)
-	# _grab = box.compare_height(hero) DEPRECATED
-	var ledge: Node2D = hero.logic.see.world.skills.pull.ledge
-
-	_grab = not ledge.is_colliding() # _grab or
+	boxes.push_back(box) #;print("START FORWARD")
+	hero.to.moves.jump.pull_box(boxes.size() > 0)
+	
+	_grab = not hero.to.skills.pull.ledge.is_colliding() # or box.compare_height(hero) DEPRECATED
 	if _grab:
-		velocity.weight += box.weight
+		hero.to.topdown.move.act.velocity.weight += box.weight
 
 func stop_forward(box: CharacterBody2D) -> void:
 	boxes.erase(box)
-	print("STOP FORWARD")
-	if _grab:
-		velocity.weight = max(0, velocity.weight - box.weight)
-		box.logic.work.push.apply_velocity(Vector2.ZERO)
+	hero.to.moves.jump.pull_box(boxes.size() > 0)
+
+	if _grab: # print("STOP FORWARD")
+		var v: Node = hero.to.topdown.move.act.velocity
+		v.weight = max(0, v.weight - box.weight)
+		box.logic.work.move.apply_velocity(Vector2.ZERO)
 
 func apply_velocity(velocity: Vector2) -> void:
 	for box in boxes:
-		box.logic.work.push.apply_velocity(velocity)
-	if has_boxes:
-		hero.view.animation.moves.set_move_action("pull")
-	else:
-		hero.view.animation.moves.set_move_action("go")
+		box.logic.work.move.apply_velocity(velocity)

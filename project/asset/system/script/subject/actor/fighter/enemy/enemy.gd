@@ -4,7 +4,7 @@ extends CharacterBody2D
 @onready var logic: Node2D = $logic
 @export var caption: String = "eye-seeker"
 
-var spawn_transport_index: int = 0
+var spawn_pos: int = 0
 
 func _ready() -> void: logic.relation.controls(self)
 

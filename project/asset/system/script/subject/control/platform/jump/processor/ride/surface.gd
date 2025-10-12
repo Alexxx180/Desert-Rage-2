@@ -6,8 +6,8 @@ enum { FREE = 0, IGNITING = 1, BUSY = 2 }
 enum { height = 1, feedback = 2 }
 
 var platform: CharacterBody2D
-var half: Vector2:
-	get: return platform.geometry.shape.size / 2
+#var half: Vector2:
+#	get: return platform.geometry.shape.size / 2
 #var center: Vector2:
 	#get: return platform.position#  + half
 
@@ -21,7 +21,7 @@ func ignite_engine() -> void:
 	igniting.start()
 
 func compare_height(hero: CharacterBody2D) -> bool:
-	return platform.logic.processors.seat.compare(hero)
+	return platform.logic.work.seat.compare(hero)
 
 func push(next: Vector2) -> void:
 	platform.velocity = next
@@ -36,7 +36,7 @@ func check_engine(ride: Node) -> void:
 			_set_ledge(ride)
 
 func _set_ledge(ride: Node) -> void:
-	var ledge: Node2D = platform.logic.detectors.ledge
+	var ledge: Node2D = platform.logic.see.ledge
 	if ride.ledge_stop(ledge):
 		push(Vector2.ZERO)
 		free_engine()

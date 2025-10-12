@@ -5,11 +5,10 @@ signal next_level(path: String, fdiff: int)
 const CREDITS: String = "res://asset/system/scene/usable/level/credits.tscn"
 const LEVEL: String = "res://asset/system/scene/usable/level/%s/%s/%d/level.tscn"
 
-@onready var floors: Node = $floors
-
-func connect_levels(curtain: CanvasLayer, check: Node) -> void:
+func connect_levels(curtain: CanvasLayer) -> void:
 	next_level.connect(curtain.start_transition)
-	next_level.connect(check.next_level_transition)
+	# Stop transitions
+	# next_level.connect(check.next_level_transition)
 
 func credits() -> void: next_level.emit(CREDITS, 0) ; print("CREDITS")
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=1697 format=3 uid="uid://ybgjukxk63mc"]
+[gd_scene load_steps=1698 format=3 uid="uid://ybgjukxk63mc"]
 
 [ext_resource type="Script" uid="uid://ctkxvtr3os1lt" path="res://asset/system/script/subject/control/platform/jump/jump.gd" id="1_b2wmg"]
 [ext_resource type="Script" uid="uid://bwq032jyu8u10" path="res://asset/system/script/subject/control/drive/box/base/view/view.gd" id="1_j1ff4"]
@@ -9,7 +9,6 @@
 [ext_resource type="Script" uid="uid://q4sox4o54611" path="res://asset/system/script/subject/control/platform/jump/detector/detector.gd" id="6_01d2f"]
 [ext_resource type="Texture2D" uid="uid://bg306yjfnfuv5" path="res://asset/resource/media/image/actors/player/ray/fight/bash/backward.png" id="6_kirha"]
 [ext_resource type="Texture2D" uid="uid://tpxfdjtl12an" path="res://asset/resource/media/image/actors/player/ray/chains/move/backward.png" id="7_bwlfe"]
-[ext_resource type="PackedScene" uid="uid://wadgmfub4bhi" path="res://asset/system/scene/subject/control/drive/box/jump/small/logic/stand.tscn" id="8_j5ceb"]
 [ext_resource type="Texture2D" uid="uid://c4kqfwpy14710" path="res://asset/resource/media/image/actors/player/ray/chains/whip/backward.png" id="8_juiko"]
 [ext_resource type="Script" uid="uid://buv51uglm2evx" path="res://asset/system/script/subject/control/platform/jump/detector/ledge.gd" id="9_45jud"]
 [ext_resource type="Texture2D" uid="uid://cjlyc8ahtwj8y" path="res://asset/resource/media/image/actors/player/ray/fight/fire/backward.png" id="9_v4gis"]
@@ -198,6 +197,8 @@
 [ext_resource type="Texture2D" uid="uid://dh03al6y0ix3q" path="res://asset/resource/media/image/actors/player/rock/skills/run/right.png" id="182_23cur"]
 [ext_resource type="Texture2D" uid="uid://mngk83oxgibu" path="res://asset/resource/media/image/actors/player/rock/fight/spark/right.png" id="183_w5i2n"]
 [ext_resource type="Texture2D" uid="uid://bdm2y8v7kw2f4" path="res://asset/resource/media/image/actors/player/rock/fight/stomp/right.png" id="184_0v6e8"]
+[ext_resource type="Script" uid="uid://c2lqak7by8566" path="res://asset/system/script/subject/control/drive/box/base/logic/see/stand.gd" id="187_wn5kb"]
+[ext_resource type="Shape2D" uid="uid://4vlyc8cvtjsy" path="res://asset/resource/canvas/map/geometry/interactables/jumping.tres" id="188_10jpr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2s3n0"]
 size = Vector2(60, 60)
@@ -11634,11 +11635,17 @@ script = ExtResource("5_kqgit")
 [node name="see" type="Node2D" parent="logic"]
 script = ExtResource("6_01d2f")
 
-[node name="stand" parent="logic/see" instance=ExtResource("8_j5ceb")]
+[node name="stand" type="Area2D" parent="logic/see"]
 position = Vector2(0, -26)
+collision_layer = 32
 collision_mask = 0
+script = ExtResource("187_wn5kb")
+
+[node name="geometry" type="CollisionShape2D" parent="logic/see/stand"]
+shape = ExtResource("188_10jpr")
 
 [node name="ledge" type="Node2D" parent="logic/see"]
+visible = false
 script = ExtResource("9_45jud")
 
 [node name="x" type="ShapeCast2D" parent="logic/see/ledge"]

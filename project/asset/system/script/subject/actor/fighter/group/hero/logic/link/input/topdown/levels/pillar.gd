@@ -6,6 +6,7 @@ func controls(hero: CharacterBody2D, pillar: Node) -> void:
 	env.view = hero.view
 	env.whip = levels.tools.chains.whip
 	env.layers = hero.to.layers
+	env.pillars = levels.tools.pillar
 	env.chains = hero.to.platformer.tools.chains
 	env.floors = hero.to.topdown.levels.jump.feet.floors
 	env.teleport = hero.to.topdown.move.act.teleport

@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://dtibatxhubbff"]
+[gd_scene load_steps=44 format=3 uid="uid://dtibatxhubbff"]
 
 [ext_resource type="Script" uid="uid://chyqd202d6so4" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/work/input/input.gd" id="1_n780q"]
 [ext_resource type="PackedScene" uid="uid://cf3n6jqk372jc" path="res://asset/system/scene/subject/actor/group/hero/base/logic/work/input/movement/move.tscn" id="2_paa2o"]
@@ -20,10 +20,11 @@
 [ext_resource type="Script" uid="uid://bbb5nspgj74q8" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/work/input/platformer/tools/jump/jump.gd" id="11_sy3qj"]
 [ext_resource type="Script" uid="uid://cacg0uo42xuy6" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/work/input/platformer/tools/jump/slide.gd" id="12_d8pvu"]
 [ext_resource type="Script" uid="uid://b2eukqcbuq556" path="res://addons/godot-behavior-tree-plugin/selector/selector.gd" id="12_l43a0"]
-[ext_resource type="Script" uid="uid://cdt1p3rs1c5qe" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/work/input/platformer/move/device/keyboard.gd" id="13_0nfdi"]
+[ext_resource type="Script" uid="uid://cdt1p3rs1c5qe" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/work/input/platformer/move/device/keyboard/ray.gd" id="13_0nfdi"]
 [ext_resource type="Script" uid="uid://xyxwk1uhmmqa" path="res://addons/godot-behavior-tree-plugin/sequence/sequence.gd" id="13_tv1bt"]
 [ext_resource type="Script" uid="uid://bmf1d8axk35bq" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/work/input/platformer/tools/tools.gd" id="13_vkcox"]
 [ext_resource type="Script" uid="uid://6wmvjfxaoweo" path="res://asset/system/scene/object/input/button/axis.gd" id="14_e5i7j"]
+[ext_resource type="Script" uid="uid://cyff6wcny3pk3" path="res://asset/system/scene/object/input/button/input.gd" id="14_kp6gd"]
 [ext_resource type="Script" uid="uid://2emwmpqnf28y" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/work/input/actions/skills/punch/action.gd" id="14_nc84u"]
 [ext_resource type="Script" uid="uid://d4efp8vhmy5s5" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/work/input/platformer/tools/jump/spring/ground.gd" id="15_35qtk"]
 [ext_resource type="PackedScene" uid="uid://bmf26ewu2u0l0" path="res://asset/system/scene/object/input/button/button.tscn" id="15_75x16"]
@@ -49,16 +50,30 @@ script = ExtResource("16_0255t")
 group = Array[ExtResource("18_eg4tw")]([SubResource("Resource_70kee")])
 metadata/_custom_type_script = "uid://21kvo5qk8w8q"
 
-[sub_resource type="Resource" id="Resource_egvxd"]
+[sub_resource type="Resource" id="Resource_0v1wd"]
 script = ExtResource("19_5tudl")
 action = "left"
 complex = Array[ExtResource("16_0255t")]([ExtResource("17_q1hob"), SubResource("Resource_dwkwo")])
 passthru = false
 metadata/_custom_type_script = "uid://rssqt7kxsel6"
 
-[sub_resource type="Resource" id="Resource_ra82r"]
+[sub_resource type="Resource" id="Resource_26dec"]
 script = ExtResource("19_5tudl")
 action = "right"
+complex = Array[ExtResource("16_0255t")]([ExtResource("17_q1hob"), SubResource("Resource_dwkwo")])
+passthru = false
+metadata/_custom_type_script = "uid://rssqt7kxsel6"
+
+[sub_resource type="Resource" id="Resource_7j72u"]
+script = ExtResource("19_5tudl")
+action = "forward"
+complex = Array[ExtResource("16_0255t")]([ExtResource("17_q1hob"), SubResource("Resource_dwkwo")])
+passthru = false
+metadata/_custom_type_script = "uid://rssqt7kxsel6"
+
+[sub_resource type="Resource" id="Resource_jjijc"]
+script = ExtResource("19_5tudl")
+action = "backward"
 complex = Array[ExtResource("16_0255t")]([ExtResource("17_q1hob"), SubResource("Resource_dwkwo")])
 passthru = false
 metadata/_custom_type_script = "uid://rssqt7kxsel6"
@@ -102,13 +117,25 @@ script = ExtResource("11_nat2t")
 script = ExtResource("13_0nfdi")
 
 [node name="input" type="Node" parent="platformer/move/device/keyboard"]
+script = ExtResource("14_kp6gd")
+
+[node name="x" type="Node" parent="platformer/move/device/keyboard/input"]
 script = ExtResource("14_e5i7j")
 
-[node name="left" parent="platformer/move/device/keyboard/input" instance=ExtResource("15_75x16")]
-actions = SubResource("Resource_egvxd")
+[node name="left" parent="platformer/move/device/keyboard/input/x" instance=ExtResource("15_75x16")]
+actions = SubResource("Resource_0v1wd")
 
-[node name="right" parent="platformer/move/device/keyboard/input" instance=ExtResource("15_75x16")]
-actions = SubResource("Resource_ra82r")
+[node name="right" parent="platformer/move/device/keyboard/input/x" instance=ExtResource("15_75x16")]
+actions = SubResource("Resource_26dec")
+
+[node name="y" type="Node" parent="platformer/move/device/keyboard/input"]
+script = ExtResource("14_e5i7j")
+
+[node name="left" parent="platformer/move/device/keyboard/input/y" instance=ExtResource("15_75x16")]
+actions = SubResource("Resource_7j72u")
+
+[node name="right" parent="platformer/move/device/keyboard/input/y" instance=ExtResource("15_75x16")]
+actions = SubResource("Resource_jjijc")
 
 [node name="tools" type="Node" parent="platformer"]
 script = ExtResource("13_vkcox")
@@ -237,4 +264,4 @@ metadata/_custom_type_script = "uid://c28asuataqv3u"
 script = ExtResource("17_dx5x7")
 metadata/_custom_type_script = "uid://c28asuataqv3u"
 
-[connection signal="timeout" from="platformer/tools/jump/spring/ground/deactivation" to="platformer/tools/jump/spring" method="deactivate_spring"]
+[connection signal="timeout" from="platformer/tools/jump/spring/ground/deactivation" to="platformer/tools/jump/spring/ground" method="deactivate_spring"]

@@ -8,17 +8,21 @@ signal moving(velocity: Vector2)
 
 var levels: Node
 var actions: Node
+var chains: Node
 
 func process_physics(delta: float) -> void:
 	pass # run.process_physics(delta)
 
 func _feedback(motion: Vector2) -> void:
 	run.set_direction(motion)
-	velocity.travel(motion)
-	levels.jump.perform(motion)
+	if not chains.hanging:
+		levels.jump.perform(motion)
+		velocity.travel(motion)
+	else:
+		velocity.platforming(motion)
 	actions.tick()
 
 func turn_around(target_motion: Vector2) -> void:
-	moving.emit(target_motion) # print("MOTION: ", target_motion)
 	if not levels.jump.jumped:
+		moving.emit(target_motion) # print("MOTION: ", target_motion)
 		_feedback(target_motion)

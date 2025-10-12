@@ -7,8 +7,10 @@ extends Node2D
 	Vector2i(0, 1): $bottom_center, Vector2i(1, 1): $bottom_right
 }
 @onready var jump_zone: Node2D = directions[Vector2i(0, -1)]
+@onready var dir: Vector2i
 
 func _set_jumpzone(direction: Vector2i) -> void:
+	dir = direction
 	if directions.has(direction):
 		jump_zone = directions[direction]
 

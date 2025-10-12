@@ -10,8 +10,10 @@ var topdown: Node:
 	get: return input.topdown
 var act: Node:
 	get: return topdown.move.act
+var jump: Node:
+	get: return topdown.levels.jump
 var F: int:
-	get: return topdown.levels.jump.feet.floors.F
+	get: return jump.feet.floors.F
 var platformer: Node:
 	get: return input.platformer
 # World environment and skills

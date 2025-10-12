@@ -7,14 +7,14 @@ var target_pos: Vector2
 @onready var ledge: Dictionary = { "node": Defaults.NODE, "offset": 0 }
 
 func ledge_is_near() -> bool:
-	for pillar in env.jump.walls:
+	for pillar in env.pillars.jump_zone.walls:
 		if pillar.is_colliding():
-			target_pos = env.jump.position + pillar.position
+			target_pos = env.pillars.jump_zone.position + pillar.position
 			return env.floors.same_to_hero(target_pos)
 	return false
 
 func is_near() -> bool:
-	return not env.jump.border.is_colliding() and ledge_is_near()
+	return not env.pillars.jump_zone.border.is_colliding() and ledge_is_near()
 
 func set_offset(next: Node, offset: float) -> void:
 	ledge.node = next
