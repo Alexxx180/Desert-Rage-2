@@ -16,7 +16,7 @@ func ledge_is_near() -> bool:
 func is_near() -> bool:
 	return not env.jump.border.is_colliding() and ledge_is_near()
 
-func _set_offset(next: Node, offset: float) -> void:
+func set_offset(next: Node, offset: float) -> void:
 	ledge.node = next
 	ledge.offset = offset
 

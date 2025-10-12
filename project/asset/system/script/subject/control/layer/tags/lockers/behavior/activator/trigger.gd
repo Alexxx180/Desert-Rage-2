@@ -10,4 +10,4 @@ func map_check(map_coords: Vector2i) -> void:
 		map_activate(map_coords)
 
 func map_activate(map_coords: Vector2i) -> void:
-	location.activate(map_coords)
+	location.search.activate(map_coords)

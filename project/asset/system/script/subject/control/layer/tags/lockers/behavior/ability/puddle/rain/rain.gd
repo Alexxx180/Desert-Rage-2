@@ -2,22 +2,16 @@ extends Node
 
 signal flow(map_coords: Vector2i, no: int)
 
-@onready var particle = preload("res://asset/system/scene/subject/control/drive/rain.tscn")
+@onready var particle: PackedScene = preload("res://asset/system/scene/subject/particle/rain.tscn")
 
-var border: TileDecorator
-var execute: TileDecorator
-
-func _atlas(layer: TileDecorator, coords: Vector2i) -> Vector2i:
-	return layer.from_coords(coords).context.atlas
+var lay: Node
 
 func diffuse_source(cell: Vector2i, context: Dictionary) -> void:
-	var atlas = _atlas(border, cell)
-	match atlas:
+	match lay.atlas("border", cell):
 		FlowConductor.TILE.SOURCE.ON: context.charge = true
 
 func diffuse_puddle(cell: Vector2i, context: Dictionary) -> bool:
-	var atlas = _atlas(execute, cell)
-	match execute.from_coords(cell).context.atlas:
+	match lay.atlas("execute", cell):
 		FlowConductor.TILE.PUDDLE.ON: context.charge = true
 		_: diffuse_source(cell, context)
 	return not context.charge
@@ -29,15 +23,11 @@ func diffusion(map_coords: Vector2i) -> void:
 
 func watering(direction: Vector2i) -> void:
 	var t: Dictionary = FlowConductor.TILE.PUDDLE
-	var rain = particle.instantiate()
-	rain.set_pos(execute.context.pos).set_direction(direction)
-	execute.add_chip(rain, "..").select(t.OFF, t.ID).paint()
-	diffusion(execute.context.coords)
+	var rain: Node2D = particle.instantiate()
+	lay.execute.add_chip(rain, "..").select(t.OFF, t.ID).paint() # rain.set_direction(direction)
+	diffusion(lay.execute.context.coords)
 
 func activate(pos: Vector2, direction: Vector2i) -> void:
-	match execute.from_pos(pos).context.atlas:
-		Vector2(-1, -1):
-			print("WATERING")
-			watering(direction)
-		_: 
-			print("CANT WATERING")
+	match lay.execute.from_pos(pos).context.atlas:
+		Vector2(-1, -1): watering(direction) #; print("WATERING")
+		_: print("CANT WATERING")

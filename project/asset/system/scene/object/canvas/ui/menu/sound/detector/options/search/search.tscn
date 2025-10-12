@@ -1,0 +1,39 @@
+[gd_scene load_steps=8 format=3 uid="uid://cl6v1poaywpn8"]
+
+[ext_resource type="PackedScene" uid="uid://cl1pjr771pa81" path="res://asset/system/scene/object/canvas/ui/menu/sound/detector/options/search/add.tscn" id="1_51ybe"]
+[ext_resource type="PackedScene" uid="uid://ci4vdsy43kwk2" path="res://asset/system/scene/object/canvas/ui/menu/sound/detector/options/backspace/drop.tscn" id="1_caenl"]
+[ext_resource type="Script" uid="uid://bvmasgg0youf0" path="res://asset/system/script/object/image/view/ui/menu/sound/detector/options/search.gd" id="1_tjt7r"]
+[ext_resource type="PackedScene" uid="uid://cax6rka0108yv" path="res://asset/system/scene/object/canvas/ui/menu/sound/detector/options/search/set.tscn" id="2_niw3p"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_ptf25"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_iwvn7"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_sy0at"]
+
+[node name="search" type="HBoxContainer"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+script = ExtResource("1_tjt7r")
+
+[node name="drop" parent="." instance=ExtResource("1_caenl")]
+layout_mode = 2
+toggle_mode = true
+button_group = SubResource("ButtonGroup_ptf25")
+
+[node name="add" parent="." instance=ExtResource("1_51ybe")]
+layout_mode = 2
+toggle_mode = true
+button_group = SubResource("ButtonGroup_iwvn7")
+
+[node name="search" parent="." instance=ExtResource("2_niw3p")]
+layout_mode = 2
+toggle_mode = true
+button_group = SubResource("ButtonGroup_sy0at")

@@ -1,0 +1,172 @@
+[gd_scene load_steps=20 format=3 uid="uid://d2q6jjokb1yfr"]
+
+[ext_resource type="Script" uid="uid://b6bigqrspgblf" path="res://asset/system/script/object/image/view/ui/menu/main/hud.gd" id="1_0p17w"]
+[ext_resource type="Theme" uid="uid://oio1oqqid0vo" path="res://asset/resource/ui/theme/patterns/template/menu/hud/game/hud.tres" id="1_3x4bx"]
+[ext_resource type="Theme" uid="uid://dfg873urxgnev" path="res://asset/resource/ui/theme/patterns/template/text/title/title.tres" id="1_kxgut"]
+[ext_resource type="PackedScene" uid="uid://ds1p72mqshr4i" path="res://asset/system/scene/object/canvas/ui/menu/main/detector/main/load.tscn" id="2_2lbtu"]
+[ext_resource type="PackedScene" uid="uid://cvs8byy41xeo5" path="res://asset/system/scene/object/canvas/ui/hud/detector/pause/menu/exit/exit.tscn" id="2_xru45"]
+[ext_resource type="Theme" uid="uid://0xjk2vnf3nwb" path="res://asset/resource/ui/theme/patterns/template/text/title/secondary.tres" id="3_e3wku"]
+[ext_resource type="PackedScene" uid="uid://cybcj4tc11mdx" path="res://asset/system/scene/object/canvas/ui/menu/main/detector/main/new.tscn" id="3_h5kf1"]
+[ext_resource type="Script" uid="uid://bdgdet1mbxhpp" path="res://asset/system/script/object/image/view/ui/menu/main/detector/options.gd" id="4_ev43r"]
+[ext_resource type="Script" uid="uid://67osjsomsdwy" path="res://asset/system/script/object/image/view/ui/menu/main/detector/menu.gd" id="4_px3im"]
+[ext_resource type="Shortcut" uid="uid://brjhv1uiicoq4" path="res://asset/resource/ui/short/cut/pause/resume.tres" id="5_drmow"]
+[ext_resource type="Shortcut" uid="uid://b7qpkrdl5s1rd" path="res://asset/resource/ui/short/cut/pause/exit.tres" id="8_yb07m"]
+[ext_resource type="Script" uid="uid://b2m5lppv8rns7" path="res://asset/system/script/object/image/view/ui/menu/main/relation/relation.gd" id="9_7rcx5"]
+[ext_resource type="Script" uid="uid://bkbeaeonbqp08" path="res://asset/system/script/object/image/view/ui/menu/main/processor/processor.gd" id="9_ljjug"]
+[ext_resource type="Script" uid="uid://b4mnw1y5uf73f" path="res://asset/system/script/object/image/view/ui/menu/main/processor/new.gd" id="11_a0ecu"]
+[ext_resource type="Script" uid="uid://koh4lugaltmm" path="res://asset/system/script/object/image/view/ui/menu/main/relation/exit.gd" id="11_oi6ff"]
+[ext_resource type="Script" uid="uid://ndr6dbwimlh4" path="res://asset/system/script/object/image/view/ui/menu/main/processor/remember.gd" id="13_5pfdi"]
+[ext_resource type="PackedScene" uid="uid://b8y7fde0v435t" path="res://asset/system/scene/object/canvas/ui/hud/processor/pause/exit.tscn" id="15_4wjbk"]
+[ext_resource type="Script" uid="uid://bjkaxkulcifgv" path="res://asset/system/script/object/image/view/ui/menu/main/relation/remember.gd" id="16_ohnoq"]
+[ext_resource type="Script" uid="uid://daag041w7pjkq" path="res://asset/system/script/object/image/view/ui/menu/main/relation/new.gd" id="17_f5m0a"]
+
+[node name="main" type="Node2D"]
+
+[node name="menu" type="CanvasLayer" parent="."]
+
+[node name="hud" type="Control" parent="menu"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_0p17w")
+
+[node name="detector" type="Control" parent="menu/hud"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_3x4bx")
+
+[node name="load" type="Control" parent="menu/hud/detector"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="main" type="Control" parent="menu/hud/detector"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="margin" type="MarginContainer" parent="menu/hud/detector/main"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_top = -324.0
+offset_right = 576.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="title" type="VBoxContainer" parent="menu/hud/detector/main/margin"]
+layout_mode = 2
+
+[node name="split" type="Control" parent="menu/hud/detector/main/margin/title"]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+
+[node name="margin" type="MarginContainer" parent="menu/hud/detector/main/margin/title/split"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme = ExtResource("1_kxgut")
+
+[node name="caption" type="VBoxContainer" parent="menu/hud/detector/main/margin/title/split/margin"]
+layout_mode = 2
+
+[node name="primary" type="Label" parent="menu/hud/detector/main/margin/title/split/margin/caption"]
+layout_mode = 2
+text = "Desert Rage"
+
+[node name="secondary" type="Label" parent="menu/hud/detector/main/margin/title/split/margin/caption"]
+layout_mode = 2
+theme = ExtResource("3_e3wku")
+text = "The Hidden Artifact"
+
+[node name="content" type="HBoxContainer" parent="menu/hud/detector/main/margin/title"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="options" type="VBoxContainer" parent="menu/hud/detector/main/margin/title/content"]
+custom_minimum_size = Vector2(250, 250)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2
+script = ExtResource("4_ev43r")
+
+[node name="split-1" type="Control" parent="menu/hud/detector/main/margin/title/content/options"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.25
+
+[node name="menu" type="VBoxContainer" parent="menu/hud/detector/main/margin/title/content/options"]
+layout_mode = 2
+script = ExtResource("4_px3im")
+
+[node name="remember" parent="menu/hud/detector/main/margin/title/content/options/menu" instance=ExtResource("2_2lbtu")]
+layout_mode = 2
+focus_neighbor_left = NodePath("../new")
+focus_neighbor_top = NodePath("../exit")
+focus_neighbor_right = NodePath("../exit")
+focus_neighbor_bottom = NodePath("../new")
+focus_next = NodePath("../new")
+focus_previous = NodePath("../exit")
+shortcut = ExtResource("5_drmow")
+
+[node name="new" parent="menu/hud/detector/main/margin/title/content/options/menu" instance=ExtResource("3_h5kf1")]
+layout_mode = 2
+
+[node name="exit" parent="menu/hud/detector/main/margin/title/content/options/menu" instance=ExtResource("2_xru45")]
+layout_mode = 2
+size_flags_horizontal = 1
+focus_neighbor_left = NodePath("../help")
+focus_neighbor_top = NodePath("../screen")
+focus_neighbor_right = NodePath("../help")
+focus_neighbor_bottom = NodePath("../resume")
+focus_next = NodePath("../resume")
+focus_previous = NodePath("../screen")
+shortcut = ExtResource("8_yb07m")
+
+[node name="split-2" type="Control" parent="menu/hud/detector/main/margin/title/content/options"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.25
+
+[node name="character" type="Control" parent="menu/hud/detector/main/margin/title/content"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.8
+
+[node name="processor" type="Node" parent="menu/hud"]
+script = ExtResource("9_ljjug")
+
+[node name="remember" type="Node" parent="menu/hud/processor"]
+script = ExtResource("13_5pfdi")
+
+[node name="new" type="Node" parent="menu/hud/processor"]
+script = ExtResource("11_a0ecu")
+
+[node name="exit" parent="menu/hud/processor" instance=ExtResource("15_4wjbk")]
+
+[node name="relation" type="Node" parent="menu/hud"]
+script = ExtResource("9_7rcx5")
+
+[node name="remember" type="Node" parent="menu/hud/relation"]
+script = ExtResource("16_ohnoq")
+
+[node name="new" type="Node" parent="menu/hud/relation"]
+script = ExtResource("17_f5m0a")
+
+[node name="exit" type="Node" parent="menu/hud/relation"]
+script = ExtResource("11_oi6ff")

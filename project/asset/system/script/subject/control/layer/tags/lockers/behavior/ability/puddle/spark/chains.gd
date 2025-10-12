@@ -9,15 +9,11 @@ var size: Array[int] = []
 @onready var charge: Node = $charge
 @onready var drain: Node = $drain
 
-var border: TileDecorator:
-	set(layer):
+var lay: Node:
+	set(value):
+		charge.lay = value
 		var t: Dictionary = FlowConductor.TILE.SOURCE
-		charge.border = layer
-		initiate(layer.busy(t.ON, t.ID))
-
-var execute: TileDecorator:
-	set(layer):
-		charge.execute = layer
+		initiate(value.border.busy(t.ON, t.ID))
 
 func _ready() -> void:
 	drain.chains = self

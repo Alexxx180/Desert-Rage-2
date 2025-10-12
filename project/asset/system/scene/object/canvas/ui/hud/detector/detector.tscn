@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://c1yixupmo8miw"]
+
+[ext_resource type="Theme" uid="uid://p2br8b6ea3n6" path="res://asset/resource/ui/theme/patterns/template/menu/hud/pause/pause.tres" id="1_slnsy"]
+[ext_resource type="PackedScene" uid="uid://cel3u88abrgv3" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/game.tscn" id="2_ln84v"]
+[ext_resource type="Script" uid="uid://qwfcsi7o7ncc" path="res://asset/system/script/object/image/view/ui/hud/detector/detector.gd" id="2_vyndf"]
+[ext_resource type="PackedScene" uid="uid://v6stk7j8vyox" path="res://asset/system/scene/object/canvas/ui/hud/detector/pause/pause.tscn" id="6_w0d23"]
+
+[node name="detector" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("1_slnsy")
+script = ExtResource("2_vyndf")
+
+[node name="game" parent="." instance=ExtResource("2_ln84v")]
+layout_mode = 1
+size_flags_horizontal = 1
+size_flags_vertical = 1
+
+[node name="pause" parent="." instance=ExtResource("6_w0d23")]
+process_mode = 3
+visible = false
+layout_mode = 2
+anchors_preset = 0
+grow_vertical = 0

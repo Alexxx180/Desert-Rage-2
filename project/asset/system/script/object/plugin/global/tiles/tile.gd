@@ -48,7 +48,7 @@ static func from_pos(layer: TileMapLayer, pos: Vector2) -> Dictionary:
 	return result
 
 
-static func logic(cell: Vector2i) -> int:
+static func logic_no(cell: Vector2i) -> int:
 	return cell.y * SIZE + FLOOR + cell.x
 
 static func extract_at_pos(layer: TileMapLayer, pos: Vector2, no: int) -> Variant:

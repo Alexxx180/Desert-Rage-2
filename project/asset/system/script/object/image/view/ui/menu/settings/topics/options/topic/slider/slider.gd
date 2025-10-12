@@ -10,7 +10,7 @@ signal hold_focus(status: bool)
 var _manual: bool = false
 var released: bool:
 	get: return not _manual
-var _grabber: Texture2D = preload("res://asset/resource/engine/internal/shape/image/texture/grabber.tres")
+var _grabber: Texture2D = preload("res://asset/resource/ui/texture/grabber.tres")
 
 func _ready() -> void:
 	value_changed.connect(func(v: int):

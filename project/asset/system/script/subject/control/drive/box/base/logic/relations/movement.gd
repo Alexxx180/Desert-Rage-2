@@ -1,11 +1,9 @@
 extends Node
 
-@onready var floors: Node = $floors
 @onready var seat: Node = $seat
 @onready var push: Node = $push
 
-func controls(box: CharacterBody2D, movement: Node) -> void:
-	floors.controls(box, movement.floors)
-	seat.controls(box, movement.seat)
-	push.controls(box, movement.push)
-	movement.gravity.box = box
+func controls(box: CharacterBody2D, move: Node) -> void:
+	seat.controls(box, move.seat)
+	push.controls(box, move.push)
+	move.gravity.box = box

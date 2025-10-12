@@ -6,7 +6,7 @@ extends Node
 
 func controls(hero: CharacterBody2D) -> void:
 	var work: Node = hero.logic.work
-	hero.view.animation.moves.hero = hero
+	hero.to.moves.hero = hero
 	input.controls(hero, work.input)
 	world.controls(hero, work.world)
 	stats.controls(hero, work.stats)

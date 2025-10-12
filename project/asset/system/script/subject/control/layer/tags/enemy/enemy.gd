@@ -1,35 +1,28 @@
 extends Node
 
-const SOURCE: int = 4
-
+@onready var spawn: Node = $spawn
+@onready var pool: Node = $pool
 @onready var hud_reseter: Timer = $hud
 
-var places: Array[Vector2i]
 var hud: EnemyHUD = EnemyHUD.new()
 
-func setup(tags: TileMapLayer, execute: TileMapLayer, casual_mode: bool) -> void:
+func _enemy(tag: Vector2i) -> String:
+	match spawn.lay.tags.from_coords(tag).context.atlas:
+		Vector2i(1, 0): return "boss"
+		_: return "foe"
+
+func set_enemies_spawn(lay: Node) -> void:
+	spawn.set_spawn(lay)
+	var type: Dictionary = spawn.select(pool)
+	for i in range(0, spawn.places.size()):
+		set_enemy(i, spawn.places[i], type)
+
+func setup(lay: Node, casual_mode: bool) -> void:
 	hud.set_timer(self)
-	if casual_mode: return
-	places = tags.get_used_cells_by_id(SOURCE)
-	var i: int = 0
-	while i < places.size() - 1:
-		var tag: Vector2i = places[i]
-		var tile: Dictionary = Tile.from_coords(tags, tag)
-		var enemy: CharacterBody2D
-		match tile.atlas:
-			Vector2i(1, 0): enemy = foe[tags.boss].instantiate()
-			_: enemy = foe["eye-seeker"].instantiate() # tags.foe.pick_random()
-		execute.add_child(enemy)
-		enemy.teleport(Tile.get_pos(execute, tag))
-		enemy.spawn_transport_index = i
-		enemy.view.animation.dead.transport.connect(func(): transport_foe(execute, enemy))
-		hud.setup(enemy)
-		i += 1
+	if not casual_mode: set_enemies_spawn(lay)
 
-func transport_foe(execute: TileMapLayer, enemy: CharacterBody2D) -> void:
-	enemy.spawn_transport_index = (enemy.spawn_transport_index + 1) % places.size()
-	enemy.teleport(Tile.get_pos(execute, places[enemy.spawn_transport_index]))
-
-var foe: Dictionary = {
-	"eye-seeker": preload("res://asset/system/scene/subject/actor/fighter/enemy/asset/eye-seeker/eye-seeker.tscn")
-}
+func set_enemy(i: int, tag: Vector2i, type: Dictionary) -> void:
+	var enemy: CharacterBody2D = spawn.from_pool(type, pool, _enemy(tag))
+	spawn.initiate(enemy, i, tag)
+	enemy.view.animation.dead.transport.connect(func(): spawn.dead(enemy))
+	hud.setup(enemy)

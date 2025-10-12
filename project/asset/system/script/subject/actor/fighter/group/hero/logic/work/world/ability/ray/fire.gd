@@ -9,7 +9,7 @@ const DAMAGE: int = 2
 
 func _set_hero(value: CharacterBody2D) -> void:
 	super._set_hero(value)
-	_act = _hero.logic.see.world.ability.fire.ice
+	_act = _hero.to.ability.fire.ice
 
 func far_map(_execute: TileMapLayer) -> void:
 	_last_position = Vector2.ZERO
@@ -21,18 +21,18 @@ func far_enemy(_hitbox: StaticBody2D) -> void:
 	enemy = Defaults.STATIC
 
 func animation() -> void:
-	_hero.view.animation.moves.set_fight_start("active")
-	_hero.view.animation.moves.set_fighting("skill_one")
+	_hero.to.moves.set_fight_start("active")
+	_hero.to.moves.set_fighting("skill_one")
 
 func ability() -> void:
 	if enemy != Defaults.STATIC and aura.use(cost):
 		animation()
 		enemy.fire(_hero.logic.stats.influence)
 	
-	if _vessel != Defaults.ENTITY and !_vessel.logic.relations.fire.on and aura.use(cost):
+	if _vessel != Defaults.ENTITY and !_vessel.logic.link.fire.on and aura.use(cost):
 		animation()
-		_vessel.logic.processors.fire.ignite()
+		_vessel.logic.work.fire.ignite()
 
 	if _last_position != Vector2.ZERO and aura.use(cost):
-		activate.emit(_last_position, DAMAGE)
 		animation()
+		activate.emit(_last_position, DAMAGE)

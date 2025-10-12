@@ -3,10 +3,9 @@ extends Node
 @onready var booking: Node = $booking
 
 func controls(box: CharacterBody2D, seat: Node) -> void:
-	var stand: Node = box.logic.detectors.platforming.stand
-	var floors: Node = box.logic.processors.movement.floors
+	var stand: Node = box.logic.see.stand
 
-	seat.entity = box
+	seat.place.entity = box
 	seat.place.standing.connect(box.view.enable_sync)
 	seat.place.leaving.connect(box.view.disable_sync)
 
@@ -16,9 +15,7 @@ func controls(box: CharacterBody2D, seat: Node) -> void:
 	seat.height = box.height
 
 	booking.controls(seat)
-
 	box.move.connect(seat.transport)
-	# floors.update_floor.connect(seat.set_floor)
 
 	stand.entered.connect(seat.enable_stand)
 	stand.exited.connect(seat.disable_stand)

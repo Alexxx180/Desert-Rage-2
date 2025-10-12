@@ -1,5 +1,7 @@
 extends Node
 
+const CONSTRAINT: int = 5
+
 var is_pressed: bool = false
 var execute: TileDecorator
 var world_y: float = 0.0
@@ -22,4 +24,4 @@ func deactivate_spring() -> void:
 	if press(is_pressed):
 		switch_spring_tile()
 
-func save(hero_y: float) -> void: world_y = hero_y
+func save(hero_y: float) -> void: world_y = hero_y + CONSTRAINT

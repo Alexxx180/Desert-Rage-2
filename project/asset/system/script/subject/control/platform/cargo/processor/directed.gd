@@ -8,9 +8,9 @@ extends Node
 const INVERSE: Vector2 = Vector2(-1, -1)
 
 func bind_lever() -> void:
-	var tags: TileMapLayer = cargo.platform.get_node("../../../tags")
-	var location: Node = tags.lockers.location
-	var data: Dictionary = location.search.atlas.get_mech_atlas(tags, cargo.platform.position)
+	var lay: Node = cargo.platform.get_node("../../../tags").lay
+	var location: Node = lay.tags.layer.tags.lockers.location
+	var data: Dictionary = location.search.atlas.get_mech_atlas(lay.tags, cargo.platform.position)
 	data.processor = self
 	location.storage.setup_mech(data)
 

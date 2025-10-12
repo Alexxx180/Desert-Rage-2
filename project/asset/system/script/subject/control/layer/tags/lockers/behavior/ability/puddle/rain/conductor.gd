@@ -6,7 +6,7 @@ enum { NONE = -1, SPARK = 0, SOURCE = 1 }
 
 const TILE: Dictionary = {
 	"PUDDLE": { "OFF": Vector2i(2, 2), "ON": Vector2i(3, 2), "ID": 4 },
-	"SOURCE": { "OFF": Vector2i(3, 5), "ON": Vector2i(4, 5), "ID": 2 }
+	"SOURCE": { "OFF": Vector2i(4, 2), "ON": Vector2i(5, 2), "ID": 0 }
 }
 
 static func around(map_coords: Vector2i, context: Dictionary, check: Callable) -> bool:

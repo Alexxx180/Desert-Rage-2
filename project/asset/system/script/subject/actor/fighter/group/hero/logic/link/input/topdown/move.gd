@@ -8,8 +8,16 @@ func controls(hero: CharacterBody2D, move: Node) -> void:
 	
 	print("CONNECT MOVEMENT")
 	move.device.mouse.target.hero = hero
-	act.velocity.hero = hero
-	act.teleport.hero = hero
+	
+	for a in [move.act, hero.to.platformer.move.act]:
+		a.run.state.hero = hero
+		a.velocity.hero = hero
+		a.teleport.hero = hero
+	
+	act.levels = hero.to.topdown.levels
+	act.actions = hero.to.topdown.actions
+	hero.to.platformer.move.act.levels = hero.to.topdown.levels
+	hero.to.platformer.move.act.actions = hero.to.platformer.actions
 	
 	act.moving.connect(hero.logic.see.set_direction)
 	act.moving.connect(hero.view.animation.move)

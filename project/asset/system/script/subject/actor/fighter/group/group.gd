@@ -4,9 +4,9 @@ extends Node2D
 @export var deployed: bool = true
 @onready var camera: Camera2D = $camera
 @onready var xp: Node = $xp
+@onready var lay: Node = get_node("../tags").lay
 @onready var ray: CharacterBody2D = $ray
 @onready var rock: CharacterBody2D = $rock
-@onready var group: Node2D = get_parent()
 
 var navigation: Array
 var deploy: HeroDeploy = HeroDeploy.new()
@@ -24,14 +24,13 @@ func is_hud_opened() -> bool:
 		result = result and (not n.hud.logic.is_opened_last)
 	return not result
 
-func resume_input() -> void:
-	if is_hud_opened(): return
+func _set_input(state: bool) -> void:
 	for hero in deploy.party.heroes:
-		hero.logic.processors.ui.input.resume_input()
+		hero.logic.work.input.suspended = state
 
-func suspend_input() -> void:
-	for hero in deploy.party.heroes:
-		hero.logic.processors.ui.input.suspend_input()
+func resume_input() -> void: if not is_hud_opened(): _set_input(false)
+
+func suspend_input() -> void: _set_input(true)
 
 func _input(event) -> void:
 	if event.is_action_pressed("select") or (

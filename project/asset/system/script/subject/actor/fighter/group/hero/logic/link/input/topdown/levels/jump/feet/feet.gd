@@ -18,5 +18,5 @@ func controls(hero: CharacterBody2D, feet: Node, levels: Node) -> void:
 	feet.set_movement.connect(_set_movement)
 	feet.set_deploy(hero.to.platform.surface.deploy)
 	
-	feet.floors.border = hero.get_node("../../border")
+	feet.floors.border = hero.group.get_node("../tags").lay.border
 	feet.floors.hero = hero

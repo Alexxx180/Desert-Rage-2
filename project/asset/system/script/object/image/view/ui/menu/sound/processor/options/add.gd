@@ -1,7 +1,7 @@
 extends Node
 
-var theme: Resource = preload("res://asset/system/scene/object/image/view/ui/menu/sound/detector/dropdown/tree/leaf/leaf.tscn")
-var fight: Resource = preload("res://asset/system/scene/object/image/view/ui/menu/sound/detector/dropdown/tree/leaf/combat.tscn")
+var theme: Resource = preload("res://asset/system/scene/object/canvas/ui/menu/sound/detector/dropdown/tree/leaf/leaf.tscn")
+var fight: Resource = preload("res://asset/system/scene/object/canvas/ui/menu/sound/detector/dropdown/tree/leaf/combat.tscn")
 
 var context: OpenThemeDialog
 

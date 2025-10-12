@@ -5,3 +5,4 @@ extends Node2D
 @onready var platform: ShapeCast2D = $platform
 @onready var slide: ShapeCast2D = $slide
 @onready var spring: ShapeCast2D = $spring
+@onready var walls: RayCast2D = $walls

@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://ch3tq36n8apgn"]
+
+[ext_resource type="PackedScene" uid="uid://cc8u4e20bj4c8" path="res://asset/system/scene/object/canvas/ui/menu/sound/detector/dropdown/tree/branch/content/head/named/named.tscn" id="1_64muf"]
+[ext_resource type="Script" uid="uid://pheh3tocvg43" path="res://asset/system/script/object/image/view/ui/menu/sound/detector/dropdown/tree/branch/title.gd" id="1_qtplb"]
+
+[node name="head" type="HBoxContainer"]
+custom_minimum_size = Vector2(300, 0)
+offset_left = -1.0
+offset_right = 299.0
+offset_bottom = 47.0
+script = ExtResource("1_qtplb")
+
+[node name="named" parent="." instance=ExtResource("1_64muf")]
+layout_mode = 2
+
+[connection signal="toggled" from="named" to="named" method="_toggled"]

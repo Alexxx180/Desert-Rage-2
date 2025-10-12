@@ -24,7 +24,7 @@ func _ignite() -> void:
 func _freeze() -> void: set_fire(false)
 
 func controls(box: CharacterBody2D, fire: Node, trigger: Node) -> void:
-	_fire = box.logic.detectors.fire
+	_fire = box.logic.see.fire
 	for area in _fire.detectors:
 		area.body_entered.connect(func(_execute: TileMapLayer): _burn_fire(area.position))
 	_box = box

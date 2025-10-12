@@ -8,6 +8,16 @@ func access(motion: Vector2) -> void:
 	if levels.jump.jumped: return
 	levels.jump.perform(motion)
 	actions.tick()
+	
+	@onready var freeze_input: Dictionary = {
+	true: func() -> void:
+		input.topdown.move.act.run.reset_run() # input.movement.behavior.move.reset()
+		Processors.turn(input, false),
+	false: func() -> void:
+		Processors.turn(input, true)
+}
+	
+	
 """
 func _ready() -> void:
 	move.act.levels = levels

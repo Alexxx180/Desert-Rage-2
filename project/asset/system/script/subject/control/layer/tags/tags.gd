@@ -1,10 +1,11 @@
 extends TileMapLayer
 
-@export var invisible: bool = true
 @export var manual: BooksManual
-@export var foe: Array[String] = [""]
-@export var boss: String = ""
+@export var invisible: bool = true
 @export var casual_mode: bool = false
+@export_group("Enemies")
+@export_flags_3d_physics var monsters: int
+@export_flags_3d_navigation var bosses: int
 
 @onready var transition: Node = $transition
 @onready var lockers: Node = $lockers
@@ -12,15 +13,13 @@ extends TileMapLayer
 @onready var enemy: Node = $enemy
 @onready var curtain: Node = $curtain
 @onready var chests: Node = $chests
-@onready var level: Dictionary = {
-	"border": get_node("../border"), "execute": get_node("../execute"), "tags": self
-}
+@onready var lay: Node = $lay
 # @onready var push: TileMapLayer = get_node("../push")
 
 func _ready() -> void:
-	lockers.setup(level)
-	transition.setup(self, level.border)
-	books.setup(level)
-	enemy.setup(self, level.execute, casual_mode)
-	chests.setup(self, casual_mode)
+	lockers.setup(lay)
+	transition.setup(lay)
+	books.setup(lay)
+	enemy.setup(lay, casual_mode)
+	chests.setup(lay, casual_mode)
 	if invisible: hide()

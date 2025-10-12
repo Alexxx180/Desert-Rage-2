@@ -3,15 +3,10 @@ extends Node
 @onready var freeze = $freeze
 @onready var puddle = $puddle
 
-var border: TileDecorator:
-	set(value):
-		puddle.border = value
-
-var execute: TileDecorator:
-	set(value):
-		freeze.execute = value
-		puddle.execute = value
-
 func _ready() -> void:
-	var drain: Node = puddle.spark.chains.drain
-	freeze.fire_drain.connect(drain.evaporation)
+	freeze.fire_drain.connect(puddle.spark.chains.drain.evaporation)
+
+func setup(lay: Node, trigger: Node) -> void:
+	puddle.lay = lay
+	freeze.execute = lay.execute # execute: TileDecorator, border: TileDecorator
+	puddle.spark.chains.charge.activate.connect(trigger.map_activate)

@@ -10,23 +10,25 @@ enum { JUMP = 200000, SINGULARITY = 45000, GRAVITY = 700000 } # JUMP = -75000, G
 @export_range(1, 2, 1) var height: int = 1
 
 @onready var view: Node2D = $view
-@onready var geometry: Node = $placement
+@onready var geometry: Node = $geometry
 @onready var logic: Node2D = $logic
 
 const feedback: int = 2
 
+"""
 @onready var half: Vector2 = geometry.shape.size / 2
 
 var center: Vector2:
 	get: return position + half
+"""
 
-func _ready() -> void: logic.relations.controls(self)
+func _ready() -> void: logic.link.controls(self)
 
 func compare_height(hero: CharacterBody2D) -> bool:
-	return logic.processors.movement.seat.compare(hero)
+	return logic.work.movement.seat.compare(hero)
 
 func _physics_process(delta: float) -> void:
-	if logic.detectors.slide.is_colliding():
+	if logic.see.slide.is_colliding():
 		velocity.y = delta * SINGULARITY
 	move_and_slide()
 

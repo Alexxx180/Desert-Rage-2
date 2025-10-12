@@ -5,4 +5,4 @@ extends CharacterBody2D
 @onready var geometry: CollisionShape2D = $placement
 
 func _ready() -> void:
-	logic.relations.controls(self)
+	logic.link.controls(self)

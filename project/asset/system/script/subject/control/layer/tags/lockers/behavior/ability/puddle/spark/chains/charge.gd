@@ -3,8 +3,7 @@ extends Node
 signal activate()
 
 var chains: Node
-var border: TileDecorator
-var execute: TileDecorator
+var lay: Node
 var context: Dictionary
 
 func init(map_coords: Vector2i) -> void:
@@ -13,11 +12,11 @@ func init(map_coords: Vector2i) -> void:
 	activate.emit(map_coords)
 
 func diffuse_source(cell: Vector2i, tile: Dictionary) -> void:
-	match border.from_coords(cell).context.atlas:
+	match lay.atlas("border", cell):
 		FlowConductor.TILE.SOURCE.OFF: tile.cell = 1
 
 func diffuse_puddle(cell: Vector2i, tile: Dictionary) -> bool:
-	match execute.from_coords(cell).context.atlas:
+	match lay.atlas("execute", cell):
 		FlowConductor.TILE.PUDDLE.OFF: tile.cell = FlowConductor.SPARK
 		_: diffuse_source(cell, tile)
 	return tile.cell == FlowConductor.NONE # ==
@@ -29,8 +28,8 @@ func contact(map_coords: Vector2i) -> void:
 		return diffuse_puddle(cell, tile))
 
 	match tile.cell: # if tile.cell > FlowConductor.NONE:
-		FlowConductor.SOURCE: from_puddle(border.context.coords, tile.cell)
-		FlowConductor.SPARK: from_puddle(execute.context.coords, tile.cell)
+		FlowConductor.SOURCE: from_puddle(lay.border.context.coords, tile.cell)
+		FlowConductor.SPARK: from_puddle(lay.execute.context.coords, tile.cell)
 
 func _connection(chain: int, map_coords: Vector2i) -> bool:
 	var track: Rect2 = chains.get_track(chain)
@@ -48,11 +47,11 @@ func _connection(chain: int, map_coords: Vector2i) -> bool:
 
 func draw_source(map_coords: Vector2i, status: String) -> void:
 	var source: Dictionary = FlowConductor.TILE.SOURCE
-	border.target(map_coords).select(source[status], source.ID).paint()
+	lay.border.target(map_coords).select(source[status], source.ID).paint()
 
 func draw_puddle(map_coords: Vector2i, status: String) -> void:
 	var puddle: Dictionary = FlowConductor.TILE.PUDDLE
-	execute.target(map_coords).select(puddle[status], puddle.ID).paint()
+	lay.execute.target(map_coords).select(puddle[status], puddle.ID).paint()
 
 func to_conductor(map_coords: Vector2i, chain: int, draw: Callable) -> void:
 	if chains.can_extend(chain) and _connection(chain, map_coords):

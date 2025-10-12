@@ -1,0 +1,16 @@
+[gd_scene load_steps=5 format=3 uid="uid://d3t052b74mpyl"]
+
+[ext_resource type="Script" uid="uid://c230vcyeubh5m" path="res://asset/system/script/object/image/view/ui/menu/sound/processor/options/play/behavior/behavior.gd" id="1_eg0tn"]
+[ext_resource type="Script" uid="uid://b2eukqcbuq556" path="res://addons/godot-behavior-tree-plugin/selector/selector.gd" id="2_34l17"]
+[ext_resource type="PackedScene" uid="uid://ck1q604rnidgx" path="res://asset/system/scene/object/canvas/ui/menu/sound/processor/options/play/behavior/level/level.tscn" id="3_w2q12"]
+[ext_resource type="PackedScene" uid="uid://di78ig3lqhtlo" path="res://asset/system/scene/object/canvas/ui/menu/sound/processor/options/play/behavior/world/world.tscn" id="4_qne2j"]
+
+[node name="behavior" type="Node"]
+script = ExtResource("1_eg0tn")
+
+[node name="location" type="Node" parent="."]
+script = ExtResource("2_34l17")
+
+[node name="level" parent="location" instance=ExtResource("3_w2q12")]
+
+[node name="world" parent="location" instance=ExtResource("4_qne2j")]

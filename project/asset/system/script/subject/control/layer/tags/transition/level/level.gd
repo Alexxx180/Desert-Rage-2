@@ -13,12 +13,10 @@ func connect_levels(curtain: CanvasLayer, check: Node) -> void:
 
 func credits() -> void: next_level.emit(CREDITS, 0) ; print("CREDITS")
 
-func elevate(execute: TileMapLayer, tiles: Dictionary) -> void:
-	var diff: int = floors.differ(execute, tiles.way)
-	var part: int = 0
-	if tiles.link.name != "none": part = Tile.logic(tiles.link.atlas)
-	
-	# var F: String = floors.get_next(diff)
+func elevate(lay: Node) -> void:
+	var diff: int = lay.border.extract(Tile.FLOOR)
+	var part: int = lay.tags.logic_no
+	# if tiles.link.name != "none": part = Tile.logic_no(tiles.link.atlas) # var F: String = floors.get_next(diff)
 	var F: String = SessionStats.group_level(diff)
 
 	var caption: String = SessionStats.location.name

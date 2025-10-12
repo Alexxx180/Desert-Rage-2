@@ -1,6 +1,6 @@
 extends Node
 
-enum { ID = 4, HEIGHT = 5, CELL = 64, TRY = 75000 } # 0
+enum { ID = 4, HEIGHT = 5, CELL = 64 } # 0 , TRY = 75000
 
 @onready var ground: Node = $ground
 @onready var control: Node = $control
@@ -17,4 +17,5 @@ func return_input() -> void:
 func gravity(delta: float) -> void:
 	if spring.is_colliding() and Input.is_action_just_released("run"):
 		perform_jump(1.0)
-		ground.save(control.hero.position.y)
+		ground.save(control.slide.hero.position.y)
+	control.gravity(delta)

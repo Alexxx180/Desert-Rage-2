@@ -14,15 +14,14 @@ func far_map(_execute: TileMapLayer) -> void:
 	print("HERO STOP USING: ", _last_position)
 
 func animation() -> void:
-	_hero.view.animation.moves.set_fight_start("active")
-	_hero.view.animation.moves.set_fighting("skill_two")
+	_hero.to.moves.set_fight_start("active")
+	_hero.to.moves.set_fighting("skill_two")
 
 func ability() -> void:
-	if _vessel != Defaults.ENTITY and !_vessel.logic.relations.spark.on and aura.use(cost):
-		_vessel.logic.processors.spark.charge()
+	if _vessel != Defaults.ENTITY and !_vessel.logic.link.spark.on and aura.use(cost):
+		_vessel.logic.work.spark.charge()
 	
 	print("ROCK SPARK, ", _last_position != Vector2.ZERO)
 	if _last_position != Vector2.ZERO and aura.use(cost):
-		activate.emit(_last_position)
-		print("USED")
+		activate.emit(_last_position); print("USED")
 		animation()

@@ -1,5 +1,5 @@
 extends Node2D
 
-@onready var processors: Node = $processors
-@onready var detectors: Node = $detectors
-@onready var relations: Node = $relations
+@onready var see: Node2D = $see
+@onready var work: Node = $work
+@onready var link: Node = $link

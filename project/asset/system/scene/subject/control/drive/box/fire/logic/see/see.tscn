@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://c07cdb4vb5780"]
+
+[ext_resource type="Script" uid="uid://ct8umkubtkjdb" path="res://asset/system/script/subject/control/drive/box/fire/detectors/detectors.gd" id="1_2nq2g"]
+[ext_resource type="PackedScene" uid="uid://cwvc7idib7ro3" path="res://asset/system/scene/subject/control/drive/box/base/press.tscn" id="2_5um8t"]
+[ext_resource type="PackedScene" uid="uid://cda88lhlfg85" path="res://asset/system/scene/subject/control/drive/box/fire/logic/see/fire.tscn" id="3_bhoxg"]
+[ext_resource type="Script" uid="uid://bd51c3vsimkv4" path="res://asset/system/script/subject/control/drive/box/fire/detectors/fire.gd" id="3_wcyrx"]
+[ext_resource type="Shape2D" uid="uid://do0s1n5uuqpof" path="res://asset/resource/canvas/map/geometry/characters/character/character.tres" id="4_wvas3"]
+
+[node name="detectors" type="Node2D"]
+script = ExtResource("1_2nq2g")
+
+[node name="press" parent="." instance=ExtResource("2_5um8t")]
+
+[node name="fire" type="Node2D" parent="."]
+script = ExtResource("3_wcyrx")
+
+[node name="a" parent="fire" instance=ExtResource("3_bhoxg")]
+position = Vector2(-32, -20)
+collision_mask = 526336
+monitoring = false
+
+[node name="b" parent="fire" instance=ExtResource("3_bhoxg")]
+position = Vector2(32, -20)
+collision_mask = 526336
+monitoring = false
+
+[node name="c" parent="fire" instance=ExtResource("3_bhoxg")]
+position = Vector2(32, 20)
+collision_mask = 526336
+monitoring = false
+
+[node name="d" parent="fire" instance=ExtResource("3_bhoxg")]
+position = Vector2(-32, 20)
+collision_mask = 526336
+monitoring = false
+
+[node name="slide" type="ShapeCast2D" parent="."]
+shape = ExtResource("4_wvas3")
+target_position = Vector2(0, 0)
+max_results = 1
+collision_mask = 268435456

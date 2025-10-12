@@ -2,35 +2,29 @@ extends Node
 
 @onready var storage: Node = $storage
 @onready var search: Node = $search
+@onready var activator: Node = $activator
 
-func setup(execute: TileMapLayer) -> void:
-	search.setup(execute, storage)
+var PLATE: Dictionary = { "OFF": Vector2i(4, 1), "ON": Vector2i(5, 1) }
+var LEVER: Dictionary = { "OFF": Vector2i(4, 3), "ON": Vector2i(5, 3) }
+var STAND: Dictionary = { "OFF": Vector2i(0, 2), "ON": Vector2i(1, 2) }
+var GATE: Dictionary = { "A": Vector2i(3, 0), "B": Vector2i(3, 1) }
 
-func activate(map_coords: Vector2i) -> void:
-	search.activate(map_coords)
-
-func setup_trigger(tile: Dictionary, map_coords: Array[Vector2i], i: int) -> void:
-	storage.setup_trigger(tile)
-	map_coords.remove_at(i)
+func setup(border: TileDecorator) -> void:
+	search.setup(border, storage)
+	activator.set_location(self)
 
 func set_lockers(tag: Vector2i, map_coords: Array[Vector2i]) -> void:
-	var i: int = map_coords.size()
-	print("TAG: ", tag)
+	var i: int = map_coords.size() ; print("TAG: ", tag)
 	while i > 0:
 		i -= 1
 		var tile: Dictionary = search.atlas.get_atlas(map_coords[i], tag)
 		tile.offset = Vector2i(1, 0)
 		match tile.atlas:
-			Vector2i(0, 3), Vector2i(1, 3):
-				storage.setup_plate(tile)
-				map_coords.remove_at(i)
-			Vector2i(0, 4), Vector2i(1, 4):
-				setup_trigger(tile, map_coords, i)
-			Vector2i(3, 5):
-				tile.offset.x = -1
-				setup_trigger(tile, map_coords, i)
-			Vector2i(0, 5), Vector2i(1, 5):
-				storage.setup_lock(tile)
-			Vector2i(2, 3), Vector2i(2, 4):
-				storage.setup_eraser_lock(tile)
+			PLATE.OFF, PLATE.ON: storage.add_plate(tile).unique(map_coords, i)
+			LEVER.OFF, LEVER.ON, FlowConductor.TILE.SOURCE.OFF:
+				if tile.atlas == FlowConductor.TILE.SOURCE.OFF:
+					print("tile: ", tile, " - coords: ", map_coords[i])
+				storage.add_trigger(tile).unique(map_coords, i)
+			STAND.OFF, STAND.ON: storage.add_stand(tile)
+			GATE.A, GATE.B: storage.add_gate(tile)
 	storage.logic.connector[tag] = map_coords

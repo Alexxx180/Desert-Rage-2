@@ -27,11 +27,11 @@ func stop_forward(box: CharacterBody2D) -> void:
 	print("STOP FORWARD")
 	if _grab:
 		velocity.weight = max(0, velocity.weight - box.weight)
-		box.logic.processors.movement.push.apply_velocity(Vector2.ZERO)
+		box.logic.work.push.apply_velocity(Vector2.ZERO)
 
 func apply_velocity(velocity: Vector2) -> void:
 	for box in boxes:
-		box.logic.processors.movement.push.apply_velocity(velocity)
+		box.logic.work.push.apply_velocity(velocity)
 	if has_boxes:
 		hero.view.animation.moves.set_move_action("pull")
 	else:

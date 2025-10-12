@@ -5,7 +5,7 @@ var location: Node
 func switch(pos: Vector2, appendix: int) -> void:
 	var map_coords: Vector2i = location.search.atlas.find_cell(pos)
 	if map_coords != Lockers.EMPTY and check_weight(map_coords, appendix):
-		location.activate(map_coords)
+		location.search.activate(map_coords)
 
 func check_weight(map_coords: Vector2i, appendix: int) -> bool:
 	var trigger: Dictionary = location.storage.logic.trigger[map_coords]

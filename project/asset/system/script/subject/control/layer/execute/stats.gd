@@ -37,7 +37,7 @@ func can_fill() -> bool: return middle("hp") or middle("ap")
 func _stat(type: String) -> Dictionary: return recovery.get(type)
 
 func enough(type: String) -> bool: return _stat(type).use != BORDER
-func middle(type: String) -> bool: return _stat(type).use < stat.max
+func middle(type: String) -> bool: return _stat(type).use < _stat(type).max
 func nobody(type: String) -> bool: return _stat(type).hero.size() == 0
 
 func no_one() -> bool: return nobody("hp") and nobody("ap")

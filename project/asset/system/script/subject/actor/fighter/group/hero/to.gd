@@ -4,11 +4,19 @@ func _init(hero: CharacterBody2D) -> void: _hero = hero
 
 var _hero: CharacterBody2D
 # Input and physics genre logic
+var input: Node:
+	get: return _hero.logic.work.input
 var topdown: Node:
-	get: return _hero.logic.work.input.topdown
+	get: return input.topdown
+var act: Node:
+	get: return topdown.move.act
+var F: int:
+	get: return topdown.levels.jump.feet.floors.F
 var platformer: Node:
-	get: return _hero.logic.work.input.platformer
+	get: return input.platformer
 # World environment and skills
+var moves: Node:
+	get: return _hero.view.animation.moves
 var effect: Node:
 	get: return _hero.view.animation.effect
 var world: Node:
@@ -22,6 +30,8 @@ var hud: Node:
 # Eye sight detecting
 var skills: Node2D:
 	get: return _hero.logic.see.world.skills
+var ability: Node2D:
+	get: return _hero.logic.see.world.ability
 var platform: Node2D:
 	get: return _hero.logic.see.levels.platform
 var tools: Node2D:

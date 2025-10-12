@@ -3,15 +3,10 @@ extends Node
 @onready var rain: Node = $rain
 @onready var spark: Node = $spark
 
-var border: TileDecorator:
+var lay: Node:
 	set(value):
-		rain.border = value
-		spark.border = value
-
-var execute: TileDecorator:
-	set(value):
-		rain.execute = value
-		spark.execute = value
+		rain.lay = value
+		spark.lay = value
 
 func _ready() -> void:
 	rain.flow.connect(spark.puddle_charge)
