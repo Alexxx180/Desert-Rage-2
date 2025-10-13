@@ -15,7 +15,7 @@ func controls(box: CharacterBody2D, seat: Node) -> void:
 	seat.height = box.height
 
 	booking.controls(seat)
-	box.move.connect(seat.transport)
+	# box.move.connect(seat.transport)
 
 	stand.entered.connect(seat.enable_stand)
 	stand.exited.connect(seat.disable_stand)

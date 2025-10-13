@@ -14,20 +14,25 @@ func controls(platform: CharacterBody2D, seat: Node) -> void:
 	stand.seat = seat
 	seat.place.entity = platform
 	seat.place.stand = stand
-	seat.height = ride.surface.height
+	seat.height = platform.height
 
 	booking.controls(seat)
 
-	platform.logic.work.ride.surface.move.connect(seat.transport)
+	ride.engine.move.connect(seat.transport)
+	ride.engine.speed = platform.speed
 	# floors.update_floor.connect(seat.set_floor)
 
 	stand.entered.connect(seat.enable_stand)
+	"""
 	stand.entered.connect(func(hero):
 		ride.hero_entered(hero)
 		hero.to.act.velocity.forget()
 		#  # FOR DIRECTED PLATFORMS
 		)
+	"""
 	stand.exited.connect(seat.disable_stand)
+	"""
 	stand.exited.connect(func(_hero):
-		ride.surface.push(Vector2.ZERO)
-		ride.surface.free_engine())
+		ride.engine.push(Vector2.ZERO)
+		ride.engine.set_busy(ride.engine.FREE))
+	"""

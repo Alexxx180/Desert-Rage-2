@@ -29,6 +29,7 @@ func stop_dash() -> void:
 	sequence(false)
 	moves.set_move_action("go")
 	moves.set_hang_move("go")
+	moves.hero.to.act.teleport.set_box(Defaults.ENTITY)
 	# moves.hero.to.topdown.move.act.velocity.forget()
 	# moves.tree.direction = temp
 	print("DASH STOPPED")

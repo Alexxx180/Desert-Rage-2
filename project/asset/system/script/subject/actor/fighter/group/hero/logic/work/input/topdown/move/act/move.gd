@@ -17,7 +17,8 @@ func _feedback(motion: Vector2) -> void:
 	run.set_direction(motion)
 	if not chains.hanging:
 		levels.jump.perform(motion)
-		velocity.travel(motion)
+		if levels.jump.feet.stable:
+			velocity.travel(motion)
 	else:
 		velocity.platforming(motion)
 	actions.tick()

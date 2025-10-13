@@ -7,12 +7,13 @@ var jumped: bool = false
 var surface: Node2D
 
 func determine() -> void:
-	print("determine jump")
+	# print("determine jump")
 	if ledges.around():
-		print("jump on the box")
+		# print("jump on the box")
+		feet.set_box(ledges.box)
 		feet.jump(ledges.pos)
 	else:
-		print("jump on the floor")
+		# print("jump on the floor")
 		feet.deploy()
 
 func perform(motion: Vector2) -> void:

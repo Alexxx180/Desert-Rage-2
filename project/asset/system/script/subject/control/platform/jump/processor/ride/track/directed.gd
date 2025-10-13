@@ -21,7 +21,7 @@ func _physics_process(_delta: float) -> void:
 func busy_feedback() -> void: pass
 func hero_entered(hero: CharacterBody2D) -> void:
 	surface.ignite_engine()
-	var direction: Vector2 = hero.logic.detectors.platforming.direction
+	var direction: Vector2 = hero.logic.see.levels.dir
 	var x: int = int(direction.x)
 	track = Vector2(POWER * x, 0) if x != 0 else Vector2(0, POWER * direction.y)
 

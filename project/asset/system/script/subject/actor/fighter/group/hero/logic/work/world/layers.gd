@@ -28,9 +28,7 @@ func hero_collide(value: bool) -> Lay:
 	return self
 
 func during_jump(sequence: bool, stable_ground: bool) -> void:
-	if sequence:
-		print("collided: ", false)
+	if sequence: # print("collided: ", false)
 		context(false).collide_main().hero_collide(false)
-	elif stable_ground:
-		print("collided: ", true)
+	elif stable_ground: # print("collided: ", true)
 		context(true).collide_main().hero_collide(true)

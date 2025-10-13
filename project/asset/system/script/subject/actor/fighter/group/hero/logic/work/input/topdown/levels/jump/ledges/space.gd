@@ -27,9 +27,9 @@ func _observe(ledge: Vector2) -> bool:
 
 func reach(stand: Area2D) -> bool:
 	var pos: Vector2 = stand.get_ledge_position()
-	var place: Node = stand.seat.place
+	var seat: Node = stand.seat.place
 	var box: CharacterBody2D = stand.box
 	# var unique: bool = stand.box.get_instance_id() != floors.entity.get_instance_id() unique and 
-	print(" EMPTY PLACE: ", place.empty()) # "UNIQUE: ", unique, 
+	# print(" EMPTY PLACE: ", place.empty()) # "UNIQUE: ", unique, 
 	# var _floor: int = stand.seat.F # print("SL: ", pos == null) DEPRECATED
-	return place.empty() and _observe(pos) and floors.same(box.position, box.height)
+	return seat.empty() and _observe(pos) and floors.same(box.position, box.height)

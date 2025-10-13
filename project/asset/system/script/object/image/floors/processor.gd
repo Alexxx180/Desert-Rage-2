@@ -19,7 +19,7 @@ func get_floor() -> int:
 		return extract(entity.position, entity.height)
 
 func same(pos: Vector2, height: int = 0) -> bool:
-	var f: int = extract(pos, height); print("F: ", f, " ", "=" if f == F else ("<" if f < F else ">"), F, " ")
+	var f: int = extract(pos, height)#; print("F: ", f, " ", "=" if f == F else ("<" if f < F else ">"), " ", F, " ")
 	return f == F
 
 func same_to_hero(ground: Vector2) -> bool:
