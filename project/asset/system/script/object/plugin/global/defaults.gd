@@ -5,6 +5,7 @@ const DICT: Dictionary = {}
 const INT: int = -1
 
 static func FUNC(): pass
+static func entity(o: CharacterBody2D) -> bool: return o == Defaults.ENTITY
 
 @onready var NODE: Node = Node.new()
 @onready var ENTITY: CharacterBody2D = CharacterBody2D.new()

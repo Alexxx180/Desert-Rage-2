@@ -14,25 +14,23 @@ func _set_input(topdown: Node, started_sequence: bool) -> void:
 	if !started_sequence:
 		topdown.move.act.velocity.forget()
 		print("FORGET VELOCITY! ")
-	#else:
-		#topdown.move.act.run.reset_run()
-	# work.freeze_input[started_sequence].call()# IMPORTANT
 
 func sequence(started: bool) -> void:
 	moves.tree.effect.sync_animation()
 	_set_input(moves.hero.to.topdown, started)
 	_switch_monitoring(!started)
-#	else: for state in [true, false]: hero.set_hero_collision(true)
 
-func stop_dash() -> void:
-	# var temp: Vector2i = moves.tree.direction
+func start(action: String) -> void:
+	moves.set_move_action(action)
+	moves.set_base_stance("move")
+	sequence(true)
+
+func end() -> void:
 	sequence(false)
 	moves.set_move_action("go")
 	moves.set_hang_move("go")
-	moves.hero.to.act.teleport.set_box(Defaults.ENTITY)
-	# moves.hero.to.topdown.move.act.velocity.forget()
-	# moves.tree.direction = temp
-	print("DASH STOPPED")
+	#$moves.hero.to.act.teleport.platform.set_box(Defaults.ENTITY)
+	print("JUMP FINISHED")
 
 func pull_box(has_boxes: bool) -> void:
 	if not moves.hero.to.topdown.levels.jump.jumped:

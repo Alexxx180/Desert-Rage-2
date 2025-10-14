@@ -4,9 +4,9 @@ extends Node
 @onready var place: Node = $place
 
 var size: int = 0
-var data: Dictionary = {} # int, Area2D
+var data: Dictionary = {} # int, StaticBody2D
 
-var _current: Area2D
+var _current: StaticBody2D
 var pos: Vector2:
 	get: return _current.get_ledge_position()
 var box: CharacterBody2D:
@@ -14,11 +14,11 @@ var box: CharacterBody2D:
 
 func _ready() -> void: space.place = place
 
-func append(ledge: Area2D) -> void:
+func append(ledge: StaticBody2D) -> void:
 	data[ledge.get_instance_id()] = ledge
 	size += 1
 
-func remove(ledge: Area2D) -> void:
+func remove(ledge: StaticBody2D) -> void:
 	data.erase(ledge.get_instance_id())
 	size -= 1
 

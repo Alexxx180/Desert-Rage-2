@@ -29,8 +29,6 @@ func _physics_process(delta: float) -> void:
 	if logic.see.slide.is_colliding():
 		velocity.y = delta * SINGULARITY
 	move_and_slide()
-	if velocity != Vector2.ZERO:
-		pass#logic.work.transport(position)
 
 func push(next: Vector2) -> void:
 	velocity = next

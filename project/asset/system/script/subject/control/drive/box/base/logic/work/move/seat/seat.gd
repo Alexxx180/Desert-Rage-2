@@ -12,7 +12,8 @@ func compare(hero: CharacterBody2D) -> bool:
 	return hero.to.F == place.get_floor()
 
 func transport(_position: Vector2) -> void:
-	move.emit(place.stand.get_ledge_position()) #print("TRANSPORTED: ", target)
+	pass
+	# move.emit(place.stand.get_ledge_position()) #print("TRANSPORTED: ", target)
 
 func enable_stand(hero: CharacterBody2D) -> void:
 	if place.empty() and place.is_in_midair(hero):# print("ENABLE STAND! ", place.empty())

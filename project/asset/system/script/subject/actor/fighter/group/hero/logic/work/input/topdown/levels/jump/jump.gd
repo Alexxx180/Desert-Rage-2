@@ -13,7 +13,8 @@ func determine() -> void:
 		feet.set_box(ledges.box)
 		feet.jump(ledges.pos)
 	else:
-		# print("jump on the floor")
+		print("jump on the floor")
+		feet.set_box(Defaults.ENTITY)
 		feet.deploy()
 
 func perform(motion: Vector2) -> void:

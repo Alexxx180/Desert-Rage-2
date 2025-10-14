@@ -1,13 +1,6 @@
-extends Area2D
+extends StaticBody2D
 
-signal entered(hero)
-signal exited(hero)
+var box: CharacterBody2D
 
-var box: PhysicsBody2D
-var seat: Node
-
-func get_ledge_position() -> Vector2: # print("POS: ", _box.position + position)  # + Vector2(0, 30)
+func get_ledge_position() -> Vector2:
 	return box.position + position
-
-func set_entered(hero) -> void: entered.emit(hero)
-func set_exited(hero) -> void: exited.emit(hero)

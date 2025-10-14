@@ -25,11 +25,12 @@ func _observe(ledge: Vector2) -> bool:
 	_for_direction(func(a): _observe_ledge(a, ledge))
 	return _try
 
-func reach(stand: Area2D) -> bool:
+func reach(stand: StaticBody2D) -> bool:
 	var pos: Vector2 = stand.get_ledge_position()
-	var seat: Node = stand.seat.place
+	#var seat: Node = stand.seat.place
 	var box: CharacterBody2D = stand.box
 	# var unique: bool = stand.box.get_instance_id() != floors.entity.get_instance_id() unique and 
 	# print(" EMPTY PLACE: ", place.empty()) # "UNIQUE: ", unique, 
 	# var _floor: int = stand.seat.F # print("SL: ", pos == null) DEPRECATED
-	return seat.empty() and _observe(pos) and floors.same(box.position, box.height)
+	# seat.empty() 
+	return _observe(pos) and floors.same(box.position, box.height)

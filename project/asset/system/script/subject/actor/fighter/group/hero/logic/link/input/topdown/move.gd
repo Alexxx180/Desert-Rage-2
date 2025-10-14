@@ -12,7 +12,7 @@ func controls(hero: CharacterBody2D, move: Node) -> void:
 	for a in [move.act, hero.to.platformer.move.act]:
 		a.run.state.hero = hero
 		a.velocity.hero = hero
-		a.teleport.hero = hero
+		a.teleport.platform.hero = hero
 		a.chains = hero.to.platformer.tools.chains
 		a.moving.connect(hero.logic.see.set_direction)
 	

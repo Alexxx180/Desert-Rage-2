@@ -15,8 +15,8 @@ func _physics_process(_delta: float) -> void:
 	engine.process()
 	platform.move_and_slide()
 	
-	if platform.velocity != Vector2.ZERO:
-		pass
+#	if platform.velocity != Vector2.ZERO:
+		#pass
 		# seat.transport(platform.logic.see.stand.get_ledge_position())
 
 func hero_entered(_hero: CharacterBody2D) -> void: pass

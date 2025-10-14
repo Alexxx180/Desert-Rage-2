@@ -37,7 +37,7 @@ func update_image() -> void:
 	sync_view.emit(self)
  
 func enable_sync(_seat: Node, hero: CharacterBody2D) -> void:
-	visible = true
+	#visible = true
 	hero.to.act.moving.connect(animation.move)
 	hero.view.sync_view.connect(sync_image)
 	hero.view.update_image()
@@ -45,6 +45,6 @@ func enable_sync(_seat: Node, hero: CharacterBody2D) -> void:
 	#profile.modulate = hero.modulate
 
 func disable_sync(_seat: Node, hero: CharacterBody2D) -> void:
-	visible = false
+#	visible = false
 	hero.view.sync_view.disconnect(sync_image)
 	hero.to.act.moving.disconnect(animation.move)
