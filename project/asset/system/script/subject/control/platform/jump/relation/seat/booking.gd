@@ -1,6 +1,6 @@
 extends Node
 
-var _hero: CharacterBody2D
+@onready var _hero: CharacterBody2D = Defaults.ENTITY
 
 func controls(seat: Node) -> void:
 	seat.place.standing.connect(_on_stand)
@@ -10,8 +10,10 @@ func _height(hero: CharacterBody2D) -> Node:
 	return hero.to.jump.feet.floors
 
 func set_pos(pos: Vector2) -> void:
-	if not _hero.to.topdown.levels.jump.jumped:
+	if _hero != Defaults.ENTITY and not _hero.to.topdown.levels.jump.jumped:
+		print("override hero pos: ", pos)
 		_hero.make_position(pos)
+#	else:
 
 func _on_stand(platform: CharacterBody2D, hero: CharacterBody2D) -> void:
 	print("connected ride")

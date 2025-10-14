@@ -22,6 +22,6 @@ func disable_sync(seat: Node, hero: CharacterBody2D) -> void:
 	# view.disable_sync(seat, hero)
 
 func sync_anim(animation: String, frame: int) -> void:
-	print("received animation: ", animation, " - and frame: ", frame)
+	# print("received animation: ", animation, " - and frame: ", frame)
 	heroes[_name].animation = animation
 	heroes[_name].frame = frame

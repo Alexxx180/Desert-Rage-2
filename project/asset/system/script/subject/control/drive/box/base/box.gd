@@ -15,6 +15,8 @@ enum { JUMP = 200000, SINGULARITY = 45000, GRAVITY = 700000 } # JUMP = -75000, G
 
 const feedback: int = 2
 
+var offset: Vector2:
+	get: return logic.see.stand.position
 var ledge: Vector2:
 	get: return logic.see.stand.get_ledge_position()
 
@@ -27,7 +29,8 @@ func _physics_process(delta: float) -> void:
 	if logic.see.slide.is_colliding():
 		velocity.y = delta * SINGULARITY
 	move_and_slide()
-	logic.work.transport(position)
+	if velocity != Vector2.ZERO:
+		pass#logic.work.transport(position)
 
 func push(next: Vector2) -> void:
 	velocity = next

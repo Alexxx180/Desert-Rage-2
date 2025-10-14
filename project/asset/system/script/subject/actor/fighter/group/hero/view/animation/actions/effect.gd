@@ -18,6 +18,5 @@ func set_position(proportion: float) -> void:
 	sync_animation()
 
 func sync_animation() -> void:
-	var view: AnimatedSprite2D = moves.hero.view.profile
-	print("SYNCED animation: ", view.animation, " - and frame: ", view.frame)
+	var view: AnimatedSprite2D = moves.hero.view.profile # print("SYNCED animation: ", view.animation, " - and frame: ", view.frame)
 	sync_anim.emit(view.animation, view.frame)

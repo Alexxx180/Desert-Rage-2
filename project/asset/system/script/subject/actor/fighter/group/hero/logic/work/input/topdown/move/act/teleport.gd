@@ -1,17 +1,19 @@
 extends Node
 
+const ENDED: float = 1.0
+
 @onready var box: CharacterBody2D = Defaults.ENTITY
 var hero: CharacterBody2D
 var target: Rect2
+var reserve: Vector2 = Vector2.ZERO
 
 func set_hero_action(action: String) -> void:
-	# hero.to.act.turn_around(Vector2.ZERO) #hero.velocity = Vector2.ZERO; hero.logic.work.input.topdown.levels.jump.feet.deployment.reset_direction()
-	print("TELEPORTING: ", target.position + target.size)
+	print("START TELEPORTING: ", target.position + target.size)
 	hero.to.moves.set_move_action(action)
 	hero.to.moves.set_base_stance("move")
-	hero.to.moves.jump.sequence(true)
+	hero.to.moves.set_jump_start()
 
-func set_box(next: CharacterBody2D) -> void:
+func set_box(next: CharacterBody2D) -> void: #if not box is PlatformingBox:
 	box = next
 
 func delta(b: Vector2, a: Vector2) -> Vector2: return b - a
@@ -23,11 +25,32 @@ func teleport(next: Vector2, action: String = "jump") -> void:
 func dash(force: Vector2, action: String = "jump") -> void:
 	teleport(hero.position + force, action)
 
-func move(proportion: float) -> void:
+func _sync_moving_platform(proportion: float) -> void:
 	if box != Defaults.ENTITY:
-		if proportion == 1.0:
-			hero.position = box.ledge
-		else:
-			hero.position = target.position + delta(box.ledge, target.position) * proportion
+		hero.position = target.position + delta(box.ledge, target.position) * proportion
 	else:
-		hero.position = target.position + target.size * proportion #print("TP MOVE: ", target.position + target.size) # print("JUMP TARGET POS: ", target.position, " + SIZE: ", target.size)
+		hero.position = target.position + target.size * proportion
+
+func _jump_from_platform() -> void:
+	box.view.remove_child(hero)
+	hero.group.add_child(hero)
+	hero.position = reserve + target.size
+	reserve = Vector2.ZERO
+
+func _jump_to_platform() -> void:
+	hero.group.remove_child(hero)
+	box.view.add_child(hero)
+	reserve = hero.position
+	hero.position = box.offset # +  box.position
+
+func move(proportion: float) -> void:
+	_sync_moving_platform(proportion)
+	if proportion == ENDED:
+		if box == Defaults.ENTITY:
+			_jump_from_platform()
+		else:
+			_jump_to_platform()
+		print("hero position with 1.0 proportion: ", hero.position)
+		hero.to.moves.set_jump_end()
+	else:
+		print("hero position: ", hero.position)

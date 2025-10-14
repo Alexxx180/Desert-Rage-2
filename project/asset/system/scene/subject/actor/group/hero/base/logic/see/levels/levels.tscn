@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://chf3wtyobsvlq"]
+[gd_scene load_steps=14 format=3 uid="uid://chf3wtyobsvlq"]
 
 [ext_resource type="Script" uid="uid://d02ln3jqeo2p3" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/see/levels/levels.gd" id="1_drm8j"]
 [ext_resource type="PackedScene" uid="uid://b3hev1nf6r4th" path="res://asset/system/scene/subject/actor/group/hero/base/logic/see/levels/platform/platform.tscn" id="2_simtw"]
@@ -10,6 +10,9 @@
 [ext_resource type="Shape2D" uid="uid://i0icy78wfk8i" path="res://asset/resource/canvas/map/geometry/characters/character/levels.tres" id="8_7tjjt"]
 [ext_resource type="Shape2D" uid="uid://do0s1n5uuqpof" path="res://asset/resource/canvas/map/geometry/characters/character/character.tres" id="9_2x7sw"]
 [ext_resource type="Script" uid="uid://cwuy8y0rqwdt" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/see/levels/platforms/surface/deploy/walls/distance/distance.gd" id="10_xteie"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iyat4"]
+size = Vector2(2, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n6gc1"]
 size = Vector2(0, 0)
@@ -29,6 +32,12 @@ script = ExtResource("3_seham")
 [node name="chains" type="Node2D" parent="tools"]
 position = Vector2(0, -100)
 script = ExtResource("4_58q8y")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="tools/chains"]
+collision_mask = 512
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="tools/chains/StaticBody2D"]
+shape = SubResource("RectangleShape2D_iyat4")
 
 [node name="pillar" type="Area2D" parent="tools/chains"]
 collision_layer = 0
