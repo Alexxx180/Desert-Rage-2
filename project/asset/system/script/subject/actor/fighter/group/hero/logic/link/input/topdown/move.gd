@@ -14,13 +14,13 @@ func controls(hero: CharacterBody2D, move: Node) -> void:
 		a.velocity.hero = hero
 		a.teleport.hero = hero
 		a.chains = hero.to.platformer.tools.chains
+		a.moving.connect(hero.logic.see.set_direction)
 	
 	act.levels = hero.to.topdown.levels
 	act.actions = hero.to.topdown.actions
 	hero.to.platformer.move.act.levels = hero.to.topdown.levels
 	hero.to.platformer.move.act.actions = hero.to.platformer.actions
 	
-	act.moving.connect(hero.logic.see.set_direction)
 	act.moving.connect(hero.view.animation.move)
 	act.moving.connect(hero.view.ap.set_direction)
 

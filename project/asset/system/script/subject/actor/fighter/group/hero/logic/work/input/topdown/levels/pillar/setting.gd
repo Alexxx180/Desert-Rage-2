@@ -17,8 +17,10 @@ func whip_dash(pos: Vector2) -> void:
 	teleport.dash(pos, "whip_dash")
 
 func whip_catch(pos: Vector2) -> void:
+	print("BUT POS WAS: ", pos)
 	if pos.x != 0: return
 	teleport.dash(pos, "go")
+	view.animation.moves.set_hang("move")
 	view.animation.moves.set_hang_move("whip_dash")
 
 func rotate(pos: Vector2, jump_offset: float) -> Vector2:

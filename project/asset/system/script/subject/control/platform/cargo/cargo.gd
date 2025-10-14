@@ -1,8 +1,7 @@
 extends CharacterBody2D
 
-@onready var detectors: Node2D = $detectors
-@onready var processor: Node = $processor
-@onready var relation: Node = $relation
+@onready var see: Node2D = $see
+@onready var work: Node = $work
+@onready var link: Node = $link
 
-func _ready() -> void:
-	relation.controls(self)
+func _ready() -> void: link.controls(self)

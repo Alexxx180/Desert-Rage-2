@@ -2,6 +2,7 @@ extends Node
 
 @onready var topdown: Node = $topdown
 @onready var platformer: Node = $platformer
+@onready var board: BehaviorBlackboard = $board
 
 var is_platformer: bool = false
 var suspended: bool = false

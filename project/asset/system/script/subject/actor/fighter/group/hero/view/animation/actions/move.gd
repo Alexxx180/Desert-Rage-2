@@ -22,9 +22,11 @@ func set_base_stance(stand: String) -> void:
 	for pose in ["hang", "stand"]: tree.request(pose, stand)
 
 func set_aggressive(stand: String) -> void:
-	for env in ["ground", "chains"]: tree.request(env, stand)
+	for env in ["ground"]: tree.request(env, stand) # "chains"
 
 func set_environment(stand: String) -> void: tree.request("environment", stand)
+
+func set_hang(stand: String) -> void: tree.request("hang", stand)
 
 func set_hang_move(stand: String) -> void: tree.request("hang_move", stand)
 

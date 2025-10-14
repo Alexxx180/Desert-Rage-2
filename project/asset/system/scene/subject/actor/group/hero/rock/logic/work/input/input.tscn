@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://sxbplp4jth8i"]
+[gd_scene load_steps=41 format=3 uid="uid://sxbplp4jth8i"]
 
 [ext_resource type="Script" uid="uid://chyqd202d6so4" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/work/input/input.gd" id="1_3116p"]
 [ext_resource type="Script" uid="uid://dw2tfm70swerb" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/work/input/topdown/topdown.gd" id="2_3116p"]
@@ -30,6 +30,7 @@
 [ext_resource type="Script" uid="uid://cmm8nk2huc4mb" path="res://addons/godot-behavior-tree-plugin/tree/tree.gd" id="26_c1fe2"]
 [ext_resource type="Script" uid="uid://b2eukqcbuq556" path="res://addons/godot-behavior-tree-plugin/selector/selector.gd" id="27_y0nu7"]
 [ext_resource type="Script" uid="uid://xyxwk1uhmmqa" path="res://addons/godot-behavior-tree-plugin/sequence/sequence.gd" id="28_44pk4"]
+[ext_resource type="Script" uid="uid://s4miy2ilnjvo" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/work/input/platformer/actions.gd" id="28_87ydr"]
 [ext_resource type="Script" uid="uid://d142f2qhty4op" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/work/input/actions/skills/combo/na.gd" id="29_sc206"]
 [ext_resource type="Script" uid="uid://2emwmpqnf28y" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/work/input/actions/skills/punch/action.gd" id="30_s1iqr"]
 [ext_resource type="Script" uid="uid://cmwixa7o3lh67" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/work/input/actions/skills/punch/combo/single.gd" id="31_adlbq"]
@@ -65,6 +66,10 @@ metadata/_custom_type_script = "uid://rssqt7kxsel6"
 [node name="input" type="Node"]
 script = ExtResource("1_3116p")
 
+[node name="board" type="Node" parent="."]
+script = ExtResource("7_hrf0v")
+metadata/_custom_type_script = "uid://6ruw0ycrqlbq"
+
 [node name="topdown" type="Node" parent="."]
 script = ExtResource("2_3116p")
 
@@ -76,10 +81,6 @@ script = ExtResource("2_3116p")
 script = ExtResource("5_nhsi8")
 
 [node name="combo" type="Timer" parent="topdown/actions"]
-
-[node name="board" type="Node" parent="topdown/actions"]
-script = ExtResource("7_hrf0v")
-metadata/_custom_type_script = "uid://6ruw0ycrqlbq"
 
 [node name="behavior" parent="topdown/actions" instance=ExtResource("9_f00jc")]
 
@@ -138,10 +139,7 @@ wait_time = 0.3
 one_shot = true
 
 [node name="actions" type="Node" parent="platformer"]
-
-[node name="board" type="Node" parent="platformer/actions"]
-script = ExtResource("7_hrf0v")
-metadata/_custom_type_script = "uid://6ruw0ycrqlbq"
+script = ExtResource("28_87ydr")
 
 [node name="behavior" type="Node" parent="platformer/actions"]
 script = ExtResource("26_c1fe2")
