@@ -6,11 +6,15 @@ signal directing(direction: Vector2)
 @onready var platform: CharacterBody2D
 @onready var engine: Node = $engine
 
+var caution: ShapeCast2D
 var seat: Node
 
 func _physics_process(_delta: float) -> void:
+	if caution.is_colliding(): return
+	
 	engine.process()
 	platform.move_and_slide()
+	
 	if platform.velocity != Vector2.ZERO:
 		pass
 		# seat.transport(platform.logic.see.stand.get_ledge_position())

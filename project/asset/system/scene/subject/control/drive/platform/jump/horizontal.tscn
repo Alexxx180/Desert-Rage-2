@@ -1,4 +1,4 @@
-[gd_scene load_steps=1695 format=3 uid="uid://cqxt80wks7rq3"]
+[gd_scene load_steps=1696 format=3 uid="uid://cqxt80wks7rq3"]
 
 [ext_resource type="Script" uid="uid://ctkxvtr3os1lt" path="res://asset/system/script/subject/control/platform/jump/jump.gd" id="1_hlg1w"]
 [ext_resource type="Script" uid="uid://bwq032jyu8u10" path="res://asset/system/script/subject/control/drive/box/base/view/view.gd" id="2_thfwd"]
@@ -197,6 +197,7 @@
 [ext_resource type="Script" uid="uid://bkna48x4wobfe" path="res://asset/system/script/subject/control/platform/jump/detector/horizontal.gd" id="186_t6uqh"]
 [ext_resource type="Script" uid="uid://c2lqak7by8566" path="res://asset/system/script/subject/control/drive/box/base/logic/see/stand.gd" id="187_t6uqh"]
 [ext_resource type="Shape2D" uid="uid://byqqkvyxrb1ta" path="res://asset/resource/canvas/map/geometry/interactables/platform/jump-platform.tres" id="188_helu0"]
+[ext_resource type="Shape2D" uid="uid://d2kwfwwome0ir" path="res://asset/resource/canvas/map/geometry/interactables/platform/caution/jump.tres" id="189_t6uqh"]
 [ext_resource type="Script" uid="uid://bwpna8842lrpe" path="res://asset/system/script/subject/control/platform/jump/processor/ride/engine/auto.gd" id="194_t6uqh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_10ksy"]
@@ -11641,6 +11642,12 @@ shape = ExtResource("188_helu0")
 position = Vector2(-40, -22)
 target_position = Vector2(80, 0)
 collision_mask = 128
+
+[node name="caution" type="ShapeCast2D" parent="logic/see"]
+shape = ExtResource("189_t6uqh")
+target_position = Vector2(0, 0)
+max_results = 1
+collision_mask = 20
 
 [node name="work" type="Node" parent="logic"]
 script = ExtResource("11_yr0hh")

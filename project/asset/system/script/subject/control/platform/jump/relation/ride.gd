@@ -24,6 +24,7 @@ func controls(platform: CharacterBody2D, ride: Node) -> void:
 	# ride.surface.seat = work.seat
 	#ride.surface.engine = ride.engine
 	# ride.surface.igniting = ride.igniting
+	ride.caution = platform.logic.see.caution
 	ride.engine.platform = platform #  platform
 	
 	#ride.surface.ignite_engine()
