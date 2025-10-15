@@ -8,6 +8,7 @@ func teleport(next: Vector2, action: String = "jump") -> void:
 	platform.hero.to.moves.jump.start(action)
 
 func dash(force: Vector2, action: String = "jump") -> void:
+	print("DASH TO GROUND. ")
 	teleport(platform.hero.position + force, action)
 
 func move(proportion: float) -> void:

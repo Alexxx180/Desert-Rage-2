@@ -16,7 +16,9 @@ func process_physics(delta: float) -> void:
 func _feedback(motion: Vector2) -> void:
 	run.set_direction(motion)
 	if not chains.hanging:
-		levels.jump.perform(motion)
+		print("perform right after: ", motion)
+		if motion != Vector2.ZERO:
+			levels.jump.perform(motion)
 		if levels.jump.feet.stable:
 			velocity.travel(motion)
 	else:

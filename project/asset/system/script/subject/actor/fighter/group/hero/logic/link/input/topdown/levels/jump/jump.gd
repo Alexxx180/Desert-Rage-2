@@ -8,7 +8,7 @@ func controls(hero: CharacterBody2D, jump: Node) -> void: # overview controls...
 	# var type: Node = hero.to.topdown.move.act.teleport
 
 	jump.ledges.space.setup(hero)
-	jump.ledges.space.floors = jump.feet.floors
+	jump.ledges.place.floors = jump.feet.floors
 	jump.surface = levels.platform.surface
 
 	ledges.body_entered.connect(jump.ledges.append)

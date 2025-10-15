@@ -23,9 +23,6 @@ func set_deploy(next) -> void:
 func get_ground() -> Vector2:
 	return floors.hero.position + _deploy.walls.target
 
-func same_level(pos: Vector2 = get_ground(), height: int = 0) -> bool:
-	return floors.same(pos, height)
-
 func set_box(box: CharacterBody2D) -> void:
 	floors.hero.to.act.teleport.platform.set_box(box)
 
@@ -35,4 +32,5 @@ func deploy() -> void:
 
 func jump(next: Vector2, to_floor: bool = false, move = teleport) -> void:
 	set_stable(to_floor)
+	print("WAIT WHAT")
 	move.emit(next)

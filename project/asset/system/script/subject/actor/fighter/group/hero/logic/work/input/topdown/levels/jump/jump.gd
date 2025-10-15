@@ -9,7 +9,7 @@ var surface: Node2D
 func determine() -> void:
 	# print("determine jump")
 	if ledges.around():
-		# print("jump on the box")
+		print("jump on the box")
 		feet.set_box(ledges.box)
 		feet.jump(ledges.pos)
 	else:
@@ -18,7 +18,6 @@ func determine() -> void:
 		feet.deploy()
 
 func perform(motion: Vector2) -> void:
-	surface.deploy.set_direction(motion)
-	# print("overleaping: ", surface.overleap.is_colliding(motion))
+	surface.deploy.set_direction(motion) # print("overleaping: ", surface.overleap.is_colliding(motion))
 	if feet.unstable or surface.border.is_colliding(motion):
 		determine()

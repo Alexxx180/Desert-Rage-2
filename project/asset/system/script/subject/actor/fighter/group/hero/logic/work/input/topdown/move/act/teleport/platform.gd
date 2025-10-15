@@ -7,24 +7,31 @@ const LANDED: int = 1.0
 var hero: CharacterBody2D
 var target: Rect2
 var delta: Vector2:
-	get: return box.next.ledge - target.position
+	get: return box.next.ledge - (box.prev.ledge if box_ride() else target.position)
+
+func box_ride() -> bool: return box.prev != Defaults.ENTITY
 
 func is_landed(track: float) -> bool: return track == LANDED
 
-func set_box(next: CharacterBody2D) -> void: box.next = next
+func set_box(next: CharacterBody2D) -> void:
+	box.next = next
 
-func set_target_stand(next: Vector2) -> void:
-	target = Rect2(hero.position, next - hero.position)
+func set_target_stand(track: Vector2) -> void:
+	track -= box.prev.ledge if box_ride() else hero.position
+	print("NEXT HERO TRAVEL: ", track)
+	target = Rect2(hero.position, track)
 
 func _get_track(part: float) -> Vector2:
 	return (target.size if Defaults.entity(box.next) else delta) * part
 
 func sync_hero_pos(proportion: float) -> void:
 	hero.position = target.position + _get_track(proportion)
+	print("sync hero pos: ", hero.position)
 
 func reposition(pos: Vector2, platform: CharacterBody2D) -> void:
 	hero.position = pos
 	box.prev = platform
+	hero.to.jump.feet.floors.entity = platform
 
 func reparent_hero(prev: Node2D, next: Node2D) -> void:
 	prev.remove_child(hero)
@@ -42,8 +49,9 @@ func _jump_to_platform() -> void:
 	reposition(box.next.offset, box.next)
 
 func decide_jump() -> void:
-	if box.next == Defaults.ENTITY:
-		if not box.prev == Defaults.ENTITY:
-			_jump_from_platform()
-	else:
+	if box.next != Defaults.ENTITY:
 		_jump_to_platform()
+		return 
+
+	if box_ride():
+		_jump_from_platform()

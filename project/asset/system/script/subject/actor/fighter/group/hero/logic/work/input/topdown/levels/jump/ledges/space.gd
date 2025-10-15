@@ -4,7 +4,6 @@ var _direction: Vector2i = Vector2i.ZERO
 var _plane: Array[Array] = []
 var _try: bool = false
 
-var floors: Node
 var place: Node
 
 func set_direction(direction: Vector2i) -> void:
@@ -27,10 +26,6 @@ func _observe(ledge: Vector2) -> bool:
 
 func reach(stand: StaticBody2D) -> bool:
 	var pos: Vector2 = stand.get_ledge_position()
-	#var seat: Node = stand.seat.place
 	var box: CharacterBody2D = stand.box
-	# var unique: bool = stand.box.get_instance_id() != floors.entity.get_instance_id() unique and 
-	# print(" EMPTY PLACE: ", place.empty()) # "UNIQUE: ", unique, 
-	# var _floor: int = stand.seat.F # print("SL: ", pos == null) DEPRECATED
-	# seat.empty() 
-	return _observe(pos) and floors.same(box.position, box.height)
+	print("ACTUAL HEIGHT: ", box.height, " CAN: ", _observe(pos))
+	return _observe(pos) and place.floors.same(box)

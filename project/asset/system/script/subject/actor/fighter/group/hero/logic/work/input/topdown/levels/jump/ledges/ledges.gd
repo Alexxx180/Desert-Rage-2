@@ -31,4 +31,5 @@ func _search(count: int, platforms: Array) -> bool:
 	return jump
 
 func around() -> bool:
+	print("ledges size: ", size)
 	return _search(size, data.values())
