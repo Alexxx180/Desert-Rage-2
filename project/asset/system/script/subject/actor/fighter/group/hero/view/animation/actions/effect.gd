@@ -15,8 +15,9 @@ func set_damage(multiplier: float = 1) -> void:
 
 func set_position(proportion: float) -> void:
 	moves.hero.to.act.teleport.move(proportion)
-	sync_animation()
-
+	#sync_animation()
+"""
 func sync_animation() -> void:
 	var view: AnimatedSprite2D = moves.hero.view.profile # print("SYNCED animation: ", view.animation, " - and frame: ", view.frame)
 	sync_anim.emit(view.animation, view.frame)
+"""

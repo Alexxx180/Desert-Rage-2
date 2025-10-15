@@ -25,7 +25,6 @@ func _observe(ledge: Vector2) -> bool:
 	return _try
 
 func reach(stand: StaticBody2D) -> bool:
-	var pos: Vector2 = stand.get_ledge_position()
 	var box: CharacterBody2D = stand.box
-	print("ACTUAL HEIGHT: ", box.height, " CAN: ", _observe(pos))
+	var pos: Vector2 = box.ledge; print("ACTUAL HEIGHT: ", box.height, " CAN: ", _observe(pos))
 	return _observe(pos) and place.floors.same(box)

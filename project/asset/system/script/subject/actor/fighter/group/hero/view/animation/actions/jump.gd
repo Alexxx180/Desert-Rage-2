@@ -16,7 +16,7 @@ func _set_input(topdown: Node, started_sequence: bool) -> void:
 		print("FORGET VELOCITY! ")
 
 func sequence(started: bool) -> void:
-	moves.tree.effect.sync_animation()
+	# moves.tree.effect.sync_animation()
 	_set_input(moves.hero.to.topdown, started)
 	_switch_monitoring(!started)
 

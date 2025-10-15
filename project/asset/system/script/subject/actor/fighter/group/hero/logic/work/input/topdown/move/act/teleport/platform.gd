@@ -49,12 +49,15 @@ func set_target_stand(track: Vector2) -> void:
 		track = _get_track(track, "ledge")
 	print("NEXT HERO TRAVEL: ", track)
 	target = Rect2(hero.position, track)
+	print("TARGET IS: ", target)
 
 func sync_hero_pos(proportion: float) -> void:
-	hero.position = target.position + delta * proportion
+	if proportion != 1.0:
+		hero.position = target.position + delta * proportion
 	print("sync hero pos: ", hero.position)
 
 func reposition(pos: Vector2, platform: CharacterBody2D) -> void:
+	print("reposition: ", pos)
 	hero.position = pos
 	box.prev = platform
 	hero.to.jump.feet.floors.entity = platform

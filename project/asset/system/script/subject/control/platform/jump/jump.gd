@@ -7,7 +7,7 @@ extends CharacterBody2D
 @export var speed: float = 1
 
 var offset: Vector2:
-	get: return Vector2.ZERO #logic.see.stand.position
+	get: return Vector2(0, -32) #.ZERO#Vector2.ZERO #logic.see.stand.position
 var ledge: Vector2:
 	get: return position#logic.see.stand.get_ledge_position()
 var height: int = 1

@@ -4,13 +4,14 @@ extends Node
 
 func controls(platform: CharacterBody2D, seat: Node) -> void:
 	var stand: StaticBody2D = platform.logic.see.stand
+	stand.box = platform
 	var floors: Node = platform.logic.work.floors
 	var ride: Node = platform.logic.work.ride
 
 	#seat.place.standing.connect(platform.view.enable_sync)
 	#seat.place.leaving.connect(platform.view.disable_sync)
 
-	stand.box = platform
+	
 	#stand.seat = seat
 	#seat.place.entity = platform
 	#seat.place.stand = stand
