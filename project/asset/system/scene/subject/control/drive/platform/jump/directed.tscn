@@ -8,7 +8,6 @@
 [ext_resource type="Material" uid="uid://dgu0as4wl227l" path="res://asset/resource/canvas/gpu/shader/aura.tres" id="6_tnk0e"]
 [ext_resource type="Texture2D" uid="uid://5njpv4q1vm6m" path="res://asset/resource/media/image/actors/player/ray/skills/move/backward.png" id="7_sahvy"]
 [ext_resource type="Texture2D" uid="uid://bg306yjfnfuv5" path="res://asset/resource/media/image/actors/player/ray/fight/bash/backward.png" id="8_10hnd"]
-[ext_resource type="Shape2D" uid="uid://cmlykhkjbkx1x" path="res://asset/resource/canvas/map/geometry/interactables/platform/jump.tres" id="8_ggnph"]
 [ext_resource type="Texture2D" uid="uid://tpxfdjtl12an" path="res://asset/resource/media/image/actors/player/ray/chains/move/backward.png" id="9_abb46"]
 [ext_resource type="Script" uid="uid://buv51uglm2evx" path="res://asset/system/script/subject/control/platform/jump/detector/directed/ledge.gd" id="9_v0lse"]
 [ext_resource type="Texture2D" uid="uid://c4kqfwpy14710" path="res://asset/resource/media/image/actors/player/ray/chains/whip/backward.png" id="10_p28fo"]
@@ -198,6 +197,7 @@
 [ext_resource type="Texture2D" uid="uid://dh03al6y0ix3q" path="res://asset/resource/media/image/actors/player/rock/skills/run/right.png" id="184_madwy"]
 [ext_resource type="Texture2D" uid="uid://mngk83oxgibu" path="res://asset/resource/media/image/actors/player/rock/fight/spark/right.png" id="185_cwbam"]
 [ext_resource type="Texture2D" uid="uid://bdm2y8v7kw2f4" path="res://asset/resource/media/image/actors/player/rock/fight/stomp/right.png" id="186_d02yo"]
+[ext_resource type="Shape2D" uid="uid://byqqkvyxrb1ta" path="res://asset/resource/canvas/map/geometry/interactables/platform/jump-platform.tres" id="187_gk3tf"]
 [ext_resource type="Script" uid="uid://c2lqak7by8566" path="res://asset/system/script/subject/control/drive/box/base/logic/see/stand.gd" id="188_68803"]
 [ext_resource type="Shape2D" uid="uid://4vlyc8cvtjsy" path="res://asset/resource/canvas/map/geometry/interactables/jumping.tres" id="189_gk3tf"]
 [ext_resource type="Shape2D" uid="uid://d2kwfwwome0ir" path="res://asset/resource/canvas/map/geometry/interactables/platform/caution/jump.tres" id="191_gk3tf"]
@@ -11638,10 +11638,11 @@ script = ExtResource("5_jx5lw")
 script = ExtResource("6_m6gti")
 
 [node name="border" type="StaticBody2D" parent="logic/detectors"]
+position = Vector2(0, -22)
 collision_mask = 0
 
 [node name="shape" type="CollisionShape2D" parent="logic/detectors/border"]
-shape = ExtResource("8_ggnph")
+shape = ExtResource("187_gk3tf")
 
 [node name="stand" type="Area2D" parent="logic/detectors"]
 position = Vector2(0, -26)

@@ -8,7 +8,7 @@ var data: Dictionary = {} # int, StaticBody2D
 
 var _current: StaticBody2D
 var pos: Vector2:
-	get: return _current.get_ledge_position()
+	get: return _current.box.ledge
 var box: CharacterBody2D:
 	get: return _current.box
 

@@ -34,20 +34,21 @@ func is_landed(track: float) -> bool: return track == LANDED
 func set_box(next: CharacterBody2D) -> void:
 	box.next = next
 
+func _get_track(track: Vector2, prop: String) -> Vector2:
+	if box_ride():
+		print("added ", prop, " = ", box.prev.get(prop))
+		return track - box.prev.get(prop)
+	else:
+		print("minus hero pos")
+		return track - hero.position
+
 func set_target_stand(track: Vector2) -> void:
 	if Defaults.entity(box.next):
-		# print("original track")
-		if box_ride():
-			track -= box.prev.offset
-		else:
-			track -= hero.position
+		track = _get_track(track, "offset")
 	else:
-		track -= box.prev.ledge if box_ride() else hero.position
+		track = _get_track(track, "ledge")
 	print("NEXT HERO TRAVEL: ", track)
 	target = Rect2(hero.position, track)
-
-func _get_track(part: float) -> Vector2:
-	return (target.size if Defaults.entity(box.next) else delta) * part
 
 func sync_hero_pos(proportion: float) -> void:
 	hero.position = target.position + delta * proportion
