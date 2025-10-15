@@ -7,7 +7,25 @@ const LANDED: int = 1.0
 var hero: CharacterBody2D
 var target: Rect2
 var delta: Vector2:
-	get: return box.next.ledge - (box.prev.ledge if box_ride() else target.position)
+	get:
+		#target.size if Defaults.entity(box.next) else delta) * part
+		if Defaults.entity(box.next):
+			"""
+			if box_ride():
+				print("theory hero pos: ", hero.position)
+				print("theory: ", box.prev.ledge - target.position)
+				return box.prev.ledge - target.size
+			"""
+			return target.size
+		
+		print("next box: ", box.next.ledge)
+		if box_ride():
+			print("- old box standing: ", box.prev.ledge)
+			return box.next.ledge - box.prev.ledge
+		else:
+			print("- target pos : ", target.position)
+			return box.next.ledge - target.position
+		# return box.next.ledge - (box.prev.ledge if box_ride() else target.position)
 
 func box_ride() -> bool: return box.prev != Defaults.ENTITY
 
@@ -17,7 +35,14 @@ func set_box(next: CharacterBody2D) -> void:
 	box.next = next
 
 func set_target_stand(track: Vector2) -> void:
-	track -= box.prev.ledge if box_ride() else hero.position
+	if Defaults.entity(box.next):
+		# print("original track")
+		if box_ride():
+			track -= box.prev.offset
+		else:
+			track -= hero.position
+	else:
+		track -= box.prev.ledge if box_ride() else hero.position
 	print("NEXT HERO TRAVEL: ", track)
 	target = Rect2(hero.position, track)
 
@@ -25,7 +50,7 @@ func _get_track(part: float) -> Vector2:
 	return (target.size if Defaults.entity(box.next) else delta) * part
 
 func sync_hero_pos(proportion: float) -> void:
-	hero.position = target.position + _get_track(proportion)
+	hero.position = target.position + delta * proportion
 	print("sync hero pos: ", hero.position)
 
 func reposition(pos: Vector2, platform: CharacterBody2D) -> void:
