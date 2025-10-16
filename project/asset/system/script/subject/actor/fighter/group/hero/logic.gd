@@ -8,3 +8,6 @@ extends Node2D
 @onready var link: Node = $link
 
 func _ready() -> void: stats.update_stats()
+
+func _physics_process(delta: float) -> void:
+	hero.move_and_slide()

@@ -6,18 +6,21 @@ extends Node
 @onready var cargo: Node = $cargo
 
 const INVERSE: Vector2 = Vector2(-1, -1)
-
-func move_cargo() -> void:
-	cargo.move_cargo(direction)
+var enabled: bool = false
 
 func control_cargo() -> void:
-	if not cargo.platform.see.ledge.sync_traps():
-		move_cargo()
+	if enabled or not cargo.platform.see.ledge.sync_traps():
+		cargo.move_cargo(direction) #move_cargo()
 
 func enable_control() -> void:
-	cargo.movement = control_cargo
+	enabled = false
 
 func toggle_logic() -> void:
 	direction *= INVERSE
-	#cargo.movement = move_cargo
+	enabled = true
 	timer.start()
+
+func _physics_process(_delta: float) -> void:
+	#if cargo.weight.size() >= 1:
+	control_cargo()
+	cargo.platform.move_and_slide()
