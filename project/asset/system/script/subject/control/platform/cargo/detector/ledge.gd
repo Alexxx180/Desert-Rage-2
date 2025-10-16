@@ -15,6 +15,7 @@ func sync_trap() -> bool:
 	return open
 
 func move() -> bool:
+	#sync_trap() #not sync_trap() and  
 	return not sync_trap() and hero.is_colliding()
 
 func rail() -> bool:

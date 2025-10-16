@@ -21,6 +21,8 @@ func sync_traps() -> bool:
 func move() -> Vector2:
 	var directions: Array = get_directions()
 	for motion in directions:
-		if motion[0].move() and motion[0].rail():
+		if motion[0].rail() and motion[0].move():
+			#print("CarGo on rails: ", motion[1])
+			# print("CarGo moves: ", motion[1])
 			return motion[1]
 	return Vector2.ZERO
