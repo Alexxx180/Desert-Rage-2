@@ -1,6 +1,7 @@
 extends Node2D
 
 @onready var stand: Sprite2D = $stand
+"""
 @onready var heroes: Dictionary = {
 	"ray": $ray_profile, "rock": $rock_profile }
 
@@ -25,3 +26,4 @@ func sync_anim(animation: String, frame: int) -> void:
 	# print("received animation: ", animation, " - and frame: ", frame)
 	heroes[_name].animation = animation
 	heroes[_name].frame = frame
+"""

@@ -25,9 +25,10 @@ func wait() -> void:
 	stay = false
 	starting = true
 
-func push(motion: Vector2 = track) -> void:
-	platform.velocity = track * speed # platform.position
-	move.emit(platform.ledge)#logic.see.stand.get_ledge_position())
+func push(motion: Vector2) -> void:
+	platform.velocity = motion * speed # platform.position
+	# print("SET VELOCITY TO: ", motion * speed)
+	#move.emit(platform.ledge)#logic.see.stand.get_ledge_position())
 
 func _set_motion(motion: Vector2) -> void:
 	if stay:

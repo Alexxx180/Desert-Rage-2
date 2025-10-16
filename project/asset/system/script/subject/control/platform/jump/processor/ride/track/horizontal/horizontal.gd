@@ -13,6 +13,8 @@ func _physics_process(_delta: float) -> void:
 	if caution.is_colliding(): return
 	
 	engine.process()
+#	if platform.velocity == Vector2.ZERO:
+#		print("PLATFORM VELOCITY: ", platform.velocity)
 	platform.move_and_slide()
 	
 #	if platform.velocity != Vector2.ZERO:

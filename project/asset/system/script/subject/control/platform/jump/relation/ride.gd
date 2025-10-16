@@ -20,7 +20,7 @@ func controls(platform: CharacterBody2D, ride: Node) -> void:
 	_ride = ride
 	var work: Node = platform.logic.work
 	ride.platform = platform
-	ride.seat = work.seat
+	#ride.seat = work.seat
 	# ride.surface.seat = work.seat
 	#ride.surface.engine = ride.engine
 	# ride.surface.igniting = ride.igniting

@@ -1,12 +1,39 @@
-[gd_scene load_steps=3 format=3 uid="uid://dekjgpdurors"]
+[gd_scene load_steps=7 format=3 uid="uid://dekjgpdurors"]
 
 [ext_resource type="Texture2D" uid="uid://byjlxjjpmlmup" path="res://asset/resource/media/image/interactables/box/large.png" id="2_63rqq"]
 [ext_resource type="Script" uid="uid://bwq032jyu8u10" path="res://asset/system/script/subject/control/drive/box/base/view/view.gd" id="2_se4ou"]
 
+[sub_resource type="Gradient" id="Gradient_bfcnh"]
+colors = PackedColorArray(0, 0, 0, 0.235294, 0, 0, 0, 0.235294)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_2152n"]
+gradient = SubResource("Gradient_bfcnh")
+width = 70
+height = 24
+fill_from = Vector2(0.507576, 0)
+fill_to = Vector2(0.492424, 1)
+
+[sub_resource type="Gradient" id="Gradient_2152n"]
+colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 0.470588)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_3yhld"]
+gradient = SubResource("Gradient_2152n")
+height = 100
+fill_from = Vector2(0.495726, 0)
+fill_to = Vector2(0.5, 1)
+
 [node name="view" type="Node2D"]
 script = ExtResource("2_se4ou")
+
+[node name="shadow" type="Sprite2D" parent="."]
+position = Vector2(0, 2)
+texture = SubResource("GradientTexture2D_2152n")
 
 [node name="stand" type="Sprite2D" parent="."]
 position = Vector2(-32, -118)
 texture = ExtResource("2_63rqq")
 centered = false
+
+[node name="shadow-behind" type="Sprite2D" parent="."]
+position = Vector2(0, -40)
+texture = SubResource("GradientTexture2D_3yhld")
