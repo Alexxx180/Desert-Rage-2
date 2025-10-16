@@ -23,7 +23,7 @@ func _feedback(motion: Vector2) -> void:
 			velocity.travel(motion)
 	else:
 		velocity.platforming(motion)
-	# actions.tick() # TEMP disable fox jump box check
+	actions.tick() # TEMP disable fox jump box check
 
 func turn_around(target_motion: Vector2) -> void:
 	if not levels.jump.jumped:
