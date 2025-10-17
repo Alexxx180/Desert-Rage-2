@@ -1,8 +1,7 @@
 extends Node
 
 @onready var behavior: BehaviorTree = $behavior
-
-var board: BehaviorBlackboard
+@onready var board: BehaviorBlackboard = $board
 
 # TODOT
 func tick() -> void:

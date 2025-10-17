@@ -2,9 +2,7 @@ extends BehaviorAction
 
 @onready var caption: String = get_parent().name
 
-func tick(mark: Tick) -> int:
-	# print("DENIED ACCESS TO SKILLS ! ", mark.actor)
-	# return FAILED
+func tick(mark: Tick) -> int: # print("DENIED ACCESS TO SKILLS ! ", mark.actor) # return FAILED #print("hero: ", mark.blackboard.get_value("tools").hero.name)
 	var action: Dictionary = mark.blackboard.get_value(caption) # action.pressed = Input.is_action_pressed(name) # action.toggled = Input.is_action_just_pressed(name)
 	action.released = Input.is_action_just_pressed(name)
 	if action.released:

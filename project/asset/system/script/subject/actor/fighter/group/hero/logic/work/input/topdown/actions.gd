@@ -1,9 +1,8 @@
 extends Node
 
 @onready var behavior: BehaviorTree = $behavior
+@onready var board: BehaviorBlackboard = $board
 @onready var combo: Timer = $combo
-
-var board: BehaviorBlackboard
 
 func _ready() -> void:
 	combo.timeout.connect(reset_combo)

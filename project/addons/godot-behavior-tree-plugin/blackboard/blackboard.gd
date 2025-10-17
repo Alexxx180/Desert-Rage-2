@@ -4,19 +4,14 @@ class_name BehaviorBlackboard
 
 """ Behavior tree dictionary storage """
 
-var _base_memory: Dictionary # global info
-var _tree_memory: Dictionary # node-tree info
+var _base_memory: Dictionary = {} # global info
+var _tree_memory: Dictionary = {} # node-tree info
 
-func _enter_tree() -> void:
-	_base_memory = {}
-	_tree_memory = {}
+func set_value(key, value, tree: BehaviorTree = null, scope: BehaviorTreeBase = null) -> void:
+	_get_memory(tree, scope)[key] = value
 
-func set_value(key, value, behavior_tree = null, node_scope = null) -> void:
-	var memory := _get_memory(behavior_tree, node_scope)
-	memory[key] = value
-
-func get_value(key, behavior_tree = null, node_scope = null) -> Variant:
-	var memory := _get_memory(behavior_tree, node_scope)
+func get_value(key, tree: BehaviorTree = null, scope: BehaviorTreeBase = null) -> Variant:
+	var memory := _get_memory(tree, scope)
 	return memory[key] if memory.has(key) else null
 
 func add_value(key: String, value: int) -> void:
@@ -25,21 +20,18 @@ func add_value(key: String, value: int) -> void:
 func compare(key: Variant, value: Variant) -> bool:
 	return get_value(key) == value
 
-func _extract(behavior_tree: Variant, node_scope) -> Dictionary:
-	var memory: Dictionary = _get_tree_memory(behavior_tree)
-	if node_scope: memory = _get_node_memory(memory, node_scope)
-	return memory
+func _extract(memory: Dictionary, scope: BehaviorTreeBase) -> Dictionary:
+	return _get_node_memory(memory, scope) if scope else memory
 
-func _get_memory(behavior_tree: Variant, node_scope) -> Dictionary:
-	if behavior_tree: return _extract(behavior_tree, node_scope)
-	return _base_memory
+func _get_memory(tree: BehaviorTree, scope: BehaviorTreeBase) -> Dictionary:
+	return _extract(_get_tree_memory(tree), scope) if tree else _base_memory
 
-func _get_tree_memory(behavior_tree: Variant) -> Dictionary:
-	if not _tree_memory.has(behavior_tree):
-		_tree_memory[behavior_tree] = { "nodeMemory": {}, "openNodes": [] }
-	return _tree_memory[behavior_tree]
+func make_exist(memory: Dictionary, key: Variant, value: Dictionary) -> Dictionary:
+	if not memory.has(key): memory[key] = value
+	return memory[key]
 
-func _get_node_memory(tree_memory: Dictionary, node_scope: Variant) -> Dictionary:
-	var memory: Dictionary = tree_memory['nodeMemory']
-	if not memory.has(node_scope): memory[node_scope] = {}
-	return memory[node_scope]
+func _get_tree_memory(tree: BehaviorTree) -> Dictionary:
+	return make_exist(_tree_memory, tree, { "nodeMemory": {}, "openNodes": [] })
+
+func _get_node_memory(memory: Dictionary, scope: BehaviorTreeBase) -> Dictionary:
+	return make_exist(memory['nodeMemory'], scope, {})
