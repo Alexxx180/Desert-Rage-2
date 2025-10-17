@@ -9,7 +9,7 @@ func access(motion: Vector2) -> void:
 	actions.tick() # TEMP disable for jumping
 
 func process_physics(delta: float) -> void:
-	move.act.process_physics(delta)
+	# move.act.process_physics(delta)
 	tools.process_physics(delta)
 
 func input(event: InputEvent) -> void:

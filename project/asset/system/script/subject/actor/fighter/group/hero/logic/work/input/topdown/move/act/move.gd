@@ -10,9 +10,6 @@ var levels: Node
 var actions: Node
 var chains: Node
 
-func process_physics(delta: float) -> void:
-	pass # run.process_physics(delta)
-
 func _feedback(motion: Vector2) -> void:
 	run.set_direction(motion)
 	if not chains.hanging:

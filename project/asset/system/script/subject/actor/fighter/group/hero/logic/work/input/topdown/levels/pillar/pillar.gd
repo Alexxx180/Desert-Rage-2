@@ -19,7 +19,7 @@ func _turn_collision(state: bool) -> void:
 	dashed = !state
 
 func _selective_dash(pos: Vector2) -> void:
-	if env.chains.above:
+	if env.chains.hanging:
 		print("WHIP CATCH")
 		env.whip_catch(pos)
 	else:

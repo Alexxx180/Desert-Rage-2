@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://chf3wtyobsvlq"]
+[gd_scene load_steps=13 format=3 uid="uid://chf3wtyobsvlq"]
 
 [ext_resource type="Script" uid="uid://d02ln3jqeo2p3" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/see/levels/levels.gd" id="1_drm8j"]
 [ext_resource type="PackedScene" uid="uid://b3hev1nf6r4th" path="res://asset/system/scene/subject/actor/group/hero/base/logic/see/levels/platform/platform.tscn" id="2_simtw"]
@@ -11,11 +11,8 @@
 [ext_resource type="Shape2D" uid="uid://do0s1n5uuqpof" path="res://asset/resource/canvas/map/geometry/characters/character/character.tres" id="9_2x7sw"]
 [ext_resource type="Script" uid="uid://cwuy8y0rqwdt" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/see/levels/platforms/surface/deploy/walls/distance/distance.gd" id="10_xteie"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_iyat4"]
-size = Vector2(2, 1)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n6gc1"]
-size = Vector2(0, 0)
+size = Vector2(24, 10)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_urn3e"]
 size = Vector2(17, 17)
@@ -26,32 +23,26 @@ script = ExtResource("1_drm8j")
 [node name="platform" parent="." instance=ExtResource("2_simtw")]
 
 [node name="tools" type="Node2D" parent="."]
-visible = false
 script = ExtResource("3_seham")
 
 [node name="chains" type="Node2D" parent="tools"]
 position = Vector2(0, -100)
 script = ExtResource("4_58q8y")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="tools/chains"]
+[node name="border" type="ShapeCast2D" parent="tools/chains"]
+shape = SubResource("RectangleShape2D_n6gc1")
+target_position = Vector2(0, 0)
 collision_mask = 512
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="tools/chains/StaticBody2D"]
-shape = SubResource("RectangleShape2D_iyat4")
-
-[node name="pillar" type="Area2D" parent="tools/chains"]
-collision_layer = 0
+[node name="pillar" type="ShapeCast2D" parent="tools/chains"]
+shape = SubResource("RectangleShape2D_n6gc1")
+target_position = Vector2(0, 0)
 collision_mask = 67108864
 
-[node name="shape" type="CollisionShape2D" parent="tools/chains/pillar"]
+[node name="unit" type="ShapeCast2D" parent="tools/chains"]
 shape = SubResource("RectangleShape2D_n6gc1")
-
-[node name="unit" type="Area2D" parent="tools/chains"]
-collision_layer = 0
+target_position = Vector2(0, 0)
 collision_mask = 33554432
-
-[node name="shape" type="CollisionShape2D" parent="tools/chains/unit"]
-shape = SubResource("RectangleShape2D_n6gc1")
 
 [node name="whip" type="Node2D" parent="tools/chains"]
 script = ExtResource("5_r8h3s")

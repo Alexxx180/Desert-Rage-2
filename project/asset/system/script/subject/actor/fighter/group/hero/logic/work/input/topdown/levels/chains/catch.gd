@@ -8,7 +8,8 @@ var view: Node2D
 
 func hero_in_midair() -> bool: return control.slide.falling
 
-func ledge() -> void: encounter_ledge(true)
+func ledge() -> void:
+	encounter_ledge(true)
 
 func ledge_in_midair() -> void:
 	control.land()

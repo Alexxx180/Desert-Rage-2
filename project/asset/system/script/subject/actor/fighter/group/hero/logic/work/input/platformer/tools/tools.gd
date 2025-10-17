@@ -6,3 +6,5 @@ extends Node
 func process_physics(delta: float) -> void:
 	# chains.process_physics(delta)
 	jump.process_physics(delta)
+	chains.process_physics(delta)
+	#pass # run.process_physics(delta)

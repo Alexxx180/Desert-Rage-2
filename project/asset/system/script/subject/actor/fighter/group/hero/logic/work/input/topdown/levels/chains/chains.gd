@@ -4,30 +4,24 @@ signal chained(state: bool)
 
 @onready var catch: Node = $catch
 
-var above: bool = false
-var climbing: bool = false
-var hanging: bool:
-	get: return above and climbing
+var see: Node2D
+var hanging: bool = false
 
-func _decide_moving() -> void:
-	if hanging: catch.ledge()
+func process_physics(delta: float) -> void:
+	if see.border.is_colliding():
+		if hanging:
+			hanging = false
+			catch.encounter_ledge(false)
+		return
+	#view.animation.moves.hero.to.act.velocity.forget()
 
-func move_above(_execute: TileMapLayer) -> void:
-	above = true
-	if above and catch.hero_in_midair():
+	if see.pillar.is_colliding():
+		hanging = see.unit.is_colliding()
+		if not hanging:
+			catch.encounter_ledge(false)
+	
+	if see.unit.is_colliding() and catch.hero_in_midair():
+		hanging = true
 		catch.ledge_in_midair()
-	else:
-		_decide_moving()
-
-func move_under(_execute: TileMapLayer) -> void:
-	above = false
-
-func climbing_start(_execute: TileMapLayer) -> void:
-	climbing = true
-	_decide_moving()
-
-func climbing_stop(_execute: TileMapLayer) -> void:
-	if not above:
-		climbing = false
-		catch.encounter_ledge(false)
-# func process_physics(delta: float) -> void: pass
+	elif hanging:
+		catch.ledge()

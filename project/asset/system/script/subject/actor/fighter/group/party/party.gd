@@ -49,9 +49,3 @@ func sync_pos() -> void:
 
 func locate(position: Vector2) -> void:
 	for hero in heroes: hero.position = position
-
-func get_feet(hero: CharacterBody2D) -> int:
-	return hero.logic.work.input.topdown.levels.jump.feet.floors.F
-
-func same_ground() -> bool:
-	return get_feet(leader) == get_feet(follower)

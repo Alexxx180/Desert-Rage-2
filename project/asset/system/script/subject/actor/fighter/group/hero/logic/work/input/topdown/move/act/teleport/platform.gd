@@ -52,8 +52,8 @@ func set_target_stand(track: Vector2) -> void:
 	print("TARGET IS: ", target)
 
 func sync_hero_pos(proportion: float) -> void:
-	if proportion != 1.0:
-		hero.position = target.position + delta * proportion
+	#if proportion != 1.0:
+	hero.position = target.position + delta * proportion
 	print("sync hero pos: ", hero.position)
 
 func reposition(pos: Vector2, platform: CharacterBody2D) -> void:
