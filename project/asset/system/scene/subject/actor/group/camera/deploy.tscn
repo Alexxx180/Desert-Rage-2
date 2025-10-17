@@ -1,63 +1,126 @@
 [gd_scene load_steps=5 format=3 uid="uid://c75178jy2w4kb"]
 
 [ext_resource type="Script" uid="uid://cc0xru1qj7v14" path="res://asset/system/script/subject/actor/fighter/group/camera/deploy/deploy.gd" id="1_04bu4"]
-[ext_resource type="Shape2D" uid="uid://67kqlop0bqsn" path="res://asset/resource/canvas/map/geometry/characters/camera/deploy.tres" id="2_8dm7k"]
-[ext_resource type="Script" uid="uid://dr287a1vbujum" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/see/levels/platforms/surface/border/border.gd" id="3_2fsng"]
-[ext_resource type="Script" uid="uid://bm7idlnbkyi2d" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/see/levels/platforms/surface/border/rays.gd" id="4_358a6"]
+[ext_resource type="Script" uid="uid://bfosvdgtekb3m" path="res://asset/system/script/subject/actor/fighter/group/camera/deploy/border/border.gd" id="2_wpc40"]
+[ext_resource type="Script" uid="uid://bokgxenhnr8sl" path="res://asset/system/script/subject/actor/fighter/group/camera/deploy/border/rays.gd" id="3_2fsng"]
 
-[node name="deploy" type="Area2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wpc40"]
+size = Vector2(90, 90)
+
+[node name="deploy" type="Node2D"]
 script = ExtResource("1_04bu4")
 
-[node name="zone" type="CollisionShape2D" parent="."]
-shape = ExtResource("2_8dm7k")
-
 [node name="border" type="Node2D" parent="."]
-script = ExtResource("3_2fsng")
+visible = false
+script = ExtResource("2_wpc40")
 
 [node name="left" type="Node2D" parent="border"]
-script = ExtResource("4_358a6")
+script = ExtResource("3_2fsng")
 
-[node name="left" type="RayCast2D" parent="border/left"]
+[node name="left" type="ShapeCast2D" parent="border/left"]
+shape = SubResource("RectangleShape2D_wpc40")
 target_position = Vector2(-90, -90)
 collision_mask = 195
 
-[node name="mid" type="RayCast2D" parent="border/left"]
+[node name="mid" type="ShapeCast2D" parent="border/left"]
+shape = SubResource("RectangleShape2D_wpc40")
 target_position = Vector2(0, -128)
 collision_mask = 195
 
-[node name="right" type="RayCast2D" parent="border/left"]
+[node name="right" type="ShapeCast2D" parent="border/left"]
+shape = SubResource("RectangleShape2D_wpc40")
 target_position = Vector2(90, -90)
 collision_mask = 195
 
 [node name="mid" type="Node2D" parent="border"]
-script = ExtResource("4_358a6")
+script = ExtResource("3_2fsng")
 
-[node name="left" type="RayCast2D" parent="border/mid"]
+[node name="left" type="ShapeCast2D" parent="border/mid"]
+shape = SubResource("RectangleShape2D_wpc40")
 target_position = Vector2(-128, 0)
 collision_mask = 195
 
-[node name="mid" type="RayCast2D" parent="border/mid"]
+[node name="mid" type="ShapeCast2D" parent="border/mid"]
+shape = SubResource("RectangleShape2D_wpc40")
 target_position = Vector2(0, 0)
 collision_mask = 195
 
-[node name="right" type="RayCast2D" parent="border/mid"]
+[node name="right" type="ShapeCast2D" parent="border/mid"]
+shape = SubResource("RectangleShape2D_wpc40")
 target_position = Vector2(128, 0)
 collision_mask = 195
 
 [node name="right" type="Node2D" parent="border"]
-script = ExtResource("4_358a6")
+script = ExtResource("3_2fsng")
 
-[node name="left" type="RayCast2D" parent="border/right"]
+[node name="left" type="ShapeCast2D" parent="border/right"]
+shape = SubResource("RectangleShape2D_wpc40")
 target_position = Vector2(-90, 90)
 collision_mask = 195
 
-[node name="mid" type="RayCast2D" parent="border/right"]
+[node name="mid" type="ShapeCast2D" parent="border/right"]
+shape = SubResource("RectangleShape2D_wpc40")
 target_position = Vector2(0, 128)
 collision_mask = 195
 
-[node name="right" type="RayCast2D" parent="border/right"]
+[node name="right" type="ShapeCast2D" parent="border/right"]
+shape = SubResource("RectangleShape2D_wpc40")
 target_position = Vector2(90, 90)
 collision_mask = 195
 
-[connection signal="body_entered" from="." to="." method="ready_to_deploy"]
-[connection signal="body_exited" from="." to="." method="hero_get_far_away"]
+[node name="heroes" type="Node2D" parent="."]
+script = ExtResource("2_wpc40")
+
+[node name="left" type="Node2D" parent="heroes"]
+script = ExtResource("3_2fsng")
+
+[node name="left" type="ShapeCast2D" parent="heroes/left"]
+shape = SubResource("RectangleShape2D_wpc40")
+target_position = Vector2(-90, -90)
+collision_mask = 4
+
+[node name="mid" type="ShapeCast2D" parent="heroes/left"]
+shape = SubResource("RectangleShape2D_wpc40")
+target_position = Vector2(0, -128)
+collision_mask = 4
+
+[node name="right" type="ShapeCast2D" parent="heroes/left"]
+shape = SubResource("RectangleShape2D_wpc40")
+target_position = Vector2(90, -90)
+collision_mask = 4
+
+[node name="mid" type="Node2D" parent="heroes"]
+script = ExtResource("3_2fsng")
+
+[node name="left" type="ShapeCast2D" parent="heroes/mid"]
+shape = SubResource("RectangleShape2D_wpc40")
+target_position = Vector2(-128, 0)
+collision_mask = 4
+
+[node name="mid" type="ShapeCast2D" parent="heroes/mid"]
+shape = SubResource("RectangleShape2D_wpc40")
+target_position = Vector2(0, 0)
+collision_mask = 4
+
+[node name="right" type="ShapeCast2D" parent="heroes/mid"]
+shape = SubResource("RectangleShape2D_wpc40")
+target_position = Vector2(128, 0)
+collision_mask = 4
+
+[node name="right" type="Node2D" parent="heroes"]
+script = ExtResource("3_2fsng")
+
+[node name="left" type="ShapeCast2D" parent="heroes/right"]
+shape = SubResource("RectangleShape2D_wpc40")
+target_position = Vector2(-90, 90)
+collision_mask = 4
+
+[node name="mid" type="ShapeCast2D" parent="heroes/right"]
+shape = SubResource("RectangleShape2D_wpc40")
+target_position = Vector2(0, 128)
+collision_mask = 4
+
+[node name="right" type="ShapeCast2D" parent="heroes/right"]
+shape = SubResource("RectangleShape2D_wpc40")
+target_position = Vector2(90, 90)
+collision_mask = 4

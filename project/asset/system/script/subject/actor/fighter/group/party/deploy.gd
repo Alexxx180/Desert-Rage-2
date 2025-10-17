@@ -6,7 +6,7 @@ signal traverse_camera(node: Node2D, hero: CharacterBody2D)
 signal select_hero(hero: CharacterBody2D)
 
 var party: HeroParty = HeroParty.new()
-var _deploy: Area2D
+var _deploy: Node2D
 var anchored: bool = false
 
 func set_anchor() -> void: anchored = !anchored
