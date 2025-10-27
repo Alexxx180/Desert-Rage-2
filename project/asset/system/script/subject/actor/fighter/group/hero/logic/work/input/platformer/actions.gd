@@ -5,4 +5,6 @@ extends Node
 
 # TODOT
 func tick() -> void:
-	behavior.tick(self, board)
+	# NO ACTIONS
+	pass
+	#behavior.tick(self, board)

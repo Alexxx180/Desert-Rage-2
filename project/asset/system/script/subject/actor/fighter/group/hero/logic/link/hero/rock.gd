@@ -7,6 +7,7 @@ extends Node
 
 func controls(hero: CharacterBody2D, world: Node) -> void:
 	var tags: TileDecorator = hero.group.get_node("../tags").lay.tags
+	hero.to.layers.hero = hero
 	if tags != null:
 		skills.controls(hero, world.skills, tags)
 		ability.controls(hero, world.ability, tags.layer.lockers.ability)

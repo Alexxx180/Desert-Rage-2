@@ -10,6 +10,7 @@ func get_metadata() -> Array[int]:
 func take_effect(mark: Tick) -> void:
 	basis.fight_combo(mark).fight_body("legs")
 	basis.x(mark, Skills.TRIPLE).notify(mark, "Ноги-гриль")
+	
 
 func tick(mark: Tick) -> int:
 	return basis.tick(mark, self)
