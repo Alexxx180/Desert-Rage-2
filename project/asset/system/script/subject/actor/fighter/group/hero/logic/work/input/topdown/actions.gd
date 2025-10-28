@@ -4,6 +4,9 @@ extends Node
 @onready var board: BehaviorBlackboard = $board
 @onready var combo: Timer = $combo
 
+@onready var punch: PackedScene = preload("res://asset/system/scene/subject/particle/fight/punch.tscn")
+@onready var kick: PackedScene = preload("res://asset/system/scene/subject/particle/fight/kick.tscn")
+
 func _ready() -> void:
 	combo.timeout.connect(reset_combo)
 
