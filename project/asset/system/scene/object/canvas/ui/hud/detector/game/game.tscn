@@ -1,4 +1,4 @@
-[gd_scene load_steps=108 format=3 uid="uid://cel3u88abrgv3"]
+[gd_scene load_steps=117 format=3 uid="uid://cel3u88abrgv3"]
 
 [ext_resource type="Theme" uid="uid://p2br8b6ea3n6" path="res://asset/resource/ui/theme/patterns/template/menu/hud/pause/pause.tres" id="1_klae1"]
 [ext_resource type="Script" uid="uid://81xdi4771u0a" path="res://asset/system/script/object/image/view/ui/hud/detector/game/game.gd" id="1_o71r6"]
@@ -43,6 +43,7 @@
 [ext_resource type="Script" uid="uid://cuqygsqpgrd75" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/menu/status/enemy/enemy.gd" id="38_ql3o6"]
 [ext_resource type="Script" uid="uid://cfaxt6ng6ftvc" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/menu/status/enemy/damage.gd" id="39_xe00t"]
 [ext_resource type="Script" uid="uid://buq442yndfae8" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/menu/status/enemy/hits.gd" id="40_u412m"]
+[ext_resource type="FontFile" uid="uid://cjafv81djmqe8" path="res://asset/resource/media/data/font/Touchscreen-Regular.ttf" id="41_tveuy"]
 [ext_resource type="PackedScene" uid="uid://dvdimdxij23df" path="res://asset/system/scene/object/timer/hide/hider/hover/hooder.tscn" id="43_xe00t"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ccxqt"]
@@ -281,6 +282,16 @@ content_margin_left = 4.0
 content_margin_top = 6.0
 bg_color = Color(0, 0, 0, 1)
 
+[sub_resource type="Gradient" id="Gradient_tveuy"]
+colors = PackedColorArray(0, 0, 0, 0, 0.392157, 0.392157, 0.686275, 0.470588)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_upyjg"]
+gradient = SubResource("Gradient_tveuy")
+width = 80
+height = 27
+fill_from = Vector2(0.491525, 0)
+fill_to = Vector2(0.502825, 1)
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_g3c1s"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o4lum"]
@@ -298,6 +309,36 @@ corner_radius_top_left = 3
 corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
+
+[sub_resource type="Gradient" id="Gradient_pau43"]
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 0.235294)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_tveuy"]
+gradient = SubResource("Gradient_pau43")
+width = 106
+height = 28
+fill_from = Vector2(0.497175, 0.831638)
+fill_to = Vector2(0.497175, 0)
+
+[sub_resource type="Gradient" id="Gradient_upyjg"]
+colors = PackedColorArray(0, 0, 0, 0, 0.741176, 0, 0, 0.470588)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_3yh6s"]
+gradient = SubResource("Gradient_upyjg")
+width = 75
+height = 27
+fill_from = Vector2(0.5, 0)
+fill_to = Vector2(0.5, 1)
+
+[sub_resource type="Gradient" id="Gradient_3yh6s"]
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 0.235294)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_6knvb"]
+gradient = SubResource("Gradient_3yh6s")
+width = 15
+height = 24
+fill_from = Vector2(0.482906, 1)
+fill_to = Vector2(0.478632, 0)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kdjwi"]
 
@@ -3808,6 +3849,10 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_dhhqb")
 text = "💠"
 alignment = 0
 
+[node name="Sprite2D" type="Sprite2D" parent="menu/stats/inventory/ability/controls/topic/items/status/experience/caption/main/space"]
+texture = SubResource("GradientTexture2D_upyjg")
+centered = false
+
 [node name="margin" type="MarginContainer" parent="menu/stats/inventory/ability/controls/topic/items/status/experience/caption/main"]
 visible = false
 layout_mode = 2
@@ -3902,13 +3947,27 @@ fill_mode = 1
 show_percentage = false
 
 [node name="enemy_1" type="PanelContainer" parent="menu/stats/inventory/ability/controls/topic/items/status"]
-visible = false
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8
 theme_override_styles/panel = SubResource("StyleBoxFlat_jj441")
 script = ExtResource("38_ql3o6")
+
+[node name="ColorRect" type="ColorRect" parent="menu/stats/inventory/ability/controls/topic/items/status/enemy_1"]
+custom_minimum_size = Vector2(106, 1)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="lamp" type="Sprite2D" parent="menu/stats/inventory/ability/controls/topic/items/status/enemy_1"]
+texture = SubResource("GradientTexture2D_tveuy")
+centered = false
+
+[node name="blood" type="Sprite2D" parent="menu/stats/inventory/ability/controls/topic/items/status/enemy_1"]
+position = Vector2(557, 0)
+texture = SubResource("GradientTexture2D_3yh6s")
+centered = false
 
 [node name="margin" type="MarginContainer" parent="menu/stats/inventory/ability/controls/topic/items/status/enemy_1"]
 layout_mode = 2
@@ -3930,6 +3989,7 @@ text = "Гляделкинс"
 autowrap_mode = 2
 
 [node name="interrogate" type="Label" parent="menu/stats/inventory/ability/controls/topic/items/status/enemy_1/margin/contents"]
+visible = false
 custom_minimum_size = Vector2(22, 0)
 layout_mode = 2
 size_flags_horizontal = 8
@@ -3941,9 +4001,8 @@ horizontal_alignment = 2
 autowrap_mode = 2
 
 [node name="damage" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/topic/items/status/enemy_1/margin/contents"]
-visible = false
 layout_mode = 2
-theme_override_constants/separation = 4
+theme_override_constants/separation = 0
 script = ExtResource("39_xe00t")
 
 [node name="health" type="Label" parent="menu/stats/inventory/ability/controls/topic/items/status/enemy_1/margin/contents/damage"]
@@ -3951,19 +4010,20 @@ custom_minimum_size = Vector2(36, 0)
 layout_mode = 2
 size_flags_horizontal = 8
 theme_override_colors/font_color = Color(0.588235, 0.588235, 0.588235, 1)
+theme_override_fonts/font = ExtResource("28_ql3o6")
 theme_override_font_sizes/font_size = 16
 text = "150"
 horizontal_alignment = 2
 autowrap_mode = 2
 
 [node name="minus" type="Label" parent="menu/stats/inventory/ability/controls/topic/items/status/enemy_1/margin/contents/damage"]
-custom_minimum_size = Vector2(7, 0)
+custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 size_flags_horizontal = 8
 theme_override_colors/font_color = Color(0.588235, 0.588235, 0.588235, 1)
-theme_override_fonts/font = ExtResource("18_3tqp8")
+theme_override_fonts/font = ExtResource("28_ql3o6")
 theme_override_font_sizes/font_size = 10
-text = "➖"
+text = "–"
 horizontal_alignment = 1
 vertical_alignment = 2
 autowrap_mode = 2
@@ -3973,17 +4033,18 @@ custom_minimum_size = Vector2(36, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_colors/font_color = Color(0.588235, 0.588235, 0.588235, 1)
+theme_override_fonts/font = ExtResource("28_ql3o6")
 theme_override_font_sizes/font_size = 16
 text = "15"
 autowrap_mode = 2
 
 [node name="hits" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/topic/items/status/enemy_1/margin/contents"]
-visible = false
 layout_mode = 2
 theme_override_constants/separation = 3
 script = ExtResource("40_u412m")
 
 [node name="x" type="Label" parent="menu/stats/inventory/ability/controls/topic/items/status/enemy_1/margin/contents/hits"]
+visible = false
 custom_minimum_size = Vector2(8, 0)
 layout_mode = 2
 size_flags_horizontal = 8
@@ -3993,11 +4054,166 @@ horizontal_alignment = 1
 autowrap_mode = 2
 
 [node name="count" type="Label" parent="menu/stats/inventory/ability/controls/topic/items/status/enemy_1/margin/contents/hits"]
+visible = false
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 size_flags_horizontal = 8
 theme_override_font_sizes/font_size = 16
+text = "999"
 autowrap_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/topic/items/status/enemy_1/margin/contents/hits"]
+layout_mode = 2
+theme_override_constants/separation = -5
+
+[node name="count2" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/topic/items/status/enemy_1/margin/contents/hits/VBoxContainer"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 0
+
+[node name="c1" type="Control" parent="menu/stats/inventory/ability/controls/topic/items/status/enemy_1/margin/contents/hits/VBoxContainer/count2"]
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 2
+
+[node name="Control" type="Control" parent="menu/stats/inventory/ability/controls/topic/items/status/enemy_1/margin/contents/hits/VBoxContainer/count2/c1"]
+modulate = Color(1, 1, 1, 0.117647)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="menu/stats/inventory/ability/controls/topic/items/status/enemy_1/margin/contents/hits/VBoxContainer/count2/c1/Control"]
+custom_minimum_size = Vector2(9, 1)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+
+[node name="lamp" type="Sprite2D" parent="menu/stats/inventory/ability/controls/topic/items/status/enemy_1/margin/contents/hits/VBoxContainer/count2/c1/Control"]
+texture = SubResource("GradientTexture2D_6knvb")
+centered = false
+
+[node name="count" type="Label" parent="menu/stats/inventory/ability/controls/topic/items/status/enemy_1/margin/contents/hits/VBoxContainer/count2/c1"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -5.0
+offset_top = -11.5
+offset_right = 5.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 8
+theme_override_fonts/font = ExtResource("41_tveuy")
+theme_override_font_sizes/font_size = 14
+text = "9"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="c2" type="Control" parent="menu/stats/inventory/ability/controls/topic/items/status/enemy_1/margin/contents/hits/VBoxContainer/count2"]
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 2
+
+[node name="Control" type="Control" parent="menu/stats/inventory/ability/controls/topic/items/status/enemy_1/margin/contents/hits/VBoxContainer/count2/c2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="menu/stats/inventory/ability/controls/topic/items/status/enemy_1/margin/contents/hits/VBoxContainer/count2/c2/Control"]
+custom_minimum_size = Vector2(9, 1)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+
+[node name="lamp" type="Sprite2D" parent="menu/stats/inventory/ability/controls/topic/items/status/enemy_1/margin/contents/hits/VBoxContainer/count2/c2/Control"]
+texture = SubResource("GradientTexture2D_6knvb")
+centered = false
+
+[node name="count" type="Label" parent="menu/stats/inventory/ability/controls/topic/items/status/enemy_1/margin/contents/hits/VBoxContainer/count2/c2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -5.0
+offset_top = -11.5
+offset_right = 5.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 8
+theme_override_fonts/font = ExtResource("41_tveuy")
+theme_override_font_sizes/font_size = 14
+text = "5"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="c3" type="Control" parent="menu/stats/inventory/ability/controls/topic/items/status/enemy_1/margin/contents/hits/VBoxContainer/count2"]
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 2
+
+[node name="Control" type="Control" parent="menu/stats/inventory/ability/controls/topic/items/status/enemy_1/margin/contents/hits/VBoxContainer/count2/c3"]
+modulate = Color(1, 1, 1, 0.117647)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="menu/stats/inventory/ability/controls/topic/items/status/enemy_1/margin/contents/hits/VBoxContainer/count2/c3/Control"]
+custom_minimum_size = Vector2(9, 1)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+
+[node name="lamp" type="Sprite2D" parent="menu/stats/inventory/ability/controls/topic/items/status/enemy_1/margin/contents/hits/VBoxContainer/count2/c3/Control"]
+texture = SubResource("GradientTexture2D_6knvb")
+centered = false
+
+[node name="count" type="Label" parent="menu/stats/inventory/ability/controls/topic/items/status/enemy_1/margin/contents/hits/VBoxContainer/count2/c3"]
+modulate = Color(1, 1, 1, 0.235294)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -5.0
+offset_top = -11.5
+offset_right = 5.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 8
+theme_override_fonts/font = ExtResource("41_tveuy")
+theme_override_font_sizes/font_size = 14
+text = "9"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Label" type="Label" parent="menu/stats/inventory/ability/controls/topic/items/status/enemy_1/margin/contents/hits/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_fonts/font = ExtResource("41_tveuy")
+theme_override_font_sizes/font_size = 7
+text = "||| H I T"
 
 [node name="hp" type="MarginContainer" parent="menu/stats/inventory/ability/controls/topic/items/status/enemy_1"]
 layout_mode = 2
@@ -4024,7 +4240,7 @@ theme_override_styles/background = SubResource("StyleBoxEmpty_2uuwx")
 theme_override_styles/fill = SubResource("StyleBoxFlat_blc53")
 max_value = 15.0
 step = 1.0
-value = 15.0
+value = 10.0
 show_percentage = false
 
 [node name="time" type="PanelContainer" parent="menu/stats/inventory/ability/controls/topic/items/status"]
