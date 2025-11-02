@@ -25,6 +25,7 @@ func _connect_target_path(path: Node2D, target: Node) -> void:
 
 func controls(entity: CharacterBody2D) -> void:
 	var logic: Node2D = entity.logic
+	entity.view.animation.dead.damage = logic.detector.fight.damagebox
 	logic.processor.health.aura.entity = entity
 	logic.processor.health.points.setup(logic.stats.health)
 

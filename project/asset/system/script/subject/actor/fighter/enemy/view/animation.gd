@@ -28,4 +28,9 @@ func interrogation_end() -> void:
 
 func dead_animation_end() -> void:
 	dead.effect()
+	request("enemy", "alive")
+
+func live_animation_end() -> void:
+	dead.path.ignite_motion()
+	dead.damage.monitoring = true
 	request("enemy", "active")
