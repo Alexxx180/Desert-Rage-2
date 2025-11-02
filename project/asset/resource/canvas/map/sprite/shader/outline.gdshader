@@ -2,8 +2,9 @@ shader_type canvas_item;
 
 uniform vec4 line_color : source_color = vec4(1.0);
 uniform float line_thickness : hint_range(0, 10) = 1.0;
-uniform bool invisible = true;
-uniform bool ability = true;
+uniform float ap = 5.0;
+uniform bool invisible = false;
+uniform bool ability = false;
 
 const vec2 OFFSETS[8] = {
 	vec2(-1, -1), vec2(-1, 0), vec2(-1, 1), vec2(0, -1), vec2(0, 1),
@@ -21,7 +22,7 @@ void fragment() {
 
 	vec4 color = texture(TEXTURE, UV);
 	if (ability) {
-		color *= vec4(0, 0, 5, 1);
+		color *= vec4(0, 0, ap, 1);
 	} else if (invisible) {
 		color *= vec4(0, 0, 0, 255);
 	}

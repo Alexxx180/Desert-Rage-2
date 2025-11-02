@@ -22,7 +22,7 @@ func controls(hero: CharacterBody2D, move: Node) -> void:
 	hero.to.platformer.move.act.actions = hero.to.platformer.actions
 	
 	act.moving.connect(hero.view.animation.move)
-	act.moving.connect(hero.view.ap.set_direction)
+#	act.moving.connect(hero.view.ap.set_direction)
 
 	act.moving.connect(deploy.walls.set_direction)
 	act.moving.connect(deploy.ground.set_direction)

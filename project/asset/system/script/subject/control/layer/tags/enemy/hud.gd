@@ -43,20 +43,27 @@ func set_health(card: PanelContainer, hp: Node) -> void:
 	_set_contested_health(card.get_instance_id(), card.contested, hp)
 
 func set_damage(card: PanelContainer, hp: Node) -> void:
+	# TODO CARD DAMAGE HEALTH
+	"""
 	card.damage.health.text = str(int(hp.contested))
 	card.damage.value.text = str(int(hp.contested - hp.points))
+	"""
 	var interrogation: bool = hp.contested == 0
-	card.interrogate.visible = interrogation
+	card.caption.interrogating = hp.points <= 0
+	card.set_hp(hp)
+	card.caption.show_start()
+	# card.interrogate.visible = interrogation
 	card.damage.visible = !interrogation
 
 func set_hits(card: PanelContainer) -> void:
 	if hits >= 2:
-		card.hits.count.text = str(hits)
-		card.hits.show()
+		# card.hits.count.text = str(hits)
+		#card.hits.show()
+		card.hits.set_count(hits)
 		set_achievement()
 
 func set_stats(card: PanelContainer, enemy: String, hp: Node) -> void:
-	card.caption.text = enemy
+	# card.caption.text = enemy
 	card.show()
 	set_health(card, hp)
 	set_damage(card, hp)

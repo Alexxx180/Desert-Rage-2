@@ -1,13 +1,13 @@
 extends Node
 
-const EMPTY: int = 0
+enum { EMPTY = 0, MAX = 10 }
 
 signal update_bar(current: int)
 
 @export var infinite: bool = false
 @onready var timer: Timer = $timer
 
-var bar: TextureProgressBar
+var bar: Node2D
 var points: float
 var maximum: int
 
@@ -20,8 +20,7 @@ func setup(next: int) -> void:
 
 func sync_points() -> void:
 	update_bar.emit(points)
-	bar.value = points
-	bar.show()
+	bar.show_ap(points / maximum * MAX)
 	timer.start()
 
 func restore() -> void:
@@ -41,4 +40,4 @@ func use(amount: int = 1) -> bool:
 
 func diffusion() -> void:
 	timer.stop()
-	bar.hide()
+	bar.hide_ap()

@@ -2,6 +2,7 @@ extends Node
 
 class_name PlayerXP
 
+signal update_level(priority: int, level: int)
 signal update_exp(value: Vector2i, base: int)
 signal update_priorities(summary: Dictionary)
 
@@ -23,6 +24,7 @@ func level_up(hero: String) -> void:
 	var i: Dictionary = summary.hero[hero]
 	var maxed: int = 0
 	i.of[i.at] += 1
+	update_level.emit(i.at, i.of[i.at])
 	while i.of[i.at] >= MAX_LV and maxed < PRIORITY:
 		maxed += 1
 		i.at = (i.at + 1) % PRIORITY

@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://6b0ydfrtbu38"]
+[gd_scene load_steps=52 format=3 uid="uid://6b0ydfrtbu38"]
 
 [ext_resource type="PackedScene" uid="uid://scs1xlb7x0d6" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/selection.tscn" id="1_7touf"]
 [ext_resource type="StyleBox" uid="uid://cvfnqancophme" path="res://asset/resource/ui/theme/style/solid-color-panel.tres" id="1_r0sy2"]
@@ -12,9 +12,13 @@
 [ext_resource type="Script" uid="uid://cfaxt6ng6ftvc" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/menu/status/enemy/damage.gd" id="5_ywq7x"]
 [ext_resource type="StyleBox" uid="uid://c5qf02s45xwn" path="res://asset/resource/ui/theme/style/noto-color.tres" id="6_5obb3"]
 [ext_resource type="Shortcut" uid="uid://ucetbklb6n0q" path="res://asset/resource/ui/short/cut/game/gameplay-menu.tres" id="6_xd2oj"]
-[ext_resource type="Script" uid="uid://buq442yndfae8" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/menu/status/enemy/hits.gd" id="8_oq1iv"]
+[ext_resource type="Script" uid="uid://3m6nbcdg64rt" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/menu/status/enemy/caption.gd" id="7_i4r7h"]
+[ext_resource type="Script" uid="uid://buq442yndfae8" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/menu/status/enemy/hits/hits.gd" id="8_oq1iv"]
+[ext_resource type="FontFile" uid="uid://tledodlx6okb" path="res://asset/resource/media/data/font/LTSuperiorMono-Semibold.otf" id="9_qmg3v"]
 [ext_resource type="FontFile" uid="uid://b2wbdbnkxcqv1" path="res://asset/resource/media/data/font/NotoEmoji-VariableFont_wght.ttf" id="10_0gbwx"]
+[ext_resource type="Script" uid="uid://b3xiagqbq71ox" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/menu/status/enemy/hits/digit.gd" id="10_51vjo"]
 [ext_resource type="Script" uid="uid://ck11vtlkgauqb" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/menu/inventory/ability/xp/long.gd" id="10_ywq7x"]
+[ext_resource type="FontFile" uid="uid://cjafv81djmqe8" path="res://asset/resource/media/data/font/Touchscreen-Regular.ttf" id="11_i4r7h"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_l0mxd"]
 
@@ -63,20 +67,56 @@ corner_radius_bottom_right = 3
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wn3ua"]
 bg_color = Color(0.0980392, 0.0980392, 0.196078, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5p2ax"]
-bg_color = Color(0.0588235, 0.0588235, 0.0588235, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_duiwy"]
+bg_color = Color(0.0196078, 0.0196078, 0.0196078, 1)
 corner_radius_top_left = 3
 corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ywq7x"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_v6m3p"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oq1iv"]
+[sub_resource type="Gradient" id="Gradient_e1onj"]
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 0.235294)
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2a0ln"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ue4v8"]
+gradient = SubResource("Gradient_e1onj")
+width = 106
+height = 28
+fill_from = Vector2(0.497175, 0.831638)
+fill_to = Vector2(0.497175, 0)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_srpuw"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cti4s"]
+
+[sub_resource type="Gradient" id="Gradient_upyjg"]
+colors = PackedColorArray(0, 0, 0, 0, 0.741176, 0, 0, 0.470588)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_6fqtq"]
+gradient = SubResource("Gradient_upyjg")
+width = 25
+height = 27
+fill_from = Vector2(0.5, 0)
+fill_to = Vector2(0.5, 1)
+
+[sub_resource type="Gradient" id="Gradient_3yh6s"]
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 0.235294)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_xug3m"]
+gradient = SubResource("Gradient_3yh6s")
+width = 15
+height = 20
+fill_from = Vector2(0.482906, 1)
+fill_to = Vector2(0.478632, 0)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_e88g5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mblmk"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_542vm"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_agc2p"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g3cu7"]
 bg_color = Color(0.739789, 2.00946e-06, 5.77569e-07, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nilgw"]
@@ -362,14 +402,48 @@ color = Color(0.0196078, 0.0196078, 0.0196078, 1)
 
 [node name="enemy_1" type="PanelContainer" parent="scroll/margin/stack/menu/fast-access"]
 visible = false
+custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8
-theme_override_styles/panel = SubResource("StyleBoxFlat_5p2ax")
+theme_override_styles/panel = SubResource("StyleBoxFlat_duiwy")
 script = ExtResource("4_5p2ax")
+
+[node name="caption" type="PanelContainer" parent="scroll/margin/stack/menu/fast-access/enemy_1"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_v6m3p")
+script = ExtResource("7_i4r7h")
+
+[node name="lamp" type="ColorRect" parent="scroll/margin/stack/menu/fast-access/enemy_1/caption"]
+custom_minimum_size = Vector2(106, 1)
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="back" type="TextureRect" parent="scroll/margin/stack/menu/fast-access/enemy_1/caption"]
+layout_mode = 2
+texture = SubResource("GradientTexture2D_ue4v8")
+
+[node name="margin" type="MarginContainer" parent="scroll/margin/stack/menu/fast-access/enemy_1/caption"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = -2
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 0
+
+[node name="text" type="Label" parent="scroll/margin/stack/menu/fast-access/enemy_1/caption/margin"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Гляделкинc"
+
+[node name="timer" type="Timer" parent="scroll/margin/stack/menu/fast-access/enemy_1/caption"]
+wait_time = 0.5
 
 [node name="margin" type="MarginContainer" parent="scroll/margin/stack/menu/fast-access/enemy_1"]
 layout_mode = 2
+size_flags_horizontal = 8
 theme_override_constants/margin_left = 7
 theme_override_constants/margin_top = 3
 theme_override_constants/margin_right = 7
@@ -379,83 +453,243 @@ theme_override_constants/margin_bottom = 4
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="caption" type="Label" parent="scroll/margin/stack/menu/fast-access/enemy_1/margin/contents"]
-custom_minimum_size = Vector2(50, 0)
+[node name="damage" type="PanelContainer" parent="scroll/margin/stack/menu/fast-access/enemy_1/margin/contents"]
 layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 16
-text = "Гляделкинс"
-autowrap_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_cti4s")
 
-[node name="interrogate" type="Label" parent="scroll/margin/stack/menu/fast-access/enemy_1/margin/contents"]
-custom_minimum_size = Vector2(22, 0)
+[node name="back" type="TextureRect" parent="scroll/margin/stack/menu/fast-access/enemy_1/margin/contents/damage"]
 layout_mode = 2
-size_flags_horizontal = 8
-theme_override_colors/font_color = Color(0.588235, 0.588235, 0.588235, 1)
-theme_override_fonts/font = ExtResource("10_0gbwx")
-theme_override_font_sizes/font_size = 16
-text = "😵"
-horizontal_alignment = 2
-autowrap_mode = 2
+texture = SubResource("GradientTexture2D_6fqtq")
 
-[node name="damage" type="HBoxContainer" parent="scroll/margin/stack/menu/fast-access/enemy_1/margin/contents"]
-visible = false
+[node name="margin" type="MarginContainer" parent="scroll/margin/stack/menu/fast-access/enemy_1/margin/contents/damage"]
 layout_mode = 2
-theme_override_constants/separation = 4
+theme_override_constants/margin_left = 7
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 7
+theme_override_constants/margin_bottom = 0
+
+[node name="damage" type="HBoxContainer" parent="scroll/margin/stack/menu/fast-access/enemy_1/margin/contents/damage/margin"]
+layout_mode = 2
+theme_override_constants/separation = 0
 script = ExtResource("5_ywq7x")
 
-[node name="health" type="Label" parent="scroll/margin/stack/menu/fast-access/enemy_1/margin/contents/damage"]
-custom_minimum_size = Vector2(36, 0)
+[node name="health" type="Label" parent="scroll/margin/stack/menu/fast-access/enemy_1/margin/contents/damage/margin/damage"]
+custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 size_flags_horizontal = 8
 theme_override_colors/font_color = Color(0.588235, 0.588235, 0.588235, 1)
+theme_override_fonts/font = ExtResource("9_qmg3v")
 theme_override_font_sizes/font_size = 16
 text = "150"
-horizontal_alignment = 2
-autowrap_mode = 2
+horizontal_alignment = 1
 
-[node name="minus" type="Label" parent="scroll/margin/stack/menu/fast-access/enemy_1/margin/contents/damage"]
-custom_minimum_size = Vector2(7, 0)
+[node name="minus" type="Label" parent="scroll/margin/stack/menu/fast-access/enemy_1/margin/contents/damage/margin/damage"]
+custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 size_flags_horizontal = 8
 theme_override_colors/font_color = Color(0.588235, 0.588235, 0.588235, 1)
-theme_override_fonts/font = ExtResource("10_0gbwx")
+theme_override_fonts/font = ExtResource("9_qmg3v")
 theme_override_font_sizes/font_size = 10
-text = "➖"
+text = "–"
 horizontal_alignment = 1
 vertical_alignment = 2
-autowrap_mode = 2
 
-[node name="value" type="Label" parent="scroll/margin/stack/menu/fast-access/enemy_1/margin/contents/damage"]
-custom_minimum_size = Vector2(36, 0)
+[node name="value" type="Label" parent="scroll/margin/stack/menu/fast-access/enemy_1/margin/contents/damage/margin/damage"]
+custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_colors/font_color = Color(0.588235, 0.588235, 0.588235, 1)
+theme_override_fonts/font = ExtResource("9_qmg3v")
 theme_override_font_sizes/font_size = 16
 text = "15"
-autowrap_mode = 2
+horizontal_alignment = 1
 
-[node name="hits" type="HBoxContainer" parent="scroll/margin/stack/menu/fast-access/enemy_1/margin/contents"]
-visible = false
+[node name="hits" type="VBoxContainer" parent="scroll/margin/stack/menu/fast-access/enemy_1/margin/contents"]
 layout_mode = 2
-theme_override_constants/separation = 3
+theme_override_constants/separation = -5
 script = ExtResource("8_oq1iv")
 
-[node name="x" type="Label" parent="scroll/margin/stack/menu/fast-access/enemy_1/margin/contents/hits"]
-custom_minimum_size = Vector2(8, 0)
+[node name="count" type="HBoxContainer" parent="scroll/margin/stack/menu/fast-access/enemy_1/margin/contents/hits"]
+custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 0
+
+[node name="hundred" type="Control" parent="scroll/margin/stack/menu/fast-access/enemy_1/margin/contents/hits/count"]
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 2
+script = ExtResource("10_51vjo")
+
+[node name="space" type="Control" parent="scroll/margin/stack/menu/fast-access/enemy_1/margin/contents/hits/count/hundred"]
+modulate = Color(1, 1, 1, 0.117647)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="lamp" type="ColorRect" parent="scroll/margin/stack/menu/fast-access/enemy_1/margin/contents/hits/count/hundred/space"]
+custom_minimum_size = Vector2(9, 1)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+
+[node name="back" type="TextureRect" parent="scroll/margin/stack/menu/fast-access/enemy_1/margin/contents/hits/count/hundred/space"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_xug3m")
+
+[node name="count" type="Label" parent="scroll/margin/stack/menu/fast-access/enemy_1/margin/contents/hits/count/hundred"]
+modulate = Color(1, 1, 1, 0.235294)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -5.0
+offset_top = -11.5
+offset_right = 5.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 8
+theme_override_fonts/font = ExtResource("11_i4r7h")
 theme_override_font_sizes/font_size = 14
-text = "x"
+text = "0"
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="count" type="Label" parent="scroll/margin/stack/menu/fast-access/enemy_1/margin/contents/hits"]
-custom_minimum_size = Vector2(30, 0)
+[node name="timer" type="Timer" parent="scroll/margin/stack/menu/fast-access/enemy_1/margin/contents/hits/count/hundred"]
+wait_time = 0.75
+one_shot = true
+
+[node name="ten" type="Control" parent="scroll/margin/stack/menu/fast-access/enemy_1/margin/contents/hits/count"]
+custom_minimum_size = Vector2(15, 0)
 layout_mode = 2
+script = ExtResource("10_51vjo")
+
+[node name="space" type="Control" parent="scroll/margin/stack/menu/fast-access/enemy_1/margin/contents/hits/count/ten"]
+modulate = Color(1, 1, 1, 0.117647)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="lamp" type="ColorRect" parent="scroll/margin/stack/menu/fast-access/enemy_1/margin/contents/hits/count/ten/space"]
+custom_minimum_size = Vector2(9, 1)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+
+[node name="back" type="TextureRect" parent="scroll/margin/stack/menu/fast-access/enemy_1/margin/contents/hits/count/ten/space"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_xug3m")
+
+[node name="count" type="Label" parent="scroll/margin/stack/menu/fast-access/enemy_1/margin/contents/hits/count/ten"]
+modulate = Color(1, 1, 1, 0.235294)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -5.0
+offset_top = -11.5
+offset_right = 5.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 8
-theme_override_font_sizes/font_size = 16
+theme_override_fonts/font = ExtResource("11_i4r7h")
+theme_override_font_sizes/font_size = 14
+text = "0"
+horizontal_alignment = 1
 autowrap_mode = 2
+
+[node name="timer" type="Timer" parent="scroll/margin/stack/menu/fast-access/enemy_1/margin/contents/hits/count/ten"]
+one_shot = true
+
+[node name="one" type="Control" parent="scroll/margin/stack/menu/fast-access/enemy_1/margin/contents/hits/count"]
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 2
+script = ExtResource("10_51vjo")
+
+[node name="space" type="Control" parent="scroll/margin/stack/menu/fast-access/enemy_1/margin/contents/hits/count/one"]
+modulate = Color(1, 1, 1, 0.117647)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="lamp" type="ColorRect" parent="scroll/margin/stack/menu/fast-access/enemy_1/margin/contents/hits/count/one/space"]
+custom_minimum_size = Vector2(9, 1)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+
+[node name="back" type="TextureRect" parent="scroll/margin/stack/menu/fast-access/enemy_1/margin/contents/hits/count/one/space"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_xug3m")
+
+[node name="count" type="Label" parent="scroll/margin/stack/menu/fast-access/enemy_1/margin/contents/hits/count/one"]
+modulate = Color(1, 1, 1, 0.235294)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -5.0
+offset_top = -11.5
+offset_right = 5.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 8
+theme_override_fonts/font = ExtResource("11_i4r7h")
+theme_override_font_sizes/font_size = 14
+text = "0"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="timer" type="Timer" parent="scroll/margin/stack/menu/fast-access/enemy_1/margin/contents/hits/count/one"]
+wait_time = 1.25
+one_shot = true
+
+[node name="caption" type="Label" parent="scroll/margin/stack/menu/fast-access/enemy_1/margin/contents/hits"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("11_i4r7h")
+theme_override_font_sizes/font_size = 7
+theme_override_styles/normal = SubResource("StyleBoxEmpty_e88g5")
+text = "H I T"
+horizontal_alignment = 1
 
 [node name="hp" type="MarginContainer" parent="scroll/margin/stack/menu/fast-access/enemy_1"]
 layout_mode = 2
@@ -468,8 +702,8 @@ theme_override_constants/margin_bottom = 1
 [node name="contested" type="ProgressBar" parent="scroll/margin/stack/menu/fast-access/enemy_1/hp"]
 layout_mode = 2
 size_flags_vertical = 8
-theme_override_styles/background = SubResource("StyleBoxEmpty_ywq7x")
-theme_override_styles/fill = SubResource("StyleBoxFlat_oq1iv")
+theme_override_styles/background = SubResource("StyleBoxEmpty_mblmk")
+theme_override_styles/fill = SubResource("StyleBoxFlat_542vm")
 max_value = 15.0
 step = 1.0
 value = 10.0
@@ -478,12 +712,16 @@ show_percentage = false
 [node name="health" type="ProgressBar" parent="scroll/margin/stack/menu/fast-access/enemy_1/hp"]
 layout_mode = 2
 size_flags_vertical = 8
-theme_override_styles/background = SubResource("StyleBoxEmpty_2a0ln")
-theme_override_styles/fill = SubResource("StyleBoxFlat_srpuw")
+theme_override_styles/background = SubResource("StyleBoxEmpty_agc2p")
+theme_override_styles/fill = SubResource("StyleBoxFlat_g3cu7")
 max_value = 15.0
 step = 1.0
 value = 15.0
 show_percentage = false
+
+[node name="timer" type="Timer" parent="scroll/margin/stack/menu/fast-access/enemy_1"]
+wait_time = 0.3
+one_shot = true
 
 [node name="menu" type="Button" parent="scroll/margin/stack/menu"]
 custom_minimum_size = Vector2(40, 30)
