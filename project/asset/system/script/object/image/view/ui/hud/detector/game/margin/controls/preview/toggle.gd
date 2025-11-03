@@ -4,6 +4,7 @@ extends Button
 
 func _ready() -> void:
 	var chats: BoxContainer = get_node(path)
+	if not chats: return
 	chats.show_toggle.connect(func(state):
 		visible = state)
 	#print("chats: ", chats.name)

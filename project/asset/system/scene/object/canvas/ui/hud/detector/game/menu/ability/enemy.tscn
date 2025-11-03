@@ -1,0 +1,385 @@
+[gd_scene load_steps=22 format=3 uid="uid://b5qo332jiddu3"]
+
+[ext_resource type="Script" uid="uid://cuqygsqpgrd75" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/menu/status/enemy/enemy.gd" id="1_nm75a"]
+[ext_resource type="Script" uid="uid://3m6nbcdg64rt" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/menu/status/enemy/caption.gd" id="2_i1hqj"]
+[ext_resource type="Script" uid="uid://cfaxt6ng6ftvc" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/menu/status/enemy/damage.gd" id="3_2q6xa"]
+[ext_resource type="FontFile" uid="uid://tledodlx6okb" path="res://asset/resource/media/data/font/LTSuperiorMono-Semibold.otf" id="4_tulju"]
+[ext_resource type="Script" uid="uid://buq442yndfae8" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/menu/status/enemy/hits/hits.gd" id="5_jtye3"]
+[ext_resource type="Script" uid="uid://b3xiagqbq71ox" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/menu/status/enemy/hits/digit.gd" id="6_tprdu"]
+[ext_resource type="FontFile" uid="uid://cjafv81djmqe8" path="res://asset/resource/media/data/font/Touchscreen-Regular.ttf" id="7_0jn6q"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jj441"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tveuy"]
+
+[sub_resource type="Gradient" id="Gradient_3yh6s"]
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 0.235294)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_tveuy"]
+gradient = SubResource("Gradient_3yh6s")
+width = 106
+height = 28
+fill_from = Vector2(0.497175, 0.831638)
+fill_to = Vector2(0.497175, 0)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_upyjg"]
+
+[sub_resource type="Gradient" id="Gradient_e1onj"]
+colors = PackedColorArray(0, 0, 0, 0, 0.741176, 0, 0, 0.470588)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_3yh6s"]
+gradient = SubResource("Gradient_e1onj")
+width = 25
+height = 23
+fill_from = Vector2(0.503077, 0)
+fill_to = Vector2(0.5, 1)
+
+[sub_resource type="Gradient" id="Gradient_jnh4p"]
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 0.235294)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_6knvb"]
+gradient = SubResource("Gradient_jnh4p")
+width = 15
+height = 20
+fill_from = Vector2(0.482906, 1)
+fill_to = Vector2(0.478632, 0)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3yh6s"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kdjwi"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lvc3v"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2uuwx"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_blc53"]
+bg_color = Color(0.739789, 2.00946e-06, 5.77569e-07, 1)
+
+[node name="enemy_1" type="PanelContainer"]
+custom_minimum_size = Vector2(0, 30)
+size_flags_horizontal = 3
+size_flags_vertical = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_jj441")
+script = ExtResource("1_nm75a")
+
+[node name="caption" type="PanelContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_tveuy")
+script = ExtResource("2_i1hqj")
+
+[node name="lamp" type="ColorRect" parent="caption"]
+custom_minimum_size = Vector2(106, 1)
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="back" type="TextureRect" parent="caption"]
+layout_mode = 2
+texture = SubResource("GradientTexture2D_tveuy")
+
+[node name="margin" type="MarginContainer" parent="caption"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = -2
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 0
+
+[node name="text" type="Label" parent="caption/margin"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Гляделкинc"
+
+[node name="timer" type="Timer" parent="caption"]
+wait_time = 0.5
+one_shot = true
+
+[node name="hiding" type="Timer" parent="caption"]
+wait_time = 0.25
+one_shot = true
+
+[node name="margin" type="MarginContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_constants/margin_left = 7
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 2
+
+[node name="contents" type="HBoxContainer" parent="margin"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="damage" type="PanelContainer" parent="margin/contents"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_upyjg")
+
+[node name="back" type="TextureRect" parent="margin/contents/damage"]
+layout_mode = 2
+texture = SubResource("GradientTexture2D_3yh6s")
+
+[node name="margin" type="MarginContainer" parent="margin/contents/damage"]
+layout_mode = 2
+theme_override_constants/margin_left = 7
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 7
+theme_override_constants/margin_bottom = 0
+
+[node name="damage" type="HBoxContainer" parent="margin/contents/damage/margin"]
+layout_mode = 2
+theme_override_constants/separation = 0
+script = ExtResource("3_2q6xa")
+
+[node name="health" type="Label" parent="margin/contents/damage/margin/damage"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/font_color = Color(0.588235, 0.588235, 0.588235, 1)
+theme_override_fonts/font = ExtResource("4_tulju")
+theme_override_font_sizes/font_size = 16
+text = "150"
+horizontal_alignment = 1
+
+[node name="minus" type="Label" parent="margin/contents/damage/margin/damage"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/font_color = Color(0.588235, 0.588235, 0.588235, 1)
+theme_override_fonts/font = ExtResource("4_tulju")
+theme_override_font_sizes/font_size = 10
+text = "–"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="value" type="Label" parent="margin/contents/damage/margin/damage"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(0.588235, 0.588235, 0.588235, 1)
+theme_override_fonts/font = ExtResource("4_tulju")
+theme_override_font_sizes/font_size = 16
+text = "15"
+horizontal_alignment = 1
+
+[node name="hits" type="VBoxContainer" parent="margin/contents"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = -5
+script = ExtResource("5_jtye3")
+
+[node name="count" type="HBoxContainer" parent="margin/contents/hits"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 0
+
+[node name="hundred" type="Control" parent="margin/contents/hits/count"]
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 2
+script = ExtResource("6_tprdu")
+
+[node name="space" type="Control" parent="margin/contents/hits/count/hundred"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="lamp" type="ColorRect" parent="margin/contents/hits/count/hundred/space"]
+custom_minimum_size = Vector2(9, 1)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+
+[node name="back" type="TextureRect" parent="margin/contents/hits/count/hundred/space"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_6knvb")
+
+[node name="count" type="Label" parent="margin/contents/hits/count/hundred"]
+modulate = Color(1, 1, 1, 0.235294)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -5.0
+offset_top = -23.0
+offset_right = 5.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 8
+theme_override_fonts/font = ExtResource("7_0jn6q")
+theme_override_font_sizes/font_size = 14
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="timer" type="Timer" parent="margin/contents/hits/count/hundred"]
+wait_time = 0.75
+one_shot = true
+
+[node name="ten" type="Control" parent="margin/contents/hits/count"]
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 2
+script = ExtResource("6_tprdu")
+
+[node name="space" type="Control" parent="margin/contents/hits/count/ten"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="lamp" type="ColorRect" parent="margin/contents/hits/count/ten/space"]
+custom_minimum_size = Vector2(9, 1)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+
+[node name="back" type="TextureRect" parent="margin/contents/hits/count/ten/space"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_6knvb")
+
+[node name="count" type="Label" parent="margin/contents/hits/count/ten"]
+modulate = Color(1, 1, 1, 0.235294)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -5.0
+offset_top = -23.0
+offset_right = 5.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 8
+theme_override_fonts/font = ExtResource("7_0jn6q")
+theme_override_font_sizes/font_size = 14
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="timer" type="Timer" parent="margin/contents/hits/count/ten"]
+one_shot = true
+
+[node name="one" type="Control" parent="margin/contents/hits/count"]
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 2
+script = ExtResource("6_tprdu")
+
+[node name="space" type="Control" parent="margin/contents/hits/count/one"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="lamp" type="ColorRect" parent="margin/contents/hits/count/one/space"]
+custom_minimum_size = Vector2(9, 1)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+
+[node name="back" type="TextureRect" parent="margin/contents/hits/count/one/space"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_6knvb")
+
+[node name="count" type="Label" parent="margin/contents/hits/count/one"]
+modulate = Color(1, 1, 1, 0.235294)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -5.0
+offset_top = -23.0
+offset_right = 5.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 8
+theme_override_fonts/font = ExtResource("7_0jn6q")
+theme_override_font_sizes/font_size = 14
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="timer" type="Timer" parent="margin/contents/hits/count/one"]
+wait_time = 1.25
+one_shot = true
+
+[node name="margin" type="MarginContainer" parent="margin/contents/hits"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 0
+
+[node name="caption" type="Label" parent="margin/contents/hits/margin"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_fonts/font = ExtResource("7_0jn6q")
+theme_override_font_sizes/font_size = 7
+theme_override_styles/normal = SubResource("StyleBoxEmpty_3yh6s")
+text = "H I T"
+horizontal_alignment = 1
+
+[node name="hp" type="MarginContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 1
+
+[node name="contested" type="ProgressBar" parent="hp"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_styles/background = SubResource("StyleBoxEmpty_kdjwi")
+theme_override_styles/fill = SubResource("StyleBoxFlat_lvc3v")
+max_value = 15.0
+step = 1.0
+value = 10.0
+show_percentage = false
+
+[node name="health" type="ProgressBar" parent="hp"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_styles/background = SubResource("StyleBoxEmpty_2uuwx")
+theme_override_styles/fill = SubResource("StyleBoxFlat_blc53")
+max_value = 15.0
+step = 1.0
+value = 15.0
+show_percentage = false
+
+[node name="timer" type="Timer" parent="."]
+wait_time = 0.3

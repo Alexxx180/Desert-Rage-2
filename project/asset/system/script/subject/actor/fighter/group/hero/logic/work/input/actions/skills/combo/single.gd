@@ -25,7 +25,16 @@ func x1(mark: Tick) -> SkillBasis:
 	return self
 
 func notify(mark: Tick, caption: String) -> void:
-	mark.blackboard.get_value("ui").set_slot_combo(caption)
+	# mark.blackboard.get_value("ui").set_slot_combo(caption)
+	var tools: Dictionary = mark.blackboard.get_value("tools")
+	var hero: CharacterBody2D = tools.hero
+	if tools.combos == null:
+		var combo: Label = mark.actor.combos.instantiate()
+		combo.tools = tools
+		hero.group.lay.execute.layer.add_child(combo)
+		tools.combos = combo
+	tools.combos.text = caption
+	tools.combos.position = hero.position - Vector2(120, 120)
 
 static func standalone(mark: Tick, slot: int) -> int:
 	var combo: Dictionary = mark.blackboard.get_value("combo")

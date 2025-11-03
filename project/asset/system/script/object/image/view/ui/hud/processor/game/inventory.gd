@@ -20,8 +20,8 @@ func _toggle_selection(a: int, b: int) -> void:
 	markers.items[a].hide_item()
 	markers.items[b].show_item()
 	for element in inventory:
-		element.primary[a].selection.hide()
-		element.primary[b].selection.show()
+		element.primary[a].hide_selection()
+		element.primary[b].show_selection()
 
 func _fast_panel_selection(offset: int) -> void:
 	if not showed:
@@ -37,11 +37,12 @@ func _fast_panel_selection(offset: int) -> void:
 	selection = next
 
 func hide_preview() -> void:
-	markers.items[mask[selection]].preview.hide()
+	pass
+	# markers.items[mask[selection]].preview.hide()
 
 func hide_items() -> void:
 	showed = false
-	for item in markers.items: item.hide()
+	for item in markers.items: item.stand.hide()
 
 func _input(_event: InputEvent) -> void:
 	if not Input.is_action_pressed("item_select"):

@@ -79,7 +79,7 @@ func reset_stats() -> void:
 	hits = 0 # caption = ""
 	for card in cards:
 		card.damage.hide()
-		card.hits.hide()
+		card.hits.hide_all()
 		if not boss_fight:
 			card.hide()
 

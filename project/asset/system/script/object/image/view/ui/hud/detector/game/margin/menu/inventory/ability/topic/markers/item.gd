@@ -1,9 +1,9 @@
 extends Button
 
-@onready var stand: PanelContainer = $stand
-@onready var collapsed: Control = $stand/content/collapsed
-@onready var selected: Control = $stand/content/selected
-@onready var preview: Control = $stand/content/selected/image
+@onready var stand: VBoxContainer = $content
+@onready var collapsed: Control = stand.get_node("collapsed")
+@onready var selected: Control = stand.get_node("selected")
+@onready var preview: Control = stand.get_node("selected/image")
 
 func toggle(selection: bool) -> void:
 	collapsed.visible = !selection
