@@ -10,7 +10,7 @@ func _set_stamina(hero: CharacterBody2D, ui: HBoxContainer) -> void:
 	run.stop_mach.connect(func(): stamina.hide())
 
 func _set_ability(stats: Node, ui: HBoxContainer) -> void:
-	var amount: ProgressBar = ui.get_node("ap/margin/combo/aura")
+	var amount: ProgressBar = ui.get_node("health/hp/margin/health/aura")
 	stats.aura.update_bar.connect(func(v): amount.value = v)
 
 func _set_health(stats: Node, ui: HBoxContainer) -> void:

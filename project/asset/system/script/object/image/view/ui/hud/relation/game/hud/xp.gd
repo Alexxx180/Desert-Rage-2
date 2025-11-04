@@ -44,10 +44,11 @@ func _set_advanced_xp(group: Node2D, game: Control) -> void:
 	var status: HBoxContainer = game.controls.get_node("topic/items/status")
 	var long: VBoxContainer = game.ability.get_node("scroll/margin/stack/ability/score")
 	var short: VBoxContainer = game.ability.get_node("scroll/margin/stack/menu/fast-access/experience")
-	for xp in [status, short, long]:
+	for xp in [status]:
 		_set_multiply(group.xp.multiply, xp)
 		# var score: Dictionary = _get_xp_score(status.get_node("experience"))
 		xp.set_xp_score(group.xp)
+	long.set_xp_score(group.xp) # short
 	_set_priorities(group.xp, game.priorities, status)
 
 func controls(group: Node2D, game: Control) -> void:

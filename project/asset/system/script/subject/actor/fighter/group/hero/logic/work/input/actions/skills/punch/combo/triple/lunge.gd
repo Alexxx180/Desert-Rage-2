@@ -9,7 +9,8 @@ func get_metadata() -> Array[int]:
 
 func take_effect(mark: Tick) -> void:
 	basis.fight_combo(mark).fight_body("hands")
-	basis.x(mark, Skills.TRIPLE).notify(mark, "Выпад")
+	basis.x(mark, Skills.TRIPLE).vfx_hint(mark, mark.actor.kick)
+	basis.notify(mark, "Выпад")
 
 func tick(mark: Tick) -> int:
 	return basis.tick(mark, self)
