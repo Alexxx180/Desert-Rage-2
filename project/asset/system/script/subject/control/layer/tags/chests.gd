@@ -1,6 +1,6 @@
 extends Node
 
-enum { JAR = 0, GROUND = 1, ENEMY = 4 }
+enum { JAR = 0, GROUND = 1, ENEMY = 4, CHESTS = 5 }
 
 var lay: Node
 
