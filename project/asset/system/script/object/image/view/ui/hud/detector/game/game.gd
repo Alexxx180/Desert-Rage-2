@@ -5,6 +5,10 @@ extends Control
 @onready var controls: VBoxContainer = $menu/stats/inventory/ability/controls
 @onready var status: HBoxContainer = controls.get_node("topic/items/status")
 @onready var markers: HFlowContainer = controls.get_node("markers")
+@onready var statuses: Dictionary = {
+	"ray": markers.get_node("margin/score/stack/ray"),
+	"rock": markers.get_node("margin/score/stack/rock")
+}
 @onready var preview: HBoxContainer = controls.get_node("hints/space/preview")
 @onready var hints: VBoxContainer = preview.get_node("help/content/help/hints")
 @onready var inventory: PanelContainer = $menu/stats/inventory/topic
