@@ -1,12 +1,9 @@
-extends RefCounted
+extends UseItem
 
 class_name ArmorItem
 
-var power: int = 0
-var supply: int = 0
+var equip: Array[int]
 
-var equip: Array[Dictionary] = [{}, {}]
-
-func _init(_power, _supply: int) -> void:
-	power = _power
-	supply = _supply
+func _init(_power: int, _supply: int = 0, _equip: Array[int] = [], _effect: String = "defend") -> void:
+	super._init(_power, _supply, _effect) # check with at: int in inventory slots
+	equip = _equip
