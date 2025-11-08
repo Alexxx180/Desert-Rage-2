@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://6b0ydfrtbu38"]
+[gd_scene load_steps=40 format=3 uid="uid://6b0ydfrtbu38"]
 
 [ext_resource type="PackedScene" uid="uid://scs1xlb7x0d6" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/selection.tscn" id="1_7touf"]
 [ext_resource type="StyleBox" uid="uid://cvfnqancophme" path="res://asset/resource/ui/theme/style/solid-color-panel.tres" id="1_r0sy2"]
@@ -10,8 +10,28 @@
 [ext_resource type="StyleBox" uid="uid://c5qf02s45xwn" path="res://asset/resource/ui/theme/style/noto-color.tres" id="6_5obb3"]
 [ext_resource type="PackedScene" uid="uid://b5qo332jiddu3" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/ability/enemy.tscn" id="6_e8qsl"]
 [ext_resource type="Shortcut" uid="uid://ucetbklb6n0q" path="res://asset/resource/ui/short/cut/game/gameplay-menu.tres" id="6_xd2oj"]
-[ext_resource type="FontFile" uid="uid://b2wbdbnkxcqv1" path="res://asset/resource/media/data/font/NotoEmoji-VariableFont_wght.ttf" id="10_0gbwx"]
 [ext_resource type="Script" uid="uid://ck11vtlkgauqb" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/menu/inventory/ability/xp/long.gd" id="10_ywq7x"]
+[ext_resource type="FontFile" uid="uid://cwksbiskkcf5d" path="res://asset/resource/media/data/font/NotoSansMath-Regular.ttf" id="12_xukiq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eiiiu"]
+content_margin_left = 8.0
+content_margin_top = 5.0
+content_margin_right = 4.0
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_53yy5"]
+content_margin_left = 6.0
+content_margin_top = 4.0
+content_margin_right = 3.0
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f8gj5"]
 content_margin_left = 4.0
@@ -62,17 +82,6 @@ fill_to = Vector2(0.507692, 0)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v78vk"]
 bg_color = Color(0.392157, 0.392157, 0.686275, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nilgw"]
-bg_color = Color(0.0588235, 0.0588235, 0.0588235, 1)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oq1iv"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tdkka"]
-
 [sub_resource type="Gradient" id="Gradient_xukiq"]
 colors = PackedColorArray(0, 0, 0, 0, 0.184314, 0.184314, 0.72549, 0.235294)
 
@@ -91,6 +100,9 @@ content_margin_top = 6.0
 content_margin_left = 7.0
 content_margin_top = 6.0
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nilgw"]
+bg_color = Color(0.0588235, 0.0588235, 0.0588235, 1)
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5p2ax"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tdkka"]
@@ -103,6 +115,42 @@ content_margin_top = 6.0
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ep0kr"]
 content_margin_left = 9.0
 content_margin_top = 12.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c5kkd"]
+content_margin_left = 8.0
+content_margin_top = 7.0
+content_margin_right = 1.0
+content_margin_bottom = 0.0
+bg_color = Color(0.0196078, 0.0196078, 0.0392157, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xukiq"]
+content_margin_right = 3.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xukiq"]
+content_margin_left = 7.0
+content_margin_top = 7.0
+content_margin_right = 1.0
+content_margin_bottom = 0.0
+bg_color = Color(0.0196078, 0.0196078, 0.0392157, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e8qsl"]
+content_margin_left = 7.0
+content_margin_top = 7.0
+content_margin_right = 1.0
+content_margin_bottom = 0.0
+bg_color = Color(0.0196078, 0.0196078, 0.0392157, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1cni0"]
+content_margin_left = 7.0
+content_margin_top = 7.0
+content_margin_right = 1.0
+content_margin_bottom = 0.0
+bg_color = Color(0.0196078, 0.0196078, 0.0392157, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yj0ue"]
+content_margin_left = 2.0
+content_margin_bottom = 4.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [node name="panel" type="PanelContainer"]
 anchors_preset = 15
@@ -136,12 +184,26 @@ theme_override_constants/separation = 10
 custom_minimum_size = Vector2(40, 30)
 layout_mode = 2
 
+[node name="icons" type="Button" parent="scroll/margin/stack/menu"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_5obb3")
+theme_override_styles/normal = SubResource("StyleBoxFlat_eiiiu")
+text = "🌠"
+
+[node name="list" type="Button" parent="scroll/margin/stack/menu"]
+visible = false
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_5obb3")
+theme_override_styles/normal = SubResource("StyleBoxFlat_53yy5")
+text = "🗃"
+
 [node name="fast-access" type="HBoxContainer" parent="scroll/margin/stack/menu"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 10
 
 [node name="ability" type="HBoxContainer" parent="scroll/margin/stack/menu/fast-access"]
+visible = false
 custom_minimum_size = Vector2(78, 0)
 layout_mode = 2
 theme_override_constants/separation = 0
@@ -359,9 +421,130 @@ value = 5.0
 fill_mode = 1
 show_percentage = false
 
+[node name="score" type="VBoxContainer" parent="scroll/margin/stack/menu/fast-access"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+script = ExtResource("10_ywq7x")
+
+[node name="experience" type="HBoxContainer" parent="scroll/margin/stack/menu/fast-access/score"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_constants/separation = 5
+
+[node name="next" type="Label" parent="scroll/margin/stack/menu/fast-access/score/experience"]
+layout_mode = 2
+theme = ExtResource("2_r0sy2")
+theme_override_font_sizes/font_size = 18
+text = "До ур."
+
+[node name="next_score" type="MarginContainer" parent="scroll/margin/stack/menu/fast-access/score/experience"]
+layout_mode = 2
+theme = ExtResource("2_r0sy2")
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="count" type="Label" parent="scroll/margin/stack/menu/fast-access/score/experience/next_score"]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 10
+theme_override_fonts/font = ExtResource("3_plxo8")
+text = "10"
+vertical_alignment = 2
+
 [node name="enemy_1" parent="scroll/margin/stack/menu/fast-access" instance=ExtResource("6_e8qsl")]
 visible = false
 layout_mode = 2
+
+[node name="preset" type="HBoxContainer" parent="scroll/margin/stack/menu/fast-access"]
+layout_mode = 2
+size_flags_horizontal = 10
+
+[node name="first" type="VBoxContainer" parent="scroll/margin/stack/menu/fast-access/preset"]
+layout_mode = 2
+theme_override_constants/separation = -1
+
+[node name="lamp" type="ColorRect" parent="scroll/margin/stack/menu/fast-access/preset/first"]
+custom_minimum_size = Vector2(0, 1)
+layout_mode = 2
+color = Color(0.184314, 0.184314, 0.72549, 1)
+
+[node name="shadow" type="TextureRect" parent="scroll/margin/stack/menu/fast-access/preset/first/lamp"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+texture = SubResource("GradientTexture2D_ddn1q")
+
+[node name="skill" type="HBoxContainer" parent="scroll/margin/stack/menu/fast-access/preset/first"]
+layout_mode = 2
+
+[node name="fire" type="Button" parent="scroll/margin/stack/menu/fast-access/preset/first/skill"]
+custom_minimum_size = Vector2(31, 25)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("3_5obb3")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxEmpty_v78vk")
+text = "🔥"
+alignment = 0
+
+[node name="whip" type="Button" parent="scroll/margin/stack/menu/fast-access/preset/first/skill"]
+custom_minimum_size = Vector2(31, 25)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("3_5obb3")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxEmpty_4mbfr")
+text = "🎣"
+alignment = 0
+
+[node name="second" type="VBoxContainer" parent="scroll/margin/stack/menu/fast-access/preset"]
+layout_mode = 2
+theme_override_constants/separation = -1
+
+[node name="lamp" type="ColorRect" parent="scroll/margin/stack/menu/fast-access/preset/second"]
+visible = false
+custom_minimum_size = Vector2(0, 1)
+layout_mode = 2
+color = Color(0.184314, 0.184314, 0.72549, 1)
+
+[node name="shadow" type="TextureRect" parent="scroll/margin/stack/menu/fast-access/preset/second/lamp"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+texture = SubResource("GradientTexture2D_ddn1q")
+
+[node name="skill" type="HBoxContainer" parent="scroll/margin/stack/menu/fast-access/preset/second"]
+visible = false
+layout_mode = 2
+
+[node name="fire" type="Button" parent="scroll/margin/stack/menu/fast-access/preset/second/skill"]
+custom_minimum_size = Vector2(31, 25)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("3_5obb3")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxEmpty_v78vk")
+text = "☀️"
+alignment = 0
+
+[node name="whip" type="Button" parent="scroll/margin/stack/menu/fast-access/preset/second/skill"]
+custom_minimum_size = Vector2(31, 25)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("3_5obb3")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxEmpty_4mbfr")
+text = "⚖️"
+alignment = 0
 
 [node name="menu" type="Button" parent="scroll/margin/stack/menu"]
 custom_minimum_size = Vector2(40, 30)
@@ -373,344 +556,47 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_nilgw")
 shortcut = ExtResource("6_xd2oj")
 text = "Alt"
 
-[node name="ability" type="HBoxContainer" parent="scroll/margin/stack"]
+[node name="content" type="HBoxContainer" parent="scroll/margin/stack"]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.3
 
-[node name="ray" type="HBoxContainer" parent="scroll/margin/stack/ability"]
-layout_mode = 2
-theme_override_constants/separation = 0
-
-[node name="x" type="Button" parent="scroll/margin/stack/ability/ray"]
-custom_minimum_size = Vector2(39, 25)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_fonts/font = ExtResource("3_5obb3")
-theme_override_font_sizes/font_size = 18
-theme_override_styles/hover = SubResource("StyleBoxFlat_f8gj5")
-theme_override_styles/normal = SubResource("StyleBoxFlat_ddn1q")
-text = "✊"
-alignment = 0
-
-[node name="hint" type="MarginContainer" parent="scroll/margin/stack/ability/ray/x"]
-layout_mode = 1
-anchors_preset = 11
-anchor_left = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -11.0
-grow_horizontal = 0
-grow_vertical = 2
-theme_override_constants/margin_left = 0
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 4
-theme_override_constants/margin_bottom = 0
-
-[node name="caption" type="Label" parent="scroll/margin/stack/ability/ray/x/hint"]
-layout_mode = 2
-size_flags_horizontal = 8
-theme_override_colors/font_color = Color(0.588235, 0.588235, 0.588235, 1)
-theme_override_font_sizes/font_size = 16
-text = "A"
-
-[node name="y" type="Button" parent="scroll/margin/stack/ability/ray"]
-custom_minimum_size = Vector2(39, 25)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_fonts/font = ExtResource("3_5obb3")
-theme_override_font_sizes/font_size = 18
-theme_override_styles/hover = SubResource("StyleBoxFlat_4mbfr")
-theme_override_styles/normal = SubResource("StyleBoxFlat_5khej")
-text = "🦶"
-alignment = 0
-
-[node name="hint" type="MarginContainer" parent="scroll/margin/stack/ability/ray/y"]
-layout_mode = 1
-anchors_preset = 11
-anchor_left = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -11.0
-grow_horizontal = 0
-grow_vertical = 2
-theme_override_constants/margin_left = 0
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 4
-theme_override_constants/margin_bottom = 0
-
-[node name="caption" type="Label" parent="scroll/margin/stack/ability/ray/y/hint"]
-layout_mode = 2
-size_flags_horizontal = 8
-theme_override_colors/font_color = Color(0.588235, 0.588235, 0.588235, 1)
-theme_override_font_sizes/font_size = 16
-text = "B"
-
-[node name="rock" type="HBoxContainer" parent="scroll/margin/stack/ability"]
+[node name="flow" type="HFlowContainer" parent="scroll/margin/stack/content"]
 visible = false
-layout_mode = 2
-theme_override_constants/separation = 7
-
-[node name="x" type="HBoxContainer" parent="scroll/margin/stack/ability/rock"]
-layout_mode = 2
-theme_override_constants/separation = 0
-
-[node name="puddle" type="Button" parent="scroll/margin/stack/ability/rock/x"]
-custom_minimum_size = Vector2(30, 0)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("10_0gbwx")
-theme_override_font_sizes/font_size = 24
-theme_override_styles/normal = SubResource("StyleBoxEmpty_oq1iv")
-text = "💧"
-autowrap_mode = 2
-
-[node name="y" type="HBoxContainer" parent="scroll/margin/stack/ability/rock"]
-layout_mode = 2
-theme_override_constants/separation = 0
-
-[node name="spark" type="Button" parent="scroll/margin/stack/ability/rock/y"]
-custom_minimum_size = Vector2(30, 0)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("10_0gbwx")
-theme_override_font_sizes/font_size = 24
-theme_override_styles/normal = SubResource("StyleBoxEmpty_tdkka")
-text = "⚡️"
-autowrap_mode = 2
-
-[node name="skills" type="HBoxContainer" parent="scroll/margin/stack/ability"]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="fire" type="HBoxContainer" parent="scroll/margin/stack/ability/skills"]
-layout_mode = 2
-
-[node name="icon" type="MarginContainer" parent="scroll/margin/stack/ability/skills/fire"]
-layout_mode = 2
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 0
-
-[node name="text" type="Label" parent="scroll/margin/stack/ability/skills/fire/icon"]
-layout_mode = 2
-theme = ExtResource("2_r0sy2")
-theme_override_fonts/font = ExtResource("3_5obb3")
-text = "🔥"
-
-[node name="caption" type="Label" parent="scroll/margin/stack/ability/skills/fire"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("2_r0sy2")
-text = "Факел"
-
-[node name="whip" type="HBoxContainer" parent="scroll/margin/stack/ability/skills"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="icon" type="MarginContainer" parent="scroll/margin/stack/ability/skills/whip"]
-layout_mode = 2
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 0
-
-[node name="text" type="Label" parent="scroll/margin/stack/ability/skills/whip/icon"]
-layout_mode = 2
-theme = ExtResource("2_r0sy2")
-theme_override_fonts/font = ExtResource("3_5obb3")
-text = "🎣"
-
-[node name="caption" type="Label" parent="scroll/margin/stack/ability/skills/whip"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("2_r0sy2")
-text = "Кнут"
-
-[node name="space2" type="Control" parent="scroll/margin/stack/ability"]
-custom_minimum_size = Vector2(20, 0)
-layout_mode = 2
-
-[node name="preset" type="HBoxContainer" parent="scroll/margin/stack/ability"]
-layout_mode = 2
-
-[node name="first" type="VBoxContainer" parent="scroll/margin/stack/ability/preset"]
-layout_mode = 2
-theme_override_constants/separation = -1
-
-[node name="lamp" type="ColorRect" parent="scroll/margin/stack/ability/preset/first"]
-custom_minimum_size = Vector2(0, 1)
-layout_mode = 2
-color = Color(0.184314, 0.184314, 0.72549, 1)
-
-[node name="shadow" type="TextureRect" parent="scroll/margin/stack/ability/preset/first/lamp"]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-grow_horizontal = 2
-texture = SubResource("GradientTexture2D_ddn1q")
-
-[node name="skill" type="HBoxContainer" parent="scroll/margin/stack/ability/preset/first"]
-layout_mode = 2
-
-[node name="fire" type="Button" parent="scroll/margin/stack/ability/preset/first/skill"]
-custom_minimum_size = Vector2(31, 25)
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 8
-theme_override_fonts/font = ExtResource("3_5obb3")
-theme_override_font_sizes/font_size = 18
-theme_override_styles/normal = SubResource("StyleBoxEmpty_v78vk")
-text = "🔥"
-alignment = 0
-
-[node name="whip" type="Button" parent="scroll/margin/stack/ability/preset/first/skill"]
-custom_minimum_size = Vector2(31, 25)
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 8
-theme_override_fonts/font = ExtResource("3_5obb3")
-theme_override_font_sizes/font_size = 18
-theme_override_styles/normal = SubResource("StyleBoxEmpty_4mbfr")
-text = "🎣"
-alignment = 0
-
-[node name="second" type="VBoxContainer" parent="scroll/margin/stack/ability/preset"]
-visible = false
-layout_mode = 2
-theme_override_constants/separation = -1
-
-[node name="lamp" type="ColorRect" parent="scroll/margin/stack/ability/preset/second"]
-visible = false
-custom_minimum_size = Vector2(0, 1)
-layout_mode = 2
-color = Color(0.184314, 0.184314, 0.72549, 1)
-
-[node name="shadow" type="TextureRect" parent="scroll/margin/stack/ability/preset/second/lamp"]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-grow_horizontal = 2
-texture = SubResource("GradientTexture2D_ddn1q")
-
-[node name="skill" type="HBoxContainer" parent="scroll/margin/stack/ability/preset/second"]
-layout_mode = 2
-
-[node name="fire" type="Button" parent="scroll/margin/stack/ability/preset/second/skill"]
-custom_minimum_size = Vector2(31, 25)
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 8
-theme_override_fonts/font = ExtResource("3_5obb3")
-theme_override_font_sizes/font_size = 18
-theme_override_styles/normal = SubResource("StyleBoxEmpty_v78vk")
-text = "☀️"
-alignment = 0
-
-[node name="whip" type="Button" parent="scroll/margin/stack/ability/preset/second/skill"]
-custom_minimum_size = Vector2(31, 25)
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 8
-theme_override_fonts/font = ExtResource("3_5obb3")
-theme_override_font_sizes/font_size = 18
-theme_override_styles/normal = SubResource("StyleBoxEmpty_4mbfr")
-text = "⚖️"
-alignment = 0
-
-[node name="space" type="Control" parent="scroll/margin/stack/ability"]
-custom_minimum_size = Vector2(20, 0)
-layout_mode = 2
-
-[node name="score" type="VBoxContainer" parent="scroll/margin/stack/ability"]
-layout_mode = 2
-theme_override_constants/separation = 0
-script = ExtResource("10_ywq7x")
-
-[node name="experience" type="HBoxContainer" parent="scroll/margin/stack/ability/score"]
-layout_mode = 2
-size_flags_horizontal = 8
-theme_override_constants/separation = 5
-
-[node name="next" type="Label" parent="scroll/margin/stack/ability/score/experience"]
-layout_mode = 2
-theme = ExtResource("2_r0sy2")
-theme_override_font_sizes/font_size = 18
-text = "До ур."
-
-[node name="next_score" type="MarginContainer" parent="scroll/margin/stack/ability/score/experience"]
-layout_mode = 2
-theme = ExtResource("2_r0sy2")
-theme_override_constants/margin_left = 3
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 0
-
-[node name="count" type="Label" parent="scroll/margin/stack/ability/score/experience/next_score"]
-layout_mode = 2
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_outline_size = 10
-theme_override_fonts/font = ExtResource("3_plxo8")
-text = "10"
-vertical_alignment = 2
-
-[node name="fire-description" type="Label" parent="scroll/margin/stack/ability"]
-visible = false
-custom_minimum_size = Vector2(50, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("2_r0sy2")
-text = "Топит лед и оставляет ожоги, медленно снимающие здоровье."
-horizontal_alignment = 1
-autowrap_mode = 2
-
-[node name="whip-description" type="Label" parent="scroll/margin/stack/ability"]
-visible = false
-custom_minimum_size = Vector2(50, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("2_r0sy2")
-text = "Подтягивает объекты и наносит урон врагам поблизости."
-horizontal_alignment = 1
-autowrap_mode = 2
-
-[node name="flow" type="HFlowContainer" parent="scroll/margin/stack"]
 layout_mode = 2
 theme_override_constants/h_separation = 25
 
-[node name="selection" parent="scroll/margin/stack/flow" instance=ExtResource("1_7touf")]
+[node name="selection" parent="scroll/margin/stack/content/flow" instance=ExtResource("1_7touf")]
 visible = false
 layout_mode = 2
 
-[node name="item" type="HFlowContainer" parent="scroll/margin/stack/flow"]
+[node name="item" type="HFlowContainer" parent="scroll/margin/stack/content/flow"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/h_separation = 20
 theme_override_constants/v_separation = 0
 
-[node name="ability" type="VBoxContainer" parent="scroll/margin/stack/flow/item"]
+[node name="ability" type="VBoxContainer" parent="scroll/margin/stack/content/flow/item"]
 visible = false
 layout_mode = 2
 
-[node name="main" type="HBoxContainer" parent="scroll/margin/stack/flow/item/ability"]
+[node name="main" type="HBoxContainer" parent="scroll/margin/stack/content/flow/item/ability"]
 layout_mode = 2
 theme_override_constants/separation = 5
 
-[node name="preview" type="PanelContainer" parent="scroll/margin/stack/flow/item/ability/main"]
+[node name="preview" type="PanelContainer" parent="scroll/margin/stack/content/flow/item/ability/main"]
 custom_minimum_size = Vector2(45, 45)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxEmpty_5p2ax")
 
-[node name="margin" type="MarginContainer" parent="scroll/margin/stack/flow/item/ability/main/preview"]
+[node name="margin" type="MarginContainer" parent="scroll/margin/stack/content/flow/item/ability/main/preview"]
 layout_mode = 2
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 2
 
-[node name="icon" type="Label" parent="scroll/margin/stack/flow/item/ability/main/preview/margin"]
+[node name="icon" type="Label" parent="scroll/margin/stack/content/flow/item/ability/main/preview/margin"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
@@ -718,29 +604,29 @@ theme_override_fonts/font = ExtResource("3_5obb3")
 theme_override_font_sizes/font_size = 28
 text = "🔥"
 
-[node name="caption" type="Label" parent="scroll/margin/stack/flow/item/ability/main"]
+[node name="caption" type="Label" parent="scroll/margin/stack/content/flow/item/ability/main"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Факел"
 
-[node name="states" type="HBoxContainer" parent="scroll/margin/stack/flow/item/ability"]
+[node name="states" type="HBoxContainer" parent="scroll/margin/stack/content/flow/item/ability"]
 layout_mode = 2
 
-[node name="blue" type="PanelContainer" parent="scroll/margin/stack/flow/item/ability/states"]
+[node name="blue" type="PanelContainer" parent="scroll/margin/stack/content/flow/item/ability/states"]
 custom_minimum_size = Vector2(45, 45)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_tdkka")
 
-[node name="margin" type="MarginContainer" parent="scroll/margin/stack/flow/item/ability/states/blue"]
+[node name="margin" type="MarginContainer" parent="scroll/margin/stack/content/flow/item/ability/states/blue"]
 layout_mode = 2
 theme_override_constants/margin_left = 2
 theme_override_constants/margin_top = 2
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 
-[node name="icon" type="Label" parent="scroll/margin/stack/flow/item/ability/states/blue/margin"]
+[node name="icon" type="Label" parent="scroll/margin/stack/content/flow/item/ability/states/blue/margin"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("3_5obb3")
@@ -748,34 +634,34 @@ theme_override_font_sizes/font_size = 28
 theme_override_styles/normal = ExtResource("6_5obb3")
 text = "🧊"
 
-[node name="type" type="MarginContainer" parent="scroll/margin/stack/flow/item/ability/states/blue"]
+[node name="type" type="MarginContainer" parent="scroll/margin/stack/content/flow/item/ability/states/blue"]
 layout_mode = 2
 theme_override_constants/margin_left = 3
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 3
 theme_override_constants/margin_bottom = 0
 
-[node name="color" type="ColorRect" parent="scroll/margin/stack/flow/item/ability/states/blue/type"]
+[node name="color" type="ColorRect" parent="scroll/margin/stack/content/flow/item/ability/states/blue/type"]
 custom_minimum_size = Vector2(0, 1)
 layout_mode = 2
 size_flags_vertical = 8
 color = Color(0, 0.65098, 0.929412, 1)
 
-[node name="green" type="PanelContainer" parent="scroll/margin/stack/flow/item/ability/states"]
+[node name="green" type="PanelContainer" parent="scroll/margin/stack/content/flow/item/ability/states"]
 custom_minimum_size = Vector2(45, 45)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_tdkka")
 
-[node name="margin" type="MarginContainer" parent="scroll/margin/stack/flow/item/ability/states/green"]
+[node name="margin" type="MarginContainer" parent="scroll/margin/stack/content/flow/item/ability/states/green"]
 layout_mode = 2
 theme_override_constants/margin_left = 2
 theme_override_constants/margin_top = 2
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 
-[node name="icon" type="Label" parent="scroll/margin/stack/flow/item/ability/states/green/margin"]
+[node name="icon" type="Label" parent="scroll/margin/stack/content/flow/item/ability/states/green/margin"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("3_5obb3")
@@ -783,7 +669,7 @@ theme_override_font_sizes/font_size = 28
 theme_override_styles/normal = ExtResource("6_5obb3")
 text = "🩹"
 
-[node name="type" type="MarginContainer" parent="scroll/margin/stack/flow/item/ability/states/green"]
+[node name="type" type="MarginContainer" parent="scroll/margin/stack/content/flow/item/ability/states/green"]
 visible = false
 layout_mode = 2
 size_flags_vertical = 8
@@ -792,34 +678,34 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 3
 theme_override_constants/margin_bottom = 0
 
-[node name="color" type="ColorRect" parent="scroll/margin/stack/flow/item/ability/states/green/type"]
+[node name="color" type="ColorRect" parent="scroll/margin/stack/content/flow/item/ability/states/green/type"]
 custom_minimum_size = Vector2(0, 1)
 layout_mode = 2
 size_flags_vertical = 8
 color = Color(0.52549, 0.843137, 0.184314, 1)
 
-[node name="red" type="PanelContainer" parent="scroll/margin/stack/flow/item/ability/states"]
+[node name="red" type="PanelContainer" parent="scroll/margin/stack/content/flow/item/ability/states"]
 custom_minimum_size = Vector2(45, 45)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_tdkka")
 
-[node name="category" type="Label" parent="scroll/margin/stack/flow/item/ability/states/red"]
+[node name="category" type="Label" parent="scroll/margin/stack/content/flow/item/ability/states/red"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_5obb3")
 theme_override_font_sizes/font_size = 28
 theme_override_styles/normal = SubResource("StyleBoxEmpty_0gbwx")
 text = "🔥"
 
-[node name="skull" type="Label" parent="scroll/margin/stack/flow/item/ability/states/red"]
+[node name="skull" type="Label" parent="scroll/margin/stack/content/flow/item/ability/states/red"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_5obb3")
 theme_override_font_sizes/font_size = 28
 theme_override_styles/normal = SubResource("StyleBoxEmpty_ep0kr")
 text = "☠️"
 
-[node name="type" type="MarginContainer" parent="scroll/margin/stack/flow/item/ability/states/red"]
+[node name="type" type="MarginContainer" parent="scroll/margin/stack/content/flow/item/ability/states/red"]
 visible = false
 layout_mode = 2
 size_flags_vertical = 8
@@ -828,41 +714,41 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 3
 theme_override_constants/margin_bottom = 0
 
-[node name="color" type="ColorRect" parent="scroll/margin/stack/flow/item/ability/states/red/type"]
+[node name="color" type="ColorRect" parent="scroll/margin/stack/content/flow/item/ability/states/red/type"]
 custom_minimum_size = Vector2(0, 1)
 layout_mode = 2
 size_flags_vertical = 8
 color = Color(0.792157, 0.0431373, 0.290196, 1)
 
-[node name="description" type="VBoxContainer" parent="scroll/margin/stack/flow/item"]
+[node name="description" type="VBoxContainer" parent="scroll/margin/stack/content/flow/item"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 10
 
-[node name="tags" type="HFlowContainer" parent="scroll/margin/stack/flow/item/description"]
+[node name="tags" type="HFlowContainer" parent="scroll/margin/stack/content/flow/item/description"]
 layout_mode = 2
 theme_override_constants/h_separation = 10
 
-[node name="main" type="HBoxContainer" parent="scroll/margin/stack/flow/item/description/tags"]
+[node name="main" type="HBoxContainer" parent="scroll/margin/stack/content/flow/item/description/tags"]
 layout_mode = 2
 size_flags_horizontal = 2
 theme_override_constants/separation = 5
 
-[node name="preview" type="PanelContainer" parent="scroll/margin/stack/flow/item/description/tags/main"]
+[node name="preview" type="PanelContainer" parent="scroll/margin/stack/content/flow/item/description/tags/main"]
 custom_minimum_size = Vector2(45, 45)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxEmpty_5p2ax")
 
-[node name="margin" type="MarginContainer" parent="scroll/margin/stack/flow/item/description/tags/main/preview"]
+[node name="margin" type="MarginContainer" parent="scroll/margin/stack/content/flow/item/description/tags/main/preview"]
 layout_mode = 2
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 2
 
-[node name="icon" type="Label" parent="scroll/margin/stack/flow/item/description/tags/main/preview/margin"]
+[node name="icon" type="Label" parent="scroll/margin/stack/content/flow/item/description/tags/main/preview/margin"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
@@ -870,18 +756,18 @@ theme_override_fonts/font = ExtResource("3_5obb3")
 theme_override_font_sizes/font_size = 28
 text = "🔥"
 
-[node name="caption" type="Label" parent="scroll/margin/stack/flow/item/description/tags/main"]
+[node name="caption" type="Label" parent="scroll/margin/stack/content/flow/item/description/tags/main"]
 layout_mode = 2
 size_flags_horizontal = 10
 theme_override_font_sizes/font_size = 24
 text = "Факел"
 
-[node name="blue" type="VBoxContainer" parent="scroll/margin/stack/flow/item/description/tags"]
+[node name="blue" type="VBoxContainer" parent="scroll/margin/stack/content/flow/item/description/tags"]
 layout_mode = 2
 size_flags_horizontal = 10
 theme_override_constants/separation = 2
 
-[node name="ingredients" type="Label" parent="scroll/margin/stack/flow/item/description/tags/blue"]
+[node name="ingredients" type="Label" parent="scroll/margin/stack/content/flow/item/description/tags/blue"]
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_stretch_ratio = 0.75
@@ -890,17 +776,17 @@ theme_override_font_sizes/font_size = 18
 text = "Плавление и испарение"
 horizontal_alignment = 2
 
-[node name="color" type="ColorRect" parent="scroll/margin/stack/flow/item/description/tags/blue"]
+[node name="color" type="ColorRect" parent="scroll/margin/stack/content/flow/item/description/tags/blue"]
 custom_minimum_size = Vector2(1, 1)
 layout_mode = 2
 color = Color(0, 0.65098, 0.929412, 1)
 
-[node name="red" type="VBoxContainer" parent="scroll/margin/stack/flow/item/description/tags"]
+[node name="red" type="VBoxContainer" parent="scroll/margin/stack/content/flow/item/description/tags"]
 layout_mode = 2
 size_flags_horizontal = 8
 theme_override_constants/separation = 2
 
-[node name="ingredients" type="Label" parent="scroll/margin/stack/flow/item/description/tags/red"]
+[node name="ingredients" type="Label" parent="scroll/margin/stack/content/flow/item/description/tags/red"]
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_stretch_ratio = 0.75
@@ -909,17 +795,17 @@ theme_override_font_sizes/font_size = 18
 text = "Оставляет ожоги"
 horizontal_alignment = 2
 
-[node name="color" type="ColorRect" parent="scroll/margin/stack/flow/item/description/tags/red"]
+[node name="color" type="ColorRect" parent="scroll/margin/stack/content/flow/item/description/tags/red"]
 custom_minimum_size = Vector2(1, 1)
 layout_mode = 2
 color = Color(0.792157, 0.0431373, 0.290196, 1)
 
-[node name="green" type="VBoxContainer" parent="scroll/margin/stack/flow/item/description/tags"]
+[node name="green" type="VBoxContainer" parent="scroll/margin/stack/content/flow/item/description/tags"]
 layout_mode = 2
 size_flags_horizontal = 8
 theme_override_constants/separation = 2
 
-[node name="ingredients" type="Label" parent="scroll/margin/stack/flow/item/description/tags/green"]
+[node name="ingredients" type="Label" parent="scroll/margin/stack/content/flow/item/description/tags/green"]
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_stretch_ratio = 0.75
@@ -928,12 +814,12 @@ theme_override_font_sizes/font_size = 18
 text = "Прижигает раны"
 horizontal_alignment = 2
 
-[node name="color" type="ColorRect" parent="scroll/margin/stack/flow/item/description/tags/green"]
+[node name="color" type="ColorRect" parent="scroll/margin/stack/content/flow/item/description/tags/green"]
 custom_minimum_size = Vector2(1, 1)
 layout_mode = 2
 color = Color(0.52549, 0.843137, 0.184314, 1)
 
-[node name="effect" type="Label" parent="scroll/margin/stack/flow/item/description"]
+[node name="effect" type="Label" parent="scroll/margin/stack/content/flow/item/description"]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -944,7 +830,231 @@ theme_override_font_sizes/font_size = 18
 text = "Сила, дарованная людям с незапамятных времен. Может как помочь, так и навредить. Позволяет убирать помехи на пути, выступает источником энергии."
 autowrap_mode = 2
 
-[node name="perks" parent="scroll/margin/stack" instance=ExtResource("3_h2uo5")]
+[node name="perks" parent="scroll/margin/stack/content" instance=ExtResource("3_h2uo5")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
+
+[node name="slots" type="VBoxContainer" parent="scroll/margin/stack/content"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="punch" type="Button" parent="scroll/margin/stack/content/slots"]
+custom_minimum_size = Vector2(40, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.341176, 0.341176, 0.341176, 1)
+theme_override_fonts/font = ExtResource("3_5obb3")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_c5kkd")
+text = "✊"
+
+[node name="cost" type="Label" parent="scroll/margin/stack/content/slots/punch"]
+visible = false
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -15.0
+offset_bottom = 17.0
+grow_horizontal = 0
+size_flags_horizontal = 8
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxEmpty_xukiq")
+text = "2"
+horizontal_alignment = 2
+
+[node name="kick" type="Button" parent="scroll/margin/stack/content/slots"]
+custom_minimum_size = Vector2(40, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.341176, 0.341176, 0.341176, 1)
+theme_override_fonts/font = ExtResource("3_5obb3")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_c5kkd")
+text = "🦶"
+
+[node name="cost" type="Label" parent="scroll/margin/stack/content/slots/kick"]
+visible = false
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -15.0
+offset_bottom = 17.0
+grow_horizontal = 0
+size_flags_horizontal = 8
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxEmpty_xukiq")
+text = "2"
+horizontal_alignment = 2
+
+[node name="shot" type="Button" parent="scroll/margin/stack/content/slots"]
+custom_minimum_size = Vector2(40, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.341176, 0.341176, 0.341176, 1)
+theme_override_fonts/font = ExtResource("3_5obb3")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_xukiq")
+text = "🎯"
+
+[node name="cost" type="Label" parent="scroll/margin/stack/content/slots/shot"]
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -15.0
+offset_bottom = 17.0
+grow_horizontal = 0
+size_flags_horizontal = 8
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxEmpty_xukiq")
+text = "1"
+horizontal_alignment = 2
+
+[node name="fire" type="Button" parent="scroll/margin/stack/content/slots"]
+custom_minimum_size = Vector2(40, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.341176, 0.341176, 0.341176, 1)
+theme_override_fonts/font = ExtResource("3_5obb3")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_e8qsl")
+text = "🔥"
+
+[node name="cost" type="Label" parent="scroll/margin/stack/content/slots/fire"]
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -15.0
+offset_bottom = 17.0
+grow_horizontal = 0
+size_flags_horizontal = 8
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxEmpty_xukiq")
+text = "1"
+horizontal_alignment = 2
+
+[node name="whip" type="Button" parent="scroll/margin/stack/content/slots"]
+custom_minimum_size = Vector2(40, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.341176, 0.341176, 0.341176, 1)
+theme_override_fonts/font = ExtResource("3_5obb3")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_1cni0")
+text = "🎣"
+
+[node name="cost" type="Label" parent="scroll/margin/stack/content/slots/whip"]
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -15.0
+offset_bottom = 17.0
+grow_horizontal = 0
+size_flags_horizontal = 8
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxEmpty_xukiq")
+text = "1"
+horizontal_alignment = 2
+
+[node name="description" type="MarginContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="stack" type="HBoxContainer" parent="description"]
+layout_mode = 2
+
+[node name="slot-1" type="Label" parent="description/stack"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("3_5obb3")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = ExtResource("6_5obb3")
+text = "🦶"
+vertical_alignment = 1
+
+[node name="dot" type="Label" parent="description/stack"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("12_xukiq")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_yj0ue")
+text = "⋅"
+vertical_alignment = 1
+
+[node name="slot-2" type="Label" parent="description/stack"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("3_5obb3")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = ExtResource("6_5obb3")
+text = "✊"
+vertical_alignment = 1
+
+[node name="dot2" type="Label" parent="description/stack"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("12_xukiq")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_yj0ue")
+text = "⋅"
+vertical_alignment = 1
+
+[node name="slot-3" type="Label" parent="description/stack"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("3_5obb3")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = ExtResource("6_5obb3")
+text = "✊"
+vertical_alignment = 1
+
+[node name="dot3" type="Label" parent="description/stack"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("12_xukiq")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_yj0ue")
+text = "⋅"
+vertical_alignment = 1
+
+[node name="slot-4" type="Label" parent="description/stack"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("3_5obb3")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = ExtResource("6_5obb3")
+text = "🦶"
+vertical_alignment = 1
+
+[node name="simple" type="Label" parent="description"]
+visible = false
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+theme = ExtResource("2_r0sy2")
+text = "Двоечка"
+horizontal_alignment = 1
+autowrap_mode = 2

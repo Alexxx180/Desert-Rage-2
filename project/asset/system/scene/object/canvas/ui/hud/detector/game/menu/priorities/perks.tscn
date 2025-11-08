@@ -1,10 +1,32 @@
-[gd_scene load_steps=8 format=3 uid="uid://l7thqkrsol4m"]
+[gd_scene load_steps=26 format=3 uid="uid://l7thqkrsol4m"]
 
 [ext_resource type="Script" uid="uid://bddks5rorwpmk" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/menu/summary/perks.gd" id="1_fvwiw"]
 [ext_resource type="StyleBox" uid="uid://cht8hrroa75bg" path="res://asset/resource/ui/theme/style/tag-button.tres" id="1_yts5o"]
 [ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://asset/resource/ui/theme/patterns/template/menu/settings/topic/footer.tres" id="2_kww2j"]
 [ext_resource type="FontFile" uid="uid://b37js8y80ak1k" path="res://asset/resource/media/data/font/NotoColorEmoji-Regular.ttf" id="3_8w086"]
 [ext_resource type="StyleBox" uid="uid://c5qf02s45xwn" path="res://asset/resource/ui/theme/style/noto-color.tres" id="4_fvwiw"]
+[ext_resource type="PackedScene" uid="uid://by0ptyciv1scs" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/gameplay/skills/common/double.tscn" id="5_x13sw"]
+[ext_resource type="PackedScene" uid="uid://br061ue566x82" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/gameplay/skills.tscn" id="6_5ap4j"]
+[ext_resource type="PackedScene" uid="uid://c2og7qxjp8y7m" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/gameplay/skills/ray/stray_bullet.tscn" id="6_uai83"]
+[ext_resource type="PackedScene" uid="uid://bi1gmpuyaxj5b" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/gameplay/skills/ray/breakfly.tscn" id="7_5we7h"]
+[ext_resource type="PackedScene" uid="uid://cp5edgjdu8klp" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/gameplay/skills/common/two_punch.tscn" id="7_jlkt3"]
+[ext_resource type="PackedScene" uid="uid://cfelrqhqrugta" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/gameplay/skills/ray/shrapnel.tscn" id="8_0d834"]
+[ext_resource type="PackedScene" uid="uid://wvwlnrbvth2f" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/gameplay/skills/ray/dead_grip.tscn" id="8_b5p2p"]
+[ext_resource type="PackedScene" uid="uid://cyd4ywjqr2jef" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/gameplay/skills/common/spit_kick.tscn" id="8_m6jlp"]
+[ext_resource type="PackedScene" uid="uid://vt8s0e42cncs" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/gameplay/skills/common/back_spit_kick.tscn" id="10_ln8j7"]
+[ext_resource type="PackedScene" uid="uid://c3tbmkamaifqs" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/gameplay/skills/ray/knock_down.tscn" id="11_kv8ev"]
+[ext_resource type="PackedScene" uid="uid://c73eqe7lnsxm6" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/gameplay/skills/ray/dance.tscn" id="12_kv8ev"]
+[ext_resource type="PackedScene" uid="uid://bgnjhey8fpjx1" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/gameplay/skills/ray/fire_kick.tscn" id="13_1l60j"]
+[ext_resource type="PackedScene" uid="uid://de6w4s5gn21it" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/gameplay/skills/ray/cure.tscn" id="14_jpjty"]
+[ext_resource type="PackedScene" uid="uid://dnclelqehu0wo" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/gameplay/skills/ray/aid.tscn" id="15_i0ltj"]
+[ext_resource type="PackedScene" uid="uid://b2h730spqqqpm" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/gameplay/skills/ray/spanking.tscn" id="16_esltg"]
+[ext_resource type="PackedScene" uid="uid://oqxa5n3nmt2m" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/gameplay/skills/ray/backstab.tscn" id="17_0pj6o"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_x13sw"]
+content_margin_left = 3.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jlkt3"]
+content_margin_right = 3.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8w086"]
 content_margin_left = 9.0
@@ -23,6 +45,7 @@ theme_override_constants/separation = 10
 script = ExtResource("1_fvwiw")
 
 [node name="caption" type="Label" parent="."]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Исследования"
@@ -32,1319 +55,761 @@ layout_mode = 2
 theme_override_constants/h_separation = 10
 theme_override_constants/v_separation = 5
 
-[node name="hero" type="Label" parent="ray"]
-visible = false
+[node name="Control" type="Control" parent="ray"]
 layout_mode = 2
-theme = ExtResource("2_kww2j")
-text = "Рей"
+size_flags_horizontal = 3
 
-[node name="items" type="Control" parent="ray"]
-custom_minimum_size = Vector2(30, 27)
+[node name="spin_shot" type="Button" parent="ray"]
+custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.341176, 0.341176, 0.341176, 1)
+theme_override_styles/normal = ExtResource("1_yts5o")
 
-[node name="bag" type="Label" parent="ray/items"]
+[node name="view" parent="ray/spin_shot" instance=ExtResource("6_uai83")]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -15.0
-offset_top = -13.0
-offset_right = 15.0
-offset_bottom = 13.0
+offset_left = -21.0
+offset_top = -21.0
+offset_right = 21.0
+offset_bottom = 21.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_fonts/font = ExtResource("3_8w086")
-theme_override_styles/normal = ExtResource("4_fvwiw")
-text = "💰"
 
-[node name="clover" type="Label" parent="ray/items"]
+[node name="zone" type="Label" parent="ray/spin_shot"]
+custom_minimum_size = Vector2(20, 0)
 layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
+anchors_preset = 2
 anchor_top = 1.0
-anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -15.0
-offset_top = -26.0
-offset_right = 15.0
-grow_horizontal = 2
+offset_top = -20.0
+offset_right = 20.0
 grow_vertical = 0
-theme_override_fonts/font = ExtResource("3_8w086")
-theme_override_font_sizes/font_size = 10
-theme_override_styles/normal = SubResource("StyleBoxEmpty_8w086")
-text = "🍀"
+size_flags_horizontal = 8
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxEmpty_x13sw")
+text = "I"
 
-[node name="dealer" type="HBoxContainer" parent="ray"]
-layout_mode = 2
-theme_override_constants/separation = -5
+[node name="cost" type="Label" parent="ray/spin_shot"]
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -15.0
+offset_bottom = 17.0
+grow_horizontal = 0
+size_flags_horizontal = 8
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxEmpty_jlkt3")
+text = "2"
+horizontal_alignment = 2
 
-[node name="opened" type="Button" parent="ray/dealer"]
+[node name="breakfly" type="Button" parent="ray"]
+custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
+size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0.341176, 0.341176, 0.341176, 1)
 theme_override_styles/normal = ExtResource("1_yts5o")
-text = "Торговец"
 
-[node name="purpose" type="HBoxContainer" parent="ray/dealer"]
-visible = false
-layout_mode = 2
-theme_override_constants/separation = -3
+[node name="view" parent="ray/breakfly" instance=ExtResource("7_5we7h")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -21.0
+offset_top = -21.0
+offset_right = 21.0
+offset_bottom = 21.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="level" type="Label" parent="ray/dealer/purpose"]
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_font_sizes/font_size = 18
-text = "12"
+[node name="zone" type="Label" parent="ray/breakfly"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -20.0
+offset_right = 20.0
+grow_vertical = 0
+size_flags_horizontal = 8
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxEmpty_x13sw")
+text = "I"
 
-[node name="icon" type="Label" parent="ray/dealer/purpose"]
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_fonts/font = ExtResource("3_8w086")
-theme_override_styles/normal = ExtResource("4_fvwiw")
-text = "📈"
+[node name="cost" type="Label" parent="ray/breakfly"]
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -15.0
+offset_bottom = 17.0
+grow_horizontal = 0
+size_flags_horizontal = 8
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxEmpty_jlkt3")
+text = "3"
+horizontal_alignment = 2
 
-[node name="self_control" type="HBoxContainer" parent="ray/dealer"]
-visible = false
+[node name="shrapnel2" type="Button" parent="ray"]
+custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
-theme_override_constants/separation = -3
-
-[node name="level" type="Label" parent="ray/dealer/self_control"]
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_font_sizes/font_size = 18
-text = "6"
-
-[node name="icon" type="Label" parent="ray/dealer/self_control"]
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_fonts/font = ExtResource("3_8w086")
-theme_override_styles/normal = ExtResource("4_fvwiw")
-text = "⚖️"
-
-[node name="caption" type="HBoxContainer" parent="ray/dealer"]
-visible = false
-layout_mode = 2
-theme_override_constants/separation = 0
-
-[node name="ancient" type="HBoxContainer" parent="ray/dealer/caption"]
-visible = false
-layout_mode = 2
-theme_override_constants/separation = -3
-
-[node name="search" type="Label" parent="ray/dealer/caption/ancient"]
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_fonts/font = ExtResource("3_8w086")
-theme_override_styles/normal = ExtResource("4_fvwiw")
-text = "📕"
-
-[node name="caption" type="Label" parent="ray/dealer/caption/ancient"]
-modulate = Color(1, 1, 1, 0.196078)
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_colors/font_color = Color(0.756863, 0.756863, 0.756863, 1)
-text = ":+ !\\+"
-
-[node name="modern" type="Label" parent="ray/dealer/caption"]
-visible = false
-modulate = Color(1, 1, 1, 0.196078)
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_colors/font_color = Color(0.756863, 0.756863, 0.756863, 1)
-text = "Торговец"
-
-[node name="shot" type="Label" parent="ray"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("3_8w086")
-theme_override_styles/normal = ExtResource("4_fvwiw")
-text = "🎯"
-
-[node name="spin_shot" type="HBoxContainer" parent="ray"]
-layout_mode = 2
-theme_override_constants/separation = -5
-
-[node name="opened" type="Button" parent="ray/spin_shot"]
-layout_mode = 2
+size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0.341176, 0.341176, 0.341176, 1)
 theme_override_styles/normal = ExtResource("1_yts5o")
-text = "Крученый выстрел"
 
-[node name="purpose" type="HBoxContainer" parent="ray/spin_shot"]
-visible = false
-layout_mode = 2
-theme_override_constants/separation = -3
+[node name="view" parent="ray/shrapnel2" instance=ExtResource("8_0d834")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -21.0
+offset_top = -21.0
+offset_right = 21.0
+offset_bottom = 21.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="level" type="Label" parent="ray/spin_shot/purpose"]
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_font_sizes/font_size = 18
-text = "12"
+[node name="zone" type="Label" parent="ray/shrapnel2"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -20.0
+offset_right = 20.0
+grow_vertical = 0
+size_flags_horizontal = 8
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxEmpty_x13sw")
+text = "..I.."
 
-[node name="icon" type="Label" parent="ray/spin_shot/purpose"]
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_fonts/font = ExtResource("3_8w086")
-theme_override_styles/normal = ExtResource("4_fvwiw")
-text = "📈"
+[node name="cost" type="Label" parent="ray/shrapnel2"]
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -15.0
+offset_bottom = 17.0
+grow_horizontal = 0
+size_flags_horizontal = 8
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxEmpty_jlkt3")
+text = "5"
+horizontal_alignment = 2
 
-[node name="self_control" type="HBoxContainer" parent="ray/spin_shot"]
-visible = false
+[node name="double" type="Button" parent="ray"]
+custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
-theme_override_constants/separation = -3
-
-[node name="level" type="Label" parent="ray/spin_shot/self_control"]
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_font_sizes/font_size = 18
-text = "6"
-
-[node name="icon" type="Label" parent="ray/spin_shot/self_control"]
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_fonts/font = ExtResource("3_8w086")
-theme_override_styles/normal = ExtResource("4_fvwiw")
-text = "⚖️"
-
-[node name="caption" type="HBoxContainer" parent="ray/spin_shot"]
-visible = false
-layout_mode = 2
-theme_override_constants/separation = 0
-
-[node name="ancient" type="HBoxContainer" parent="ray/spin_shot/caption"]
-visible = false
-layout_mode = 2
-theme_override_constants/separation = -3
-
-[node name="search" type="Label" parent="ray/spin_shot/caption/ancient"]
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_fonts/font = ExtResource("3_8w086")
-theme_override_styles/normal = ExtResource("4_fvwiw")
-text = "📕"
-
-[node name="caption" type="Label" parent="ray/spin_shot/caption/ancient"]
-modulate = Color(1, 1, 1, 0.196078)
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_colors/font_color = Color(0.756863, 0.756863, 0.756863, 1)
-text = ":+ !\\+"
-
-[node name="modern" type="Label" parent="ray/spin_shot/caption"]
-visible = false
-modulate = Color(1, 1, 1, 0.196078)
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_colors/font_color = Color(0.756863, 0.756863, 0.756863, 1)
-text = "Крученый выстрел"
-
-[node name="breakfly" type="HBoxContainer" parent="ray"]
-layout_mode = 2
-theme_override_constants/separation = -5
-
-[node name="opened" type="Button" parent="ray/breakfly"]
-layout_mode = 2
+size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0.341176, 0.341176, 0.341176, 1)
 theme_override_styles/normal = ExtResource("1_yts5o")
-text = "Отбойной молоток"
 
-[node name="purpose" type="HBoxContainer" parent="ray/breakfly"]
-visible = false
-layout_mode = 2
-theme_override_constants/separation = -3
+[node name="view" parent="ray/double" instance=ExtResource("5_x13sw")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -21.0
+offset_top = -21.0
+offset_right = 21.0
+offset_bottom = 21.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="level" type="Label" parent="ray/breakfly/purpose"]
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_font_sizes/font_size = 18
-text = "12"
+[node name="zone" type="Label" parent="ray/double"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -20.0
+offset_right = 20.0
+grow_vertical = 0
+size_flags_horizontal = 8
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxEmpty_x13sw")
+text = "I"
 
-[node name="icon" type="Label" parent="ray/breakfly/purpose"]
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_fonts/font = ExtResource("3_8w086")
-theme_override_styles/normal = ExtResource("4_fvwiw")
-text = "📈"
+[node name="cost" type="Label" parent="ray/double"]
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -15.0
+offset_bottom = 17.0
+grow_horizontal = 0
+size_flags_horizontal = 8
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxEmpty_jlkt3")
+horizontal_alignment = 2
 
-[node name="self_control" type="HBoxContainer" parent="ray/breakfly"]
-visible = false
+[node name="lunge" type="Button" parent="ray"]
+custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
-theme_override_constants/separation = -3
-
-[node name="level" type="Label" parent="ray/breakfly/self_control"]
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_font_sizes/font_size = 18
-text = "6"
-
-[node name="icon" type="Label" parent="ray/breakfly/self_control"]
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_fonts/font = ExtResource("3_8w086")
-theme_override_styles/normal = ExtResource("4_fvwiw")
-text = "⚖️"
-
-[node name="caption" type="HBoxContainer" parent="ray/breakfly"]
-layout_mode = 2
-theme_override_constants/separation = 0
-
-[node name="ancient" type="HBoxContainer" parent="ray/breakfly/caption"]
-visible = false
-layout_mode = 2
-theme_override_constants/separation = -3
-
-[node name="search" type="Label" parent="ray/breakfly/caption/ancient"]
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_fonts/font = ExtResource("3_8w086")
-theme_override_styles/normal = ExtResource("4_fvwiw")
-text = "📕"
-
-[node name="caption" type="Label" parent="ray/breakfly/caption/ancient"]
-modulate = Color(1, 1, 1, 0.196078)
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_colors/font_color = Color(0.756863, 0.756863, 0.756863, 1)
-text = ":+ !\\+"
-
-[node name="modern" type="Label" parent="ray/breakfly/caption"]
-visible = false
-modulate = Color(1, 1, 1, 0.196078)
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_colors/font_color = Color(0.756863, 0.756863, 0.756863, 1)
-text = "Отбойной молоток"
-
-[node name="shrapnel" type="HBoxContainer" parent="ray"]
-layout_mode = 2
-theme_override_constants/separation = -5
-
-[node name="opened" type="Button" parent="ray/shrapnel"]
-layout_mode = 2
+size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0.341176, 0.341176, 0.341176, 1)
 theme_override_styles/normal = ExtResource("1_yts5o")
-text = "Шрапнель"
 
-[node name="purpose" type="HBoxContainer" parent="ray/shrapnel"]
-visible = false
-layout_mode = 2
-theme_override_constants/separation = -3
+[node name="view" parent="ray/lunge" instance=ExtResource("7_jlkt3")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -21.0
+offset_top = -21.0
+offset_right = 21.0
+offset_bottom = 21.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="level" type="Label" parent="ray/shrapnel/purpose"]
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_font_sizes/font_size = 18
-text = "12"
+[node name="zone" type="Label" parent="ray/lunge"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -20.0
+offset_right = 20.0
+grow_vertical = 0
+size_flags_horizontal = 8
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxEmpty_x13sw")
+text = "I"
 
-[node name="icon" type="Label" parent="ray/shrapnel/purpose"]
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_fonts/font = ExtResource("3_8w086")
-theme_override_styles/normal = ExtResource("4_fvwiw")
-text = "📈"
+[node name="cost" type="Label" parent="ray/lunge"]
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -15.0
+offset_bottom = 17.0
+grow_horizontal = 0
+size_flags_horizontal = 8
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxEmpty_jlkt3")
+horizontal_alignment = 2
 
-[node name="self_control" type="HBoxContainer" parent="ray/shrapnel"]
-visible = false
+[node name="dead_grip" type="Button" parent="ray"]
+custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
-theme_override_constants/separation = -3
-
-[node name="level" type="Label" parent="ray/shrapnel/self_control"]
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_font_sizes/font_size = 18
-text = "6"
-
-[node name="icon" type="Label" parent="ray/shrapnel/self_control"]
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_fonts/font = ExtResource("3_8w086")
-theme_override_styles/normal = ExtResource("4_fvwiw")
-text = "⚖️"
-
-[node name="caption" type="HBoxContainer" parent="ray/shrapnel"]
-layout_mode = 2
-theme_override_constants/separation = 0
-
-[node name="ancient" type="HBoxContainer" parent="ray/shrapnel/caption"]
-visible = false
-layout_mode = 2
-theme_override_constants/separation = -3
-
-[node name="search" type="Label" parent="ray/shrapnel/caption/ancient"]
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_fonts/font = ExtResource("3_8w086")
-theme_override_styles/normal = ExtResource("4_fvwiw")
-text = "📕"
-
-[node name="caption" type="Label" parent="ray/shrapnel/caption/ancient"]
-modulate = Color(1, 1, 1, 0.196078)
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_colors/font_color = Color(0.756863, 0.756863, 0.756863, 1)
-text = "\\:\\ /:+ !\\+"
-
-[node name="modern" type="Label" parent="ray/shrapnel/caption"]
-visible = false
-modulate = Color(1, 1, 1, 0.196078)
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_colors/font_color = Color(0.756863, 0.756863, 0.756863, 1)
-text = "Шрапнель"
-
-[node name="punch" type="Label" parent="ray"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("3_8w086")
-theme_override_styles/normal = ExtResource("4_fvwiw")
-text = "✊"
-
-[node name="double" type="HBoxContainer" parent="ray"]
-layout_mode = 2
-theme_override_constants/separation = -5
-
-[node name="opened" type="Button" parent="ray/double"]
-layout_mode = 2
+size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0.341176, 0.341176, 0.341176, 1)
 theme_override_styles/normal = ExtResource("1_yts5o")
-text = "Двоечка"
 
-[node name="purpose" type="HBoxContainer" parent="ray/double"]
-visible = false
-layout_mode = 2
-theme_override_constants/separation = -3
+[node name="view" parent="ray/dead_grip" instance=ExtResource("8_b5p2p")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -21.0
+offset_top = -21.0
+offset_right = 21.0
+offset_bottom = 21.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="level" type="Label" parent="ray/double/purpose"]
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_font_sizes/font_size = 18
-text = "12"
+[node name="zone" type="Label" parent="ray/dead_grip"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -20.0
+offset_right = 20.0
+grow_vertical = 0
+size_flags_horizontal = 8
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxEmpty_x13sw")
+text = "I"
 
-[node name="icon" type="Label" parent="ray/double/purpose"]
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_fonts/font = ExtResource("3_8w086")
-theme_override_styles/normal = ExtResource("4_fvwiw")
-text = "📈"
+[node name="cost" type="Label" parent="ray/dead_grip"]
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -15.0
+offset_bottom = 17.0
+grow_horizontal = 0
+size_flags_horizontal = 8
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxEmpty_jlkt3")
+text = "1"
+horizontal_alignment = 2
 
-[node name="self_control" type="HBoxContainer" parent="ray/double"]
-visible = false
+[node name="spit_kick" type="Button" parent="ray"]
+custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
-theme_override_constants/separation = -3
-
-[node name="level" type="Label" parent="ray/double/self_control"]
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_font_sizes/font_size = 18
-text = "6"
-
-[node name="icon" type="Label" parent="ray/double/self_control"]
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_fonts/font = ExtResource("3_8w086")
-theme_override_styles/normal = ExtResource("4_fvwiw")
-text = "⚖️"
-
-[node name="caption" type="HBoxContainer" parent="ray/double"]
-layout_mode = 2
-theme_override_constants/separation = 0
-
-[node name="ancient" type="HBoxContainer" parent="ray/double/caption"]
-visible = false
-layout_mode = 2
-theme_override_constants/separation = -3
-
-[node name="search" type="Label" parent="ray/double/caption/ancient"]
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_fonts/font = ExtResource("3_8w086")
-theme_override_styles/normal = ExtResource("4_fvwiw")
-text = "📕"
-
-[node name="caption" type="Label" parent="ray/double/caption/ancient"]
-modulate = Color(1, 1, 1, 0.196078)
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_colors/font_color = Color(0.756863, 0.756863, 0.756863, 1)
-text = ":+ :+"
-
-[node name="modern" type="Label" parent="ray/double/caption"]
-visible = false
-modulate = Color(1, 1, 1, 0.196078)
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_colors/font_color = Color(0.756863, 0.756863, 0.756863, 1)
-text = "Выпад"
-
-[node name="lunge" type="HBoxContainer" parent="ray"]
-layout_mode = 2
-theme_override_constants/separation = -5
-
-[node name="opened" type="Button" parent="ray/lunge"]
-layout_mode = 2
+size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0.341176, 0.341176, 0.341176, 1)
 theme_override_styles/normal = ExtResource("1_yts5o")
-text = "Выпад"
 
-[node name="purpose" type="HBoxContainer" parent="ray/lunge"]
-visible = false
-layout_mode = 2
-theme_override_constants/separation = -3
+[node name="view" parent="ray/spit_kick" instance=ExtResource("8_m6jlp")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -21.0
+offset_top = -21.0
+offset_right = 21.0
+offset_bottom = 21.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="level" type="Label" parent="ray/lunge/purpose"]
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_font_sizes/font_size = 18
-text = "12"
+[node name="zone" type="Label" parent="ray/spit_kick"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -20.0
+offset_right = 20.0
+grow_vertical = 0
+size_flags_horizontal = 8
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxEmpty_x13sw")
+text = "I"
 
-[node name="icon" type="Label" parent="ray/lunge/purpose"]
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_fonts/font = ExtResource("3_8w086")
-theme_override_styles/normal = ExtResource("4_fvwiw")
-text = "📈"
+[node name="cost" type="Label" parent="ray/spit_kick"]
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -15.0
+offset_bottom = 17.0
+grow_horizontal = 0
+size_flags_horizontal = 8
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxEmpty_jlkt3")
+horizontal_alignment = 2
 
-[node name="self_control" type="HBoxContainer" parent="ray/lunge"]
-visible = false
+[node name="round_kick" type="Button" parent="ray"]
+custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
-theme_override_constants/separation = -3
-
-[node name="level" type="Label" parent="ray/lunge/self_control"]
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_font_sizes/font_size = 18
-text = "6"
-
-[node name="icon" type="Label" parent="ray/lunge/self_control"]
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_fonts/font = ExtResource("3_8w086")
-theme_override_styles/normal = ExtResource("4_fvwiw")
-text = "⚖️"
-
-[node name="caption" type="HBoxContainer" parent="ray/lunge"]
-layout_mode = 2
-theme_override_constants/separation = 0
-
-[node name="ancient" type="HBoxContainer" parent="ray/lunge/caption"]
-visible = false
-layout_mode = 2
-theme_override_constants/separation = -3
-
-[node name="search" type="Label" parent="ray/lunge/caption/ancient"]
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_fonts/font = ExtResource("3_8w086")
-theme_override_styles/normal = ExtResource("4_fvwiw")
-text = "📕"
-
-[node name="caption" type="Label" parent="ray/lunge/caption/ancient"]
-modulate = Color(1, 1, 1, 0.196078)
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_colors/font_color = Color(0.756863, 0.756863, 0.756863, 1)
-text = "\\. :+ :+"
-
-[node name="modern" type="Label" parent="ray/lunge/caption"]
-visible = false
-modulate = Color(1, 1, 1, 0.196078)
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_colors/font_color = Color(0.756863, 0.756863, 0.756863, 1)
-text = "Выпад"
-
-[node name="dead_grip" type="HBoxContainer" parent="ray"]
-layout_mode = 2
-theme_override_constants/separation = -5
-
-[node name="opened" type="Button" parent="ray/dead_grip"]
-layout_mode = 2
+size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0.341176, 0.341176, 0.341176, 1)
 theme_override_styles/normal = ExtResource("1_yts5o")
-text = "Мертвая хватка"
 
-[node name="purpose" type="HBoxContainer" parent="ray/dead_grip"]
-visible = false
-layout_mode = 2
-theme_override_constants/separation = -3
+[node name="view" parent="ray/round_kick" instance=ExtResource("10_ln8j7")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -21.0
+offset_top = -21.0
+offset_right = 21.0
+offset_bottom = 21.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="level" type="Label" parent="ray/dead_grip/purpose"]
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_font_sizes/font_size = 18
-text = "12"
+[node name="zone" type="Label" parent="ray/round_kick"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -20.0
+offset_right = 20.0
+grow_vertical = 0
+size_flags_horizontal = 8
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxEmpty_x13sw")
+text = "I"
 
-[node name="icon" type="Label" parent="ray/dead_grip/purpose"]
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_fonts/font = ExtResource("3_8w086")
-theme_override_styles/normal = ExtResource("4_fvwiw")
-text = "📈"
+[node name="cost" type="Label" parent="ray/round_kick"]
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -15.0
+offset_bottom = 17.0
+grow_horizontal = 0
+size_flags_horizontal = 8
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxEmpty_jlkt3")
+horizontal_alignment = 2
 
-[node name="self_control" type="HBoxContainer" parent="ray/dead_grip"]
-visible = false
+[node name="knock_down" type="Button" parent="ray"]
+custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
-theme_override_constants/separation = -3
-
-[node name="level" type="Label" parent="ray/dead_grip/self_control"]
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_font_sizes/font_size = 18
-text = "6"
-
-[node name="icon" type="Label" parent="ray/dead_grip/self_control"]
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_fonts/font = ExtResource("3_8w086")
-theme_override_styles/normal = ExtResource("4_fvwiw")
-text = "⚖️"
-
-[node name="caption" type="HBoxContainer" parent="ray/dead_grip"]
-layout_mode = 2
-theme_override_constants/separation = 0
-
-[node name="ancient" type="HBoxContainer" parent="ray/dead_grip/caption"]
-visible = false
-layout_mode = 2
-theme_override_constants/separation = -3
-
-[node name="search" type="Label" parent="ray/dead_grip/caption/ancient"]
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_fonts/font = ExtResource("3_8w086")
-theme_override_styles/normal = ExtResource("4_fvwiw")
-text = "📕"
-
-[node name="caption" type="Label" parent="ray/dead_grip/caption/ancient"]
-modulate = Color(1, 1, 1, 0.196078)
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_colors/font_color = Color(0.756863, 0.756863, 0.756863, 1)
-text = ":+ /:+ :+"
-
-[node name="modern" type="Label" parent="ray/dead_grip/caption"]
-visible = false
-modulate = Color(1, 1, 1, 0.196078)
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_colors/font_color = Color(0.756863, 0.756863, 0.756863, 1)
-text = "Мертвая хватка"
-
-[node name="kick" type="Label" parent="ray"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("3_8w086")
-theme_override_styles/normal = ExtResource("4_fvwiw")
-text = "🦶"
-
-[node name="spit_kick" type="HBoxContainer" parent="ray"]
-layout_mode = 2
-theme_override_constants/separation = -5
-
-[node name="opened" type="Button" parent="ray/spit_kick"]
-layout_mode = 2
+size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0.341176, 0.341176, 0.341176, 1)
 theme_override_styles/normal = ExtResource("1_yts5o")
-text = "Косой удар"
 
-[node name="purpose" type="HBoxContainer" parent="ray/spit_kick"]
-visible = false
-layout_mode = 2
-theme_override_constants/separation = -3
+[node name="view" parent="ray/knock_down" instance=ExtResource("11_kv8ev")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -21.0
+offset_top = -21.0
+offset_right = 21.0
+offset_bottom = 21.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="level" type="Label" parent="ray/spit_kick/purpose"]
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_font_sizes/font_size = 18
-text = "12"
+[node name="zone" type="Label" parent="ray/knock_down"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -20.0
+offset_right = 20.0
+grow_vertical = 0
+size_flags_horizontal = 8
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxEmpty_x13sw")
+text = "I"
 
-[node name="icon" type="Label" parent="ray/spit_kick/purpose"]
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_fonts/font = ExtResource("3_8w086")
-theme_override_styles/normal = ExtResource("4_fvwiw")
-text = "📈"
+[node name="cost" type="Label" parent="ray/knock_down"]
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -15.0
+offset_bottom = 17.0
+grow_horizontal = 0
+size_flags_horizontal = 8
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxEmpty_jlkt3")
+horizontal_alignment = 2
 
-[node name="self_control" type="HBoxContainer" parent="ray/spit_kick"]
-visible = false
+[node name="dance" type="Button" parent="ray"]
+custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
-theme_override_constants/separation = -3
-
-[node name="level" type="Label" parent="ray/spit_kick/self_control"]
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_font_sizes/font_size = 18
-text = "6"
-
-[node name="icon" type="Label" parent="ray/spit_kick/self_control"]
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_fonts/font = ExtResource("3_8w086")
-theme_override_styles/normal = ExtResource("4_fvwiw")
-text = "⚖️"
-
-[node name="caption" type="HBoxContainer" parent="ray/spit_kick"]
-layout_mode = 2
-theme_override_constants/separation = 0
-
-[node name="ancient" type="HBoxContainer" parent="ray/spit_kick/caption"]
-visible = false
-layout_mode = 2
-theme_override_constants/separation = -3
-
-[node name="search" type="Label" parent="ray/spit_kick/caption/ancient"]
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_fonts/font = ExtResource("3_8w086")
-theme_override_styles/normal = ExtResource("4_fvwiw")
-text = "📕"
-
-[node name="caption" type="Label" parent="ray/spit_kick/caption/ancient"]
-modulate = Color(1, 1, 1, 0.196078)
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_colors/font_color = Color(0.756863, 0.756863, 0.756863, 1)
-text = "\\. :+ \\."
-
-[node name="modern" type="Label" parent="ray/spit_kick/caption"]
-visible = false
-modulate = Color(1, 1, 1, 0.196078)
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_colors/font_color = Color(0.756863, 0.756863, 0.756863, 1)
-text = "Косой удар"
-
-[node name="round_kick" type="HBoxContainer" parent="ray"]
-layout_mode = 2
-theme_override_constants/separation = -5
-
-[node name="opened" type="Button" parent="ray/round_kick"]
-layout_mode = 2
+size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0.341176, 0.341176, 0.341176, 1)
 theme_override_styles/normal = ExtResource("1_yts5o")
-text = "Вертушка"
 
-[node name="purpose" type="HBoxContainer" parent="ray/round_kick"]
-visible = false
-layout_mode = 2
-theme_override_constants/separation = -3
+[node name="view" parent="ray/dance" instance=ExtResource("12_kv8ev")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -21.0
+offset_top = -21.0
+offset_right = 21.0
+offset_bottom = 21.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="level" type="Label" parent="ray/round_kick/purpose"]
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_font_sizes/font_size = 18
-text = "12"
+[node name="zone" type="Label" parent="ray/dance"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -20.0
+offset_right = 20.0
+grow_vertical = 0
+size_flags_horizontal = 8
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxEmpty_x13sw")
+text = "I"
 
-[node name="icon" type="Label" parent="ray/round_kick/purpose"]
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_fonts/font = ExtResource("3_8w086")
-theme_override_styles/normal = ExtResource("4_fvwiw")
-text = "📈"
+[node name="cost" type="Label" parent="ray/dance"]
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -15.0
+offset_bottom = 17.0
+grow_horizontal = 0
+size_flags_horizontal = 8
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxEmpty_jlkt3")
+text = "4"
+horizontal_alignment = 2
 
-[node name="self_control" type="HBoxContainer" parent="ray/round_kick"]
-visible = false
+[node name="fire_kick" type="Button" parent="ray"]
+custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
-theme_override_constants/separation = -3
-
-[node name="level" type="Label" parent="ray/round_kick/self_control"]
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_font_sizes/font_size = 18
-text = "6"
-
-[node name="icon" type="Label" parent="ray/round_kick/self_control"]
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_fonts/font = ExtResource("3_8w086")
-theme_override_styles/normal = ExtResource("4_fvwiw")
-text = "⚖️"
-
-[node name="caption" type="HBoxContainer" parent="ray/round_kick"]
-layout_mode = 2
-theme_override_constants/separation = 0
-
-[node name="ancient" type="HBoxContainer" parent="ray/round_kick/caption"]
-visible = false
-layout_mode = 2
-theme_override_constants/separation = -3
-
-[node name="search" type="Label" parent="ray/round_kick/caption/ancient"]
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_fonts/font = ExtResource("3_8w086")
-theme_override_styles/normal = ExtResource("4_fvwiw")
-text = "📕"
-
-[node name="caption" type="Label" parent="ray/round_kick/caption/ancient"]
-modulate = Color(1, 1, 1, 0.196078)
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_colors/font_color = Color(0.756863, 0.756863, 0.756863, 1)
-text = "\\. :+ :+ \\."
-
-[node name="modern" type="Label" parent="ray/round_kick/caption"]
-visible = false
-modulate = Color(1, 1, 1, 0.196078)
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_colors/font_color = Color(0.756863, 0.756863, 0.756863, 1)
-text = "Вертушка"
-
-[node name="knock_down" type="HBoxContainer" parent="ray"]
-layout_mode = 2
-theme_override_constants/separation = -5
-
-[node name="opened" type="Button" parent="ray/knock_down"]
-layout_mode = 2
+size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0.341176, 0.341176, 0.341176, 1)
 theme_override_styles/normal = ExtResource("1_yts5o")
-text = "Сбитие с ног"
 
-[node name="purpose" type="HBoxContainer" parent="ray/knock_down"]
-visible = false
-layout_mode = 2
-theme_override_constants/separation = -3
+[node name="view" parent="ray/fire_kick" instance=ExtResource("13_1l60j")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -21.0
+offset_top = -21.0
+offset_right = 21.0
+offset_bottom = 21.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="level" type="Label" parent="ray/knock_down/purpose"]
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_font_sizes/font_size = 18
-text = "12"
+[node name="zone" type="Label" parent="ray/fire_kick"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -20.0
+offset_right = 20.0
+grow_vertical = 0
+size_flags_horizontal = 8
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxEmpty_x13sw")
+text = "I"
 
-[node name="icon" type="Label" parent="ray/knock_down/purpose"]
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_fonts/font = ExtResource("3_8w086")
-theme_override_styles/normal = ExtResource("4_fvwiw")
-text = "📈"
+[node name="cost" type="Label" parent="ray/fire_kick"]
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -15.0
+offset_bottom = 17.0
+grow_horizontal = 0
+size_flags_horizontal = 8
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxEmpty_jlkt3")
+text = "2"
+horizontal_alignment = 2
 
-[node name="self_control" type="HBoxContainer" parent="ray/knock_down"]
-visible = false
+[node name="cure" type="Button" parent="ray"]
+custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
-theme_override_constants/separation = -3
-
-[node name="level" type="Label" parent="ray/knock_down/self_control"]
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_font_sizes/font_size = 18
-text = "6"
-
-[node name="icon" type="Label" parent="ray/knock_down/self_control"]
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_fonts/font = ExtResource("3_8w086")
-theme_override_styles/normal = ExtResource("4_fvwiw")
-text = "⚖️"
-
-[node name="caption" type="HBoxContainer" parent="ray/knock_down"]
-layout_mode = 2
-theme_override_constants/separation = 0
-
-[node name="ancient" type="HBoxContainer" parent="ray/knock_down/caption"]
-visible = false
-layout_mode = 2
-theme_override_constants/separation = -3
-
-[node name="search" type="Label" parent="ray/knock_down/caption/ancient"]
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_fonts/font = ExtResource("3_8w086")
-theme_override_styles/normal = ExtResource("4_fvwiw")
-text = "📕"
-
-[node name="caption" type="Label" parent="ray/knock_down/caption/ancient"]
-modulate = Color(1, 1, 1, 0.196078)
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_colors/font_color = Color(0.756863, 0.756863, 0.756863, 1)
-text = "+\\. \\. +\\. \\."
-
-[node name="modern" type="Label" parent="ray/knock_down/caption"]
-visible = false
-modulate = Color(1, 1, 1, 0.196078)
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_colors/font_color = Color(0.756863, 0.756863, 0.756863, 1)
-text = "Сбитие с ног"
-
-[node name="fire" type="Label" parent="ray"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("3_8w086")
-theme_override_styles/normal = ExtResource("4_fvwiw")
-text = "🔥"
-
-[node name="fire_dance" type="HBoxContainer" parent="ray"]
-layout_mode = 2
-theme_override_constants/separation = -5
-
-[node name="opened" type="Button" parent="ray/fire_dance"]
-layout_mode = 2
+size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0.341176, 0.341176, 0.341176, 1)
 theme_override_styles/normal = ExtResource("1_yts5o")
-text = "Танец огня"
 
-[node name="purpose" type="HBoxContainer" parent="ray/fire_dance"]
-visible = false
-layout_mode = 2
-theme_override_constants/separation = -3
+[node name="view" parent="ray/cure" instance=ExtResource("14_jpjty")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -21.0
+offset_top = -21.0
+offset_right = 21.0
+offset_bottom = 21.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="level" type="Label" parent="ray/fire_dance/purpose"]
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_font_sizes/font_size = 18
-text = "12"
+[node name="zone" type="Label" parent="ray/cure"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -20.0
+offset_right = 20.0
+grow_vertical = 0
+size_flags_horizontal = 8
+theme_override_colors/font_color = Color(0.560784, 1, 0.529412, 1)
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxEmpty_x13sw")
+text = ".I."
 
-[node name="icon" type="Label" parent="ray/fire_dance/purpose"]
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_fonts/font = ExtResource("3_8w086")
-theme_override_styles/normal = ExtResource("4_fvwiw")
-text = "📈"
+[node name="cost" type="Label" parent="ray/cure"]
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -15.0
+offset_bottom = 17.0
+grow_horizontal = 0
+size_flags_horizontal = 8
+theme_override_colors/font_color = Color(0.560784, 1, 0.529412, 1)
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxEmpty_jlkt3")
+text = "2"
+horizontal_alignment = 2
 
-[node name="self_control" type="HBoxContainer" parent="ray/fire_dance"]
-visible = false
+[node name="aid" type="Button" parent="ray"]
+custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
-theme_override_constants/separation = -3
-
-[node name="level" type="Label" parent="ray/fire_dance/self_control"]
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_font_sizes/font_size = 18
-text = "6"
-
-[node name="icon" type="Label" parent="ray/fire_dance/self_control"]
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_fonts/font = ExtResource("3_8w086")
-theme_override_styles/normal = ExtResource("4_fvwiw")
-text = "⚖️"
-
-[node name="caption" type="HBoxContainer" parent="ray/fire_dance"]
-layout_mode = 2
-theme_override_constants/separation = 0
-
-[node name="ancient" type="HBoxContainer" parent="ray/fire_dance/caption"]
-visible = false
-layout_mode = 2
-theme_override_constants/separation = -3
-
-[node name="search" type="Label" parent="ray/fire_dance/caption/ancient"]
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_fonts/font = ExtResource("3_8w086")
-theme_override_styles/normal = ExtResource("4_fvwiw")
-text = "📕"
-
-[node name="caption" type="Label" parent="ray/fire_dance/caption/ancient"]
-modulate = Color(1, 1, 1, 0.196078)
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_colors/font_color = Color(0.756863, 0.756863, 0.756863, 1)
-text = "\\:\\ !\\+ !\\+ \\:\\"
-
-[node name="modern" type="Label" parent="ray/fire_dance/caption"]
-visible = false
-modulate = Color(1, 1, 1, 0.196078)
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_colors/font_color = Color(0.756863, 0.756863, 0.756863, 1)
-text = "Танец огня"
-
-[node name="fire_kick" type="HBoxContainer" parent="ray"]
-layout_mode = 2
-theme_override_constants/separation = -5
-
-[node name="opened" type="Button" parent="ray/fire_kick"]
-layout_mode = 2
+size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0.341176, 0.341176, 0.341176, 1)
 theme_override_styles/normal = ExtResource("1_yts5o")
-text = "Ноги-гриль"
 
-[node name="purpose" type="HBoxContainer" parent="ray/fire_kick"]
-visible = false
-layout_mode = 2
-theme_override_constants/separation = -3
+[node name="view" parent="ray/aid" instance=ExtResource("15_i0ltj")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -21.0
+offset_top = -21.0
+offset_right = 21.0
+offset_bottom = 21.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="level" type="Label" parent="ray/fire_kick/purpose"]
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_font_sizes/font_size = 18
-text = "12"
+[node name="zone" type="Label" parent="ray/aid"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -20.0
+offset_right = 20.0
+grow_vertical = 0
+size_flags_horizontal = 8
+theme_override_colors/font_color = Color(0.560784, 1, 0.529412, 1)
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxEmpty_x13sw")
+text = "I"
 
-[node name="icon" type="Label" parent="ray/fire_kick/purpose"]
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_fonts/font = ExtResource("3_8w086")
-theme_override_styles/normal = ExtResource("4_fvwiw")
-text = "📈"
+[node name="cost" type="Label" parent="ray/aid"]
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -15.0
+offset_bottom = 17.0
+grow_horizontal = 0
+size_flags_horizontal = 8
+theme_override_colors/font_color = Color(0.560784, 1, 0.529412, 1)
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxEmpty_jlkt3")
+text = "3"
+horizontal_alignment = 2
 
-[node name="self_control" type="HBoxContainer" parent="ray/fire_kick"]
-visible = false
+[node name="spanking" type="Button" parent="ray"]
+custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
-theme_override_constants/separation = -3
-
-[node name="level" type="Label" parent="ray/fire_kick/self_control"]
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_font_sizes/font_size = 18
-text = "6"
-
-[node name="icon" type="Label" parent="ray/fire_kick/self_control"]
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_fonts/font = ExtResource("3_8w086")
-theme_override_styles/normal = ExtResource("4_fvwiw")
-text = "⚖️"
-
-[node name="caption" type="HBoxContainer" parent="ray/fire_kick"]
-layout_mode = 2
-theme_override_constants/separation = 0
-
-[node name="ancient" type="HBoxContainer" parent="ray/fire_kick/caption"]
-visible = false
-layout_mode = 2
-theme_override_constants/separation = -3
-
-[node name="search" type="Label" parent="ray/fire_kick/caption/ancient"]
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_fonts/font = ExtResource("3_8w086")
-theme_override_styles/normal = ExtResource("4_fvwiw")
-text = "📕"
-
-[node name="caption" type="Label" parent="ray/fire_kick/caption/ancient"]
-modulate = Color(1, 1, 1, 0.196078)
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_colors/font_color = Color(0.756863, 0.756863, 0.756863, 1)
-text = "\\:\\ \\. \\:\\"
-
-[node name="modern" type="Label" parent="ray/fire_kick/caption"]
-visible = false
-modulate = Color(1, 1, 1, 0.196078)
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_colors/font_color = Color(0.756863, 0.756863, 0.756863, 1)
-text = "Ноги-гриль"
-
-[node name="cure" type="HBoxContainer" parent="ray"]
-layout_mode = 2
-theme_override_constants/separation = -5
-
-[node name="opened" type="Button" parent="ray/cure"]
-layout_mode = 2
+size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0.341176, 0.341176, 0.341176, 1)
 theme_override_styles/normal = ExtResource("1_yts5o")
-text = "Лечение"
 
-[node name="purpose" type="HBoxContainer" parent="ray/cure"]
-visible = false
-layout_mode = 2
-theme_override_constants/separation = -3
+[node name="view" parent="ray/spanking" instance=ExtResource("16_esltg")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -21.0
+offset_top = -21.0
+offset_right = 21.0
+offset_bottom = 21.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="level" type="Label" parent="ray/cure/purpose"]
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_font_sizes/font_size = 18
-text = "12"
+[node name="zone" type="Label" parent="ray/spanking"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -20.0
+offset_right = 20.0
+grow_vertical = 0
+size_flags_horizontal = 8
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxEmpty_x13sw")
+text = "I.I"
 
-[node name="icon" type="Label" parent="ray/cure/purpose"]
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_fonts/font = ExtResource("3_8w086")
-theme_override_styles/normal = ExtResource("4_fvwiw")
-text = "📈"
+[node name="cost" type="Label" parent="ray/spanking"]
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -15.0
+offset_bottom = 17.0
+grow_horizontal = 0
+size_flags_horizontal = 8
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxEmpty_jlkt3")
+text = "2"
+horizontal_alignment = 2
 
-[node name="self_control" type="HBoxContainer" parent="ray/cure"]
-visible = false
+[node name="backsta" type="Button" parent="ray"]
+custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
-theme_override_constants/separation = -3
-
-[node name="level" type="Label" parent="ray/cure/self_control"]
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_font_sizes/font_size = 18
-text = "6"
-
-[node name="icon" type="Label" parent="ray/cure/self_control"]
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_fonts/font = ExtResource("3_8w086")
-theme_override_styles/normal = ExtResource("4_fvwiw")
-text = "⚖️"
-
-[node name="caption" type="HBoxContainer" parent="ray/cure"]
-layout_mode = 2
-theme_override_constants/separation = 0
-
-[node name="ancient" type="HBoxContainer" parent="ray/cure/caption"]
-visible = false
-layout_mode = 2
-theme_override_constants/separation = -3
-
-[node name="search" type="Label" parent="ray/cure/caption/ancient"]
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_fonts/font = ExtResource("3_8w086")
-theme_override_styles/normal = ExtResource("4_fvwiw")
-text = "📕"
-
-[node name="caption" type="Label" parent="ray/cure/caption/ancient"]
-modulate = Color(1, 1, 1, 0.196078)
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_colors/font_color = Color(0.756863, 0.756863, 0.756863, 1)
-text = "!\\+ \\:\\ \\:\\"
-
-[node name="modern" type="Label" parent="ray/cure/caption"]
-visible = false
-modulate = Color(1, 1, 1, 0.196078)
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_colors/font_color = Color(0.756863, 0.756863, 0.756863, 1)
-text = "Лечение"
-
-[node name="aid" type="HBoxContainer" parent="ray"]
-layout_mode = 2
-theme_override_constants/separation = -5
-
-[node name="opened" type="Button" parent="ray/aid"]
-layout_mode = 2
+size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0.341176, 0.341176, 0.341176, 1)
 theme_override_styles/normal = ExtResource("1_yts5o")
-text = "Подкрепление"
 
-[node name="purpose" type="HBoxContainer" parent="ray/aid"]
-visible = false
-layout_mode = 2
-theme_override_constants/separation = -3
+[node name="view" parent="ray/backsta" instance=ExtResource("17_0pj6o")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -21.0
+offset_top = -21.0
+offset_right = 21.0
+offset_bottom = 21.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="level" type="Label" parent="ray/aid/purpose"]
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_font_sizes/font_size = 18
-text = "12"
+[node name="zone" type="Label" parent="ray/backsta"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -20.0
+offset_right = 20.0
+grow_vertical = 0
+size_flags_horizontal = 8
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxEmpty_x13sw")
+text = "I"
 
-[node name="icon" type="Label" parent="ray/aid/purpose"]
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_fonts/font = ExtResource("3_8w086")
-theme_override_styles/normal = ExtResource("4_fvwiw")
-text = "📈"
+[node name="cost" type="Label" parent="ray/backsta"]
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -15.0
+offset_bottom = 17.0
+grow_horizontal = 0
+size_flags_horizontal = 8
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxEmpty_jlkt3")
+horizontal_alignment = 2
 
-[node name="self_control" type="HBoxContainer" parent="ray/aid"]
-visible = false
+[node name="Control2" type="Control" parent="ray"]
 layout_mode = 2
-theme_override_constants/separation = -3
-
-[node name="level" type="Label" parent="ray/aid/self_control"]
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_font_sizes/font_size = 18
-text = "6"
-
-[node name="icon" type="Label" parent="ray/aid/self_control"]
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_fonts/font = ExtResource("3_8w086")
-theme_override_styles/normal = ExtResource("4_fvwiw")
-text = "⚖️"
-
-[node name="caption" type="HBoxContainer" parent="ray/aid"]
-layout_mode = 2
-theme_override_constants/separation = 0
-
-[node name="ancient" type="HBoxContainer" parent="ray/aid/caption"]
-visible = false
-layout_mode = 2
-theme_override_constants/separation = -3
-
-[node name="search" type="Label" parent="ray/aid/caption/ancient"]
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_fonts/font = ExtResource("3_8w086")
-theme_override_styles/normal = ExtResource("4_fvwiw")
-text = "📕"
-
-[node name="caption" type="Label" parent="ray/aid/caption/ancient"]
-modulate = Color(1, 1, 1, 0.196078)
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_colors/font_color = Color(0.756863, 0.756863, 0.756863, 1)
-text = "!\\+ \\:\\ \\:\\"
-
-[node name="modern" type="Label" parent="ray/aid/caption"]
-visible = false
-modulate = Color(1, 1, 1, 0.196078)
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_colors/font_color = Color(0.756863, 0.756863, 0.756863, 1)
-text = "Подкрепление"
-
-[node name="whip" type="Label" parent="ray"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("3_8w086")
-theme_override_styles/normal = ExtResource("4_fvwiw")
-text = "🎣"
-
-[node name="poaching" type="HBoxContainer" parent="ray"]
-layout_mode = 2
-theme_override_constants/separation = -5
-
-[node name="opened" type="Button" parent="ray/poaching"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.341176, 0.341176, 0.341176, 1)
-theme_override_styles/normal = ExtResource("1_yts5o")
-text = "Порка"
-
-[node name="purpose" type="HBoxContainer" parent="ray/poaching"]
-visible = false
-layout_mode = 2
-theme_override_constants/separation = -3
-
-[node name="level" type="Label" parent="ray/poaching/purpose"]
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_font_sizes/font_size = 18
-text = "12"
-
-[node name="icon" type="Label" parent="ray/poaching/purpose"]
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_fonts/font = ExtResource("3_8w086")
-theme_override_styles/normal = ExtResource("4_fvwiw")
-text = "📈"
-
-[node name="self_control" type="HBoxContainer" parent="ray/poaching"]
-visible = false
-layout_mode = 2
-theme_override_constants/separation = -3
-
-[node name="level" type="Label" parent="ray/poaching/self_control"]
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_font_sizes/font_size = 18
-text = "6"
-
-[node name="icon" type="Label" parent="ray/poaching/self_control"]
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_fonts/font = ExtResource("3_8w086")
-theme_override_styles/normal = ExtResource("4_fvwiw")
-text = "⚖️"
-
-[node name="caption" type="HBoxContainer" parent="ray/poaching"]
-layout_mode = 2
-theme_override_constants/separation = 0
-
-[node name="ancient" type="HBoxContainer" parent="ray/poaching/caption"]
-visible = false
-layout_mode = 2
-theme_override_constants/separation = -3
-
-[node name="search" type="Label" parent="ray/poaching/caption/ancient"]
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_fonts/font = ExtResource("3_8w086")
-theme_override_styles/normal = ExtResource("4_fvwiw")
-text = "📕"
-
-[node name="caption" type="Label" parent="ray/poaching/caption/ancient"]
-modulate = Color(1, 1, 1, 0.196078)
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_colors/font_color = Color(0.756863, 0.756863, 0.756863, 1)
-text = ":+ /:+ :+ /:+"
-
-[node name="modern" type="Label" parent="ray/poaching/caption"]
-visible = false
-modulate = Color(1, 1, 1, 0.196078)
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_colors/font_color = Color(0.756863, 0.756863, 0.756863, 1)
-text = "Порка"
-
-[node name="knife" type="Label" parent="ray"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("3_8w086")
-theme_override_styles/normal = ExtResource("4_fvwiw")
-text = "🔪"
-
-[node name="backstab" type="HBoxContainer" parent="ray"]
-layout_mode = 2
-theme_override_constants/separation = -5
-
-[node name="opened" type="Button" parent="ray/backstab"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.341176, 0.341176, 0.341176, 1)
-theme_override_styles/normal = ExtResource("1_yts5o")
-text = "Удар сзади"
-
-[node name="purpose" type="HBoxContainer" parent="ray/backstab"]
-visible = false
-layout_mode = 2
-theme_override_constants/separation = -3
-
-[node name="level" type="Label" parent="ray/backstab/purpose"]
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_font_sizes/font_size = 18
-text = "12"
-
-[node name="icon" type="Label" parent="ray/backstab/purpose"]
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_fonts/font = ExtResource("3_8w086")
-theme_override_styles/normal = ExtResource("4_fvwiw")
-text = "📈"
-
-[node name="self_control" type="HBoxContainer" parent="ray/backstab"]
-visible = false
-layout_mode = 2
-theme_override_constants/separation = -3
-
-[node name="level" type="Label" parent="ray/backstab/self_control"]
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_font_sizes/font_size = 18
-text = "6"
-
-[node name="icon" type="Label" parent="ray/backstab/self_control"]
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_fonts/font = ExtResource("3_8w086")
-theme_override_styles/normal = ExtResource("4_fvwiw")
-text = "⚖️"
-
-[node name="caption" type="HBoxContainer" parent="ray/backstab"]
-layout_mode = 2
-theme_override_constants/separation = 0
-
-[node name="ancient" type="HBoxContainer" parent="ray/backstab/caption"]
-visible = false
-layout_mode = 2
-theme_override_constants/separation = -3
-
-[node name="search" type="Label" parent="ray/backstab/caption/ancient"]
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_fonts/font = ExtResource("3_8w086")
-theme_override_styles/normal = ExtResource("4_fvwiw")
-text = "📕"
-
-[node name="caption" type="Label" parent="ray/backstab/caption/ancient"]
-modulate = Color(1, 1, 1, 0.196078)
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_colors/font_color = Color(0.756863, 0.756863, 0.756863, 1)
-text = "\\. \\. +\\."
-
-[node name="modern" type="Label" parent="ray/backstab/caption"]
-visible = false
-modulate = Color(1, 1, 1, 0.196078)
-layout_mode = 2
-theme = ExtResource("2_kww2j")
-theme_override_colors/font_color = Color(0.756863, 0.756863, 0.756863, 1)
-text = "Удар сзади"
+size_flags_horizontal = 3
 
 [node name="rock" type="HFlowContainer" parent="."]
 visible = false
@@ -3061,6 +2526,10 @@ layout_mode = 2
 theme = ExtResource("2_kww2j")
 theme_override_colors/font_color = Color(0.756863, 0.756863, 0.756863, 1)
 text = "Шок"
+
+[node name="skills" parent="." instance=ExtResource("6_5ap4j")]
+visible = false
+layout_mode = 2
 
 [node name="bank" type="VBoxContainer" parent="."]
 custom_minimum_size = Vector2(0, 100)

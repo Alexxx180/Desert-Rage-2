@@ -6,10 +6,9 @@ class_name HeroInventory
 @onready var chest: Node = $chest
 @onready var items: GameItems = GameItems.new()
 
-func _slot() -> Dictionary: return { "id": JAR, "x": 0, "with": -1, "up": 0 }
+func _slot() -> Dictionary: return { "id": items.JAR, "x": 0, "with": -1, "up": 0 }
 
 func _ready() -> void:
-	var d: int = JAR
 	logic.storage = [
 		_slot(), _slot(), _slot(), _slot(), _slot(), _slot(), _slot(), _slot(), _slot(), _slot(),
 		_slot(), _slot(), _slot(), _slot(), _slot(), _slot(), _slot(), _slot(), _slot(), _slot(),

@@ -30,6 +30,8 @@ func is_dead(no_points: bool) -> bool:
 	timer.start()
 	return no_points
 
+func restore() -> void: refill(points.maximum)
+
 func refill(amount: int = 1) -> void:
 	points.refill(amount)
 	aura.react(points.segment)

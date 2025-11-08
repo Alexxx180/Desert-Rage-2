@@ -7,19 +7,13 @@ enum { JAR = 0, A_DOTE = 1, A_COUGH = 2, SAKSAUL = 3, G_KEY = 4, P_KEY = 5, WATE
 	 RT_FIELD = 10, OPUNTIA = 11, YUKKA = 12, L_PANTS = 13, C_LEGS = 14, L_BOOTS = 15, C_BOOTS = 16, L_CLOTH = 17, C_MAIL = 18,
 	 T_SHIELD = 19, K_DUSTER = 20, W_KNIFE = 21, A_SWORD = 22, T_SWORD = 23, COLT = 24, SHOTGUN = 25, BOOMERANG = 26 }
 
-var effect: ItemsEffect = ItemsEffect.new()
-
-func get_type(no: int) -> Variant:
+func get_item(no: int) -> Variant:
 	match items[no].type:
 		KEY: return keys[no]
 		USE: return uses[no]
 		WEAPON: return weapon[no]
 		ARMOR: return armor[no]
-	return USE[no]
-
-func get_item(no: int, hero: CharacterBody2D) -> void:
-	var item: Variant = get_type(no)
-	effect.get(item.effect).call(no, self, hero)
+	return uses[no]
 
 var items: Array[Item] = [
 	Item.new(KEY, "Пустая банка", "Позволяет хранить жидкость", "Находится в сундуках, их наличие значительно облегчает поход."),
@@ -51,9 +45,9 @@ var items: Array[Item] = [
 	Item.new(WEAPON, "Д. Бумеранг", "Д. Оружие", "Осторожно - это деревянное лезвие не игрушка"),
 ]
 var uses: Dictionary = {
-	WATER: KeyItem.new(10, 10), TEA: UseItem.new(40), ETHER: UseItem.new(0, 40),
-	RT_FIELD: KeyItem.new(0, 12), TAMARISK: KeyItem.new(15),
-	OPUNTIA: KeyItem.new(15, 0, "m_poison"), YUKKA: UseItem.new(12, 0, "m_cough"),
+	WATER: UseItem.new(10, 10), TEA: UseItem.new(40, 0), ETHER: UseItem.new(0, 40),
+	RT_FIELD: UseItem.new(0, 12), TAMARISK: UseItem.new(15, 0),
+	OPUNTIA: UseItem.new(15, 0, "m_poison"), YUKKA: UseItem.new(12, 0, "m_cough"),
 }
 var keys: Dictionary = {
 	SAKSAUL: KeyItem.new("distract"), JAR: KeyItem.new("store_water"),
@@ -72,5 +66,5 @@ var armor: Dictionary = {
 }
 var recipe: Dictionary = {
 	ETHER: [WATER, RT_FIELD], TEA: [WATER, TAMARISK],
-	ANTICOUGH: [WATER, YUKKA], ANTIDOTE: [WATER, OPUNTIA]
+	A_COUGH: [WATER, YUKKA], A_DOTE: [WATER, OPUNTIA]
 }
