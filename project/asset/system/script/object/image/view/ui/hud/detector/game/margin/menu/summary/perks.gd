@@ -4,10 +4,11 @@ extends VBoxContainer
 @onready var bank: VBoxContainer = $bank
 
 func connect_opened(opened: Button, ability: VBoxContainer) -> void:
-	opened.focus_entered.connect(func(): ability.show())
-	opened.focus_exited.connect(func(): ability.hide())
-	opened.mouse_entered.connect(func(): ability.show())
-	opened.mouse_exited.connect(func(): ability.hide())
+	if opened:
+		opened.focus_entered.connect(func(): ability.show())
+		opened.focus_exited.connect(func(): ability.hide())
+		opened.mouse_entered.connect(func(): ability.show())
+		opened.mouse_exited.connect(func(): ability.hide())
 
 func connect_ability(ability: VBoxContainer) -> void:
 	for hero in heroes:

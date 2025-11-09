@@ -1,10 +1,9 @@
-[gd_scene load_steps=26 format=3 uid="uid://sloxw12np1ch"]
+[gd_scene load_steps=28 format=3 uid="uid://sloxw12np1ch"]
 
 [ext_resource type="PackedScene" uid="uid://bky5mu10x2da3" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/status.tscn" id="1_2h7wb"]
 [ext_resource type="StyleBox" uid="uid://cvfnqancophme" path="res://asset/resource/ui/theme/style/solid-color-panel.tres" id="1_xvq4b"]
 [ext_resource type="Script" uid="uid://creg8v0kuegg7" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/menu/summary/summary.gd" id="2_gprs2"]
 [ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://asset/resource/ui/theme/patterns/template/menu/settings/topic/footer.tres" id="2_xvq4b"]
-[ext_resource type="PackedScene" uid="uid://l7thqkrsol4m" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/priorities/perks.tscn" id="3_2h7wb"]
 [ext_resource type="FontFile" uid="uid://b37js8y80ak1k" path="res://asset/resource/media/data/font/NotoColorEmoji-Regular.ttf" id="4_f2xkq"]
 [ext_resource type="StyleBox" uid="uid://c5qf02s45xwn" path="res://asset/resource/ui/theme/style/noto-color.tres" id="5_i4ulf"]
 [ext_resource type="StyleBox" uid="uid://cht8hrroa75bg" path="res://asset/resource/ui/theme/style/tag-button.tres" id="5_ighkc"]
@@ -60,6 +59,27 @@ bg_color = Color(0.0196078, 0.0196078, 0.0588235, 1)
 content_margin_left = 7.0
 content_margin_top = 6.0
 bg_color = Color(0.0196078, 0.0196078, 0.0196078, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lo0xa"]
+content_margin_left = 8.0
+content_margin_top = 5.0
+content_margin_right = 4.0
+content_margin_bottom = 0.0
+bg_color = Color(0.0196078, 0.0196078, 0.0392157, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8e78u"]
+content_margin_left = 8.0
+content_margin_top = 5.0
+content_margin_right = 4.0
+content_margin_bottom = 0.0
+bg_color = Color(0.0196078, 0.0196078, 0.0392157, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_htvmv"]
+content_margin_left = 8.0
+content_margin_top = 5.0
+content_margin_right = 4.0
+content_margin_bottom = 0.0
+bg_color = Color(0.0196078, 0.0196078, 0.0392157, 1)
 
 [node name="panel" type="PanelContainer"]
 anchors_preset = 15
@@ -1221,16 +1241,51 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="help" type="PanelContainer" parent="scroll/margin/stack/research/content"]
-visible = false
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = ExtResource("8_gprs2")
 
-[node name="hints" parent="scroll/margin/stack/research/content/help" instance=ExtResource("9_ph3re")]
+[node name="HBoxContainer" type="HBoxContainer" parent="scroll/margin/stack/research/content/help"]
+layout_mode = 2
+
+[node name="hints" parent="scroll/margin/stack/research/content/help/HBoxContainer" instance=ExtResource("9_ph3re")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.2
+
+[node name="group" type="VBoxContainer" parent="scroll/margin/stack/research/content/help/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_constants/separation = 5
+
+[node name="motion" type="Button" parent="scroll/margin/stack/research/content/help/HBoxContainer/group"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_fonts/font = ExtResource("4_f2xkq")
+theme_override_styles/normal = SubResource("StyleBoxFlat_lo0xa")
+toggle_mode = true
+text = "🦶"
+
+[node name="action" type="Button" parent="scroll/margin/stack/research/content/help/HBoxContainer/group"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_fonts/font = ExtResource("4_f2xkq")
+theme_override_styles/normal = SubResource("StyleBoxFlat_8e78u")
+toggle_mode = true
+text = "✊"
+
+[node name="reason" type="Button" parent="scroll/margin/stack/research/content/help/HBoxContainer/group"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_fonts/font = ExtResource("4_f2xkq")
+theme_override_styles/normal = SubResource("StyleBoxFlat_htvmv")
+toggle_mode = true
+text = "🧠"
 
 [node name="books" type="PanelContainer" parent="scroll/margin/stack/research/content"]
 visible = false
@@ -1269,6 +1324,3 @@ theme_override_fonts/font = ExtResource("10_ighkc")
 theme_override_font_sizes/font_size = 18
 text = "Истинно говорю вам, что время на приготовление сего отвара будет более чем компенсировано. Для этого нужен простой древний..."
 autowrap_mode = 2
-
-[node name="perks" parent="scroll/margin/stack/research/content" instance=ExtResource("3_2h7wb")]
-layout_mode = 2

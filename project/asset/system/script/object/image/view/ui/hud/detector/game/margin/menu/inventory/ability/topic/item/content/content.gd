@@ -3,6 +3,8 @@ extends MarginContainer
 @onready var count: VBoxContainer = $selection/count
 @onready var view: Control = $view
 
+var inventory: Node
+
 func remove_item() -> void:
 	view.remove_item()
 
@@ -15,6 +17,6 @@ func replace_item(next: Dictionary, prev: Dictionary) -> void:
 	put_item(prev)
 
 func put_item(slot: Dictionary) -> void:
-	var item: Dictionary = HeroInventory.get_items_bank()[slot.id]
+	var item: Dictionary = inventory.items[slot.id]
 	view.put_item(item.icon)
 	count.set_value(slot.x)

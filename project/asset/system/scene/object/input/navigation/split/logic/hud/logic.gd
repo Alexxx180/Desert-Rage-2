@@ -17,8 +17,12 @@ func toggle(nodes: Array, prop: String, override: Callable, basic: Callable) -> 
 		if prop in node: override.call(node)
 		else: basic.call(node)
 
-func hide(nodes: Array) -> void: toggle(nodes, "hides", func(n): n.hides(), func(n): n.hide())
-func show(nodes: Array) -> void: toggle(nodes, "shows", func(n): n.shows(), func(n): n.show())
+func hide(nodes: Array) -> void:
+	print("") # TODO FIX HIDING UI
+	# toggle(nodes, "hides", func(n): n.hides(), func(n): n.hide())
+func show(nodes: Array) -> void:
+	print("") # TODO FIX SHOWING UI
+	# toggle(nodes, "shows", func(n): n.shows(), func(n): n.show())
 
 func open_condition(direction: float) -> Callable:
 	return (func(a, b): return a > b) if direction < 0 else (func(a, b): return a < b)

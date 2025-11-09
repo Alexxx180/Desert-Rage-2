@@ -8,8 +8,9 @@ func is_gamepad_connected() -> bool:
 	return Input.get_connected_joypads().size() > 0
 
 func _ready() -> void:
-	$head/margin/caption.text = help.head
-	caption.text = help.body % help.keyboard
+	pass
+	# $head/margin/caption.text = help.head # TODO FIX HELP HINT
+	# caption.text = help.body % help.keyboard
 
 func _change_state(color: Color) -> void:
 	create_tween().tween_property(self, "modulate", color, 0.5)

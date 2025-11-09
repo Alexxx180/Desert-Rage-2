@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://c3dwvtm5ivwwp"]
+[gd_scene load_steps=49 format=3 uid="uid://c3dwvtm5ivwwp"]
 
 [ext_resource type="PackedScene" uid="uid://dqlgy3l13bibl" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/items/items.tscn" id="1_3h27n"]
 [ext_resource type="StyleBox" uid="uid://cvfnqancophme" path="res://asset/resource/ui/theme/style/solid-color-panel.tres" id="1_j4734"]
@@ -81,6 +81,13 @@ bg_color = Color(0.435192, 0.435192, 0.435192, 1)
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bieb6"]
 content_margin_left = 3.0
 content_margin_top = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1dh38"]
+content_margin_left = 9.0
+content_margin_top = 1.0
+content_margin_right = 9.0
+content_margin_bottom = 3.0
+bg_color = Color(0.0196078, 0.0196078, 0.0392157, 0)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r7fgi"]
 
@@ -789,18 +796,28 @@ script = ExtResource("7_i41dc")
 [node name="title" type="HBoxContainer" parent="scroll/margin/stack/stats"]
 layout_mode = 2
 
-[node name="caption" type="Label" parent="scroll/margin/stack/stats/title"]
+[node name="equip" type="Button" parent="scroll/margin/stack/stats/title"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("6_drayd")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_1dh38")
 text = "Показатели"
+
+[node name="bare" type="Button" parent="scroll/margin/stack/stats/title"]
+visible = false
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_drayd")
+theme_override_styles/normal = SubResource("StyleBoxFlat_1dh38")
+text = "👋"
+
+[node name="caption" type="Label" parent="scroll/margin/stack/stats/title"]
+visible = false
+layout_mode = 2
+text = "🗡"
 
 [node name="space" type="Control" parent="scroll/margin/stack/stats/title"]
 layout_mode = 2
 size_flags_horizontal = 3
-
-[node name="equip" type="Button" parent="scroll/margin/stack/stats/title"]
-layout_mode = 2
-theme_override_styles/normal = ExtResource("2_j4734")
-text = "С экипировкой"
 
 [node name="heroes" type="HBoxContainer" parent="scroll/margin/stack/stats"]
 layout_mode = 2

@@ -1,0 +1,457 @@
+[gd_scene load_steps=26 format=3 uid="uid://cq5jn6k2bwg5n"]
+
+[ext_resource type="FontFile" uid="uid://bghvysgyoj1y7" path="res://asset/resource/media/data/font/title/Equilibrist Semibold.ttf" id="1_m3psj"]
+[ext_resource type="Script" uid="uid://b2ugt042kmpr0" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/menu/topic/status.gd" id="1_stn0a"]
+[ext_resource type="FontFile" uid="uid://dqpftcx1b6r8j" path="res://asset/resource/media/data/font/LTStopwatch-Regular.ttf" id="2_stn0a"]
+[ext_resource type="Script" uid="uid://ck11vtlkgauqb" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/menu/inventory/ability/xp/long.gd" id="3_nfruw"]
+[ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://asset/resource/ui/theme/patterns/template/menu/settings/topic/footer.tres" id="4_hnjmq"]
+[ext_resource type="PackedScene" uid="uid://b5qo332jiddu3" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/ability/status/enemy.tscn" id="5_crv53"]
+[ext_resource type="FontFile" uid="uid://b37js8y80ak1k" path="res://asset/resource/media/data/font/NotoColorEmoji-Regular.ttf" id="6_f3i4p"]
+
+[sub_resource type="Gradient" id="Gradient_ok865"]
+colors = PackedColorArray(0.392157, 0.392157, 0.686275, 0.470588, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_f8gj5"]
+gradient = SubResource("Gradient_ok865")
+width = 20
+height = 27
+fill_from = Vector2(0.501923, 1)
+fill_to = Vector2(0.513462, 0)
+
+[sub_resource type="Gradient" id="Gradient_eq6yd"]
+colors = PackedColorArray(0.768627, 0.588235, 0.0705882, 0.235294, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_4mbfr"]
+gradient = SubResource("Gradient_eq6yd")
+width = 20
+height = 27
+fill_from = Vector2(0.507692, 1)
+fill_to = Vector2(0.507692, 0)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5khej"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tgn0c"]
+bg_color = Color(0.392157, 0.392157, 0.686275, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2jrau"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fn18y"]
+content_margin_right = 1.0
+bg_color = Color(0.803922, 0.803922, 0.803922, 0.784314)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_33rox"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.0110876, 0.0110876, 0.0110876, 1)
+
+[sub_resource type="Gradient" id="Gradient_e1onj"]
+colors = PackedColorArray(0, 0, 0, 0, 0.741176, 0, 0, 0.470588)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_3v3bl"]
+gradient = SubResource("Gradient_e1onj")
+width = 25
+height = 23
+fill_from = Vector2(0.503077, 0)
+fill_to = Vector2(0.5, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pa3qu"]
+content_margin_top = 3.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mv703"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fxbxi"]
+bg_color = Color(0.739789, 2.00946e-06, 5.77569e-07, 1)
+
+[sub_resource type="Gradient" id="Gradient_e8qsl"]
+colors = PackedColorArray(0, 0, 0, 0, 0.184314, 0.184314, 0.72549, 0.235294)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ddn1q"]
+gradient = SubResource("Gradient_e8qsl")
+width = 58
+height = 25
+fill_from = Vector2(0.495137, 1)
+fill_to = Vector2(0.495137, 0)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_v78vk"]
+content_margin_left = 7.0
+content_margin_top = 6.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4mbfr"]
+content_margin_left = 7.0
+content_margin_top = 6.0
+
+[node name="status" type="HBoxContainer"]
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+script = ExtResource("1_stn0a")
+
+[node name="experience" type="Control" parent="."]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+
+[node name="experience" type="VBoxContainer" parent="experience"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+theme_override_constants/separation = 0
+
+[node name="caption" type="HBoxContainer" parent="experience/experience"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 7
+
+[node name="main" type="HBoxContainer" parent="experience/experience/caption"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="space" type="Control" parent="experience/experience/caption/main"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="margin" type="MarginContainer" parent="experience/experience/caption/main/space"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -127.0
+offset_top = -21.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_vertical = 8
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="count" type="Label" parent="experience/experience/caption/main/space/margin"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 10
+theme_override_fonts/font = ExtResource("1_m3psj")
+text = "0"
+vertical_alignment = 2
+
+[node name="level_up" type="TextureRect" parent="experience/experience/caption/main/space"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -27.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = SubResource("GradientTexture2D_f8gj5")
+
+[node name="multiplier" type="Control" parent="experience/experience/caption/main"]
+visible = false
+custom_minimum_size = Vector2(56, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="meter" type="TextureRect" parent="experience/experience/caption/main/multiplier"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -27.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = SubResource("GradientTexture2D_4mbfr")
+
+[node name="margin" type="MarginContainer" parent="experience/experience/caption/main/multiplier"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -18.5
+offset_top = -17.0
+offset_right = 18.5
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_vertical = 8
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 2
+
+[node name="multiplier" type="Label" parent="experience/experience/caption/main/multiplier/margin"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/font_color = Color(0.767135, 0.588769, 0.0712476, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 7
+theme_override_fonts/font = ExtResource("1_m3psj")
+theme_override_font_sizes/font_size = 14
+text = "x2.5"
+
+[node name="meter" type="Control" parent="experience/experience"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+
+[node name="level" type="ColorRect" parent="experience/experience/meter"]
+custom_minimum_size = Vector2(2, 2)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="margin" type="MarginContainer" parent="experience/experience/meter"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 2
+
+[node name="next" type="HBoxContainer" parent="experience/experience/meter/margin"]
+layout_mode = 2
+theme_override_constants/separation = -1
+
+[node name="level" type="ColorRect" parent="experience/experience/meter/margin/next"]
+custom_minimum_size = Vector2(1, 1)
+layout_mode = 2
+size_flags_vertical = 8
+color = Color(0.392157, 0.392157, 0.686275, 1)
+
+[node name="space" type="Control" parent="experience/experience/meter/margin/next"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="score" type="ProgressBar" parent="experience/experience/meter/margin/next/space"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+theme_override_styles/background = SubResource("StyleBoxEmpty_5khej")
+theme_override_styles/fill = SubResource("StyleBoxFlat_tgn0c")
+max_value = 10.0
+step = 1.0
+value = 5.0
+fill_mode = 1
+show_percentage = false
+
+[node name="meter" type="ProgressBar" parent="experience/experience/meter/margin/next/space"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 1
+theme_override_styles/background = SubResource("StyleBoxEmpty_2jrau")
+theme_override_styles/fill = SubResource("StyleBoxFlat_fn18y")
+max_value = 1.0
+step = 0.1
+fill_mode = 1
+show_percentage = false
+
+[node name="time" type="PanelContainer" parent="experience"]
+visible = false
+custom_minimum_size = Vector2(60, 30)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_33rox")
+
+[node name="back" type="TextureRect" parent="experience/time"]
+visible = false
+layout_mode = 2
+texture = SubResource("GradientTexture2D_3v3bl")
+
+[node name="margin" type="MarginContainer" parent="experience/time"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 1
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="description" type="Label" parent="experience/time/margin"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2_stn0a")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxEmpty_pa3qu")
+text = "99:59"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="timing" type="MarginContainer" parent="experience/time"]
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="lasted" type="ProgressBar" parent="experience/time/timing"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_styles/background = SubResource("StyleBoxEmpty_mv703")
+theme_override_styles/fill = SubResource("StyleBoxFlat_fxbxi")
+max_value = 600.0
+step = 1.0
+value = 600.0
+show_percentage = false
+
+[node name="score" type="VBoxContainer" parent="."]
+visible = false
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+script = ExtResource("3_nfruw")
+
+[node name="experience" type="HBoxContainer" parent="score"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_constants/separation = 5
+
+[node name="next" type="Label" parent="score/experience"]
+layout_mode = 2
+theme = ExtResource("4_hnjmq")
+theme_override_font_sizes/font_size = 18
+text = "До ур."
+
+[node name="next_score" type="MarginContainer" parent="score/experience"]
+layout_mode = 2
+theme = ExtResource("4_hnjmq")
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="count" type="Label" parent="score/experience/next_score"]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 10
+theme_override_fonts/font = ExtResource("1_m3psj")
+text = "10"
+vertical_alignment = 2
+
+[node name="enemy_1" parent="." instance=ExtResource("5_crv53")]
+layout_mode = 2
+
+[node name="preset" type="HBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="first" type="VBoxContainer" parent="preset"]
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_constants/separation = -1
+
+[node name="lamp" type="ColorRect" parent="preset/first"]
+custom_minimum_size = Vector2(0, 1)
+layout_mode = 2
+color = Color(0.184314, 0.184314, 0.72549, 1)
+
+[node name="shadow" type="TextureRect" parent="preset/first/lamp"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+texture = SubResource("GradientTexture2D_ddn1q")
+
+[node name="skill" type="HBoxContainer" parent="preset/first"]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="fire" type="Button" parent="preset/first/skill"]
+custom_minimum_size = Vector2(31, 25)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("6_f3i4p")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxEmpty_v78vk")
+text = "🔥"
+alignment = 0
+
+[node name="whip" type="Button" parent="preset/first/skill"]
+custom_minimum_size = Vector2(31, 25)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("6_f3i4p")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxEmpty_4mbfr")
+text = "🎣"
+alignment = 0
+
+[node name="second" type="VBoxContainer" parent="preset"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = -1
+
+[node name="lamp" type="ColorRect" parent="preset/second"]
+visible = false
+custom_minimum_size = Vector2(0, 1)
+layout_mode = 2
+color = Color(0.184314, 0.184314, 0.72549, 1)
+
+[node name="shadow" type="TextureRect" parent="preset/second/lamp"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+texture = SubResource("GradientTexture2D_ddn1q")
+
+[node name="skill" type="HBoxContainer" parent="preset/second"]
+layout_mode = 2
+
+[node name="fire" type="Button" parent="preset/second/skill"]
+custom_minimum_size = Vector2(31, 25)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("6_f3i4p")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxEmpty_v78vk")
+text = "☀️"
+alignment = 0
+
+[node name="whip" type="Button" parent="preset/second/skill"]
+custom_minimum_size = Vector2(31, 25)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("6_f3i4p")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxEmpty_4mbfr")
+text = "⚖️"
+alignment = 0

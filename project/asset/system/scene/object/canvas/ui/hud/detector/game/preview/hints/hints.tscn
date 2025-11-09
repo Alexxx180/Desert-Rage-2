@@ -1,10 +1,10 @@
-[gd_scene load_steps=16 format=3 uid="uid://b01p37el432af"]
+[gd_scene load_steps=19 format=3 uid="uid://b01p37el432af"]
 
 [ext_resource type="Theme" uid="uid://ctsb6uh5t0n1l" path="res://asset/resource/ui/theme/default.tres" id="1_lqfh0"]
 [ext_resource type="Script" uid="uid://d1gehesbgg5ia" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/controls/preview/hints/hints.gd" id="2_wh6yj"]
+[ext_resource type="FontFile" uid="uid://b37js8y80ak1k" path="res://asset/resource/media/data/font/NotoColorEmoji-Regular.ttf" id="3_1pgds"]
 [ext_resource type="PackedScene" uid="uid://mdjk60h84tvs" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/preview/hints/category/motion.tscn" id="3_g22ml"]
 [ext_resource type="Script" uid="uid://cineqyu52scdk" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/controls/preview/hints/scroll.gd" id="3_jogvt"]
-[ext_resource type="StyleBox" uid="uid://cht8hrroa75bg" path="res://asset/resource/ui/theme/style/tag-button.tres" id="3_m2j0i"]
 [ext_resource type="Script" uid="uid://cmm8nk2huc4mb" path="res://addons/godot-behavior-tree-plugin/tree/tree.gd" id="4_5bxjs"]
 [ext_resource type="PackedScene" uid="uid://cimkmbth3t0at" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/preview/hints/category/action.tscn" id="5_kvclq"]
 [ext_resource type="Script" uid="uid://xyxwk1uhmmqa" path="res://addons/godot-behavior-tree-plugin/sequence/sequence.gd" id="5_ox1kg"]
@@ -15,6 +15,27 @@
 [ext_resource type="Script" uid="uid://derik0uw4vkav" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/controls/preview/hints/behavior/analyze/analyze.gd" id="9_2pumd"]
 [ext_resource type="Script" uid="uid://dtbumxi60jttw" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/controls/preview/hints/behavior/analyze/progress.gd" id="9_pvn5o"]
 [ext_resource type="Script" uid="uid://b1puby0o7ny8l" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/controls/preview/hints/behavior/blackboard.gd" id="13_2a2v1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b5bcc"]
+content_margin_left = 8.0
+content_margin_top = 5.0
+content_margin_right = 4.0
+content_margin_bottom = 0.0
+bg_color = Color(0.0196078, 0.0196078, 0.0392157, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qwy2n"]
+content_margin_left = 8.0
+content_margin_top = 5.0
+content_margin_right = 4.0
+content_margin_bottom = 0.0
+bg_color = Color(0.0196078, 0.0196078, 0.0392157, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l2w86"]
+content_margin_left = 8.0
+content_margin_top = 5.0
+content_margin_right = 4.0
+content_margin_bottom = 0.0
+bg_color = Color(0.0196078, 0.0196078, 0.0392157, 1)
 
 [node name="hints" type="VBoxContainer"]
 custom_minimum_size = Vector2(200, 0)
@@ -31,33 +52,38 @@ alignment = 2
 script = ExtResource("2_wh6yj")
 
 [node name="group" type="HBoxContainer" parent="."]
+visible = false
 layout_mode = 2
+size_flags_horizontal = 8
 size_flags_vertical = 8
 theme_override_constants/separation = 5
 
 [node name="motion" type="Button" parent="group"]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
-size_flags_horizontal = 3
-theme_override_styles/normal = ExtResource("3_m2j0i")
+size_flags_horizontal = 0
+theme_override_fonts/font = ExtResource("3_1pgds")
+theme_override_styles/normal = SubResource("StyleBoxFlat_b5bcc")
 toggle_mode = true
-text = "Движение"
+text = "🦶"
 
 [node name="action" type="Button" parent="group"]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
-size_flags_horizontal = 3
-theme_override_styles/normal = ExtResource("3_m2j0i")
+size_flags_horizontal = 0
+theme_override_fonts/font = ExtResource("3_1pgds")
+theme_override_styles/normal = SubResource("StyleBoxFlat_qwy2n")
 toggle_mode = true
-text = "Действие"
+text = "✊"
 
 [node name="reason" type="Button" parent="group"]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
-size_flags_horizontal = 3
-theme_override_styles/normal = ExtResource("3_m2j0i")
+size_flags_horizontal = 0
+theme_override_fonts/font = ExtResource("3_1pgds")
+theme_override_styles/normal = SubResource("StyleBoxFlat_l2w86")
 toggle_mode = true
-text = "Сознание"
+text = "🧠"
 
 [node name="scroll" type="ScrollContainer" parent="."]
 layout_mode = 2

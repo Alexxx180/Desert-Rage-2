@@ -1,0 +1,158 @@
+[gd_scene load_steps=9 format=3 uid="uid://qlgo5b48kj7l"]
+
+[ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://asset/resource/ui/theme/patterns/template/menu/settings/topic/footer.tres" id="1_kp0re"]
+[ext_resource type="FontFile" uid="uid://b37js8y80ak1k" path="res://asset/resource/media/data/font/NotoColorEmoji-Regular.ttf" id="2_g0m2c"]
+[ext_resource type="StyleBox" uid="uid://c5qf02s45xwn" path="res://asset/resource/ui/theme/style/noto-color.tres" id="3_v0d6s"]
+[ext_resource type="FontFile" uid="uid://cwksbiskkcf5d" path="res://asset/resource/media/data/font/NotoSansMath-Regular.ttf" id="4_0gas0"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f8gj5"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Gradient" id="Gradient_3yh6s"]
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 0.235294)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_v78vk"]
+gradient = SubResource("Gradient_3yh6s")
+width = 20
+height = 28
+fill_from = Vector2(0.497175, 0.831638)
+fill_to = Vector2(0.497175, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yj0ue"]
+content_margin_left = 2.0
+content_margin_bottom = 4.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[node name="description" type="ColorRect"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="margin" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 8
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="combos" type="HBoxContainer" parent="margin"]
+layout_mode = 2
+
+[node name="caption" type="PanelContainer" parent="margin/combos"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_f8gj5")
+
+[node name="margin" type="MarginContainer" parent="margin/combos/caption"]
+layout_mode = 2
+theme_override_constants/margin_left = 9
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 9
+theme_override_constants/margin_bottom = 0
+
+[node name="combo" type="Label" parent="margin/combos/caption/margin"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Двоечка"
+
+[node name="lamp" type="ColorRect" parent="margin/combos/caption"]
+custom_minimum_size = Vector2(0, 1)
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="back" type="TextureRect" parent="margin/combos/caption"]
+layout_mode = 2
+texture = SubResource("GradientTexture2D_v78vk")
+
+[node name="simple" type="Label" parent="margin/combos"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_kp0re")
+text = "+ 1% доп. урона"
+autowrap_mode = 2
+
+[node name="stack" type="HBoxContainer" parent="margin/combos"]
+layout_mode = 2
+theme_override_constants/separation = -6
+
+[node name="slot-1" type="Label" parent="margin/combos/stack"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("2_g0m2c")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = ExtResource("3_v0d6s")
+text = "🦶"
+vertical_alignment = 1
+
+[node name="dot" type="Label" parent="margin/combos/stack"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("4_0gas0")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_yj0ue")
+text = "⋅"
+vertical_alignment = 1
+
+[node name="slot-2" type="Label" parent="margin/combos/stack"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("2_g0m2c")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = ExtResource("3_v0d6s")
+text = "✊"
+vertical_alignment = 1
+
+[node name="dot2" type="Label" parent="margin/combos/stack"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("4_0gas0")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_yj0ue")
+text = "⋅"
+vertical_alignment = 1
+
+[node name="slot-3" type="Label" parent="margin/combos/stack"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("2_g0m2c")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = ExtResource("3_v0d6s")
+text = "✊"
+vertical_alignment = 1
+
+[node name="dot3" type="Label" parent="margin/combos/stack"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("4_0gas0")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_yj0ue")
+text = "⋅"
+vertical_alignment = 1
+
+[node name="slot-4" type="Label" parent="margin/combos/stack"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("2_g0m2c")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = ExtResource("3_v0d6s")
+text = "🦶"
+vertical_alignment = 1

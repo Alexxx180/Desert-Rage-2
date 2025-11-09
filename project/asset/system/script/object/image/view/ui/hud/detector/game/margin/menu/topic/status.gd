@@ -3,15 +3,15 @@ extends HBoxContainer
 @onready var enemy: Array[PanelContainer] = [$enemy_1] # , $enemy_2
 @onready var level_up: TextureRect = $experience/caption/main/space/level_up
 @onready var meter: Control = $experience/meter
-@onready var space: Control = meter.get_node("margin/next/space")
-@onready var score: ProgressBar = space.get_node("score")
+@onready var space: Control = null# meter.get_node("margin/next/space") # TODO FIX experience
+@onready var score: ProgressBar = null # space.get_node("score")
 
 #@onready var margin: MarginContainer = $experience/caption/main/multiplier/margin
 @onready var multiplier: Control = $experience/caption/main/multiplier
 @onready var combo: Dictionary = {
-	"meter": get_node("experience/caption/main/multiplier/meter"),# space.get_node("meter"),
-	"margin": multiplier.get_node("margin"),
-	"score": multiplier.get_node("margin/multiplier")
+	"meter": null, # get_node("experience/caption/main/multiplier/meter"),# space.get_node("meter"),
+	"margin": null, # multiplier.get_node("margin"),
+	"score": null, # multiplier.get_node("margin/multiplier")
 }
 @onready var count: Label = $experience/caption/main/space/margin/count
 var fill: StyleBoxFlat = StyleBoxFlat.new()
