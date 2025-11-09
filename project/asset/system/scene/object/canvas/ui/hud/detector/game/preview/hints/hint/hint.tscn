@@ -1,35 +1,39 @@
-[gd_scene load_steps=6 format=3 uid="uid://cmo8jhjujlsrv"]
+[gd_scene load_steps=7 format=3 uid="uid://cmo8jhjujlsrv"]
 
 [ext_resource type="Theme" uid="uid://hmh3wpm730wh" path="res://asset/resource/ui/theme/patterns/template/card.tres" id="1_dyeeh"]
 [ext_resource type="Script" uid="uid://dfqwl4opw8me4" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/controls/preview/hints/hint.gd" id="2_ygjl1"]
 [ext_resource type="FontFile" uid="uid://c4ygkmnbt1j7y" path="res://asset/resource/media/data/font/LTSuperiorSerif-Semibold.otf" id="3_unpf3"]
 [ext_resource type="FontFile" uid="uid://dmctrlrnfxaie" path="res://asset/resource/media/data/font/Roboto-Regular-Emoji.ttf" id="4_7efge"]
 
-[sub_resource type="StyleBoxLine" id="StyleBoxLine_y3q74"]
-color = Color(0.0392157, 0.0392157, 0.0588235, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7efge"]
+bg_color = Color(0, 0, 0, 0.843137)
 
-[node name="hint" type="VBoxContainer"]
-custom_minimum_size = Vector2(400, 0)
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_y3q74"]
+color = Color(0.20666, 0.206699, 0.259855, 1)
+
+[node name="hint" type="PanelContainer"]
+offset_top = 57.0
+offset_right = 1152.0
+offset_bottom = 57.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_7efge")
+
+[node name="stack" type="VBoxContainer" parent="."]
+layout_mode = 2
 theme = ExtResource("1_dyeeh")
 script = ExtResource("2_ygjl1")
 
-[node name="head" type="MarginContainer" parent="."]
+[node name="head" type="MarginContainer" parent="stack"]
 layout_mode = 2
-theme_override_constants/margin_left = 0
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 5
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 0
 
-[node name="caption" type="HBoxContainer" parent="head"]
+[node name="caption" type="HBoxContainer" parent="stack/head"]
 layout_mode = 2
 size_flags_horizontal = 8
 
-[node name="text" type="Label" parent="head/caption"]
+[node name="text" type="Label" parent="stack/head/caption"]
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_colors/font_color = Color(0.393086, 0.393086, 0.393085, 1)
@@ -37,16 +41,20 @@ theme_override_fonts/font = ExtResource("3_unpf3")
 theme_override_font_sizes/font_size = 12
 text = "Пример Текста"
 
-[node name="a" type="HSeparator" parent="head/caption"]
+[node name="a" type="HSeparator" parent="stack/head/caption"]
 custom_minimum_size = Vector2(15, 0)
 layout_mode = 2
 theme_override_constants/separation = 0
 theme_override_styles/separator = SubResource("StyleBoxLine_y3q74")
 
-[node name="body" type="MarginContainer" parent="."]
+[node name="body" type="MarginContainer" parent="stack"]
 layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
 
-[node name="caption" type="Label" parent="body"]
+[node name="caption" type="Label" parent="stack/body"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_7efge")

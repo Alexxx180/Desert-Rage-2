@@ -1,0 +1,85 @@
+[gd_scene load_steps=6 format=3 uid="uid://b10usb1wa67d2"]
+
+[ext_resource type="FontFile" uid="uid://c4ygkmnbt1j7y" path="res://asset/resource/media/data/font/LTSuperiorSerif-Semibold.otf" id="1_trkmq"]
+[ext_resource type="FontFile" uid="uid://dxg5wbmrewk2p" path="res://asset/resource/media/data/font/Lato-Regular.ttf" id="2_qurmm"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_trkmq"]
+bg_color = Color(0, 0, 0, 0.843137)
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_iy05a"]
+color = Color(0.117647, 0.117647, 0.227451, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tya2d"]
+bg_color = Color(0.0196078, 0.0196078, 0.0196078, 0)
+border_width_left = 2
+border_width_right = 2
+border_color = Color(0.117647, 0.117647, 0.227451, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[node name="PanelContainer" type="PanelContainer"]
+offset_top = 288.0
+offset_right = 135.0
+offset_bottom = 288.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_trkmq")
+
+[node name="book" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="title" type="MarginContainer" parent="book"]
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="caption" type="HBoxContainer" parent="book/title"]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="title" type="Label" parent="book/title/caption"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(0.393086, 0.393086, 0.393085, 1)
+theme_override_fonts/font = ExtResource("1_trkmq")
+theme_override_font_sizes/font_size = 12
+text = "Настой на кактусе"
+
+[node name="a" type="HSeparator" parent="book/title/caption"]
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 2
+theme_override_constants/separation = 0
+theme_override_styles/separator = SubResource("StyleBoxLine_iy05a")
+
+[node name="margin" type="MarginContainer" parent="book"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="green-1" type="PanelContainer" parent="book/margin"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_tya2d")
+
+[node name="margin" type="MarginContainer" parent="book/margin/green-1"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 3
+
+[node name="chat" type="Label" parent="book/margin/green-1/margin"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.627451, 0.627451, 0.627451, 1)
+theme_override_constants/line_spacing = -2
+theme_override_fonts/font = ExtResource("2_qurmm")
+theme_override_font_sizes/font_size = 18
+text = "Истинно говорю вам, что время на приготовление сего отвара будет более чем компенсировано. Для этого нужен простой древний..."
+horizontal_alignment = 2
+autowrap_mode = 2

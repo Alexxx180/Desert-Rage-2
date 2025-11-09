@@ -1,17 +1,18 @@
 extends HBoxContainer
 
 @onready var enemy: Array[PanelContainer] = [$enemy_1] # , $enemy_2
-@onready var level_up: TextureRect = $experience/caption/main/space/level_up
-@onready var meter: Control = $experience/meter
-@onready var space: Control = null# meter.get_node("margin/next/space") # TODO FIX experience
-@onready var score: ProgressBar = null # space.get_node("score")
+@onready var main: HBoxContainer = $experience/xp/caption/main
+@onready var level_up: TextureRect = main.get_node("space/level_up")
+@onready var meter: Control = $experience/xp/meter
+@onready var space: Control = meter.get_node("margin/next/space") # TODO FIX experience
+@onready var score: ProgressBar = space.get_node("score")
 
 #@onready var margin: MarginContainer = $experience/caption/main/multiplier/margin
-@onready var multiplier: Control = $experience/caption/main/multiplier
+@onready var multiplier: Control = main.get_node("multiplier")
 @onready var combo: Dictionary = {
-	"meter": null, # get_node("experience/caption/main/multiplier/meter"),# space.get_node("meter"),
-	"margin": null, # multiplier.get_node("margin"),
-	"score": null, # multiplier.get_node("margin/multiplier")
+	"meter": multiplier.get_node("meter"),# space.get_node("meter"),
+	"margin": multiplier.get_node("margin"),
+	"score": multiplier.get_node("margin/multiplier")
 }
 @onready var count: Label = $experience/caption/main/space/margin/count
 var fill: StyleBoxFlat = StyleBoxFlat.new()
@@ -50,8 +51,8 @@ func update_meter(time: float, maximum: float) -> void:
 		fill.bg_color = Color8(100, 100, 175, 255)
 	score.set("theme_override_styles/fill", fill)
 
-func update_multiplier(score: float) -> void:
+func update_multiplier(scored: float) -> void:
 	if not meter.visible: return
 	
 	for node in [combo.margin, space]: node.show() # combo.meter, 
-	combo.score.text = "x%.2f" % score
+	combo.score.text = "x%.2f" % scored
