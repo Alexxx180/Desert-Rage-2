@@ -1,11 +1,13 @@
 extends HBoxContainer
 
-@onready var enemy: Array[PanelContainer] = [$enemy_1] # , $enemy_2
-@onready var main: HBoxContainer = $experience/xp/caption/main
+@onready var enemy: Array[PanelContainer] = [$enemies/enemy_1] # , $enemy_2
+@onready var xp: HBoxContainer = $experience
+@onready var main: HBoxContainer = xp.get_node("xp/main")
 @onready var level_up: TextureRect = main.get_node("space/level_up")
-@onready var meter: Control = $experience/xp/meter
+@onready var meter: Control = xp.get_node("xp/meter")
 @onready var space: Control = meter.get_node("margin/next/space") # TODO FIX experience
 @onready var score: ProgressBar = space.get_node("score")
+@onready var next: VBoxContainer = $score
 
 #@onready var margin: MarginContainer = $experience/caption/main/multiplier/margin
 @onready var multiplier: Control = main.get_node("multiplier")
@@ -14,29 +16,35 @@ extends HBoxContainer
 	"margin": multiplier.get_node("margin"),
 	"score": multiplier.get_node("margin/multiplier")
 }
-@onready var count: Label = $experience/caption/main/space/margin/count
+@onready var count: Label = main.get_node("space/margin/count")
 var fill: StyleBoxFlat = StyleBoxFlat.new()
 
 func new_level_up(_priority: int, _level: int) -> void:
 	level_up.modulate.a8 = 255
 	create_tween().tween_property(level_up, "modulate", Color.TRANSPARENT, 2).set_delay(2)
 
+func _ready() -> void:
+	level_up.mouse_entered.connect(next.show)
+	level_up.mouse_exited.connect(next.hide)
+
 # var meter: ProgressBar# scroll/margin/stack/ability/score/exp/total/combo/meter
 func set_xp_score(group_xp: Node) -> void:
 	var timer: Timer = $hide_xp
-	timer.timeout.connect(func():
-		meter.hide()
-		count.hide()
-		combo.margin.hide())
+	if timer != null:
+		timer.timeout.connect(func():
+			meter.hide()
+			count.hide()
+			combo.margin.hide())
+		group_xp.update_exp.connect(timer.start)
 	group_xp.update_level.connect(new_level_up)
 	group_xp.update_exp.connect(
 		func(value: Vector2i, base_xp: int):
 			count.text = str(base_xp + value.x)
 			count.show()
 			meter.show()
-			timer.start()
 			score.max_value = value.y
 			score.value = value.x)
+	next.set_xp_score(group_xp)
 
 func finish() -> void: combo.margin.hide() # for node in [space]: node.hide()
 

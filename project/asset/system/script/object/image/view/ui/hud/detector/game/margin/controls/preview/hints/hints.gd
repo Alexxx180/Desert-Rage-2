@@ -1,8 +1,8 @@
 extends VBoxContainer
 
-@onready var motion: VBoxContainer = $scroll/category/motion
-@onready var action: VBoxContainer = $scroll/category/action
-@onready var reason: VBoxContainer = $scroll/category/reason
+@onready var motion: VBoxContainer = $category/motion
+@onready var action: VBoxContainer = $category/action
+@onready var reason: VBoxContainer = $category/reason
 
 @onready var behavior: BehaviorTree = $behavior
 @onready var blackboard: BehaviorBlackboard = $blackboard

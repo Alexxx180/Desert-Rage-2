@@ -60,8 +60,8 @@ func erase(map_coords: Vector2i = context.coords) -> TileDecorator:
 func basis(map_coords: Vector2i) -> Dictionary:
 	return Tile.basis(layer, map_coords)
 
-func from_coords(map_coords: Vector2i) -> TileDecorator:
-	context = Tile.from_coords(layer, map_coords)
+func from_coords(map_coords: Vector2i, id: int = context.id) -> TileDecorator:
+	context = Tile.from_coords(layer, map_coords, id)
 	return self
 
 func from_pos(pos: Vector2) -> TileDecorator:
@@ -72,8 +72,8 @@ func from_pos(pos: Vector2) -> TileDecorator:
 func extract(number: int, map_coords: Vector2i = context.coords) -> Variant:
 	return Tile.extract(layer, map_coords, number)
 
-func extract_at_pos(pos: Vector2, no: int) -> Variant:
-	return extract(no, find(pos))
+func extract_at_pos(pos: Vector2, number: int) -> Variant:
+	return extract(number, find(pos))
 
 func switch(to: Vector2i) -> TileDecorator:
 	Tile.switch(context, to, layer)

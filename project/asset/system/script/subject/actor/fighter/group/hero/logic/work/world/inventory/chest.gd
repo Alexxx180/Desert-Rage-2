@@ -15,4 +15,4 @@ func exit_chest(_border: TileMapLayer) -> void:
 
 func _input(_event: InputEvent) -> void:
 	if chest_pos != Vector2.ZERO and Input.is_action_just_pressed("action"):
-		chests.open_chest(hero.logic.work.ui.inventory, chest_pos)
+		chests.drink_water(hero.logic.work.ui.inventory, chest_pos)

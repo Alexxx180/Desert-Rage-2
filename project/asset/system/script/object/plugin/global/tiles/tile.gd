@@ -22,8 +22,8 @@ static func paint(layer: TileMapLayer, cells: Dictionary) -> void:
 	layer.set_cell(cells["coords"], cells["id"], cells["atlas"]) # cells["cell"])
 
 
-static func basis(layer: TileMapLayer, map_coords: Vector2i) -> Dictionary:
-	return { "coords": map_coords, "id": layer.get_cell_source_id(map_coords) }
+static func basis(layer: TileMapLayer, map_coords: Vector2i, id: int = -1) -> Dictionary:
+	return { "coords": map_coords, "id": layer.get_cell_source_id(map_coords) if id == -1 else id }
 
 static func switch(from: Dictionary, to: Vector2i, layer: TileMapLayer) -> void:
 	if to.x != 0: from.atlas.x += to.x if from.atlas.x % (to.x + 1) == 0 else -to.x
@@ -34,10 +34,11 @@ static func modify(tile_basis: Dictionary, layer: TileMapLayer) -> Dictionary:
 	if tile_basis["id"] == -1: return tile_basis
 	tile_basis.name = layer.tile_set.get_source(tile_basis["id"]).resource_name
 	tile_basis.atlas = atlas_coords(layer, tile_basis["coords"])
+	print("CATLAS: ", tile_basis["coords"])
 	return tile_basis
 
-static func from_coords(layer: TileMapLayer, map_coords: Vector2i) -> Dictionary:
-	var result: Dictionary = basis(layer, map_coords)
+static func from_coords(layer: TileMapLayer, map_coords: Vector2i, id: int = -1) -> Dictionary:
+	var result: Dictionary = basis(layer, map_coords, id)
 	result.atlas = Vector2(-1, -1)
 	result.name = "none"
 	return modify(result, layer)

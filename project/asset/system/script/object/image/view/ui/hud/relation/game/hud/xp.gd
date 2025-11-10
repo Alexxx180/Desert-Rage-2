@@ -29,7 +29,7 @@ func _set_multiply(multiply: Node, status: BoxContainer) -> void:
 	multiply.update_x.connect(status.update_multiplier)
 
 func _set_priorities(xp: Node, priorities: PanelContainer, status: HBoxContainer) -> void:
-	var score: Dictionary = _get_xp_score(status.get_node("experience"))
+	var score: Dictionary = _get_xp_score(status.get_node("experience/xp"))
 	xp.update_priorities.connect(priorities.set_priorities)
 	priorities.connect_priority_select(xp.summary)
 	xp.update_exp.connect(priorities.update_exp)
@@ -41,14 +41,15 @@ func _set_navigation(group: Node2D, game: Control) -> void:
 		n.hud.suspend_input.connect(group.suspend_input)
 
 func _set_advanced_xp(group: Node2D, game: Control) -> void:
-	var status: HBoxContainer = game.controls.get_node("topic/items/status")
-	var long: VBoxContainer = game.ability.get_node("scroll/margin/stack/ability/score")
-	var short: VBoxContainer = game.ability.get_node("scroll/margin/stack/menu/fast-access/experience")
-	for xp in [status]:
+	var status: HBoxContainer = game.controls.get_node("topic/items/ability/status")
+	var fast_access: HBoxContainer = game.ability.get_node("scroll/margin/stack/menu/space/fast_access/status")
+	#var long: VBoxContainer = game.ability.get_node("scroll/margin/stack/ability/score")
+	
+	# var short: VBoxContainer = game.ability.get_node("scroll/margin/stack/menu/space/fast_access/status/experience/xp")
+	for xp in [status, fast_access]:
 		_set_multiply(group.xp.multiply, xp)
 		# var score: Dictionary = _get_xp_score(status.get_node("experience"))
 		xp.set_xp_score(group.xp)
-	long.set_xp_score(group.xp) # short
 	_set_priorities(group.xp, game.priorities, status)
 
 func controls(group: Node2D, game: Control) -> void:

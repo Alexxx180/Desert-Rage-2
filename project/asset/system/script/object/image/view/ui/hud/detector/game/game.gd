@@ -3,7 +3,7 @@ extends Control
 @onready var options: HFlowContainer = $menu/stats/inventory/ability/controls/topic
 @onready var chat: VBoxContainer = $dialog/chat
 @onready var controls: VBoxContainer = $menu/stats/inventory/ability/controls
-@onready var status: HBoxContainer = controls.get_node("topic/items/status")
+@onready var status: HBoxContainer = controls.get_node("topic/items/ability/status")
 @onready var markers: HFlowContainer = controls.get_node("markers")
 @onready var statuses: Dictionary = {
 	"ray": markers.get_node("margin/score/stack/ray"),
@@ -20,7 +20,7 @@ extends Control
 @onready var ap: Dictionary = _get_points("ability")
 
 func get_enemy_cards() -> Array:
-	return [status.get_node("enemy_1"), ability.get_node("scroll/margin/stack/menu/fast-access/enemy_1")]
+	return [status.get_node("enemies/enemy_1"), ability.get_node("scroll/margin/stack/menu/space/fast_access/status/enemies/enemy_1")]
 
 func _get_points(caption: String) -> Dictionary:
 	return {

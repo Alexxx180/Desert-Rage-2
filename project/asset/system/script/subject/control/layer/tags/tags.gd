@@ -17,6 +17,7 @@ extends TileMapLayer
 # @onready var push: TileMapLayer = get_node("../push")
 
 func _ready() -> void:
+	lockers.location.activator.trigger.chests = chests
 	lockers.setup(lay)
 	transition.setup(lay)
 	books.setup(lay)

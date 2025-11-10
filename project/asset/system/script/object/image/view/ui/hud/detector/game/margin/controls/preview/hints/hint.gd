@@ -1,16 +1,16 @@
-extends VBoxContainer
+extends PanelContainer
 
 @export var help: HelpHint
 
-@onready var caption: Label = $body/margin/caption
+@onready var caption: Label = $stack/body/caption
+@onready var head: Label = $stack/head/caption/text
 
 func is_gamepad_connected() -> bool:
 	return Input.get_connected_joypads().size() > 0
 
 func _ready() -> void:
-	pass
-	# $head/margin/caption.text = help.head # TODO FIX HELP HINT
-	# caption.text = help.body % help.keyboard
+	head.text = help.head # TODO FIX HELP HINT
+	caption.text = help.body % help.keyboard
 
 func _change_state(color: Color) -> void:
 	create_tween().tween_property(self, "modulate", color, 0.5)

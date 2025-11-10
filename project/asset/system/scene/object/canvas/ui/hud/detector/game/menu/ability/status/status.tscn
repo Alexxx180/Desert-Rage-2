@@ -94,35 +94,28 @@ size_flags_horizontal = 3
 theme_override_constants/separation = 10
 script = ExtResource("1_stn0a")
 
-[node name="experience" type="Control" parent="."]
+[node name="experience" type="HBoxContainer" parent="."]
 custom_minimum_size = Vector2(70, 0)
 layout_mode = 2
+mouse_filter = 0
 
 [node name="xp" type="VBoxContainer" parent="experience"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
 size_flags_horizontal = 0
 theme_override_constants/separation = 0
 
-[node name="caption" type="HBoxContainer" parent="experience/xp"]
+[node name="main" type="HBoxContainer" parent="experience/xp"]
 layout_mode = 2
+size_flags_horizontal = 0
 size_flags_vertical = 3
-theme_override_constants/separation = 7
-
-[node name="main" type="HBoxContainer" parent="experience/xp/caption"]
-layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="space" type="Control" parent="experience/xp/caption/main"]
+[node name="space" type="Control" parent="experience/xp/main"]
 custom_minimum_size = Vector2(70, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="margin" type="MarginContainer" parent="experience/xp/caption/main/space"]
+[node name="margin" type="MarginContainer" parent="experience/xp/main/space"]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -139,7 +132,7 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 
-[node name="count" type="Label" parent="experience/xp/caption/main/space/margin"]
+[node name="count" type="Label" parent="experience/xp/main/space/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -148,7 +141,7 @@ theme_override_fonts/font = ExtResource("1_m3psj")
 text = "0"
 vertical_alignment = 2
 
-[node name="level_up" type="TextureRect" parent="experience/xp/caption/main/space"]
+[node name="level_up" type="TextureRect" parent="experience/xp/main/space"]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 12
@@ -160,13 +153,13 @@ grow_horizontal = 2
 grow_vertical = 0
 texture = SubResource("GradientTexture2D_f8gj5")
 
-[node name="multiplier" type="Control" parent="experience/xp/caption/main"]
+[node name="multiplier" type="Control" parent="experience/xp/main"]
 visible = false
 custom_minimum_size = Vector2(56, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="meter" type="TextureRect" parent="experience/xp/caption/main/multiplier"]
+[node name="meter" type="TextureRect" parent="experience/xp/main/multiplier"]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -177,7 +170,7 @@ grow_horizontal = 2
 grow_vertical = 0
 texture = SubResource("GradientTexture2D_4mbfr")
 
-[node name="margin" type="MarginContainer" parent="experience/xp/caption/main/multiplier"]
+[node name="margin" type="MarginContainer" parent="experience/xp/main/multiplier"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -195,7 +188,7 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 2
 
-[node name="multiplier" type="Label" parent="experience/xp/caption/main/multiplier/margin"]
+[node name="multiplier" type="Label" parent="experience/xp/main/multiplier/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
 theme_override_colors/font_color = Color(0.767135, 0.588769, 0.0712476, 1)
@@ -282,12 +275,7 @@ show_percentage = false
 [node name="time" type="PanelContainer" parent="experience"]
 visible = false
 custom_minimum_size = Vector2(60, 30)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
 theme_override_styles/panel = SubResource("StyleBoxFlat_33rox")
@@ -301,9 +289,9 @@ texture = SubResource("GradientTexture2D_3v3bl")
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_constants/margin_left = 2
+theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 1
-theme_override_constants/margin_right = 0
+theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 0
 
 [node name="description" type="Label" parent="experience/time/margin"]
@@ -313,7 +301,7 @@ size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("2_stn0a")
 theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxEmpty_pa3qu")
-text = "99:59"
+text = "9:59"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
@@ -350,6 +338,8 @@ theme_override_constants/separation = 5
 [node name="next" type="Label" parent="score/experience"]
 layout_mode = 2
 theme = ExtResource("4_hnjmq")
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 10
 theme_override_font_sizes/font_size = 18
 text = "До ур."
 
@@ -369,10 +359,21 @@ theme_override_fonts/font = ExtResource("1_m3psj")
 text = "10"
 vertical_alignment = 2
 
-[node name="enemy_1" parent="." instance=ExtResource("5_crv53")]
+[node name="enemies" type="Control" parent="."]
 layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="enemy_1" parent="enemies" instance=ExtResource("5_crv53")]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="preset" type="HBoxContainer" parent="."]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 8
 
