@@ -23,11 +23,11 @@ func drink_water(inventory: Node, pos: Vector2) -> void:
 		inventory.logic.effect.restore() # USE WATER
 
 func open_chests() -> void:
-	var atlas: Vector2i = lay.border.context.atlas
-	var id: int = Tile.logic_no(lay.tags.from_coords(lay.border.context.coords).context.atlas)
-	var logic: Node2D = group.leader.to.inventory
-	if chest.on_at(atlas):
+	var tile: Dictionary = lay.border.context
+	var id: int = Tile.logic_no(lay.tags.from_coords(tile.coords).context.atlas)
+	var logic: Node = group.leader.to.inventory.logic
+	if chest.on_at(tile.atlas):
 		logic.remember_inventory(id)
-	elif chest.off_at(atlas):
+	elif chest.off_at(tile.atlas):
 		lay.border.switch(chest.offset.on) # TODO NEED TO ADD CHECK BEFORE CHANGE
 		logic.put_to_inventory(id)

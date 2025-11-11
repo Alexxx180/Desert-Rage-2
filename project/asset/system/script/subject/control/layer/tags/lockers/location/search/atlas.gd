@@ -3,10 +3,15 @@ extends Node
 var search: Node
 
 func find_cell(pos: Vector2) -> Vector2i:
-	var map_coords: Vector2i = search.border.from_pos(pos).context.coords
-	if not search.storage.has_trigger(map_coords):
-		search.border.select(Transitions.MISSING).paint() # assert "no trigger found"
-	return map_coords
+	#var map_coords: Vector2i = 
+	#if not search.storage.has_trigger(map_coords):
+	#	search.border.select(Transitions.MISSING).paint() # assert "no trigger found"
+	return search.border.from_pos(pos).context.coords
+
+func has_trigger(map_coords: Vector2i) -> bool:
+	var has: bool = search.storage.has_trigger(map_coords)
+	if not has: search.border.select(Transitions.MISSING).paint() # assert "no trigger found"
+	return has
 
 func get_atlas(map_coords: Vector2i, tag: Vector2i) -> Dictionary:
 	var tile: Dictionary = search.border.from_coords(map_coords).context.duplicate()

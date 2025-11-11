@@ -29,6 +29,8 @@ var stats: Node:
 	get: return _hero.logic.work.stats
 var hud: Node:
 	get: return stats.hud
+var inventory: Node:
+	get: return world.inventory
 # Eye sight detecting
 var skills: Node2D:
 	get: return _hero.logic.see.world.skills

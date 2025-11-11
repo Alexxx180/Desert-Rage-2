@@ -31,10 +31,10 @@ static func switch(from: Dictionary, to: Vector2i, layer: TileMapLayer) -> void:
 	paint(layer, from)
 
 static func modify(tile_basis: Dictionary, layer: TileMapLayer) -> Dictionary:
-	if tile_basis["id"] == -1: return tile_basis
-	tile_basis.name = layer.tile_set.get_source(tile_basis["id"]).resource_name
-	tile_basis.atlas = atlas_coords(layer, tile_basis["coords"])
-	print("CATLAS: ", tile_basis["coords"])
+	if tile_basis.id == -1: return tile_basis
+	tile_basis.name = layer.tile_set.get_source(tile_basis.id).resource_name
+	tile_basis.atlas = atlas_coords(layer, tile_basis.coords)
+	print("ID: ", tile_basis.id, " - C-COORDS: ", tile_basis.coords, " - ATLAS: ", tile_basis.atlas)
 	return tile_basis
 
 static func from_coords(layer: TileMapLayer, map_coords: Vector2i, id: int = -1) -> Dictionary:
@@ -47,7 +47,6 @@ static func from_pos(layer: TileMapLayer, pos: Vector2) -> Dictionary:
 	var result: Dictionary = from_coords(layer, find(layer, pos))
 	result.pos = pos
 	return result
-
 
 static func logic_no(cell: Vector2i) -> int:
 	return cell.y * SIZE + FLOOR + cell.x
