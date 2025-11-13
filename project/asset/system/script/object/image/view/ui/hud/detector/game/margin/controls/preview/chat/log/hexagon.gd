@@ -4,6 +4,7 @@ extends Control
 # @export var side: int = 10
 var center: Vector2
 var side: int
+@export var color: Color = Color8(28, 28, 53, 255)
 @export_range(3, 20, 1) var sides: int = 6
 
 func _ready() -> void:
@@ -12,7 +13,7 @@ func _ready() -> void:
 
 func _draw() -> void: # draw_polyline()
 	var pts: PackedVector2Array = get_hex()
-	draw_colored_polygon(pts, Color8(28, 28, 53, 200))
+	draw_colored_polygon(pts, color)
 	print("PTS: ", pts)
 	#for i in range(1, len(pts), 2):
 		#draw_line(pts[i], pts[i], Color.BLUE, 3)
