@@ -1,51 +1,45 @@
 extends Control
 
-# @export var center: Vector2 = Vector2(10, 10)
-# @export var side: int = 10
-const MAX: float = 95
-enum {  HP = 1, AP = 2 }
+enum { MAX = 45, OFFSET = 30, DEGREE = 60 }
 
-var center: Vector2
-var side: int
+var centered: Rect2
 var portion: Array[float] = []
-@export var color: Color = Color8(28, 28, 53, 255)
+
 @export_range(3, 20, 1) var sides: int = 6
 
-# """
-var default: Dictionary = { "hp": 0, "ap": 95, "power": 95,
-	"influence": 95, "vitality": 95, "reaction": 10 }
-"""
-var default: Dictionary = { "hp": 20, "ap": 30, "power": 17,
-	"influence": 7, "vitality": 20, "reaction": 67 }
-# """
+var colors: Dictionary = {
+	"line": Color8(28, 28, 53, 255), "polygon": Color8(25, 25, 25, 255),
+	"dots": [Color8(127, 127, 127, 255), Color8(78, 78, 156, 255), Color8(135, 135, 255, 255)]
+}
 
-func _ready() -> void:
-	side = custom_minimum_size.x
-	center = custom_minimum_size / 2
-	set_stats(default)
+var default: Dictionary = { "hp": 11, "ap": 10, "power": 6,
+	"influence": 7, "vitality": 3, "reaction": 6 }
+var adds: Array[int] = [1, 2, 1, 3, 1, 2]
 
 func set_stats(stats: Dictionary) -> void:
 	for p in ["vitality", "reaction", "ap", "influence", "power", "hp"]:
-		portion.append(stats[p] / MAX)
+		portion.append(stats[p] / float(MAX))
 
-#TODO DRAW
-func _draw() -> void: # draw_polyline()
+func _ready() -> void:
+	centered = Rect2(custom_minimum_size / 2, custom_minimum_size)
+	set_stats(default)
+
+func draw_point(point: Vector2, add: int) -> void:
+	if add == 0: return
+	add = min(colors.dots.size(), add)
+	var dot: Color = colors.dots[add - 1]
+	add = min(2, add)
+	draw_rect(Rect2(point, Vector2(add, add)), dot)
+
+func _draw() -> void:
 	var pts: PackedVector2Array = get_hex()
-	draw_colored_polygon(pts, color)
-	print("PTS: ", pts)
-	for i in range(1, len(pts), 2):
-		draw_circle(pts[i], 2, Color.BLUE)
-	draw_circle(pts[-2], 2, Color.BLUE)
-	#for pt in pts: #draw_polyline()
-"""
-[(40.98076, 0.0),
-(40.98076, 30.0), (40.98076, 30.0),
-(15.0, 45.0), (15.0, 45.0),
-(-10.98076, 30.0), (-10.98076, 30.0),
-(-10.98076, -0.0), (-10.98076, -0.0),
-(15.0, -15.0), (15.0, -15.0),
-(40.98076, 0.0)]
-"""
+	draw_colored_polygon(pts, colors.polygon)
+	draw_polyline(pts, colors.line, 1)
+	var j: int = 0
+	for i in range(0, len(pts), 2):
+		draw_point(pts[i], adds[j])
+		j += 1
+
 func get_hex() -> PackedVector2Array:
 	var pts: PackedVector2Array = []
 	var pos: Vector2 = hex_corner(0)
@@ -58,22 +52,5 @@ func get_hex() -> PackedVector2Array:
 	return pts
 	
 func hex_corner(i: int) -> Vector2:
-	var rad: float = deg_to_rad(60 * i - 30) # var angle_rad = PI / 180 * angle_deg
-	return center + portion[i] * Vector2(side * cos(rad), side * sin(rad))
-
-"""
-func hex_corner(i: int) -> Vector2:
-	var rad: float = deg_to_rad(60 * i - 30) # var angle_rad = PI / 180 * angle_deg
-	return portion[i] * Vector2(
-		center.x + side * cos(rad),
-		center.y + side * sin(rad))
-"""
-
-"""
-In a regular hexagon the interior angles are 120°.
-There are six “wedges”, each an equilateral triangle with 60° angles inside.
-Each corner is size units away from the center. In code:
-	
-To fill a hexagon, gather the polygon vertices at hex_corner(…, 0) through hex_corner(…, 5).
-To draw a hexagon outline, use those vertices, and then draw a line back to hex_corner(…, 0).
-"""
+	var rad: float = deg_to_rad(DEGREE * i - OFFSET)
+	return centered.position + portion[i] * centered.size * Vector2(cos(rad), sin(rad))

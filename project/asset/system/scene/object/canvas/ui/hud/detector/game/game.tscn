@@ -1,4 +1,4 @@
-[gd_scene load_steps=105 format=3 uid="uid://cel3u88abrgv3"]
+[gd_scene load_steps=98 format=3 uid="uid://cel3u88abrgv3"]
 
 [ext_resource type="Theme" uid="uid://p2br8b6ea3n6" path="res://asset/resource/ui/theme/patterns/template/menu/hud/pause/pause.tres" id="1_klae1"]
 [ext_resource type="Script" uid="uid://81xdi4771u0a" path="res://asset/system/script/object/image/view/ui/hud/detector/game/game.gd" id="1_o71r6"]
@@ -203,29 +203,6 @@ corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jn2xb"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iy05a"]
-bg_color = Color(1, 1, 1, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pau43"]
-bg_color = Color(0.898039, 0.196078, 0.180392, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tveuy"]
-bg_color = Color(0.262745, 0.662745, 0.839216, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_upyjg"]
-bg_color = Color(0.67451, 0.780392, 0.807843, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3yh6s"]
-bg_color = Color(1, 0.443137, 0, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6knvb"]
-bg_color = Color(0.529412, 0.67451, 0.709804, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e1onj"]
-bg_color = Color(0.243137, 0.552941, 0.619608, 1)
-
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ok865"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8qkor"]
@@ -246,6 +223,8 @@ content_margin_top = 2.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rw2ti"]
 content_margin_left = 1.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jn2xb"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8jauc"]
 bg_color = Color(1, 1, 1, 1)
@@ -1950,232 +1929,28 @@ theme_override_constants/margin_top = 3
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 3
 
-[node name="hero" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin"]
+[node name="hero" type="HFlowContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin"]
 layout_mode = 2
 
-[node name="level" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero"]
+[node name="ray" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero"]
 layout_mode = 2
+size_flags_horizontal = 6
 theme_override_constants/separation = 0
 
-[node name="description" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level"]
+[node name="description" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 3
 
-[node name="caption" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/description"]
+[node name="caption" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray/description"]
 layout_mode = 2
 theme_override_constants/separation = 3
 
-[node name="stats" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/description/caption"]
-visible = false
-custom_minimum_size = Vector2(15, 0)
-layout_mode = 2
-size_flags_vertical = 4
-theme_override_constants/separation = 1
-
-[node name="hp" type="Control" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/description/caption/stats"]
-custom_minimum_size = Vector2(0, 1)
-layout_mode = 2
-
-[node name="old" type="ProgressBar" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/description/caption/stats/hp"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/background = SubResource("StyleBoxEmpty_jn2xb")
-theme_override_styles/fill = SubResource("StyleBoxFlat_iy05a")
-max_value = 50.0
-step = 1.0
-value = 32.0
-show_percentage = false
-
-[node name="next" type="ProgressBar" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/description/caption/stats/hp"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(1.0038, 1)
-theme_override_styles/background = SubResource("StyleBoxEmpty_jn2xb")
-theme_override_styles/fill = SubResource("StyleBoxFlat_pau43")
-max_value = 50.0
-step = 1.0
-value = 30.0
-show_percentage = false
-
-[node name="ap" type="Control" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/description/caption/stats"]
-custom_minimum_size = Vector2(0, 1)
-layout_mode = 2
-
-[node name="old" type="ProgressBar" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/description/caption/stats/ap"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/background = SubResource("StyleBoxEmpty_jn2xb")
-theme_override_styles/fill = SubResource("StyleBoxFlat_iy05a")
-max_value = 50.0
-step = 1.0
-value = 32.0
-show_percentage = false
-
-[node name="next" type="ProgressBar" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/description/caption/stats/ap"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(1.0038, 1)
-theme_override_styles/background = SubResource("StyleBoxEmpty_jn2xb")
-theme_override_styles/fill = SubResource("StyleBoxFlat_tveuy")
-max_value = 50.0
-step = 1.0
-value = 30.0
-show_percentage = false
-
-[node name="power" type="Control" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/description/caption/stats"]
-custom_minimum_size = Vector2(0, 1)
-layout_mode = 2
-
-[node name="old" type="ProgressBar" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/description/caption/stats/power"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/background = SubResource("StyleBoxEmpty_jn2xb")
-theme_override_styles/fill = SubResource("StyleBoxFlat_iy05a")
-max_value = 50.0
-step = 1.0
-value = 32.0
-show_percentage = false
-
-[node name="next" type="ProgressBar" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/description/caption/stats/power"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(1.0038, 1)
-theme_override_styles/background = SubResource("StyleBoxEmpty_jn2xb")
-theme_override_styles/fill = SubResource("StyleBoxFlat_upyjg")
-max_value = 50.0
-step = 1.0
-value = 30.0
-show_percentage = false
-
-[node name="influence" type="Control" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/description/caption/stats"]
-custom_minimum_size = Vector2(0, 1)
-layout_mode = 2
-
-[node name="old" type="ProgressBar" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/description/caption/stats/influence"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/background = SubResource("StyleBoxEmpty_jn2xb")
-theme_override_styles/fill = SubResource("StyleBoxFlat_iy05a")
-max_value = 50.0
-step = 1.0
-value = 32.0
-show_percentage = false
-
-[node name="next" type="ProgressBar" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/description/caption/stats/influence"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(1.0038, 1)
-theme_override_styles/background = SubResource("StyleBoxEmpty_jn2xb")
-theme_override_styles/fill = SubResource("StyleBoxFlat_3yh6s")
-max_value = 50.0
-step = 1.0
-value = 30.0
-show_percentage = false
-
-[node name="vitality" type="Control" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/description/caption/stats"]
-custom_minimum_size = Vector2(0, 1)
-layout_mode = 2
-
-[node name="old" type="ProgressBar" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/description/caption/stats/vitality"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/background = SubResource("StyleBoxEmpty_jn2xb")
-theme_override_styles/fill = SubResource("StyleBoxFlat_iy05a")
-max_value = 50.0
-step = 1.0
-value = 32.0
-show_percentage = false
-
-[node name="next" type="ProgressBar" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/description/caption/stats/vitality"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(1.0038, 1)
-theme_override_styles/background = SubResource("StyleBoxEmpty_jn2xb")
-theme_override_styles/fill = SubResource("StyleBoxFlat_6knvb")
-max_value = 50.0
-step = 1.0
-value = 30.0
-show_percentage = false
-
-[node name="reaction" type="Control" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/description/caption/stats"]
-custom_minimum_size = Vector2(0, 1)
-layout_mode = 2
-
-[node name="old" type="ProgressBar" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/description/caption/stats/reaction"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/background = SubResource("StyleBoxEmpty_jn2xb")
-theme_override_styles/fill = SubResource("StyleBoxFlat_iy05a")
-max_value = 50.0
-step = 1.0
-value = 32.0
-show_percentage = false
-
-[node name="next" type="ProgressBar" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/description/caption/stats/reaction"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(1.0038, 1)
-theme_override_styles/background = SubResource("StyleBoxEmpty_jn2xb")
-theme_override_styles/fill = SubResource("StyleBoxFlat_e1onj")
-max_value = 50.0
-step = 1.0
-value = 30.0
-show_percentage = false
-
-[node name="line" type="HSeparator" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/description/caption"]
+[node name="line" type="HSeparator" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray/description/caption"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 
-[node name="priority" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/description/caption"]
+[node name="priority" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray/description/caption"]
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_colors/font_color = Color(0.393086, 0.393086, 0.393085, 1)
@@ -2183,7 +1958,24 @@ theme_override_fonts/font = ExtResource("23_rw2ti")
 theme_override_font_sizes/font_size = 12
 text = "Выдержка"
 
-[node name="statement" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/description"]
+[node name="arrow" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray/description/caption"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
+theme_override_fonts/font = ExtResource("23_rw2ti")
+theme_override_font_sizes/font_size = 12
+text = "→"
+
+[node name="level" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray/description/caption"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(0.393086, 0.393086, 0.393085, 1)
+theme_override_fonts/font = ExtResource("23_rw2ti")
+theme_override_font_sizes/font_size = 12
+text = "7"
+
+[node name="statement" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray/description"]
 visible = false
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
@@ -2195,16 +1987,16 @@ theme_override_font_sizes/font_size = 14
 text = "Выдержка"
 autowrap_mode = 2
 
-[node name="stats-1" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/description"]
+[node name="stats-1" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray/description"]
 visible = false
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="hp" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/description/stats-1"]
+[node name="hp" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray/description/stats-1"]
 layout_mode = 2
 theme_override_constants/separation = 2
 
-[node name="number" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/description/stats-1/hp"]
+[node name="number" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray/description/stats-1/hp"]
 custom_minimum_size = Vector2(28, 0)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -2216,7 +2008,7 @@ theme_override_font_sizes/font_size = 12
 text = "10"
 horizontal_alignment = 1
 
-[node name="add" type="MarginContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/description/stats-1/hp"]
+[node name="add" type="MarginContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray/description/stats-1/hp"]
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_constants/margin_left = 0
@@ -2224,7 +2016,7 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 
-[node name="icon" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/description/stats-1/hp/add"]
+[node name="icon" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray/description/stats-1/hp/add"]
 layout_mode = 2
 theme = ExtResource("28_iy05a")
 theme_override_fonts/font = ExtResource("4_42m6k")
@@ -2232,7 +2024,7 @@ theme_override_font_sizes/font_size = 16
 theme_override_styles/normal = SubResource("StyleBoxEmpty_ok865")
 text = "🩸"
 
-[node name="number" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/description/stats-1/hp/add"]
+[node name="number" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray/description/stats-1/hp/add"]
 visible = false
 layout_mode = 2
 theme = ExtResource("28_iy05a")
@@ -2243,11 +2035,11 @@ theme_override_font_sizes/font_size = 12
 theme_override_styles/normal = SubResource("StyleBoxEmpty_8qkor")
 text = "2"
 
-[node name="ap" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/description/stats-1"]
+[node name="ap" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray/description/stats-1"]
 layout_mode = 2
 theme_override_constants/separation = 2
 
-[node name="number" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/description/stats-1/ap"]
+[node name="number" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray/description/stats-1/ap"]
 custom_minimum_size = Vector2(28, 0)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -2259,7 +2051,7 @@ theme_override_font_sizes/font_size = 12
 text = "9"
 horizontal_alignment = 1
 
-[node name="add" type="MarginContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/description/stats-1/ap"]
+[node name="add" type="MarginContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray/description/stats-1/ap"]
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_constants/margin_left = 0
@@ -2267,7 +2059,7 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 
-[node name="icon" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/description/stats-1/ap/add"]
+[node name="icon" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray/description/stats-1/ap/add"]
 layout_mode = 2
 theme = ExtResource("28_iy05a")
 theme_override_fonts/font = ExtResource("4_42m6k")
@@ -2275,7 +2067,7 @@ theme_override_font_sizes/font_size = 16
 theme_override_styles/normal = SubResource("StyleBoxEmpty_ok865")
 text = "💧"
 
-[node name="number" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/description/stats-1/ap/add"]
+[node name="number" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray/description/stats-1/ap/add"]
 visible = false
 layout_mode = 2
 theme = ExtResource("28_iy05a")
@@ -2286,11 +2078,11 @@ theme_override_font_sizes/font_size = 12
 theme_override_styles/normal = SubResource("StyleBoxEmpty_8qkor")
 text = "1"
 
-[node name="power" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/description/stats-1"]
+[node name="power" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray/description/stats-1"]
 layout_mode = 2
 theme_override_constants/separation = 2
 
-[node name="number" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/description/stats-1/power"]
+[node name="number" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray/description/stats-1/power"]
 custom_minimum_size = Vector2(28, 0)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -2302,7 +2094,7 @@ theme_override_font_sizes/font_size = 12
 text = "5"
 horizontal_alignment = 1
 
-[node name="add" type="MarginContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/description/stats-1/power"]
+[node name="add" type="MarginContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray/description/stats-1/power"]
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_constants/margin_left = 0
@@ -2310,7 +2102,7 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 
-[node name="icon" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/description/stats-1/power/add"]
+[node name="icon" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray/description/stats-1/power/add"]
 layout_mode = 2
 theme = ExtResource("28_iy05a")
 theme_override_fonts/font = ExtResource("4_42m6k")
@@ -2318,7 +2110,7 @@ theme_override_font_sizes/font_size = 16
 theme_override_styles/normal = SubResource("StyleBoxEmpty_ok865")
 text = "⚔️"
 
-[node name="number" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/description/stats-1/power/add"]
+[node name="number" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray/description/stats-1/power/add"]
 visible = false
 layout_mode = 2
 theme = ExtResource("28_iy05a")
@@ -2329,16 +2121,16 @@ theme_override_font_sizes/font_size = 12
 theme_override_styles/normal = SubResource("StyleBoxEmpty_8qkor")
 text = "1"
 
-[node name="stats-2" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/description"]
+[node name="stats-2" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray/description"]
 visible = false
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="hp" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/description/stats-2"]
+[node name="hp" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray/description/stats-2"]
 layout_mode = 2
 theme_override_constants/separation = 2
 
-[node name="number" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/description/stats-2/hp"]
+[node name="number" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray/description/stats-2/hp"]
 custom_minimum_size = Vector2(28, 0)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -2350,7 +2142,7 @@ theme_override_font_sizes/font_size = 12
 text = "5"
 horizontal_alignment = 1
 
-[node name="add" type="MarginContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/description/stats-2/hp"]
+[node name="add" type="MarginContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray/description/stats-2/hp"]
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_constants/margin_left = 0
@@ -2358,7 +2150,7 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 
-[node name="icon" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/description/stats-2/hp/add"]
+[node name="icon" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray/description/stats-2/hp/add"]
 layout_mode = 2
 theme = ExtResource("28_iy05a")
 theme_override_fonts/font = ExtResource("4_42m6k")
@@ -2366,7 +2158,7 @@ theme_override_font_sizes/font_size = 16
 theme_override_styles/normal = SubResource("StyleBoxEmpty_ok865")
 text = "🔥"
 
-[node name="number" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/description/stats-2/hp/add"]
+[node name="number" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray/description/stats-2/hp/add"]
 visible = false
 layout_mode = 2
 theme = ExtResource("28_iy05a")
@@ -2377,11 +2169,11 @@ theme_override_font_sizes/font_size = 12
 theme_override_styles/normal = SubResource("StyleBoxEmpty_8qkor")
 text = "2"
 
-[node name="ap" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/description/stats-2"]
+[node name="ap" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray/description/stats-2"]
 layout_mode = 2
 theme_override_constants/separation = 2
 
-[node name="number" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/description/stats-2/ap"]
+[node name="number" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray/description/stats-2/ap"]
 custom_minimum_size = Vector2(28, 0)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -2393,7 +2185,7 @@ theme_override_font_sizes/font_size = 12
 text = "2"
 horizontal_alignment = 1
 
-[node name="add" type="MarginContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/description/stats-2/ap"]
+[node name="add" type="MarginContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray/description/stats-2/ap"]
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_constants/margin_left = 0
@@ -2401,7 +2193,7 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 
-[node name="icon" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/description/stats-2/ap/add"]
+[node name="icon" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray/description/stats-2/ap/add"]
 layout_mode = 2
 theme = ExtResource("28_iy05a")
 theme_override_fonts/font = ExtResource("4_42m6k")
@@ -2409,7 +2201,7 @@ theme_override_font_sizes/font_size = 16
 theme_override_styles/normal = SubResource("StyleBoxEmpty_ok865")
 text = "🛡"
 
-[node name="number" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/description/stats-2/ap/add"]
+[node name="number" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray/description/stats-2/ap/add"]
 visible = false
 layout_mode = 2
 theme = ExtResource("28_iy05a")
@@ -2420,11 +2212,11 @@ theme_override_font_sizes/font_size = 12
 theme_override_styles/normal = SubResource("StyleBoxEmpty_8qkor")
 text = "1"
 
-[node name="power" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/description/stats-2"]
+[node name="power" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray/description/stats-2"]
 layout_mode = 2
 theme_override_constants/separation = 2
 
-[node name="number" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/description/stats-2/power"]
+[node name="number" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray/description/stats-2/power"]
 custom_minimum_size = Vector2(28, 0)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -2436,7 +2228,7 @@ theme_override_font_sizes/font_size = 12
 text = "4"
 horizontal_alignment = 1
 
-[node name="add" type="MarginContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/description/stats-2/power"]
+[node name="add" type="MarginContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray/description/stats-2/power"]
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_constants/margin_left = 0
@@ -2444,7 +2236,7 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 
-[node name="icon" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/description/stats-2/power/add"]
+[node name="icon" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray/description/stats-2/power/add"]
 layout_mode = 2
 theme = ExtResource("28_iy05a")
 theme_override_fonts/font = ExtResource("4_42m6k")
@@ -2452,7 +2244,7 @@ theme_override_font_sizes/font_size = 16
 theme_override_styles/normal = SubResource("StyleBoxEmpty_ok865")
 text = "🫧"
 
-[node name="number" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/description/stats-2/power/add"]
+[node name="number" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray/description/stats-2/power/add"]
 visible = false
 layout_mode = 2
 theme = ExtResource("28_iy05a")
@@ -2463,7 +2255,7 @@ theme_override_font_sizes/font_size = 12
 theme_override_styles/normal = SubResource("StyleBoxEmpty_8qkor")
 text = "2"
 
-[node name="stats" type="MarginContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level"]
+[node name="stats" type="MarginContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray"]
 custom_minimum_size = Vector2(70, 70)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -2472,14 +2264,15 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 25
 theme_override_constants/margin_bottom = 10
 
-[node name="hexagon" type="Control" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/stats"]
+[node name="hexagon" type="Control" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray/stats"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 script = ExtResource("28_ok865")
 
-[node name="level" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/stats/hexagon"]
+[node name="level" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray/stats/hexagon"]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -2500,18 +2293,18 @@ theme_override_font_sizes/font_size = 14
 theme_override_styles/normal = SubResource("StyleBoxEmpty_eq6yd")
 text = "7"
 
-[node name="icons" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/stats"]
+[node name="icons" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray/stats"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme_override_constants/separation = 17
 
-[node name="aura" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/stats/icons"]
+[node name="aura" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray/stats/icons"]
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_constants/separation = 10
 
-[node name="power" type="MarginContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/stats/icons/aura"]
+[node name="power" type="MarginContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray/stats/icons/aura"]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
@@ -2520,14 +2313,14 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 
-[node name="icon" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/stats/icons/aura/power"]
+[node name="icon" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray/stats/icons/aura/power"]
 layout_mode = 2
 theme = ExtResource("28_iy05a")
 theme_override_fonts/font = ExtResource("4_42m6k")
 theme_override_font_sizes/font_size = 10
 text = "⚔️"
 
-[node name="health" type="MarginContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/stats/icons/aura"]
+[node name="health" type="MarginContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray/stats/icons/aura"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
@@ -2536,14 +2329,14 @@ theme_override_constants/margin_top = -4
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 
-[node name="icon" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/stats/icons/aura/health"]
+[node name="icon" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray/stats/icons/aura/health"]
 layout_mode = 2
 theme = ExtResource("28_iy05a")
 theme_override_fonts/font = ExtResource("4_42m6k")
 theme_override_font_sizes/font_size = 10
 text = "🩸"
 
-[node name="vitality" type="MarginContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/stats/icons/aura"]
+[node name="vitality" type="MarginContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray/stats/icons/aura"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
@@ -2552,19 +2345,19 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 
-[node name="icon" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/stats/icons/aura/vitality"]
+[node name="icon" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray/stats/icons/aura/vitality"]
 layout_mode = 2
 theme = ExtResource("28_iy05a")
 theme_override_fonts/font = ExtResource("4_42m6k")
 theme_override_font_sizes/font_size = 10
 text = "🛡"
 
-[node name="resource" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/stats/icons"]
+[node name="resource" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray/stats/icons"]
 layout_mode = 2
 size_flags_vertical = 8
 theme_override_constants/separation = 10
 
-[node name="influence" type="MarginContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/stats/icons/resource"]
+[node name="influence" type="MarginContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray/stats/icons/resource"]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
@@ -2573,14 +2366,14 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 10
 
-[node name="icon" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/stats/icons/resource/influence"]
+[node name="icon" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray/stats/icons/resource/influence"]
 layout_mode = 2
 theme = ExtResource("28_iy05a")
 theme_override_fonts/font = ExtResource("4_42m6k")
 theme_override_font_sizes/font_size = 10
 text = "🔥"
 
-[node name="ability" type="MarginContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/stats/icons/resource"]
+[node name="ability" type="MarginContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray/stats/icons/resource"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
@@ -2589,7 +2382,7 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = -2
 
-[node name="icon" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/stats/icons/resource/ability"]
+[node name="icon" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray/stats/icons/resource/ability"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
@@ -2598,7 +2391,7 @@ theme_override_fonts/font = ExtResource("4_42m6k")
 theme_override_font_sizes/font_size = 10
 text = "💧"
 
-[node name="reaction" type="MarginContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/stats/icons/resource"]
+[node name="reaction" type="MarginContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray/stats/icons/resource"]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
@@ -2607,14 +2400,14 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 9
 
-[node name="icon" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/stats/icons/resource/reaction"]
+[node name="icon" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray/stats/icons/resource/reaction"]
 layout_mode = 2
 theme = ExtResource("28_iy05a")
 theme_override_fonts/font = ExtResource("4_42m6k")
 theme_override_font_sizes/font_size = 10
 text = "🫧"
 
-[node name="current" type="MarginContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/stats"]
+[node name="current" type="MarginContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray/stats"]
 layout_mode = 2
 theme = SubResource("Theme_eq6yd")
 theme_override_constants/margin_left = -35
@@ -2622,107 +2415,107 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = -35
 theme_override_constants/margin_bottom = 0
 
-[node name="next" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/stats/current"]
+[node name="next" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray/stats/current"]
 layout_mode = 2
 theme_override_constants/separation = 24
 
-[node name="offence" type="MarginContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/stats/current/next"]
+[node name="offence" type="MarginContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray/stats/current/next"]
 layout_mode = 2
 theme_override_constants/margin_left = 0
 theme_override_constants/margin_top = -8
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 
-[node name="stats" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/stats/current/next/offence"]
+[node name="stats" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray/stats/current/next/offence"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/separation = 0
 
-[node name="power" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/stats/current/next/offence/stats"]
+[node name="power" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray/stats/current/next/offence/stats"]
 custom_minimum_size = Vector2(28, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 theme_override_fonts/font = ExtResource("30_eq6yd")
 theme_override_font_sizes/font_size = 10
-text = "12"
+text = "5"
 horizontal_alignment = 1
 
-[node name="hp" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/stats/current/next/offence/stats"]
+[node name="hp" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray/stats/current/next/offence/stats"]
 custom_minimum_size = Vector2(28, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 theme_override_fonts/font = ExtResource("30_eq6yd")
 theme_override_font_sizes/font_size = 10
-text = "12"
+text = "10"
 horizontal_alignment = 1
 
-[node name="defence" type="MarginContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/stats/current/next"]
+[node name="defence" type="MarginContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray/stats/current/next"]
 layout_mode = 2
 theme_override_constants/margin_left = 0
 theme_override_constants/margin_top = -8
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 
-[node name="stats" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/stats/current/next/defence"]
+[node name="stats" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray/stats/current/next/defence"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/separation = 50
 
-[node name="hp" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/stats/current/next/defence/stats"]
+[node name="influence" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray/stats/current/next/defence/stats"]
 custom_minimum_size = Vector2(28, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 theme_override_fonts/font = ExtResource("30_eq6yd")
 theme_override_font_sizes/font_size = 10
-text = "12"
+text = "5"
 horizontal_alignment = 1
 
-[node name="vitality" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/stats/current/next/defence/stats"]
+[node name="vitality" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray/stats/current/next/defence/stats"]
 custom_minimum_size = Vector2(28, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 theme_override_fonts/font = ExtResource("30_eq6yd")
 theme_override_font_sizes/font_size = 10
-text = "12"
+text = "2"
 horizontal_alignment = 1
 
-[node name="offence2" type="MarginContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/stats/current/next"]
+[node name="resource" type="MarginContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray/stats/current/next"]
 layout_mode = 2
 theme_override_constants/margin_left = 0
 theme_override_constants/margin_top = -8
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 
-[node name="stats" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/stats/current/next/offence2"]
+[node name="stats" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray/stats/current/next/resource"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/separation = 0
 
-[node name="power" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/stats/current/next/offence2/stats"]
+[node name="ap" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray/stats/current/next/resource/stats"]
 custom_minimum_size = Vector2(28, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 theme_override_fonts/font = ExtResource("30_eq6yd")
 theme_override_font_sizes/font_size = 10
-text = "12"
+text = "9"
 horizontal_alignment = 1
 
-[node name="hp" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/stats/current/next/offence2/stats"]
+[node name="reaction" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray/stats/current/next/resource/stats"]
 custom_minimum_size = Vector2(28, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 theme_override_fonts/font = ExtResource("30_eq6yd")
 theme_override_font_sizes/font_size = 10
-text = "12"
+text = "4"
 horizontal_alignment = 1
 
-[node name="add" type="MarginContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/stats"]
+[node name="add" type="MarginContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray/stats"]
 layout_mode = 2
 theme = SubResource("Theme_8qkor")
 theme_override_constants/margin_left = -35
@@ -2730,30 +2523,30 @@ theme_override_constants/margin_top = -7
 theme_override_constants/margin_right = -35
 theme_override_constants/margin_bottom = -7
 
-[node name="next" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/stats/add"]
+[node name="next" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray/stats/add"]
 layout_mode = 2
 theme_override_constants/separation = 43
 
-[node name="offence" type="MarginContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/stats/add/next"]
+[node name="offence" type="MarginContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray/stats/add/next"]
 layout_mode = 2
 theme_override_constants/margin_left = 0
 theme_override_constants/margin_top = -8
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 
-[node name="stats" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/stats/add/next/offence"]
+[node name="stats" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray/stats/add/next/offence"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/separation = 26
 
-[node name="power" type="MarginContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/stats/add/next/offence/stats"]
+[node name="power" type="MarginContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray/stats/add/next/offence/stats"]
 layout_mode = 2
 theme_override_constants/margin_left = 0
 theme_override_constants/margin_top = 13
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 
-[node name="stat" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/stats/add/next/offence/stats/power"]
+[node name="stat" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray/stats/add/next/offence/stats/power"]
 custom_minimum_size = Vector2(6, 0)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -2763,24 +2556,24 @@ theme_override_font_sizes/font_size = 10
 text = "1"
 horizontal_alignment = 1
 
-[node name="hp" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/stats/add/next/offence/stats"]
+[node name="hp" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray/stats/add/next/offence/stats"]
 custom_minimum_size = Vector2(6, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 theme_override_fonts/font = ExtResource("30_eq6yd")
 theme_override_font_sizes/font_size = 10
-text = "1"
+text = "2"
 horizontal_alignment = 1
 
-[node name="vitality" type="MarginContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/stats/add/next/offence/stats"]
+[node name="vitality" type="MarginContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray/stats/add/next/offence/stats"]
 layout_mode = 2
 theme_override_constants/margin_left = 0
 theme_override_constants/margin_top = 13
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 
-[node name="stat" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/stats/add/next/offence/stats/vitality"]
+[node name="stat" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray/stats/add/next/offence/stats/vitality"]
 custom_minimum_size = Vector2(6, 0)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -2790,27 +2583,37 @@ theme_override_font_sizes/font_size = 10
 text = "1"
 horizontal_alignment = 1
 
-[node name="offence2" type="MarginContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/stats/add/next"]
+[node name="offence2" type="MarginContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray/stats/add/next"]
 layout_mode = 2
 theme_override_constants/margin_left = 0
 theme_override_constants/margin_top = -5
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 
-[node name="stats" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/stats/add/next/offence2"]
+[node name="stats" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray/stats/add/next/offence2"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 theme_override_constants/separation = 26
 
-[node name="power" type="MarginContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/stats/add/next/offence2/stats"]
+[node name="power" type="MarginContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray/stats/add/next/offence2/stats"]
 layout_mode = 2
 theme_override_constants/margin_left = 0
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 12
 
-[node name="stat" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/stats/add/next/offence2/stats/power"]
+[node name="stat" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray/stats/add/next/offence2/stats/power"]
+custom_minimum_size = Vector2(6, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("30_eq6yd")
+theme_override_font_sizes/font_size = 10
+text = "2"
+horizontal_alignment = 1
+
+[node name="hp" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray/stats/add/next/offence2/stats"]
 custom_minimum_size = Vector2(6, 0)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -2820,38 +2623,28 @@ theme_override_font_sizes/font_size = 10
 text = "1"
 horizontal_alignment = 1
 
-[node name="hp" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/stats/add/next/offence2/stats"]
-custom_minimum_size = Vector2(6, 0)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 8
-theme_override_fonts/font = ExtResource("30_eq6yd")
-theme_override_font_sizes/font_size = 10
-text = "1"
-horizontal_alignment = 1
-
-[node name="vitality" type="MarginContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/stats/add/next/offence2/stats"]
+[node name="vitality" type="MarginContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray/stats/add/next/offence2/stats"]
 layout_mode = 2
 theme_override_constants/margin_left = 0
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 12
 
-[node name="stat" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/stats/add/next/offence2/stats/vitality"]
+[node name="stat" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray/stats/add/next/offence2/stats/vitality"]
 custom_minimum_size = Vector2(6, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 theme_override_fonts/font = ExtResource("30_eq6yd")
 theme_override_font_sizes/font_size = 10
-text = "1"
+text = "2"
 horizontal_alignment = 1
 
-[node name="hero" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level"]
+[node name="hero" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray"]
 layout_mode = 2
 theme_override_constants/separation = 3
 
-[node name="caption" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/hero"]
+[node name="caption" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray/hero"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
@@ -2860,22 +2653,768 @@ theme_override_fonts/font = ExtResource("23_rw2ti")
 theme_override_font_sizes/font_size = 12
 text = "Рей"
 
-[node name="next" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/hero"]
+[node name="next" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray/hero"]
 layout_mode = 2
 theme_override_constants/separation = 3
 
-[node name="arrow" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/hero/next"]
+[node name="arrow" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray/hero/next"]
 layout_mode = 2
 size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
+theme_override_fonts/font = ExtResource("23_rw2ti")
+theme_override_font_sizes/font_size = 12
+text = "→"
+
+[node name="priority" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/ray/hero/next"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0.393086, 0.393086, 0.393085, 1)
+theme_override_fonts/font = ExtResource("23_rw2ti")
+theme_override_font_sizes/font_size = 12
+text = "Стойкость"
+
+[node name="rock" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero"]
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_constants/separation = 0
+
+[node name="description" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 3
+
+[node name="caption" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock/description"]
+layout_mode = 2
+theme_override_constants/separation = 3
+
+[node name="line" type="HSeparator" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock/description/caption"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="priority" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock/description/caption"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(0.393086, 0.393086, 0.393085, 1)
+theme_override_fonts/font = ExtResource("23_rw2ti")
+theme_override_font_sizes/font_size = 12
+text = "Стремление"
+
+[node name="arrow" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock/description/caption"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
+theme_override_fonts/font = ExtResource("23_rw2ti")
+theme_override_font_sizes/font_size = 12
+text = "→"
+
+[node name="level" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock/description/caption"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(0.393086, 0.393086, 0.393085, 1)
+theme_override_fonts/font = ExtResource("23_rw2ti")
+theme_override_font_sizes/font_size = 12
+text = "5"
+
+[node name="statement" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock/description"]
+visible = false
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.627451, 0.627451, 0.627451, 1)
+theme_override_constants/line_spacing = -2
+theme_override_fonts/font = ExtResource("16_g3c1s")
+theme_override_font_sizes/font_size = 14
+text = "Выдержка"
+autowrap_mode = 2
+
+[node name="stats-1" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock/description"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="hp" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock/description/stats-1"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="number" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock/description/stats-1/hp"]
+custom_minimum_size = Vector2(28, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme = ExtResource("28_iy05a")
+theme_override_colors/font_color = Color(0.627451, 0.627451, 0.627451, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 12
+text = "10"
+horizontal_alignment = 1
+
+[node name="add" type="MarginContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock/description/stats-1/hp"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="icon" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock/description/stats-1/hp/add"]
+layout_mode = 2
+theme = ExtResource("28_iy05a")
+theme_override_fonts/font = ExtResource("4_42m6k")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ok865")
+text = "🩸"
+
+[node name="number" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock/description/stats-1/hp/add"]
+visible = false
+layout_mode = 2
+theme = ExtResource("28_iy05a")
+theme_override_colors/font_color = Color(0.99558, 0.99558, 0.99558, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 7
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxEmpty_8qkor")
+text = "2"
+
+[node name="ap" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock/description/stats-1"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="number" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock/description/stats-1/ap"]
+custom_minimum_size = Vector2(28, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme = ExtResource("28_iy05a")
+theme_override_colors/font_color = Color(0.627451, 0.627451, 0.627451, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 12
+text = "9"
+horizontal_alignment = 1
+
+[node name="add" type="MarginContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock/description/stats-1/ap"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="icon" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock/description/stats-1/ap/add"]
+layout_mode = 2
+theme = ExtResource("28_iy05a")
+theme_override_fonts/font = ExtResource("4_42m6k")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ok865")
+text = "💧"
+
+[node name="number" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock/description/stats-1/ap/add"]
+visible = false
+layout_mode = 2
+theme = ExtResource("28_iy05a")
+theme_override_colors/font_color = Color(0.99558, 0.99558, 0.99558, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 7
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxEmpty_8qkor")
+text = "1"
+
+[node name="power" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock/description/stats-1"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="number" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock/description/stats-1/power"]
+custom_minimum_size = Vector2(28, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme = ExtResource("28_iy05a")
+theme_override_colors/font_color = Color(0.627451, 0.627451, 0.627451, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 12
+text = "5"
+horizontal_alignment = 1
+
+[node name="add" type="MarginContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock/description/stats-1/power"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="icon" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock/description/stats-1/power/add"]
+layout_mode = 2
+theme = ExtResource("28_iy05a")
+theme_override_fonts/font = ExtResource("4_42m6k")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ok865")
+text = "⚔️"
+
+[node name="number" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock/description/stats-1/power/add"]
+visible = false
+layout_mode = 2
+theme = ExtResource("28_iy05a")
+theme_override_colors/font_color = Color(0.99558, 0.99558, 0.99558, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 7
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxEmpty_8qkor")
+text = "1"
+
+[node name="stats-2" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock/description"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="hp" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock/description/stats-2"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="number" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock/description/stats-2/hp"]
+custom_minimum_size = Vector2(28, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme = ExtResource("28_iy05a")
+theme_override_colors/font_color = Color(0.627451, 0.627451, 0.627451, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 12
+text = "5"
+horizontal_alignment = 1
+
+[node name="add" type="MarginContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock/description/stats-2/hp"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="icon" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock/description/stats-2/hp/add"]
+layout_mode = 2
+theme = ExtResource("28_iy05a")
+theme_override_fonts/font = ExtResource("4_42m6k")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ok865")
+text = "🔥"
+
+[node name="number" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock/description/stats-2/hp/add"]
+visible = false
+layout_mode = 2
+theme = ExtResource("28_iy05a")
+theme_override_colors/font_color = Color(0.99558, 0.99558, 0.99558, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 7
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxEmpty_8qkor")
+text = "2"
+
+[node name="ap" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock/description/stats-2"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="number" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock/description/stats-2/ap"]
+custom_minimum_size = Vector2(28, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme = ExtResource("28_iy05a")
+theme_override_colors/font_color = Color(0.627451, 0.627451, 0.627451, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 12
+text = "2"
+horizontal_alignment = 1
+
+[node name="add" type="MarginContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock/description/stats-2/ap"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="icon" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock/description/stats-2/ap/add"]
+layout_mode = 2
+theme = ExtResource("28_iy05a")
+theme_override_fonts/font = ExtResource("4_42m6k")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ok865")
+text = "🛡"
+
+[node name="number" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock/description/stats-2/ap/add"]
+visible = false
+layout_mode = 2
+theme = ExtResource("28_iy05a")
+theme_override_colors/font_color = Color(0.99558, 0.99558, 0.99558, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 7
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxEmpty_8qkor")
+text = "1"
+
+[node name="power" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock/description/stats-2"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="number" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock/description/stats-2/power"]
+custom_minimum_size = Vector2(28, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme = ExtResource("28_iy05a")
+theme_override_colors/font_color = Color(0.627451, 0.627451, 0.627451, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 12
+text = "4"
+horizontal_alignment = 1
+
+[node name="add" type="MarginContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock/description/stats-2/power"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="icon" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock/description/stats-2/power/add"]
+layout_mode = 2
+theme = ExtResource("28_iy05a")
+theme_override_fonts/font = ExtResource("4_42m6k")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ok865")
+text = "🫧"
+
+[node name="number" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock/description/stats-2/power/add"]
+visible = false
+layout_mode = 2
+theme = ExtResource("28_iy05a")
+theme_override_colors/font_color = Color(0.99558, 0.99558, 0.99558, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 7
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxEmpty_8qkor")
+text = "2"
+
+[node name="stats" type="MarginContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock"]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 10
+
+[node name="hexagon" type="Control" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock/stats"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("28_ok865")
+
+[node name="level" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock/stats/hexagon"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -4.0
+offset_top = -10.0
+offset_right = 4.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("28_iy05a")
+theme_override_colors/font_color = Color(0.99558, 0.99558, 0.99558, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 7
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxEmpty_eq6yd")
+text = "5"
+
+[node name="icons" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock/stats"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/separation = 17
+
+[node name="aura" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock/stats/icons"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/separation = 10
+
+[node name="power" type="MarginContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock/stats/icons/aura"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_constants/margin_left = 1
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="icon" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock/stats/icons/aura/power"]
+layout_mode = 2
+theme = ExtResource("28_iy05a")
+theme_override_fonts/font = ExtResource("4_42m6k")
+theme_override_font_sizes/font_size = 10
+text = "⚔️"
+
+[node name="health" type="MarginContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock/stats/icons/aura"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = -4
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="icon" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock/stats/icons/aura/health"]
+layout_mode = 2
+theme = ExtResource("28_iy05a")
+theme_override_fonts/font = ExtResource("4_42m6k")
+theme_override_font_sizes/font_size = 10
+text = "🩸"
+
+[node name="vitality" type="MarginContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock/stats/icons/aura"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="icon" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock/stats/icons/aura/vitality"]
+layout_mode = 2
+theme = ExtResource("28_iy05a")
+theme_override_fonts/font = ExtResource("4_42m6k")
+theme_override_font_sizes/font_size = 10
+text = "🛡"
+
+[node name="resource" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock/stats/icons"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 10
+
+[node name="influence" type="MarginContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock/stats/icons/resource"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_constants/margin_left = 1
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 10
+
+[node name="icon" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock/stats/icons/resource/influence"]
+layout_mode = 2
+theme = ExtResource("28_iy05a")
+theme_override_fonts/font = ExtResource("4_42m6k")
+theme_override_font_sizes/font_size = 10
+text = "🔥"
+
+[node name="ability" type="MarginContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock/stats/icons/resource"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = -2
+
+[node name="icon" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock/stats/icons/resource/ability"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme = ExtResource("28_iy05a")
+theme_override_fonts/font = ExtResource("4_42m6k")
+theme_override_font_sizes/font_size = 10
+text = "💧"
+
+[node name="reaction" type="MarginContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock/stats/icons/resource"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 9
+
+[node name="icon" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock/stats/icons/resource/reaction"]
+layout_mode = 2
+theme = ExtResource("28_iy05a")
+theme_override_fonts/font = ExtResource("4_42m6k")
+theme_override_font_sizes/font_size = 10
+text = "🫧"
+
+[node name="current" type="MarginContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock/stats"]
+layout_mode = 2
+theme = SubResource("Theme_eq6yd")
+theme_override_constants/margin_left = -35
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = -35
+theme_override_constants/margin_bottom = 0
+
+[node name="next" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock/stats/current"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="offence" type="MarginContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock/stats/current/next"]
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = -8
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="stats" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock/stats/current/next/offence"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 0
+
+[node name="power" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock/stats/current/next/offence/stats"]
+custom_minimum_size = Vector2(28, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("30_eq6yd")
+theme_override_font_sizes/font_size = 10
+text = "5"
+horizontal_alignment = 1
+
+[node name="hp" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock/stats/current/next/offence/stats"]
+custom_minimum_size = Vector2(28, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("30_eq6yd")
+theme_override_font_sizes/font_size = 10
+text = "10"
+horizontal_alignment = 1
+
+[node name="defence" type="MarginContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock/stats/current/next"]
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = -8
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="stats" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock/stats/current/next/defence"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 50
+
+[node name="influence" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock/stats/current/next/defence/stats"]
+custom_minimum_size = Vector2(28, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("30_eq6yd")
+theme_override_font_sizes/font_size = 10
+text = "5"
+horizontal_alignment = 1
+
+[node name="vitality" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock/stats/current/next/defence/stats"]
+custom_minimum_size = Vector2(28, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("30_eq6yd")
+theme_override_font_sizes/font_size = 10
+text = "2"
+horizontal_alignment = 1
+
+[node name="resource" type="MarginContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock/stats/current/next"]
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = -8
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="stats" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock/stats/current/next/resource"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 0
+
+[node name="ap" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock/stats/current/next/resource/stats"]
+custom_minimum_size = Vector2(28, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("30_eq6yd")
+theme_override_font_sizes/font_size = 10
+text = "9"
+horizontal_alignment = 1
+
+[node name="reaction" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock/stats/current/next/resource/stats"]
+custom_minimum_size = Vector2(28, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("30_eq6yd")
+theme_override_font_sizes/font_size = 10
+text = "4"
+horizontal_alignment = 1
+
+[node name="add" type="MarginContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock/stats"]
+layout_mode = 2
+theme = SubResource("Theme_8qkor")
+theme_override_constants/margin_left = -35
+theme_override_constants/margin_top = -7
+theme_override_constants/margin_right = -35
+theme_override_constants/margin_bottom = -7
+
+[node name="next" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock/stats/add"]
+layout_mode = 2
+theme_override_constants/separation = 43
+
+[node name="offence" type="MarginContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock/stats/add/next"]
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = -8
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="stats" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock/stats/add/next/offence"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 26
+
+[node name="power" type="MarginContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock/stats/add/next/offence/stats"]
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 13
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="stat" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock/stats/add/next/offence/stats/power"]
+custom_minimum_size = Vector2(6, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("30_eq6yd")
+theme_override_font_sizes/font_size = 10
+text = "1"
+horizontal_alignment = 1
+
+[node name="hp" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock/stats/add/next/offence/stats"]
+custom_minimum_size = Vector2(6, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("30_eq6yd")
+theme_override_font_sizes/font_size = 10
+text = "2"
+horizontal_alignment = 1
+
+[node name="vitality" type="MarginContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock/stats/add/next/offence/stats"]
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 13
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="stat" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock/stats/add/next/offence/stats/vitality"]
+custom_minimum_size = Vector2(6, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("30_eq6yd")
+theme_override_font_sizes/font_size = 10
+text = "1"
+horizontal_alignment = 1
+
+[node name="offence2" type="MarginContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock/stats/add/next"]
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = -5
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="stats" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock/stats/add/next/offence2"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_constants/separation = 26
+
+[node name="power" type="MarginContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock/stats/add/next/offence2/stats"]
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 12
+
+[node name="stat" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock/stats/add/next/offence2/stats/power"]
+custom_minimum_size = Vector2(6, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("30_eq6yd")
+theme_override_font_sizes/font_size = 10
+text = "2"
+horizontal_alignment = 1
+
+[node name="hp" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock/stats/add/next/offence2/stats"]
+custom_minimum_size = Vector2(6, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("30_eq6yd")
+theme_override_font_sizes/font_size = 10
+text = "1"
+horizontal_alignment = 1
+
+[node name="vitality" type="MarginContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock/stats/add/next/offence2/stats"]
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 12
+
+[node name="stat" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock/stats/add/next/offence2/stats/vitality"]
+custom_minimum_size = Vector2(6, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("30_eq6yd")
+theme_override_font_sizes/font_size = 10
+text = "2"
+horizontal_alignment = 1
+
+[node name="hero" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock"]
+layout_mode = 2
+theme_override_constants/separation = 3
+
+[node name="caption" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock/hero"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0.393086, 0.393086, 0.393085, 1)
+theme_override_fonts/font = ExtResource("23_rw2ti")
+theme_override_font_sizes/font_size = 12
+text = "Рок"
+
+[node name="next" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock/hero"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 3
+
+[node name="arrow" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock/hero/next"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
 theme_override_colors/font_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
 theme_override_fonts/font = ExtResource("23_rw2ti")
 theme_override_font_sizes/font_size = 12
 theme_override_styles/normal = SubResource("StyleBoxEmpty_pau43")
 text = "→"
 
-[node name="priority" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/level/hero/next"]
+[node name="priority" type="Label" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero/rock/hero/next"]
 layout_mode = 2
 size_flags_horizontal = 0
+size_flags_vertical = 8
 theme_override_colors/font_color = Color(0.393086, 0.393086, 0.393085, 1)
 theme_override_fonts/font = ExtResource("23_rw2ti")
 theme_override_font_sizes/font_size = 12
