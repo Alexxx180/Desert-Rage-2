@@ -11,7 +11,13 @@ func _ready() -> void:
 	center = custom_minimum_size / 2
 
 func _draw() -> void: # draw_polyline()
-	draw_colored_polygon(get_hex(), Color.RED)
+	var pts: PackedVector2Array = get_hex()
+	draw_colored_polygon(pts, Color8(28, 28, 53, 200))
+	print("PTS: ", pts)
+	#for i in range(1, len(pts), 2):
+		#draw_line(pts[i], pts[i], Color.BLUE, 3)
+	#for pt in pts:
+		#draw_polyline()
 """
 var pts: PackedVector2Array = [
 		Vector2(0, 0), Vector2(10, 0),
