@@ -19,7 +19,7 @@ extends HBoxContainer
 @onready var count: Label = main.get_node("space/margin/count")
 var fill: StyleBoxFlat = StyleBoxFlat.new()
 
-func new_level_up(_priority: int, _level: int) -> void:
+func new_level_up(_level: Node, _stats: Dictionary) -> void:
 	level_up.modulate.a8 = 255
 	create_tween().tween_property(level_up, "modulate", Color.TRANSPARENT, 2).set_delay(2)
 
@@ -36,7 +36,7 @@ func set_xp_score(group_xp: Node) -> void:
 			count.hide()
 			combo.margin.hide())
 		group_xp.update_exp.connect(timer.start)
-	group_xp.update_level.connect(new_level_up)
+	group_xp.update_priorities.connect(new_level_up)
 	group_xp.update_exp.connect(
 		func(value: Vector2i, base_xp: int):
 			count.text = str(base_xp + value.x)

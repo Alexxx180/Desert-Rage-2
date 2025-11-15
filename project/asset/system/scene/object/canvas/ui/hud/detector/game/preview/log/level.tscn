@@ -1,0 +1,496 @@
+[gd_scene load_steps=22 format=3 uid="uid://c22q3l40mqshp"]
+
+[ext_resource type="Script" uid="uid://463bb1vmgnq6" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/controls/preview/chat/log/level/next/caption.gd" id="1_jcvca"]
+[ext_resource type="FontFile" uid="uid://c4ygkmnbt1j7y" path="res://asset/resource/media/data/font/LTSuperiorSerif-Semibold.otf" id="1_yp2k8"]
+[ext_resource type="Script" uid="uid://celfkwhkvwnw" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/controls/preview/chat/log/level/next/priority.gd" id="2_jcvca"]
+[ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://asset/resource/ui/theme/patterns/template/menu/settings/topic/footer.tres" id="3_kahng"]
+[ext_resource type="FontFile" uid="uid://b37js8y80ak1k" path="res://asset/resource/media/data/font/NotoColorEmoji-Regular.ttf" id="4_63ck7"]
+[ext_resource type="Script" uid="uid://bafydvdypn3ha" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/controls/preview/chat/log/level/next/stats/stats.gd" id="4_kahng"]
+[ext_resource type="Script" uid="uid://d0n5gv6fy4tsa" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/controls/preview/chat/log/hexagon.gd" id="5_ja1as"]
+[ext_resource type="Script" uid="uid://uaubflb2lxud" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/controls/preview/chat/log/level/next/stats/add/icon.gd" id="8_1hfkb"]
+[ext_resource type="FontFile" uid="uid://dqpftcx1b6r8j" path="res://asset/resource/media/data/font/LTStopwatch-Regular.ttf" id="8_nommo"]
+[ext_resource type="Script" uid="uid://do1fvsnw24i83" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/controls/preview/chat/log/level/next/hero.gd" id="9_63ck7"]
+[ext_resource type="Script" uid="uid://c5snooq8lhtl8" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/controls/preview/chat/log/level/next/stats/current/stats.gd" id="9_rsnoo"]
+[ext_resource type="Script" uid="uid://x8147mhmlvk1" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/controls/preview/chat/log/level/next/stats/add/stat.gd" id="11_tphyy"]
+[ext_resource type="Script" uid="uid://cmr5ir57vggfl" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/controls/preview/chat/log/level/next/stats/current/stat.gd" id="12_tphyy"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_eq6yd"]
+content_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fah5h"]
+content_margin_left = 3.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vj755"]
+content_margin_left = 3.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3g0un"]
+content_margin_left = 4.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ih64s"]
+content_margin_left = 4.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_o3wlr"]
+content_margin_left = 5.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nommo"]
+content_margin_left = 4.0
+
+[sub_resource type="Theme" id="Theme_8qkor"]
+Label/colors/font_color = Color(0.903598, 0.903598, 0.903598, 1)
+
+[node name="ray" type="VBoxContainer"]
+size_flags_horizontal = 6
+theme_override_constants/separation = 0
+script = ExtResource("1_jcvca")
+
+[node name="caption" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 3
+script = ExtResource("2_jcvca")
+
+[node name="line" type="HSeparator" parent="caption"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="priority" type="Label" parent="caption"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(0.393086, 0.393086, 0.393085, 1)
+theme_override_fonts/font = ExtResource("1_yp2k8")
+theme_override_font_sizes/font_size = 12
+text = "Выдержка"
+
+[node name="arrow" type="Label" parent="caption"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0.501961, 0.501961, 0.501961, 1)
+theme_override_fonts/font = ExtResource("1_yp2k8")
+theme_override_font_sizes/font_size = 12
+text = "→"
+
+[node name="level" type="Label" parent="caption"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(0.393086, 0.393086, 0.393085, 1)
+theme_override_fonts/font = ExtResource("1_yp2k8")
+theme_override_font_sizes/font_size = 12
+text = "7"
+
+[node name="stats" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(90, 145)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 7
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 3
+script = ExtResource("4_kahng")
+
+[node name="hexagon" type="Control" parent="stats"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("5_ja1as")
+
+[node name="level" type="Label" parent="stats/hexagon"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -4.0
+offset_top = -10.0
+offset_right = 4.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_kahng")
+theme_override_colors/font_color = Color(0.99558, 0.99558, 0.99558, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 7
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxEmpty_eq6yd")
+text = "7"
+
+[node name="add" type="MarginContainer" parent="stats"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 15
+script = ExtResource("9_rsnoo")
+
+[node name="stats" type="HBoxContainer" parent="stats/add"]
+layout_mode = 2
+theme_override_constants/separation = 17
+
+[node name="offence" type="VBoxContainer" parent="stats/add/stats"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 20
+script = ExtResource("11_tphyy")
+add = Array[String](["power", "influence"])
+
+[node name="power" type="Label" parent="stats/add/stats/offence"]
+layout_mode = 2
+size_flags_vertical = 10
+theme = ExtResource("3_kahng")
+theme_override_fonts/font = ExtResource("4_63ck7")
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxEmpty_fah5h")
+text = "⚔️"
+script = ExtResource("8_1hfkb")
+
+[node name="value" type="Label" parent="stats/add/stats/offence/power"]
+custom_minimum_size = Vector2(6, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -3.0
+offset_top = -7.0
+offset_right = 3.0
+offset_bottom = 7.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 10
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 7
+theme_override_fonts/font = ExtResource("8_nommo")
+theme_override_font_sizes/font_size = 14
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="influence" type="Label" parent="stats/add/stats/offence"]
+layout_mode = 2
+size_flags_vertical = 2
+theme = ExtResource("3_kahng")
+theme_override_fonts/font = ExtResource("4_63ck7")
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxEmpty_vj755")
+text = "🔥"
+script = ExtResource("8_1hfkb")
+
+[node name="value" type="Label" parent="stats/add/stats/offence/influence"]
+custom_minimum_size = Vector2(6, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -3.0
+offset_top = -7.0
+offset_right = 3.0
+offset_bottom = 7.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 10
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 7
+theme_override_fonts/font = ExtResource("8_nommo")
+theme_override_font_sizes/font_size = 14
+text = "2"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="points" type="VBoxContainer" parent="stats/add/stats"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+script = ExtResource("11_tphyy")
+add = Array[String](["health", "ability"])
+
+[node name="health" type="Label" parent="stats/add/stats/points"]
+layout_mode = 2
+size_flags_vertical = 2
+theme_override_fonts/font = ExtResource("4_63ck7")
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxEmpty_3g0un")
+text = "🩸"
+script = ExtResource("8_1hfkb")
+
+[node name="value" type="Label" parent="stats/add/stats/points/health"]
+custom_minimum_size = Vector2(6, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -3.0
+offset_top = -7.0
+offset_right = 3.0
+offset_bottom = 7.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 10
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 7
+theme_override_fonts/font = ExtResource("8_nommo")
+theme_override_font_sizes/font_size = 14
+text = "2"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ability" type="Label" parent="stats/add/stats/points"]
+self_modulate = Color(0, 0.337255, 0.929412, 1)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 10
+theme = ExtResource("3_kahng")
+theme_override_fonts/font = ExtResource("4_63ck7")
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ih64s")
+text = "🩸"
+script = ExtResource("8_1hfkb")
+
+[node name="value" type="Label" parent="stats/add/stats/points/ability"]
+custom_minimum_size = Vector2(6, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -3.0
+offset_top = -7.0
+offset_right = 3.0
+offset_bottom = 7.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 10
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 7
+theme_override_fonts/font = ExtResource("8_nommo")
+theme_override_font_sizes/font_size = 14
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="defence" type="VBoxContainer" parent="stats/add/stats"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 20
+script = ExtResource("11_tphyy")
+add = Array[String](["vitality", "reaction"])
+
+[node name="vitality" type="Label" parent="stats/add/stats/defence"]
+layout_mode = 2
+size_flags_vertical = 10
+theme = ExtResource("3_kahng")
+theme_override_fonts/font = ExtResource("4_63ck7")
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxEmpty_o3wlr")
+text = "🛡"
+script = ExtResource("8_1hfkb")
+
+[node name="value" type="Label" parent="stats/add/stats/defence/vitality"]
+custom_minimum_size = Vector2(6, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -3.0
+offset_top = -7.0
+offset_right = 3.0
+offset_bottom = 7.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 10
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 7
+theme_override_fonts/font = ExtResource("8_nommo")
+theme_override_font_sizes/font_size = 14
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="reaction" type="Label" parent="stats/add/stats/defence"]
+layout_mode = 2
+size_flags_vertical = 2
+theme = ExtResource("3_kahng")
+theme_override_fonts/font = ExtResource("4_63ck7")
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxEmpty_nommo")
+text = "🫧"
+script = ExtResource("8_1hfkb")
+
+[node name="value" type="Label" parent="stats/add/stats/defence/reaction"]
+custom_minimum_size = Vector2(6, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -3.0
+offset_top = -7.0
+offset_right = 3.0
+offset_bottom = 7.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 10
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 7
+theme_override_fonts/font = ExtResource("8_nommo")
+theme_override_font_sizes/font_size = 14
+text = "2"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="next" type="MarginContainer" parent="stats"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+theme = SubResource("Theme_8qkor")
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+script = ExtResource("9_rsnoo")
+
+[node name="stats" type="HBoxContainer" parent="stats/next"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="offence" type="VBoxContainer" parent="stats/next/stats"]
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_constants/separation = 55
+script = ExtResource("12_tphyy")
+keys = Array[String](["power", "influence"])
+
+[node name="power" type="Label" parent="stats/next/stats/offence"]
+custom_minimum_size = Vector2(6, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 10
+theme_override_colors/font_color = Color(0.380392, 0.380392, 0.380392, 1)
+theme_override_fonts/font = ExtResource("8_nommo")
+theme_override_font_sizes/font_size = 14
+text = "5"
+horizontal_alignment = 2
+
+[node name="influence" type="Label" parent="stats/next/stats/offence"]
+custom_minimum_size = Vector2(6, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 2
+theme_override_colors/font_color = Color(0.380392, 0.380392, 0.380392, 1)
+theme_override_fonts/font = ExtResource("8_nommo")
+theme_override_font_sizes/font_size = 14
+text = "1"
+horizontal_alignment = 1
+
+[node name="points" type="VBoxContainer" parent="stats/next/stats"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+script = ExtResource("12_tphyy")
+keys = Array[String](["health", "ability"])
+
+[node name="health" type="Label" parent="stats/next/stats/points"]
+custom_minimum_size = Vector2(6, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.380392, 0.380392, 0.380392, 1)
+theme_override_fonts/font = ExtResource("8_nommo")
+theme_override_font_sizes/font_size = 14
+text = "11"
+horizontal_alignment = 1
+
+[node name="ability" type="Label" parent="stats/next/stats/points"]
+custom_minimum_size = Vector2(6, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0.380392, 0.380392, 0.380392, 1)
+theme_override_fonts/font = ExtResource("8_nommo")
+theme_override_font_sizes/font_size = 14
+text = "10"
+horizontal_alignment = 1
+
+[node name="defence" type="VBoxContainer" parent="stats/next/stats"]
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_constants/separation = 55
+script = ExtResource("12_tphyy")
+keys = Array[String](["vitality", "reaction"])
+
+[node name="vitality" type="Label" parent="stats/next/stats/defence"]
+custom_minimum_size = Vector2(6, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 10
+theme_override_colors/font_color = Color(0.380392, 0.380392, 0.380392, 1)
+theme_override_fonts/font = ExtResource("8_nommo")
+theme_override_font_sizes/font_size = 14
+text = "3"
+
+[node name="reaction" type="Label" parent="stats/next/stats/defence"]
+custom_minimum_size = Vector2(6, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 2
+theme_override_colors/font_color = Color(0.380392, 0.380392, 0.380392, 1)
+theme_override_fonts/font = ExtResource("8_nommo")
+theme_override_font_sizes/font_size = 14
+text = "6"
+
+[node name="hero" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 3
+script = ExtResource("9_63ck7")
+
+[node name="caption" type="Label" parent="hero"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0.393086, 0.393086, 0.393085, 1)
+theme_override_fonts/font = ExtResource("1_yp2k8")
+theme_override_font_sizes/font_size = 12
+text = "Рей"
+
+[node name="next" type="HBoxContainer" parent="hero"]
+layout_mode = 2
+theme_override_constants/separation = 3
+
+[node name="arrow" type="Label" parent="hero/next"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0.501961, 0.501961, 0.501961, 1)
+theme_override_fonts/font = ExtResource("1_yp2k8")
+theme_override_font_sizes/font_size = 12
+text = "→"
+
+[node name="priority" type="Label" parent="hero/next"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0.393086, 0.393086, 0.393085, 1)
+theme_override_fonts/font = ExtResource("1_yp2k8")
+theme_override_font_sizes/font_size = 12
+text = "Стойкость"

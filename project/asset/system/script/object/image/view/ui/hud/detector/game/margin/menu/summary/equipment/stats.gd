@@ -3,8 +3,9 @@ extends VBoxContainer
 @onready var heroes: Array[VBoxContainer] = [$heroes/ray, $heroes/rock]
 @onready var description: VBoxContainer = $description
 
-func set_stats(stats: Dictionary) -> void:
-	heroes[0].set_stats(stats.ray)
+func set_stats(_level: Node, stats: Dictionary) -> void:
+	heroes[0].set_stats(stats.stats.ray)
+	# var summary: Dictionary = level.summary
 
 func connect_description(opened: Button, caption: Label) -> void:
 	opened.focus_entered.connect(func(): caption.show())

@@ -21,7 +21,7 @@ func tick(mark: Tick, act: BehaviorAction) -> int:
 	return FAILED
 
 func x1(mark: Tick) -> SkillBasis:
-	mark.blackboard.get_value("group").xp.multiply.hit()
+	mark.blackboard.get_value("group").xp.level.multiply.hit()
 	return self
 
 func notify(mark: Tick, caption: String) -> void:

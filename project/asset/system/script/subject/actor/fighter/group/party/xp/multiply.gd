@@ -9,10 +9,8 @@ const BASE: int = 1.0
 
 @onready var delay: Timer = $delay
 
-var drop: Dictionary = {
-	Skills.DOUBLE: 0.05, Skills.TRIPLE: 0.1, Skills.FOURTH: 0.2 }
-var multiplier: Dictionary = {
-	Skills.DOUBLE: 1.25, Skills.TRIPLE: 1.5, Skills.FOURTH: 2 }
+var drop: Dictionary = Skills.drop
+var multiplier: Dictionary = Skills.multiplier
 var last: Vector2 = Vector2.ONE
 var duration: float = MAX
 

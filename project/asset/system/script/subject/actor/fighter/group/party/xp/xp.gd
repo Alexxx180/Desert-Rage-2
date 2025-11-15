@@ -1,89 +1,24 @@
 extends Node
 
-class_name PlayerXP
-
-signal update_level(priority: int, level: int)
 signal update_exp(value: Vector2i, base: int)
-signal update_priorities(summary: Dictionary)
-
-enum { PRIORITY = 3, MAX_LV = 7, BASE_NEXT = 10 }
-
-const MULTIPLIER: float = 1.2
+signal update_priorities(level: Node, stats: Dictionary)
 
 @onready var stats: Node = $stats
-@onready var multiply: Timer = $multiply
+@onready var level: Node = $level
 
-var next: int
-var base_xp: int = 0
-var summary: Dictionary
-
-func sync_points(hero: String, kind: String, value: int) -> void:
-	summary.hero[hero].points[kind] = value
-
-func level_up(hero: String) -> void:
-	var i: Dictionary = summary.hero[hero]
-	var maxed: int = 0
-	i.of[i.at] += 1
-	update_level.emit(i.at, i.of[i.at])
-	while i.of[i.at] >= MAX_LV and maxed < PRIORITY:
-		maxed += 1
-		i.at = (i.at + 1) % PRIORITY
-	_prevent_new_levels(maxed)
-
-func _prevent_new_levels(maxed: int) -> void:
-	if maxed == PRIORITY: next = 0
-
-func _circle_level_up() -> void:
-	while summary.xp >= next:
-		summary.xp -= next
-		for hero in summary.hero: level_up(hero)
-		next_level()
-
-func sync() -> void:
-	sync_exp()
-	sync_stats()
-	sync_priorities()
-
-func sync_priorities() -> void:
-	update_priorities.emit(summary)
+func experience() -> void: update_exp.emit(level.get_exp(), level.priority.base_xp)
 
 func sync_stats() -> void:
-	stats.calculate(summary.hero)
+	var prior: Dictionary = { "summary": level.summary, "prev": level.prev }
+	update_priorities.emit(level, {
+		"stats": stats.calculate(level.summary.hero),
+		"prev": stats.calculate(level.prev.hero) })
 
-func sync_exp() -> void:
-	update_exp.emit(Vector2i(summary.xp, next), base_xp)
+func sync() -> void:
+	sync_stats()
+	experience()
 
-func add_exp(amount: int) -> void:
-	# print("XP: ", amount, " x %.2f" % multiply.last.y, " = ", roundi(amount * multiply.last.y))
-	summary.xp += roundi(amount * multiply.last.y) # amount
-	if next != 0 and summary.xp >= next:
-		_circle_level_up()
-		sync_priorities()
+func add_exp(amount: int) -> void: # print("XP: ", amount, " x %.f" % multiply.last.y, " = ", roundi(amount * multiply.last.y))
+	if level.circle_level_up(amount):
 		sync_stats()
-	sync_exp()
-
-func next_level() -> void:
-	base_xp += next
-	next *= MULTIPLIER
-
-func _remember_priority_as_max(i: int) -> bool:
-	var priority: int = summary.hero.ray.of[i]
-	for j in range(0, priority): next_level()
-	return priority == MAX_LV
-
-func _remember_progress() -> void:
-	base_xp = 0
-	next = BASE_NEXT
-	var maxed: int = 0
-	for i in range(0, PRIORITY):
-		if _remember_priority_as_max(i): maxed += 1
-	_prevent_new_levels(maxed)
-
-func _ready() -> void:
-	summary = {
-		"xp": 0, "hero": {
-			"ray": { "at": 0, "of": [0, 0, 0], "stat": { "h": 9, "a": 11, "buff": [] }, },
-			"rock": { "at": 0, "of": [0, 0, 0], "stat": { "h": 11, "a": 9, "buff": [] } },
-		}
-	}
-	_remember_progress()
+	experience()
