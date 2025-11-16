@@ -21,7 +21,7 @@ func circle_level_up(amount: int) -> bool:
 	summary.xp += roundi(amount * multiply.last.y) # amount
 	if priority.collecting(summary): return false
 	
-	prev = summary.duplicate()
+	prev = summary.duplicate(true)
 	while summary.xp >= priority.next:
 		summary.xp -= priority.next
 		level_up_heroes()

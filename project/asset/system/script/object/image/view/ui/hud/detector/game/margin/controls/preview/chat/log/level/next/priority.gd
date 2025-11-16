@@ -1,10 +1,10 @@
-extends HBoxContainer
+extends VBoxContainer
 
-@onready var priority: Label = $priority
+@onready var caption: Label = $caption
 @onready var level: Label = $level
 
-var priorities: Array[String] = ["Стремление", "Выдержка", "Стойкость"]
+var names: Array[String] = ["Стремление", "Выдержка", "Стойкость"]
 
-func set_priority(no: int, at: int) -> void:
-	priority.text = priorities[no]
-	level.text = str(at)
+func set_priority(at: int, lv: int) -> void:
+	caption.text = names[at]
+	level.text = str(lv)

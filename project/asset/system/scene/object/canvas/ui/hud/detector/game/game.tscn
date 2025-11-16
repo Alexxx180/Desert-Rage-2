@@ -1,4 +1,4 @@
-[gd_scene load_steps=90 format=3 uid="uid://cel3u88abrgv3"]
+[gd_scene load_steps=91 format=3 uid="uid://cel3u88abrgv3"]
 
 [ext_resource type="Theme" uid="uid://p2br8b6ea3n6" path="res://asset/resource/ui/theme/patterns/template/menu/hud/pause/pause.tres" id="1_klae1"]
 [ext_resource type="Script" uid="uid://81xdi4771u0a" path="res://asset/system/script/object/image/view/ui/hud/detector/game/game.gd" id="1_o71r6"]
@@ -30,10 +30,11 @@
 [ext_resource type="StyleBox" uid="uid://vtasw48vidxj" path="res://asset/resource/ui/theme/style/noto-color/noto-color-left.tres" id="20_6gnce"]
 [ext_resource type="Script" uid="uid://hb6avc0h2sag" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/controls/preview/hints.gd" id="21_fuh2f"]
 [ext_resource type="Texture2D" uid="uid://bt7rgtk8dl35x" path="res://asset/resource/media/image/actors/npc/dialog/ray.png" id="22_rw2ti"]
+[ext_resource type="Script" uid="uid://drcochfogfne4" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/controls/preview/scroll/scroll.gd" id="23_ok865"]
 [ext_resource type="FontFile" uid="uid://c4ygkmnbt1j7y" path="res://asset/resource/media/data/font/LTSuperiorSerif-Semibold.otf" id="23_rw2ti"]
 [ext_resource type="PackedScene" uid="uid://c7v6nlcj2ohx7" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/preview/log/chat.tscn" id="24_iy05a"]
 [ext_resource type="FontFile" uid="uid://byixp8w8hrpot" path="res://asset/resource/media/data/font/ComicHelvetic_Light.otf" id="24_tysmj"]
-[ext_resource type="PackedScene" uid="uid://c22q3l40mqshp" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/preview/log/level.tscn" id="28_iy05a"]
+[ext_resource type="Script" uid="uid://basexjwfooy37" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/controls/preview/chat/log/log.gd" id="27_ok865"]
 [ext_resource type="FontFile" uid="uid://tledodlx6okb" path="res://asset/resource/media/data/font/LTSuperiorMono-Semibold.otf" id="28_ql3o6"]
 [ext_resource type="FontFile" uid="uid://cwksbiskkcf5d" path="res://asset/resource/media/data/font/NotoSansMath-Regular.ttf" id="29_ok865"]
 [ext_resource type="PackedScene" uid="uid://b10usb1wa67d2" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/preview/books/book.tscn" id="31_rw2ti"]
@@ -362,7 +363,7 @@ controls = ExtResource("10_u412m")
 axis = 1
 reserve = Array[float]([-37.0, -74.0])
 node_paths = Array[Array]([["../ability/controls/markers/margin/score/stack/ray", "../ability/controls/markers/item_1", "../ability/controls/markers/item_2", "../ability/controls/markers/item_3", "../ability/controls/markers/item_4", "../ability/controls/markers/item_5", "../ability/controls/markers/item_6", "../ability/controls/markers/item_7", "../ability/controls/markers/item_8", "../ability/controls/markers/item_9", "../ability/controls/markers/item_0"], ["../topic/scroll/margin/stack/flow/ray_selection/short", "../ability/controls/markers/margin/score/stack/rock"]])
-focus_paths = Array[String](["../topic/scroll/margin/stack/flow/ray/slot_0", "../ability/controls/markers/margin/score/stack/ray/health/hero"])
+focus_paths = Array[String](["../topic/scroll/margin/stack/flow/ray/slot_0", "../ability/controls/markers/margin/score/stack/ray/health/status/hero"])
 
 [node name="topic" parent="menu/stats/inventory" instance=ExtResource("11_1y8ov")]
 layout_mode = 2
@@ -1087,7 +1088,7 @@ theme = ExtResource("19_aco5m")
 theme_override_font_sizes/font_size = 14
 text = "123"
 
-[node name="margin" type="MarginContainer" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/health"]
+[node name="status" type="MarginContainer" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/health"]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/margin_left = 2
@@ -1095,12 +1096,12 @@ theme_override_constants/margin_top = -1
 theme_override_constants/margin_right = 2
 theme_override_constants/margin_bottom = 0
 
-[node name="texture" type="TextureRect" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/health/margin"]
+[node name="back" type="TextureRect" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/health/status"]
 visible = false
 layout_mode = 2
 texture = SubResource("GradientTexture2D_pau43")
 
-[node name="margin" type="MarginContainer" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/health/margin"]
+[node name="margin" type="MarginContainer" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/health/status"]
 visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 4
@@ -1108,11 +1109,11 @@ theme_override_constants/margin_top = 3
 theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 0
 
-[node name="hp" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/health/margin/margin"]
+[node name="hp" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/health/status/margin"]
 layout_mode = 2
 theme_override_constants/separation = -3
 
-[node name="health" type="Label" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/health/margin/margin/hp"]
+[node name="health" type="Label" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/health/status/margin/hp"]
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
@@ -1120,7 +1121,7 @@ theme_override_fonts/font = ExtResource("28_ql3o6")
 theme_override_font_sizes/font_size = 16
 text = "100"
 
-[node name="damage" type="Label" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/health/margin/margin/hp"]
+[node name="damage" type="Label" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/health/status/margin/hp"]
 layout_mode = 2
 size_flags_horizontal = 8
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -1129,13 +1130,13 @@ theme_override_fonts/font = ExtResource("28_ql3o6")
 theme_override_font_sizes/font_size = 16
 text = "-10"
 
-[node name="hero" type="Button" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/health/margin"]
+[node name="hero" type="Button" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/health/status"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("28_ql3o6")
 theme_override_styles/normal = SubResource("StyleBoxFlat_kdjwi")
 text = "Рок"
 
-[node name="hooder" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/health/margin/hero" instance=ExtResource("43_xe00t")]
+[node name="hooder" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/health/status/hero" instance=ExtResource("43_xe00t")]
 
 [node name="ailments" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock"]
 layout_mode = 2
@@ -1637,11 +1638,25 @@ custom_minimum_size = Vector2(0, 120)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+follow_focus = true
+draw_focus_border = true
+horizontal_scroll_mode = 0
+script = ExtResource("23_ok865")
 
 [node name="list" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 10
+
+[node name="temp" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="chat" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/temp"]
+layout_mode = 2
+
+[node name="log" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/temp"]
+layout_mode = 2
 
 [node name="chat" type="PanelContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list"]
 visible = false
@@ -1792,8 +1807,10 @@ text = "Ну дарова, ребятки, че нового?"
 autowrap_mode = 2
 
 [node name="log" type="PanelContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list"]
+visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_tysmj")
+script = ExtResource("27_ok865")
 
 [node name="margin" type="MarginContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log"]
 layout_mode = 2
@@ -1897,26 +1914,6 @@ theme_override_fonts/font = ExtResource("16_g3c1s")
 theme_override_font_sizes/font_size = 14
 text = "Получено 213 очков опыта"
 autowrap_mode = 2
-
-[node name="content" type="PanelContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat"]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_tya2d")
-
-[node name="margin" type="MarginContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content"]
-layout_mode = 2
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 3
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 3
-
-[node name="hero" type="HFlowContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin"]
-layout_mode = 2
-
-[node name="ray" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero" instance=ExtResource("28_iy05a")]
-layout_mode = 2
-
-[node name="rock" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content/margin/hero" instance=ExtResource("28_iy05a")]
-layout_mode = 2
 
 [node name="stats" type="PanelContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat"]
 visible = false
@@ -2495,7 +2492,6 @@ text = "Рок падает без сознания"
 autowrap_mode = 2
 
 [node name="game-over" type="PanelContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat"]
-visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_tya2d")
 

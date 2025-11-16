@@ -1,0 +1,36 @@
+[gd_scene load_steps=4 format=3 uid="uid://gq66ooocd5ks"]
+
+[ext_resource type="Script" uid="uid://bntx81mccbdm7" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/controls/preview/chat/log/level/heroes.gd" id="1_88hdm"]
+[ext_resource type="PackedScene" uid="uid://c22q3l40mqshp" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/preview/log/levels/level.tscn" id="1_hvjm0"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tya2d"]
+bg_color = Color(0.0352941, 0.0352941, 0.0352941, 1)
+border_width_left = 2
+border_width_right = 2
+border_color = Color(0.119426, 0.119504, 0.22556, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[node name="content" type="PanelContainer"]
+theme_override_styles/panel = SubResource("StyleBoxFlat_tya2d")
+script = ExtResource("1_88hdm")
+
+[node name="margin" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 3
+
+[node name="hero" type="HFlowContainer" parent="margin"]
+layout_mode = 2
+
+[node name="ray" parent="margin/hero" instance=ExtResource("1_hvjm0")]
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="rock" parent="margin/hero" instance=ExtResource("1_hvjm0")]
+layout_mode = 2
+size_flags_horizontal = 6

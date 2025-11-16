@@ -1,6 +1,6 @@
 extends Node
 
-const BASE: Dictionary = { "ray": [1, 2, 0, 2, 5, 5], "rock": [2, 1, 1, 1, 7, 3] }
+const BASE: Dictionary = { "ray": [1, 2, 0, 2, 100, 20], "rock": [2, 1, 1, 1, 100, 20] } # ray, p: 5, 5  rock, p: 7, 3
 
 func make_priorities(priorities: Array, stats: Array) -> void:
 	for i in range(0, len(priorities)):

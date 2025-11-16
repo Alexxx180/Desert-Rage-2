@@ -26,17 +26,14 @@ func show_from_panel() -> void: set_view(false)
 func hides() -> void: if not minimized: super.hide()
 func shows() -> void: if not minimized: super.show()
 
+func set_toggle(no: int, a: PanelContainer, b: PanelContainer) -> void:
+	if opened == no:
+		a.visible = !a.visible
+	else:
+		toggles(b, a)
+		opened = no
+
 func _ready() -> void:
 	tabs.get_node("toggle").pressed.connect(hide_to_panel)
-	tabs.get_node("game").pressed.connect(func():
-		if opened == SECOND:
-			log.visible = !log.visible
-		else:
-			toggles(chat, log)
-			opened = SECOND)
-	tabs.get_node("chat").pressed.connect(func():
-		if opened == FIRST:
-			chat.visible = !chat.visible
-		else:
-			toggles(log, chat)
-			opened = FIRST)
+	tabs.get_node("game").pressed.connect(func(): set_toggle(SECOND, log, chat))
+	tabs.get_node("chat").pressed.connect(func(): set_toggle(FIRST, chat, log))
