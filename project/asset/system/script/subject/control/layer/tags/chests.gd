@@ -25,9 +25,10 @@ func drink_water(inventory: Node, pos: Vector2) -> void:
 func open_chests() -> void:
 	var tile: Dictionary = lay.border.context
 	var id: int = Tile.logic_no(lay.tags.from_coords(tile.coords).context.atlas)
-	var logic: Node = group.leader.to.inventory.logic
+	var hero: CharacterBody2D = group.deploy.party.leader
+	var logic: Node = hero.to.inventory.logic
 	if chest.on_at(tile.atlas):
-		logic.remember_inventory(id)
+		logic.remember_inventory(hero, id)
 	elif chest.off_at(tile.atlas):
 		lay.border.switch(chest.offset.on) # TODO NEED TO ADD CHECK BEFORE CHANGE
 		logic.put_to_inventory(id)

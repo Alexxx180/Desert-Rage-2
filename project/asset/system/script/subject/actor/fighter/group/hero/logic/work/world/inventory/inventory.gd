@@ -9,7 +9,7 @@ class_name HeroInventory
 func _slot() -> Dictionary: return { "id": items.JAR, "x": 0, "with": -1, "up": 0 }
 
 func _ready() -> void:
-	logic.storage = [
-		_slot(), _slot(), _slot(), _slot(), _slot(), _slot(), _slot(), _slot(), _slot(), _slot(),
-		_slot(), _slot(), _slot(), _slot(), _slot(), _slot(), _slot(), _slot(), _slot(), _slot(),
-	]
+	logic.effect.logic = logic
+	logic.effect.items = items
+	logic.storage = []
+	for i in range(0, 20): logic.storage.append(_slot())

@@ -41,9 +41,9 @@ func _set_navigation(group: Node2D, game: Control) -> void:
 		n.hud.suspend_input.connect(group.suspend_input)
 
 func _set_advanced_xp(group: Node2D, game: Control) -> void:
-	var status: HBoxContainer = game.controls.get_node("topic/items/ability/status")
+	var status: HBoxContainer = game.controls.status
 	var fast_access: HBoxContainer = game.ability.get_node("scroll/margin/stack/menu/space/fast_access/status")
-	var logs: PanelContainer = game.controls.get_node("hints/space/preview/chats").log
+	var logs: PanelContainer = game.controls.log
 	#var long: VBoxContainer = game.ability.get_node("scroll/margin/stack/ability/score")
 	
 	# var short: VBoxContainer = game.ability.get_node("scroll/margin/stack/menu/space/fast_access/status/experience/xp")

@@ -2,6 +2,7 @@ extends PanelContainer
 
 @onready var chat: VBoxContainer = $margin/chat
 @onready var levels: PackedScene = preload("res://asset/system/scene/object/canvas/ui/hud/detector/game/preview/log/levels/levels.tscn")
+@onready var items: PackedScene = preload("res://asset/system/scene/object/canvas/ui/hud/detector/game/preview/log/item.tscn")
 @onready var scroll: ScrollContainer = get_node("../..")
 
 func add_childs(stack: VBoxContainer, scene: PackedScene, feedback: Callable) -> PanelContainer:
@@ -22,3 +23,6 @@ func add_log(scene: PackedScene, feedback: Callable) -> void:
 
 func set_priority(level: Node, stats: Dictionary) -> void:
 	add_log(levels, func(node): node.set_priority(level, stats))
+
+func add_item(thing: String) -> void: add_log(items, func(n): n.chest(thing))
+func add_enemy(thing: String) -> void: add_log(items, func(n): n.analyze(thing))

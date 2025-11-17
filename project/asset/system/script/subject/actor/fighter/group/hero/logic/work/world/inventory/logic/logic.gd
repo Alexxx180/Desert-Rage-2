@@ -36,5 +36,7 @@ func fill_the_jar() -> void:
 		var water: int = items.find_item_or_slot(storage, 1)
 		use_the_jar(jar, water, 1)
 
-func remember_inventory(no: int) -> void:
-	pass
+func remember_inventory(hero: CharacterBody2D, no: int) -> void:
+	var item: Item = effect.items.items[no]
+	var game: Control = hero.to.hud.display.detector.game
+	game.controls.log.add_item(item.name)

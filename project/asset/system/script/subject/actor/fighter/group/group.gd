@@ -12,6 +12,7 @@ var navigation: Array
 var deploy: HeroDeploy = HeroDeploy.new()
 
 func _ready() -> void:
+	lay.tags.layer.chests.group = self
 	var party: Array[CharacterBody2D] = [ray, rock]
 	deploy.init(self, party, deployed)
 	if is_overworld: camera.set_overworld()

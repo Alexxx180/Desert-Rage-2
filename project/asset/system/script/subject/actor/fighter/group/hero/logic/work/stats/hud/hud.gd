@@ -4,6 +4,7 @@ extends Node
 
 var _display: CanvasLayer
 var display: CanvasLayer:
+	get: return _display
 	set(value):
 		_display = value
 		slots.markers = value.detector.game.markers
