@@ -6,6 +6,7 @@ var type: int
 var name: String
 var short: String
 var description: String
+var icon: String
 
 func _init(_type: int, _name: String, _short: String, _desc: String) -> void:
 	type = _type

@@ -32,3 +32,4 @@ func open_chests() -> void:
 	elif chest.off_at(tile.atlas):
 		lay.border.switch(chest.offset.on) # TODO NEED TO ADD CHECK BEFORE CHANGE
 		logic.put_to_inventory(id)
+		logic.remember_inventory(hero, id)

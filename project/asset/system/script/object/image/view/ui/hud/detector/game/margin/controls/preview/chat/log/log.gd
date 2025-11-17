@@ -22,7 +22,8 @@ func add_log(scene: PackedScene, feedback: Callable) -> void:
 	scroll.down()
 
 func set_priority(level: Node, stats: Dictionary) -> void:
-	add_log(levels, func(node): node.set_priority(level, stats))
+	if level.summary != level.prev:
+		add_log(levels, func(node): node.set_priority(level, stats))
 
 func add_item(thing: String) -> void: add_log(items, func(n): n.chest(thing))
 func add_enemy(thing: String) -> void: add_log(items, func(n): n.analyze(thing))

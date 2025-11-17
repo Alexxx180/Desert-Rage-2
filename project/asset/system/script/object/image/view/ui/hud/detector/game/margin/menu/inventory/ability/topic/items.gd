@@ -4,3 +4,11 @@ extends HFlowContainer
 @onready var equipment: Array[Button] = [$weapon, $artifact, $armor, $legs, $boots]
 
 @onready var items: Array[Node] = get_children()
+@onready var group: Node2D = get_tree().current_scene.get_node("group") # get_node("/root/group") # get_tree().current_scene.
+
+var inventory: Node:
+	get: return group.deploy.party.leader.to.inventory
+
+#func _ready() -> void:
+#	for i in items:
+#		i.margin.inventory = 

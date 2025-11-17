@@ -8,7 +8,8 @@ func remove_item() -> void:
 
 func put_item(value: String) -> void:
 	if value.contains("/"):
-		image.texture = ImageTexture.create_from_image(Image.load_from_file(image.icon))
+		# image.icon
+		image.texture = ImageTexture.create_from_image(Image.load_from_file(value))
 		image.show()
 	else:
 		icon.text = value
