@@ -13,6 +13,7 @@ func say(message: String, params: Array = []) -> void:
 	chat.text = message % params
 
 func chest(item: String) -> void:
+	print("ADD ITEM = ", item)
 	say(items.pick_random(), [item])
 
 func analyze(enemy: String) -> void:

@@ -22,9 +22,12 @@ func drink_water(inventory: Node, pos: Vector2) -> void:
 	if lay.border.from_pos(pos).context.atlas in FLOW:
 		inventory.logic.effect.restore() # USE WATER
 
+func _get_id(tag: Dictionary) -> int: return Tile.logic_no(tag.atlas) - Tile.FLOOR
+
 func open_chests() -> void:
 	var tile: Dictionary = lay.border.context
-	var id: int = Tile.logic_no(lay.tags.from_coords(tile.coords).context.atlas)
+	var id: int = _get_id(lay.tags.from_coords(tile.coords).context)
+	# print("FOUND ID: ", id)
 	var hero: CharacterBody2D = group.deploy.party.leader
 	var logic: Node = hero.to.inventory.logic
 	if chest.on_at(tile.atlas):

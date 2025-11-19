@@ -1,4 +1,4 @@
-[gd_scene load_steps=87 format=3 uid="uid://cel3u88abrgv3"]
+[gd_scene load_steps=89 format=3 uid="uid://cel3u88abrgv3"]
 
 [ext_resource type="Theme" uid="uid://p2br8b6ea3n6" path="res://asset/resource/ui/theme/patterns/template/menu/hud/pause/pause.tres" id="1_klae1"]
 [ext_resource type="Script" uid="uid://81xdi4771u0a" path="res://asset/system/script/object/image/view/ui/hud/detector/game/game.gd" id="1_o71r6"]
@@ -48,11 +48,11 @@ shadow_color = Color(0, 0, 0, 0)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_o4lum"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uhig6"]
-bg_color = Color(0.452141, 0.532021, 1, 1)
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n0yye"]
 bg_color = Color(1, 1, 0.588235, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uhig6"]
+bg_color = Color(0.452141, 0.532021, 1, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xf68l"]
 bg_color = Color(0.588235, 1, 0.588235, 1)
@@ -183,8 +183,13 @@ corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6gnce"]
-content_margin_left = 8.0
-content_margin_top = 7.0
+content_margin_left = 5.0
+content_margin_bottom = 4.0
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tveuy"]
+content_margin_left = 6.0
+content_margin_bottom = 4.0
 bg_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rw2ti"]
@@ -209,6 +214,10 @@ corner_radius_top_left = 3
 corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pau43"]
+content_margin_left = 5.0
+bg_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eq6yd"]
 content_margin_left = 7.0
@@ -458,37 +467,28 @@ theme_override_constants/margin_bottom = 1
 layout_mode = 2
 theme_override_constants/separation = 2
 
-[node name="aura" type="ProgressBar" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/ray/health/hp/margin/health"]
-layout_mode = 2
-size_flags_vertical = 1
-theme_override_styles/background = SubResource("StyleBoxEmpty_o4lum")
-theme_override_styles/fill = SubResource("StyleBoxFlat_uhig6")
-max_value = 20.0
-step = 1.0
-value = 20.0
-show_percentage = false
-
 [node name="stamina" type="Control" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/ray/health/hp/margin/health"]
 visible = false
-custom_minimum_size = Vector2(1, 1)
+custom_minimum_size = Vector2(1, 2)
 layout_mode = 2
 
 [node name="tick3" type="ColorRect" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/ray/health/hp/margin/health/stamina"]
-custom_minimum_size = Vector2(6, 1)
+custom_minimum_size = Vector2(6, 2)
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -4.0
-offset_top = -0.5
-offset_bottom = 0.5
+offset_left = -6.0
+offset_top = -1.0
+offset_bottom = 1.0
 grow_horizontal = 0
 grow_vertical = 2
 color = Color(1, 0.752941, 0.588235, 1)
 
 [node name="amount" type="ProgressBar" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/ray/health/hp/margin/health/stamina"]
+custom_minimum_size = Vector2(0, 2)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -501,8 +501,19 @@ max_value = 40.0
 step = 1.0
 show_percentage = false
 
+[node name="aura" type="ProgressBar" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/ray/health/hp/margin/health"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_styles/background = SubResource("StyleBoxEmpty_o4lum")
+theme_override_styles/fill = SubResource("StyleBoxFlat_uhig6")
+max_value = 20.0
+step = 1.0
+value = 20.0
+show_percentage = false
+
 [node name="amount" type="ProgressBar" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/ray/health/hp/margin/health"]
-custom_minimum_size = Vector2(35, 0)
+custom_minimum_size = Vector2(35, 2)
 layout_mode = 2
 theme_override_styles/background = SubResource("StyleBoxEmpty_o4lum")
 theme_override_styles/fill = SubResource("StyleBoxFlat_xf68l")
@@ -977,24 +988,6 @@ theme_override_constants/margin_bottom = 1
 layout_mode = 2
 theme_override_constants/separation = 2
 
-[node name="aura" type="ProgressBar" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/health/hp/margin/health"]
-layout_mode = 2
-theme_override_styles/background = SubResource("StyleBoxEmpty_o4lum")
-theme_override_styles/fill = SubResource("StyleBoxFlat_uhig6")
-max_value = 20.0
-step = 1.0
-value = 20.0
-show_percentage = false
-
-[node name="amount" type="ProgressBar" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/health/hp/margin/health"]
-custom_minimum_size = Vector2(35, 0)
-layout_mode = 2
-theme_override_styles/background = SubResource("StyleBoxEmpty_o4lum")
-theme_override_styles/fill = SubResource("StyleBoxFlat_xf68l")
-step = 1.0
-value = 100.0
-show_percentage = false
-
 [node name="stamina" type="Control" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/health/hp/margin/health"]
 visible = false
 custom_minimum_size = Vector2(0, 1)
@@ -1039,6 +1032,25 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_n0yye")
 max_value = 40.0
 step = 1.0
 value = 10.0
+show_percentage = false
+
+[node name="aura" type="ProgressBar" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/health/hp/margin/health"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxEmpty_o4lum")
+theme_override_styles/fill = SubResource("StyleBoxFlat_uhig6")
+max_value = 20.0
+step = 1.0
+value = 20.0
+show_percentage = false
+
+[node name="amount" type="ProgressBar" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/health/hp/margin/health"]
+custom_minimum_size = Vector2(35, 2)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxEmpty_o4lum")
+theme_override_styles/fill = SubResource("StyleBoxFlat_xf68l")
+step = 1.0
+value = 100.0
 show_percentage = false
 
 [node name="change" type="PanelContainer" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/health"]
@@ -1588,8 +1600,8 @@ custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_42m6k")
 theme_override_font_sizes/font_size = 24
-theme_override_styles/normal = SubResource("StyleBoxFlat_6gnce")
-text = "🎞"
+theme_override_styles/normal = SubResource("StyleBoxFlat_tveuy")
+text = "🗃️"
 alignment = 0
 
 [node name="hooder" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/tabs/game" instance=ExtResource("43_xe00t")]
@@ -1600,7 +1612,7 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("4_42m6k")
 theme_override_font_sizes/font_size = 25
 theme_override_styles/normal = SubResource("StyleBoxFlat_6gnce")
-text = "🕵️‍♂️"
+text = "💻"
 alignment = 0
 
 [node name="hooder" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/tabs/chat" instance=ExtResource("43_xe00t")]
@@ -2005,10 +2017,10 @@ alignment = 0
 [node name="analyze" type="Button" parent="menu/stats/inventory/ability/controls/hints/space/preview/help/tabs"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
-theme_override_fonts/font = ExtResource("4_42m6k")
+theme_override_fonts/font = ExtResource("18_3tqp8")
 theme_override_font_sizes/font_size = 25
-theme_override_styles/normal = SubResource("StyleBoxFlat_6gnce")
-text = "❔"
+theme_override_styles/normal = SubResource("StyleBoxFlat_pau43")
+text = "🔎"
 alignment = 0
 
 [node name="hooder" parent="menu/stats/inventory/ability/controls/hints/space/preview/help/tabs/analyze" instance=ExtResource("43_xe00t")]

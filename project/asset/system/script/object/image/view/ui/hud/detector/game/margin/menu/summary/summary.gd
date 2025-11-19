@@ -21,8 +21,12 @@ var selected: Array
 	]
 }
 
-func _show(nodes: Array) -> void: for h in nodes: h.show()
-func _hide(nodes: Array) -> void: for h in nodes: h.hide()
+func _show(nodes: Array) -> void:
+	pass # TODO FIXME show UI nodes
+	#  for h in nodes: h.show()
+func _hide(nodes: Array) -> void:
+	pass # TODO FIXME hide UI nodes
+	# for h in nodes: h.hide()
 
 func connect_methods(hint: Array, entered, exited) -> void:
 	entered.connect(func(): _hide(selected); _show(hint))

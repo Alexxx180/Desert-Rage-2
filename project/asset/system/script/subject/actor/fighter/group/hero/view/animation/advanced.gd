@@ -11,7 +11,7 @@ func ask(caption: String) -> Variant:
 	return get("parameters/%s/current_state" % caption)
 
 func request(caption: String, value: Variant) -> void:
-	set("parameters/%s/transition_request" % caption, value)
+	set("parameters/%s/transition_request" % caption, str(value))
 
 func blend(caption: String) -> void:
 	set("parameters/%s/blend_position" % caption, direction)
