@@ -35,6 +35,8 @@ height = 23
 fill_from = Vector2(0.503077, 0)
 fill_to = Vector2(0.5, 1)
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3yh6s"]
+
 [sub_resource type="Gradient" id="Gradient_jnh4p"]
 colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 0.235294)
 
@@ -44,8 +46,6 @@ width = 15
 height = 20
 fill_from = Vector2(0.482906, 1)
 fill_to = Vector2(0.478632, 0)
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3yh6s"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kdjwi"]
 
@@ -58,6 +58,10 @@ bg_color = Color(0.739789, 2.00946e-06, 5.77569e-07, 1)
 
 [node name="enemy_1" type="PanelContainer"]
 custom_minimum_size = Vector2(0, 30)
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 28.0
+grow_horizontal = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8
 theme_override_styles/panel = SubResource("StyleBoxFlat_jj441")
@@ -164,7 +168,6 @@ text = "15"
 horizontal_alignment = 1
 
 [node name="hits" type="VBoxContainer" parent="margin/contents"]
-visible = false
 layout_mode = 2
 theme_override_constants/separation = -5
 script = ExtResource("5_jtye3")
@@ -175,8 +178,26 @@ layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 0
 
+[node name="margin" type="MarginContainer" parent="margin/contents/hits/count"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_constants/margin_left = 7
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 7
+theme_override_constants/margin_bottom = 0
+
+[node name="caption" type="Label" parent="margin/contents/hits/count/margin"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_constants/line_spacing = -4
+theme_override_fonts/font = ExtResource("4_tulju")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxEmpty_3yh6s")
+text = "x"
+horizontal_alignment = 2
+
 [node name="hundred" type="Control" parent="margin/contents/hits/count"]
-custom_minimum_size = Vector2(15, 0)
+custom_minimum_size = Vector2(19, 0)
 layout_mode = 2
 script = ExtResource("6_tprdu")
 
@@ -214,14 +235,14 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -5.0
-offset_top = -23.0
-offset_right = 5.0
+offset_left = -4.5
+offset_top = -27.0
+offset_right = 4.5
 grow_horizontal = 2
 grow_vertical = 0
 size_flags_horizontal = 8
 theme_override_fonts/font = ExtResource("7_0jn6q")
-theme_override_font_sizes/font_size = 14
+theme_override_font_sizes/font_size = 19
 horizontal_alignment = 1
 autowrap_mode = 2
 
@@ -230,7 +251,7 @@ wait_time = 0.75
 one_shot = true
 
 [node name="ten" type="Control" parent="margin/contents/hits/count"]
-custom_minimum_size = Vector2(15, 0)
+custom_minimum_size = Vector2(19, 0)
 layout_mode = 2
 script = ExtResource("6_tprdu")
 
@@ -268,14 +289,14 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -5.0
-offset_top = -23.0
-offset_right = 5.0
+offset_left = -4.5
+offset_top = -27.0
+offset_right = 4.5
 grow_horizontal = 2
 grow_vertical = 0
 size_flags_horizontal = 8
 theme_override_fonts/font = ExtResource("7_0jn6q")
-theme_override_font_sizes/font_size = 14
+theme_override_font_sizes/font_size = 19
 horizontal_alignment = 1
 autowrap_mode = 2
 
@@ -283,7 +304,7 @@ autowrap_mode = 2
 one_shot = true
 
 [node name="one" type="Control" parent="margin/contents/hits/count"]
-custom_minimum_size = Vector2(15, 0)
+custom_minimum_size = Vector2(19, 0)
 layout_mode = 2
 script = ExtResource("6_tprdu")
 
@@ -321,37 +342,20 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -5.0
-offset_top = -23.0
-offset_right = 5.0
+offset_left = -4.5
+offset_top = -27.0
+offset_right = 4.5
 grow_horizontal = 2
 grow_vertical = 0
 size_flags_horizontal = 8
 theme_override_fonts/font = ExtResource("7_0jn6q")
-theme_override_font_sizes/font_size = 14
+theme_override_font_sizes/font_size = 19
 horizontal_alignment = 1
 autowrap_mode = 2
 
 [node name="timer" type="Timer" parent="margin/contents/hits/count/one"]
 wait_time = 1.25
 one_shot = true
-
-[node name="margin" type="MarginContainer" parent="margin/contents/hits"]
-layout_mode = 2
-size_flags_horizontal = 8
-theme_override_constants/margin_left = 0
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 2
-theme_override_constants/margin_bottom = 0
-
-[node name="caption" type="Label" parent="margin/contents/hits/margin"]
-layout_mode = 2
-size_flags_horizontal = 8
-theme_override_fonts/font = ExtResource("7_0jn6q")
-theme_override_font_sizes/font_size = 7
-theme_override_styles/normal = SubResource("StyleBoxEmpty_3yh6s")
-text = "H I T"
-horizontal_alignment = 1
 
 [node name="hp" type="MarginContainer" parent="."]
 layout_mode = 2

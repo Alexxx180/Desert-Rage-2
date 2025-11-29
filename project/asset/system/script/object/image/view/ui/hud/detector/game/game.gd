@@ -4,7 +4,7 @@ extends Control
 @onready var chat: VBoxContainer = $dialog/chat
 @onready var controls: VBoxContainer = $menu/stats/inventory/ability/controls
 @onready var status: HBoxContainer = controls.get_node("topic/items/ability/status")
-@onready var markers: HFlowContainer = controls.get_node("markers")
+@onready var markers: HFlowContainer = controls.get_node("status/markers")
 @onready var statuses: Dictionary = {
 	"ray": markers.get_node("margin/score/stack/ray"),
 	"rock": markers.get_node("margin/score/stack/rock")

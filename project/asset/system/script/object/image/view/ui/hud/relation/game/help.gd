@@ -8,7 +8,7 @@ func controls(hud: CanvasLayer, game: Control) -> void:
 	# var hints: VBoxContainer = hud.detector.game.hints
 
 	# hint.input.connect(analyze.short.sync_control_hint)
-	var analyze: Button = game.preview.get_node("help/tabs/analyze")
+	var analyze: Button = game.preview.get_node("help/ability/tabs/analyze")
 	# """
 	analyze.pressed.connect(game.hints.toggle_help)
 	# TODO FIX CATEGORY

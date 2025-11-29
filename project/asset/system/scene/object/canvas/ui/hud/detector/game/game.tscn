@@ -1,4 +1,4 @@
-[gd_scene load_steps=89 format=3 uid="uid://cel3u88abrgv3"]
+[gd_scene load_steps=93 format=3 uid="uid://cel3u88abrgv3"]
 
 [ext_resource type="Theme" uid="uid://p2br8b6ea3n6" path="res://asset/resource/ui/theme/patterns/template/menu/hud/pause/pause.tres" id="1_klae1"]
 [ext_resource type="Script" uid="uid://81xdi4771u0a" path="res://asset/system/script/object/image/view/ui/hud/detector/game/game.gd" id="1_o71r6"]
@@ -15,6 +15,7 @@
 [ext_resource type="Resource" uid="uid://pmde805pr1ag" path="res://asset/resource/ui/short/controls/split/inventory.tres" id="10_u412m"]
 [ext_resource type="PackedScene" uid="uid://b1cenupqm80wx" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/inventory.tscn" id="11_1y8ov"]
 [ext_resource type="Script" uid="uid://k6kmcptwqrbg" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/menu/inventory/ability/controls.gd" id="11_ok865"]
+[ext_resource type="Script" uid="uid://cfaxt6ng6ftvc" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/menu/status/enemy/damage.gd" id="12_eq6yd"]
 [ext_resource type="Script" uid="uid://dpqq1oa2r423r" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/menu/inventory/ability/topic/markers/combos/combos.gd" id="12_jbac8"]
 [ext_resource type="PackedScene" uid="uid://c3dwvtm5ivwwp" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/stats.tscn" id="12_jdj2p"]
 [ext_resource type="PackedScene" uid="uid://d3kdrb4woyoi8" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/ability/markers/item.tscn" id="12_upyjg"]
@@ -42,27 +43,10 @@
 [ext_resource type="PackedScene" uid="uid://qlgo5b48kj7l" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/ability/status/description.tscn" id="34_r2nhr"]
 [ext_resource type="PackedScene" uid="uid://dvdimdxij23df" path="res://asset/system/scene/object/timer/hide/hider/hover/hooder.tscn" id="43_xe00t"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u412m"]
-bg_color = Color(0, 0, 0, 1)
-shadow_color = Color(0, 0, 0, 0)
-
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_o4lum"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n0yye"]
-bg_color = Color(1, 1, 0.588235, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uhig6"]
-bg_color = Color(0.452141, 0.532021, 1, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xf68l"]
 bg_color = Color(0.588235, 1, 0.588235, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kdjwi"]
-content_margin_top = 2.0
-content_margin_bottom = 0.0
-bg_color = Color(0, 0, 0, 1)
-corner_radius_bottom_right = 1
-corner_radius_bottom_left = 1
 
 [sub_resource type="Gradient" id="Gradient_8qkor"]
 colors = PackedColorArray(0.588235, 1, 0.588235, 0.235294, 1, 1, 1, 0)
@@ -73,6 +57,23 @@ width = 16
 height = 20
 fill_from = Vector2(0.5, 0)
 fill_to = Vector2(0.5, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kdjwi"]
+content_margin_top = 2.0
+content_margin_bottom = 0.0
+bg_color = Color(0, 0, 0, 1)
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u412m"]
+bg_color = Color(0, 0, 0, 1)
+shadow_color = Color(0, 0, 0, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n0yye"]
+bg_color = Color(1, 1, 0.588235, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uhig6"]
+bg_color = Color(0.452141, 0.532021, 1, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_loeqg"]
 bg_color = Color(0, 0, 0, 1)
@@ -161,18 +162,6 @@ bg_color = Color(0.6, 0.6, 0.6, 0)
 content_margin_left = 5.0
 content_margin_bottom = 3.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x6rox"]
-content_margin_right = 1.0
-content_margin_bottom = 1.0
-bg_color = Color(0, 0, 0, 1)
-expand_margin_left = 1.0
-expand_margin_top = 1.0
-expand_margin_right = 1.0
-expand_margin_bottom = 1.0
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6h6y6"]
-bg_color = Color(0.953292, 0.415199, 9.62615e-07, 1)
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jbac8"]
 content_margin_left = 7.0
 content_margin_top = 6.0
@@ -219,6 +208,18 @@ corner_radius_bottom_left = 3
 content_margin_left = 5.0
 bg_color = Color(0, 0, 0, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x6rox"]
+content_margin_right = 1.0
+content_margin_bottom = 1.0
+bg_color = Color(0, 0, 0, 1)
+expand_margin_left = 1.0
+expand_margin_top = 1.0
+expand_margin_right = 1.0
+expand_margin_bottom = 1.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6h6y6"]
+bg_color = Color(0.953292, 0.415199, 9.62615e-07, 1)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eq6yd"]
 content_margin_left = 7.0
 content_margin_top = 7.0
@@ -250,12 +251,22 @@ content_margin_right = 1.0
 content_margin_bottom = 0.0
 bg_color = Color(0.0196078, 0.0196078, 0.0392157, 1)
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_eq6yd"]
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fuh2f"]
 bg_color = Color(0, 0, 0, 1)
 corner_radius_top_left = 3
 corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_upyjg"]
+content_margin_left = 6.0
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3yh6s"]
+content_margin_left = 5.0
+bg_color = Color(0, 0, 0, 1)
 
 [node name="game" type="Control"]
 layout_mode = 3
@@ -385,41 +396,229 @@ layout_mode = 2
 mouse_filter = 2
 script = ExtResource("11_ok865")
 
-[node name="markers" type="HFlowContainer" parent="menu/stats/inventory/ability/controls"]
+[node name="status" type="VBoxContainer" parent="menu/stats/inventory/ability/controls"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="hp" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/status"]
+visible = false
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+
+[node name="ray" type="ProgressBar" parent="menu/stats/inventory/ability/controls/status/hp"]
+custom_minimum_size = Vector2(35, 2)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/background = SubResource("StyleBoxEmpty_o4lum")
+theme_override_styles/fill = SubResource("StyleBoxFlat_xf68l")
+step = 1.0
+value = 100.0
+show_percentage = false
+
+[node name="status" type="MarginContainer" parent="menu/stats/inventory/ability/controls/status/hp/ray"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -41.0
+offset_bottom = 33.0
+grow_horizontal = 0
+mouse_filter = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="back" type="TextureRect" parent="menu/stats/inventory/ability/controls/status/hp/ray/status"]
+layout_mode = 2
+texture = SubResource("GradientTexture2D_pau43")
+
+[node name="margin" type="MarginContainer" parent="menu/stats/inventory/ability/controls/status/hp/ray/status"]
+layout_mode = 2
+theme_override_constants/margin_left = 7
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 7
+theme_override_constants/margin_bottom = 3
+
+[node name="damage" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/status/hp/ray/status/margin"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+script = ExtResource("12_eq6yd")
+
+[node name="health" type="Label" parent="menu/stats/inventory/ability/controls/status/hp/ray/status/margin/damage"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/font_color = Color(0.921569, 0.921569, 0.921569, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("28_ql3o6")
+theme_override_font_sizes/font_size = 16
+text = "150"
+horizontal_alignment = 1
+
+[node name="minus" type="Label" parent="menu/stats/inventory/ability/controls/status/hp/ray/status/margin/damage"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/font_color = Color(0.921569, 0.921569, 0.921569, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("28_ql3o6")
+theme_override_font_sizes/font_size = 10
+text = "–"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="value" type="Label" parent="menu/stats/inventory/ability/controls/status/hp/ray/status/margin/damage"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(0.921569, 0.921569, 0.921569, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("28_ql3o6")
+theme_override_font_sizes/font_size = 16
+text = "15"
+horizontal_alignment = 1
+
+[node name="hero" type="Button" parent="menu/stats/inventory/ability/controls/status/hp/ray/status"]
+visible = false
+layout_mode = 2
+theme_override_fonts/font = ExtResource("28_ql3o6")
+theme_override_styles/normal = SubResource("StyleBoxFlat_kdjwi")
+text = "Рей"
+
+[node name="hooder" parent="menu/stats/inventory/ability/controls/status/hp/ray/status/hero" instance=ExtResource("43_xe00t")]
+
+[node name="rock" type="ProgressBar" parent="menu/stats/inventory/ability/controls/status/hp"]
+custom_minimum_size = Vector2(102, 2)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxEmpty_o4lum")
+theme_override_styles/fill = SubResource("StyleBoxFlat_xf68l")
+step = 1.0
+value = 100.0
+show_percentage = false
+
+[node name="status" type="MarginContainer" parent="menu/stats/inventory/ability/controls/status/hp/rock"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -41.0
+offset_bottom = 33.0
+grow_horizontal = 0
+mouse_filter = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="back" type="TextureRect" parent="menu/stats/inventory/ability/controls/status/hp/rock/status"]
+layout_mode = 2
+texture = SubResource("GradientTexture2D_pau43")
+
+[node name="margin" type="MarginContainer" parent="menu/stats/inventory/ability/controls/status/hp/rock/status"]
+layout_mode = 2
+theme_override_constants/margin_left = 7
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 7
+theme_override_constants/margin_bottom = 3
+
+[node name="damage" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/status/hp/rock/status/margin"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+script = ExtResource("12_eq6yd")
+
+[node name="health" type="Label" parent="menu/stats/inventory/ability/controls/status/hp/rock/status/margin/damage"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/font_color = Color(0.921569, 0.921569, 0.921569, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("28_ql3o6")
+theme_override_font_sizes/font_size = 16
+text = "9999"
+horizontal_alignment = 1
+
+[node name="minus" type="Label" parent="menu/stats/inventory/ability/controls/status/hp/rock/status/margin/damage"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/font_color = Color(0.921569, 0.921569, 0.921569, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("28_ql3o6")
+theme_override_font_sizes/font_size = 10
+text = "–"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="value" type="Label" parent="menu/stats/inventory/ability/controls/status/hp/rock/status/margin/damage"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(0.921569, 0.921569, 0.921569, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("28_ql3o6")
+theme_override_font_sizes/font_size = 16
+text = "9999"
+horizontal_alignment = 1
+
+[node name="hero" type="Button" parent="menu/stats/inventory/ability/controls/status/hp/rock/status"]
+visible = false
+layout_mode = 2
+theme_override_fonts/font = ExtResource("28_ql3o6")
+theme_override_styles/normal = SubResource("StyleBoxFlat_kdjwi")
+text = "Рей"
+
+[node name="hooder" parent="menu/stats/inventory/ability/controls/status/hp/rock/status/hero" instance=ExtResource("43_xe00t")]
+
+[node name="markers" type="HFlowContainer" parent="menu/stats/inventory/ability/controls/status"]
 layout_mode = 2
 script = ExtResource("8_2uuwx")
 
-[node name="item_1" parent="menu/stats/inventory/ability/controls/markers" instance=ExtResource("12_upyjg")]
+[node name="Control" type="Control" parent="menu/stats/inventory/ability/controls/status/markers"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="item_1" parent="menu/stats/inventory/ability/controls/status/markers" instance=ExtResource("12_upyjg")]
 layout_mode = 2
 
-[node name="item_2" parent="menu/stats/inventory/ability/controls/markers" instance=ExtResource("12_upyjg")]
+[node name="item_2" parent="menu/stats/inventory/ability/controls/status/markers" instance=ExtResource("12_upyjg")]
 layout_mode = 2
 
-[node name="item_3" parent="menu/stats/inventory/ability/controls/markers" instance=ExtResource("12_upyjg")]
+[node name="item_3" parent="menu/stats/inventory/ability/controls/status/markers" instance=ExtResource("12_upyjg")]
 layout_mode = 2
 
-[node name="item_4" parent="menu/stats/inventory/ability/controls/markers" instance=ExtResource("12_upyjg")]
+[node name="item_4" parent="menu/stats/inventory/ability/controls/status/markers" instance=ExtResource("12_upyjg")]
 layout_mode = 2
 
-[node name="item_5" parent="menu/stats/inventory/ability/controls/markers" instance=ExtResource("12_upyjg")]
+[node name="item_5" parent="menu/stats/inventory/ability/controls/status/markers" instance=ExtResource("12_upyjg")]
 layout_mode = 2
 
-[node name="item_6" parent="menu/stats/inventory/ability/controls/markers" instance=ExtResource("12_upyjg")]
+[node name="item_6" parent="menu/stats/inventory/ability/controls/status/markers" instance=ExtResource("12_upyjg")]
 layout_mode = 2
 
-[node name="item_7" parent="menu/stats/inventory/ability/controls/markers" instance=ExtResource("12_upyjg")]
+[node name="item_7" parent="menu/stats/inventory/ability/controls/status/markers" instance=ExtResource("12_upyjg")]
 layout_mode = 2
 
-[node name="item_8" parent="menu/stats/inventory/ability/controls/markers" instance=ExtResource("12_upyjg")]
+[node name="item_8" parent="menu/stats/inventory/ability/controls/status/markers" instance=ExtResource("12_upyjg")]
 layout_mode = 2
 
-[node name="item_9" parent="menu/stats/inventory/ability/controls/markers" instance=ExtResource("12_upyjg")]
+[node name="item_9" parent="menu/stats/inventory/ability/controls/status/markers" instance=ExtResource("12_upyjg")]
 layout_mode = 2
 
-[node name="item_0" parent="menu/stats/inventory/ability/controls/markers" instance=ExtResource("12_upyjg")]
+[node name="item_0" parent="menu/stats/inventory/ability/controls/status/markers" instance=ExtResource("12_upyjg")]
 layout_mode = 2
 
-[node name="margin" type="MarginContainer" parent="menu/stats/inventory/ability/controls/markers"]
+[node name="margin" type="MarginContainer" parent="menu/stats/inventory/ability/controls/status/markers"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/margin_left = 10
@@ -428,51 +627,79 @@ theme_override_constants/margin_right = 2
 theme_override_constants/margin_bottom = 2
 script = ExtResource("12_jbac8")
 
-[node name="score" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/markers/margin"]
+[node name="score" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/status/markers/margin"]
 layout_mode = 2
 theme_override_constants/separation = 3
 
-[node name="stack" type="HFlowContainer" parent="menu/stats/inventory/ability/controls/markers/margin/score"]
+[node name="stack" type="HFlowContainer" parent="menu/stats/inventory/ability/controls/status/markers/margin/score"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="space" type="Control" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack"]
+[node name="space" type="Control" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="ray" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack"]
+[node name="ray" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 8
 theme_override_constants/separation = 0
 script = ExtResource("13_tya2d")
 
-[node name="health" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/ray"]
+[node name="health" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/ray"]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="hp" type="PanelContainer" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/ray/health"]
+[node name="hp" type="PanelContainer" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/ray/health"]
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_u412m")
 
-[node name="margin" type="MarginContainer" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/ray/health/hp"]
+[node name="margin" type="MarginContainer" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/ray/health/hp"]
 layout_mode = 2
 theme_override_constants/margin_left = 2
 theme_override_constants/margin_top = 1
 theme_override_constants/margin_right = 2
 theme_override_constants/margin_bottom = 1
 
-[node name="health" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/ray/health/hp/margin"]
+[node name="health" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/ray/health/hp/margin"]
 layout_mode = 2
 theme_override_constants/separation = 2
 
-[node name="stamina" type="Control" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/ray/health/hp/margin/health"]
-visible = false
+[node name="stamina" type="Control" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/ray/health/hp/margin/health"]
 custom_minimum_size = Vector2(1, 2)
 layout_mode = 2
 
-[node name="tick3" type="ColorRect" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/ray/health/hp/margin/health/stamina"]
+[node name="act" type="ColorRect" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/ray/health/hp/margin/health/stamina"]
+custom_minimum_size = Vector2(6, 2)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -1.0
+offset_right = 6.0
+offset_bottom = 1.0
+grow_vertical = 2
+color = Color(0.45098, 0.533333, 1, 1)
+
+[node name="walk" type="ColorRect" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/ray/health/hp/margin/health/stamina"]
+custom_minimum_size = Vector2(6, 2)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -3.0
+offset_top = -1.0
+offset_right = 3.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 0.588235, 1)
+
+[node name="run" type="ColorRect" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/ray/health/hp/margin/health/stamina"]
 custom_minimum_size = Vector2(6, 2)
 layout_mode = 1
 anchors_preset = 6
@@ -487,7 +714,7 @@ grow_horizontal = 0
 grow_vertical = 2
 color = Color(1, 0.752941, 0.588235, 1)
 
-[node name="amount" type="ProgressBar" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/ray/health/hp/margin/health/stamina"]
+[node name="amount" type="ProgressBar" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/ray/health/hp/margin/health/stamina"]
 custom_minimum_size = Vector2(0, 2)
 layout_mode = 1
 anchors_preset = 15
@@ -501,7 +728,7 @@ max_value = 40.0
 step = 1.0
 show_percentage = false
 
-[node name="aura" type="ProgressBar" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/ray/health/hp/margin/health"]
+[node name="aura" type="ProgressBar" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/ray/health/hp/margin/health"]
 custom_minimum_size = Vector2(0, 2)
 layout_mode = 2
 size_flags_vertical = 1
@@ -512,7 +739,7 @@ step = 1.0
 value = 20.0
 show_percentage = false
 
-[node name="amount" type="ProgressBar" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/ray/health/hp/margin/health"]
+[node name="amount" type="ProgressBar" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/ray/health/hp/margin/health"]
 custom_minimum_size = Vector2(35, 2)
 layout_mode = 2
 theme_override_styles/background = SubResource("StyleBoxEmpty_o4lum")
@@ -521,43 +748,43 @@ step = 1.0
 value = 100.0
 show_percentage = false
 
-[node name="change" type="PanelContainer" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/ray/health"]
+[node name="change" type="PanelContainer" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/ray/health"]
 visible = false
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_kdjwi")
 
-[node name="margin" type="MarginContainer" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/ray/health/change"]
+[node name="margin" type="MarginContainer" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/ray/health/change"]
 layout_mode = 2
 theme_override_constants/margin_left = 2
 theme_override_constants/margin_top = -5
 theme_override_constants/margin_right = 2
 theme_override_constants/margin_bottom = -3
 
-[node name="damage" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/ray/health/change/margin"]
+[node name="damage" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/ray/health/change/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
 theme_override_constants/separation = 0
 
-[node name="minus" type="Label" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/ray/health/change/margin/damage"]
+[node name="minus" type="Label" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/ray/health/change/margin/damage"]
 layout_mode = 2
 theme = ExtResource("19_aco5m")
 theme_override_font_sizes/font_size = 14
 
-[node name="plus" type="Label" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/ray/health/change/margin/damage"]
+[node name="plus" type="Label" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/ray/health/change/margin/damage"]
 visible = false
 layout_mode = 2
 theme = ExtResource("19_aco5m")
 theme_override_font_sizes/font_size = 14
 text = "+"
 
-[node name="value" type="Label" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/ray/health/change/margin/damage"]
+[node name="value" type="Label" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/ray/health/change/margin/damage"]
 layout_mode = 2
 theme = ExtResource("19_aco5m")
 theme_override_font_sizes/font_size = 14
 text = "9999"
 
-[node name="status" type="MarginContainer" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/ray/health"]
+[node name="status" type="MarginContainer" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/ray/health"]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/margin_left = 2
@@ -565,24 +792,22 @@ theme_override_constants/margin_top = -1
 theme_override_constants/margin_right = 2
 theme_override_constants/margin_bottom = 0
 
-[node name="back" type="TextureRect" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/ray/health/status"]
-visible = false
+[node name="back" type="TextureRect" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/ray/health/status"]
 layout_mode = 2
 texture = SubResource("GradientTexture2D_pau43")
 
-[node name="margin" type="MarginContainer" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/ray/health/status"]
-visible = false
+[node name="margin" type="MarginContainer" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/ray/health/status"]
 layout_mode = 2
 theme_override_constants/margin_left = 4
 theme_override_constants/margin_top = 3
 theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 0
 
-[node name="hp" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/ray/health/status/margin"]
+[node name="hp" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/ray/health/status/margin"]
 layout_mode = 2
 theme_override_constants/separation = -3
 
-[node name="health" type="Label" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/ray/health/status/margin/hp"]
+[node name="health" type="Label" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/ray/health/status/margin/hp"]
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
@@ -590,7 +815,7 @@ theme_override_fonts/font = ExtResource("28_ql3o6")
 theme_override_font_sizes/font_size = 16
 text = "100"
 
-[node name="damage" type="Label" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/ray/health/status/margin/hp"]
+[node name="damage" type="Label" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/ray/health/status/margin/hp"]
 layout_mode = 2
 size_flags_horizontal = 8
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -599,40 +824,41 @@ theme_override_fonts/font = ExtResource("28_ql3o6")
 theme_override_font_sizes/font_size = 16
 text = "-10"
 
-[node name="hero" type="Button" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/ray/health/status"]
+[node name="hero" type="Button" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/ray/health/status"]
+visible = false
 layout_mode = 2
 theme_override_fonts/font = ExtResource("28_ql3o6")
 theme_override_styles/normal = SubResource("StyleBoxFlat_kdjwi")
 text = "Рей"
 
-[node name="hooder" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/ray/health/status/hero" instance=ExtResource("43_xe00t")]
+[node name="hooder" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/ray/health/status/hero" instance=ExtResource("43_xe00t")]
 
-[node name="ailments" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/ray"]
+[node name="ailments" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/ray"]
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_constants/separation = 2
 
-[node name="poison" type="PanelContainer" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/ray/ailments"]
+[node name="poison" type="PanelContainer" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/ray/ailments"]
 visible = false
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_loeqg")
 
-[node name="cancel" type="Label" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/ray/ailments/poison"]
+[node name="cancel" type="Label" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/ray/ailments/poison"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("18_3tqp8")
 theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_2xwjp")
 text = "💀"
 
-[node name="category" type="Label" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/ray/ailments/poison"]
+[node name="category" type="Label" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/ray/ailments/poison"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("18_3tqp8")
 theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_hns2m")
 text = "🩸"
 
-[node name="margin" type="MarginContainer" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/ray/ailments/poison"]
+[node name="margin" type="MarginContainer" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/ray/ailments/poison"]
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_constants/margin_left = 3
@@ -640,7 +866,7 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 3
 theme_override_constants/margin_bottom = 0
 
-[node name="time" type="ProgressBar" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/ray/ailments/poison/margin"]
+[node name="time" type="ProgressBar" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/ray/ailments/poison/margin"]
 layout_mode = 2
 size_flags_vertical = 8
 theme_override_styles/background = SubResource("StyleBoxEmpty_6h6y6")
@@ -650,20 +876,20 @@ step = 1.0
 value = 10.0
 show_percentage = false
 
-[node name="cough" type="PanelContainer" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/ray/ailments"]
+[node name="cough" type="PanelContainer" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/ray/ailments"]
 visible = false
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_loeqg")
 
-[node name="category" type="Label" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/ray/ailments/cough"]
+[node name="category" type="Label" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/ray/ailments/cough"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("18_3tqp8")
 theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_b4jty")
 text = "🤧"
 
-[node name="margin" type="MarginContainer" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/ray/ailments/cough"]
+[node name="margin" type="MarginContainer" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/ray/ailments/cough"]
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_constants/margin_left = 3
@@ -671,7 +897,7 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 3
 theme_override_constants/margin_bottom = 0
 
-[node name="time" type="ProgressBar" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/ray/ailments/cough/margin"]
+[node name="time" type="ProgressBar" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/ray/ailments/cough/margin"]
 layout_mode = 2
 size_flags_vertical = 8
 theme_override_styles/background = SubResource("StyleBoxEmpty_6h6y6")
@@ -681,20 +907,20 @@ step = 1.0
 value = 10.0
 show_percentage = false
 
-[node name="freeze" type="PanelContainer" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/ray/ailments"]
+[node name="freeze" type="PanelContainer" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/ray/ailments"]
 visible = false
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_rq6bm")
 
-[node name="category" type="Label" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/ray/ailments/freeze"]
+[node name="category" type="Label" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/ray/ailments/freeze"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("18_3tqp8")
 theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_5vhop")
 text = "🥶"
 
-[node name="margin" type="MarginContainer" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/ray/ailments/freeze"]
+[node name="margin" type="MarginContainer" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/ray/ailments/freeze"]
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_constants/margin_left = 3
@@ -702,7 +928,7 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 3
 theme_override_constants/margin_bottom = 0
 
-[node name="time" type="ProgressBar" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/ray/ailments/freeze/margin"]
+[node name="time" type="ProgressBar" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/ray/ailments/freeze/margin"]
 layout_mode = 2
 size_flags_vertical = 8
 theme_override_styles/background = SubResource("StyleBoxEmpty_6h6y6")
@@ -712,27 +938,27 @@ step = 1.0
 value = 10.0
 show_percentage = false
 
-[node name="burn" type="PanelContainer" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/ray/ailments"]
+[node name="burn" type="PanelContainer" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/ray/ailments"]
 visible = false
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_rq6bm")
 
-[node name="skull" type="Label" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/ray/ailments/burn"]
+[node name="skull" type="Label" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/ray/ailments/burn"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("18_3tqp8")
 theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_3rb3m")
 text = "☠️"
 
-[node name="category" type="Label" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/ray/ailments/burn"]
+[node name="category" type="Label" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/ray/ailments/burn"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("18_3tqp8")
 theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_nefyx")
 text = "🔥"
 
-[node name="margin" type="MarginContainer" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/ray/ailments/burn"]
+[node name="margin" type="MarginContainer" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/ray/ailments/burn"]
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_constants/margin_left = 3
@@ -740,7 +966,7 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 3
 theme_override_constants/margin_bottom = 0
 
-[node name="time" type="ProgressBar" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/ray/ailments/burn/margin"]
+[node name="time" type="ProgressBar" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/ray/ailments/burn/margin"]
 layout_mode = 2
 size_flags_vertical = 8
 theme_override_styles/background = SubResource("StyleBoxEmpty_6h6y6")
@@ -750,20 +976,20 @@ step = 1.0
 value = 10.0
 show_percentage = false
 
-[node name="dizzy" type="PanelContainer" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/ray/ailments"]
+[node name="dizzy" type="PanelContainer" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/ray/ailments"]
 visible = false
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_loeqg")
 
-[node name="category" type="Label" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/ray/ailments/dizzy"]
+[node name="category" type="Label" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/ray/ailments/dizzy"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("18_3tqp8")
 theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_b4jty")
 text = "💫"
 
-[node name="margin" type="MarginContainer" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/ray/ailments/dizzy"]
+[node name="margin" type="MarginContainer" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/ray/ailments/dizzy"]
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_constants/margin_left = 3
@@ -771,7 +997,7 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 3
 theme_override_constants/margin_bottom = 0
 
-[node name="time" type="ProgressBar" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/ray/ailments/dizzy/margin"]
+[node name="time" type="ProgressBar" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/ray/ailments/dizzy/margin"]
 layout_mode = 2
 size_flags_vertical = 8
 theme_override_styles/background = SubResource("StyleBoxEmpty_6h6y6")
@@ -781,20 +1007,20 @@ step = 1.0
 value = 10.0
 show_percentage = false
 
-[node name="no_reason" type="PanelContainer" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/ray/ailments"]
+[node name="no_reason" type="PanelContainer" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/ray/ailments"]
 visible = false
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_loeqg")
 
-[node name="category" type="Label" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/ray/ailments/no_reason"]
+[node name="category" type="Label" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/ray/ailments/no_reason"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("18_3tqp8")
 theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_b4jty")
 text = "🥴"
 
-[node name="margin" type="MarginContainer" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/ray/ailments/no_reason"]
+[node name="margin" type="MarginContainer" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/ray/ailments/no_reason"]
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_constants/margin_left = 3
@@ -802,7 +1028,7 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 3
 theme_override_constants/margin_bottom = 0
 
-[node name="time" type="ProgressBar" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/ray/ailments/no_reason/margin"]
+[node name="time" type="ProgressBar" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/ray/ailments/no_reason/margin"]
 layout_mode = 2
 size_flags_vertical = 8
 theme_override_styles/background = SubResource("StyleBoxEmpty_6h6y6")
@@ -812,27 +1038,27 @@ step = 1.0
 value = 10.0
 show_percentage = false
 
-[node name="no_motion" type="PanelContainer" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/ray/ailments"]
+[node name="no_motion" type="PanelContainer" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/ray/ailments"]
 visible = false
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_dil3k")
 
-[node name="cancel" type="Label" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/ray/ailments/no_motion"]
+[node name="cancel" type="Label" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/ray/ailments/no_motion"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("18_3tqp8")
 theme_override_font_sizes/font_size = 24
 theme_override_styles/normal = SubResource("StyleBoxFlat_aagfr")
 text = "🚫"
 
-[node name="category" type="Label" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/ray/ailments/no_motion"]
+[node name="category" type="Label" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/ray/ailments/no_motion"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("18_3tqp8")
 theme_override_font_sizes/font_size = 16
 theme_override_styles/normal = SubResource("StyleBoxFlat_la40t")
 text = "🦶"
 
-[node name="margin" type="MarginContainer" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/ray/ailments/no_motion"]
+[node name="margin" type="MarginContainer" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/ray/ailments/no_motion"]
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_constants/margin_left = 3
@@ -840,7 +1066,7 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 3
 theme_override_constants/margin_bottom = 0
 
-[node name="time" type="ProgressBar" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/ray/ailments/no_motion/margin"]
+[node name="time" type="ProgressBar" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/ray/ailments/no_motion/margin"]
 layout_mode = 2
 size_flags_vertical = 8
 theme_override_styles/background = SubResource("StyleBoxEmpty_n0yye")
@@ -850,27 +1076,27 @@ step = 1.0
 value = 10.0
 show_percentage = false
 
-[node name="no_action" type="PanelContainer" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/ray/ailments"]
+[node name="no_action" type="PanelContainer" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/ray/ailments"]
 visible = false
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_loeqg")
 
-[node name="cancel" type="Label" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/ray/ailments/no_action"]
+[node name="cancel" type="Label" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/ray/ailments/no_action"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("18_3tqp8")
 theme_override_font_sizes/font_size = 24
 theme_override_styles/normal = SubResource("StyleBoxFlat_b8doq")
 text = "🚫"
 
-[node name="category" type="Label" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/ray/ailments/no_action"]
+[node name="category" type="Label" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/ray/ailments/no_action"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("18_3tqp8")
 theme_override_font_sizes/font_size = 16
 theme_override_styles/normal = SubResource("StyleBoxFlat_psn67")
 text = "✊"
 
-[node name="margin" type="MarginContainer" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/ray/ailments/no_action"]
+[node name="margin" type="MarginContainer" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/ray/ailments/no_action"]
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_constants/margin_left = 3
@@ -878,7 +1104,7 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 3
 theme_override_constants/margin_bottom = 0
 
-[node name="time" type="ProgressBar" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/ray/ailments/no_action/margin"]
+[node name="time" type="ProgressBar" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/ray/ailments/no_action/margin"]
 layout_mode = 2
 size_flags_vertical = 8
 theme_override_styles/background = SubResource("StyleBoxEmpty_6h6y6")
@@ -888,20 +1114,20 @@ step = 1.0
 value = 10.0
 show_percentage = false
 
-[node name="ko" type="PanelContainer" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/ray/ailments"]
+[node name="ko" type="PanelContainer" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/ray/ailments"]
 visible = false
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_ld26c")
 
-[node name="category" type="Label" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/ray/ailments/ko"]
+[node name="category" type="Label" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/ray/ailments/ko"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("18_3tqp8")
 theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_4rqj6")
 text = "😵"
 
-[node name="margin" type="MarginContainer" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/ray/ailments/ko"]
+[node name="margin" type="MarginContainer" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/ray/ailments/ko"]
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_constants/margin_left = 3
@@ -909,7 +1135,7 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 3
 theme_override_constants/margin_bottom = 0
 
-[node name="time" type="ProgressBar" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/ray/ailments/ko/margin"]
+[node name="time" type="ProgressBar" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/ray/ailments/ko/margin"]
 layout_mode = 2
 size_flags_vertical = 8
 theme_override_styles/background = SubResource("StyleBoxEmpty_pvtda")
@@ -919,13 +1145,13 @@ step = 1.0
 value = 10.0
 show_percentage = false
 
-[node name="rage" type="PanelContainer" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/ray/ailments"]
+[node name="rage" type="PanelContainer" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/ray/ailments"]
 visible = false
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_loeqg")
 
-[node name="cancel" type="Label" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/ray/ailments/rage"]
+[node name="cancel" type="Label" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/ray/ailments/rage"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.313726, 0.313726, 0.313726, 1)
 theme_override_fonts/font = ExtResource("18_3tqp8")
@@ -933,7 +1159,7 @@ theme_override_font_sizes/font_size = 24
 theme_override_styles/normal = SubResource("StyleBoxFlat_b8doq")
 text = "🔥"
 
-[node name="category" type="Label" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/ray/ailments/rage"]
+[node name="category" type="Label" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/ray/ailments/rage"]
 layout_mode = 2
 size_flags_vertical = 8
 theme_override_fonts/font = ExtResource("18_3tqp8")
@@ -941,7 +1167,7 @@ theme_override_font_sizes/font_size = 16
 theme_override_styles/normal = SubResource("StyleBoxEmpty_w6vwc")
 text = "😡"
 
-[node name="margin" type="MarginContainer" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/ray/ailments/rage"]
+[node name="margin" type="MarginContainer" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/ray/ailments/rage"]
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_constants/margin_left = 3
@@ -949,7 +1175,7 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 3
 theme_override_constants/margin_bottom = 0
 
-[node name="time" type="ProgressBar" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/ray/ailments/rage/margin"]
+[node name="time" type="ProgressBar" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/ray/ailments/rage/margin"]
 layout_mode = 2
 size_flags_vertical = 8
 theme_override_styles/background = SubResource("StyleBoxEmpty_6h6y6")
@@ -959,41 +1185,42 @@ step = 1.0
 value = 10.0
 show_percentage = false
 
-[node name="timer" type="Timer" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/ray"]
+[node name="timer" type="Timer" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/ray"]
 
-[node name="rock" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack"]
+[node name="rock" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 8
 theme_override_constants/separation = 0
 script = ExtResource("13_tya2d")
 
-[node name="health" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock"]
+[node name="health" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/rock"]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="hp" type="PanelContainer" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/health"]
+[node name="hp" type="PanelContainer" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/rock/health"]
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_u412m")
 
-[node name="margin" type="MarginContainer" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/health/hp"]
+[node name="margin" type="MarginContainer" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/rock/health/hp"]
 layout_mode = 2
 theme_override_constants/margin_left = 2
 theme_override_constants/margin_top = 1
 theme_override_constants/margin_right = 2
 theme_override_constants/margin_bottom = 1
 
-[node name="health" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/health/hp/margin"]
+[node name="health" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/rock/health/hp/margin"]
 layout_mode = 2
 theme_override_constants/separation = 2
 
-[node name="stamina" type="Control" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/health/hp/margin/health"]
+[node name="stamina" type="Control" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/rock/health/hp/margin/health"]
 visible = false
 custom_minimum_size = Vector2(0, 1)
 layout_mode = 2
 
-[node name="time" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/health/hp/margin/health/stamina"]
+[node name="time" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/rock/health/hp/margin/health/stamina"]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -1001,25 +1228,25 @@ offset_bottom = 1.0
 grow_horizontal = 2
 theme_override_constants/separation = 0
 
-[node name="space" type="Control" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/health/hp/margin/health/stamina/time"]
+[node name="space" type="Control" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/rock/health/hp/margin/health/stamina/time"]
 custom_minimum_size = Vector2(17, 0)
 layout_mode = 2
 
-[node name="tick2" type="ColorRect" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/health/hp/margin/health/stamina/time"]
+[node name="tick2" type="ColorRect" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/rock/health/hp/margin/health/stamina/time"]
 custom_minimum_size = Vector2(1, 1)
 layout_mode = 2
 color = Color(0.397138, 0.472122, 1, 1)
 
-[node name="space2" type="Control" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/health/hp/margin/health/stamina/time"]
+[node name="space2" type="Control" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/rock/health/hp/margin/health/stamina/time"]
 custom_minimum_size = Vector2(12, 0)
 layout_mode = 2
 
-[node name="tick3" type="ColorRect" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/health/hp/margin/health/stamina/time"]
+[node name="tick3" type="ColorRect" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/rock/health/hp/margin/health/stamina/time"]
 custom_minimum_size = Vector2(1, 1)
 layout_mode = 2
 color = Color(0.396078, 0.470588, 1, 1)
 
-[node name="amount" type="ProgressBar" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/health/hp/margin/health/stamina"]
+[node name="amount" type="ProgressBar" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/rock/health/hp/margin/health/stamina"]
 custom_minimum_size = Vector2(35, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -1034,7 +1261,7 @@ step = 1.0
 value = 10.0
 show_percentage = false
 
-[node name="aura" type="ProgressBar" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/health/hp/margin/health"]
+[node name="aura" type="ProgressBar" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/rock/health/hp/margin/health"]
 custom_minimum_size = Vector2(0, 2)
 layout_mode = 2
 theme_override_styles/background = SubResource("StyleBoxEmpty_o4lum")
@@ -1044,7 +1271,7 @@ step = 1.0
 value = 20.0
 show_percentage = false
 
-[node name="amount" type="ProgressBar" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/health/hp/margin/health"]
+[node name="amount" type="ProgressBar" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/rock/health/hp/margin/health"]
 custom_minimum_size = Vector2(35, 2)
 layout_mode = 2
 theme_override_styles/background = SubResource("StyleBoxEmpty_o4lum")
@@ -1053,44 +1280,44 @@ step = 1.0
 value = 100.0
 show_percentage = false
 
-[node name="change" type="PanelContainer" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/health"]
+[node name="change" type="PanelContainer" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/rock/health"]
 visible = false
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_kdjwi")
 
-[node name="margin" type="MarginContainer" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/health/change"]
+[node name="margin" type="MarginContainer" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/rock/health/change"]
 layout_mode = 2
 theme_override_constants/margin_left = 2
 theme_override_constants/margin_top = -5
 theme_override_constants/margin_right = 2
 theme_override_constants/margin_bottom = -3
 
-[node name="damage" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/health/change/margin"]
+[node name="damage" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/rock/health/change/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
 theme_override_constants/separation = 0
 
-[node name="minus" type="Label" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/health/change/margin/damage"]
+[node name="minus" type="Label" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/rock/health/change/margin/damage"]
 layout_mode = 2
 theme = ExtResource("19_aco5m")
 theme_override_font_sizes/font_size = 14
 text = "-"
 
-[node name="plus" type="Label" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/health/change/margin/damage"]
+[node name="plus" type="Label" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/rock/health/change/margin/damage"]
 visible = false
 layout_mode = 2
 theme = ExtResource("19_aco5m")
 theme_override_font_sizes/font_size = 14
 text = "+"
 
-[node name="value" type="Label" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/health/change/margin/damage"]
+[node name="value" type="Label" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/rock/health/change/margin/damage"]
 layout_mode = 2
 theme = ExtResource("19_aco5m")
 theme_override_font_sizes/font_size = 14
 text = "123"
 
-[node name="status" type="MarginContainer" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/health"]
+[node name="status" type="MarginContainer" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/rock/health"]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/margin_left = 2
@@ -1098,12 +1325,12 @@ theme_override_constants/margin_top = -1
 theme_override_constants/margin_right = 2
 theme_override_constants/margin_bottom = 0
 
-[node name="back" type="TextureRect" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/health/status"]
+[node name="back" type="TextureRect" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/rock/health/status"]
 visible = false
 layout_mode = 2
 texture = SubResource("GradientTexture2D_pau43")
 
-[node name="margin" type="MarginContainer" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/health/status"]
+[node name="margin" type="MarginContainer" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/rock/health/status"]
 visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 4
@@ -1111,11 +1338,11 @@ theme_override_constants/margin_top = 3
 theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 0
 
-[node name="hp" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/health/status/margin"]
+[node name="hp" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/rock/health/status/margin"]
 layout_mode = 2
 theme_override_constants/separation = -3
 
-[node name="health" type="Label" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/health/status/margin/hp"]
+[node name="health" type="Label" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/rock/health/status/margin/hp"]
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
@@ -1123,7 +1350,7 @@ theme_override_fonts/font = ExtResource("28_ql3o6")
 theme_override_font_sizes/font_size = 16
 text = "100"
 
-[node name="damage" type="Label" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/health/status/margin/hp"]
+[node name="damage" type="Label" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/rock/health/status/margin/hp"]
 layout_mode = 2
 size_flags_horizontal = 8
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -1132,40 +1359,40 @@ theme_override_fonts/font = ExtResource("28_ql3o6")
 theme_override_font_sizes/font_size = 16
 text = "-10"
 
-[node name="hero" type="Button" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/health/status"]
+[node name="hero" type="Button" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/rock/health/status"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("28_ql3o6")
 theme_override_styles/normal = SubResource("StyleBoxFlat_kdjwi")
 text = "Рок"
 
-[node name="hooder" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/health/status/hero" instance=ExtResource("43_xe00t")]
+[node name="hooder" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/rock/health/status/hero" instance=ExtResource("43_xe00t")]
 
-[node name="ailments" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock"]
+[node name="ailments" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/rock"]
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_constants/separation = 2
 
-[node name="poison" type="PanelContainer" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/ailments"]
+[node name="poison" type="PanelContainer" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/rock/ailments"]
 visible = false
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_loeqg")
 
-[node name="cancel" type="Label" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/ailments/poison"]
+[node name="cancel" type="Label" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/rock/ailments/poison"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("18_3tqp8")
 theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_2xwjp")
 text = "💀"
 
-[node name="category" type="Label" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/ailments/poison"]
+[node name="category" type="Label" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/rock/ailments/poison"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("18_3tqp8")
 theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_hns2m")
 text = "🩸"
 
-[node name="margin" type="MarginContainer" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/ailments/poison"]
+[node name="margin" type="MarginContainer" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/rock/ailments/poison"]
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_constants/margin_left = 3
@@ -1173,7 +1400,7 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 3
 theme_override_constants/margin_bottom = 0
 
-[node name="time" type="ProgressBar" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/ailments/poison/margin"]
+[node name="time" type="ProgressBar" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/rock/ailments/poison/margin"]
 layout_mode = 2
 size_flags_vertical = 8
 theme_override_styles/background = SubResource("StyleBoxEmpty_6h6y6")
@@ -1183,20 +1410,20 @@ step = 1.0
 value = 10.0
 show_percentage = false
 
-[node name="cough" type="PanelContainer" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/ailments"]
+[node name="cough" type="PanelContainer" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/rock/ailments"]
 visible = false
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_loeqg")
 
-[node name="category" type="Label" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/ailments/cough"]
+[node name="category" type="Label" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/rock/ailments/cough"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("18_3tqp8")
 theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_b4jty")
 text = "🤧"
 
-[node name="margin" type="MarginContainer" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/ailments/cough"]
+[node name="margin" type="MarginContainer" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/rock/ailments/cough"]
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_constants/margin_left = 3
@@ -1204,7 +1431,7 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 3
 theme_override_constants/margin_bottom = 0
 
-[node name="time" type="ProgressBar" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/ailments/cough/margin"]
+[node name="time" type="ProgressBar" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/rock/ailments/cough/margin"]
 layout_mode = 2
 size_flags_vertical = 8
 theme_override_styles/background = SubResource("StyleBoxEmpty_6h6y6")
@@ -1214,20 +1441,20 @@ step = 1.0
 value = 10.0
 show_percentage = false
 
-[node name="freeze" type="PanelContainer" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/ailments"]
+[node name="freeze" type="PanelContainer" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/rock/ailments"]
 visible = false
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_rq6bm")
 
-[node name="category" type="Label" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/ailments/freeze"]
+[node name="category" type="Label" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/rock/ailments/freeze"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("18_3tqp8")
 theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_5vhop")
 text = "🥶"
 
-[node name="margin" type="MarginContainer" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/ailments/freeze"]
+[node name="margin" type="MarginContainer" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/rock/ailments/freeze"]
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_constants/margin_left = 3
@@ -1235,7 +1462,7 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 3
 theme_override_constants/margin_bottom = 0
 
-[node name="time" type="ProgressBar" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/ailments/freeze/margin"]
+[node name="time" type="ProgressBar" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/rock/ailments/freeze/margin"]
 layout_mode = 2
 size_flags_vertical = 8
 theme_override_styles/background = SubResource("StyleBoxEmpty_6h6y6")
@@ -1245,27 +1472,27 @@ step = 1.0
 value = 10.0
 show_percentage = false
 
-[node name="burn" type="PanelContainer" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/ailments"]
+[node name="burn" type="PanelContainer" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/rock/ailments"]
 visible = false
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_rq6bm")
 
-[node name="skull" type="Label" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/ailments/burn"]
+[node name="skull" type="Label" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/rock/ailments/burn"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("18_3tqp8")
 theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_3rb3m")
 text = "☠️"
 
-[node name="category" type="Label" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/ailments/burn"]
+[node name="category" type="Label" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/rock/ailments/burn"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("18_3tqp8")
 theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_nefyx")
 text = "🔥"
 
-[node name="margin" type="MarginContainer" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/ailments/burn"]
+[node name="margin" type="MarginContainer" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/rock/ailments/burn"]
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_constants/margin_left = 3
@@ -1273,7 +1500,7 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 3
 theme_override_constants/margin_bottom = 0
 
-[node name="time" type="ProgressBar" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/ailments/burn/margin"]
+[node name="time" type="ProgressBar" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/rock/ailments/burn/margin"]
 layout_mode = 2
 size_flags_vertical = 8
 theme_override_styles/background = SubResource("StyleBoxEmpty_6h6y6")
@@ -1283,20 +1510,20 @@ step = 1.0
 value = 10.0
 show_percentage = false
 
-[node name="dizzy" type="PanelContainer" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/ailments"]
+[node name="dizzy" type="PanelContainer" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/rock/ailments"]
 visible = false
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_loeqg")
 
-[node name="category" type="Label" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/ailments/dizzy"]
+[node name="category" type="Label" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/rock/ailments/dizzy"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("18_3tqp8")
 theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_b4jty")
 text = "💫"
 
-[node name="margin" type="MarginContainer" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/ailments/dizzy"]
+[node name="margin" type="MarginContainer" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/rock/ailments/dizzy"]
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_constants/margin_left = 3
@@ -1304,7 +1531,7 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 3
 theme_override_constants/margin_bottom = 0
 
-[node name="time" type="ProgressBar" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/ailments/dizzy/margin"]
+[node name="time" type="ProgressBar" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/rock/ailments/dizzy/margin"]
 layout_mode = 2
 size_flags_vertical = 8
 theme_override_styles/background = SubResource("StyleBoxEmpty_6h6y6")
@@ -1314,20 +1541,20 @@ step = 1.0
 value = 10.0
 show_percentage = false
 
-[node name="no_reason" type="PanelContainer" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/ailments"]
+[node name="no_reason" type="PanelContainer" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/rock/ailments"]
 visible = false
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_loeqg")
 
-[node name="category" type="Label" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/ailments/no_reason"]
+[node name="category" type="Label" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/rock/ailments/no_reason"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("18_3tqp8")
 theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_b4jty")
 text = "🥴"
 
-[node name="margin" type="MarginContainer" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/ailments/no_reason"]
+[node name="margin" type="MarginContainer" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/rock/ailments/no_reason"]
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_constants/margin_left = 3
@@ -1335,7 +1562,7 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 3
 theme_override_constants/margin_bottom = 0
 
-[node name="time" type="ProgressBar" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/ailments/no_reason/margin"]
+[node name="time" type="ProgressBar" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/rock/ailments/no_reason/margin"]
 layout_mode = 2
 size_flags_vertical = 8
 theme_override_styles/background = SubResource("StyleBoxEmpty_6h6y6")
@@ -1345,27 +1572,27 @@ step = 1.0
 value = 10.0
 show_percentage = false
 
-[node name="no_motion" type="PanelContainer" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/ailments"]
+[node name="no_motion" type="PanelContainer" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/rock/ailments"]
 visible = false
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_dil3k")
 
-[node name="cancel" type="Label" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/ailments/no_motion"]
+[node name="cancel" type="Label" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/rock/ailments/no_motion"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("18_3tqp8")
 theme_override_font_sizes/font_size = 24
 theme_override_styles/normal = SubResource("StyleBoxFlat_aagfr")
 text = "🚫"
 
-[node name="category" type="Label" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/ailments/no_motion"]
+[node name="category" type="Label" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/rock/ailments/no_motion"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("18_3tqp8")
 theme_override_font_sizes/font_size = 16
 theme_override_styles/normal = SubResource("StyleBoxFlat_la40t")
 text = "🦶"
 
-[node name="margin" type="MarginContainer" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/ailments/no_motion"]
+[node name="margin" type="MarginContainer" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/rock/ailments/no_motion"]
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_constants/margin_left = 3
@@ -1373,7 +1600,7 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 3
 theme_override_constants/margin_bottom = 0
 
-[node name="time" type="ProgressBar" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/ailments/no_motion/margin"]
+[node name="time" type="ProgressBar" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/rock/ailments/no_motion/margin"]
 layout_mode = 2
 size_flags_vertical = 8
 theme_override_styles/background = SubResource("StyleBoxEmpty_n0yye")
@@ -1383,27 +1610,27 @@ step = 1.0
 value = 10.0
 show_percentage = false
 
-[node name="no_action" type="PanelContainer" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/ailments"]
+[node name="no_action" type="PanelContainer" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/rock/ailments"]
 visible = false
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_loeqg")
 
-[node name="cancel" type="Label" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/ailments/no_action"]
+[node name="cancel" type="Label" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/rock/ailments/no_action"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("18_3tqp8")
 theme_override_font_sizes/font_size = 24
 theme_override_styles/normal = SubResource("StyleBoxFlat_b8doq")
 text = "🚫"
 
-[node name="category" type="Label" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/ailments/no_action"]
+[node name="category" type="Label" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/rock/ailments/no_action"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("18_3tqp8")
 theme_override_font_sizes/font_size = 16
 theme_override_styles/normal = SubResource("StyleBoxFlat_psn67")
 text = "✊"
 
-[node name="margin" type="MarginContainer" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/ailments/no_action"]
+[node name="margin" type="MarginContainer" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/rock/ailments/no_action"]
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_constants/margin_left = 3
@@ -1411,7 +1638,7 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 3
 theme_override_constants/margin_bottom = 0
 
-[node name="time" type="ProgressBar" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/ailments/no_action/margin"]
+[node name="time" type="ProgressBar" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/rock/ailments/no_action/margin"]
 layout_mode = 2
 size_flags_vertical = 8
 theme_override_styles/background = SubResource("StyleBoxEmpty_6h6y6")
@@ -1421,20 +1648,20 @@ step = 1.0
 value = 10.0
 show_percentage = false
 
-[node name="ko" type="PanelContainer" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/ailments"]
+[node name="ko" type="PanelContainer" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/rock/ailments"]
 visible = false
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_ld26c")
 
-[node name="category" type="Label" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/ailments/ko"]
+[node name="category" type="Label" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/rock/ailments/ko"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("18_3tqp8")
 theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_4rqj6")
 text = "😵"
 
-[node name="margin" type="MarginContainer" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/ailments/ko"]
+[node name="margin" type="MarginContainer" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/rock/ailments/ko"]
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_constants/margin_left = 3
@@ -1442,7 +1669,7 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 3
 theme_override_constants/margin_bottom = 0
 
-[node name="time" type="ProgressBar" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/ailments/ko/margin"]
+[node name="time" type="ProgressBar" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/rock/ailments/ko/margin"]
 layout_mode = 2
 size_flags_vertical = 8
 theme_override_styles/background = SubResource("StyleBoxEmpty_pvtda")
@@ -1452,13 +1679,13 @@ step = 1.0
 value = 10.0
 show_percentage = false
 
-[node name="rage" type="PanelContainer" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/ailments"]
+[node name="rage" type="PanelContainer" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/rock/ailments"]
 visible = false
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_loeqg")
 
-[node name="cancel" type="Label" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/ailments/rage"]
+[node name="cancel" type="Label" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/rock/ailments/rage"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.313726, 0.313726, 0.313726, 1)
 theme_override_fonts/font = ExtResource("18_3tqp8")
@@ -1466,7 +1693,7 @@ theme_override_font_sizes/font_size = 24
 theme_override_styles/normal = SubResource("StyleBoxFlat_b8doq")
 text = "🔥"
 
-[node name="category" type="Label" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/ailments/rage"]
+[node name="category" type="Label" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/rock/ailments/rage"]
 layout_mode = 2
 size_flags_vertical = 8
 theme_override_fonts/font = ExtResource("18_3tqp8")
@@ -1474,7 +1701,7 @@ theme_override_font_sizes/font_size = 16
 theme_override_styles/normal = SubResource("StyleBoxEmpty_w6vwc")
 text = "😡"
 
-[node name="margin" type="MarginContainer" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/ailments/rage"]
+[node name="margin" type="MarginContainer" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/rock/ailments/rage"]
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_constants/margin_left = 3
@@ -1482,7 +1709,7 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 3
 theme_override_constants/margin_bottom = 0
 
-[node name="time" type="ProgressBar" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock/ailments/rage/margin"]
+[node name="time" type="ProgressBar" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/rock/ailments/rage/margin"]
 layout_mode = 2
 size_flags_vertical = 8
 theme_override_styles/background = SubResource("StyleBoxEmpty_6h6y6")
@@ -1492,26 +1719,7 @@ step = 1.0
 value = 10.0
 show_percentage = false
 
-[node name="timer" type="Timer" parent="menu/stats/inventory/ability/controls/markers/margin/score/stack/rock"]
-
-[node name="synergy" type="MarginContainer" parent="menu/stats/inventory/ability/controls/markers/margin/score"]
-visible = false
-layout_mode = 2
-theme_override_constants/margin_left = 1
-theme_override_constants/margin_top = 1
-theme_override_constants/margin_right = 1
-theme_override_constants/margin_bottom = 1
-
-[node name="points" type="ProgressBar" parent="menu/stats/inventory/ability/controls/markers/margin/score/synergy"]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 1
-theme_override_styles/background = SubResource("StyleBoxFlat_x6rox")
-theme_override_styles/fill = SubResource("StyleBoxFlat_6h6y6")
-step = 1.0
-value = 20.0
-fill_mode = 2
-show_percentage = false
+[node name="timer" type="Timer" parent="menu/stats/inventory/ability/controls/status/markers/margin/score/stack/rock"]
 
 [node name="hints" type="VBoxContainer" parent="menu/stats/inventory/ability/controls"]
 layout_mode = 2
@@ -1567,11 +1775,86 @@ size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.25
 script = ExtResource("13_uhig6")
 
-[node name="tabs" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats"]
+[node name="log" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="stamina" type="Control" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/log"]
+custom_minimum_size = Vector2(1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="value" type="Control" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/log/stamina"]
+visible = false
+custom_minimum_size = Vector2(1, 2)
+layout_mode = 2
+anchors_preset = 0
+offset_right = 1.0
+offset_bottom = 337.0
+
+[node name="act" type="ColorRect" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/log/stamina/value"]
+custom_minimum_size = Vector2(1, 6)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -0.5
+offset_top = -6.0
+offset_right = 0.5
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.45098, 0.533333, 1, 1)
+
+[node name="walk" type="ColorRect" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/log/stamina/value"]
+custom_minimum_size = Vector2(1, 6)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -0.5
+offset_top = -3.0
+offset_right = 0.5
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 0.588235, 1)
+
+[node name="run" type="ColorRect" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/log/stamina/value"]
+custom_minimum_size = Vector2(1, 6)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -0.5
+offset_right = 0.5
+offset_bottom = 6.0
+grow_horizontal = 2
+color = Color(1, 0.752941, 0.588235, 1)
+
+[node name="amount" type="ProgressBar" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/log/stamina/value"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxEmpty_o4lum")
+theme_override_styles/fill = SubResource("StyleBoxFlat_n0yye")
+max_value = 40.0
+step = 1.0
+fill_mode = 3
+show_percentage = false
+
+[node name="tabs" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/log"]
 layout_mode = 2
 size_flags_vertical = 8
 
-[node name="toggle" type="Button" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/tabs"]
+[node name="toggle" type="Button" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/log/tabs"]
 visible = false
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
@@ -1581,9 +1864,9 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_jbac8")
 text = "⬅️"
 alignment = 0
 
-[node name="hooder" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/tabs/toggle" instance=ExtResource("43_xe00t")]
+[node name="hooder" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/log/tabs/toggle" instance=ExtResource("43_xe00t")]
 
-[node name="search" type="Button" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/tabs"]
+[node name="search" type="Button" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/log/tabs"]
 visible = false
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
@@ -1593,9 +1876,9 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_6gnce")
 text = "🔍"
 alignment = 0
 
-[node name="hooder" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/tabs/search" instance=ExtResource("43_xe00t")]
+[node name="hooder" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/log/tabs/search" instance=ExtResource("43_xe00t")]
 
-[node name="game" type="Button" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/tabs"]
+[node name="game" type="Button" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/log/tabs"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_42m6k")
@@ -1604,9 +1887,9 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_tveuy")
 text = "🗃️"
 alignment = 0
 
-[node name="hooder" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/tabs/game" instance=ExtResource("43_xe00t")]
+[node name="hooder" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/log/tabs/game" instance=ExtResource("43_xe00t")]
 
-[node name="chat" type="Button" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/tabs"]
+[node name="chat" type="Button" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/log/tabs"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_42m6k")
@@ -1615,9 +1898,9 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_6gnce")
 text = "💻"
 alignment = 0
 
-[node name="hooder" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/tabs/chat" instance=ExtResource("43_xe00t")]
+[node name="hooder" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/log/tabs/chat" instance=ExtResource("43_xe00t")]
 
-[node name="margin" type="MarginContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/tabs/chat"]
+[node name="margin" type="MarginContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/log/tabs/chat"]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -1630,7 +1913,7 @@ theme_override_constants/margin_top = 2
 theme_override_constants/margin_right = 2
 theme_override_constants/margin_bottom = 2
 
-[node name="icon" type="TextureRect" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/tabs/chat/margin"]
+[node name="icon" type="TextureRect" parent="menu/stats/inventory/ability/controls/hints/space/preview/chats/log/tabs/chat/margin"]
 layout_mode = 2
 texture = ExtResource("22_rw2ti")
 expand_mode = 1
@@ -1998,11 +2281,15 @@ size_flags_vertical = 8
 layout_mode = 2
 size_flags_vertical = 8
 
-[node name="tabs" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/help"]
+[node name="ability" type="HBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/help"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="tabs" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/help/ability"]
 layout_mode = 2
 size_flags_vertical = 8
 
-[node name="toggle" type="Button" parent="menu/stats/inventory/ability/controls/hints/space/preview/help/tabs"]
+[node name="toggle" type="Button" parent="menu/stats/inventory/ability/controls/hints/space/preview/help/ability/tabs"]
 visible = false
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
@@ -2012,9 +2299,9 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_jbac8")
 text = "➡️"
 alignment = 0
 
-[node name="hooder" parent="menu/stats/inventory/ability/controls/hints/space/preview/help/tabs/toggle" instance=ExtResource("43_xe00t")]
+[node name="hooder" parent="menu/stats/inventory/ability/controls/hints/space/preview/help/ability/tabs/toggle" instance=ExtResource("43_xe00t")]
 
-[node name="analyze" type="Button" parent="menu/stats/inventory/ability/controls/hints/space/preview/help/tabs"]
+[node name="analyze" type="Button" parent="menu/stats/inventory/ability/controls/hints/space/preview/help/ability/tabs"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("18_3tqp8")
@@ -2023,9 +2310,9 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_pau43")
 text = "🔎"
 alignment = 0
 
-[node name="hooder" parent="menu/stats/inventory/ability/controls/hints/space/preview/help/tabs/analyze" instance=ExtResource("43_xe00t")]
+[node name="hooder" parent="menu/stats/inventory/ability/controls/hints/space/preview/help/ability/tabs/analyze" instance=ExtResource("43_xe00t")]
 
-[node name="books" type="Button" parent="menu/stats/inventory/ability/controls/hints/space/preview/help/tabs"]
+[node name="books" type="Button" parent="menu/stats/inventory/ability/controls/hints/space/preview/help/ability/tabs"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_42m6k")
@@ -2034,7 +2321,68 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_6gnce")
 text = "📚"
 alignment = 0
 
-[node name="hooder" parent="menu/stats/inventory/ability/controls/hints/space/preview/help/tabs/books" instance=ExtResource("43_xe00t")]
+[node name="hooder" parent="menu/stats/inventory/ability/controls/hints/space/preview/help/ability/tabs/books" instance=ExtResource("43_xe00t")]
+
+[node name="synergy" type="MarginContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/help/ability"]
+custom_minimum_size = Vector2(3, 0)
+layout_mode = 2
+theme_override_constants/margin_left = 1
+theme_override_constants/margin_top = 1
+theme_override_constants/margin_right = 1
+theme_override_constants/margin_bottom = 1
+
+[node name="points" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/hints/space/preview/help/ability/synergy"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="ray" type="ProgressBar" parent="menu/stats/inventory/ability/controls/hints/space/preview/help/ability/synergy/points"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 3
+theme_override_styles/background = SubResource("StyleBoxFlat_x6rox")
+theme_override_styles/fill = SubResource("StyleBoxFlat_6h6y6")
+max_value = 20.0
+step = 1.0
+value = 20.0
+fill_mode = 3
+show_percentage = false
+
+[node name="rock" type="ProgressBar" parent="menu/stats/inventory/ability/controls/hints/space/preview/help/ability/synergy/points"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 3
+theme_override_styles/background = SubResource("StyleBoxFlat_x6rox")
+theme_override_styles/fill = SubResource("StyleBoxFlat_6h6y6")
+max_value = 20.0
+step = 1.0
+value = 20.0
+fill_mode = 3
+show_percentage = false
+
+[node name="rock2" type="ProgressBar" parent="menu/stats/inventory/ability/controls/hints/space/preview/help/ability/synergy/points"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 3
+theme_override_styles/background = SubResource("StyleBoxFlat_x6rox")
+theme_override_styles/fill = SubResource("StyleBoxFlat_6h6y6")
+max_value = 20.0
+step = 1.0
+value = 20.0
+fill_mode = 3
+show_percentage = false
+
+[node name="rock3" type="ProgressBar" parent="menu/stats/inventory/ability/controls/hints/space/preview/help/ability/synergy/points"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 3
+theme_override_styles/background = SubResource("StyleBoxFlat_x6rox")
+theme_override_styles/fill = SubResource("StyleBoxFlat_6h6y6")
+max_value = 20.0
+step = 1.0
+value = 20.0
+fill_mode = 3
+show_percentage = false
 
 [node name="bottom" type="Control" parent="menu/stats/inventory/ability/controls/hints"]
 layout_mode = 2
@@ -2194,16 +2542,31 @@ custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
 script = ExtResource("2_m0xgs")
 
+[node name="left-space" type="Control" parent="menu/stats/inventory/ability/controls/topic"]
+visible = false
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+size_flags_stretch_ratio = 0.25
+
 [node name="pause" parent="menu/stats/inventory/ability/controls/topic" instance=ExtResource("1_p1rgr")]
 custom_minimum_size = Vector2(40, 30)
 layout_mode = 2
 
 [node name="hooder" parent="menu/stats/inventory/ability/controls/topic/pause" instance=ExtResource("43_xe00t")]
 
-[node name="left-space" type="Control" parent="menu/stats/inventory/ability/controls/topic"]
+[node name="menu" type="Button" parent="menu/stats/inventory/ability/controls/topic"]
+custom_minimum_size = Vector2(40, 30)
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.25
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 18
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_eq6yd")
+theme_override_styles/normal = SubResource("StyleBoxFlat_fuh2f")
+disabled = true
+shortcut = ExtResource("13_1chk7")
+text = "Y"
+
+[node name="hooder" parent="menu/stats/inventory/ability/controls/topic/menu" instance=ExtResource("43_xe00t")]
 
 [node name="items" type="VBoxContainer" parent="menu/stats/inventory/ability/controls/topic"]
 layout_mode = 2
@@ -2229,23 +2592,37 @@ grow_vertical = 2
 visible = false
 layout_mode = 1
 
-[node name="right-space" type="Control" parent="menu/stats/inventory/ability/controls/topic"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.25
-
-[node name="menu" type="Button" parent="menu/stats/inventory/ability/controls/topic"]
+[node name="team" type="Button" parent="menu/stats/inventory/ability/controls/topic"]
 custom_minimum_size = Vector2(40, 30)
 layout_mode = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 8
 size_flags_vertical = 8
-theme_override_font_sizes/font_size = 18
-theme_override_styles/normal = SubResource("StyleBoxFlat_fuh2f")
-disabled = true
-shortcut = ExtResource("13_1chk7")
-text = "Alt"
+theme_override_fonts/font = ExtResource("18_3tqp8")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_upyjg")
+text = "🙂‍↔️"
+alignment = 0
 
-[node name="hooder" parent="menu/stats/inventory/ability/controls/topic/menu" instance=ExtResource("43_xe00t")]
+[node name="hooder" parent="menu/stats/inventory/ability/controls/topic/team" instance=ExtResource("43_xe00t")]
+
+[node name="group" type="Button" parent="menu/stats/inventory/ability/controls/topic"]
+custom_minimum_size = Vector2(40, 30)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("18_3tqp8")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_3yh6s")
+text = "😶‍🌫️"
+alignment = 0
+
+[node name="hooder" parent="menu/stats/inventory/ability/controls/topic/group" instance=ExtResource("43_xe00t")]
+
+[node name="right-space" type="Control" parent="menu/stats/inventory/ability/controls/topic"]
+visible = false
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+size_flags_stretch_ratio = 0.25
 
 [node name="topic" parent="menu/stats/inventory/ability" instance=ExtResource("14_joidv")]
 layout_mode = 2

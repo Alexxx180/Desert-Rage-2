@@ -10,7 +10,7 @@ extends Node
 #@onready var stats: Node = $stats
 
 func controls(ui: CanvasLayer, game: Control) -> void:
-	pause.controls(ui, game.options.pause)
+	# pause.controls(ui, game.options.pause) # TODO FIXME PAUSE
 	help.controls(ui, game)
 	gameplay.controls(ui, game.options)
 	var group: Node2D = ui.get_node("../../group")

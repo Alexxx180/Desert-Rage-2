@@ -8,8 +8,9 @@ var short: String
 var description: String
 var icon: String
 
-func _init(_type: int, _name: String, _short: String, _desc: String) -> void:
+func _init(_type: int, _name: String, _short: String, _desc: String, _icon: String) -> void:
 	type = _type
 	name = _name
 	short = _short
 	description = _desc
+	icon = _icon

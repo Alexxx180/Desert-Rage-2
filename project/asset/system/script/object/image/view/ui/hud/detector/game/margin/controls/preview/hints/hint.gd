@@ -9,8 +9,8 @@ func is_gamepad_connected() -> bool:
 	return Input.get_connected_joypads().size() > 0
 
 func _ready() -> void:
-	head.text = help.head # TODO FIX HELP HINT
-	caption.text = help.body % help.keyboard
+	head.text = help.head # TODO FIXME HELP HINT
+	# caption.text = help.body % help.keyboard
 
 func _change_state(color: Color) -> void:
 	create_tween().tween_property(self, "modulate", color, 0.5)
@@ -46,4 +46,5 @@ func sync_control_hint(event: InputEvent) -> void:
 	if event is InputEventJoypadButton or event is InputEventJoypadMotion:
 		caption.text = get_gamepad_hint()
 	else:
-		caption.text = help.body % help.keyboard
+		pass # TODO FIXME HELP 
+		# caption.text = help.body % help.keyboard

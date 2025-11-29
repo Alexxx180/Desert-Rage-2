@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://cq5jn6k2bwg5n"]
+[gd_scene load_steps=31 format=3 uid="uid://cq5jn6k2bwg5n"]
 
 [ext_resource type="FontFile" uid="uid://bghvysgyoj1y7" path="res://asset/resource/media/data/font/title/Equilibrist Semibold.ttf" id="1_m3psj"]
 [ext_resource type="Script" uid="uid://b2ugt042kmpr0" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/menu/topic/status.gd" id="1_stn0a"]
@@ -7,6 +7,7 @@
 [ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://asset/resource/ui/theme/patterns/template/menu/settings/topic/footer.tres" id="4_hnjmq"]
 [ext_resource type="PackedScene" uid="uid://b5qo332jiddu3" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/ability/status/enemy.tscn" id="5_crv53"]
 [ext_resource type="FontFile" uid="uid://b37js8y80ak1k" path="res://asset/resource/media/data/font/NotoColorEmoji-Regular.ttf" id="6_f3i4p"]
+[ext_resource type="FontFile" uid="uid://tledodlx6okb" path="res://asset/resource/media/data/font/LTSuperiorMono-Semibold.otf" id="8_nfruw"]
 
 [sub_resource type="Gradient" id="Gradient_ok865"]
 colors = PackedColorArray(0.392157, 0.392157, 0.686275, 0.470588, 0, 0, 0, 0)
@@ -65,16 +66,6 @@ content_margin_top = 3.0
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fxbxi"]
 bg_color = Color(0.739789, 2.00946e-06, 5.77569e-07, 1)
 
-[sub_resource type="Gradient" id="Gradient_e8qsl"]
-colors = PackedColorArray(0, 0, 0, 0, 0.184314, 0.184314, 0.72549, 0.235294)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_ddn1q"]
-gradient = SubResource("Gradient_e8qsl")
-width = 58
-height = 25
-fill_from = Vector2(0.495137, 1)
-fill_to = Vector2(0.495137, 0)
-
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_stn0a"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_v78vk"]
@@ -84,6 +75,24 @@ content_margin_top = 6.0
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4mbfr"]
 content_margin_left = 7.0
 content_margin_top = 6.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nfruw"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hnjmq"]
+bg_color = Color(0.0255499, 0.0246065, 0.204078, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nfruw"]
+bg_color = Color(0.184314, 0.184314, 0.72549, 1)
+
+[sub_resource type="Gradient" id="Gradient_e8qsl"]
+colors = PackedColorArray(0, 0, 0, 0, 0.184314, 0.184314, 0.72549, 0.235294)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ddn1q"]
+gradient = SubResource("Gradient_e8qsl")
+width = 58
+height = 29
+fill_from = Vector2(0.497347, 0)
+fill_to = Vector2(0.497347, 1)
 
 [node name="status" type="HBoxContainer"]
 anchors_preset = 10
@@ -364,16 +373,13 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="enemy_1" parent="enemies" instance=ExtResource("5_crv53")]
-visible = false
 layout_mode = 1
 anchors_preset = 15
-anchor_right = 1.0
 anchor_bottom = 1.0
-grow_horizontal = 2
+offset_bottom = 0.0
 grow_vertical = 2
 
 [node name="preset" type="HBoxContainer" parent="."]
-visible = false
 layout_mode = 2
 size_flags_horizontal = 8
 
@@ -382,19 +388,8 @@ layout_mode = 2
 size_flags_horizontal = 10
 theme_override_constants/separation = -1
 
-[node name="lamp" type="ColorRect" parent="preset/first"]
-custom_minimum_size = Vector2(0, 1)
-layout_mode = 2
-color = Color(0.184314, 0.184314, 0.72549, 1)
-
-[node name="shadow" type="TextureRect" parent="preset/first/lamp"]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-grow_horizontal = 2
-texture = SubResource("GradientTexture2D_ddn1q")
-
 [node name="skill" type="Button" parent="preset/first"]
+visible = false
 custom_minimum_size = Vector2(65, 30)
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxEmpty_stn0a")
@@ -429,6 +424,92 @@ theme_override_font_sizes/font_size = 18
 theme_override_styles/normal = SubResource("StyleBoxEmpty_4mbfr")
 text = "🎣"
 alignment = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="preset/first"]
+custom_minimum_size = Vector2(0, 29)
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="ap" type="HBoxContainer" parent="preset/first/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="left" type="Control" parent="preset/first/MarginContainer/ap"]
+custom_minimum_size = Vector2(7, 0)
+layout_mode = 2
+
+[node name="health" type="Label" parent="preset/first/MarginContainer/ap"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/font_color = Color(0.920995, 0.920995, 0.920995, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("8_nfruw")
+theme_override_font_sizes/font_size = 16
+text = "150"
+horizontal_alignment = 1
+
+[node name="minus" type="Label" parent="preset/first/MarginContainer/ap"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/font_color = Color(0.920995, 0.920995, 0.920995, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("8_nfruw")
+theme_override_font_sizes/font_size = 10
+text = "–"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="value" type="Label" parent="preset/first/MarginContainer/ap"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(0.920995, 0.920995, 0.920995, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("8_nfruw")
+theme_override_font_sizes/font_size = 16
+text = "15"
+horizontal_alignment = 1
+
+[node name="right" type="Control" parent="preset/first/MarginContainer/ap"]
+custom_minimum_size = Vector2(7, 0)
+layout_mode = 2
+
+[node name="current" type="ProgressBar" parent="preset/first"]
+custom_minimum_size = Vector2(0, 1)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxEmpty_nfruw")
+theme_override_styles/fill = SubResource("StyleBoxFlat_hnjmq")
+value = 70.0
+show_percentage = false
+
+[node name="cost" type="ProgressBar" parent="preset/first/current"]
+custom_minimum_size = Vector2(0, 1)
+layout_mode = 2
+offset_right = 73.0
+offset_bottom = 1.0
+theme_override_styles/background = SubResource("StyleBoxEmpty_nfruw")
+theme_override_styles/fill = SubResource("StyleBoxFlat_nfruw")
+value = 50.0
+show_percentage = false
+
+[node name="shadow" type="TextureRect" parent="preset/first/current"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -25.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = SubResource("GradientTexture2D_ddn1q")
 
 [node name="second" type="VBoxContainer" parent="preset"]
 visible = false

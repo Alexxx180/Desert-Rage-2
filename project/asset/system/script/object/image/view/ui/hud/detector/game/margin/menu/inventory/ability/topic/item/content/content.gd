@@ -18,5 +18,5 @@ func replace_item(next: Dictionary, prev: Dictionary) -> void:
 
 func put_item(slot: Dictionary) -> void:
 	var item: Item = items.inventory.items.items[slot.id]
-	view.put_item(icons + "items/bottle.svg") #  + item.icon
+	view.put_item(icons + "/" + item.icon) #  + item.icon
 	count.set_value(slot.x)

@@ -2,7 +2,7 @@ extends BoxContainer
 
 signal show_toggle(state: bool)
 
-@onready var tabs: BoxContainer = $tabs
+@onready var tabs: BoxContainer = $log/tabs
 @onready var chat: PanelContainer = $scroll/list/chat
 @onready var log: PanelContainer = $scroll/list/log
 

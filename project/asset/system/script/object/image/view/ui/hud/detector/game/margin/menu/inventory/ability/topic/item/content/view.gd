@@ -9,6 +9,7 @@ func remove_item() -> void:
 func put_item(value: String) -> void:
 	if value.contains("/"):
 		# image.icon
+		print("ICON VALUE: ", value)
 		image.texture = ImageTexture.create_from_image(Image.load_from_file(value))
 		image.show()
 	else:
