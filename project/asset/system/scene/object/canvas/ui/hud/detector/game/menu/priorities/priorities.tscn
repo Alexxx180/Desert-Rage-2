@@ -1,6 +1,6 @@
-[gd_scene load_steps=34 format=3 uid="uid://sloxw12np1ch"]
+[gd_scene load_steps=38 format=3 uid="uid://sloxw12np1ch"]
 
-[ext_resource type="PackedScene" uid="uid://bky5mu10x2da3" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/status.tscn" id="1_2h7wb"]
+[ext_resource type="PackedScene" uid="uid://bky5mu10x2da3" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/status/status.tscn" id="1_2h7wb"]
 [ext_resource type="StyleBox" uid="uid://cvfnqancophme" path="res://asset/resource/ui/theme/style/solid-color-panel.tres" id="1_xvq4b"]
 [ext_resource type="Script" uid="uid://creg8v0kuegg7" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/menu/summary/summary.gd" id="2_gprs2"]
 [ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://asset/resource/ui/theme/patterns/template/menu/settings/topic/footer.tres" id="2_xvq4b"]
@@ -44,6 +44,20 @@ bg_color = Color(0.89059, 0.89059, 0.89059, 1)
 content_margin_left = 3.0
 content_margin_right = 2.0
 bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_k8lmy"]
+content_margin_left = 0.0
+content_margin_top = 4.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_htvmv"]
+content_margin_left = 3.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pvcso"]
+content_margin_left = 0.0
+content_margin_top = 4.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_iyg18"]
+content_margin_left = 3.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tlufy"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -171,8 +185,8 @@ size_flags_horizontal = 3
 [node name="pursuit" type="Button" parent="scroll/margin/stack/priority"]
 custom_minimum_size = Vector2(0, 34)
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxEmpty_ph3re")
 theme_override_styles/hover = ExtResource("5_ighkc")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ph3re")
 script = ExtResource("5_ph3re")
 
 [node name="description" type="HBoxContainer" parent="scroll/margin/stack/priority/pursuit"]
@@ -308,8 +322,8 @@ color = Color(0.435294, 0.435294, 0.435294, 1)
 [node name="self_control" type="Button" parent="scroll/margin/stack/priority"]
 custom_minimum_size = Vector2(0, 34)
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxEmpty_ph3re")
 theme_override_styles/hover = ExtResource("5_ighkc")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ph3re")
 script = ExtResource("5_ph3re")
 priority_no = 1
 
@@ -449,8 +463,8 @@ color = Color(0.435294, 0.435294, 0.435294, 1)
 [node name="tenacity" type="Button" parent="scroll/margin/stack/priority"]
 custom_minimum_size = Vector2(0, 34)
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxEmpty_ph3re")
 theme_override_styles/hover = ExtResource("5_ighkc")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ph3re")
 script = ExtResource("5_ph3re")
 priority_no = 2
 
@@ -601,6 +615,7 @@ layout_mode = 2
 [node name="passive" type="HFlowContainer" parent="scroll/margin/stack/priority/description"]
 custom_minimum_size = Vector2(130, 0)
 layout_mode = 2
+theme_override_constants/h_separation = 20
 
 [node name="growth" type="Label" parent="scroll/margin/stack/priority/description/passive"]
 layout_mode = 2
@@ -623,7 +638,7 @@ size_flags_vertical = 4
 [node name="caption" type="Label" parent="scroll/margin/stack/priority/description/passive/add/ray/power"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_f2xkq")
-theme_override_styles/normal = SubResource("StyleBoxFlat_tlufy")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_k8lmy")
 text = "⚔️"
 
 [node name="number" type="Label" parent="scroll/margin/stack/priority/description/passive/add/ray/power"]
@@ -631,6 +646,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.99558, 0.99558, 0.99558, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 7
+theme_override_styles/normal = SubResource("StyleBoxEmpty_htvmv")
 text = "2"
 
 [node name="influence" type="CenterContainer" parent="scroll/margin/stack/priority/description/passive/add/ray"]
@@ -641,6 +657,7 @@ size_flags_horizontal = 0
 [node name="caption" type="Label" parent="scroll/margin/stack/priority/description/passive/add/ray/influence"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_f2xkq")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_pvcso")
 text = "🔥"
 
 [node name="number" type="Label" parent="scroll/margin/stack/priority/description/passive/add/ray/influence"]
@@ -648,6 +665,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.99558, 0.99558, 0.99558, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 7
+theme_override_styles/normal = SubResource("StyleBoxEmpty_iyg18")
 text = "1"
 
 [node name="vitality" type="CenterContainer" parent="scroll/margin/stack/priority/description/passive/add/ray"]
@@ -854,6 +872,7 @@ autowrap_mode = 2
 [node name="rank" type="Label" parent="scroll/margin/stack/priority/description/HBoxContainer"]
 custom_minimum_size = Vector2(13, 30)
 layout_mode = 2
+size_flags_horizontal = 8
 size_flags_vertical = 0
 theme_override_colors/font_color = Color(0.258824, 0.258824, 0.258824, 1)
 theme_override_constants/line_spacing = -7
@@ -862,7 +881,7 @@ text = "РАНГ"
 autowrap_mode = 1
 
 [node name="space" type="Control" parent="scroll/margin/stack/priority/description/HBoxContainer"]
-custom_minimum_size = Vector2(2, 0)
+custom_minimum_size = Vector2(1, 0)
 layout_mode = 2
 
 [node name="research" type="VBoxContainer" parent="scroll/margin/stack"]
