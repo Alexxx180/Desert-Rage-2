@@ -12,19 +12,21 @@ extends Node
 func controls(ui: CanvasLayer, game: Control) -> void:
 	# pause.controls(ui, game.options.pause) # TODO FIXME PAUSE
 	help.controls(ui, game)
-	gameplay.controls(ui, game.options)
+	gameplay.controls(ui, game.controls.topic)
 	var group: Node2D = ui.get_node("../../group")
 	group.lay.tags.layer.enemy.hud.cards = game.get_enemy_cards()
 	#stats.controls(hud, group, game.get_node("menu/stats"))
-	inventory.controls(ui, group, game.get_node("menu/stats/inventory"))
+	inventory.controls(ui, group, game.priorities.stats.inventory)
 	ability.controls(ui, group, game) #game.get_node("menu/stats/inventory/ability")
 	hud.controls(ui, group, game)
+
+	var heroes: Dictionary = game.controls.status.markers.margin.stack.heroes
 
 	for hero in group.deploy.party.heroes:
 		var stats: Node = hero.logic.work.stats
 		stats.health.points.update_bar.connect(func(v: int):
 			game.set_hp_value(hero.name, v)
-			game.statuses[hero.name].set_hp(hero.logic.work.stats.health.points))
+			heroes[hero.name].set_hp(hero.logic.work.stats.health.points))
 		stats.aura.update_bar.connect(func(v: int): game.set_ap_value(hero.name, v))
 	
 	

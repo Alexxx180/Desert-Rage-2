@@ -5,22 +5,22 @@ class_name ControlTimeHooder
 const TIME: float = 0.5
 
 @export var fix_on_press: bool = false
+@export var target_path: String = ".."
 
 var state: Control
+var target: Control
 var fixed: bool = false
 
 func _ready() -> void:
-	var next = get_parent()
-	if fix_on_press: next.pressed.connect(set_fixed)
-	state = next
+	state = get_parent()
+	target = get_node(target_path)
+	if fix_on_press: state.pressed.connect(set_fixed)
 	for s in [state.focus_entered, state.mouse_entered]: s.connect(in_focus)
 	for s in [state.focus_exited, state.mouse_exited]: s.connect(out_focus)
 	_start_hide()
 
-func _tween_property(caption: String, value: Variant) -> void:
-	create_tween().tween_property(state, caption, value, TIME)
-
-func _change_state(color: Color) -> void: _tween_property("modulate", color)
+func _change_state(color: Color) -> void:
+	create_tween().tween_property(target, "modulate", color, TIME)
 
 func set_fixed() -> void:
 	fixed = !fixed
@@ -38,7 +38,5 @@ func _stop_hide() -> void:
 	_show_pause()
 
 func _show_pause() -> void: _change_state(Color.WHITE)
-# 	if time_left == 0: 
 
-func hide_pause() -> void:
-	_change_state(Color.TRANSPARENT)
+func hide_pause() -> void: _change_state(Color.TRANSPARENT)

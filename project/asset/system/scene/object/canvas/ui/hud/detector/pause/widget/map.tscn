@@ -1,0 +1,111 @@
+[gd_scene load_steps=4 format=3 uid="uid://cyw5j1y4scsdc"]
+
+[ext_resource type="FontFile" uid="uid://b37js8y80ak1k" path="res://asset/resource/media/data/font/NotoColorEmoji-Regular.ttf" id="1_cog7m"]
+[ext_resource type="StyleBox" uid="uid://c5qf02s45xwn" path="res://asset/resource/ui/theme/style/noto-color.tres" id="2_t6a7a"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bfn3g"]
+bg_color = Color(0.458011, 0.591248, 0.902475, 1)
+
+[node name="panel" type="PanelContainer"]
+theme_override_styles/panel = SubResource("StyleBoxFlat_bfn3g")
+
+[node name="margin" type="MarginContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="panel" type="PanelContainer" parent="margin"]
+layout_mode = 2
+
+[node name="margin" type="MarginContainer" parent="margin/panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 5
+
+[node name="status" type="HFlowContainer" parent="margin/panel/margin"]
+layout_mode = 2
+theme_override_constants/h_separation = 10
+
+[node name="description" type="Label" parent="margin/panel/margin/status"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Пещера истоков - Иголка в стоге сена - 30%"
+text_overrun_behavior = 3
+
+[node name="left" type="Control" parent="margin/panel/margin/status"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+
+[node name="level" type="Label" parent="margin/panel/margin/status"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+text = " 2 Этаж"
+horizontal_alignment = 2
+
+[node name="right" type="Control" parent="margin/panel/margin/status"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+
+[node name="enemy" type="HBoxContainer" parent="margin/panel/margin/status"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+
+[node name="icon" type="Label" parent="margin/panel/margin/status/enemy"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_cog7m")
+theme_override_styles/normal = ExtResource("2_t6a7a")
+text = "👻"
+
+[node name="progress" type="Label" parent="margin/panel/margin/status/enemy"]
+layout_mode = 2
+text = "2 / 3"
+
+[node name="books" type="HBoxContainer" parent="margin/panel/margin/status"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+
+[node name="icon" type="Label" parent="margin/panel/margin/status/books"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_cog7m")
+theme_override_styles/normal = ExtResource("2_t6a7a")
+text = "📖"
+
+[node name="progress" type="Label" parent="margin/panel/margin/status/books"]
+layout_mode = 2
+text = "3 / 6"
+
+[node name="pages" type="HBoxContainer" parent="margin/panel/margin/status"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+
+[node name="icon" type="Label" parent="margin/panel/margin/status/pages"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_cog7m")
+theme_override_styles/normal = ExtResource("2_t6a7a")
+text = "📜"
+
+[node name="progress" type="Label" parent="margin/panel/margin/status/pages"]
+layout_mode = 2
+text = "1 / 2"
+
+[node name="secrets" type="HBoxContainer" parent="margin/panel/margin/status"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+
+[node name="icon" type="Label" parent="margin/panel/margin/status/secrets"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_cog7m")
+theme_override_styles/normal = ExtResource("2_t6a7a")
+text = "🔍"
+
+[node name="progress" type="Label" parent="margin/panel/margin/status/secrets"]
+layout_mode = 2
+text = "2 / 7"

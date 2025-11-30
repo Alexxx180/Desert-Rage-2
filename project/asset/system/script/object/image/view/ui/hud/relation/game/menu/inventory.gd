@@ -1,18 +1,19 @@
 extends Node
 
+func update_inventory(ui: Node) -> void:
+	ui.update_inventory_storage() # TODO UPDATE INVENTORY
+	for i in range(0, len(ui.items.inventory.items)):
+	# for button in ui.items.inventory.items:
+		ui.items.inventory.items[i].pressed.connect(func():
+			ui.effect.use_item(i, ui.storage[i]))
+
 func controls(hud: CanvasLayer, group: Node2D, inventory: VSplitContainer) -> void:
 	var processor: Node = hud.processor.game.inventory
-	processor.inventory.append(inventory.get_node("topic/scroll/margin/stack/flow/ray"))
-	processor.inventory.append(hud.detector.game.get_node("menu/stats/topic/scroll/margin/stack/items/ray"))
-	processor.markers = hud.detector.game.markers
+	var items: HFlowContainer = inventory.topic.selected.ray 
+	processor.inventory.append(items)
+	processor.inventory.append(hud.detector.game.priorities.stats.topic.stack.items)
+	processor.markers = hud.detector.game.controls.status.markers
 	# processor.markers = inventory.get_node("ability/controls/markers")
-	# """
 	for hero in group.deploy.party.heroes:
-		var ui: Node = hero.logic.work.world.inventory.logic
-		ui.items.inventory = hud.detector.game.inventory.items
-		ui.update_inventory_storage()
-		for i in range(0, len(ui.items.inventory.items)):
-		# for button in ui.items.inventory.items:
-			ui.items.inventory.items[i].pressed.connect(func():
-				ui.effect.use_item(i, ui.storage[i]))
-	# """
+		hero.to.inventory.logic.items.inventory = items
+		# update_inventory(ui)

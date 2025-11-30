@@ -38,7 +38,10 @@ script = ExtResource("1_447re")
 layout_mode = 2
 theme_override_constants/margin_bottom = 20
 
-[node name="resume" parent="." instance=ExtResource("2_8gyh0")]
+[node name="options" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="resume" parent="options" instance=ExtResource("2_8gyh0")]
 custom_minimum_size = Vector2(160, 60)
 layout_mode = 2
 tooltip_text = "Назад в игру"
@@ -50,7 +53,7 @@ theme_override_styles/normal = ExtResource("5_4h84o")
 toggle_mode = false
 shortcut_in_tooltip = false
 
-[node name="information" type="Button" parent="."]
+[node name="information" type="Button" parent="options"]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 focus_neighbor_left = NodePath("../exit")
@@ -62,7 +65,7 @@ focus_previous = NodePath("../resume")
 theme_override_styles/normal = ExtResource("5_4h84o")
 shortcut = ExtResource("5_0cwon")
 
-[node name="margin" type="MarginContainer" parent="information"]
+[node name="margin" type="MarginContainer" parent="options/information"]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -72,11 +75,11 @@ offset_right = 103.0
 offset_bottom = 20.0
 grow_vertical = 2
 
-[node name="caption" type="Label" parent="information/margin"]
+[node name="caption" type="Label" parent="options/information/margin"]
 layout_mode = 2
 text = "Сведения"
 
-[node name="settings" type="Button" parent="."]
+[node name="settings" type="Button" parent="options"]
 custom_minimum_size = Vector2(160, 60)
 layout_mode = 2
 focus_neighbor_left = NodePath("../resume")
@@ -86,7 +89,7 @@ focus_next = NodePath("../exit")
 theme_override_styles/normal = ExtResource("5_4h84o")
 shortcut = SubResource("Shortcut_lsiya")
 
-[node name="margin" type="MarginContainer" parent="settings"]
+[node name="margin" type="MarginContainer" parent="options/settings"]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -96,11 +99,11 @@ offset_right = 165.0
 offset_bottom = 49.0
 grow_vertical = 2
 
-[node name="caption" type="Label" parent="settings/margin"]
+[node name="caption" type="Label" parent="options/settings/margin"]
 layout_mode = 2
 text = "Настройки"
 
-[node name="exit" parent="." instance=ExtResource("5_8a5yd")]
+[node name="exit" parent="options" instance=ExtResource("5_8a5yd")]
 custom_minimum_size = Vector2(160, 60)
 layout_mode = 2
 size_flags_horizontal = 1

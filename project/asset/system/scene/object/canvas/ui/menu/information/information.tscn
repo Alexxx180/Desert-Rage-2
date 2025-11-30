@@ -9,6 +9,7 @@
 [ext_resource type="StyleBox" uid="uid://chr58r7ok2alt" path="res://asset/resource/ui/theme/style/panel/accent.tres" id="5_bfn3g"]
 [ext_resource type="Script" uid="uid://b06ntftlpr38h" path="res://asset/system/script/object/image/view/ui/menu/information/card.gd" id="5_ux7gx"]
 [ext_resource type="StyleBox" uid="uid://c5qf02s45xwn" path="res://asset/resource/ui/theme/style/noto-color.tres" id="6_au5bm"]
+[ext_resource type="PackedScene" uid="uid://cyw5j1y4scsdc" path="res://asset/system/scene/object/canvas/ui/hud/detector/pause/widget/map.tscn" id="6_hyb51"]
 [ext_resource type="StyleBox" uid="uid://c8hy4gq5uksdh" path="res://asset/resource/ui/theme/style/panel/complex/hover.tres" id="6_jiab0"]
 [ext_resource type="Texture2D" uid="uid://c23wy3keigqvs" path="res://asset/resource/media/image/hints/motion.svg" id="8_hfgsm"]
 [ext_resource type="Texture2D" uid="uid://dfuu0d7o46rsx" path="res://asset/resource/media/image/hints/jump.svg" id="9_ukisd"]
@@ -46,9 +47,6 @@ content_margin_top = 7.0
 bg_color = Color(0, 0, 0, 1)
 border_width_right = 2
 border_color = Color(0.0646965, 0.0646966, 0.0646964, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bfn3g"]
-bg_color = Color(0.458011, 0.591248, 0.902475, 1)
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_jiab0"]
 color = Color(0, 0.490135, 0, 1)
@@ -108,7 +106,7 @@ theme_override_fonts/font = ExtResource("2_wr3od")
 theme_override_font_sizes/font_size = 36
 theme_override_styles/tab_selected = SubResource("StyleBoxFlat_y6mkc")
 theme_override_styles/tab_unselected = SubResource("StyleBoxFlat_wr3od")
-current_tab = 4
+current_tab = 3
 tabs_position = 1
 
 [node name="💾" type="MarginContainer" parent="detector/content"]
@@ -703,101 +701,8 @@ theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 metadata/_tab_index = 0
 
-[node name="panel" type="PanelContainer" parent="detector/content/🗺/map/Карта"]
+[node name="panel" parent="detector/content/🗺/map/Карта" instance=ExtResource("6_hyb51")]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_bfn3g")
-
-[node name="margin" type="MarginContainer" parent="detector/content/🗺/map/Карта/panel"]
-layout_mode = 2
-size_flags_vertical = 8
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
-
-[node name="panel" type="PanelContainer" parent="detector/content/🗺/map/Карта/panel/margin"]
-layout_mode = 2
-
-[node name="margin" type="MarginContainer" parent="detector/content/🗺/map/Карта/panel/margin/panel"]
-layout_mode = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 5
-
-[node name="status" type="HFlowContainer" parent="detector/content/🗺/map/Карта/panel/margin/panel/margin"]
-layout_mode = 2
-theme_override_constants/h_separation = 10
-
-[node name="description" type="Label" parent="detector/content/🗺/map/Карта/panel/margin/panel/margin/status"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Пещера истоков - Иголка в стоге сена"
-text_overrun_behavior = 3
-
-[node name="level" type="Label" parent="detector/content/🗺/map/Карта/panel/margin/panel/margin/status"]
-custom_minimum_size = Vector2(60, 0)
-layout_mode = 2
-size_flags_horizontal = 10
-text = " 2 Этаж"
-horizontal_alignment = 2
-
-[node name="enemy" type="HBoxContainer" parent="detector/content/🗺/map/Карта/panel/margin/panel/margin/status"]
-custom_minimum_size = Vector2(20, 0)
-layout_mode = 2
-
-[node name="icon" type="Label" parent="detector/content/🗺/map/Карта/panel/margin/panel/margin/status/enemy"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("2_wr3od")
-theme_override_styles/normal = ExtResource("6_au5bm")
-text = "👻"
-
-[node name="progress" type="Label" parent="detector/content/🗺/map/Карта/panel/margin/panel/margin/status/enemy"]
-layout_mode = 2
-text = "2 / 3"
-
-[node name="books" type="HBoxContainer" parent="detector/content/🗺/map/Карта/panel/margin/panel/margin/status"]
-custom_minimum_size = Vector2(20, 0)
-layout_mode = 2
-
-[node name="icon" type="Label" parent="detector/content/🗺/map/Карта/panel/margin/panel/margin/status/books"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("2_wr3od")
-theme_override_styles/normal = ExtResource("6_au5bm")
-text = "📖"
-
-[node name="progress" type="Label" parent="detector/content/🗺/map/Карта/panel/margin/panel/margin/status/books"]
-layout_mode = 2
-text = "3 / 6"
-
-[node name="pages" type="HBoxContainer" parent="detector/content/🗺/map/Карта/panel/margin/panel/margin/status"]
-custom_minimum_size = Vector2(20, 0)
-layout_mode = 2
-
-[node name="icon" type="Label" parent="detector/content/🗺/map/Карта/panel/margin/panel/margin/status/pages"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("2_wr3od")
-theme_override_styles/normal = ExtResource("6_au5bm")
-text = "📜"
-
-[node name="progress" type="Label" parent="detector/content/🗺/map/Карта/panel/margin/panel/margin/status/pages"]
-layout_mode = 2
-text = "1 / 2"
-
-[node name="secrets" type="HBoxContainer" parent="detector/content/🗺/map/Карта/panel/margin/panel/margin/status"]
-custom_minimum_size = Vector2(20, 0)
-layout_mode = 2
-
-[node name="icon" type="Label" parent="detector/content/🗺/map/Карта/panel/margin/panel/margin/status/secrets"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("2_wr3od")
-theme_override_styles/normal = ExtResource("6_au5bm")
-text = "🔍"
-
-[node name="progress" type="Label" parent="detector/content/🗺/map/Карта/panel/margin/panel/margin/status/secrets"]
-layout_mode = 2
-text = "2 / 7"
 
 [node name="Помощь" type="MarginContainer" parent="detector/content/🗺/map"]
 visible = false
@@ -4123,7 +4028,6 @@ custom_minimum_size = Vector2(90, 90)
 layout_mode = 2
 
 [node name="👁" type="MarginContainer" parent="detector/content"]
-visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
@@ -4432,6 +4336,7 @@ layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_fnw42")
 
 [node name="🧪" type="MarginContainer" parent="detector/content"]
+visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20

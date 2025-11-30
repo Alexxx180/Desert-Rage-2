@@ -1,4 +1,4 @@
-extends VBoxContainer
+extends HFlowContainer
 
 @onready var resume: Button = $resume
 @onready var information: Button = $information

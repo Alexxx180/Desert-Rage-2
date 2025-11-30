@@ -6,7 +6,7 @@ extends Node
 @onready var exit: Node = $exit
 @onready var hints: Node = $hints
 
-func controls(hud: CanvasLayer, menu: VBoxContainer) -> void:
+func controls(hud: CanvasLayer, menu: HFlowContainer) -> void:
 	resume.controls(hud, menu.resume)
 	information.controls(hud, menu.information)
 	settings.controls(hud, menu.settings)

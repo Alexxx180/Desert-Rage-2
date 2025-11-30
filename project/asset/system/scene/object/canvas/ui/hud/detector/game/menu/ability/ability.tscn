@@ -1,11 +1,13 @@
-[gd_scene load_steps=28 format=3 uid="uid://6b0ydfrtbu38"]
+[gd_scene load_steps=30 format=3 uid="uid://6b0ydfrtbu38"]
 
 [ext_resource type="PackedScene" uid="uid://scs1xlb7x0d6" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/selection.tscn" id="1_7touf"]
 [ext_resource type="StyleBox" uid="uid://cvfnqancophme" path="res://asset/resource/ui/theme/style/solid-color-panel.tres" id="1_r0sy2"]
+[ext_resource type="Script" uid="uid://crvwhurmt6td2" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/topic/topic.gd" id="2_f8gj5"]
 [ext_resource type="PackedScene" uid="uid://dugyepxewkmgo" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/pause/pause.tscn" id="2_l0mxd"]
 [ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://asset/resource/ui/theme/patterns/template/menu/settings/topic/footer.tres" id="2_r0sy2"]
 [ext_resource type="FontFile" uid="uid://b37js8y80ak1k" path="res://asset/resource/media/data/font/NotoColorEmoji-Regular.ttf" id="3_5obb3"]
 [ext_resource type="PackedScene" uid="uid://l7thqkrsol4m" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/priorities/perks.tscn" id="3_h2uo5"]
+[ext_resource type="Script" uid="uid://mfje2iy274bg" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/topic/fast_access.gd" id="4_ddn1q"]
 [ext_resource type="PackedScene" uid="uid://cq5jn6k2bwg5n" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/ability/status/status.tscn" id="4_l3qyh"]
 [ext_resource type="FontFile" uid="uid://b2wbdbnkxcqv1" path="res://asset/resource/media/data/font/NotoEmoji-VariableFont_wght.ttf" id="5_e8qsl"]
 [ext_resource type="PackedScene" uid="uid://qlgo5b48kj7l" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/ability/status/description.tscn" id="5_l3qyh"]
@@ -104,6 +106,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 3
 theme_override_styles/panel = ExtResource("1_r0sy2")
+script = ExtResource("2_f8gj5")
 
 [node name="back" type="Panel" parent="."]
 layout_mode = 2
@@ -147,6 +150,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 10
+script = ExtResource("4_ddn1q")
 
 [node name="pause" parent="scroll/margin/stack/menu/space/fast_access" instance=ExtResource("2_l0mxd")]
 custom_minimum_size = Vector2(40, 30)
@@ -242,57 +246,57 @@ text = "Alt"
 [node name="content" type="HBoxContainer" parent="scroll/margin/stack"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="scroll/margin/stack/content"]
+[node name="skill" type="VBoxContainer" parent="scroll/margin/stack/content"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 15
 
-[node name="perks" parent="scroll/margin/stack/content/VBoxContainer" instance=ExtResource("3_h2uo5")]
+[node name="perks" parent="scroll/margin/stack/content/skill" instance=ExtResource("3_h2uo5")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
 
-[node name="flow" type="HFlowContainer" parent="scroll/margin/stack/content/VBoxContainer"]
+[node name="flow" type="HFlowContainer" parent="scroll/margin/stack/content/skill"]
 layout_mode = 2
 theme_override_constants/h_separation = 25
 
-[node name="selection" parent="scroll/margin/stack/content/VBoxContainer/flow" instance=ExtResource("1_7touf")]
+[node name="selection" parent="scroll/margin/stack/content/skill/flow" instance=ExtResource("1_7touf")]
 visible = false
 layout_mode = 2
 
-[node name="item" type="HBoxContainer" parent="scroll/margin/stack/content/VBoxContainer/flow"]
+[node name="item" type="HBoxContainer" parent="scroll/margin/stack/content/skill/flow"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="description" type="VBoxContainer" parent="scroll/margin/stack/content/VBoxContainer/flow/item"]
+[node name="description" type="VBoxContainer" parent="scroll/margin/stack/content/skill/flow/item"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 10
 
-[node name="tags" type="HFlowContainer" parent="scroll/margin/stack/content/VBoxContainer/flow/item/description"]
+[node name="tags" type="HFlowContainer" parent="scroll/margin/stack/content/skill/flow/item/description"]
 layout_mode = 2
 theme_override_constants/h_separation = 10
 
-[node name="main" type="HBoxContainer" parent="scroll/margin/stack/content/VBoxContainer/flow/item/description/tags"]
+[node name="main" type="HBoxContainer" parent="scroll/margin/stack/content/skill/flow/item/description/tags"]
 layout_mode = 2
 size_flags_horizontal = 2
 theme_override_constants/separation = 5
 
-[node name="preview" type="PanelContainer" parent="scroll/margin/stack/content/VBoxContainer/flow/item/description/tags/main"]
+[node name="preview" type="PanelContainer" parent="scroll/margin/stack/content/skill/flow/item/description/tags/main"]
 custom_minimum_size = Vector2(45, 45)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxEmpty_5p2ax")
 
-[node name="margin" type="MarginContainer" parent="scroll/margin/stack/content/VBoxContainer/flow/item/description/tags/main/preview"]
+[node name="margin" type="MarginContainer" parent="scroll/margin/stack/content/skill/flow/item/description/tags/main/preview"]
 layout_mode = 2
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 2
 
-[node name="icon" type="Label" parent="scroll/margin/stack/content/VBoxContainer/flow/item/description/tags/main/preview/margin"]
+[node name="icon" type="Label" parent="scroll/margin/stack/content/skill/flow/item/description/tags/main/preview/margin"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
@@ -300,18 +304,18 @@ theme_override_fonts/font = ExtResource("3_5obb3")
 theme_override_font_sizes/font_size = 28
 text = "🔥"
 
-[node name="caption" type="Label" parent="scroll/margin/stack/content/VBoxContainer/flow/item/description/tags/main"]
+[node name="caption" type="Label" parent="scroll/margin/stack/content/skill/flow/item/description/tags/main"]
 layout_mode = 2
 size_flags_horizontal = 10
 theme_override_font_sizes/font_size = 24
 text = "Факел"
 
-[node name="blue" type="VBoxContainer" parent="scroll/margin/stack/content/VBoxContainer/flow/item/description/tags"]
+[node name="blue" type="VBoxContainer" parent="scroll/margin/stack/content/skill/flow/item/description/tags"]
 layout_mode = 2
 size_flags_horizontal = 10
 theme_override_constants/separation = 2
 
-[node name="ingredients" type="Label" parent="scroll/margin/stack/content/VBoxContainer/flow/item/description/tags/blue"]
+[node name="ingredients" type="Label" parent="scroll/margin/stack/content/skill/flow/item/description/tags/blue"]
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_stretch_ratio = 0.75
@@ -320,17 +324,17 @@ theme_override_font_sizes/font_size = 18
 text = "Плавление и испарение"
 horizontal_alignment = 2
 
-[node name="color" type="ColorRect" parent="scroll/margin/stack/content/VBoxContainer/flow/item/description/tags/blue"]
+[node name="color" type="ColorRect" parent="scroll/margin/stack/content/skill/flow/item/description/tags/blue"]
 custom_minimum_size = Vector2(1, 1)
 layout_mode = 2
 color = Color(0, 0.65098, 0.929412, 1)
 
-[node name="red" type="VBoxContainer" parent="scroll/margin/stack/content/VBoxContainer/flow/item/description/tags"]
+[node name="red" type="VBoxContainer" parent="scroll/margin/stack/content/skill/flow/item/description/tags"]
 layout_mode = 2
 size_flags_horizontal = 8
 theme_override_constants/separation = 2
 
-[node name="ingredients" type="Label" parent="scroll/margin/stack/content/VBoxContainer/flow/item/description/tags/red"]
+[node name="ingredients" type="Label" parent="scroll/margin/stack/content/skill/flow/item/description/tags/red"]
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_stretch_ratio = 0.75
@@ -339,17 +343,17 @@ theme_override_font_sizes/font_size = 18
 text = "Оставляет ожоги"
 horizontal_alignment = 2
 
-[node name="color" type="ColorRect" parent="scroll/margin/stack/content/VBoxContainer/flow/item/description/tags/red"]
+[node name="color" type="ColorRect" parent="scroll/margin/stack/content/skill/flow/item/description/tags/red"]
 custom_minimum_size = Vector2(1, 1)
 layout_mode = 2
 color = Color(0.792157, 0.0431373, 0.290196, 1)
 
-[node name="green" type="VBoxContainer" parent="scroll/margin/stack/content/VBoxContainer/flow/item/description/tags"]
+[node name="green" type="VBoxContainer" parent="scroll/margin/stack/content/skill/flow/item/description/tags"]
 layout_mode = 2
 size_flags_horizontal = 8
 theme_override_constants/separation = 2
 
-[node name="ingredients" type="Label" parent="scroll/margin/stack/content/VBoxContainer/flow/item/description/tags/green"]
+[node name="ingredients" type="Label" parent="scroll/margin/stack/content/skill/flow/item/description/tags/green"]
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_stretch_ratio = 0.75
@@ -358,12 +362,12 @@ theme_override_font_sizes/font_size = 18
 text = "Прижигает раны"
 horizontal_alignment = 2
 
-[node name="color" type="ColorRect" parent="scroll/margin/stack/content/VBoxContainer/flow/item/description/tags/green"]
+[node name="color" type="ColorRect" parent="scroll/margin/stack/content/skill/flow/item/description/tags/green"]
 custom_minimum_size = Vector2(1, 1)
 layout_mode = 2
 color = Color(0.52549, 0.843137, 0.184314, 1)
 
-[node name="effect" type="Label" parent="scroll/margin/stack/content/VBoxContainer/flow/item/description"]
+[node name="effect" type="Label" parent="scroll/margin/stack/content/skill/flow/item/description"]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -374,10 +378,10 @@ theme_override_font_sizes/font_size = 18
 text = "Сила, дарованная людям с незапамятных времен. Может как помочь, так и навредить. Позволяет убирать помехи на пути, выступает источником энергии."
 autowrap_mode = 2
 
-[node name="skills" type="VBoxContainer" parent="scroll/margin/stack/content/VBoxContainer/flow/item"]
+[node name="skills" type="VBoxContainer" parent="scroll/margin/stack/content/skill/flow/item"]
 layout_mode = 2
 
-[node name="effect" type="Label" parent="scroll/margin/stack/content/VBoxContainer/flow/item/skills"]
+[node name="effect" type="Label" parent="scroll/margin/stack/content/skill/flow/item/skills"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -389,18 +393,18 @@ text = "Умения"
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="ray" type="HBoxContainer" parent="scroll/margin/stack/content/VBoxContainer/flow/item/skills"]
+[node name="ray" type="HBoxContainer" parent="scroll/margin/stack/content/skill/flow/item/skills"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/separation = 7
 
-[node name="fire" type="TextureRect" parent="scroll/margin/stack/content/VBoxContainer/flow/item/skills/ray"]
+[node name="fire" type="TextureRect" parent="scroll/margin/stack/content/skill/flow/item/skills/ray"]
 custom_minimum_size = Vector2(26, 26)
 layout_mode = 2
 texture = ExtResource("10_c5kkd")
 expand_mode = 1
 
-[node name="whip" type="TextureRect" parent="scroll/margin/stack/content/VBoxContainer/flow/item/skills/ray"]
+[node name="whip" type="TextureRect" parent="scroll/margin/stack/content/skill/flow/item/skills/ray"]
 custom_minimum_size = Vector2(26, 26)
 layout_mode = 2
 texture = ExtResource("11_xukiq")

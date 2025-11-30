@@ -29,4 +29,4 @@ func _set_hero(hero: CharacterBody2D, markers: HFlowContainer) -> void:
 
 func controls(group: Node2D, game: Control) -> void:
 	for hero in ["ray", "rock"]:
-		_set_hero(group.get(hero), game.markers)
+		_set_hero(group.get(hero), game.controls.status.markers)

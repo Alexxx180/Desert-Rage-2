@@ -1,4 +1,4 @@
 extends VBoxContainer
 
-@onready var menu: VBoxContainer = $menu
+@onready var menu: HFlowContainer = $menu
 @onready var navigate: Button = $navigate

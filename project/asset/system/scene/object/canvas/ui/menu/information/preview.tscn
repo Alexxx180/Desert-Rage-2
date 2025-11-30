@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://dkkdejo26syrt"]
+[gd_scene load_steps=5 format=3 uid="uid://dkkdejo26syrt"]
 
 [ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://asset/resource/ui/theme/patterns/template/menu/settings/topic/footer.tres" id="1_a47ns"]
+[ext_resource type="FontFile" uid="uid://drm0mr2hyapf2" path="res://asset/resource/media/data/font/EmojiOneColor.otf" id="2_eucgb"]
 [ext_resource type="FontFile" uid="uid://b37js8y80ak1k" path="res://asset/resource/media/data/font/NotoColorEmoji-Regular.ttf" id="2_kl672"]
+[ext_resource type="FontFile" uid="uid://c6xnr3551fg10" path="res://asset/resource/media/data/font/Izuver.otf" id="4_efg1v"]
 
 [node name="preview" type="VBoxContainer"]
 
@@ -13,10 +15,40 @@ theme_override_constants/separation = 20
 layout_mode = 2
 size_flags_horizontal = 3
 
+[node name="HBoxContainer" type="HBoxContainer" parent="title"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="stats" type="MarginContainer" parent="title/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="icon" type="Label" parent="title/HBoxContainer/stats"]
+layout_mode = 2
+theme = ExtResource("1_a47ns")
+theme_override_fonts/font = ExtResource("2_kl672")
+text = "📊"
+
+[node name="level" type="Label" parent="title/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_a47ns")
+text = "17"
+
+[node name="separator2" type="HSeparator" parent="title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
 [node name="caption" type="Label" parent="title"]
 layout_mode = 2
 theme = ExtResource("1_a47ns")
 text = "Предпросмотр"
+
+[node name="separator3" type="HSeparator" parent="title"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
 
 [node name="content" type="HBoxContainer" parent="."]
 layout_mode = 2
@@ -52,51 +84,30 @@ autowrap_mode = 2
 [node name="heroes" type="HFlowContainer" parent="content/description/details"]
 layout_mode = 2
 theme_override_constants/h_separation = 20
-theme_override_constants/v_separation = 5
+theme_override_constants/v_separation = 0
 
 [node name="ray" type="HBoxContainer" parent="content/description/details/heroes"]
 layout_mode = 2
 
-[node name="name" type="Label" parent="content/description/details/heroes/ray"]
-layout_mode = 2
-theme = ExtResource("1_a47ns")
-text = "Рей"
-
 [node name="name-icon" type="MarginContainer" parent="content/description/details/heroes/ray"]
 layout_mode = 2
 theme_override_constants/margin_left = 4
-theme_override_constants/margin_top = 8
+theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 
 [node name="icon" type="Label" parent="content/description/details/heroes/ray/name-icon"]
 layout_mode = 2
 theme = ExtResource("1_a47ns")
-theme_override_fonts/font = ExtResource("2_kl672")
-text = "🤠"
+theme_override_fonts/font = ExtResource("2_eucgb")
+theme_override_font_sizes/font_size = 24
+text = "🕵️‍♂️"
 
-[node name="level" type="Label" parent="content/description/details/heroes/ray"]
+[node name="name" type="Label" parent="content/description/details/heroes/ray"]
+custom_minimum_size = Vector2(42, 0)
 layout_mode = 2
 theme = ExtResource("1_a47ns")
-text = "17"
-
-[node name="stats" type="MarginContainer" parent="content/description/details/heroes/ray"]
-layout_mode = 2
-theme_override_constants/margin_left = 4
-theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 0
-
-[node name="icon" type="Label" parent="content/description/details/heroes/ray/stats"]
-layout_mode = 2
-theme = ExtResource("1_a47ns")
-theme_override_fonts/font = ExtResource("2_kl672")
-text = "📊"
-
-[node name="hp" type="Label" parent="content/description/details/heroes/ray"]
-layout_mode = 2
-theme = ExtResource("1_a47ns")
-text = "100"
+text = "Рей"
 
 [node name="health" type="MarginContainer" parent="content/description/details/heroes/ray"]
 layout_mode = 2
@@ -111,10 +122,11 @@ theme = ExtResource("1_a47ns")
 theme_override_fonts/font = ExtResource("2_kl672")
 text = "🩵"
 
-[node name="ap" type="Label" parent="content/description/details/heroes/ray"]
+[node name="hp" type="Label" parent="content/description/details/heroes/ray"]
+custom_minimum_size = Vector2(42, 0)
 layout_mode = 2
 theme = ExtResource("1_a47ns")
-text = "20"
+text = "100"
 
 [node name="aura" type="MarginContainer" parent="content/description/details/heroes/ray"]
 layout_mode = 2
@@ -129,49 +141,34 @@ theme = ExtResource("1_a47ns")
 theme_override_fonts/font = ExtResource("2_kl672")
 text = "🔋"
 
-[node name="rock" type="HBoxContainer" parent="content/description/details/heroes"]
-layout_mode = 2
-
-[node name="name" type="Label" parent="content/description/details/heroes/rock"]
+[node name="ap" type="Label" parent="content/description/details/heroes/ray"]
+custom_minimum_size = Vector2(42, 0)
 layout_mode = 2
 theme = ExtResource("1_a47ns")
-text = "Рок"
+text = "20"
+
+[node name="rock" type="HBoxContainer" parent="content/description/details/heroes"]
+layout_mode = 2
 
 [node name="name-icon" type="MarginContainer" parent="content/description/details/heroes/rock"]
 layout_mode = 2
 theme_override_constants/margin_left = 4
-theme_override_constants/margin_top = 8
+theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 
 [node name="icon" type="Label" parent="content/description/details/heroes/rock/name-icon"]
 layout_mode = 2
 theme = ExtResource("1_a47ns")
-theme_override_fonts/font = ExtResource("2_kl672")
-text = "🧐"
+theme_override_fonts/font = ExtResource("4_efg1v")
+theme_override_font_sizes/font_size = 24
+text = "👨‍🏭"
 
-[node name="level" type="Label" parent="content/description/details/heroes/rock"]
+[node name="name" type="Label" parent="content/description/details/heroes/rock"]
+custom_minimum_size = Vector2(42, 0)
 layout_mode = 2
 theme = ExtResource("1_a47ns")
-text = "17"
-
-[node name="stats" type="MarginContainer" parent="content/description/details/heroes/rock"]
-layout_mode = 2
-theme_override_constants/margin_left = 4
-theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 0
-
-[node name="icon" type="Label" parent="content/description/details/heroes/rock/stats"]
-layout_mode = 2
-theme = ExtResource("1_a47ns")
-theme_override_fonts/font = ExtResource("2_kl672")
-text = "📊"
-
-[node name="hp" type="Label" parent="content/description/details/heroes/rock"]
-layout_mode = 2
-theme = ExtResource("1_a47ns")
-text = "1"
+text = "Рок"
 
 [node name="health" type="MarginContainer" parent="content/description/details/heroes/rock"]
 layout_mode = 2
@@ -186,10 +183,11 @@ theme = ExtResource("1_a47ns")
 theme_override_fonts/font = ExtResource("2_kl672")
 text = "💔"
 
-[node name="ap" type="Label" parent="content/description/details/heroes/rock"]
+[node name="hp" type="Label" parent="content/description/details/heroes/rock"]
+custom_minimum_size = Vector2(42, 0)
 layout_mode = 2
 theme = ExtResource("1_a47ns")
-text = "8"
+text = "1"
 
 [node name="aura" type="MarginContainer" parent="content/description/details/heroes/rock"]
 layout_mode = 2
@@ -203,6 +201,12 @@ layout_mode = 2
 theme = ExtResource("1_a47ns")
 theme_override_fonts/font = ExtResource("2_kl672")
 text = "🪫"
+
+[node name="ap" type="Label" parent="content/description/details/heroes/rock"]
+custom_minimum_size = Vector2(42, 0)
+layout_mode = 2
+theme = ExtResource("1_a47ns")
+text = "8"
 
 [node name="image" type="Panel" parent="content"]
 custom_minimum_size = Vector2(270, 270)

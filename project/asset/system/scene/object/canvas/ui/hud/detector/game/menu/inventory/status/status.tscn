@@ -1,11 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://bky5mu10x2da3"]
+[gd_scene load_steps=15 format=3 uid="uid://bky5mu10x2da3"]
 
 [ext_resource type="PackedScene" uid="uid://bx8m1gw4fot0d" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/status/ray.tscn" id="1_ac5kb"]
+[ext_resource type="Script" uid="uid://cwdoph6deb38u" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/topic/selected/status/status.gd" id="1_swigx"]
 [ext_resource type="PackedScene" uid="uid://cishpih8t1tbj" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/status/rock.tscn" id="2_iv2gx"]
 [ext_resource type="Texture2D" uid="uid://d4jc2lrslbm26" path="res://asset/resource/media/image/actors/npc/dialog/ray.jpg" id="3_iv2gx"]
 [ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://asset/resource/ui/theme/patterns/template/menu/settings/topic/footer.tres" id="4_psh3v"]
 [ext_resource type="FontFile" uid="uid://c4ygkmnbt1j7y" path="res://asset/resource/media/data/font/LTSuperiorSerif-Semibold.otf" id="5_dunc1"]
-[ext_resource type="FontFile" uid="uid://tledodlx6okb" path="res://asset/resource/media/data/font/LTSuperiorMono-Semibold.otf" id="6_0m8hh"]
+[ext_resource type="FontFile" uid="uid://qxg3lsudod7p" path="res://asset/resource/media/data/font/Championship.ttf" id="6_swigx"]
 [ext_resource type="Texture2D" uid="uid://cwbldyii867om" path="res://asset/resource/media/image/actors/npc/dialog/rock.jpg" id="7_3olsu"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ac5kb"]
@@ -26,6 +27,18 @@ border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
 
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_3olsu"]
+color = Color(0.0110876, 0.0110876, 0.0110876, 1)
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_swigx"]
+color = Color(0.0110876, 0.0110876, 0.0110876, 1)
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_nuuu5"]
+color = Color(0.0110876, 0.0110876, 0.0110876, 1)
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_en5di"]
+color = Color(0.0110876, 0.0110876, 0.0110876, 1)
+
 [node name="status" type="VBoxContainer"]
 anchors_preset = 10
 anchor_right = 1.0
@@ -33,6 +46,7 @@ offset_bottom = 169.0
 grow_horizontal = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 3
+script = ExtResource("1_swigx")
 
 [node name="ray" parent="." instance=ExtResource("1_ac5kb")]
 layout_mode = 2
@@ -47,110 +61,111 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 
-[node name="HFlowContainer" type="HFlowContainer" parent="card"]
+[node name="cards" type="HFlowContainer" parent="card"]
 layout_mode = 2
 theme_override_constants/h_separation = 10
 theme_override_constants/v_separation = 10
 
-[node name="Control" type="Control" parent="card/HFlowContainer"]
+[node name="left" type="Control" parent="card/cards"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="back" type="PanelContainer" parent="card/HFlowContainer"]
+[node name="ray" type="PanelContainer" parent="card/cards"]
 custom_minimum_size = Vector2(300, 133)
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_ac5kb")
 
-[node name="margin" type="MarginContainer" parent="card/HFlowContainer/back"]
+[node name="margin" type="MarginContainer" parent="card/cards/ray"]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="contents" type="HBoxContainer" parent="card/HFlowContainer/back/margin"]
+[node name="contents" type="HBoxContainer" parent="card/cards/ray/margin"]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="short" type="VBoxContainer" parent="card/HFlowContainer/back/margin/contents"]
+[node name="short" type="VBoxContainer" parent="card/cards/ray/margin/contents"]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="icon" type="PanelContainer" parent="card/HFlowContainer/back/margin/contents/short"]
+[node name="icon" type="PanelContainer" parent="card/cards/ray/margin/contents/short"]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_psh3v")
 
-[node name="image" type="TextureRect" parent="card/HFlowContainer/back/margin/contents/short/icon"]
+[node name="image" type="TextureRect" parent="card/cards/ray/margin/contents/short/icon"]
 custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
 texture = ExtResource("3_iv2gx")
 expand_mode = 1
 
-[node name="caption" type="VBoxContainer" parent="card/HFlowContainer/back/margin/contents/short"]
+[node name="caption" type="VBoxContainer" parent="card/cards/ray/margin/contents/short"]
 layout_mode = 2
 theme_override_constants/separation = -3
 
-[node name="he" type="Label" parent="card/HFlowContainer/back/margin/contents/short/caption"]
+[node name="he" type="Label" parent="card/cards/ray/margin/contents/short/caption"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("4_psh3v")
 theme_override_font_sizes/font_size = 12
 text = "Он"
 
-[node name="years" type="Label" parent="card/HFlowContainer/back/margin/contents/short/caption"]
+[node name="years" type="Label" parent="card/cards/ray/margin/contents/short/caption"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("4_psh3v")
 theme_override_font_sizes/font_size = 12
 text = "20 лет"
 
-[node name="summary" type="VBoxContainer" parent="card/HFlowContainer/back/margin/contents"]
+[node name="summary" type="VBoxContainer" parent="card/cards/ray/margin/contents"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 20
 
-[node name="initials" type="VBoxContainer" parent="card/HFlowContainer/back/margin/contents/summary"]
+[node name="initials" type="VBoxContainer" parent="card/cards/ray/margin/contents/summary"]
 layout_mode = 2
 theme_override_constants/separation = -3
 
-[node name="initials" type="Label" parent="card/HFlowContainer/back/margin/contents/summary/initials"]
+[node name="initials" type="Label" parent="card/cards/ray/margin/contents/summary/initials"]
 layout_mode = 2
 theme = ExtResource("4_psh3v")
 theme_override_font_sizes/font_size = 12
 text = "Рей Брайт"
 
-[node name="separation" type="HBoxContainer" parent="card/HFlowContainer/back/margin/contents/summary/initials"]
+[node name="separation" type="HBoxContainer" parent="card/cards/ray/margin/contents/summary/initials"]
 layout_mode = 2
 
-[node name="HSeparator" type="HSeparator" parent="card/HFlowContainer/back/margin/contents/summary/initials/separation"]
+[node name="HSeparator" type="HSeparator" parent="card/cards/ray/margin/contents/summary/initials/separation"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_styles/separator = SubResource("StyleBoxLine_3olsu")
 
-[node name="Label" type="Label" parent="card/HFlowContainer/back/margin/contents/summary/initials/separation"]
+[node name="Label" type="Label" parent="card/cards/ray/margin/contents/summary/initials/separation"]
 layout_mode = 2
 theme = ExtResource("4_psh3v")
 theme_override_fonts/font = ExtResource("5_dunc1")
 theme_override_font_sizes/font_size = 10
 text = "Title"
 
-[node name="HSeparator2" type="HSeparator" parent="card/HFlowContainer/back/margin/contents/summary/initials/separation"]
+[node name="HSeparator2" type="HSeparator" parent="card/cards/ray/margin/contents/summary/initials/separation"]
 visible = false
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 
-[node name="title" type="Label" parent="card/HFlowContainer/back/margin/contents/summary/initials"]
+[node name="title" type="Label" parent="card/cards/ray/margin/contents/summary/initials"]
 layout_mode = 2
 theme = ExtResource("4_psh3v")
 theme_override_font_sizes/font_size = 12
 text = "Автобот-консультант"
 
-[node name="question" type="VBoxContainer" parent="card/HFlowContainer/back/margin/contents/summary"]
+[node name="question" type="VBoxContainer" parent="card/cards/ray/margin/contents/summary"]
 layout_mode = 2
 theme_override_constants/separation = -2
 
-[node name="caption" type="Label" parent="card/HFlowContainer/back/margin/contents/summary/question"]
+[node name="caption" type="Label" parent="card/cards/ray/margin/contents/summary/question"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 theme = ExtResource("4_psh3v")
@@ -159,126 +174,128 @@ theme_override_font_sizes/font_size = 12
 text = "У вас все деньги мира, какую машину вы бы заказали"
 autowrap_mode = 2
 
-[node name="separator" type="HBoxContainer" parent="card/HFlowContainer/back/margin/contents/summary/question"]
+[node name="separator" type="HBoxContainer" parent="card/cards/ray/margin/contents/summary/question"]
 layout_mode = 2
 
-[node name="lefr" type="HSeparator" parent="card/HFlowContainer/back/margin/contents/summary/question/separator"]
+[node name="lefr" type="HSeparator" parent="card/cards/ray/margin/contents/summary/question/separator"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_styles/separator = SubResource("StyleBoxLine_swigx")
 
-[node name="caption" type="Label" parent="card/HFlowContainer/back/margin/contents/summary/question/separator"]
+[node name="caption" type="Label" parent="card/cards/ray/margin/contents/summary/question/separator"]
 layout_mode = 2
 theme = ExtResource("4_psh3v")
 theme_override_fonts/font = ExtResource("5_dunc1")
 theme_override_font_sizes/font_size = 10
 text = "Question"
 
-[node name="answer" type="Label" parent="card/HFlowContainer/back/margin/contents/summary/question"]
+[node name="answer" type="Label" parent="card/cards/ray/margin/contents/summary/question"]
 layout_mode = 2
 theme = ExtResource("4_psh3v")
 theme_override_constants/line_spacing = -4
 theme_override_font_sizes/font_size = 12
-text = "- Тебе никто денег даст"
+text = "- Тебе никто денег не даст"
 
-[node name="Label" type="Label" parent="card/HFlowContainer/back/margin"]
+[node name="Label" type="Label" parent="card/cards/ray/margin"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 theme = ExtResource("4_psh3v")
-theme_override_fonts/font = ExtResource("6_0m8hh")
-theme_override_font_sizes/font_size = 10
-text = "Every.co"
+theme_override_fonts/font = ExtResource("6_swigx")
+theme_override_font_sizes/font_size = 12
+text = "EVERY.CO"
 
-[node name="back2" type="PanelContainer" parent="card/HFlowContainer"]
+[node name="rock" type="PanelContainer" parent="card/cards"]
 custom_minimum_size = Vector2(300, 133)
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_ac5kb")
 
-[node name="margin" type="MarginContainer" parent="card/HFlowContainer/back2"]
+[node name="margin" type="MarginContainer" parent="card/cards/rock"]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="contents" type="HBoxContainer" parent="card/HFlowContainer/back2/margin"]
+[node name="contents" type="HBoxContainer" parent="card/cards/rock/margin"]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="short" type="VBoxContainer" parent="card/HFlowContainer/back2/margin/contents"]
+[node name="short" type="VBoxContainer" parent="card/cards/rock/margin/contents"]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="icon" type="PanelContainer" parent="card/HFlowContainer/back2/margin/contents/short"]
+[node name="icon" type="PanelContainer" parent="card/cards/rock/margin/contents/short"]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_psh3v")
 
-[node name="image" type="TextureRect" parent="card/HFlowContainer/back2/margin/contents/short/icon"]
+[node name="image" type="TextureRect" parent="card/cards/rock/margin/contents/short/icon"]
 custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
 texture = ExtResource("7_3olsu")
 expand_mode = 1
 
-[node name="caption" type="VBoxContainer" parent="card/HFlowContainer/back2/margin/contents/short"]
+[node name="caption" type="VBoxContainer" parent="card/cards/rock/margin/contents/short"]
 layout_mode = 2
 theme_override_constants/separation = -3
 
-[node name="engaged" type="Label" parent="card/HFlowContainer/back2/margin/contents/short/caption"]
+[node name="engaged" type="Label" parent="card/cards/rock/margin/contents/short/caption"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("4_psh3v")
 theme_override_font_sizes/font_size = 12
 text = "Он"
 
-[node name="years" type="Label" parent="card/HFlowContainer/back2/margin/contents/short/caption"]
+[node name="years" type="Label" parent="card/cards/rock/margin/contents/short/caption"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("4_psh3v")
 theme_override_font_sizes/font_size = 12
 text = "20 лет"
 
-[node name="summary" type="VBoxContainer" parent="card/HFlowContainer/back2/margin/contents"]
+[node name="summary" type="VBoxContainer" parent="card/cards/rock/margin/contents"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 20
 
-[node name="initials" type="VBoxContainer" parent="card/HFlowContainer/back2/margin/contents/summary"]
+[node name="initials" type="VBoxContainer" parent="card/cards/rock/margin/contents/summary"]
 layout_mode = 2
 theme_override_constants/separation = -3
 
-[node name="initials" type="Label" parent="card/HFlowContainer/back2/margin/contents/summary/initials"]
+[node name="initials" type="Label" parent="card/cards/rock/margin/contents/summary/initials"]
 layout_mode = 2
 theme = ExtResource("4_psh3v")
 theme_override_font_sizes/font_size = 12
 text = "Рок Тайт"
 
-[node name="separation" type="HBoxContainer" parent="card/HFlowContainer/back2/margin/contents/summary/initials"]
+[node name="separation" type="HBoxContainer" parent="card/cards/rock/margin/contents/summary/initials"]
 layout_mode = 2
 
-[node name="left" type="HSeparator" parent="card/HFlowContainer/back2/margin/contents/summary/initials/separation"]
+[node name="left" type="HSeparator" parent="card/cards/rock/margin/contents/summary/initials/separation"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_styles/separator = SubResource("StyleBoxLine_nuuu5")
 
-[node name="caption" type="Label" parent="card/HFlowContainer/back2/margin/contents/summary/initials/separation"]
+[node name="caption" type="Label" parent="card/cards/rock/margin/contents/summary/initials/separation"]
 layout_mode = 2
 theme = ExtResource("4_psh3v")
 theme_override_fonts/font = ExtResource("5_dunc1")
 theme_override_font_sizes/font_size = 10
 text = "Title"
 
-[node name="title" type="Label" parent="card/HFlowContainer/back2/margin/contents/summary/initials"]
+[node name="title" type="Label" parent="card/cards/rock/margin/contents/summary/initials"]
 layout_mode = 2
 theme = ExtResource("4_psh3v")
 theme_override_font_sizes/font_size = 12
 text = "Младший стажер оптимизаций"
 
-[node name="question" type="VBoxContainer" parent="card/HFlowContainer/back2/margin/contents/summary"]
+[node name="question" type="VBoxContainer" parent="card/cards/rock/margin/contents/summary"]
 layout_mode = 2
 theme_override_constants/separation = -2
 
-[node name="caption" type="Label" parent="card/HFlowContainer/back2/margin/contents/summary/question"]
+[node name="caption" type="Label" parent="card/cards/rock/margin/contents/summary/question"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 theme = ExtResource("4_psh3v")
@@ -287,36 +304,37 @@ theme_override_font_sizes/font_size = 12
 text = "Кем вы видите себя в нашей компании через 100 лет?"
 autowrap_mode = 2
 
-[node name="separator" type="HBoxContainer" parent="card/HFlowContainer/back2/margin/contents/summary/question"]
+[node name="separator" type="HBoxContainer" parent="card/cards/rock/margin/contents/summary/question"]
 layout_mode = 2
 
-[node name="lefr" type="HSeparator" parent="card/HFlowContainer/back2/margin/contents/summary/question/separator"]
+[node name="lefr" type="HSeparator" parent="card/cards/rock/margin/contents/summary/question/separator"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_styles/separator = SubResource("StyleBoxLine_en5di")
 
-[node name="caption" type="Label" parent="card/HFlowContainer/back2/margin/contents/summary/question/separator"]
+[node name="caption" type="Label" parent="card/cards/rock/margin/contents/summary/question/separator"]
 layout_mode = 2
 theme = ExtResource("4_psh3v")
 theme_override_fonts/font = ExtResource("5_dunc1")
 theme_override_font_sizes/font_size = 10
 text = "Question"
 
-[node name="answer" type="Label" parent="card/HFlowContainer/back2/margin/contents/summary/question"]
+[node name="answer" type="Label" parent="card/cards/rock/margin/contents/summary/question"]
 layout_mode = 2
 theme = ExtResource("4_psh3v")
 theme_override_constants/line_spacing = -4
 theme_override_font_sizes/font_size = 12
 text = "- Бессмертным?"
 
-[node name="Label" type="Label" parent="card/HFlowContainer/back2/margin"]
+[node name="Label" type="Label" parent="card/cards/rock/margin"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 theme = ExtResource("4_psh3v")
-theme_override_fonts/font = ExtResource("6_0m8hh")
-theme_override_font_sizes/font_size = 10
-text = "Every.co"
+theme_override_fonts/font = ExtResource("6_swigx")
+theme_override_font_sizes/font_size = 12
+text = "EVERY.CO"
 
-[node name="Control2" type="Control" parent="card/HFlowContainer"]
+[node name="right" type="Control" parent="card/cards"]
 layout_mode = 2
 size_flags_horizontal = 3

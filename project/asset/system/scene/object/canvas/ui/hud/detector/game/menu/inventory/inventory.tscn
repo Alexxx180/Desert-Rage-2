@@ -1,11 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://b1cenupqm80wx"]
+[gd_scene load_steps=9 format=3 uid="uid://b1cenupqm80wx"]
 
 [ext_resource type="StyleBox" uid="uid://cvfnqancophme" path="res://asset/resource/ui/theme/style/solid-color-panel.tres" id="1_0hiii"]
 [ext_resource type="PackedScene" uid="uid://dqlgy3l13bibl" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/items/items.tscn" id="1_res6x"]
-[ext_resource type="Script" uid="uid://dkebrycycbfkp" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/menu/inventory/ability/topic/inventory.gd" id="2_t0gma"]
+[ext_resource type="Script" uid="uid://dkebrycycbfkp" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/topic/inventory.gd" id="2_t0gma"]
 [ext_resource type="PackedScene" uid="uid://bky5mu10x2da3" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/status/status.tscn" id="3_res6x"]
 [ext_resource type="PackedScene" uid="uid://bx8m1gw4fot0d" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/status/ray.tscn" id="4_1qvr3"]
 [ext_resource type="PackedScene" uid="uid://cishpih8t1tbj" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/status/rock.tscn" id="4_qe4mf"]
+[ext_resource type="Script" uid="uid://bxdjy6nk2id7i" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/topic/selected/selected.gd" id="6_bem3p"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3amgv"]
 bg_color = Color(0, 0, 0, 1)
@@ -42,6 +43,7 @@ layout_mode = 2
 theme_override_constants/separation = 20
 
 [node name="bag" type="HFlowContainer" parent="scroll/margin/stack"]
+visible = false
 layout_mode = 2
 theme_override_constants/h_separation = 5
 theme_override_constants/v_separation = 25
@@ -76,23 +78,24 @@ layout_mode = 2
 size_flags_vertical = 0
 size_flags_stretch_ratio = 1.0
 
-[node name="status" type="HFlowContainer" parent="scroll/margin/stack"]
+[node name="selected" type="HFlowContainer" parent="scroll/margin/stack"]
 layout_mode = 2
 theme_override_constants/h_separation = 5
 theme_override_constants/v_separation = 25
+script = ExtResource("6_bem3p")
 
-[node name="ray" parent="scroll/margin/stack/status" instance=ExtResource("1_res6x")]
+[node name="ray" parent="scroll/margin/stack/selected" instance=ExtResource("1_res6x")]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_vertical = 0
 size_flags_stretch_ratio = 1.0
 
-[node name="rock2" parent="scroll/margin/stack/status" instance=ExtResource("1_res6x")]
+[node name="rock" parent="scroll/margin/stack/selected" instance=ExtResource("1_res6x")]
 visible = false
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 size_flags_vertical = 0
 size_flags_stretch_ratio = 1.0
 
-[node name="status" parent="scroll/margin/stack/status" instance=ExtResource("3_res6x")]
+[node name="status" parent="scroll/margin/stack/selected" instance=ExtResource("3_res6x")]
 layout_mode = 2

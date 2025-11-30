@@ -1,31 +1,21 @@
-[gd_scene load_steps=38 format=3 uid="uid://sloxw12np1ch"]
+[gd_scene load_steps=40 format=3 uid="uid://sloxw12np1ch"]
 
 [ext_resource type="PackedScene" uid="uid://bky5mu10x2da3" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/status/status.tscn" id="1_2h7wb"]
 [ext_resource type="StyleBox" uid="uid://cvfnqancophme" path="res://asset/resource/ui/theme/style/solid-color-panel.tres" id="1_xvq4b"]
-[ext_resource type="Script" uid="uid://creg8v0kuegg7" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/menu/summary/summary.gd" id="2_gprs2"]
+[ext_resource type="Script" uid="uid://creg8v0kuegg7" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/topic/topic.gd" id="2_gprs2"]
 [ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://asset/resource/ui/theme/patterns/template/menu/settings/topic/footer.tres" id="2_xvq4b"]
+[ext_resource type="Script" uid="uid://ptu1t5a0cbpa" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/topic/stack/stack.gd" id="3_htvmv"]
 [ext_resource type="FontFile" uid="uid://b37js8y80ak1k" path="res://asset/resource/media/data/font/NotoColorEmoji-Regular.ttf" id="4_f2xkq"]
 [ext_resource type="StyleBox" uid="uid://c5qf02s45xwn" path="res://asset/resource/ui/theme/style/noto-color.tres" id="5_i4ulf"]
 [ext_resource type="StyleBox" uid="uid://cht8hrroa75bg" path="res://asset/resource/ui/theme/style/tag-button.tres" id="5_ighkc"]
-[ext_resource type="Script" uid="uid://cmatnxt7nxxbw" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/menu/summary/priority.gd" id="5_ph3re"]
+[ext_resource type="Script" uid="uid://c3nt5k6qfjf31" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/topic/stack/priority/priority.gd" id="5_ph3re"]
+[ext_resource type="Script" uid="uid://cmatnxt7nxxbw" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/topic/stack/priority/setter.gd" id="6_k8lmy"]
 [ext_resource type="FontFile" uid="uid://g5guxjrt6wb6" path="res://asset/resource/media/data/font/Troubleside.ttf" id="8_8e78u"]
 [ext_resource type="StyleBox" uid="uid://bsggnr5c3uk7o" path="res://asset/resource/ui/theme/style/panel/preview.tres" id="8_gprs2"]
-[ext_resource type="Script" uid="uid://cmeppk3ealnv8" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/controls/preview/toggle.gd" id="8_ph3re"]
+[ext_resource type="Script" uid="uid://cmeppk3ealnv8" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/hints/preview/toggle.gd" id="8_ph3re"]
 [ext_resource type="PackedScene" uid="uid://b01p37el432af" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/preview/hints/hints.tscn" id="9_ph3re"]
 [ext_resource type="FontFile" uid="uid://b2wbdbnkxcqv1" path="res://asset/resource/media/data/font/NotoEmoji-VariableFont_wght.ttf" id="10_8e78u"]
 [ext_resource type="FontFile" uid="uid://dxg5wbmrewk2p" path="res://asset/resource/media/data/font/Lato-Regular.ttf" id="10_ighkc"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ph3re"]
-content_margin_right = 1.0
-content_margin_bottom = 1.0
-bg_color = Color(0.0588235, 0.0588235, 0.0588235, 1)
-expand_margin_left = 1.0
-expand_margin_top = 1.0
-expand_margin_right = 1.0
-expand_margin_bottom = 1.0
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ighkc"]
-bg_color = Color(0.953292, 0.415199, 9.62615e-07, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ph3re"]
 
@@ -92,6 +82,16 @@ content_margin_left = 7.0
 content_margin_top = 6.0
 bg_color = Color(0.0196078, 0.0196078, 0.0588235, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pvcso"]
+content_margin_left = 7.0
+content_margin_top = 6.0
+bg_color = Color(0.0196078, 0.0196078, 0.0588235, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xecfx"]
+content_margin_left = 7.0
+content_margin_top = 6.0
+bg_color = Color(0.0588235, 0.0588235, 0.0588235, 1)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_htk2n"]
 content_margin_left = 7.0
 content_margin_top = 6.0
@@ -142,34 +142,14 @@ theme_override_constants/margin_bottom = 20
 
 [node name="stack" type="VBoxContainer" parent="scroll/margin"]
 layout_mode = 2
+script = ExtResource("3_htvmv")
 
-[node name="summary" type="HBoxContainer" parent="scroll/margin/stack"]
+[node name="status" parent="scroll/margin/stack" instance=ExtResource("1_2h7wb")]
 layout_mode = 2
-
-[node name="status" parent="scroll/margin/stack/summary" instance=ExtResource("1_2h7wb")]
-layout_mode = 2
-
-[node name="synergy" type="MarginContainer" parent="scroll/margin/stack/summary"]
-visible = false
-layout_mode = 2
-theme_override_constants/margin_left = 1
-theme_override_constants/margin_top = 1
-theme_override_constants/margin_right = 1
-theme_override_constants/margin_bottom = 1
-
-[node name="points" type="ProgressBar" parent="scroll/margin/stack/summary/synergy"]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 1
-theme_override_styles/background = SubResource("StyleBoxFlat_ph3re")
-theme_override_styles/fill = SubResource("StyleBoxFlat_ighkc")
-step = 1.0
-value = 20.0
-fill_mode = 2
-show_percentage = false
 
 [node name="priority" type="VBoxContainer" parent="scroll/margin/stack"]
 layout_mode = 2
+script = ExtResource("5_ph3re")
 
 [node name="title" type="HBoxContainer" parent="scroll/margin/stack/priority"]
 layout_mode = 2
@@ -187,7 +167,7 @@ custom_minimum_size = Vector2(0, 34)
 layout_mode = 2
 theme_override_styles/hover = ExtResource("5_ighkc")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_ph3re")
-script = ExtResource("5_ph3re")
+script = ExtResource("6_k8lmy")
 
 [node name="description" type="HBoxContainer" parent="scroll/margin/stack/priority/pursuit"]
 layout_mode = 1
@@ -324,7 +304,7 @@ custom_minimum_size = Vector2(0, 34)
 layout_mode = 2
 theme_override_styles/hover = ExtResource("5_ighkc")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_ph3re")
-script = ExtResource("5_ph3re")
+script = ExtResource("6_k8lmy")
 priority_no = 1
 
 [node name="description" type="HBoxContainer" parent="scroll/margin/stack/priority/self_control"]
@@ -465,7 +445,7 @@ custom_minimum_size = Vector2(0, 34)
 layout_mode = 2
 theme_override_styles/hover = ExtResource("5_ighkc")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_ph3re")
-script = ExtResource("5_ph3re")
+script = ExtResource("6_k8lmy")
 priority_no = 2
 
 [node name="description" type="HBoxContainer" parent="scroll/margin/stack/priority/tenacity"]
@@ -889,14 +869,14 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.25
 
-[node name="HFlowContainer" type="HFlowContainer" parent="scroll/margin/stack/research"]
+[node name="possibilities" type="HFlowContainer" parent="scroll/margin/stack/research"]
 layout_mode = 2
 
-[node name="items" type="Control" parent="scroll/margin/stack/research/HFlowContainer"]
+[node name="items" type="Control" parent="scroll/margin/stack/research/possibilities"]
 custom_minimum_size = Vector2(30, 27)
 layout_mode = 2
 
-[node name="bag" type="Label" parent="scroll/margin/stack/research/HFlowContainer/items"]
+[node name="bag" type="Label" parent="scroll/margin/stack/research/possibilities/items"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -913,7 +893,7 @@ theme_override_fonts/font = ExtResource("4_f2xkq")
 theme_override_styles/normal = ExtResource("5_i4ulf")
 text = "💰"
 
-[node name="clover" type="Label" parent="scroll/margin/stack/research/HFlowContainer/items"]
+[node name="clover" type="Label" parent="scroll/margin/stack/research/possibilities/items"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -930,77 +910,77 @@ theme_override_font_sizes/font_size = 10
 theme_override_styles/normal = SubResource("StyleBoxEmpty_8e78u")
 text = "🍀"
 
-[node name="dealer" type="HBoxContainer" parent="scroll/margin/stack/research/HFlowContainer"]
+[node name="dealer" type="HBoxContainer" parent="scroll/margin/stack/research/possibilities"]
 layout_mode = 2
 theme_override_constants/separation = -5
 
-[node name="opened" type="Button" parent="scroll/margin/stack/research/HFlowContainer/dealer"]
+[node name="opened" type="Button" parent="scroll/margin/stack/research/possibilities/dealer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.341176, 0.341176, 0.341176, 1)
 theme_override_styles/normal = ExtResource("5_ighkc")
 text = "Торговец"
 
-[node name="purpose" type="HBoxContainer" parent="scroll/margin/stack/research/HFlowContainer/dealer"]
+[node name="purpose" type="HBoxContainer" parent="scroll/margin/stack/research/possibilities/dealer"]
 visible = false
 layout_mode = 2
 theme_override_constants/separation = -3
 
-[node name="level" type="Label" parent="scroll/margin/stack/research/HFlowContainer/dealer/purpose"]
+[node name="level" type="Label" parent="scroll/margin/stack/research/possibilities/dealer/purpose"]
 layout_mode = 2
 theme = ExtResource("2_xvq4b")
 theme_override_font_sizes/font_size = 18
 text = "12"
 
-[node name="icon" type="Label" parent="scroll/margin/stack/research/HFlowContainer/dealer/purpose"]
+[node name="icon" type="Label" parent="scroll/margin/stack/research/possibilities/dealer/purpose"]
 layout_mode = 2
 theme = ExtResource("2_xvq4b")
 theme_override_fonts/font = ExtResource("4_f2xkq")
 theme_override_styles/normal = ExtResource("5_i4ulf")
 text = "📈"
 
-[node name="self_control" type="HBoxContainer" parent="scroll/margin/stack/research/HFlowContainer/dealer"]
+[node name="self_control" type="HBoxContainer" parent="scroll/margin/stack/research/possibilities/dealer"]
 visible = false
 layout_mode = 2
 theme_override_constants/separation = -3
 
-[node name="level" type="Label" parent="scroll/margin/stack/research/HFlowContainer/dealer/self_control"]
+[node name="level" type="Label" parent="scroll/margin/stack/research/possibilities/dealer/self_control"]
 layout_mode = 2
 theme = ExtResource("2_xvq4b")
 theme_override_font_sizes/font_size = 18
 text = "6"
 
-[node name="icon" type="Label" parent="scroll/margin/stack/research/HFlowContainer/dealer/self_control"]
+[node name="icon" type="Label" parent="scroll/margin/stack/research/possibilities/dealer/self_control"]
 layout_mode = 2
 theme = ExtResource("2_xvq4b")
 theme_override_fonts/font = ExtResource("4_f2xkq")
 theme_override_styles/normal = ExtResource("5_i4ulf")
 text = "⚖️"
 
-[node name="caption" type="HBoxContainer" parent="scroll/margin/stack/research/HFlowContainer/dealer"]
+[node name="caption" type="HBoxContainer" parent="scroll/margin/stack/research/possibilities/dealer"]
 visible = false
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="ancient" type="HBoxContainer" parent="scroll/margin/stack/research/HFlowContainer/dealer/caption"]
+[node name="ancient" type="HBoxContainer" parent="scroll/margin/stack/research/possibilities/dealer/caption"]
 visible = false
 layout_mode = 2
 theme_override_constants/separation = -3
 
-[node name="search" type="Label" parent="scroll/margin/stack/research/HFlowContainer/dealer/caption/ancient"]
+[node name="search" type="Label" parent="scroll/margin/stack/research/possibilities/dealer/caption/ancient"]
 layout_mode = 2
 theme = ExtResource("2_xvq4b")
 theme_override_fonts/font = ExtResource("4_f2xkq")
 theme_override_styles/normal = ExtResource("5_i4ulf")
 text = "📕"
 
-[node name="caption" type="Label" parent="scroll/margin/stack/research/HFlowContainer/dealer/caption/ancient"]
+[node name="caption" type="Label" parent="scroll/margin/stack/research/possibilities/dealer/caption/ancient"]
 modulate = Color(1, 1, 1, 0.196078)
 layout_mode = 2
 theme = ExtResource("2_xvq4b")
 theme_override_colors/font_color = Color(0.756863, 0.756863, 0.756863, 1)
 text = ":+ !\\+"
 
-[node name="modern" type="Label" parent="scroll/margin/stack/research/HFlowContainer/dealer/caption"]
+[node name="modern" type="Label" parent="scroll/margin/stack/research/possibilities/dealer/caption"]
 visible = false
 modulate = Color(1, 1, 1, 0.196078)
 layout_mode = 2
@@ -1073,6 +1053,28 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_kf4b8")
 text = "🔬"
 alignment = 0
 
+[node name="notes" type="Button" parent="scroll/margin/stack/research/tabs"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_f2xkq")
+theme_override_font_sizes/font_size = 15
+theme_override_styles/pressed = SubResource("StyleBoxFlat_pvcso")
+theme_override_styles/normal = SubResource("StyleBoxFlat_xecfx")
+toggle_mode = true
+text = "👁"
+alignment = 0
+
+[node name="items" type="Button" parent="scroll/margin/stack/research/tabs"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_f2xkq")
+theme_override_font_sizes/font_size = 15
+theme_override_styles/pressed = SubResource("StyleBoxFlat_pvcso")
+theme_override_styles/normal = SubResource("StyleBoxFlat_xecfx")
+toggle_mode = true
+text = "🧪"
+alignment = 0
+
 [node name="tabs" type="HBoxContainer" parent="scroll/margin/stack/research/tabs"]
 layout_mode = 2
 theme_override_constants/separation = 4
@@ -1137,6 +1139,7 @@ text = "📖"
 alignment = 0
 
 [node name="help" type="HBoxContainer" parent="scroll/margin/stack/research/tabs/tabs"]
+visible = false
 layout_mode = 2
 
 [node name="motion" type="Button" parent="scroll/margin/stack/research/tabs/tabs/help"]
