@@ -1,0 +1,183 @@
+[gd_scene load_steps=18 format=3 uid="uid://yaryrrsclijd"]
+
+[ext_resource type="Script" uid="uid://cfaxt6ng6ftvc" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/topic/status/enemy/damage.gd" id="1_3ar3v"]
+[ext_resource type="FontFile" uid="uid://bmtckcw2a28p2" path="res://asset/resource/media/data/font/Sportsball.ttf" id="2_hyv66"]
+[ext_resource type="PackedScene" uid="uid://y6fn078j2sh3" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/status/shared/ailment/poison.tscn" id="3_eanof"]
+[ext_resource type="PackedScene" uid="uid://bx1eh0q5rbynn" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/status/shared/ailment/cough.tscn" id="4_6ruye"]
+[ext_resource type="PackedScene" uid="uid://yfxdd77grbp0" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/status/shared/ailment/freeze.tscn" id="5_gb3mf"]
+[ext_resource type="PackedScene" uid="uid://xspep2aas82r" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/status/shared/ailment/burn.tscn" id="6_tinmv"]
+[ext_resource type="PackedScene" uid="uid://4jy7bmeaqofu" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/status/shared/ailment/dizzy.tscn" id="7_47qfn"]
+[ext_resource type="PackedScene" uid="uid://3dbl8kh661a3" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/status/shared/ailment/no/reason.tscn" id="8_keos1"]
+[ext_resource type="PackedScene" uid="uid://cedejpbmq56j3" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/status/shared/ailment/no/motion.tscn" id="9_gbco3"]
+[ext_resource type="PackedScene" uid="uid://b0hyoxlrt1af" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/status/shared/ailment/no/action.tscn" id="10_1c4h8"]
+[ext_resource type="PackedScene" uid="uid://cmauui2eio5gc" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/status/shared/ailment/ko.tscn" id="11_a1ofm"]
+[ext_resource type="PackedScene" uid="uid://dq1fal5qwrk8n" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/status/shared/ailment/rage.tscn" id="12_xmvd1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_o4lum"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xf68l"]
+bg_color = Color(0.588235, 1, 0.588235, 1)
+
+[sub_resource type="Gradient" id="Gradient_8qkor"]
+colors = PackedColorArray(0.588235, 1, 0.588235, 0.235294, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_pau43"]
+gradient = SubResource("Gradient_8qkor")
+width = 16
+height = 20
+fill_from = Vector2(0.5, 0)
+fill_to = Vector2(0.5, 1)
+
+[sub_resource type="Theme" id="Theme_1moid"]
+
+[node name="ray" type="ProgressBar"]
+custom_minimum_size = Vector2(137, 2)
+size_flags_horizontal = 3
+theme_override_styles/background = SubResource("StyleBoxEmpty_o4lum")
+theme_override_styles/fill = SubResource("StyleBoxFlat_xf68l")
+step = 1.0
+value = 100.0
+show_percentage = false
+
+[node name="health" type="MarginContainer" parent="."]
+z_index = 1
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -41.0
+offset_bottom = 33.0
+grow_horizontal = 0
+mouse_filter = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="back" type="TextureRect" parent="health"]
+layout_mode = 2
+texture = SubResource("GradientTexture2D_pau43")
+
+[node name="damage" type="Control" parent="health"]
+custom_minimum_size = Vector2(137, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="margin" type="MarginContainer" parent="health/damage"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 17.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 9
+theme_override_constants/margin_top = 7
+theme_override_constants/margin_right = 7
+theme_override_constants/margin_bottom = 3
+
+[node name="points" type="HBoxContainer" parent="health/damage/margin"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 0
+script = ExtResource("1_3ar3v")
+
+[node name="health" type="Label" parent="health/damage/margin/points"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+theme = SubResource("Theme_1moid")
+theme_override_colors/font_color = Color(0.588235, 0.588235, 0.588235, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 7
+theme_override_fonts/font = ExtResource("2_hyv66")
+theme_override_font_sizes/font_size = 11
+text = "9999"
+horizontal_alignment = 1
+
+[node name="margin" type="MarginContainer" parent="health/damage/margin/points"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 1
+
+[node name="minus" type="Label" parent="health/damage/margin/points/margin"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme = SubResource("Theme_1moid")
+theme_override_colors/font_color = Color(0.588235, 0.588235, 0.588235, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 7
+theme_override_fonts/font = ExtResource("2_hyv66")
+theme_override_font_sizes/font_size = 8
+text = "-"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="value" type="Label" parent="health/damage/margin/points"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+theme = SubResource("Theme_1moid")
+theme_override_colors/font_color = Color(0.588235, 0.588235, 0.588235, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 7
+theme_override_fonts/font = ExtResource("2_hyv66")
+theme_override_font_sizes/font_size = 11
+text = "9999"
+horizontal_alignment = 1
+
+[node name="status" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 32.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="ailments" type="HBoxContainer" parent="status"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/separation = 0
+
+[node name="poison" parent="status/ailments" instance=ExtResource("3_eanof")]
+visible = false
+layout_mode = 2
+
+[node name="cough" parent="status/ailments" instance=ExtResource("4_6ruye")]
+visible = false
+layout_mode = 2
+
+[node name="freeze" parent="status/ailments" instance=ExtResource("5_gb3mf")]
+visible = false
+layout_mode = 2
+
+[node name="burn" parent="status/ailments" instance=ExtResource("6_tinmv")]
+visible = false
+layout_mode = 2
+
+[node name="dizzy" parent="status/ailments" instance=ExtResource("7_47qfn")]
+visible = false
+layout_mode = 2
+
+[node name="no_reason" parent="status/ailments" instance=ExtResource("8_keos1")]
+visible = false
+layout_mode = 2
+
+[node name="no_motion" parent="status/ailments" instance=ExtResource("9_gbco3")]
+visible = false
+layout_mode = 2
+
+[node name="no_action" parent="status/ailments" instance=ExtResource("10_1c4h8")]
+visible = false
+layout_mode = 2
+
+[node name="ko" parent="status/ailments" instance=ExtResource("11_a1ofm")]
+visible = false
+layout_mode = 2
+
+[node name="rage" parent="status/ailments" instance=ExtResource("12_xmvd1")]
+visible = false
+layout_mode = 2

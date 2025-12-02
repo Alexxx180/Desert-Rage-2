@@ -1,3 +1,3 @@
 extends PanelContainer
 
-@onready var stack: VBoxContainer = $scroll/margin/stack
+@onready var stack: VBoxContainer = $content/scroll/margin/stack

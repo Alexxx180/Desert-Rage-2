@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://b1cenupqm80wx"]
+[gd_scene load_steps=10 format=3 uid="uid://b1cenupqm80wx"]
 
 [ext_resource type="StyleBox" uid="uid://cvfnqancophme" path="res://asset/resource/ui/theme/style/solid-color-panel.tres" id="1_0hiii"]
 [ext_resource type="PackedScene" uid="uid://dqlgy3l13bibl" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/items/items.tscn" id="1_res6x"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bx8m1gw4fot0d" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/status/ray.tscn" id="4_1qvr3"]
 [ext_resource type="PackedScene" uid="uid://cishpih8t1tbj" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/status/rock.tscn" id="4_qe4mf"]
 [ext_resource type="Script" uid="uid://bxdjy6nk2id7i" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/topic/selected/selected.gd" id="6_bem3p"]
+[ext_resource type="PackedScene" uid="uid://cm4lshhyr3mtm" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/ability/status/hp/hp.tscn" id="8_3amgv"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3amgv"]
 bg_color = Color(0, 0, 0, 1)
@@ -40,7 +41,10 @@ theme_override_constants/margin_bottom = 10
 
 [node name="stack" type="VBoxContainer" parent="scroll/margin"]
 layout_mode = 2
-theme_override_constants/separation = 20
+theme_override_constants/separation = 7
+
+[node name="hp" parent="scroll/margin/stack" instance=ExtResource("8_3amgv")]
+layout_mode = 2
 
 [node name="bag" type="HFlowContainer" parent="scroll/margin/stack"]
 visible = false
@@ -98,4 +102,5 @@ size_flags_vertical = 0
 size_flags_stretch_ratio = 1.0
 
 [node name="status" parent="scroll/margin/stack/selected" instance=ExtResource("3_res6x")]
+visible = false
 layout_mode = 2

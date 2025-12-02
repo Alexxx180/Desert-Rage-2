@@ -15,32 +15,6 @@ theme_override_constants/separation = 20
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="title"]
-layout_mode = 2
-theme_override_constants/separation = 0
-
-[node name="stats" type="MarginContainer" parent="title/HBoxContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 4
-theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 0
-
-[node name="icon" type="Label" parent="title/HBoxContainer/stats"]
-layout_mode = 2
-theme = ExtResource("1_a47ns")
-theme_override_fonts/font = ExtResource("2_kl672")
-text = "📊"
-
-[node name="level" type="Label" parent="title/HBoxContainer"]
-layout_mode = 2
-theme = ExtResource("1_a47ns")
-text = "17"
-
-[node name="separator2" type="HSeparator" parent="title"]
-layout_mode = 2
-size_flags_horizontal = 3
-
 [node name="caption" type="Label" parent="title"]
 layout_mode = 2
 theme = ExtResource("1_a47ns")
@@ -63,16 +37,42 @@ size_flags_stretch_ratio = 9.0
 
 [node name="caption" type="Label" parent="content/description"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.72549, 0.72549, 0.72549, 1)
 text = "Иголка в стоге сена - 1"
 
 [node name="details" type="VBoxContainer" parent="content/description"]
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="date" type="Label" parent="content/description/details"]
+[node name="HFlowContainer" type="HFlowContainer" parent="content/description/details"]
+layout_mode = 2
+
+[node name="date" type="Label" parent="content/description/details/HFlowContainer"]
 layout_mode = 2
 theme = ExtResource("1_a47ns")
 text = "Создан 16:46 30.06.2025"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="content/description/details/HFlowContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="stats" type="MarginContainer" parent="content/description/details/HFlowContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="icon" type="Label" parent="content/description/details/HFlowContainer/HBoxContainer/stats"]
+layout_mode = 2
+theme = ExtResource("1_a47ns")
+theme_override_fonts/font = ExtResource("2_kl672")
+text = "📊"
+
+[node name="level" type="Label" parent="content/description/details/HFlowContainer/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_a47ns")
+text = "17"
 
 [node name="description" type="Label" parent="content/description/details"]
 custom_minimum_size = Vector2(50, 0)
@@ -208,8 +208,35 @@ layout_mode = 2
 theme = ExtResource("1_a47ns")
 text = "8"
 
-[node name="image" type="Panel" parent="content"]
+[node name="caption" type="Label" parent="content/description/details"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.72549, 0.72549, 0.72549, 1)
+text = "Пещера истоков"
+text_overrun_behavior = 3
+
+[node name="load" type="Button" parent="content"]
 custom_minimum_size = Vector2(270, 270)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 16.0
+
+[node name="margin" type="MarginContainer" parent="content/load"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 8
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 10
+
+[node name="caption" type="Label" parent="content/load/margin"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 20
+text = "Загрузить"

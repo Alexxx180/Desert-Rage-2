@@ -1,4 +1,4 @@
-[gd_scene load_steps=101 format=3 uid="uid://cel3u88abrgv3"]
+[gd_scene load_steps=106 format=3 uid="uid://cel3u88abrgv3"]
 
 [ext_resource type="Theme" uid="uid://p2br8b6ea3n6" path="res://asset/resource/ui/theme/patterns/template/menu/hud/pause/pause.tres" id="1_klae1"]
 [ext_resource type="Script" uid="uid://81xdi4771u0a" path="res://asset/system/script/object/image/view/ui/hud/detector/game/game.gd" id="1_o71r6"]
@@ -17,7 +17,6 @@
 [ext_resource type="Resource" uid="uid://pmde805pr1ag" path="res://asset/resource/ui/short/controls/split/inventory.tres" id="10_u412m"]
 [ext_resource type="PackedScene" uid="uid://b1cenupqm80wx" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/inventory.tscn" id="11_1y8ov"]
 [ext_resource type="Script" uid="uid://k6kmcptwqrbg" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/controls.gd" id="11_ok865"]
-[ext_resource type="Script" uid="uid://cfaxt6ng6ftvc" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/topic/status/enemy/damage.gd" id="12_eq6yd"]
 [ext_resource type="Script" uid="uid://dpqq1oa2r423r" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/topic/items/markers/combos/combos.gd" id="12_jbac8"]
 [ext_resource type="PackedScene" uid="uid://c3dwvtm5ivwwp" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/stats.tscn" id="12_jdj2p"]
 [ext_resource type="Script" uid="uid://cgycplc3rb2f8" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/ability.gd" id="12_tveuy"]
@@ -30,7 +29,7 @@
 [ext_resource type="StyleBox" uid="uid://bsggnr5c3uk7o" path="res://asset/resource/ui/theme/style/panel/preview.tres" id="14_jj441"]
 [ext_resource type="PackedScene" uid="uid://6b0ydfrtbu38" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/ability/ability.tscn" id="14_joidv"]
 [ext_resource type="Script" uid="uid://fkuknxcbcum2" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/status/status.gd" id="15_upyjg"]
-[ext_resource type="FontFile" uid="uid://dxg5wbmrewk2p" path="res://asset/resource/media/data/font/Lato-Regular.ttf" id="16_g3c1s"]
+[ext_resource type="PackedScene" uid="uid://cm4lshhyr3mtm" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/ability/status/hp/hp.tscn" id="16_jnh4p"]
 [ext_resource type="FontFile" uid="uid://b2wbdbnkxcqv1" path="res://asset/resource/media/data/font/NotoEmoji-VariableFont_wght.ttf" id="18_3tqp8"]
 [ext_resource type="Theme" uid="uid://y1o83ldh4al2" path="res://asset/resource/ui/theme/patterns/template/menu/settings/topic/header/header.tres" id="19_aco5m"]
 [ext_resource type="Script" uid="uid://hb6avc0h2sag" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/hints/preview/hints.gd" id="21_fuh2f"]
@@ -50,11 +49,30 @@
 [ext_resource type="Script" uid="uid://cjoheu7m2eic3" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/hints/preview/help/content/help.gd" id="40_jnh4p"]
 [ext_resource type="Script" uid="uid://ctl16kwrqvphb" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/hints/preview/help/tabs.gd" id="42_e1onj"]
 [ext_resource type="PackedScene" uid="uid://dvdimdxij23df" path="res://asset/system/scene/object/timer/hide/hider/hover/hooder.tscn" id="43_xe00t"]
+[ext_resource type="FontFile" uid="uid://drm0mr2hyapf2" path="res://asset/resource/media/data/font/EmojiOneColor.otf" id="44_yh0r2"]
+[ext_resource type="FontFile" uid="uid://dqpftcx1b6r8j" path="res://asset/resource/media/data/font/LTStopwatch-Regular.ttf" id="47_1moid"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u412m"]
+bg_color = Color(0, 0, 0, 1)
+shadow_color = Color(0, 0, 0, 0)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_o4lum"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n0yye"]
+bg_color = Color(1, 1, 0.588235, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uhig6"]
+bg_color = Color(0.452141, 0.532021, 1, 1)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xf68l"]
 bg_color = Color(0.588235, 1, 0.588235, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kdjwi"]
+content_margin_top = 2.0
+content_margin_bottom = 0.0
+bg_color = Color(0, 0, 0, 1)
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
 
 [sub_resource type="Gradient" id="Gradient_8qkor"]
 colors = PackedColorArray(0.588235, 1, 0.588235, 0.235294, 1, 1, 1, 0)
@@ -65,23 +83,6 @@ width = 16
 height = 20
 fill_from = Vector2(0.5, 0)
 fill_to = Vector2(0.5, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kdjwi"]
-content_margin_top = 2.0
-content_margin_bottom = 0.0
-bg_color = Color(0, 0, 0, 1)
-corner_radius_bottom_right = 1
-corner_radius_bottom_left = 1
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u412m"]
-bg_color = Color(0, 0, 0, 1)
-shadow_color = Color(0, 0, 0, 0)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n0yye"]
-bg_color = Color(1, 1, 0.588235, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uhig6"]
-bg_color = Color(0.452141, 0.532021, 1, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_loeqg"]
 bg_color = Color(0, 0, 0, 1)
@@ -202,8 +203,8 @@ color = Color(0.117647, 0.117647, 0.227451, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tysmj"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tya2d"]
-bg_color = Color(0.0352941, 0.0352941, 0.0352941, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yuxct"]
+bg_color = Color(0, 0, 0, 1)
 border_width_left = 2
 border_width_right = 2
 border_color = Color(0.119426, 0.119504, 0.22556, 1)
@@ -228,6 +229,17 @@ expand_margin_bottom = 1.0
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6h6y6"]
 bg_color = Color(0.953292, 0.415199, 9.62615e-07, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4chmg"]
+content_margin_left = 3.0
+content_margin_top = 5.0
+content_margin_right = 1.0
+content_margin_bottom = 0.0
+bg_color = Color(0.0196078, 0.0196078, 0.0392157, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1moid"]
+content_margin_top = 1.0
+content_margin_right = 5.0
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eq6yd"]
 content_margin_left = 7.0
 content_margin_top = 7.0
@@ -237,6 +249,10 @@ bg_color = Color(0.0196078, 0.0196078, 0.0392157, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_iy05a"]
 content_margin_right = 3.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4chmg"]
+content_margin_left = 10.0
+content_margin_top = 1.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8qkor"]
 content_margin_left = 7.0
@@ -254,6 +270,13 @@ bg_color = Color(0.0196078, 0.0196078, 0.0392157, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ok865"]
 content_margin_left = 8.0
+content_margin_top = 7.0
+content_margin_right = 1.0
+content_margin_bottom = 0.0
+bg_color = Color(0.0196078, 0.0196078, 0.0392157, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1moid"]
+content_margin_left = 4.0
 content_margin_top = 7.0
 content_margin_right = 1.0
 content_margin_bottom = 0.0
@@ -404,191 +427,14 @@ layout_mode = 2
 theme_override_constants/separation = 0
 script = ExtResource("15_upyjg")
 
-[node name="hp" type="HBoxContainer" parent="priorities/stats/inventory/ability/controls/status"]
-visible = false
-custom_minimum_size = Vector2(0, 2)
+[node name="hp" parent="priorities/stats/inventory/ability/controls/status" instance=ExtResource("16_jnh4p")]
 layout_mode = 2
-
-[node name="ray" type="ProgressBar" parent="priorities/stats/inventory/ability/controls/status/hp"]
-custom_minimum_size = Vector2(35, 2)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_styles/background = SubResource("StyleBoxEmpty_o4lum")
-theme_override_styles/fill = SubResource("StyleBoxFlat_xf68l")
-step = 1.0
-value = 100.0
-show_percentage = false
-
-[node name="status" type="MarginContainer" parent="priorities/stats/inventory/ability/controls/status/hp/ray"]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -41.0
-offset_bottom = 33.0
-grow_horizontal = 0
-mouse_filter = 2
-theme_override_constants/margin_left = 0
-theme_override_constants/margin_top = 2
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 0
-
-[node name="back" type="TextureRect" parent="priorities/stats/inventory/ability/controls/status/hp/ray/status"]
-layout_mode = 2
-texture = SubResource("GradientTexture2D_pau43")
-
-[node name="margin" type="MarginContainer" parent="priorities/stats/inventory/ability/controls/status/hp/ray/status"]
-layout_mode = 2
-theme_override_constants/margin_left = 7
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 7
-theme_override_constants/margin_bottom = 3
-
-[node name="damage" type="HBoxContainer" parent="priorities/stats/inventory/ability/controls/status/hp/ray/status/margin"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_constants/separation = 0
-script = ExtResource("12_eq6yd")
-
-[node name="health" type="Label" parent="priorities/stats/inventory/ability/controls/status/hp/ray/status/margin/damage"]
-custom_minimum_size = Vector2(10, 0)
-layout_mode = 2
-size_flags_horizontal = 8
-theme_override_colors/font_color = Color(0.921569, 0.921569, 0.921569, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 5
-theme_override_fonts/font = ExtResource("28_ql3o6")
-theme_override_font_sizes/font_size = 16
-text = "150"
-horizontal_alignment = 1
-
-[node name="minus" type="Label" parent="priorities/stats/inventory/ability/controls/status/hp/ray/status/margin/damage"]
-custom_minimum_size = Vector2(10, 0)
-layout_mode = 2
-size_flags_horizontal = 8
-theme_override_colors/font_color = Color(0.921569, 0.921569, 0.921569, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 5
-theme_override_fonts/font = ExtResource("28_ql3o6")
-theme_override_font_sizes/font_size = 10
-text = "–"
-horizontal_alignment = 1
-vertical_alignment = 2
-
-[node name="value" type="Label" parent="priorities/stats/inventory/ability/controls/status/hp/ray/status/margin/damage"]
-custom_minimum_size = Vector2(10, 0)
-layout_mode = 2
-size_flags_horizontal = 0
-theme_override_colors/font_color = Color(0.921569, 0.921569, 0.921569, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 5
-theme_override_fonts/font = ExtResource("28_ql3o6")
-theme_override_font_sizes/font_size = 16
-text = "15"
-horizontal_alignment = 1
-
-[node name="hero" type="Button" parent="priorities/stats/inventory/ability/controls/status/hp/ray/status"]
-visible = false
-layout_mode = 2
-theme_override_fonts/font = ExtResource("28_ql3o6")
-theme_override_styles/normal = SubResource("StyleBoxFlat_kdjwi")
-text = "Рей"
-
-[node name="hooder" parent="priorities/stats/inventory/ability/controls/status/hp/ray/status/hero" instance=ExtResource("43_xe00t")]
-
-[node name="rock" type="ProgressBar" parent="priorities/stats/inventory/ability/controls/status/hp"]
-custom_minimum_size = Vector2(102, 2)
-layout_mode = 2
-theme_override_styles/background = SubResource("StyleBoxEmpty_o4lum")
-theme_override_styles/fill = SubResource("StyleBoxFlat_xf68l")
-step = 1.0
-value = 100.0
-show_percentage = false
-
-[node name="status" type="MarginContainer" parent="priorities/stats/inventory/ability/controls/status/hp/rock"]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -41.0
-offset_bottom = 33.0
-grow_horizontal = 0
-mouse_filter = 2
-theme_override_constants/margin_left = 0
-theme_override_constants/margin_top = 2
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 0
-
-[node name="back" type="TextureRect" parent="priorities/stats/inventory/ability/controls/status/hp/rock/status"]
-layout_mode = 2
-texture = SubResource("GradientTexture2D_pau43")
-
-[node name="margin" type="MarginContainer" parent="priorities/stats/inventory/ability/controls/status/hp/rock/status"]
-layout_mode = 2
-theme_override_constants/margin_left = 7
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 7
-theme_override_constants/margin_bottom = 3
-
-[node name="damage" type="HBoxContainer" parent="priorities/stats/inventory/ability/controls/status/hp/rock/status/margin"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_constants/separation = 0
-script = ExtResource("12_eq6yd")
-
-[node name="health" type="Label" parent="priorities/stats/inventory/ability/controls/status/hp/rock/status/margin/damage"]
-custom_minimum_size = Vector2(10, 0)
-layout_mode = 2
-size_flags_horizontal = 8
-theme_override_colors/font_color = Color(0.921569, 0.921569, 0.921569, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 5
-theme_override_fonts/font = ExtResource("28_ql3o6")
-theme_override_font_sizes/font_size = 16
-text = "9999"
-horizontal_alignment = 1
-
-[node name="minus" type="Label" parent="priorities/stats/inventory/ability/controls/status/hp/rock/status/margin/damage"]
-custom_minimum_size = Vector2(10, 0)
-layout_mode = 2
-size_flags_horizontal = 8
-theme_override_colors/font_color = Color(0.921569, 0.921569, 0.921569, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 5
-theme_override_fonts/font = ExtResource("28_ql3o6")
-theme_override_font_sizes/font_size = 10
-text = "–"
-horizontal_alignment = 1
-vertical_alignment = 2
-
-[node name="value" type="Label" parent="priorities/stats/inventory/ability/controls/status/hp/rock/status/margin/damage"]
-custom_minimum_size = Vector2(10, 0)
-layout_mode = 2
-size_flags_horizontal = 0
-theme_override_colors/font_color = Color(0.921569, 0.921569, 0.921569, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 5
-theme_override_fonts/font = ExtResource("28_ql3o6")
-theme_override_font_sizes/font_size = 16
-text = "9999"
-horizontal_alignment = 1
-
-[node name="hero" type="Button" parent="priorities/stats/inventory/ability/controls/status/hp/rock/status"]
-visible = false
-layout_mode = 2
-theme_override_fonts/font = ExtResource("28_ql3o6")
-theme_override_styles/normal = SubResource("StyleBoxFlat_kdjwi")
-text = "Рей"
-
-[node name="hooder" parent="priorities/stats/inventory/ability/controls/status/hp/rock/status/hero" instance=ExtResource("43_xe00t")]
 
 [node name="markers" type="HFlowContainer" parent="priorities/stats/inventory/ability/controls/status"]
 layout_mode = 2
 script = ExtResource("8_2uuwx")
 
-[node name="Control" type="Control" parent="priorities/stats/inventory/ability/controls/status/markers"]
+[node name="space" type="Control" parent="priorities/stats/inventory/ability/controls/status/markers"]
 layout_mode = 2
 size_flags_horizontal = 3
 
@@ -622,7 +468,12 @@ layout_mode = 2
 [node name="item_0" parent="priorities/stats/inventory/ability/controls/status/markers" instance=ExtResource("12_upyjg")]
 layout_mode = 2
 
+[node name="space2" type="Control" parent="priorities/stats/inventory/ability/controls/status/markers"]
+layout_mode = 2
+size_flags_horizontal = 3
+
 [node name="margin" type="MarginContainer" parent="priorities/stats/inventory/ability/controls/status/markers"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/margin_left = 10
@@ -2099,7 +1950,6 @@ text = "Ну дарова, ребятки, че нового?"
 autowrap_mode = 2
 
 [node name="log" type="PanelContainer" parent="priorities/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list"]
-visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_tysmj")
 script = ExtResource("27_ok865")
@@ -2118,7 +1968,7 @@ theme_override_constants/separation = 0
 [node name="content7" type="PanelContainer" parent="priorities/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat"]
 visible = false
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_tya2d")
+theme_override_styles/panel = SubResource("StyleBoxFlat_yuxct")
 
 [node name="margin" type="MarginContainer" parent="priorities/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content7"]
 layout_mode = 2
@@ -2133,15 +1983,15 @@ layout_mode = 2
 size_flags_vertical = 1
 theme_override_colors/font_color = Color(0.627451, 0.627451, 0.627451, 1)
 theme_override_constants/line_spacing = -2
-theme_override_fonts/font = ExtResource("16_g3c1s")
-theme_override_font_sizes/font_size = 14
+theme_override_fonts/font = ExtResource("24_tysmj")
+theme_override_font_sizes/font_size = 18
 text = "В сундуке найдена пустая банка"
 autowrap_mode = 2
 
 [node name="content6" type="PanelContainer" parent="priorities/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat"]
 visible = false
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_tya2d")
+theme_override_styles/panel = SubResource("StyleBoxFlat_yuxct")
 
 [node name="margin" type="MarginContainer" parent="priorities/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content6"]
 layout_mode = 2
@@ -2156,18 +2006,20 @@ layout_mode = 2
 size_flags_vertical = 1
 theme_override_colors/font_color = Color(0.627451, 0.627451, 0.627451, 1)
 theme_override_constants/line_spacing = -2
-theme_override_fonts/font = ExtResource("16_g3c1s")
-theme_override_font_sizes/font_size = 14
+theme_override_fonts/font = ExtResource("24_tysmj")
+theme_override_font_sizes/font_size = 18
 text = "Получено 213 очков опыта"
 autowrap_mode = 2
 
 [node name="item_found" parent="priorities/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat" instance=ExtResource("30_iy05a")]
+visible = false
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_yuxct")
 
 [node name="ko-ray" type="PanelContainer" parent="priorities/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat"]
 visible = false
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_tya2d")
+theme_override_styles/panel = SubResource("StyleBoxFlat_yuxct")
 
 [node name="margin" type="MarginContainer" parent="priorities/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/ko-ray"]
 layout_mode = 2
@@ -2182,15 +2034,15 @@ layout_mode = 2
 size_flags_vertical = 1
 theme_override_colors/font_color = Color(0.627451, 0.627451, 0.627451, 1)
 theme_override_constants/line_spacing = -2
-theme_override_fonts/font = ExtResource("16_g3c1s")
-theme_override_font_sizes/font_size = 14
+theme_override_fonts/font = ExtResource("24_tysmj")
+theme_override_font_sizes/font_size = 18
 text = "Рей падает без сознания"
 autowrap_mode = 2
 
 [node name="ko-rock" type="PanelContainer" parent="priorities/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat"]
 visible = false
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_tya2d")
+theme_override_styles/panel = SubResource("StyleBoxFlat_yuxct")
 
 [node name="margin" type="MarginContainer" parent="priorities/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/ko-rock"]
 layout_mode = 2
@@ -2205,14 +2057,15 @@ layout_mode = 2
 size_flags_vertical = 1
 theme_override_colors/font_color = Color(0.627451, 0.627451, 0.627451, 1)
 theme_override_constants/line_spacing = -2
-theme_override_fonts/font = ExtResource("16_g3c1s")
-theme_override_font_sizes/font_size = 14
+theme_override_fonts/font = ExtResource("24_tysmj")
+theme_override_font_sizes/font_size = 18
 text = "Рок падает без сознания"
 autowrap_mode = 2
 
 [node name="game-over" type="PanelContainer" parent="priorities/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat"]
+visible = false
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_tya2d")
+theme_override_styles/panel = SubResource("StyleBoxFlat_yuxct")
 
 [node name="margin" type="MarginContainer" parent="priorities/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/game-over"]
 layout_mode = 2
@@ -2227,8 +2080,8 @@ layout_mode = 2
 size_flags_vertical = 1
 theme_override_colors/font_color = Color(0.627451, 0.627451, 0.627451, 1)
 theme_override_constants/line_spacing = -2
-theme_override_fonts/font = ExtResource("16_g3c1s")
-theme_override_font_sizes/font_size = 14
+theme_override_fonts/font = ExtResource("24_tysmj")
+theme_override_font_sizes/font_size = 18
 text = "Вас унесло раскаленными песками...."
 autowrap_mode = 2
 
@@ -2340,7 +2193,6 @@ theme_override_constants/margin_right = 1
 theme_override_constants/margin_bottom = 1
 
 [node name="points" type="VBoxContainer" parent="priorities/stats/inventory/ability/controls/hints/space/preview/help/ability/synergy"]
-visible = false
 layout_mode = 2
 theme_override_constants/separation = 4
 
@@ -2414,6 +2266,36 @@ layout_mode = 2
 size_flags_horizontal = 8
 theme_override_constants/separation = 2
 
+[node name="left" type="Button" parent="priorities/stats/inventory/ability/controls/hints/bottom/slots/ability"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.341176, 0.341176, 0.341176, 1)
+theme_override_fonts/font = ExtResource("28_ql3o6")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_4chmg")
+text = "←"
+
+[node name="bag" type="Label" parent="priorities/stats/inventory/ability/controls/hints/bottom/slots/ability/left"]
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -15.0
+offset_top = -9.0
+offset_bottom = 9.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+theme_override_fonts/font = ExtResource("4_42m6k")
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxEmpty_1moid")
+text = "💰"
+horizontal_alignment = 2
+
 [node name="fire" type="Button" parent="priorities/stats/inventory/ability/controls/hints/bottom/slots/ability"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
@@ -2439,9 +2321,32 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_iy05a")
 text = "1"
 horizontal_alignment = 2
 
-[node name="space" type="Control" parent="priorities/stats/inventory/ability/controls/hints/bottom/slots/ability"]
+[node name="right" type="Button" parent="priorities/stats/inventory/ability/controls/hints/bottom/slots/ability"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.341176, 0.341176, 0.341176, 1)
+theme_override_fonts/font = ExtResource("28_ql3o6")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_4chmg")
+text = "→"
+
+[node name="bag" type="Label" parent="priorities/stats/inventory/ability/controls/hints/bottom/slots/ability/right"]
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -9.0
+offset_right = 20.0
+offset_bottom = 9.0
+grow_vertical = 2
+size_flags_horizontal = 8
+theme_override_fonts/font = ExtResource("4_42m6k")
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxEmpty_4chmg")
+text = "💰"
+horizontal_alignment = 2
 
 [node name="medium" type="HBoxContainer" parent="priorities/stats/inventory/ability/controls/hints/bottom/slots"]
 layout_mode = 2
@@ -2523,15 +2428,21 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_iy05a")
 text = "2"
 horizontal_alignment = 2
 
-[node name="base2" type="HBoxContainer" parent="priorities/stats/inventory/ability/controls/hints/bottom/slots"]
+[node name="base" type="HBoxContainer" parent="priorities/stats/inventory/ability/controls/hints/bottom/slots"]
 layout_mode = 2
 theme_override_constants/separation = 2
 
-[node name="space" type="Control" parent="priorities/stats/inventory/ability/controls/hints/bottom/slots/base2"]
+[node name="cure" type="Button" parent="priorities/stats/inventory/ability/controls/hints/bottom/slots/base"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.341176, 0.341176, 0.341176, 1)
+theme_override_fonts/font = ExtResource("4_42m6k")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_ok865")
+text = "🧪"
 
-[node name="kick" type="Button" parent="priorities/stats/inventory/ability/controls/hints/bottom/slots/base2"]
+[node name="kick" type="Button" parent="priorities/stats/inventory/ability/controls/hints/bottom/slots/base"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -2541,7 +2452,7 @@ theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_ok865")
 text = "🦶"
 
-[node name="cost" type="Label" parent="priorities/stats/inventory/ability/controls/hints/bottom/slots/base2/kick"]
+[node name="cost" type="Label" parent="priorities/stats/inventory/ability/controls/hints/bottom/slots/base/kick"]
 visible = false
 custom_minimum_size = Vector2(15, 0)
 layout_mode = 1
@@ -2557,9 +2468,15 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_iy05a")
 text = "2"
 horizontal_alignment = 2
 
-[node name="space2" type="Control" parent="priorities/stats/inventory/ability/controls/hints/bottom/slots/base2"]
+[node name="osmose" type="Button" parent="priorities/stats/inventory/ability/controls/hints/bottom/slots/base"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.341176, 0.341176, 0.341176, 1)
+theme_override_fonts/font = ExtResource("44_yh0r2")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_1moid")
+text = "🥏"
 
 [node name="topic" type="HFlowContainer" parent="priorities/stats/inventory/ability/controls"]
 custom_minimum_size = Vector2(10, 10)
@@ -2575,6 +2492,8 @@ size_flags_stretch_ratio = 0.25
 [node name="pause" parent="priorities/stats/inventory/ability/controls/topic" instance=ExtResource("1_p1rgr")]
 custom_minimum_size = Vector2(40, 30)
 layout_mode = 2
+theme_override_fonts/font = ExtResource("47_1moid")
+text = "ESC"
 
 [node name="hooder" parent="priorities/stats/inventory/ability/controls/topic/pause" instance=ExtResource("43_xe00t")]
 
@@ -2583,12 +2502,13 @@ custom_minimum_size = Vector2(40, 30)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("47_1moid")
 theme_override_font_sizes/font_size = 18
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_eq6yd")
 theme_override_styles/normal = SubResource("StyleBoxFlat_fuh2f")
 disabled = true
 shortcut = ExtResource("13_1chk7")
-text = "Y"
+text = "y"
 
 [node name="hooder" parent="priorities/stats/inventory/ability/controls/topic/menu" instance=ExtResource("43_xe00t")]
 

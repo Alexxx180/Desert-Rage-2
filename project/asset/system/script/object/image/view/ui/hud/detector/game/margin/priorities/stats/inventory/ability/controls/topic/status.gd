@@ -1,8 +1,8 @@
 extends HBoxContainer
 
-@onready var enemy_1: PanelContainer = $enemies/enemy_1
+@onready var enemy_1: PanelContainer = $space/enemy/enemies/enemy_1
 @onready var enemy: Array[PanelContainer] = [enemy_1] # , $enemy_2
-@onready var xp: HBoxContainer = $experience
+@onready var xp: HBoxContainer = $space/enemy/experience
 @onready var main: HBoxContainer = xp.get_node("xp/main")
 @onready var level_up: TextureRect = main.get_node("space/level_up")
 @onready var meter: Control = xp.get_node("xp/meter")
@@ -17,6 +17,7 @@ extends HBoxContainer
 	"margin": multiplier.get_node("margin"),
 	"score": multiplier.get_node("margin/multiplier")
 }
+@onready var sp: Control = main.get_node("space")
 @onready var count: Label = main.get_node("space/margin/count")
 var fill: StyleBoxFlat = StyleBoxFlat.new()
 
@@ -28,21 +29,25 @@ func _ready() -> void:
 	level_up.mouse_entered.connect(next.show)
 	level_up.mouse_exited.connect(next.hide)
 
+func set_hide_xp(timer: Timer, group_xp: Node) -> void:
+	#if timer != null:
+	timer.timeout.connect(func():
+		meter.hide()
+		sp.hide()
+		combo.margin.hide())
+	#group_xp.update_exp.connect(timer.start)
+
 # var meter: ProgressBar# scroll/margin/stack/ability/score/exp/total/combo/meter
 func set_xp_score(group_xp: Node) -> void:
 	var timer: Timer = $hide_xp
-	if timer != null:
-		timer.timeout.connect(func():
-			meter.hide()
-			count.hide()
-			combo.margin.hide())
-		group_xp.update_exp.connect(timer.start)
+	set_hide_xp(timer, group_xp)
 	group_xp.update_priorities.connect(new_level_up)
 	group_xp.update_exp.connect(
 		func(value: Vector2i, base_xp: int):
 			count.text = str(base_xp + value.x)
-			count.show()
+			sp.show()
 			meter.show()
+			timer.start()
 			score.max_value = value.y
 			score.value = value.x)
 	next.set_xp_score(group_xp)
@@ -64,4 +69,8 @@ func update_multiplier(scored: float) -> void:
 	if not meter.visible: return
 	
 	for node in [combo.margin, space]: node.show() # combo.meter, 
-	combo.score.text = "x%.2f" % scored
+	var result: String = "x%.2f" % scored
+	if result[-1] == "0":
+		combo.score.text = result.substr(0, result.rfind("0"))
+	else:
+		combo.score.text = result

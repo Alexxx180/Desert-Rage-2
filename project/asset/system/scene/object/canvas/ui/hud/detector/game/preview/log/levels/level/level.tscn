@@ -1,0 +1,86 @@
+[gd_scene load_steps=8 format=3 uid="uid://c22q3l40mqshp"]
+
+[ext_resource type="Script" uid="uid://dv5g1ftvj8yic" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/hints/preview/chat/log/level/hero.gd" id="1_3hhut"]
+[ext_resource type="Script" uid="uid://celfkwhkvwnw" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/hints/preview/chat/log/level/next/priority.gd" id="2_auva5"]
+[ext_resource type="FontFile" uid="uid://qxg3lsudod7p" path="res://asset/resource/media/data/font/Championship.ttf" id="3_auva5"]
+[ext_resource type="FontFile" uid="uid://tledodlx6okb" path="res://asset/resource/media/data/font/LTSuperiorMono-Semibold.otf" id="4_auva5"]
+[ext_resource type="Script" uid="uid://463bb1vmgnq6" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/hints/preview/chat/log/level/next/caption.gd" id="4_tg3uo"]
+[ext_resource type="Script" uid="uid://do1fvsnw24i83" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/hints/preview/chat/log/level/next/hero.gd" id="5_i8veq"]
+[ext_resource type="PackedScene" uid="uid://dv268r05flq5" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/preview/log/levels/level/number.tscn" id="7_erywr"]
+
+[node name="ray" type="HBoxContainer"]
+offset_right = 140.0
+offset_bottom = 171.0
+theme_override_constants/separation = 12
+script = ExtResource("1_3hhut")
+
+[node name="priority" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 10
+script = ExtResource("2_auva5")
+
+[node name="level" type="Label" parent="priority"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(0.72549, 0.72549, 0.72549, 1)
+theme_override_fonts/font = ExtResource("3_auva5")
+theme_override_font_sizes/font_size = 20
+text = "7"
+
+[node name="caption" type="Label" parent="priority"]
+custom_minimum_size = Vector2(7, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(0.235294, 0.235294, 0.235294, 1)
+theme_override_constants/line_spacing = -4
+theme_override_fonts/font = ExtResource("4_auva5")
+theme_override_font_sizes/font_size = 14
+text = "Выдержка"
+autowrap_mode = 1
+
+[node name="stats" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_constants/separation = 10
+script = ExtResource("4_tg3uo")
+
+[node name="hero" type="HBoxContainer" parent="stats"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 5
+script = ExtResource("5_i8veq")
+
+[node name="caption" type="Label" parent="stats/hero"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0.393086, 0.393086, 0.393085, 1)
+theme_override_fonts/font = ExtResource("4_auva5")
+theme_override_font_sizes/font_size = 12
+text = "Рей"
+
+[node name="next" type="HBoxContainer" parent="stats/hero"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="arrow" type="Label" parent="stats/hero/next"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0.501961, 0.501961, 0.501961, 1)
+theme_override_fonts/font = ExtResource("4_auva5")
+theme_override_font_sizes/font_size = 12
+text = "→"
+
+[node name="priority" type="Label" parent="stats/hero/next"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0.393086, 0.393086, 0.393085, 1)
+theme_override_fonts/font = ExtResource("4_auva5")
+theme_override_font_sizes/font_size = 12
+text = "Стойкость"
+
+[node name="number" parent="stats" instance=ExtResource("7_erywr")]
+layout_mode = 2

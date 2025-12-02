@@ -12,4 +12,5 @@ func set_stats(stats: Dictionary) -> void:  # ["power", "health"]
 
 func reveal_stats() -> void:
 	for i in range(0, len(group)):
-		group[i].text = str(now[i])
+		pass # TODO FIXME SEPARATOR
+		# group[i].text = str(now[i])

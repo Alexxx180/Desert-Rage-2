@@ -13,4 +13,4 @@ func set_stats(stats: Dictionary) -> void:
 		v.text = str(value))
 
 func reveal_stats() -> void:
-	_reveal(func(i, v): v.hide())
+	_reveal(func(i, v): pass  )# v.hide()) # TODO FIXME stats level up hide

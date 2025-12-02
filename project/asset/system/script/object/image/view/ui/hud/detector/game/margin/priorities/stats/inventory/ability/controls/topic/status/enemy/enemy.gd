@@ -2,11 +2,11 @@ extends PanelContainer
 
 @onready var health: ProgressBar = $hp/health
 @onready var contested: ProgressBar = $hp/contested
-@onready var caption: PanelContainer = $caption # TODO fix caption and interrogate for enemy
+@onready var caption: PanelContainer = $content/caption # TODO fix caption and interrogate for enemy
 @onready var back: TextureRect = $margin/contents/damage/back
 # @onready var interrogate: Label = $margin/contents/interrogate
 @onready var damage = $margin/contents/damage
-@onready var hits: VBoxContainer = $margin/contents/hits
+@onready var hits: VBoxContainer = $content/hits # margin/contents/
 @onready var damages: HBoxContainer = damage.get_node("margin/damage")
 
 func set_hp(hp: Node) -> void:
