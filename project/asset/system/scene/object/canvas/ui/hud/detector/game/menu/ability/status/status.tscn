@@ -1,12 +1,18 @@
-[gd_scene load_steps=32 format=3 uid="uid://cq5jn6k2bwg5n"]
+[gd_scene load_steps=45 format=3 uid="uid://cq5jn6k2bwg5n"]
 
 [ext_resource type="Script" uid="uid://b2ugt042kmpr0" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/topic/status.gd" id="1_stn0a"]
+[ext_resource type="Script" uid="uid://crmcb7sw51vpd" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/xp/short.gd" id="2_nfruw"]
 [ext_resource type="FontFile" uid="uid://dqpftcx1b6r8j" path="res://asset/resource/media/data/font/LTStopwatch-Regular.ttf" id="2_stn0a"]
 [ext_resource type="FontFile" uid="uid://cc0l5uav5qfke" path="res://asset/resource/media/data/font/ka1.ttf" id="3_crv53"]
+[ext_resource type="PackedScene" uid="uid://dugyepxewkmgo" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/pause/pause.tscn" id="4_f3i4p"]
 [ext_resource type="PackedScene" uid="uid://b5qo332jiddu3" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/ability/status/enemy.tscn" id="5_crv53"]
+[ext_resource type="FontFile" uid="uid://c150873ijitn" path="res://asset/resource/media/data/font/ComicHelvetic_Heavy.otf" id="5_ipktp"]
 [ext_resource type="FontFile" uid="uid://b37js8y80ak1k" path="res://asset/resource/media/data/font/NotoColorEmoji-Regular.ttf" id="6_f3i4p"]
+[ext_resource type="PackedScene" uid="uid://dvdimdxij23df" path="res://asset/system/scene/object/timer/hide/hider/hover/hooder.tscn" id="6_ipktp"]
+[ext_resource type="Shortcut" uid="uid://ucetbklb6n0q" path="res://asset/resource/ui/short/cut/game/gameplay-menu.tres" id="7_p6ffv"]
 [ext_resource type="PackedScene" uid="uid://qlgo5b48kj7l" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/ability/status/description.tscn" id="7_stn0a"]
 [ext_resource type="FontFile" uid="uid://bmtckcw2a28p2" path="res://asset/resource/media/data/font/Sportsball.ttf" id="8_hnjmq"]
+[ext_resource type="FontFile" uid="uid://b2wbdbnkxcqv1" path="res://asset/resource/media/data/font/NotoEmoji-VariableFont_wght.ttf" id="13_p6ffv"]
 
 [sub_resource type="Gradient" id="Gradient_ok865"]
 colors = PackedColorArray(0.392157, 0.392157, 0.686275, 0.470588, 0, 0, 0, 0)
@@ -17,6 +23,44 @@ width = 20
 height = 27
 fill_from = Vector2(0.501923, 1)
 fill_to = Vector2(0.513462, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6f6g2"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pndwk"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ipktp"]
+content_margin_left = 8.0
+content_margin_top = 5.0
+content_margin_right = 4.0
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ipktp"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_p6ffv"]
+content_margin_left = 6.0
+content_margin_top = 5.0
 
 [sub_resource type="Gradient" id="Gradient_eq6yd"]
 colors = PackedColorArray(0.768627, 0.588235, 0.0705882, 0.235294, 1, 1, 1, 0)
@@ -67,8 +111,6 @@ bg_color = Color(0.739789, 2.00946e-06, 5.77569e-07, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hnjmq"]
 
-[sub_resource type="Theme" id="Theme_crv53"]
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_crv53"]
 bg_color = Color(0, 0, 0, 1)
 border_color = Color(0.184314, 0.184314, 0.72549, 1)
@@ -80,6 +122,16 @@ content_margin_top = 6.0
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4mbfr"]
 content_margin_left = 7.0
 content_margin_top = 6.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lglah"]
+content_margin_left = 6.0
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8bgqw"]
+content_margin_left = 5.0
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Theme" id="Theme_crv53"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nfruw"]
 
@@ -135,6 +187,7 @@ mouse_filter = 0
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_constants/separation = 0
+script = ExtResource("2_nfruw")
 
 [node name="main" type="HBoxContainer" parent="space/enemy/experience/xp"]
 layout_mode = 2
@@ -143,8 +196,7 @@ size_flags_vertical = 3
 theme_override_constants/separation = 0
 
 [node name="space" type="Control" parent="space/enemy/experience/xp/main"]
-visible = false
-custom_minimum_size = Vector2(70, 0)
+custom_minimum_size = Vector2(140, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
@@ -175,7 +227,7 @@ size_flags_vertical = 8
 theme_override_constants/margin_left = 0
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 2
+theme_override_constants/margin_bottom = 5
 
 [node name="count" type="Label" parent="space/enemy/experience/xp/main/space/margin"]
 layout_mode = 2
@@ -183,9 +235,80 @@ size_flags_horizontal = 8
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_outline_size = 10
 theme_override_fonts/font = ExtResource("3_crv53")
-theme_override_font_sizes/font_size = 19
-text = "0"
+theme_override_font_sizes/font_size = 18
+text = "20000000"
 vertical_alignment = 2
+
+[node name="options" type="HBoxContainer" parent="space/enemy/experience/xp/main/space"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = -1
+
+[node name="pause" parent="space/enemy/experience/xp/main/space/options" instance=ExtResource("4_f3i4p")]
+custom_minimum_size = Vector2(40, 30)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_ipktp")
+theme_override_font_sizes/font_size = 20
+text = "ESC"
+
+[node name="hooder" parent="space/enemy/experience/xp/main/space/options/pause" instance=ExtResource("6_ipktp")]
+
+[node name="menu" type="Button" parent="space/enemy/experience/xp/main/space/options"]
+custom_minimum_size = Vector2(40, 30)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("5_ipktp")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/disabled = SubResource("StyleBoxFlat_6f6g2")
+theme_override_styles/normal = SubResource("StyleBoxFlat_pndwk")
+disabled = true
+shortcut = ExtResource("7_p6ffv")
+text = "Y"
+
+[node name="hooder" parent="space/enemy/experience/xp/main/space/options/menu" instance=ExtResource("6_ipktp")]
+
+[node name="icons" type="Button" parent="space/enemy/experience/xp/main/space/options"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("6_f3i4p")
+theme_override_styles/normal = SubResource("StyleBoxFlat_ipktp")
+
+[node name="icons" type="Label" parent="space/enemy/experience/xp/main/space/options/icons"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -11.5
+offset_right = 40.0
+offset_bottom = 11.5
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("6_f3i4p")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ipktp")
+text = "🌠"
+
+[node name="list" type="Label" parent="space/enemy/experience/xp/main/space/options/icons"]
+modulate = Color(1, 1, 1, 0.0588235)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -30.0
+offset_top = -13.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("6_f3i4p")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxEmpty_p6ffv")
+text = "🗃"
 
 [node name="multiplier" type="Control" parent="space/enemy/experience/xp/main"]
 visible = false
@@ -233,7 +356,6 @@ theme_override_font_sizes/font_size = 15
 text = "x2.15"
 
 [node name="meter" type="Control" parent="space/enemy/experience/xp"]
-visible = false
 custom_minimum_size = Vector2(0, 2)
 layout_mode = 2
 
@@ -381,7 +503,7 @@ layout_mode = 2
 size_flags_horizontal = 8
 
 [node name="skills" type="PanelContainer" parent="preset"]
-custom_minimum_size = Vector2(65, 30)
+custom_minimum_size = Vector2(140, 30)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_hnjmq")
 
@@ -389,7 +511,85 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_hnjmq")
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="margin" type="MarginContainer" parent="preset/skills/set"]
+[node name="skill" type="MarginContainer" parent="preset/skills/set"]
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="options" type="HBoxContainer" parent="preset/skills/set/skill"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="first" type="Button" parent="preset/skills/set/skill/options"]
+custom_minimum_size = Vector2(60, 29)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_crv53")
+
+[node name="skill" type="HBoxContainer" parent="preset/skills/set/skill/options/first"]
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -27.5
+offset_right = 27.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 8
+theme_override_constants/separation = -5
+
+[node name="fire" type="Label" parent="preset/skills/set/skill/options/first/skill"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("6_f3i4p")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxEmpty_v78vk")
+text = "🔥"
+
+[node name="whip" type="Label" parent="preset/skills/set/skill/options/first/skill"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("6_f3i4p")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxEmpty_4mbfr")
+text = "🎣"
+
+[node name="hooder" parent="preset/skills/set/skill/options/first" instance=ExtResource("6_ipktp")]
+
+[node name="team" type="Button" parent="preset/skills/set/skill/options"]
+custom_minimum_size = Vector2(40, 30)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("13_p6ffv")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_lglah")
+text = "🙂‍↔️"
+alignment = 0
+
+[node name="hooder" parent="preset/skills/set/skill/options/team" instance=ExtResource("6_ipktp")]
+
+[node name="group" type="Button" parent="preset/skills/set/skill/options"]
+custom_minimum_size = Vector2(40, 30)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("13_p6ffv")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_8bgqw")
+text = "😶‍🌫️"
+alignment = 0
+
+[node name="hooder" parent="preset/skills/set/skill/options/group" instance=ExtResource("6_ipktp")]
+
+[node name="margin" type="MarginContainer" parent="preset/skills/set/skill"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/margin_left = 9
@@ -397,11 +597,11 @@ theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 7
 theme_override_constants/margin_bottom = 0
 
-[node name="ap" type="HBoxContainer" parent="preset/skills/set/margin"]
+[node name="ap" type="HBoxContainer" parent="preset/skills/set/skill/margin"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="health" type="Label" parent="preset/skills/set/margin/ap"]
+[node name="health" type="Label" parent="preset/skills/set/skill/margin/ap"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 size_flags_horizontal = 8
@@ -414,14 +614,14 @@ theme_override_font_sizes/font_size = 11
 text = "9999"
 horizontal_alignment = 1
 
-[node name="margin" type="MarginContainer" parent="preset/skills/set/margin/ap"]
+[node name="margin" type="MarginContainer" parent="preset/skills/set/skill/margin/ap"]
 layout_mode = 2
 theme_override_constants/margin_left = 4
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 1
 
-[node name="minus" type="Label" parent="preset/skills/set/margin/ap/margin"]
+[node name="minus" type="Label" parent="preset/skills/set/skill/margin/ap/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
 theme = SubResource("Theme_crv53")
@@ -434,7 +634,7 @@ text = "-"
 horizontal_alignment = 1
 vertical_alignment = 2
 
-[node name="value" type="Label" parent="preset/skills/set/margin/ap"]
+[node name="value" type="Label" parent="preset/skills/set/skill/margin/ap"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -444,49 +644,8 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 7
 theme_override_fonts/font = ExtResource("8_hnjmq")
 theme_override_font_sizes/font_size = 11
-text = "100"
+text = "1000"
 horizontal_alignment = 1
-
-[node name="first" type="Button" parent="preset/skills/set"]
-visible = false
-custom_minimum_size = Vector2(65, 29)
-layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_crv53")
-
-[node name="skill" type="HBoxContainer" parent="preset/skills/set/first"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -33.0
-offset_top = -14.0
-offset_right = 33.0
-offset_bottom = 14.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 8
-
-[node name="fire" type="Label" parent="preset/skills/set/first/skill"]
-custom_minimum_size = Vector2(31, 25)
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 8
-theme_override_fonts/font = ExtResource("6_f3i4p")
-theme_override_font_sizes/font_size = 18
-theme_override_styles/normal = SubResource("StyleBoxEmpty_v78vk")
-text = "🔥"
-
-[node name="whip" type="Label" parent="preset/skills/set/first/skill"]
-custom_minimum_size = Vector2(31, 25)
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 8
-theme_override_fonts/font = ExtResource("6_f3i4p")
-theme_override_font_sizes/font_size = 18
-theme_override_styles/normal = SubResource("StyleBoxEmpty_4mbfr")
-text = "🎣"
 
 [node name="ap" type="MarginContainer" parent="preset/skills/set"]
 layout_mode = 2

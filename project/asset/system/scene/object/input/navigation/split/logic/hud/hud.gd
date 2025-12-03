@@ -11,12 +11,12 @@ var ui_nodes: Array[Array] = []
 func _ready() -> void:
 	timer.timeout.connect(drag_feedback)
 
-func setup(navigation: Node) -> void:
+func setup(navigation: Node, nodes_pack: Array) -> void:
 	logic.navigation = navigation
 	logic.navigation.ui.drag_ended.connect(on_drag_end)
 	logic.navigation.ui.drag_started.connect(on_drag_start)
-	for paths in navigation.node_paths:
-		ui_nodes.append(navigation.get_nodes(paths))
+	for nodes in nodes_pack: # navigation.node_paths:
+		ui_nodes.append(nodes)#navigation.get_nodes(paths))
 
 func on_drag_start() -> void:
 	suspend_input.emit()

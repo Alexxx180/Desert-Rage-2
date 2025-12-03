@@ -25,8 +25,8 @@ func controls(ui: CanvasLayer, game: Control) -> void:
 	for hero in group.deploy.party.heroes:
 		var stats: Node = hero.logic.work.stats
 		stats.health.points.update_bar.connect(func(v: int):
-			game.set_hp_value(hero.name, v)
+			game.priorities.set_points("health", hero.name, v)
 			heroes[hero.name].set_hp(hero.logic.work.stats.health.points))
-		stats.aura.update_bar.connect(func(v: int): game.set_ap_value(hero.name, v))
+		stats.aura.update_bar.connect(func(v: int): game.priorities.set_points("ability", hero.name, v))
 	
 	

@@ -1,10 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://ph1bka3pi2g5"]
+[gd_scene load_steps=5 format=3 uid="uid://ph1bka3pi2g5"]
 
 [ext_resource type="Script" uid="uid://dyglon46lwd4j" path="res://asset/system/scene/object/input/navigation/split/split.gd" id="1_0jfel"]
-[ext_resource type="PackedScene" uid="uid://bmf26ewu2u0l0" path="res://asset/system/scene/object/input/button/button.tscn" id="1_dp4dc"]
 [ext_resource type="Script" uid="uid://b4v34l66ynds7" path="res://asset/system/scene/object/input/navigation/split/logic/hud/hud.gd" id="2_1mliv"]
 [ext_resource type="Script" uid="uid://btxg5da2q0st5" path="res://asset/system/scene/object/input/navigation/split/logic/input.gd" id="2_bauy3"]
-[ext_resource type="Script" uid="uid://c1k2y51nfpplm" path="res://asset/system/scene/object/input/navigation/split/logic/focus.gd" id="2_lev23"]
+[ext_resource type="PackedScene" uid="uid://dsmphie5iwv8s" path="res://asset/system/scene/object/input/button/focus.tscn" id="4_bauy3"]
 
 [node name="navigation" type="Node"]
 script = ExtResource("1_0jfel")
@@ -19,15 +18,4 @@ one_shot = true
 [node name="input" type="Node" parent="."]
 script = ExtResource("2_bauy3")
 
-[node name="focus" type="Node" parent="."]
-script = ExtResource("2_lev23")
-
-[node name="panel_focus" parent="focus" instance=ExtResource("1_dp4dc")]
-
-[node name="tab_focus" parent="focus" instance=ExtResource("1_dp4dc")]
-
-[node name="smooth_direct" parent="focus" instance=ExtResource("1_dp4dc")]
-
-[node name="smooth_back" parent="focus" instance=ExtResource("1_dp4dc")]
-
-[node name="instant" parent="focus" instance=ExtResource("1_dp4dc")]
+[node name="focus" parent="." instance=ExtResource("4_bauy3")]

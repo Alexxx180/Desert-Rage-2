@@ -19,12 +19,17 @@ extends Node
 var proportion: float:
 	get: return get_window().size[axis] * direction
 
+func set_property(dir: float, res: Array[float], focused: Control, nodes: Array[Array]) -> void:
+	direction = dir; reserve = res
+	setup(nodes, focused)
+
 func get_nodes(paths: Array) -> Array:
 	var nodes: Array = []
 	for path in paths: nodes.append(get_node(path))
 	return nodes
 
-func _ready() -> void:
-	hud.setup(self)
-	focus.setup(self)
+func setup(nodes: Array[Array], focused: Control) -> void:
+	hud.setup(self, nodes)
+	focus.setup(self, focused)
 	input.set_order()
+# func _ready() -> void: setup()

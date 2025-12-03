@@ -1,7 +1,8 @@
 extends VBoxContainer
 
+@onready var score: ProgressBar = $meter/margin/next/space/score
 @onready var combo_node: Array = [
-	$caption/main/combo, $caption/multiplier
+	$main/multiplier/margin, $main/multiplier/margin/multiplier
 ]
 @onready var combo: Dictionary = {
 	"meter": combo_node[0].get_node("meter"),
@@ -9,7 +10,6 @@ extends VBoxContainer
 }
 
 func set_xp_score(group_xp: Node) -> void:
-	var score: ProgressBar = $meter/main/next/score
 	group_xp.update_exp.connect(
 		func(value: Vector2i, base_xp: int):
 			score.max_value = value.y

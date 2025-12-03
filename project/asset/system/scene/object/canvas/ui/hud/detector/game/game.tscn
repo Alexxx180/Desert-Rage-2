@@ -1,8 +1,7 @@
-[gd_scene load_steps=106 format=3 uid="uid://cel3u88abrgv3"]
+[gd_scene load_steps=99 format=3 uid="uid://cel3u88abrgv3"]
 
 [ext_resource type="Theme" uid="uid://p2br8b6ea3n6" path="res://asset/resource/ui/theme/patterns/template/menu/hud/pause/pause.tres" id="1_klae1"]
 [ext_resource type="Script" uid="uid://81xdi4771u0a" path="res://asset/system/script/object/image/view/ui/hud/detector/game/game.gd" id="1_o71r6"]
-[ext_resource type="PackedScene" uid="uid://dugyepxewkmgo" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/pause/pause.tscn" id="1_p1rgr"]
 [ext_resource type="Script" uid="uid://dommedweskvsj" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/margin.gd" id="2_m0xgs"]
 [ext_resource type="PackedScene" uid="uid://b01p37el432af" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/preview/hints/hints.tscn" id="2_mf7wa"]
 [ext_resource type="Script" uid="uid://bin7ih026bhac" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/priorities.gd" id="3_eq6yd"]
@@ -21,7 +20,6 @@
 [ext_resource type="PackedScene" uid="uid://c3dwvtm5ivwwp" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/stats.tscn" id="12_jdj2p"]
 [ext_resource type="Script" uid="uid://cgycplc3rb2f8" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/ability.gd" id="12_tveuy"]
 [ext_resource type="PackedScene" uid="uid://d3kdrb4woyoi8" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/ability/markers/item.tscn" id="12_upyjg"]
-[ext_resource type="Shortcut" uid="uid://ucetbklb6n0q" path="res://asset/resource/ui/short/cut/game/gameplay-menu.tres" id="13_1chk7"]
 [ext_resource type="PackedScene" uid="uid://sloxw12np1ch" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/priorities/priorities.tscn" id="13_iexbr"]
 [ext_resource type="Script" uid="uid://b76aq57lhikw7" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/topic/items/markers/combos/hint.gd" id="13_tya2d"]
 [ext_resource type="Script" uid="uid://b6q8af1i030yf" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/hints/preview/chats.gd" id="13_uhig6"]
@@ -50,7 +48,6 @@
 [ext_resource type="Script" uid="uid://ctl16kwrqvphb" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/hints/preview/help/tabs.gd" id="42_e1onj"]
 [ext_resource type="PackedScene" uid="uid://dvdimdxij23df" path="res://asset/system/scene/object/timer/hide/hider/hover/hooder.tscn" id="43_xe00t"]
 [ext_resource type="FontFile" uid="uid://drm0mr2hyapf2" path="res://asset/resource/media/data/font/EmojiOneColor.otf" id="44_yh0r2"]
-[ext_resource type="FontFile" uid="uid://dqpftcx1b6r8j" path="res://asset/resource/media/data/font/LTStopwatch-Regular.ttf" id="47_1moid"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u412m"]
 bg_color = Color(0, 0, 0, 1)
@@ -281,23 +278,6 @@ content_margin_top = 7.0
 content_margin_right = 1.0
 content_margin_bottom = 0.0
 bg_color = Color(0.0196078, 0.0196078, 0.0392157, 1)
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_eq6yd"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fuh2f"]
-bg_color = Color(0, 0, 0, 1)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_upyjg"]
-content_margin_left = 6.0
-bg_color = Color(0, 0, 0, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3yh6s"]
-content_margin_left = 5.0
-bg_color = Color(0, 0, 0, 1)
 
 [node name="game" type="Control"]
 layout_mode = 3
@@ -2193,6 +2173,7 @@ theme_override_constants/margin_right = 1
 theme_override_constants/margin_bottom = 1
 
 [node name="points" type="VBoxContainer" parent="priorities/stats/inventory/ability/controls/hints/space/preview/help/ability/synergy"]
+visible = false
 layout_mode = 2
 theme_override_constants/separation = 4
 
@@ -2489,29 +2470,6 @@ custom_minimum_size = Vector2(40, 0)
 layout_mode = 2
 size_flags_stretch_ratio = 0.25
 
-[node name="pause" parent="priorities/stats/inventory/ability/controls/topic" instance=ExtResource("1_p1rgr")]
-custom_minimum_size = Vector2(40, 30)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("47_1moid")
-text = "ESC"
-
-[node name="hooder" parent="priorities/stats/inventory/ability/controls/topic/pause" instance=ExtResource("43_xe00t")]
-
-[node name="menu" type="Button" parent="priorities/stats/inventory/ability/controls/topic"]
-custom_minimum_size = Vector2(40, 30)
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 8
-theme_override_fonts/font = ExtResource("47_1moid")
-theme_override_font_sizes/font_size = 18
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_eq6yd")
-theme_override_styles/normal = SubResource("StyleBoxFlat_fuh2f")
-disabled = true
-shortcut = ExtResource("13_1chk7")
-text = "y"
-
-[node name="hooder" parent="priorities/stats/inventory/ability/controls/topic/menu" instance=ExtResource("43_xe00t")]
-
 [node name="items" type="VBoxContainer" parent="priorities/stats/inventory/ability/controls/topic"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -2536,32 +2494,6 @@ scale = Vector2(1.00223, 1.00812)
 [node name="description" parent="priorities/stats/inventory/ability/controls/topic/items/ability" instance=ExtResource("34_r2nhr")]
 visible = false
 layout_mode = 1
-
-[node name="team" type="Button" parent="priorities/stats/inventory/ability/controls/topic"]
-custom_minimum_size = Vector2(40, 30)
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 8
-theme_override_fonts/font = ExtResource("18_3tqp8")
-theme_override_font_sizes/font_size = 24
-theme_override_styles/normal = SubResource("StyleBoxFlat_upyjg")
-text = "🙂‍↔️"
-alignment = 0
-
-[node name="hooder" parent="priorities/stats/inventory/ability/controls/topic/team" instance=ExtResource("43_xe00t")]
-
-[node name="group" type="Button" parent="priorities/stats/inventory/ability/controls/topic"]
-custom_minimum_size = Vector2(40, 30)
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 8
-theme_override_fonts/font = ExtResource("18_3tqp8")
-theme_override_font_sizes/font_size = 24
-theme_override_styles/normal = SubResource("StyleBoxFlat_3yh6s")
-text = "😶‍🌫️"
-alignment = 0
-
-[node name="hooder" parent="priorities/stats/inventory/ability/controls/topic/group" instance=ExtResource("43_xe00t")]
 
 [node name="right-space" type="Control" parent="priorities/stats/inventory/ability/controls/topic"]
 visible = false

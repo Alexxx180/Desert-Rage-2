@@ -1,13 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://b1cenupqm80wx"]
+[gd_scene load_steps=9 format=3 uid="uid://b1cenupqm80wx"]
 
 [ext_resource type="StyleBox" uid="uid://cvfnqancophme" path="res://asset/resource/ui/theme/style/solid-color-panel.tres" id="1_0hiii"]
 [ext_resource type="PackedScene" uid="uid://dqlgy3l13bibl" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/items/items.tscn" id="1_res6x"]
 [ext_resource type="Script" uid="uid://dkebrycycbfkp" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/topic/inventory.gd" id="2_t0gma"]
-[ext_resource type="PackedScene" uid="uid://bky5mu10x2da3" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/status/status.tscn" id="3_res6x"]
-[ext_resource type="PackedScene" uid="uid://bx8m1gw4fot0d" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/status/ray.tscn" id="4_1qvr3"]
-[ext_resource type="PackedScene" uid="uid://cishpih8t1tbj" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/status/rock.tscn" id="4_qe4mf"]
+[ext_resource type="PackedScene" uid="uid://b3pwlem0vs6ab" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/status/state/flow.tscn" id="6_3amgv"]
 [ext_resource type="Script" uid="uid://bxdjy6nk2id7i" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/topic/selected/selected.gd" id="6_bem3p"]
 [ext_resource type="PackedScene" uid="uid://cm4lshhyr3mtm" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/ability/status/hp/hp.tscn" id="8_3amgv"]
+[ext_resource type="PackedScene" uid="uid://cp2cf4xlxu476" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/status/card.tscn" id="9_ivgyk"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3amgv"]
 bg_color = Color(0, 0, 0, 1)
@@ -46,42 +45,6 @@ theme_override_constants/separation = 7
 [node name="hp" parent="scroll/margin/stack" instance=ExtResource("8_3amgv")]
 layout_mode = 2
 
-[node name="bag" type="HFlowContainer" parent="scroll/margin/stack"]
-visible = false
-layout_mode = 2
-theme_override_constants/h_separation = 5
-theme_override_constants/v_separation = 25
-
-[node name="ray" type="VBoxContainer" parent="scroll/margin/stack/bag"]
-custom_minimum_size = Vector2(300, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/separation = 7
-
-[node name="health" parent="scroll/margin/stack/bag/ray" instance=ExtResource("4_1qvr3")]
-layout_mode = 2
-
-[node name="items" parent="scroll/margin/stack/bag/ray" instance=ExtResource("1_res6x")]
-custom_minimum_size = Vector2(300, 0)
-layout_mode = 2
-size_flags_vertical = 0
-size_flags_stretch_ratio = 1.0
-
-[node name="rock" type="VBoxContainer" parent="scroll/margin/stack/bag"]
-custom_minimum_size = Vector2(300, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/separation = 7
-
-[node name="health" parent="scroll/margin/stack/bag/rock" instance=ExtResource("4_qe4mf")]
-layout_mode = 2
-
-[node name="items" parent="scroll/margin/stack/bag/rock" instance=ExtResource("1_res6x")]
-custom_minimum_size = Vector2(300, 0)
-layout_mode = 2
-size_flags_vertical = 0
-size_flags_stretch_ratio = 1.0
-
 [node name="selected" type="HFlowContainer" parent="scroll/margin/stack"]
 layout_mode = 2
 theme_override_constants/h_separation = 5
@@ -101,6 +64,9 @@ layout_mode = 2
 size_flags_vertical = 0
 size_flags_stretch_ratio = 1.0
 
-[node name="status" parent="scroll/margin/stack/selected" instance=ExtResource("3_res6x")]
+[node name="status" parent="scroll/margin/stack" instance=ExtResource("6_3amgv")]
 visible = false
+layout_mode = 2
+
+[node name="card" parent="scroll/margin/stack" instance=ExtResource("9_ivgyk")]
 layout_mode = 2

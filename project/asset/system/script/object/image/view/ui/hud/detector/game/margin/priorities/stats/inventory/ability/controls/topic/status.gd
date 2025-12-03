@@ -8,7 +8,7 @@ extends HBoxContainer
 @onready var meter: Control = xp.get_node("xp/meter")
 @onready var space: Control = meter.get_node("margin/next/space") # TODO FIX experience
 @onready var score: ProgressBar = space.get_node("score")
-@onready var next: VBoxContainer = $score
+@onready var next: VBoxContainer = $space/enemy/experience/xp
 
 #@onready var margin: MarginContainer = $experience/caption/main/multiplier/margin
 @onready var multiplier: Control = main.get_node("multiplier")

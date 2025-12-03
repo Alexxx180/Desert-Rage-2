@@ -10,8 +10,8 @@ func get_controls_focus(l: SplitToggleLogic, controls: SplitNavigation) -> Array
 		[l.straight_drag, controls.smooth_direct], [l.backward_drag, controls.smooth_back],
 		[l.instant_drag, controls.instant]]
 
-func setup(navigation: Node) -> void:
-	navigation.hud.logic.focus = navigation.get_nodes(navigation.focus_paths)
+func setup(navigation: Node, focused: Control) -> void:
+	navigation.hud.logic.focus = focused# navigation.get_nodes(navigation.focus_paths)
 	
 	var actions: Array[Node] = get_children()
 	var logic: Array = get_controls_focus(navigation.hud.logic, navigation.controls)

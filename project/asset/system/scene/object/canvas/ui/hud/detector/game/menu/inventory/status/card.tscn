@@ -1,0 +1,322 @@
+[gd_scene load_steps=12 format=3 uid="uid://cp2cf4xlxu476"]
+
+[ext_resource type="Texture2D" uid="uid://d4jc2lrslbm26" path="res://asset/resource/media/image/actors/npc/dialog/ray.jpg" id="1_ps4bu"]
+[ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://asset/resource/ui/theme/patterns/template/menu/settings/topic/footer.tres" id="2_u2tb5"]
+[ext_resource type="FontFile" uid="uid://c4ygkmnbt1j7y" path="res://asset/resource/media/data/font/LTSuperiorSerif-Semibold.otf" id="3_6eq7w"]
+[ext_resource type="FontFile" uid="uid://qxg3lsudod7p" path="res://asset/resource/media/data/font/Championship.ttf" id="4_5atce"]
+[ext_resource type="Texture2D" uid="uid://cwbldyii867om" path="res://asset/resource/media/image/actors/npc/dialog/rock.jpg" id="5_u0d8w"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ac5kb"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.473976, 0.473976, 0.473975, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_psh3v"]
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_3olsu"]
+color = Color(0.0110876, 0.0110876, 0.0110876, 1)
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_swigx"]
+color = Color(0.0110876, 0.0110876, 0.0110876, 1)
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_nuuu5"]
+color = Color(0.0110876, 0.0110876, 0.0110876, 1)
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_en5di"]
+color = Color(0.0110876, 0.0110876, 0.0110876, 1)
+
+[node name="card" type="MarginContainer"]
+visible = false
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="cards" type="HFlowContainer" parent="."]
+layout_mode = 2
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 10
+
+[node name="left" type="Control" parent="cards"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ray" type="PanelContainer" parent="cards"]
+custom_minimum_size = Vector2(300, 133)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_ac5kb")
+
+[node name="margin" type="MarginContainer" parent="cards/ray"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="contents" type="HBoxContainer" parent="cards/ray/margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="short" type="VBoxContainer" parent="cards/ray/margin/contents"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="icon" type="PanelContainer" parent="cards/ray/margin/contents/short"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_psh3v")
+
+[node name="image" type="TextureRect" parent="cards/ray/margin/contents/short/icon"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+texture = ExtResource("1_ps4bu")
+expand_mode = 1
+
+[node name="caption" type="VBoxContainer" parent="cards/ray/margin/contents/short"]
+layout_mode = 2
+theme_override_constants/separation = -3
+
+[node name="he" type="Label" parent="cards/ray/margin/contents/short/caption"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_u2tb5")
+theme_override_font_sizes/font_size = 12
+text = "Он / Его"
+
+[node name="years" type="Label" parent="cards/ray/margin/contents/short/caption"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_u2tb5")
+theme_override_font_sizes/font_size = 12
+text = "20 лет"
+
+[node name="summary" type="VBoxContainer" parent="cards/ray/margin/contents"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 20
+
+[node name="initials" type="VBoxContainer" parent="cards/ray/margin/contents/summary"]
+layout_mode = 2
+theme_override_constants/separation = -3
+
+[node name="initials" type="Label" parent="cards/ray/margin/contents/summary/initials"]
+layout_mode = 2
+theme = ExtResource("2_u2tb5")
+theme_override_font_sizes/font_size = 12
+text = "Рей Брайт"
+
+[node name="separation" type="HBoxContainer" parent="cards/ray/margin/contents/summary/initials"]
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="cards/ray/margin/contents/summary/initials/separation"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/separator = SubResource("StyleBoxLine_3olsu")
+
+[node name="Label" type="Label" parent="cards/ray/margin/contents/summary/initials/separation"]
+layout_mode = 2
+theme = ExtResource("2_u2tb5")
+theme_override_fonts/font = ExtResource("3_6eq7w")
+theme_override_font_sizes/font_size = 10
+text = "#"
+
+[node name="HSeparator2" type="HSeparator" parent="cards/ray/margin/contents/summary/initials/separation"]
+visible = false
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+
+[node name="title" type="Label" parent="cards/ray/margin/contents/summary/initials"]
+layout_mode = 2
+theme = ExtResource("2_u2tb5")
+theme_override_font_sizes/font_size = 12
+text = "Автобот-консультант"
+
+[node name="question" type="VBoxContainer" parent="cards/ray/margin/contents/summary"]
+layout_mode = 2
+theme_override_constants/separation = -2
+
+[node name="caption" type="Label" parent="cards/ray/margin/contents/summary/question"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+theme = ExtResource("2_u2tb5")
+theme_override_constants/line_spacing = -4
+theme_override_font_sizes/font_size = 12
+text = "У вас все деньги мира, какую машину вы бы заказали"
+autowrap_mode = 2
+
+[node name="separator" type="HBoxContainer" parent="cards/ray/margin/contents/summary/question"]
+layout_mode = 2
+
+[node name="lefr" type="HSeparator" parent="cards/ray/margin/contents/summary/question/separator"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/separator = SubResource("StyleBoxLine_swigx")
+
+[node name="caption" type="Label" parent="cards/ray/margin/contents/summary/question/separator"]
+layout_mode = 2
+theme = ExtResource("2_u2tb5")
+theme_override_fonts/font = ExtResource("3_6eq7w")
+theme_override_font_sizes/font_size = 10
+text = "?"
+
+[node name="answer" type="Label" parent="cards/ray/margin/contents/summary/question"]
+layout_mode = 2
+theme = ExtResource("2_u2tb5")
+theme_override_constants/line_spacing = -4
+theme_override_font_sizes/font_size = 12
+text = "- Тебе никто денег не даст"
+
+[node name="Label" type="Label" parent="cards/ray/margin"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme = ExtResource("2_u2tb5")
+theme_override_fonts/font = ExtResource("4_5atce")
+theme_override_font_sizes/font_size = 12
+text = "EVERY.CO"
+
+[node name="rock" type="PanelContainer" parent="cards"]
+custom_minimum_size = Vector2(300, 133)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_ac5kb")
+
+[node name="margin" type="MarginContainer" parent="cards/rock"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="contents" type="HBoxContainer" parent="cards/rock/margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="short" type="VBoxContainer" parent="cards/rock/margin/contents"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="icon" type="PanelContainer" parent="cards/rock/margin/contents/short"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_psh3v")
+
+[node name="image" type="TextureRect" parent="cards/rock/margin/contents/short/icon"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+texture = ExtResource("5_u0d8w")
+expand_mode = 1
+
+[node name="caption" type="VBoxContainer" parent="cards/rock/margin/contents/short"]
+layout_mode = 2
+theme_override_constants/separation = -3
+
+[node name="engaged" type="Label" parent="cards/rock/margin/contents/short/caption"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_u2tb5")
+theme_override_font_sizes/font_size = 12
+text = "Он / Его"
+
+[node name="years" type="Label" parent="cards/rock/margin/contents/short/caption"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_u2tb5")
+theme_override_font_sizes/font_size = 12
+text = "20 лет"
+
+[node name="summary" type="VBoxContainer" parent="cards/rock/margin/contents"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 20
+
+[node name="initials" type="VBoxContainer" parent="cards/rock/margin/contents/summary"]
+layout_mode = 2
+theme_override_constants/separation = -3
+
+[node name="initials" type="Label" parent="cards/rock/margin/contents/summary/initials"]
+layout_mode = 2
+theme = ExtResource("2_u2tb5")
+theme_override_font_sizes/font_size = 12
+text = "Рок Тайт"
+
+[node name="separation" type="HBoxContainer" parent="cards/rock/margin/contents/summary/initials"]
+layout_mode = 2
+
+[node name="left" type="HSeparator" parent="cards/rock/margin/contents/summary/initials/separation"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/separator = SubResource("StyleBoxLine_nuuu5")
+
+[node name="caption" type="Label" parent="cards/rock/margin/contents/summary/initials/separation"]
+layout_mode = 2
+theme = ExtResource("2_u2tb5")
+theme_override_fonts/font = ExtResource("3_6eq7w")
+theme_override_font_sizes/font_size = 10
+text = "#"
+
+[node name="title" type="Label" parent="cards/rock/margin/contents/summary/initials"]
+layout_mode = 2
+theme = ExtResource("2_u2tb5")
+theme_override_font_sizes/font_size = 12
+text = "Младший стажер оптимизаций"
+
+[node name="question" type="VBoxContainer" parent="cards/rock/margin/contents/summary"]
+layout_mode = 2
+theme_override_constants/separation = -2
+
+[node name="caption" type="Label" parent="cards/rock/margin/contents/summary/question"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+theme = ExtResource("2_u2tb5")
+theme_override_constants/line_spacing = -4
+theme_override_font_sizes/font_size = 12
+text = "Кем вы видите себя в нашей компании через 100 лет"
+autowrap_mode = 2
+
+[node name="separator" type="HBoxContainer" parent="cards/rock/margin/contents/summary/question"]
+layout_mode = 2
+
+[node name="lefr" type="HSeparator" parent="cards/rock/margin/contents/summary/question/separator"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/separator = SubResource("StyleBoxLine_en5di")
+
+[node name="caption" type="Label" parent="cards/rock/margin/contents/summary/question/separator"]
+layout_mode = 2
+theme = ExtResource("2_u2tb5")
+theme_override_fonts/font = ExtResource("3_6eq7w")
+theme_override_font_sizes/font_size = 10
+text = "?"
+
+[node name="answer" type="Label" parent="cards/rock/margin/contents/summary/question"]
+layout_mode = 2
+theme = ExtResource("2_u2tb5")
+theme_override_constants/line_spacing = -4
+theme_override_font_sizes/font_size = 12
+text = "- Бессмертным"
+
+[node name="Label" type="Label" parent="cards/rock/margin"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme = ExtResource("2_u2tb5")
+theme_override_fonts/font = ExtResource("4_5atce")
+theme_override_font_sizes/font_size = 12
+text = "EVERY.CO"
+
+[node name="right" type="Control" parent="cards"]
+layout_mode = 2
+size_flags_horizontal = 3

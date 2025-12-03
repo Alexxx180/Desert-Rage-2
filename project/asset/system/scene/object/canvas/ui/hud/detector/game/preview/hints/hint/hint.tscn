@@ -28,6 +28,7 @@ theme = ExtResource("1_dyeeh")
 
 [node name="head" type="MarginContainer" parent="stack"]
 layout_mode = 2
+size_flags_horizontal = 0
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
@@ -37,6 +38,12 @@ theme_override_constants/margin_bottom = 0
 layout_mode = 2
 size_flags_horizontal = 8
 
+[node name="a" type="HSeparator" parent="stack/head/caption"]
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 2
+theme_override_constants/separation = 0
+theme_override_styles/separator = SubResource("StyleBoxLine_y3q74")
+
 [node name="text" type="Label" parent="stack/head/caption"]
 layout_mode = 2
 size_flags_horizontal = 0
@@ -44,12 +51,6 @@ theme_override_colors/font_color = Color(0.393086, 0.393086, 0.393085, 1)
 theme_override_fonts/font = ExtResource("3_unpf3")
 theme_override_font_sizes/font_size = 12
 text = "Пример Текста"
-
-[node name="a" type="HSeparator" parent="stack/head/caption"]
-custom_minimum_size = Vector2(15, 0)
-layout_mode = 2
-theme_override_constants/separation = 0
-theme_override_styles/separator = SubResource("StyleBoxLine_y3q74")
 
 [node name="body" type="MarginContainer" parent="stack"]
 layout_mode = 2
@@ -62,20 +63,22 @@ theme_override_constants/margin_bottom = 10
 layout_mode = 2
 
 [node name="caption" type="Label" parent="stack/body/VBoxContainer"]
+visible = false
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
+size_flags_horizontal = 0
 theme_override_fonts/font = ExtResource("4_7efge")
 theme_override_font_sizes/font_size = 20
 text = "Пример Текста"
-horizontal_alignment = 2
 autowrap_mode = 2
 
 [node name="RichTextLabel" type="RichTextLabel" parent="stack/body/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("5_unpf3")
-theme_override_fonts/bold_font = ExtResource("6_ooaso")
-theme_override_fonts/bold_italics_font = ExtResource("6_gs3g1")
 theme_override_fonts/italics_font = ExtResource("7_ooaso")
+theme_override_fonts/bold_italics_font = ExtResource("6_gs3g1")
+theme_override_fonts/bold_font = ExtResource("6_ooaso")
 bbcode_enabled = true
 text = "Movement [b][i]🅰️🅱️🇽🇾➡️[/i][/b] [b]Esc[/b] '[i]🖱️I🕹️[/i]ˌ- Move -ˌ[i]🕹️I[/i]"
 fit_content = true
+autowrap_mode = 2
