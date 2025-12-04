@@ -1,26 +1,24 @@
 extends VBoxContainer
 
-@onready var score: ProgressBar = $meter/margin/next/space/score
-@onready var combo_node: Array = [
-	$main/multiplier/margin, $main/multiplier/margin/multiplier
-]
-@onready var combo: Dictionary = {
-	"meter": combo_node[0].get_node("meter"),
-	"score": combo_node[1]
-}
+@onready var body: HBoxContainer = $body
+@onready var meter: HBoxContainer = $meter
 
-func set_xp_score(group_xp: Node) -> void:
-	group_xp.update_exp.connect(
-		func(value: Vector2i, base_xp: int):
-			score.max_value = value.y
-			score.value = value.x)
+func set_hide_xp() -> void:
+	body.set_hide_xp()
+	body.timer.timeout.connect(meter.hide)
 
-func finish() -> void: for node in combo_node: node.hide()
+func set_show_xp(group_xp: Node) -> void:
+	body.set_show_xp(group_xp)
+	meter.new_score(group_xp)	
 
 func update_meter(time: float, maximum: float) -> void:
-	combo.meter.max_value = maximum
-	combo.meter.value = time
+	body.multiplier.update_meter(time, maximum)
+	meter.update_color(body.multiplier.visible)
 
-func update_multiplier(score: float) -> void:
-	for node in combo_node: node.show()
-	combo.score.text = "%.2f" % score
+func update_multiplier(scored: float) -> void:
+	body.multiplier.update_x(scored)
+
+func set_xp_score(group_xp: Node) -> void:
+	group_xp.update_priorities.connect(body.space.score.new_level_up)
+	set_hide_xp()
+	set_show_xp(group_xp)

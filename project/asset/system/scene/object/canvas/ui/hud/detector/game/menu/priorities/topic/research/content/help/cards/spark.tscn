@@ -1,0 +1,156 @@
+[gd_scene load_steps=7 format=3 uid="uid://bdu11sbtbkxs8"]
+
+[ext_resource type="Script" uid="uid://b06ntftlpr38h" path="res://asset/system/script/object/image/view/ui/menu/information/card.gd" id="1_ml0pv"]
+[ext_resource type="StyleBox" uid="uid://c8hy4gq5uksdh" path="res://asset/resource/ui/theme/style/panel/complex/hover.tres" id="2_cxfrm"]
+[ext_resource type="StyleBox" uid="uid://chr58r7ok2alt" path="res://asset/resource/ui/theme/style/panel/accent.tres" id="3_n3bmu"]
+[ext_resource type="Texture2D" uid="uid://bjn1a1dv8fgrc" path="res://asset/resource/media/image/hints/action/spark.svg" id="4_wn8t8"]
+[ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://asset/resource/ui/theme/patterns/template/menu/settings/topic/footer.tres" id="5_dfkrf"]
+[ext_resource type="FontFile" uid="uid://b37js8y80ak1k" path="res://asset/resource/media/data/font/NotoColorEmoji-Regular.ttf" id="6_6lyk1"]
+
+[node name="spark" type="Control"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 3
+anchors_preset = 0
+size_flags_horizontal = 4
+script = ExtResource("1_ml0pv")
+
+[node name="collapsed" type="Button" parent="."]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(130, 0)
+theme_override_styles/hover_pressed = ExtResource("2_cxfrm")
+theme_override_styles/hover = ExtResource("2_cxfrm")
+theme_override_styles/normal = ExtResource("3_n3bmu")
+
+[node name="margin" type="MarginContainer" parent="collapsed"]
+layout_mode = 2
+offset_right = 260.0
+offset_bottom = 356.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="content" type="VBoxContainer" parent="collapsed/margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="image" type="TextureRect" parent="collapsed/margin/content"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("4_wn8t8")
+expand_mode = 1
+
+[node name="title" type="HBoxContainer" parent="collapsed/margin/content"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="left" type="HSeparator" parent="collapsed/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="collapsed/margin/content/title"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Искра"
+
+[node name="right" type="HSeparator" parent="collapsed/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="showcase" type="Button" parent="."]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1e-05, 1)
+pivot_offset = Vector2(131, 0)
+theme_override_styles/hover_pressed = ExtResource("2_cxfrm")
+theme_override_styles/hover = ExtResource("2_cxfrm")
+theme_override_styles/normal = ExtResource("3_n3bmu")
+
+[node name="margin" type="MarginContainer" parent="showcase"]
+layout_mode = 2
+offset_right = 260.0
+offset_bottom = 356.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="content" type="VBoxContainer" parent="showcase/margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="description" type="Control" parent="showcase/margin/content"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="icons" type="MarginContainer" parent="showcase/margin/content/description"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -68.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 5
+
+[node name="caption" type="Label" parent="showcase/margin/content/description/icons"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme = ExtResource("5_dfkrf")
+theme_override_colors/font_color = Color(0.52549, 0.52549, 0.52549, 1)
+theme_override_fonts/font = ExtResource("6_6lyk1")
+text = "🌩💡⚡️"
+
+[node name="caption" type="Label" parent="showcase/margin/content/description"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 258.0
+grow_horizontal = 2
+size_flags_vertical = 6
+theme = ExtResource("5_dfkrf")
+text = "Для передачи тока встаньте около аппара-туры и нажмите %s
+
+Заряжает источники, шокирует врагов
+
+Открывает приемы стихии молнии"
+autowrap_mode = 2
+
+[node name="title" type="HBoxContainer" parent="showcase/margin/content"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 10
+
+[node name="left" type="HSeparator" parent="showcase/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="showcase/margin/content/title"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Искра"
+
+[node name="right" type="HSeparator" parent="showcase/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3

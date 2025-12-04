@@ -1,0 +1,144 @@
+[gd_scene load_steps=13 format=3 uid="uid://sloxw12np1ch"]
+
+[ext_resource type="StyleBox" uid="uid://cvfnqancophme" path="res://asset/resource/ui/theme/style/solid-color-panel.tres" id="1_h3g5x"]
+[ext_resource type="Script" uid="uid://creg8v0kuegg7" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/topic/topic.gd" id="2_6i1ua"]
+[ext_resource type="Script" uid="uid://ptu1t5a0cbpa" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/topic/stack/stack.gd" id="3_epgdt"]
+[ext_resource type="PackedScene" uid="uid://bky5mu10x2da3" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/status/state/stack.tscn" id="4_j6ix4"]
+[ext_resource type="PackedScene" uid="uid://cp2cf4xlxu476" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/status/card.tscn" id="5_iyx8g"]
+[ext_resource type="PackedScene" uid="uid://bmexdqeihycjg" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/priorities/topic/record/record.tscn" id="6_ewu2d"]
+[ext_resource type="PackedScene" uid="uid://bmmg6xahpkusq" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/priorities/topic/research/research.tscn" id="7_606mb"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cuhdu"]
+content_margin_right = 1.0
+content_margin_bottom = 1.0
+bg_color = Color(0, 0, 0, 1)
+expand_margin_left = 1.0
+expand_margin_top = 1.0
+expand_margin_right = 1.0
+expand_margin_bottom = 1.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6e5ks"]
+content_margin_right = 4.0
+bg_color = Color(0.953292, 0.415199, 9.62615e-07, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qw6gd"]
+bg_color = Color(0.6, 0.6, 0.6, 0.498039)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ccjyc"]
+content_margin_left = 4.0
+content_margin_right = 4.0
+bg_color = Color(0.00392157, 0.00392157, 0.00392157, 0.498039)
+
+[sub_resource type="Theme" id="Theme_cuhdu"]
+VScrollBar/styles/grabber = SubResource("StyleBoxFlat_qw6gd")
+VScrollBar/styles/scroll = SubResource("StyleBoxFlat_ccjyc")
+
+[node name="panel" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("1_h3g5x")
+script = ExtResource("2_6i1ua")
+
+[node name="synergy" type="MarginContainer" parent="."]
+visible = false
+custom_minimum_size = Vector2(3, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 5
+
+[node name="points" type="VBoxContainer" parent="synergy"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="ray" type="ProgressBar" parent="synergy/points"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 3
+theme_override_styles/background = SubResource("StyleBoxFlat_cuhdu")
+theme_override_styles/fill = SubResource("StyleBoxFlat_6e5ks")
+max_value = 20.0
+step = 1.0
+value = 20.0
+fill_mode = 3
+show_percentage = false
+
+[node name="rock" type="ProgressBar" parent="synergy/points"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 3
+theme_override_styles/background = SubResource("StyleBoxFlat_cuhdu")
+theme_override_styles/fill = SubResource("StyleBoxFlat_6e5ks")
+max_value = 20.0
+step = 1.0
+value = 20.0
+fill_mode = 3
+show_percentage = false
+
+[node name="1" type="ProgressBar" parent="synergy/points"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 3
+theme_override_styles/background = SubResource("StyleBoxFlat_cuhdu")
+theme_override_styles/fill = SubResource("StyleBoxFlat_6e5ks")
+max_value = 20.0
+step = 1.0
+value = 20.0
+fill_mode = 3
+show_percentage = false
+
+[node name="2" type="ProgressBar" parent="synergy/points"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 3
+theme_override_styles/background = SubResource("StyleBoxFlat_cuhdu")
+theme_override_styles/fill = SubResource("StyleBoxFlat_6e5ks")
+max_value = 20.0
+step = 1.0
+value = 20.0
+fill_mode = 3
+show_percentage = false
+
+[node name="scroll" type="ScrollContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = SubResource("Theme_cuhdu")
+
+[node name="margin" type="MarginContainer" parent="scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="stack" type="VBoxContainer" parent="scroll/margin"]
+layout_mode = 2
+script = ExtResource("3_epgdt")
+
+[node name="status" parent="scroll/margin/stack" instance=ExtResource("4_j6ix4")]
+layout_mode = 2
+
+[node name="card" parent="scroll/margin/stack" instance=ExtResource("5_iyx8g")]
+layout_mode = 2
+
+[node name="record" parent="scroll/margin/stack" instance=ExtResource("6_ewu2d")]
+layout_mode = 2
+
+[node name="research" parent="scroll/margin/stack" instance=ExtResource("7_606mb")]
+layout_mode = 2

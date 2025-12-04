@@ -1,0 +1,140 @@
+[gd_scene load_steps=9 format=3 uid="uid://bmexdqeihycjg"]
+
+[ext_resource type="Script" uid="uid://c3nt5k6qfjf31" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/topic/stack/record/record.gd" id="1_cdi27"]
+[ext_resource type="PackedScene" uid="uid://duuvdsc4g6fem" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/priorities/topic/record/priority/priority.tscn" id="2_vdfvb"]
+[ext_resource type="Script" uid="uid://60mx4fui16tc" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/topic/stack/record/ranking/ranking.gd" id="2_y5x8i"]
+[ext_resource type="Script" uid="uid://cvelhlqm4dmo2" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/topic/stack/record/ranking/priority/priority.gd" id="3_e1oyj"]
+[ext_resource type="FontFile" uid="uid://tledodlx6okb" path="res://asset/resource/media/data/font/LTSuperiorMono-Semibold.otf" id="3_y5x8i"]
+[ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://asset/resource/ui/theme/patterns/template/menu/settings/topic/footer.tres" id="4_e1oyj"]
+[ext_resource type="PackedScene" uid="uid://ct4vkw2q1l83e" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/priorities/topic/record/growth/addon.tscn" id="6_vdfvb"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vdfvb"]
+content_margin_right = 7.0
+
+[node name="record" type="VBoxContainer"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 471.0
+grow_horizontal = 2
+theme_override_constants/separation = 4
+script = ExtResource("1_cdi27")
+
+[node name="title" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="caption" type="Label" parent="title"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.737255, 0.737255, 0.737255, 1)
+text = "Досье"
+
+[node name="space" type="Control" parent="title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="status" type="VBoxContainer" parent="title"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_constants/separation = -3
+
+[node name="letter" type="Label" parent="title/status"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.737255, 0.737255, 0.737255, 1)
+theme_override_font_sizes/font_size = 26
+text = "А"
+horizontal_alignment = 1
+
+[node name="underline" type="ColorRect" parent="title/status"]
+custom_minimum_size = Vector2(25, 2)
+layout_mode = 2
+color = Color(0.258824, 0.258824, 0.258824, 1)
+
+[node name="ranking" type="HBoxContainer" parent="."]
+layout_mode = 2
+script = ExtResource("2_y5x8i")
+
+[node name="priority" type="VBoxContainer" parent="ranking"]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("3_e1oyj")
+
+[node name="selection" parent="ranking/priority" instance=ExtResource("2_vdfvb")]
+layout_mode = 2
+
+[node name="growth" type="VBoxContainer" parent="ranking/priority"]
+layout_mode = 2
+
+[node name="passive" type="HFlowContainer" parent="ranking/priority/growth"]
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+theme_override_constants/h_separation = 20
+
+[node name="rock" type="Label" parent="ranking/priority/growth/passive"]
+visible = false
+custom_minimum_size = Vector2(35, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("4_e1oyj")
+text = "Рок"
+horizontal_alignment = 2
+
+[node name="growth" type="Label" parent="ranking/priority/growth/passive"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.737255, 0.737255, 0.737255, 1)
+text = "Прирост"
+
+[node name="add" type="HBoxContainer" parent="ranking/priority/growth/passive"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="ray" parent="ranking/priority/growth/passive/add" instance=ExtResource("6_vdfvb")]
+layout_mode = 2
+
+[node name="rock" parent="ranking/priority/growth/passive/add" instance=ExtResource("6_vdfvb")]
+visible = false
+layout_mode = 2
+
+[node name="space" type="Control" parent="ranking/priority/growth/passive"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="description" type="HBoxContainer" parent="ranking/priority/growth"]
+layout_mode = 2
+
+[node name="pursuit" type="Label" parent="ranking/priority/growth/description"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("4_e1oyj")
+text = "Направленность на результат. Определяет количество слотов комбо. Влияет на получение новых возможностей и способностей."
+autowrap_mode = 2
+
+[node name="self_control" type="Label" parent="ranking/priority/growth/description"]
+visible = false
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("4_e1oyj")
+text = "Контроль мыслей и побуждений. Определяет эффективность приемов. Влияет на получение новых способностей."
+autowrap_mode = 2
+
+[node name="tenacity" type="Label" parent="ranking/priority/growth/description"]
+visible = false
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("4_e1oyj")
+text = "Преодоление обстоятельств. Определяет стойкость и облегчает взаимодействие с предметами окружения. Влияет на получение новых возможностей."
+autowrap_mode = 2
+
+[node name="rank" type="Label" parent="ranking"]
+custom_minimum_size = Vector2(19, 30)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0.258824, 0.258824, 0.258824, 1)
+theme_override_constants/line_spacing = -2
+theme_override_fonts/font = ExtResource("3_y5x8i")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_vdfvb")
+text = "АТЛАНТ"
+horizontal_alignment = 2
+autowrap_mode = 1

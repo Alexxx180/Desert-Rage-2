@@ -1,16 +1,16 @@
-[gd_scene load_steps=22 format=3 uid="uid://6b0ydfrtbu38"]
+[gd_scene load_steps=16 format=3 uid="uid://6b0ydfrtbu38"]
 
-[ext_resource type="PackedScene" uid="uid://scs1xlb7x0d6" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/selection.tscn" id="1_7touf"]
 [ext_resource type="StyleBox" uid="uid://cvfnqancophme" path="res://asset/resource/ui/theme/style/solid-color-panel.tres" id="1_r0sy2"]
 [ext_resource type="Script" uid="uid://crvwhurmt6td2" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/topic/topic.gd" id="2_f8gj5"]
-[ext_resource type="PackedScene" uid="uid://dugyepxewkmgo" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/pause/pause.tscn" id="2_l0mxd"]
 [ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://asset/resource/ui/theme/patterns/template/menu/settings/topic/footer.tres" id="2_r0sy2"]
 [ext_resource type="FontFile" uid="uid://b37js8y80ak1k" path="res://asset/resource/media/data/font/NotoColorEmoji-Regular.ttf" id="3_5obb3"]
+[ext_resource type="Script" uid="uid://dx0yflfj7hnm4" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/topic/stack/stack.gd" id="3_c5kkd"]
 [ext_resource type="PackedScene" uid="uid://l7thqkrsol4m" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/priorities/perks.tscn" id="3_h2uo5"]
-[ext_resource type="Script" uid="uid://mfje2iy274bg" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/topic/fast_access.gd" id="4_ddn1q"]
+[ext_resource type="Script" uid="uid://bva3xns2bogxp" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/topic/stack/space.gd" id="4_e8qsl"]
 [ext_resource type="PackedScene" uid="uid://cq5jn6k2bwg5n" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/ability/status/status.tscn" id="4_l3qyh"]
 [ext_resource type="PackedScene" uid="uid://qlgo5b48kj7l" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/ability/status/description.tscn" id="5_l3qyh"]
-[ext_resource type="Shortcut" uid="uid://ucetbklb6n0q" path="res://asset/resource/ui/short/cut/game/gameplay-menu.tres" id="6_xd2oj"]
+[ext_resource type="Script" uid="uid://c332axg0sxnof" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/topic/stack/skill/skill.gd" id="6_xukiq"]
+[ext_resource type="Script" uid="uid://qh4kirhvva7r" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/topic/stack/skill/item.gd" id="8_xukiq"]
 [ext_resource type="Texture2D" uid="uid://6lt3fgbwoayr" path="res://asset/resource/media/image/actors/skills/ray/fire.svg" id="10_c5kkd"]
 [ext_resource type="Texture2D" uid="uid://bhb75html3edk" path="res://asset/resource/media/image/actors/skills/ray/whip.svg" id="11_xukiq"]
 
@@ -19,45 +19,7 @@ bg_color = Color(0, 0, 0, 1)
 expand_margin_left = 12.0
 expand_margin_right = 12.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2jrau"]
-bg_color = Color(0, 0, 0, 1)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5p2ax"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c5kkd"]
-content_margin_left = 8.0
-content_margin_top = 7.0
-content_margin_right = 1.0
-content_margin_bottom = 0.0
-bg_color = Color(0.0196078, 0.0196078, 0.0392157, 1)
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xukiq"]
-content_margin_right = 3.0
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xukiq"]
-content_margin_left = 7.0
-content_margin_top = 7.0
-content_margin_right = 1.0
-content_margin_bottom = 0.0
-bg_color = Color(0.0196078, 0.0196078, 0.0392157, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e8qsl"]
-content_margin_left = 7.0
-content_margin_top = 7.0
-content_margin_right = 1.0
-content_margin_bottom = 0.0
-bg_color = Color(0.0196078, 0.0196078, 0.0392157, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1cni0"]
-content_margin_left = 7.0
-content_margin_top = 7.0
-content_margin_right = 1.0
-content_margin_bottom = 0.0
-bg_color = Color(0.0196078, 0.0196078, 0.0392157, 1)
 
 [node name="panel" type="PanelContainer"]
 anchors_preset = 15
@@ -69,7 +31,7 @@ size_flags_vertical = 3
 theme_override_styles/panel = ExtResource("1_r0sy2")
 script = ExtResource("2_f8gj5")
 
-[node name="back" type="Panel" parent="."]
+[node name="sides" type="Panel" parent="."]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_l3qyh")
 
@@ -87,104 +49,71 @@ theme_override_constants/margin_bottom = 20
 [node name="stack" type="VBoxContainer" parent="scroll/margin"]
 layout_mode = 2
 theme_override_constants/separation = 15
+script = ExtResource("3_c5kkd")
 
-[node name="menu" type="HBoxContainer" parent="scroll/margin/stack"]
-layout_mode = 2
-theme_override_constants/separation = 10
-
-[node name="pause" parent="scroll/margin/stack/menu" instance=ExtResource("2_l0mxd")]
-visible = false
-custom_minimum_size = Vector2(40, 30)
-layout_mode = 2
-
-[node name="space" type="Control" parent="scroll/margin/stack/menu"]
+[node name="space" type="Control" parent="scroll/margin/stack"]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 size_flags_horizontal = 3
+script = ExtResource("4_e8qsl")
 
-[node name="fast_access" type="HBoxContainer" parent="scroll/margin/stack/menu/space"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-theme_override_constants/separation = 10
-script = ExtResource("4_ddn1q")
-
-[node name="status" parent="scroll/margin/stack/menu/space/fast_access" instance=ExtResource("4_l3qyh")]
+[node name="status" parent="scroll/margin/stack/space" instance=ExtResource("4_l3qyh")]
 layout_mode = 2
+anchors_preset = 0
+anchor_right = 0.0
+offset_top = -1.0
+offset_right = 1112.0
+offset_bottom = 31.0
 
-[node name="description" parent="scroll/margin/stack/menu/space" instance=ExtResource("5_l3qyh")]
+[node name="slots" parent="scroll/margin/stack/space" instance=ExtResource("5_l3qyh")]
 visible = false
 layout_mode = 1
 
-[node name="menu" type="Button" parent="scroll/margin/stack/menu"]
-visible = false
-custom_minimum_size = Vector2(40, 30)
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 8
-theme_override_font_sizes/font_size = 18
-theme_override_styles/normal = SubResource("StyleBoxFlat_2jrau")
-shortcut = ExtResource("6_xd2oj")
-text = "Alt"
-
-[node name="content" type="HBoxContainer" parent="scroll/margin/stack"]
-layout_mode = 2
-
-[node name="skill" type="VBoxContainer" parent="scroll/margin/stack/content"]
+[node name="skill" type="VBoxContainer" parent="scroll/margin/stack"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 15
+script = ExtResource("6_xukiq")
 
-[node name="perks" parent="scroll/margin/stack/content/skill" instance=ExtResource("3_h2uo5")]
+[node name="perks" parent="scroll/margin/stack/skill" instance=ExtResource("3_h2uo5")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
 
-[node name="flow" type="HFlowContainer" parent="scroll/margin/stack/content/skill"]
-layout_mode = 2
-theme_override_constants/h_separation = 25
-
-[node name="selection" parent="scroll/margin/stack/content/skill/flow" instance=ExtResource("1_7touf")]
-visible = false
-layout_mode = 2
-
-[node name="item" type="HBoxContainer" parent="scroll/margin/stack/content/skill/flow"]
+[node name="item" type="HBoxContainer" parent="scroll/margin/stack/skill"]
 layout_mode = 2
 size_flags_horizontal = 3
+script = ExtResource("8_xukiq")
 
-[node name="description" type="VBoxContainer" parent="scroll/margin/stack/content/skill/flow/item"]
+[node name="title" type="VBoxContainer" parent="scroll/margin/stack/skill/item"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 10
 
-[node name="tags" type="HFlowContainer" parent="scroll/margin/stack/content/skill/flow/item/description"]
+[node name="tags" type="HFlowContainer" parent="scroll/margin/stack/skill/item/title"]
 layout_mode = 2
 theme_override_constants/h_separation = 10
 
-[node name="main" type="HBoxContainer" parent="scroll/margin/stack/content/skill/flow/item/description/tags"]
+[node name="main" type="HBoxContainer" parent="scroll/margin/stack/skill/item/title/tags"]
 layout_mode = 2
-size_flags_horizontal = 2
+size_flags_horizontal = 0
 theme_override_constants/separation = 5
 
-[node name="preview" type="PanelContainer" parent="scroll/margin/stack/content/skill/flow/item/description/tags/main"]
+[node name="preview" type="PanelContainer" parent="scroll/margin/stack/skill/item/title/tags/main"]
 custom_minimum_size = Vector2(45, 45)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxEmpty_5p2ax")
 
-[node name="margin" type="MarginContainer" parent="scroll/margin/stack/content/skill/flow/item/description/tags/main/preview"]
+[node name="margin" type="MarginContainer" parent="scroll/margin/stack/skill/item/title/tags/main/preview"]
 layout_mode = 2
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 2
 
-[node name="icon" type="Label" parent="scroll/margin/stack/content/skill/flow/item/description/tags/main/preview/margin"]
+[node name="icon" type="Label" parent="scroll/margin/stack/skill/item/title/tags/main/preview/margin"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
@@ -192,18 +121,23 @@ theme_override_fonts/font = ExtResource("3_5obb3")
 theme_override_font_sizes/font_size = 28
 text = "🔥"
 
-[node name="caption" type="Label" parent="scroll/margin/stack/content/skill/flow/item/description/tags/main"]
+[node name="caption" type="Label" parent="scroll/margin/stack/skill/item/title/tags/main"]
 layout_mode = 2
 size_flags_horizontal = 10
 theme_override_font_sizes/font_size = 24
 text = "Факел"
 
-[node name="blue" type="VBoxContainer" parent="scroll/margin/stack/content/skill/flow/item/description/tags"]
+[node name="space" type="Control" parent="scroll/margin/stack/skill/item/title/tags"]
+custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
-size_flags_horizontal = 10
+
+[node name="blue" type="VBoxContainer" parent="scroll/margin/stack/skill/item/title/tags"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
 theme_override_constants/separation = 2
 
-[node name="ingredients" type="Label" parent="scroll/margin/stack/content/skill/flow/item/description/tags/blue"]
+[node name="ingredients" type="Label" parent="scroll/margin/stack/skill/item/title/tags/blue"]
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_stretch_ratio = 0.75
@@ -212,17 +146,18 @@ theme_override_font_sizes/font_size = 18
 text = "Плавление"
 horizontal_alignment = 2
 
-[node name="color" type="ColorRect" parent="scroll/margin/stack/content/skill/flow/item/description/tags/blue"]
+[node name="color" type="ColorRect" parent="scroll/margin/stack/skill/item/title/tags/blue"]
 custom_minimum_size = Vector2(1, 1)
 layout_mode = 2
 color = Color(0, 0.65098, 0.929412, 1)
 
-[node name="red" type="VBoxContainer" parent="scroll/margin/stack/content/skill/flow/item/description/tags"]
+[node name="red" type="VBoxContainer" parent="scroll/margin/stack/skill/item/title/tags"]
 layout_mode = 2
 size_flags_horizontal = 8
+size_flags_vertical = 4
 theme_override_constants/separation = 2
 
-[node name="ingredients" type="Label" parent="scroll/margin/stack/content/skill/flow/item/description/tags/red"]
+[node name="ingredients" type="Label" parent="scroll/margin/stack/skill/item/title/tags/red"]
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_stretch_ratio = 0.75
@@ -231,17 +166,18 @@ theme_override_font_sizes/font_size = 18
 text = "Ожоги"
 horizontal_alignment = 2
 
-[node name="color" type="ColorRect" parent="scroll/margin/stack/content/skill/flow/item/description/tags/red"]
+[node name="color" type="ColorRect" parent="scroll/margin/stack/skill/item/title/tags/red"]
 custom_minimum_size = Vector2(1, 1)
 layout_mode = 2
 color = Color(0.792157, 0.0431373, 0.290196, 1)
 
-[node name="green" type="VBoxContainer" parent="scroll/margin/stack/content/skill/flow/item/description/tags"]
+[node name="green" type="VBoxContainer" parent="scroll/margin/stack/skill/item/title/tags"]
 layout_mode = 2
 size_flags_horizontal = 8
+size_flags_vertical = 4
 theme_override_constants/separation = 2
 
-[node name="ingredients" type="Label" parent="scroll/margin/stack/content/skill/flow/item/description/tags/green"]
+[node name="ingredients" type="Label" parent="scroll/margin/stack/skill/item/title/tags/green"]
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_stretch_ratio = 0.75
@@ -250,12 +186,12 @@ theme_override_font_sizes/font_size = 18
 text = "Лечение"
 horizontal_alignment = 2
 
-[node name="color" type="ColorRect" parent="scroll/margin/stack/content/skill/flow/item/description/tags/green"]
+[node name="color" type="ColorRect" parent="scroll/margin/stack/skill/item/title/tags/green"]
 custom_minimum_size = Vector2(1, 1)
 layout_mode = 2
 color = Color(0.52549, 0.843137, 0.184314, 1)
 
-[node name="effect" type="Label" parent="scroll/margin/stack/content/skill/flow/item/description"]
+[node name="effect" type="Label" parent="scroll/margin/stack/skill/item/title"]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -266,10 +202,10 @@ theme_override_font_sizes/font_size = 18
 text = "Сила, дарованная людям с незапамятных времен. Может как помочь раненному, так и навредить противнику. Позволяет убирать помехи на пути."
 autowrap_mode = 2
 
-[node name="skills" type="VBoxContainer" parent="scroll/margin/stack/content/skill/flow/item"]
+[node name="sets" type="VBoxContainer" parent="scroll/margin/stack/skill/item"]
 layout_mode = 2
 
-[node name="effect" type="Label" parent="scroll/margin/stack/content/skill/flow/item/skills"]
+[node name="effect" type="Label" parent="scroll/margin/stack/skill/item/sets"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -281,150 +217,19 @@ text = "Умения"
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="ray" type="HBoxContainer" parent="scroll/margin/stack/content/skill/flow/item/skills"]
+[node name="ray" type="HBoxContainer" parent="scroll/margin/stack/skill/item/sets"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/separation = 7
 
-[node name="fire" type="TextureRect" parent="scroll/margin/stack/content/skill/flow/item/skills/ray"]
+[node name="fire" type="TextureRect" parent="scroll/margin/stack/skill/item/sets/ray"]
 custom_minimum_size = Vector2(26, 26)
 layout_mode = 2
 texture = ExtResource("10_c5kkd")
 expand_mode = 1
 
-[node name="whip" type="TextureRect" parent="scroll/margin/stack/content/skill/flow/item/skills/ray"]
+[node name="whip" type="TextureRect" parent="scroll/margin/stack/skill/item/sets/ray"]
 custom_minimum_size = Vector2(26, 26)
 layout_mode = 2
 texture = ExtResource("11_xukiq")
 expand_mode = 1
-
-[node name="slots" type="VFlowContainer" parent="scroll/margin/stack/content"]
-visible = false
-layout_mode = 2
-
-[node name="punch" type="Button" parent="scroll/margin/stack/content/slots"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_colors/font_color = Color(0.341176, 0.341176, 0.341176, 1)
-theme_override_fonts/font = ExtResource("3_5obb3")
-theme_override_font_sizes/font_size = 20
-theme_override_styles/normal = SubResource("StyleBoxFlat_c5kkd")
-text = "✊"
-
-[node name="cost" type="Label" parent="scroll/margin/stack/content/slots/punch"]
-visible = false
-custom_minimum_size = Vector2(15, 0)
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -15.0
-offset_bottom = 17.0
-grow_horizontal = 0
-size_flags_horizontal = 8
-theme_override_font_sizes/font_size = 12
-theme_override_styles/normal = SubResource("StyleBoxEmpty_xukiq")
-text = "2"
-horizontal_alignment = 2
-
-[node name="kick" type="Button" parent="scroll/margin/stack/content/slots"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_colors/font_color = Color(0.341176, 0.341176, 0.341176, 1)
-theme_override_fonts/font = ExtResource("3_5obb3")
-theme_override_font_sizes/font_size = 20
-theme_override_styles/normal = SubResource("StyleBoxFlat_c5kkd")
-text = "🦶"
-
-[node name="cost" type="Label" parent="scroll/margin/stack/content/slots/kick"]
-visible = false
-custom_minimum_size = Vector2(15, 0)
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -15.0
-offset_bottom = 17.0
-grow_horizontal = 0
-size_flags_horizontal = 8
-theme_override_font_sizes/font_size = 12
-theme_override_styles/normal = SubResource("StyleBoxEmpty_xukiq")
-text = "2"
-horizontal_alignment = 2
-
-[node name="shot" type="Button" parent="scroll/margin/stack/content/slots"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_colors/font_color = Color(0.341176, 0.341176, 0.341176, 1)
-theme_override_fonts/font = ExtResource("3_5obb3")
-theme_override_font_sizes/font_size = 20
-theme_override_styles/normal = SubResource("StyleBoxFlat_xukiq")
-text = "🎯"
-
-[node name="cost" type="Label" parent="scroll/margin/stack/content/slots/shot"]
-custom_minimum_size = Vector2(15, 0)
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -15.0
-offset_bottom = 17.0
-grow_horizontal = 0
-size_flags_horizontal = 8
-theme_override_font_sizes/font_size = 12
-theme_override_styles/normal = SubResource("StyleBoxEmpty_xukiq")
-text = "1"
-horizontal_alignment = 2
-
-[node name="fire" type="Button" parent="scroll/margin/stack/content/slots"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_colors/font_color = Color(0.341176, 0.341176, 0.341176, 1)
-theme_override_fonts/font = ExtResource("3_5obb3")
-theme_override_font_sizes/font_size = 20
-theme_override_styles/normal = SubResource("StyleBoxFlat_e8qsl")
-text = "🔥"
-
-[node name="cost" type="Label" parent="scroll/margin/stack/content/slots/fire"]
-custom_minimum_size = Vector2(15, 0)
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -15.0
-offset_bottom = 17.0
-grow_horizontal = 0
-size_flags_horizontal = 8
-theme_override_font_sizes/font_size = 12
-theme_override_styles/normal = SubResource("StyleBoxEmpty_xukiq")
-text = "1"
-horizontal_alignment = 2
-
-[node name="whip" type="Button" parent="scroll/margin/stack/content/slots"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_colors/font_color = Color(0.341176, 0.341176, 0.341176, 1)
-theme_override_fonts/font = ExtResource("3_5obb3")
-theme_override_font_sizes/font_size = 20
-theme_override_styles/normal = SubResource("StyleBoxFlat_1cni0")
-text = "🎣"
-
-[node name="cost" type="Label" parent="scroll/margin/stack/content/slots/whip"]
-custom_minimum_size = Vector2(15, 0)
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -15.0
-offset_bottom = 17.0
-grow_horizontal = 0
-size_flags_horizontal = 8
-theme_override_font_sizes/font_size = 12
-theme_override_styles/normal = SubResource("StyleBoxEmpty_xukiq")
-text = "1"
-horizontal_alignment = 2

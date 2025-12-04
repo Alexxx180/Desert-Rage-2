@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dbkrincgd6l50"]
+[gd_scene load_steps=24 format=3 uid="uid://dbkrincgd6l50"]
 
 [ext_resource type="Script" uid="uid://dv3ea7oqn3rav" path="res://asset/system/script/object/image/view/ui/hud/relation/relation.gd" id="1_ny3sf"]
 [ext_resource type="PackedScene" uid="uid://bisnfriip5102" path="res://asset/system/scene/object/canvas/ui/hud/relation/pause/hints.tscn" id="2_kyivv"]
@@ -13,10 +13,16 @@
 [ext_resource type="PackedScene" uid="uid://crmw2u8x88m8i" path="res://asset/system/scene/object/canvas/ui/hud/relation/pause/resume.tscn" id="7_r8mtf"]
 [ext_resource type="Script" uid="uid://drfq8w54lv52r" path="res://asset/system/script/object/image/view/ui/hud/relation/pause/information.gd" id="7_u0en7"]
 [ext_resource type="Script" uid="uid://cfgi6pedio522" path="res://asset/system/script/object/image/view/ui/hud/relation/game/menu/inventory.gd" id="7_xrgkb"]
-[ext_resource type="Script" uid="uid://dnwmbx7le4xxt" path="res://asset/system/script/object/image/view/ui/hud/relation/game/menu/ability.gd" id="8_kdl5j"]
+[ext_resource type="Script" uid="uid://dnwmbx7le4xxt" path="res://asset/system/script/object/image/view/ui/hud/relation/game/menu/ability/ability.gd" id="8_kdl5j"]
+[ext_resource type="PackedScene" uid="uid://ph1bka3pi2g5" path="res://asset/system/scene/object/input/navigation/split/split.tscn" id="9_4vpp0"]
 [ext_resource type="Script" uid="uid://ckosl6hpq7ew4" path="res://asset/system/script/object/image/view/ui/hud/relation/game/hud/xp.gd" id="9_8eyfs"]
 [ext_resource type="Script" uid="uid://b1nbmi5cqcppl" path="res://asset/system/script/object/image/view/ui/hud/relation/game/hud/hud.gd" id="9_dcfxn"]
+[ext_resource type="Script" uid="uid://c7ntxfsxll74o" path="res://asset/system/script/object/image/view/ui/hud/relation/game/menu/ability/inventory.gd" id="9_v7bcc"]
+[ext_resource type="Resource" uid="uid://pmde805pr1ag" path="res://asset/resource/ui/short/controls/split/inventory.tres" id="10_ah38b"]
+[ext_resource type="Resource" uid="uid://bfe83rgv7g8ei" path="res://asset/resource/ui/short/controls/split/ability.tres" id="10_ew8by"]
+[ext_resource type="Resource" uid="uid://ckt8qtx3k763i" path="res://asset/resource/ui/short/controls/split/priorities.tres" id="10_sa6l1"]
 [ext_resource type="Script" uid="uid://cp18p8kgaahp6" path="res://asset/system/script/object/image/view/ui/hud/relation/game/hud/hp.gd" id="11_87y6j"]
+[ext_resource type="Resource" uid="uid://crjf8gs0qa35w" path="res://asset/resource/ui/short/controls/split/stats.tres" id="11_sa6l1"]
 
 [node name="relation" type="Node"]
 script = ExtResource("1_ny3sf")
@@ -39,6 +45,38 @@ script = ExtResource("7_xrgkb")
 
 [node name="ability" type="Node" parent="game"]
 script = ExtResource("8_kdl5j")
+
+[node name="inventory" type="Node" parent="game/ability"]
+script = ExtResource("9_v7bcc")
+
+[node name="navigation" parent="game/ability/inventory" instance=ExtResource("9_4vpp0")]
+controls = ExtResource("10_ah38b")
+axis = 1
+reserve = Array[float]([-37.0, -74.0])
+node_paths = Array[Array]([["../ability/controls/markers/margin/score/stack/ray", "../ability/controls/markers/item_1", "../ability/controls/markers/item_2", "../ability/controls/markers/item_3", "../ability/controls/markers/item_4", "../ability/controls/markers/item_5", "../ability/controls/markers/item_6", "../ability/controls/markers/item_7", "../ability/controls/markers/item_8", "../ability/controls/markers/item_9", "../ability/controls/markers/item_0"], ["../topic/scroll/margin/stack/flow/ray_selection/short", "../ability/controls/markers/margin/score/stack/rock"]])
+focus_paths = Array[String](["../topic/scroll/margin/stack/flow/ray/slot_0", "../ability/controls/markers/margin/score/stack/ray/health/status/hero"])
+
+[node name="ability" parent="game/ability/inventory" instance=ExtResource("9_4vpp0")]
+controls = ExtResource("10_ew8by")
+axis = 1
+direction = 1.0
+reserve = Array[float]([32.0, 109.0])
+node_paths = Array[Array]([["../controls/topic/items/ability", "../controls/topic/menu", "../controls/topic/pause"], []])
+focus_paths = Array[String](["../topic/scroll/margin/stack/menu/space/fast_access/space/icons", "../controls/topic/pause"])
+
+[node name="priorities" parent="game/ability" instance=ExtResource("9_4vpp0")]
+controls = ExtResource("10_sa6l1")
+direction = 0.5
+reserve = Array[float]([24.0])
+node_paths = Array[Array]([["../stats/inventory/topic/scroll/margin/stack/flow/controls/summary/status", "../stats/inventory/ability/controls/hints/space/preview/help", "../stats/inventory/ability/controls/markers/margin/score/stack"]])
+focus_paths = Array[String](["../priorities/scroll/margin/stack/summary/status/ray/bag", "../stats/inventory/ability/controls/hints/space/preview/help/tabs/books"])
+
+[node name="stats" parent="game/ability" instance=ExtResource("9_4vpp0")]
+controls = ExtResource("11_sa6l1")
+direction = -1.0
+reserve = Array[float]([-24.0])
+node_paths = Array[Array]([["../inventory/topic/scroll/margin/stack/flow/ray", "../inventory/ability/controls/hints/space/preview/chats"]])
+focus_paths = Array[String](["../topic/scroll/margin/stack/items/ray/slot_0", "../inventory/ability/controls/hints/space/preview/chats/tabs/chat"])
 
 [node name="hud" type="Node" parent="game"]
 script = ExtResource("9_dcfxn")

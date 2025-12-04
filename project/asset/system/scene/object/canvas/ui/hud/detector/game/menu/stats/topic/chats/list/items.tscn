@@ -1,0 +1,32 @@
+[gd_scene load_steps=7 format=3 uid="uid://bfgfwnhsb2f7c"]
+
+[ext_resource type="StyleBox" uid="uid://evyfrkamah1" path="res://asset/resource/ui/theme/style/items/chests/hover.tres" id="1_46qkm"]
+[ext_resource type="StyleBox" uid="uid://by6bvf7ens3ul" path="res://asset/resource/ui/theme/style/items/chests/empty.tres" id="2_unshb"]
+[ext_resource type="Script" uid="uid://ckwy3qb2rie2m" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/topic/items/item/primary.gd" id="3_jkbib"]
+[ext_resource type="PackedScene" uid="uid://bn2dd80xcv3py" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/items/content.tscn" id="4_k4fpk"]
+[ext_resource type="PackedScene" uid="uid://kq7xh4x513e" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/items/title.tscn" id="5_hnnsx"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fsybd"]
+
+[node name="items" type="PanelContainer"]
+theme_override_styles/panel = SubResource("StyleBoxEmpty_fsybd")
+
+[node name="container" type="HFlowContainer" parent="."]
+layout_mode = 2
+theme_override_constants/h_separation = 7
+theme_override_constants/v_separation = 7
+
+[node name="item" type="Button" parent="container"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_styles/hover = ExtResource("1_46qkm")
+theme_override_styles/normal = ExtResource("2_unshb")
+script = ExtResource("3_jkbib")
+
+[node name="margin" parent="container/item" instance=ExtResource("4_k4fpk")]
+layout_mode = 1
+mouse_filter = 2
+
+[node name="title" parent="container" instance=ExtResource("5_hnnsx")]
+layout_mode = 2

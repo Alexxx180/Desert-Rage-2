@@ -1,0 +1,29 @@
+extends Node
+
+const FULL: int = 24
+
+@onready var inventory: Node = $inventory
+@onready var priorities: Node = $priorities
+@onready var stats: Node = $stats
+
+func face_priorities(split: SplitContainer) -> void: # TODOT RELATION ABILITY
+	var bag: SplitContainer = split.stats.inventory
+	var focus: Control = split.topic.stack.record.ranking.priority.selection.pursuit
+	priorities.ui = split
+	priorities.face(inventory.X, inventory.HALF_DIR, [FULL], focus, [[
+		bag.topic.stack.status, bag.topic.stack.sticker,
+		bag.ability.controls.preview.help,
+		bag.ability.controls.status.sticker
+	]])
+	face_stats(split.stats, bag)
+
+func face_stats(split: SplitContainer, bag: SplitContainer) -> void:
+	var focus: Control = split.topic.stack.stats.title.equip
+	stats.ui = split
+	stats.face(inventory.X, -inventory.Y, [-FULL], focus, [[
+		bag.topic.ability.controls.preview.chats, bag.topic.stack.bag.rock
+	]])
+	inventory.face_inventory(bag, split)
+
+func controls(_hud: CanvasLayer, _group: Node2D, game: Control) -> void:
+	face_priorities(game.priorities)

@@ -1,0 +1,133 @@
+[gd_scene load_steps=10 format=3 uid="uid://dxhn1gbi6mno3"]
+
+[ext_resource type="StyleBox" uid="uid://evyfrkamah1" path="res://asset/resource/ui/theme/style/items/chests/hover.tres" id="1_8sf1w"]
+[ext_resource type="StyleBox" uid="uid://by6bvf7ens3ul" path="res://asset/resource/ui/theme/style/items/chests/empty.tres" id="2_gf6gl"]
+[ext_resource type="Script" uid="uid://ckwy3qb2rie2m" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/topic/items/item/primary.gd" id="3_n85s4"]
+[ext_resource type="PackedScene" uid="uid://bn2dd80xcv3py" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/items/content.tscn" id="4_n074c"]
+[ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://asset/resource/ui/theme/patterns/template/menu/settings/topic/footer.tres" id="5_r8w8n"]
+[ext_resource type="PackedScene" uid="uid://dv268r05flq5" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/preview/log/levels/level/number.tscn" id="6_ae44v"]
+[ext_resource type="FontFile" uid="uid://b37js8y80ak1k" path="res://asset/resource/media/data/font/NotoColorEmoji-Regular.ttf" id="7_mrj32"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jb804"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_toq2e"]
+content_margin_top = 7.0
+
+[node name="bestiary" type="PanelContainer"]
+visible = false
+theme_override_styles/panel = SubResource("StyleBoxEmpty_jb804")
+
+[node name="container" type="HFlowContainer" parent="."]
+layout_mode = 2
+theme_override_constants/h_separation = 7
+theme_override_constants/v_separation = 7
+
+[node name="item" type="Button" parent="container"]
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_styles/hover = ExtResource("1_8sf1w")
+theme_override_styles/normal = ExtResource("2_gf6gl")
+script = ExtResource("3_n85s4")
+
+[node name="margin" parent="container/item" instance=ExtResource("4_n074c")]
+layout_mode = 1
+mouse_filter = 2
+
+[node name="margin2" type="MarginContainer" parent="container/item"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 2
+
+[node name="height" type="Label" parent="container/item/margin2"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme = ExtResource("5_r8w8n")
+theme_override_font_sizes/font_size = 16
+text = "33 cm"
+text_overrun_behavior = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="container/item/margin2"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 0
+
+[node name="count" type="Label" parent="container/item/margin2/HBoxContainer"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+theme = ExtResource("5_r8w8n")
+theme_override_font_sizes/font_size = 16
+text = "25"
+horizontal_alignment = 2
+text_overrun_behavior = 3
+
+[node name="title" type="HBoxContainer" parent="container"]
+layout_mode = 2
+theme_override_constants/separation = 7
+
+[node name="number" parent="container/title" instance=ExtResource("6_ae44v")]
+layout_mode = 2
+
+[node name="description" type="MarginContainer" parent="container/title"]
+custom_minimum_size = Vector2(230, 0)
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="short" type="VBoxContainer" parent="container/title/description"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.4
+theme_override_constants/separation = 2
+
+[node name="caption" type="Label" parent="container/title/description/short"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 16
+text = "Паук"
+text_overrun_behavior = 3
+
+[node name="effect" type="Label" parent="container/title/description/short"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme = ExtResource("5_r8w8n")
+theme_override_constants/line_spacing = -7
+theme_override_font_sizes/font_size = 18
+text = "Крайне полезный противник для приключений."
+autowrap_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="container/title/description/short"]
+layout_mode = 2
+
+[node name="effect" type="Label" parent="container/title/description/short/HBoxContainer2"]
+custom_minimum_size = Vector2(115, 0)
+layout_mode = 2
+size_flags_vertical = 0
+theme = ExtResource("5_r8w8n")
+theme_override_constants/line_spacing = -7
+theme_override_font_sizes/font_size = 18
+text = "Слабости:"
+
+[node name="weakness" type="Label" parent="container/title/description/short/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("7_mrj32")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_toq2e")
+text = "🔥"

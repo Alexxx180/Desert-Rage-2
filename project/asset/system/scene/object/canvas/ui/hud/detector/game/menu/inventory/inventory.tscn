@@ -1,10 +1,10 @@
 [gd_scene load_steps=9 format=3 uid="uid://b1cenupqm80wx"]
 
 [ext_resource type="StyleBox" uid="uid://cvfnqancophme" path="res://asset/resource/ui/theme/style/solid-color-panel.tres" id="1_0hiii"]
-[ext_resource type="PackedScene" uid="uid://dqlgy3l13bibl" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/items/items.tscn" id="1_res6x"]
 [ext_resource type="Script" uid="uid://dkebrycycbfkp" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/topic/inventory.gd" id="2_t0gma"]
+[ext_resource type="Script" uid="uid://b11cg8w5hftiu" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/topic/stack/stack.gd" id="3_3amgv"]
+[ext_resource type="PackedScene" uid="uid://cddw0qxlba87p" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/items/bag.tscn" id="5_bem3p"]
 [ext_resource type="PackedScene" uid="uid://b3pwlem0vs6ab" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/status/state/flow.tscn" id="6_3amgv"]
-[ext_resource type="Script" uid="uid://bxdjy6nk2id7i" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/topic/selected/selected.gd" id="6_bem3p"]
 [ext_resource type="PackedScene" uid="uid://cm4lshhyr3mtm" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/ability/status/hp/hp.tscn" id="8_3amgv"]
 [ext_resource type="PackedScene" uid="uid://cp2cf4xlxu476" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/status/card.tscn" id="9_ivgyk"]
 
@@ -13,7 +13,7 @@ bg_color = Color(0, 0, 0, 1)
 expand_margin_left = 12.0
 expand_margin_right = 12.0
 
-[node name="panel" type="PanelContainer"]
+[node name="topic" type="PanelContainer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -23,7 +23,7 @@ size_flags_vertical = 3
 theme_override_styles/panel = ExtResource("1_0hiii")
 script = ExtResource("2_t0gma")
 
-[node name="back" type="Panel" parent="."]
+[node name="sides" type="Panel" parent="."]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_3amgv")
 
@@ -33,39 +33,26 @@ layout_mode = 2
 [node name="margin" type="MarginContainer" parent="scroll"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/margin_left = 20
+theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 20
+theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
 [node name="stack" type="VBoxContainer" parent="scroll/margin"]
 layout_mode = 2
 theme_override_constants/separation = 7
+script = ExtResource("3_3amgv")
 
-[node name="hp" parent="scroll/margin/stack" instance=ExtResource("8_3amgv")]
+[node name="sticker" type="MarginContainer" parent="scroll/margin/stack"]
 layout_mode = 2
 
-[node name="selected" type="HFlowContainer" parent="scroll/margin/stack"]
+[node name="hp" parent="scroll/margin/stack/sticker" instance=ExtResource("8_3amgv")]
 layout_mode = 2
-theme_override_constants/h_separation = 5
-theme_override_constants/v_separation = 25
-script = ExtResource("6_bem3p")
 
-[node name="ray" parent="scroll/margin/stack/selected" instance=ExtResource("1_res6x")]
-custom_minimum_size = Vector2(200, 0)
+[node name="bag" parent="scroll/margin/stack" instance=ExtResource("5_bem3p")]
 layout_mode = 2
-size_flags_vertical = 0
-size_flags_stretch_ratio = 1.0
-
-[node name="rock" parent="scroll/margin/stack/selected" instance=ExtResource("1_res6x")]
-visible = false
-custom_minimum_size = Vector2(300, 0)
-layout_mode = 2
-size_flags_vertical = 0
-size_flags_stretch_ratio = 1.0
 
 [node name="status" parent="scroll/margin/stack" instance=ExtResource("6_3amgv")]
-visible = false
 layout_mode = 2
 
 [node name="card" parent="scroll/margin/stack" instance=ExtResource("9_ivgyk")]

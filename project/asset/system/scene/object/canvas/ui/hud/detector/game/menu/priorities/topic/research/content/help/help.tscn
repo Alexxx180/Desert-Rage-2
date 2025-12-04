@@ -1,0 +1,110 @@
+[gd_scene load_steps=23 format=3 uid="uid://cdpsykqf6eaa2"]
+
+[ext_resource type="StyleBox" uid="uid://bsggnr5c3uk7o" path="res://asset/resource/ui/theme/style/panel/preview.tres" id="1_ldt5i"]
+[ext_resource type="PackedScene" uid="uid://b01p37el432af" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/preview/hints/hints.tscn" id="2_xoxha"]
+[ext_resource type="PackedScene" uid="uid://cspf6sh5v7o4v" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/priorities/topic/research/content/help/cards/motion.tscn" id="3_dajg6"]
+[ext_resource type="PackedScene" uid="uid://dhuln26yealpj" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/priorities/topic/research/content/help/cards/jump.tscn" id="4_7cxl1"]
+[ext_resource type="PackedScene" uid="uid://brjnxnwddm5tx" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/priorities/topic/research/content/help/cards/push.tscn" id="5_vyexv"]
+[ext_resource type="PackedScene" uid="uid://nrny5ilbot03" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/priorities/topic/research/content/help/cards/land.tscn" id="6_mvqeu"]
+[ext_resource type="PackedScene" uid="uid://cb7x57prcw1bk" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/priorities/topic/research/content/help/cards/action.tscn" id="7_clmfh"]
+[ext_resource type="PackedScene" uid="uid://cueyg1244ek2b" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/priorities/topic/research/content/help/cards/fire.tscn" id="8_eqmym"]
+[ext_resource type="PackedScene" uid="uid://bhx1wvs221hc1" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/priorities/topic/research/content/help/cards/whip.tscn" id="9_poank"]
+[ext_resource type="PackedScene" uid="uid://cckqtwpmt2qke" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/priorities/topic/research/content/help/cards/water.tscn" id="10_vyxp2"]
+[ext_resource type="PackedScene" uid="uid://bdu11sbtbkxs8" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/priorities/topic/research/content/help/cards/spark.tscn" id="11_wr4c2"]
+[ext_resource type="PackedScene" uid="uid://bhs3238f8vbr1" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/priorities/topic/research/content/help/cards/explosion.tscn" id="12_gfwsx"]
+[ext_resource type="PackedScene" uid="uid://wweuvlkxsasg" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/priorities/topic/research/content/help/cards/reason.tscn" id="13_calk0"]
+[ext_resource type="PackedScene" uid="uid://o51h1fwr3h4q" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/priorities/topic/research/content/help/cards/group.tscn" id="14_13l8t"]
+[ext_resource type="PackedScene" uid="uid://bd037ca25c642" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/priorities/topic/research/content/help/cards/fight.tscn" id="15_djlct"]
+[ext_resource type="PackedScene" uid="uid://bw23tpulstgwe" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/priorities/topic/research/content/help/cards/foes.tscn" id="16_l4s3q"]
+[ext_resource type="PackedScene" uid="uid://cb3tma7sk6te2" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/priorities/topic/research/content/help/cards/aura.tscn" id="17_r76as"]
+[ext_resource type="PackedScene" uid="uid://dngobu7qa4a0i" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/priorities/topic/research/content/help/cards/priorities.tscn" id="18_jiltl"]
+[ext_resource type="PackedScene" uid="uid://og4dng4pdpjv" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/priorities/topic/research/content/help/cards/stats.tscn" id="19_2cylk"]
+[ext_resource type="PackedScene" uid="uid://x5m2yan2esc6" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/priorities/topic/research/content/help/cards/items.tscn" id="20_oxpbe"]
+[ext_resource type="PackedScene" uid="uid://cukk6u5xq7mnf" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/priorities/topic/research/content/help/cards/equipment.tscn" id="21_8vnmy"]
+[ext_resource type="PackedScene" uid="uid://bbu2yv5vm7jw5" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/priorities/topic/research/content/help/cards/accessory.tscn" id="22_c2h18"]
+
+[node name="help" type="PanelContainer"]
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("1_ldt5i")
+
+[node name="analyze" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="hints" parent="analyze" instance=ExtResource("2_xoxha")]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 2
+
+[node name="margin" type="MarginContainer" parent="analyze"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="cards" type="HFlowContainer" parent="analyze/margin"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="motion" parent="analyze/margin/cards" instance=ExtResource("3_dajg6")]
+layout_mode = 2
+
+[node name="jump" parent="analyze/margin/cards" instance=ExtResource("4_7cxl1")]
+layout_mode = 2
+
+[node name="push" parent="analyze/margin/cards" instance=ExtResource("5_vyexv")]
+layout_mode = 2
+
+[node name="land" parent="analyze/margin/cards" instance=ExtResource("6_mvqeu")]
+layout_mode = 2
+
+[node name="action" parent="analyze/margin/cards" instance=ExtResource("7_clmfh")]
+layout_mode = 2
+
+[node name="fire" parent="analyze/margin/cards" instance=ExtResource("8_eqmym")]
+layout_mode = 2
+
+[node name="whip" parent="analyze/margin/cards" instance=ExtResource("9_poank")]
+layout_mode = 2
+
+[node name="water" parent="analyze/margin/cards" instance=ExtResource("10_vyxp2")]
+layout_mode = 2
+
+[node name="spark" parent="analyze/margin/cards" instance=ExtResource("11_wr4c2")]
+layout_mode = 2
+
+[node name="explosion" parent="analyze/margin/cards" instance=ExtResource("12_gfwsx")]
+layout_mode = 2
+
+[node name="reason" parent="analyze/margin/cards" instance=ExtResource("13_calk0")]
+layout_mode = 2
+
+[node name="group" parent="analyze/margin/cards" instance=ExtResource("14_13l8t")]
+layout_mode = 2
+
+[node name="fight" parent="analyze/margin/cards" instance=ExtResource("15_djlct")]
+layout_mode = 2
+
+[node name="foes" parent="analyze/margin/cards" instance=ExtResource("16_l4s3q")]
+layout_mode = 2
+
+[node name="aura" parent="analyze/margin/cards" instance=ExtResource("17_r76as")]
+layout_mode = 2
+
+[node name="priorities" parent="analyze/margin/cards" instance=ExtResource("18_jiltl")]
+layout_mode = 2
+
+[node name="stats" parent="analyze/margin/cards" instance=ExtResource("19_2cylk")]
+layout_mode = 2
+
+[node name="items" parent="analyze/margin/cards" instance=ExtResource("20_oxpbe")]
+layout_mode = 2
+
+[node name="equipment" parent="analyze/margin/cards" instance=ExtResource("21_8vnmy")]
+layout_mode = 2
+
+[node name="accessory" parent="analyze/margin/cards" instance=ExtResource("22_c2h18")]
+layout_mode = 2

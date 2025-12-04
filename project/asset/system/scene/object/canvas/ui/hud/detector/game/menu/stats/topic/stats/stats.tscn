@@ -1,0 +1,115 @@
+[gd_scene load_steps=8 format=3 uid="uid://cd6olkpfan76j"]
+
+[ext_resource type="Script" uid="uid://dgr6idneegayx" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/topic/stack/stats/equipment/stats.gd" id="1_ux7gg"]
+[ext_resource type="Script" uid="uid://b7ssehgjd1hps" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/topic/stack/stats/title.gd" id="2_483bj"]
+[ext_resource type="FontFile" uid="uid://b37js8y80ak1k" path="res://asset/resource/media/data/font/NotoColorEmoji-Regular.ttf" id="2_fs4c2"]
+[ext_resource type="PackedScene" uid="uid://dsu01cw1gye0x" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/stats/topic/stats/heroes/heroes.tscn" id="3_483bj"]
+[ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://asset/resource/ui/theme/patterns/template/menu/settings/topic/footer.tres" id="4_bt6sh"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1dh38"]
+content_margin_left = 9.0
+content_margin_top = 1.0
+content_margin_right = 9.0
+content_margin_bottom = 3.0
+bg_color = Color(0.0196078, 0.0196078, 0.0392157, 0)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rxilr"]
+content_margin_left = 5.0
+content_margin_top = 7.0
+
+[node name="stats" type="VBoxContainer"]
+script = ExtResource("1_ux7gg")
+
+[node name="title" type="HBoxContainer" parent="."]
+layout_mode = 2
+script = ExtResource("2_483bj")
+
+[node name="equip" type="Button" parent="title"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_fs4c2")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_1dh38")
+text = "Показатели"
+
+[node name="state" type="Control" parent="title"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+
+[node name="equipped" type="Label" parent="title/state"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_fs4c2")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxEmpty_rxilr")
+text = "🗡"
+
+[node name="bare" type="Label" parent="title/state"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_fs4c2")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxEmpty_rxilr")
+text = "👏"
+
+[node name="space" type="Control" parent="title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="heroes" parent="." instance=ExtResource("3_483bj")]
+layout_mode = 2
+
+[node name="description" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(0, 26)
+layout_mode = 2
+
+[node name="power" type="Label" parent="description"]
+visible = false
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+theme = ExtResource("4_bt6sh")
+text = "Урон от физических атак. Дополняет Жизненный Запас"
+horizontal_alignment = 2
+text_overrun_behavior = 3
+
+[node name="influence" type="Label" parent="description"]
+visible = false
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+theme = ExtResource("4_bt6sh")
+text = "Сила умений, задействующих ауру. Дополняет Очки Умений"
+horizontal_alignment = 2
+text_overrun_behavior = 3
+
+[node name="vitality" type="Label" parent="description"]
+visible = false
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+theme = ExtResource("4_bt6sh")
+text = "Защита от физического урона. Определяет Жизненный Запас"
+horizontal_alignment = 2
+text_overrun_behavior = 3
+
+[node name="reaction" type="Label" parent="description"]
+visible = false
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+theme = ExtResource("4_bt6sh")
+text = "Пропускает урон от ауры. Определяет Очки Умений"
+horizontal_alignment = 2
+text_overrun_behavior = 3

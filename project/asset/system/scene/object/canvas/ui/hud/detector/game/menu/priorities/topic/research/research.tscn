@@ -1,0 +1,3311 @@
+[gd_scene load_steps=44 format=3 uid="uid://bmmg6xahpkusq"]
+
+[ext_resource type="StyleBox" uid="uid://cht8hrroa75bg" path="res://asset/resource/ui/theme/style/tag-button.tres" id="1_rlvie"]
+[ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://asset/resource/ui/theme/patterns/template/menu/settings/topic/footer.tres" id="2_5tx11"]
+[ext_resource type="FontFile" uid="uid://b2wbdbnkxcqv1" path="res://asset/resource/media/data/font/NotoEmoji-VariableFont_wght.ttf" id="3_p5yj6"]
+[ext_resource type="Script" uid="uid://cmeppk3ealnv8" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/hints/preview/toggle.gd" id="4_hexy2"]
+[ext_resource type="FontFile" uid="uid://b37js8y80ak1k" path="res://asset/resource/media/data/font/NotoColorEmoji-Regular.ttf" id="5_vlu61"]
+[ext_resource type="StyleBox" uid="uid://bsggnr5c3uk7o" path="res://asset/resource/ui/theme/style/panel/preview.tres" id="6_uhat8"]
+[ext_resource type="PackedScene" uid="uid://b01p37el432af" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/preview/hints/hints.tscn" id="7_uy1so"]
+[ext_resource type="Script" uid="uid://b06ntftlpr38h" path="res://asset/system/script/object/image/view/ui/menu/information/card.gd" id="8_cm0us"]
+[ext_resource type="StyleBox" uid="uid://c8hy4gq5uksdh" path="res://asset/resource/ui/theme/style/panel/complex/hover.tres" id="9_n63xe"]
+[ext_resource type="StyleBox" uid="uid://chr58r7ok2alt" path="res://asset/resource/ui/theme/style/panel/accent.tres" id="10_nofsu"]
+[ext_resource type="Texture2D" uid="uid://c23wy3keigqvs" path="res://asset/resource/media/image/hints/motion.svg" id="11_48cas"]
+[ext_resource type="Texture2D" uid="uid://dfuu0d7o46rsx" path="res://asset/resource/media/image/hints/jump.svg" id="12_tvk35"]
+[ext_resource type="Texture2D" uid="uid://b14cmwjsig788" path="res://asset/resource/media/image/hints/push.svg" id="13_h75ws"]
+[ext_resource type="Texture2D" uid="uid://d012ckp28xixl" path="res://asset/resource/media/image/hints/land.svg" id="14_sw70e"]
+[ext_resource type="Texture2D" uid="uid://dmvqe8j7qqwnl" path="res://asset/resource/media/image/hints/action.svg" id="15_1i0jv"]
+[ext_resource type="Texture2D" uid="uid://fddwxbvnupnb" path="res://asset/resource/media/image/hints/action/fire.svg" id="16_6pk6r"]
+[ext_resource type="Texture2D" uid="uid://d0mlboi8womp5" path="res://asset/resource/media/image/hints/action/whip.svg" id="17_53mrv"]
+[ext_resource type="Texture2D" uid="uid://bliopmbpp0dgs" path="res://asset/resource/media/image/hints/action/water.svg" id="18_cck0c"]
+[ext_resource type="Texture2D" uid="uid://bjn1a1dv8fgrc" path="res://asset/resource/media/image/hints/action/spark.svg" id="19_77qe7"]
+[ext_resource type="Texture2D" uid="uid://d1bpjvixpyfm2" path="res://asset/resource/media/image/hints/action/explosion.svg" id="20_5rihp"]
+[ext_resource type="Texture2D" uid="uid://b30ydisjlktx6" path="res://asset/resource/media/image/hints/reason/reason.svg" id="21_a3j3k"]
+[ext_resource type="Texture2D" uid="uid://lc173jqalxoo" path="res://asset/resource/media/image/hints/reason/group.svg" id="22_dw4ug"]
+[ext_resource type="Texture2D" uid="uid://bndvjaq0r5q0" path="res://asset/resource/media/image/hints/reason/fight.svg" id="23_amim7"]
+[ext_resource type="Texture2D" uid="uid://blnu86plm0asl" path="res://asset/resource/media/image/hints/reason/enemies.svg" id="24_sodvt"]
+[ext_resource type="Texture2D" uid="uid://c10ecsn6ao1ef" path="res://asset/resource/media/image/hints/reason/aura.svg" id="25_hy7xr"]
+[ext_resource type="Texture2D" uid="uid://bmbe2xea6iafh" path="res://asset/resource/media/image/hints/reason/priorities.svg" id="26_niibm"]
+[ext_resource type="Texture2D" uid="uid://c235aiy60lonn" path="res://asset/resource/media/image/hints/reason/stats.svg" id="27_6fhhu"]
+[ext_resource type="Texture2D" uid="uid://cxlt276bxyfd3" path="res://asset/resource/media/image/hints/reason/items.svg" id="28_bflmk"]
+[ext_resource type="Texture2D" uid="uid://dayfjrsaxga0e" path="res://asset/resource/media/image/hints/reason/equipment.svg" id="29_4qgyt"]
+[ext_resource type="Texture2D" uid="uid://dn7j0dp2homah" path="res://asset/resource/media/image/hints/reason/accessory.svg" id="30_w8ht7"]
+[ext_resource type="FontFile" uid="uid://dxg5wbmrewk2p" path="res://asset/resource/media/data/font/Lato-Regular.ttf" id="31_upyky"]
+[ext_resource type="StyleBox" uid="uid://evyfrkamah1" path="res://asset/resource/ui/theme/style/items/chests/hover.tres" id="32_y6s2t"]
+[ext_resource type="StyleBox" uid="uid://by6bvf7ens3ul" path="res://asset/resource/ui/theme/style/items/chests/empty.tres" id="33_yw1xc"]
+[ext_resource type="Script" uid="uid://ckwy3qb2rie2m" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/topic/items/item/primary.gd" id="34_5fy24"]
+[ext_resource type="PackedScene" uid="uid://bn2dd80xcv3py" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/items/content.tscn" id="35_p8cms"]
+[ext_resource type="PackedScene" uid="uid://dv268r05flq5" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/preview/log/levels/level/number.tscn" id="36_pqlxk"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k8lmy"]
+content_margin_left = 4.0
+content_margin_top = 0.0
+bg_color = Color(0.0196078, 0.0196078, 0.0588235, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cuhdu"]
+content_margin_left = 15.0
+content_margin_bottom = 15.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kf4b8"]
+content_margin_left = 7.0
+content_margin_top = 6.0
+bg_color = Color(0.0196078, 0.0196078, 0.0588235, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pvcso"]
+content_margin_left = 7.0
+content_margin_top = 6.0
+bg_color = Color(0.0196078, 0.0196078, 0.0588235, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xecfx"]
+content_margin_left = 7.0
+content_margin_top = 6.0
+bg_color = Color(0.0588235, 0.0588235, 0.0588235, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jb804"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_toq2e"]
+content_margin_top = 7.0
+
+[node name="research" type="VBoxContainer"]
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.25
+
+[node name="possibilities" type="HFlowContainer" parent="."]
+layout_mode = 2
+theme_override_constants/h_separation = 7
+theme_override_constants/v_separation = 0
+
+[node name="caption" type="Label" parent="possibilities"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.737255, 0.737255, 0.737255, 1)
+text = "Возможности"
+
+[node name="dealer" type="Button" parent="possibilities"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.341176, 0.341176, 0.341176, 1)
+theme_override_styles/normal = ExtResource("1_rlvie")
+text = "Торговец"
+
+[node name="description" type="Label" parent="."]
+custom_minimum_size = Vector2(50, 30)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+theme = ExtResource("2_5tx11")
+text = "Нажмите на картинку для чтения содержимого"
+autowrap_mode = 2
+text_overrun_behavior = 3
+
+[node name="tabs" type="HBoxContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 4
+
+[node name="toggle" type="Button" parent="tabs"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_p5yj6")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_k8lmy")
+alignment = 0
+script = ExtResource("4_hexy2")
+path = "../../../../../../../stats/inventory/ability/controls/hints/space/preview/help"
+
+[node name="shown" type="Label" parent="tabs/toggle"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -11.5
+offset_top = -11.0
+offset_right = 11.5
+offset_bottom = 11.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.00295, 0.994388)
+theme_override_fonts/font = ExtResource("3_p5yj6")
+theme_override_font_sizes/font_size = 18
+text = "👁"
+
+[node name="hidden" type="Label" parent="tabs/toggle"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.00295, 0.994388)
+theme_override_fonts/font = ExtResource("3_p5yj6")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxEmpty_cuhdu")
+text = "⌣"
+
+[node name="analyze" type="Button" parent="tabs"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_fonts/font = ExtResource("5_vlu61")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_kf4b8")
+text = "❔"
+alignment = 0
+
+[node name="books" type="Button" parent="tabs"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_vlu61")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_kf4b8")
+text = "📚"
+alignment = 0
+
+[node name="learn" type="Button" parent="tabs"]
+visible = false
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_vlu61")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_kf4b8")
+text = "🔬"
+alignment = 0
+
+[node name="notes" type="Button" parent="tabs"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_vlu61")
+theme_override_font_sizes/font_size = 15
+theme_override_styles/pressed = SubResource("StyleBoxFlat_pvcso")
+theme_override_styles/normal = SubResource("StyleBoxFlat_xecfx")
+toggle_mode = true
+text = "🕷"
+alignment = 0
+
+[node name="content" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="help" type="PanelContainer" parent="content"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("6_uhat8")
+
+[node name="analyze" type="HBoxContainer" parent="content/help"]
+layout_mode = 2
+
+[node name="hints" parent="content/help/analyze" instance=ExtResource("7_uy1so")]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 2
+
+[node name="margin" type="MarginContainer" parent="content/help/analyze"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="cards" type="HFlowContainer" parent="content/help/analyze/margin"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="motion" type="Control" parent="content/help/analyze/margin/cards"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 2
+size_flags_horizontal = 4
+script = ExtResource("8_cm0us")
+
+[node name="collapsed" type="Button" parent="content/help/analyze/margin/cards/motion"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(130, 0)
+theme_override_styles/hover_pressed = ExtResource("9_n63xe")
+theme_override_styles/hover = ExtResource("9_n63xe")
+theme_override_styles/normal = ExtResource("10_nofsu")
+
+[node name="margin" type="MarginContainer" parent="content/help/analyze/margin/cards/motion/collapsed"]
+layout_mode = 2
+offset_right = 260.0
+offset_bottom = 356.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="content" type="VBoxContainer" parent="content/help/analyze/margin/cards/motion/collapsed/margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="image" type="TextureRect" parent="content/help/analyze/margin/cards/motion/collapsed/margin/content"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("11_48cas")
+expand_mode = 1
+
+[node name="title" type="HBoxContainer" parent="content/help/analyze/margin/cards/motion/collapsed/margin/content"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="left" type="HSeparator" parent="content/help/analyze/margin/cards/motion/collapsed/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="content/help/analyze/margin/cards/motion/collapsed/margin/content/title"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Движение"
+
+[node name="right" type="HSeparator" parent="content/help/analyze/margin/cards/motion/collapsed/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="showcase" type="Button" parent="content/help/analyze/margin/cards/motion"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1e-05, 1)
+pivot_offset = Vector2(131, 0)
+theme_override_styles/hover_pressed = ExtResource("9_n63xe")
+theme_override_styles/hover = ExtResource("9_n63xe")
+theme_override_styles/normal = ExtResource("10_nofsu")
+
+[node name="margin" type="MarginContainer" parent="content/help/analyze/margin/cards/motion/showcase"]
+layout_mode = 2
+offset_right = 260.0
+offset_bottom = 356.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="content" type="VBoxContainer" parent="content/help/analyze/margin/cards/motion/showcase/margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="description" type="Control" parent="content/help/analyze/margin/cards/motion/showcase/margin/content"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="icons" type="MarginContainer" parent="content/help/analyze/margin/cards/motion/showcase/margin/content/description"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -68.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 5
+
+[node name="caption" type="Label" parent="content/help/analyze/margin/cards/motion/showcase/margin/content/description/icons"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme = ExtResource("2_5tx11")
+theme_override_colors/font_color = Color(0.525101, 0.525101, 0.525101, 1)
+theme_override_fonts/font = ExtResource("5_vlu61")
+text = "🏃🦶🚫"
+
+[node name="caption" type="Label" parent="content/help/analyze/margin/cards/motion/showcase/margin/content/description"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 258.0
+grow_horizontal = 2
+size_flags_vertical = 6
+theme = ExtResource("2_5tx11")
+text = "Для перемещения используйте %s. Чтобы ускориться нажмите %s
+
+Позволяет герою ходить и использовать приемы с ногами
+
+Можно потерять"
+autowrap_mode = 2
+
+[node name="title" type="HBoxContainer" parent="content/help/analyze/margin/cards/motion/showcase/margin/content"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 10
+
+[node name="left" type="HSeparator" parent="content/help/analyze/margin/cards/motion/showcase/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="content/help/analyze/margin/cards/motion/showcase/margin/content/title"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Движение"
+
+[node name="right" type="HSeparator" parent="content/help/analyze/margin/cards/motion/showcase/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="jump" type="Control" parent="content/help/analyze/margin/cards"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 2
+size_flags_horizontal = 4
+script = ExtResource("8_cm0us")
+
+[node name="collapsed" type="Button" parent="content/help/analyze/margin/cards/jump"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(130, 0)
+theme_override_styles/hover_pressed = ExtResource("9_n63xe")
+theme_override_styles/hover = ExtResource("9_n63xe")
+theme_override_styles/normal = ExtResource("10_nofsu")
+
+[node name="margin" type="MarginContainer" parent="content/help/analyze/margin/cards/jump/collapsed"]
+layout_mode = 2
+offset_right = 260.0
+offset_bottom = 356.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="content" type="VBoxContainer" parent="content/help/analyze/margin/cards/jump/collapsed/margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="image" type="TextureRect" parent="content/help/analyze/margin/cards/jump/collapsed/margin/content"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("12_tvk35")
+expand_mode = 1
+
+[node name="title" type="HBoxContainer" parent="content/help/analyze/margin/cards/jump/collapsed/margin/content"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="left" type="HSeparator" parent="content/help/analyze/margin/cards/jump/collapsed/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="content/help/analyze/margin/cards/jump/collapsed/margin/content/title"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Прыжки"
+
+[node name="right" type="HSeparator" parent="content/help/analyze/margin/cards/jump/collapsed/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="showcase" type="Button" parent="content/help/analyze/margin/cards/jump"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1e-05, 1)
+pivot_offset = Vector2(131, 0)
+theme_override_styles/hover_pressed = ExtResource("9_n63xe")
+theme_override_styles/hover = ExtResource("9_n63xe")
+theme_override_styles/normal = ExtResource("10_nofsu")
+
+[node name="margin" type="MarginContainer" parent="content/help/analyze/margin/cards/jump/showcase"]
+layout_mode = 2
+offset_right = 260.0
+offset_bottom = 356.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="content" type="VBoxContainer" parent="content/help/analyze/margin/cards/jump/showcase/margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="description" type="Control" parent="content/help/analyze/margin/cards/jump/showcase/margin/content"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="icons" type="MarginContainer" parent="content/help/analyze/margin/cards/jump/showcase/margin/content/description"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -68.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 5
+
+[node name="caption" type="Label" parent="content/help/analyze/margin/cards/jump/showcase/margin/content/description/icons"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme = ExtResource("2_5tx11")
+theme_override_colors/font_color = Color(0.52549, 0.52549, 0.52549, 1)
+theme_override_fonts/font = ExtResource("5_vlu61")
+text = "🕳 ⛳️"
+
+[node name="caption" type="Label" parent="content/help/analyze/margin/cards/jump/showcase/margin/content/description"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 258.0
+grow_horizontal = 2
+size_flags_vertical = 6
+theme = ExtResource("2_5tx11")
+text = "Для прыжка подойдите к выступу вплотную, затем продолжайте идти
+
+Обратите внимание: вы должны быть на той же высоте, что и место для приземления"
+autowrap_mode = 2
+
+[node name="title" type="HBoxContainer" parent="content/help/analyze/margin/cards/jump/showcase/margin/content"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 10
+
+[node name="left" type="HSeparator" parent="content/help/analyze/margin/cards/jump/showcase/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="content/help/analyze/margin/cards/jump/showcase/margin/content/title"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Прыжки"
+
+[node name="right" type="HSeparator" parent="content/help/analyze/margin/cards/jump/showcase/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="push" type="Control" parent="content/help/analyze/margin/cards"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 2
+size_flags_horizontal = 4
+script = ExtResource("8_cm0us")
+
+[node name="collapsed" type="Button" parent="content/help/analyze/margin/cards/push"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(130, 0)
+theme_override_styles/hover_pressed = ExtResource("9_n63xe")
+theme_override_styles/hover = ExtResource("9_n63xe")
+theme_override_styles/normal = ExtResource("10_nofsu")
+
+[node name="margin" type="MarginContainer" parent="content/help/analyze/margin/cards/push/collapsed"]
+layout_mode = 2
+offset_right = 260.0
+offset_bottom = 356.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="content" type="VBoxContainer" parent="content/help/analyze/margin/cards/push/collapsed/margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="image" type="TextureRect" parent="content/help/analyze/margin/cards/push/collapsed/margin/content"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("13_h75ws")
+expand_mode = 1
+
+[node name="title" type="HBoxContainer" parent="content/help/analyze/margin/cards/push/collapsed/margin/content"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="left" type="HSeparator" parent="content/help/analyze/margin/cards/push/collapsed/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="content/help/analyze/margin/cards/push/collapsed/margin/content/title"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Ящики"
+
+[node name="right" type="HSeparator" parent="content/help/analyze/margin/cards/push/collapsed/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="showcase" type="Button" parent="content/help/analyze/margin/cards/push"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1e-05, 1)
+pivot_offset = Vector2(131, 0)
+theme_override_styles/hover_pressed = ExtResource("9_n63xe")
+theme_override_styles/hover = ExtResource("9_n63xe")
+theme_override_styles/normal = ExtResource("10_nofsu")
+
+[node name="margin" type="MarginContainer" parent="content/help/analyze/margin/cards/push/showcase"]
+layout_mode = 2
+offset_right = 260.0
+offset_bottom = 356.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="content" type="VBoxContainer" parent="content/help/analyze/margin/cards/push/showcase/margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="description" type="Control" parent="content/help/analyze/margin/cards/push/showcase/margin/content"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="icons" type="MarginContainer" parent="content/help/analyze/margin/cards/push/showcase/margin/content/description"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -68.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 5
+
+[node name="caption" type="Label" parent="content/help/analyze/margin/cards/push/showcase/margin/content/description/icons"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme = ExtResource("2_5tx11")
+theme_override_colors/font_color = Color(0.52549, 0.52549, 0.52549, 1)
+theme_override_fonts/font = ExtResource("5_vlu61")
+text = "🙇 👐 📦"
+
+[node name="caption" type="Label" parent="content/help/analyze/margin/cards/push/showcase/margin/content/description"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 258.0
+grow_horizontal = 2
+size_flags_vertical = 6
+theme = ExtResource("2_5tx11")
+text = "Для перемещения перед собой встаньте около предмета и идите
+
+Чтобы начать тащить зажмите %s у ящика и идите
+
+Сзади ящика можно пройти"
+autowrap_mode = 2
+
+[node name="title" type="HBoxContainer" parent="content/help/analyze/margin/cards/push/showcase/margin/content"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 10
+
+[node name="left" type="HSeparator" parent="content/help/analyze/margin/cards/push/showcase/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="content/help/analyze/margin/cards/push/showcase/margin/content/title"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Ящики"
+
+[node name="right" type="HSeparator" parent="content/help/analyze/margin/cards/push/showcase/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="land" type="Control" parent="content/help/analyze/margin/cards"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 2
+size_flags_horizontal = 4
+script = ExtResource("8_cm0us")
+
+[node name="collapsed" type="Button" parent="content/help/analyze/margin/cards/land"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(130, 0)
+theme_override_styles/hover_pressed = ExtResource("9_n63xe")
+theme_override_styles/hover = ExtResource("9_n63xe")
+theme_override_styles/normal = ExtResource("10_nofsu")
+
+[node name="margin" type="MarginContainer" parent="content/help/analyze/margin/cards/land/collapsed"]
+layout_mode = 2
+offset_right = 260.0
+offset_bottom = 356.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="content" type="VBoxContainer" parent="content/help/analyze/margin/cards/land/collapsed/margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="image" type="TextureRect" parent="content/help/analyze/margin/cards/land/collapsed/margin/content"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("14_sw70e")
+expand_mode = 1
+
+[node name="title" type="HBoxContainer" parent="content/help/analyze/margin/cards/land/collapsed/margin/content"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="left" type="HSeparator" parent="content/help/analyze/margin/cards/land/collapsed/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="content/help/analyze/margin/cards/land/collapsed/margin/content/title"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Возвышенность"
+
+[node name="right" type="HSeparator" parent="content/help/analyze/margin/cards/land/collapsed/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="showcase" type="Button" parent="content/help/analyze/margin/cards/land"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1e-05, 1)
+pivot_offset = Vector2(131, 0)
+theme_override_styles/hover_pressed = ExtResource("9_n63xe")
+theme_override_styles/hover = ExtResource("9_n63xe")
+theme_override_styles/normal = ExtResource("10_nofsu")
+
+[node name="margin" type="MarginContainer" parent="content/help/analyze/margin/cards/land/showcase"]
+layout_mode = 2
+offset_right = 260.0
+offset_bottom = 356.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="content" type="VBoxContainer" parent="content/help/analyze/margin/cards/land/showcase/margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="description" type="Control" parent="content/help/analyze/margin/cards/land/showcase/margin/content"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="icons" type="MarginContainer" parent="content/help/analyze/margin/cards/land/showcase/margin/content/description"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -68.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 5
+
+[node name="caption" type="Label" parent="content/help/analyze/margin/cards/land/showcase/margin/content/description/icons"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme = ExtResource("2_5tx11")
+theme_override_colors/font_color = Color(0.52549, 0.52549, 0.52549, 1)
+theme_override_fonts/font = ExtResource("5_vlu61")
+text = "🕋🗻"
+
+[node name="caption" type="Label" parent="content/help/analyze/margin/cards/land/showcase/margin/content/description"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 258.0
+grow_horizontal = 2
+size_flags_vertical = 6
+theme = ExtResource("2_5tx11")
+text = "Для прыжка на ящик или выступ, вы должны быть на уровне с ними
+
+Чем светлее область, тем выше вы находитесь
+
+Помогайте себе исследо-вать предметами"
+autowrap_mode = 2
+
+[node name="title" type="HBoxContainer" parent="content/help/analyze/margin/cards/land/showcase/margin/content"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 10
+
+[node name="left" type="HSeparator" parent="content/help/analyze/margin/cards/land/showcase/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="content/help/analyze/margin/cards/land/showcase/margin/content/title"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Возвышенность"
+
+[node name="right" type="HSeparator" parent="content/help/analyze/margin/cards/land/showcase/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="action" type="Control" parent="content/help/analyze/margin/cards"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 2
+size_flags_horizontal = 4
+script = ExtResource("8_cm0us")
+
+[node name="collapsed" type="Button" parent="content/help/analyze/margin/cards/action"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(130, 0)
+theme_override_styles/hover_pressed = ExtResource("9_n63xe")
+theme_override_styles/hover = ExtResource("9_n63xe")
+theme_override_styles/normal = ExtResource("10_nofsu")
+
+[node name="margin" type="MarginContainer" parent="content/help/analyze/margin/cards/action/collapsed"]
+layout_mode = 2
+offset_right = 260.0
+offset_bottom = 356.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="content" type="VBoxContainer" parent="content/help/analyze/margin/cards/action/collapsed/margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="image" type="TextureRect" parent="content/help/analyze/margin/cards/action/collapsed/margin/content"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("15_1i0jv")
+expand_mode = 1
+
+[node name="title" type="HBoxContainer" parent="content/help/analyze/margin/cards/action/collapsed/margin/content"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="left" type="HSeparator" parent="content/help/analyze/margin/cards/action/collapsed/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="content/help/analyze/margin/cards/action/collapsed/margin/content/title"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Действие"
+
+[node name="right" type="HSeparator" parent="content/help/analyze/margin/cards/action/collapsed/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="showcase" type="Button" parent="content/help/analyze/margin/cards/action"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1e-05, 1)
+pivot_offset = Vector2(131, 0)
+theme_override_styles/hover_pressed = ExtResource("9_n63xe")
+theme_override_styles/hover = ExtResource("9_n63xe")
+theme_override_styles/normal = ExtResource("10_nofsu")
+
+[node name="margin" type="MarginContainer" parent="content/help/analyze/margin/cards/action/showcase"]
+layout_mode = 2
+offset_right = 260.0
+offset_bottom = 356.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="content" type="VBoxContainer" parent="content/help/analyze/margin/cards/action/showcase/margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="description" type="Control" parent="content/help/analyze/margin/cards/action/showcase/margin/content"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="icons" type="MarginContainer" parent="content/help/analyze/margin/cards/action/showcase/margin/content/description"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -68.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 5
+
+[node name="caption" type="Label" parent="content/help/analyze/margin/cards/action/showcase/margin/content/description/icons"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme = ExtResource("2_5tx11")
+theme_override_colors/font_color = Color(0.52549, 0.52549, 0.52549, 1)
+theme_override_fonts/font = ExtResource("5_vlu61")
+text = "🙌👊🚫"
+
+[node name="caption" type="Label" parent="content/help/analyze/margin/cards/action/showcase/margin/content/description"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 258.0
+grow_horizontal = 2
+size_flags_vertical = 6
+theme = ExtResource("2_5tx11")
+text = "Для ручного взаимо-действия подойдите к предмету и нажмите %s
+
+Позволяет герою использовать приемы с руками и действовать
+
+Можно потерять"
+autowrap_mode = 2
+
+[node name="title" type="HBoxContainer" parent="content/help/analyze/margin/cards/action/showcase/margin/content"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 10
+
+[node name="left" type="HSeparator" parent="content/help/analyze/margin/cards/action/showcase/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="content/help/analyze/margin/cards/action/showcase/margin/content/title"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Действие"
+
+[node name="right" type="HSeparator" parent="content/help/analyze/margin/cards/action/showcase/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="fire" type="Control" parent="content/help/analyze/margin/cards"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 2
+size_flags_horizontal = 4
+script = ExtResource("8_cm0us")
+
+[node name="collapsed" type="Button" parent="content/help/analyze/margin/cards/fire"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(130, 0)
+theme_override_styles/hover_pressed = ExtResource("9_n63xe")
+theme_override_styles/hover = ExtResource("9_n63xe")
+theme_override_styles/normal = ExtResource("10_nofsu")
+
+[node name="margin" type="MarginContainer" parent="content/help/analyze/margin/cards/fire/collapsed"]
+layout_mode = 2
+offset_right = 260.0
+offset_bottom = 356.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="content" type="VBoxContainer" parent="content/help/analyze/margin/cards/fire/collapsed/margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="image" type="TextureRect" parent="content/help/analyze/margin/cards/fire/collapsed/margin/content"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("16_6pk6r")
+expand_mode = 1
+
+[node name="title" type="HBoxContainer" parent="content/help/analyze/margin/cards/fire/collapsed/margin/content"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="left" type="HSeparator" parent="content/help/analyze/margin/cards/fire/collapsed/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="content/help/analyze/margin/cards/fire/collapsed/margin/content/title"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Пламя"
+
+[node name="right" type="HSeparator" parent="content/help/analyze/margin/cards/fire/collapsed/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="showcase" type="Button" parent="content/help/analyze/margin/cards/fire"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1e-05, 1)
+pivot_offset = Vector2(131, 0)
+theme_override_styles/hover_pressed = ExtResource("9_n63xe")
+theme_override_styles/hover = ExtResource("9_n63xe")
+theme_override_styles/normal = ExtResource("10_nofsu")
+
+[node name="margin" type="MarginContainer" parent="content/help/analyze/margin/cards/fire/showcase"]
+layout_mode = 2
+offset_right = 260.0
+offset_bottom = 356.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="content" type="VBoxContainer" parent="content/help/analyze/margin/cards/fire/showcase/margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="description" type="Control" parent="content/help/analyze/margin/cards/fire/showcase/margin/content"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="icons" type="MarginContainer" parent="content/help/analyze/margin/cards/fire/showcase/margin/content/description"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -68.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 5
+
+[node name="caption" type="Label" parent="content/help/analyze/margin/cards/fire/showcase/margin/content/description/icons"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme = ExtResource("2_5tx11")
+theme_override_colors/font_color = Color(0.52549, 0.52549, 0.52549, 1)
+theme_override_fonts/font = ExtResource("5_vlu61")
+text = "🧊❄️🔥"
+
+[node name="caption" type="Label" parent="content/help/analyze/margin/cards/fire/showcase/margin/content/description"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 258.0
+grow_horizontal = 2
+size_flags_vertical = 6
+theme = ExtResource("2_5tx11")
+text = "Для зажигания подойдите к предмету и нажмите %s
+
+Чистит путь ото льда, зажигает фитили
+
+Открывает приемы стихии огня"
+autowrap_mode = 2
+
+[node name="title" type="HBoxContainer" parent="content/help/analyze/margin/cards/fire/showcase/margin/content"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 10
+
+[node name="left" type="HSeparator" parent="content/help/analyze/margin/cards/fire/showcase/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="content/help/analyze/margin/cards/fire/showcase/margin/content/title"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Пламя"
+
+[node name="right" type="HSeparator" parent="content/help/analyze/margin/cards/fire/showcase/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="whip" type="Control" parent="content/help/analyze/margin/cards"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 2
+size_flags_horizontal = 4
+script = ExtResource("8_cm0us")
+
+[node name="collapsed" type="Button" parent="content/help/analyze/margin/cards/whip"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(130, 0)
+theme_override_styles/hover_pressed = ExtResource("9_n63xe")
+theme_override_styles/hover = ExtResource("9_n63xe")
+theme_override_styles/normal = ExtResource("10_nofsu")
+
+[node name="margin" type="MarginContainer" parent="content/help/analyze/margin/cards/whip/collapsed"]
+layout_mode = 2
+offset_right = 260.0
+offset_bottom = 356.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="content" type="VBoxContainer" parent="content/help/analyze/margin/cards/whip/collapsed/margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="image" type="TextureRect" parent="content/help/analyze/margin/cards/whip/collapsed/margin/content"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("17_53mrv")
+expand_mode = 1
+
+[node name="title" type="HBoxContainer" parent="content/help/analyze/margin/cards/whip/collapsed/margin/content"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="left" type="HSeparator" parent="content/help/analyze/margin/cards/whip/collapsed/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="content/help/analyze/margin/cards/whip/collapsed/margin/content/title"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Кнут"
+
+[node name="right" type="HSeparator" parent="content/help/analyze/margin/cards/whip/collapsed/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="showcase" type="Button" parent="content/help/analyze/margin/cards/whip"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1e-05, 1)
+pivot_offset = Vector2(131, 0)
+theme_override_styles/hover_pressed = ExtResource("9_n63xe")
+theme_override_styles/hover = ExtResource("9_n63xe")
+theme_override_styles/normal = ExtResource("10_nofsu")
+
+[node name="margin" type="MarginContainer" parent="content/help/analyze/margin/cards/whip/showcase"]
+layout_mode = 2
+offset_right = 260.0
+offset_bottom = 356.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="content" type="VBoxContainer" parent="content/help/analyze/margin/cards/whip/showcase/margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="description" type="Control" parent="content/help/analyze/margin/cards/whip/showcase/margin/content"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="icons" type="MarginContainer" parent="content/help/analyze/margin/cards/whip/showcase/margin/content/description"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -68.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 5
+
+[node name="caption" type="Label" parent="content/help/analyze/margin/cards/whip/showcase/margin/content/description/icons"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme = ExtResource("2_5tx11")
+theme_override_colors/font_color = Color(0.52549, 0.52549, 0.52549, 1)
+theme_override_fonts/font = ExtResource("5_vlu61")
+text = "🎣⛓️🎚"
+
+[node name="caption" type="Label" parent="content/help/analyze/margin/cards/whip/showcase/margin/content/description"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 258.0
+grow_horizontal = 2
+size_flags_vertical = 6
+theme = ExtResource("2_5tx11")
+text = "Вы можете под-тянуться нажав %s перед столбом или крюком
+
+Для подтягивания к цепи нужно висеть на цепи лицом к ней
+
+Задетые кнутом рычаги переключаются."
+autowrap_mode = 2
+
+[node name="title" type="HBoxContainer" parent="content/help/analyze/margin/cards/whip/showcase/margin/content"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 10
+
+[node name="left" type="HSeparator" parent="content/help/analyze/margin/cards/whip/showcase/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="content/help/analyze/margin/cards/whip/showcase/margin/content/title"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Кнут"
+
+[node name="right" type="HSeparator" parent="content/help/analyze/margin/cards/whip/showcase/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="water" type="Control" parent="content/help/analyze/margin/cards"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 2
+size_flags_horizontal = 4
+script = ExtResource("8_cm0us")
+
+[node name="collapsed" type="Button" parent="content/help/analyze/margin/cards/water"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(130, 0)
+theme_override_styles/hover_pressed = ExtResource("9_n63xe")
+theme_override_styles/hover = ExtResource("9_n63xe")
+theme_override_styles/normal = ExtResource("10_nofsu")
+
+[node name="margin" type="MarginContainer" parent="content/help/analyze/margin/cards/water/collapsed"]
+layout_mode = 2
+offset_right = 260.0
+offset_bottom = 356.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="content" type="VBoxContainer" parent="content/help/analyze/margin/cards/water/collapsed/margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="image" type="TextureRect" parent="content/help/analyze/margin/cards/water/collapsed/margin/content"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("18_cck0c")
+expand_mode = 1
+
+[node name="title" type="HBoxContainer" parent="content/help/analyze/margin/cards/water/collapsed/margin/content"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="left" type="HSeparator" parent="content/help/analyze/margin/cards/water/collapsed/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="content/help/analyze/margin/cards/water/collapsed/margin/content/title"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Вода"
+
+[node name="right" type="HSeparator" parent="content/help/analyze/margin/cards/water/collapsed/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="showcase" type="Button" parent="content/help/analyze/margin/cards/water"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1e-05, 1)
+pivot_offset = Vector2(131, 0)
+theme_override_styles/hover_pressed = ExtResource("9_n63xe")
+theme_override_styles/hover = ExtResource("9_n63xe")
+theme_override_styles/normal = ExtResource("10_nofsu")
+
+[node name="margin" type="MarginContainer" parent="content/help/analyze/margin/cards/water/showcase"]
+layout_mode = 2
+offset_right = 260.0
+offset_bottom = 356.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="content" type="VBoxContainer" parent="content/help/analyze/margin/cards/water/showcase/margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="description" type="Control" parent="content/help/analyze/margin/cards/water/showcase/margin/content"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="icons" type="MarginContainer" parent="content/help/analyze/margin/cards/water/showcase/margin/content/description"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -68.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 5
+
+[node name="caption" type="Label" parent="content/help/analyze/margin/cards/water/showcase/margin/content/description/icons"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme = ExtResource("2_5tx11")
+theme_override_colors/font_color = Color(0.52549, 0.52549, 0.52549, 1)
+theme_override_fonts/font = ExtResource("5_vlu61")
+text = "🌧🪫💧"
+
+[node name="caption" type="Label" parent="content/help/analyze/margin/cards/water/showcase/margin/content/description"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 258.0
+grow_horizontal = 2
+size_flags_vertical = 6
+theme = ExtResource("2_5tx11")
+text = "Для призыва тучи остановитесь на нужном месте и нажмите %s
+
+Проводит ток и держит заряд, сковывает движения
+
+Открывает приемы стихии воды"
+autowrap_mode = 2
+
+[node name="title" type="HBoxContainer" parent="content/help/analyze/margin/cards/water/showcase/margin/content"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 10
+
+[node name="left" type="HSeparator" parent="content/help/analyze/margin/cards/water/showcase/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="content/help/analyze/margin/cards/water/showcase/margin/content/title"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Вода"
+
+[node name="right" type="HSeparator" parent="content/help/analyze/margin/cards/water/showcase/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="spark" type="Control" parent="content/help/analyze/margin/cards"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 2
+size_flags_horizontal = 4
+script = ExtResource("8_cm0us")
+
+[node name="collapsed" type="Button" parent="content/help/analyze/margin/cards/spark"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(130, 0)
+theme_override_styles/hover_pressed = ExtResource("9_n63xe")
+theme_override_styles/hover = ExtResource("9_n63xe")
+theme_override_styles/normal = ExtResource("10_nofsu")
+
+[node name="margin" type="MarginContainer" parent="content/help/analyze/margin/cards/spark/collapsed"]
+layout_mode = 2
+offset_right = 260.0
+offset_bottom = 356.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="content" type="VBoxContainer" parent="content/help/analyze/margin/cards/spark/collapsed/margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="image" type="TextureRect" parent="content/help/analyze/margin/cards/spark/collapsed/margin/content"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("19_77qe7")
+expand_mode = 1
+
+[node name="title" type="HBoxContainer" parent="content/help/analyze/margin/cards/spark/collapsed/margin/content"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="left" type="HSeparator" parent="content/help/analyze/margin/cards/spark/collapsed/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="content/help/analyze/margin/cards/spark/collapsed/margin/content/title"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Искра"
+
+[node name="right" type="HSeparator" parent="content/help/analyze/margin/cards/spark/collapsed/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="showcase" type="Button" parent="content/help/analyze/margin/cards/spark"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1e-05, 1)
+pivot_offset = Vector2(131, 0)
+theme_override_styles/hover_pressed = ExtResource("9_n63xe")
+theme_override_styles/hover = ExtResource("9_n63xe")
+theme_override_styles/normal = ExtResource("10_nofsu")
+
+[node name="margin" type="MarginContainer" parent="content/help/analyze/margin/cards/spark/showcase"]
+layout_mode = 2
+offset_right = 260.0
+offset_bottom = 356.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="content" type="VBoxContainer" parent="content/help/analyze/margin/cards/spark/showcase/margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="description" type="Control" parent="content/help/analyze/margin/cards/spark/showcase/margin/content"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="icons" type="MarginContainer" parent="content/help/analyze/margin/cards/spark/showcase/margin/content/description"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -68.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 5
+
+[node name="caption" type="Label" parent="content/help/analyze/margin/cards/spark/showcase/margin/content/description/icons"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme = ExtResource("2_5tx11")
+theme_override_colors/font_color = Color(0.52549, 0.52549, 0.52549, 1)
+theme_override_fonts/font = ExtResource("5_vlu61")
+text = "🌩💡⚡️"
+
+[node name="caption" type="Label" parent="content/help/analyze/margin/cards/spark/showcase/margin/content/description"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 258.0
+grow_horizontal = 2
+size_flags_vertical = 6
+theme = ExtResource("2_5tx11")
+text = "Для передачи тока встаньте около аппара-туры и нажмите %s
+
+Заряжает источники, шокирует врагов
+
+Открывает приемы стихии молнии"
+autowrap_mode = 2
+
+[node name="title" type="HBoxContainer" parent="content/help/analyze/margin/cards/spark/showcase/margin/content"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 10
+
+[node name="left" type="HSeparator" parent="content/help/analyze/margin/cards/spark/showcase/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="content/help/analyze/margin/cards/spark/showcase/margin/content/title"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Искра"
+
+[node name="right" type="HSeparator" parent="content/help/analyze/margin/cards/spark/showcase/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="explosion" type="Control" parent="content/help/analyze/margin/cards"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 2
+size_flags_horizontal = 4
+script = ExtResource("8_cm0us")
+
+[node name="collapsed" type="Button" parent="content/help/analyze/margin/cards/explosion"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(130, 0)
+theme_override_styles/hover_pressed = ExtResource("9_n63xe")
+theme_override_styles/hover = ExtResource("9_n63xe")
+theme_override_styles/normal = ExtResource("10_nofsu")
+
+[node name="margin" type="MarginContainer" parent="content/help/analyze/margin/cards/explosion/collapsed"]
+layout_mode = 2
+offset_right = 260.0
+offset_bottom = 356.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="content" type="VBoxContainer" parent="content/help/analyze/margin/cards/explosion/collapsed/margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="image" type="TextureRect" parent="content/help/analyze/margin/cards/explosion/collapsed/margin/content"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("20_5rihp")
+expand_mode = 1
+
+[node name="title" type="HBoxContainer" parent="content/help/analyze/margin/cards/explosion/collapsed/margin/content"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="left" type="HSeparator" parent="content/help/analyze/margin/cards/explosion/collapsed/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="content/help/analyze/margin/cards/explosion/collapsed/margin/content/title"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Взрыв"
+
+[node name="right" type="HSeparator" parent="content/help/analyze/margin/cards/explosion/collapsed/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="showcase" type="Button" parent="content/help/analyze/margin/cards/explosion"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1e-05, 1)
+pivot_offset = Vector2(131, 0)
+theme_override_styles/hover_pressed = ExtResource("9_n63xe")
+theme_override_styles/hover = ExtResource("9_n63xe")
+theme_override_styles/normal = ExtResource("10_nofsu")
+
+[node name="margin" type="MarginContainer" parent="content/help/analyze/margin/cards/explosion/showcase"]
+layout_mode = 2
+offset_right = 260.0
+offset_bottom = 356.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="content" type="VBoxContainer" parent="content/help/analyze/margin/cards/explosion/showcase/margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="description" type="Control" parent="content/help/analyze/margin/cards/explosion/showcase/margin/content"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="icons" type="MarginContainer" parent="content/help/analyze/margin/cards/explosion/showcase/margin/content/description"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -68.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 5
+
+[node name="caption" type="Label" parent="content/help/analyze/margin/cards/explosion/showcase/margin/content/description/icons"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme = ExtResource("2_5tx11")
+theme_override_colors/font_color = Color(0.52549, 0.52549, 0.52549, 1)
+theme_override_fonts/font = ExtResource("5_vlu61")
+text = "⚡️🪨💥"
+
+[node name="caption" type="Label" parent="content/help/analyze/margin/cards/explosion/showcase/margin/content/description"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 258.0
+grow_horizontal = 2
+size_flags_vertical = 6
+theme = ExtResource("2_5tx11")
+text = "Для совершения взрыва ударьте пламенем и кнутом по заряженной луже
+
+Вы можете убирать препятствия вокруг
+
+Стены препятствуют ударной волне"
+autowrap_mode = 2
+
+[node name="title" type="HBoxContainer" parent="content/help/analyze/margin/cards/explosion/showcase/margin/content"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 10
+
+[node name="left" type="HSeparator" parent="content/help/analyze/margin/cards/explosion/showcase/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="content/help/analyze/margin/cards/explosion/showcase/margin/content/title"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Взрыв"
+
+[node name="right" type="HSeparator" parent="content/help/analyze/margin/cards/explosion/showcase/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="reason" type="Control" parent="content/help/analyze/margin/cards"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 2
+size_flags_horizontal = 4
+script = ExtResource("8_cm0us")
+
+[node name="collapsed" type="Button" parent="content/help/analyze/margin/cards/reason"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(130, 0)
+theme_override_styles/hover_pressed = ExtResource("9_n63xe")
+theme_override_styles/hover = ExtResource("9_n63xe")
+theme_override_styles/normal = ExtResource("10_nofsu")
+
+[node name="margin" type="MarginContainer" parent="content/help/analyze/margin/cards/reason/collapsed"]
+layout_mode = 2
+offset_right = 260.0
+offset_bottom = 356.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="content" type="VBoxContainer" parent="content/help/analyze/margin/cards/reason/collapsed/margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="image" type="TextureRect" parent="content/help/analyze/margin/cards/reason/collapsed/margin/content"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("21_a3j3k")
+expand_mode = 1
+
+[node name="title" type="HBoxContainer" parent="content/help/analyze/margin/cards/reason/collapsed/margin/content"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="left" type="HSeparator" parent="content/help/analyze/margin/cards/reason/collapsed/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="content/help/analyze/margin/cards/reason/collapsed/margin/content/title"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Сознание"
+
+[node name="right" type="HSeparator" parent="content/help/analyze/margin/cards/reason/collapsed/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="showcase" type="Button" parent="content/help/analyze/margin/cards/reason"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1e-05, 1)
+pivot_offset = Vector2(131, 0)
+theme_override_styles/hover_pressed = ExtResource("9_n63xe")
+theme_override_styles/hover = ExtResource("9_n63xe")
+theme_override_styles/normal = ExtResource("10_nofsu")
+
+[node name="margin" type="MarginContainer" parent="content/help/analyze/margin/cards/reason/showcase"]
+layout_mode = 2
+offset_right = 260.0
+offset_bottom = 356.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="content" type="VBoxContainer" parent="content/help/analyze/margin/cards/reason/showcase/margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="description" type="Control" parent="content/help/analyze/margin/cards/reason/showcase/margin/content"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="icons" type="MarginContainer" parent="content/help/analyze/margin/cards/reason/showcase/margin/content/description"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -68.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 5
+
+[node name="caption" type="Label" parent="content/help/analyze/margin/cards/reason/showcase/margin/content/description/icons"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme = ExtResource("2_5tx11")
+theme_override_colors/font_color = Color(0.52549, 0.52549, 0.52549, 1)
+theme_override_fonts/font = ExtResource("5_vlu61")
+text = "🤝 🫡 💫"
+
+[node name="caption" type="Label" parent="content/help/analyze/margin/cards/reason/showcase/margin/content/description"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 258.0
+grow_horizontal = 2
+size_flags_vertical = 6
+theme = ExtResource("2_5tx11")
+text = "Чтобы сменить сокомандника, нажмите %s
+
+Позволяет управлять героем и его способно-стями
+
+Можно потерять"
+autowrap_mode = 2
+
+[node name="title" type="HBoxContainer" parent="content/help/analyze/margin/cards/reason/showcase/margin/content"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 10
+
+[node name="left" type="HSeparator" parent="content/help/analyze/margin/cards/reason/showcase/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="content/help/analyze/margin/cards/reason/showcase/margin/content/title"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Сознание"
+
+[node name="right" type="HSeparator" parent="content/help/analyze/margin/cards/reason/showcase/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="group" type="Control" parent="content/help/analyze/margin/cards"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 2
+size_flags_horizontal = 4
+script = ExtResource("8_cm0us")
+
+[node name="collapsed" type="Button" parent="content/help/analyze/margin/cards/group"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(130, 0)
+theme_override_styles/hover_pressed = ExtResource("9_n63xe")
+theme_override_styles/hover = ExtResource("9_n63xe")
+theme_override_styles/normal = ExtResource("10_nofsu")
+
+[node name="margin" type="MarginContainer" parent="content/help/analyze/margin/cards/group/collapsed"]
+layout_mode = 2
+offset_right = 260.0
+offset_bottom = 356.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="content" type="VBoxContainer" parent="content/help/analyze/margin/cards/group/collapsed/margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="image" type="TextureRect" parent="content/help/analyze/margin/cards/group/collapsed/margin/content"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("22_dw4ug")
+expand_mode = 1
+
+[node name="title" type="HBoxContainer" parent="content/help/analyze/margin/cards/group/collapsed/margin/content"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="left" type="HSeparator" parent="content/help/analyze/margin/cards/group/collapsed/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="content/help/analyze/margin/cards/group/collapsed/margin/content/title"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Группа"
+
+[node name="right" type="HSeparator" parent="content/help/analyze/margin/cards/group/collapsed/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="showcase" type="Button" parent="content/help/analyze/margin/cards/group"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1e-05, 1)
+pivot_offset = Vector2(131, 0)
+theme_override_styles/hover_pressed = ExtResource("9_n63xe")
+theme_override_styles/hover = ExtResource("9_n63xe")
+theme_override_styles/normal = ExtResource("10_nofsu")
+
+[node name="margin" type="MarginContainer" parent="content/help/analyze/margin/cards/group/showcase"]
+layout_mode = 2
+offset_right = 260.0
+offset_bottom = 356.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="content" type="VBoxContainer" parent="content/help/analyze/margin/cards/group/showcase/margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="description" type="Control" parent="content/help/analyze/margin/cards/group/showcase/margin/content"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="icons" type="MarginContainer" parent="content/help/analyze/margin/cards/group/showcase/margin/content/description"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -68.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 5
+
+[node name="caption" type="Label" parent="content/help/analyze/margin/cards/group/showcase/margin/content/description/icons"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme = ExtResource("2_5tx11")
+theme_override_colors/font_color = Color(0.52549, 0.52549, 0.52549, 1)
+theme_override_fonts/font = ExtResource("5_vlu61")
+text = "🕵️‍♂️🤜🤛🕵️‍♂️"
+
+[node name="caption" type="Label" parent="content/help/analyze/margin/cards/group/showcase/margin/content/description"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 258.0
+grow_horizontal = 2
+size_flags_vertical = 6
+theme = ExtResource("2_5tx11")
+text = "Для разделения нажмите %s на той же высоте
+
+Для сбора встаньте рядом с членами коман-ды и нажмите %s снова.
+
+Полезно в развилках"
+autowrap_mode = 2
+
+[node name="title" type="HBoxContainer" parent="content/help/analyze/margin/cards/group/showcase/margin/content"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 10
+
+[node name="left" type="HSeparator" parent="content/help/analyze/margin/cards/group/showcase/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="content/help/analyze/margin/cards/group/showcase/margin/content/title"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Группа"
+
+[node name="right" type="HSeparator" parent="content/help/analyze/margin/cards/group/showcase/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="fight" type="Control" parent="content/help/analyze/margin/cards"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 2
+size_flags_horizontal = 4
+script = ExtResource("8_cm0us")
+
+[node name="collapsed" type="Button" parent="content/help/analyze/margin/cards/fight"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(130, 0)
+theme_override_styles/hover_pressed = ExtResource("9_n63xe")
+theme_override_styles/hover = ExtResource("9_n63xe")
+theme_override_styles/normal = ExtResource("10_nofsu")
+
+[node name="margin" type="MarginContainer" parent="content/help/analyze/margin/cards/fight/collapsed"]
+layout_mode = 2
+offset_right = 260.0
+offset_bottom = 356.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="content" type="VBoxContainer" parent="content/help/analyze/margin/cards/fight/collapsed/margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="image" type="TextureRect" parent="content/help/analyze/margin/cards/fight/collapsed/margin/content"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("23_amim7")
+expand_mode = 1
+
+[node name="title" type="HBoxContainer" parent="content/help/analyze/margin/cards/fight/collapsed/margin/content"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="left" type="HSeparator" parent="content/help/analyze/margin/cards/fight/collapsed/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="content/help/analyze/margin/cards/fight/collapsed/margin/content/title"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Сражение"
+
+[node name="right" type="HSeparator" parent="content/help/analyze/margin/cards/fight/collapsed/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="showcase" type="Button" parent="content/help/analyze/margin/cards/fight"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1e-05, 1)
+pivot_offset = Vector2(131, 0)
+theme_override_styles/hover_pressed = ExtResource("9_n63xe")
+theme_override_styles/hover = ExtResource("9_n63xe")
+theme_override_styles/normal = ExtResource("10_nofsu")
+
+[node name="margin" type="MarginContainer" parent="content/help/analyze/margin/cards/fight/showcase"]
+layout_mode = 2
+offset_right = 260.0
+offset_bottom = 356.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="content" type="VBoxContainer" parent="content/help/analyze/margin/cards/fight/showcase/margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="description" type="Control" parent="content/help/analyze/margin/cards/fight/showcase/margin/content"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="icons" type="MarginContainer" parent="content/help/analyze/margin/cards/fight/showcase/margin/content/description"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -68.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 5
+
+[node name="caption" type="Label" parent="content/help/analyze/margin/cards/fight/showcase/margin/content/description/icons"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme = ExtResource("2_5tx11")
+theme_override_colors/font_color = Color(0.52549, 0.52549, 0.52549, 1)
+theme_override_fonts/font = ExtResource("5_vlu61")
+text = "⚔️🧩😵"
+
+[node name="caption" type="Label" parent="content/help/analyze/margin/cards/fight/showcase/margin/content/description"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 258.0
+grow_horizontal = 2
+size_flags_vertical = 6
+theme = ExtResource("2_5tx11")
+text = "Отбивайтесь: руками, ногами и умениями
+
+Используйте окружен-ие в своих целях. Бегите если не победить
+
+Возвращайте павших товарищей в группу, следите за ЖЗ"
+autowrap_mode = 2
+
+[node name="title" type="HBoxContainer" parent="content/help/analyze/margin/cards/fight/showcase/margin/content"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 10
+
+[node name="left" type="HSeparator" parent="content/help/analyze/margin/cards/fight/showcase/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="content/help/analyze/margin/cards/fight/showcase/margin/content/title"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Сражение"
+
+[node name="right" type="HSeparator" parent="content/help/analyze/margin/cards/fight/showcase/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="foes" type="Control" parent="content/help/analyze/margin/cards"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 2
+size_flags_horizontal = 4
+script = ExtResource("8_cm0us")
+
+[node name="collapsed" type="Button" parent="content/help/analyze/margin/cards/foes"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(130, 0)
+theme_override_styles/hover_pressed = ExtResource("9_n63xe")
+theme_override_styles/hover = ExtResource("9_n63xe")
+theme_override_styles/normal = ExtResource("10_nofsu")
+
+[node name="margin" type="MarginContainer" parent="content/help/analyze/margin/cards/foes/collapsed"]
+layout_mode = 2
+offset_right = 260.0
+offset_bottom = 356.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="content" type="VBoxContainer" parent="content/help/analyze/margin/cards/foes/collapsed/margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="image" type="TextureRect" parent="content/help/analyze/margin/cards/foes/collapsed/margin/content"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("24_sodvt")
+expand_mode = 1
+
+[node name="title" type="HBoxContainer" parent="content/help/analyze/margin/cards/foes/collapsed/margin/content"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="left" type="HSeparator" parent="content/help/analyze/margin/cards/foes/collapsed/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="content/help/analyze/margin/cards/foes/collapsed/margin/content/title"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Противники"
+
+[node name="right" type="HSeparator" parent="content/help/analyze/margin/cards/foes/collapsed/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="showcase" type="Button" parent="content/help/analyze/margin/cards/foes"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1e-05, 1)
+pivot_offset = Vector2(131, 0)
+theme_override_styles/hover_pressed = ExtResource("9_n63xe")
+theme_override_styles/hover = ExtResource("9_n63xe")
+theme_override_styles/normal = ExtResource("10_nofsu")
+
+[node name="margin" type="MarginContainer" parent="content/help/analyze/margin/cards/foes/showcase"]
+layout_mode = 2
+offset_right = 260.0
+offset_bottom = 356.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="content" type="VBoxContainer" parent="content/help/analyze/margin/cards/foes/showcase/margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="description" type="Control" parent="content/help/analyze/margin/cards/foes/showcase/margin/content"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="icons" type="MarginContainer" parent="content/help/analyze/margin/cards/foes/showcase/margin/content/description"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -68.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 5
+
+[node name="caption" type="Label" parent="content/help/analyze/margin/cards/foes/showcase/margin/content/description/icons"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme = ExtResource("2_5tx11")
+theme_override_colors/font_color = Color(0.52549, 0.52549, 0.52549, 1)
+theme_override_fonts/font = ExtResource("5_vlu61")
+text = "🕷✨❔"
+
+[node name="caption" type="Label" parent="content/help/analyze/margin/cards/foes/showcase/margin/content/description"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 258.0
+grow_horizontal = 2
+size_flags_vertical = 6
+theme = ExtResource("2_5tx11")
+text = "Ваши враги норовят расправиться с вами. Не дайте себя поглотить
+
+Вы надежда этого искалеченного мира
+
+Исследуйте слабые сто-роны каждого с по-мощью анализа"
+autowrap_mode = 2
+
+[node name="title" type="HBoxContainer" parent="content/help/analyze/margin/cards/foes/showcase/margin/content"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 10
+
+[node name="left" type="HSeparator" parent="content/help/analyze/margin/cards/foes/showcase/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="content/help/analyze/margin/cards/foes/showcase/margin/content/title"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Противники"
+
+[node name="right" type="HSeparator" parent="content/help/analyze/margin/cards/foes/showcase/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="aura" type="Control" parent="content/help/analyze/margin/cards"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 2
+size_flags_horizontal = 4
+script = ExtResource("8_cm0us")
+
+[node name="collapsed" type="Button" parent="content/help/analyze/margin/cards/aura"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(130, 0)
+theme_override_styles/hover_pressed = ExtResource("9_n63xe")
+theme_override_styles/hover = ExtResource("9_n63xe")
+theme_override_styles/normal = ExtResource("10_nofsu")
+
+[node name="margin" type="MarginContainer" parent="content/help/analyze/margin/cards/aura/collapsed"]
+layout_mode = 2
+offset_right = 260.0
+offset_bottom = 356.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="content" type="VBoxContainer" parent="content/help/analyze/margin/cards/aura/collapsed/margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="image" type="TextureRect" parent="content/help/analyze/margin/cards/aura/collapsed/margin/content"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("25_hy7xr")
+expand_mode = 1
+
+[node name="title" type="HBoxContainer" parent="content/help/analyze/margin/cards/aura/collapsed/margin/content"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="left" type="HSeparator" parent="content/help/analyze/margin/cards/aura/collapsed/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="content/help/analyze/margin/cards/aura/collapsed/margin/content/title"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Аура"
+
+[node name="right" type="HSeparator" parent="content/help/analyze/margin/cards/aura/collapsed/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="showcase" type="Button" parent="content/help/analyze/margin/cards/aura"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1e-05, 1)
+pivot_offset = Vector2(131, 0)
+theme_override_styles/hover_pressed = ExtResource("9_n63xe")
+theme_override_styles/hover = ExtResource("9_n63xe")
+theme_override_styles/normal = ExtResource("10_nofsu")
+
+[node name="margin" type="MarginContainer" parent="content/help/analyze/margin/cards/aura/showcase"]
+layout_mode = 2
+offset_right = 260.0
+offset_bottom = 356.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="content" type="VBoxContainer" parent="content/help/analyze/margin/cards/aura/showcase/margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="description" type="Control" parent="content/help/analyze/margin/cards/aura/showcase/margin/content"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="icons" type="MarginContainer" parent="content/help/analyze/margin/cards/aura/showcase/margin/content/description"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -68.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 5
+
+[node name="caption" type="Label" parent="content/help/analyze/margin/cards/aura/showcase/margin/content/description/icons"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme = ExtResource("2_5tx11")
+theme_override_colors/font_color = Color(0.52549, 0.52549, 0.52549, 1)
+theme_override_fonts/font = ExtResource("5_vlu61")
+text = "❤️‍🔥🔋☄️"
+
+[node name="caption" type="Label" parent="content/help/analyze/margin/cards/aura/showcase/margin/content/description"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 258.0
+grow_horizontal = 2
+size_flags_vertical = 6
+theme = ExtResource("2_5tx11")
+text = "Показатель здоровья отображается в виде оболочки вокруг тела
+
+Действие ауры отоб-ражается в виде тени
+
+Является связующим зве-ном потенциала сущест-ва и реальности "
+autowrap_mode = 2
+
+[node name="title" type="HBoxContainer" parent="content/help/analyze/margin/cards/aura/showcase/margin/content"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 10
+
+[node name="left" type="HSeparator" parent="content/help/analyze/margin/cards/aura/showcase/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="content/help/analyze/margin/cards/aura/showcase/margin/content/title"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Аура"
+
+[node name="right" type="HSeparator" parent="content/help/analyze/margin/cards/aura/showcase/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="priorities" type="Control" parent="content/help/analyze/margin/cards"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 2
+size_flags_horizontal = 4
+script = ExtResource("8_cm0us")
+
+[node name="collapsed" type="Button" parent="content/help/analyze/margin/cards/priorities"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(130, 0)
+theme_override_styles/hover_pressed = ExtResource("9_n63xe")
+theme_override_styles/hover = ExtResource("9_n63xe")
+theme_override_styles/normal = ExtResource("10_nofsu")
+
+[node name="margin" type="MarginContainer" parent="content/help/analyze/margin/cards/priorities/collapsed"]
+layout_mode = 2
+offset_right = 260.0
+offset_bottom = 356.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="content" type="VBoxContainer" parent="content/help/analyze/margin/cards/priorities/collapsed/margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="image" type="TextureRect" parent="content/help/analyze/margin/cards/priorities/collapsed/margin/content"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("26_niibm")
+expand_mode = 1
+
+[node name="title" type="HBoxContainer" parent="content/help/analyze/margin/cards/priorities/collapsed/margin/content"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="left" type="HSeparator" parent="content/help/analyze/margin/cards/priorities/collapsed/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="content/help/analyze/margin/cards/priorities/collapsed/margin/content/title"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Приоритеты"
+
+[node name="right" type="HSeparator" parent="content/help/analyze/margin/cards/priorities/collapsed/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="showcase" type="Button" parent="content/help/analyze/margin/cards/priorities"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1e-05, 1)
+pivot_offset = Vector2(131, 0)
+theme_override_styles/hover_pressed = ExtResource("9_n63xe")
+theme_override_styles/hover = ExtResource("9_n63xe")
+theme_override_styles/normal = ExtResource("10_nofsu")
+
+[node name="margin" type="MarginContainer" parent="content/help/analyze/margin/cards/priorities/showcase"]
+layout_mode = 2
+offset_right = 260.0
+offset_bottom = 356.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="content" type="VBoxContainer" parent="content/help/analyze/margin/cards/priorities/showcase/margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="description" type="Control" parent="content/help/analyze/margin/cards/priorities/showcase/margin/content"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="icons" type="MarginContainer" parent="content/help/analyze/margin/cards/priorities/showcase/margin/content/description"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -68.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 5
+
+[node name="caption" type="Label" parent="content/help/analyze/margin/cards/priorities/showcase/margin/content/description/icons"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme = ExtResource("2_5tx11")
+theme_override_colors/font_color = Color(0.52549, 0.52549, 0.52549, 1)
+theme_override_fonts/font = ExtResource("5_vlu61")
+text = "🤺📊🌟"
+
+[node name="caption" type="Label" parent="content/help/analyze/margin/cards/priorities/showcase/margin/content/description"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 258.0
+grow_horizontal = 2
+size_flags_vertical = 6
+theme = ExtResource("2_5tx11")
+text = "Постепенно вы расте-те в своих приоритетах
+
+Вы можете выбрать любой из трех. Каждый отвечает за что-то свое
+
+После достижения ма-ксимума, определяется новый приоритет"
+autowrap_mode = 2
+
+[node name="title" type="HBoxContainer" parent="content/help/analyze/margin/cards/priorities/showcase/margin/content"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 10
+
+[node name="left" type="HSeparator" parent="content/help/analyze/margin/cards/priorities/showcase/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="content/help/analyze/margin/cards/priorities/showcase/margin/content/title"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Приоритеты"
+
+[node name="right" type="HSeparator" parent="content/help/analyze/margin/cards/priorities/showcase/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="stats" type="Control" parent="content/help/analyze/margin/cards"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 2
+size_flags_horizontal = 4
+script = ExtResource("8_cm0us")
+
+[node name="collapsed" type="Button" parent="content/help/analyze/margin/cards/stats"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(130, 0)
+theme_override_styles/hover_pressed = ExtResource("9_n63xe")
+theme_override_styles/hover = ExtResource("9_n63xe")
+theme_override_styles/normal = ExtResource("10_nofsu")
+
+[node name="margin" type="MarginContainer" parent="content/help/analyze/margin/cards/stats/collapsed"]
+layout_mode = 2
+offset_right = 260.0
+offset_bottom = 356.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="content" type="VBoxContainer" parent="content/help/analyze/margin/cards/stats/collapsed/margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="image" type="TextureRect" parent="content/help/analyze/margin/cards/stats/collapsed/margin/content"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("27_6fhhu")
+expand_mode = 1
+
+[node name="title" type="HBoxContainer" parent="content/help/analyze/margin/cards/stats/collapsed/margin/content"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="left" type="HSeparator" parent="content/help/analyze/margin/cards/stats/collapsed/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="content/help/analyze/margin/cards/stats/collapsed/margin/content/title"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Показатели"
+
+[node name="right" type="HSeparator" parent="content/help/analyze/margin/cards/stats/collapsed/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="showcase" type="Button" parent="content/help/analyze/margin/cards/stats"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1e-05, 1)
+pivot_offset = Vector2(131, 0)
+theme_override_styles/hover_pressed = ExtResource("9_n63xe")
+theme_override_styles/hover = ExtResource("9_n63xe")
+theme_override_styles/normal = ExtResource("10_nofsu")
+
+[node name="margin" type="MarginContainer" parent="content/help/analyze/margin/cards/stats/showcase"]
+layout_mode = 2
+offset_right = 260.0
+offset_bottom = 356.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="content" type="VBoxContainer" parent="content/help/analyze/margin/cards/stats/showcase/margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="description" type="Control" parent="content/help/analyze/margin/cards/stats/showcase/margin/content"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="icons" type="MarginContainer" parent="content/help/analyze/margin/cards/stats/showcase/margin/content/description"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -68.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 5
+
+[node name="caption" type="Label" parent="content/help/analyze/margin/cards/stats/showcase/margin/content/description/icons"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme = ExtResource("2_5tx11")
+theme_override_colors/font_color = Color(0.52549, 0.52549, 0.52549, 1)
+theme_override_fonts/font = ExtResource("5_vlu61")
+text = "🔰🎩📈"
+
+[node name="caption" type="Label" parent="content/help/analyze/margin/cards/stats/showcase/margin/content/description"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 258.0
+grow_horizontal = 2
+size_flags_vertical = 6
+theme = ExtResource("2_5tx11")
+text = "Отвечают за многие аспекты в сражениях
+
+Можно поднять неко-торые из них с помощью экипировки
+
+После нового уровня, вы  получаете прирост согла-сно приоритету"
+autowrap_mode = 2
+
+[node name="title" type="HBoxContainer" parent="content/help/analyze/margin/cards/stats/showcase/margin/content"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 10
+
+[node name="left" type="HSeparator" parent="content/help/analyze/margin/cards/stats/showcase/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="content/help/analyze/margin/cards/stats/showcase/margin/content/title"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Показатели"
+
+[node name="right" type="HSeparator" parent="content/help/analyze/margin/cards/stats/showcase/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="items" type="Control" parent="content/help/analyze/margin/cards"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 2
+size_flags_horizontal = 4
+script = ExtResource("8_cm0us")
+
+[node name="collapsed" type="Button" parent="content/help/analyze/margin/cards/items"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(130, 0)
+theme_override_styles/hover_pressed = ExtResource("9_n63xe")
+theme_override_styles/hover = ExtResource("9_n63xe")
+theme_override_styles/normal = ExtResource("10_nofsu")
+
+[node name="margin" type="MarginContainer" parent="content/help/analyze/margin/cards/items/collapsed"]
+layout_mode = 2
+offset_right = 260.0
+offset_bottom = 356.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="content" type="VBoxContainer" parent="content/help/analyze/margin/cards/items/collapsed/margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="image" type="TextureRect" parent="content/help/analyze/margin/cards/items/collapsed/margin/content"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("28_bflmk")
+expand_mode = 1
+
+[node name="title" type="HBoxContainer" parent="content/help/analyze/margin/cards/items/collapsed/margin/content"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="left" type="HSeparator" parent="content/help/analyze/margin/cards/items/collapsed/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="content/help/analyze/margin/cards/items/collapsed/margin/content/title"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Предметы"
+
+[node name="right" type="HSeparator" parent="content/help/analyze/margin/cards/items/collapsed/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="showcase" type="Button" parent="content/help/analyze/margin/cards/items"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1e-05, 1)
+pivot_offset = Vector2(131, 0)
+theme_override_styles/hover_pressed = ExtResource("9_n63xe")
+theme_override_styles/hover = ExtResource("9_n63xe")
+theme_override_styles/normal = ExtResource("10_nofsu")
+
+[node name="margin" type="MarginContainer" parent="content/help/analyze/margin/cards/items/showcase"]
+layout_mode = 2
+offset_right = 260.0
+offset_bottom = 356.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="content" type="VBoxContainer" parent="content/help/analyze/margin/cards/items/showcase/margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="description" type="Control" parent="content/help/analyze/margin/cards/items/showcase/margin/content"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="icons" type="MarginContainer" parent="content/help/analyze/margin/cards/items/showcase/margin/content/description"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -68.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 5
+
+[node name="caption" type="Label" parent="content/help/analyze/margin/cards/items/showcase/margin/content/description/icons"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme = ExtResource("2_5tx11")
+theme_override_colors/font_color = Color(0.52549, 0.52549, 0.52549, 1)
+theme_override_fonts/font = ExtResource("5_vlu61")
+text = "🥉💧🔩"
+
+[node name="caption" type="Label" parent="content/help/analyze/margin/cards/items/showcase/margin/content/description"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 258.0
+grow_horizontal = 2
+size_flags_vertical = 6
+theme = ExtResource("2_5tx11")
+text = "Новые предметы на-ходятся в сундуках и па-дают с противников
+
+При использовании накладывается эффект
+
+Некоторые из них используются в качестве материала"
+autowrap_mode = 2
+
+[node name="title" type="HBoxContainer" parent="content/help/analyze/margin/cards/items/showcase/margin/content"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 10
+
+[node name="left" type="HSeparator" parent="content/help/analyze/margin/cards/items/showcase/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="content/help/analyze/margin/cards/items/showcase/margin/content/title"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Предметы"
+
+[node name="right" type="HSeparator" parent="content/help/analyze/margin/cards/items/showcase/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="equipment" type="Control" parent="content/help/analyze/margin/cards"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 2
+size_flags_horizontal = 4
+script = ExtResource("8_cm0us")
+
+[node name="collapsed" type="Button" parent="content/help/analyze/margin/cards/equipment"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(130, 0)
+theme_override_styles/hover_pressed = ExtResource("9_n63xe")
+theme_override_styles/hover = ExtResource("9_n63xe")
+theme_override_styles/normal = ExtResource("10_nofsu")
+
+[node name="margin" type="MarginContainer" parent="content/help/analyze/margin/cards/equipment/collapsed"]
+layout_mode = 2
+offset_right = 260.0
+offset_bottom = 356.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="content" type="VBoxContainer" parent="content/help/analyze/margin/cards/equipment/collapsed/margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="image" type="TextureRect" parent="content/help/analyze/margin/cards/equipment/collapsed/margin/content"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("29_4qgyt")
+expand_mode = 1
+
+[node name="title" type="HBoxContainer" parent="content/help/analyze/margin/cards/equipment/collapsed/margin/content"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="left" type="HSeparator" parent="content/help/analyze/margin/cards/equipment/collapsed/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="content/help/analyze/margin/cards/equipment/collapsed/margin/content/title"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Экипировка"
+
+[node name="right" type="HSeparator" parent="content/help/analyze/margin/cards/equipment/collapsed/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="showcase" type="Button" parent="content/help/analyze/margin/cards/equipment"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1e-05, 1)
+pivot_offset = Vector2(131, 0)
+theme_override_styles/hover_pressed = ExtResource("9_n63xe")
+theme_override_styles/hover = ExtResource("9_n63xe")
+theme_override_styles/normal = ExtResource("10_nofsu")
+
+[node name="margin" type="MarginContainer" parent="content/help/analyze/margin/cards/equipment/showcase"]
+layout_mode = 2
+offset_right = 260.0
+offset_bottom = 356.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="content" type="VBoxContainer" parent="content/help/analyze/margin/cards/equipment/showcase/margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="description" type="Control" parent="content/help/analyze/margin/cards/equipment/showcase/margin/content"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="icons" type="MarginContainer" parent="content/help/analyze/margin/cards/equipment/showcase/margin/content/description"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -68.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 5
+
+[node name="caption" type="Label" parent="content/help/analyze/margin/cards/equipment/showcase/margin/content/description/icons"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme = ExtResource("2_5tx11")
+theme_override_colors/font_color = Color(0.52549, 0.52549, 0.52549, 1)
+theme_override_fonts/font = ExtResource("5_vlu61")
+text = "🥈🥋♻️"
+
+[node name="caption" type="Label" parent="content/help/analyze/margin/cards/equipment/showcase/margin/content/description"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 258.0
+grow_horizontal = 2
+size_flags_vertical = 6
+theme = ExtResource("2_5tx11")
+text = "Можно найти в серебрянных сундуках
+
+Надевается через специальное меню
+
+У определенных тип-ов брони есть свой пост-оянный эффект "
+autowrap_mode = 2
+
+[node name="title" type="HBoxContainer" parent="content/help/analyze/margin/cards/equipment/showcase/margin/content"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 10
+
+[node name="left" type="HSeparator" parent="content/help/analyze/margin/cards/equipment/showcase/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="content/help/analyze/margin/cards/equipment/showcase/margin/content/title"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Экипировка"
+
+[node name="right" type="HSeparator" parent="content/help/analyze/margin/cards/equipment/showcase/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="accessory" type="Control" parent="content/help/analyze/margin/cards"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 2
+size_flags_horizontal = 4
+script = ExtResource("8_cm0us")
+
+[node name="collapsed" type="Button" parent="content/help/analyze/margin/cards/accessory"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(130, 0)
+theme_override_styles/hover_pressed = ExtResource("9_n63xe")
+theme_override_styles/hover = ExtResource("9_n63xe")
+theme_override_styles/normal = ExtResource("10_nofsu")
+
+[node name="margin" type="MarginContainer" parent="content/help/analyze/margin/cards/accessory/collapsed"]
+layout_mode = 2
+offset_right = 260.0
+offset_bottom = 356.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="content" type="VBoxContainer" parent="content/help/analyze/margin/cards/accessory/collapsed/margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="image" type="TextureRect" parent="content/help/analyze/margin/cards/accessory/collapsed/margin/content"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("30_w8ht7")
+expand_mode = 1
+
+[node name="title" type="HBoxContainer" parent="content/help/analyze/margin/cards/accessory/collapsed/margin/content"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="left" type="HSeparator" parent="content/help/analyze/margin/cards/accessory/collapsed/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="content/help/analyze/margin/cards/accessory/collapsed/margin/content/title"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Оснастка"
+
+[node name="right" type="HSeparator" parent="content/help/analyze/margin/cards/accessory/collapsed/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="showcase" type="Button" parent="content/help/analyze/margin/cards/accessory"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1e-05, 1)
+pivot_offset = Vector2(131, 0)
+theme_override_styles/hover_pressed = ExtResource("9_n63xe")
+theme_override_styles/hover = ExtResource("9_n63xe")
+theme_override_styles/normal = ExtResource("10_nofsu")
+
+[node name="margin" type="MarginContainer" parent="content/help/analyze/margin/cards/accessory/showcase"]
+layout_mode = 2
+offset_right = 260.0
+offset_bottom = 356.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="content" type="VBoxContainer" parent="content/help/analyze/margin/cards/accessory/showcase/margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="description" type="Control" parent="content/help/analyze/margin/cards/accessory/showcase/margin/content"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="icons" type="MarginContainer" parent="content/help/analyze/margin/cards/accessory/showcase/margin/content/description"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -68.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 5
+
+[node name="caption" type="Label" parent="content/help/analyze/margin/cards/accessory/showcase/margin/content/description/icons"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme = ExtResource("2_5tx11")
+theme_override_colors/font_color = Color(0.52549, 0.52549, 0.52549, 1)
+theme_override_fonts/font = ExtResource("5_vlu61")
+text = "🥇🫙"
+
+[node name="caption" type="Label" parent="content/help/analyze/margin/cards/accessory/showcase/margin/content/description"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 258.0
+grow_horizontal = 2
+size_flags_vertical = 6
+theme = ExtResource("2_5tx11")
+text = "Можно найти в золотых сундуках
+
+Для добавлении оснастки на экипировку нужно нажать по ней и добавить ее в появив-шийся слот"
+autowrap_mode = 2
+
+[node name="title" type="HBoxContainer" parent="content/help/analyze/margin/cards/accessory/showcase/margin/content"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 10
+
+[node name="left" type="HSeparator" parent="content/help/analyze/margin/cards/accessory/showcase/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="content/help/analyze/margin/cards/accessory/showcase/margin/content/title"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Оснастка"
+
+[node name="right" type="HSeparator" parent="content/help/analyze/margin/cards/accessory/showcase/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="books" type="PanelContainer" parent="content"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("6_uhat8")
+
+[node name="books" type="VBoxContainer" parent="content/books"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 5
+
+[node name="caption" type="Label" parent="content/books/books"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Настой на кактусе"
+
+[node name="margin" type="MarginContainer" parent="content/books/books"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="text" type="VBoxContainer" parent="content/books/books/margin"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="chat" type="Label" parent="content/books/books/margin/text"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("2_5tx11")
+theme_override_constants/line_spacing = -2
+theme_override_fonts/font = ExtResource("31_upyky")
+theme_override_font_sizes/font_size = 18
+text = "Истинно говорю вам, что время на приготовление сего отвара будет более чем компенсировано. Для этого нужен простой древний..."
+autowrap_mode = 2
+
+[node name="bestiary" type="PanelContainer" parent="content"]
+visible = false
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_jb804")
+
+[node name="container" type="HFlowContainer" parent="content/bestiary"]
+layout_mode = 2
+theme_override_constants/h_separation = 7
+theme_override_constants/v_separation = 7
+
+[node name="item" type="Button" parent="content/bestiary/container"]
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_styles/hover = ExtResource("32_y6s2t")
+theme_override_styles/normal = ExtResource("33_yw1xc")
+script = ExtResource("34_5fy24")
+
+[node name="margin" parent="content/bestiary/container/item" instance=ExtResource("35_p8cms")]
+layout_mode = 1
+mouse_filter = 2
+
+[node name="margin2" type="MarginContainer" parent="content/bestiary/container/item"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 2
+
+[node name="height" type="Label" parent="content/bestiary/container/item/margin2"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme = ExtResource("2_5tx11")
+theme_override_font_sizes/font_size = 16
+text = "33 cm"
+text_overrun_behavior = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="content/bestiary/container/item/margin2"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 0
+
+[node name="count" type="Label" parent="content/bestiary/container/item/margin2/HBoxContainer"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+theme = ExtResource("2_5tx11")
+theme_override_font_sizes/font_size = 16
+text = "25"
+horizontal_alignment = 2
+text_overrun_behavior = 3
+
+[node name="title" type="HBoxContainer" parent="content/bestiary/container"]
+layout_mode = 2
+theme_override_constants/separation = 7
+
+[node name="number" parent="content/bestiary/container/title" instance=ExtResource("36_pqlxk")]
+layout_mode = 2
+
+[node name="description" type="MarginContainer" parent="content/bestiary/container/title"]
+custom_minimum_size = Vector2(230, 0)
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="short" type="VBoxContainer" parent="content/bestiary/container/title/description"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.4
+theme_override_constants/separation = 2
+
+[node name="caption" type="Label" parent="content/bestiary/container/title/description/short"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 16
+text = "Паук"
+text_overrun_behavior = 3
+
+[node name="effect" type="Label" parent="content/bestiary/container/title/description/short"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme = ExtResource("2_5tx11")
+theme_override_constants/line_spacing = -7
+theme_override_font_sizes/font_size = 18
+text = "Крайне полезный противник для приключений."
+autowrap_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="content/bestiary/container/title/description/short"]
+layout_mode = 2
+
+[node name="effect" type="Label" parent="content/bestiary/container/title/description/short/HBoxContainer2"]
+custom_minimum_size = Vector2(115, 0)
+layout_mode = 2
+size_flags_vertical = 0
+theme = ExtResource("2_5tx11")
+theme_override_constants/line_spacing = -7
+theme_override_font_sizes/font_size = 18
+text = "Слабости:"
+
+[node name="weakness" type="Label" parent="content/bestiary/container/title/description/short/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("5_vlu61")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_toq2e")
+text = "🔥"

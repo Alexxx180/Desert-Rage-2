@@ -1,3 +1,3 @@
 extends PanelContainer
 
-@onready var selected: HFlowContainer = $scroll/margin/stack/selected
+@onready var stack: VBoxContainer = $scroll/margin/stack

@@ -1,7 +1,7 @@
 extends VBoxContainer
 
-@onready var priority: VBoxContainer = $priority
+@onready var recorded: VBoxContainer = $recorded
 @onready var status: VBoxContainer = $status
 
-@onready var items: HFlowContainer = $items/ray
-@onready var stats: VBoxContainer = $stats
+@onready var card: MarginContainer = $card
+@onready var research: VBoxContainer = $research

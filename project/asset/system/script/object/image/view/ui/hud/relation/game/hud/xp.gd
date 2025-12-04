@@ -40,7 +40,7 @@ func _set_navigation(group: Node2D, game: Control) -> void:
 
 func _set_advanced_xp(group: Node2D, game: Control) -> void:
 	var status: HBoxContainer = game.priorities.stats.inventory.ability.topic.fast_access.status
-	var logs: PanelContainer = game.controls.log #var long: VBoxContainer = game.ability.get_node("scroll/margin/stack/ability/score") # var short: VBoxContainer = game.ability.get_node("scroll/margin/stack/menu/space/fast_access/status/experience/xp")
+	var logs: PanelContainer = game.controls.preview.chats.log #var long: VBoxContainer = game.ability.get_node("scroll/margin/stack/ability/score") # var short: VBoxContainer = game.ability.get_node("scroll/margin/stack/menu/space/fast_access/status/experience/xp")
 	for xp in [game.controls.topic.status, status]:
 		_set_multiply(group.xp.level.multiply, xp) # var score: Dictionary = _get_xp_score(status.get_node("experience"))
 		xp.set_xp_score(group.xp)

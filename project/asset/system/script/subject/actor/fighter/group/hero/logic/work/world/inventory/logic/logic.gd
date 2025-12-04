@@ -40,4 +40,4 @@ func remember_inventory(hero: CharacterBody2D, no: int) -> void:
 	var item: Item = effect.items.items[no]
 	print("ITEM NO = ", no)
 	var game: Control = hero.to.hud.display.detector.game
-	game.controls.log.add_item(item.name)
+	game.controls.preview.chats.log.add_item(item.name)
