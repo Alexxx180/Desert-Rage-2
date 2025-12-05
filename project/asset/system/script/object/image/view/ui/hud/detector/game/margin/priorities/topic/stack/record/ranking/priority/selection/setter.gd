@@ -8,7 +8,7 @@ extends Button
 	"unselected": $description/caption/unselected
 }
 
-@export_range(0, 3, 1) var priority_no: int = 0
+@export var priority_no: MakeStats.PRIORITIES = 0
 
 var selected: Control
 var count: Dictionary = {}

@@ -20,6 +20,8 @@ func connect_description(opened: Button, caption: Label) -> void:
 func set_caption(caption: Label) -> void:
 	connect_description(heroes[0].get_node(NodePath(caption.name)), caption)
 
+"""
 func _ready() -> void:
 	for caption in description.get_children():
 		set_caption(caption)
+"""

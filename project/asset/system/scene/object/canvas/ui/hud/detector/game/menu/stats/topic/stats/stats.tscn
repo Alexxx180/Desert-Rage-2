@@ -1,10 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://cd6olkpfan76j"]
+[gd_scene load_steps=13 format=3 uid="uid://cd6olkpfan76j"]
 
 [ext_resource type="Script" uid="uid://dgr6idneegayx" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/topic/stack/stats/equipment/stats.gd" id="1_ux7gg"]
 [ext_resource type="Script" uid="uid://b7ssehgjd1hps" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/topic/stack/stats/title.gd" id="2_483bj"]
 [ext_resource type="FontFile" uid="uid://b37js8y80ak1k" path="res://asset/resource/media/data/font/NotoColorEmoji-Regular.ttf" id="2_fs4c2"]
 [ext_resource type="PackedScene" uid="uid://dsu01cw1gye0x" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/stats/topic/stats/heroes/heroes.tscn" id="3_483bj"]
 [ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://asset/resource/ui/theme/patterns/template/menu/settings/topic/footer.tres" id="4_bt6sh"]
+[ext_resource type="Texture2D" uid="uid://cwbldyii867om" path="res://asset/resource/media/image/actors/npc/dialog/rock.jpg" id="5_dcud6"]
+[ext_resource type="Texture2D" uid="uid://d4jc2lrslbm26" path="res://asset/resource/media/image/actors/npc/dialog/ray.jpg" id="7_oaour"]
+[ext_resource type="FontFile" uid="uid://b2wbdbnkxcqv1" path="res://asset/resource/media/data/font/NotoEmoji-VariableFont_wght.ttf" id="8_gx2of"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1dh38"]
 content_margin_left = 9.0
@@ -17,7 +20,20 @@ bg_color = Color(0.0196078, 0.0196078, 0.0392157, 0)
 content_margin_left = 5.0
 content_margin_top = 7.0
 
-[node name="stats" type="VBoxContainer"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dcud6"]
+content_margin_left = 3.0
+content_margin_top = 3.0
+bg_color = Color(0, 0, 0, 0.890196)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6lio4"]
+content_margin_right = 1.0
+content_margin_bottom = 3.0
+
+[node name="equip" type="VBoxContainer"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 375.0
+grow_horizontal = 2
 script = ExtResource("1_ux7gg")
 
 [node name="title" type="HBoxContainer" parent="."]
@@ -63,53 +79,125 @@ text = "👏"
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="heroes" parent="." instance=ExtResource("3_483bj")]
+[node name="stats" type="HFlowContainer" parent="."]
 layout_mode = 2
 
-[node name="description" type="VBoxContainer" parent="."]
-custom_minimum_size = Vector2(0, 26)
+[node name="value" type="VBoxContainer" parent="stats"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.7
+theme_override_constants/separation = 7
+
+[node name="heroes" parent="stats/value" instance=ExtResource("3_483bj")]
 layout_mode = 2
 
-[node name="power" type="Label" parent="description"]
+[node name="bag" type="HBoxContainer" parent="stats/value"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="ray" type="TextureRect" parent="stats/value/bag"]
+custom_minimum_size = Vector2(45, 45)
+layout_mode = 2
+size_flags_horizontal = 0
+texture = ExtResource("7_oaour")
+expand_mode = 1
+
+[node name="back" type="PanelContainer" parent="stats/value/bag/ray"]
+visible = false
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -20.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_dcud6")
+
+[node name="bag" type="Label" parent="stats/value/bag/ray/back"]
+layout_mode = 2
+size_flags_vertical = 10
+size_flags_stretch_ratio = 2.0
+theme = ExtResource("4_bt6sh")
+theme_override_colors/font_color = Color(0.783523, 0.783523, 0.783523, 1)
+theme_override_fonts/font = ExtResource("8_gx2of")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxEmpty_6lio4")
+text = "🎒"
+
+[node name="rock" type="TextureRect" parent="stats/value/bag"]
+custom_minimum_size = Vector2(45, 45)
+layout_mode = 2
+size_flags_horizontal = 0
+texture = ExtResource("5_dcud6")
+expand_mode = 1
+
+[node name="back" type="PanelContainer" parent="stats/value/bag/rock"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -23.0
+offset_top = -24.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_dcud6")
+
+[node name="bag" type="Label" parent="stats/value/bag/rock/back"]
+layout_mode = 2
+size_flags_vertical = 10
+size_flags_stretch_ratio = 2.0
+theme = ExtResource("4_bt6sh")
+theme_override_colors/font_color = Color(0.783523, 0.783523, 0.783523, 1)
+theme_override_fonts/font = ExtResource("8_gx2of")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxEmpty_6lio4")
+text = "🎒"
+
+[node name="description" type="VBoxContainer" parent="stats"]
+custom_minimum_size = Vector2(100, 30)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.3
+
+[node name="power" type="Label" parent="stats/description"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+theme = ExtResource("4_bt6sh")
+text = "Урон от физических атак и способностей не-элементов. Дополняет Жизненный Запас. Влияет на урон от оружия ближнего боя, метательные снаряды, пушек ручного наведения."
+autowrap_mode = 2
+
+[node name="influence" type="Label" parent="stats/description"]
 visible = false
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
 theme = ExtResource("4_bt6sh")
-text = "Урон от физических атак. Дополняет Жизненный Запас"
-horizontal_alignment = 2
-text_overrun_behavior = 3
+text = "Сила умений и способностей элементов. Дополняет Очки Умений. Влияет на огнестрельное, дальнебойное, метательное оружие, лазерное оружие."
+autowrap_mode = 2
 
-[node name="influence" type="Label" parent="description"]
+[node name="vitality" type="Label" parent="stats/description"]
 visible = false
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
 theme = ExtResource("4_bt6sh")
-text = "Сила умений, задействующих ауру. Дополняет Очки Умений"
-horizontal_alignment = 2
-text_overrun_behavior = 3
+text = "Защита от физического и комбинированного урона. Определяет Жизненный Запас. Влияет на запас выносливости персонажа."
+autowrap_mode = 2
 
-[node name="vitality" type="Label" parent="description"]
+[node name="reaction" type="Label" parent="stats/description"]
 visible = false
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
 theme = ExtResource("4_bt6sh")
-text = "Защита от физического урона. Определяет Жизненный Запас"
-horizontal_alignment = 2
-text_overrun_behavior = 3
-
-[node name="reaction" type="Label" parent="description"]
-visible = false
-custom_minimum_size = Vector2(50, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 2.0
-theme = ExtResource("4_bt6sh")
-text = "Пропускает урон от ауры. Определяет Очки Умений"
-horizontal_alignment = 2
-text_overrun_behavior = 3
+text = "Пропускает урон от ауры. Определяет Очки Умений. Влияет на урон от некоторого дальнебойного оружия."
+autowrap_mode = 2

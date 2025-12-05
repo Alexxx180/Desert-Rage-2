@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bmexdqeihycjg"]
+[gd_scene load_steps=16 format=3 uid="uid://bmexdqeihycjg"]
 
 [ext_resource type="Script" uid="uid://c3nt5k6qfjf31" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/topic/stack/record/record.gd" id="1_cdi27"]
 [ext_resource type="PackedScene" uid="uid://duuvdsc4g6fem" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/priorities/topic/record/priority/priority.tscn" id="2_vdfvb"]
@@ -6,7 +6,21 @@
 [ext_resource type="Script" uid="uid://cvelhlqm4dmo2" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/topic/stack/record/ranking/priority/priority.gd" id="3_e1oyj"]
 [ext_resource type="FontFile" uid="uid://tledodlx6okb" path="res://asset/resource/media/data/font/LTSuperiorMono-Semibold.otf" id="3_y5x8i"]
 [ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://asset/resource/ui/theme/patterns/template/menu/settings/topic/footer.tres" id="4_e1oyj"]
+[ext_resource type="Script" uid="uid://cv23lawumqo7r" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/topic/stack/record/ranking/priority/growth/growth.gd" id="6_8r2ak"]
 [ext_resource type="PackedScene" uid="uid://ct4vkw2q1l83e" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/priorities/topic/record/growth/addon.tscn" id="6_vdfvb"]
+[ext_resource type="Texture2D" uid="uid://cwbldyii867om" path="res://asset/resource/media/image/actors/npc/dialog/rock.jpg" id="7_2tbnu"]
+[ext_resource type="Texture2D" uid="uid://d4jc2lrslbm26" path="res://asset/resource/media/image/actors/npc/dialog/ray.jpg" id="9_5h7uh"]
+[ext_resource type="FontFile" uid="uid://b37js8y80ak1k" path="res://asset/resource/media/data/font/NotoColorEmoji-Regular.ttf" id="10_1q5d6"]
+[ext_resource type="Script" uid="uid://xbwbq4ppbwns" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/topic/stack/record/ranking/priority/growth/description.gd" id="12_1q5d6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2tbnu"]
+content_margin_left = 5.0
+content_margin_top = 2.0
+bg_color = Color(0, 0, 0, 0.890196)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1q5d6"]
+content_margin_left = 0.0
+content_margin_top = 5.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vdfvb"]
 content_margin_right = 7.0
@@ -19,34 +33,10 @@ grow_horizontal = 2
 theme_override_constants/separation = 4
 script = ExtResource("1_cdi27")
 
-[node name="title" type="HBoxContainer" parent="."]
-layout_mode = 2
-
-[node name="caption" type="Label" parent="title"]
+[node name="title" type="Label" parent="."]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.737255, 0.737255, 0.737255, 1)
 text = "Досье"
-
-[node name="space" type="Control" parent="title"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="status" type="VBoxContainer" parent="title"]
-layout_mode = 2
-size_flags_horizontal = 8
-theme_override_constants/separation = -3
-
-[node name="letter" type="Label" parent="title/status"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.737255, 0.737255, 0.737255, 1)
-theme_override_font_sizes/font_size = 26
-text = "А"
-horizontal_alignment = 1
-
-[node name="underline" type="ColorRect" parent="title/status"]
-custom_minimum_size = Vector2(25, 2)
-layout_mode = 2
-color = Color(0.258824, 0.258824, 0.258824, 1)
 
 [node name="ranking" type="HBoxContainer" parent="."]
 layout_mode = 2
@@ -58,49 +48,199 @@ size_flags_horizontal = 3
 script = ExtResource("3_e1oyj")
 
 [node name="selection" parent="ranking/priority" instance=ExtResource("2_vdfvb")]
+custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
+size_flags_stretch_ratio = 0.7
 
-[node name="growth" type="VBoxContainer" parent="ranking/priority"]
-layout_mode = 2
-
-[node name="passive" type="HFlowContainer" parent="ranking/priority/growth"]
+[node name="growth" type="HBoxContainer" parent="ranking/priority"]
 custom_minimum_size = Vector2(130, 0)
 layout_mode = 2
-theme_override_constants/h_separation = 20
+theme_override_constants/separation = 10
+script = ExtResource("6_8r2ak")
 
-[node name="rock" type="Label" parent="ranking/priority/growth/passive"]
+[node name="rock" type="TextureRect" parent="ranking/priority/growth"]
+custom_minimum_size = Vector2(45, 45)
+layout_mode = 2
+texture = ExtResource("7_2tbnu")
+expand_mode = 1
+
+[node name="back" type="PanelContainer" parent="ranking/priority/growth/rock"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -20.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_2tbnu")
+
+[node name="stats" parent="ranking/priority/growth/rock/back" instance=ExtResource("6_vdfvb")]
 visible = false
-custom_minimum_size = Vector2(35, 0)
 layout_mode = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 8
+
+[node name="priority" type="VBoxContainer" parent="ranking/priority/growth/rock/back"]
+layout_mode = 2
+
+[node name="pursuit" type="Label" parent="ranking/priority/growth/rock/back/priority"]
+layout_mode = 2
+size_flags_vertical = 10
+size_flags_stretch_ratio = 2.0
 theme = ExtResource("4_e1oyj")
-text = "Рок"
-horizontal_alignment = 2
+theme_override_colors/font_color = Color(0.783523, 0.783523, 0.783523, 1)
+theme_override_fonts/font = ExtResource("10_1q5d6")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxEmpty_1q5d6")
+text = "📈"
 
-[node name="growth" type="Label" parent="ranking/priority/growth/passive"]
+[node name="self_control" type="Label" parent="ranking/priority/growth/rock/back/priority"]
+visible = false
 layout_mode = 2
-theme_override_colors/font_color = Color(0.737255, 0.737255, 0.737255, 1)
-text = "Прирост"
+size_flags_vertical = 10
+size_flags_stretch_ratio = 2.0
+theme = ExtResource("4_e1oyj")
+theme_override_colors/font_color = Color(0.783523, 0.783523, 0.783523, 1)
+theme_override_fonts/font = ExtResource("10_1q5d6")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxEmpty_1q5d6")
+text = "⚖️"
 
-[node name="add" type="HBoxContainer" parent="ranking/priority/growth/passive"]
+[node name="tenacity" type="Label" parent="ranking/priority/growth/rock/back/priority"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 10
+size_flags_stretch_ratio = 2.0
+theme = ExtResource("4_e1oyj")
+theme_override_colors/font_color = Color(0.783523, 0.783523, 0.783523, 1)
+theme_override_fonts/font = ExtResource("10_1q5d6")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxEmpty_1q5d6")
+text = "🪨"
+
+[node name="ray" type="TextureRect" parent="ranking/priority/growth"]
+custom_minimum_size = Vector2(45, 45)
+layout_mode = 2
+texture = ExtResource("9_5h7uh")
+expand_mode = 1
+
+[node name="back" type="PanelContainer" parent="ranking/priority/growth/ray"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -20.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_2tbnu")
+
+[node name="stats" parent="ranking/priority/growth/ray/back" instance=ExtResource("6_vdfvb")]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="priority" type="VBoxContainer" parent="ranking/priority/growth/ray/back"]
+layout_mode = 2
+
+[node name="pursuit" type="Label" parent="ranking/priority/growth/ray/back/priority"]
+layout_mode = 2
+size_flags_vertical = 10
+size_flags_stretch_ratio = 2.0
+theme = ExtResource("4_e1oyj")
+theme_override_colors/font_color = Color(0.783523, 0.783523, 0.783523, 1)
+theme_override_fonts/font = ExtResource("10_1q5d6")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxEmpty_1q5d6")
+text = "📈"
+
+[node name="self_control" type="Label" parent="ranking/priority/growth/ray/back/priority"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 10
+size_flags_stretch_ratio = 2.0
+theme = ExtResource("4_e1oyj")
+theme_override_colors/font_color = Color(0.783523, 0.783523, 0.783523, 1)
+theme_override_fonts/font = ExtResource("10_1q5d6")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxEmpty_1q5d6")
+text = "⚖️"
+
+[node name="tenacity" type="Label" parent="ranking/priority/growth/ray/back/priority"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 10
+size_flags_stretch_ratio = 2.0
+theme = ExtResource("4_e1oyj")
+theme_override_colors/font_color = Color(0.783523, 0.783523, 0.783523, 1)
+theme_override_fonts/font = ExtResource("10_1q5d6")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxEmpty_1q5d6")
+text = "🪨"
+
+[node name="space" type="Control" parent="ranking/priority/growth"]
+custom_minimum_size = Vector2(13, 0)
+layout_mode = 2
+
+[node name="ranking" type="HBoxContainer" parent="ranking/priority/growth"]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="ray" parent="ranking/priority/growth/passive/add" instance=ExtResource("6_vdfvb")]
+[node name="rank" type="MarginContainer" parent="ranking/priority/growth/ranking"]
 layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = -4
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
 
-[node name="rock" parent="ranking/priority/growth/passive/add" instance=ExtResource("6_vdfvb")]
-visible = false
+[node name="status" type="VBoxContainer" parent="ranking/priority/growth/ranking/rank"]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_constants/separation = -3
 
-[node name="space" type="Control" parent="ranking/priority/growth/passive"]
+[node name="letter" type="Label" parent="ranking/priority/growth/ranking/rank/status"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.737255, 0.737255, 0.737255, 1)
+theme_override_font_sizes/font_size = 32
+text = "А"
+horizontal_alignment = 1
+
+[node name="underline" type="ColorRect" parent="ranking/priority/growth/ranking/rank/status"]
+custom_minimum_size = Vector2(25, 2)
+layout_mode = 2
+color = Color(0.258824, 0.258824, 0.258824, 1)
+
+[node name="title" type="VBoxContainer" parent="ranking/priority/growth/ranking"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 3
+
+[node name="caption" type="Label" parent="ranking/priority/growth/ranking/title"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.235294, 0.235294, 0.235294, 1)
+text = "Ранг"
+
+[node name="description" type="Label" parent="ranking/priority/growth/ranking/title"]
+custom_minimum_size = Vector2(19, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0.258824, 0.258824, 0.258824, 1)
+theme_override_constants/line_spacing = -2
+theme_override_fonts/font = ExtResource("3_y5x8i")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_vdfvb")
+text = "Атлант"
+horizontal_alignment = 2
+
+[node name="description" type="VBoxContainer" parent="ranking"]
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.3
+script = ExtResource("12_1q5d6")
 
-[node name="description" type="HBoxContainer" parent="ranking/priority/growth"]
-layout_mode = 2
-
-[node name="pursuit" type="Label" parent="ranking/priority/growth/description"]
+[node name="pursuit" type="Label" parent="ranking/description"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -108,7 +248,7 @@ theme = ExtResource("4_e1oyj")
 text = "Направленность на результат. Определяет количество слотов комбо. Влияет на получение новых возможностей и способностей."
 autowrap_mode = 2
 
-[node name="self_control" type="Label" parent="ranking/priority/growth/description"]
+[node name="self_control" type="Label" parent="ranking/description"]
 visible = false
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
@@ -117,7 +257,7 @@ theme = ExtResource("4_e1oyj")
 text = "Контроль мыслей и побуждений. Определяет эффективность приемов. Влияет на получение новых способностей."
 autowrap_mode = 2
 
-[node name="tenacity" type="Label" parent="ranking/priority/growth/description"]
+[node name="tenacity" type="Label" parent="ranking/description"]
 visible = false
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
@@ -125,16 +265,3 @@ size_flags_horizontal = 3
 theme = ExtResource("4_e1oyj")
 text = "Преодоление обстоятельств. Определяет стойкость и облегчает взаимодействие с предметами окружения. Влияет на получение новых возможностей."
 autowrap_mode = 2
-
-[node name="rank" type="Label" parent="ranking"]
-custom_minimum_size = Vector2(19, 30)
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 0
-theme_override_colors/font_color = Color(0.258824, 0.258824, 0.258824, 1)
-theme_override_constants/line_spacing = -2
-theme_override_fonts/font = ExtResource("3_y5x8i")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_vdfvb")
-text = "АТЛАНТ"
-horizontal_alignment = 2
-autowrap_mode = 1

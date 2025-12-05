@@ -3,6 +3,7 @@ extends RefCounted
 class_name MakeStats
 
 enum STAT { POWER = 0, INFLUENCE = 1, VITALITY = 2, REACTION = 3, HP = 4, AP = 5, MAX = 6 }
+enum PRIORITIES { PURSUIT = 0, SELF_CONTROL = 1, TENACITY = 2 }
 
 const PRIORITY: Array[Array] = [[3, 2, 1, 1], [1, 3, 1, 2], [1, 1, 3, 2]]
 

@@ -7,7 +7,7 @@ extends HSplitContainer
 
 func _get_points(hero: String, caption: String) -> Array[Button]:
 	return [
-		stats.inventory.topic.selected.status.get(hero).get(caption),
+		stats.inventory.topic.stack.status.get(hero).get(caption),
 		topic.stack.status.get(hero).get(caption)
 	]
 

@@ -1,11 +1,10 @@
-[gd_scene load_steps=17 format=3 uid="uid://dsu01cw1gye0x"]
+[gd_scene load_steps=14 format=3 uid="uid://dsu01cw1gye0x"]
 
 [ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://asset/resource/ui/theme/patterns/template/menu/settings/topic/footer.tres" id="1_d8eso"]
 [ext_resource type="Script" uid="uid://dyygb0pfdburj" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/topic/stack/stats/equipment/hero.gd" id="2_aj864"]
 [ext_resource type="StyleBox" uid="uid://cht8hrroa75bg" path="res://asset/resource/ui/theme/style/tag-button.tres" id="3_7i1pj"]
 [ext_resource type="Script" uid="uid://c5k8wgipwd250" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/topic/stack/stats/equipment/stat.gd" id="4_3pmqs"]
 [ext_resource type="FontFile" uid="uid://b37js8y80ak1k" path="res://asset/resource/media/data/font/NotoColorEmoji-Regular.ttf" id="5_ygvwg"]
-[ext_resource type="FontFile" uid="uid://b2wbdbnkxcqv1" path="res://asset/resource/media/data/font/NotoEmoji-VariableFont_wght.ttf" id="6_bc71f"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r7fgi"]
 
@@ -28,30 +27,34 @@ bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d1l3l"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t5qjx"]
-content_margin_left = 25.0
-content_margin_right = 5.0
-bg_color = Color(0.0588235, 0.0588235, 0.0588235, 1)
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bieb6"]
-content_margin_left = 3.0
-content_margin_top = 2.0
-
 [node name="heroes" type="HBoxContainer"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 144.0
+grow_horizontal = 2
+theme_override_constants/separation = 5
 
-[node name="rock" type="VBoxContainer" parent="."]
+[node name="rock" type="MarginContainer" parent="."]
 visible = false
 layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
 
-[node name="power" type="VBoxContainer" parent="rock"]
+[node name="rock" type="VBoxContainer" parent="rock"]
 layout_mode = 2
-theme_override_constants/separation = 6
+theme_override_constants/separation = 10
 
-[node name="description" type="HBoxContainer" parent="rock/power"]
+[node name="power" type="VBoxContainer" parent="rock/rock"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="description" type="HBoxContainer" parent="rock/rock/power"]
 layout_mode = 2
 
-[node name="number" type="Label" parent="rock/power/description"]
-custom_minimum_size = Vector2(40, 0)
+[node name="number" type="Label" parent="rock/rock/power/description"]
+custom_minimum_size = Vector2(45, 0)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_stretch_ratio = 0.5
@@ -59,14 +62,14 @@ theme = ExtResource("1_d8eso")
 text = "255"
 horizontal_alignment = 2
 
-[node name="margin" type="MarginContainer" parent="rock/power"]
+[node name="margin" type="MarginContainer" parent="rock/rock/power"]
 layout_mode = 2
-theme_override_constants/margin_left = 10
+theme_override_constants/margin_left = 0
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 
-[node name="equipment" type="ProgressBar" parent="rock/power/margin"]
+[node name="equipment" type="ProgressBar" parent="rock/rock/power/margin"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -78,7 +81,7 @@ step = 1.0
 value = 70.0
 show_percentage = false
 
-[node name="base" type="ProgressBar" parent="rock/power/margin"]
+[node name="base" type="ProgressBar" parent="rock/rock/power/margin"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -90,15 +93,15 @@ step = 1.0
 value = 50.0
 show_percentage = false
 
-[node name="influence" type="VBoxContainer" parent="rock"]
+[node name="influence" type="VBoxContainer" parent="rock/rock"]
 layout_mode = 2
-theme_override_constants/separation = 6
+theme_override_constants/separation = 0
 
-[node name="description" type="HBoxContainer" parent="rock/influence"]
+[node name="description" type="HBoxContainer" parent="rock/rock/influence"]
 layout_mode = 2
 
-[node name="number" type="Label" parent="rock/influence/description"]
-custom_minimum_size = Vector2(40, 0)
+[node name="number" type="Label" parent="rock/rock/influence/description"]
+custom_minimum_size = Vector2(45, 0)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_stretch_ratio = 0.5
@@ -106,14 +109,14 @@ theme = ExtResource("1_d8eso")
 text = "255"
 horizontal_alignment = 2
 
-[node name="margin" type="MarginContainer" parent="rock/influence"]
+[node name="margin" type="MarginContainer" parent="rock/rock/influence"]
 layout_mode = 2
-theme_override_constants/margin_left = 10
+theme_override_constants/margin_left = 0
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 
-[node name="equipment" type="ProgressBar" parent="rock/influence/margin"]
+[node name="equipment" type="ProgressBar" parent="rock/rock/influence/margin"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -125,7 +128,7 @@ step = 1.0
 value = 70.0
 show_percentage = false
 
-[node name="base" type="ProgressBar" parent="rock/influence/margin"]
+[node name="base" type="ProgressBar" parent="rock/rock/influence/margin"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -137,15 +140,15 @@ step = 1.0
 value = 50.0
 show_percentage = false
 
-[node name="vitality" type="VBoxContainer" parent="rock"]
+[node name="vitality" type="VBoxContainer" parent="rock/rock"]
 layout_mode = 2
-theme_override_constants/separation = 6
+theme_override_constants/separation = 0
 
-[node name="description" type="HBoxContainer" parent="rock/vitality"]
+[node name="description" type="HBoxContainer" parent="rock/rock/vitality"]
 layout_mode = 2
 
-[node name="number" type="Label" parent="rock/vitality/description"]
-custom_minimum_size = Vector2(40, 0)
+[node name="number" type="Label" parent="rock/rock/vitality/description"]
+custom_minimum_size = Vector2(45, 0)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_stretch_ratio = 0.5
@@ -153,14 +156,14 @@ theme = ExtResource("1_d8eso")
 text = "255"
 horizontal_alignment = 2
 
-[node name="margin" type="MarginContainer" parent="rock/vitality"]
+[node name="margin" type="MarginContainer" parent="rock/rock/vitality"]
 layout_mode = 2
-theme_override_constants/margin_left = 10
+theme_override_constants/margin_left = 0
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 
-[node name="equipment" type="ProgressBar" parent="rock/vitality/margin"]
+[node name="equipment" type="ProgressBar" parent="rock/rock/vitality/margin"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -172,7 +175,7 @@ step = 1.0
 value = 70.0
 show_percentage = false
 
-[node name="base" type="ProgressBar" parent="rock/vitality/margin"]
+[node name="base" type="ProgressBar" parent="rock/rock/vitality/margin"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -184,15 +187,15 @@ step = 1.0
 value = 50.0
 show_percentage = false
 
-[node name="reaction" type="VBoxContainer" parent="rock"]
+[node name="reaction" type="VBoxContainer" parent="rock/rock"]
 layout_mode = 2
-theme_override_constants/separation = 6
+theme_override_constants/separation = 0
 
-[node name="description" type="HBoxContainer" parent="rock/reaction"]
+[node name="description" type="HBoxContainer" parent="rock/rock/reaction"]
 layout_mode = 2
 
-[node name="number" type="Label" parent="rock/reaction/description"]
-custom_minimum_size = Vector2(40, 0)
+[node name="number" type="Label" parent="rock/rock/reaction/description"]
+custom_minimum_size = Vector2(45, 0)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_stretch_ratio = 0.5
@@ -200,14 +203,14 @@ theme = ExtResource("1_d8eso")
 text = "255"
 horizontal_alignment = 2
 
-[node name="margin" type="MarginContainer" parent="rock/reaction"]
+[node name="margin" type="MarginContainer" parent="rock/rock/reaction"]
 layout_mode = 2
-theme_override_constants/margin_left = 10
+theme_override_constants/margin_left = 0
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 
-[node name="equipment" type="ProgressBar" parent="rock/reaction/margin"]
+[node name="equipment" type="ProgressBar" parent="rock/rock/reaction/margin"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -219,7 +222,7 @@ step = 1.0
 value = 70.0
 show_percentage = false
 
-[node name="base" type="ProgressBar" parent="rock/reaction/margin"]
+[node name="base" type="ProgressBar" parent="rock/rock/reaction/margin"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -230,14 +233,6 @@ max_value = 90.0
 step = 1.0
 value = 50.0
 show_percentage = false
-
-[node name="caption" type="Label" parent="rock"]
-custom_minimum_size = Vector2(35, 0)
-layout_mode = 2
-size_flags_horizontal = 0
-theme = ExtResource("1_d8eso")
-text = "Рок"
-horizontal_alignment = 2
 
 [node name="ray" type="VBoxContainer" parent="."]
 layout_mode = 2
@@ -264,7 +259,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="number" type="Label" parent="ray/power/description"]
-custom_minimum_size = Vector2(40, 0)
+custom_minimum_size = Vector2(45, 0)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_stretch_ratio = 0.5
@@ -351,7 +346,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="number" type="Label" parent="ray/influence/description"]
-custom_minimum_size = Vector2(40, 0)
+custom_minimum_size = Vector2(45, 0)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_stretch_ratio = 0.5
@@ -438,7 +433,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="number" type="Label" parent="ray/vitality/description"]
-custom_minimum_size = Vector2(40, 0)
+custom_minimum_size = Vector2(45, 0)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_stretch_ratio = 0.5
@@ -525,7 +520,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="number" type="Label" parent="ray/reaction/description"]
-custom_minimum_size = Vector2(40, 0)
+custom_minimum_size = Vector2(45, 0)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_stretch_ratio = 0.5
@@ -591,27 +586,3 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_bieb6")
 max_value = 75.0
 step = 1.0
 show_percentage = false
-
-[node name="bag" type="VBoxContainer" parent="."]
-layout_mode = 2
-
-[node name="rock" type="Button" parent="bag"]
-custom_minimum_size = Vector2(0, 30)
-layout_mode = 2
-theme_override_font_sizes/font_size = 14
-theme_override_styles/normal = SubResource("StyleBoxFlat_t5qjx")
-text = "Рок"
-alignment = 2
-
-[node name="icon" type="Label" parent="bag/rock"]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_top = -11.5
-offset_right = 40.0
-offset_bottom = 11.5
-grow_vertical = 2
-theme_override_fonts/font = ExtResource("6_bc71f")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_bieb6")
-text = "🎒"
