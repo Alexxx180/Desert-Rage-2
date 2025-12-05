@@ -244,86 +244,110 @@ mouse_filter = 2
 split_offset = 2000
 script = ExtResource("12_tveuy")
 
-[node name="controls" type="VBoxContainer" parent="priorities/stats/inventory/ability"]
+[node name="vertical" type="VBoxContainer" parent="priorities/stats/inventory/ability"]
 layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 0
+
+[node name="top" type="Control" parent="priorities/stats/inventory/ability/vertical"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.02
+
+[node name="horizontal" type="HBoxContainer" parent="priorities/stats/inventory/ability/vertical"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.96
+theme_override_constants/separation = 0
+
+[node name="left" type="Control" parent="priorities/stats/inventory/ability/vertical/horizontal"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.02
+
+[node name="controls" type="VBoxContainer" parent="priorities/stats/inventory/ability/vertical/horizontal"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.96
 mouse_filter = 2
 script = ExtResource("11_ok865")
 
-[node name="status" type="VBoxContainer" parent="priorities/stats/inventory/ability/controls"]
+[node name="status" type="VBoxContainer" parent="priorities/stats/inventory/ability/vertical/horizontal/controls"]
 layout_mode = 2
 theme_override_constants/separation = 0
 script = ExtResource("15_upyjg")
 
-[node name="sticker" type="MarginContainer" parent="priorities/stats/inventory/ability/controls/status"]
+[node name="sticker" type="MarginContainer" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/status"]
 layout_mode = 2
 theme_override_constants/margin_left = 0
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
 script = ExtResource("16_tveuy")
 
-[node name="hp" parent="priorities/stats/inventory/ability/controls/status/sticker" instance=ExtResource("16_jnh4p")]
+[node name="hp" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/status/sticker" instance=ExtResource("16_jnh4p")]
 layout_mode = 2
 
-[node name="markers" type="HFlowContainer" parent="priorities/stats/inventory/ability/controls/status"]
+[node name="markers" type="HFlowContainer" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/status"]
 layout_mode = 2
 script = ExtResource("8_2uuwx")
 
-[node name="left" type="Control" parent="priorities/stats/inventory/ability/controls/status/markers"]
+[node name="left" type="Control" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/status/markers"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="item_1" parent="priorities/stats/inventory/ability/controls/status/markers" instance=ExtResource("12_upyjg")]
+[node name="item_1" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/status/markers" instance=ExtResource("12_upyjg")]
 layout_mode = 2
 
-[node name="item_2" parent="priorities/stats/inventory/ability/controls/status/markers" instance=ExtResource("12_upyjg")]
+[node name="item_2" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/status/markers" instance=ExtResource("12_upyjg")]
 layout_mode = 2
 
-[node name="item_3" parent="priorities/stats/inventory/ability/controls/status/markers" instance=ExtResource("12_upyjg")]
+[node name="item_3" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/status/markers" instance=ExtResource("12_upyjg")]
 layout_mode = 2
 
-[node name="item_4" parent="priorities/stats/inventory/ability/controls/status/markers" instance=ExtResource("12_upyjg")]
+[node name="item_4" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/status/markers" instance=ExtResource("12_upyjg")]
 layout_mode = 2
 
-[node name="item_5" parent="priorities/stats/inventory/ability/controls/status/markers" instance=ExtResource("12_upyjg")]
+[node name="item_5" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/status/markers" instance=ExtResource("12_upyjg")]
 layout_mode = 2
 
-[node name="item_6" parent="priorities/stats/inventory/ability/controls/status/markers" instance=ExtResource("12_upyjg")]
+[node name="item_6" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/status/markers" instance=ExtResource("12_upyjg")]
 layout_mode = 2
 
-[node name="item_7" parent="priorities/stats/inventory/ability/controls/status/markers" instance=ExtResource("12_upyjg")]
+[node name="item_7" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/status/markers" instance=ExtResource("12_upyjg")]
 layout_mode = 2
 
-[node name="item_8" parent="priorities/stats/inventory/ability/controls/status/markers" instance=ExtResource("12_upyjg")]
+[node name="item_8" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/status/markers" instance=ExtResource("12_upyjg")]
 layout_mode = 2
 
-[node name="item_9" parent="priorities/stats/inventory/ability/controls/status/markers" instance=ExtResource("12_upyjg")]
+[node name="item_9" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/status/markers" instance=ExtResource("12_upyjg")]
 layout_mode = 2
 
-[node name="item_0" parent="priorities/stats/inventory/ability/controls/status/markers" instance=ExtResource("12_upyjg")]
+[node name="item_0" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/status/markers" instance=ExtResource("12_upyjg")]
 layout_mode = 2
 
-[node name="right" type="Control" parent="priorities/stats/inventory/ability/controls/status/markers"]
+[node name="right" type="Control" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/status/markers"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="hints" type="VBoxContainer" parent="priorities/stats/inventory/ability/controls"]
+[node name="hints" type="VBoxContainer" parent="priorities/stats/inventory/ability/vertical/horizontal/controls"]
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
 
-[node name="top" type="Control" parent="priorities/stats/inventory/ability/controls/hints"]
+[node name="top" type="Control" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.15
 
-[node name="space" type="Control" parent="priorities/stats/inventory/ability/controls/hints"]
+[node name="space" type="Control" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.7
 mouse_filter = 2
 
-[node name="scroll" type="ScrollContainer" parent="priorities/stats/inventory/ability/controls/hints/space"]
+[node name="scroll" type="ScrollContainer" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -335,18 +359,18 @@ size_flags_vertical = 3
 mouse_filter = 2
 follow_focus = true
 
-[node name="stack" type="VBoxContainer" parent="priorities/stats/inventory/ability/controls/hints/space/scroll"]
+[node name="stack" type="VBoxContainer" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/scroll"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 10
 
-[node name="skills" parent="priorities/stats/inventory/ability/controls/hints/space/scroll/stack" instance=ExtResource("9_ehml2")]
+[node name="skills" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/scroll/stack" instance=ExtResource("9_ehml2")]
 visible = false
 layout_mode = 2
 size_flags_vertical = 8
 mouse_filter = 2
 
-[node name="preview" type="HBoxContainer" parent="priorities/stats/inventory/ability/controls/hints/space"]
+[node name="preview" type="HBoxContainer" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -355,22 +379,22 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("27_6knvb")
 
-[node name="chats" type="HBoxContainer" parent="priorities/stats/inventory/ability/controls/hints/space/preview"]
+[node name="chats" type="HBoxContainer" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.25
 script = ExtResource("13_uhig6")
 
-[node name="log" type="HBoxContainer" parent="priorities/stats/inventory/ability/controls/hints/space/preview/chats"]
+[node name="log" type="HBoxContainer" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/chats"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="stamina" type="Control" parent="priorities/stats/inventory/ability/controls/hints/space/preview/chats/log"]
+[node name="stamina" type="Control" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/chats/log"]
 custom_minimum_size = Vector2(1, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="value" type="Control" parent="priorities/stats/inventory/ability/controls/hints/space/preview/chats/log/stamina"]
+[node name="value" type="Control" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/chats/log/stamina"]
 visible = false
 custom_minimum_size = Vector2(1, 2)
 layout_mode = 2
@@ -378,7 +402,7 @@ anchors_preset = 0
 offset_right = 1.0
 offset_bottom = 337.0
 
-[node name="act" type="ColorRect" parent="priorities/stats/inventory/ability/controls/hints/space/preview/chats/log/stamina/value"]
+[node name="act" type="ColorRect" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/chats/log/stamina/value"]
 custom_minimum_size = Vector2(1, 6)
 layout_mode = 1
 anchors_preset = 7
@@ -393,7 +417,7 @@ grow_horizontal = 2
 grow_vertical = 0
 color = Color(0.45098, 0.533333, 1, 1)
 
-[node name="walk" type="ColorRect" parent="priorities/stats/inventory/ability/controls/hints/space/preview/chats/log/stamina/value"]
+[node name="walk" type="ColorRect" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/chats/log/stamina/value"]
 custom_minimum_size = Vector2(1, 6)
 layout_mode = 1
 anchors_preset = 8
@@ -409,7 +433,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 1, 0.588235, 1)
 
-[node name="run" type="ColorRect" parent="priorities/stats/inventory/ability/controls/hints/space/preview/chats/log/stamina/value"]
+[node name="run" type="ColorRect" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/chats/log/stamina/value"]
 custom_minimum_size = Vector2(1, 6)
 layout_mode = 1
 anchors_preset = 5
@@ -421,7 +445,7 @@ offset_bottom = 6.0
 grow_horizontal = 2
 color = Color(1, 0.752941, 0.588235, 1)
 
-[node name="amount" type="ProgressBar" parent="priorities/stats/inventory/ability/controls/hints/space/preview/chats/log/stamina/value"]
+[node name="amount" type="ProgressBar" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/chats/log/stamina/value"]
 custom_minimum_size = Vector2(0, 2)
 layout_mode = 1
 anchors_preset = 15
@@ -436,11 +460,11 @@ step = 1.0
 fill_mode = 3
 show_percentage = false
 
-[node name="tabs" type="VBoxContainer" parent="priorities/stats/inventory/ability/controls/hints/space/preview/chats/log"]
+[node name="tabs" type="VBoxContainer" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/chats/log"]
 layout_mode = 2
 size_flags_vertical = 8
 
-[node name="toggle" type="Button" parent="priorities/stats/inventory/ability/controls/hints/space/preview/chats/log/tabs"]
+[node name="toggle" type="Button" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/chats/log/tabs"]
 visible = false
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
@@ -450,9 +474,9 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_jbac8")
 text = "⬅️"
 alignment = 0
 
-[node name="hooder" parent="priorities/stats/inventory/ability/controls/hints/space/preview/chats/log/tabs/toggle" instance=ExtResource("43_xe00t")]
+[node name="hooder" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/chats/log/tabs/toggle" instance=ExtResource("43_xe00t")]
 
-[node name="search" type="Button" parent="priorities/stats/inventory/ability/controls/hints/space/preview/chats/log/tabs"]
+[node name="search" type="Button" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/chats/log/tabs"]
 visible = false
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
@@ -462,9 +486,9 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_6gnce")
 text = "🔍"
 alignment = 0
 
-[node name="hooder" parent="priorities/stats/inventory/ability/controls/hints/space/preview/chats/log/tabs/search" instance=ExtResource("43_xe00t")]
+[node name="hooder" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/chats/log/tabs/search" instance=ExtResource("43_xe00t")]
 
-[node name="game" type="Button" parent="priorities/stats/inventory/ability/controls/hints/space/preview/chats/log/tabs"]
+[node name="game" type="Button" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/chats/log/tabs"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_42m6k")
@@ -473,9 +497,9 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_upyjg")
 text = "🗃️"
 alignment = 0
 
-[node name="hooder" parent="priorities/stats/inventory/ability/controls/hints/space/preview/chats/log/tabs/game" instance=ExtResource("43_xe00t")]
+[node name="hooder" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/chats/log/tabs/game" instance=ExtResource("43_xe00t")]
 
-[node name="chat" type="Button" parent="priorities/stats/inventory/ability/controls/hints/space/preview/chats/log/tabs"]
+[node name="chat" type="Button" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/chats/log/tabs"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_42m6k")
@@ -484,9 +508,9 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_upyjg")
 text = "💻"
 alignment = 0
 
-[node name="hooder" parent="priorities/stats/inventory/ability/controls/hints/space/preview/chats/log/tabs/chat" instance=ExtResource("43_xe00t")]
+[node name="hooder" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/chats/log/tabs/chat" instance=ExtResource("43_xe00t")]
 
-[node name="margin" type="MarginContainer" parent="priorities/stats/inventory/ability/controls/hints/space/preview/chats/log/tabs/chat"]
+[node name="margin" type="MarginContainer" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/chats/log/tabs/chat"]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -499,12 +523,12 @@ theme_override_constants/margin_top = 2
 theme_override_constants/margin_right = 2
 theme_override_constants/margin_bottom = 2
 
-[node name="icon" type="TextureRect" parent="priorities/stats/inventory/ability/controls/hints/space/preview/chats/log/tabs/chat/margin"]
+[node name="icon" type="TextureRect" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/chats/log/tabs/chat/margin"]
 layout_mode = 2
 texture = ExtResource("22_rw2ti")
 expand_mode = 1
 
-[node name="scroll" type="ScrollContainer" parent="priorities/stats/inventory/ability/controls/hints/space/preview/chats"]
+[node name="scroll" type="ScrollContainer" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/chats"]
 custom_minimum_size = Vector2(0, 120)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -515,58 +539,58 @@ draw_focus_border = true
 horizontal_scroll_mode = 0
 script = ExtResource("23_ok865")
 
-[node name="list" type="VBoxContainer" parent="priorities/stats/inventory/ability/controls/hints/space/preview/chats/scroll"]
+[node name="list" type="VBoxContainer" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/chats/scroll"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 10
 
-[node name="temp" type="VBoxContainer" parent="priorities/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list"]
+[node name="temp" type="VBoxContainer" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/chats/scroll/list"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="chat" type="VBoxContainer" parent="priorities/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/temp"]
+[node name="chat" type="VBoxContainer" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/chats/scroll/list/temp"]
 layout_mode = 2
 
-[node name="log" type="VBoxContainer" parent="priorities/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/temp"]
+[node name="log" type="VBoxContainer" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/chats/scroll/list/temp"]
 layout_mode = 2
 
-[node name="chat" type="PanelContainer" parent="priorities/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list"]
+[node name="chat" type="PanelContainer" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/chats/scroll/list"]
 visible = false
 layout_mode = 2
 theme_override_styles/panel = ExtResource("14_jj441")
 
-[node name="margin" type="MarginContainer" parent="priorities/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/chat"]
+[node name="margin" type="MarginContainer" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/chats/scroll/list/chat"]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="heroes" type="VBoxContainer" parent="priorities/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/chat/margin"]
+[node name="heroes" type="VBoxContainer" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/chats/scroll/list/chat/margin"]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="ray" parent="priorities/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/chat/margin/heroes" instance=ExtResource("24_iy05a")]
+[node name="ray" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/chats/scroll/list/chat/margin/heroes" instance=ExtResource("24_iy05a")]
 layout_mode = 2
 
-[node name="rock" type="VBoxContainer" parent="priorities/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/chat/margin/heroes"]
+[node name="rock" type="VBoxContainer" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/chats/scroll/list/chat/margin/heroes"]
 layout_mode = 2
 theme_override_constants/separation = 4
 
-[node name="description" type="VBoxContainer" parent="priorities/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/chat/margin/heroes/rock"]
+[node name="description" type="VBoxContainer" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/chats/scroll/list/chat/margin/heroes/rock"]
 layout_mode = 2
 theme_override_constants/separation = 3
 
-[node name="caption" type="HBoxContainer" parent="priorities/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/chat/margin/heroes/rock/description"]
+[node name="caption" type="HBoxContainer" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/chats/scroll/list/chat/margin/heroes/rock/description"]
 layout_mode = 2
 
-[node name="a" type="HSeparator" parent="priorities/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/chat/margin/heroes/rock/description/caption"]
+[node name="a" type="HSeparator" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/chats/scroll/list/chat/margin/heroes/rock/description/caption"]
 custom_minimum_size = Vector2(15, 0)
 layout_mode = 2
 theme_override_constants/separation = 0
 theme_override_styles/separator = SubResource("StyleBoxLine_iy05a")
 
-[node name="player" type="Label" parent="priorities/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/chat/margin/heroes/rock/description/caption"]
+[node name="player" type="Label" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/chats/scroll/list/chat/margin/heroes/rock/description/caption"]
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_colors/font_color = Color(0.393086, 0.393086, 0.393085, 1)
@@ -574,14 +598,14 @@ theme_override_fonts/font = ExtResource("23_rw2ti")
 theme_override_font_sizes/font_size = 12
 text = "Рок, PussyDestroyer22"
 
-[node name="b" type="HSeparator" parent="priorities/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/chat/margin/heroes/rock/description/caption"]
+[node name="b" type="HSeparator" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/chats/scroll/list/chat/margin/heroes/rock/description/caption"]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 0
 theme_override_styles/separator = SubResource("StyleBoxLine_iy05a")
 
-[node name="chat" type="Label" parent="priorities/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/chat/margin/heroes/rock/description"]
+[node name="chat" type="Label" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/chats/scroll/list/chat/margin/heroes/rock/description"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 size_flags_vertical = 1
@@ -592,24 +616,24 @@ theme_override_font_sizes/font_size = 18
 text = "Да ничего так, норм туса"
 autowrap_mode = 2
 
-[node name="did" type="VBoxContainer" parent="priorities/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/chat/margin/heroes"]
+[node name="did" type="VBoxContainer" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/chats/scroll/list/chat/margin/heroes"]
 layout_mode = 2
 theme_override_constants/separation = 4
 
-[node name="description" type="VBoxContainer" parent="priorities/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/chat/margin/heroes/did"]
+[node name="description" type="VBoxContainer" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/chats/scroll/list/chat/margin/heroes/did"]
 layout_mode = 2
 theme_override_constants/separation = 3
 
-[node name="caption" type="HBoxContainer" parent="priorities/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/chat/margin/heroes/did/description"]
+[node name="caption" type="HBoxContainer" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/chats/scroll/list/chat/margin/heroes/did/description"]
 layout_mode = 2
 
-[node name="a" type="HSeparator" parent="priorities/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/chat/margin/heroes/did/description/caption"]
+[node name="a" type="HSeparator" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/chats/scroll/list/chat/margin/heroes/did/description/caption"]
 custom_minimum_size = Vector2(15, 0)
 layout_mode = 2
 theme_override_constants/separation = 0
 theme_override_styles/separator = SubResource("StyleBoxLine_iy05a")
 
-[node name="player" type="Label" parent="priorities/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/chat/margin/heroes/did/description/caption"]
+[node name="player" type="Label" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/chats/scroll/list/chat/margin/heroes/did/description/caption"]
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_colors/font_color = Color(0.393086, 0.393086, 0.393085, 1)
@@ -617,14 +641,14 @@ theme_override_fonts/font = ExtResource("23_rw2ti")
 theme_override_font_sizes/font_size = 12
 text = "Дид"
 
-[node name="b" type="HSeparator" parent="priorities/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/chat/margin/heroes/did/description/caption"]
+[node name="b" type="HSeparator" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/chats/scroll/list/chat/margin/heroes/did/description/caption"]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 0
 theme_override_styles/separator = SubResource("StyleBoxLine_iy05a")
 
-[node name="chat" type="Label" parent="priorities/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/chat/margin/heroes/did/description"]
+[node name="chat" type="Label" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/chats/scroll/list/chat/margin/heroes/did/description"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 size_flags_vertical = 1
@@ -635,24 +659,24 @@ theme_override_font_sizes/font_size = 18
 text = "Харе ерундой маяться, вилкой данж иди чисти"
 autowrap_mode = 2
 
-[node name="ant" type="VBoxContainer" parent="priorities/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/chat/margin/heroes"]
+[node name="ant" type="VBoxContainer" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/chats/scroll/list/chat/margin/heroes"]
 layout_mode = 2
 theme_override_constants/separation = 4
 
-[node name="description" type="VBoxContainer" parent="priorities/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/chat/margin/heroes/ant"]
+[node name="description" type="VBoxContainer" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/chats/scroll/list/chat/margin/heroes/ant"]
 layout_mode = 2
 theme_override_constants/separation = 3
 
-[node name="caption" type="HBoxContainer" parent="priorities/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/chat/margin/heroes/ant/description"]
+[node name="caption" type="HBoxContainer" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/chats/scroll/list/chat/margin/heroes/ant/description"]
 layout_mode = 2
 
-[node name="a" type="HSeparator" parent="priorities/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/chat/margin/heroes/ant/description/caption"]
+[node name="a" type="HSeparator" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/chats/scroll/list/chat/margin/heroes/ant/description/caption"]
 custom_minimum_size = Vector2(15, 0)
 layout_mode = 2
 theme_override_constants/separation = 0
 theme_override_styles/separator = SubResource("StyleBoxLine_iy05a")
 
-[node name="player" type="Label" parent="priorities/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/chat/margin/heroes/ant/description/caption"]
+[node name="player" type="Label" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/chats/scroll/list/chat/margin/heroes/ant/description/caption"]
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_colors/font_color = Color(0.393086, 0.393086, 0.393085, 1)
@@ -660,14 +684,14 @@ theme_override_fonts/font = ExtResource("23_rw2ti")
 theme_override_font_sizes/font_size = 12
 text = "? ? ?"
 
-[node name="b" type="HSeparator" parent="priorities/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/chat/margin/heroes/ant/description/caption"]
+[node name="b" type="HSeparator" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/chats/scroll/list/chat/margin/heroes/ant/description/caption"]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 0
 theme_override_styles/separator = SubResource("StyleBoxLine_iy05a")
 
-[node name="chat" type="Label" parent="priorities/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/chat/margin/heroes/ant/description"]
+[node name="chat" type="Label" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/chats/scroll/list/chat/margin/heroes/ant/description"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 size_flags_vertical = 1
@@ -678,35 +702,35 @@ theme_override_font_sizes/font_size = 18
 text = "Ну дарова, ребятки, че нового?"
 autowrap_mode = 2
 
-[node name="log" type="PanelContainer" parent="priorities/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list"]
+[node name="log" type="PanelContainer" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/chats/scroll/list"]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_tysmj")
 script = ExtResource("27_ok865")
 
-[node name="margin" type="MarginContainer" parent="priorities/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log"]
+[node name="margin" type="MarginContainer" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/chats/scroll/list/log"]
 layout_mode = 2
 theme_override_constants/margin_left = 0
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 
-[node name="chat" type="VBoxContainer" parent="priorities/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin"]
+[node name="chat" type="VBoxContainer" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/chats/scroll/list/log/margin"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="content7" type="PanelContainer" parent="priorities/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat"]
+[node name="content7" type="PanelContainer" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/chats/scroll/list/log/margin/chat"]
 visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_yuxct")
 
-[node name="margin" type="MarginContainer" parent="priorities/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content7"]
+[node name="margin" type="MarginContainer" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content7"]
 layout_mode = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 3
 
-[node name="chat" type="Label" parent="priorities/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content7/margin"]
+[node name="chat" type="Label" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content7/margin"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 size_flags_vertical = 1
@@ -717,19 +741,19 @@ theme_override_font_sizes/font_size = 18
 text = "В сундуке найдена пустая банка"
 autowrap_mode = 2
 
-[node name="content6" type="PanelContainer" parent="priorities/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat"]
+[node name="content6" type="PanelContainer" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/chats/scroll/list/log/margin/chat"]
 visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_yuxct")
 
-[node name="margin" type="MarginContainer" parent="priorities/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content6"]
+[node name="margin" type="MarginContainer" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content6"]
 layout_mode = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 3
 
-[node name="chat" type="Label" parent="priorities/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content6/margin"]
+[node name="chat" type="Label" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/chats/scroll/list/log/margin/chat/content6/margin"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 size_flags_vertical = 1
@@ -740,24 +764,24 @@ theme_override_font_sizes/font_size = 18
 text = "Получено 213 очков опыта"
 autowrap_mode = 2
 
-[node name="item_found" parent="priorities/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat" instance=ExtResource("30_iy05a")]
+[node name="item_found" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/chats/scroll/list/log/margin/chat" instance=ExtResource("30_iy05a")]
 visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_yuxct")
 
-[node name="ko-ray" type="PanelContainer" parent="priorities/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat"]
+[node name="ko-ray" type="PanelContainer" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/chats/scroll/list/log/margin/chat"]
 visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_yuxct")
 
-[node name="margin" type="MarginContainer" parent="priorities/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/ko-ray"]
+[node name="margin" type="MarginContainer" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/chats/scroll/list/log/margin/chat/ko-ray"]
 layout_mode = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 3
 
-[node name="chat" type="Label" parent="priorities/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/ko-ray/margin"]
+[node name="chat" type="Label" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/chats/scroll/list/log/margin/chat/ko-ray/margin"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 size_flags_vertical = 1
@@ -768,19 +792,19 @@ theme_override_font_sizes/font_size = 18
 text = "Рей падает без сознания"
 autowrap_mode = 2
 
-[node name="ko-rock" type="PanelContainer" parent="priorities/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat"]
+[node name="ko-rock" type="PanelContainer" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/chats/scroll/list/log/margin/chat"]
 visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_yuxct")
 
-[node name="margin" type="MarginContainer" parent="priorities/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/ko-rock"]
+[node name="margin" type="MarginContainer" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/chats/scroll/list/log/margin/chat/ko-rock"]
 layout_mode = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 3
 
-[node name="chat" type="Label" parent="priorities/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/ko-rock/margin"]
+[node name="chat" type="Label" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/chats/scroll/list/log/margin/chat/ko-rock/margin"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 size_flags_vertical = 1
@@ -791,19 +815,19 @@ theme_override_font_sizes/font_size = 18
 text = "Рок падает без сознания"
 autowrap_mode = 2
 
-[node name="game-over" type="PanelContainer" parent="priorities/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat"]
+[node name="game-over" type="PanelContainer" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/chats/scroll/list/log/margin/chat"]
 visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_yuxct")
 
-[node name="margin" type="MarginContainer" parent="priorities/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/game-over"]
+[node name="margin" type="MarginContainer" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/chats/scroll/list/log/margin/chat/game-over"]
 layout_mode = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 3
 
-[node name="chat" type="Label" parent="priorities/stats/inventory/ability/controls/hints/space/preview/chats/scroll/list/log/margin/chat/game-over/margin"]
+[node name="chat" type="Label" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/chats/scroll/list/log/margin/chat/game-over/margin"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 size_flags_vertical = 1
@@ -814,72 +838,72 @@ theme_override_font_sizes/font_size = 18
 text = "Вас унесло раскаленными песками...."
 autowrap_mode = 2
 
-[node name="ColorRect" type="ColorRect" parent="priorities/stats/inventory/ability/controls/hints/space/preview/chats"]
+[node name="ColorRect" type="ColorRect" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/chats"]
 layout_mode = 2
 color = Color(0.109804, 0.109804, 0.207843, 1)
 
-[node name="space" type="Control" parent="priorities/stats/inventory/ability/controls/hints/space/preview"]
+[node name="space" type="Control" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.5
 
-[node name="help" type="HBoxContainer" parent="priorities/stats/inventory/ability/controls/hints/space/preview"]
+[node name="help" type="HBoxContainer" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.25
 script = ExtResource("21_fuh2f")
 
-[node name="content" type="VBoxContainer" parent="priorities/stats/inventory/ability/controls/hints/space/preview/help"]
+[node name="content" type="VBoxContainer" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/help"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = SubResource("Theme_tysmj")
 
-[node name="help" type="ScrollContainer" parent="priorities/stats/inventory/ability/controls/hints/space/preview/help/content"]
+[node name="help" type="ScrollContainer" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/help/content"]
 visible = false
 layout_mode = 2
 size_flags_vertical = 3
 horizontal_scroll_mode = 0
 script = ExtResource("40_jnh4p")
 
-[node name="hints" parent="priorities/stats/inventory/ability/controls/hints/space/preview/help/content/help" instance=ExtResource("2_mf7wa")]
+[node name="hints" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/help/content/help" instance=ExtResource("2_mf7wa")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.2
 
-[node name="books" type="ScrollContainer" parent="priorities/stats/inventory/ability/controls/hints/space/preview/help/content"]
+[node name="books" type="ScrollContainer" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/help/content"]
 visible = false
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="books" type="VBoxContainer" parent="priorities/stats/inventory/ability/controls/hints/space/preview/help/content/books"]
+[node name="books" type="VBoxContainer" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/help/content/books"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 0
 
-[node name="space" type="Control" parent="priorities/stats/inventory/ability/controls/hints/space/preview/help/content/books/books"]
+[node name="space" type="Control" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/help/content/books/books"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="book" parent="priorities/stats/inventory/ability/controls/hints/space/preview/help/content/books/books" instance=ExtResource("31_rw2ti")]
+[node name="book" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/help/content/books/books" instance=ExtResource("31_rw2ti")]
 layout_mode = 2
 size_flags_vertical = 8
 
-[node name="book2" parent="priorities/stats/inventory/ability/controls/hints/space/preview/help/content/books/books" instance=ExtResource("31_rw2ti")]
+[node name="book2" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/help/content/books/books" instance=ExtResource("31_rw2ti")]
 layout_mode = 2
 size_flags_vertical = 8
 
-[node name="ability" type="HBoxContainer" parent="priorities/stats/inventory/ability/controls/hints/space/preview/help"]
+[node name="ability" type="HBoxContainer" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/help"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="tabs" type="VBoxContainer" parent="priorities/stats/inventory/ability/controls/hints/space/preview/help/ability"]
+[node name="tabs" type="VBoxContainer" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/help/ability"]
 layout_mode = 2
 size_flags_vertical = 8
 script = ExtResource("42_e1onj")
 
-[node name="toggle" type="Button" parent="priorities/stats/inventory/ability/controls/hints/space/preview/help/ability/tabs"]
+[node name="toggle" type="Button" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/help/ability/tabs"]
 visible = false
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
@@ -889,9 +913,9 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_jbac8")
 text = "➡️"
 alignment = 0
 
-[node name="hooder" parent="priorities/stats/inventory/ability/controls/hints/space/preview/help/ability/tabs/toggle" instance=ExtResource("43_xe00t")]
+[node name="hooder" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/help/ability/tabs/toggle" instance=ExtResource("43_xe00t")]
 
-[node name="analyze" type="Button" parent="priorities/stats/inventory/ability/controls/hints/space/preview/help/ability/tabs"]
+[node name="analyze" type="Button" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/help/ability/tabs"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("18_3tqp8")
@@ -900,9 +924,9 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_pau43")
 text = "🔎"
 alignment = 0
 
-[node name="hooder" parent="priorities/stats/inventory/ability/controls/hints/space/preview/help/ability/tabs/analyze" instance=ExtResource("43_xe00t")]
+[node name="hooder" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/help/ability/tabs/analyze" instance=ExtResource("43_xe00t")]
 
-[node name="books" type="Button" parent="priorities/stats/inventory/ability/controls/hints/space/preview/help/ability/tabs"]
+[node name="books" type="Button" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/help/ability/tabs"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_42m6k")
@@ -911,9 +935,9 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_upyjg")
 text = "📚"
 alignment = 0
 
-[node name="hooder" parent="priorities/stats/inventory/ability/controls/hints/space/preview/help/ability/tabs/books" instance=ExtResource("43_xe00t")]
+[node name="hooder" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/help/ability/tabs/books" instance=ExtResource("43_xe00t")]
 
-[node name="synergy" type="MarginContainer" parent="priorities/stats/inventory/ability/controls/hints/space/preview/help/ability"]
+[node name="synergy" type="MarginContainer" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/help/ability"]
 custom_minimum_size = Vector2(3, 0)
 layout_mode = 2
 theme_override_constants/margin_left = 1
@@ -921,12 +945,12 @@ theme_override_constants/margin_top = 1
 theme_override_constants/margin_right = 1
 theme_override_constants/margin_bottom = 1
 
-[node name="points" type="VBoxContainer" parent="priorities/stats/inventory/ability/controls/hints/space/preview/help/ability/synergy"]
+[node name="points" type="VBoxContainer" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/help/ability/synergy"]
 visible = false
 layout_mode = 2
 theme_override_constants/separation = 4
 
-[node name="ray" type="ProgressBar" parent="priorities/stats/inventory/ability/controls/hints/space/preview/help/ability/synergy/points"]
+[node name="ray" type="ProgressBar" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/help/ability/synergy/points"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 3
@@ -938,7 +962,7 @@ value = 20.0
 fill_mode = 3
 show_percentage = false
 
-[node name="rock" type="ProgressBar" parent="priorities/stats/inventory/ability/controls/hints/space/preview/help/ability/synergy/points"]
+[node name="rock" type="ProgressBar" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/help/ability/synergy/points"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 3
@@ -950,7 +974,7 @@ value = 20.0
 fill_mode = 3
 show_percentage = false
 
-[node name="rock2" type="ProgressBar" parent="priorities/stats/inventory/ability/controls/hints/space/preview/help/ability/synergy/points"]
+[node name="rock2" type="ProgressBar" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/help/ability/synergy/points"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 3
@@ -962,7 +986,7 @@ value = 20.0
 fill_mode = 3
 show_percentage = false
 
-[node name="rock3" type="ProgressBar" parent="priorities/stats/inventory/ability/controls/hints/space/preview/help/ability/synergy/points"]
+[node name="rock3" type="ProgressBar" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/help/ability/synergy/points"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 3
@@ -974,12 +998,12 @@ value = 20.0
 fill_mode = 3
 show_percentage = false
 
-[node name="bottom" type="Control" parent="priorities/stats/inventory/ability/controls/hints"]
+[node name="bottom" type="Control" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.15
 
-[node name="slots" type="VBoxContainer" parent="priorities/stats/inventory/ability/controls/hints/bottom"]
+[node name="slots" type="VBoxContainer" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/bottom"]
 visible = false
 layout_mode = 1
 anchors_preset = 11
@@ -991,12 +1015,12 @@ grow_horizontal = 0
 grow_vertical = 2
 theme_override_constants/separation = 2
 
-[node name="ability" type="HBoxContainer" parent="priorities/stats/inventory/ability/controls/hints/bottom/slots"]
+[node name="ability" type="HBoxContainer" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/bottom/slots"]
 layout_mode = 2
 size_flags_horizontal = 8
 theme_override_constants/separation = 2
 
-[node name="left" type="Button" parent="priorities/stats/inventory/ability/controls/hints/bottom/slots/ability"]
+[node name="left" type="Button" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/bottom/slots/ability"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -1006,7 +1030,7 @@ theme_override_font_sizes/font_size = 32
 theme_override_styles/normal = SubResource("StyleBoxFlat_4chmg")
 text = "←"
 
-[node name="bag" type="Label" parent="priorities/stats/inventory/ability/controls/hints/bottom/slots/ability/left"]
+[node name="bag" type="Label" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/bottom/slots/ability/left"]
 custom_minimum_size = Vector2(15, 0)
 layout_mode = 1
 anchors_preset = 6
@@ -1026,7 +1050,7 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_1moid")
 text = "💰"
 horizontal_alignment = 2
 
-[node name="fire" type="Button" parent="priorities/stats/inventory/ability/controls/hints/bottom/slots/ability"]
+[node name="fire" type="Button" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/bottom/slots/ability"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -1036,7 +1060,7 @@ theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_eq6yd")
 text = "🔥"
 
-[node name="cost" type="Label" parent="priorities/stats/inventory/ability/controls/hints/bottom/slots/ability/fire"]
+[node name="cost" type="Label" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/bottom/slots/ability/fire"]
 custom_minimum_size = Vector2(15, 0)
 layout_mode = 1
 anchors_preset = 1
@@ -1051,7 +1075,7 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_iy05a")
 text = "1"
 horizontal_alignment = 2
 
-[node name="right" type="Button" parent="priorities/stats/inventory/ability/controls/hints/bottom/slots/ability"]
+[node name="right" type="Button" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/bottom/slots/ability"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -1061,7 +1085,7 @@ theme_override_font_sizes/font_size = 32
 theme_override_styles/normal = SubResource("StyleBoxFlat_4chmg")
 text = "→"
 
-[node name="bag" type="Label" parent="priorities/stats/inventory/ability/controls/hints/bottom/slots/ability/right"]
+[node name="bag" type="Label" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/bottom/slots/ability/right"]
 custom_minimum_size = Vector2(15, 0)
 layout_mode = 1
 anchors_preset = 4
@@ -1078,11 +1102,11 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_4chmg")
 text = "💰"
 horizontal_alignment = 2
 
-[node name="medium" type="HBoxContainer" parent="priorities/stats/inventory/ability/controls/hints/bottom/slots"]
+[node name="medium" type="HBoxContainer" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/bottom/slots"]
 layout_mode = 2
 theme_override_constants/separation = 2
 
-[node name="whip" type="Button" parent="priorities/stats/inventory/ability/controls/hints/bottom/slots/medium"]
+[node name="whip" type="Button" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/bottom/slots/medium"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -1092,7 +1116,7 @@ theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_8qkor")
 text = "🎣"
 
-[node name="cost" type="Label" parent="priorities/stats/inventory/ability/controls/hints/bottom/slots/medium/whip"]
+[node name="cost" type="Label" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/bottom/slots/medium/whip"]
 custom_minimum_size = Vector2(15, 0)
 layout_mode = 1
 anchors_preset = 1
@@ -1107,7 +1131,7 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_iy05a")
 text = "1"
 horizontal_alignment = 2
 
-[node name="shot" type="Button" parent="priorities/stats/inventory/ability/controls/hints/bottom/slots/medium"]
+[node name="shot" type="Button" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/bottom/slots/medium"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -1117,7 +1141,7 @@ theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_tysmj")
 text = "🎯"
 
-[node name="cost" type="Label" parent="priorities/stats/inventory/ability/controls/hints/bottom/slots/medium/shot"]
+[node name="cost" type="Label" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/bottom/slots/medium/shot"]
 custom_minimum_size = Vector2(15, 0)
 layout_mode = 1
 anchors_preset = 1
@@ -1132,7 +1156,7 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_iy05a")
 text = "1"
 horizontal_alignment = 2
 
-[node name="punch" type="Button" parent="priorities/stats/inventory/ability/controls/hints/bottom/slots/medium"]
+[node name="punch" type="Button" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/bottom/slots/medium"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -1142,7 +1166,7 @@ theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_ok865")
 text = "✊"
 
-[node name="cost" type="Label" parent="priorities/stats/inventory/ability/controls/hints/bottom/slots/medium/punch"]
+[node name="cost" type="Label" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/bottom/slots/medium/punch"]
 visible = false
 custom_minimum_size = Vector2(15, 0)
 layout_mode = 1
@@ -1158,11 +1182,11 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_iy05a")
 text = "2"
 horizontal_alignment = 2
 
-[node name="base" type="HBoxContainer" parent="priorities/stats/inventory/ability/controls/hints/bottom/slots"]
+[node name="base" type="HBoxContainer" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/bottom/slots"]
 layout_mode = 2
 theme_override_constants/separation = 2
 
-[node name="cure" type="Button" parent="priorities/stats/inventory/ability/controls/hints/bottom/slots/base"]
+[node name="cure" type="Button" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/bottom/slots/base"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -1172,7 +1196,7 @@ theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_ok865")
 text = "🧪"
 
-[node name="kick" type="Button" parent="priorities/stats/inventory/ability/controls/hints/bottom/slots/base"]
+[node name="kick" type="Button" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/bottom/slots/base"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -1182,7 +1206,7 @@ theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_ok865")
 text = "🦶"
 
-[node name="cost" type="Label" parent="priorities/stats/inventory/ability/controls/hints/bottom/slots/base/kick"]
+[node name="cost" type="Label" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/bottom/slots/base/kick"]
 visible = false
 custom_minimum_size = Vector2(15, 0)
 layout_mode = 1
@@ -1198,7 +1222,7 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_iy05a")
 text = "2"
 horizontal_alignment = 2
 
-[node name="osmose" type="Button" parent="priorities/stats/inventory/ability/controls/hints/bottom/slots/base"]
+[node name="osmose" type="Button" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/bottom/slots/base"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -1208,31 +1232,31 @@ theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_1moid")
 text = "🥏"
 
-[node name="topic" type="HFlowContainer" parent="priorities/stats/inventory/ability/controls"]
+[node name="topic" type="HFlowContainer" parent="priorities/stats/inventory/ability/vertical/horizontal/controls"]
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
 script = ExtResource("2_m0xgs")
 
-[node name="left-space" type="Control" parent="priorities/stats/inventory/ability/controls/topic"]
+[node name="left-space" type="Control" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/topic"]
 visible = false
 custom_minimum_size = Vector2(40, 0)
 layout_mode = 2
 size_flags_stretch_ratio = 0.25
 
-[node name="items" type="VBoxContainer" parent="priorities/stats/inventory/ability/controls/topic"]
+[node name="items" type="VBoxContainer" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/topic"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="space" type="Control" parent="priorities/stats/inventory/ability/controls/topic/items"]
+[node name="space" type="Control" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/topic/items"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="ability" type="Control" parent="priorities/stats/inventory/ability/controls/topic/items"]
+[node name="ability" type="Control" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/topic/items"]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="status" parent="priorities/stats/inventory/ability/controls/topic/items/ability" instance=ExtResource("33_0ovyy")]
+[node name="status" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/topic/items/ability" instance=ExtResource("33_0ovyy")]
 layout_mode = 1
 anchors_preset = 15
 anchor_bottom = 1.0
@@ -1240,11 +1264,21 @@ offset_bottom = 0.0
 grow_vertical = 2
 scale = Vector2(1.00223, 1.00812)
 
-[node name="right-space" type="Control" parent="priorities/stats/inventory/ability/controls/topic"]
+[node name="right-space" type="Control" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/topic"]
 visible = false
 custom_minimum_size = Vector2(40, 0)
 layout_mode = 2
 size_flags_stretch_ratio = 0.25
+
+[node name="right" type="Control" parent="priorities/stats/inventory/ability/vertical/horizontal"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.02
+
+[node name="down" type="Control" parent="priorities/stats/inventory/ability/vertical"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.02
 
 [node name="topic" parent="priorities/stats/inventory/ability" instance=ExtResource("14_joidv")]
 layout_mode = 2

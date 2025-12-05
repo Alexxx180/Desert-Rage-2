@@ -1,4 +1,4 @@
-extends HBoxContainer
+extends HFlowContainer
 
 @onready var selection: VBoxContainer = $selection
 @onready var rank: Label = $rank

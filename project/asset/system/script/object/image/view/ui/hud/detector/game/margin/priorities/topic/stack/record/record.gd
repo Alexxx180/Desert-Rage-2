@@ -1,7 +1,7 @@
 extends VBoxContainer
 
 @onready var priorities: Array[Button] = []
-@onready var ranking: HBoxContainer = $ranking
+@onready var ranking: HFlowContainer = $ranking
 
 func connect_priority_select(summary: Dictionary) -> void:
 	for button in priorities:
