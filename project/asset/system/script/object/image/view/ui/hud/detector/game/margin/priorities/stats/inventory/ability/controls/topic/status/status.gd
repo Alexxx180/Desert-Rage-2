@@ -7,3 +7,4 @@ extends HBoxContainer
 
 func _ready() -> void:
 	space.title.status.xp.set_fixed(fixed)
+	preset.sets.ap.set_fixed(fixed)

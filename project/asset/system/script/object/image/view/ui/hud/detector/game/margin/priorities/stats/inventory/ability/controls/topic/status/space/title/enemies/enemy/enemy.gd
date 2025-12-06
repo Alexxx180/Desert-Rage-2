@@ -17,7 +17,4 @@ func set_hp(hp: Node) -> void:
 	damages.health.text = str(int(hp.contested))
 	damages.value.text = str(int(hp.contested - hp.points))
 	#if (back.texture.fill_from.y < 0.99):
-	const MAX: float = 0.95
-	var value: float = MAX - MAX * hp.points / hp.maximum
-	back.texture.fill_from.y = value
-	back.visible = value < MAX
+	back.set_value(hp)

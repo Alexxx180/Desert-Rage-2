@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=3 uid="uid://cq5jn6k2bwg5n"]
+[gd_scene load_steps=64 format=3 uid="uid://cq5jn6k2bwg5n"]
 
 [ext_resource type="Script" uid="uid://b2ugt042kmpr0" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/topic/status/status.gd" id="1_stn0a"]
 [ext_resource type="Script" uid="uid://c34inyxgbvb7k" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/topic/status/space/space.gd" id="2_6f6g2"]
@@ -30,6 +30,7 @@
 [ext_resource type="Script" uid="uid://b4nmtus4f0d7q" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/topic/status/preset/preset.gd" id="23_2jtil"]
 [ext_resource type="Script" uid="uid://c40pfrym4fvlm" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/topic/status/preset/sets/sets.gd" id="24_o5ht6"]
 [ext_resource type="Script" uid="uid://dtvx7836cooo7" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/topic/status/preset/sets/ap.gd" id="27_12j0a"]
+[ext_resource type="Script" uid="uid://cudekrwdutcl7" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/topic/status/space/title/enemies/enemy/margin/back.gd" id="31_wguk7"]
 
 [sub_resource type="Gradient" id="Gradient_ok865"]
 colors = PackedColorArray(0.392157, 0.392157, 0.686275, 0.470588, 0, 0, 0, 0)
@@ -144,10 +145,13 @@ bg_color = Color(0, 0, 0, 1)
 
 [sub_resource type="Theme" id="Theme_crv53"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nfruw"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fya81"]
+bg_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hnjmq"]
 bg_color = Color(0.0255499, 0.0246065, 0.204078, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nfruw"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nfruw"]
 bg_color = Color(0.184314, 0.184314, 0.72549, 1)
@@ -653,22 +657,24 @@ theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 1
 
 [node name="current" type="ProgressBar" parent="preset/skill/sets/ap"]
+modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(0, 1)
 layout_mode = 2
-theme_override_styles/background = SubResource("StyleBoxEmpty_nfruw")
+theme_override_styles/background = SubResource("StyleBoxFlat_fya81")
 theme_override_styles/fill = SubResource("StyleBoxFlat_hnjmq")
-value = 70.0
 show_percentage = false
 script = ExtResource("27_12j0a")
 
 [node name="cost" type="ProgressBar" parent="preset/skill/sets/ap/current"]
 custom_minimum_size = Vector2(0, 1)
-layout_mode = 2
-offset_right = 73.0
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
 offset_bottom = 1.0
+grow_horizontal = 2
 theme_override_styles/background = SubResource("StyleBoxEmpty_nfruw")
 theme_override_styles/fill = SubResource("StyleBoxFlat_nfruw")
-value = 50.0
+value = 100.0
 show_percentage = false
 
 [node name="shadow" type="TextureRect" parent="preset/skill/sets/ap/current"]
@@ -681,3 +687,6 @@ offset_top = -25.0
 grow_horizontal = 2
 grow_vertical = 0
 texture = SubResource("GradientTexture2D_ddn1q")
+script = ExtResource("31_wguk7")
+
+[node name="timer" parent="preset/skill/sets/ap/current" instance=ExtResource("6_ueqbc")]

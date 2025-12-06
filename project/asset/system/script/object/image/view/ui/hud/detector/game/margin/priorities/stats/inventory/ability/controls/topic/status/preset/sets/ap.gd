@@ -2,11 +2,23 @@ extends ProgressBar
 
 @onready var cost: ProgressBar = $cost
 @onready var shadow: TextureRect = $shadow
+@onready var timer: Timer = $timer
 
 const TIME: int = 1
 
+var fixed: bool = false
 var shown: bool = false
 var tween: Tween
+
+func set_fixed(state: bool) -> void:
+	fixed = state
+	if fixed: modulate = Color.WHITE
+
+func use_skill(resource: Node) -> void:
+	cost.max_value = resource.maximum
+	cost.value = int(resource.points)
+	shadow.set_value(resource)
+	if not fixed: timer.appear()
 
 func show_cost(points: int, delta: int) -> void:
 	value = points

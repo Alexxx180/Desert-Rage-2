@@ -11,9 +11,11 @@ func _set_stamina(hero: CharacterBody2D, game: Control) -> void:
 		bar.value = next; if run.is_delayed(next): stamina.show())
 	run.stop_mach.connect(func(): stamina.hide())
 
-func _set_ability(stats: Node, ap: ProgressBar) -> void:
+func _set_ability(stats: Node, sets: VBoxContainer) -> void:
 	# var amount: ProgressBar = ui.get_node("health/hp/margin/health/aura")
-	stats.aura.update_bar.connect(func(v): ap.value = v)
+	stats.aura.update_bar.connect(func(_v):
+		sets.use_skill(stats.aura))
+		# ap.value = v)
 
 func _set_health(stats: Node, hp: HBoxContainer, hero: String) -> void:
 	# var amount: ProgressBar = ui.get_node("health/hp/margin/health/amount")
@@ -23,7 +25,9 @@ func _set_health(stats: Node, hp: HBoxContainer, hero: String) -> void:
 func _set_stats(hero: CharacterBody2D, game: Control) -> void:
 	var stats: Node = hero.logic.work.stats
 	_set_health(stats, game.controls.status.sticker.hp, hero.name)
-	_set_ability(stats, game.controls.topic.status.preset.sets.ap.cost)
+	for status in [game.controls.topic.status.preset.sets,
+		game.priorities.stats.inventory.ability.topic.stack.space.status.preset.sets]:
+		_set_ability(stats, status)
 
 func _set_hero(hero: CharacterBody2D, game: Control) -> void:
 	_set_stats(hero, game)
