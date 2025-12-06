@@ -1,11 +1,28 @@
-[gd_scene load_steps=15 format=3 uid="uid://c3dwvtm5ivwwp"]
+[gd_scene load_steps=16 format=3 uid="uid://c3dwvtm5ivwwp"]
 
 [ext_resource type="StyleBox" uid="uid://cvfnqancophme" path="res://asset/resource/ui/theme/style/solid-color-panel.tres" id="1_rxilr"]
 [ext_resource type="Script" uid="uid://dpfrxgilymrcv" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/topic/topic.gd" id="2_aar2m"]
-[ext_resource type="Script" uid="uid://ptu1t5a0cbpa" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/topic/stack/stack.gd" id="3_2q36e"]
+[ext_resource type="Script" uid="uid://bdc5mcj472kxf" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/hints/preview/chats/stamina.gd" id="3_77mna"]
+[ext_resource type="Script" uid="uid://b3w8ueb7rmpu" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/topic/stack/stack.gd" id="3_dfl0a"]
 [ext_resource type="PackedScene" uid="uid://cddw0qxlba87p" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/items/bag.tscn" id="4_ka18d"]
 [ext_resource type="PackedScene" uid="uid://cd6olkpfan76j" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/stats/topic/stats/stats.tscn" id="5_dfl0a"]
 [ext_resource type="PackedScene" uid="uid://bi2quqenqmjhk" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/stats/topic/chats/chats.tscn" id="9_hi8jx"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qw6gd"]
+bg_color = Color(0.6, 0.6, 0.6, 0.498039)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ccjyc"]
+content_margin_left = 4.0
+content_margin_right = 4.0
+bg_color = Color(0.00392157, 0.00392157, 0.00392157, 0.498039)
+
+[sub_resource type="Theme" id="Theme_qw6gd"]
+VScrollBar/styles/grabber = SubResource("StyleBoxFlat_qw6gd")
+VScrollBar/styles/scroll = SubResource("StyleBoxFlat_ccjyc")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pmlmm"]
 bg_color = Color(0.45098, 0.533333, 1, 1)
@@ -38,22 +55,6 @@ corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qw6gd"]
-bg_color = Color(0.6, 0.6, 0.6, 0.498039)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ccjyc"]
-content_margin_left = 4.0
-content_margin_right = 4.0
-bg_color = Color(0.00392157, 0.00392157, 0.00392157, 0.498039)
-
-[sub_resource type="Theme" id="Theme_qw6gd"]
-VScrollBar/styles/grabber = SubResource("StyleBoxFlat_qw6gd")
-VScrollBar/styles/scroll = SubResource("StyleBoxFlat_ccjyc")
-
 [node name="topic" type="PanelContainer"]
 anchors_preset = 15
 anchor_right = 1.0
@@ -64,29 +65,37 @@ size_flags_horizontal = 3
 theme_override_styles/panel = ExtResource("1_rxilr")
 script = ExtResource("2_aar2m")
 
-[node name="margin" type="MarginContainer" parent="."]
-visible = false
+[node name="scroll" type="ScrollContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = SubResource("Theme_qw6gd")
+
+[node name="margin" type="MarginContainer" parent="scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="content" type="HBoxContainer" parent="scroll/margin"]
+layout_mode = 2
+
+[node name="margin" type="MarginContainer" parent="scroll/margin/content"]
 layout_mode = 2
 size_flags_horizontal = 8
-theme_override_constants/margin_left = 0
+theme_override_constants/margin_left = 3
 theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 4
+theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 5
 
-[node name="stamina" type="Control" parent="margin"]
-custom_minimum_size = Vector2(1, 0)
-layout_mode = 2
-
-[node name="value" type="Control" parent="margin/stamina"]
+[node name="stamina" type="Control" parent="scroll/margin/content/margin"]
 custom_minimum_size = Vector2(1, 2)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
+script = ExtResource("3_77mna")
 
-[node name="act" type="Panel" parent="margin/stamina/value"]
+[node name="act" type="Panel" parent="scroll/margin/content/margin/stamina"]
 custom_minimum_size = Vector2(4, 6)
 layout_mode = 1
 anchors_preset = 7
@@ -101,7 +110,7 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_pmlmm")
 
-[node name="walk" type="Panel" parent="margin/stamina/value"]
+[node name="walk" type="Panel" parent="scroll/margin/content/margin/stamina"]
 custom_minimum_size = Vector2(4, 6)
 layout_mode = 1
 anchors_preset = 8
@@ -117,7 +126,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_slvrw")
 
-[node name="run" type="Panel" parent="margin/stamina/value"]
+[node name="run" type="Panel" parent="scroll/margin/content/margin/stamina"]
 custom_minimum_size = Vector2(4, 6)
 layout_mode = 1
 anchors_preset = 5
@@ -129,7 +138,7 @@ offset_bottom = 6.0
 grow_horizontal = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_56w7u")
 
-[node name="amount" type="ProgressBar" parent="margin/stamina/value"]
+[node name="amount" type="ProgressBar" parent="scroll/margin/content/margin/stamina"]
 custom_minimum_size = Vector2(0, 2)
 layout_mode = 1
 anchors_preset = 15
@@ -145,30 +154,17 @@ value = 20.0
 fill_mode = 3
 show_percentage = false
 
-[node name="scroll" type="ScrollContainer" parent="."]
-layout_mode = 2
-size_flags_horizontal = 3
-theme = SubResource("Theme_qw6gd")
-
-[node name="margin" type="MarginContainer" parent="scroll"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
-
-[node name="stack" type="VBoxContainer" parent="scroll/margin"]
+[node name="stack" type="VBoxContainer" parent="scroll/margin/content"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 20
-script = ExtResource("3_2q36e")
+script = ExtResource("3_dfl0a")
 
-[node name="bag" parent="scroll/margin/stack" instance=ExtResource("4_ka18d")]
+[node name="bag" parent="scroll/margin/content/stack" instance=ExtResource("4_ka18d")]
 layout_mode = 2
 
-[node name="stats" parent="scroll/margin/stack" instance=ExtResource("5_dfl0a")]
+[node name="stats" parent="scroll/margin/content/stack" instance=ExtResource("5_dfl0a")]
 layout_mode = 2
 
-[node name="chats" parent="scroll/margin/stack" instance=ExtResource("9_hi8jx")]
+[node name="chats" parent="scroll/margin/content/stack" instance=ExtResource("9_hi8jx")]
 layout_mode = 2

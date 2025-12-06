@@ -4,7 +4,8 @@ extends VBoxContainer
 #@onready var heroes: HBoxContainer = $heroes
 @onready var description: VBoxContainer = $description
 
-@onready var heroes: Array[VBoxContainer] = [$heroes/ray, $heroes/rock]
+@onready var heroes: Array[VBoxContainer] = [
+	$stats/value/heroes/ray, $heroes/value/heroes/rock]
 # @onready var description: VBoxContainer = $description
 
 func set_stats(_level: Node, stats: Dictionary) -> void:

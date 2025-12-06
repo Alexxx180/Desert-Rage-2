@@ -5,7 +5,7 @@ extends Node
 
 @export_group("Offset")
 @export var direction: float = -0.5
-@export var reserve: Array[float] = [-6]
+@export var reserve: Array = [-6]
 
 @export_group("Paths")
 @export var node_paths: Array[Array] = [[""]]
@@ -14,13 +14,13 @@ extends Node
 @onready var input: Node = $input
 @onready var focus: Node = $focus
 @onready var hud: Node = $hud
-@onready var ui: SplitContainer = get_parent()
+@onready var ui: SplitContainer#  = get_parent()
 
 var proportion: float:
 	get: return get_window().size[axis] * direction
 
-func set_property(dir: float, res: Array[float], focused: Control, nodes: Array[Array]) -> void:
-	direction = dir; reserve = res
+func face(ax: int, dir: float, res: Array, focused: Control, nodes: Array) -> void:
+	axis = ax; direction = dir; reserve = res
 	setup(nodes, focused)
 
 func get_nodes(paths: Array) -> Array:
@@ -28,7 +28,7 @@ func get_nodes(paths: Array) -> Array:
 	for path in paths: nodes.append(get_node(path))
 	return nodes
 
-func setup(nodes: Array[Array], focused: Control) -> void:
+func setup(nodes: Array, focused: Control) -> void:
 	hud.setup(self, nodes)
 	focus.setup(self, focused)
 	input.set_order()

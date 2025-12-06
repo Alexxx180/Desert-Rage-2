@@ -10,6 +10,6 @@ func _ready() -> void:
 
 func set_stats(now: Array, prev: Array) -> void:
 	var stats: Dictionary = { "now": now, "delta": MakeStats.delta(now, prev) }
-	add.set_stats(stats)
+	# add.set_stats(stats)
 	next.set_stats(stats)
 	hexagon.set_stats(stats.now, stats.delta)

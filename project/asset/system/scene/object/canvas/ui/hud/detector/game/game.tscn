@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=3 uid="uid://cel3u88abrgv3"]
+[gd_scene load_steps=63 format=3 uid="uid://cel3u88abrgv3"]
 
 [ext_resource type="Theme" uid="uid://p2br8b6ea3n6" path="res://asset/resource/ui/theme/patterns/template/menu/hud/pause/pause.tres" id="1_klae1"]
 [ext_resource type="Script" uid="uid://81xdi4771u0a" path="res://asset/system/script/object/image/view/ui/hud/detector/game/game.gd" id="1_o71r6"]
@@ -16,13 +16,14 @@
 [ext_resource type="Script" uid="uid://cgycplc3rb2f8" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/ability.gd" id="12_tveuy"]
 [ext_resource type="PackedScene" uid="uid://d3kdrb4woyoi8" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/ability/markers/item.tscn" id="12_upyjg"]
 [ext_resource type="PackedScene" uid="uid://sloxw12np1ch" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/priorities/topic/priorities.tscn" id="13_iexbr"]
-[ext_resource type="Script" uid="uid://b6q8af1i030yf" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/hints/preview/chats.gd" id="13_uhig6"]
+[ext_resource type="Script" uid="uid://b6q8af1i030yf" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/hints/preview/chats/chats.gd" id="13_uhig6"]
 [ext_resource type="StyleBox" uid="uid://bsggnr5c3uk7o" path="res://asset/resource/ui/theme/style/panel/preview.tres" id="14_jj441"]
 [ext_resource type="PackedScene" uid="uid://6b0ydfrtbu38" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/ability/ability.tscn" id="14_joidv"]
 [ext_resource type="Script" uid="uid://fkuknxcbcum2" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/status/status.gd" id="15_upyjg"]
 [ext_resource type="PackedScene" uid="uid://cm4lshhyr3mtm" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/ability/status/hp/hp.tscn" id="16_jnh4p"]
-[ext_resource type="Script" uid="uid://fi6850meofjv" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/status/sticker.gd" id="16_tveuy"]
+[ext_resource type="Script" uid="uid://fi6850meofjv" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/status/sticker/sticker.gd" id="16_tveuy"]
 [ext_resource type="FontFile" uid="uid://b2wbdbnkxcqv1" path="res://asset/resource/media/data/font/NotoEmoji-VariableFont_wght.ttf" id="18_3tqp8"]
+[ext_resource type="Script" uid="uid://bdc5mcj472kxf" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/hints/preview/chats/stamina.gd" id="18_iy05a"]
 [ext_resource type="Script" uid="uid://hb6avc0h2sag" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/hints/preview/hints.gd" id="21_fuh2f"]
 [ext_resource type="Texture2D" uid="uid://bt7rgtk8dl35x" path="res://asset/resource/media/image/actors/npc/dialog/ray.png" id="22_rw2ti"]
 [ext_resource type="Script" uid="uid://drcochfogfne4" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/hints/preview/scroll/scroll.gd" id="23_ok865"]
@@ -170,6 +171,7 @@ theme = ExtResource("1_klae1")
 script = ExtResource("1_o71r6")
 
 [node name="debug-color" type="ColorRect" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -401,6 +403,7 @@ layout_mode = 2
 anchors_preset = 0
 offset_right = 1.0
 offset_bottom = 337.0
+script = ExtResource("18_iy05a")
 
 [node name="act" type="ColorRect" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/chats/log/stamina/value"]
 custom_minimum_size = Vector2(1, 6)
@@ -703,6 +706,7 @@ text = "Ну дарова, ребятки, че нового?"
 autowrap_mode = 2
 
 [node name="log" type="PanelContainer" parent="priorities/stats/inventory/ability/vertical/horizontal/controls/hints/space/preview/chats/scroll/list"]
+visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_tysmj")
 script = ExtResource("27_ok865")

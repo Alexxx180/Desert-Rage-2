@@ -3,7 +3,7 @@ extends RefCounted
 class_name SplitToggleLogic
 
 var toggled: bool = false
-var focus: Array
+var focus: Control
 var navigation: Node
 var is_opened_last: int:
 	get: return is_opened_at(-1)
@@ -66,7 +66,10 @@ func instant_drag() -> void:
 	if toggled: set_effect(0, STRAIGHT)
 	else: set_effect(navigation.proportion, BACKWARD)
 
-func _set_focus(no: int) -> void: focus[no].grab_focus()
+func _set_focus(no: int) -> void:
+	match no:
+		0: focus.grab_focus()
+
 func focus_backward() -> void:
 	if not is_opened_first:
 		_set_focus(BACKWARD)

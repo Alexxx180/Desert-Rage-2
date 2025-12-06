@@ -1,7 +1,5 @@
 extends HBoxContainer
 
-const MAX: float = 0.95
-#@onready var slots: HBoxContainer = $ap/margin/combo/slots
 #@onready var status: MarginContainer = $ap/margin/combo/status
 #@onready var status_caption: Label = status.get_node("caption")
 @onready var health: Label = $health/status/margin/hp/health
@@ -10,6 +8,9 @@ const MAX: float = 0.95
 @onready var status: MarginContainer = $health/status/margin
 @onready var back: TextureRect = $health/status/back
 @onready var timer: Timer = $timer
+
+const MAX: float = 0.95
+#@onready var slots: HBoxContainer = $ap/margin/combo/slots
 
 func _ready() -> void:
 	timer.timeout.connect(hide_status)

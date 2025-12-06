@@ -4,8 +4,8 @@ class_name EnemyHUD
 
 var boss_fight: bool = false
 
-var foe: Node
-var cards: Array
+var foe: Node # var cards: Array
+var card: PanelContainer
 var hits: int = 0
 var xp: Node
 
@@ -36,13 +36,13 @@ func _set_contested_health(id: int, health: ProgressBar, hp: Node) -> void:
 		health.value = hp.contested
 	tween[id].tween_property(health, "value", hp.points, CONTEST_TIME).set_delay(DELAY)
 
-func set_health(card: PanelContainer, hp: Node) -> void:
+func set_health(_card: PanelContainer, hp: Node) -> void:
 	for bar in [card.health, card.contested]:
 		bar.max_value = hp.maximum
 	card.health.value = hp.points
 	_set_contested_health(card.get_instance_id(), card.contested, hp)
 
-func set_damage(card: PanelContainer, hp: Node) -> void:
+func set_damage(_card: PanelContainer, hp: Node) -> void:
 	# TODO CARD DAMAGE HEALTH
 	"""
 	card.damage.health.text = str(int(hp.contested))
@@ -55,16 +55,16 @@ func set_damage(card: PanelContainer, hp: Node) -> void:
 	# card.interrogate.visible = interrogation
 	card.damage.visible = !interrogation
 
-func set_hits(card: PanelContainer) -> void:
+func set_hits(_card: PanelContainer) -> void:
 	if hits >= 2:
 		# card.hits.count.text = str(hits)
-		#card.hits.show()
+		card.hits.show()
 		card.hits.set_count(hits)
 		set_achievement()
 
-func set_stats(card: PanelContainer, enemy: String, hp: Node) -> void:
+func set_stats(_card: PanelContainer, _enemy: String, hp: Node) -> void:
 	# card.caption.text = enemy
-	card.show()
+	card.appear()
 	set_health(card, hp)
 	set_damage(card, hp)
 	set_hits(card)
@@ -73,14 +73,15 @@ func set_stats(card: PanelContainer, enemy: String, hp: Node) -> void:
 func set_cards(enemy: String, hp: Node):
 	hits += 1
 	if hp.points != 0: xp.add_exp(EXP)
-	for card in cards: set_stats(card, enemy, hp)
+	# for card in cards: 
+	set_stats(card, enemy, hp)
 
 func reset_stats() -> void:
 	hits = 0 # caption = ""
-	for card in cards:
-		card.damage.hide()
-		card.hits.hide_all()
-		if not boss_fight:
-			card.hide()
+	# for card in cards:
+	card.damage.hide()
+	card.hits.hide_all()
+	if not boss_fight:
+		card.disappear()
 
 var in_game: Dictionary = { "eye-seeker": "Гляделкинс" }

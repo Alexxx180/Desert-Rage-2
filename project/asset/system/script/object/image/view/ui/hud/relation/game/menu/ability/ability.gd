@@ -6,6 +6,9 @@ const FULL: int = 24
 @onready var priorities: Node = $priorities
 @onready var stats: Node = $stats
 
+var navigation: Array:
+	get: return [priorities, stats, inventory.navigation, inventory.ability]
+
 func face_priorities(split: SplitContainer) -> void: # TODOT RELATION ABILITY
 	var bag: SplitContainer = split.stats.inventory
 	var focus: Control = split.topic.stack.record.ranking.priority.selection.pursuit
@@ -21,7 +24,7 @@ func face_stats(split: SplitContainer, bag: SplitContainer) -> void:
 	var focus: Control = split.topic.stack.stats.title.equip
 	stats.ui = split
 	stats.face(inventory.X, -inventory.Y, [-FULL], focus, [[
-		bag.topic.ability.controls.preview.chats, bag.topic.stack.bag.rock
+		bag.ability.controls.preview.chats, bag.topic.stack.bag.rock
 	]])
 	inventory.face_inventory(bag, split)
 

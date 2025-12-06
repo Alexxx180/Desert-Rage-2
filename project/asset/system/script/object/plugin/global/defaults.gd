@@ -1,6 +1,7 @@
 extends Node
 
 const DIRECTION: Vector2i = Vector2i(24, 20)
+const ARRAY: Array = []
 const DICT: Dictionary = {}
 const INT: int = -1
 

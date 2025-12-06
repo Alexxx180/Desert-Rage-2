@@ -5,7 +5,7 @@ extends VBoxContainer
 
 func _reveal(feedback: Callable) -> void:
 	for i in range(0, len(group)):
-		feedback.call(i, group[i].value)
+		feedback.call(i, group[i]) # .value
 
 func set_stats(stats: Dictionary) -> void:
 	_reveal(func(i, v):

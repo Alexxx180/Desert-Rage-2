@@ -15,6 +15,14 @@
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_eq6yd"]
 content_margin_bottom = 2.0
 
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_xgkak"]
+color = Color(0.0383972, 0.0383972, 0.0383972, 1)
+thickness = 2
+vertical = true
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6n8xe"]
+content_margin_top = 4.0
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fah5h"]
 content_margin_left = 3.0
 
@@ -22,11 +30,11 @@ content_margin_left = 3.0
 content_margin_right = 3.0
 content_margin_bottom = 4.0
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6n8xe"]
-content_margin_top = 4.0
-
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vj755"]
 content_margin_left = 3.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yxspp"]
+content_margin_top = 4.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3g0un"]
 content_margin_left = 4.0
@@ -44,14 +52,6 @@ content_margin_left = 4.0
 Label/colors/font_color = Color(0.903598, 0.903598, 0.903598, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_n7aum"]
-content_margin_top = 4.0
-
-[sub_resource type="StyleBoxLine" id="StyleBoxLine_xgkak"]
-color = Color(0.0383972, 0.0383972, 0.0383972, 1)
-thickness = 2
-vertical = true
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yxspp"]
 content_margin_top = 4.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_w371p"]
@@ -114,9 +114,52 @@ theme_override_constants/separation = 13
 
 [node name="offence" type="VBoxContainer" parent="add/stats"]
 layout_mode = 2
-theme_override_constants/separation = 12
+theme_override_constants/separation = 0
 script = ExtResource("5_yxspp")
 keys = Array[int]([0, 1])
+
+[node name="top" type="VSeparator" parent="add/stats/offence"]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_xgkak")
+
+[node name="plus" type="Label" parent="add/stats/offence/top"]
+visible = false
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -17.0
+offset_right = 16.0
+grow_vertical = 0
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.380392, 0.380392, 0.380392, 1)
+theme_override_fonts/font = ExtResource("10_xpl8l")
+theme_override_font_sizes/font_size = 14
+text = "+"
+
+[node name="value" type="Label" parent="add/stats/offence/top"]
+visible = false
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -16.0
+offset_top = -9.5
+offset_bottom = 9.5
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.380392, 0.380392, 0.380392, 1)
+theme_override_fonts/font = ExtResource("8_qt4lq")
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxEmpty_6n8xe")
+text = "2"
+horizontal_alignment = 2
 
 [node name="power" type="Label" parent="add/stats/offence"]
 layout_mode = 2
@@ -170,6 +213,10 @@ theme_override_font_sizes/font_size = 14
 theme_override_styles/normal = SubResource("StyleBoxEmpty_6n8xe")
 text = "2"
 
+[node name="space" type="Control" parent="add/stats/offence"]
+layout_mode = 2
+size_flags_vertical = 3
+
 [node name="influence" type="Label" parent="add/stats/offence"]
 layout_mode = 2
 size_flags_horizontal = 0
@@ -206,6 +253,46 @@ theme_override_font_sizes/font_size = 14
 text = "2"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="bottom" type="VSeparator" parent="add/stats/offence"]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+theme_override_constants/separation = 0
+theme_override_styles/separator = SubResource("StyleBoxLine_xgkak")
+
+[node name="plus" type="Label" parent="add/stats/offence/bottom"]
+visible = false
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 1
+offset_right = 16.0
+offset_bottom = 17.0
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.380392, 0.380392, 0.380392, 1)
+theme_override_fonts/font = ExtResource("10_xpl8l")
+theme_override_font_sizes/font_size = 14
+text = "+"
+
+[node name="value" type="Label" parent="add/stats/offence/bottom"]
+visible = false
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -16.0
+offset_top = -9.5
+offset_bottom = 9.5
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.380392, 0.380392, 0.380392, 1)
+theme_override_fonts/font = ExtResource("8_qt4lq")
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxEmpty_yxspp")
+text = "2"
+horizontal_alignment = 2
 
 [node name="points" type="VBoxContainer" parent="add/stats"]
 layout_mode = 2
@@ -289,9 +376,14 @@ vertical_alignment = 1
 
 [node name="defence" type="VBoxContainer" parent="add/stats"]
 layout_mode = 2
-theme_override_constants/separation = 12
+theme_override_constants/separation = 0
 script = ExtResource("5_yxspp")
 keys = Array[int]([2, 3])
+
+[node name="top" type="VSeparator" parent="add/stats/defence"]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_xgkak")
 
 [node name="vitality" type="Label" parent="add/stats/defence"]
 layout_mode = 2
@@ -330,6 +422,10 @@ text = "1"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="space" type="Control" parent="add/stats/defence"]
+layout_mode = 2
+size_flags_vertical = 3
+
 [node name="reaction" type="Label" parent="add/stats/defence"]
 layout_mode = 2
 size_flags_horizontal = 0
@@ -367,6 +463,11 @@ text = "2"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="bottom" type="VSeparator" parent="add/stats/defence"]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_xgkak")
+
 [node name="next" type="MarginContainer" parent="."]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
@@ -391,100 +492,13 @@ keys = Array[int]([0, 1])
 [node name="power" type="Label" parent="next/stats/offence"]
 custom_minimum_size = Vector2(32, 0)
 layout_mode = 2
-size_flags_vertical = 1
+size_flags_vertical = 3
 theme_override_colors/font_color = Color(0.380392, 0.380392, 0.380392, 1)
 theme_override_fonts/font = ExtResource("11_n7aum")
 theme_override_font_sizes/font_size = 14
 theme_override_styles/normal = SubResource("StyleBoxEmpty_n7aum")
 text = "10"
 horizontal_alignment = 1
-
-[node name="top" type="VSeparator" parent="next/stats/offence"]
-custom_minimum_size = Vector2(0, 15)
-layout_mode = 2
-theme_override_styles/separator = SubResource("StyleBoxLine_xgkak")
-
-[node name="plus" type="Label" parent="next/stats/offence/top"]
-visible = false
-custom_minimum_size = Vector2(16, 0)
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -17.0
-offset_right = 16.0
-grow_vertical = 0
-size_flags_vertical = 1
-theme_override_colors/font_color = Color(0.380392, 0.380392, 0.380392, 1)
-theme_override_fonts/font = ExtResource("10_xpl8l")
-theme_override_font_sizes/font_size = 14
-text = "+"
-
-[node name="value" type="Label" parent="next/stats/offence/top"]
-visible = false
-custom_minimum_size = Vector2(16, 0)
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -16.0
-offset_top = -9.5
-offset_bottom = 9.5
-grow_horizontal = 0
-grow_vertical = 2
-size_flags_vertical = 1
-theme_override_colors/font_color = Color(0.380392, 0.380392, 0.380392, 1)
-theme_override_fonts/font = ExtResource("8_qt4lq")
-theme_override_font_sizes/font_size = 14
-theme_override_styles/normal = SubResource("StyleBoxEmpty_6n8xe")
-text = "2"
-horizontal_alignment = 2
-
-[node name="space" type="Control" parent="next/stats/offence"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="bottom" type="VSeparator" parent="next/stats/offence"]
-custom_minimum_size = Vector2(0, 15)
-layout_mode = 2
-theme_override_constants/separation = 0
-theme_override_styles/separator = SubResource("StyleBoxLine_xgkak")
-
-[node name="plus" type="Label" parent="next/stats/offence/bottom"]
-visible = false
-custom_minimum_size = Vector2(16, 0)
-layout_mode = 1
-offset_right = 16.0
-offset_bottom = 17.0
-size_flags_vertical = 1
-theme_override_colors/font_color = Color(0.380392, 0.380392, 0.380392, 1)
-theme_override_fonts/font = ExtResource("10_xpl8l")
-theme_override_font_sizes/font_size = 14
-text = "+"
-
-[node name="value" type="Label" parent="next/stats/offence/bottom"]
-visible = false
-custom_minimum_size = Vector2(16, 0)
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -16.0
-offset_top = -9.5
-offset_bottom = 9.5
-grow_horizontal = 0
-grow_vertical = 2
-size_flags_vertical = 1
-theme_override_colors/font_color = Color(0.380392, 0.380392, 0.380392, 1)
-theme_override_fonts/font = ExtResource("8_qt4lq")
-theme_override_font_sizes/font_size = 14
-theme_override_styles/normal = SubResource("StyleBoxEmpty_yxspp")
-text = "2"
-horizontal_alignment = 2
 
 [node name="influence" type="Label" parent="next/stats/offence"]
 custom_minimum_size = Vector2(32, 0)
@@ -505,17 +519,11 @@ theme_override_constants/separation = 0
 script = ExtResource("9_c7xx3")
 keys = Array[int]([4, 5])
 
-[node name="VBoxContainer" type="VBoxContainer" parent="next/stats/points"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 3
-theme_override_constants/separation = -3
-
-[node name="health" type="Label" parent="next/stats/points/VBoxContainer"]
+[node name="health" type="Label" parent="next/stats/points"]
 custom_minimum_size = Vector2(32, 0)
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 1
+size_flags_vertical = 3
 theme_override_colors/font_color = Color(0.380392, 0.380392, 0.380392, 1)
 theme_override_fonts/font = ExtResource("11_n7aum")
 theme_override_font_sizes/font_size = 14
@@ -545,27 +553,13 @@ keys = Array[int]([2, 3])
 [node name="vitality" type="Label" parent="next/stats/defence"]
 custom_minimum_size = Vector2(32, 0)
 layout_mode = 2
-size_flags_vertical = 1
+size_flags_vertical = 3
 theme_override_colors/font_color = Color(0.380392, 0.380392, 0.380392, 1)
 theme_override_fonts/font = ExtResource("11_n7aum")
 theme_override_font_sizes/font_size = 14
 theme_override_styles/normal = SubResource("StyleBoxEmpty_wkcv5")
 text = "15"
 horizontal_alignment = 1
-
-[node name="top" type="VSeparator" parent="next/stats/defence"]
-custom_minimum_size = Vector2(0, 15)
-layout_mode = 2
-theme_override_styles/separator = SubResource("StyleBoxLine_xgkak")
-
-[node name="space" type="Control" parent="next/stats/defence"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="bottom" type="VSeparator" parent="next/stats/defence"]
-custom_minimum_size = Vector2(0, 15)
-layout_mode = 2
-theme_override_styles/separator = SubResource("StyleBoxLine_xgkak")
 
 [node name="reaction" type="Label" parent="next/stats/defence"]
 custom_minimum_size = Vector2(32, 0)

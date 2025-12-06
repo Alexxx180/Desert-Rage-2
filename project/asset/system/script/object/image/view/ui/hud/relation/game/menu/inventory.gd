@@ -9,11 +9,11 @@ func update_inventory(ui: Node) -> void:
 
 func controls(hud: CanvasLayer, group: Node2D, inventory: VSplitContainer) -> void:
 	var processor: Node = hud.processor.game.inventory
-	var items: HFlowContainer = inventory.topic.selected.ray 
+	var items: HFlowContainer = inventory.topic.stack.bag.ray.items
 	processor.inventory.append(items)
-	processor.inventory.append(hud.detector.game.priorities.stats.topic.stack.items)
+	processor.inventory.append(hud.detector.game.priorities.stats.topic.stack.bag.ray.items)
 	processor.markers = hud.detector.game.controls.status.markers
 	# processor.markers = inventory.get_node("ability/controls/markers")
 	for hero in group.deploy.party.heroes:
-		hero.to.inventory.logic.items.inventory = items
+		hero.to.inventory.logic.items.inventory = items # TODO FIXME set processor inventory instead
 		# update_inventory(ui)

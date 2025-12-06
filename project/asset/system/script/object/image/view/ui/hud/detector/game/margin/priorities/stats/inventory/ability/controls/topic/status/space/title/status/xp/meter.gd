@@ -1,19 +1,27 @@
 extends HBoxContainer
 
-@onready var score: ProgressBar = $score
+const KEY: String = "theme_override_styles/fill"
 
-var fill: StyleBoxFlat = StyleBoxFlat.new()
+@onready var score: ProgressBar = $score
+@onready var fill: StyleBoxLine = score.get(KEY)
+@onready var timer: Timer = $timer
+
+const COLOR: Dictionary = { 
+	"combo": Color8(196, 150, 18, 255),
+	"usual": Color8(100, 100, 175, 255) }
+
+var fixed: bool = false
 
 func new_score(group_xp: Node) -> void:
 	group_xp.update_exp.connect(
-		func(value: Vector2i, base_xp: int):
-			show()
+		func(value: Vector2i, _base_xp: int):
+			if not fixed: timer.appear()
+			# show()
 			score.max_value = value.y
 			score.value = value.x)
 
-func _next_color(is_combo: bool) -> Color:
-	return Color8(196, 150, 18, 255) if is_combo else Color8(100, 100, 175, 255)
+func update_color(color: String = "combo") -> void: # is_combo: bool, 
+	fill.color = COLOR[color] # bg_
+	score.set(KEY, fill)
 
-func update_color(is_combo: bool) -> void:
-	fill.bg_color = _next_color(is_combo)
-	score.set("theme_override_styles/fill", fill)
+func finish() -> void: update_color("usual")
