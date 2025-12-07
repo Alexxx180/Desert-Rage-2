@@ -14,9 +14,10 @@ func _bind_enemy_xp(group: Node2D) -> void:
 func _set_stats(group: Node2D, game: Control) -> void:
 	var stats: VBoxContainer = game.priorities.stats.topic.stack.stats
 	var priority: VBoxContainer = game.priorities.topic.stack.record
+	var party: HeroParty = group.deploy.party
 	group.xp.update_priorities.connect(func(_level, s):
 		_stats = s
-		stats.set_stats(s, group.deploy.party.leader.name)
+		stats.set_stats(s, party.leader.name)
 		for hero in ["ray", "rock"]:
 			group.get(hero).view.animation.effect.set_stats(s.stats[hero])
 		priority.set_priorities(_level, _stats, group)
@@ -24,7 +25,12 @@ func _set_stats(group: Node2D, game: Control) -> void:
 	group.deploy.select_hero.connect(func(leader):
 		if _stats == Defaults.DICT:
 			_stats = group.xp.current_stats()
-		stats.set_stats(_stats, group.deploy.party.leader.name)
+
+		stats.stats.bag.select_hero(party)
+		stats.set_stats(_stats, party.leader.name)
+
+		game.controls.topic.status.preset.sets.skill.select_hero(party)
+		game.priorities.stats.inventory.ability.topic.stack.select_hero(party)
 		group.get(leader.name).view.animation.effect.set_stats(_stats.stats[leader.name]) # get(leader.name)
 	)
 

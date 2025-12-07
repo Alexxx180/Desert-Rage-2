@@ -3,10 +3,17 @@ extends VBoxContainer
 @onready var ranking: HFlowContainer = $ranking
 @onready var priorities: Array[Button] = ranking.priority.selection.priorities
 
+var selected: int = 0
+
+func _ready() -> void:
+	ranking.description.connect_priorities(self)
+
 func connect_priority_select(level: Node, group: Node2D) -> void:
 	for button in priorities:
 		button.connect_selection(self, level.summary, group.deploy)
+	
 	group.deploy.select_hero.connect(func(_l):
+		ranking.priority.growth.heroes.select_hero(group.deploy.party)
 		var hero: String = group.deploy.party.leader.name
 		for priority in priorities:
 			if priority.priority_no == level.summary.hero[hero].at:

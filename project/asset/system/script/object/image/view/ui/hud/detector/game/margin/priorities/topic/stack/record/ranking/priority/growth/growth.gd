@@ -1,4 +1,4 @@
 extends HBoxContainer
 
-@onready var ray: TextureRect = $ray
-@onready var rock: TextureRect = $rock
+@onready var heroes: HBoxContainer = $heroes
+@onready var ranking: HBoxContainer = $ranking

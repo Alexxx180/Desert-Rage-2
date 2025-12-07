@@ -32,9 +32,12 @@ func _toggle_caption(state: bool) -> void:
 func connect_selection(ui: VBoxContainer, summary: Dictionary, deploy: HeroDeploy) -> void:
 	pressed.connect(func():
 		var hero: String = deploy.party.leader.name
-		if summary.hero[hero].of[summary.hero[hero].at] == PlayerXP.MAX_LV: return
+		var prev: int = summary.hero[hero].at
+		if summary.hero[hero].of[prev] == PlayerXP.MAX_LV: return
 		# ui.selected = ui.addons[name]
 		for priority in ui.priorities: priority.unselect()
+		ui.ranking.priority.growth.heroes.get(hero).change(prev, priority_no)
+		ui.selected = priority_no
 		summary.hero[hero].at = priority_no
 		set_hero_priority(priority_no, summary, hero)
 		select()

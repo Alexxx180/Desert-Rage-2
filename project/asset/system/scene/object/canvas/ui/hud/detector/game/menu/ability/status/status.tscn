@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=3 uid="uid://cq5jn6k2bwg5n"]
+[gd_scene load_steps=66 format=3 uid="uid://cq5jn6k2bwg5n"]
 
 [ext_resource type="Script" uid="uid://b2ugt042kmpr0" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/topic/status/status.gd" id="1_stn0a"]
 [ext_resource type="Script" uid="uid://c34inyxgbvb7k" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/topic/status/space/space.gd" id="2_6f6g2"]
@@ -30,6 +30,8 @@
 [ext_resource type="Script" uid="uid://b4nmtus4f0d7q" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/topic/status/preset/preset.gd" id="23_2jtil"]
 [ext_resource type="Script" uid="uid://c40pfrym4fvlm" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/topic/status/preset/sets/sets.gd" id="24_o5ht6"]
 [ext_resource type="Script" uid="uid://dtvx7836cooo7" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/topic/status/preset/sets/ap.gd" id="27_12j0a"]
+[ext_resource type="Script" uid="uid://cu0j24mb01o04" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/topic/status/preset/sets/skill/skill.gd" id="28_y5xe6"]
+[ext_resource type="Script" uid="uid://bb1pv0jihkjnw" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/topic/status/preset/sets/skill/sets.gd" id="29_c1lyx"]
 [ext_resource type="Script" uid="uid://cudekrwdutcl7" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/topic/status/space/title/enemies/enemy/margin/back.gd" id="31_wguk7"]
 
 [sub_resource type="Gradient" id="Gradient_ok865"]
@@ -518,18 +520,28 @@ theme_override_constants/margin_left = 0
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
+script = ExtResource("28_y5xe6")
 
 [node name="options" type="HBoxContainer" parent="preset/skill/sets/skill"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="first" type="Button" parent="preset/skill/sets/skill/options"]
+[node name="sets" type="HBoxContainer" parent="preset/skill/sets/skill/options"]
+layout_mode = 2
+theme_override_constants/separation = 0
+script = ExtResource("29_c1lyx")
+
+[node name="ray" type="HBoxContainer" parent="preset/skill/sets/skill/options/sets"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="first" type="Button" parent="preset/skill/sets/skill/options/sets/ray"]
 custom_minimum_size = Vector2(60, 29)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/normal = SubResource("StyleBoxFlat_crv53")
 
-[node name="skill" type="HBoxContainer" parent="preset/skill/sets/skill/options/first"]
+[node name="skill" type="HBoxContainer" parent="preset/skill/sets/skill/options/sets/ray/first"]
 layout_mode = 1
 anchors_preset = 13
 anchor_left = 0.5
@@ -542,7 +554,7 @@ grow_vertical = 2
 size_flags_horizontal = 8
 theme_override_constants/separation = -5
 
-[node name="fire" type="Label" parent="preset/skill/sets/skill/options/first/skill"]
+[node name="fire" type="Label" parent="preset/skill/sets/skill/options/sets/ray/first/skill"]
 custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -552,7 +564,7 @@ theme_override_font_sizes/font_size = 18
 theme_override_styles/normal = SubResource("StyleBoxEmpty_v78vk")
 text = "🔥"
 
-[node name="whip" type="Label" parent="preset/skill/sets/skill/options/first/skill"]
+[node name="whip" type="Label" parent="preset/skill/sets/skill/options/sets/ray/first/skill"]
 custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -562,7 +574,53 @@ theme_override_font_sizes/font_size = 18
 theme_override_styles/normal = SubResource("StyleBoxEmpty_4mbfr")
 text = "🎣"
 
-[node name="hooder" parent="preset/skill/sets/skill/options/first" instance=ExtResource("6_ipktp")]
+[node name="hooder" parent="preset/skill/sets/skill/options/sets/ray/first" instance=ExtResource("6_ipktp")]
+
+[node name="rock" type="HBoxContainer" parent="preset/skill/sets/skill/options/sets"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="first" type="Button" parent="preset/skill/sets/skill/options/sets/rock"]
+custom_minimum_size = Vector2(60, 29)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_crv53")
+
+[node name="skill" type="HBoxContainer" parent="preset/skill/sets/skill/options/sets/rock/first"]
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -27.5
+offset_right = 27.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 8
+theme_override_constants/separation = -5
+
+[node name="water" type="Label" parent="preset/skill/sets/skill/options/sets/rock/first/skill"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("6_f3i4p")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxEmpty_v78vk")
+text = "💧"
+
+[node name="spark" type="Label" parent="preset/skill/sets/skill/options/sets/rock/first/skill"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("6_f3i4p")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxEmpty_4mbfr")
+text = "⚡️"
+
+[node name="hooder" parent="preset/skill/sets/skill/options/sets/rock/first" instance=ExtResource("6_ipktp")]
 
 [node name="team" type="Button" parent="preset/skill/sets/skill/options"]
 custom_minimum_size = Vector2(40, 30)

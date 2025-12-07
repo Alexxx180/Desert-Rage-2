@@ -1,13 +1,16 @@
-[gd_scene load_steps=13 format=3 uid="uid://cd6olkpfan76j"]
+[gd_scene load_steps=16 format=3 uid="uid://cd6olkpfan76j"]
 
-[ext_resource type="Script" uid="uid://dgr6idneegayx" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/topic/stack/stats/equipment/stats.gd" id="1_ux7gg"]
+[ext_resource type="Script" uid="uid://dgr6idneegayx" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/topic/stack/stats/equipment/equip.gd" id="1_ux7gg"]
 [ext_resource type="Script" uid="uid://b7ssehgjd1hps" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/topic/stack/stats/title.gd" id="2_483bj"]
 [ext_resource type="FontFile" uid="uid://b37js8y80ak1k" path="res://asset/resource/media/data/font/NotoColorEmoji-Regular.ttf" id="2_fs4c2"]
 [ext_resource type="PackedScene" uid="uid://dsu01cw1gye0x" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/stats/topic/stats/heroes/heroes.tscn" id="3_483bj"]
 [ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://asset/resource/ui/theme/patterns/template/menu/settings/topic/footer.tres" id="4_bt6sh"]
+[ext_resource type="Script" uid="uid://dqofd4052lruh" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/topic/stack/stats/equipment/stats/stats.gd" id="4_gx2of"]
 [ext_resource type="Texture2D" uid="uid://cwbldyii867om" path="res://asset/resource/media/image/actors/npc/dialog/rock.jpg" id="5_dcud6"]
+[ext_resource type="Script" uid="uid://ct4ba0ncwehjc" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/topic/stack/stats/equipment/stats/bag/bag.gd" id="5_oaour"]
 [ext_resource type="Texture2D" uid="uid://d4jc2lrslbm26" path="res://asset/resource/media/image/actors/npc/dialog/ray.jpg" id="7_oaour"]
 [ext_resource type="FontFile" uid="uid://b2wbdbnkxcqv1" path="res://asset/resource/media/data/font/NotoEmoji-VariableFont_wght.ttf" id="8_gx2of"]
+[ext_resource type="Script" uid="uid://6j3kibb78x2v" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/topic/stack/stats/equipment/stats/bag/hero.gd" id="8_ycc3w"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1dh38"]
 content_margin_left = 9.0
@@ -81,6 +84,7 @@ size_flags_horizontal = 3
 
 [node name="stats" type="HFlowContainer" parent="."]
 layout_mode = 2
+script = ExtResource("4_gx2of")
 
 [node name="value" type="VBoxContainer" parent="stats"]
 custom_minimum_size = Vector2(300, 0)
@@ -95,6 +99,7 @@ layout_mode = 2
 [node name="bag" type="HBoxContainer" parent="stats/value"]
 layout_mode = 2
 theme_override_constants/separation = 5
+script = ExtResource("5_oaour")
 
 [node name="ray" type="TextureRect" parent="stats/value/bag"]
 custom_minimum_size = Vector2(45, 45)
@@ -102,6 +107,7 @@ layout_mode = 2
 size_flags_horizontal = 0
 texture = ExtResource("7_oaour")
 expand_mode = 1
+script = ExtResource("8_ycc3w")
 
 [node name="back" type="PanelContainer" parent="stats/value/bag/ray"]
 visible = false
@@ -132,6 +138,7 @@ layout_mode = 2
 size_flags_horizontal = 0
 texture = ExtResource("5_dcud6")
 expand_mode = 1
+script = ExtResource("8_ycc3w")
 
 [node name="back" type="PanelContainer" parent="stats/value/bag/rock"]
 layout_mode = 1

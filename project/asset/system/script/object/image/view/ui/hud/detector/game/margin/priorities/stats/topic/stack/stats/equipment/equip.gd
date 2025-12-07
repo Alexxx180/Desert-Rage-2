@@ -4,12 +4,13 @@ extends VBoxContainer
 #@onready var heroes: HBoxContainer = $heroes
 @onready var description: VBoxContainer = $description
 
+@onready var stats: HFlowContainer = $stats
 @onready var heroes: Array[VBoxContainer] = [
 	$stats/value/heroes/ray, $heroes/value/heroes/rock]
 # @onready var description: VBoxContainer = $description
 
-func set_stats(stats: Dictionary, hero: String) -> void:
-	heroes[0].set_stats(stats.stats[hero])
+func set_stats(summary: Dictionary, hero: String) -> void:
+	heroes[0].set_stats(summary.stats[hero])
 # 	heroes[1].set_stats(stats.stats.rock)
 	# var summary: Dictionary = level.summary
 

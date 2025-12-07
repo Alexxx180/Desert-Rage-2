@@ -1,4 +1,4 @@
 extends VBoxContainer
 
 @onready var perks: VBoxContainer = $perks
-@onready var item: HBoxContainer = $item
+@onready var item: VBoxContainer = $item
