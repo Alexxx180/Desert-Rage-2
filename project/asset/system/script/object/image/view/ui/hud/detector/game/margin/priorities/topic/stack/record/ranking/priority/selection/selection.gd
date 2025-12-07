@@ -5,6 +5,9 @@ extends VBoxContainer
 @onready var tenacity: Button = $tenacity
 @onready var select: MakeStats.PRIORITIES = pursuit.priority_no
 
+var priorities: Array[Button]:
+	get: return [pursuit, self_control, tenacity]
+
 func _toggle_call(i: Array[int], ui: VBoxContainer) -> Callable:
 	return func(): for j in [[i[0], "hide"], [i[1], "show"]]: ui.toggle(j[0], j[1])
 
