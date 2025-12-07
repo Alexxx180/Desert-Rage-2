@@ -8,11 +8,13 @@ signal update_priorities(level: Node, stats: Dictionary)
 
 func experience() -> void: update_exp.emit(level.get_exp(), level.priority.base_xp)
 
+func current_stats() -> Dictionary:
+	return stats.calculate(level.summary.hero)
+
 func sync_stats() -> void:
-	var prior: Dictionary = { "summary": level.summary, "prev": level.prev }
+	# var prior: Dictionary = { "summary": level.summary, "prev": level.prev }
 	update_priorities.emit(level, {
-		"stats": stats.calculate(level.summary.hero),
-		"prev": stats.calculate(level.prev.hero) })
+		"stats": current_stats(), "prev": stats.calculate(level.prev.hero) })
 
 func sync() -> void:
 	sync_stats()

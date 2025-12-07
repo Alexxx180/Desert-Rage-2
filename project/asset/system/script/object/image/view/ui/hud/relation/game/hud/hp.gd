@@ -11,27 +11,30 @@ func _set_stamina(hero: CharacterBody2D, game: Control) -> void:
 		bar.value = next; if run.is_delayed(next): stamina.show())
 	run.stop_mach.connect(func(): stamina.hide())
 
-func _set_ability(stats: Node, sets: VBoxContainer) -> void:
-	# var amount: ProgressBar = ui.get_node("health/hp/margin/health/aura")
-	stats.aura.update_bar.connect(func(_v):
-		sets.use_skill(stats.aura))
-		# ap.value = v)
+func _set_ability(stats: Node, game: Control, hero: CharacterBody2D) -> void:
+	for sets in [game.controls.topic.status.preset.sets,
+		game.priorities.stats.inventory.ability.topic.stack.space.status.preset.sets]:
+		stats.aura.update_bar.connect(func(_v):
+			sets.use_skill(stats.aura))
+	stats.aura.update_bar.connect(func(v):
+		game.priorities.set_points("ability", hero.name, v))
 
-func _set_health(stats: Node, hp: HBoxContainer, hero: String) -> void:
-	# var amount: ProgressBar = ui.get_node("health/hp/margin/health/amount")
-	stats.health.points.update_bar.connect(func(_v):
-		hp.change(hero, stats.health.points))
+func _set_health(stats: Node, game: Control, hero: CharacterBody2D) -> void:
+	stats.health.points.update_bar.connect(func(v):
+		game.controls.status.sticker.hp.change(hero.name, stats.health.points)
+		game.priorities.set_points("health", hero.name, v)
+	)
 
 func _set_stats(hero: CharacterBody2D, game: Control) -> void:
-	var stats: Node = hero.logic.work.stats
-	_set_health(stats, game.controls.status.sticker.hp, hero.name)
-	for status in [game.controls.topic.status.preset.sets,
-		game.priorities.stats.inventory.ability.topic.stack.space.status.preset.sets]:
-		_set_ability(stats, status)
+	for points in [_set_health, _set_ability]:
+		points.call(hero.logic.work.stats, game, hero)
 
 func _set_hero(hero: CharacterBody2D, game: Control) -> void:
-	_set_stats(hero, game)
-	_set_stamina(hero, game)
+	for attribute in [_set_stats, _set_stamina]: attribute.call(hero, game)
 
 func controls(group: Node2D, game: Control) -> void:
 	for hero in ["ray", "rock"]: _set_hero(group.get(hero), game)
+
+	group.deploy.select_hero.connect(func(_l):
+		game.controls.status.sticker.hp.select(group.deploy.party)
+	)

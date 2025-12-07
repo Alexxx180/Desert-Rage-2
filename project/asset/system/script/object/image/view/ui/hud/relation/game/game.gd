@@ -20,14 +20,3 @@ func controls(ui: CanvasLayer, game: Control) -> void:
 	inventory.controls(ui, group, game.priorities.stats.inventory)
 	ability.controls(ui, group, game) #game.get_node("menu/stats/inventory/ability")
 	hud.controls(ui, group, game)
-
-	""" # FIXME ability and other marker points
-	var heroes: Dictionary = game.controls.status.markers.margin.stack.heroes
-
-	for hero in group.deploy.party.heroes:
-		var stats: Node = hero.logic.work.stats
-		stats.health.points.update_bar.connect(func(v: int):
-			game.priorities.set_points("health", hero.name, v)
-			heroes[hero.name].set_hp(hero.logic.work.stats.health.points))
-		stats.aura.update_bar.connect(func(v: int): game.priorities.set_points("ability", hero.name, v))
-	"""

@@ -8,8 +8,9 @@ extends VBoxContainer
 	$stats/value/heroes/ray, $heroes/value/heroes/rock]
 # @onready var description: VBoxContainer = $description
 
-func set_stats(_level: Node, stats: Dictionary) -> void:
-	heroes[0].set_stats(stats.stats.ray)
+func set_stats(stats: Dictionary, hero: String) -> void:
+	heroes[0].set_stats(stats.stats[hero])
+# 	heroes[1].set_stats(stats.stats.rock)
 	# var summary: Dictionary = level.summary
 
 func connect_description(opened: Button, caption: Label) -> void:
