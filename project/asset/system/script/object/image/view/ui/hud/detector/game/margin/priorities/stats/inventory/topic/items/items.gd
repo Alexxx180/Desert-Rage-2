@@ -7,7 +7,10 @@ extends HFlowContainer
 var items: Array[InventoryItem] = []
 
 func _ready() -> void:
-	for item in items: if item is InventoryItem: items.append(item) # item.margin.inventory = 
+	for item in get_children():
+		# items
+		if item is InventoryItem:
+			items.append(item) # item.margin.inventory = 
 
 var inventory: Node:
 	get: return group.deploy.party.leader.to.inventory

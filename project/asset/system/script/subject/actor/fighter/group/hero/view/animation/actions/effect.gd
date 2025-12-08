@@ -11,7 +11,7 @@ var stats: Array
 func set_stats(next: Array) -> void: stats = next
 
 func set_damage(multiplier: float = 1) -> void:
-	close_damage.emit(5)# * multiplier) # stats[POWER]
+	close_damage.emit(stats[POWER])# * multiplier) # 5
 
 func set_position(proportion: float) -> void:
 	moves.hero.to.act.teleport.move(proportion)
