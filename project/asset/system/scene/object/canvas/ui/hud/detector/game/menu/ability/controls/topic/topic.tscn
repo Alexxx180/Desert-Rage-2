@@ -1,0 +1,41 @@
+[gd_scene load_steps=3 format=3 uid="uid://cbmbtjefr35ux"]
+
+[ext_resource type="Script" uid="uid://dommedweskvsj" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/margin.gd" id="1_hx5x6"]
+[ext_resource type="PackedScene" uid="uid://cq5jn6k2bwg5n" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/ability/controls/topic/status/status.tscn" id="2_8cxr5"]
+
+[node name="topic" type="HFlowContainer"]
+custom_minimum_size = Vector2(10, 10)
+script = ExtResource("1_hx5x6")
+
+[node name="left-space" type="Control" parent="."]
+visible = false
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+size_flags_stretch_ratio = 0.25
+
+[node name="items" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="space" type="Control" parent="items"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ability" type="Control" parent="items"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="status" parent="items/ability" instance=ExtResource("2_8cxr5")]
+layout_mode = 1
+anchors_preset = 15
+anchor_bottom = 1.0
+offset_bottom = 0.0
+grow_vertical = 2
+scale = Vector2(1.00223, 1.00812)
+
+[node name="right-space" type="Control" parent="."]
+visible = false
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+size_flags_stretch_ratio = 0.25

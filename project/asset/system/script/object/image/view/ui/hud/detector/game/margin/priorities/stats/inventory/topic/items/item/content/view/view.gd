@@ -5,6 +5,7 @@ extends Control
 
 var prev: Vector2 = Vector2.ZERO
 var prev_text: Texture2D = null
+var inventory: Node
 
 func _get_drag_data(at_position: Vector2) -> Variant:
 	prev = at_position

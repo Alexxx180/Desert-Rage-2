@@ -6,7 +6,7 @@ extends Node
 
 @onready var punch = preload("res://asset/system/scene/subject/particle/fight/punch.tscn")
 @onready var kick = preload("res://asset/system/scene/subject/particle/fight/kick.tscn")
-@onready var combos = preload("res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/ability/markers/combo.tscn")
+@onready var combos = preload("res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/ability/controls/status/markers/combo.tscn")
 
 func _ready() -> void:
 	combo.timeout.connect(reset_combo)

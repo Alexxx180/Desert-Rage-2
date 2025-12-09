@@ -11,7 +11,7 @@ func update_inventory_storage() -> void:
 		items.update_item(slot, storage[slot])
 
 func use_inventory(slot: int) -> void:
-	storage[slot].x -= items.UNIT
+	storage[slot].x -= items.ui.UNIT
 	items.update_item(slot, storage[slot])
 
 func put_to_inventory(no: int) -> bool:
@@ -20,7 +20,7 @@ func put_to_inventory(no: int) -> bool:
 		slot = items.find_item_or_slot(storage, no)
 	else:
 		slot = items.find_empty_slot(storage)
-	if slot != items.NONE:
+	if slot != items.ui.NONE:
 		items.put_item(slot, storage[slot], no)
 		return true
 	return false
