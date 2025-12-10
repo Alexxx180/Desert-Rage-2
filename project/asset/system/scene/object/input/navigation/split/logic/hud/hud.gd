@@ -19,9 +19,11 @@ func setup(navigation: Node, nodes_pack: Array) -> void:
 		ui_nodes.append(nodes)#navigation.get_nodes(paths))
 
 func on_drag_start() -> void:
+	print("SUSPEND INPUT")
 	suspend_input.emit()
 
 func drag_feedback() -> void:
+	print("RESUME INPUT")
 	resume_input.emit()
 
 func delay_feedback() -> void:

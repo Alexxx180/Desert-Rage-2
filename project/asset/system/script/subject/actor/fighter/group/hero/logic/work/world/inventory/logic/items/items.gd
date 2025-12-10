@@ -4,6 +4,12 @@ extends Node
 
 var description: Label
 
+func decide_item_or_equipment(storage: Array, id: int) -> int:
+	if id in [0, 1]:
+		return find_item_or_slot(storage, id)
+	else:
+		return find_empty_slot(storage)
+
 func find_item_or_slot(storage: Array, id: int) -> int:
 	var slot: int = ui.NONE
 	for i in range(0, len(storage)):

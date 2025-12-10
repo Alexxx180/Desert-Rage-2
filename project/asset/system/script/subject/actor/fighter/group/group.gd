@@ -22,7 +22,8 @@ func _ready() -> void:
 func is_hud_opened() -> bool:
 	var result: bool = true
 	for n in navigation:
-		result = result and (not n.hud.logic.is_opened_last)
+		var last: bool = n.hud.logic.is_opened_last
+		result = result and (not last)
 	return not result
 
 func _set_input(state: bool) -> void:

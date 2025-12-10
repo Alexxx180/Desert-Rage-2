@@ -1,9 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://bn2dd80xcv3py"]
+[gd_scene load_steps=16 format=3 uid="uid://bn2dd80xcv3py"]
 
 [ext_resource type="Script" uid="uid://c0o6pslklkxuw" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/topic/items/item/content/view/view.gd" id="1_ep1v2"]
 [ext_resource type="FontFile" uid="uid://b37js8y80ak1k" path="res://asset/resource/media/data/font/NotoColorEmoji-Regular.ttf" id="1_hlhpk"]
 [ext_resource type="Script" uid="uid://ganthw8uqtu5" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/topic/items/item/content/content.gd" id="1_xa6yb"]
-[ext_resource type="Script" uid="uid://bdu6kwvinxtnx" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/topic/items/item/count.gd" id="2_ep1v2"]
+[ext_resource type="Script" uid="uid://bdu6kwvinxtnx" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/topic/items/item/content/selection/count.gd" id="2_ep1v2"]
+[ext_resource type="Script" uid="uid://cg5og751o27wo" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/topic/items/item/content/selection/selection.gd" id="2_unky5"]
+[ext_resource type="Script" uid="uid://d1ehx3qqcgn3x" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/topic/items/item/content/selection/fast.gd" id="3_8p8p3"]
 [ext_resource type="FontFile" uid="uid://dxg5wbmrewk2p" path="res://asset/resource/media/data/font/Lato-Regular.ttf" id="3_xa6yb"]
 [ext_resource type="Texture2D" uid="uid://rdsdp3be1k17" path="res://asset/resource/media/image/inventory/weapon/schofield45-colt.svg" id="3_ymscp"]
 [ext_resource type="Script" uid="uid://fe3muxdmt4bv" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/topic/items/item/content/view/image.gd" id="5_mjmrn"]
@@ -44,8 +46,9 @@ script = ExtResource("1_xa6yb")
 
 [node name="selection" type="Control" parent="."]
 layout_mode = 2
+script = ExtResource("2_unky5")
 
-[node name="back" type="TextureRect" parent="selection"]
+[node name="fast" type="VBoxContainer" parent="selection"]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -53,18 +56,19 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = SubResource("GradientTexture2D_mjmrn")
+theme_override_constants/separation = 0
+script = ExtResource("3_8p8p3")
 
-[node name="color" type="ColorRect" parent="selection"]
-visible = false
+[node name="color" type="ColorRect" parent="selection/fast"]
 custom_minimum_size = Vector2(0, 2)
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 2.0
-grow_horizontal = 2
+layout_mode = 2
 size_flags_vertical = 0
 color = Color(0.184314, 0.184314, 0.72549, 1)
+
+[node name="back" type="TextureRect" parent="selection/fast"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = SubResource("GradientTexture2D_mjmrn")
 
 [node name="count" type="VBoxContainer" parent="selection"]
 layout_mode = 1

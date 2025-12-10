@@ -8,7 +8,7 @@ func update_inventory(ui: Node) -> void:
 
 func controls(hud: CanvasLayer, group: Node2D, inventory: VSplitContainer) -> void:
 	var processor: Node = hud.processor.game.inventory
-	var stack: HFlowContainer = inventory.topic.stack
+	var stack: Container = inventory.topic.stack
 	var bag: HFlowContainer = hud.detector.game.priorities.stats.topic.stack.bag
 	processor.inventory.append(stack.bag.ray.items)
 	processor.inventory.append(bag.ray.items)

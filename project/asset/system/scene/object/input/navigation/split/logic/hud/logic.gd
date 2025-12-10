@@ -5,9 +5,9 @@ class_name SplitToggleLogic
 var toggled: bool = false
 var focus: Control
 var navigation: Node
-var is_opened_last: int:
+var is_opened_last: bool:
 	get: return is_opened_at(-1)
-var is_opened_first: int:
+var is_opened_first: bool:
 	get: return is_opened_at(0)
 
 enum { STRAIGHT = 0, BACKWARD = 1, MOVE = 3 }
@@ -28,7 +28,7 @@ func open_condition(direction: float) -> Callable:
 func is_opened_at(item: int) -> bool:
 	var n: Node = navigation
 	var offset: float = float(n.reserve[item] + n.ui.split_offset)
-	print("OFFSET: ", offset, " - PORTION: ", n.proportion)
+	print("OFFSET: ", offset, (" >" if n.direction < 0 else " <"), " PORTION: ", n.proportion)
 	return open_condition(n.direction).call(offset, n.proportion)
 
 func drag_feedback(opened: bool, nodes: Array) -> void:

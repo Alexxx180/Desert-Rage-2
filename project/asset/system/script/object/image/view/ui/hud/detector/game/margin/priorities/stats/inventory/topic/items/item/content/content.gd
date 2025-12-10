@@ -1,22 +1,17 @@
 extends MarginContainer
 
-@onready var count: VBoxContainer = $selection/count
 @onready var view: Control = $view
-@onready var items: Control = get_node("../..")
-@onready var icons: String = "res://asset/resource/media/image/inventory/"
+@onready var selection: Control = $selection
 
 func remove_item() -> void: # var inventory: Node # TODOT inv
-	view.remove_item()
+	for node in [view, selection]: node.remove_item()
 
 func _show_text(caption: Label, next: String) -> void:
 	caption.text = next
 	caption.show()
 
 func replace_item(next: Dictionary, prev: Dictionary) -> void:
-	put_item(next)
-	put_item(prev)
+	for item in [next, prev]: put_item(item)
 
-func put_item(slot: Dictionary) -> void:
-	var item: Item = items.inventory.items.items[slot.id]
-	view.put_item(icons + "/" + item.icon) #  + item.icon
-	count.set_value(slot.x)
+func put_item(item: Dictionary) -> void:
+	for node in [view, selection]: node.put_item(item)

@@ -46,7 +46,7 @@ func _set_priorities(group: Node2D, topic: PanelContainer, status: HBoxContainer
 	group.xp.update_exp.connect(priority.update_exp)
 
 func _set_navigation(hud: CanvasLayer, group: Node2D, game: Control) -> void:
-	group.navigation = hud.relation.game.ability.navigation
+	group.navigation = hud.relation.game.menu.navigation
 	for n in group.navigation:
 		n.hud.resume_input.connect(group.resume_input)
 		n.hud.suspend_input.connect(group.suspend_input)
