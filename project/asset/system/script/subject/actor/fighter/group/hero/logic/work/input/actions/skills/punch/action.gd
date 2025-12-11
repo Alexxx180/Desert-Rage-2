@@ -6,6 +6,8 @@ func tick(mark: Tick) -> int: # print("DENIED ACCESS TO SKILLS ! ", mark.actor) 
 	var action: Dictionary = mark.blackboard.get_value(caption) # action.pressed = Input.is_action_pressed(name) # action.toggled = Input.is_action_just_pressed(name)
 	action.released = Input.is_action_just_pressed(name)
 	if action.released:
-		print("action: ", action)
+		var hero: CharacterBody2D = mark.blackboard.get_value("tools").hero
+		hero.to.topdown.move.act.run.state.atb.decrement()
+		# action.tools # print("action: ", action)
 		return OK
 	return FAILED

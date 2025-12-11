@@ -6,9 +6,12 @@ func _set_stamina(hero: CharacterBody2D, game: Control) -> void:
 	var bar: ProgressBar = stamina.amount
 	var run: Node = hero.to.act.run.state
 	run.hero = hero
+	run.atb.show.connect(hero.view.barrier.set_atb)
+	"""
 	run.new_mach.connect(func(next: int):
 		f_stamina.value = next
 		bar.value = next; if run.is_delayed(next): stamina.show())
+	"""
 	run.stop_mach.connect(func(): stamina.hide())
 
 func _set_ability(stats: Node, game: Control, hero: CharacterBody2D) -> void:

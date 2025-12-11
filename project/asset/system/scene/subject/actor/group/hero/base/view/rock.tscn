@@ -64,7 +64,6 @@
 [ext_resource type="Texture2D" uid="uid://dhap7bfpxpgi0" path="res://asset/resource/media/image/actors/player/rock/fight/rain/backward-right.png" id="30_3fgip"]
 [ext_resource type="Script" uid="uid://y1gi0fsbgjr1" path="res://asset/system/script/subject/actor/fighter/group/hero/view/animation/actions/move.gd" id="30_3ktcr"]
 [ext_resource type="Texture2D" uid="uid://osydqfu4k3fb" path="res://asset/resource/media/image/actors/player/rock/fight/punch/forward-right.png" id="30_l8aj6"]
-[ext_resource type="PackedScene" uid="uid://bqdyu2d6o0sab" path="res://asset/system/scene/subject/actor/group/hero/base/view/base/influence.tscn" id="30_ol4r3"]
 [ext_resource type="Script" uid="uid://b3wu30ik45duc" path="res://asset/system/script/subject/actor/fighter/group/hero/view/animation/actions/jump.gd" id="31_0vuin"]
 [ext_resource type="Texture2D" uid="uid://x7aoc3tv05c3" path="res://asset/resource/media/image/actors/player/rock/skills/run/forward-left.png" id="31_5euh6"]
 [ext_resource type="Texture2D" uid="uid://cv1w0d0c5k8nw" path="res://asset/resource/media/image/actors/player/rock/fight/stomp/backward.png" id="31_8ibed"]
@@ -98,6 +97,7 @@
 [ext_resource type="Texture2D" uid="uid://cpk5001845d7p" path="res://asset/resource/media/image/actors/player/rock/fight/rain/right.png" id="79_f1d1k"]
 [ext_resource type="Texture2D" uid="uid://mngk83oxgibu" path="res://asset/resource/media/image/actors/player/rock/fight/spark/right.png" id="86_x1lmt"]
 [ext_resource type="Script" uid="uid://b4j6plclsbq6x" path="res://asset/system/script/subject/actor/fighter/group/hero/view/animation/rock.gd" id="92_mktei"]
+[ext_resource type="PackedScene" uid="uid://3pyu7p5tvaj5" path="res://asset/system/scene/subject/actor/group/hero/base/view/base/barrier.tscn" id="98_p7ijp"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ol4r3"]
 light_mode = 2
@@ -106,7 +106,9 @@ light_mode = 2
 shader = ExtResource("4_yrun7")
 shader_parameter/line_color = Color(1, 1, 1, 0)
 shader_parameter/line_thickness = 1.0
+shader_parameter/ap = 5.0
 shader_parameter/invisible = false
+shader_parameter/ability = false
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1wnep"]
 atlas = ExtResource("4_cyd1v")
@@ -6431,6 +6433,7 @@ blend_mode = 1
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_thqop"]
 graph_offset = Vector2(-562.192, -1121.33)
+nodes/output/position = Vector2(1640, -60)
 nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_bwgxx")
 nodes/TimeScale/position = Vector2(-720, -760)
 nodes/active/node = SubResource("AnimationNodeTransition_4o1wx")
@@ -6467,7 +6470,6 @@ nodes/kick_combo/node = SubResource("AnimationNodeTransition_c2g57")
 nodes/kick_combo/position = Vector2(-20, -1520)
 nodes/move/node = SubResource("AnimationNodeTransition_op77x")
 nodes/move/position = Vector2(-360, -380)
-nodes/output/position = Vector2(1640, -60)
 nodes/pull/node = SubResource("AnimationNodeTransition_xtkps")
 nodes/pull/position = Vector2(-740, -320)
 nodes/pull_forward/node = SubResource("AnimationNodeBlendSpace2D_omnyj")
@@ -6494,7 +6496,7 @@ nodes/tools/node = SubResource("AnimationNodeTransition_cc1f1")
 nodes/tools/position = Vector2(600, -840)
 nodes/walk/node = SubResource("AnimationNodeBlendSpace2D_7pjmh")
 nodes/walk/position = Vector2(-940, -800)
-node_connections = [&"TimeScale", 0, &"walk", &"active", 0, &"punch_combo", &"active", 1, &"kick_combo", &"active", 2, &"rain", &"active", 3, &"spark", &"chains", 1, &"hang", &"environment", 0, &"ground", &"environment", 1, &"chains", &"external", 0, &"bash", &"external", 1, &"stomp", &"go", 0, &"TimeScale", &"go", 1, &"run", &"ground", 0, &"tools", &"ground", 1, &"stand", &"hang", 0, &"hang_go", &"hang", 1, &"hang_idle", &"idle", 0, &"idle-1", &"kick_combo", 0, &"kick_0", &"kick_combo", 1, &"kick_1", &"move", 0, &"go", &"move", 1, &"pull", &"move", 2, &"jump", &"output", 0, &"speed", &"pull", 0, &"pull_forward", &"punch_combo", 0, &"punch_0", &"punch_combo", 1, &"punch_1", &"speed", 0, &"environment", &"stand", 0, &"move", &"stand", 1, &"idle", &"tools", 0, &"active", &"tools", 1, &"external"]
+node_connections = [&"output", 0, &"speed", &"TimeScale", 0, &"walk", &"active", 0, &"punch_combo", &"active", 1, &"kick_combo", &"active", 2, &"rain", &"active", 3, &"spark", &"chains", 1, &"hang", &"environment", 0, &"ground", &"environment", 1, &"chains", &"external", 0, &"bash", &"external", 1, &"stomp", &"go", 0, &"TimeScale", &"go", 1, &"run", &"ground", 0, &"tools", &"ground", 1, &"stand", &"hang", 0, &"hang_go", &"hang", 1, &"hang_idle", &"idle", 0, &"idle-1", &"kick_combo", 0, &"kick_0", &"kick_combo", 1, &"kick_1", &"move", 0, &"go", &"move", 1, &"pull", &"move", 2, &"jump", &"pull", 0, &"pull_forward", &"punch_combo", 0, &"punch_0", &"punch_combo", 1, &"punch_1", &"speed", 0, &"environment", &"stand", 0, &"move", &"stand", 1, &"idle", &"tools", 0, &"active", &"tools", 1, &"external"]
 
 [sub_resource type="Animation" id="Animation_osu37"]
 length = 0.001
@@ -11582,7 +11584,17 @@ script = ExtResource("33_ux61i")
 [node name="syncer" type="Node" parent="animation"]
 script = ExtResource("34_hg14t")
 
-[node name="influence" parent="." instance=ExtResource("30_ol4r3")]
+[node name="barrier" parent="." instance=ExtResource("98_p7ijp")]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -45.0
+offset_top = -114.0
+offset_right = 45.0
+offset_bottom = 16.0
+grow_vertical = 0
 
 [connection signal="body_entered" from="behind" to="." method="_go_behind_scene"]
 [connection signal="body_exited" from="behind" to="." method="_go_on_scene"]

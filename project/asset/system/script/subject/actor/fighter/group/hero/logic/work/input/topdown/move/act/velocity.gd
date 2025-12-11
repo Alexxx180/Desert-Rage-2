@@ -5,7 +5,7 @@ var weight: int = 0
 var hero: CharacterBody2D
 
 func animate(motion: Vector2) -> void:
-	hero.view.animation.move(motion)
+	hero.view.move(motion)
 
 func make(motion: Vector2) -> void:
 	hero.make_velocity(motion)

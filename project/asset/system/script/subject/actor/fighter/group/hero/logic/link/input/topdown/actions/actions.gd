@@ -1,7 +1,8 @@
 extends Node
 
 func controls(hero: CharacterBody2D, topdown: Node) -> void:
-	var meta: Dictionary = { "tools": { "hero": hero, "combos": null }, "combo": {},
+	var meta: Dictionary = { "tools": { "hero": hero, "combos": null },
+		"combo": {},
 		"board": topdown.actions.board,
 		"actions": topdown.actions, "act": hero.to.world, "ui": hero.to.hud }
 

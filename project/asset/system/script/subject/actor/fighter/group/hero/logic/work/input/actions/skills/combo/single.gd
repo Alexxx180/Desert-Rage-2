@@ -15,7 +15,7 @@ func fight_combo(mark: Tick) -> Node:
 
 func tick(mark: Tick, act: BehaviorAction) -> int:
 	if check_combo(mark, act.get_metadata()):
-		print("GOT A COMBO!")
+		# print("GOT A COMBO!")
 		act.take_effect(mark)
 		return _continue_process()
 	return FAILED
@@ -34,7 +34,7 @@ func notify(mark: Tick, caption: String) -> void:
 		hero.group.lay.execute.layer.add_child(combo)
 		tools.combos = combo
 	tools.combos.text = caption
-	tools.combos.position = hero.position - Vector2(120, 160)
+	tools.combos.position = hero.position - Vector2(300, 160) # x = 120
 
 func vfx_hint(mark: Tick, scene: PackedScene) -> void:
 	var vfx: Sprite2D = scene.instantiate()
@@ -51,5 +51,5 @@ static func standalone(mark: Tick, slot: int) -> int:
 
 	combo.timer.start()
 	combo.completed = false
-	Skills.view_actions(combo.query)
+	# Skills.view_actions(combo.query)
 	return FAILED

@@ -1,4 +1,4 @@
-[gd_scene load_steps=1095 format=3 uid="uid://csra3penxclqe"]
+[gd_scene load_steps=1096 format=3 uid="uid://csra3penxclqe"]
 
 [ext_resource type="Script" uid="uid://djhgknvw72ya6" path="res://asset/system/script/subject/actor/fighter/group/hero/view/view.gd" id="1_02nce"]
 [ext_resource type="PackedScene" uid="uid://c136xgt1v5vbl" path="res://asset/system/scene/subject/actor/group/hero/base/view/base/shadow.tscn" id="2_7whrg"]
@@ -101,6 +101,7 @@
 [ext_resource type="Texture2D" uid="uid://ifch2qgqrovw" path="res://asset/resource/media/image/actors/player/ray/fight/bash/right.png" id="82_rcjfm"]
 [ext_resource type="Texture2D" uid="uid://8qpwt4g0ok1y" path="res://asset/resource/media/image/actors/player/ray/fight/stomp/right.png" id="83_hv3re"]
 [ext_resource type="Script" uid="uid://c0a00bictxi5e" path="res://asset/system/script/subject/actor/fighter/group/hero/view/animation/ray.gd" id="97_4xu38"]
+[ext_resource type="PackedScene" uid="uid://3pyu7p5tvaj5" path="res://asset/system/scene/subject/actor/group/hero/base/view/base/barrier.tscn" id="102_t3jj2"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1m64o"]
 atlas = ExtResource("4_svwue")
@@ -11079,6 +11080,8 @@ script = ExtResource("32_3ofum")
 
 [node name="effect" type="Node" parent="animation"]
 script = ExtResource("33_mef5b")
+
+[node name="barrier" parent="." instance=ExtResource("102_t3jj2")]
 
 [connection signal="body_entered" from="behind" to="." method="_go_behind_scene"]
 [connection signal="body_exited" from="behind" to="." method="_go_on_scene"]

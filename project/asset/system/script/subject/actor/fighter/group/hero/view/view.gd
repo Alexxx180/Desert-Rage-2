@@ -7,6 +7,7 @@ signal sync_view(hero: Node2D)
 @onready var profile: AnimatedSprite2D = $profile
 @onready var shadow: Sprite2D = $shadow
 @onready var animation: AnimationTree = $animation
+@onready var barrier: VBoxContainer = $barrier
 # @onready var ap: TextureProgressBar = $influence
 @onready var whip: Sprite2D = $whip
 
@@ -17,6 +18,10 @@ var param: Dictionary = {
 	"ability": "shader_parameter/ability",
 	"ap": "shader_parameter/ap"
 }
+
+func move(direction: Vector2) -> void:
+	animation.move(direction)
+	barrier.set_direction(direction)
 
 func _ready() -> void: visible = is_hero
 
