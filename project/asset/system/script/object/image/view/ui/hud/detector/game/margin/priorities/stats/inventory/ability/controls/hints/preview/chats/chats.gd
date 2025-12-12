@@ -5,7 +5,6 @@ signal show_toggle(state: bool)
 @onready var tabs: BoxContainer = $log/tabs
 @onready var chat: PanelContainer = $scroll/list/chat
 @onready var log: PanelContainer = $scroll/list/log
-@onready var stamina: Control = $log/stamina/value
 
 enum { NONE = -1, FIRST = 0, SECOND = 1 }
 

@@ -5,7 +5,7 @@ class_name EnemyHUD
 var boss_fight: bool = false
 
 var foe: Node # var cards: Array
-var card: PanelContainer
+var card: Array
 var hits: int = 0
 var xp: Node
 
@@ -19,7 +19,7 @@ func set_timer(enemy: Node) -> void:
 	foe = enemy
 	foe.hud_reseter.timeout.connect(reset_stats)
 
-func set_achievement() -> void: if hits >= 100: pass # set after 100 hits in a row
+func set_achievement() -> void: if hits >= 999: pass # set after 999 hits in a row
 
 func setup(enemy: CharacterBody2D) -> void:
 	var health: Node = enemy.logic.processor.health
@@ -36,52 +36,46 @@ func _set_contested_health(id: int, health: ProgressBar, hp: Node) -> void:
 		health.value = hp.contested
 	tween[id].tween_property(health, "value", hp.points, CONTEST_TIME).set_delay(DELAY)
 
-func set_health(_card: PanelContainer, hp: Node) -> void:
-	for bar in [card.health, card.contested]:
+func set_health(c: PanelContainer, hp: Node) -> void:
+	for bar in [c.health, c.contested]:
 		bar.max_value = hp.maximum
-	card.health.value = hp.points
-	_set_contested_health(card.get_instance_id(), card.contested, hp)
+	c.health.value = hp.points
+	_set_contested_health(c.get_instance_id(), c.contested, hp)
 
-func set_damage(_card: PanelContainer, hp: Node) -> void:
-	# TODO CARD DAMAGE HEALTH
-	"""
-	card.damage.health.text = str(int(hp.contested))
-	card.damage.value.text = str(int(hp.contested - hp.points))
-	"""
+func set_damage(c: PanelContainer, hp: Node) -> void:
 	var interrogation: bool = hp.contested == 0
-	card.caption.interrogating = hp.points <= 0
-	card.set_hp(hp)
-	card.caption.show_start()
-	# card.interrogate.visible = interrogation
-	card.damage.visible = !interrogation
+	c.caption.interrogating = hp.points <= 0
+	c.set_hp(hp)
+	c.caption.show_start()
+	# c.interrogate.visible = interrogation
+	c.damage.visible = !interrogation
 
-func set_hits(_card: PanelContainer) -> void:
+func set_hits(c: PanelContainer) -> void:
 	if hits >= 2:
-		# card.hits.count.text = str(hits)
-		card.hits.show()
-		card.hits.set_count(hits)
+		c.hits.show()
+		c.hits.set_count(hits)
 		set_achievement()
 
-func set_stats(_card: PanelContainer, _enemy: String, hp: Node) -> void:
-	# card.caption.text = enemy
-	card.appear()
-	set_health(card, hp)
-	set_damage(card, hp)
-	set_hits(card)
+func set_stats(c: PanelContainer, _enemy: String, hp: Node) -> void:
+	# c.caption.text = enemy
+	c.appear()
+	set_health(c, hp)
+	set_damage(c, hp)
+	set_hits(c)
 	foe.hud_reseter.start()
 
 func set_cards(enemy: String, hp: Node):
 	hits += 1
 	if hp.points != 0: xp.add_exp(EXP)
-	# for card in cards: 
-	set_stats(card, enemy, hp)
+	for c in card: 
+		set_stats(c, enemy, hp)
 
 func reset_stats() -> void:
 	hits = 0 # caption = ""
-	# for card in cards:
-	card.damage.hide()
-	card.hits.hide_all()
-	if not boss_fight:
-		card.disappear()
+	for c in card:
+		c.damage.hide()
+		c.hits.hide_all()
+		if not boss_fight:
+			c.disappear()
 
 var in_game: Dictionary = { "eye-seeker": "Гляделкинс" }

@@ -1,8 +1,7 @@
-[gd_scene load_steps=17 format=3 uid="uid://cishpih8t1tbj"]
+[gd_scene load_steps=15 format=3 uid="uid://cishpih8t1tbj"]
 
-[ext_resource type="FontFile" uid="uid://b2wbdbnkxcqv1" path="res://asset/resource/media/data/font/NotoEmoji-VariableFont_wght.ttf" id="1_3704q"]
 [ext_resource type="Script" uid="uid://dl23q0jb3ahtc" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/topic/stack/selected/status/hero.gd" id="1_vy1mb"]
-[ext_resource type="Theme" uid="uid://y1o83ldh4al2" path="res://asset/resource/ui/theme/patterns/template/menu/settings/topic/header/header.tres" id="2_vy1mb"]
+[ext_resource type="PackedScene" uid="uid://hw20vxdse268" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/status/shared/bag.tscn" id="2_c7i6y"]
 [ext_resource type="PackedScene" uid="uid://bdp11gai8bk5" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/status/shared/health.tscn" id="4_3704q"]
 [ext_resource type="PackedScene" uid="uid://du2nfngsi1lpk" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/status/shared/ability.tscn" id="5_vy1mb"]
 [ext_resource type="PackedScene" uid="uid://y6fn078j2sh3" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/status/shared/ailment/poison.tscn" id="6_lerm2"]
@@ -16,28 +15,14 @@
 [ext_resource type="PackedScene" uid="uid://cmauui2eio5gc" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/status/shared/ailment/ko.tscn" id="14_owahf"]
 [ext_resource type="PackedScene" uid="uid://dq1fal5qwrk8n" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/status/shared/ailment/rage.tscn" id="15_f6ftu"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_imbbu"]
-content_margin_left = 2.0
-
 [node name="rock" type="HFlowContainer"]
 size_flags_horizontal = 3
 theme_override_constants/h_separation = 0
 theme_override_constants/v_separation = 0
 script = ExtResource("1_vy1mb")
 
-[node name="bag" type="Button" parent="."]
-custom_minimum_size = Vector2(30, 30)
+[node name="bag" parent="." instance=ExtResource("2_c7i6y")]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("1_3704q")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_imbbu")
-text = "🎒"
-
-[node name="caption" type="Label" parent="."]
-custom_minimum_size = Vector2(40, 0)
-layout_mode = 2
-theme = ExtResource("2_vy1mb")
-theme_override_font_sizes/font_size = 16
-text = "Рок"
 
 [node name="health" parent="." instance=ExtResource("4_3704q")]
 layout_mode = 2

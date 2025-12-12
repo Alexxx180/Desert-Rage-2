@@ -1,9 +1,8 @@
-[gd_scene load_steps=45 format=3 uid="uid://dbaauq0nlgduw"]
+[gd_scene load_steps=42 format=3 uid="uid://dbaauq0nlgduw"]
 
 [ext_resource type="PackedScene" uid="uid://br061ue566x82" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/gameplay/skills.tscn" id="1_1gnfy"]
 [ext_resource type="Script" uid="uid://d1bkj71odt1bp" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/hints/preview/preview.gd" id="2_ytxpc"]
 [ext_resource type="Script" uid="uid://b6q8af1i030yf" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/hints/preview/chats/chats.gd" id="3_ycvvo"]
-[ext_resource type="Script" uid="uid://bdc5mcj472kxf" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/hints/preview/chats/stamina.gd" id="4_wqb2j"]
 [ext_resource type="FontFile" uid="uid://b37js8y80ak1k" path="res://asset/resource/media/data/font/NotoColorEmoji-Regular.ttf" id="5_mhiad"]
 [ext_resource type="PackedScene" uid="uid://dvdimdxij23df" path="res://asset/system/scene/object/timer/hide/hider/hover/hooder.tscn" id="6_j53xd"]
 [ext_resource type="Texture2D" uid="uid://bt7rgtk8dl35x" path="res://asset/resource/media/image/actors/npc/dialog/ray.png" id="7_aemsg"]
@@ -22,12 +21,6 @@
 [ext_resource type="FontFile" uid="uid://b2wbdbnkxcqv1" path="res://asset/resource/media/data/font/NotoEmoji-VariableFont_wght.ttf" id="20_nm87g"]
 [ext_resource type="FontFile" uid="uid://tledodlx6okb" path="res://asset/resource/media/data/font/LTSuperiorMono-Semibold.otf" id="21_jd8lw"]
 [ext_resource type="FontFile" uid="uid://drm0mr2hyapf2" path="res://asset/resource/media/data/font/EmojiOneColor.otf" id="22_a545b"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iy05a"]
-bg_color = Color(0, 0, 0, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n0yye"]
-bg_color = Color(1, 1, 0.588235, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jbac8"]
 content_margin_left = 7.0
@@ -202,78 +195,6 @@ script = ExtResource("3_ycvvo")
 [node name="log" type="HBoxContainer" parent="space/preview/chats"]
 layout_mode = 2
 theme_override_constants/separation = 0
-
-[node name="stamina" type="Control" parent="space/preview/chats/log"]
-visible = false
-custom_minimum_size = Vector2(1, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="value" type="Control" parent="space/preview/chats/log/stamina"]
-visible = false
-custom_minimum_size = Vector2(1, 2)
-anchors_preset = 0
-offset_right = 1.0
-offset_bottom = 337.0
-script = ExtResource("4_wqb2j")
-
-[node name="act" type="ColorRect" parent="space/preview/chats/log/stamina/value"]
-custom_minimum_size = Vector2(1, 6)
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -0.5
-offset_top = -6.0
-offset_right = 0.5
-grow_horizontal = 2
-grow_vertical = 0
-color = Color(0.45098, 0.533333, 1, 1)
-
-[node name="walk" type="ColorRect" parent="space/preview/chats/log/stamina/value"]
-custom_minimum_size = Vector2(1, 6)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -0.5
-offset_top = -3.0
-offset_right = 0.5
-offset_bottom = 3.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(1, 1, 0.588235, 1)
-
-[node name="run" type="ColorRect" parent="space/preview/chats/log/stamina/value"]
-custom_minimum_size = Vector2(1, 6)
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -0.5
-offset_right = 0.5
-offset_bottom = 6.0
-grow_horizontal = 2
-color = Color(1, 0.752941, 0.588235, 1)
-
-[node name="amount" type="ProgressBar" parent="space/preview/chats/log/stamina/value"]
-custom_minimum_size = Vector2(0, 2)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/background = SubResource("StyleBoxFlat_iy05a")
-theme_override_styles/fill = SubResource("StyleBoxFlat_n0yye")
-max_value = 40.0
-step = 1.0
-fill_mode = 3
-show_percentage = false
 
 [node name="tabs" type="VBoxContainer" parent="space/preview/chats/log"]
 layout_mode = 2

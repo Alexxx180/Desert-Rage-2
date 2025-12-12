@@ -2,10 +2,13 @@ extends Node
 
 @onready var timing: ActionTimer = $timing
 @onready var state: Node = $state
+@onready var walk: Timer = $walk
 
 func _ready() -> void:
 	state.atb.timing = timing
+	state.atb.walking = walk
 	timing.timeout.connect(tick)
+	walk.timeout.connect(state.atb.walk)
 	# timing.start()
 
 func set_direction(motion: Vector2) -> void:

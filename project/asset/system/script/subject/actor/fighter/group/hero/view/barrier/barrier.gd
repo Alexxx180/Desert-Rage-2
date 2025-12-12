@@ -5,8 +5,9 @@ extends VBoxContainer
 @onready var down: ColorRect = $down
 
 func set_direction(dir: Vector2) -> void:
-	if not options.shows(dir.y, up, down):
-		options.set_direction(dir)
+	if dir == Vector2.ZERO: return
+	options.shows(dir.y, up, down)
+	options.set_direction(dir)
 
 func set_atb(portion: float) -> void:
 	options.acting(portion, up, down)

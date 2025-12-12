@@ -1,9 +1,9 @@
 extends Node
 
 func _set_stamina(hero: CharacterBody2D, game: Control) -> void:
-	var f_stamina: ProgressBar = game.priorities.stats.topic.stamina.amount
-	var stamina: Control = game.controls.preview.chats.stamina
-	var bar: ProgressBar = stamina.amount
+	# var f_stamina: ProgressBar = game.priorities.stats.topic.stamina.amount
+	# var stamina: Control = game.controls.preview.chats.stamina
+	# var bar: ProgressBar = stamina.amount
 	var run: Node = hero.to.act.run.state
 	run.hero = hero
 	run.atb.show.connect(hero.view.barrier.set_atb)
@@ -12,7 +12,7 @@ func _set_stamina(hero: CharacterBody2D, game: Control) -> void:
 		f_stamina.value = next
 		bar.value = next; if run.is_delayed(next): stamina.show())
 	"""
-	run.stop_mach.connect(func(): stamina.hide())
+	# run.stop_mach.connect(func(): stamina.hide())
 
 func _set_ability(stats: Node, game: Control, hero: CharacterBody2D) -> void:
 	for sets in [game.controls.topic.status.preset.sets,

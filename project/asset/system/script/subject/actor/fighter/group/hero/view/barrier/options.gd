@@ -8,6 +8,7 @@ const TIME: float = 0.25
 @onready var right: ColorRect = $right
 
 var blocked: bool = false
+var previous: bool = false
 
 func acting(portion: float, a: ColorRect, b: ColorRect) -> void:
 	for i in [a, b]: i.modulate = Color.WHITE * portion
@@ -23,19 +24,18 @@ func visualize_block(a: ColorRect, b: ColorRect) -> void:
 	tween.tween_callback(func(): _turn_to_atb([a, b]))
 	blocked = true
 
-func shows(axis: float, a: ColorRect, b: ColorRect) -> bool:
-	if axis < 0:
-		b.hide()
-		a.show()
-	elif axis > 0:
-		a.hide()
-		b.show()
-	else:
-		return false
-	return true
+func _toggle(a: ColorRect, b: ColorRect) -> void: a.hide() ; b.show()
 
-func set_direction(dir: Vector2) -> bool:
-	return shows(dir.x, left, right)
+func shows(axis: float, a: ColorRect, b: ColorRect) -> void:
+	if axis < 0:
+		_toggle(b, a)
+	elif axis > 0:
+		_toggle(a, b)
+	else:
+		for i in [a, b]: i.hide()
+
+func set_direction(dir: Vector2) -> void:
+	shows(dir.x, left, right)
 
 func set_atb(portion: float) -> void:
 	acting(portion, left, right)

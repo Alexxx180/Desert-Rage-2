@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://sloxw12np1ch"]
+[gd_scene load_steps=15 format=3 uid="uid://sloxw12np1ch"]
 
 [ext_resource type="StyleBox" uid="uid://cvfnqancophme" path="res://asset/resource/ui/theme/style/solid-color-panel.tres" id="1_h3g5x"]
 [ext_resource type="Script" uid="uid://creg8v0kuegg7" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/topic/topic.gd" id="2_6i1ua"]
@@ -41,6 +41,19 @@ bg_color = Color(0.00392157, 0.00392157, 0.00392157, 0.498039)
 VScrollBar/styles/grabber = SubResource("StyleBoxFlat_qw6gd")
 VScrollBar/styles/scroll = SubResource("StyleBoxFlat_ccjyc")
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ewu2d"]
+content_margin_right = 1.0
+content_margin_bottom = 1.0
+bg_color = Color(0, 0, 0, 1)
+expand_margin_left = 1.0
+expand_margin_top = 1.0
+expand_margin_right = 1.0
+expand_margin_bottom = 1.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_606mb"]
+content_margin_right = 4.0
+bg_color = Color(0.953292, 0.415199, 9.62615e-07, 1)
+
 [node name="panel" type="PanelContainer"]
 anchors_preset = 15
 anchor_right = 1.0
@@ -51,21 +64,26 @@ size_flags_horizontal = 3
 theme_override_styles/panel = ExtResource("1_h3g5x")
 script = ExtResource("2_6i1ua")
 
-[node name="synergy" type="MarginContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="synergy" type="MarginContainer" parent="HBoxContainer"]
 visible = false
 custom_minimum_size = Vector2(3, 0)
 layout_mode = 2
 size_flags_horizontal = 8
-theme_override_constants/margin_left = 0
+theme_override_constants/margin_left = -5
 theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 2
+theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 5
 
-[node name="points" type="VBoxContainer" parent="synergy"]
+[node name="points" type="VBoxContainer" parent="HBoxContainer/synergy"]
 layout_mode = 2
 theme_override_constants/separation = 4
 
-[node name="ray" type="ProgressBar" parent="synergy/points"]
+[node name="ray" type="ProgressBar" parent="HBoxContainer/synergy/points"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 3
@@ -77,7 +95,7 @@ value = 20.0
 fill_mode = 3
 show_percentage = false
 
-[node name="rock" type="ProgressBar" parent="synergy/points"]
+[node name="rock" type="ProgressBar" parent="HBoxContainer/synergy/points"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 3
@@ -89,7 +107,7 @@ value = 20.0
 fill_mode = 3
 show_percentage = false
 
-[node name="1" type="ProgressBar" parent="synergy/points"]
+[node name="1" type="ProgressBar" parent="HBoxContainer/synergy/points"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 3
@@ -101,7 +119,7 @@ value = 20.0
 fill_mode = 3
 show_percentage = false
 
-[node name="2" type="ProgressBar" parent="synergy/points"]
+[node name="2" type="ProgressBar" parent="HBoxContainer/synergy/points"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 3
@@ -129,10 +147,71 @@ theme_override_constants/margin_bottom = 20
 
 [node name="stack" type="VBoxContainer" parent="scroll/margin"]
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_constants/separation = 7
 script = ExtResource("3_epgdt")
 
-[node name="status" parent="scroll/margin/stack" instance=ExtResource("4_j6ix4")]
+[node name="points" type="HBoxContainer" parent="scroll/margin/stack"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="synergy" type="VBoxContainer" parent="scroll/margin/stack/points"]
+visible = false
+layout_mode = 2
+
+[node name="ray" type="ProgressBar" parent="scroll/margin/stack/points/synergy"]
+custom_minimum_size = Vector2(4, 12)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 3
+theme_override_styles/background = SubResource("StyleBoxFlat_ewu2d")
+theme_override_styles/fill = SubResource("StyleBoxFlat_606mb")
+max_value = 20.0
+step = 1.0
+value = 20.0
+fill_mode = 3
+show_percentage = false
+
+[node name="rock" type="ProgressBar" parent="scroll/margin/stack/points/synergy"]
+custom_minimum_size = Vector2(4, 2)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 3
+theme_override_styles/background = SubResource("StyleBoxFlat_ewu2d")
+theme_override_styles/fill = SubResource("StyleBoxFlat_606mb")
+max_value = 20.0
+step = 1.0
+value = 20.0
+fill_mode = 3
+show_percentage = false
+
+[node name="1" type="ProgressBar" parent="scroll/margin/stack/points/synergy"]
+custom_minimum_size = Vector2(4, 2)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 3
+theme_override_styles/background = SubResource("StyleBoxFlat_ewu2d")
+theme_override_styles/fill = SubResource("StyleBoxFlat_606mb")
+max_value = 20.0
+step = 1.0
+value = 20.0
+fill_mode = 3
+show_percentage = false
+
+[node name="2" type="ProgressBar" parent="scroll/margin/stack/points/synergy"]
+custom_minimum_size = Vector2(4, 2)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 3
+theme_override_styles/background = SubResource("StyleBoxFlat_ewu2d")
+theme_override_styles/fill = SubResource("StyleBoxFlat_606mb")
+max_value = 20.0
+step = 1.0
+value = 20.0
+fill_mode = 3
+show_percentage = false
+
+[node name="status" parent="scroll/margin/stack/points" instance=ExtResource("4_j6ix4")]
 layout_mode = 2
 
 [node name="card" parent="scroll/margin/stack" instance=ExtResource("5_iyx8g")]

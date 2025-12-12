@@ -18,6 +18,7 @@ func face_priorities(split: SplitContainer) -> void:
 		bag.ability.controls.preview.help,
 		bag.ability.controls.status.sticker
 	]])
+	# split.ability.controls.status.sticker.points
 	face_stats(split.stats, bag)
 
 func face_stats(split: SplitContainer, bag: SplitContainer) -> void:

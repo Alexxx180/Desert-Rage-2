@@ -9,6 +9,7 @@ var inventory: Node:
 	get: return group.deploy.party.leader.to.inventory
 
 func _ready() -> void:
+	if group == null: return
 	var slot: int = -1
 	for item in get_children(): # items
 		if item is InventoryItem:

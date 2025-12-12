@@ -11,13 +11,14 @@ var direction: int = 0
 var value: int = 0
 
 var acting: bool = false # :
-	#	get: return value <= STAND# and direction != WALK
+	#get: return value <= STAND# and direction != WALK
 var stand: bool:
 	get: return value == STAND
 var go: bool:
 	get: return value >= GO
 
 var timing: Node
+var walking: Timer
 
 func set_mach(next: int) -> void:
 	value = next ; print("MACH: ", value)
@@ -30,16 +31,21 @@ func lower(power: int) -> int:
 func decrement() -> void:
 	acting = true
 	set_mach(lower(DROP))
+	walking.start()
+
+func walk() -> void:
+	acting = false
+	timing.start()
 
 func increment() -> void:
-	print("direction: ", direction)
-	if acting:
+	#  print("direction: ", direction)
+	if value < STAND:
 		set_mach(lower(WALK))
 	elif value >= STAND:
 		set_mach(lower(direction))
 
 func run_start(motion: Vector2) -> void:
 	direction = STAY if motion == Vector2.ZERO else WALK
-	if not acting and not timing.is_ticking and direction == WALK:
+	if not timing.is_ticking and direction == WALK: # not acting and 
 		timing.start() # not acting and 
-	acting = false
+	# acting = false
