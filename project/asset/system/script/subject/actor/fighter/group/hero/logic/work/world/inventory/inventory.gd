@@ -7,7 +7,7 @@ class_name HeroInventory
 @onready var items: GameItems = GameItems.new()
 
 static func slot() -> Dictionary:
-	return { "id": GameItems.JAR, "x": 0, "with": -1, "up": 0 }
+	return { "id": 0, "x": 0, "with": -1, "up": 0 }
 
 func _ready() -> void:
 	logic.effect.logic = logic

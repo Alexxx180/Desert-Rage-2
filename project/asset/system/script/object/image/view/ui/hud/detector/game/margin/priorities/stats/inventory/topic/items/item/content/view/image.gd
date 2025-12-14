@@ -2,7 +2,7 @@ extends TextureRect
 
 var holder: Texture2D = null
 
-const PREVIEW_SIZE: Vector2 = Vector2(60, 60)
+const PREVIEW_SIZE: Vector2 = Vector2(72, 72)
 const ICONS: String = "res://asset/resource/media/image/inventory/"
 
 func get_preview_texture() -> TextureRect:

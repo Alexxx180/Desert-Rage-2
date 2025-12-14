@@ -1,0 +1,12 @@
+extends RefCounted
+
+class_name EquipTypeItems
+
+enum { JAR = 0, A_DOTE = 1, A_COUGH = 2, SAKSAUL = 3, G_KEY = 4, P_KEY = 5, WATER = 6, TEA = 7, ETHER = 8, TAMARISK = 9,
+	 RT_FIELD = 10, OPUNTIA = 11, YUKKA = 12, L_PANTS = 13, C_LEGS = 14, L_BOOTS = 15, C_BOOTS = 16, L_CLOTH = 17, C_MAIL = 18,
+	 T_SHIELD = 19, K_DUSTER = 20, W_KNIFE = 21, A_SWORD = 22, T_SWORD = 23, COLT = 24, SHOTGUN = 25, BOOMERANG = 26, SHOE = 27 }
+
+var recipe: Dictionary = {
+	ETHER: [WATER, RT_FIELD], TEA: [WATER, TAMARISK],
+	A_COUGH: [WATER, YUKKA], A_DOTE: [WATER, OPUNTIA]
+}

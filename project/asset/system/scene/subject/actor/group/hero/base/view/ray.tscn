@@ -1,4 +1,4 @@
-[gd_scene load_steps=1096 format=3 uid="uid://csra3penxclqe"]
+[gd_scene load_steps=1099 format=3 uid="uid://csra3penxclqe"]
 
 [ext_resource type="Script" uid="uid://djhgknvw72ya6" path="res://asset/system/script/subject/actor/fighter/group/hero/view/view.gd" id="1_02nce"]
 [ext_resource type="PackedScene" uid="uid://c136xgt1v5vbl" path="res://asset/system/scene/subject/actor/group/hero/base/view/base/shadow.tscn" id="2_7whrg"]
@@ -100,6 +100,7 @@
 [ext_resource type="Texture2D" uid="uid://c0p0ms0yb25r7" path="res://asset/resource/media/image/actors/player/ray/fight/fire/right.png" id="70_v87tl"]
 [ext_resource type="Texture2D" uid="uid://ifch2qgqrovw" path="res://asset/resource/media/image/actors/player/ray/fight/bash/right.png" id="82_rcjfm"]
 [ext_resource type="Texture2D" uid="uid://8qpwt4g0ok1y" path="res://asset/resource/media/image/actors/player/ray/fight/stomp/right.png" id="83_hv3re"]
+[ext_resource type="Script" uid="uid://dv5mhv4nhbfyc" path="res://asset/system/script/subject/actor/fighter/group/hero/view/mirror.gd" id="96_c8l3p"]
 [ext_resource type="Script" uid="uid://c0a00bictxi5e" path="res://asset/system/script/subject/actor/fighter/group/hero/view/animation/ray.gd" id="97_4xu38"]
 [ext_resource type="PackedScene" uid="uid://3pyu7p5tvaj5" path="res://asset/system/scene/subject/actor/group/hero/base/view/base/barrier.tscn" id="102_t3jj2"]
 
@@ -5967,6 +5968,12 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c8l3p"]
+size = Vector2(20, 26)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t3jj2"]
+size = Vector2(20, 24)
+
 [sub_resource type="Gradient" id="Gradient_o5svw"]
 colors = PackedColorArray(0.325441, 0.325441, 0.325441, 1, 0.568973, 0.568973, 0.568973, 1)
 
@@ -10976,6 +10983,31 @@ metadata/_edit_horizontal_guides_ = [-324.0]
 
 [node name="shadow" parent="." instance=ExtResource("2_7whrg")]
 
+[node name="mirror" type="AnimatedSprite2D" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0.235294)
+position = Vector2(0, -32)
+sprite_frames = SubResource("SpriteFrames_ajgxq")
+animation = &"backward"
+offset = Vector2(0, -51.5)
+script = ExtResource("96_c8l3p")
+
+[node name="a" type="Area2D" parent="mirror"]
+collision_layer = 0
+collision_mask = 1074268160
+
+[node name="shape" type="CollisionShape2D" parent="mirror/a"]
+position = Vector2(0, -89)
+shape = SubResource("RectangleShape2D_c8l3p")
+
+[node name="b" type="Area2D" parent="mirror"]
+collision_layer = 0
+collision_mask = 1074268160
+
+[node name="shape" type="CollisionShape2D" parent="mirror/b"]
+position = Vector2(0, -6)
+shape = SubResource("RectangleShape2D_t3jj2")
+
 [node name="profile" type="AnimatedSprite2D" parent="."]
 material = ExtResource("4_4xu38")
 position = Vector2(0, 1)
@@ -11082,6 +11114,8 @@ script = ExtResource("32_3ofum")
 script = ExtResource("33_mef5b")
 
 [node name="barrier" parent="." instance=ExtResource("102_t3jj2")]
+grow_horizontal = 1
+grow_vertical = 1
 
 [connection signal="body_entered" from="behind" to="." method="_go_behind_scene"]
 [connection signal="body_exited" from="behind" to="." method="_go_on_scene"]

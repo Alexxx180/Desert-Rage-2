@@ -22,14 +22,15 @@ colors = PackedColorArray(0, 0, 0, 0.235294, 0, 0, 0, 0.235294)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_w6fel"]
 gradient = SubResource("Gradient_tvpfk")
-width = 8
 
-[sub_resource type="Gradient" id="Gradient_w6fel"]
+[sub_resource type="Gradient" id="Gradient_0rv78"]
 colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 0.470588)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_qpogm"]
-gradient = SubResource("Gradient_w6fel")
-width = 32
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_uyn7k"]
+gradient = SubResource("Gradient_0rv78")
+height = 12
+fill_from = Vector2(0.515152, 0)
+fill_to = Vector2(0.518939, 1)
 
 [node name="jump" type="CharacterBody2D"]
 position = Vector2(0, 22)
@@ -45,7 +46,8 @@ shape = SubResource("ConcavePolygonShape2D_tvpfk")
 script = ExtResource("1_j1ff4")
 
 [node name="shadow" type="Sprite2D" parent="view"]
-position = Vector2(36, -22)
+position = Vector2(4.5, -17)
+scale = Vector2(0.984375, 1)
 texture = SubResource("GradientTexture2D_w6fel")
 
 [node name="stand" type="Sprite2D" parent="view"]
@@ -54,8 +56,8 @@ texture = ExtResource("2_b2wmg")
 offset = Vector2(32, 32)
 
 [node name="shadow-behind" type="Sprite2D" parent="view"]
-position = Vector2(16, -22)
-texture = SubResource("GradientTexture2D_qpogm")
+position = Vector2(0, 4)
+texture = SubResource("GradientTexture2D_uyn7k")
 
 [node name="logic" type="Node2D" parent="."]
 script = ExtResource("5_kqgit")

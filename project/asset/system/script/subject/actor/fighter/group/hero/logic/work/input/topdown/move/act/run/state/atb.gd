@@ -21,7 +21,7 @@ var timing: Node
 var walking: Timer
 
 func set_mach(next: int) -> void:
-	value = next ; print("MACH: ", value)
+	value = next# ; print("MACH: ", value)
 	if value < 0:
 		show.emit(abs(value) / float(abs(ACTION)))
 
@@ -37,8 +37,7 @@ func walk() -> void:
 	acting = false
 	timing.start()
 
-func increment() -> void:
-	#  print("direction: ", direction)
+func increment() -> void: #  print("direction: ", direction)
 	if value < STAND:
 		set_mach(lower(WALK))
 	elif value >= STAND:

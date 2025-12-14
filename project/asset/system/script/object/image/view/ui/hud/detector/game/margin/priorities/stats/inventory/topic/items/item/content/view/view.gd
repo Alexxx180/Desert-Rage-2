@@ -23,7 +23,7 @@ func _drop_data(_pos: Vector2, cell: Variant) -> void:
 func remove_item() -> void: image.remove_item()
 
 func put_item(item: Dictionary) -> void:
-	image.put_item(inventory.items.items[item.id].icon)
+	image.put_item(inventory.items.get_item(item.id).item.icon)
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.is_released():

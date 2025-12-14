@@ -5,6 +5,7 @@ signal sync_view(hero: Node2D)
 @export var is_hero: bool = false
 
 @onready var profile: AnimatedSprite2D = $profile
+@onready var mirror: AnimatedSprite2D = $mirror
 @onready var shadow: Sprite2D = $shadow
 @onready var animation: AnimationTree = $animation
 @onready var barrier: VBoxContainer = $barrier
@@ -23,7 +24,7 @@ func move(direction: Vector2) -> void:
 	animation.move(direction)
 	barrier.set_direction(direction)
 
-func _ready() -> void: visible = is_hero
+func _ready() -> void: visible = is_hero; mirror.sync(profile)
 
 func set_aura(next_color: Color, thickness: float) -> void:
 	profile.material.set(param.thick, thickness)

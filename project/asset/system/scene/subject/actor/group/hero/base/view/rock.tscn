@@ -1,4 +1,4 @@
-[gd_scene load_steps=1095 format=3 uid="uid://xh6k0wh1djy2"]
+[gd_scene load_steps=1098 format=3 uid="uid://xh6k0wh1djy2"]
 
 [ext_resource type="Script" uid="uid://djhgknvw72ya6" path="res://asset/system/script/subject/actor/fighter/group/hero/view/view.gd" id="1_f3u3w"]
 [ext_resource type="PackedScene" uid="uid://c136xgt1v5vbl" path="res://asset/system/scene/subject/actor/group/hero/base/view/base/shadow.tscn" id="2_cqm6d"]
@@ -97,18 +97,11 @@
 [ext_resource type="Texture2D" uid="uid://cpk5001845d7p" path="res://asset/resource/media/image/actors/player/rock/fight/rain/right.png" id="79_f1d1k"]
 [ext_resource type="Texture2D" uid="uid://mngk83oxgibu" path="res://asset/resource/media/image/actors/player/rock/fight/spark/right.png" id="86_x1lmt"]
 [ext_resource type="Script" uid="uid://b4j6plclsbq6x" path="res://asset/system/script/subject/actor/fighter/group/hero/view/animation/rock.gd" id="92_mktei"]
+[ext_resource type="Script" uid="uid://dv5mhv4nhbfyc" path="res://asset/system/script/subject/actor/fighter/group/hero/view/mirror.gd" id="92_pm6ls"]
 [ext_resource type="PackedScene" uid="uid://3pyu7p5tvaj5" path="res://asset/system/scene/subject/actor/group/hero/base/view/base/barrier.tscn" id="98_p7ijp"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ol4r3"]
 light_mode = 2
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_6do5e"]
-shader = ExtResource("4_yrun7")
-shader_parameter/line_color = Color(1, 1, 1, 0)
-shader_parameter/line_thickness = 1.0
-shader_parameter/ap = 5.0
-shader_parameter/invisible = false
-shader_parameter/ability = false
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1wnep"]
 atlas = ExtResource("4_cyd1v")
@@ -5626,6 +5619,20 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pm6ls"]
+size = Vector2(20, 51)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8cmwq"]
+size = Vector2(20, 40)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6do5e"]
+shader = ExtResource("4_yrun7")
+shader_parameter/line_color = Color(1, 1, 1, 0)
+shader_parameter/line_thickness = 1.0
+shader_parameter/ap = 5.0
+shader_parameter/invisible = false
+shader_parameter/ability = false
+
 [sub_resource type="Gradient" id="Gradient_o5svw"]
 colors = PackedColorArray(0.325441, 0.325441, 0.325441, 1, 0.568973, 0.568973, 0.568973, 1)
 
@@ -6433,7 +6440,6 @@ blend_mode = 1
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_thqop"]
 graph_offset = Vector2(-562.192, -1121.33)
-nodes/output/position = Vector2(1640, -60)
 nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_bwgxx")
 nodes/TimeScale/position = Vector2(-720, -760)
 nodes/active/node = SubResource("AnimationNodeTransition_4o1wx")
@@ -6470,6 +6476,7 @@ nodes/kick_combo/node = SubResource("AnimationNodeTransition_c2g57")
 nodes/kick_combo/position = Vector2(-20, -1520)
 nodes/move/node = SubResource("AnimationNodeTransition_op77x")
 nodes/move/position = Vector2(-360, -380)
+nodes/output/position = Vector2(1640, -60)
 nodes/pull/node = SubResource("AnimationNodeTransition_xtkps")
 nodes/pull/position = Vector2(-740, -320)
 nodes/pull_forward/node = SubResource("AnimationNodeBlendSpace2D_omnyj")
@@ -6496,7 +6503,7 @@ nodes/tools/node = SubResource("AnimationNodeTransition_cc1f1")
 nodes/tools/position = Vector2(600, -840)
 nodes/walk/node = SubResource("AnimationNodeBlendSpace2D_7pjmh")
 nodes/walk/position = Vector2(-940, -800)
-node_connections = [&"output", 0, &"speed", &"TimeScale", 0, &"walk", &"active", 0, &"punch_combo", &"active", 1, &"kick_combo", &"active", 2, &"rain", &"active", 3, &"spark", &"chains", 1, &"hang", &"environment", 0, &"ground", &"environment", 1, &"chains", &"external", 0, &"bash", &"external", 1, &"stomp", &"go", 0, &"TimeScale", &"go", 1, &"run", &"ground", 0, &"tools", &"ground", 1, &"stand", &"hang", 0, &"hang_go", &"hang", 1, &"hang_idle", &"idle", 0, &"idle-1", &"kick_combo", 0, &"kick_0", &"kick_combo", 1, &"kick_1", &"move", 0, &"go", &"move", 1, &"pull", &"move", 2, &"jump", &"pull", 0, &"pull_forward", &"punch_combo", 0, &"punch_0", &"punch_combo", 1, &"punch_1", &"speed", 0, &"environment", &"stand", 0, &"move", &"stand", 1, &"idle", &"tools", 0, &"active", &"tools", 1, &"external"]
+node_connections = [&"TimeScale", 0, &"walk", &"active", 0, &"punch_combo", &"active", 1, &"kick_combo", &"active", 2, &"rain", &"active", 3, &"spark", &"chains", 1, &"hang", &"environment", 0, &"ground", &"environment", 1, &"chains", &"external", 0, &"bash", &"external", 1, &"stomp", &"go", 0, &"TimeScale", &"go", 1, &"run", &"ground", 0, &"tools", &"ground", 1, &"stand", &"hang", 0, &"hang_go", &"hang", 1, &"hang_idle", &"idle", 0, &"idle-1", &"kick_combo", 0, &"kick_0", &"kick_combo", 1, &"kick_1", &"move", 0, &"go", &"move", 1, &"pull", &"move", 2, &"jump", &"output", 0, &"speed", &"pull", 0, &"pull_forward", &"punch_combo", 0, &"punch_0", &"punch_combo", 1, &"punch_1", &"speed", 0, &"environment", &"stand", 0, &"move", &"stand", 1, &"idle", &"tools", 0, &"active", &"tools", 1, &"external"]
 
 [sub_resource type="Animation" id="Animation_osu37"]
 length = 0.001
@@ -11481,6 +11488,30 @@ script = ExtResource("1_f3u3w")
 
 [node name="shadow" parent="." instance=ExtResource("2_cqm6d")]
 scale = Vector2(0.6, 0.72)
+
+[node name="mirror" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(0, -32)
+sprite_frames = SubResource("SpriteFrames_bd13v")
+animation = &"backward_left"
+offset = Vector2(0, -51.5)
+script = ExtResource("92_pm6ls")
+
+[node name="a" type="Area2D" parent="mirror"]
+collision_layer = 0
+collision_mask = 526336
+
+[node name="shape" type="CollisionShape2D" parent="mirror/a"]
+position = Vector2(0, -83.5)
+shape = SubResource("RectangleShape2D_pm6ls")
+
+[node name="b" type="Area2D" parent="mirror"]
+collision_layer = 0
+collision_mask = 526336
+
+[node name="shape" type="CollisionShape2D" parent="mirror/b"]
+position = Vector2(0, -14)
+shape = SubResource("RectangleShape2D_8cmwq")
 
 [node name="profile" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_6do5e")

@@ -25,7 +25,7 @@ func transitions() -> void:
 		state.to_walk()
 
 func bar_reset() -> void:
-	if state.atb.acting:
+	if state.atb.acting or state.atb.stand:
 		state.reset_mach()
 		timing.stop()
 

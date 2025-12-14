@@ -1,15 +1,42 @@
-[gd_scene load_steps=4 format=3 uid="uid://3gtpqwa5afwd"]
+[gd_scene load_steps=8 format=3 uid="uid://3gtpqwa5afwd"]
 
 [ext_resource type="Script" uid="uid://6h5j2hl3srm1" path="res://asset/system/script/subject/control/drive/box/fire/view.gd" id="1_1wjir"]
 [ext_resource type="Texture2D" uid="uid://co5hxrpt4c6ha" path="res://asset/resource/media/image/interactables/box/fire-box.png" id="1_xtqw3"]
 [ext_resource type="Material" uid="uid://cbf2yw7c100kv" path="res://asset/resource/canvas/gpu/particle/torch.tres" id="3_nwxfl"]
 
+[sub_resource type="Gradient" id="Gradient_qy2n7"]
+colors = PackedColorArray(0, 0, 0, 0.235294, 0, 0, 0, 0.235294)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_h51wb"]
+gradient = SubResource("Gradient_qy2n7")
+width = 70
+height = 24
+fill_from = Vector2(0.507576, 0)
+fill_to = Vector2(0.492424, 1)
+
+[sub_resource type="Gradient" id="Gradient_qjgnu"]
+colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 0.470588)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ut0cm"]
+gradient = SubResource("Gradient_qjgnu")
+height = 36
+fill_from = Vector2(0.5, 0)
+fill_to = Vector2(0.492424, 0.992424)
+
 [node name="view" type="Node2D"]
 script = ExtResource("1_1wjir")
+
+[node name="shadow" type="Sprite2D" parent="."]
+position = Vector2(0, 2)
+texture = SubResource("GradientTexture2D_h51wb")
 
 [node name="stand" type="Sprite2D" parent="."]
 position = Vector2(0, -22)
 texture = ExtResource("1_xtqw3")
+
+[node name="shadow-behind" type="Sprite2D" parent="."]
+position = Vector2(0, -8)
+texture = SubResource("GradientTexture2D_ut0cm")
 
 [node name="fire" type="GPUParticles2D" parent="."]
 position = Vector2(0, -35)
