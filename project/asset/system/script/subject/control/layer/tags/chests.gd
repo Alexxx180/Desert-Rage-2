@@ -1,6 +1,6 @@
 extends Node
 
-enum { GROUND = 1, ENEMY = 4, CHESTS = 5 }
+enum { GROUND = 1, ENEMY = 4, CHESTS = 5, TILE_SIZE = 6 }
 
 var lay: Node
 var group: Node2D
@@ -22,7 +22,9 @@ func drink_water(inventory: Node, pos: Vector2) -> void:
 	if lay.border.from_pos(pos).context.atlas in FLOW:
 		inventory.logic.effect.restore() # USE WATER
 
-func _get_id(tag: Dictionary) -> int: return Tile.logic_no(tag.atlas) - Tile.FLOOR
+func _get_id(tag: Dictionary) -> int:
+	print("ITEM ID = ", Tile.logic_no(tag.atlas, TILE_SIZE))
+	return Tile.logic_no(tag.atlas, TILE_SIZE) - Tile.FLOOR
 
 func open_chests() -> void:
 	var tile: Dictionary = lay.border.context

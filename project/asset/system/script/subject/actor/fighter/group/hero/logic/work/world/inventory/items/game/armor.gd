@@ -2,10 +2,15 @@ extends RefCounted
 
 class_name ArmorTypeItems
 
+var t: Dictionary = { "C": "Одежда", "A": "Броня", "R": "Реликвия" }
+
 func get_item(no: int) -> Dictionary:
 	return { "logic": effect[no], "item": names[no] }
 
 func _init() -> void: size = names.size()
+
+func _slot(name: String, type: String, description: String, icon: String) -> Item:
+	return Item.new(name, t[type], description, "armor/" + icon)
 
 var size: int
 var effect: Array[ArmorItem] = [
@@ -14,12 +19,12 @@ var effect: Array[ArmorItem] = [
 	ArmorItem.new(2), ArmorItem.new(0, 10)
 ]
 var names: Array[Item] = [
-	Item.new("К. Штаны", "Одежда", "Сделаны из цельного куска кожи", "armor/pants/pants.svg"),
-	Item.new("К. Поножи", "Броня", "Надежно защищает от попадания стрел", "armor/pants/greaves.svg"),
-	Item.new("К. Ботинки", "Одежда", "Без ботинок по раскаленным поверхностям перемещаться будет тяжеловато", "armor/boots/leather.svg"),
-	Item.new("К. Сапоги", "Броня", "В них очень приятно давить ползающих гадюк", "armor/boots/iron.svg"),
-	Item.new("К. Куртка", "Одежда", "Прикрывает спину от палящего солнца", "armor/breast-plate/leather.svg"),
-	Item.new("К. Нагрудник", "Броня", "Плотная кольчуга хорошо защищает от пробитий", "armor/breast-plate/iron.svg"),
-	Item.new("Ж. Щит", "Реликвия", "Защищает от внезапных ударов с 1% шансом", "armor/shield.svg"),
-	Item.new("Зуб мудрости", "Реликвия", "Усиливает ваше влияние", "armor/shield.svg")
+	_slot("К. Штаны", "C", "Сделаны из цельного куска кожи", "pants/pants.svg"),
+	_slot("К. Поножи", "A", "Надежно защищает от попадания стрел", "pants/greaves.svg"),
+	_slot("К. Ботинки", "C", "Без ботинок по раскаленным поверхностям перемещаться будет тяжеловато", "boots/leather.svg"),
+	_slot("К. Сапоги", "A", "В них очень приятно давить ползающих гадюк", "boots/iron.svg"),
+	_slot("К. Куртка", "C", "Прикрывает спину от палящего солнца", "breast-plate/leather.svg"),
+	_slot("К. Нагрудник", "A", "Плотная кольчуга хорошо защищает от пробитий", "breast-plate/iron.svg"),
+	_slot("Ж. Щит", "R", "Защищает от внезапных ударов с 1% шансом", "artifact/shield.svg"),
+	_slot("Зуб мудрости", "R", "Усиливает ваше влияние", "artifact/tooth.svg")
 ]

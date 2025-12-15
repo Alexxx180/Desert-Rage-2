@@ -2,10 +2,17 @@ extends RefCounted
 
 class_name WeaponTypeItems
 
+var t: Dictionary = { "M": "Б. Оружие", "F": "О. Оружие", "R": "Д. Оружие" }
+
 func get_item(no: int) -> Variant:
 	return { "logic": effect[no], "item": names[no] }
 
 func _init() -> void: size = names.size()
+func _icon(path: String) -> String: return "weapon/" + path
+func _icon(path: String) -> String: return "weapon/" + path
+
+func _slot(name: String, type: String, description: String, icon: String) -> Item:
+	return Item.new(name, t[type], description, "weapon/" + icon)
 
 var size: int
 var effect: Array[WeaponItem] = [

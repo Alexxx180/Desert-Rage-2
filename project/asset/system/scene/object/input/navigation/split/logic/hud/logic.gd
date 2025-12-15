@@ -12,15 +12,12 @@ var is_opened_first: bool:
 
 enum { STRAIGHT = 0, BACKWARD = 1, MOVE = 3 }
 
-func toggle(nodes: Array, prop: String, override: Callable, basic: Callable) -> void:
+func hide(nodes: Array) -> void: toggle(nodes, "hide")
+func show(nodes: Array) -> void: toggle(nodes, "show")
+func toggle(nodes: Array, prop: String) -> void:
 	for node in nodes:
-		if prop in node: override.call(node)
-		else: basic.call(node)
-
-func hide(nodes: Array) -> void:
-	toggle(nodes, "hides", func(n): n.hides(), func(n): n.hide())
-func show(nodes: Array) -> void:
-	toggle(nodes, "shows", func(n): n.shows(), func(n): n.show())
+		var next: String = prop + "s"
+		node.get(next if next in node else prop).call()
 
 func open_condition(direction: float) -> Callable:
 	return (func(a, b): return a > b) if direction < 0 else (func(a, b): return a < b)
@@ -28,7 +25,7 @@ func open_condition(direction: float) -> Callable:
 func is_opened_at(item: int) -> bool:
 	var n: Node = navigation
 	var offset: float = float(n.reserve[item] + n.ui.split_offset)
-	print("OFFSET: ", offset, (" >" if n.direction < 0 else " <"), " PORTION: ", n.proportion)
+	# print("OFFSET: ", offset, (" >" if n.direction < 0 else " <"), " PORTION: ", n.proportion)
 	return open_condition(n.direction).call(offset, n.proportion)
 
 func drag_feedback(opened: bool, nodes: Array) -> void:
@@ -43,7 +40,7 @@ func _get_move(a: int, b: int, dir: float) -> float:
 	return MOVE * (a if dir < 0 else b)
 
 func out_screen_drag(condition: bool, offset: float, portion: float) -> void:
-	open_menu(portion if condition else offset)
+	open_menu(int(portion if condition else offset))
 
 func straight_drag() -> void:
 	var move: float = _get_move(1, -1, navigation.direction)
@@ -57,9 +54,9 @@ func backward_drag() -> void:
 	open_menu(navigation.ui.split_offset + move)
 	navigation.hud.delay_feedback()
 
-func set_effect(offset: int, focus: int) -> void:
+func set_effect(offset: int, focused: int) -> void:
 	open_menu(offset)
-	_set_focus(focus)
+	_set_focus(focused)
 
 func instant_drag() -> void:
 	toggled = !toggled
@@ -71,9 +68,7 @@ func _set_focus(no: int) -> void:
 		0: focus.grab_focus()
 
 func focus_backward() -> void:
-	if not is_opened_first:
-		_set_focus(BACKWARD)
+	if not is_opened_first: _set_focus(BACKWARD)
 
 func focus_straight() -> void:
-	if is_opened_last:
-		_set_focus(STRAIGHT)
+	if is_opened_last: _set_focus(STRAIGHT)
