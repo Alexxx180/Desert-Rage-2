@@ -1,34 +1,27 @@
-extends RefCounted
+extends TypeItems
 
 class_name WeaponTypeItems
 
 var t: Dictionary = { "M": "Б. Оружие", "F": "О. Оружие", "R": "Д. Оружие" }
 
-func get_item(no: int) -> Variant:
-	return { "logic": effect[no], "item": names[no] }
-
-func _init() -> void: size = names.size()
 func _icon(path: String) -> String: return "weapon/" + path
-func _icon(path: String) -> String: return "weapon/" + path
+func _type(type: String) -> String: return t[type]
 
-func _slot(name: String, type: String, description: String, icon: String) -> Item:
-	return Item.new(name, t[type], description, "weapon/" + icon)
+func _get_effect() -> Array: return [
+		WeaponItem.new(3), WeaponItem.new(4), WeaponItem.new(4), WeaponItem.new(7),
+		WeaponItem.new(5), WeaponItem.new(7), WeaponItem.new(9), WeaponItem.new(3),
+		WeaponItem.new(50)
+	]
 
-var size: int
-var effect: Array[WeaponItem] = [
-	WeaponItem.new(3), WeaponItem.new(4), WeaponItem.new(4), WeaponItem.new(7),
-	WeaponItem.new(5), WeaponItem.new(7), WeaponItem.new(9), WeaponItem.new(3),
-	WeaponItem.new(50)
-]
-var names: Array[Item] = [
-	Item.new("К. Кастет", "Б. Оружие", "Усиливает пробивающую силу удара", "weapon/knuckle-duster.svg"),
-	Item.new("П. Нож", "Б. Оружие", "Годится чтобы нарезать тортик", "weapon/knife.svg"),
-	Item.new("Д. Меч", "Б. Оружие", "Снова сэкономили...", "weapon/sword.svg"),
-	Item.new("И. Меч", "Б. Оружие", "Простая игрушка?", "weapon/toy-sword.svg"),
-	Item.new("К. Шофилд-45", "О. Оружие", "Простой, надежный револьвер", "weapon/schofield45-colt.svg"),
-	Item.new("Пацифист", "О. Оружие", "Мир достается тяжелой ценой", "weapon/pacifist-colt.svg"),
-	Item.new("Дробовик", "О. Оружие", "Похоже кто-то обронил", "weapon/shotgun.svg"),
-	Item.new("Д. Бумеранг", "Д. Оружие", "Осторожно - это деревянное лезвие не игрушка", "weapon/boomerang.svg"),
-	Item.new("Тапок", "Б. Оружие", "Слова излишни", "weapon/shoe.svg"),
-]
+func _get_names() -> Array[Item]: return [
+		_item("К. Кастет", "M", "Усиливает пробивающую силу удара", "melee/knuckle-duster.svg"),
+		_item("П. Нож", "M", "Годится чтобы нарезать тортик", "melee/knife.svg"),
+		_item("Д. Меч", "M", "Снова сэкономили...", "melee/sword.svg"),
+		_item("И. Меч", "M", "Простая игрушка?", "melee/toy-sword.svg"),
+		_item("К. Шофилд-45", "F", "Простой, надежный револьвер", "firearm/schofield45-colt.svg"),
+		_item("Пацифист", "F", "Мир достается тяжелой ценой", "firearm/pacifist-colt.svg"),
+		_item("Дробовик", "F", "Похоже кто-то обронил", "firearm/shotgun.svg"),
+		_item("Д. Бумеранг", "R", "Осторожно - это деревянное лезвие не игрушка", "boomerang.svg"),
+		_item("Тапок", "M", "Слова излишни", "melee/shoe.svg"),
+	]
 

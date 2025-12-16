@@ -10,6 +10,9 @@ var description: String
 var icon: String
 var craft: Dictionary
 
+static func i(product: int) -> Dictionary: return { "i": product }
+static func o(resources: Array[int]) -> Dictionary: return { "o": resources }
+
 static func crafts(result: Dictionary) -> void:
 	for i in [TEA, ETHER, A_DOTE, A_COUGH]:
 		result[i] = { "i": [], "o": -1 }

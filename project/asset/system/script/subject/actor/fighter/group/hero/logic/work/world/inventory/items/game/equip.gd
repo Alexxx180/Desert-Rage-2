@@ -1,12 +1,25 @@
-extends RefCounted
+extends TypeItems
 
 class_name EquipTypeItems
 
-enum { JAR = 0, A_DOTE = 1, A_COUGH = 2, SAKSAUL = 3, G_KEY = 4, P_KEY = 5, WATER = 6, TEA = 7, ETHER = 8, TAMARISK = 9,
-	 RT_FIELD = 10, OPUNTIA = 11, YUKKA = 12, L_PANTS = 13, C_LEGS = 14, L_BOOTS = 15, C_BOOTS = 16, L_CLOTH = 17, C_MAIL = 18,
-	 T_SHIELD = 19, K_DUSTER = 20, W_KNIFE = 21, A_SWORD = 22, T_SWORD = 23, COLT = 24, SHOTGUN = 25, BOOMERANG = 26, SHOE = 27 }
+func _icon(path: String) -> String: return "armor/equip" + path
 
-var recipe: Dictionary = {
-	ETHER: [WATER, RT_FIELD], TEA: [WATER, TAMARISK],
-	A_COUGH: [WATER, YUKKA], A_DOTE: [WATER, OPUNTIA]
-}
+func _get_effect() -> Array:
+	var damage: String = "damage_increase"; var rate: String = "fire_rate"
+	return [
+		EquipItem.new(rate, 5), EquipItem.new("burn_time", 25),
+		EquipItem.new(damage, 5), EquipItem.new("spread_decrease", 10),
+		EquipItem.new(damage, 15), EquipItem.new("range", 5),
+		EquipItem.new(rate, 5), EquipItem.new("skip_cost", 10)
+	]
+
+func _get_names() -> Array[Item]: return [
+		_item("Масло", "+5% скорость атак", "Смазывая клинки маслом, можно получить интересный эффект.", "butter.svg"),
+		_item("Огненное масло", "+25% времени ожога", "Это раскаленное масло отличный выбор для гриля.", "fire-butter.svg", Item.i(Item.A_DOTE)),
+		_item("Точ. Камень", "+5% урон", "Главный инструмент на кухне - это нож и его надо хорошо наточить перед использованием.", "fasten.svg", Item.i(Item.A_COUGH)),
+		_item("Помпа", "-10% рассеивание", "Делает из неотесанного дробовика уточненный винчестер", "pump.svg"),
+		_item("М. Наконечник", "+15% урон", "Похоже, что для монстров игры закончились", "metal-end.svg"),
+		_item("М. Прицел", "+5% дальность", "Через него хорошо видно, что кто-то не помыл конечности перед трапезой", "target.svg"),
+		_item("Очиститель", "+5% скорость атак", "Вычищает всю грязь и налет внутри и снаружи орудий", "cleaner.svg"),
+		_item("Доп. Обойма", "-10% расход ресурса", "Будь раньше у меня такая оснастка, я может и не расставался бы с пушками", "magazine.svg")
+	]
