@@ -2,6 +2,8 @@ extends Node
 
 class_name HeroInventory
 
+const SLOTS: int = 25
+
 @onready var logic: Node = $logic
 @onready var chest: Node = $chest
 @onready var items: GameItems = GameItems.new()
@@ -13,4 +15,4 @@ func _ready() -> void:
 	logic.effect.logic = logic
 	logic.effect.items = items
 	logic.storage = []
-	for i in range(0, 20): logic.storage.append(slot())
+	for i in range(0, SLOTS): logic.storage.append(slot())

@@ -2,7 +2,7 @@ extends TypeItems
 
 class_name EquipTypeItems
 
-func _icon(path: String) -> String: return "armor/equip" + path
+func _icon(path: String) -> String: return "armor/equip/" + path
 
 func _get_effect() -> Array:
 	var damage: String = "damage_increase"; var rate: String = "fire_rate"
