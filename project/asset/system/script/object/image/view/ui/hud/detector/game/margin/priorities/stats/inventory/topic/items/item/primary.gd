@@ -8,5 +8,4 @@ func _toggle(state: bool) -> void:
 	back.visible = state
 
 func show_selection() -> void: _toggle(true)
-
 func hide_selection() -> void: _toggle(false)

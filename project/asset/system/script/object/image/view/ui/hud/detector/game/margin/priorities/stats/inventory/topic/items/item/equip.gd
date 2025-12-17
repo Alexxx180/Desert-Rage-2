@@ -6,6 +6,6 @@ func remove_item() -> void:
 	super.remove_item()
 	default.show()
 
-func put_item(selection: Dictionary) -> void:
+func put_item(selected: Dictionary) -> void:
 	default.hide()
-	super.put_item(selection)
+	super.put_item(selected)

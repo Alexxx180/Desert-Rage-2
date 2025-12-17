@@ -8,6 +8,10 @@ class_name CellDrag
 var slot: int = 0
 var inventory: Node
 
+func hold_item(cursor: Dictionary) -> void:
+	cursor.bag = inventory
+	cursor.slot = slot
+
 func _get_drag_data(_pos: Vector2) -> Variant:
 	set_drag_preview(image.get_cursor_preview())
 	remove_item()
@@ -18,7 +22,10 @@ func _can_drop_data(_pos: Vector2, cell: Variant) -> bool:
 
 func _drop_data(_pos: Vector2, cell: Variant) -> void:
 	cell.image.holder = null
-	inventory.logic.trade_inventory(cell.slot, slot)
+	trade(cell.inventory.logic, cell.slot)
+
+func trade(hero: Node, prev: int) -> void:
+	inventory.logic.trade_bags(hero, prev, slot)
 
 func remove_item() -> void: image.remove_item()
 

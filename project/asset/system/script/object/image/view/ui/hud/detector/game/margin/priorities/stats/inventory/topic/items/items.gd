@@ -8,9 +8,12 @@ var items: Array[InventoryItem] = []
 var inventory: Node:
 	get: return group.deploy.party.leader.to.inventory
 
+func connect_selection(selection: Array[Dictionary]) -> void:
+	for i in items: i.selection = selection
+
 func _ready() -> void:
 	if group == null: return
-	var slot: int = -1
+	var slot: int = Defaults.INT
 	for item in get_children(): # items
 		if item is InventoryItem:
 			slot += 1
