@@ -11,12 +11,11 @@ var inventory: Node:
 func connect_selection(selection: Array[Dictionary]) -> void:
 	for i in items: i.selection = selection
 
-func _ready() -> void:
+func set_items(hero: String) -> void:
 	if group == null: return
 	var slot: int = Defaults.INT
 	for item in get_children(): # items
 		if item is InventoryItem:
 			slot += 1
-			item.margin.view.slot = slot
-			item.margin.view.inventory = inventory
+			item.margin.view.describe(group.get(hero).to.inventory, slot)
 			items.append(item) # item.margin.inventory = 

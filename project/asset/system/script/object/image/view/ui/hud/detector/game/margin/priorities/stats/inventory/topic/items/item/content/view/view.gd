@@ -8,6 +8,10 @@ class_name CellDrag
 var slot: int = 0
 var inventory: Node
 
+func describe(bag: Node, no: int) -> void:
+	inventory = bag
+	slot = no
+
 func hold_item(cursor: Dictionary) -> void:
 	cursor.bag = inventory
 	cursor.slot = slot
@@ -25,7 +29,8 @@ func _drop_data(_pos: Vector2, cell: Variant) -> void:
 	trade(cell.inventory.logic, cell.slot)
 
 func trade(hero: Node, prev: int) -> void:
-	inventory.logic.trade_bags(hero, prev, slot)
+	hero.trade_bags(inventory.logic, prev, slot)
+	# inventory.logic.trade_bags(hero, prev, slot)
 
 func remove_item() -> void: image.remove_item()
 

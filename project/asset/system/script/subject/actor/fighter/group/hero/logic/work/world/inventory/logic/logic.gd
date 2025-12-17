@@ -28,16 +28,16 @@ func _copy(item: Dictionary, copied: Dictionary) -> Dictionary:
 func update_item(inventory: Node, slot: int) -> void:
 	inventory.items.ui.update_item(slot, inventory.storage[slot])
 
-func _trade(a: Dictionary, b: Dictionary) -> void:
+func trade(a: Dictionary, b: Dictionary) -> void:
 	var temp: Dictionary = HeroInventory.slot()
 	_copy(_copy(_copy(temp, b), a), temp)
 
 func trade_inventory(slot_a: int, slot_b: int) -> void:
-	_trade(storage[slot_a], storage[slot_b])
+	trade(storage[slot_a], storage[slot_b])
 	for slot in [slot_a, slot_b]: update_item(self, slot)
 
 func trade_bags(hero: Node, slot_a: int, slot_b: int) -> void:
-	_trade(storage[slot_a], hero.storage[slot_b])
+	trade(storage[slot_a], hero.storage[slot_b])
 	for it in [[self, slot_a], [hero, slot_b]]: update_item(it[0], it[1])
 
 func use_the_jar(source: int, product: int, id: int) -> void:
