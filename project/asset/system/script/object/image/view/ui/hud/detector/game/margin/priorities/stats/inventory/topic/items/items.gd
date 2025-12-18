@@ -2,8 +2,8 @@ extends HFlowContainer
 
 @onready var primary: Array[Button] = [$slot_0, $slot_1, $slot_2, $slot_3, $slot_4, $slot_5, $slot_6, $slot_7, $slot_8, $slot_9]
 @onready var equipment: Array[Button] = [$weapon, $artifact, $armor, $legs, $boots]
-@onready var group: Node2D = get_tree().current_scene.get_node("group") # get_node("/root/group") # get_tree().current_scene.
 
+var group: Node2D
 var items: Array[InventoryItem] = []
 var inventory: Node:
 	get: return group.deploy.party.leader.to.inventory
@@ -11,8 +11,8 @@ var inventory: Node:
 func connect_selection(selection: Array[Dictionary]) -> void:
 	for i in items: i.selection = selection
 
-func set_items(hero: String) -> void:
-	if group == null: return
+func set_items(hero: String, _group: Node2D) -> void:
+	group = _group
 	var slot: int = Defaults.INT
 	for item in get_children(): # items
 		if item is InventoryItem:
