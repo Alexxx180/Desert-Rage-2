@@ -22,12 +22,12 @@ func select_hero(group: Node) -> void:
 	var follower: String = group.deploy.party.follower.name
 	get(group.deploy.party.leader.name).show()
 	get(follower).hide()
-	# opened.bag = follower
 
 func switch(hero: String) -> void:
 	if opened.bag == hero:
+		#pass
 		get(hero).visible = !get(hero).visible
 	else:
 		get(opened.bag).hide()
 		get(hero).show()
-	# opened.bag = hero
+	#"""

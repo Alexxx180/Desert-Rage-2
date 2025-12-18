@@ -21,4 +21,7 @@ func connect_group(stack: VBoxContainer, group: Node2D, opened: Node) -> void:
 	group.deploy.select_hero.connect(func(_h):
 		bag.select_hero(group)
 		stack.bag.select_hero(group)
-		opened.bag = group.deploy.party.follower.name)
+		for i in [ui, b]:
+			i.disabled = group.deploy.party.follower.leader.name
+		opened.bag = group.deploy.party.follower.name
+		)
