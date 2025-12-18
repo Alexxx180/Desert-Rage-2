@@ -5,6 +5,9 @@ signal switch_bags(bag: String)
 var inventory: Node
 var hero: String
 
+func set_inventory(group: Node2D) -> void:
+	inventory = group.get(hero).to.inventory
+
 func _ready() -> void: pressed.connect(switch)
 
 func _can_drop_data(_pos: Vector2, cell: Variant) -> bool: return cell is CellDrag

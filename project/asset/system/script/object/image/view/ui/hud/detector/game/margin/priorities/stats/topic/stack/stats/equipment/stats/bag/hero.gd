@@ -8,7 +8,7 @@ var inventory: Node
 
 func _ready() -> void: pressed.connect(switch)
 
-func connect_group(group: Node2D) -> void:
+func set_inventory(group: Node2D) -> void:
 	inventory = group.get(name).to.inventory
 
 func _can_drop_data(_pos: Vector2, cell: Variant) -> bool: return cell is CellDrag

@@ -25,7 +25,7 @@ func face_stats(split: SplitContainer, bag: SplitContainer) -> void:
 	var focus: Control = split.topic.stack.stats.title.equip
 	stats.ui = split
 	stats.face(inventory.X, -inventory.PORTION.FULL, [-RESERVE], focus, [[
-		bag.ability.controls.preview.chats, bag.topic.stack.bag.rock
+		bag.ability.controls.preview.chats, bag.topic.stack.bag
 	]])
 	inventory.face_inventory(bag, split)
 
