@@ -19,13 +19,18 @@ func get_cursor() -> Dictionary:
 	return { "bag": Defaults.NODE, "slot": Defaults.INT }
 
 func select_hero(group: Node) -> void:
+	var leader: String = group.deploy.party.leader.name
 	var follower: String = group.deploy.party.follower.name
-	get(group.deploy.party.leader.name).show()
-	get(follower).hide()
+	get(leader).show()
+	var ui: MarginContainer = get(follower)
+	ui.visible = opened.other
+	remove_child(ui)
+	add_child(ui)
 
 func switch(hero: String) -> void:
-	if opened.bag == hero:
-		#pass
+	#get(hero).visible = !get(hero).visible
+	#"""
+	if opened.bag == hero: #pass
 		get(hero).visible = !get(hero).visible
 	else:
 		get(opened.bag).hide()

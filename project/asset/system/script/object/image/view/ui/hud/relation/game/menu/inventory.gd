@@ -1,6 +1,7 @@
 extends Node
 
 var bag: String = "rock"
+var other: bool = false
 
 func update_inventory(ui: Node) -> void:
 	ui.update_inventory_storage() # TODO UPDATE INVENTORY
@@ -19,8 +20,10 @@ func controls(hud: CanvasLayer, group: Node2D, inventory: VSplitContainer) -> vo
 	# TODOT invcon
 	# hud.detector.game.priorities.stats.inventory
 
-	stack.connect_group(group, self)
-	topic.stack.connect_group(stack, group, self)
+	var status: VBoxContainer = hud.detector.game.priorities.topic.stack.status
+	group.deploy.select_hero.connect(func(_h): status.select_hero(group))
+	# stack.connect_group(group, self)
+	topic.stack.connect_group(stack, status, group, self)
 	
 	# processor.markers = inventory.get_node("ability/controls/markers")
 	for hero in group.deploy.party.heroes:
