@@ -14,5 +14,5 @@ static func slot() -> Dictionary:
 func _ready() -> void:
 	logic.effect.logic = logic
 	logic.effect.items = items
-	logic.storage = []
-	for i in range(0, SLOTS): logic.storage.append(slot())
+	logic.items.storage = []
+	for i in range(0, SLOTS): logic.items.storage.append(slot())

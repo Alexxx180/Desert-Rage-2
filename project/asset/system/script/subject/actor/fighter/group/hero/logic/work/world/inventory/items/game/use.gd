@@ -8,9 +8,12 @@ func _icon(path: String) -> String: return "items/" + path
 func _type(short: String) -> String: return short.replace("h", "ЖЗ").replace("a", "ОУ")
 
 func _get_effect() -> Array: return [
-	UseItem.new(L1, L1), UseItem.new(M, N), UseItem.new(N, M),
+	UseItem.new(L1, L1, KeyItem.Spend.JAR),
+	UseItem.new(M, N, KeyItem.Spend.JAR),
+	UseItem.new(N, M, KeyItem.Spend.JAR),
 	UseItem.new(L3, N), UseItem.new(N, L2),
-	UseItem.new(L3, N, "m_poison"), UseItem.new(L2, N, "m_cough"),
+	UseItem.new(L3, N, KeyItem.Spend.LIMITED, "status.m_poison"),
+	UseItem.new(L2, N, KeyItem.Spend.LIMITED, "status.m_cough"),
 ]
 
 func _get_names() -> Array[Item]:

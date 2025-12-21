@@ -16,21 +16,24 @@ func hold_item(cursor: Dictionary) -> void:
 	cursor.bag = inventory
 	cursor.slot = slot
 
+func get_item() -> Dictionary:
+	return inventory.logic.items.get_item(slot)
+
+func use_item() -> int:
+	return inventory.logic.effect.use_item(slot)
+
 func _get_drag_data(_pos: Vector2) -> Variant:
 	set_drag_preview(image.get_cursor_preview())
 	remove_item()
 	return self
-
-func _can_drop_data(_pos: Vector2, cell: Variant) -> bool:
-	return cell is CellDrag # Dictionary
-
+	
+func _can_drop_data(_pos: Vector2, cell: Variant) -> bool: return cell is CellDrag
 func _drop_data(_pos: Vector2, cell: Variant) -> void:
 	cell.image.holder = null
 	trade(cell.inventory.logic, cell.slot)
 
 func trade(hero: Node, prev: int) -> void:
-	hero.trade_bags(inventory.logic, prev, slot)
-	# inventory.logic.trade_bags(hero, prev, slot)
+	hero.items.trade.bags(inventory.logic.items, prev, slot)
 
 func remove_item() -> void: image.remove_item()
 

@@ -2,7 +2,7 @@ extends Node
 
 enum { NONE = -1, UNIT = 1, EMPTY = 0, MAX = 30 }
 
-var inventory: Array# [HFlowContainer] # : HFlowContainer
+var inventory: Array # [HFlowContainer] # : HFlowContainer
 
 func have(slot: int) -> bool: return slot != NONE
 

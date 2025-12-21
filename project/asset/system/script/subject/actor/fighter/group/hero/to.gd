@@ -29,6 +29,9 @@ var stats: Node:
 	get: return _hero.logic.work.stats
 var hud: Node:
 	get: return stats.hud
+var chats: HBoxContainer:
+	get: return hud.display.detector.game.controls.preview.chats
+
 var inventory: Node:
 	get: return world.inventory
 # Eye sight detecting

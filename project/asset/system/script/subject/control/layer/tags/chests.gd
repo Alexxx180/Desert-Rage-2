@@ -30,11 +30,14 @@ func open_chests() -> void:
 	var tile: Dictionary = lay.border.context
 	var id: int = _get_id(lay.tags.from_coords(tile.coords).context)
 	# print("FOUND ID: ", id)
+	
 	var hero: CharacterBody2D = group.deploy.party.leader
 	var logic: Node = hero.to.inventory.logic
+	logic.effect.status.hero = hero
+	
 	if chest.on_at(tile.atlas):
-		logic.remember_inventory(hero, id)
+		logic.effect.remember(id)
 	elif chest.off_at(tile.atlas):
 		lay.border.switch(chest.offset.on) # TODO NEED TO ADD CHECK BEFORE CHANGE
 		logic.put_to_inventory(id)
-		logic.remember_inventory(hero, id)
+		logic.effect.remember(id)
