@@ -27,3 +27,4 @@ func set_priority(level: Node, stats: Dictionary) -> void:
 
 func add_item(thing: String) -> void: add_log(items, func(n): n.chest(thing))
 func add_enemy(thing: String) -> void: add_log(items, func(n): n.analyze(thing))
+func add_any(thing: String) -> void: add_log(items, func(n): n.say(thing))

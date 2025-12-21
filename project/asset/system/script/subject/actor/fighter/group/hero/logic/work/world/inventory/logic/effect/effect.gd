@@ -12,10 +12,10 @@ func spend_item(slot: int, spending: int) -> bool:
 	var result: bool = false
 	match spending:
 		KeyItem.Spend.INFINITE: result = true
+		KeyItem.Spend.JAR: result = logic.items.replace_item(slot, JAR)
 		KeyItem.Spend.LIMITED:
 			logic.items.use_item(slot)
-		KeyItem.Spend.JAR:
-			result = logic.items.replace_item(slot, JAR)
+			result = true
 	return result
 
 func use_item(slot: int) -> int:
@@ -26,4 +26,4 @@ func use_item(slot: int) -> int:
 	return logic.items.get_count(slot)
 
 func remember(id: int) -> void: # func find(id: int) -> void: status.hero.to.chats.log.add_item(bank.get_item(id).item.name)
-	status.hero.to.chats.log.add_item(items.get_item(id).item.name) #; print("REMEMBER ITEM NO = ", no)
+	status.log.add_item(items.get_item(id).item.name) #; print("REMEMBER ITEM NO = ", no)

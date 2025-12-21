@@ -19,7 +19,6 @@ func controls(hud: CanvasLayer, group: Node2D, inventory: VSplitContainer) -> vo
 	
 	# TODOT invcon
 	# hud.detector.game.priorities.stats.inventory
-
 	var status: VBoxContainer = hud.detector.game.priorities.topic.stack.status
 	group.deploy.select_hero.connect(func(_h): status.select_hero(group))
 	# stack.connect_group(group, self)
@@ -30,4 +29,9 @@ func controls(hud: CanvasLayer, group: Node2D, inventory: VSplitContainer) -> vo
 		hero.to.inventory.logic.items.ui.inventory = [
 			stack.bag.get(hero.name).items, topic.stack.bag.get(hero.name).items
 		] # TODO FIXME set processor inventory instead
+		
+		for i in [stack.status.get(hero.name),
+			 hud.detector.game.priorities.topic.stack.status.get(hero.name)]:
+			i.ability.set_inventory(hero)
+			i.health.set_inventory(hero)
 		# update_inventory(ui)
