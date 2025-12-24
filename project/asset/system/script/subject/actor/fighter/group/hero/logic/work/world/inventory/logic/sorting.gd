@@ -1,10 +1,14 @@
 extends Node
 
+enum Sort { ASC = 0, DESC = 1, RANDOM = 2 }
+enum { NA = 0, SIZE = 2, MAX = 25 }
+
+var _jars: Dictionary = { "a": [6, 8, 10], "h": [1, 2, 6, 7, 9, 11, 12] }
 var effect: Node
 var items: Node
 
-enum Sort { ASC = 0, DESC = 1, RANDOM = 2 }
-enum { NA = 0, SIZE = 2, MAX = 25 }
+func fillable(cell: Variant, key: String) -> bool:
+	return cell.get_item().id in _jars[key]
 
 func _logic(item: Dictionary, s: Dictionary) -> int:
 	return item.item.logic.get(s.key)
