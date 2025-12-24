@@ -9,7 +9,8 @@ func _get_xp_score(exp: VBoxContainer) -> Dictionary:
 	}
 
 func _bind_enemy_xp(group: Node2D) -> void:
-	group.lay.tags.layer.enemy.hud.xp = group.xp
+	if group.lay != null:
+		group.lay.tags.layer.enemy.hud.xp = group.xp
 
 func _set_stats(group: Node2D, game: Control) -> void:
 	var stats: VBoxContainer = game.priorities.stats.topic.stack.stats

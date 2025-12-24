@@ -4,15 +4,18 @@ extends Node2D
 @export var deployed: bool = true
 @onready var camera: Camera2D = $camera
 @onready var xp: Node = $xp
-@onready var lay: Node = get_node("../tags").lay
 @onready var ray: CharacterBody2D = $ray
 @onready var rock: CharacterBody2D = $rock
 
+var lay: Node
 var navigation: Array
 var deploy: HeroDeploy = HeroDeploy.new()
 
 func _ready() -> void:
-	lay.tags.layer.chests.group = self
+	var tags = get_node("../tags")
+	if tags != null:
+		lay = tags.lay
+		lay.tags.layer.chests.group = self
 	var party: Array[CharacterBody2D] = [ray, rock]
 	deploy.init(self, party, deployed)
 	if is_overworld: camera.set_overworld()
