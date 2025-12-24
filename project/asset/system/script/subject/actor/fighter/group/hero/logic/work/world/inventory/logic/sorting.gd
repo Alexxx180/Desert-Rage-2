@@ -42,8 +42,8 @@ func _usage(s: Dictionary, p: Node, condition: Callable) -> int:
 
 func _sort_usage(s: Dictionary, p: Node) -> int:
 	match s.sort:
-		Sort.ASC: return _usage(s, p, more)
-		Sort.DESC: return _usage(s, p, func(a, b): a < b)
+		Sort.ASC: return _usage(s, p, func(a, b): a < b)
+		Sort.DESC: return _usage(s, p, more)
 	return use_item(s.result.pick_random())
 
 func uses_left(size: int, kind: String = "") -> int:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=1099 format=3 uid="uid://csra3penxclqe"]
+[gd_scene load_steps=1107 format=3 uid="uid://csra3penxclqe"]
 
 [ext_resource type="Script" uid="uid://djhgknvw72ya6" path="res://asset/system/script/subject/actor/fighter/group/hero/view/view.gd" id="1_02nce"]
 [ext_resource type="PackedScene" uid="uid://c136xgt1v5vbl" path="res://asset/system/scene/subject/actor/group/hero/base/view/base/shadow.tscn" id="2_7whrg"]
@@ -102,6 +102,9 @@
 [ext_resource type="Texture2D" uid="uid://8qpwt4g0ok1y" path="res://asset/resource/media/image/actors/player/ray/fight/stomp/right.png" id="83_hv3re"]
 [ext_resource type="Script" uid="uid://dv5mhv4nhbfyc" path="res://asset/system/script/subject/actor/fighter/group/hero/view/mirror.gd" id="96_c8l3p"]
 [ext_resource type="Script" uid="uid://c0a00bictxi5e" path="res://asset/system/script/subject/actor/fighter/group/hero/view/animation/ray.gd" id="97_4xu38"]
+[ext_resource type="Shader" uid="uid://bh41yydd6fnll" path="res://asset/system/scene/subject/actor/group/hero/base/view/cutout.gdshader" id="97_yh2k1"]
+[ext_resource type="Texture2D" uid="uid://7vikqbjayhm8" path="res://asset/resource/media/image/actors/player/vfx/concrete.png" id="98_0i2ac"]
+[ext_resource type="Texture2D" uid="uid://87ku7t7pd05f" path="res://asset/resource/media/image/actors/player/vfx/holes.png" id="98_c83rp"]
 [ext_resource type="PackedScene" uid="uid://3pyu7p5tvaj5" path="res://asset/system/scene/subject/actor/group/hero/base/view/base/barrier.tscn" id="102_t3jj2"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1m64o"]
@@ -5974,6 +5977,26 @@ size = Vector2(20, 26)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t3jj2"]
 size = Vector2(20, 24)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_asclc"]
+shader = ExtResource("97_yh2k1")
+shader_parameter/mask = ExtResource("98_0i2ac")
+shader_parameter/offset = Vector2(0.01, 0.01)
+
+[sub_resource type="Gradient" id="Gradient_asclc"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_8mf1j"]
+gradient = SubResource("Gradient_asclc")
+width = 60
+height = 120
+
+[sub_resource type="Gradient" id="Gradient_yh2k1"]
+offsets = PackedFloat32Array(0, 0.375309, 0.716049, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.377778, 0.377778, 0.377778, 1, 0.716049, 0.716049, 0.716049, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_asclc"]
+gradient = SubResource("Gradient_yh2k1")
+fill_to = Vector2(1, 1)
+
 [sub_resource type="Gradient" id="Gradient_o5svw"]
 colors = PackedColorArray(0.325441, 0.325441, 0.325441, 1, 0.568973, 0.568973, 0.568973, 1)
 
@@ -11011,10 +11034,36 @@ shape = SubResource("RectangleShape2D_t3jj2")
 
 [node name="profile" type="AnimatedSprite2D" parent="."]
 material = ExtResource("4_4xu38")
-position = Vector2(0, 1)
+position = Vector2(0, 0.999992)
 sprite_frames = SubResource("SpriteFrames_ajgxq")
 animation = &"left"
 offset = Vector2(0, -51.5)
+
+[node name="Node2D" type="Sprite2D" parent="."]
+visible = false
+clip_children = 1
+material = SubResource("ShaderMaterial_asclc")
+texture = SubResource("GradientTexture2D_8mf1j")
+offset = Vector2(0, -50)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+clip_children = 1
+texture = ExtResource("98_c83rp")
+offset = Vector2(0, -50)
+
+[node name="Sprite2D" type="Sprite2D" parent="Sprite2D"]
+visible = false
+clip_children = 1
+texture = ExtResource("98_0i2ac")
+offset = Vector2(0, -60)
+
+[node name="hole" type="Sprite2D" parent="."]
+visible = false
+clip_children = 1
+position = Vector2(-2, -48)
+scale = Vector2(1.2, 1.15)
+texture = SubResource("GradientTexture2D_asclc")
 
 [node name="whip" type="Sprite2D" parent="."]
 visible = false
@@ -11115,6 +11164,7 @@ script = ExtResource("32_3ofum")
 script = ExtResource("33_mef5b")
 
 [node name="barrier" parent="." instance=ExtResource("102_t3jj2")]
+visible = false
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
