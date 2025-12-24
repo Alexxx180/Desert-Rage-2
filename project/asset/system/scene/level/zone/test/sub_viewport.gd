@@ -1,7 +1,7 @@
 extends Control
 
 @onready var subview: SubViewport = $glass/contains/subview
-@onready var player: CharacterBody2D = get_node("../../../../../group/ray") # 
+@onready var player: CharacterBody2D = get_node("../../group/ray") # 
 @onready var camera: Camera2D = subview.get_node("camera")
 
 func _ready() -> void:
