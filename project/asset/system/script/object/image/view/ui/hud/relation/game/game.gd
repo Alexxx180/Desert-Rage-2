@@ -17,8 +17,9 @@ func controls(ui: CanvasLayer, game: Control) -> void:
 	help.controls(ui, game)
 	gameplay.controls(ui, game.controls.topic)
 	var group: Node2D = ui.get_node("../../group")
-	group.lay.tags.layer.enemy.hud.card = [_e(game.controls.topic),
-		_e(game.priorities.stats.inventory.ability.topic.stack.space)]
+	if group.lay != null: 
+		group.lay.tags.layer.enemy.hud.card = [_e(game.controls.topic),
+			_e(game.priorities.stats.inventory.ability.topic.stack.space)]
 	# game.get_enemy_cards()
 	#stats.controls(hud, group, game.get_node("menu/stats"))
 	inventory.controls(ui, group, game.priorities.stats.inventory)

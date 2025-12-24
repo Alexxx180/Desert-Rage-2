@@ -1,62 +1,70 @@
 extends Node
 
+enum Sort { ASC = 0, DESC = 1, RANDOM = 2 }
+enum { NA = 0, SIZE = 2, MAX = 25 }
+
+var _jars: Dictionary = { "a": [6, 8, 10], "h": [1, 2, 6, 7, 9, 11, 12] }
 var effect: Node
 var items: Node
 
-enum Sort { ASC = 0, DESC = 1, RANDOM = 2 }
-const MAX: int = 25
+func fillable(cell: Variant, key: String) -> bool:
+	return cell.get_item().id in _jars[key]
+
+func _logic(item: Dictionary, s: Dictionary) -> int:
+	return item.item.logic.get(s.key)
 
 func get_item(i: int) -> Dictionary:
 	return effect.items.get_item(items.storage[i].id)
 
-func more(a, b): a >= b
+func more(a: int, b: int) -> bool: return a >= b
 
-func determine_sort(r: UseItem, l: UseItem, s: Dictionary, i: int) -> void:
-	if s.sort == Sort.RANDOM: return
-	
-	if s.sort == Sort.ASC and r.get(s.key) <= l.get(s.key): return
-	
-	if (s.sort == Sort.DESC or s.size == 2) and more(r.get(s.key), l.get(s.key)):
-		s.sort = Sort.DESC
-	else: s.sort = Sort.RANDOM
+func determine_sort(p: int, n: int, s: Dictionary) -> void:
+	match s.sort:
+		Sort.RANDOM: return
+		Sort.ASC: if not p <= n:
+			s.sort = Sort.DESC if s.size == SIZE and more(p, n) else Sort.RANDOM
+		Sort.DESC: if not more(p, n): s.sort = Sort.RANDOM
+
+func _no_use(l: UseItem, s: Dictionary, i: int) -> bool:
+	return l.get(s.key) == NA or items.storage[i].x <= NA
 
 func add_usable(s: Dictionary, i: int) -> void:
-	var item: Dictionary = get_item(i)
-	var l = item.logic
-	if l is not UseItem or l.get(s.key) == 0 or items.storage[i].x <= 0: return
+	var it: Dictionary = get_item(i)
+	if it.logic is not UseItem or _no_use(it.logic, s, i): return
 	
-	if s.size >= 2: determine_sort(s.result[i - 1].logic, l, s, i)
-	s.result.append({ "slot": i, "item": item })
+	s.result.append({ "slot": i, "item": it })
 	s.size += 1
+	
+	if s.size >= SIZE:
+		determine_sort(_logic(s.result[i - 1], s), it.logic.get(s.key), s)
 
 func use_item(i: Dictionary) -> int:
 	return uses_left(effect.use_item(i.slot), i.item.item.name)
 
 func _usage(s: Dictionary, p: Node, condition: Callable) -> int:
 	var previous: Dictionary = s.result.front()
-	for i in s.result:
-		if condition.call(p.points + i.item.logic.get(s.key), p.maximum):
+	for item in s.result:
+		if condition.call(p.points + _logic(item, s), p.maximum):
 			return use_item(previous)
-		previous = i
+		previous = item
 	return use_item(previous)
 
 func _sort_usage(s: Dictionary, p: Node) -> int:
-	match s.sort:
-		Sort.ASC: return _usage(s, p, func(a, b): a < b)
-		Sort.DESC: return _usage(s, p, more)
+	print("Sort is defined as: ", s.sort)
+	match s.sort: # Only after sort found
+		Sort.ASC: return _usage(s, p, more)
+		Sort.DESC: return _usage(s, p, func(a, b): return a < b)
 	return use_item(s.result.pick_random())
 
 func uses_left(size: int, kind: String = "") -> int:
-	if size == 0:
-		effect.status.log.add_any(kind + " - расходников не осталось!")
-	else:
-		effect.status.log.add_any(kind + " - расходников осталось: " + str(size))
+	match size:
+		-1: effect.status.log.add_any("Рей: Воу-воу, полегче с этим.")
+		0: effect.status.log.add_any(kind + " - расходников не осталось!")
+		_: effect.status.log.add_any(kind + " - расходников осталось: " + str(size))
 	return size
 
 func _usables_search(key: String, p: Node) -> int:
-	if p.points == p.maximum:
-		effect.status.log.add_any("Рей: Воу-воу, полегче с этим.")
-		return 0
+	if p.points == p.maximum: return uses_left(-1)
 	
 	var s: Dictionary = { "result": [], "size": 0, "sort": Sort.ASC, "key": key }
 	for i in range(0, MAX): add_usable(s, i)

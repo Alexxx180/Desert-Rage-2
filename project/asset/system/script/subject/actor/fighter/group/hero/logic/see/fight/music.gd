@@ -7,6 +7,8 @@ func controls(group: Node2D) -> void:
 	if not group.has_node("../../ost"): return
 	var tension: Node = group.get_node("../../ost").tension
 	
+	if group.get_parent().lay == null: return
+	
 	nearby.body_entered.connect(tension.add_enemy)
 	nearby.body_exited.connect(tension.drop_enemy)
 

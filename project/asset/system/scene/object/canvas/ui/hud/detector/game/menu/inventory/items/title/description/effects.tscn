@@ -1,0 +1,63 @@
+[gd_scene load_steps=9 format=3 uid="uid://dwx132fbpo3d8"]
+
+[ext_resource type="PackedScene" uid="uid://d8rt24mkevbt" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/status/shared/positive/recovery/health.tscn" id="1_hat2r"]
+[ext_resource type="PackedScene" uid="uid://pf718lymyywh" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/status/shared/positive/recovery/influence.tscn" id="2_cox7n"]
+[ext_resource type="PackedScene" uid="uid://cioios3hsx1io" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/status/shared/positive/no/enemy.tscn" id="3_i2gs3"]
+[ext_resource type="PackedScene" uid="uid://cqx57eq22aav" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/status/shared/positive/no/poison.tscn" id="4_2sih1"]
+[ext_resource type="PackedScene" uid="uid://df56a1dcqln6y" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/status/shared/positive/no/cough.tscn" id="5_pgfue"]
+[ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://asset/resource/ui/theme/patterns/template/menu/settings/topic/footer.tres" id="6_durn2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1cter"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bamps"]
+
+[node name="effects" type="HBoxContainer"]
+size_flags_horizontal = 8
+mouse_filter = 2
+
+[node name="health" parent="." instance=ExtResource("1_hat2r")]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="influence" parent="." instance=ExtResource("2_cox7n")]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="no_enemy" parent="." instance=ExtResource("3_i2gs3")]
+visible = false
+layout_mode = 2
+mouse_filter = 2
+
+[node name="no_poison" parent="." instance=ExtResource("4_2sih1")]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="no_cough" parent="." instance=ExtResource("5_pgfue")]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="timing" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="effect" type="Label" parent="timing"]
+custom_minimum_size = Vector2(35, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("6_durn2")
+theme_override_constants/line_spacing = -7
+theme_override_font_sizes/font_size = 18
+text = "30 s."
+
+[node name="time" type="ProgressBar" parent="timing"]
+layout_mode = 2
+size_flags_vertical = 8
+mouse_filter = 2
+theme_override_styles/background = SubResource("StyleBoxEmpty_1cter")
+theme_override_styles/fill = SubResource("StyleBoxFlat_bamps")
+max_value = 60.0
+step = 1.0
+value = 10.0
+show_percentage = false

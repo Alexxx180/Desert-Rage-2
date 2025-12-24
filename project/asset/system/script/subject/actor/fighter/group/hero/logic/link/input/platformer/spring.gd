@@ -14,5 +14,6 @@ func controls(hero: CharacterBody2D, jump: Node) -> void:
 	jump.slide.slide = see.slide
 	jump.slide.walls = see.walls
 	jump.slide.hero = hero
-	jump.spring.ground.execute = hero.group.get_node("../tags").lay.execute
 	jump.spring.spring = see.spring
+	if hero.group.lay != null:
+		jump.spring.ground.execute = hero.group.lay.execute
