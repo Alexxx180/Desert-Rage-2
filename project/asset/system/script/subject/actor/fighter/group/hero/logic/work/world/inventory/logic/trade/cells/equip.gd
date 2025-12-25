@@ -5,6 +5,8 @@ var base: Dictionary
 var equip: Node
 var slots: Array[int] = []
 
+var slots: TradeSlots
+
 func busy() -> bool: return slots.size() >= base.max
 func reset() -> void: slots.clear()
 

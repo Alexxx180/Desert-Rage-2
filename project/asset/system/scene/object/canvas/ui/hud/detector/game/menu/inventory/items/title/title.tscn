@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://kq7xh4x513e"]
+[gd_scene load_steps=12 format=3 uid="uid://kq7xh4x513e"]
 
 [ext_resource type="Script" uid="uid://chwwxl3w0i1ir" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/topic/items/title/title.gd" id="1_la5xp"]
 [ext_resource type="StyleBox" uid="uid://evyfrkamah1" path="res://asset/resource/ui/theme/style/items/chests/hover.tres" id="2_p5i5m"]
@@ -6,9 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bn2dd80xcv3py" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/items/content.tscn" id="4_2cexs"]
 [ext_resource type="StyleBox" uid="uid://bev4u886yv13b" path="res://asset/resource/ui/theme/style/tag/tag-blank.tres" id="5_ms26y"]
 [ext_resource type="StyleBox" uid="uid://cht8hrroa75bg" path="res://asset/resource/ui/theme/style/tag/tag-button.tres" id="5_p5i5m"]
-[ext_resource type="PackedScene" uid="uid://d18r42k3iyxhs" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/items/title/crafts.tscn" id="5_ybb2u"]
-[ext_resource type="PackedScene" uid="uid://dwx132fbpo3d8" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/items/title/description/effects.tscn" id="6_la5xp"]
-[ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://asset/resource/ui/theme/patterns/template/menu/settings/topic/footer.tres" id="7_84i35"]
+[ext_resource type="PackedScene" uid="uid://ctk77pb6b6woe" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/items/title/stack/stack.tscn" id="7_la5xp"]
 
 [sub_resource type="Gradient" id="Gradient_gx44j"]
 colors = PackedColorArray(0.19607843, 0.19607843, 0.19607843, 0.47058824, 0.1764706, 0.1764706, 0.1764706, 0.627451)
@@ -47,61 +45,5 @@ layout_mode = 2
 theme_override_styles/normal = ExtResource("5_ms26y")
 theme_override_styles/hover = ExtResource("5_p5i5m")
 
-[node name="stack" type="HBoxContainer" parent="workspace"]
+[node name="stack" parent="workspace" instance=ExtResource("7_la5xp")]
 layout_mode = 2
-mouse_filter = 2
-theme_override_constants/separation = 7
-
-[node name="craft" parent="workspace/stack" instance=ExtResource("5_ybb2u")]
-layout_mode = 2
-size_flags_vertical = 4
-
-[node name="item" type="MarginContainer" parent="workspace/stack"]
-custom_minimum_size = Vector2(230, 0)
-layout_mode = 2
-mouse_filter = 2
-theme_override_constants/margin_left = 0
-theme_override_constants/margin_top = 3
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 0
-
-[node name="short" type="VBoxContainer" parent="workspace/stack/item"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.4
-mouse_filter = 2
-theme_override_constants/separation = -3
-
-[node name="margin" type="MarginContainer" parent="workspace/stack/item/short"]
-layout_mode = 2
-mouse_filter = 2
-theme_override_constants/margin_left = 0
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 0
-
-[node name="items" type="HBoxContainer" parent="workspace/stack/item/short/margin"]
-layout_mode = 2
-mouse_filter = 2
-theme_override_constants/separation = 7
-
-[node name="caption" type="Label" parent="workspace/stack/item/short/margin/items"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 24
-text = "Чучело"
-text_overrun_behavior = 3
-
-[node name="effects" parent="workspace/stack/item/short/margin/items" instance=ExtResource("6_la5xp")]
-layout_mode = 2
-
-[node name="effect" type="Label" parent="workspace/stack/item/short"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 0
-theme = ExtResource("7_84i35")
-theme_override_constants/line_spacing = -7
-theme_override_font_sizes/font_size = 18
-text = "Отвлекает противников"
-autowrap_mode = 2
