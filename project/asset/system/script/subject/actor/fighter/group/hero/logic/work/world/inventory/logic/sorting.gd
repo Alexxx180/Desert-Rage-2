@@ -17,12 +17,11 @@ func get_item(i: int) -> Dictionary:
 	return effect.items.get_item(items.storage[i].id)
 
 func more(a: int, b: int) -> bool: return a >= b
+func desc_sort(cond: bool) -> int: return Sort.DESC if cond else Sort.RANDOM
 
 func determine_sort(p: int, n: int, s: Dictionary) -> void:
 	match s.sort:
-		Sort.RANDOM: return
-		Sort.ASC: if not p <= n:
-			s.sort = Sort.DESC if s.size == SIZE and more(p, n) else Sort.RANDOM
+		Sort.ASC: if not p <= n: s.sort = desc_sort(s.size == SIZE and more(p, n))
 		Sort.DESC: if not more(p, n): s.sort = Sort.RANDOM
 
 func _no_use(l: UseItem, s: Dictionary, i: int) -> bool:

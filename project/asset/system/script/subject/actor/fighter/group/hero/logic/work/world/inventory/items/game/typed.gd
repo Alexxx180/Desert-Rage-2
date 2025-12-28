@@ -19,6 +19,10 @@ func _init() -> void:
 	size = names.size()
 	effect = _get_effect()
 
+func in_items(id: int) -> bool:
+	return origin <= id and id < origin + size
+
+var origin: int
 var size: int
 var effect: Array
 var names: Array[Item]

@@ -5,6 +5,7 @@ extends Node
 
 var description: Label
 var storage: Array
+var items: GameItems
 
 func _ready() -> void: trade.items = self
 
@@ -13,7 +14,7 @@ func update_inventory() -> void:
 		ui.update_item(slot, storage[slot])
 
 func decide_item_or_equipment(id: int) -> int:
-	if id in [0, 1]:
+	if items.is_consumable(id):
 		return find_item_or_slot(id)
 	else:
 		return find_empty_slot()
@@ -47,6 +48,11 @@ func replace_item(source: int, id: int) -> bool:
 func get_item(slot: int) -> Dictionary: return storage[slot]
 func get_count(slot: int) -> int: return storage[slot].x
 
+func put_to_inventory(id: int) -> bool:
+	var slot: int = decide_item_or_equipment(id)
+	if ui.have(slot): put_item(slot, id); return true
+	return false
+
 func use_item(slot: int) -> void: # use_inventory
 	storage[slot].x -= ui.UNIT
 	ui.update_item(slot, storage[slot])
@@ -58,3 +64,8 @@ func add_item(slot: int) -> void:
 func put_item(slot: int, id: int) -> void:
 	storage[slot].id = id
 	add_item(slot)
+
+func put_items(slot: int, id: int, count: int) -> void:
+	storage[slot].id = id
+	storage[slot].x = count
+	ui.put_item(slot, storage[slot])

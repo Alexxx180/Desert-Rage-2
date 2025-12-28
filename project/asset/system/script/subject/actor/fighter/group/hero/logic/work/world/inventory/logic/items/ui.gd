@@ -27,6 +27,10 @@ func remove_item(slot: int) -> void:
 func put_item(slot: int, item: Dictionary) -> void:
 	for ui in inventory: ui.items[slot].put_item(item)
 
+func helping() -> void: for ui in inventory: ui.title.helping()
+func describe(item: Variant) -> void:
+	for ui in inventory: ui.title.describe(item)
+
 func update_item(slot: int, item: Dictionary) -> void:
 	if is_empty(item):
 		remove_item(slot)

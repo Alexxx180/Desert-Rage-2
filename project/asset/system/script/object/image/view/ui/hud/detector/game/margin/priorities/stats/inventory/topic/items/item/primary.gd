@@ -1,7 +1,7 @@
 extends InventoryItem
 
-@onready var color: ColorRect = $margin/selection/color
-@onready var back: TextureRect = $margin/selection/back
+@onready var color: ColorRect = $margin/selection/fast/color
+@onready var back: TextureRect = $margin/selection/fast/back
 
 func _toggle(state: bool) -> void:
 	color.visible = state

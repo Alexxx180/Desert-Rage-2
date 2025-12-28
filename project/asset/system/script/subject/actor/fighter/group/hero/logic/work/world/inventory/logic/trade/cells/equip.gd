@@ -2,15 +2,13 @@ extends Node
 
 var base: Dictionary
 
-var equip: Node
-var slots: Array[int] = []
-
+var logic: Node
 var slots: TradeSlots
 
-func busy() -> bool: return slots.size() >= base.max
-func reset() -> void: slots.clear()
-
-func add_slot(slot: int) -> void:
-	equip.reset()
-	slots.append(slot)
-	if busy(): reset()
+func add_slot(slot: int, item: EquipItem) -> void:
+	var i: Dictionary = logic.items.get_item(slot)
+	#i.
+	slots.equip()
+	slots.append([slot, item])
+	#if slots.busy(item):
+	#	slots.reset()

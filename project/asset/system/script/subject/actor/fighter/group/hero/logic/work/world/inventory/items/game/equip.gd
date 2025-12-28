@@ -2,6 +2,8 @@ extends TypeItems
 
 class_name EquipTypeItems
 
+var items: Array = []
+
 func _icon(path: String) -> String: return "armor/equip/" + path
 
 func _get_effect() -> Array:

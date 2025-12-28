@@ -1,15 +1,17 @@
-[gd_scene load_steps=12 format=3 uid="uid://kq7xh4x513e"]
+[gd_scene load_steps=14 format=3 uid="uid://kq7xh4x513e"]
 
 [ext_resource type="Script" uid="uid://chwwxl3w0i1ir" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/topic/items/title/title.gd" id="1_la5xp"]
 [ext_resource type="StyleBox" uid="uid://evyfrkamah1" path="res://asset/resource/ui/theme/style/items/chests/hover.tres" id="2_p5i5m"]
 [ext_resource type="Script" uid="uid://bb0iykbgs3tpv" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/topic/items/item/item.gd" id="3_ms26y"]
 [ext_resource type="PackedScene" uid="uid://bn2dd80xcv3py" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/items/content.tscn" id="4_2cexs"]
+[ext_resource type="Script" uid="uid://chkm0rdvgawjk" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/topic/items/title/workspace/workspace.gd" id="5_2cexs"]
 [ext_resource type="StyleBox" uid="uid://bev4u886yv13b" path="res://asset/resource/ui/theme/style/tag/tag-blank.tres" id="5_ms26y"]
 [ext_resource type="StyleBox" uid="uid://cht8hrroa75bg" path="res://asset/resource/ui/theme/style/tag/tag-button.tres" id="5_p5i5m"]
 [ext_resource type="PackedScene" uid="uid://ctk77pb6b6woe" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/items/title/stack/stack.tscn" id="7_la5xp"]
+[ext_resource type="Script" uid="uid://b472xs64m4wbd" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/topic/items/title/workspace/cancel.gd" id="8_ms26y"]
 
 [sub_resource type="Gradient" id="Gradient_gx44j"]
-colors = PackedColorArray(0.19607843, 0.19607843, 0.19607843, 0.47058824, 0.1764706, 0.1764706, 0.1764706, 0.627451)
+colors = PackedColorArray(0.196078, 0.196078, 0.196078, 0.470588, 0.176471, 0.176471, 0.176471, 0.627451)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_5agbf"]
 gradient = SubResource("Gradient_gx44j")
@@ -28,8 +30,8 @@ script = ExtResource("1_la5xp")
 [node name="slot" type="Button" parent="."]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxTexture_mya2s")
 theme_override_styles/hover = ExtResource("2_p5i5m")
+theme_override_styles/normal = SubResource("StyleBoxTexture_mya2s")
 script = ExtResource("3_ms26y")
 
 [node name="margin" parent="slot" instance=ExtResource("4_2cexs")]
@@ -39,11 +41,13 @@ mouse_filter = 2
 [node name="workspace" type="PanelContainer" parent="."]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_ms26y")
+script = ExtResource("5_2cexs")
 
 [node name="cancel" type="Button" parent="workspace"]
 layout_mode = 2
-theme_override_styles/normal = ExtResource("5_ms26y")
 theme_override_styles/hover = ExtResource("5_p5i5m")
+theme_override_styles/normal = ExtResource("5_ms26y")
+script = ExtResource("8_ms26y")
 
 [node name="stack" parent="workspace" instance=ExtResource("7_la5xp")]
 layout_mode = 2
