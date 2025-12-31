@@ -8,13 +8,16 @@ var slots: TradeSlots
 
 @onready var preview: Node = $preview
 @onready var placement: Node = $placement
+@onready var workspace: Node = $workspace
 
 func set_logic(logic: Node) -> void:
 	placement.preview = preview
 
 func add_slot(slot: int) -> void:
-	slots.craft()
-	slots.append(placement.make_slot(slot)) # [slot, item, placement.get_id(slot)])
-	if slots.busy(MAX): slots.reset()
+	slots.operate("craft", MAX, placement.make_slot(slot))
+	workspace.update_ui(placement.search.logic, preview, slots.slots)
 
-func product() -> void: placement.try_craft(slots.slots)
+func one_item() -> void: pass
+func one_slot() -> void: pass
+
+func product() -> void: placement.craft(slots.slots)

@@ -31,6 +31,15 @@ func helping() -> void: for ui in inventory: ui.title.helping()
 func describe(item: Variant) -> void:
 	for ui in inventory: ui.title.describe(item)
 
+func set_weapon(trade: Node) -> void:
+	for ui in inventory: ui.title.set_weapon(trade)
+
+func set_resource(trade: Node) -> void:
+	for ui in inventory: ui.title.set_resource(trade)
+	
+func put_product(item: Item) -> void:
+	for ui in inventory: ui.title.put_product(item)
+
 func update_item(slot: int, item: Dictionary) -> void:
 	if is_empty(item):
 		remove_item(slot)

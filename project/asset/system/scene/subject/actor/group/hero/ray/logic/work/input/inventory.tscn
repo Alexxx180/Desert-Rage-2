@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://c0ggcc8w7lmmd"]
+[gd_scene load_steps=21 format=3 uid="uid://c0ggcc8w7lmmd"]
 
 [ext_resource type="Script" uid="uid://bnsc5n176lhi0" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/work/world/inventory/inventory.gd" id="1_06ro6"]
 [ext_resource type="Script" uid="uid://d14xeg3g25gvd" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/work/world/inventory/logic/logic.gd" id="2_684tj"]
@@ -14,9 +14,12 @@
 [ext_resource type="Script" uid="uid://clwvc2u12r5yk" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/work/world/inventory/logic/sorting.gd" id="11_is2s8"]
 [ext_resource type="Script" uid="uid://ns44rn6lwqgi" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/work/world/inventory/logic/trade/trade.gd" id="12_37fot"]
 [ext_resource type="Script" uid="uid://hbj05dkxk5my" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/work/world/inventory/logic/trade/cells/craft/craft.gd" id="12_ys6qq"]
-[ext_resource type="Script" uid="uid://dqxmhuoyepe3o" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/work/world/inventory/logic/trade/cells/craft/preview.gd" id="14_6icy4"]
+[ext_resource type="Script" uid="uid://dqxmhuoyepe3o" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/work/world/inventory/logic/trade/cells/craft/preview/preview.gd" id="14_6icy4"]
 [ext_resource type="Script" uid="uid://b0xtw65hh2eng" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/work/world/inventory/logic/trade/cells/equip.gd" id="14_36plb"]
-[ext_resource type="Script" uid="uid://do8fluet1k6qi" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/work/world/inventory/logic/trade/cells/craft/placement.gd" id="15_u61hf"]
+[ext_resource type="Script" uid="uid://dj6ys4lq3u3sq" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/work/world/inventory/logic/trade/cells/craft/preview/slots.gd" id="15_5g0kp"]
+[ext_resource type="Script" uid="uid://do8fluet1k6qi" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/work/world/inventory/logic/trade/cells/craft/placement/placement.gd" id="15_u61hf"]
+[ext_resource type="Script" uid="uid://bg3ohxi68hle7" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/work/world/inventory/logic/trade/cells/craft/placement/search.gd" id="17_jscwt"]
+[ext_resource type="Script" uid="uid://bghfeu7xon0ok" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/work/world/inventory/logic/trade/cells/craft/workspace.gd" id="18_arept"]
 
 [node name="inventory" type="Node"]
 script = ExtResource("1_06ro6")
@@ -60,8 +63,17 @@ script = ExtResource("12_ys6qq")
 [node name="preview" type="Node" parent="logic/trade/craft"]
 script = ExtResource("14_6icy4")
 
+[node name="cells" type="Node" parent="logic/trade/craft/preview"]
+script = ExtResource("15_5g0kp")
+
 [node name="placement" type="Node" parent="logic/trade/craft"]
 script = ExtResource("15_u61hf")
+
+[node name="search" type="Node" parent="logic/trade/craft/placement"]
+script = ExtResource("17_jscwt")
+
+[node name="workspace" type="Node" parent="logic/trade/craft"]
+script = ExtResource("18_arept")
 
 [node name="equip" type="Node" parent="logic/trade"]
 script = ExtResource("14_36plb")

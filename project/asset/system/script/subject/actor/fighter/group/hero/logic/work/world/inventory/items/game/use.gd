@@ -17,13 +17,14 @@ func _get_effect() -> Array: return [
 ]
 
 func _get_names() -> Array[Item]:
-	var tea: int = Item.TEA; var ether: int = Item.ETHER
+	var tea: int = Item.TEA; var ether: int = Item.ETHER; var adote: int = Item.A_DOTE
+	var acough: int = Item.A_COUGH
 	return [
-		_item("Чистая вода", "10 h 10 a", "Используется для создания водных растворов. Ингредиент", "jar/water.svg"),
+		_item("Чистая вода", "10 h 10 a", "Используется для создания водных растворов. Ингредиент", "jar/water.svg", Item.o([tea, ether, adote, acough])),
 		_item("Чай", "40 h", "Немного восполняет ауру здоровья", "jar/tea.svg", Item.i(tea)),
 		_item("Эфир", "40 a", "Немного восполняет ресурс очков умений", "jar/ether.svg", Item.i(ether)),
 		_item("Тамариск", "15 h", "Используется как ингридиент для лечебных отваров", "craft/tamarisk.svg", Item.o([tea])),
 		_item("Перекати поле", "12 a", "Используется для восстановления бодрости. Ингридиент", "craft/tumbleweed.svg", Item.o([ether])),
-		_item("Опунция", "- время яда", "Помогает при лихорадке и симптомах отравления", "craft/opuntia.svg", Item.o([Item.A_DOTE])),
-		_item("Юкка", "- время кашля", "Убирает симптомы кашля, с картофельным привкусом.", "craft/yukka.svg", Item.o([Item.A_COUGH]))
+		_item("Опунция", "- время яда", "Помогает при лихорадке и симптомах отравления", "craft/opuntia.svg", Item.o([adote])),
+		_item("Юкка", "- время кашля", "Убирает симптомы кашля, с картофельным привкусом.", "craft/yukka.svg", Item.o([acough]))
 	]

@@ -12,19 +12,20 @@ func _ready() -> void:
 
 func set_logic(l: Node) -> void:
 	logic = l
-	craft.placement.logic = logic
+	craft.placement.search.logic = logic
 	equip.logic = logic
 
 func description(item: Variant) -> void: #describe.emit(item, self)
 	logic.items.ui.describe(item)
 	craft.slots.reload()
 
-func add_slot(slot: int, item: Variant) -> void:
+func add_slot(slot: int) -> void: # , item: Variant
 	var id: int = logic.slot(slot).id
-	match logic.effect.items.craft(id):
-		GameItems.CRAFT: craft.add_slot(slot, item)
-		GameItems.EQUIP: equip.add_slot(slot, item)
-		GameItems.ITEM: description(item)
+	var type: int = logic.items.items.craft(id)
+	match type:
+		GameItems.CRAFT: craft.add_slot(slot)
+		GameItems.EQUIP: equip.add_slot(slot)
+		GameItems.ITEM: description(logic.item(id))
 
 func confirm_item() -> void:
 	match craft.slots.load:

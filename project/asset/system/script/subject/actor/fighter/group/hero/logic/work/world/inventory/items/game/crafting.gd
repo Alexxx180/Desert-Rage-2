@@ -6,25 +6,27 @@ var craft: Dictionary = {}
 var items: Array = []
 
 func in_items(id: int) -> bool: return id in items
+func push_back(id: int) -> void:
+	if not in_items(id):
+		items.push_back(id)
 
-func _add_item(c: Array, next: int) -> void:
+func _add_item(c: Array, id: int) -> void:
 	for o in c:
-		craft[o].i.push_back(next)
-		if not in_items(next):
-			items.push_back(next)
+		craft[o].i.push_back(o)
+	push_back(id)
 
-func _connect_ingredients(c: Dictionary, j: int, n: int) -> void:
+func _connect_ingredients(c: Dictionary, id: int) -> void:
 	if c.has("o"):
-		_add_item(c.o, j + n)
+		_add_item(c.o, id)
 	else:
-		craft[c.i].o = j + n
+		craft[c.i].o = id
 
-func _set_craft(type, n: int) -> void:
+func _set_craft(type, base: int) -> void:
 	for j in type.size:
 		var c: Dictionary = type.names[j].craft
 		if c != Defaults.DICT:
-			_connect_ingredients(c, j, n)
-	craft
+			print("CRAFT ITEM: ", type.names[j].name)
+			_connect_ingredients(c, base + j) #craft
 
 func _init(items: GameItems) -> void:
 	Item.crafts(craft)

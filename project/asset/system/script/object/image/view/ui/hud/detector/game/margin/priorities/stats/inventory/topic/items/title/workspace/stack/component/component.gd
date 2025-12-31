@@ -8,6 +8,6 @@ func hides() -> void: for i in [two, four]: i.hides()
 
 func update_slots(slots: Array, type: int) -> void:
 	hides()
-	for i in range(0, slots.size()):
-		items[i].put_item(slots[i])
+	for i in len(slots):
+		items[i].put_item(slots[i].item.item.icon)
 		items[i].show()

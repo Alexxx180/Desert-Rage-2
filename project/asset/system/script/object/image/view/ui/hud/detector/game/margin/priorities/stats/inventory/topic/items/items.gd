@@ -15,8 +15,10 @@ func connect_selection(selection: Array[Dictionary]) -> void:
 func set_items(hero: String, _group: Node2D) -> void:
 	group = _group
 	var slot: int = Defaults.INT
+	title.inventory = group.get(hero).to.inventory
+	title.slot.margin.view.describe(title.inventory, InventoryItem.CRAFT)
 	for item in get_children(): # items
 		if item is InventoryItem:
 			slot += 1
-			item.margin.view.describe(group.get(hero).to.inventory, slot)
+			item.margin.view.describe(title.inventory, slot)
 			items.append(item) # item.margin.inventory = 
