@@ -2,7 +2,7 @@ extends Node
 
 enum { NONE = -1, UNIT = 1, EMPTY = 0, MAX = 30 }
 
-var inventory: Array # [HFlowContainer] # : HFlowContainer
+var inventory: Array = [] # [HFlowContainer] # : HFlowContainer
 
 func have(slot: int) -> bool: return slot != NONE
 
@@ -37,7 +37,7 @@ func set_weapon(trade: Node) -> void:
 func set_resource(trade: Node) -> void:
 	for ui in inventory: ui.title.set_resource(trade)
 	
-func put_product(item: Item) -> void:
+func put_product(item: Dictionary) -> void:
 	for ui in inventory: ui.title.put_product(item)
 
 func update_item(slot: int, item: Dictionary) -> void:

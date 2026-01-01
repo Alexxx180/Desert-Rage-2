@@ -12,12 +12,14 @@ func check(items: Array, search: Callable, flow: Callable, offset: int) -> bool:
 			return true
 	return false
 
-func matches(products: Dictionary, items: Array) -> bool:
+func matches(logic: Node, items: Array) -> bool:
+	var products: Dictionary = logic.items.items.crafting.craft
 	return products[craft_id].i.size() == items.size()
 
 func first(items: Array, i: int) -> bool: return items[i] in _recipes
 
-func other(items: Array, i: int) -> bool: return craft_id in items[i].o
+func other(items: Array, i: int) -> bool:
+	return craft_id in _craft(items[i]).o
 
 func set_id(id: int) -> void: craft_id = id
 
@@ -25,4 +27,5 @@ func _craft(entry: Dictionary) -> Dictionary: return entry.item.item.craft
 
 func recipe(items: Array) -> Array:
 	_recipes = _craft(items[SECOND]).o
-	return _craft(items.front()).o
+	var first = _craft(items.front()).o
+	return first

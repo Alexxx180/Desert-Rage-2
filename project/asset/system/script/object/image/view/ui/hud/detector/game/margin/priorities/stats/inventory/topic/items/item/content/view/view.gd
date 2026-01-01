@@ -5,41 +5,11 @@ class_name CellDrag
 @onready var image: TextureRect = $image
 @onready var both: TextureRect = $both
 
-var slot: int = 0
-var inventory: Node
+var slot: int ; var drag: Node
 
-func describe(bag: Node, no: int) -> void:
-	inventory = bag
-	slot = no
-
-func hold_item(cursor: Dictionary) -> void:
-	cursor.bag = inventory
-	cursor.slot = slot
-
-func get_item() -> Dictionary:
-	return inventory.logic.items.get_item(slot)
-
-func use_item() -> int:
-	return inventory.logic.effect.use_item(slot)
-
-func _get_drag_data(_pos: Vector2) -> Variant:
-	set_drag_preview(image.get_cursor_preview())
-	remove_item()
-	return self
-	
-func _can_drop_data(_pos: Vector2, cell: Variant) -> bool: return cell is CellDrag
-func _drop_data(_pos: Vector2, cell: Variant) -> void:
-	cell.image.holder = null
-	trade(cell.inventory.logic, cell.slot)
-
-func trade(hero: Node, prev: int) -> void:
-	hero.items.trade.bags(inventory.logic.items, prev, slot)
-
-func remove_item() -> void: image.remove_item()
-
-func put_item(item: Dictionary) -> void:
-	image.put_item(inventory.items.get_item(item.id).item.icon)
+func _get_drag_data(_p) -> CellDrag: return drag.set_preview(self)
+func _can_drop_data(_p, cell: Variant) -> bool: return cell is CellDrag
+func _drop_data(_p, cell: Variant) -> void: drag.trade(cell)
 
 func _input(event: InputEvent) -> void:
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.is_released():
-		image.reset_texture()
+	if drag.ui.move(event): drag.reset_texture(image)

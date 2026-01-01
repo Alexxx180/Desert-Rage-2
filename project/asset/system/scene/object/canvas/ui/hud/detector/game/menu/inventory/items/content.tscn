@@ -1,19 +1,12 @@
-[gd_scene load_steps=16 format=3 uid="uid://bn2dd80xcv3py"]
+[gd_scene load_steps=13 format=3 uid="uid://bn2dd80xcv3py"]
 
 [ext_resource type="Script" uid="uid://c0o6pslklkxuw" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/topic/items/item/content/view/view.gd" id="1_ep1v2"]
-[ext_resource type="FontFile" uid="uid://b37js8y80ak1k" path="res://asset/resource/media/data/font/NotoColorEmoji-Regular.ttf" id="1_hlhpk"]
 [ext_resource type="Script" uid="uid://ganthw8uqtu5" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/topic/items/item/content/content.gd" id="1_xa6yb"]
 [ext_resource type="Script" uid="uid://bdu6kwvinxtnx" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/topic/items/item/content/selection/count.gd" id="2_ep1v2"]
 [ext_resource type="Script" uid="uid://cg5og751o27wo" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/topic/items/item/content/selection/selection.gd" id="2_unky5"]
 [ext_resource type="Script" uid="uid://d1ehx3qqcgn3x" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/topic/items/item/content/selection/fast.gd" id="3_8p8p3"]
 [ext_resource type="Texture2D" uid="uid://rdsdp3be1k17" path="res://asset/resource/media/image/inventory/weapon/firearm/schofield45-colt.svg" id="3_ymscp"]
 [ext_resource type="FontFile" uid="uid://tledodlx6okb" path="res://asset/resource/media/data/font/LTSuperiorMono-Semibold.otf" id="5_8p8p3"]
-[ext_resource type="Script" uid="uid://fe3muxdmt4bv" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/topic/items/item/content/view/image.gd" id="5_mjmrn"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1tuns"]
-content_margin_top = 6.0
-content_margin_right = 4.0
-bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [sub_resource type="Gradient" id="Gradient_7knqk"]
 colors = PackedColorArray(0, 0, 0, 0, 0.184314, 0.184314, 0.72549, 0.235294)
@@ -57,7 +50,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 expand_mode = 1
-script = ExtResource("5_mjmrn")
 
 [node name="both" type="TextureRect" parent="view"]
 visible = false
@@ -70,25 +62,6 @@ grow_vertical = 2
 texture = ExtResource("3_ymscp")
 expand_mode = 1
 flip_h = true
-
-[node name="icon" type="Label" parent="view"]
-modulate = Color(1, 1, 1, 0.294118)
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -44.0
-offset_top = -22.0
-offset_bottom = 22.0
-grow_horizontal = 0
-grow_vertical = 2
-size_flags_horizontal = 8
-theme_override_fonts/font = ExtResource("1_hlhpk")
-theme_override_font_sizes/font_size = 32
-theme_override_styles/normal = SubResource("StyleBoxFlat_1tuns")
-horizontal_alignment = 1
 
 [node name="selection" type="Control" parent="."]
 layout_mode = 2
@@ -153,41 +126,3 @@ max_value = 30.0
 step = 1.0
 fill_mode = 1
 show_percentage = false
-
-[node name="upgrades" type="VBoxContainer" parent="."]
-visible = false
-custom_minimum_size = Vector2(0, 2)
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 4
-theme_override_constants/separation = 2
-
-[node name="a" type="VBoxContainer" parent="upgrades"]
-layout_mode = 2
-theme_override_constants/separation = 0
-
-[node name="on" type="ColorRect" parent="upgrades/a"]
-custom_minimum_size = Vector2(4, 4)
-layout_mode = 2
-color = Color(0.69863, 0.535067, 0, 1)
-
-[node name="off" type="ColorRect" parent="upgrades/a"]
-visible = false
-custom_minimum_size = Vector2(4, 4)
-layout_mode = 2
-color = Color(0.17081, 0.121802, 0, 1)
-
-[node name="b" type="VBoxContainer" parent="upgrades"]
-layout_mode = 2
-theme_override_constants/separation = 0
-
-[node name="on" type="ColorRect" parent="upgrades/b"]
-custom_minimum_size = Vector2(4, 4)
-layout_mode = 2
-color = Color(0.698039, 0.533333, 0, 1)
-
-[node name="off" type="ColorRect" parent="upgrades/b"]
-visible = false
-custom_minimum_size = Vector2(4, 4)
-layout_mode = 2
-color = Color(0.17081, 0.121802, 0, 1)

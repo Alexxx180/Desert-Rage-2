@@ -9,7 +9,7 @@ func get_id(slot: int) -> int: return logic.slot(slot).id
 func default_message() -> void: logic.items.ui.helping()
 
 func form(no: int, cell: Dictionary) -> Dictionary:
-	return { "slot": no, "cell": cell, "item": logic.item(cell.id), "id": cell.id }
+	return { "slot": no, "id": cell.id, "cell": cell, "item": logic.item(cell.id) }
 
 func _find_item(algorithm: String, id: int, feedback: Callable) -> bool:
 	var slot: int = logic.items.get(algorithm).call(id)

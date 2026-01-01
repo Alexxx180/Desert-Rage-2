@@ -18,6 +18,8 @@ func add_slot(slot: int) -> void:
 	workspace.update_ui(placement.search.logic, preview, slots.slots)
 
 func one_item() -> void: pass
-func one_slot() -> void: pass
+func one_slot() -> bool: return true
+
+func all_items() -> void: pass
 
 func product() -> void: placement.craft(slots.slots)

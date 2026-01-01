@@ -1,8 +1,8 @@
 extends Node
 
-#signal describe(item: Variant, trade: Node)
 @onready var craft: Node = $craft
 @onready var equip: Node = $equip
+@onready var drag: Node = $drag
 
 var logic: Node
 
@@ -18,6 +18,10 @@ func set_logic(l: Node) -> void:
 func description(item: Variant) -> void: #describe.emit(item, self)
 	logic.items.ui.describe(item)
 	craft.slots.reload()
+
+func trades(cell: CellDrag) -> void:
+	drag.ui.reset_texture(cell.image)
+	add_slot(cell.slot)
 
 func add_slot(slot: int) -> void: # , item: Variant
 	var id: int = logic.slot(slot).id

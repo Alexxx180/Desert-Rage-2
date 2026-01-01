@@ -8,12 +8,19 @@ func _has_first(items: Array) -> bool:
 func _has_other(items: Array) -> bool:
 	return cells.check(items, cells.other, Defaults.FUNC, cells.MIN)
 
+func reset_id() -> bool:
+	cells.set_id(Defaults.INT)
+	return false
+
+func complete_product(logic: Node, items: Array) -> bool:
+	if not cells.matches(logic, items): return reset_id()
+	return true
+
 func slots(logic: Node, items: Array) -> bool:
 	if items.size() < cells.MIN: return false
 	
-	var craft: Dictionary = logic.items.items.crafting.craft
-	if _has_first(items) and _has_other(items) and cells.matches(craft, items):
-		return true
+	if not _has_first(items): return reset_id()
+	if items.size() == cells.MIN: return complete_product(logic, items)
 	
-	cells.set_id(Defaults.INT)
-	return false
+	if not _has_other(items): return reset_id()
+	return complete_product(logic, items)
