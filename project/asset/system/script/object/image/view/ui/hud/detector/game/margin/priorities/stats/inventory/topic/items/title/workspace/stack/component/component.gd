@@ -6,8 +6,16 @@ extends HBoxContainer
 
 func hides() -> void: for i in [two, four]: i.hides()
 
-func update_slots(slots: Array, type: int) -> void:
-	hides()
-	for i in len(slots):
-		items[i].put_item(slots[i].item.item.icon)
+func _iterate(rang: Variant, feedback: Callable) -> void:
+	for i in rang:
+		feedback.call(i)
 		items[i].show()
+
+func equipment(slots: Array, item: ArmorItem) -> void:
+	production(slots)
+	_iterate(range(len(slots), item.equip.size()), Defaults.FUNC)
+
+func production(slots: Array) -> void:
+	hides()
+	_iterate(len(slots), func(i):
+		items[i].put_item(slots[i].item.item.icon))

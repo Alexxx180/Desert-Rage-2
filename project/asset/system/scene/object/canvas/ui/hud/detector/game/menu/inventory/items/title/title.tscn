@@ -1,9 +1,8 @@
-[gd_scene load_steps=17 format=3 uid="uid://kq7xh4x513e"]
+[gd_scene load_steps=16 format=3 uid="uid://kq7xh4x513e"]
 
 [ext_resource type="Script" uid="uid://chwwxl3w0i1ir" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/topic/items/title/title.gd" id="1_la5xp"]
 [ext_resource type="StyleBox" uid="uid://evyfrkamah1" path="res://asset/resource/ui/theme/style/items/chests/hover.tres" id="2_p5i5m"]
 [ext_resource type="Script" uid="uid://bwl1i8618qbpw" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/topic/items/item/product/product.gd" id="3_eiur7"]
-[ext_resource type="PackedScene" uid="uid://bn2dd80xcv3py" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/items/content.tscn" id="4_2cexs"]
 [ext_resource type="Script" uid="uid://chkm0rdvgawjk" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/topic/items/title/workspace/workspace.gd" id="5_2cexs"]
 [ext_resource type="Script" uid="uid://bfgqhrldu4kbx" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/topic/items/item/product/craft.gd" id="5_84i35"]
 [ext_resource type="Script" uid="uid://c0o6pslklkxuw" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/topic/items/item/content/view/view.gd" id="5_eiur7"]
@@ -37,22 +36,18 @@ theme_override_styles/hover = ExtResource("2_p5i5m")
 theme_override_styles/normal = SubResource("StyleBoxTexture_mya2s")
 script = ExtResource("3_eiur7")
 
-[node name="margin" parent="slot" instance=ExtResource("4_2cexs")]
-layout_mode = 1
-mouse_filter = 2
-
-[node name="craft" type="MarginContainer" parent="slot"]
+[node name="margin" type="MarginContainer" parent="slot"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("5_84i35")
 
-[node name="view" type="Control" parent="slot/craft"]
+[node name="view" type="Control" parent="slot/margin"]
 layout_mode = 2
 mouse_filter = 2
 script = ExtResource("5_eiur7")
 
-[node name="image" type="TextureRect" parent="slot/craft/view"]
+[node name="image" type="TextureRect" parent="slot/margin/view"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -61,7 +56,7 @@ grow_horizontal = 2
 grow_vertical = 2
 expand_mode = 1
 
-[node name="both" type="TextureRect" parent="slot/craft/view"]
+[node name="both" type="TextureRect" parent="slot/margin/view"]
 visible = false
 layout_mode = 1
 anchors_preset = 15

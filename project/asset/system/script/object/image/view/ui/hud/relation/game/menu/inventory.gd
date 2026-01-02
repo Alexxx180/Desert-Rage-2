@@ -26,9 +26,8 @@ func controls(hud: CanvasLayer, group: Node2D, inventory: VSplitContainer) -> vo
 	
 	# processor.markers = inventory.get_node("ability/controls/markers")
 	for hero in group.deploy.party.heroes:
-		hero.to.inventory.logic.items.ui.inventory = [
-			stack.bag.get(hero.name).items, topic.stack.bag.get(hero.name).items
-		] # TODO FIXME set processor inventory instead
+		#hero.to.inventory.logic.items.ui.inventory = [
+		#	stack.bag.get(hero.name).items, topic.stack.bag.get(hero.name).items]
 		
 		for i in [stack.status.get(hero.name),
 			 hud.detector.game.priorities.topic.stack.status.get(hero.name)]:

@@ -1,8 +1,8 @@
 extends Node
 
-enum { NONE = -1, UNIT = 1, EMPTY = 0, MAX = 30 }
+enum { NONE = -1, UNIT = 1, EMPTY = 0, SLOTS = 25, MAX = 30 }
 
-var inventory: Array = [] # [HFlowContainer] # : HFlowContainer
+var inventory: Array = []
 
 func have(slot: int) -> bool: return slot != NONE
 
@@ -21,24 +21,10 @@ func same_slot_search(id: int, item: Dictionary) -> bool:
 func same_item_search(id: int, item: Dictionary) -> bool:
 	return same(id, item) and not is_empty(item)
 
-func remove_item(slot: int) -> void:
-	for ui in inventory: ui.items[slot].remove_item()
+func _u(slot: int, f: Callable): for ui in inventory: f.call(ui[slot])
 
-func put_item(slot: int, item: Dictionary) -> void:
-	for ui in inventory: ui.items[slot].put_item(item)
-
-func helping() -> void: for ui in inventory: ui.title.helping()
-func describe(item: Variant) -> void:
-	for ui in inventory: ui.title.describe(item)
-
-func set_weapon(trade: Node) -> void:
-	for ui in inventory: ui.title.set_weapon(trade)
-
-func set_resource(trade: Node) -> void:
-	for ui in inventory: ui.title.set_resource(trade)
-	
-func put_product(item: Dictionary) -> void:
-	for ui in inventory: ui.title.put_product(item)
+func remove_item(no): _u(no, func(u): u.remove_item())
+func put_item(no, item: Dictionary): _u(no, func(u): u.put_item(item))
 
 func update_item(slot: int, item: Dictionary) -> void:
 	if is_empty(item):

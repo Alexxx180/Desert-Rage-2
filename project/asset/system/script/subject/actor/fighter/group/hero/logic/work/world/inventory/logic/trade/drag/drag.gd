@@ -7,8 +7,8 @@ extends Node
 
 var group: Node2D
 
-func trade(cell: CellDrag) -> void:
-	ui.reset_holder(cell.image)
+func trade(cell: CellDrag) -> void: # ui.remove_item
+	ui.reset_texture(cell.image)
 	select.trades(cell.slot)
 
 func moving_items(view: Control) -> void:

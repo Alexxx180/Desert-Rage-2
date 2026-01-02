@@ -1,16 +1,32 @@
 extends Node
 
-var items: Array[Node] = []
-var size: int = 0
+var ui: Node
+var trade: Node
+var title: Array[HBoxContainer] = []
+var size: int
+var slots: Array:
+	get: return trade.craft.slots.slots
 
-func describe(cell: Control, drag: Node) -> void:
-	cell.drag = drag
+func _drag(cell: CellDrag) -> void:
+	cell.drag = trade.drag
 	cell.slot = size
 	size += 1
 
-func set_items(bag: HFlowContainer) -> void: # var inventory: Node = group.get(hero).to.inventory # hero: String, , group: Node2D
-	var trade: Node = get_parent()
-	items = get_children().slice(0, InventoryItem.CRAFT)
-	
-	for item in items: describe(item.margin.view, trade.drag)
-	describe(bag.title.slot.margin.view, trade.drag)
+func _add_ui(res: Array, ui: Variant, iterator: Callable) -> void:
+	res.append(ui)
+	iterator.call(func(i): _drag(i.margin.view))
+
+func set_items(bag: HFlowContainer) -> void:
+	size = ui.EMPTY
+	_add_ui(ui.inventory, bag.get_children().slice(ui.EMPTY, ui.SLOTS), 
+		func(f): for item in ui.inventory.back(): f.call(item))
+	_add_ui(title, bag.title, func(f): f.call(bag.title.slot))
+	bag.title.workspace.cancel.trade = trade
+
+func _t(f: Callable) -> void: for t in title: f.call(t)
+
+func describe(item: Variant): _t(func(t): t.describe(item))
+func equipment(item: Dictionary): _t(func(t): t.equipment(slots, item))
+func production(): _t(func(t): t.production(slots))
+func product(item: Dictionary): _t(func(t): t.put_product(item))
+func helping() -> void: _t(func(t): t.helping())

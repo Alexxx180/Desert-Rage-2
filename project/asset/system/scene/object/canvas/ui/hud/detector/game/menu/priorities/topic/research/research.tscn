@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://bmmg6xahpkusq"]
+[gd_scene load_steps=22 format=3 uid="uid://bmmg6xahpkusq"]
 
 [ext_resource type="StyleBox" uid="uid://cht8hrroa75bg" path="res://asset/resource/ui/theme/style/tag/tag-button.tres" id="1_rlvie"]
 [ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://asset/resource/ui/theme/patterns/template/menu/settings/topic/footer.tres" id="2_5tx11"]
@@ -11,8 +11,6 @@
 [ext_resource type="FontFile" uid="uid://dxg5wbmrewk2p" path="res://asset/resource/media/data/font/Lato-Regular.ttf" id="31_upyky"]
 [ext_resource type="StyleBox" uid="uid://evyfrkamah1" path="res://asset/resource/ui/theme/style/items/chests/hover.tres" id="32_y6s2t"]
 [ext_resource type="StyleBox" uid="uid://by6bvf7ens3ul" path="res://asset/resource/ui/theme/style/items/chests/empty.tres" id="33_yw1xc"]
-[ext_resource type="Script" uid="uid://ckwy3qb2rie2m" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/topic/items/item/primary.gd" id="34_5fy24"]
-[ext_resource type="PackedScene" uid="uid://bn2dd80xcv3py" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/items/content.tscn" id="35_p8cms"]
 [ext_resource type="PackedScene" uid="uid://dv268r05flq5" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/preview/log/levels/level/number.tscn" id="36_pqlxk"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k8lmy"]
@@ -187,6 +185,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="help" parent="content" instance=ExtResource("6_y2jwj")]
+visible = false
 layout_mode = 2
 
 [node name="analyze" type="PanelContainer" parent="content"]
@@ -239,7 +238,6 @@ text = "Истинно говорю вам, что время на пригот�
 autowrap_mode = 2
 
 [node name="bestiary" type="PanelContainer" parent="content"]
-visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_jb804")
 
@@ -254,13 +252,8 @@ layout_mode = 2
 size_flags_horizontal = 0
 theme_override_styles/hover = ExtResource("32_y6s2t")
 theme_override_styles/normal = ExtResource("33_yw1xc")
-script = ExtResource("34_5fy24")
 
-[node name="margin" parent="content/bestiary/container/item" instance=ExtResource("35_p8cms")]
-layout_mode = 1
-mouse_filter = 2
-
-[node name="margin2" type="MarginContainer" parent="content/bestiary/container/item"]
+[node name="margin" type="MarginContainer" parent="content/bestiary/container/item"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -272,7 +265,7 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 2
 
-[node name="height" type="Label" parent="content/bestiary/container/item/margin2"]
+[node name="height" type="Label" parent="content/bestiary/container/item/margin"]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -282,12 +275,12 @@ theme_override_font_sizes/font_size = 16
 text = "33 cm"
 text_overrun_behavior = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="content/bestiary/container/item/margin2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="content/bestiary/container/item/margin"]
 layout_mode = 2
 size_flags_vertical = 8
 theme_override_constants/separation = 0
 
-[node name="count" type="Label" parent="content/bestiary/container/item/margin2/HBoxContainer"]
+[node name="count" type="Label" parent="content/bestiary/container/item/margin/HBoxContainer"]
 custom_minimum_size = Vector2(40, 0)
 layout_mode = 2
 size_flags_horizontal = 3

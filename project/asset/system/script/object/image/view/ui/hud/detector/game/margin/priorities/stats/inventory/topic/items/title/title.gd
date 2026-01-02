@@ -3,11 +3,13 @@ extends HBoxContainer
 @onready var slot: Button = $slot
 @onready var workspace: PanelContainer = $workspace
 
-func set_weapon(trade: Node) -> void: workspace.update_slots(trade.craft.slots, TradeSlots.EQUIP)
-func set_resource(trade: Node) -> void: workspace.update_slots(trade.craft.slots, TradeSlots.CRAFT)
-func describe(item: Dictionary) -> void: workspace.describe(item)
-
 func _ready() -> void: helping()
+
+func equipment(slots: Array, item: Dictionary) -> void:
+	workspace.stack.equipment(slots, item)
+
+func production(slots: Array) -> void: workspace.stack.production(slots)
+func describe(item: Dictionary) -> void: workspace.stack.set_item(item)
 
 func put_product(item: Dictionary) -> void: slot.put_item(item)
 

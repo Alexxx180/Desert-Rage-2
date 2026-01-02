@@ -3,16 +3,17 @@ extends Node
 enum { MAIN = 0, CRAFT = 26 }
 
 var items: Node
-var selection: Array[Dictionary]
+var selection: Array[Dictionary] = [_cursor(), _cursor()]
 var main: Dictionary:
 	get: return selection[MAIN]
+
+func _cursor() -> Dictionary: return { "bag": Defaults.NODE, "slot": Defaults.INT }
+
+func set_selection(bag: Node, slot: int) -> void: main.bag = bag ; main.slot = slot
 
 func was_selected() -> bool: return main.slot == CRAFT
 
 func is_selected() -> bool: return main.bag != Defaults.NODE
-
-func set_selection(bag: Node, slot: int) -> void:
-	main.bag = bag ; main.slot = slot
 
 func reset_selection() -> void: set_selection(Defaults.NODE, Defaults.INT)
 

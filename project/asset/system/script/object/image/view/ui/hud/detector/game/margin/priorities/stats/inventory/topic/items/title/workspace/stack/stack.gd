@@ -5,13 +5,16 @@ extends HBoxContainer
 
 func set_item(i: Dictionary) -> void: item.set_item(i)
 
-func update_slots(slots: Array, type: int) -> void:
-	component.update_slots(slots, type)
-	var i = slots.back()
-	if i == null:
+func equipment(slots: Array, equip: Dictionary) -> void:
+	component.equipment(slots, equip.logic)
+	set_item(equip)
+
+func production(slots: Array) -> void:
+	component.production(slots)
+	if slots.is_empty():
 		item.helping()
 	else:
-		item.set_item(i.item)
+		set_item(slots.back().item)
 
 func helping() -> void:
 	component.hides()

@@ -3,10 +3,12 @@ extends Node
 @onready var craft: Node = $craft
 @onready var equip: Node = $equip
 @onready var drag: Node = $drag
+@onready var ui: Node = $ui
 
 var logic: Node
 
 func _ready() -> void:
+	ui.trade = self
 	var slots: TradeSlots = TradeSlots.new()
 	for i in [craft, equip]: i.slots = slots
 
@@ -23,7 +25,7 @@ func trades(cell: CellDrag) -> void:
 	drag.ui.reset_texture(cell.image)
 	add_slot(cell.slot)
 
-func add_slot(slot: int) -> void: # , item: Variant
+func add_slot(slot: int) -> void:
 	var id: int = logic.slot(slot).id
 	var type: int = logic.items.items.craft(id)
 	match type:
