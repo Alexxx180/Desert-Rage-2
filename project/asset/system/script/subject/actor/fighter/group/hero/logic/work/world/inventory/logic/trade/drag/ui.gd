@@ -13,13 +13,14 @@ func move(e: InputEvent, image: TextureRect) -> void:
 	if e is InputEventMouseButton and lmb_out(e): reset_texture(image)
 
 func put_item(item: Dictionary, image: TextureRect) -> void:
-	var path: String
+	var path: String = PREVIEW.ICON
 	if item.has("item"):
-		path = item.item.icon
+		path += item.item.icon
 	else:
-		path = logic.item(item.id).item.icon
-	var file: Image = Image.load_from_file(PREVIEW.ICON + path)
+		path += logic.item(item.id).item.icon
+	var file: Image = Image.load_from_file(path)
 	image.texture = ImageTexture.create_from_image(file)
+	pass
 
 func reset_holder() -> void: holder = null
 

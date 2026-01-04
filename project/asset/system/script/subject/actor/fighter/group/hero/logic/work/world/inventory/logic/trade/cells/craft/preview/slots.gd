@@ -2,19 +2,23 @@ extends Node
 
 enum { SECOND = 1, MIN = 2 }
 
+var ii: int
+var craft: Dictionary
 var craft_id: int = Defaults.INT
 var _recipes: Array = Defaults.ARRAY
 
 func check(items: Array, search: Callable, flow: Callable, offset: int) -> bool:
 	for i in range(offset, len(items)):
 		if search.call(items, i):
-			flow.call(i)
+			var ii: int = items[i]
+			flow.call(craft[ii].o)
 			return true
 	return false
 
 func matches(logic: Node, items: Array) -> bool:
-	var products: Dictionary = logic.items.items.crafting.craft
-	return products[craft_id].i.size() == items.size()
+	#var products: Dictionary = logic.items.items.crafting.craft
+	#logic.item(craft_id).item.craft.o
+	return craft[ii].i.size() == items.size()
 
 func first(items: Array, i: int) -> bool: return items[i] in _recipes
 

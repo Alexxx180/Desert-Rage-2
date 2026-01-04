@@ -14,6 +14,7 @@ static func slot() -> Dictionary:
 func _ready() -> void:
 	var s: Array = []
 	logic.items.items = items
+	logic.trade.craft.preview.cells.craft = items.crafting.craft
 	logic.effect.logic = logic
 	logic.items.storage = s
 	for i in SLOTS: s.append(slot())

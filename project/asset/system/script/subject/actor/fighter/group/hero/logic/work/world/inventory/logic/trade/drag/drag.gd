@@ -7,6 +7,10 @@ extends Node
 
 var group: Node2D
 
+func _ready() -> void:
+	craft.select = select
+	craft.trade = get_parent()
+
 func trade(cell: CellDrag) -> void: # ui.remove_item
 	ui.reset_texture(cell.image)
 	select.trades(cell.slot)

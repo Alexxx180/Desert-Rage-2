@@ -35,3 +35,4 @@ func _init(items: GameItems) -> void:
 		var type = items.get(i)
 		_set_craft(type, n)
 		n += type.size
+	print("craft: ", craft)

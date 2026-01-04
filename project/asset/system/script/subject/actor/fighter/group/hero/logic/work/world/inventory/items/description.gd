@@ -15,7 +15,7 @@ static func o(resources: Array[int]) -> Dictionary: return { "o": resources }
 static func recipe() -> Array: return [TEA, ETHER, A_DOTE, A_COUGH]
 
 static func crafts(result: Dictionary) -> void:
-	for i in recipe(): result[i] = { "i": [], "o": -1 }
+	for j in recipe(): result[j] = { "i": [], "o": -1 }
 
 func _init(_name: String, _short: String, _desc: String, _icon: String, _craft: Dictionary = Defaults.DICT) -> void:
 	name = _name
