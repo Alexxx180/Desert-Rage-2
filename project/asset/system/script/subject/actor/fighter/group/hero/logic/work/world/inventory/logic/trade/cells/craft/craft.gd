@@ -17,8 +17,10 @@ func add_slot(slot: int) -> void:
 	slots.operate("craft", MAX, placement.make_slot(slot))
 	workspace.update_ui(placement.search.logic, preview, slots.slots)
 
-func one_item() -> void: pass
-func one_slot() -> bool: return true
+func one_item(selected: Dictionary) -> void: pass
+func one_slot(selected: Dictionary) -> bool:
+	
+	return true
 
 func all_items() -> void: pass
 

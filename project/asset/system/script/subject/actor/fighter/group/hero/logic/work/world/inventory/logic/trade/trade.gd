@@ -8,6 +8,7 @@ extends Node
 var logic: Node
 
 func _ready() -> void:
+	drag.craft.selection.craft = craft
 	ui.trade = self
 	var slots: TradeSlots = TradeSlots.new()
 	for i in [craft, equip]: i.slots = slots

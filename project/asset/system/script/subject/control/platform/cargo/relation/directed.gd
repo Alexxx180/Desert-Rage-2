@@ -1,10 +1,10 @@
 extends Node
 
 @onready var timer: Timer = $timer
+var tags: TileMapLayer
 var _platform: CharacterBody2D
 
 func bind_lever() -> void:
-	var tags: TileMapLayer = _platform.get_node("../tags")
 	var location: Node = tags.lockers.location
 	var pos: Vector2 = _platform.position + _platform.see.position
 	var data: Dictionary = location.search.atlas.get_mech_atlas(tags.lay.tags, pos)
@@ -17,6 +17,8 @@ func controls(platform: CharacterBody2D) -> void:
 	var work: Node = platform.work
 	#bind_lever(platform)
 	_platform = platform
+	if not tags:
+		tags = platform.get_node("../tags")
 
 	work.cargo.platform = platform
 	stand.body_entered.connect(work.cargo.load_cargo)

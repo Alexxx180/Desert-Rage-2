@@ -1,5 +1,7 @@
 extends Node
 
+@onready var selection: Node = $selection
+
 var trade: Node
 var select: Node
 

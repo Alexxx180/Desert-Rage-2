@@ -6,8 +6,11 @@ extends Node
 @onready var ui: Node = $ui
 
 var group: Node2D
+var inventory: Node
 
 func _ready() -> void:
+	craft.selection.drag = self
+	craft.selection.select = select
 	craft.select = select
 	craft.trade = get_parent()
 
