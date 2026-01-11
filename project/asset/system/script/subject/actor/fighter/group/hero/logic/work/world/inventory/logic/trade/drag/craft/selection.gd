@@ -10,7 +10,7 @@ func _release_item() -> void:
 
 func craft_all_items() -> void: pass
 
-func craft_more_items() -> void: craft.one_slot(select.main)
+func craft_more_items(slot: int) -> void: craft.one_slot(slot)
 
 func hold_selection() -> void: pass # margin.view.hold_item(select.main)
 
@@ -20,7 +20,7 @@ func equiping_items() -> bool: return false
 
 func crafting_items(slot: int) -> bool:
 	if select.was_selected():
-		craft_more_items()
+		craft_more_items(slot)
 		return true
 	if select.craft_selected(slot):
 		select_to_craft()

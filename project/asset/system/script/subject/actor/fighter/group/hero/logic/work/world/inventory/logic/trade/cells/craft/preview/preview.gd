@@ -13,8 +13,8 @@ func reset_id() -> bool:
 	return false
 
 func complete_product(logic: Node, items: Array) -> bool:
-	if not cells.matches(logic, items): return reset_id()
-	return true
+	if cells.matches(logic, items): return true
+	return reset_id()
 
 func slots(logic: Node, items: Array) -> bool:
 	if items.size() < cells.MIN: return false

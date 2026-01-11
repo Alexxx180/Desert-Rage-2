@@ -42,6 +42,9 @@ func min_cell(items: Array) -> int:
 	for f in [_minimum, _put_items]: _iterate(items, f)
 	return _cost
 
+func put_product(cells: Array, id: int, slot: int) -> void:
+	logic.items.put_items(slot, id, min_cell(cells))
+
 func put_crafted_item(cells: Array, id: int) -> void:
 	_find_item("find_item_or_slot", id, func(slot):
-		logic.items.put_items(slot, id, min_cell(cells)))
+		put_product(cells, id, slot))

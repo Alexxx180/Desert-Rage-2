@@ -8,13 +8,13 @@ var effect: Node
 var items: Node
 
 func fillable(cell: Variant, key: String) -> bool:
-	return cell.get_item().id in _jars[key]
+	return cell.drag.ui.get_slot(cell.slot).id in _jars[key]
 
 func _logic(item: Dictionary, s: Dictionary) -> int:
 	return item.item.logic.get(s.key)
 
 func get_item(i: int) -> Dictionary:
-	return effect.items.get_item(items.storage[i].id)
+	return effect.logic.item(items.storage[i].id)
 
 func more(a: int, b: int) -> bool: return a >= b
 func desc_sort(cond: bool) -> int: return Sort.DESC if cond else Sort.RANDOM
@@ -37,6 +37,9 @@ func add_usable(s: Dictionary, i: int) -> void:
 	if s.size >= SIZE:
 		determine_sort(_logic(s.result[i - 1], s), it.logic.get(s.key), s)
 
+func use_as_slot(slot: int) -> int:
+	return use_item({ "slot": slot, "item": get_item(slot) })
+	
 func use_item(i: Dictionary) -> int:
 	return uses_left(effect.use_item(i.slot), i.item.item.name)
 

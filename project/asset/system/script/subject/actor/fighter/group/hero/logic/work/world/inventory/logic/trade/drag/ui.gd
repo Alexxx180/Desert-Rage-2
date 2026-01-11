@@ -6,6 +6,8 @@ const PREVIEW: Dictionary = { "SIZE": Vector2(72, 72),
 var logic: Node
 var holder: Texture2D = null
 
+func get_slot(slot: int) -> Dictionary: return logic.slot(slot)
+
 func lmb_out(e: InputEventMouseButton) -> bool:
 	return e.button_index == MOUSE_BUTTON_LEFT and e.is_released()
 

@@ -10,12 +10,12 @@ var _recipes: Array = Defaults.ARRAY
 func check(items: Array, search: Callable, flow: Callable, offset: int) -> bool:
 	for i in range(offset, len(items)):
 		if search.call(items, i):
-			var ii: int = items[i]
+			ii = items[i]
 			flow.call(craft[ii].o)
 			return true
 	return false
 
-func matches(logic: Node, items: Array) -> bool:
+func matches(_logic: Node, items: Array) -> bool:
 	#var products: Dictionary = logic.items.items.crafting.craft
 	#logic.item(craft_id).item.craft.o
 	return craft[ii].i.size() == items.size()
