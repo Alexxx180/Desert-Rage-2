@@ -12,7 +12,7 @@ func equipment(slots: Array, equip: Dictionary) -> void:
 func production(slots: Array) -> void:
 	component.production(slots)
 	if slots.is_empty():
-		item.helping()
+		helping()
 	else:
 		set_item(slots.back().item)
 

@@ -14,6 +14,18 @@ theme_override_constants/margin_right = 3
 theme_override_constants/margin_bottom = 0
 script = ExtResource("1_hqkyh")
 
+[node name="effect" type="Label" parent="."]
+visible = false
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme = ExtResource("2_hqkyh")
+theme_override_constants/line_spacing = -7
+theme_override_font_sizes/font_size = 18
+text = "Отвлекает противников"
+autowrap_mode = 2
+
 [node name="short" type="VBoxContainer" parent="."]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -29,23 +41,20 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 
-[node name="title" type="HBoxContainer" parent="short/margin"]
-layout_mode = 2
-mouse_filter = 2
-theme_override_constants/separation = 7
-script = ExtResource("2_4cvfk")
-
-[node name="caption" type="Label" parent="short/margin/title"]
+[node name="caption" type="Label" parent="short/margin"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 20
 text = "Чучело"
 text_overrun_behavior = 3
 
-[node name="effects" parent="short/margin/title" instance=ExtResource("1_civys")]
+[node name="title" type="HBoxContainer" parent="short"]
 layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 7
+script = ExtResource("2_4cvfk")
 
-[node name="effect" type="Label" parent="short"]
+[node name="effect" type="Label" parent="short/title"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -53,5 +62,8 @@ size_flags_vertical = 0
 theme = ExtResource("2_hqkyh")
 theme_override_constants/line_spacing = -7
 theme_override_font_sizes/font_size = 18
-text = "Отвлекает противников"
-autowrap_mode = 2
+text = "Восполнение"
+
+[node name="effects" parent="short/title" instance=ExtResource("1_civys")]
+layout_mode = 2
+size_flags_horizontal = 0

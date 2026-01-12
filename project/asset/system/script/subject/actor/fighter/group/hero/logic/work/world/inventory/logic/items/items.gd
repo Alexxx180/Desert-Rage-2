@@ -68,4 +68,4 @@ func put_item(slot: int, id: int) -> void:
 func put_items(slot: int, id: int, count: int) -> void:
 	storage[slot].id = id
 	storage[slot].x = count
-	ui.put_item(slot, storage[slot])
+	ui.update_item(slot, storage[slot])

@@ -20,6 +20,8 @@ func add_slot(slot: int) -> void:
 func one_item(selected: Dictionary) -> void: pass
 func one_slot(slot: int) -> bool:
 	placement.search.put_product(slots.slots, preview.cells.craft_id, slot)
+	slots.reload()
+	placement.search.logic.trade.ui.production()
 	return true
 
 func all_items() -> void: pass
