@@ -23,8 +23,10 @@ func reset_selection() -> void: set_selection(Defaults.NODE, Defaults.INT)
 
 func from_ui(ui: Control) -> void: set_selection(ui.drag.inventory, ui.slot)
 
-func trades(slot: int) -> void:
-	main.bag.logic.trade.bags(items, main.slot, slot)
+func trades_bag(bag: Node, slot: int) -> void:
+	bag.logic.items.trade.bags(items, main.slot, slot)
+
+func trades(slot: int) -> void: trades_bag(main.bag, slot)
 
 func release_item(view: Control) -> void:
 	trades(view.slot)

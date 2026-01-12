@@ -5,14 +5,16 @@ const PREVIEW: Dictionary = { "SIZE": Vector2(72, 72),
 
 var logic: Node
 var holder: Texture2D = null
+var _image: TextureRect
 
 func get_slot(slot: int) -> Dictionary: return logic.slot(slot)
 
 func lmb_out(e: InputEventMouseButton) -> bool:
 	return e.button_index == MOUSE_BUTTON_LEFT and e.is_released()
 
-func move(e: InputEvent, image: TextureRect) -> void:
-	if e is InputEventMouseButton and lmb_out(e): reset_texture(image)
+func move(e: InputEvent) -> void:
+	if e is InputEventMouseButton and lmb_out(e):
+		reset_texture(_image)
 
 func put_item(item: Dictionary, image: TextureRect) -> void:
 	var path: String = PREVIEW.ICON
@@ -43,10 +45,12 @@ func get_preview_rect() -> TextureRect:
 	return image
 
 func set_preview(cell: CellDrag) -> CellDrag:
+	_image = cell.image
 	holder = cell.image.texture
 	var preview: Control = Control.new()
 	preview.add_child(get_preview_rect())
 	cell.image.set_drag_preview(preview)
 	remove_item(cell.image)
 	return cell
-	
+
+func _input(event: InputEvent) -> void: move(event)

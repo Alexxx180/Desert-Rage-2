@@ -26,8 +26,11 @@ func _u(slot: int, f: Callable): for ui in inventory: f.call(ui[slot])
 func remove_item(no): _u(no, func(u): u.remove_item())
 func put_item(no, item: Dictionary): _u(no, func(u): u.put_item(item))
 
+func repair_id_for_search(item: Dictionary) -> void: item.id = EMPTY
+
 func update_item(slot: int, item: Dictionary) -> void:
 	if is_empty(item):
+		repair_id_for_search(item)
 		remove_item(slot)
 	else:
 		put_item(slot, item)

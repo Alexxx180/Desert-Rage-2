@@ -11,6 +11,7 @@ func item(id: int) -> Dictionary: return items.items.get_item(id)
 func _ready() -> void:
 	trade.ui.ui = items.ui
 	trade.drag.ui.logic = self
+	trade.drag.select.items = items
 	sorting.effect = effect
 	sorting.items = items
 	trade.set_logic(self)

@@ -7,7 +7,7 @@ class_name InventoryItem
 func _ready() -> void: pressed.connect(select_item)
 
 func select_item() -> void:
-	margin.view.drag.craft.selection.select_item(margin.view.slot)
+	margin.view.drag.craft.selection.select_item(margin.view)
 
 func remove_item() -> void: margin.remove_item()
 
