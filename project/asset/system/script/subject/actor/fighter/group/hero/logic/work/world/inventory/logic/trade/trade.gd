@@ -19,8 +19,8 @@ func set_logic(l: Node) -> void:
 	equip.logic = logic
 
 func description(item: Variant) -> void: #describe.emit(item, self)
-	logic.items.ui.describe(item)
 	craft.slots.reload()
+	ui.describe(item)
 
 func trades(cell: CellDrag) -> void:
 	drag.ui.reset_texture(cell.image)

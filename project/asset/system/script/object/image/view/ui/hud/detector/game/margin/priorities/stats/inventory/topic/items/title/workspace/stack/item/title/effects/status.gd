@@ -21,4 +21,6 @@ func set_refill(item: UseItem, type: int) -> void:
 
 func set_effect(item: Variant) -> void:
 	hides()
-	get(item.effect).show()
+	var sticker = get(item.effect)
+	if sticker:
+		sticker.show()

@@ -10,7 +10,8 @@ func set_values(item: UseItem) -> void:
 
 func set_status(item: Variant) -> void:
 	status.set_effect(item)
-	timing.set_time(item.time)
+	#if 
+	#timing.set_time(item.time)
 
 func set_effect(item: Variant) -> void:
 	show()

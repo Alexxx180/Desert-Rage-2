@@ -2,7 +2,7 @@ extends Node
 
 class_name InventorySelect
 
-enum { MAIN = 0, CRAFT = 25 }
+enum { MAIN = 0, CRAFT = 25, SPACE = 26 }
 
 var items: Node
 var selection: Array[Dictionary] = [_cursor(), _cursor()]
@@ -15,13 +15,18 @@ func set_selection(bag: Node, slot: int) -> void: main.bag = bag ; main.slot = s
 
 func craft_selected(slot: int) -> bool: return slot == CRAFT
 
+func is_space() -> bool: return main.slot == SPACE
+
 func was_selected() -> bool: return craft_selected(main.slot)
 
 func is_selected() -> bool: return main.slot != Defaults.INT
 
 func reset_selection() -> void: set_selection(Defaults.NODE, Defaults.INT)
 
-func from_ui(ui: Control) -> void: set_selection(ui.drag.inventory, ui.slot)
+func from_ui(ui: Control) -> void: from_space(ui.drag, ui.slot)
+
+func from_space(drag: Node, slot: int = SPACE) -> void:
+	set_selection(drag.inventory, slot)
 
 func trades_bag(bag: Node, slot: int) -> void:
 	bag.logic.items.trade.bags(items, main.slot, slot)

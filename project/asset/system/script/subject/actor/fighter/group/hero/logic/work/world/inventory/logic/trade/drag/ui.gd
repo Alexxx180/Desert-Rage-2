@@ -24,7 +24,6 @@ func put_item(item: Dictionary, image: TextureRect) -> void:
 		path += logic.item(item.id).item.icon
 	var file: Image = Image.load_from_file(path)
 	image.texture = ImageTexture.create_from_image(file)
-	pass
 
 func reset_holder() -> void: holder = null
 

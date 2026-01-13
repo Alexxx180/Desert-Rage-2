@@ -22,6 +22,9 @@ func craft_one_item(_v) -> void: craft.one_item(select.main)
 func equiping_items() -> bool: return false
 
 func crafting_items(view: Control) -> bool:
+	if select.is_space():
+		drag.craft.trade.trades(view)
+		return true
 	if select.was_selected():
 		craft_more_items(view.slot)
 		return true

@@ -19,8 +19,11 @@ func trade(cell: CellDrag) -> void: # ui.remove_item
 	select.trades(cell.slot)
 
 func trades(prev: CellDrag, next: CellDrag) -> void:
-	select.set_selection(prev.drag.inventory, prev.slot)
-	trade(next)
+	if select.craft_selected(prev.slot):
+		craft.selection.craft_more_items(next.slot)
+	else:
+		select.set_selection(prev.drag.inventory, prev.slot)
+		trade(next)
 
 func moving_items(view: Control) -> void:
 	if not select.is_selected():
@@ -32,3 +35,10 @@ func select_item(option: Button) -> void:
 	if craft.items(option): return
 	if equip.items(): return
 	moving_items(option.margin.view)
+
+func select_space() -> void:
+	if select.is_space():
+		craft.trade.craft.reset()
+		select.reset_selection()
+	else:
+		select.from_space(self)
