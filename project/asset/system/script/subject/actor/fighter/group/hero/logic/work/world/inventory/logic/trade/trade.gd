@@ -28,13 +28,15 @@ func trades(cell: CellDrag) -> void:
 	drag.ui.reset_texture(cell.image)
 	add_slot(cell.slot)
 
-func check_weapon(id: int, slot: int) -> void:
+func check_weapon(id: int, slot: int) -> bool:
 	var i: GameItems = logic.items.items
 	if i.is_equipable(id):
 		equip.select_weapon(slot)
 	elif equip.available and i.equip.in_items(id):
 		equip.add_slot(slot)
 		ui.equipment()
+		return false
+	return true
 
 func add_slot(slot: int) -> void:
 	var id: int = logic.slot(slot).id
@@ -42,8 +44,8 @@ func add_slot(slot: int) -> void:
 	match type:
 		GameItems.CRAFT: craft.add_slot(slot)
 		GameItems.EQUIP, GameItems.ITEM:
-			check_weapon(id, slot)
-			description(logic.item(id))
+			if check_weapon(id, slot):
+				description(logic.item(id))
 
 func confirm_item() -> void:
 	match craft.slots.load:

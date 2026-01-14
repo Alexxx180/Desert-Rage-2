@@ -9,7 +9,7 @@ func set_item(i: Dictionary) -> void:
 
 func equipment(slots: Array, equip: Dictionary) -> void:
 	component.equipment(slots, equip.logic)
-	set_item(equip)
+	# set_item(equip)
 
 func production(slots: Array) -> void:
 	component.production(slots)

@@ -10,6 +10,9 @@ var available: bool:
 	get: return space != Defaults.DICT 
 
 func _slot() -> Dictionary: return { "equip": [], "cross": Defaults.DICT }
+func _equip(slot: int) -> Dictionary:
+	var id: int = logic.slot(slot).id
+	return { "item": logic.item(id), "id": id }
 
 func select_weapon(slot: int) -> void:
 	space = logic.slot(slot).duplicate()
@@ -27,7 +30,7 @@ func add_weapon(slot: int) -> void:
 		meta.x = _tail_to_bank(meta.id, _slot())
 
 func add_slot(slot: int) -> void:
-	select.equip.append(logic.slot(slot).id)
+	select.equip.append(_equip(slot))
 
 func add_cross(slot: int) -> void:
 	select.cross = logic.slot(slot).duplicate()

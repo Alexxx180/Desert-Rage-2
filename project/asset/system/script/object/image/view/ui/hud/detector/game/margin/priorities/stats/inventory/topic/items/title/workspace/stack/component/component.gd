@@ -11,9 +11,9 @@ func _iterate(rang: Variant, feedback: Callable) -> void:
 		feedback.call(i)
 		items[i].show()
 
-func equipment(slots: Array, item: ArmorItem) -> void:
-	#production(slots)
-	_iterate(range(len(slots), item.equip.size()), func(i):
+func equipment(slots: Array, item: ArmorItem) -> void: #production(slots) # item.equip.size()
+	#items[0].put_item(slots[0].item.item.icon)
+	_iterate(len(slots), func(i):
 		items[i].put_item(slots[i].item.item.icon))
 
 func production(slots: Array) -> void:
