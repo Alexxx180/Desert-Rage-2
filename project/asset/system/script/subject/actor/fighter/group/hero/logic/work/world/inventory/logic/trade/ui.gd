@@ -26,7 +26,8 @@ func set_items(bag: HFlowContainer) -> void:
 func _t(f: Callable) -> void: for t in title: f.call(t)
 
 func describe(item: Variant): _t(func(t): t.describe(item))
-func equipment(item: Dictionary): _t(func(t): t.equipment(slots, item))
+func equipment(): _t(func(t): t.equipment(
+	trade.equip.select.equip, trade.equipped()))
 func production(): _t(func(t): t.production(slots))
 func product(item: Dictionary): _t(func(t): t.put_product(item))
 func helping() -> void: _t(func(t): t.helping())

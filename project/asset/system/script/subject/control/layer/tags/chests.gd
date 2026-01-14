@@ -39,5 +39,7 @@ func open_chests() -> void:
 		logic.effect.remember(id)
 	elif chest.off_at(tile.atlas):
 		lay.border.switch(chest.offset.on) # TODO NEED TO ADD CHECK BEFORE CHANGE
-		logic.put_to_inventory(id)
+		var slot: int = logic.put_to_inventory(id)
+		if logic.items.ui.have(slot):
+			logic.trade.equip.add_weapon(slot)
 		logic.effect.remember(id)

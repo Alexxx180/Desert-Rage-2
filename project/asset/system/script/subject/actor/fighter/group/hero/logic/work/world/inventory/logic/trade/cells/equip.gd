@@ -1,15 +1,33 @@
 extends Node
 
-var base: Dictionary
-
 var logic: Node
-var slots: TradeSlots
+var bank: Dictionary
+var space: Dictionary = Defaults.DICT
+var select: Dictionary:
+	get: return bank[space.id][space.x - 1]
+
+var available: bool:
+	get: return space != Defaults.DICT 
+
+func _slot() -> Dictionary: return { "equip": [], "cross": Defaults.DICT }
+
+func select_weapon(slot: int) -> void:
+	space = logic.slot(slot).duplicate()
+
+func _tail_to_bank(id: int, slot: Dictionary) -> int:
+	if bank.has(id):
+		bank[id].append(slot)
+	else:
+		bank[id] = [slot]
+	return len(bank[id])
+
+func add_weapon(slot: int) -> void:
+	var meta: Dictionary = logic.slot(slot)
+	if logic.items.items.is_equipable(meta.id):
+		meta.x = _tail_to_bank(meta.id, _slot())
 
 func add_slot(slot: int) -> void:
-	var item: EquipItem
-	var i: Dictionary = logic.items.get_item(slot)
-	#i.
-	# slots.equip()
-	#slots.append([slot, item])
-	#if slots.busy(item):
-	#	slots.reset()
+	select.equip.append(logic.slot(slot).id)
+
+func add_cross(slot: int) -> void:
+	select.cross = logic.slot(slot).duplicate()

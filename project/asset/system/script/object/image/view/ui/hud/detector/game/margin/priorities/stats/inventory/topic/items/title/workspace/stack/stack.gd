@@ -3,7 +3,9 @@ extends HBoxContainer
 @onready var component: HBoxContainer = $component
 @onready var item: MarginContainer = $item
 
-func set_item(i: Dictionary) -> void: item.set_item(i)
+func set_item(i: Dictionary) -> void:
+	item.set_item(i)
+	component.describe(i)
 
 func equipment(slots: Array, equip: Dictionary) -> void:
 	component.equipment(slots, equip.logic)

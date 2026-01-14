@@ -17,7 +17,7 @@ func craft_selected(slot: int) -> bool: return slot == CRAFT
 
 func is_space() -> bool: return main.slot == SPACE
 
-func was_selected() -> bool: return craft_selected(main.slot)
+func is_craft() -> bool: return craft_selected(main.slot)
 
 func is_selected() -> bool: return main.slot != Defaults.INT
 

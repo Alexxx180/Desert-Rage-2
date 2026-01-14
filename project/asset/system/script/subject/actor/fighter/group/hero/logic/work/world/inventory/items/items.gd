@@ -14,6 +14,9 @@ var crafting: CraftingItems = CraftingItems.new(self)
 func is_consumable(id: int) -> bool:
 	return keys.in_items(id) or uses.in_items(id)
 
+func is_equipable(id: int) -> bool:
+	return weapon.in_items(id) or armor.in_items(id)
+
 func craft(id: int) -> int:
 	if equip.in_items(id): return EQUIP
 	if crafting.in_items(id): return CRAFT

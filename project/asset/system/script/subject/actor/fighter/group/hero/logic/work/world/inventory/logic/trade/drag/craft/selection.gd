@@ -8,6 +8,8 @@ func _release_item(view: CellDrag) -> void:
 	drag.trade(view)#select.main.bag.logic, select.main.slot)
 	select.reset_selection()
 
+func trade_items(view: Control) -> void: drag.craft.trade.trades(view)
+
 func craft_all_items() -> void: pass
 
 func craft_more_items(slot: int) -> void:
@@ -19,13 +21,20 @@ func hold_selection(view: Control) -> void:
 
 func craft_one_item(_v) -> void: craft.one_item(select.main)
 
-func equiping_items() -> bool: return false
+func equiping_items(view: Control) -> bool:
+	if select.is_space():
+		trade_items(view)
+		return true
+	if select.is_craft():
+		craft_more_items(view.slot)
+		return true
+	return false
 
 func crafting_items(view: Control) -> bool:
 	if select.is_space():
-		drag.craft.trade.trades(view)
+		trade_items(view)
 		return true
-	if select.was_selected():
+	if select.is_craft():
 		craft_more_items(view.slot)
 		return true
 	if select.craft_selected(view.slot):
@@ -47,5 +56,5 @@ func moving_items(view: Control) -> void:
 
 func select_item(view: Control) -> void:
 	if crafting_items(view): return
-	if equiping_items(): return
+	if equiping_items(view): return
 	moving_items(view)

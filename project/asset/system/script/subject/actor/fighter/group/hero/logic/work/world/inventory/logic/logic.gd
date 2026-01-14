@@ -16,5 +16,5 @@ func _ready() -> void:
 	sorting.items = items
 	trade.set_logic(self)
 
-func put_to_inventory(id: int) -> bool:
+func put_to_inventory(id: int) -> int:
 	return items.put_to_inventory(id)

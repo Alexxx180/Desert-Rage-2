@@ -48,10 +48,10 @@ func replace_item(source: int, id: int) -> bool:
 func get_item(slot: int) -> Dictionary: return storage[slot]
 func get_count(slot: int) -> int: return storage[slot].x
 
-func put_to_inventory(id: int) -> bool:
+func put_to_inventory(id: int) -> int:
 	var slot: int = decide_item_or_equipment(id)
-	if ui.have(slot): put_item(slot, id); return true
-	return false
+	if ui.have(slot): put_item(slot, id)
+	return slot
 
 func use_item(slot: int) -> void: # use_inventory
 	storage[slot].x -= ui.UNIT
