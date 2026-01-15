@@ -12,8 +12,8 @@ func controls(hud: CanvasLayer, game: Control) -> void:
 	var analyze: Button = game.controls.preview.help.tabs.analyze
 
 	# """
-	analyze.pressed.connect(hints.toggle_help)
-	# TODO FIX CATEGORY
+	#analyze.pressed.connect(hints.toggle_help)
+	# TODO FIXME CATEGORY
 	#for button in game.hints.get_node("group").get_children():
 	#	button.toggled.connect(func(off: bool):
 	#		game.hints.help[button.name].visible = !off)

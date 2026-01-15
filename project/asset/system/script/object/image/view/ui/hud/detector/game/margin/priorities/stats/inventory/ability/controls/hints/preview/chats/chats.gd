@@ -35,5 +35,6 @@ func set_toggle(no: int, a: PanelContainer, b: PanelContainer) -> void:
 
 func _ready() -> void:
 	tabs.get_node("toggle").pressed.connect(hide_to_panel)
-	tabs.get_node("game").pressed.connect(func(): set_toggle(SECOND, log, chat))
-	tabs.get_node("chat").pressed.connect(func(): set_toggle(FIRST, chat, log))
+	# TODO FIXME TOGGLE LOGS
+	#tabs.get_node("game").pressed.connect(func(): set_toggle(SECOND, log, chat))
+	#tabs.get_node("chat").pressed.connect(func(): set_toggle(FIRST, chat, log))

@@ -1,11 +1,10 @@
-[gd_scene load_steps=42 format=3 uid="uid://dbaauq0nlgduw"]
+[gd_scene load_steps=38 format=3 uid="uid://dbaauq0nlgduw"]
 
 [ext_resource type="PackedScene" uid="uid://br061ue566x82" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/gameplay/skills.tscn" id="1_1gnfy"]
 [ext_resource type="Script" uid="uid://d1bkj71odt1bp" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/hints/preview/preview.gd" id="2_ytxpc"]
 [ext_resource type="Script" uid="uid://b6q8af1i030yf" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/hints/preview/chats/chats.gd" id="3_ycvvo"]
 [ext_resource type="FontFile" uid="uid://b37js8y80ak1k" path="res://asset/resource/media/data/font/NotoColorEmoji-Regular.ttf" id="5_mhiad"]
 [ext_resource type="PackedScene" uid="uid://dvdimdxij23df" path="res://asset/system/scene/object/timer/hide/hider/hover/hooder.tscn" id="6_j53xd"]
-[ext_resource type="Texture2D" uid="uid://bt7rgtk8dl35x" path="res://asset/resource/media/image/actors/npc/dialog/ray.png" id="7_aemsg"]
 [ext_resource type="Script" uid="uid://drcochfogfne4" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/hints/preview/scroll/scroll.gd" id="8_cyanb"]
 [ext_resource type="StyleBox" uid="uid://bsggnr5c3uk7o" path="res://asset/resource/ui/theme/style/panel/preview.tres" id="9_qnmve"]
 [ext_resource type="PackedScene" uid="uid://c7v6nlcj2ohx7" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/preview/log/chat.tscn" id="10_l6fkx"]
@@ -18,7 +17,6 @@
 [ext_resource type="PackedScene" uid="uid://b01p37el432af" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/preview/hints/hints.tscn" id="17_o45p0"]
 [ext_resource type="PackedScene" uid="uid://b10usb1wa67d2" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/preview/books/book.tscn" id="18_utpyv"]
 [ext_resource type="Script" uid="uid://ctl16kwrqvphb" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/hints/preview/help/tabs.gd" id="19_ljxyi"]
-[ext_resource type="FontFile" uid="uid://b2wbdbnkxcqv1" path="res://asset/resource/media/data/font/NotoEmoji-VariableFont_wght.ttf" id="20_nm87g"]
 [ext_resource type="FontFile" uid="uid://tledodlx6okb" path="res://asset/resource/media/data/font/LTSuperiorMono-Semibold.otf" id="21_jd8lw"]
 [ext_resource type="FontFile" uid="uid://drm0mr2hyapf2" path="res://asset/resource/media/data/font/EmojiOneColor.otf" id="22_a545b"]
 
@@ -34,11 +32,6 @@ corner_radius_bottom_left = 3
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6gnce"]
 content_margin_left = 5.0
 content_margin_bottom = 4.0
-bg_color = Color(0, 0, 0, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_upyjg"]
-content_margin_left = 7.0
-content_margin_top = 7.0
 bg_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rw2ti"]
@@ -63,10 +56,6 @@ corner_radius_top_left = 3
 corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pau43"]
-content_margin_left = 5.0
-bg_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x6rox"]
 content_margin_right = 1.0
@@ -145,7 +134,7 @@ mouse_filter = 2
 [node name="top" type="Control" parent="."]
 layout_mode = 2
 size_flags_vertical = 3
-size_flags_stretch_ratio = 0.15
+size_flags_stretch_ratio = 0.01
 
 [node name="space" type="Control" parent="."]
 layout_mode = 2
@@ -193,6 +182,7 @@ size_flags_stretch_ratio = 0.25
 script = ExtResource("3_ycvvo")
 
 [node name="log" type="HBoxContainer" parent="space/preview/chats"]
+visible = false
 layout_mode = 2
 theme_override_constants/separation = 0
 
@@ -201,7 +191,6 @@ layout_mode = 2
 size_flags_vertical = 8
 
 [node name="toggle" type="Button" parent="space/preview/chats/log/tabs"]
-visible = false
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("5_mhiad")
@@ -213,7 +202,6 @@ alignment = 0
 [node name="hooder" parent="space/preview/chats/log/tabs/toggle" instance=ExtResource("6_j53xd")]
 
 [node name="search" type="Button" parent="space/preview/chats/log/tabs"]
-visible = false
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("5_mhiad")
@@ -223,46 +211,6 @@ text = "🔍"
 alignment = 0
 
 [node name="hooder" parent="space/preview/chats/log/tabs/search" instance=ExtResource("6_j53xd")]
-
-[node name="game" type="Button" parent="space/preview/chats/log/tabs"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("5_mhiad")
-theme_override_font_sizes/font_size = 24
-theme_override_styles/normal = SubResource("StyleBoxFlat_upyjg")
-text = "🗃️"
-alignment = 0
-
-[node name="hooder" parent="space/preview/chats/log/tabs/game" instance=ExtResource("6_j53xd")]
-
-[node name="chat" type="Button" parent="space/preview/chats/log/tabs"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("5_mhiad")
-theme_override_font_sizes/font_size = 25
-theme_override_styles/normal = SubResource("StyleBoxFlat_upyjg")
-text = "💻"
-alignment = 0
-
-[node name="hooder" parent="space/preview/chats/log/tabs/chat" instance=ExtResource("6_j53xd")]
-
-[node name="margin" type="MarginContainer" parent="space/preview/chats/log/tabs/chat"]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 2
-theme_override_constants/margin_top = 2
-theme_override_constants/margin_right = 2
-theme_override_constants/margin_bottom = 2
-
-[node name="icon" type="TextureRect" parent="space/preview/chats/log/tabs/chat/margin"]
-layout_mode = 2
-texture = ExtResource("7_aemsg")
-expand_mode = 1
 
 [node name="scroll" type="ScrollContainer" parent="space/preview/chats"]
 custom_minimum_size = Vector2(0, 120)
@@ -291,7 +239,6 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="chat" type="PanelContainer" parent="space/preview/chats/scroll/list"]
-visible = false
 layout_mode = 2
 theme_override_styles/panel = ExtResource("9_qnmve")
 
@@ -609,7 +556,6 @@ size_flags_vertical = 3
 size_flags_stretch_ratio = 0.2
 
 [node name="books" type="ScrollContainer" parent="space/preview/help/content"]
-visible = false
 layout_mode = 2
 size_flags_vertical = 3
 
@@ -632,6 +578,7 @@ layout_mode = 2
 size_flags_vertical = 8
 
 [node name="ability" type="HBoxContainer" parent="space/preview/help"]
+visible = false
 layout_mode = 2
 theme_override_constants/separation = 0
 
@@ -651,28 +598,6 @@ text = "➡️"
 alignment = 0
 
 [node name="hooder" parent="space/preview/help/ability/tabs/toggle" instance=ExtResource("6_j53xd")]
-
-[node name="analyze" type="Button" parent="space/preview/help/ability/tabs"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("20_nm87g")
-theme_override_font_sizes/font_size = 25
-theme_override_styles/normal = SubResource("StyleBoxFlat_pau43")
-text = "🔎"
-alignment = 0
-
-[node name="hooder" parent="space/preview/help/ability/tabs/analyze" instance=ExtResource("6_j53xd")]
-
-[node name="books" type="Button" parent="space/preview/help/ability/tabs"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("5_mhiad")
-theme_override_font_sizes/font_size = 25
-theme_override_styles/normal = SubResource("StyleBoxFlat_upyjg")
-text = "📚"
-alignment = 0
-
-[node name="hooder" parent="space/preview/help/ability/tabs/books" instance=ExtResource("6_j53xd")]
 
 [node name="synergy" type="MarginContainer" parent="space/preview/help/ability"]
 custom_minimum_size = Vector2(3, 0)
@@ -738,7 +663,7 @@ show_percentage = false
 [node name="bottom" type="Control" parent="."]
 layout_mode = 2
 size_flags_vertical = 3
-size_flags_stretch_ratio = 0.15
+size_flags_stretch_ratio = 0.01
 
 [node name="slots" type="VBoxContainer" parent="bottom"]
 visible = false

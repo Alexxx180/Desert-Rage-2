@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=3 uid="uid://cq5jn6k2bwg5n"]
+[gd_scene load_steps=70 format=3 uid="uid://cq5jn6k2bwg5n"]
 
 [ext_resource type="Script" uid="uid://b2ugt042kmpr0" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/topic/status/status.gd" id="1_3iju4"]
 [ext_resource type="Script" uid="uid://c34inyxgbvb7k" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/topic/status/space/space.gd" id="2_iitkt"]
@@ -20,6 +20,7 @@
 [ext_resource type="Shortcut" uid="uid://ucetbklb6n0q" path="res://asset/resource/ui/short/cut/game/gameplay-menu.tres" id="18_ghbld"]
 [ext_resource type="FontFile" uid="uid://b37js8y80ak1k" path="res://asset/resource/media/data/font/NotoColorEmoji-Regular.ttf" id="19_biktr"]
 [ext_resource type="Script" uid="uid://dim2gh2xi14fs" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/topic/status/space/title/status/xp/meter.gd" id="20_4445a"]
+[ext_resource type="Texture2D" uid="uid://bt7rgtk8dl35x" path="res://asset/resource/media/image/actors/npc/dialog/ray.png" id="20_i51uf"]
 [ext_resource type="Script" uid="uid://bbdi3k2c2306b" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/topic/status/space/title/status/time.gd" id="21_tdyda"]
 [ext_resource type="FontFile" uid="uid://dqpftcx1b6r8j" path="res://asset/resource/media/data/font/LTStopwatch-Regular.ttf" id="22_w2hc4"]
 [ext_resource type="Script" uid="uid://bwtr43cgelxn8" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/topic/status/space/title/enemies/enemies.gd" id="23_423h3"]
@@ -62,13 +63,18 @@ fill_to = Vector2(0.507692, 0)
 content_margin_right = 9.0
 content_margin_bottom = 5.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6f6g2"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6k1g3"]
+content_margin_left = 7.0
+content_margin_top = 7.0
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pndwk"]
 content_margin_left = 4.0
 content_margin_top = 4.0
 content_margin_right = 4.0
 bg_color = Color(0, 0, 0, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pndwk"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6f6g2"]
 content_margin_left = 4.0
 content_margin_top = 4.0
 content_margin_right = 4.0
@@ -125,6 +131,14 @@ bg_color = Color(0.739789, 2.00946e-06, 5.77569e-07, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hnjmq"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lglah"]
+content_margin_left = 6.0
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8bgqw"]
+content_margin_left = 5.0
+bg_color = Color(0, 0, 0, 1)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_crv53"]
 bg_color = Color(0, 0, 0, 1)
 border_color = Color(0.184314, 0.184314, 0.72549, 1)
@@ -137,12 +151,13 @@ content_margin_top = 6.0
 content_margin_left = 7.0
 content_margin_top = 6.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lglah"]
-content_margin_left = 6.0
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i51uf"]
+content_margin_left = 5.0
 bg_color = Color(0, 0, 0, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8bgqw"]
-content_margin_left = 5.0
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f66ty"]
+content_margin_left = 7.0
+content_margin_top = 7.0
 bg_color = Color(0, 0, 0, 1)
 
 [sub_resource type="Theme" id="Theme_crv53"]
@@ -321,7 +336,6 @@ script = ExtResource("12_sfss6")
 [node name="timer" parent="space/title/status/xp/body/space/score" instance=ExtResource("13_ic7dp")]
 
 [node name="options" type="HBoxContainer" parent="space/title/status/xp/body/space"]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -330,6 +344,17 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = -1
 script = ExtResource("14_fsyq3")
+
+[node name="game" type="Button" parent="space/title/status/xp/body/space/options"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("19_biktr")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_6k1g3")
+text = "🗃️"
+alignment = 0
+
+[node name="hooder" parent="space/title/status/xp/body/space/options/game" instance=ExtResource("17_3i86x")]
 
 [node name="pause" parent="space/title/status/xp/body/space/options" instance=ExtResource("15_uia8v")]
 custom_minimum_size = Vector2(40, 30)
@@ -341,14 +366,15 @@ text = "ESC"
 [node name="hooder" parent="space/title/status/xp/body/space/options/pause" instance=ExtResource("17_3i86x")]
 
 [node name="menu" type="Button" parent="space/title/status/xp/body/space/options"]
+visible = false
 custom_minimum_size = Vector2(40, 30)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 theme_override_fonts/font = ExtResource("16_gshab")
 theme_override_font_sizes/font_size = 20
-theme_override_styles/disabled = SubResource("StyleBoxFlat_6f6g2")
 theme_override_styles/normal = SubResource("StyleBoxFlat_pndwk")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_6f6g2")
 disabled = true
 shortcut = ExtResource("18_ghbld")
 text = "Y"
@@ -356,6 +382,7 @@ text = "Y"
 [node name="hooder" parent="space/title/status/xp/body/space/options/menu" instance=ExtResource("17_3i86x")]
 
 [node name="icons" type="Button" parent="space/title/status/xp/body/space/options"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("19_biktr")
@@ -392,6 +419,36 @@ theme_override_fonts/font = ExtResource("19_biktr")
 theme_override_font_sizes/font_size = 18
 theme_override_styles/normal = SubResource("StyleBoxEmpty_p6ffv")
 text = "🗃"
+
+[node name="chat" type="Button" parent="space/title/status/xp/body/space/options"]
+visible = false
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("19_biktr")
+theme_override_font_sizes/font_size = 25
+theme_override_styles/normal = SubResource("StyleBoxFlat_6k1g3")
+text = "💻"
+alignment = 0
+
+[node name="hooder" parent="space/title/status/xp/body/space/options/chat" instance=ExtResource("17_3i86x")]
+
+[node name="margin" type="MarginContainer" parent="space/title/status/xp/body/space/options/chat"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="icon" type="TextureRect" parent="space/title/status/xp/body/space/options/chat/margin"]
+layout_mode = 2
+texture = ExtResource("20_i51uf")
+expand_mode = 1
 
 [node name="meter" type="HBoxContainer" parent="space/title/status/xp"]
 custom_minimum_size = Vector2(0, 2)
@@ -526,6 +583,33 @@ script = ExtResource("28_vcby2")
 layout_mode = 2
 theme_override_constants/separation = 0
 
+[node name="team" type="Button" parent="preset/skill/sets/skill/options"]
+visible = false
+custom_minimum_size = Vector2(40, 30)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("30_g7ksd")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_lglah")
+text = "🙂‍↔️"
+alignment = 0
+
+[node name="hooder" parent="preset/skill/sets/skill/options/team" instance=ExtResource("17_3i86x")]
+
+[node name="group" type="Button" parent="preset/skill/sets/skill/options"]
+custom_minimum_size = Vector2(40, 30)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("30_g7ksd")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_8bgqw")
+text = "😶‍🌫️"
+alignment = 0
+
+[node name="hooder" parent="preset/skill/sets/skill/options/group" instance=ExtResource("17_3i86x")]
+
 [node name="sets" type="HBoxContainer" parent="preset/skill/sets/skill/options"]
 layout_mode = 2
 theme_override_constants/separation = 0
@@ -539,8 +623,8 @@ theme_override_constants/separation = 0
 custom_minimum_size = Vector2(60, 29)
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_styles/disabled = SubResource("StyleBoxFlat_crv53")
 theme_override_styles/normal = SubResource("StyleBoxFlat_crv53")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_crv53")
 disabled = true
 
 [node name="skill" type="HBoxContainer" parent="preset/skill/sets/skill/options/sets/ray/first"]
@@ -587,8 +671,8 @@ theme_override_constants/separation = 0
 custom_minimum_size = Vector2(60, 29)
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_styles/disabled = SubResource("StyleBoxFlat_crv53")
 theme_override_styles/normal = SubResource("StyleBoxFlat_crv53")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_crv53")
 disabled = true
 
 [node name="skill" type="HBoxContainer" parent="preset/skill/sets/skill/options/sets/rock/first"]
@@ -626,31 +710,28 @@ text = "⚡️"
 
 [node name="hooder" parent="preset/skill/sets/skill/options/sets/rock/first" instance=ExtResource("17_3i86x")]
 
-[node name="team" type="Button" parent="preset/skill/sets/skill/options"]
-custom_minimum_size = Vector2(40, 30)
+[node name="analyze" type="Button" parent="preset/skill/sets/skill/options"]
+custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 8
 theme_override_fonts/font = ExtResource("30_g7ksd")
-theme_override_font_sizes/font_size = 24
-theme_override_styles/normal = SubResource("StyleBoxFlat_lglah")
-text = "🙂‍↔️"
+theme_override_font_sizes/font_size = 25
+theme_override_styles/normal = SubResource("StyleBoxFlat_i51uf")
+text = "🔎"
 alignment = 0
 
-[node name="hooder" parent="preset/skill/sets/skill/options/team" instance=ExtResource("17_3i86x")]
+[node name="hooder" parent="preset/skill/sets/skill/options/analyze" instance=ExtResource("17_3i86x")]
 
-[node name="group" type="Button" parent="preset/skill/sets/skill/options"]
-custom_minimum_size = Vector2(40, 30)
+[node name="books" type="Button" parent="preset/skill/sets/skill/options"]
+visible = false
+custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 8
-theme_override_fonts/font = ExtResource("30_g7ksd")
-theme_override_font_sizes/font_size = 24
-theme_override_styles/normal = SubResource("StyleBoxFlat_8bgqw")
-text = "😶‍🌫️"
+theme_override_fonts/font = ExtResource("19_biktr")
+theme_override_font_sizes/font_size = 25
+theme_override_styles/normal = SubResource("StyleBoxFlat_f66ty")
+text = "📚"
 alignment = 0
 
-[node name="hooder" parent="preset/skill/sets/skill/options/group" instance=ExtResource("17_3i86x")]
+[node name="hooder" parent="preset/skill/sets/skill/options/books" instance=ExtResource("17_3i86x")]
 
 [node name="margin" type="MarginContainer" parent="preset/skill/sets/skill"]
 visible = false

@@ -28,6 +28,7 @@ func shows() -> void: if not minimized: super.show()
 
 func _ready() -> void:
 	tabs.get_node("toggle").pressed.connect(hide_to_panel)
+	return # TODO FIXME ANALYZE
 	tabs.get_node("analyze").pressed.connect(func():
 		if opened == SECOND:
 			help.visible = !help.visible
