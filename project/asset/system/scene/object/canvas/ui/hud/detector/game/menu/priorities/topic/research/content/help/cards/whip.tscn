@@ -1,11 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://bhx1wvs221hc1"]
+[gd_scene load_steps=6 format=3 uid="uid://bhx1wvs221hc1"]
 
 [ext_resource type="Script" uid="uid://b06ntftlpr38h" path="res://asset/system/script/object/image/view/ui/menu/information/card.gd" id="1_544qv"]
 [ext_resource type="StyleBox" uid="uid://c8hy4gq5uksdh" path="res://asset/resource/ui/theme/style/panel/complex/hover.tres" id="2_xs0gb"]
 [ext_resource type="StyleBox" uid="uid://chr58r7ok2alt" path="res://asset/resource/ui/theme/style/panel/accent.tres" id="3_8gh0y"]
 [ext_resource type="Texture2D" uid="uid://d0mlboi8womp5" path="res://asset/resource/media/image/hints/action/whip.svg" id="4_0hl45"]
 [ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://asset/resource/ui/theme/patterns/template/menu/settings/topic/footer.tres" id="5_erpce"]
-[ext_resource type="FontFile" uid="uid://b37js8y80ak1k" path="res://asset/resource/media/data/font/NotoColorEmoji-Regular.ttf" id="6_q7ffm"]
 
 [node name="whip" type="Control"]
 custom_minimum_size = Vector2(260, 356)
@@ -71,7 +70,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(1e-05, 1)
 pivot_offset = Vector2(131, 0)
 theme_override_styles/hover_pressed = ExtResource("2_xs0gb")
 theme_override_styles/hover = ExtResource("2_xs0gb")
@@ -90,52 +88,15 @@ theme_override_constants/margin_bottom = 10
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="description" type="Control" parent="showcase/margin/content"]
+[node name="caption" type="RichTextLabel" parent="showcase/margin/content"]
+custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 size_flags_vertical = 3
-mouse_filter = 2
-
-[node name="icons" type="MarginContainer" parent="showcase/margin/content/description"]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -68.0
-offset_top = -40.0
-grow_horizontal = 0
-grow_vertical = 0
-theme_override_constants/margin_left = 0
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 5
-
-[node name="caption" type="Label" parent="showcase/margin/content/description/icons"]
-custom_minimum_size = Vector2(50, 0)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 6
 theme = ExtResource("5_erpce")
-theme_override_colors/font_color = Color(0.52549, 0.52549, 0.52549, 1)
-theme_override_fonts/font = ExtResource("6_q7ffm")
-text = "🎣⛓️🎚"
-
-[node name="caption" type="Label" parent="showcase/margin/content/description"]
-custom_minimum_size = Vector2(50, 0)
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 258.0
-grow_horizontal = 2
-size_flags_vertical = 6
-theme = ExtResource("5_erpce")
-text = "Вы можете под-тянуться нажав %s перед столбом или крюком
-
-Для подтягивания к цепи нужно висеть на цепи лицом к ней
-
-Задетые кнутом рычаги переключаются."
+bbcode_enabled = true
+text = "[p][i]🎣[/i]Вы можете подтя-нуться нажав %s перед столбом[/p][p]—[/p][p][b]⛓️[/b] Для подтягивания к другой цепи нужно ви-сеть лицом к ней на достаточном расстоя-нии[/p]"
 autowrap_mode = 2
+vertical_alignment = 1
 
 [node name="title" type="HBoxContainer" parent="showcase/margin/content"]
 layout_mode = 2

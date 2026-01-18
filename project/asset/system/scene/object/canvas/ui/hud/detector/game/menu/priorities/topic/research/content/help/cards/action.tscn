@@ -1,11 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://cb7x57prcw1bk"]
+[gd_scene load_steps=6 format=3 uid="uid://cb7x57prcw1bk"]
 
 [ext_resource type="Script" uid="uid://b06ntftlpr38h" path="res://asset/system/script/object/image/view/ui/menu/information/card.gd" id="1_irban"]
 [ext_resource type="StyleBox" uid="uid://c8hy4gq5uksdh" path="res://asset/resource/ui/theme/style/panel/complex/hover.tres" id="2_kqgux"]
 [ext_resource type="StyleBox" uid="uid://chr58r7ok2alt" path="res://asset/resource/ui/theme/style/panel/accent.tres" id="3_w3lpu"]
 [ext_resource type="Texture2D" uid="uid://dmvqe8j7qqwnl" path="res://asset/resource/media/image/hints/action.svg" id="4_wb6dq"]
 [ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://asset/resource/ui/theme/patterns/template/menu/settings/topic/footer.tres" id="5_p18pe"]
-[ext_resource type="FontFile" uid="uid://b37js8y80ak1k" path="res://asset/resource/media/data/font/NotoColorEmoji-Regular.ttf" id="6_l36a6"]
 
 [node name="action" type="Control"]
 custom_minimum_size = Vector2(260, 356)
@@ -71,7 +70,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(1e-05, 1)
 pivot_offset = Vector2(131, 0)
 theme_override_styles/hover_pressed = ExtResource("2_kqgux")
 theme_override_styles/hover = ExtResource("2_kqgux")
@@ -90,52 +88,15 @@ theme_override_constants/margin_bottom = 10
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="description" type="Control" parent="showcase/margin/content"]
+[node name="caption" type="RichTextLabel" parent="showcase/margin/content"]
+custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 size_flags_vertical = 3
-mouse_filter = 2
-
-[node name="icons" type="MarginContainer" parent="showcase/margin/content/description"]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -68.0
-offset_top = -40.0
-grow_horizontal = 0
-grow_vertical = 0
-theme_override_constants/margin_left = 0
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 5
-
-[node name="caption" type="Label" parent="showcase/margin/content/description/icons"]
-custom_minimum_size = Vector2(50, 0)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 6
 theme = ExtResource("5_p18pe")
-theme_override_colors/font_color = Color(0.52549, 0.52549, 0.52549, 1)
-theme_override_fonts/font = ExtResource("6_l36a6")
-text = "🙌👊🚫"
-
-[node name="caption" type="Label" parent="showcase/margin/content/description"]
-custom_minimum_size = Vector2(50, 0)
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 258.0
-grow_horizontal = 2
-size_flags_vertical = 6
-theme = ExtResource("5_p18pe")
-text = "Для ручного взаимо-действия подойдите к предмету и нажмите %s
-
-Позволяет герою использовать приемы с руками и действовать
-
-Можно потерять"
+bbcode_enabled = true
+text = "[p][b]🔓[/b] Для взаимодейст-вия подойдите к пре-дмету и нажмите %s[/p][p]—[/p][p][b]🙌[/b] Это также позвол-яет выполнять прие-мы руками[/p][p]—[/p][p][b]🚫[/b] Можно потерять[/p]"
 autowrap_mode = 2
+vertical_alignment = 1
 
 [node name="title" type="HBoxContainer" parent="showcase/margin/content"]
 layout_mode = 2
