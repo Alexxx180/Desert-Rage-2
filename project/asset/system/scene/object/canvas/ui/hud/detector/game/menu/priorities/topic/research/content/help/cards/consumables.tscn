@@ -1,17 +1,16 @@
-[gd_scene load_steps=6 format=3 uid="uid://cb3tma7sk6te2"]
+[gd_scene load_steps=6 format=3 uid="uid://dxsh5evndtnar"]
 
-[ext_resource type="Script" uid="uid://b06ntftlpr38h" path="res://asset/system/script/object/image/view/ui/menu/information/card.gd" id="1_erawl"]
-[ext_resource type="StyleBox" uid="uid://c8hy4gq5uksdh" path="res://asset/resource/ui/theme/style/panel/complex/hover.tres" id="2_bsv0g"]
-[ext_resource type="StyleBox" uid="uid://chr58r7ok2alt" path="res://asset/resource/ui/theme/style/panel/accent.tres" id="3_lvyjh"]
-[ext_resource type="Texture2D" uid="uid://c10ecsn6ao1ef" path="res://asset/resource/media/image/hints/reason/aura.svg" id="4_vfsjt"]
-[ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://asset/resource/ui/theme/patterns/template/menu/settings/topic/footer.tres" id="5_ydfkg"]
+[ext_resource type="Script" uid="uid://b06ntftlpr38h" path="res://asset/system/script/object/image/view/ui/menu/information/card.gd" id="1_h8wpr"]
+[ext_resource type="StyleBox" uid="uid://c8hy4gq5uksdh" path="res://asset/resource/ui/theme/style/panel/complex/hover.tres" id="1_urcin"]
+[ext_resource type="StyleBox" uid="uid://chr58r7ok2alt" path="res://asset/resource/ui/theme/style/panel/accent.tres" id="2_h8wpr"]
+[ext_resource type="Texture2D" uid="uid://dayfjrsaxga0e" path="res://asset/resource/media/image/hints/reason/equipment.svg" id="3_uy3rw"]
+[ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://asset/resource/ui/theme/patterns/template/menu/settings/topic/footer.tres" id="4_0w82c"]
 
-[node name="aura" type="Control"]
+[node name="consumables" type="Control"]
 custom_minimum_size = Vector2(260, 356)
 layout_mode = 3
 anchors_preset = 0
-size_flags_horizontal = 4
-script = ExtResource("1_erawl")
+script = ExtResource("1_h8wpr")
 
 [node name="collapsed" type="Button" parent="."]
 custom_minimum_size = Vector2(260, 356)
@@ -22,9 +21,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(130, 0)
-theme_override_styles/hover_pressed = ExtResource("2_bsv0g")
-theme_override_styles/hover = ExtResource("2_bsv0g")
-theme_override_styles/normal = ExtResource("3_lvyjh")
+theme_override_styles/hover_pressed = ExtResource("1_urcin")
+theme_override_styles/hover = ExtResource("1_urcin")
+theme_override_styles/normal = ExtResource("2_h8wpr")
 
 [node name="margin" type="MarginContainer" parent="collapsed"]
 layout_mode = 2
@@ -42,7 +41,7 @@ theme_override_constants/separation = 10
 [node name="image" type="TextureRect" parent="collapsed/margin/content"]
 layout_mode = 2
 size_flags_vertical = 3
-texture = ExtResource("4_vfsjt")
+texture = ExtResource("3_uy3rw")
 expand_mode = 1
 
 [node name="title" type="HBoxContainer" parent="collapsed/margin/content"]
@@ -56,7 +55,7 @@ size_flags_horizontal = 3
 [node name="caption" type="Label" parent="collapsed/margin/content/title"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 14
-text = "Аура"
+text = "Расходники"
 
 [node name="right" type="HSeparator" parent="collapsed/margin/content/title"]
 layout_mode = 2
@@ -72,9 +71,9 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1e-05, 1)
 pivot_offset = Vector2(131, 0)
-theme_override_styles/hover_pressed = ExtResource("2_bsv0g")
-theme_override_styles/hover = ExtResource("2_bsv0g")
-theme_override_styles/normal = ExtResource("3_lvyjh")
+theme_override_styles/hover_pressed = ExtResource("1_urcin")
+theme_override_styles/hover = ExtResource("1_urcin")
+theme_override_styles/normal = ExtResource("2_h8wpr")
 
 [node name="margin" type="MarginContainer" parent="showcase"]
 layout_mode = 2
@@ -93,9 +92,9 @@ theme_override_constants/separation = 10
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 size_flags_vertical = 3
-theme = ExtResource("5_ydfkg")
+theme = ExtResource("4_0w82c")
 bbcode_enabled = true
-text = "[p][i]❤️‍🔥[/i]Оболочка предохра-няющая вас от гибели[/p][p]—[/p][p][i]🌡[/i]Общий запас отоб-ражается в виде кол-бы в инвентаре[/p][p]—[/p][p][b]🫙[/b]Поддерживайте уро-вень выше 0 водой и растворами[/p]"
+text = "[p][b]🧪[/b]Для использования откройте свой инвен-тарь %s и нажмите %s на предмете[/p][p]—[/p][p][i]🎒[/i]Перемещайте пред-меты выбрав один из слотов, затем другой слот[/p]"
 autowrap_mode = 2
 vertical_alignment = 1
 
@@ -111,7 +110,7 @@ size_flags_horizontal = 3
 [node name="caption" type="Label" parent="showcase/margin/content/title"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 14
-text = "Аура"
+text = "Расходники"
 
 [node name="right" type="HSeparator" parent="showcase/margin/content/title"]
 layout_mode = 2

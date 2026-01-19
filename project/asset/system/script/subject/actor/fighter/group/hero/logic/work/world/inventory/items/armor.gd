@@ -1,10 +1,16 @@
-extends UseItem
+extends IUse
 
-class_name ArmorItem
+class_name IArmor
 
 var equip: Array[int]
 
-func _init(_power: int, _supply: int = 0, _equip: Array[int] = [], _effect: String = "defend") -> void:
-	super._init(_power, _supply, KeyItem.Spend.INFINITE, _effect) # check with at: int in inventory slots
-	equip = _equip
-	#spending = KeyItem.Spend.INFINITE
+func _init(_power: int, _supply: int = 0, _effect: String = "defend") -> void:
+	super._init(_power, _supply, TypeItems.INFINITE, _effect)
+
+func aura(value: int) -> IArmor:
+	supply = value
+	return self
+
+func eqa(value: Array[int]) -> IArmor:
+	equip = value
+	return self

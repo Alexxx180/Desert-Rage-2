@@ -1,6 +1,6 @@
-extends KeyItem
+extends IKey
 
-class_name EquipItem
+class_name IEquip
 
 var power: float = 0
 

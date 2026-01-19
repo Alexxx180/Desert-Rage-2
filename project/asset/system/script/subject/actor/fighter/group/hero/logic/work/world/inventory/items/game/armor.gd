@@ -2,24 +2,16 @@ extends TypeItems
 
 class_name ArmorTypeItems
 
-var t: Dictionary = { "C": "Одежда", "A": "Броня", "R": "Реликвия" }
-
-func _type(short: String) -> String: return t[short]
 func _icon(path: String) -> String: return "armor/" + path
+func _def(value: int) -> IArmor: return IArmor.new(value)
 
-func _get_effect() -> Array: return [
-		ArmorItem.new(1, 1), ArmorItem.new(3), ArmorItem.new(1),
-		ArmorItem.new(2), ArmorItem.new(2), ArmorItem.new(5),
-		ArmorItem.new(2), ArmorItem.new(0, 10)
-	]
-
-func _get_names() -> Array[Item]: return [
-		_item("К. Штаны", "C", "Сделаны из цельного куска кожи", "pants/pants.svg"),
-		_item("К. Поножи", "A", "Надежно защищает от попадания стрел", "pants/greaves.svg"),
-		_item("К. Ботинки", "C", "Без ботинок по раскаленным поверхностям перемещаться будет тяжеловато", "boots/leather.svg"),
-		_item("К. Сапоги", "A", "В них очень приятно давить ползающих гадюк", "boots/iron.svg"),
-		_item("К. Куртка", "C", "Прикрывает спину от палящего солнца", "jacket/leather.svg"),
-		_item("К. Нагрудник", "A", "Плотная кольчуга хорошо защищает от пробитий", "jacket/iron.svg"),
-		_item("Ж. Щит", "R", "Защищает от внезапных ударов с 1% шансом", "artifact/shield.svg"),
-		_item("Зуб мудрости", "R", "Усиливает ваше влияние", "artifact/tooth.svg")
+func _get_effect() -> Array[Dictionary]: return [
+		_item("IN", "AC", "pants/pants.svg", _def(1).aura(1)),
+		_item("IV", "AA", "pants/greaves.svg", _def(3)),
+		_item("IH", "AC", "boots/leather.svg", _def(1)),
+		_item("IB", "AA", "boots/iron.svg", _def(2)),
+		_item("IK", "AC", "jacket/leather.svg", _def(2)),
+		_item("IP", "AA", "jacket/iron.svg", _def(5)),
+		_item("II", "AR", "artifact/shield.svg", _def(2)),
+		_item("IWD", "AR", "artifact/tooth.svg", _def(0).aura(10))
 	]

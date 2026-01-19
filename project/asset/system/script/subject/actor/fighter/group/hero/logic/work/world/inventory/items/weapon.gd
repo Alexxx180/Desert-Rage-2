@@ -1,16 +1,20 @@
-extends ArmorItem
+extends IArmor
 
-class_name WeaponItem
+class_name IWeapon
 
 var cross: Array[int]
 
-func _init(_power: int, _equip: Array[int] = [], _effect: String = "attack") -> void:
-	super._init(_power, 0, _equip, _effect) # check with at: int in inventory slots
+func _init(_power: int, _effect: String = "attack") -> void:
+	super._init(_power, 0, _effect) # check with at: int in inventory slots
 
-func of(_supply: int) -> WeaponItem:
+func eqw(value: Array[int]) -> IWeapon:
+	eqa(value)
+	return self
+
+func of(_supply: int) -> IWeapon:
 	supply = _supply
 	return self
 
-func crosses(_cross: Array[int]) -> WeaponItem:
+func crosses(_cross: Array[int]) -> IWeapon:
 	cross = _cross
 	return self

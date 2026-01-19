@@ -4,9 +4,8 @@ extends HBoxContainer
 @onready var timing: VBoxContainer = $timing
 
 func set_values(item: UseItem) -> void:
-	var type: int = item.describe()
-	timing.set_power(item, type)
-	status.set_refill(item, type)
+	timing.set_power(item)
+	status.set_refill(item)
 
 func set_status(item: Variant) -> void:
 	status.set_effect(item)

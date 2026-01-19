@@ -2,25 +2,17 @@ extends TypeItems
 
 class_name WeaponTypeItems
 
-var t: Dictionary = { "M": "Б. Оружие", "F": "О. Оружие", "R": "Д. Оружие" }
-
 func _icon(path: String) -> String: return "weapon/" + path
-func _type(type: String) -> String: return t[type]
+func _pow(value: int) -> IWeapon: return IWeapon.new(value)
 
-func _get_effect() -> Array: return [
-		WeaponItem.new(3, [0, 1]), WeaponItem.new(4), WeaponItem.new(4), WeaponItem.new(7),
-		WeaponItem.new(5), WeaponItem.new(7), WeaponItem.new(9), WeaponItem.new(3),
-		WeaponItem.new(50)
-	]
-
-func _get_names() -> Array[Item]: return [
-		_item("К. Кастет", "M", "Усиливает пробивающую силу удара", "melee/knuckle-duster.svg"),
-		_item("П. Нож", "M", "Годится чтобы нарезать тортик", "melee/knife.svg"),
-		_item("Д. Меч", "M", "Снова сэкономили...", "melee/sword.svg"),
-		_item("И. Меч", "M", "Простая игрушка?", "melee/toy-sword.svg"),
-		_item("К. Шофилд-45", "F", "Простой, надежный револьвер", "firearm/schofield45-colt.svg"),
-		_item("Пацифист", "F", "Мир достается тяжелой ценой", "firearm/pacifist-colt.svg"),
-		_item("Дробовик", "F", "Похоже кто-то обронил", "firearm/shotgun.svg"),
-		_item("Д. Бумеранг", "R", "Осторожно - это деревянное лезвие не игрушка", "boomerang.svg"),
-		_item("Тапок", "M", "Слова излишни", "melee/shoe.svg"),
+func _get_effect() -> Array[Dictionary]: return [
+		_item("IKD", "WM", "melee/knuckle-duster", _pow(3).eqw([0, 1])),
+		_item("IKW", "WM", "melee/knife", _pow(2)),
+		_item("ISW", "WM", "melee/sword", _pow(4)),
+		_item("IST", "WM", "melee/toy-sword", _pow(7)),
+		_item("ICS", "WF", "firearm/schofield45-colt", _pow(5)),
+		_item("IPT", "WF", "firearm/pacifist-colt", _pow(7)),
+		_item("ISH", "WF", "firearm/shotgun", _pow(9)),
+		_item("IBM", "WR", "boomerang", _pow(3)),
+		_item("IBS", "WM", "melee/shoe", _pow(50)),
 	]

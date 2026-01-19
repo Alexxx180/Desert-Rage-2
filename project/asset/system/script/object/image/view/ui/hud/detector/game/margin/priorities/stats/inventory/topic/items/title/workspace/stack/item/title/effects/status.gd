@@ -8,16 +8,17 @@ extends HBoxContainer
 
 func hides() -> void: for i in get_children(): i.hide()
 
-func determine_ar(item: UseItem) -> void:
-	if item.supply > item.power: resource.show()
-	else: aura.show()
+func saura() -> String:
+	aura.show()
+	return "aura shown"
 
-func set_refill(item: UseItem, type: int) -> void:
+func sresource() -> String:
+	resource.show()
+	return "resource shown"
+
+func set_refill(item: UseItem) -> void:
 	hides()
-	match type:
-		UseItem.AURA, UseItem.BOTH: aura.show()
-		UseItem.RESOURCE: resource.show()
-		UseItem.AR: determine_ar(item)
+	item.imagine(self)
 
 func set_effect(item: Variant) -> void:
 	hides()

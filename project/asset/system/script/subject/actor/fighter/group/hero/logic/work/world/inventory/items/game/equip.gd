@@ -2,26 +2,22 @@ extends TypeItems
 
 class_name EquipTypeItems
 
+enum { L1 = 5, L2 = 10, L3 = 15, L4 = 25 }
+
+const E: Dictionary = { "RATE": "fire_rate", "DMG": "damage_increase" }
+
 var items: Array = []
 
 func _icon(path: String) -> String: return "armor/equip/" + path
+func e(percent: int, effect: String) -> IEquip: return IEquip.new(effect, percent)
 
-func _get_effect() -> Array:
-	var damage: String = "damage_increase"; var rate: String = "fire_rate"
-	return [
-		EquipItem.new(rate, 5), EquipItem.new("burn_time", 25),
-		EquipItem.new(damage, 5), EquipItem.new("spread_decrease", 10),
-		EquipItem.new(damage, 15), EquipItem.new("range", 5),
-		EquipItem.new(rate, 5), EquipItem.new("skip_cost", 10)
-	]
-
-func _get_names() -> Array[Item]: return [
-		_item("Масло", "+5% скорость атак", "Смазывая клинки маслом, можно получить интересный эффект.", "butter.svg"),
-		_item("Огненное масло", "+25% времени ожога", "Это раскаленное масло отличный выбор для гриля.", "fire-butter.svg", Item.i(Item.A_DOTE)),
-		_item("Точ. Камень", "+5% урон", "Главный инструмент на кухне - это нож и его надо хорошо наточить перед использованием.", "fasten.svg", Item.i(Item.A_COUGH)),
-		_item("Помпа", "-10% рассеивание", "Делает из неотесанного дробовика уточненный винчестер", "pump.svg"),
-		_item("М. Наконечник", "+15% урон", "Похоже, что для монстров игры закончились", "metal-end.svg"),
-		_item("М. Прицел", "+5% дальность", "Через него хорошо видно, что кто-то не помыл конечности перед трапезой", "target.svg"),
-		_item("Очиститель", "+5% скорость атак", "Вычищает всю грязь и налет внутри и снаружи орудий", "cleaner.svg"),
-		_item("Доп. Обойма", "-10% расход ресурса", "Будь раньше у меня такая оснастка, я может и не расставался бы с пушками", "magazine.svg")
+func _get_effect() -> Array[Dictionary]: return [
+		_item("IU", "PAS", "butter.svg", e(L1, E.RATE)),
+		_item("IF", "PBT", "fire-butter.svg", e(L4, "burn_time"), i(A_DOTE)),
+		_item("IG", "PDG", "fasten.svg", e(L1, E.DMG), i(A_COUGH)),
+		_item("IM", "PSD", "pump.svg", e(-L2, "spread_decrease")),
+		_item("IT", "PDG", "metal-end.svg", e(L3, E.DMG)),
+		_item("IA", "PRG", "target.svg", e(L1, "range")),
+		_item("IL", "PAS", "cleaner.svg", e(L1, E.RATE)),
+		_item("IEA", "PRC", "magazine.svg", e(-L2, "skip_cost"))
 	]

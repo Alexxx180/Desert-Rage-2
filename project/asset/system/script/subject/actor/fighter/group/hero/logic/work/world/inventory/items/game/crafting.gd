@@ -29,7 +29,7 @@ func _set_craft(type, base: int) -> void:
 			_connect_ingredients(c, base + j) #craft
 
 func _init(items: GameItems) -> void:
-	Item.crafts(craft)
+	items.weapon.crafts(craft)
 	var n: int = 0
 	for i in ["keys", "uses"]:
 		var type = items.get(i)
