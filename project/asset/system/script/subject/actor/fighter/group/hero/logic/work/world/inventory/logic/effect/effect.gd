@@ -9,14 +9,7 @@ const JAR: int = 0
 var logic: Node
 
 func spend_item(slot: int, spending: int) -> bool:
-	var result: bool = false
-	match spending:
-		KeyItem.Spend.INFINITE: result = true
-		KeyItem.Spend.JAR: result = logic.items.replace_item(slot, JAR)
-		KeyItem.Spend.LIMITED:
-			logic.items.use_item(slot)
-			result = true
-	return result
+	return TypeItems.spend(spending, slot, logic)
 
 func use_item(slot: int) -> int:
 	var item: Dictionary = logic.item(logic.slot(slot).id)

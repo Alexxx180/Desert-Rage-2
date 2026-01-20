@@ -5,7 +5,7 @@ class_name IWeapon
 var cross: Array[int]
 
 func _init(_power: int, _effect: String = "attack") -> void:
-	super._init(_power, 0, _effect) # check with at: int in inventory slots
+	super._init(_power, 0, _effect)
 
 func eqw(value: Array[int]) -> IWeapon:
 	eqa(value)

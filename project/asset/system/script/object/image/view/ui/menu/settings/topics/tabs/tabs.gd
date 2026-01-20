@@ -1,4 +1,4 @@
-extends HFlowContainer
+extends VFlowContainer
 
 @onready var caption: Control = $caption
 @onready var exit: Control = $exit

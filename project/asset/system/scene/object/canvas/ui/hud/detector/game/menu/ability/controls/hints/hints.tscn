@@ -6,14 +6,15 @@
 [ext_resource type="FontFile" uid="uid://b37js8y80ak1k" path="res://asset/resource/media/data/font/NotoColorEmoji-Regular.ttf" id="5_mhiad"]
 [ext_resource type="PackedScene" uid="uid://dvdimdxij23df" path="res://asset/system/scene/object/timer/hide/hider/hover/hooder.tscn" id="6_j53xd"]
 [ext_resource type="Script" uid="uid://drcochfogfne4" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/hints/preview/scroll/scroll.gd" id="8_cyanb"]
+[ext_resource type="Script" uid="uid://n36jd2ri2pe8" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/hints/preview/chat/chat.gd" id="9_3vr44"]
 [ext_resource type="StyleBox" uid="uid://bsggnr5c3uk7o" path="res://asset/resource/ui/theme/style/panel/preview.tres" id="9_qnmve"]
-[ext_resource type="PackedScene" uid="uid://c7v6nlcj2ohx7" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/preview/log/chat.tscn" id="10_l6fkx"]
 [ext_resource type="FontFile" uid="uid://c4ygkmnbt1j7y" path="res://asset/resource/media/data/font/LTSuperiorSerif-Semibold.otf" id="11_3knmu"]
 [ext_resource type="FontFile" uid="uid://byixp8w8hrpot" path="res://asset/resource/media/data/font/ComicHelvetic_Light.otf" id="12_ok7xt"]
 [ext_resource type="Script" uid="uid://basexjwfooy37" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/hints/preview/chat/log/log.gd" id="13_dm5pn"]
 [ext_resource type="PackedScene" uid="uid://dhcteeknvvvj8" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/preview/log/item.tscn" id="14_lwpsb"]
 [ext_resource type="Script" uid="uid://hb6avc0h2sag" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/hints/preview/hints.gd" id="15_lu4o3"]
 [ext_resource type="Script" uid="uid://cjoheu7m2eic3" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/hints/preview/help/content/help.gd" id="16_2o5ct"]
+[ext_resource type="PackedScene" uid="uid://ct27hc33r8hui" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/priorities/topic/research/content/help/cards/spring.tscn" id="17_3vr44"]
 [ext_resource type="PackedScene" uid="uid://b01p37el432af" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/preview/hints/hints.tscn" id="17_o45p0"]
 [ext_resource type="PackedScene" uid="uid://b10usb1wa67d2" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/preview/books/book.tscn" id="18_utpyv"]
 [ext_resource type="Script" uid="uid://ctl16kwrqvphb" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/hints/preview/help/tabs.gd" id="19_ljxyi"]
@@ -41,9 +42,6 @@ bg_color = Color(0.0383972, 0.0383972, 0.0383971, 1)
 
 [sub_resource type="Theme" id="Theme_tysmj"]
 VScrollBar/styles/scroll = SubResource("StyleBoxFlat_rw2ti")
-
-[sub_resource type="StyleBoxLine" id="StyleBoxLine_iy05a"]
-color = Color(0.117647, 0.117647, 0.227451, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tysmj"]
 
@@ -253,137 +251,138 @@ theme_override_constants/margin_bottom = 10
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="ray" parent="space/preview/chats/scroll/list/chat/margin/heroes" instance=ExtResource("10_l6fkx")]
-layout_mode = 2
-
-[node name="rock" type="VBoxContainer" parent="space/preview/chats/scroll/list/chat/margin/heroes"]
-layout_mode = 2
-theme_override_constants/separation = 4
-
-[node name="description" type="VBoxContainer" parent="space/preview/chats/scroll/list/chat/margin/heroes/rock"]
-layout_mode = 2
-theme_override_constants/separation = 3
-
-[node name="caption" type="HBoxContainer" parent="space/preview/chats/scroll/list/chat/margin/heroes/rock/description"]
-layout_mode = 2
-
-[node name="a" type="HSeparator" parent="space/preview/chats/scroll/list/chat/margin/heroes/rock/description/caption"]
-custom_minimum_size = Vector2(15, 0)
-layout_mode = 2
-theme_override_constants/separation = 0
-theme_override_styles/separator = SubResource("StyleBoxLine_iy05a")
-
-[node name="player" type="Label" parent="space/preview/chats/scroll/list/chat/margin/heroes/rock/description/caption"]
-layout_mode = 2
-size_flags_horizontal = 0
-theme_override_colors/font_color = Color(0.393086, 0.393086, 0.393085, 1)
-theme_override_fonts/font = ExtResource("11_3knmu")
-theme_override_font_sizes/font_size = 16
-text = "Рок, PussyDestroyer22"
-
-[node name="b" type="HSeparator" parent="space/preview/chats/scroll/list/chat/margin/heroes/rock/description/caption"]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/separation = 0
-theme_override_styles/separator = SubResource("StyleBoxLine_iy05a")
-
-[node name="chat" type="Label" parent="space/preview/chats/scroll/list/chat/margin/heroes/rock/description"]
+[node name="ray" type="Label" parent="space/preview/chats/scroll/list/chat/margin/heroes"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 size_flags_vertical = 1
-theme_override_colors/font_color = Color(0.627451, 0.627451, 0.627451, 1)
+theme_override_colors/font_color = Color(0.294118, 0.294118, 0.294118, 1)
 theme_override_constants/line_spacing = -2
 theme_override_fonts/font = ExtResource("12_ok7xt")
 theme_override_font_sizes/font_size = 22
-text = "Да ничего так, норм туса"
+text = "L27_13R"
 autowrap_mode = 2
+script = ExtResource("9_3vr44")
 
-[node name="did" type="VBoxContainer" parent="space/preview/chats/scroll/list/chat/margin/heroes"]
-layout_mode = 2
-theme_override_constants/separation = 4
-
-[node name="description" type="VBoxContainer" parent="space/preview/chats/scroll/list/chat/margin/heroes/did"]
-layout_mode = 2
-theme_override_constants/separation = 3
-
-[node name="caption" type="HBoxContainer" parent="space/preview/chats/scroll/list/chat/margin/heroes/did/description"]
-layout_mode = 2
-
-[node name="a" type="HSeparator" parent="space/preview/chats/scroll/list/chat/margin/heroes/did/description/caption"]
-custom_minimum_size = Vector2(15, 0)
-layout_mode = 2
-theme_override_constants/separation = 0
-theme_override_styles/separator = SubResource("StyleBoxLine_iy05a")
-
-[node name="player" type="Label" parent="space/preview/chats/scroll/list/chat/margin/heroes/did/description/caption"]
-layout_mode = 2
+[node name="title" type="Label" parent="space/preview/chats/scroll/list/chat/margin/heroes/ray"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -38.0
+offset_top = -20.0
+grow_horizontal = 0
+grow_vertical = 0
 size_flags_horizontal = 0
-theme_override_colors/font_color = Color(0.393086, 0.393086, 0.393085, 1)
+theme_override_colors/font_color = Color(0.588235, 0.588235, 0.588235, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/shadow_outline_size = 2
 theme_override_fonts/font = ExtResource("11_3knmu")
-theme_override_font_sizes/font_size = 16
-text = "Дид"
+theme_override_font_sizes/font_size = 20
+text = "RAY"
+horizontal_alignment = 2
 
-[node name="b" type="HSeparator" parent="space/preview/chats/scroll/list/chat/margin/heroes/did/description/caption"]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/separation = 0
-theme_override_styles/separator = SubResource("StyleBoxLine_iy05a")
-
-[node name="chat" type="Label" parent="space/preview/chats/scroll/list/chat/margin/heroes/did/description"]
+[node name="rock" type="Label" parent="space/preview/chats/scroll/list/chat/margin/heroes"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 size_flags_vertical = 1
-theme_override_colors/font_color = Color(0.627451, 0.627451, 0.627451, 1)
+theme_override_colors/font_color = Color(0.294118, 0.294118, 0.294118, 1)
 theme_override_constants/line_spacing = -2
 theme_override_fonts/font = ExtResource("12_ok7xt")
 theme_override_font_sizes/font_size = 22
-text = "Харе ерундой маяться, вилкой данж иди чисти"
+text = "L27_15K"
 autowrap_mode = 2
 
-[node name="ant" type="VBoxContainer" parent="space/preview/chats/scroll/list/chat/margin/heroes"]
-layout_mode = 2
-theme_override_constants/separation = 4
-
-[node name="description" type="VBoxContainer" parent="space/preview/chats/scroll/list/chat/margin/heroes/ant"]
-layout_mode = 2
-theme_override_constants/separation = 3
-
-[node name="caption" type="HBoxContainer" parent="space/preview/chats/scroll/list/chat/margin/heroes/ant/description"]
-layout_mode = 2
-
-[node name="a" type="HSeparator" parent="space/preview/chats/scroll/list/chat/margin/heroes/ant/description/caption"]
-custom_minimum_size = Vector2(15, 0)
-layout_mode = 2
-theme_override_constants/separation = 0
-theme_override_styles/separator = SubResource("StyleBoxLine_iy05a")
-
-[node name="player" type="Label" parent="space/preview/chats/scroll/list/chat/margin/heroes/ant/description/caption"]
-layout_mode = 2
+[node name="title" type="Label" parent="space/preview/chats/scroll/list/chat/margin/heroes/rock"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -38.0
+offset_top = -20.0
+grow_horizontal = 0
+grow_vertical = 0
 size_flags_horizontal = 0
-theme_override_colors/font_color = Color(0.393086, 0.393086, 0.393085, 1)
+theme_override_colors/font_color = Color(0.588235, 0.588235, 0.588235, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/shadow_outline_size = 2
 theme_override_fonts/font = ExtResource("11_3knmu")
-theme_override_font_sizes/font_size = 16
-text = "? ? ?"
+theme_override_font_sizes/font_size = 20
+text = "ROCK"
+horizontal_alignment = 2
 
-[node name="b" type="HSeparator" parent="space/preview/chats/scroll/list/chat/margin/heroes/ant/description/caption"]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/separation = 0
-theme_override_styles/separator = SubResource("StyleBoxLine_iy05a")
-
-[node name="chat" type="Label" parent="space/preview/chats/scroll/list/chat/margin/heroes/ant/description"]
+[node name="did" type="Label" parent="space/preview/chats/scroll/list/chat/margin/heroes"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 size_flags_vertical = 1
-theme_override_colors/font_color = Color(0.627451, 0.627451, 0.627451, 1)
+theme_override_colors/font_color = Color(0.294118, 0.294118, 0.294118, 1)
 theme_override_constants/line_spacing = -2
 theme_override_fonts/font = ExtResource("12_ok7xt")
 theme_override_font_sizes/font_size = 22
-text = "Ну дарова, ребятки, че нового?"
+text = "L27_16D"
 autowrap_mode = 2
+
+[node name="title" type="Label" parent="space/preview/chats/scroll/list/chat/margin/heroes/did"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -38.0
+offset_top = -20.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(0.588235, 0.588235, 0.588235, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/shadow_outline_size = 2
+theme_override_fonts/font = ExtResource("11_3knmu")
+theme_override_font_sizes/font_size = 20
+text = "DID"
+horizontal_alignment = 2
+
+[node name="ant" type="Label" parent="space/preview/chats/scroll/list/chat/margin/heroes"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.294118, 0.294118, 0.294118, 1)
+theme_override_constants/line_spacing = -2
+theme_override_fonts/font = ExtResource("12_ok7xt")
+theme_override_font_sizes/font_size = 22
+text = "L27_17Q"
+autowrap_mode = 2
+
+[node name="title" type="Label" parent="space/preview/chats/scroll/list/chat/margin/heroes/ant"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -38.0
+offset_top = -20.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(0.588235, 0.588235, 0.588235, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/shadow_outline_size = 2
+theme_override_fonts/font = ExtResource("11_3knmu")
+theme_override_font_sizes/font_size = 20
+text = "NA"
+horizontal_alignment = 2
 
 [node name="log" type="PanelContainer" parent="space/preview/chats/scroll/list"]
 visible = false
@@ -550,6 +549,7 @@ horizontal_scroll_mode = 0
 script = ExtResource("16_2o5ct")
 
 [node name="hints" parent="space/preview/help/content/help" instance=ExtResource("17_o45p0")]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -570,6 +570,7 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="book" parent="space/preview/help/content/books/books" instance=ExtResource("18_utpyv")]
+visible = false
 layout_mode = 2
 size_flags_vertical = 8
 
@@ -577,6 +578,10 @@ size_flags_vertical = 8
 visible = false
 layout_mode = 2
 size_flags_vertical = 8
+
+[node name="spring" parent="space/preview/help/content/books/books" instance=ExtResource("17_3vr44")]
+layout_mode = 2
+size_flags_horizontal = 8
 
 [node name="ability" type="HBoxContainer" parent="space/preview/help"]
 visible = false

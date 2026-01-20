@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://ct27hc33r8hui"]
+[gd_scene load_steps=7 format=3 uid="uid://ct27hc33r8hui"]
 
 [ext_resource type="Script" uid="uid://b06ntftlpr38h" path="res://asset/system/script/object/image/view/ui/menu/information/card.gd" id="1_lb2a0"]
 [ext_resource type="StyleBox" uid="uid://c8hy4gq5uksdh" path="res://asset/resource/ui/theme/style/panel/complex/hover.tres" id="2_8rdtk"]
 [ext_resource type="StyleBox" uid="uid://chr58r7ok2alt" path="res://asset/resource/ui/theme/style/panel/accent.tres" id="3_wvxl7"]
 [ext_resource type="Texture2D" uid="uid://d0mlboi8womp5" path="res://asset/resource/media/image/hints/action/whip.svg" id="4_qt4j4"]
 [ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://asset/resource/ui/theme/patterns/template/menu/settings/topic/footer.tres" id="5_0ulew"]
+[ext_resource type="PackedScene" uid="uid://8le631m7klhr" path="res://asset/system/scene/object/canvas/util/localizer/localizer.tscn" id="6_8rdtk"]
 
 [node name="spring" type="Control"]
 custom_minimum_size = Vector2(260, 356)
@@ -55,7 +56,7 @@ size_flags_horizontal = 3
 [node name="caption" type="Label" parent="collapsed/margin/content/title"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 14
-text = "Пружины"
+text = "RT"
 
 [node name="right" type="HSeparator" parent="collapsed/margin/content/title"]
 layout_mode = 2
@@ -93,7 +94,7 @@ layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("5_0ulew")
 bbcode_enabled = true
-text = "[p][b][i]⏏️[/i][/b] Нажмите %s на пружине для прыжка [/p][p]—[/p][p][b]🪂[/b] Управляйте геро-ем в воздухе и наж-мите %s чтобы при-землиться[/p][p]—[/p][p][b]✊[/b] Вы можете схватить цепь при падении[/p]"
+text = "RD"
 autowrap_mode = 2
 vertical_alignment = 1
 
@@ -109,8 +110,10 @@ size_flags_horizontal = 3
 [node name="caption" type="Label" parent="showcase/margin/content/title"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 14
-text = "Пружины"
+text = "RT"
 
 [node name="right" type="HSeparator" parent="showcase/margin/content/title"]
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="localizer" parent="." instance=ExtResource("6_8rdtk")]

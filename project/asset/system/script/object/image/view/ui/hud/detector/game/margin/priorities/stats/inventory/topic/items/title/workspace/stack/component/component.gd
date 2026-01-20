@@ -11,7 +11,7 @@ func _iterate(rang: Variant, feedback: Callable) -> void:
 		feedback.call(i)
 		items[i].show()
 
-func equipment(slots: Array, item: ArmorItem) -> void: #production(slots) # item.equip.size()
+func equipment(slots: Array, item: IArmor) -> void: #production(slots) # item.equip.size()
 	#items[0].put_item(slots[0].item.item.icon)
 	_iterate(len(slots), func(i):
 		items[i].put_item(slots[i].item.item.icon))
@@ -23,5 +23,5 @@ func production(slots: Array) -> void:
 
 func describe(item: Dictionary) -> void:
 	hides()
-	if item.logic is ArmorItem:
+	if item.logic is IArmor:
 		_iterate(len(item.logic.equip), func(_i): pass)

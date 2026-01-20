@@ -3,7 +3,7 @@ extends HBoxContainer
 @onready var status: HBoxContainer = $status
 @onready var timing: VBoxContainer = $timing
 
-func set_values(item: UseItem) -> void:
+func set_values(item: IUse) -> void:
 	timing.set_power(item)
 	status.set_refill(item)
 
@@ -14,7 +14,7 @@ func set_status(item: Variant) -> void:
 
 func set_effect(item: Variant) -> void:
 	show()
-	if item is UseItem:
+	if item is IUse:
 		set_values(item)
 	else:
 		set_status(item)

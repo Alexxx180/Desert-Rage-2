@@ -24,12 +24,12 @@ func determine_sort(p: int, n: int, s: Dictionary) -> void:
 		Sort.ASC: if not p <= n: s.sort = desc_sort(s.size == SIZE and more(p, n))
 		Sort.DESC: if not more(p, n): s.sort = Sort.RANDOM
 
-func _no_use(l: UseItem, s: Dictionary, i: int) -> bool:
+func _no_use(l: IUse, s: Dictionary, i: int) -> bool:
 	return l.get(s.key) == NA or items.storage[i].x <= NA
 
 func add_usable(s: Dictionary, i: int) -> void:
 	var it: Dictionary = get_item(i)
-	if it.logic is not UseItem or _no_use(it.logic, s, i): return
+	if it.logic is not IUse or _no_use(it.logic, s, i): return
 	
 	s.result.append({ "slot": i, "item": it })
 	s.size += 1

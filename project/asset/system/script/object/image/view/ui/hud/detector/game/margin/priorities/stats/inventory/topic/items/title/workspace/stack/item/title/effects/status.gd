@@ -16,7 +16,7 @@ func sresource() -> String:
 	resource.show()
 	return "resource shown"
 
-func set_refill(item: UseItem) -> void:
+func set_refill(item: IUse) -> void:
 	hides()
 	item.imagine(self)
 

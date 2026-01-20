@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=3 uid="uid://b4x588yxrcok3"]
+[gd_scene load_steps=61 format=3 uid="uid://b4x588yxrcok3"]
 
 [ext_resource type="Script" uid="uid://d05jnr6xe41se" path="res://asset/system/script/object/image/view/ui/menu/settings/settings.gd" id="1_apf6u"]
 [ext_resource type="Theme" uid="uid://dfyi7rrcrweqx" path="res://asset/resource/ui/theme/patterns/template/menu/settings/settings.tres" id="1_vs08l"]
@@ -23,6 +23,7 @@
 [ext_resource type="StyleBox" uid="uid://sum2wm2lethm" path="res://asset/resource/ui/theme/patterns/template/menu/settings/topic/header/top.tres" id="10_4wiln"]
 [ext_resource type="PackedScene" uid="uid://bwxmswjunrdab" path="res://asset/system/scene/object/canvas/ui/menu/settings/sound/interface.tscn" id="10_bgvfr"]
 [ext_resource type="Script" uid="uid://bddnexjid3qoh" path="res://asset/system/script/object/image/view/ui/menu/settings/topics/options/topic/named/options/experience/sound.gd" id="11_n6v6j"]
+[ext_resource type="FontFile" uid="uid://tledodlx6okb" path="res://asset/resource/media/data/font/LTSuperiorMono-Semibold.otf" id="12_jw263"]
 [ext_resource type="Script" uid="uid://bkvtgtb73me2c" path="res://asset/system/script/object/image/view/ui/menu/settings/topics/tabs/tabs.gd" id="13_cumtp"]
 [ext_resource type="Script" uid="uid://c55a67g70w7c7" path="res://asset/system/script/object/image/view/ui/menu/settings/topics/tabs/caption/caption.gd" id="13_rpxmq"]
 [ext_resource type="Shortcut" uid="uid://bgd4ocokxr1wj" path="res://asset/resource/ui/short/cut/pause.tres" id="14_n4pyq"]
@@ -47,6 +48,19 @@
 [ext_resource type="Script" uid="uid://ctik5u2wvkppb" path="res://asset/system/script/object/image/view/ui/menu/settings/topics/options/topic/slider/manual.gd" id="27_g800x"]
 [ext_resource type="Script" uid="uid://dix4ud17vkox1" path="res://asset/system/script/object/image/view/ui/menu/settings/topics/options/topic/named/options/management/gamepad.gd" id="28_6l1og"]
 [ext_resource type="StyleBox" uid="uid://do1sdititwera" path="res://asset/resource/ui/theme/patterns/template/menu/settings/topic/header/bottom.tres" id="32_3074f"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jw263"]
+content_margin_left = 12.0
+content_margin_top = 12.0
+content_margin_right = 12.0
+content_margin_bottom = 12.0
+bg_color = Color(0.0666667, 0.0666667, 0.0666667, 1)
+
+[sub_resource type="Shortcut" id="Shortcut_xycy2"]
+events = [ExtResource("16_yw7xu"), ExtResource("17_wy3ld"), ExtResource("18_5iaie")]
+
+[sub_resource type="Shortcut" id="Shortcut_5q5w7"]
+events = [ExtResource("16_yw7xu"), ExtResource("18_ynqjn")]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_okge3"]
 bg_color = Color(0.0196078, 0.0196078, 0.0196078, 1)
@@ -76,12 +90,6 @@ bg_color = Color(0.0687983, 0.0687983, 0.0687982, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1821x"]
 
-[sub_resource type="Shortcut" id="Shortcut_xycy2"]
-events = [ExtResource("16_yw7xu"), ExtResource("17_wy3ld"), ExtResource("18_5iaie")]
-
-[sub_resource type="Shortcut" id="Shortcut_5q5w7"]
-events = [ExtResource("16_yw7xu"), ExtResource("18_ynqjn")]
-
 [node name="settings" type="CanvasLayer"]
 script = ExtResource("1_apf6u")
 
@@ -109,12 +117,95 @@ theme_override_constants/margin_top = 30
 theme_override_constants/margin_right = 35
 theme_override_constants/margin_bottom = 30
 
-[node name="topics" type="VBoxContainer" parent="detector/margin"]
+[node name="topics" type="HBoxContainer" parent="detector/margin"]
 layout_mode = 2
 script = ExtResource("3_dcp6l")
 
+[node name="tabs" type="MarginContainer" parent="detector/margin/topics"]
+layout_mode = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="options" type="VFlowContainer" parent="detector/margin/topics/tabs"]
+layout_mode = 2
+script = ExtResource("13_cumtp")
+
+[node name="caption" type="VBoxContainer" parent="detector/margin/topics/tabs/options"]
+custom_minimum_size = Vector2(10, 45)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.95
+script = ExtResource("13_rpxmq")
+
+[node name="experience" type="Button" parent="detector/margin/topics/tabs/options/caption"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.9
+theme_override_constants/line_spacing = -2
+theme_override_fonts/font = ExtResource("12_jw263")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_jw263")
+shortcut = SubResource("Shortcut_xycy2")
+text = "Game Experience"
+autowrap_mode = 1
+script = ExtResource("19_fobve")
+
+[node name="shortcut" type="Node" parent="detector/margin/topics/tabs/options/caption/experience"]
+process_mode = 4
+script = ExtResource("19_eqfhs")
+action = "list_right"
+
+[node name="controls" type="Button" parent="detector/margin/topics/tabs/options/caption"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.9
+theme_override_font_sizes/font_size = 22
+shortcut = SubResource("Shortcut_5q5w7")
+script = ExtResource("19_fobve")
+
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/tabs/options/caption/controls"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 0
+
+[node name="label" type="Label" parent="detector/margin/topics/tabs/options/caption/controls/margin"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Manage Controls"
+
+[node name="shortcut" type="Node" parent="detector/margin/topics/tabs/options/caption/controls"]
+process_mode = 4
+script = ExtResource("19_eqfhs")
+action = "list_left"
+
+[node name="exit" type="Button" parent="detector/margin/topics/tabs/options"]
+custom_minimum_size = Vector2(45, 45)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_stretch_ratio = 0.05
+theme_override_constants/line_spacing = -2
+theme_override_fonts/font = ExtResource("12_jw263")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_jw263")
+shortcut = ExtResource("14_n4pyq")
+text = "Back"
+autowrap_mode = 1
+
 [node name="content" type="ScrollContainer" parent="detector/margin/topics"]
 layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 3
 follow_focus = true
 script = ExtResource("4_insl8")
@@ -188,6 +279,50 @@ scrollable = false
 [node name="interface" parent="detector/margin/topics/content/options/game/experience/sound/content/options" instance=ExtResource("10_bgvfr")]
 layout_mode = 2
 scrollable = false
+
+[node name="listen" type="Button" parent="detector/margin/topics/content/options/game/experience/sound/content/options"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/game/experience/sound/content/options/listen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/game/experience/sound/content/options/listen/margin"]
+layout_mode = 2
+text = "Listen"
+
+[node name="status" type="Label" parent="detector/margin/topics/content/options/game/experience/sound/content/options/listen/margin"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "theme / full"
+
+[node name="repeat" type="Button" parent="detector/margin/topics/content/options/game/experience/sound/content/options"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/game/experience/sound/content/options/repeat"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/game/experience/sound/content/options/repeat/margin"]
+layout_mode = 2
+text = "Repeat"
+
+[node name="status" type="Label" parent="detector/margin/topics/content/options/game/experience/sound/content/options/repeat/margin"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "On"
 
 [node name="system" type="Button" parent="detector/margin/topics/content/options/game/experience/sound/content/options"]
 custom_minimum_size = Vector2(300, 60)
@@ -288,6 +423,45 @@ size_flags_vertical = 10
 theme = ExtResource("2_ull8j")
 script = ExtResource("16_4tgnu")
 
+[node name="first_time" type="Button" parent="detector/margin/topics/content/options/game/experience/experience/content/options"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/game/experience/experience/content/options/first_time"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/game/experience/experience/content/options/first_time/margin"]
+layout_mode = 2
+text = "I'm new here"
+
+[node name="gameplay" type="Button" parent="detector/margin/topics/content/options/game/experience/experience/content/options"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/game/experience/experience/content/options/gameplay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/game/experience/experience/content/options/gameplay/margin"]
+layout_mode = 2
+text = "Like genre..."
+
+[node name="status" type="Label" parent="detector/margin/topics/content/options/game/experience/experience/content/options/gameplay/margin"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "JRPG / Action"
+
 [node name="narrative" type="Button" parent="detector/margin/topics/content/options/game/experience/experience/content/options"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
@@ -310,6 +484,50 @@ layout_mode = 2
 size_flags_horizontal = 8
 text = "On"
 
+[node name="quotes" type="Button" parent="detector/margin/topics/content/options/game/experience/experience/content/options"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/game/experience/experience/content/options/quotes"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/game/experience/experience/content/options/quotes/margin"]
+layout_mode = 2
+text = "Quotes"
+
+[node name="status" type="Label" parent="detector/margin/topics/content/options/game/experience/experience/content/options/quotes/margin"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "On"
+
+[node name="help" type="Button" parent="detector/margin/topics/content/options/game/experience/experience/content/options"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/game/experience/experience/content/options/help"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/game/experience/experience/content/options/help/margin"]
+layout_mode = 2
+text = "Gameplay help"
+
+[node name="status" type="Label" parent="detector/margin/topics/content/options/game/experience/experience/content/options/help/margin"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "On"
+
 [node name="emotions" type="Button" parent="detector/margin/topics/content/options/game/experience/experience/content/options"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
@@ -328,6 +546,28 @@ layout_mode = 2
 text = "Emotions"
 
 [node name="status" type="Label" parent="detector/margin/topics/content/options/game/experience/experience/content/options/emotions/margin"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "On"
+
+[node name="card" type="Button" parent="detector/margin/topics/content/options/game/experience/experience/content/options"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/game/experience/experience/content/options/card"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/game/experience/experience/content/options/card/margin"]
+layout_mode = 2
+text = "Item cards"
+
+[node name="status" type="Label" parent="detector/margin/topics/content/options/game/experience/experience/content/options/card/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "On"
@@ -398,6 +638,23 @@ size_flags_vertical = 10
 theme = ExtResource("2_ull8j")
 script = ExtResource("18_6ai1k")
 
+[node name="interface" type="Button" parent="detector/margin/topics/content/options/game/experience/interface/content/options"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/game/experience/interface/content/options/interface"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/game/experience/interface/content/options/interface/margin"]
+layout_mode = 2
+text = "Minimal / Adaptive / Full / Fixed"
+
 [node name="language" type="Button" parent="detector/margin/topics/content/options/game/experience/interface/content/options"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
@@ -438,12 +695,12 @@ grow_vertical = 2
 layout_mode = 2
 text = "Fullscreen"
 
-[node name="counters" type="Button" parent="detector/margin/topics/content/options/game/experience/interface/content/options"]
+[node name="combo" type="Button" parent="detector/margin/topics/content/options/game/experience/interface/content/options"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/game/experience/interface/content/options/counters"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/game/experience/interface/content/options/combo"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -451,14 +708,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="caption" type="Label" parent="detector/margin/topics/content/options/game/experience/interface/content/options/counters/margin"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/game/experience/interface/content/options/combo/margin"]
 layout_mode = 2
-text = "Counters"
+text = "Combo"
 
-[node name="status" type="Label" parent="detector/margin/topics/content/options/game/experience/interface/content/options/counters/margin"]
+[node name="status" type="Label" parent="detector/margin/topics/content/options/game/experience/interface/content/options/combo/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
-text = "On"
+text = "x2 / x3 / x4 / Off"
 
 [node name="health" type="Button" parent="detector/margin/topics/content/options/game/experience/interface/content/options"]
 custom_minimum_size = Vector2(300, 60)
@@ -475,12 +732,12 @@ grow_vertical = 2
 
 [node name="caption" type="Label" parent="detector/margin/topics/content/options/game/experience/interface/content/options/health/margin"]
 layout_mode = 2
-text = "Health"
+text = "Aura"
 
 [node name="status" type="Label" parent="detector/margin/topics/content/options/game/experience/interface/content/options/health/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
-text = "Aura"
+text = "Vessel / Bar / DMG / Off"
 
 [node name="influence" type="Button" parent="detector/margin/topics/content/options/game/experience/interface/content/options"]
 custom_minimum_size = Vector2(300, 60)
@@ -504,12 +761,12 @@ layout_mode = 2
 size_flags_horizontal = 8
 text = "Vessel"
 
-[node name="damage" type="Button" parent="detector/margin/topics/content/options/game/experience/interface/content/options"]
+[node name="enemy-card" type="Button" parent="detector/margin/topics/content/options/game/experience/interface/content/options"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/game/experience/interface/content/options/damage"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/game/experience/interface/content/options/enemy-card"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -517,21 +774,21 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="caption" type="Label" parent="detector/margin/topics/content/options/game/experience/interface/content/options/damage/margin"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/game/experience/interface/content/options/enemy-card/margin"]
 layout_mode = 2
-text = "Damage"
+text = "E. card"
 
-[node name="status" type="Label" parent="detector/margin/topics/content/options/game/experience/interface/content/options/damage/margin"]
+[node name="status" type="Label" parent="detector/margin/topics/content/options/game/experience/interface/content/options/enemy-card/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
-text = "On"
+text = "Off / APT / Boss / Foe"
 
-[node name="adaptive" type="Button" parent="detector/margin/topics/content/options/game/experience/interface/content/options"]
+[node name="enemy-status" type="Button" parent="detector/margin/topics/content/options/game/experience/interface/content/options"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/game/experience/interface/content/options/adaptive"]
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/game/experience/interface/content/options/enemy-status"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -539,14 +796,58 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="caption" type="Label" parent="detector/margin/topics/content/options/game/experience/interface/content/options/adaptive/margin"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/game/experience/interface/content/options/enemy-status/margin"]
+layout_mode = 2
+text = "Enemy status"
+
+[node name="status" type="Label" parent="detector/margin/topics/content/options/game/experience/interface/content/options/enemy-status/margin"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "DMG / x / Both"
+
+[node name="options" type="Button" parent="detector/margin/topics/content/options/game/experience/interface/content/options"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/game/experience/interface/content/options/options"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/game/experience/interface/content/options/options/margin"]
 layout_mode = 2
 text = "Options"
 
-[node name="status" type="Label" parent="detector/margin/topics/content/options/game/experience/interface/content/options/adaptive/margin"]
+[node name="status" type="Label" parent="detector/margin/topics/content/options/game/experience/interface/content/options/options/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
-text = "Adaptive"
+text = "Adaptive / Fixed"
+
+[node name="inventory" type="Button" parent="detector/margin/topics/content/options/game/experience/interface/content/options"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/game/experience/interface/content/options/inventory"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/game/experience/interface/content/options/inventory/margin"]
+layout_mode = 2
+text = "Inventory"
+
+[node name="status" type="Label" parent="detector/margin/topics/content/options/game/experience/interface/content/options/inventory/margin"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "Adaptive / Weapon / Fixed"
 
 [node name="footer" type="Button" parent="detector/margin/topics/content/options/game/experience/interface/content"]
 custom_minimum_size = Vector2(0, 45)
@@ -2045,118 +2346,6 @@ process_mode = 4
 
 [node name="items" type="Node" parent="detector/margin/topics/content/options/controls"]
 script = ExtResource("27_bq0bq")
-
-[node name="tabs" type="MarginContainer" parent="detector/margin/topics"]
-layout_mode = 2
-theme_override_constants/margin_left = 2
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 2
-theme_override_constants/margin_bottom = 2
-
-[node name="options" type="HFlowContainer" parent="detector/margin/topics/tabs"]
-layout_mode = 2
-script = ExtResource("13_cumtp")
-
-[node name="exit" type="Button" parent="detector/margin/topics/tabs/options"]
-custom_minimum_size = Vector2(60, 45)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.05
-shortcut = ExtResource("14_n4pyq")
-
-[node name="margin" type="MarginContainer" parent="detector/margin/topics/tabs/options/exit"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 15
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 15
-
-[node name="label" type="Label" parent="detector/margin/topics/tabs/options/exit/margin"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.54902, 0.54902, 0.54902, 1)
-theme_override_font_sizes/font_size = 20
-text = "Back"
-
-[node name="caption" type="Control" parent="detector/margin/topics/tabs/options"]
-custom_minimum_size = Vector2(170, 45)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.95
-script = ExtResource("13_rpxmq")
-
-[node name="experience" type="Button" parent="detector/margin/topics/tabs/options/caption"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.9
-shortcut = SubResource("Shortcut_xycy2")
-script = ExtResource("19_fobve")
-
-[node name="margin" type="MarginContainer" parent="detector/margin/topics/tabs/options/caption/experience"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 0
-
-[node name="label" type="Label" parent="detector/margin/topics/tabs/options/caption/experience/margin"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 20
-text = "Game Experience"
-
-[node name="shortcut" type="Node" parent="detector/margin/topics/tabs/options/caption/experience"]
-process_mode = 4
-script = ExtResource("19_eqfhs")
-action = "list_right"
-
-[node name="controls" type="Button" parent="detector/margin/topics/tabs/options/caption"]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.9
-theme_override_font_sizes/font_size = 22
-shortcut = SubResource("Shortcut_5q5w7")
-script = ExtResource("19_fobve")
-
-[node name="margin" type="MarginContainer" parent="detector/margin/topics/tabs/options/caption/controls"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 0
-
-[node name="label" type="Label" parent="detector/margin/topics/tabs/options/caption/controls/margin"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 20
-text = "Manage Controls"
-
-[node name="shortcut" type="Node" parent="detector/margin/topics/tabs/options/caption/controls"]
-process_mode = 4
-script = ExtResource("19_eqfhs")
-action = "list_left"
 
 [connection signal="pressed" from="detector/margin/topics/content/options/game/experience/sound/header" to="detector/margin/topics/content/options/game/experience/sound/header" method="_toggle_content"]
 [connection signal="pressed" from="detector/margin/topics/content/options/game/experience/sound/content/footer" to="detector/margin/topics/content/options/game/experience/sound/content/footer" method="_hide_topic"]

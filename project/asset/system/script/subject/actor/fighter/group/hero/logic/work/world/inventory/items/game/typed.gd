@@ -5,6 +5,12 @@ class_name TypeItems
 enum { INFINITE = 0, LIMITED = 1, JAR = 2 }
 enum { TEA = 0, ETHER = 1, A_DOTE = 2, A_COUGH = 3 }
 
+static func spend(spending: int, slot: int, logic: Node) -> bool:
+	match spending:
+		JAR: return logic.items.replace_item(slot, JAR)
+		LIMITED: logic.items.use_item(slot)
+	return true
+
 func i(product: int) -> Dictionary: return { "i": product }
 func o(resources: Array[int]) -> Dictionary: return { "o": resources }
 func recipe() -> Array: return [TEA, ETHER, A_DOTE, A_COUGH]

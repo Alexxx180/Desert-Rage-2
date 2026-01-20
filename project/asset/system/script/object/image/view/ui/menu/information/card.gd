@@ -5,13 +5,25 @@ extends Control
 
 const TIME: float = 0.2
 
+func get_locale() -> RichTextLabel:
+	return $showcase/margin/content/caption
+
 func _ready() -> void:
 	for button in [collapsed, showcase]:
 		button.pressed.connect(flip_the_card)
 
-func flip_the_card() -> void:
-	# collapsed.visible = showcase.visible
-	# showcase.visible = !showcase.visible
+"""
+func _r() -> void:
+	var language = "automatic"
+	# Load here language from the user settings file
+	if language == "automatic":
+	   var preferred_language = OS.get_locale_language()
+	   TranslationServer.set_locale(preferred_language)
+	else:
+	   TranslationServer.set_locale(language)
+"""
+
+func flip_the_card() -> void: # collapsed.visible = showcase.visible # showcase.visible = !showcase.visible
 	if collapsed.scale == Vector2.ONE:
 		_change_states(showcase, collapsed)
 	else:

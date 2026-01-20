@@ -1,13 +1,7 @@
-extends VBoxContainer
+extends Label
 
-@onready var title: Label = $description/caption/title
-@onready var state: Label = $description/statement
-"""
-func _ready() -> void: Locale.update.connect()
-func _set_language() -> void:
-	title.text = Locale.LANG[key[0]]
-	state.text = Locale.LANG[key[1]]
-"""
+@onready var title: Label = $title
+
 func say(who: String, what: String) -> void:
 	title.text = who
-	state.text = what
+	text = what

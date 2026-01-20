@@ -9,6 +9,7 @@ func controls(hero: CharacterBody2D, pillar: Node) -> void:
 	env.pillars = levels.tools.pillar
 	env.chains = hero.to.platformer.tools.chains
 	env.floors = hero.to.topdown.levels.jump.feet.floors
+	env.floors.border = hero.group.get_node("../tags").lay.border
 	env.teleport = hero.to.topdown.move.act.teleport
 	env.levels = levels
 

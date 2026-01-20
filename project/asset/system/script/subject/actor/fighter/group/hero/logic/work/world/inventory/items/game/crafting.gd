@@ -23,10 +23,10 @@ func _connect_ingredients(c: Dictionary, id: int) -> void:
 
 func _set_craft(type, base: int) -> void:
 	for j in type.size:
-		var c: Dictionary = type.names[j].craft
-		if c != Defaults.DICT:
-			print("CRAFT ITEM: ", type.names[j].name)
-			_connect_ingredients(c, base + j) #craft
+		var i: Item = type.effect[j].item
+		if i.craft != Defaults.DICT:
+			print("CRAFT ITEM: ", i.name)
+			_connect_ingredients(i.craft, base + j) #craft
 
 func _init(items: GameItems) -> void:
 	items.weapon.crafts(craft)

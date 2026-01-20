@@ -17,6 +17,6 @@ func set_time(seconds: int) -> void:
 	else:
 		effect.text = "%.1f m. " % (seconds / PERIOD)
 
-func set_power(item: UseItem) -> void:
+func set_power(item: IUse) -> void:
 	show()
 	effect.text = item.describe(self)
