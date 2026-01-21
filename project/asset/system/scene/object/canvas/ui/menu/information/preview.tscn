@@ -1,15 +1,107 @@
-[gd_scene load_steps=5 format=3 uid="uid://dkkdejo26syrt"]
+[gd_scene load_steps=23 format=3 uid="uid://dkkdejo26syrt"]
 
 [ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://asset/resource/ui/theme/patterns/template/menu/settings/topic/footer.tres" id="1_a47ns"]
+[ext_resource type="Shortcut" uid="uid://bgd4ocokxr1wj" path="res://asset/resource/ui/short/cut/pause.tres" id="1_efg1v"]
+[ext_resource type="Theme" uid="uid://dfyi7rrcrweqx" path="res://asset/resource/ui/theme/patterns/template/menu/settings/settings.tres" id="1_y8gsi"]
+[ext_resource type="InputEventKey" uid="uid://cjlyrqdxoernq" path="res://asset/resource/ui/short/device/keyboard/key/ctrl/tab.tres" id="2_eu1qy"]
 [ext_resource type="FontFile" uid="uid://drm0mr2hyapf2" path="res://asset/resource/media/data/font/EmojiOneColor.otf" id="2_eucgb"]
 [ext_resource type="FontFile" uid="uid://b37js8y80ak1k" path="res://asset/resource/media/data/font/NotoColorEmoji-Regular.ttf" id="2_kl672"]
+[ext_resource type="InputEventKey" uid="uid://d24fadfa7hd1w" path="res://asset/resource/ui/short/device/keyboard/key/alt/two.tres" id="3_y8gsi"]
 [ext_resource type="FontFile" uid="uid://c6xnr3551fg10" path="res://asset/resource/media/data/font/Izuver.otf" id="4_efg1v"]
+[ext_resource type="InputEventJoypadMotion" uid="uid://lythe86smbls" path="res://asset/resource/ui/short/device/gamepad/stick/right/right.tres" id="4_x5jee"]
+[ext_resource type="Script" uid="uid://bhnfok60v3ala" path="res://asset/system/script/object/image/view/ui/menu/settings/topics/tabs/caption/short.gd" id="5_1f3t6"]
+[ext_resource type="Script" uid="uid://chw3gy3exeat5" path="res://asset/system/script/object/image/view/ui/hud/processor/pause/exit/shortcut.gd" id="6_gqxn2"]
+
+[sub_resource type="Shortcut" id="Shortcut_8grwo"]
+events = [ExtResource("2_eu1qy"), ExtResource("3_y8gsi"), ExtResource("4_x5jee")]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eucgb"]
+bg_color = Color(0.0196078, 0.0196078, 0.0196078, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_efg1v"]
+bg_color = Color(0.00784314, 0.407843, 0.203922, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_maq2g"]
+bg_color = Color(0.101961, 0.392157, 0.513726, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gqxn2"]
+content_margin_left = 30.0
+content_margin_right = 30.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1f3t6"]
+content_margin_left = 30.0
+content_margin_right = 30.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_bottom = 2
+border_color = Color(0.588235, 0.588235, 0.588235, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_y8gsi"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x5jee"]
+content_margin_left = 30.0
+content_margin_right = 30.0
+bg_color = Color(0, 0, 0.235294, 1)
+
+[sub_resource type="Theme" id="Theme_y8gsi"]
+Button/styles/focus = SubResource("StyleBoxFlat_gqxn2")
+Button/styles/hover = SubResource("StyleBoxFlat_1f3t6")
+Button/styles/normal = SubResource("StyleBoxEmpty_y8gsi")
+Button/styles/pressed = SubResource("StyleBoxFlat_x5jee")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y8gsi"]
+bg_color = Color(0, 0, 0, 0.470588)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_x5jee"]
 
 [node name="preview" type="VBoxContainer"]
 
 [node name="title" type="HBoxContainer" parent="."]
 layout_mode = 2
+theme = ExtResource("1_y8gsi")
 theme_override_constants/separation = 20
+
+[node name="begin" type="HSeparator" parent="title"]
+visible = false
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+
+[node name="mid" type="HSeparator" parent="title"]
+visible = false
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="title"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="exit" type="Button" parent="title/HBoxContainer"]
+custom_minimum_size = Vector2(60, 30)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.05
+theme_override_colors/font_color = Color(0.470588, 0.470588, 0.470588, 1)
+theme_override_font_sizes/font_size = 18
+shortcut = ExtResource("1_efg1v")
+text = "Назад"
+
+[node name="experience" type="Button" parent="title/HBoxContainer"]
+layout_mode = 2
+size_flags_stretch_ratio = 0.9
+theme_override_colors/font_color = Color(0.470588, 0.470588, 0.470588, 1)
+theme_override_font_sizes/font_size = 18
+shortcut = SubResource("Shortcut_8grwo")
+text = "Сводка"
+script = ExtResource("5_1f3t6")
+
+[node name="shortcut" type="Node" parent="title/HBoxContainer/experience"]
+process_mode = 4
+script = ExtResource("6_gqxn2")
+action = "list_right"
 
 [node name="separator" type="HSeparator" parent="title"]
 layout_mode = 2
@@ -18,9 +110,9 @@ size_flags_horizontal = 3
 [node name="caption" type="Label" parent="title"]
 layout_mode = 2
 theme = ExtResource("1_a47ns")
-text = "Предпросмотр"
+text = "Предпросмотр - 16:46 30.06.2025"
 
-[node name="separator3" type="HSeparator" parent="title"]
+[node name="end" type="HSeparator" parent="title"]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 
@@ -29,212 +121,245 @@ layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 20
 
-[node name="description" type="VBoxContainer" parent="content"]
-custom_minimum_size = Vector2(160, 0)
+[node name="margin" type="MarginContainer" parent="content"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 9.0
-
-[node name="caption" type="Label" parent="content/description"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.72549, 0.72549, 0.72549, 1)
-text = "Иголка в стоге сена - 1"
-
-[node name="details" type="VBoxContainer" parent="content/description"]
-layout_mode = 2
-theme_override_constants/separation = 20
-
-[node name="HFlowContainer" type="HFlowContainer" parent="content/description/details"]
-layout_mode = 2
-
-[node name="date" type="Label" parent="content/description/details/HFlowContainer"]
-layout_mode = 2
-theme = ExtResource("1_a47ns")
-text = "Создан 16:46 30.06.2025"
-
-[node name="HBoxContainer" type="HBoxContainer" parent="content/description/details/HFlowContainer"]
-layout_mode = 2
-theme_override_constants/separation = 0
-
-[node name="stats" type="MarginContainer" parent="content/description/details/HFlowContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 4
-theme_override_constants/margin_top = 8
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 
-[node name="icon" type="Label" parent="content/description/details/HFlowContainer/HBoxContainer/stats"]
+[node name="details" type="VBoxContainer" parent="content/margin"]
 layout_mode = 2
-theme = ExtResource("1_a47ns")
-theme_override_fonts/font = ExtResource("2_kl672")
-text = "📊"
+theme_override_constants/separation = 20
 
-[node name="level" type="Label" parent="content/description/details/HFlowContainer/HBoxContainer"]
+[node name="caption" type="Label" parent="content/margin/details"]
+custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
-theme = ExtResource("1_a47ns")
-text = "17"
-
-[node name="description" type="Label" parent="content/description/details"]
-custom_minimum_size = Vector2(50, 0)
-layout_mode = 2
-theme = ExtResource("1_a47ns")
-text = "В этом звене пещерной цепи содержится замок, который, по видимому, открывается только одним ключом."
+size_flags_horizontal = 3
+text = "Пещера истоков - Иголка в стоге сена"
 autowrap_mode = 2
 
-[node name="heroes" type="HFlowContainer" parent="content/description/details"]
+[node name="heroes" type="HFlowContainer" parent="content/margin/details"]
 layout_mode = 2
 theme_override_constants/h_separation = 20
 theme_override_constants/v_separation = 0
 
-[node name="ray" type="HBoxContainer" parent="content/description/details/heroes"]
+[node name="ray" type="HBoxContainer" parent="content/margin/details/heroes"]
 layout_mode = 2
 
-[node name="name-icon" type="MarginContainer" parent="content/description/details/heroes/ray"]
+[node name="name-icon" type="MarginContainer" parent="content/margin/details/heroes/ray"]
 layout_mode = 2
 theme_override_constants/margin_left = 4
 theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 
-[node name="icon" type="Label" parent="content/description/details/heroes/ray/name-icon"]
+[node name="icon" type="Label" parent="content/margin/details/heroes/ray/name-icon"]
 layout_mode = 2
 theme = ExtResource("1_a47ns")
 theme_override_fonts/font = ExtResource("2_eucgb")
 theme_override_font_sizes/font_size = 24
 text = "🕵️‍♂️"
 
-[node name="name" type="Label" parent="content/description/details/heroes/ray"]
+[node name="name" type="Label" parent="content/margin/details/heroes/ray"]
 custom_minimum_size = Vector2(42, 0)
 layout_mode = 2
 theme = ExtResource("1_a47ns")
 text = "Рей"
 
-[node name="health" type="MarginContainer" parent="content/description/details/heroes/ray"]
+[node name="hp" type="VBoxContainer" parent="content/margin/details/heroes/ray"]
 layout_mode = 2
-theme_override_constants/margin_left = 4
-theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 0
+size_flags_vertical = 4
+theme_override_constants/separation = -2
 
-[node name="icon" type="Label" parent="content/description/details/heroes/ray/health"]
-layout_mode = 2
-theme = ExtResource("1_a47ns")
-theme_override_fonts/font = ExtResource("2_kl672")
-text = "🩵"
-
-[node name="hp" type="Label" parent="content/description/details/heroes/ray"]
+[node name="stat" type="Label" parent="content/margin/details/heroes/ray/hp"]
 custom_minimum_size = Vector2(42, 0)
 layout_mode = 2
+size_flags_horizontal = 8
 theme = ExtResource("1_a47ns")
 text = "100"
+horizontal_alignment = 2
 
-[node name="aura" type="MarginContainer" parent="content/description/details/heroes/ray"]
+[node name="bar" type="ProgressBar" parent="content/margin/details/heroes/ray/hp"]
+custom_minimum_size = Vector2(1, 0)
 layout_mode = 2
-theme_override_constants/margin_left = 4
-theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 0
+theme_override_styles/background = SubResource("StyleBoxFlat_eucgb")
+theme_override_styles/fill = SubResource("StyleBoxFlat_efg1v")
+value = 50.0
+show_percentage = false
 
-[node name="icon" type="Label" parent="content/description/details/heroes/ray/aura"]
+[node name="resource" type="VBoxContainer" parent="content/margin/details/heroes/ray"]
 layout_mode = 2
-theme = ExtResource("1_a47ns")
-theme_override_fonts/font = ExtResource("2_kl672")
-text = "🔋"
+size_flags_vertical = 4
+theme_override_constants/separation = -2
 
-[node name="ap" type="Label" parent="content/description/details/heroes/ray"]
+[node name="stat" type="Label" parent="content/margin/details/heroes/ray/resource"]
 custom_minimum_size = Vector2(42, 0)
 layout_mode = 2
+size_flags_horizontal = 8
 theme = ExtResource("1_a47ns")
 text = "20"
+horizontal_alignment = 2
 
-[node name="rock" type="HBoxContainer" parent="content/description/details/heroes"]
+[node name="bar" type="ProgressBar" parent="content/margin/details/heroes/ray/resource"]
+custom_minimum_size = Vector2(1, 0)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_eucgb")
+theme_override_styles/fill = SubResource("StyleBoxFlat_maq2g")
+value = 50.0
+show_percentage = false
+
+[node name="rock" type="HBoxContainer" parent="content/margin/details/heroes"]
 layout_mode = 2
 
-[node name="name-icon" type="MarginContainer" parent="content/description/details/heroes/rock"]
+[node name="name-icon" type="MarginContainer" parent="content/margin/details/heroes/rock"]
 layout_mode = 2
 theme_override_constants/margin_left = 4
 theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 
-[node name="icon" type="Label" parent="content/description/details/heroes/rock/name-icon"]
+[node name="icon" type="Label" parent="content/margin/details/heroes/rock/name-icon"]
 layout_mode = 2
 theme = ExtResource("1_a47ns")
 theme_override_fonts/font = ExtResource("4_efg1v")
 theme_override_font_sizes/font_size = 24
 text = "👨‍🏭"
 
-[node name="name" type="Label" parent="content/description/details/heroes/rock"]
+[node name="name" type="Label" parent="content/margin/details/heroes/rock"]
 custom_minimum_size = Vector2(42, 0)
 layout_mode = 2
 theme = ExtResource("1_a47ns")
 text = "Рок"
 
-[node name="health" type="MarginContainer" parent="content/description/details/heroes/rock"]
+[node name="hp" type="VBoxContainer" parent="content/margin/details/heroes/rock"]
 layout_mode = 2
-theme_override_constants/margin_left = 4
-theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 0
+size_flags_vertical = 4
+theme_override_constants/separation = -2
 
-[node name="icon" type="Label" parent="content/description/details/heroes/rock/health"]
-layout_mode = 2
-theme = ExtResource("1_a47ns")
-theme_override_fonts/font = ExtResource("2_kl672")
-text = "💔"
-
-[node name="hp" type="Label" parent="content/description/details/heroes/rock"]
+[node name="stat" type="Label" parent="content/margin/details/heroes/rock/hp"]
 custom_minimum_size = Vector2(42, 0)
 layout_mode = 2
+size_flags_horizontal = 8
 theme = ExtResource("1_a47ns")
-text = "1"
+text = "100"
+horizontal_alignment = 2
 
-[node name="aura" type="MarginContainer" parent="content/description/details/heroes/rock"]
+[node name="bar" type="ProgressBar" parent="content/margin/details/heroes/rock/hp"]
+custom_minimum_size = Vector2(1, 0)
 layout_mode = 2
-theme_override_constants/margin_left = 4
-theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 0
+theme_override_styles/background = SubResource("StyleBoxFlat_eucgb")
+theme_override_styles/fill = SubResource("StyleBoxFlat_efg1v")
+value = 50.0
+show_percentage = false
 
-[node name="icon" type="Label" parent="content/description/details/heroes/rock/aura"]
+[node name="resource" type="VBoxContainer" parent="content/margin/details/heroes/rock"]
 layout_mode = 2
-theme = ExtResource("1_a47ns")
-theme_override_fonts/font = ExtResource("2_kl672")
-text = "🪫"
+size_flags_vertical = 4
+theme_override_constants/separation = -2
 
-[node name="ap" type="Label" parent="content/description/details/heroes/rock"]
+[node name="stat" type="Label" parent="content/margin/details/heroes/rock/resource"]
 custom_minimum_size = Vector2(42, 0)
 layout_mode = 2
+size_flags_horizontal = 8
 theme = ExtResource("1_a47ns")
-text = "8"
+text = "20"
+horizontal_alignment = 2
 
-[node name="caption" type="Label" parent="content/description/details"]
+[node name="bar" type="ProgressBar" parent="content/margin/details/heroes/rock/resource"]
+custom_minimum_size = Vector2(1, 0)
 layout_mode = 2
-size_flags_horizontal = 3
-theme_override_colors/font_color = Color(0.72549, 0.72549, 0.72549, 1)
-text = "Пещера истоков"
-text_overrun_behavior = 3
+theme_override_styles/background = SubResource("StyleBoxFlat_eucgb")
+theme_override_styles/fill = SubResource("StyleBoxFlat_maq2g")
+value = 50.0
+show_percentage = false
 
-[node name="load" type="Button" parent="content"]
+[node name="description" type="RichTextLabel" parent="content/margin/details"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme = ExtResource("1_a47ns")
+theme_override_fonts/bold_font = ExtResource("2_kl672")
+bbcode_enabled = true
+text = "[b]📊[/b]17 - В этом звене пещерной цепи содержится замок, который, по видимому, открывается только одним ключом."
+fit_content = true
+autowrap_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="content"]
 custom_minimum_size = Vector2(270, 270)
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 16.0
+size_flags_stretch_ratio = 2.0
+theme = SubResource("Theme_y8gsi")
 
-[node name="margin" type="MarginContainer" parent="content/load"]
+[node name="HBoxContainer" type="HBoxContainer" parent="content/TextureRect"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+theme_override_constants/separation = 0
+
+[node name="save" type="Button" parent="content/TextureRect/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="back" type="PanelContainer" parent="content/TextureRect/HBoxContainer/save"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -38.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_y8gsi")
+
+[node name="margin" type="MarginContainer" parent="content/TextureRect/HBoxContainer/save/back"]
+layout_mode = 2
 size_flags_vertical = 8
 theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 0
+theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 10
 
-[node name="caption" type="Label" parent="content/load/margin"]
+[node name="save" type="Label" parent="content/TextureRect/HBoxContainer/save/back/margin"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 20
+text = "Сохранить"
+
+[node name="load" type="Button" parent="content/TextureRect/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_x5jee")
+
+[node name="back" type="PanelContainer" parent="content/TextureRect/HBoxContainer/load"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -38.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_y8gsi")
+
+[node name="margin" type="MarginContainer" parent="content/TextureRect/HBoxContainer/load/back"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 10
+
+[node name="save" type="Label" parent="content/TextureRect/HBoxContainer/load/back/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8

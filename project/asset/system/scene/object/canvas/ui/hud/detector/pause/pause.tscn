@@ -1,10 +1,11 @@
-[gd_scene load_steps=26 format=3 uid="uid://v6stk7j8vyox"]
+[gd_scene load_steps=45 format=3 uid="uid://v6stk7j8vyox"]
 
 [ext_resource type="Theme" uid="uid://p2br8b6ea3n6" path="res://asset/resource/ui/theme/patterns/template/menu/hud/pause/pause.tres" id="1_j33m5"]
 [ext_resource type="Script" uid="uid://cw5ky6kde3o8c" path="res://asset/system/script/object/image/view/ui/hud/detector/pause/pause.gd" id="1_mkyw8"]
 [ext_resource type="Script" uid="uid://citnas3uoasqt" path="res://asset/system/script/object/image/view/ui/hud/detector/pause/options/options.gd" id="2_i4sx2"]
 [ext_resource type="Script" uid="uid://cineqyu52scdk" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/hints/preview/hints/scroll.gd" id="3_rk80b"]
-[ext_resource type="StyleBox" uid="uid://b4nrienvl66p4" path="res://asset/resource/ui/theme/patterns/pause/pause-button.tres" id="6_ha6g0"]
+[ext_resource type="FontFile" uid="uid://o0rgn7d13mr3" path="res://asset/resource/media/data/font/OpenSans-VariableFont_wdth,wght.ttf" id="6_snrb0"]
+[ext_resource type="Theme" uid="uid://dfyi7rrcrweqx" path="res://asset/resource/ui/theme/patterns/template/menu/settings/settings.tres" id="11_hswoq"]
 [ext_resource type="Script" uid="uid://d1qknlm4n13yx" path="res://asset/system/script/object/image/view/ui/hud/detector/pause/options/menu/focus/menu.gd" id="12_qxd8n"]
 [ext_resource type="PackedScene" uid="uid://15t2xvow6yly" path="res://asset/system/scene/object/canvas/ui/hud/detector/pause/menu/resume/resume.tscn" id="12_xuf5j"]
 [ext_resource type="Shortcut" uid="uid://3f4gd42nvfmx" path="res://asset/resource/ui/short/cut/manual.tres" id="13_hswoq"]
@@ -21,14 +22,124 @@
 [ext_resource type="FontFile" uid="uid://b37js8y80ak1k" path="res://asset/resource/media/data/font/NotoColorEmoji-Regular.ttf" id="21_snrb0"]
 [ext_resource type="PackedScene" uid="uid://dvdimdxij23df" path="res://asset/system/scene/object/timer/hide/hider/hover/hooder.tscn" id="23_pbrvw"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mj6hi"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pbrvw"]
 content_margin_left = 11.0
 content_margin_top = 11.0
-bg_color = Color(0.0588235, 0.0588235, 0.0588235, 1)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hus44"]
+content_margin_left = 11.0
+content_margin_top = 11.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_bottom = 2
+border_color = Color(0.588235, 0.588235, 0.588235, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qxd8n"]
+content_margin_left = 11.0
+content_margin_top = 11.0
+bg_color = Color(0, 0, 0.235294, 1)
+
+[sub_resource type="Gradient" id="Gradient_ln5vs"]
+colors = PackedColorArray(0.0392157, 0.0392157, 0.0392157, 1, 0.0117647, 0.0117647, 0.0117647, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_drjsb"]
+gradient = SubResource("Gradient_ln5vs")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_j20bp"]
+content_margin_left = 11.0
+content_margin_top = 11.0
+texture = SubResource("GradientTexture2D_drjsb")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lornl"]
+content_margin_left = 11.0
+content_margin_top = 11.0
+bg_color = Color(0, 0, 0.235294, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_86e1b"]
+bg_color = Color(0.27451, 0.27451, 0.27451, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gvsy4"]
+bg_color = Color(0.589096, 0.589096, 0.589096, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2kem1"]
+bg_color = Color(0.470076, 0.470076, 0.470076, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fsxfs"]
+content_margin_left = 3.0
+content_margin_right = 3.0
+bg_color = Color(0.0196078, 0.0196078, 0.0196078, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q7eh3"]
+content_margin_left = 3.0
+content_margin_right = 3.0
+bg_color = Color(0.0196078, 0.0196078, 0.0196078, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.588235, 0.588235, 0.588235, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0rseu"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m6a6m"]
+bg_color = Color(0.27451, 0.27451, 0.27451, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3nnvj"]
+bg_color = Color(0.589096, 0.589096, 0.589096, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rlcpa"]
+bg_color = Color(0.470076, 0.470076, 0.470076, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vyj7k"]
+content_margin_left = 3.0
+content_margin_right = 3.0
+bg_color = Color(0.0196078, 0.0196078, 0.0196078, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ggcle"]
+content_margin_left = 3.0
+content_margin_right = 3.0
+bg_color = Color(0.0196078, 0.0196078, 0.0196078, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.588235, 0.588235, 0.588235, 1)
+
+[sub_resource type="Theme" id="Theme_6gp30"]
+Button/colors/font_color = Color(0.784314, 0.784314, 0.784314, 1)
+Button/font_sizes/font_size = 20
+Button/fonts/font = ExtResource("6_snrb0")
+Button/styles/focus = SubResource("StyleBoxFlat_pbrvw")
+Button/styles/hover = SubResource("StyleBoxFlat_hus44")
+Button/styles/hover_pressed = SubResource("StyleBoxFlat_qxd8n")
+Button/styles/normal = SubResource("StyleBoxTexture_j20bp")
+Button/styles/pressed = SubResource("StyleBoxFlat_lornl")
+HBoxContainer/constants/separation = 2
+HFlowContainer/constants/v_separation = 4
+HScrollBar/styles/grabber = SubResource("StyleBoxFlat_86e1b")
+HScrollBar/styles/grabber_highlight = SubResource("StyleBoxFlat_gvsy4")
+HScrollBar/styles/grabber_pressed = SubResource("StyleBoxFlat_2kem1")
+HScrollBar/styles/scroll = SubResource("StyleBoxFlat_fsxfs")
+HScrollBar/styles/scroll_focus = SubResource("StyleBoxFlat_q7eh3")
+Label/colors/font_color = Color(0.784314, 0.784314, 0.784314, 1)
+Label/font_sizes/font_size = 23
+Label/fonts/font = ExtResource("6_snrb0")
+MarginContainer/constants/margin_bottom = 10
+MarginContainer/constants/margin_left = 30
+MarginContainer/constants/margin_right = 30
+MarginContainer/constants/margin_top = 0
+Panel/styles/panel = SubResource("StyleBoxFlat_0rseu")
+VBoxContainer/constants/separation = 8
+VScrollBar/styles/grabber = SubResource("StyleBoxFlat_m6a6m")
+VScrollBar/styles/grabber_highlight = SubResource("StyleBoxFlat_3nnvj")
+VScrollBar/styles/grabber_pressed = SubResource("StyleBoxFlat_rlcpa")
+VScrollBar/styles/scroll = SubResource("StyleBoxFlat_vyj7k")
+VScrollBar/styles/scroll_focus = SubResource("StyleBoxFlat_ggcle")
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mj6hi"]
 content_margin_left = 4.0
@@ -95,6 +206,7 @@ size_flags_vertical = 0
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
+theme = SubResource("Theme_6gp30")
 theme_override_constants/separation = 5
 
 [node name="map" type="Button" parent="scroll/margin/options/pause/widgets"]
@@ -110,7 +222,6 @@ focus_next = NodePath("../settings")
 focus_previous = NodePath("../resume")
 theme_override_fonts/font = ExtResource("21_snrb0")
 theme_override_font_sizes/font_size = 36
-theme_override_styles/normal = SubResource("StyleBoxFlat_mj6hi")
 shortcut = ExtResource("13_hswoq")
 text = "🗺"
 alignment = 2
@@ -152,7 +263,6 @@ focus_next = NodePath("../settings")
 focus_previous = NodePath("../resume")
 theme_override_fonts/font = ExtResource("21_snrb0")
 theme_override_font_sizes/font_size = 36
-theme_override_styles/normal = SubResource("StyleBoxFlat_mj6hi")
 shortcut = ExtResource("13_hswoq")
 text = "📷"
 
@@ -193,7 +303,6 @@ focus_next = NodePath("../settings")
 focus_previous = NodePath("../resume")
 theme_override_fonts/font = ExtResource("21_snrb0")
 theme_override_font_sizes/font_size = 36
-theme_override_styles/normal = SubResource("StyleBoxFlat_mj6hi")
 shortcut = ExtResource("13_hswoq")
 text = "🏠"
 
@@ -238,6 +347,7 @@ size_flags_vertical = 3
 [node name="menu" type="HFlowContainer" parent="scroll/margin/options"]
 layout_mode = 2
 size_flags_vertical = 8
+theme = ExtResource("11_hswoq")
 theme_override_constants/h_separation = 10
 script = ExtResource("12_qxd8n")
 
@@ -250,7 +360,6 @@ focus_neighbor_left = NodePath("../settings")
 focus_neighbor_top = NodePath("../exit")
 focus_neighbor_right = NodePath("../settings")
 focus_previous = NodePath("../exit")
-theme_override_styles/normal = ExtResource("6_ha6g0")
 toggle_mode = false
 shortcut_in_tooltip = false
 
@@ -274,22 +383,10 @@ focus_neighbor_right = NodePath("../exit")
 focus_neighbor_bottom = NodePath("../settings")
 focus_next = NodePath("../settings")
 focus_previous = NodePath("../resume")
-theme_override_styles/normal = ExtResource("6_ha6g0")
+theme_override_font_sizes/font_size = 24
 shortcut = ExtResource("13_hswoq")
-
-[node name="margin" type="MarginContainer" parent="scroll/margin/options/menu/information"]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_top = -20.0
-offset_right = 103.0
-offset_bottom = 20.0
-grow_vertical = 2
-
-[node name="caption" type="Label" parent="scroll/margin/options/menu/information/margin"]
-layout_mode = 2
 text = "Сохранения"
+alignment = 0
 
 [node name="hotkey" type="Label" parent="scroll/margin/options/menu/information"]
 custom_minimum_size = Vector2(12, 12)
@@ -309,22 +406,10 @@ focus_neighbor_left = NodePath("../resume")
 focus_neighbor_right = NodePath("../resume")
 focus_neighbor_bottom = NodePath("../exit")
 focus_next = NodePath("../exit")
-theme_override_styles/normal = ExtResource("6_ha6g0")
+theme_override_font_sizes/font_size = 24
 shortcut = SubResource("Shortcut_drjsb")
-
-[node name="margin" type="MarginContainer" parent="scroll/margin/options/menu/settings"]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_top = -49.0
-offset_right = 165.0
-offset_bottom = 49.0
-grow_vertical = 2
-
-[node name="caption" type="Label" parent="scroll/margin/options/menu/settings/margin"]
-layout_mode = 2
 text = "Настройки"
+alignment = 0
 
 [node name="hotkey" type="Label" parent="scroll/margin/options/menu/settings"]
 custom_minimum_size = Vector2(12, 12)
@@ -346,7 +431,6 @@ focus_neighbor_right = NodePath("../information")
 focus_neighbor_bottom = NodePath("../resume")
 focus_next = NodePath("../resume")
 focus_previous = NodePath("../settings")
-theme_override_styles/normal = ExtResource("6_ha6g0")
 shortcut = SubResource("Shortcut_j20bp")
 
 [node name="hotkey" type="Label" parent="scroll/margin/options/menu/exit"]

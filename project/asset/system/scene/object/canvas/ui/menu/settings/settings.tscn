@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=3 uid="uid://b4x588yxrcok3"]
+[gd_scene load_steps=69 format=3 uid="uid://b4x588yxrcok3"]
 
 [ext_resource type="Script" uid="uid://d05jnr6xe41se" path="res://asset/system/script/object/image/view/ui/menu/settings/settings.gd" id="1_apf6u"]
 [ext_resource type="Theme" uid="uid://dfyi7rrcrweqx" path="res://asset/resource/ui/theme/patterns/template/menu/settings/settings.tres" id="1_vs08l"]
@@ -20,11 +20,11 @@
 [ext_resource type="PackedScene" uid="uid://bqsegj237ygi0" path="res://asset/system/scene/object/canvas/ui/menu/settings/sound/music.tscn" id="8_tby3j"]
 [ext_resource type="Script" uid="uid://bw6sk86sxnhl1" path="res://asset/system/script/object/image/view/ui/menu/settings/topics/options/topic/named/topics/experience.gd" id="9_7pxvf"]
 [ext_resource type="PackedScene" uid="uid://hoxnejr2ne7q" path="res://asset/system/scene/object/canvas/ui/menu/settings/sound/sound.tscn" id="9_fgij5"]
-[ext_resource type="StyleBox" uid="uid://sum2wm2lethm" path="res://asset/resource/ui/theme/patterns/template/menu/settings/topic/header/top.tres" id="10_4wiln"]
 [ext_resource type="PackedScene" uid="uid://bwxmswjunrdab" path="res://asset/system/scene/object/canvas/ui/menu/settings/sound/interface.tscn" id="10_bgvfr"]
 [ext_resource type="Script" uid="uid://bddnexjid3qoh" path="res://asset/system/script/object/image/view/ui/menu/settings/topics/options/topic/named/options/experience/sound.gd" id="11_n6v6j"]
 [ext_resource type="FontFile" uid="uid://tledodlx6okb" path="res://asset/resource/media/data/font/LTSuperiorMono-Semibold.otf" id="12_jw263"]
 [ext_resource type="Script" uid="uid://bkvtgtb73me2c" path="res://asset/system/script/object/image/view/ui/menu/settings/topics/tabs/tabs.gd" id="13_cumtp"]
+[ext_resource type="FontFile" uid="uid://b2wbdbnkxcqv1" path="res://asset/resource/media/data/font/NotoEmoji-VariableFont_wght.ttf" id="13_owwju"]
 [ext_resource type="Script" uid="uid://c55a67g70w7c7" path="res://asset/system/script/object/image/view/ui/menu/settings/topics/tabs/caption/caption.gd" id="13_rpxmq"]
 [ext_resource type="Shortcut" uid="uid://bgd4ocokxr1wj" path="res://asset/resource/ui/short/cut/pause.tres" id="14_n4pyq"]
 [ext_resource type="Script" uid="uid://bjhuajk6ba0q4" path="res://asset/system/script/object/image/view/ui/menu/settings/topics/options/topic/named/options/experience/experience.gd" id="16_4tgnu"]
@@ -47,14 +47,52 @@
 [ext_resource type="Script" uid="uid://bjyjw52ymqcqa" path="res://asset/system/script/object/image/view/ui/menu/settings/topics/options/topic/focus/items/management.gd" id="27_bq0bq"]
 [ext_resource type="Script" uid="uid://ctik5u2wvkppb" path="res://asset/system/script/object/image/view/ui/menu/settings/topics/options/topic/slider/manual.gd" id="27_g800x"]
 [ext_resource type="Script" uid="uid://dix4ud17vkox1" path="res://asset/system/script/object/image/view/ui/menu/settings/topics/options/topic/named/options/management/gamepad.gd" id="28_6l1og"]
-[ext_resource type="StyleBox" uid="uid://do1sdititwera" path="res://asset/resource/ui/theme/patterns/template/menu/settings/topic/header/bottom.tres" id="32_3074f"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aers8"]
+content_margin_left = 14.0
+content_margin_top = 12.0
+content_margin_right = 14.0
+content_margin_bottom = 12.0
+bg_color = Color(0, 0, 0.0235294, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.588235, 0.588235, 0.588235, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qibg1"]
+content_margin_left = 14.0
+content_margin_top = 12.0
+content_margin_right = 14.0
+content_margin_bottom = 12.0
+bg_color = Color(0, 0, 0.0235294, 0)
+border_width_right = 2
+border_color = Color(0.588235, 0.588235, 0.588235, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jw263"]
-content_margin_left = 12.0
+content_margin_left = 14.0
 content_margin_top = 12.0
-content_margin_right = 12.0
+content_margin_right = 14.0
 content_margin_bottom = 12.0
-bg_color = Color(0.0666667, 0.0666667, 0.0666667, 1)
+bg_color = Color(0, 0, 0.0235294, 1)
+border_width_right = 2
+border_color = Color(0.0392157, 0.0392157, 0.0392157, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1um0r"]
+content_margin_left = 14.0
+content_margin_top = 12.0
+content_margin_right = 14.0
+content_margin_bottom = 12.0
+bg_color = Color(0, 0, 0.235294, 1)
+
+[sub_resource type="Theme" id="Theme_jw263"]
+Button/constants/line_spacing = -2
+Button/font_sizes/font_size = 24
+Button/fonts/font = ExtResource("12_jw263")
+Button/styles/focus = SubResource("StyleBoxFlat_aers8")
+Button/styles/hover = SubResource("StyleBoxFlat_qibg1")
+Button/styles/normal = SubResource("StyleBoxFlat_jw263")
+Button/styles/pressed = SubResource("StyleBoxFlat_1um0r")
 
 [sub_resource type="Shortcut" id="Shortcut_xycy2"]
 events = [ExtResource("16_yw7xu"), ExtResource("17_wy3ld"), ExtResource("18_5iaie")]
@@ -62,10 +100,44 @@ events = [ExtResource("16_yw7xu"), ExtResource("17_wy3ld"), ExtResource("18_5iai
 [sub_resource type="Shortcut" id="Shortcut_5q5w7"]
 events = [ExtResource("16_yw7xu"), ExtResource("18_ynqjn")]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_okge3"]
-bg_color = Color(0.0196078, 0.0196078, 0.0196078, 1)
-border_width_bottom = 1
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fmjjx"]
+content_margin_left = 6.0
+content_margin_top = 9.0
+content_margin_right = 6.0
+content_margin_bottom = 9.0
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
 border_color = Color(0.588235, 0.588235, 0.588235, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0qh8n"]
+content_margin_left = 6.0
+content_margin_top = 9.0
+content_margin_right = 6.0
+content_margin_bottom = 9.0
+bg_color = Color(0, 0, 0, 1)
+border_width_right = 2
+border_color = Color(0.588235, 0.588235, 0.588235, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_owwju"]
+content_margin_left = 6.0
+content_margin_top = 9.0
+content_margin_right = 6.0
+content_margin_bottom = 9.0
+bg_color = Color(0, 0, 0.0235294, 1)
+border_width_right = 2
+border_color = Color(0.0392157, 0.0392157, 0.0392157, 1)
+
+[sub_resource type="Gradient" id="Gradient_xe2qb"]
+colors = PackedColorArray(0.0117647, 0.0117647, 0.0117647, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_vru4j"]
+gradient = SubResource("Gradient_xe2qb")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_owwju"]
+texture = SubResource("GradientTexture2D_vru4j")
 
 [sub_resource type="Gradient" id="Gradient_n1w43"]
 
@@ -85,8 +157,8 @@ width = 1
 gradient = SubResource("Gradient_c1lch")
 width = 1
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_71y6s"]
-bg_color = Color(0.0687983, 0.0687983, 0.0687982, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hmqgx"]
+bg_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1821x"]
 
@@ -123,13 +195,14 @@ script = ExtResource("3_dcp6l")
 
 [node name="tabs" type="MarginContainer" parent="detector/margin/topics"]
 layout_mode = 2
-theme_override_constants/margin_left = 2
+theme_override_constants/margin_left = 0
 theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 2
-theme_override_constants/margin_bottom = 2
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
 
 [node name="options" type="VFlowContainer" parent="detector/margin/topics/tabs"]
 layout_mode = 2
+theme = SubResource("Theme_jw263")
 script = ExtResource("13_cumtp")
 
 [node name="caption" type="VBoxContainer" parent="detector/margin/topics/tabs/options"]
@@ -141,16 +214,14 @@ size_flags_stretch_ratio = 0.95
 script = ExtResource("13_rpxmq")
 
 [node name="experience" type="Button" parent="detector/margin/topics/tabs/options/caption"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.9
-theme_override_constants/line_spacing = -2
-theme_override_fonts/font = ExtResource("12_jw263")
-theme_override_font_sizes/font_size = 20
-theme_override_styles/normal = SubResource("StyleBoxFlat_jw263")
+theme = SubResource("Theme_jw263")
 shortcut = SubResource("Shortcut_xycy2")
-text = "Game Experience"
+text = "Experience"
 autowrap_mode = 1
 script = ExtResource("19_fobve")
 
@@ -160,30 +231,16 @@ script = ExtResource("19_eqfhs")
 action = "list_right"
 
 [node name="controls" type="Button" parent="detector/margin/topics/tabs/options/caption"]
-visible = false
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
 size_flags_stretch_ratio = 0.9
+theme = SubResource("Theme_jw263")
 theme_override_font_sizes/font_size = 22
 shortcut = SubResource("Shortcut_5q5w7")
+text = "Controls"
+autowrap_mode = 1
 script = ExtResource("19_fobve")
-
-[node name="margin" type="MarginContainer" parent="detector/margin/topics/tabs/options/caption/controls"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 0
-
-[node name="label" type="Label" parent="detector/margin/topics/tabs/options/caption/controls/margin"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 20
-text = "Manage Controls"
 
 [node name="shortcut" type="Node" parent="detector/margin/topics/tabs/options/caption/controls"]
 process_mode = 4
@@ -196,12 +253,13 @@ layout_mode = 2
 size_flags_horizontal = 0
 size_flags_stretch_ratio = 0.05
 theme_override_constants/line_spacing = -2
-theme_override_fonts/font = ExtResource("12_jw263")
-theme_override_font_sizes/font_size = 20
-theme_override_styles/normal = SubResource("StyleBoxFlat_jw263")
+theme_override_fonts/font = ExtResource("13_owwju")
+theme_override_font_sizes/font_size = 28
+theme_override_styles/focus = SubResource("StyleBoxFlat_fmjjx")
+theme_override_styles/hover = SubResource("StyleBoxFlat_0qh8n")
+theme_override_styles/normal = SubResource("StyleBoxFlat_owwju")
 shortcut = ExtResource("14_n4pyq")
-text = "Back"
-autowrap_mode = 1
+text = "✅"
 
 [node name="content" type="ScrollContainer" parent="detector/margin/topics"]
 layout_mode = 2
@@ -217,10 +275,11 @@ size_flags_vertical = 6
 script = ExtResource("4_2i1li")
 
 [node name="game" type="MarginContainer" parent="detector/margin/topics/content/options"]
+visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 2
-theme_override_constants/margin_top = 2
-theme_override_constants/margin_right = 2
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 3
 theme_override_constants/margin_bottom = 2
 script = ExtResource("5_scc36")
 
@@ -239,7 +298,7 @@ script = ExtResource("8_1w8km")
 custom_minimum_size = Vector2(0, 45)
 layout_mode = 2
 theme = ExtResource("6_kbam3")
-theme_override_styles/normal = ExtResource("10_4wiln")
+theme_override_styles/normal = SubResource("StyleBoxTexture_owwju")
 script = ExtResource("6_w727q")
 
 [node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/game/experience/sound/header"]
@@ -366,7 +425,7 @@ layout_mode = 2
 size_flags_horizontal = 8
 theme_override_colors/font_color = Color(0.313726, 0.313726, 0.313726, 1)
 theme_override_font_sizes/font_size = 18
-text = "Music and sound settings"
+text = "Music and sound effects"
 
 [node name="controls" type="HBoxContainer" parent="detector/margin/topics/content/options/game/experience/sound/content/footer/margin"]
 visible = false
@@ -458,6 +517,28 @@ layout_mode = 2
 text = "Like genre..."
 
 [node name="status" type="Label" parent="detector/margin/topics/content/options/game/experience/experience/content/options/gameplay/margin"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "JRPG / Action"
+
+[node name="difficulty" type="Button" parent="detector/margin/topics/content/options/game/experience/experience/content/options"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/game/experience/experience/content/options/difficulty"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/game/experience/experience/content/options/difficulty/margin"]
+layout_mode = 2
+text = "Difficulty"
+
+[node name="status" type="Label" parent="detector/margin/topics/content/options/game/experience/experience/content/options/difficulty/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "JRPG / Action"
@@ -887,7 +968,6 @@ script = ExtResource("18_h1png")
 custom_minimum_size = Vector2(0, 45)
 layout_mode = 2
 theme = ExtResource("6_kbam3")
-theme_override_styles/normal = SubResource("StyleBoxFlat_okge3")
 script = ExtResource("6_w727q")
 
 [node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/game/experience/stats/header"]
@@ -914,108 +994,84 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 10
 theme = ExtResource("2_ull8j")
-
-[node name="difficulty" type="MarginContainer" parent="detector/margin/topics/content/options/game/experience/stats/content/options"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="stats" type="VBoxContainer" parent="detector/margin/topics/content/options/game/experience/stats/content/options/difficulty"]
-layout_mode = 2
-
-[node name="caption" type="Label" parent="detector/margin/topics/content/options/game/experience/stats/content/options/difficulty/stats"]
-layout_mode = 2
-text = "Difficulty"
-
-[node name="value" type="Label" parent="detector/margin/topics/content/options/game/experience/stats/content/options/difficulty/stats"]
-layout_mode = 2
-size_flags_horizontal = 8
-text = "Unbearable"
-
-[node name="ProgressBar" type="ProgressBar" parent="detector/margin/topics/content/options/game/experience/stats/content/options/difficulty/stats"]
-layout_mode = 2
-max_value = 5.0
-value = 5.0
-show_percentage = false
+theme_override_constants/h_separation = -24
 
 [node name="playtime" type="MarginContainer" parent="detector/margin/topics/content/options/game/experience/stats/content/options"]
+custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
-size_flags_horizontal = 3
 
 [node name="stats" type="VBoxContainer" parent="detector/margin/topics/content/options/game/experience/stats/content/options/playtime"]
 layout_mode = 2
 
-[node name="caption" type="Label" parent="detector/margin/topics/content/options/game/experience/stats/content/options/playtime/stats"]
+[node name="time" type="HBoxContainer" parent="detector/margin/topics/content/options/game/experience/stats/content/options/playtime/stats"]
 layout_mode = 2
-text = "Playtime"
 
-[node name="value" type="Label" parent="detector/margin/topics/content/options/game/experience/stats/content/options/playtime/stats"]
-layout_mode = 2
-size_flags_horizontal = 8
-text = "5 hours"
-
-[node name="mocked" type="MarginContainer" parent="detector/margin/topics/content/options/game/experience/stats/content/options"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/game/experience/stats/content/options/playtime/stats/time"]
 layout_mode = 2
 size_flags_horizontal = 3
+text = "Time"
 
-[node name="stats" type="VBoxContainer" parent="detector/margin/topics/content/options/game/experience/stats/content/options/mocked"]
+[node name="value" type="Label" parent="detector/margin/topics/content/options/game/experience/stats/content/options/playtime/stats/time"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "35:XX"
+
+[node name="saves" type="HBoxContainer" parent="detector/margin/topics/content/options/game/experience/stats/content/options/playtime/stats"]
 layout_mode = 2
 
-[node name="caption" type="Label" parent="detector/margin/topics/content/options/game/experience/stats/content/options/mocked/stats"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/game/experience/stats/content/options/playtime/stats/saves"]
 layout_mode = 2
-text = "Mocked"
+size_flags_horizontal = 3
+text = "Saves"
 
-[node name="value" type="Label" parent="detector/margin/topics/content/options/game/experience/stats/content/options/mocked/stats"]
+[node name="value" type="Label" parent="detector/margin/topics/content/options/game/experience/stats/content/options/playtime/stats/saves"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "5"
+
+[node name="counters" type="MarginContainer" parent="detector/margin/topics/content/options/game/experience/stats/content/options"]
+layout_mode = 2
+size_flags_horizontal = 2
+
+[node name="stack" type="HBoxContainer" parent="detector/margin/topics/content/options/game/experience/stats/content/options/counters"]
+layout_mode = 2
+theme_override_constants/separation = 25
+
+[node name="mock" type="VBoxContainer" parent="detector/margin/topics/content/options/game/experience/stats/content/options/counters/stack"]
+layout_mode = 2
+
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/game/experience/stats/content/options/counters/stack/mock"]
+layout_mode = 2
+text = "Mock"
+
+[node name="value" type="Label" parent="detector/margin/topics/content/options/game/experience/stats/content/options/counters/stack/mock"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "467"
 
-[node name="annihilated" type="MarginContainer" parent="detector/margin/topics/content/options/game/experience/stats/content/options"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="stats" type="VBoxContainer" parent="detector/margin/topics/content/options/game/experience/stats/content/options/annihilated"]
+[node name="win" type="VBoxContainer" parent="detector/margin/topics/content/options/game/experience/stats/content/options/counters/stack"]
 layout_mode = 2
 
-[node name="caption" type="Label" parent="detector/margin/topics/content/options/game/experience/stats/content/options/annihilated/stats"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/game/experience/stats/content/options/counters/stack/win"]
 layout_mode = 2
-text = "Annihilated"
+text = "Win"
 
-[node name="value" type="Label" parent="detector/margin/topics/content/options/game/experience/stats/content/options/annihilated/stats"]
+[node name="value" type="Label" parent="detector/margin/topics/content/options/game/experience/stats/content/options/counters/stack/win"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "123"
 
-[node name="deaths" type="MarginContainer" parent="detector/margin/topics/content/options/game/experience/stats/content/options"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="stats" type="VBoxContainer" parent="detector/margin/topics/content/options/game/experience/stats/content/options/deaths"]
+[node name="lose" type="VBoxContainer" parent="detector/margin/topics/content/options/game/experience/stats/content/options/counters/stack"]
 layout_mode = 2
 
-[node name="caption" type="Label" parent="detector/margin/topics/content/options/game/experience/stats/content/options/deaths/stats"]
+[node name="caption" type="Label" parent="detector/margin/topics/content/options/game/experience/stats/content/options/counters/stack/lose"]
 layout_mode = 2
-text = "Deaths"
+text = "Lost"
 
-[node name="value" type="Label" parent="detector/margin/topics/content/options/game/experience/stats/content/options/deaths/stats"]
+[node name="value" type="Label" parent="detector/margin/topics/content/options/game/experience/stats/content/options/counters/stack/lose"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "23"
-
-[node name="saves" type="MarginContainer" parent="detector/margin/topics/content/options/game/experience/stats/content/options"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="stats" type="VBoxContainer" parent="detector/margin/topics/content/options/game/experience/stats/content/options/saves"]
-layout_mode = 2
-
-[node name="caption" type="Label" parent="detector/margin/topics/content/options/game/experience/stats/content/options/saves/stats"]
-layout_mode = 2
-text = "Saves"
-
-[node name="value" type="Label" parent="detector/margin/topics/content/options/game/experience/stats/content/options/saves/stats"]
-layout_mode = 2
-size_flags_horizontal = 8
-text = "5"
 
 [node name="footer" type="Button" parent="detector/margin/topics/content/options/game/experience/stats/content"]
 custom_minimum_size = Vector2(0, 45)
@@ -1054,7 +1110,6 @@ process_mode = 4
 script = ExtResource("8_lfymp")
 
 [node name="controls" type="MarginContainer" parent="detector/margin/topics/content/options"]
-visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 2
 theme_override_constants/margin_top = 2
@@ -1078,7 +1133,6 @@ script = ExtResource("8_1w8km")
 custom_minimum_size = Vector2(0, 45)
 layout_mode = 2
 theme = ExtResource("6_kbam3")
-theme_override_styles/normal = ExtResource("10_4wiln")
 script = ExtResource("6_w727q")
 
 [node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/management/mouse/header"]
@@ -1138,7 +1192,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.35
 mouse_filter = 1
-theme_override_styles/panel = SubResource("StyleBoxFlat_71y6s")
+theme_override_styles/panel = SubResource("StyleBoxFlat_hmqgx")
 
 [node name="volume" type="VBoxContainer" parent="detector/margin/topics/content/options/controls/management/mouse/content/options/sensitivity/margin/music"]
 layout_mode = 1
@@ -1390,7 +1444,7 @@ grow_vertical = 2
 
 [node name="caption" type="Label" parent="detector/margin/topics/content/options/controls/management/mouse/content/options/help/margin"]
 layout_mode = 2
-text = "Analyyze"
+text = "Analyze"
 
 [node name="status" type="Label" parent="detector/margin/topics/content/options/controls/management/mouse/content/options/help/margin"]
 layout_mode = 2
@@ -2084,7 +2138,6 @@ script = ExtResource("8_1w8km")
 custom_minimum_size = Vector2(0, 45)
 layout_mode = 2
 theme = ExtResource("6_kbam3")
-theme_override_styles/normal = ExtResource("32_3074f")
 script = ExtResource("6_w727q")
 
 [node name="margin" type="MarginContainer" parent="detector/margin/topics/content/options/controls/management/gamepad/header"]

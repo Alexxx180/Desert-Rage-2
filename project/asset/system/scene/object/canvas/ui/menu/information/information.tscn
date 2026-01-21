@@ -1,9 +1,10 @@
-[gd_scene load_steps=17 format=3 uid="uid://ce8kdx2kkhrxj"]
+[gd_scene load_steps=23 format=3 uid="uid://ce8kdx2kkhrxj"]
 
 [ext_resource type="Script" uid="uid://cppftbc2k00nt" path="res://asset/system/script/object/image/view/ui/menu/information/information.gd" id="1_3n4lk"]
 [ext_resource type="PackedScene" uid="uid://dyrgxovxyo3oy" path="res://asset/system/scene/object/canvas/ui/menu/information/states/details.tscn" id="2_7bo3i"]
 [ext_resource type="PackedScene" uid="uid://dkkdejo26syrt" path="res://asset/system/scene/object/canvas/ui/menu/information/preview.tscn" id="2_fnw42"]
 [ext_resource type="PackedScene" uid="uid://b7hiotc0r50bt" path="res://asset/system/scene/object/canvas/ui/menu/information/states/thumbnail.tscn" id="4_0l6ee"]
+[ext_resource type="Theme" uid="uid://dfyi7rrcrweqx" path="res://asset/resource/ui/theme/patterns/template/menu/settings/settings.tres" id="5_0l6ee"]
 [ext_resource type="Shortcut" uid="uid://bgd4ocokxr1wj" path="res://asset/resource/ui/short/cut/pause.tres" id="5_7bo3i"]
 [ext_resource type="Script" uid="uid://c55a67g70w7c7" path="res://asset/system/script/object/image/view/ui/menu/settings/topics/tabs/caption/caption.gd" id="6_0l6ee"]
 [ext_resource type="InputEventKey" uid="uid://cjlyrqdxoernq" path="res://asset/resource/ui/short/device/keyboard/key/ctrl/tab.tres" id="7_6fgl2"]
@@ -15,6 +16,35 @@
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kv7fx"]
 bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gqxn2"]
+content_margin_left = 30.0
+content_margin_right = 30.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1f3t6"]
+content_margin_left = 30.0
+content_margin_right = 30.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_bottom = 2
+border_color = Color(0.588235, 0.588235, 0.588235, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_y8gsi"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x5jee"]
+content_margin_left = 30.0
+content_margin_right = 30.0
+bg_color = Color(0, 0, 0.235294, 1)
+
+[sub_resource type="Theme" id="Theme_0l6ee"]
+Button/styles/focus = SubResource("StyleBoxFlat_gqxn2")
+Button/styles/hover = SubResource("StyleBoxFlat_1f3t6")
+Button/styles/normal = SubResource("StyleBoxEmpty_y8gsi")
+Button/styles/pressed = SubResource("StyleBoxFlat_x5jee")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7bo3i"]
 content_margin_left = 15.0
@@ -64,20 +94,20 @@ size_flags_vertical = 3
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme = SubResource("Theme_0l6ee")
 theme_override_constants/separation = 15
 
 [node name="details" type="HFlowContainer" parent="back/detector/saves/content/scroll/saves"]
-visible = false
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_constants/h_separation = 5
-theme_override_constants/v_separation = 5
+theme_override_constants/h_separation = 2
+theme_override_constants/v_separation = 2
 
 [node name="saves-1" type="VBoxContainer" parent="back/detector/saves/content/scroll/saves/details"]
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/separation = 5
+theme_override_constants/separation = 2
 
 [node name="details" parent="back/detector/saves/content/scroll/saves/details/saves-1" instance=ExtResource("2_7bo3i")]
 layout_mode = 2
@@ -98,7 +128,7 @@ layout_mode = 2
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/separation = 5
+theme_override_constants/separation = 2
 
 [node name="details" parent="back/detector/saves/content/scroll/saves/details/saves-2" instance=ExtResource("2_7bo3i")]
 layout_mode = 2
@@ -116,6 +146,7 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="thumbnails" type="HFlowContainer" parent="back/detector/saves/content/scroll/saves"]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/h_separation = 5
@@ -153,7 +184,9 @@ layout_mode = 2
 size_flags_vertical = 8
 
 [node name="options" type="HBoxContainer" parent="back/detector/saves"]
+visible = false
 layout_mode = 2
+theme = ExtResource("5_0l6ee")
 
 [node name="exit" type="Button" parent="back/detector/saves/options"]
 custom_minimum_size = Vector2(60, 45)
@@ -243,6 +276,7 @@ script = ExtResource("11_le1ci")
 action = "list_left"
 
 [node name="save" type="Button" parent="back/detector/saves/options"]
+visible = false
 custom_minimum_size = Vector2(60, 45)
 layout_mode = 2
 size_flags_horizontal = 3
