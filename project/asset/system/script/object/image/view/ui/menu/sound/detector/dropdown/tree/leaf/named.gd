@@ -1,6 +1,6 @@
 extends SoundtrackLeaf
 
-@onready var title: Label = $margin/title
+@onready var title: Label = $title/caption
 
 #var event: String
 var event: Dictionary = {
