@@ -5,8 +5,24 @@ signal playback(status: String)
 @onready var player: AudioStreamPlayer = $player
 @onready var behavior: BehaviorTree = $behavior
 @onready var board: BehaviorBlackboard = $blackboard
+@onready var change: Node = $change
 
 var started = false
+
+func set_playback(status: String) -> void: playback.emit(status)
+
+func set_menu_context(menu: VBoxContainer) -> void:
+	menu.options.back.pressed.connect(save_changes(menu))
+	playback.connect(func(status): menu.playback.text = status)
+	board.progress.connect(func(value): menu.progress.value = value)
+
+func save_changes(menu: VBoxContainer) -> Callable:
+	return func():
+		started = false ; player.stop() ; board.reset()
+		menu.playback.reset()
+		SoundtrackSystem.save_changes()
+
+func pause() -> void: player.stream_paused = true
 
 func play_progress() -> void:
 	behavior.tick(self, board)
@@ -14,8 +30,7 @@ func play_progress() -> void:
 
 func start_play() -> void:
 	if started:
-		player.stream_paused = false
-		#player.play()
+		player.stream_paused = false #player.play()
 	else:
 		play_progress()
 		started = true
@@ -24,38 +39,7 @@ func set_ost(ost: Node) -> void:
 	behavior.set_ost(ost)
 	board.reset()
 
-func set_status(metadata: Dictionary) -> void:
-	print("PLAYING!")
-	var status: String = metadata.caption
-	if metadata.has("name"):
-		status = metadata.name + " - " + status
-	var track: String = metadata.track.track if metadata.track is Dictionary else metadata.track
-	
-	match player.load_music(track):
-		OK: playback.emit(status)
-		FAILED: playback.emit(track + "? Missing: " + status)
-		ERR_BUSY: playback.emit(track + " ≠ .mp3, .ogg: " + status)
-
-func as_theme(entry: Dictionary, ui: Control) -> void:
-	entry.theme.at = ui.i
-	entry.play.call(board, ui)
-	set_status({ "caption": ui.caption, "track": entry.theme.set[ui.i] })
-
-func as_named(entry: Dictionary, ui: Control) -> void:
-	entry.play.call(board, ui)
-	set_status({ "caption": ui.caption, "name": ui.event.name, "track": entry.theme[ui.event.name] })
-
-func as_blend(entry: Dictionary, ui: Control) -> void:
-	entry.play.call(board, ui)
-	set_status({ "caption": ui.caption, "name": ui.event.name, "track": entry.theme.set[ui.event.name] })
-
-func as_ambient(entry: Dictionary, status: String, ui: Control) -> void:
-	entry.theme.at = ui.i
-	var rampage: int = 3
-	match status:
-		"ambient": rampage = 0
-		"heating": rampage = 1
-		"rampage": rampage = 2
-	board.set_value("level_rampage", rampage)
-	entry.play.call(board, ui)
-	set_status({ "caption": ui.content[status].caption, "name": status, "track": entry.theme.set[ui.i][status] })
+func as_theme(entry: Dictionary, ui: Control) -> void: change.as_theme(entry, ui)
+func as_named(entry: Dictionary, ui: Control) -> void: change.as_named(entry, ui)
+func as_blend(entry: Dictionary, ui: Control) -> void: change.as_blend(entry, ui)
+func as_ambient(entry: Dictionary, status: String, ui: Control) -> void: change.as_ambient(entry, ui, status)

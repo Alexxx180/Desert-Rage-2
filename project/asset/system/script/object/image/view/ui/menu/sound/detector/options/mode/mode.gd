@@ -1,9 +1,7 @@
 extends HBoxContainer
 
-# @onready var music: Button = $music
-# @onready var sound: Button = $sound
-@onready var play: Button = $play
-@onready var edit: Button = $edit
+@onready var edit: HBoxContainer = $edit
+@onready var play: HBoxContainer = $play
 
 func _toggle(state: bool) -> void:
 	edit.visible = !state

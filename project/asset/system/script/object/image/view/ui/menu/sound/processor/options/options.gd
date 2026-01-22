@@ -9,50 +9,22 @@ extends Node
 
 var ui: Dictionary
 
-func set_leaf_theme(entry: Dictionary, leaf: Control) -> void:
-	operation.set_leaf_theme(self, entry, leaf)
+func op(key: String, entry: Dictionary, leaf: Control) -> void:
+	operation.get("set_" + key + "_theme").call(self, entry, leaf)
 
-func set_ambient_theme(entry: Dictionary, leaf: Control) -> void:
-	operation.set_ambient_theme(self, entry, leaf)
-
-func set_named_theme(entry: Dictionary, leaf: Control) -> void:
-	operation.set_named_theme(self, entry, leaf)
-
-func set_standalone(entry: Dictionary, leaf: Control) -> void:
-	operation.set_standalone(self, entry, leaf)
-
-func set_blend_theme(entry: Dictionary, leaf: Control) -> void:
-	operation.set_blend_theme(self, entry, leaf)
-
-func setup_search(options: Control) -> void:
-	var group: Array[Button] = options.search.options
-	var i: int = group.size()
-	while i > 0:
-		i -= 1
-		group[i].pressed.connect(func():
-			operation.type = i
-			play.player.stream_paused = true
-			options.switch_skip())
-	options.play.pressed.connect(func():
-		play.start_play()
-		operation.type = 3
-		options.switch_play())
-	options.skip.pressed.connect(play.play_progress)
-
-func set_operations(menu: VBoxContainer) -> void:
-	var theme: OpenThemeDialog = $theme
+func set_leaf_theme(e: Dictionary, l: Control) -> void: op("leaf", e, l)
+func set_ambient_theme(e: Dictionary, l: Control) -> void: op("ambient", e, l)
+func set_named_theme(e: Dictionary, l: Control) -> void: op("named", e, l)
+func set_standalone(e: Dictionary, l: Control) -> void: op("standalone", e, l)
+func set_blend_theme(e: Dictionary, l: Control) -> void: op("blend", e, l)
+func set_theme_context(theme: OpenThemeDialog) -> void:
 	add.context = theme
 	search.theme = theme
-	setup_search(menu.options)
-	menu.options.back.pressed.connect(func():
-		play.started = false
-		play.player.stop()
-		play.board.reset()
-		menu.playback.reset()
-		SoundtrackSystem.save_changes()
-	)
-	play.playback.connect(func(status): menu.playback.text = status)
-	play.board.progress.connect(func(value): menu.progress.value = value)
+
+func set_operations(menu: VBoxContainer) -> void:
+	set_theme_context($theme)
+	ost.setup_modes(self, menu)
+	play.set_menu_context(menu)
 
 func setup() -> void:
 	ost.setup(self)

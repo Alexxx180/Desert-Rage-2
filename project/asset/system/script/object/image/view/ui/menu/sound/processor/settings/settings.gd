@@ -10,4 +10,5 @@ func set_info(info: HBoxContainer, setup: Node) -> void:
 	importer.setup.connect(setup.reimport)
 
 func set_tabs(tabs: HBoxContainer, options: Node) -> void:
-	tabs.restart.pressed.connect(options.play.board.reset)
+	for o in [tabs.play, tabs.edit]: # TODO SET TABS
+		o.pressed.connect(options.ost.switch_mode)

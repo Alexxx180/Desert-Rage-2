@@ -1,4 +1,4 @@
-extends Label
+extends RichTextLabel
 
 var _placeholder: String
 

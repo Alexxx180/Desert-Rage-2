@@ -1,12 +1,157 @@
-[gd_scene load_steps=7 format=3 uid="uid://c85yu6373k7wr"]
+[gd_scene load_steps=31 format=3 uid="uid://c85yu6373k7wr"]
 
-[ext_resource type="Theme" uid="uid://b4uvs3mj2kjx2" path="res://asset/resource/ui/theme/patterns/template/button/sound.tres" id="1_pxwqc"]
+[ext_resource type="FontFile" uid="uid://o0rgn7d13mr3" path="res://asset/resource/media/data/font/OpenSans-VariableFont_wdth,wght.ttf" id="1_wqanw"]
 [ext_resource type="PackedScene" uid="uid://c5eqytdlesbjp" path="res://asset/system/scene/object/canvas/ui/menu/sound/detector/options/backspace/back.tscn" id="2_dtpe2"]
 [ext_resource type="Script" uid="uid://dw16fxcol3efj" path="res://asset/system/script/object/image/view/ui/menu/sound/detector/options/options.gd" id="2_ot2k7"]
-[ext_resource type="PackedScene" uid="uid://7cht3lf53hy5" path="res://asset/system/scene/object/canvas/ui/menu/sound/detector/options/play.tscn" id="3_sc6x6"]
 [ext_resource type="PackedScene" uid="uid://cl6v1poaywpn8" path="res://asset/system/scene/object/canvas/ui/menu/sound/detector/options/search/search.tscn" id="4_pgl6e"]
+[ext_resource type="Script" uid="uid://cgrcb2l2vmwmg" path="res://asset/system/script/object/image/view/ui/menu/sound/detector/options/play.gd" id="5_wqanw"]
+[ext_resource type="PackedScene" uid="uid://i7qo1de48i2c" path="res://asset/system/scene/object/canvas/ui/menu/sound/detector/settings/tabs/restart.tscn" id="6_cbrv0"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_f7drk"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hjbks"]
+content_margin_left = 6.0
+content_margin_right = 6.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qebsx"]
+content_margin_left = 6.0
+content_margin_right = 6.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_bottom = 2
+border_color = Color(0.588235, 0.588235, 0.588235, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_waa8r"]
+content_margin_left = 6.0
+content_margin_right = 6.0
+bg_color = Color(0, 0, 0.235294, 1)
+
+[sub_resource type="Gradient" id="Gradient_j033k"]
+colors = PackedColorArray(0.0392157, 0.0392157, 0.0392157, 1, 0.0117647, 0.0117647, 0.0117647, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_a8eoj"]
+gradient = SubResource("Gradient_j033k")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rl78j"]
+content_margin_left = 6.0
+content_margin_right = 6.0
+texture = SubResource("GradientTexture2D_a8eoj")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kpesr"]
+content_margin_left = 6.0
+content_margin_right = 6.0
+bg_color = Color(0, 0, 0.0117647, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nscyf"]
+bg_color = Color(0.27451, 0.27451, 0.27451, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_631br"]
+bg_color = Color(0.589096, 0.589096, 0.589096, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j00fp"]
+bg_color = Color(0.470076, 0.470076, 0.470076, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rqxqw"]
+content_margin_left = 3.0
+content_margin_right = 3.0
+bg_color = Color(0.0196078, 0.0196078, 0.0196078, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ik06k"]
+content_margin_left = 3.0
+content_margin_right = 3.0
+bg_color = Color(0.0196078, 0.0196078, 0.0196078, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.588235, 0.588235, 0.588235, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ka23t"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i5h57"]
+bg_color = Color(0.27451, 0.27451, 0.27451, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kwra8"]
+bg_color = Color(0.589096, 0.589096, 0.589096, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pps06"]
+bg_color = Color(0.470076, 0.470076, 0.470076, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6ahvg"]
+content_margin_left = 3.0
+content_margin_right = 3.0
+bg_color = Color(0.0196078, 0.0196078, 0.0196078, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_74ho6"]
+content_margin_left = 3.0
+content_margin_right = 3.0
+bg_color = Color(0.0196078, 0.0196078, 0.0196078, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.588235, 0.588235, 0.588235, 1)
+
+[sub_resource type="Theme" id="Theme_cbrv0"]
+Button/colors/font_color = Color(0.784314, 0.784314, 0.784314, 1)
+Button/font_sizes/font_size = 20
+Button/fonts/font = ExtResource("1_wqanw")
+Button/styles/focus = SubResource("StyleBoxFlat_hjbks")
+Button/styles/hover = SubResource("StyleBoxFlat_qebsx")
+Button/styles/hover_pressed = SubResource("StyleBoxFlat_waa8r")
+Button/styles/normal = SubResource("StyleBoxTexture_rl78j")
+Button/styles/pressed = SubResource("StyleBoxFlat_kpesr")
+HBoxContainer/constants/separation = 2
+HFlowContainer/constants/v_separation = 4
+HScrollBar/styles/grabber = SubResource("StyleBoxFlat_nscyf")
+HScrollBar/styles/grabber_highlight = SubResource("StyleBoxFlat_631br")
+HScrollBar/styles/grabber_pressed = SubResource("StyleBoxFlat_j00fp")
+HScrollBar/styles/scroll = SubResource("StyleBoxFlat_rqxqw")
+HScrollBar/styles/scroll_focus = SubResource("StyleBoxFlat_ik06k")
+Label/colors/font_color = Color(0.784314, 0.784314, 0.784314, 1)
+Label/font_sizes/font_size = 23
+Label/fonts/font = ExtResource("1_wqanw")
+MarginContainer/constants/margin_bottom = 10
+MarginContainer/constants/margin_left = 30
+MarginContainer/constants/margin_right = 30
+MarginContainer/constants/margin_top = 0
+Panel/styles/panel = SubResource("StyleBoxFlat_ka23t")
+VBoxContainer/constants/separation = 8
+VScrollBar/styles/grabber = SubResource("StyleBoxFlat_i5h57")
+VScrollBar/styles/grabber_highlight = SubResource("StyleBoxFlat_kwra8")
+VScrollBar/styles/grabber_pressed = SubResource("StyleBoxFlat_pps06")
+VScrollBar/styles/scroll = SubResource("StyleBoxFlat_6ahvg")
+VScrollBar/styles/scroll_focus = SubResource("StyleBoxFlat_74ho6")
+
+[sub_resource type="Gradient" id="Gradient_cbrv0"]
+colors = PackedColorArray(0.0392157, 0.0392157, 0.0392157, 1, 0.0117647, 0.0117647, 0.0117647, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_x08p4"]
+gradient = SubResource("Gradient_cbrv0")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_acl31"]
+content_margin_left = 2.0
+content_margin_top = 6.0
+content_margin_right = 0.0
+texture = SubResource("GradientTexture2D_x08p4")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2joyh"]
+content_margin_left = 1.0
+content_margin_bottom = 4.0
+
+[sub_resource type="Theme" id="Theme_qsgqq"]
+Button/colors/font_outline_color = Color(0.313726, 0.568627, 1, 1)
+Button/constants/outline_size = 10
+Button/font_sizes/font_size = 28
+Button/styles/normal = SubResource("StyleBoxTexture_acl31")
+Label/colors/font_outline_color = Color(0, 0, 0, 1)
+Label/constants/outline_size = 10
+Label/font_sizes/font_size = 27
+Label/fonts/font = null
+Label/styles/normal = SubResource("StyleBoxEmpty_2joyh")
 
 [node name="options" type="Control"]
 custom_minimum_size = Vector2(0, 45)
@@ -17,7 +162,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 8
-theme = ExtResource("1_pxwqc")
+theme = SubResource("Theme_cbrv0")
 script = ExtResource("2_ot2k7")
 
 [node name="back" parent="." instance=ExtResource("2_dtpe2")]
@@ -29,17 +174,17 @@ offset_top = -45.0
 offset_right = 45.0
 grow_vertical = 0
 
-[node name="search" parent="." instance=ExtResource("4_pgl6e")]
+[node name="mode" parent="." instance=ExtResource("4_pgl6e")]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -77.5
+offset_left = -71.5
 offset_top = -45.0
-offset_right = 77.5
+offset_right = 71.5
 grow_horizontal = 2
 
-[node name="play" type="Control" parent="."]
+[node name="play" type="HBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -50,56 +195,16 @@ offset_left = -40.0
 offset_top = -40.0
 grow_horizontal = 0
 grow_vertical = 0
+theme = SubResource("Theme_qsgqq")
+script = ExtResource("5_wqanw")
 
-[node name="play" parent="play" instance=ExtResource("3_sc6x6")]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -45.0
-offset_top = -45.0
-offset_right = 0.0
-offset_bottom = 0.0
-grow_horizontal = 0
-grow_vertical = 0
-button_group = SubResource("ButtonGroup_f7drk")
-
-[node name="skip" type="Button" parent="play"]
+[node name="copy" type="Button" parent="play"]
 visible = false
 custom_minimum_size = Vector2(45, 45)
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -45.0
-offset_top = -45.0
-grow_horizontal = 0
-grow_vertical = 0
-
-[node name="margin" type="MarginContainer" parent="play/skip"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -10.5
-offset_top = -27.0
-offset_right = 10.5
-offset_bottom = 27.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 3
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 3
-
-[node name="text" type="Label" parent="play/skip/margin"]
 layout_mode = 2
-theme_override_colors/font_outline_color = Color(0.176471, 0.658824, 0.294118, 1)
-theme_override_constants/outline_size = 10
-text = "I▶️"
+theme_override_font_sizes/font_size = 26
+toggle_mode = true
+text = "📑"
+
+[node name="restart" parent="play" instance=ExtResource("6_cbrv0")]
+layout_mode = 2

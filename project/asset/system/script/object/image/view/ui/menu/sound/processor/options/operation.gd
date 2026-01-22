@@ -7,6 +7,8 @@ var type: int:
 	get: return _type
 	set(value): _type = value
 
+func set_type(i: int) -> void: type = i
+
 func set_leaf_theme(options: Node, entry: Dictionary, leaf: Control) -> void:
 	leaf.pressed.connect(func():
 		match type:
@@ -33,7 +35,7 @@ func set_named_theme(options: Node, entry: Dictionary, leaf: Control) -> void:
 			PLAY: options.play.as_named(entry, leaf)
 	)
 
-func set_standalone(options: Node, entry: Dictionary, leaf: Control) -> void:
+func set_standalone_theme(options: Node, entry: Dictionary, leaf: Control) -> void:
 	leaf.set_feedback(func():
 		match type:
 			SET: options.search.for_standalone(entry, leaf)
