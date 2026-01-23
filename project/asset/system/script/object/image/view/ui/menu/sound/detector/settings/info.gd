@@ -1,4 +1,4 @@
-extends HBoxContainer
+extends VBoxContainer
 
 @onready var reset: Button = $reset
 @onready var importer: Button = $importer

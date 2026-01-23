@@ -1,4 +1,4 @@
 extends Control
 
-@onready var info: HBoxContainer = $info
-@onready var tabs: HBoxContainer = $tabs
+@onready var info: VBoxContainer = $info
+@onready var tabs: VBoxContainer = $tabs

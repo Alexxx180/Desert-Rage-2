@@ -24,7 +24,7 @@ func set_theme_context(theme: OpenThemeDialog) -> void:
 func set_operations(menu: VBoxContainer) -> void:
 	set_theme_context($theme)
 	ost.setup_modes(self, menu)
-	play.set_menu_context(menu)
+	# play.set_menu_context(menu) # TODO FIXME SET MENU CONTEXT
 
 func setup() -> void:
 	ost.setup(self)

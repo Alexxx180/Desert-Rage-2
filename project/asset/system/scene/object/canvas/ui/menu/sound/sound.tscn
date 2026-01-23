@@ -8,10 +8,10 @@
 [ext_resource type="Script" uid="uid://bdiy1humf8qxu" path="res://asset/system/script/object/image/view/ui/menu/sound/detector/detector.gd" id="2_swapw"]
 [ext_resource type="Script" uid="uid://bqja0uabl444" path="res://asset/system/script/object/image/view/ui/menu/sound/detector/soundtrack.gd" id="3_6cqct"]
 [ext_resource type="PackedScene" uid="uid://68ojve62yh1c" path="res://asset/system/scene/object/canvas/ui/menu/sound/processor/processor.tscn" id="4_gw4ot"]
-[ext_resource type="Theme" uid="uid://dfyi7rrcrweqx" path="res://asset/resource/ui/theme/patterns/template/menu/settings/settings.tres" id="4_nbelp"]
 [ext_resource type="FontFile" uid="uid://o0rgn7d13mr3" path="res://asset/resource/media/data/font/OpenSans-VariableFont_wdth,wght.ttf" id="5_gestq"]
 [ext_resource type="Script" uid="uid://b46bsb0wlja7f" path="res://asset/system/script/object/image/view/ui/menu/sound/detector/playback.gd" id="6_upsxh"]
 [ext_resource type="FontFile" uid="uid://b2wbdbnkxcqv1" path="res://asset/resource/media/data/font/NotoEmoji-VariableFont_wght.ttf" id="8_hqe2i"]
+[ext_resource type="PackedScene" uid="uid://c5eqytdlesbjp" path="res://asset/system/scene/object/canvas/ui/menu/sound/detector/options/backspace/back.tscn" id="9_hotwc"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hjbks"]
 content_margin_left = 6.0
@@ -157,7 +157,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("4_nbelp")
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
@@ -169,19 +168,27 @@ layout_mode = 2
 theme = SubResource("Theme_hotwc")
 script = ExtResource("3_6cqct")
 
-[node name="settings" parent="detector/margin/soundtrack" instance=ExtResource("1_1yo1r")]
-layout_mode = 2
-
 [node name="unfocus" type="Control" parent="detector/margin/soundtrack"]
 layout_mode = 2
 
-[node name="scroll" type="ScrollContainer" parent="detector/margin/soundtrack"]
+[node name="ost" type="HBoxContainer" parent="detector/margin/soundtrack"]
 layout_mode = 2
+size_flags_vertical = 3
+
+[node name="settings" parent="detector/margin/soundtrack/ost" instance=ExtResource("1_1yo1r")]
+custom_minimum_size = Vector2(0, 45)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 1
+
+[node name="scroll" type="ScrollContainer" parent="detector/margin/soundtrack/ost"]
+layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 3
 follow_focus = true
 horizontal_scroll_mode = 0
 
-[node name="margin" type="MarginContainer" parent="detector/margin/soundtrack/scroll"]
+[node name="margin" type="MarginContainer" parent="detector/margin/soundtrack/ost/scroll"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -190,34 +197,44 @@ theme_override_constants/margin_top = 2
 theme_override_constants/margin_right = 2
 theme_override_constants/margin_bottom = 2
 
-[node name="dropdown" parent="detector/margin/soundtrack/scroll/margin" instance=ExtResource("1_v2fxn")]
+[node name="dropdown" parent="detector/margin/soundtrack/ost/scroll/margin" instance=ExtResource("1_v2fxn")]
 custom_minimum_size = Vector2(150, 200)
 layout_mode = 2
 size_flags_vertical = 2
 
-[node name="playback" type="Control" parent="detector/margin/soundtrack"]
+[node name="margin" type="MarginContainer" parent="detector/margin/soundtrack"]
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = -20
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="playback" type="HBoxContainer" parent="detector/margin/soundtrack/margin"]
 custom_minimum_size = Vector2(200, 25)
 layout_mode = 2
 
-[node name="status" type="RichTextLabel" parent="detector/margin/soundtrack/playback"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_bottom = 7.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 8
+[node name="back" parent="detector/margin/soundtrack/margin/playback" instance=ExtResource("9_hotwc")]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="detector/margin/soundtrack/margin/playback"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="status" type="RichTextLabel" parent="detector/margin/soundtrack/margin/playback/VBoxContainer"]
+custom_minimum_size = Vector2(0, 27)
+layout_mode = 2
+size_flags_vertical = 10
 theme_override_fonts/bold_font = ExtResource("8_hqe2i")
 bbcode_enabled = true
 text = "Press ▶️ to start and [b]🚩[/b] to reset playback"
+fit_content = true
 autowrap_mode = 0
 horizontal_alignment = 1
 text_direction = 2
 script = ExtResource("6_upsxh")
 
-[node name="progress" type="ProgressBar" parent="detector/margin/soundtrack"]
+[node name="progress" type="ProgressBar" parent="detector/margin/soundtrack/margin/playback/VBoxContainer"]
 custom_minimum_size = Vector2(0, 2)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -225,6 +242,13 @@ size_flags_vertical = 8
 theme_override_styles/fill = SubResource("StyleBoxFlat_fb1ce")
 max_value = 30.0
 show_percentage = false
+
+[node name="Button" type="Button" parent="detector/margin/soundtrack/margin/playback"]
+custom_minimum_size = Vector2(45, 45)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("8_hqe2i")
+theme_override_font_sizes/font_size = 26
+text = "🔽"
 
 [node name="options" parent="detector/margin/soundtrack" instance=ExtResource("2_s3j2j")]
 layout_mode = 2

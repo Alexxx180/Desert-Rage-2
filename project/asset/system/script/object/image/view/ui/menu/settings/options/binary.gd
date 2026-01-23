@@ -2,16 +2,20 @@ extends Button
 
 class_name BinaryChoice
 
-@onready var status: Label = $margin/status
+@onready var status: Label = $status
 
-var _caption: Dictionary = { false: "Off", true: "On" }
+@export var _caption: Array = _default_caption()
+
 var _choice: bool = false
-var selected: String:
-	get: return _caption[_choice]
+var selection: String:
+	get: return tr(_caption[int(_choice)])
+
+func _default_caption() -> Array: return ["SOFF", "SON"]
+func _view() -> Variant: return status
 
 func sync_caption() -> void:
-	status.text = selected
+	_view().text = selection
 
-func change_choice() -> void:
-	_choice = !_choice
+func change_choice(state: bool = !_choice) -> void:
+	_choice = state
 	sync_caption()

@@ -17,6 +17,7 @@ func _input(event: InputEvent) -> void:
 
 	while i > 0 and not (pressed or focused):
 		i -= 1
+		if options[i] == null: continue # TODO FIXME NULL options focus on arrows
 		focused = options[i].has_focus()
 		pressed = Input.is_action_just_pressed("ui_" + acts[i])
 

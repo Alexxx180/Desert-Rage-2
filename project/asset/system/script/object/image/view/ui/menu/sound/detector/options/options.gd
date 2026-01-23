@@ -1,7 +1,7 @@
 extends Control
 
+@onready var home: HBoxContainer = $home
 @onready var mode: HBoxContainer = $mode
-@onready var back: Button = $back
 @onready var play: HBoxContainer = $play
 
 func switch_skip() -> void: mode.play.switch_skip()

@@ -5,23 +5,27 @@
 [ext_resource type="PackedScene" uid="uid://bqcde7s3cxww3" path="res://asset/system/scene/object/canvas/ui/menu/sound/detector/settings/management/import.tscn" id="2_2dj30"]
 [ext_resource type="PackedScene" uid="uid://gub64vwnclew" path="res://asset/system/scene/object/canvas/ui/menu/sound/detector/settings/management/export.tscn" id="3_o1hcw"]
 
-[node name="info" type="HBoxContainer"]
-anchors_preset = 3
+[node name="info" type="VBoxContainer"]
+anchors_preset = 11
 anchor_left = 1.0
-anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -40.0
-offset_top = -40.0
+offset_left = -46.0
 grow_horizontal = 0
-grow_vertical = 0
+grow_vertical = 2
 script = ExtResource("1_2broo")
 
 [node name="reset" parent="." instance=ExtResource("1_ntocc")]
 layout_mode = 2
 
+[node name="exporter" parent="." instance=ExtResource("3_o1hcw")]
+layout_mode = 2
+size_flags_vertical = 10
+
 [node name="importer" parent="." instance=ExtResource("2_2dj30")]
 layout_mode = 2
 
-[node name="exporter" parent="." instance=ExtResource("3_o1hcw")]
+[node name="Control" type="Control" parent="."]
+visible = false
+custom_minimum_size = Vector2(0, 45)
 layout_mode = 2

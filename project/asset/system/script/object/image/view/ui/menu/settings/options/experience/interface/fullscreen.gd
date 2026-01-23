@@ -1,18 +1,12 @@
 extends BinaryChoice
 
-var _mode: Dictionary = {
-	false: DisplayServer.WINDOW_MODE_WINDOWED,
-	true: DisplayServer.WINDOW_MODE_FULLSCREEN
-}
+func _default_caption() -> Array: return ["SWND", "SFSN"]
 
-func _ready() -> void:
-	_caption[false] = "Window"
-	_caption[true] = "Fullscreen"
-	_choice = DisplayServer.window_get_mode() == _mode[true]
-	sync_caption()
+func _view() -> Variant: return self
 
-func set_fullscreen() -> void:
-	DisplayServer.window_set_mode(_mode[_choice])
+func _ready() -> void: change_choice(bool(DisplayServer.window_get_mode()))
+
+func set_fullscreen() -> void: DisplayServer.window_set_mode(int(_choice))
 
 func toggle() -> void:
 	change_choice()

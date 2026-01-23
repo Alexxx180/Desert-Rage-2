@@ -1,4 +1,4 @@
-extends HBoxContainer
+extends VBoxContainer
 
 # @onready var music: Button = $music
 # @onready var sound: Button = $sound
