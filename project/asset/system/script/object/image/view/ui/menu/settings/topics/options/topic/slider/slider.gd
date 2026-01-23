@@ -4,7 +4,7 @@ class_name FocusedSlider
 
 signal hold_focus(status: bool)
 
-@onready var submit: Button = $margin/music/volume/state/info/manual
+@onready var submit: Button = $form/state/manual
 @onready var manual: Node = $manual
 
 var _manual: bool = false

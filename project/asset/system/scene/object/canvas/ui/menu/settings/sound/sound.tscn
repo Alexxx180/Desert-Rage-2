@@ -27,50 +27,47 @@ theme_override_styles/grabber_area_highlight = ExtResource("3_dav0v")
 value = 50.0
 script = ExtResource("4_xnxk6")
 
-[node name="margin" type="MarginContainer" parent="."]
+[node name="form" type="Panel" parent="."]
+custom_minimum_size = Vector2(0, 55)
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = 10
 anchor_right = 1.0
-anchor_bottom = 1.0
 grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 0
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 7
-
-[node name="music" type="Panel" parent="margin"]
-layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.35
 mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_4wtr0")
 
-[node name="volume" type="VBoxContainer" parent="margin/music"]
+[node name="caption" type="Label" parent="form"]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -11.5
+offset_right = 198.0
+offset_bottom = 11.5
 grow_vertical = 2
-theme_override_constants/separation = 4
-
-[node name="state" type="MarginContainer" parent="margin/music/volume"]
-layout_mode = 2
-theme_override_constants/margin_left = 25
-theme_override_constants/margin_top = 15
-theme_override_constants/margin_right = 23
-theme_override_constants/margin_bottom = 15
-
-[node name="info" type="HBoxContainer" parent="margin/music/volume/state"]
-layout_mode = 2
-
-[node name="caption" type="Label" parent="margin/music/volume/state/info"]
-layout_mode = 2
 size_flags_horizontal = 3
-text = "Sound"
+text = "SSDT"
 
-[node name="manual" type="Button" parent="margin/music/volume/state/info"]
+[node name="state" type="MarginContainer" parent="form"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -26.5
+offset_bottom = 26.5
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 23
+theme_override_constants/margin_bottom = 0
+
+[node name="manual" type="Button" parent="form/state"]
 custom_minimum_size = Vector2(50, 20)
 layout_mode = 2
 size_flags_horizontal = 8
@@ -83,4 +80,4 @@ script = ExtResource("5_j14e8")
 
 [node name="focus" parent="manual" instance=ExtResource("8_u22ni")]
 
-[connection signal="pressed" from="margin/music/volume/state/info/manual" to="." method="focus_manual"]
+[connection signal="pressed" from="form/state/manual" to="." method="focus_manual"]
