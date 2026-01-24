@@ -1,14 +1,21 @@
-[gd_scene load_steps=5 format=3 uid="uid://dugyepxewkmgo"]
+[gd_scene load_steps=8 format=3 uid="uid://dugyepxewkmgo"]
 
 [ext_resource type="Theme" uid="uid://p2br8b6ea3n6" path="res://asset/resource/ui/theme/patterns/template/menu/hud/pause/pause.tres" id="1_5deg3"]
 [ext_resource type="Shortcut" uid="uid://bgd4ocokxr1wj" path="res://asset/resource/ui/short/cut/pause.tres" id="2_21uvd"]
+[ext_resource type="FontFile" uid="uid://b37js8y80ak1k" path="res://asset/resource/media/data/font/NotoColorEmoji-Regular.ttf" id="2_fekyi"]
 [ext_resource type="Script" uid="uid://c64ox6llkepp4" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/pause.gd" id="3_7tvtn"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3rbdo"]
-content_margin_left = 4.0
-content_margin_top = 4.0
-content_margin_right = 4.0
-bg_color = Color(0, 0, 0, 1)
+[sub_resource type="Gradient" id="Gradient_g4hpx"]
+colors = PackedColorArray(0.0392157, 0.0392157, 0.0392157, 1, 0.0117647, 0.0117647, 0.0117647, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_iqx8c"]
+gradient = SubResource("Gradient_g4hpx")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fekyi"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 2.0
+texture = SubResource("GradientTexture2D_iqx8c")
 
 [node name="pause" type="Button"]
 custom_minimum_size = Vector2(40, 40)
@@ -22,8 +29,9 @@ size_flags_horizontal = 0
 size_flags_vertical = 8
 tooltip_text = "Приостановить игру"
 theme = ExtResource("1_5deg3")
-theme_override_font_sizes/font_size = 18
-theme_override_styles/normal = SubResource("StyleBoxFlat_3rbdo")
+theme_override_fonts/font = ExtResource("2_fekyi")
+theme_override_font_sizes/font_size = 26
+theme_override_styles/normal = SubResource("StyleBoxTexture_fekyi")
 shortcut = ExtResource("2_21uvd")
-text = "Esc"
+text = "🏠"
 script = ExtResource("3_7tvtn")
