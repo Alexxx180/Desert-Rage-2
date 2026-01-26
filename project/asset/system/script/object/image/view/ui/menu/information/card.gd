@@ -1,29 +1,34 @@
 extends Control
 
 @onready var collapsed: Button = $collapsed
-@onready var showcase: Button = $showcase
+@onready var showcase: PanelContainer = $showcase
+
+@export var hint: HelpHint
 
 const TIME: float = 0.2
 
+func update_locale() -> void:
+	collapsed.title.text = hint.key("T")
+
+func update_hint() -> void:
+	collapsed.image.texture = hint.texture
+	update_locale()
+	showcase.hint = hint
+	showcase.update_hint(Defaults.ARRAY)
+
+func translate(controls: Node) -> void:
+	update_locale()
+	showcase.translate(controls)
+
 func get_locale() -> RichTextLabel:
-	return $showcase/margin/content/caption
+	return $showcase/margin.caption
 
 func _ready() -> void:
-	for button in [collapsed, showcase]:
+	if hint: update_hint()
+	for button in [collapsed, showcase.showcase]:
 		button.pressed.connect(flip_the_card)
 
-"""
-func _r() -> void:
-	var language = "automatic"
-	# Load here language from the user settings file
-	if language == "automatic":
-	   var preferred_language = OS.get_locale_language()
-	   TranslationServer.set_locale(preferred_language)
-	else:
-	   TranslationServer.set_locale(language)
-"""
-
-func flip_the_card() -> void: # collapsed.visible = showcase.visible # showcase.visible = !showcase.visible
+func flip_the_card() -> void:
 	if collapsed.scale == Vector2.ONE:
 		_change_states(showcase, collapsed)
 	else:
@@ -34,6 +39,11 @@ func _change_states(prev: CanvasItem, next: CanvasItem) -> void:
 	_change_state(next, 0.0, false)
 
 func _change_state(subject: CanvasItem, scales: float, visibility: bool) -> void:
-	create_tween().tween_property(subject, "scale", Vector2(scales, 1), TIME)
-	# create_tween().tween_property(subject, "visible", visibility, TIME)
+	var tween: Tween = create_tween()
+	tween.set_parallel(false)
+	tween.tween_property(subject, "scale", Vector2(scales, 1), TIME)
+	if visibility:
+		subject.show()
+	else:
+		tween.tween_property(subject, "visible", visibility, TIME)
 	

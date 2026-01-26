@@ -1,48 +1,14 @@
-[gd_scene load_steps=22 format=3 uid="uid://bmmg6xahpkusq"]
+[gd_scene load_steps=12 format=3 uid="uid://bmmg6xahpkusq"]
 
 [ext_resource type="StyleBox" uid="uid://cht8hrroa75bg" path="res://asset/resource/ui/theme/style/tag/tag-button.tres" id="1_rlvie"]
 [ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://asset/resource/ui/theme/patterns/template/menu/settings/topic/footer.tres" id="2_5tx11"]
-[ext_resource type="FontFile" uid="uid://b2wbdbnkxcqv1" path="res://asset/resource/media/data/font/NotoEmoji-VariableFont_wght.ttf" id="3_p5yj6"]
-[ext_resource type="Script" uid="uid://cmeppk3ealnv8" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/hints/preview/toggle.gd" id="4_hexy2"]
+[ext_resource type="PackedScene" uid="uid://b10usb1wa67d2" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/preview/books/book.tscn" id="5_chdrm"]
 [ext_resource type="FontFile" uid="uid://b37js8y80ak1k" path="res://asset/resource/media/data/font/NotoColorEmoji-Regular.ttf" id="5_vlu61"]
 [ext_resource type="StyleBox" uid="uid://bsggnr5c3uk7o" path="res://asset/resource/ui/theme/style/panel/preview.tres" id="6_uhat8"]
 [ext_resource type="PackedScene" uid="uid://cdpsykqf6eaa2" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/priorities/topic/research/content/help/help.tscn" id="6_y2jwj"]
-[ext_resource type="PackedScene" uid="uid://b01p37el432af" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/preview/hints/hints.tscn" id="7_uy1so"]
-[ext_resource type="FontFile" uid="uid://dxg5wbmrewk2p" path="res://asset/resource/media/data/font/Lato-Regular.ttf" id="31_upyky"]
 [ext_resource type="StyleBox" uid="uid://evyfrkamah1" path="res://asset/resource/ui/theme/style/items/chests/hover.tres" id="32_y6s2t"]
 [ext_resource type="StyleBox" uid="uid://by6bvf7ens3ul" path="res://asset/resource/ui/theme/style/items/chests/empty.tres" id="33_yw1xc"]
 [ext_resource type="PackedScene" uid="uid://dv268r05flq5" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/preview/log/levels/level/number.tscn" id="36_pqlxk"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k8lmy"]
-content_margin_left = 4.0
-content_margin_top = 0.0
-bg_color = Color(0.0196078, 0.0196078, 0.0588235, 1)
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cuhdu"]
-content_margin_left = 15.0
-content_margin_bottom = 15.0
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kf4b8"]
-content_margin_left = 7.0
-content_margin_top = 6.0
-bg_color = Color(0.0196078, 0.0196078, 0.0588235, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rlvie"]
-content_margin_left = 5.0
-content_margin_top = 1.0
-bg_color = Color(0.0196078, 0.0196078, 0.0588235, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pvcso"]
-content_margin_left = 7.0
-content_margin_top = 6.0
-bg_color = Color(0.0196078, 0.0196078, 0.0588235, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xecfx"]
-content_margin_left = 7.0
-content_margin_top = 6.0
-bg_color = Color(0.0588235, 0.0588235, 0.0588235, 1)
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rlvie"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jb804"]
 
@@ -82,104 +48,6 @@ text = "Нажмите на картинку для чтения содержи�
 autowrap_mode = 2
 text_overrun_behavior = 3
 
-[node name="tabs" type="HBoxContainer" parent="."]
-layout_mode = 2
-size_flags_vertical = 8
-theme_override_constants/separation = 4
-
-[node name="toggle" type="Button" parent="tabs"]
-custom_minimum_size = Vector2(30, 30)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("3_p5yj6")
-theme_override_font_sizes/font_size = 18
-theme_override_styles/normal = SubResource("StyleBoxFlat_k8lmy")
-alignment = 0
-script = ExtResource("4_hexy2")
-path = "../../../../../../../stats/inventory/ability/controls/hints/space/preview/help"
-
-[node name="shown" type="Label" parent="tabs/toggle"]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -11.5
-offset_top = -11.0
-offset_right = 11.5
-offset_bottom = 11.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(1.00295, 0.994388)
-theme_override_fonts/font = ExtResource("3_p5yj6")
-theme_override_font_sizes/font_size = 18
-text = "👁"
-
-[node name="hidden" type="Label" parent="tabs/toggle"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(1.00295, 0.994388)
-theme_override_fonts/font = ExtResource("3_p5yj6")
-theme_override_font_sizes/font_size = 24
-theme_override_styles/normal = SubResource("StyleBoxEmpty_cuhdu")
-text = "⌣"
-
-[node name="help" type="Button" parent="tabs"]
-visible = false
-custom_minimum_size = Vector2(30, 30)
-layout_mode = 2
-size_flags_horizontal = 8
-theme_override_fonts/font = ExtResource("5_vlu61")
-theme_override_font_sizes/font_size = 16
-theme_override_styles/normal = SubResource("StyleBoxFlat_kf4b8")
-text = "❔"
-alignment = 0
-
-[node name="analyze" type="Button" parent="tabs"]
-custom_minimum_size = Vector2(30, 30)
-layout_mode = 2
-size_flags_horizontal = 8
-theme_override_fonts/font = ExtResource("3_p5yj6")
-theme_override_font_sizes/font_size = 16
-theme_override_styles/normal = SubResource("StyleBoxFlat_rlvie")
-text = "🔍"
-alignment = 0
-
-[node name="books" type="Button" parent="tabs"]
-custom_minimum_size = Vector2(30, 30)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("5_vlu61")
-theme_override_font_sizes/font_size = 16
-theme_override_styles/normal = SubResource("StyleBoxFlat_kf4b8")
-text = "📚"
-alignment = 0
-
-[node name="learn" type="Button" parent="tabs"]
-visible = false
-custom_minimum_size = Vector2(30, 30)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("5_vlu61")
-theme_override_font_sizes/font_size = 16
-theme_override_styles/normal = SubResource("StyleBoxFlat_kf4b8")
-text = "🔬"
-alignment = 0
-
-[node name="notes" type="Button" parent="tabs"]
-custom_minimum_size = Vector2(30, 30)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("5_vlu61")
-theme_override_font_sizes/font_size = 15
-theme_override_styles/pressed = SubResource("StyleBoxFlat_pvcso")
-theme_override_styles/normal = SubResource("StyleBoxFlat_xecfx")
-toggle_mode = true
-text = "🕷"
-alignment = 0
-
 [node name="content" type="VBoxContainer" parent="."]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -188,19 +56,7 @@ size_flags_horizontal = 3
 visible = false
 layout_mode = 2
 
-[node name="analyze" type="PanelContainer" parent="content"]
-visible = false
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_rlvie")
-
-[node name="hints" parent="content/analyze" instance=ExtResource("7_uy1so")]
-custom_minimum_size = Vector2(300, 0)
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 2
-
 [node name="books" type="PanelContainer" parent="content"]
-visible = false
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = ExtResource("6_uhat8")
@@ -210,32 +66,9 @@ layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 5
 
-[node name="caption" type="Label" parent="content/books/books"]
+[node name="book" parent="content/books/books" instance=ExtResource("5_chdrm")]
 layout_mode = 2
-size_flags_horizontal = 4
-text = "Настой на кактусе"
-
-[node name="margin" type="MarginContainer" parent="content/books/books"]
-layout_mode = 2
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 5
-
-[node name="text" type="VBoxContainer" parent="content/books/books/margin"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="chat" type="Label" parent="content/books/books/margin/text"]
-custom_minimum_size = Vector2(10, 0)
-layout_mode = 2
-size_flags_vertical = 1
-theme = ExtResource("2_5tx11")
-theme_override_constants/line_spacing = -2
-theme_override_fonts/font = ExtResource("31_upyky")
-theme_override_font_sizes/font_size = 18
-text = "Истинно говорю вам, что время на приготовление сего отвара будет более чем компенсировано. Для этого нужен простой древний..."
-autowrap_mode = 2
+size_flags_vertical = 8
 
 [node name="bestiary" type="PanelContainer" parent="content"]
 layout_mode = 2

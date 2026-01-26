@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=3 uid="uid://b4x588yxrcok3"]
+[gd_scene load_steps=80 format=3 uid="uid://b4x588yxrcok3"]
 
 [ext_resource type="Script" uid="uid://d05jnr6xe41se" path="res://asset/system/script/object/image/view/ui/menu/settings/settings.gd" id="1_apf6u"]
 [ext_resource type="Theme" uid="uid://dfyi7rrcrweqx" path="res://asset/resource/ui/theme/patterns/template/menu/settings/settings.tres" id="1_vs08l"]
@@ -47,6 +47,19 @@
 [ext_resource type="Script" uid="uid://bjyjw52ymqcqa" path="res://asset/system/script/object/image/view/ui/menu/settings/topics/options/topic/focus/items/management.gd" id="27_bq0bq"]
 [ext_resource type="Script" uid="uid://ctik5u2wvkppb" path="res://asset/system/script/object/image/view/ui/menu/settings/topics/options/topic/slider/manual.gd" id="27_g800x"]
 [ext_resource type="Script" uid="uid://dix4ud17vkox1" path="res://asset/system/script/object/image/view/ui/menu/settings/topics/options/topic/named/options/management/gamepad.gd" id="28_6l1og"]
+[ext_resource type="PackedScene" uid="uid://byamepml8w2f7" path="res://asset/system/scene/object/canvas/ui/menu/settings/detector/mouse/mouse.tscn" id="45_sw4q0"]
+[ext_resource type="Script" uid="uid://dgmejd07h6mvr" path="res://asset/system/script/object/image/view/ui/menu/settings/processor/processor.gd" id="48_jw263"]
+[ext_resource type="Script" uid="uid://7sb8hnbo402n" path="res://asset/system/script/object/image/view/ui/menu/settings/processor/controls/controls.gd" id="49_1um0r"]
+[ext_resource type="Script" uid="uid://5pbte4kry7v6" path="res://asset/system/script/object/image/view/ui/menu/settings/processor/controls/keys/keys.gd" id="49_owwju"]
+[ext_resource type="Script" uid="uid://du8fvu8uow16n" path="res://asset/system/script/object/image/view/ui/menu/settings/processor/controls/determine/gamepad/gamepad.gd" id="50_qibg1"]
+[ext_resource type="Script" uid="uid://dkc4tuorjpr2f" path="res://asset/system/script/object/image/view/ui/menu/settings/processor/controls/determine/determine.gd" id="51_0qh8n"]
+[ext_resource type="Script" uid="uid://ktwx51h8e4rs" path="res://asset/system/script/object/image/view/ui/menu/settings/processor/controls/determine/gamepad/type.gd" id="51_aers8"]
+[ext_resource type="Script" uid="uid://dwd5v3mbryfqe" path="res://asset/system/script/object/image/view/ui/menu/settings/processor/controls/keys/keyboard.gd" id="51_bgo5c"]
+[ext_resource type="Script" uid="uid://bq6354c3j51d3" path="res://asset/system/script/object/image/view/ui/menu/settings/processor/controls/keys/mouse.gd" id="51_d07id"]
+[ext_resource type="Script" uid="uid://b4n28qoa5us2i" path="res://asset/system/script/object/image/view/ui/menu/settings/processor/experience/experience.gd" id="54_317at"]
+[ext_resource type="Script" uid="uid://c7kto53y7lpl4" path="res://asset/system/script/object/image/view/ui/menu/settings/processor/experience/language.gd" id="54_fmjjx"]
+[ext_resource type="Script" uid="uid://dug3scueyap15" path="res://asset/system/script/object/image/view/ui/menu/settings/processor/controls/keys/gamepad.gd" id="54_lanli"]
+[ext_resource type="Script" uid="uid://bhrr2y24jdgcf" path="res://asset/system/script/object/image/view/ui/menu/settings/relation.gd" id="60_bjomr"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aers8"]
 content_margin_left = 14.0
@@ -152,6 +165,10 @@ width = 1
 bg_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1821x"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_sw4q0"]
+content_margin_left = 10.0
+content_margin_bottom = 7.0
 
 [node name="settings" type="CanvasLayer"]
 script = ExtResource("1_apf6u")
@@ -985,6 +1002,7 @@ theme = ExtResource("2_ull8j")
 script = ExtResource("23_7s0gm")
 
 [node name="mouse" type="VBoxContainer" parent="detector/margin/topics/content/options/controls/management"]
+visible = false
 layout_mode = 2
 script = ExtResource("8_1w8km")
 
@@ -1090,6 +1108,7 @@ text = "SHND"
 alignment = 0
 
 [node name="status" type="Label" parent="detector/margin/topics/content/options/controls/management/mouse/content/options/hands"]
+visible = false
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -1103,6 +1122,41 @@ grow_horizontal = 0
 grow_vertical = 2
 size_flags_horizontal = 8
 text = "LMB"
+
+[node name="MarginContainer" type="MarginContainer" parent="detector/margin/topics/content/options/controls/management/mouse/content/options/hands"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -102.0
+offset_top = -24.5
+offset_bottom = 24.5
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 7
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="detector/margin/topics/content/options/controls/management/mouse/content/options/hands/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+
+[node name="mouse" parent="detector/margin/topics/content/options/controls/management/mouse/content/options/hands/MarginContainer/HBoxContainer" instance=ExtResource("45_sw4q0")]
+layout_mode = 2
+
+[node name="status" type="Label" parent="detector/margin/topics/content/options/controls/management/mouse/content/options/hands/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxEmpty_sw4q0")
+text = "+"
+
+[node name="mouse2" parent="detector/margin/topics/content/options/controls/management/mouse/content/options/hands/MarginContainer/HBoxContainer" instance=ExtResource("45_sw4q0")]
+layout_mode = 2
 
 [node name="legs" type="Button" parent="detector/margin/topics/content/options/controls/management/mouse/content/options"]
 custom_minimum_size = Vector2(300, 60)
@@ -1283,6 +1337,7 @@ text = "Left stick  adjust | Periphery  set | A  next | B  back"
 [node name="detection" parent="detector/margin/topics/content/options/controls/management/mouse/content/footer/controls" instance=ExtResource("19_ayoyv")]
 
 [node name="keyboard" type="VBoxContainer" parent="detector/margin/topics/content/options/controls/management"]
+visible = false
 layout_mode = 2
 script = ExtResource("8_1w8km")
 
@@ -1335,6 +1390,7 @@ size_flags_horizontal = 8
 text = "WASD"
 
 [node name="forward" type="Button" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options"]
+visible = false
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -1358,6 +1414,7 @@ size_flags_horizontal = 8
 text = "W"
 
 [node name="backward" type="Button" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options"]
+visible = false
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -1381,6 +1438,7 @@ size_flags_horizontal = 8
 text = "S"
 
 [node name="left" type="Button" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options"]
+visible = false
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -1404,6 +1462,7 @@ size_flags_horizontal = 8
 text = "A"
 
 [node name="right" type="Button" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options"]
+visible = false
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -1427,6 +1486,7 @@ size_flags_horizontal = 8
 text = "D"
 
 [node name="luggage" type="Button" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options"]
+visible = false
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -1450,6 +1510,7 @@ size_flags_horizontal = 8
 text = "Cross"
 
 [node name="inventory" type="Button" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options"]
+visible = false
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -1473,6 +1534,7 @@ size_flags_horizontal = 8
 text = "CU"
 
 [node name="equipment" type="Button" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options"]
+visible = false
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -1588,6 +1650,7 @@ size_flags_horizontal = 8
 text = "E"
 
 [node name="legs" type="Button" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options"]
+visible = false
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -1749,6 +1812,7 @@ size_flags_horizontal = 8
 text = "R"
 
 [node name="analyze" type="Button" parent="detector/margin/topics/content/options/controls/management/keyboard/content/options"]
+visible = false
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -2459,6 +2523,42 @@ process_mode = 4
 
 [node name="items" type="Node" parent="detector/margin/topics/content/options/controls"]
 script = ExtResource("27_bq0bq")
+
+[node name="work" type="Node" parent="."]
+script = ExtResource("48_jw263")
+
+[node name="controls" type="Node" parent="work"]
+script = ExtResource("49_1um0r")
+
+[node name="keys" type="Node" parent="work/controls"]
+script = ExtResource("49_owwju")
+
+[node name="mouse" type="Node" parent="work/controls/keys"]
+script = ExtResource("51_d07id")
+
+[node name="keyboard" type="Node" parent="work/controls/keys"]
+script = ExtResource("51_bgo5c")
+
+[node name="gamepad" type="Node" parent="work/controls/keys"]
+script = ExtResource("54_lanli")
+
+[node name="determine" type="Node" parent="work/controls"]
+script = ExtResource("51_0qh8n")
+
+[node name="gamepad" type="Node" parent="work/controls/determine"]
+script = ExtResource("51_aers8")
+
+[node name="type" type="Node" parent="work/controls/determine/gamepad"]
+script = ExtResource("50_qibg1")
+
+[node name="experience" type="Node" parent="work"]
+script = ExtResource("54_317at")
+
+[node name="language" type="Node" parent="work/experience"]
+script = ExtResource("54_fmjjx")
+
+[node name="link" type="Node" parent="."]
+script = ExtResource("60_bjomr")
 
 [connection signal="pressed" from="detector/margin/topics/content/options/game/experience/sound/header" to="detector/margin/topics/content/options/game/experience/sound/header" method="_toggle_content"]
 [connection signal="pressed" from="detector/margin/topics/content/options/game/experience/sound/content/footer" to="detector/margin/topics/content/options/game/experience/sound/content/footer" method="_hide_topic"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://sloxw12np1ch"]
+[gd_scene load_steps=21 format=3 uid="uid://sloxw12np1ch"]
 
 [ext_resource type="StyleBox" uid="uid://cvfnqancophme" path="res://asset/resource/ui/theme/style/solid-color-panel.tres" id="1_h3g5x"]
 [ext_resource type="Script" uid="uid://creg8v0kuegg7" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/topic/topic.gd" id="2_6i1ua"]
@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://cp2cf4xlxu476" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/status/card.tscn" id="5_iyx8g"]
 [ext_resource type="PackedScene" uid="uid://bmexdqeihycjg" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/priorities/topic/record/record.tscn" id="6_ewu2d"]
 [ext_resource type="PackedScene" uid="uid://bmmg6xahpkusq" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/priorities/topic/research/research.tscn" id="7_606mb"]
+[ext_resource type="FontFile" uid="uid://b37js8y80ak1k" path="res://asset/resource/media/data/font/NotoColorEmoji-Regular.ttf" id="8_epn87"]
+[ext_resource type="FontFile" uid="uid://b2wbdbnkxcqv1" path="res://asset/resource/media/data/font/NotoEmoji-VariableFont_wght.ttf" id="9_vjrx7"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cuhdu"]
 content_margin_right = 1.0
@@ -53,6 +55,26 @@ expand_margin_bottom = 1.0
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_606mb"]
 content_margin_right = 4.0
 bg_color = Color(0.953292, 0.415199, 9.62615e-07, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ne0m5"]
+content_margin_left = 7.0
+content_margin_top = 6.0
+bg_color = Color(0.0196078, 0.0196078, 0.0588235, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_21ixm"]
+content_margin_left = 5.0
+content_margin_top = 1.0
+bg_color = Color(0.0196078, 0.0196078, 0.0588235, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ren3u"]
+content_margin_left = 7.0
+content_margin_top = 6.0
+bg_color = Color(0.0196078, 0.0196078, 0.0588235, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tiw6m"]
+content_margin_left = 7.0
+content_margin_top = 6.0
+bg_color = Color(0.0588235, 0.0588235, 0.0588235, 1)
 
 [node name="panel" type="PanelContainer"]
 anchors_preset = 15
@@ -222,3 +244,66 @@ layout_mode = 2
 
 [node name="research" parent="scroll/margin/stack" instance=ExtResource("7_606mb")]
 layout_mode = 2
+
+[node name="margin" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="tabs" type="HBoxContainer" parent="margin"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 4
+
+[node name="help" type="Button" parent="margin/tabs"]
+visible = false
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_fonts/font = ExtResource("8_epn87")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_ne0m5")
+text = "❔"
+alignment = 0
+
+[node name="analyze" type="Button" parent="margin/tabs"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_fonts/font = ExtResource("9_vjrx7")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_21ixm")
+text = "🔍"
+alignment = 0
+
+[node name="books" type="Button" parent="margin/tabs"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("8_epn87")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_ne0m5")
+text = "📚"
+alignment = 0
+
+[node name="learn" type="Button" parent="margin/tabs"]
+visible = false
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("8_epn87")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_ne0m5")
+text = "🔬"
+alignment = 0
+
+[node name="notes" type="Button" parent="margin/tabs"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("8_epn87")
+theme_override_font_sizes/font_size = 15
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ren3u")
+theme_override_styles/normal = SubResource("StyleBoxFlat_tiw6m")
+toggle_mode = true
+text = "🕷"
+alignment = 0

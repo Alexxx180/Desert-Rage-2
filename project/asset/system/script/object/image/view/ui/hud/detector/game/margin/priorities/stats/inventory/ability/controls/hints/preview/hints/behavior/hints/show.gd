@@ -2,7 +2,9 @@ extends BehaviorAction
 
 @onready var category: String = get_parent().name
 
+func _gets(mark: Tick, key: String) -> Variant:
+	return mark.blackboard.g("show")[category][name]
+
 func tick(mark: Tick) -> int:
-	if (mark.blackboard.get_value("show")[category][name]):
-		mark.blackboard.get_value("ref")[category][name].show()
+	if _gets(mark, "show"): _gets(mark, "ref").show()
 	return OK

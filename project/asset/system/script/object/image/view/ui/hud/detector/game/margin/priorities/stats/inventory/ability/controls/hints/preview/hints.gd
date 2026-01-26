@@ -3,7 +3,7 @@ extends BoxContainer
 signal show_toggle(state: bool)
 
 @onready var tabs: BoxContainer = $ability/tabs
-@onready var help: ScrollContainer = $content/help
+@onready var help: ScrollContainer = $help
 @onready var books: ScrollContainer = $content/books
 
 enum { NONE = -1, FIRST = 0, SECOND = 1 }

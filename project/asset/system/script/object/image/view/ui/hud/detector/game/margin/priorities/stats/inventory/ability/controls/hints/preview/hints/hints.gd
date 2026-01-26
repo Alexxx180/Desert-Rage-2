@@ -1,13 +1,8 @@
 extends VBoxContainer
 
-@onready var motion: VBoxContainer = $category/motion
-@onready var action: VBoxContainer = $category/action
-@onready var reason: VBoxContainer = $category/reason
-
+@onready var kind: VBoxContainer = $category
 @onready var behavior: BehaviorTree = $behavior
 @onready var blackboard: BehaviorBlackboard = $blackboard
-
-@onready var help: Dictionary = { "motion": motion, "action": action, "reason": reason }
 
 func toggle_help() -> void:
 	blackboard.toggle_value("hide")
@@ -15,23 +10,16 @@ func toggle_help() -> void:
 
 func clear_progress() -> void:
 	for type in ["motion", "action", "reason"]:
-		for ref in blackboard.get_value("ref")[type].values():
+		for ref in blackboard.g("ref")[type].values():
 			if ref.visible: ref.hide_delayed()
 
 func progress(head: String, body: String) -> void:
-	blackboard.get_value("progress").push_back(head)
-	blackboard.get_value("progress").push_back(body)
-	behavior.tick(self, blackboard)
-	blackboard.get_value("progress").clear()
+	behavior.tick(self, blackboard.s("head", head).s("body", body))
 
 func set_preview(group: Node2D, prev: HelpPreview) -> void:
 	var help: Dictionary = group.camera.analyze.get_analyze()
-	var ref: Dictionary = {
-		"motion": motion.get_category(),
-		"action": action.get_category(),
-		"reason": reason.get_category()
-	}
-	blackboard.set_values(
-		["hide", "show", "preview", "analyze", "ref", "progress"],
-		[true, prev.clone(), prev.help, help, ref, []]
-	)
+	blackboard.s("hide", true).s("show", prev.clone()).s("ref", {
+		"motion": kind.motion.get_category(),
+		"action": kind.action.get_category(),
+		"reason": kind.reason.get_category()
+	}).s("progress", []).s("preview", prev.help).s("analyze", help)

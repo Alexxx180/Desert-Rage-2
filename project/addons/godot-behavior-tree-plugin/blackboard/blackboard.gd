@@ -7,18 +7,17 @@ class_name BehaviorBlackboard
 var _base_memory: Dictionary = {} # global info
 var _tree_memory: Dictionary = {} # node-tree info
 
-func set_value(key, value, tree: BehaviorTree = null, scope: BehaviorTreeBase = null) -> void:
+func s(key, value, tree: BehaviorTree = null, scope: BehaviorTreeBase = null) -> BehaviorBlackboard:
 	_get_memory(tree, scope)[key] = value
+	return self
 
-func get_value(key, tree: BehaviorTree = null, scope: BehaviorTreeBase = null) -> Variant:
+func g(key, tree: BehaviorTree = null, scope: BehaviorTreeBase = null) -> Variant:
 	var memory := _get_memory(tree, scope)
 	return memory[key] if memory.has(key) else null
 
-func add_value(key: String, value: int) -> void:
-	set_value(key, get_value(key) + value)
+func add(key: String, value: int) -> void: s(key, g(key) + value)
 
-func compare(key: Variant, value: Variant) -> bool:
-	return get_value(key) == value
+func compare(key: Variant, value: Variant) -> bool: return g(key) == value
 
 func _extract(memory: Dictionary, scope: BehaviorTreeBase) -> Dictionary:
 	return _get_node_memory(memory, scope) if scope else memory

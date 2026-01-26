@@ -1,7 +1,10 @@
 extends CanvasLayer
 
-@onready var topics: HBoxContainer = $detector/margin/topics
 @onready var detector: Panel = $detector
+@onready var work: Node = $work
+@onready var link: Node = $link
+
+@onready var topics: HBoxContainer = $detector/margin/topics
 @onready var music: HSlider = detector.get_node("margin/topics/content/options/game/experience/sound/content/options/music")
 
 func first_focus() -> void:

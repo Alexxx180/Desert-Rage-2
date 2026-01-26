@@ -1,7 +1,9 @@
 extends MarginContainer
 
-@onready var points: HBoxContainer = $damage/margin/points
-@onready var back: TextureRect = $back
+@onready var damage: PanelContainer = $damage
+@onready var status: HBoxContainer = $damage/status
+@onready var points: HBoxContainer = $damage/status/margin/points
+@onready var back: TextureRect = $damage/back
 
 const MAX: float = 0.95
 
