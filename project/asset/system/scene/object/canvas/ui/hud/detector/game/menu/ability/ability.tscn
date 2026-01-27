@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://6b0ydfrtbu38"]
+[gd_scene load_steps=20 format=3 uid="uid://6b0ydfrtbu38"]
 
 [ext_resource type="StyleBox" uid="uid://cvfnqancophme" path="res://asset/resource/ui/theme/style/solid-color-panel.tres" id="1_r0sy2"]
 [ext_resource type="Script" uid="uid://crvwhurmt6td2" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/topic/topic.gd" id="2_f8gj5"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://cq5jn6k2bwg5n" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/ability/controls/topic/status/status.tscn" id="4_l3qyh"]
 [ext_resource type="PackedScene" uid="uid://qlgo5b48kj7l" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/ability/controls/topic/status/description.tscn" id="5_l3qyh"]
 [ext_resource type="Script" uid="uid://c332axg0sxnof" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/topic/stack/skill/skill.gd" id="6_xukiq"]
+[ext_resource type="PackedScene" uid="uid://cg8aic01sf2yd" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/priorities/seals.tscn" id="8_4mbfr"]
 [ext_resource type="Script" uid="uid://xlwdatm64gh" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/topic/stack/skill/item/item.gd" id="8_xukiq"]
 [ext_resource type="Texture2D" uid="uid://6lt3fgbwoayr" path="res://asset/resource/media/image/actors/skills/ray/fire.svg" id="10_c5kkd"]
 [ext_resource type="Script" uid="uid://qh4kirhvva7r" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/topic/stack/skill/item/hero.gd" id="10_v78vk"]
@@ -78,7 +79,15 @@ size_flags_horizontal = 3
 theme_override_constants/separation = 15
 script = ExtResource("6_xukiq")
 
-[node name="perks" parent="scroll/margin/stack/skill" instance=ExtResource("3_h2uo5")]
+[node name="stack" type="VBoxContainer" parent="scroll/margin/stack/skill"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="seals" parent="scroll/margin/stack/skill/stack" instance=ExtResource("8_4mbfr")]
+visible = false
+layout_mode = 2
+
+[node name="perks" parent="scroll/margin/stack/skill/stack" instance=ExtResource("3_h2uo5")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
@@ -214,6 +223,7 @@ text = "Сила, дарованная людям с незапамятных в
 autowrap_mode = 2
 
 [node name="whip" type="VBoxContainer" parent="scroll/margin/stack/skill/item/ray/title"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 10
@@ -618,3 +628,38 @@ custom_minimum_size = Vector2(26, 26)
 layout_mode = 2
 texture = ExtResource("15_v78vk")
 expand_mode = 1
+
+[node name="title" type="VBoxContainer" parent="scroll/margin/stack/skill"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="scroll/margin/stack/skill/title"]
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_font_sizes/font_size = 24
+text = "Способности"
+
+[node name="effect" type="RichTextLabel" parent="scroll/margin/stack/skill/title"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.25
+theme = ExtResource("2_r0sy2")
+theme_override_constants/paragraph_separation = 8
+bbcode_enabled = true
+text = "[ul]Здесь описаны умения и способности - приёмы ваших героев. Описание способности включает в себя комбо, стоимость, площадь и эффект
+Слоты - умения, входящие в комбо
+Эффект - полезное действие способности
+Комбо или комбинация - набор слотов, используемых для получения эффекта
+Стоимость - общее количество необходимого ресурса для действия способности
+Площадь - сколько противников может быть затронуто способностью
+I - одна сущность или колонна сущностей стоящих друг за другом
+.I. - малая группы сущностей, импульс по небольшой площади
+..I.. - большая группа сущностей, импульс по большой площади
+III - малая группы сущностей, эффект по небольшой площади
+IIIII - большая группа сущностей, эффект по большой площади или по всем сущностям на местности
+[p]В режиме наведения вы можете выбрать один из предоставленных приемов. Затем, вы можете выбрать противников
+ЛКМ по способности - ЛКМ по противнику - выполнение всей комбинации
+ПКМ по способности - Наведение на противника - любое из умений %s / %s / %s / %s - выполнение слота комбинации. Вам необходимо выбрать столько целей, сколько указано слотов в способности[/p]"
+fit_content = true
+autowrap_mode = 2

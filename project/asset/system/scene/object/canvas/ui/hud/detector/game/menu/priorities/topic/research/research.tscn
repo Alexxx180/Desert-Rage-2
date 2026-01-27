@@ -16,6 +16,10 @@
 content_margin_top = 7.0
 
 [node name="research" type="VBoxContainer"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 283.0
+grow_horizontal = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.25
 
@@ -57,6 +61,7 @@ visible = false
 layout_mode = 2
 
 [node name="books" type="PanelContainer" parent="content"]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = ExtResource("6_uhat8")
@@ -70,7 +75,36 @@ theme_override_constants/separation = 5
 layout_mode = 2
 size_flags_vertical = 8
 
+[node name="book2" parent="content/books/books" instance=ExtResource("5_chdrm")]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="book3" parent="content/books/books" instance=ExtResource("5_chdrm")]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="book4" parent="content/books/books" instance=ExtResource("5_chdrm")]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="book5" parent="content/books/books" instance=ExtResource("5_chdrm")]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="book6" parent="content/books/books" instance=ExtResource("5_chdrm")]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="book7" parent="content/books/books" instance=ExtResource("5_chdrm")]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="book8" parent="content/books/books" instance=ExtResource("5_chdrm")]
+layout_mode = 2
+size_flags_vertical = 8
+
 [node name="bestiary" type="PanelContainer" parent="content"]
+visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_jb804")
 
@@ -83,8 +117,8 @@ theme_override_constants/v_separation = 7
 custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
 size_flags_horizontal = 0
-theme_override_styles/hover = ExtResource("32_y6s2t")
 theme_override_styles/normal = ExtResource("33_yw1xc")
+theme_override_styles/hover = ExtResource("32_y6s2t")
 
 [node name="margin" type="MarginContainer" parent="content/bestiary/container/item"]
 layout_mode = 1
@@ -183,3 +217,33 @@ size_flags_vertical = 0
 theme_override_fonts/font = ExtResource("5_vlu61")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_toq2e")
 text = "🔥"
+
+[node name="title" type="VBoxContainer" parent="content"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="content/title"]
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_font_sizes/font_size = 24
+text = "Приоритеты"
+
+[node name="effect" type="RichTextLabel" parent="content/title"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.25
+theme = ExtResource("2_5tx11")
+theme_override_constants/paragraph_separation = 8
+bbcode_enabled = true
+text = "[ul]Здесь находятся приоритеты героев.
+В ходе сражений с противниками вы получаете Очки Попыток или опыт. Если вы получаете достаточное количество, то выбранный вами приоритет увеличивается на 1.
+Вы можете выбрать любой из трёх для каждого героя в любой момент времени. Приоритеты не могут быть выше определённого уровня. Как только вы достигаете максимума, ваш герой переходит на новый приоритет.
+При повышении вы получаете прирост к определённым показателям, облегчающим ваше положение в следующих битвах. Вместе с этим согласно вашим приоритетам вы можете получить уникальный эффект.
+Уникальные эффекты героев делятся на возможности и способности.
+Возможность - приводится в действие по определённому событию или закреплён за персонажем насовсем. Например, дополнительный опыт при допытывании.
+Способность - приводится в действие во время выполнения комбо - нажатия кнопок, отвечающих за действие, движение героев и их умений.
+Подбирайте их с умом. Наличие определённых возможностей и способностей помогают в конкретных ситуациях, а также облегчают ваше прохождение.
+Некоторые способности могут быть приобретены только после чтения книг нужного типа. Ищите книги, чтобы раздвинуть свои возможности.[/ul]"
+fit_content = true
+autowrap_mode = 2

@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://c3dwvtm5ivwwp"]
+[gd_scene load_steps=11 format=3 uid="uid://c3dwvtm5ivwwp"]
 
 [ext_resource type="StyleBox" uid="uid://cvfnqancophme" path="res://asset/resource/ui/theme/style/solid-color-panel.tres" id="1_rxilr"]
 [ext_resource type="Script" uid="uid://dpfrxgilymrcv" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/topic/topic.gd" id="2_aar2m"]
 [ext_resource type="Script" uid="uid://b3w8ueb7rmpu" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/topic/stack/stack.gd" id="3_dfl0a"]
 [ext_resource type="PackedScene" uid="uid://cddw0qxlba87p" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/items/bag.tscn" id="4_ka18d"]
 [ext_resource type="PackedScene" uid="uid://cd6olkpfan76j" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/stats/topic/stats/stats.tscn" id="5_dfl0a"]
+[ext_resource type="PackedScene" uid="uid://dfygwaahhajot" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/stats/topic/chats/tabs.tscn" id="7_77mna"]
 [ext_resource type="PackedScene" uid="uid://bi2quqenqmjhk" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/stats/topic/chats/chats.tscn" id="9_hi8jx"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qw6gd"]
@@ -37,27 +38,60 @@ script = ExtResource("2_aar2m")
 layout_mode = 2
 size_flags_horizontal = 3
 theme = SubResource("Theme_qw6gd")
+vertical_scroll_mode = 0
 
-[node name="margin" type="MarginContainer" parent="scroll"]
+[node name="control" type="Control" parent="scroll"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/margin_left = 10
+
+[node name="scroll" type="ScrollContainer" parent="scroll/control"]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="margin" type="MarginContainer" parent="scroll/control/scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 15
 theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
+theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 10
 
-[node name="stack" type="VBoxContainer" parent="scroll/margin"]
+[node name="stack" type="VBoxContainer" parent="scroll/control/scroll/margin"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 20
 script = ExtResource("3_dfl0a")
 
-[node name="bag" parent="scroll/margin/stack" instance=ExtResource("4_ka18d")]
+[node name="bag" parent="scroll/control/scroll/margin/stack" instance=ExtResource("4_ka18d")]
 layout_mode = 2
 
-[node name="stats" parent="scroll/margin/stack" instance=ExtResource("5_dfl0a")]
+[node name="stats" parent="scroll/control/scroll/margin/stack" instance=ExtResource("5_dfl0a")]
 layout_mode = 2
 
-[node name="chats" parent="scroll/margin/stack" instance=ExtResource("9_hi8jx")]
+[node name="chats" parent="scroll/control/scroll/margin/stack" instance=ExtResource("9_hi8jx")]
 layout_mode = 2
+
+[node name="margin" type="MarginContainer" parent="scroll/control"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -30.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="tabs" parent="scroll/control/margin" instance=ExtResource("7_77mna")]
+layout_mode = 2
+size_flags_vertical = 1

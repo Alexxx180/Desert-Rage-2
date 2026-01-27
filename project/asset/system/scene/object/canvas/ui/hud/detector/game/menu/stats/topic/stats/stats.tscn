@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cd6olkpfan76j"]
+[gd_scene load_steps=18 format=3 uid="uid://cd6olkpfan76j"]
 
 [ext_resource type="Script" uid="uid://dgr6idneegayx" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/topic/stack/stats/equipment/equip.gd" id="1_ux7gg"]
 [ext_resource type="Script" uid="uid://b7ssehgjd1hps" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/topic/stack/stats/title.gd" id="2_483bj"]
@@ -31,6 +31,12 @@ bg_color = Color(0, 0, 0, 0.890196)
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6lio4"]
 content_margin_right = 1.0
 content_margin_bottom = 3.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ycc3w"]
+content_margin_left = 5.0
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_ycc3w"]
+color = Color(0.11764706, 0.11764706, 0.22745098, 1)
 
 [node name="equip" type="VBoxContainer"]
 anchors_preset = 10
@@ -168,6 +174,19 @@ theme_override_font_sizes/font_size = 16
 theme_override_styles/normal = SubResource("StyleBoxEmpty_6lio4")
 text = "🎒"
 
+[node name="able" type="RichTextLabel" parent="stats/value/bag"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("4_bt6sh")
+theme_override_constants/paragraph_separation = -3
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ycc3w")
+bbcode_enabled = true
+text = " [b][i]▒[/i][/b] лёгкий огнестрел
+[b][i]🗡[/i][/b] кинжалы, кастеты"
+fit_content = true
+autowrap_mode = 2
+
 [node name="description" type="VBoxContainer" parent="stats"]
 custom_minimum_size = Vector2(300, 30)
 layout_mode = 2
@@ -212,3 +231,7 @@ size_flags_stretch_ratio = 2.0
 theme = ExtResource("4_bt6sh")
 text = "Пропускает урон от ауры. Определяет Очки Умений. Влияет на урон от некоторого дальнебойного оружия."
 autowrap_mode = 2
+
+[node name="separator" type="HSeparator" parent="."]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_ycc3w")

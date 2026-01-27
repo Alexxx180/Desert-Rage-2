@@ -3,7 +3,12 @@ extends PanelContainer
 @onready var chat: VBoxContainer = $margin/chat
 @onready var levels: PackedScene = preload("res://asset/system/scene/object/canvas/ui/hud/detector/game/preview/log/levels/levels.tscn")
 @onready var items: PackedScene = preload("res://asset/system/scene/object/canvas/ui/hud/detector/game/preview/log/item.tscn")
-@onready var scroll: ScrollContainer = get_node("../..")
+@onready var scroll: ScrollContainer
+
+func _ready() -> void:
+	var s = get_node("../..")
+	if s is ScrollContainer:
+		scroll = s
 
 func add_childs(stack: VBoxContainer, scene: PackedScene, feedback: Callable) -> PanelContainer:
 	var node: PanelContainer = scene.instantiate()

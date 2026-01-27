@@ -1,0 +1,142 @@
+[gd_scene load_steps=6 format=3 uid="uid://dhqu2qkapwck2"]
+
+[ext_resource type="Script" uid="uid://basexjwfooy37" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/hints/preview/chat/log/log.gd" id="1_uwuqe"]
+[ext_resource type="FontFile" uid="uid://byixp8w8hrpot" path="res://asset/resource/media/data/font/ComicHelvetic_Light.otf" id="2_8c5hy"]
+[ext_resource type="PackedScene" uid="uid://dhcteeknvvvj8" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/preview/log/item.tscn" id="3_wecsh"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tysmj"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yuxct"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 2
+border_width_right = 2
+border_color = Color(0.119426, 0.119504, 0.22556, 1)
+
+[node name="log" type="PanelContainer"]
+theme_override_styles/panel = SubResource("StyleBoxEmpty_tysmj")
+script = ExtResource("1_uwuqe")
+
+[node name="margin" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="chat" type="VBoxContainer" parent="margin"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="content7" type="PanelContainer" parent="margin/chat"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_yuxct")
+
+[node name="margin" type="MarginContainer" parent="margin/chat/content7"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 3
+
+[node name="chat" type="Label" parent="margin/chat/content7/margin"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.627451, 0.627451, 0.627451, 1)
+theme_override_constants/line_spacing = -2
+theme_override_fonts/font = ExtResource("2_8c5hy")
+theme_override_font_sizes/font_size = 18
+text = "В сундуке найдена пустая банка"
+autowrap_mode = 2
+
+[node name="content6" type="PanelContainer" parent="margin/chat"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_yuxct")
+
+[node name="margin" type="MarginContainer" parent="margin/chat/content6"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 3
+
+[node name="chat" type="Label" parent="margin/chat/content6/margin"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.627451, 0.627451, 0.627451, 1)
+theme_override_constants/line_spacing = -2
+theme_override_fonts/font = ExtResource("2_8c5hy")
+theme_override_font_sizes/font_size = 18
+text = "Получено 213 очков опыта"
+autowrap_mode = 2
+
+[node name="item_found" parent="margin/chat" instance=ExtResource("3_wecsh")]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_yuxct")
+
+[node name="ko-ray" type="PanelContainer" parent="margin/chat"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_yuxct")
+
+[node name="margin" type="MarginContainer" parent="margin/chat/ko-ray"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 3
+
+[node name="chat" type="Label" parent="margin/chat/ko-ray/margin"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.627451, 0.627451, 0.627451, 1)
+theme_override_constants/line_spacing = -2
+theme_override_fonts/font = ExtResource("2_8c5hy")
+theme_override_font_sizes/font_size = 18
+text = "Рей падает без сознания"
+autowrap_mode = 2
+
+[node name="ko-rock" type="PanelContainer" parent="margin/chat"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_yuxct")
+
+[node name="margin" type="MarginContainer" parent="margin/chat/ko-rock"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 3
+
+[node name="chat" type="Label" parent="margin/chat/ko-rock/margin"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.627451, 0.627451, 0.627451, 1)
+theme_override_constants/line_spacing = -2
+theme_override_fonts/font = ExtResource("2_8c5hy")
+theme_override_font_sizes/font_size = 18
+text = "Рок падает без сознания"
+autowrap_mode = 2
+
+[node name="game-over" type="PanelContainer" parent="margin/chat"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_yuxct")
+
+[node name="margin" type="MarginContainer" parent="margin/chat/game-over"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 3
+
+[node name="chat" type="Label" parent="margin/chat/game-over/margin"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.627451, 0.627451, 0.627451, 1)
+theme_override_constants/line_spacing = -2
+theme_override_fonts/font = ExtResource("2_8c5hy")
+theme_override_font_sizes/font_size = 18
+text = "Вас унесло раскаленными песками...."
+autowrap_mode = 2

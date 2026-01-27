@@ -1,9 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://dfygwaahhajot"]
+[gd_scene load_steps=13 format=3 uid="uid://dfygwaahhajot"]
 
 [ext_resource type="FontFile" uid="uid://b37js8y80ak1k" path="res://asset/resource/media/data/font/NotoColorEmoji-Regular.ttf" id="1_uvwqk"]
-[ext_resource type="FontFile" uid="uid://b2wbdbnkxcqv1" path="res://asset/resource/media/data/font/NotoEmoji-VariableFont_wght.ttf" id="2_aidb4"]
-[ext_resource type="Script" uid="uid://cmeppk3ealnv8" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/hints/preview/toggle.gd" id="3_s12vq"]
-[ext_resource type="FontFile" uid="uid://cwksbiskkcf5d" path="res://asset/resource/media/data/font/NotoSansMath-Regular.ttf" id="4_aidb4"]
+[ext_resource type="Script" uid="uid://ddnlfc3tie4gs" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/topic/description.gd" id="5_n5hbl"]
+[ext_resource type="Theme" uid="uid://dfyi7rrcrweqx" path="res://asset/resource/ui/theme/patterns/template/menu/settings/settings.tres" id="6_5hlrn"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e06ya"]
 content_margin_left = 7.0
@@ -15,16 +14,42 @@ content_margin_left = 7.0
 content_margin_top = 6.0
 bg_color = Color(0.0196078, 0.0196078, 0.0588235, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_87wqk"]
-content_margin_left = 4.0
-content_margin_top = 0.0
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aidb4"]
+content_margin_left = 7.0
+content_margin_top = 6.0
 bg_color = Color(0.0196078, 0.0196078, 0.0588235, 1)
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vtj8m"]
-content_margin_left = 4.0
-content_margin_bottom = 2.0
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s12vq"]
+content_margin_left = 7.0
+content_margin_top = 0.0
+bg_color = Color(0.019607844, 0.019607844, 0.05882353, 0.7254902)
+
+[sub_resource type="Gradient" id="Gradient_5pr1g"]
+offsets = PackedFloat32Array(0, 0.996139)
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_21ixm"]
+gradient = SubResource("Gradient_5pr1g")
+fill_from = Vector2(0, 0.47863248)
+fill_to = Vector2(0.48290598, 0.47435898)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_o0cao"]
+texture = SubResource("GradientTexture2D_21ixm")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6d5kl"]
+content_margin_left = 15.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uvwqk"]
+content_margin_left = 5.0
+content_margin_top = 1.0
+content_margin_bottom = 3.0
+bg_color = Color(0.019607844, 0.019607844, 0.05882353, 0.7254902)
 
 [node name="tabs" type="HBoxContainer"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 30.0
+grow_horizontal = 2
 size_flags_vertical = 8
 
 [node name="game" type="Button" parent="."]
@@ -61,55 +86,45 @@ toggle_mode = true
 text = "🧪"
 alignment = 0
 
-[node name="notes" type="Button" parent="."]
+[node name="learn" type="Button" parent="."]
+visible = false
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_uvwqk")
-theme_override_font_sizes/font_size = 15
-theme_override_styles/normal = SubResource("StyleBoxFlat_e06ya")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_c036o")
-toggle_mode = true
-text = "📜"
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_aidb4")
+text = "🔬"
 alignment = 0
 
-[node name="toggle" type="Button" parent="."]
+[node name="help" type="Button" parent="."]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_aidb4")
-theme_override_font_sizes/font_size = 18
-theme_override_styles/normal = SubResource("StyleBoxFlat_87wqk")
+size_flags_horizontal = 8
+theme_override_fonts/font = ExtResource("1_uvwqk")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_s12vq")
+text = "❔"
 alignment = 0
-script = ExtResource("3_s12vq")
-path = "../../../../../../../inventory/ability/controls/hints/space/preview/chats"
 
-[node name="shown" type="Label" parent="toggle"]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -11.5
-offset_top = -11.0
-offset_right = 11.5
-offset_bottom = 11.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(1.00295, 0.994388)
-theme_override_fonts/font = ExtResource("2_aidb4")
+[node name="description" type="PanelContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxTexture_o0cao")
+script = ExtResource("5_n5hbl")
+
+[node name="caption" type="Label" parent="description"]
+layout_mode = 2
+theme = ExtResource("6_5hlrn")
 theme_override_font_sizes/font_size = 18
-text = "👁"
+theme_override_styles/normal = SubResource("StyleBoxEmpty_6d5kl")
+text = "Help"
 
-[node name="hidden" type="Label" parent="toggle"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(1.00295, 0.994388)
-theme_override_fonts/font = ExtResource("4_aidb4")
-theme_override_font_sizes/font_size = 24
-theme_override_styles/normal = SubResource("StyleBoxEmpty_vtj8m")
-text = "⌣"
+[node name="pin" type="Button" parent="."]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_fonts/font = ExtResource("1_uvwqk")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_uvwqk")
+text = "📌"
+alignment = 0
