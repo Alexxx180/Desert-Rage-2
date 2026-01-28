@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://rwvq7uy5mefo"]
+[gd_scene load_steps=9 format=3 uid="uid://rwvq7uy5mefo"]
 
 [ext_resource type="StyleBox" uid="uid://chr58r7ok2alt" path="res://asset/resource/ui/theme/style/panel/accent.tres" id="2_be1fw"]
 [ext_resource type="Script" uid="uid://bcf6bwk5uhca0" path="res://asset/system/script/object/image/view/ui/menu/information/showcase/margin.gd" id="3_2x602"]
@@ -6,6 +6,7 @@
 [ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://asset/resource/ui/theme/patterns/template/menu/settings/topic/footer.tres" id="4_7cggv"]
 [ext_resource type="PackedScene" uid="uid://cpm8sffxjxe6u" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/priorities/topic/research/content/help/cards/showcase/title.tscn" id="4_eaaxx"]
 [ext_resource type="Theme" uid="uid://dfyi7rrcrweqx" path="res://asset/resource/ui/theme/patterns/template/menu/settings/settings.tres" id="5_8a321"]
+[ext_resource type="Script" uid="uid://c8pdd5t0v7dsm" path="res://asset/system/script/object/image/view/ui/menu/information/showcase/unfocus.gd" id="7_7r4i6"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_eaaxx"]
 
@@ -41,6 +42,7 @@ layout_mode = 2
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 size_flags_vertical = 3
+focus_mode = 0
 mouse_filter = 2
 theme = ExtResource("4_7cggv")
 bbcode_enabled = true
@@ -51,5 +53,10 @@ vertical_alignment = 1
 
 [node name="showcase" type="Button" parent="."]
 layout_mode = 2
+focus_mode = 1
 theme = ExtResource("5_8a321")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_eaaxx")
+
+[node name="unfocus" type="Control" parent="showcase"]
+anchors_preset = 0
+script = ExtResource("7_7r4i6")

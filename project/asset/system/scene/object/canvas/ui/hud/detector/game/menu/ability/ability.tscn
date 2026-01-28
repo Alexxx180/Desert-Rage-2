@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://6b0ydfrtbu38"]
+[gd_scene load_steps=22 format=3 uid="uid://6b0ydfrtbu38"]
 
 [ext_resource type="StyleBox" uid="uid://cvfnqancophme" path="res://asset/resource/ui/theme/style/solid-color-panel.tres" id="1_r0sy2"]
 [ext_resource type="Script" uid="uid://crvwhurmt6td2" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/topic/topic.gd" id="2_f8gj5"]
@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://bhb75html3edk" path="res://asset/resource/media/image/actors/skills/ray/whip.svg" id="11_xukiq"]
 [ext_resource type="Texture2D" uid="uid://cu6dcgjq8svhw" path="res://asset/resource/media/image/actors/skills/rock/water.svg" id="14_ddn1q"]
 [ext_resource type="Texture2D" uid="uid://ce7xyvu3k00hi" path="res://asset/resource/media/image/actors/skills/rock/spark.svg" id="15_v78vk"]
+[ext_resource type="PackedScene" uid="uid://c6gpqe0httyfi" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/ability/title.tscn" id="18_5khej"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l3qyh"]
 bg_color = Color(0, 0, 0, 1)
@@ -24,6 +25,9 @@ expand_margin_left = 12.0
 expand_margin_right = 12.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5p2ax"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5khej"]
+content_margin_bottom = 6.0
 
 [node name="panel" type="PanelContainer"]
 anchors_preset = 15
@@ -126,19 +130,12 @@ size_flags_horizontal = 0
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxEmpty_5p2ax")
 
-[node name="margin" type="MarginContainer" parent="scroll/margin/stack/skill/item/ray/title/fire/tags/main/preview"]
-layout_mode = 2
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 2
-
-[node name="icon" type="Label" parent="scroll/margin/stack/skill/item/ray/title/fire/tags/main/preview/margin"]
+[node name="icon" type="Label" parent="scroll/margin/stack/skill/item/ray/title/fire/tags/main/preview"]
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 8
 theme_override_fonts/font = ExtResource("3_5obb3")
 theme_override_font_sizes/font_size = 28
+theme_override_styles/normal = SubResource("StyleBoxEmpty_5khej")
 text = "🔥"
 
 [node name="caption" type="Label" parent="scroll/margin/stack/skill/item/ray/title/fire/tags/main"]
@@ -629,37 +626,5 @@ layout_mode = 2
 texture = ExtResource("15_v78vk")
 expand_mode = 1
 
-[node name="title" type="VBoxContainer" parent="scroll/margin/stack/skill"]
+[node name="title" parent="scroll/margin/stack/skill" instance=ExtResource("18_5khej")]
 layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="caption" type="Label" parent="scroll/margin/stack/skill/title"]
-layout_mode = 2
-size_flags_horizontal = 2
-theme_override_font_sizes/font_size = 24
-text = "Способности"
-
-[node name="effect" type="RichTextLabel" parent="scroll/margin/stack/skill/title"]
-custom_minimum_size = Vector2(50, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.25
-theme = ExtResource("2_r0sy2")
-theme_override_constants/paragraph_separation = 8
-bbcode_enabled = true
-text = "[ul]Здесь описаны умения и способности - приёмы ваших героев. Описание способности включает в себя комбо, стоимость, площадь и эффект
-Слоты - умения, входящие в комбо
-Эффект - полезное действие способности
-Комбо или комбинация - набор слотов, используемых для получения эффекта
-Стоимость - общее количество необходимого ресурса для действия способности
-Площадь - сколько противников может быть затронуто способностью
-I - одна сущность или колонна сущностей стоящих друг за другом
-.I. - малая группы сущностей, импульс по небольшой площади
-..I.. - большая группа сущностей, импульс по большой площади
-III - малая группы сущностей, эффект по небольшой площади
-IIIII - большая группа сущностей, эффект по большой площади или по всем сущностям на местности
-[p]В режиме наведения вы можете выбрать один из предоставленных приемов. Затем, вы можете выбрать противников
-ЛКМ по способности - ЛКМ по противнику - выполнение всей комбинации
-ПКМ по способности - Наведение на противника - любое из умений %s / %s / %s / %s - выполнение слота комбинации. Вам необходимо выбрать столько целей, сколько указано слотов в способности[/p]"
-fit_content = true
-autowrap_mode = 2

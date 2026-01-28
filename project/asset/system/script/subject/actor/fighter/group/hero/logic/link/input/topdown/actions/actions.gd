@@ -9,4 +9,4 @@ func controls(hero: CharacterBody2D, topdown: Node) -> void:
 	for skill in get_children(): skill.controls(meta)
 
 	for key in ["tools", "combo", "ui"]:
-		meta.board.set_value(key, meta[key]); print("hero: ", hero)
+		meta.board.s(key, meta[key]); print("hero: ", hero)

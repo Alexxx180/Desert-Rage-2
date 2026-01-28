@@ -42,9 +42,8 @@ enum ACT {
 	GROUP_DEPLOY, QUICK_HEAL, QUICK_REFRESH, MAP,
 	SAVES, SETTINGS, MAIN_MENU, OST_SYSTEM,
 	CHECKPOINT, FAST_SAVE, FAST_LOAD, FULLSCREEN,
-	PHOTOMODE, AIMING, PANEL_LEFT_SHOW, PANEL_RIGHT_SHOW,
-	PANEL_LEFT_TOGGLE, PANEL_RIGHT_TOGGLE, INVENTORY_TOGGLE,
-	ABILITY_TOGGLE, EQUIPMENT_TOGGLE, PRIORITIES_TOGGLE,
+	PHOTOMODE, AIMING, PANEL_LEFT_TOGGLE, PANEL_RIGHT_TOGGLE,
+	INVENTORY_TOGGLE, ABILITY_TOGGLE, EQUIPMENT_TOGGLE, PRIORITIES_TOGGLE,
 	INVENTORY_SHOW, ABILITY_SHOW, EQUIPMENT_SHOW, PRIORITIES_SHOW,
 	INVENTORY_HIDE, ABILITY_HIDE, EQUIPMENT_HIDE, PRIORITIES_HIDE,
 	UI_LMB
@@ -53,7 +52,12 @@ enum ACT {
 const _act: Array[String] = [
 	"movement", "left", "forward", "right", "backward", "action", "run", "skill_one",
 	"skill_two", "fire", "view_left", "view_right", "inventory_up", "inventory_down",
-	"select", "deploy"
+	"select", "deploy", "quick_heal", "quick_refresh", "map", "saves", "settings",
+	"main_menu", "ost_system", "checkpoint", "fast_save", "fast_load", "fullscreen",
+	"photomode", "aiming", "panel_left_toggle", "panel_right_toggle",
+	"inventory_toggle", "ability_toggle", "equipment_toggle", "priorities_toggle",
+	"inventory_show", "ability_show", "equipment_show", "priorities_show",
+	"inventory_hide", "ability_hide", "equipment_hide", "priorities_hide", "ui_lmb"
 ]
 
 func m(type: String, value: Array) -> ActionsControl:

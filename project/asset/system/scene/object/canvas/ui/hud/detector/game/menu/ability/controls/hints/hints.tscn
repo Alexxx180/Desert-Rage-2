@@ -1,8 +1,9 @@
-[gd_scene load_steps=23 format=3 uid="uid://dbaauq0nlgduw"]
+[gd_scene load_steps=24 format=3 uid="uid://dbaauq0nlgduw"]
 
-[ext_resource type="PackedScene" uid="uid://br061ue566x82" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/gameplay/skills.tscn" id="1_1gnfy"]
 [ext_resource type="Script" uid="uid://d1bkj71odt1bp" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/hints/preview/preview.gd" id="2_ytxpc"]
+[ext_resource type="Script" uid="uid://b740p71awf41" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/hints/preview/scroll/list.gd" id="3_6g6fj"]
 [ext_resource type="PackedScene" uid="uid://b3kq5rgblhq6b" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/gameplay/chats/chat.tscn" id="4_qhrr6"]
+[ext_resource type="Script" uid="uid://cb5kv63wqgrfj" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/hints/preview/scroll/temp.gd" id="4_rtvwv"]
 [ext_resource type="PackedScene" uid="uid://dhqu2qkapwck2" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/gameplay/chats/log.tscn" id="5_6g6fj"]
 [ext_resource type="FontFile" uid="uid://b37js8y80ak1k" path="res://asset/resource/media/data/font/NotoColorEmoji-Regular.ttf" id="5_mhiad"]
 [ext_resource type="Script" uid="uid://drcochfogfne4" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/hints/preview/scroll/scroll.gd" id="8_cyanb"]
@@ -94,29 +95,6 @@ size_flags_vertical = 3
 size_flags_stretch_ratio = 0.7
 mouse_filter = 2
 
-[node name="scroll" type="ScrollContainer" parent="space"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-mouse_filter = 2
-follow_focus = true
-
-[node name="stack" type="VBoxContainer" parent="space/scroll"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 10
-
-[node name="skills" parent="space/scroll/stack" instance=ExtResource("1_1gnfy")]
-visible = false
-layout_mode = 2
-size_flags_vertical = 8
-mouse_filter = 2
-
 [node name="preview" type="HBoxContainer" parent="space"]
 layout_mode = 1
 anchors_preset = 15
@@ -142,21 +120,24 @@ script = ExtResource("8_cyanb")
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 10
+script = ExtResource("3_6g6fj")
 
 [node name="temp" type="VBoxContainer" parent="space/preview/chats/list"]
 layout_mode = 2
 theme_override_constants/separation = 0
+script = ExtResource("4_rtvwv")
 
 [node name="chat" type="VBoxContainer" parent="space/preview/chats/list/temp"]
 layout_mode = 2
 
-[node name="log" type="VBoxContainer" parent="space/preview/chats/list/temp"]
+[node name="logs" type="VBoxContainer" parent="space/preview/chats/list/temp"]
 layout_mode = 2
 
 [node name="chat" parent="space/preview/chats/list" instance=ExtResource("4_qhrr6")]
+visible = false
 layout_mode = 2
 
-[node name="log" parent="space/preview/chats/list" instance=ExtResource("5_6g6fj")]
+[node name="logs" parent="space/preview/chats/list" instance=ExtResource("5_6g6fj")]
 visible = false
 layout_mode = 2
 
@@ -167,7 +148,9 @@ size_flags_stretch_ratio = 0.5
 
 [node name="help" type="ScrollContainer" parent="space/preview"]
 layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 3
+size_flags_stretch_ratio = 0.25
 horizontal_scroll_mode = 0
 script = ExtResource("16_2o5ct")
 
@@ -178,7 +161,6 @@ size_flags_vertical = 10
 theme = SubResource("Theme_tysmj")
 
 [node name="hints" parent="space/preview/help/content" instance=ExtResource("17_o45p0")]
-visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3

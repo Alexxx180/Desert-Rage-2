@@ -1,18 +1,14 @@
-[gd_scene load_steps=15 format=3 uid="uid://b01p37el432af"]
+[gd_scene load_steps=11 format=3 uid="uid://b01p37el432af"]
 
 [ext_resource type="Theme" uid="uid://ctsb6uh5t0n1l" path="res://asset/resource/ui/theme/default.tres" id="1_lqfh0"]
 [ext_resource type="Script" uid="uid://d1gehesbgg5ia" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/hints/preview/hints/hints.gd" id="2_wh6yj"]
 [ext_resource type="PackedScene" uid="uid://mdjk60h84tvs" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/preview/hints/category/motion.tscn" id="3_g22ml"]
 [ext_resource type="Script" uid="uid://cm56atf81fxki" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/hints/preview/hints/category/kind.gd" id="3_t1jk8"]
-[ext_resource type="Script" uid="uid://cmm8nk2huc4mb" path="res://addons/godot-behavior-tree-plugin/tree/tree.gd" id="4_5bxjs"]
 [ext_resource type="PackedScene" uid="uid://cimkmbth3t0at" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/preview/hints/category/action.tscn" id="5_kvclq"]
-[ext_resource type="Script" uid="uid://xyxwk1uhmmqa" path="res://addons/godot-behavior-tree-plugin/sequence/sequence.gd" id="5_ox1kg"]
-[ext_resource type="Script" uid="uid://b2eukqcbuq556" path="res://addons/godot-behavior-tree-plugin/selector/selector.gd" id="6_3aqll"]
 [ext_resource type="PackedScene" uid="uid://pcadvttb4v3o" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/preview/hints/category/reason.tscn" id="6_7ljf1"]
-[ext_resource type="Script" uid="uid://ckdbiojn5lq8d" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/hints/preview/hints/behavior/hints/hide.gd" id="6_d0k20"]
-[ext_resource type="Script" uid="uid://b6v5dx3kh5wmo" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/hints/preview/hints/behavior/hints/show.gd" id="8_kc64f"]
-[ext_resource type="Script" uid="uid://derik0uw4vkav" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/hints/preview/hints/behavior/analyze/analyze.gd" id="9_2pumd"]
-[ext_resource type="Script" uid="uid://dtbumxi60jttw" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/hints/preview/hints/behavior/analyze/progress.gd" id="9_pvn5o"]
+[ext_resource type="PackedScene" uid="uid://75o02vpk30s8" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/preview/hints/category/fight.tscn" id="7_6u77t"]
+[ext_resource type="PackedScene" uid="uid://b7woh07gu383w" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/preview/hints/category/common.tscn" id="8_mwh4q"]
+[ext_resource type="PackedScene" uid="uid://cced4fdp88hwk" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/preview/hints/behavior/behavior.tscn" id="9_d1vfy"]
 [ext_resource type="Script" uid="uid://b1puby0o7ny8l" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/hints/preview/hints/behavior/blackboard.gd" id="13_2a2v1"]
 
 [node name="hints" type="VBoxContainer"]
@@ -36,78 +32,27 @@ size_flags_vertical = 3
 [node name="category" type="VBoxContainer" parent="."]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 10
+size_flags_vertical = 8
 theme_override_constants/separation = 0
 script = ExtResource("3_t1jk8")
 
 [node name="motion" parent="category" instance=ExtResource("3_g22ml")]
 layout_mode = 2
-size_flags_vertical = 3
 alignment = 2
 
 [node name="action" parent="category" instance=ExtResource("5_kvclq")]
 layout_mode = 2
-size_flags_vertical = 3
 
 [node name="reason" parent="category" instance=ExtResource("6_7ljf1")]
 layout_mode = 2
 
-[node name="behavior" type="Node" parent="."]
-script = ExtResource("4_5bxjs")
+[node name="fight" parent="category" instance=ExtResource("7_6u77t")]
+layout_mode = 2
 
-[node name="hints" type="Node" parent="behavior"]
-script = ExtResource("6_3aqll")
+[node name="common" parent="category" instance=ExtResource("8_mwh4q")]
+layout_mode = 2
 
-[node name="progress" type="Node" parent="behavior/hints"]
-script = ExtResource("9_pvn5o")
-
-[node name="hide" type="Node" parent="behavior/hints"]
-script = ExtResource("6_d0k20")
-
-[node name="show" type="Node" parent="behavior/hints"]
-script = ExtResource("5_ox1kg")
-
-[node name="analyze" type="Node" parent="behavior/hints/show"]
-script = ExtResource("9_2pumd")
-
-[node name="motion" type="Node" parent="behavior/hints/show"]
-script = ExtResource("5_ox1kg")
-
-[node name="move" type="Node" parent="behavior/hints/show/motion"]
-script = ExtResource("8_kc64f")
-
-[node name="jump" type="Node" parent="behavior/hints/show/motion"]
-script = ExtResource("8_kc64f")
-
-[node name="push" type="Node" parent="behavior/hints/show/motion"]
-script = ExtResource("8_kc64f")
-
-[node name="land" type="Node" parent="behavior/hints/show/motion"]
-script = ExtResource("8_kc64f")
-
-[node name="action" type="Node" parent="behavior/hints/show"]
-script = ExtResource("5_ox1kg")
-
-[node name="act" type="Node" parent="behavior/hints/show/action"]
-script = ExtResource("8_kc64f")
-
-[node name="fire" type="Node" parent="behavior/hints/show/action"]
-script = ExtResource("8_kc64f")
-
-[node name="water" type="Node" parent="behavior/hints/show/action"]
-script = ExtResource("8_kc64f")
-
-[node name="spark" type="Node" parent="behavior/hints/show/action"]
-script = ExtResource("8_kc64f")
-
-[node name="reason" type="Node" parent="behavior/hints/show"]
-script = ExtResource("5_ox1kg")
-
-[node name="team" type="Node" parent="behavior/hints/show/reason"]
-script = ExtResource("8_kc64f")
-
-[node name="group" type="Node" parent="behavior/hints/show/reason"]
-script = ExtResource("8_kc64f")
+[node name="behavior" parent="." instance=ExtResource("9_d1vfy")]
 
 [node name="blackboard" type="Node" parent="."]
 script = ExtResource("13_2a2v1")

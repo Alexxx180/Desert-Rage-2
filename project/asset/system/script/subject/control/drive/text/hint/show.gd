@@ -9,7 +9,7 @@ extends Area2D
 func _on_hint_collected(_hero: CharacterBody2D) -> void:
 	var act: Node2D = get_parent()
 	var category: Node2D = act.get_parent()
-	var hints: VBoxContainer = hud.game.detector.game.controls.preview.help.help
+	var hints: VBoxContainer = hud.game.detector.game.controls.preview.help.hints
 	# .hints
 
 	if head == "": head = category.name

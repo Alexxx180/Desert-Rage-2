@@ -1,4 +1,4 @@
 extends Node
 
 func controls(meta: Dictionary) -> void:
-	meta.board.set_value("cut", { "pressed": false, "toggled": false })
+	meta.board.s("cut", { "pressed": false, "toggled": false })

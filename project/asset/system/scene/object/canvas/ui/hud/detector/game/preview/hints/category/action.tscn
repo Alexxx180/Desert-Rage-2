@@ -1,31 +1,42 @@
-[gd_scene load_steps=7 format=3 uid="uid://cimkmbth3t0at"]
+[gd_scene load_steps=8 format=3 uid="uid://cimkmbth3t0at"]
 
-[ext_resource type="Script" uid="uid://dsq3oxvtw6ort" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/hints/preview/hints/category/action.gd" id="1_sxiw8"]
-[ext_resource type="PackedScene" uid="uid://cmo8jhjujlsrv" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/preview/hints/hint/hint.tscn" id="2_205ay"]
+[ext_resource type="Script" uid="uid://vrukrgge6v5u" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/hints/preview/hints/category/category.gd" id="1_gtv8c"]
+[ext_resource type="PackedScene" uid="uid://rwvq7uy5mefo" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/priorities/topic/research/content/help/cards/showcase/showcase.tscn" id="2_gtv8c"]
 [ext_resource type="Resource" uid="uid://c2ktudlok8m2v" path="res://asset/resource/media/data/manual/preview/content/action/act.tres" id="3_aqrfh"]
 [ext_resource type="Resource" uid="uid://klrhwk7r01wh" path="res://asset/resource/media/data/manual/preview/content/action/water.tres" id="4_3n68o"]
 [ext_resource type="Resource" uid="uid://cv10n4uaro2sw" path="res://asset/resource/media/data/manual/preview/content/action/spark.tres" id="4_epryl"]
 [ext_resource type="Resource" uid="uid://bvo4vqt78pypp" path="res://asset/resource/media/data/manual/preview/content/action/fire.tres" id="4_kiuyx"]
+[ext_resource type="Resource" uid="uid://7wb6io62ltm4" path="res://asset/resource/media/data/manual/preview/content/action/whip.tres" id="5_vpa8y"]
 
 [node name="action" type="VBoxContainer"]
-script = ExtResource("1_sxiw8")
+script = ExtResource("1_gtv8c")
 
-[node name="act" parent="." instance=ExtResource("2_205ay")]
+[node name="action" parent="." instance=ExtResource("2_gtv8c")]
 visible = false
 layout_mode = 2
-help = ExtResource("3_aqrfh")
+hint = ExtResource("3_aqrfh")
 
-[node name="fire" parent="." instance=ExtResource("2_205ay")]
+[node name="fire" parent="." instance=ExtResource("2_gtv8c")]
 visible = false
 layout_mode = 2
-help = ExtResource("4_kiuyx")
+hint = ExtResource("4_kiuyx")
 
-[node name="water" parent="." instance=ExtResource("2_205ay")]
+[node name="whip" parent="." instance=ExtResource("2_gtv8c")]
 visible = false
 layout_mode = 2
-help = ExtResource("4_3n68o")
+hint = ExtResource("5_vpa8y")
 
-[node name="spark" parent="." instance=ExtResource("2_205ay")]
+[node name="water" parent="." instance=ExtResource("2_gtv8c")]
 visible = false
 layout_mode = 2
-help = ExtResource("4_epryl")
+hint = ExtResource("4_3n68o")
+
+[node name="spark" parent="." instance=ExtResource("2_gtv8c")]
+visible = false
+layout_mode = 2
+hint = ExtResource("4_epryl")
+
+[node name="explosion" parent="." instance=ExtResource("2_gtv8c")]
+visible = false
+layout_mode = 2
+hint = ExtResource("4_epryl")

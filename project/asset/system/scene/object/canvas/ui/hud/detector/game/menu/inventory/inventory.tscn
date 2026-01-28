@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cddw0qxlba87p" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/items/bag.tscn" id="5_bem3p"]
 [ext_resource type="PackedScene" uid="uid://b3pwlem0vs6ab" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/status/state/flow.tscn" id="6_3amgv"]
 [ext_resource type="PackedScene" uid="uid://cm4lshhyr3mtm" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/ability/controls/status/bar/hp/hp.tscn" id="8_3amgv"]
-[ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://asset/resource/ui/theme/patterns/template/menu/settings/topic/footer.tres" id="9_ikycn"]
+[ext_resource type="PackedScene" uid="uid://b8hybaq32frfk" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/title.tscn" id="9_ikycn"]
 [ext_resource type="PackedScene" uid="uid://cp2cf4xlxu476" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/status/card.tscn" id="9_ivgyk"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3amgv"]
@@ -78,40 +78,5 @@ size_flags_horizontal = 3
 [node name="card" parent="scroll/margin/stack" instance=ExtResource("9_ivgyk")]
 layout_mode = 2
 
-[node name="title" type="VBoxContainer" parent="scroll/margin/stack"]
+[node name="title" parent="scroll/margin/stack" instance=ExtResource("9_ikycn")]
 layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="caption" type="Label" parent="scroll/margin/stack/title"]
-layout_mode = 2
-size_flags_horizontal = 2
-theme_override_font_sizes/font_size = 24
-text = "Инвентарь"
-
-[node name="effect" type="RichTextLabel" parent="scroll/margin/stack/title"]
-custom_minimum_size = Vector2(50, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.25
-theme = ExtResource("9_ikycn")
-theme_override_constants/paragraph_separation = 8
-bbcode_enabled = true
-text = "[ul]Здесь находятся ваши собранные предметы с сундуков, включая снаряжение.
-Чтобы переместить предмет выберите его и ячейку, куда хотите положить. Вы также можете перетаскивать предмет при помощи мыши на новое место.
-Существуют разные типы предметов: используемые расходники, снаряжение или экипировка, оснастка или обвес.
-Расходники - некоторые из них могут быть использованы двойным нажатием, занимают немного места. Вы также можете перетаскивать предмет восполняющий ауру / ресурс на колбы, чтобы использовать его.
-Экипировка - надеваемый предмет, его характеристики и принадлежность к ячейкам можно увидеть в меню \"Снаряжение\", занимает целый слот инвентаря.
-Обвес - предмет, участвующий при улучшении экипировки в ходе процесса, известного как \"Оснащение\".
-Узнать больше о предмете можно в области осмотра, выглядящей как продолговатая тёмная ячейка. Вы можете перетащить предмет в эту область. Тут можно приготовить некоторые расходники, оснастить экипировку и скрестить некоторое оружие. Для старта нажмите на область осмотра.
-[b][i]♨[/i][/b]Готовка - нажмите на расходник, затем нажмите на другой расходник. Если вы в состоянии приготовить что-то из этих предметов - то у вас появится слот слева. Нажмите на него, затем на пустой слот, чтобы создать новый предмет..
-[b][i]🪛[/i][/b]Оснащение - нажмите на экипировку. Чтобы оснастить  нажмите на необходимый обвес. Чтобы снять оснастку - нажмите на пустое место.
-[b][i]⚔️[/i][/b]Скрещивание - нажмите на оружие. Чтобы скрестить нажмите на другое оружие. Для отмены скрещивания нажмите на появившейся слот слева. 
-Вы также можете перетаскивать предметы на область осмотра с выбранной экипировкой, чтобы оснащать или скрестить, а также расходники, чтобы готовить.
-При нажатии на колбы сверху происходит быстрое восстановление, которое использует инвентарь выбранного персонажа. Вы также можете использовать %s и %s для быстрого доступа в ходе игры. Поведение определяется с помощью сортировки.
-Сортировка - положение вещей в вашем инвентаре. Существует 3 вида: случайная, по возрастанию, по убыванию. Порядок определяется предметами, лежащими слева-направо, восстанавливающими число с пометкой АР - аура / ресурс. Зеленая шкала преимущественно использует предметы с пометкой А, в то время как синяя шкала с пометкой Р.
-Предметы могут быть на разном расстоянии друг от друга. Приоритет использования  определяет сортировка. Порядок начинается с первого предмета, за ним следуют промежуточные и в конце последний предмет. Сортировки по АР:
-По возрастанию - меньше всего, значение увеличивается, больше всего. Приоритет: полное восстановление АР с экономией предметов
-По убыванию - больше всего, значение уменьшается, меньше всего. Приоритет: полное восстановление АР без экономии предметов
-Случайный - предметы лежат в разных местах, независимо от их восстанавливающей способности. Приоритет: предмет для пополнения случайного количества АР.[/ul]"
-fit_content = true
-autowrap_mode = 2

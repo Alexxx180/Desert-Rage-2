@@ -5,5 +5,5 @@ func controls(meta: Dictionary) -> void:
 	act.book.hero = meta.tools.hero
 	meta.tools.lever = act
 	meta.tools.strike = { "lever": act.lever, "book": act.book }
-	meta.board.set_value("punch", { "pressed": false, "toggled": false })
+	meta.board.s("punch", { "pressed": false, "toggled": false })
 	print("PUNCH SET: ", meta.board)

@@ -7,7 +7,7 @@ const LEVEL: String = "%s/%s/%d"
 @onready var relation: Node = $relation
 
 func set_preview(group: Node2D, progress: HelpPreview) -> void:
-	detector.game.controls.preview.help.help.hints.set_preview(group, progress)
+	detector.game.controls.preview.help.hints.set_preview(group, progress)
 
 func set_transitions(ui: Dictionary, ost: Node) -> void:
 	detector.game.visibility_changed.connect(func():

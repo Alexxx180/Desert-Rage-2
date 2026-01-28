@@ -5,7 +5,7 @@ class_name BehaviorTreeBase
 func _execute(mark: Tick) -> int:
 	_enter(mark)
 
-	if not mark.blackboard.get_value('isOpen', mark.tree, self):
+	if not mark.blackboard.g('isOpen', mark.tree, self):
 		_open(mark)
 
 	var status := _tick(mark)
@@ -21,7 +21,7 @@ func _enter(mark: Tick) -> void:
 
 func _open(mark: Tick) -> void:
 	mark.open_node(self)
-	mark.blackboard.set_value('isOpen', true, mark.tree, self)
+	mark.blackboard.s('isOpen', true, mark.tree, self)
 	open(mark)
 
 func _tick(mark: Tick) -> int:
@@ -30,7 +30,7 @@ func _tick(mark: Tick) -> int:
 
 func _close(mark: Tick) -> void:
 	mark.close_node(self)
-	mark.blackboard.set_value('isOpen', false, mark.tree, self)
+	mark.blackboard.s('isOpen', false, mark.tree, self)
 	close(mark)
 
 func _exit(mark: Tick) -> void:

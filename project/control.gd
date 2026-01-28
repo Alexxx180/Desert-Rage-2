@@ -6,10 +6,15 @@ extends Control
 
 var select: int = 0
 
+func hide_caption(no: int) -> void:
+	ui[no].margin.caption.hide()
+
 func _ready() -> void:
 	for i in count:
-		ui[i].margin.caption.hide()
-		ui[i].showcase.pressed.connect(func(): _change(i))
+		hide_caption(i)
+		ui[i].showcase.pressed.connect(func():
+			if not ui[i].helping:
+				_change(i))
 		ui[i].update_hint(Defaults.ARRAY)
 
 func _select_next(next: int) -> int:
@@ -19,13 +24,13 @@ func _select_next(next: int) -> int:
 	return next
 
 func _change(next: int) -> void:
-	ui[select].margin.caption.hide()
+	hide_caption(select)
 	select = _select_next(next)
 	var caption: RichTextLabel = ui[select].margin.caption
 	caption.show()
 	caption.grab_focus()
 
 func _input(event: InputEvent) -> void:
-	for i in [["forward", -1], ["backward", 1]]:
+	for i in [["list_up", -1], ["list_down", 1]]:
 		if Input.is_action_pressed(i[0]):
 			_change(select + i[1])

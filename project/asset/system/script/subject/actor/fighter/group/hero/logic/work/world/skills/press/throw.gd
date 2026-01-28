@@ -14,4 +14,4 @@ var hero: CharacterBody2D:
 
 func take_effect() -> void:
 	for box in pull.boxes:
-		box.logic.processors.movement.push.throw_velocity(POWER)
+		box.logic.work.move.push.throw_velocity(POWER)

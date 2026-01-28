@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://b3kq5rgblhq6b" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/gameplay/chats/chat.tscn" id="1_0qxsr"]
 [ext_resource type="PackedScene" uid="uid://dhqu2qkapwck2" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/gameplay/chats/log.tscn" id="2_4llyi"]
 [ext_resource type="PackedScene" uid="uid://bfgfwnhsb2f7c" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/stats/topic/chats/list/items.tscn" id="4_5eyf4"]
-[ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://asset/resource/ui/theme/patterns/template/menu/settings/topic/footer.tres" id="5_4llyi"]
+[ext_resource type="PackedScene" uid="uid://cudeyff6t5knw" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/stats/title.tscn" id="5_4llyi"]
 [ext_resource type="PackedScene" uid="uid://ikenyhjscyj3" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/stats/topic/chats/list/notes.tscn" id="5_v7w04"]
 
 [node name="chats" type="VBoxContainer"]
@@ -30,37 +30,5 @@ layout_mode = 2
 [node name="notes" parent="." instance=ExtResource("5_v7w04")]
 layout_mode = 2
 
-[node name="title" type="VBoxContainer" parent="."]
+[node name="title" parent="." instance=ExtResource("5_4llyi")]
 layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="caption" type="Label" parent="title"]
-layout_mode = 2
-size_flags_horizontal = 2
-theme_override_font_sizes/font_size = 24
-text = "Экипировка"
-
-[node name="effect" type="RichTextLabel" parent="title"]
-custom_minimum_size = Vector2(50, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.25
-theme = ExtResource("5_4llyi")
-theme_override_constants/paragraph_separation = 8
-bbcode_enabled = true
-text = "[ul]Здесь находится ваше снаряжение и показатели. 
-Показатель - число, определяющее конкретные характеристики в поединке.
-Снаряжение - предмет, который может быть надет на героя особым образом и имеет дополнительный эффект на персонажа, например повышение его мощи или живучести.
-Нажав на \"Снаряжение\", можно посмотреть как оно влияет на показатели.
-Например живучесть определяет количество ауры, реакция количество ресурса и т.п.
-Чтобы надеть предмет, используйте определённые ячейки в инвентаре. Дальнобойное оружие часто задействует %s, в то время как оружие ближнего боя использует %s и %s. Каждый герой может носить любой вид снаряжения, но использовать далеко не каждый. Учитывайте это при построении команды.
- [b][i]▒[/i][/b] Панель быстрого доступа - размещается основное оружие, чтобы взять его, нужно выбрать слот, на котором оно лежит.
-[b][i]🗡[/i][/b] Оружие - располагается редко сменяемое, альтернативное вооружение.
-[b][i]🛡[/i][/b] Реликвия - здесь вы можете положить особый вид снаряжения, имеющий определённый эффект в бою.
-[b][i]🧥[/i][/b] Броня - основной вид защитной экипировки, по типу курток, нагрудников.
-[b][i]👖[/i][/b] Поножи - защитная экипировка, по типу штанов, понож.
-[b][i]🥾[/i][/b] Сапоги - защитная экипировка, по типу ботинок, сапог.
-Если предмет не является экипировкой, то он просто займёт слот, без какого-либо эффекта для героя.
-[/ul]"
-fit_content = true
-autowrap_mode = 2

@@ -13,13 +13,13 @@ func _ready() -> void:
 func close_nodes(mark: Tick) -> Variant:
 	# Close nodes from last tick, if needed
 	var board: BehaviorBlackboard = mark.blackboard
-	var last_open_nodes: Array = board.get_value('openNodes', self)
+	var last_open_nodes: Array = board.g('openNodes', self)
 	var current_open_nodes := mark.open_nodes
 
 	# If node isn't currently open, but was open during last tick, close it
 	for node in last_open_nodes:
 		if (not current_open_nodes.has(node) and
-			board.get_value('isOpen', mark.tree, node)):
+			board.g('isOpen', mark.tree, node)):
 			node._close(mark)
 	return current_open_nodes
 
@@ -35,7 +35,7 @@ func tick(actor: Variant, blackboard: BehaviorBlackboard, debug = false) -> int:
 		result = child._execute(mark)
 
 	# Populate the blackboard
-	blackboard.set_value('openNodes', close_nodes(mark), self)
+	blackboard.s('openNodes', close_nodes(mark), self)
 	return result
 
 func _notification(code: int) -> void:

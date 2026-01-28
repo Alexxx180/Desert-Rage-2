@@ -1,7 +1,6 @@
 extends ScrollContainer
 
-@onready var chat: VBoxContainer = $list/temp/chat
-@onready var log: VBoxContainer = $list/temp/log
+@onready var list: VBoxContainer = $list
 
 const DOWN: float = 0.2
 

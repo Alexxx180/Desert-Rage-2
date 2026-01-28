@@ -1,12 +1,14 @@
-[gd_scene load_steps=8 format=3 uid="uid://mdjk60h84tvs"]
+[gd_scene load_steps=10 format=3 uid="uid://mdjk60h84tvs"]
 
 [ext_resource type="Theme" uid="uid://ctsb6uh5t0n1l" path="res://asset/resource/ui/theme/default.tres" id="1_eorvr"]
 [ext_resource type="Script" uid="uid://if6whb6pr2b" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/hints/preview/hints/category/motion.gd" id="2_sakrl"]
-[ext_resource type="PackedScene" uid="uid://cmo8jhjujlsrv" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/preview/hints/hint/hint.tscn" id="3_4x8d3"]
+[ext_resource type="PackedScene" uid="uid://rwvq7uy5mefo" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/priorities/topic/research/content/help/cards/showcase/showcase.tscn" id="3_e6xn2"]
 [ext_resource type="Resource" uid="uid://co4ybxow1lq4x" path="res://asset/resource/media/data/manual/preview/content/motion/motion.tres" id="4_lo0dv"]
 [ext_resource type="Resource" uid="uid://b2o5w2bj6xcmn" path="res://asset/resource/media/data/manual/preview/content/motion/jump.tres" id="5_h0j2s"]
 [ext_resource type="Resource" uid="uid://byi51k7h80qme" path="res://asset/resource/media/data/manual/preview/content/motion/push.tres" id="6_e6xn2"]
 [ext_resource type="Resource" uid="uid://cilu3h076h7x4" path="res://asset/resource/media/data/manual/preview/content/motion/land.tres" id="7_edrvx"]
+[ext_resource type="Resource" uid="uid://c1b2tr8iwdyy7" path="res://asset/resource/media/data/manual/preview/content/action/spring.tres" id="8_edrvx"]
+[ext_resource type="Resource" uid="uid://bam1ufd2mvty3" path="res://asset/resource/media/data/manual/preview/content/motion/chains.tres" id="9_8xdvx"]
 
 [node name="motion" type="VBoxContainer"]
 anchors_preset = 15
@@ -18,22 +20,32 @@ theme = ExtResource("1_eorvr")
 theme_override_constants/separation = 0
 script = ExtResource("2_sakrl")
 
-[node name="move" parent="." instance=ExtResource("3_4x8d3")]
+[node name="motion" parent="." instance=ExtResource("3_e6xn2")]
+custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
-size_flags_vertical = 0
-help = ExtResource("4_lo0dv")
+hint = ExtResource("4_lo0dv")
 
-[node name="jump" parent="." instance=ExtResource("3_4x8d3")]
+[node name="jump" parent="." instance=ExtResource("3_e6xn2")]
+visible = false
 layout_mode = 2
-size_flags_vertical = 0
-help = ExtResource("5_h0j2s")
+hint = ExtResource("5_h0j2s")
 
-[node name="push" parent="." instance=ExtResource("3_4x8d3")]
+[node name="push" parent="." instance=ExtResource("3_e6xn2")]
+visible = false
 layout_mode = 2
-size_flags_vertical = 0
-help = ExtResource("6_e6xn2")
+hint = ExtResource("6_e6xn2")
 
-[node name="land" parent="." instance=ExtResource("3_4x8d3")]
+[node name="land" parent="." instance=ExtResource("3_e6xn2")]
+visible = false
 layout_mode = 2
-size_flags_vertical = 0
-help = ExtResource("7_edrvx")
+hint = ExtResource("7_edrvx")
+
+[node name="spring" parent="." instance=ExtResource("3_e6xn2")]
+visible = false
+layout_mode = 2
+hint = ExtResource("8_edrvx")
+
+[node name="chains" parent="." instance=ExtResource("3_e6xn2")]
+visible = false
+layout_mode = 2
+hint = ExtResource("9_8xdvx")

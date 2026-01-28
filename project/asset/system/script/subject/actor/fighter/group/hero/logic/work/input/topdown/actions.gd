@@ -12,7 +12,7 @@ func _ready() -> void:
 	combo.timeout.connect(reset_combo)
 
 func reset_combo() -> void:
-	board.get_value("combo").query.clear()
+	board.g("combo").query.clear()
 
 func tick() -> void:
 	behavior.tick(self, board)

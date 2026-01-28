@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bmmg6xahpkusq"]
+[gd_scene load_steps=13 format=3 uid="uid://bmmg6xahpkusq"]
 
 [ext_resource type="StyleBox" uid="uid://cht8hrroa75bg" path="res://asset/resource/ui/theme/style/tag/tag-button.tres" id="1_rlvie"]
 [ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://asset/resource/ui/theme/patterns/template/menu/settings/topic/footer.tres" id="2_5tx11"]
@@ -6,6 +6,7 @@
 [ext_resource type="FontFile" uid="uid://b37js8y80ak1k" path="res://asset/resource/media/data/font/NotoColorEmoji-Regular.ttf" id="5_vlu61"]
 [ext_resource type="StyleBox" uid="uid://bsggnr5c3uk7o" path="res://asset/resource/ui/theme/style/panel/preview.tres" id="6_uhat8"]
 [ext_resource type="PackedScene" uid="uid://cdpsykqf6eaa2" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/priorities/topic/research/content/help/help.tscn" id="6_y2jwj"]
+[ext_resource type="PackedScene" uid="uid://bu5vbvvgn1q4d" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/priorities/title.tscn" id="10_m5uhw"]
 [ext_resource type="StyleBox" uid="uid://evyfrkamah1" path="res://asset/resource/ui/theme/style/items/chests/hover.tres" id="32_y6s2t"]
 [ext_resource type="StyleBox" uid="uid://by6bvf7ens3ul" path="res://asset/resource/ui/theme/style/items/chests/empty.tres" id="33_yw1xc"]
 [ext_resource type="PackedScene" uid="uid://dv268r05flq5" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/preview/log/levels/level/number.tscn" id="36_pqlxk"]
@@ -218,32 +219,5 @@ theme_override_fonts/font = ExtResource("5_vlu61")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_toq2e")
 text = "🔥"
 
-[node name="title" type="VBoxContainer" parent="content"]
+[node name="title" parent="content" instance=ExtResource("10_m5uhw")]
 layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="caption" type="Label" parent="content/title"]
-layout_mode = 2
-size_flags_horizontal = 2
-theme_override_font_sizes/font_size = 24
-text = "Приоритеты"
-
-[node name="effect" type="RichTextLabel" parent="content/title"]
-custom_minimum_size = Vector2(50, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.25
-theme = ExtResource("2_5tx11")
-theme_override_constants/paragraph_separation = 8
-bbcode_enabled = true
-text = "[ul]Здесь находятся приоритеты героев.
-В ходе сражений с противниками вы получаете Очки Попыток или опыт. Если вы получаете достаточное количество, то выбранный вами приоритет увеличивается на 1.
-Вы можете выбрать любой из трёх для каждого героя в любой момент времени. Приоритеты не могут быть выше определённого уровня. Как только вы достигаете максимума, ваш герой переходит на новый приоритет.
-При повышении вы получаете прирост к определённым показателям, облегчающим ваше положение в следующих битвах. Вместе с этим согласно вашим приоритетам вы можете получить уникальный эффект.
-Уникальные эффекты героев делятся на возможности и способности.
-Возможность - приводится в действие по определённому событию или закреплён за персонажем насовсем. Например, дополнительный опыт при допытывании.
-Способность - приводится в действие во время выполнения комбо - нажатия кнопок, отвечающих за действие, движение героев и их умений.
-Подбирайте их с умом. Наличие определённых возможностей и способностей помогают в конкретных ситуациях, а также облегчают ваше прохождение.
-Некоторые способности могут быть приобретены только после чтения книг нужного типа. Ищите книги, чтобы раздвинуть свои возможности.[/ul]"
-fit_content = true
-autowrap_mode = 2

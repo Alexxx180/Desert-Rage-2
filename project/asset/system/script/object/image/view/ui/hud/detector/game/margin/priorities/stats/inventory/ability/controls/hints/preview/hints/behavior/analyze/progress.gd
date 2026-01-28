@@ -8,7 +8,7 @@ func tick(mark: Tick) -> int:
 	if head == EMPTY: return FAILED
 	
 	var body: String = board.g("body")
-	var ref: VBoxContainer = board.g("ref")[head][body]
+	var ref: PanelContainer = board.g("ref")[head][body]
 	ref.show_delayed()
 	
 	board.g("preview")[head][body] = true

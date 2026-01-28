@@ -2,7 +2,10 @@ extends VBoxContainer
 
 class_name HintsCategory
 
-func get_acts() -> Array[String]: return []
+func get_acts() -> Array[String]:
+	var acts: Array[String] = []
+	for i in get_children(): acts.append(i.name)
+	return acts
 
 func get_category() -> Dictionary:
 	var category: Dictionary = {}
