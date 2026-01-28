@@ -6,7 +6,7 @@ signal finish_combo(keys: Array)
 
 var previous: Array = Defaults.ARRAY
 var next: Array
-var groups: int = 0
+var group: int = 0
 
 func make_mask() -> void: next = previous.duplicate()
 func save_state(keys: Array) -> void:
@@ -25,17 +25,42 @@ func one_key(_d, event: InputEvent) -> void:
 	else:
 		finish_combo.emit([event.keycode])
 
-func alternate(d, event: InputEvent) -> void:
+func add_keys(event: InputEvent, add: Callable, defaulting: Callable, check: Callable) -> void:
 	match event.keycode:
-		KEY_COMMA: groups = previous.size() + 1
-		KEY_BACKSPACE: groups = next.size() - 1
-		KEY_ESCAPE: pass
-		KEY_ENTER: groups = previous.size()
-	previous.append()
-	finish_combo.emit()
-	
-	select_type(ALT)
-func aggregate() -> void:
-	key_mask = AGG
-	select_type(AGG)
-	key_mask = KEY
+		KEY_BACKSPACE:
+			if next.size() > 1:
+				next.pop_back() # groups = next.size() - 1
+			else:
+				defaulting.call()
+		KEY_ESCAPE: clear_keys()
+		KEY_ENTER:
+			if check.call(): # next.front() != Defaults.INT:
+				clear_keys()
+			else:
+				finish_combo.emit(next)
+		_: add.call()
+
+func alternate(d, event: InputEvent) -> void:
+	add_keys(event, func(): next.append(event.keycode), 
+		func(): next[0] = Defaults.INT,
+		func(): next.front() == Defaults.INT)
+
+func agg_form(i: int) -> Array: return [i, i, i, i]
+func agg_undefined() -> bool: return Defaults.INT in next.front()
+
+func hot(d, event: InputEvent) -> void:
+	alternate(d, event)
+
+func aggregate(d, event: InputEvent) -> void:
+	match event.keycode:
+		KEY_COMMA:
+			if not agg_undefined():
+				next.append(agg_form(Defaults.INT))
+				group = 0
+		KEY_ESCAPE: clear_keys()
+		_: add_keys(event, func():
+			if agg_undefined():
+				next[group] = event.keycode
+				group += 1,
+			func(): for i in len(next[-1]): next[-1][i] = Defaults.INT,
+			agg_undefined)

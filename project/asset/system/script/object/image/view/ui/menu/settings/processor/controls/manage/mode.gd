@@ -27,6 +27,7 @@ func clear() -> bool:
 
 func one_key() -> void: select_type(KEY)
 func alternate() -> void: select_type(ALT)
+func hot() -> void: select_type(HOT)
 func aggregate() -> void:
 	key_mask = AGG
 	select_type(AGG)
