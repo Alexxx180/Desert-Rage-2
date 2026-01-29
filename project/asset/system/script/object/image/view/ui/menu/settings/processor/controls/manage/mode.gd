@@ -11,10 +11,14 @@ const device_types: Array[String] = ["mouse", "keyboard", "gamepad"]
 var key_mask: int = KEY
 var selected: int = NONE
 var device: int = KEYBOARD
+var device_name: String:
+	get: return device_types[device]
 
 func as_keyboard() -> void: device = KEYBOARD
 func as_mouse() -> void: device = MOUSE
 func as_gamepad() -> void: device = GAMEPAD
+func is_setting() -> bool:
+	return selected != NONE
 
 func select_type(value: int) -> void:
 	selected = value
@@ -41,11 +45,8 @@ func check(event: InputEvent) -> bool:
 
 func manage(type: Node, event: InputEvent) -> void:
 	if check(event) and clear(): return
-	
-	var d: String = device_types[device]
 	match selected:
-		NONE: pass
-		KEY: type.one_key(d, event)
-		ALT: type.alternate(d, event)
-		HOT: type.one_key(d, event)
-		AGG: type.aggregate(d, event)
+		KEY: type.one_key(event)
+		ALT: type.alternate(event)
+		HOT: type.one_key(event)
+		AGG: type.aggregate(event)
