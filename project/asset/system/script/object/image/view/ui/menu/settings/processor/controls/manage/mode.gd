@@ -8,19 +8,15 @@ enum { MOUSE = 0, KEYBOARD = 1, GAMEPAD = 2 }
 
 const device_types: Array[String] = ["mouse", "keyboard", "gamepad"]
 
-var key_mask: int = KEY
 var selected: int = NONE
 var device: int = KEYBOARD
 var device_name: String:
 	get: return device_types[device]
 
-func as_keyboard() -> void: device = KEYBOARD
-func as_mouse() -> void: device = MOUSE
-func as_gamepad() -> void: device = GAMEPAD
-func is_setting() -> bool:
-	return selected != NONE
+func as_device(machine: int) -> void: device = machine
+func is_setting() -> bool: return selected != NONE
 
-func select_type(value: int) -> void:
+func select_type(value: int, key_mask = KEY) -> void:
 	selected = value
 	start_input.emit(key_mask)
 
@@ -32,10 +28,7 @@ func clear() -> bool:
 func one_key() -> void: select_type(KEY)
 func alternate() -> void: select_type(ALT)
 func hot() -> void: select_type(HOT)
-func aggregate() -> void:
-	key_mask = AGG
-	select_type(AGG)
-	key_mask = KEY
+func aggregate() -> void: select_type(AGG, AGG)
 
 func check(event: InputEvent) -> bool:
 	match device:

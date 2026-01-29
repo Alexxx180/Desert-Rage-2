@@ -3,6 +3,9 @@ extends Node
 signal finish_combo(keys: Array)
 
 @onready var mode: Node = $mode
+@onready var mouse: Node = $mouse
+@onready var keyboard: Node = $keyboard
+@onready var gamepad: Node = $gamepad
 
 var previous: Array = Defaults.ARRAY
 var next: Array
@@ -17,8 +20,7 @@ func clear_keys() -> void:
 	make_mask()
 	mode.clear()
 
-func finish(sequence: Array) -> void:
-	finish_combo.emit(sequence)
+func finish(sequence: Array) -> void: finish_combo.emit(sequence)
 
 func _input(event: InputEvent) -> void:
 	if mode.is_setting():

@@ -10,4 +10,4 @@ func add_mouse(event: InputEvent) -> void:
 	else:
 		manage.finish(manage.next)
 
-func alternate(event: InputEvent) -> void: add_mouse(event)
+func hot(event: InputEvent) -> void: add_mouse(event)
