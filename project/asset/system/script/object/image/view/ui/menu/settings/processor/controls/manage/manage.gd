@@ -1,26 +1,26 @@
 extends Node
 
-signal finish_combo(keys: Array)
-
 @onready var mode: Node = $mode
 @onready var mouse: Node = $mouse
 @onready var keyboard: Node = $keyboard
 @onready var gamepad: Node = $gamepad
 
-var previous: Array = Defaults.ARRAY
-var next: Array
+var next: Array = []
 var group: int = 0
 
-func make_mask() -> void: next = previous.duplicate()
-func save_state(keys: Array) -> void:
-	previous = keys
-	make_mask()
-
-func clear_keys() -> void:
-	make_mask()
+func reset() -> void:
+	next.clear()
 	mode.clear()
 
-func finish(sequence: Array) -> void: finish_combo.emit(sequence)
+func clear_keys() -> void: reset()
+
+func a_key(sequence: Array) -> void:
+	mode.input_a_key.emit(mode.keys.keyboard.translate_alt(sequence))
+
+func finish(sequence: Array) -> void:
+	# match
+	mode.finish_combo.emit(mode.keys.keyboard.translate_alt(sequence))
+	reset()
 
 func _input(event: InputEvent) -> void:
 	if mode.is_setting():

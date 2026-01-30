@@ -11,6 +11,9 @@ func _set_event(act: String, event: InputEvent) -> void:
 	InputMap.action_erase_event(act, event)
 	InputMap.action_add_event(act, event)
 
+func set_action(caption: String, keys: Array) -> void:
+	actions[caption] = keys
+
 func a(no: int) -> String: return _act[no]
 
 func translate_word(key: int) -> bool:
@@ -20,20 +23,29 @@ func translate_word(key: int) -> bool:
 	word = keys.escapes[key]
 	return true
 
-func translate(acts: Array[Array]) -> Array[String]:
+func translate_sentence(act: Array, s: bool = false) -> Array[String]:
+	var sentence: Array[String] = []
+	for i in act:
+		translate_word(i if s else actions[a(i)])
+		sentence.append(word)
+	return sentence
+
+func translate(acts: Array[Array], sep: String, s: bool = false) -> Array[String]:
 	var result: Array[String] = []
-	for act in acts:
-		var sentence: Array[String] = []
-		for i in act:
-			translate_word(actions[a(i)])
-			sentence.append(word)
-		result.append("".join(sentence))
+	for act in acts: result.append(sep.join(translate_sentence(act, s)))
 	return result
 
-func masked_translate(hint: String) -> Array[String]:
-	if mask.has(hint): return translate(mask[hint])
+func translate_alt(acts: Array) -> Array[String]: return translate_sentence(acts, true)
+func translate_agg(acts: Array[Array]) -> Array[String]: return translate(acts, "", true)
+func translate_all(acts: Array[Array]) -> Array[String]: return translate(acts, " + ", true)
+
+func masked_translate(hint: String, sep: String) -> Array[String]:
+	if mask.has(hint): return translate(mask[hint], sep)
 	if defaults.has(hint): return defaults[hint]
 	return Defaults.ARRAY
+
+func masked_agg(hint: String) -> Array[String]: return masked_translate(hint, "")
+func masked_all(hint: String) -> Array[String]: return masked_translate(hint, " + ")
 
 enum ACT {
 	MOVEMENT, LEFT, UP, RIGHT, DOWN, HANDS,

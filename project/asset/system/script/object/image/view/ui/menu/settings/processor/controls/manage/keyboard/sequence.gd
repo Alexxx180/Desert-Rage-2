@@ -2,6 +2,12 @@ extends Node
 
 var manage: Node
 
+const MAX: int = 3
+
+func present(event: InputEvent) -> bool: return event.keycode in manage.next
+
+func clear_keys() -> void: manage.reset()
+
 func hardcoded() -> Array: # prevents users from binding keys
 	return [KEY_ESCAPE, KEY_ENTER, KEY_BACKSPACE, KEY_COMMA,
 		KEY_0, KEY_1, KEY_2, KEY_3, KEY_4, KEY_5, KEY_6, KEY_7, KEY_8, KEY_9]
@@ -24,7 +30,7 @@ func delete(defaulting: Callable) -> void:
 
 func complete(check: Callable) -> void:
 	if check.call(manage.next):
-		manage.clear_keys()
+		manage.reset()
 	else:
 		manage.finish(manage.next)
 
@@ -42,19 +48,26 @@ func group_key(event: InputEvent) -> Callable:
 	return func(n): n[manage.group] = event.keycode
 
 func add_key(event: InputEvent, check: Callable) -> Callable:
-	return func(n): if check.call(event): n.append(event.keycode)
+	return func(n):
+		if check.call(event) and n.size() < MAX:
+			n.append(event.keycode)
+			if n.size() >= MAX:
+				manage.finish(n)
+			else:
+				manage.a_key(n)
+			print("INPUT A KEY!!")
 
 func key_alt(event: InputEvent) -> bool:
-	return not event.keycode in hardcoded()
+	return true # not event.keycode in hardcoded()
 
 func key_press(event: InputEvent) -> bool:
-	return key_alt(event) or manage.next.size() > 0
+	return not event.keycode in hardcoded() or manage.next.size() > 0 # key_alt(event)
 
 func aggregate_next(event: InputEvent) -> Callable:
 	return func(): next_key(agg_undefined(), 0, group_key(event))
 
 func alternate(event: InputEvent, add_keys: Callable, key: String) -> void:
-	add_keys.call(event, func(e): return add_key(e, get(key)), nullify, key_defined)
+	add_keys.call(event, add_key(event, get(key)), nullify, key_defined)
 
 func aggregate(event: InputEvent, add_keys: Callable) -> void:
 	add_keys.call(event, aggregate_next(event), clear, agg_undefined)

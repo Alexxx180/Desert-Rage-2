@@ -13,3 +13,4 @@ func set_transitions(menu: CanvasLayer, sound: CanvasLayer) -> void:
 func _ready() -> void:
 	see.topics.tabs.caption.set_shortcut(self)
 	see.topics.options.set_transition(self)
+	link.connect_controls(see, work)

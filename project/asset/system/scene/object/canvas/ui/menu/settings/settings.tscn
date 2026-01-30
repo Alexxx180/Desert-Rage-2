@@ -1,4 +1,4 @@
-[gd_scene load_steps=89 format=3 uid="uid://b4x588yxrcok3"]
+[gd_scene load_steps=90 format=3 uid="uid://b4x588yxrcok3"]
 
 [ext_resource type="Script" uid="uid://d05jnr6xe41se" path="res://asset/system/script/object/image/view/ui/menu/settings/settings.gd" id="1_apf6u"]
 [ext_resource type="Theme" uid="uid://dfyi7rrcrweqx" path="res://asset/resource/ui/theme/patterns/template/menu/settings/settings.tres" id="1_vs08l"]
@@ -69,6 +69,7 @@
 [ext_resource type="Script" uid="uid://bf1c3yp3jpr70" path="res://asset/system/script/object/image/view/ui/menu/settings/processor/controls/manage/gamepad/gamepad.gd" id="63_juy01"]
 [ext_resource type="Script" uid="uid://dw3d6eo0u77lc" path="res://asset/system/script/object/image/view/ui/menu/settings/processor/controls/manage/gamepad/button.gd" id="64_28rgk"]
 [ext_resource type="Script" uid="uid://dav3cd3sw0r0j" path="res://asset/system/script/object/image/view/ui/menu/settings/link/devices.gd" id="69_yo1e4"]
+[ext_resource type="Script" uid="uid://bsf5ipnb1p5gp" path="res://asset/system/script/object/image/view/ui/menu/settings/link/buttons.gd" id="70_if42a"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aers8"]
 content_margin_left = 14.0
@@ -122,24 +123,6 @@ events = [ExtResource("16_yw7xu"), ExtResource("17_wy3ld"), ExtResource("18_5iai
 [sub_resource type="Shortcut" id="Shortcut_5q5w7"]
 events = [ExtResource("16_yw7xu"), ExtResource("18_ynqjn")]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_owwju"]
-content_margin_left = 6.0
-content_margin_top = 9.0
-content_margin_right = 6.0
-content_margin_bottom = 9.0
-bg_color = Color(0, 0, 0.0235294, 1)
-border_width_right = 2
-border_color = Color(0.0392157, 0.0392157, 0.0392157, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0qh8n"]
-content_margin_left = 6.0
-content_margin_top = 9.0
-content_margin_right = 6.0
-content_margin_bottom = 9.0
-bg_color = Color(0, 0, 0, 1)
-border_width_right = 2
-border_color = Color(0.588235, 0.588235, 0.588235, 1)
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fmjjx"]
 content_margin_left = 6.0
 content_margin_top = 9.0
@@ -151,6 +134,24 @@ border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
 border_color = Color(0.588235, 0.588235, 0.588235, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0qh8n"]
+content_margin_left = 6.0
+content_margin_top = 9.0
+content_margin_right = 6.0
+content_margin_bottom = 9.0
+bg_color = Color(0, 0, 0, 1)
+border_width_right = 2
+border_color = Color(0.588235, 0.588235, 0.588235, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_owwju"]
+content_margin_left = 6.0
+content_margin_top = 9.0
+content_margin_right = 6.0
+content_margin_bottom = 9.0
+bg_color = Color(0, 0, 0.0235294, 1)
+border_width_right = 2
+border_color = Color(0.0392157, 0.0392157, 0.0392157, 1)
 
 [sub_resource type="Gradient" id="Gradient_n1w43"]
 
@@ -273,9 +274,9 @@ size_flags_stretch_ratio = 0.05
 theme_override_constants/line_spacing = -2
 theme_override_fonts/font = ExtResource("13_owwju")
 theme_override_font_sizes/font_size = 28
-theme_override_styles/normal = SubResource("StyleBoxFlat_owwju")
-theme_override_styles/hover = SubResource("StyleBoxFlat_0qh8n")
 theme_override_styles/focus = SubResource("StyleBoxFlat_fmjjx")
+theme_override_styles/hover = SubResource("StyleBoxFlat_0qh8n")
+theme_override_styles/normal = SubResource("StyleBoxFlat_owwju")
 shortcut = ExtResource("14_n4pyq")
 text = "✅"
 
@@ -1347,7 +1348,6 @@ text = "Left stick  adjust | Periphery  set | A  next | B  back"
 [node name="detection" parent="see/margin/topics/content/options/controls/management/mouse/content/footer/controls" instance=ExtResource("19_ayoyv")]
 
 [node name="keyboard" type="VBoxContainer" parent="see/margin/topics/content/options/controls/management"]
-visible = false
 layout_mode = 2
 script = ExtResource("8_1w8km")
 
@@ -1376,7 +1376,7 @@ layout_mode = 2
 layout_mode = 2
 script = ExtResource("27_06o0n")
 
-[node name="preset" type="Button" parent="see/margin/topics/content/options/controls/management/keyboard/content/options"]
+[node name="movement" type="Button" parent="see/margin/topics/content/options/controls/management/keyboard/content/options"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -1384,7 +1384,7 @@ size_flags_stretch_ratio = 0.35
 text = "SMVT"
 alignment = 0
 
-[node name="status" type="Label" parent="see/margin/topics/content/options/controls/management/keyboard/content/options/preset"]
+[node name="status" type="Label" parent="see/margin/topics/content/options/controls/management/keyboard/content/options/movement"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -1520,7 +1520,6 @@ size_flags_horizontal = 8
 text = "Cross"
 
 [node name="inventory" type="Button" parent="see/margin/topics/content/options/controls/management/keyboard/content/options"]
-visible = false
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -1544,7 +1543,6 @@ size_flags_horizontal = 8
 text = "CU"
 
 [node name="equipment" type="Button" parent="see/margin/topics/content/options/controls/management/keyboard/content/options"]
-visible = false
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -1683,7 +1681,7 @@ grow_vertical = 2
 size_flags_horizontal = 8
 text = "X"
 
-[node name="action_one" type="Button" parent="see/margin/topics/content/options/controls/management/keyboard/content/options"]
+[node name="skill_1" type="Button" parent="see/margin/topics/content/options/controls/management/keyboard/content/options"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -1691,7 +1689,7 @@ size_flags_stretch_ratio = 0.35
 text = "SAB1"
 alignment = 0
 
-[node name="status" type="Label" parent="see/margin/topics/content/options/controls/management/keyboard/content/options/action_one"]
+[node name="status" type="Label" parent="see/margin/topics/content/options/controls/management/keyboard/content/options/skill_1"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -1706,7 +1704,7 @@ grow_vertical = 2
 size_flags_horizontal = 8
 text = "C"
 
-[node name="action_two" type="Button" parent="see/margin/topics/content/options/controls/management/keyboard/content/options"]
+[node name="skill_2" type="Button" parent="see/margin/topics/content/options/controls/management/keyboard/content/options"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -1714,7 +1712,7 @@ size_flags_stretch_ratio = 0.35
 text = "SAB2"
 alignment = 0
 
-[node name="status" type="Label" parent="see/margin/topics/content/options/controls/management/keyboard/content/options/action_two"]
+[node name="status" type="Label" parent="see/margin/topics/content/options/controls/management/keyboard/content/options/skill_2"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -1728,6 +1726,29 @@ grow_horizontal = 0
 grow_vertical = 2
 size_flags_horizontal = 8
 text = "V"
+
+[node name="fire" type="Button" parent="see/margin/topics/content/options/controls/management/keyboard/content/options"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+text = "SFIR"
+alignment = 0
+
+[node name="status" type="Label" parent="see/margin/topics/content/options/controls/management/keyboard/content/options/fire"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -72.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "F"
 
 [node name="team" type="Button" parent="see/margin/topics/content/options/controls/management/keyboard/content/options"]
 custom_minimum_size = Vector2(300, 60)
@@ -1775,7 +1796,7 @@ grow_vertical = 2
 size_flags_horizontal = 8
 text = "G"
 
-[node name="heal" type="Button" parent="see/margin/topics/content/options/controls/management/keyboard/content/options"]
+[node name="quick_heal" type="Button" parent="see/margin/topics/content/options/controls/management/keyboard/content/options"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -1783,7 +1804,7 @@ size_flags_stretch_ratio = 0.35
 text = "SSQH"
 alignment = 0
 
-[node name="status" type="Label" parent="see/margin/topics/content/options/controls/management/keyboard/content/options/heal"]
+[node name="status" type="Label" parent="see/margin/topics/content/options/controls/management/keyboard/content/options/quick_heal"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -1798,7 +1819,7 @@ grow_vertical = 2
 size_flags_horizontal = 8
 text = "R"
 
-[node name="refresh" type="Button" parent="see/margin/topics/content/options/controls/management/keyboard/content/options"]
+[node name="quick_refresh" type="Button" parent="see/margin/topics/content/options/controls/management/keyboard/content/options"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -1806,7 +1827,7 @@ size_flags_stretch_ratio = 0.35
 text = "SSQR"
 alignment = 0
 
-[node name="status" type="Label" parent="see/margin/topics/content/options/controls/management/keyboard/content/options/refresh"]
+[node name="status" type="Label" parent="see/margin/topics/content/options/controls/management/keyboard/content/options/quick_refresh"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -1845,7 +1866,7 @@ grow_vertical = 2
 size_flags_horizontal = 8
 text = "F1"
 
-[node name="information" type="Button" parent="see/margin/topics/content/options/controls/management/keyboard/content/options"]
+[node name="options" type="Button" parent="see/margin/topics/content/options/controls/management/keyboard/content/options"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -1853,7 +1874,31 @@ size_flags_stretch_ratio = 0.35
 text = "SMAP"
 alignment = 0
 
-[node name="status" type="Label" parent="see/margin/topics/content/options/controls/management/keyboard/content/options/information"]
+[node name="status" type="Label" parent="see/margin/topics/content/options/controls/management/keyboard/content/options/options"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -82.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "F2, F3, F4, F5"
+
+[node name="map" type="Button" parent="see/margin/topics/content/options/controls/management/keyboard/content/options"]
+visible = false
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+text = "SMAP"
+alignment = 0
+
+[node name="status" type="Label" parent="see/margin/topics/content/options/controls/management/keyboard/content/options/map"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -1869,6 +1914,7 @@ size_flags_horizontal = 8
 text = "F2"
 
 [node name="settings" type="Button" parent="see/margin/topics/content/options/controls/management/keyboard/content/options"]
+visible = false
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -1892,6 +1938,7 @@ size_flags_horizontal = 8
 text = "F3"
 
 [node name="main_menu" type="Button" parent="see/margin/topics/content/options/controls/management/keyboard/content/options"]
+visible = false
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -1915,6 +1962,7 @@ size_flags_horizontal = 8
 text = "F4"
 
 [node name="soundtrack" type="Button" parent="see/margin/topics/content/options/controls/management/keyboard/content/options"]
+visible = false
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -1938,6 +1986,7 @@ size_flags_horizontal = 8
 text = "F5"
 
 [node name="checkpoint" type="Button" parent="see/margin/topics/content/options/controls/management/keyboard/content/options"]
+visible = false
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -1961,6 +2010,7 @@ size_flags_horizontal = 8
 text = "F6"
 
 [node name="fast_save" type="Button" parent="see/margin/topics/content/options/controls/management/keyboard/content/options"]
+visible = false
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -1984,6 +2034,7 @@ size_flags_horizontal = 8
 text = "F7"
 
 [node name="fast_load" type="Button" parent="see/margin/topics/content/options/controls/management/keyboard/content/options"]
+visible = false
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -2007,6 +2058,7 @@ size_flags_horizontal = 8
 text = "F8"
 
 [node name="saves" type="Button" parent="see/margin/topics/content/options/controls/management/keyboard/content/options"]
+visible = false
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -2030,6 +2082,7 @@ size_flags_horizontal = 8
 text = "F9"
 
 [node name="fullscreen" type="Button" parent="see/margin/topics/content/options/controls/management/keyboard/content/options"]
+visible = false
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -2053,6 +2106,7 @@ size_flags_horizontal = 8
 text = "F11"
 
 [node name="photo_mode" type="Button" parent="see/margin/topics/content/options/controls/management/keyboard/content/options"]
+visible = false
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -2084,6 +2138,7 @@ alignment = 2
 script = ExtResource("6_wolhp")
 
 [node name="gamepad" type="VBoxContainer" parent="see/margin/topics/content/options/controls/management"]
+visible = false
 layout_mode = 2
 script = ExtResource("8_1w8km")
 
@@ -2157,6 +2212,102 @@ grow_horizontal = 0
 grow_vertical = 2
 size_flags_horizontal = 8
 text = "LS"
+
+[node name="forward" type="Button" parent="see/margin/topics/content/options/controls/management/gamepad/content/options"]
+visible = false
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+text = "SFWD"
+alignment = 0
+
+[node name="status" type="Label" parent="see/margin/topics/content/options/controls/management/gamepad/content/options/forward"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -79.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "W"
+
+[node name="backward" type="Button" parent="see/margin/topics/content/options/controls/management/gamepad/content/options"]
+visible = false
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+text = "SBWD"
+alignment = 0
+
+[node name="status" type="Label" parent="see/margin/topics/content/options/controls/management/gamepad/content/options/backward"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -71.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "S"
+
+[node name="left" type="Button" parent="see/margin/topics/content/options/controls/management/gamepad/content/options"]
+visible = false
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+text = "SLFT"
+alignment = 0
+
+[node name="status" type="Label" parent="see/margin/topics/content/options/controls/management/gamepad/content/options/left"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -73.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "A"
+
+[node name="right" type="Button" parent="see/margin/topics/content/options/controls/management/gamepad/content/options"]
+visible = false
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+text = "SRHT"
+alignment = 0
+
+[node name="status" type="Label" parent="see/margin/topics/content/options/controls/management/gamepad/content/options/right"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -75.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "D"
 
 [node name="luggage" type="Button" parent="see/margin/topics/content/options/controls/management/gamepad/content/options"]
 custom_minimum_size = Vector2(300, 60)
@@ -2593,6 +2744,9 @@ script = ExtResource("60_bjomr")
 
 [node name="devices" type="Node" parent="link"]
 script = ExtResource("69_yo1e4")
+
+[node name="buttons" type="Node" parent="link/devices"]
+script = ExtResource("70_if42a")
 
 [connection signal="pressed" from="see/margin/topics/content/options/game/experience/sound/header" to="see/margin/topics/content/options/game/experience/sound/header" method="_toggle_content"]
 [connection signal="pressed" from="see/margin/topics/content/options/game/experience/sound/content/footer" to="see/margin/topics/content/options/game/experience/sound/content/footer" method="_hide_topic"]
