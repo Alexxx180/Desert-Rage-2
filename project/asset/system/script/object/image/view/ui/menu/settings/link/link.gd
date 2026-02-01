@@ -16,7 +16,7 @@ func connect_controls(ui: Panel, work: Node) -> void:
 	var manage: VBoxContainer = ui.topics.options.controls.management
 	var m: Node = work.controls.manage
 	devices.setup(work)
-	for i in devices.buttons.mode.device_types:
+	for i in devices.buttons.resolve.mode.device.types:
 		devices.get("connect_" + i).call(manage.get(i))
 	m.mode.keys = work.controls.keys
 	m.mouse.manage = m

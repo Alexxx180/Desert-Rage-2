@@ -8,26 +8,30 @@ func one_key(event: InputEvent) -> void:
 	else:
 		sequence.manage.finish([event.keycode])
 
-func add_keys(event: InputEvent, add: Callable, defaulting: Callable, check: Callable) -> void:
+func add_keys(event: InputEvent, add: Callable, defaulting: Callable, check: String) -> void:
 	match event.keycode:
 		KEY_BACKSPACE: sequence.delete(defaulting)
 		KEY_ESCAPE: sequence.clear_keys()
 		KEY_ENTER: sequence.complete(check)
-		_: add.call(sequence.manage.next)
+		_: add.call()
+
+func _alt(state: bool, event: InputEvent, type: String) -> void:
+	if state: sequence.alternate(event, add_keys, "key_" + type)
+
+func _agg(state: bool, event: InputEvent) -> void:
+	if state: sequence.aggregate(event, add_keys)
 
 func alternate(event: InputEvent) -> void:
-	if event.is_pressed() and not sequence.present(event):
-		sequence.alternate(event, add_keys, "key_alt")
+	_alt(sequence.unique(event), event, "alt")
 
 func hot(event: InputEvent) -> void:
 	if event.is_pressed():
-		if not sequence.present(event):
-			sequence.alternate(event, add_keys, "key_press")
+		_alt(not sequence.input.present(event.keycode), event, "press")
 	else:
-		sequence.manage.finish(sequence.manage.next)
+		sequence.input.finish()
 
 func aggregate(event: InputEvent) -> void:
 	match event.keycode:
 		KEY_COMMA: sequence.add()
 		KEY_ESCAPE: sequence.clear_keys()
-		_: sequence.aggregate(event, add_keys)
+		_: _agg(sequence.unique(event, true), event)

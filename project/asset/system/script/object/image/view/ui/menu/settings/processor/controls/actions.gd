@@ -20,24 +20,27 @@ func translate_word(key: int) -> bool:
 	if not keys.escapes.has(key):
 		word = OS.get_keycode_string(key)
 		return false
-	word = keys.escapes[key]
+	word = tr("S" + keys.escapes[key])
 	return true
 
 func translate_sentence(act: Array, s: bool = false) -> Array[String]:
 	var sentence: Array[String] = []
 	for i in act:
-		translate_word(i if s else actions[a(i)])
+		if i == Defaults.INT:
+			word = "_"
+		else:
+			translate_word(i if s else actions[a(i)])
 		sentence.append(word)
 	return sentence
 
-func translate(acts: Array[Array], sep: String, s: bool = false) -> Array[String]:
+func translate(acts: Array, sep: String, s: bool = false) -> Array[String]:
 	var result: Array[String] = []
 	for act in acts: result.append(sep.join(translate_sentence(act, s)))
 	return result
 
 func translate_alt(acts: Array) -> Array[String]: return translate_sentence(acts, true)
-func translate_agg(acts: Array[Array]) -> Array[String]: return translate(acts, "", true)
-func translate_all(acts: Array[Array]) -> Array[String]: return translate(acts, " + ", true)
+func translate_agg(acts: Array) -> Array[String]: return translate(acts, "", true)
+func translate_all(acts: Array) -> Array[String]: return translate(acts, " + ", true)
 
 func masked_translate(hint: String, sep: String) -> Array[String]:
 	if mask.has(hint): return translate(mask[hint], sep)

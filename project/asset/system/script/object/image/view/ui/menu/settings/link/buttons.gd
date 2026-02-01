@@ -1,36 +1,35 @@
 extends Node
 
-var mode: Node
-var _caption: String
+var resolve: Node
 
-func _g(ui: VBoxContainer, caption: String) -> Button:
-	return ui.options.get_node(caption)
+func connect_button(button: Button, named: String, ui: VBoxContainer, machine: int) -> void:
+	button.pressed.connect(resolve.option(button, named, ui, machine))
 
-func connect_button(button: Button, ui: VBoxContainer, machine: int) -> void:
-	button.pressed.connect(func():
-		mode.as_device(machine)
-		ui.footer.title = button.text
-		_caption = button.name)
+func connect_footer(modes: Dictionary, ui: VBoxContainer, machine: int) -> void:
+	for key in modes: for n in modes[key]:
+		connect_button(resolve.agg(ui, n), n, ui, machine)
 
-func connect_footer(buttons: Array, ui: VBoxContainer, machine: int) -> void:
-	for i in buttons:
-		for j in i:
-			connect_button(_g(ui, j), ui, machine)
+func connect_logic(modes: Dictionary, key: String, ui: VBoxContainer) -> void:
+	for n in modes[key]:
+		if modes.has("MASK") and modes.MASK.has(n):
+			resolve.logic(ui, n, key, modes.MASK[n])
+		else:
+			resolve.logic(ui, n, key)
 
-func connect_logic(logic: Array, ui: VBoxContainer) -> void:
-	for i in len(logic.front()):
-		for j in logic[0][i]: _g(ui, j).pressed.connect(mode.get(logic[1][i]))
+func connect_modes(modes: Dictionary, ui: VBoxContainer) -> void:
+	for key in modes:
+		if not key == "MASK":
+			connect_logic(modes, key, ui)
 
-func connect_finish(ui: VBoxContainer) -> void:
-	mode.finish_combo.connect(ui.footer.finish_input)
-	mode.input_a_key.connect(func(buttons: Array):
-		ui.footer.input_button(mode.separator.join(buttons)))
+func connect_all(keys: Dictionary, ui: VBoxContainer, machine: int) -> void:
+	resolve.finish(ui)
+	connect_footer(keys, ui, machine)
+	connect_modes(keys, ui)
 
-func connect_all(names: Array, logic: Array, ui: VBoxContainer, machine: int) -> void:
-	connect_finish(ui)
-	connect_footer(names, ui, machine)
-	connect_logic([names, logic], ui)
-	
-	mode.finish_combo.connect(func(buttons: Array):
-		mode.keys.get(mode.device_name).set_action(_caption, buttons)
-		_g(ui, _caption).get_node("status").text = mode.separator.join(buttons))
+func connect_mouse(ui: VBoxContainer, nodes: Array[Node]) -> void:
+	var machine: int = resolve.mode.device.MOUSE
+	resolve.finish(ui)
+	for button in nodes:
+		# resolve.agg(ui, n)
+		connect_button(button, button.name, ui, machine)
+		resolve.connects(button, "HOT")

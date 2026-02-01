@@ -1,73 +1,57 @@
 extends Node
 
 var manage: Node
-
-const MAX: int = 3
-
-func present(event: InputEvent) -> bool: return event.keycode in manage.next
-
-func clear_keys() -> void: manage.reset()
+var input: Node:
+	get: return manage.mode.input
 
 func hardcoded() -> Array: # prevents users from binding keys
 	return [KEY_ESCAPE, KEY_ENTER, KEY_BACKSPACE, KEY_COMMA,
 		KEY_0, KEY_1, KEY_2, KEY_3, KEY_4, KEY_5, KEY_6, KEY_7, KEY_8, KEY_9]
 
-func key_defined(n) -> bool: return n.front() == Defaults.INT
-func agg_defined() -> bool: return not Defaults.INT in manage.next.front()
-func agg_undefined() -> bool: return not agg_defined()
-func agg_form(i: int) -> Array: return [i, i, i, i]
-
-func next_key(state: bool, mask: int, next: Callable) -> void:
-	if state:
-		next.call(manage.next)
-		manage.group = mask
-
 func delete(defaulting: Callable) -> void:
-	if manage.next.size() > 1:
-		manage.next.pop_back() # groups = next.size() - 1
+	if input.next.size() > 1:
+		input.next.pop_back() # groups = next.size() - 1
 	else:
-		defaulting.call(manage.next)
+		defaulting.call()
 
-func complete(check: Callable) -> void:
-	if check.call(manage.next):
-		manage.reset()
+func complete(check: String) -> void:
+	if input.get(check).call():
+		manage.mode.clear()
 	else:
-		manage.finish(manage.next)
+		input.finish()
 
-func add() -> void:
-	next_key(agg_defined(), 0, func(n):
-		n.append(agg_form(Defaults.INT)))
+func add() -> void: input.start_enter()
 
 func clear(next: Array) -> void:
-	var n: Array = next[-1]
-	for i in len(n): nullify(n, i)
+	var n: Array = next.back()
+	n.fill(Defaults.INT)
 
 func nullify(n: Array, i: int = 0): n[i] = Defaults.INT
 
-func group_key(event: InputEvent) -> Callable:
-	return func(n): n[manage.group] = event.keycode
-
 func add_key(event: InputEvent, check: Callable) -> Callable:
-	return func(n):
-		if check.call(event) and n.size() < MAX:
-			n.append(event.keycode)
-			if n.size() >= MAX:
-				manage.finish(n)
+	return func():
+		if check.call(event) and not input.limit():
+			input.append(event.keycode)
+			if input.limit():
+				input.finish()
 			else:
-				manage.a_key(n)
+				input.enter()
 			print("INPUT A KEY!!")
+
+func unique(event: InputEvent, deep: bool = false) -> bool:
+	return event.is_pressed() and not input.present(event.keycode, deep)
 
 func key_alt(event: InputEvent) -> bool:
 	return true # not event.keycode in hardcoded()
 
 func key_press(event: InputEvent) -> bool:
-	return not event.keycode in hardcoded() or manage.next.size() > 0 # key_alt(event)
+	return not event.keycode in hardcoded() or not input.empty() # key_alt(event)
 
 func aggregate_next(event: InputEvent) -> Callable:
-	return func(): next_key(agg_undefined(), 0, group_key(event))
+	return func(): input.enter_next(event.keycode)
 
 func alternate(event: InputEvent, add_keys: Callable, key: String) -> void:
-	add_keys.call(event, add_key(event, get(key)), nullify, key_defined)
+	add_keys.call(event, add_key(event, get(key)), nullify, "key_defined")
 
 func aggregate(event: InputEvent, add_keys: Callable) -> void:
-	add_keys.call(event, aggregate_next(event), clear, agg_undefined)
+	add_keys.call(event, aggregate_next(event), clear, "agg_undefined")
