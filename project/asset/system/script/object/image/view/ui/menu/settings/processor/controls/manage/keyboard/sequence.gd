@@ -11,6 +11,9 @@ func hardcoded() -> Array: # prevents users from binding keys
 func delete(defaulting: Callable) -> void:
 	if input.next.size() > 1:
 		input.next.pop_back() # groups = next.size() - 1
+		clear(input.next)
+		input.reset()
+		input.enter()
 	else:
 		defaulting.call()
 
@@ -20,7 +23,10 @@ func complete(check: String) -> void:
 	else:
 		input.finish()
 
-func add() -> void: input.start_enter()
+func add(event: InputEvent) -> void:
+	if event.is_pressed() and not input.limit():
+		input.start_enter()
+		input.enter()
 
 func clear(next: Array) -> void:
 	var n: Array = next.back()
@@ -41,8 +47,7 @@ func add_key(event: InputEvent, check: Callable) -> Callable:
 func unique(event: InputEvent, deep: bool = false) -> bool:
 	return event.is_pressed() and not input.present(event.keycode, deep)
 
-func key_alt(event: InputEvent) -> bool:
-	return true # not event.keycode in hardcoded()
+func key_alt(event: InputEvent) -> bool: return true # not event.keycode in hardcoded()
 
 func key_press(event: InputEvent) -> bool:
 	return not event.keycode in hardcoded() or not input.empty() # key_alt(event)

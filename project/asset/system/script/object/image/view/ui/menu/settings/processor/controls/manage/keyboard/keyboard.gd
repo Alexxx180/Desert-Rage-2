@@ -32,6 +32,6 @@ func hot(event: InputEvent) -> void:
 
 func aggregate(event: InputEvent) -> void:
 	match event.keycode:
-		KEY_COMMA: sequence.add()
+		KEY_COMMA: sequence.add(event)
 		KEY_ESCAPE: sequence.clear_keys()
 		_: _agg(sequence.unique(event, true), event)

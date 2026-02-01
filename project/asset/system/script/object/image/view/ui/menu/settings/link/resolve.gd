@@ -41,6 +41,7 @@ func controls(ui: VBoxContainer) -> Callable:
 	return func(buttons: Array):
 		if mode.device.named != ui.name: return
 		
+		agg(ui, _caption).disabled = false
 		ui.footer.finish_input(buttons)
 		var device: Node = mode.keys.get(mode.device.named)
 		device.set_action(_caption, buttons)
@@ -48,6 +49,9 @@ func controls(ui: VBoxContainer) -> Callable:
 
 func option(button: Button, named: String, ui: VBoxContainer, machine: int) -> Callable:
 	return func():
+		button.disabled = true
+		
+		button.release_focus()
 		mode.device.set_as(machine)
 		ui.footer.title = button.text
 		_caption = named
