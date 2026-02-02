@@ -11,7 +11,8 @@ var separator: String:
 
 func mask(caption: String, keys: int) -> int:
 	if get(caption) == AGG and keys == KEY: return AGG
-	return KEY
+	if get(caption) in [HOT, ALT]: return KEY
+	return keys
 
 func listen() -> bool: return selected != NONE
 
@@ -29,8 +30,10 @@ func manage(type: Node, event: InputEvent) -> void:
 		ALT: type.alternate(event)
 		HOT: type.hot(event)
 		AGG: type.aggregate(event)
+		ALL: type.all(event)
 
 func translate(device: Node, sequence: Array) -> Array:
 	match selected:
 		AGG: return device.translate_agg(sequence)
+		ALL: return device.translate_all(sequence)
 	return device.translate_alt(sequence)

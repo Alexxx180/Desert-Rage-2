@@ -1,4 +1,4 @@
-[gd_scene load_steps=136 format=3 uid="uid://b4x588yxrcok3"]
+[gd_scene load_steps=141 format=3 uid="uid://b4x588yxrcok3"]
 
 [ext_resource type="Script" uid="uid://d05jnr6xe41se" path="res://asset/system/script/object/image/view/ui/menu/settings/settings.gd" id="1_apf6u"]
 [ext_resource type="Theme" uid="uid://dfyi7rrcrweqx" path="res://asset/resource/ui/theme/patterns/template/menu/settings/settings.tres" id="1_vs08l"]
@@ -75,7 +75,9 @@
 [ext_resource type="Script" uid="uid://8rx1jbeyfdc7" path="res://asset/system/script/object/image/view/ui/menu/settings/processor/controls/manage/mode/input.gd" id="65_rbsui"]
 [ext_resource type="Script" uid="uid://dav3cd3sw0r0j" path="res://asset/system/script/object/image/view/ui/menu/settings/link/devices.gd" id="69_yo1e4"]
 [ext_resource type="Script" uid="uid://bsf5ipnb1p5gp" path="res://asset/system/script/object/image/view/ui/menu/settings/link/buttons.gd" id="70_if42a"]
-[ext_resource type="Script" uid="uid://dwp2p8pfwkgl5" path="res://asset/system/script/object/image/view/ui/menu/settings/link/resolve.gd" id="76_c2rqr"]
+[ext_resource type="Script" uid="uid://521sfod8l8s2" path="res://asset/system/script/object/image/view/ui/menu/settings/link/options.gd" id="77_egcsm"]
+[ext_resource type="Script" uid="uid://cnap4m4qyii3s" path="res://asset/system/script/object/image/view/ui/menu/settings/link/t.gd" id="78_aujbd"]
+[ext_resource type="Script" uid="uid://dbo624b5np7nx" path="res://asset/system/script/object/image/view/ui/menu/settings/link/logic.gd" id="79_pyihq"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aers8"]
 content_margin_left = 14.0
@@ -159,6 +161,14 @@ bg_color = Color(0, 0, 0.0235294, 1)
 border_width_right = 2
 border_color = Color(0.0392157, 0.0392157, 0.0392157, 1)
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wtl5k"]
+content_margin_right = 5.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_aujbd"]
+content_margin_right = 30.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pyihq"]
+
 [sub_resource type="Gradient" id="Gradient_n1w43"]
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_o3d5i"]
@@ -181,10 +191,6 @@ width = 1
 bg_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1821x"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_sw4q0"]
-content_margin_left = 10.0
-content_margin_bottom = 7.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ptro4"]
 content_margin_left = 30.0
@@ -434,6 +440,10 @@ VScrollBar/styles/grabber_highlight = SubResource("StyleBoxFlat_o6wu7")
 VScrollBar/styles/grabber_pressed = SubResource("StyleBoxFlat_ilv8b")
 VScrollBar/styles/scroll = SubResource("StyleBoxFlat_yi8ef")
 VScrollBar/styles/scroll_focus = SubResource("StyleBoxFlat_4bp2y")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_sw4q0"]
+content_margin_left = 10.0
+content_margin_bottom = 7.0
 
 [node name="settings" type="CanvasLayer"]
 script = ExtResource("1_apf6u")
@@ -1275,44 +1285,57 @@ script = ExtResource("8_1w8km")
 custom_minimum_size = Vector2(0, 45)
 layout_mode = 2
 theme = ExtResource("6_kbam3")
+text = "SMST"
+alignment = 0
 script = ExtResource("6_w727q")
 
-[node name="caption" type="Label" parent="see/margin/topics/content/options/controls/management/mouse/header"]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_top = -14.0
-offset_right = 111.0
-offset_bottom = 14.0
-grow_vertical = 2
-size_flags_horizontal = 0
-text = "SMST"
-
-[node name="controls" type="HBoxContainer" parent="see/margin/topics/content/options/controls/management/mouse/header"]
-visible = false
+[node name="mouse" type="HBoxContainer" parent="see/margin/topics/content/options/controls/management/mouse/header"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_top = 313.0
-offset_bottom = 313.0
+offset_left = -266.0
+offset_top = -20.0
+offset_bottom = 20.0
 grow_horizontal = 0
 grow_vertical = 2
 
-[node name="keyboard" type="Label" parent="see/margin/topics/content/options/controls/management/mouse/header/controls"]
+[node name="hold" type="Label" parent="see/margin/topics/content/options/controls/management/mouse/header/mouse"]
+layout_mode = 2
+size_flags_horizontal = 10
+theme = ExtResource("8_j2b4r")
+theme_override_fonts/font = ExtResource("13_owwju")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_wtl5k")
+text = "🥌"
+horizontal_alignment = 2
+
+[node name="title" type="Label" parent="see/margin/topics/content/options/controls/management/mouse/header/mouse"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("8_j2b4r")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_aujbd")
+text = "SLMB"
+horizontal_alignment = 2
+
+[node name="sequence" type="Label" parent="see/margin/topics/content/options/controls/management/mouse/header/mouse"]
 visible = false
 layout_mode = 2
-text = "Arrows  adjust | Digits  set | Enter  next | Esc back"
+size_flags_horizontal = 4
+theme = ExtResource("8_j2b4r")
+theme_override_fonts/font = ExtResource("13_owwju")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_pyihq")
+text = "🗑⬅️🖱➡️➕"
+horizontal_alignment = 2
 
-[node name="gamepad" type="Label" parent="see/margin/topics/content/options/controls/management/mouse/header/controls"]
-visible = false
+[node name="close" type="Label" parent="see/margin/topics/content/options/controls/management/mouse/header/mouse"]
 layout_mode = 2
-text = "Left stick  adjust | Periphery  set | A  next | B  back"
-
-[node name="detection" parent="see/margin/topics/content/options/controls/management/mouse/header/controls" instance=ExtResource("19_ayoyv")]
+size_flags_horizontal = 8
+theme = ExtResource("8_j2b4r")
+theme_override_fonts/font = ExtResource("13_owwju")
+text = "🖱⬆️❌"
+horizontal_alignment = 2
 
 [node name="content" type="VBoxContainer" parent="see/margin/topics/content/options/controls/management/mouse"]
 layout_mode = 2
@@ -1413,7 +1436,31 @@ size_flags_horizontal = 8
 text = "LMB + RMB"
 horizontal_alignment = 2
 
+[node name="skills" type="HBoxContainer" parent="see/margin/topics/content/options/controls/management/mouse/content/options"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+script = ExtResource("49_5qe8d")
+
+[node name="enter" type="Button" parent="see/margin/topics/content/options/controls/management/mouse/content/options/skills"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+theme = SubResource("Theme_icevt")
+text = "SSKIL"
+alignment = 0
+
+[node name="collapse" type="Button" parent="see/margin/topics/content/options/controls/management/mouse/content/options/skills"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+theme = SubResource("Theme_5hw7m")
+text = "SRMB"
+alignment = 2
+
 [node name="hands" type="Button" parent="see/margin/topics/content/options/controls/management/mouse/content/options"]
+visible = false
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -1473,6 +1520,7 @@ text = "+"
 layout_mode = 2
 
 [node name="legs" type="Button" parent="see/margin/topics/content/options/controls/management/mouse/content/options"]
+visible = false
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -1495,6 +1543,7 @@ size_flags_horizontal = 8
 text = "RMB"
 
 [node name="skill_1" type="Button" parent="see/margin/topics/content/options/controls/management/mouse/content/options"]
+visible = false
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -1518,6 +1567,7 @@ text = "S.UP"
 horizontal_alignment = 2
 
 [node name="skill_2" type="Button" parent="see/margin/topics/content/options/controls/management/mouse/content/options"]
+visible = false
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -1540,30 +1590,32 @@ size_flags_horizontal = 8
 text = "S.DOWN"
 horizontal_alignment = 2
 
-[node name="combo" type="Button" parent="see/margin/topics/content/options/controls/management/mouse/content/options"]
+[node name="subjects" type="HBoxContainer" parent="see/margin/topics/content/options/controls/management/mouse/content/options"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
-text = "SAIM"
+theme_override_constants/separation = 0
+script = ExtResource("49_5qe8d")
+
+[node name="enter" type="Button" parent="see/margin/topics/content/options/controls/management/mouse/content/options/subjects"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+theme = SubResource("Theme_icevt")
+text = "SQCK"
 alignment = 0
 
-[node name="status" type="Label" parent="see/margin/topics/content/options/controls/management/mouse/content/options/combo"]
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -109.0
-offset_top = -14.0
-offset_bottom = 14.0
-grow_horizontal = 0
-grow_vertical = 2
-size_flags_horizontal = 8
-text = "LMB + S.Up"
-horizontal_alignment = 2
+[node name="collapse" type="Button" parent="see/margin/topics/content/options/controls/management/mouse/content/options/subjects"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+theme = SubResource("Theme_5hw7m")
+text = "E + R, R"
+alignment = 2
+text_overrun_behavior = 3
 
 [node name="inventory_prev" type="Button" parent="see/margin/topics/content/options/controls/management/mouse/content/options"]
+visible = false
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -1587,6 +1639,7 @@ text = "RMB + S.Up"
 horizontal_alignment = 2
 
 [node name="inventory_next" type="Button" parent="see/margin/topics/content/options/controls/management/mouse/content/options"]
+visible = false
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -1610,6 +1663,7 @@ text = "RMB + S.Down"
 horizontal_alignment = 2
 
 [node name="fire" type="Button" parent="see/margin/topics/content/options/controls/management/mouse/content/options"]
+visible = false
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -1631,6 +1685,66 @@ grow_vertical = 2
 size_flags_horizontal = 8
 text = "RMB + LMB"
 horizontal_alignment = 2
+
+[node name="combo" type="Button" parent="see/margin/topics/content/options/controls/management/mouse/content/options"]
+visible = false
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "SAIM"
+alignment = 0
+
+[node name="status" type="Label" parent="see/margin/topics/content/options/controls/management/mouse/content/options/combo"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -109.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "LMB + S.Up"
+horizontal_alignment = 2
+
+[node name="gestures" type="Control" parent="see/margin/topics/content/options/controls/management/mouse/content"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+
+[node name="pan" type="ScrollContainer" parent="see/margin/topics/content/options/controls/management/mouse/content/gestures"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_vs08l")
+scroll_vertical = 140
+vertical_scroll_mode = 2
+
+[node name="background" type="ColorRect" parent="see/margin/topics/content/options/controls/management/mouse/content/gestures/pan"]
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 2
+size_flags_horizontal = 3
+color = Color(0, 0, 0, 1)
+
+[node name="caption" type="Label" parent="see/margin/topics/content/options/controls/management/mouse/content/gestures"]
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -95.5
+offset_right = 95.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme = ExtResource("8_j2b4r")
+text = "Поместите сюда курсор и вводите здесь!"
 
 [node name="footer" type="Button" parent="see/margin/topics/content/options/controls/management/mouse/content"]
 custom_minimum_size = Vector2(0, 45)
@@ -1682,6 +1796,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.35
 theme = SubResource("Theme_icevt")
+action_mode = 0
 text = "SMVT"
 alignment = 0
 
@@ -1983,29 +2098,6 @@ grow_vertical = 2
 size_flags_horizontal = 8
 text = "G"
 
-[node name="fire" type="Button" parent="see/margin/topics/content/options/controls/management/keyboard/content/options"]
-custom_minimum_size = Vector2(300, 60)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.35
-text = "SFIR"
-alignment = 0
-
-[node name="status" type="Label" parent="see/margin/topics/content/options/controls/management/keyboard/content/options/fire"]
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -72.0
-offset_top = -14.0
-offset_bottom = 14.0
-grow_horizontal = 0
-grow_vertical = 2
-size_flags_horizontal = 8
-text = "F"
-
 [node name="quick_heal" type="Button" parent="see/margin/topics/content/options/controls/management/keyboard/content/options"]
 visible = false
 custom_minimum_size = Vector2(300, 60)
@@ -2053,6 +2145,130 @@ grow_horizontal = 0
 grow_vertical = 2
 size_flags_horizontal = 8
 text = "R"
+
+[node name="subjects" type="HBoxContainer" parent="see/margin/topics/content/options/controls/management/keyboard/content/options"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+theme_override_constants/separation = 0
+script = ExtResource("49_5qe8d")
+
+[node name="enter" type="Button" parent="see/margin/topics/content/options/controls/management/keyboard/content/options/subjects"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+theme = SubResource("Theme_icevt")
+text = "SQCK"
+alignment = 0
+
+[node name="collapse" type="Button" parent="see/margin/topics/content/options/controls/management/keyboard/content/options/subjects"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+theme = SubResource("Theme_5hw7m")
+text = "E + R, R"
+alignment = 2
+text_overrun_behavior = 3
+
+[node name="inventory_prev" type="Button" parent="see/margin/topics/content/options/controls/management/keyboard/content/options"]
+visible = false
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+text = "SINV"
+alignment = 0
+
+[node name="status" type="Label" parent="see/margin/topics/content/options/controls/management/keyboard/content/options/inventory_prev"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -166.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "Tab + 2"
+horizontal_alignment = 2
+
+[node name="inventory_next" type="Button" parent="see/margin/topics/content/options/controls/management/keyboard/content/options"]
+visible = false
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+text = "SINV"
+alignment = 0
+
+[node name="status" type="Label" parent="see/margin/topics/content/options/controls/management/keyboard/content/options/inventory_next"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -166.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "Tab + 3"
+horizontal_alignment = 2
+
+[node name="fire" type="Button" parent="see/margin/topics/content/options/controls/management/keyboard/content/options"]
+visible = false
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+text = "SFIR"
+alignment = 0
+
+[node name="status" type="Label" parent="see/margin/topics/content/options/controls/management/keyboard/content/options/fire"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -72.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "F"
+
+[node name="combo" type="Button" parent="see/margin/topics/content/options/controls/management/keyboard/content/options"]
+visible = false
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+text = "SAIM"
+alignment = 0
+
+[node name="status" type="Label" parent="see/margin/topics/content/options/controls/management/keyboard/content/options/combo"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -109.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "LMB + S.Up"
+horizontal_alignment = 2
 
 [node name="luggage" type="HBoxContainer" parent="see/margin/topics/content/options/controls/management/keyboard/content/options"]
 custom_minimum_size = Vector2(300, 60)
@@ -2198,6 +2414,7 @@ size_flags_stretch_ratio = 0.35
 theme = SubResource("Theme_5hw7m")
 text = "F2, F3, F4, F5"
 alignment = 2
+text_overrun_behavior = 3
 
 [node name="map" type="Button" parent="see/margin/topics/content/options/controls/management/keyboard/content/options"]
 visible = false
@@ -2271,16 +2488,16 @@ grow_vertical = 2
 size_flags_horizontal = 8
 text = "F4"
 
-[node name="soundtrack" type="Button" parent="see/margin/topics/content/options/controls/management/keyboard/content/options"]
+[node name="checkpoint" type="Button" parent="see/margin/topics/content/options/controls/management/keyboard/content/options"]
 visible = false
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.35
-text = "STST"
+text = "SLDC"
 alignment = 0
 
-[node name="status" type="Label" parent="see/margin/topics/content/options/controls/management/keyboard/content/options/soundtrack"]
+[node name="status" type="Label" parent="see/margin/topics/content/options/controls/management/keyboard/content/options/checkpoint"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -2295,16 +2512,16 @@ grow_vertical = 2
 size_flags_horizontal = 8
 text = "F5"
 
-[node name="checkpoint" type="Button" parent="see/margin/topics/content/options/controls/management/keyboard/content/options"]
+[node name="fast_load" type="Button" parent="see/margin/topics/content/options/controls/management/keyboard/content/options"]
 visible = false
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.35
-text = "SLDC"
+text = "SFLD"
 alignment = 0
 
-[node name="status" type="Label" parent="see/margin/topics/content/options/controls/management/keyboard/content/options/checkpoint"]
+[node name="status" type="Label" parent="see/margin/topics/content/options/controls/management/keyboard/content/options/fast_load"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -2343,30 +2560,6 @@ grow_vertical = 2
 size_flags_horizontal = 8
 text = "F7"
 
-[node name="fast_load" type="Button" parent="see/margin/topics/content/options/controls/management/keyboard/content/options"]
-visible = false
-custom_minimum_size = Vector2(300, 60)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.35
-text = "SFLD"
-alignment = 0
-
-[node name="status" type="Label" parent="see/margin/topics/content/options/controls/management/keyboard/content/options/fast_load"]
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -82.0
-offset_top = -14.0
-offset_bottom = 14.0
-grow_horizontal = 0
-grow_vertical = 2
-size_flags_horizontal = 8
-text = "F8"
-
 [node name="saves" type="Button" parent="see/margin/topics/content/options/controls/management/keyboard/content/options"]
 visible = false
 custom_minimum_size = Vector2(300, 60)
@@ -2390,6 +2583,30 @@ grow_horizontal = 0
 grow_vertical = 2
 size_flags_horizontal = 8
 text = "F9"
+
+[node name="soundtrack" type="Button" parent="see/margin/topics/content/options/controls/management/keyboard/content/options"]
+visible = false
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+text = "STST"
+alignment = 0
+
+[node name="status" type="Label" parent="see/margin/topics/content/options/controls/management/keyboard/content/options/soundtrack"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -82.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "F10"
 
 [node name="fullscreen" type="Button" parent="see/margin/topics/content/options/controls/management/keyboard/content/options"]
 visible = false
@@ -3082,8 +3299,16 @@ script = ExtResource("69_yo1e4")
 [node name="buttons" type="Node" parent="link/devices"]
 script = ExtResource("70_if42a")
 
-[node name="resolve" type="Node" parent="link/devices"]
-script = ExtResource("76_c2rqr")
+[node name="t" type="Node" parent="link/devices/buttons"]
+script = ExtResource("78_aujbd")
+
+[node name="logic" type="Node" parent="link/devices/buttons/t"]
+script = ExtResource("79_pyihq")
+
+[node name="options" type="Node" parent="link/devices/buttons"]
+script = ExtResource("77_egcsm")
+
+[node name="Timer" type="Timer" parent="link/devices/buttons/options"]
 
 [connection signal="pressed" from="see/margin/topics/content/options/game/experience/sound/header" to="see/margin/topics/content/options/game/experience/sound/header" method="_toggle_content"]
 [connection signal="pressed" from="see/margin/topics/content/options/game/experience/sound/content/footer" to="see/margin/topics/content/options/game/experience/sound/content/footer" method="_hide_topic"]

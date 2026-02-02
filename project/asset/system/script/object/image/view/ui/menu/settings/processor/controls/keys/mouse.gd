@@ -1,5 +1,7 @@
 extends ActionsControl
 
+func get_escapes() -> Dictionary: return keys.mouses
+
 func new_controls(act: String) -> void:
 	var event := InputEventMouseButton.new()
 	event.button_index = actions[act]

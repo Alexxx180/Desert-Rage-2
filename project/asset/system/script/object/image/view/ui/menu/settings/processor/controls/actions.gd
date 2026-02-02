@@ -6,7 +6,9 @@ var keys: Node
 var defaults: Node
 var word: String
 var actions: Dictionary
+var escapes: Dictionary: get = get_escapes
 
+func get_escapes() -> Dictionary: return keys.escapes
 func _set_event(act: String, event: InputEvent) -> void:
 	InputMap.action_erase_event(act, event)
 	InputMap.action_add_event(act, event)
@@ -17,10 +19,10 @@ func set_action(caption: String, keys: Array) -> void:
 func a(no: int) -> String: return _act[no]
 
 func translate_word(key: int) -> bool:
-	if not keys.escapes.has(key):
+	if not escapes.has(key):
 		word = OS.get_keycode_string(key)
 		return false
-	word = tr("S" + keys.escapes[key])
+	word = tr("S" + escapes[key])
 	return true
 
 func translate_sentence(act: Array, s: bool = false) -> Array[String]:
