@@ -79,7 +79,7 @@
 [ext_resource type="Script" uid="uid://bsf5ipnb1p5gp" path="res://asset/system/script/object/image/view/ui/menu/settings/link/buttons.gd" id="70_if42a"]
 [ext_resource type="Script" uid="uid://521sfod8l8s2" path="res://asset/system/script/object/image/view/ui/menu/settings/link/options.gd" id="77_egcsm"]
 [ext_resource type="Script" uid="uid://cnap4m4qyii3s" path="res://asset/system/script/object/image/view/ui/menu/settings/link/t.gd" id="78_aujbd"]
-[ext_resource type="Script" path="res://asset/system/script/object/image/view/ui/menu/settings/link/logic.gd" id="79_pyihq"]
+[ext_resource type="Script" uid="uid://dbo624b5np7nx" path="res://asset/system/script/object/image/view/ui/menu/settings/link/logic.gd" id="79_pyihq"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aers8"]
 content_margin_left = 14.0
@@ -133,24 +133,6 @@ events = [ExtResource("16_yw7xu"), ExtResource("17_wy3ld"), ExtResource("18_5iai
 [sub_resource type="Shortcut" id="Shortcut_5q5w7"]
 events = [ExtResource("16_yw7xu"), ExtResource("18_ynqjn")]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_owwju"]
-content_margin_left = 6.0
-content_margin_top = 9.0
-content_margin_right = 6.0
-content_margin_bottom = 9.0
-bg_color = Color(0, 0, 0.0235294, 1)
-border_width_right = 2
-border_color = Color(0.0392157, 0.0392157, 0.0392157, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0qh8n"]
-content_margin_left = 6.0
-content_margin_top = 9.0
-content_margin_right = 6.0
-content_margin_bottom = 9.0
-bg_color = Color(0, 0, 0, 1)
-border_width_right = 2
-border_color = Color(0.588235, 0.588235, 0.588235, 1)
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fmjjx"]
 content_margin_left = 6.0
 content_margin_top = 9.0
@@ -162,6 +144,24 @@ border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
 border_color = Color(0.588235, 0.588235, 0.588235, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0qh8n"]
+content_margin_left = 6.0
+content_margin_top = 9.0
+content_margin_right = 6.0
+content_margin_bottom = 9.0
+bg_color = Color(0, 0, 0, 1)
+border_width_right = 2
+border_color = Color(0.588235, 0.588235, 0.588235, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_owwju"]
+content_margin_left = 6.0
+content_margin_top = 9.0
+content_margin_right = 6.0
+content_margin_bottom = 9.0
+bg_color = Color(0, 0, 0.0235294, 1)
+border_width_right = 2
+border_color = Color(0.0392157, 0.0392157, 0.0392157, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wtl5k"]
 content_margin_right = 5.0
@@ -541,9 +541,9 @@ size_flags_stretch_ratio = 0.05
 theme_override_constants/line_spacing = -2
 theme_override_fonts/font = ExtResource("13_owwju")
 theme_override_font_sizes/font_size = 28
-theme_override_styles/normal = SubResource("StyleBoxFlat_owwju")
-theme_override_styles/hover = SubResource("StyleBoxFlat_0qh8n")
 theme_override_styles/focus = SubResource("StyleBoxFlat_fmjjx")
+theme_override_styles/hover = SubResource("StyleBoxFlat_0qh8n")
+theme_override_styles/normal = SubResource("StyleBoxFlat_owwju")
 shortcut = ExtResource("14_n4pyq")
 text = "✅"
 
@@ -561,7 +561,6 @@ size_flags_vertical = 6
 script = ExtResource("4_2i1li")
 
 [node name="game" type="MarginContainer" parent="see/margin/topics/content/options"]
-visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 2
 theme_override_constants/margin_top = 0
@@ -867,6 +866,28 @@ text = "SITC"
 alignment = 0
 
 [node name="status" type="Label" parent="see/margin/topics/content/options/game/experience/experience/content/options/card"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -61.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "SON"
+
+[node name="hold" type="Button" parent="see/margin/topics/content/options/game/experience/experience/content/options"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "SMAX"
+alignment = 0
+
+[node name="status" type="Label" parent="see/margin/topics/content/options/game/experience/experience/content/options/hold"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -1264,6 +1285,7 @@ process_mode = 4
 script = ExtResource("8_lfymp")
 
 [node name="controls" type="MarginContainer" parent="see/margin/topics/content/options"]
+visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 2
 theme_override_constants/margin_top = 2
@@ -1280,7 +1302,6 @@ theme = ExtResource("2_ull8j")
 script = ExtResource("23_7s0gm")
 
 [node name="mouse" type="VBoxContainer" parent="see/margin/topics/content/options/controls/management"]
-visible = false
 layout_mode = 2
 script = ExtResource("8_1w8km")
 
@@ -1758,7 +1779,6 @@ alignment = 2
 script = ExtResource("18_xgvxx")
 
 [node name="keyboard" type="VBoxContainer" parent="see/margin/topics/content/options/controls/management"]
-visible = false
 layout_mode = 2
 script = ExtResource("8_1w8km")
 
@@ -2704,7 +2724,6 @@ script = ExtResource("28_6l1og")
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.35
 text = "SPST"
 alignment = 0
 
@@ -2727,7 +2746,6 @@ text = "SLFTG"
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.35
 text = "STGT"
 alignment = 0
 
@@ -2750,7 +2768,6 @@ text = "LT"
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.35
 theme_override_constants/separation = 0
 script = ExtResource("49_5qe8d")
 
@@ -2776,7 +2793,6 @@ visible = false
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.35
 text = "SFWD"
 alignment = 0
 
@@ -2800,7 +2816,6 @@ visible = false
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.35
 text = "SBWD"
 alignment = 0
 
@@ -2824,7 +2839,6 @@ visible = false
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.35
 text = "SLFT"
 alignment = 0
 
@@ -2848,7 +2862,6 @@ visible = false
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.35
 text = "SRHT"
 alignment = 0
 
@@ -2871,7 +2884,6 @@ text = "D"
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.35
 theme_override_constants/separation = 0
 script = ExtResource("49_5qe8d")
 
@@ -2897,7 +2909,6 @@ visible = false
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.35
 text = "SINV"
 alignment = 0
 
@@ -2921,7 +2932,6 @@ visible = false
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.35
 text = "HEQT"
 alignment = 0
 
@@ -2945,7 +2955,6 @@ visible = false
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.35
 text = "SABY"
 alignment = 0
 
@@ -2969,7 +2978,6 @@ visible = false
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.35
 text = "HPST"
 alignment = 0
 
@@ -2992,7 +3000,6 @@ text = "CR"
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.35
 theme_override_constants/separation = 0
 script = ExtResource("49_5qe8d")
 
@@ -3017,7 +3024,6 @@ visible = false
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.35
 text = "SHND"
 alignment = 0
 
@@ -3041,7 +3047,6 @@ visible = false
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.35
 text = "SLEG"
 alignment = 0
 
@@ -3065,7 +3070,6 @@ visible = false
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.35
 text = "SAB1"
 alignment = 0
 
@@ -3089,7 +3093,6 @@ visible = false
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.35
 text = "SAB2"
 alignment = 0
 
@@ -3132,11 +3135,59 @@ text = "E + R, R"
 alignment = 2
 text_overrun_behavior = 3
 
-[node name="fire" type="Button" parent="see/margin/topics/content/options/controls/management/gamepad/content/options"]
+[node name="inventory_prev" type="Button" parent="see/margin/topics/content/options/controls/management/gamepad/content/options"]
+visible = false
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.35
+text = "SINV"
+alignment = 0
+
+[node name="status" type="Label" parent="see/margin/topics/content/options/controls/management/gamepad/content/options/inventory_prev"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -166.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "RMB + S.Up"
+horizontal_alignment = 2
+
+[node name="inventory_next" type="Button" parent="see/margin/topics/content/options/controls/management/gamepad/content/options"]
+visible = false
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "SINV"
+alignment = 0
+
+[node name="status" type="Label" parent="see/margin/topics/content/options/controls/management/gamepad/content/options/inventory_next"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -166.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "RMB + S.Down"
+horizontal_alignment = 2
+
+[node name="fire" type="Button" parent="see/margin/topics/content/options/controls/management/gamepad/content/options"]
+visible = false
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
 text = "SFIR"
 alignment = 0
 
@@ -3155,11 +3206,34 @@ grow_vertical = 2
 size_flags_horizontal = 8
 text = "RT"
 
+[node name="combo" type="Button" parent="see/margin/topics/content/options/controls/management/gamepad/content/options"]
+visible = false
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "SAIM"
+alignment = 0
+
+[node name="status" type="Label" parent="see/margin/topics/content/options/controls/management/gamepad/content/options/combo"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -109.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "LMB + S.Up"
+horizontal_alignment = 2
+
 [node name="vendor" type="Button" parent="see/margin/topics/content/options/controls/management/gamepad/content/options"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.35
 text = "SVND"
 alignment = 0
 
@@ -3182,7 +3256,6 @@ text = "SNTD"
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.35
 text = "SORA"
 alignment = 0
 
@@ -3205,7 +3278,6 @@ text = "AB"
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.35
 text = "SORX"
 alignment = 0
 

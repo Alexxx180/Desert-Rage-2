@@ -34,9 +34,14 @@ func connect_keyboard(type: int) -> void:
 	buttons.connect_all(keys, type, agg)
 
 func connect_gamepad(type: int) -> void:
+	var agg: Dictionary = {
+		"luggage": ["inventory", "equipment", "ability", "priorities"],
+		"movement": ["left", "forward", "right", "backward"],
+		"skills": ["hands", "legs", "skill_1", "skill_2"]
+	}
 	var keys: Dictionary = {
-		"ONE": ["hands", "legs", "skill_1", "skill_2", "left", "forward", "right", "backward"],
-		"HOT": ["fire", "inventory", "equipment", "ability", "priorities"],
+		"ONE": agg.movement + agg.skills,
+		"HOT": ["fire"] + agg.luggage,
 		"AGG": ["movement", "targeting"]
 	} # enum { NONE = 0, KEY = 1, ALT = 2, HOT = 3, AGG = 4, ALL = 5 } # var all: Array[String] = ["luggage"]
-	buttons.connect_all(keys, type)
+	buttons.connect_all(keys, type, agg)
