@@ -22,7 +22,7 @@ func connect_controls(ui: Panel, work: Node) -> void:
 		devices.get("connect_" + device.names[i]).call(device.types[i])
 	m.mode.keys = work.controls.keys
 	m.mouse.manage = m
-	m.keyboard.sequence.manage = m
+	m.keyboard.sequence.input = m.mode.input
 	m.gamepad.button.manage = m
 
 func controls(work: Node, ui: Control) -> void:

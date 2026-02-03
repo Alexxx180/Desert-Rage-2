@@ -7,12 +7,14 @@ var ui: VBoxContainer:
 	get: return management.get(logic.mode.device.named)
 var machine: int:
 	get: return logic.mode.device.device
+var topic: Button:
+	get: return phrase(of(logic.option))
 
 func finish(buttons: Array) -> void:
 	ui.footer.finish_input(buttons)
 
 func set_title() -> void:
-	ui.footer.title = phrase(of(logic.option)).text
+	ui.footer.title = topic.text
 
 func set_button_input(buttons: Array) -> void:
 	ui.footer.input_button(logic.join(buttons))

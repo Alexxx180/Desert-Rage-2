@@ -22,11 +22,19 @@ func _alt(state: bool, event: InputEvent, type: String, count: String = "MAX", d
 func _agg(state: bool, event: InputEvent) -> void:
 	if state: add_keys(event, sequence.aggregate(event))
 
-func _all(state: bool, event: InputEvent) -> void:
-	pass
+func _lock() -> bool:
+	sequence.input.locked = true
+	return true
+
+func _all(event: InputEvent) -> void:
+	if sequence.input.got_hotkey(event): return
+	if sequence.input.hotkeys(event.keycode): return
+	
+	var state: bool = not sequence.input.present(event.keycode, true)
+	_alt(state, event, "hold", "key_mask", "delete_last")
 
 func alternate(event: InputEvent) -> void:
-	_alt(sequence.unique(event), event, "alt")
+	_alt(sequence.input.unique(event), event, "alt")
 
 func hot(event: InputEvent) -> void:
 	if event.is_pressed():
@@ -41,14 +49,7 @@ func aggregate(event: InputEvent) -> void:
 
 func all(event: InputEvent) -> void:
 	match event.keycode:
-		KEY_BACKSPACE:
-			if event.is_pressed():
-				sequence.input.remove_last()
+		KEY_BACKSPACE: if event.is_pressed(): sequence.input.remove_last()
 		KEY_COMMA: sequence.all(event)
 		KEY_ENTER: pass
-		_:
-			if (not sequence.input.locked or event.keycode in sequence.hardcoded()) and event.is_pressed():
-				var state: bool = not sequence.input.present(event.keycode, true)
-				_alt(state, event, "hold", "key_mask", "delete_last")
-			else:
-				sequence.input.locked = true
+		_: _all(event)

@@ -19,15 +19,12 @@ func connect_logic(modes: Dictionary, key: String) -> void:
 func connect_modes(modes: Dictionary) -> void:
 	for key in modes: if t.logic.valid(key): connect_logic(modes, key)
 
-func connect_all(keys: Dictionary, machine: int) -> void:
+func connect_all(keys: Dictionary, machine: int, agg: Dictionary) -> void:
 	t.logic.mode.device.device = machine
 	t.logic.connects(options)
 	connect_footer(keys)
 	connect_modes(keys)
-"""
-func connect_mouse(nodes: Array[Node]) -> void:
-	t.logic.connects(options)
-	for button in nodes:
-		connect_button(button, button.name, resolve.mode.device.MOUSE)
-		resolve.connects(button, "HOT")
-"""
+	aggregate(agg)
+
+func aggregate(agg: Dictionary) -> void:
+	for c in agg: t.of(c).connect_collapsing(agg[c], t)
