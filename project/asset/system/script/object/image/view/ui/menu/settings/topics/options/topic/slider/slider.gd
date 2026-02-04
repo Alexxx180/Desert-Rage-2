@@ -4,7 +4,10 @@ class_name FocusedSlider
 
 signal hold_focus(status: bool)
 
+@export var text: String = ""
+
 @onready var submit: Button = $form/state/manual
+@onready var caption: Label = $form/caption
 @onready var manual: Node = $manual
 
 var _manual: bool = false
@@ -13,6 +16,7 @@ var released: bool:
 var _grabber: Texture2D = preload("res://asset/resource/ui/texture/grabber.tres")
 
 func _ready() -> void:
+	caption.text = text
 	value_changed.connect(func(v: int):
 		submit.text = str(v)#str(v, "%")
 		if v == max_value:

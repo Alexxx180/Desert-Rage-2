@@ -1,4 +1,4 @@
-[gd_scene load_steps=143 format=3 uid="uid://b4x588yxrcok3"]
+[gd_scene load_steps=142 format=3 uid="uid://b4x588yxrcok3"]
 
 [ext_resource type="Script" uid="uid://d05jnr6xe41se" path="res://asset/system/script/object/image/view/ui/menu/settings/settings.gd" id="1_apf6u"]
 [ext_resource type="Theme" uid="uid://dfyi7rrcrweqx" path="res://asset/resource/ui/theme/patterns/template/menu/settings/settings.tres" id="1_vs08l"]
@@ -21,7 +21,6 @@
 [ext_resource type="PackedScene" uid="uid://bqsegj237ygi0" path="res://asset/system/scene/object/canvas/ui/menu/settings/sound/music.tscn" id="8_tby3j"]
 [ext_resource type="Script" uid="uid://bw6sk86sxnhl1" path="res://asset/system/script/object/image/view/ui/menu/settings/topics/options/topic/named/topics/experience.gd" id="9_7pxvf"]
 [ext_resource type="PackedScene" uid="uid://hoxnejr2ne7q" path="res://asset/system/scene/object/canvas/ui/menu/settings/sound/sound.tscn" id="9_fgij5"]
-[ext_resource type="PackedScene" uid="uid://bwxmswjunrdab" path="res://asset/system/scene/object/canvas/ui/menu/settings/sound/interface.tscn" id="10_bgvfr"]
 [ext_resource type="Script" uid="uid://bddnexjid3qoh" path="res://asset/system/script/object/image/view/ui/menu/settings/topics/options/topic/named/options/experience/sound.gd" id="11_n6v6j"]
 [ext_resource type="FontFile" uid="uid://tledodlx6okb" path="res://asset/resource/media/data/font/LTSuperiorMono-Semibold.otf" id="12_jw263"]
 [ext_resource type="Script" uid="uid://bkvtgtb73me2c" path="res://asset/system/script/object/image/view/ui/menu/settings/topics/tabs/tabs.gd" id="13_cumtp"]
@@ -133,6 +132,24 @@ events = [ExtResource("16_yw7xu"), ExtResource("17_wy3ld"), ExtResource("18_5iai
 [sub_resource type="Shortcut" id="Shortcut_5q5w7"]
 events = [ExtResource("16_yw7xu"), ExtResource("18_ynqjn")]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_owwju"]
+content_margin_left = 6.0
+content_margin_top = 9.0
+content_margin_right = 6.0
+content_margin_bottom = 9.0
+bg_color = Color(0, 0, 0.0235294, 1)
+border_width_right = 2
+border_color = Color(0.0392157, 0.0392157, 0.0392157, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0qh8n"]
+content_margin_left = 6.0
+content_margin_top = 9.0
+content_margin_right = 6.0
+content_margin_bottom = 9.0
+bg_color = Color(0, 0, 0, 1)
+border_width_right = 2
+border_color = Color(0.588235, 0.588235, 0.588235, 1)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fmjjx"]
 content_margin_left = 6.0
 content_margin_top = 9.0
@@ -144,24 +161,6 @@ border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
 border_color = Color(0.588235, 0.588235, 0.588235, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0qh8n"]
-content_margin_left = 6.0
-content_margin_top = 9.0
-content_margin_right = 6.0
-content_margin_bottom = 9.0
-bg_color = Color(0, 0, 0, 1)
-border_width_right = 2
-border_color = Color(0.588235, 0.588235, 0.588235, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_owwju"]
-content_margin_left = 6.0
-content_margin_top = 9.0
-content_margin_right = 6.0
-content_margin_bottom = 9.0
-bg_color = Color(0, 0, 0.0235294, 1)
-border_width_right = 2
-border_color = Color(0.0392157, 0.0392157, 0.0392157, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wtl5k"]
 content_margin_right = 5.0
@@ -541,9 +540,9 @@ size_flags_stretch_ratio = 0.05
 theme_override_constants/line_spacing = -2
 theme_override_fonts/font = ExtResource("13_owwju")
 theme_override_font_sizes/font_size = 28
-theme_override_styles/focus = SubResource("StyleBoxFlat_fmjjx")
-theme_override_styles/hover = SubResource("StyleBoxFlat_0qh8n")
 theme_override_styles/normal = SubResource("StyleBoxFlat_owwju")
+theme_override_styles/hover = SubResource("StyleBoxFlat_0qh8n")
+theme_override_styles/focus = SubResource("StyleBoxFlat_fmjjx")
 shortcut = ExtResource("14_n4pyq")
 text = "✅"
 
@@ -561,6 +560,7 @@ size_flags_vertical = 6
 script = ExtResource("4_2i1li")
 
 [node name="game" type="MarginContainer" parent="see/margin/topics/content/options"]
+visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 2
 theme_override_constants/margin_top = 0
@@ -600,14 +600,17 @@ script = ExtResource("11_n6v6j")
 [node name="music" parent="see/margin/topics/content/options/game/experience/sound/content/options" instance=ExtResource("8_tby3j")]
 layout_mode = 2
 scrollable = false
+text = "SMSC"
 
 [node name="sound" parent="see/margin/topics/content/options/game/experience/sound/content/options" instance=ExtResource("9_fgij5")]
 layout_mode = 2
 scrollable = false
+text = "SSDT"
 
-[node name="interface" parent="see/margin/topics/content/options/game/experience/sound/content/options" instance=ExtResource("10_bgvfr")]
+[node name="interface" parent="see/margin/topics/content/options/game/experience/sound/content/options" instance=ExtResource("9_fgij5")]
 layout_mode = 2
 scrollable = false
+text = "SIFT"
 
 [node name="listen" type="Button" parent="see/margin/topics/content/options/game/experience/sound/content/options"]
 custom_minimum_size = Vector2(300, 60)
@@ -906,6 +909,7 @@ text = "SON"
 custom_minimum_size = Vector2(0, 45)
 layout_mode = 2
 theme = ExtResource("8_j2b4r")
+theme_override_fonts/font = ExtResource("12_jw263")
 script = ExtResource("6_wolhp")
 
 [node name="caption" type="Label" parent="see/margin/topics/content/options/game/experience/experience/content/footer"]
@@ -1285,7 +1289,6 @@ process_mode = 4
 script = ExtResource("8_lfymp")
 
 [node name="controls" type="MarginContainer" parent="see/margin/topics/content/options"]
-visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 2
 theme_override_constants/margin_top = 2
@@ -1786,19 +1789,8 @@ script = ExtResource("8_1w8km")
 custom_minimum_size = Vector2(0, 45)
 layout_mode = 2
 theme = ExtResource("6_kbam3")
-script = ExtResource("6_w727q")
-
-[node name="caption" type="Label" parent="see/margin/topics/content/options/controls/management/keyboard/header"]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_top = -14.0
-offset_right = 109.0
-offset_bottom = 14.0
-grow_vertical = 2
-size_flags_horizontal = 0
 text = "SKDT"
+script = ExtResource("6_w727q")
 
 [node name="content" type="VBoxContainer" parent="see/margin/topics/content/options/controls/management/keyboard"]
 layout_mode = 2
@@ -2183,7 +2175,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.35
 theme = SubResource("Theme_icevt")
-text = "SQCK"
+text = "SSBJ"
 alignment = 0
 
 [node name="collapse" type="Button" parent="see/margin/topics/content/options/controls/management/keyboard/content/options/subjects"]
@@ -2684,6 +2676,7 @@ text = "F12"
 custom_minimum_size = Vector2(0, 45)
 layout_mode = 2
 theme = ExtResource("8_j2b4r")
+theme_override_fonts/font = ExtResource("12_jw263")
 text = "SKDD"
 alignment = 2
 script = ExtResource("6_wolhp")
@@ -2699,19 +2692,8 @@ script = ExtResource("8_1w8km")
 custom_minimum_size = Vector2(0, 45)
 layout_mode = 2
 theme = ExtResource("6_kbam3")
-script = ExtResource("6_w727q")
-
-[node name="caption" type="Label" parent="see/margin/topics/content/options/controls/management/gamepad/header"]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_top = -14.0
-offset_right = 112.0
-offset_bottom = 14.0
-grow_vertical = 2
-size_flags_horizontal = 0
 text = "SGDT"
+script = ExtResource("6_w727q")
 
 [node name="content" type="VBoxContainer" parent="see/margin/topics/content/options/controls/management/gamepad"]
 layout_mode = 2
@@ -3066,7 +3048,6 @@ size_flags_horizontal = 8
 text = "B"
 
 [node name="skill_1" type="Button" parent="see/margin/topics/content/options/controls/management/gamepad/content/options"]
-visible = false
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -3110,6 +3091,127 @@ grow_horizontal = 0
 grow_vertical = 2
 size_flags_horizontal = 8
 text = "Y"
+
+[node name="quick" type="HBoxContainer" parent="see/margin/topics/content/options/controls/management/gamepad/content/options"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+theme_override_constants/separation = 0
+script = ExtResource("49_5qe8d")
+
+[node name="enter" type="Button" parent="see/margin/topics/content/options/controls/management/gamepad/content/options/quick"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+theme = SubResource("Theme_icevt")
+text = "SQCK"
+alignment = 0
+
+[node name="collapse" type="Button" parent="see/margin/topics/content/options/controls/management/gamepad/content/options/quick"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+theme = SubResource("Theme_5hw7m")
+text = "E + R, R"
+alignment = 2
+text_overrun_behavior = 3
+
+[node name="team" type="Button" parent="see/margin/topics/content/options/controls/management/gamepad/content/options"]
+visible = false
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+text = "SHSL"
+alignment = 0
+
+[node name="status" type="Label" parent="see/margin/topics/content/options/controls/management/gamepad/content/options/team"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -72.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "T"
+
+[node name="group" type="Button" parent="see/margin/topics/content/options/controls/management/gamepad/content/options"]
+visible = false
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+text = "SGRP"
+alignment = 0
+
+[node name="status" type="Label" parent="see/margin/topics/content/options/controls/management/gamepad/content/options/group"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -75.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "G"
+
+[node name="quick_heal" type="Button" parent="see/margin/topics/content/options/controls/management/gamepad/content/options"]
+visible = false
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+text = "SSQH"
+alignment = 0
+
+[node name="status" type="Label" parent="see/margin/topics/content/options/controls/management/gamepad/content/options/quick_heal"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -73.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "R"
+
+[node name="quick_refresh" type="Button" parent="see/margin/topics/content/options/controls/management/gamepad/content/options"]
+visible = false
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+text = "SSQR"
+alignment = 0
+
+[node name="status" type="Label" parent="see/margin/topics/content/options/controls/management/gamepad/content/options/quick_refresh"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -73.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "R"
 
 [node name="subjects" type="HBoxContainer" parent="see/margin/topics/content/options/controls/management/gamepad/content/options"]
 custom_minimum_size = Vector2(300, 60)

@@ -4,6 +4,8 @@ var manage: Node
 
 enum { S = -1, E = 1, MAX = 4 }
 
+func c(e: InputEvent) -> int: return e.axis
+
 func completed() -> bool:
 	return manage.next.size() < MAX
 
@@ -17,7 +19,7 @@ func add_buttons(state: bool, button: Variant) -> void:
 		finish(manage.next)
 
 func from_axis(event: InputEventJoypadMotion) -> Array:
-	return [event.axis, event.axis_value]
+	return [c(event), event.axis_value]
 
 func add_ax(axis: int, value: int) -> Node:
 	manage.next.append([axis, value])
@@ -27,7 +29,7 @@ func add_axs(x: int, y: int) -> void:
 	add_ax(x, S).add_ax(y, S).add_ax(x, E).add_ax(y, E)
 
 func auto_ax(event: InputEvent, ax: Array) -> void:
-	for a in ax: if event.axis in ax:
+	for a in ax: if c(event) in ax:
 		add_axs(a[0], a[1]); return
 
 func all_axis(event: InputEvent) -> bool:

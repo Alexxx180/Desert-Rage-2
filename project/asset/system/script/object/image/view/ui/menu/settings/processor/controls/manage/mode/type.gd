@@ -24,6 +24,9 @@ func select(value: int) -> void:
 	selected = value
 	start_input.emit()
 
+func aggregated_mask() -> bool: return selected == AGG
+func deep() -> bool: return selected in [AGG, ALL]
+
 func manage(type: Node, event: InputEvent) -> void:
 	match selected:
 		KEY: type.one_key(event)

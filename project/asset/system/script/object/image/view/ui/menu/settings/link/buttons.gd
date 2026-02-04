@@ -22,9 +22,9 @@ func connect_modes(modes: Dictionary) -> void:
 func connect_all(keys: Dictionary, machine: int, agg: Dictionary) -> void:
 	t.logic.mode.device.device = machine
 	t.logic.connects(options)
+	aggregate(agg)
 	connect_footer(keys)
 	connect_modes(keys)
-	aggregate(agg)
 
 func aggregate(agg: Dictionary) -> void:
 	for c in agg: t.of(c).connect_collapsing(agg[c], t)

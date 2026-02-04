@@ -9,6 +9,7 @@ func connect_collapsing(options: Array, t: Node) -> void:
 	nodes = []
 	for i in options: nodes.push_back(t.of(i))
 	collapse.pressed.connect(toggle)
+	enter.pressed.connect(func(): t.set_aggregate(nodes))
 
 func toggle() -> void:
 	var state: bool = !nodes.front().visible

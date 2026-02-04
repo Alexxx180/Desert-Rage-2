@@ -3,11 +3,12 @@ extends Node
 signal finish_combo(keys: Array[String])
 signal enter_keys(keys: Array[String])
 
-var group: int = 0
 var mode: Node
+var store: Node:
+	get: return mode.input.store
 
-func reset() -> void: group = 0
-func next() -> int: return group + 1
+#func reset() -> void: group = 0
+#func next() -> int: return group + 1
 func clear() -> void: mode.type.clear()
 
 func form(count: int) -> Array:
@@ -16,16 +17,14 @@ func form(count: int) -> Array:
 	unit.fill(Defaults.INT)
 	return unit
 
-func set_position(place: int) -> void: group = place
+func store_code(element: Array, code: int) -> void:
+	store.sets(element, mode.input.place, code)
 
-func store_code(store: Node, element: Array, code: int) -> void:
-	store.sets(element, group, code)
-
-func store_next(store: Node, code: int) -> void:
+func store_next(code: int) -> void:
 	store.sets(store, store.next, code)
 
-func store_last(store: Node, code: int) -> void:
-	store_code(store, store.last, code)
+func store_last(code: int) -> void:
+	store_code(store.last, code)
 	enter(store.next)
 
 func enter(codes: Array, input: Signal = enter_keys) -> void:
@@ -33,11 +32,11 @@ func enter(codes: Array, input: Signal = enter_keys) -> void:
 
 func finish(codes: Array) -> void: enter(codes, finish_combo)
 
-func is_shallow(unit: Variant) -> bool: return unit is Array # not empty() and last is Array and not  - PUT before
+func is_deep(unit: Variant) -> bool: return unit is Array # not empty() and last is Array and not  - PUT before
 
-func store_keys(store: Node, code: int) -> Callable:
+func store_keys(code: int) -> Callable:
 	return func():
-		if is_shallow(store.last):
-			store_last(store, code)
+		if is_deep(store.last):
+			store_last(code)
 		else:
-			store_next(store, code)
+			store_next(code)

@@ -5,6 +5,8 @@ class_name TopicFooter
 @onready var topic: VBoxContainer = get_parent()
 @onready var header: Button = topic.get_node("../header")
 
+const MASK: String = "%10s"
+
 var _caption: String
 var _title: String
 var title: String:
@@ -22,5 +24,6 @@ func _hide_topic() -> void:
 func finish_input(_id: Array) -> void:
 	text = _caption
 
-func input_button(buttons: String) -> void:
-	text = buttons + " - " + tr(title)
+func input_button(buttons: String, kind: String = "") -> void:
+	text = buttons + " = "
+	text += tr(title) if kind == "" else MASK % tr(kind) #kind

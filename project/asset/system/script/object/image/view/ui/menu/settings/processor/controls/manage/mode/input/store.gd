@@ -3,8 +3,11 @@ extends Node
 var next: Array = []
 var last: Variant:
 	get: return next.back()
+var agg: int:
+	get: return next.size() - 1
 
 enum { RESET = 0, SINGLE = 1, MAX = 3 } # SINGLE = 1, # const RESET: int = 0
+
 func hardcoded() -> Array: # prevents users from binding keys
 	return [KEY_ESCAPE, KEY_ENTER, KEY_BACKSPACE, KEY_COMMA, KEY_0, KEY_1, KEY_2,
 		KEY_3, KEY_4, KEY_5, KEY_6, KEY_7, KEY_8, KEY_9]
@@ -23,7 +26,9 @@ func clear() -> void: next.clear()
 func shorten() -> void: last.clear()
 
 func add_last(unit: Variant) -> void: last.push_back(unit)
-func add_next(unit: Variant) -> void: next.push_back(unit)
+func add_next(unit: Variant) -> void:
+	next.push_back(unit)
+	agg = next.size() - 1
 
 func compare(to: int) -> bool: return next.size() == to
 func empty() -> bool: return compare(RESET)
@@ -38,8 +43,10 @@ func key_press(code: int) -> bool: return key_hold(code) and key_alt(code)
 func unique(e: InputEvent, deep: bool = false) -> bool:
 	return e.is_pressed() and not present(e.keycode, deep)
 
-func append(unit: Variant, link: Node) -> void:
-	if link.is_shallow(unit):
+func append(unit: Variant, mode: Node) -> void:
+	if mode.input.link.is_deep(unit): # and not empty():
+		add_next(unit)
+	elif mode.type.deep():
 		add_last(unit)
 	else:
 		add_next(unit)

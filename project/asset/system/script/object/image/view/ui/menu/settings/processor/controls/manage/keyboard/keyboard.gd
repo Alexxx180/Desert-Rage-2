@@ -30,22 +30,22 @@ func _all(event: InputEvent) -> void:
 	if sequence.input.got_hotkey(event): return
 	if sequence.input.hotkeys(event.keycode): return
 	
-	var state: bool = not sequence.input.present(event.keycode, true)
+	var state: bool = not sequence.input.store.present(event.keycode, true)
 	_alt(state, event, "hold", "key_mask", "delete_last")
 
 func alternate(event: InputEvent) -> void:
-	_alt(sequence.input.unique(event), event, "alt")
+	_alt(sequence.input.store.unique(event), event, "alt")
 
 func hot(event: InputEvent) -> void:
 	if event.is_pressed():
-		_alt(not sequence.input.present(event.keycode), event, "press")
+		_alt(not sequence.input.store.present(event.keycode), event, "press")
 	else:
 		sequence.input.finish()
 
 func aggregate(event: InputEvent) -> void:
 	match event.keycode:
 		KEY_COMMA: sequence.add(event)
-		_: _agg(sequence.unique(event, true), event)
+		_: _agg(sequence.input.store.unique(event, true), event)
 
 func all(event: InputEvent) -> void:
 	match event.keycode:
