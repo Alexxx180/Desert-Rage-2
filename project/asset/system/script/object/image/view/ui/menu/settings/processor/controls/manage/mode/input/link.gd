@@ -2,14 +2,17 @@ extends Node
 
 signal finish_combo(keys: Array[String])
 signal enter_keys(keys: Array[String])
+signal interrupt_input()
 
+var option: String = ""
 var mode: Node
 var store: Node:
 	get: return mode.input.store
 
-#func reset() -> void: group = 0
-#func next() -> int: return group + 1
 func clear() -> void: mode.type.clear()
+func interrupt() -> void:
+	if option != "":
+		interrupt_input.emit()
 
 func form(count: int) -> Array:
 	var unit: Array = []

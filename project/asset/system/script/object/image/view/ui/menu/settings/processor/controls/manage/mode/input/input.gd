@@ -19,7 +19,7 @@ func start_enter() -> void: next_key("defined", add_mask)
 func enter_next(code: int) -> void: next_key("undefined", link.store_keys(code))
 
 func clear() -> void: store.clear() ; enter()
-func stop_operating() -> void: clear() ; link.clear()
+func stop_operating() -> void: store.clear(); link.clear()
 
 func _remove_unit() -> void: if not store.masked(): store.remove()
 func _remove_after_mask() -> void: if not store.empty(): store.remove()
@@ -55,7 +55,7 @@ func lock(state: bool) -> bool:
 	return true
 
 func add_key(code: int, maximum: String) -> void:
-	append(code) ; get("finish" if store.compare(store.get(maximum)) else "enter").call()
+	append(code) ; get("finish" if store.compare(get(maximum)) else "enter").call()
 
 func append(unit: Variant) -> void: store.append(unit, link.mode)
 func add() -> void: append([])
@@ -63,6 +63,7 @@ func add_mask() -> void: append(link.form(key_mask))
 
 func enter() -> void: link.enter(store.next)
 func finish() -> void: link.finish(store.next) ; stop_operating()
+func interrupt() -> void: link.interrupt() ; stop_operating()
 
 func hotkeys(code: int) -> bool:
 	return not locked or store.is_hard(code) and lock(true)

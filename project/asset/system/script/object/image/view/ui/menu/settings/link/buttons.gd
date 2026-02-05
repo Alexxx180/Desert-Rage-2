@@ -19,9 +19,10 @@ func connect_logic(modes: Dictionary, key: String) -> void:
 func connect_modes(modes: Dictionary) -> void:
 	for key in modes: if t.logic.valid(key): connect_logic(modes, key)
 
+func connect_signals() -> void: t.logic.connects(options)
+
 func connect_all(keys: Dictionary, machine: int, agg: Dictionary) -> void:
 	t.logic.mode.device.device = machine
-	t.logic.connects(options)
 	aggregate(agg)
 	connect_footer(keys)
 	connect_modes(keys)

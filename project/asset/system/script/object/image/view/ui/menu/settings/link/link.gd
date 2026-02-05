@@ -18,6 +18,7 @@ func connect_controls(ui: Panel, work: Node) -> void:
 	devices.buttons.t.management = manage
 	devices.buttons.t.logic.mode = m.mode
 	var device: Node = m.mode.device
+	devices.buttons.connect_signals()
 	for i in len(device.types):
 		devices.get("connect_" + device.names[i]).call(device.types[i])
 	m.mode.keys = work.controls.keys

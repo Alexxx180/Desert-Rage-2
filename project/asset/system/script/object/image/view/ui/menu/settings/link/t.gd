@@ -24,8 +24,8 @@ func set_button_input(buttons: Array) -> void:
 	logic.mode.footer_status(ui.footer, logic.join(buttons))
 
 func set_final_input(buttons: Array) -> void:
-	set_aggregate(Defaults.ARRAY)
 	status(of(logic.option)).text = logic.join(buttons)
+	set_aggregate(Defaults.ARRAY)
 
 func of(caption: String) -> Variant: return ui.options.get_node(caption)
 
@@ -38,9 +38,8 @@ func status(b: Control) -> Variant:
 func connects(caption: String, type: String, mask: int) -> void:
 	phrase(of(caption)).pressed.connect(logic.activate(type, mask))
 
-func focus(b: Button, state: bool, type: String) -> void:
-	b.disabled = state # false
-	b.get(type + "_focus").call()
+func focus(b: Button, type: String) -> void:
+	b.get(type + "_focus").call() # b.disabled = state # false
 
 func option(named: String) -> void:
 	set_title()

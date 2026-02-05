@@ -27,6 +27,9 @@ func manage(machine: Node, event: InputEvent) -> void:
 func translate(sequence: Array) -> Array:
 	return type.translate(keys.get(device.named), sequence)
 
+func interrupts(set_title: Callable) -> void:
+	input.link.interrupt_input.connect(set_title)
+
 func connects(enter: Callable, controls: Callable) -> void:
 	input.link.enter_keys.connect(enter)
 	input.link.finish_combo.connect(controls)
