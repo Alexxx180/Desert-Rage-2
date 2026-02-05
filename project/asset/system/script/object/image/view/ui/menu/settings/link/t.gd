@@ -11,8 +11,8 @@ var topic: Button:
 	get: return phrase(of(logic.option))
 var aggregate: Array = Defaults.ARRAY
 
-func finish(buttons: Array) -> void:
-	ui.footer.finish_input(buttons)
+func finish() -> void:
+	ui.footer.finish_input()
 
 func set_title() -> void:
 	ui.footer.title = topic.text
@@ -27,12 +27,14 @@ func set_final_input(buttons: Array) -> void:
 	status(of(logic.option)).text = logic.join(buttons)
 	set_aggregate(Defaults.ARRAY)
 
-func of(caption: String) -> Variant: return ui.options.get_node(caption)
+func of(caption: String) -> Variant:
+	var r = ui.options.get_node(caption)
+	return r # ui.options.get_node(caption)
 
-func phrase(b: Control) -> Button:
+func phrase(b: Variant) -> Button:
 	return b if b is Button else b.enter
 
-func status(b: Control) -> Variant:
+func status(b: Variant) -> Variant:
 	return b.get_node("status") if b is Button else b.collapse
 
 func connects(caption: String, type: String, mask: int) -> void:

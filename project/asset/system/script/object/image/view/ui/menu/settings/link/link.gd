@@ -12,6 +12,10 @@ func connect_ui(work: Node, ui: VBoxContainer) -> void:
 		l.update.connect(_card_hint(card, d))
 		d.hints.connect(_card_hint(card, d))
 
+func connect_interrupt(tabs: VFlowContainer, m: Node) -> void:
+	for i in [tabs.caption.experience, tabs.exit]:
+		i.pressed.connect(m.mode.input.interrupt)
+
 func connect_controls(ui: Panel, work: Node) -> void:
 	var manage: VBoxContainer = ui.topics.options.controls.management
 	var m: Node = work.controls.manage
@@ -21,6 +25,7 @@ func connect_controls(ui: Panel, work: Node) -> void:
 	devices.buttons.connect_signals()
 	for i in len(device.types):
 		devices.get("connect_" + device.names[i]).call(device.types[i])
+	connect_interrupt(ui.topics.tabs, m)
 	m.mode.keys = work.controls.keys
 	m.mouse.manage = m
 	m.keyboard.sequence.input = m.mode.input

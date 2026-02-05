@@ -21,7 +21,7 @@ func _hide_topic() -> void:
 	topic.hide()
 	header.grab_focus()
 
-func finish_input(_id: Array) -> void:
+func finish_input() -> void:
 	text = _caption
 
 func input_button(buttons: String, kind: String = "") -> void:

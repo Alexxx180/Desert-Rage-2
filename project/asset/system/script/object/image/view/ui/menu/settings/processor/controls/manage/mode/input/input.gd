@@ -7,6 +7,8 @@ var key_mask: int = 1
 var locked: bool = false
 var place: int:
 	get: return min(get_place(store.last, Defaults.INT), key_mask - 1)
+var MAX: int:
+	get: return store.MAX
 
 const SINGLE: int = 1
 

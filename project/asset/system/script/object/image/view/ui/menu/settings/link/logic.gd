@@ -30,5 +30,5 @@ func custom_mask(modes: Dictionary, named: String) -> int:
 	return modes[KEY][named]
 
 func connects(options: Node) -> void:
-	mode.interrupts(options.t.set_title)
+	mode.interrupts(options.t.finish)
 	mode.connects(options.t.set_button_input, options.controls)

@@ -50,6 +50,6 @@ func aggregate(event: InputEvent) -> void:
 func all(event: InputEvent) -> void:
 	match event.keycode:
 		KEY_BACKSPACE: if event.is_pressed(): sequence.input.remove_last()
-		KEY_COMMA: sequence.all(event)
+		KEY_COMMA: if event.is_pressed(): sequence.all(event)
 		KEY_ENTER: pass
 		_: _all(event)

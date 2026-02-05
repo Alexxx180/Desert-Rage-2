@@ -3,7 +3,7 @@ extends Node
 var t: Node
 
 func controls(buttons: Array) -> void: # func enter() -> Callable: return resolve.t.set_button_input
-	t.finish(buttons)
+	t.finish()
 	t.logic.set_input_action(buttons)
 	t.set_final_input(buttons)
 	# interrupt()
@@ -17,6 +17,6 @@ func option(button: Button, named: String, machine: int) -> Callable:
 	return func():
 		interrupt()
 		t.focus(button, "release")
+		t.logic.set_device(machine)
 		t.logic.set_caption(named)
 		t.set_title()
-		t.logic.set_device(machine)
