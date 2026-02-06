@@ -1,6 +1,6 @@
 extends Node
 
-enum { INTERFACE, OPTIONS, CARD, INVENTORY }
+enum { DIFFICULTY, COMBO, INTERFACE, OPTIONS, CARD, INVENTORY, VENDOR }
 
 const MASK: int = 0x02 # 4 options max, 2 digits
 var settings: int = 0
@@ -15,14 +15,13 @@ func _value_behind(no: int) -> int: return settings & bit(no)
 func get_mask(no: int, type: Callable = bit) -> int:
 	var value: int = 0
 	var from: int = digit(no)
-	for i in range(from, from + MASK):
-		value += type.call(i)
-	return value # print(" - bits: ", value)
+	for i in range(from, from + MASK): value += type.call(i)
+	return value
 
 func _get_exact_value(no: int) -> int: return get_mask(no, _value_behind)
 
 func get_value(no: int) -> int:
-	return whole(_get_exact_value(no), digit(no)) # whole(, no) # 100 # 10000 # 1000000 # 100000000
+	return whole(_get_exact_value(no), digit(no))
 
 func set_value(no: int, next: int) -> void:
 	settings = settings & ~get_mask(no) | zeros(next, digit(no))

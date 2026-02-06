@@ -1,6 +1,7 @@
 extends Node
 
-enum { SCREEN = 1, ON }
+enum { LISTEN, REPEAT, PLAYER, GENRE, NARRATIVE, QUOTES, HELP, EMOTIONS,
+	SCREEN, AURA, RESOURCE, DAMAGE, ITEMS, ORDER_A, ORDER_X, PRESS }
 
 var settings: int
 

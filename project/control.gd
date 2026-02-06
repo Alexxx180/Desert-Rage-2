@@ -7,12 +7,6 @@ var directed: int = 1
 
 enum { OFF = 3, Z = 0, HALF = 90, AIM = 180 }
 
-func _ready() -> void:
-	var sections: Node = $sections
-	sections.set_value(sections.INTERFACE, 2)
-	sections.set_value(sections.OPTIONS, 1)
-	sections.set_value(sections.INVENTORY, 3)
-
 func t(direction: String) -> String:
 	return "targeting_" + direction
 
