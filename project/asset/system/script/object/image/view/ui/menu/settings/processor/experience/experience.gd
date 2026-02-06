@@ -1,3 +1,4 @@
 extends Node
 
-@onready var language: Node = $language
+# @onready var sound: Node = $sound
+@onready var interface: Node = $interface

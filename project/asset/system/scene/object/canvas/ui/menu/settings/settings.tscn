@@ -1,4 +1,4 @@
-[gd_scene load_steps=142 format=3 uid="uid://b4x588yxrcok3"]
+[gd_scene load_steps=146 format=3 uid="uid://b4x588yxrcok3"]
 
 [ext_resource type="Script" uid="uid://d05jnr6xe41se" path="res://asset/system/script/object/image/view/ui/menu/settings/settings.gd" id="1_apf6u"]
 [ext_resource type="Theme" uid="uid://dfyi7rrcrweqx" path="res://asset/resource/ui/theme/patterns/template/menu/settings/settings.tres" id="1_vs08l"]
@@ -59,7 +59,7 @@
 [ext_resource type="Script" uid="uid://dwd5v3mbryfqe" path="res://asset/system/script/object/image/view/ui/menu/settings/processor/controls/keys/keyboard.gd" id="51_bgo5c"]
 [ext_resource type="Script" uid="uid://bq6354c3j51d3" path="res://asset/system/script/object/image/view/ui/menu/settings/processor/controls/keys/mouse.gd" id="51_d07id"]
 [ext_resource type="Script" uid="uid://b4n28qoa5us2i" path="res://asset/system/script/object/image/view/ui/menu/settings/processor/experience/experience.gd" id="54_317at"]
-[ext_resource type="Script" uid="uid://c7kto53y7lpl4" path="res://asset/system/script/object/image/view/ui/menu/settings/processor/experience/language.gd" id="54_fmjjx"]
+[ext_resource type="Script" uid="uid://c7kto53y7lpl4" path="res://asset/system/script/object/image/view/ui/menu/settings/processor/experience/interface/language.gd" id="54_fmjjx"]
 [ext_resource type="Script" uid="uid://dug3scueyap15" path="res://asset/system/script/object/image/view/ui/menu/settings/processor/controls/keys/gamepad.gd" id="54_lanli"]
 [ext_resource type="Script" uid="uid://cbndyn6tcpkk4" path="res://asset/system/script/object/image/view/ui/menu/settings/processor/controls/manage/manage.gd" id="58_bvlu0"]
 [ext_resource type="Script" uid="uid://waiueh75ott" path="res://asset/system/script/object/image/view/ui/menu/settings/processor/controls/manage/mode/mode.gd" id="59_a11lw"]
@@ -76,6 +76,10 @@
 [ext_resource type="Script" uid="uid://dmvhxhvx2imel" path="res://asset/system/script/object/image/view/ui/menu/settings/processor/controls/manage/mode/input/link.gd" id="67_wtl5k"]
 [ext_resource type="Script" uid="uid://dav3cd3sw0r0j" path="res://asset/system/script/object/image/view/ui/menu/settings/link/devices.gd" id="69_yo1e4"]
 [ext_resource type="Script" uid="uid://bsf5ipnb1p5gp" path="res://asset/system/script/object/image/view/ui/menu/settings/link/buttons.gd" id="70_if42a"]
+[ext_resource type="Script" uid="uid://c0a623xty3q3x" path="res://asset/system/script/object/image/view/ui/menu/settings/processor/experience/interface/interface.gd" id="73_wtl5k"]
+[ext_resource type="Script" uid="uid://17jy6o5a53q4" path="res://asset/system/script/object/image/view/ui/menu/settings/processor/experience/interface/aura.gd" id="75_lkcqr"]
+[ext_resource type="Script" uid="uid://sh6qqihyuxsa" path="res://asset/system/script/object/image/view/ui/menu/settings/processor/experience/interface/toggles.gd" id="76_7c0ot"]
+[ext_resource type="Script" uid="uid://cwyjy1lshu6ro" path="res://asset/system/script/object/image/view/ui/menu/settings/processor/experience/interface/sections.gd" id="77_3fmnv"]
 [ext_resource type="Script" uid="uid://521sfod8l8s2" path="res://asset/system/script/object/image/view/ui/menu/settings/link/options.gd" id="77_egcsm"]
 [ext_resource type="Script" uid="uid://cnap4m4qyii3s" path="res://asset/system/script/object/image/view/ui/menu/settings/link/t.gd" id="78_aujbd"]
 [ext_resource type="Script" uid="uid://dbo624b5np7nx" path="res://asset/system/script/object/image/view/ui/menu/settings/link/logic.gd" id="79_pyihq"]
@@ -132,24 +136,6 @@ events = [ExtResource("16_yw7xu"), ExtResource("17_wy3ld"), ExtResource("18_5iai
 [sub_resource type="Shortcut" id="Shortcut_5q5w7"]
 events = [ExtResource("16_yw7xu"), ExtResource("18_ynqjn")]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_owwju"]
-content_margin_left = 6.0
-content_margin_top = 9.0
-content_margin_right = 6.0
-content_margin_bottom = 9.0
-bg_color = Color(0, 0, 0.0235294, 1)
-border_width_right = 2
-border_color = Color(0.0392157, 0.0392157, 0.0392157, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0qh8n"]
-content_margin_left = 6.0
-content_margin_top = 9.0
-content_margin_right = 6.0
-content_margin_bottom = 9.0
-bg_color = Color(0, 0, 0, 1)
-border_width_right = 2
-border_color = Color(0.588235, 0.588235, 0.588235, 1)
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fmjjx"]
 content_margin_left = 6.0
 content_margin_top = 9.0
@@ -161,6 +147,24 @@ border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
 border_color = Color(0.588235, 0.588235, 0.588235, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0qh8n"]
+content_margin_left = 6.0
+content_margin_top = 9.0
+content_margin_right = 6.0
+content_margin_bottom = 9.0
+bg_color = Color(0, 0, 0, 1)
+border_width_right = 2
+border_color = Color(0.588235, 0.588235, 0.588235, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_owwju"]
+content_margin_left = 6.0
+content_margin_top = 9.0
+content_margin_right = 6.0
+content_margin_bottom = 9.0
+bg_color = Color(0, 0, 0.0235294, 1)
+border_width_right = 2
+border_color = Color(0.0392157, 0.0392157, 0.0392157, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wtl5k"]
 content_margin_right = 5.0
@@ -540,9 +544,9 @@ size_flags_stretch_ratio = 0.05
 theme_override_constants/line_spacing = -2
 theme_override_fonts/font = ExtResource("13_owwju")
 theme_override_font_sizes/font_size = 28
-theme_override_styles/normal = SubResource("StyleBoxFlat_owwju")
-theme_override_styles/hover = SubResource("StyleBoxFlat_0qh8n")
 theme_override_styles/focus = SubResource("StyleBoxFlat_fmjjx")
+theme_override_styles/hover = SubResource("StyleBoxFlat_0qh8n")
+theme_override_styles/normal = SubResource("StyleBoxFlat_owwju")
 shortcut = ExtResource("14_n4pyq")
 text = "✅"
 
@@ -560,7 +564,6 @@ size_flags_vertical = 6
 script = ExtResource("4_2i1li")
 
 [node name="game" type="MarginContainer" parent="see/margin/topics/content/options"]
-visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 2
 theme_override_constants/margin_top = 0
@@ -573,6 +576,7 @@ layout_mode = 2
 script = ExtResource("9_7pxvf")
 
 [node name="sound" type="VBoxContainer" parent="see/margin/topics/content/options/game/experience"]
+visible = false
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -600,17 +604,14 @@ script = ExtResource("11_n6v6j")
 [node name="music" parent="see/margin/topics/content/options/game/experience/sound/content/options" instance=ExtResource("8_tby3j")]
 layout_mode = 2
 scrollable = false
-text = "SMSC"
 
 [node name="sound" parent="see/margin/topics/content/options/game/experience/sound/content/options" instance=ExtResource("9_fgij5")]
 layout_mode = 2
 scrollable = false
-text = "SSDT"
 
 [node name="interface" parent="see/margin/topics/content/options/game/experience/sound/content/options" instance=ExtResource("9_fgij5")]
 layout_mode = 2
 scrollable = false
-text = "SIFT"
 
 [node name="listen" type="Button" parent="see/margin/topics/content/options/game/experience/sound/content/options"]
 custom_minimum_size = Vector2(300, 60)
@@ -698,6 +699,7 @@ text = "Left stick  adjust | Periphery  set | A  next | B  back."
 [node name="detection" parent="see/margin/topics/content/options/game/experience/sound/content/footer/controls" instance=ExtResource("19_ayoyv")]
 
 [node name="experience" type="VBoxContainer" parent="see/margin/topics/content/options/game/experience"]
+visible = false
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -1013,14 +1015,14 @@ grow_vertical = 2
 size_flags_horizontal = 8
 text = "SADP"
 
-[node name="health" type="Button" parent="see/margin/topics/content/options/game/experience/interface/content/options"]
+[node name="aura" type="Button" parent="see/margin/topics/content/options/game/experience/interface/content/options"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 text = "HART"
 alignment = 0
 
-[node name="status" type="Label" parent="see/margin/topics/content/options/game/experience/interface/content/options/health"]
+[node name="status" type="Label" parent="see/margin/topics/content/options/game/experience/interface/content/options/aura"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -1035,14 +1037,14 @@ grow_vertical = 2
 size_flags_horizontal = 8
 text = "SON"
 
-[node name="influence" type="Button" parent="see/margin/topics/content/options/game/experience/interface/content/options"]
+[node name="resource" type="Button" parent="see/margin/topics/content/options/game/experience/interface/content/options"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 text = "HRST"
 alignment = 0
 
-[node name="status" type="Label" parent="see/margin/topics/content/options/game/experience/interface/content/options/influence"]
+[node name="status" type="Label" parent="see/margin/topics/content/options/game/experience/interface/content/options/resource"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -1057,14 +1059,14 @@ grow_vertical = 2
 size_flags_horizontal = 8
 text = "SON"
 
-[node name="enemy-card" type="Button" parent="see/margin/topics/content/options/game/experience/interface/content/options"]
+[node name="card" type="Button" parent="see/margin/topics/content/options/game/experience/interface/content/options"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 text = "SENC"
 alignment = 0
 
-[node name="status" type="Label" parent="see/margin/topics/content/options/game/experience/interface/content/options/enemy-card"]
+[node name="status" type="Label" parent="see/margin/topics/content/options/game/experience/interface/content/options/card"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -1079,14 +1081,14 @@ grow_vertical = 2
 size_flags_horizontal = 8
 text = "SBSS"
 
-[node name="enemy-status" type="Button" parent="see/margin/topics/content/options/game/experience/interface/content/options"]
+[node name="damage" type="Button" parent="see/margin/topics/content/options/game/experience/interface/content/options"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
-text = "SENS"
+text = "SDMG"
 alignment = 0
 
-[node name="status" type="Label" parent="see/margin/topics/content/options/game/experience/interface/content/options/enemy-status"]
+[node name="status" type="Label" parent="see/margin/topics/content/options/game/experience/interface/content/options/damage"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -1099,7 +1101,7 @@ offset_bottom = 14.0
 grow_horizontal = 0
 grow_vertical = 2
 size_flags_horizontal = 8
-text = "SALL"
+text = "SON"
 
 [node name="inventory" type="Button" parent="see/margin/topics/content/options/game/experience/interface/content/options"]
 custom_minimum_size = Vector2(300, 60)
@@ -1169,7 +1171,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 10
 theme = ExtResource("2_ull8j")
-theme_override_constants/h_separation = -18
+theme_override_constants/h_separation = 4
 
 [node name="vendor" type="Button" parent="see/margin/topics/content/options/game/experience/devices/content/options"]
 custom_minimum_size = Vector2(300, 60)
@@ -1416,6 +1418,7 @@ process_mode = 4
 script = ExtResource("8_lfymp")
 
 [node name="controls" type="MarginContainer" parent="see/margin/topics/content/options"]
+visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 2
 theme_override_constants/margin_top = 2
@@ -3564,8 +3567,20 @@ script = ExtResource("64_28rgk")
 [node name="experience" type="Node" parent="work"]
 script = ExtResource("54_317at")
 
-[node name="language" type="Node" parent="work/experience"]
+[node name="interface" type="Node" parent="work/experience"]
+script = ExtResource("73_wtl5k")
+
+[node name="language" type="Node" parent="work/experience/interface"]
 script = ExtResource("54_fmjjx")
+
+[node name="aura" type="Node" parent="work/experience/interface"]
+script = ExtResource("75_lkcqr")
+
+[node name="toggles" type="Node" parent="work/experience/interface"]
+script = ExtResource("76_7c0ot")
+
+[node name="sections" type="Node" parent="work/experience/interface"]
+script = ExtResource("77_3fmnv")
 
 [node name="link" type="Node" parent="."]
 script = ExtResource("60_bjomr")
