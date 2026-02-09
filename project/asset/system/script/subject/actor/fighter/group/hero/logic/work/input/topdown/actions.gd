@@ -2,14 +2,16 @@ extends Node
 
 @onready var behavior: BehaviorTree = $behavior
 @onready var board: BehaviorBlackboard = $board
-@onready var combo: Timer = $combo
+@onready var timer: Timer = $combo
 
 @onready var punch = preload("res://asset/system/scene/subject/particle/fight/punch.tscn")
 @onready var kick = preload("res://asset/system/scene/subject/particle/fight/kick.tscn")
 @onready var combos = preload("res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/ability/controls/status/markers/combo.tscn")
 
+var combo: Node
+
 func _ready() -> void:
-	combo.timeout.connect(reset_combo)
+	timer.timeout.connect(reset_combo)
 
 func reset_combo() -> void:
 	board.g("combo").query.clear()

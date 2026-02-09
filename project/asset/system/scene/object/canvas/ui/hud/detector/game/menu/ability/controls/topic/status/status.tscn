@@ -1,4 +1,4 @@
-[gd_scene load_steps=89 format=3 uid="uid://cq5jn6k2bwg5n"]
+[gd_scene load_steps=91 format=3 uid="uid://cq5jn6k2bwg5n"]
 
 [ext_resource type="Script" uid="uid://b2ugt042kmpr0" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/topic/status/status.gd" id="1_3iju4"]
 [ext_resource type="Script" uid="uid://c34inyxgbvb7k" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/topic/status/space/space.gd" id="2_iitkt"]
@@ -13,13 +13,15 @@
 [ext_resource type="Script" uid="uid://4fsf4suiosss" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/topic/status/space/title/status/xp/body/multiplier.gd" id="11_rh004"]
 [ext_resource type="Script" uid="uid://sm6t5tdsxtq6" path="res://asset/system/scene/object/canvas/util/appear/modulator.gd" id="12_sfss6"]
 [ext_resource type="PackedScene" uid="uid://djwmyxjpm8g3w" path="res://asset/system/scene/object/canvas/util/appear/timer.tscn" id="13_ic7dp"]
-[ext_resource type="Script" uid="uid://cjt7534amfa8e" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/topic/status/space/title/status/xp/body/space/options.gd" id="14_fsyq3"]
+[ext_resource type="Script" uid="uid://cjt7534amfa8e" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/topic/status/space/title/status/xp/body/space/options/options.gd" id="14_fsyq3"]
 [ext_resource type="PackedScene" uid="uid://dugyepxewkmgo" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/pause/pause.tscn" id="15_uia8v"]
 [ext_resource type="PackedScene" uid="uid://dvdimdxij23df" path="res://asset/system/scene/object/timer/hide/hider/hover/hooder.tscn" id="17_3i86x"]
 [ext_resource type="FontFile" uid="uid://b37js8y80ak1k" path="res://asset/resource/media/data/font/NotoColorEmoji-Regular.ttf" id="19_biktr"]
 [ext_resource type="Script" uid="uid://dim2gh2xi14fs" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/topic/status/space/title/status/xp/meter.gd" id="20_4445a"]
+[ext_resource type="Script" uid="uid://dnubtfx2gsk1h" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/topic/status/space/title/status/xp/body/space/options/chat/chat.gd" id="20_g4hpx"]
 [ext_resource type="Texture2D" uid="uid://bt7rgtk8dl35x" path="res://asset/resource/media/image/actors/npc/dialog/ray.png" id="20_i51uf"]
 [ext_resource type="Script" uid="uid://cmeppk3ealnv8" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/hints/preview/toggle.gd" id="21_f66ty"]
+[ext_resource type="Script" uid="uid://dx3t7u78nieve" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/topic/status/space/title/status/xp/body/space/options/chat/margin.gd" id="21_iqx8c"]
 [ext_resource type="Script" uid="uid://bbdi3k2c2306b" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/topic/status/space/title/status/time.gd" id="21_tdyda"]
 [ext_resource type="FontFile" uid="uid://cwksbiskkcf5d" path="res://asset/resource/media/data/font/NotoSansMath-Regular.ttf" id="22_iqx8c"]
 [ext_resource type="FontFile" uid="uid://dqpftcx1b6r8j" path="res://asset/resource/media/data/font/LTStopwatch-Regular.ttf" id="22_w2hc4"]
@@ -517,7 +519,6 @@ alignment = 0
 [node name="hooder" parent="space/title/status/xp/body/space/options/game" instance=ExtResource("17_3i86x")]
 
 [node name="chat" type="Button" parent="space/title/status/xp/body/space/options"]
-visible = false
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 focus_mode = 1
@@ -526,11 +527,11 @@ theme_override_font_sizes/font_size = 25
 theme_override_styles/normal = SubResource("StyleBoxFlat_6k1g3")
 text = "💻"
 alignment = 0
+script = ExtResource("20_g4hpx")
 
 [node name="hooder" parent="space/title/status/xp/body/space/options/chat" instance=ExtResource("17_3i86x")]
 
 [node name="margin" type="MarginContainer" parent="space/title/status/xp/body/space/options/chat"]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -541,8 +542,10 @@ theme_override_constants/margin_left = 2
 theme_override_constants/margin_top = 2
 theme_override_constants/margin_right = 2
 theme_override_constants/margin_bottom = 2
+script = ExtResource("21_iqx8c")
 
 [node name="icon" type="TextureRect" parent="space/title/status/xp/body/space/options/chat/margin"]
+visible = false
 layout_mode = 2
 texture = ExtResource("20_i51uf")
 expand_mode = 1
@@ -702,8 +705,6 @@ text = "💾"
 custom_minimum_size = Vector2(40, 30)
 layout_mode = 2
 size_flags_vertical = 1
-theme_override_fonts/font = ExtResource("19_biktr")
-theme_override_font_sizes/font_size = 26
 text = "🏘"
 
 [node name="hooder" parent="space/title/enemies/pause/pause" instance=ExtResource("17_3i86x")]
@@ -765,8 +766,8 @@ size_flags_horizontal = 3
 focus_mode = 1
 theme_override_fonts/font = ExtResource("19_biktr")
 theme_override_font_sizes/font_size = 22
-theme_override_styles/normal = SubResource("StyleBoxFlat_crv53")
 theme_override_styles/disabled = SubResource("StyleBoxFlat_crv53")
+theme_override_styles/normal = SubResource("StyleBoxFlat_crv53")
 disabled = true
 text = "🔥🎣"
 
@@ -784,8 +785,8 @@ size_flags_horizontal = 3
 focus_mode = 1
 theme_override_fonts/font = ExtResource("19_biktr")
 theme_override_font_sizes/font_size = 22
-theme_override_styles/normal = SubResource("StyleBoxFlat_crv53")
 theme_override_styles/disabled = SubResource("StyleBoxFlat_crv53")
+theme_override_styles/normal = SubResource("StyleBoxFlat_crv53")
 disabled = true
 text = "💧⚡️"
 

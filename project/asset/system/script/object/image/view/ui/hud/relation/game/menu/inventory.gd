@@ -12,14 +12,14 @@ func update_inventory(ui: Node) -> void:
 func controls(hud: CanvasLayer, group: Node2D, inventory: VSplitContainer) -> void:
 	var processor: Node = hud.processor.game.inventory
 	var stack: Container = inventory.topic.stack
-	var topic: PanelContainer = hud.detector.game.priorities.stats.topic
+	var topic: PanelContainer = hud.see.game.priorities.stats.topic
 	processor.inventory.append(stack.bag.ray.items)
 	processor.inventory.append(topic.stack.bag.ray.items)
-	processor.markers = hud.detector.game.controls.status.markers
+	processor.markers = hud.see.game.controls.status.markers
 	
 	# TODOT invcon
 	# hud.detector.game.priorities.stats.inventory
-	var status: VBoxContainer = hud.detector.game.priorities.topic.stack.status
+	var status: VBoxContainer = hud.see.game.priorities.topic.stack.status
 	group.deploy.select_hero.connect(func(_h): status.select_hero(group))
 	# stack.connect_group(group, self)
 	topic.stack.connect_group(stack, status, group, self)
@@ -30,7 +30,7 @@ func controls(hud: CanvasLayer, group: Node2D, inventory: VSplitContainer) -> vo
 		#	stack.bag.get(hero.name).items, topic.stack.bag.get(hero.name).items]
 		
 		for i in [stack.status.get(hero.name),
-			 hud.detector.game.priorities.topic.stack.status.get(hero.name)]:
+			 hud.see.game.priorities.topic.stack.status.get(hero.name)]:
 			i.ability.set_inventory(hero)
 			i.health.set_inventory(hero)
 		# update_inventory(ui)

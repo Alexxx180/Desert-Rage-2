@@ -14,7 +14,7 @@ var party: HeroParty:
 	get: return deploy.party
 
 func target_accepted(enemy: CharacterBody2D) -> void:
-	Processors.turn(movement, true)
+	Works.turn(movement, true)
 	movement.set_target(enemy)
 	target_accept.emit(enemy)
 	if auto_switch and !deploy.anchored:

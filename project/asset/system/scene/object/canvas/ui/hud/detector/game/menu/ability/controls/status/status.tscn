@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://y8ariuggphmr"]
+[gd_scene load_steps=8 format=3 uid="uid://y8ariuggphmr"]
 
 [ext_resource type="Script" uid="uid://fkuknxcbcum2" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/status/status.gd" id="1_r00j6"]
 [ext_resource type="Script" uid="uid://fi6850meofjv" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/status/sticker/sticker.gd" id="2_m3psj"]
+[ext_resource type="Script" uid="uid://cn8v5mdasdio1" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/status/sticker/status/status.gd" id="3_6s2ku"]
 [ext_resource type="PackedScene" uid="uid://cm4lshhyr3mtm" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/ability/controls/status/bar/hp/hp.tscn" id="3_stn0a"]
-[ext_resource type="PackedScene" uid="uid://iwjy140d1gxp" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/ability/controls/status/bar/synergy.tscn" id="3_w1nw0"]
 [ext_resource type="Script" uid="uid://dw6r0use77qqc" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/topic/items/markers/markers.gd" id="4_nfruw"]
+[ext_resource type="PackedScene" uid="uid://dwcx6tvnhcjol" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/ability/controls/status/markers/ailments.tscn" id="4_w1nw0"]
 [ext_resource type="PackedScene" uid="uid://d3kdrb4woyoi8" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/ability/controls/status/markers/item.tscn" id="5_hnjmq"]
 
 [node name="status" type="VBoxContainer"]
@@ -15,7 +16,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/separation = 0
+theme_override_constants/separation = 2
 script = ExtResource("1_r00j6")
 
 [node name="sticker" type="MarginContainer" parent="."]
@@ -23,22 +24,30 @@ layout_mode = 2
 theme_override_constants/margin_left = 0
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 0
+theme_override_constants/margin_bottom = -45
 script = ExtResource("2_m3psj")
 
-[node name="points" type="HBoxContainer" parent="sticker"]
+[node name="status" type="HBoxContainer" parent="sticker"]
 layout_mode = 2
+theme_override_constants/separation = 4
+script = ExtResource("3_6s2ku")
 
-[node name="synergy" parent="sticker/points" instance=ExtResource("3_w1nw0")]
-visible = false
-custom_minimum_size = Vector2(0, 30)
+[node name="ray" parent="sticker/status" instance=ExtResource("4_w1nw0")]
 layout_mode = 2
+size_flags_horizontal = 3
 
-[node name="hp" parent="sticker/points" instance=ExtResource("3_stn0a")]
+[node name="rock" parent="sticker/status" instance=ExtResource("4_w1nw0")]
 layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="hp" parent="sticker" instance=ExtResource("3_stn0a")]
+layout_mode = 2
+size_flags_vertical = 1
 
 [node name="markers" type="HFlowContainer" parent="."]
 layout_mode = 2
+theme_override_constants/h_separation = 4
+theme_override_constants/v_separation = 4
 script = ExtResource("4_nfruw")
 
 [node name="left" type="Control" parent="markers"]

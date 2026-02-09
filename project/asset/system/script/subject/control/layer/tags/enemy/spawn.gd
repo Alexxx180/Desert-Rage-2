@@ -15,8 +15,7 @@ func from_pool(no: Dictionary, pool: Node, type: String) -> CharacterBody2D:
 func decide(map: int, type: Array[PackedScene]) -> Array[int]:
 	var monsters: Array[int] = []
 	for i in range(0, type.size()):
-		var bit: int = 2 ** i
-		if bit & map == bit: monsters.append(i)
+		if Works.is_bit(map, i): monsters.append(i)
 	return monsters
 
 func select(pool: Node) -> Dictionary:

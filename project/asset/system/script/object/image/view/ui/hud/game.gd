@@ -2,26 +2,24 @@ extends CanvasLayer
 
 const LEVEL: String = "%s/%s/%d"
 
-@onready var detector: Control = $detector
+@onready var see: Control = $detector
 @onready var processor: Node = $processor
 @onready var relation: Node = $relation
 
 func set_preview(group: Node2D, progress: HelpPreview) -> void:
-	detector.game.controls.preview.help.hints.set_preview(group, progress)
+	see.game.controls.preview.help.hints.set_preview(group, progress)
 
 func set_transitions(ui: Dictionary, ost: Node) -> void:
-	detector.game.visibility_changed.connect(func():
-		if detector.game.visible:
-			ost.player.process_mode = Node.PROCESS_MODE_ALWAYS
-		else:
-			ost.player.process_mode = Node.PROCESS_MODE_INHERIT
-		ost.player.stream_paused = !detector.game.visible)
+	see.game.visibility_changed.connect(func():
+		ost.player.process_mode = (Node.PROCESS_MODE_ALWAYS if see.game.visible
+			else Node.PROCESS_MODE_INHERIT)
+		ost.player.stream_paused = !see.game.visible)
 	
 	relation.pause.settings.switch.transit_settings = func():
-		detector.pause.hide(); ui.settings.show()
+		see.pause.hide(); ui.settings.show()
 		ui.settings.first_focus()
 		
 	relation.pause.information.switch.transit_info = func():
-		detector.pause.hide(); ui.information.show()
+		see.pause.hide(); ui.information.show()
 
 func _ready() -> void: relation.controls(self)

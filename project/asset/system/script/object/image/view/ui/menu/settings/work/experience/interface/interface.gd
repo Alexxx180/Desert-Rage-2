@@ -1,4 +1,4 @@
 extends Node
 
 @onready var language: Node = $language
-@onready var aura: Node = $aura
+@onready var logic: Node = $logic

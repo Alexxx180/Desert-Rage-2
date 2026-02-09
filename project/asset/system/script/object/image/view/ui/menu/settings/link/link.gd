@@ -1,6 +1,7 @@
 extends Node
 
 @onready var devices: Node = $devices
+@onready var experience: Node = $experience
 
 func _card_hint(card: Control, determine: Node) -> Callable:
 	return func(): card.translate(determine.selected)
@@ -31,7 +32,8 @@ func connect_controls(ui: Panel, work: Node) -> void:
 	m.keyboard.sequence.input = m.mode.input
 	m.gamepad.button.manage = m
 
-func controls(work: Node, ui: Control) -> void:
-	for i in [ui.ui]:
-		connect_ui(work, i)
-	connect_controls(ui, work)
+func controls(ui: Control) -> void:
+	var s: CanvasLayer = get_parent()
+	# for i in [ui.ui]: connect_ui(s.work, i)w
+	connect_controls(s.see, s.work)
+	experience.controls(ui, s.see, s.work)

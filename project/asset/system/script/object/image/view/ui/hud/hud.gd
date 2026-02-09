@@ -23,6 +23,9 @@ func set_group() -> void:
 	game.set_preview(group, progress)
 
 func set_transitions() -> String:
+	settings = hud.settings.instantiate() # settings
+	add_child(settings)
+	settings.link.controls(game.see)
 	return """
 	game.set_transitions({ "settings": settings,
 		"information": information }, get_node("../ost"))

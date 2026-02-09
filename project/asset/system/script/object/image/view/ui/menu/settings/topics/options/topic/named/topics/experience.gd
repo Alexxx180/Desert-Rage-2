@@ -3,6 +3,7 @@ extends VBoxContainer
 @onready var sound: VBoxContainer = $sound
 @onready var experience: VBoxContainer = $experience
 @onready var interface: VBoxContainer = $interface
+@onready var accessibility: VBoxContainer = $accessibility
 @onready var stats: VBoxContainer = $stats
 @onready var focus: Node = $focus
 

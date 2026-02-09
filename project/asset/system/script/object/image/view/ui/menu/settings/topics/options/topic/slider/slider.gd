@@ -53,7 +53,7 @@ func focus_manual() -> void:
 
 func set_manual(next: bool) -> void:
 	_manual = next
-	Processors.turn(manual, _manual)
+	Works.turn(manual, _manual)
 	hold_focus.emit(!next)
 
 func check_actions(_event: InputEvent) -> void:

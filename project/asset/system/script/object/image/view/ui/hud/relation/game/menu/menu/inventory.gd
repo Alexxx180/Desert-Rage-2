@@ -14,7 +14,7 @@ func face_inventory(split: SplitContainer, stats: SplitContainer) -> void:
 	navigation.ui = split
 	navigation.face(Y, -PORTION.HALF, INVENTORY, focus, [[
 		stats.topic.stack.bag.ray,
-		split.ability.controls.status.sticker.points
+		split.ability.controls.status.sticker.hp
 	], [
 		split.ability.controls.status.markers
 	], Defaults.ARRAY])

@@ -1,4 +1,4 @@
 extends MarginContainer
 
-@onready var points: HBoxContainer = $points
-@onready var hp: HBoxContainer = points.get_node("hp")
+@onready var status: HBoxContainer = $status
+@onready var hp: HBoxContainer = $hp

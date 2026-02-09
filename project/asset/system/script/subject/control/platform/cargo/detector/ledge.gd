@@ -10,7 +10,7 @@ var open: bool
 
 func sync_trap() -> bool:
 	open = plane.is_colliding() # wall.visible = not open
-	Processors.turn(wall, not open)
+	Works.turn(wall, not open)
 	trap.visible = open
 	return open
 

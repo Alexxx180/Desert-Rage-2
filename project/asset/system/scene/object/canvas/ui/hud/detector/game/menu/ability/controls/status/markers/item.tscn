@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://d3kdrb4woyoi8"]
+[gd_scene load_steps=13 format=3 uid="uid://d3kdrb4woyoi8"]
 
 [ext_resource type="StyleBox" uid="uid://evyfrkamah1" path="res://asset/resource/ui/theme/style/items/chests/hover.tres" id="1_4y30w"]
 [ext_resource type="Script" uid="uid://t52wbbj1shib" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/topic/items/markers/item.gd" id="1_eansm"]
 [ext_resource type="Texture2D" uid="uid://rdsdp3be1k17" path="res://asset/resource/media/image/inventory/weapon/firearm/schofield45-colt.svg" id="2_4y30w"]
+[ext_resource type="FontFile" uid="uid://tledodlx6okb" path="res://asset/resource/media/data/font/LTSuperiorMono-Semibold.otf" id="4_ovf6t"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ccxqt"]
 
@@ -21,12 +22,19 @@ height = 60
 fill_from = Vector2(0.495137, 1)
 fill_to = Vector2(0.495137, 0)
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fuh2f"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wvg1t"]
+bg_color = Color(0, 0, 0, 0.498039)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3tqp8"]
 content_margin_top = 1.0
 content_margin_bottom = 1.0
 bg_color = Color(0.184314, 0.184314, 0.72549, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ovf6t"]
+content_margin_left = 4.0
+content_margin_top = 2.0
+content_margin_right = 4.0
+bg_color = Color(0, 0, 0, 0.498039)
 
 [node name="item_1" type="Button"]
 custom_minimum_size = Vector2(60, 60)
@@ -41,6 +49,7 @@ offset_bottom = 64.0
 theme_override_constants/separation = 0
 
 [node name="collapsed" type="ProgressBar" parent="content"]
+visible = false
 custom_minimum_size = Vector2(0, 2)
 layout_mode = 2
 theme_override_styles/background = SubResource("StyleBoxEmpty_lvc3v")
@@ -56,6 +65,7 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="back" type="TextureRect" parent="content/selected"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -64,27 +74,47 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("GradientTexture2D_e1onj")
 
-[node name="count" type="ProgressBar" parent="content/selected"]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 2.0
-grow_horizontal = 2
-theme_override_styles/background = SubResource("StyleBoxEmpty_fuh2f")
-theme_override_styles/fill = SubResource("StyleBoxFlat_3tqp8")
-max_value = 30.0
-step = 1.0
-value = 15.0
-show_percentage = false
-
-[node name="image" type="TextureRect" parent="content/selected"]
-custom_minimum_size = Vector2(0, 58)
+[node name="stack" type="VBoxContainer" parent="content/selected"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="count" type="ProgressBar" parent="content/selected/stack"]
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_wvg1t")
+theme_override_styles/fill = SubResource("StyleBoxFlat_3tqp8")
+max_value = 30.0
+step = 1.0
+value = 15.0
+show_percentage = false
+
+[node name="margin" type="MarginContainer" parent="content/selected/stack"]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = -22
+
+[node name="image" type="TextureRect" parent="content/selected/stack/margin"]
+custom_minimum_size = Vector2(0, 58)
+layout_mode = 2
 size_flags_vertical = 3
 texture = ExtResource("2_4y30w")
 expand_mode = 1
+
+[node name="number" type="Label" parent="content/selected/stack"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0.588235, 0.588235, 0.588235, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("4_ovf6t")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_ovf6t")
+text = "45"
+horizontal_alignment = 2

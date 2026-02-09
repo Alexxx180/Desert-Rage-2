@@ -29,6 +29,8 @@ func notify(mark: Tick, caption: String) -> void:
 	var tools: Dictionary = mark.blackboard.g("tools")
 	var hero: CharacterBody2D = tools.hero
 	if tools.combos == null:
+		var size: int = mark.blackboard.g("combo").query.size()
+		if not mark.actor.combo.prefers(size): return
 		var combo: Label = mark.actor.combos.instantiate()
 		combo.tools = tools
 		hero.group.lay.execute.layer.add_child(combo)

@@ -1,22 +1,13 @@
-[gd_scene load_steps=25 format=3 uid="uid://yaryrrsclijd"]
+[gd_scene load_steps=16 format=3 uid="uid://yaryrrsclijd"]
 
-[ext_resource type="Script" uid="uid://crjycdob487a2" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/status/sticker/hp/hero/hero.gd" id="1_00n1r"]
-[ext_resource type="Script" uid="uid://1rbh43s372sw" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/status/sticker/hp/hero/health.gd" id="2_jeh3t"]
+[ext_resource type="Script" uid="uid://crjycdob487a2" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/status/sticker/status/hp/hero/hero.gd" id="1_00n1r"]
+[ext_resource type="Script" uid="uid://1rbh43s372sw" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/status/sticker/status/hp/hero/health.gd" id="2_jeh3t"]
 [ext_resource type="Script" uid="uid://cfaxt6ng6ftvc" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/topic/status/space/title/enemies/enemy/margin/damage.gd" id="3_86jmb"]
 [ext_resource type="FontFile" uid="uid://bghvysgyoj1y7" path="res://asset/resource/media/data/font/title/Equilibrist Semibold.ttf" id="3_gieb1"]
 [ext_resource type="FontFile" uid="uid://b2wbdbnkxcqv1" path="res://asset/resource/media/data/font/NotoEmoji-VariableFont_wght.ttf" id="3_m3vbw"]
-[ext_resource type="Script" uid="uid://cku7y05lderm4" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/status/sticker/hp/hero/status.gd" id="3_nwjnq"]
+[ext_resource type="Script" uid="uid://cku7y05lderm4" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/status/sticker/status/hp/hero/status.gd" id="3_nwjnq"]
 [ext_resource type="FontFile" uid="uid://bmtckcw2a28p2" path="res://asset/resource/media/data/font/Sportsball.ttf" id="4_m3vbw"]
-[ext_resource type="PackedScene" uid="uid://y6fn078j2sh3" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/status/shared/ailment/damage/poison.tscn" id="5_gieb1"]
-[ext_resource type="PackedScene" uid="uid://bx1eh0q5rbynn" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/status/shared/ailment/damage/cough.tscn" id="6_nwjnq"]
-[ext_resource type="PackedScene" uid="uid://yfxdd77grbp0" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/status/shared/ailment/numb/freeze.tscn" id="7_cyvds"]
-[ext_resource type="PackedScene" uid="uid://xspep2aas82r" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/status/shared/ailment/damage/burn.tscn" id="8_ek60b"]
-[ext_resource type="PackedScene" uid="uid://4jy7bmeaqofu" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/status/shared/ailment/mind/dizzy.tscn" id="9_ej14i"]
-[ext_resource type="PackedScene" uid="uid://3dbl8kh661a3" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/status/shared/ailment/no/reason.tscn" id="10_b0e5n"]
-[ext_resource type="PackedScene" uid="uid://cedejpbmq56j3" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/status/shared/ailment/no/motion.tscn" id="11_2lb6d"]
-[ext_resource type="PackedScene" uid="uid://b0hyoxlrt1af" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/status/shared/ailment/no/action.tscn" id="12_4ws8x"]
-[ext_resource type="PackedScene" uid="uid://cmauui2eio5gc" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/status/shared/ailment/numb/ko.tscn" id="13_h4r7a"]
-[ext_resource type="PackedScene" uid="uid://dq1fal5qwrk8n" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/status/shared/ailment/mind/rage.tscn" id="14_qaboo"]
+[ext_resource type="PackedScene" uid="uid://dwcx6tvnhcjol" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/ability/controls/status/markers/ailments.tscn" id="8_ojxr2"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gb3mf"]
 bg_color = Color(0, 0, 0, 0.686275)
@@ -170,60 +161,5 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 
-[node name="ailments" type="HFlowContainer" parent="status"]
+[node name="ailments" parent="status" instance=ExtResource("8_ojxr2")]
 layout_mode = 2
-theme_override_constants/h_separation = 0
-theme_override_constants/v_separation = 0
-
-[node name="control" type="Control" parent="status/ailments"]
-layout_mode = 2
-
-[node name="poison" parent="status/ailments" instance=ExtResource("5_gieb1")]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 8
-
-[node name="cough" parent="status/ailments" instance=ExtResource("6_nwjnq")]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 8
-
-[node name="freeze" parent="status/ailments" instance=ExtResource("7_cyvds")]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 8
-
-[node name="burn" parent="status/ailments" instance=ExtResource("8_ek60b")]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 8
-
-[node name="dizzy" parent="status/ailments" instance=ExtResource("9_ej14i")]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 8
-
-[node name="no_reason" parent="status/ailments" instance=ExtResource("10_b0e5n")]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 8
-
-[node name="no_motion" parent="status/ailments" instance=ExtResource("11_2lb6d")]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 8
-
-[node name="no_action" parent="status/ailments" instance=ExtResource("12_4ws8x")]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 8
-
-[node name="ko" parent="status/ailments" instance=ExtResource("13_h4r7a")]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 8
-
-[node name="rage" parent="status/ailments" instance=ExtResource("14_qaboo")]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 8

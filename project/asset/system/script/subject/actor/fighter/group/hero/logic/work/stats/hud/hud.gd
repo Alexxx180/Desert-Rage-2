@@ -7,12 +7,12 @@ var display: CanvasLayer:
 	get: return _display
 	set(value):
 		_display = value
-		slots.markers = value.detector.game.controls.status.markers
+		slots.markers = value.see.game.controls.status.markers
 var status: HBoxContainer:
-	get: return _display.detector.game.controls.topic.status
+	get: return _display.see.game.controls.topic.status
 
 func dialog(text: Array[String]) -> void:
-	_display.detector.game.chat.add_blocks(text)
+	_display.see.game.chat.add_blocks(text)
 
 func notify(text: String):
 	status.enemy[0].notify(text)

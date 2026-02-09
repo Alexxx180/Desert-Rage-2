@@ -36,7 +36,7 @@ content_margin_bottom = 3.0
 content_margin_left = 5.0
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_ycc3w"]
-color = Color(0.11764706, 0.11764706, 0.22745098, 1)
+color = Color(0.117647, 0.117647, 0.227451, 1)
 
 [node name="equip" type="VBoxContainer"]
 anchors_preset = 10
@@ -111,6 +111,7 @@ script = ExtResource("5_oaour")
 custom_minimum_size = Vector2(45, 45)
 layout_mode = 2
 size_flags_horizontal = 0
+size_flags_vertical = 0
 texture_normal = ExtResource("7_oaour")
 ignore_texture_size = true
 stretch_mode = 0
@@ -144,6 +145,7 @@ text = "🎒"
 custom_minimum_size = Vector2(45, 45)
 layout_mode = 2
 size_flags_horizontal = 0
+size_flags_vertical = 0
 texture_normal = ExtResource("5_dcud6")
 ignore_texture_size = true
 stretch_mode = 0
@@ -174,16 +176,25 @@ theme_override_font_sizes/font_size = 16
 theme_override_styles/normal = SubResource("StyleBoxEmpty_6lio4")
 text = "🎒"
 
-[node name="able" type="RichTextLabel" parent="stats/value/bag"]
+[node name="margin" type="MarginContainer" parent="stats/value/bag"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = -5
+theme_override_constants/margin_top = -7
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="able" type="RichTextLabel" parent="stats/value/bag/margin"]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("4_bt6sh")
-theme_override_constants/paragraph_separation = -3
+theme_override_constants/line_separation = -4
 theme_override_styles/normal = SubResource("StyleBoxEmpty_ycc3w")
 bbcode_enabled = true
 text = " [b][i]▒[/i][/b] лёгкий огнестрел
-[b][i]🗡[/i][/b] кинжалы, кастеты"
+[b][i]🗡[/i][/b] кинжалы, кастеты
+"
 fit_content = true
 autowrap_mode = 2
 
