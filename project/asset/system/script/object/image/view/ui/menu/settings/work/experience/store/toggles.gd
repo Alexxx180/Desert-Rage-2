@@ -5,17 +5,23 @@ enum { LISTEN, REPEAT, PLAYER, GENRE, NARRATIVE, QUOTES, HELP, EMOTIONS, OPTIONS
 
 var settings: int
 
-func get_value(next: int) -> bool: return Works.is_bit(settings, next)
-func set_value(next: int) -> void: settings = settings ^ next
-func switch(next: int) -> bool: set_value(next); return get_value(next)
+func zeros(a: int, no: int) -> int: return a << no
+func digit(no: int) -> int: return 2 ** no
+
+func get_value(no: int) -> bool: return Works.is_bit(settings, no)
+func set_value(no: int, next: bool) -> void:
+	var state: int = digit(no)
+	settings = settings & ~state | (state * int(next))
+	# settings = settings ^ next
+func switch(no: int, next: int) -> bool: set_value(no, next); return get_value(no)
 
 func toggle(next: int, op: Dictionary) -> void:
-	var state: bool = switch(next)
+	var state: bool = switch(next, !get_value(next))
 	op.ui.set(op.prop, state) # visible
 	show_text(op, state)
 
 func toggles(next: int, ui: Array) -> void:
-	var state: bool = switch(next)
+	var state: bool = switch(next, !get_value(next))
 	for i in ui: i.visible = state
 
 func show_text(op: Dictionary, state: bool) -> void:
