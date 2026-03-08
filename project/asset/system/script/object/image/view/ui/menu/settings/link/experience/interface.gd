@@ -9,6 +9,7 @@ func sect_logic(op: HFlowContainer, logic: Node) -> void:
 	s.select(op, ["interface", "imin", "iadaptive", "ifull", "ifixed"], logic, s.p.p("interface").d)
 
 func controls(op: HFlowContainer, main: VBoxContainer, work: Node) -> void:
+	s.select(op, ["language", "lenglish", "lrussian"], work.experience.interface.logic, s.p.p("interface").s().d)
 	sect_logic(op, work.experience.interface.logic)
 	sections(op, main, work)
 	s.tap(op, "damage", main.status.sticker.hp, s.p.p("control").t().d)

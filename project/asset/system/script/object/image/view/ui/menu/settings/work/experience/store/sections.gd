@@ -1,9 +1,11 @@
 extends Node
 
-enum { INTERFACE, ITEMS, CARD, COMBO }
+enum { DIFFICULTY, LANGUAGE, INTERFACE, ITEMS, CARD, COMBO }
+enum { MASK = 0x02, MASK2 = 0x03 }
 
-const MASK: int = 0x02 # 4 options max, 2 digits
 var settings: int = 0
+var mask2: Array[int] = [DIFFICULTY]
+var compat: Dictionary = { DIFFICULTY: [0, 2] }
 
 func zeros(a: int, no: int) -> int: return a << no
 func whole(a: int, no: int) -> int: return a >> no
@@ -12,10 +14,14 @@ func digit(no: int) -> int: return no * MASK
 func _get_exact_value(no: int) -> int: return get_mask(no, _value_behind)
 func _value_behind(no: int) -> int: return settings & Works.bit(no)
 
+func determine_mask(no: int) -> int:
+	return MASK2 if no in mask2 else MASK
+
 func get_mask(no: int, type: Callable = Works.bit) -> int:
 	var value: int = 0
 	var from: int = digit(no)
-	for i in range(from, from + MASK): value += type.call(i)
+	var to: int = from + determine_mask(no)
+	for i in range(from, to): value += type.call(i)
 	return value
 
 func get_value(no: int) -> int: return whole(_get_exact_value(no), digit(no))
@@ -48,21 +54,33 @@ func model(op: HFlowContainer, title: Array, ui: Variant, prop: Dictionary) -> D
 func show_text(op: Dictionary, key: int) -> void:
 	op.status.text = op.options[key].text
 
-func select_show(toggle: Button, options: Array) -> void:
+func select_show(toggle: Button, op: Dictionary) -> void:
 	toggle.pressed.connect(func():
-		var state: bool = !options.front().visble
-		for i in options: i.visible = state)
+		if len(op.section) == 2:
+			var state: bool = !bool(get_value(op.bit))
+			set_bit_value(int(state), op.bit, op)
+		else:
+			var state: bool = !op.section.front().visible
+			for i in op.section: i.visible = state)
+
+func set_bit_value(i: int, bit: int, op: Dictionary) -> void:
+	set_value(bit, i)
+	var prop: String 
+	if (op.prop is Dictionary):
+		prop = op.prop.prop
+	else:
+		prop = op.prop
+	op.ui.set(prop, i) # visible
+	show_text(op, i)
 
 func select_options(op: Dictionary, bit: int) -> void:
 	show_text(op, get_value(bit))
-	for i in len(op.options):
-		op.options[i].pressed.connect(func():
-			set_value(bit, i)
-			op.ui.set(op.prop.prop, i) # visible
-			show_text(op, i))
+	print("select_options - ")
+	for i in len(op.options): # print(op.options[i].name)
+		op.options[i].pressed.connect(func(): set_bit_value(i, bit, op))
 
 func tap(op: Dictionary) -> void:
-	select_show(op.toggle, op.section)
+	select_show(op.toggle, op)
 	select_options(op, op.bit)
 
 func interface() -> Array[Dictionary]:
