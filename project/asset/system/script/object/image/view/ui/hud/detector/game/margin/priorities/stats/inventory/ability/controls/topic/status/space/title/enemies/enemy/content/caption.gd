@@ -7,7 +7,7 @@ extends PanelContainer
 @onready var timer: Timer = $timer
 @onready var hiding: Timer = $hiding
 
-var combo: Node
+var combos: Node
 var health: ProgressBar
 var interrogating: bool = false
 var _title: String
@@ -27,11 +27,12 @@ func set_disabled_tint() -> void:
 	if not interrogating:
 		set_tint(255)
 		back.visible = true
-		if not combo.fixate_card(health.value, _title):
-			hiding.start()
+		# if combo.fixate_card(health.value, _title): return
+		hiding.start()
 
 func show_start() -> void:
-	if combo.has_card() and timer.is_stopped() and hiding.is_stopped():
+	# combo.has_card TODO FIXME add to condition with and
+	if timer.is_stopped() and hiding.is_stopped():
 		timer.start()
 		set_tint(60)
 		back.visible = false

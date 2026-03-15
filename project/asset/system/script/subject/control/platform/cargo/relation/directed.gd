@@ -1,7 +1,7 @@
 extends Node
 
 @onready var timer: Timer = $timer
-var tags: TileMapLayer
+var tags: TileMapLayer = null
 var _platform: CharacterBody2D
 
 func bind_lever() -> void:
@@ -17,8 +17,7 @@ func controls(platform: CharacterBody2D) -> void:
 	var work: Node = platform.work
 	#bind_lever(platform)
 	_platform = platform
-	if not tags:
-		tags = platform.get_node("../tags")
+	if tags == null: tags = platform.get_node("../tags")
 
 	work.cargo.platform = platform
 	stand.body_entered.connect(work.cargo.load_cargo)

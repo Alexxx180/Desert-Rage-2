@@ -30,7 +30,7 @@ func notify(mark: Tick, caption: String) -> void:
 	var hero: CharacterBody2D = tools.hero
 	if tools.combos == null:
 		var size: int = mark.blackboard.g("combo").query.size()
-		if not mark.actor.combo.prefers(size): return
+		# if not mark.actor.combo.prefers(size): return TODO FIXME uncomment after settings fully implemented
 		var combo: Label = mark.actor.combos.instantiate()
 		combo.tools = tools
 		hero.group.lay.execute.layer.add_child(combo)

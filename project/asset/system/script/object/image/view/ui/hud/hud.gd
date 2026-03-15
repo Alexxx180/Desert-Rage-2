@@ -36,7 +36,7 @@ func set_transitions() -> String:
 
 func _ready() -> void:
 	set_group() # TODO
-	set_transitions()
+	# set_transitions()
 
 func reset() -> void:
 	game.detector.game.show()

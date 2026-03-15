@@ -75,7 +75,7 @@ func reset_stats() -> void:
 	for c in card:
 		c.damage.hide()
 		c.hits.hide_all()
-		if not boss_fight:
+		if not boss_fight and c.modulator.appeared:
 			c.disappear()
 
 var in_game: Dictionary = { "eye-seeker": "Гляделкинс" }

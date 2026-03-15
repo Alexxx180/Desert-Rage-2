@@ -17,11 +17,11 @@ func add_childs(stack: VBoxContainer, scene: PackedScene, feedback: Callable) ->
 	return node
 
 func add_log(scene: PackedScene, feedback: Callable) -> void:
-	var log: PanelContainer = add_childs(scroll.log, scene, feedback)
+	var log: PanelContainer = add_childs(scroll.list.logs.chat, scene, feedback)
 	var tween = create_tween()
 	tween.tween_property(log, "modulate", Color.TRANSPARENT, 0.5).set_delay(3)
 	tween.tween_callback(func():
-		scroll.log.remove_child(log)
+		scroll.list.logs.chat.remove_child(log) # scroll.log
 		log.queue_free())
 	add_childs(chat, scene, feedback)
 	scroll.down()

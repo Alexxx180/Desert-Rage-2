@@ -10,10 +10,12 @@
 [ext_resource type="PackedScene" uid="uid://dwcx6tvnhcjol" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/ability/controls/status/markers/ailments.tscn" id="8_ojxr2"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gb3mf"]
-bg_color = Color(0, 0, 0, 0.686275)
+bg_color = Color(0.0142119, 2.11512e-09, 1.12806e-09, 0.686275)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xf68l"]
 bg_color = Color(0.588235, 1, 0.588235, 1)
+border_width_right = 5
+border_color = Color(0.0753366, 0.000335012, 0.000548787, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_m3vbw"]
 
@@ -43,7 +45,7 @@ size_flags_horizontal = 3
 theme_override_styles/background = SubResource("StyleBoxFlat_gb3mf")
 theme_override_styles/fill = SubResource("StyleBoxFlat_xf68l")
 step = 1.0
-value = 100.0
+value = 50.0
 show_percentage = false
 script = ExtResource("1_00n1r")
 
@@ -123,7 +125,14 @@ theme_override_font_sizes/font_size = 11
 text = "99"
 horizontal_alignment = 1
 
-[node name="sign" type="Label" parent="health/damage/status/margin/points"]
+[node name="margin" type="MarginContainer" parent="health/damage/status/margin/points"]
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="sign" type="Label" parent="health/damage/status/margin/points/margin"]
 layout_mode = 2
 size_flags_horizontal = 8
 theme = SubResource("Theme_1moid")

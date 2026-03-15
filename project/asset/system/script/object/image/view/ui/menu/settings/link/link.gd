@@ -37,3 +37,6 @@ func controls(ui: Control) -> void:
 	# for i in [ui.ui]: connect_ui(s.work, i)w
 	connect_controls(s.see, s.work)
 	experience.controls(ui, s.see, s.work)
+	for p in s.get_node("../../group").deploy.party:
+		p.to.topdown.actions.combo = s.work.experience.game.combo
+	# s.enemy_1.caption.combo = s.work.experience.game.combo

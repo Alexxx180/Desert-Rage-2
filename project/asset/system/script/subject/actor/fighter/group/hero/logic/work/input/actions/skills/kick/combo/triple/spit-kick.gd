@@ -12,11 +12,11 @@ func fight_combo(combo: Node) -> void:
 	combo.fight_body("legs")
 
 func take_effect(mark: Tick) -> void:
-	var tools: Dictionary = mark.blackboard.get_value("tools")
+	var tools: Dictionary = mark.blackboard.g("tools")
 	fight_combo(tools.hero.view.animation.moves.combo)
 	basis.vfx_hint(mark, mark.actor.kick)
 	basis.notify(mark, "Косой удар")
-	mark.blackboard.get_value("group").xp.level.multiply.by_slots(Skills.TRIPLE)
+	mark.blackboard.g("group").xp.level.multiply.by_slots(Skills.TRIPLE)
 
 func tick(mark: Tick) -> int:
 	return basis.tick(mark, self)

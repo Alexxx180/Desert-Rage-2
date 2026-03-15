@@ -1,7 +1,7 @@
 extends BehaviorAction
 
 func tick(mark: Tick) -> int:
-	var tools: Dictionary = mark.blackboard.get_value("tools")
+	var tools: Dictionary = mark.blackboard.g("tools")
 	# print("WHIP CHECK PASSED: ", tools.pillar.is_near)
 	if tools.pillar.is_near:
 		tools.pillar.take_effect()
