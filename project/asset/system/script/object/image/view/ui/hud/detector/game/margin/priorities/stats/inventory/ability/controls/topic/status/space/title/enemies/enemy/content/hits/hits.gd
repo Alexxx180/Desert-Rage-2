@@ -1,15 +1,8 @@
-extends VBoxContainer
-"""
-@onready var hundred: Control = $count/hundred
-@onready var ten: Control = $count/ten
-@onready var one: Control = $count/one
-"""
-
-@onready var digits: Array[Control] = [
-	$count/hundred, $count/ten, $count/one
-]
+extends HBoxContainer
 
 enum { DIGIT = 10, MAX = 999 }
+
+@onready var digits: Array[Control] = [$hundred, $ten, $one]
 
 func hide_all() -> void:
 	hide()

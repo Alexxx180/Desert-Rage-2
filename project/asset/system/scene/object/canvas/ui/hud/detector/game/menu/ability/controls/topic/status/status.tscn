@@ -1,4 +1,4 @@
-[gd_scene load_steps=91 format=3 uid="uid://cq5jn6k2bwg5n"]
+[gd_scene load_steps=96 format=3 uid="uid://cq5jn6k2bwg5n"]
 
 [ext_resource type="Script" uid="uid://b2ugt042kmpr0" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/topic/status/status.gd" id="1_3iju4"]
 [ext_resource type="Script" uid="uid://c34inyxgbvb7k" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/topic/status/space/space.gd" id="2_iitkt"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://dlm8rd63iot38" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/topic/status/space/title/status/xp/body/space/score/value.gd" id="9_1m7v2"]
 [ext_resource type="FontFile" uid="uid://cc0l5uav5qfke" path="res://asset/resource/media/data/font/ka1.ttf" id="10_lrfvi"]
 [ext_resource type="Script" uid="uid://4fsf4suiosss" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/topic/status/space/title/status/xp/body/multiplier.gd" id="11_rh004"]
+[ext_resource type="Shader" uid="uid://ciivvs0a4nhrw" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/ability/controls/topic/status/dissolve.gdshader" id="12_0msb3"]
 [ext_resource type="Script" uid="uid://sm6t5tdsxtq6" path="res://asset/system/scene/object/canvas/util/appear/modulator/modulator.gd" id="12_sfss6"]
 [ext_resource type="PackedScene" uid="uid://djwmyxjpm8g3w" path="res://asset/system/scene/object/canvas/util/appear/timer.tscn" id="13_ic7dp"]
 [ext_resource type="Script" uid="uid://cjt7534amfa8e" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/topic/status/space/title/status/xp/body/space/options/options.gd" id="14_fsyq3"]
@@ -26,7 +27,7 @@
 [ext_resource type="FontFile" uid="uid://cwksbiskkcf5d" path="res://asset/resource/media/data/font/NotoSansMath-Regular.ttf" id="22_iqx8c"]
 [ext_resource type="FontFile" uid="uid://dqpftcx1b6r8j" path="res://asset/resource/media/data/font/LTStopwatch-Regular.ttf" id="22_w2hc4"]
 [ext_resource type="Script" uid="uid://bwtr43cgelxn8" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/topic/status/space/title/enemies/enemies.gd" id="23_423h3"]
-[ext_resource type="PackedScene" uid="uid://b5qo332jiddu3" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/ability/controls/topic/status/enemy.tscn" id="24_ssxtu"]
+[ext_resource type="PackedScene" uid="uid://b5qo332jiddu3" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/ability/controls/topic/status/enemy/enemy.tscn" id="24_ssxtu"]
 [ext_resource type="PackedScene" uid="uid://qlgo5b48kj7l" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/ability/controls/topic/status/description.tscn" id="25_jva7y"]
 [ext_resource type="Script" uid="uid://b4nmtus4f0d7q" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/topic/status/preset/preset.gd" id="26_1prmq"]
 [ext_resource type="FontFile" uid="uid://o0rgn7d13mr3" path="res://asset/resource/media/data/font/OpenSans-VariableFont_wdth,wght.ttf" id="26_6k1g3"]
@@ -62,6 +63,20 @@ width = 20
 height = 27
 fill_from = Vector2(0.507692, 1)
 fill_to = Vector2(0.507692, 0)
+
+[sub_resource type="Gradient" id="Gradient_0msb3"]
+colors = PackedColorArray(0.615742, 0.302577, 0, 1, 1, 0.784314, 0.188235, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_rs8k3"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_jjnqq"]
+color_ramp = SubResource("Gradient_0msb3")
+noise = SubResource("FastNoiseLite_rs8k3")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rs8k3"]
+shader = ExtResource("12_0msb3")
+shader_parameter/dissolve_texture = SubResource("NoiseTexture2D_jjnqq")
+shader_parameter/dissolve_value = 1.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yuvxi"]
 content_margin_right = 9.0
@@ -400,7 +415,6 @@ horizontal_alignment = 2
 vertical_alignment = 2
 
 [node name="multiplier" type="Control" parent="space/title/status/xp/body/space/score"]
-modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(75, 0)
 layout_mode = 1
 anchors_preset = 9
@@ -409,7 +423,20 @@ grow_vertical = 2
 size_flags_horizontal = 3
 script = ExtResource("11_rh004")
 
+[node name="ColorRect" type="ColorRect" parent="space/title/status/xp/body/space/score/multiplier"]
+visible = false
+custom_minimum_size = Vector2(0, 27)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0, 0, 0, 1)
+
 [node name="meter" type="TextureRect" parent="space/title/status/xp/body/space/score/multiplier"]
+visible = false
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -421,6 +448,7 @@ grow_vertical = 0
 texture = SubResource("GradientTexture2D_4mbfr")
 
 [node name="number" type="Label" parent="space/title/status/xp/body/space/score/multiplier"]
+material = SubResource("ShaderMaterial_rs8k3")
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -433,8 +461,6 @@ grow_horizontal = 0
 grow_vertical = 0
 size_flags_horizontal = 8
 theme_override_colors/font_color = Color(0.767135, 0.588769, 0.0712476, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_outline_size = 7
 theme_override_fonts/font = ExtResource("10_lrfvi")
 theme_override_font_sizes/font_size = 15
 theme_override_styles/normal = SubResource("StyleBoxEmpty_yuvxi")
@@ -447,6 +473,7 @@ script = ExtResource("12_sfss6")
 [node name="timer" parent="space/title/status/xp/body/space/score" instance=ExtResource("13_ic7dp")]
 
 [node name="options" type="HBoxContainer" parent="space/title/status/xp/body/space"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -672,11 +699,12 @@ script = ExtResource("23_423h3")
 [node name="enemy" parent="space/title/enemies" instance=ExtResource("24_ssxtu")]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = 12
+anchor_top = 1.0
 anchor_bottom = 1.0
-offset_right = -2.0
+offset_top = -29.0
 offset_bottom = 0.0
-grow_vertical = 2
+grow_vertical = 0
 scale = Vector2(1.00226, 1)
 
 [node name="synergy" parent="space/title/enemies" instance=ExtResource("27_g4hpx")]

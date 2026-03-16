@@ -16,6 +16,8 @@ func update_x(score: float) -> void:
 	number.text = multiply("%.2fx" % score)
 
 func update_meter(time: float, maximum: float) -> void:
-	var value: float = MAX - MAX * time / maximum
+	var portion: float = time / maximum
+	var value: float = MAX - MAX * portion
 	meter.texture.fill_to.y = value
+	number.material.set("shader_parameter/dissolve_value", portion)
 	modulator.appear(self)
