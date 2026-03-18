@@ -2,8 +2,8 @@ extends HBoxContainer
 
 @export var fixed: bool = false
 
-@onready var ray: ProgressBar = $ray
-@onready var rock: ProgressBar = $rock
+@onready var ray: ProgressBar = $ray/hp
+@onready var rock: ProgressBar = $rock/hp
 @onready var timer: Timer = $timer
 
 var control: bool:
@@ -12,8 +12,9 @@ var control: bool:
 		rock.health.visible = value
 
 func select(party: HeroParty) -> void:
-	get(party.leader.name).size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	get(party.follower.name).size_flags_horizontal = Control.SIZE_FILL
+	pass
+	#get(party.leader.name).size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	#get(party.follower.name).size_flags_horizontal = Control.SIZE_FILL
 
 func disappear() -> void:
 	if not fixed: timer.disappear() #hide()

@@ -40,20 +40,6 @@
 [ext_resource type="Script" uid="uid://dtvx7836cooo7" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/topic/status/preset/sets/ap.gd" id="32_8lmtr"]
 [ext_resource type="Script" uid="uid://cudekrwdutcl7" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/topic/status/space/title/enemies/enemy/margin/back.gd" id="33_iku1p"]
 
-[sub_resource type="Gradient" id="Gradient_ok865"]
-colors = PackedColorArray(0.392157, 0.392157, 0.686275, 0.470588, 0, 0, 0, 0)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_f8gj5"]
-gradient = SubResource("Gradient_ok865")
-width = 20
-height = 27
-fill_from = Vector2(0.501923, 1)
-fill_to = Vector2(0.513462, 0)
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hv8pq"]
-content_margin_right = 7.0
-content_margin_bottom = 5.0
-
 [sub_resource type="Gradient" id="Gradient_eq6yd"]
 colors = PackedColorArray(0.768627, 0.588235, 0.0705882, 0.235294, 1, 1, 1, 0)
 
@@ -82,6 +68,20 @@ shader_parameter/dissolve_value = 1.0
 content_margin_right = 9.0
 content_margin_bottom = 5.0
 
+[sub_resource type="Gradient" id="Gradient_ok865"]
+colors = PackedColorArray(0.392157, 0.392157, 0.686275, 0.470588, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_f8gj5"]
+gradient = SubResource("Gradient_ok865")
+width = 20
+height = 27
+fill_from = Vector2(1, 0.491453)
+fill_to = Vector2(0, 0.491453)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hv8pq"]
+content_margin_right = 7.0
+content_margin_bottom = 5.0
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g4hpx"]
 content_margin_left = 4.0
 content_margin_top = 0.0
@@ -106,13 +106,12 @@ content_margin_left = 5.0
 bg_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hv8pq"]
-content_margin_bottom = 2.0
 bg_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_31tm0"]
-content_margin_right = 1.0
 color = Color(0.392157, 0.392157, 0.686275, 1)
 grow_end = 0.0
+vertical = true
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_33rox"]
 bg_color = Color(0, 0, 0, 1)
@@ -334,58 +333,93 @@ size_flags_horizontal = 3
 theme_override_constants/separation = 10
 script = ExtResource("3_lp8e3")
 
-[node name="status" type="HBoxContainer" parent="space/title"]
-visible = false
-custom_minimum_size = Vector2(70, 0)
+[node name="enemies" type="Control" parent="space/title"]
 layout_mode = 2
-mouse_filter = 0
-script = ExtResource("4_pn2dd")
+size_flags_horizontal = 3
+script = ExtResource("23_423h3")
 
-[node name="xp" type="VBoxContainer" parent="space/title/status"]
-layout_mode = 2
-size_flags_horizontal = 0
-theme_override_constants/separation = 0
-script = ExtResource("5_qvr63")
+[node name="enemy" parent="space/title/enemies" instance=ExtResource("24_ssxtu")]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -29.0
+offset_bottom = 0.0
+grow_vertical = 0
+scale = Vector2(1.00226, 1)
 
-[node name="body" type="HBoxContainer" parent="space/title/status/xp"]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 3
-theme_override_constants/separation = 0
-script = ExtResource("6_n6ucc")
-
-[node name="timer" type="Timer" parent="space/title/status/xp/body"]
-wait_time = 2.5
-one_shot = true
-
-[node name="space" type="Control" parent="space/title/status/xp/body"]
-custom_minimum_size = Vector2(140, 0)
-layout_mode = 2
-script = ExtResource("7_hw15g")
-
-[node name="score" type="Control" parent="space/title/status/xp/body/space"]
+[node name="margin" type="MarginContainer" parent="space/title/enemies"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("8_612bo")
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
 
-[node name="count" type="Control" parent="space/title/status/xp/body/space/score"]
+[node name="status" type="HBoxContainer" parent="space/title/enemies/margin"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+mouse_filter = 0
+script = ExtResource("4_pn2dd")
+
+[node name="xp" type="VBoxContainer" parent="space/title/enemies/margin/status"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+script = ExtResource("5_qvr63")
+
+[node name="body" type="HBoxContainer" parent="space/title/enemies/margin/status/xp"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 3
+theme_override_constants/separation = 0
+script = ExtResource("6_n6ucc")
+
+[node name="timer" type="Timer" parent="space/title/enemies/margin/status/xp/body"]
+wait_time = 2.5
+one_shot = true
+
+[node name="space" type="Control" parent="space/title/enemies/margin/status/xp/body"]
 custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+script = ExtResource("7_hw15g")
+
+[node name="score" type="HBoxContainer" parent="space/title/enemies/margin/status/xp/body/space"]
 layout_mode = 1
 anchors_preset = 11
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -219.0
 grow_horizontal = 0
 grow_vertical = 2
-size_flags_horizontal = 3
-script = ExtResource("9_1m7v2")
+script = ExtResource("8_612bo")
 
-[node name="level_up" type="TextureRect" parent="space/title/status/xp/body/space/score/count"]
-modulate = Color(1, 1, 1, 0)
+[node name="multiplier" type="Control" parent="space/title/enemies/margin/status/xp/body/space/score"]
+custom_minimum_size = Vector2(75, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("11_rh004")
+
+[node name="ColorRect" type="ColorRect" parent="space/title/enemies/margin/status/xp/body/space/score/multiplier"]
+visible = false
+custom_minimum_size = Vector2(0, 27)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0, 0, 0, 1)
+
+[node name="meter" type="TextureRect" parent="space/title/enemies/margin/status/xp/body/space/score/multiplier"]
+visible = false
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -394,9 +428,48 @@ anchor_bottom = 1.0
 offset_top = -27.0
 grow_horizontal = 2
 grow_vertical = 0
+texture = SubResource("GradientTexture2D_4mbfr")
+
+[node name="number" type="Label" parent="space/title/enemies/margin/status/xp/body/space/score/multiplier"]
+material = SubResource("ShaderMaterial_rs8k3")
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -69.0
+offset_top = -23.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 8
+theme_override_colors/font_color = Color(0.767135, 0.588769, 0.0712476, 1)
+theme_override_fonts/font = ExtResource("10_lrfvi")
+theme_override_font_sizes/font_size = 15
+theme_override_styles/normal = SubResource("StyleBoxEmpty_yuvxi")
+text = "2.15x"
+horizontal_alignment = 2
+
+[node name="modulator" type="Node" parent="space/title/enemies/margin/status/xp/body/space/score/multiplier"]
+script = ExtResource("12_sfss6")
+
+[node name="count" type="Control" parent="space/title/enemies/margin/status/xp/body/space/score"]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("9_1m7v2")
+
+[node name="level_up" type="TextureRect" parent="space/title/enemies/margin/status/xp/body/space/score/count"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = SubResource("GradientTexture2D_f8gj5")
 
-[node name="value" type="Label" parent="space/title/status/xp/body/space/score/count"]
+[node name="value" type="Label" parent="space/title/enemies/margin/status/xp/body/space/score/count"]
 layout_mode = 1
 anchors_preset = 11
 anchor_left = 1.0
@@ -415,65 +488,9 @@ text = "20000000"
 horizontal_alignment = 2
 vertical_alignment = 2
 
-[node name="multiplier" type="Control" parent="space/title/status/xp/body/space/score"]
-custom_minimum_size = Vector2(75, 0)
-layout_mode = 1
-anchors_preset = 9
-anchor_bottom = 1.0
-grow_vertical = 2
-size_flags_horizontal = 3
-script = ExtResource("11_rh004")
+[node name="timer" parent="space/title/enemies/margin/status/xp/body/space/score" instance=ExtResource("13_ic7dp")]
 
-[node name="ColorRect" type="ColorRect" parent="space/title/status/xp/body/space/score/multiplier"]
-visible = false
-custom_minimum_size = Vector2(0, 27)
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 0
-color = Color(0, 0, 0, 1)
-
-[node name="meter" type="TextureRect" parent="space/title/status/xp/body/space/score/multiplier"]
-visible = false
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -27.0
-grow_horizontal = 2
-grow_vertical = 0
-texture = SubResource("GradientTexture2D_4mbfr")
-
-[node name="number" type="Label" parent="space/title/status/xp/body/space/score/multiplier"]
-material = SubResource("ShaderMaterial_rs8k3")
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -66.0
-offset_top = -23.0
-grow_horizontal = 0
-grow_vertical = 0
-size_flags_horizontal = 8
-theme_override_colors/font_color = Color(0.767135, 0.588769, 0.0712476, 1)
-theme_override_fonts/font = ExtResource("10_lrfvi")
-theme_override_font_sizes/font_size = 15
-theme_override_styles/normal = SubResource("StyleBoxEmpty_yuvxi")
-text = "2.15x"
-horizontal_alignment = 2
-
-[node name="modulator" type="Node" parent="space/title/status/xp/body/space/score/multiplier"]
-script = ExtResource("12_sfss6")
-
-[node name="timer" parent="space/title/status/xp/body/space/score" instance=ExtResource("13_ic7dp")]
-
-[node name="options" type="HBoxContainer" parent="space/title/status/xp/body/space"]
+[node name="options" type="HBoxContainer" parent="space/title/enemies/margin/status/xp/body/space"]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -484,7 +501,7 @@ grow_vertical = 2
 theme_override_constants/separation = -1
 script = ExtResource("14_fsyq3")
 
-[node name="toggle" type="Button" parent="space/title/status/xp/body/space/options"]
+[node name="toggle" type="Button" parent="space/title/enemies/margin/status/xp/body/space/options"]
 visible = false
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
@@ -496,7 +513,7 @@ alignment = 0
 script = ExtResource("21_f66ty")
 path = "../../../../../../../stats/inventory/ability/controls/hints/space/preview/help"
 
-[node name="shown" type="Label" parent="space/title/status/xp/body/space/options/toggle"]
+[node name="shown" type="Label" parent="space/title/enemies/margin/status/xp/body/space/options/toggle"]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -515,7 +532,7 @@ theme_override_fonts/font = ExtResource("30_g7ksd")
 theme_override_font_sizes/font_size = 18
 text = "👁"
 
-[node name="hidden" type="Label" parent="space/title/status/xp/body/space/options/toggle"]
+[node name="hidden" type="Label" parent="space/title/enemies/margin/status/xp/body/space/options/toggle"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -534,7 +551,7 @@ theme_override_font_sizes/font_size = 24
 theme_override_styles/normal = SubResource("StyleBoxEmpty_iqx8c")
 text = "⌣"
 
-[node name="game" type="Button" parent="space/title/status/xp/body/space/options"]
+[node name="game" type="Button" parent="space/title/enemies/margin/status/xp/body/space/options"]
 visible = false
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
@@ -545,9 +562,9 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_6k1g3")
 text = "🗃️"
 alignment = 0
 
-[node name="hooder" parent="space/title/status/xp/body/space/options/game" instance=ExtResource("17_3i86x")]
+[node name="hooder" parent="space/title/enemies/margin/status/xp/body/space/options/game" instance=ExtResource("17_3i86x")]
 
-[node name="chat" type="Button" parent="space/title/status/xp/body/space/options"]
+[node name="chat" type="Button" parent="space/title/enemies/margin/status/xp/body/space/options"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 focus_mode = 1
@@ -558,9 +575,9 @@ text = "💻"
 alignment = 0
 script = ExtResource("20_g4hpx")
 
-[node name="hooder" parent="space/title/status/xp/body/space/options/chat" instance=ExtResource("17_3i86x")]
+[node name="hooder" parent="space/title/enemies/margin/status/xp/body/space/options/chat" instance=ExtResource("17_3i86x")]
 
-[node name="margin" type="MarginContainer" parent="space/title/status/xp/body/space/options/chat"]
+[node name="margin" type="MarginContainer" parent="space/title/enemies/margin/status/xp/body/space/options/chat"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -573,13 +590,13 @@ theme_override_constants/margin_right = 2
 theme_override_constants/margin_bottom = 2
 script = ExtResource("21_iqx8c")
 
-[node name="icon" type="TextureRect" parent="space/title/status/xp/body/space/options/chat/margin"]
+[node name="icon" type="TextureRect" parent="space/title/enemies/margin/status/xp/body/space/options/chat/margin"]
 visible = false
 layout_mode = 2
 texture = ExtResource("20_i51uf")
 expand_mode = 1
 
-[node name="team" type="Button" parent="space/title/status/xp/body/space/options"]
+[node name="team" type="Button" parent="space/title/enemies/margin/status/xp/body/space/options"]
 custom_minimum_size = Vector2(40, 30)
 layout_mode = 2
 size_flags_horizontal = 8
@@ -590,9 +607,9 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_lglah")
 text = "🙂‍↔️"
 alignment = 0
 
-[node name="hooder" parent="space/title/status/xp/body/space/options/team" instance=ExtResource("17_3i86x")]
+[node name="hooder" parent="space/title/enemies/margin/status/xp/body/space/options/team" instance=ExtResource("17_3i86x")]
 
-[node name="group" type="Button" parent="space/title/status/xp/body/space/options"]
+[node name="group" type="Button" parent="space/title/enemies/margin/status/xp/body/space/options"]
 visible = false
 custom_minimum_size = Vector2(40, 30)
 layout_mode = 2
@@ -604,44 +621,30 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_8bgqw")
 text = "😶‍🌫️"
 alignment = 0
 
-[node name="hooder" parent="space/title/status/xp/body/space/options/group" instance=ExtResource("17_3i86x")]
+[node name="hooder" parent="space/title/enemies/margin/status/xp/body/space/options/group" instance=ExtResource("17_3i86x")]
 
-[node name="meter" type="HBoxContainer" parent="space/title/status/xp"]
-custom_minimum_size = Vector2(0, 2)
+[node name="meter" type="HBoxContainer" parent="space/title/enemies/margin/status/xp/body"]
+custom_minimum_size = Vector2(0, 1)
 layout_mode = 2
 theme_override_constants/separation = 0
 script = ExtResource("20_4445a")
 
-[node name="next" type="VBoxContainer" parent="space/title/status/xp/meter"]
-layout_mode = 2
-theme_override_constants/separation = 0
-
-[node name="level" type="ColorRect" parent="space/title/status/xp/meter/next"]
-custom_minimum_size = Vector2(3, 1)
-layout_mode = 2
-size_flags_vertical = 0
-color = Color(0.238731, 0.235008, 0.457421, 1)
-
-[node name="back" type="ColorRect" parent="space/title/status/xp/meter/next"]
-custom_minimum_size = Vector2(3, 1)
-layout_mode = 2
-size_flags_vertical = 0
-color = Color(0, 0, 0, 1)
-
-[node name="score" type="ProgressBar" parent="space/title/status/xp/meter"]
+[node name="score" type="ProgressBar" parent="space/title/enemies/margin/status/xp/body/meter"]
+custom_minimum_size = Vector2(0, 1)
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 1
 theme_override_styles/background = SubResource("StyleBoxFlat_hv8pq")
 theme_override_styles/fill = SubResource("StyleBoxLine_31tm0")
 max_value = 10.0
 step = 1.0
 value = 5.0
-fill_mode = 1
+fill_mode = 3
 show_percentage = false
 
-[node name="timer" parent="space/title/status/xp/meter" instance=ExtResource("13_ic7dp")]
+[node name="timer" parent="space/title/enemies/margin/status/xp/body/meter" instance=ExtResource("13_ic7dp")]
 
-[node name="time" type="PanelContainer" parent="space/title/status"]
+[node name="time" type="PanelContainer" parent="space/title/enemies/margin/status"]
 visible = false
 custom_minimum_size = Vector2(60, 30)
 layout_mode = 2
@@ -649,12 +652,12 @@ size_flags_horizontal = 8
 theme_override_styles/panel = SubResource("StyleBoxFlat_33rox")
 script = ExtResource("21_tdyda")
 
-[node name="back" type="TextureRect" parent="space/title/status/time"]
+[node name="back" type="TextureRect" parent="space/title/enemies/margin/status/time"]
 visible = false
 layout_mode = 2
 texture = SubResource("GradientTexture2D_3v3bl")
 
-[node name="margin" type="MarginContainer" parent="space/title/status/time"]
+[node name="margin" type="MarginContainer" parent="space/title/enemies/margin/status/time"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -663,7 +666,7 @@ theme_override_constants/margin_top = 1
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 0
 
-[node name="number" type="Label" parent="space/title/status/time/margin"]
+[node name="number" type="Label" parent="space/title/enemies/margin/status/time/margin"]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -675,14 +678,14 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="timing" type="MarginContainer" parent="space/title/status/time"]
+[node name="timing" type="MarginContainer" parent="space/title/enemies/margin/status/time"]
 layout_mode = 2
 theme_override_constants/margin_left = 0
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 
-[node name="lasted" type="ProgressBar" parent="space/title/status/time/timing"]
+[node name="lasted" type="ProgressBar" parent="space/title/enemies/margin/status/time/timing"]
 layout_mode = 2
 size_flags_vertical = 8
 theme_override_styles/background = SubResource("StyleBoxEmpty_mv703")
@@ -691,22 +694,6 @@ max_value = 600.0
 step = 1.0
 value = 600.0
 show_percentage = false
-
-[node name="enemies" type="Control" parent="space/title"]
-layout_mode = 2
-size_flags_horizontal = 3
-script = ExtResource("23_423h3")
-
-[node name="enemy" parent="space/title/enemies" instance=ExtResource("24_ssxtu")]
-modulate = Color(1, 1, 1, 0)
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -29.0
-offset_bottom = 0.0
-grow_vertical = 0
-scale = Vector2(1.00226, 1)
 
 [node name="synergy" parent="space/title/enemies" instance=ExtResource("27_g4hpx")]
 visible = false
@@ -759,6 +746,7 @@ size_flags_horizontal = 8
 script = ExtResource("26_1prmq")
 
 [node name="skill" type="PanelContainer" parent="preset"]
+visible = false
 custom_minimum_size = Vector2(140, 30)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_hnjmq")

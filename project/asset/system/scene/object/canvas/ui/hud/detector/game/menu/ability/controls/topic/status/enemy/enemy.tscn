@@ -19,18 +19,8 @@ border_color = Color(0, 0, 0, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_05gi3"]
 bg_color = Color(0, 0, 0, 1)
 
-[sub_resource type="Gradient" id="Gradient_nm75a"]
-colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 0.235294)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_tveuy"]
-gradient = SubResource("Gradient_nm75a")
-width = 106
-height = 28
-fill_from = Vector2(0.497175, 0.831638)
-fill_to = Vector2(0.497175, 0)
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j11u2"]
-bg_color = Color(0, 0, 0, 0.945098)
+bg_color = Color(0, 0, 0, 0.705882)
 border_width_top = 5
 border_color = Color(0.8, 0.8, 0.8, 0)
 
@@ -59,6 +49,16 @@ shader_parameter/dissolve_texture = SubResource("NoiseTexture2D_forf1")
 shader_parameter/dissolve_value = 1.0
 
 [sub_resource type="Theme" id="Theme_tckc4"]
+
+[sub_resource type="Gradient" id="Gradient_nm75a"]
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 0.235294)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_tveuy"]
+gradient = SubResource("Gradient_nm75a")
+width = 106
+height = 28
+fill_from = Vector2(0.497175, 0.831638)
+fill_to = Vector2(0.497175, 0)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kdjwi"]
 
@@ -104,10 +104,6 @@ custom_minimum_size = Vector2(106, 1)
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="back" type="TextureRect" parent="content/margin/caption"]
-layout_mode = 2
-texture = SubResource("GradientTexture2D_tveuy")
-
 [node name="margin" type="MarginContainer" parent="content/margin/caption"]
 layout_mode = 2
 theme_override_constants/margin_left = 8
@@ -118,17 +114,10 @@ theme_override_constants/margin_bottom = 0
 [node name="text" type="Label" parent="content/margin/caption/margin"]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
+theme_override_colors/font_color = Color(0.462291, 0.462291, 0.462291, 1)
 theme_override_fonts/font = ExtResource("3_forf1")
 theme_override_font_sizes/font_size = 16
 text = "Гляделкинc"
-
-[node name="timer" type="Timer" parent="content/margin/caption"]
-wait_time = 0.5
-one_shot = true
-
-[node name="hiding" type="Timer" parent="content/margin/caption"]
-wait_time = 0.25
-one_shot = true
 
 [node name="damage" type="PanelContainer" parent="content/margin/caption"]
 layout_mode = 2
@@ -193,6 +182,18 @@ theme_override_fonts/font = ExtResource("6_0mwta")
 theme_override_font_sizes/font_size = 11
 text = "15"
 horizontal_alignment = 1
+
+[node name="back" type="TextureRect" parent="content/margin/caption"]
+layout_mode = 2
+texture = SubResource("GradientTexture2D_tveuy")
+
+[node name="timer" type="Timer" parent="content/margin/caption"]
+wait_time = 0.5
+one_shot = true
+
+[node name="hiding" type="Timer" parent="content/margin/caption"]
+wait_time = 0.25
+one_shot = true
 
 [node name="hits" type="HBoxContainer" parent="content"]
 layout_mode = 2

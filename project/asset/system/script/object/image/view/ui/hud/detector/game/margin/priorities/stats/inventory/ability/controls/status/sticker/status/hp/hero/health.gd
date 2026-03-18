@@ -5,7 +5,7 @@ extends MarginContainer
 @onready var points: HBoxContainer = $damage/status/margin/points
 @onready var back: TextureRect = $damage/back
 
-const MAX: float = 0.95
+const MAX: float = 0.93
 
 var icons: Dictionary = {
 	"max": "😖😣😩🫩🙄😧🥲🌚🗿",
@@ -20,7 +20,7 @@ func change(hp: Node) -> void:
 	show()
 	points.change(hp)
 	var portion: float = hp.points / hp.maximum
-	back.texture.fill_to.y = MAX * portion
+	back.texture.fill_to.x = 0.07 + MAX * portion
 	var icon: String = icons[faced(portion)]
 	var no: int = randi_range(0, len(icon) - 1)
 	status.face.text = icon[no]

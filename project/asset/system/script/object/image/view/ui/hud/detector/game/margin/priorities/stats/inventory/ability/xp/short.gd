@@ -1,7 +1,7 @@
 extends VBoxContainer
 
 @onready var body: HBoxContainer = $body
-@onready var meter: HBoxContainer = $meter
+@onready var meter: HBoxContainer = $body/meter
 @onready var timer: Timer = $timer
 
 func set_fixed(state: bool) -> void:
