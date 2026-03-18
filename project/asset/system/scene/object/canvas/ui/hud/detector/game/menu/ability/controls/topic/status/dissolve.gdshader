@@ -9,6 +9,6 @@ void fragment(){
 	main_texture.r = noise_texture.r;
 	main_texture.g = noise_texture.g;
 	main_texture.b = noise_texture.b;
-    main_texture.a *= floor(dissolve_value + min(1, noise_texture.x));
+    main_texture.a *= floor(dissolve_value + min(1, noise_texture.y));
     COLOR = main_texture;
 }
