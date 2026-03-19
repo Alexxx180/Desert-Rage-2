@@ -1,4 +1,4 @@
-[gd_scene load_steps=96 format=3 uid="uid://cq5jn6k2bwg5n"]
+[gd_scene load_steps=80 format=3 uid="uid://cq5jn6k2bwg5n"]
 
 [ext_resource type="Script" uid="uid://b2ugt042kmpr0" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/topic/status/status.gd" id="1_3iju4"]
 [ext_resource type="Script" uid="uid://c34inyxgbvb7k" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/topic/status/space/space.gd" id="2_iitkt"]
@@ -29,16 +29,36 @@
 [ext_resource type="Script" uid="uid://bwtr43cgelxn8" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/topic/status/space/title/enemies/enemies.gd" id="23_423h3"]
 [ext_resource type="PackedScene" uid="uid://b5qo332jiddu3" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/ability/controls/topic/status/enemy/enemy.tscn" id="24_ssxtu"]
 [ext_resource type="PackedScene" uid="uid://qlgo5b48kj7l" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/ability/controls/topic/status/description.tscn" id="25_jva7y"]
-[ext_resource type="Script" uid="uid://b4nmtus4f0d7q" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/topic/status/preset/preset.gd" id="26_1prmq"]
 [ext_resource type="FontFile" uid="uid://o0rgn7d13mr3" path="res://asset/resource/media/data/font/OpenSans-VariableFont_wdth,wght.ttf" id="26_6k1g3"]
-[ext_resource type="Script" uid="uid://c40pfrym4fvlm" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/topic/status/preset/sets/sets.gd" id="27_8j2jp"]
 [ext_resource type="PackedScene" uid="uid://cxrc1e7t1llmh" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/ability/controls/topic/status/synergy.tscn" id="27_g4hpx"]
-[ext_resource type="Script" uid="uid://cu0j24mb01o04" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/topic/status/preset/sets/skill/skill.gd" id="28_vcby2"]
 [ext_resource type="Script" uid="uid://bb1pv0jihkjnw" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/topic/status/preset/sets/skill/sets.gd" id="29_iywcr"]
 [ext_resource type="FontFile" uid="uid://b2wbdbnkxcqv1" path="res://asset/resource/media/data/font/NotoEmoji-VariableFont_wght.ttf" id="30_g7ksd"]
-[ext_resource type="FontFile" uid="uid://bmtckcw2a28p2" path="res://asset/resource/media/data/font/Sportsball.ttf" id="31_cma14"]
-[ext_resource type="Script" uid="uid://dtvx7836cooo7" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/topic/status/preset/sets/ap.gd" id="32_8lmtr"]
-[ext_resource type="Script" uid="uid://cudekrwdutcl7" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/topic/status/space/title/enemies/enemy/margin/back.gd" id="33_iku1p"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_33rox"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.0110876, 0.0110876, 0.0110876, 1)
+
+[sub_resource type="Gradient" id="Gradient_e1onj"]
+colors = PackedColorArray(0, 0, 0, 0, 0.741176, 0, 0, 0.470588)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_3v3bl"]
+gradient = SubResource("Gradient_e1onj")
+width = 25
+height = 23
+fill_from = Vector2(0.503077, 0)
+fill_to = Vector2(0.5, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pa3qu"]
+content_margin_top = 3.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mv703"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fxbxi"]
+bg_color = Color(0.739789, 2.00946e-06, 5.77569e-07, 1)
 
 [sub_resource type="Gradient" id="Gradient_eq6yd"]
 colors = PackedColorArray(0.768627, 0.588235, 0.0705882, 0.235294, 1, 1, 1, 0)
@@ -105,6 +125,10 @@ bg_color = Color(0, 0, 0, 1)
 content_margin_left = 5.0
 bg_color = Color(0, 0, 0, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_crv53"]
+bg_color = Color(0, 0, 0, 1)
+border_color = Color(0.184314, 0.184314, 0.72549, 1)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hv8pq"]
 bg_color = Color(0, 0, 0, 1)
 
@@ -112,32 +136,6 @@ bg_color = Color(0, 0, 0, 1)
 color = Color(0.392157, 0.392157, 0.686275, 1)
 grow_end = 0.0
 vertical = true
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_33rox"]
-bg_color = Color(0, 0, 0, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0.0110876, 0.0110876, 0.0110876, 1)
-
-[sub_resource type="Gradient" id="Gradient_e1onj"]
-colors = PackedColorArray(0, 0, 0, 0, 0.741176, 0, 0, 0.470588)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_3v3bl"]
-gradient = SubResource("Gradient_e1onj")
-width = 25
-height = 23
-fill_from = Vector2(0.503077, 0)
-fill_to = Vector2(0.5, 1)
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pa3qu"]
-content_margin_top = 3.0
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mv703"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fxbxi"]
-bg_color = Color(0.739789, 2.00946e-06, 5.77569e-07, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hjbks"]
 content_margin_left = 6.0
@@ -270,44 +268,6 @@ content_margin_top = 8.0
 content_margin_right = 2.0
 texture = SubResource("GradientTexture2D_iqx8c")
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hnjmq"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_crv53"]
-bg_color = Color(0, 0, 0, 1)
-border_color = Color(0.184314, 0.184314, 0.72549, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f66ty"]
-content_margin_left = 7.0
-content_margin_top = 7.0
-bg_color = Color(0, 0, 0, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i51uf"]
-content_margin_left = 5.0
-bg_color = Color(0, 0, 0, 1)
-
-[sub_resource type="Theme" id="Theme_crv53"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fya81"]
-bg_color = Color(0, 0, 0, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hnjmq"]
-bg_color = Color(0.0255499, 0.0246065, 0.204078, 1)
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nfruw"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nfruw"]
-bg_color = Color(0.184314, 0.184314, 0.72549, 1)
-
-[sub_resource type="Gradient" id="Gradient_e8qsl"]
-colors = PackedColorArray(0, 0, 0, 0, 0.184314, 0.184314, 0.72549, 0.235294)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_ddn1q"]
-gradient = SubResource("Gradient_e8qsl")
-width = 58
-height = 29
-fill_from = Vector2(0.497347, 0)
-fill_to = Vector2(0.497347, 1)
-
 [node name="status" type="HBoxContainer"]
 anchors_preset = 10
 anchor_right = 1.0
@@ -367,9 +327,61 @@ layout_mode = 2
 mouse_filter = 0
 script = ExtResource("4_pn2dd")
 
-[node name="xp" type="VBoxContainer" parent="space/title/enemies/margin/status"]
+[node name="space" type="Control" parent="space/title/enemies/margin/status"]
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="time" type="PanelContainer" parent="space/title/enemies/margin/status"]
+custom_minimum_size = Vector2(60, 30)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_33rox")
+script = ExtResource("21_tdyda")
+
+[node name="back" type="TextureRect" parent="space/title/enemies/margin/status/time"]
+layout_mode = 2
+texture = SubResource("GradientTexture2D_3v3bl")
+
+[node name="margin" type="MarginContainer" parent="space/title/enemies/margin/status/time"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 1
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 0
+
+[node name="number" type="Label" parent="space/title/enemies/margin/status/time/margin"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("22_w2hc4")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxEmpty_pa3qu")
+text = "9:59"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="timing" type="MarginContainer" parent="space/title/enemies/margin/status/time"]
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="lasted" type="ProgressBar" parent="space/title/enemies/margin/status/time/timing"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_styles/background = SubResource("StyleBoxEmpty_mv703")
+theme_override_styles/fill = SubResource("StyleBoxFlat_fxbxi")
+max_value = 600.0
+step = 1.0
+value = 600.0
+show_percentage = false
+
+[node name="xp" type="VBoxContainer" parent="space/title/enemies/margin/status"]
+layout_mode = 2
 theme_override_constants/separation = 0
 script = ExtResource("5_qvr63")
 
@@ -385,7 +397,7 @@ wait_time = 2.5
 one_shot = true
 
 [node name="space" type="Control" parent="space/title/enemies/margin/status/xp/body"]
-custom_minimum_size = Vector2(140, 0)
+custom_minimum_size = Vector2(220, 0)
 layout_mode = 2
 script = ExtResource("7_hw15g")
 
@@ -405,18 +417,6 @@ custom_minimum_size = Vector2(75, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("11_rh004")
-
-[node name="ColorRect" type="ColorRect" parent="space/title/enemies/margin/status/xp/body/space/score/multiplier"]
-visible = false
-custom_minimum_size = Vector2(0, 27)
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 0
-color = Color(0, 0, 0, 1)
 
 [node name="meter" type="TextureRect" parent="space/title/enemies/margin/status/xp/body/space/score/multiplier"]
 visible = false
@@ -491,12 +491,13 @@ vertical_alignment = 2
 [node name="timer" parent="space/title/enemies/margin/status/xp/body/space/score" instance=ExtResource("13_ic7dp")]
 
 [node name="options" type="HBoxContainer" parent="space/title/enemies/margin/status/xp/body/space"]
-visible = false
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = 11
+anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-grow_horizontal = 2
+offset_left = -177.0
+grow_horizontal = 0
 grow_vertical = 2
 theme_override_constants/separation = -1
 script = ExtResource("14_fsyq3")
@@ -565,6 +566,7 @@ alignment = 0
 [node name="hooder" parent="space/title/enemies/margin/status/xp/body/space/options/game" instance=ExtResource("17_3i86x")]
 
 [node name="chat" type="Button" parent="space/title/enemies/margin/status/xp/body/space/options"]
+visible = false
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 focus_mode = 1
@@ -604,13 +606,12 @@ focus_mode = 1
 theme_override_fonts/font = ExtResource("30_g7ksd")
 theme_override_font_sizes/font_size = 24
 theme_override_styles/normal = SubResource("StyleBoxFlat_lglah")
-text = "🙂‍↔️"
+text = "🧍"
 alignment = 0
 
 [node name="hooder" parent="space/title/enemies/margin/status/xp/body/space/options/team" instance=ExtResource("17_3i86x")]
 
 [node name="group" type="Button" parent="space/title/enemies/margin/status/xp/body/space/options"]
-visible = false
 custom_minimum_size = Vector2(40, 30)
 layout_mode = 2
 size_flags_horizontal = 8
@@ -618,10 +619,101 @@ focus_mode = 1
 theme_override_fonts/font = ExtResource("30_g7ksd")
 theme_override_font_sizes/font_size = 24
 theme_override_styles/normal = SubResource("StyleBoxFlat_8bgqw")
-text = "😶‍🌫️"
+text = "🛡🤠"
 alignment = 0
 
 [node name="hooder" parent="space/title/enemies/margin/status/xp/body/space/options/group" instance=ExtResource("17_3i86x")]
+
+[node name="sets" type="HBoxContainer" parent="space/title/enemies/margin/status/xp/body/space/options"]
+layout_mode = 2
+theme_override_constants/separation = 0
+script = ExtResource("29_iywcr")
+
+[node name="ray" type="HBoxContainer" parent="space/title/enemies/margin/status/xp/body/space/options/sets"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="first" type="Button" parent="space/title/enemies/margin/status/xp/body/space/options/sets/ray"]
+custom_minimum_size = Vector2(60, 29)
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 1
+theme_override_fonts/font = ExtResource("19_biktr")
+theme_override_font_sizes/font_size = 22
+theme_override_styles/disabled = SubResource("StyleBoxFlat_crv53")
+theme_override_styles/normal = SubResource("StyleBoxFlat_crv53")
+disabled = true
+text = "🔥🎣"
+
+[node name="hooder" parent="space/title/enemies/margin/status/xp/body/space/options/sets/ray/first" instance=ExtResource("17_3i86x")]
+
+[node name="rock" type="HBoxContainer" parent="space/title/enemies/margin/status/xp/body/space/options/sets"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="first" type="Button" parent="space/title/enemies/margin/status/xp/body/space/options/sets/rock"]
+custom_minimum_size = Vector2(60, 29)
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 1
+theme_override_fonts/font = ExtResource("19_biktr")
+theme_override_font_sizes/font_size = 22
+theme_override_styles/disabled = SubResource("StyleBoxFlat_crv53")
+theme_override_styles/normal = SubResource("StyleBoxFlat_crv53")
+disabled = true
+text = "💧⚡️"
+
+[node name="hooder" parent="space/title/enemies/margin/status/xp/body/space/options/sets/rock/first" instance=ExtResource("17_3i86x")]
+
+[node name="toggle2" type="Button" parent="space/title/enemies/margin/status/xp/body/space/options"]
+custom_minimum_size = Vector2(40, 30)
+layout_mode = 2
+focus_mode = 1
+theme_override_fonts/font = ExtResource("30_g7ksd")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_g4hpx")
+alignment = 0
+script = ExtResource("21_f66ty")
+path = "../../../../../../../stats/inventory/ability/controls/hints/space/preview/help"
+
+[node name="shown" type="Label" parent="space/title/enemies/margin/status/xp/body/space/options/toggle2"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -11.5
+offset_top = -11.0
+offset_right = 11.5
+offset_bottom = 11.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.00295, 0.994388)
+theme_override_fonts/font = ExtResource("30_g7ksd")
+theme_override_font_sizes/font_size = 18
+text = "👁"
+
+[node name="hidden" type="Label" parent="space/title/enemies/margin/status/xp/body/space/options/toggle2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.0
+offset_top = -26.0
+offset_right = 19.0
+offset_bottom = 26.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.00295, 0.994388)
+theme_override_fonts/font = ExtResource("22_iqx8c")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxEmpty_iqx8c")
+text = "⌣"
 
 [node name="meter" type="HBoxContainer" parent="space/title/enemies/margin/status/xp/body"]
 custom_minimum_size = Vector2(0, 1)
@@ -643,57 +735,6 @@ fill_mode = 3
 show_percentage = false
 
 [node name="timer" parent="space/title/enemies/margin/status/xp/body/meter" instance=ExtResource("13_ic7dp")]
-
-[node name="time" type="PanelContainer" parent="space/title/enemies/margin/status"]
-visible = false
-custom_minimum_size = Vector2(60, 30)
-layout_mode = 2
-size_flags_horizontal = 8
-theme_override_styles/panel = SubResource("StyleBoxFlat_33rox")
-script = ExtResource("21_tdyda")
-
-[node name="back" type="TextureRect" parent="space/title/enemies/margin/status/time"]
-visible = false
-layout_mode = 2
-texture = SubResource("GradientTexture2D_3v3bl")
-
-[node name="margin" type="MarginContainer" parent="space/title/enemies/margin/status/time"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 1
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 0
-
-[node name="number" type="Label" parent="space/title/enemies/margin/status/time/margin"]
-custom_minimum_size = Vector2(50, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_fonts/font = ExtResource("22_w2hc4")
-theme_override_font_sizes/font_size = 20
-theme_override_styles/normal = SubResource("StyleBoxEmpty_pa3qu")
-text = "9:59"
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 2
-
-[node name="timing" type="MarginContainer" parent="space/title/enemies/margin/status/time"]
-layout_mode = 2
-theme_override_constants/margin_left = 0
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 0
-
-[node name="lasted" type="ProgressBar" parent="space/title/enemies/margin/status/time/timing"]
-layout_mode = 2
-size_flags_vertical = 8
-theme_override_styles/background = SubResource("StyleBoxEmpty_mv703")
-theme_override_styles/fill = SubResource("StyleBoxFlat_fxbxi")
-max_value = 600.0
-step = 1.0
-value = 600.0
-show_percentage = false
 
 [node name="synergy" parent="space/title/enemies" instance=ExtResource("27_g4hpx")]
 visible = false
@@ -737,253 +778,3 @@ text = "📁"
 [node name="slots" parent="space" instance=ExtResource("25_jva7y")]
 visible = false
 layout_mode = 1
-
-[node name="preset" type="HBoxContainer" parent="."]
-visible = false
-custom_minimum_size = Vector2(95, 29)
-layout_mode = 2
-size_flags_horizontal = 8
-script = ExtResource("26_1prmq")
-
-[node name="skill" type="PanelContainer" parent="preset"]
-visible = false
-custom_minimum_size = Vector2(140, 30)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_hnjmq")
-
-[node name="sets" type="VBoxContainer" parent="preset/skill"]
-layout_mode = 2
-theme_override_constants/separation = 0
-script = ExtResource("27_8j2jp")
-
-[node name="skill" type="MarginContainer" parent="preset/skill/sets"]
-layout_mode = 2
-theme_override_constants/margin_left = 0
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 0
-script = ExtResource("28_vcby2")
-
-[node name="options" type="HBoxContainer" parent="preset/skill/sets/skill"]
-layout_mode = 2
-size_flags_horizontal = 8
-theme_override_constants/separation = 0
-
-[node name="sets" type="HBoxContainer" parent="preset/skill/sets/skill/options"]
-visible = false
-layout_mode = 2
-theme_override_constants/separation = 0
-script = ExtResource("29_iywcr")
-
-[node name="ray" type="HBoxContainer" parent="preset/skill/sets/skill/options/sets"]
-layout_mode = 2
-theme_override_constants/separation = 0
-
-[node name="first" type="Button" parent="preset/skill/sets/skill/options/sets/ray"]
-custom_minimum_size = Vector2(60, 29)
-layout_mode = 2
-size_flags_horizontal = 3
-focus_mode = 1
-theme_override_fonts/font = ExtResource("19_biktr")
-theme_override_font_sizes/font_size = 22
-theme_override_styles/disabled = SubResource("StyleBoxFlat_crv53")
-theme_override_styles/normal = SubResource("StyleBoxFlat_crv53")
-disabled = true
-text = "🔥🎣"
-
-[node name="hooder" parent="preset/skill/sets/skill/options/sets/ray/first" instance=ExtResource("17_3i86x")]
-
-[node name="rock" type="HBoxContainer" parent="preset/skill/sets/skill/options/sets"]
-visible = false
-layout_mode = 2
-theme_override_constants/separation = 0
-
-[node name="first" type="Button" parent="preset/skill/sets/skill/options/sets/rock"]
-custom_minimum_size = Vector2(60, 29)
-layout_mode = 2
-size_flags_horizontal = 3
-focus_mode = 1
-theme_override_fonts/font = ExtResource("19_biktr")
-theme_override_font_sizes/font_size = 22
-theme_override_styles/disabled = SubResource("StyleBoxFlat_crv53")
-theme_override_styles/normal = SubResource("StyleBoxFlat_crv53")
-disabled = true
-text = "💧⚡️"
-
-[node name="hooder" parent="preset/skill/sets/skill/options/sets/rock/first" instance=ExtResource("17_3i86x")]
-
-[node name="books" type="Button" parent="preset/skill/sets/skill/options"]
-visible = false
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-focus_mode = 1
-theme_override_fonts/font = ExtResource("19_biktr")
-theme_override_font_sizes/font_size = 25
-theme_override_styles/normal = SubResource("StyleBoxFlat_f66ty")
-text = "📚"
-alignment = 0
-
-[node name="hooder" parent="preset/skill/sets/skill/options/books" instance=ExtResource("17_3i86x")]
-
-[node name="analyze" type="Button" parent="preset/skill/sets/skill/options"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-focus_mode = 1
-theme_override_fonts/font = ExtResource("30_g7ksd")
-theme_override_font_sizes/font_size = 25
-theme_override_styles/normal = SubResource("StyleBoxFlat_i51uf")
-text = "🔎"
-alignment = 0
-
-[node name="hooder" parent="preset/skill/sets/skill/options/analyze" instance=ExtResource("17_3i86x")]
-
-[node name="toggle" type="Button" parent="preset/skill/sets/skill/options"]
-visible = false
-custom_minimum_size = Vector2(40, 30)
-layout_mode = 2
-focus_mode = 1
-theme_override_fonts/font = ExtResource("30_g7ksd")
-theme_override_font_sizes/font_size = 18
-theme_override_styles/normal = SubResource("StyleBoxFlat_g4hpx")
-alignment = 0
-script = ExtResource("21_f66ty")
-path = "../../../../../../../stats/inventory/ability/controls/hints/space/preview/help"
-
-[node name="shown" type="Label" parent="preset/skill/sets/skill/options/toggle"]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -11.5
-offset_top = -11.0
-offset_right = 11.5
-offset_bottom = 11.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(1.00295, 0.994388)
-theme_override_fonts/font = ExtResource("30_g7ksd")
-theme_override_font_sizes/font_size = 18
-text = "👁"
-
-[node name="hidden" type="Label" parent="preset/skill/sets/skill/options/toggle"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -19.0
-offset_top = -26.0
-offset_right = 19.0
-offset_bottom = 26.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(1.00295, 0.994388)
-theme_override_fonts/font = ExtResource("22_iqx8c")
-theme_override_font_sizes/font_size = 24
-theme_override_styles/normal = SubResource("StyleBoxEmpty_iqx8c")
-text = "⌣"
-
-[node name="margin" type="MarginContainer" parent="preset/skill/sets/skill"]
-visible = false
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_constants/margin_left = 9
-theme_override_constants/margin_top = 4
-theme_override_constants/margin_right = 7
-theme_override_constants/margin_bottom = 0
-
-[node name="ap" type="HBoxContainer" parent="preset/skill/sets/skill/margin"]
-layout_mode = 2
-theme_override_constants/separation = 0
-
-[node name="health" type="Label" parent="preset/skill/sets/skill/margin/ap"]
-custom_minimum_size = Vector2(10, 0)
-layout_mode = 2
-size_flags_horizontal = 8
-theme = SubResource("Theme_crv53")
-theme_override_colors/font_color = Color(0.588235, 0.588235, 0.588235, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 7
-theme_override_fonts/font = ExtResource("31_cma14")
-theme_override_font_sizes/font_size = 11
-text = "9999"
-horizontal_alignment = 1
-
-[node name="margin" type="MarginContainer" parent="preset/skill/sets/skill/margin/ap"]
-layout_mode = 2
-theme_override_constants/margin_left = 4
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 4
-theme_override_constants/margin_bottom = 1
-
-[node name="minus" type="Label" parent="preset/skill/sets/skill/margin/ap/margin"]
-layout_mode = 2
-size_flags_horizontal = 8
-theme = SubResource("Theme_crv53")
-theme_override_colors/font_color = Color(0.588235, 0.588235, 0.588235, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 7
-theme_override_fonts/font = ExtResource("31_cma14")
-theme_override_font_sizes/font_size = 8
-text = "-"
-horizontal_alignment = 1
-vertical_alignment = 2
-
-[node name="value" type="Label" parent="preset/skill/sets/skill/margin/ap"]
-custom_minimum_size = Vector2(10, 0)
-layout_mode = 2
-size_flags_horizontal = 0
-theme = SubResource("Theme_crv53")
-theme_override_colors/font_color = Color(0.588235, 0.588235, 0.588235, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 7
-theme_override_fonts/font = ExtResource("31_cma14")
-theme_override_font_sizes/font_size = 11
-text = "1000"
-horizontal_alignment = 1
-
-[node name="ap" type="MarginContainer" parent="preset/skill/sets"]
-layout_mode = 2
-theme_override_constants/margin_left = 0
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 1
-
-[node name="current" type="ProgressBar" parent="preset/skill/sets/ap"]
-modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(0, 1)
-layout_mode = 2
-theme_override_styles/background = SubResource("StyleBoxFlat_fya81")
-theme_override_styles/fill = SubResource("StyleBoxFlat_hnjmq")
-show_percentage = false
-script = ExtResource("32_8lmtr")
-
-[node name="cost" type="ProgressBar" parent="preset/skill/sets/ap/current"]
-custom_minimum_size = Vector2(0, 1)
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 1.0
-grow_horizontal = 2
-theme_override_styles/background = SubResource("StyleBoxEmpty_nfruw")
-theme_override_styles/fill = SubResource("StyleBoxFlat_nfruw")
-value = 100.0
-show_percentage = false
-
-[node name="shadow" type="TextureRect" parent="preset/skill/sets/ap/current"]
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -25.0
-grow_horizontal = 2
-grow_vertical = 0
-texture = SubResource("GradientTexture2D_ddn1q")
-script = ExtResource("33_iku1p")
-
-[node name="timer" parent="preset/skill/sets/ap/current" instance=ExtResource("13_ic7dp")]

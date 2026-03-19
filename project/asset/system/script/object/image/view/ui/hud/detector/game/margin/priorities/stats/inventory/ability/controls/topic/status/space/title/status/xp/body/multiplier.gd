@@ -1,6 +1,6 @@
 extends Control
 
-@onready var meter: TextureRect = $meter
+# @onready var meter: TextureRect = $meter
 @onready var number: Label = $number
 @onready var modulator: Node = $modulator
 
@@ -18,6 +18,6 @@ func update_x(score: float) -> void:
 func update_meter(time: float, maximum: float) -> void:
 	var portion: float = time / maximum
 	var value: float = MAX - MAX * portion
-	meter.texture.fill_to.y = value
+	#meter.texture.fill_to.y = value
 	number.material.set("shader_parameter/dissolve_value", portion)
 	modulator.appear(self)
