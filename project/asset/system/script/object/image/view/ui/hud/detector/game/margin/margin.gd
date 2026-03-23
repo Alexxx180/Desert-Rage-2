@@ -4,4 +4,4 @@ extends HFlowContainer
 @onready var menu: Button = $menu
 
 @onready var skills: PanelContainer = get_node("../hints/space/scroll/stack/skills")
-@onready var status: HBoxContainer = $items/ability/status
+@onready var status: HBoxContainer = $status

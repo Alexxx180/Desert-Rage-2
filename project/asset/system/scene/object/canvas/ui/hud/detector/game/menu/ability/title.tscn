@@ -3,6 +3,10 @@
 [ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://asset/resource/ui/theme/patterns/template/menu/settings/topic/footer.tres" id="1_bgds4"]
 
 [node name="title" type="VBoxContainer"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 3426.0
+grow_horizontal = 2
 size_flags_horizontal = 3
 
 [node name="caption" type="Label" parent="."]
@@ -11,27 +15,176 @@ size_flags_horizontal = 2
 theme_override_font_sizes/font_size = 24
 text = "Способности"
 
-[node name="effect" type="RichTextLabel" parent="."]
+[node name="details" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 25
+
+[node name="name" type="RichTextLabel" parent="details"]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.25
 theme = ExtResource("1_bgds4")
-theme_override_constants/paragraph_separation = 8
 bbcode_enabled = true
-text = "[ul]Здесь описаны умения и способности - приёмы ваших героев. Описание способности включает в себя комбо, стоимость, площадь и эффект
-Слоты - умения, входящие в комбо
-Эффект - полезное действие способности
-Комбо или комбинация - набор слотов, используемых для получения эффекта
-Стоимость - общее количество необходимого ресурса для действия способности
-Площадь - сколько противников может быть затронуто способностью
-I - одна сущность или колонна сущностей стоящих друг за другом
-.I. - малая группы сущностей, импульс по небольшой площади
-..I.. - большая группа сущностей, импульс по большой площади
-III - малая группы сущностей, эффект по небольшой площади
-IIIII - большая группа сущностей, эффект по большой площади или по всем сущностям на местности
-[p]В режиме наведения вы можете выбрать один из предоставленных приемов. Затем, вы можете выбрать противников
-ЛКМ по способности - ЛКМ по противнику - выполнение всей комбинации
-ПКМ по способности - Наведение на противника - любое из умений %s / %s / %s / %s - выполнение слота комбинации. Вам необходимо выбрать столько целей, сколько указано слотов в способности[/p]"
+text = " Здесь описаны умения и способности - приёмы ваших героев.
+
+· Описание способности включает в себя комбо, стоимость, площадь и эффект."
+fit_content = true
+autowrap_mode = 2
+
+[node name="types2" type="VBoxContainer" parent="details"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="priority" type="HBoxContainer" parent="details/types2"]
+layout_mode = 2
+
+[node name="maxed" type="RichTextLabel" parent="details/types2/priority"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.25
+theme = ExtResource("1_bgds4")
+bbcode_enabled = true
+text = "[b][i]✨[/i][/b] Эффект - полезное действие способности"
+fit_content = true
+autowrap_mode = 2
+
+[node name="one" type="RichTextLabel" parent="details/types2/priority"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.25
+theme = ExtResource("1_bgds4")
+bbcode_enabled = true
+text = "[b][i]5️⃣[/i][/b] Стоимость - количество ресурса для эффекта"
+fit_content = true
+autowrap_mode = 2
+
+[node name="priority2" type="HBoxContainer" parent="details/types2"]
+layout_mode = 2
+
+[node name="one" type="RichTextLabel" parent="details/types2/priority2"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.25
+theme = ExtResource("1_bgds4")
+bbcode_enabled = true
+text = "[b][i]✊[/i][/b] Комбо - набор умений - слотов, используемых для получения эффекта."
+fit_content = true
+autowrap_mode = 2
+
+[node name="maxed" type="RichTextLabel" parent="details/types2/priority2"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.25
+theme = ExtResource("1_bgds4")
+bbcode_enabled = true
+text = "[b][i]🫓[/i][/b] Площадь - сколько противников может быть затронуто способностью"
+fit_content = true
+autowrap_mode = 2
+
+[node name="effect" type="RichTextLabel" parent="details"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.25
+theme = ExtResource("1_bgds4")
+bbcode_enabled = true
+text = "· Площадь зоны попадания по сущностям определяется специальными отметками.
+
+   I   - одна сущность или колонна сущностей стоящих друг за другом"
+fit_content = true
+autowrap_mode = 2
+
+[node name="types" type="VBoxContainer" parent="details"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="priority" type="HBoxContainer" parent="details/types"]
+layout_mode = 2
+
+[node name="maxed" type="RichTextLabel" parent="details/types/priority"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.25
+theme = ExtResource("1_bgds4")
+bbcode_enabled = true
+text = " •I•  - малая группы сущностей, импульс по небольшой площади"
+fit_content = true
+autowrap_mode = 2
+
+[node name="one" type="RichTextLabel" parent="details/types/priority"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.25
+theme = ExtResource("1_bgds4")
+bbcode_enabled = true
+text = " III  - малая группы сущностей, эффект по небольшой площади"
+fit_content = true
+autowrap_mode = 2
+
+[node name="priority2" type="HBoxContainer" parent="details/types"]
+layout_mode = 2
+
+[node name="one" type="RichTextLabel" parent="details/types/priority2"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.25
+theme = ExtResource("1_bgds4")
+bbcode_enabled = true
+text = ".•I•. - большая группа сущностей, импульс по большой площади"
+fit_content = true
+autowrap_mode = 2
+
+[node name="maxed" type="RichTextLabel" parent="details/types/priority2"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.25
+theme = ExtResource("1_bgds4")
+bbcode_enabled = true
+text = "IIIII - большая группа сущностей, эффект по большой площади или по всем сущностям на местности"
+fit_content = true
+autowrap_mode = 2
+
+[node name="effect2" type="RichTextLabel" parent="details"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.25
+theme = ExtResource("1_bgds4")
+bbcode_enabled = true
+text = "· В режиме наведения вы можете выбрать один из предоставленных приемов. Затем, вы можете выбрать противников. Вам необходимо выбрать столько целей, сколько указано слотов в способности."
+fit_content = true
+autowrap_mode = 2
+
+[node name="priority" type="HBoxContainer" parent="details"]
+layout_mode = 2
+
+[node name="maxed" type="RichTextLabel" parent="details/priority"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.25
+theme = ExtResource("1_bgds4")
+bbcode_enabled = true
+text = "ЛКМ по способности - ЛКМ по противнику - выполнение всей комбинации"
+fit_content = true
+autowrap_mode = 2
+
+[node name="one" type="RichTextLabel" parent="details/priority"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.25
+theme = ExtResource("1_bgds4")
+bbcode_enabled = true
+text = "ПКМ по способности - любое из умений %s / %s / %s / %s - выполнение слота комбинации."
 fit_content = true
 autowrap_mode = 2

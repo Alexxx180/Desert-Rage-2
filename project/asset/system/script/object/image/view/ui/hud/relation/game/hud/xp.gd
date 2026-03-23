@@ -30,7 +30,7 @@ func _set_stats(group: Node2D, game: Control) -> void:
 		stats.stats.bag.select_hero(party)
 		stats.set_stats(_stats, party.leader.name)
 
-		game.controls.topic.status.preset.sets.skill.select_hero(party)
+		# game.controls.topic.status.preset.sets.skill.select_hero(party) # TODO FIXME SELECT
 		game.priorities.stats.inventory.ability.topic.stack.select_hero(party)
 		group.get(leader.name).view.animation.effect.set_stats(_stats.stats[leader.name]) # get(leader.name)
 	)

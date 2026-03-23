@@ -1,7 +1,9 @@
 extends PanelContainer
 
-func transparent() -> void: modulate = Color.TRANSPARENT
-func usual() -> void: modulate = Color.WHITE
+@onready var tabs: HBoxContainer = get_parent()
+
+func transparent() -> void: tabs.modulate = Color.TRANSPARENT
+func usual() -> void: tabs.modulate = Color.WHITE
 
 func _ready() -> void:
 	mouse_entered.connect(transparent)

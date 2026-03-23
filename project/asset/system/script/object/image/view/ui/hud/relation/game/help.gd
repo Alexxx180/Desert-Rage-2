@@ -8,11 +8,11 @@ func controls(hud: CanvasLayer, game: Control) -> void:
 	var hints: VBoxContainer = game.controls.preview.help.hints
 	# var hints: VBoxContainer = hud.detector.game.hints
 
+	# TODO FIXME CATEGORY NEED TO CREATE SINGLE SHOW HIDE BUTTON
 	# hint.input.connect(analyze.short.sync_control_hint)
-	var analyze: Button = game.controls.topic.status.preset.sets.skill.analyze
-	# """
-	analyze.pressed.connect(hints.toggle_help)
-	# TODO FIXME CATEGORY
+	#var analyze: Button = game.controls.topic.status.preset.sets.skill.analyze
+	#analyze.pressed.connect(hints.toggle_help)
+	
 	#for button in game.hints.get_node("group").get_children():
 	#	button.toggled.connect(func(off: bool):
 	#		game.hints.help[button.name].visible = !off)

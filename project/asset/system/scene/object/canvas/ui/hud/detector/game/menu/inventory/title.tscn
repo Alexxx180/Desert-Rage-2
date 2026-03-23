@@ -3,6 +3,10 @@
 [ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://asset/resource/ui/theme/patterns/template/menu/settings/topic/footer.tres" id="1_ojo8r"]
 
 [node name="title" type="VBoxContainer"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 9354.0
+grow_horizontal = 2
 size_flags_horizontal = 3
 
 [node name="caption" type="Label" parent="."]
@@ -11,30 +15,152 @@ size_flags_horizontal = 2
 theme_override_font_sizes/font_size = 24
 text = "Инвентарь"
 
-[node name="effect" type="RichTextLabel" parent="."]
+[node name="details" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 25
+
+[node name="name" type="RichTextLabel" parent="details"]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.25
 theme = ExtResource("1_ojo8r")
-theme_override_constants/paragraph_separation = 8
 bbcode_enabled = true
-text = "[ul]Здесь находятся ваши собранные предметы с сундуков, включая снаряжение.
-Чтобы переместить предмет выберите его и ячейку, куда хотите положить. Вы также можете перетаскивать предмет при помощи мыши на новое место.
-Существуют разные типы предметов: используемые расходники, снаряжение или экипировка, оснастка или обвес.
-Расходники - некоторые из них могут быть использованы двойным нажатием, занимают немного места. Вы также можете перетаскивать предмет восполняющий ауру / ресурс на колбы, чтобы использовать его.
-Экипировка - надеваемый предмет, его характеристики и принадлежность к ячейкам можно увидеть в меню \"Снаряжение\", занимает целый слот инвентаря.
-Обвес - предмет, участвующий при улучшении экипировки в ходе процесса, известного как \"Оснащение\".
-Узнать больше о предмете можно в области осмотра, выглядящей как продолговатая тёмная ячейка. Вы можете перетащить предмет в эту область. Тут можно приготовить некоторые расходники, оснастить экипировку и скрестить некоторое оружие. Для старта нажмите на область осмотра.
-[b][i]♨[/i][/b]Готовка - нажмите на расходник, затем нажмите на другой расходник. Если вы в состоянии приготовить что-то из этих предметов - то у вас появится слот слева. Нажмите на него, затем на пустой слот, чтобы создать новый предмет..
-[b][i]🪛[/i][/b]Оснащение - нажмите на экипировку. Чтобы оснастить  нажмите на необходимый обвес. Чтобы снять оснастку - нажмите на пустое место.
-[b][i]⚔️[/i][/b]Скрещивание - нажмите на оружие. Чтобы скрестить нажмите на другое оружие. Для отмены скрещивания нажмите на появившейся слот слева. 
-Вы также можете перетаскивать предметы на область осмотра с выбранной экипировкой, чтобы оснащать или скрестить, а также расходники, чтобы готовить.
-При нажатии на колбы сверху происходит быстрое восстановление, которое использует инвентарь выбранного персонажа. Вы также можете использовать %s и %s для быстрого доступа в ходе игры. Поведение определяется с помощью сортировки.
-Сортировка - положение вещей в вашем инвентаре. Существует 3 вида: случайная, по возрастанию, по убыванию. Порядок определяется предметами, лежащими слева-направо, восстанавливающими число с пометкой АР - аура / ресурс. Зеленая шкала преимущественно использует предметы с пометкой А, в то время как синяя шкала с пометкой Р.
-Предметы могут быть на разном расстоянии друг от друга. Приоритет использования  определяет сортировка. Порядок начинается с первого предмета, за ним следуют промежуточные и в конце последний предмет. Сортировки по АР:
-По возрастанию - меньше всего, значение увеличивается, больше всего. Приоритет: полное восстановление АР с экономией предметов
-По убыванию - больше всего, значение уменьшается, меньше всего. Приоритет: полное восстановление АР без экономии предметов
-Случайный - предметы лежат в разных местах, независимо от их восстанавливающей способности. Приоритет: предмет для пополнения случайного количества АР.[/ul]"
+text = " Здесь находятся ваши собранные предметы с сундуков, включая снаряжение.
+
+· Существуют разные типы предметов: используемые расходники, снаряжение или экипировка, оснастка или обвес. Расходники - некоторые из них могут быть использованы двойным нажатием, занимают немного места.
+
+· Узнать больше о предмете можно в области осмотра, выглядящей как продолговатая тёмная ячейка. Вы можете перетащить предмет в эту область. Тут можно приготовить некоторые расходники, оснастить экипировку и скрестить некоторое оружие. Для старта нажмите на область осмотра."
+fit_content = true
+autowrap_mode = 2
+
+[node name="types" type="VBoxContainer" parent="details"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="priority" type="HBoxContainer" parent="details/types"]
+layout_mode = 2
+
+[node name="maxed" type="RichTextLabel" parent="details/types/priority"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.25
+theme = ExtResource("1_ojo8r")
+bbcode_enabled = true
+text = "[b][i]✋[/i][/b] Чтобы переместить предмет выберите его и ячейку, куда хотите положить. Вы также можете перетаскивать предмет на новое место. Перетащите предмет восполняющий ауру / ресурс на колбы, чтобы использовать его."
+fit_content = true
+autowrap_mode = 2
+
+[node name="one" type="RichTextLabel" parent="details/types/priority"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.25
+theme = ExtResource("1_ojo8r")
+bbcode_enabled = true
+text = "[b][i]♨[/i][/b] Готовка - нажмите на один, затем на другой расходник. Если вы в состоянии приготовить что-то из этих предметов - то у вас появится слот слева. Нажмите на него, затем на пустой слот, чтобы создать новый предмет."
+fit_content = true
+autowrap_mode = 2
+
+[node name="priority2" type="HBoxContainer" parent="details/types"]
+layout_mode = 2
+
+[node name="one" type="RichTextLabel" parent="details/types/priority2"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.25
+theme = ExtResource("1_ojo8r")
+bbcode_enabled = true
+text = "[b][i]⚔️[/i][/b] Скрещивание - нажмите на оружие. Чтобы скрестить нажмите на другое оружие. Для отмены скрещивания нажмите на появившейся слот слева. "
+fit_content = true
+autowrap_mode = 2
+
+[node name="maxed" type="RichTextLabel" parent="details/types/priority2"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.25
+theme = ExtResource("1_ojo8r")
+bbcode_enabled = true
+text = "[b][i]🪛[/i][/b] Оснащение - нажмите на экипировку. Чтобы оснастить  нажмите на необходимый обвес. Чтобы снять оснастку - нажмите на пустое место."
+fit_content = true
+autowrap_mode = 2
+
+[node name="effect" type="RichTextLabel" parent="details"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.25
+theme = ExtResource("1_ojo8r")
+bbcode_enabled = true
+text = "· Вы также можете перетаскивать предметы на область осмотра с выбранной экипировкой, чтобы оснастить или скрестить, а также расходники, чтобы готовить.
+
+· Экипировка - надеваемый предмет, его характеристики и принадлежность к ячейкам можно увидеть в меню \"Снаряжение\", занимает целый слот инвентаря.
+
+· Обвес - предмет, участвующий при улучшении экипировки в ходе процесса, известного как \"Оснащение\", занимает целый слот инвентаря."
+fit_content = true
+autowrap_mode = 2
+
+[node name="sorting" type="HBoxContainer" parent="details"]
+layout_mode = 2
+
+[node name="one" type="RichTextLabel" parent="details/sorting"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.25
+theme = ExtResource("1_ojo8r")
+bbcode_enabled = true
+text = "· При нажатии на колбы сверху происходит быстрое восстановление, которое использует инвентарь выбранного персонажа. Вы также можете использовать %s и %s для быстрого доступа в ходе игры. Поведение определяется сортировкой.
+"
+fit_content = true
+autowrap_mode = 2
+
+[node name="maxed" type="RichTextLabel" parent="details/sorting"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.25
+theme = ExtResource("1_ojo8r")
+bbcode_enabled = true
+text = "· Порядок сортировки определяют предметы, лежащие слева-направо, восполняющие число АР - пометка аура / ресурс. Зеленая шкала преимущественно использует предметы с пометкой А, в то время как синяя шкала с пометкой Р."
+fit_content = true
+autowrap_mode = 2
+
+[node name="order" type="HBoxContainer" parent="details"]
+layout_mode = 2
+
+[node name="more" type="RichTextLabel" parent="details/order"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.25
+theme = ExtResource("1_ojo8r")
+bbcode_enabled = true
+text = "[b][i]🔼[/i][/b] Предметы с АР по возрастанию - восстановление полностью с экономией предметов"
+fit_content = true
+autowrap_mode = 2
+
+[node name="less" type="RichTextLabel" parent="details/order"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.25
+theme = ExtResource("1_ojo8r")
+bbcode_enabled = true
+text = "[b][i]🔽[/i][/b] Предметы с АР по убыванию - восстановление АР полностью без экономии предметов"
+fit_content = true
+autowrap_mode = 2
+
+[node name="random" type="RichTextLabel" parent="details/order"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.25
+theme = ExtResource("1_ojo8r")
+bbcode_enabled = true
+text = "[b][i]🔀[/i][/b] Предметы с АР в случайном порядке - восполнение АР случайным образом"
 fit_content = true
 autowrap_mode = 2

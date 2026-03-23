@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://dbaauq0nlgduw"]
+[gd_scene load_steps=27 format=3 uid="uid://dbaauq0nlgduw"]
 
 [ext_resource type="Script" uid="uid://d1bkj71odt1bp" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/hints/preview/preview.gd" id="2_ytxpc"]
 [ext_resource type="Script" uid="uid://b740p71awf41" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/hints/preview/scroll/list.gd" id="3_6g6fj"]
@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://dhqu2qkapwck2" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/gameplay/chats/log.tscn" id="5_6g6fj"]
 [ext_resource type="FontFile" uid="uid://b37js8y80ak1k" path="res://asset/resource/media/data/font/NotoColorEmoji-Regular.ttf" id="5_mhiad"]
 [ext_resource type="Script" uid="uid://drcochfogfne4" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/hints/preview/scroll/scroll.gd" id="8_cyanb"]
+[ext_resource type="Script" uid="uid://bfn1kkdcd4vhy" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/hints/preview/borders.gd" id="10_ch3ha"]
+[ext_resource type="Texture2D" uid="uid://bt7rgtk8dl35x" path="res://asset/resource/media/image/actors/npc/dialog/ray.png" id="10_qhrr6"]
 [ext_resource type="Script" uid="uid://cjoheu7m2eic3" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/hints/preview/help/content/help.gd" id="16_2o5ct"]
 [ext_resource type="PackedScene" uid="uid://b01p37el432af" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/preview/hints/hints.tscn" id="17_o45p0"]
 [ext_resource type="PackedScene" uid="uid://b10usb1wa67d2" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/preview/books/book.tscn" id="18_utpyv"]
@@ -20,6 +22,14 @@ bg_color = Color(0.0383972, 0.0383972, 0.0383971, 1)
 
 [sub_resource type="Theme" id="Theme_tysmj"]
 VScrollBar/styles/scroll = SubResource("StyleBoxFlat_rw2ti")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ch3ha"]
+bg_color = Color(0.864675, 0.864675, 0.864675, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.0605306, 0.0605303, 0.0605303, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4chmg"]
 content_margin_left = 3.0
@@ -137,7 +147,6 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="chat" parent="space/preview/chats/list" instance=ExtResource("4_qhrr6")]
-visible = false
 layout_mode = 2
 
 [node name="logs" parent="space/preview/chats/list" instance=ExtResource("5_6g6fj")]
@@ -185,28 +194,60 @@ layout_mode = 2
 size_flags_vertical = 8
 
 [node name="bottom" type="Control" parent="."]
+custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.01
 
-[node name="slots" type="VBoxContainer" parent="bottom"]
-visible = false
+[node name="talk" type="MarginContainer" parent="bottom"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="borders" type="PanelContainer" parent="bottom/talk"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+script = ExtResource("10_ch3ha")
+borders = SubResource("StyleBoxFlat_ch3ha")
+
+[node name="image" type="TextureRect" parent="bottom/talk/borders"]
+layout_mode = 2
+texture = ExtResource("10_qhrr6")
+expand_mode = 1
+
+[node name="controls" type="MarginContainer" parent="bottom"]
 layout_mode = 1
-anchors_preset = 11
-anchor_left = 1.0
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -40.0
-grow_horizontal = 0
+grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="bottom/controls"]
+layout_mode = 2
+
+[node name="control" type="Control" parent="bottom/controls/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="slots" type="VBoxContainer" parent="bottom/controls/HBoxContainer"]
+layout_mode = 2
 theme_override_constants/separation = 2
 
-[node name="ability" type="HBoxContainer" parent="bottom/slots"]
+[node name="ability" type="HBoxContainer" parent="bottom/controls/HBoxContainer/slots"]
 layout_mode = 2
 size_flags_horizontal = 8
 theme_override_constants/separation = 2
 
-[node name="left" type="Button" parent="bottom/slots/ability"]
+[node name="left" type="Button" parent="bottom/controls/HBoxContainer/slots/ability"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -216,7 +257,7 @@ theme_override_font_sizes/font_size = 32
 theme_override_styles/normal = SubResource("StyleBoxFlat_4chmg")
 text = "←"
 
-[node name="bag" type="Label" parent="bottom/slots/ability/left"]
+[node name="bag" type="Label" parent="bottom/controls/HBoxContainer/slots/ability/left"]
 custom_minimum_size = Vector2(15, 0)
 layout_mode = 1
 anchors_preset = 6
@@ -236,7 +277,7 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_1moid")
 text = "💰"
 horizontal_alignment = 2
 
-[node name="fire" type="Button" parent="bottom/slots/ability"]
+[node name="fire" type="Button" parent="bottom/controls/HBoxContainer/slots/ability"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -246,7 +287,7 @@ theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_eq6yd")
 text = "🔥"
 
-[node name="cost" type="Label" parent="bottom/slots/ability/fire"]
+[node name="cost" type="Label" parent="bottom/controls/HBoxContainer/slots/ability/fire"]
 custom_minimum_size = Vector2(15, 0)
 layout_mode = 1
 anchors_preset = 1
@@ -261,7 +302,7 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_iy05a")
 text = "1"
 horizontal_alignment = 2
 
-[node name="right" type="Button" parent="bottom/slots/ability"]
+[node name="right" type="Button" parent="bottom/controls/HBoxContainer/slots/ability"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -271,7 +312,7 @@ theme_override_font_sizes/font_size = 32
 theme_override_styles/normal = SubResource("StyleBoxFlat_4chmg")
 text = "→"
 
-[node name="bag" type="Label" parent="bottom/slots/ability/right"]
+[node name="bag" type="Label" parent="bottom/controls/HBoxContainer/slots/ability/right"]
 custom_minimum_size = Vector2(15, 0)
 layout_mode = 1
 anchors_preset = 4
@@ -288,11 +329,11 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_4chmg")
 text = "💰"
 horizontal_alignment = 2
 
-[node name="medium" type="HBoxContainer" parent="bottom/slots"]
+[node name="medium" type="HBoxContainer" parent="bottom/controls/HBoxContainer/slots"]
 layout_mode = 2
 theme_override_constants/separation = 2
 
-[node name="whip" type="Button" parent="bottom/slots/medium"]
+[node name="whip" type="Button" parent="bottom/controls/HBoxContainer/slots/medium"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -302,7 +343,7 @@ theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_8qkor")
 text = "🎣"
 
-[node name="cost" type="Label" parent="bottom/slots/medium/whip"]
+[node name="cost" type="Label" parent="bottom/controls/HBoxContainer/slots/medium/whip"]
 custom_minimum_size = Vector2(15, 0)
 layout_mode = 1
 anchors_preset = 1
@@ -317,7 +358,7 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_iy05a")
 text = "1"
 horizontal_alignment = 2
 
-[node name="shot" type="Button" parent="bottom/slots/medium"]
+[node name="shot" type="Button" parent="bottom/controls/HBoxContainer/slots/medium"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -327,7 +368,7 @@ theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_tysmj")
 text = "🎯"
 
-[node name="cost" type="Label" parent="bottom/slots/medium/shot"]
+[node name="cost" type="Label" parent="bottom/controls/HBoxContainer/slots/medium/shot"]
 custom_minimum_size = Vector2(15, 0)
 layout_mode = 1
 anchors_preset = 1
@@ -342,7 +383,7 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_iy05a")
 text = "1"
 horizontal_alignment = 2
 
-[node name="punch" type="Button" parent="bottom/slots/medium"]
+[node name="punch" type="Button" parent="bottom/controls/HBoxContainer/slots/medium"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -352,7 +393,7 @@ theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_ok865")
 text = "✊"
 
-[node name="cost" type="Label" parent="bottom/slots/medium/punch"]
+[node name="cost" type="Label" parent="bottom/controls/HBoxContainer/slots/medium/punch"]
 visible = false
 custom_minimum_size = Vector2(15, 0)
 layout_mode = 1
@@ -368,11 +409,11 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_iy05a")
 text = "2"
 horizontal_alignment = 2
 
-[node name="base" type="HBoxContainer" parent="bottom/slots"]
+[node name="base" type="HBoxContainer" parent="bottom/controls/HBoxContainer/slots"]
 layout_mode = 2
 theme_override_constants/separation = 2
 
-[node name="cure" type="Button" parent="bottom/slots/base"]
+[node name="cure" type="Button" parent="bottom/controls/HBoxContainer/slots/base"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -382,7 +423,7 @@ theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_ok865")
 text = "🧪"
 
-[node name="kick" type="Button" parent="bottom/slots/base"]
+[node name="kick" type="Button" parent="bottom/controls/HBoxContainer/slots/base"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -392,7 +433,7 @@ theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_ok865")
 text = "🦶"
 
-[node name="cost" type="Label" parent="bottom/slots/base/kick"]
+[node name="cost" type="Label" parent="bottom/controls/HBoxContainer/slots/base/kick"]
 visible = false
 custom_minimum_size = Vector2(15, 0)
 layout_mode = 1
@@ -408,7 +449,7 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_iy05a")
 text = "2"
 horizontal_alignment = 2
 
-[node name="osmose" type="Button" parent="bottom/slots/base"]
+[node name="osmose" type="Button" parent="bottom/controls/HBoxContainer/slots/base"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 size_flags_horizontal = 4

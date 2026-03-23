@@ -15,10 +15,12 @@ func _set_stamina(hero: CharacterBody2D, game: Control) -> void:
 	# run.stop_mach.connect(func(): stamina.hide())
 
 func _set_ability(stats: Node, game: Control, hero: CharacterBody2D) -> void:
+	"""
 	for sets in [game.controls.topic.status.preset.sets,
 		game.priorities.stats.inventory.ability.topic.stack.space.status.preset.sets]:
 		stats.aura.update_bar.connect(func(_v):
 			sets.use_skill(stats.aura))
+	""" # TODO FIXME ABILITY PRESET
 	stats.aura.update_bar.connect(func(v):
 		game.priorities.set_points("ability", hero.name, v))
 

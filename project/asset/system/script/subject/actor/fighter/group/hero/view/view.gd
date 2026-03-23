@@ -39,7 +39,7 @@ func hide_ap() -> void:
 
 func _set_invis(invisible: bool) -> void:
 	profile.material.set(param.invis, invisible)
-	if invisible: set_aura(Color("FFFFFFFF"), 3)
+	if invisible: set_aura(Color("FFFFFF7F"), 3)
 	else: set_aura(Color("FFFFFF00"), 0)
 	
 func _go_behind_scene(_curtain: TileMapLayer) -> void: _set_invis(true)

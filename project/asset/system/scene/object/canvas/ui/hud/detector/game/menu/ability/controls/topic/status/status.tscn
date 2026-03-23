@@ -1,4 +1,4 @@
-[gd_scene load_steps=80 format=3 uid="uid://cq5jn6k2bwg5n"]
+[gd_scene load_steps=81 format=3 uid="uid://cq5jn6k2bwg5n"]
 
 [ext_resource type="Script" uid="uid://b2ugt042kmpr0" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/topic/status/status.gd" id="1_3iju4"]
 [ext_resource type="Script" uid="uid://c34inyxgbvb7k" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/topic/status/space/space.gd" id="2_iitkt"]
@@ -7,6 +7,8 @@
 [ext_resource type="Script" uid="uid://crmcb7sw51vpd" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/xp/short.gd" id="5_qvr63"]
 [ext_resource type="Script" uid="uid://d1lspg170mgtg" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/topic/status/space/title/status/xp/body/body.gd" id="6_n6ucc"]
 [ext_resource type="Script" uid="uid://dlrahqp7w44nr" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/topic/status/space/title/status/xp/body/space/space.gd" id="7_hw15g"]
+[ext_resource type="Script" uid="uid://buq442yndfae8" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/topic/status/space/title/enemies/enemy/content/hits/hits.gd" id="7_i51uf"]
+[ext_resource type="PackedScene" uid="uid://dqvbrynkvm7qe" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/ability/controls/topic/status/enemy/one.tscn" id="8_6k1g3"]
 [ext_resource type="Script" uid="uid://c68tfcondenln" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/topic/status/space/title/status/xp/body/space/score/score.gd" id="8_612bo"]
 [ext_resource type="Script" uid="uid://dlm8rd63iot38" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/topic/status/space/title/status/xp/body/space/score/value.gd" id="9_1m7v2"]
 [ext_resource type="FontFile" uid="uid://cc0l5uav5qfke" path="res://asset/resource/media/data/font/ka1.ttf" id="10_lrfvi"]
@@ -30,7 +32,6 @@
 [ext_resource type="PackedScene" uid="uid://b5qo332jiddu3" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/ability/controls/topic/status/enemy/enemy.tscn" id="24_ssxtu"]
 [ext_resource type="PackedScene" uid="uid://qlgo5b48kj7l" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/ability/controls/topic/status/description.tscn" id="25_jva7y"]
 [ext_resource type="FontFile" uid="uid://o0rgn7d13mr3" path="res://asset/resource/media/data/font/OpenSans-VariableFont_wdth,wght.ttf" id="26_6k1g3"]
-[ext_resource type="PackedScene" uid="uid://cxrc1e7t1llmh" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/ability/controls/topic/status/synergy.tscn" id="27_g4hpx"]
 [ext_resource type="Script" uid="uid://bb1pv0jihkjnw" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/topic/status/preset/sets/skill/sets.gd" id="29_iywcr"]
 [ext_resource type="FontFile" uid="uid://b2wbdbnkxcqv1" path="res://asset/resource/media/data/font/NotoEmoji-VariableFont_wght.ttf" id="30_g7ksd"]
 
@@ -49,8 +50,10 @@ colors = PackedColorArray(0, 0, 0, 0, 0.741176, 0, 0, 0.470588)
 gradient = SubResource("Gradient_e1onj")
 width = 25
 height = 23
-fill_from = Vector2(0.503077, 0)
-fill_to = Vector2(0.5, 1)
+fill_from = Vector2(0, 0.5)
+fill_to = Vector2(1, 0.5)
+metadata/_snap_enabled = true
+metadata/_snap_count = 2
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pa3qu"]
 content_margin_top = 3.0
@@ -331,7 +334,22 @@ script = ExtResource("4_pn2dd")
 layout_mode = 2
 size_flags_horizontal = 3
 
+[node name="hits" type="HBoxContainer" parent="space/title/enemies/margin/status"]
+layout_mode = 2
+theme_override_constants/separation = -5
+script = ExtResource("7_i51uf")
+
+[node name="hundred" parent="space/title/enemies/margin/status/hits" instance=ExtResource("8_6k1g3")]
+layout_mode = 2
+
+[node name="ten" parent="space/title/enemies/margin/status/hits" instance=ExtResource("8_6k1g3")]
+layout_mode = 2
+
+[node name="one" parent="space/title/enemies/margin/status/hits" instance=ExtResource("8_6k1g3")]
+layout_mode = 2
+
 [node name="time" type="PanelContainer" parent="space/title/enemies/margin/status"]
+visible = false
 custom_minimum_size = Vector2(60, 30)
 layout_mode = 2
 size_flags_horizontal = 8
@@ -372,12 +390,14 @@ theme_override_constants/margin_bottom = 0
 
 [node name="lasted" type="ProgressBar" parent="space/title/enemies/margin/status/time/timing"]
 layout_mode = 2
-size_flags_vertical = 8
+size_flags_horizontal = 8
+size_flags_vertical = 1
 theme_override_styles/background = SubResource("StyleBoxEmpty_mv703")
 theme_override_styles/fill = SubResource("StyleBoxFlat_fxbxi")
 max_value = 600.0
 step = 1.0
 value = 600.0
+fill_mode = 3
 show_percentage = false
 
 [node name="xp" type="VBoxContainer" parent="space/title/enemies/margin/status"]
@@ -491,6 +511,7 @@ vertical_alignment = 2
 [node name="timer" parent="space/title/enemies/margin/status/xp/body/space/score" instance=ExtResource("13_ic7dp")]
 
 [node name="options" type="HBoxContainer" parent="space/title/enemies/margin/status/xp/body/space"]
+visible = false
 layout_mode = 1
 anchors_preset = 11
 anchor_left = 1.0
@@ -619,10 +640,29 @@ focus_mode = 1
 theme_override_fonts/font = ExtResource("30_g7ksd")
 theme_override_font_sizes/font_size = 24
 theme_override_styles/normal = SubResource("StyleBoxFlat_8bgqw")
-text = "🛡🤠"
+text = "🤠
+"
 alignment = 0
 
 [node name="hooder" parent="space/title/enemies/margin/status/xp/body/space/options/group" instance=ExtResource("17_3i86x")]
+
+[node name="shield" type="Label" parent="space/title/enemies/margin/status/xp/body/space/options/group"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -15.0
+offset_top = -14.5
+offset_right = 15.0
+offset_bottom = 14.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("30_g7ksd")
+theme_override_font_sizes/font_size = 24
+text = "🛡"
 
 [node name="sets" type="HBoxContainer" parent="space/title/enemies/margin/status/xp/body/space/options"]
 layout_mode = 2
@@ -676,6 +716,8 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_g4hpx")
 alignment = 0
 script = ExtResource("21_f66ty")
 path = "../../../../../../../stats/inventory/ability/controls/hints/space/preview/help"
+
+[node name="hooder" parent="space/title/enemies/margin/status/xp/body/space/options/toggle2" instance=ExtResource("17_3i86x")]
 
 [node name="shown" type="Label" parent="space/title/enemies/margin/status/xp/body/space/options/toggle2"]
 visible = false
@@ -735,10 +777,6 @@ fill_mode = 3
 show_percentage = false
 
 [node name="timer" parent="space/title/enemies/margin/status/xp/body/meter" instance=ExtResource("13_ic7dp")]
-
-[node name="synergy" parent="space/title/enemies" instance=ExtResource("27_g4hpx")]
-visible = false
-layout_mode = 1
 
 [node name="pause" type="HBoxContainer" parent="space/title/enemies"]
 visible = false

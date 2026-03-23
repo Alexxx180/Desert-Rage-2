@@ -6,7 +6,7 @@ extends PanelContainer
 @onready var modulator: Node = $modulator
 @onready var margin: MarginContainer = $margin
 @onready var damage: PanelContainer = caption.get_node("damage")
-@onready var hits: HBoxContainer = $content/hits
+@onready var hits: HBoxContainer = get_node("../margin/status/hits") #$content/hits
 @onready var back: TextureRect = damage.get_node("back") # @onready var interrogate: Label = $margin/contents/interrogate
 @onready var damages: HBoxContainer = damage.get_node("margin/damage")
 

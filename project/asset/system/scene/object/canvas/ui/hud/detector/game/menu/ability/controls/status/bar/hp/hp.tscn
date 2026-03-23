@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://cm4lshhyr3mtm"]
+[gd_scene load_steps=6 format=3 uid="uid://cm4lshhyr3mtm"]
 
 [ext_resource type="PackedScene" uid="uid://yaryrrsclijd" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/ability/controls/status/bar/hp/bar.tscn" id="1_52rk0"]
 [ext_resource type="Script" uid="uid://hkphdq3b15i8" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/status/sticker/status/hp/hp.gd" id="1_m7qr1"]
 [ext_resource type="PackedScene" uid="uid://dwcx6tvnhcjol" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/ability/controls/status/markers/ailments.tscn" id="3_fmms1"]
 [ext_resource type="PackedScene" uid="uid://djwmyxjpm8g3w" path="res://asset/system/scene/object/canvas/util/appear/timer.tscn" id="3_ryhpa"]
+[ext_resource type="PackedScene" uid="uid://cxrc1e7t1llmh" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/ability/controls/topic/status/synergy.tscn" id="4_m4dbo"]
 
 [node name="hp" type="HBoxContainer"]
 custom_minimum_size = Vector2(0, 2)
@@ -42,6 +43,7 @@ size_flags_vertical = 0
 
 [node name="rock" type="HBoxContainer" parent="."]
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_constants/separation = 0
 
 [node name="hp" parent="rock" instance=ExtResource("1_52rk0")]
@@ -62,5 +64,9 @@ theme_override_constants/margin_bottom = 0
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
+
+[node name="synergy" parent="." instance=ExtResource("4_m4dbo")]
+visible = false
+layout_mode = 2
 
 [node name="timer" parent="." instance=ExtResource("3_ryhpa")]
