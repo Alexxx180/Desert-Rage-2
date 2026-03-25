@@ -21,12 +21,16 @@ func scroll() -> void:
 		_add_chat(phrase)
 		backlog -= 1
 
-func insert_chat() -> void:
-	
+func _new(key: String):
+	pass
+
+func insert_chat(key: String) -> void:
+	locale.hud.chat.insert(_new(key))
+	locale.panel.chat.insert(_new(key))
 
 func _add_chat(key: String) -> void:
-	ui
+	locale.hud.temp.chat.add_child(_new(key))
+	locale.hud.chat.add_child(_new(key))
+	locale.panel.chat.add_child(_new(key))
 
-func add_chat(part: int) -> void: # func get_chat(level: int, part: int) -> void:
-	var entry: String = "L%d_%d" % [_level, part]
-	# locale.get_chat(part) 
+func add_chat(part: int) -> void: _add_chat("L%d_%d" % [_level, part])
