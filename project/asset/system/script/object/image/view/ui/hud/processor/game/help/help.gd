@@ -6,3 +6,5 @@ extends InputObserver # HELP =
 
 func _ready() -> void:
 	dialog.cursor.block = block
+	dialog.locale = locale
+	dialog.set_level(10)

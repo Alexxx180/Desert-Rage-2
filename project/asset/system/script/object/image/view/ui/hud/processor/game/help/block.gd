@@ -24,6 +24,6 @@ func add_chat(nodes: Array) -> void:
 	hud.chat.append(nodes[1]) # add_child
 	panel.chat.append(nodes[2])
 
+func hide_emotion() -> void: for e in emotion: e.hide_animation()
 func set_emotion(id: Dictionary) -> void:
-	for e in emotion:
-		e.animation = id.who + "_" + id.face
+	for e in emotion: e.set_animation(id.who + "_" + id.face)

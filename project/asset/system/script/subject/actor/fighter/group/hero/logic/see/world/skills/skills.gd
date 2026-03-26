@@ -7,6 +7,7 @@ extends Node2D
 @onready var pull: Node2D = $pull
 @onready var act: Area2D = $act
 @onready var chest: Area2D = $chest
+@onready var chat: Area2D = $chat
 
 func set_direction(direction: Vector2i) -> void:
 	pull.set_direction(direction)

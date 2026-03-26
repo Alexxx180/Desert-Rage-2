@@ -40,10 +40,14 @@ func plot_speech() -> void:
 	for node in nodes: node.visible_characters += 1
 	length -= 1
 
+func stop_speech() -> void:
+	cursor.block.hide_emotion()
+	timer.stop()
+
 func talking() -> void:
 	if length > 0:
 		plot_speech()
 	elif cursor.talking:
 		_new_chat_block()
 	else:
-		timer.stop()
+		stop_speech()

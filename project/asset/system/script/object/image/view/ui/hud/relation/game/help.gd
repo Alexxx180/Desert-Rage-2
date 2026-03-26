@@ -6,6 +6,19 @@ func connect_hint(hint: InputObserver, hints, act: String) -> void:
 func controls(hud: CanvasLayer, game: Control) -> void:
 	var hint: InputObserver = hud.processor.game.help
 	var hints: VBoxContainer = game.controls.preview.help.hints
+	
+	hint.block.hud = hints.space.preview.chats.list
+	hint.block.panel = game
+	hint.block.emotion.append(hints.bottom.talk)
+	for hero in hud.get_node("../group").deploy.party.heroes:
+		hero.to.skills.chat.body_entered.connect(func(layer: TileMapLayer):
+			var tile: Dictionary = Tile.from_pos(layer, hero.position)
+			var part: int = Tile.logic_no(tile.atlas)
+			hint.add_chat(part)
+			Tile.erase_area(layer, Tile.used_cells(layer, tile.atlas)))
+
+	# priorities/stats/inventory/ability/back/vertical
+	
 	# var hints: VBoxContainer = hud.detector.game.hints
 
 	# TODO FIXME CATEGORY NEED TO CREATE SINGLE SHOW HIDE BUTTON

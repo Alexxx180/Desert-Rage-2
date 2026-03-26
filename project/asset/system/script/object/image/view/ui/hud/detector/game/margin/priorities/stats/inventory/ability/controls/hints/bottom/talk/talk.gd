@@ -21,7 +21,5 @@ func hide_animation() -> void:
 	borders.image.stop()
 
 func set_animation(caption: String) -> void:
-	var animation: String = animations[caption[-1]]
-	var hero: String = caption[-2]
 	if not borders.image.playing: show_animation()
-	borders.image.play(hero + '_' + animation)
+	borders.image.play(caption)

@@ -22,6 +22,12 @@ static func paint(layer: TileMapLayer, cells: Dictionary) -> void:
 	layer.set_cell(cells["coords"], cells["id"], cells["atlas"]) # cells["cell"])
 
 
+static func erase_area(layer: TileMapLayer, cells: Array[Vector2i]) -> void:
+	for cell in cells: erase(layer, cell)
+
+static func erase(layer: TileMapLayer, cell: Vector2i) -> void:
+	layer.erase_cell(cell)
+
 static func basis(layer: TileMapLayer, map_coords: Vector2i, id: int = -1) -> Dictionary:
 	return { "coords": map_coords, "id": layer.get_cell_source_id(map_coords) if id == -1 else id }
 
