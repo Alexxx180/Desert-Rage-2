@@ -1,13 +1,14 @@
 extends Node
 
-var hud: VBoxContainer
-var panel: PanelContainer
-
 var _locale: Array
 var locale: Array:
 	get:
 		if _locale == null: _locale = _get_locale()
 		return _locale
+
+func text(cursor: int) -> String: return locale[cursor]
+func with(cursor: int, start: String) -> bool:
+	return locale[cursor].begins_with(start)
 
 func _get_locale() -> Array: # TODOT
 	var result: Array = []
