@@ -1,9 +1,8 @@
-[gd_scene load_steps=25 format=3 uid="uid://b5qo332jiddu3"]
+[gd_scene load_steps=23 format=3 uid="uid://b5qo332jiddu3"]
 
 [ext_resource type="Script" uid="uid://cuqygsqpgrd75" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/topic/status/space/title/enemies/enemy/enemy.gd" id="1_ydy8w"]
 [ext_resource type="Script" uid="uid://3m6nbcdg64rt" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/topic/status/space/title/enemies/enemy/content/caption.gd" id="2_su5le"]
 [ext_resource type="FontFile" uid="uid://g5guxjrt6wb6" path="res://asset/resource/media/data/font/Troubleside.ttf" id="3_forf1"]
-[ext_resource type="Script" uid="uid://cudekrwdutcl7" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/topic/status/space/title/enemies/enemy/margin/back.gd" id="4_1dscl"]
 [ext_resource type="Script" uid="uid://cfaxt6ng6ftvc" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/topic/status/space/title/enemies/enemy/margin/damage.gd" id="5_ro5ui"]
 [ext_resource type="FontFile" uid="uid://bmtckcw2a28p2" path="res://asset/resource/media/data/font/Sportsball.ttf" id="6_0mwta"]
 [ext_resource type="Shader" uid="uid://ciivvs0a4nhrw" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/ability/controls/topic/status/dissolve.gdshader" id="6_qj16n"]
@@ -17,36 +16,10 @@ border_color = Color(0, 0, 0, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_05gi3"]
 bg_color = Color(0, 0, 0, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j11u2"]
-bg_color = Color(0, 0, 0, 0.705882)
-border_width_top = 5
-border_color = Color(0.8, 0.8, 0.8, 0)
-
-[sub_resource type="Gradient" id="Gradient_i1hqj"]
-colors = PackedColorArray(0, 0, 0, 0, 0.741176, 0, 0, 0.470588)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_3yh6s"]
-gradient = SubResource("Gradient_i1hqj")
-width = 25
-height = 23
-fill_from = Vector2(0.503077, 0)
-fill_to = Vector2(0.5, 1)
-
-[sub_resource type="Gradient" id="Gradient_ydy8w"]
-colors = PackedColorArray(0.54099, 0.54099, 0.54099, 1, 0.147672, 0.147672, 0.147672, 1)
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_su5le"]
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_forf1"]
-color_ramp = SubResource("Gradient_ydy8w")
-noise = SubResource("FastNoiseLite_su5le")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_1dscl"]
-shader = ExtResource("6_qj16n")
-shader_parameter/dissolve_texture = SubResource("NoiseTexture2D_forf1")
-shader_parameter/dissolve_value = 1.0
-
-[sub_resource type="Theme" id="Theme_tckc4"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_veien"]
+content_margin_left = 8.0
+content_margin_top = 0.0
+content_margin_right = 8.0
 
 [sub_resource type="Gradient" id="Gradient_nm75a"]
 colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 0.235294)
@@ -55,8 +28,32 @@ colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 0.235294)
 gradient = SubResource("Gradient_nm75a")
 width = 106
 height = 28
-fill_from = Vector2(0.497175, 0.831638)
-fill_to = Vector2(0.497175, 0)
+fill_from = Vector2(0.5, 0)
+fill_to = Vector2(0.5, 1)
+metadata/_snap_enabled = true
+metadata/_snap_count = 2
+
+[sub_resource type="Gradient" id="Gradient_ydy8w"]
+colors = PackedColorArray(0.54099, 0.54099, 0.54099, 1, 0.147672, 0.147672, 0.147672, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_su5le"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_forf1"]
+noise = SubResource("FastNoiseLite_su5le")
+color_ramp = SubResource("Gradient_ydy8w")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1dscl"]
+shader = ExtResource("6_qj16n")
+shader_parameter/dissolve_texture = SubResource("NoiseTexture2D_forf1")
+shader_parameter/dissolve_value = 1.0
+
+[sub_resource type="Theme" id="Theme_tckc4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_novm0"]
+content_margin_left = 7.0
+content_margin_top = 4.0
+content_margin_right = 6.0
+content_margin_bottom = 0.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kdjwi"]
 
@@ -100,86 +97,16 @@ script = ExtResource("2_su5le")
 [node name="lamp" type="ColorRect" parent="content/margin/caption"]
 custom_minimum_size = Vector2(106, 1)
 layout_mode = 2
-size_flags_vertical = 0
+size_flags_vertical = 8
 
-[node name="margin" type="MarginContainer" parent="content/margin/caption"]
-layout_mode = 2
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = -1
-theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 0
-
-[node name="text" type="Label" parent="content/margin/caption/margin"]
+[node name="text" type="Label" parent="content/margin/caption"]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.462291, 0.462291, 0.462291, 1)
 theme_override_fonts/font = ExtResource("3_forf1")
 theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxEmpty_veien")
 text = "Гляделкинc"
-
-[node name="damage" type="PanelContainer" parent="content/margin/caption"]
-layout_mode = 2
-size_flags_horizontal = 0
-theme_override_styles/panel = SubResource("StyleBoxFlat_j11u2")
-
-[node name="back" type="TextureRect" parent="content/margin/caption/damage"]
-layout_mode = 2
-texture = SubResource("GradientTexture2D_3yh6s")
-script = ExtResource("4_1dscl")
-
-[node name="margin" type="MarginContainer" parent="content/margin/caption/damage"]
-layout_mode = 2
-theme_override_constants/margin_left = 7
-theme_override_constants/margin_top = 4
-theme_override_constants/margin_right = 6
-theme_override_constants/margin_bottom = 0
-
-[node name="damage" type="HBoxContainer" parent="content/margin/caption/damage/margin"]
-layout_mode = 2
-theme_override_constants/separation = 0
-script = ExtResource("5_ro5ui")
-
-[node name="health" type="Label" parent="content/margin/caption/damage/margin/damage"]
-material = SubResource("ShaderMaterial_1dscl")
-custom_minimum_size = Vector2(10, 0)
-layout_mode = 2
-size_flags_horizontal = 8
-theme = SubResource("Theme_tckc4")
-theme_override_colors/font_color = Color(0.588235, 0.588235, 0.588235, 1)
-theme_override_fonts/font = ExtResource("6_0mwta")
-theme_override_font_sizes/font_size = 11
-text = "150"
-horizontal_alignment = 1
-
-[node name="margin" type="MarginContainer" parent="content/margin/caption/damage/margin/damage"]
-layout_mode = 2
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 4
-theme_override_constants/margin_bottom = 1
-
-[node name="sign" type="Label" parent="content/margin/caption/damage/margin/damage/margin"]
-layout_mode = 2
-size_flags_horizontal = 8
-theme = SubResource("Theme_tckc4")
-theme_override_colors/font_color = Color(0.588235, 0.588235, 0.588235, 1)
-theme_override_fonts/font = ExtResource("6_0mwta")
-theme_override_font_sizes/font_size = 8
-text = "-"
-horizontal_alignment = 1
-vertical_alignment = 2
-
-[node name="value" type="Label" parent="content/margin/caption/damage/margin/damage"]
-material = SubResource("ShaderMaterial_1dscl")
-custom_minimum_size = Vector2(10, 0)
-layout_mode = 2
-size_flags_horizontal = 0
-theme = SubResource("Theme_tckc4")
-theme_override_colors/font_color = Color(0.588235, 0.588235, 0.588235, 1)
-theme_override_fonts/font = ExtResource("6_0mwta")
-theme_override_font_sizes/font_size = 11
-text = "15"
-horizontal_alignment = 1
 
 [node name="back" type="TextureRect" parent="content/margin/caption"]
 layout_mode = 2
@@ -193,27 +120,21 @@ one_shot = true
 wait_time = 0.25
 one_shot = true
 
-[node name="margin" type="MarginContainer" parent="."]
+[node name="damage" type="Label" parent="content"]
+material = SubResource("ShaderMaterial_1dscl")
+custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 size_flags_horizontal = 8
-theme_override_constants/margin_left = 7
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 1
+theme = SubResource("Theme_tckc4")
+theme_override_colors/font_color = Color(0.588235, 0.588235, 0.588235, 1)
+theme_override_fonts/font = ExtResource("6_0mwta")
+theme_override_font_sizes/font_size = 11
+theme_override_styles/normal = SubResource("StyleBoxEmpty_novm0")
+text = "150 > 15"
+horizontal_alignment = 1
+script = ExtResource("5_ro5ui")
 
-[node name="contents" type="HBoxContainer" parent="margin"]
-layout_mode = 2
-theme_override_constants/separation = 0
-
-[node name="hp" type="MarginContainer" parent="."]
-layout_mode = 2
-size_flags_vertical = 8
-theme_override_constants/margin_left = 0
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 0
-
-[node name="contested" type="ProgressBar" parent="hp"]
+[node name="contested" type="ProgressBar" parent="."]
 layout_mode = 2
 size_flags_vertical = 8
 theme_override_styles/background = SubResource("StyleBoxEmpty_kdjwi")
@@ -223,7 +144,7 @@ step = 1.0
 value = 10.0
 show_percentage = false
 
-[node name="health" type="ProgressBar" parent="hp"]
+[node name="health" type="ProgressBar" parent="."]
 layout_mode = 2
 size_flags_vertical = 8
 theme_override_styles/background = SubResource("StyleBoxEmpty_2uuwx")

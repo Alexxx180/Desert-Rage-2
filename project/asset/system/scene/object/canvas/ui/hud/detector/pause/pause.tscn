@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://v6stk7j8vyox"]
+[gd_scene load_steps=46 format=3 uid="uid://v6stk7j8vyox"]
 
 [ext_resource type="Theme" uid="uid://p2br8b6ea3n6" path="res://asset/resource/ui/theme/patterns/template/menu/hud/pause/pause.tres" id="1_j33m5"]
 [ext_resource type="Script" uid="uid://cw5ky6kde3o8c" path="res://asset/system/script/object/image/view/ui/hud/detector/pause/pause.gd" id="1_mkyw8"]
@@ -21,6 +21,9 @@
 [ext_resource type="Script" uid="uid://cvf4r0b1ew5es" path="res://asset/system/script/object/image/view/ui/hud/detector/pause/options/menu/focus/focus.gd" id="21_hus44"]
 [ext_resource type="FontFile" uid="uid://b37js8y80ak1k" path="res://asset/resource/media/data/font/NotoColorEmoji-Regular.ttf" id="21_snrb0"]
 [ext_resource type="PackedScene" uid="uid://dvdimdxij23df" path="res://asset/system/scene/object/timer/hide/hider/hover/hooder.tscn" id="23_pbrvw"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_snrb0"]
+bg_color = Color(0, 0, 0, 0.78431374)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pbrvw"]
 content_margin_left = 11.0
@@ -155,40 +158,24 @@ events = [ExtResource("14_snrb0"), ExtResource("15_mj6hi"), ExtResource("16_pbrv
 [sub_resource type="Shortcut" id="Shortcut_j20bp"]
 events = [ExtResource("18_qxd8n"), ExtResource("19_ln5vs")]
 
-[node name="pause" type="Control"]
-layout_mode = 3
+[node name="pause" type="PanelContainer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_j33m5")
+theme_override_styles/panel = SubResource("StyleBoxFlat_snrb0")
 script = ExtResource("1_mkyw8")
 
-[node name="back" type="ColorRect" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 0.784314)
-
 [node name="scroll" type="ScrollContainer" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
 script = ExtResource("3_rk80b")
 
 [node name="margin" type="MarginContainer" parent="scroll"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/margin_left = 35
-theme_override_constants/margin_right = 35
 
 [node name="options" type="VBoxContainer" parent="scroll/margin"]
 layout_mode = 2

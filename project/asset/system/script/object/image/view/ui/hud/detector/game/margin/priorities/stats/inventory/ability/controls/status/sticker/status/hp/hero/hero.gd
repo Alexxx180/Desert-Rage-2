@@ -1,18 +1,22 @@
-extends ProgressBar
+extends ProgressBar # @export var right: bool = false
 
-@export var right: bool = false
+@onready var health: Label = $health
+@onready var back: TextureRect = $back
 
-@onready var health: MarginContainer = $health
-@onready var ailments: HFlowContainer = $status/ailments
+const MAX: float = 0.99
+
+var _litmus: HBoxContainer = null
+var litmus: HBoxContainer:
+	get:
+		if _litmus == null:
+			_litmus = get_parent().litmus.instantiate()
+			var space: Control = $control
+			space.add_sibling(_litmus)
+			remove_child(space)
+		return _litmus
 
 func change(hp: Node) -> void:
-	value = hp.points
+	value = hp.points ; show() #health.change(hp)
 	health.change(hp)
-
-func _ready() -> void:
-	if right:
-		var control: Control = ailments.get_node("control")
-		control.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		health.damage.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
-		health.status.right()
-		fill_mode = FILL_END_TO_BEGIN
+	var portion: float = hp.points / hp.maximum
+	back.texture.fill_to.x = 0.07 + MAX * portion

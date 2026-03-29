@@ -1,24 +1,34 @@
 extends Node
 
-func connect_hint(hint: InputObserver, hints, act: String) -> void:
+var panel: VBoxContainer
+var hint: InputObserver
+
+func connect_hint(hints, act: String) -> void:
 	hint.input.connect(hints.get_node(act).sync_control_hint)
 
+func connect_stats(stack: Container) -> void:
+	stack.chats.chat = panel
+	stack.chats.add_child(panel)
+
 func controls(hud: CanvasLayer, game: Control) -> void:
-	var hint: InputObserver = hud.processor.game.help
-	var hints: VBoxContainer = game.controls.preview.help.hints
+	hint = hud.processor.game.help
+	panel = preload("res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/gameplay/chats/chat.tscn").instantiate()
+	hint.block.panel = panel
+	game.priorities.stats.topic.loaded.connect(connect_stats)
 	
-	hint.block.hud = hints.space.preview.chats.list
-	hint.block.panel = game
-	hint.block.emotion.append(hints.bottom.talk)
-	for hero in hud.get_node("../group").deploy.party.heroes:
-		hero.to.skills.chat.body_entered.connect(func(layer: TileMapLayer):
-			var tile: Dictionary = Tile.from_pos(layer, hero.position)
-			var part: int = Tile.logic_no(tile.atlas)
-			hint.add_chat(part)
-			Tile.erase_area(layer, Tile.used_cells(layer, tile.atlas)))
+	var hints: VBoxContainer = game.controls.hints.space.preview.help.hints
+	# hint.block.panel = game.priorities.stats.topic.stack.chats.chat
+	hint.block.hud = game.controls.hints.space.preview.chats.list
+	hint.block.emotion.append(game.controls.hints.bottom.talk)
+	var group: Node2D = hud.get_node("../../group")
+	# for hero in .deploy.party.heroes: TODO FIXME all group need to listen dialog
+	group.ray.to.skills.chat.body_entered.connect(func(layer: TileMapLayer):
+		var tile: Dictionary = Tile.from_pos(layer, group.ray.position)
+		var part: int = Tile.logic_no(tile.atlas)
+		hint.dialog.add_chat(part)
+		Tile.erase_area(layer, Tile.used_cells(layer, tile.atlas)))
 
 	# priorities/stats/inventory/ability/back/vertical
-	
 	# var hints: VBoxContainer = hud.detector.game.hints
 
 	# TODO FIXME CATEGORY NEED TO CREATE SINGLE SHOW HIDE BUTTON

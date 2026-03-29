@@ -1,9 +1,10 @@
 extends Node
 
-var _locale: Array
+var _locale: Array = Defaults.ARRAY
 var locale: Array:
 	get:
-		if _locale == null: _locale = _get_locale()
+		if _locale == Defaults.ARRAY:
+			_locale = _get_locale()
 		return _locale
 
 func text(cursor: int) -> String: return locale[cursor]
@@ -11,19 +12,29 @@ func with(cursor: int, start: String) -> bool:
 	return locale[cursor].begins_with(start)
 
 func _get_locale() -> Array: # TODOT
-	var result: Array = []
-	for loc in TranslationServer.get_loaded_locales():
-		var translation = TranslationServer.get_translation_object(loc)
-		if translation: result.append_array(translation.get_message_list())
+	var result: Array = [] # for loc in TranslationServer.get_loaded_locales():
+	var translation: Translation = TranslationServer.get_translation_object("en")
+	if translation:
+		var message: PackedStringArray = translation.get_message_list() # get_all_scripts()
+		result.append_array(message)
 	return result
+
+func search_entry(entry: String) -> int:
+	var res: int = Defaults.INT
+	var size: int = len(locale)
+	var cr: Array = [[1, 2], [size - (size % 2), -2]]
+	while (cr[0][0] < size) and (cr[1][0] > 0) and (res == Defaults.INT):
+		for c in cr:
+			if with(c[0], entry): res = c[0]
+			c[0] += c[1]
+	return res
+
+func align_cursor(res: int, entry: String) -> int:
+	assert(res != Defaults.INT, "Level localization not found")
+	while (res != Defaults.INT and with(res, entry)): res -= 1
+	res += 1
+	return res
 
 func get_chat(level: int) -> int:
 	var entry: String = "L%d" % level
-	var res: int = Defaults.INT ; var i: int = 1
-	var size: int = len(locale) ; var j: int = size - (size % 2)
-	while (i < size) and (j > 0) and (res == Defaults.INT):
-		if text(i).begins_with(entry): res = i
-		if text(j).begins_with(entry): res = i
-		i += 2 ; j -= 2
-	assert(res != Defaults.INT, "Level localization not found")
-	return res
+	return align_cursor(search_entry(entry), entry)

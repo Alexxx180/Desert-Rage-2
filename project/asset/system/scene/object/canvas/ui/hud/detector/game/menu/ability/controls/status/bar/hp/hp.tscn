@@ -1,10 +1,16 @@
-[gd_scene load_steps=6 format=3 uid="uid://cm4lshhyr3mtm"]
+[gd_scene load_steps=8 format=3 uid="uid://cm4lshhyr3mtm"]
 
 [ext_resource type="PackedScene" uid="uid://yaryrrsclijd" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/ability/controls/status/bar/hp/bar.tscn" id="1_52rk0"]
 [ext_resource type="Script" uid="uid://hkphdq3b15i8" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/status/sticker/status/hp/hp.gd" id="1_m7qr1"]
-[ext_resource type="PackedScene" uid="uid://dwcx6tvnhcjol" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/ability/controls/status/markers/ailments.tscn" id="3_fmms1"]
 [ext_resource type="PackedScene" uid="uid://djwmyxjpm8g3w" path="res://asset/system/scene/object/canvas/util/appear/timer.tscn" id="3_ryhpa"]
-[ext_resource type="PackedScene" uid="uid://cxrc1e7t1llmh" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/ability/controls/topic/status/synergy.tscn" id="4_m4dbo"]
+[ext_resource type="FontFile" uid="uid://b2wbdbnkxcqv1" path="res://asset/resource/media/data/font/NotoEmoji-VariableFont_wght.ttf" id="4_m4dbo"]
+[ext_resource type="PackedScene" uid="uid://dvdimdxij23df" path="res://asset/system/scene/object/timer/hide/hider/hover/hooder.tscn" id="5_gnqwg"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gw824"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bnmdh"]
+bg_color = Color(0, 0, 0, 1)
 
 [node name="hp" type="HBoxContainer"]
 custom_minimum_size = Vector2(0, 2)
@@ -17,56 +23,43 @@ size_flags_vertical = 3
 theme_override_constants/separation = 4
 script = ExtResource("1_m7qr1")
 
-[node name="ray" type="HBoxContainer" parent="."]
-custom_minimum_size = Vector2(130, 0)
+[node name="ray" parent="." instance=ExtResource("1_52rk0")]
 layout_mode = 2
-theme_override_constants/separation = 0
 
-[node name="hp" parent="ray" instance=ExtResource("1_52rk0")]
+[node name="rock" parent="." instance=ExtResource("1_52rk0")]
 layout_mode = 2
 size_flags_horizontal = 0
-fill_mode = 3
 
-[node name="status" type="MarginContainer" parent="ray"]
-visible = false
-z_index = -1
-layout_mode = 2
-theme_override_constants/margin_left = 0
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 0
-
-[node name="ailments" parent="ray/status" instance=ExtResource("3_fmms1")]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-
-[node name="rock" type="HBoxContainer" parent="."]
+[node name="space" type="Control" parent="."]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/separation = 0
-
-[node name="hp" parent="rock" instance=ExtResource("1_52rk0")]
-layout_mode = 2
-size_flags_horizontal = 0
-fill_mode = 3
-
-[node name="status" type="MarginContainer" parent="rock"]
-visible = false
-z_index = -1
-layout_mode = 2
-theme_override_constants/margin_left = 0
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 0
-
-[node name="ailments" parent="rock/status" instance=ExtResource("3_fmms1")]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-
-[node name="synergy" parent="." instance=ExtResource("4_m4dbo")]
-visible = false
-layout_mode = 2
 
 [node name="timer" parent="." instance=ExtResource("3_ryhpa")]
+
+[node name="ap" type="Button" parent="."]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+size_flags_horizontal = 8
+focus_mode = 1
+theme_override_colors/font_color = Color(0.47997648, 0.6311869, 0.99882394, 1)
+theme_override_fonts/font = ExtResource("4_m4dbo")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_gw824")
+text = "🫙"
+alignment = 0
+
+[node name="hooder" parent="ap" instance=ExtResource("5_gnqwg")]
+
+[node name="hp" type="Button" parent="."]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+size_flags_horizontal = 8
+focus_mode = 1
+theme_override_colors/font_color = Color(0.56830424, 0.9961899, 0.56598073, 1)
+theme_override_fonts/font = ExtResource("4_m4dbo")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_bnmdh")
+text = "🫙"
+alignment = 0
+
+[node name="hooder" parent="hp" instance=ExtResource("5_gnqwg")]

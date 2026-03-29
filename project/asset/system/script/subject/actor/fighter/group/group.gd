@@ -19,8 +19,6 @@ func _ready() -> void:
 	var party: Array[CharacterBody2D] = [ray, rock]
 	deploy.init(self, party, deployed)
 	if is_overworld: camera.set_overworld()
-	for hero in party:
-		hero.to.topdown.actions.board.s("group", self)
 
 func is_hud_opened() -> bool:
 	var result: bool = true

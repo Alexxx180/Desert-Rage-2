@@ -9,21 +9,29 @@ const ABILITY: Array[int] = [36, 188] # 109 #
 @onready var navigation: Node = $navigation
 @onready var ability: Node = $ability
 
-func face_inventory(split: SplitContainer, stats: SplitContainer) -> void:
-	var focus: Control = split.topic.stack.bag.ray.items.primary[0]
-	navigation.ui = split
+var stats: SplitContainer
+
+func load_inventory(stack: Container) -> void:
+	var focus: Control = stack.bag.ray.items.primary[0]
 	navigation.face(Y, -PORTION.HALF, INVENTORY, focus, [[
 		stats.topic.stack.bag.ray,
-		split.ability.controls.status.sticker.hp
+		navigation.ui.ability.controls.status.sticker.hp
 	], [
-		split.ability.controls.status.markers
+		navigation.ui.ability.controls.status.markers
 	], Defaults.ARRAY])
+
+func load_ability(stack: Container) -> void:
+	var status: HBoxContainer = stack.space.status.space.title.status
+	var focus: Control = status.xp.body.space.options.pause
+	ability.face(Y, PORTION.HALF, ABILITY, focus, [[
+		ability.ui.controls.topic.status
+	], Defaults.ARRAY])
+
+func face_inventory(split: SplitContainer, s: SplitContainer) -> void:
+	navigation.ui = split ; stats = s
+	split.topic.loaded.connect(load_inventory)
 	face_ability(split.ability)
 
 func face_ability(split: SplitContainer) -> void:
-	var status: HBoxContainer = split.topic.stack.space.status.space.title.status
-	var focus: Control = status.xp.body.space.options.pause
 	ability.ui = split # PORTION.FULL [336, 413]
-	ability.face(Y, PORTION.HALF, ABILITY, focus, [[
-		split.controls.topic.status
-	], Defaults.ARRAY]) # Defaults.ARRAY
+	split.topic.loaded.connect(load_ability)

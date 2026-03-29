@@ -3,17 +3,11 @@ extends Node
 enum { LISTEN, REPEAT, PLAYER, GENRE, NARRATIVE, QUOTES, HELP, EMOTIONS, OPTIONS,
 	SCREEN, AURA, RESOURCE, DAMAGE, VENDOR, REORDER, ORDER_A, ORDER_X, PRESS }
 
-var settings: int
+@onready var bits: Node = $bits
 
-func zeros(a: int, no: int) -> int: return a << no
-func digit(no: int) -> int: return 2 ** no
-
-func get_value(no: int) -> bool: return Works.is_bit(settings, no)
-func set_value(no: int, next: bool) -> void:
-	var state: int = digit(no)
-	settings = settings & ~state | (state * int(next))
-	# settings = settings ^ next
-func switch(no: int, next: int) -> bool: set_value(no, next); return get_value(no)
+func get_value(no: int) -> bool: return bits.get_value(no)
+func set_value(no: int, next: bool) -> void: bits.set_value(no, next)
+func switch(no: int, next: int) -> bool: return bits.switch(no, next)
 
 func toggle(next: int, op: Dictionary) -> void:
 	var state: bool = switch(next, !get_value(next))

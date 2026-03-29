@@ -1,7 +1,11 @@
 extends HBoxContainer
 
-@onready var face: Label = $face
+@onready var hp: ProgressBar = $hp
 
-func right() -> void:
-	remove_child(face)
-	add_child(face)
+var _ailments: HBoxContainer = null
+var ailments: HBoxContainer:
+	get:
+		if _ailments == null:
+			_ailments = get_parent().ailments.instantiate()
+			add_child(_ailments)
+		return _ailments

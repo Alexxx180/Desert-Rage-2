@@ -6,20 +6,24 @@ extends Node
 @onready var inventory: Node = $inventory
 @onready var menu: Node = $menu
 @onready var hud: Node = $hud
-#@onready var equipment: Node = $equipment
-#@onready var stats: Node = $stats
+var group: Node2D
+var topic: Control
+#@onready var equipment: Node = $equipment #@onready var stats: Node = $stats
 
 func _e(space: Control) -> PanelContainer:
-	return space.status.space.title.enemies.enemy
+	return space.enemy # .space.title.enemies
+
+func connect_card(stack: Container) -> void:
+	if group.lay != null:
+		group.lay.tags.layer.enemy.hud.card = [_e(topic), _e(stack.space)]
 
 func controls(ui: CanvasLayer, game: Control) -> void:
 	# pause.controls(ui, game.options.pause) # TODO FIXME PAUSE
+	topic = game.controls.topic
 	help.controls(ui, game)
-	gameplay.controls(ui, game.controls.topic)
-	var group: Node2D = ui.get_node("../../group")
-	if group.lay != null: 
-		group.lay.tags.layer.enemy.hud.card = [_e(game.controls.topic),
-			_e(game.priorities.stats.inventory.ability.topic.stack.space)]
+	gameplay.controls(ui, topic)
+	group = ui.get_node("../../group")
+	game.priorities.stats.inventory.ability.topic.loaded.connect(connect_card)
 	# game.get_enemy_cards()
 	#stats.controls(hud, group, game.get_node("menu/stats"))
 	inventory.controls(ui, group, game.priorities.stats.inventory)

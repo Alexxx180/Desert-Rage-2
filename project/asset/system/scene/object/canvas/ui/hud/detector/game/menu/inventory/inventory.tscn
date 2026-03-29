@@ -1,13 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://b1cenupqm80wx"]
+[gd_scene load_steps=4 format=3 uid="uid://b1cenupqm80wx"]
 
 [ext_resource type="StyleBox" uid="uid://cvfnqancophme" path="res://asset/resource/ui/theme/style/solid-color-panel.tres" id="1_0hiii"]
 [ext_resource type="Script" uid="uid://dkebrycycbfkp" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/topic/inventory.gd" id="2_t0gma"]
-[ext_resource type="Script" uid="uid://b11cg8w5hftiu" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/topic/stack/stack.gd" id="3_3amgv"]
-[ext_resource type="PackedScene" uid="uid://iwjy140d1gxp" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/ability/controls/status/bar/synergy.tscn" id="4_3amgv"]
-[ext_resource type="PackedScene" uid="uid://cddw0qxlba87p" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/items/bag.tscn" id="5_bem3p"]
-[ext_resource type="PackedScene" uid="uid://b3pwlem0vs6ab" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/status/state/flow.tscn" id="6_3amgv"]
-[ext_resource type="PackedScene" uid="uid://cm4lshhyr3mtm" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/ability/controls/status/bar/hp/hp.tscn" id="8_3amgv"]
-[ext_resource type="PackedScene" uid="uid://b8hybaq32frfk" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/title.tscn" id="9_ikycn"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3amgv"]
 bg_color = Color(0, 0, 0, 1)
@@ -27,52 +21,3 @@ script = ExtResource("2_t0gma")
 [node name="sides" type="Panel" parent="."]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_3amgv")
-
-[node name="scroll" type="ScrollContainer" parent="."]
-layout_mode = 2
-
-[node name="margin" type="MarginContainer" parent="scroll"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
-
-[node name="stack" type="VBoxContainer" parent="scroll/margin"]
-layout_mode = 2
-theme_override_constants/separation = 7
-script = ExtResource("3_3amgv")
-
-[node name="points" type="HBoxContainer" parent="scroll/margin/stack"]
-layout_mode = 2
-
-[node name="synergy" parent="scroll/margin/stack/points" instance=ExtResource("4_3amgv")]
-visible = false
-layout_mode = 2
-size_flags_vertical = 1
-
-[node name="status" parent="scroll/margin/stack/points" instance=ExtResource("6_3amgv")]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="sticker" type="MarginContainer" parent="scroll/margin/stack"]
-visible = false
-layout_mode = 2
-theme_override_constants/margin_left = 0
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 0
-
-[node name="points" type="HBoxContainer" parent="scroll/margin/stack/sticker"]
-layout_mode = 2
-
-[node name="hp" parent="scroll/margin/stack/sticker/points" instance=ExtResource("8_3amgv")]
-layout_mode = 2
-
-[node name="bag" parent="scroll/margin/stack" instance=ExtResource("5_bem3p")]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="title" parent="scroll/margin/stack" instance=ExtResource("9_ikycn")]
-layout_mode = 2

@@ -1,15 +1,6 @@
-extends HBoxContainer
+extends Label
 
-@onready var health: Label = $health
-@onready var sign: Label = $margin/sign
-@onready var value: Label = $value
-
-func change(hp: Node) -> void:
-	health.text = str(int(hp.contested))
-	var delta: int = int(hp.contested - hp.points)
-	if delta < 0:
-		sign.text = "+"
-		value.text = str(abs(delta))
-	else:
-		sign.text = "-"
-		value.text = str(delta)
+func change(hp: Node) -> void: # text = str(int(hp.contested))
+	var delta: int = hp.contested - hp.points # int(
+	var op: String = "^" ; if delta < 0: op = ">"
+	text = "%d %s %d" % [hp.contested, op, abs(delta)] # int()

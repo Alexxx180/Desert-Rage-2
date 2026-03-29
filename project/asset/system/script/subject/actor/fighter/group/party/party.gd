@@ -36,7 +36,7 @@ func get_leader() -> CharacterBody2D: return heroes[main]
 func get_follower() -> CharacterBody2D: return heroes[next]
 
 func set_hero(hero: int, visible: bool) -> void:
-	Works.turn(heroes[hero].logic.work, visible)
+	Works.turn(heroes[hero], visible) # .logic.work
 
 func show_hero(hero: int, visible: bool) -> void:
 	heroes[hero].visible = visible

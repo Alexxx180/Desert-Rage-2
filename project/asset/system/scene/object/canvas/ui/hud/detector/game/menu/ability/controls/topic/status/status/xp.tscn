@@ -1,0 +1,145 @@
+[gd_scene load_steps=20 format=3 uid="uid://bt2qhucrs8xwg"]
+
+[ext_resource type="Script" uid="uid://dlrahqp7w44nr" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/topic/status/space/title/status/xp/body/space/space.gd" id="1_g87vy"]
+[ext_resource type="Script" uid="uid://c68tfcondenln" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/topic/status/space/title/status/xp/body/space/score/score.gd" id="2_7cs4n"]
+[ext_resource type="Shader" uid="uid://ciivvs0a4nhrw" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/ability/controls/topic/status/dissolve.gdshader" id="3_uf7bh"]
+[ext_resource type="FontFile" uid="uid://cc0l5uav5qfke" path="res://asset/resource/media/data/font/ka1.ttf" id="4_org78"]
+[ext_resource type="Script" uid="uid://4fsf4suiosss" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/topic/status/space/title/status/xp/body/multiplier.gd" id="5_dwp5b"]
+[ext_resource type="Script" uid="uid://sm6t5tdsxtq6" path="res://asset/system/scene/object/canvas/util/appear/modulator/modulator.gd" id="6_y72uv"]
+[ext_resource type="Script" uid="uid://dlm8rd63iot38" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/topic/status/space/title/status/xp/body/space/score/value.gd" id="7_0js04"]
+[ext_resource type="PackedScene" uid="uid://djwmyxjpm8g3w" path="res://asset/system/scene/object/canvas/util/appear/timer.tscn" id="8_e02qi"]
+[ext_resource type="Script" uid="uid://dim2gh2xi14fs" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/topic/status/space/title/status/xp/meter.gd" id="9_vf2e6"]
+
+[sub_resource type="Gradient" id="Gradient_0msb3"]
+colors = PackedColorArray(0.615742, 0.302577, 0, 1, 1, 0.784314, 0.188235, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_rs8k3"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_jjnqq"]
+noise = SubResource("FastNoiseLite_rs8k3")
+color_ramp = SubResource("Gradient_0msb3")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rs8k3"]
+shader = ExtResource("3_uf7bh")
+shader_parameter/dissolve_texture = SubResource("NoiseTexture2D_jjnqq")
+shader_parameter/dissolve_value = 1.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yuvxi"]
+content_margin_right = 9.0
+content_margin_bottom = 5.0
+
+[sub_resource type="Gradient" id="Gradient_ok865"]
+colors = PackedColorArray(0.392157, 0.392157, 0.686275, 0.470588, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_f8gj5"]
+gradient = SubResource("Gradient_ok865")
+width = 20
+height = 27
+fill_from = Vector2(1, 0.491453)
+fill_to = Vector2(0, 0.491453)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hv8pq"]
+content_margin_right = 7.0
+content_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hv8pq"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_31tm0"]
+color = Color(0.392157, 0.392157, 0.686275, 1)
+grow_end = 0.0
+vertical = true
+
+[node name="xp" type="Control"]
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_g87vy")
+
+[node name="timer" type="Timer" parent="."]
+wait_time = 2.5
+one_shot = true
+
+[node name="score" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -219.0
+grow_horizontal = 0
+grow_vertical = 2
+script = ExtResource("2_7cs4n")
+
+[node name="multiplier" type="Label" parent="score"]
+material = SubResource("ShaderMaterial_rs8k3")
+custom_minimum_size = Vector2(75, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0.767135, 0.588769, 0.0712476, 1)
+theme_override_fonts/font = ExtResource("4_org78")
+theme_override_font_sizes/font_size = 15
+theme_override_styles/normal = SubResource("StyleBoxEmpty_yuvxi")
+text = "2.15x"
+horizontal_alignment = 2
+script = ExtResource("5_dwp5b")
+
+[node name="modulator" type="Node" parent="score/multiplier"]
+script = ExtResource("6_y72uv")
+
+[node name="count" type="TextureRect" parent="score"]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+texture = SubResource("GradientTexture2D_f8gj5")
+script = ExtResource("7_0js04")
+
+[node name="value" type="Label" parent="score/count"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -134.0
+offset_top = -26.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 8
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 10
+theme_override_fonts/font = ExtResource("4_org78")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxEmpty_hv8pq")
+text = "20000000"
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="timer" parent="score" instance=ExtResource("8_e02qi")]
+
+[node name="meter" type="ProgressBar" parent="."]
+custom_minimum_size = Vector2(1, 1)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -1.0
+offset_top = -15.0
+offset_bottom = 15.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_styles/background = SubResource("StyleBoxFlat_hv8pq")
+theme_override_styles/fill = SubResource("StyleBoxLine_31tm0")
+max_value = 10.0
+step = 1.0
+value = 5.0
+fill_mode = 3
+show_percentage = false
+script = ExtResource("9_vf2e6")
+
+[node name="timer" parent="meter" instance=ExtResource("8_e02qi")]

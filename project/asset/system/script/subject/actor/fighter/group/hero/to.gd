@@ -27,6 +27,8 @@ var layers: Node:
 	get: return world.layers
 var stats: Node:
 	get: return _hero.logic.work.stats
+var state: Node:
+	get: return stats.state
 var hud: Node:
 	get: return stats.hud
 var chats: HBoxContainer:

@@ -1,11 +1,23 @@
 extends Node
 
-@onready var range: Node = $range
-@onready var music: Node = $music
+@onready var ranged: Node = $range # @onready var music: Node = $music
 
-func controls(hero: CharacterBody2D, fight: Node) -> void:
-	music.controls(hero)
-	range.controls(hero, fight)
+func controls(hero: CharacterBody2D, fight: Node) -> void: # music.controls(hero)
+	fight.deploy = hero.group.deploy
 	fight.movement.hero = hero
-	var group: Node2D = hero.get_parent()
-	fight.deploy = group.deploy
+	hero.to.effect.close_damage.connect(fight.close.hit)
+	ranged.setup(hero, fight)
+	connect_lever(hero.logic.see.fight.after_tile)
+	connect_book(hero.logic.see.fight.sided)
+	connect_zones(hero)
+
+func connect_lever(lever: Area2D) -> void:
+	lever.body_entered.connect(ranged.enter_lever)
+	lever.body_exited.connect(ranged.exit_lever)
+
+func connect_book(book: Area2D) -> void:
+	book.body_entered.connect(ranged.enter_book)
+	book.body_exited.connect(ranged.exit_book)
+
+func connect_zones(hero: CharacterBody2D) -> void:
+	for area in ["close", "zone"]: ranged.set_zone(hero.logic.see.fight, area)

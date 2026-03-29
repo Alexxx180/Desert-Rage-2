@@ -13,11 +13,11 @@ var animations: Dictionary = {
 
 func show_animation() -> void:
 	var tween: Tween = create_tween()
-	tween.tween_property(borders.image, "modulate", Color.TRANSPARENT, DURATION)
+	tween.tween_property(borders, "modulate", Color.WHITE, DURATION)
 
 func hide_animation() -> void:
 	var tween: Tween = create_tween()
-	tween.tween_property(borders.image, "modulate", Color.TRANSPARENT, DURATION)
+	tween.tween_property(borders, "modulate", Color.TRANSPARENT, DURATION)
 	borders.image.stop()
 
 func set_animation(caption: String) -> void:

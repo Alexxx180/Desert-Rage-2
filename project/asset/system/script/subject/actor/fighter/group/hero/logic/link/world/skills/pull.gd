@@ -1,12 +1,10 @@
 extends Node
 
-var _pull: Node
-var _detector: Node2D
+var _hero: CharacterBody2D
+var _skills: Node
 
-func controls(hero: CharacterBody2D, pull: Node) -> void:
-	_detector = hero.logic.see.world.skills.pull
-	_pull = pull
-
-	_detector.box.body_entered.connect(pull.start_forward)
-	_detector.box.body_exited.connect(pull.stop_forward)
-	pull.hero = hero
+func controls(hero: CharacterBody2D, skills: Node) -> void:
+	_hero = hero ; _skills = skills
+	var detector: Node2D = hero.logic.see.world.skills.pull
+	detector.box.body_entered.connect(start_forward)
+	detector.box.body_exited.connect(stop_forward)

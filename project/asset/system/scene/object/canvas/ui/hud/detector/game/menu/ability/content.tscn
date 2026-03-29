@@ -1,0 +1,608 @@
+[gd_scene load_steps=19 format=3 uid="uid://bo6wehp5f8viu"]
+
+[ext_resource type="Script" uid="uid://dx0yflfj7hnm4" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/topic/stack/stack.gd" id="1_wjovj"]
+[ext_resource type="Script" uid="uid://bva3xns2bogxp" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/topic/stack/space.gd" id="2_ompkg"]
+[ext_resource type="PackedScene" uid="uid://cq5jn6k2bwg5n" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/ability/controls/topic/status/status.tscn" id="3_r0v4r"]
+[ext_resource type="PackedScene" uid="uid://qlgo5b48kj7l" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/ability/controls/topic/status/slots.tscn" id="4_34skn"]
+[ext_resource type="Script" uid="uid://c332axg0sxnof" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/topic/stack/skill/skill.gd" id="5_us80v"]
+[ext_resource type="PackedScene" uid="uid://cg8aic01sf2yd" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/priorities/seals.tscn" id="6_k4v7v"]
+[ext_resource type="PackedScene" uid="uid://l7thqkrsol4m" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/priorities/perks.tscn" id="7_msgsh"]
+[ext_resource type="Script" uid="uid://xlwdatm64gh" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/topic/stack/skill/item/item.gd" id="8_acx0m"]
+[ext_resource type="Script" uid="uid://qh4kirhvva7r" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/topic/stack/skill/item/hero.gd" id="9_tmt4d"]
+[ext_resource type="FontFile" uid="uid://b37js8y80ak1k" path="res://asset/resource/media/data/font/NotoColorEmoji-Regular.ttf" id="10_7ajh3"]
+[ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://asset/resource/ui/theme/patterns/template/menu/settings/topic/footer.tres" id="11_ystvt"]
+[ext_resource type="Texture2D" uid="uid://6lt3fgbwoayr" path="res://asset/resource/media/image/actors/skills/ray/fire.svg" id="12_620va"]
+[ext_resource type="Texture2D" uid="uid://bhb75html3edk" path="res://asset/resource/media/image/actors/skills/ray/whip.svg" id="13_nysyt"]
+[ext_resource type="Texture2D" uid="uid://cu6dcgjq8svhw" path="res://asset/resource/media/image/actors/skills/rock/water.svg" id="14_r3dwh"]
+[ext_resource type="Texture2D" uid="uid://ce7xyvu3k00hi" path="res://asset/resource/media/image/actors/skills/rock/spark.svg" id="15_crerl"]
+[ext_resource type="PackedScene" uid="uid://c6gpqe0httyfi" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/ability/title.tscn" id="16_vfarv"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5p2ax"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5khej"]
+content_margin_bottom = 6.0
+
+[node name="scroll" type="ScrollContainer"]
+
+[node name="margin" type="MarginContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="stack" type="VBoxContainer" parent="margin"]
+layout_mode = 2
+theme_override_constants/separation = 15
+script = ExtResource("1_wjovj")
+
+[node name="space" type="Control" parent="margin/stack"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("2_ompkg")
+
+[node name="status" parent="margin/stack/space" instance=ExtResource("3_r0v4r")]
+layout_mode = 1
+anchors_preset = 15
+anchor_bottom = 1.0
+offset_bottom = 0.0
+grow_vertical = 2
+fixed = true
+
+[node name="slots" parent="margin/stack/space" instance=ExtResource("4_34skn")]
+visible = false
+layout_mode = 1
+
+[node name="skill" type="VBoxContainer" parent="margin/stack"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 15
+script = ExtResource("5_us80v")
+
+[node name="stack" type="VBoxContainer" parent="margin/stack/skill"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="seals" parent="margin/stack/skill/stack" instance=ExtResource("6_k4v7v")]
+visible = false
+layout_mode = 2
+
+[node name="perks" parent="margin/stack/skill/stack" instance=ExtResource("7_msgsh")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="item" type="VBoxContainer" parent="margin/stack/skill"]
+layout_mode = 2
+script = ExtResource("8_acx0m")
+
+[node name="ray" type="HBoxContainer" parent="margin/stack/skill/item"]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("9_tmt4d")
+
+[node name="title" type="VBoxContainer" parent="margin/stack/skill/item/ray"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="fire" type="VBoxContainer" parent="margin/stack/skill/item/ray/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+
+[node name="tags" type="HFlowContainer" parent="margin/stack/skill/item/ray/title/fire"]
+layout_mode = 2
+theme_override_constants/h_separation = 10
+
+[node name="main" type="HBoxContainer" parent="margin/stack/skill/item/ray/title/fire/tags"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/separation = 5
+
+[node name="preview" type="PanelContainer" parent="margin/stack/skill/item/ray/title/fire/tags/main"]
+custom_minimum_size = Vector2(45, 45)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxEmpty_5p2ax")
+
+[node name="icon" type="Label" parent="margin/stack/skill/item/ray/title/fire/tags/main/preview"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("10_7ajh3")
+theme_override_font_sizes/font_size = 28
+theme_override_styles/normal = SubResource("StyleBoxEmpty_5khej")
+text = "🔥"
+
+[node name="caption" type="Label" parent="margin/stack/skill/item/ray/title/fire/tags/main"]
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_font_sizes/font_size = 24
+text = "Факел"
+
+[node name="space" type="Control" parent="margin/stack/skill/item/ray/title/fire/tags"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+
+[node name="blue" type="VBoxContainer" parent="margin/stack/skill/item/ray/title/fire/tags"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_constants/separation = 2
+
+[node name="ingredients" type="Label" parent="margin/stack/skill/item/ray/title/fire/tags/blue"]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_stretch_ratio = 0.75
+theme = ExtResource("11_ystvt")
+theme_override_font_sizes/font_size = 18
+text = "Плавление"
+horizontal_alignment = 2
+
+[node name="color" type="ColorRect" parent="margin/stack/skill/item/ray/title/fire/tags/blue"]
+custom_minimum_size = Vector2(1, 1)
+layout_mode = 2
+color = Color(0, 0.65098, 0.929412, 1)
+
+[node name="red" type="VBoxContainer" parent="margin/stack/skill/item/ray/title/fire/tags"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_constants/separation = 2
+
+[node name="ingredients" type="Label" parent="margin/stack/skill/item/ray/title/fire/tags/red"]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_stretch_ratio = 0.75
+theme = ExtResource("11_ystvt")
+theme_override_font_sizes/font_size = 18
+text = "Ожоги"
+horizontal_alignment = 2
+
+[node name="color" type="ColorRect" parent="margin/stack/skill/item/ray/title/fire/tags/red"]
+custom_minimum_size = Vector2(1, 1)
+layout_mode = 2
+color = Color(0.792157, 0.0431373, 0.290196, 1)
+
+[node name="green" type="VBoxContainer" parent="margin/stack/skill/item/ray/title/fire/tags"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_constants/separation = 2
+
+[node name="ingredients" type="Label" parent="margin/stack/skill/item/ray/title/fire/tags/green"]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_stretch_ratio = 0.75
+theme = ExtResource("11_ystvt")
+theme_override_font_sizes/font_size = 18
+text = "Лечение"
+horizontal_alignment = 2
+
+[node name="color" type="ColorRect" parent="margin/stack/skill/item/ray/title/fire/tags/green"]
+custom_minimum_size = Vector2(1, 1)
+layout_mode = 2
+color = Color(0.52549, 0.843137, 0.184314, 1)
+
+[node name="effect" type="Label" parent="margin/stack/skill/item/ray/title/fire"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+size_flags_stretch_ratio = 0.25
+theme = ExtResource("11_ystvt")
+theme_override_font_sizes/font_size = 18
+text = "Сила, дарованная людям с незапамятных времен. Может как помочь раненному, так и навредить противнику. Позволяет убирать помехи на пути."
+autowrap_mode = 2
+
+[node name="whip" type="VBoxContainer" parent="margin/stack/skill/item/ray/title"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+
+[node name="tags" type="HFlowContainer" parent="margin/stack/skill/item/ray/title/whip"]
+layout_mode = 2
+theme_override_constants/h_separation = 10
+
+[node name="main" type="HBoxContainer" parent="margin/stack/skill/item/ray/title/whip/tags"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/separation = 5
+
+[node name="preview" type="PanelContainer" parent="margin/stack/skill/item/ray/title/whip/tags/main"]
+custom_minimum_size = Vector2(45, 45)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxEmpty_5p2ax")
+
+[node name="margin" type="MarginContainer" parent="margin/stack/skill/item/ray/title/whip/tags/main/preview"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 2
+
+[node name="icon" type="Label" parent="margin/stack/skill/item/ray/title/whip/tags/main/preview/margin"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("10_7ajh3")
+theme_override_font_sizes/font_size = 28
+text = "🎣"
+
+[node name="caption" type="Label" parent="margin/stack/skill/item/ray/title/whip/tags/main"]
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_font_sizes/font_size = 24
+text = "Кнут"
+
+[node name="space" type="Control" parent="margin/stack/skill/item/ray/title/whip/tags"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+
+[node name="blue" type="VBoxContainer" parent="margin/stack/skill/item/ray/title/whip/tags"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_constants/separation = 2
+
+[node name="ingredients" type="Label" parent="margin/stack/skill/item/ray/title/whip/tags/blue"]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_stretch_ratio = 0.75
+theme = ExtResource("11_ystvt")
+theme_override_font_sizes/font_size = 18
+text = "Подтягивание"
+horizontal_alignment = 2
+
+[node name="color" type="ColorRect" parent="margin/stack/skill/item/ray/title/whip/tags/blue"]
+custom_minimum_size = Vector2(1, 1)
+layout_mode = 2
+color = Color(0, 0.65098, 0.929412, 1)
+
+[node name="red" type="VBoxContainer" parent="margin/stack/skill/item/ray/title/whip/tags"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_constants/separation = 2
+
+[node name="ingredients" type="Label" parent="margin/stack/skill/item/ray/title/whip/tags/red"]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_stretch_ratio = 0.75
+theme = ExtResource("11_ystvt")
+theme_override_font_sizes/font_size = 18
+text = "Захват"
+horizontal_alignment = 2
+
+[node name="color" type="ColorRect" parent="margin/stack/skill/item/ray/title/whip/tags/red"]
+custom_minimum_size = Vector2(1, 1)
+layout_mode = 2
+color = Color(0.792157, 0.0431373, 0.290196, 1)
+
+[node name="effect" type="Label" parent="margin/stack/skill/item/ray/title/whip"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+size_flags_stretch_ratio = 0.25
+theme = ExtResource("11_ystvt")
+theme_override_font_sizes/font_size = 18
+text = "Прочный, хорошо тянущейся кнут. Позволяет захватывать предметы и противников. Благодаря нему можно комбинировать имеющиеся умения. Является не-элементом"
+autowrap_mode = 2
+
+[node name="sets" type="VBoxContainer" parent="margin/stack/skill/item/ray"]
+layout_mode = 2
+
+[node name="effect" type="Label" parent="margin/stack/skill/item/ray/sets"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 1
+size_flags_stretch_ratio = 0.25
+theme = ExtResource("11_ystvt")
+theme_override_font_sizes/font_size = 18
+text = "Умения"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="ray" type="HBoxContainer" parent="margin/stack/skill/item/ray/sets"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 7
+
+[node name="fire" type="TextureRect" parent="margin/stack/skill/item/ray/sets/ray"]
+custom_minimum_size = Vector2(26, 26)
+layout_mode = 2
+texture = ExtResource("12_620va")
+expand_mode = 1
+
+[node name="whip" type="TextureRect" parent="margin/stack/skill/item/ray/sets/ray"]
+custom_minimum_size = Vector2(26, 26)
+layout_mode = 2
+texture = ExtResource("13_nysyt")
+expand_mode = 1
+
+[node name="rock" type="HBoxContainer" parent="margin/stack/skill/item"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("9_tmt4d")
+
+[node name="title" type="VBoxContainer" parent="margin/stack/skill/item/rock"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="water" type="VBoxContainer" parent="margin/stack/skill/item/rock/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+
+[node name="tags" type="HFlowContainer" parent="margin/stack/skill/item/rock/title/water"]
+layout_mode = 2
+theme_override_constants/h_separation = 10
+
+[node name="main" type="HBoxContainer" parent="margin/stack/skill/item/rock/title/water/tags"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/separation = 5
+
+[node name="preview" type="PanelContainer" parent="margin/stack/skill/item/rock/title/water/tags/main"]
+custom_minimum_size = Vector2(45, 45)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxEmpty_5p2ax")
+
+[node name="margin" type="MarginContainer" parent="margin/stack/skill/item/rock/title/water/tags/main/preview"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 2
+
+[node name="icon" type="Label" parent="margin/stack/skill/item/rock/title/water/tags/main/preview/margin"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("10_7ajh3")
+theme_override_font_sizes/font_size = 28
+text = "💧"
+
+[node name="caption" type="Label" parent="margin/stack/skill/item/rock/title/water/tags/main"]
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_font_sizes/font_size = 24
+text = "Вода"
+
+[node name="space" type="Control" parent="margin/stack/skill/item/rock/title/water/tags"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+
+[node name="blue" type="VBoxContainer" parent="margin/stack/skill/item/rock/title/water/tags"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_constants/separation = 2
+
+[node name="ingredients" type="Label" parent="margin/stack/skill/item/rock/title/water/tags/blue"]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_stretch_ratio = 0.75
+theme = ExtResource("11_ystvt")
+theme_override_font_sizes/font_size = 18
+text = "Проводник"
+horizontal_alignment = 2
+
+[node name="color" type="ColorRect" parent="margin/stack/skill/item/rock/title/water/tags/blue"]
+custom_minimum_size = Vector2(1, 1)
+layout_mode = 2
+color = Color(0, 0.65098, 0.929412, 1)
+
+[node name="red" type="VBoxContainer" parent="margin/stack/skill/item/rock/title/water/tags"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_constants/separation = 2
+
+[node name="ingredients" type="Label" parent="margin/stack/skill/item/rock/title/water/tags/red"]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_stretch_ratio = 0.75
+theme = ExtResource("11_ystvt")
+theme_override_font_sizes/font_size = 18
+text = "Скольжение"
+horizontal_alignment = 2
+
+[node name="color" type="ColorRect" parent="margin/stack/skill/item/rock/title/water/tags/red"]
+custom_minimum_size = Vector2(1, 1)
+layout_mode = 2
+color = Color(0.792157, 0.0431373, 0.290196, 1)
+
+[node name="green" type="VBoxContainer" parent="margin/stack/skill/item/rock/title/water/tags"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_constants/separation = 2
+
+[node name="ingredients" type="Label" parent="margin/stack/skill/item/rock/title/water/tags/green"]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_stretch_ratio = 0.75
+theme = ExtResource("11_ystvt")
+theme_override_font_sizes/font_size = 18
+text = "Промывание"
+horizontal_alignment = 2
+
+[node name="color" type="ColorRect" parent="margin/stack/skill/item/rock/title/water/tags/green"]
+custom_minimum_size = Vector2(1, 1)
+layout_mode = 2
+color = Color(0.52549, 0.843137, 0.184314, 1)
+
+[node name="effect" type="Label" parent="margin/stack/skill/item/rock/title/water"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+size_flags_stretch_ratio = 0.25
+theme = ExtResource("11_ystvt")
+theme_override_font_sizes/font_size = 18
+text = "То что дает жизнь всему живому. Умение оставляет за собой разлитую лужу, которая способна проводить ток и вызывает скольжение противников и союзников. Можно использовать для наполнения сосудов и проведения раскопок."
+autowrap_mode = 2
+
+[node name="spark" type="VBoxContainer" parent="margin/stack/skill/item/rock/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+
+[node name="tags" type="HFlowContainer" parent="margin/stack/skill/item/rock/title/spark"]
+layout_mode = 2
+theme_override_constants/h_separation = 10
+
+[node name="main" type="HBoxContainer" parent="margin/stack/skill/item/rock/title/spark/tags"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/separation = 5
+
+[node name="preview" type="PanelContainer" parent="margin/stack/skill/item/rock/title/spark/tags/main"]
+custom_minimum_size = Vector2(45, 45)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxEmpty_5p2ax")
+
+[node name="margin" type="MarginContainer" parent="margin/stack/skill/item/rock/title/spark/tags/main/preview"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 2
+
+[node name="icon" type="Label" parent="margin/stack/skill/item/rock/title/spark/tags/main/preview/margin"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("10_7ajh3")
+theme_override_font_sizes/font_size = 28
+text = "⚡️"
+
+[node name="caption" type="Label" parent="margin/stack/skill/item/rock/title/spark/tags/main"]
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_font_sizes/font_size = 24
+text = "Искра"
+
+[node name="space" type="Control" parent="margin/stack/skill/item/rock/title/spark/tags"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+
+[node name="blue" type="VBoxContainer" parent="margin/stack/skill/item/rock/title/spark/tags"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_constants/separation = 2
+
+[node name="ingredients" type="Label" parent="margin/stack/skill/item/rock/title/spark/tags/blue"]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_stretch_ratio = 0.75
+theme = ExtResource("11_ystvt")
+theme_override_font_sizes/font_size = 18
+text = "Заряд"
+horizontal_alignment = 2
+
+[node name="color" type="ColorRect" parent="margin/stack/skill/item/rock/title/spark/tags/blue"]
+custom_minimum_size = Vector2(1, 1)
+layout_mode = 2
+color = Color(0, 0.65098, 0.929412, 1)
+
+[node name="red" type="VBoxContainer" parent="margin/stack/skill/item/rock/title/spark/tags"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_constants/separation = 2
+
+[node name="ingredients" type="Label" parent="margin/stack/skill/item/rock/title/spark/tags/red"]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_stretch_ratio = 0.75
+theme = ExtResource("11_ystvt")
+theme_override_font_sizes/font_size = 18
+text = "Паралич"
+horizontal_alignment = 2
+
+[node name="color" type="ColorRect" parent="margin/stack/skill/item/rock/title/spark/tags/red"]
+custom_minimum_size = Vector2(1, 1)
+layout_mode = 2
+color = Color(0.792157, 0.0431373, 0.290196, 1)
+
+[node name="green" type="VBoxContainer" parent="margin/stack/skill/item/rock/title/spark/tags"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_constants/separation = 2
+
+[node name="ingredients" type="Label" parent="margin/stack/skill/item/rock/title/spark/tags/green"]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_stretch_ratio = 0.75
+theme = ExtResource("11_ystvt")
+theme_override_font_sizes/font_size = 18
+text = "Оживление"
+horizontal_alignment = 2
+
+[node name="color" type="ColorRect" parent="margin/stack/skill/item/rock/title/spark/tags/green"]
+custom_minimum_size = Vector2(1, 1)
+layout_mode = 2
+color = Color(0.52549, 0.843137, 0.184314, 1)
+
+[node name="effect" type="Label" parent="margin/stack/skill/item/rock/title/spark"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+size_flags_stretch_ratio = 0.25
+theme = ExtResource("11_ystvt")
+theme_override_font_sizes/font_size = 18
+text = "Ток электричества позволяет двигать огромные платформы, открывать двери, включать свет и многое другое. Используйте различные проводники для искры и экспериментируйте с ней в бою."
+autowrap_mode = 2
+
+[node name="sets" type="VBoxContainer" parent="margin/stack/skill/item/rock"]
+layout_mode = 2
+
+[node name="effect" type="Label" parent="margin/stack/skill/item/rock/sets"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 1
+size_flags_stretch_ratio = 0.25
+theme = ExtResource("11_ystvt")
+theme_override_font_sizes/font_size = 18
+text = "Умения"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="ray" type="HBoxContainer" parent="margin/stack/skill/item/rock/sets"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 7
+
+[node name="water" type="TextureRect" parent="margin/stack/skill/item/rock/sets/ray"]
+custom_minimum_size = Vector2(26, 26)
+layout_mode = 2
+texture = ExtResource("14_r3dwh")
+expand_mode = 1
+
+[node name="whip" type="TextureRect" parent="margin/stack/skill/item/rock/sets/ray"]
+custom_minimum_size = Vector2(26, 26)
+layout_mode = 2
+texture = ExtResource("15_crerl")
+expand_mode = 1
+
+[node name="title" parent="margin/stack/skill" instance=ExtResource("16_vfarv")]
+layout_mode = 2

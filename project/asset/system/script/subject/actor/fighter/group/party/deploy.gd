@@ -12,7 +12,7 @@ var anchored: bool = false
 func set_anchor() -> void: anchored = !anchored
 
 func select(hero: Node2D = party.leader) -> void:
-	party.set_heroes()
+	# party.set_heroes()
 	#party.forget_velocity()
 	if anchored:
 		party.sync_pos()

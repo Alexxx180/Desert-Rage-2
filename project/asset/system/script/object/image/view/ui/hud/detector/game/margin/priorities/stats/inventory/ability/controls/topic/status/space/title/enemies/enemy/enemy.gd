@@ -1,7 +1,7 @@
 extends PanelContainer
 
-@onready var health: ProgressBar = $hp/health
-@onready var contested: ProgressBar = $hp/contested
+@onready var health: ProgressBar = $health
+@onready var contested: ProgressBar = $contested
 @onready var caption: PanelContainer = $content/margin/caption # TODO fix caption and interrogate for enemy
 @onready var modulator: Node = $modulator
 @onready var margin: MarginContainer = $margin

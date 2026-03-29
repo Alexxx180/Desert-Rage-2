@@ -4,7 +4,7 @@ extends Node
 # @onready var _logs: PackedScene = preload("res://asset/system/scene/object/canvas/ui/hud/detector/game/preview/log/item.tscn")
 
 var hud: VBoxContainer
-var panel: PanelContainer
+var panel: VBoxContainer
 var emotion: Array = []
 
 func chat(who: String, key: String):
@@ -17,13 +17,14 @@ func chats(who: String, result: Array, key: String, count: int) -> void:
 
 func insert_chat(h: Label, p: Label) -> void:
 	hud.chat.insert(h)
-	panel.chat.insert(p)
+	panel.insert(p) # .chat
 
 func add_chat(nodes: Array) -> void:
 	hud.temp.chat.append(nodes[0])
 	hud.chat.append(nodes[1]) # add_child
-	panel.chat.append(nodes[2])
+	panel.append(nodes[2]) # chat
 
 func hide_emotion() -> void: for e in emotion: e.hide_animation()
 func set_emotion(id: Dictionary) -> void:
-	for e in emotion: e.set_animation(id.who + "_" + id.face)
+# id.alias.to_lower()
+	for e in emotion: e.set_animation('r' + "_" + id.face)

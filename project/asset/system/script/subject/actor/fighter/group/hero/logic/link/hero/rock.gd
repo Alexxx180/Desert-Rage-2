@@ -11,7 +11,7 @@ func controls(hero: CharacterBody2D, world: Node) -> void:
 	
 	var tags: TileDecorator = hero.group.lay.tags
 	if tags != null:
-		skills.controls(hero, world.skills, tags)
+		skills.controls(hero, world.skills, tags.layer)
 		ability.controls(hero, world.ability, tags.layer.lockers.ability)
 		unique.controls(hero)
 		fight.controls(hero, world.fight)

@@ -1,7 +1,7 @@
 extends VBoxContainer
 
-@onready var preview: HBoxContainer = $hints/space/preview
-@onready var topic: HFlowContainer = $topic
+@onready var hints: VBoxContainer = $hints
+@onready var topic: Control = $topic
 @onready var status: VBoxContainer = $status
 
 var control: bool:

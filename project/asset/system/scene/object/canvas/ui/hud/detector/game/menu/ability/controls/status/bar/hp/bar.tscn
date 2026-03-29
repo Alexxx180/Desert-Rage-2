@@ -1,21 +1,18 @@
-[gd_scene load_steps=15 format=3 uid="uid://yaryrrsclijd"]
+[gd_scene load_steps=13 format=3 uid="uid://yaryrrsclijd"]
 
 [ext_resource type="Script" uid="uid://crjycdob487a2" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/status/sticker/status/hp/hero/hero.gd" id="1_00n1r"]
-[ext_resource type="Script" uid="uid://1rbh43s372sw" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/status/sticker/status/hp/hero/health.gd" id="2_jeh3t"]
 [ext_resource type="Script" uid="uid://cfaxt6ng6ftvc" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/topic/status/space/title/enemies/enemy/margin/damage.gd" id="3_86jmb"]
 [ext_resource type="FontFile" uid="uid://bghvysgyoj1y7" path="res://asset/resource/media/data/font/title/Equilibrist Semibold.ttf" id="3_gieb1"]
-[ext_resource type="FontFile" uid="uid://b2wbdbnkxcqv1" path="res://asset/resource/media/data/font/NotoEmoji-VariableFont_wght.ttf" id="3_m3vbw"]
 [ext_resource type="Script" uid="uid://cku7y05lderm4" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/status/sticker/status/hp/hero/status.gd" id="3_nwjnq"]
 [ext_resource type="FontFile" uid="uid://bmtckcw2a28p2" path="res://asset/resource/media/data/font/Sportsball.ttf" id="4_m3vbw"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gb3mf"]
 bg_color = Color(0.0142119, 2.11512e-09, 1.12806e-09, 0.686275)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xf68l"]
-bg_color = Color(0.588235, 1, 0.588235, 1)
-border_color = Color(0.0753366, 0.000335012, 0.000548787, 1)
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_m3vbw"]
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_4jq01"]
+color = Color(0.5882353, 1, 0.5882353, 1)
+grow_end = 0.0
+vertical = true
 
 [sub_resource type="Gradient" id="Gradient_8qkor"]
 colors = PackedColorArray(0.588235, 1, 0.588235, 0.235294, 1, 1, 1, 0)
@@ -29,129 +26,87 @@ fill_to = Vector2(1, 0.5)
 metadata/_snap_enabled = true
 metadata/_snap_count = 2
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gieb1"]
-content_margin_left = 4.0
-bg_color = Color(0.6, 0.6, 0.6, 0)
-
 [sub_resource type="Theme" id="Theme_1moid"]
 
-[node name="ray" type="ProgressBar"]
-custom_minimum_size = Vector2(2, 30)
-offset_right = 2.0
-offset_bottom = 2.0
-size_flags_horizontal = 3
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4jq01"]
+content_margin_left = 9.0
+content_margin_top = 5.0
+content_margin_right = 7.0
+content_margin_bottom = 3.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4y0su"]
+content_margin_left = 9.0
+content_margin_top = 3.0
+
+[node name="status" type="HBoxContainer"]
+offset_right = 394.0
+offset_bottom = 40.0
+theme_override_constants/separation = 0
+script = ExtResource("3_nwjnq")
+
+[node name="hp" type="ProgressBar" parent="."]
+custom_minimum_size = Vector2(120, 30)
+layout_mode = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_gb3mf")
-theme_override_styles/fill = SubResource("StyleBoxFlat_xf68l")
+theme_override_styles/fill = SubResource("StyleBoxLine_4jq01")
 step = 1.0
 value = 50.0
+fill_mode = 3
 show_percentage = false
 script = ExtResource("1_00n1r")
 
-[node name="health" type="MarginContainer" parent="."]
-z_index = 1
+[node name="сontrol" type="Control" parent="hp"]
+visible = false
 layout_mode = 1
 anchors_preset = 9
 anchor_bottom = 1.0
-offset_right = 103.0
 grow_vertical = 2
-mouse_filter = 2
-theme_override_constants/margin_left = 0
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 0
-script = ExtResource("2_jeh3t")
 
-[node name="damage" type="PanelContainer" parent="health"]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_m3vbw")
-
-[node name="back" type="TextureRect" parent="health/damage"]
-layout_mode = 2
+[node name="back" type="TextureRect" parent="hp"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_vertical = 0
 texture = SubResource("GradientTexture2D_pau43")
 
-[node name="status" type="HBoxContainer" parent="health/damage"]
-layout_mode = 2
-theme_override_constants/separation = -5
-script = ExtResource("3_nwjnq")
-
-[node name="face" type="Label" parent="health/damage/status"]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 8
-theme_override_fonts/font = ExtResource("3_m3vbw")
-theme_override_font_sizes/font_size = 20
-theme_override_styles/normal = SubResource("StyleBoxFlat_gieb1")
-text = "😒"
-
-[node name="margin" type="MarginContainer" parent="health/damage/status"]
-layout_mode = 2
-theme_override_constants/margin_left = 9
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 7
-theme_override_constants/margin_bottom = 3
-
-[node name="hero" type="Label" parent="health/damage/status/margin"]
-visible = false
+[node name="health" type="Label" parent="hp"]
+z_index = 1
 custom_minimum_size = Vector2(10, 0)
-layout_mode = 2
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -11.0
+offset_right = 116.0
+offset_bottom = 11.0
+grow_vertical = 2
+size_flags_horizontal = 8
 theme = SubResource("Theme_1moid")
 theme_override_colors/font_color = Color(0.588235, 0.588235, 0.588235, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 7
+theme_override_fonts/font = ExtResource("4_m3vbw")
+theme_override_font_sizes/font_size = 11
+theme_override_styles/normal = SubResource("StyleBoxEmpty_4jq01")
+text = "100 > 0"
+script = ExtResource("3_86jmb")
+
+[node name="select" type="Button" parent="hp"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.5882353, 0.5882353, 0.5882353, 1)
 theme_override_constants/outline_size = 7
 theme_override_fonts/font = ExtResource("3_gieb1")
 theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxEmpty_4y0su")
 text = "RAY"
-horizontal_alignment = 1
-
-[node name="points" type="HBoxContainer" parent="health/damage/status/margin"]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_constants/separation = 0
-script = ExtResource("3_86jmb")
-
-[node name="health" type="Label" parent="health/damage/status/margin/points"]
-custom_minimum_size = Vector2(10, 0)
-layout_mode = 2
-size_flags_horizontal = 8
-theme = SubResource("Theme_1moid")
-theme_override_colors/font_color = Color(0.588235, 0.588235, 0.588235, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 7
-theme_override_fonts/font = ExtResource("4_m3vbw")
-theme_override_font_sizes/font_size = 11
-text = "100"
-horizontal_alignment = 1
-
-[node name="margin" type="MarginContainer" parent="health/damage/status/margin/points"]
-layout_mode = 2
-theme_override_constants/margin_left = 0
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 0
-
-[node name="sign" type="Label" parent="health/damage/status/margin/points/margin"]
-layout_mode = 2
-size_flags_horizontal = 8
-theme = SubResource("Theme_1moid")
-theme_override_colors/font_color = Color(0.588235, 0.588235, 0.588235, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 7
-theme_override_fonts/font = ExtResource("4_m3vbw")
-theme_override_font_sizes/font_size = 8
-text = "-"
-horizontal_alignment = 1
-vertical_alignment = 2
-
-[node name="value" type="Label" parent="health/damage/status/margin/points"]
-custom_minimum_size = Vector2(10, 0)
-layout_mode = 2
-size_flags_horizontal = 0
-theme = SubResource("Theme_1moid")
-theme_override_colors/font_color = Color(0.588235, 0.588235, 0.588235, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 7
-theme_override_fonts/font = ExtResource("4_m3vbw")
-theme_override_font_sizes/font_size = 11
-text = "0"
-horizontal_alignment = 1
+alignment = 0

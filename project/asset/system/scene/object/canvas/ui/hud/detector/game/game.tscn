@@ -4,28 +4,16 @@
 [ext_resource type="Script" uid="uid://81xdi4771u0a" path="res://asset/system/script/object/image/view/ui/hud/detector/game/game.gd" id="1_o71r6"]
 [ext_resource type="Script" uid="uid://bin7ih026bhac" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/priorities.gd" id="3_eq6yd"]
 [ext_resource type="Script" uid="uid://ckuuvbre3lyln" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/stats.gd" id="6_8qkor"]
-[ext_resource type="PackedScene" uid="uid://b0uuruktnhhug" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/ability/vertical.tscn" id="9_3fbdk"]
 [ext_resource type="Script" uid="uid://hcq4mc35vqx0" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/inventory.gd" id="9_pau43"]
+[ext_resource type="Script" uid="uid://dfo1spwp7j3dp" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/margin.gd" id="9_teb7y"]
+[ext_resource type="PackedScene" uid="uid://trd7xarcxhy1" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/ability/controls/controls.tscn" id="10_1yp05"]
 [ext_resource type="PackedScene" uid="uid://b1cenupqm80wx" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/inventory.tscn" id="11_1y8ov"]
 [ext_resource type="PackedScene" uid="uid://c3dwvtm5ivwwp" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/stats/topic/topic.tscn" id="12_jdj2p"]
 [ext_resource type="Script" uid="uid://cgycplc3rb2f8" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/ability.gd" id="12_tveuy"]
 [ext_resource type="PackedScene" uid="uid://sloxw12np1ch" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/priorities/topic/priorities.tscn" id="13_iexbr"]
 [ext_resource type="PackedScene" uid="uid://6b0ydfrtbu38" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/ability/ability.tscn" id="14_joidv"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3fbdk"]
-bg_color = Color(0.6, 0.6, 0.6, 0)
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-border_color = Color(0, 0, 0, 0.235294)
-expand_margin_left = 12.0
-expand_margin_top = 12.0
-expand_margin_right = 12.0
-expand_margin_bottom = 12.0
-
-[node name="game" type="Control"]
-layout_mode = 3
+[node name="game" type="ColorRect"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -37,45 +25,8 @@ size_flags_horizontal = 0
 size_flags_vertical = 8
 mouse_filter = 2
 theme = ExtResource("1_klae1")
+color = Color(0.23137255, 0.23137255, 0.23137255, 0)
 script = ExtResource("1_o71r6")
-
-[node name="debug-color" type="ColorRect" parent="."]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.230315, 0.230315, 0.230315, 1)
-
-[node name="strips" type="Control" parent="."]
-visible = false
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="top" type="ColorRect" parent="strips"]
-custom_minimum_size = Vector2(0, 80)
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 80.0
-grow_horizontal = 2
-color = Color(0, 0, 0, 1)
-
-[node name="bottom" type="ColorRect" parent="strips"]
-custom_minimum_size = Vector2(0, 80)
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 528.0
-offset_bottom = 608.0
-grow_horizontal = 2
-grow_vertical = 0
-color = Color(0, 0, 0, 1)
 
 [node name="priorities" type="HSplitContainer" parent="."]
 layout_mode = 1
@@ -115,11 +66,15 @@ mouse_filter = 2
 split_offset = 2000
 script = ExtResource("12_tveuy")
 
-[node name="back" type="PanelContainer" parent="priorities/stats/inventory/ability"]
+[node name="margin" type="MarginContainer" parent="priorities/stats/inventory/ability"]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_3fbdk")
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+script = ExtResource("9_teb7y")
 
-[node name="vertical" parent="priorities/stats/inventory/ability/back" instance=ExtResource("9_3fbdk")]
+[node name="controls" parent="priorities/stats/inventory/ability/margin" instance=ExtResource("10_1yp05")]
 layout_mode = 2
 
 [node name="topic" parent="priorities/stats/inventory/ability" instance=ExtResource("14_joidv")]

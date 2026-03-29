@@ -1,6 +1,11 @@
 extends Node
 
 var _stats: Dictionary = Defaults.DICT
+var stats: VBoxContainer = null
+var priority: VBoxContainer = null
+var group: Node2D
+var game: Control
+var logs: PanelContainer
 
 func _get_xp_score(exp: VBoxContainer) -> Dictionary:
 	return {
@@ -8,13 +13,8 @@ func _get_xp_score(exp: VBoxContainer) -> Dictionary:
 		"count": exp.get_node("caption/main/space/margin/count")
 	}
 
-func _bind_enemy_xp(group: Node2D) -> void:
-	if group.lay != null:
-		group.lay.tags.layer.enemy.hud.xp = group.xp
-
-func _set_stats(group: Node2D, game: Control) -> void:
-	var stats: VBoxContainer = game.priorities.stats.topic.stack.stats
-	var priority: VBoxContainer = game.priorities.topic.stack.record
+func connect_xp() -> void:
+	if stats == null or priority == null: return
 	var party: HeroParty = group.deploy.party
 	group.xp.update_priorities.connect(func(_level, s):
 		_stats = s
@@ -34,6 +34,23 @@ func _set_stats(group: Node2D, game: Control) -> void:
 		game.priorities.stats.inventory.ability.topic.stack.select_hero(party)
 		group.get(leader.name).view.animation.effect.set_stats(_stats.stats[leader.name]) # get(leader.name)
 	)
+	priority.connect_priority_select(group.xp.level, group)
+	group.xp.update_exp.connect(priority.update_exp)
+
+func connect_stats(stack: Container) -> void:
+	stats = stack.stats
+	connect_xp()
+
+func connect_priority(stack: Container) -> void:
+	priority = stack.record
+	connect_xp()
+
+func _set_stats(g: Node2D, m: Control) -> void:
+	group = g ; game = m ; var stats = game.priorities.stats
+	stats.topic.loaded.connect(connect_stats)
+	game.priorities.topic.loaded.connect(connect_priority)
+	stats.inventory.ability.topic.loaded.connect(set_ability)
+	logs = game.controls.hints.space.preview.chats.list.logs
 
 func _set_multiply(multiply: Node, status: BoxContainer) -> void:
 	multiply.finish.connect(status.finish)
@@ -41,33 +58,30 @@ func _set_multiply(multiply: Node, status: BoxContainer) -> void:
 	multiply.update_x.connect(status.update_multiplier)
 
 func _set_priorities(group: Node2D, topic: PanelContainer, status: HBoxContainer) -> void:
-	var priority: VBoxContainer = topic.stack.record#.priority
+	pass # var priority: VBoxContainer = topic.stack.record#.priority
 	# group.xp.update_priorities.connect(priority.set_priorities) # var score: Dictionary = _get_xp_score(status.get_node("experience/xp"))
-	priority.connect_priority_select(group.xp.level, group)
-	group.xp.update_exp.connect(priority.update_exp)
+	# priority.connect_priority_select(group.xp.level, group)
+	# group.xp.update_exp.connect(priority.update_exp)
 
-func _set_navigation(hud: CanvasLayer, group: Node2D, game: Control) -> void:
+func _set_navigation(hud: CanvasLayer) -> void:
 	group.navigation = hud.relation.game.menu.navigation
-	for n in group.navigation:
+	for n in group.navigation:  # .space.title # status
 		n.hud.resume_input.connect(group.resume_input)
 		n.hud.suspend_input.connect(group.suspend_input)
 
-func _status(topic: Control) -> HBoxContainer:
-	return topic.status.space.title.status
+func set_xp_multiply(xp) -> void:
+	_set_multiply(group.xp.level.multiply, xp) # var score: Dictionary = _get_xp_score(status.get_node("experience"))
+	xp.set_xp_score(group.xp)
 
-func _set_advanced_xp(group: Node2D, game: Control) -> void:
-	var topic: PanelContainer = game.priorities.stats.inventory.ability.topic
-	var status: HBoxContainer = _status(topic.stack.space)
-	var logs: PanelContainer = game.controls.preview.chats.list.logs #var long: VBoxContainer = game.ability.get_node("scroll/margin/stack/ability/score") # var short: VBoxContainer = game.ability.get_node("scroll/margin/stack/menu/space/fast_access/status/experience/xp")
-	for xp in [_status(game.controls.topic), status]:
-		_set_multiply(group.xp.level.multiply, xp) # var score: Dictionary = _get_xp_score(status.get_node("experience"))
-		xp.set_xp_score(group.xp)
+func set_ability(stack: Container) -> void:
+	set_xp_multiply(stack.space.status)
+	set_xp_multiply(game.controls.topic.status)
+	if group.lay != null:
+		group.lay.tags.layer.enemy.hud.xp = group.xp
 	group.xp.update_priorities.connect(logs.set_priority)
-	_set_priorities(group, game.priorities.topic, status)
 
 func controls(hud: CanvasLayer, group: Node2D, game: Control) -> void:
-	_bind_enemy_xp(group)
-	_set_stats(group, game)
-	_set_advanced_xp(group, game)
-	_set_navigation(hud, group, game)
+	_set_stats(group, game) # _bind_enemy_xp()
+	_set_navigation(hud)
+	# _set_priorities(group, game.priorities.topic, status)
 	group.xp.sync()

@@ -3,7 +3,7 @@ extends Node
 var _actions: bool = false
 
 var hud: CanvasLayer
-var options: HFlowContainer
+var options: Control
 
 @onready var skills: Node = $skills
 @onready var tree: SceneTree = get_tree()

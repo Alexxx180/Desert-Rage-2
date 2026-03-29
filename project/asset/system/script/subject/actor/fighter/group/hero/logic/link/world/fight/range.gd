@@ -1,14 +1,23 @@
 extends Node
 
-func set_range(see: Node2D, work: Node, range: String) -> void:
-	see.get(range).body_entered.connect(work.get(range).enter_range)
-	see.get(range).body_exited.connect(work.get(range).exit_range)
+var act: Node
+var fight: Node
 
-func controls(hero: CharacterBody2D, fight: Node) -> void:
-	var see: Node2D = hero.logic.see.fight	
-	for area in ["close", "zone"]: set_range(see, fight, area)
+func setup(h: CharacterBody2D, f: Node) -> void:
+	act = h.logic.work.world.skills.act ; fight = f
 
-	var act: Node = hero.logic.work.world.skills.act
-	set_range(see, act.lever, "after_tile")
-	set_range(see, act.book, "sided")
-	hero.to.effect.close_damage.connect(fight.close.hit)
+func enter_lever(map: TileMapLayer) -> void:
+	act.lever.after_tile.enter_range(map)
+
+func exit_lever(map: TileMapLayer) -> void:
+	act.lever.after_tile.exit_range(map)
+
+func enter_book(map: TileMapLayer) -> void:
+	act.book.sided.enter_range(map)
+
+func exit_book(map: TileMapLayer) -> void:
+	act.book.sided.exit_range(map)
+
+func set_zone(see: Node2D, zone: String) -> void:
+	see.get(zone).body_entered.connect(fight.get(zone).enter_range)
+	see.get(zone).body_exited.connect(fight.get(zone).exit_range)

@@ -1,20 +1,23 @@
-[gd_scene load_steps=10 format=3 uid="uid://b83b7oo2fmh5h"]
+[gd_scene load_steps=12 format=3 uid="uid://b83b7oo2fmh5h"]
 
 [ext_resource type="Script" uid="uid://8eppp7nw4off" path="res://asset/system/script/subject/actor/fighter/group/group.gd" id="1_kivt0"]
 [ext_resource type="PackedScene" uid="uid://wbjmq3n817nk" path="res://asset/system/scene/subject/actor/group/hero/ray/ray.tscn" id="2_1wfvg"]
 [ext_resource type="PackedScene" uid="uid://mcm0vtwuyeii" path="res://asset/system/scene/subject/actor/group/hero/rock/rock.tscn" id="2_70x6q"]
 [ext_resource type="PackedScene" uid="uid://dwq2sbrb6d7xm" path="res://asset/system/scene/subject/actor/group/camera/camera.tscn" id="3_2mawu"]
+[ext_resource type="Resource" uid="uid://2etksyyn4awk" path="res://asset/resource/media/data/stats/hero/rock.tres" id="3_6r1cj"]
 [ext_resource type="Script" uid="uid://drky58idh8lgy" path="res://asset/system/script/subject/actor/fighter/group/party/xp/xp.gd" id="5_slnxt"]
 [ext_resource type="Script" uid="uid://576btgbn77m0" path="res://asset/system/script/subject/actor/fighter/group/party/xp/stats/stats.gd" id="6_unf1n"]
 [ext_resource type="Script" uid="uid://bhyos1rsfkryv" path="res://asset/system/script/subject/actor/fighter/group/party/xp/multiply.gd" id="7_t4urm"]
 [ext_resource type="Script" uid="uid://bgfhfca6g8cc8" path="res://asset/system/script/subject/actor/fighter/group/party/xp/level.gd" id="8_6r1cj"]
 [ext_resource type="Script" uid="uid://bupsxbwtj1r5o" path="res://asset/system/script/subject/actor/fighter/group/party/xp/priority.gd" id="9_6r1cj"]
+[ext_resource type="Script" uid="uid://cktocu0tts6sm" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/link/world/fight/music.gd" id="11_wy1p6"]
 
 [node name="group" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_kivt0")
 
 [node name="rock" parent="." instance=ExtResource("2_70x6q")]
+stats = ExtResource("3_6r1cj")
 
 [node name="ray" parent="." instance=ExtResource("2_1wfvg")]
 
@@ -40,3 +43,6 @@ script = ExtResource("7_t4urm")
 [node name="delay" type="Timer" parent="xp/level/multiply"]
 wait_time = 0.3
 one_shot = true
+
+[node name="music" type="Node" parent="xp"]
+script = ExtResource("11_wy1p6")

@@ -3,7 +3,15 @@ extends HSplitContainer
 @onready var stats: HSplitContainer = $stats
 @onready var topic: PanelContainer = $topic
 @onready var navigation: Node = $navigation
-@onready var bars: Dictionary = _get_bars()
+
+var _bars: Dictionary = Def.DICT
+var bars: Dictionary:
+	get:
+		if _bars == Def.DICT:
+			_bars = _get_bars()
+		return _bars
+
+func _ready() -> void: drag_started.connect(topic.update_stack)
 
 func _get_points(hero: String, caption: String) -> Array[Button]:
 	return [

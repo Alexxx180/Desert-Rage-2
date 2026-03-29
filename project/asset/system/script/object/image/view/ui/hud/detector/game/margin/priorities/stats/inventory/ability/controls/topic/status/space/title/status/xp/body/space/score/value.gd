@@ -1,20 +1,34 @@
-extends Control
+extends TextureRect
 
-@onready var level_up: TextureRect = $level_up
 @onready var value: Label = $value
 
 const DELAY: int = 2
 
+var record: int
+var text: int:
+	set(next):
+		if not is_new_level:
+			value.text = str(next)
+		else:
+			record = next
+var is_new_level: bool = false
 var first_entry: bool = true
-# var fill: StyleBoxFlat = StyleBoxFlat.new() # TODOT STATUS
+
+func set_effect() -> void:
+	create_tween().tween_method(func(w: Color):
+		self_modulate = w
+		if w == Color.TRANSPARENT:
+			is_new_level = false
+			value.text = str(record)
+		, Color.WHITE, Color.TRANSPARENT, DELAY).set_delay(DELAY)
 
 func new_level_up(_level: Node, _stats: Dictionary) -> void:
-	if first_entry:
-		first_entry = false
-		return
-	# if level.summary.xp == 0: return
-	level_up.modulate = Color.WHITE
-	create_tween().tween_property(level_up, "modulate", Color.TRANSPARENT, DELAY).set_delay(DELAY)
+	if is_new_level: return # if level.summary.xp == 0: return
+	if first_entry: first_entry = false ; return
+	is_new_level = true
+	record = int(value.text)
+	value.text = tr("RECD")
+	set_effect()
 
 """
 func _ready() -> void:

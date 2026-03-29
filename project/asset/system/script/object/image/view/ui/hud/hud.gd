@@ -7,12 +7,6 @@ extends Node
 @onready var information: CanvasLayer# = $information
 @onready var sound: CanvasLayer# = $sound
 
-var hud: Dictionary = {
-	"settings": preload("res://asset/system/scene/object/canvas/ui/menu/settings/settings.tscn"),
-	"sound": preload("res://asset/system/scene/object/canvas/ui/menu/sound/sound.tscn"),
-	"info": preload("res://asset/system/scene/object/canvas/ui/menu/information/information.tscn")
-}
-
 @onready var group: Node2D  = get_node("../group")
 
 func set_group() -> void:
@@ -23,6 +17,11 @@ func set_group() -> void:
 	game.set_preview(group, progress)
 
 func set_transitions() -> String:
+	var hud: Dictionary = {
+		"settings": load("res://asset/system/scene/object/canvas/ui/menu/settings/settings.tscn"),
+		"sound": load("res://asset/system/scene/object/canvas/ui/menu/sound/sound.tscn"),
+		"info": load("res://asset/system/scene/object/canvas/ui/menu/information/information.tscn")
+	}
 	settings = hud.settings.instantiate() # settings
 	add_child(settings)
 	settings.link.controls(game.see)
