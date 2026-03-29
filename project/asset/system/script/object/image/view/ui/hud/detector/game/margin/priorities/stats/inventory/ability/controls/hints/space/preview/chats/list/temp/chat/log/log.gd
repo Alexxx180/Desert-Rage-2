@@ -1,6 +1,5 @@
-extends PanelContainer
+extends VBoxContainer
 
-@onready var chat: VBoxContainer = $margin/chat
 @onready var levels: PackedScene = preload("res://asset/system/scene/object/canvas/ui/hud/detector/game/preview/log/levels/levels.tscn")
 @onready var items: PackedScene = preload("res://asset/system/scene/object/canvas/ui/hud/detector/game/preview/log/item.tscn")
 @onready var scroll: ScrollContainer
@@ -17,13 +16,13 @@ func add_childs(stack: VBoxContainer, scene: PackedScene, feedback: Callable) ->
 	return node
 
 func add_log(scene: PackedScene, feedback: Callable) -> void:
-	var log: PanelContainer = add_childs(scroll.list.logs.chat, scene, feedback)
+	var lg: PanelContainer = add_childs(scroll.list.logs.chat, scene, feedback)
 	var tween = create_tween()
-	tween.tween_property(log, "modulate", Color.TRANSPARENT, 0.5).set_delay(3)
+	tween.tween_property(lg, "modulate", Color.TRANSPARENT, 0.5).set_delay(3)
 	tween.tween_callback(func():
-		scroll.list.logs.chat.remove_child(log) # scroll.log
-		log.queue_free())
-	add_childs(chat, scene, feedback)
+		scroll.list.logs.chat.remove_child(lg) # scroll.log
+		lg.queue_free())
+	add_childs(self, scene, feedback)
 	scroll.down()
 
 func set_priority(level: Node, stats: Dictionary) -> void:

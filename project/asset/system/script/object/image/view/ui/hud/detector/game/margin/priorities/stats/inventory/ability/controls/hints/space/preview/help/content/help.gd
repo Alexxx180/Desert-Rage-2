@@ -5,6 +5,12 @@ extends ScrollContainer
 
 @onready var ui: Array = hints.kind.motion.get_children()
 @onready var count: int = len(ui)
+@onready var list: VBoxContainer = $list
+
+const DOWN: float = 0.2
+
+func down() -> void:
+	create_tween().tween_property(self, "scroll_vertical", get_v_scroll_bar().max_value, DOWN)
 
 var select: int = 0
 

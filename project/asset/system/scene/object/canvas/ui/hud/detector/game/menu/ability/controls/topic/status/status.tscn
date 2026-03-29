@@ -1,5 +1,7 @@
-[gd_scene load_steps=35 format=3 uid="uid://cq5jn6k2bwg5n"]
+[gd_scene load_steps=37 format=3 uid="uid://cq5jn6k2bwg5n"]
 
+[ext_resource type="FontFile" uid="uid://dh77105qn5h3n" path="res://asset/resource/media/data/font/Werkzeug.woff2" id="4_4ahk1"]
+[ext_resource type="PackedScene" uid="uid://bt2qhucrs8xwg" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/ability/controls/topic/status/status/xp.tscn" id="4_7u0qk"]
 [ext_resource type="Script" uid="uid://cufeg7h0ydck4" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/topic/status/space/title/status/status.gd" id="4_pn2dd"]
 [ext_resource type="PackedScene" uid="uid://dugyepxewkmgo" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/pause/pause.tscn" id="15_uia8v"]
 [ext_resource type="PackedScene" uid="uid://dvdimdxij23df" path="res://asset/system/scene/object/timer/hide/hider/hover/hooder.tscn" id="17_3i86x"]
@@ -192,6 +194,17 @@ theme_override_font_sizes/font_size = 18
 theme_override_styles/normal = SubResource("StyleBoxEmpty_cqgmm")
 text = "🎯"
 vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="status"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="status/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_4ahk1")
+text = "230"
+
+[node name="xp" parent="status" instance=ExtResource("4_7u0qk")]
+layout_mode = 2
 
 [node name="toggle" type="Button" parent="."]
 custom_minimum_size = Vector2(30, 30)

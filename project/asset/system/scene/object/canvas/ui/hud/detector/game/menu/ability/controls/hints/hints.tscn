@@ -1,19 +1,19 @@
-[gd_scene load_steps=17 format=3 uid="uid://dbaauq0nlgduw"]
+[gd_scene load_steps=15 format=3 uid="uid://dbaauq0nlgduw"]
 
 [ext_resource type="Script" uid="uid://djaaedqq0cusq" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/hints/hints.gd" id="1_ch3ha"]
-[ext_resource type="Script" uid="uid://cxi6s12rjdbpi" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/hints/space/space.gd" id="2_ucqqn"]
 [ext_resource type="Script" uid="uid://d1bkj71odt1bp" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/hints/space/preview/preview.gd" id="2_ytxpc"]
 [ext_resource type="Script" uid="uid://b740p71awf41" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/hints/space/preview/chats/list/list.gd" id="3_6g6fj"]
 [ext_resource type="PackedScene" uid="uid://b3kq5rgblhq6b" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/gameplay/chats/chat.tscn" id="4_qhrr6"]
 [ext_resource type="Script" uid="uid://cb5kv63wqgrfj" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/hints/space/preview/chats/list/temp/temp.gd" id="4_rtvwv"]
 [ext_resource type="PackedScene" uid="uid://dhqu2qkapwck2" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/gameplay/chats/log.tscn" id="5_6g6fj"]
-[ext_resource type="Script" uid="uid://dn4pyy540kv4y" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/hints/space/preview/chats/list/temp/chat/heroes.gd" id="7_w1ktq"]
-[ext_resource type="Script" uid="uid://drcochfogfne4" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/hints/space/preview/chats/chats.gd" id="8_cyanb"]
 [ext_resource type="PackedScene" uid="uid://bl1pm3rkee4xl" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/preview/bottom/talk.tscn" id="10_qhrr6"]
 [ext_resource type="Script" uid="uid://4q2n1sfdf1j" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/hints/bottom/bottom.gd" id="12_paqty"]
 [ext_resource type="Script" uid="uid://cjoheu7m2eic3" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/hints/space/preview/help/content/help.gd" id="16_2o5ct"]
 [ext_resource type="PackedScene" uid="uid://b01p37el432af" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/preview/hints/hints.tscn" id="17_o45p0"]
 [ext_resource type="PackedScene" uid="uid://b10usb1wa67d2" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/preview/books/book.tscn" id="18_utpyv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6g6fj"]
+bg_color = Color(0, 0, 0, 0.49803922)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rw2ti"]
 content_margin_left = 2.0
@@ -33,74 +33,7 @@ size_flags_vertical = 3
 mouse_filter = 2
 script = ExtResource("1_ch3ha")
 
-[node name="space" type="Control" parent="."]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.7
-mouse_filter = 2
-script = ExtResource("2_ucqqn")
-
-[node name="preview" type="HBoxContainer" parent="space"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("2_ytxpc")
-
-[node name="chats" type="ScrollContainer" parent="space/preview"]
-custom_minimum_size = Vector2(0, 120)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.25
-theme = SubResource("Theme_tysmj")
-follow_focus = true
-draw_focus_border = true
-horizontal_scroll_mode = 0
-script = ExtResource("8_cyanb")
-
-[node name="list" type="VBoxContainer" parent="space/preview/chats"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 10
-script = ExtResource("3_6g6fj")
-
-[node name="temp" type="VBoxContainer" parent="space/preview/chats/list"]
-visible = false
-layout_mode = 2
-theme_override_constants/separation = 0
-script = ExtResource("4_rtvwv")
-
-[node name="logs" type="VBoxContainer" parent="space/preview/chats/list/temp"]
-layout_mode = 2
-
-[node name="chat" type="VBoxContainer" parent="space/preview/chats/list/temp"]
-layout_mode = 2
-script = ExtResource("7_w1ktq")
-
-[node name="first" type="Control" parent="space/preview/chats/list/temp/chat"]
-visible = false
-layout_mode = 2
-
-[node name="quotes" type="VBoxContainer" parent="space/preview/chats/list/temp"]
-layout_mode = 2
-
-[node name="chat" parent="space/preview/chats/list" instance=ExtResource("4_qhrr6")]
-layout_mode = 2
-
-[node name="logs" parent="space/preview/chats/list" instance=ExtResource("5_6g6fj")]
-visible = false
-layout_mode = 2
-
-[node name="space" type="Control" parent="space/preview"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.5
-
-[node name="help" type="ScrollContainer" parent="space/preview"]
+[node name="space" type="ScrollContainer" parent="."]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -108,29 +41,68 @@ size_flags_stretch_ratio = 0.25
 horizontal_scroll_mode = 0
 script = ExtResource("16_2o5ct")
 
-[node name="content" type="VBoxContainer" parent="space/preview/help"]
+[node name="preview" type="HBoxContainer" parent="space"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("2_ytxpc")
+
+[node name="chats" type="PanelContainer" parent="space/preview"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_6g6fj")
+
+[node name="stack" type="VBoxContainer" parent="space/preview/chats"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 10
+script = ExtResource("3_6g6fj")
+
+[node name="temp" type="VBoxContainer" parent="space/preview/chats/stack"]
+layout_mode = 2
+theme_override_constants/separation = 0
+script = ExtResource("4_rtvwv")
+
+[node name="chat" parent="space/preview/chats/stack" instance=ExtResource("4_qhrr6")]
+layout_mode = 2
+
+[node name="logs" parent="space/preview/chats/stack" instance=ExtResource("5_6g6fj")]
+visible = false
+layout_mode = 2
+
+[node name="space" type="Control" parent="space/preview"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="help" type="PanelContainer" parent="space/preview"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_6g6fj")
+
+[node name="stack" type="VBoxContainer" parent="space/preview/help"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 10
 theme = SubResource("Theme_tysmj")
 
-[node name="hints" parent="space/preview/help/content" instance=ExtResource("17_o45p0")]
+[node name="hints" parent="space/preview/help/stack" instance=ExtResource("17_o45p0")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.2
 
-[node name="books" type="VBoxContainer" parent="space/preview/help/content"]
+[node name="books" type="VBoxContainer" parent="space/preview/help/stack"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 10
 theme_override_constants/separation = 0
 
-[node name="space" type="Control" parent="space/preview/help/content/books"]
+[node name="space" type="Control" parent="space/preview/help/stack/books"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="book" parent="space/preview/help/content/books" instance=ExtResource("18_utpyv")]
+[node name="book" parent="space/preview/help/stack/books" instance=ExtResource("18_utpyv")]
 layout_mode = 2
 size_flags_vertical = 8
 

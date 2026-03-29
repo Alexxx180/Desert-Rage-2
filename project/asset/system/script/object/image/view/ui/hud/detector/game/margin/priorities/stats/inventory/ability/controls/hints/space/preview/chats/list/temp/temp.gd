@@ -1,5 +1,3 @@
 extends VBoxContainer
 
-@onready var chat: VBoxContainer = $chat
-@onready var logs: VBoxContainer = $logs
-@onready var quotes: VBoxContainer = $quotes
+func append(next: Label) -> void: add_child(next)
