@@ -16,10 +16,13 @@ func controls(hud: CanvasLayer, game: Control) -> void:
 	hint.block.panel = panel
 	game.priorities.stats.topic.loaded.connect(connect_stats)
 	
-	var hints: VBoxContainer = game.controls.hints.space.preview.help.hints
+	# var hints: VBoxContainer = game.controls.hints.space.preview.help.hints
 	# hint.block.panel = game.priorities.stats.topic.stack.chats.chat
-	hint.block.hud = game.controls.hints.space.preview.chats.list
-	hint.block.emotion.append(game.controls.hints.bottom.talk)
+	
+	# TODO FIXME HUD LINK
+	# hint.block.hud = game.controls.hints.space.preview.chats.list
+	# hint.block.emotion.append(game.controls.hints.bottom.talk)
+	
 	var group: Node2D = hud.get_node("../../group")
 	# for hero in .deploy.party.heroes: TODO FIXME all group need to listen dialog
 	group.ray.to.skills.chat.body_entered.connect(func(layer: TileMapLayer):

@@ -1,3 +1,5 @@
-extends VBoxContainer
+extends Label
 
-@onready var priorities: Array[Label] = [$pursuit, $self_control, $tenacity]
+var priorities: Array[String] = ["📈", "⚖️", "🪨"]
+
+func set_priority(no: int) -> void: text = priorities[no]

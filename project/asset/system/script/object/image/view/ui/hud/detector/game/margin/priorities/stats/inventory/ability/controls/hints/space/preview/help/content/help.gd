@@ -1,10 +1,14 @@
 extends ScrollContainer
 
-@onready var hints: VBoxContainer = $content/hints
+# @onready var hints: VBoxContainer = $content/hints
 @onready var books: VBoxContainer = $content/books
 
-@onready var ui: Array = hints.kind.motion.get_children()
-@onready var count: int = len(ui)
+var _hints: VBoxContainer = null
+var hints: VBoxContainer:
+	get: return _hints
+
+# @onready var ui: Array = hints.kind.motion.get_children()
+# @onready var count: int = len(ui)
 @onready var list: VBoxContainer = $list
 
 const DOWN: float = 0.2
@@ -13,7 +17,7 @@ func down() -> void:
 	create_tween().tween_property(self, "scroll_vertical", get_v_scroll_bar().max_value, DOWN)
 
 var select: int = 0
-
+"""
 func hide_caption(no: int) -> void:
 	ui[no].margin.caption.hide()
 
@@ -41,3 +45,4 @@ func _input(_event: InputEvent) -> void:
 	for i in [["list_up", -1], ["list_down", 1]]:
 		if Input.is_action_pressed(i[0]):
 			_change(select + i[1])
+"""

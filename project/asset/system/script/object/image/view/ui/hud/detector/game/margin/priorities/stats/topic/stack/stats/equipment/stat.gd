@@ -1,35 +1,47 @@
 extends Button
 
-@onready var count: Array[Label] = [$description/number, $description/alternate]
-@onready var base: ProgressBar = $margin/base
-@onready var equipment: ProgressBar = $margin/equipment
+@export var image: String = ""
 
-@onready var BASE_MAX: int = base.max_value
+@onready var equipment: ProgressBar = $equipment
+@onready var base: ProgressBar = $equipment/base
+@onready var number: Label = $number
+@onready var icons: Label = $number/icon
+@onready var BASE_MAX: int = int(base.max_value)
 
 var equipped: bool = false
+var stats_text: String
+var equipments: int = 0
+
+func _ready() -> void:
+	icons.text = image
+	stats_text = text
 
 func set_base(stat: int) -> void:
-	var addon: int = equipment.value - base.value
-	base.value = stat
-	set_equip(stat, stat if addon <= 0 else (stat + addon))
-
-func set_equip(stat: int, next: int) -> void:
-	equipment.value = next
-	_set_counts([next, stat] if equipped else [stat, next])
+	_set_base_value(stat)
 
 func add_equip(add: int) -> void:
-	set_equip(base.value, base.value + add)
+	var value: int = int(base.value)
+	_set_equipment_value(value + add)
 
-func _set_counts(stats: Array) -> void:
-	for i in range(0, len(count)): count[i].text = str(stats[i])
+func _set_equipment_value(value: int) -> void:
+	equipments = value
+	if equipped: equipment.value = value
 
-func _set_base_count(value: int, stats: Array) -> void:
-	base.max_value = value
-	_set_counts(stats)
+func _set_base_value(value: int) -> void:
+	base.value = value
+	number.text = str(value)
+	text = stats_text
+	if not equipped:
+		text += " (%d)" % equipments
 
-func set_view_type(with: bool) -> void:
-	equipped = with
-	if with: _set_base_count(equipment.max_value, [equipment.value, base.value])
-	else: _set_base_count(BASE_MAX, [base.value, equipment.value])
-	equipment.visible = equipped
-	
+func _set_view_values(based: int, equip: int) -> void:
+	equipment.value = equip
+	base.max_value = based
+
+func set_view_type(mode: bool) -> void:
+	equipped = mode
+	if equipped:
+		_set_view_values(int(equipment.max_value), 0)
+	else:
+		_set_view_values(BASE_MAX, equipments)
+	_set_base_value(int(base.value))

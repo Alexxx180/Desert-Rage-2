@@ -1,4 +1,4 @@
 extends HFlowContainer
 
 @onready var priority: VBoxContainer = $priority
-@onready var description: VBoxContainer = $perks/description
+@onready var description: Label = $description

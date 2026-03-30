@@ -8,8 +8,7 @@ extends Button
 	"unselected": $description/caption/unselected
 }
 
-@export var priority_no: MakeStats.PRIORITIES = 0
-
+var priority_no: MakeStats.PRIORITIES = MakeStats.PRIORITIES.get(name)
 var selected: Control
 var count: Dictionary = {}
 var main: String = "ray"

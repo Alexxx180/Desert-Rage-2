@@ -1,110 +1,39 @@
-[gd_scene load_steps=13 format=3 uid="uid://bn2dd80xcv3py"]
+[gd_scene load_steps=5 format=3 uid="uid://bn2dd80xcv3py"]
 
-[ext_resource type="Script" uid="uid://c0o6pslklkxuw" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/topic/items/item/content/view/view.gd" id="1_ep1v2"]
 [ext_resource type="Script" uid="uid://ganthw8uqtu5" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/topic/items/item/content/content.gd" id="1_xa6yb"]
-[ext_resource type="Script" uid="uid://bdu6kwvinxtnx" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/topic/items/item/content/selection/count.gd" id="2_ep1v2"]
-[ext_resource type="Script" uid="uid://cg5og751o27wo" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/topic/items/item/content/selection/selection.gd" id="2_unky5"]
-[ext_resource type="Script" uid="uid://d1ehx3qqcgn3x" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/topic/items/item/content/selection/fast.gd" id="3_8p8p3"]
 [ext_resource type="Texture2D" uid="uid://rdsdp3be1k17" path="res://asset/resource/media/image/inventory/weapon/firearm/schofield45-colt.svg" id="3_ymscp"]
 [ext_resource type="FontFile" uid="uid://tledodlx6okb" path="res://asset/resource/media/data/font/LTSuperiorMono-Semibold.otf" id="5_8p8p3"]
 
-[sub_resource type="Gradient" id="Gradient_7knqk"]
-colors = PackedColorArray(0, 0, 0, 0, 0.184314, 0.184314, 0.72549, 0.235294)
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_l6ekx"]
+content_margin_right = 4.0
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_mjmrn"]
-gradient = SubResource("Gradient_7knqk")
-fill_from = Vector2(0.495726, 1)
-fill_to = Vector2(0.495726, 0)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vb3xh"]
-content_margin_bottom = 1.0
-bg_color = Color(0.6, 0.6, 0.6, 0)
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1tuns"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lrum8"]
-
-[node name="margin" type="MarginContainer"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_vertical = 8
-theme_override_constants/margin_left = 3
-theme_override_constants/margin_top = 2
-theme_override_constants/margin_right = 3
-theme_override_constants/margin_bottom = 2
-script = ExtResource("1_xa6yb")
-
-[node name="view" type="Control" parent="."]
-layout_mode = 2
-mouse_filter = 2
-script = ExtResource("1_ep1v2")
-
-[node name="image" type="TextureRect" parent="view"]
-layout_mode = 1
+[node name="image" type="TextureRect"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 expand_mode = 1
+script = ExtResource("1_xa6yb")
 
-[node name="both" type="TextureRect" parent="view"]
+[node name="both" type="TextureRect" parent="."]
 visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 0
 texture = ExtResource("3_ymscp")
 expand_mode = 1
 flip_h = true
 
-[node name="selection" type="Control" parent="."]
-layout_mode = 2
-mouse_filter = 2
-script = ExtResource("2_unky5")
-
-[node name="fast" type="VBoxContainer" parent="selection"]
-visible = false
+[node name="count" type="Label" parent="."]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 0
-script = ExtResource("3_8p8p3")
-
-[node name="color" type="ColorRect" parent="selection/fast"]
-custom_minimum_size = Vector2(0, 2)
-layout_mode = 2
-size_flags_vertical = 0
-color = Color(0.184314, 0.184314, 0.72549, 1)
-
-[node name="back" type="TextureRect" parent="selection/fast"]
-layout_mode = 2
-size_flags_vertical = 3
-texture = SubResource("GradientTexture2D_mjmrn")
-
-[node name="count" type="VBoxContainer" parent="selection"]
-layout_mode = 1
-anchors_preset = 12
+anchors_preset = 3
+anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -19.0
-grow_horizontal = 2
+offset_left = -24.0
+offset_top = -21.0
+grow_horizontal = 0
 grow_vertical = 0
-size_flags_vertical = 10
-theme_override_constants/separation = -3
-script = ExtResource("2_ep1v2")
-
-[node name="number" type="Label" parent="selection/count"]
-layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
 theme_override_colors/font_color = Color(0.588235, 0.588235, 0.588235, 1)
@@ -114,15 +43,5 @@ theme_override_constants/shadow_offset_y = -1
 theme_override_constants/shadow_outline_size = 6
 theme_override_fonts/font = ExtResource("5_8p8p3")
 theme_override_font_sizes/font_size = 20
-theme_override_styles/normal = SubResource("StyleBoxFlat_vb3xh")
-horizontal_alignment = 1
-
-[node name="bar" type="ProgressBar" parent="selection/count"]
-layout_mode = 2
-size_flags_vertical = 8
-theme_override_styles/background = SubResource("StyleBoxEmpty_1tuns")
-theme_override_styles/fill = SubResource("StyleBoxFlat_lrum8")
-max_value = 30.0
-step = 1.0
-fill_mode = 1
-show_percentage = false
+theme_override_styles/normal = SubResource("StyleBoxEmpty_l6ekx")
+text = "23"

@@ -1,4 +1,4 @@
 extends HBoxContainer
 
-@onready var chats: ScrollContainer = $chats
-@onready var help: ScrollContainer = $help
+@onready var chats: PanelContainer = $chats
+@onready var help: PanelContainer = $help

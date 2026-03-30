@@ -1,39 +1,30 @@
-[gd_scene load_steps=8 format=3 uid="uid://ct4vkw2q1l83e"]
+[gd_scene load_steps=5 format=3 uid="uid://ct4vkw2q1l83e"]
 
 [ext_resource type="Script" uid="uid://dmdry7d3jpxop" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/topic/stack/record/ranking/priority/growth/stats/stats.gd" id="1_iiunp"]
 [ext_resource type="FontFile" uid="uid://b37js8y80ak1k" path="res://asset/resource/media/data/font/NotoColorEmoji-Regular.ttf" id="1_sf5h5"]
-[ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://asset/resource/ui/theme/patterns/template/menu/settings/topic/footer.tres" id="2_iiunp"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_k8lmy"]
-content_margin_left = 0.0
-content_margin_top = 4.0
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sf5h5"]
+content_margin_left = 3.0
+content_margin_top = 0.0
+content_margin_right = 3.0
+bg_color = Color(0, 0, 0, 0.890196)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_htvmv"]
-content_margin_left = 3.0
+content_margin_left = 5.0
+content_margin_right = 3.0
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pvcso"]
-content_margin_left = 0.0
-content_margin_top = 4.0
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_iyg18"]
-content_margin_left = 6.0
-
-[node name="stats" type="VBoxContainer"]
-offset_right = 44.0
-offset_bottom = 50.0
-theme_override_constants/separation = -5
-script = ExtResource("1_iiunp")
-
-[node name="power" type="Label" parent="."]
-visible = false
-layout_mode = 2
+[node name="icon" type="Label"]
+offset_right = 20.0
+offset_bottom = 45.0
 size_flags_horizontal = 0
 theme_override_fonts/font = ExtResource("1_sf5h5")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_k8lmy")
-text = "⚔️"
+theme_override_styles/normal = SubResource("StyleBoxFlat_sf5h5")
+text = "
+📈"
+script = ExtResource("1_iiunp")
 
-[node name="number" type="Label" parent="power"]
-layout_mode = 2
+[node name="number" type="Label" parent="."]
+layout_mode = 0
 offset_left = 3.0
 offset_right = 16.0
 offset_bottom = 23.0
@@ -41,61 +32,3 @@ theme_override_colors/font_color = Color(0.99558, 0.99558, 0.99558, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 7
 theme_override_styles/normal = SubResource("StyleBoxEmpty_htvmv")
-text = "2"
-
-[node name="influence" type="Label" parent="."]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 0
-theme_override_fonts/font = ExtResource("1_sf5h5")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_pvcso")
-text = "🔥"
-
-[node name="number" type="Label" parent="influence"]
-layout_mode = 1
-offset_right = 16.0
-offset_bottom = 23.0
-theme_override_colors/font_color = Color(0.99558, 0.99558, 0.99558, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 7
-theme_override_styles/normal = SubResource("StyleBoxEmpty_iyg18")
-text = "1"
-
-[node name="reaction" type="Label" parent="."]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 0
-theme_override_fonts/font = ExtResource("1_sf5h5")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_pvcso")
-text = "🫧"
-
-[node name="number" type="Label" parent="reaction"]
-layout_mode = 1
-offset_right = 11.0
-offset_bottom = 26.0
-theme = ExtResource("2_iiunp")
-theme_override_colors/font_color = Color(0.99558, 0.99558, 0.99558, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 7
-theme_override_styles/normal = SubResource("StyleBoxEmpty_iyg18")
-text = "1"
-
-[node name="vitality" type="Label" parent="."]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 0
-theme_override_fonts/font = ExtResource("1_sf5h5")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_pvcso")
-text = "🛡"
-
-[node name="number" type="Label" parent="vitality"]
-layout_mode = 1
-offset_right = 17.0
-offset_bottom = 26.0
-scale = Vector2(0.983534, 1)
-theme = ExtResource("2_iiunp")
-theme_override_colors/font_color = Color(0.99558, 0.99558, 0.99558, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 7
-theme_override_styles/normal = SubResource("StyleBoxEmpty_iyg18")
-text = "2"

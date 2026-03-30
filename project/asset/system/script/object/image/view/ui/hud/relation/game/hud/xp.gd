@@ -50,7 +50,9 @@ func _set_stats(g: Node2D, m: Control) -> void:
 	stats.topic.loaded.connect(connect_stats)
 	game.priorities.topic.loaded.connect(connect_priority)
 	stats.inventory.ability.topic.loaded.connect(set_ability)
-	logs = game.controls.hints.space.preview.chats.list.logs
+	
+	# TODO FIXME LOGS
+	# logs = game.controls.hints.space.preview.chats.list.logs
 
 func _set_multiply(multiply: Node, status: BoxContainer) -> void:
 	multiply.finish.connect(status.finish)

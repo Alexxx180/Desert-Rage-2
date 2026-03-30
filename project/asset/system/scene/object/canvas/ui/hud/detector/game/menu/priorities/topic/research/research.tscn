@@ -1,17 +1,23 @@
-[gd_scene load_steps=13 format=3 uid="uid://bmmg6xahpkusq"]
+[gd_scene load_steps=14 format=3 uid="uid://bmmg6xahpkusq"]
 
-[ext_resource type="StyleBox" uid="uid://cht8hrroa75bg" path="res://asset/resource/ui/theme/style/tag/tag-button.tres" id="1_rlvie"]
 [ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://asset/resource/ui/theme/patterns/template/menu/settings/topic/footer.tres" id="2_5tx11"]
 [ext_resource type="PackedScene" uid="uid://b10usb1wa67d2" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/preview/books/book.tscn" id="5_chdrm"]
 [ext_resource type="FontFile" uid="uid://b37js8y80ak1k" path="res://asset/resource/media/data/font/NotoColorEmoji-Regular.ttf" id="5_vlu61"]
-[ext_resource type="StyleBox" uid="uid://bsggnr5c3uk7o" path="res://asset/resource/ui/theme/style/panel/preview.tres" id="6_uhat8"]
 [ext_resource type="PackedScene" uid="uid://cdpsykqf6eaa2" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/priorities/topic/research/content/help/help.tscn" id="6_y2jwj"]
+[ext_resource type="FontFile" uid="uid://b2wbdbnkxcqv1" path="res://asset/resource/media/data/font/NotoEmoji-VariableFont_wght.ttf" id="8_m5uhw"]
 [ext_resource type="PackedScene" uid="uid://bu5vbvvgn1q4d" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/priorities/title.tscn" id="10_m5uhw"]
 [ext_resource type="StyleBox" uid="uid://evyfrkamah1" path="res://asset/resource/ui/theme/style/items/chests/hover.tres" id="32_y6s2t"]
 [ext_resource type="StyleBox" uid="uid://by6bvf7ens3ul" path="res://asset/resource/ui/theme/style/items/chests/empty.tres" id="33_yw1xc"]
 [ext_resource type="PackedScene" uid="uid://dv268r05flq5" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/preview/log/levels/level/number.tscn" id="36_pqlxk"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jb804"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_j1nxy"]
+content_margin_left = 5.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jufai"]
+content_margin_right = 3.0
+content_margin_bottom = 1.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_m5uhw"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_toq2e"]
 content_margin_top = 7.0
@@ -24,163 +30,111 @@ grow_horizontal = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.25
 
-[node name="possibilities" type="HFlowContainer" parent="."]
-visible = false
-layout_mode = 2
-theme_override_constants/h_separation = 7
-theme_override_constants/v_separation = 0
-
-[node name="caption" type="Label" parent="possibilities"]
-visible = false
-layout_mode = 2
-theme_override_colors/font_color = Color(0.737255, 0.737255, 0.737255, 1)
-text = "Возможности"
-
-[node name="dealer" type="Button" parent="possibilities"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.341176, 0.341176, 0.341176, 1)
-theme_override_styles/normal = ExtResource("1_rlvie")
-text = "Торговец"
-
-[node name="description" type="Label" parent="."]
-visible = false
-custom_minimum_size = Vector2(50, 30)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 2.0
-theme = ExtResource("2_5tx11")
-text = "Нажмите на картинку для чтения содержимого"
-autowrap_mode = 2
-text_overrun_behavior = 3
-
-[node name="content" type="VBoxContainer" parent="."]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="help" parent="content" instance=ExtResource("6_y2jwj")]
+[node name="help" parent="." instance=ExtResource("6_y2jwj")]
 visible = false
 layout_mode = 2
 
-[node name="books" type="PanelContainer" parent="content"]
+[node name="books" type="VBoxContainer" parent="."]
 visible = false
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_styles/panel = ExtResource("6_uhat8")
-
-[node name="books" type="VBoxContainer" parent="content/books"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 5
 
-[node name="book" parent="content/books/books" instance=ExtResource("5_chdrm")]
+[node name="book" parent="books" instance=ExtResource("5_chdrm")]
 layout_mode = 2
 size_flags_vertical = 8
 
-[node name="book2" parent="content/books/books" instance=ExtResource("5_chdrm")]
+[node name="book2" parent="books" instance=ExtResource("5_chdrm")]
 layout_mode = 2
 size_flags_vertical = 8
 
-[node name="book3" parent="content/books/books" instance=ExtResource("5_chdrm")]
+[node name="book3" parent="books" instance=ExtResource("5_chdrm")]
 layout_mode = 2
 size_flags_vertical = 8
 
-[node name="book4" parent="content/books/books" instance=ExtResource("5_chdrm")]
+[node name="book4" parent="books" instance=ExtResource("5_chdrm")]
 layout_mode = 2
 size_flags_vertical = 8
 
-[node name="book5" parent="content/books/books" instance=ExtResource("5_chdrm")]
+[node name="book5" parent="books" instance=ExtResource("5_chdrm")]
 layout_mode = 2
 size_flags_vertical = 8
 
-[node name="book6" parent="content/books/books" instance=ExtResource("5_chdrm")]
+[node name="book6" parent="books" instance=ExtResource("5_chdrm")]
 layout_mode = 2
 size_flags_vertical = 8
 
-[node name="book7" parent="content/books/books" instance=ExtResource("5_chdrm")]
+[node name="book7" parent="books" instance=ExtResource("5_chdrm")]
 layout_mode = 2
 size_flags_vertical = 8
 
-[node name="book8" parent="content/books/books" instance=ExtResource("5_chdrm")]
+[node name="book8" parent="books" instance=ExtResource("5_chdrm")]
 layout_mode = 2
 size_flags_vertical = 8
 
-[node name="bestiary" type="PanelContainer" parent="content"]
+[node name="bestiary" type="HFlowContainer" parent="."]
 visible = false
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_jb804")
-
-[node name="container" type="HFlowContainer" parent="content/bestiary"]
 layout_mode = 2
 theme_override_constants/h_separation = 7
 theme_override_constants/v_separation = 7
 
-[node name="item" type="Button" parent="content/bestiary/container"]
+[node name="spider" type="Button" parent="bestiary"]
 custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
 size_flags_horizontal = 0
-theme_override_styles/hover = ExtResource("32_y6s2t")
 theme_override_styles/normal = ExtResource("33_yw1xc")
+theme_override_styles/hover = ExtResource("32_y6s2t")
+alignment = 0
 
-[node name="margin" type="MarginContainer" parent="content/bestiary/container/item"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 2
-
-[node name="height" type="Label" parent="content/bestiary/container/item/margin"]
+[node name="height" type="Label" parent="bestiary/spider"]
 custom_minimum_size = Vector2(50, 0)
-layout_mode = 2
+layout_mode = 1
+offset_right = 110.0
+offset_bottom = 23.0
 size_flags_horizontal = 3
 size_flags_vertical = 0
 theme = ExtResource("2_5tx11")
 theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxEmpty_j1nxy")
 text = "33 cm"
 text_overrun_behavior = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="content/bestiary/container/item/margin"]
-layout_mode = 2
-size_flags_vertical = 8
-theme_override_constants/separation = 0
-
-[node name="count" type="Label" parent="content/bestiary/container/item/margin/HBoxContainer"]
+[node name="count" type="Label" parent="bestiary/spider"]
 custom_minimum_size = Vector2(40, 0)
-layout_mode = 2
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -110.0
+offset_top = -23.0
+grow_horizontal = 0
+grow_vertical = 0
 size_flags_horizontal = 3
 size_flags_vertical = 8
 theme = ExtResource("2_5tx11")
 theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxEmpty_jufai")
 text = "25"
 horizontal_alignment = 2
 text_overrun_behavior = 3
 
-[node name="title" type="HBoxContainer" parent="content/bestiary/container"]
+[node name="title" type="HBoxContainer" parent="bestiary"]
 layout_mode = 2
 theme_override_constants/separation = 7
 
-[node name="number" parent="content/bestiary/container/title" instance=ExtResource("36_pqlxk")]
+[node name="number" parent="bestiary/title" instance=ExtResource("36_pqlxk")]
 layout_mode = 2
 
-[node name="description" type="MarginContainer" parent="content/bestiary/container/title"]
+[node name="short" type="VBoxContainer" parent="bestiary/title"]
 custom_minimum_size = Vector2(230, 0)
-layout_mode = 2
-theme_override_constants/margin_left = 0
-theme_override_constants/margin_top = 3
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 0
-
-[node name="short" type="VBoxContainer" parent="content/bestiary/container/title/description"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.4
 theme_override_constants/separation = 2
 
-[node name="caption" type="Label" parent="content/bestiary/container/title/description/short"]
+[node name="caption" type="Label" parent="bestiary/title/short"]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 size_flags_vertical = 0
@@ -188,7 +142,7 @@ theme_override_font_sizes/font_size = 16
 text = "Паук"
 text_overrun_behavior = 3
 
-[node name="effect" type="Label" parent="content/bestiary/container/title/description/short"]
+[node name="effect" type="Label" parent="bestiary/title/short"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -199,19 +153,22 @@ theme_override_font_sizes/font_size = 18
 text = "Крайне полезный противник для приключений."
 autowrap_mode = 2
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="content/bestiary/container/title/description/short"]
+[node name="weakness" type="HBoxContainer" parent="bestiary/title/short"]
 layout_mode = 2
+theme_override_constants/separation = 0
 
-[node name="effect" type="Label" parent="content/bestiary/container/title/description/short/HBoxContainer2"]
-custom_minimum_size = Vector2(115, 0)
+[node name="weak" type="Label" parent="bestiary/title/short/weakness"]
 layout_mode = 2
+size_flags_horizontal = 0
 size_flags_vertical = 0
 theme = ExtResource("2_5tx11")
 theme_override_constants/line_spacing = -7
+theme_override_fonts/font = ExtResource("8_m5uhw")
 theme_override_font_sizes/font_size = 18
-text = "Слабости:"
+theme_override_styles/normal = SubResource("StyleBoxEmpty_m5uhw")
+text = "🍷"
 
-[node name="weakness" type="Label" parent="content/bestiary/container/title/description/short/HBoxContainer2"]
+[node name="weffects" type="Label" parent="bestiary/title/short/weakness"]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
@@ -219,5 +176,23 @@ theme_override_fonts/font = ExtResource("5_vlu61")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_toq2e")
 text = "🔥"
 
-[node name="title" parent="content" instance=ExtResource("10_m5uhw")]
+[node name="strong" type="Label" parent="bestiary/title/short/weakness"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme = ExtResource("2_5tx11")
+theme_override_constants/line_spacing = -7
+theme_override_fonts/font = ExtResource("8_m5uhw")
+theme_override_font_sizes/font_size = 18
+text = "🛡"
+
+[node name="seffects" type="Label" parent="bestiary/title/short/weakness"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("5_vlu61")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_toq2e")
+text = "🪨"
+
+[node name="title" parent="." instance=ExtResource("10_m5uhw")]
 layout_mode = 2

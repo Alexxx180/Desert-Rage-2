@@ -1,9 +1,20 @@
-[gd_scene load_steps=5 format=3 uid="uid://duuvdsc4g6fem"]
+[gd_scene load_steps=8 format=3 uid="uid://duuvdsc4g6fem"]
 
 [ext_resource type="PackedScene" uid="uid://bn3ucq5ac5lss" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/priorities/topic/record/priority/pursuit.tscn" id="1_m0io8"]
 [ext_resource type="Script" uid="uid://dk2fo32ab2yyo" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/topic/stack/record/ranking/priority/selection/selection.gd" id="1_rodd7"]
 [ext_resource type="PackedScene" uid="uid://dtjrciypb4yly" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/priorities/topic/record/priority/self_control.tscn" id="2_8kwj1"]
 [ext_resource type="PackedScene" uid="uid://sl22kndh7h64" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/priorities/topic/record/priority/tenacity.tscn" id="3_7rf2f"]
+[ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://asset/resource/ui/theme/patterns/template/menu/settings/topic/footer.tres" id="3_rhb3s"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rodd7"]
+content_margin_left = 5.0
+content_margin_right = 5.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_right = 1
+border_color = Color(0.43529412, 0.43529412, 0.43529412, 1)
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_rhb3s"]
+color = Color(0.49747366, 0.49747366, 0.49747366, 1)
 
 [node name="priority" type="VBoxContainer"]
 anchors_preset = 10
@@ -11,11 +22,41 @@ anchor_right = 1.0
 offset_bottom = 110.0
 grow_horizontal = 2
 size_flags_horizontal = 3
-theme_override_constants/separation = 4
+theme_override_constants/separation = 0
 script = ExtResource("1_rodd7")
 
 [node name="pursuit" parent="." instance=ExtResource("1_m0io8")]
 layout_mode = 2
+
+[node name="next" type="Label" parent="pursuit"]
+custom_minimum_size = Vector2(35, 0)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -35.0
+offset_top = -13.0
+offset_bottom = 13.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+size_flags_stretch_ratio = 0.5
+theme = ExtResource("3_rhb3s")
+text = "1"
+
+[node name="progress" type="ProgressBar" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+size_flags_stretch_ratio = 4.0
+theme_override_styles/background = SubResource("StyleBoxFlat_rodd7")
+theme_override_styles/fill = SubResource("StyleBoxLine_rhb3s")
+max_value = 10.0
+step = 1.0
+value = 5.0
+show_percentage = false
 
 [node name="self_control" parent="." instance=ExtResource("2_8kwj1")]
 layout_mode = 2

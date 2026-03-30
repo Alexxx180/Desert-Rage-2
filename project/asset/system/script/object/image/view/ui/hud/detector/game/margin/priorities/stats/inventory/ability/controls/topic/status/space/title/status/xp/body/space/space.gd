@@ -4,12 +4,12 @@ extends Control
 @onready var options: Control = $options
 @onready var multiplier: Control = $multiplier
 
-@onready var meter: HBoxContainer = $meter
+@onready var meter: ProgressBar = $meter
 @onready var timer: Timer = $timer
 
 func set_fixed(state: bool) -> void:
 	score.fixed = state
-	meter.fixed = state
+	# meter.fixed = state
 #	if not fixed:
 		#pass
 		#body.set_hide_xp()

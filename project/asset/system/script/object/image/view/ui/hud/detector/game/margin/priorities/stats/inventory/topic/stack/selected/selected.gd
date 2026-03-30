@@ -1,12 +1,26 @@
 extends HFlowContainer
 
-@onready var ray: MarginContainer = $ray
-@onready var rock: MarginContainer = $rock
+var bag: PackedScene = preload("res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/items/items.tscn")
+var _ray: HFlowContainer = null
+var ray: HFlowContainer:
+	get: upload_bag(_ray, "ray") ; return _ray
+
+var _rock: HFlowContainer = null
+var rock: HFlowContainer:
+	get: upload_bag(_rock, "rock") ; return _rock
+
+func upload_bag(hero: HFlowContainer, title: String) -> void:
+	if hero == null:
+		hero = bag.instantiate() # set("_" + title, hero) if ref won't work
+		hero.name = title
+		var space: Control = get_node(title)
+		space.add_sibling(hero)
+		remove_child(space)
 
 var opened: Node
 
-func hides() -> void: get(opened.bag).items.hide()
-func shows() -> void: get(opened.bag).items.show()
+func hides() -> void: get(opened.bag).hide()
+func shows() -> void: get(opened.bag).show()
 
 func connect_group(hero: String, group: Node2D, _opened: Node) -> void:
 	var ui: HFlowContainer = get(hero).items

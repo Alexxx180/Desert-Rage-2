@@ -1,9 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://du2nfngsi1lpk"]
+[gd_scene load_steps=10 format=3 uid="uid://du2nfngsi1lpk"]
 
 [ext_resource type="Script" uid="uid://c14oc7djocbem" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/topic/stack/selected/status/points/ability.gd" id="1_1mkek"]
 [ext_resource type="StyleBox" uid="uid://mbh4jijnx78j" path="res://asset/resource/ui/theme/style/button/status_points.tres" id="1_abgr3"]
 [ext_resource type="Theme" uid="uid://dfg873urxgnev" path="res://asset/resource/ui/theme/patterns/template/text/title/title.tres" id="2_abgr3"]
-[ext_resource type="FontFile" uid="uid://tledodlx6okb" path="res://asset/resource/media/data/font/LTSuperiorMono-Semibold.otf" id="3_74dy5"]
 [ext_resource type="FontFile" uid="uid://bmtckcw2a28p2" path="res://asset/resource/media/data/font/Sportsball.ttf" id="4_nviv5"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_e4tjx"]
@@ -27,23 +26,6 @@ border_color = Color(0.054902, 0.219608, 0.278431, 0.215686)
 corner_radius_top_left = 12
 corner_radius_bottom_left = 12
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s8rf2"]
-content_margin_left = 3.0
-content_margin_top = 2.0
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ik8mr"]
-content_margin_left = 2.0
-content_margin_top = 2.0
-content_margin_right = 2.0
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1y8ov"]
 bg_color = Color(0.100247, 0.100417, 0.0962017, 1)
 border_width_left = 2
@@ -62,8 +44,8 @@ content_margin_right = 2.0
 custom_minimum_size = Vector2(90, 26)
 size_flags_horizontal = 3
 size_flags_vertical = 4
-theme_override_styles/hover = ExtResource("1_abgr3")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_e4tjx")
+theme_override_styles/hover = ExtResource("1_abgr3")
 script = ExtResource("1_1mkek")
 
 [node name="points" type="HBoxContainer" parent="."]
@@ -85,7 +67,7 @@ size_flags_horizontal = 3
 mouse_filter = 2
 
 [node name="bar" type="ProgressBar" parent="points/space"]
-custom_minimum_size = Vector2(0, 25)
+custom_minimum_size = Vector2(25, 25)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -100,43 +82,6 @@ max_value = 20.0
 step = 1.0
 value = 20.0
 show_percentage = false
-
-[node name="margin" type="MarginContainer" parent="points/space"]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_top = -20.0
-offset_right = 40.0
-offset_bottom = 20.0
-grow_vertical = 2
-mouse_filter = 2
-theme_override_constants/margin_left = 10
-
-[node name="label" type="HBoxContainer" parent="points/space/margin"]
-visible = false
-layout_mode = 2
-size_flags_vertical = 4
-theme_override_constants/separation = -2
-
-[node name="caption" type="Label" parent="points/space/margin/label"]
-layout_mode = 2
-size_flags_horizontal = 0
-theme = ExtResource("2_abgr3")
-theme_override_colors/font_color = Color(0.103744, 0.103744, 0.103744, 1)
-theme_override_font_sizes/font_size = 11
-theme_override_styles/normal = SubResource("StyleBoxFlat_s8rf2")
-text = "ОУ"
-
-[node name="max" type="Label" parent="points/space/margin/label"]
-layout_mode = 2
-size_flags_horizontal = 0
-theme = ExtResource("2_abgr3")
-theme_override_colors/font_color = Color(0.103744, 0.103744, 0.103744, 1)
-theme_override_fonts/font = ExtResource("3_74dy5")
-theme_override_font_sizes/font_size = 11
-theme_override_styles/normal = SubResource("StyleBoxFlat_ik8mr")
-text = "9999"
 
 [node name="merge" type="MarginContainer" parent="points"]
 layout_mode = 2

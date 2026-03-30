@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dqlgy3l13bibl"]
+[gd_scene load_steps=17 format=3 uid="uid://dqlgy3l13bibl"]
 
 [ext_resource type="Script" uid="uid://bmdahhw0xgfv8" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/topic/items/items.gd" id="1_s3f5p"]
 [ext_resource type="StyleBox" uid="uid://evyfrkamah1" path="res://asset/resource/ui/theme/style/items/chests/hover.tres" id="2_3g2au"]
@@ -9,6 +9,19 @@
 [ext_resource type="Script" uid="uid://bb0iykbgs3tpv" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/topic/items/item/item.gd" id="8_5x7cy"]
 [ext_resource type="Script" uid="uid://e3s47evggk2s" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/topic/items/item/equip.gd" id="9_h878g"]
 [ext_resource type="FontFile" uid="uid://b2wbdbnkxcqv1" path="res://asset/resource/media/data/font/NotoEmoji-VariableFont_wght.ttf" id="10_fpum0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3g2au"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5agbf"]
+bg_color = Color(0.18431373, 0.18431373, 0.7254902, 1)
+
+[sub_resource type="Gradient" id="Gradient_7knqk"]
+colors = PackedColorArray(0, 0, 0, 0, 0.184314, 0.184314, 0.72549, 0.235294)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_5agbf"]
+gradient = SubResource("Gradient_7knqk")
+fill_from = Vector2(0.495726, 1)
+fill_to = Vector2(0.495726, 0)
 
 [sub_resource type="Gradient" id="Gradient_3g2au"]
 colors = PackedColorArray(0.196078, 0.196078, 0.196078, 0.470588, 0.176471, 0.176471, 0.176471, 0.627451)
@@ -36,118 +49,388 @@ script = ExtResource("1_s3f5p")
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 size_flags_horizontal = 10
-theme_override_styles/hover = ExtResource("2_3g2au")
 theme_override_styles/normal = ExtResource("2_dlaeg")
+theme_override_styles/hover = ExtResource("2_3g2au")
 script = ExtResource("3_pjpcj")
 
 [node name="margin" parent="slot_0" instance=ExtResource("4_kqtsx")]
 layout_mode = 1
 mouse_filter = 2
 
+[node name="bar" type="ProgressBar" parent="slot_0"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+size_flags_vertical = 8
+theme_override_styles/background = SubResource("StyleBoxEmpty_3g2au")
+theme_override_styles/fill = SubResource("StyleBoxFlat_5agbf")
+max_value = 30.0
+step = 1.0
+value = 30.0
+fill_mode = 1
+show_percentage = false
+
+[node name="back" type="TextureRect" parent="slot_0/bar"]
+visible = false
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = -2.0
+offset_right = 2.0
+offset_bottom = 64.0
+grow_horizontal = 2
+size_flags_vertical = 3
+texture = SubResource("GradientTexture2D_5agbf")
+
 [node name="slot_1" type="Button" parent="."]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
-theme_override_styles/hover = ExtResource("2_3g2au")
 theme_override_styles/normal = ExtResource("2_dlaeg")
+theme_override_styles/hover = ExtResource("2_3g2au")
 script = ExtResource("3_pjpcj")
 
 [node name="margin" parent="slot_1" instance=ExtResource("4_kqtsx")]
 layout_mode = 1
 mouse_filter = 2
 
+[node name="bar" type="ProgressBar" parent="slot_1"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+size_flags_vertical = 8
+theme_override_styles/background = SubResource("StyleBoxEmpty_3g2au")
+theme_override_styles/fill = SubResource("StyleBoxFlat_5agbf")
+max_value = 30.0
+step = 1.0
+value = 30.0
+fill_mode = 1
+show_percentage = false
+
+[node name="back" type="TextureRect" parent="slot_1/bar"]
+visible = false
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = -2.0
+offset_right = 2.0
+offset_bottom = 64.0
+grow_horizontal = 2
+size_flags_vertical = 3
+texture = SubResource("GradientTexture2D_5agbf")
+
 [node name="slot_2" type="Button" parent="."]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
-theme_override_styles/hover = ExtResource("2_3g2au")
 theme_override_styles/normal = ExtResource("2_dlaeg")
+theme_override_styles/hover = ExtResource("2_3g2au")
 script = ExtResource("3_pjpcj")
 
 [node name="margin" parent="slot_2" instance=ExtResource("4_kqtsx")]
 layout_mode = 1
 mouse_filter = 2
 
+[node name="bar" type="ProgressBar" parent="slot_2"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+size_flags_vertical = 8
+theme_override_styles/background = SubResource("StyleBoxEmpty_3g2au")
+theme_override_styles/fill = SubResource("StyleBoxFlat_5agbf")
+max_value = 30.0
+step = 1.0
+value = 30.0
+fill_mode = 1
+show_percentage = false
+
+[node name="back" type="TextureRect" parent="slot_2/bar"]
+visible = false
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = -2.0
+offset_right = 2.0
+offset_bottom = 64.0
+grow_horizontal = 2
+size_flags_vertical = 3
+texture = SubResource("GradientTexture2D_5agbf")
+
 [node name="slot_3" type="Button" parent="."]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
-theme_override_styles/hover = ExtResource("2_3g2au")
 theme_override_styles/normal = ExtResource("2_dlaeg")
+theme_override_styles/hover = ExtResource("2_3g2au")
 script = ExtResource("3_pjpcj")
 
 [node name="margin" parent="slot_3" instance=ExtResource("4_kqtsx")]
 layout_mode = 1
 mouse_filter = 2
 
+[node name="bar" type="ProgressBar" parent="slot_3"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+size_flags_vertical = 8
+theme_override_styles/background = SubResource("StyleBoxEmpty_3g2au")
+theme_override_styles/fill = SubResource("StyleBoxFlat_5agbf")
+max_value = 30.0
+step = 1.0
+value = 30.0
+fill_mode = 1
+show_percentage = false
+
+[node name="back" type="TextureRect" parent="slot_3/bar"]
+visible = false
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = -2.0
+offset_right = 2.0
+offset_bottom = 64.0
+grow_horizontal = 2
+size_flags_vertical = 3
+texture = SubResource("GradientTexture2D_5agbf")
+
 [node name="slot_4" type="Button" parent="."]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
-theme_override_styles/hover = ExtResource("2_3g2au")
 theme_override_styles/normal = ExtResource("2_dlaeg")
+theme_override_styles/hover = ExtResource("2_3g2au")
 script = ExtResource("3_pjpcj")
 
 [node name="margin" parent="slot_4" instance=ExtResource("4_kqtsx")]
 layout_mode = 1
 mouse_filter = 2
 
+[node name="bar" type="ProgressBar" parent="slot_4"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+size_flags_vertical = 8
+theme_override_styles/background = SubResource("StyleBoxEmpty_3g2au")
+theme_override_styles/fill = SubResource("StyleBoxFlat_5agbf")
+max_value = 30.0
+step = 1.0
+value = 30.0
+fill_mode = 1
+show_percentage = false
+
+[node name="back" type="TextureRect" parent="slot_4/bar"]
+visible = false
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = -2.0
+offset_right = 2.0
+offset_bottom = 64.0
+grow_horizontal = 2
+size_flags_vertical = 3
+texture = SubResource("GradientTexture2D_5agbf")
+
 [node name="slot_5" type="Button" parent="."]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
-theme_override_styles/hover = ExtResource("2_3g2au")
 theme_override_styles/normal = ExtResource("2_dlaeg")
+theme_override_styles/hover = ExtResource("2_3g2au")
 script = ExtResource("3_pjpcj")
 
 [node name="margin" parent="slot_5" instance=ExtResource("4_kqtsx")]
 layout_mode = 1
 mouse_filter = 2
 
+[node name="bar" type="ProgressBar" parent="slot_5"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+size_flags_vertical = 8
+theme_override_styles/background = SubResource("StyleBoxEmpty_3g2au")
+theme_override_styles/fill = SubResource("StyleBoxFlat_5agbf")
+max_value = 30.0
+step = 1.0
+value = 30.0
+fill_mode = 1
+show_percentage = false
+
+[node name="back" type="TextureRect" parent="slot_5/bar"]
+visible = false
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = -2.0
+offset_right = 2.0
+offset_bottom = 64.0
+grow_horizontal = 2
+size_flags_vertical = 3
+texture = SubResource("GradientTexture2D_5agbf")
+
 [node name="slot_6" type="Button" parent="."]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
-theme_override_styles/hover = ExtResource("2_3g2au")
 theme_override_styles/normal = ExtResource("2_dlaeg")
+theme_override_styles/hover = ExtResource("2_3g2au")
 script = ExtResource("3_pjpcj")
 
 [node name="margin" parent="slot_6" instance=ExtResource("4_kqtsx")]
 layout_mode = 1
 mouse_filter = 2
 
+[node name="bar" type="ProgressBar" parent="slot_6"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+size_flags_vertical = 8
+theme_override_styles/background = SubResource("StyleBoxEmpty_3g2au")
+theme_override_styles/fill = SubResource("StyleBoxFlat_5agbf")
+max_value = 30.0
+step = 1.0
+value = 30.0
+fill_mode = 1
+show_percentage = false
+
+[node name="back" type="TextureRect" parent="slot_6/bar"]
+visible = false
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = -2.0
+offset_right = 2.0
+offset_bottom = 64.0
+grow_horizontal = 2
+size_flags_vertical = 3
+texture = SubResource("GradientTexture2D_5agbf")
+
 [node name="slot_7" type="Button" parent="."]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
-theme_override_styles/hover = ExtResource("2_3g2au")
 theme_override_styles/normal = ExtResource("2_dlaeg")
+theme_override_styles/hover = ExtResource("2_3g2au")
 script = ExtResource("3_pjpcj")
 
 [node name="margin" parent="slot_7" instance=ExtResource("4_kqtsx")]
 layout_mode = 1
 mouse_filter = 2
 
+[node name="bar" type="ProgressBar" parent="slot_7"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+size_flags_vertical = 8
+theme_override_styles/background = SubResource("StyleBoxEmpty_3g2au")
+theme_override_styles/fill = SubResource("StyleBoxFlat_5agbf")
+max_value = 30.0
+step = 1.0
+value = 30.0
+fill_mode = 1
+show_percentage = false
+
+[node name="back" type="TextureRect" parent="slot_7/bar"]
+visible = false
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = -2.0
+offset_right = 2.0
+offset_bottom = 64.0
+grow_horizontal = 2
+size_flags_vertical = 3
+texture = SubResource("GradientTexture2D_5agbf")
+
 [node name="slot_8" type="Button" parent="."]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
-theme_override_styles/hover = ExtResource("2_3g2au")
 theme_override_styles/normal = ExtResource("2_dlaeg")
+theme_override_styles/hover = ExtResource("2_3g2au")
 script = ExtResource("3_pjpcj")
 
 [node name="margin" parent="slot_8" instance=ExtResource("4_kqtsx")]
 layout_mode = 1
 mouse_filter = 2
 
+[node name="bar" type="ProgressBar" parent="slot_8"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+size_flags_vertical = 8
+theme_override_styles/background = SubResource("StyleBoxEmpty_3g2au")
+theme_override_styles/fill = SubResource("StyleBoxFlat_5agbf")
+max_value = 30.0
+step = 1.0
+value = 30.0
+fill_mode = 1
+show_percentage = false
+
+[node name="back" type="TextureRect" parent="slot_8/bar"]
+visible = false
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = -2.0
+offset_right = 2.0
+offset_bottom = 64.0
+grow_horizontal = 2
+size_flags_vertical = 3
+texture = SubResource("GradientTexture2D_5agbf")
+
 [node name="slot_9" type="Button" parent="."]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
-theme_override_styles/hover = ExtResource("2_3g2au")
 theme_override_styles/normal = ExtResource("2_dlaeg")
+theme_override_styles/hover = ExtResource("2_3g2au")
 script = ExtResource("3_pjpcj")
 
 [node name="margin" parent="slot_9" instance=ExtResource("4_kqtsx")]
 layout_mode = 1
 mouse_filter = 2
 
+[node name="bar" type="ProgressBar" parent="slot_9"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+size_flags_vertical = 8
+theme_override_styles/background = SubResource("StyleBoxEmpty_3g2au")
+theme_override_styles/fill = SubResource("StyleBoxFlat_5agbf")
+max_value = 30.0
+step = 1.0
+value = 30.0
+fill_mode = 1
+show_percentage = false
+
+[node name="back" type="TextureRect" parent="slot_9/bar"]
+visible = false
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = -2.0
+offset_right = 2.0
+offset_bottom = 64.0
+grow_horizontal = 2
+size_flags_vertical = 3
+texture = SubResource("GradientTexture2D_5agbf")
+
 [node name="0" type="Button" parent="."]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
-theme_override_styles/hover = ExtResource("2_3g2au")
 theme_override_styles/normal = SubResource("StyleBoxTexture_8o4rq")
+theme_override_styles/hover = ExtResource("2_3g2au")
 script = ExtResource("8_5x7cy")
 
 [node name="margin" parent="0" instance=ExtResource("4_kqtsx")]
@@ -157,8 +440,8 @@ mouse_filter = 2
 [node name="1" type="Button" parent="."]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
-theme_override_styles/hover = ExtResource("2_3g2au")
 theme_override_styles/normal = SubResource("StyleBoxTexture_8o4rq")
+theme_override_styles/hover = ExtResource("2_3g2au")
 script = ExtResource("8_5x7cy")
 
 [node name="margin" parent="1" instance=ExtResource("4_kqtsx")]
@@ -168,8 +451,8 @@ mouse_filter = 2
 [node name="2" type="Button" parent="."]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
-theme_override_styles/hover = ExtResource("2_3g2au")
 theme_override_styles/normal = SubResource("StyleBoxTexture_8o4rq")
+theme_override_styles/hover = ExtResource("2_3g2au")
 script = ExtResource("8_5x7cy")
 
 [node name="margin" parent="2" instance=ExtResource("4_kqtsx")]
@@ -179,8 +462,8 @@ mouse_filter = 2
 [node name="3" type="Button" parent="."]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
-theme_override_styles/hover = ExtResource("2_3g2au")
 theme_override_styles/normal = SubResource("StyleBoxTexture_8o4rq")
+theme_override_styles/hover = ExtResource("2_3g2au")
 script = ExtResource("8_5x7cy")
 
 [node name="margin" parent="3" instance=ExtResource("4_kqtsx")]
@@ -190,8 +473,8 @@ mouse_filter = 2
 [node name="4" type="Button" parent="."]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
-theme_override_styles/hover = ExtResource("2_3g2au")
 theme_override_styles/normal = SubResource("StyleBoxTexture_8o4rq")
+theme_override_styles/hover = ExtResource("2_3g2au")
 script = ExtResource("8_5x7cy")
 
 [node name="margin" parent="4" instance=ExtResource("4_kqtsx")]
@@ -201,8 +484,8 @@ mouse_filter = 2
 [node name="5" type="Button" parent="."]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
-theme_override_styles/hover = ExtResource("2_3g2au")
 theme_override_styles/normal = SubResource("StyleBoxTexture_8o4rq")
+theme_override_styles/hover = ExtResource("2_3g2au")
 script = ExtResource("8_5x7cy")
 
 [node name="margin" parent="5" instance=ExtResource("4_kqtsx")]
@@ -212,8 +495,8 @@ mouse_filter = 2
 [node name="6" type="Button" parent="."]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
-theme_override_styles/hover = ExtResource("2_3g2au")
 theme_override_styles/normal = SubResource("StyleBoxTexture_8o4rq")
+theme_override_styles/hover = ExtResource("2_3g2au")
 script = ExtResource("8_5x7cy")
 
 [node name="margin" parent="6" instance=ExtResource("4_kqtsx")]
@@ -223,8 +506,8 @@ mouse_filter = 2
 [node name="7" type="Button" parent="."]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
-theme_override_styles/hover = ExtResource("2_3g2au")
 theme_override_styles/normal = SubResource("StyleBoxTexture_8o4rq")
+theme_override_styles/hover = ExtResource("2_3g2au")
 script = ExtResource("8_5x7cy")
 
 [node name="margin" parent="7" instance=ExtResource("4_kqtsx")]
@@ -234,8 +517,8 @@ mouse_filter = 2
 [node name="8" type="Button" parent="."]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
-theme_override_styles/hover = ExtResource("2_3g2au")
 theme_override_styles/normal = SubResource("StyleBoxTexture_8o4rq")
+theme_override_styles/hover = ExtResource("2_3g2au")
 script = ExtResource("8_5x7cy")
 
 [node name="margin" parent="8" instance=ExtResource("4_kqtsx")]
@@ -245,8 +528,8 @@ mouse_filter = 2
 [node name="9" type="Button" parent="."]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
-theme_override_styles/hover = ExtResource("2_3g2au")
 theme_override_styles/normal = SubResource("StyleBoxTexture_8o4rq")
+theme_override_styles/hover = ExtResource("2_3g2au")
 script = ExtResource("8_5x7cy")
 
 [node name="margin" parent="9" instance=ExtResource("4_kqtsx")]
@@ -256,8 +539,8 @@ mouse_filter = 2
 [node name="weapon" type="Button" parent="."]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
-theme_override_styles/hover = ExtResource("2_3g2au")
 theme_override_styles/normal = SubResource("StyleBoxTexture_8o4rq")
+theme_override_styles/hover = ExtResource("2_3g2au")
 script = ExtResource("9_h878g")
 
 [node name="default" type="Label" parent="weapon"]
@@ -278,8 +561,8 @@ mouse_filter = 2
 [node name="artifact" type="Button" parent="."]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
-theme_override_styles/hover = ExtResource("2_3g2au")
 theme_override_styles/normal = SubResource("StyleBoxTexture_8o4rq")
+theme_override_styles/hover = ExtResource("2_3g2au")
 script = ExtResource("9_h878g")
 
 [node name="default" type="Label" parent="artifact"]
@@ -300,8 +583,8 @@ mouse_filter = 2
 [node name="armor" type="Button" parent="."]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
-theme_override_styles/hover = ExtResource("2_3g2au")
 theme_override_styles/normal = SubResource("StyleBoxTexture_8o4rq")
+theme_override_styles/hover = ExtResource("2_3g2au")
 script = ExtResource("9_h878g")
 
 [node name="default" type="Label" parent="armor"]
@@ -322,8 +605,8 @@ mouse_filter = 2
 [node name="legs" type="Button" parent="."]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
-theme_override_styles/hover = ExtResource("2_3g2au")
 theme_override_styles/normal = SubResource("StyleBoxTexture_8o4rq")
+theme_override_styles/hover = ExtResource("2_3g2au")
 script = ExtResource("9_h878g")
 
 [node name="default" type="Label" parent="legs"]
@@ -345,8 +628,8 @@ mouse_filter = 2
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 size_flags_horizontal = 0
-theme_override_styles/hover = ExtResource("2_3g2au")
 theme_override_styles/normal = SubResource("StyleBoxTexture_8o4rq")
+theme_override_styles/hover = ExtResource("2_3g2au")
 script = ExtResource("9_h878g")
 
 [node name="default" type="Control" parent="boots"]
