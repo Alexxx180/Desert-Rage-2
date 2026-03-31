@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://dibx6xqgh2qmj"]
+
+[ext_resource type="Script" uid="uid://b740p71awf41" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/hints/space/preview/chats/list/list.gd" id="1_huapw"]
+[ext_resource type="Script" uid="uid://cb5kv63wqgrfj" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/hints/space/preview/chats/list/temp/temp.gd" id="2_gj4vs"]
+[ext_resource type="PackedScene" uid="uid://b3kq5rgblhq6b" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/gameplay/chats/chat.tscn" id="3_f6lxs"]
+[ext_resource type="PackedScene" uid="uid://dhqu2qkapwck2" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/gameplay/chats/log.tscn" id="4_0ak06"]
+
+[node name="stack" type="VBoxContainer"]
+size_flags_horizontal = 3
+size_flags_vertical = 10
+script = ExtResource("1_huapw")
+
+[node name="temp" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 0
+script = ExtResource("2_gj4vs")
+
+[node name="chat" parent="." instance=ExtResource("3_f6lxs")]
+layout_mode = 2
+
+[node name="logs" parent="." instance=ExtResource("4_0ak06")]
+visible = false
+layout_mode = 2
