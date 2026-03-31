@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=3 uid="uid://dh72jhqsqpog3"]
+
+[ext_resource type="FontFile" uid="uid://b37js8y80ak1k" path="res://asset/resource/media/data/font/NotoColorEmoji-Regular.ttf" id="1_fvyjj"]
+[ext_resource type="FontFile" uid="uid://dh77105qn5h3n" path="res://asset/resource/media/data/font/Werkzeug.woff2" id="2_7suwh"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4ahk1"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_v3fti"]
+color = Color(0.5370113, 0.5370113, 0.5370113, 1)
+grow_begin = 0.0
+grow_end = 0.0
+vertical = true
+
+[node name="a" type="HBoxContainer"]
+
+[node name="icon" type="Label" parent="."]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_fvyjj")
+text = "🛡"
+
+[node name="stat" type="Label" parent="icon"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -12.0
+offset_right = 12.0
+offset_bottom = 20.0
+grow_horizontal = 2
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("2_7suwh")
+text = "2"
+horizontal_alignment = 1
+
+[node name="bar" type="ProgressBar" parent="."]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_styles/background = SubResource("StyleBoxEmpty_4ahk1")
+theme_override_styles/fill = SubResource("StyleBoxLine_v3fti")
+value = 70.0
+fill_mode = 3
+show_percentage = false
