@@ -5,36 +5,53 @@ class_name HeroDeploy
 signal traverse_camera(node: Node2D, hero: CharacterBody2D)
 signal select_hero(hero: CharacterBody2D)
 
-var party: HeroParty = HeroParty.new()
+const COUNT: int = 2
+
+var main: int = -1
+var next: int = 0
+
 var _deploy: Node2D
 var anchored: bool = false
 
+func get_next() -> int: return (main + 1) % COUNT
+func set_next() -> void:
+	main = get_next()
+	next = get_next()
+
+func switch_hero(party: Array, show: bool, process: bool) -> void:
+	party[next].visible = show
+	Works.turn(party[next], process)
+
+func is_select() -> bool: return _test_input("select", "select")
+func is_group() -> bool: return _test_input("deploy", "group")
+
+func _test_input(key: String, mouse: String) -> bool:
+	return Input.is_action_pressed(key) or (
+		Input.is_action_pressed("mouse_" + mouse) and
+		Input.is_action_just_released("mouse_%s_2" % mouse))
+
 func set_anchor() -> void: anchored = !anchored
 
-func select(hero: Node2D = party.leader) -> void:
-	# party.set_heroes()
-	#party.forget_velocity()
-	if anchored:
-		party.sync_pos()
-		party.show_heroes()
-	traverse_camera.emit(hero, party.follower)
-	party.set_next()
-	select_hero.emit(party.leader)
+func select(group: Node2D, leader: CharacterBody2D, follower: CharacterBody2D) -> void: # party.set_heroes() #party.forget_velocity()
+	if anchored: group.sync_pos() # V party.show_heroes()
+	traverse_camera.emit(leader, follower)
+	set_next()
+	select_hero.emit(group.leader)
 
-func group_heroes() -> void:
-	party.sync_pos()
+func group_heroes(group: Node2D) -> void:
+	group.sync_pos()
 	set_anchor()
-	party.switch_hero(true, false)
+	switch_hero(group.party, true, false)
 
-func deploy_group() -> void:
+func deploy_group(party: Array) -> void:
+	var process: bool = !anchored
 	set_anchor()
-	party.regroup_hero(!anchored)
+	switch_hero(party, process, process)
 
-func regroup() -> void: # not party.same_ground() #if true: pass
-	if anchored: group_heroes()
-	elif _deploy.is_colliding(
-		party.leader.position, party.follower.position):
-		deploy_group()
+func regroup(group: Node2D) -> void: # not party.same_ground() #if true: pass
+	if anchored: group_heroes(group)
+	elif _deploy.is_colliding(group.leader.position, group.follower.position):
+		deploy_group(group.party)
 
 func setup_camera(camera: Camera2D) -> void:
 	traverse_camera.connect(camera.traverse)
@@ -43,11 +60,11 @@ func setup_camera(camera: Camera2D) -> void:
 
 func setup_location(group: Node2D) -> void:
 	setup_camera(group.camera)
-	party.locate(group.position)
+	# group.locate(group.position)
+	group.ray.position = group.initial
 	group.position = Vector2.ZERO
 
-func init(group: Node2D, heroes: Array[CharacterBody2D], deployed: bool) -> void:
-	party.heroes = heroes
+func init(group: Node2D, deployed: bool) -> void:
 	setup_location(group)
-	select(group)
-	if deployed: regroup()
+	select(group, group._rock, group.ray)
+	if deployed: regroup(group)

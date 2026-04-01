@@ -5,4 +5,5 @@ extends Node
 
 func controls(hero: CharacterBody2D, input: Node) -> void:
 	topdown.controls(hero, input.topdown)
-	platformer.controls(hero, input.platformer.tools)
+	# TODO FIXME platformer connect
+	# platformer.controls(hero, input.platformer.tools)

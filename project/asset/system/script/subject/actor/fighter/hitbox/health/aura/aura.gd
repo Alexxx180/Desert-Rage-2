@@ -2,6 +2,7 @@ extends Node
 
 const THICKNESS: int = 2
 const WAVE: float = 0.7
+const DURATION: float = 0.1
 
 @onready var timer: Timer = $blink
 
@@ -14,6 +15,7 @@ var last_thickness: float = 5.0
 var blinked: bool = false
 var colors: AuraHealthColor = AuraHealthColor.new()
 var entity: CharacterBody2D
+var tween: Tween
 
 var material: ShaderMaterial:
 	get: return entity.view.profile.material
@@ -36,6 +38,11 @@ func diffusion() -> void:
 func is_blinking() -> bool: return not timer.is_stopped()
 func start_blinking() -> void: timer.start()
 func stop_blinking() -> void: timer.stop()
+
+func _ready() -> void:
+	tween = create_tween()
+	tween.set_loops()
+	tween.tween_method(aura_waving, 0.0, 0.9, DURATION)
 
 func blink() -> void:
 	blinked = !blinked

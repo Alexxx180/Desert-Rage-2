@@ -45,21 +45,19 @@ script = ExtResource("1_b2wmg")
 [node name="placement" type="CollisionShape2D" parent="."]
 shape = SubResource("ConcavePolygonShape2D_tvpfk")
 
-[node name="view" type="Node2D" parent="."]
-script = ExtResource("1_j1ff4")
-
-[node name="shadow" type="Sprite2D" parent="view"]
-position = Vector2(0, 32)
-scale = Vector2(0.984375, 1)
-texture = SubResource("GradientTexture2D_c5q44")
-
-[node name="stand" type="Sprite2D" parent="view"]
+[node name="stand" type="Sprite2D" parent="."]
 position = Vector2(-32, -54)
 texture = ExtResource("2_b2wmg")
 offset = Vector2(32, 32)
+script = ExtResource("1_j1ff4")
 
-[node name="shadow-behind" type="Sprite2D" parent="view"]
-position = Vector2(0, 4)
+[node name="shadow" type="Sprite2D" parent="stand"]
+position = Vector2(32, 86)
+scale = Vector2(0.984375, 1)
+texture = SubResource("GradientTexture2D_c5q44")
+
+[node name="behind" type="Sprite2D" parent="stand"]
+position = Vector2(32, 58)
 texture = SubResource("GradientTexture2D_uyn7k")
 
 [node name="logic" type="Node2D" parent="."]

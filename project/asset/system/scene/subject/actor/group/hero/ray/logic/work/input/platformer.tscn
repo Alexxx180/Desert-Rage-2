@@ -1,0 +1,247 @@
+[gd_scene load_steps=39 format=3 uid="uid://bb752wie2b17j"]
+
+[ext_resource type="Script" uid="uid://bohl4j55eetkb" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/work/input/platformer/platformer.gd" id="1_uqh8e"]
+[ext_resource type="Script" uid="uid://b24e6dk0dqnwp" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/work/input/platformer/move/move.gd" id="2_nml1y"]
+[ext_resource type="PackedScene" uid="uid://b7v637wmhaoam" path="res://asset/system/scene/subject/actor/group/hero/base/logic/work/input/movement/behavior.tscn" id="3_u7wph"]
+[ext_resource type="Script" uid="uid://bocb1songpf12" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/work/input/topdown/move/device/device.gd" id="4_bct4h"]
+[ext_resource type="Script" uid="uid://dena1c53yb102" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/work/input/platformer/move/device/mouse.gd" id="5_yrxjs"]
+[ext_resource type="Script" uid="uid://cdt1p3rs1c5qe" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/work/input/platformer/move/device/keyboard/ray.gd" id="6_obu4q"]
+[ext_resource type="Script" uid="uid://cyff6wcny3pk3" path="res://asset/system/scene/object/input/button/input.gd" id="7_i542l"]
+[ext_resource type="Script" uid="uid://6wmvjfxaoweo" path="res://asset/system/scene/object/input/button/axis.gd" id="8_xg5ea"]
+[ext_resource type="PackedScene" uid="uid://bmf26ewu2u0l0" path="res://asset/system/scene/object/input/button/button.tscn" id="9_qiub1"]
+[ext_resource type="Script" uid="uid://21kvo5qk8w8q" path="res://asset/system/script/object/plugin/stats/split/group.gd" id="10_egpal"]
+[ext_resource type="Resource" uid="uid://t0uwtrhrgv1n" path="res://asset/resource/ui/short/controls/group/powered_single.tres" id="11_rf112"]
+[ext_resource type="Script" uid="uid://ccqrq830l8in6" path="res://asset/system/script/object/plugin/stats/split/button.gd" id="12_o6mql"]
+[ext_resource type="Script" uid="uid://rssqt7kxsel6" path="res://asset/system/script/object/plugin/stats/split/complex.gd" id="13_cbngv"]
+[ext_resource type="Script" uid="uid://bmf1d8axk35bq" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/work/input/platformer/tools/tools.gd" id="14_xdvrw"]
+[ext_resource type="Script" uid="uid://cgc44dvua0jb7" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/work/input/topdown/levels/chains/chains.gd" id="15_0xf6e"]
+[ext_resource type="Script" uid="uid://cxrdadx5a8gxc" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/work/input/topdown/levels/chains/catch.gd" id="16_tg1qx"]
+[ext_resource type="Script" uid="uid://bbb5nspgj74q8" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/work/input/platformer/tools/jump/jump.gd" id="17_kwyii"]
+[ext_resource type="Script" uid="uid://cacg0uo42xuy6" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/work/input/platformer/tools/jump/slide.gd" id="18_u033v"]
+[ext_resource type="Script" uid="uid://4nmet7l2bswx" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/work/input/topdown/levels/spring.gd" id="19_0mcfj"]
+[ext_resource type="Script" uid="uid://deu4d8k815al4" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/work/input/platformer/tools/jump/spring/control.gd" id="20_o4mkd"]
+[ext_resource type="Script" uid="uid://d4efp8vhmy5s5" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/work/input/platformer/tools/jump/spring/ground.gd" id="21_qyi3v"]
+[ext_resource type="Script" uid="uid://s4miy2ilnjvo" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/work/input/platformer/actions.gd" id="22_exxdh"]
+[ext_resource type="Script" uid="uid://6ruw0ycrqlbq" path="res://addons/godot-behavior-tree-plugin/blackboard/blackboard.gd" id="23_jmonf"]
+[ext_resource type="Script" uid="uid://cmm8nk2huc4mb" path="res://addons/godot-behavior-tree-plugin/tree/tree.gd" id="24_diftm"]
+[ext_resource type="Script" uid="uid://b2eukqcbuq556" path="res://addons/godot-behavior-tree-plugin/selector/selector.gd" id="25_s1aou"]
+[ext_resource type="Script" uid="uid://xyxwk1uhmmqa" path="res://addons/godot-behavior-tree-plugin/sequence/sequence.gd" id="26_rdgtk"]
+[ext_resource type="Script" uid="uid://d142f2qhty4op" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/work/input/actions/skills/combo/na.gd" id="27_qtq2i"]
+[ext_resource type="Script" uid="uid://2emwmpqnf28y" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/work/input/actions/skills/punch/action.gd" id="28_tkpgk"]
+[ext_resource type="Script" uid="uid://cmwixa7o3lh67" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/work/input/actions/skills/punch/combo/single.gd" id="29_6vj8j"]
+[ext_resource type="Script" uid="uid://6yvq6k33e1lx" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/work/input/actions/skills/whip/tools/chains.gd" id="30_vc14w"]
+[ext_resource type="Script" uid="uid://nnegaqwyb3r0" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/work/input/actions/skills/combo/create/whip.gd" id="31_ekdkc"]
+[ext_resource type="Script" uid="uid://csi5jxcifjqkb" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/work/input/actions/skills/whip/combo/single.gd" id="32_iab44"]
+
+[sub_resource type="Resource" id="Resource_70kee"]
+script = ExtResource("12_o6mql")
+id = 2
+metadata/_custom_type_script = "uid://ccqrq830l8in6"
+
+[sub_resource type="Resource" id="Resource_dwkwo"]
+script = ExtResource("10_egpal")
+group = Array[ExtResource("12_o6mql")]([SubResource("Resource_70kee")])
+metadata/_custom_type_script = "uid://21kvo5qk8w8q"
+
+[sub_resource type="Resource" id="Resource_0v1wd"]
+script = ExtResource("13_cbngv")
+action = "left"
+complex = Array[ExtResource("10_egpal")]([ExtResource("11_rf112"), SubResource("Resource_dwkwo")])
+metadata/_custom_type_script = "uid://rssqt7kxsel6"
+
+[sub_resource type="Resource" id="Resource_26dec"]
+script = ExtResource("13_cbngv")
+action = "right"
+complex = Array[ExtResource("10_egpal")]([ExtResource("11_rf112"), SubResource("Resource_dwkwo")])
+metadata/_custom_type_script = "uid://rssqt7kxsel6"
+
+[sub_resource type="Resource" id="Resource_7j72u"]
+script = ExtResource("13_cbngv")
+action = "forward"
+complex = Array[ExtResource("10_egpal")]([ExtResource("11_rf112"), SubResource("Resource_dwkwo")])
+metadata/_custom_type_script = "uid://rssqt7kxsel6"
+
+[sub_resource type="Resource" id="Resource_jjijc"]
+script = ExtResource("13_cbngv")
+action = "backward"
+complex = Array[ExtResource("10_egpal")]([ExtResource("11_rf112"), SubResource("Resource_dwkwo")])
+metadata/_custom_type_script = "uid://rssqt7kxsel6"
+
+[node name="platformer" type="Node"]
+script = ExtResource("1_uqh8e")
+
+[node name="move" type="Node" parent="."]
+script = ExtResource("2_nml1y")
+
+[node name="act" parent="move" instance=ExtResource("3_u7wph")]
+
+[node name="device" type="Node" parent="move"]
+script = ExtResource("4_bct4h")
+
+[node name="mouse" type="Node" parent="move/device"]
+script = ExtResource("5_yrxjs")
+
+[node name="keyboard" type="Node" parent="move/device"]
+script = ExtResource("6_obu4q")
+
+[node name="input" type="Node" parent="move/device/keyboard"]
+script = ExtResource("7_i542l")
+
+[node name="x" type="Node" parent="move/device/keyboard/input"]
+script = ExtResource("8_xg5ea")
+
+[node name="left" parent="move/device/keyboard/input/x" instance=ExtResource("9_qiub1")]
+actions = SubResource("Resource_0v1wd")
+
+[node name="right" parent="move/device/keyboard/input/x" instance=ExtResource("9_qiub1")]
+actions = SubResource("Resource_26dec")
+
+[node name="y" type="Node" parent="move/device/keyboard/input"]
+script = ExtResource("8_xg5ea")
+
+[node name="left" parent="move/device/keyboard/input/y" instance=ExtResource("9_qiub1")]
+actions = SubResource("Resource_7j72u")
+
+[node name="right" parent="move/device/keyboard/input/y" instance=ExtResource("9_qiub1")]
+actions = SubResource("Resource_jjijc")
+
+[node name="tools" type="Node" parent="."]
+script = ExtResource("14_xdvrw")
+
+[node name="chains" type="Node" parent="tools"]
+script = ExtResource("15_0xf6e")
+
+[node name="catch" type="Node" parent="tools/chains"]
+script = ExtResource("16_tg1qx")
+
+[node name="jump" type="Node" parent="tools"]
+script = ExtResource("17_kwyii")
+
+[node name="slide" type="Node" parent="tools/jump"]
+script = ExtResource("18_u033v")
+
+[node name="spring" type="Node" parent="tools/jump"]
+script = ExtResource("19_0mcfj")
+
+[node name="control" type="Node" parent="tools/jump/spring"]
+script = ExtResource("20_o4mkd")
+
+[node name="ground" type="Node" parent="tools/jump/spring"]
+script = ExtResource("21_qyi3v")
+
+[node name="deactivation" type="Timer" parent="tools/jump/spring/ground"]
+wait_time = 0.3
+one_shot = true
+
+[node name="actions" type="Node" parent="."]
+script = ExtResource("22_exxdh")
+
+[node name="board" type="Node" parent="actions"]
+script = ExtResource("23_jmonf")
+metadata/_custom_type_script = "uid://6ruw0ycrqlbq"
+
+[node name="behavior" type="Node" parent="actions"]
+script = ExtResource("24_diftm")
+metadata/_custom_type_script = "uid://cmm8nk2huc4mb"
+
+[node name="skills" type="Node" parent="actions/behavior"]
+script = ExtResource("25_s1aou")
+metadata/_custom_type_script = "uid://b2eukqcbuq556"
+
+[node name="equipment" type="Node" parent="actions/behavior/skills"]
+script = ExtResource("25_s1aou")
+metadata/_custom_type_script = "uid://b2eukqcbuq556"
+
+[node name="knife" type="Node" parent="actions/behavior/skills/equipment"]
+script = ExtResource("26_rdgtk")
+metadata/_custom_type_script = "uid://xyxwk1uhmmqa"
+
+[node name="equip" type="Node" parent="actions/behavior/skills/equipment/knife"]
+script = ExtResource("27_qtq2i")
+metadata/_custom_type_script = "uid://c28asuataqv3u"
+
+[node name="dagger" type="Node" parent="actions/behavior/skills/equipment/knife"]
+script = ExtResource("26_rdgtk")
+metadata/_custom_type_script = "uid://xyxwk1uhmmqa"
+
+[node name="action" type="Node" parent="actions/behavior/skills/equipment/knife/dagger"]
+script = ExtResource("28_tkpgk")
+metadata/_custom_type_script = "uid://c28asuataqv3u"
+
+[node name="single" type="Node" parent="actions/behavior/skills/equipment/knife/dagger"]
+script = ExtResource("29_6vj8j")
+metadata/_custom_type_script = "uid://c28asuataqv3u"
+
+[node name="distance" type="Node" parent="actions/behavior/skills/equipment"]
+script = ExtResource("25_s1aou")
+metadata/_custom_type_script = "uid://b2eukqcbuq556"
+
+[node name="colts" type="Node" parent="actions/behavior/skills/equipment/distance"]
+script = ExtResource("26_rdgtk")
+metadata/_custom_type_script = "uid://xyxwk1uhmmqa"
+
+[node name="equip" type="Node" parent="actions/behavior/skills/equipment/distance/colts"]
+script = ExtResource("27_qtq2i")
+metadata/_custom_type_script = "uid://c28asuataqv3u"
+
+[node name="shot" type="Node" parent="actions/behavior/skills/equipment/distance/colts"]
+script = ExtResource("26_rdgtk")
+metadata/_custom_type_script = "uid://xyxwk1uhmmqa"
+
+[node name="action" type="Node" parent="actions/behavior/skills/equipment/distance/colts/shot"]
+script = ExtResource("28_tkpgk")
+metadata/_custom_type_script = "uid://c28asuataqv3u"
+
+[node name="single" type="Node" parent="actions/behavior/skills/equipment/distance/colts/shot"]
+script = ExtResource("29_6vj8j")
+metadata/_custom_type_script = "uid://c28asuataqv3u"
+
+[node name="shotgun" type="Node" parent="actions/behavior/skills/equipment/distance"]
+script = ExtResource("26_rdgtk")
+metadata/_custom_type_script = "uid://xyxwk1uhmmqa"
+
+[node name="equip" type="Node" parent="actions/behavior/skills/equipment/distance/shotgun"]
+script = ExtResource("27_qtq2i")
+metadata/_custom_type_script = "uid://c28asuataqv3u"
+
+[node name="shot" type="Node" parent="actions/behavior/skills/equipment/distance/shotgun"]
+script = ExtResource("26_rdgtk")
+metadata/_custom_type_script = "uid://xyxwk1uhmmqa"
+
+[node name="action" type="Node" parent="actions/behavior/skills/equipment/distance/shotgun/shot"]
+script = ExtResource("28_tkpgk")
+metadata/_custom_type_script = "uid://c28asuataqv3u"
+
+[node name="single" type="Node" parent="actions/behavior/skills/equipment/distance/shotgun/shot"]
+script = ExtResource("29_6vj8j")
+metadata/_custom_type_script = "uid://c28asuataqv3u"
+
+[node name="whip" type="Node" parent="actions/behavior/skills"]
+script = ExtResource("26_rdgtk")
+metadata/_custom_type_script = "uid://xyxwk1uhmmqa"
+
+[node name="skill_two" type="Node" parent="actions/behavior/skills/whip"]
+script = ExtResource("28_tkpgk")
+metadata/_custom_type_script = "uid://c28asuataqv3u"
+
+[node name="tools" type="Node" parent="actions/behavior/skills/whip"]
+script = ExtResource("25_s1aou")
+metadata/_custom_type_script = "uid://b2eukqcbuq556"
+
+[node name="chains" type="Node" parent="actions/behavior/skills/whip/tools"]
+script = ExtResource("30_vc14w")
+metadata/_custom_type_script = "uid://c28asuataqv3u"
+
+[node name="combo" type="Node" parent="actions/behavior/skills/whip"]
+script = ExtResource("25_s1aou")
+metadata/_custom_type_script = "uid://b2eukqcbuq556"
+
+[node name="create" type="Node" parent="actions/behavior/skills/whip/combo"]
+script = ExtResource("31_ekdkc")
+metadata/_custom_type_script = "uid://c28asuataqv3u"
+
+[node name="single" type="Node" parent="actions/behavior/skills/whip/combo"]
+script = ExtResource("32_iab44")
+metadata/_custom_type_script = "uid://c28asuataqv3u"
+
+[connection signal="timeout" from="tools/jump/spring/ground/deactivation" to="tools/jump/spring/ground" method="deactivate_spring"]

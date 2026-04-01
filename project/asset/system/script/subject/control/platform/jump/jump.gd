@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 @onready var logic: Node2D = $logic
-@onready var view: Node2D = $view
+@onready var view: Sprite2D = $stand
 @onready var geometry: CollisionShape2D = $placement
 
 @export var speed: float = 1

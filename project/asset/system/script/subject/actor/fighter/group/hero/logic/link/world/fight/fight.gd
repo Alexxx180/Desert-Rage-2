@@ -3,7 +3,7 @@ extends Node
 @onready var ranged: Node = $range # @onready var music: Node = $music
 
 func controls(hero: CharacterBody2D, fight: Node) -> void: # music.controls(hero)
-	fight.deploy = hero.group.deploy
+	fight.group = hero.group
 	fight.movement.hero = hero
 	hero.to.effect.close_damage.connect(fight.close.hit)
 	ranged.setup(hero, fight)

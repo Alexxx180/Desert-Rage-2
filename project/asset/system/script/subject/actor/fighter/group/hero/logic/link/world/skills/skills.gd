@@ -8,7 +8,7 @@ func controls(hero: CharacterBody2D, skills: Node, tags: TileMapLayer) -> void:
 	connect_transition(hero.logic.see.world.skills.transition)
 	connect_act(hero.logic.see.world.skills.act)
 	connect_press(hero.logic.see.world.skills.press)
-	connect_activation()
+	# connect_activation() # TODO FIXME ENABLE ACTIVATION
 	connect_stomp(hero.logic.see.fight.small_circle)
 
 func connect_pull(pull: Node2D) -> void:

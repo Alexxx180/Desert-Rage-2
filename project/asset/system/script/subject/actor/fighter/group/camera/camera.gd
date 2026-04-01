@@ -9,7 +9,8 @@ var zooming: CameraZooming = CameraZooming.new()
 func _ready() -> void: music.controls(self)
 
 func traverse(node: Node, hero: CharacterBody2D):
-	node.remove_child(self)
+	if node != null:
+		node.remove_child(self)
 	hero.add_child(self)
 	self.set_owner(hero)
 

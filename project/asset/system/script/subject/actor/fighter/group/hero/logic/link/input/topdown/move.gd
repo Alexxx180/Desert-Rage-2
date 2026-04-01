@@ -1,5 +1,15 @@
 extends Node
 
+func connect_platformer(moves: Array, hero: CharacterBody2D) -> void:
+	hero.to.platformer.move.act.levels = hero.to.topdown.levels
+	hero.to.platformer.move.act.actions = hero.to.platformer.actions
+	for a in moves:
+		a.run.state.hero = hero
+		a.velocity.hero = hero
+		a.teleport.platform.hero = hero
+		a.chains = hero.to.platformer.tools.chains
+		a.moving.connect(hero.logic.see.set_direction)
+
 func controls(hero: CharacterBody2D, move: Node) -> void:
 	var act: Node = move.act
 	var space: Node = hero.to.topdown.levels.jump.ledges.space
@@ -8,19 +18,11 @@ func controls(hero: CharacterBody2D, move: Node) -> void:
 	
 	print("CONNECT MOVEMENT")
 	move.device.mouse.target.hero = hero
-	
-	for a in [move.act, hero.to.platformer.move.act]:
-		a.run.state.hero = hero
-		a.velocity.hero = hero
-		a.teleport.platform.hero = hero
-		a.chains = hero.to.platformer.tools.chains
-		a.moving.connect(hero.logic.see.set_direction)
+	# TODO FIXME connect platformer skills
+	# connect_platformer([move.act, hero.to.platformer.move.act], hero)
 	
 	act.levels = hero.to.topdown.levels
 	act.actions = hero.to.topdown.actions
-	hero.to.platformer.move.act.levels = hero.to.topdown.levels
-	hero.to.platformer.move.act.actions = hero.to.platformer.actions
-	
 	act.moving.connect(hero.view.animation.move)
 #	act.moving.connect(hero.view.ap.set_direction)
 

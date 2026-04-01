@@ -9,16 +9,14 @@ var zone: FightRange = FightRange.new()
 
 var auto_switch: bool = true
 
-var deploy: HeroDeploy
-var party: HeroParty:
-	get: return deploy.party
+var group: Node2D
 
 func target_accepted(enemy: CharacterBody2D) -> void:
 	Works.turn(movement, true)
 	movement.set_target(enemy)
 	target_accept.emit(enemy)
-	if auto_switch and !deploy.anchored:
-		deploy.select()
+	if auto_switch and !group.deploy.anchored:
+		group.deploy.select(group)
 
 func _detector(entity: PhysicsBody2D) -> Node:
 	return entity.logic.detector.fight
@@ -36,19 +34,19 @@ func reveal_aims() -> void:
 	var targets: Array = zone.area.values()
 	iterate_enemy(targets, func(entity):
 		entity.logic.detector.fight.reveal_aim()
-		add_assignee(entity, party.leader))
+		add_assignee(entity, group.leader))
 	iterate_enemy(targets, func(entity):
 		entity.logic.detector.fight.aim.grab_focus(), true)
 
 func hide_aims() -> void:
 	iterate_enemy(zone.area.values(), func(entity):
 		entity.logic.detector.fight.hide_aim()
-		drop_assignee(entity, party.leader))
+		drop_assignee(entity, group.leader))
 
 func update_assignee(_party: HeroParty) -> void:
 	iterate_enemy(zone.area.values(), func(entity):
-		drop_assignee(entity, party.follower)
-		add_assignee(entity, party.leader))
+		drop_assignee(entity, group.follower)
+		add_assignee(entity, group.leader))
 
 func add_assignee(entity: PhysicsBody2D, hero: CharacterBody2D) -> void:
 	_detector(entity).assign.connect(_fight(hero).target_accepted)
