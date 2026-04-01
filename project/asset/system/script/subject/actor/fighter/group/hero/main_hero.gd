@@ -9,6 +9,9 @@ extends CharacterBody2D
 func make_velocity(motion: Vector2) -> void: velocity = motion
 func make_position(motion: Vector2) -> void: position = motion
 
+func update_stats() -> void:
+	$logic.update_stats()
+
 func _ready() -> void:
 	logic.link.controls(self)
 	to.topdown.actions.board.s("group", group)

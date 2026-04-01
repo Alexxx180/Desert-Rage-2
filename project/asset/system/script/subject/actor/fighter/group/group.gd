@@ -41,6 +41,7 @@ func upload_hero(ref: CharacterBody2D, caption: String) -> CharacterBody2D:
 	if ref == null:
 		ref = load("res://asset/system/scene/subject/actor/group/hero/%s/%s.tscn" % [caption, caption]).instantiate()
 		ref.name = caption
+		ref.update_stats()
 		set("_" + caption, ref)
 		add_child(ref)
 	return ref
@@ -51,6 +52,12 @@ func sync_pos() -> void: follower.position = leader.position
 func locate(next: Vector2) -> void: for hero in party: hero.position = next
 func forget_velocity() -> void:
 	leader.logic.work.input.topdown.move.act.velocity.forget()
+
+func traverse(node: Node, hero: CharacterBody2D):
+	if node != null:
+		node.remove_child(camera)
+	hero.add_child(camera)
+	# self.set_owner(hero)
 
 func _ready() -> void:
 	deploy.init(self, deployed)
