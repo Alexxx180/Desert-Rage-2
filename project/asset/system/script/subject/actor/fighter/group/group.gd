@@ -56,8 +56,10 @@ func forget_velocity() -> void:
 func traverse(node: Node, hero: CharacterBody2D):
 	if node != null:
 		node.remove_child(camera)
+	else:
+		remove_child(camera)
 	hero.add_child(camera)
-	# self.set_owner(hero)
+#	camera.set_owner(hero)
 
 func _ready() -> void:
 	deploy.init(self, deployed)
