@@ -1,56 +1,46 @@
-[gd_scene load_steps=4 format=3 uid="uid://c75178jy2w4kb"]
+[gd_scene load_steps=3 format=3 uid="uid://c75178jy2w4kb"]
 
 [ext_resource type="Script" uid="uid://cc0xru1qj7v14" path="res://asset/system/script/subject/actor/fighter/group/camera/deploy/deploy.gd" id="1_04bu4"]
-[ext_resource type="Script" uid="uid://bfosvdgtekb3m" path="res://asset/system/script/subject/actor/fighter/group/camera/deploy/border/border.gd" id="2_wpc40"]
 [ext_resource type="Script" uid="uid://bokgxenhnr8sl" path="res://asset/system/script/subject/actor/fighter/group/camera/deploy/border/rays.gd" id="3_2fsng"]
 
 [node name="deploy" type="Node2D"]
 script = ExtResource("1_04bu4")
 
-[node name="border" type="Node2D" parent="."]
-script = ExtResource("2_wpc40")
-
-[node name="left" type="Node2D" parent="border"]
+[node name="left" type="RayCast2D" parent="."]
+target_position = Vector2(0, -128)
+collision_mask = 195
 script = ExtResource("3_2fsng")
 
-[node name="left" type="RayCast2D" parent="border/left"]
+[node name="left" type="RayCast2D" parent="left"]
 target_position = Vector2(-128, -128)
 collision_mask = 195
 
-[node name="mid" type="RayCast2D" parent="border/left"]
-target_position = Vector2(0, -128)
-collision_mask = 195
-
-[node name="right" type="RayCast2D" parent="border/left"]
+[node name="right" type="RayCast2D" parent="left"]
 target_position = Vector2(128, -128)
 collision_mask = 195
 
-[node name="mid" type="Node2D" parent="border"]
+[node name="mid" type="RayCast2D" parent="."]
+target_position = Vector2(0, 0)
+collision_mask = 195
 script = ExtResource("3_2fsng")
 
-[node name="left" type="RayCast2D" parent="border/mid"]
+[node name="left" type="RayCast2D" parent="mid"]
 target_position = Vector2(-128, 0)
 collision_mask = 195
 
-[node name="mid" type="RayCast2D" parent="border/mid"]
-target_position = Vector2(0, 0)
-collision_mask = 195
-
-[node name="right" type="RayCast2D" parent="border/mid"]
+[node name="right" type="RayCast2D" parent="mid"]
 target_position = Vector2(128, 0)
 collision_mask = 195
 
-[node name="right" type="Node2D" parent="border"]
+[node name="right" type="RayCast2D" parent="."]
+target_position = Vector2(0, 128)
+collision_mask = 195
 script = ExtResource("3_2fsng")
 
-[node name="left" type="RayCast2D" parent="border/right"]
+[node name="left" type="RayCast2D" parent="right"]
 target_position = Vector2(-128, 128)
 collision_mask = 195
 
-[node name="mid" type="RayCast2D" parent="border/right"]
-target_position = Vector2(0, 128)
-collision_mask = 195
-
-[node name="right" type="RayCast2D" parent="border/right"]
+[node name="right" type="RayCast2D" parent="right"]
 target_position = Vector2(128, 128)
 collision_mask = 195

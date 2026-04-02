@@ -1,11 +1,11 @@
 extends Node2D
 
-@onready var border: Node2D = $border
-# @onready var heroes: Node2D = $heroes
-
-var _count: int = 0
+@onready var edges: Array[Node2D] = [$mid, $right, $left]
 
 const DISTANCE: int = 128
+
+func _edge_colliding(motion: Vector2i) -> bool:
+	return edges[motion.y].vertices[motion.x].is_colliding()
 
 func is_colliding(leader: Vector2, follow: Vector2) -> bool:
 	if leader.distance_to(follow) >= DISTANCE:
@@ -20,4 +20,4 @@ func is_colliding(leader: Vector2, follow: Vector2) -> bool:
 	# _count == HeroParty.COUNT and
 	#print("DIR: ", dir, " - BORDER: ", not border.is_colliding(dir))
 	#print("HEROES: ", heroes.is_colliding(dir)) # heroes.is_colliding(dir) and 
-	return not border.is_colliding(dir)
+	return not _edge_colliding(dir)

@@ -1,3 +1,3 @@
-extends Node2D
+extends RayCast2D
 
-@onready var vertices: Array[RayCast2D] = [$mid, $right, $left]
+@onready var vertices: Array[RayCast2D] = [self, $right, $left]

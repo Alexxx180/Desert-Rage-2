@@ -1,4 +1,4 @@
-extends Node
+class_name RecoveryStats extends RefCounted
 
 enum { BORDER = 0, TICK = 1 }
 
