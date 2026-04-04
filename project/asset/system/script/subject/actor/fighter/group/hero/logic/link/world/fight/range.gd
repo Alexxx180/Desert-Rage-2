@@ -1,4 +1,4 @@
-extends Node
+class_name FightRangeHeader extends RefCounted
 
 var act: Node
 var fight: Node

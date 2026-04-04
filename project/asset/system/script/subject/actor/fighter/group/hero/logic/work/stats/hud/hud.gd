@@ -1,6 +1,6 @@
 extends Node
 
-@onready var slots: Node = $slots
+@onready var slots: Timer = $slots
 
 var _display: CanvasLayer
 var display: CanvasLayer:

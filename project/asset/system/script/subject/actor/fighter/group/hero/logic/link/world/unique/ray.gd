@@ -3,25 +3,29 @@ extends Node
 var _detector: Area2D
 var _hero: CharacterBody2D
 var category: String = ""
+var tile: TilesBelt = TilesBelt.new(2, 0).add("COMFORTER").add("ADJUSTER").from(2, 3).add("PAGE")
 
 func read_book(execute: TileMapLayer, tile: Dictionary) -> void:
 	execute.show_text(tile.coords)
-
 	if tile.atlas.x % 2 == 0:
 		tile.atlas.x += 1
 		Tile.paint(execute, tile)
 
-func set_category(kind, execute: TileMapLayer) -> void:
+func set_category(kind) -> void:
 	category = kind
-	execute.recovery.recover(_hero, category)
+	_hero.group.work.recovery.recover(_hero, category)
+
+func encourage_message() -> void:
+	pass
 
 func determine_static(execute: TileMapLayer) -> void:
 	category = ""
 	var tile: Dictionary = Tile.from_pos(execute, _hero.position + _detector.position)
 	match tile.atlas:
-		Vector2i(2, 1): execute.show_text(tile.coords)
-		Vector2i(2, 3): set_category("hp", execute)
-		Vector2i(3, 3): set_category("ap", execute)
+		tile.AS.PAGE: execute.show_text(tile.coords)
+		tile.AS.COMFORTER: set_category("hp")
+		tile.AS.ADJUSTER: set_category("ap")
+		tile.AS.ENCOURAGER: encourage_message()
 		_: read_book(execute, tile)
 
 func distract(execute: TileMapLayer) -> void:

@@ -1,10 +1,10 @@
-extends Node
+extends Timer
 
 const THICKNESS: int = 2
 const WAVE: float = 0.7
 const DURATION: float = 0.1
 
-@onready var timer: Timer = $blink
+@onready var diffuse: Timer = $diffuse
 
 var param: Dictionary = {
 	"thick": "shader_parameter/line_thickness",
@@ -35,11 +35,15 @@ func diffusion() -> void:
 	material.set(param.color, colors.diffuse())
 	#pass
 
-func is_blinking() -> bool: return not timer.is_stopped()
-func start_blinking() -> void: timer.start()
-func stop_blinking() -> void: timer.stop()
+func is_blinking() -> bool: return not is_stopped()
+func start_blinking() -> void: start()
+func stop_blinking() -> void: stop()
+
+func delay_diffuse() -> void: diffuse.start()
 
 func _ready() -> void:
+	diffuse.timeout.connect(diffusion)
+	timeout.connect(blink)
 	tween = create_tween()
 	tween.set_loops()
 	tween.tween_method(aura_waving, 0.0, 0.9, DURATION)

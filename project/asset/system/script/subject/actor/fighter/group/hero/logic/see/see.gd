@@ -2,7 +2,14 @@ extends Node2D
 
 @onready var world: Node2D = $world
 @onready var levels: Node2D = $levels
-@onready var fight: Node2D = $fight
+
+var _fight: Node2D = null
+var fight: Node2D:
+	get:
+		if _fight == null:
+			_fight = load("res://asset/system/scene/subject/actor/group/hero/ray/logic/see/fight/fight.tscn").instantiate()
+			add_child(_fight)
+		return _fight
 
 var dir: Vector2i = Vector2i(0, 1)
 

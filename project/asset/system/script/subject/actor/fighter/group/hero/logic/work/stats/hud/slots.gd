@@ -1,11 +1,8 @@
-extends Node
-
-@onready var hiding: Timer = $preview
+extends Timer
 
 var markers: HFlowContainer
 
-func _ready() -> void:
-	hiding.timeout.connect(hide_slots_status)
+func _ready() -> void: timeout.connect(hide_slots_status)
 
 func show(ui, query) -> void:
 	ui.show()
@@ -18,7 +15,7 @@ func hide_right(hint, query) -> void:
 	for i in range(count, len(hint.slots.slots)):
 		hint.slots.slots[i].hide()
 	if count == 0: hint.status.hide()
-	hiding.start()
+	start()
 
 func set_combo_text(caption: String):
 	markers.combo.heroes.ray.status.show()

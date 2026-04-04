@@ -39,9 +39,7 @@
 
 [sub_resource type="Resource" id="Resource_70kee"]
 script = ExtResource("15_eaaje")
-state = 0
 id = 2
-power = true
 metadata/_custom_type_script = "uid://ccqrq830l8in6"
 
 [sub_resource type="Resource" id="Resource_dwkwo"]
@@ -53,14 +51,12 @@ metadata/_custom_type_script = "uid://21kvo5qk8w8q"
 script = ExtResource("16_wil21")
 action = "left"
 complex = Array[ExtResource("13_1w7cb")]([ExtResource("14_avb20"), SubResource("Resource_dwkwo")])
-passthru = false
 metadata/_custom_type_script = "uid://rssqt7kxsel6"
 
 [sub_resource type="Resource" id="Resource_a7kew"]
 script = ExtResource("16_wil21")
 action = "right"
 complex = Array[ExtResource("13_1w7cb")]([ExtResource("14_avb20"), SubResource("Resource_dwkwo")])
-passthru = false
 metadata/_custom_type_script = "uid://rssqt7kxsel6"
 
 [node name="input" type="Node"]
@@ -73,16 +69,14 @@ script = ExtResource("2_3116p")
 
 [node name="levels" parent="topdown" instance=ExtResource("5_2kup8")]
 
-[node name="actions" type="Node" parent="topdown"]
+[node name="combo" type="Timer" parent="topdown"]
 script = ExtResource("5_nhsi8")
 
-[node name="board" type="Node" parent="topdown/actions"]
+[node name="board" type="Node" parent="topdown/combo"]
 script = ExtResource("7_hrf0v")
 metadata/_custom_type_script = "uid://6ruw0ycrqlbq"
 
-[node name="behavior" parent="topdown/actions" instance=ExtResource("9_f00jc")]
-
-[node name="combo" type="Timer" parent="topdown/actions"]
+[node name="behavior" parent="topdown/combo" instance=ExtResource("9_f00jc")]
 
 [node name="platformer" type="Node" parent="."]
 script = ExtResource("3_f00jc")

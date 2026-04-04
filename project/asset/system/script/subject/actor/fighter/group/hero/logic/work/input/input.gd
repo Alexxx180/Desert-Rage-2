@@ -1,13 +1,18 @@
 extends Node
 
-@onready var topdown: Node = $topdown
-
 var is_platformer: bool = false
 var suspended: bool = false
 
+func upload_act(ref: Node, caption: String) -> Node:
+	return Works.upload(self, ref, "res://asset/system/scene/subject/actor/group/hero/ray/logic/work/input/type/%s.tscn" % caption, caption)
+
+var _topdown: Node = null
+var topdown: Node:
+	get: return upload_act(_topdown, "topdown")
+
 var _platformer: Node = null
 var platformer: Node:
-	get: return Works.upload(self, _platformer, "res://asset/system/scene/subject/actor/group/hero/ray/logic/work/input/actions.tscn", "platformer")
+	get: return upload_act(_platformer, "platformer")
 
 func _input(event: InputEvent) -> void:
 	if suspended: return

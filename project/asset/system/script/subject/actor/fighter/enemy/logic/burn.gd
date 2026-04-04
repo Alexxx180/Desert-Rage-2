@@ -6,6 +6,8 @@ signal hit(damage: int)
 
 var summary_damage: int = 0
 
+func _ready() -> void: timeout.connect(burns)
+
 func dead() -> void:
 	summary_damage = 0
 	stop()

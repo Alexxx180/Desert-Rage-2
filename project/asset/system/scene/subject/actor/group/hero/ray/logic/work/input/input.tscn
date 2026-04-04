@@ -1,27 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://dtibatxhubbff"]
+[gd_scene load_steps=2 format=3 uid="uid://dtibatxhubbff"]
 
 [ext_resource type="Script" uid="uid://chyqd202d6so4" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/work/input/input.gd" id="1_n780q"]
-[ext_resource type="PackedScene" uid="uid://cf3n6jqk372jc" path="res://asset/system/scene/subject/actor/group/hero/base/logic/work/input/movement/move.tscn" id="2_paa2o"]
-[ext_resource type="PackedScene" uid="uid://dqxhg7f8wohsj" path="res://asset/system/scene/subject/actor/group/hero/base/logic/work/input/platforming/platforming.tscn" id="3_alqks"]
-[ext_resource type="Script" uid="uid://dw2tfm70swerb" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/work/input/topdown/topdown.gd" id="3_xqgwn"]
-[ext_resource type="Script" uid="uid://m1bf74xh1hia" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/work/input/topdown/actions.gd" id="6_0ve4s"]
-[ext_resource type="Script" uid="uid://6ruw0ycrqlbq" path="res://addons/godot-behavior-tree-plugin/blackboard/blackboard.gd" id="6_xi04g"]
 
 [node name="input" type="Node"]
 script = ExtResource("1_n780q")
-
-[node name="topdown" type="Node" parent="."]
-script = ExtResource("3_xqgwn")
-
-[node name="move" parent="topdown" instance=ExtResource("2_paa2o")]
-
-[node name="levels" parent="topdown" instance=ExtResource("3_alqks")]
-
-[node name="actions" type="Node" parent="topdown"]
-script = ExtResource("6_0ve4s")
-
-[node name="board" type="Node" parent="topdown/actions"]
-script = ExtResource("6_xi04g")
-metadata/_custom_type_script = "uid://6ruw0ycrqlbq"
-
-[node name="combo" type="Timer" parent="topdown/actions"]

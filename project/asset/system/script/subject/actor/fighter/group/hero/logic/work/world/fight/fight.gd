@@ -5,15 +5,22 @@ signal target_accept(enemy: CharacterBody2D)
 var close: FightRange = FightRange.new()
 var zone: FightRange = FightRange.new()
 # var all: FightRange = FightRange.new() - simply enemies list
-@onready var movement: Node = $movement
 
 var auto_switch: bool = true
-
 var group: Node2D
 
+var hero: CharacterBody2D
+var targeting: Array[CharacterBody2D] = []
+var selection: int = 0
+
+func set_target(enemy: CharacterBody2D) -> void:
+	targeting.append(enemy)
+	# hero.enemy = enemy # targets[selection].position
+	hero.logic.processors.ui.input.movement.mode.target.enemy = enemy
+
 func target_accepted(enemy: CharacterBody2D) -> void:
-	Works.turn(movement, true)
-	movement.set_target(enemy)
+	# Works.turn(movement, true)
+	set_target(enemy)
 	target_accept.emit(enemy)
 	if auto_switch and !group.deploy.anchored:
 		group.deploy.select(group)

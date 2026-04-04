@@ -10,10 +10,16 @@ var context: Dictionary:
 		_context.id = value.id
 		_context.coords = value.coords
 		_context.atlas = value.atlas
-var no: Vector2i:
+static var no: Vector2i:
 	get: return Vector2i.ZERO
 var logic_no: int:
 	get: return Tile.logic_no(context.atlas)
+var is_enabled:
+	get: return layer != null
+var tatlas: Vector2i:
+	get: return context.atlas
+var tcoords: Vector2i:
+	get: return context.coords
 
 func add_chip(node: Node2D, path = '.') -> TileDecorator:
 	node.position = context.pos
@@ -22,7 +28,7 @@ func add_chip(node: Node2D, path = '.') -> TileDecorator:
 
 func _init(_layer: TileMapLayer, id: int = -1, coords: Vector2i = no, atlas: Vector2i = no) -> void:
 	layer = _layer
-	_context = { "id": id, "coords": coords, "atlas": atlas }
+	if is_enabled: _context = { "id": id, "coords": coords, "atlas": atlas }
 
 func get_pos(map_coords: Vector2i) -> Vector2:
 	return Tile.get_pos(layer, map_coords)

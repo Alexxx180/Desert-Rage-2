@@ -1,4 +1,4 @@
-extends Node
+extends Timer
 
 enum { EMPTY = 0, MAX = 10 }
 
@@ -10,6 +10,8 @@ signal update_bar(current: int)
 var bar: Node2D
 var points: float
 var maximum: int
+
+func _ready() -> void: timeout.connect(diffusion)
 
 func available_skill(cost: int) -> bool:
 	return points - cost >= EMPTY

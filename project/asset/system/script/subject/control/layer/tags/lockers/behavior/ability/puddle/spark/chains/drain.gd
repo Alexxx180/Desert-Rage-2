@@ -36,7 +36,6 @@ func path_discharge(tiles: Dictionary) -> void:
 	while chains.length(chain) - 1 > tiles.joint:
 		discharge(chains.closing_unit(chain), chain)
 		chains.drop_unit(chain)
-
 	discharge(tiles.map_coords, chain)
 
 	var target_coords: Vector2i = tiles.map_coords - tiles.direction

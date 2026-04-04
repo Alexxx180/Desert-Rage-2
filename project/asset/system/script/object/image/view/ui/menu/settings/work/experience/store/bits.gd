@@ -1,4 +1,4 @@
-extends Node
+class_name BitField extends Node
 
 var settings: int
 
@@ -11,5 +11,5 @@ func switch(no: int, next: int) -> bool:
 
 func get_value(no: int) -> bool: return Works.is_bit(settings, no)
 func set_value(no: int, next: bool) -> void:
-	var state: int = digit(no) # settings = settings ^ next
+	var state: int = digit(no)
 	settings = settings & ~state | (state * int(next)) 

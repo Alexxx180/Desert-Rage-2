@@ -1,7 +1,6 @@
-extends Node
+extends Timer
 
 @onready var board: BehaviorBlackboard = $board
-@onready var timer: Timer = $combo
 
 @onready var punch = preload("res://asset/system/scene/subject/particle/fight/punch.tscn")
 @onready var kick = preload("res://asset/system/scene/subject/particle/fight/kick.tscn")
@@ -14,7 +13,7 @@ var behavior: BehaviorTree:# = $behavior
 var combo: Node
 
 func _ready() -> void:
-	timer.timeout.connect(reset_combo)
+	timeout.connect(reset_combo)
 
 func reset_combo() -> void:
 	board.g("combo").query.clear()

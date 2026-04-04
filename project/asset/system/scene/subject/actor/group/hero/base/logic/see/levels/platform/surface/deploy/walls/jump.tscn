@@ -1,53 +1,30 @@
-[gd_scene load_steps=5 format=3 uid="uid://c5lbe81jkv6v"]
+[gd_scene load_steps=4 format=3 uid="uid://c5lbe81jkv6v"]
 
 [ext_resource type="Script" uid="uid://dxmnfphy1rw8t" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/see/levels/platforms/surface/deploy/walls/distance/jump_zone.gd" id="1_8hefe"]
-[ext_resource type="PackedScene" uid="uid://bkebe58hbeadp" path="res://asset/system/scene/subject/actor/group/hero/base/logic/see/levels/platform/surface/deploy/walls/ground.tscn" id="1_qvx3s"]
-[ext_resource type="Shape2D" uid="uid://do0s1n5uuqpof" path="res://asset/resource/canvas/map/geometry/characters/character/character.tres" id="2_8hefe"]
 [ext_resource type="Script" uid="uid://dywan2rrypqv8" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/see/levels/platforms/surface/deploy/walls/distance/unit.gd" id="2_ehfof"]
 
-[node name="jump" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ipn42"]
+size = Vector2(5, 20)
+
+[node name="center" type="ShapeCast2D"]
+shape = SubResource("RectangleShape2D_ipn42")
+target_position = Vector2(76, 0)
+max_results = 3
+collision_mask = 65731
 script = ExtResource("1_8hefe")
 
-[node name="top" type="Node2D" parent="."]
-script = ExtResource("2_ehfof")
-
-[node name="left" parent="top" instance=ExtResource("1_qvx3s")]
-position = Vector2(-28, -28)
-shape = ExtResource("2_8hefe")
-
-[node name="center" parent="top" instance=ExtResource("1_qvx3s")]
+[node name="top" type="ShapeCast2D" parent="."]
 position = Vector2(0, -28)
-shape = ExtResource("2_8hefe")
-
-[node name="right" parent="top" instance=ExtResource("1_qvx3s")]
-position = Vector2(28, -28)
-shape = ExtResource("2_8hefe")
-
-[node name="center" type="Node2D" parent="."]
+shape = SubResource("RectangleShape2D_ipn42")
+target_position = Vector2(76, 0)
+max_results = 3
+collision_mask = 65731
 script = ExtResource("2_ehfof")
 
-[node name="left" parent="center" instance=ExtResource("1_qvx3s")]
-position = Vector2(-28, 0)
-shape = ExtResource("2_8hefe")
-
-[node name="center" parent="center" instance=ExtResource("1_qvx3s")]
-shape = ExtResource("2_8hefe")
-
-[node name="right" parent="center" instance=ExtResource("1_qvx3s")]
-position = Vector2(28, 0)
-shape = ExtResource("2_8hefe")
-
-[node name="bottom" type="Node2D" parent="."]
-script = ExtResource("2_ehfof")
-
-[node name="left" parent="bottom" instance=ExtResource("1_qvx3s")]
-position = Vector2(-28, 28)
-shape = ExtResource("2_8hefe")
-
-[node name="center" parent="bottom" instance=ExtResource("1_qvx3s")]
+[node name="bottom" type="ShapeCast2D" parent="."]
 position = Vector2(0, 28)
-shape = ExtResource("2_8hefe")
-
-[node name="right" parent="bottom" instance=ExtResource("1_qvx3s")]
-position = Vector2(28, 28)
-shape = ExtResource("2_8hefe")
+shape = SubResource("RectangleShape2D_ipn42")
+target_position = Vector2(76, 0)
+max_results = 3
+collision_mask = 65731
+script = ExtResource("2_ehfof")

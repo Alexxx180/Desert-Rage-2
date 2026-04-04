@@ -4,8 +4,9 @@ signal interrogation()
 
 @onready var points: Node = $points
 @onready var aura: Node = $aura
-@onready var timer: Timer = $timer
 @onready var burn: Timer = $burn
+
+func _ready() -> void: burn.hit.timeout.connect(burns)
 
 func thrown(box: CharacterBody2D) -> void:
 	if box.logic.processors.movement.push.flying:
@@ -19,7 +20,7 @@ func hit(amount: int = 1) -> void:
 		interrogate()
 
 func interrogate() -> void:
-	timer.start()
+	aura.delay_diffuse()
 	interrogation.emit()
 
 func burns(amount: int = 1) -> void:
@@ -27,7 +28,7 @@ func burns(amount: int = 1) -> void:
 
 func is_dead(no_points: bool) -> bool:
 	if no_points: points.death()
-	timer.start()
+	aura.delay_diffuse()
 	return no_points
 
 func restore() -> void: refill(points.maximum)
@@ -35,7 +36,7 @@ func restore() -> void: refill(points.maximum)
 func refill(amount: int = 1) -> void:
 	points.refill(amount)
 	aura.react(points.segment)
-	timer.start()
+	aura.delay_diffuse()
 
 func _apply_damage(amount: int = 1) -> bool:
 	points.damage(amount)

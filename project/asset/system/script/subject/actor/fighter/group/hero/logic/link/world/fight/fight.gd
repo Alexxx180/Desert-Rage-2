@@ -1,10 +1,10 @@
 extends Node
 
-@onready var ranged: Node = $range # @onready var music: Node = $music
+var ranged: FightRangeHeader = FightRangeHeader.new()
+# @onready var music: Node = $music
 
 func controls(hero: CharacterBody2D, fight: Node) -> void: # music.controls(hero)
-	fight.group = hero.group
-	fight.movement.hero = hero
+	fight.group = hero.group # fight.movement.hero = hero
 	hero.to.effect.close_damage.connect(fight.close.hit)
 	ranged.setup(hero, fight)
 	connect_lever(hero.logic.see.fight.after_tile)

@@ -1,12 +1,10 @@
-extends Node
+extends Timer
 
 const LIFE_BORDER: int = 0
 
 signal update_bar(current: int)
 signal dead()
 signal freeze()
-
-@onready var contest: Timer = $contest
 
 var points: float
 var maximum: int
@@ -20,11 +18,10 @@ var alive: bool:
 var segment: float:
 	get: return points / maximum
 
-func set_contested_health() -> void:
-	contested = points
+func set_contested_health() -> void: contested = int(points)
 
 func setup(next: int) -> void:
-	contest.timeout.connect(set_contested_health)
+	timeout.connect(set_contested_health)
 	maximum = next
 	contested = maximum
 	points = next # maximum - 50 # TODO TEST JARS
@@ -44,4 +41,4 @@ func damage(amount: int = 1) -> void:
 	is_just_dead = points == LIFE_BORDER and not is_dead
 	if is_just_dead: is_dead = true
 	update_bar.emit(points)
-	contest.start()
+	start()

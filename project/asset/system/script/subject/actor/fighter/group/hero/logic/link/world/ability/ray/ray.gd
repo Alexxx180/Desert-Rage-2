@@ -1,6 +1,6 @@
 extends Node
 
-@onready var skill: Node = $skill
+var skill: AbilitiesHeader = AbilitiesHeader.new()
 
 func controls(hero: CharacterBody2D, ability: Node, behavior: Node) -> void:
 	skill.setup(hero, ability)

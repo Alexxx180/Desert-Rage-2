@@ -1,4 +1,4 @@
-extends Node
+class_name AbilitiesHeader extends RefCounted
 
 var hero: CharacterBody2D
 var ability: Node

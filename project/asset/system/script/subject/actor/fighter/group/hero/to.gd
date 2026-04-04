@@ -23,7 +23,7 @@ var effect: Node:
 	get: return _hero.view.animation.effect
 var world: Node:
 	get: return _hero.logic.work.world
-var layers: Node:
+var layers: Lay:
 	get: return world.layers
 var stats: Node:
 	get: return _hero.logic.work.stats

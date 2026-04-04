@@ -1,9 +1,9 @@
 extends Node
 
-@onready var skill: Node = $skill
+var skill: SkillsHeader = SkillsHeader.new()
 
-func controls(hero: CharacterBody2D, skills: Node, tags: TileMapLayer) -> void:
-	skill.setup(hero, skills, tags)
+func controls(hero: CharacterBody2D, skills: Node) -> void:
+	skill.setup(hero, skills)
 	connect_pull(hero.logic.see.world.skills.pull)
 	connect_transition(hero.logic.see.world.skills.transition)
 	connect_act(hero.logic.see.world.skills.act)

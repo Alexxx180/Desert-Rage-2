@@ -6,8 +6,7 @@ extends Node
 @onready var fight: Node = $fight
 
 func controls(hero: CharacterBody2D, world: Node) -> void:
-	hero.to.layers.hero = hero
-	if hero.group.lay == null: return
+	hero.to.layers.hero = hero # if hero.group.lay == null: return
 	
 	var tags: TileDecorator = hero.group.lay.tags
 	if tags != null:

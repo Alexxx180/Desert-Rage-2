@@ -1,34 +1,34 @@
-extends Node
+extends Timer
 
 enum { DROP = 1, DIFFUSION = 5, LENGTH = 10 }
 
-@onready var timer: Timer = $diffuse
-
-var execute: TileDecorator
 var spark: Dictionary = {}
 var cells: Array[Vector2i] = []
 var size: int = 0
+var conductor: FlowConductor
 
-func set_puddle(cell: Vector2i, resize: int, status: Vector2i) -> void:
-	execute.select(status, FlowConductor.TILE.PUDDLE.ID).target(cell).paint()
+func _ready() -> void: timeout.connect(lazy_diffusion)
+
+func set_puddle(cell: Vector2i, status: String, resize: int) -> void:
+	conductor.set_puddle(cell, status)
 	size = resize
 
 func diffuse_puddle(item: int) -> void:
 	var map_coords: Vector2i = cells[item]
 	if spark[map_coords] <= 0:
-		set_puddle(map_coords, size - 1, FlowConductor.TILE.PUDDLE.OFF)
+		set_puddle(map_coords, "OFF", size - 1)
 		spark.erase(map_coords)
 		cells.remove_at(item)
 
+func not_in_spark(cell: Vector2i, _c = Def.DICT) -> bool: return not cell in spark
+
 func lazy_sparking(map_coords: Vector2i) -> void:
-	var can_place: bool = FlowConductor.around(map_coords, {},
-		(func(cell: Vector2i, _context: Dictionary):
-			return not cell in spark))
+	var can_place: bool = conductor.around(map_coords, {}, not_in_spark)
 	if can_place:
-		set_puddle(map_coords, size + 1, FlowConductor.TILE.PUDDLE.ON)
+		set_puddle(map_coords, "ON", size + 1)
 		spark[map_coords] = DIFFUSION
 		cells.append(map_coords)
-	if size == 1: timer.start()
+	if size == 1: start()
 
 func lazy_diffusion() -> void:
 	var i: int = cells.size()
@@ -36,4 +36,4 @@ func lazy_diffusion() -> void:
 		i -= 1
 		spark[cells[i]] -= DROP
 		diffuse_puddle(i)
-	if size == 0: timer.stop()
+	if size == 0: stop()

@@ -15,21 +15,19 @@ collision_mask = 16
 shape = ExtResource("2_a4e3v")
 debug_color = Color(0.607889, 1.545e-05, 0.438106, 0.42)
 
-[node name="ledge" type="Node2D" parent="."]
-script = ExtResource("3_sgdss")
-
-[node name="top" type="RayCast2D" parent="ledge"]
+[node name="top" type="RayCast2D" parent="."]
 target_position = Vector2(0, -48)
 collision_mask = 192
+script = ExtResource("3_sgdss")
 
-[node name="left" type="RayCast2D" parent="ledge"]
+[node name="left" type="RayCast2D" parent="top"]
 target_position = Vector2(-48, 0)
 collision_mask = 192
 
-[node name="right" type="RayCast2D" parent="ledge"]
+[node name="right" type="RayCast2D" parent="top"]
 target_position = Vector2(48, 0)
 collision_mask = 192
 
-[node name="bottom" type="RayCast2D" parent="ledge"]
+[node name="bottom" type="RayCast2D" parent="top"]
 target_position = Vector2(0, 64)
 collision_mask = 192

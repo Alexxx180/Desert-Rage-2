@@ -5,12 +5,20 @@ signal sync_view(hero: Node2D)
 @export var is_hero: bool = false
 
 @onready var profile: AnimatedSprite2D = $profile
-@onready var mirror: AnimatedSprite2D = $mirror
 @onready var shadow: Sprite2D = $shadow
 @onready var animation: AnimationTree = $animation
 @onready var barrier: VBoxContainer = $barrier
 # @onready var ap: TextureProgressBar = $influence
 @onready var whip: Sprite2D = $whip
+
+var _mirror: AnimatedSprite2D = null
+var mirror: AnimatedSprite2D:
+	get:
+		if _mirror == null:
+			var caption: String = get_parent().name
+			_mirror = load("res://asset/system/scene/subject/actor/group/hero/base/view/%s/mirror.tscn" % caption).instantiate()
+			shadow.add_sibling(_mirror)
+		return _mirror
 
 var param: Dictionary = {
 	"thick": "shader_parameter/line_thickness",

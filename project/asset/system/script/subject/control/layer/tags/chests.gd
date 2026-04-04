@@ -8,6 +8,8 @@ var FLOW: Array[Vector2i] = TilesTape.list(3, 0, 3, 1)
 
 var chest: TilesTape = TilesTape.new(2, 0).add("BRONZE").add("SILVER").add("GOLD").add("PLATINUM")
 
+func is_chest(atlas: Vector2i) -> bool: return chest.on_at(atlas) or chest.off_at(atlas)
+
 func _paint(places: Array[Vector2i]) -> void:
 	for coords in places:
 		lay.border.paint({ "id": GROUND, "atlas": Vector2i.ONE, "coords": coords })
@@ -15,8 +17,7 @@ func _paint(places: Array[Vector2i]) -> void:
 func _set_casual_mode(casual_mode: bool) -> void:
 	if not casual_mode: return # for chest in [0, 1, 2]: _paint(tags.get_used_cells_by_id(ENEMY, Vector2i(0, chest)))
 
-func setup(_lay: Node, _casual_mode: bool) -> void: lay = _lay
-# _set_casual_mode(casual_mode)
+func setup(_lay: Node, _casual_mode: bool) -> void: lay = _lay # _set_casual_mode(casual_mode)
 
 func drink_water(inventory: Node, pos: Vector2) -> void:
 	if lay.border.from_pos(pos).context.atlas in FLOW:

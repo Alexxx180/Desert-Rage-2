@@ -1,14 +1,12 @@
-extends Node
+class_name SkillsHeader extends RefCounted
 
 var skills: Node
-
-var hero: CharacterBody2D
-var tags: TileMapLayer
+var hero: CharacterBody2D # var tags: TileMapLayer
 var activator: Node:
-	get: return tags.lockers.location.activator
+	get: return hero.group.lockers.location.activator
 
-func setup(h: CharacterBody2D, s: Node, t: TileMapLayer) -> void:
-	hero = h ; tags = t ; skills = s
+func setup(h: CharacterBody2D, s: Node) -> void:
+	hero = h ; skills = s
 
 func start_forward(body: CharacterBody2D) -> void:
 	skills.pull.start_forward(body, hero)
@@ -17,7 +15,7 @@ func stop_forward(body: CharacterBody2D) -> void:
 	skills.pull.stop_forward(body, hero)
 
 func transit(_body: CharacterBody2D) -> void:
-	tags.transition.transit(hero)
+	hero.group.work.transition.transit(hero)
 
 func encounter_act(body: CharacterBody2D) -> void:
 	skills.act.encounter(body, hero)

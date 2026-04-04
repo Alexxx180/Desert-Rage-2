@@ -1,6 +1,4 @@
-extends Node
-
-class_name Lay
+class_name Lay extends RefCounted
 
 enum { WORLD = 1, BORDERS = 2, CHARACTER = 3, BOX = 5, GAP = 7, UPLAND = 8, JUMP = 200000, GRAVITY = 700000 }
 

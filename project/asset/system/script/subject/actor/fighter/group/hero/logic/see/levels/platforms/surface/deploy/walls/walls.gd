@@ -7,10 +7,6 @@ var target_ground: Vector2 = Vector2.ZERO
 var floors: Node
 var recursed: int = 0
 
-func set_direction(direction: Vector2) -> void:
-	var next: Vector2i = Vector2i(roundi(direction.x), roundi(direction.y))
-	for env in [borders, distance]: env.set_direction(next)
-
 func same_ground(ground_offset: ShapeCast2D) -> bool:
 	target_ground = distance.jump_zone.position + ground_offset.position
 	return not ground_offset.is_colliding() and floors.same_to_hero(target_ground)
