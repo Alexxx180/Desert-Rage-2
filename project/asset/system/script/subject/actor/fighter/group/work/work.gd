@@ -3,6 +3,16 @@ extends Node
 func update_act(ref: Node, caption: String) -> Node:
 	return Works.upload(self, ref, "res://asset/system/scene/level/zone/build/tilemap/tags/%s.tscn" % caption, caption)
 
+var _stats: MakeStats
+var stats: MakeStats:
+	get:
+		if _stats == null:
+			var timer: Timer = Defaults.pre.multiply.instantiate()
+			timer.name = "multiply"
+			add_child(timer)
+			_stats = MakeStats.new(timer)
+		return _stats
+
 var _recovery: Timer = null
 var recovery: Timer:
 	get: return update_act(_recovery, "recovery")
@@ -22,11 +32,6 @@ var enemy: Node:
 var _transition: Node = null
 var transition: Node:
 	get: return update_act(_transition, "transition")
-
-@export var casual_mode: bool = false
-@export_group("Enemies")
-@export_flags_3d_physics var monsters: int
-@export_flags_3d_navigation var bosses: int
 
 @onready var xp: Node = $xp
 @onready var lockers: Node = $lockers

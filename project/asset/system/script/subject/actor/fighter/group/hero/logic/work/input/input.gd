@@ -1,22 +1,23 @@
 extends Node
 
 var is_platformer: bool = false
-var suspended: bool = false
+var suspended: bool:
+	get: return process_mode == PROCESS_MODE_DISABLED
+	set(value): process_mode = PROCESS_MODE_DISABLED if value else PROCESS_MODE_INHERIT
 
 func upload_act(ref: Node, caption: String) -> Node:
 	return Works.upload(self, ref, "res://asset/system/scene/subject/actor/group/hero/ray/logic/work/input/type/%s.tscn" % caption, caption)
 
 var _topdown: Node = null
 var topdown: Node:
-	get: return upload_act(_topdown, "topdown")
+	get:
+		return upload_act(_topdown, "topdown")
 
 var _platformer: Node = null
 var platformer: Node:
 	get: return upload_act(_platformer, "platformer")
 
 func _input(event: InputEvent) -> void:
-	if suspended: return
-	
 	if is_platformer:
 		platformer.input(event)
 	else:

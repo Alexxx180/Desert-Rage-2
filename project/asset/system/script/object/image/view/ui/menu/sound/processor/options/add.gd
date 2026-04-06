@@ -1,8 +1,5 @@
 extends Node
 
-var theme: Resource = preload("res://asset/system/scene/object/canvas/ui/menu/sound/detector/dropdown/tree/leaf/leaf.tscn")
-var fight: Resource = preload("res://asset/system/scene/object/canvas/ui/menu/sound/detector/dropdown/tree/leaf/combat.tscn")
-
 var context: OpenThemeDialog
 
 func _add_leaf(entry: Dictionary, kind: Resource, ui: Control) -> Control:
@@ -24,11 +21,11 @@ func _get_ambient() -> Dictionary:
 	return { "ambient": track, "heating": track, "rampage": track }
 
 func to_theme(options: Node, entry: Dictionary, ui: Control) -> void:
-	var leaf: Control = _add_leaf(entry, theme, ui)
+	var leaf: Control = _add_leaf(entry, Defaults.pre.ost.theme, ui)
 	entry.theme.set.insert(leaf.i, context.result_file)
 	options.set_leaf_theme(entry, leaf)
 
 func to_ambient(options: Node, entry: Dictionary, ui: Control) -> void:
-	var leaf: Control = _add_leaf(entry, fight, ui)
+	var leaf: Control = _add_leaf(entry, Defaults.pre.ost.fight, ui)
 	entry.theme.set.insert(leaf.i, _get_ambient())
 	options.set_ambient_theme(entry, leaf)

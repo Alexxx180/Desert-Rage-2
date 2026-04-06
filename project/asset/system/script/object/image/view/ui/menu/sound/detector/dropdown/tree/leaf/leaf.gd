@@ -1,9 +1,6 @@
-extends Button
+class_name SoundtrackLeaf extends Button
 
-class_name SoundtrackLeaf
-
-@onready var description: Label = $margin/caption/description
-@onready var metadata: Label = $margin/caption/metadata
+@onready var metadata: Label = $metadata
 
 var i: int
 var caption: String = ""
@@ -14,11 +11,11 @@ func set_metadata(track: String) -> void:
 	var dot: int = path.rfind(".")
 	caption = path.substr(0, dot)
 	metadata.text = track
-	description.text = caption
+	text = caption
 
 func set_track_authority(ui_track: String) -> void:
 	metadata.text = ui_track
-	description.text = ui_track + "_metadata"
+	text = ui_track + "_metadata"
 
 func set_options(options: Node, context: Dictionary) -> void:
 	options.set_leaf_theme(context, self)

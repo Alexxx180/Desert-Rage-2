@@ -1,6 +1,5 @@
 extends HFlowContainer
 
-var bag: PackedScene = preload("res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/items/items.tscn")
 var _ray: HFlowContainer = null
 var ray: HFlowContainer:
 	get: upload_bag(_ray, "ray") ; return _ray
@@ -11,7 +10,7 @@ var rock: HFlowContainer:
 
 func upload_bag(hero: HFlowContainer, title: String) -> void:
 	if hero == null:
-		hero = bag.instantiate() # set("_" + title, hero) if ref won't work
+		hero = Defaults.pre.bag.instantiate() # set("_" + title, hero) if ref won't work
 		hero.name = title
 		var space: Control = get_node(title)
 		space.add_sibling(hero)

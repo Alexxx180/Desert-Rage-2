@@ -7,10 +7,7 @@ extends Node
 
 func controls(hero: CharacterBody2D, world: Node) -> void:
 	hero.to.layers.hero = hero # if hero.group.lay == null: return
-	
-	var tags: TileDecorator = hero.group.lay.tags
-	if tags != null:
-		skills.controls(hero, world.skills, tags.layer)
-		ability.controls(hero, world.ability, tags.layer.lockers.ability)
-		unique.controls(hero)
-		fight.controls(hero, world.fight)
+	skills.controls(hero, world.skills)
+	# ability.controls(hero, world.ability, root.group.work.lockers.ability)
+	# unique.controls(hero) # TODO FIXME fight unique
+	# fight.controls(hero, world.fight)

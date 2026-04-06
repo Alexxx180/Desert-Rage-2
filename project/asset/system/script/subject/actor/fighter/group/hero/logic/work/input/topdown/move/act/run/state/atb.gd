@@ -1,6 +1,4 @@
-extends RefCounted
-
-class_name RangeATB
+class_name RangeATB extends RefCounted
 
 signal show(portion: float)
 
@@ -17,7 +15,7 @@ var stand: bool:
 var go: bool:
 	get: return value >= GO
 
-var timing: Node
+# var timing: ActionTimer
 var walking: Timer
 
 func set_mach(next: int) -> void:
@@ -35,7 +33,7 @@ func decrement() -> void:
 
 func walk() -> void:
 	acting = false
-	timing.start()
+	walking.timing.start()
 
 func increment() -> void: #  print("direction: ", direction)
 	if value < STAND:
@@ -45,6 +43,6 @@ func increment() -> void: #  print("direction: ", direction)
 
 func run_start(motion: Vector2) -> void:
 	direction = STAY if motion == Vector2.ZERO else WALK
-	if not timing.is_ticking and direction == WALK: # not acting and 
-		timing.start() # not acting and 
+	if not walking.timing.is_ticking and direction == WALK: # not acting and 
+		walking.timing.start() # not acting and 
 	# acting = false

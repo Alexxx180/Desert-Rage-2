@@ -1,4 +1,4 @@
-class_name CellDrag extends MarginContainer
+class_name CellDrag extends TextureRect
 
 @onready var count: Label = $count
 @onready var image: TextureRect = $image

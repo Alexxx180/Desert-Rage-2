@@ -10,11 +10,9 @@ var state: Variant: get = get_state
 
 func get_state() -> Variant:
 	if entity == Defaults.ENTITY:
-		print("ENTITY is LEDGE")
 		_state.position = hero.position
-		return _state
-	print("ENTITY is BOX")
-	return entity
+		return Def.ic("ENTITY is LEDGE", _state)
+	return Def.ic("ENTITY is BOX", entity)
 
 func get_floor() -> int: return extract(state)
 
@@ -22,12 +20,10 @@ func extract(sub: Variant) -> int:
 	return border.extract_at_pos(sub.position, Tile.FLOOR) + sub.height
 
 func same(sub: Variant) -> bool:
-	var f: int = extract(sub)#; print("F: ", f, " ", "=" if f == F else ("<" if f < F else ">"), " ", F, " ")
-	print("HERO F: ", F, " and BOX f: ", f, ", but height: ", sub.height)
-	return f == F
+	var f: int = extract(sub)
+	return Def.ics("%s | HERO F: %d and BOX f: %d, but height: ", [f == F, F, f, sub.height])
 
 func same_to_hero(ground: Vector2) -> bool:
 	var _s: Variant = state
 	var pos: Vector2 = _s.ledge if "ledge" in _s else _s.position
-	print("SEE A FLOOR: ", pos + ground)
-	return same({ "position": pos + ground, "height": 0 }) # hero
+	return same({ "position": Def.ic("SEE A FLOOR: %s", pos + ground), "height": 0 }) # hero

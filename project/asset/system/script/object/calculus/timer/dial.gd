@@ -1,6 +1,4 @@
-extends RefCounted
-
-class_name TimerDial
+class_name TimerDial extends RefCounted
 
 var _time_left: float = 0
 var time_left: float:

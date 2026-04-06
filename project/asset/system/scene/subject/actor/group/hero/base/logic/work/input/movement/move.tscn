@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://cf3n6jqk372jc"]
+[gd_scene load_steps=12 format=3 uid="uid://cf3n6jqk372jc"]
 
 [ext_resource type="Script" uid="uid://c60f67hinhx4y" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/work/input/topdown/move/move.gd" id="1_adfp2"]
 [ext_resource type="PackedScene" uid="uid://b7v637wmhaoam" path="res://asset/system/scene/subject/actor/group/hero/base/logic/work/input/movement/behavior.tscn" id="2_vidyi"]
@@ -7,58 +7,10 @@
 [ext_resource type="Script" uid="uid://cg4lnjctp4das" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/work/input/topdown/move/device/mouse/trarget/target.gd" id="5_gt8wn"]
 [ext_resource type="Script" uid="uid://c63qtbv64l63c" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/work/input/topdown/move/device/mouse/manual.gd" id="5_vidyi"]
 [ext_resource type="Script" uid="uid://c2w0dnsrewcdf" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/work/input/topdown/move/device/mouse/trarget/antistuck.gd" id="6_uq0hi"]
-[ext_resource type="Script" uid="uid://dcjbac20e7fq7" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/work/input/topdown/move/device/keyboard.gd" id="7_uy7ta"]
-[ext_resource type="Script" uid="uid://6wmvjfxaoweo" path="res://asset/system/scene/object/input/button/axis.gd" id="9_4teyq"]
-[ext_resource type="PackedScene" uid="uid://bmf26ewu2u0l0" path="res://asset/system/scene/object/input/button/button.tscn" id="9_ee4g3"]
-[ext_resource type="Script" uid="uid://cyff6wcny3pk3" path="res://asset/system/scene/object/input/button/input.gd" id="9_gt8wn"]
-[ext_resource type="Script" uid="uid://21kvo5qk8w8q" path="res://asset/system/script/object/plugin/stats/split/group.gd" id="12_qqdpo"]
-[ext_resource type="Script" uid="uid://ccqrq830l8in6" path="res://asset/system/script/object/plugin/stats/split/button.gd" id="13_70kee"]
-[ext_resource type="Resource" uid="uid://t0uwtrhrgv1n" path="res://asset/resource/ui/short/controls/group/powered_single.tres" id="13_qqdpo"]
-[ext_resource type="Script" uid="uid://rssqt7kxsel6" path="res://asset/system/script/object/plugin/stats/split/complex.gd" id="14_dwkwo"]
-
-[sub_resource type="Resource" id="Resource_70kee"]
-script = ExtResource("13_70kee")
-id = 2
-metadata/_custom_type_script = "uid://ccqrq830l8in6"
-
-[sub_resource type="Resource" id="Resource_dwkwo"]
-script = ExtResource("12_qqdpo")
-group = Array[ExtResource("13_70kee")]([SubResource("Resource_70kee")])
-metadata/_custom_type_script = "uid://21kvo5qk8w8q"
-
-[sub_resource type="Resource" id="Resource_6ur8y"]
-script = ExtResource("13_70kee")
-metadata/_custom_type_script = "uid://ccqrq830l8in6"
-
-[sub_resource type="Resource" id="Resource_71cn5"]
-script = ExtResource("12_qqdpo")
-group = Array[ExtResource("13_70kee")]([SubResource("Resource_6ur8y")])
-metadata/_custom_type_script = "uid://21kvo5qk8w8q"
-
-[sub_resource type="Resource" id="Resource_8osb4"]
-script = ExtResource("14_dwkwo")
-action = "left"
-complex = Array[ExtResource("12_qqdpo")]([SubResource("Resource_dwkwo"), SubResource("Resource_71cn5")])
-power = true
-metadata/_custom_type_script = "uid://rssqt7kxsel6"
-
-[sub_resource type="Resource" id="Resource_rtjit"]
-script = ExtResource("14_dwkwo")
-action = "right"
-complex = Array[ExtResource("12_qqdpo")]([ExtResource("13_qqdpo"), SubResource("Resource_dwkwo")])
-metadata/_custom_type_script = "uid://rssqt7kxsel6"
-
-[sub_resource type="Resource" id="Resource_og6cd"]
-script = ExtResource("14_dwkwo")
-action = "forward"
-complex = Array[ExtResource("12_qqdpo")]([ExtResource("13_qqdpo"), SubResource("Resource_dwkwo")])
-metadata/_custom_type_script = "uid://rssqt7kxsel6"
-
-[sub_resource type="Resource" id="Resource_g2bcl"]
-script = ExtResource("14_dwkwo")
-action = "backward"
-complex = Array[ExtResource("12_qqdpo")]([ExtResource("13_qqdpo"), SubResource("Resource_dwkwo")])
-metadata/_custom_type_script = "uid://rssqt7kxsel6"
+[ext_resource type="Resource" uid="uid://cv8s1ymmr3n3g" path="res://asset/resource/input/move_left.tres" id="12_pyhnh"]
+[ext_resource type="Resource" uid="uid://dhu76eu1s3mjl" path="res://asset/resource/input/move_right.tres" id="13_hjasl"]
+[ext_resource type="Resource" uid="uid://cwxp8ekcmoam8" path="res://asset/resource/input/move_up.tres" id="14_6ur8y"]
+[ext_resource type="Resource" uid="uid://c5gjpycik656m" path="res://asset/resource/input/move_down.tres" id="15_71cn5"]
 
 [node name="move" type="Node"]
 script = ExtResource("1_adfp2")
@@ -67,6 +19,10 @@ script = ExtResource("1_adfp2")
 
 [node name="device" type="Node" parent="."]
 script = ExtResource("3_ee4g3")
+left = ExtResource("12_pyhnh")
+right = ExtResource("13_hjasl")
+forward = ExtResource("14_6ur8y")
+backward = ExtResource("15_71cn5")
 
 [node name="mouse" type="Node" parent="device"]
 script = ExtResource("4_4teyq")
@@ -79,27 +35,3 @@ script = ExtResource("5_gt8wn")
 
 [node name="antistuck" type="Node" parent="device/mouse/target"]
 script = ExtResource("6_uq0hi")
-
-[node name="keyboard" type="Node" parent="device"]
-script = ExtResource("7_uy7ta")
-
-[node name="input" type="Node" parent="device/keyboard"]
-script = ExtResource("9_gt8wn")
-
-[node name="x" type="Node" parent="device/keyboard/input"]
-script = ExtResource("9_4teyq")
-
-[node name="left" parent="device/keyboard/input/x" instance=ExtResource("9_ee4g3")]
-actions = SubResource("Resource_8osb4")
-
-[node name="right" parent="device/keyboard/input/x" instance=ExtResource("9_ee4g3")]
-actions = SubResource("Resource_rtjit")
-
-[node name="y" type="Node" parent="device/keyboard/input"]
-script = ExtResource("9_4teyq")
-
-[node name="left" parent="device/keyboard/input/y" instance=ExtResource("9_ee4g3")]
-actions = SubResource("Resource_og6cd")
-
-[node name="right" parent="device/keyboard/input/y" instance=ExtResource("9_ee4g3")]
-actions = SubResource("Resource_g2bcl")

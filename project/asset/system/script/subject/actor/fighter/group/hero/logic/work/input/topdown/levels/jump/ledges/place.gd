@@ -19,8 +19,4 @@ func _side(axis: int, align: Callable) -> Callable:
 			return align.call(ledge[axis], state.position[axis])
 
 func decide(hero: CharacterBody2D, axis: int) -> Array[Callable]:
-	return [
-		_side(axis, _between),
-		_side(axis, _more),
-		_side(axis, _less)
-	]
+	return [_side(axis, _between), _side(axis, _more), _side(axis, _less)]

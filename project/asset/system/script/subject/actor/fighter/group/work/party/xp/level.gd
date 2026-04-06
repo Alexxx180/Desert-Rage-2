@@ -1,6 +1,4 @@
-extends RefCounted
-
-class_name LevelUpXP
+class_name LevelUpXP extends RefCounted
 
 var multiply: Timer
 var priority: PlayerXP = PlayerXP.new()

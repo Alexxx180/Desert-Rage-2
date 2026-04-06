@@ -1,6 +1,6 @@
-extends RefCounted
+class_name Works extends RefCounted
 
-class_name Works
+# Works.upload(self, _music, "res://asset/system/scene/subject/actor/group/music.tscn", "music")
 
 static func turn(holder: Node, condition: bool) -> void:
 	holder.process_mode = Node.PROCESS_MODE_INHERIT if condition else Node.PROCESS_MODE_DISABLED

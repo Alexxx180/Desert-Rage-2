@@ -12,6 +12,6 @@ func make_position(motion: Vector2) -> void: position = motion
 func update_stats() -> void:
 	$logic.update_stats()
 
-func controls(root: LevelRoot) -> void:
+func controls() -> void:
 	to.topdown.actions.board.s("group", group)
-	logic.link.controls(root, self)
+	logic.link.controls(self)

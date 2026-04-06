@@ -1,7 +1,5 @@
 extends Node
 
-@onready var particle: PackedScene = preload("res://asset/system/scene/subject/particle/rain.tscn")
-
 var conductor: FlowConductor
 
 func diffusion(map_coords: Vector2i) -> void:
@@ -10,7 +8,7 @@ func diffusion(map_coords: Vector2i) -> void:
 	if tile.charge: conductor.puddle_flow(map_coords)
 
 func watering(_direction: Vector2i) -> void:
-	conductor.rain_particle(particle.instantiate())
+	conductor.rain_particle(Defaults.pre.rain.instantiate())
 	diffusion(conductor.root.execute.tcoords)
 
 func activate(pos: Vector2, direction: Vector2i) -> void:

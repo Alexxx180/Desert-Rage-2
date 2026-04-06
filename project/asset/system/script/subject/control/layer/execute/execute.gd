@@ -10,7 +10,7 @@ var _dialog: Label = null
 var dialog: Label:
 	get:
 		if _dialog == null:
-			_dialog = preload("res://asset/system/scene/subject/actor/npc/dialog.tscn").instantiate()
+			_dialog = Defaults.pre.dialog.instantiate()
 			add_child(_dialog)
 		return _dialog
 

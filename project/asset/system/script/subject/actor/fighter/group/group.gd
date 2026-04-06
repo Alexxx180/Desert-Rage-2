@@ -1,12 +1,18 @@
 extends Node2D
 
-@export var is_overworld: bool = false
-@export var deployed: bool = true
 @onready var camera: Camera2D = $camera
 @onready var xp: Node = $xp
 @onready var initial: Vector2 = position
 
-var _root: LevelRoot
+@export_group("Deployment")
+@export var is_overworld: bool = false
+@export var deployed: bool = true
+@export var casual_mode: bool = false
+@export_group("Enemies")
+@export_flags_3d_physics var monsters: int
+@export_flags_3d_navigation var bosses: int
+
+var root: LevelRoot
 var _ray: CharacterBody2D = null
 var ray: CharacterBody2D:
 	get: return upload_hero(_ray, "ray")
@@ -26,16 +32,19 @@ var party: Array[CharacterBody2D]:
 var leader: CharacterBody2D: get = get_leader
 var follower: CharacterBody2D: get = get_follower
 
-func controls(root: LevelRoot) -> void: _root = root
+func controls(_root: LevelRoot) -> void:
+	root = root
+	deploy.init(self, deployed)
+	if is_overworld: camera.set_overworld()
 
 func upload_hero(ref: CharacterBody2D, caption: String) -> CharacterBody2D:
 	if ref == null:
 		ref = load("res://asset/system/scene/subject/actor/group/hero/%s/%s.tscn" % [caption, caption]).instantiate()
 		ref.name = caption
 		ref.update_stats()
-		ref.controls(_root)
 		set("_" + caption, ref)
 		add_child(ref)
+		ref.controls()
 	return ref
 
 func get_leader() -> CharacterBody2D: return party[deploy.main]
@@ -52,9 +61,7 @@ func traverse(node: Node, hero: CharacterBody2D):
 		remove_child(camera)
 	hero.add_child(camera)
 
-func _ready() -> void:
-	deploy.init(self, deployed)
-	if is_overworld: camera.set_overworld()
+func _ready() -> void: get_parent().set_script(Defaults.pre.root)
 
 func is_hud_opened() -> bool:
 	var result: bool = true

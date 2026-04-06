@@ -2,11 +2,7 @@ extends SoundtrackLeaf
 
 @onready var title: Label = $title/caption
 
-#var event: String
-var event: Dictionary = {
-	"id": 0,
-	"name": ""
-}
+var event: Dictionary = { "id": 0, "name": "" } # var event: String
 
 func set_title(entity: String) -> void:
 	title.text = entity

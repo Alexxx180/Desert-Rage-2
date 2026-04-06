@@ -1,6 +1,7 @@
-extends RefCounted
+class_name MakeStats extends RefCounted
 
-class_name MakeStats
+signal update_exp(value: Vector2i, base: int)
+signal update_priorities(level: Node, stats: Dictionary)
 
 enum STAT { POWER = 0, INFLUENCE = 1, VITALITY = 2, REACTION = 3, HP = 4, AP = 5, MAX = 6 }
 enum PRIORITIES { PURSUIT = 0, SELF_CONTROL = 1, TENACITY = 2 }
@@ -10,12 +11,10 @@ const BASE: Dictionary = { "ray": [1, 2, 0, 2, 100, 20], "rock": [2, 1, 1, 1, 10
 
 var level: LevelUpXP
 
-func _init(multiply: Timer) -> void:
-	level = LevelUpXP.new(multiply)
+func _init(multiply: Timer) -> void: level = LevelUpXP.new(multiply)
 
 func make_priorities(priorities: Array, values: Array) -> void:
-	for i in range(0, len(priorities)):
-		MakeStats.stats(values, Vector2i(i, priorities[i]))
+	for i in range(0, len(priorities)): stats(values, Vector2i(i, priorities[i]))
 
 func calculate(heroes: Dictionary) -> Dictionary:
 	var values: Dictionary = {}
@@ -23,6 +22,17 @@ func calculate(heroes: Dictionary) -> Dictionary:
 		values[hero] = BASE[hero].duplicate()
 		make_priorities(heroes[hero].of, values[hero])
 	return values
+
+func current_stats() -> Dictionary: return calculate(level.summary.hero)
+
+func sync() -> void: sync_stats() ; experience()
+func experience() -> void: update_exp.emit(level.get_exp(), level.priority.base_xp)
+func sync_stats() -> void: # var prior: Dictionary = { "summary": level.summary, "prev": level.prev }
+	update_priorities.emit(level, { "stats": current_stats(), "prev": calculate(level.prev.hero) })
+
+func add_exp(amount: int) -> void: # print("XP: ", amount, " x %.f" % multiply.last.y, " = ", roundi(amount * multiply.last.y))
+	if level.circle_level_up(amount): sync_stats()
+	experience()
 
 static func _points(stat: Array, add: Array, pts: Array) -> void:
 	stat[pts[0]] += add[pts[1]] * 2 + add[pts[2]]

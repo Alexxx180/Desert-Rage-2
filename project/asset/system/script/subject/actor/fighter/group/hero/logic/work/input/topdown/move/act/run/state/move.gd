@@ -1,4 +1,4 @@
-extends Node
+class_name SpeedRangeATB extends RefCounted
 
 enum { WALK = 1, RUN = 2, DELAY = 5 } # ACTION = 20, 
 

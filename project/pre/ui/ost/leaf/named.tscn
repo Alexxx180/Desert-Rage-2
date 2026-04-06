@@ -1,0 +1,68 @@
+[gd_scene load_steps=5 format=3 uid="uid://daaivgxtkwjjj"]
+
+[ext_resource type="Script" uid="uid://dj854l6loycaa" path="res://asset/system/script/object/image/view/ui/menu/sound/detector/dropdown/tree/leaf/named.gd" id="1_xh2ga"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_411qc"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 23.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_v0ahc"]
+content_margin_left = 8.0
+content_margin_right = 6.0
+content_margin_bottom = 8.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v0ahc"]
+content_margin_left = 5.0
+content_margin_right = 5.0
+bg_color = Color(0, 0, 0, 1)
+
+[node name="leaf" type="Button"]
+custom_minimum_size = Vector2(150, 50)
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_411qc")
+text = "Ambient theme 1"
+script = ExtResource("1_xh2ga")
+
+[node name="metadata" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -17.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.589096, 0.589096, 0.589096, 1)
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxEmpty_v0ahc")
+text = "C:\\Your\\path\\to\\theme.ogg"
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="title" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = -8
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 0
+
+[node name="caption" type="Label" parent="title"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxFlat_v0ahc")
+text = "Spider"

@@ -3,10 +3,7 @@ extends HBoxContainer
 @onready var leaf: Button = $leaf
 @onready var active: Button = $active
 
-var event: Dictionary = {
-	"id": 0,
-	"name": ""
-}
+var event: Dictionary = { "id": 0, "name": "" }
 
 func set_track_metadata(track: String) -> void:
 	leaf.set_metadata(track)

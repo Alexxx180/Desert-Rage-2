@@ -1,14 +1,15 @@
-extends Node
+extends Timer
 
-@onready var timing: ActionTimer = $timing
-@onready var state: Node = $state
-@onready var walk: Timer = $walk
+var state: SpeedRangeATB = SpeedRangeATB.new()
+var timing: ActionTimer = ActionTimer.new()
+
+func _physics_process(delta: float) -> void:
+	timing.play(delta)
 
 func _ready() -> void:
-	state.atb.timing = timing
-	state.atb.walking = walk
+	state.atb.walking = self
 	timing.timeout.connect(tick)
-	walk.timeout.connect(state.atb.walk)
+	timeout.connect(state.atb.walk)
 	# timing.start()
 
 func set_direction(motion: Vector2) -> void:

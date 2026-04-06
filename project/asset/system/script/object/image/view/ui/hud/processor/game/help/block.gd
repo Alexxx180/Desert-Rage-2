@@ -1,14 +1,11 @@
 extends Node
 
-@onready var _chat: PackedScene = preload("res://asset/system/scene/object/canvas/ui/hud/detector/game/preview/log/chat.tscn")
-# @onready var _logs: PackedScene = preload("res://asset/system/scene/object/canvas/ui/hud/detector/game/preview/log/item.tscn")
-
 var hud: VBoxContainer
 var panel: VBoxContainer
 var emotion: Array = []
 
 func chat(who: String, key: String):
-	var statement: Label = _chat.instantiate()
+	var statement: Label = Defaults.pre.chat.instantiate()
 	statement.say(who, key)
 	return statement
 

@@ -1,0 +1,71 @@
+[gd_scene load_steps=16 format=3 uid="uid://chvprd662tx56"]
+
+[ext_resource type="Script" uid="uid://cx2ai5ggi1bfv" path="res://asset/system/script/subject/actor/fighter/enemy/enemy.gd" id="1_llum4"]
+[ext_resource type="PackedScene" uid="uid://betuc6opsy7to" path="res://asset/system/scene/subject/actor/enemy/asset/eye_seeker/view.tscn" id="2_652rx"]
+[ext_resource type="Script" uid="uid://bc7flucmcsdk1" path="res://asset/system/script/subject/actor/fighter/enemy/logic/logic.gd" id="3_fe4yh"]
+[ext_resource type="Resource" uid="uid://b7sl70n5frv80" path="res://asset/resource/media/data/stats/enemy/eye-seeker.tres" id="4_01fg4"]
+[ext_resource type="Script" uid="uid://cvtwuovpwj8dr" path="res://asset/system/script/subject/actor/fighter/enemy/logic/detector/detector.gd" id="5_7j6o4"]
+[ext_resource type="PackedScene" uid="uid://18yjilbfmwhk" path="res://asset/system/scene/subject/actor/enemy/fight/fight.tscn" id="6_u8ia6"]
+[ext_resource type="PackedScene" uid="uid://ehv6yrrtue21" path="res://asset/system/scene/subject/actor/enemy/path/single_dimension/detector.tscn" id="7_q2al0"]
+[ext_resource type="Script" uid="uid://dg25pv4t0434y" path="res://asset/system/script/subject/actor/fighter/enemy/logic/processor/processor.gd" id="8_5g7pr"]
+[ext_resource type="Script" uid="uid://dk7j1m805k50a" path="res://asset/system/script/subject/actor/fighter/enemy/path/path.gd" id="9_x3yhb"]
+[ext_resource type="PackedScene" uid="uid://duacg3ub01lss" path="res://asset/system/scene/subject/actor/enemy/path/single_dimension/processor.tscn" id="10_45v5t"]
+[ext_resource type="PackedScene" uid="uid://b460ne4ouhshc" path="res://asset/system/scene/object/canvas/util/health/aura.tscn" id="11_xqnuv"]
+[ext_resource type="Script" uid="uid://cydn744kmched" path="res://asset/system/script/subject/actor/fighter/enemy/logic/processor/damagebox.gd" id="12_3rx7j"]
+[ext_resource type="Script" uid="uid://bgganavb8l02t" path="res://asset/system/script/subject/actor/fighter/enemy/logic/relation/relation.gd" id="13_c4jcr"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_d13e7"]
+radius = 40.1123
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iv0jw"]
+size = Vector2(64, 49)
+
+[node name="eye-seeker" type="CharacterBody2D" groups=["enemy"]]
+collision_layer = 4
+collision_mask = 1048576
+script = ExtResource("1_llum4")
+
+[node name="geometry" type="CollisionShape2D" parent="."]
+position = Vector2(0, -25)
+shape = SubResource("CircleShape2D_d13e7")
+
+[node name="view" parent="." instance=ExtResource("2_652rx")]
+
+[node name="logic" type="Node2D" parent="."]
+script = ExtResource("3_fe4yh")
+stats = ExtResource("4_01fg4")
+
+[node name="detector" type="Node2D" parent="logic"]
+script = ExtResource("5_7j6o4")
+
+[node name="fight" parent="logic/detector" instance=ExtResource("6_u8ia6")]
+
+[node name="path" parent="logic/detector" instance=ExtResource("7_q2al0")]
+
+[node name="box" type="Area2D" parent="logic/detector"]
+collision_layer = 0
+collision_mask = 16
+
+[node name="geometry" type="CollisionShape2D" parent="logic/detector/box"]
+position = Vector2(0, 9.5)
+shape = SubResource("RectangleShape2D_iv0jw")
+debug_color = Color(0.628918, 0.427086, 0.81446, 0.42)
+
+[node name="processor" type="Node" parent="logic"]
+script = ExtResource("8_5g7pr")
+
+[node name="path" type="Node" parent="logic/processor"]
+script = ExtResource("9_x3yhb")
+
+[node name="track" parent="logic/processor/path" instance=ExtResource("10_45v5t")]
+
+[node name="health" parent="logic/processor" instance=ExtResource("11_xqnuv")]
+
+[node name="damagebox" type="Node" parent="logic/processor"]
+script = ExtResource("12_3rx7j")
+
+[node name="timer" type="Timer" parent="logic/processor/damagebox"]
+wait_time = 0.5
+
+[node name="relation" type="Node" parent="logic"]
+script = ExtResource("13_c4jcr")

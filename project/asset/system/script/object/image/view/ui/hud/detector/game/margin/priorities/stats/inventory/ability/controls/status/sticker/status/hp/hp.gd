@@ -6,8 +6,6 @@ extends HBoxContainer
 @onready var rock: ProgressBar = $rock/hp
 @onready var timer: Timer = $timer
 
-var ailments: PackedScene = preload("res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/ability/controls/status/markers/ailments.tscn")
-
 var control: bool:
 	set(value):
 		ray.health.visible = value

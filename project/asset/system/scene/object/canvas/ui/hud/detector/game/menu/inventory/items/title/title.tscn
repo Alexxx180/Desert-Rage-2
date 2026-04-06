@@ -1,14 +1,12 @@
-[gd_scene load_steps=16 format=3 uid="uid://kq7xh4x513e"]
+[gd_scene load_steps=14 format=3 uid="uid://kq7xh4x513e"]
 
 [ext_resource type="Script" uid="uid://chwwxl3w0i1ir" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/topic/items/title/title.gd" id="1_la5xp"]
 [ext_resource type="StyleBox" uid="uid://evyfrkamah1" path="res://asset/resource/ui/theme/style/items/chests/hover.tres" id="2_p5i5m"]
 [ext_resource type="Script" uid="uid://bwl1i8618qbpw" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/topic/items/item/product/product.gd" id="3_eiur7"]
+[ext_resource type="PackedScene" uid="uid://bn2dd80xcv3py" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/items/content.tscn" id="4_ms26y"]
 [ext_resource type="Script" uid="uid://chkm0rdvgawjk" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/topic/items/title/workspace/workspace.gd" id="5_2cexs"]
-[ext_resource type="Script" uid="uid://bfgqhrldu4kbx" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/topic/items/item/product/craft.gd" id="5_84i35"]
-[ext_resource type="Script" uid="uid://c0o6pslklkxuw" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/topic/items/item/content/view/view.gd" id="5_eiur7"]
 [ext_resource type="StyleBox" uid="uid://bev4u886yv13b" path="res://asset/resource/ui/theme/style/tag/tag-blank.tres" id="5_ms26y"]
 [ext_resource type="StyleBox" uid="uid://cht8hrroa75bg" path="res://asset/resource/ui/theme/style/tag/tag-button.tres" id="5_p5i5m"]
-[ext_resource type="Texture2D" uid="uid://rdsdp3be1k17" path="res://asset/resource/media/image/inventory/weapon/firearm/schofield45-colt.svg" id="7_2g076"]
 [ext_resource type="PackedScene" uid="uid://ctk77pb6b6woe" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/items/title/stack/stack.tscn" id="7_la5xp"]
 [ext_resource type="Script" uid="uid://b472xs64m4wbd" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/topic/items/title/workspace/cancel.gd" id="8_ms26y"]
 
@@ -32,48 +30,12 @@ script = ExtResource("1_la5xp")
 [node name="slot" type="Button" parent="."]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
-theme_override_styles/hover = ExtResource("2_p5i5m")
 theme_override_styles/normal = SubResource("StyleBoxTexture_mya2s")
+theme_override_styles/hover = ExtResource("2_p5i5m")
 script = ExtResource("3_eiur7")
 
-[node name="margin" type="MarginContainer" parent="slot"]
+[node name="image" parent="slot" instance=ExtResource("4_ms26y")]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 3
-theme_override_constants/margin_top = 2
-theme_override_constants/margin_right = 3
-theme_override_constants/margin_bottom = 2
-script = ExtResource("5_84i35")
-
-[node name="view" type="Control" parent="slot/margin"]
-layout_mode = 2
-mouse_filter = 2
-script = ExtResource("5_eiur7")
-
-[node name="image" type="TextureRect" parent="slot/margin/view"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-expand_mode = 1
-
-[node name="both" type="TextureRect" parent="slot/margin/view"]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("7_2g076")
-expand_mode = 1
-flip_h = true
 
 [node name="workspace" type="PanelContainer" parent="."]
 layout_mode = 2
@@ -82,8 +44,8 @@ script = ExtResource("5_2cexs")
 
 [node name="cancel" type="Button" parent="workspace"]
 layout_mode = 2
-theme_override_styles/hover = ExtResource("5_p5i5m")
 theme_override_styles/normal = ExtResource("5_ms26y")
+theme_override_styles/hover = ExtResource("5_p5i5m")
 script = ExtResource("8_ms26y")
 
 [node name="stack" parent="workspace" instance=ExtResource("7_la5xp")]

@@ -2,9 +2,12 @@ extends Timer
 
 @onready var board: BehaviorBlackboard = $board
 
-@onready var punch = preload("res://asset/system/scene/subject/particle/fight/punch.tscn")
-@onready var kick = preload("res://asset/system/scene/subject/particle/fight/kick.tscn")
-@onready var combos = preload("res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/ability/controls/status/markers/combo.tscn")
+var punch: PackedScene:
+	get: return Defaults.pre.punch
+var kick: PackedScene:
+	get: return Defaults.pre.kick
+var combos: PackedScene:
+	get: return Defaults.pre.combos
 
 var _behavior: BehaviorTree = null
 var behavior: BehaviorTree:# = $behavior
@@ -12,11 +15,6 @@ var behavior: BehaviorTree:# = $behavior
 
 var combo: Node
 
-func _ready() -> void:
-	timeout.connect(reset_combo)
-
-func reset_combo() -> void:
-	board.g("combo").query.clear()
-
-func tick() -> void:
-	behavior.tick(self, board)
+func _ready() -> void: timeout.connect(reset_combo)
+func reset_combo() -> void: board.g("combo").query.clear()
+func tick() -> void: behavior.tick(self, board)

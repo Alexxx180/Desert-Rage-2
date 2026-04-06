@@ -1,4 +1,4 @@
-extends Node
+class_name ActionsSwitch extends RefCounted
 
 signal feedback()
 signal strength_input(power: float)

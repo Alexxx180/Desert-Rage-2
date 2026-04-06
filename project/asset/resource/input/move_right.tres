@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="ActionButtonComplex" load_steps=7 format=3 uid="uid://dhu76eu1s3mjl"]
+
+[ext_resource type="Script" uid="uid://21kvo5qk8w8q" path="res://asset/system/script/object/plugin/stats/split/group.gd" id="1_2140b"]
+[ext_resource type="Resource" uid="uid://t0uwtrhrgv1n" path="res://asset/resource/ui/short/controls/group/powered_single.tres" id="2_34le8"]
+[ext_resource type="Script" uid="uid://ccqrq830l8in6" path="res://asset/system/script/object/plugin/stats/split/button.gd" id="3_p14ed"]
+[ext_resource type="Script" uid="uid://rssqt7kxsel6" path="res://asset/system/script/object/plugin/stats/split/complex.gd" id="4_i10e6"]
+
+[sub_resource type="Resource" id="Resource_70kee"]
+script = ExtResource("3_p14ed")
+id = 2
+metadata/_custom_type_script = "uid://ccqrq830l8in6"
+
+[sub_resource type="Resource" id="Resource_dwkwo"]
+script = ExtResource("1_2140b")
+group = Array[ExtResource("3_p14ed")]([SubResource("Resource_70kee")])
+metadata/_custom_type_script = "uid://21kvo5qk8w8q"
+
+[resource]
+script = ExtResource("4_i10e6")
+action = "right"
+complex = Array[ExtResource("1_2140b")]([ExtResource("2_34le8"), SubResource("Resource_dwkwo")])
+metadata/_custom_type_script = "uid://rssqt7kxsel6"

@@ -21,6 +21,5 @@ func update_stack() -> void:
 
 func update_scroll() -> void:
 	if _scroll == null:
-		var asset: PackedScene = preload("res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/priorities/topic/content.tscn")
-		_scroll = asset.instantiate()
+		_scroll = Defaults.pre.priorities.instantiate()
 		add_child(_scroll)

@@ -13,14 +13,13 @@ signal hold_focus(status: bool)
 var _manual: bool = false
 var released: bool:
 	get: return not _manual
-var _grabber: Texture2D = preload("res://asset/resource/ui/texture/grabber.tres")
 
 func _ready() -> void:
 	caption.text = text
 	value_changed.connect(func(v: int):
 		submit.text = str(v)#str(v, "%")
 		if v == max_value:
-			add_theme_icon_override("grabber", _grabber)
+			add_theme_icon_override("grabber", Defaults.pre.grabber)
 		else:
 			add_theme_icon_override("grabber", Defaults.TEXTURE)
 	)

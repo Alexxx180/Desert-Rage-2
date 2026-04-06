@@ -1,7 +1,5 @@
 extends VBoxContainer
 
-@onready var levels: PackedScene = preload("res://asset/system/scene/object/canvas/ui/hud/detector/game/preview/log/levels/levels.tscn")
-@onready var items: PackedScene = preload("res://asset/system/scene/object/canvas/ui/hud/detector/game/preview/log/item.tscn")
 @onready var scroll: ScrollContainer
 
 func _ready() -> void:
@@ -27,8 +25,8 @@ func add_log(scene: PackedScene, feedback: Callable) -> void:
 
 func set_priority(level: Node, stats: Dictionary) -> void:
 	if level.summary != level.prev:
-		add_log(levels, func(node): node.set_priority(level, stats))
+		add_log(Defaults.pre.levels, func(node): node.set_priority(level, stats))
 
-func add_item(thing: String) -> void: add_log(items, func(n): n.chest(thing))
-func add_enemy(thing: String) -> void: add_log(items, func(n): n.analyze(thing))
-func add_any(thing: String) -> void: add_log(items, func(n): n.say(thing))
+func add_item(thing: String) -> void: add_log(Defaults.pre.item, func(n): n.chest(thing))
+func add_enemy(thing: String) -> void: add_log(Defaults.pre.item, func(n): n.analyze(thing))
+func add_any(thing: String) -> void: add_log(Defaults.pre.item, func(n): n.say(thing))

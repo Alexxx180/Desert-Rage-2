@@ -1,6 +1,4 @@
-extends PanelContainer
-
-@onready var chat: Label = $margin/chat
+extends Label
 
 var items: Array[String] = [
 	"А что нашлось то тут у нас... %s", "%s? Отдавай сундук!",
@@ -10,7 +8,7 @@ var items: Array[String] = [
 	"%s... а подтираться этим можно?"]
 
 func say(message: String, params: Array = []) -> void:
-	chat.text = message % params
+	text = message % params
 
 func chest(item: String) -> void:
 	print("ADD ITEM = ", item)

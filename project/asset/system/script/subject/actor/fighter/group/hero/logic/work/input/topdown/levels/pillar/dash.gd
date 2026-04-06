@@ -24,6 +24,4 @@ func set_offset(next: Node, offset: float) -> void:
 
 func whip_caught(_execute: TileMapLayer) -> void: caught = true
 func whip_left(_execute: TileMapLayer) -> void: caught = false
-
-func rotate_whip(pos: Vector2) -> Vector2:
-	return env.rotate(pos, ledge.offset)
+func rotate_whip(pos: Vector2) -> Vector2: return env.rotate(pos, ledge.offset)

@@ -3,8 +3,6 @@ extends HBoxContainer
 @onready var slot: Label = $slot
 @onready var time: PanelContainer = $time
 
-var stats: PackedScene = preload("res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/ability/controls/topic/status/record/stats.tscn")
-
 var _hits: HBoxContainer = null
 var hits: HBoxContainer:
 	get:
