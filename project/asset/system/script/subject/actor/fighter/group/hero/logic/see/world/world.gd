@@ -1,12 +1,16 @@
-extends Node2D
+extends RayCast2D
 
-@onready var skills: Node2D = $skills
-@onready var ability: Node2D = $ability
-@onready var unique: Area2D = $unique
-@onready var trigger: RayCast2D = $trigger
+@onready var pull: Area2D = $pull
+@onready var ground: Area2D = $ground
+@onready var whip: Area2D = $whip
+
+enum { WHIP = 240, CHAINS = 177 }
 
 func set_direction(direction: Vector2i) -> void:
-	trigger.target_position = Defaults.DIRECTION * direction
-	skills.set_direction(direction)
-	ability.set_direction(direction)
-	unique.set_direction(direction)
+	target_position = Defaults.DIRECTION * direction
+	ground.target_position = target_position
+	pull.position = target_position
+	# -417 MAX for whip (chains)
+# 3 слоя - противники / игрок / ящик / книга (зона) = Entity,
+# плиты / телепортер / пружины /  (зона 2D) = Ground,
+# рычаги / лёд / сундук (рейкаст) = Trigger

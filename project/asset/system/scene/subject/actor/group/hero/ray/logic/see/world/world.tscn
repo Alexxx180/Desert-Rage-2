@@ -1,32 +1,49 @@
-[gd_scene load_steps=6 format=3 uid="uid://drenendoaby3e"]
+[gd_scene load_steps=8 format=3 uid="uid://drenendoaby3e"]
 
 [ext_resource type="Script" uid="uid://bxiq1tuyhthv3" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/see/world/world.gd" id="1_takck"]
-[ext_resource type="PackedScene" uid="uid://bocjcbuk66c25" path="res://asset/system/scene/subject/actor/group/hero/base/logic/see/world/skills.tscn" id="2_atcx5"]
-[ext_resource type="PackedScene" uid="uid://uyqui5q40f3c" path="res://asset/system/scene/subject/actor/group/hero/ray/logic/see/world/ability/ability.tscn" id="3_hcvih"]
+[ext_resource type="PackedScene" uid="uid://c5osnbcikj60l" path="res://asset/system/scene/subject/actor/group/hero/base/logic/see/levels/platform/surface/deploy/deploy.tscn" id="4_1dbca"]
 [ext_resource type="Shape2D" uid="uid://i0icy78wfk8i" path="res://asset/resource/canvas/map/geometry/characters/character/levels.tres" id="4_1jmey"]
-[ext_resource type="Script" uid="uid://cwijybsv8qfx1" path="res://asset/system/script/subject/actor/fighter/group/hero/logic/see/world/skills/skill.gd" id="4_p60fr"]
+[ext_resource type="PackedScene" uid="uid://bph5gk3muj1yw" path="res://asset/system/scene/subject/actor/group/hero/base/logic/see/levels/platform/surface/border/overleap.tscn" id="5_n4f87"]
+[ext_resource type="PackedScene" uid="uid://ce2doowddkex8" path="res://asset/system/scene/subject/actor/group/hero/base/logic/see/world/skills/pull.tscn" id="6_83xjm"]
+[ext_resource type="PackedScene" uid="uid://pakgu76xxntl" path="res://asset/system/scene/subject/actor/group/hero/base/logic/see/levels/platform/ledges.tscn" id="6_vfajm"]
 
-[node name="world" type="Node2D"]
-script = ExtResource("1_takck")
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e0li8"]
+size = Vector2(20, 5.25)
 
-[node name="skills" parent="." instance=ExtResource("2_atcx5")]
-
-[node name="ability" parent="." instance=ExtResource("3_hcvih")]
-visible = false
-
-[node name="unique" type="Area2D" parent="."]
-visible = false
-collision_layer = 0
-collision_mask = 2097152
-script = ExtResource("4_p60fr")
-
-[node name="geometry" type="CollisionShape2D" parent="unique"]
-shape = ExtResource("4_1jmey")
-
-[node name="trigger" type="RayCast2D" parent="."]
+[node name="world" type="RayCast2D"]
 target_position = Vector2(0, 0)
 collision_mask = 16
+script = ExtResource("1_takck")
 
-[node name="ground" type="RayCast2D" parent="."]
-target_position = Vector2(0, 0)
-collision_mask = 8
+[node name="pull" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 0
+
+[node name="geometry" type="CollisionShape2D" parent="pull"]
+shape = ExtResource("4_1jmey")
+
+[node name="ground" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 0
+
+[node name="geometry" type="CollisionShape2D" parent="ground"]
+shape = ExtResource("4_1jmey")
+
+[node name="pulled" parent="." instance=ExtResource("6_83xjm")]
+visible = false
+
+[node name="whip" type="ShapeCast2D" parent="."]
+position = Vector2(0, -177)
+shape = SubResource("RectangleShape2D_e0li8")
+target_position = Vector2(0, -240)
+max_results = 1
+collision_mask = 16
+
+[node name="deploy" parent="." instance=ExtResource("4_1dbca")]
+visible = false
+
+[node name="border" parent="." instance=ExtResource("5_n4f87")]
+visible = false
+
+[node name="ledges" parent="." instance=ExtResource("6_vfajm")]
+visible = false

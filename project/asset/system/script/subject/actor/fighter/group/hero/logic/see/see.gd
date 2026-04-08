@@ -1,6 +1,6 @@
 extends Node2D
 
-@onready var world: Node2D = $world
+@onready var world: RayCast2D = $world
 @onready var levels: Node2D = $levels
 
 var _fight: Node2D = null
