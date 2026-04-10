@@ -1,16 +1,40 @@
 extends RayCast2D
 
-@onready var pull: Area2D = $pull
-@onready var ground: Area2D = $ground
-@onready var whip: Area2D = $whip
+enum { WHIP = 240, CHAINS = 177 } # -417 MAX for whip (chains)
 
-enum { WHIP = 240, CHAINS = 177 }
+@onready var deploy: RayCast2D = $deploy
+
+var _ledges: Area2D = null
+var ledges: Area2D:
+	get: return Works.upload(self, _ledges, Defaults.now.ledges, "ledges")
+
+var _pull: ShapeCast2D = null
+var pull: ShapeCast2D:
+	get: return Works.upload(self, _pull, Defaults.now.pull, "pull")
+
+var _whip: ShapeCast2D = null
+var whip: ShapeCast2D:
+	get: return Works.upload(self, _whip, Defaults.now.whip, "whip")
+
+var _ground: Area2D = null
+var ground: Area2D:
+	get: return Works.upload(self, _ground, Defaults.now.ground, "ground")
+
+var _fight: Node2D = null
+var fight: Node2D:
+	get: return Works.upload(self, _fight, Defaults.now.fight, "fight")
 
 func set_direction(direction: Vector2i) -> void:
 	target_position = Defaults.DIRECTION * direction
-	ground.target_position = target_position
+
+func set_pull() -> void:
 	pull.position = target_position
-	# -417 MAX for whip (chains)
-# 3 слоя - противники / игрок / ящик / книга (зона) = Entity,
-# плиты / телепортер / пружины /  (зона 2D) = Ground,
-# рычаги / лёд / сундук (рейкаст) = Trigger
+
+func set_ground() -> void:
+	ground.target_position = target_position
+
+func set_fight(direction: Vector2i) -> void:
+	fight.set_direction(direction)
+
+func set_whip(direction: Vector2i) -> void:
+	whip.target_position = Def.vec2i(240) * direction

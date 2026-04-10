@@ -1,8 +1,10 @@
-extends Node
+class_name ComboMoves extends RefCounted
 
 const DOUBLE_COMBO: int = 2
 
 var moves: Node
+
+func _init(m: Node) -> void: moves = m
 
 func _get_combo(stand: String) -> String:
 	return "punch_combo" if stand == "hands" else "kick_combo"

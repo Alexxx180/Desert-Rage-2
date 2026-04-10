@@ -1,6 +1,6 @@
 extends Node
 
-func _p() -> String: return "res://asset/system/scene/level/zone/build/tilemap/tags/lockers/ability/%s.tscn"
+func _p() -> String: return Defaults.now.ability
 func update_act(ref: Node, caption: String) -> Node: return Works.upload(self, ref, _p() % caption, caption)
 
 var has_sources: bool = false
@@ -26,8 +26,8 @@ var rain: Node:
 			add_child(_rain)
 		return _rain
 
-var _spark: Node = null
-var spark: Node:
+var _spark: Timer = null
+var spark: Timer:
 	get:
 		if _spark == null:
 			var title: String = "spark"

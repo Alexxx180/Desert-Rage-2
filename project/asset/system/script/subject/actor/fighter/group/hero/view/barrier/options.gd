@@ -27,10 +27,8 @@ func visualize_block(a: ColorRect, b: ColorRect) -> void:
 func _toggle(a: ColorRect, b: ColorRect) -> void: a.hide() ; b.show()
 
 func shows(axis: float, a: ColorRect, b: ColorRect) -> void:
-	if axis < 0:
-		_toggle(b, a)
-	elif axis > 0:
-		_toggle(a, b)
+	if axis < 0: _toggle(b, a)
+	elif axis > 0: _toggle(a, b)
 	else:
 		for i in [a, b]: i.hide()
 

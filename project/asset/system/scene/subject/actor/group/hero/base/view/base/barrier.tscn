@@ -1,54 +1,20 @@
-[gd_scene load_steps=4 format=3 uid="uid://3pyu7p5tvaj5"]
+[gd_scene load_steps=3 format=3 uid="uid://3pyu7p5tvaj5"]
 
 [ext_resource type="Script" uid="uid://ddw0vhlortumr" path="res://asset/system/script/subject/actor/fighter/group/hero/view/barrier/barrier.gd" id="1_reklp"]
-[ext_resource type="Script" uid="uid://b8fjx8xmt01db" path="res://asset/system/script/subject/actor/fighter/group/hero/view/barrier/options.gd" id="2_edrp8"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ktvrt"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ej5ei"]
 
-[node name="barrier" type="VBoxContainer"]
-offset_left = -30.0
-offset_top = -110.0
-offset_right = 30.0
-offset_bottom = 12.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 0
+[node name="select" type="Button"]
+custom_minimum_size = Vector2(90, 130)
+offset_right = 90.0
+offset_bottom = 130.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ej5ei")
 script = ExtResource("1_reklp")
 
-[node name="up" type="ColorRect" parent="."]
-visible = false
+[node name="barrier" type="ColorRect" parent="."]
 modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(2, 2)
-layout_mode = 2
-color = Color(1, 1, 0.588235, 1)
-
-[node name="options" type="HBoxContainer" parent="."]
-layout_mode = 2
-theme_override_constants/separation = 0
-script = ExtResource("2_edrp8")
-
-[node name="left" type="ColorRect" parent="options"]
-visible = false
-modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(2, 2)
-layout_mode = 2
-color = Color(1, 1, 0.588235, 1)
-
-[node name="select" type="Button" parent="options"]
-custom_minimum_size = Vector2(90, 130)
-layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxEmpty_ktvrt")
-
-[node name="right" type="ColorRect" parent="options"]
-visible = false
-modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(2, 2)
-layout_mode = 2
-color = Color(1, 1, 0.588235, 1)
-
-[node name="down" type="ColorRect" parent="."]
-visible = false
-modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(2, 2)
-layout_mode = 2
+layout_mode = 1
+offset_right = 2.0
+offset_bottom = 2.0
 color = Color(1, 1, 0.588235, 1)

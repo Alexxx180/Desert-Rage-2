@@ -1,7 +1,5 @@
 extends Node
 
-@onready var layers: Lay = Lay.new()
-
 func update_act(ref: Node, caption: String, path: String = caption) -> Node:
 	return Works.upload(self, ref, "res://asset/system/scene/subject/actor/group/hero/base/logic/work/world/%s.tscn" % path, caption)
 

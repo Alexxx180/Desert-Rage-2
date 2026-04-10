@@ -1,6 +1,4 @@
-extends RefCounted
-
-class_name SkillBasis
+class_name SkillBasis extends RefCounted
 
 func _continue_process() -> int: return FAILED
 

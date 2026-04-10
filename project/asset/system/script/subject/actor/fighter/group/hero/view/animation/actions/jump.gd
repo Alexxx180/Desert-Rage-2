@@ -1,6 +1,8 @@
-extends Node
+class_name JumpMoves extends RefCounted
 
 var moves: Node
+
+func _init(m: Node) -> void: moves = m
 
 func _switch_monitoring(sequence_ended: bool) -> void:
 	moves.hero.to.platform.surface.border.turn_monitoring(sequence_ended)

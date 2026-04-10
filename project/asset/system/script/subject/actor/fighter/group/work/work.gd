@@ -1,7 +1,6 @@
 extends Node
 
-func update_act(ref: Node, caption: String) -> Node:
-	return Works.upload(self, ref, "res://asset/system/scene/level/zone/build/tilemap/tags/%s.tscn" % caption, caption)
+func update_act(ref: Node, caption: String) -> Node: return Works.upload(self, ref, Defaults.now.group % caption, caption)
 
 var _stats: MakeStats
 var stats: MakeStats:
@@ -13,9 +12,9 @@ var stats: MakeStats:
 			_stats = MakeStats.new(timer)
 		return _stats
 
-var _recovery: Timer = null
-var recovery: Timer:
-	get: return update_act(_recovery, "recovery")
+var _lockers: Node = null
+var lockers: Node:
+	get: return update_act(_lockers, "lockers")
 
 var _books: Node = null
 var books: Node:
@@ -34,5 +33,4 @@ var transition: Node:
 	get: return update_act(_transition, "transition")
 
 @onready var xp: Node = $xp
-@onready var lockers: Node = $lockers
 # @onready var push: TileMapLayer = get_node("../push")

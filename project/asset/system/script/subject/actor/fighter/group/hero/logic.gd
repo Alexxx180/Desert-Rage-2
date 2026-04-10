@@ -3,7 +3,7 @@ extends Node2D
 var stats: EntityStats
 
 @onready var hero: CharacterBody2D = get_parent()
-@onready var see: Node2D = $see
+@onready var see: RayCast2D = $see
 @onready var work: Node = $work
 @onready var link: Node = $link
 

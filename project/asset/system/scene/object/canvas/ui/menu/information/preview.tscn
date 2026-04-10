@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://dkkdejo26syrt"]
+[gd_scene load_steps=25 format=3 uid="uid://dkkdejo26syrt"]
 
 [ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://asset/resource/ui/theme/patterns/template/menu/settings/topic/footer.tres" id="1_a47ns"]
 [ext_resource type="Shortcut" uid="uid://bgd4ocokxr1wj" path="res://asset/resource/ui/short/cut/pause.tres" id="1_efg1v"]
@@ -14,6 +14,10 @@
 
 [sub_resource type="Shortcut" id="Shortcut_8grwo"]
 events = [ExtResource("2_eu1qy"), ExtResource("3_y8gsi"), ExtResource("4_x5jee")]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1f3t6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8grwo"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eucgb"]
 bg_color = Color(0.0196078, 0.0196078, 0.0196078, 1)
@@ -103,9 +107,14 @@ process_mode = 4
 script = ExtResource("6_gqxn2")
 action = "list_right"
 
-[node name="separator" type="HSeparator" parent="title"]
+[node name="progress" type="ProgressBar" parent="title"]
+custom_minimum_size = Vector2(40, 0)
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxEmpty_1f3t6")
+theme_override_styles/fill = SubResource("StyleBoxFlat_8grwo")
+value = 50.0
+show_percentage = false
 
 [node name="caption" type="Label" parent="title"]
 layout_mode = 2

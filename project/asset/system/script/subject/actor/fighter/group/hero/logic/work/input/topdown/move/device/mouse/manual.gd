@@ -1,6 +1,4 @@
-extends Node
-
-class_name MouseManualControl
+class_name MouseManualControl extends Node
 
 const GAP_ZONE: int = 32
 

@@ -3,27 +3,25 @@ extends Node
 @export var progress: HelpPreview
 
 @onready var game: CanvasLayer = $game
-@onready var settings: CanvasLayer# = $settings
-@onready var information: CanvasLayer# = $information
-@onready var sound: CanvasLayer# = $sound
 
-@onready var group: Node2D  = get_node("../group")
+var _settings: CanvasLayer = null
+var settings: CanvasLayer:
+	get: return Works.upload(self, _settings, Defaults.now.settings, "settings")
+
+var _information: CanvasLayer = null
+var information: CanvasLayer:
+	get: return Works.upload(self, _information, Defaults.now.information, "information")
+
+var _sound: CanvasLayer = null
+var sound: CanvasLayer:
+	get: return Works.upload(self, _sound, Defaults.now.sound, "sound")
 
 func set_group() -> void:
 	SessionStats.save_progress()
 	#group
-	for hero in group.deploy.party.heroes:
-		hero.logic.work.stats.hud.display = game
-	game.set_preview(group, progress)
+	# game.set_preview(group, progress)
 
 func set_transitions() -> String:
-	var hud: Dictionary = {
-		"settings": load("res://asset/system/scene/object/canvas/ui/menu/settings/settings.tscn"),
-		"sound": load("res://asset/system/scene/object/canvas/ui/menu/sound/sound.tscn"),
-		"info": load("res://asset/system/scene/object/canvas/ui/menu/information/information.tscn")
-	}
-	settings = hud.settings.instantiate() # settings
-	add_child(settings)
 	settings.link.controls(game.see)
 	return """
 	game.set_transitions({ "settings": settings,

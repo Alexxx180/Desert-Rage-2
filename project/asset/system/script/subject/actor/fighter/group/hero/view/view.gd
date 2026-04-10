@@ -50,7 +50,7 @@ func _set_invis(invisible: bool) -> void:
 	if invisible: set_aura(Color("FFFFFF7F"), 3)
 	else: set_aura(Color("FFFFFF00"), 0)
 	
-func _go_behind_scene(_curtain: TileMapLayer) -> void: _set_invis(true)
+func _go_behind_scene(_curtain: TileMapLayer) -> void: _set_invis(true) # MOVE & CONNECT TO LINK
 func _go_on_scene(_curtain: TileMapLayer) -> void: _set_invis(false)
 
 func sync_image(hero: Node2D) -> void:

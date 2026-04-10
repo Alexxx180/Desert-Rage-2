@@ -1,8 +1,7 @@
-extends Node
+extends Timer
 
-@onready var stance: Timer = $stance
-@onready var combo: Node = $combo
-@onready var jump: Node = $jump
+@onready var combo: ComboMoves = ComboMoves.new(self)
+@onready var jump: JumpMoves = JumpMoves.new(self)
 
 var hero: CharacterBody2D
 var tree: AnimationTree:
@@ -11,6 +10,7 @@ var tree: AnimationTree:
 var go: Array[String] = ["walk", "run"]
 
 func _ready() -> void:
+	timeout.connect(set_fight_end)
 	combo.moves = self
 	jump.moves = self
 

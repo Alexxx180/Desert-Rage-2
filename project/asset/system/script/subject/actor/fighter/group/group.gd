@@ -23,7 +23,7 @@ var rock: CharacterBody2D:
 
 var _music: Node = null
 var music: Node:
-	get: return Works.upload(self, _music, "res://asset/system/scene/subject/actor/group/music.tscn", "music")
+	get: return Works.upload(self, _music, Defaults.now.music, "music")
 
 var navigation: Array
 var deploy: HeroDeploy = HeroDeploy.new()
@@ -39,7 +39,7 @@ func controls(_root: LevelRoot) -> void:
 
 func upload_hero(ref: CharacterBody2D, caption: String) -> CharacterBody2D:
 	if ref == null:
-		ref = load("res://asset/system/scene/subject/actor/group/hero/%s/%s.tscn" % [caption, caption]).instantiate()
+		ref = load(Defaults.now.hero % [caption, caption]).instantiate()
 		ref.name = caption
 		ref.update_stats()
 		set("_" + caption, ref)

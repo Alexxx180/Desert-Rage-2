@@ -2,7 +2,6 @@ extends Node
 
 var _detector: Area2D
 var _hero: CharacterBody2D
-var category: String = ""
 var tile: TilesBelt = TilesBelt.new(2, 0).add("COMFORTER").add("ADJUSTER").from(2, 3).add("PAGE")
 
 func read_book(execute: TileMapLayer, tile: Dictionary) -> void:
@@ -11,28 +10,23 @@ func read_book(execute: TileMapLayer, tile: Dictionary) -> void:
 		tile.atlas.x += 1
 		Tile.paint(execute, tile)
 
-func set_category(kind) -> void:
-	category = kind
-	_hero.group.work.recovery.recover(_hero, category)
+func recover(kind) -> void: _hero.group.work.recovery.recover(_hero, kind)
 
 func encourage_message() -> void:
 	pass
 
 func determine_static(execute: TileMapLayer) -> void:
-	category = ""
 	var tile: Dictionary = Tile.from_pos(execute, _hero.position + _detector.position)
 	match tile.atlas:
 		tile.AS.PAGE: execute.show_text(tile.coords)
-		tile.AS.COMFORTER: set_category("hp")
-		tile.AS.ADJUSTER: set_category("ap")
+		tile.AS.COMFORTER: recover("hp")
+		tile.AS.ADJUSTER: recover("ap")
 		tile.AS.ENCOURAGER: encourage_message()
 		_: read_book(execute, tile)
 
 func distract(execute: TileMapLayer) -> void:
 	execute.hide_text()
-	if category != "":
-		execute.recovery.stop_recover(_hero, category)
-		category = ""
+	for i in ["hp", "ap"]: execute.recovery.stop_recover(_hero, i)
 
 func controls(hero: CharacterBody2D) -> void:
 	_hero = hero
