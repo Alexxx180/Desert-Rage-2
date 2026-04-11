@@ -7,11 +7,7 @@ enum { WAY = 0, LEDGE = 1 }
 var blackout: BlackoutTransition = BlackoutTransition.new()
 var _ledges: ColorRect = null
 var ledges: ColorRect:
-	get:
-		if _ledges == null:
-			_ledges = load("res://asset/system/scene/object/canvas/change/stairs/down/ledges.tscn").instantiate()
-			add_child(_ledges)
-		return _ledges
+	get: return Works.upload(self, _ledges, Defaults.now.hero % "ledges", "ledges")
 
 func entry_way() -> void: # way.color = Color.BLACK
 	blackout.as_way(way, Color.TRANSPARENT, true)

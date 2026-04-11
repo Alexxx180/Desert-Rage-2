@@ -1,6 +1,7 @@
 extends Timer
 
 @onready var board: BehaviorBlackboard = $board
+@onready var named: String = get_node("../../../../..").name
 
 var punch: PackedScene:
 	get: return Defaults.pre.punch
@@ -11,7 +12,7 @@ var combos: PackedScene:
 
 var _behavior: BehaviorTree = null
 var behavior: BehaviorTree:# = $behavior
-	get: return Works.upload_tree(self, _behavior, "res://asset/system/scene/subject/actor/group/hero/ray/logic/work/input/actions.tscn", "behavior")
+	get: return Works.upload(self, _behavior, Defaults.now.actions % named, "behavior")
 
 var combo: Node
 

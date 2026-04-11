@@ -4,23 +4,17 @@ signal loaded(stack: Container)
 
 var _scroll: ScrollContainer = null
 var scroll: ScrollContainer:
-	get:
-		update_scroll()
-		return _scroll
+	get: return update_scroll()
 
 var _stack: VBoxContainer = null
 var stack: VBoxContainer:
-	get:
-		update_stack()
-		return _stack
+	get: return update_stack()
 
-func update_stack() -> void:
+func update_stack() -> VBoxContainer:
 	if _stack == null:
 		_stack = scroll.get_node("margin/stack")
 		loaded.emit(_stack)
+	return _stack
 
-func update_scroll() -> void:
-	if _scroll == null:
-		var asset: PackedScene = load("res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/ability/content.tscn")
-		_scroll = asset.instantiate()
-		add_child(_scroll)
+func update_scroll() -> ScrollContainer:
+	return Works.upload(self, _scroll, Defaults.now.game % "ability", "ability")

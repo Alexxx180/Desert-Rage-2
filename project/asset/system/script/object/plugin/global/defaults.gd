@@ -7,7 +7,7 @@ const DICT: Dictionary = {}
 const INT: int = -1
 
 static func vec2() -> Array: return [Vector2.AXIS_X, Vector2.AXIS_Y]
-static func vec2i(axis: float) -> Vector2i: return Vector2i(axis, axis)
+static func vec2i(axis: int) -> Vector2i: return Vector2i(axis, axis)
 static func truth(_empty: Object) -> bool: return true # combined with implicit func for readability
 static func FUNC(): pass
 static func entity(o: CharacterBody2D) -> bool: return o == Defaults.ENTITY
@@ -16,7 +16,8 @@ static func ics(text: String, state: Array = Defaults.ARR) -> Variant: print(tex
 
 @onready var pre: PreloadBus = PreloadBus.new()
 @onready var now: LoadBus = LoadBus.new()
-
+@onready var ost: SoundtrackSystem = SoundtrackSystem.new()
+@onready var session: SessionStats = SessionStats.new(get_tree())
 # @onready var make: Works = Works.new()
 
 @onready var NODE: Node = Node.new()

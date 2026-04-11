@@ -1,8 +1,9 @@
-extends Node
+class_name SessionStats extends RefCounted
 
 const LEVEL: String = "res://asset/system/scene/usable/level/%s/%s/%d/level.tscn"
 const PATH: String = "user://progress.txt"
 
+var tree: SceneTree
 var level: String:
 	get: return LEVEL % [location.name, group_level(), location.part]
 
@@ -11,6 +12,8 @@ var location: Dictionary = {
 	"level": 0, "part": 0,
 	"save": false
 }
+
+func _init(t: SceneTree) -> void: tree = t
 
 func assign(path: String) -> void:
 	var i: int = path.find("-", 1)
@@ -23,7 +26,7 @@ func _file(access: FileAccess.ModeFlags) -> FileAccess:
 	return FileAccess.open(PATH, access)
 
 func load_scene(scene: String) -> void:
-	print_debug(get_tree().change_scene_to_file(scene))
+	print_debug(tree.change_scene_to_file(scene))
 
 func save_progress() -> void:
 	if location.save:

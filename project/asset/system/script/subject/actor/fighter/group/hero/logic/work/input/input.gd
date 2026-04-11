@@ -1,10 +1,11 @@
 extends Node
 
+@onready var named: String = get_node("../../../..").name
+
 var is_platformer: bool = false
 
 func update_act(ref: Node, caption: String) -> Node: return Works.upload(self, ref, Defaults.now.health % caption, caption)
-func upload_act(ref: Node, caption: String) -> Node:
-	return Works.upload(self, ref, "res://asset/system/scene/subject/actor/group/hero/ray/logic/work/input/type/%s.tscn" % caption, caption)
+func upload_act(ref: Node, caption: String) -> Node: return Works.upload(self, ref, Defaults.now.input % [named, "input/" + caption], caption)
 
 var _topdown: Node = null
 var topdown: Node:

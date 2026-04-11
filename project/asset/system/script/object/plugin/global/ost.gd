@@ -1,4 +1,4 @@
-extends Node
+class_name SoundtrackSystem extends RefCounted
 
 signal update()
 
@@ -35,14 +35,11 @@ func get_value(ui: Dictionary, keys: Array) -> Dictionary:
 		context.ui = context.ui[key]
 	return context
 
-func _ready() -> void:
-	_init_vault("music")
+func _ready() -> void: reimport()
 
-func reset() -> void:
-	_init_vault("music", true)
+func reset() -> void: _init_vault("music", true)
 
-func reimport() -> void:
-	_init_vault("music")
+func reimport() -> void: _init_vault("music")
 
 func _set_vault(from: String, to: String, force: bool = false) -> void:
 	Vault.copy(from, to, force)

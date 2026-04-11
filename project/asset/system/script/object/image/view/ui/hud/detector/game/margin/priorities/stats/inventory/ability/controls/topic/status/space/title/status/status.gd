@@ -6,19 +6,11 @@ extends HBoxContainer
 var _hits: HBoxContainer = null
 var hits: HBoxContainer:
 	get:
-		if _hits == null:
-			_hits = load("res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/ability/controls/topic/status/status/hits.tscn").instantiate()
-			slot.add_sibling(_hits)
-		return _hits
+		return Works.upload(self, _hits, Defaults.now.hits, "hits")
 
-var _xp: Control = null
-var xp: Control:
-	get:
-		if _xp == $xp:
-			remove_child(_xp)
-			_xp = load("res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/ability/controls/topic/status/status/xp.tscn").instantiate()
-			add_child(xp)
-		return _xp
+var _xp: Label = null
+var xp: Label:
+	get: return Works.upload(self, _xp, Defaults.now.xp, "xp")
 
 func update_meter(duration: float, mx: float) -> void: xp.update_meter(duration, mx)
 

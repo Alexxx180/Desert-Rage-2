@@ -16,7 +16,7 @@ var mirror: AnimatedSprite2D:
 	get:
 		if _mirror == null:
 			var caption: String = get_parent().name
-			_mirror = load("res://asset/system/scene/subject/actor/group/hero/base/view/%s/mirror.tscn" % caption).instantiate()
+			_mirror = load(Defaults.now.mirror % caption).instantiate()
 			shadow.add_sibling(_mirror)
 		return _mirror
 

@@ -25,6 +25,4 @@ var grabber: GradientTexture2D = preload("res://pre/grabber.tres")
 var root: Script = preload("res://pre/level.gd")
 var _ost: SoundtrackUI = null
 var ost: SoundtrackUI:
-	get:
-		if _ost == null: _ost = SoundtrackUI.new()
-		return _ost
+	get: return Works.lazy(self, SoundtrackUI.new() if _ost == null else _ost, "ost")

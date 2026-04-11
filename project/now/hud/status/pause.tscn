@@ -1,9 +1,9 @@
 [gd_scene load_steps=27 format=3 uid="uid://4y53l713gbfa"]
 
-[ext_resource type="FontFile" uid="uid://o0rgn7d13mr3" path="res://asset/resource/media/data/font/OpenSans-VariableFont_wdth,wght.ttf" id="1_nner8"]
-[ext_resource type="PackedScene" uid="uid://dugyepxewkmgo" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/pause/pause.tscn" id="2_f7d5r"]
-[ext_resource type="FontFile" uid="uid://b2wbdbnkxcqv1" path="res://asset/resource/media/data/font/NotoEmoji-VariableFont_wght.ttf" id="3_5xepp"]
-[ext_resource type="PackedScene" uid="uid://dvdimdxij23df" path="res://asset/system/scene/object/timer/hide/hider/hover/hooder.tscn" id="4_ew5sc"]
+[ext_resource type="FontFile" uid="uid://o0rgn7d13mr3" path="res://asset/resource/media/data/font/OpenSans-VariableFont_wdth,wght.ttf" id="1_v8obx"]
+[ext_resource type="FontFile" uid="uid://b2wbdbnkxcqv1" path="res://asset/resource/media/data/font/NotoEmoji-VariableFont_wght.ttf" id="3_dujwp"]
+[ext_resource type="PackedScene" uid="uid://dvdimdxij23df" path="res://asset/system/scene/object/timer/hide/hider/hover/hooder.tscn" id="4_1qfnv"]
+[ext_resource type="Script" uid="uid://c64ox6llkepp4" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/pause.gd" id="4_ol6hr"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hjbks"]
 content_margin_left = 6.0
@@ -96,7 +96,7 @@ border_color = Color(0.588235, 0.588235, 0.588235, 1)
 [sub_resource type="Theme" id="Theme_f66ty"]
 Button/colors/font_color = Color(0.784314, 0.784314, 0.784314, 1)
 Button/font_sizes/font_size = 20
-Button/fonts/font = ExtResource("1_nner8")
+Button/fonts/font = ExtResource("1_v8obx")
 Button/styles/focus = SubResource("StyleBoxFlat_hjbks")
 Button/styles/hover = SubResource("StyleBoxFlat_qebsx")
 Button/styles/hover_pressed = SubResource("StyleBoxFlat_waa8r")
@@ -111,7 +111,7 @@ HScrollBar/styles/scroll = SubResource("StyleBoxFlat_rqxqw")
 HScrollBar/styles/scroll_focus = SubResource("StyleBoxFlat_ik06k")
 Label/colors/font_color = Color(0.784314, 0.784314, 0.784314, 1)
 Label/font_sizes/font_size = 23
-Label/fonts/font = ExtResource("1_nner8")
+Label/fonts/font = ExtResource("1_v8obx")
 MarginContainer/constants/margin_bottom = 10
 MarginContainer/constants/margin_left = 30
 MarginContainer/constants/margin_right = 30
@@ -141,27 +141,26 @@ offset_right = 128.0
 offset_bottom = 40.0
 theme = SubResource("Theme_f66ty")
 
-[node name="pause" parent="." instance=ExtResource("2_f7d5r")]
-custom_minimum_size = Vector2(40, 30)
+[node name="pause" type="Button" parent="."]
 layout_mode = 2
-size_flags_vertical = 1
-theme_override_fonts/font = ExtResource("3_5xepp")
+theme_override_fonts/font = ExtResource("3_dujwp")
 theme_override_font_sizes/font_size = 25
 theme_override_styles/normal = SubResource("StyleBoxTexture_f66ty")
 text = "⏸️"
+script = ExtResource("4_ol6hr")
 
-[node name="hooder" parent="pause" instance=ExtResource("4_ew5sc")]
+[node name="hooder" parent="pause" instance=ExtResource("4_1qfnv")]
 
 [node name="load" type="Button" parent="."]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("3_5xepp")
+theme_override_fonts/font = ExtResource("3_dujwp")
 theme_override_font_sizes/font_size = 25
 theme_override_styles/normal = SubResource("StyleBoxTexture_f66ty")
 text = "⏮️"
 
 [node name="save" type="Button" parent="."]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("3_5xepp")
+theme_override_fonts/font = ExtResource("3_dujwp")
 theme_override_font_sizes/font_size = 25
 theme_override_styles/normal = SubResource("StyleBoxTexture_f66ty")
 text = "⏏"

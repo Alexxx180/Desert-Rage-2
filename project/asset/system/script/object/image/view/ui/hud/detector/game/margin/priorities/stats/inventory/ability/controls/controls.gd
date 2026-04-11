@@ -5,11 +5,7 @@ extends VBoxContainer
 
 var _hints: VBoxContainer = null
 var hints: VBoxContainer:
-	get:
-		if _hints == null:
-			_hints = load("res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/ability/controls/hints/hints.tscn").instantiate()
-			status.add_sibling(_hints)
-		return _hints
+	get: return Works.upload_at(self, status, _hints, Defaults.now.hints % "hints", "hints")
 
 var control: bool:
 	set(value):

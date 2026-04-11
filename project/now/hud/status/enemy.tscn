@@ -75,18 +75,14 @@ size_flags_vertical = 8
 theme_override_styles/panel = SubResource("StyleBoxFlat_o4ki4")
 script = ExtResource("1_ydy8w")
 
-[node name="content" type="HBoxContainer" parent="."]
-layout_mode = 2
-theme_override_constants/separation = 0
-
-[node name="margin" type="MarginContainer" parent="content"]
+[node name="margin" type="MarginContainer" parent="."]
 layout_mode = 2
 theme_override_constants/margin_left = 0
 theme_override_constants/margin_top = -20
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 20
 
-[node name="caption" type="PanelContainer" parent="content/margin"]
+[node name="caption" type="PanelContainer" parent="margin"]
 custom_minimum_size = Vector2(0, 28)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -94,12 +90,13 @@ size_flags_vertical = 10
 theme_override_styles/panel = SubResource("StyleBoxFlat_05gi3")
 script = ExtResource("2_su5le")
 
-[node name="lamp" type="ColorRect" parent="content/margin/caption"]
+[node name="lamp" type="ColorRect" parent="margin/caption"]
+visible = false
 custom_minimum_size = Vector2(106, 1)
 layout_mode = 2
 size_flags_vertical = 8
 
-[node name="text" type="Label" parent="content/margin/caption"]
+[node name="text" type="Label" parent="margin/caption"]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.462291, 0.462291, 0.462291, 1)
@@ -108,23 +105,30 @@ theme_override_font_sizes/font_size = 16
 theme_override_styles/normal = SubResource("StyleBoxEmpty_veien")
 text = "Гляделкинc"
 
-[node name="back" type="TextureRect" parent="content/margin/caption"]
+[node name="back" type="TextureRect" parent="margin/caption"]
 layout_mode = 2
 texture = SubResource("GradientTexture2D_tveuy")
 
-[node name="timer" type="Timer" parent="content/margin/caption"]
+[node name="timer" type="Timer" parent="margin/caption"]
 wait_time = 0.5
 one_shot = true
 
-[node name="hiding" type="Timer" parent="content/margin/caption"]
+[node name="hiding" type="Timer" parent="margin/caption"]
 wait_time = 0.25
 one_shot = true
 
-[node name="damage" type="Label" parent="content"]
+[node name="margin2" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = -25
+
+[node name="damage" type="Label" parent="margin2"]
 material = SubResource("ShaderMaterial_1dscl")
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
-size_flags_horizontal = 8
+size_flags_horizontal = 0
 theme = SubResource("Theme_tckc4")
 theme_override_colors/font_color = Color(0.588235, 0.588235, 0.588235, 1)
 theme_override_fonts/font = ExtResource("6_0mwta")

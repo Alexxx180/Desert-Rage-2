@@ -4,11 +4,7 @@ extends Node2D
 
 var _fight: Node2D = null
 var fight: Node2D:
-	get:
-		if _fight == null:
-			_fight = load("res://asset/system/scene/subject/actor/group/hero/ray/logic/see/fight/fight.tscn").instantiate()
-			add_child(_fight)
-		return _fight
+	get: return Works.upload(self, _fight, Defaults.now.fight, "fight")
 
 var casual: bool = true
 var dir: Vector2i = Vector2i(0, 1)
