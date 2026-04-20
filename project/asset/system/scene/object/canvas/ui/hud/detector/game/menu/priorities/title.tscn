@@ -1,43 +1,36 @@
-[gd_scene load_steps=2 format=3 uid="uid://bu5vbvvgn1q4d"]
+[gd_scene load_steps=3 format=3 uid="uid://bu5vbvvgn1q4d"]
 
 [ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://asset/resource/ui/theme/patterns/template/menu/settings/topic/footer.tres" id="1_vvrgj"]
 
-[node name="title" type="VBoxContainer"]
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 738.0
-grow_horizontal = 2
-size_flags_horizontal = 3
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vvrgj"]
+content_margin_top = 32.0
 
-[node name="caption" type="Label" parent="."]
-layout_mode = 2
-size_flags_horizontal = 2
-theme_override_font_sizes/font_size = 24
-text = "Приоритеты"
-
-[node name="name" type="RichTextLabel" parent="."]
+[node name="name" type="RichTextLabel"]
 custom_minimum_size = Vector2(50, 0)
-layout_mode = 2
+offset_right = 1152.0
+offset_bottom = 626.0
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.25
 theme = ExtResource("1_vvrgj")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_vvrgj")
 bbcode_enabled = true
 text = " Здесь находятся приоритеты героев. В ходе сражений с противниками вы получаете Очки Пытливости - опыт.
 
 [table=2]
-[cell expand][left][b][i]👉[/i][/b] Достаточное количество, увеличивает выбранный приоритет на 1. Вы можете выбрать любой из трёх для каждого героя в любой момент времени.[/left][/cell][cell][right][b][i]⭐️[/i][/b] Приоритеты не могут быть выше определённого уровня. Как только вы достигаете максимума, ваш герой меняет приоритет.[/right][/cell]
+[cell expand][left][b][i]👉[/i][/b] Достаточное количество, увеличивает выбранный приоритет на 1. Вы можете выбрать любой из трёх для каждого героя в любой момент времени.[/left][/cell][cell][left][b][i]⭐️[/i][/b] Приоритеты не могут быть выше определённого уровня. Как только вы достигаете максимума, ваш герой меняет приоритет.[/left][/cell]
+[cell][/cell][cell] [/cell]
+[cell expand][left][b][i]🎖[/i][/b] Возможность - приводится в действие по событию или закреплена за персонажем насовсем. Например, дополнительный опыт при допытывании.[/left][/cell][cell][left][b][i]⚔️[/i][/b] Способность - приводится в действие во время выполнения комбо - нажатия кнопок, отвечающих за действие, движение героев и их умений.[/left][/cell]
 [/table]
 
-· При повышении вы получаете прирост к определённым показателям, облегчающим ваше положение в следующих битвах.
-
-· Вместе с этим согласно вашим приоритетам вы можете получить уникальный эффект. Уникальные эффекты героев делятся на возможности и способности.
-
-[table=2]
-[cell expand][left][b][i]🎖[/i][/b] Возможность - приводится в действие по событию или закреплена за персонажем насовсем. Например, дополнительный опыт при допытывании.[/left][/cell][cell][right][b][i]⚔️[/i][/b] Способность - приводится в действие во время выполнения комбо - нажатия кнопок, отвечающих за действие, движение героев и их умений.[/right][/cell]
-[/table]
-
-· Подбирайте их с умом. Наличие определённых возможностей и способностей помогают в конкретных ситуациях, а также облегчают ваше прохождение.
-
-· Некоторые способности могут быть приобретены только после чтения книг нужного типа. Ищите книги, чтобы раздвинуть свои возможности."
+· При повышении уровня приоритета вы получаете прирост к определённым показателям, а также уникальные эффекты. Наличие определённых способностей помогает в конкретных ситуациях. Некоторые могут быть приобретены только после чтения книг нужного типа. Ищите книги, чтобы раздвинуть свои возможности."
 fit_content = true
 autowrap_mode = 2
+
+[node name="caption" type="Label" parent="."]
+layout_mode = 1
+offset_right = 152.0
+offset_bottom = 34.0
+size_flags_horizontal = 2
+theme_override_colors/font_color = Color(0.64705884, 0.64705884, 0.64705884, 1)
+theme_override_font_sizes/font_size = 24
+text = "Приоритеты"

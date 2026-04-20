@@ -1,4 +1,4 @@
-extends PanelContainer
+extends Label
 
 @onready var tabs: HBoxContainer = get_parent()
 

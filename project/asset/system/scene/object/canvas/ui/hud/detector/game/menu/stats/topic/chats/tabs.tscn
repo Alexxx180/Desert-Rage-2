@@ -1,19 +1,19 @@
-[gd_scene load_steps=14 format=3 uid="uid://dfygwaahhajot"]
+[gd_scene load_steps=13 format=3 uid="uid://dfygwaahhajot"]
 
 [ext_resource type="FontFile" uid="uid://b37js8y80ak1k" path="res://asset/resource/media/data/font/NotoColorEmoji-Regular.ttf" id="1_uvwqk"]
 [ext_resource type="FontFile" uid="uid://drm0mr2hyapf2" path="res://asset/resource/media/data/font/EmojiOneColor.otf" id="2_aidb4"]
 [ext_resource type="Script" uid="uid://ddnlfc3tie4gs" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/topic/description.gd" id="5_n5hbl"]
 [ext_resource type="Theme" uid="uid://dfyi7rrcrweqx" path="res://asset/resource/ui/theme/patterns/template/menu/settings/settings.tres" id="6_5hlrn"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c036o"]
-content_margin_left = 7.0
-content_margin_top = 6.0
-bg_color = Color(0.0196078, 0.0196078, 0.0588235, 1)
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e06ya"]
 content_margin_left = 7.0
 content_margin_top = 6.0
 bg_color = Color(0.0588235, 0.0588235, 0.0588235, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c036o"]
+content_margin_left = 7.0
+content_margin_top = 6.0
+bg_color = Color(0.0196078, 0.0196078, 0.0588235, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aidb4"]
 content_margin_left = 7.0
@@ -35,10 +35,8 @@ fill_from = Vector2(0, 0.478632)
 fill_to = Vector2(0.482906, 0.474359)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_o0cao"]
-texture = SubResource("GradientTexture2D_21ixm")
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6d5kl"]
 content_margin_left = 15.0
+texture = SubResource("GradientTexture2D_21ixm")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uvwqk"]
 content_margin_left = 5.0
@@ -58,8 +56,8 @@ custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_uvwqk")
 theme_override_font_sizes/font_size = 15
-theme_override_styles/pressed = SubResource("StyleBoxFlat_c036o")
 theme_override_styles/normal = SubResource("StyleBoxFlat_e06ya")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_c036o")
 toggle_mode = true
 text = "🗃️"
 alignment = 0
@@ -69,8 +67,8 @@ custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_uvwqk")
 theme_override_font_sizes/font_size = 15
-theme_override_styles/pressed = SubResource("StyleBoxFlat_c036o")
 theme_override_styles/normal = SubResource("StyleBoxFlat_e06ya")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_c036o")
 toggle_mode = true
 button_pressed = true
 text = "💻"
@@ -81,8 +79,8 @@ custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_uvwqk")
 theme_override_font_sizes/font_size = 15
-theme_override_styles/pressed = SubResource("StyleBoxFlat_c036o")
 theme_override_styles/normal = SubResource("StyleBoxFlat_e06ya")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_c036o")
 toggle_mode = true
 text = "🧪"
 alignment = 0
@@ -106,18 +104,14 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_s12vq")
 text = "❔"
 alignment = 0
 
-[node name="description" type="PanelContainer" parent="."]
+[node name="caption" type="Label" parent="."]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBoxTexture_o0cao")
-script = ExtResource("5_n5hbl")
-
-[node name="caption" type="Label" parent="description"]
-layout_mode = 2
 theme = ExtResource("6_5hlrn")
 theme_override_font_sizes/font_size = 18
-theme_override_styles/normal = SubResource("StyleBoxEmpty_6d5kl")
+theme_override_styles/normal = SubResource("StyleBoxTexture_o0cao")
 text = "Help"
+script = ExtResource("5_n5hbl")
 
 [node name="pin" type="Button" parent="."]
 custom_minimum_size = Vector2(30, 30)

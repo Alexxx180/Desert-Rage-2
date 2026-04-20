@@ -1,7 +1,7 @@
-extends HBoxContainer
+extends Label
 
-@onready var rank: MarginContainer = $rank
-@onready var title: VBoxContainer = $title
+@onready var rank: Label = $rank
+@onready var title: Label = $title
 
 var status: VBoxContainer
 

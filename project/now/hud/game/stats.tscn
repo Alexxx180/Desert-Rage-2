@@ -1,67 +1,85 @@
-[gd_scene load_steps=6 format=3 uid="uid://og4dng4pdpjv"]
+[gd_scene load_steps=11 format=3 uid="uid://7o2xe4bosovy"]
 
-[ext_resource type="Script" uid="uid://b06ntftlpr38h" path="res://asset/system/script/object/image/view/ui/menu/information/card.gd" id="1_5amay"]
-[ext_resource type="StyleBox" uid="uid://c8hy4gq5uksdh" path="res://asset/resource/ui/theme/style/panel/complex/hover.tres" id="2_4b162"]
-[ext_resource type="StyleBox" uid="uid://chr58r7ok2alt" path="res://asset/resource/ui/theme/style/panel/accent.tres" id="3_5wwqx"]
-[ext_resource type="Texture2D" uid="uid://c235aiy60lonn" path="res://asset/resource/media/image/hints/reason/stats.svg" id="4_aijs3"]
-[ext_resource type="PackedScene" uid="uid://kgdwwcc8y85n" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/priorities/topic/research/content/help/cards/common/luggage/stats/showcase.tscn" id="5_5x8t7"]
+[ext_resource type="Script" uid="uid://b3w8ueb7rmpu" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/topic/stack/stack.gd" id="1_pr1y1"]
+[ext_resource type="PackedScene" uid="uid://cddw0qxlba87p" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/inventory/items/bag.tscn" id="2_hk02f"]
+[ext_resource type="PackedScene" uid="uid://cd6olkpfan76j" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/stats/topic/stats/stats.tscn" id="3_y3dd6"]
+[ext_resource type="PackedScene" uid="uid://bi2quqenqmjhk" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/stats/topic/chats/chats.tscn" id="4_dfxp3"]
+[ext_resource type="PackedScene" uid="uid://dfygwaahhajot" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/stats/topic/chats/tabs.tscn" id="5_aj13k"]
 
-[node name="stats" type="Control"]
-custom_minimum_size = Vector2(260, 356)
-layout_mode = 3
-anchors_preset = 0
-size_flags_horizontal = 4
-script = ExtResource("1_5amay")
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qw6gd"]
+bg_color = Color(0.6, 0.6, 0.6, 0.498039)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 
-[node name="collapsed" type="Button" parent="."]
-custom_minimum_size = Vector2(260, 356)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ccjyc"]
+content_margin_left = 4.0
+content_margin_right = 4.0
+bg_color = Color(0.00392157, 0.00392157, 0.00392157, 0.498039)
+
+[sub_resource type="Theme" id="Theme_qw6gd"]
+VScrollBar/styles/grabber = SubResource("StyleBoxFlat_qw6gd")
+VScrollBar/styles/scroll = SubResource("StyleBoxFlat_ccjyc")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pr1y1"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pr1y1"]
+
+[node name="scroll" type="ScrollContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+theme = SubResource("Theme_qw6gd")
+theme_override_styles/panel = SubResource("StyleBoxFlat_pr1y1")
+vertical_scroll_mode = 0
+
+[node name="control" type="Control" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="scroll" type="ScrollContainer" parent="control"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-pivot_offset = Vector2(130, 0)
-theme_override_styles/hover_pressed = ExtResource("2_4b162")
-theme_override_styles/hover = ExtResource("2_4b162")
-theme_override_styles/normal = ExtResource("3_5wwqx")
-
-[node name="margin" type="MarginContainer" parent="collapsed"]
-layout_mode = 2
-offset_right = 260.0
-offset_bottom = 356.0
-theme_override_constants/margin_left = 15
-theme_override_constants/margin_top = 15
-theme_override_constants/margin_right = 15
-theme_override_constants/margin_bottom = 10
-
-[node name="content" type="VBoxContainer" parent="collapsed/margin"]
-layout_mode = 2
-theme_override_constants/separation = 10
-
-[node name="image" type="TextureRect" parent="collapsed/margin/content"]
-layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 3
-texture = ExtResource("4_aijs3")
-expand_mode = 1
+theme_override_styles/panel = SubResource("StyleBoxEmpty_pr1y1")
+horizontal_scroll_mode = 0
 
-[node name="title" type="HBoxContainer" parent="collapsed/margin/content"]
-layout_mode = 2
-theme_override_constants/separation = 10
-
-[node name="left" type="HSeparator" parent="collapsed/margin/content/title"]
+[node name="stack" type="VBoxContainer" parent="control/scroll"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_constants/separation = 20
+script = ExtResource("1_pr1y1")
 
-[node name="caption" type="Label" parent="collapsed/margin/content/title"]
+[node name="bag" parent="control/scroll/stack" instance=ExtResource("2_hk02f")]
 layout_mode = 2
-theme_override_font_sizes/font_size = 14
-text = "HSTT"
 
-[node name="right" type="HSeparator" parent="collapsed/margin/content/title"]
+[node name="stats" parent="control/scroll/stack" instance=ExtResource("3_y3dd6")]
 layout_mode = 2
-size_flags_horizontal = 3
 
-[node name="showcase" parent="." instance=ExtResource("5_5x8t7")]
-layout_mode = 0
-anchors_preset = 0
+[node name="chats" parent="control/scroll/stack" instance=ExtResource("4_dfxp3")]
+layout_mode = 2
+
+[node name="tabs" parent="control" instance=ExtResource("5_aj13k")]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -30.0
+offset_bottom = 0.0
+grow_vertical = 0
+size_flags_vertical = 1
