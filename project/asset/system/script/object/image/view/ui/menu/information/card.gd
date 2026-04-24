@@ -6,22 +6,20 @@ extends Button
 @export var hint: HelpHint
 
 const TIME: float = 0.2
+const MARGIN: String = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
 
-func update_locale() -> void:
-	text = hint.key("T")
+func update_locale(params: Array) -> void:
+	text = hint.key("T") + MARGIN
+	help.text = hint.key("D") % params
 
 func update_hint() -> void:
-	icon.texture = hint.texture
-	update_locale()
-	help.hint = hint
-	help.update_hint(Defaults.ARRAY)
+	image.texture = hint.texture
+	update_locale(Defaults.ARRAY)
 
-func translate(controls: Node) -> void:
-	update_locale()
-	help.translate(controls)
+func translate(_controls: Node) -> void:
+	update_hint() # controls.masked_translate(hint.body)
 
-func get_locale() -> RichTextLabel:
-	return $showcase/margin.caption
+func get_locale() -> RichTextLabel: return help
 
 func _ready() -> void:
 	if hint: update_hint()
@@ -38,7 +36,6 @@ func change_state(prev: CanvasItem, next: CanvasItem) -> Callable:
 		if Def.among(-0.5, x, 0.5) and prev.visible:
 			prev.hide()
 			next.show()
-		# print_debug("TEST : ", x)
 		self.scale = Vector2(abs(x), 1)
 
 func _change_state(prev: CanvasItem, next: CanvasItem) -> void:
