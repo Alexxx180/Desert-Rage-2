@@ -1,4 +1,4 @@
-extends PanelContainer
+extends RichTextLabel
 
 @onready var margin: MarginContainer = $margin
 @onready var showcase: Button = $showcase

@@ -6,6 +6,7 @@ const ARRAY: Array = []
 const DICT: Dictionary = {}
 const INT: int = -1
 
+static func among(from: float, x: float, to: float) -> bool: return (from <= x) and (x <= to)
 static func vec2() -> Array: return [Vector2.AXIS_X, Vector2.AXIS_Y]
 static func vec2i(axis: int) -> Vector2i: return Vector2i(axis, axis)
 static func truth(_empty: Object) -> bool: return true # combined with implicit func for readability

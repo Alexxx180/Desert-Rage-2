@@ -1,14 +1,18 @@
-[gd_scene load_steps=14 format=3 uid="uid://bmmg6xahpkusq"]
+[gd_scene load_steps=15 format=3 uid="uid://bmmg6xahpkusq"]
 
 [ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://asset/resource/ui/theme/patterns/template/menu/settings/topic/footer.tres" id="2_5tx11"]
-[ext_resource type="PackedScene" uid="uid://b10usb1wa67d2" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/preview/books/book.tscn" id="5_chdrm"]
+[ext_resource type="FontFile" uid="uid://dxg5wbmrewk2p" path="res://asset/resource/media/data/font/Lato-Regular.ttf" id="3_swfjr"]
 [ext_resource type="FontFile" uid="uid://b37js8y80ak1k" path="res://asset/resource/media/data/font/NotoColorEmoji-Regular.ttf" id="5_vlu61"]
 [ext_resource type="PackedScene" uid="uid://cdpsykqf6eaa2" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/priorities/topic/research/content/help/help.tscn" id="6_y2jwj"]
+[ext_resource type="FontFile" uid="uid://tledodlx6okb" path="res://asset/resource/media/data/font/LTSuperiorMono-Semibold.otf" id="7_swfjr"]
 [ext_resource type="FontFile" uid="uid://b2wbdbnkxcqv1" path="res://asset/resource/media/data/font/NotoEmoji-VariableFont_wght.ttf" id="8_m5uhw"]
 [ext_resource type="PackedScene" uid="uid://bu5vbvvgn1q4d" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/priorities/title.tscn" id="10_m5uhw"]
-[ext_resource type="StyleBox" uid="uid://evyfrkamah1" path="res://asset/resource/ui/theme/style/items/chests/hover.tres" id="32_y6s2t"]
-[ext_resource type="StyleBox" uid="uid://by6bvf7ens3ul" path="res://asset/resource/ui/theme/style/items/chests/empty.tres" id="33_yw1xc"]
 [ext_resource type="PackedScene" uid="uid://dv268r05flq5" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/preview/log/levels/level/number.tscn" id="36_pqlxk"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_chdrm"]
+content_margin_left = 10.0
+color = Color(0.13143739, 0.052491084, 0.16601008, 1)
+vertical = true
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_j1nxy"]
 content_margin_left = 5.0
@@ -17,9 +21,14 @@ content_margin_left = 5.0
 content_margin_right = 3.0
 content_margin_bottom = 1.0
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_swfjr"]
+content_margin_bottom = 30.0
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_m5uhw"]
+content_margin_bottom = 3.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_toq2e"]
+content_margin_left = 18.0
 content_margin_top = 7.0
 
 [node name="research" type="VBoxContainer"]
@@ -34,57 +43,25 @@ size_flags_stretch_ratio = 0.25
 visible = false
 layout_mode = 2
 
-[node name="books" type="VBoxContainer" parent="."]
-visible = false
+[node name="books" type="RichTextLabel" parent="."]
 layout_mode = 2
-size_flags_vertical = 3
-theme_override_constants/separation = 5
-
-[node name="book" parent="books" instance=ExtResource("5_chdrm")]
-layout_mode = 2
-size_flags_vertical = 8
-
-[node name="book2" parent="books" instance=ExtResource("5_chdrm")]
-layout_mode = 2
-size_flags_vertical = 8
-
-[node name="book3" parent="books" instance=ExtResource("5_chdrm")]
-layout_mode = 2
-size_flags_vertical = 8
-
-[node name="book4" parent="books" instance=ExtResource("5_chdrm")]
-layout_mode = 2
-size_flags_vertical = 8
-
-[node name="book5" parent="books" instance=ExtResource("5_chdrm")]
-layout_mode = 2
-size_flags_vertical = 8
-
-[node name="book6" parent="books" instance=ExtResource("5_chdrm")]
-layout_mode = 2
-size_flags_vertical = 8
-
-[node name="book7" parent="books" instance=ExtResource("5_chdrm")]
-layout_mode = 2
-size_flags_vertical = 8
-
-[node name="book8" parent="books" instance=ExtResource("5_chdrm")]
-layout_mode = 2
-size_flags_vertical = 8
+theme_override_colors/default_color = Color(0.29411766, 0.29411766, 0.29411766, 1)
+theme_override_fonts/normal_font = ExtResource("3_swfjr")
+theme_override_font_sizes/normal_font_size = 22
+theme_override_styles/normal = SubResource("StyleBoxLine_chdrm")
+text = "K2
+K3"
+fit_content = true
 
 [node name="bestiary" type="HFlowContainer" parent="."]
-visible = false
 layout_mode = 2
 theme_override_constants/h_separation = 7
 theme_override_constants/v_separation = 7
 
-[node name="spider" type="Button" parent="bestiary"]
+[node name="spider" type="TextureRect" parent="bestiary"]
 custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
 size_flags_horizontal = 0
-theme_override_styles/normal = ExtResource("33_yw1xc")
-theme_override_styles/hover = ExtResource("32_y6s2t")
-alignment = 0
 
 [node name="height" type="Label" parent="bestiary/spider"]
 custom_minimum_size = Vector2(50, 0)
@@ -96,7 +73,7 @@ size_flags_vertical = 0
 theme = ExtResource("2_5tx11")
 theme_override_font_sizes/font_size = 16
 theme_override_styles/normal = SubResource("StyleBoxEmpty_j1nxy")
-text = "33 cm"
+text = "33 cm "
 text_overrun_behavior = 3
 
 [node name="count" type="Label" parent="bestiary/spider"]
@@ -120,79 +97,69 @@ text = "25"
 horizontal_alignment = 2
 text_overrun_behavior = 3
 
-[node name="title" type="HBoxContainer" parent="bestiary"]
-layout_mode = 2
-theme_override_constants/separation = 7
-
-[node name="number" parent="bestiary/title" instance=ExtResource("36_pqlxk")]
+[node name="number" parent="bestiary" instance=ExtResource("36_pqlxk")]
 layout_mode = 2
 
-[node name="short" type="VBoxContainer" parent="bestiary/title"]
+[node name="effect" type="Label" parent="bestiary"]
 custom_minimum_size = Vector2(230, 0)
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.4
-theme_override_constants/separation = 2
-
-[node name="caption" type="Label" parent="bestiary/title/short"]
-custom_minimum_size = Vector2(120, 0)
-layout_mode = 2
-size_flags_vertical = 0
-theme_override_font_sizes/font_size = 16
-text = "Паук"
-text_overrun_behavior = 3
-
-[node name="effect" type="Label" parent="bestiary/title/short"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-size_flags_horizontal = 3
 size_flags_vertical = 0
 theme = ExtResource("2_5tx11")
 theme_override_constants/line_spacing = -7
-theme_override_font_sizes/font_size = 18
-text = "Крайне полезный противник для приключений."
+theme_override_constants/paragraph_spacing = -2
+theme_override_font_sizes/font_size = 17
+theme_override_styles/normal = SubResource("StyleBoxEmpty_swfjr")
+text = "Паук
+
+Крайне полезный противник для приключений."
 autowrap_mode = 2
 
-[node name="weakness" type="HBoxContainer" parent="bestiary/title/short"]
-layout_mode = 2
-theme_override_constants/separation = 0
-
-[node name="weak" type="Label" parent="bestiary/title/short/weakness"]
-layout_mode = 2
+[node name="weak" type="Label" parent="bestiary/effect"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -22.0
+offset_right = 61.0
+grow_vertical = 0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme = ExtResource("2_5tx11")
 theme_override_constants/line_spacing = -7
 theme_override_fonts/font = ExtResource("8_m5uhw")
-theme_override_font_sizes/font_size = 18
+theme_override_font_sizes/font_size = 16
 theme_override_styles/normal = SubResource("StyleBoxEmpty_m5uhw")
-text = "🍷"
+text = "🍷 🛡"
 
-[node name="weffects" type="Label" parent="bestiary/title/short/weakness"]
-layout_mode = 2
+[node name="skill" type="Label" parent="bestiary/effect/weak"]
+layout_mode = 1
+offset_right = 23.0
+offset_bottom = 29.0
 size_flags_horizontal = 8
 size_flags_vertical = 0
 theme_override_fonts/font = ExtResource("5_vlu61")
+theme_override_font_sizes/font_size = 16
 theme_override_styles/normal = SubResource("StyleBoxEmpty_toq2e")
-text = "🔥"
+text = "🔥 🪨"
 
-[node name="strong" type="Label" parent="bestiary/title/short/weakness"]
+[node name="hero" type="RichTextLabel" parent="bestiary"]
+clip_contents = false
+custom_minimum_size = Vector2(392, 0)
 layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme = ExtResource("2_5tx11")
-theme_override_constants/line_spacing = -7
-theme_override_fonts/font = ExtResource("8_m5uhw")
-theme_override_font_sizes/font_size = 18
-text = "🛡"
-
-[node name="seffects" type="Label" parent="bestiary/title/short/weakness"]
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 0
-theme_override_fonts/font = ExtResource("5_vlu61")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_toq2e")
-text = "🪨"
+size_flags_vertical = 8
+theme_override_colors/default_color = Color(0.3854925, 0.38549247, 0.38549247, 1)
+theme_override_constants/paragraph_separation = 0
+theme_override_fonts/normal_font = ExtResource("7_swfjr")
+theme_override_fonts/bold_font = ExtResource("5_vlu61")
+theme_override_font_sizes/normal_font_size = 12
+theme_override_font_sizes/bold_font_size = 12
+bbcode_enabled = true
+text = "[b]⬆️[/b][b]📈[/b] 1 [b]⚖️[/b] 9 
+[b]⚔[/b] 215 ▰▰[b]🕵️‍♂️[/b]--[b]👨‍🏭[/b]▰
+[b]🛡[/b] 234 [b]🕵️‍♂️[/b]▰▰--
+[b]🔥[/b] 234 [b]👨‍🏭[/b]▰▰--"
+fit_content = true
+scroll_active = false
 
 [node name="title" parent="." instance=ExtResource("10_m5uhw")]
 layout_mode = 2

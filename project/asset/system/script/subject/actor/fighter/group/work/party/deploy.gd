@@ -18,7 +18,7 @@ func set_next() -> void:
 
 func switch_hero(party: Array, show: bool, process: bool) -> void:
 	party[next].visible = show
-	Works.turn(party[next], process)
+	Works.on(party[next], process)
 
 func is_select() -> bool: return _test_input("select", "select")
 func is_group() -> bool: return _test_input("deploy", "group")

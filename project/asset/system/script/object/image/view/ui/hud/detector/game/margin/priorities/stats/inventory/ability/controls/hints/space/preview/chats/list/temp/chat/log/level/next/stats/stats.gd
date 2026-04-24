@@ -1,4 +1,4 @@
-extends MarginContainer
+extends RichTextLabel
 
 @onready var add: MarginContainer = $add
 @onready var next: MarginContainer = $next
