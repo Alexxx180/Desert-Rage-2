@@ -1,63 +1,16 @@
-[gd_scene load_steps=6 format=3 uid="uid://qlgo5b48kj7l"]
+[gd_scene load_steps=3 format=3 uid="uid://qlgo5b48kj7l"]
 
 [ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://asset/resource/ui/theme/patterns/template/menu/settings/topic/footer.tres" id="1_kp0re"]
 
-[sub_resource type="Gradient" id="Gradient_j033k"]
-colors = PackedColorArray(0.0392157, 0.0392157, 0.0392157, 1, 0.0117647, 0.0117647, 0.0117647, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_73pll"]
+bg_color = Color(0, 0, 0, 1)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_a8eoj"]
-gradient = SubResource("Gradient_j033k")
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rl78j"]
-content_margin_left = 6.0
-content_margin_right = 6.0
-texture = SubResource("GradientTexture2D_a8eoj")
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hpps8"]
-
-[node name="description" type="ColorRect"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 1)
-
-[node name="combo" type="Label" parent="."]
+[node name="caption" type="Label"]
 custom_minimum_size = Vector2(30, 0)
-layout_mode = 0
 offset_top = 1.0
-offset_right = 86.0
+offset_right = 139.0
 offset_bottom = 27.0
 theme = ExtResource("1_kp0re")
-theme_override_styles/normal = SubResource("StyleBoxTexture_rl78j")
-text = "Двоечка"
-horizontal_alignment = 2
-
-[node name="combos" type="HBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -69.5
-offset_right = 69.5
-offset_bottom = 28.0
-grow_horizontal = 2
-size_flags_vertical = 0
-
-[node name="caption" type="Label" parent="combos"]
-custom_minimum_size = Vector2(30, 0)
-layout_mode = 2
-theme = ExtResource("1_kp0re")
+theme_override_styles/normal = SubResource("StyleBoxFlat_73pll")
 text = "+ 1% доп. урона"
 horizontal_alignment = 2
-
-[node name="shoot" type="Label" parent="combos"]
-visible = false
-custom_minimum_size = Vector2(30, 0)
-layout_mode = 2
-theme = ExtResource("1_kp0re")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_hpps8")
-text = "🎯"
-horizontal_alignment = 2
-autowrap_mode = 2
