@@ -1,12 +1,18 @@
-[gd_scene load_steps=15 format=3 uid="uid://bmmg6xahpkusq"]
+[gd_scene load_steps=25 format=3 uid="uid://bmmg6xahpkusq"]
 
 [ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://asset/resource/ui/theme/patterns/template/menu/settings/topic/footer.tres" id="2_5tx11"]
+[ext_resource type="StyleBox" uid="uid://cht8hrroa75bg" path="res://asset/resource/ui/theme/style/tag/tag-button.tres" id="2_y2jwj"]
+[ext_resource type="Script" uid="uid://b82g80p2b6kwm" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/hints/bottom/talk/animated.gd" id="3_chdrm"]
 [ext_resource type="FontFile" uid="uid://dxg5wbmrewk2p" path="res://asset/resource/media/data/font/Lato-Regular.ttf" id="3_swfjr"]
 [ext_resource type="FontFile" uid="uid://b37js8y80ak1k" path="res://asset/resource/media/data/font/NotoColorEmoji-Regular.ttf" id="5_vlu61"]
+[ext_resource type="FontFile" uid="uid://qxg3lsudod7p" path="res://asset/resource/media/data/font/Championship.ttf" id="6_xklic"]
 [ext_resource type="PackedScene" uid="uid://cdpsykqf6eaa2" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/priorities/topic/research/content/help/help.tscn" id="6_y2jwj"]
-[ext_resource type="FontFile" uid="uid://tledodlx6okb" path="res://asset/resource/media/data/font/LTSuperiorMono-Semibold.otf" id="7_swfjr"]
 [ext_resource type="FontFile" uid="uid://b2wbdbnkxcqv1" path="res://asset/resource/media/data/font/NotoEmoji-VariableFont_wght.ttf" id="8_m5uhw"]
+[ext_resource type="Texture2D" uid="uid://b2ouvbea4wbsy" path="res://asset/resource/media/image/actors/npc/dialog/ray/look.png" id="8_y2jwj"]
+[ext_resource type="Script" uid="uid://6j3kibb78x2v" path="res://asset/system/script/object/image/view/ui/hud/detector/game/margin/priorities/stats/topic/stack/stats/equipment/stats/bag/hero.gd" id="9_xklic"]
 [ext_resource type="PackedScene" uid="uid://bu5vbvvgn1q4d" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/menu/priorities/title.tscn" id="10_m5uhw"]
+[ext_resource type="FontFile" uid="uid://o0rgn7d13mr3" path="res://asset/resource/media/data/font/OpenSans-VariableFont_wdth,wght.ttf" id="12_36dr4"]
+[ext_resource type="Texture2D" uid="uid://duh8yijfoivq6" path="res://asset/resource/media/image/actors/npc/dialog/rock/diminish/2.png" id="12_y2jwj"]
 [ext_resource type="PackedScene" uid="uid://dv268r05flq5" path="res://asset/system/scene/object/canvas/ui/hud/detector/game/preview/log/levels/level/number.tscn" id="36_pqlxk"]
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_chdrm"]
@@ -31,6 +37,37 @@ content_margin_bottom = 3.0
 content_margin_left = 18.0
 content_margin_top = 7.0
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_36dr4"]
+content_margin_left = 75.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.4745098, 0.4745098, 0.4745098, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_36dr4"]
+content_margin_left = 12.0
+content_margin_top = 99.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6vdyv"]
+bg_color = Color(0.25565878, 0.2556588, 0.25565875, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.06469657, 0.06469653, 0.06469646, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_y2jwj"]
+content_margin_top = 50.0
+
 [node name="research" type="VBoxContainer"]
 anchors_preset = 10
 anchor_right = 1.0
@@ -42,6 +79,18 @@ size_flags_stretch_ratio = 0.25
 [node name="help" parent="." instance=ExtResource("6_y2jwj")]
 visible = false
 layout_mode = 2
+
+[node name="perks" type="HFlowContainer" parent="."]
+visible = false
+layout_mode = 2
+theme_override_constants/h_separation = 7
+theme_override_constants/v_separation = 0
+
+[node name="dealer" type="Button" parent="perks"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.341176, 0.341176, 0.341176, 1)
+theme_override_styles/normal = ExtResource("2_y2jwj")
+text = "Торговец"
 
 [node name="books" type="RichTextLabel" parent="."]
 layout_mode = 2
@@ -59,9 +108,12 @@ theme_override_constants/h_separation = 7
 theme_override_constants/v_separation = 7
 
 [node name="spider" type="TextureRect" parent="bestiary"]
+process_mode = 4
 custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
 size_flags_horizontal = 0
+script = ExtResource("3_chdrm")
+metadata/_custom_type_script = "uid://b82g80p2b6kwm"
 
 [node name="height" type="Label" parent="bestiary/spider"]
 custom_minimum_size = Vector2(50, 0)
@@ -93,12 +145,17 @@ size_flags_vertical = 8
 theme = ExtResource("2_5tx11")
 theme_override_font_sizes/font_size = 16
 theme_override_styles/normal = SubResource("StyleBoxEmpty_jufai")
-text = "25"
+text = "65"
 horizontal_alignment = 2
 text_overrun_behavior = 3
 
 [node name="number" parent="bestiary" instance=ExtResource("36_pqlxk")]
 layout_mode = 2
+text = "[b]🕷[/b] Тип ▰▰-
+[b]⚔[/b] 215 ▰--
+[b]🛡[/b] 234 ▰▰--
+[b]🔥[/b] 215 ▰-
+[b]🫧[/b] 233 ▰▰-"
 
 [node name="effect" type="Label" parent="bestiary"]
 custom_minimum_size = Vector2(230, 0)
@@ -142,24 +199,133 @@ theme_override_font_sizes/font_size = 16
 theme_override_styles/normal = SubResource("StyleBoxEmpty_toq2e")
 text = "🔥 🪨"
 
-[node name="hero" type="RichTextLabel" parent="bestiary"]
-clip_contents = false
-custom_minimum_size = Vector2(392, 0)
+[node name="ray" type="RichTextLabel" parent="bestiary"]
+custom_minimum_size = Vector2(300, 130)
 layout_mode = 2
-size_flags_vertical = 8
-theme_override_colors/default_color = Color(0.3854925, 0.38549247, 0.38549247, 1)
-theme_override_constants/paragraph_separation = 0
-theme_override_fonts/normal_font = ExtResource("7_swfjr")
-theme_override_fonts/bold_font = ExtResource("5_vlu61")
-theme_override_font_sizes/normal_font_size = 12
-theme_override_font_sizes/bold_font_size = 12
-bbcode_enabled = true
-text = "[b]⬆️[/b][b]📈[/b] 1 [b]⚖️[/b] 9 
-[b]⚔[/b] 215 ▰▰[b]🕵️‍♂️[/b]--[b]👨‍🏭[/b]▰
-[b]🛡[/b] 234 [b]🕵️‍♂️[/b]▰▰--
-[b]🔥[/b] 234 [b]👨‍🏭[/b]▰▰--"
-fit_content = true
+size_flags_vertical = 4
+theme_override_colors/default_color = Color(0.3137255, 0.3137255, 0.3137255, 1)
+theme_override_fonts/normal_font = ExtResource("12_36dr4")
+theme_override_font_sizes/normal_font_size = 13
+theme_override_styles/normal = SubResource("StyleBoxFlat_36dr4")
+text = "Рей Брайт
+- Консультант по вопроcам
+
+У вас все деньги мира, какую машину вы бы заказали?
+- Деньги обесценятся."
 scroll_active = false
+
+[node name="company" type="Label" parent="bestiary/ray"]
+layout_mode = 1
+offset_right = 62.0
+offset_bottom = 111.0
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme = ExtResource("2_5tx11")
+theme_override_fonts/font = ExtResource("6_xklic")
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxEmpty_36dr4")
+text = "EVERY.CO"
+
+[node name="hero" type="PanelContainer" parent="bestiary/ray/company"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -50.0
+offset_bottom = 49.0
+grow_horizontal = 0
+size_flags_vertical = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_6vdyv")
+
+[node name="image" type="TextureRect" parent="bestiary/ray/company/hero"]
+custom_minimum_size = Vector2(45, 45)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("8_y2jwj")
+expand_mode = 1
+script = ExtResource("9_xklic")
+
+[node name="caption" type="Label" parent="bestiary/ray/company"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -47.0
+offset_bottom = 81.0
+grow_horizontal = 0
+size_flags_horizontal = 4
+theme = ExtResource("2_5tx11")
+theme_override_constants/line_spacing = -3
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxEmpty_y2jwj")
+text = "Он / Его
+20 лет"
+horizontal_alignment = 1
+
+[node name="rock" type="RichTextLabel" parent="bestiary"]
+custom_minimum_size = Vector2(300, 130)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_colors/default_color = Color(0.3137255, 0.3137255, 0.3137255, 1)
+theme_override_fonts/normal_font = ExtResource("12_36dr4")
+theme_override_font_sizes/normal_font_size = 13
+theme_override_styles/normal = SubResource("StyleBoxFlat_36dr4")
+text = "Рок Тайт
+- Младший стажер оптимизаций
+
+Кем вы видите себя в нашей компании через 100 лет?
+- Бессмертным."
+scroll_active = false
+
+[node name="company" type="Label" parent="bestiary/rock"]
+layout_mode = 1
+offset_right = 62.0
+offset_bottom = 111.0
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme = ExtResource("2_5tx11")
+theme_override_fonts/font = ExtResource("6_xklic")
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxEmpty_36dr4")
+text = "EVERY.CO"
+
+[node name="hero" type="PanelContainer" parent="bestiary/rock/company"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -50.0
+offset_bottom = 49.0
+grow_horizontal = 0
+size_flags_vertical = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_6vdyv")
+
+[node name="image" type="TextureRect" parent="bestiary/rock/company/hero"]
+custom_minimum_size = Vector2(45, 45)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("12_y2jwj")
+expand_mode = 1
+script = ExtResource("9_xklic")
+
+[node name="caption" type="Label" parent="bestiary/rock/company"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -47.0
+offset_bottom = 81.0
+grow_horizontal = 0
+size_flags_horizontal = 4
+theme = ExtResource("2_5tx11")
+theme_override_constants/line_spacing = -3
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxEmpty_y2jwj")
+text = "Он / Его
+20 лет"
+horizontal_alignment = 1
 
 [node name="title" parent="." instance=ExtResource("10_m5uhw")]
 layout_mode = 2

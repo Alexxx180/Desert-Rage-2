@@ -9,6 +9,7 @@ const TIME: float = 0.2
 const MARGIN: String = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
 
 func update_locale(params: Array) -> void:
+	ScrollContainer
 	text = hint.key("T") + MARGIN
 	help.text = hint.key("D") % params
 
