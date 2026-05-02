@@ -1,0 +1,77 @@
+[gd_scene load_steps=10 format=3 uid="uid://b07y3nfql0rh1"]
+
+[ext_resource type="Script" uid="uid://v8ulhot1poc4" path="res://asset/script/ui/menu/sound/detector/dropdown/tree/branch/blend/content.gd" id="1_0ek7n"]
+[ext_resource type="Script" uid="uid://cob68cmtvcen7" path="res://asset/script/ui/menu/sound/detector/dropdown/tree/branch/content.gd" id="1_e5apt"]
+[ext_resource type="PackedScene" uid="uid://dimtfdfw8ffb1" path="res://asset/scene/ui/menu/sound/detector/dropdown/tree/branch/content/body.tscn" id="3_dn4wa"]
+[ext_resource type="PackedScene" uid="uid://bl4uykv2mkpoy" path="res://asset/scene/ui/menu/sound/detector/dropdown/tree/blend/content/head.tscn" id="3_xeive"]
+[ext_resource type="Texture2D" uid="uid://dsrhfffuck7x7" path="res://asset/resource/ui/theme/slider/vertical/highlight.tres" id="4_ir3vi"]
+[ext_resource type="StyleBox" uid="uid://bwm6nj0qolmws" path="res://asset/resource/ui/theme/slider/vertical/area-front.tres" id="5_fjv5g"]
+
+[sub_resource type="Gradient" id="Gradient_fs2k3"]
+colors = PackedColorArray(0.478431, 0.25098, 0.588235, 1, 0.478431, 0.25098, 0.588235, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_fspsd"]
+gradient = SubResource("Gradient_fs2k3")
+width = 45
+height = 1
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cnfav"]
+
+[node name="content" type="HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+offset_right = 349.0
+offset_bottom = 47.0
+script = ExtResource("1_0ek7n")
+
+[node name="themes" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("1_e5apt")
+
+[node name="head" parent="themes" instance=ExtResource("3_xeive")]
+layout_mode = 2
+
+[node name="body" parent="themes" instance=ExtResource("3_dn4wa")]
+visible = false
+layout_mode = 2
+
+[node name="mix" type="VSlider" parent="."]
+custom_minimum_size = Vector2(45, 45)
+layout_mode = 2
+size_flags_horizontal = 1
+theme_override_icons/grabber = SubResource("GradientTexture2D_fspsd")
+theme_override_icons/grabber_highlight = ExtResource("4_ir3vi")
+theme_override_icons/grabber_disabled = ExtResource("4_ir3vi")
+theme_override_icons/tick = ExtResource("4_ir3vi")
+theme_override_styles/slider = SubResource("StyleBoxEmpty_cnfav")
+theme_override_styles/grabber_area = ExtResource("5_fjv5g")
+theme_override_styles/grabber_area_highlight = ExtResource("5_fjv5g")
+value = 50.0
+
+[node name="margin" type="MarginContainer" parent="mix"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 2
+
+[node name="status" type="Label" parent="mix/margin"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 9
+text = "Always"
+horizontal_alignment = 1
+text_overrun_behavior = 3
+
+[node name="times" type="Label" parent="mix/margin"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 9
+text = "times"
+horizontal_alignment = 1
+text_overrun_behavior = 3

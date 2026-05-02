@@ -1,0 +1,443 @@
+[gd_scene load_steps=33 format=3 uid="uid://d2q6jjokb1yfr"]
+
+[ext_resource type="Texture2D" uid="uid://e6ajmhn5ga6q" path="res://asset/logo/name/back.svg" id="1_5j00g"]
+[ext_resource type="Script" uid="uid://b6bigqrspgblf" path="res://asset/script/ui/menu/main/hud.gd" id="1_kbpc8"]
+[ext_resource type="Shader" uid="uid://bg4dqjy6sfam7" path="res://asset/resource/shader/hole.gdshader" id="2_aswk2"]
+[ext_resource type="Script" uid="uid://bdgdet1mbxhpp" path="res://asset/script/ui/menu/main/detector/options.gd" id="2_fcvjg"]
+[ext_resource type="Texture2D" uid="uid://0h6pmw3fl2ff" path="res://asset/logo/name/button/off.svg" id="2_plqjw"]
+[ext_resource type="FontFile" uid="uid://cjafv81djmqe8" path="res://asset/resource/media/text/font/Touchscreen-Regular.ttf" id="3_41j3w"]
+[ext_resource type="Texture2D" uid="uid://r051pjb2ub4l" path="res://asset/logo/name/caption.svg" id="4_5j00g"]
+[ext_resource type="Texture2D" uid="uid://bk0b1oc1l1rmd" path="res://asset/resource/media/image/ui/item/armor/weapon/whip.svg" id="4_045ix"]
+[ext_resource type="Texture2D" uid="uid://c22atsgc5c7sh" path="res://asset/resource/media/image/ui/item/consume/jar/water.svg" id="5_8gwkv"]
+[ext_resource type="FontFile" uid="uid://b2wbdbnkxcqv1" path="res://asset/resource/media/text/font/noto_sans/NotoEmoji-VariableFont_wght.ttf" id="5_aswk2"]
+[ext_resource type="Texture2D" uid="uid://dtho0ojpqjmph" path="res://asset/resource/media/image/ui/item/consume/jar/bottle.svg" id="6_36xd2"]
+[ext_resource type="Texture2D" uid="uid://b2v1sviankpsb" path="res://asset/resource/media/image/ui/dialog/ray/smile.png" id="6_kbpc8"]
+[ext_resource type="Texture2D" uid="uid://cpbagfmyiffmo" path="res://asset/resource/media/image/ui/item/consume/jar/tea.svg" id="7_045ix"]
+[ext_resource type="Texture2D" uid="uid://core4cjo58407" path="res://asset/resource/media/image/tilemap/actor/dungeon/platform/jump.svg" id="7_faw4m"]
+[ext_resource type="Texture2D" uid="uid://dxjt2gayjfhuk" path="res://asset/resource/media/image/ui/dialog/ray/untrust.png" id="7_fcvjg"]
+[ext_resource type="Script" uid="uid://bkbeaeonbqp08" path="res://asset/script/ui/menu/main/processor/processor.gd" id="7_jm08w"]
+[ext_resource type="Texture2D" uid="uid://cib6aldde4buw" path="res://asset/logo/name/lever/off.svg" id="7_nmkoa"]
+[ext_resource type="PackedScene" uid="uid://cspf6sh5v7o4v" path="res://asset/scene/ui/hud/detector/game/menu/priorities/topic/research/content/help/cards/card.tscn" id="8_41j3w"]
+[ext_resource type="Texture2D" uid="uid://cq032867v1kvb" path="res://asset/resource/media/image/ui/item/consume/jar/antidote.svg" id="8_faw4m"]
+[ext_resource type="Texture2D" uid="uid://kxrjc3v8k5q1" path="res://asset/resource/media/image/tilemap/actor/dungeon/box/small.svg" id="13_jm08w"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_plqjw"]
+shader = ExtResource("2_aswk2")
+shader_parameter/hole_pos = Vector2(0.77, 0.75)
+shader_parameter/hole_radius = 0.2
+shader_parameter/softness = 0.3
+shader_parameter/color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2jkom"]
+content_margin_left = 20.0
+content_margin_top = 10.0
+content_margin_right = 20.0
+content_margin_bottom = 10.0
+bg_color = Color(0.050980393, 0.050980393, 0.050980393, 0.47058824)
+
+[sub_resource type="Theme" id="Theme_67u4h"]
+Button/styles/normal = SubResource("StyleBoxFlat_2jkom")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xwawd"]
+content_margin_left = 25.0
+content_margin_top = 85.0
+content_margin_right = 25.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uer58"]
+content_margin_left = 13.0
+content_margin_top = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ds34t"]
+bg_color = Color(0, 0, 0, 0.47058824)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_color = Color(0.12591082, 0.12591085, 0.12591073, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5j00g"]
+bg_color = Color(0.07058824, 0.07058824, 0.07058824, 0)
+border_width_left = 4
+border_color = Color(0.09239709, 0.09239706, 0.09239706, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aswk2"]
+bg_color = Color(0.007843138, 0.007843138, 0.019607844, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_plqjw"]
+content_margin_left = 20.0
+content_margin_top = 30.0
+content_margin_right = 20.0
+content_margin_bottom = 10.0
+bg_color = Color(0.050980393, 0.050980393, 0.050980393, 0.47058824)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pu7fm"]
+content_margin_left = 10.0
+content_margin_right = 10.0
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fcvjg"]
+content_margin_right = 65.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_41j3w"]
+content_margin_left = 20.0
+content_margin_top = 10.0
+content_margin_right = 20.0
+content_margin_bottom = 10.0
+bg_color = Color(0.050980393, 0.050980393, 0.050980393, 0.11764706)
+
+[node name="menu" type="CanvasLayer"]
+script = ExtResource("7_jm08w")
+
+[node name="background" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_5j00g")
+expand_mode = 1
+
+[node name="water" type="TextureButton" parent="background"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 1.0
+offset_top = -78.0
+offset_right = 65.0
+offset_bottom = -14.0
+grow_vertical = 2
+texture_normal = ExtResource("5_8gwkv")
+stretch_mode = 0
+
+[node name="antidote" type="TextureButton" parent="background"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 46.0
+offset_top = -102.0
+offset_right = 110.0
+offset_bottom = -38.0
+grow_vertical = 2
+texture_normal = ExtResource("8_faw4m")
+stretch_mode = 0
+
+[node name="empty" type="TextureButton" parent="background"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 73.0
+offset_top = -71.0
+offset_right = 137.0
+offset_bottom = -7.0
+grow_vertical = 2
+texture_normal = ExtResource("6_36xd2")
+stretch_mode = 0
+
+[node name="tea" type="TextureButton" parent="background"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 113.0
+offset_top = -100.0
+offset_right = 177.0
+offset_bottom = -36.0
+grow_vertical = 2
+texture_normal = ExtResource("7_045ix")
+stretch_mode = 0
+
+[node name="lever" type="TextureButton" parent="background"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 1
+offset_left = 3.0
+offset_top = 2.0
+offset_right = 67.0
+offset_bottom = 66.0
+texture_normal = ExtResource("7_nmkoa")
+stretch_mode = 0
+
+[node name="jump" type="TextureButton" parent="background"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 1
+offset_left = 3.0
+offset_top = 2.0
+offset_right = 67.0
+offset_bottom = 66.0
+texture_normal = ExtResource("7_faw4m")
+stretch_mode = 0
+
+[node name="button" type="TextureRect" parent="background"]
+custom_minimum_size = Vector2(50, 100)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -105.0
+offset_top = -215.0
+offset_right = 37.0
+offset_bottom = -115.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("2_plqjw")
+
+[node name="whip" type="TextureButton" parent="background/button"]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -88.0
+offset_top = 20.0
+offset_right = 62.0
+offset_bottom = 170.0
+grow_horizontal = 2
+texture_normal = ExtResource("4_045ix")
+stretch_mode = 0
+
+[node name="box" type="TextureButton" parent="background/button"]
+visible = false
+custom_minimum_size = Vector2(200, 150)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -100.0
+offset_top = 63.0
+offset_right = 100.0
+offset_bottom = 213.0
+grow_horizontal = 2
+texture_normal = ExtResource("13_jm08w")
+stretch_mode = 0
+
+[node name="shadow" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_plqjw")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.99607843)
+
+[node name="hud" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_67u4h")
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+script = ExtResource("1_kbpc8")
+
+[node name="caption" type="Label" parent="hud"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("3_41j3w")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxEmpty_xwawd")
+text = "The Hidden Artifact"
+
+[node name="title" type="TextureRect" parent="hud/caption"]
+custom_minimum_size = Vector2(490, 80)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -245.0
+offset_top = -40.0
+offset_right = 245.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_5j00g")
+
+[node name="icon" type="Label" parent="hud/caption"]
+visible = false
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -33.0
+offset_top = -25.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("5_aswk2")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxEmpty_uer58")
+text = "🪞"
+
+[node name="terminal" type="Panel" parent="hud/caption"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_ds34t")
+
+[node name="difficulties" type="HFlowContainer" parent="hud"]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="game" type="VBoxContainer" parent="hud/difficulties"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 30
+
+[node name="continue" type="LinkButton" parent="hud/difficulties/game"]
+custom_minimum_size = Vector2(250, 150)
+layout_mode = 2
+theme_override_constants/underline_spacing = 7
+text = "      To be continued..."
+uri = "https://youtu.be/5J_suTMqZLg?si=9foGil4WhNH5TcSd"
+
+[node name="ladder" type="ProgressBar" parent="hud/difficulties/game/continue"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_5j00g")
+theme_override_styles/fill = SubResource("StyleBoxFlat_aswk2")
+max_value = 35.0
+step = 1.0
+value = 35.0
+fill_mode = 2
+show_percentage = false
+script = ExtResource("2_fcvjg")
+
+[node name="continue" type="Button" parent="hud/difficulties/game/continue/ladder"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -21.5
+offset_bottom = 21.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 10
+text = "Продолжить"
+
+[node name="start" type="Button" parent="hud/difficulties/game/continue/ladder"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -43.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_vertical = 8
+text = "Начать"
+
+[node name="difficulty" type="HBoxContainer" parent="hud/difficulties/game"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+
+[node name="saves" type="Button" parent="hud/difficulties/game/difficulty"]
+visible = false
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_styles/normal = SubResource("StyleBoxFlat_plqjw")
+text = "Сохранения"
+
+[node name="progress" type="Label" parent="hud/difficulties/game/difficulty/saves"]
+layout_mode = 1
+offset_right = 150.0
+offset_bottom = 22.0
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("3_41j3w")
+theme_override_styles/normal = SubResource("StyleBoxFlat_pu7fm")
+text = "07.18 RK"
+
+[node name="icon" type="TextureButton" parent="hud/difficulties/game/difficulty"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 8
+texture_normal = ExtResource("6_kbpc8")
+texture_pressed = ExtResource("6_kbpc8")
+texture_hover = ExtResource("7_fcvjg")
+
+[node name="choose" type="Label" parent="hud/difficulties/game/difficulty/icon"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -31.5
+offset_bottom = 31.5
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.39308554, 0.3930855, 0.39308548, 1)
+theme_override_constants/line_spacing = -3
+theme_override_styles/normal = SubResource("StyleBoxEmpty_fcvjg")
+text = "Жми  на меня, чтобы сменить сложность!"
+horizontal_alignment = 2
+autowrap_mode = 2
+
+[node name="casual" parent="hud/difficulties" instance=ExtResource("8_41j3w")]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="suitable" parent="hud/difficulties" instance=ExtResource("8_41j3w")]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="settings" type="Button" parent="hud/difficulties"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 8
+theme_override_styles/normal = SubResource("StyleBoxFlat_2jkom")
+text = "Настройки"
+
+[node name="exit" type="Button" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -70.0
+offset_bottom = 44.0
+grow_horizontal = 0
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0.08468998, 0.08468991, 0.08468992, 1)
+theme_override_fonts/font = ExtResource("5_aswk2")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_41j3w")
+text = "❌"
+
+[node name="cursor" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 50.0
+offset_top = 100.0
+offset_right = 50.0
+offset_bottom = 100.0

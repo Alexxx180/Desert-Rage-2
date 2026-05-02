@@ -1,0 +1,67 @@
+[gd_scene load_steps=6 format=3 uid="uid://og4dng4pdpjv"]
+
+[ext_resource type="Script" uid="uid://b06ntftlpr38h" path="res://asset/script/ui/menu/information/card.gd" id="1_5amay"]
+[ext_resource type="StyleBox" uid="uid://c8hy4gq5uksdh" path="res://asset/resource/ui/theme/style/panel/complex/hover.tres" id="2_4b162"]
+[ext_resource type="StyleBox" uid="uid://chr58r7ok2alt" path="res://asset/resource/ui/theme/style/panel/accent.tres" id="3_5wwqx"]
+[ext_resource type="Texture2D" uid="uid://c235aiy60lonn" path="res://asset/resource/media/image/ui/help/reason/stats.svg" id="4_aijs3"]
+[ext_resource type="PackedScene" uid="uid://kgdwwcc8y85n" path="res://asset/scene/ui/hud/detector/game/menu/priorities/topic/research/content/help/cards/common/luggage/stats/showcase.tscn" id="5_5x8t7"]
+
+[node name="stats" type="Control"]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 3
+anchors_preset = 0
+size_flags_horizontal = 4
+script = ExtResource("1_5amay")
+
+[node name="collapsed" type="Button" parent="."]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(130, 0)
+theme_override_styles/hover_pressed = ExtResource("2_4b162")
+theme_override_styles/hover = ExtResource("2_4b162")
+theme_override_styles/normal = ExtResource("3_5wwqx")
+
+[node name="margin" type="MarginContainer" parent="collapsed"]
+layout_mode = 2
+offset_right = 260.0
+offset_bottom = 356.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="content" type="VBoxContainer" parent="collapsed/margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="image" type="TextureRect" parent="collapsed/margin/content"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("4_aijs3")
+expand_mode = 1
+
+[node name="title" type="HBoxContainer" parent="collapsed/margin/content"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="left" type="HSeparator" parent="collapsed/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="collapsed/margin/content/title"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "HSTT"
+
+[node name="right" type="HSeparator" parent="collapsed/margin/content/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="showcase" parent="." instance=ExtResource("5_5x8t7")]
+layout_mode = 0
+anchors_preset = 0

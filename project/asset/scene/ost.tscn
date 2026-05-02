@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://bsumfxiuy47r"]
+
+[ext_resource type="Script" uid="uid://de6dwyt4d4uyp" path="res://asset/script/ost/ost.gd" id="1_movyr"]
+[ext_resource type="Script" uid="uid://dv88o6psoqr41" path="res://asset/script/ost/tension.gd" id="2_yk28w"]
+[ext_resource type="Script" uid="uid://c5vriyr0n2ome" path="res://asset/script/ost/mixer.gd" id="3_tvghr"]
+[ext_resource type="Script" uid="uid://ce8nj8av5lft8" path="res://asset/script/ost/kind/caves.gd" id="4_ngupx"]
+
+[sub_resource type="AudioStreamInteractive" id="AudioStreamInteractive_dnml4"]
+
+[node name="ost" type="Node"]
+script = ExtResource("1_movyr")
+
+[node name="tension" type="Timer" parent="."]
+wait_time = 0.25
+script = ExtResource("2_yk28w")
+
+[node name="mixer" type="Node" parent="."]
+script = ExtResource("3_tvghr")
+
+[node name="a" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamInteractive_dnml4")
+script = ExtResource("4_ngupx")
+
+[node name="b" type="AudioStreamPlayer" parent="."]
+volume_db = -80.0
+script = ExtResource("4_ngupx")
+
+[connection signal="finished" from="a" to="." method="_finished"]
+[connection signal="finished" from="b" to="." method="_finished"]

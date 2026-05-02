@@ -1,0 +1,26 @@
+[gd_scene load_steps=6 format=3 uid="uid://esjdr0frox65"]
+
+[ext_resource type="Script" uid="uid://l2rrd7usgf5y" path="res://asset/script/util/world/drive/box/base/box.gd" id="1_nj7ki"]
+[ext_resource type="Shape2D" uid="uid://cqyj3i1vf3w47" path="res://asset/resource/geometry/interactables/box/box.tres" id="2_vtio6"]
+[ext_resource type="PackedScene" uid="uid://c4rsc67nmdx43" path="res://asset/scene/util/world/drive/box/jump/small/view.tscn" id="3_yxg3y"]
+[ext_resource type="PackedScene" uid="uid://hxnrxxfrid4k" path="res://asset/scene/util/world/drive/box/jump/small/logic/logic.tscn" id="4_fii6i"]
+[ext_resource type="PackedScene" uid="uid://bocuu344hsqv" path="res://asset/scene/ui/util/fov.tscn" id="5_4r4dv"]
+
+[node name="small_box" type="CharacterBody2D"]
+position = Vector2(0, 22)
+collision_layer = 16
+collision_mask = 536871135
+motion_mode = 1
+script = ExtResource("1_nj7ki")
+weight = 1.9
+
+[node name="geometry" type="CollisionShape2D" parent="."]
+shape = ExtResource("2_vtio6")
+
+[node name="view" parent="." instance=ExtResource("3_yxg3y")]
+
+[node name="logic" parent="." instance=ExtResource("4_fii6i")]
+
+[node name="fov" parent="." instance=ExtResource("5_4r4dv")]
+position = Vector2(9.53674e-07, -22)
+scale = Vector2(2, 2)

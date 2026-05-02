@@ -1,0 +1,83 @@
+[gd_scene load_steps=9 format=3 uid="uid://tqi41asahmnh"]
+
+[ext_resource type="Script" uid="uid://bbdi3k2c2306b" path="res://asset/script/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/topic/status/space/title/status/time.gd" id="1_g7ec3"]
+[ext_resource type="FontFile" uid="uid://dqpftcx1b6r8j" path="res://asset/resource/media/text/font/LTStopwatch-Regular.ttf" id="2_o5ovg"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_33rox"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.0110876, 0.0110876, 0.0110876, 1)
+
+[sub_resource type="Gradient" id="Gradient_e1onj"]
+colors = PackedColorArray(0, 0, 0, 0, 0.741176, 0, 0, 0.470588)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_3v3bl"]
+gradient = SubResource("Gradient_e1onj")
+width = 25
+height = 23
+fill_from = Vector2(0, 0.5)
+fill_to = Vector2(1, 0.5)
+metadata/_snap_enabled = true
+metadata/_snap_count = 2
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pa3qu"]
+content_margin_top = 3.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mv703"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fxbxi"]
+bg_color = Color(0.739789, 2.00946e-06, 5.77569e-07, 1)
+
+[node name="time" type="PanelContainer"]
+visible = false
+custom_minimum_size = Vector2(60, 30)
+size_flags_horizontal = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_33rox")
+script = ExtResource("1_g7ec3")
+
+[node name="back" type="TextureRect" parent="."]
+layout_mode = 2
+texture = SubResource("GradientTexture2D_3v3bl")
+
+[node name="margin" type="MarginContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 1
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 0
+
+[node name="number" type="Label" parent="margin"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2_o5ovg")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxEmpty_pa3qu")
+text = "9:59"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="timing" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="lasted" type="ProgressBar" parent="timing"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 1
+theme_override_styles/background = SubResource("StyleBoxEmpty_mv703")
+theme_override_styles/fill = SubResource("StyleBoxFlat_fxbxi")
+max_value = 600.0
+step = 1.0
+value = 600.0
+fill_mode = 3
+show_percentage = false

@@ -1,0 +1,48 @@
+[gd_resource type="Resource" script_class="SplitNavigation" load_steps=13 format=3 uid="uid://bfe83rgv7g8ei"]
+
+[ext_resource type="Script" uid="uid://21kvo5qk8w8q" path="res://asset/script/ui/util/split/group.gd" id="1_lxrbg"]
+[ext_resource type="Script" uid="uid://rssqt7kxsel6" path="res://asset/script/ui/util/split/complex.gd" id="3_u7wh5"]
+[ext_resource type="Resource" uid="uid://cnd4woe74swcg" path="res://asset/resource/input/short/controls/group/pressed_released.tres" id="4_g8h0k"]
+[ext_resource type="Script" uid="uid://b5gtpgl13aj1h" path="res://asset/script/ui/util/split/split.gd" id="5_jwtdh"]
+[ext_resource type="Resource" uid="uid://rrj1q3b5w0r6" path="res://asset/resource/input/short/controls/group/pressed_three.tres" id="6_g8h0k"]
+[ext_resource type="Resource" uid="uid://bc88xrak6sbmu" path="res://asset/resource/input/short/controls/group/pressed_both.tres" id="6_uk542"]
+[ext_resource type="Resource" uid="uid://0d2syxtrparc" path="res://asset/resource/input/short/controls/group/pressed_2_released.tres" id="7_u7wh5"]
+
+[sub_resource type="Resource" id="Resource_loeqg"]
+script = ExtResource("3_u7wh5")
+action = "drag_up"
+complex = Array[ExtResource("1_lxrbg")]([ExtResource("6_uk542")])
+metadata/_custom_type_script = "uid://rssqt7kxsel6"
+
+[sub_resource type="Resource" id="Resource_x6rox"]
+script = ExtResource("3_u7wh5")
+action = "drag_smooth_direct_down"
+complex = Array[ExtResource("1_lxrbg")]([ExtResource("4_g8h0k")])
+metadata/_custom_type_script = "uid://rssqt7kxsel6"
+
+[sub_resource type="Resource" id="Resource_2xwjp"]
+script = ExtResource("3_u7wh5")
+action = "drag_smooth_back_down"
+complex = Array[ExtResource("1_lxrbg")]([ExtResource("6_g8h0k")])
+metadata/_custom_type_script = "uid://rssqt7kxsel6"
+
+[sub_resource type="Resource" id="Resource_hns2m"]
+script = ExtResource("3_u7wh5")
+action = "drag_smooth_direct_down"
+complex = Array[ExtResource("1_lxrbg")]([ExtResource("6_uk542")])
+metadata/_custom_type_script = "uid://rssqt7kxsel6"
+
+[sub_resource type="Resource" id="Resource_lt0hn"]
+script = ExtResource("3_u7wh5")
+action = "drag_smooth_back_down"
+complex = Array[ExtResource("1_lxrbg")]([ExtResource("7_u7wh5")])
+metadata/_custom_type_script = "uid://rssqt7kxsel6"
+
+[resource]
+script = ExtResource("5_jwtdh")
+tab_focus = SubResource("Resource_lt0hn")
+panel_focus = SubResource("Resource_x6rox")
+instant = SubResource("Resource_loeqg")
+smooth_direct = SubResource("Resource_hns2m")
+smooth_back = SubResource("Resource_2xwjp")
+metadata/_custom_type_script = "uid://b5gtpgl13aj1h"

@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://cu4x3yb051m2k"]
+
+[ext_resource type="Script" uid="uid://re5uu2tmyk6f" path="res://asset/script/ui/menu/sound/detector/settings/info.gd" id="1_2broo"]
+[ext_resource type="PackedScene" uid="uid://lfx444je4o8m" path="res://asset/scene/ui/menu/sound/detector/settings/management/reset.tscn" id="1_ntocc"]
+[ext_resource type="PackedScene" uid="uid://bqcde7s3cxww3" path="res://asset/scene/ui/menu/sound/detector/settings/management/import.tscn" id="2_2dj30"]
+[ext_resource type="PackedScene" uid="uid://gub64vwnclew" path="res://asset/scene/ui/menu/sound/detector/settings/management/export.tscn" id="3_o1hcw"]
+
+[node name="info" type="VBoxContainer"]
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -46.0
+grow_horizontal = 0
+grow_vertical = 2
+script = ExtResource("1_2broo")
+
+[node name="reset" parent="." instance=ExtResource("1_ntocc")]
+layout_mode = 2
+
+[node name="exporter" parent="." instance=ExtResource("3_o1hcw")]
+layout_mode = 2
+size_flags_vertical = 10
+
+[node name="importer" parent="." instance=ExtResource("2_2dj30")]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="."]
+visible = false
+custom_minimum_size = Vector2(0, 45)
+layout_mode = 2

@@ -1,0 +1,42 @@
+[gd_scene load_steps=4 format=3 uid="uid://bwh301yd1s6ik"]
+
+[ext_resource type="StyleBox" uid="uid://bsggnr5c3uk7o" path="res://asset/resource/ui/theme/style/panel/preview.tres" id="1_jfxja"]
+[ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://asset/resource/ui/theme/patterns/template/menu/settings/topic/footer.tres" id="2_hmh35"]
+[ext_resource type="FontFile" uid="uid://dxg5wbmrewk2p" path="res://asset/resource/media/text/font/Lato-Regular.ttf" id="3_3ftt1"]
+
+[node name="books" type="PanelContainer"]
+visible = false
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("1_jfxja")
+
+[node name="books" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 5
+
+[node name="caption" type="Label" parent="books"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Настой на кактусе"
+
+[node name="margin" type="MarginContainer" parent="books"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="text" type="VBoxContainer" parent="books/margin"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="chat" type="Label" parent="books/margin/text"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("2_hmh35")
+theme_override_constants/line_spacing = -2
+theme_override_fonts/font = ExtResource("3_3ftt1")
+theme_override_font_sizes/font_size = 18
+text = "Истинно говорю вам, что время на приготовление сего отвара будет более чем компенсировано. Для этого нужен простой древний..."
+autowrap_mode = 2

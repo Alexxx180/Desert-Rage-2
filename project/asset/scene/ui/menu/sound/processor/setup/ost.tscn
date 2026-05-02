@@ -1,0 +1,46 @@
+[gd_scene load_steps=12 format=3 uid="uid://5u0sx5gwg7ep"]
+
+[ext_resource type="Script" uid="uid://b8kug8r3g4lsc" path="res://asset/script/ui/menu/sound/processor/options/ost/ost.gd" id="1_jpx3e"]
+[ext_resource type="Script" uid="uid://5lhti1xkpx66" path="res://asset/script/ui/menu/sound/processor/options/ost/level/level.gd" id="2_fu028"]
+[ext_resource type="Script" uid="uid://b2njef8ewmdrd" path="res://asset/script/ui/menu/sound/processor/options/ost/level/typed.gd" id="3_78hw8"]
+[ext_resource type="Script" uid="uid://b6jbt3oau7cjx" path="res://asset/script/ui/menu/sound/processor/options/ost/level/named.gd" id="4_k6v6w"]
+[ext_resource type="Script" uid="uid://yojc5pxybulw" path="res://asset/script/ui/menu/sound/processor/options/ost/world/world.gd" id="5_2bhnd"]
+[ext_resource type="Script" uid="uid://bunnfrrfwjlst" path="res://asset/script/ui/menu/sound/processor/options/ost/world/typed.gd" id="6_15jq0"]
+[ext_resource type="Script" uid="uid://bojlobktb408p" path="res://asset/script/ui/menu/sound/processor/options/ost/world/named/named.gd" id="7_xpkh8"]
+[ext_resource type="Script" uid="uid://cw7mnurf7mgg3" path="res://asset/script/ui/menu/sound/processor/options/ost/world/named/ambient/ambient.gd" id="8_oshs6"]
+[ext_resource type="Script" uid="uid://mb0mtc43k45b" path="res://asset/script/ui/menu/sound/processor/options/ost/world/named/ambient/typed.gd" id="9_bfsre"]
+[ext_resource type="Script" uid="uid://ce6b2q0o0l23b" path="res://asset/script/ui/menu/sound/processor/options/ost/world/named/ambient/named.gd" id="10_88bfb"]
+[ext_resource type="Script" uid="uid://cmo0sw4wwytp6" path="res://asset/script/ui/menu/sound/processor/options/ost/world/weak.gd" id="11_ltfog"]
+
+[node name="ost" type="Node"]
+script = ExtResource("1_jpx3e")
+
+[node name="level" type="Node" parent="."]
+script = ExtResource("2_fu028")
+
+[node name="typed" type="Node" parent="level"]
+script = ExtResource("3_78hw8")
+
+[node name="named" type="Node" parent="level"]
+script = ExtResource("4_k6v6w")
+
+[node name="world" type="Node" parent="."]
+script = ExtResource("5_2bhnd")
+
+[node name="typed" type="Node" parent="world"]
+script = ExtResource("6_15jq0")
+
+[node name="named" type="Node" parent="world"]
+script = ExtResource("7_xpkh8")
+
+[node name="ambient" type="Node" parent="world/named"]
+script = ExtResource("8_oshs6")
+
+[node name="typed" type="Node" parent="world/named/ambient"]
+script = ExtResource("9_bfsre")
+
+[node name="named" type="Node" parent="world/named/ambient"]
+script = ExtResource("10_88bfb")
+
+[node name="weak" type="Node" parent="world"]
+script = ExtResource("11_ltfog")

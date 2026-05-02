@@ -1,0 +1,21 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://ucb2irnxwk3y"]
+
+[ext_resource type="Shader" uid="uid://bh4aokwj0b71k" path="res://now/dungeon/cave/smoke/0/1/fog.gdshader" id="1_wjakc"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_t7h2w"]
+frequency = 0.0075
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_t7h2w"]
+width = 1920
+height = 1080
+seamless = true
+seamless_blend_skirt = 0.75
+noise = SubResource("FastNoiseLite_t7h2w")
+
+[resource]
+shader = ExtResource("1_wjakc")
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_t7h2w")
+shader_parameter/smoke_color = Color(0.8, 0.8, 0.8, 1)
+shader_parameter/distortion_speed = 0.45
+shader_parameter/density = 0.25
+shader_parameter/time1 = 0.0

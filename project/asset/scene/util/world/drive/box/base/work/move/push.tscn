@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://nn382ektov7w"]
+
+[ext_resource type="Script" uid="uid://cogt5bonsqqyf" path="res://asset/script/util/world/drive/box/base/logic/work/move/push/push.gd" id="1_336w2"]
+[ext_resource type="PackedScene" uid="uid://dga0coql425dk" path="res://asset/scene/util/timer/variants/action.tscn" id="2_jc7ce"]
+
+[node name="push" type="Node"]
+script = ExtResource("1_336w2")
+
+[node name="forward" parent="." instance=ExtResource("2_jc7ce")]
+
+[node name="duration" type="Timer" parent="."]
+wait_time = 0.5
+
+[connection signal="timeout" from="duration" to="." method="throw_velocity_stop"]

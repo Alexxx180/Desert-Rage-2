@@ -1,0 +1,56 @@
+[gd_scene load_steps=7 format=3 uid="uid://du2nfngsi1lpk"]
+
+[ext_resource type="Script" uid="uid://c14oc7djocbem" path="res://asset/script/ui/hud/detector/game/margin/priorities/stats/inventory/topic/stack/selected/status/points/ability.gd" id="1_1mkek"]
+[ext_resource type="StyleBox" uid="uid://mbh4jijnx78j" path="res://asset/resource/ui/theme/style/button/status_points.tres" id="1_abgr3"]
+[ext_resource type="FontFile" uid="uid://bmtckcw2a28p2" path="res://asset/resource/media/text/font/Sportsball.ttf" id="4_nviv5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nj8kg"]
+content_margin_top = 2.0
+content_margin_right = 5.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cfogw"]
+content_margin_right = 80.0
+bg_color = Color(0.878431, 0.878431, 0.878431, 0.0588235)
+border_width_right = 58
+border_color = Color(0.043039158, 0.04303915, 0.04303915, 0.42352942)
+corner_radius_top_left = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nj8kg"]
+content_margin_right = 80.0
+bg_color = Color(0.09803922, 0.39215687, 0.5137255, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 58
+border_width_bottom = 4
+border_color = Color(0.8, 0.8, 0.8, 0)
+corner_radius_top_left = 12
+corner_radius_bottom_left = 12
+
+[node name="ability" type="Button"]
+custom_minimum_size = Vector2(90, 26)
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("4_nviv5")
+theme_override_font_sizes/font_size = 10
+theme_override_styles/normal = SubResource("StyleBoxEmpty_nj8kg")
+theme_override_styles/hover = ExtResource("1_abgr3")
+text = "20"
+alignment = 2
+script = ExtResource("1_1mkek")
+
+[node name="bar" type="ProgressBar" parent="."]
+custom_minimum_size = Vector2(35, 26)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 26.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_cfogw")
+theme_override_styles/fill = SubResource("StyleBoxFlat_nj8kg")
+max_value = 20.0
+step = 1.0
+value = 20.0
+show_percentage = false

@@ -1,0 +1,19 @@
+[gd_scene load_steps=6 format=3 uid="uid://cy3ejmnjfhyac"]
+
+[ext_resource type="Script" uid="uid://bfsb4gbi0xvg6" path="res://asset/script/actor/group/hero/logic/work/world/world.gd" id="1_2brf4"]
+[ext_resource type="PackedScene" uid="uid://ukraj3jxlsmc" path="res://now/work/hero/world/skills.tscn" id="1_bwf5u"]
+[ext_resource type="PackedScene" uid="uid://3mpy8nheipaf" path="res://now/work/hero/rock/ability.tscn" id="2_ac4b0"]
+[ext_resource type="Script" uid="uid://cwww5clpwrqbe" path="res://asset/script/actor/group/hero/logic/work/world/fight/fight.gd" id="4_jtr4b"]
+[ext_resource type="PackedScene" uid="uid://c0ggcc8w7lmmd" path="res://now/work/hero/world/inventory.tscn" id="6_cvve6"]
+
+[node name="world" type="Node"]
+script = ExtResource("1_2brf4")
+
+[node name="skills" parent="." instance=ExtResource("1_bwf5u")]
+
+[node name="ability" parent="." instance=ExtResource("2_ac4b0")]
+
+[node name="fight" type="Node" parent="."]
+script = ExtResource("4_jtr4b")
+
+[node name="inventory" parent="." instance=ExtResource("6_cvve6")]

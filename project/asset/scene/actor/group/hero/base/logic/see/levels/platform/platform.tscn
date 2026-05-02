@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://b3hev1nf6r4th"]
+
+[ext_resource type="Script" uid="uid://iieril7lr5hl" path="res://asset/script/actor/group/hero/logic/see/levels/platforms/platforms.gd" id="1_8q1ok"]
+[ext_resource type="PackedScene" uid="uid://ye5g8w01sjkk" path="res://asset/scene/actor/group/hero/base/logic/see/levels/platform/surface/surface.tscn" id="1_vvkd0"]
+[ext_resource type="Script" uid="uid://7to27lv1mbl4" path="res://asset/script/actor/group/hero/logic/see/levels/platforms/cargo.gd" id="4_1kkfj"]
+[ext_resource type="Shape2D" uid="uid://do0s1n5uuqpof" path="res://asset/resource/geometry/characters/character/character.tres" id="5_41p6s"]
+
+[node name="platform" type="Node2D"]
+script = ExtResource("1_8q1ok")
+
+[node name="surface" parent="." instance=ExtResource("1_vvkd0")]
+
+[node name="cargo" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 32
+script = ExtResource("4_1kkfj")
+
+[node name="shape" type="CollisionShape2D" parent="cargo"]
+shape = ExtResource("5_41p6s")
+
+[connection signal="area_entered" from="cargo" to="cargo" method="_enter_stand"]
+[connection signal="area_exited" from="cargo" to="cargo" method="_exit_stand"]
