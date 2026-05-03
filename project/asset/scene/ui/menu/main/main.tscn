@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://d2q6jjokb1yfr"]
+[gd_scene load_steps=35 format=3 uid="uid://d2q6jjokb1yfr"]
 
 [ext_resource type="Texture2D" uid="uid://e6ajmhn5ga6q" path="res://asset/logo/name/back.svg" id="1_5j00g"]
 [ext_resource type="Script" uid="uid://b6bigqrspgblf" path="res://asset/script/ui/menu/main/hud.gd" id="1_kbpc8"]
@@ -20,11 +20,12 @@
 [ext_resource type="PackedScene" uid="uid://cspf6sh5v7o4v" path="res://asset/scene/ui/hud/detector/game/menu/priorities/topic/research/content/help/cards/card.tscn" id="8_41j3w"]
 [ext_resource type="Texture2D" uid="uid://cq032867v1kvb" path="res://asset/resource/media/image/ui/item/consume/jar/antidote.svg" id="8_faw4m"]
 [ext_resource type="Texture2D" uid="uid://kxrjc3v8k5q1" path="res://asset/resource/media/image/tilemap/actor/dungeon/box/small.svg" id="13_jm08w"]
+[ext_resource type="Texture2D" uid="uid://b7qjh40uy3owe" path="res://asset/logo/name/ice.svg" id="20_7jlr2"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_plqjw"]
 shader = ExtResource("2_aswk2")
 shader_parameter/hole_pos = Vector2(0.77, 0.75)
-shader_parameter/hole_radius = 0.2
+shader_parameter/hole_radius = 0.05
 shader_parameter/softness = 0.3
 shader_parameter/color = Color(0, 0, 0, 1)
 
@@ -74,8 +75,16 @@ content_margin_left = 10.0
 content_margin_right = 10.0
 bg_color = Color(0, 0, 0, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nmkoa"]
+bg_color = Color(0.08856002, 0.08855984, 0.08856001, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.0605306, 0.0605303, 0.0605303, 1)
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fcvjg"]
-content_margin_right = 65.0
+content_margin_left = 70.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_41j3w"]
 content_margin_left = 20.0
@@ -374,7 +383,12 @@ theme_override_fonts/font = ExtResource("3_41j3w")
 theme_override_styles/normal = SubResource("StyleBoxFlat_pu7fm")
 text = "07.18 RK"
 
-[node name="icon" type="TextureButton" parent="hud/difficulties/game/difficulty"]
+[node name="borders" type="PanelContainer" parent="hud/difficulties/game/difficulty"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_nmkoa")
+
+[node name="icon" type="TextureButton" parent="hud/difficulties/game/difficulty/borders"]
 layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 8
@@ -382,25 +396,26 @@ texture_normal = ExtResource("6_kbpc8")
 texture_pressed = ExtResource("6_kbpc8")
 texture_hover = ExtResource("7_fcvjg")
 
-[node name="choose" type="Label" parent="hud/difficulties/game/difficulty/icon"]
+[node name="choose" type="Label" parent="hud/difficulties/game/difficulty/borders/icon"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
+anchors_preset = 4
 anchor_top = 0.5
-anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -200.0
 offset_top = -31.5
+offset_right = 200.0
 offset_bottom = 31.5
-grow_horizontal = 0
 grow_vertical = 2
 theme_override_colors/font_color = Color(0.39308554, 0.3930855, 0.39308548, 1)
 theme_override_constants/line_spacing = -3
 theme_override_styles/normal = SubResource("StyleBoxEmpty_fcvjg")
 text = "Жми  на меня, чтобы сменить сложность!"
-horizontal_alignment = 2
 autowrap_mode = 2
+
+[node name="ice" type="TextureRect" parent="hud/difficulties/game/difficulty/borders"]
+layout_mode = 2
+texture = ExtResource("20_7jlr2")
+expand_mode = 1
 
 [node name="casual" parent="hud/difficulties" instance=ExtResource("8_41j3w")]
 visible = false
