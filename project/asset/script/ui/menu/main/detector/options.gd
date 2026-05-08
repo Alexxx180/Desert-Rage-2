@@ -1,3 +1,5 @@
-extends ProgressBar
+extends VBoxContainer
 
-@onready var menu: VBoxContainer = $menu
+@onready var difficulty: Button = $difficulty
+@onready var finish: Button = $finish
+@onready var start: Button = $start

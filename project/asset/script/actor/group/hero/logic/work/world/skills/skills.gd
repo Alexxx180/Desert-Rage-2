@@ -1,7 +1,7 @@
 extends Node
 
 func update_act(ref: Node, caption: String) -> Node:
-	return Works.upload(self, ref, Defaults.now.world % ("skills/" + caption), caption)
+	return Works.upload(self, ref, LoadBus.world % ("skills/" + caption), caption)
 
 var _pull: Node = null
 var pull: Node:

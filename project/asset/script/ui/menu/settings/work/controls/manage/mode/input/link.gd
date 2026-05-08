@@ -17,7 +17,7 @@ func interrupt() -> void:
 func form(count: int) -> Array:
 	var unit: Array = []
 	unit.resize(count)
-	unit.fill(Defaults.INT)
+	unit.fill(Def.INT)
 	return unit
 
 func store_code(element: Array, code: int) -> void:

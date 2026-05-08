@@ -9,7 +9,7 @@ var stable: bool = true
 var velo: VeloHero
 var F: int: get = get_floor
 
-func _init() -> void: entity = Defaults.ENTITY
+func _init() -> void: entity = HUD.ENTITY
 func get_floor() -> int: return velo.extract(get_state())
 
 func set_stable(is_floor: bool) -> void:
@@ -30,7 +30,7 @@ func jump(next: Vector2, to_floor: bool = false, move = teleport) -> void:
 	move.emit(Def.ic("WAIT WHAT: %s", next))
 
 func get_state() -> Variant:
-	if entity == Defaults.ENTITY:
+	if entity == HUD.ENTITY:
 		velo.remember_pos()
 		return Def.ic("ENTITY is LEDGE %s", velo.state)
 	return Def.ic("ENTITY is BOX %s", entity)

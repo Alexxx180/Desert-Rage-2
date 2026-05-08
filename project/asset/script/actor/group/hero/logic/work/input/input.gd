@@ -4,8 +4,8 @@ extends Node
 
 var is_platformer: bool = false
 
-func update_act(ref: Node, caption: String) -> Node: return Works.upload(self, ref, Defaults.now.health % caption, caption)
-func upload_act(ref: Node, caption: String) -> Node: return Works.upload(self, ref, Defaults.now.input % [named, "input/" + caption], caption)
+func update_act(ref: Node, caption: String) -> Node: return Works.upload(self, ref, LoadBus.health % caption, caption)
+func upload_act(ref: Node, caption: String) -> Node: return Works.upload(self, ref, LoadBus.input % [named, "input/" + caption], caption)
 
 var _topdown: Node = null
 var topdown: Node:

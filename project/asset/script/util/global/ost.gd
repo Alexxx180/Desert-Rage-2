@@ -2,13 +2,16 @@ class_name SoundtrackSystem extends RefCounted
 
 signal update()
 
+var _ui: SoundtrackUI = null
+var ui: SoundtrackUI:
+	get: return Works.lazy(self, SoundtrackUI.new() if _ui == null else _ui, "ost")
 var _json: Dictionary = {
 	"COPY": "res://asset/resource/media/ost/%s.json",
 	"USER": "user://%s.json"
 }
 
 var save: bool = false
-var _copy: Dictionary = { "music": Defaults.DICT }
+var _copy: Dictionary = { "music": Def.DICT }
 var _user: Dictionary
 var user: Dictionary:
 	get: return _user

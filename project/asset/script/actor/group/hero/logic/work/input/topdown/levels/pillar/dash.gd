@@ -4,7 +4,7 @@ var env: Node
 var caught: bool = false
 var target_pos: Vector2
 
-@onready var ledge: Dictionary = { "node": Defaults.NODE, "offset": 0 }
+@onready var ledge: Dictionary = { "node": HUD.NODE, "offset": 0 }
 
 func ledge_is_near(ignore_floor: bool) -> bool:
 	for pillar in ledge.node.jump_zone.walls:

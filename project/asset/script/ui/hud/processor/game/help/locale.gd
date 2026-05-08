@@ -1,10 +1,9 @@
 extends Node
 
-var _locale: Array = Defaults.ARRAY
+var _locale: Array = Def.ARRAY
 var locale: Array:
 	get:
-		if _locale == Defaults.ARRAY:
-			_locale = _get_locale()
+		if _locale == Def.ARRAY: _locale = _get_locale()
 		return _locale
 
 func text(cursor: int) -> String: return locale[cursor]
@@ -20,18 +19,18 @@ func _get_locale() -> Array: # TODOT
 	return result
 
 func search_entry(entry: String) -> int:
-	var res: int = Defaults.INT
+	var res: int = Def.INT
 	var size: int = len(locale)
 	var cr: Array = [[1, 2], [size - (size % 2), -2]]
-	while (cr[0][0] < size) and (cr[1][0] > 0) and (res == Defaults.INT):
+	while (cr[0][0] < size) and (cr[1][0] > 0) and (res == Def.INT):
 		for c in cr:
 			if with(c[0], entry): res = c[0]
 			c[0] += c[1]
 	return res
 
 func align_cursor(res: int, entry: String) -> int:
-	assert(res != Defaults.INT, "Level localization not found")
-	while (res != Defaults.INT and with(res, entry)): res -= 1
+	assert(res != Def.INT, "Level localization not found")
+	while (res != Def.INT and with(res, entry)): res -= 1
 	res += 1
 	return res
 

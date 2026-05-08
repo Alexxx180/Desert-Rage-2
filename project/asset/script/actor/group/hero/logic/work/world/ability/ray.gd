@@ -2,7 +2,7 @@ extends Node
 
 signal activate(pos: Vector2, type: String) # signal activate(pos: Vector2, damage: int) const DAMAGE: int = 2
 
-@onready var enemy: StaticBody2D = Defaults.STATIC # _act = _hero.to.ability.fire.ice
+@onready var enemy: StaticBody2D = HUD.STATIC # _act = _hero.to.ability.fire.ice
 
 @export var act_1: String = "one"
 @export var act_2: String = "two"

@@ -6,11 +6,11 @@ extends HBoxContainer
 var _hits: HBoxContainer = null
 var hits: HBoxContainer:
 	get:
-		return Works.upload(self, _hits, Defaults.now.hits, "hits")
+		return Works.upload(self, _hits, LoadBus.hits, "hits")
 
 var _xp: Label = null
 var xp: Label:
-	get: return Works.upload(self, _xp, Defaults.now.xp, "xp")
+	get: return Works.upload(self, _xp, LoadBus.xp, "xp")
 
 func update_meter(duration: float, mx: float) -> void: xp.update_meter(duration, mx)
 

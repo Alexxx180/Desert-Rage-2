@@ -1,12 +1,12 @@
 extends Node
 
-func update_act(ref: Node, caption: String) -> Node: return Works.upload(self, ref, Defaults.now.group % caption, caption)
+func update_act(ref: Node, caption: String) -> Node: return Works.upload(self, ref, LoadBus.group % caption, caption)
 
 var _stats: MakeStats
 var stats: MakeStats:
 	get:
 		if _stats == null:
-			var timer: Timer = Defaults.pre.multiply.instantiate()
+			var timer: Timer = PreloadBus.multiply.instantiate()
 			timer.name = "multiply"
 			add_child(timer)
 			_stats = MakeStats.new(timer)

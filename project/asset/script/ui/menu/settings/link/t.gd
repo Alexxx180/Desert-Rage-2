@@ -9,7 +9,7 @@ var machine: int:
 	get: return logic.mode.device.device
 var topic: Button:
 	get: return phrase(of(logic.option))
-var aggregate: Array = Defaults.ARRAY
+var aggregate: Array = Def.ARRAY
 
 func finish() -> void:
 	ui.footer.finish_input()
@@ -25,7 +25,7 @@ func set_button_input(buttons: Array) -> void:
 
 func set_final_input(buttons: Array) -> void:
 	status(of(logic.option)).text = logic.join(buttons)
-	set_aggregate(Defaults.ARRAY)
+	set_aggregate(Def.ARRAY)
 
 func of(caption: String) -> Variant:
 	var r = ui.options.get_node(caption)

@@ -15,7 +15,7 @@ func update_locale(params: Array) -> void:
 
 func update_hint() -> void:
 	image.texture = hint.texture
-	update_locale(Defaults.ARRAY)
+	update_locale(Def.ARRAY)
 
 func translate(_controls: Node) -> void:
 	update_hint() # controls.masked_translate(hint.body)
@@ -34,7 +34,7 @@ func flip_the_card() -> void:
 
 func change_state(prev: CanvasItem, next: CanvasItem) -> Callable:
 	return func(x: float):
-		if Def.among(-0.5, x, 0.5) and prev.visible:
+		if HUD.among(-0.5, x, 0.5) and prev.visible:
 			prev.hide()
 			next.show()
 		self.scale = Vector2(abs(x), 1)

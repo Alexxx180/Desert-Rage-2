@@ -4,15 +4,15 @@ extends Timer
 @onready var named: String = get_node("../../../../..").name
 
 var punch: PackedScene:
-	get: return Defaults.pre.punch
+	get: return PreloadBus.punch
 var kick: PackedScene:
-	get: return Defaults.pre.kick
+	get: return PreloadBus.kick
 var combos: PackedScene:
-	get: return Defaults.pre.combos
+	get: return PreloadBus.combo
 
 var _behavior: BehaviorTree = null
 var behavior: BehaviorTree:# = $behavior
-	get: return Works.upload(self, _behavior, Defaults.now.actions % named, "behavior")
+	get: return Works.upload(self, _behavior, LoadBus.actions % named, "behavior")
 
 var combo: Node
 

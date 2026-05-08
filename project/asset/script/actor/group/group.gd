@@ -13,17 +13,12 @@ extends Node2D
 @export_flags_3d_navigation var bosses: int
 
 var root: LevelRoot
-var _ray: CharacterBody2D = null
 var ray: CharacterBody2D:
-	get: return upload_hero(_ray, "ray")
-
-var _rock: CharacterBody2D = null
+	get: return Works.uploads(self, LoadBus.ray, "group/ray", upload_hero)
 var rock: CharacterBody2D:
-	get: return upload_hero(_rock, "rock")
-
-var _music: Node = null
+	get: return Works.uploads(self, LoadBus.rock, "group/rock", upload_hero)
 var music: Node:
-	get: return Works.upload(self, _music, Defaults.now.music, "music")
+	get: return Works.uploads(self, LoadBus.music, "music")
 
 var navigation: Array
 var deploy: HeroDeploy = HeroDeploy.new()
@@ -37,15 +32,9 @@ func controls(_root: LevelRoot) -> void:
 	deploy.init(self, deployed)
 	if is_overworld: camera.set_overworld()
 
-func upload_hero(ref: CharacterBody2D, caption: String) -> CharacterBody2D:
-	if ref == null:
-		ref = load(Defaults.now.hero % [caption, caption]).instantiate()
-		ref.name = caption
-		ref.update_stats()
-		set("_" + caption, ref)
-		add_child(ref)
-		ref.controls()
-	return ref
+func upload_hero(ref: CharacterBody2D) -> void:
+	ref.update_stats()
+	ref.controls()
 
 func get_leader() -> CharacterBody2D: return party[deploy.main]
 func get_follower() -> CharacterBody2D: return party[deploy.next]
@@ -61,7 +50,7 @@ func traverse(node: Node, hero: CharacterBody2D):
 		remove_child(camera)
 	hero.add_child(camera)
 
-func _ready() -> void: get_parent().set_script(Defaults.pre.root)
+func _ready() -> void: get_parent().set_script(PreloadBus.root)
 
 func is_hud_opened() -> bool:
 	var result: bool = true

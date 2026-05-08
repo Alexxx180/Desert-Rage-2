@@ -31,7 +31,7 @@ func _init() -> void:
 		j += type.size
 
 func get_item(no: int) -> Dictionary:
-	if no < 0: return Defaults.DICT
+	if no < 0: return Def.DICT
 
 	print("actual number: ", no)
 	var j: int = 0 # var type
@@ -41,4 +41,4 @@ func get_item(no: int) -> Dictionary:
 			print("category type: ", j); return type.get_item(no - j)#, type.get_item(j).item.name)
 		j += type.size
 
-	print("got untypical id number: ", no); return Defaults.DICT
+	print("got untypical id number: ", no); return Def.DICT

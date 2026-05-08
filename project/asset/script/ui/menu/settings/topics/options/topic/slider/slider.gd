@@ -1,6 +1,4 @@
-extends HSlider
-
-class_name FocusedSlider
+class_name FocusedSlider extends HSlider
 
 signal hold_focus(status: bool)
 
@@ -19,9 +17,9 @@ func _ready() -> void:
 	value_changed.connect(func(v: int):
 		submit.text = str(v)#str(v, "%")
 		if v == max_value:
-			add_theme_icon_override("grabber", Defaults.pre.grabber)
+			add_theme_icon_override("grabber", PreloadBus.grabber)
 		else:
-			add_theme_icon_override("grabber", Defaults.TEXTURE)
+			add_theme_icon_override("grabber", HUD.TEXTURE)
 	)
 
 func get_root() -> String: return "../../../../../../"

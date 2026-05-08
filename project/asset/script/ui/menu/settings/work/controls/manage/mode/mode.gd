@@ -7,7 +7,7 @@ extends Node
 var keys: Node
 var buttons: Node:
 	get: return keys.get(device.named)
-var aggregate: Array = Defaults.ARRAY
+var aggregate: Array = Def.ARRAY
 
 func select(caption: String, mask: int = input.DEFAULT) -> void:
 	mask = type.mask(caption, mask)
@@ -15,7 +15,7 @@ func select(caption: String, mask: int = input.DEFAULT) -> void:
 	input.mask(mask, type)
 
 func footer_status(footer: Button, text: String) -> void:
-	if aggregate == Defaults.ARRAY:
+	if aggregate == Def.ARRAY:
 		footer.input_button(text)
 	else:
 		footer.input_button(text, aggregate[input.agg(type)].text)

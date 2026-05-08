@@ -1,7 +1,7 @@
 extends Node
 
-var item: Dictionary = Defaults.DICT
-var _cost: int = Defaults.INT
+var item: Dictionary = Def.DICT
+var _cost: int = Def.INT
 var logic: Node
 
 func get_id(slot: int) -> int: return logic.slot(slot).id

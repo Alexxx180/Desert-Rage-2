@@ -12,14 +12,14 @@ func hardcoded() -> Array: # prevents users from binding keys
 	return [KEY_ESCAPE, KEY_ENTER, KEY_BACKSPACE, KEY_COMMA, KEY_0, KEY_1, KEY_2,
 		KEY_3, KEY_4, KEY_5, KEY_6, KEY_7, KEY_8, KEY_9]
 
-func nullify_agg() -> void: last.fill(Defaults.INT)
-func nullify() -> void: sets(next, RESET, Defaults.INT)
+func nullify_agg() -> void: last.fill(Def.INT)
+func nullify() -> void: sets(next, RESET, Def.INT)
 func sets(element: Array, no: int, code: int) -> void: element[no] = code
 
 func present(code: int, deep: bool = false) -> bool: return code in (last if deep else next)
 func defined() -> bool: return not undefined()
-func undefined() -> bool: return Defaults.INT in last
-func is_mask() -> bool: return last == Defaults.INT
+func undefined() -> bool: return Def.INT in last
+func is_mask() -> bool: return last == Def.INT
 
 func remove() -> void: next.pop_back()
 func clear() -> void: next.clear()

@@ -10,7 +10,7 @@ var rock: HFlowContainer:
 
 func upload_bag(hero: HFlowContainer, title: String) -> void:
 	if hero == null:
-		hero = Defaults.pre.bag.instantiate() # set("_" + title, hero) if ref won't work
+		hero = PreloadBus.bag.instantiate() # set("_" + title, hero) if ref won't work
 		hero.name = title
 		var space: Control = get_node(title)
 		space.add_sibling(hero)

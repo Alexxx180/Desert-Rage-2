@@ -6,10 +6,10 @@ func _has_first(items: Array) -> bool:
 	return cells.check(cells.recipe(items), cells.first, cells.set_id, 0)
 
 func _has_other(items: Array) -> bool:
-	return cells.check(items, cells.other, Defaults.FUNC, cells.MIN)
+	return cells.check(items, cells.other, Def.FUNC, cells.MIN)
 
 func reset_id() -> bool:
-	cells.set_id(Defaults.INT)
+	cells.set_id(Def.INT)
 	return false
 
 func complete_product(logic: Node, items: Array) -> bool:

@@ -18,7 +18,7 @@ func animation() -> void:
 	_hero.to.moves.set_fighting("skill_two")
 
 func ability() -> void:
-	if _vessel != Defaults.ENTITY and !_vessel.logic.link.spark.on and aura.use(cost):
+	if _vessel != HUD.ENTITY and !_vessel.logic.link.spark.on and aura.use(cost):
 		_vessel.logic.work.spark.charge()
 	
 	print("ROCK SPARK, ", _last_position != Vector2.ZERO)

@@ -4,7 +4,7 @@ extends Node2D
 
 var _fight: Node2D = null
 var fight: Node2D:
-	get: return Works.upload(self, _fight, Defaults.now.fight, "fight")
+	get: return Works.upload(self, _fight, LoadBus.fight, "fight")
 
 var casual: bool = true
 var dir: Vector2i = Vector2i(0, 1)

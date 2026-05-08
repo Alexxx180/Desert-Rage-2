@@ -1,8 +1,6 @@
-extends Node
+class_name IPreset extends Node
 
-class_name IPreset
-
-var mask: Array = Defaults.ARRAY
+var mask: Array = Def.ARRAY
 var preset: Array = []
 var s: Node
 
@@ -12,7 +10,7 @@ func add(op: HFlowContainer, title: Variant, ui: Control) -> void:
 	preset.push_back(s.get(s.p.c).model(op, title, ui, s.p.d))
 
 func bit(value: int) -> Variant:
-	return Defaults.DICT if mask == Defaults.ARRAY else mask[value]
+	return Def.DICT if mask == Def.ARRAY else mask[value]
 
 func set_toggle(value: Variant, ref: Dictionary) -> void:
 	ref.ui.set(ref.prop, value)

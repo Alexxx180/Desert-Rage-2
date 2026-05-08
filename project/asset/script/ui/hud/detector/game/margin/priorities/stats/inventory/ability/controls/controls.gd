@@ -5,16 +5,15 @@ extends VBoxContainer
 
 var _hp: HBoxContainer = null
 var hp: HBoxContainer:
-	get: return Works.upload_at(status, _hp, "hp", Defaults.now.hp, "hp")
+	get: return Works.upload_at(status, _hp, "hp", LoadBus.hp, "hp")
 
 var _markers: HFlowContainer = null
 var markers: HFlowContainer:
-	get: return Works.upload(self, _markers, Defaults.now.items, "markers") # TODO SET MARKERS FREE FROM LINKING
-
+	get: return Works.upload(self, _markers, LoadBus.items, "markers") # TODO SET MARKERS FREE FROM LINKING
 
 var _hints: VBoxContainer = null
 var hints: VBoxContainer:
-	get: return Works.upload_at(self, status, _hints, Defaults.now.hints % "hints", "hints")
+	get: return Works.upload_at(self, status, _hints, LoadBus.hints % "hints", "hints")
 
 var control: bool:
 	set(value):

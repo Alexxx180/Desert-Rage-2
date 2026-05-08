@@ -1,13 +1,13 @@
 extends Node
 
-@onready var box: Dictionary = { "prev": Defaults.ENTITY, "next": Defaults.ENTITY }
+@onready var box: Dictionary = { "prev": HUD.ENTITY, "next": HUD.ENTITY }
 
 const LANDED: int = 1.0
 
 var velo: VeloHero 
 var target: Rect2
 var delta: Vector2:
-	get: #target.size if Defaults.entity(box.next) else delta) * part
+	get: #target.size if HUD.entity(box.next) else delta) * part
 		if Def.entity(box.next): #if box_ride(): # print("theory hero pos: ", hero.position) ; print("theory: ", box.prev.ledge - target.position) #	return box.prev.ledge - target.size
 			return target.size
 		print("next box: ", box.next.ledge)
@@ -19,7 +19,7 @@ var delta: Vector2:
 			return box.next.ledge - target.position
 		# return box.next.ledge - (box.prev.ledge if box_ride() else target.position)
 
-func box_ride() -> bool: return box.prev != Defaults.ENTITY
+func box_ride() -> bool: return box.prev != HUD.ENTITY
 
 func is_landed(track: float) -> bool: return track == LANDED
 

@@ -31,7 +31,7 @@ func end() -> void:
 	sequence(false)
 	moves.set_move_action("go")
 	moves.set_hang_move("go")
-	#$moves.hero.to.act.teleport.platform.set_box(Defaults.ENTITY)
+	#$moves.hero.to.act.teleport.platform.set_box(HUD.ENTITY)
 	print("JUMP FINISHED")
 
 func pull_box(has_boxes: bool) -> void:

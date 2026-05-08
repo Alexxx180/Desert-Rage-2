@@ -12,7 +12,7 @@ func connect_stats(stack: Container) -> void:
 
 func controls(hud: CanvasLayer, game: Control) -> void:
 	hint = hud.processor.game.help
-	panel = Defaults.pre.chats.instantiate()
+	panel = PreloadBus.chats.instantiate()
 	hint.block.panel = panel
 	game.priorities.stats.topic.loaded.connect(connect_stats)
 	

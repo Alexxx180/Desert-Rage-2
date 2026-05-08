@@ -1,17 +1,17 @@
 extends Node
 
 @onready var jump: LedgeDeployment = LedgeDeployment.new()
-@onready var pillar: LevelsPillar = LevelsPillar.new(Defaults.NODE)
-@onready var box: Dictionary = { "prev": Defaults.ENTITY, "next": Defaults.ENTITY }
+@onready var pillar: LevelsPillar = LevelsPillar.new(HUD.NODE)
+@onready var box: Dictionary = { "prev": HUD.ENTITY, "next": HUD.ENTITY }
 
 var target: Rect2
 var delta: Vector2: get = get_delta # return box.next.ledge - (box.prev.ledge if box_ride() else target.position)
 
-func get_delta() -> Vector2: #target.size if Defaults.entity(box.next) else delta) * part #if box_ride(): # print("theory hero pos: ", hero.position) ; print("theory: ", box.prev.ledge - target.position) #	return box.prev.ledge - target.size
+func get_delta() -> Vector2: #target.size if HUD.entity(box.next) else delta) * part #if box_ride(): # print("theory hero pos: ", hero.position) ; print("theory: ", box.prev.ledge - target.position) #	return box.prev.ledge - target.size
 	if Def.entity(box.next): return target.size
 	return Def.ic("next box: ", box.next.ledge) - (Def.ic("- old box standing: ", box.prev.ledge) if box_ride() else Def.ic("- target pos : ", target.position))
 
-func box_ride() -> bool: return box.prev != Defaults.ENTITY
+func box_ride() -> bool: return box.prev != HUD.ENTITY
 
 func is_landed(track: float, LANDED: int = 1) -> bool: return track == LANDED
 
@@ -38,7 +38,7 @@ func reparent_hero(prev: Node2D, next: Node2D) -> void:
 
 func _jump_from_platform() -> void:
 	reparent_hero(box.prev.view, jump.jump.velo.hero.group)
-	reposition(box.prev.ledge + target.size, Defaults.ENTITY)
+	reposition(box.prev.ledge + target.size, HUD.ENTITY)
 
 func _jump_to_platform() -> void:
 	reparent_hero(jump.jump.velo.hero.group if Def.entity(box.prev) else box.prev.view, box.next.view)

@@ -3,10 +3,10 @@ extends Node
 @onready var named: String = get_node("../../../..").name
 
 func update_act(ref: Node, caption: String, path: String = caption) -> Node:
-	return Works.upload(self, ref, Defaults.now.world % path, caption)
+	return Works.upload(self, ref, LoadBus.world % path, caption)
 
 func update_ability(ref: Node) -> Node:
-	return Works.upload(self, ref, Defaults.now.input % [named, "ability/ability"], "ability")
+	return Works.upload(self, ref, LoadBus.input % [named, "ability/ability"], "ability")
 
 var _skills: Node = null
 var skills: Node:

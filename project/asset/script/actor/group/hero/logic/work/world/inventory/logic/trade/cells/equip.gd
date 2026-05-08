@@ -2,14 +2,14 @@ extends Node
 
 var logic: Node
 var bank: Dictionary
-var space: Dictionary = Defaults.DICT
+var space: Dictionary = Def.DICT
 var select: Dictionary:
 	get: return bank[space.id][space.x - 1]
 
 var available: bool:
-	get: return space != Defaults.DICT 
+	get: return space != Def.DICT 
 
-func _slot() -> Dictionary: return { "equip": [], "cross": Defaults.DICT }
+func _slot() -> Dictionary: return { "equip": [], "cross": Def.DICT }
 func _equip(slot: int) -> Dictionary:
 	var id: int = logic.slot(slot).id
 	return { "item": logic.item(id), "id": id }

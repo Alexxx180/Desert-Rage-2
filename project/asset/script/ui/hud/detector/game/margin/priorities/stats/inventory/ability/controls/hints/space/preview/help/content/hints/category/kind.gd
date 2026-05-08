@@ -22,7 +22,7 @@ func _ready() -> void:
 		ui[i].showcase.pressed.connect(func():
 			if not ui[i].helping:
 				_change(i))
-		ui[i].update_hint(Defaults.ARRAY)
+		ui[i].update_hint(Def.ARRAY)
 
 func _select_next(next: int) -> int:
 	match next:

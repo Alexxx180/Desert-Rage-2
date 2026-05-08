@@ -6,26 +6,26 @@ enum { WHIP = 240, CHAINS = 177 } # -417 MAX for whip (chains)
 
 var _ledges: Area2D = null
 var ledges: Area2D:
-	get: return Works.upload(self, _ledges, Defaults.now.ledges, "ledges")
+	get: return Works.upload(self, _ledges, LoadBus.ledges, "ledges")
 
 var _pull: ShapeCast2D = null
 var pull: ShapeCast2D:
-	get: return Works.upload(self, _pull, Defaults.now.pull, "pull")
+	get: return Works.upload(self, _pull, LoadBus.pull, "pull")
 
 var _whip: ShapeCast2D = null
 var whip: ShapeCast2D:
-	get: return Works.upload(self, _whip, Defaults.now.whip, "whip")
+	get: return Works.upload(self, _whip, LoadBus.whip, "whip")
 
 var _ground: Area2D = null
 var ground: Area2D:
-	get: return Works.upload(self, _ground, Defaults.now.ground, "ground")
+	get: return Works.upload(self, _ground, LoadBus.ground, "ground")
 
 var _fight: Node2D = null
 var fight: Node2D:
-	get: return Works.upload(self, _fight, Defaults.now.fight, "fight")
+	get: return Works.upload(self, _fight, LoadBus.fight, "fight")
 
 func set_direction(direction: Vector2i) -> void:
-	target_position = Defaults.DIRECTION * direction
+	target_position = Def.DIRECTION * direction
 
 func set_pull() -> void:
 	pull.position = target_position

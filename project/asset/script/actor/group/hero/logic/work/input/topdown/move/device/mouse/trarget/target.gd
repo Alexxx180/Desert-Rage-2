@@ -4,7 +4,7 @@ var locked: bool = false
 var hero: CharacterBody2D
 
 @onready var antistuck: Node = $antistuck
-@onready var _enemy: CharacterBody2D = Defaults.ENTITY
+@onready var _enemy: CharacterBody2D = HUD.ENTITY
 
 var enemy: CharacterBody2D:
 	set(value): _enemy = value#; select_mode(!no_target())
@@ -17,9 +17,9 @@ func end_fight() -> void:
 	antistuck.perform_motion(hero, hero)
 	reset_target()
 
-func no_target() -> bool: return _enemy == Defaults.ENTITY
+func no_target() -> bool: return _enemy == HUD.ENTITY
 func reset_target() -> void:
-	enemy = Defaults.ENTITY
+	enemy = HUD.ENTITY
 	locked = false
 
 func hero_lock_move() -> void:

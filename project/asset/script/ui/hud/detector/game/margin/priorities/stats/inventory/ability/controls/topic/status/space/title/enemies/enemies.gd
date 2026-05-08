@@ -5,7 +5,7 @@ extends Control
 @onready var preset: HBoxContainer = $preset
 @onready var skills: PanelContainer = get_node("../../hints/space/scroll/stack/skills")
 
-func _update_pause() -> Variant: return Works.upload_hold(self, "holder", _pause, Defaults.now.pause, "pause")
+func _update_pause() -> Variant: return Works.upload_hold(self, "holder", _pause, LoadBus.pause, "pause")
 
 var _pause: HBoxContainer = null
 var pause: HBoxContainer:
@@ -13,11 +13,11 @@ var pause: HBoxContainer:
 
 var _enemy: PanelContainer = null
 var enemy: PanelContainer:
-	get: return Works.upload_hold(self, "space", _enemy, Defaults.now.enemy, "enemy")
+	get: return Works.upload_hold(self, "space", _enemy, LoadBus.enemy, "enemy")
 
 var _slots: ColorRect = null
 var slots: ColorRect:
-	get: return Works.upload_at(self, status, _slots, Defaults.now.slots, "slots")
+	get: return Works.upload_at(self, status, _slots, LoadBus.slots, "slots")
 
 func _ready() -> void:
 	$holder.mouse_entered.connect(_update_pause) #status.xp.set_fixed(fixed)

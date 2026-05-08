@@ -1,6 +1,4 @@
-extends GPUParticles2D
-
-class_name FireParticle
+class_name FireParticle extends GPUParticles2D
 
 func _ready() -> void:
 	one_shot = true

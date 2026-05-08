@@ -10,7 +10,7 @@ var items: GameItems
 func _ready() -> void: trade.items = self
 
 func update_inventory() -> void:
-	for slot in range(len(storage) - 1, Defaults.INT, Defaults.INT):
+	for slot in range(len(storage) - 1, Def.INT, Def.INT):
 		ui.update_item(slot, storage[slot])
 
 func decide_item_or_equipment(id: int) -> int:

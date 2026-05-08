@@ -14,7 +14,7 @@ func determine() -> void: # print("determine jump")
 		jump.velo.set_box(Def.ic('jump on the box %s', that.box))
 		jump.jump(that.box.pos)
 	else:
-		jump.velo.set_box(Def.ic('jump on the floor %s', Defaults.ENTITY))
+		jump.velo.set_box(Def.ic('jump on the floor %s', HUD.ENTITY))
 		jump.deploy()
 
 func perform(motion: Vector2) -> void:

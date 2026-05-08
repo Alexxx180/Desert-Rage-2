@@ -7,7 +7,7 @@ func reset_monitoring(allow: bool) -> void: #_allow_monitoring = allow
 
 func set_direction(direction: Vector2i) -> void:
 	if not Input.is_action_pressed("action") and direction != Vector2i.ZERO:
-		position = Defaults.DIRECTION * direction
+		position = Def.DIRECTION * direction
 		ledge.set_direction(direction)
 		"""
 		var pos: Vector2 = direction * distance

@@ -1,63 +1,39 @@
 extends Node
 
-func _p() -> String: return Defaults.now.ability
-func update_act(ref: Node, caption: String) -> Node: return Works.upload(self, ref, _p() % caption, caption)
+func _p(title: String) -> String: return LoadBus.ability % title
+func update_act(ref: Node, caption: String) -> Node: return Works.upload(self, ref, _p(caption), caption)
 
 var has_sources: bool = false
 var lockers: Lockers
 
 var _flow: FlowConductor = null
 var flow: FlowConductor:
-	get:
-		if _flow == null:
-			_flow = FlowConductor.new()
-			_flow.root = lockers.root
-			_flow.flow.connect(puddle_charge)
-		return _flow
+	get: return Works.inits(self, _flow, "flow", get_flow)
 
-var _rain: Node = null
+func get_flow() -> FlowConductor:
+	_flow = FlowConductor.new()
+	_flow.root = lockers.root
+	_flow.flow.connect(puddle_charge)
+	return _flow
+
 var rain: Node:
-	get:
-		if _rain == null:
-			var title: String = "rain"
-			_rain = load(_p() % title).instantiate()
-			_rain.name = title
-			_rain.conductor = flow
-			add_child(_rain)
-		return _rain
-
-var _spark: Timer = null
+	get: return Works.uploads(self, _p("rain"), "rain", set_conductor)
 var spark: Timer:
-	get:
-		if _spark == null:
-			var title: String = "spark"
-			_spark = load(_p() % title).instantiate()
-			_spark.name = title
-			_spark.conductor = flow
-			add_child(_spark)
-		return _spark
-
-var _chains: Node = null
+	get: return Works.uploads(self, _p("spark"), "spark", set_conductor)
 var chains: Node:
-	get:
-		if _chains == null:
-			var title: String = "chains"
-			_chains = load(_p() % title).instantiate()
-			_chains.name = title
-			_chains.set_conductor(flow)
-			_chains.charge.activate(lockers.activator.map_activate)
-			rain.add_child(_chains)
-		return _chains
-
-var _freeze: Node = null
+	get: return Works.uploads(rain, _p("chains"), "chains", set_chains)
 var freeze: Node:
-	get:
-		if _freeze == null:
-			_freeze = load(_p() % "freeze").instantiate()
-			_freeze.root = lockers.root
-			add_child(_freeze)
-			if has_sources: _freeze.fire_drain.connect(evaporation)
-		return _freeze
+	get: return Works.uploads(self, _p("freeze"), "freeze", set_freeze)
+
+func set_conductor(_rain: Node) -> void: _rain.conductor = flow
+
+func set_chains(_chains: Node) -> void:
+	_chains.set_conductor(flow)
+	_chains.charge.activate(lockers.activator.map_activate)
+
+func set_freeze(_freeze: Node) -> void:
+	_freeze.root = lockers.root
+	if has_sources: _freeze.fire_drain.connect(evaporation)
 
 func evaporation(map_coords: Vector2i) -> void: chains.drain.evaporation(map_coords)
 

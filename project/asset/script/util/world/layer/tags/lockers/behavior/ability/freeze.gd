@@ -6,7 +6,7 @@ var root: LevelRoot
 var act: TilesTape = TilesTape.new(2, 1).add("ICE").add("PUDDLE")
 
 func evaporation() -> void:
-	root.execute.erase().add_chip(Defaults.pre.fire.instantiate())
+	root.execute.erase().add_chip(PreloadBus.fire.instantiate())
 	fire_drain.emit(root.execute.tcoords)
 
 func break_ice(damage: int) -> void:

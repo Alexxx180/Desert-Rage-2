@@ -4,8 +4,8 @@ enum { SECOND = 1, MIN = 2 }
 
 var ii: int
 var craft: Dictionary
-var craft_id: int = Defaults.INT
-var _recipes: Array = Defaults.ARRAY
+var craft_id: int = Def.INT
+var _recipes: Array = Def.ARRAY
 
 func check(items: Array, search: Callable, flow: Callable, offset: int) -> bool:
 	for i in range(offset, len(items)):

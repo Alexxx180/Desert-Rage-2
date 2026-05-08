@@ -18,14 +18,14 @@ func load_inventory(stack: Container) -> void:
 		navigation.ui.ability.controls.status.sticker.hp
 	], [
 		navigation.ui.ability.controls.status.markers
-	], Defaults.ARRAY])
+	], Def.ARRAY])
 
 func load_ability(stack: Container) -> void:
 	var status: HBoxContainer = stack.space.status.space.title.status
 	var focus: Control = status.xp.body.space.options.pause
 	ability.face(Y, PORTION.HALF, ABILITY, focus, [[
 		ability.ui.controls.topic.status
-	], Defaults.ARRAY])
+	], Def.ARRAY])
 
 func face_inventory(split: SplitContainer, s: SplitContainer) -> void:
 	navigation.ui = split ; stats = s

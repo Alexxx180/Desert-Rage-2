@@ -22,10 +22,10 @@ func get_item(no: int) -> Dictionary: return effect[no]
 func _icon(path: String) -> String: return path + ".svg"
 func _type(short: String) -> String: return short
 
-func _items(name: String, type: String, description: String, icon: String, logic: Variant, _craft: Dictionary = Defaults.DICT) -> Dictionary:
+func _items(name: String, type: String, description: String, icon: String, logic: Variant, _craft: Dictionary = Def.DICT) -> Dictionary:
 	return { "logic": logic, "item": Item.new(name + "T", _type(type), description, _icon(icon), _craft) }
 
-func _item(name: String, type: String, icon: String, logic: Variant, _craft: Dictionary = Defaults.DICT) -> Dictionary:
+func _item(name: String, type: String, icon: String, logic: Variant, _craft: Dictionary = Def.DICT) -> Dictionary:
 	return _items(name, type, name + "D", icon, logic, _craft)
 
 func _get_effect() -> Array[Dictionary]: return []

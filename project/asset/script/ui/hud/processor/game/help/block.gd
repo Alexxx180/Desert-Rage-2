@@ -5,7 +5,7 @@ var panel: VBoxContainer
 var emotion: Array = []
 
 func chat(who: String, key: String):
-	var statement: Label = Defaults.pre.chat.instantiate()
+	var statement: Label = PreloadBus.chat.instantiate()
 	statement.say(who, key)
 	return statement
 

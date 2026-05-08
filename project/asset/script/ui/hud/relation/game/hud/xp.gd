@@ -1,6 +1,6 @@
 extends Node
 
-var _stats: Dictionary = Defaults.DICT
+var _stats: Dictionary = Def.DICT
 var stats: VBoxContainer = null
 var priority: VBoxContainer = null
 var group: Node2D
@@ -24,7 +24,7 @@ func connect_xp() -> void:
 		priority.set_priorities(_level, _stats, group)
 	)
 	group.deploy.select_hero.connect(func(leader):
-		if _stats == Defaults.DICT:
+		if _stats == Def.DICT:
 			_stats = group.xp.current_stats()
 
 		stats.stats.bag.select_hero(party)

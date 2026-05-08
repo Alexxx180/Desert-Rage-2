@@ -1,6 +1,6 @@
 extends Node
 
-func update_act(ref: Node, caption: String) -> Node: return Works.upload(self, ref, Defaults.now.health % caption, caption)
+func update_act(ref: Node, caption: String) -> Node: return Works.upload(self, ref, LoadBus.health % caption, caption)
 
 var _aura: Node = null
 var aura: Node:

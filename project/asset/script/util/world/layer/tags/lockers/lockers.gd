@@ -4,19 +4,10 @@ enum { MECH = 0, SOURCE = 2 }
 
 var root: LevelRoot
 
-var _ability: Node = null
-var ability: Node:
-	get:
-		if _ability == null:
-			_ability = load(Defaults.now.ability % "ability").instantiate()
-			_ability.lockers = self
-			add_child(_ability)
-		return _ability
+func set_lockers(_ability: Node) -> void: _ability.lockers = self
 
-var _activator: Node = null
+var ability: Node:
+	get: return Works.uploads(self, LoadBus.ability % "ability", "ability", set_lockers)
+
 var activator: Node:
-	get:
-		if _activator == null:
-			_activator = load(Defaults.now.activator).instantiate()
-			add_child(_activator)
-		return _activator
+	get: return Works.uploads(self, LoadBus.activator, "activator")

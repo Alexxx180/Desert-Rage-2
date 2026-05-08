@@ -10,13 +10,13 @@ var last_pos: Vector2
 func _init(h: CharacterBody2D) -> void: hero = h
 
 func use(cost: int) -> bool: return hero.to.resource.use(cost)
-func no_box() -> bool: return box == Defaults.ENTITY
+func no_box() -> bool: return box == HUD.ENTITY
 func undefined_pos() -> bool: return last_pos == Vector2.ZERO
 
 func far_map() -> void: last_pos = Vector2.ZERO
 func near_map(act: Node2D) -> void: last_pos = hero.position + act.position
 func near_box(vessel: CharacterBody2D) -> void: box = vessel
-func far_box(_vessel: CharacterBody2D) -> void: box = Defaults.ENTITY
+func far_box(_vessel: CharacterBody2D) -> void: box = HUD.ENTITY
 
 func animate(motion: Vector2) -> void: hero.view.move(motion)
 func make(motion: Vector2) -> void: hero.make_velocity(motion)

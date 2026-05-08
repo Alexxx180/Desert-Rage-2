@@ -4,20 +4,21 @@ extends Node
 
 @onready var game: CanvasLayer = $game
 
+var stats: SessionStats
 var _settings: CanvasLayer = null
 var settings: CanvasLayer:
-	get: return Works.upload(self, _settings, Defaults.now.settings, "settings")
+	get: return Works.upload(self, _settings, LoadBus.settings, "settings")
 
 var _information: CanvasLayer = null
 var information: CanvasLayer:
-	get: return Works.upload(self, _information, Defaults.now.information, "information")
+	get: return Works.upload(self, _information, LoadBus.information, "information")
 
 var _sound: CanvasLayer = null
 var sound: CanvasLayer:
-	get: return Works.upload(self, _sound, Defaults.now.sound, "sound")
+	get: return Works.upload(self, _sound, LoadBus.sound, "sound")
 
 func set_group() -> void:
-	SessionStats.save_progress()
+	stats.save_progress()
 	#group
 	# game.set_preview(group, progress)
 

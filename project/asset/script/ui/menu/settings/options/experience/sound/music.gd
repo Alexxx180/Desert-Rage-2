@@ -15,7 +15,7 @@ func _ready() -> void:
 	bus_index = AudioServer.get_bus_index(bus_name)
 	value_changed.connect(_on_value_changed)
 	var json: Dictionary = Vault.get_json(FILE, func(s): pass)
-	if json != Defaults.DICT:
+	if json != Def.DICT:
 		default_volume = json.music
 	_init()
 

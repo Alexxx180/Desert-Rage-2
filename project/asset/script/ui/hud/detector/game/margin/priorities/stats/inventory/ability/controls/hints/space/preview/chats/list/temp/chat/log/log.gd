@@ -25,8 +25,8 @@ func add_log(scene: PackedScene, feedback: Callable) -> void:
 
 func set_priority(level: Node, stats: Dictionary) -> void:
 	if level.summary != level.prev:
-		add_log(Defaults.pre.levels, func(node): node.set_priority(level, stats))
+		add_log(PreloadBus.levels, func(node): node.set_priority(level, stats))
 
-func add_item(thing: String) -> void: add_log(Defaults.pre.item, func(n): n.chest(thing))
-func add_enemy(thing: String) -> void: add_log(Defaults.pre.item, func(n): n.analyze(thing))
-func add_any(thing: String) -> void: add_log(Defaults.pre.item, func(n): n.say(thing))
+func add_item(thing: String) -> void: add_log(PreloadBus.item, func(n): n.chest(thing))
+func add_enemy(thing: String) -> void: add_log(PreloadBus.item, func(n): n.analyze(thing))
+func add_any(thing: String) -> void: add_log(PreloadBus.item, func(n): n.say(thing))

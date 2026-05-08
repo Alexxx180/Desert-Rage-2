@@ -1,6 +1,4 @@
-extends Node
-
-class_name ActionsControl
+class_name ActionsControl extends Node
 
 var keys: Node
 var defaults: Node
@@ -28,7 +26,7 @@ func translate_word(key: int) -> bool:
 func translate_sentence(act: Array, s: bool = false) -> Array[String]:
 	var sentence: Array[String] = []
 	for i in act:
-		if i == Defaults.INT:
+		if i == Def.INT:
 			word = "_"
 		else:
 			translate_word(i if s else actions[a(i)])
@@ -47,7 +45,7 @@ func translate_all(acts: Array) -> Array[String]: return translate(acts, " + ", 
 func masked_translate(hint: String, sep: String) -> Array[String]:
 	if mask.has(hint): return translate(mask[hint], sep)
 	if defaults.has(hint): return defaults[hint]
-	return Defaults.ARRAY
+	return Def.ARRAY
 
 func masked_agg(hint: String) -> Array[String]: return masked_translate(hint, "")
 func masked_all(hint: String) -> Array[String]: return masked_translate(hint, " + ")
