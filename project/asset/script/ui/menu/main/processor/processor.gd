@@ -1,4 +1,4 @@
-extends CanvasLayer
+extends Control
 
 @onready var tree: SceneTree = get_tree()
 

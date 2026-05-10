@@ -1,7 +1,5 @@
 extends TileMapLayer
 
-@onready var recovery: Node = $recovery
-
 const MANUAL: int = 1
 
 var books: Dictionary = {}

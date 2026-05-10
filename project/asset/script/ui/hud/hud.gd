@@ -2,22 +2,17 @@ extends Node
 
 @export var progress: HelpPreview
 
-@onready var game: CanvasLayer = $game
+var game: CanvasLayer = $game
 
 var stats: SessionStats
-var _settings: CanvasLayer = null
-var settings: CanvasLayer:
-	get: return Works.upload(self, _settings, LoadBus.settings, "settings")
+var settings: Control:
+	get: return Works.uploads(self, LoadBus.settings, "settings")
+var information: Control:
+	get: return Works.uploads(self, LoadBus.information, "information")
+var sound: Control:
+	get: return Works.uploads(self, LoadBus.sound, "sound")
 
-var _information: CanvasLayer = null
-var information: CanvasLayer:
-	get: return Works.upload(self, _information, LoadBus.information, "information")
-
-var _sound: CanvasLayer = null
-var sound: CanvasLayer:
-	get: return Works.upload(self, _sound, LoadBus.sound, "sound")
-
-func set_group() -> void:
+func set_group() -> void: 
 	stats.save_progress()
 	#group
 	# game.set_preview(group, progress)

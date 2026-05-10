@@ -1,5 +1,4 @@
 extends Control
-
 @onready var game: Control = $game
 var pause: Control
 

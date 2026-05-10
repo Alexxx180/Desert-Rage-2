@@ -11,7 +11,7 @@ func _ready() -> void: music.controls(self)
 func set_overworld() -> void:
 	zooming.overworld()
 	zoom = Vector2(0.2, 0.2)
-	position_smoothing_enabled = true
+	# position_smoothing_enabled = true
 
 func _input(_event) -> void:
 	var z: float = zooming.zoom()

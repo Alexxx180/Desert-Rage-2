@@ -1,6 +1,4 @@
-extends Timer
-
-class_name ControlTimeHooder
+class_name ControlTimeHooder extends Timer
 
 const TIME: float = 0.5
 

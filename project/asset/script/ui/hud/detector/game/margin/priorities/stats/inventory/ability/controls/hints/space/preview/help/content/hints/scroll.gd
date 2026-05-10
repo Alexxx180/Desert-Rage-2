@@ -1,5 +1,7 @@
 extends ScrollContainer
 
+@onready var options: VBoxContainer = $options
+
 var scroll: int = 0
 
 func _physics_process(_delta: float) -> void:

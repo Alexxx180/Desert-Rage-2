@@ -1,6 +1,4 @@
-extends CanvasLayer
-
-@onready var way: ColorRect = $way
+extends ColorRect
 
 enum { WAY = 0, LEDGE = 1 }
 
@@ -10,12 +8,12 @@ var ledges: ColorRect:
 	get: return Works.upload(self, _ledges, LoadBus.hero % ["ledges", "ledges"], "ledges")
 
 func entry_way() -> void: # way.color = Color.BLACK
-	blackout.as_way(way, Color.TRANSPARENT, true)
+	blackout.as_way(self, Color.TRANSPARENT, true)
 
 func entry_ledges() -> void:
 	blackout.set_color(Color.BLACK)
 	blackout.as_ledges(ledges, Color.TRANSPARENT, true)
-	way.color = Color.TRANSPARENT
+	color = Color.TRANSPARENT
 
 func entry_transit(type: int) -> void:
 	match type:
@@ -25,5 +23,5 @@ func entry_transit(type: int) -> void:
 func start_transition(level: String, _floor_diff: int = 0, type: int = LEDGE) -> void:
 	blackout.scene = level
 	match type:
-		WAY: blackout.as_way(way, Color.BLACK, true)
+		WAY: blackout.as_way(self, Color.BLACK, true)
 		LEDGE: blackout.as_ledges(ledges, Color.BLACK, true)

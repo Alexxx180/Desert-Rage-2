@@ -1,6 +1,7 @@
 class_name LoadBus extends RefCounted
 
 const first_level: String = "res://now/dungeon/cave/origin/0/0/level.tscn"
+const main_menu: String = "res://now/credits/main/main.tscn"
 const fight: String = "res://now/see/fight.tscn"
 const ground: String = "res://now/see/ground.tscn"
 const whip: String = "res://now/see/whip.tscn"
@@ -10,6 +11,7 @@ const health: String = "res://now/work/health/%s.tscn"
 const ability: String = "res://now/work/lockers/ability/%s.tscn"
 const activator: String = "res://now/work/lockers/ability/%s.tscn"
 const music: String = "res://now/work/music.tscn" # const hero: String = "res://now/work/hero/%s/%s.tscn"
+const hero: String = "res://now/work/hero/%s/%s.tscn"
 const ray: String = "res://now/work/hero/ray/ray.tscn"
 const rock: String = "res://now/work/hero/rock/rock.tscn"
 const group: String = "res://now/work/group/%s.tscn"

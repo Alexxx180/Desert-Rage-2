@@ -1,16 +1,12 @@
 extends Node2D
 
 @onready var camera: Camera2D = $camera
-@onready var xp: Node = $xp
-@onready var initial: Vector2 = position
 
 @export_group("Deployment")
 @export var is_overworld: bool = false
 @export var deployed: bool = true
 @export var casual_mode: bool = false
-@export_group("Enemies")
-@export_flags_3d_physics var monsters: int
-@export_flags_3d_navigation var bosses: int
+@export_flags_3d_physics var enemy: int
 
 var root: LevelRoot
 var ray: CharacterBody2D:
@@ -20,12 +16,11 @@ var rock: CharacterBody2D:
 var music: Node:
 	get: return Works.uploads(self, LoadBus.music, "music")
 
-var navigation: Array
-var deploy: HeroDeploy = HeroDeploy.new()
+var work: GroupWork
+
+var deploy: HeroDeploy = HeroDeploy.new(position)
 var party: Array[CharacterBody2D]:
 	get: return [ray, rock]
-var leader: CharacterBody2D: get = get_leader
-var follower: CharacterBody2D: get = get_follower
 
 func controls(_root: LevelRoot) -> void:
 	root = root
@@ -36,12 +31,12 @@ func upload_hero(ref: CharacterBody2D) -> void:
 	ref.update_stats()
 	ref.controls()
 
-func get_leader() -> CharacterBody2D: return party[deploy.main]
-func get_follower() -> CharacterBody2D: return party[deploy.next]
-func sync_pos() -> void: follower.position = leader.position
+func leader() -> CharacterBody2D: return party[deploy.main]
+func follower() -> CharacterBody2D: return party[deploy.next]
+func sync_pos() -> void: follower().position = leader().position
 func locate(next: Vector2) -> void: for hero in party: hero.position = next
 func forget_velocity() -> void:
-	leader.logic.work.input.topdown.move.act.velocity.forget()
+	leader().logic.work.input.topdown.move.act.velocity.forget()
 
 func traverse(node: Node, hero: CharacterBody2D):
 	if node != null:
@@ -52,19 +47,6 @@ func traverse(node: Node, hero: CharacterBody2D):
 
 func _ready() -> void: get_parent().set_script(PreloadBus.root)
 
-func is_hud_opened() -> bool:
-	var result: bool = true
-	for n in navigation:
-		var last: bool = n.hud.logic.is_opened_last
-		result = result and (not last)
-	return not result
-
-func _set_input(state: bool) -> void:
-	for hero in party: hero.logic.work.input.suspended = state
-
-func resume_input() -> void: if not is_hud_opened(): _set_input(false)
-func suspend_input() -> void: _set_input(true)
-
 func _input(_event: InputEvent) -> void:
-	if deploy.is_select(): deploy.select(self, leader, follower)
+	if deploy.is_select(): deploy.select(self, leader(), follower())
 	elif deploy.is_group(): deploy.regroup(self)

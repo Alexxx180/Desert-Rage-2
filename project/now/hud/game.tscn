@@ -1,0 +1,84 @@
+[gd_scene load_steps=13 format=3 uid="uid://cel3u88abrgv3"]
+
+[ext_resource type="Theme" uid="uid://p2br8b6ea3n6" path="res://asset/resource/ui/theme/patterns/template/menu/hud/pause/pause.tres" id="1_hhfp1"]
+[ext_resource type="Script" uid="uid://81xdi4771u0a" path="res://asset/script/ui/hud/detector/game/game.gd" id="2_xesv8"]
+[ext_resource type="Script" uid="uid://bin7ih026bhac" path="res://asset/script/ui/hud/detector/game/margin/priorities/priorities.gd" id="3_elm3m"]
+[ext_resource type="Script" uid="uid://ckuuvbre3lyln" path="res://asset/script/ui/hud/detector/game/margin/priorities/stats/stats.gd" id="4_ggbgf"]
+[ext_resource type="PackedScene" uid="uid://c3dwvtm5ivwwp" path="res://asset/scene/ui/hud/detector/game/menu/stats/topic/topic.tscn" id="5_d8wtd"]
+[ext_resource type="Script" uid="uid://hcq4mc35vqx0" path="res://asset/script/ui/hud/detector/game/margin/priorities/stats/inventory/inventory.gd" id="6_ysrsa"]
+[ext_resource type="PackedScene" uid="uid://b1cenupqm80wx" path="res://asset/scene/ui/hud/detector/game/menu/inventory/inventory.tscn" id="7_st1ew"]
+[ext_resource type="Script" uid="uid://cgycplc3rb2f8" path="res://asset/script/ui/hud/detector/game/margin/priorities/stats/inventory/ability/ability.gd" id="8_0duew"]
+[ext_resource type="Script" uid="uid://dfo1spwp7j3dp" path="res://asset/script/ui/hud/detector/game/margin/priorities/stats/inventory/ability/margin.gd" id="9_5xnts"]
+[ext_resource type="PackedScene" uid="uid://trd7xarcxhy1" path="res://asset/scene/ui/hud/detector/game/menu/ability/controls/controls.tscn" id="10_t83qg"]
+[ext_resource type="PackedScene" uid="uid://6b0ydfrtbu38" path="res://asset/scene/ui/hud/detector/game/menu/ability/ability.tscn" id="11_4c8lj"]
+[ext_resource type="PackedScene" uid="uid://sloxw12np1ch" path="res://asset/scene/ui/hud/detector/game/menu/priorities/topic/priorities.tscn" id="12_pr4q0"]
+
+[node name="game" type="ColorRect"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+mouse_filter = 2
+theme = ExtResource("1_hhfp1")
+color = Color(0.23137255, 0.23137255, 0.23137255, 0)
+script = ExtResource("2_xesv8")
+
+[node name="priorities" type="HSplitContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+split_offset = 2000
+script = ExtResource("3_elm3m")
+
+[node name="stats" type="HSplitContainer" parent="priorities"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+split_offset = -2000
+script = ExtResource("4_ggbgf")
+
+[node name="topic" parent="priorities/stats" instance=ExtResource("5_d8wtd")]
+layout_mode = 2
+
+[node name="inventory" type="VSplitContainer" parent="priorities/stats"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+split_offset = -2000
+script = ExtResource("6_ysrsa")
+
+[node name="topic" parent="priorities/stats/inventory" instance=ExtResource("7_st1ew")]
+layout_mode = 2
+
+[node name="ability" type="VSplitContainer" parent="priorities/stats/inventory"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+split_offset = 2000
+script = ExtResource("8_0duew")
+
+[node name="margin" type="MarginContainer" parent="priorities/stats/inventory/ability"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+script = ExtResource("9_5xnts")
+
+[node name="controls" parent="priorities/stats/inventory/ability/margin" instance=ExtResource("10_t83qg")]
+layout_mode = 2
+
+[node name="topic" parent="priorities/stats/inventory/ability" instance=ExtResource("11_4c8lj")]
+layout_mode = 2
+
+[node name="topic" parent="priorities" instance=ExtResource("12_pr4q0")]
+layout_mode = 2

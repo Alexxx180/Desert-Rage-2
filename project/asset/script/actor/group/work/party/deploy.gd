@@ -1,15 +1,16 @@
-extends RefCounted
-
-class_name HeroDeploy
+class_name HeroDeploy extends RefCounted
 
 signal traverse_camera(node: Node2D, hero: CharacterBody2D)
 signal select_hero(hero: CharacterBody2D)
 
 const COUNT: int = 2
 
+var initial: Vector2
 var main: int = -1
 var next: int = 0
 var anchored: bool = false
+
+func _init(pos: Vector2) -> void: initial = pos
 
 func get_next() -> int: return (main + 1) % COUNT
 func set_next() -> void:
