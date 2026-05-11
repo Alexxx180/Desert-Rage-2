@@ -1,6 +1,4 @@
-extends Node
-
-class_name HeroInventory
+class_name HeroInventory extends Node
 
 const SLOTS: int = 25
 

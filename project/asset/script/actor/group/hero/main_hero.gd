@@ -1,5 +1,10 @@
 extends CharacterBody2D
 
+enum { STANDING, LAYER, PERSPECTIVE }
+
+var field: int
+var REF: Dictionary = {}
+
 @onready var group: Node2D = get_parent()
 @onready var to: HeroDependency = HeroDependency.new(self)
 

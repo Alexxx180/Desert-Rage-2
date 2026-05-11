@@ -1,20 +1,20 @@
 extends Node2D
 
+enum { DEPLOYED, OVERWORLD, CASUAL }
+
 @onready var camera: Camera2D = $camera
 
 @export_group("Deployment")
-@export var is_overworld: bool = false
-@export var deployed: bool = true
-@export var casual_mode: bool = false
+@export_flags_3d_render var mode: int
 @export_flags_3d_physics var enemy: int
 
 var root: LevelRoot
 var ray: CharacterBody2D:
-	get: return Works.uploads(self, LoadBus.ray, "group/ray", upload_hero)
+	get: return Works.uploads(self, Def.ray, "group/ray", HUD.REF, upload_hero)
 var rock: CharacterBody2D:
-	get: return Works.uploads(self, LoadBus.rock, "group/rock", upload_hero)
+	get: return Works.uploads(self, Def.rock, "group/rock", HUD.REF, upload_hero)
 var music: Node:
-	get: return Works.uploads(self, LoadBus.music, "music")
+	get: return Works.uploads(self, Def.music, "music")
 
 var work: GroupWork
 
@@ -24,8 +24,8 @@ var party: Array[CharacterBody2D]:
 
 func controls(_root: LevelRoot) -> void:
 	root = root
-	deploy.init(self, deployed)
-	if is_overworld: camera.set_overworld()
+	deploy.init(self, Bit.of(mode, DEPLOYED))
+	if Bit.of(mode, OVERWORLD): camera.set_overworld()
 
 func upload_hero(ref: CharacterBody2D) -> void:
 	ref.update_stats()

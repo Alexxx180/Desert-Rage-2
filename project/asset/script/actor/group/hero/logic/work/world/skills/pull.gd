@@ -1,4 +1,4 @@
-extends Node
+class_name SkillPull extends RefCounted
 
 var hero: CharacterBody2D
 var _grab: bool = false

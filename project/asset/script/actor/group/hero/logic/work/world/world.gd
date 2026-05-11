@@ -2,24 +2,16 @@ extends Node
 
 @onready var named: String = get_node("../../../..").name
 
-func update_act(ref: Node, caption: String, path: String = caption) -> Node:
-	return Works.upload(self, ref, LoadBus.world % path, caption)
+var hero: CharacterBody2D
 
-func update_ability(ref: Node) -> Node:
-	return Works.upload(self, ref, LoadBus.input % [named, "ability/ability"], "ability")
+func update_act(caption: String, path: String = caption) -> Node:
+	return Works.uploads(self, Def.world % path, caption, hero.REF)
 
-var _skills: Node = null
 var skills: Node:
-	get: return update_act(_skills, "skills", "skills/skills")
-
-var _ability: Node = null
+	get: return update_act("skills", "skills/skills")
 var ability: Node:
-	get: return update_ability(_ability)
-
-var _inventory: Node = null
+	get: return Works.uploads(self, Def.input % [named, "ability/ability"], "ability", hero.REF)
 var inventory: Node:
-	get: return update_act(_inventory, "inventory")
-
-var _fight: Node = null
+	get: return update_act("inventory")
 var fight: Node:
-	get: return update_act(_fight, "fight")
+	get: return update_act("fight")

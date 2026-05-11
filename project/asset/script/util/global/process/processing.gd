@@ -5,11 +5,6 @@ const hud: Dictionary = {}
 static func on(holder: Node, state: bool) -> void: holder.process_mode = Node.PROCESS_MODE_INHERIT if state else Node.PROCESS_MODE_DISABLED
 static func off(holder: Node) -> bool: return holder.process_mode == Node.PROCESS_MODE_DISABLED
 
-static func bit(no: int) -> int: return 2 ** no
-static func is_bit(value: int, index: int) -> bool:
-	var digit: int = bit(index)
-	return value & digit == digit
-
 static func _set_parent(parent: Object, ref: Variant, caption: String) -> void:
 	parent.set("_" + caption, ref)
 
@@ -42,13 +37,13 @@ static func inits(parent: Node, ref: Variant, caption: String, logic: Callable) 
 		parent.set("_" + caption, ref)
 	return ref
 
-static func uploads(parent: Node, path: String, caption: String, feedback: Callable = HUD.FUNC) -> Variant:
-	if not HUD.REF.has(caption):
-		HUD.REF[caption] = ref_upload(path, caption)
-		parent.add_child(HUD.REF[caption])
-		if feedback != HUD.FUNC:
-			feedback.call(HUD.REF[caption])
-	return HUD.REF[caption]
+static func uploads(parent: Node, path: String, caption: String, storage: Dictionary = HUD.REF, feedback: Callable = Def.FUNC) -> Variant:
+	if not storage.has(caption):
+		storage[caption] = ref_upload(path, caption)
+		parent.add_child(storage[caption])
+		if feedback != Def.FUNC:
+			feedback.call(storage[caption])
+	return storage[caption]
 
 static func upload(parent: Node, ref: Variant, path: String, caption: String) -> Variant:
 	if ref == null:

@@ -11,6 +11,11 @@ func zeros(a: int, no: int) -> int: return a << no
 func whole(a: int, no: int) -> int: return a >> no
 func digit(no: int) -> int: return no * MASK
 
+static func bit(no: int) -> int: return 2 ** no
+static func is_bit(value: int, index: int) -> bool:
+	var dig: int = bit(index)
+	return value & dig == dig
+
 func _get_exact_value(no: int) -> int: return get_mask(no, _value_behind)
 func _value_behind(no: int) -> int: return settings & Works.bit(no)
 

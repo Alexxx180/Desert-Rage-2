@@ -9,7 +9,7 @@ func switch(no: int, next: int) -> bool:
 	set_value(no, next)
 	return get_value(no)
 
-func get_value(no: int) -> bool: return Works.is_bit(settings, no)
+func get_value(no: int) -> bool: return Bits.out(settings, no)
 func set_value(no: int, next: bool) -> void:
 	var state: int = digit(no)
 	settings = settings & ~state | (state * int(next)) 

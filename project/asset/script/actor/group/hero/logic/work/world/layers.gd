@@ -4,12 +4,9 @@ enum { WORLD = 1, BORDERS = 2, CHARACTER = 3, BOX = 5, GAP = 7, UPLAND = 8, JUMP
 
 var hero: CharacterBody2D
 var height: float = 0
-var _context: bool = true
-var collision_on: bool:
-	get: return _context
 
 func context(enable: bool) -> Lay:
-	_context = enable
+	hero.field = Bit.to(hero.field, hero.LAYER, enable)
 	return self
 
 func collide_main() -> Lay:
@@ -18,7 +15,7 @@ func collide_main() -> Lay:
 	return self
 
 func collide(mask: int) -> Lay:
-	hero.set_collision_mask_value(mask, _context)
+	hero.set_collision_mask_value(mask, Bit.of(hero.field, hero.LAYER))
 	return self
 
 func hero_collide(value: bool) -> Lay:

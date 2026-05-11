@@ -1,11 +1,9 @@
 class_name SessionStats extends RefCounted
 
-const LEVEL: String = "res://asset/system/scene/usable/level/%s/%s/%d/level.tscn"
-const PATH: String = "user://progress.txt"
-
+var xp: RefCounted
 var tree: SceneTree
 var level: String:
-	get: return LEVEL % [location.name, group_level(), location.part]
+	get: return Def.level % [location.name, group_level(), location.part]
 
 var location: Dictionary = {
 	"name": "cave/origin",
@@ -23,7 +21,7 @@ func assign(path: String) -> void:
 	print("Session stats assign: ", location)
 
 func _file(access: FileAccess.ModeFlags) -> FileAccess:
-	return FileAccess.open(PATH, access)
+	return FileAccess.open(Def.progress, access)
 
 func load_scene(scene: String) -> void:
 	print_debug(tree.change_scene_to_file(scene))
@@ -49,10 +47,8 @@ func _parseable(text: String) -> bool:
 	return parsed
 
 func load_progress() -> bool:
-	var exist: bool = FileAccess.file_exists(PATH)
+	var exist: bool = FileAccess.file_exists(Def.progress)
 	return exist and _parseable(_file(FileAccess.READ).get_as_text())
-
-var root: String = "res://asset/system/scene/usable/level/cave/origin/0/0/level.tscn"
 
 func _ready() -> void:
 	pass
@@ -61,5 +57,5 @@ func _ready() -> void:
 	#options.start.pressed.connect(game_start)
 
 func game_exit() -> void: tree.quit()
-func game_start() -> void: load_scene(root)
-func game_continue() -> void: if not load_progress(): load_scene(root)
+func game_start() -> void: load_scene(Def.first_level)
+func game_continue() -> void: if not load_progress(): load_scene(Def.first_level)
