@@ -1,13 +1,14 @@
 class_name SkillManager extends RefCounted
 
-func update_act(ref: Node, caption: String) -> Node:
-	return Works.upload(self, ref, LoadBus.world % ("skills/" + caption), caption)
+var REF: Dictionary = {}
 
-var _pull: SkillPull = null
 var pull: SkillPull:
-	get:
-		if _pull == null: _pull = SkillPull.new()
-		return _pull
+	get: return Works.loads("pull", REF, new_skill_pull)
+
+var _last_position: Vector2
+
+func new_skill_pull() -> SkillPull: return SkillPull.new()
+func new_act() -> SkillPull: return SkillPull.new()
 
 var _transition: Node = null
 var transition: Node:

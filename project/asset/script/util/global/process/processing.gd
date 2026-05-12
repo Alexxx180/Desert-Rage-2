@@ -37,6 +37,11 @@ static func inits(parent: Node, ref: Variant, caption: String, logic: Callable) 
 		parent.set("_" + caption, ref)
 	return ref
 
+static func loads(caption: String, storage: Dictionary, feedback: Callable) -> Variant:
+	if not storage.has(caption):
+		storage[caption] = feedback.call()
+	return storage[caption]
+
 static func uploads(parent: Node, path: String, caption: String, storage: Dictionary = HUD.REF, feedback: Callable = Def.FUNC) -> Variant:
 	if not storage.has(caption):
 		storage[caption] = ref_upload(path, caption)

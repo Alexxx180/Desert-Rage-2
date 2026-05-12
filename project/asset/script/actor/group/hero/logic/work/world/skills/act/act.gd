@@ -1,4 +1,4 @@
-extends Node
+class_name SkillAct extends RefCounted
 
 signal activate(pos: Vector2)
 
@@ -8,7 +8,7 @@ signal activate(pos: Vector2)
 var _allow: bool = false
 var is_near: bool:
 	get: return _allow
-var _last_position: Vector2
+
 
 var _act: Area2D
 var _hero: CharacterBody2D
