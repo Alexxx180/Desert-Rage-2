@@ -2,9 +2,6 @@ class_name SkillAct extends RefCounted
 
 signal activate(pos: Vector2)
 
-@onready var lever: Node = $lever
-@onready var book: Node = $book
-
 var _allow: bool = false
 var is_near: bool:
 	get: return _allow

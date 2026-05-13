@@ -11,14 +11,14 @@ var small_circle: FightRange = FightRange.new()
 func is_near(hero) -> bool:
 	return _boxes(hero).size() > 0
 
-func encounter(_execute: TileMapLayer, hero: CharacterBody2D) -> void:
-	_last_position = hero.position
-	activate.emit(_last_position, hero)
-	hero.to.state.standing_to(true)
+func encounter(hero: CharacterBody2D) -> void:
+	hero.posed = hero.position
+	hero.field = Bit.to(hero.field, hero.STANDING, true)
+	activate.emit(hero.posed, hero)
 
-func diverge(_execute: TileMapLayer, hero: CharacterBody2D) -> void:
-	deactivate.emit(_last_position, hero)
-	hero.to.state.standing_to(false)
+func diverge(hero: CharacterBody2D) -> void:
+	hero.field = Bit.to(hero.field, hero.STANDING, false)
+	deactivate.emit(hero.posed, hero)
 
 func _boxes(hero: CharacterBody2D) -> Array:
 	return hero.to.world.skills.pull.boxes
