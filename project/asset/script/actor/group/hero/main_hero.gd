@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-enum { STANDING, LAYER, PERSPECTIVE, ACTING }
+enum { STANDING, LAYER, PERSPECTIVE, ACTING, GRAB }
 
 const DAMAGE: int = 10
 
@@ -14,8 +14,12 @@ const DAMAGE: int = 10
 var field: int
 var posed: Vector2
 var REF: Dictionary = {}
+var boxes: Array[CharacterBody2D] = []
 var area: Dictionary = { "close": {}, "zone": {}, "after_tile": {}, "small_circle": {} }
 var layers: Lay = Lay.new()
+
+func do(state: String) -> bool: return Bit.of(field, get(state))
+func states(bit: String, state: bool) -> void: field = Bit.to(field, get(bit), state)
 
 func make_velocity(motion: Vector2) -> void: velocity = motion
 func make_position(motion: Vector2) -> void: position = motion
@@ -45,6 +49,10 @@ func _boxes(hero: CharacterBody2D) -> Array: return hero.to.world.skills.pull.bo
 
 func throw_effect(hero: CharacterBody2D) -> void: # THROW
 	for box in _boxes(hero): box.logic.work.move.push.throw_velocity(POWER)
+
+func apply_velocity(velocity: Vector2) -> void:
+	for box in boxes:
+		box.logic.work.move.apply_velocity(velocity)
 
 func stomp_enemies() -> void: HUD.level.fight.hit(DAMAGE, area.small_circle)
 

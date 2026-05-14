@@ -3,7 +3,7 @@ extends Node
 signal fire_drain(map_coords: Vector2i)
 
 var root: LevelRoot
-var act: TilesTape = TilesTape.new(2, 1).add("ICE").add("PUDDLE")
+var act: Dictionary = TilesTape.new(2, 1).add("ICE").add("PUDDLE").result()
 
 func evaporation() -> void:
 	root.execute.erase().add_chip(PreloadBus.fire.instantiate())

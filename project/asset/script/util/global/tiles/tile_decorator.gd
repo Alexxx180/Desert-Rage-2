@@ -19,6 +19,10 @@ var tatlas: Vector2i:
 var tcoords: Vector2i:
 	get: return context.coords
 
+func add_prop(key: String, value: Variant) -> TileDecorator:
+	_context[key] = value
+	return self
+
 func add_chip(node: Node2D, path = '.') -> TileDecorator:
 	node.position = context.pos
 	layer.get_node(path).add_child(node)

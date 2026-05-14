@@ -3,7 +3,7 @@ class_name LockersStorage extends RefCounted
 const STAND_ID: int = 3
 
 var logic: Dictionary = { "trigger": {}, "connector": {}, "machine": {} }
-var act: TilesTape = TilesTape.new(4, 1).next(0, 2).add("PLATE").add("LEVER").from(0, 2).next(3, -2).add("STAND").on(0, 1).add("GATE")
+var act: Dictionary = TilesTape.new(4, 1).next(0, 2).add("PLATE").add("LEVER").from(0, 2).next(3, -2).add("STAND").on(0, 1).add("GATE").result()
 
 func unique(map_coords: Array, i: int) -> void: map_coords.remove_at(i)
 func builder(_empty: Object) -> LockersStorage: return self

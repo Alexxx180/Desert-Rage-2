@@ -12,6 +12,9 @@ var root: LevelRoot
 var TILE: TilesTape = TilesTape.new(2, 2).next(2, 0).add("PUDDLE", 4).add("SOURCE", 0)
 
 func puddle_flow(map_coords: Vector2i) -> void:
+	var t = PackedVector2Array()
+	t.last()
+	t.first()
 	flow.emit(map_coords, SPARK)
 
 func sources_busy() -> Array[Vector2i]:
