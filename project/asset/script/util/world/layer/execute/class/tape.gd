@@ -1,33 +1,22 @@
-class_name TilesTape extends RefCounted
+class_name MTape extends RefCounted
 
-enum { AT, ADD, TO }
-enum BORDER { LOGIC = 0, TRANSITION = 3 }
-enum EXECUTE { BOOKS = 2, HOOKUPS = 4, LOGIC = 7, TRANSITION = 8, CHATS = 6, CHEST = 9, ENEMY = 10 }
-enum {}
+enum { EXECUTE = 0, TRANSPORT = 3 } # LAYER ID
+enum { BOOKS = 2, HOOKS = 4, LOGIC = 7, TRANSITION = 8, CHATS = 6, CHEST = 9 }
 
-var offset: PackedVector2Array = [Vector2i.ZERO, Vector2i(0, 1), Vector2i(1, 0)]
-var tiles: PackedVector2Array
-var OFF: Dictionary = {} ; var ON: Dictionary = {}
-var inventory: Dictionary[String, int] = {}
+enum { BLUE_OFF, BLUE_ON, RED_OFF, RED_ON, GREEN_OFF, GREEN_ON, WHITE_OFF, WHITE_ON, BLACK_OFF, BLACK_ON,
+	BRONZE_OFF, BRONZE_ON, SILVER_OFF, SILVER_ON, GOLD_OFF, GOLD_ON, PLATINUM_OFF, PLATINUM_ON, PLACE, TELEPORT_ON,
+	SOURCE_OFF, SOURCE_ON, LEVER_OFF, LEVER_ON, PLATE_OFF, PLATE_ON, TELEPORT_OFF, SPIKER, COMFORTER, SUPPLIER,
+	COOLER, BOX, FIRE_BOX, LARGE_BOX }
 
-func off_at(value: Vector2i) -> bool: return value in OFF.values()
-func on_at(value: Vector2i) -> bool: return value in ON.values()
+enum { LADDER_UP, ENTRY_B, EXIT_B, WALL_B, LADDER_DOWN, ENTRY, EXIT, STAND_OFF, STAND_ON, DESCENT, EXIT_DOWN,
+	WATER_UP, WATER, WATER_DOWN }
 
-func _init(x: int, y: int, size: int) -> void:
-	tiles.resize(size)
-	from(x, y)
+enum { POST_UP, BOSS, ICE, THICK_ICE, POST, ENEMY, PUDDLE_OFF, PUDDLE_ON, SPRING_OFF, SPRING_ON, LOAD_OFF, LOAD_ON, PAGE }
 
-func _set_prop(prop: int, cell: Vector2i) -> TilesTape:
-	offset[prop] = cell
-	return self
+func to(field: int, off: int) -> Vector2i: return Vector2i(field & (2 << off), field >> off)
+func to8(field: int) -> Vector2i: return to(field, 3)
+func to4(field: int) -> Vector2i: return to(field, 2)
 
-func from(x: int, y: int) -> TilesTape: return _set_prop(AT, Vector2i(x, y))
-func next(x: int, y: int) -> TilesTape: return _set_prop(ADD, Vector2i(x, y))
-func on(x: int, y: int) -> TilesTape: return _set_prop(TO, Vector2i(x, y))
-
-func add(key: String) -> TilesTape:
-	inventory[key] = inventory.size()
-	OFF[key] = offset[AT]
-	ON[key] = offset[AT] + offset[TO]
-	offset[AT] += offset[ADD]
-	return self
+func from(pos: Vector2i, off: int) -> int: return (pos.y << off) | pos.x
+func from8(pos: Vector2i) -> int: return from(pos, 3)
+func from4(pos: Vector2i) -> int: return from(pos, 2)
