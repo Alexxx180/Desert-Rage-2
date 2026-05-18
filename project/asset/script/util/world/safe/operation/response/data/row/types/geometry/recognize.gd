@@ -1,6 +1,4 @@
-extends RefCounted
-
-class_name GeometryPostgres
+class_name GeometryPostgres extends RefCounted
 
 signal stop()
 

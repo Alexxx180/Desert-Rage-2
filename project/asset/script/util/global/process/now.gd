@@ -1,5 +1,27 @@
 class_name Def
 
+enum { ALT1, ALT2, ALT3, ALT4 }
+enum { EXECUTE = 0, TRANSPORT = 3, MAX4 = 16, MAX8 = 64 } # LAYER ID
+enum { BOOKS = 2, HOOKS = 4, LOGIC = 7, TRANSITION = 8, CHATS = 6, CHEST = 9 }
+
+enum { BLUE_OFF, BLUE_ON, RED_OFF, RED_ON, GREEN_OFF, GREEN_ON, WHITE_OFF, WHITE_ON, BLACK_OFF, BLACK_ON,
+	BRONZE_OFF, BRONZE_ON, SILVER_OFF, SILVER_ON, GOLD_OFF, GOLD_ON, PLATINUM_OFF, PLATINUM_ON, PLACE, TELEPORT_ON,
+	SOURCE_OFF, SOURCE_ON, LEVER_OFF, LEVER_ON, PLATE_OFF, PLATE_ON, TELEPORT_OFF, SPIKER, COMFORTER, SUPPLIER,
+	COOLER, BOX, FIRE_BOX, LARGE_BOX }
+
+enum { U_LADDER, U_ENTRY, U_WALL_OFF, U_WALL_ON, D_LADDER, D_ENTRY, D_WALL_OFF, D_WALL_ON, STAND_OFF, STAND_ON, DESCENT, EXIT,
+	WATER_UP, WATER, WATER_DOWN }
+
+enum { POST_UP, BOSS, ICE, THICK_ICE, POST, ENEMY, PUDDLE_OFF, PUDDLE_ON, SPRING_OFF, SPRING_ON, LOAD_OFF, LOAD_ON, PAGE }
+
+static func to(field: int, off: int) -> Vector2i: return Vector2i(field & (2 << off), field >> off)
+static func to8(field: int) -> Vector2i: return to(field, 3)
+static func to4(field: int) -> Vector2i: return to(field, 2)
+
+static func from(pos: Vector2i, off: int) -> int: return (pos.y << off) | pos.x
+static func from8(pos: Vector2i) -> int: return from(pos, 3)
+static func from4(pos: Vector2i) -> int: return from(pos, 2)
+
 const DIRECTION: Vector2i = Vector2i(24, 20)
 const VECTI: Vector2i = Vector2i(-1, -1)
 const ARRAY: Array = []
@@ -8,7 +30,7 @@ const DICT: Dictionary = {}
 const INT: int = -1
 
 static func FUNC(): pass
-static func among(from: float, x: float, to: float) -> bool: return (from <= x) and (x <= to)
+static func among(a: float, x: float, b: float) -> bool: return (a <= x) and (x <= b)
 static func vec2() -> Array: return [Vector2.AXIS_X, Vector2.AXIS_Y]
 static func vec2i(axis: int) -> Vector2i: return Vector2i(axis, axis)
 static func truth(_empty: Object) -> bool: return true # combined with implicit func for readability

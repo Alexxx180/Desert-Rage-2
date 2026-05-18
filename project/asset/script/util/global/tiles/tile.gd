@@ -30,8 +30,7 @@ static func basis(layer: TileMapLayer, map_coords: Vector2i, id: int = -1) -> Di
 	return { "coords": map_coords, "id": layer.get_cell_source_id(map_coords) if id == -1 else id }
 
 static func switch(from: Dictionary, to: Vector2i, layer: TileMapLayer) -> void:
-	if to.x != 0: from.atlas.x += to.x if from.atlas.x % (to.x + 1) == 0 else -to.x
-	if to.y != 0: from.atlas.y += to.y if from.atlas.y % (to.y + 1) == 0 else -to.y
+	from.atlas = to
 	paint(layer, from)
 
 static func modify(tile_basis: Dictionary, layer: TileMapLayer) -> Dictionary:

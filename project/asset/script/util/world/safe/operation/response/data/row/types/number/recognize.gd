@@ -1,6 +1,4 @@
-extends RefCounted
-
-class_name NumberPostgres
+class_name NumberPostgres extends RefCounted
 
 signal stop()
 

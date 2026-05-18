@@ -1,6 +1,6 @@
 class_name Bit
 
-enum { MASK = 2, MASK2 = 3, INTEGER = 32, BIG = 64 }
+enum { MASK = 2, MASK2 = 3, BYTE = 8, INTEGER = 32, BIG = 64 }
 
 static func bit(no: int) -> int: return 2 ** no
 
@@ -18,6 +18,16 @@ static func to(value: int, index: int, next: bool) -> int:
 static func turn(value: int, index: int) -> int:
 	var state: int = bit(index)
 	return value & ~state | (state * int(from(value, state)))
+
+static func indexes(digits: int, index: int) -> Vector2i:
+	var cursor: Vector2i = Vector2i(0, index)
+	while cursor.y > digits:
+		cursor.x += 1
+		cursor.y -= digits
+	return cursor
+
+static func index8(index: int) -> Vector2i: return indexes(BYTE, index)
+static func index32(index: int) -> Vector2i: return indexes(INTEGER, index)
 
 static func zeros(a: int, no: int) -> int: return a << no
 static func whole(a: int, no: int) -> int: return a >> no

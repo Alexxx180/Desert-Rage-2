@@ -1,6 +1,4 @@
-extends Node
-
-class_name DataRowFragment
+class_name DataRowFragment extends Node
 
 const RAW: int = 1
 

@@ -1,6 +1,4 @@
-extends RefCounted
-
-class_name PostgresNumberTypes
+class_name PostgresNumberTypes extends RefCounted
 
 enum { BOOLEAN = 16, SMALLINT = 21, INTEGER = 23, BIGINT = 20, REAL = 700, DOUBLE_PRECISION = 701 } # Boolean # Integer # Floating point value
 

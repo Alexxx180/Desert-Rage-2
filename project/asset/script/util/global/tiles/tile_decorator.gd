@@ -19,6 +19,9 @@ var tatlas: Vector2i:
 var tcoords: Vector2i:
 	get: return context.coords
 
+func tile(coords: Vector2) -> Vector2i: return from_coords(coords).tatlas
+func tpos(pos: Vector2) -> Vector2i: return from_pos(pos).tatlas
+
 func add_prop(key: String, value: Variant) -> TileDecorator:
 	_context[key] = value
 	return self
@@ -69,9 +72,7 @@ func basis(map_coords: Vector2i) -> Dictionary:
 	return Tile.basis(layer, map_coords)
 
 func from_coords(map_coords: Vector2i, id: int = context.id) -> TileDecorator:
-	print("EXTRACT!")
-	context = Tile.from_coords(layer, map_coords, id)
-	print("CONTEXT: ", context.coords, " - ATLAS: ", context.atlas)
+	context = Tile.from_coords(layer, map_coords, id) # print("EXTRACT! CONTEXT: ", context.coords, " - ATLAS: ", context.atlas)
 	return self
 
 func from_pos(pos: Vector2) -> TileDecorator:

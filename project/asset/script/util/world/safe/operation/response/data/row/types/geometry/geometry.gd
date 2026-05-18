@@ -1,6 +1,4 @@
-extends RefCounted
-
-class_name PostgresGeometryTypes
+class_name PostgresGeometryTypes extends RefCounted
 
 enum { POINT = 600, BOX = 603, LSEG = 601, LINE = 628, CIRCLE = 718 } # Universal Unique IDentifier # Geometry # Date-time
 

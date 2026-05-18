@@ -1,6 +1,4 @@
-extends RefCounted
-
-class_name PostgresStringTypes
+class_name PostgresStringTypes extends RefCounted
 
 enum { TEXT = 25, CHARACTER = 1042, CHARACTER_VARYING = 1043, JSON_ = 114, JSONB = 3802, XML = 142 } # VARying, CHARacter # Schemas: JSON, XML
 

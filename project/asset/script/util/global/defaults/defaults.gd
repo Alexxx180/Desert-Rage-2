@@ -9,29 +9,32 @@ extends CanvasLayer
 @onready var ost: SoundtrackSystem = SoundtrackSystem.new()
 @onready var stats: SessionStats = SessionStats.new(get_tree())
 
-var game: Control:
-	get: return Works.uploads(self, Def.game % "game", "game", menu.connect_menu)
-var pause: Control:
-	get: return Works.uploads(self, Def.pause, "pause", menu.connect_menu)
-var settings: Control:
-	get: return Works.uploads(self, Def.settings, "settings", menu.connect_menu)
-var information: Control:
-	get: return Works.uploads(self, Def.information, "information", menu.connect_menu)
-var sound: Control:
-	get: return Works.uploads(self, Def.sound, "sound", menu.connect_menu)
-
 var REF: Dictionary = {}
-var menu: Menu = Menu.new()
-var level: Node2D
 
-func set_group() -> void:
-	stats.save_progress()
+var game: Control:
+	get: return Works.uploads(self, Def.game % "game", "game", REF, menu.connect_menu)
+var pause: Control:
+	get: return Works.uploads(self, Def.pause, "pause", REF, menu.connect_menu)
+var settings: Control:
+	get: return Works.uploads(self, Def.settings, "settings", REF, menu.connect_menu)
+var information: Control:
+	get: return Works.uploads(self, Def.information, "information", REF, menu.connect_menu)
+var sound: Control:
+	get: return Works.uploads(self, Def.sound, "sound", REF, menu.connect_menu)
+var menu: Menu:
+	get: return Works.loads("preserve", REF, new_menu)
 
-func _ready() -> void:
-	set_group() # TODO
-	layer = 2
+var preserve: Preserves:
+	get: return Works.loads("preserve", REF, new_preserve)
+var skills: SkillManager:
+	get: return Works.loads("skills", REF, new_skills)
 
-func reset() -> void:
-	game.detector.game.show()
-	game.detector.pause.hide()
-	settings.hide()
+var _level: Node2D
+var level: Node2D:
+	set(next): _level = next; _level.setup()
+
+func new_preserve() -> Preserves: return Preserves.new()
+func new_skills() -> SkillManager: return SkillManager.new()
+func new_menu() -> Menu: return Menu.new()
+
+func _ready() -> void: layer = 2 # TODO

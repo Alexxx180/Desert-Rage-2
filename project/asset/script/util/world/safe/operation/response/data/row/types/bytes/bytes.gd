@@ -1,6 +1,4 @@
-extends RefCounted
-
-class_name PostgresBytesTypes
+class_name PostgresBytesTypes extends RefCounted
 
 enum { BITEA = 17, CIDR = 650, INET = 869, MACADDR = 829, MACADDR8 = 774, BIT = 1560, BIT_VARYING = 1562, DATE = 1082, TIME = 1266, UUID = 2950 } # Byte array # Network masks # Bit
 

@@ -13,10 +13,10 @@ enum { LADDER_UP, ENTRY_B, EXIT_B, WALL_B, LADDER_DOWN, ENTRY, EXIT, STAND_OFF, 
 
 enum { POST_UP, BOSS, ICE, THICK_ICE, POST, ENEMY, PUDDLE_OFF, PUDDLE_ON, SPRING_OFF, SPRING_ON, LOAD_OFF, LOAD_ON, PAGE }
 
-func to(field: int, off: int) -> Vector2i: return Vector2i(field & (2 << off), field >> off)
-func to8(field: int) -> Vector2i: return to(field, 3)
-func to4(field: int) -> Vector2i: return to(field, 2)
+static func to(field: int, off: int) -> Vector2i: return Vector2i(field & (2 << off), field >> off)
+static func to8(field: int) -> Vector2i: return to(field, 3)
+static func to4(field: int) -> Vector2i: return to(field, 2)
 
-func from(pos: Vector2i, off: int) -> int: return (pos.y << off) | pos.x
-func from8(pos: Vector2i) -> int: return from(pos, 3)
-func from4(pos: Vector2i) -> int: return from(pos, 2)
+static func from(pos: Vector2i, off: int) -> int: return (pos.y << off) | pos.x
+static func from8(pos: Vector2i) -> int: return from(pos, 3)
+static func from4(pos: Vector2i) -> int: return from(pos, 2)

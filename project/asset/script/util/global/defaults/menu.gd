@@ -66,7 +66,7 @@ func toggle_menu(menu: Control) -> void:
 
 func main_menu() -> void:
 	HUD.pause.hide()
-	HUD.stats.tree.change_scene_to_file(LoadBus.main_menu)
+	HUD.stats.tree.change_scene_to_file(Def.main_menu)
 
 func pause_set() -> void: _pause_toggle(true, Node.PROCESS_MODE_DISABLED)
 func pause_resume() -> void: _pause_toggle(false, Node.PROCESS_MODE_INHERIT)

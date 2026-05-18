@@ -10,6 +10,7 @@ var location: Dictionary = {
 	"level": 0, "part": 0,
 	"save": false
 }
+var progress: PackedInt32Array
 
 func _init(t: SceneTree) -> void: tree = t
 

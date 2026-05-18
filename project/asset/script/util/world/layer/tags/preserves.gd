@@ -1,84 +1,72 @@
-extends Node
+class_name Preserves extends Node
 
-enum { GROUND = 1, ENEMY = 4, CHESTS = 5, TILE_SIZE = 6 }
+enum { GROUND = 1, TILE_SIZE = 6 }
 
-var lay: Node
-var group: Node2D
-var FLOW: Array[Vector2i] = TilesTape.list(3, 0, 3, 1)
-
-var chest: TilesTape = TilesTape.new(2, 0).add("BRONZE").add("SILVER").add("GOLD").add("PLATINUM")
-
-func is_chest(atlas: Vector2i) -> bool: return chest.on_at(atlas) or chest.off_at(atlas)
+func is_chest(atlas: Vector2i) -> bool:
+	return Def.from8(atlas) in [Def.BRONZE_OFF, Def.SILVER_OFF, Def.GOLD_OFF,
+		Def.PLATINUM_OFF, Def.BRONZE_ON, Def.SILVER_ON, Def.GOLD_ON, Def.PLATINUM_ON]
 
 func _paint(places: Array[Vector2i]) -> void:
 	for coords in places:
-		lay.border.paint({ "id": GROUND, "atlas": Vector2i.ONE, "coords": coords })
+		HUD.level.border.paint({ "id": GROUND, "atlas": Vector2i.ONE, "coords": coords })
 
 func _set_casual_mode(casual_mode: bool) -> void:
 	if not casual_mode: return # for chest in [0, 1, 2]: _paint(tags.get_used_cells_by_id(ENEMY, Vector2i(0, chest)))
 
-func setup(_lay: Node, _casual_mode: bool) -> void: lay = _lay # _set_casual_mode(casual_mode)
+func setup(_casual_mode: bool) -> void:
+	for tag in HUD.level.execute.layer.get_used_cells_by_id(Def.HOOKS):
+		set_pages(tag)
+	# _set_casual_mode(casual_mode)
 
 func drink_water(inventory: Node, pos: Vector2) -> void:
-	if lay.border.from_pos(pos).context.atlas in FLOW:
-		inventory.logic.effect.restore() # USE WATER
+	match Def.from8(HUD.level.border.tpos(pos)):
+		Def.WATER_DOWN:
+			inventory.logic.effect.restore() # USE WATER
 
-func _get_id(tag: Dictionary) -> int:
-	print("ITEM ID = ", Tile.logic_no(tag.atlas, TILE_SIZE))
-	return Tile.logic_no(tag.atlas, TILE_SIZE) - Tile.FLOOR
+func _get_id(tile: Dictionary) -> int:
+	var tag: Vector2i = HUD.level.execute.tile(tile.coords)
+	print("ITEM ID = ", Tile.logic_no(tag, TILE_SIZE))
+	return Def.from8(tag) - Tile.FLOOR
+
+func open_chest(tile: Dictionary) -> void:
+	var id: int = _get_id(tile)
+	var hero: CharacterBody2D = HUD.level.group.deploy.party.leader
+	var logic: Node = hero.to.inventory.logic
+	# lay.border.switch(chest.offset.on) # TODO NEED TO ADD CHECK BEFORE CHANGE
+	var slot: int = logic.put_to_inventory(id)
+	if logic.items.ui.have(slot):
+		logic.trade.equip.add_weapon(slot)
+	logic.effect.remember(id)
 
 func open_chests() -> void:
-	var tile: Dictionary = lay.border.context
-	var id: int = _get_id(lay.tags.from_coords(tile.coords).context)
-	# print("FOUND ID: ", id)
-	
-	var hero: CharacterBody2D = group.deploy.party.leader
-	var logic: Node = hero.to.inventory.logic
-	logic.effect.status.hero = hero
-	
-	if chest.on_at(tile.atlas):
-		logic.effect.remember(id)
-	elif chest.off_at(tile.atlas):
-		lay.border.switch(chest.offset.on) # TODO NEED TO ADD CHECK BEFORE CHANGE
-		var slot: int = logic.put_to_inventory(id)
-		if logic.items.ui.have(slot):
-			logic.trade.equip.add_weapon(slot)
-		logic.effect.remember(id)
+	var tile: Dictionary = HUD.level.border.context # print("FOUND ID: ", id) # logic.effect.status.hero = hero
+	match Def.from8(tile.atlas):
+		Def.BRONZE_OFF, Def.SILVER_OFF, Def.GOLD_OFF, Def.PLATINUM_OFF:
+			open_chest(tile)
+		Def.BRONZE_ON, Def.SILVER_ON, Def.GOLD_ON, Def.PLATINUM_ON:
+			var logic: Node = HUD.level.group.deploy.party.leader.to.inventory.logic
+			logic.effect.remember(_get_id(tile))
 
-
-const SOURCE: int = 3
-
-func _message(lay: Node, map_coords: Vector2i) -> int:
-	return lay.tags.from_coords(map_coords).logic_no - 1
 # TODO BOOKS
-func check_book(lay: Node, tile: Dictionary) -> void:
-	var books: Dictionary = lay.tags.manual.books
-	if (books[tile.atlas].size() > 0):
+func check_book() -> void:
+	var tile: Dictionary = HUD.level.border.context
+	var books: Dictionary = HUD.level.execute.manual.books
+	if books[tile.atlas].size() > 0:
 		var manual: String = books[tile.atlas][0]#[message]
-		set_book(lay, tile.coords, [tile.atlas, manual])
+		set_page(tile.coords, [tile.atlas, manual])
 
-func b(x: int, y: int) -> Vector2i: return Vector2i(x, y)
-func set_books(lay: Node, tag: Vector2i) -> void:
-	var tile: Dictionary = lay.border.from_coords(tag).context
-	if [b(3, 0), b(3, 1), b(3, 2), b(3, 3), b(3, 4),
-		b(4, 0), b(4, 1), b(4, 2), b(4, 3), b(4, 4)].has(tile.atlas):
-		check_book(lay, tile)
+func set_book(tag: Vector2i) -> void:
+	match Def.from8(HUD.level.border.tile(tag)):
+		Def.BLUE_OFF, Def.RED_OFF, Def.GREEN_OFF, Def.BLACK_OFF, Def.WHITE_OFF: check_book()
 
-func set_book(lay: Node, coords: Vector2i, value: Array) -> void:
-	lay.execute.books[coords] = value
+func set_page(coords: Vector2i, value: Array) -> void:
+	HUD.level.execute.books[coords] = value
 
-func _manual(lay: Node, coords: Vector2i) -> String:
-	return lay.tags.manual.pages[_message(lay, coords)]
+func _manual(coords: Vector2i) -> String:
+	return Def.master.manual[Def.master.PAGES + Def.from8(HUD.level.execute.from_coords(coords).tatlas)]
 
-func set_page(lay: Node, tile: Dictionary) -> void:
-	set_book(lay, tile.coords, [tile.atlas, _manual(lay, tile.coords)])
-
-func set_pages(lay: Node, tag: Vector2i) -> void:
-	var tile: Dictionary = lay.execute.from_coords(tag).context
-	match tile.atlas:
-		Vector2i(2, 1): set_page(lay, tile)
-		_: set_books(lay, tag)
-
-func setup(lay: Node) -> void:
-	for tag in lay.tags.layer.get_used_cells_by_id(SOURCE):
-		set_pages(lay, tag)
+func set_pages(tag: Vector2i) -> void:
+	var tile: Dictionary = HUD.level.execute.from_coords(tag).context
+	match Def.from8(tile.atlas):
+		Def.PAGE: set_page(tile.coords, [tile.atlas, _manual(tile.coords)])
+		_: set_book(tile.coords)
