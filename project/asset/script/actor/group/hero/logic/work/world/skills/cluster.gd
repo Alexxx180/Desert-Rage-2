@@ -5,6 +5,7 @@ enum { LEVER, BUTTON, SOURCE, TILE }
 var progress: PackedByteArray
 var cluster: PackedVector2Array
 var teleport: Dictionary[Vector2i, PackedVector2Array]
+var button: Dictionary[Vector2i, int] = {}
 
 var completed: PackedByteArray
 var execute: PackedByteArray = [Def.LEVER_OFF, Def.LEVER_ON, Def.PLATE_OFF, Def.PLATE_ON, Def.SOURCE_OFF, Def.SOURCE_ON]
@@ -27,16 +28,25 @@ func _in(of: int, context: Dictionary, tiles: PackedByteArray) -> bool: return c
 
 func set_tile(context: Dictionary, cursor: Vector2i) -> void: # var id: int = context.id # var atlas: Vector2i = border.tile(coords)
 	if _in(Def.EXECUTE, context, execute):
+		if context.atlas in [Def.STAND_OFF, Def.STAND_ON]:
+			button[context.coords] = 0
 		progress[cursor.x] = context.coords
 	elif _in(Def.TRANSITION, context, transport):
 		progress[cursor.x + cursor.y] = context.coords
 
-func resize_cluster(count: int) -> Vector2i:
+func resize_cluster(root: LevelRoot, tag: int) -> bool:
+	var tiles: Array[Vector2i] = root.execute.layer.get_used_cells_by_id(Def.LOGIC, Def.to8(tag))
+	var count: int = tiles.size()
+	if count == 0: return false
+	
 	var cursor: Vector2i = Vector2i.ZERO
 	for x in progress: cursor.x += x
 	progress.append(count)
 	cluster.resize(cursor.x + count)
-	return cursor
+	for tile in tiles:
+		set_tile(root.border.from_coords(tile).context, cursor)
+		cursor.y += 1
+	return true
 
 func has(count: int) -> bool: return count > 0
 func executes(border: TileDecorator, next: int) -> void: border.switch(Def.to8(next))
@@ -45,6 +55,10 @@ func atlas_of(border: TileDecorator, i: int) -> int: return Def.from8(border.til
 
 func _state(a: int, b: int, next: bool) -> int: return a if next else b
 
+func button_press(coords: Vector2i, add: int, compare: int) -> bool:
+	button[coords] = button[coords] + add
+	return button[coords] == compare
+
 func toggle_openning(no: int, state: bool, border: TileDecorator) -> void:
 	var tag: int = Def.from8(border.tile(cluster[no]))
 	match tag:
@@ -52,8 +66,12 @@ func toggle_openning(no: int, state: bool, border: TileDecorator) -> void:
 		Def.U_WALL_ON: transports(border, _state(Def.U_WALL_OFF, tag, state))
 		Def.D_WALL_OFF: transports(border, _state(Def.D_WALL_ON, tag, state))
 		Def.D_WALL_ON: transports(border, _state(Def.D_WALL_OFF, tag, state))
-		Def.STAND_OFF: transports(border, _state(Def.STAND_ON, tag, state))
-		Def.STAND_ON: transports(border, _state(Def.STAND_OFF, tag, state))
+		Def.STAND_OFF:
+			if button_press(cluster[no], 1, 1):
+				transports(border, _state(Def.STAND_ON, tag, state))
+		Def.STAND_ON:
+			if button_press(cluster[no], -1, 0):
+				transports(border, _state(Def.STAND_OFF, tag, state))
 
 func toggle_tiles(bit: Vector2i, x: int, count: int, border: TileDecorator) -> void:
 	for i in range(x + 1, x + count):

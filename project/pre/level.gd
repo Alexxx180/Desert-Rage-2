@@ -24,44 +24,29 @@ var aura: Node:
 	get: return update_act("aura")
 var resource: Node:
 	get: return update_act("resource")
-var skills: Node:
-	get: return update_world("skills", "skills/skills")
+var skills: SkillManager:
+	get: return Works.loads("skills", REF, new_skill_manager)
 var ability: Node:
 	get: return Works.uploads(self, Def.input % ["named", "ability/ability"], "ability", REF)
 var inventory: Node:
 	get: return update_world("inventory")
 var fight: Node:
 	get: return update_world("fight")
+var boxes: Boxes:
+	get: return Works.loads("boxes", REF, new_boxes)
+var tile: TileCluster:
+	get: return Works.loads("tile", REF, new_cluster)
 
-func set_tile(coords: Vector2i, cursor: Vector2i) -> void:
-	var atlas: Vector2i = border.tile(coords)
-	var id: int = border.context.id
-	if id == Def.EXECUTE and atlas in [Def.LEVER_OFF, Def.LEVER_ON, Def.PLATE_OFF,
-		Def.PLATE_ON, Def.SOURCE_OFF, Def.SOURCE_ON, Def.PLACE]:
-		progress[cursor.x] = border.context.coords
-	elif id == Def.EXECUTE and atlas in [Def.U_WALL, Def.D_WALL, Def.STAND_OFF, Def.STAND_ON]:
-		progress[cursor.x + cursor.y] = border.context.coords
-
-func resize_cluster(tiles: Array[Vector2i], count: int) -> void:
-	var cursor: Vector2i = Vector2i.ZERO
-	for x in progress: cursor.x += x
-	progress.append(count)
-	for tile in tiles:
-		set_tile(tile, cursor)
-		cursor.y += 1
-
-func add_tile_cluster(tag: int) -> bool:
-	var tiles: Array[Vector2i] = execute.layer.get_used_cells_by_id(Def.LOGIC, Def.to8(tag))
-	var count: int = tiles.size()
-	if count > 0:
-		resize_cluster(tiles, count)
-		return true
-	return false
+func new_boxes() -> Boxes: return Boxes.new()
+func new_cluster() -> TileCluster: return TileCluster.new()
+func new_skill_manager() -> SkillManager: return SkillManager.new()
 
 func setup() -> void:
+	tile.set_types({
+		"lever": border.layer.get_used_cells_by_id(Def.EXECUTE, Def.to8(Def.LEVER_OFF)),
+		"button": border.layer.get_used_cells_by_id(Def.EXECUTE, Def.to8(Def.PLATE_OFF)),
+		"source": border.layer.get_used_cells_by_id(Def.EXECUTE, Def.to8(Def.SOURCE_OFF))
+	})
 	# BOX PLACEMENT
-	for tag in Def.MAX8: if not add_tile_cluster(tag): break
+	for tag in Def.MAX8: if not tile.resize_cluster(self, tag): break
 	# CHEST PLACEMENT
-
-func switch_cluster() -> void:
-	pass
