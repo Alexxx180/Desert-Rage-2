@@ -107,17 +107,20 @@ func teleporting(hero: CharacterBody2D, border: TileDecorator) -> bool:
 
 func tile_walk(hero: CharacterBody2D, border: TileDecorator) -> void:
 	if teleporting(hero, border): return
-	match Def.from8(border.tatlas):
+	tile_press(hero.position, border)
+
+func tile_press(pos: Vector2, border: TileDecorator) -> void:
+	match Def.from8(border.tpos(pos)):
 		Def.PLATE_OFF: executes(border, Def.PLATE_ON) ; switch_cluster(BUTTON, border)
 		Def.PLATE_ON: executes(border, Def.PLATE_OFF) ; switch_cluster(BUTTON, border)
 
-func tile_act(hero: CharacterBody2D, border: TileDecorator) -> void:
-	match Def.from8(border.tpos(hero.position)):
+func tile_act(pos: Vector2, border: TileDecorator) -> void:
+	match Def.from8(border.tpos(pos)):
 		Def.LEVER_OFF: executes(border, Def.LEVER_ON) ; switch_cluster(LEVER, border)
 		Def.LEVER_ON: executes(border, Def.LEVER_OFF) ; switch_cluster(LEVER, border)
 
-func tile_spark(hero: CharacterBody2D, border: TileDecorator) -> void:
-	match Def.from8(border.tpos(hero.position)):
+func tile_spark(pos: Vector2, border: TileDecorator) -> void:
+	match Def.from8(border.tpos(pos)):
 		Def.SOURCE_OFF: executes(border, Def.SOURCE_ON) ; switch_cluster(SOURCE, border)
 		Def.SOURCE_ON: executes(border, Def.SOURCE_OFF) ; switch_cluster(SOURCE, border)
 	# _acting(hero, border, [Def.SOURCE_OFF, Def.SOURCE_ON])

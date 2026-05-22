@@ -1,36 +1,19 @@
-extends CharacterBody2D
-
-class_name PlatformingBox
-
-signal move(next: Vector2)
-
-enum { JUMP = 200000, SINGULARITY = 45000, GRAVITY = 700000 } # JUMP = -75000, GRAVITY = 375000 / 150 - 750
+class_name PlatformingBox extends CharacterBody2D
 
 @export_range(1.5, 3.0, 0.1) var weight: float = 1
 @export_range(1, 2, 1) var height: int = 1
+@onready var offset: Vector2 = Vector2i(0, -32) * height + Vector2i(0, 14)
 
-@onready var view: Node2D = $view
-@onready var geometry: Node = $geometry
-@onready var logic: Node2D = $logic
-
-const feedback: int = 2
-
-var offset: Vector2:
-	get: return logic.see.stand.position
+var no: int
 var ledge: Vector2:
-	get: return logic.see.stand.get_ledge_position()
+	get: return position + offset
 
-func _ready() -> void: logic.link.controls(self)
+func _ready() -> void: HUD.level.boxes.controls(self)
 
-func compare_height(hero: CharacterBody2D) -> bool:
-	return logic.work.movement.seat.compare(hero)
-
-func _physics_process(delta: float) -> void:
-	if logic.see.slide.is_colliding():
-		velocity.y = delta * SINGULARITY
+func _physics_process(_delta: float) -> void:
+	if Bit.of(HUD.level.boxes.slides, no):
+		HUD.level.boxes.slide_the_box(self)
 	move_and_slide()
 
-func push(next: Vector2) -> void:
+func add_velocity(next: Vector2) -> void:
 	velocity = next
-	move.emit(position)
-	#print("CURRENT POS: ", position)

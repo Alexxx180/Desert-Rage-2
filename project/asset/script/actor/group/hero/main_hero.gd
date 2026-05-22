@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-enum { STANDING, LAYER, PERSPECTIVE, ACTING, GRAB }
+
 
 const DAMAGE: int = 10
 
@@ -12,6 +12,7 @@ const DAMAGE: int = 10
 @onready var logic: Node2D = $logic
 
 var field: int
+var state: PackedInt32Array = [0, 0]
 var posed: Vector2
 var REF: Dictionary = {}
 var boxes: Array[CharacterBody2D] = []
