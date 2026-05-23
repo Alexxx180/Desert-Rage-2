@@ -32,12 +32,15 @@ var inventory: Node:
 	get: return update_world("inventory")
 var fight: Node:
 	get: return update_world("fight")
+var input: WorldInput:
+	get: return Works.loads("input", REF, new_world_input)
 var boxes: Boxes:
 	get: return Works.loads("boxes", REF, new_boxes)
 var tile: TileCluster:
 	get: return Works.loads("tile", REF, new_cluster)
 
 func new_boxes() -> Boxes: return Boxes.new()
+func new_world_input() -> WorldInput: return WorldInput.new()
 func new_cluster() -> TileCluster: return TileCluster.new()
 func new_skill_manager() -> SkillManager: return SkillManager.new()
 

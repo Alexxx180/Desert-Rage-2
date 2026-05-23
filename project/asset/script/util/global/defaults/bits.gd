@@ -1,6 +1,6 @@
 class_name Bit
 
-enum { MASK = 2, MASK2 = 3, BYTE = 8, INTEGER = 32, BIG = 64 }
+enum { MASK = 2, MASK2 = 3, MASK3 = 4, BYTE = 8, INTEGER = 32, BIG = 64 }
 
 static func bit(no: int) -> int: return 1 << no
 
@@ -16,7 +16,7 @@ static func of(value: int, index: int) -> bool:
 
 static func to(value: int, index: int, next: bool) -> int:
 	var state: int = bit(index)
-	return value & ~state | (state * int(next)) 
+	return value & ~state | (state * int(next))
 
 static func turn(value: int, index: int) -> int:
 	var state: int = bit(index)
@@ -32,6 +32,19 @@ static func indexes(digits: int, index: int) -> Vector2i:
 static func digit(no: int) -> int: return no * MASK
 
 static func mask_range(no: int, mask: int) -> Array: return range(digit(no), digit(no) + mask)
+
+static func of_num(field: int, no: int, mask: int) -> int: return (field >> (mask * no)) & mask
+static func of4(field: int, no: int) -> int: return of_num(field, no, MASK)
+static func of8(field: int, no: int) -> int: return of_num(field, no, MASK2)
+static func of16(field: int, no: int) -> int: return of_num(field, no, MASK3)
+
+static func add(field: int, value: int) -> int: return field << Bit.MASK2 | value
+
+static func take8(fields: PackedByteArray) -> int: return take(fields, MASK2)
+static func take(fields: PackedByteArray, mask: int) -> int:
+	var result: int = 0 ; var count: int = len(fields)
+	for i in count: result |= fields[i] << (mask * (count - i))
+	return result
 
 static func in_mask(no: int, mask: PackedByteArray = Def.BYTE) -> Array:
 	if mask != Def.BYTE and no in mask: return mask_range(no, MASK2)
