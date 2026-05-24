@@ -1,11 +1,48 @@
-[gd_scene load_steps=8 format=3 uid="uid://dbaauq0nlgduw"]
+[gd_scene load_steps=15 format=3 uid="uid://dbaauq0nlgduw"]
 
 [ext_resource type="Script" uid="uid://djaaedqq0cusq" path="res://asset/script/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/hints/hints.gd" id="1_ch3ha"]
 [ext_resource type="Script" uid="uid://d1bkj71odt1bp" path="res://asset/script/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/hints/space/preview/preview.gd" id="2_ytxpc"]
+[ext_resource type="FontFile" uid="uid://diqccdhcphksm" path="res://asset/resource/media/text/font/Sagewold.ttf" id="3_jew5v"]
 [ext_resource type="Script" uid="uid://dwjxgwlh76j60" path="res://asset/script/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/hints/space/preview/chats/stack.gd" id="4_rbbuv"]
 [ext_resource type="PackedScene" uid="uid://bl1pm3rkee4xl" path="res://asset/scene/ui/hud/detector/game/preview/bottom/talk.tscn" id="10_qhrr6"]
 [ext_resource type="Script" uid="uid://4q2n1sfdf1j" path="res://asset/script/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/hints/bottom/bottom.gd" id="12_paqty"]
-[ext_resource type="Script" uid="uid://cjoheu7m2eic3" path="res://asset/script/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/hints/space/preview/help/content/help.gd" id="16_2o5ct"]
+
+[sub_resource type="Gradient" id="Gradient_jew5v"]
+offsets = PackedFloat32Array(0, 0.61255413, 1)
+colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 0.03529412, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_rvq63"]
+gradient = SubResource("Gradient_jew5v")
+fill_from = Vector2(0.5, 0)
+fill_to = Vector2(0.5, 1)
+metadata/_snap_enabled = true
+
+[sub_resource type="Gradient" id="Gradient_8eutt"]
+offsets = PackedFloat32Array(0.11860465, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_jew5v"]
+gradient = SubResource("Gradient_8eutt")
+fill_from = Vector2(0.5, 1)
+fill_to = Vector2(0.5, 0)
+metadata/_snap_enabled = true
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rvq63"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 40.0
+texture = SubResource("GradientTexture2D_jew5v")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8eutt"]
+bg_color = Color(0.00566115, 0.0056611523, 0.005661145, 1)
+border_width_right = 60
+border_color = Color(0.8, 0.8, 0.8, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jew5v"]
+content_margin_left = 10.0
+content_margin_right = 10.0
+bg_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6g6fj"]
 bg_color = Color(0, 0, 0, 0.49803922)
@@ -20,32 +57,78 @@ size_flags_vertical = 3
 mouse_filter = 2
 script = ExtResource("1_ch3ha")
 
-[node name="space" type="ScrollContainer" parent="."]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.25
-horizontal_scroll_mode = 0
-script = ExtResource("16_2o5ct")
-
-[node name="preview" type="HBoxContainer" parent="space"]
+[node name="preview" type="HBoxContainer" parent="."]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("2_ytxpc")
 
-[node name="chats" type="PanelContainer" parent="space/preview"]
+[node name="chats" type="TextureRect" parent="preview"]
+clip_children = 2
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 8
-theme_override_styles/panel = SubResource("StyleBoxFlat_6g6fj")
-script = ExtResource("4_rbbuv")
+texture = SubResource("GradientTexture2D_rvq63")
 
-[node name="space" type="Control" parent="space/preview"]
+[node name="text" type="RichTextLabel" parent="preview/chats"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxTexture_rvq63")
+text = "asdsdadhajdhjasdadasdadsd jdsadjasdd asdadasdda
+asdasds
+asdasds
+asdsdadhajdhjasdadasdadsd jdsadjasdd asdadasdda
+asdasds
+asdasds
+asdsdadhajdhjasdadasdadsd jdsadjasdd asdadasdda
+asdasds
+asdasds
+asdsdadhajdhjasdadasdadsd jdsadjasdd asdadasdda
+asdasds
+asdasds"
+vertical_alignment = 2
+
+[node name="speak" type="LineEdit" parent="preview/chats/text"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -31.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_placeholder_color = Color(6.016344e-09, 0.26907006, 2.4065375e-07, 1)
+theme_override_fonts/font = ExtResource("3_jew5v")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_8eutt")
+theme_override_styles/read_only = SubResource("StyleBoxFlat_jew5v")
+placeholder_text = "EVERY.CO ACCESS"
+editable = false
+
+[node name="talk" parent="preview/chats/text" instance=ExtResource("10_qhrr6")]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -60.0
+offset_top = -60.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/margin_left = 0
+
+[node name="space" type="Control" parent="preview"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="help" type="PanelContainer" parent="space/preview"]
+[node name="help" type="PanelContainer" parent="preview"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_6g6fj")
@@ -57,9 +140,6 @@ layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.01
 script = ExtResource("12_paqty")
-
-[node name="talk" parent="bottom" instance=ExtResource("10_qhrr6")]
-layout_mode = 0
 
 [node name="controls" type="MarginContainer" parent="bottom"]
 layout_mode = 1

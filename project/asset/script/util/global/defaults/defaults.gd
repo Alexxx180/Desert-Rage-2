@@ -23,6 +23,8 @@ var sound: Control:
 	get: return Works.uploads(self, Def.sound, "sound", REF, menu.connect_menu)
 var menu: Menu:
 	get: return Works.loads("preserve", REF, new_menu)
+var input: WorldInput:
+	get: return Works.loads("input", REF, new_world_input)
 
 var preserve: Preserves:
 	get: return Works.loads("preserve", REF, new_preserve)
@@ -36,5 +38,62 @@ var level: Node2D:
 func new_preserve() -> Preserves: return Preserves.new()
 func new_skills() -> SkillManager: return SkillManager.new()
 func new_menu() -> Menu: return Menu.new()
+func new_world_input() -> WorldInput: return WorldInput.new()
 
 func _ready() -> void: layer = 2 # TODO
+
+
+func _continue_process() -> int: return FAILED
+
+func check_combo(mark: Tick, slots: Array) -> bool:
+	return mark.blackboard.g(slots[0]).released
+
+func fight_combo(mark: Tick) -> Node:
+	var tools: Dictionary = mark.blackboard.g("tools")
+	var combo: Node = tools.hero.view.animation.moves.combo
+	combo.start_fight("active")
+	return combo
+
+func tick(mark: Tick, act: BehaviorAction) -> int:
+	if check_combo(mark, act.get_metadata()):
+		# print("GOT A COMBO!")
+		act.take_effect(mark)
+		return _continue_process()
+	return FAILED
+
+func x1(mark: Tick) -> void:
+	mark.blackboard.g("group").xp.level.multiply.hit()
+	# return self
+
+func notify(mark: Tick, caption: String) -> void:
+	# mark.blackboard.get_value("ui").set_slot_combo(caption)
+	var tools: Dictionary = mark.blackboard.g("tools")
+	var hero: CharacterBody2D = tools.hero
+	if tools.combos == null:
+		var size: int = mark.blackboard.g("combo").query.size()
+		# if not mark.actor.combo.prefers(size): return TODO FIXME uncomment after settings fully implemented
+		var combo: Label = mark.actor.combos.instantiate()
+		combo.tools = tools
+		hero.group.lay.execute.layer.add_child(combo)
+		tools.combos = combo
+	tools.combos.text = caption
+	tools.combos.position = hero.position - Vector2(300, 160) # x = 120
+
+
+func _body(text: String, no: int, type: String = "hands") -> void:
+	var mark: Tick
+	basis.fight_combo(mark).fight_body(type).x(mark, no).notify(mark, text)
+
+var basis: ComboBasis = ComboBasis.new()
+
+func get_metadata() -> Array[int]:
+	var p: int = Skills.PUNCH
+	var k: int = Skills.KICK
+	return [k, p, p]
+
+func take_effect(mark: Tick) -> void:
+	# HUD.xp.level.multiply.by_slots(slots) # mark.blackboard.g("group")
+	
+	basis.x(mark, Skills.TRIPLE).vfx_hint(mark, mark.actor.kick)
+
+	basis.notify(mark, "Выпад")

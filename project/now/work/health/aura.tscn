@@ -1,28 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://b460ne4ouhshc"]
+[gd_scene load_steps=2 format=3 uid="uid://b460ne4ouhshc"]
 
 [ext_resource type="Script" uid="uid://b4nfdlipsumsu" path="res://asset/script/util/world/hitbox/health/health.gd" id="1_h60ng"]
-[ext_resource type="Script" uid="uid://cju6rs7vkvs7d" path="res://asset/script/util/world/hitbox/health/points.gd" id="2_vrivt"]
-[ext_resource type="Script" uid="uid://ddrihu4seb8yu" path="res://asset/script/util/world/hitbox/health/aura/aura.gd" id="3_iwolm"]
-[ext_resource type="Script" uid="uid://ohq15xrqxnor" path="res://asset/script/actor/enemy/logic/burn.gd" id="4_v5qnp"]
 
 [node name="health" type="Node"]
 script = ExtResource("1_h60ng")
 
-[node name="points" type="Timer" parent="."]
-wait_time = 1.75
-one_shot = true
-script = ExtResource("2_vrivt")
-
-[node name="aura" type="Timer" parent="."]
-wait_time = 0.5
-script = ExtResource("3_iwolm")
-
-[node name="diffuse" type="Timer" parent="aura"]
+[node name="diffuse" type="Timer" parent="."]
 wait_time = 0.6
 one_shot = true
-
-[node name="burn" type="Timer" parent="."]
-wait_time = 0.2
-script = ExtResource("4_v5qnp")
-
-[connection signal="hit" from="burn" to="." method="burning"]

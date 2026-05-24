@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://trd7xarcxhy1"]
+[gd_scene load_steps=4 format=3 uid="uid://trd7xarcxhy1"]
 
 [ext_resource type="Script" uid="uid://k6kmcptwqrbg" path="res://asset/script/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/controls.gd" id="1_xi2lk"]
+[ext_resource type="PackedScene" uid="uid://dbaauq0nlgduw" path="res://now/hud/hints/hints.tscn" id="2_ulp2k"]
 [ext_resource type="PackedScene" uid="uid://cq5jn6k2bwg5n" path="res://asset/scene/ui/hud/detector/game/menu/ability/controls/topic/status/status.tscn" id="4_xi2lk"]
 
 [node name="controls" type="VBoxContainer"]
@@ -16,7 +17,6 @@ script = ExtResource("1_xi2lk")
 
 [node name="status" type="HBoxContainer" parent="."]
 layout_mode = 2
-size_flags_vertical = 3
 
 [node name="hp" type="Control" parent="status"]
 visible = false
@@ -26,6 +26,9 @@ size_flags_horizontal = 3
 [node name="space" type="Control" parent="status"]
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="hints" parent="." instance=ExtResource("2_ulp2k")]
+layout_mode = 2
 
 [node name="topic" parent="." instance=ExtResource("4_xi2lk")]
 custom_minimum_size = Vector2(0, 30)
