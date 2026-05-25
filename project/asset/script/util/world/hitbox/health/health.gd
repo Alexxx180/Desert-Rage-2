@@ -1,68 +1,42 @@
 class_name AuraResource extends RefCounted
 
-enum { DEAD, FREEZE }
+enum { NO = 0, MAX = 10, SEMI = 100, SET = 255 }
+enum { BLUE, GREEN, YELLOW, RED }
+enum { THICK, COLOR, RESOURCE, RESOURCE_VALUE }
+enum { LIFE_BORDER, PERIOD, SUMMARY }
+enum { WAVE, DURATION, THICKNESS, LAST_THICKNESS, CRITICAL }
 
-signal interrogation()
+const param: PackedStringArray = ["shader_parameter/line_thickness", "shader_parameter/line_color"]
+const color: PackedFloat32Array = [1.0, 0.8, 0.4, 0.0]
 
-var state: int
-LevelRoot
+var state: PackedByteArray
+var _aura: Array[Tween]
+var _resource: Array[Tween]
+var damage: PackedByteArray = [0, 1, 0]
+var aura: PackedFloat32Array = [0.7, 0.1, 2.0, 5.0, 0.1]
+var last_color: Color
 
-func _ready() -> void:
-	HUD.aura_time.timeout.connect(burns)
-	timeout.connect()
-	diffuse.timeout.connect(diffusion)
-	timeout.connect(blink)
-	tween = create_tween()
-	tween.set_loops()
-	tween.tween_method(aura_waving, 0.0, 0.9, DURATION)
+var status: GameStatuses
+
+func setup() -> void: HUD.aura_time.timeout.connect(diffusion) # burns - blink
+
+func transport_entity(hero: int) -> void:
+	if HUD.entity[hero]:
+		pass
 
 func diffusion() -> void:
-	for i in len(HUD.entity):
-		if HUD.level.points[i] <= aura[CRITICAL]:
-			pass
-		if Bit.of(HUD.entity[i], ):
-			pass
+	for hero in len(HUD.entity):
+		if Bit.of(HUD.state[hero], Def.DEAD):
+			transport_entity(hero)
 
 func delay_diffuse() -> void:
 	diffuse.start()
 	material.set(param.color, colors.diffuse())
 
-func thrown(box: CharacterBody2D) -> void:
-	if box.logic.processors.movement.push.flying:
-		hit(10)
-
-func hit(amount: int = 1) -> void:
-	print("points alive: ", points.alive)
-	if points > damage[LIFE_BORDER]:
-		if not _apply_damage(amount): points.hit()
-	else:
-		interrogate()
-
-func interrogate() -> void:
-	aura.delay_diffuse()
-	interrogation.emit()
-
-func is_dead(no_points: bool) -> bool:
-	if no_points: points.death()
-	aura.delay_diffuse()
-	return no_points
-
-func restore() -> void: refill(points.maximum)
-
-func refill(amount: int = 1) -> void:
-	points.refill(amount)
-	aura.react(points.segment)
-	aura.delay_diffuse()
-
-func _apply_damage(amount: int = 1) -> bool:
-	points.damage(amount)
-	aura.react(points.segment)
-	return is_dead(not points.alive)
-
-
-func dead() -> void:
+func interrogated() -> void:
+	HUD.status.interrogate()
+	
 	damage[SUMMARY] = 0
-	HUD.aura_time.stop()
 
 func contact(damage: int) -> void:
 	damage[SUMMARY] += damage
@@ -76,77 +50,78 @@ func burns() -> void:
 	if damage[SUMMARY] == 0:
 		HUD.aura_time.stop()
 
-enum { LIFE_BORDER, PERIOD, SUMMARY }
-enum { WAVE, DURATION, THICKNESS, LAST_THICKNESS, CRITICAL }
-enum { THICK, COLOR }
+func decide(a: int, b: int, segment: float) -> float:
+	return 1.0 / (color[a] - color[b]) * (segment - color[b])
 
-var damage: PackedByteArray = [0, 1, 0]
-var aura: PackedFloat32Array = [0.7, 0.1, 2.0, 5.0, 0.1]
-var param: PackedStringArray = ["shader_parameter/line_thickness", "shader_parameter/line_color"]
+func _between(a: int, segment: float, b: int) -> bool:
+	return color[a] > segment and segment >= color[b]
 
-var last_color: Color
-var blinked: bool = false
-var colors: AuraHealthColor = AuraHealthColor.new()
-var entity: CharacterBody2D
-var tween: Tween
-
-var material: ShaderMaterial:
-	get: return entity.view.profile.material
-
-func react(no: int, segment: float) -> void:
-	last_color = colors.get_color(segment)
-	last_thickness = segment * THICKNESS + 3
-	HUD.entity[no].view.profile.material.set(param.color, last_color)
-	if segment < 0.1:
-		start_blinking()
-
-func aura_waving(offset: float) -> void:
-	material.set(param.thick, last_thickness + offset * WAVE) #  * 0.75
-
-func is_blinking() -> bool: return not HUD.aura_time.is_stopped()
-func diffuse_start() -> void: HUD.aura_time.start()
-func diffuse_stop() -> void: HUD.aura_time.stop()
-
-func blink() -> void:
-	blinked = !blinked
-	if blinked:
-		material.set(param.color, Color.TRANSPARENT)
+func set_color(hero: int) -> void:
+	var segment: float = HUD.points[hero] / HUD.maximum[hero]
+	if segment <= color[RED]:
+		last_color = Color.from_rgba8(SET, NO, NO, SEMI)
+	elif segment >= color[BLUE]:
+		last_color = Color.from_rgba8(NO, SET, SET, SEMI)
+	elif _between(BLUE, segment, GREEN):
+		last_color = Color.from_rgba8(NO, SET, int(SET * decide(BLUE, GREEN, segment)), SEMI)
+	elif _between(GREEN, segment, YELLOW):
+		last_color = Color.from_rgba8(int((1.0 - decide(GREEN, YELLOW, segment)) * SET), SET, NO, SEMI)
 	else:
-		material.set(param.color, last_color)
+		last_color = Color.from_rgba8(SET, int(SET * decide(YELLOW, RED, segment)), NO, SEMI)
 
+func set_material(hero: int, type: int, value: Variant) -> void:
+	HUD.level.entity[hero].profile.material.set(param[type], value)
 
-signal update_bar(current: int)
+func set_points(hero: int, type: int, amount: int) -> void:
+	HUD.status.set_points(hero, type, clampi(HUD.points[hero][type] + amount, NO, HUD.maximum[hero][type]))
 
+func react(hero: int) -> void:
+	var segment: float = HUD.points[hero] / HUD.maximum[hero]
+	
+	colors.set_color(hero)
+	last_thickness = segment * THICKNESS + 3
+	set_material(hero, COLOR, last_color)
+	if segment < 0.1:
+		diffuse_start()
 
+func transfusion(hero: int) -> void:
+	_aura[hero] = create_tween()
+	_aura[hero].tween_method(func():
+		set_material(hero, COLOR, last_color)
+		pass,
+	0.0, 1.0, 1)
 
-var is_just_dead: bool = false
-var is_dead: bool = false
+func aura_affect(hero: int, amount: int = -1) -> void:
+	set_points(hero, Vector2.Axis.AXIS_X, amount)
+	HUD.state[hero] = Bit.to(HUD.state[hero], Def.DEAD, HUD.points[hero] == NO)
+	HUD.game.set_hp(hero, HUD.points)
+	if Bit.of(HUD.state[hero], Def.DEAD) and HUD.entity[hero].is_in_group("enemy"):
+		HUD.aura_timing.start()
+		
+	else:
+		pass # animate transfusion
 
-func is_alive(no: int) -> void:
-	return HUD.points[no] > damage[LIFE_BORDER]
+func costly(hero: int, cost: int) -> bool: return HUD.points[hero] - cost < EMPTY
 
-var segment: float:
-	get: return points / maximum
+func can_use(cost: int) -> bool: return Bit.of_field(HUD.settings_state, Def.DIFFICULTY) != Def.CASUAL and not costly(cost)
 
-func set_contested_health() -> void: contested = int(points)
+func _react_resource(hero: int) -> Callable:
+	return func(value: float):
+		colors.set_material(hero, RESOURCE_VALUE, HUD.points[hero].y)
+		if value == 1.0:
+			state[RESOURCE] = Bit.to(state[RESOURCE], hero, false)
+			diffusion_resource(hero)
 
-func setup(next: int) -> void:
-	timeout.connect(set_contested_health)
-	maximum = next
-	contested = maximum
-	points = next # maximum - 50 # TODO TEST JARS
-#	update_bar.emit(points)
+func affect_resource(hero: int, amount: int = 1) -> void:
+	set_points(hero, Vector2.Axis.AXIS_Y, amount)
+	set_material(hero, RESOURCE, true)
+	if not Bit.of(state[RESOURCE], hero):
+		state[RESOURCE] = Bit.to(state[RESOURCE], hero, true)
+		_resource[hero] = create_tween()
+		_resource[hero].tween_method(_react_resource(hero), 0.0, 1.0, 1.0)
 
-func revive() -> void: points = maximum
+func diffusion_resource(hero: int) -> void:
+	set_material(hero, RESOURCE, false)
 
-func refill(amount: int = 1) -> void:
-	points = min(points + amount, maximum)
-	update_bar.emit(points)
-	is_dead = points == damage[LIFE_BORDER]
-
-func damage(amount: int = 1) -> void:
-	points = max(points - amount, damage[LIFE_BORDER])
-	is_just_dead = points == damage[LIFE_BORDER] and not is_dead
-	if is_just_dead: is_dead = true
-	update_bar.emit(points)
-	start()
+func thrown(box: CharacterBody2D) -> void:
+	if box.velocity != Vector2.ZERO: affect_aura(10)
