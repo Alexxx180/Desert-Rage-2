@@ -1,6 +1,5 @@
-class_name TileDecorator extends RefCounted
+class_name TileDecorator extends TileMapLayer
 
-var layer: TileMapLayer
 var _context: Dictionary
 var context: Dictionary:
 	get: return _context
@@ -8,12 +7,8 @@ var context: Dictionary:
 		_context.id = value.id
 		_context.coords = value.coords
 		_context.atlas = value.atlas
-static var no: Vector2i:
-	get: return Vector2i.ZERO
 var logic_no: int:
 	get: return Tile.logic_no(context.atlas)
-var is_enabled:
-	get: return layer != null
 var tatlas: Vector2i:
 	get: return context.atlas
 var tcoords: Vector2i:
@@ -28,24 +23,23 @@ func add_prop(key: String, value: Variant) -> TileDecorator:
 
 func add_chip(node: Node2D, path = '.') -> TileDecorator:
 	node.position = context.pos
-	layer.get_node(path).add_child(node)
+	get_node(path).add_child(node)
 	return self
 
-func _init(_layer: TileMapLayer, id: int = -1, coords: Vector2i = no, atlas: Vector2i = no) -> void:
-	layer = _layer
+func _init(id: int = -1, coords: Vector2i = Vector2i.ZERO, atlas: Vector2i = Vector2i.ZERO) -> void:
 	if is_enabled: _context = { "id": id, "coords": coords, "atlas": atlas }
 
 func get_pos(map_coords: Vector2i) -> Vector2:
-	return Tile.get_pos(layer, map_coords)
+	return Tile.get_pos(self, map_coords)
 
-func find(position: Vector2) -> Vector2i:
-	return Tile.find(layer, position)
+func find(pos: Vector2) -> Vector2i:
+	return Tile.find(self, pos)
 
-func busy(tile: Vector2i = _context.atlas, id: int = _context.id) -> Array[Vector2i]:
-	return Tile.used_cells(layer, tile, id)
+func busy(atlas: Vector2i = _context.atlas, id: int = _context.id) -> Array[Vector2i]:
+	return Tile.used_cells(self, atlas, id)
 
 func atlas_coords(map_coords: Vector2i) -> Vector2i:
-	return Tile.atlas_coords(layer, map_coords)
+	return Tile.atlas_coords(self, map_coords)
 
 func select(atlas: Vector2i, id: int = context.id) -> TileDecorator:
 	_context.atlas = atlas
@@ -61,31 +55,31 @@ func offset(value: Vector2i) -> TileDecorator:
 	return self
 
 func paint(cell: Dictionary = context) -> TileDecorator:
-	Tile.paint(layer, cell)
+	Tile.paint(self, cell)
 	return self
 
 func erase(map_coords: Vector2i = context.coords) -> TileDecorator:
-	layer.erase_cell(map_coords)
+	erase_cell(map_coords)
 	return self
 
 func basis(map_coords: Vector2i) -> Dictionary:
-	return Tile.basis(layer, map_coords)
+	return Tile.basis(self, map_coords)
 
 func from_coords(map_coords: Vector2i, id: int = context.id) -> TileDecorator:
-	context = Tile.from_coords(layer, map_coords, id) # print("EXTRACT! CONTEXT: ", context.coords, " - ATLAS: ", context.atlas)
+	context = Tile.from_coords(self, map_coords, id) # print("EXTRACT! CONTEXT: ", context.coords, " - ATLAS: ", context.atlas)
 	return self
 
 func from_pos(pos: Vector2) -> TileDecorator:
-	context = Tile.from_pos(layer, pos)
+	context = Tile.from_pos(self, pos)
 	_context.pos = pos
 	return self
 
 func extract(number: int, map_coords: Vector2i = context.coords) -> Variant:
-	return Tile.extract(layer, map_coords, number)
+	return Tile.extract(self, map_coords, number)
 
 func extract_at_pos(pos: Vector2, number: int) -> Variant:
 	return extract(number, find(pos))
 
 func switch(to: Vector2i) -> TileDecorator:
-	Tile.switch(context, to, layer)
+	Tile.switch(context, to, self)
 	return self

@@ -30,6 +30,13 @@ var preserve: Preserves:
 	get: return Works.loads("preserve", REF, new_preserve)
 var skills: SkillManager:
 	get: return Works.loads("skills", REF, new_skills)
+var status: GameStatuses:
+	get: return Works.loads("status", REF, new_game_statuses)
+var aura: AuraResource:
+	get: return Works.loads("status", REF, new_aura_resource)
+var pillar: PillarChains:
+	get: return Works.loads("pillar", REF, new_pillar_chains)
+
 
 var _level: Node2D
 var level: Node2D:
@@ -39,6 +46,9 @@ func new_preserve() -> Preserves: return Preserves.new()
 func new_skills() -> SkillManager: return SkillManager.new()
 func new_menu() -> Menu: return Menu.new()
 func new_world_input() -> WorldInput: return WorldInput.new()
+func new_game_statuses() -> GameStatuses: return GameStatuses.new()
+func new_aura_resource() -> AuraResource: return AuraResource.new()
+func new_pillar_chains() -> PillarChains: return PillarChains.new()
 
 func _ready() -> void: layer = 2 # TODO
 

@@ -1,7 +1,7 @@
 class_name LevelRoot extends Node2D # LEVEL CONTROL 
 # enum { BOOKS = 2, HOOKUPS = 4, CHATS = 6, LOGIC = 7, TRANSITION = 8, CHESTS = 9, ENEMY = 10 }
-@onready var border: TileDecorator = TileDecorator.new($border)
-@onready var execute: TileDecorator = TileDecorator.new($execute)
+@onready var border: TileDecorator = $border
+@onready var execute: TileDecorator = $execute
 @onready var group: Node2D = $group
 @onready var transition: CanvasLayer = $transition
 
@@ -25,10 +25,10 @@ var topdown: Node:
 	get: return upload_act("topdown")
 var platformer: Node:
 	get: return upload_act("platformer")
-var aura: Node:
-	get: return update_act("aura")
-var resource: Node:
-	get: return update_act("resource")
+#var aura: Node:
+#	get: return update_act("aura")
+#var resource: Node:
+#	get: return update_act("resource")
 var skills: SkillManager:
 	get: return Works.loads("skills", REF, new_skill_manager)
 var ability: Node:
@@ -43,7 +43,7 @@ var boxes: Boxes:
 	get: return Works.loads("boxes", REF, new_boxes)
 var tile: TileCluster:
 	get: return Works.loads("tile", REF, new_cluster)
-
+HUD
 func new_boxes() -> Boxes: return Boxes.new()
 func new_cluster() -> TileCluster: return TileCluster.new()
 func new_skill_manager() -> SkillManager: return SkillManager.new()
@@ -51,9 +51,9 @@ func new_hero_movement() -> HeroMovement: return HeroMovement.new()
 
 func setup() -> void:
 	tile.set_types({
-		"lever": border.layer.get_used_cells_by_id(Def.EXECUTE, Def.to8(Def.LEVER_OFF)),
-		"button": border.layer.get_used_cells_by_id(Def.EXECUTE, Def.to8(Def.PLATE_OFF)),
-		"source": border.layer.get_used_cells_by_id(Def.EXECUTE, Def.to8(Def.SOURCE_OFF))
+		"lever": border.get_used_cells_by_id(Def.EXECUTE, Def.to8(Def.LEVER_OFF)),
+		"button": border.get_used_cells_by_id(Def.EXECUTE, Def.to8(Def.PLATE_OFF)),
+		"source": border.get_used_cells_by_id(Def.EXECUTE, Def.to8(Def.SOURCE_OFF))
 	})
 	# BOX PLACEMENT
 	for tag in Def.MAX8: if not tile.resize_cluster(self, tag): break

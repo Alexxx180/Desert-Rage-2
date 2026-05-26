@@ -5,6 +5,7 @@ enum { BLUE, GREEN, YELLOW, RED }
 enum { THICK, COLOR, RESOURCE, RESOURCE_VALUE }
 enum { LIFE_BORDER, PERIOD, SUMMARY }
 enum { WAVE, DURATION, THICKNESS, LAST_THICKNESS, CRITICAL }
+enum { AURA, AP, TRANSPORT }
 
 const param: PackedStringArray = ["shader_parameter/line_thickness", "shader_parameter/line_color"]
 const color: PackedFloat32Array = [1.0, 0.8, 0.4, 0.0]
@@ -17,17 +18,18 @@ var aura: PackedFloat32Array = [0.7, 0.1, 2.0, 5.0, 0.1]
 var last_color: Color
 var last_thickness: float
 
-var status: GameStatuses
-
 func setup() -> void: HUD.aura_time.timeout.connect(diffusion) # burns - blink
 
-func transport() -> void:
-	HUD.level.
-	pass
+func transport(hero: int) -> void:
+	HUD.level.entity[hero].animation.transport()
+	HUD.level.entity[hero].process_mode = Node.PROCESS_MODE_DISABLED
+	var shift: int = 1 if Bit.of(state[TRANSPORT], hero) else -1
+	HUD.level.entity[hero].state[2] = posmod(HUD.level.entity[hero].state[2] + shift, len(HUD.level.spawn))
+	HUD.level.entity[hero].position = HUD.level.spawn[HUD.level.entity[hero].state[2]]
 
 func ko(hero: int) -> void:
 	var over: bool = true
-	for i in len(Def.ENEMY):
+	for i in Def.ENEMY:
 		over = over and Bit.of(HUD.state[i], Def.DEAD)
 	if over:
 		HUD.level.group.spectrum()
@@ -87,11 +89,11 @@ func affect_aura(hero: int, amount: int = -1) -> void:
 	if Bit.of(HUD.state[hero], Def.DEAD) and HUD.entity[hero].is_in_group(&"enemy"):
 		HUD.aura_time.start()
 	else:
-		transfusion()
+		transfusion(hero)
 
 func costly(hero: int, cost: int) -> bool: return HUD.points[hero] - cost < NO
-
-func infinite() -> bool: return Bit.of_field(HUD.settings_state, Def.DIFFICULTY) == Def.CASUAL
+# TODO FIXME difficulty infinite usage
+# func infinite() -> bool: return Bit.of_field(HUD.settings_state, Def.DIFFICULTY) == Def.CASUAL
 
 func _react_resource(hero: int) -> Callable:
 	return func(value: float):

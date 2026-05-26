@@ -107,12 +107,15 @@ func teleporting(hero: CharacterBody2D, border: TileDecorator) -> bool:
 
 func tile_walk(hero: CharacterBody2D, border: TileDecorator) -> void:
 	if teleporting(hero, border): return
-	tile_press(hero.position, border)
+	if not tile_press(hero.position, border):
+		
 
-func tile_press(pos: Vector2, border: TileDecorator) -> void:
+func tile_press(pos: Vector2, border: TileDecorator) -> bool:
 	match Def.from8(border.tpos(pos)):
 		Def.PLATE_OFF: executes(border, Def.PLATE_ON) ; switch_cluster(BUTTON, border)
 		Def.PLATE_ON: executes(border, Def.PLATE_OFF) ; switch_cluster(BUTTON, border)
+		_: return false
+	return true
 
 func tile_act(pos: Vector2, border: TileDecorator) -> void:
 	match Def.from8(border.tpos(pos)):
