@@ -15,40 +15,36 @@ var _resource: Array[Tween]
 var damage: PackedByteArray = [0, 1, 0]
 var aura: PackedFloat32Array = [0.7, 0.1, 2.0, 5.0, 0.1]
 var last_color: Color
+var last_thickness: float
 
 var status: GameStatuses
 
 func setup() -> void: HUD.aura_time.timeout.connect(diffusion) # burns - blink
 
+func transport() -> void:
+	HUD.level.
+	pass
+
+func ko(hero: int) -> void:
+	var over: bool = true
+	for i in len(Def.ENEMY):
+		over = over and Bit.of(HUD.state[i], Def.DEAD)
+	if over:
+		HUD.level.group.spectrum()
+	else:
+		HUD.level.entity[hero].animation.play_coma()
+
 func transport_entity(hero: int) -> void:
-	if HUD.entity[hero]:
-		pass
+	if HUD.entity[hero].is_in_group("enemy"):
+		transport(hero)
+	else:
+		ko(hero)
+	HUD.state[hero] = Bit.to(HUD.state[hero], Def.DEAD, false)
 
 func diffusion() -> void:
 	for hero in len(HUD.entity):
 		if Bit.of(HUD.state[hero], Def.DEAD):
 			transport_entity(hero)
-
-func delay_diffuse() -> void:
-	diffuse.start()
-	material.set(param.color, colors.diffuse())
-
-func interrogated() -> void:
-	HUD.status.interrogate()
-	
-	damage[SUMMARY] = 0
-
-func contact(damage: int) -> void:
-	damage[SUMMARY] += damage
-	if damage[SUMMARY] > 0 and is_stopped():
-		HUD.aura_time.start()
-
-func burns() -> void:
-	if points.alive: _apply_damage(amount)
-	
-	damage[SUMMARY] = max(damage[SUMMARY] - period, 0)
-	if damage[SUMMARY] == 0:
-		HUD.aura_time.stop()
 
 func decide(a: int, b: int, segment: float) -> float:
 	return 1.0 / (color[a] - color[b]) * (segment - color[b])
@@ -56,8 +52,10 @@ func decide(a: int, b: int, segment: float) -> float:
 func _between(a: int, segment: float, b: int) -> bool:
 	return color[a] > segment and segment >= color[b]
 
-func set_color(hero: int) -> void:
+func react(hero: int) -> void:
 	var segment: float = HUD.points[hero] / HUD.maximum[hero]
+	last_thickness = segment * THICKNESS + 3
+	set_material(hero, COLOR, last_color)
 	if segment <= color[RED]:
 		last_color = Color.from_rgba8(SET, NO, NO, SEMI)
 	elif segment >= color[BLUE]:
@@ -75,53 +73,40 @@ func set_material(hero: int, type: int, value: Variant) -> void:
 func set_points(hero: int, type: int, amount: int) -> void:
 	HUD.status.set_points(hero, type, clampi(HUD.points[hero][type] + amount, NO, HUD.maximum[hero][type]))
 
-func react(hero: int) -> void:
-	var segment: float = HUD.points[hero] / HUD.maximum[hero]
-	
-	colors.set_color(hero)
-	last_thickness = segment * THICKNESS + 3
-	set_material(hero, COLOR, last_color)
-	if segment < 0.1:
-		diffuse_start()
-
 func transfusion(hero: int) -> void:
-	_aura[hero] = create_tween()
+	_aura[hero] = HUD.aura_time.create_tween()
 	_aura[hero].tween_method(func():
 		set_material(hero, COLOR, last_color)
-		pass,
+		set_material(hero, THICK, last_thickness),
 	0.0, 1.0, 1)
 
-func aura_affect(hero: int, amount: int = -1) -> void:
+func affect_aura(hero: int, amount: int = -1) -> void:
 	set_points(hero, Vector2.Axis.AXIS_X, amount)
 	HUD.state[hero] = Bit.to(HUD.state[hero], Def.DEAD, HUD.points[hero] == NO)
 	HUD.game.set_hp(hero, HUD.points)
-	if Bit.of(HUD.state[hero], Def.DEAD) and HUD.entity[hero].is_in_group("enemy"):
-		HUD.aura_timing.start()
-		
+	if Bit.of(HUD.state[hero], Def.DEAD) and HUD.entity[hero].is_in_group(&"enemy"):
+		HUD.aura_time.start()
 	else:
-		pass # animate transfusion
+		transfusion()
 
-func costly(hero: int, cost: int) -> bool: return HUD.points[hero] - cost < EMPTY
+func costly(hero: int, cost: int) -> bool: return HUD.points[hero] - cost < NO
 
-func can_use(cost: int) -> bool: return Bit.of_field(HUD.settings_state, Def.DIFFICULTY) != Def.CASUAL and not costly(cost)
+func infinite() -> bool: return Bit.of_field(HUD.settings_state, Def.DIFFICULTY) == Def.CASUAL
 
 func _react_resource(hero: int) -> Callable:
 	return func(value: float):
-		colors.set_material(hero, RESOURCE_VALUE, HUD.points[hero].y)
+		set_material(hero, RESOURCE_VALUE, HUD.points[hero].y)
 		if value == 1.0:
 			state[RESOURCE] = Bit.to(state[RESOURCE], hero, false)
-			diffusion_resource(hero)
+			set_material(hero, RESOURCE, false)
 
 func affect_resource(hero: int, amount: int = 1) -> void:
 	set_points(hero, Vector2.Axis.AXIS_Y, amount)
 	set_material(hero, RESOURCE, true)
 	if not Bit.of(state[RESOURCE], hero):
 		state[RESOURCE] = Bit.to(state[RESOURCE], hero, true)
-		_resource[hero] = create_tween()
+		_resource[hero] = HUD.aura_time.create_tween()
 		_resource[hero].tween_method(_react_resource(hero), 0.0, 1.0, 1.0)
-
-func diffusion_resource(hero: int) -> void:
-	set_material(hero, RESOURCE, false)
 
 func thrown(box: CharacterBody2D) -> void:
 	if box.velocity != Vector2.ZERO: affect_aura(10)

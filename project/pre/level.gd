@@ -20,7 +20,7 @@ func update_act(caption: String) -> Node: return Works.uploads(self, Def.health 
 func upload_act(caption: String) -> Node: return Works.uploads(self, Def.input % [caption, "input/" + caption], caption, REF)
 func update_world(caption: String, path: String = caption) -> Node:
 	return Works.uploads(self, Def.world % path, caption, REF)
-HUD
+
 var topdown: Node:
 	get: return upload_act("topdown")
 var platformer: Node:
