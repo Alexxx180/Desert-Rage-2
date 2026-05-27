@@ -1,21 +1,24 @@
 class_name PillarChains extends RefCounted
 
-enum { CONSTRAINT = 5, ACCELERATION = 1000, GRAVITY = 500 } # 700000
-enum { ID = 4, HEIGHT = 5, CELL = 64 } # 0 , TRY = 75000
-enum { JUMP = 25000 } # , SINGULARITY = 35000 # JUMP = -75000, GRAVITY = 375000 / 150 - 750
-
+enum { ID = 4, CONSTRAINT = 5, HEIGHT = 5, CELL = 64, ACCELERATION = 1000, GRAVITY = 500, JUMP = 25000 } # 700000  # , TRY = 75000 , SINGULARITY = 35000 # JUMP = -75000, GRAVITY = 375000 / 150 - 750
 # TOOLS CHAINS
 
-func process_physics(delta: float) -> void:
-	# chains.process_physics(delta)
-	jump.process_physics(delta)
-	chains.process_physics(delta)
-	#pass # run.process_physics(delta)
-
 # CHAINS MOVE
-
 var see: Node2D
+var slide: ShapeCast2D
+var walls: RayCast2D
+var hero: CharacterBody2D
+var height: float = 0
+var is_sliding: bool:
+	get: return slide.is_colliding()
+
 var hanging: bool = false
+var is_pressed: bool = false
+var was_sliding: bool = false
+var falling: bool = false
+
+
+var world_y: float = 0.0 # @onready var deactivation: Timer = $deactivation
 
 func process_physics(delta: float) -> void:
 	if see.border.is_colliding():
@@ -70,16 +73,6 @@ func process_physics(delta: float) -> void:
 	spring.gravity(delta)
 
 # JUMP SLIDE
-var slide: ShapeCast2D
-var walls: RayCast2D
-var hero: CharacterBody2D
-
-var falling: bool = false
-var height: float = 0
-var is_sliding: bool:
-	get: return slide.is_colliding()
-var was_sliding: bool = false
-
 func gravity(delta: float) -> void:
 	if is_sliding:
 		slides(delta)
@@ -101,9 +94,7 @@ func above(ground_y: float) -> bool:
 	return hero.position.y <= ground_y - 1
 
 func falls(delta: float) -> void:
-	# height = max(-500, height + delta * GRAVITY) # delta * slide.height
 	hero.velocity.y = GRAVITY # delta * 
-	# hero.velocity.y = hero.velocity.y + delta * height
 	print("Y: ", hero.position.y)#, " - HEIGHT: ", height)
 	if walls.is_colliding(): land()
 
@@ -163,9 +154,6 @@ func gravity(delta: float) -> void: #if score > HEIGHT * CELL:	hero.velocity.y -
 		landing_crash()
 
 # SPRING GROUND
-var is_pressed: bool = false
-var world_y: float = 0.0 # @onready var deactivation: Timer = $deactivation
-
 func switch_spring_tile() -> void:
 	HUD.execute.switch(Def.to4(Def.SPRING_ON))
 
