@@ -43,7 +43,7 @@ var boxes: Boxes:
 	get: return Works.loads("boxes", REF, new_boxes)
 var tile: TileCluster:
 	get: return Works.loads("tile", REF, new_cluster)
-HUD
+
 func new_boxes() -> Boxes: return Boxes.new()
 func new_cluster() -> TileCluster: return TileCluster.new()
 func new_skill_manager() -> SkillManager: return SkillManager.new()
@@ -56,5 +56,5 @@ func setup() -> void:
 		"source": border.get_used_cells_by_id(Def.EXECUTE, Def.to8(Def.SOURCE_OFF))
 	})
 	# BOX PLACEMENT
-	for tag in Def.MAX8: if not tile.resize_cluster(self, tag): break
+	for tag in Def.MAX8: if not tile.resize_cluster(tag): break
 	# CHEST PLACEMENT

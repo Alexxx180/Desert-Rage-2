@@ -5,10 +5,18 @@ enum { ID = 4, CONSTRAINT = 5, HEIGHT = 5, CELL = 64, ACCELERATION = 1000, GRAVI
 
 # CHAINS MOVE
 var see: Node2D
-var slide: ShapeCast2D
+var slide: ShapeCast2D # # var slide: Node
 var walls: RayCast2D
 var hero: CharacterBody2D
+var ground: Node
+var input: Node
+var layers: Node
+#var input: Node
+var control: Node
+var view: Node2D
+var platform: ShapeCast2D # func singularity_point(delta: float) -> void: if slide.height > SINGULARITY: slide.height -= delta * slide.height; else: slide.falling = true; slide.height = height#; += delta * GRAVITY
 var height: float = 0
+var world_y: float = 0.0 # @onready var deactivation: Timer = $deactivation
 var is_sliding: bool:
 	get: return slide.is_colliding()
 
@@ -17,36 +25,20 @@ var is_pressed: bool = false
 var was_sliding: bool = false
 var falling: bool = false
 
+func hold_chains(hero: int) -> void:
+	HUD.level.state[hero] = Bit.to(Bit.to(HUD.level.state[hero],
+		Def.CHAINS, true), Def.JUMP, false)
+	HUD.level.entity[hero].set_collision_mask_value(1, false)
+	view.shadow.hanging = active
+	view.animation.moves.set_environment("chains")
 
-var world_y: float = 0.0 # @onready var deactivation: Timer = $deactivation
-
-func process_physics(delta: float) -> void:
-	if see.border.is_colliding():
-		if hanging:
-			hanging = false
-			catch.encounter_ledge(false)
-		return
-	#view.animation.moves.hero.to.act.velocity.forget()
-
-	if see.pillar.is_colliding():
-		hanging = see.unit.is_colliding()
-		if not hanging:
-			encounter_ledge(false)
-	
-	if see.unit.is_colliding() and catch.hero_in_midair():
-		hanging = true
-		catch.ledge_in_midair()
-	elif hanging:
-		encounter_ledge(true)
-
+func pull_chains(hero: int) -> void:
+	HUD.level.state[hero] = Bit.to(HUD.level.state[hero], Def.CHAINS, false)
+	HUD.level.entity[hero].set_collision_mask_value(1, true)
+	view.shadow.set
+	HUD.level.entity[hero].view.animation.moves.set_environment("ground")
 
 # CHAINS CATCH
-var input: Node
-var control: Node
-var view: Node2D
-
-func hero_in_midair() -> bool: return control.slide.falling
-
 func ledge_in_midair() -> void:
 	control.land()
 	encounter_ledge(true)
@@ -54,7 +46,7 @@ func ledge_in_midair() -> void:
 func encounter_ledge(active: bool) -> void:
 	disable_collision(active)
 	chains_animation(active)
-	
+
 func chains_animation(active: bool) -> void:
 	view.shadow.hanging = active
 	view.animation.moves.set_environment("chains" if active else "ground")
@@ -65,33 +57,18 @@ func disable_collision(active: bool) -> void:
 	control.layers.context(!active).collide_main()
 
 # TOOLS JUMP
-func _ready() -> void:
-	spring.control.slide = slide
-
-func process_physics(delta: float) -> void:
-	slide.gravity(delta)
-	spring.gravity(delta)
-
 # JUMP SLIDE
-func gravity(delta: float) -> void:
-	if is_sliding:
-		slides(delta)
-	elif falling:
-		falls(delta)
-	elif was_sliding:
-		was_sliding = false
-		hero.velocity.y = 0
-	#else:
-	#	hero.velocity.y = 0
+func gravity(hero: int) -> void:
+	var state: int = HUD.level.state[hero]
+	if Bit.of(state, Def.CHAINS):
+		HUD.level.entity[hero].velocity.y = 0
+	elif Bit.of(state, Def.FALL):
+		HUD.level.entity[hero].add_velocity(Vector2(0, GRAVITY))
+	elif Bit.of(state, Def.JUMP):
+		HUD.level.entity[hero].add_velocity(Vector2(0, -GRAVITY))
 
-func slides(delta: float) -> void:
-	hero.velocity.y = ACCELERATION # delta * 
-	was_sliding = true
-	#if not is_sliding:
-	#	hero.velocity.y = 0
-
-func above(ground_y: float) -> bool:
-	return hero.position.y <= ground_y - 1
+func jump(hero: int) -> void:
+	pass
 
 func falls(delta: float) -> void:
 	hero.velocity.y = GRAVITY # delta * 
@@ -122,12 +99,6 @@ func gravity(delta: float) -> void:
 
 
 # SPRING CONTROL
-var ground: Node
-var slide: Node
-var input: Node
-var layers: Node
-var platform: ShapeCast2D # func singularity_point(delta: float) -> void: if slide.height > SINGULARITY: slide.height -= delta * slide.height; else: slide.falling = true; slide.height = height#; += delta * GRAVITY
-
 func jump(jumped: bool) -> void:
 	# slide.height = -JUMP if jumped else 0 # hero.movement = gravity if jumped else floating # hero.motion_mode = CharacterBody2D.MOTION_MODE_GROUNDED / CharacterBody2D.MOTION_MODE_FLOATING
 	if jumped:

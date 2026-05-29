@@ -7,9 +7,9 @@ func _hold(no: int) -> bool: return Input.is_action_pressed(action[no])
 func _power(no: int) -> float: return Input.get_action_strength(action[no])
 func act(no: int) -> bool: return Bit.from(combo, acts[no])
 
+enum { A, B, X, Y, T }
 enum { LEFT, RIGHT, UP, DOWN, ACT1, ACT2, ACT3, ACT4, OPT_LEFT, OPT_RIGHT, OPT_UP,
 	OPT_DOWN, FIRE, AIM, MENU }
-enum { A, B, X, Y, T }
 enum { DOUBLE, LUNGE, DEAD_GRIP, LOW_KICK, BACKSTAB, FIRE_KICK,
 	SPIT_KICK, BACK_SPIT, POACHING,
 	GREEK_FIRE, STRAY_BULLET, AIR_FIGHT, AID, FIRE_DANCE, BREAKFLY, SHRAPNEL,
@@ -49,7 +49,7 @@ func punch() -> void:
 	if act(BACKSTAB):
 		pass
 	# hands("Двоечка")
-	timer.start()
+	# timer.start()
 
 func kick() -> void:
 	combo = Bit.add(combo, B)
@@ -59,6 +59,8 @@ func kick() -> void:
 		pass
 	if act(FIRE_KICK):
 		pass
+	if HUD.level.tile[HUD.hero] == Def.SPRING_OFF:
+		HUD.level.chains.jump()
 
 func skill_a() -> void:
 	combo = Bit.add(combo, X)

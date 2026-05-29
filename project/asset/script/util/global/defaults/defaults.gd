@@ -36,7 +36,8 @@ var aura: AuraResource:
 	get: return Works.loads("status", REF, new_aura_resource)
 var pillar: PillarChains:
 	get: return Works.loads("pillar", REF, new_pillar_chains)
-
+var deploy: HeroDeploy:
+	get: return Works.loads("pillar", REF, new_hero_deploy)
 
 var _level: Node2D
 var level: Node2D:
@@ -49,6 +50,7 @@ func new_world_input() -> WorldInput: return WorldInput.new()
 func new_game_statuses() -> GameStatuses: return GameStatuses.new()
 func new_aura_resource() -> AuraResource: return AuraResource.new()
 func new_pillar_chains() -> PillarChains: return PillarChains.new()
+func new_hero_deploy() -> HeroDeploy: return HeroDeploy.new()
 
 func _ready() -> void: layer = 2 # TODO
 

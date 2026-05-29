@@ -46,20 +46,20 @@ static func take(fields: PackedByteArray, mask: int) -> int:
 	for i in count: result |= fields[i] << (mask * (count - i))
 	return result
 
-static func in_mask(no: int, mask: PackedByteArray = Def.BYTE) -> Array:
-	if mask != Def.BYTE and no in mask: return mask_range(no, MASK2)
+static func in_mask(no: int, mask: PackedByteArray = Def.ARRAY) -> Array:
+	if mask.size() > 0 and no in mask: return mask_range(no, MASK2)
 	return mask_range(no, MASK)
 
-static func masked_value(field: int, no: int, mask: PackedByteArray = Def.BYTE) -> int:
+static func masked_value(field: int, no: int, mask: PackedByteArray = Def.ARRAY) -> int:
 	var value: int = 0 ; for i in in_mask(no, mask): value |= field & Bit.bit(i)
 	return value
 
-static func masked_digit(no: int, mask: PackedByteArray = Def.BYTE) -> int:
+static func masked_digit(no: int, mask: PackedByteArray = Def.ARRAY) -> int:
 	var value: int = 0 ; for i in in_mask(no, mask): value |= Bit.bit(i)
 	return value
 
-static func of_field(field: int, no: int, mask: PackedByteArray = Def.BYTE) -> int:
+static func of_field(field: int, no: int, mask: PackedByteArray = Def.ARRAY) -> int:
 	return masked_value(field, no, mask) >> digit(no)
 
-static func to_field(field: int, no: int, next: int, mask: PackedByteArray = Def.BYTE) -> int:
+static func to_field(field: int, no: int, next: int, mask: PackedByteArray = Def.ARRAY) -> int:
 	return field & ~masked_digit(no, mask) | (next << digit(no))
