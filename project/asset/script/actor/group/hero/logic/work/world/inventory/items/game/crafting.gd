@@ -24,7 +24,7 @@ func _connect_ingredients(c: Dictionary, id: int) -> void:
 func _set_craft(type, base: int) -> void:
 	for j in type.size:
 		var i: Item = type.effect[j].item
-		if i.craft != Def.DICT:
+		if not i.craft.is_empty():
 			print("CRAFT ITEM: ", i.name)
 			_connect_ingredients(i.craft, base + j) #craft
 

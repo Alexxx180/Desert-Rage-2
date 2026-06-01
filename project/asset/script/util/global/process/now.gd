@@ -1,25 +1,21 @@
 class_name Def
 
-enum { JUMP = 200000, SINGULARITY = 45000, GRAVITY = 700000 } # JUMP = -75000, GRAVITY = 375000 / 150 - 750
-enum { HERO, BOX }
-enum { STANDING, LAYER, PERSPECTIVE, ACTING, GRAB }
-enum { DEAD, FREEZE }
+enum { BLUE_OFF, LOGIC = 0, U_WATER = 0, ALT1 = 0, BLUE_ON, U_EXIT = 1, ALT2 = 1, RED_OFF,
+	U_WALL_OFF = 2, ALT3 = 2, RED_ON, U_WALL_ON = 3, ENTRY = 3, ALT4 = 3, GREEN_OFF, U_LADDER = 4,
+	GREEN_ON, D_LADDER = 5, WHITE_OFF, ENEMY = 6, WHITE_ON, BOSS = 7, BLACK_OFF, M_WATER = 8,
+	TAGS = 8, BLACK_ON, M_EXIT = 9, CHESTS = 9, BRONZE_OFF, D_WALL_OFF = 10, BRONZE_ON,
+	D_WALL_ON = 11, SILVER_OFF, H_SPRING_OFF = 12, SILVER_ON, H_SPRING_ON = 13, GOLD_OFF,
+	B_SPRING_OFF = 14, GOLD_ON, B_SPRING_ON = 15, PLATINUM_OFF, D_WATER = 16, PLATINUM_ON,
+	D_EXIT = 17, PLACE, SLIDE = 18, TELEPORT_ON, PILLAR = 19, SOURCE_OFF, STAND_OFF = 20,
+	SOURCE_ON, STAND_ON = 21, LEVER_OFF, SECRET_OFF = 22, LEVER_ON, SECRET_ON = 23, PLATE_OFF,
+	PAGE = 24, PLATE_ON, TELEPORT_OFF, SPIKER, COMFORTER, SUPPLIER, COOLER, SMALL_BOX, FIRE_BOX, LARGE_BOX }
 
-enum { ALT1, ALT2, ALT3, ALT4, EXECUTE = 0, TRANSPORT = 3, MAX4 = 16, MAX8 = 64,
-	BOOKS = 2, HOOKS = 4, LOGIC = 7, TRANSITION = 8, CHATS = 6, CHEST = 9 } # LAYER ID
+enum { HERO, DEPLOYED = 0, DEAD, OVERWORLD = 1, FREEZE, CASUAL = 2,
+	BOX, LAYER, PERSPECTIVE, ACTING, GRAB, CAMERA,
+	TILESET4 = 16, TILE32 = 32, TILE48 = 48, TILESET8 = 64,
+	DEPLOY_DELTA = 4096, JUMP = 200000, SINGULARITY = 45000, GRAVITY = 700000 }
 
-enum { BLUE_OFF, BLUE_ON, RED_OFF, RED_ON, GREEN_OFF, GREEN_ON, WHITE_OFF, WHITE_ON, BLACK_OFF, BLACK_ON,
-	BRONZE_OFF, BRONZE_ON, SILVER_OFF, SILVER_ON, GOLD_OFF, GOLD_ON, PLATINUM_OFF, PLATINUM_ON, PLACE, TELEPORT_ON,
-	SOURCE_OFF, SOURCE_ON, LEVER_OFF, LEVER_ON, PLATE_OFF, PLATE_ON, TELEPORT_OFF, SPIKER, COMFORTER, SUPPLIER,
-	COOLER, SMALL_BOX, FIRE_BOX, LARGE_BOX }
-
-enum { U_LADDER, U_ENTRY, U_WALL_OFF, U_WALL_ON, D_LADDER, D_ENTRY, D_WALL_OFF, D_WALL_ON, STAND_OFF, STAND_ON, DESCENT, EXIT,
-	WATER_UP, WATER, WATER_DOWN }
-
-enum { POST_UP, BOSS, ICE, THICK_ICE, POST, ENEMY, PUDDLE_OFF, PUDDLE_ON, SPRING_OFF, SPRING_ON, LOAD_OFF, LOAD_ON, PAGE }
-
-enum { HINTS, BOOK, PAGES, ENEMIES }
-enum { RAY, ROCK, EYE_SEEKER }
+enum { INT = -1, RAY, ROCK, EYE_SEEKER }
 
 const manual: PackedByteArray = [1, 3, 7, 10, 20, 21] ## Hints count shown
 const levels: PackedByteArray = [1, 7, 9, 13, 25, 26] ## Level number
@@ -39,63 +35,59 @@ const hints: PackedStringArray = ["MM", "MJ", "MB", "ML", "CN", "AA", "AE", "AF"
 	"SR", "AW", "AH", "AM", "RG", "RM", "BY", "BK", "RG", "FG", "LO", "IM", "LG", "AY",
 	"CM", "CF", "IM", "EN", "PS", "RS", "ST", "BOOKS_STRING-ENEMY_STRING"]
 
+const DIR: PackedVector2Array = [Vector2i(24, 20), Vector2i(-1, -1)]
+
 static func to(field: int, off: int) -> Vector2i: return Vector2i(field & (2 << off), field >> off)
+static func to256(field: int) -> Vector2i: return to(field, 8)
 static func to8(field: int) -> Vector2i: return to(field, 3)
 static func to4(field: int) -> Vector2i: return to(field, 2)
 
 static func from(pos: Vector2i, off: int) -> int: return (pos.y << off) | pos.x
+static func from256(pos: Vector2i) -> int: return from(pos, 8)
 static func from8(pos: Vector2i) -> int: return from(pos, 3)
 static func from4(pos: Vector2i) -> int: return from(pos, 2)
-
-const DIR: PackedVector2Array = [Vector2i(24, 20), Vector2i(-1, -1)]
-const ARRAY: Array = []
-const DICT: Dictionary = {}
-const INT: int = -1
 
 static func FUNC(): pass
 static func among(a: float, x: float, b: float) -> bool: return (a <= x) and (x <= b)
 static func vec2() -> Array: return [Vector2.AXIS_X, Vector2.AXIS_Y]
 static func vec2i(axis: int) -> Vector2i: return Vector2i(axis, axis)
 static func truth(_empty: Object) -> bool: return true # combined with implicit func for readability
-static func entity(o: CharacterBody2D) -> bool: return o == HUD.ENTITY
-static func ic(text: String, result: Variant) -> Variant: print(text % result) ; return result
-static func ics(text: String, state: Array = Def.ARRAY) -> Variant: print(text % state) ; return state[0]
 # LOADS
-const first_level: String = "res://now/dungeon/cave/origin/0/0/level.tscn"
-const level: String = "res://now/dungeon/%s/%s/%d/level.tscn"
-const main_menu: String = "res://now/credits/main/main.tscn"
-const fight: String = "res://now/see/fight.tscn"
-const ground: String = "res://now/see/ground.tscn"
-const whip: String = "res://now/see/whip.tscn"
-const pull: String = "res://now/see/ledges.tscn"
-const ledges: String = "res://now/see/ledges.tscn"
-const health: String = "res://now/work/health/%s.tscn"
-const ability: String = "res://now/work/lockers/ability/%s.tscn"
-const activator: String = "res://now/work/lockers/ability/%s.tscn"
-const music: String = "res://now/work/music.tscn" # const hero: String = "res://now/work/hero/%s/%s.tscn"
-const hero: String = "res://now/work/hero/%s/%s.tscn"
-const ray: String = "res://now/work/hero/ray/ray.tscn"
-const rock: String = "res://now/work/hero/rock/rock.tscn"
-const group: String = "res://now/work/group/%s.tscn"
-const hud: String = "res://now/hud/%s.tscn"
-const credits: String = "res://now/credits.tscn"
-const settings: String = "res://now/settings.tscn"
-const sound: String = "res://now/sound.tscn"
-const information: String = "res://now/information.tscn"
-const pause: String = "res://now/hud/status/pause.tscn"
-const slots: String = "res://now/hud/status/slots.tscn"
-const enemy: String = "res://now/hud/status/enemy.tscn"
-const hint: String = "res://now/hud/hints/%s.tscn"
-const mhealth: String = "res://now/hud/markers/health.tscn"
-const items: String = "res://now/hud/markers/items.tscn"
-const actions: String = "res://now/work/hero/actions/%s.tscn"
-const xp: String = "res://now/hud/status/xp.tscn"
-const hits: String = "res://now/hud/status/hits.tscn"
-const game: String = "res://now/hud/game/%s.tscn"
-const mirror: String = "res://now/see/mirror/%s.tscn"
-const input: String = "res://now/work/hero/%s/%s.tscn"
-const world: String = "res://now/work/hero/world/%s.tscn"
-const progress: String = "user://progress.txt"
+const first_level: StringName = &"res://now/dungeon/cave/origin/0/0/level.tscn"
+const level: StringName = &"res://now/dungeon/%s/%s/%d/level.tscn"
+const main_menu: StringName = &"res://now/credits/main/main.tscn"
+const fight: StringName = &"res://now/see/fight.tscn"
+const ground: StringName = &"res://now/see/ground.tscn"
+const whip: StringName = &"res://now/see/whip.tscn"
+const pull: StringName = &"res://now/see/ledges.tscn"
+const ledges: StringName = &"res://now/see/ledges.tscn"
+const health: StringName = &"res://now/work/health/%s.tscn"
+const ability: StringName = &"res://now/work/lockers/ability/%s.tscn"
+const activator: StringName = &"res://now/work/lockers/ability/%s.tscn"
+const music: StringName = &"res://now/work/music.tscn" # const hero: StringName = &"res://now/work/hero/%s/%s.tscn"
+const hero: StringName = &"res://now/work/hero/%s/%s.tscn"
+const ray: StringName = &"res://now/work/hero/ray/ray.tscn"
+const rock: StringName = &"res://now/work/hero/rock/rock.tscn"
+const group: StringName = &"res://now/work/group/%s.tscn"
+const hud: StringName = &"res://now/hud/%s.tscn"
+const credits: StringName = &"res://now/credits.tscn"
+const settings: StringName = &"res://now/settings.tscn"
+const sound: StringName = &"res://now/sound.tscn"
+const information: StringName = &"res://now/information.tscn"
+const pause: StringName = &"res://now/hud/status/pause.tscn"
+const slots: StringName = &"res://now/hud/status/slots.tscn"
+const enemy: StringName = &"res://now/hud/status/enemy.tscn"
+const hint: StringName = &"res://now/hud/hints/%s.tscn"
+const mhealth: StringName = &"res://now/hud/markers/health.tscn"
+const items: StringName = &"res://now/hud/markers/items.tscn"
+const actions: StringName = &"res://now/work/hero/actions/%s.tscn"
+const xp: StringName = &"res://now/hud/status/xp.tscn"
+const hits: StringName = &"res://now/hud/status/hits.tscn"
+const game: StringName = &"res://now/hud/game/%s.tscn"
+const mirror: StringName = &"res://now/see/mirror/%s.tscn"
+const input: StringName = &"res://now/work/hero/%s/%s.tscn"
+const world: StringName = &"res://now/work/hero/world/%s.tscn"
+const progress: StringName = &"user://progress.txt"
 # PRELOADS
 const rain: PackedScene = preload("res://pre/particle/rain/rain.tscn")
 const sand: PackedScene = preload("res://pre/particle/sand.tscn")

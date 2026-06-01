@@ -1,24 +1,24 @@
 class_name Boxes extends RefCounted
 
-enum { WORLD, BORDERS, ENTITY, GROUND, TRIGGER, GAP = 7, UPLAND = 8, GRAVITY = 700000 } # , JUMP = 200000, GRAVITY = 700000 # CHARACTER = 3, BOX = 5
+enum { BORDERS, WORLD, ENTITY, GROUND, SLIDE = 2 } # , JUMP = 200000, GRAVITY = 700000 # CHARACTER = 3, BOX = 5
 
 var boxes: Array[CharacterBody2D] = []
 var pos: PackedVector2Array = []
 var count: PackedByteArray = []
-var slides: int
+var state: PackedByteArray = []
 
-func toggle_physics(box: CharacterBody2D) -> void:
-	if count[box.no] == 0 and not Bit.of(slides, box.no):
-		box.process_mode = Node.PROCESS_MODE_DISABLED
-	elif count[box.no] == 1 or Bit.of(slides, box.no):
-		box.process_mode = Node.PROCESS_MODE_INHERIT
+func toggle_physics(no: int) -> void:
+	if count[no] == 0 and not Bit.of(state[SLIDE], no):
+		boxes[no].process_mode = Node.PROCESS_MODE_DISABLED
+	elif count[no] == 1 or Bit.of(state[SLIDE], no):
+		boxes[no].process_mode = Node.PROCESS_MODE_INHERIT
 
-func toggle_slide(box: CharacterBody2D, state: bool) -> void:
-	slides = Bit.to(slides, box.no, state)
-	toggle_physics(box)
+func toggle_slide(no: int, next: bool) -> void:
+	state[SLIDE] = Bit.to(state[SLIDE], no, next)
+	toggle_physics(no)
 
 func slide_the_box(box: CharacterBody2D) -> void:
-	box.add_velocity(Vector2(box.velocity.x, GRAVITY)) # * delta
+	box.add_velocity(Vector2(box.velocity.x, Def.GRAVITY)) # * delta
 
 func add_box(box: CharacterBody2D) -> void:
 	box.no = boxes.size()
@@ -28,12 +28,12 @@ func add_box(box: CharacterBody2D) -> void:
 # LINKING
 func pushes(hero: CharacterBody2D, velocity: Vector2) -> void:
 	for i in range(0, count.size()):
-		if Bit.of(hero.state[Def.BOX], i):
+		if Bit.of(state[hero.no], i):
 			boxes[i].add_velocity(velocity)
 
-func fixate_box(hero: CharacterBody2D, box: CharacterBody2D, add: int) -> void:
-	count[box.no] += add
-	hero.state[Def.BOX] = Bit.to(hero.state[Def.BOX], box.no, true)
+func fixate_box(hero: int, box: int, add: int) -> void:
+	count[box] += add
+	state[hero] = Bit.to(state[hero], box, true)
 	toggle_physics(box)
 
 func animate_hero(hero: CharacterBody2D, action: String, condition: Callable) -> void:
@@ -41,11 +41,11 @@ func animate_hero(hero: CharacterBody2D, action: String, condition: Callable) ->
 		hero.to.moves.set_move_action(action)
 
 func _grab(hero: CharacterBody2D, box: CharacterBody2D) -> void:
-	fixate_box(hero, box, 1)
+	fixate_box(hero.no, box.no, 1)
 	animate_hero(hero, "pull", Bit.single)
 
 func _release(hero: CharacterBody2D, box: CharacterBody2D) -> void:
-	fixate_box(hero, box, -1)
+	fixate_box(hero.no, box.no, -1)
 	animate_hero(hero, "go", Bit.empty)
 
 func controls(box: CharacterBody2D) -> void:
@@ -58,17 +58,16 @@ func controls(box: CharacterBody2D) -> void:
 
 # WORK
 func turn_walls_collision(box: CharacterBody2D, value: bool) -> void:
-	for mask in [WORLD, GAP, UPLAND, BORDERS]:
+	for mask in [WORLD, BORDERS]:
 		box.set_collision_mask_value(mask, value)
 
-func set_tiles(box: CharacterBody2D, border: TileDecorator, slide: bool) -> void:
-	match Def.from8(border.tpos(pos[box.no])):
+func set_tiles(box: int, slide: bool) -> void:
+	match Def.from8(HUD.level.border.tpos(pos[box])):
 		Def.DESCENT: toggle_slide(box, slide)
-		_: HUD.level.tile.tile_press(pos[box.no], border)
+		_: HUD.level.tile.tile_press(pos[box])
 
-func encounter(box: CharacterBody2D, border: TileDecorator) -> void:
-	pos[box.no] = box.position
-	set_tiles(box, border, true)
+func encounter(no: int) -> void:
+	pos[no] = boxes[no].position
+	set_tiles(no, true)
 
-func diverge(box: CharacterBody2D, border: TileDecorator) -> void:
-	set_tiles(box, border, false)
+func diverge(no: int) -> void: set_tiles(no, false)

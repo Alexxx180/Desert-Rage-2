@@ -1,15 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://b83b7oo2fmh5h"]
+[gd_scene load_steps=2 format=3 uid="uid://b83b7oo2fmh5h"]
 
-[ext_resource type="Script" uid="uid://8eppp7nw4off" path="res://asset/script/actor/group/group.gd" id="1_kivt0"]
-[ext_resource type="PackedScene" uid="uid://dwq2sbrb6d7xm" path="res://asset/scene/actor/group/camera/camera.tscn" id="3_2mawu"]
+[ext_resource type="Script" uid="uid://dlflsnymw4yea" path="res://asset/script/actor/group/camera/camera.gd" id="1_7kw81"]
 
-[node name="group" type="Node2D"]
-y_sort_enabled = true
-script = ExtResource("1_kivt0")
-mode = null
-enemy = null
-eye_seeker_navigation = null
-spider_navigation = null
-
-[node name="camera" parent="." instance=ExtResource("3_2mawu")]
+[node name="camera" type="Camera2D"]
+process_mode = 3
 position_smoothing_speed = 2.0
+rotation_smoothing_speed = 10.0
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+script = ExtResource("1_7kw81")

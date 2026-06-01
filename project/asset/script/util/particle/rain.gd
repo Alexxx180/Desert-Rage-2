@@ -1,4 +1,4 @@
-class_name RainParticle extends Node2D
+class_name RainParticle extends GPUParticles2D
 
 func _ready() -> void:
 	$droplets.one_shot = true

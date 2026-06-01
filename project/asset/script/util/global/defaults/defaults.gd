@@ -38,6 +38,7 @@ var pillar: PillarChains:
 	get: return Works.loads("pillar", REF, new_pillar_chains)
 var deploy: HeroDeploy:
 	get: return Works.loads("pillar", REF, new_hero_deploy)
+var work: GroupWork
 
 var _level: Node2D
 var level: Node2D:
