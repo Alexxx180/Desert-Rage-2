@@ -27,12 +27,12 @@ func perform(motion: Vector2) -> void:
 func _init() -> void: jump = JumpDeployment.new()
 func append(ledge: StaticBody2D) -> void: data[ledge.get_instance_id()] = ledge
 func remove(ledge: StaticBody2D) -> void: data.erase(ledge.get_instance_id())
-func around() -> bool: return _search(Def.ic("ledges size: ", data.size()), data.values())
+func around() -> bool: return _search(data.size(), data.values())
 func _more(x: float, y: float) -> bool: return x > y
 func _less(x: float, y: float) -> bool: return x < y
 func decide(axis: int) -> Array[Callable]: return [_side(axis, _between), _side(axis, _more), _side(axis, _less)]
 func set_direction(direction: Vector2i) -> void: _direction = direction
-func _for_direction(action: Callable) -> void: for axis in Def.vec2(): action.call(axis)
+func _for_direction(action: Callable) -> void: for axis in [Vector2.AXIS_X, Vector2.AXIS_Y]: action.call(axis)
 func setup(): _for_direction(func(a): _plane.push_back(decide(a)))
 
 func _between(ledge: float, subject: float, GAP: int = 32) -> bool:

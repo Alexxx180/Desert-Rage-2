@@ -37,4 +37,4 @@ func set_fight(direction: Vector2i) -> void:
 	fight.set_direction(direction)
 
 func set_whip(direction: Vector2i) -> void:
-	whip.target_position = Def.vec2i(240) * direction
+	whip.target_position = Vector2i(240, 240) * direction

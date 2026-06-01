@@ -8,8 +8,7 @@ uniform float ap : hint_range(0.0, 1.0) = 0.5; // Resource view control
 const vec4 invisible_line = vec4(0.5, 0.5, 0.5, 1);
 const float invisible_thick = 5.0;
 const float ap_color = 12.0;
-const vec2 OFFSETS[8] = { vec2(-1, -1), vec2(-1, 0), vec2(-1, 1),
-	vec2(0, -1), vec2(0, 1), vec2(1, -1), vec2(1, 0), vec2(1, 1) };
+const vec2 OFFSETS[8] = { vec2(-1, -1), vec2(-1, 0), vec2(-1, 1), vec2(0, -1), vec2(0, 1), vec2(1, -1), vec2(1, 0), vec2(1, 1) };
 
 vec4 resource(vec4 color, float y) {
 	if (!view_skill.y) {

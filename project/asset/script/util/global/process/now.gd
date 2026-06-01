@@ -10,12 +10,12 @@ enum { BLUE_OFF, LOGIC = 0, U_WATER = 0, ALT1 = 0, BLUE_ON, U_EXIT = 1, ALT2 = 1
 	SOURCE_ON, STAND_ON = 21, LEVER_OFF, SECRET_OFF = 22, LEVER_ON, SECRET_ON = 23, PLATE_OFF,
 	PAGE = 24, PLATE_ON, TELEPORT_OFF, SPIKER, COMFORTER, SUPPLIER, COOLER, SMALL_BOX, FIRE_BOX, LARGE_BOX }
 
-enum { HERO, DEPLOYED = 0, DEAD, OVERWORLD = 1, FREEZE, CASUAL = 2,
-	BOX, LAYER, PERSPECTIVE, ACTING, GRAB, CAMERA,
+enum { INT = -1, HERO, DEPLOYED = 0, DEAD, OVERWORLD = 1, FREEZE,
+	CASUAL = 2, BOX, LAYER, PERSPECTIVE, ACTING, GRAB, CAMERA,
 	TILESET4 = 16, TILE32 = 32, TILE48 = 48, TILESET8 = 64,
 	DEPLOY_DELTA = 4096, JUMP = 200000, SINGULARITY = 45000, GRAVITY = 700000 }
 
-enum { INT = -1, RAY, ROCK, EYE_SEEKER }
+enum { RAY, ROCK, EYE_SEEKER }
 
 const manual: PackedByteArray = [1, 3, 7, 10, 20, 21] ## Hints count shown
 const levels: PackedByteArray = [1, 7, 9, 13, 25, 26] ## Level number
@@ -49,9 +49,6 @@ static func from4(pos: Vector2i) -> int: return from(pos, 2)
 
 static func FUNC(): pass
 static func among(a: float, x: float, b: float) -> bool: return (a <= x) and (x <= b)
-static func vec2() -> Array: return [Vector2.AXIS_X, Vector2.AXIS_Y]
-static func vec2i(axis: int) -> Vector2i: return Vector2i(axis, axis)
-static func truth(_empty: Object) -> bool: return true # combined with implicit func for readability
 # LOADS
 const first_level: StringName = &"res://now/dungeon/cave/origin/0/0/level.tscn"
 const level: StringName = &"res://now/dungeon/%s/%s/%d/level.tscn"
