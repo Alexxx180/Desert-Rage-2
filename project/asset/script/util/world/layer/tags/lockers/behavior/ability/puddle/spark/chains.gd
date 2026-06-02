@@ -1,6 +1,6 @@
 class_name FlowConductor extends RefCounted
 
-enum { A = -2, B = -1, LENGTH = 10, NONE = -1, SPARK = 0, SOURCE = 1 }
+enum { CHAIN = 0, JOINT = 1, A = -2, B = -1, LENGTH = 10, NONE = -1, SPARK = 0, SOURCE = 1 }
 
 var context: Dictionary
 var current: Array[PackedInt32Array] = [] # Vector2i
@@ -25,6 +25,16 @@ func activate_puddle(pos: Vector2) -> void:
 		Def.SOURCE_OFF: contact(HUD.level.border.tcoords)
 		TILE.OFF.PUDDLE: ability.spark.lazy_sparking(HUD.level.border.tcoords)
 
+func draw_tile(map_coords: Vector2i, status: String) -> void
+	HUD.level.border.target(map_coords)
+	if HUD.level.border.tiles[Def.ID] == Def.LOGIC:
+		pass
+	elif HUD.level.border.tiles[Def.ID] == Def.FLOOR:
+		HUD.level.border.tiles[Def.ALT] == Def.FLOOR
+		pass
+	match 
+		
+
 func draw_source(map_coords: Vector2i, status: String) -> void:
 	root.border.target(map_coords).select(TILE[status].SOURCE, TILE.ID.SOURCE).paint()
 
@@ -48,21 +58,13 @@ func diffuse_puddle(cell: Vector2i, context: Dictionary) -> bool:
 		context.charge = true
 	return not context.charge
 
-func at_dimension(tiles: Dictionary, site: Array, axis: int, opposite: int) -> bool:
-	if not tiles.map_coords[axis] == site[tiles.joint][axis]: return false
-	var x: int = tiles.map_coords[opposite]
-	var a: int = site[tiles.joint - 1][opposite]
-	var b: int = site[tiles.joint][opposite]
+func at_dimension(tiles: Dictionary, map_coords: Vector2i, axis: int) -> bool:
+	if not map_coords[axis] == current[tile[CHAIN]][tiles[JOINT]][axis]: return false
+	var opposite: int = axis ^ 1
+	var x: int = map_coords[opposite]
+	var a: int = current[tile[CHAIN]][tiles[JOINT] - 1][opposite]
+	var b: int = current[tile[CHAIN]][tiles[JOINT]][opposite]
 	return (a <= x and x <= b) or (a >= x and x >= b)
-
-func between(tiles: Dictionary, site: Array) -> bool:
-	var confirm: bool = false
-	var axis: int = Vector2.AXIS_Y
-	while axis >= Vector2.AXIS_X and not confirm:
-		var opposite_axis: int = abs(axis - 1)
-		confirm = at_dimension(tiles, site, axis, opposite_axis)
-		axis -= 1
-	return confirm
 
 func get_direction(delta: Vector2i) -> Vector2i:
 	for axis in [Vector2.AXIS_X, Vector2.AXIS_Y]:
@@ -116,30 +118,26 @@ func conduct(chain: int, map_coords: Vector2i, draw: Callable) -> void:
 	size[chain] -= 1
 	contact(map_coords)
 
-func discharge_unit(chains: Node, map_coords: Vector2i) -> void:
-	var tiles: Dictionary = {
-		"direction": Vector2i.ZERO, "map_coords": map_coords,
-		"chain": chains.current.size(), "joint": 0, "search": true
-	}
-	while tiles.chain > 0 and tiles.search:
-		tiles.chain -= 1
-		tiles.joint = current[tiles.chain].size()
-		while tiles.joint > 1 and tiles.search:
-			tiles.joint -= 1
-			var path: PackedInt32Array = current[tiles.chain]
-			tiles.search = not between(tiles, path)
+func get_site_to_discharge(map_coords: Vector2i) -> PackedInt32Array:
+	var tile: PackedInt32Array = [current.size(), 0]
+	for c in range(tile[CHAIN], 0, -1):
+		tile[CHAIN] = c
+		for j in range(current[tile[CHAIN]].size(), 1, -1):
+			tile[JOINT] = j
+			if not (at_dimension(tile, map_coords, Vector2.AXIS_Y) or
+				at_dimension(tile, map_coords, Vector2.AXIS_X)):
+				return tile
+	return tile
 
-	tiles.search = not tiles.search
-	if not tiles.search: return
-		
-	tiles.direction = get_direction(tiles.map_coords - current[tiles.chain][tiles.joint - 1])
-	
-	var chain: int = tiles.chain
-	while current[chain].size() - 1 > tiles.joint:
-		discharge(current[chain][A], chain)
-		current[chain].pop_back()
-	discharge(tiles.map_coords, chain)
-	diffuse_cross_and_turn_unit(tiles.map_coords - tiles.direction, chain)
+func discharge_unit(chains: Node, map_coords: Vector2i) -> void:
+	var site: PackedInt32Array = get_site_to_discharge(map_coords)
+	if site[CHAIN] == 0: return
+	var direction: Vector2i = get_direction(map_coords - current[tile[CHAIN]][tiles[JOINT] - 1])
+	while current[tile[CHAIN]].size() - 1 > tiles[JOINT]:
+		discharge(current[tile[CHAIN]][A], chain)
+		current[tile[CHAIN]].pop_back()
+	discharge(map_coords, tile[CHAIN])
+	diffuse_cross_and_turn_unit(map_coords - direction, tile[CHAIN])
 
 func discharge(target: Vector2i, chain: int) -> void:
 	var track: Rect2i = get_track(chain)
