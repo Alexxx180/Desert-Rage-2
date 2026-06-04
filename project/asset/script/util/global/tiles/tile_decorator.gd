@@ -1,85 +1,62 @@
 class_name TileDecorator extends TileMapLayer
 
-var _context: Dictionary
-var context: Dictionary:
-	get: return _context
-	set(value):
-		_context.id = value.id
-		_context.coords = value.coords
-		_context.atlas = value.atlas
-var logic_no: int:
-	get: return Tile.logic_no(context.atlas)
-var tatlas: Vector2i:
-	get: return context.atlas
-var tcoords: Vector2i:
-	get: return context.coords
+enum { LEVEL = 0, FLOOR = 1, BREAK = 2, SIZE = 5 }
 
-func tile(coords: Vector2) -> Vector2i: return from_coords(coords).tatlas
-func tpos(pos: Vector2) -> Vector2i: return from_pos(pos).tatlas
+var tile: PackedInt32Array = [0, 0, 0, 0, 0]
+var data: PackedStringArray = ["P", "F", "B"]
 
-func add_prop(key: String, value: Variant) -> TileDecorator:
-	_context[key] = value
+func set_chip(node: Node2D) -> TileDecorator:
+	node.position = map_to_local(Def.to256(tile[Def.TILE]))
 	return self
 
-func add_chip(node: Node2D, path = '.') -> TileDecorator:
-	node.position = context.pos
-	get_node(path).add_child(node)
+func atlas(next: int) -> TileDecorator:
+	tile[Def.TILE] = next
 	return self
 
-func _init(id: int = -1, coords: Vector2i = Vector2i.ZERO, atlas: Vector2i = Vector2i.ZERO) -> void:
-	if is_enabled: _context = { "id": id, "coords": coords, "atlas": atlas }
+func id(next: int = -1) -> TileDecorator:
+	tile[Def.ID] = next
+	if next == -1: get_cell_source_id(Def.to256(tile[Def.COORDS]))
+	return self
 
-func get_pos(map_coords: Vector2i) -> Vector2:
-	return Tile.get_pos(self, map_coords)
+func type(next: int) -> TileDecorator:
+	tile[Def.TYPE] = next
+	return self
 
-func find(pos: Vector2) -> Vector2i:
-	return Tile.find(self, pos)
+func alt(next: int) -> TileDecorator:
+	tile[Def.ALT] = next
+	return self
 
-func busy(atlas: Vector2i = _context.atlas, id: int = _context.id) -> Array[Vector2i]:
-	return Tile.used_cells(self, atlas, id)
+func pos(p: Vector2) -> TileDecorator:
+	tile[Def.COORDS] = Def.from256(local_to_map(p))
+	return self
+
+func coords(map_coords: Vector2i) -> TileDecorator:
+	tile[Def.COORDS] = Def.from256(map_coords)
+	return self
+
+func layer_name() -> String:
+	return tile_set.get_source(tile[Def.ID]).resource_name
+
+func busy() -> Array[Vector2i]:
+	return get_used_cells_by_id(tile[Def.ID], Def.to256(tile[Def.TILE]))
 
 func atlas_coords(map_coords: Vector2i) -> Vector2i:
-	return Tile.atlas_coords(self, map_coords)
+	return get_cell_atlas_coords(map_coords)
 
-func select(atlas: Vector2i, id: int = context.id) -> TileDecorator:
-	_context.atlas = atlas
-	_context.id = id
+func paint() -> TileDecorator:
+	set_cell(Def.to256(tile[Def.COORDS]), tile[Def.ID], Def.to256(tile[Def.TILE]))
 	return self
 
-func target(map_coords: Vector2i) -> TileDecorator:
-	_context.coords = map_coords
+func paint_alt() -> TileDecorator: return paint_on(Def.to256(tile[Def.COORDS]))
+
+func paint_on(_coords: Vector2i) -> TileDecorator:
+	set_cell(_coords, tile[Def.ID], Def.to256(tile[Def.TILE]), tile[Def.TYPE] + tile[Def.ALT])
 	return self
 
-func offset(value: Vector2i) -> TileDecorator:
-	_context.atlas += value
+func erase() -> TileDecorator:
+	erase_cell(Def.to256(tile[Def.COORDS]))
 	return self
 
-func paint(cell: Dictionary = context) -> TileDecorator:
-	Tile.paint(self, cell)
-	return self
-
-func erase(map_coords: Vector2i = context.coords) -> TileDecorator:
-	erase_cell(map_coords)
-	return self
-
-func basis(map_coords: Vector2i) -> Dictionary:
-	return Tile.basis(self, map_coords)
-
-func from_coords(map_coords: Vector2i, id: int = context.id) -> TileDecorator:
-	context = Tile.from_coords(self, map_coords, id) # print("EXTRACT! CONTEXT: ", context.coords, " - ATLAS: ", context.atlas)
-	return self
-
-func from_pos(pos: Vector2) -> TileDecorator:
-	context = Tile.from_pos(self, pos)
-	_context.pos = pos
-	return self
-
-func extract(number: int, map_coords: Vector2i = context.coords) -> Variant:
-	return Tile.extract(self, map_coords, number)
-
-func extract_at_pos(pos: Vector2, number: int) -> Variant:
-	return extract(number, find(pos))
-
-func switch(to: Vector2i) -> TileDecorator:
-	Tile.switch(context, to, self)
-	return self
+func extract(no: int) -> int:
+	var at: TileData = get_cell_tile_data(Def.to256(tile[Def.COORDS]))
+	return 0 if at == null else at.get_custom_data(data[no])

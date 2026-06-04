@@ -7,7 +7,7 @@ func next() -> int: return (HUD.hero + 1) % Def.ENEMY
 func switch_hero(hero: int, process: bool) -> void:
 	HUD.level.entity[hero].visible = process
 	HUD.level.entity[hero].process_mode = (int(process) << 2) ^ Node.PROCESS_MODE_DISABLED
-	HUD.state = Bit.to(HUD.state, Def.DEPLOYED, process)
+	HUD.state = Bit.to_(HUD.state, Def.DEPLOYED)
 
 func select() -> void:
 	if HUD.level.entity[next()] == null:
@@ -48,8 +48,8 @@ func forget_velocity() -> void:
 
 func traverse_camera():
 	if not Bit.of(HUD.level.state[HUD.hero], Def.CAMERA):
-		HUD.level.state[HUD.hero] = Bit.to(HUD.level.state[HUD.hero], Def.CAMERA, true)
-		HUD.level.state[next()] = Bit.to(HUD.level.state[next()], Def.CAMERA, false)
+		HUD.level.state[HUD.hero] = Bit.to1(HUD.level.state[HUD.hero], Def.CAMERA)
+		HUD.level.state[next()] = Bit.to0(HUD.level.state[next()], Def.CAMERA)
 		if HUD.level.state[HUD.hero][Def.BOX]:
 			HUD.level.group.position = Vector2.ZERO
 			HUD.level.group.reparent(HUD.level)

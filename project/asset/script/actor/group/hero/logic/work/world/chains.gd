@@ -26,14 +26,13 @@ var was_sliding: bool = false
 var falling: bool = false
 
 func hold_chains(hero: int) -> void:
-	HUD.level.state[hero] = Bit.to(Bit.to(HUD.level.state[hero],
-		Def.CHAINS, true), Def.JUMP, false)
+	HUD.level.state[hero] = Bit.to0(Bit.to1(HUD.level.state[hero], Def.CHAINS), Def.JUMP)
 	HUD.level.entity[hero].set_collision_mask_value(1, false)
 	view.shadow.hanging = active
 	view.animation.moves.set_environment("chains")
 
 func pull_chains(hero: int) -> void:
-	HUD.level.state[hero] = Bit.to(HUD.level.state[hero], Def.CHAINS, false)
+	HUD.level.state[hero] = Bit.to0(HUD.level.state[hero], Def.CHAINS)
 	HUD.level.entity[hero].set_collision_mask_value(1, true)
 	view.shadow.set
 	HUD.level.entity[hero].view.animation.moves.set_environment("ground")

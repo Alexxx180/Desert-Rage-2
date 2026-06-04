@@ -41,7 +41,7 @@ func transport_entity(hero: int) -> void:
 		transport(hero)
 	else:
 		ko(hero)
-	HUD.state[hero] = Bit.to(HUD.state[hero], Def.DEAD, false)
+	HUD.state[hero] = Bit.to0(HUD.state[hero], Def.DEAD)
 
 func diffusion() -> void:
 	for hero in len(HUD.entity):
@@ -99,14 +99,14 @@ func _react_resource(hero: int) -> Callable:
 	return func(value: float):
 		set_material(hero, RESOURCE_VALUE, HUD.points[hero].y)
 		if value == 1.0:
-			state[RESOURCE] = Bit.to(state[RESOURCE], hero, false)
+			state[RESOURCE] = Bit.to0(state[RESOURCE], hero)
 			set_material(hero, RESOURCE, false)
 
 func affect_resource(hero: int, amount: int = 1) -> void:
 	set_points(hero, Vector2.Axis.AXIS_Y, amount)
 	set_material(hero, RESOURCE, true)
 	if not Bit.of(state[RESOURCE], hero):
-		state[RESOURCE] = Bit.to(state[RESOURCE], hero, true)
+		state[RESOURCE] = Bit.to1(state[RESOURCE], hero)
 		_resource[hero] = HUD.aura_time.create_tween()
 		_resource[hero].tween_method(_react_resource(hero), 0.0, 1.0, 1.0)
 

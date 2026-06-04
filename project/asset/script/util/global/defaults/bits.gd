@@ -8,19 +8,17 @@ static func empty(n: int) -> bool: return n == 0
 
 static func single(n: int) -> bool: return n > 0 and (n & (n - 1)) == 0
 
-static func from(value: int, state: int) -> bool:
-	return value & state == state
-
 static func of(value: int, index: int) -> bool:
-	return from(value, bit(index))
+	var state: int = bit(index)
+	return value & state == state
 
 static func to(value: int, index: int, next: bool) -> int:
 	var state: int = bit(index)
 	return value & ~state | (state * int(next))
 
-static func turn(value: int, index: int) -> int:
-	var state: int = bit(index)
-	return value & ~state | (state * int(from(value, state)))
+static func to1(value: int, index: int) -> int: return value | bit(index)
+static func to0(value: int, index: int) -> int: return value & ~bit(index)
+static func to_(value: int, index: int) -> int: return value ^ bit(index)
 
 static func index8(index: int) -> Vector2i: return indexes(BYTE, index)
 static func index32(index: int) -> Vector2i: return indexes(INTEGER, index)

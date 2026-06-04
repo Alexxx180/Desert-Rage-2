@@ -33,7 +33,7 @@ func pushes(hero: CharacterBody2D, velocity: Vector2) -> void:
 
 func fixate_box(hero: int, box: int, add: int) -> void:
 	count[box] += add
-	state[hero] = Bit.to(state[hero], box, true)
+	state[hero] = Bit.to1(state[hero], box)
 	toggle_physics(box)
 
 func animate_hero(hero: CharacterBody2D, action: String, condition: Callable) -> void:
