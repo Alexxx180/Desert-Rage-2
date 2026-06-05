@@ -30,14 +30,13 @@ func activate_puddle(pos: Vector2) -> void:
 		_: pass # ability.spark.lazy_sparking(HUD.level.border.tcoords) TODO FIXME
 
 func draw_tile(map_coords: Vector2i) -> void:
-	HUD.level.border.target(map_coords)
+	HUD.level.border.coords(map_coords).id().atlas().type()
 	var t: PackedInt32Array = HUD.level.border.tiles
 	
-	if t[Tile.ID] == Def.LOGIC and t[Tile.TILE] == Def.SOURCE_OFF:
-		HUD.level.border.select(Def.SOURCE_ON, Def.LOGIC).paint()
-	elif ((t[Tile.TILE] != Def.WALL) and (t[Tile.ID] == Def.FLOOR) and
-		(Def.PUDDLE_OFF0 >= t[Tile.ALT] and t[Tile.ALT] >= Def.PUDDLE_OFF4)):
-		HUD.level.border.select(t[Tile.TILE], Def.PUDDLE_ON0 + t[Tile.ALT] - Def.PUDDLE_OFF0).paint()
+	if t[Def.ID] == Def.LOGIC and t[Def.TILE] == Def.SOURCE_OFF:
+		HUD.level.border.atlas(Def.SOURCE_ON).paint()
+	elif ((t[Def.TILE] != Def.WALL) and (t[Def.ID] == Def.FLOOR) and (Def.PUDDLE_OFF == t[Def.TYPE])):
+		HUD.level.border.type(Def.PUDDLE_ON0).paint_alt()
 		var rain: Node2D # rain - preload logic...
 		HUD.level.border.add_chip(rain, "..")
 
@@ -82,15 +81,12 @@ func contact(map_coords: Vector2i) -> void:
 	elif HUD.level.border.atlas != Def.PUDDLE_OFF:
 		push_error("invalid electricity connection number")
 		return
-	var found: bool = false
 	for chain in range(current.size(), 0, -1):
 		var direction: Vector2i = map_coords - Def.to256(current[chain][B])
-		if (direction.x + direction.y) ^ 1 == 1:
-			found = conduct(map_coords, chain, conductor.draw_puddle)
-			if found: break
-	if found:
-		draw_tile(map_coords)
-		contact(map_coords)
+		if ((direction.x + direction.y) ^ 1 == 1) and conduct(map_coords, chain):
+			draw_puddle(map_coords)
+			contact(map_coords)
+			return
 
 func conduct(chain: int, map_coords: Vector2i) -> bool:
 	if size[chain] == 0: return false
