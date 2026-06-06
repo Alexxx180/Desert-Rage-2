@@ -1,7 +1,6 @@
 class_name Def
 
-enum { LOGIC = 0, FLOOR0 = 0, FLOOR4 = 4, FLOOR = 4, PUDDLE_OFF0 = 4, PUDDLE_OFF4 = 8,
-	PUDDLE_ON0 = 8, PUDDLE_ON4 = 12, ICE_FLOOR0 = 12, ICE_FLOOR4 = 16,
+enum { LOGIC = 0, FLOOR = 4, PUDDLE_OFF = 4, PUDDLE_ON = 8, ICE_FLOOR = 12,
 	BLUE_OFF = 0, U_WATER = 0, BLUE_ON, U_EXIT = 1, RED_OFF, U_WALL_OFF = 2, RED_ON,
 	U_WALL_ON = 3, ENTRY = 3, WALL = 3, GREEN_OFF, U_LADDER = 4, GREEN_ON, D_LADDER = 5,
 	WHITE_OFF, ENEMY = 6, WHITE_ON, BOSS = 7, BLACK_OFF, M_WATER = 8,
@@ -12,9 +11,9 @@ enum { LOGIC = 0, FLOOR0 = 0, FLOOR4 = 4, FLOOR = 4, PUDDLE_OFF0 = 4, PUDDLE_OFF
 	SOURCE_ON, STAND_ON = 21, LEVER_OFF, SECRET_OFF = 22, LEVER_ON, SECRET_ON = 23, PLATE_OFF,
 	PAGE = 24, PLATE_ON, TELEPORT_OFF, SPIKER, COMFORTER, SUPPLIER, COOLER, SMALL_BOX, FIRE_BOX, LARGE_BOX }
 
-enum { INT = -1, HERO, DEPLOYED = 0, TILE = 0, DEAD, OVERWORLD = 1, ID = 1, FREEZE,
+enum { INT = -1, HERO, DEPLOYED = 0, ATLAS = 0, DEAD, OVERWORLD = 1, ID = 1, FREEZE,
 	CASUAL = 2, ALT = 2, BOX, TYPE = 3, LAYER, COORDS = 4, PERSPECTIVE, ACTING, GRAB, CAMERA,
-	TILESET4 = 16, TILE32 = 32, TILE48 = 48, TILESET8 = 64,
+	TILESET4 = 16, TILE32 = 32, TILE48 = 48, TILESET8 = 64, LEVEL = 8,
 	DEPLOY_DELTA = 4096, JUMP = 200000, SINGULARITY = 45000, GRAVITY = 700000 }
 
 enum { RAY, ROCK, EYE_SEEKER }
@@ -39,15 +38,22 @@ const hints: PackedStringArray = ["MM", "MJ", "MB", "ML", "CN", "AA", "AE", "AF"
 
 const DIR: PackedVector2Array = [Vector2i(24, 20), Vector2i(-1, -1)]
 
-static func to(field: int, off: int) -> Vector2i: return Vector2i(field & (2 << off), field >> off)
-static func to256(field: int) -> Vector2i: return to(field, 8)
+static func y(field: int, off: int) -> int: return field >> off
+static func x(field: int, off: int) -> int: return field & ((1 << off) - 1)
+static func xmap(field: int) -> int: return x(field, LEVEL)
+static func ymap(field: int) -> int: return y(field, LEVEL)
+
+static func to(field: int, off: int) -> Vector2i: return Vector2i(x(field, off), y(field, off))
+static func tomap(field: int) -> Vector2i: return to(field, LEVEL)
 static func to8(field: int) -> Vector2i: return to(field, 3)
 static func to4(field: int) -> Vector2i: return to(field, 2)
 
-static func from(pos: Vector2i, off: int) -> int: return (pos.y << off) | pos.x
-static func from256(pos: Vector2i) -> int: return from(pos, 8)
-static func from8(pos: Vector2i) -> int: return from(pos, 3)
-static func from4(pos: Vector2i) -> int: return from(pos, 2)
+static func yof(y1: int, off: int) -> int: return y1 << off
+static func yofmap(y1: int) -> int: return yof(y1, LEVEL)
+static func of(pos: Vector2i, off: int) -> int: return yof(pos.y, off) | pos.x
+static func ofmap(pos: Vector2i) -> int: return of(pos, LEVEL) # CTRL + LMB - the more the LEVEL the larger the map
+static func of8(pos: Vector2i) -> int: return of(pos, 3)
+static func of4(pos: Vector2i) -> int: return of(pos, 2)
 
 static func FUNC(): pass
 static func among(a: float, x: float, b: float) -> bool: return (a <= x) and (x <= b)
