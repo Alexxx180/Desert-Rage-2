@@ -36,17 +36,15 @@ func fixate_box(hero: int, box: int, add: int) -> void:
 	state[hero] = Bit.to1(state[hero], box)
 	toggle_physics(box)
 
-func animate_hero(hero: CharacterBody2D, action: String, condition: Callable) -> void:
-	if condition.call(hero.state[Def.BOX]): #  == 0
-		hero.to.moves.set_move_action(action)
-
 func _grab(hero: CharacterBody2D, box: CharacterBody2D) -> void:
 	fixate_box(hero.no, box.no, 1)
-	animate_hero(hero, "pull", Bit.single)
+	if Bit.one(hero.state[Def.BOX]):
+		hero.to.moves.set_move_action("go")
 
 func _release(hero: CharacterBody2D, box: CharacterBody2D) -> void:
 	fixate_box(hero.no, box.no, -1)
-	animate_hero(hero, "go", Bit.empty)
+	if hero.state[Def.BOX] == 0:
+		hero.to.moves.set_move_action("pull")
 
 func controls(box: CharacterBody2D) -> void:
 	var see: Area2D = box.get_node("press")
@@ -62,8 +60,9 @@ func turn_walls_collision(box: CharacterBody2D, value: bool) -> void:
 		box.set_collision_mask_value(mask, value)
 
 func set_tiles(box: int, slide: bool) -> void:
-	match Def.from8(HUD.level.border.tpos(pos[box])):
-		Def.DESCENT: toggle_slide(box, slide)
+	HUD.level.border.pos(pos[box]).id().atlas()
+	match Def.of8(HUD.level.border.tile(Def.ATLAS)):
+		Def.SLIDE: toggle_slide(box, slide)
 		_: HUD.level.tile.tile_press(pos[box])
 
 func encounter(no: int) -> void:

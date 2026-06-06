@@ -1,11 +1,15 @@
 class_name FlowConductor extends RefCounted
 
-enum { CHAIN = 0, JOINT = 1, A = -2, B = -1, LENGTH = 10, NONE = -1, PUDDLE = 0, SOURCE = 1 }
+enum { CHAIN = 0, STATE = 0, JOINT = 1, A = -2, B = -1, TIME = 4, LENGTH = 10, NONE = -1, PUDDLE = 0, SOURCE = 1 }
 
-var context: Dictionary
+var puddles: PackedInt32Array = [0, 0, 0, 0, 0, 0, 0, 0]
 var current: Array[PackedInt32Array] = [] # Vector2i
 var size: PackedByteArray = []
 var rain: Node2D = null
+
+func setup() -> void:
+	for coords in HUD.level.border.busy(Def.SOURCE_ON, Def.LOGIC):
+		initiate_source(Def.ofmap(coords))
 
 func initiate_source(coords: int) -> void:
 	current.append([coords, coords])
@@ -13,15 +17,33 @@ func initiate_source(coords: int) -> void:
 	draw_tile(coords, SOURCE)
 	contact(coords)
 
-func setup() -> void:
-	for map_coords in HUD.level.border.busy(Def.SOURCE_ON, Def.LOGIC):
-		initiate_source(Def.ofmap(map_coords))
+func diffusion() -> void:
+	for i in range(1, 8):
+		var state: int = Bit.of_x(Bit.MASK3, puddles[STATE], i)
+		if state == 0: continue
+		if state - 1 == 0:
+			HUD.level.border.coords(puddles[i]).id().atlas().alt().type(Def.PUDDLE_OFF).paint_alt()
+			puddles[STATE] = Bit.edit_x(Bit.MASK3, puddles[STATE], 0, -1)
+		puddles[STATE] = Bit.to_x(Bit.MASK3, puddles[STATE], i, state - 1)
+	if puddles[STATE] == 0: HUD.sparking.stop()
+
+func sparking(tile: int) -> void:
+	if puddles[STATE] & 7 == 7: return
+	for i in range(1, 8):
+		if Bit.of_x(Bit.MASK3, puddles[STATE], i) == 0:
+			puddles[i] = tile
+			HUD.level.border.coords(tile).id().atlas().alt().type(Def.PUDDLE_ON).paint_alt()
+			puddles[STATE] = Bit.to_x(Bit.MASK3, puddles[STATE], i, TIME)
+			puddles[STATE] = Bit.edit_x(Bit.MASK3, puddles[STATE], 0, +1)
+			break
+	if Bit.of_x(Bit.MASK3, puddles[STATE], 0) == 1:
+		HUD.sparking.start()
 
 func activate_puddle(pos: Vector2) -> void:
-	if not _around(Def.ofmap(pos)): return
+	if not _around(Def.ofmap(HUD.level.border.local_to_map(pos))): return
 	
 	if HUD.level.border.tile[Def.TYPE] == Def.PUDDLE_OFF:
-		pass  # ability.spark.lazy_sparking(HUD.level.border.tcoords) TODO FIXME
+		sparking(HUD.level.border.tile[Def.COORDS])
 	else:
 		contact(HUD.level.border.tile[Def.COORDS])
 
