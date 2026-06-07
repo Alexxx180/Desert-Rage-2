@@ -11,9 +11,9 @@ enum { LOGIC = 0, FLOOR = 4, PUDDLE_OFF = 4, PUDDLE_ON = 8, ICE_FLOOR = 12,
 	SOURCE_ON, STAND_ON = 21, LEVER_OFF, SECRET_OFF = 22, LEVER_ON, SECRET_ON = 23, PLATE_OFF,
 	PAGE = 24, PLATE_ON, TELEPORT_OFF, SPIKER, COMFORTER, SUPPLIER, COOLER, SMALL_BOX, FIRE_BOX, LARGE_BOX }
 
-enum { INT = -1, HERO, DEPLOYED = 0, ATLAS = 0, DEAD, OVERWORLD = 1, ID = 1, FREEZE,
+enum { INT = -1, HERO, DEPLOYED = 0, ATLAS = 0, PLATE = 0, DEAD, OVERWORLD = 1, ID = 1, LEVER = 1, FREEZE,
 	CASUAL = 2, ALT = 2, BOX, TYPE = 3, LAYER, COORDS = 4, PERSPECTIVE, ACTING, GRAB, CAMERA,
-	TILESET4 = 16, TILE32 = 32, TILE48 = 48, TILESET8 = 64, LEVEL = 8,
+	TILESET4 = 16, TILE32 = 32, TILE48 = 48, TILESET8 = 64, LEVEL = 14,
 	DEPLOY_DELTA = 4096, JUMP = 200000, SINGULARITY = 45000, GRAVITY = 700000 }
 
 enum { RAY, ROCK, EYE_SEEKER }
@@ -28,8 +28,8 @@ const hp: PackedByteArray = [100, 100, 93, 93]
 const ap: PackedByteArray = [ 20,  20,  2,  2]
 
 const power: PackedByteArray = [5, 5, 5, 5]
-const defen: PackedByteArray = [5, 5, 5, 5]
-const influ: PackedByteArray = [5, 5, 5, 5]
+const shell: PackedByteArray = [5, 5, 5, 5]
+const impac: PackedByteArray = [5, 5, 5, 5]
 const react: PackedByteArray = [5, 5, 5, 5]
 
 const hints: PackedStringArray = ["MM", "MJ", "MB", "ML", "CN", "AA", "AE", "AF", "AT",
@@ -55,8 +55,41 @@ static func ofmap(pos: Vector2i) -> int: return of(pos, LEVEL) # CTRL + LMB - th
 static func of8(pos: Vector2i) -> int: return of(pos, 3)
 static func of4(pos: Vector2i) -> int: return of(pos, 2)
 
-static func FUNC(): pass
-static func among(a: float, x: float, b: float) -> bool: return (a <= x) and (x <= b)
+static func ref(parent: Object, object: Variant, caption: StringName, feedback: Callable) -> Variant:
+	if object == null:
+		object = feedback.call()
+		parent.set(caption, object)
+	return object
+
+static func add(parent: Node, path: StringName, caption: StringName) -> Variant:
+	var node: Node = load(path).instantiate()
+	node.name = caption
+	parent.set(caption, node)
+	parent.add_child(node)
+	return node
+
+static func preadd(parent: Node, path: PackedScene, caption: StringName) -> Variant:
+	var node: Node = path.instantiate()
+	node.name = caption
+	parent.set(caption, node)
+	parent.add_child(node)
+	return node
+
+static func lazy(parent: Node, node: Variant, path: StringName, caption: StringName) -> Variant:
+	return node if node != null else add(parent, path, caption)
+
+static func pre(parent: Node, node: Variant, path: PackedScene, caption: StringName) -> Variant:
+	return node if node != null else preadd(parent, path, caption)
+
+static func lazy_at(parent: Node, sibling: Node, path: String, caption: StringName) -> Variant:
+	var node: Node = parent.get(caption)
+	if node == null:
+		node = load(path).instantiate()
+		node.name = caption
+		parent.set(caption, node)
+		sibling.add_sibling(node)
+	return node
+
 # LOADS
 const first_level: StringName = &"res://now/dungeon/cave/origin/0/0/level.tscn"
 const level: StringName = &"res://now/dungeon/%s/%s/%d/level.tscn"
@@ -70,9 +103,8 @@ const health: StringName = &"res://now/work/health/%s.tscn"
 const ability: StringName = &"res://now/work/lockers/ability/%s.tscn"
 const activator: StringName = &"res://now/work/lockers/ability/%s.tscn"
 const music: StringName = &"res://now/work/music.tscn" # const hero: StringName = &"res://now/work/hero/%s/%s.tscn"
-const hero: StringName = &"res://now/work/hero/%s/%s.tscn"
-const ray: StringName = &"res://now/work/hero/ray/ray.tscn"
-const rock: StringName = &"res://now/work/hero/rock/rock.tscn"
+const ray: StringName = &"res://now/work/hero/ray.tscn"
+const rock: StringName = &"res://now/work/hero/rock.tscn"
 const group: StringName = &"res://now/work/group/%s.tscn"
 const hud: StringName = &"res://now/hud/%s.tscn"
 const credits: StringName = &"res://now/credits.tscn"
@@ -82,15 +114,15 @@ const information: StringName = &"res://now/information.tscn"
 const pause: StringName = &"res://now/hud/status/pause.tscn"
 const slots: StringName = &"res://now/hud/status/slots.tscn"
 const enemy: StringName = &"res://now/hud/status/enemy.tscn"
-const hint: StringName = &"res://now/hud/hints/%s.tscn"
+const hint: StringName = &"res://now/hud/hints/hints.tscn"
 const mhealth: StringName = &"res://now/hud/markers/health.tscn"
 const items: StringName = &"res://now/hud/markers/items.tscn"
 const actions: StringName = &"res://now/work/hero/actions/%s.tscn"
 const xp: StringName = &"res://now/hud/status/xp.tscn"
 const hits: StringName = &"res://now/hud/status/hits.tscn"
-const game: StringName = &"res://now/hud/game/%s.tscn"
+const game: StringName = &"res://now/hud/game.tscn"
 const mirror: StringName = &"res://now/see/mirror/%s.tscn"
-const input: StringName = &"res://now/work/hero/%s/%s.tscn"
+const input: StringName = &"res://now/work/hero/named/%s.tscn"
 const world: StringName = &"res://now/work/hero/world/%s.tscn"
 const progress: StringName = &"user://progress.txt"
 # PRELOADS

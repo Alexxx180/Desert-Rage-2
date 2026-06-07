@@ -1,7 +1,7 @@
-class_name HeroInventory extends Node
+class_name HeroInventory extends RefCounted
 
 const SLOTS: int = 25
-
+"""
 @onready var logic: Node = $logic
 @onready var chest: Node = $chest
 @onready var items: GameItems = GameItems.new()
@@ -17,3 +17,4 @@ func _ready() -> void:
 	logic.effect.logic = logic
 	logic.items.storage = s
 	for i in SLOTS: s.append(slot())
+"""

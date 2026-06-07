@@ -8,6 +8,7 @@ const unique: PackedStringArray = ["whip_dash", "fire", "whip", "hang_whip_dash"
 func _ready() -> void:
 	direct()
 	effect.moves = moves
+	# timeout.connect(set_fight_end)
 	# syncer.moves = moves
 
 func direct() -> void:
@@ -29,9 +30,6 @@ var tree: AnimationTree:
 	get: return hero.view.animation
 
 var go: Array[String] = ["walk", "run"]
-
-func _ready() -> void:
-	timeout.connect(set_fight_end)
 
 func set_walk_speed(mach: int) -> void: tree.request("go", go[min(mach - 1, 1)])
 

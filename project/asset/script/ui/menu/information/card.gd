@@ -9,13 +9,12 @@ const TIME: float = 0.2
 const MARGIN: String = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
 
 func update_locale(params: Array) -> void:
-	ScrollContainer
 	text = hint.key("T") + MARGIN
 	help.text = hint.key("D") % params
 
 func update_hint() -> void:
 	image.texture = hint.texture
-	update_locale(Def.ARRAY)
+	update_locale([])
 
 func translate(_controls: Node) -> void:
 	update_hint() # controls.masked_translate(hint.body)

@@ -5,7 +5,7 @@ enum { DROP = 1, DIFFUSION = 5, LENGTH = 10 }
 var spark: Dictionary = {}
 var cells: Array[Vector2i] = []
 var size: int = 0
-var conductor: FlowConductor
+var conductor: 
 
 func _ready() -> void: timeout.connect(lazy_diffusion)
 

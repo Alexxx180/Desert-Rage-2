@@ -26,16 +26,16 @@ var was_sliding: bool = false
 var falling: bool = false
 
 func hold_chains(hero: int) -> void:
-	HUD.level.state[hero] = Bit.to0(Bit.to1(HUD.level.state[hero], Def.CHAINS), Def.JUMP)
+	# HUD.level.state[hero] = Bit.to0(Bit.to1(HUD.level.state[hero], Def.CHAINS), Def.JUMP)
 	HUD.level.entity[hero].set_collision_mask_value(1, false)
-	view.shadow.hanging = active
-	view.animation.moves.set_environment("chains")
+	# view.shadow.hanging = active
+	view.animation.moves.set_environment(&"chains")
 
 func pull_chains(hero: int) -> void:
-	HUD.level.state[hero] = Bit.to0(HUD.level.state[hero], Def.CHAINS)
+	# HUD.level.state[hero] = Bit.to0(HUD.level.state[hero], Def.CHAINS)
 	HUD.level.entity[hero].set_collision_mask_value(1, true)
 	view.shadow.set
-	HUD.level.entity[hero].view.animation.moves.set_environment("ground")
+	HUD.level.entity[hero].view.animation.moves.set_environment(&"ground")
 
 # CHAINS CATCH
 func ledge_in_midair() -> void:
@@ -48,26 +48,32 @@ func encounter_ledge(active: bool) -> void:
 
 func chains_animation(active: bool) -> void:
 	view.shadow.hanging = active
-	view.animation.moves.set_environment("chains" if active else "ground")
+	view.animation.moves.set_environment(&"chains" if active else &"ground")
 
 func disable_collision(active: bool) -> void:
 	input.is_platformer = active
-	chained.emit(active)
+	# chained.emit(active)
 	control.layers.context(!active).collide_main()
 
 # TOOLS JUMP
 # JUMP SLIDE
 func gravity(hero: int) -> void:
 	var state: int = HUD.level.state[hero]
-	if Bit.of(state, Def.CHAINS):
+	if Bit.of(state, Def.JUMP): # CHAINS
 		HUD.level.entity[hero].velocity.y = 0
-	elif Bit.of(state, Def.FALL):
+	elif Bit.of(state, Def.JUMP): # FALL
 		HUD.level.entity[hero].add_velocity(Vector2(0, GRAVITY))
-	elif Bit.of(state, Def.JUMP):
+	elif Bit.of(state, Def.JUMP): # JUMP
 		HUD.level.entity[hero].add_velocity(Vector2(0, -GRAVITY))
 
-func jump(hero: int) -> void:
-	pass
+# SPRING CONTROL
+func jump(jumped: bool) -> void:
+	# slide.height = -JUMP if jumped else 0 # hero.movement = gravity if jumped else floating # hero.motion_mode = CharacterBody2D.MOTION_MODE_GROUNDED / CharacterBody2D.MOTION_MODE_FLOATING
+	if jumped:
+		slide.hero.velocity.y = -JUMP
+	slide.falling = jumped
+	layers.context(!jumped).collide_main()#.collide(Lay.BORDERS) BAD IDEA
+	input.is_platformer = jumped # hero.logic.work.world.layers.context(!jumped).collide_main().collide(Lay.BORDERS) # hero.logic.work.input.modes.select(jumped)
 
 func falls(delta: float) -> void:
 	hero.velocity.y = GRAVITY # delta * 
@@ -90,25 +96,8 @@ func return_input() -> void:
 #	ground.deactivate_spring()
 	control.jump(false)
 
-func gravity(delta: float) -> void:
-	if spring.is_colliding() and Input.is_action_just_released("run"):
-		perform_jump(1.0)
-		ground.save(control.slide.hero.position.y)
-	control.gravity(delta)
 
 
-# SPRING CONTROL
-func jump(jumped: bool) -> void:
-	# slide.height = -JUMP if jumped else 0 # hero.movement = gravity if jumped else floating # hero.motion_mode = CharacterBody2D.MOTION_MODE_GROUNDED / CharacterBody2D.MOTION_MODE_FLOATING
-	if jumped:
-		slide.hero.velocity.y = -JUMP
-	slide.falling = jumped
-	layers.context(!jumped).collide_main()#.collide(Lay.BORDERS) BAD IDEA
-	input.is_platformer = jumped # hero.logic.work.world.layers.context(!jumped).collide_main().collide(Lay.BORDERS) # hero.logic.work.input.modes.select(jumped)
-
-func land() -> void:
-	slide.land()
-	jump(false)
 
 func landing_crash() -> void:
 	if not slide.above(ground.world_y):
@@ -118,14 +107,10 @@ func landing_manual() -> void: # flying and
 	if not platform.is_colliding() and Input.is_action_just_pressed("run"): # landing.emit()
 		land() # height > 0
 
-func gravity(delta: float) -> void: #if score > HEIGHT * CELL:	hero.velocity.y -= delta * TRY; score += delta * TRY # else: # if not slide.is_colliding():
-	if slide.falling:
-		landing_manual() #	singularity_point(delta)
-		landing_crash()
-
 # SPRING GROUND
 func switch_spring_tile() -> void:
-	HUD.execute.switch(Def.to4(Def.SPRING_ON))
+	pass
+	# HUD.execute.switch(Def.to4(Def.SPRING_ON))
 
 func press(condition: bool) -> bool:
 	if condition: is_pressed = !is_pressed
@@ -136,7 +121,7 @@ func activate_spring(hero_pos: Vector2) -> void:
 		HUD.level.entity
 		HUD.execute.from_pos(hero_pos)
 		switch_spring_tile()
-		deactivation.start()
+		# deactivation.start()
 
 func deactivate_spring() -> void:
 	if press(is_pressed):

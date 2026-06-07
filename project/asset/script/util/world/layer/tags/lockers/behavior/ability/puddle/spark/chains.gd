@@ -16,6 +16,7 @@ func initiate_source(coords: int) -> void:
 	size.append(LENGTH)
 	draw_tile(coords, SOURCE)
 	contact(coords)
+	TileCluster
 
 func diffusion() -> void:
 	for i in range(1, 8):

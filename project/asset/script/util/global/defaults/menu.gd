@@ -13,13 +13,14 @@ func is_hud_opened() -> bool:
 		result = result and (not last)
 	return not result
 
-func connect_menu(node: Control) -> void:
+func connect_menu(node: Control) -> Control:
 	match node.name:
-		"game": game_connect()
-		"pause": pause_connect(node.options)
-		"saves": saves_connect()
-		"sound": sound_connect()
-		"settings": settings_connect()
+		&"game": game_connect()
+		&"pause": pause_connect(node.options)
+		&"saves": saves_connect()
+		&"sound": sound_connect()
+		&"settings": settings_connect()
+	return node
 
 func game_connect() -> void: pass
 func settings_connect() -> void:

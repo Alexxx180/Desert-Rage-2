@@ -1,14 +1,16 @@
 class_name AuraResource extends RefCounted
 
-enum { NO = 0, MAX = 10, SEMI = 100, SET = 255 }
-enum { BLUE, GREEN, YELLOW, RED }
-enum { THICK, COLOR, RESOURCE, RESOURCE_VALUE }
-enum { LIFE_BORDER, PERIOD, SUMMARY }
-enum { WAVE, DURATION, THICKNESS, LAST_THICKNESS, CRITICAL }
-enum { AURA, AP, TRANSPORT }
+enum { BLUE, NO = 0, AURA = 0, LIFE_BORDER = 0, WAVE = 0, THICK = 0, GREEN, COLOR = 1, AP = 1,
+	PERIOD = 1, DURATION = 1, YELLOW, TRANSPORT = 2, SUMMARY = 2, RESOURCE = 2, THICKNESS = 2, RED,
+	RESOURCE_VALUE = 3, LAST_THICKNESS = 3, CRITICAL = 4, MAX = 10, SEMI = 100, SET = 255 }
 
-const param: PackedStringArray = ["shader_parameter/line_thickness", "shader_parameter/line_color"]
+const param: PackedStringArray = [&"shader_parameter/line_thickness", &"shader_parameter/line_color"]
 const color: PackedFloat32Array = [1.0, 0.8, 0.4, 0.0]
+
+var max_points: PackedByteArray = [0, 0]
+var points: PackedByteArray = [0, 0]
+var max_resource: PackedByteArray = [0, 0]
+var resource: PackedByteArray = [0, 0]
 
 var state: PackedByteArray
 var _aura: Array[Tween]
@@ -16,7 +18,6 @@ var _resource: Array[Tween]
 var damage: PackedByteArray = [0, 1, 0]
 var aura: PackedFloat32Array = [0.7, 0.1, 2.0, 5.0, 0.1]
 var last_color: Color
-var last_thickness: float
 
 func setup() -> void: HUD.aura_time.timeout.connect(diffusion) # burns - blink
 
@@ -30,7 +31,7 @@ func transport(hero: int) -> void:
 func ko(hero: int) -> void:
 	var over: bool = true
 	for i in Def.ENEMY:
-		over = over and Bit.of(HUD.state[i], Def.DEAD)
+		over = over and HUD._status != null and Bit.of(HUD.status.state[i], Def.DEAD)
 	if over:
 		HUD.level.group.spectrum()
 	else:
@@ -41,11 +42,11 @@ func transport_entity(hero: int) -> void:
 		transport(hero)
 	else:
 		ko(hero)
-	HUD.state[hero] = Bit.to0(HUD.state[hero], Def.DEAD)
+	HUD.status.state[hero] = Bit.to0(HUD.status.state[hero], Def.DEAD)
 
 func diffusion() -> void:
 	for hero in len(HUD.entity):
-		if Bit.of(HUD.state[hero], Def.DEAD):
+		if Bit.of(HUD.status.state[hero], Def.DEAD):
 			transport_entity(hero)
 
 func decide(a: int, b: int, segment: float) -> float:
@@ -56,7 +57,7 @@ func _between(a: int, segment: float, b: int) -> bool:
 
 func react(hero: int) -> void:
 	var segment: float = HUD.points[hero] / HUD.maximum[hero]
-	last_thickness = segment * THICKNESS + 3
+	aura[LAST_THICKNESS] = segment * THICKNESS + 3
 	set_material(hero, COLOR, last_color)
 	if segment <= color[RED]:
 		last_color = Color.from_rgba8(SET, NO, NO, SEMI)
@@ -79,14 +80,14 @@ func transfusion(hero: int) -> void:
 	_aura[hero] = HUD.aura_time.create_tween()
 	_aura[hero].tween_method(func():
 		set_material(hero, COLOR, last_color)
-		set_material(hero, THICK, last_thickness),
+		set_material(hero, THICK, aura[LAST_THICKNESS]),
 	0.0, 1.0, 1)
 
 func affect_aura(hero: int, amount: int = -1) -> void:
 	set_points(hero, Vector2.Axis.AXIS_X, amount)
-	HUD.state[hero] = Bit.to(HUD.state[hero], Def.DEAD, HUD.points[hero] == NO)
+	HUD.status.state[hero] = Bit.to(HUD.status.state[hero], Def.DEAD, HUD.points[hero] == NO)
 	HUD.game.set_hp(hero, HUD.points)
-	if Bit.of(HUD.state[hero], Def.DEAD) and HUD.entity[hero].is_in_group(&"enemy"):
+	if Bit.of(HUD.status.state[hero], Def.DEAD) and HUD.entity[hero].is_in_group(&"enemy"):
 		HUD.aura_time.start()
 	else:
 		transfusion(hero)

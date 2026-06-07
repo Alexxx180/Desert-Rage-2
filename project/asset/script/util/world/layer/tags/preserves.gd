@@ -3,7 +3,7 @@ class_name Preserves extends Node
 enum { GROUND = 1, TILE_SIZE = 6 }
 
 func is_chest(atlas: Vector2i) -> bool:
-	return Def.from8(atlas) in [Def.BRONZE_OFF, Def.SILVER_OFF, Def.GOLD_OFF,
+	return Def.of8(atlas) in [Def.BRONZE_OFF, Def.SILVER_OFF, Def.GOLD_OFF,
 		Def.PLATINUM_OFF, Def.BRONZE_ON, Def.SILVER_ON, Def.GOLD_ON, Def.PLATINUM_ON]
 
 func _paint(places: Array[Vector2i]) -> void:
@@ -14,19 +14,19 @@ func _set_casual_mode(casual_mode: bool) -> void:
 	if not casual_mode: return # for chest in [0, 1, 2]: _paint(tags.get_used_cells_by_id(ENEMY, Vector2i(0, chest)))
 
 func setup(_casual_mode: bool) -> void:
-	for tag in HUD.level.execute.layer.get_used_cells_by_id(Def.HOOKS):
+	for tag in HUD.level.execute.layer.get_used_cells_by_id(Def.FLOOR):
 		set_pages(tag)
 	# _set_casual_mode(casual_mode)
 
 func drink_water(inventory: Node, pos: Vector2) -> void:
-	match Def.from8(HUD.level.border.tpos(pos)):
-		Def.WATER_DOWN:
+	match Def.of8(HUD.level.border.tpos(pos)):
+		Def.D_WATER:
 			inventory.logic.effect.restore() # USE WATER
 
 func _get_id(tile: Dictionary) -> int:
 	var tag: Vector2i = HUD.level.execute.tile(tile.coords)
 	print("ITEM ID = ", Tile.logic_no(tag, TILE_SIZE))
-	return Def.from8(tag) - Tile.FLOOR
+	return Def.of8(tag) - Tile.FLOOR
 
 func open_chest(tile: Dictionary) -> void:
 	var id: int = _get_id(tile)
@@ -40,7 +40,7 @@ func open_chest(tile: Dictionary) -> void:
 
 func open_chests() -> void:
 	var tile: Dictionary = HUD.level.border.context # print("FOUND ID: ", id) # logic.effect.status.hero = hero
-	match Def.from8(tile.atlas):
+	match Def.of8(tile.atlas):
 		Def.BRONZE_OFF, Def.SILVER_OFF, Def.GOLD_OFF, Def.PLATINUM_OFF:
 			open_chest(tile)
 		Def.BRONZE_ON, Def.SILVER_ON, Def.GOLD_ON, Def.PLATINUM_ON:
@@ -56,17 +56,17 @@ func check_book() -> void:
 		set_page(tile.coords, [tile.atlas, manual])
 
 func set_book(tag: Vector2i) -> void:
-	match Def.from8(HUD.level.border.tile(tag)):
+	match Def.of8(HUD.level.border.tile(tag)):
 		Def.BLUE_OFF, Def.RED_OFF, Def.GREEN_OFF, Def.BLACK_OFF, Def.WHITE_OFF: check_book()
 
 func set_page(coords: Vector2i, value: Array) -> void:
 	HUD.level.execute.books[coords] = value
 
 func _manual(coords: Vector2i) -> String:
-	return Def.master.manual[Def.master.PAGES + Def.from8(HUD.level.execute.from_coords(coords).tatlas)]
+	return Def.master.manual[Def.master.PAGES + Def.of8(HUD.level.execute.from_coords(coords).tatlas)]
 
 func set_pages(tag: Vector2i) -> void:
 	var tile: Dictionary = HUD.level.execute.from_coords(tag).context
-	match Def.from8(tile.atlas):
+	match Def.of8(tile.atlas):
 		Def.PAGE: set_page(tile.coords, [tile.atlas, _manual(tile.coords)])
 		_: set_book(tile.coords)

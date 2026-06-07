@@ -5,7 +5,7 @@ enum { WAY = 0, LEDGE = 1 }
 var blackout: BlackoutTransition = BlackoutTransition.new()
 var _ledges: ColorRect = null
 var ledges: ColorRect:
-	get: return Works.upload(self, _ledges, LoadBus.hero % ["ledges", "ledges"], "ledges")
+	get: return Def.lazy(self, _ledges, Def.ray, "ledges")
 
 func entry_way() -> void: # way.color = Color.BLACK
 	blackout.as_way(self, Color.TRANSPARENT, true)

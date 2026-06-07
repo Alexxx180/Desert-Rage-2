@@ -1,6 +1,6 @@
 class_name Boxes extends RefCounted
 
-enum { BORDERS, WORLD, ENTITY, GROUND, SLIDE = 2 } # , JUMP = 200000, GRAVITY = 700000 # CHARACTER = 3, BOX = 5
+enum { BORDERS, WORLD, ENTITY, GROUND, SLIDE = 2, POWER = 40000 } # , JUMP = 200000, GRAVITY = 700000 # CHARACTER = 3, BOX = 5
 
 var boxes: Array[CharacterBody2D] = []
 var pos: PackedVector2Array = []
@@ -19,6 +19,14 @@ func toggle_slide(no: int, next: bool) -> void:
 
 func slide_the_box(box: CharacterBody2D) -> void:
 	box.add_velocity(Vector2(box.velocity.x, Def.GRAVITY)) # * delta
+
+func throw_effect(hero: CharacterBody2D, motion: Vector2i) -> void: # THROW
+	for box in hero.boxes:
+		box.velocity = POWER * motion
+
+func apply_velocity(hero: CharacterBody2D, velocity: Vector2) -> void:
+	for box in hero.boxes:
+		box.velocity = velocity # make_velocity(velocity)
 
 func add_box(box: CharacterBody2D) -> void:
 	box.no = boxes.size()

@@ -15,10 +15,10 @@ static func _parse_json(path: String) -> Dictionary:
 	return { "json": processor, "result": processor.parse(text) == OK }
 
 static func get_json(path: String, feedback: Callable) -> Dictionary:
-	if not FileAccess.file_exists(path): return Def.DICT
+	if not FileAccess.file_exists(path): return {}
 
 	var parsed: Dictionary = _parse_json(path)
-	if not parsed.result: return Def.DICT
+	if not parsed.result: return {}
 	
 	feedback.call(true)
 	return parsed.json.data

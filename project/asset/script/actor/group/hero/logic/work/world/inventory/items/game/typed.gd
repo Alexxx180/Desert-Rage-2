@@ -1,9 +1,6 @@
-extends RefCounted
+class_name TypeItems extends RefCounted
 
-class_name TypeItems
-
-enum { INFINITE = 0, LIMITED = 1, JAR = 2 }
-enum { TEA = 0, ETHER = 1, A_DOTE = 2, A_COUGH = 3 }
+enum { INFINITE = 0, TEA = 0, LIMITED = 1, ETHER = 1, JAR = 2, A_DOTE = 2, A_COUGH = 3 }
 
 static func spend(spending: int, slot: int, logic: Node) -> bool:
 	match spending:
@@ -22,10 +19,10 @@ func get_item(no: int) -> Dictionary: return effect[no]
 func _icon(path: String) -> String: return path + ".svg"
 func _type(short: String) -> String: return short
 
-func _items(name: String, type: String, description: String, icon: String, logic: Variant, _craft: Dictionary = Def.DICT) -> Dictionary:
+func _items(name: String, type: String, description: String, icon: String, logic: Variant, _craft: Dictionary = {}) -> Dictionary:
 	return { "logic": logic, "item": Item.new(name + "T", _type(type), description, _icon(icon), _craft) }
 
-func _item(name: String, type: String, icon: String, logic: Variant, _craft: Dictionary = Def.DICT) -> Dictionary:
+func _item(name: String, type: String, icon: String, logic: Variant, _craft: Dictionary = {}) -> Dictionary:
 	return _items(name, type, name + "D", icon, logic, _craft)
 
 func _get_effect() -> Array[Dictionary]: return []
