@@ -1,4 +1,4 @@
-extends HFlowContainer
+extends MarginContainer
 
 @onready var bag: Button = $bag
 @onready var health: Button = $health

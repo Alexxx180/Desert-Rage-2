@@ -8,6 +8,13 @@ var sizes: PackedByteArray = [0, 0, 0, 0]
 var buttons: Dictionary[int, int] = {}
 var completed: int
 
+func reset_button_completion() -> void:
+	if sizes[BUTTON] == 0: return
+	
+	
+	
+	pass
+
 func resize_clusters() -> void:
 	var button: PackedInt32Array = []
 	var lever: PackedInt32Array = []
@@ -104,3 +111,6 @@ func tile_walk(hero: CharacterBody2D, enter: bool = true) -> void:
 				break
 		return
 	tile_press(HUD.level.border.tile[Def.COORDS], enter)
+
+func secret_reveal() -> void:
+	

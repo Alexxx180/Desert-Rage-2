@@ -3,19 +3,14 @@
 [ext_resource type="FontFile" uid="uid://b2wbdbnkxcqv1" path="res://asset/resource/media/text/font/noto_sans/NotoEmoji-VariableFont_wght.ttf" id="1_5vmjc"]
 [ext_resource type="Script" uid="uid://b7d2u2o0e0qg7" path="res://asset/script/ui/hud/detector/game/margin/priorities/stats/inventory/topic/stack/selected/status/bag.gd" id="2_861ju"]
 
-[sub_resource type="Gradient" id="Gradient_861ju"]
-colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 0.352941)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_4caue"]
-gradient = SubResource("Gradient_861ju")
-fill_from = Vector2(0.504274, 0)
-fill_to = Vector2(0.508547, 1)
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_tk1jj"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pua34"]
 content_margin_left = 25.0
 content_margin_right = 5.0
-content_margin_bottom = 1.0
-texture = SubResource("GradientTexture2D_4caue")
+bg_color = Color(0, 0, 0, 0.78431374)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
 
 [sub_resource type="Gradient" id="Gradient_4caue"]
 colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 0.588235)
@@ -31,25 +26,36 @@ content_margin_right = 5.0
 content_margin_bottom = 1.0
 texture = SubResource("GradientTexture2D_tk1jj")
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_861ju"]
+[sub_resource type="Gradient" id="Gradient_861ju"]
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 0.352941)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_4caue"]
+gradient = SubResource("Gradient_861ju")
+fill_from = Vector2(0.504274, 0)
+fill_to = Vector2(0.508547, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_tk1jj"]
 content_margin_left = 25.0
 content_margin_right = 5.0
 content_margin_bottom = 1.0
+texture = SubResource("GradientTexture2D_4caue")
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4caue"]
-content_margin_left = 3.0
+content_margin_left = 6.0
 content_margin_top = 2.0
 
 [node name="bag" type="Button"]
 custom_minimum_size = Vector2(80, 25)
+theme_override_colors/font_color = Color(0.54509807, 0.54509807, 0.54509807, 1)
 theme_override_fonts/font = ExtResource("1_5vmjc")
-theme_override_styles/hover = SubResource("StyleBoxTexture_tk1jj")
+theme_override_styles/normal = SubResource("StyleBoxFlat_pua34")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_ilthy")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_861ju")
+theme_override_styles/hover = SubResource("StyleBoxTexture_tk1jj")
 text = "Рок"
 script = ExtResource("2_861ju")
 
 [node name="icon" type="Label" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -58,6 +64,7 @@ offset_top = -11.5
 offset_right = 40.0
 offset_bottom = 11.5
 grow_vertical = 2
+theme_override_colors/font_color = Color(0.5449743, 0.54497427, 0.54497427, 1)
 theme_override_fonts/font = ExtResource("1_5vmjc")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_4caue")
 text = "🎒"

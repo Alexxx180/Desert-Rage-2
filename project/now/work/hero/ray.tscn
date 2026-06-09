@@ -3,8 +3,8 @@
 [ext_resource type="Script" uid="uid://co1bl75te11gl" path="res://asset/script/actor/group/hero/main_hero.gd" id="1_y0t4a"]
 [ext_resource type="Shape2D" uid="uid://do0s1n5uuqpof" path="res://asset/resource/geometry/characters/character/character.tres" id="2_3j6ex"]
 [ext_resource type="PackedScene" uid="uid://csra3penxclqe" path="res://asset/scene/actor/group/hero/base/view/ray/ray.tscn" id="3_kk633"]
-[ext_resource type="PackedScene" uid="uid://dr8rr0noso8m4" path="res://asset/scene/actor/group/hero/base/logic/logic.tscn" id="4_etyqi"]
 [ext_resource type="PackedScene" uid="uid://bocuu344hsqv" path="res://asset/scene/ui/util/fov.tscn" id="6_1p510"]
+[ext_resource type="Shape2D" uid="uid://i0icy78wfk8i" path="res://asset/resource/geometry/characters/character/levels.tres" id="6_fsxid"]
 
 [node name="ray" type="CharacterBody2D" groups=["player"]]
 collision_layer = 4
@@ -20,8 +20,10 @@ debug_color = Color(1, 1, 1, 0.419608)
 [node name="view" parent="." instance=ExtResource("3_kk633")]
 is_hero = true
 
-[node name="logic" parent="." instance=ExtResource("4_etyqi")]
-visible = false
+[node name="lever" type="Area2D" parent="."]
+
+[node name="shape" type="CollisionShape2D" parent="lever"]
+shape = ExtResource("6_fsxid")
 
 [node name="fov" parent="." instance=ExtResource("6_1p510")]
 visible = false

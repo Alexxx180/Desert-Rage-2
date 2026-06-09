@@ -15,57 +15,80 @@
 [ext_resource type="PackedScene" uid="uid://cmauui2eio5gc" path="res://now/hud/status/ailment/numb/ko.tscn" id="14_owahf"]
 [ext_resource type="PackedScene" uid="uid://dq1fal5qwrk8n" path="res://now/hud/status/ailment/mind/rage.tscn" id="15_f6ftu"]
 
-[node name="rock" type="HFlowContainer"]
+[node name="rock" type="MarginContainer"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 39.0
+grow_horizontal = 2
 size_flags_horizontal = 3
-theme_override_constants/h_separation = 0
-theme_override_constants/v_separation = 0
 script = ExtResource("1_vy1mb")
+
+[node name="alt" type="MarginContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/margin_left = 58
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 123
+theme_override_constants/margin_bottom = 0
+
+[node name="ability" parent="alt" instance=ExtResource("5_vy1mb")]
+layout_mode = 2
+
+[node name="main" type="MarginContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/margin_top = 13
+theme_override_constants/margin_right = 181
+
+[node name="health" parent="main" instance=ExtResource("4_3704q")]
+layout_mode = 2
 
 [node name="bag" parent="." instance=ExtResource("2_c7i6y")]
 layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
 
-[node name="health" parent="." instance=ExtResource("4_3704q")]
+[node name="status" type="HBoxContainer" parent="."]
+visible = false
+custom_minimum_size = Vector2(123, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_constants/separation = 1
+
+[node name="poison" parent="status" instance=ExtResource("6_lerm2")]
 layout_mode = 2
 
-[node name="ability" parent="." instance=ExtResource("5_vy1mb")]
+[node name="cough" parent="status" instance=ExtResource("7_ldr1k")]
 layout_mode = 2
 
-[node name="poison" parent="." instance=ExtResource("6_lerm2")]
+[node name="freeze" parent="status" instance=ExtResource("8_e574m")]
+layout_mode = 2
+
+[node name="burn" parent="status" instance=ExtResource("9_kht6o")]
+layout_mode = 2
+
+[node name="dizzy" parent="status" instance=ExtResource("10_psleq")]
 visible = false
 layout_mode = 2
 
-[node name="cough" parent="." instance=ExtResource("7_ldr1k")]
+[node name="no_reason" parent="status" instance=ExtResource("11_07fmm")]
 visible = false
 layout_mode = 2
 
-[node name="freeze" parent="." instance=ExtResource("8_e574m")]
+[node name="no_motion" parent="status" instance=ExtResource("12_snsfo")]
 visible = false
 layout_mode = 2
 
-[node name="burn" parent="." instance=ExtResource("9_kht6o")]
+[node name="no_action" parent="status" instance=ExtResource("13_g43gd")]
 visible = false
 layout_mode = 2
 
-[node name="dizzy" parent="." instance=ExtResource("10_psleq")]
+[node name="ko" parent="status" instance=ExtResource("14_owahf")]
 visible = false
 layout_mode = 2
 
-[node name="no_reason" parent="." instance=ExtResource("11_07fmm")]
-visible = false
-layout_mode = 2
-
-[node name="no_motion" parent="." instance=ExtResource("12_snsfo")]
-visible = false
-layout_mode = 2
-
-[node name="no_action" parent="." instance=ExtResource("13_g43gd")]
-visible = false
-layout_mode = 2
-
-[node name="ko" parent="." instance=ExtResource("14_owahf")]
-visible = false
-layout_mode = 2
-
-[node name="rage" parent="." instance=ExtResource("15_f6ftu")]
+[node name="rage" parent="status" instance=ExtResource("15_f6ftu")]
 visible = false
 layout_mode = 2

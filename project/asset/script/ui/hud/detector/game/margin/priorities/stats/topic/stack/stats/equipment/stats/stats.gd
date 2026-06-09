@@ -1,4 +1,4 @@
-extends HFlowContainer
+extends MarginContainer
 
 @onready var bag: HBoxContainer = $value/bag
 @onready var description: Label = $description

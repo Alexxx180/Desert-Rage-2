@@ -1,6 +1,4 @@
-extends AnimationTree
-
-class_name AdvancedCharacterAnimation
+class_name AdvancedCharacterAnimation extends AnimationTree
 
 const SPEED: int = 4
 
