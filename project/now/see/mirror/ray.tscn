@@ -1,4 +1,4 @@
-[gd_scene load_steps=865 format=3 uid="uid://d20c80m4ea6lv"]
+[gd_scene load_steps=862 format=3 uid="uid://d20c80m4ea6lv"]
 
 [ext_resource type="Texture2D" uid="uid://5njpv4q1vm6m" path="res://asset/resource/media/image/actor/player/ray/skills/move/backward.png" id="1_pr4tj"]
 [ext_resource type="Texture2D" uid="uid://bg306yjfnfuv5" path="res://asset/resource/media/image/actor/player/ray/fight/bash/backward.png" id="2_5cu42"]
@@ -92,7 +92,6 @@
 [ext_resource type="Texture2D" uid="uid://23x5x8jd1fe6" path="res://asset/resource/media/image/actor/player/ray/skills/run/right.png" id="90_qe5kv"]
 [ext_resource type="Texture2D" uid="uid://8qpwt4g0ok1y" path="res://asset/resource/media/image/actor/player/ray/fight/stomp/right.png" id="91_ab2f1"]
 [ext_resource type="Texture2D" uid="uid://cahnys8x5edet" path="res://asset/resource/media/image/actor/player/ray/fight/whip/right.png" id="92_cqp7w"]
-[ext_resource type="Script" uid="uid://dv5mhv4nhbfyc" path="res://asset/script/actor/group/hero/view/mirror.gd" id="93_y3qnm"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1m64o"]
 atlas = ExtResource("1_pr4tj")
@@ -5958,32 +5957,8 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_c8l3p"]
-size = Vector2(20, 26)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_t3jj2"]
-size = Vector2(20, 24)
-
 [node name="mirror" type="AnimatedSprite2D"]
-visible = false
 modulate = Color(1, 1, 1, 0.235294)
 sprite_frames = SubResource("SpriteFrames_ajgxq")
 animation = &"backward"
 offset = Vector2(0, -51.5)
-script = ExtResource("93_y3qnm")
-
-[node name="a" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 1074268160
-
-[node name="shape" type="CollisionShape2D" parent="a"]
-position = Vector2(0, -89)
-shape = SubResource("RectangleShape2D_c8l3p")
-
-[node name="b" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 1074268160
-
-[node name="shape" type="CollisionShape2D" parent="b"]
-position = Vector2(0, -6)
-shape = SubResource("RectangleShape2D_t3jj2")

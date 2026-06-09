@@ -113,4 +113,4 @@ func tile_walk(hero: CharacterBody2D, enter: bool = true) -> void:
 	tile_press(HUD.level.border.tile[Def.COORDS], enter)
 
 func secret_reveal() -> void:
-	
+	pass

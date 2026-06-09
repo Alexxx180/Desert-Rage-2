@@ -5,18 +5,6 @@ const TIME: float = 0.25
 
 @onready var barrier: ColorRect = $barrier
 
-func set_fill(horizont: Control.SizeFlags, vertical: Control.SizeFlags) -> void:
-	barrier.size_flags_horizontal = horizont
-	barrier.size_flags_vertical = vertical
-
-func set_direction(dir: Vector2) -> void:
-	match dir:
-		Vector2.ZERO: return
-		Vector2(1, 0), Vector2(1, -1): set_fill(Control.SIZE_SHRINK_END, Control.SIZE_FILL)
-		Vector2(0, 1), Vector2(1, 1): set_fill(Control.SIZE_FILL, Control.SIZE_SHRINK_END)
-		Vector2(-1, 0), Vector2(-1, 1): set_fill(Control.SIZE_SHRINK_BEGIN, Control.SIZE_FILL)
-		Vector2(0, -1), Vector2(1, 1): set_fill(Control.SIZE_FILL, Control.SIZE_SHRINK_BEGIN)
-
 func set_atb(portion: float) -> void:
 	print("ATB PORTION: ", portion)
 
@@ -28,22 +16,19 @@ func appear(ui: Control) -> void: ui.modulate = Color.WHITE
 
 signal sync_view(hero: Node2D)
 
-@export var is_hero: bool = false
-
 @onready var profile: AnimatedSprite2D = $profile
 @onready var shadow: Sprite2D = $shadow
 @onready var animation: AnimationTree = $animation
-# @onready var barrier: VBoxContainer = $barrier
-# @onready var ap: TextureProgressBar = $influence
 @onready var whip: Sprite2D = $whip
 
 var _mirror: AnimatedSprite2D = null
 var mirror: AnimatedSprite2D:
 	get:
 		if _mirror == null:
-			var caption: String = get_parent().name
-			_mirror = load(Def.mirror % caption).instantiate()
+			_mirror = load(Def.ray_mirror).instantiate()
 			shadow.add_sibling(_mirror)
+			profile.animation_changed.connect(HUD.level.animation.mirror_animation)
+			profile.frame_changed.connect(HUD.level.animation.mirror_frame)
 		return _mirror
 
 var param: Dictionary = {
@@ -57,8 +42,6 @@ var param: Dictionary = {
 func move(direction: Vector2) -> void:
 	animation.move(direction)
 	barrier.set_direction(direction)
-
-func _ready() -> void: visible = is_hero; mirror.sync(profile)
 
 func set_aura(next_color: Color, thickness: float) -> void:
 	profile.material.set(param.thick, thickness)

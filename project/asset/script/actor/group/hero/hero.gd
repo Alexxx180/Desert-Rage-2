@@ -10,6 +10,7 @@ func make_velocity(motion: Vector2) -> void: velocity = motion
 func make_position(motion: Vector2) -> void: position = motion
 
 func update_stats() -> void:
+	
 	$logic.update_stats()
 
 func controls() -> void:

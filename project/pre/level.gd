@@ -32,10 +32,18 @@ var cluster: TileCluster:
 	get: return Def.ref(self, _cluster, &"tile", new_cluster)
 var conductor: FlowConductor:
 	get: return Def.ref(self, _conductor, &"_conductor", new_conductor)
+var animation: CharacterAnimation:
+	get: return Def.ref(self, _animation, &"_animation", new_character_animation)
 
-var _conductor: FlowConductor ; var _cluster: TileCluster ; var _boxes: Boxes
+var _conductor: FlowConductor ; var _cluster: TileCluster ; var _boxes: Boxes ; var _animation: CharacterAnimation
 var _inventory: HeroInventory ; var _deploy: HeroDeploy ; var _move: HeroMovement ; var _skills: SkillManager
 
+func plate_encounter() -> void: pass
+func plate_diverge() -> void: pass
+func lever_encounter() -> void: pass
+func lever_diverge() -> void: pass
+
+func new_character_animation() -> CharacterAnimation: return CharacterAnimation.new()
 func new_hero_deploy() -> HeroDeploy: return HeroDeploy.new()
 func new_conductor() -> FlowConductor: return FlowConductor.new()
 func new_boxes() -> Boxes: return Boxes.new()

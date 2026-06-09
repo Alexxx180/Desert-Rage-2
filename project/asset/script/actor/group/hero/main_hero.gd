@@ -1,16 +1,27 @@
 extends CharacterBody2D
 
-@onready var view: Node2D = $view
-@onready var logic: Node2D = $logic
+@onready var view: Button = $view
+@onready var lever: Area2D = $lever
+@onready var plate: Area2D = $plate
 
 var field: int
 var state: PackedInt32Array = [0, 0]
 var boxes: PackedByteArray = []
+var is_monitoring: bool: set = set_monitoring
 
-func make_velocity(motion: Vector2) -> void: velocity = motion
+func _ready() -> void:
+	LevelRoot
+	plate.body_entered.connect(HUD.level.plate_encounter)
+	plate.body_entered.connect(HUD.level.plate_diverge)
+	lever.body_entered.connect(HUD.level.lever_encounter)
+	lever.body_entered.connect(HUD.level.lever_diverge)
+
+func set_monitoring(value: bool) -> void:
+	lever.monitoring = value
+	plate.monitoring = value
+
+func make_velocity(motion: Vector2) -> void: 
+	velocity = motion
+
 func make_position(motion: Vector2) -> void: position = motion
-
 func _physics_process(_delta: float) -> void: move_and_slide()
-
-func encounter(_execute: TileMapLayer) -> void: HUD.level.press.encounter(self)
-func diverge(_execute: TileMapLayer) -> void: HUD.level.press.diverge(self)

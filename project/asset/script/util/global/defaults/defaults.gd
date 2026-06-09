@@ -7,8 +7,6 @@ enum { OPEN_MENU, TRANSIT }
 @onready var ost: SoundtrackSystem = SoundtrackSystem.new()
 @onready var stats: SessionStats = SessionStats.new(get_tree())
 
-var REF: Dictionary = {}
-
 var state: int = 1
 var hero: int = 0
 var _pause: Control ; var _game: Control ; var _settings: Control ; var _sound: Control ; var _information: Control
