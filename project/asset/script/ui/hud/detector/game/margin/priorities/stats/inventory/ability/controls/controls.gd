@@ -5,10 +5,10 @@ extends VBoxContainer
 
 var _hp: HBoxContainer = null
 var hp: HBoxContainer:
-	get: return Works.upload_at(status, _hp, "hp", Def.hp, "hp")
+	get: return Works.upload_at(status, _hp, "hp", Def.mhealth, "hp")
 
 var markers: HFlowContainer:
-	get: return Works.uploads(self, Def.items, "markers") # TODO SET MARKERS FREE FROM LINKING
+	get: return Works.uploads(self, Def.items, "markers") # TODO SET  MARKERS FREE FROM LINKING
 
 var _hints: VBoxContainer = null
 var hints: VBoxContainer:

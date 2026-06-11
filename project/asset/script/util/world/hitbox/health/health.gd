@@ -1,32 +1,28 @@
 class_name AuraResource extends RefCounted
 
-enum { BLUE, NO = 0, AURA = 0, LIFE_BORDER = 0, WAVE = 0, THICK = 0, GREEN, COLOR = 1, AP = 1,
-	PERIOD = 1, DURATION = 1, YELLOW, TRANSPORT = 2, SUMMARY = 2, RESOURCE = 2, THICKNESS = 2, RED,
-	RESOURCE_VALUE = 3, LAST_THICKNESS = 3, CRITICAL = 4, MAX = 10, SEMI = 100, SET = 255 }
+enum { BLUE, NO = 0, AURA = 0, LIFE_BORDER = 0, WAVE = 0, THICK = 0, GREEN, COLOR = 1, AP = 1, RESOURCE_SHIFT = 1,
+	PERIOD = 1, DURATION = 1, YELLOW, BAR_TYPE = 2, TRANSPORT = 2, SUMMARY = 2, RESOURCE = 2, THICKNESS = 2, RED,
+	RESOURCE_VALUE = 3, LAST_THICKNESS = 3, CRITICAL = 4, BARS = 4, MAX = 10, SEMI = 100, SET = 255 }
 
-const param: PackedStringArray = [&"shader_parameter/line_thickness", &"shader_parameter/line_color"]
 const color: PackedFloat32Array = [1.0, 0.8, 0.4, 0.0]
-
-var max_points: PackedByteArray = [0, 0]
-var points: PackedByteArray = [0, 0]
-var max_resource: PackedByteArray = [0, 0]
-var resource: PackedByteArray = [0, 0]
-
-var state: PackedByteArray
-var _aura: Array[Tween]
-var _resource: Array[Tween]
-var damage: PackedByteArray = [0, 1, 0]
 var aura: PackedFloat32Array = [0.7, 0.1, 2.0, 5.0, 0.1]
+
+var max_points: PackedByteArray = [0, 0, 0, 0]
+var points: PackedByteArray = [0, 0, 0, 0]
+var damage: PackedByteArray = [0, 1, 0]
+
+var _reaction: Array[Tween]
 var last_color: Color
 
 func setup() -> void: HUD.aura_time.timeout.connect(diffusion) # burns - blink
 
 func transport(hero: int) -> void:
-	HUD.level.entity[hero].animation.transport()
-	HUD.level.entity[hero].process_mode = Node.PROCESS_MODE_DISABLED
-	var shift: int = 1 if Bit.of(state[TRANSPORT], hero) else -1
-	HUD.level.entity[hero].state[2] = posmod(HUD.level.entity[hero].state[2] + shift, len(HUD.level.spawn))
-	HUD.level.entity[hero].position = HUD.level.spawn[HUD.level.entity[hero].state[2]]
+	var h: CharacterBody2D = HUD.level.entity[hero]
+	h.animation.transport()
+	h.process_mode = Node.PROCESS_MODE_DISABLED
+	var shift: int = 1 if Bit.of(h.state[TRANSPORT], hero) else -1
+	h.state[2] = posmod(h.state[2] + shift, len(HUD.level.spawn))
+	h.position = HUD.level.spawn[h.state[2]]
 
 func ko(hero: int) -> void:
 	var over: bool = true
@@ -58,7 +54,7 @@ func _between(a: int, segment: float, b: int) -> bool:
 func react(hero: int) -> void:
 	var segment: float = HUD.points[hero] / HUD.maximum[hero]
 	aura[LAST_THICKNESS] = segment * THICKNESS + 3
-	set_material(hero, COLOR, last_color)
+	set_material(hero, &"shader_parameter/line_color", last_color)
 	if segment <= color[RED]:
 		last_color = Color.from_rgba8(SET, NO, NO, SEMI)
 	elif segment >= color[BLUE]:
@@ -70,17 +66,21 @@ func react(hero: int) -> void:
 	else:
 		last_color = Color.from_rgba8(SET, int(SET * decide(YELLOW, RED, segment)), NO, SEMI)
 
-func set_material(hero: int, type: int, value: Variant) -> void:
-	HUD.level.entity[hero].profile.material.set(param[type], value)
+func set_material(hero: int, param: StringName, value: Variant) -> void:
+	HUD.level.entity[hero].profile.material.set(param, value)
 
 func set_points(hero: int, type: int, amount: int) -> void:
-	HUD.status.set_points(hero, type, clampi(HUD.points[hero][type] + amount, NO, HUD.maximum[hero][type]))
+	var pts: int = clampi(HUD.points[hero][type] + amount, NO, HUD.maximum[hero][type])
+	var no: int = hero * BARS + type * BAR_TYPE
+	for i in range(no, no + BAR_TYPE):
+		HUD.game.points[i].value = pts
 
 func transfusion(hero: int) -> void:
-	_aura[hero] = HUD.aura_time.create_tween()
-	_aura[hero].tween_method(func():
-		set_material(hero, COLOR, last_color)
-		set_material(hero, THICK, aura[LAST_THICKNESS]),
+	var no: int = hero * BAR_TYPE
+	_reaction[no] = HUD.aura_time.create_tween()
+	_reaction[no].tween_method(func():
+		set_material(hero, &"shader_parameter/line_color", last_color)
+		set_material(hero, &"shader_parameter/line_thickness", aura[LAST_THICKNESS]),
 	0.0, 1.0, 1)
 
 func affect_aura(hero: int, amount: int = -1) -> void:
@@ -98,18 +98,19 @@ func costly(hero: int, cost: int) -> bool: return HUD.points[hero] - cost < NO
 
 func _react_resource(hero: int) -> Callable:
 	return func(value: float):
-		set_material(hero, RESOURCE_VALUE, HUD.points[hero].y)
+		set_material(hero, &"shader_parameter/ap", HUD.points[hero].y)
 		if value == 1.0:
-			state[RESOURCE] = Bit.to0(state[RESOURCE], hero)
-			set_material(hero, RESOURCE, false)
+			HUD.level.entity[hero].state[RESOURCE] = Bit.to0(HUD.level.entity[hero].state[RESOURCE], hero)
+			set_material(hero, &"shader_parameter/action", false)
 
 func affect_resource(hero: int, amount: int = 1) -> void:
 	set_points(hero, Vector2.Axis.AXIS_Y, amount)
-	set_material(hero, RESOURCE, true)
-	if not Bit.of(state[RESOURCE], hero):
-		state[RESOURCE] = Bit.to1(state[RESOURCE], hero)
-		_resource[hero] = HUD.aura_time.create_tween()
-		_resource[hero].tween_method(_react_resource(hero), 0.0, 1.0, 1.0)
+	set_material(hero, &"shader_parameter/action", true)
+	if not Bit.of(HUD.level.entity[hero].state[RESOURCE], hero):
+		var no: int = hero * BAR_TYPE + RESOURCE_SHIFT
+		HUD.level.entity[hero].state[RESOURCE] = Bit.to1(HUD.level.entity[hero].state[RESOURCE], hero)
+		_reaction[no] = HUD.aura_time.create_tween()
+		_reaction[no].tween_method(_react_resource(hero), 0.0, 1.0, 1.0)
 
 func thrown(box: CharacterBody2D) -> void:
 	if box.velocity != Vector2.ZERO: affect_aura(10)

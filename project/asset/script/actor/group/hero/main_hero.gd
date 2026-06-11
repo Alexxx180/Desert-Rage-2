@@ -1,20 +1,29 @@
 extends CharacterBody2D
 
-@onready var view: Button = $view
 @onready var lever: Area2D = $lever
 @onready var plate: Area2D = $plate
+@onready var profile: AnimatedSprite2D = $profile
+@onready var shadow: Sprite2D = $shadow
+@onready var animation: Timer = $animation
+# @onready var animation: AnimationTree = $animation
 
-var field: int
-var state: PackedInt32Array = [0, 0]
+var _mirror: AnimatedSprite2D = null
+var mirror: AnimatedSprite2D:
+	get: return HUD.animation.get_mirror_sprite(self, Def.ray_mirror, _mirror)
+
+var state: PackedInt32Array = [0, 0, 0]
 var boxes: PackedByteArray = []
 var is_monitoring: bool: set = set_monitoring
 
+func stop_animation() -> void:
+	HUD.animation.stop_animation()
+
 func _ready() -> void:
-	LevelRoot
+	animation.timeout.connect(stop_animation)
 	plate.body_entered.connect(HUD.level.plate_encounter)
-	plate.body_entered.connect(HUD.level.plate_diverge)
+	plate.body_exited.connect(HUD.level.plate_diverge)
 	lever.body_entered.connect(HUD.level.lever_encounter)
-	lever.body_entered.connect(HUD.level.lever_diverge)
+	lever.body_exited.connect(HUD.level.lever_diverge)
 
 func set_monitoring(value: bool) -> void:
 	lever.monitoring = value

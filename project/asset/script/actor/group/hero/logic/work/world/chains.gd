@@ -59,9 +59,9 @@ func disable_collision(active: bool) -> void:
 # JUMP SLIDE
 func gravity(hero: int) -> void:
 	var state: int = HUD.level.state[hero]
-	if Bit.of(state, Def.JUMP): # CHAINS
+	if Bit.of(state, Def.JUMP) and Bit.of(state, Def.FALL): # CHAINS
 		HUD.level.entity[hero].velocity.y = 0
-	elif Bit.of(state, Def.JUMP): # FALL
+	elif Bit.of(state, Def.FALL): # FALL
 		HUD.level.entity[hero].add_velocity(Vector2(0, GRAVITY))
 	elif Bit.of(state, Def.JUMP): # JUMP
 		HUD.level.entity[hero].add_velocity(Vector2(0, -GRAVITY))

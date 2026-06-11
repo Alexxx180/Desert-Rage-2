@@ -1,7 +1,6 @@
 class_name Def
 
-enum { LOGIC = 0, FLOOR = 4, PUDDLE_OFF = 4, PUDDLE_ON = 8, ICE_FLOOR = 12,
-	BLUE_OFF = 0, U_WATER = 0, BLUE_ON, U_EXIT = 1, RED_OFF, U_WALL_OFF = 2, RED_ON,
+enum { LOGIC = 0, FLOOR = 4, BLUE_OFF = 0, U_WATER = 0, BLUE_ON, U_EXIT = 1, RED_OFF, U_WALL_OFF = 2, RED_ON,
 	U_WALL_ON = 3, ENTRY = 3, WALL = 3, GREEN_OFF, U_LADDER = 4, GREEN_ON, D_LADDER = 5,
 	WHITE_OFF, ENEMY = 6, WHITE_ON, BOSS = 7, BLACK_OFF, M_WATER = 8,
 	TAGS = 8, BLACK_ON, M_EXIT = 9, CHESTS = 9, BRONZE_OFF, D_WALL_OFF = 10, BRONZE_ON,
@@ -11,12 +10,15 @@ enum { LOGIC = 0, FLOOR = 4, PUDDLE_OFF = 4, PUDDLE_ON = 8, ICE_FLOOR = 12,
 	SOURCE_ON, STAND_ON = 21, LEVER_OFF, SECRET_OFF = 22, LEVER_ON, SECRET_ON = 23, PLATE_OFF,
 	PAGE = 24, PLATE_ON, TELEPORT_OFF, SPIKER, COMFORTER, SUPPLIER, COOLER, SMALL_BOX, FIRE_BOX, LARGE_BOX }
 
-enum { INT = -1, HERO, DEPLOYED = 0, ATLAS = 0, PLATE = 0, DEAD, OVERWORLD = 1, ID = 1, LEVER = 1, FREEZE,
-	CASUAL = 2, ALT = 2, BOX, TYPE = 3, LAYER, COORDS = 4, PERSPECTIVE, ACTING, GRAB, CAMERA,
+enum { INT = -1, HERO, DEPLOYED = 0, NO = 0, ATLAS = 0, PLATE = 0,
+	OVERWORLD = 1, ID = 1, LEVER = 1, STATUS = 1, CASUAL = 2, OFFSET = 2, ALT = 2, TYPE = 3, LAYER,
+	COORDS = 4, FLOORS = 0, PUDDLE_OFF = 4, ICE_MECH = 4, PUDDLE_ON = 8, ICE_FLOOR = 12,
 	TILESET4 = 16, TILE32 = 32, TILE48 = 48, TILESET8 = 64, LEVEL = 14,
-	DEPLOY_DELTA = 4096, JUMP = 200000, SINGULARITY = 45000, GRAVITY = 700000 }
+	DEPLOY_DELTA = 4096, JUMP_POWER = 200000, MOVE = 550, GRAVITY = 700000 }
 
-enum { RAY, ROCK, EYE_SEEKER }
+enum { DEAD, OPEN_MENU = 0, FREEZE, TRANSIT = 1, BOX, ACTING, JUMP, FALL, CAMERA, GRAB } # status
+
+enum { RAY, ROCK, EYE_SEEKER } # enemy name
 
 const manual: PackedByteArray = [1, 3, 7, 10, 20, 21] ## Hints count shown
 const levels: PackedByteArray = [1, 7, 9, 13, 25, 26] ## Level number
@@ -37,6 +39,8 @@ const hints: PackedStringArray = ["MM", "MJ", "MB", "ML", "CN", "AA", "AE", "AF"
 	"CM", "CF", "IM", "EN", "PS", "RS", "ST", "BOOKS_STRING-ENEMY_STRING"]
 
 const DIR: PackedVector2Array = [Vector2i(24, 20), Vector2i(-1, -1)]
+
+static func offset(hero: int, no: int = 0) -> int: return hero * OFFSET + no
 
 static func y(field: int, off: int) -> int: return field >> off
 static func x(field: int, off: int) -> int: return field & ((1 << off) - 1)

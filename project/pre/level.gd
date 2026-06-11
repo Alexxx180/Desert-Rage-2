@@ -1,65 +1,71 @@
 class_name LevelRoot extends Node2D
 
-@onready var border: TileDecorator = $border
-@onready var execute: TileDecorator = $execute
 @onready var group: Camera2D = $group
+@onready var border: TileDecorator = $border
 
-var progress: PackedByteArray
-var state: PackedInt32Array = [0, 0]
+var execute: TileDecorator ; var _conductor: FlowConductor ; var _cluster: TileCluster
+var _pillar: PillarChains ; var _deploy: HeroDeploy ; var _boxes: LevelBoxes
+
 var entity: Array[CharacterBody2D] = [null, null]
 var tile: PackedInt32Array = [0, 0, 0, 0]
 
-var path: PackedVector2Array = []
-var maximum: PackedByteArray = [0, 0, 0, 0]
-var heroes: PackedStringArray = [Def.ray, &"ray", Def.rock, &"rock"]
+func get_tile(no: int) -> int: return tile[Def.offset(HUD.hero, no)]
+func set_tile(no: int) -> void: tile[Def.offset(HUD.hero, no)] = Def.ofmap(border.local_to_map(HUD.level.entity[HUD.hero].position))
+func no_tile(no: int) -> void: tile[Def.offset(HUD.hero, no)] = 0
 
-func _hero(hero: int, no: int) -> int: return hero * 2 + no
-func get_tile(no: int) -> int: return tile[_hero(HUD.hero, no)]
-func set_tile(no: int) -> void: tile[_hero(HUD.hero, no)] = Def.ofmap(border.local_to_map(HUD.level.entity[HUD.hero].position))
-func no_tile(no: int) -> void: tile[_hero(HUD.hero, no)] = 0
-
-var skills: SkillManager:
-	get: return Def.ref(self, _skills, &"_skills", new_skill_manager)
-var inventory: HeroInventory:
-	get: return Def.ref(self, _inventory, &"_inventory", new_hero_inventory)
-var move: HeroMovement:
-	get: return Def.ref(self, _move, &"move", new_hero_movement)
 var deploy: HeroDeploy:
 	get: return Def.ref(self, _deploy, &"_deploy", new_hero_deploy)
-var boxes: Boxes:
+var boxes: LevelBoxes:
 	get: return Def.ref(self, _boxes, &"boxes", new_boxes)
 var cluster: TileCluster:
 	get: return Def.ref(self, _cluster, &"tile", new_cluster)
 var conductor: FlowConductor:
 	get: return Def.ref(self, _conductor, &"_conductor", new_conductor)
-var animation: CharacterAnimation:
-	get: return Def.ref(self, _animation, &"_animation", new_character_animation)
+var pillar: PillarChains:
+	get: return Def.ref(self, _pillar, &"_pillar", new_pillar_chains)
 
-var _conductor: FlowConductor ; var _cluster: TileCluster ; var _boxes: Boxes ; var _animation: CharacterAnimation
-var _inventory: HeroInventory ; var _deploy: HeroDeploy ; var _move: HeroMovement ; var _skills: SkillManager
-
-func plate_encounter() -> void: pass
-func plate_diverge() -> void: pass
+func plate_encounter() -> void:
+	var h: CharacterBody2D = HUD.level.entity[HUD.hero]
+	tile[Def.offset(HUD.hero, Def.PLATE)] = Def.ofmap(border.local_to_map(h.position))
+	HUD.level.cluster.tile_walk(h, true)
+func plate_diverge() -> void:
+	HUD.level.cluster.tile_walk(HUD.level.entity[HUD.hero], false)
+	tile[Def.offset(HUD.hero, Def.PLATE)] = 0
 func lever_encounter() -> void: pass
 func lever_diverge() -> void: pass
 
-func new_character_animation() -> CharacterAnimation: return CharacterAnimation.new()
-func new_hero_deploy() -> HeroDeploy: return HeroDeploy.new()
+func new_pillar_chains() -> PillarChains: return PillarChains.new()
 func new_conductor() -> FlowConductor: return FlowConductor.new()
-func new_boxes() -> Boxes: return Boxes.new()
+func new_boxes() -> LevelBoxes: return LevelBoxes.new()
 func new_cluster() -> TileCluster: return TileCluster.new()
-func new_skill_manager() -> SkillManager: return SkillManager.new()
-func new_hero_movement() -> HeroMovement: return HeroMovement.new()
-func new_hero_inventory() -> HeroInventory: return HeroInventory.new()
+func new_hero_deploy() -> HeroDeploy: return HeroDeploy.new()
 func new_hero(no: int) -> CharacterBody2D:
 	if entity[no] == null:
-		entity[no] = load(heroes[_hero(no, 0)]).instantiate()
-		entity[no].name = heroes[_hero(no, 1)]
-		add_child(entity[no])
+		var hero: CharacterBody2D
+		if no == Def.RAY:
+			hero = load(Def.ray).instantiate()
+			hero.name = &"ray"
+		else:
+			hero = load(Def.rock).instantiate()
+			hero.name = &"rock"
+		add_child(hero)
+		return hero
 	return entity[no]
 
-func _ready() -> void:
+func load_hero(that: int) -> void:
+	if entity[that] == null:
+		entity[that] = new_hero(that)
+
+func load_level() -> void:
 	HUD.level = self
-	deploy.load_hero(HUD.hero)
-	if execute != null: cluster.resize_clusters()
-	HUD.state = Bit.to1(HUD.state, HUD.TRANSIT)
+	if has_node(^"execute"):
+		execute = get_node(^"execute")
+		cluster.resize_clusters()
+	# HUD.state = Bit.to1(HUD.state, Def.TRANSIT)
+
+func _ready() -> void:
+	load_level()
+	load_hero(HUD.hero)
+	entity[HUD.hero].position = group.position
+	group.reparent(entity[HUD.hero])
+	group.position = Vector2.ZERO
