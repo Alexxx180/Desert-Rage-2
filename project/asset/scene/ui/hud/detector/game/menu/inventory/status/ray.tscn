@@ -1,97 +1,54 @@
-[gd_scene load_steps=15 format=3 uid="uid://bx8m1gw4fot0d"]
+[gd_scene load_steps=4 format=3 uid="uid://bx8m1gw4fot0d"]
 
 [ext_resource type="Script" uid="uid://dl23q0jb3ahtc" path="res://asset/script/ui/hud/detector/game/margin/priorities/stats/inventory/topic/stack/selected/status/hero.gd" id="1_e07ln"]
-[ext_resource type="PackedScene" uid="uid://hw20vxdse268" path="res://asset/scene/ui/hud/detector/game/menu/inventory/status/shared/bag.tscn" id="2_64oob"]
 [ext_resource type="PackedScene" uid="uid://bdp11gai8bk5" path="res://asset/scene/ui/hud/detector/game/menu/inventory/status/shared/health.tscn" id="4_j5pou"]
 [ext_resource type="PackedScene" uid="uid://du2nfngsi1lpk" path="res://asset/scene/ui/hud/detector/game/menu/inventory/status/shared/ability.tscn" id="5_e07ln"]
-[ext_resource type="PackedScene" uid="uid://y6fn078j2sh3" path="res://now/hud/status/ailment/damage/poison.tscn" id="5_lomds"]
-[ext_resource type="PackedScene" uid="uid://bx1eh0q5rbynn" path="res://now/hud/status/ailment/damage/cough.tscn" id="6_2b7lq"]
-[ext_resource type="PackedScene" uid="uid://yfxdd77grbp0" path="res://now/hud/status/ailment/numb/freeze.tscn" id="7_mw3n5"]
-[ext_resource type="PackedScene" uid="uid://xspep2aas82r" path="res://now/hud/status/ailment/damage/burn.tscn" id="8_cs6id"]
-[ext_resource type="PackedScene" uid="uid://4jy7bmeaqofu" path="res://now/hud/status/ailment/mind/dizzy.tscn" id="9_snunp"]
-[ext_resource type="PackedScene" uid="uid://3dbl8kh661a3" path="res://now/hud/status/ailment/no/reason.tscn" id="10_yoo4r"]
-[ext_resource type="PackedScene" uid="uid://cedejpbmq56j3" path="res://now/hud/status/ailment/no/motion.tscn" id="11_yf6tu"]
-[ext_resource type="PackedScene" uid="uid://b0hyoxlrt1af" path="res://now/hud/status/ailment/no/action.tscn" id="12_fs11u"]
-[ext_resource type="PackedScene" uid="uid://cmauui2eio5gc" path="res://now/hud/status/ailment/numb/ko.tscn" id="13_dex14"]
-[ext_resource type="PackedScene" uid="uid://dq1fal5qwrk8n" path="res://now/hud/status/ailment/mind/rage.tscn" id="14_7rhjt"]
 
-[node name="ray" type="MarginContainer"]
-offset_right = 1152.0
-offset_bottom = 39.0
+[node name="ray" type="Control"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 3
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
 size_flags_horizontal = 3
-theme_override_constants/margin_left = 0
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 0
 script = ExtResource("1_e07ln")
 
 [node name="alt" type="MarginContainer" parent="."]
-layout_mode = 2
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 26.0
+grow_horizontal = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 theme_override_constants/margin_left = 58
 theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 123
+theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
+
+[node name="status-line" type="ColorRect" parent="alt"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+size_flags_vertical = 0
+color = Color(0.274328, 1.7417316e-06, 0.012187982, 1)
 
 [node name="ability" parent="alt" instance=ExtResource("5_e07ln")]
 layout_mode = 2
 
 [node name="main" type="MarginContainer" parent="."]
-layout_mode = 2
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -39.0
+grow_horizontal = 2
+grow_vertical = 0
 size_flags_vertical = 0
+theme_override_constants/margin_left = 0
 theme_override_constants/margin_top = 13
-theme_override_constants/margin_right = 181
+theme_override_constants/margin_right = 58
+theme_override_constants/margin_bottom = 0
 
 [node name="health" parent="main" instance=ExtResource("4_j5pou")]
-layout_mode = 2
-
-[node name="bag" parent="." instance=ExtResource("2_64oob")]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-text = "Рей"
-
-[node name="status" type="HBoxContainer" parent="."]
-visible = false
-custom_minimum_size = Vector2(123, 0)
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 4
-theme_override_constants/separation = 1
-
-[node name="poison" parent="status" instance=ExtResource("5_lomds")]
-layout_mode = 2
-
-[node name="cough" parent="status" instance=ExtResource("6_2b7lq")]
-layout_mode = 2
-
-[node name="freeze" parent="status" instance=ExtResource("7_mw3n5")]
-layout_mode = 2
-
-[node name="burn" parent="status" instance=ExtResource("8_cs6id")]
-layout_mode = 2
-
-[node name="dizzy" parent="status" instance=ExtResource("9_snunp")]
-visible = false
-layout_mode = 2
-
-[node name="no_reason" parent="status" instance=ExtResource("10_yoo4r")]
-visible = false
-layout_mode = 2
-
-[node name="no_motion" parent="status" instance=ExtResource("11_yf6tu")]
-visible = false
-layout_mode = 2
-
-[node name="no_action" parent="status" instance=ExtResource("12_fs11u")]
-visible = false
-layout_mode = 2
-
-[node name="ko" parent="status" instance=ExtResource("13_dex14")]
-visible = false
-layout_mode = 2
-
-[node name="rage" parent="status" instance=ExtResource("14_7rhjt")]
-visible = false
 layout_mode = 2

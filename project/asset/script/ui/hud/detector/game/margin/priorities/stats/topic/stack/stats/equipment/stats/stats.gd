@@ -13,5 +13,5 @@ func connect_description(opened: Button) -> void:
 	opened.focus_entered.connect(func(): description.sets(opened.name)) # opened.focus_exited.connect(func(): caption.hide())
 	opened.mouse_entered.connect(func(): description.sets(opened.name)) # opened.mouse_exited.connect(func(): caption.hide())
 
-func _ready() -> void:
-	for caption in main.stats: connect_description(caption) # for caption in description.get_children():
+#func _ready() -> void:
+#	for caption in main.stats: connect_description(caption) # for caption in description.get_children():

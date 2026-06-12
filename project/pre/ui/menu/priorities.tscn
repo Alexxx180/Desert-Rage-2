@@ -1,14 +1,18 @@
-[gd_scene load_steps=41 format=3 uid="uid://pwqvjeffo6u5"]
+[gd_scene load_steps=46 format=3 uid="uid://pwqvjeffo6u5"]
 
 [ext_resource type="Script" uid="uid://ptu1t5a0cbpa" path="res://asset/script/ui/hud/detector/game/margin/priorities/topic/stack/stack.gd" id="1_hm58d"]
-[ext_resource type="PackedScene" uid="uid://bky5mu10x2da3" path="res://asset/scene/ui/hud/detector/game/menu/inventory/status/state/stack.tscn" id="2_hv7oy"]
+[ext_resource type="PackedScene" uid="uid://cishpih8t1tbj" path="res://asset/scene/ui/hud/detector/game/menu/inventory/status/rock.tscn" id="2_a8msc"]
 [ext_resource type="PackedScene" uid="uid://bmexdqeihycjg" path="res://asset/scene/ui/hud/detector/game/menu/priorities/topic/record/record.tscn" id="3_1uiam"]
-[ext_resource type="PackedScene" uid="uid://bmmg6xahpkusq" path="res://asset/scene/ui/hud/detector/game/menu/priorities/topic/research/research.tscn" id="4_4xtdc"]
+[ext_resource type="PackedScene" uid="uid://bx8m1gw4fot0d" path="res://asset/scene/ui/hud/detector/game/menu/inventory/status/ray.tscn" id="3_snbvy"]
+[ext_resource type="StyleBox" uid="uid://cht8hrroa75bg" path="res://asset/resource/ui/theme/style/tag/tag-button.tres" id="5_a8msc"]
 [ext_resource type="FontFile" uid="uid://o0rgn7d13mr3" path="res://asset/resource/media/text/font/OpenSans-VariableFont_wdth,wght.ttf" id="5_idl6i"]
 [ext_resource type="FontFile" uid="uid://b2wbdbnkxcqv1" path="res://asset/resource/media/text/font/noto_sans/NotoEmoji-VariableFont_wght.ttf" id="6_5sshg"]
+[ext_resource type="PackedScene" uid="uid://cdpsykqf6eaa2" path="res://asset/scene/ui/hud/detector/game/menu/priorities/topic/research/content/help/help.tscn" id="6_n6hbv"]
+[ext_resource type="PackedScene" uid="uid://ikenyhjscyj3" path="res://asset/scene/ui/hud/detector/game/menu/stats/topic/chats/list/notes.tscn" id="7_dqtm4"]
 [ext_resource type="FontFile" uid="uid://b37js8y80ak1k" path="res://asset/resource/media/text/font/noto_sans/NotoColorEmoji-Regular.ttf" id="7_vi5is"]
-[ext_resource type="FontFile" uid="uid://drm0mr2hyapf2" path="res://asset/resource/media/text/font/EmojiOneColor.otf" id="8_2kyrp"]
 [ext_resource type="Script" uid="uid://ddnlfc3tie4gs" path="res://asset/script/ui/hud/detector/game/margin/priorities/topic/description.gd" id="8_n1nnf"]
+[ext_resource type="FontFile" uid="uid://dxg5wbmrewk2p" path="res://asset/resource/media/text/font/Lato-Regular.ttf" id="8_x1t7t"]
+[ext_resource type="PackedScene" uid="uid://bu5vbvvgn1q4d" path="res://asset/scene/ui/hud/detector/game/menu/priorities/title.tscn" id="9_cfv3t"]
 [ext_resource type="Theme" uid="uid://dfyi7rrcrweqx" path="res://asset/resource/ui/theme/patterns/template/menu/settings/settings.tres" id="9_vmvf2"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qw6gd"]
@@ -27,12 +31,23 @@ bg_color = Color(0.00392157, 0.00392157, 0.00392157, 0.498039)
 VScrollBar/styles/grabber = SubResource("StyleBoxFlat_qw6gd")
 VScrollBar/styles/scroll = SubResource("StyleBoxFlat_ccjyc")
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l70cx"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a8msc"]
 content_margin_left = 20.0
-content_margin_top = 20.0
-content_margin_right = 20.0
+content_margin_top = 0.0
+content_margin_right = 0.0
 content_margin_bottom = 20.0
 bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l70cx"]
+content_margin_left = 0.0
+content_margin_top = 20.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_flm7h"]
+content_margin_top = 7.0
+color = Color(0.117647, 0.117647, 0.227451, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hjbks"]
 content_margin_left = 6.0
@@ -163,11 +178,6 @@ content_margin_left = 7.0
 content_margin_top = 0.0
 bg_color = Color(0.0196078, 0.0196078, 0.0588235, 0.72549)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2kyrp"]
-content_margin_left = 7.0
-content_margin_top = 0.0
-bg_color = Color(0.0588235, 0.0588235, 0.0588235, 0.72549)
-
 [sub_resource type="Gradient" id="Gradient_ne0m5"]
 offsets = PackedFloat32Array(0, 0.996139)
 colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0)
@@ -195,7 +205,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 theme = SubResource("Theme_cuhdu")
-theme_override_styles/panel = SubResource("StyleBoxFlat_l70cx")
+theme_override_styles/panel = SubResource("StyleBoxFlat_a8msc")
 vertical_scroll_mode = 0
 
 [node name="space" type="Control" parent="."]
@@ -212,6 +222,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_l70cx")
 horizontal_scroll_mode = 0
 
 [node name="stack" type="VBoxContainer" parent="space/scroll"]
@@ -220,13 +231,51 @@ size_flags_horizontal = 3
 theme_override_constants/separation = 7
 script = ExtResource("1_hm58d")
 
-[node name="status" parent="space/scroll/stack" instance=ExtResource("2_hv7oy")]
+[node name="ray" parent="space/scroll/stack" instance=ExtResource("3_snbvy")]
+layout_mode = 2
+
+[node name="rock" parent="space/scroll/stack" instance=ExtResource("2_a8msc")]
 layout_mode = 2
 
 [node name="record" parent="space/scroll/stack" instance=ExtResource("3_1uiam")]
 layout_mode = 2
 
-[node name="research" parent="space/scroll/stack" instance=ExtResource("4_4xtdc")]
+[node name="perks" type="HFlowContainer" parent="space/scroll/stack"]
+layout_mode = 2
+theme_override_constants/h_separation = 7
+theme_override_constants/v_separation = 0
+
+[node name="dealer" type="Button" parent="space/scroll/stack/perks"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.341176, 0.341176, 0.341176, 1)
+theme_override_styles/normal = ExtResource("5_a8msc")
+text = "Торговец"
+
+[node name="help" parent="space/scroll/stack" instance=ExtResource("6_n6hbv")]
+layout_mode = 2
+
+[node name="books" type="VBoxContainer" parent="space/scroll/stack"]
+visible = false
+layout_mode = 2
+
+[node name="notes" parent="space/scroll/stack/books" instance=ExtResource("7_dqtm4")]
+visible = true
+layout_mode = 2
+
+[node name="books" type="RichTextLabel" parent="space/scroll/stack/books"]
+layout_mode = 2
+theme_override_colors/default_color = Color(0.29411766, 0.29411766, 0.29411766, 1)
+theme_override_fonts/normal_font = ExtResource("8_x1t7t")
+theme_override_font_sizes/normal_font_size = 22
+theme_override_styles/normal = SubResource("StyleBoxLine_flm7h")
+text = "Здесь содержатся послания, которые оставляли древние в виде книг и записок. При сборе книг определенного типа вы можете открывать новые возможности и способности для разных героев. Чтобы узнать историю Древних, соберите все записи на локации и выложите их как единый связный рассказ.
+------
+K2
+K3"
+fit_content = true
+
+[node name="title" parent="space/scroll/stack" instance=ExtResource("9_cfv3t")]
+visible = false
 layout_mode = 2
 
 [node name="tabs" type="HBoxContainer" parent="space"]
@@ -259,15 +308,6 @@ theme_override_fonts/font = ExtResource("7_vi5is")
 theme_override_font_sizes/font_size = 16
 theme_override_styles/normal = SubResource("StyleBoxFlat_ne0m5")
 text = "📚"
-alignment = 0
-
-[node name="notes" type="Button" parent="space/tabs"]
-custom_minimum_size = Vector2(30, 30)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("8_2kyrp")
-theme_override_font_sizes/font_size = 17
-theme_override_styles/normal = SubResource("StyleBoxFlat_2kyrp")
-text = "💳"
 alignment = 0
 
 [node name="help" type="Button" parent="space/tabs"]

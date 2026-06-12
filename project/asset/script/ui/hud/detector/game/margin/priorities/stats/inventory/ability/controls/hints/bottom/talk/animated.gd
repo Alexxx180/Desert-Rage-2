@@ -12,12 +12,12 @@ var refresh_rate: float = 1.0
 var fps: float = 30.0
 var frame_delta: float = 0.0
 
-func _ready() -> void:
-	sync_data()
-	if sprites == null:
-		process_mode = Node.ProcessMode.PROCESS_MODE_DISABLED
-		assert(false, "No suitable sprite frames found, disabling")
-	elif auto_play: play()
+#func _ready() -> void:
+	# sync_data()
+	#if sprites == null:
+	#	process_mode = Node.ProcessMode.PROCESS_MODE_DISABLED
+	#	assert(false, "No suitable sprite frames found, disabling")
+	#elif auto_play: play()
 
 func sync_data() -> void:
 	fps = sprites.get_animation_speed(current_animation)

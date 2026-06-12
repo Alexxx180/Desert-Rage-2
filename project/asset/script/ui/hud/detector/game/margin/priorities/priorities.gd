@@ -3,9 +3,9 @@ extends HSplitContainer
 @onready var stats: HSplitContainer = $stats
 @onready var topic: PanelContainer = $topic
 @onready var navigation: Node = $navigation
-@onready var points: Array[Button] = _get_points()
+# @onready var points: Array[Button] = _get_points()
 
-func _ready() -> void: drag_started.connect(topic.update_stack)
+# func _ready() -> void: drag_started.connect(topic.update_stack)
 
 func _get_points() -> Array[Button]:
 	var items: MarginContainer = stats.inventory.topic.stack.status

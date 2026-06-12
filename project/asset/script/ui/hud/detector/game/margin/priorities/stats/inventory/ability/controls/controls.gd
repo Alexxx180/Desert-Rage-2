@@ -8,11 +8,11 @@ var hp: HBoxContainer:
 	get: return Works.upload_at(status, _hp, "hp", Def.mhealth, "hp")
 
 var markers: HFlowContainer:
-	get: return Works.uploads(self, Def.items, "markers") # TODO SET  MARKERS FREE FROM LINKING
+	get: return null# Works.uploads(self, Def.items, "markers") # TODO SET  MARKERS FREE FROM LINKING
 
 var _hints: VBoxContainer = null
 var hints: VBoxContainer:
-	get: return Works.upload_at(self, status, _hints, Def.hints % "hints", "hints")
+	get: return null# Works.upload_at(self, status, _hints, Def.hints % "hints", "hints")
 
 var control: bool:
 	set(value):

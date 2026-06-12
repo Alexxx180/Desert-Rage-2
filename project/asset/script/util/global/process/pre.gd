@@ -19,5 +19,5 @@ const bag: PackedScene = preload("res://pre/ui/status/items.tscn")
 const chats: PackedScene = preload("res://pre/ui/menu/chat.tscn")
 const priorities: PackedScene = preload("res://pre/ui/menu/priorities.tscn")
 
-const grabber: GradientTexture2D = preload("res://pre/grabber.tres")
+# const grabber: GradientTexture2D = preload("res://pre/grabber.tres")
 const root: Script = preload("res://pre/level.gd")

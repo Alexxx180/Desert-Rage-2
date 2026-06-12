@@ -1,10 +1,25 @@
-[gd_scene load_steps=11 format=3 uid="uid://7o2xe4bosovy"]
+[gd_scene load_steps=40 format=3 uid="uid://7o2xe4bosovy"]
 
 [ext_resource type="Script" uid="uid://b3w8ueb7rmpu" path="res://asset/script/ui/hud/detector/game/margin/priorities/stats/topic/stack/stack.gd" id="1_pr1y1"]
 [ext_resource type="PackedScene" uid="uid://cddw0qxlba87p" path="res://asset/scene/ui/hud/detector/game/menu/inventory/items/bag.tscn" id="2_hk02f"]
-[ext_resource type="PackedScene" uid="uid://cd6olkpfan76j" path="res://asset/scene/ui/hud/detector/game/menu/stats/topic/stats/stats.tscn" id="3_y3dd6"]
-[ext_resource type="PackedScene" uid="uid://bi2quqenqmjhk" path="res://asset/scene/ui/hud/detector/game/menu/stats/topic/chats/chats.tscn" id="4_dfxp3"]
+[ext_resource type="FontFile" uid="uid://b37js8y80ak1k" path="res://asset/resource/media/text/font/noto_sans/NotoColorEmoji-Regular.ttf" id="3_cqb2w"]
+[ext_resource type="PackedScene" uid="uid://hw20vxdse268" path="res://asset/scene/ui/hud/detector/game/menu/inventory/status/shared/bag.tscn" id="4_b7s0k"]
 [ext_resource type="PackedScene" uid="uid://dfygwaahhajot" path="res://asset/scene/ui/hud/detector/game/menu/stats/topic/chats/tabs.tscn" id="5_aj13k"]
+[ext_resource type="Script" uid="uid://dqofd4052lruh" path="res://asset/script/ui/hud/detector/game/margin/priorities/stats/topic/stack/stats/equipment/stats/stats.gd" id="5_fer0w"]
+[ext_resource type="PackedScene" uid="uid://dsu01cw1gye0x" path="res://asset/scene/ui/hud/detector/game/menu/stats/topic/stats/heroes/heroes.tscn" id="6_exixj"]
+[ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://asset/resource/ui/theme/patterns/template/menu/settings/topic/footer.tres" id="7_hejl4"]
+[ext_resource type="Script" uid="uid://s66cv1o1gyus" path="res://asset/script/ui/hud/detector/game/margin/priorities/stats/topic/stack/stats/equipment/stats/description.gd" id="8_csg74"]
+[ext_resource type="FontFile" uid="uid://c4ygkmnbt1j7y" path="res://asset/resource/media/text/font/LTSuperiorSerif-Semibold.otf" id="9_0vblc"]
+[ext_resource type="FontFile" uid="uid://o0rgn7d13mr3" path="res://asset/resource/media/text/font/OpenSans-VariableFont_wdth,wght.ttf" id="10_10kjk"]
+[ext_resource type="FontFile" uid="uid://b2wbdbnkxcqv1" path="res://asset/resource/media/text/font/noto_sans/NotoEmoji-VariableFont_wght.ttf" id="11_q0nrq"]
+[ext_resource type="FontFile" uid="uid://qxg3lsudod7p" path="res://asset/resource/media/text/font/Championship.ttf" id="12_ekak2"]
+[ext_resource type="Texture2D" uid="uid://b2ouvbea4wbsy" path="res://asset/resource/media/image/ui/dialog/ray/look.png" id="13_qc2ou"]
+[ext_resource type="Script" uid="uid://6j3kibb78x2v" path="res://asset/script/ui/hud/detector/game/margin/priorities/stats/topic/stack/stats/equipment/stats/bag/hero.gd" id="14_fftgc"]
+[ext_resource type="Texture2D" uid="uid://duh8yijfoivq6" path="res://asset/resource/media/image/ui/dialog/rock/diminish/2.png" id="15_d8ro2"]
+[ext_resource type="Script" uid="uid://b82g80p2b6kwm" path="res://asset/script/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/hints/bottom/talk/animated.gd" id="16_baiyi"]
+[ext_resource type="PackedScene" uid="uid://dv268r05flq5" path="res://asset/scene/ui/hud/detector/game/preview/log/levels/level/number.tscn" id="17_0jpq3"]
+[ext_resource type="PackedScene" uid="uid://dhqu2qkapwck2" path="res://asset/scene/ui/hud/detector/game/menu/gameplay/chats/log.tscn" id="18_0qaq4"]
+[ext_resource type="PackedScene" uid="uid://cudeyff6t5knw" path="res://asset/scene/ui/hud/detector/game/menu/stats/title.tscn" id="19_8msaf"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qw6gd"]
 bg_color = Color(0.6, 0.6, 0.6, 0.498039)
@@ -30,6 +45,77 @@ content_margin_bottom = 10.0
 bg_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pr1y1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n3757"]
+content_margin_left = 33.0
+content_margin_top = 1.0
+content_margin_right = 9.0
+content_margin_bottom = 3.0
+bg_color = Color(0.0196078, 0.0196078, 0.0392157, 0)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_38gf1"]
+content_margin_left = 3.0
+content_margin_bottom = 3.0
+
+[sub_resource type="Gradient" id="Gradient_hf8md"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_lpjcv"]
+gradient = SubResource("Gradient_hf8md")
+fill_from = Vector2(1, 0)
+fill_to = Vector2(0, 0)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_hjtod"]
+content_margin_left = 160.0
+texture = SubResource("GradientTexture2D_lpjcv")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ui6km"]
+content_margin_left = 75.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.4745098, 0.4745098, 0.4745098, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3b44d"]
+content_margin_left = 12.0
+content_margin_top = 99.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_exo6i"]
+bg_color = Color(0.25565878, 0.2556588, 0.25565875, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.06469657, 0.06469653, 0.06469646, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s6ojn"]
+content_margin_top = 50.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c8nu0"]
+content_margin_left = 5.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8skr0"]
+content_margin_right = 3.0
+content_margin_bottom = 1.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_i0ff0"]
+content_margin_bottom = 30.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7x86q"]
+content_margin_bottom = 3.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ryb87"]
+content_margin_left = 18.0
+content_margin_top = 7.0
 
 [node name="scroll" type="ScrollContainer"]
 anchors_preset = 15
@@ -68,10 +154,320 @@ script = ExtResource("1_pr1y1")
 [node name="bag" parent="control/scroll/stack" instance=ExtResource("2_hk02f")]
 layout_mode = 2
 
-[node name="stats" parent="control/scroll/stack" instance=ExtResource("3_y3dd6")]
+[node name="equip" type="HFlowContainer" parent="control/scroll/stack"]
 layout_mode = 2
 
-[node name="chats" parent="control/scroll/stack" instance=ExtResource("4_dfxp3")]
+[node name="equip" type="Button" parent="control/scroll/stack/equip"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_fonts/font = ExtResource("3_cqb2w")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_n3757")
+text = "Снаряжение"
+
+[node name="equipped" type="Label" parent="control/scroll/stack/equip/equip"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -13.5
+offset_right = 28.0
+offset_bottom = 13.5
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_cqb2w")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxEmpty_38gf1")
+text = "🗡"
+
+[node name="bare" type="Label" parent="control/scroll/stack/equip/equip/equipped"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_cqb2w")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxEmpty_38gf1")
+text = "👏"
+
+[node name="ray" parent="control/scroll/stack/equip" instance=ExtResource("4_b7s0k")]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+text = "Рей"
+
+[node name="rock" parent="control/scroll/stack/equip" instance=ExtResource("4_b7s0k")]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+
+[node name="stats" type="MarginContainer" parent="control/scroll/stack"]
+layout_mode = 2
+theme_override_constants/margin_top = -10
+script = ExtResource("5_fer0w")
+
+[node name="heroes" parent="control/scroll/stack/stats" instance=ExtResource("6_exixj")]
+layout_mode = 2
+
+[node name="description" type="Label" parent="control/scroll/stack/stats"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+size_flags_stretch_ratio = 2.0
+theme = ExtResource("7_hejl4")
+theme_override_constants/line_spacing = 11
+theme_override_styles/normal = SubResource("StyleBoxTexture_hjtod")
+text = "Some Test object like this asdadadadsadadadadasdad фывфывфвыолвоыфвловофвлфыовфы фовыофлывофылв олфыфывофлыв олфыовлфовлофылвофолы офлыволфыовлфыовло офлывофлоывлфовлфо олфывофлыво офлыовлфыввофылвофы олфывофлвофылволвф офывловлывофлвоылфовфло офылвофылолофлвофыолв офылвофывлофвлофылво фыовлфоылвофылвофывофло фолвлфодволыфдодфоывдофлв фыволфывоыылфов "
+horizontal_alignment = 2
+autowrap_mode = 2
+script = ExtResource("8_csg74")
+
+[node name="bestiary" type="HFlowContainer" parent="control/scroll/stack"]
+layout_mode = 2
+theme_override_constants/h_separation = 7
+theme_override_constants/v_separation = 7
+
+[node name="description" type="Label" parent="control/scroll/stack/bestiary"]
+custom_minimum_size = Vector2(230, 10)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.19434929, 0.19434926, 0.19434926, 1)
+theme_override_fonts/font = ExtResource("9_0vblc")
+text = "В бестиарии находятся све-дения о противниках, люд-ях и исследованиях. Навед-ите курсор на противника чтобы получить сводку о нём."
+autowrap_mode = 2
+
+[node name="ray" type="RichTextLabel" parent="control/scroll/stack/bestiary"]
+custom_minimum_size = Vector2(300, 130)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_colors/default_color = Color(0.3137255, 0.3137255, 0.3137255, 1)
+theme_override_fonts/normal_font = ExtResource("10_10kjk")
+theme_override_fonts/bold_font = ExtResource("11_q0nrq")
+theme_override_font_sizes/normal_font_size = 13
+theme_override_styles/normal = SubResource("StyleBoxFlat_ui6km")
+bbcode_enabled = true
+text = "Рей Брайт - Решает вопросики
+
+- Все деньги мира, ваша машина?
+- Обесценятся.
+
+[b]▒[/b]  Огнестрел [b]🗡[/b] Снасти"
+scroll_active = false
+
+[node name="company" type="Label" parent="control/scroll/stack/bestiary/ray"]
+layout_mode = 1
+offset_right = 62.0
+offset_bottom = 111.0
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme = ExtResource("7_hejl4")
+theme_override_fonts/font = ExtResource("12_ekak2")
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxEmpty_3b44d")
+text = "EVERY.CO"
+
+[node name="hero" type="PanelContainer" parent="control/scroll/stack/bestiary/ray/company"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -50.0
+offset_bottom = 49.0
+grow_horizontal = 0
+size_flags_vertical = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_exo6i")
+
+[node name="image" type="TextureRect" parent="control/scroll/stack/bestiary/ray/company/hero"]
+custom_minimum_size = Vector2(45, 45)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("13_qc2ou")
+expand_mode = 1
+script = ExtResource("14_fftgc")
+
+[node name="caption" type="Label" parent="control/scroll/stack/bestiary/ray/company"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -47.0
+offset_bottom = 81.0
+grow_horizontal = 0
+size_flags_horizontal = 4
+theme = ExtResource("7_hejl4")
+theme_override_constants/line_spacing = -3
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxEmpty_s6ojn")
+text = "Он / Его
+20 лет"
+horizontal_alignment = 1
+
+[node name="rock" type="RichTextLabel" parent="control/scroll/stack/bestiary"]
+custom_minimum_size = Vector2(300, 130)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_colors/default_color = Color(0.3137255, 0.3137255, 0.3137255, 1)
+theme_override_fonts/normal_font = ExtResource("10_10kjk")
+theme_override_fonts/bold_font = ExtResource("11_q0nrq")
+theme_override_font_sizes/normal_font_size = 13
+theme_override_styles/normal = SubResource("StyleBoxFlat_ui6km")
+bbcode_enabled = true
+text = "Рок Тайт - Стажер стажировок
+
+- Вы в компании через 100 лет?
+- Бессмертный.
+
+[b]▒[/b]  Мечи [b]🗡[/b] Метательное"
+scroll_active = false
+
+[node name="company" type="Label" parent="control/scroll/stack/bestiary/rock"]
+layout_mode = 1
+offset_right = 62.0
+offset_bottom = 111.0
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme = ExtResource("7_hejl4")
+theme_override_fonts/font = ExtResource("12_ekak2")
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxEmpty_3b44d")
+text = "EVERY.CO"
+
+[node name="hero" type="PanelContainer" parent="control/scroll/stack/bestiary/rock/company"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -50.0
+offset_bottom = 49.0
+grow_horizontal = 0
+size_flags_vertical = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_exo6i")
+
+[node name="image" type="TextureRect" parent="control/scroll/stack/bestiary/rock/company/hero"]
+custom_minimum_size = Vector2(45, 45)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("15_d8ro2")
+expand_mode = 1
+script = ExtResource("14_fftgc")
+
+[node name="caption" type="Label" parent="control/scroll/stack/bestiary/rock/company"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -47.0
+offset_bottom = 81.0
+grow_horizontal = 0
+size_flags_horizontal = 4
+theme = ExtResource("7_hejl4")
+theme_override_constants/line_spacing = -3
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxEmpty_s6ojn")
+text = "Он / Его
+20 лет"
+horizontal_alignment = 1
+
+[node name="spider" type="TextureRect" parent="control/scroll/stack/bestiary"]
+process_mode = 4
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
+size_flags_horizontal = 0
+script = ExtResource("16_baiyi")
+metadata/_custom_type_script = "uid://b82g80p2b6kwm"
+
+[node name="height" type="Label" parent="control/scroll/stack/bestiary/spider"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 1
+offset_right = 110.0
+offset_bottom = 23.0
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme = ExtResource("7_hejl4")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxEmpty_c8nu0")
+text = "33 cm "
+text_overrun_behavior = 3
+
+[node name="count" type="Label" parent="control/scroll/stack/bestiary/spider"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -110.0
+offset_top = -23.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 3
+size_flags_vertical = 8
+theme = ExtResource("7_hejl4")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxEmpty_8skr0")
+text = "65"
+horizontal_alignment = 2
+text_overrun_behavior = 3
+
+[node name="number" parent="control/scroll/stack/bestiary" instance=ExtResource("17_0jpq3")]
+layout_mode = 2
+text = "[b]🕷[/b] Тип ▰▰-
+[b]⚔[/b] 215 ▰--
+[b]🛡[/b] 234 ▰▰--
+[b]🔥[/b] 215 ▰-
+[b]🫧[/b] 233 ▰▰-"
+
+[node name="effect" type="Label" parent="control/scroll/stack/bestiary"]
+custom_minimum_size = Vector2(230, 0)
+layout_mode = 2
+size_flags_vertical = 0
+theme = ExtResource("7_hejl4")
+theme_override_constants/line_spacing = -7
+theme_override_constants/paragraph_spacing = -2
+theme_override_font_sizes/font_size = 17
+theme_override_styles/normal = SubResource("StyleBoxEmpty_i0ff0")
+text = "Паук
+
+Крайне полезный противник для приключений."
+autowrap_mode = 2
+
+[node name="weak" type="Label" parent="control/scroll/stack/bestiary/effect"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -22.0
+offset_right = 61.0
+grow_vertical = 0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme = ExtResource("7_hejl4")
+theme_override_constants/line_spacing = -7
+theme_override_fonts/font = ExtResource("11_q0nrq")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxEmpty_7x86q")
+text = "🍷 🛡"
+
+[node name="skill" type="Label" parent="control/scroll/stack/bestiary/effect/weak"]
+layout_mode = 1
+offset_right = 23.0
+offset_bottom = 29.0
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("3_cqb2w")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ryb87")
+text = "🔥 🪨"
+
+[node name="chats" parent="control/scroll/stack" instance=ExtResource("18_0qaq4")]
+visible = false
+layout_mode = 2
+
+[node name="title" parent="control/scroll/stack" instance=ExtResource("19_8msaf")]
 layout_mode = 2
 
 [node name="tabs" parent="control" instance=ExtResource("5_aj13k")]

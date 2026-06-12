@@ -1,5 +1,6 @@
 extends VBoxContainer
 
+"""
 var chat: VBoxContainer
 
 @onready var logs: PanelContainer = $log
@@ -7,3 +8,4 @@ var chat: VBoxContainer
 @onready var notes: PanelContainer = $notes
 @onready var title: VBoxContainer = $title
 @onready var card: MarginContainer = $card
+"""

@@ -8,7 +8,9 @@ var hero: String
 func set_inventory(group: Node2D) -> void:
 	inventory = group.get(hero).to.inventory
 
-func _ready() -> void: pressed.connect(switch)
+func _ready() -> void:
+	pressed.connect(switch)
+	if text == "Рок": $icon.hide()
 
 func _can_drop_data(_pos: Vector2, cell: Variant) -> bool: return cell is CellDrag
 func _drop_data(_pos: Vector2, cell: Variant) -> void: trade(cell)

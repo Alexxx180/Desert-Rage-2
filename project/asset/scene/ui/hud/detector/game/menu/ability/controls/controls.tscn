@@ -1,8 +1,71 @@
-[gd_scene load_steps=4 format=3 uid="uid://trd7xarcxhy1"]
+[gd_scene load_steps=24 format=3 uid="uid://trd7xarcxhy1"]
 
 [ext_resource type="Script" uid="uid://k6kmcptwqrbg" path="res://asset/script/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/controls.gd" id="1_xi2lk"]
-[ext_resource type="PackedScene" uid="uid://dbaauq0nlgduw" path="res://now/hud/hints/hints.tscn" id="2_ulp2k"]
-[ext_resource type="PackedScene" uid="uid://cq5jn6k2bwg5n" path="res://asset/scene/ui/hud/detector/game/menu/ability/controls/topic/status/status.tscn" id="4_xi2lk"]
+[ext_resource type="PackedScene" uid="uid://c22onwmrfbca2" path="res://now/hud/markers/items.tscn" id="2_u8dui"]
+[ext_resource type="PackedScene" uid="uid://cspf6sh5v7o4v" path="res://asset/scene/ui/hud/detector/game/menu/priorities/topic/research/content/help/cards/card.tscn" id="3_mriv0"]
+[ext_resource type="Resource" uid="uid://co4ybxow1lq4x" path="res://asset/resource/media/text/manual/preview/content/motion/motion.tres" id="4_legjx"]
+[ext_resource type="Script" uid="uid://4q2n1sfdf1j" path="res://asset/script/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/hints/bottom/bottom.gd" id="5_fanus"]
+[ext_resource type="PackedScene" uid="uid://bl1pm3rkee4xl" path="res://asset/scene/ui/hud/detector/game/preview/bottom/talk.tscn" id="6_lkvne"]
+[ext_resource type="Script" uid="uid://cufeg7h0ydck4" path="res://asset/script/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/topic/status/space/title/status/status.gd" id="7_4at73"]
+[ext_resource type="FontFile" uid="uid://cjafv81djmqe8" path="res://asset/resource/media/text/font/Touchscreen-Regular.ttf" id="8_4at73"]
+[ext_resource type="Script" uid="uid://cmeppk3ealnv8" path="res://asset/script/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/hints/space/preview/toggle.gd" id="9_rcer3"]
+[ext_resource type="PackedScene" uid="uid://dvdimdxij23df" path="res://asset/scene/util/timer/hide/hider/hover/hooder.tscn" id="10_avyle"]
+[ext_resource type="FontFile" uid="uid://cwksbiskkcf5d" path="res://asset/resource/media/text/font/noto_sans/NotoSansMath-Regular.ttf" id="11_euraa"]
+[ext_resource type="FontFile" uid="uid://b37js8y80ak1k" path="res://asset/resource/media/text/font/noto_sans/NotoColorEmoji-Regular.ttf" id="12_ot86l"]
+[ext_resource type="FontFile" uid="uid://b2wbdbnkxcqv1" path="res://asset/resource/media/text/font/noto_sans/NotoEmoji-VariableFont_wght.ttf" id="13_a68jl"]
+
+[sub_resource type="Gradient" id="Gradient_jew5v"]
+offsets = PackedFloat32Array(0, 0.61255413, 1)
+colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 0.03529412, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_tnqry"]
+gradient = SubResource("Gradient_jew5v")
+fill_from = Vector2(0.5, 0)
+fill_to = Vector2(0.5, 1)
+metadata/_snap_enabled = true
+
+[sub_resource type="Gradient" id="Gradient_fanus"]
+offsets = PackedFloat32Array(0.11860465, 1)
+colors = PackedColorArray(0, 0, 0, 0.78431374, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_jew5v"]
+gradient = SubResource("Gradient_fanus")
+fill_from = Vector2(0.5, 1)
+fill_to = Vector2(0.5, 0)
+metadata/_snap_enabled = true
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_lkvne"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 5.0
+texture = SubResource("GradientTexture2D_jew5v")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bjbyt"]
+content_margin_left = 10.0
+content_margin_top = 5.0
+content_margin_right = 10.0
+content_margin_bottom = 5.0
+bg_color = Color(0, 0, 0, 0.78431374)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dt5p5"]
+content_margin_left = 3.0
+content_margin_top = 0.0
+bg_color = Color(0.0196078, 0.0196078, 0.0588235, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_a3bmt"]
+content_margin_left = 3.0
+content_margin_bottom = 3.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f27su"]
+content_margin_left = 4.0
+content_margin_top = 0.0
+bg_color = Color(0.0196078, 0.0196078, 0.0588235, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b7yaw"]
+content_margin_left = 8.0
+content_margin_top = 7.0
+content_margin_bottom = 0.0
 
 [node name="controls" type="VBoxContainer"]
 anchors_preset = 15
@@ -15,21 +78,198 @@ size_flags_stretch_ratio = 0.96
 mouse_filter = 2
 script = ExtResource("1_xi2lk")
 
-[node name="status" type="HBoxContainer" parent="."]
+[node name="markers" parent="." instance=ExtResource("2_u8dui")]
 layout_mode = 2
 
-[node name="hp" type="Control" parent="status"]
+[node name="space" type="Control" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="chat" type="VBoxContainer" parent="space"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 260.0
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="log" type="TextureRect" parent="space/chat"]
+clip_children = 2
+custom_minimum_size = Vector2(260, 128)
+layout_mode = 2
+size_flags_vertical = 3
+texture = SubResource("GradientTexture2D_tnqry")
+
+[node name="text" type="RichTextLabel" parent="space/chat/log"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxTexture_lkvne")
+text = "asdsdadhajdhjasdadasdadsd jdsadjasdd asdadasdda
+asdasds
+asdasds
+asdsdadhajdhjasdadasdadsd jdsadjasdd asdadasdda
+asdasds
+asdasds
+asdsdadhajdhjasdadasdadsd jdsadjasdd asdadasdda
+asdasds
+asdasds
+asdsdadhajdhjasdadasdadsd jdsadjasdd asdadasdda
+asdasds
+asdasds"
+vertical_alignment = 2
+
+[node name="dialog" type="RichTextLabel" parent="space/chat"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_bjbyt")
+text = "asdsdadhajdhjasdadasdadsd jdsadjasdd asdadasdda
+asdasds
+asdasds
+asdsdadhajdhjasdadasdadsd jdsadjasdd asdadasdda
+asdasds
+asdasds
+asdsdadhajdhjasdadasdadsd jdsadjasdd asdadasdda
+asdasds
+asdasds
+asdsdadhajdhjasdadasdadsd jdsadjasdd asdadasdda
+asdasds
+asdasds"
+vertical_alignment = 2
+
+[node name="help" type="VBoxContainer" parent="space"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -260.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="motion" parent="space/help" instance=ExtResource("3_mriv0")]
+layout_mode = 2
+size_flags_vertical = 10
+hint = ExtResource("4_legjx")
+
+[node name="bottom" type="Control" parent="."]
+custom_minimum_size = Vector2(0, 220)
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.01
+script = ExtResource("5_fanus")
+
+[node name="talk" parent="bottom" instance=ExtResource("6_lkvne")]
+layout_mode = 1
+offset_right = 60.0
+offset_bottom = 60.0
+theme_override_constants/margin_left = 0
+
+[node name="status" type="HBoxContainer" parent="bottom"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -30.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 0
+script = ExtResource("7_4at73")
+
+[node name="pause" type="Button" parent="bottom/status"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+focus_mode = 1
+theme_override_fonts/font = ExtResource("8_4at73")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_dt5p5")
+text = "||"
+alignment = 0
+script = ExtResource("9_rcer3")
+path = "../../../../../../../stats/inventory/ability/controls/hints/space/preview/help"
+
+[node name="hooder" parent="bottom/status/pause" instance=ExtResource("10_avyle")]
+
+[node name="progress" type="ScrollContainer" parent="bottom/status"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="slot" type="Label" parent="bottom/status/progress"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("12_ot86l")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxEmpty_a3bmt")
+text = "🎯"
+vertical_alignment = 1
+
+[node name="toggle" type="Button" parent="bottom/status"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+focus_mode = 1
+theme_override_fonts/font = ExtResource("13_a68jl")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_f27su")
+text = "🔬"
+alignment = 0
+script = ExtResource("9_rcer3")
+path = "../../../../../../../stats/inventory/ability/controls/hints/space/preview/help"
+
+[node name="hooder" parent="bottom/status/toggle" instance=ExtResource("10_avyle")]
+
+[node name="toggle2" type="Button" parent="bottom/status"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+focus_mode = 1
+theme_override_fonts/font = ExtResource("13_a68jl")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_f27su")
+text = "🔍"
+alignment = 0
+script = ExtResource("9_rcer3")
+path = "../../../../../../../stats/inventory/ability/controls/hints/space/preview/help"
+
+[node name="hooder" parent="bottom/status/toggle2" instance=ExtResource("10_avyle")]
+
+[node name="toggle3" type="Button" parent="bottom/status"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+focus_mode = 1
+theme_override_fonts/font = ExtResource("13_a68jl")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_f27su")
+text = "👁"
+alignment = 0
+script = ExtResource("9_rcer3")
+path = "../../../../../../../stats/inventory/ability/controls/hints/space/preview/help"
+
+[node name="hooder" parent="bottom/status/toggle3" instance=ExtResource("10_avyle")]
+
+[node name="hidden" type="Label" parent="bottom/status/toggle3"]
 visible = false
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="space" type="Control" parent="status"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="hints" parent="." instance=ExtResource("2_ulp2k")]
-layout_mode = 2
-
-[node name="topic" parent="." instance=ExtResource("4_xi2lk")]
-custom_minimum_size = Vector2(0, 30)
-layout_mode = 2
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.0
+offset_top = -26.0
+offset_right = 19.0
+offset_bottom = 26.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.00295, 0.994388)
+theme_override_fonts/font = ExtResource("11_euraa")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxEmpty_b7yaw")
+text = "⌣"

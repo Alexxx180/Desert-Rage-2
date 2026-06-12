@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://cdpsykqf6eaa2"]
+[gd_scene load_steps=33 format=3 uid="uid://cdpsykqf6eaa2"]
 
 [ext_resource type="PackedScene" uid="uid://cspf6sh5v7o4v" path="res://asset/scene/ui/hud/detector/game/menu/priorities/topic/research/content/help/cards/card.tscn" id="3_dajg6"]
 [ext_resource type="Resource" uid="uid://co4ybxow1lq4x" path="res://asset/resource/media/text/manual/preview/content/motion/motion.tres" id="3_wr4c2"]
@@ -32,12 +32,26 @@
 [ext_resource type="Resource" uid="uid://bam1ufd2mvty3" path="res://asset/resource/media/text/manual/preview/content/motion/chains.tres" id="31_gfwsx"]
 [ext_resource type="Resource" uid="uid://c1b2tr8iwdyy7" path="res://asset/resource/media/text/manual/preview/content/action/spring.tres" id="32_wr4c2"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bo7ln"]
+content_margin_left = 25.0
+content_margin_top = 0.0
+content_margin_right = 10.0
+
 [node name="cards" type="HFlowContainer"]
 offset_left = 2.0
 offset_top = 2.0
 offset_right = 1150.0
 offset_bottom = 2878.0
 size_flags_horizontal = 3
+
+[node name="help" type="Label" parent="."]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.29219002, 0.29219005, 0.29219002, 1)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_bo7ln")
+text = "Тут описывается помощь. Если не понимаете, что конкретно нужно сделать в той или иной ситуации или забыли про разные умения и базовые возмо-жности героев, заглядыв-айте сюда."
+vertical_alignment = 1
+autowrap_mode = 2
 
 [node name="motion" parent="." instance=ExtResource("3_dajg6")]
 layout_mode = 2

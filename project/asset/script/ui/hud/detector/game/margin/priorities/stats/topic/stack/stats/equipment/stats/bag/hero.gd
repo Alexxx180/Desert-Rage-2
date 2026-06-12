@@ -1,4 +1,4 @@
-extends TextureButton
+extends TextureRect#Button
 
 signal switch_bags(bag: String)
 
@@ -6,7 +6,7 @@ signal switch_bags(bag: String)
 
 var inventory: Node
 
-func _ready() -> void: pressed.connect(switch)
+# func _ready() -> void: pressed.connect(switch)
 
 func set_inventory(group: Node2D) -> void:
 	inventory = group.get(name).to.inventory

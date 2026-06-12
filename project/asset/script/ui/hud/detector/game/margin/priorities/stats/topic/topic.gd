@@ -17,4 +17,4 @@ func update_stack() -> VBoxContainer:
 	return _stack
 
 func update_scroll() -> ScrollContainer:
-	return Works.upload(self, _scroll, Def.game % "stats", "stats")
+	return null # Works.upload(self, _scroll, Def.game % "stats", "stats")
