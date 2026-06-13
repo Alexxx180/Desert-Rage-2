@@ -9,10 +9,8 @@ var sprite: AnimatedSprite2D: # var player: AnimationPlayer
 var material: ShaderMaterial:
 	get: return sprite.material
 
-var directed: int = 0   # 0  1  -1
-var x: PackedByteArray = [0, 5, 2]
-var y: PackedByteArray = [2, 0, 1]
-# 01234567
+var directed: int = 0
+
 enum { CHAINS, JUMP, GROUND, DIRECTED = 8 }
 enum { BODY, HANG, COMBO }
 enum { PULL, RUN, AIR }
@@ -56,7 +54,7 @@ func direct(dir: Vector2i) -> void:
 		stop_animation()
 		return # sprite.frame = (sprite.frame + 1) & 15
 	Def.MOVE
-	directed = x[dir.x] + y[dir.y]
+	directed = Def.direct(dir)
 	var anim: int = get_anim()
 	sprite.animation = sprites[anim]
 	#HUD.level.entity[HUD.hero].animation.stop()

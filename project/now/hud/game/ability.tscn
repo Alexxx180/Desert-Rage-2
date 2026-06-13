@@ -1,14 +1,11 @@
-[gd_scene load_steps=22 format=3 uid="uid://bo6wehp5f8viu"]
+[gd_scene load_steps=14 format=3 uid="uid://bo6wehp5f8viu"]
 
 [ext_resource type="Script" uid="uid://dx0yflfj7hnm4" path="res://asset/script/ui/hud/detector/game/margin/priorities/stats/inventory/ability/topic/stack/stack.gd" id="1_hq6jf"]
+[ext_resource type="PackedScene" uid="uid://br061ue566x82" path="res://asset/scene/ui/hud/detector/game/menu/gameplay/skills.tscn" id="3_ogicf"]
 [ext_resource type="PackedScene" uid="uid://cq5jn6k2bwg5n" path="res://asset/scene/ui/hud/detector/game/menu/ability/controls/topic/status/status.tscn" id="3_uklt7"]
-[ext_resource type="PackedScene" uid="uid://qlgo5b48kj7l" path="res://now/hud/status/slots.tscn" id="4_g4gaf"]
-[ext_resource type="PackedScene" uid="uid://l7thqkrsol4m" path="res://asset/scene/ui/hud/detector/game/menu/priorities/perks.tscn" id="6_33ncq"]
-[ext_resource type="Script" uid="uid://qh4kirhvva7r" path="res://asset/script/ui/hud/detector/game/margin/priorities/stats/inventory/ability/topic/stack/skill/item/hero.gd" id="7_s01kp"]
+[ext_resource type="FontFile" uid="uid://c4ygkmnbt1j7y" path="res://asset/resource/media/text/font/LTSuperiorSerif-Semibold.otf" id="5_grhtg"]
 [ext_resource type="FontFile" uid="uid://b37js8y80ak1k" path="res://asset/resource/media/text/font/noto_sans/NotoColorEmoji-Regular.ttf" id="8_ln473"]
 [ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://asset/resource/ui/theme/patterns/template/menu/settings/topic/footer.tres" id="9_xc6ys"]
-[ext_resource type="Texture2D" uid="uid://6lt3fgbwoayr" path="res://asset/resource/media/image/actor/player/vfx/skills/ray/fire.svg" id="10_m6r0r"]
-[ext_resource type="Texture2D" uid="uid://bhb75html3edk" path="res://asset/resource/media/image/actor/player/vfx/skills/ray/whip.svg" id="11_qgny1"]
 [ext_resource type="PackedScene" uid="uid://c6gpqe0httyfi" path="res://asset/scene/ui/hud/detector/game/menu/ability/title.tscn" id="12_54b4y"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uklt7"]
@@ -43,29 +40,9 @@ bg_color = Color(0, 0, 0, 1)
 expand_margin_left = 12.0
 expand_margin_right = 12.0
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ooq4j"]
-content_margin_left = 40.0
-content_margin_right = 30.0
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5khej"]
-content_margin_bottom = 6.0
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g4gaf"]
-bg_color = Color(0.6, 0.6, 0.6, 0)
-border_width_bottom = 1
-border_color = Color(0, 0.6509804, 0.92941177, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_irp6s"]
-bg_color = Color(0.6, 0.6, 0.6, 0)
-border_width_bottom = 1
-border_color = Color(0.7921569, 0.043137256, 0.2901961, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_33ncq"]
-bg_color = Color(0.6, 0.6, 0.6, 0)
-border_width_bottom = 1
-border_color = Color(0.5254902, 0.84313726, 0.18431373, 1)
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hq6jf"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_grhtg"]
+content_margin_left = 5.0
+content_margin_right = 5.0
 
 [node name="scroll" type="ScrollContainer"]
 anchors_preset = 15
@@ -87,92 +64,66 @@ custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 fixed = true
 
-[node name="slots" parent="stack/status" instance=ExtResource("4_g4gaf")]
-visible = false
-custom_minimum_size = Vector2(0, 30)
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_top = 0.0
-offset_right = 0.0
-offset_bottom = 26.0
-grow_horizontal = 2
-horizontal_alignment = 0
-autowrap_mode = 2
-
-[node name="perks" parent="stack" instance=ExtResource("6_33ncq")]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 2.0
-
-[node name="ability" type="HBoxContainer" parent="stack"]
-layout_mode = 2
-size_flags_horizontal = 3
-script = ExtResource("7_s01kp")
-
-[node name="title" type="VBoxContainer" parent="stack/ability"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/separation = 10
-
-[node name="tags" type="HFlowContainer" parent="stack/ability/title"]
+[node name="pallete" type="HFlowContainer" parent="stack"]
 layout_mode = 2
 theme_override_constants/h_separation = 10
 
-[node name="caption" type="Label" parent="stack/ability/title/tags"]
+[node name="0" type="Button" parent="stack/pallete"]
 layout_mode = 2
-size_flags_horizontal = 8
-theme_override_colors/font_color = Color(0.64705884, 0.64705884, 0.64705884, 1)
-theme_override_font_sizes/font_size = 24
-theme_override_styles/normal = SubResource("StyleBoxEmpty_ooq4j")
-text = "Факел"
+theme_override_colors/font_color = Color(0.3403393, 0.34033933, 0.3403393, 1)
+theme_override_fonts/font = ExtResource("5_grhtg")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxEmpty_grhtg")
+text = "Бой"
 
-[node name="icon" type="Label" parent="stack/ability/title/tags/caption"]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_top = -19.5
-offset_right = 35.0
-offset_bottom = 19.5
-grow_vertical = 2
-size_flags_horizontal = 0
+[node name="1" type="Button" parent="stack/pallete"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.3403393, 0.34033933, 0.3403393, 1)
+theme_override_fonts/font = ExtResource("5_grhtg")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxEmpty_grhtg")
+text = "Пал. 1"
+
+[node name="2" type="Button" parent="stack/pallete"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.3403393, 0.34033933, 0.3403393, 1)
+theme_override_fonts/font = ExtResource("5_grhtg")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxEmpty_grhtg")
+text = "Пал. 2"
+
+[node name="3" type="Button" parent="stack/pallete"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.3403393, 0.34033933, 0.3403393, 1)
+theme_override_fonts/font = ExtResource("5_grhtg")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxEmpty_grhtg")
+text = "Пал. 3"
+
+[node name="4" type="Button" parent="stack/pallete"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.3403393, 0.34033933, 0.3403393, 1)
+theme_override_fonts/font = ExtResource("5_grhtg")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxEmpty_grhtg")
+text = "Пал. 4"
+
+[node name="5" type="Button" parent="stack/pallete"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.3403393, 0.34033933, 0.3403393, 1)
+theme_override_fonts/font = ExtResource("5_grhtg")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxEmpty_grhtg")
+text = "Пал. 5"
+
+[node name="set" type="Button" parent="stack/pallete"]
+layout_mode = 2
 theme_override_fonts/font = ExtResource("8_ln473")
-theme_override_font_sizes/font_size = 28
-theme_override_styles/normal = SubResource("StyleBoxEmpty_5khej")
-text = "🔥"
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxEmpty_grhtg")
+text = "🔥🎣"
 
-[node name="blue" type="Label" parent="stack/ability/title/tags"]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_stretch_ratio = 0.75
-theme = ExtResource("9_xc6ys")
-theme_override_font_sizes/font_size = 18
-theme_override_styles/normal = SubResource("StyleBoxFlat_g4gaf")
-text = "Плавление"
-horizontal_alignment = 2
-
-[node name="red" type="Label" parent="stack/ability/title/tags"]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_stretch_ratio = 0.75
-theme = ExtResource("9_xc6ys")
-theme_override_font_sizes/font_size = 18
-theme_override_styles/normal = SubResource("StyleBoxFlat_irp6s")
-text = "Ожоги"
-horizontal_alignment = 2
-
-[node name="green" type="Label" parent="stack/ability/title/tags"]
-layout_mode = 2
-size_flags_horizontal = 2
-size_flags_stretch_ratio = 0.75
-theme = ExtResource("9_xc6ys")
-theme_override_font_sizes/font_size = 18
-theme_override_styles/normal = SubResource("StyleBoxFlat_33ncq")
-text = "Дезинфекция"
-horizontal_alignment = 2
-
-[node name="effect" type="Label" parent="stack/ability/title"]
+[node name="effect" type="Label" parent="stack"]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -180,48 +131,30 @@ size_flags_vertical = 1
 size_flags_stretch_ratio = 0.25
 theme = ExtResource("9_xc6ys")
 theme_override_font_sizes/font_size = 18
-text = "Сила, дарованная людям с незапамятных времен. Может как помочь раненному, так и навредить противнику. Позволяет убирать помехи на пути."
+text = "Пламя - сила, помогающая раненному и вредящая противнику. Позволяет плавить лёд и зажигать факелы.
+Кнут - элемент присутствия и гибкости, позволяющий хвататься за столбы."
 autowrap_mode = 2
 
-[node name="sets" type="Label" parent="stack/ability"]
-custom_minimum_size = Vector2(100, 55)
+[node name="skills" parent="stack" instance=ExtResource("3_ogicf")]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 0
-size_flags_stretch_ratio = 0.25
-theme = ExtResource("9_xc6ys")
-theme_override_font_sizes/font_size = 18
-theme_override_styles/normal = SubResource("StyleBoxEmpty_hq6jf")
-text = "Умения"
-horizontal_alignment = 1
-autowrap_mode = 2
-
-[node name="ray" type="GridContainer" parent="stack/ability/sets"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -28.0
-offset_top = -26.0
-offset_right = 28.0
-grow_horizontal = 2
-grow_vertical = 0
-size_flags_horizontal = 4
-columns = 2
-
-[node name="fire" type="TextureRect" parent="stack/ability/sets/ray"]
-custom_minimum_size = Vector2(26, 26)
-layout_mode = 2
-texture = ExtResource("10_m6r0r")
-expand_mode = 1
-
-[node name="whip" type="TextureRect" parent="stack/ability/sets/ray"]
-custom_minimum_size = Vector2(26, 26)
-layout_mode = 2
-texture = ExtResource("11_qgny1")
-expand_mode = 1
 
 [node name="title" parent="stack" instance=ExtResource("12_54b4y")]
 layout_mode = 2
+text = " Здесь описаны умения и способности - приёмы ваших героев. Описание способности включает в себя комбо, стоимость, площадь и эффект.
+
+[table=2]
+[cell expand][left]⠀[b][i]✨[/i][/b]⠀Эффект - полезное действие способности[/left][/cell][cell][left]⠀[b][i]5️⃣[/i][/b]⠀Стоимость - количество ресурса для эффекта[/left][/cell]
+[cell expand][left]⠀[b][i]✊[/i][/b]⠀Комбо - набор умений - слотов, используемых для получения эффекта.[/left][/cell][cell][left]⠀[b][i]🫓[/i][/b]⠀Площадь - сколько противников может быть затронуто способностью[/left][/cell]
+[cell expand][left]⠀⠀·⠀⠀Площадь зоны попадания по сущностям определяется специальными отметками.[/left][/cell]
+[cell][left]⠀  I  ⠀ - одна сущность или колонна сущностей стоящих друг за другом[/left][/cell]
+[cell expand][left]⠀ •I• ⠀ - малая группы сущностей, импульс по небольшой площади[/left][/cell]
+[cell][left]⠀ III ⠀ - малая группы сущностей, эффект по небольшой площади[/left][/cell]
+[cell expand][left]⠀.•I•.⠀ - большая группа сущностей, импульс по большой площади[/left][/cell]
+[cell][left]⠀IIIII⠀ - большая группа сущностей, эффект по большой площади или по всем сущностям на местности[/left][/cell]
+[/table]
+
+⠀·⠀Боевая палитра позволяет вам выбрать определенные способности, которые персонаж будет использовать при тесном контакте с противником. Для активации вы должны ритмично сближаться с противником и отдаляться от него. Чтобы отключить действие боевой палитры и перейти обратно в режим близкого боя нажмите \"Бой\".
+
+⠀·⠀Для создания новой палитры выберите любой номер с \"Пал.\". Нажмите на способности, которые будут добавлены в конец последовательности. Если вам необходимо удалить способности - выберите описание, режим изменится с \"x\" на \"+\", затем выберите добавленную способность - все ее вхождения будут удалены, а кол-во максимально возможных способностей снова увеличится.
+ 
+⠀·⠀Чтобы увидеть слоты, которые будут задействованы в последовательности, немного приоткройте данную панель и прокрутите её в самый верх. Для того чтобы использовать дальнобойные снаряды, нажимайте курок, когда увидите [b]🎯[/b] в слотах."

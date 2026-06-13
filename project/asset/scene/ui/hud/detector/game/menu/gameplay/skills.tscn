@@ -1,8 +1,8 @@
 [gd_scene load_steps=15 format=3 uid="uid://br061ue566x82"]
 
-[ext_resource type="StyleBox" uid="uid://bsggnr5c3uk7o" path="res://asset/resource/ui/theme/style/panel/preview.tres" id="1_e8epa"]
 [ext_resource type="Script" uid="uid://ct0gm416r5nna" path="res://asset/script/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/hints/skills.gd" id="1_g5mgg"]
 [ext_resource type="FontFile" uid="uid://b37js8y80ak1k" path="res://asset/resource/media/text/font/noto_sans/NotoColorEmoji-Regular.ttf" id="1_w1r1c"]
+[ext_resource type="PackedScene" uid="uid://qlgo5b48kj7l" path="res://now/hud/status/slots.tscn" id="4_kw8kk"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e8epa"]
 content_margin_left = 55.0
@@ -26,7 +26,7 @@ content_margin_left = 15.0
 content_margin_bottom = 8.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3q034"]
-content_margin_right = 120.0
+content_margin_right = 140.0
 content_margin_bottom = 5.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_v0un7"]
@@ -57,20 +57,14 @@ border_color = Color(0.03137255, 0.03137255, 0.03137255, 1)
 content_margin_left = 15.0
 content_margin_bottom = 8.0
 
-[node name="skills" type="PanelContainer"]
-anchors_preset = 10
-anchor_right = 1.0
+[node name="skill" type="GridContainer"]
+offset_right = 1152.0
 offset_bottom = 702.0
-grow_horizontal = 2
-theme_override_styles/panel = ExtResource("1_e8epa")
-script = ExtResource("1_g5mgg")
-
-[node name="skill" type="GridContainer" parent="."]
-layout_mode = 2
 theme = SubResource("Theme_50ghp")
 columns = 2
+script = ExtResource("1_g5mgg")
 
-[node name="slap" type="Button" parent="skill"]
+[node name="slap" type="Button" parent="."]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -79,7 +73,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_v0un7")
 text = "Подзатыльник	"
 alignment = 0
 
-[node name="view" type="Label" parent="skill/slap"]
+[node name="view" type="Label" parent="slap"]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -93,7 +87,7 @@ theme_override_font_sizes/font_size = 28
 theme_override_styles/normal = SubResource("StyleBoxEmpty_e1frd")
 text = "👋"
 
-[node name="slots" type="Label" parent="skill/slap"]
+[node name="slots" type="Label" parent="slap"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 1
 anchors_preset = 6
@@ -115,7 +109,7 @@ text = "✊"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="zone" type="Label" parent="skill/slap"]
+[node name="zone" type="Label" parent="slap"]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 1
 anchors_preset = 6
@@ -134,7 +128,7 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_v0un7")
 text = "       I"
 horizontal_alignment = 2
 
-[node name="kick" type="Button" parent="skill"]
+[node name="kick" type="Button" parent="."]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -143,7 +137,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_v0un7")
 text = "Пинок"
 alignment = 0
 
-[node name="view" type="Label" parent="skill/kick"]
+[node name="view" type="Label" parent="kick"]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -157,7 +151,7 @@ theme_override_font_sizes/font_size = 28
 theme_override_styles/normal = SubResource("StyleBoxEmpty_e1frd")
 text = "🦶"
 
-[node name="slots" type="Label" parent="skill/kick"]
+[node name="slots" type="Label" parent="kick"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 1
 anchors_preset = 6
@@ -179,7 +173,7 @@ text = "🦶"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="zone" type="Label" parent="skill/kick"]
+[node name="zone" type="Label" parent="kick"]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 1
 anchors_preset = 6
@@ -198,14 +192,15 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_v0un7")
 text = "       I"
 horizontal_alignment = 2
 
-[node name="double" type="Button" parent="skill"]
+[node name="double" type="Button" parent="."]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 18
 text = "Двоечка"
 alignment = 0
 
-[node name="icon" type="Label" parent="skill/double"]
+[node name="icon" type="Label" parent="double"]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -223,7 +218,7 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_e1frd")
 text = "👊
 ⠀👊"
 
-[node name="slots" type="Label" parent="skill/double"]
+[node name="slots" type="Label" parent="double"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 1
 anchors_preset = 6
@@ -245,7 +240,7 @@ text = "✊⠀✊"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="zone" type="Label" parent="skill/double"]
+[node name="zone" type="Label" parent="double"]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 1
 anchors_preset = 6
@@ -264,15 +259,21 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_v0un7")
 text = "       I"
 horizontal_alignment = 2
 
-[node name="cure" type="Button" parent="skill"]
+[node name="slots" parent="." instance=ExtResource("4_kw8kk")]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+autowrap_mode = 2
+
+[node name="cure" type="Button" parent="."]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.56078434, 1, 0.5294118, 1)
+theme_override_font_sizes/font_size = 18
 text = "Лечение"
 alignment = 0
 
-[node name="icon" type="Label" parent="skill/cure"]
+[node name="icon" type="Label" parent="cure"]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -290,7 +291,7 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_vlwq6")
 text = "🔥
 🩹"
 
-[node name="slots" type="Label" parent="skill/cure"]
+[node name="slots" type="Label" parent="cure"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 1
 anchors_preset = 6
@@ -312,7 +313,7 @@ text = "✊⠀🔥⠀🔥"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="zone" type="Label" parent="skill/cure"]
+[node name="zone" type="Label" parent="cure"]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 1
 anchors_preset = 6
@@ -332,7 +333,7 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_v0un7")
 text = "2       I"
 horizontal_alignment = 2
 
-[node name="cost" type="ProgressBar" parent="skill/cure"]
+[node name="cost" type="ProgressBar" parent="cure"]
 custom_minimum_size = Vector2(2, 0)
 layout_mode = 1
 anchors_preset = 11
@@ -352,15 +353,16 @@ value = 2.0
 fill_mode = 3
 show_percentage = false
 
-[node name="two-punch" type="Button" parent="skill"]
+[node name="two-punch" type="Button" parent="."]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 18
 text = "Выпад"
 alignment = 0
 
-[node name="icon" type="Label" parent="skill/two-punch"]
+[node name="icon" type="Label" parent="two-punch"]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -377,7 +379,7 @@ theme_override_font_sizes/font_size = 26
 theme_override_styles/normal = SubResource("StyleBoxEmpty_vlwq6")
 text = "🏓"
 
-[node name="slots" type="Label" parent="skill/two-punch"]
+[node name="slots" type="Label" parent="two-punch"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 1
 anchors_preset = 6
@@ -399,7 +401,7 @@ text = "🦶⠀✊⠀✊"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="zone" type="Label" parent="skill/two-punch"]
+[node name="zone" type="Label" parent="two-punch"]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 1
 anchors_preset = 6
@@ -419,16 +421,17 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_v0un7")
 text = "       I"
 horizontal_alignment = 2
 
-[node name="aid" type="Button" parent="skill"]
+[node name="aid" type="Button" parent="."]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.56078434, 1, 0.5294118, 1)
+theme_override_font_sizes/font_size = 18
 theme_override_styles/normal = SubResource("StyleBoxFlat_685r6")
 text = "Подкрепление"
 alignment = 0
 
-[node name="icon" type="Label" parent="skill/aid"]
+[node name="icon" type="Label" parent="aid"]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -446,7 +449,7 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_vlwq6")
 text = "🎯
 🩹"
 
-[node name="slots" type="Label" parent="skill/aid"]
+[node name="slots" type="Label" parent="aid"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 1
 anchors_preset = 6
@@ -468,7 +471,7 @@ text = "🎯⠀🔥⠀🔥"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="zone" type="Label" parent="skill/aid"]
+[node name="zone" type="Label" parent="aid"]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 1
 anchors_preset = 6
@@ -485,10 +488,10 @@ size_flags_horizontal = 8
 theme_override_colors/font_color = Color(0.56078434, 1, 0.5294118, 1)
 theme_override_font_sizes/font_size = 18
 theme_override_styles/normal = SubResource("StyleBoxEmpty_v0un7")
-text = "2       I"
+text = "2       I "
 horizontal_alignment = 2
 
-[node name="cost" type="ProgressBar" parent="skill/aid"]
+[node name="cost" type="ProgressBar" parent="aid"]
 custom_minimum_size = Vector2(2, 0)
 layout_mode = 1
 anchors_preset = 11
@@ -508,15 +511,16 @@ value = 2.0
 fill_mode = 3
 show_percentage = false
 
-[node name="single-shot" type="Button" parent="skill"]
+[node name="single-shot" type="Button" parent="."]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 18
 text = "Выстрел"
 alignment = 0
 
-[node name="icon" type="Label" parent="skill/single-shot"]
+[node name="icon" type="Label" parent="single-shot"]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -533,7 +537,7 @@ theme_override_font_sizes/font_size = 26
 theme_override_styles/normal = SubResource("StyleBoxEmpty_vlwq6")
 text = "🔫"
 
-[node name="slots" type="Label" parent="skill/single-shot"]
+[node name="slots" type="Label" parent="single-shot"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 1
 anchors_preset = 6
@@ -555,7 +559,7 @@ text = "🎯"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="zone" type="Label" parent="skill/single-shot"]
+[node name="zone" type="Label" parent="single-shot"]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 1
 anchors_preset = 6
@@ -575,15 +579,16 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_v0un7")
 text = "       I"
 horizontal_alignment = 2
 
-[node name="fire" type="Button" parent="skill"]
+[node name="fire" type="Button" parent="."]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 18
 text = "Факел"
 alignment = 0
 
-[node name="icon" type="Label" parent="skill/fire"]
+[node name="icon" type="Label" parent="fire"]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -600,7 +605,7 @@ theme_override_font_sizes/font_size = 26
 theme_override_styles/normal = SubResource("StyleBoxEmpty_vlwq6")
 text = "🔥"
 
-[node name="slots" type="Label" parent="skill/fire"]
+[node name="slots" type="Label" parent="fire"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 1
 anchors_preset = 6
@@ -622,7 +627,7 @@ text = "🔥"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="zone" type="Label" parent="skill/fire"]
+[node name="zone" type="Label" parent="fire"]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 1
 anchors_preset = 6
@@ -642,15 +647,16 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_v0un7")
 text = "1     •I•"
 horizontal_alignment = 2
 
-[node name="whip" type="Button" parent="skill"]
+[node name="whip" type="Button" parent="."]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 18
 text = "Кнут"
 alignment = 0
 
-[node name="icon" type="Label" parent="skill/whip"]
+[node name="icon" type="Label" parent="whip"]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -667,7 +673,7 @@ theme_override_font_sizes/font_size = 26
 theme_override_styles/normal = SubResource("StyleBoxEmpty_vlwq6")
 text = "🎣"
 
-[node name="slots" type="Label" parent="skill/whip"]
+[node name="slots" type="Label" parent="whip"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 1
 anchors_preset = 6
@@ -689,7 +695,7 @@ text = "🎣"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="zone" type="Label" parent="skill/whip"]
+[node name="zone" type="Label" parent="whip"]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 1
 anchors_preset = 6
@@ -706,18 +712,19 @@ size_flags_horizontal = 8
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 18
 theme_override_styles/normal = SubResource("StyleBoxEmpty_v0un7")
-text = "1       ↟"
+text = "1       I"
 horizontal_alignment = 2
 
-[node name="breakfly" type="Button" parent="skill"]
+[node name="breakfly" type="Button" parent="."]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 18
 text = "Отбойный молоток"
 alignment = 0
 
-[node name="icon" type="Label" parent="skill/breakfly"]
+[node name="icon" type="Label" parent="breakfly"]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -735,7 +742,7 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_mt5am")
 text = "⠀🔨
 🎯"
 
-[node name="slots" type="Label" parent="skill/breakfly"]
+[node name="slots" type="Label" parent="breakfly"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 1
 anchors_preset = 6
@@ -757,7 +764,7 @@ text = "✊⠀🎯"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="zone" type="Label" parent="skill/breakfly"]
+[node name="zone" type="Label" parent="breakfly"]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 1
 anchors_preset = 6

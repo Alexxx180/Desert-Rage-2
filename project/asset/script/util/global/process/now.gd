@@ -39,7 +39,12 @@ const hints: PackedStringArray = ["MM", "MJ", "MB", "ML", "CN", "AA", "AE", "AF"
 	"CM", "CF", "IM", "EN", "PS", "RS", "ST", "BOOKS_STRING-ENEMY_STRING"]
 
 const DIR: PackedVector2Array = [Vector2i(24, 20), Vector2i(-1, -1)]
+const x_direction: PackedByteArray = [0, 5, 2]
+const y_direction: PackedByteArray = [2, 0, 1]
+const rotation: PackedByteArray = [135, 0, -135, -45, -90, 135, 45, 90]
 
+static func rotate(dir: Vector2i) -> int: return rotation[direct(dir)]
+static func direct(dir: Vector2i) -> int: return x_direction[dir.x] + y_direction[dir.y]
 static func offset(hero: int, no: int = 0) -> int: return hero * OFFSET + no
 
 static func y(field: int, off: int) -> int: return field >> off
@@ -104,8 +109,8 @@ const whip: StringName = &"res://now/see/whip.tscn"
 const pull: StringName = &"res://now/see/ledges.tscn"
 const ledges: StringName = &"res://now/see/ledges.tscn"
 const health: StringName = &"res://now/work/health/%s.tscn"
-const ability: StringName = &"res://now/work/lockers/ability/%s.tscn"
-const activator: StringName = &"res://now/work/lockers/ability/%s.tscn"
+# const ability: StringName = &"res://now/work/lockers/ability/%s.tscn"
+# const activator: StringName = &"res://now/work/lockers/ability/%s.tscn"
 const music: StringName = &"res://now/work/music.tscn" # const hero: StringName = &"res://now/work/hero/%s/%s.tscn"
 const ray: StringName = &"res://now/work/hero/ray.tscn"
 const rock: StringName = &"res://now/work/hero/rock.tscn"
@@ -131,12 +136,13 @@ const rock_mirror: StringName = &"res://now/see/mirror/rock.tscn"
 const input: StringName = &"res://now/work/hero/named/%s.tscn"
 const world: StringName = &"res://now/work/hero/world/%s.tscn"
 const progress: StringName = &"user://progress.txt"
+const ability: StringName = &"res://now/hud/game/ability.tscn"
+const priorities: StringName = &"res://now/hud/game/priorities.tscn"
 # PRELOADS
 const rain: PackedScene = preload("res://pre/particle/rain/rain.tscn")
 const sand: PackedScene = preload("res://pre/particle/sand.tscn")
 const fire: PackedScene = preload("res://pre/particle/fire/fire.tscn")
-const kick: PackedScene = preload("res://pre/particle/fight/kick.tscn")
-const punch: PackedScene = preload("res://pre/particle/fight/punch.tscn")
+const throw: PackedScene = preload("res://pre/particle/fight/kick.tscn")
 
 const dialog: PackedScene = preload("res://pre/ui/dialog.tscn")
 const combo: PackedScene = preload("res://pre/ui/combo.tscn")
@@ -148,8 +154,6 @@ const ailments: PackedScene = preload("res://pre/ui/status/ailments.tscn")
 const sstats: PackedScene = preload("res://pre/ui/status/stats.tscn")
 const bag: PackedScene = preload("res://pre/ui/status/items.tscn")
 const chats: PackedScene = preload("res://pre/ui/menu/chat.tscn")
-const priorities: PackedScene = preload("res://pre/ui/menu/priorities.tscn")
 
 const grabber: GradientTexture2D = preload("res://pre/ui/grabber.tres")
 const root: Script = preload("res://pre/level.gd")
-const master: MasterManifest = preload("res://asset/resource/media/stats/master.tres")

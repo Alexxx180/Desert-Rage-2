@@ -1,4 +1,4 @@
-extends Control
+extends HBoxContainer
 
 @export var fixed: bool = false
 @onready var status: HBoxContainer = $status
@@ -11,9 +11,10 @@ var _pause: HBoxContainer = null
 var pause: HBoxContainer:
 	get: return null # _update_pause()
 
+Def.enemy
 var _enemy: PanelContainer = null
 var enemy: PanelContainer:
-	get: return null # Works.upload_hold(self, "space", _enemy, LoadBus.enemy, "enemy")
+	get: return null # Works.upload_hold(self, "space", _enemy, Def.enemy, "enemy")
 
 var _slots: ColorRect = null
 var slots: ColorRect:

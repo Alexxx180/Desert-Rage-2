@@ -1,12 +1,14 @@
-[gd_scene load_steps=18 format=3 uid="uid://bt2qhucrs8xwg"]
+[gd_scene load_steps=23 format=3 uid="uid://bt2qhucrs8xwg"]
 
 [ext_resource type="Shader" uid="uid://ciivvs0a4nhrw" path="res://asset/scene/ui/hud/detector/game/menu/ability/controls/topic/status/dissolve.gdshader" id="3_uf7bh"]
 [ext_resource type="FontFile" uid="uid://cc0l5uav5qfke" path="res://asset/resource/media/text/font/ka1.ttf" id="4_org78"]
 [ext_resource type="Script" uid="uid://4fsf4suiosss" path="res://asset/script/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/topic/status/space/title/status/xp/body/multiplier.gd" id="5_dwp5b"]
-[ext_resource type="Script" uid="uid://sm6t5tdsxtq6" path="res://asset/scene/ui/util/appear/modulator/modulator.gd" id="6_y72uv"]
 [ext_resource type="Script" uid="uid://dlm8rd63iot38" path="res://asset/script/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/topic/status/space/title/status/xp/body/space/score/value.gd" id="7_0js04"]
-[ext_resource type="PackedScene" uid="uid://djwmyxjpm8g3w" path="res://asset/scene/ui/util/appear/timer.tscn" id="8_e02qi"]
+[ext_resource type="FontFile" uid="uid://cjafv81djmqe8" path="res://asset/resource/media/text/font/Touchscreen-Regular.ttf" id="8_c3bqj"]
+[ext_resource type="Script" uid="uid://cmeppk3ealnv8" path="res://asset/script/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/hints/space/preview/toggle.gd" id="9_b8mgx"]
 [ext_resource type="Script" uid="uid://dim2gh2xi14fs" path="res://asset/script/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/topic/status/space/title/status/xp/meter.gd" id="9_vf2e6"]
+[ext_resource type="FontFile" uid="uid://b2wbdbnkxcqv1" path="res://asset/resource/media/text/font/noto_sans/NotoEmoji-VariableFont_wght.ttf" id="10_lvsij"]
+[ext_resource type="FontFile" uid="uid://b37js8y80ak1k" path="res://asset/resource/media/text/font/noto_sans/NotoColorEmoji-Regular.ttf" id="11_b8mgx"]
 
 [sub_resource type="Gradient" id="Gradient_ok865"]
 colors = PackedColorArray(0.392157, 0.392157, 0.686275, 0.470588, 0, 0, 0, 0)
@@ -46,12 +48,26 @@ content_margin_bottom = 1.0
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hv8pq"]
 bg_color = Color(0, 0, 0, 1)
 
-[sub_resource type="StyleBoxLine" id="StyleBoxLine_31tm0"]
-color = Color(0.392157, 0.392157, 0.686275, 1)
-grow_end = 0.0
-vertical = true
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5bgtj"]
+bg_color = Color(0.18039216, 0.18039216, 0.31764707, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xqdyw"]
+content_margin_left = 3.0
+content_margin_top = 0.0
+bg_color = Color(0.0196078, 0.0196078, 0.0588235, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gol50"]
+content_margin_left = 4.0
+content_margin_top = 0.0
+bg_color = Color(0.0196078, 0.0196078, 0.0588235, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lvsij"]
+content_margin_left = 5.0
+content_margin_right = 5.0
+bg_color = Color(0.000113828006, 0.00011382805, 0.00011382793, 1)
 
 [node name="value" type="Label"]
+custom_minimum_size = Vector2(200, 26)
 offset_right = 202.0
 offset_bottom = 26.0
 grow_horizontal = 0
@@ -88,28 +104,89 @@ text = "2.15x"
 horizontal_alignment = 2
 script = ExtResource("5_dwp5b")
 
-[node name="modulator" type="Node" parent="multiplier"]
-script = ExtResource("6_y72uv")
-
 [node name="meter" type="ProgressBar" parent="."]
 custom_minimum_size = Vector2(1, 1)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -1.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_styles/background = SubResource("StyleBoxFlat_hv8pq")
+theme_override_styles/fill = SubResource("StyleBoxFlat_5bgtj")
+max_value = 10.0
+step = 1.0
+value = 5.0
+fill_mode = 1
+show_percentage = false
+script = ExtResource("9_vf2e6")
+
+[node name="options" type="HBoxContainer" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 11
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -1.0
+offset_left = -191.0
 grow_horizontal = 0
 grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 1
-theme_override_styles/background = SubResource("StyleBoxFlat_hv8pq")
-theme_override_styles/fill = SubResource("StyleBoxLine_31tm0")
-max_value = 10.0
-step = 1.0
-value = 5.0
-fill_mode = 3
-show_percentage = false
-script = ExtResource("9_vf2e6")
 
-[node name="timer" parent="." instance=ExtResource("8_e02qi")]
+[node name="pause" type="Button" parent="options"]
+custom_minimum_size = Vector2(30, 26)
+layout_mode = 2
+focus_mode = 1
+theme_override_fonts/font = ExtResource("8_c3bqj")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_xqdyw")
+text = "||"
+alignment = 0
+script = ExtResource("9_b8mgx")
+path = "../../../../../../../stats/inventory/ability/controls/hints/space/preview/help"
+
+[node name="dialog" type="Button" parent="options"]
+custom_minimum_size = Vector2(30, 26)
+layout_mode = 2
+focus_mode = 1
+theme_override_fonts/font = ExtResource("10_lvsij")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_gol50")
+text = "🔍"
+alignment = 0
+script = ExtResource("9_b8mgx")
+path = "../../../../../../../stats/inventory/ability/controls/hints/space/preview/help"
+
+[node name="toggle" type="Button" parent="options"]
+custom_minimum_size = Vector2(30, 26)
+layout_mode = 2
+focus_mode = 1
+theme_override_fonts/font = ExtResource("10_lvsij")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_gol50")
+text = "🔬"
+alignment = 0
+script = ExtResource("9_b8mgx")
+path = "../../../../../../../stats/inventory/ability/controls/hints/space/preview/help"
+
+[node name="help" type="Button" parent="options"]
+custom_minimum_size = Vector2(30, 26)
+layout_mode = 2
+focus_mode = 1
+theme_override_fonts/font = ExtResource("10_lvsij")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_gol50")
+text = "👁"
+alignment = 0
+script = ExtResource("9_b8mgx")
+path = "../../../../../../../stats/inventory/ability/controls/hints/space/preview/help"
+
+[node name="set" type="Button" parent="options"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("11_b8mgx")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_lvsij")
+text = "🔥🎣"

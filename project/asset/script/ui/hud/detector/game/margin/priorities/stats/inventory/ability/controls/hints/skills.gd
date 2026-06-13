@@ -1,4 +1,4 @@
-extends PanelContainer
+extends GridContainer
 
 var hero_name: String = "ray"
 

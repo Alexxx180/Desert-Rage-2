@@ -1,6 +1,6 @@
 extends ProgressBar
 
-@onready var fill: StyleBoxLine = get(KEY)
+@onready var fill: StyleBoxFlat = get(KEY)
 @onready var timer: Timer = $timer
 
 var fixed: bool = false
