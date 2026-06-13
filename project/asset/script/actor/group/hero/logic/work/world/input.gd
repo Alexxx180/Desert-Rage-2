@@ -26,7 +26,7 @@ func act_enter() -> void: HUD.level.set_tile(HUD.hero, Def.LEVER)
 func act_exit() -> void: HUD.level.no_tile(HUD.hero, Def.LEVER)
 
 func input(_event: InputEvent) -> void:
-	return #TODO FIXME disable after HUD test
+	# return #TODO FIXME disable after HUD test
 	if Bit.of(HUD.state, Def.OPEN_MENU) or Bit.of(HUD.state, Def.TRANSIT):
 		menu_interaction()
 	else:

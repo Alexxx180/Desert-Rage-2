@@ -15,7 +15,6 @@ func update_stack() -> VBoxContainer:
 		_stack = scroll.get_node("margin/stack")
 		loaded.emit(_stack)
 	return _stack
-	Def
 
 func update_scroll() -> ScrollContainer:
 	return null #  Works.upload(self, _scroll, Def.ability, "ability")

@@ -4,6 +4,7 @@ extends Button
 @onready var image: TextureRect = $icon
 
 @export var hint: HelpHint
+@export var helps: CompressedTexture2DArray
 
 const TIME: float = 0.2
 const MARGIN: String = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
@@ -22,6 +23,9 @@ func translate(_controls: Node) -> void:
 func get_locale() -> RichTextLabel: return help
 
 func _ready() -> void:
+	HUD
+	image.texture = ImageTexture.create_from_image(helps.get_layer_data(0))
+	
 	if hint: update_hint()
 	pressed.connect(flip_the_card)
 

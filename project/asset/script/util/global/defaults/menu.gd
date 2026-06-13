@@ -3,8 +3,10 @@ class_name Menu extends RefCounted
 enum { PAUSE, GAME }
 
 var state: int
+var no: int = 0
 
 var navigation: Array
+var hints: CompressedTexture2DArray = preload("res://asset/resource/media/image/ui/help/master.svg")
 
 func is_hud_opened() -> bool:
 	var result: bool = true
@@ -76,3 +78,6 @@ func _pause_toggle(next: bool, mode: Node.ProcessMode) -> void:
 	set_level_mode(mode)
 
 func set_level_mode(mode: Node.ProcessMode) -> void: HUD.level.process_mode = mode
+
+func upload_help() -> void:
+	HUD.game.hints.motion.texture = ImageTexture.create_from_image(hints.get_layer_data(no))

@@ -63,7 +63,7 @@ func set_page(coords: Vector2i, value: Array) -> void:
 	HUD.level.execute.books[coords] = value
 
 func _manual(coords: Vector2i) -> String:
-	return Def.master.manual[Def.master.PAGES + Def.of8(HUD.level.execute.from_coords(coords).tatlas)]
+	return Def.pages[Def.of8(HUD.level.execute.coords(coords).id().atlas().tile[Def.ATLAS])]
 
 func set_pages(tag: Vector2i) -> void:
 	var tile: Dictionary = HUD.level.execute.from_coords(tag).context

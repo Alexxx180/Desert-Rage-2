@@ -37,6 +37,7 @@ const react: PackedByteArray = [5, 5, 5, 5]
 const hints: PackedStringArray = ["MM", "MJ", "MB", "ML", "CN", "AA", "AE", "AF", "AT",
 	"SR", "AW", "AH", "AM", "RG", "RM", "BY", "BK", "RG", "FG", "LO", "IM", "LG", "AY",
 	"CM", "CF", "IM", "EN", "PS", "RS", "ST", "BOOKS_STRING-ENEMY_STRING"]
+const pages: PackedStringArray = []
 
 const DIR: PackedVector2Array = [Vector2i(24, 20), Vector2i(-1, -1)]
 const x_direction: PackedByteArray = [0, 5, 2]
