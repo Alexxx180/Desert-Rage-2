@@ -70,3 +70,27 @@ func set_pages(tag: Vector2i) -> void:
 	match Def.of8(tile.atlas):
 		Def.PAGE: set_page(tile.coords, [tile.atlas, _manual(tile.coords)])
 		_: set_book(tile.coords)
+
+
+var chest_pos: Vector2 = Vector2.ZERO
+var logic: Node
+
+func enter_chest(border: TileMapLayer) -> void:
+	var h: CharacterBody2D = HUD.level.entity[HUD.hero]
+	chest_pos = h.position + h.logic.see.world.skills.chest.position
+	# print("ENTER THE CHEST!")
+
+func exit_chest(_border: TileMapLayer) -> void:
+	chest_pos = Vector2.ZERO
+	# print("EXIT THE CHEST!")
+
+func _input(_event: InputEvent) -> void:
+	if chest_pos != Vector2.ZERO and Input.is_action_just_pressed("action"):
+		drink_water(HUD.level.entity[HUD.hero].logic.work.ui.inventory, chest_pos)
+
+
+func open_lock(no: int) -> void:
+	pass
+
+func open_mystic(no: int) -> void:
+	pass

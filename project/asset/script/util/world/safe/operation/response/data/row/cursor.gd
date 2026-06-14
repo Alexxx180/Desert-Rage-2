@@ -18,6 +18,7 @@ func _next_offset(cursor: int) -> Dictionary:
 	return { "next": next, "length": get_message_length(cursor, next) }
 
 func resolve(fragments: ResponseFragments, rows: Array, i: int) -> void:
+	HeroDeploy
 	var offset: Dictionary = _next_offset(fragments.message.cursor)
 	if offset.length == NULL:
 		fragments.move_cursor(fragment.null_the_result(rows))

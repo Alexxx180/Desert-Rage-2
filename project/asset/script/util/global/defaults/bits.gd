@@ -1,6 +1,6 @@
 class_name Bit
 
-enum { MASK = 2, MASK2 = 3, MASK3 = 4, BYTE = 8, INTEGER = 32, BIG = 64 }
+enum { MASK = 2, MASK2 = 3, MASK3 = 4, BYTE = 8, SHORT = 16, INTEGER = 32, BIG = 64 }
 
 static func bit(no: int) -> int: return 1 << no
 static func one(n: int) -> bool: return n > 0 and (n & (n - 1)) == 0

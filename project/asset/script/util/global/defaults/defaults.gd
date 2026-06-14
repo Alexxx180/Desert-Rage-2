@@ -8,7 +8,7 @@ var state: int = 0
 var hero: int = 0
 var _pause: Control ; var _game: Control ; var _settings: Control ; var _sound: Control ; var _information: Control
 var _status: GameStatuses ; var _menu: Menu ; var _preserves: Preserves ; var _aura: AuraResource
-var _inventory: HeroInventory ; var _animation: CharacterAnimation
+var _inventory: HeroInventory ; var _animation: CharacterAnimation ; LevelRoot
 
 func create_menu(node: Control, path: StringName, caption: StringName) -> Control:
 	return node if node != null else menu.connect_menu(Def.lazy(self, node, path, caption))
@@ -48,5 +48,6 @@ func new_world_input() -> WorldInput: return WorldInput.new()
 func new_game_statuses() -> GameStatuses: return GameStatuses.new()
 func new_aura_resource() -> AuraResource: return AuraResource.new()
 
+func next() -> int: return (HUD.hero + 1) & Def.ROCK
 func _ready() -> void: layer = 2 # TODO
 func _input(event: InputEvent) -> void: _world.input(event)

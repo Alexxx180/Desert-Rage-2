@@ -18,7 +18,7 @@ enum { INT = -1, HERO, DEPLOYED = 0, NO = 0, ATLAS = 0, PLATE = 0,
 
 enum { DEAD, OPEN_MENU = 0, FREEZE, TRANSIT = 1, BOX, ACTING, JUMP, FALL, CAMERA, GRAB } # status
 
-enum { RAY, ROCK, EYE_SEEKER } # enemy name
+enum { PARTY = 2, RAY = 0, ROCK, EYE_SEEKER } # enemy name
 
 const manual: PackedByteArray = [1, 3, 7, 10, 20, 21] ## Hints count shown
 const levels: PackedByteArray = [1, 7, 9, 13, 25, 26] ## Level number
