@@ -33,10 +33,12 @@ func plate_encounter() -> void:
 	var h: CharacterBody2D = HUD.level.entity[HUD.hero]
 	tile[Def.offset(HUD.hero, Def.PLATE)] = Def.ofmap(border.local_to_map(h.position))
 	HUD.level.cluster.tile_walk(h, true)
+
 func plate_diverge() -> void:
 	HUD.level.cluster.tile_walk(HUD.level.entity[HUD.hero], false)
 	tile[Def.offset(HUD.hero, Def.PLATE)] = 0
-func lever_encounter(_t: TileMapLayer) -> void: pass
+
+func lever_encounter(_t: TileMapLayer) -> void: HUD._world.ledge_jump()
 func lever_diverge(_t: TileMapLayer) -> void: pass
 
 func new_pillar_chains() -> PillarChains: return PillarChains.new()

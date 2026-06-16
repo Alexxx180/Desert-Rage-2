@@ -56,12 +56,15 @@ func paint() -> TileDecorator:
 	return self
 
 func paint_alt() -> TileDecorator:
-	set_cell(Def.tomap(tile[Def.COORDS]), tile[Def.ID], Def.tomap(tile[Def.ATLAS]), (tile[Def.TYPE] << 2) | (tile[Def.ALT] + 1))
+	set_cell(Def.tomap(tile[Def.COORDS]), tile[Def.ID], Def.tomap(tile[Def.ATLAS]), ((tile[Def.TYPE] << 2) | tile[Def.ALT])  + 1)
 	return self
 
 func erase() -> TileDecorator:
 	erase_cell(Def.tomap(tile[Def.COORDS]))
 	return self
+
+func position() -> Vector2:
+	return map_to_local(Def.tomap(tile[Def.COORDS]))
 
 func extract(no: int) -> int:
 	var at: TileData = get_cell_tile_data(Def.tomap(tile[Def.COORDS]))

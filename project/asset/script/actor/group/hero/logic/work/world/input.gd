@@ -21,8 +21,9 @@ var acts: PackedInt32Array = [a([A, A]), a([B, A, A]), a([A, Y, A]), a([A, B, A]
 	a([B, B, A]), a([B, X, B]), a([B, A, B]), a([B, A, A, B]), a([A, Y, A, Y])]
 # var hero: int enum { RAY, ROCK } enum { TOOL, FIGHT, DANCE }
 var combo: int
+var directed: Vector2
 
-const close: Vector2 = Vector2(24, 20)
+const close: Vector2 = Vector2.ONE * 20
 
 func act_enter() -> void: HUD.level.set_tile(HUD.hero, Def.LEVER)
 func act_exit() -> void: HUD.level.no_tile(HUD.hero, Def.LEVER)
@@ -36,11 +37,11 @@ func input(_event: InputEvent) -> void:
 	if _hold(&"menu1"): open_menu()
 
 func _movement() -> void:
-	var direction: Vector2 = Input.get_vector(&"left", &"right", &"forward", &"backward")
-	HUD.level.entity[HUD.hero].make_velocity(direction * Def.MOVE)
-	HUD.animation.direct(direction)
-	if direction != Vector2.ZERO:
-		HUD.level.entity[HUD.hero].lever.position = close * direction
+	directed = Input.get_vector(&"left", &"right", &"forward", &"backward")
+	HUD.level.entity[HUD.hero].make_velocity(directed * Def.MOVE)
+	HUD.animation.direct(directed)
+	if directed != Vector2.ZERO:
+		HUD.level.entity[HUD.hero].lever.position = close * directed
 
 func action_input() -> void:
 	_movement()
@@ -79,7 +80,7 @@ func melt_ice() -> void:
 	var pos: Vector2 = HUD.level.tile_lever()
 	var tile: PackedInt32Array = HUD.level.on_tile(pos)
 	if tile[Def.ID] == Def.FLOOR and tile[Def.TYPE] == Def.ICE_FLOOR:
-		HUD.level.border.type(Def.FLOORS).paint_alt()
+		HUD.level.border.type(Def.PUDDLE_OFF).paint_alt()
 		if HUD.level.fire == null:
 			HUD.level.fire = load(Def.fire).instantiate()
 			HUD.level.fire.one_shot = true
@@ -87,6 +88,16 @@ func melt_ice() -> void:
 		else:
 			HUD.level.fire.restart()
 		HUD.level.fire.position = pos
+
+func ledge_jump() -> void:
+	var pos: Vector2 = HUD.level.tile_lever()
+	var tile: PackedInt32Array = HUD.level.on_tile(pos)
+	if tile[Def.ID] == Def.FLOOR and tile[Def.TYPE] == Def.FLOORS:
+		var f1: int = HUD.level.border.extract(TileDecorator.FLOOR)
+		HUD.level.on_tile(pos + Vector2.ONE * 128 * (Vector2(0, directed.y) if directed.x != 0 and directed.y != 0 else directed))
+		var f2: int = HUD.level.border.extract(TileDecorator.FLOOR)
+		if f1 == f2 and tile[Def.ID] == Def.FLOOR and tile[Def.TYPE] == Def.FLOORS:
+			HUD.level.entity[HUD.hero].position = HUD.level.border.position()
 
 func skill_a() -> void:
 	combo = combo << Bit.MASK3 | X
