@@ -26,7 +26,7 @@ func id(next: int = -1) -> TileDecorator:
 
 func type(next: int = -1) -> TileDecorator:
 	if next == -1:
-		var alt_id: int = get_cell_alternative_tile(Def.tomap(tile[Def.COORDS]))
+		var alt_id: int = get_cell_alternative_tile(Def.tomap(tile[Def.COORDS])) - 1
 		tile[Def.TYPE] = alt_id >> 2
 		tile[Def.ALT] = alt_id & 3
 	else:
@@ -56,7 +56,7 @@ func paint() -> TileDecorator:
 	return self
 
 func paint_alt() -> TileDecorator:
-	set_cell(Def.tomap(tile[Def.COORDS]), tile[Def.ID], Def.tomap(tile[Def.ATLAS]), tile[Def.TYPE] + tile[Def.ALT])
+	set_cell(Def.tomap(tile[Def.COORDS]), tile[Def.ID], Def.tomap(tile[Def.ATLAS]), (tile[Def.TYPE] << 2) | (tile[Def.ALT] + 1))
 	return self
 
 func erase() -> TileDecorator:
