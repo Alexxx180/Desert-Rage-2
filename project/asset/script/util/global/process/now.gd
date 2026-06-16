@@ -140,10 +140,10 @@ const progress: StringName = &"user://progress.txt"
 const ability: StringName = &"res://now/hud/game/ability.tscn"
 const priorities: StringName = &"res://now/hud/game/priorities.tscn"
 const title: StringName = &"res://pre/ui/menu/title.tscn"
+const fire: StringName = &"res://pre/particle/fire/fire.tscn"
 # PRELOADS
 const rain: PackedScene = preload("res://pre/particle/rain/rain.tscn")
 const sand: PackedScene = preload("res://pre/particle/sand.tscn")
-const fire: PackedScene = preload("res://pre/particle/fire/fire.tscn")
 const throw: PackedScene = preload("res://pre/particle/fight/kick.tscn")
 
 const dialog: PackedScene = preload("res://pre/ui/dialog.tscn")

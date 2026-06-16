@@ -21,6 +21,7 @@ var acts: PackedInt32Array = [a([A, A]), a([B, A, A]), a([A, Y, A]), a([A, B, A]
 	a([B, B, A]), a([B, X, B]), a([B, A, B]), a([B, A, A, B]), a([A, Y, A, Y])]
 # var hero: int enum { RAY, ROCK } enum { TOOL, FIGHT, DANCE }
 var combo: int
+
 const close: Vector2 = Vector2(24, 20)
 
 func act_enter() -> void: HUD.level.set_tile(HUD.hero, Def.LEVER)
@@ -74,13 +75,25 @@ func kick() -> void:
 	if HUD.level.tile[HUD.hero] == Def.H_SPRING_OFF:
 		HUD.level.chains.jump()
 
-func skill_a() -> void:
-	combo = combo << Bit.MASK3 | X
-	LevelRoot
-	TileDecorator
-	var tile: PackedInt32Array = HUD.level.tile_near()
+func melt_ice() -> void:
+	var pos: Vector2 = HUD.level.tile_lever()
+	var tile: PackedInt32Array = HUD.level.on_tile(pos)
 	if tile[Def.ID] == Def.FLOOR and tile[Def.TYPE] == Def.ICE_FLOOR:
 		HUD.level.border.type(Def.FLOORS).paint_alt()
+		if HUD.level.fire == null:
+			HUD.level.fire = load(Def.fire).instantiate()
+			HUD.level.fire.one_shot = true
+			HUD.level.add_child(HUD.level.fire)
+		else:
+			HUD.level.fire.restart()
+		HUD.level.fire.position = pos
+
+func skill_a() -> void:
+	combo = combo << Bit.MASK3 | X
+	match HUD.hero:
+		Def.RAY: melt_ice()
+	LevelRoot
+	TileDecorator
 
 func skill_b() -> void:
 	combo = combo << Bit.MASK3 | Y
