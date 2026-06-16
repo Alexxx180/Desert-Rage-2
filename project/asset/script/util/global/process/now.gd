@@ -1,23 +1,23 @@
 class_name Def
 
-enum { LOGIC = 0, FLOOR = 4, BLUE_OFF = 0, U_WATER = 0, BLUE_ON, U_EXIT = 1, RED_OFF, U_WALL_OFF = 2, RED_ON,
-	U_WALL_ON = 3, ENTRY = 3, WALL = 3, GREEN_OFF, U_LADDER = 4, GREEN_ON, D_LADDER = 5,
+enum { LOGIC = 0, FLOOR = 1, ENTRY = 2, BLUE_OFF = 0, U_WATER = 0, BLUE_ON, U_EXIT = 1, RED_OFF, U_WALL_OFF = 2, RED_ON,
+	U_WALL_ON = 3, WALL = 3, GREEN_OFF, U_LADDER = 4, GREEN_ON, D_LADDER = 5,
 	WHITE_OFF, ENEMY = 6, WHITE_ON, BOSS = 7, BLACK_OFF, M_WATER = 8,
 	TAGS = 8, BLACK_ON, M_EXIT = 9, CHESTS = 9, BRONZE_OFF, D_WALL_OFF = 10, BRONZE_ON,
 	D_WALL_ON = 11, SILVER_OFF, H_SPRING_OFF = 12, SILVER_ON, H_SPRING_ON = 13, GOLD_OFF,
 	B_SPRING_OFF = 14, GOLD_ON, B_SPRING_ON = 15, PLATINUM_OFF, D_WATER = 16, PLATINUM_ON,
 	D_EXIT = 17, PLACE, SLIDE = 18, TELEPORT_ON, PILLAR = 19, SOURCE_OFF, STAND_OFF = 20,
 	SOURCE_ON, STAND_ON = 21, LEVER_OFF, SECRET_OFF = 22, LEVER_ON, SECRET_ON = 23, PLATE_OFF,
-	PAGE = 24, PLATE_ON, TELEPORT_OFF, SPIKER, COMFORTER, SUPPLIER, COOLER, SMALL_BOX, FIRE_BOX, LARGE_BOX }
+	PAGE = 24, PLATE_ON, TELEPORT_OFF, SPIKER, COMFORTER, SUPPLIER, COOLER, SMALL_BOX, FIRE_BOX, LARGE_BOX } # tiles
 
-enum { INT = -1, HERO, DEPLOYED = 0, NO = 0, ATLAS = 0, PLATE = 0,
-	OVERWORLD = 1, ID = 1, LEVER = 1, STATUS = 1, CASUAL = 2, OFFSET = 2, ALT = 2, TYPE = 3, LAYER,
-	COORDS = 4, FLOORS = 0, PUDDLE_OFF = 4, ICE_MECH = 4, PUDDLE_ON = 8, ICE_FLOOR = 12,
-	TILESET4 = 16, TILE32 = 32, TILE48 = 48, TILESET8 = 64, LEVEL = 14,
+enum { N = -1, HERO, DEPLOYED = 0, NO = 0, ATLAS = 0, PLATE = 0,
+	OVERWORLD = 1,  LEVER = 1, STATUS = 1, CASUAL = 2, OFFSET = 2,  LAYER, LEVEL = 14,
 	DEPLOY_DELTA = 4096, JUMP_POWER = 200000, MOVE = 550, GRAVITY = 700000 }
 
+enum { FLOORS, PUDDLE_OFF, PUDDLE_ON, ICE_FLOOR, ICE_THICK,
+	ICE_MECH = 0, 
+	ID = 1, ALT = 2, TYPE = 3, COORDS = 4, T4 = 16, T8 = 64 } # alternatives
 enum { DEAD, OPEN_MENU = 0, FREEZE, TRANSIT = 1, BOX, ACTING, JUMP, FALL, CAMERA, GRAB } # status
-
 enum { PARTY = 2, RAY = 0, ROCK, EYE_SEEKER } # enemy name
 
 const manual: PackedByteArray = [1, 3, 7, 10, 20, 21] ## Hints count shown
@@ -139,6 +139,7 @@ const world: StringName = &"res://now/work/hero/world/%s.tscn"
 const progress: StringName = &"user://progress.txt"
 const ability: StringName = &"res://now/hud/game/ability.tscn"
 const priorities: StringName = &"res://now/hud/game/priorities.tscn"
+const title: StringName = &"res://pre/ui/menu/title.tscn"
 # PRELOADS
 const rain: PackedScene = preload("res://pre/particle/rain/rain.tscn")
 const sand: PackedScene = preload("res://pre/particle/sand.tscn")

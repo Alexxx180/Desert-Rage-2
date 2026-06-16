@@ -6,7 +6,7 @@ var state: int
 var no: int = 0
 
 var navigation: Array
-var hints: CompressedTexture2DArray = preload("res://asset/resource/media/image/ui/help/master.svg")
+var hints: CompressedTexture2DArray = preload("res://icon/help/z_master.svg")
 
 func is_hud_opened() -> bool:
 	var result: bool = true

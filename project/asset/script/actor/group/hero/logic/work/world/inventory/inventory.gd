@@ -1,6 +1,6 @@
 class_name HeroInventory extends RefCounted
 
-enum { STICKS, OPUNTIA, TUMBLEWEED, TAMARISK, YUKKA, JAR, ANTIDOTE, GOLD_KEY, SECRET_KEY,
+enum { STICKS, OPUNTIA, TUMBLEWEED, TAMARISK, YUKKA, JAR, ANTIDOTE, ANTICOUGH, GOLD_KEY, SECRET_KEY,
 	WATER, TEA, ETHER, L_PANTS, I_PANTS, L_ARMOR, I_ARMOR, L_BOOTS, I_BOOTS,
 	SHIELD, CORETOOTH, KNUCKLES, SAW_STRING, W_RAPIER, T_RAPIER, SHOE, R_SCHO45,
 	R_ENLIGHT, SHOTGUN, BOOMERANG, BUTTER, F_BUTTER, CLEANER, SHARPEN, AMMO,
@@ -8,7 +8,9 @@ enum { STICKS, OPUNTIA, TUMBLEWEED, TAMARISK, YUKKA, JAR, ANTIDOTE, GOLD_KEY, SE
 	ARMOR = 20, WEAPON = 28, KIT = 36, AURA = 0, RESOURCE = 1, AR = 2, CROSS = 2, BOTH = 3,
 	PREVIEW_SIZE = 72, ITEMS = 0, SLOT = 1, UNIT = 1, EMPTY = 0, MAIN = 0, CRAFTS = 25, SPACE = 26,
 	ASC = 0, DESC = 1, RANDOM = 2, NA = 0, SIZE = 2, MAX = 25, SECOND = 1, MIN = 2,
-	UP1 = 5, UP2 = 6, UP3 = 7, UP4 = 8, ID = 0, X = 1 }
+	UP1 = 5, UP2 = 6, UP3 = 7, UP4 = 8, ID = 0, X = 1,
+	SHOTGUN_COST = 0, BOUNDARY = 1, FAST_PANEL = 10,
+	ITEM_OR_SLOT = 0, SAME_ITEM = 1, EMPTY_SLOT = 2 }
 
 const aura: PackedByteArray = [10, 70,  0]
 const resc: PackedByteArray = [10,  0, 50]
@@ -39,19 +41,48 @@ var main: Dictionary:
 var holder: Texture2D = null
 var _image: TextureRect
 
+var distraction: PackedInt32Array = []
+var distraction_body: Array[StaticBody2D] = []
+
 func _init() -> void:
 	storage = [0]
 	storage.resize(SLOTS * Def.PARTY)
 
-func fill_the_jar() -> void:
-	var slot: int = items.find_same_item(JAR)
-	if items.have(slot): items.replace_item(slot, WATER) # logic.use_the_jar(jar, water, 1)
+func use_inventory(id: int) -> void:
+	match id:
+		JAR: store_water(selection)
+		WATER, TEA, ETHER: refill(aura[id - USE], resc[id - USE])
+		ANTIDOTE: HUD.game.level.status.nullify(GameStatuses.POISON)
+		ANTICOUGH: HUD.game.level.status.nullify(GameStatuses.COUGH)
+		STICKS: distract()
+		T_RAPIER, W_RAPIER: use_boomerang() ; return false
+		T_RAPIER, W_RAPIER: use_boomerang() ; return false
+		GOLD_KEY, SECRET_KEY: open_door(id) ; return false
+		_: return false
+	return true
 
-func distract(slot: Dictionary, item: Variant) -> void:
-	pass # effect.special.distract()
+func open_door(id: int) -> void: pass
 
-func store_water(slot: Dictionary, item: Variant) -> void:
-	fill_the_jar()
+func use_boomerang(): pass
+
+func refill(hp: int, ap: int) -> void:
+	if hp != 0: HUD.level.aura.add_points(HUD.hero, hp)
+	if ap != 0: HUD.level.aura.add_resource(HUD.hero, ap)
+
+func distract() -> void: # LevelRoot
+	var tile: PackedInt32Array = HUD.level.tile_at()
+	for i in range(0, len(distraction)):
+		if distraction[i] == tile[Def.COORDS]:
+			distraction_body[i].add_stick()
+			return
+	var body: StaticBody2D
+	distraction.append()
+	distraction_body.append(body)
+
+func store_water(slot: int) -> void:
+	var tile: PackedInt32Array = HUD.level.tile_near()
+	if tile[Def.ID] == ENTRY and tile[Def.ATLAS] == Def.D_WATER:
+		produce_item(slot, WATER)
 
 func i(hero: int, no: int) -> int: return hero * Def.PARTY + no
 
@@ -68,135 +99,121 @@ func update_ui(logic: Node, preview: Node, slots: Array) -> void:
 	if preview.slots(logic, slots):
 		ui.product(logic.item(preview.cells.craft_id))
 
-func slot(no: int) -> Dictionary: return items.get_item(no)
-func item(id: int) -> Dictionary: return items.items.get_item(id)
+var _fast_panel: Tween
 
-func put_to_inventory(id: int) -> int:
-	HUD.game.inventory.ray
-	HUD.game.stats.ray
-	return items.put_to_inventory(id)
+func hide_selection() -> void:
+	_fast_panel = HUD.create_tween()
+	_fast_panel.tween_property(HUD.game.fast_panel, "modulate", Color.TRANSPARENT, 0.5)
 
-func _ready() -> void: trade.items = self
+func select_exact(slot: int) -> void:
+	if _fast_panel.is_valid(): _fast_panel.kill()
+	for item in get_fast_panel(selection): item.bar.back.hide()
+	selection = slot
+	for item in get_fast_panel(selection): item.bar.back.show()
+	HUD.game.fast_panel.modulate = Color.WHITE
+	HUD.item_select.start()
+
+func select_shift(direction: int) -> void:
+	select_exact(posmod(selection + direction, FAST_PANEL))
+
+func ui_drop_item(slot: Button, no: int) -> void:
+	slot.image.texture = null
+	slot.number.text = ""
+	if no < FAST_PANEL: slot.bar.value = 0
+
+func ui_add_item(slot: Button, no: int) -> void:
+	var i: int = i(HUD.hero, no)
+	var count: int = _count(i)
+	slot.image.texture = _get_icon(_id(i))
+	if no < FAST_PANEL: slot.bar.value = count
+	slot.number.text = str(count)
+
+func ui_count_item(slot: Button, count: int) -> void:
+	if count == BOUNDARY: slot.image.texture = null
+	slot.number.text = "" if count <= BOUNDARY else str(next)
+	if no < FAST_PANEL: slot.bar.value = next
 
 func update_inventory() -> void:
 	for slot in range(len(storage) - 1, Def.INT, Def.INT):
-		ui.update_item(slot, storage[slot])
+		for ui in get_inventory(slot): ui_add_item(ui, slot)
 
-func decide_item_or_equipment(id: int) -> int:
-	if items.is_consumable(id):
-		return find_item_or_slot(id)
-	else:
-		return find_empty_slot()
 
-func get_count(no: int) -> int: return Bit.of_x(Bit.SHORT, storage[no], X)
+const cost: PackedFloat32Array = [0.33]
 
-func is_maxed(item: Dictionary) -> bool: return item.x >= MAX
+func fast_panel_cost() -> int:
+	match _id(slot):
+		R_SCHO45, R_ENLIGHT: return HUD.level.aura.resource(HUD.hero)
+		SHOTGUN: return HUD.level.aura.resource(HUD.hero) * cost[SHOTGUN_COST]
+	return _count(slot)
 
-func same(id: int, item: Dictionary) -> bool: return item.id == id
+func get_fast_panel() -> Array[Node]:
+	match HUD.hero:
+		Def.RAY: return [HUD.game.inventory.ray.slots[slot], HUD.game.priorities.ray.slots[slot], HUD.game.fast_panel]
+		Def.ROCK: return [HUD.game.inventory.rock.slots[slot], HUD.game.priorities.rock.slots[slot], HUD.game.fast_panel]
+	return []
 
-func find_item_or_slot(target_id: int) -> int:
-	var slot: int = MISSING_NO
-	for i in range(SLOTS * HUD.hero, (SLOTS * HUD.hero) + SLOTS):
-		var id: int = Bit.of_x(Bit.SHORT, storage[i], ID)
-		var count: int = Bit.of_x(Bit.SHORT, storage[i], X)
-		if slot == MISSING_NO and count == EMPTY: slot = i
-		if id == target_id and count < LIMIT: return i
+func get_inventory(slot: int) -> Array[Node]:
+	match HUD.hero:
+		Def.RAY: return [HUD.game.inventory.ray.slots[slot], HUD.game.priorities.ray.slots[slot]]
+		Def.ROCK: return [HUD.game.inventory.rock.slots[slot], HUD.game.priorities.rock.slots[slot]]
+	return []
+
+func _count(no: int) -> int: return Bit.of_x(Bit.SHORT, storage[no], X)
+func _id(no: int) -> int: return Bit.of_x(Bit.SHORT, storage[no], ID)
+func _offset() -> int: return SLOTS * HUD.hero
+
+func find_item(search: int, target_id: int = MISSING_NO) -> int:
+	match search:
+		ITEM_OR_SLOT:
+			var slot: int = MISSING_NO
+			for item in range(_offset(), _offset() + SLOTS):
+				var count: int = _count(i)
+				if slot == MISSING_NO and count == EMPTY: slot = item
+				if _id(item) == target_id and count < LIMIT: return item
+		SAME_ITEM:
+			for item in range(_offset(), _offset() + SLOTS):
+				if _id(item) == target_id: return item
+		EMPTY_SLOT:
+			for slot in range(_offset(), _offset() + SLOTS):
+				if _count(slot) == EMPTY: return slot
 	return MISSING_NO
 
-func find_same_item(target_id: int) -> int:
-	for i in range(SLOTS * HUD.hero, (SLOTS * HUD.hero) + SLOTS):
-		if target_id == Bit.of_x(Bit.SHORT, storage[i], ID): return i
-	return MISSING_NO
-
-func find_empty_slot() -> int:
-	for i in range(SLOTS * HUD.hero, (SLOTS * HUD.hero) + SLOTS):
-		if Bit.of_x(Bit.SHORT, storage[i], X) == EMPTY: return i
-	return MISSING_NO
-
-func replace_item(source: int, id: int) -> bool:
-	var product: int = find_item_or_slot(id)
+func produce_item(source: int, product_id: int) -> void:
+	var product: int = find_item(ITEM_OR_SLOT, product_id)
 	if product != MISSING_NO:
 		use_item(source)
-		put_item(product, id)
-		return true
-	return false
+		put_item(product, product_id)
+	else:
+		HUD.game.markers.notify(HelpMarkers.STORAGE)
 
-func put_to_inventory(id: int) -> int:
-	var slot: int = decide_item_or_equipment(id)
-	if ui.have(slot): put_item(slot, id)
+func store_new_item(id: int) -> int:
+	var slot: int = find_item(SAME_ITEM, id) if id < USE else find_item(EMPTY_SLOT)
+	if slot != MISSING_NO: put_item(slot, id)
 	return slot
 
 func use_item(slot: int) -> void: # use_inventory
 	var i: int = i(HUD.hero, slot)
+	if use_inventory(_id(i)): return
+	if _count(i) < 1: return
 	storage[i] = Bit.edit_x(Bit.SHORT, storage[i], X, -1)
-	ui.update_item(slot, storage[i])
+	for ui in get_inventory(slot): ui_count_item(ui, _count(slot))
 
 func add_item(slot: int) -> void:
-	storage[slot].x += ui.UNIT
-	ui.put_item(slot, storage[slot])
-
-func put_item(slot: int, id: int) -> void:
 	var i: int = i(HUD.hero, slot)
-	storage[i] = Bit.to_x(Bit.SHORT, storage[i], ID, id)
+	storage[i] = Bit.edit_x(Bit.SHORT, storage[i], X, +1)
+	for ui in get_inventory(slot): ui_add_item(ui, slot)
+
+func put_item(slot: int, id: int, count: int = 1) -> void:
+	var i: int = i(HUD.hero, slot)
+	storage[i] = count << Bit.SHORT | id
 	add_item(slot)
 
-func put_items(slot: int, id: int, count: int) -> void:
-	storage[i(HUD.hero, slot)] = count << Bit.SHORT | id
-	ui.update_item(slot, storage[slot])
-
-func _u(slot: int, f: Callable): for ui in inventory: f.call(ui[slot])
-
-func remove_item(no):
-	_u(no, func(u): u.remove_item())
-func put_item(no, item: Dictionary):
-	_u(no, func(u): u.put_item(item))
-
-func repair_id_for_search(item: Dictionary) -> void: item.id = EMPTY
-
-func update_item(slot: int) -> void:
-	if Bit.of_x(Bit.SHORT, storage[slot], X) == EMPTY:
-		repair_id_for_search(item)
-		remove_item(slot)
-	else:
-		put_item(slot, item)
 
 
 
-
-
-
-func spend_item(slot: int, spending: int) -> bool:
-	return TypeItems.spend(spending, slot, logic)
-
-func use_item(slot: int) -> int:
-	var item: Dictionary = logic.item(logic.slot(slot).id)
-	if spend_item(slot, item.logic.spending):
-		var effect: Array = item.logic.effect.split('.')
-		get(effect[0]).get(effect[1]).call(item)
-	return logic.items.get_count(slot)
 
 func remember(id: int) -> void: # func find(id: int) -> void: status.hero.to.chats.log.add_item(bank.get_item(id).item.name)
 	status.log.add_item(logic.item(id).item.name) #; print("REMEMBER ITEM NO = ", no)
-
-var log: PanelContainer:
-	get: return HUD.game.controls.chats.log
-
-func refill(hp: int, ap: int) -> void:
-	HUD.level.aura
-	hero.to.stats.health.refill(hp)
-	hero.to.stats.aura.refill(ap)
-
-func restore() -> void:
-	hero.to.stats.health.restore()
-	hero.to.stats.aura.restore()
-
-func replenish(item: Dictionary) -> void:
-	refill(item.logic.power, item.logic.supply)
-
-func m_poison(item: Dictionary) -> void: hero.to.stats.status.decrease()
-func m_cough(item: Dictionary) -> void: hero.to.stats.status.decrease()
-func no_poison(item: Dictionary) -> void: hero.to.stats.status.remove()
-func no_cough(item: Dictionary) -> void: hero.to.stats.status.remove()
 
 func reload_resource() -> void:
 	pass
@@ -237,9 +254,6 @@ func add_usable(s: Dictionary, i: int) -> void:
 
 func use_as_slot(slot: int) -> int:
 	return use_item({ "slot": slot, "item": get_item(slot) })
-	
-func use_item(i: Dictionary) -> int:
-	return uses_left(effect.use_item(i.slot), i.item.item.name)
 
 func _usage(s: Dictionary, p: Node, condition: Callable) -> int:
 	var previous: Dictionary = s.result.front()
@@ -256,20 +270,15 @@ func _sort_usage(s: Dictionary, p: Node) -> int:
 		Sort.DESC: return _usage(s, p, func(a, b): return a < b)
 	return use_item(s.result.pick_random())
 
-func uses_left(size: int, kind: String = "") -> int:
-	match size:
-		-1: effect.status.log.add_any("Рей: Воу-воу, полегче с этим.")
-		0: effect.status.log.add_any(kind + " - расходников не осталось!")
-		_: effect.status.log.add_any(kind + " - расходников осталось: " + str(size))
-	return size
-
 func _usables_search(key: String, p: Node) -> int:
-	if p.points == p.maximum: return uses_left(-1)
+	if p.points == p.maximum:
+		HUD.game.markers.notify(HelpMarkers.IS_FULL)
+		return -1
 	
 	var s: Dictionary = { "result": [], "size": 0, "sort": Sort.ASC, "key": key }
 	for i in range(0, MAX): add_usable(s, i)
 	match s.size:
-		0: return uses_left(0)
+		0: return 0
 		1: return use_item(s.result.front())
 		_: return _sort_usage(s, p)
 
@@ -399,7 +408,7 @@ func same_slot() -> bool:
 
 func item_slot(_item: Dictionary) -> bool:
 	item = _item
-	return same_slot() or same_item()
+	return same_slot() or find_item(SAME_ITEM)
 
 func _minimum(i: Dictionary) -> void:
 	if i.cell.x < _cost: _cost = i.cell.x
@@ -423,7 +432,7 @@ func put_crafted_item(cells: Array, id: int) -> void:
 		put_product(cells, id, slot))
 
 
-
+# CRAFT
 
 var bank: Dictionary
 var space: Dictionary = Def.DICT
@@ -494,6 +503,8 @@ func select_space() -> void:
 		select.reset_selection()
 	else:
 		select.from_space(self)
+
+
 
 
 func _cursor() -> Dictionary: return { "bag": HUD.NODE, "slot": Def.INT }
@@ -637,11 +648,8 @@ func _get_icon(id: int) -> StringName:
 
 func get_slot(slot: int) -> Dictionary: return logic.slot(slot)
 
-func lmb_out(e: InputEventMouseButton) -> bool:
-	return e.button_index == MOUSE_BUTTON_LEFT and e.is_released()
-
 func move(e: InputEvent) -> void:
-	if e is InputEventMouseButton and lmb_out(e):
+	if (e is InputEventMouseButton and (e.button_index == MOUSE_BUTTON_LEFT) and e.is_released()):
 		reset_texture(_image)
 
 func put_item(item: Dictionary, image: TextureRect) -> void:
@@ -729,9 +737,6 @@ func confirm_item() -> void:
 
 
 
-
-
-
 var title: Array[HBoxContainer] = []
 var size: int
 var slots: Array:
@@ -745,19 +750,3 @@ func _drag(cell: CellDrag) -> void:
 func _add_ui(res: Array, ui: Variant, iterator: Callable) -> void:
 	res.append(ui)
 	iterator.call(func(i): _drag(i.margin.view))
-
-func set_items(bag: HFlowContainer) -> void:
-	size = ui.EMPTY
-	_add_ui(ui.inventory, bag.get_children().slice(ui.EMPTY, ui.SLOTS), 
-		func(f): for item in ui.inventory.back(): f.call(item))
-	_add_ui(title, bag.title, func(f): f.call(bag.title.slot))
-	bag.title.workspace.cancel.trade = trade
-
-func _t(f: Callable) -> void: for t in title: f.call(t)
-
-func describe(item: Variant): _t(func(t): t.describe(item))
-func equipment(): _t(func(t): t.equipment(
-	trade.equip.select.equip, trade.equipped()))
-func production(): _t(func(t): t.production(slots))
-func product(item: Dictionary): _t(func(t): t.put_product(item))
-func helping() -> void: _t(func(t): t.helping())

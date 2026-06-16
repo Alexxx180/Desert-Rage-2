@@ -1,6 +1,5 @@
 extends CanvasLayer
 
-@onready var TEXTURE := PlaceholderTexture2D.new()
 @onready var ost: SoundtrackSystem = SoundtrackSystem.new()
 @onready var stats: SessionStats = SessionStats.new(get_tree())
 
@@ -8,7 +7,7 @@ var state: int = 0
 var hero: int = 0
 var _pause: Control ; var _game: Control ; var _settings: Control ; var _sound: Control ; var _information: Control
 var _status: GameStatuses ; var _menu: Menu ; var _preserves: Preserves ; var _aura: AuraResource
-var _inventory: HeroInventory ; var _animation: CharacterAnimation ; LevelRoot
+var _animation: CharacterAnimation ; # var _inventory: HeroInventory ;
 
 func create_menu(node: Control, path: StringName, caption: StringName) -> Control:
 	return node if node != null else menu.connect_menu(Def.lazy(self, node, path, caption))
@@ -26,8 +25,8 @@ var sound: Control:
 var menu: Menu:
 	get: return Def.ref(self, _menu, &"_menu", new_menu)
 
-var inventory: HeroInventory:
-	get: return Def.ref(self, _inventory, &"_inventory", new_hero_inventory)
+# var inventory: HeroInventory:
+# 	get: return Def.ref(self, _inventory, &"_inventory", new_hero_inventory)
 var preserves: Preserves:
 	get: return Def.ref(self, _preserves, &"_preserves", new_preserve)
 var status: GameStatuses:
@@ -42,7 +41,7 @@ var _world: WorldInput = WorldInput.new()
 
 func new_menu() -> Menu: return Menu.new()
 func new_character_animation() -> CharacterAnimation: return CharacterAnimation.new()
-func new_hero_inventory() -> HeroInventory: return HeroInventory.new()
+# func new_hero_inventory() -> HeroInventory: return HeroInventory.new()
 func new_preserve() -> Preserves: return Preserves.new()
 func new_world_input() -> WorldInput: return WorldInput.new()
 func new_game_statuses() -> GameStatuses: return GameStatuses.new()

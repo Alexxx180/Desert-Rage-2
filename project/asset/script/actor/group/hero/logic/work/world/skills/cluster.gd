@@ -23,7 +23,7 @@ func resize_clusters() -> void:
 	
 	cluster.resize(CLUSTER)
 	var count: int = 0
-	for y in range(0, Def.TILESET8):
+	for y in range(0, Def.T8):
 		var tiles: PackedVector2Array = HUD.level.execute.get_used_cells_by_id(Def.TAGS, Def.to8(y))
 		if tiles.size() == 0: break
 		if count + tiles.size() > cluster.size(): cluster.resize(cluster.size() * 2)

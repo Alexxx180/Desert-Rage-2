@@ -10,21 +10,27 @@ func set_chip(node: Node2D) -> TileDecorator:
 	return self
 
 func atlas(next: int = -1) -> TileDecorator:
-	tile[Def.ATLAS] = next
-	if next == -1: tile[Def.ATLAS] = Def.ofmap(get_atlas())
+	if next == -1:
+		tile[Def.ATLAS] = Def.ofmap(get_cell_atlas_coords(Def.tomap(tile[Def.COORDS])))
+	else:
+		tile[Def.ATLAS] = next
 	return self
 
 func id(next: int = -1) -> TileDecorator:
-	tile[Def.ID] = next
-	if next == -1: tile[Def.ID] = get_cell_source_id(Def.tomap(tile[Def.COORDS]))
+	if next == -1:
+		var id: int = get_cell_source_id(Def.tomap(tile[Def.COORDS]))
+		tile[Def.ID] = id
+	else:
+		tile[Def.ID] = next
 	return self
 
-func type(next: int) -> TileDecorator:
-	tile[Def.TYPE] = next
+func type(next: int = -1) -> TileDecorator:
 	if next == -1:
 		var alt_id: int = get_cell_alternative_tile(Def.tomap(tile[Def.COORDS]))
 		tile[Def.TYPE] = alt_id >> 2
 		tile[Def.ALT] = alt_id & 3
+	else:
+		tile[Def.TYPE] = next
 	return self
 
 func alt(next: int) -> TileDecorator:
@@ -44,9 +50,6 @@ func layer_name() -> String:
 
 func busy() -> Array[Vector2i]:
 	return get_used_cells_by_id(tile[Def.ID], Def.tomap(tile[Def.ATLAS]))
-
-func get_atlas() -> Vector2i:
-	return get_cell_atlas_coords(Def.tomap(tile[Def.COORDS]))
 
 func paint() -> TileDecorator:
 	set_cell(Def.tomap(tile[Def.COORDS]), tile[Def.ID], Def.tomap(tile[Def.ATLAS]))

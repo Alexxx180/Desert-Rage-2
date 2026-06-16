@@ -16,6 +16,8 @@ var last_color: Color
 
 func setup() -> void: HUD.aura_time.timeout.connect(diffusion) # burns - blink
 
+func resource(hero: int) -> int: return points[hero * 2 + 1]
+
 func transport(hero: int) -> void:
 	var h: CharacterBody2D = HUD.level.entity[hero]
 	h.animation.transport()

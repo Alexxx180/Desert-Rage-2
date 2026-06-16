@@ -13,6 +13,15 @@ func get_tile(no: int) -> int: return tile[Def.offset(HUD.hero, no)]
 func set_tile(no: int) -> void: tile[Def.offset(HUD.hero, no)] = Def.ofmap(border.local_to_map(HUD.level.entity[HUD.hero].position))
 func no_tile(no: int) -> void: tile[Def.offset(HUD.hero, no)] = 0
 
+func tile_at() -> PackedInt32Array:
+	var h: CharacterBody2D = HUD.level.entity[HUD.hero]
+	return HUD.level.border.pos(h.position + h.plate.position).id().atlas().type().tile
+
+func tile_near() -> PackedInt32Array:
+	var h: CharacterBody2D = HUD.level.entity[HUD.hero]
+	TileDecorator
+	return HUD.level.border.pos(h.position + h.lever.position).id().atlas().type().tile
+
 var deploy: HeroDeploy:
 	get: return Def.ref(self, _deploy, &"_deploy", new_hero_deploy)
 var boxes: LevelBoxes:

@@ -6,10 +6,10 @@ const timing: PackedFloat32Array = [0.2, 0.4, 0.6]
 
 func set_direction(pos: Vector2, direction: Vector2, type: int) -> void:
 	match type:
-		KICK: texture = preload("res://asset/resource/media/image/actor/player/vfx/kick.png")
-		PUNCH: texture = preload("res://asset/resource/media/image/actor/player/vfx/punch.png")
-		FIRE: texture = preload("res://asset/resource/media/image/actor/player/vfx/skills/ray/whip.svg")
-		DROP: texture = preload("res://asset/resource/media/image/actor/player/vfx/skills/rock/water.svg")
+		KICK: texture = preload("res://icon/vfx/kick.png")
+		PUNCH: texture = preload("res://icon/vfx/punch.png")
+		FIRE: texture = preload("res://icon/vfx/ray/fire.svg")
+		DROP: texture = preload("res://icon/vfx/rock/water.svg")
 	position = pos - Vector2(0, 32)
 	var offsets: Vector2 = Vector2(OFFSET, OFFSET)
 	var angle: float = Def.rotate(direction)

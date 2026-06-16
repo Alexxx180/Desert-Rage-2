@@ -1,4 +1,4 @@
-[gd_scene load_steps=822 format=3 uid="uid://wbjmq3n817nk"]
+[gd_scene load_steps=824 format=3 uid="uid://wbjmq3n817nk"]
 
 [ext_resource type="Script" uid="uid://co1bl75te11gl" path="res://asset/script/actor/group/hero/main_hero.gd" id="1_y0t4a"]
 [ext_resource type="PackedScene" uid="uid://c136xgt1v5vbl" path="res://asset/scene/actor/group/hero/base/view/base/shadow.tscn" id="4_bt2v1"]
@@ -5738,6 +5738,12 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="Gradient" id="Gradient_umkci"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_n6fgc"]
+gradient = SubResource("Gradient_umkci")
+width = 2
+
 [node name="ray" type="CharacterBody2D" groups=["player"]]
 collision_layer = 2
 collision_mask = 536870913
@@ -5765,6 +5771,9 @@ offset = Vector2(0, -60)
 
 [node name="shape" type="CollisionShape2D" parent="lever"]
 shape = ExtResource("6_fsxid")
+
+[node name="Sprite2D" type="Sprite2D" parent="lever"]
+texture = SubResource("GradientTexture1D_n6fgc")
 
 [node name="plate" type="Area2D" parent="."]
 

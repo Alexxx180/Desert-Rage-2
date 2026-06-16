@@ -21,6 +21,7 @@ var acts: PackedInt32Array = [a([A, A]), a([B, A, A]), a([A, Y, A]), a([A, B, A]
 	a([B, B, A]), a([B, X, B]), a([B, A, B]), a([B, A, A, B]), a([A, Y, A, Y])]
 # var hero: int enum { RAY, ROCK } enum { TOOL, FIGHT, DANCE }
 var combo: int
+const close: Vector2 = Vector2(24, 20)
 
 func act_enter() -> void: HUD.level.set_tile(HUD.hero, Def.LEVER)
 func act_exit() -> void: HUD.level.no_tile(HUD.hero, Def.LEVER)
@@ -33,12 +34,15 @@ func input(_event: InputEvent) -> void:
 		action_input()
 	if _hold(&"menu1"): open_menu()
 
-func _moves() -> Vector2: return Input.get_vector(&"left", &"right", &"forward", &"backward")
-
-func action_input() -> void:
-	var direction: Vector2 = _moves()
+func _movement() -> void:
+	var direction: Vector2 = Input.get_vector(&"left", &"right", &"forward", &"backward")
 	HUD.level.entity[HUD.hero].make_velocity(direction * Def.MOVE)
 	HUD.animation.direct(direction)
+	if direction != Vector2.ZERO:
+		HUD.level.entity[HUD.hero].lever.position = close * direction
+
+func action_input() -> void:
+	_movement()
 	if _press(&"act1"): punch()
 	if _press(&"act2"): kick()
 	if _press(&"act3"): skill_a()
@@ -72,6 +76,11 @@ func kick() -> void:
 
 func skill_a() -> void:
 	combo = combo << Bit.MASK3 | X
+	LevelRoot
+	TileDecorator
+	var tile: PackedInt32Array = HUD.level.tile_near()
+	if tile[Def.ID] == Def.FLOOR and tile[Def.TYPE] == Def.ICE_FLOOR:
+		HUD.level.border.type(Def.FLOORS).paint_alt()
 
 func skill_b() -> void:
 	combo = combo << Bit.MASK3 | Y

@@ -1,5 +1,9 @@
 extends InventoryItem
 
+# func _get_drag_data(_p) -> InventoryItem: return set_preview(self)
+# func _can_drop_data(_p, cell: Variant) -> bool: return cell is InventoryItem
+# func _drop_data(_p, cell: Variant) -> void: trades(cell, self)
+
 @onready var color: ColorRect = $margin/selection/fast/color
 @onready var back: TextureRect = $margin/selection/fast/back
 

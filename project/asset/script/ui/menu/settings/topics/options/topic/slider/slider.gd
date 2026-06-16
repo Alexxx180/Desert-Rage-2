@@ -19,7 +19,7 @@ func _ready() -> void:
 		if v == max_value:
 			add_theme_icon_override("grabber", PreloadBus.grabber)
 		else:
-			add_theme_icon_override("grabber", HUD.TEXTURE)
+			add_theme_icon_override("grabber", null)
 	)
 
 func get_root() -> String: return "../../../../../../"
