@@ -48,12 +48,12 @@ func activate_puddle(pos: Vector2) -> void:
 	else:
 		contact(HUD.level.border.tile[Def.COORDS])
 
-func draw_the_puddle() -> void:
-	if rain == null:
-		rain = Def.rain.instantiate()
-		HUD.level.border.add_child(rain)
-	HUD.level.border.add_chip(rain)
-	rain.shows()
+#func draw_the_puddle() -> void:
+#	if rain == null:
+#		rain = Def.rain.instantiate()
+#		HUD.level.border.add_child(rain)
+#	HUD.level.border.add_chip(rain)
+#	rain.shows()
 
 func draw_tile(map_coords: int, no: int) -> void:
 	HUD.level.border.coords(map_coords).id().atlas().type()
@@ -62,7 +62,7 @@ func draw_tile(map_coords: int, no: int) -> void:
 		PUDDLE: HUD.level.border.type(Def.PUDDLE_ON).paint_alt()
 
 func _around(tile: int) -> bool:
-	var t: PackedInt32Array = HUD.level.border.coords(tile).id().alt().tile
+	var t: PackedInt32Array = HUD.level.border.coords(tile).id().type().tile
 	return ((t[Def.ID] == Def.LOGIC and t[Def.ATLAS] == Def.SOURCE_OFF) or
 		(t[Def.ID] == Def.FLOOR and t[Def.ATLAS] != Def.WALL and t[Def.TYPE] == Def.PUDDLE_OFF))
 

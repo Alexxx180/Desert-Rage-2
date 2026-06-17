@@ -9,6 +9,7 @@ var timer: Timer
 var hero: int
 var _hero: Node:
 	get: return HUD.level.group.hero[hero]
+var state: PackedByteArray = [0, 0]
 
 func speeding() -> void:
 	meter[SPEED] += meter[INCREMENT]
@@ -47,8 +48,8 @@ func switch_hero(hero: int, process: bool) -> void:
 func select() -> void:
 	var that: int = next()
 	HUD.level.load_hero(that)
-	if Bit.of(HUD.state, Def.DEPLOYED):
-		HUD.level.entity[HUD.hero].position = HUD.level.entity[that].position
+	# if Bit.of(HUD.state, Def.DEPLOYED):
+	HUD.level.entity[that].position = HUD.level.entity[HUD.hero].position
 	traverse_camera()
 	HUD.hero = that
 
@@ -84,17 +85,17 @@ func forget_velocity() -> void:
 		HUD.level.entity[i].add_velocity(Vector2.ZERO)
 
 func traverse_camera():
-	var h: CharacterBody2D = HUD.level.entity[HUD.hero]
+	#var h: CharacterBody2D = HUD.level.entity[HUD.hero]
 	var n: CharacterBody2D = HUD.level.entity[next()]
-	if not Bit.of(h.state[HUD.hero], Def.CAMERA):
-		h.state[Def.STATUS] = Bit.to1(h.state[Def.STATUS], Def.CAMERA)
-		n.state[Def.STATUS] = Bit.to0(n.state[Def.STATUS], Def.CAMERA)
-		if h.state[Def.BOX]:
-			HUD.level.group.position = h.position
-			HUD.level.group.reparent(HUD.level)
-		else:
-			HUD.level.group.position = Vector2.ZERO
-			HUD.level.group.reparent(h)
+	# if not Bit.of(h.state[HUD.hero], Def.CAMERA):
+		# h.state[Def.STATUS] = Bit.to1(h.state[Def.STATUS], Def.CAMERA)
+		# n.state[Def.STATUS] = Bit.to0(n.state[Def.STATUS], Def.CAMERA)
+	#if Bit.of(state[HUD.hero], Def.BOX): # TODO FIXME Box group
+	#	HUD.level.group.position = h.position
+	#	HUD.level.group.reparent(HUD.level)
+	#else:
+	HUD.level.group.position = Vector2.ZERO
+	HUD.level.group.reparent(n)
 
 var zoom: Vector3 = Vector3(0.5, 0.1, 1.5)
 

@@ -102,7 +102,7 @@ func tile_melt(coords: int) -> void:
 		HUD.level.border.type(Def.FLOOR).paint_alt()
 
 func tile_walk(hero: CharacterBody2D, enter: bool = true) -> void:
-	var atlas: int = Def.of8(HUD.level.border.coords(HUD.level.get_tile(hero.no, Def.PLATE)).tile[Def.ATLAS])
+	var atlas: int = HUD.interact.tile_atlas(hero, Def.PLATE)
 	if atlas == Def.TELEPORT_ON:
 		var c: int = get_cluster(TELEPORT, Def.ofmap(HUD.level.border.tile[Def.COORDS]))
 		for i in range(Def.xmap(access[c]), Def.ymap(access[c])):

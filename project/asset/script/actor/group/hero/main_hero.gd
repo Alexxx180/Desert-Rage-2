@@ -6,13 +6,13 @@ extends CharacterBody2D
 @onready var shadow: Sprite2D = $shadow
 @onready var animation: Timer = $animation
 # @onready var animation: AnimationTree = $animation
-
+var no: int
+var weight: int = 0
 var _mirror: AnimatedSprite2D = null
 var mirror: AnimatedSprite2D:
 	get: return HUD.animation.get_mirror_sprite(self, Def.ray_mirror, _mirror)
 
-var state: PackedInt32Array = [0, 0, 0]
-var boxes: PackedByteArray = []
+var boxes: PackedByteArray = [] # var state: PackedInt32Array = [0, 0, 0]
 var is_monitoring: bool: set = set_monitoring
 
 func stop_animation() -> void:
@@ -21,16 +21,16 @@ func stop_animation() -> void:
 func _ready() -> void:
 	animation.timeout.connect(stop_animation)
 	plate.body_entered.connect(HUD.level.plate_encounter)
-	plate.body_exited.connect(HUD.level.plate_diverge)
+	plate.body_exited.connect(HUD.level.plate_disappear)
 	lever.body_entered.connect(HUD.level.lever_encounter)
-	lever.body_exited.connect(HUD.level.lever_diverge)
+	lever.body_exited.connect(HUD.level.lever_disappear)
 
 func set_monitoring(value: bool) -> void:
 	lever.monitoring = value
 	plate.monitoring = value
 
 func make_velocity(motion: Vector2) -> void: 
-	velocity = motion
+	velocity = (motion - Vector2.ONE * weight * 0.5)
 
 func make_position(motion: Vector2) -> void: position = motion
 func _physics_process(_delta: float) -> void: move_and_slide()

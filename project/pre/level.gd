@@ -5,7 +5,7 @@ class_name LevelRoot extends Node2D
 
 var execute: TileDecorator ; var _conductor: FlowConductor ; var _cluster: TileCluster
 var _pillar: PillarChains ; var _deploy: HeroDeploy ; var _boxes: LevelBoxes
-var fire: GPUParticles2D ; var _cloud: RainParticle
+var fire: GPUParticles2D ; var rain: GPUParticles2D
 
 var entity: Array[CharacterBody2D] = [null, null]
 var tile: PackedInt32Array = [0, 0, 0, 0]
@@ -29,17 +29,10 @@ var conductor: FlowConductor:
 var pillar: PillarChains:
 	get: return Def.ref(self, _pillar, &"_pillar", new_pillar_chains)
 
-func plate_encounter() -> void:
-	var h: CharacterBody2D = HUD.level.entity[HUD.hero]
-	tile[Def.offset(HUD.hero, Def.PLATE)] = Def.ofmap(border.local_to_map(h.position))
-	HUD.level.cluster.tile_walk(h, true)
-
-func plate_diverge() -> void:
-	HUD.level.cluster.tile_walk(HUD.level.entity[HUD.hero], false)
-	tile[Def.offset(HUD.hero, Def.PLATE)] = 0
-
-func lever_encounter(_t: TileMapLayer) -> void: HUD._world.ledge_jump()
-func lever_diverge(_t: TileMapLayer) -> void: pass
+func plate_encounter(body: Variant) -> void: HUD.interact.plate_encounter(body)
+func plate_disappear(body: Variant) -> void: HUD.interact.plate_disappear(body)
+func lever_encounter(body: Variant) -> void: HUD.interact.trigger_encounter(body)
+func lever_disappear(body: Variant) -> void: HUD.interact.trigger_disappear(body)
 
 func new_pillar_chains() -> PillarChains: return PillarChains.new()
 func new_conductor() -> FlowConductor: return FlowConductor.new()
@@ -55,6 +48,7 @@ func new_hero(no: int) -> CharacterBody2D:
 		else:
 			hero = load(Def.rock).instantiate()
 			hero.name = &"rock"
+		hero.no = no
 		add_child(hero)
 		return hero
 	return entity[no]

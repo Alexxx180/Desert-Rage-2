@@ -25,3 +25,15 @@ static func to_x(mask: int, field: int, no: int, next: int) -> int:
 
 static func edit_x(mask: int, field: int, no: int, add: int) -> int:
 	return to_x(mask, field, no, of_x(mask, field, no) + add)
+
+static func bytes_to_int(fields: PackedByteArray, mask: int) -> int:
+	var value: int = 0 ; for i in range(0, len(fields)): value |= fields[i] << (i * mask)
+	return value
+
+"""
+static func iterate_set_bits(mask: int) -> int: # Handle negative integers safely if treating as an unsigned bitmask
+	while mask != 0:
+		var bit_index: int = ctz(mask) # 1. Find the index of the lowest set bit (0 to 63)
+		print("Found active bit at index: ", bit_index) # 2. Execute your logic with the active index
+		mask = mask & (mask - 1) # # 3. Clear the lowest set bit to move to the next one
+"""

@@ -7,13 +7,10 @@ class_name PlatformingBox extends CharacterBody2D
 var no: int
 var ledge: Vector2:
 	get: return position + offset
-
-func _ready() -> void: HUD.level.boxes.controls(self)
-
+# func _ready() -> void: HUD.level.boxes.controls(self)
 func _physics_process(_delta: float) -> void:
-	if Bit.of(HUD.level.boxes.slides, no):
-		HUD.level.boxes.slide_the_box(self)
+	# if HUD.level.boxes.is_sliding(no): # HUD.level.boxes.slide_the_box(self)
 	move_and_slide()
 
-func add_velocity(next: Vector2) -> void:
+func make_velocity(next: Vector2) -> void:
 	velocity = next

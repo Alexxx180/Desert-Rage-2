@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://esjdr0frox65"]
+
+[ext_resource type="Script" uid="uid://l2rrd7usgf5y" path="res://asset/script/util/world/drive/box/base/box.gd" id="1_322sx"]
+[ext_resource type="Shape2D" uid="uid://cqyj3i1vf3w47" path="res://asset/resource/geometry/interactables/box/box.tres" id="2_g4e7c"]
+[ext_resource type="Texture2D" uid="uid://kxrjc3v8k5q1" path="res://icon/platform/b_small.svg" id="3_bbqui"]
+[ext_resource type="PackedScene" uid="uid://cwvc7idib7ro3" path="res://asset/scene/util/world/drive/box/base/press.tscn" id="4_2qqvj"]
+[ext_resource type="PackedScene" uid="uid://bocuu344hsqv" path="res://asset/scene/ui/util/fov.tscn" id="5_r7lfd"]
+
+[node name="small_box" type="CharacterBody2D" groups=["box"]]
+collision_layer = 16
+collision_mask = 536871135
+motion_mode = 1
+script = ExtResource("1_322sx")
+weight = 1.9
+
+[node name="geometry" type="CollisionShape2D" parent="."]
+position = Vector2(0, -9)
+shape = ExtResource("2_g4e7c")
+
+[node name="view" type="Sprite2D" parent="."]
+position = Vector2(-35, -67)
+texture = ExtResource("3_bbqui")
+centered = false
+
+[node name="press" parent="." instance=ExtResource("4_2qqvj")]
+position = Vector2(0, -9)
+
+[node name="fov" parent="." instance=ExtResource("5_r7lfd")]
+position = Vector2(1, -29)
+scale = Vector2(2, 2)
+rect = Rect2(-18, -19, 35, 35)

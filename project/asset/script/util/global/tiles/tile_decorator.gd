@@ -5,13 +5,9 @@ enum { LEVEL = 0, FLOOR = 1, BREAK = 2, SIZE = 5 }
 var tile: PackedInt32Array = [0, 0, 0, 0, 0]
 var data: String = "PFB"
 
-func set_chip(node: Node2D) -> TileDecorator:
-	node.position = map_to_local(Def.tomap(tile[Def.ATLAS]))
-	return self
-
 func atlas(next: int = -1) -> TileDecorator:
 	if next == -1:
-		tile[Def.ATLAS] = Def.ofmap(get_cell_atlas_coords(Def.tomap(tile[Def.COORDS])))
+		tile[Def.ATLAS] = Def.of8(get_cell_atlas_coords(Def.tomap(tile[Def.COORDS])))
 	else:
 		tile[Def.ATLAS] = next
 	return self
@@ -49,14 +45,15 @@ func layer_name() -> String:
 	return tile_set.get_source(tile[Def.ID]).resource_name
 
 func busy() -> Array[Vector2i]:
-	return get_used_cells_by_id(tile[Def.ID], Def.tomap(tile[Def.ATLAS]))
+	return get_used_cells_by_id(tile[Def.ID], Def.to8(tile[Def.ATLAS]))
 
 func paint() -> TileDecorator:
-	set_cell(Def.tomap(tile[Def.COORDS]), tile[Def.ID], Def.tomap(tile[Def.ATLAS]))
+	set_cell(Def.tomap(tile[Def.COORDS]), tile[Def.ID], Def.to8(tile[Def.ATLAS]))
 	return self
 
 func paint_alt() -> TileDecorator:
-	set_cell(Def.tomap(tile[Def.COORDS]), tile[Def.ID], Def.tomap(tile[Def.ATLAS]), ((tile[Def.TYPE] << 2) | tile[Def.ALT])  + 1)
+	var coords: Vector2i = Def.tomap(tile[Def.COORDS])
+	set_cell(coords, tile[Def.ID], Def.to8(tile[Def.ATLAS]), ((tile[Def.TYPE] << 2) | tile[Def.ALT]) + 1)
 	return self
 
 func erase() -> TileDecorator:

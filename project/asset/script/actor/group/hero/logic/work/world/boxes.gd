@@ -2,15 +2,23 @@ class_name LevelBoxes extends RefCounted
 
 enum { BORDERS, WORLD, ENTITY, GROUND, SLIDE = 2, POWER = 40000 } # , JUMP = 200000, GRAVITY = 700000 # CHARACTER = 3, BOX = 5
 
+const small: PackedScene = preload("res://pre/box/small.tscn")
+const large: PackedScene = preload("res://pre/box/large.tscn")
+const fire: PackedScene = preload("res://pre/box/fire.tscn")
+
 var boxes: Array[CharacterBody2D] = []
 var pos: PackedVector2Array = []
 var count: PackedByteArray = []
 var state: PackedByteArray = []
 
+var grab: PackedByteArray = []
+
+func is_sliding(no: int) -> bool: return Bit.of(state[SLIDE], no)
+
 func toggle_physics(no: int) -> void:
-	if count[no] == 0 and not Bit.of(state[SLIDE], no):
+	if count[no] == 0 and not is_sliding(no):
 		boxes[no].process_mode = Node.PROCESS_MODE_DISABLED
-	elif count[no] == 1 or Bit.of(state[SLIDE], no):
+	elif count[no] == 1 or is_sliding(no):
 		boxes[no].process_mode = Node.PROCESS_MODE_INHERIT
 
 func toggle_slide(no: int, next: bool) -> void:
@@ -18,21 +26,30 @@ func toggle_slide(no: int, next: bool) -> void:
 	toggle_physics(no)
 
 func slide_the_box(box: CharacterBody2D) -> void:
-	box.add_velocity(Vector2(box.velocity.x, Def.GRAVITY)) # * delta
+	box.make_velocity(Vector2(box.velocity.x, Def.GRAVITY)) # * delta
 
 func throw_effect(hero: CharacterBody2D, motion: Vector2i) -> void: # THROW
 	for box in hero.boxes:
 		box.velocity = POWER * motion
 
 func apply_velocity(hero: CharacterBody2D, velocity: Vector2) -> void:
-	for box in hero.boxes:
-		box.velocity = velocity # make_velocity(velocity)
+	pass
+	# for box in hero.boxes:
+	# 	box.velocity = velocity # make_velocity(velocity)
 
-func add_box(box: CharacterBody2D) -> void:
+func add_box(box_type: int, position: Vector2) -> void:
+	var box: CharacterBody2D
+	match box_type:
+		Def.SMALL_BOX: box = small.instantiate()
+		Def.LARGE_BOX: box = large.instantiate()
+		Def.FIRE_BOX: box = fire.instantiate()
 	box.no = boxes.size()
 	pos.append(Vector2.ZERO)
 	boxes.append(box)
 	count.append(0)
+	HUD.level.add_child(box)
+	box.position = position
+	# box.show()
 # LINKING
 func pushes(hero: CharacterBody2D, velocity: Vector2) -> void:
 	for i in range(0, count.size()):
@@ -46,21 +63,21 @@ func fixate_box(hero: int, box: int, add: int) -> void:
 
 func _grab(hero: CharacterBody2D, box: CharacterBody2D) -> void:
 	fixate_box(hero.no, box.no, 1)
-	if Bit.one(hero.state[Def.BOX]):
+	if Bit.one(grab[hero.no]):
 		hero.to.moves.set_move_action("go")
 
 func _release(hero: CharacterBody2D, box: CharacterBody2D) -> void:
 	fixate_box(hero.no, box.no, -1)
-	if hero.state[Def.BOX] == 0:
+	if grab[hero.no] == 0:
 		hero.to.moves.set_move_action("pull")
 
 func controls(box: CharacterBody2D) -> void:
 	var see: Area2D = box.get_node("press")
 	see.body_entered.connect(encounter)
 	see.body_exited.connect(diverge)
-	var fov: VisibleOnScreenNotifier2D = box.get_node("fov")
-	fov.screen_entered.connect(box.show)
-	fov.screen_entered.connect(box.hide)
+	# var fov: VisibleOnScreenNotifier2D = box.get_node("fov")
+	# fov.screen_entered.connect(box.show)
+	# fov.screen_exited.connect(box.hide)
 
 # WORK
 func turn_walls_collision(box: CharacterBody2D, value: bool) -> void:

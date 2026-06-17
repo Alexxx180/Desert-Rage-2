@@ -1,21 +1,22 @@
 class_name Def
 
 enum { LOGIC = 0, FLOOR = 1, ENTRY = 2, BLUE_OFF = 0, U_WATER = 0, BLUE_ON, U_EXIT = 1, RED_OFF, U_WALL_OFF = 2, RED_ON,
-	U_WALL_ON = 3, WALL = 3, GREEN_OFF, U_LADDER = 4, GREEN_ON, D_LADDER = 5,
+	U_WALL_ON = 3, WALL = 3, LEDGE = 5, GREEN_OFF, U_LADDER = 4, GREEN_ON, D_LADDER = 5,
 	WHITE_OFF, ENEMY = 6, WHITE_ON, BOSS = 7, BLACK_OFF, M_WATER = 8,
-	TAGS = 8, BLACK_ON, M_EXIT = 9, CHESTS = 9, BRONZE_OFF, D_WALL_OFF = 10, BRONZE_ON,
+	TAGS = 8, BLACK_ON, M_EXIT = 9, CHESTS = 9, GROUND = 9, BRONZE_OFF, D_WALL_OFF = 10, BRONZE_ON,
 	D_WALL_ON = 11, SILVER_OFF, H_SPRING_OFF = 12, SILVER_ON, H_SPRING_ON = 13, GOLD_OFF,
 	B_SPRING_OFF = 14, GOLD_ON, B_SPRING_ON = 15, PLATINUM_OFF, D_WATER = 16, PLATINUM_ON,
-	D_EXIT = 17, PLACE, SLIDE = 18, TELEPORT_ON, PILLAR = 19, SOURCE_OFF, STAND_OFF = 20,
-	SOURCE_ON, STAND_ON = 21, LEVER_OFF, SECRET_OFF = 22, LEVER_ON, SECRET_ON = 23, PLATE_OFF,
-	PAGE = 24, PLATE_ON, TELEPORT_OFF, SPIKER, COMFORTER, SUPPLIER, COOLER, SMALL_BOX, FIRE_BOX, LARGE_BOX } # tiles
+	D_EXIT = 17, PLACE, SLIDE = 18, TELEPORT_ON, PILLAR = 19, SOURCE_OFF, G_SECRET_OFF = 20,
+	SOURCE_ON, G_SECRET_ON = 21, LEVER_OFF, W_SECRET_OFF = 22, LEVER_ON, W_SECRET_ON = 23,
+	PLATE_OFF, PAGE = 24, PLATE_ON, TELEPORT_OFF, SPIKER, COMFORTER, SUPPLIER, COOLER,
+	SMALL_BOX, FIRE_BOX, LARGE_BOX, STAND_OFF, STAND_ON } # tiles
 
 enum { N = -1, HERO, DEPLOYED = 0, NO = 0, PLATE = 0,
 	OVERWORLD = 1,  LEVER = 1, STATUS = 1, CASUAL = 2, OFFSET = 2,  LAYER, LEVEL = 14,
 	DEPLOY_DELTA = 4096, JUMP_POWER = 200000, MOVE = 550, GRAVITY = 700000 }
 
 enum { FLOORS, PUDDLE_OFF, PUDDLE_ON, ICE_FLOOR, ICE_THICK,
-	ICE_MECH = 0, 
+	ICE_MECH = 0,
 	ID = 0, TYPE = 1, ALT = 2, ATLAS = 3, COORDS = 4, T4 = 16, T8 = 64 } # alternatives
 enum { DEAD, OPEN_MENU = 0, FREEZE, TRANSIT = 1, BOX, ACTING, JUMP, FALL, CAMERA, GRAB } # status
 enum { PARTY = 2, RAY = 0, ROCK, EYE_SEEKER } # enemy name
@@ -141,8 +142,8 @@ const ability: StringName = &"res://now/hud/game/ability.tscn"
 const priorities: StringName = &"res://now/hud/game/priorities.tscn"
 const title: StringName = &"res://pre/ui/menu/title.tscn"
 const fire: StringName = &"res://pre/particle/fire/fire.tscn"
+const rain: StringName = &"res://pre/particle/rain/rain.tscn"
 # PRELOADS
-const rain: PackedScene = preload("res://pre/particle/rain/rain.tscn")
 const sand: PackedScene = preload("res://pre/particle/sand.tscn")
 const throw: PackedScene = preload("res://pre/particle/fight/kick.tscn")
 

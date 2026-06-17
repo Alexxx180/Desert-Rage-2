@@ -124,15 +124,15 @@ func pull_box(has_boxes: bool) -> void:
 		set_move_action(&"pull" if has_boxes else &"go")
 
 func mirror_animation() -> void:
-	var animation: String = HUD.level.entity[HUD.hero].view.profile.animation
+	var animation: String = HUD.level.entity[HUD.hero].profile.animation
 	if animation.contains("forward"):
 		animation = animation.replace("forward", "backward")
 	elif animation.contains("backward"):
 		animation = animation.replace("backward", "forward")
-	HUD.level.entity[HUD.hero].view.mirror.animation = animation
+	HUD.level.entity[HUD.hero].mirror.animation = animation
 
 func mirror_frame() -> void:
-	HUD.level.entity[HUD.hero].view.mirror.frame = HUD.level.entity[HUD.hero].view.profile.frame
+	HUD.level.entity[HUD.hero].mirror.frame = HUD.level.entity[HUD.hero].profile.frame
 
 func set_hanging(next: bool) -> void:
 	HUD.level.entity[HUD.hero].view.shadow.position = Vector2(0, 27) if next else Vector2(0, -5)
