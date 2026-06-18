@@ -36,7 +36,8 @@ func action_input() -> void:
 	if _press(&"act3"): skill_a()
 	if _press(&"act4"): skill_b()
 	if _hold(&"aim") and _press(&"fire"): use_item()
-	if _press(&"select"): HUD.level.deploy.select()
+	if _press(&"select") and HUD.interact.state[HUD.hero] == 0:
+		HUD.level.deploy.select()
 
 func punch() -> void:
 	combo = combo << Bit.MASK3 | A

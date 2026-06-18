@@ -10,10 +10,13 @@ var material: ShaderMaterial:
 	get: return sprite.material
 
 var directed: int = 0
+var frames: int = 0
 
-enum { CHAINS, JUMP, GROUND, DIRECTED = 8 }
+enum { WALK, RUN, JUMP }
+
+enum { CHAINS, GROUND, DIRECTED = 8 }
 enum { BODY, HANG, COMBO }
-enum { PULL, RUN, AIR }
+enum { PULL, AIR }
 
 var state: PackedByteArray = [0, 0]
 var sprites: Array[StringName] = [
@@ -37,29 +40,20 @@ func animate_fight() -> void:
 	pass
 	# sprite.animation = 
 
+func animate_frames(type: int) -> void:
+	frames = type
+	sprite.animation = sprites[get_anim()]
+
 func stop_animation() -> void:
 	sprite.stop()
 	sprite.animation = sprites[directed]
 	sprite.frame = 0
 
-func get_anim() -> int:
-	if Bit.of(state[BODY], RUN):
-		return directed + DIRECTED
-	else:
-		return directed
+func get_anim() -> int: return directed + DIRECTED * frames # if Bit.of(state[BODY], RUN):
 
 func direct(dir: Vector2i) -> void:
-	if dir == Vector2i.ZERO:
-		#HUD.level.entity[HUD.hero].animation.start()
-		stop_animation()
-		return # sprite.frame = (sprite.frame + 1) & 15
-	Def.MOVE
-	directed = Def.direct(dir)
-	var anim: int = get_anim()
-	sprite.animation = sprites[anim]
-	#HUD.level.entity[HUD.hero].animation.stop()
-	if not sprite.is_playing():
-		sprite.play(sprites[anim])
+	directed = Def.direct(dir) # Def.MOVE
+	
 
 var animations: PackedStringArray = ["idle-1", "walk", "run", "jump", "kick_0", "kick_1",
 		"punch_0", "punch_1", "hang_go", "hang_idle", "bash", "stomp"]
@@ -70,8 +64,14 @@ func ask(caption: String) -> String: return "parameters/" + caption + "/current_
 func request(caption: String) -> String: return "parameters/" + caption + "/transition_request"
 func blend(caption: String) -> String: return "parameters/" + caption + "/blend_position"
 
-func animate(motion: Vector2) -> void:
+func animate() -> void:# motion: Vector2
+	var anim: int = get_anim()
+	sprite.animation = sprites[anim]
+	#HUD.level.entity[HUD.hero].animation.stop()
+	if not sprite.is_playing():
+		sprite.play(sprites[anim])
 	return
+	"""
 	if motion != Vector2.ZERO:
 		for pose in hang: tree.set(request(pose), &"move")
 		for animation in animations:
@@ -83,6 +83,7 @@ func animate(motion: Vector2) -> void:
 		#for pose in hang: tree.set(request(pose), &"idle")
 	for animation in unique[HUD.hero]: blend(animation)
 	if !Bit.of(HUD.state, Def.ACTING): blend("pull_forward")
+	"""
 
 func set_walk_speed(mach: int) -> void: tree.set(request("go"), go[(mach - 1) & 1])
 func set_move_action(stand: StringName) -> void: tree.set(request("move"), stand)

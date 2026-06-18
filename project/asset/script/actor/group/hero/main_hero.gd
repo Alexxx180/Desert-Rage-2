@@ -1,12 +1,15 @@
 extends CharacterBody2D
 
 @onready var lever: Area2D = $lever
+@onready var lever_body: CollisionShape2D = lever.get_node("shape")
 @onready var plate: Area2D = $plate
+@onready var plate_body: CollisionShape2D = plate.get_node("shape")
 @onready var profile: AnimatedSprite2D = $profile
 @onready var shadow: Sprite2D = $shadow
 @onready var animation: Timer = $animation
 # @onready var animation: AnimationTree = $animation
 var no: int
+var box: int = -1
 var weight: int = 0
 var _mirror: AnimatedSprite2D = null
 var mirror: AnimatedSprite2D:

@@ -30,13 +30,7 @@ func add_box(box_type: int, position: Vector2) -> void:
 	# box.show()
 # LINKING
 
-func jump_on_box(f1: int, f2: int, coords: int) -> int:
-	for box in boxes:
-		var c: int = HUD.interact.on_tile(box.position)[Def.COORDS]
-		if c == coords and (f1 == f2 + box.height):
-			HUD.interact.hero.position = box.ledge
-			return f2
-	return f2
+func get_box(no: int) -> CharacterBody2D: return boxes[no]
 
 func throw(box: int, motion: Vector2i) -> void: # THROW
 	boxes[box].velocity = POWER * motion
@@ -51,6 +45,6 @@ func controls(box: CharacterBody2D) -> void:
 	# var see: Area2D = box.get_node("press")
 	# see.body_entered.connect(encounter)
 	# see.body_exited.connect(diverge)
-	var fov: VisibleOnScreenNotifier2D = box.get_node("fov")
+	var fov: VisibleOnScreenNotifier2D = box.get_node(^"fov")
 	fov.screen_entered.connect(box.show)
 	fov.screen_exited.connect(box.hide)
