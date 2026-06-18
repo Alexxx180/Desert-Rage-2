@@ -64,7 +64,7 @@ func draw_tile(map_coords: int, no: int) -> void:
 func _around(tile: int) -> bool:
 	var t: PackedInt32Array = HUD.level.border.coords(tile).id().type().tile
 	return ((t[Def.ID] == Def.LOGIC and t[Def.ATLAS] == Def.SOURCE_OFF) or
-		(t[Def.ID] == Def.FLOOR and t[Def.ATLAS] != Def.WALL and t[Def.TYPE] == Def.PUDDLE_OFF))
+		(t[Def.ID] == Def.FLOOR and t[Def.ATLAS] != Def.WALL and t[Def.TYPE] == Def.PUDDLE_ON))
 
 func contact(map_coords: int) -> void:
 	if not (_around(map_coords + Def.yofmap(1)) or _around(map_coords + 1) or

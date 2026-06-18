@@ -17,6 +17,9 @@ func no_tile(no: int) -> void: tile[Def.offset(HUD.hero, no)] = 0
 func on_tile(pos: Vector2) -> PackedInt32Array: return HUD.level.border.pos(pos).id().atlas().type().tile
 func tile_plate() -> Vector2: return HUD.level.entity[HUD.hero].position
 func tile_lever() -> Vector2: return HUD.level.entity[HUD.hero].position + HUD.level.entity[HUD.hero].lever.position
+func add_chip(box: CharacterBody2D) -> void:
+	add_child(box)
+	box.position = HUD.level.border.get_position()
 
 var deploy: HeroDeploy:
 	get: return Def.ref(self, _deploy, &"_deploy", new_hero_deploy)

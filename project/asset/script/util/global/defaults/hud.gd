@@ -16,12 +16,14 @@ var game: Control:
 	get: return create_menu(_game, Def.game, &"_game")
 var pause: Control:
 	get: return create_menu(_pause, Def.pause, &"_pause")
+"""
 var settings: Control:
 	get: return create_menu(_settings, Def.settings, &"_settings")
 var information: Control:
 	get: return create_menu(_information, Def.information, &"_information")
 var sound: Control:
 	get: return create_menu(_sound, Def.sound, &"_sound")
+"""
 var menu: Menu:
 	get: return Def.ref(self, _menu, &"_menu", new_menu)
 

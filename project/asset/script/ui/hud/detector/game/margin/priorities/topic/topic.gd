@@ -21,5 +21,5 @@ func update_stack() -> void:
 
 func update_scroll() -> void:
 	if _scroll == null:
-		_scroll = Def.priorities.instantiate()
+		_scroll = load(Def.priorities).instantiate()
 		add_child(_scroll)

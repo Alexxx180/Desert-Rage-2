@@ -32,15 +32,20 @@ func movement(act: bool) -> void:
 func puddle_tile() -> void:
 	var pos: Vector2 = lever()
 	if on_tile(pos)[Def.ID] == Def.FLOOR and _tile[Def.TYPE] == Def.FLOORS:
-		HUD.level.border.type(Def.PUDDLE_OFF).paint_alt()
-		if HUD.level.rain == null:
-			HUD.level.rain = load(Def.rain).instantiate()
-			HUD.level.rain.one_shot = true
-			HUD.level.add_child(HUD.level.rain)
-		else:
-			HUD.level.rain.restart()
-		HUD.level.rain.position = pos
-		HUD.level.conductor.contact(_tile[Def.COORDS])
+		pass
+	elif _tile[Def.ID] == Def.WALLS and _tile[Def.ATLAS] == Def.GROUND:
+		HUD.level.border.id(Def.FLOOR).alt(Def.ALT1)
+	else:
+		return
+	HUD.level.border.type(Def.PUDDLE_OFF).paint_alt()
+	if HUD.level.rain == null:
+		HUD.level.rain = load(Def.rain).instantiate()
+		HUD.level.rain.one_shot = true
+		HUD.level.add_child(HUD.level.rain)
+	else:
+		HUD.level.rain.restart()
+	HUD.level.rain.position = pos
+	HUD.level.conductor.contact(_tile[Def.COORDS])
 
 func melt_ice() -> void:
 	var pos: Vector2 = lever()
@@ -55,17 +60,27 @@ func melt_ice() -> void:
 		TileDecorator
 		HUD.level.fire.position = pos
 
-func ledge_jump(pos: Vector2) -> void:
-	var f1: int = HUD.level.border.extract(TileDecorator.FLOOR)
-	on_tile(pos + Vector2.ONE * 128 * direct4())
+func box_jump(f1: int, coords: int) -> int:
 	var f2: int = HUD.level.border.extract(TileDecorator.FLOOR)
+	if HUD.level._boxes == null: return f2
+	return HUD.level.boxes.jump_on_box(f1, f2, coords)
+
+const box_height: Vector2 = Vector2(0, -12)
+
+func ledge_jump(pos: Vector2) -> void:
+	var dir: Vector2 = pos + Vector2.ONE * 128 * direct4()
+	var f1: int = HUD.level.border.extract(TileDecorator.FLOOR)
+	var f2: int = box_jump(f1, on_tile(dir)[Def.COORDS])
+	# on_tile(dir)
+	# var f2: int = HUD.level.border.extract(TileDecorator.FLOOR)
 	if f1 == f2:
-		var boxes: bool = Def.SMALL_BOX >= _tile[Def.ATLAS] and _tile[Def.ATLAS] <= Def.LARGE_BOX
-		if _tile[Def.ID] == Def.FLOOR and _tile[Def.TYPE] == Def.FLOORS:
+		var boxes: bool = Def.SMALL_BOX >= on_tile(dir)[Def.ATLAS] and _tile[Def.ATLAS] <= Def.LARGE_BOX
+		var t: PackedInt32Array = _tile
+		if t[Def.ID] == Def.FLOOR and t[Def.TYPE] == Def.FLOORS:
 			hero.position = HUD.level.border.position()
 		elif _tile[Def.ID] == Def.LOGIC and (_tile[Def.ATLAS] == Def.STAND_ON or boxes):
 			hero.position = HUD.level.border.position()
-			if boxes: hero.position += Vector2(0, -12)
+			if boxes: hero.position += box_height
 
 func leverage() -> void:
 	var pos: Vector2 = plate()
@@ -82,7 +97,7 @@ func box_move() -> void:
 	pass
 
 func trigger_encounter(body: Variant) -> void:
-	if body is CharacterBody2D:
+	if body is CharacterBody2D and body.is_in_group(&"box"):
 		hero.boxes.append(body.no)
 		hero.weight += body.weight
 	elif body is StaticBody2D:
@@ -92,11 +107,13 @@ func trigger_encounter(body: Variant) -> void:
 		leverage()
 
 func trigger_disappear(body: Variant) -> void:
-	if body is CharacterBody2D:
+	if body is CharacterBody2D and body.is_in_group(&"box"):
 		for i in range(0, len(hero.boxes)):
 			if hero.boxes[i] == body.no:
+				var h = hero
 				hero.weight -= body.weight
-				hero.boxes.remove_at(i)
+				break
+				# h.boxes.remove_at(i)
 
 func plate_encounter(_body: Variant) -> void:
 	HUD.level.tile[Def.offset(HUD.hero, Def.PLATE)] = Def.ofmap(HUD.level.border.local_to_map(hero.position))
