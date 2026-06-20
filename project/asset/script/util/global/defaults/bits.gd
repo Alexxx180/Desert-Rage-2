@@ -17,6 +17,9 @@ static func to1(value: int, index: int) -> int: return value | bit(index)
 static func to0(value: int, index: int) -> int: return value & ~bit(index)
 static func to_(value: int, index: int) -> int: return value ^ bit(index)
 
+static func b(state: PackedByteArray, select: int, index: int, value: int) -> void:
+	state[select] = to(state[select], index, value)
+
 static func b0(state: PackedByteArray, select: int, index: int) -> void:
 	state[select] = to0(state[select], index)
 
