@@ -34,6 +34,9 @@ func movement(act: bool) -> void:
 	if Bit.of(state[HUD.hero], JUMPED):
 		if hero.box == -1:
 			ledge_jump(hero.position) # pass
+			HUD.animation.direct(directed)
+			hero.lever.position = close.position * directed
+			# if not in_place: hero.lever.position = close.position * directed
 		elif not in_place:
 			var box: CharacterBody2D = HUD.level.boxes.get_box(hero.box)
 			ledge_jump(box.position, box.height)
@@ -104,9 +107,9 @@ func jump_to_box(f1: int, coords: int) -> int:
 		if c == coords and (f1 == f2 + box.height): # HUD.interact.hero.position = box.ledge
 			Bit.b1(state, HUD.hero, JUMPED)
 			toggle_stuck(false)
-			await hero.call_deferred(&"reparent", box, true)
+			#hero.call_deferred(&"reparent", box, true) # await
 			# hero.call_deferred(&"reparent", box, true)
-			# hero.reparent(box, true)
+			hero.reparent(box, true)
 			var dir: Vector2 = (close.size if hero.box == -1 else Vector2.ZERO)# + box.position)
 			# var delta: Vector2 = hero.position - dir
 			var pos = hero.position
@@ -130,6 +133,8 @@ func finish_jump() -> void:
 	if hero.box == -1:
 		hero.reparent(HUD.level, true)
 		if not Bit.of(state[HUD.hero], JUMPED):
+			hero.lever.position = Vector2.ZERO
+			hero.plate.position = Vector2.ZERO
 			toggle_stuck(true) # hero.position = HUD.level.border.position() #  HUD.animation.stop_animation()
 		# Bit.b0(state, HUD.hero, JUMPED)
 		print(state)
@@ -154,7 +159,7 @@ func intermediate_jump(slot: int) -> void:
 func ledge_jump(pos: Vector2, height: int = 0) -> void:
 	var dir: Vector2 = Vector2.ONE * 128 * direct4() # pos +
 	var f1: int = HUD.level.border.extract(TileDecorator.FLOOR) + height
-	var f2: int = await jump_to_box(f1, on_tile(pos + dir)[Def.COORDS])
+	var f2: int = jump_to_box(f1, on_tile(pos + dir)[Def.COORDS])
 	if f1 == f2:
 		if _tile[Def.ID] == Def.FLOOR and _tile[Def.TYPE] == Def.FLOORS:
 			var next: bool = _tile[Def.ATLAS] == Def.LEDGE
