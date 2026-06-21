@@ -1,6 +1,6 @@
 class_name WorldInteraction extends RefCounted
 
-enum { STATIC = 1, JUMPED = 0, JUMPING, COUNT = 8, PORTION = 0, DURATION = 1 }
+enum { STATIC = 1, JUMPED = 0, JUMPING, COUNT = 8, JUMP = 0, DURATION = 1 }
 
 var hero: CharacterBody2D:
 	get: return HUD.level.entity[HUD.hero]
@@ -11,7 +11,7 @@ var directed: Vector2
 var target: Rect2
 var state: PackedByteArray = [0, 0]
 
-const duration: PackedFloat32Array = [0.125, 0.2]
+const portion: PackedFloat32Array = [0.125, 0.2]
 const close: Rect2 = Rect2(Vector2.ONE * 20, Vector2(0, -53))
 const shadow: Vector2 = Vector2(0.6, 0.72)
 
@@ -36,7 +36,6 @@ func movement(act: bool) -> void:
 			ledge_jump(hero.position) # pass
 			HUD.animation.direct(directed)
 			hero.lever.position = close.position * directed
-			# if not in_place: hero.lever.position = close.position * directed
 		elif not in_place:
 			var box: CharacterBody2D = HUD.level.boxes.get_box(hero.box)
 			ledge_jump(box.position, box.height)
@@ -44,16 +43,11 @@ func movement(act: bool) -> void:
 		hero.make_velocity(directed * Def.MOVE)
 		if not in_place and not act:
 			hero.lever.position = close.position * directed
-	if state[HUD.hero] == 0:
-		if in_place:
-			HUD.animation.stop_animation()
-		else:
-			HUD.animation.direct(directed)
-			HUD.animation.animate()
-	# elif not in_place:
-	elif in_place:
+	if in_place:
 		HUD.animation.stop_animation()
-		# HUD.animation.direct(directed)
+	elif state[HUD.hero] == 0:
+		HUD.animation.direct(directed)
+		HUD.animation.animate()
 
 func add_particle(asset: GPUParticles2D, path: StringName, name: StringName, next: Vector2) -> void:
 	if asset == null:
@@ -85,11 +79,10 @@ func melt_ice() -> void:
 
 func animate_jump(next: Rect2) -> void:
 	target = next
-	print(target)
 	HUD.animation.animate_frames(CharacterAnimation.JUMP)
 	Bit.b1(state, HUD.hero, JUMPING)
 	var jumping: Tween = HUD.create_tween()
-	jumping.tween_method(intermediate_jump, 0, COUNT, duration[DURATION]).set_trans(Tween.TRANS_LINEAR)
+	jumping.tween_method(intermediate_jump, 0, COUNT, portion[DURATION]).set_trans(Tween.TRANS_LINEAR).set_delay(1)
 	jumping.tween_callback(finish_jump)
 
 func toggle_stuck(next: bool) -> void:
@@ -107,25 +100,19 @@ func jump_to_box(f1: int, coords: int) -> int:
 		if c == coords and (f1 == f2 + box.height): # HUD.interact.hero.position = box.ledge
 			Bit.b1(state, HUD.hero, JUMPED)
 			toggle_stuck(false)
-			#hero.call_deferred(&"reparent", box, true) # await
-			# hero.call_deferred(&"reparent", box, true)
-			hero.reparent(box, true)
-			var dir: Vector2 = (close.size if hero.box == -1 else Vector2.ZERO)# + box.position)
-			# var delta: Vector2 = hero.position - dir
-			var pos = hero.position
-			print("P: ", pos, " + D: ", dir)
+			hero.call_deferred(&"reparent", box, true)
+			#hero.reparent(box, true)
+			var aim: Rect2 = Rect2(hero.position, hero.position - (close.size if hero.box == -1 else Vector2.ZERO))
 			hero.box = box.no
-			animate_jump(Rect2(pos, pos - dir))
+			animate_jump(aim)
 			return f2
 	return f2
 
-func jump_from_box(pos: Vector2, dir: Vector2) -> void:
-	# dir = pos + dir
-	if hero.box == -1:
-		animate_jump(Rect2(pos, -dir)) #  + dir + dir
-	else:
-		animate_jump(Rect2(close.size, -dir))
-	hero.box = -1 # HUD.level.boxes.get_box(hero.box).position +  # delta = HUD.level.boxes.get_box(hero.box).position - dir # close.size # close.size
+func jump_from_box(pos: Vector2, dir: Vector2, jumped: bool) -> void:
+	Bit.b(state, HUD.hero, JUMPED, jumped)
+	toggle_stuck(false)
+	animate_jump(Rect2(pos, -dir) if hero.box == -1 else Rect2(close.size, -dir))
+	hero.box = -1
 
 func finish_jump() -> void:
 	hero.make_velocity(Vector2.ZERO)
@@ -135,26 +122,15 @@ func finish_jump() -> void:
 		if not Bit.of(state[HUD.hero], JUMPED):
 			hero.lever.position = Vector2.ZERO
 			hero.plate.position = Vector2.ZERO
-			toggle_stuck(true) # hero.position = HUD.level.border.position() #  HUD.animation.stop_animation()
-		# Bit.b0(state, HUD.hero, JUMPED)
-		print(state)
-	#if not Bit.of(state[HUD.hero], JUMPED):
-		#toggle_stuck(true)
-	#else:
-	#	hero.position = target.size # HUD.create_tween().tween_callback(func(): Bit.b0(state, HUD.hero, JUMPED)).set_delay(2)
+			toggle_stuck(true)
 	HUD.animation.sprite.stop()
 	Bit.b0(state, HUD.hero, JUMPING)
 
 func intermediate_jump(slot: int) -> void:
+	var of: float = slot * portion[JUMP]
 	HUD.animation.sprite.frame = slot
-	var of: float = slot * duration[PORTION]
 	hero.shadow.scale = shadow * of
-	var a: Vector2 = target.position
-	var b: Vector2 = target.size
-	var pos: Vector2 = target.position - target.size * of # + (target.position * of)
-	var pos2: Vector2 = hero.position
-	print("SLOT: ", slot, " - POS: ", pos, " - HERO: ", pos2, " - A: ", a, " - B: ", b)
-	hero.position = pos
+	hero.position = target.position - target.size * of
 
 func ledge_jump(pos: Vector2, height: int = 0) -> void:
 	var dir: Vector2 = Vector2.ONE * 128 * direct4() # pos +
@@ -162,16 +138,9 @@ func ledge_jump(pos: Vector2, height: int = 0) -> void:
 	var f2: int = jump_to_box(f1, on_tile(pos + dir)[Def.COORDS])
 	if f1 == f2:
 		if _tile[Def.ID] == Def.FLOOR and _tile[Def.TYPE] == Def.FLOORS:
-			var next: bool = _tile[Def.ATLAS] == Def.LEDGE
-			Bit.b(state, HUD.hero, JUMPED, next)
-			toggle_stuck(false)
-			jump_from_box(pos, dir)
-			var result: bool = Bit.of(state[HUD.hero], JUMPED)
-			print("RES: ", result)
-		elif are_box_ledges(_tile[Def.ID], _tile[Def.ATLAS]): # _tile[Def.ID] == Def.LOGIC and (_tile[Def.ATLAS] == Def.STAND_ON or boxes):
-			Bit.b1(state, HUD.hero, JUMPED)
-			toggle_stuck(false)
-			jump_from_box(pos, dir)
+			jump_from_box(pos, dir, _tile[Def.ATLAS] == Def.LEDGE)
+		elif are_box_ledges(_tile[Def.ID], _tile[Def.ATLAS]):
+			jump_from_box(HUD.level.border.position() - dir - Vector2(0, 18), dir, true)
 
 func is_platform_box(atlas: int) -> bool:
 	return Def.SMALL_BOX >= atlas and atlas <= Def.LARGE_BOX

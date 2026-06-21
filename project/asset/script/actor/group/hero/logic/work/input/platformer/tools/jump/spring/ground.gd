@@ -3,7 +3,7 @@ extends Node
 const CONSTRAINT: int = 5
 
 var is_pressed: bool = false
-var execute: TileDecorator
+var execute: 
 var world_y: float = 0.0
 
 @onready var deactivation: Timer = $deactivation
