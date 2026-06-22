@@ -1,7 +1,7 @@
-extends ParallaxLayer
+extends ParallaxBackground
 
 @export var speed: float = 0.5
+@onready var back: Array[Node] = get_children()
 
 func _process(_delta: float) -> void:
-	self.motion_offset = HUD.level.entity[HUD.hero].position * speed
-	# self.motion_offset.x += delta * speed
+	for lay in back: lay.motion_offset = HUD.level.entity[HUD.hero].position * speed

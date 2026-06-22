@@ -1,0 +1,44 @@
+[gd_scene load_steps=6 format=3 uid="uid://bw8s1067aus4d"]
+
+[ext_resource type="Script" uid="uid://b1v45y3lnmpkv" path="res://asset/script/util/world/layer/parallax/back.gd" id="1_4hhob"]
+
+[sub_resource type="Gradient" id="Gradient_xr3m0"]
+colors = PackedColorArray(0.737255, 0.584314, 0.309804, 1, 0.722283, 0.571231, 0.299598, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_3aaod"]
+gradient = SubResource("Gradient_xr3m0")
+width = 4080
+height = 2160
+fill_from = Vector2(0.479245, 1)
+fill_to = Vector2(0.479245, 0)
+
+[sub_resource type="Gradient" id="Gradient_s475c"]
+offsets = PackedFloat32Array(0, 0.09166667, 0.23333333, 0.28333333, 0.3375, 1)
+colors = PackedColorArray(0.7372549, 0.58431375, 0.30980393, 1, 0.2509804, 0.6039216, 1, 1, 0.6039216, 1, 1, 1, 0.36862746, 0.68235296, 0.972549, 1, 0.564706, 0.682353, 1, 1, 0.87050545, 0.90808636, 0.99999744, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_xr3m0"]
+gradient = SubResource("Gradient_s475c")
+width = 4080
+height = 3250
+fill_from = Vector2(0.5, 1)
+fill_to = Vector2(0.5, 0)
+metadata/_snap_enabled = true
+
+[node name="background" type="ParallaxBackground"]
+script = ExtResource("1_4hhob")
+
+[node name="land" type="ParallaxLayer" parent="."]
+position = Vector2(0, 850)
+motion_mirroring = Vector2(4080, 2160)
+
+[node name="view" type="Sprite2D" parent="land"]
+texture = SubResource("GradientTexture2D_3aaod")
+centered = false
+
+[node name="air" type="ParallaxLayer" parent="."]
+position = Vector2(0, -2400)
+motion_mirroring = Vector2(4080, 0)
+
+[node name="view" type="Sprite2D" parent="air"]
+texture = SubResource("GradientTexture2D_xr3m0")
+centered = false
