@@ -10,7 +10,7 @@ extends CharacterBody2D
 # @onready var animation: AnimationTree = $animation
 var no: int
 var box: int = -1
-var weight: int = 0
+var weight: float = 1.0
 var _mirror: AnimatedSprite2D = null
 var mirror: AnimatedSprite2D:
 	get: return HUD.animation.get_mirror_sprite(self, Def.ray_mirror, _mirror)
@@ -33,7 +33,7 @@ func set_monitoring(value: bool) -> void:
 	plate.monitoring = value
 
 func make_velocity(motion: Vector2) -> void: 
-	velocity = (motion - Vector2.ONE * weight * 0.5)
+	velocity = (motion * weight) # - Vector2.ONE #  * 0.5
 
 func make_position(motion: Vector2) -> void: position = motion
 func _physics_process(_delta: float) -> void: move_and_collide(velocity)

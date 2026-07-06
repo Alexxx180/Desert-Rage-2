@@ -1,4 +1,4 @@
-[gd_scene load_steps=822 format=3 uid="uid://wbjmq3n817nk"]
+[gd_scene load_steps=825 format=3 uid="uid://wbjmq3n817nk"]
 
 [ext_resource type="Script" uid="uid://co1bl75te11gl" path="res://script/actor/group/hero/main_hero.gd" id="1_y0t4a"]
 [ext_resource type="PackedScene" uid="uid://c136xgt1v5vbl" path="res://now/scene/actor/group/hero/base/view/base/shadow.tscn" id="4_bt2v1"]
@@ -5738,6 +5738,14 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_umkci"]
+size = Vector2(10, 10)
+
+[sub_resource type="Gradient" id="Gradient_umkci"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_n6fgc"]
+gradient = SubResource("Gradient_umkci")
+
 [node name="ray" type="CharacterBody2D" groups=["player"]]
 motion_mode = 1
 script = ExtResource("1_y0t4a")
@@ -5764,7 +5772,12 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="shape" type="CollisionShape2D" parent="lever"]
-shape = ExtResource("6_fsxid")
+shape = SubResource("RectangleShape2D_umkci")
+
+[node name="Sprite2D" type="Sprite2D" parent="lever/shape"]
+position = Vector2(2.1457672e-06, 0)
+scale = Vector2(0.007812483, 1.9999999)
+texture = SubResource("GradientTexture1D_n6fgc")
 
 [node name="plate" type="Area2D" parent="."]
 collision_layer = 0
