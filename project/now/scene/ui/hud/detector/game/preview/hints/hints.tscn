@@ -1,0 +1,58 @@
+[gd_scene load_steps=11 format=3 uid="uid://b01p37el432af"]
+
+[ext_resource type="Theme" uid="uid://ctsb6uh5t0n1l" path="res://ui/theme/default.tres" id="1_lqfh0"]
+[ext_resource type="Script" uid="uid://d1gehesbgg5ia" path="res://script/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/hints/space/preview/help/content/hints/hints.gd" id="2_wh6yj"]
+[ext_resource type="PackedScene" uid="uid://mdjk60h84tvs" path="res://now/scene/ui/hud/detector/game/preview/hints/category/motion.tscn" id="3_g22ml"]
+[ext_resource type="Script" uid="uid://cm56atf81fxki" path="res://script/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/hints/space/preview/help/content/hints/category/kind.gd" id="3_t1jk8"]
+[ext_resource type="PackedScene" uid="uid://cimkmbth3t0at" path="res://now/scene/ui/hud/detector/game/preview/hints/category/action.tscn" id="5_kvclq"]
+[ext_resource type="PackedScene" uid="uid://pcadvttb4v3o" path="res://now/scene/ui/hud/detector/game/preview/hints/category/reason.tscn" id="6_7ljf1"]
+[ext_resource type="PackedScene" uid="uid://75o02vpk30s8" path="res://now/scene/ui/hud/detector/game/preview/hints/category/fight.tscn" id="7_6u77t"]
+[ext_resource type="PackedScene" uid="uid://b7woh07gu383w" path="res://now/scene/ui/hud/detector/game/preview/hints/category/common.tscn" id="8_mwh4q"]
+[ext_resource type="PackedScene" uid="uid://cced4fdp88hwk" path="res://now/scene/ui/hud/detector/game/preview/hints/behavior/behavior.tscn" id="9_d1vfy"]
+[ext_resource type="Script" uid="uid://b1puby0o7ny8l" path="res://script/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/hints/space/preview/help/content/hints/behavior/blackboard.gd" id="13_2a2v1"]
+
+[node name="hints" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+mouse_filter = 2
+theme = ExtResource("1_lqfh0")
+theme_override_constants/separation = 0
+alignment = 2
+script = ExtResource("2_wh6yj")
+
+[node name="space" type="Control" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="category" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+theme_override_constants/separation = 0
+script = ExtResource("3_t1jk8")
+
+[node name="motion" parent="category" instance=ExtResource("3_g22ml")]
+layout_mode = 2
+alignment = 2
+
+[node name="action" parent="category" instance=ExtResource("5_kvclq")]
+layout_mode = 2
+
+[node name="reason" parent="category" instance=ExtResource("6_7ljf1")]
+layout_mode = 2
+
+[node name="fight" parent="category" instance=ExtResource("7_6u77t")]
+layout_mode = 2
+
+[node name="common" parent="category" instance=ExtResource("8_mwh4q")]
+layout_mode = 2
+
+[node name="behavior" parent="." instance=ExtResource("9_d1vfy")]
+
+[node name="blackboard" type="Node" parent="."]
+script = ExtResource("13_2a2v1")

@@ -1,30 +1,20 @@
 class_name WorldInteraction extends RefCounted
 
-enum { STATIC = 1, JUMPED = 0, JUMPING, COUNT = 8, JUMP = 0, DURATION = 1 }
+enum { STATIC = 1, JUMPED = 0, JUMPING, COUNT = 8, JUMP = 0, DURATION = 1,
+	CLOSE = 0, HEIGHT = 1, SHADOW = 2, PORTION = 3, JUMP_POWER = 10 }
 
 var hero: CharacterBody2D:
 	get: return HUD.level.entity[HUD.hero]
 var _tile: PackedInt32Array:
 	get: return HUD.level.border.tile
 
-var directed: Vector2
-var target: Rect2
+var directed: Vector2 ; var off: Vector2
 var state: PackedByteArray = [0, 0]
 
-const portion: PackedFloat32Array = [0.125, 0.2]
-const close: Rect2 = Rect2(Vector2.ONE * 20, Vector2(0, -53))
-const shadow: Vector2 = Vector2(0.6, 0.72)
-
-func direct4() -> Vector2: return Vector2(0, directed.y) if directed.x != 0 and directed.y != 0 else directed
-func tile_atlas(h: CharacterBody2D, no: int) -> int: return HUD.level.border.coords(get_tile(h.no, no)).atlas().tile[Def.ATLAS]
-
-func get_tile(h: int, no: int) -> int: return HUD.level.tile[Def.offset(h, no)]
-func set_tile(h: int, no: int, pos: Vector2) -> void: HUD.level.tile[Def.offset(h, no)] = Def.ofmap(HUD.level.border.local_to_map(pos))
-func no_tile(h: int, no: int) -> void: HUD.level.tile[Def.offset(h, no)] = 0
+const stand: PackedInt32Array = [Def.STAND_ON, Def.SMALL_BOX, Def.LARGE_BOX]
+const position: PackedVector2Array = [Vector2.ONE * 20, Vector2(0, -48), Vector2(0.6, 0.72), Vector2(0.125, 0.2)]
 
 func on_tile(pos: Vector2) -> PackedInt32Array: return HUD.level.border.pos(pos).id().atlas().type().tile
-func plate() -> Vector2: return hero.position
-func lever() -> Vector2: return hero.position + hero.lever.position
 
 func movement(act: bool) -> void:
 	directed = Input.get_vector(&"left", &"right", &"forward", &"backward")
@@ -34,19 +24,19 @@ func movement(act: bool) -> void:
 	if Bit.of(state[HUD.hero], JUMPED):
 		if hero.box == -1:
 			ledge_jump(hero.position) # pass
-			HUD.animation.direct(directed)
-			hero.lever.position = close.position * directed
+			HUD.animation.direct(directed.round())
+			hero.lever.position = position[CLOSE] * directed
 		elif not in_place:
-			var box: CharacterBody2D = HUD.level.boxes.get_box(hero.box)
-			ledge_jump(box.position, box.height)
+			var box: AnimatableBody2D = HUD.level.boxes.get_box(hero.box)
+			ledge_jump(box.position, HUD.level.boxes.height[box.get_meta(&"no")])
 	else:
 		hero.make_velocity(directed * Def.MOVE)
 		if not in_place and not act:
-			hero.lever.position = close.position * directed
+			hero.lever.position = position[CLOSE] * directed
 	if in_place:
 		HUD.animation.stop_animation()
 	elif state[HUD.hero] == 0:
-		HUD.animation.direct(directed)
+		HUD.animation.direct(directed.round())
 		HUD.animation.animate()
 
 func add_particle(asset: GPUParticles2D, path: StringName, name: StringName, next: Vector2) -> void:
@@ -60,7 +50,7 @@ func add_particle(asset: GPUParticles2D, path: StringName, name: StringName, nex
 	asset.position = next
 
 func puddle_tile() -> void:
-	var pos: Vector2 = lever()
+	var pos: Vector2 = hero.position + hero.lever.position
 	if on_tile(pos)[Def.ID] == Def.FLOOR and _tile[Def.TYPE] == Def.FLOORS:
 		pass
 	elif _tile[Def.ID] == Def.WALLS and _tile[Def.ATLAS] == Def.GROUND:
@@ -72,110 +62,73 @@ func puddle_tile() -> void:
 	HUD.level.conductor.contact(_tile[Def.COORDS])
 
 func melt_ice() -> void:
-	var pos: Vector2 = lever()
+	var pos: Vector2 = hero.position + hero.lever.position
 	if on_tile(pos)[Def.ID] == Def.FLOOR and _tile[Def.TYPE] == Def.ICE_FLOOR:
 		HUD.level.border.type(Def.PUDDLE_OFF).paint_alt()
 		add_particle(HUD.level.fire, Def.fire, &"fire", pos) # TileDecorator
 
-func animate_jump(next: Rect2) -> void:
-	target = next
-	HUD.animation.animate_frames(CharacterAnimation.JUMP)
-	Bit.b1(state, HUD.hero, JUMPING)
-	var jumping: Tween = HUD.create_tween()
-	jumping.tween_method(intermediate_jump, 0, COUNT, portion[DURATION]).set_trans(Tween.TRANS_LINEAR).set_delay(1)
-	jumping.tween_callback(finish_jump)
-
 func toggle_stuck(next: bool) -> void:
-	hero.lever_body.set_deferred("disabled", not next)
-	hero.plate_body.set_deferred("disabled", not next)
+	hero.lever_body.set_deferred(&"disabled", not next)
+	hero.plate_body.set_deferred(&"disabled", not next)
 	hero.set_collision_layer_value(STATIC, next)
 	hero.set_collision_mask_value(STATIC, next)
 
-func jump_to_box(f1: int, coords: int) -> int:
-	var f2: int = HUD.level.border.extract(TileDecorator.FLOOR)
-	if HUD.level._boxes == null: return f2
+func ledge_jump(pos: Vector2, height: int = 0) -> void:
+	var d: Vector2 = directed.round()
+	if d == Vector2.ZERO: return
 	
-	for box in HUD.level.boxes.boxes:
-		var c: int = on_tile(box.position)[Def.COORDS]
-		if c == coords and (f1 == f2 + box.height): # HUD.interact.hero.position = box.ledge
-			Bit.b1(state, HUD.hero, JUMPED)
-			toggle_stuck(false)
-			hero.call_deferred(&"reparent", box, true)
-			#hero.reparent(box, true)
-			var aim: Rect2 = Rect2(hero.position, hero.position - (close.size if hero.box == -1 else Vector2.ZERO))
-			hero.box = box.no
-			animate_jump(aim)
-			return f2
-	return f2
-
-func jump_from_box(pos: Vector2, dir: Vector2, jumped: bool) -> void:
+	var dir: Vector2 = Vector2.ONE * 128 * (Vector2(0, directed.y)
+		if directed.x != 0 and directed.y != 0 else directed) ; on_tile(pos)
+	var f1: int = HUD.level.border.extract(TileDecorator.FLOOR) + height
+	var t: PackedInt32Array = on_tile(pos + dir).duplicate()
+	var f2: int = HUD.level.border.extract(TileDecorator.FLOOR)
+	var jumped: bool = false ; var no: int = -1
+	if HUD.level._boxes != null:
+		for i in range(0, len(HUD.level.boxes.boxes)):
+			var c: int = on_tile(HUD.level.boxes.boxes[i].position)[Def.COORDS]
+			jumped = c == t[Def.COORDS] and (f1 == f2 + HUD.level.boxes.height[i])
+			if jumped: no = i; break
+	if jumped:
+		pos = position[HEIGHT]
+	elif f1 == f2:
+		pos = HUD.level.border.map_to_local(Def.tomap(t[Def.COORDS]))
+		jumped = t[Def.ID] == Def.LOGIC and t[Def.ATLAS] in stand
+		if jumped: off = Vector2(0, 18) ; pos -= off
+		elif t[Def.ID] == Def.FLOOR and t[Def.TYPE] == Def.FLOORS:
+			pos -= off ; off = Vector2.ZERO
+			jumped = t[Def.ATLAS] == Def.LEDGE
+		else: return
+	else: return
+	
 	Bit.b(state, HUD.hero, JUMPED, jumped)
 	toggle_stuck(false)
-	animate_jump(Rect2(pos, -dir) if hero.box == -1 else Rect2(close.size, -dir))
-	hero.box = -1
-
-func finish_jump() -> void:
-	hero.make_velocity(Vector2.ZERO)
-	HUD.animation.animate_frames(CharacterAnimation.WALK)
-	if hero.box == -1:
-		hero.reparent(HUD.level, true)
-		if not Bit.of(state[HUD.hero], JUMPED):
-			hero.lever.position = Vector2.ZERO
-			hero.plate.position = Vector2.ZERO
-			toggle_stuck(true)
-	HUD.animation.sprite.stop()
-	Bit.b0(state, HUD.hero, JUMPING)
-
-func intermediate_jump(slot: int) -> void:
-	var of: float = slot * portion[JUMP]
-	HUD.animation.sprite.frame = slot
-	hero.shadow.scale = shadow * of
-	hero.position = target.position - target.size * of
-
-func ledge_jump(pos: Vector2, height: int = 0) -> void:
-	var dir: Vector2 = Vector2.ONE * 128 * direct4() # pos +
-	var f1: int = HUD.level.border.extract(TileDecorator.FLOOR) + height
-	var f2: int = jump_to_box(f1, on_tile(pos + dir)[Def.COORDS])
-	if f1 == f2:
-		if _tile[Def.ID] == Def.FLOOR and _tile[Def.TYPE] == Def.FLOORS:
-			jump_from_box(pos, dir, _tile[Def.ATLAS] == Def.LEDGE)
-		elif are_box_ledges(_tile[Def.ID], _tile[Def.ATLAS]):
-			jump_from_box(HUD.level.border.position() - dir - Vector2(0, 18), dir, true)
-
-func is_platform_box(atlas: int) -> bool:
-	return Def.SMALL_BOX >= atlas and atlas <= Def.LARGE_BOX
-
-func are_box_ledges(id: int, atlas: int) -> bool:
-	return id == Def.LOGIC and (atlas == Def.STAND_ON or is_platform_box(atlas))
-
-func are_floors(id: int, type: int, atlas: int) -> bool:
-	return (id == Def.FLOOR and type == Def.FLOORS) or (
-		id == Def.LOGIC and (atlas == Def.STAND_ON or is_platform_box(atlas)))
-
-func are_boxes(id: int, atlas: int) -> bool:
-	return id == Def.LOGIC and Def.SMALL_BOX >= atlas and atlas <= Def.FIRE_BOX
-
-func leverage() -> void:
-	var pos: Vector2 = plate()
-	if are_floors(on_tile(pos)[Def.ID], _tile[Def.TYPE], _tile[Def.ATLAS]):
-		ledge_jump(pos)
-	elif are_boxes(on_tile(lever())[Def.ID], _tile[Def.ATLAS]):
-		var atlas: int = _tile[Def.ATLAS]
-		HUD.level.border.atlas(Def.GROUND).id(Def.FLOOR).type(Def.FLOORS).paint_alt() # coords(Def.GROUND)
-		HUD.level.boxes.add_box(atlas, HUD.level.border.position())
+	if no != -1: hero.call_deferred(&"reparent", HUD.level.boxes.boxes[no], true)
+	
+	HUD.animation.direct(d)
+	HUD.animation.animate_frames(CharacterAnimation.JUMP)
+	Bit.b1(state, HUD.hero, JUMPING)
+	hero.make_velocity(directed * Vector2.ONE * JUMP_POWER) #	Vector2(-10, 0))
+	var jumping: Tween = HUD.create_tween()
+	jumping.tween_method(func(slot):
+		HUD.animation.sprite.frame = slot
+		hero.shadow.scale = slot * position[SHADOW] * position[PORTION][JUMP],
+		0, COUNT, position[PORTION][DURATION]).set_trans(Tween.TRANS_LINEAR)# .set_delay(1)
+	jumping.tween_callback(func():
+		hero.make_velocity(Vector2.ZERO)
+		HUD.animation.animate_frames(CharacterAnimation.WALK)
+		if hero.box == -1:
+			hero.reparent(HUD.level, true)
+			if not Bit.of(state[HUD.hero], JUMPED):
+				hero.lever.position = Vector2.ZERO
+				hero.plate.position = Vector2.ZERO
+				toggle_stuck(true)
+		hero.position = pos
+		HUD.animation.sprite.stop()
+		Bit.b0(state, HUD.hero, JUMPING))
+	hero.box = no
 
 func box_move() -> void:
 	pass
-
-func trigger_encounter(body: Variant) -> void:
-	if body is CharacterBody2D and body.is_in_group(&"box"):
-		hero.boxes.append(body.no)
-		hero.weight += body.weight
-	elif body is StaticBody2D:
-		
-		pass
-	else:
-		leverage()
 
 func trigger_disappear(body: Variant) -> void:
 	if body is CharacterBody2D and body.is_in_group(&"box"):
@@ -186,8 +139,21 @@ func trigger_disappear(body: Variant) -> void:
 				break
 				# h.boxes.remove_at(i)
 
+func trigger_encounter(body: Variant) -> void:
+	if body is CharacterBody2D and body.is_in_group(&"box"):
+		hero.boxes.append(body.no)
+		hero.weight += body.weight
+		return# else:
+	var pos: Vector2 = hero.position
+	var id: int = on_tile(pos)[Def.ID]
+	if (id == Def.FLOOR and _tile[Def.TYPE] == Def.FLOORS) or (id == Def.LOGIC and _tile[Def.ATLAS] in stand):
+		ledge_jump(pos)
+	elif on_tile(hero.position + hero.lever.position)[Def.ID] == Def.LOGIC and _tile[Def.ATLAS] in [Def.SMALL_BOX, Def.LARGE_BOX]:
+		HUD.level.boxes.add_box(_tile[Def.ATLAS], HUD.level.border.position())
+		HUD.level.border.atlas(Def.GROUND).id(Def.FLOOR).type(Def.FLOORS).paint_alt() # coords(Def.GROUND)
+
 func plate_encounter(_body: Variant) -> void:
-	set_tile(HUD.hero, Def.PLATE, hero.position)
+	HUD.level.tile[Def.offset(HUD.hero, Def.PLATE)] = Def.ofmap(HUD.level.border.local_to_map(hero.position))
 	HUD.level.cluster.tile_walk(hero, true)
 
 func plate_disappear(_body: Variant) -> void:

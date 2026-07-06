@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="ActionButtonComplex" load_steps=7 format=3 uid="uid://cwxp8ekcmoam8"]
+
+[ext_resource type="Script" uid="uid://21kvo5qk8w8q" path="res://script/ui/util/split/group.gd" id="1_7nv8i"]
+[ext_resource type="Resource" uid="uid://t0uwtrhrgv1n" path="res://ui/input/short/controls/group/powered_single.tres" id="2_tjedx"]
+[ext_resource type="Script" uid="uid://ccqrq830l8in6" path="res://script/ui/util/split/button.gd" id="3_0ig3k"]
+[ext_resource type="Script" uid="uid://rssqt7kxsel6" path="res://script/ui/util/split/complex.gd" id="4_3xp8s"]
+
+[sub_resource type="Resource" id="Resource_70kee"]
+script = ExtResource("3_0ig3k")
+id = 2
+metadata/_custom_type_script = "uid://ccqrq830l8in6"
+
+[sub_resource type="Resource" id="Resource_dwkwo"]
+script = ExtResource("1_7nv8i")
+group = Array[ExtResource("3_0ig3k")]([SubResource("Resource_70kee")])
+metadata/_custom_type_script = "uid://21kvo5qk8w8q"
+
+[resource]
+script = ExtResource("4_3xp8s")
+action = "forward"
+complex = Array[ExtResource("1_7nv8i")]([ExtResource("2_tjedx"), SubResource("Resource_dwkwo")])
+metadata/_custom_type_script = "uid://rssqt7kxsel6"

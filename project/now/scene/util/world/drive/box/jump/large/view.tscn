@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://dekjgpdurors"]
+
+[ext_resource type="Script" uid="uid://bwq032jyu8u10" path="res://script/util/world/drive/box/base/view/view.gd" id="2_se4ou"]
+[ext_resource type="Texture2D" uid="uid://xmi85x15pfsd" path="res://icon/item/platform/b_large.svg" id="2_strwt"]
+
+[sub_resource type="Gradient" id="Gradient_bfcnh"]
+colors = PackedColorArray(0, 0, 0, 0.235294, 0, 0, 0, 0.235294)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_2152n"]
+gradient = SubResource("Gradient_bfcnh")
+width = 70
+height = 24
+fill_from = Vector2(0.507576, 0)
+fill_to = Vector2(0.492424, 1)
+
+[node name="view" type="Node2D"]
+script = ExtResource("2_se4ou")
+
+[node name="shadow" type="Sprite2D" parent="."]
+position = Vector2(0, 2)
+texture = SubResource("GradientTexture2D_2152n")
+
+[node name="stand" type="Sprite2D" parent="."]
+position = Vector2(-32, -118)
+texture = ExtResource("2_strwt")
+centered = false

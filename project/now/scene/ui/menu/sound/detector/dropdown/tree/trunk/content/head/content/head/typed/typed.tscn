@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://nsp72f0ke2u2"]
+
+[ext_resource type="Script" uid="uid://b02dk7mmgeipw" path="res://script/ui/menu/sound/detector/dropdown/trunk/typed.gd" id="2_gyhtu"]
+[ext_resource type="PackedScene" uid="uid://drvafuccddeo5" path="res://now/scene/ui/menu/sound/detector/dropdown/tree/trunk/content/head/content/head/typed/short.tscn" id="3_grtjj"]
+
+[node name="typed" type="Button"]
+custom_minimum_size = Vector2(47, 47)
+mouse_filter = 1
+text = "typical"
+alignment = 2
+script = ExtResource("2_gyhtu")
+
+[node name="short" parent="." instance=ExtResource("3_grtjj")]
+visible = false
+layout_mode = 1
+
+[connection signal="toggled" from="." to="." method="_toggled"]

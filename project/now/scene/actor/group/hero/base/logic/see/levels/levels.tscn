@@ -1,0 +1,17 @@
+[gd_scene load_steps=5 format=3 uid="uid://chf3wtyobsvlq"]
+
+[ext_resource type="Script" uid="uid://d02ln3jqeo2p3" path="res://script/actor/group/hero/logic/see/levels/levels.gd" id="1_drm8j"]
+[ext_resource type="PackedScene" uid="uid://b3hev1nf6r4th" path="res://now/scene/actor/group/hero/base/logic/see/levels/platform/platform.tscn" id="2_simtw"]
+[ext_resource type="Script" uid="uid://cl4eh2xxj7dgq" path="res://script/actor/group/hero/logic/see/levels/tools/tools.gd" id="3_seham"]
+[ext_resource type="PackedScene" uid="uid://daxuk1btesdei" path="res://now/scene/actor/group/hero/base/logic/see/levels/tools/pillar.tscn" id="6_sqlds"]
+
+[node name="levels" type="Node2D"]
+script = ExtResource("1_drm8j")
+
+[node name="platform" parent="." instance=ExtResource("2_simtw")]
+
+[node name="tools" type="Node2D" parent="."]
+script = ExtResource("3_seham")
+
+[node name="pillar" parent="tools" instance=ExtResource("6_sqlds")]
+position = Vector2(0, -26)

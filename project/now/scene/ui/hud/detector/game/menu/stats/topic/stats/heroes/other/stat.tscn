@@ -1,0 +1,62 @@
+[gd_scene load_steps=6 format=3 uid="uid://cag6l8hxdo83o"]
+
+[ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://ui/theme/patterns/template/menu/settings/topic/footer.tres" id="1_6620l"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6620l"]
+content_margin_top = 3.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r7fgi"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r7fgi"]
+bg_color = Color(0.435192, 0.435192, 0.435192, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bieb6"]
+bg_color = Color(0.89059, 0.89059, 0.89059, 1)
+
+[node name="power" type="Label"]
+custom_minimum_size = Vector2(45, 33)
+size_flags_horizontal = 8
+size_flags_stretch_ratio = 0.5
+theme = ExtResource("1_6620l")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_6620l")
+text = "255"
+horizontal_alignment = 2
+
+[node name="equipment" type="ProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -22.5
+offset_top = -1.0
+offset_right = 22.5
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 3
+size_flags_vertical = 1
+size_flags_stretch_ratio = 4.0
+theme_override_styles/background = SubResource("StyleBoxEmpty_r7fgi")
+theme_override_styles/fill = SubResource("StyleBoxFlat_r7fgi")
+max_value = 90.0
+step = 1.0
+value = 70.0
+show_percentage = false
+
+[node name="base" type="ProgressBar" parent="equipment"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+size_flags_stretch_ratio = 4.0
+theme_override_styles/background = SubResource("StyleBoxEmpty_r7fgi")
+theme_override_styles/fill = SubResource("StyleBoxFlat_bieb6")
+max_value = 90.0
+step = 1.0
+value = 50.0
+show_percentage = false

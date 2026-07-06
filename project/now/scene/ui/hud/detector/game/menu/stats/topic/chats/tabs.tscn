@@ -1,0 +1,111 @@
+[gd_scene load_steps=11 format=3 uid="uid://dfygwaahhajot"]
+
+[ext_resource type="FontFile" uid="uid://b37js8y80ak1k" path="res://data/font/noto_sans/NotoColorEmoji-Regular.ttf" id="1_uvwqk"]
+[ext_resource type="Script" uid="uid://ddnlfc3tie4gs" path="res://script/ui/hud/detector/game/margin/priorities/topic/description.gd" id="5_n5hbl"]
+[ext_resource type="Theme" uid="uid://dfyi7rrcrweqx" path="res://ui/theme/patterns/template/menu/settings/settings.tres" id="6_5hlrn"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e06ya"]
+content_margin_left = 7.0
+content_margin_top = 6.0
+bg_color = Color(0.0588235, 0.0588235, 0.0588235, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c036o"]
+content_margin_left = 7.0
+content_margin_top = 6.0
+bg_color = Color(0.0196078, 0.0196078, 0.0588235, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s12vq"]
+content_margin_left = 7.0
+content_margin_top = 0.0
+bg_color = Color(0.0196078, 0.0196078, 0.0588235, 0.72549)
+
+[sub_resource type="Gradient" id="Gradient_5pr1g"]
+offsets = PackedFloat32Array(0, 0.996139)
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_21ixm"]
+gradient = SubResource("Gradient_5pr1g")
+fill_from = Vector2(0, 0.478632)
+fill_to = Vector2(0.482906, 0.474359)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_o0cao"]
+content_margin_left = 15.0
+texture = SubResource("GradientTexture2D_21ixm")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uvwqk"]
+content_margin_left = 5.0
+content_margin_top = 1.0
+content_margin_bottom = 3.0
+bg_color = Color(0.0196078, 0.0196078, 0.0588235, 0.72549)
+
+[node name="tabs" type="HBoxContainer"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 30.0
+grow_horizontal = 2
+size_flags_vertical = 8
+
+[node name="game" type="Button" parent="."]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_uvwqk")
+theme_override_font_sizes/font_size = 15
+theme_override_styles/normal = SubResource("StyleBoxFlat_e06ya")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_c036o")
+toggle_mode = true
+text = "📬"
+alignment = 0
+
+[node name="chat" type="Button" parent="."]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_uvwqk")
+theme_override_font_sizes/font_size = 15
+theme_override_styles/normal = SubResource("StyleBoxFlat_e06ya")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_c036o")
+toggle_mode = true
+button_pressed = true
+text = "🔬"
+alignment = 0
+
+[node name="items" type="Button" parent="."]
+visible = false
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_uvwqk")
+theme_override_font_sizes/font_size = 15
+theme_override_styles/normal = SubResource("StyleBoxFlat_e06ya")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_c036o")
+toggle_mode = true
+text = "🧪"
+alignment = 0
+
+[node name="help" type="Button" parent="."]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_fonts/font = ExtResource("1_uvwqk")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_s12vq")
+text = "❔"
+alignment = 0
+
+[node name="caption" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("6_5hlrn")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxTexture_o0cao")
+text = "Help"
+script = ExtResource("5_n5hbl")
+
+[node name="pin" type="Button" parent="."]
+visible = false
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_fonts/font = ExtResource("1_uvwqk")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_uvwqk")
+text = "📌"
+alignment = 0

@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://c5lbe81jkv6v"]
+
+[ext_resource type="Script" uid="uid://dxmnfphy1rw8t" path="res://script/actor/group/hero/logic/see/levels/platforms/surface/deploy/walls/distance/jump_zone.gd" id="1_8hefe"]
+[ext_resource type="Script" uid="uid://dywan2rrypqv8" path="res://script/actor/group/hero/logic/see/levels/platforms/surface/deploy/walls/distance/unit.gd" id="2_ehfof"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ipn42"]
+size = Vector2(5, 20)
+
+[node name="center" type="ShapeCast2D"]
+shape = SubResource("RectangleShape2D_ipn42")
+target_position = Vector2(76, 0)
+max_results = 3
+collision_mask = 65731
+script = ExtResource("1_8hefe")
+
+[node name="top" type="ShapeCast2D" parent="."]
+position = Vector2(0, -28)
+shape = SubResource("RectangleShape2D_ipn42")
+target_position = Vector2(76, 0)
+max_results = 3
+collision_mask = 65731
+script = ExtResource("2_ehfof")
+
+[node name="bottom" type="ShapeCast2D" parent="."]
+position = Vector2(0, 28)
+shape = SubResource("RectangleShape2D_ipn42")
+target_position = Vector2(76, 0)
+max_results = 3
+collision_mask = 65731
+script = ExtResource("2_ehfof")

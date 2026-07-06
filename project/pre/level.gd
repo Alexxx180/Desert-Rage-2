@@ -10,13 +10,6 @@ var fire: GPUParticles2D ; var rain: GPUParticles2D
 var entity: Array[CharacterBody2D] = [null, null]
 var tile: PackedInt32Array = [0, 0, 0, 0]
 
-func get_tile(no: int) -> int: return tile[Def.offset(HUD.hero, no)]
-func set_tile(no: int) -> void: tile[Def.offset(HUD.hero, no)] = Def.ofmap(border.local_to_map(HUD.level.entity[HUD.hero].position))
-func no_tile(no: int) -> void: tile[Def.offset(HUD.hero, no)] = 0
-
-func on_tile(pos: Vector2) -> PackedInt32Array: return HUD.level.border.pos(pos).id().atlas().type().tile
-func tile_plate() -> Vector2: return HUD.level.entity[HUD.hero].position
-func tile_lever() -> Vector2: return HUD.level.entity[HUD.hero].position + HUD.level.entity[HUD.hero].lever.position
 func add_chip(box: CharacterBody2D) -> void:
 	add_child(box)
 	box.position = HUD.level.border.get_position()
@@ -44,13 +37,8 @@ func new_cluster() -> TileCluster: return TileCluster.new()
 func new_hero_deploy() -> HeroDeploy: return HeroDeploy.new()
 func new_hero(no: int) -> CharacterBody2D:
 	if entity[no] == null:
-		var hero: CharacterBody2D
-		if no == Def.RAY:
-			hero = load(Def.ray).instantiate()
-			hero.name = &"ray"
-		else:
-			hero = load(Def.rock).instantiate()
-			hero.name = &"rock"
+		var hero: CharacterBody2D = load(Def.ray if no == Def.RAY else Def.rock).instantiate()
+		hero.name = &"ray" if no == Def.RAY else &"rock"
 		hero.no = no
 		add_child(hero)
 		return hero

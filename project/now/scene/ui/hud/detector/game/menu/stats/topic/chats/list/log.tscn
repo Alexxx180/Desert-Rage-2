@@ -1,0 +1,144 @@
+[gd_scene load_steps=5 format=3 uid="uid://bnux5unwse147"]
+
+[ext_resource type="StyleBox" uid="uid://bsggnr5c3uk7o" path="res://ui/theme/style/panel/preview.tres" id="1_0cxcy"]
+[ext_resource type="FontFile" uid="uid://dxg5wbmrewk2p" path="res://data/font/Lato-Regular.ttf" id="2_5fhji"]
+[ext_resource type="PackedScene" uid="uid://dhcteeknvvvj8" path="res://pre/ui/log/item.tscn" id="3_wj16x"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wk8w5"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 2
+border_width_right = 2
+border_color = Color(0.119426, 0.119504, 0.22556, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[node name="log" type="PanelContainer"]
+visible = false
+theme_override_styles/panel = ExtResource("1_0cxcy")
+
+[node name="margin" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="chat" type="VBoxContainer" parent="margin"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="content7" type="PanelContainer" parent="margin/chat"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_wk8w5")
+
+[node name="margin" type="MarginContainer" parent="margin/chat/content7"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 3
+
+[node name="chat" type="Label" parent="margin/chat/content7/margin"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.627451, 0.627451, 0.627451, 1)
+theme_override_constants/line_spacing = -2
+theme_override_fonts/font = ExtResource("2_5fhji")
+theme_override_font_sizes/font_size = 14
+text = "В сундуке найдена пустая банка"
+autowrap_mode = 2
+
+[node name="content6" type="PanelContainer" parent="margin/chat"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_wk8w5")
+
+[node name="margin" type="MarginContainer" parent="margin/chat/content6"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 3
+
+[node name="chat" type="Label" parent="margin/chat/content6/margin"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.627451, 0.627451, 0.627451, 1)
+theme_override_constants/line_spacing = -2
+theme_override_fonts/font = ExtResource("2_5fhji")
+theme_override_font_sizes/font_size = 14
+text = "Получено 213 очков опыта"
+autowrap_mode = 2
+
+[node name="item_found" parent="margin/chat" instance=ExtResource("3_wj16x")]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_wk8w5")
+
+[node name="ko-ray" type="PanelContainer" parent="margin/chat"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_wk8w5")
+
+[node name="margin" type="MarginContainer" parent="margin/chat/ko-ray"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 3
+
+[node name="chat" type="Label" parent="margin/chat/ko-ray/margin"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.627451, 0.627451, 0.627451, 1)
+theme_override_constants/line_spacing = -2
+theme_override_fonts/font = ExtResource("2_5fhji")
+theme_override_font_sizes/font_size = 14
+text = "Рей падает без сознания"
+autowrap_mode = 2
+
+[node name="ko-rock" type="PanelContainer" parent="margin/chat"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_wk8w5")
+
+[node name="margin" type="MarginContainer" parent="margin/chat/ko-rock"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 3
+
+[node name="chat" type="Label" parent="margin/chat/ko-rock/margin"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.627451, 0.627451, 0.627451, 1)
+theme_override_constants/line_spacing = -2
+theme_override_fonts/font = ExtResource("2_5fhji")
+theme_override_font_sizes/font_size = 14
+text = "Рок падает без сознания"
+autowrap_mode = 2
+
+[node name="game-over" type="PanelContainer" parent="margin/chat"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_wk8w5")
+
+[node name="margin" type="MarginContainer" parent="margin/chat/game-over"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 3
+
+[node name="chat" type="Label" parent="margin/chat/game-over/margin"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.627451, 0.627451, 0.627451, 1)
+theme_override_constants/line_spacing = -2
+theme_override_fonts/font = ExtResource("2_5fhji")
+theme_override_font_sizes/font_size = 14
+text = "Вас унесло раскаленными песками...."
+autowrap_mode = 2

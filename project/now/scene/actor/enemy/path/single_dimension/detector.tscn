@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://ehv6yrrtue21"]
+
+[ext_resource type="Script" uid="uid://gkxpk6vu4v3b" path="res://script/actor/enemy/logic/detector/path.gd" id="1_ij0cj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e30m2"]
+size = Vector2(52, 52)
+
+[node name="path" type="Node2D"]
+script = ExtResource("1_ij0cj")
+
+[node name="spark" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 16777216
+
+[node name="shape" type="CollisionShape2D" parent="spark"]
+position = Vector2(0, 11)
+shape = SubResource("RectangleShape2D_e30m2")
+
+[node name="obstacle" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 1329363
+
+[node name="shape" type="CollisionShape2D" parent="obstacle"]
+position = Vector2(0, 11)
+shape = SubResource("RectangleShape2D_e30m2")
+debug_color = Color(0, 0.6, 0.0901961, 0.419608)

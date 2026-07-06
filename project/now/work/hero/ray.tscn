@@ -1,10 +1,10 @@
-[gd_scene load_steps=824 format=3 uid="uid://wbjmq3n817nk"]
+[gd_scene load_steps=822 format=3 uid="uid://wbjmq3n817nk"]
 
-[ext_resource type="Script" uid="uid://co1bl75te11gl" path="res://asset/script/actor/group/hero/main_hero.gd" id="1_y0t4a"]
-[ext_resource type="PackedScene" uid="uid://c136xgt1v5vbl" path="res://asset/scene/actor/group/hero/base/view/base/shadow.tscn" id="4_bt2v1"]
-[ext_resource type="Material" uid="uid://dgu0as4wl227l" path="res://asset/resource/shader/aura/aura.tres" id="5_61dhh"]
-[ext_resource type="PackedScene" uid="uid://bocuu344hsqv" path="res://asset/scene/ui/util/fov.tscn" id="6_1p510"]
-[ext_resource type="Shape2D" uid="uid://i0icy78wfk8i" path="res://asset/resource/geometry/characters/character/levels.tres" id="6_fsxid"]
+[ext_resource type="Script" uid="uid://co1bl75te11gl" path="res://script/actor/group/hero/main_hero.gd" id="1_y0t4a"]
+[ext_resource type="PackedScene" uid="uid://c136xgt1v5vbl" path="res://now/scene/actor/group/hero/base/view/base/shadow.tscn" id="4_bt2v1"]
+[ext_resource type="Material" uid="uid://dgu0as4wl227l" path="res://ui/shader/aura/aura.tres" id="5_61dhh"]
+[ext_resource type="PackedScene" uid="uid://bocuu344hsqv" path="res://now/scene/ui/util/fov.tscn" id="6_1p510"]
+[ext_resource type="Shape2D" uid="uid://i0icy78wfk8i" path="res://ui/geometry/characters/character/levels.tres" id="6_fsxid"]
 [ext_resource type="Texture2D" uid="uid://5njpv4q1vm6m" path="res://icon/entity/p_ray/skills/move/backward.png" id="6_q700u"]
 [ext_resource type="Texture2D" uid="uid://bg306yjfnfuv5" path="res://icon/entity/p_ray/fight/bash/backward.png" id="7_bb85k"]
 [ext_resource type="Texture2D" uid="uid://tpxfdjtl12an" path="res://icon/entity/p_ray/skills/chains_move/backward.png" id="8_nlxbg"]
@@ -5738,12 +5738,6 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="Gradient" id="Gradient_umkci"]
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_n6fgc"]
-gradient = SubResource("Gradient_umkci")
-width = 2
-
 [node name="ray" type="CharacterBody2D" groups=["player"]]
 motion_mode = 1
 script = ExtResource("1_y0t4a")
@@ -5762,7 +5756,7 @@ scale = Vector2(0.6, 0.72)
 material = ExtResource("5_61dhh")
 position = Vector2(0, 4)
 sprite_frames = SubResource("SpriteFrames_pbu02")
-animation = &"right_jump"
+animation = &"backward"
 offset = Vector2(0, -60)
 
 [node name="lever" type="Area2D" parent="."]
@@ -5771,9 +5765,6 @@ collision_mask = 2
 
 [node name="shape" type="CollisionShape2D" parent="lever"]
 shape = ExtResource("6_fsxid")
-
-[node name="Sprite2D" type="Sprite2D" parent="lever"]
-texture = SubResource("GradientTexture1D_n6fgc")
 
 [node name="plate" type="Area2D" parent="."]
 collision_layer = 0

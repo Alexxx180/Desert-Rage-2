@@ -1,0 +1,124 @@
+[gd_scene load_steps=5 format=3 uid="uid://cyw5j1y4scsdc"]
+
+[ext_resource type="FontFile" uid="uid://b37js8y80ak1k" path="res://data/font/noto_sans/NotoColorEmoji-Regular.ttf" id="1_cog7m"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qbkko"]
+content_margin_left = 10.0
+content_margin_top = 5.0
+content_margin_right = 10.0
+content_margin_bottom = 5.0
+bg_color = Color(0, 0, 0, 0.49803922)
+corner_detail = 5
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qbkko"]
+content_margin_left = 30.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cog7m"]
+
+[node name="panel" type="TextureRect"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="panel" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -33.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_qbkko")
+
+[node name="status" type="HFlowContainer" parent="panel"]
+layout_mode = 2
+theme_override_constants/h_separation = 20
+
+[node name="description" type="Label" parent="panel/status"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Пещера истоков - Иголка в стоге сена"
+text_overrun_behavior = 3
+
+[node name="level" type="Label" parent="panel/status"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+text = " 2 Этаж - 30%"
+horizontal_alignment = 2
+
+[node name="enemy" type="Label" parent="panel/status"]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_qbkko")
+text = "2 / 3"
+
+[node name="icon" type="Label" parent="panel/status/enemy"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -9.5
+offset_right = 40.0
+offset_bottom = 9.5
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_cog7m")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_cog7m")
+text = "👻"
+
+[node name="books" type="Label" parent="panel/status"]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_qbkko")
+text = "3 / 6"
+
+[node name="icon" type="Label" parent="panel/status/books"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -9.5
+offset_right = 40.0
+offset_bottom = 9.5
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_cog7m")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_cog7m")
+text = "📖"
+
+[node name="pages" type="Label" parent="panel/status"]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_qbkko")
+text = "1 / 2"
+
+[node name="icon" type="Label" parent="panel/status/pages"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -9.5
+offset_right = 40.0
+offset_bottom = 9.5
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_cog7m")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_cog7m")
+text = "📜"
+
+[node name="secrets" type="Label" parent="panel/status"]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_qbkko")
+text = "2 / 7"
+
+[node name="icon" type="Label" parent="panel/status/secrets"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -9.5
+offset_right = 40.0
+offset_bottom = 9.5
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_cog7m")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_cog7m")
+text = "🔍"

@@ -1,0 +1,96 @@
+[gd_scene load_steps=17 format=3 uid="uid://ybgjukxk63mc"]
+
+[ext_resource type="Script" uid="uid://ctkxvtr3os1lt" path="res://script/util/world/platform/jump/jump.gd" id="1_b2wmg"]
+[ext_resource type="Script" uid="uid://bwq032jyu8u10" path="res://script/util/world/drive/box/base/view/view.gd" id="1_j1ff4"]
+[ext_resource type="Texture2D" uid="uid://core4cjo58407" path="res://icon/item/platform/p_jump.svg" id="2_lt5cs"]
+[ext_resource type="Script" uid="uid://cqm8ig5u258rb" path="res://script/util/world/platform/jump/logic.gd" id="5_kqgit"]
+[ext_resource type="Script" uid="uid://dc8e4vuove4d8" path="res://script/util/world/platform/jump/processor/processor.gd" id="10_ajnil"]
+[ext_resource type="Script" uid="uid://0taw381j3o66" path="res://script/util/world/platform/jump/processor/ride/track/horizontal/horizontal.gd" id="13_2bbqa"]
+[ext_resource type="Script" uid="uid://dijt0sfg4rwdp" path="res://script/util/world/platform/jump/relation/relations.gd" id="15_eymhe"]
+[ext_resource type="Script" uid="uid://d3l371kvoqndv" path="res://script/util/world/platform/jump/relation/ride.gd" id="19_yylct"]
+[ext_resource type="Script" uid="uid://bkna48x4wobfe" path="res://script/util/world/platform/jump/detector/horizontal.gd" id="186_10jpr"]
+[ext_resource type="Script" uid="uid://c2lqak7by8566" path="res://script/util/world/drive/box/base/logic/see/stand.gd" id="187_wn5kb"]
+[ext_resource type="Shape2D" uid="uid://byqqkvyxrb1ta" path="res://ui/geometry/interactables/platform/jump-platform.tres" id="188_du130"]
+[ext_resource type="Shape2D" uid="uid://d2kwfwwome0ir" path="res://ui/geometry/interactables/platform/caution/jump.tres" id="189_wn5kb"]
+[ext_resource type="Script" uid="uid://bwpna8842lrpe" path="res://script/util/world/platform/jump/processor/ride/engine/auto.gd" id="193_du130"]
+
+[sub_resource type="ConcavePolygonShape2D" id="ConcavePolygonShape2D_tvpfk"]
+segments = PackedVector2Array(-35, -57, 35, -57, 35, -57, 35, 13, 35, 13, -35, 13, -35, 13, -35, -57, -33, -55, 33, -55, 33, -55, 33, 11, 33, 11, -33, 11, -33, 11, -33, -55)
+
+[sub_resource type="Gradient" id="Gradient_e76lj"]
+colors = PackedColorArray(0, 0, 0, 0.235294, 0, 0, 0, 0.0784314)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_c5q44"]
+gradient = SubResource("Gradient_e76lj")
+height = 32
+fill_from = Vector2(0.495726, 0)
+fill_to = Vector2(0.487179, 0.995726)
+
+[node name="jump" type="CharacterBody2D"]
+position = Vector2(0, 22)
+collision_layer = 2
+collision_mask = 128
+motion_mode = 1
+script = ExtResource("1_b2wmg")
+
+[node name="placement" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("ConcavePolygonShape2D_tvpfk")
+
+[node name="stand" type="Sprite2D" parent="."]
+position = Vector2(-32, -54)
+texture = ExtResource("2_lt5cs")
+offset = Vector2(32, 32)
+script = ExtResource("1_j1ff4")
+
+[node name="shadow" type="Sprite2D" parent="stand"]
+position = Vector2(32, 86)
+scale = Vector2(0.984375, 1)
+texture = SubResource("GradientTexture2D_c5q44")
+
+[node name="logic" type="Node2D" parent="."]
+visible = false
+script = ExtResource("5_kqgit")
+
+[node name="see" type="Node2D" parent="logic"]
+script = ExtResource("186_10jpr")
+
+[node name="stand" type="StaticBody2D" parent="logic/see"]
+position = Vector2(0, -22)
+collision_layer = 32
+collision_mask = 0
+script = ExtResource("187_wn5kb")
+
+[node name="geometry" type="CollisionShape2D" parent="logic/see/stand"]
+shape = ExtResource("188_du130")
+
+[node name="ledge" type="RayCast2D" parent="logic/see"]
+position = Vector2(0, -68)
+target_position = Vector2(0, 92)
+collision_mask = 128
+
+[node name="caution" type="ShapeCast2D" parent="logic/see"]
+shape = ExtResource("189_wn5kb")
+target_position = Vector2(0, 0)
+max_results = 1
+collision_mask = 20
+
+[node name="work" type="Node" parent="logic"]
+script = ExtResource("10_ajnil")
+
+[node name="ride" type="Node" parent="logic/work"]
+script = ExtResource("13_2bbqa")
+
+[node name="engine" type="Node" parent="logic/work/ride"]
+script = ExtResource("193_du130")
+track = Vector2(0, -250)
+
+[node name="staying" type="Timer" parent="logic/work/ride/engine"]
+wait_time = 2.5
+one_shot = true
+
+[node name="link" type="Node" parent="logic"]
+script = ExtResource("15_eymhe")
+
+[node name="ride" type="Node" parent="logic/link"]
+script = ExtResource("19_yylct")

@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=3 uid="uid://dlr2tiu87cppb"]
+
+[ext_resource type="Script" uid="uid://rew8x338rodj" path="res://script/actor/group/hero/logic/see/levels/tools/spring.gd" id="1_invhj"]
+[ext_resource type="Shape2D" uid="uid://i0icy78wfk8i" path="res://ui/geometry/characters/character/levels.tres" id="2_5min0"]
+[ext_resource type="Shape2D" uid="uid://do0s1n5uuqpof" path="res://ui/geometry/characters/character/character.tres" id="3_540in"]
+
+[node name="spring" type="Node2D"]
+visible = false
+script = ExtResource("1_invhj")
+
+[node name="ground" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 134217728
+
+[node name="shape" type="CollisionShape2D" parent="ground"]
+shape = ExtResource("2_5min0")
+
+[node name="platform" type="ShapeCast2D" parent="."]
+shape = ExtResource("3_540in")
+target_position = Vector2(0, 0)
+max_results = 1
+collision_mask = 129
+
+[node name="slide" type="ShapeCast2D" parent="."]
+shape = ExtResource("3_540in")
+target_position = Vector2(0, 0)
+max_results = 1
+collision_mask = 268435456
+
+[node name="spring" type="ShapeCast2D" parent="."]
+shape = ExtResource("2_5min0")
+target_position = Vector2(0, 0)
+max_results = 1
+collision_mask = 134217728
+
+[node name="walls" type="RayCast2D" parent="."]
+collision_mask = 2
