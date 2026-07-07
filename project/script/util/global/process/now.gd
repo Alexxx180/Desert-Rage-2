@@ -2,7 +2,7 @@ class_name Def
 
 enum { LOGIC = 0, FLOOR = 1, ENTRY = 2, WALLS = 3, BLUE_OFF = 0, U_WATER = 0, BLUE_ON, U_EXIT = 1, RED_OFF, U_WALL_OFF = 2, RED_ON,
 	U_WALL_ON = 3, WALL = 3, LEDGE = 4, GREEN_OFF, U_LADDER = 4, GREEN_ON, D_LADDER = 5,
-	WHITE_OFF, ENEMY = 6, WHITE_ON, BOSS = 7, BLACK_OFF, M_WATER = 8,
+	WHITE_OFF, ENEMY = 6, WHITE_ON, BOSS = 7, HINT = 7, BLACK_OFF, M_WATER = 8,
 	TAGS = 8, BLACK_ON, M_EXIT = 9, CHESTS = 9, GROUND = 9, BRONZE_OFF, D_WALL_OFF = 10, BRONZE_ON,
 	D_WALL_ON = 11, SILVER_OFF, H_SPRING_OFF = 12, SILVER_ON, H_SPRING_ON = 13, GOLD_OFF,
 	B_SPRING_OFF = 14, GOLD_ON, B_SPRING_ON = 15, PLATINUM_OFF, D_WATER = 16, PLATINUM_ON,
@@ -71,6 +71,14 @@ static func ref(parent: Object, object: Variant, caption: StringName, feedback: 
 		object = feedback.call()
 		parent.set(caption, object)
 	return object
+
+static func refn(parent: Node, node: Node, caption: StringName, feedback: Callable) -> Variant:
+	if node == null:
+		node = feedback.call()
+		node.name = caption
+		parent.set(caption, node)
+		parent.add_child(node)
+	return node
 
 static func add(parent: Node, path: StringName, caption: StringName) -> Variant:
 	var node: Node = load(path).instantiate()
@@ -143,6 +151,8 @@ const priorities: StringName = &"res://now/hud/game/priorities.tscn"
 const title: StringName = &"res://pre/ui/menu/title.tscn"
 const fire: StringName = &"res://pre/particle/fire/fire.tscn"
 const rain: StringName = &"res://pre/particle/rain/rain.tscn"
+const card: StringName = &"res://now/scene/ui/hud/detector/game/menu/priorities/topic/research/content/help/cards/card.tscn"
+
 # PRELOADS
 const sand: PackedScene = preload("res://pre/particle/sand.tscn")
 const throw: PackedScene = preload("res://pre/particle/fight/kick.tscn")

@@ -4,6 +4,7 @@ enum { PAUSE, GAME }
 
 var state: int
 var no: int = 0
+var card: Button
 
 var navigation: Array
 var hints: CompressedTexture2DArray = preload("res://icon/help/z_master.svg")
@@ -81,3 +82,19 @@ func set_level_mode(mode: Node.ProcessMode) -> void: HUD.level.process_mode = mo
 
 func upload_help() -> void:
 	HUD.game.hints.motion.texture = ImageTexture.create_from_image(hints.get_layer_data(no))
+
+func log_help_hide() -> void:
+	var tween: Tween = HUD.create_tween()
+	tween.tween_property(card, ^"modulate", Color.TRANSPARENT, 1)
+	tween.tween_callback(card.hide)
+
+func log_help(of: int) -> void:
+	if card == null:
+		card = load(Def.card).instantiate()
+		HUD.game.help.add_child(card)
+	card.show()
+	var tween: Tween = HUD.create_tween()
+	tween.tween_property(card, ^"modulate", Color.WHITE, 1)
+	card.text = "H" + Def.hints[of] + "T"
+	card.help.text = "H" + Def.hints[of] + "D"
+	

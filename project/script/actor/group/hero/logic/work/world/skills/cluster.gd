@@ -7,6 +7,31 @@ var access: PackedInt32Array = []
 var sizes: PackedByteArray = [0, 0, 0, 0]
 var buttons: Dictionary[int, int] = {}
 var completed: int
+var hint: PackedInt32Array = []
+
+func help_show(pos: Vector2) -> int:
+	for i in range(0, len(hint), 2):
+		var a: Rect2 = Rect2(Def.tomap(hint[i]), Def.tomap(hint[i + 1]))
+		if a.position >= pos and pos <= a.size:
+			return i
+	return -1
+
+func help_hint() -> void:
+	for tile in range(0, Def.T8):
+		var tiles: PackedVector2Array = HUD.level.execute.get_used_cells_by_id(Def.TAGS, Def.to8(tile), 1)
+		if tiles.size() == 0: break
+		
+		var a: Rect2 = Rect2(tiles[0], tiles[(1 if tiles.size() == 1 else 0)])
+		hint.append(Def.ofmap(a.position))
+		hint.append(Def.ofmap(a.size))
+		for tag in tiles: HUD.level.execute.erase_cell(tag)
+		
+		for y in range(a.position.y, a.size.y + 1):
+			for x in range(a.position.x, a.size.x + 1):
+				HUD.level.border.coords().type().id().atlas()
+				if (HUD.level.border.tile[Def.ATLAS] == Def.GROUND and
+					HUD.level.border.tile[Def.ID] in [Def.FLOOR, Def.WALLS]):
+					HUD.level.border.atlas(Def.ymap(y) | x).paint_alt()
 
 func reset_button_completion() -> void:
 	if sizes[BUTTON] == 0: return
@@ -32,11 +57,13 @@ func resize_clusters() -> void:
 		for x in range(0, tiles.size()):
 			cluster[count + x] = Def.ofmap(tiles[x])
 			if search:
+				search = false
 				match Def.of8(HUD.level.border.coords(tiles[x]).tile[Def.ATLAS]):
-					Def.PLATE_OFF, Def.PLATE_ON: button.append(Def.ymap(tiles.size()) | count) ; search = false
-					Def.LEVER_OFF, Def.LEVER_ON: lever.append(Def.ymap(tiles.size()) | count) ; search = false
-					Def.SOURCE_OFF, Def.SOURCE_ON: source.append(Def.ymap(tiles.size()) | count) ; search = false
-					Def.TELEPORT_ON, Def.PLACE: teleport.append(Def.ymap(tiles.size()) | count) ; search = false
+					Def.PLATE_OFF, Def.PLATE_ON: button.append(Def.ymap(tiles.size()) | count)
+					Def.LEVER_OFF, Def.LEVER_ON: lever.append(Def.ymap(tiles.size()) | count)
+					Def.SOURCE_OFF, Def.SOURCE_ON: source.append(Def.ymap(tiles.size()) | count)
+					Def.TELEPORT_ON, Def.PLACE: teleport.append(Def.ymap(tiles.size()) | count)
+					_: search = true
 		count += tiles.size()
 	var types: Array[PackedInt32Array] = [button, lever, source, teleport]
 	for i in range(0, len(types)):
@@ -101,6 +128,9 @@ func tile_melt(coords: int) -> void:
 	if HUD.level.border.tile[Def.TYPE] == Def.ICE_FLOOR:
 		HUD.level.border.type(Def.FLOOR).paint_alt()
 
+#func tile_walk_out() -> void:
+	# HUD.menu.log_help_hide()
+
 func tile_walk(hero: CharacterBody2D, enter: bool = true) -> void:
 	var atlas: int = HUD.level.border.coords(HUD.level.tile[Def.offset(hero.no, Def.PLATE)]).atlas().tile[Def.ATLAS]
 	if atlas == Def.TELEPORT_ON:
@@ -109,6 +139,11 @@ func tile_walk(hero: CharacterBody2D, enter: bool = true) -> void:
 			if HUD.level.border.coords(cluster[i]).tile[Def.ATLAS] == Def.PLACE:
 				hero.teleport(HUD.level.border.map_to_local(Def.tomap(cluster[i])))
 				break
+		return
+	elif atlas == Def.HINT and HUD.level.border.tile[Def.ID] == Def.FLOOR:
+		var no: int = help_show(hero.position)
+		if no == -1: return
+		HUD.menu.log_help(no)
 		return
 	tile_press(HUD.level.border.tile[Def.COORDS], enter)
 

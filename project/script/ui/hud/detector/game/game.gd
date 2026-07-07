@@ -13,6 +13,8 @@ extends Control
 @onready var margin: MarginContainer = bottom.get_node(^"margin")
 @onready var controls: VBoxContainer = margin.get_node(^"controls")
 
+@onready var help: VBoxContainer = controls.get_node(^"middle/help")
+
 """
 func _ready():
 	get_viewport().connect("size_changed", _on_viewport_resize)

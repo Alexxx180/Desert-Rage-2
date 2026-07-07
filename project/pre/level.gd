@@ -17,7 +17,7 @@ func add_chip(box: CharacterBody2D) -> void:
 var deploy: HeroDeploy:
 	get: return Def.ref(self, _deploy, &"_deploy", new_hero_deploy)
 var boxes: LevelBoxes:
-	get: return Def.ref(self, _boxes, &"_boxes", new_boxes)
+	get: return Def.refn(self, _boxes, &"_boxes", new_boxes)
 var cluster: TileCluster:
 	get: return Def.ref(self, _cluster, &"_cluster", new_cluster)
 var conductor: FlowConductor:

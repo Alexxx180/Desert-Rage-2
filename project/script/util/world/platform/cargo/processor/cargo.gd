@@ -3,7 +3,7 @@ extends Node
 var platform: CharacterBody2D
 var weight: Dictionary = {}
 
-func load_cargo(cargo: CharacterBody2D) -> void:
+func load_cargo(cargo: AnimatableBody2D) -> void:
 	if platform.see.ledge.sync_traps():
 		weight[cargo.get_instance_id()] = cargo
 		toggle(cargo, false)
@@ -19,10 +19,10 @@ func toggle_platforming(hero: CharacterBody2D, state: bool) -> void:
 func toggle_mask(gravity, state: bool) -> Lay:
 	return gravity.context(state).collide_main().collide(Lay.BORDERS)
 
-func is_weight_box(entity: CharacterBody2D) -> bool:
+func is_weight_box(entity: AnimatableBody2D) -> bool:
 	return entity is PlatformingBox
 
-func toggle(cargo: CharacterBody2D, state: bool) -> void:
+func toggle(cargo: AnimatableBody2D, state: bool) -> void:
 	if is_weight_box(cargo):
 		toggle_mask(cargo.logic.work.move.gravity, state)
 	else:
