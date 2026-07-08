@@ -28,7 +28,9 @@ func help_hint() -> void:
 		
 		for y in range(a.position.y, a.size.y + 1):
 			for x in range(a.position.x, a.size.x + 1):
-				var coords: int = Def.ymap(y) | x
+				var coords_b: int = Def.ofmap(Vector2(x, y))
+				var coords: int = Def.of(x, y)
+				print("C: ", coords, " B: ", coords_b)
 				HUD.level.border.coords(coords).type().id().atlas()
 				if (HUD.level.border.tile[Def.ATLAS] == Def.GROUND and
 					HUD.level.border.tile[Def.ID] in [Def.FLOOR, Def.WALLS]):
@@ -60,10 +62,10 @@ func resize_clusters() -> void:
 			if search:
 				search = false
 				match Def.of8(HUD.level.border.coords(tiles[x]).tile[Def.ATLAS]):
-					Def.PLATE_OFF, Def.PLATE_ON: button.append(Def.ymap(tiles.size()) | count)
-					Def.LEVER_OFF, Def.LEVER_ON: lever.append(Def.ymap(tiles.size()) | count)
-					Def.SOURCE_OFF, Def.SOURCE_ON: source.append(Def.ymap(tiles.size()) | count)
-					Def.TELEPORT_ON, Def.PLACE: teleport.append(Def.ymap(tiles.size()) | count)
+					Def.PLATE_OFF, Def.PLATE_ON: button.append(Def.of(tiles.size(), count))
+					Def.LEVER_OFF, Def.LEVER_ON: lever.append(Def.of(tiles.size(), count))
+					Def.SOURCE_OFF, Def.SOURCE_ON: source.append(Def.of(tiles.size(), count))
+					Def.TELEPORT_ON, Def.PLACE: teleport.append(Def.of(tiles.size(), count))
 					_: search = true
 		count += tiles.size()
 	var types: Array[PackedInt32Array] = [button, lever, source, teleport]
@@ -98,14 +100,14 @@ func switch_cluster(section: int, enter: bool) -> void:
 	var c: int = get_cluster(section, Def.ofmap(HUD.level.border.tile[Def.COORDS]))
 	var state: bool = !Bit.of(completed, c)
 	completed = Bit.to(completed, c, state)
-	for i in range(Def.xmap(access[c]), Def.ymap(access[c])):
+	for i in range(Def.x(access[c]), Def.y(access[c])):
 		toggle_openning(i, state, enter)
 
 func get_cluster(section: int, coords: int) -> int:
 	var from: int = 0
 	for x in range(0, section): from += sizes[x]
 	for y in range(from, from + sizes[section]):
-		for i in range(Def.xmap(access[y]), Def.ymap(access[y])):
+		for i in range(Def.x(access[y]), Def.y(access[y])):
 			if coords == cluster[i]: return y
 	return -1
 
@@ -136,7 +138,7 @@ func tile_walk(hero: CharacterBody2D, enter: bool = true) -> void:
 	var atlas: int = HUD.level.border.coords(HUD.level.tile[Def.offset(hero.no, Def.PLATE)]).atlas().tile[Def.ATLAS]
 	if atlas == Def.TELEPORT_ON:
 		var c: int = get_cluster(TELEPORT, Def.ofmap(HUD.level.border.tile[Def.COORDS]))
-		for i in range(Def.xmap(access[c]), Def.ymap(access[c])):
+		for i in range(Def.x(access[c]), Def.y(access[c])):
 			if HUD.level.border.coords(cluster[i]).tile[Def.ATLAS] == Def.PLACE:
 				hero.teleport(HUD.level.border.map_to_local(Def.tomap(cluster[i])))
 				break

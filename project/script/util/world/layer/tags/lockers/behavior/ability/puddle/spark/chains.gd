@@ -67,8 +67,8 @@ func _around(tile: int) -> bool:
 		(t[Def.ID] == Def.FLOOR and t[Def.ATLAS] != Def.WALL and t[Def.TYPE] == Def.PUDDLE_ON))
 
 func contact(map_coords: int) -> void:
-	if not (_around(map_coords + Def.yofmap(1)) or _around(map_coords + 1) or
-		_around(map_coords - Def.yofmap(1)) or _around(map_coords - 1)): return
+	if not (_around(map_coords + Def.yof(1)) or _around(map_coords + 1) or
+		_around(map_coords - Def.yof(1)) or _around(map_coords - 1)): return
 	
 	map_coords = HUD.level.border.tile[Def.COORDS]
 	if HUD.level.border.tile[Def.TYPE] == Def.PUDDLE_OFF:
@@ -116,13 +116,13 @@ func get_site_to_discharge(map_coords: Vector2i) -> Vector2i:
 func charge_unit(map_coords: int) -> void:
 	for chain in range(current.size(), 0, -1):
 		var delta: int = map_coords - current[chain][B]
-		if ((Def.xmap(delta) ^ Def.ymap(delta)) & 1 == 1) and conduct(map_coords, chain):
+		if ((Def.x(delta) ^ Def.y(delta)) & 1 == 1) and conduct(map_coords, chain):
 			draw_tile(map_coords, PUDDLE)
 			contact(map_coords)
 			return
 
 func get_direction(a: int, b: int) -> int:
-	return clampi(Def.ymap(a) - Def.ymap(b), -1, 1) | clampi(Def.xmap(a) - Def.xmap(b), -1, 1)
+	return clampi(Def.y(a) - Def.y(b), -1, 1) | clampi(Def.x(a) - Def.x(b), -1, 1)
 
 func discharge_unit(map_coords: int) -> void:
 	var site: Vector2i = get_site_to_discharge(Def.tomap(map_coords))

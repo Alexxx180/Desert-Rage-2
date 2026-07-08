@@ -49,22 +49,17 @@ static func rotate(dir: Vector2i) -> int: return rotation[direct(dir)]
 static func direct(dir: Vector2i) -> int: return x_direction[dir.x] + y_direction[dir.y] # x_direction[dir.x]
 static func offset(hero: int, no: int = 0) -> int: return hero * OFFSET + no
 
-static func y(field: int, off: int) -> int: return field >> off
-static func x(field: int, off: int) -> int: return field & ((1 << off) - 1)
-static func xmap(field: int) -> int: return x(field, LEVEL)
-static func ymap(field: int) -> int: return y(field, LEVEL)
+static func y(field: int, off: int = LEVEL) -> int: return field >> off
+static func x(field: int, off: int = LEVEL) -> int: return field & ((1 << off) - 1)
 
 static func to(field: int, off: int) -> Vector2i: return Vector2i(x(field, off), y(field, off))
 static func tomap(field: int) -> Vector2i: return to(field, LEVEL)
 static func to8(field: int) -> Vector2i: return to(field, 3)
-static func to4(field: int) -> Vector2i: return to(field, 2)
 
-static func yof(y1: int, off: int) -> int: return y1 << off
-static func yofmap(y1: int) -> int: return yof(y1, LEVEL)
-static func of(pos: Vector2i, off: int) -> int: return yof(pos.y, off) | pos.x
-static func ofmap(pos: Vector2i) -> int: return of(pos, LEVEL) # CTRL + LMB - the more the LEVEL the larger the map
-static func of8(pos: Vector2i) -> int: return of(pos, 3)
-static func of4(pos: Vector2i) -> int: return of(pos, 2)
+static func yof(y1: int, off: int = LEVEL) -> int: return y1 << off
+static func of(x1: int, y1: int, off: int = LEVEL) -> int: return y1 << off | x1
+static func ofmap(pos: Vector2i) -> int: return of(pos.x, pos.y, LEVEL) # CTRL + LMB - the more the LEVEL the larger the map
+static func of8(pos: Vector2i) -> int: return of(pos.x, pos.y, 3)
 
 static func ref(parent: Object, object: Variant, caption: StringName, feedback: Callable) -> Variant:
 	if object == null:
