@@ -18,8 +18,8 @@ func help_show(pos: Vector2) -> int:
 
 func help_hint() -> void:
 	for tile in range(0, Def.T8):
-		var tiles: PackedVector2Array = HUD.level.execute.get_used_cells_by_id(Def.TAGS, Def.to8(tile), 1)
-		if tiles.size() == 0: break
+		var tiles: PackedVector2Array = HUD.level.execute.get_used_cells_by_id(Def.TAGS, Def.to8(tile), Def.HELP) # Def.to8(tile)
+		if tiles.size() == 0: continue
 		
 		var a: Rect2 = Rect2(tiles[0], tiles[(1 if tiles.size() == 1 else 0)])
 		hint.append(Def.ofmap(a.position))
@@ -28,10 +28,11 @@ func help_hint() -> void:
 		
 		for y in range(a.position.y, a.size.y + 1):
 			for x in range(a.position.x, a.size.x + 1):
-				HUD.level.border.coords().type().id().atlas()
+				var coords: int = Def.ymap(y) | x
+				HUD.level.border.coords(coords).type().id().atlas()
 				if (HUD.level.border.tile[Def.ATLAS] == Def.GROUND and
 					HUD.level.border.tile[Def.ID] in [Def.FLOOR, Def.WALLS]):
-					HUD.level.border.atlas(Def.ymap(y) | x).paint_alt()
+					HUD.level.border.atlas(Def.HINT).id(Def.FLOOR).paint_alt()
 
 func reset_button_completion() -> void:
 	if sizes[BUTTON] == 0: return
