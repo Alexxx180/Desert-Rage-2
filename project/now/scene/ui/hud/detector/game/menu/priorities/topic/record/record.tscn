@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bmexdqeihycjg"]
+[gd_scene load_steps=13 format=3 uid="uid://bmexdqeihycjg"]
 
 [ext_resource type="Script" uid="uid://c3nt5k6qfjf31" path="res://script/ui/hud/detector/game/margin/priorities/topic/stack/record/record.gd" id="1_cdi27"]
 [ext_resource type="Script" uid="uid://cvelhlqm4dmo2" path="res://script/ui/hud/detector/game/margin/priorities/topic/stack/record/ranking/priority/priority.gd" id="3_e1oyj"]
@@ -6,11 +6,13 @@
 [ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://ui/theme/patterns/template/menu/settings/topic/footer.tres" id="4_e1oyj"]
 [ext_resource type="PackedScene" uid="uid://dtjrciypb4yly" path="res://now/scene/ui/hud/detector/game/menu/priorities/topic/record/priority/self_control.tscn" id="5_cgha8"]
 [ext_resource type="PackedScene" uid="uid://sl22kndh7h64" path="res://now/scene/ui/hud/detector/game/menu/priorities/topic/record/priority/tenacity.tscn" id="6_no5ti"]
-[ext_resource type="PackedScene" uid="uid://ct4vkw2q1l83e" path="res://now/scene/ui/hud/detector/game/menu/priorities/topic/record/growth/addon.tscn" id="6_vdfvb"]
-[ext_resource type="Texture2D" uid="uid://b2ouvbea4wbsy" path="res://icon/help/ray/look.png" id="11_7a4jk"]
 [ext_resource type="Script" uid="uid://xbwbq4ppbwns" path="res://script/ui/hud/detector/game/margin/priorities/topic/stack/record/ranking/description.gd" id="12_1q5d6"]
-[ext_resource type="Script" uid="uid://c0smqteyhgnwc" path="res://script/ui/hud/detector/game/margin/priorities/topic/stack/record/ranking/priority/growth/heroes/hero/hero.gd" id="12_8gg38"]
 [ext_resource type="FontFile" uid="uid://cc0l5uav5qfke" path="res://data/font/ka1.ttf" id="16_cgha8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_no5ti"]
+content_margin_top = 3.0
+content_margin_right = 12.0
+content_margin_bottom = 5.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o76in"]
 content_margin_left = 5.0
@@ -21,22 +23,16 @@ border_color = Color(0.43529412, 0.43529412, 0.43529412, 1)
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_x0k1n"]
 color = Color(0.49747366, 0.49747366, 0.49747366, 1)
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_no5ti"]
-content_margin_left = 60.0
-content_margin_top = 3.0
-content_margin_right = 12.0
-content_margin_bottom = 5.0
-
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8gg38"]
 content_margin_left = 200.0
 content_margin_top = 40.0
 
 [node name="space" type="Control"]
-custom_minimum_size = Vector2(0, 200)
+custom_minimum_size = Vector2(0, 150)
 layout_mode = 3
 anchors_preset = 0
 offset_right = 1152.0
-offset_bottom = 160.0
+offset_bottom = 150.0
 size_flags_horizontal = 3
 script = ExtResource("1_cdi27")
 
@@ -56,7 +52,31 @@ script = ExtResource("3_e1oyj")
 layout_mode = 2
 theme_override_colors/font_color = Color(0.64705884, 0.64705884, 0.64705884, 1)
 theme_override_font_sizes/font_size = 20
-text = "Досье \"А\""
+text = "Досье `A"
+
+[node name="value" type="Label" parent="priority/title"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -62.5
+offset_top = -14.5
+offset_right = 62.5
+offset_bottom = 14.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 8
+theme_override_colors/font_color = Color(0.241156, 0.241156, 0.241156, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 10
+theme_override_fonts/font = ExtResource("16_cgha8")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxEmpty_no5ti")
+text = "23 - 1000"
+horizontal_alignment = 2
+vertical_alignment = 2
 
 [node name="progress" type="ProgressBar" parent="priority"]
 custom_minimum_size = Vector2(10, 2)
@@ -79,48 +99,6 @@ layout_mode = 2
 
 [node name="tenacity" parent="priority" instance=ExtResource("6_no5ti")]
 layout_mode = 2
-
-[node name="ray" type="TextureRect" parent="priority"]
-custom_minimum_size = Vector2(45, 45)
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-texture = ExtResource("11_7a4jk")
-expand_mode = 1
-script = ExtResource("12_8gg38")
-
-[node name="priority" parent="priority/ray" instance=ExtResource("6_vdfvb")]
-layout_mode = 1
-anchors_preset = 11
-anchor_left = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -20.0
-offset_right = 0.0
-offset_bottom = 0.0
-grow_horizontal = 0
-grow_vertical = 2
-size_flags_horizontal = 8
-
-[node name="value" type="Label" parent="priority/ray"]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_top = -14.5
-offset_right = 142.0
-offset_bottom = 14.5
-grow_vertical = 2
-size_flags_horizontal = 8
-theme_override_colors/font_color = Color(0.241156, 0.241156, 0.241156, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_outline_size = 10
-theme_override_fonts/font = ExtResource("16_cgha8")
-theme_override_font_sizes/font_size = 18
-theme_override_styles/normal = SubResource("StyleBoxEmpty_no5ti")
-text = "23 - 1000"
-horizontal_alignment = 2
-vertical_alignment = 2
 
 [node name="description" type="Label" parent="."]
 custom_minimum_size = Vector2(300, 0)

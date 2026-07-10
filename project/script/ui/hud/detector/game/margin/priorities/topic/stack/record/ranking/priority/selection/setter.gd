@@ -1,5 +1,5 @@
 extends Button
-
+"""
 @onready var margin: MarginContainer = $margin
 @onready var xp: ProgressBar = margin.get_node("level/progress")
 @onready var next: Label = $description/next
@@ -65,3 +65,4 @@ func set_priority(no: int, summary: Dictionary) -> void:
 func update_exp(value: int, maximum: int) -> void:
 	xp.value = value
 	xp.max_value = maximum
+"""

@@ -1,5 +1,5 @@
 extends VBoxContainer
-
+"""
 #@onready var priority: VBoxContainer = $priority
 #@onready var description: Label = $description 
 
@@ -28,7 +28,6 @@ func connect_priorities(ranking: VBoxContainer) -> void:
 		for priority in [pursuit, self_control, tenacity]:
 			connect_priority(priority, ui)
 
-"""
 @onready var ranking: HFlowContainer = $ranking
 @onready var priorities: Array[Button] = ranking.priority.selection.priorities
 

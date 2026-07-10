@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cq5jn6k2bwg5n"]
+[gd_scene load_steps=15 format=3 uid="uid://cq5jn6k2bwg5n"]
 
 [ext_resource type="Script" uid="uid://bwtr43cgelxn8" path="res://script/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/topic/status/space/title/enemies/enemies.gd" id="1_cin2p"]
 [ext_resource type="FontFile" uid="uid://bmtckcw2a28p2" path="res://data/font/Sportsball.ttf" id="2_52axc"]
@@ -44,6 +44,13 @@ expand_margin_top = 2.0
 HScrollBar/styles/grabber = SubResource("StyleBoxFlat_uyouq")
 HScrollBar/styles/scroll = SubResource("StyleBoxFlat_3pmtf")
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ginur"]
+content_margin_left = 100.0
+content_margin_right = 58.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 2
+border_color = Color(0.029506592, 0.029506546, 0.029506572, 1)
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3pmtf"]
 content_margin_left = 1000.0
 content_margin_right = 1000.0
@@ -52,7 +59,9 @@ content_margin_right = 1000.0
 offset_right = 1152.0
 offset_bottom = 30.0
 size_flags_horizontal = 3
+theme_override_constants/separation = 10
 script = ExtResource("1_cin2p")
+theme_override_constants/separation = 10
 
 [node name="health" type="Button" parent="."]
 custom_minimum_size = Vector2(90, 26)
@@ -83,24 +92,17 @@ step = 1.0
 value = 20.0
 show_percentage = false
 
-[node name="pallete" type="MarginContainer" parent="health"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 100
-theme_override_constants/margin_right = 58
-theme_override_constants/margin_bottom = 4
-
-[node name="progress" type="ScrollContainer" parent="health/pallete"]
-layout_mode = 2
+[node name="progress" type="ScrollContainer" parent="health"]
+layout_mode = 0
+offset_left = 100.0
+offset_right = 885.0
+offset_bottom = 24.0
 size_flags_horizontal = 3
 theme = SubResource("Theme_llsuf")
-scroll_horizontal = 1010
+theme_override_styles/panel = SubResource("StyleBoxFlat_ginur")
+scroll_horizontal = 1105
 
-[node name="combo" type="Label" parent="health/pallete/progress"]
+[node name="combo" type="Label" parent="health/progress"]
 layout_mode = 2
 size_flags_stretch_ratio = 0.25
 theme_override_fonts/font = ExtResource("7_llsuf")
@@ -108,12 +110,6 @@ theme_override_font_sizes/font_size = 18
 theme_override_styles/normal = SubResource("StyleBoxEmpty_3pmtf")
 text = "🎯"
 vertical_alignment = 1
-
-[node name="carriage" type="ColorRect" parent="health/pallete"]
-custom_minimum_size = Vector2(2, 0)
-layout_mode = 2
-size_flags_horizontal = 0
-color = Color(0.41215247, 0.41215247, 0.41215247, 1)
 
 [node name="value" parent="." instance=ExtResource("9_uyouq")]
 layout_mode = 2

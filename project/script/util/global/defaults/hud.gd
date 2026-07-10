@@ -54,4 +54,6 @@ func new_aura_resource() -> AuraResource: return AuraResource.new()
 
 func next() -> int: return (HUD.hero + 1) & Def.ROCK
 func _ready() -> void: layer = 2 # TODO
-func _input(event: InputEvent) -> void: world.input(event)
+func _input(event: InputEvent) -> void:
+	if HUD.level != null:
+		world.input(event)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://7o2xe4bosovy"]
+[gd_scene load_steps=39 format=3 uid="uid://7o2xe4bosovy"]
 
 [ext_resource type="Script" uid="uid://b3w8ueb7rmpu" path="res://script/ui/hud/detector/game/margin/priorities/stats/topic/stack/stack.gd" id="1_pr1y1"]
 [ext_resource type="PackedScene" uid="uid://cddw0qxlba87p" path="res://now/scene/ui/hud/detector/game/menu/inventory/items/bag.tscn" id="2_hk02f"]
@@ -9,7 +9,6 @@
 [ext_resource type="PackedScene" uid="uid://dsu01cw1gye0x" path="res://now/scene/ui/hud/detector/game/menu/stats/topic/stats/heroes/heroes.tscn" id="6_exixj"]
 [ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://ui/theme/patterns/template/menu/settings/topic/footer.tres" id="7_hejl4"]
 [ext_resource type="Script" uid="uid://s66cv1o1gyus" path="res://script/ui/hud/detector/game/margin/priorities/stats/topic/stack/stats/equipment/stats/description.gd" id="8_csg74"]
-[ext_resource type="FontFile" uid="uid://c4ygkmnbt1j7y" path="res://data/font/LTSuperiorSerif-Semibold.otf" id="9_0vblc"]
 [ext_resource type="FontFile" uid="uid://o0rgn7d13mr3" path="res://data/font/OpenSans-VariableFont_wdth,wght.ttf" id="10_10kjk"]
 [ext_resource type="FontFile" uid="uid://b2wbdbnkxcqv1" path="res://data/font/noto_sans/NotoEmoji-VariableFont_wght.ttf" id="11_q0nrq"]
 [ext_resource type="FontFile" uid="uid://qxg3lsudod7p" path="res://data/font/Championship.ttf" id="12_ekak2"]
@@ -69,6 +68,23 @@ fill_to = Vector2(0, 0)
 content_margin_left = 160.0
 texture = SubResource("GradientTexture2D_lpjcv")
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c8nu0"]
+content_margin_left = 5.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8skr0"]
+content_margin_right = 3.0
+content_margin_bottom = 1.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_i0ff0"]
+content_margin_bottom = 30.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7x86q"]
+content_margin_bottom = 3.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ryb87"]
+content_margin_left = 18.0
+content_margin_top = 7.0
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ui6km"]
 content_margin_left = 75.0
 content_margin_top = 10.0
@@ -99,23 +115,6 @@ border_color = Color(0.06469657, 0.06469653, 0.06469646, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s6ojn"]
 content_margin_top = 50.0
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c8nu0"]
-content_margin_left = 5.0
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8skr0"]
-content_margin_right = 3.0
-content_margin_bottom = 1.0
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_i0ff0"]
-content_margin_bottom = 30.0
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7x86q"]
-content_margin_bottom = 3.0
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ryb87"]
-content_margin_left = 18.0
-content_margin_top = 7.0
 
 [node name="scroll" type="ScrollContainer"]
 anchors_preset = 15
@@ -229,13 +228,97 @@ layout_mode = 2
 theme_override_constants/h_separation = 7
 theme_override_constants/v_separation = 7
 
-[node name="description" type="Label" parent="control/scroll/stack/bestiary"]
-custom_minimum_size = Vector2(230, 10)
+[node name="spider" type="TextureRect" parent="control/scroll/stack/bestiary"]
+process_mode = 4
+custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
-theme_override_colors/font_color = Color(0.19434929, 0.19434926, 0.19434926, 1)
-theme_override_fonts/font = ExtResource("9_0vblc")
-text = "В бестиарии находятся све-дения о противниках, люд-ях и исследованиях. Навед-ите курсор на противника чтобы получить сводку о нём."
+size_flags_horizontal = 0
+script = ExtResource("16_baiyi")
+metadata/_custom_type_script = "uid://b82g80p2b6kwm"
+
+[node name="height" type="Label" parent="control/scroll/stack/bestiary/spider"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 1
+offset_right = 110.0
+offset_bottom = 23.0
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme = ExtResource("7_hejl4")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxEmpty_c8nu0")
+text = "33 cm "
+text_overrun_behavior = 3
+
+[node name="count" type="Label" parent="control/scroll/stack/bestiary/spider"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -110.0
+offset_top = -23.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 3
+size_flags_vertical = 8
+theme = ExtResource("7_hejl4")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxEmpty_8skr0")
+text = "65"
+horizontal_alignment = 2
+text_overrun_behavior = 3
+
+[node name="number" parent="control/scroll/stack/bestiary" instance=ExtResource("17_0jpq3")]
+layout_mode = 2
+text = "[b]🕷[/b] Тип ▰▰-
+[b]⚔[/b] 215 ▰--
+[b]🛡[/b] 234 ▰▰--
+[b]🔥[/b] 215 ▰-
+[b]🫧[/b] 233 ▰▰-"
+
+[node name="effect" type="Label" parent="control/scroll/stack/bestiary"]
+custom_minimum_size = Vector2(230, 0)
+layout_mode = 2
+size_flags_vertical = 0
+theme = ExtResource("7_hejl4")
+theme_override_constants/line_spacing = -7
+theme_override_constants/paragraph_spacing = -2
+theme_override_font_sizes/font_size = 17
+theme_override_styles/normal = SubResource("StyleBoxEmpty_i0ff0")
+text = "Паук
+
+Крайне полезный противник для приключений."
 autowrap_mode = 2
+
+[node name="weak" type="Label" parent="control/scroll/stack/bestiary/effect"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -22.0
+offset_right = 61.0
+grow_vertical = 0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme = ExtResource("7_hejl4")
+theme_override_constants/line_spacing = -7
+theme_override_fonts/font = ExtResource("11_q0nrq")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxEmpty_7x86q")
+text = "🍷 🛡"
+
+[node name="skill" type="Label" parent="control/scroll/stack/bestiary/effect/weak"]
+layout_mode = 1
+offset_right = 23.0
+offset_bottom = 29.0
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("3_cqb2w")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ryb87")
+text = "🔥 🪨"
 
 [node name="ray" type="RichTextLabel" parent="control/scroll/stack/bestiary"]
 custom_minimum_size = Vector2(300, 130)
@@ -370,98 +453,6 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_s6ojn")
 text = "Он / Его
 20 лет"
 horizontal_alignment = 1
-
-[node name="spider" type="TextureRect" parent="control/scroll/stack/bestiary"]
-process_mode = 4
-custom_minimum_size = Vector2(120, 120)
-layout_mode = 2
-size_flags_horizontal = 0
-script = ExtResource("16_baiyi")
-metadata/_custom_type_script = "uid://b82g80p2b6kwm"
-
-[node name="height" type="Label" parent="control/scroll/stack/bestiary/spider"]
-custom_minimum_size = Vector2(50, 0)
-layout_mode = 1
-offset_right = 110.0
-offset_bottom = 23.0
-size_flags_horizontal = 3
-size_flags_vertical = 0
-theme = ExtResource("7_hejl4")
-theme_override_font_sizes/font_size = 16
-theme_override_styles/normal = SubResource("StyleBoxEmpty_c8nu0")
-text = "33 cm "
-text_overrun_behavior = 3
-
-[node name="count" type="Label" parent="control/scroll/stack/bestiary/spider"]
-custom_minimum_size = Vector2(40, 0)
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -110.0
-offset_top = -23.0
-grow_horizontal = 0
-grow_vertical = 0
-size_flags_horizontal = 3
-size_flags_vertical = 8
-theme = ExtResource("7_hejl4")
-theme_override_font_sizes/font_size = 16
-theme_override_styles/normal = SubResource("StyleBoxEmpty_8skr0")
-text = "65"
-horizontal_alignment = 2
-text_overrun_behavior = 3
-
-[node name="number" parent="control/scroll/stack/bestiary" instance=ExtResource("17_0jpq3")]
-layout_mode = 2
-text = "[b]🕷[/b] Тип ▰▰-
-[b]⚔[/b] 215 ▰--
-[b]🛡[/b] 234 ▰▰--
-[b]🔥[/b] 215 ▰-
-[b]🫧[/b] 233 ▰▰-"
-
-[node name="effect" type="Label" parent="control/scroll/stack/bestiary"]
-custom_minimum_size = Vector2(230, 0)
-layout_mode = 2
-size_flags_vertical = 0
-theme = ExtResource("7_hejl4")
-theme_override_constants/line_spacing = -7
-theme_override_constants/paragraph_spacing = -2
-theme_override_font_sizes/font_size = 17
-theme_override_styles/normal = SubResource("StyleBoxEmpty_i0ff0")
-text = "Паук
-
-Крайне полезный противник для приключений."
-autowrap_mode = 2
-
-[node name="weak" type="Label" parent="control/scroll/stack/bestiary/effect"]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -22.0
-offset_right = 61.0
-grow_vertical = 0
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme = ExtResource("7_hejl4")
-theme_override_constants/line_spacing = -7
-theme_override_fonts/font = ExtResource("11_q0nrq")
-theme_override_font_sizes/font_size = 16
-theme_override_styles/normal = SubResource("StyleBoxEmpty_7x86q")
-text = "🍷 🛡"
-
-[node name="skill" type="Label" parent="control/scroll/stack/bestiary/effect/weak"]
-layout_mode = 1
-offset_right = 23.0
-offset_bottom = 29.0
-size_flags_horizontal = 8
-size_flags_vertical = 0
-theme_override_fonts/font = ExtResource("3_cqb2w")
-theme_override_font_sizes/font_size = 16
-theme_override_styles/normal = SubResource("StyleBoxEmpty_ryb87")
-text = "🔥 🪨"
 
 [node name="chats" parent="control/scroll/stack" instance=ExtResource("18_0qaq4")]
 visible = false

@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://pwqvjeffo6u5"]
+[gd_scene load_steps=48 format=3 uid="uid://pwqvjeffo6u5"]
 
 [ext_resource type="Script" uid="uid://ptu1t5a0cbpa" path="res://script/ui/hud/detector/game/margin/priorities/topic/stack/stack.gd" id="1_nakaq"]
 [ext_resource type="PackedScene" uid="uid://bx8m1gw4fot0d" path="res://now/scene/ui/hud/detector/game/menu/inventory/status/ray.tscn" id="2_emqr8"]
@@ -6,7 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://bmexdqeihycjg" path="res://now/scene/ui/hud/detector/game/menu/priorities/topic/record/record.tscn" id="4_n0ufr"]
 [ext_resource type="StyleBox" uid="uid://cht8hrroa75bg" path="res://ui/theme/style/tag/tag-button.tres" id="5_7bc6i"]
 [ext_resource type="PackedScene" uid="uid://cdpsykqf6eaa2" path="res://now/scene/ui/hud/detector/game/menu/priorities/topic/research/content/help/help.tscn" id="6_21c2y"]
+[ext_resource type="Texture2D" uid="uid://b2ouvbea4wbsy" path="res://icon/help/ray/look.png" id="6_n0ufr"]
+[ext_resource type="Script" uid="uid://c0smqteyhgnwc" path="res://script/ui/hud/detector/game/margin/priorities/topic/stack/record/ranking/priority/growth/heroes/hero/hero.gd" id="7_7bc6i"]
 [ext_resource type="PackedScene" uid="uid://ikenyhjscyj3" path="res://now/scene/ui/hud/detector/game/menu/stats/topic/chats/list/notes.tscn" id="7_ex2uw"]
+[ext_resource type="PackedScene" uid="uid://ct4vkw2q1l83e" path="res://now/scene/ui/hud/detector/game/menu/priorities/topic/record/growth/addon.tscn" id="8_21c2y"]
 [ext_resource type="FontFile" uid="uid://dxg5wbmrewk2p" path="res://data/font/Lato-Regular.ttf" id="8_p25km"]
 [ext_resource type="PackedScene" uid="uid://bu5vbvvgn1q4d" path="res://now/scene/ui/hud/detector/game/menu/priorities/title.tscn" id="9_w1cww"]
 [ext_resource type="FontFile" uid="uid://o0rgn7d13mr3" path="res://data/font/OpenSans-VariableFont_wdth,wght.ttf" id="10_mr8b2"]
@@ -191,12 +194,6 @@ fill_to = Vector2(0.482906, 0.474359)
 content_margin_left = 15.0
 texture = SubResource("GradientTexture2D_21ixm")
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_21ixm"]
-content_margin_left = 5.0
-content_margin_top = 1.0
-content_margin_bottom = 3.0
-bg_color = Color(0.0196078, 0.0196078, 0.0588235, 0.72549)
-
 [node name="scroll" type="ScrollContainer"]
 anchors_preset = 15
 anchor_right = 1.0
@@ -246,8 +243,31 @@ layout_mode = 2
 theme_override_constants/h_separation = 7
 theme_override_constants/v_separation = 0
 
+[node name="ray" type="TextureRect" parent="space/scroll/stack/perks"]
+custom_minimum_size = Vector2(45, 45)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("6_n0ufr")
+expand_mode = 1
+script = ExtResource("7_7bc6i")
+
+[node name="priority" parent="space/scroll/stack/perks/ray" instance=ExtResource("8_21c2y")]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+
 [node name="dealer" type="Button" parent="space/scroll/stack/perks"]
 layout_mode = 2
+size_flags_vertical = 8
 theme_override_colors/font_color = Color(0.341176, 0.341176, 0.341176, 1)
 theme_override_styles/normal = ExtResource("5_7bc6i")
 text = "Торговец"
@@ -277,6 +297,20 @@ fit_content = true
 
 [node name="title" parent="space/scroll/stack" instance=ExtResource("9_w1cww")]
 layout_mode = 2
+text = "[i]Приоритеты[/i]
+
+Здесь находятся приоритеты героев. В ходе сражений с противниками вы получаете Очки Пытливости - опыт.
+
+[table=2]
+[cell expand][left][b][i]👉[/i][/b] Достаточное количество, увеличивает выбранный приоритет на 1. Вы можете выбрать любой из трёх для каждого героя в любой момент времени.[/left][/cell][cell][left][b][i]⭐️[/i][/b] Приоритеты не могут быть выше определённого уровня. Как только вы достигаете максимума, ваш герой меняет приоритет.[/left][/cell]
+[cell][/cell][cell] [/cell]
+[cell expand][left][b][i]🎖[/i][/b] Возможность - приводится в действие по событию или закреплена за персонажем насовсем. Например, дополнительный опыт при допытывании.[/left][/cell][cell][left][b][i]⚔️[/i][/b] Способность - приводится в действие во время выполнения комбо - нажатия кнопок, отвечающих за действие, движение героев и их умений.[/left][/cell]
+[/table]
+
+· При повышении уровня приоритета вы получаете прирост к определённым показателям, а также уникальные эффекты. Наличие определённых способностей помогает в конкретных ситуациях. Некоторые могут быть приобретены только после чтения книг нужного типа. Ищите книги, чтобы раздвинуть свои возможности.
+
+[b][i]📚[/i][/b] Здесь содержатся подобранные вами книги и заметки. Заметки можно собрать в единую историю и прожить её в случае успеха.
+[b][i]🔍[/i][/b] Тут описывается помощь. Если не понимаете, что конкретно нужно сделать в той или иной ситуации или забыли про разные умения и базовые возмо-жности героев, заглядыв-айте сюда."
 
 [node name="tabs" type="HBoxContainer" parent="space"]
 layout_mode = 1
@@ -310,17 +344,6 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_ne0m5")
 text = "📚"
 alignment = 0
 
-[node name="help" type="Button" parent="space/tabs"]
-visible = false
-custom_minimum_size = Vector2(30, 30)
-layout_mode = 2
-size_flags_horizontal = 8
-theme_override_fonts/font = ExtResource("12_8gsmj")
-theme_override_font_sizes/font_size = 16
-theme_override_styles/normal = SubResource("StyleBoxFlat_ne0m5")
-text = "❔"
-alignment = 0
-
 [node name="caption" type="Label" parent="space/tabs"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -329,14 +352,3 @@ theme_override_font_sizes/font_size = 18
 theme_override_styles/normal = SubResource("StyleBoxTexture_ren3u")
 text = "Help"
 script = ExtResource("14_c4vwr")
-
-[node name="pin" type="Button" parent="space/tabs"]
-visible = false
-custom_minimum_size = Vector2(30, 30)
-layout_mode = 2
-size_flags_horizontal = 8
-theme_override_fonts/font = ExtResource("12_8gsmj")
-theme_override_font_sizes/font_size = 16
-theme_override_styles/normal = SubResource("StyleBoxFlat_21ixm")
-text = "📌"
-alignment = 0
