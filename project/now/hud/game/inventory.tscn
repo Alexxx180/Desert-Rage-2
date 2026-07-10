@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://bsgaxv8107ty"]
+[gd_scene load_steps=7 format=3 uid="uid://bsgaxv8107ty"]
 
 [ext_resource type="Script" uid="uid://b11cg8w5hftiu" path="res://script/ui/hud/detector/game/margin/priorities/stats/inventory/topic/stack/stack.gd" id="1_t4mhy"]
+[ext_resource type="PackedScene" uid="uid://dqlgy3l13bibl" path="res://pre/ui/status/items.tscn" id="2_01ovw"]
 [ext_resource type="PackedScene" uid="uid://b3pwlem0vs6ab" path="res://now/scene/ui/hud/detector/game/menu/inventory/status/state/flow.tscn" id="3_u0g8n"]
 [ext_resource type="PackedScene" uid="uid://cddw0qxlba87p" path="res://now/scene/ui/hud/detector/game/menu/inventory/items/bag.tscn" id="5_v6vvq"]
 [ext_resource type="PackedScene" uid="uid://b8hybaq32frfk" path="res://now/scene/ui/hud/detector/game/menu/inventory/title.tscn" id="6_2xh6b"]
@@ -26,14 +27,21 @@ size_flags_horizontal = 3
 theme_override_constants/separation = 7
 script = ExtResource("1_t4mhy")
 
-[node name="status" parent="stack" instance=ExtResource("3_u0g8n")]
+[node name="HFlowContainer" type="HFlowContainer" parent="stack"]
+layout_mode = 2
+
+[node name="items" parent="stack/HFlowContainer" instance=ExtResource("2_01ovw")]
+layout_mode = 2
+
+[node name="bag" parent="stack/HFlowContainer" instance=ExtResource("5_v6vvq")]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="status" parent="stack/HFlowContainer" instance=ExtResource("3_u0g8n")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
-
-[node name="bag" parent="stack" instance=ExtResource("5_v6vvq")]
-layout_mode = 2
-size_flags_horizontal = 3
 
 [node name="title" parent="stack" instance=ExtResource("6_2xh6b")]
 layout_mode = 2

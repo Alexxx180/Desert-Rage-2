@@ -163,5 +163,6 @@ const sstats: PackedScene = preload("res://pre/ui/status/stats.tscn")
 const bag: PackedScene = preload("res://pre/ui/status/items.tscn")
 const chats: PackedScene = preload("res://pre/ui/menu/chat.tscn")
 
+const help: CompressedTexture2DArray = preload("res://icon/help/z_master.svg")
 const grabber: GradientTexture2D = preload("res://pre/ui/grabber.tres")
 const root: Script = preload("res://pre/level.gd")

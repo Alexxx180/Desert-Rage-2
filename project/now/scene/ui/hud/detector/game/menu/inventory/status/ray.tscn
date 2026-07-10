@@ -4,45 +4,18 @@
 [ext_resource type="PackedScene" uid="uid://bdp11gai8bk5" path="res://now/scene/ui/hud/detector/game/menu/inventory/status/shared/health.tscn" id="4_j5pou"]
 [ext_resource type="PackedScene" uid="uid://du2nfngsi1lpk" path="res://now/scene/ui/hud/detector/game/menu/inventory/status/shared/ability.tscn" id="5_e07ln"]
 
-[node name="ray" type="Control"]
-custom_minimum_size = Vector2(0, 40)
-layout_mode = 3
-anchors_preset = 10
-anchor_right = 1.0
-grow_horizontal = 2
-size_flags_horizontal = 3
-script = ExtResource("1_e07ln")
-
-[node name="alt" type="MarginContainer" parent="."]
-layout_mode = 1
+[node name="ray" type="HBoxContainer"]
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 26.0
 grow_horizontal = 2
 size_flags_horizontal = 3
-size_flags_vertical = 0
-theme_override_constants/margin_left = 58
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 0
+script = ExtResource("1_e07ln")
 
-[node name="ability" parent="alt" instance=ExtResource("5_e07ln")]
+[node name="health" parent="." instance=ExtResource("4_j5pou")]
 layout_mode = 2
 
-[node name="main" type="MarginContainer" parent="."]
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -39.0
-grow_horizontal = 2
-grow_vertical = 0
-size_flags_vertical = 0
-theme_override_constants/margin_left = 0
-theme_override_constants/margin_top = 13
-theme_override_constants/margin_right = 58
-theme_override_constants/margin_bottom = 0
-
-[node name="health" parent="main" instance=ExtResource("4_j5pou")]
+[node name="ability" parent="." instance=ExtResource("5_e07ln")]
+custom_minimum_size = Vector2(150, 26)
 layout_mode = 2
+size_flags_horizontal = 0

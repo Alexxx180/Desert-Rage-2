@@ -3,31 +3,21 @@ extends Button
 @onready var help: RichTextLabel = $help
 @onready var image: TextureRect = $icon
 
-@export var hint: HelpHint
-@export var helps: CompressedTexture2DArray
+var no: int
 
 const TIME: float = 0.2
 const MARGIN: String = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
 
-func update_locale(params: Array) -> void:
-	text = hint.key("T") + MARGIN
-	help.text = hint.key("D") % params
+func translate() -> void:
+	text = tr("H" + Def.hints[no] + "T") + MARGIN
+	help.text = tr("H" + Def.hints[no] + "D") % [] # Def
 
-func update_hint() -> void:
-	image.texture = hint.texture
-	update_locale([])
+func update_hint(next: int) -> void:
+	no = next
+	image.texture = ImageTexture.create_from_image(Def.help.get_layer_data(no))
+	translate()
 
-func translate(_controls: Node) -> void:
-	update_hint() # controls.masked_translate(hint.body)
-
-func get_locale() -> RichTextLabel: return help
-
-func _ready() -> void:
-	HUD
-	image.texture = ImageTexture.create_from_image(helps.get_layer_data(0))
-	
-	if hint: update_hint()
-	pressed.connect(flip_the_card)
+func _ready() -> void: pressed.connect(flip_the_card)
 
 func flip_the_card() -> void:
 	if image.visible:
@@ -37,7 +27,7 @@ func flip_the_card() -> void:
 
 func change_state(prev: CanvasItem, next: CanvasItem) -> Callable:
 	return func(x: float):
-		if HUD.among(-0.5, x, 0.5) and prev.visible:
+		if -0.5 <= x and x <= 0.5 and prev.visible:
 			prev.hide()
 			next.show()
 		self.scale = Vector2(abs(x), 1)

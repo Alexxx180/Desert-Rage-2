@@ -9,32 +9,31 @@ var buttons: Dictionary[int, int] = {}
 var completed: int
 var hint: PackedInt32Array = []
 
-func help_show(pos: Vector2) -> int:
+func help_show(pos: Vector2i) -> int:
 	for i in range(0, len(hint), 2):
-		var a: Rect2 = Rect2(Def.tomap(hint[i]), Def.tomap(hint[i + 1]))
-		if a.position >= pos and pos <= a.size:
+		if Def.tomap(hint[i]) >= pos and pos <= Def.tomap(hint[i + 1]):
 			return i
 	return -1
 
 func help_hint() -> void:
 	for tile in range(0, Def.T8):
 		var tiles: PackedVector2Array = HUD.level.execute.get_used_cells_by_id(Def.TAGS, Def.to8(tile), Def.HELP) # Def.to8(tile)
-		if tiles.size() == 0: continue
-		
-		var a: Rect2 = Rect2(tiles[0], tiles[(1 if tiles.size() == 1 else 0)])
-		hint.append(Def.ofmap(a.position))
-		hint.append(Def.ofmap(a.size))
+		var i: int = 0
+		match tiles.size():
+			0: continue
+			2: i = 1
+		var a: Vector2i = tiles[0].min(tiles[i])
+		var b: Vector2i = tiles[i].max(tiles[0])
+		hint.append(Def.ofmap(a))
+		hint.append(Def.ofmap(b))
 		for tag in tiles: HUD.level.execute.erase_cell(tag)
-		
-		for y in range(a.position.y, a.size.y + 1):
-			for x in range(a.position.x, a.size.x + 1):
-				var coords_b: int = Def.ofmap(Vector2(x, y))
-				var coords: int = Def.of(x, y)
-				print("C: ", coords, " B: ", coords_b)
-				HUD.level.border.coords(coords).type().id().atlas()
+		for y in range(a.y, b.y + 1):
+			for x in range(a.x, b.x + 1):
+				HUD.level.border.coords(Def.of(x, y)).type().id().atlas()
 				if (HUD.level.border.tile[Def.ATLAS] == Def.GROUND and
 					HUD.level.border.tile[Def.ID] in [Def.FLOOR, Def.WALLS]):
 					HUD.level.border.atlas(Def.HINT).id(Def.FLOOR).paint_alt()
+
 
 func reset_button_completion() -> void:
 	if sizes[BUTTON] == 0: return
@@ -131,10 +130,13 @@ func tile_melt(coords: int) -> void:
 	if HUD.level.border.tile[Def.TYPE] == Def.ICE_FLOOR:
 		HUD.level.border.type(Def.FLOOR).paint_alt()
 
-#func tile_walk_out() -> void:
-	# HUD.menu.log_help_hide()
+var no: int = -1
 
 func tile_walk(hero: CharacterBody2D, enter: bool = true) -> void:
+	if not enter and no != -1:
+		HUD.menu.log_help_hide()
+		no = -1
+	
 	var atlas: int = HUD.level.border.coords(HUD.level.tile[Def.offset(hero.no, Def.PLATE)]).atlas().tile[Def.ATLAS]
 	if atlas == Def.TELEPORT_ON:
 		var c: int = get_cluster(TELEPORT, Def.ofmap(HUD.level.border.tile[Def.COORDS]))
@@ -142,13 +144,11 @@ func tile_walk(hero: CharacterBody2D, enter: bool = true) -> void:
 			if HUD.level.border.coords(cluster[i]).tile[Def.ATLAS] == Def.PLACE:
 				hero.teleport(HUD.level.border.map_to_local(Def.tomap(cluster[i])))
 				break
-		return
 	elif atlas == Def.HINT and HUD.level.border.tile[Def.ID] == Def.FLOOR:
-		var no: int = help_show(hero.position)
-		if no == -1: return
-		HUD.menu.log_help(no)
-		return
-	tile_press(HUD.level.border.tile[Def.COORDS], enter)
+		no = help_show(HUD.level.border.local_to_map(hero.position))
+		if no != -1: HUD.menu.log_help(no)
+	else:
+		tile_press(HUD.level.border.tile[Def.COORDS], enter)
 
 func secret_reveal() -> void:
 	pass

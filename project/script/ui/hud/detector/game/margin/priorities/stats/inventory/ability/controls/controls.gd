@@ -1,4 +1,4 @@
-extends VBoxContainer
+extends Control
 
 @onready var topic: Control = $topic
 @onready var status: HBoxContainer = $status

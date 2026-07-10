@@ -95,6 +95,6 @@ func log_help(of: int) -> void:
 	card.show()
 	var tween: Tween = HUD.create_tween()
 	tween.tween_property(card, ^"modulate", Color.WHITE, 1)
-	card.text = "H" + Def.hints[of] + "T"
+	card.text = tr("H" + Def.hints[of] + "T") + card.MARGIN
 	card.help.text = "H" + Def.hints[of] + "D"
 	
