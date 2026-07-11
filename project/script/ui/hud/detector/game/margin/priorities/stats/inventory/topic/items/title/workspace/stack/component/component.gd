@@ -1,4 +1,4 @@
-extends HBoxContainer
+extends GridContainer
 
 @onready var two: VBoxContainer = $two
 @onready var four: VBoxContainer = $four

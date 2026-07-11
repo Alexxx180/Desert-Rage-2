@@ -9,30 +9,27 @@ var buttons: Dictionary[int, int] = {}
 var completed: int
 var hint: PackedInt32Array = []
 
-func help_show(pos: Vector2i) -> int:
+func help_show(pos: Vector2i, type: PackedInt32Array) -> int:
 	for i in range(0, len(hint), 2):
-		if Def.tomap(hint[i]) >= pos and pos <= Def.tomap(hint[i + 1]):
+		if Def.tomap(type[i]) >= pos and pos <= Def.tomap(type[i + 1]):
 			return i
 	return -1
 
-func help_hint() -> void:
+func help_hint(tag_id: int, atlas: int, type: PackedInt32Array) -> void:
+	if HUD.level.execute.get_used_cells_by_id(Def.TAGS, Vector2i.ONE * -1, tag_id).size() == 0: return
 	for tile in range(0, Def.T8):
-		var tiles: PackedVector2Array = HUD.level.execute.get_used_cells_by_id(Def.TAGS, Def.to8(tile), Def.HELP) # Def.to8(tile)
-		var i: int = 0
-		match tiles.size():
-			0: continue
-			2: i = 1
-		var a: Vector2i = tiles[0].min(tiles[i])
-		var b: Vector2i = tiles[i].max(tiles[0])
-		hint.append(Def.ofmap(a))
-		hint.append(Def.ofmap(b))
-		for tag in tiles: HUD.level.execute.erase_cell(tag)
+		var tiles: PackedVector2Array = HUD.level.execute.get_used_cells_by_id(Def.TAGS, Def.to8(tile), tag_id) # Def.to8(tile)
+		if tiles.size() == 0: continue
+		var i: int = int(tiles.size() == 2)
+		var a: Vector2i = tiles[0].min(tiles[i]) ; type.append(Def.ofmap(a))
+		var b: Vector2i = tiles[i].max(tiles[0]) ; type.append(Def.ofmap(b))
+		for t in tiles: HUD.level.execute.erase_cell(t)
 		for y in range(a.y, b.y + 1):
 			for x in range(a.x, b.x + 1):
 				HUD.level.border.coords(Def.of(x, y)).type().id().atlas()
 				if (HUD.level.border.tile[Def.ATLAS] == Def.GROUND and
 					HUD.level.border.tile[Def.ID] in [Def.FLOOR, Def.WALLS]):
-					HUD.level.border.atlas(Def.HINT).id(Def.FLOOR).paint_alt()
+					HUD.level.border.atlas(atlas).id(Def.FLOOR).paint_alt()
 
 
 func reset_button_completion() -> void:
@@ -145,7 +142,7 @@ func tile_walk(hero: CharacterBody2D, enter: bool = true) -> void:
 				hero.teleport(HUD.level.border.map_to_local(Def.tomap(cluster[i])))
 				break
 	elif atlas == Def.HINT and HUD.level.border.tile[Def.ID] == Def.FLOOR:
-		no = help_show(HUD.level.border.local_to_map(hero.position))
+		no = help_show(HUD.level.border.local_to_map(hero.position), hint)
 		if no != -1: HUD.menu.log_help(no)
 	else:
 		tile_press(HUD.level.border.tile[Def.COORDS], enter)

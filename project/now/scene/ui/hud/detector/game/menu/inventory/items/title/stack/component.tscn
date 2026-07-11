@@ -1,96 +1,23 @@
-[gd_scene load_steps=9 format=3 uid="uid://d18r42k3iyxhs"]
+[gd_scene load_steps=3 format=3 uid="uid://d18r42k3iyxhs"]
 
 [ext_resource type="Script" uid="uid://ekmpdw1bubvp" path="res://script/ui/hud/detector/game/margin/priorities/stats/inventory/topic/items/title/workspace/stack/component/component.gd" id="1_i46g6"]
-[ext_resource type="Script" uid="uid://citq4xkf3vgmk" path="res://script/ui/hud/detector/game/margin/priorities/stats/inventory/topic/items/title/workspace/stack/component/cells.gd" id="2_7t2u4"]
-[ext_resource type="Script" uid="uid://dor826lqpmtgg" path="res://script/ui/hud/detector/game/margin/priorities/stats/inventory/topic/items/title/workspace/stack/component/cell/cell.gd" id="4_itenc"]
 [ext_resource type="Script" uid="uid://bhi7t562kxxml" path="res://script/ui/hud/detector/game/margin/priorities/stats/inventory/topic/items/title/workspace/stack/component/cell/image.gd" id="5_ik2jj"]
 
-[sub_resource type="Gradient" id="Gradient_gx44j"]
-colors = PackedColorArray(0.196078, 0.196078, 0.196078, 0.470588, 0.176471, 0.176471, 0.176471, 0.627451)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_5agbf"]
-gradient = SubResource("Gradient_gx44j")
-fill_to = Vector2(1, 1)
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fs03v"]
-texture = SubResource("GradientTexture2D_5agbf")
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_p7xy7"]
-texture = SubResource("GradientTexture2D_5agbf")
-
-[node name="component" type="HBoxContainer"]
+[node name="component" type="GridContainer"]
 offset_right = 60.0
-offset_bottom = 60.0
+offset_bottom = 64.0
 mouse_filter = 2
-theme_override_constants/separation = 0
+columns = 2
 script = ExtResource("1_i46g6")
 
-[node name="two" type="VBoxContainer" parent="."]
-layout_mode = 2
-size_flags_vertical = 6
-mouse_filter = 2
-theme_override_constants/separation = 0
-script = ExtResource("2_7t2u4")
-
-[node name="a" type="PanelContainer" parent="two"]
-visible = false
+[node name="a" type="TextureRect" parent="."]
 custom_minimum_size = Vector2(30, 30)
-layout_mode = 2
-size_flags_horizontal = 6
-mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_fs03v")
-script = ExtResource("4_itenc")
-
-[node name="image" type="TextureRect" parent="two/a"]
 layout_mode = 2
 expand_mode = 1
 script = ExtResource("5_ik2jj")
 
-[node name="b" type="PanelContainer" parent="two"]
-visible = false
+[node name="b" type="TextureRect" parent="."]
 custom_minimum_size = Vector2(30, 30)
-layout_mode = 2
-size_flags_horizontal = 6
-mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_p7xy7")
-script = ExtResource("4_itenc")
-
-[node name="image" type="TextureRect" parent="two/b"]
-layout_mode = 2
-expand_mode = 1
-script = ExtResource("5_ik2jj")
-
-[node name="four" type="VBoxContainer" parent="."]
-layout_mode = 2
-size_flags_vertical = 6
-mouse_filter = 2
-theme_override_constants/separation = 0
-script = ExtResource("2_7t2u4")
-
-[node name="a" type="PanelContainer" parent="four"]
-visible = false
-custom_minimum_size = Vector2(30, 30)
-layout_mode = 2
-size_flags_horizontal = 6
-mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_p7xy7")
-script = ExtResource("4_itenc")
-
-[node name="image" type="TextureRect" parent="four/a"]
-layout_mode = 2
-expand_mode = 1
-script = ExtResource("5_ik2jj")
-
-[node name="b" type="PanelContainer" parent="four"]
-visible = false
-custom_minimum_size = Vector2(30, 30)
-layout_mode = 2
-size_flags_horizontal = 6
-mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_p7xy7")
-script = ExtResource("4_itenc")
-
-[node name="image" type="TextureRect" parent="four/b"]
 layout_mode = 2
 expand_mode = 1
 script = ExtResource("5_ik2jj")

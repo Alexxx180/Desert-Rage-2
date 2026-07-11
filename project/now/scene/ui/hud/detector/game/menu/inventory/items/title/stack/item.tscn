@@ -1,8 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://b7qk00pl6i2dr"]
+[gd_scene load_steps=6 format=3 uid="uid://b7qk00pl6i2dr"]
 
-[ext_resource type="PackedScene" uid="uid://dwx132fbpo3d8" path="res://now/scene/ui/hud/detector/game/menu/inventory/items/title/description/effects.tscn" id="1_civys"]
 [ext_resource type="Script" uid="uid://dfqh267yj72sp" path="res://script/ui/hud/detector/game/margin/priorities/stats/inventory/topic/items/title/workspace/stack/item/item.gd" id="1_hqkyh"]
-[ext_resource type="Script" uid="uid://d0odmqfn8bpbt" path="res://script/ui/hud/detector/game/margin/priorities/stats/inventory/topic/items/title/workspace/stack/item/title/title.gd" id="2_4cvfk"]
 [ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://ui/theme/patterns/template/menu/settings/topic/footer.tres" id="2_hqkyh"]
 
 [sub_resource type="Gradient" id="Gradient_xj068"]
@@ -17,18 +15,10 @@ fill_to = Vector2(0, 0)
 content_margin_top = 5.0
 texture = SubResource("GradientTexture2D_ukt44")
 
-[node name="item" type="MarginContainer"]
-custom_minimum_size = Vector2(230, 0)
-mouse_filter = 2
-theme_override_constants/margin_left = 0
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 3
-theme_override_constants/margin_bottom = 0
-script = ExtResource("1_hqkyh")
-
-[node name="effect" type="Label" parent="."]
+[node name="effect" type="Label"]
 custom_minimum_size = Vector2(100, 57)
-layout_mode = 2
+offset_right = 227.0
+offset_bottom = 57.0
 size_flags_horizontal = 3
 size_flags_vertical = 0
 theme = ExtResource("2_hqkyh")
@@ -36,8 +26,9 @@ theme_override_constants/line_spacing = -7
 theme_override_font_sizes/font_size = 18
 text = "Отвлекает противников и также дает всем в зубы"
 autowrap_mode = 2
+script = ExtResource("1_hqkyh")
 
-[node name="caption" type="Label" parent="effect"]
+[node name="caption" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -53,47 +44,3 @@ theme_override_styles/normal = SubResource("StyleBoxTexture_6j58n")
 text = "Чучело"
 horizontal_alignment = 2
 text_overrun_behavior = 3
-
-[node name="short" type="VBoxContainer" parent="."]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.4
-mouse_filter = 2
-theme_override_constants/separation = -3
-
-[node name="margin" type="MarginContainer" parent="short"]
-layout_mode = 2
-mouse_filter = 2
-theme_override_constants/margin_left = 0
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 0
-
-[node name="caption" type="Label" parent="short/margin"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 20
-text = "Чучело"
-text_overrun_behavior = 3
-
-[node name="title" type="HBoxContainer" parent="short"]
-layout_mode = 2
-mouse_filter = 2
-theme_override_constants/separation = 7
-script = ExtResource("2_4cvfk")
-
-[node name="effect" type="Label" parent="short/title"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 0
-theme = ExtResource("2_hqkyh")
-theme_override_constants/line_spacing = -7
-theme_override_font_sizes/font_size = 18
-text = "Восполнение"
-
-[node name="effects" parent="short/title" instance=ExtResource("1_civys")]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 0

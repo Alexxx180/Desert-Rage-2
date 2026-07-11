@@ -1,14 +1,14 @@
-[gd_scene load_steps=14 format=3 uid="uid://kq7xh4x513e"]
+[gd_scene load_steps=13 format=3 uid="uid://kq7xh4x513e"]
 
 [ext_resource type="Script" uid="uid://chwwxl3w0i1ir" path="res://script/ui/hud/detector/game/margin/priorities/stats/inventory/topic/items/title/title.gd" id="1_la5xp"]
 [ext_resource type="StyleBox" uid="uid://evyfrkamah1" path="res://ui/theme/style/items/chests/hover.tres" id="2_p5i5m"]
 [ext_resource type="Script" uid="uid://bwl1i8618qbpw" path="res://script/ui/hud/detector/game/margin/priorities/stats/inventory/topic/items/item/product/product.gd" id="3_eiur7"]
 [ext_resource type="PackedScene" uid="uid://bn2dd80xcv3py" path="res://now/scene/ui/hud/detector/game/menu/inventory/items/content.tscn" id="4_ms26y"]
-[ext_resource type="Script" uid="uid://chkm0rdvgawjk" path="res://script/ui/hud/detector/game/margin/priorities/stats/inventory/topic/items/title/workspace/workspace.gd" id="5_2cexs"]
 [ext_resource type="StyleBox" uid="uid://bev4u886yv13b" path="res://ui/theme/style/tag/tag-blank.tres" id="5_ms26y"]
 [ext_resource type="StyleBox" uid="uid://cht8hrroa75bg" path="res://ui/theme/style/tag/tag-button.tres" id="5_p5i5m"]
-[ext_resource type="PackedScene" uid="uid://ctk77pb6b6woe" path="res://now/scene/ui/hud/detector/game/menu/inventory/items/title/stack/stack.tscn" id="7_la5xp"]
+[ext_resource type="PackedScene" uid="uid://d18r42k3iyxhs" path="res://now/scene/ui/hud/detector/game/menu/inventory/items/title/stack/component.tscn" id="5_ymbn4"]
 [ext_resource type="Script" uid="uid://b472xs64m4wbd" path="res://script/ui/hud/detector/game/margin/priorities/stats/inventory/topic/items/title/workspace/cancel.gd" id="8_ms26y"]
+[ext_resource type="PackedScene" uid="uid://b7qk00pl6i2dr" path="res://now/scene/ui/hud/detector/game/menu/inventory/items/title/stack/item.tscn" id="9_s71yo"]
 
 [sub_resource type="Gradient" id="Gradient_gx44j"]
 colors = PackedColorArray(0.196078, 0.196078, 0.196078, 0.470588, 0.176471, 0.176471, 0.176471, 0.627451)
@@ -19,8 +19,6 @@ fill_to = Vector2(1, 1)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_mya2s"]
 texture = SubResource("GradientTexture2D_5agbf")
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ms26y"]
 
 [node name="title" type="HBoxContainer"]
 size_flags_horizontal = 3
@@ -37,17 +35,23 @@ script = ExtResource("3_eiur7")
 [node name="image" parent="slot" instance=ExtResource("4_ms26y")]
 layout_mode = 1
 
-[node name="workspace" type="PanelContainer" parent="."]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_ms26y")
-script = ExtResource("5_2cexs")
+[node name="component" parent="slot" instance=ExtResource("5_ymbn4")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 4
 
-[node name="cancel" type="Button" parent="workspace"]
+[node name="cancel" type="Button" parent="."]
+custom_minimum_size = Vector2(230, 0)
 layout_mode = 2
 theme_override_styles/normal = ExtResource("5_ms26y")
 theme_override_styles/hover = ExtResource("5_p5i5m")
 script = ExtResource("8_ms26y")
 
-[node name="stack" parent="workspace" instance=ExtResource("7_la5xp")]
-layout_mode = 2
-size_flags_vertical = 4
+[node name="item" parent="cancel" instance=ExtResource("9_s71yo")]
+layout_mode = 0

@@ -52,7 +52,7 @@ func load_level() -> void:
 	HUD.level = self
 	if has_node(^"execute"):
 		execute = get_node(^"execute")
-		cluster.help_hint()
+		cluster.help_hint(Def.HELP, Def.HINT, cluster.hint)
 		#cluster.resize_clusters()
 	# HUD.state = Bit.to1(HUD.state, Def.TRANSIT)
 

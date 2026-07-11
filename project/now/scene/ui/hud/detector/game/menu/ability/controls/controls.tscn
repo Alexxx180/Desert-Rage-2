@@ -120,22 +120,19 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
+theme_override_fonts/bold_font = ExtResource("4_ic24g")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_nxuw1")
-text = "asdsdadhajdhjasdadasdadsd jdsadjasdd asdadasdda
-asdasds
-asdasds
-asdsdadhajdhjasdadasdadsd jdsadjasdd asdadasdda
-asdasds
-asdasds
-asdsdadhajdhjasdadasdadsd jdsadjasdd asdadasdda
-asdasds
-asdasds
-asdsdadhajdhjasdadasdadsd jdsadjasdd asdadasdda
-asdasds
-asdasds"
+bbcode_enabled = true
+text = "Новый уровень!
+[table=3]
+[cell][left][b]🕵️‍♂️[/b]   [/left][/cell][cell expand][left][b]⚔[/b] 215 + 1   [/left][/cell][cell expand][left][b]🛡[/b] 234 + 2[/left][/cell]
+[cell][left][b]👨‍🏭[/b]   [/left][/cell][cell expand][left][b]🔥[/b] 215 + 2[/left][/cell][cell expand][left][b]🫧[/b] 233 + 1[/left][/cell]
+[/table]
+Новые возможности!"
 vertical_alignment = 2
 
 [node name="motion" parent="." instance=ExtResource("3_mriv0")]
+visible = false
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -150,15 +147,20 @@ grow_horizontal = 0
 grow_vertical = 2
 size_flags_vertical = 10
 
-[node name="pause" type="Button" parent="."]
-custom_minimum_size = Vector2(30, 26)
+[node name="fast_panel" type="HBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = 2
+anchors_preset = 12
 anchor_top = 1.0
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -26.0
-offset_right = 30.0
+offset_top = -30.0
+grow_horizontal = 2
 grow_vertical = 0
+
+[node name="pause" type="Button" parent="fast_panel"]
+custom_minimum_size = Vector2(30, 26)
+layout_mode = 2
+size_flags_horizontal = 0
 focus_mode = 1
 theme_override_fonts/font = ExtResource("5_nxuw1")
 theme_override_font_sizes/font_size = 18
@@ -168,21 +170,22 @@ alignment = 0
 script = ExtResource("6_hu7it")
 path = "../../../../../../../stats/inventory/ability/controls/hints/space/preview/help"
 
-[node name="right" type="HBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -94.0
-offset_top = -40.0
-grow_horizontal = 0
-grow_vertical = 0
+[node name="open" type="Button" parent="fast_panel"]
+custom_minimum_size = Vector2(30, 26)
+layout_mode = 2
+focus_mode = 1
+theme_override_fonts/font = ExtResource("5_nxuw1")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_8tmk1")
+text = "🧮"
+alignment = 0
+script = ExtResource("6_hu7it")
+path = "../../../../../../../stats/inventory/ability/controls/hints/space/preview/help"
 
-[node name="analyze" type="Button" parent="right"]
+[node name="analyze" type="Button" parent="fast_panel"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
+size_flags_horizontal = 10
 size_flags_vertical = 4
 focus_mode = 1
 theme_override_fonts/font = ExtResource("7_hu7it")
@@ -193,7 +196,7 @@ alignment = 0
 script = ExtResource("6_hu7it")
 path = "../../../../../../../stats/inventory/ability/controls/hints/space/preview/help"
 
-[node name="set" type="Button" parent="right"]
+[node name="set" type="Button" parent="fast_panel"]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 size_flags_vertical = 4

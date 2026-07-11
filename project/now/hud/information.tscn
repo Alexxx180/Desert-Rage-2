@@ -1,21 +1,22 @@
-[gd_scene load_steps=23 format=3 uid="uid://ce8kdx2kkhrxj"]
+[gd_scene load_steps=28 format=3 uid="uid://ce8kdx2kkhrxj"]
 
-[ext_resource type="Script" uid="uid://cppftbc2k00nt" path="res://script/ui/menu/information/information.gd" id="1_fl14j"]
-[ext_resource type="PackedScene" uid="uid://dyrgxovxyo3oy" path="res://now/scene/ui/menu/information/states/details.tscn" id="2_6psfy"]
+[ext_resource type="FontFile" uid="uid://cc0l5uav5qfke" path="res://data/font/ka1.ttf" id="3_03as6"]
+[ext_resource type="FontFile" uid="uid://o0rgn7d13mr3" path="res://data/font/OpenSans-VariableFont_wdth,wght.ttf" id="3_5ff3o"]
+[ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://ui/theme/patterns/template/menu/settings/topic/footer.tres" id="3_20wqg"]
 [ext_resource type="PackedScene" uid="uid://b7hiotc0r50bt" path="res://now/scene/ui/menu/information/states/thumbnail.tscn" id="3_71axp"]
-[ext_resource type="PackedScene" uid="uid://dkkdejo26syrt" path="res://now/scene/ui/menu/information/preview.tscn" id="4_5s42n"]
 [ext_resource type="Theme" uid="uid://dfyi7rrcrweqx" path="res://ui/theme/patterns/template/menu/settings/settings.tres" id="5_0nsr2"]
 [ext_resource type="Shortcut" uid="uid://bgd4ocokxr1wj" path="res://ui/input/short/cut/pause.tres" id="6_oqbbg"]
-[ext_resource type="Script" uid="uid://c55a67g70w7c7" path="res://script/ui/menu/settings/topics/tabs/caption/caption.gd" id="7_vfaeg"]
-[ext_resource type="InputEventKey" uid="uid://cjlyrqdxoernq" path="res://ui/input/short/device/keyboard/key/ctrl/tab.tres" id="8_66kb0"]
-[ext_resource type="InputEventKey" uid="uid://d24fadfa7hd1w" path="res://ui/input/short/device/keyboard/key/alt/two.tres" id="9_6iq7h"]
-[ext_resource type="InputEventJoypadMotion" uid="uid://lythe86smbls" path="res://ui/input/short/device/gamepad/stick/right/right.tres" id="10_y2252"]
-[ext_resource type="Script" uid="uid://bhnfok60v3ala" path="res://script/ui/menu/settings/topics/tabs/caption/short.gd" id="11_s55c4"]
-[ext_resource type="Script" uid="uid://chw3gy3exeat5" path="res://script/ui/hud/processor/pause/exit/shortcut.gd" id="12_h4vij"]
-[ext_resource type="InputEventKey" uid="uid://ch54tip20nskb" path="res://ui/input/short/device/keyboard/key/alt/one.tres" id="13_fqrrh"]
+[ext_resource type="Texture2D" uid="uid://oj2wuw485d4c" path="res://icon/help/preview/save-preview.png" id="10_5ff3o"]
+[ext_resource type="FontFile" uid="uid://dh77105qn5h3n" path="res://data/font/Werkzeug.woff2" id="11_8rthp"]
+[ext_resource type="FontFile" uid="uid://bmtckcw2a28p2" path="res://data/font/Sportsball.ttf" id="12_i6hr0"]
+[ext_resource type="StyleBox" uid="uid://mbh4jijnx78j" path="res://ui/theme/style/button/status_points.tres" id="13_4uxrs"]
+[ext_resource type="Script" uid="uid://c3lbfxb6ab6uk" path="res://script/ui/hud/detector/game/margin/priorities/stats/inventory/topic/stack/selected/status/points/health.gd" id="14_m86cc"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kv7fx"]
-bg_color = Color(0, 0, 0, 1)
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8rthp"]
+content_margin_left = 20.0
+content_margin_top = 20.0
+content_margin_right = 20.0
+content_margin_bottom = 20.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gqxn2"]
 content_margin_left = 30.0
@@ -40,248 +41,258 @@ content_margin_left = 30.0
 content_margin_right = 30.0
 bg_color = Color(0, 0, 0.235294, 1)
 
-[sub_resource type="Theme" id="Theme_0l6ee"]
+[sub_resource type="Theme" id="Theme_y8gsi"]
 Button/styles/focus = SubResource("StyleBoxFlat_gqxn2")
 Button/styles/hover = SubResource("StyleBoxFlat_1f3t6")
 Button/styles/normal = SubResource("StyleBoxEmpty_y8gsi")
 Button/styles/pressed = SubResource("StyleBoxFlat_x5jee")
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7bo3i"]
-content_margin_left = 15.0
-content_margin_right = 15.0
-bg_color = Color(0.0588235, 0.0588235, 0.0588235, 1)
+[sub_resource type="Gradient" id="Gradient_iur2y"]
+offsets = PackedFloat32Array(0, 0.4266055, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0.84313726, 0, 0, 0, 0)
 
-[sub_resource type="Shortcut" id="Shortcut_wlac6"]
-events = [ExtResource("8_66kb0"), ExtResource("9_6iq7h"), ExtResource("10_y2252")]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_70xke"]
+gradient = SubResource("Gradient_iur2y")
+fill_from = Vector2(0.5, 1)
+fill_to = Vector2(0.5, 0.3)
+metadata/_snap_enabled = true
 
-[sub_resource type="Shortcut" id="Shortcut_4e1te"]
-events = [ExtResource("8_66kb0"), ExtResource("13_fqrrh")]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1m88g"]
+content_margin_left = 20.0
+content_margin_top = 5.0
+content_margin_right = 120.0
+content_margin_bottom = 10.0
+texture = SubResource("GradientTexture2D_70xke")
 
-[node name="information" type="CanvasLayer"]
-script = ExtResource("1_fl14j")
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eucgb"]
+bg_color = Color(0.0196078, 0.0196078, 0.0196078, 1)
 
-[node name="back" type="PanelContainer" parent="."]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_maq2g"]
+bg_color = Color(0.101961, 0.392157, 0.513726, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_efg1v"]
+bg_color = Color(0.00784314, 0.407843, 0.203922, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0na4j"]
+content_margin_top = 2.0
+content_margin_right = 5.0
+bg_color = Color(0, 0, 0, 0.3372549)
+corner_radius_top_left = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2dr2h"]
+content_margin_right = 80.0
+bg_color = Color(0.8784314, 0.8784314, 0.8784314, 1)
+draw_center = false
+border_width_right = 58
+border_color = Color(0.043137256, 0.043137256, 0.043137256, 0.42352942)
+corner_radius_top_left = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hw2pa"]
+content_margin_right = 80.0
+bg_color = Color(0.53978485, 0.5370027, 0.52942854, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 58
+border_width_bottom = 4
+border_color = Color(0, 0, 0, 0)
+corner_radius_top_left = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wum3e"]
+
+[node name="scroll" type="ScrollContainer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_kv7fx")
-
-[node name="detector" type="MarginContainer" parent="back"]
-layout_mode = 2
-theme_override_constants/margin_left = 0
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 2
-
-[node name="saves" type="VBoxContainer" parent="back/detector"]
-layout_mode = 2
-
-[node name="content" type="MarginContainer" parent="back/detector/saves"]
-layout_mode = 2
 size_flags_vertical = 3
-theme_override_constants/margin_left = 30
-theme_override_constants/margin_top = 25
-theme_override_constants/margin_right = 30
-theme_override_constants/margin_bottom = 20
+theme_override_styles/panel = SubResource("StyleBoxEmpty_8rthp")
 
-[node name="scroll" type="ScrollContainer" parent="back/detector/saves/content"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="saves" type="VBoxContainer" parent="back/detector/saves/content/scroll"]
+[node name="preview" type="VBoxContainer" parent="."]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme = SubResource("Theme_0l6ee")
-theme_override_constants/separation = 15
+theme_override_constants/separation = 35
 
-[node name="details" type="HFlowContainer" parent="back/detector/saves/content/scroll/saves"]
+[node name="achievements" type="VBoxContainer" parent="preview"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_constants/h_separation = 2
-theme_override_constants/v_separation = 2
 
-[node name="saves-1" type="VBoxContainer" parent="back/detector/saves/content/scroll/saves/details"]
-custom_minimum_size = Vector2(500, 0)
+[node name="image" type="TextureRect" parent="preview"]
+custom_minimum_size = Vector2(270, 320)
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/separation = 2
+theme = SubResource("Theme_y8gsi")
+texture = ExtResource("10_5ff3o")
+expand_mode = 1
+stretch_mode = 6
 
-[node name="details" parent="back/detector/saves/content/scroll/saves/details/saves-1" instance=ExtResource("2_6psfy")]
-layout_mode = 2
-
-[node name="details2" parent="back/detector/saves/content/scroll/saves/details/saves-1" instance=ExtResource("2_6psfy")]
-layout_mode = 2
-
-[node name="details3" parent="back/detector/saves/content/scroll/saves/details/saves-1" instance=ExtResource("2_6psfy")]
-layout_mode = 2
-
-[node name="details4" parent="back/detector/saves/content/scroll/saves/details/saves-1" instance=ExtResource("2_6psfy")]
-layout_mode = 2
-
-[node name="details5" parent="back/detector/saves/content/scroll/saves/details/saves-1" instance=ExtResource("2_6psfy")]
-layout_mode = 2
-
-[node name="saves-2" type="VBoxContainer" parent="back/detector/saves/content/scroll/saves/details"]
-custom_minimum_size = Vector2(500, 0)
-layout_mode = 2
+[node name="description" type="Label" parent="preview/image"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -320.0
+grow_horizontal = 2
+grow_vertical = 0
 size_flags_horizontal = 3
-theme_override_constants/separation = 2
+size_flags_vertical = 1
+theme = ExtResource("3_20wqg")
+theme_override_styles/normal = SubResource("StyleBoxTexture_1m88g")
+text = "Пещера истоков - Иголка в стоге сена. В этом звене пещерной цепи содержится замок, который, по видимому, открывается только одним ключом. Команда РК﹏﹏"
+vertical_alignment = 2
+autowrap_mode = 2
 
-[node name="details" parent="back/detector/saves/content/scroll/saves/details/saves-2" instance=ExtResource("2_6psfy")]
-layout_mode = 2
+[node name="resource" type="ProgressBar" parent="preview/image"]
+custom_minimum_size = Vector2(3, 0)
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 1.0
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("3_03as6")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/background = SubResource("StyleBoxFlat_eucgb")
+theme_override_styles/fill = SubResource("StyleBoxFlat_maq2g")
+value = 40.0
+fill_mode = 3
+show_percentage = false
 
-[node name="details2" parent="back/detector/saves/content/scroll/saves/details/saves-2" instance=ExtResource("2_6psfy")]
-layout_mode = 2
+[node name="aura" type="ProgressBar" parent="preview/image"]
+custom_minimum_size = Vector2(3, 3)
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+size_flags_stretch_ratio = 0.25
+theme_override_fonts/font = ExtResource("3_5ff3o")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/background = SubResource("StyleBoxFlat_eucgb")
+theme_override_styles/fill = SubResource("StyleBoxFlat_efg1v")
+value = 50.0
+fill_mode = 3
+show_percentage = false
 
-[node name="details3" parent="back/detector/saves/content/scroll/saves/details/saves-2" instance=ExtResource("2_6psfy")]
-layout_mode = 2
-
-[node name="details4" parent="back/detector/saves/content/scroll/saves/details/saves-2" instance=ExtResource("2_6psfy")]
-layout_mode = 2
-
-[node name="details5" parent="back/detector/saves/content/scroll/saves/details/saves-2" instance=ExtResource("2_6psfy")]
-layout_mode = 2
-
-[node name="thumbnails" type="HFlowContainer" parent="back/detector/saves/content/scroll/saves"]
-visible = false
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_constants/h_separation = 5
-theme_override_constants/v_separation = 5
-
-[node name="preview" parent="back/detector/saves/content/scroll/saves/thumbnails" instance=ExtResource("3_71axp")]
-layout_mode = 2
-
-[node name="preview2" parent="back/detector/saves/content/scroll/saves/thumbnails" instance=ExtResource("3_71axp")]
-layout_mode = 2
-
-[node name="preview3" parent="back/detector/saves/content/scroll/saves/thumbnails" instance=ExtResource("3_71axp")]
-layout_mode = 2
-
-[node name="preview4" parent="back/detector/saves/content/scroll/saves/thumbnails" instance=ExtResource("3_71axp")]
-layout_mode = 2
-
-[node name="preview5" parent="back/detector/saves/content/scroll/saves/thumbnails" instance=ExtResource("3_71axp")]
-layout_mode = 2
-
-[node name="preview6" parent="back/detector/saves/content/scroll/saves/thumbnails" instance=ExtResource("3_71axp")]
-layout_mode = 2
-
-[node name="preview7" parent="back/detector/saves/content/scroll/saves/thumbnails" instance=ExtResource("3_71axp")]
-layout_mode = 2
-
-[node name="preview8" parent="back/detector/saves/content/scroll/saves/thumbnails" instance=ExtResource("3_71axp")]
-layout_mode = 2
-
-[node name="preview9" parent="back/detector/saves/content/scroll/saves/thumbnails" instance=ExtResource("3_71axp")]
-layout_mode = 2
-
-[node name="preview" parent="back/detector/saves/content/scroll/saves" instance=ExtResource("4_5s42n")]
+[node name="saves" type="HFlowContainer" parent="preview"]
 layout_mode = 2
 size_flags_vertical = 8
 
-[node name="options" type="HBoxContainer" parent="back/detector/saves"]
-visible = false
+[node name="preview" parent="preview/saves" instance=ExtResource("3_71axp")]
 layout_mode = 2
-theme = ExtResource("5_0nsr2")
 
-[node name="exit" type="Button" parent="back/detector/saves/options"]
-custom_minimum_size = Vector2(60, 45)
+[node name="preview2" parent="preview/saves" instance=ExtResource("3_71axp")]
+layout_mode = 2
+
+[node name="preview3" parent="preview/saves" instance=ExtResource("3_71axp")]
+layout_mode = 2
+
+[node name="preview4" parent="preview/saves" instance=ExtResource("3_71axp")]
+layout_mode = 2
+
+[node name="preview5" parent="preview/saves" instance=ExtResource("3_71axp")]
+layout_mode = 2
+
+[node name="preview6" parent="preview/saves" instance=ExtResource("3_71axp")]
+layout_mode = 2
+
+[node name="preview7" parent="preview/saves" instance=ExtResource("3_71axp")]
+layout_mode = 2
+
+[node name="preview8" parent="preview/saves" instance=ExtResource("3_71axp")]
+layout_mode = 2
+
+[node name="preview9" parent="preview/saves" instance=ExtResource("3_71axp")]
+layout_mode = 2
+
+[node name="menu" type="HBoxContainer" parent="preview"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+theme_override_constants/separation = 20
+
+[node name="exit" type="Button" parent="preview/menu"]
+custom_minimum_size = Vector2(120, 30)
+layout_mode = 2
+size_flags_horizontal = 2
 size_flags_stretch_ratio = 0.05
-theme_override_font_sizes/font_size = 20
-theme_override_styles/normal = SubResource("StyleBoxFlat_7bo3i")
+theme = ExtResource("5_0nsr2")
+theme_override_colors/font_color = Color(0.470588, 0.470588, 0.470588, 1)
+theme_override_font_sizes/font_size = 18
 shortcut = ExtResource("6_oqbbg")
 text = "Назад"
 
-[node name="caption" type="Control" parent="back/detector/saves/options"]
-custom_minimum_size = Vector2(170, 45)
+[node name="load" type="Button" parent="preview/menu"]
+custom_minimum_size = Vector2(90, 26)
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.95
-script = ExtResource("7_vfaeg")
+size_flags_vertical = 4
+size_flags_stretch_ratio = 2.0
+theme_override_fonts/font = ExtResource("12_i6hr0")
+theme_override_font_sizes/font_size = 10
+theme_override_styles/normal = SubResource("StyleBoxFlat_0na4j")
+theme_override_styles/hover = ExtResource("13_4uxrs")
+text = "20"
+alignment = 2
+script = ExtResource("14_m86cc")
 
-[node name="experience" type="Button" parent="back/detector/saves/options/caption"]
+[node name="progress" type="ProgressBar" parent="preview/menu/load"]
+custom_minimum_size = Vector2(35, 26)
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = 10
 anchor_right = 1.0
-anchor_bottom = 1.0
+offset_bottom = 8.0
 grow_horizontal = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_2dr2h")
+theme_override_styles/fill = SubResource("StyleBoxFlat_hw2pa")
+max_value = 20.0
+step = 1.0
+value = 15.0
+show_percentage = false
+
+[node name="description" type="Label" parent="preview/menu/load"]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -130.0
+offset_top = -9.5
+offset_bottom = 9.5
+grow_horizontal = 0
 grow_vertical = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.9
-shortcut = SubResource("Shortcut_wlac6")
-script = ExtResource("11_s55c4")
+size_flags_vertical = 1
+theme = ExtResource("3_20wqg")
+theme_override_colors/font_color = Color(0.78352344, 0.7835234, 0.7835234, 1)
+theme_override_constants/outline_size = 7
+theme_override_fonts/font = ExtResource("11_8rthp")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxEmpty_wum3e")
+text = "Загрузить"
+vertical_alignment = 2
+autowrap_mode = 2
 
-[node name="margin" type="MarginContainer" parent="back/detector/saves/options/caption/experience"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 0
-
-[node name="label" type="Label" parent="back/detector/saves/options/caption/experience/margin"]
+[node name="save" type="Button" parent="preview/menu"]
+custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
-theme_override_font_sizes/font_size = 20
-text = "Сводка"
-
-[node name="shortcut" type="Node" parent="back/detector/saves/options/caption/experience"]
-process_mode = 4
-script = ExtResource("12_h4vij")
-action = "list_right"
-
-[node name="controls" type="Button" parent="back/detector/saves/options/caption"]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.9
-theme_override_font_sizes/font_size = 22
-shortcut = SubResource("Shortcut_4e1te")
-script = ExtResource("11_s55c4")
-
-[node name="margin" type="MarginContainer" parent="back/detector/saves/options/caption/controls"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 0
-
-[node name="label" type="Label" parent="back/detector/saves/options/caption/controls/margin"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 20
-text = "Manage Controls"
-
-[node name="shortcut" type="Node" parent="back/detector/saves/options/caption/controls"]
-process_mode = 4
-script = ExtResource("12_h4vij")
-action = "list_left"
-
-[node name="save" type="Button" parent="back/detector/saves/options"]
-visible = false
-custom_minimum_size = Vector2(60, 45)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.05
-theme_override_font_sizes/font_size = 20
-theme_override_styles/normal = SubResource("StyleBoxFlat_7bo3i")
-shortcut = ExtResource("6_oqbbg")
-text = "Сохранить"
+size_flags_stretch_ratio = 2.0
+theme_override_fonts/font = ExtResource("11_8rthp")
+text = "🎒 Сохранить"

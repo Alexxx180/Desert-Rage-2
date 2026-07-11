@@ -1,6 +1,4 @@
-extends Button
-
-class_name StatusPoints
+class_name StatusPoints extends Button
 
 @onready var bar: ProgressBar = $points/space/bar
 @onready var current: Label = $points/merge/cork/current

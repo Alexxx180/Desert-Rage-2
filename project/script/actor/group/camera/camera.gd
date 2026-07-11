@@ -2,7 +2,6 @@ extends Camera2D
 
 func _ready() -> void: get_parent().set_script(Def.root)
 
-@export var hints_texture: CompressedTexture2DArray
 @export_flags_2d_physics var chests: PackedInt32Array = [0, 0]
 @export_flags_2d_physics var pages: PackedInt32Array = [0, 0]
 @export_flags_2d_physics var books: PackedInt32Array = [0, 0]
