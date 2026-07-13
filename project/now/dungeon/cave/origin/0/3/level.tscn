@@ -1,12 +1,10 @@
-[gd_scene load_steps=8 format=4 uid="uid://dmy2kirh56ttl"]
+[gd_scene load_steps=6 format=4 uid="uid://dmy2kirh56ttl"]
 
-[ext_resource type="PackedScene" uid="uid://d0i3jl2uefg53" path="res://now/scene/tilemap/border/cave.tscn" id="1_r7l66"]
-[ext_resource type="PackedScene" uid="uid://rlwfnl6rvpkj" path="res://now/scene/tilemap/execute.tscn" id="2_54cl1"]
-[ext_resource type="PackedScene" uid="uid://ce2y76nymo6o4" path="res://now/scene/tilemap/tags.tscn" id="4_m88lg"]
-[ext_resource type="PackedScene" uid="uid://b83b7oo2fmh5h" path="res://now/scene/actor/group/group.tscn" id="5_m63n1"]
-[ext_resource type="PackedScene" uid="uid://dbbt75750fc4" path="res://now/scene/ui/hud/game.tscn" id="5_wstqh"]
-[ext_resource type="PackedScene" uid="uid://coilkuaujljb3" path="res://now/scene/ui/transition/stairs/down/end.tscn" id="6_1018o"]
-[ext_resource type="PackedScene" uid="uid://582u4do5bi2h" path="res://now/scene/util/world/text/plot.tscn" id="6_j86n1"]
+[ext_resource type="PackedScene" uid="uid://d0i3jl2uefg53" path="res://now/build/border/cave.tscn" id="1_r7l66"]
+[ext_resource type="PackedScene" uid="uid://rlwfnl6rvpkj" path="res://now/build/execute.tscn" id="2_54cl1"]
+[ext_resource type="PackedScene" uid="uid://ce2y76nymo6o4" path="res://now/build/tags.tscn" id="4_m88lg"]
+[ext_resource type="PackedScene" uid="uid://b83b7oo2fmh5h" path="res://now/build/group.tscn" id="5_m63n1"]
+[ext_resource type="PackedScene" uid="uid://582u4do5bi2h" path="res://now/entity/secret/plot.tscn" id="6_j86n1"]
 
 [node name="map-0-3" type="Node2D"]
 
@@ -18,6 +16,7 @@ tile_map_data = PackedByteArray("AAAIAG8AAAAAAAAABABcABgAAAAAAAAABABkAAkAAAAAAAA
 
 [node name="tags" parent="." instance=ExtResource("4_m88lg")]
 tile_map_data = PackedByteArray("AABgACQAAgAAAAAAAABgACMAAgAAAAAAAABgACIAAAABAAEAAABgACEAAAABAAEAAABgACAAAAABAAEAAABgAB8AAAABAAEAAABhAB8AAAACAAEAAABhACAAAAACAAEAAABfACAAAAAAAAEAAABfAB8AAAAAAAEAAABhACEAAAACAAEAAABfACEAAAAAAAEAAABhACIAAAACAAEAAABfACIAAAAAAAEAAABhACMAAAACAAEAAABfACMAAAAAAAEAAABhACQAAAACAAEAAABfACQAAAAAAAEAAAAQABUAAQAAAAAAAAATAFkAAQAAAAAAAAAiABUAAQABAAAAAAAbACEAAQABAAAAAAAoAC0AAQACAAEAAAAwABsAAQACAAEAAAA1ACcAAQAAAAQAAAAEAG4AAQAAAAQAAAAMAFgAAQADAAEAAAAMAHAAAQADAAEAAABVAEwAAQABAAEAAABUAEUAAQADAAMAAAAEAFkAAQADAAMAAAAEACIAAQABAAQAAAAFAA0AAQABAAQAAAAFABQAAQAEAAMAAABRAAkAAQAEAAMAAAARAAkAAQABAAAAAAA7AAgAAQABAAMAAAA7AA4AAQAEAAAAAABiAAoAAQACAAAAAABnAAgAAQACAAMAAAAcAAkAAQAEAAAAAABLADAAAQACAAMAAABmACcAAQABAAMAAABBACgAAQADAAAAAABeADAAAQAEAAIAAABnADkAAQAAAAIAAABDAD4AAQADAAIAAAAtAEwAAQACAAAAAABTAFoAAQAAAAEAAABmAFoAAQAEAAEAAABlAEUAAQAAAAIAAAAtAFoAAQADAAEAAAAoADwAAQACAAAAAAAeAFkAAQADAAAAAAA2AD0AAQAAAAMAAAATAGMAAQABAAEAAAAEAGMAAQABAAQAAAAeAGMAAQAEAAIAAAAlAGQAAQAAAAIAAAAsAG0AAQAEAAEAAAAnAG0AAQAAAAMAAAA2AGMAAQAAAAEAAABGAGMAAQABAAIAAAA+AGwAAQACAAIAAAA+AGMAAQACAAIAAAAKADYAAQABAAIAAAATADMAAQACAAAAAABHABsAAQACAAIAAAAyAG0AAQADAAIAAABdABkABAAAAAAAAAA7ABsABAAAAAAAAAAQABsABAAAAAAAAAAiACcABAAAAAAAAAAfAEoABAAAAAAAAABDAEoABAAAAAAAAAA1ADAABAAAAAAAAABdABMAAgABAAAAAABeABQAAgABAAAAAABfABMAAgABAAAAAAAfAFEAAgAAAAAAAAAeAEAAAgABAAAAAAA=")
+script = null
 
 [node name="group" parent="." instance=ExtResource("5_m63n1")]
 position = Vector2(766, 5186)
@@ -31,8 +30,3 @@ plot_text = Array[String](["Рей - Видим перед собой какой
 [node name="end" parent="dialog" instance=ExtResource("6_j86n1")]
 position = Vector2(2141, 2488)
 plot_text = Array[String](["Рей - Да сколько можно уже!", "Рок - И не говори..."])
-
-[node name="cards" parent="." instance=ExtResource("5_wstqh")]
-
-[node name="transition" parent="." instance=ExtResource("6_1018o")]
-visible = false

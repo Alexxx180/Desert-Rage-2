@@ -1,0 +1,69 @@
+[gd_scene load_steps=8 format=3 uid="uid://tqi41asahmnh"]
+
+[ext_resource type="Script" uid="uid://bbdi3k2c2306b" path="res://script/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/topic/status/space/title/status/time.gd" id="1_g7ec3"]
+[ext_resource type="FontFile" uid="uid://dqpftcx1b6r8j" path="res://data/font/LTStopwatch-Regular.ttf" id="2_o5ovg"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pa3qu"]
+content_margin_left = 10.0
+content_margin_top = 3.0
+content_margin_right = 10.0
+content_margin_bottom = 0.0
+
+[sub_resource type="Gradient" id="Gradient_e1onj"]
+colors = PackedColorArray(0, 0, 0, 0, 0.741176, 0, 0, 0.470588)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_3v3bl"]
+gradient = SubResource("Gradient_e1onj")
+width = 25
+height = 23
+fill_from = Vector2(0, 0.5)
+fill_to = Vector2(1, 0.5)
+metadata/_snap_enabled = true
+metadata/_snap_count = 2
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mv703"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fxbxi"]
+bg_color = Color(0.739789, 2.00946e-06, 5.77569e-07, 1)
+
+[node name="number" type="Label"]
+custom_minimum_size = Vector2(60, 30)
+offset_right = 67.0
+offset_bottom = 30.0
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2_o5ovg")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxEmpty_pa3qu")
+text = "9:59"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+script = ExtResource("1_g7ec3")
+
+[node name="back" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_3v3bl")
+
+[node name="lasted" type="ProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+size_flags_vertical = 1
+theme_override_styles/background = SubResource("StyleBoxEmpty_mv703")
+theme_override_styles/fill = SubResource("StyleBoxFlat_fxbxi")
+max_value = 600.0
+step = 1.0
+value = 600.0
+fill_mode = 3
+show_percentage = false

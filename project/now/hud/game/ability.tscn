@@ -1,11 +1,10 @@
 [gd_scene load_steps=13 format=3 uid="uid://bo6wehp5f8viu"]
 
 [ext_resource type="Script" uid="uid://dx0yflfj7hnm4" path="res://script/ui/hud/detector/game/margin/priorities/stats/inventory/ability/topic/stack/stack.gd" id="1_hq6jf"]
-[ext_resource type="PackedScene" uid="uid://br061ue566x82" path="res://now/scene/ui/hud/detector/game/menu/gameplay/skills.tscn" id="3_ogicf"]
-[ext_resource type="PackedScene" uid="uid://cq5jn6k2bwg5n" path="res://now/scene/ui/hud/detector/game/menu/ability/controls/topic/status/status.tscn" id="3_uklt7"]
+[ext_resource type="PackedScene" uid="uid://br061ue566x82" path="res://now/hud/hud/gameplay/skills.tscn" id="3_ogicf"]
+[ext_resource type="PackedScene" uid="uid://cq5jn6k2bwg5n" path="res://now/hud/hud/ability/status/status.tscn" id="3_uklt7"]
 [ext_resource type="FontFile" uid="uid://c4ygkmnbt1j7y" path="res://data/font/LTSuperiorSerif-Semibold.otf" id="5_grhtg"]
-[ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://ui/theme/patterns/template/menu/settings/topic/footer.tres" id="9_xc6ys"]
-[ext_resource type="PackedScene" uid="uid://c6gpqe0httyfi" path="res://now/scene/ui/hud/detector/game/menu/ability/title.tscn" id="12_54b4y"]
+[ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://data/theme/patterns/template/menu/settings/topic/footer.tres" id="9_xc6ys"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uklt7"]
 content_margin_left = 20.0
@@ -42,6 +41,8 @@ expand_margin_right = 12.0
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_grhtg"]
 content_margin_left = 5.0
 content_margin_right = 5.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bgds4"]
 
 [node name="scroll" type="ScrollContainer"]
 anchors_preset = 15
@@ -130,9 +131,17 @@ autowrap_mode = 2
 [node name="skills" parent="stack" instance=ExtResource("3_ogicf")]
 layout_mode = 2
 
-[node name="title" parent="stack" instance=ExtResource("12_54b4y")]
+[node name="title" type="RichTextLabel" parent="stack"]
+custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
-text = " Здесь описаны умения и способности - приёмы ваших героев. Описание способности включает в себя комбо, стоимость, площадь и эффект.
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.25
+theme = ExtResource("9_xc6ys")
+theme_override_font_sizes/italics_font_size = 28
+theme_override_styles/normal = SubResource("StyleBoxEmpty_bgds4")
+bbcode_enabled = true
+text = "[i]Способности[/i]
+Здесь описаны умения и способности - приёмы ваших героев. Описание способности включает в себя комбо, стоимость, площадь и эффект.
 
 [table=2]
 [cell expand][left]⠀[b][i]✨[/i][/b]⠀Эффект - полезное действие способности[/left][/cell][cell][left]⠀[b][i]5️⃣[/i][/b]⠀Стоимость - количество ресурса для эффекта[/left][/cell]
@@ -150,3 +159,5 @@ text = " Здесь описаны умения и способности - пр
 ⠀·⠀Для создания новой палитры выберите любой номер с \"Пал.\". Нажмите на способности, которые будут добавлены в конец последовательности. Если вам необходимо удалить способности - выберите описание, режим изменится с \"x\" на \"+\", затем выберите добавленную способность - все ее вхождения будут удалены, а кол-во максимально возможных способностей снова увеличится.
  
 ⠀·⠀Чтобы увидеть слоты, которые будут задействованы в последовательности, немного приоткройте данную панель и прокрутите её в самый верх. Для того чтобы использовать дальнобойные снаряды, нажимайте курок, когда увидите [b]🎯[/b] в слотах."
+fit_content = true
+autowrap_mode = 2

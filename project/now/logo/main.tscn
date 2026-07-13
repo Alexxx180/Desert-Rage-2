@@ -1,0 +1,293 @@
+[gd_scene load_steps=35 format=3 uid="uid://d3heya0kcph0j"]
+
+[ext_resource type="Script" uid="uid://bkbeaeonbqp08" path="res://script/ui/menu/main/processor/processor.gd" id="1_kbp5v"]
+[ext_resource type="Shader" uid="uid://bg4dqjy6sfam7" path="res://data/shader/hole.gdshader" id="2_buuqu"]
+[ext_resource type="PackedScene" uid="uid://douakkywvhnby" path="res://pre/vfx/fire/fire.tscn" id="3_w2uiu"]
+[ext_resource type="FontFile" uid="uid://cjafv81djmqe8" path="res://data/font/Touchscreen-Regular.ttf" id="4_cbe1j"]
+[ext_resource type="Texture2D" uid="uid://r051pjb2ub4l" path="res://icon/logo/game/caption.svg" id="5_ooavg"]
+[ext_resource type="FontFile" uid="uid://b2wbdbnkxcqv1" path="res://data/font/noto_sans/NotoEmoji-VariableFont_wght.ttf" id="6_3jg7b"]
+[ext_resource type="Script" uid="uid://bdgdet1mbxhpp" path="res://script/ui/menu/main/detector/options.gd" id="7_lf00u"]
+[ext_resource type="Texture2D" uid="uid://b2v1sviankpsb" path="res://icon/help/ray/smile.png" id="8_lu7pf"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_plqjw"]
+shader = ExtResource("2_buuqu")
+shader_parameter/hole_pos = Vector2(0.77, 0.75)
+shader_parameter/hole_radius = 0.2
+shader_parameter/softness = 0.3
+shader_parameter/color = Color(0, 0, 0, 1)
+
+[sub_resource type="Gradient" id="Gradient_aswk2"]
+colors = PackedColorArray(0, 0, 0, 1, 0.27307275, 0.098829396, 3.6098065e-08, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_plqjw"]
+gradient = SubResource("Gradient_aswk2")
+width = 10
+height = 20
+fill_from = Vector2(0.5, 0)
+fill_to = Vector2(0.5, 1)
+repeat = 2
+metadata/_snap_enabled = true
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xwawd"]
+content_margin_left = 25.0
+content_margin_top = 105.0
+content_margin_right = 25.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ds34t"]
+content_margin_right = 10.0
+bg_color = Color(0, 0, 0, 0.47058824)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_color = Color(0.12591082, 0.12591085, 0.12591073, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_41j3w"]
+content_margin_left = 20.0
+content_margin_top = 10.0
+content_margin_right = 20.0
+content_margin_bottom = 10.0
+bg_color = Color(0.050980393, 0.050980393, 0.050980393, 0.11764706)
+
+[sub_resource type="Gradient" id="Gradient_5j00g"]
+offsets = PackedFloat32Array(0, 0.7394958)
+colors = PackedColorArray(0, 0, 0, 1, 0.007843138, 0.007843138, 0.019607844, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_aswk2"]
+gradient = SubResource("Gradient_5j00g")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_plqjw"]
+content_margin_left = 49.0
+texture = SubResource("GradientTexture1D_aswk2")
+
+[sub_resource type="Gradient" id="Gradient_jm08w"]
+offsets = PackedFloat32Array(0, 0.7394958)
+colors = PackedColorArray(0, 0, 0, 1, 0.043137256, 0.043137256, 0.08627451, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_8gwkv"]
+gradient = SubResource("Gradient_jm08w")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_u3s3i"]
+content_margin_left = 70.0
+texture = SubResource("GradientTexture1D_8gwkv")
+
+[sub_resource type="Gradient" id="Gradient_plqjw"]
+offsets = PackedFloat32Array(0, 0.7394958)
+colors = PackedColorArray(0, 0, 0, 1, 0.007843138, 0.007843138, 0.019607844, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_jm08w"]
+gradient = SubResource("Gradient_plqjw")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8gwkv"]
+texture = SubResource("GradientTexture1D_jm08w")
+
+[sub_resource type="Gradient" id="Gradient_8gwkv"]
+offsets = PackedFloat32Array(0, 0.7394958)
+colors = PackedColorArray(0, 0, 0, 1, 0.042100586, 0.042107567, 0.08715724, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_u3s3i"]
+gradient = SubResource("Gradient_8gwkv")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_883ro"]
+content_margin_left = 30.0
+texture = SubResource("GradientTexture1D_u3s3i")
+
+[sub_resource type="Gradient" id="Gradient_41j3w"]
+colors = PackedColorArray(0, 0, 0, 1, 0.015686275, 0.015686275, 0.015686275, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_5j00g"]
+gradient = SubResource("Gradient_41j3w")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_aswk2"]
+content_margin_left = 49.0
+texture = SubResource("GradientTexture1D_5j00g")
+
+[sub_resource type="Gradient" id="Gradient_u3s3i"]
+colors = PackedColorArray(0, 0, 0, 1, 0.043039113, 0.04303918, 0.04303915, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_883ro"]
+gradient = SubResource("Gradient_u3s3i")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_36xd2"]
+content_margin_left = 70.0
+texture = SubResource("GradientTexture1D_883ro")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_aswk2"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_41j3w"]
+color = Color(0.13695562, 0.13702786, 0.22530296, 1)
+grow_begin = 0.0
+grow_end = 0.0
+vertical = true
+
+[node name="menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_kbp5v")
+
+[node name="shadow" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_plqjw")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.99607843)
+
+[node name="cursor" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -276.0
+offset_top = -171.0
+offset_right = -266.0
+offset_bottom = -125.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = SubResource("GradientTexture2D_plqjw")
+
+[node name="particle" parent="cursor" instance=ExtResource("3_w2uiu")]
+position = Vector2(5, 2)
+emitting = false
+
+[node name="caption" type="Label" parent="."]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -150.0
+offset_right = 150.0
+offset_bottom = 130.0
+grow_horizontal = 2
+size_flags_horizontal = 6
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("4_cbe1j")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxEmpty_xwawd")
+text = "The Hidden Artifact"
+horizontal_alignment = 1
+
+[node name="title" type="TextureRect" parent="caption"]
+custom_minimum_size = Vector2(490, 80)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -245.0
+offset_top = -40.0
+offset_right = 245.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_ooavg")
+
+[node name="icon" type="Label" parent="caption"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -21.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("6_3jg7b")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_ds34t")
+text = "🪞"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="exit" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -70.0
+offset_bottom = 44.0
+grow_horizontal = 0
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0.08468998, 0.08468991, 0.08468992, 1)
+theme_override_fonts/font = ExtResource("6_3jg7b")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_41j3w")
+text = "❌"
+
+[node name="hud" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 35
+theme_override_constants/margin_top = 35
+theme_override_constants/margin_right = 35
+theme_override_constants/margin_bottom = 55
+
+[node name="options" type="HBoxContainer" parent="hud"]
+layout_mode = 2
+
+[node name="game" type="VBoxContainer" parent="hud/options"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.35
+theme_override_constants/separation = 12
+script = ExtResource("7_lf00u")
+
+[node name="start" type="Button" parent="hud/options/game"]
+custom_minimum_size = Vector2(250, 45)
+layout_mode = 2
+size_flags_vertical = 10
+theme_override_styles/normal = SubResource("StyleBoxTexture_plqjw")
+theme_override_styles/hover = SubResource("StyleBoxTexture_u3s3i")
+text = "Начать"
+alignment = 0
+
+[node name="difficulty" type="Button" parent="hud/options/game"]
+custom_minimum_size = Vector2(0, 45)
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_colors/icon_normal_color = Color(0.41215247, 0.41215247, 0.41215247, 1)
+theme_override_constants/line_spacing = -5
+theme_override_styles/normal = SubResource("StyleBoxTexture_8gwkv")
+theme_override_styles/hover = SubResource("StyleBoxTexture_883ro")
+text = "Подходящая сложность"
+icon = ExtResource("8_lu7pf")
+alignment = 0
+autowrap_mode = 2
+expand_icon = true
+
+[node name="settings" type="Button" parent="hud/options/game"]
+custom_minimum_size = Vector2(250, 45)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+theme_override_styles/normal = SubResource("StyleBoxTexture_aswk2")
+theme_override_styles/hover = SubResource("StyleBoxTexture_36xd2")
+text = "Настройки"
+alignment = 0
+
+[node name="progress" type="ProgressBar" parent="hud/options"]
+custom_minimum_size = Vector2(10, 291)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+size_flags_stretch_ratio = 0.65
+theme_override_styles/background = SubResource("StyleBoxEmpty_aswk2")
+theme_override_styles/fill = SubResource("StyleBoxLine_41j3w")
+value = 30.0
+fill_mode = 3
+show_percentage = false

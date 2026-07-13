@@ -4,6 +4,7 @@ extends HBoxContainer
 @onready var workspace: PanelContainer = $workspace
 
 func _ready() -> void:
+	return
 	helping()
 	workspace.cancel.pressed.connect(select_space)
 

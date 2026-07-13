@@ -1,10 +1,8 @@
 extends GridContainer
 
-@onready var two: VBoxContainer = $two
-@onready var four: VBoxContainer = $four
-@onready var items: Array[Control] = [two.a, two.b, four.a, four.b]
+@onready var items: Array[Control] = [$a, $b]
 
-func hides() -> void: for i in [two, four]: i.hides()
+func hides() -> void: for i in items: i.hides()
 
 func _iterate(rang: Variant, feedback: Callable) -> void:
 	for i in rang:

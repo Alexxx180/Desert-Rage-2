@@ -1,14 +1,16 @@
-[gd_scene load_steps=13 format=3 uid="uid://kq7xh4x513e"]
+[gd_scene load_steps=20 format=3 uid="uid://kq7xh4x513e"]
 
 [ext_resource type="Script" uid="uid://chwwxl3w0i1ir" path="res://script/ui/hud/detector/game/margin/priorities/stats/inventory/topic/items/title/title.gd" id="1_la5xp"]
-[ext_resource type="StyleBox" uid="uid://evyfrkamah1" path="res://ui/theme/style/items/chests/hover.tres" id="2_p5i5m"]
+[ext_resource type="StyleBox" uid="uid://evyfrkamah1" path="res://data/theme/style/items/chests/hover.tres" id="2_p5i5m"]
 [ext_resource type="Script" uid="uid://bwl1i8618qbpw" path="res://script/ui/hud/detector/game/margin/priorities/stats/inventory/topic/items/item/product/product.gd" id="3_eiur7"]
-[ext_resource type="PackedScene" uid="uid://bn2dd80xcv3py" path="res://now/scene/ui/hud/detector/game/menu/inventory/items/content.tscn" id="4_ms26y"]
-[ext_resource type="StyleBox" uid="uid://bev4u886yv13b" path="res://ui/theme/style/tag/tag-blank.tres" id="5_ms26y"]
-[ext_resource type="StyleBox" uid="uid://cht8hrroa75bg" path="res://ui/theme/style/tag/tag-button.tres" id="5_p5i5m"]
-[ext_resource type="PackedScene" uid="uid://d18r42k3iyxhs" path="res://now/scene/ui/hud/detector/game/menu/inventory/items/title/stack/component.tscn" id="5_ymbn4"]
+[ext_resource type="Script" uid="uid://ganthw8uqtu5" path="res://script/ui/hud/detector/game/margin/priorities/stats/inventory/topic/items/item/content/content.gd" id="4_amwpl"]
+[ext_resource type="Texture2D" uid="uid://rdsdp3be1k17" path="res://icon/item/n_f_schofield45.svg" id="5_a24sc"]
+[ext_resource type="StyleBox" uid="uid://cht8hrroa75bg" path="res://data/theme/style/tag/tag-button.tres" id="5_p5i5m"]
+[ext_resource type="Script" uid="uid://ekmpdw1bubvp" path="res://script/ui/hud/detector/game/margin/priorities/stats/inventory/topic/items/title/workspace/stack/component/component.gd" id="5_wqy8n"]
+[ext_resource type="Script" uid="uid://bhi7t562kxxml" path="res://script/ui/hud/detector/game/margin/priorities/stats/inventory/topic/items/title/workspace/stack/component/cell/image.gd" id="6_285j5"]
+[ext_resource type="FontFile" uid="uid://tledodlx6okb" path="res://data/font/LTSuperiorMono-Semibold.otf" id="6_mmhk4"]
 [ext_resource type="Script" uid="uid://b472xs64m4wbd" path="res://script/ui/hud/detector/game/margin/priorities/stats/inventory/topic/items/title/workspace/cancel.gd" id="8_ms26y"]
-[ext_resource type="PackedScene" uid="uid://b7qk00pl6i2dr" path="res://now/scene/ui/hud/detector/game/menu/inventory/items/title/stack/item.tscn" id="9_s71yo"]
+[ext_resource type="FontFile" uid="uid://o0rgn7d13mr3" path="res://data/font/OpenSans-VariableFont_wdth,wght.ttf" id="9_mmhk4"]
 
 [sub_resource type="Gradient" id="Gradient_gx44j"]
 colors = PackedColorArray(0.196078, 0.196078, 0.196078, 0.470588, 0.176471, 0.176471, 0.176471, 0.627451)
@@ -19,6 +21,27 @@ fill_to = Vector2(1, 1)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_mya2s"]
 texture = SubResource("GradientTexture2D_5agbf")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_l6ekx"]
+content_margin_right = 4.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_285j5"]
+content_margin_bottom = 14.0
+
+[sub_resource type="Gradient" id="Gradient_amwpl"]
+colors = PackedColorArray(0, 0, 0, 0.63529414, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ukt44"]
+gradient = SubResource("Gradient_amwpl")
+height = 12
+fill_from = Vector2(1, 0)
+fill_to = Vector2(0, 0)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_a24sc"]
+content_margin_top = 4.0
+content_margin_right = 3.0
+content_margin_bottom = 3.0
+texture = SubResource("GradientTexture2D_ukt44")
 
 [node name="title" type="HBoxContainer"]
 size_flags_horizontal = 3
@@ -32,26 +55,100 @@ theme_override_styles/normal = SubResource("StyleBoxTexture_mya2s")
 theme_override_styles/hover = ExtResource("2_p5i5m")
 script = ExtResource("3_eiur7")
 
-[node name="image" parent="slot" instance=ExtResource("4_ms26y")]
-layout_mode = 1
-
-[node name="component" parent="slot" instance=ExtResource("5_ymbn4")]
+[node name="image" type="TextureRect" parent="slot"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 0.0
-offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+script = ExtResource("4_amwpl")
+
+[node name="both" type="TextureRect" parent="slot/image"]
+visible = false
+layout_mode = 0
+texture = ExtResource("5_a24sc")
+expand_mode = 1
+flip_h = true
+
+[node name="count" type="Label" parent="slot/image"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -24.0
+offset_top = -21.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0.588235, 0.588235, 0.588235, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = -1
+theme_override_constants/shadow_offset_y = -1
+theme_override_constants/shadow_outline_size = 6
+theme_override_fonts/font = ExtResource("6_mmhk4")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxEmpty_l6ekx")
+text = "23"
+
+[node name="component" type="GridContainer" parent="slot"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 4
+mouse_filter = 2
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+columns = 2
+script = ExtResource("5_wqy8n")
+
+[node name="a" type="TextureRect" parent="slot/component"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+expand_mode = 1
+script = ExtResource("6_285j5")
+
+[node name="b" type="TextureRect" parent="slot/component"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+expand_mode = 1
+script = ExtResource("6_285j5")
 
 [node name="cancel" type="Button" parent="."]
 custom_minimum_size = Vector2(230, 0)
 layout_mode = 2
-theme_override_styles/normal = ExtResource("5_ms26y")
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0.3137255, 0.3137255, 0.3137255, 1)
+theme_override_constants/line_spacing = -6
+theme_override_fonts/font = ExtResource("9_mmhk4")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxEmpty_285j5")
 theme_override_styles/hover = ExtResource("5_p5i5m")
+text = "Отвлекает противников, а также дает всем в зубы
+"
+autowrap_mode = 2
 script = ExtResource("8_ms26y")
 
-[node name="item" parent="cancel" instance=ExtResource("9_s71yo")]
-layout_mode = 0
+[node name="caption" type="Label" parent="cancel"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -28.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.51718473, 0.5171844, 0.51718444, 1)
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxTexture_a24sc")
+text = "Чучело"
+horizontal_alignment = 2
+text_overrun_behavior = 3

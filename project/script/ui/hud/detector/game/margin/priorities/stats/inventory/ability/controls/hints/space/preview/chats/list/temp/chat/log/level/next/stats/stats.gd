@@ -3,7 +3,6 @@ extends RichTextLabel
 @onready var add: MarginContainer = $add
 @onready var next: MarginContainer = $next
 @onready var hexagon: Control = $hexagon
-@onready var reveal: Timer = $reveal
 
 #func _ready() -> void:
 #	for r in [add, next, hexagon]: reveal.timeout.connect(r.reveal_stats)

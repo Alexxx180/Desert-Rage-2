@@ -117,9 +117,9 @@ const health: StringName = &"res://now/work/health/%s.tscn"
 # const ability: StringName = &"res://now/work/lockers/ability/%s.tscn"
 # const activator: StringName = &"res://now/work/lockers/ability/%s.tscn"
 const music: StringName = &"res://now/work/music.tscn" # const hero: StringName = &"res://now/work/hero/%s/%s.tscn"
-const ray: StringName = &"res://now/work/hero/ray.tscn"
-const rock: StringName = &"res://now/work/hero/rock.tscn"
-const group: StringName = &"res://now/work/group/%s.tscn"
+const ray: StringName = &"res://now/entity/ray.tscn"
+const rock: StringName = &"res://now/entity/rock.tscn"
+const group: StringName = &"res://now/entity/group.tscn"
 const hud: StringName = &"res://now/hud/%s.tscn"
 const credits: StringName = &"res://now/credits.tscn"
 const settings: StringName = &"res://now/settings.tscn"
@@ -157,7 +157,6 @@ const combo: PackedScene = preload("res://pre/ui/combo.tscn")
 const multiply: PackedScene = preload("res://pre/multiply.tscn")
 const ailments: PackedScene = preload("res://pre/ui/status/ailments.tscn")
 const bag: PackedScene = preload("res://pre/ui/status/items.tscn")
-const chats: PackedScene = preload("res://pre/ui/menu/chat.tscn")
 
 const help: CompressedTexture2DArray = preload("res://icon/help/z_master.svg")
 const grabber: GradientTexture2D = preload("res://pre/ui/grabber.tres")

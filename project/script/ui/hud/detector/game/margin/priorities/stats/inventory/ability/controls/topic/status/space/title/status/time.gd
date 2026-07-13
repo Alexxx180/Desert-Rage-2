@@ -1,4 +1,4 @@
-extends PanelContainer
+extends Label
 
 @onready var number: ProgressBar = $number
 @onready var lasted: ProgressBar = $timing/lasted

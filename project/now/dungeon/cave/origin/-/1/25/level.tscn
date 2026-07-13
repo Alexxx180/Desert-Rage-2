@@ -1,14 +1,12 @@
-[gd_scene load_steps=10 format=4 uid="uid://d32rqxopwqvj8"]
+[gd_scene load_steps=8 format=4 uid="uid://d32rqxopwqvj8"]
 
-[ext_resource type="PackedScene" uid="uid://d0i3jl2uefg53" path="res://now/scene/tilemap/border/cave.tscn" id="1_076xq"]
-[ext_resource type="PackedScene" uid="uid://rlwfnl6rvpkj" path="res://now/scene/tilemap/execute.tscn" id="2_2urcb"]
-[ext_resource type="PackedScene" uid="uid://ce2y76nymo6o4" path="res://now/scene/tilemap/tags.tscn" id="3_abivg"]
-[ext_resource type="PackedScene" uid="uid://b83b7oo2fmh5h" path="res://now/scene/actor/group/group.tscn" id="5_47itr"]
-[ext_resource type="PackedScene" uid="uid://dedq4jmv88so" path="res://now/scene/actor/npc/governtoad.tscn" id="6_2u13y"]
-[ext_resource type="PackedScene" uid="uid://dbbt75750fc4" path="res://now/scene/ui/hud/game.tscn" id="6_peoli"]
-[ext_resource type="PackedScene" uid="uid://582u4do5bi2h" path="res://now/scene/util/world/text/plot.tscn" id="6_xrfib"]
-[ext_resource type="PackedScene" uid="uid://coilkuaujljb3" path="res://now/scene/ui/transition/stairs/down/end.tscn" id="8_rqw85"]
-[ext_resource type="PackedScene" uid="uid://dry3fg6rcoow7" path="res://now/scene/actor/npc/toad.tscn" id="10_ym7ub"]
+[ext_resource type="PackedScene" uid="uid://d0i3jl2uefg53" path="res://now/build/border/cave.tscn" id="1_076xq"]
+[ext_resource type="PackedScene" uid="uid://rlwfnl6rvpkj" path="res://now/build/execute.tscn" id="2_2urcb"]
+[ext_resource type="PackedScene" uid="uid://ce2y76nymo6o4" path="res://now/build/tags.tscn" id="3_abivg"]
+[ext_resource type="PackedScene" uid="uid://b83b7oo2fmh5h" path="res://now/build/group.tscn" id="5_47itr"]
+[ext_resource type="PackedScene" uid="uid://dedq4jmv88so" path="res://now/build/npc/governtoad.tscn" id="6_2u13y"]
+[ext_resource type="PackedScene" uid="uid://582u4do5bi2h" path="res://now/entity/secret/plot.tscn" id="6_xrfib"]
+[ext_resource type="PackedScene" uid="uid://dry3fg6rcoow7" path="res://now/build/npc/toad.tscn" id="10_ym7ub"]
 
 [node name="map-1-25" type="Node2D"]
 
@@ -20,6 +18,7 @@ tile_map_data = PackedByteArray("AAAcABwAAAAAAAAABAA=")
 
 [node name="tags" parent="." instance=ExtResource("3_abivg")]
 tile_map_data = PackedByteArray("AAAhABoAAQAAAAAAAAAhABsAAQAAAAAAAAA=")
+script = null
 
 [node name="toads" type="Node2D" parent="."]
 y_sort_enabled = true
@@ -60,11 +59,6 @@ plot_text = Array[String](["Рей - Что ж, это великая честь
 
 [node name="group" parent="." instance=ExtResource("5_47itr")]
 position = Vector2(2164, 3113)
-
-[node name="cards" parent="." instance=ExtResource("6_peoli")]
-
-[node name="transition" parent="." instance=ExtResource("8_rqw85")]
-visible = false
 
 [connection signal="calm_down_my_dudes" from="toads/governtoad" to="toads/dudes" method="_idle"]
 [connection signal="calm_down_my_dudes" from="toads/governtoad" to="toads/govern" method="_idle"]

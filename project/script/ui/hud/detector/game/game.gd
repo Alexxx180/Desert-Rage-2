@@ -1,5 +1,10 @@
 extends Control
 
+# @onready var game: Control = $game
+# var pause: Control
+# func set_pause() -> void:
+# 	pause = load(LoadBus.hud % "pause").instantiate()
+
 @onready var right: HSplitContainer = $right
 @onready var left: HSplitContainer = right.get_node(^"left")
 @onready var top: VSplitContainer = left.get_node(^"top")

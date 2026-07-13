@@ -1,0 +1,45 @@
+[gd_scene load_steps=9 format=3 uid="uid://b8wsdeuhaqjym"]
+
+[ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://data/theme/patterns/template/menu/settings/topic/footer.tres" id="1_bpnee"]
+[ext_resource type="FontFile" uid="uid://o0rgn7d13mr3" path="res://data/font/OpenSans-VariableFont_wdth,wght.ttf" id="2_ib8ap"]
+[ext_resource type="StyleBox" uid="uid://cht8hrroa75bg" path="res://data/theme/style/tag/tag-button.tres" id="2_p4cw8"]
+[ext_resource type="Script" uid="uid://c5k8wgipwd250" path="res://script/ui/hud/detector/game/margin/priorities/stats/topic/stack/stats/equipment/stat.gd" id="3_h4rgg"]
+[ext_resource type="Texture2D" uid="uid://cgfj8s05myhm4" path="res://icon/help/stat_power.svg" id="4_h3t2p"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s8vpp"]
+content_margin_left = 3.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r7fgi"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_xilg3"]
+color = Color(0.45840502, 0.45840508, 0.45840502, 1)
+grow_begin = -10.0
+grow_end = -10.0
+
+[node name="power" type="Button"]
+custom_minimum_size = Vector2(0, 33)
+size_flags_horizontal = 3
+theme = ExtResource("1_bpnee")
+theme_override_fonts/font = ExtResource("2_ib8ap")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxEmpty_s8vpp")
+theme_override_styles/hover = ExtResource("2_p4cw8")
+text = "10. Мощь"
+icon = ExtResource("4_h3t2p")
+alignment = 0
+script = ExtResource("3_h4rgg")
+
+[node name="base" type="ProgressBar" parent="."]
+layout_mode = 0
+offset_top = 32.0
+offset_right = 1082.0
+offset_bottom = 33.0
+size_flags_horizontal = 3
+size_flags_vertical = 1
+size_flags_stretch_ratio = 4.0
+theme_override_styles/background = SubResource("StyleBoxEmpty_r7fgi")
+theme_override_styles/fill = SubResource("StyleBoxLine_xilg3")
+max_value = 75.0
+step = 1.0
+value = 30.0
+show_percentage = false

@@ -1,15 +1,12 @@
-[gd_scene load_steps=11 format=4 uid="uid://bfko3o18pnpav"]
+[gd_scene load_steps=8 format=4 uid="uid://bfko3o18pnpav"]
 
-[ext_resource type="PackedScene" uid="uid://d0i3jl2uefg53" path="res://now/scene/tilemap/border/cave.tscn" id="1_f05ys"]
-[ext_resource type="PackedScene" uid="uid://rlwfnl6rvpkj" path="res://now/scene/tilemap/execute.tscn" id="2_akna3"]
-[ext_resource type="PackedScene" uid="uid://ce2y76nymo6o4" path="res://now/scene/tilemap/tags.tscn" id="4_njr8d"]
-[ext_resource type="PackedScene" uid="uid://582u4do5bi2h" path="res://now/scene/util/world/text/plot.tscn" id="5_vo2xj"]
-[ext_resource type="PackedScene" uid="uid://cidkkfbh43l2u" path="res://now/scene/util/world/text/hint/hide.tscn" id="6_7n4xk"]
-[ext_resource type="PackedScene" uid="uid://boai8pinslcme" path="res://now/scene/util/world/text/hint/show.tscn" id="6_y08s1"]
-[ext_resource type="PackedScene" uid="uid://b83b7oo2fmh5h" path="res://now/scene/actor/group/group.tscn" id="7_ultax"]
-[ext_resource type="PackedScene" uid="uid://cffwkfo0pxyg" path="res://now/scene/ui/hud/hud.tscn" id="9_ao2ku"]
-[ext_resource type="PackedScene" uid="uid://cr4m4g5nhni3q" path="res://now/scene/ui/transition/gates/enter.tscn" id="10_guro6"]
-[ext_resource type="PackedScene" uid="uid://bsumfxiuy47r" path="res://now/scene/ost.tscn" id="10_qmk0h"]
+[ext_resource type="PackedScene" uid="uid://d0i3jl2uefg53" path="res://now/build/border/cave.tscn" id="1_f05ys"]
+[ext_resource type="PackedScene" uid="uid://rlwfnl6rvpkj" path="res://now/build/execute.tscn" id="2_akna3"]
+[ext_resource type="PackedScene" uid="uid://ce2y76nymo6o4" path="res://now/build/tags.tscn" id="4_njr8d"]
+[ext_resource type="PackedScene" uid="uid://582u4do5bi2h" path="res://now/entity/secret/plot.tscn" id="5_vo2xj"]
+[ext_resource type="PackedScene" uid="uid://cidkkfbh43l2u" path="res://now/entity/secret/hide.tscn" id="6_7n4xk"]
+[ext_resource type="PackedScene" uid="uid://boai8pinslcme" path="res://now/entity/secret/show.tscn" id="6_y08s1"]
+[ext_resource type="PackedScene" uid="uid://b83b7oo2fmh5h" path="res://now/build/group.tscn" id="7_ultax"]
 
 [node name="map-0-0" type="Node2D"]
 y_sort_enabled = true
@@ -43,46 +40,31 @@ plot_text = Array[String](["Рок - Видим лестницу, похоже �
 
 [node name="show" type="Node2D" parent="motion"]
 
-[node name="motion" parent="motion/show" node_paths=PackedStringArray("hud") instance=ExtResource("6_y08s1")]
+[node name="motion" parent="motion/show" instance=ExtResource("6_y08s1")]
 position = Vector2(1440, 3165)
-hud = NodePath("../../../hud")
 
-[node name="jump" parent="motion/show" node_paths=PackedStringArray("hud") instance=ExtResource("6_y08s1")]
+[node name="jump" parent="motion/show" instance=ExtResource("6_y08s1")]
 position = Vector2(1312, 2527)
-hud = NodePath("../../../hud")
 
-[node name="push" parent="motion/show" node_paths=PackedStringArray("hud") instance=ExtResource("6_y08s1")]
+[node name="push" parent="motion/show" instance=ExtResource("6_y08s1")]
 position = Vector2(160, 2399)
-hud = NodePath("../../../hud")
 
-[node name="land" parent="motion/show" node_paths=PackedStringArray("hud") instance=ExtResource("6_y08s1")]
+[node name="land" parent="motion/show" instance=ExtResource("6_y08s1")]
 position = Vector2(160, 1631)
-hud = NodePath("../../../hud")
 
 [node name="hide" type="Node2D" parent="motion"]
 
-[node name="motion" parent="motion/hide" node_paths=PackedStringArray("hud") instance=ExtResource("6_7n4xk")]
+[node name="motion" parent="motion/hide" instance=ExtResource("6_7n4xk")]
 position = Vector2(1440, 2841)
-hud = NodePath("../../../hud")
 
-[node name="jump" parent="motion/hide" node_paths=PackedStringArray("hud") instance=ExtResource("6_7n4xk")]
+[node name="jump" parent="motion/hide" instance=ExtResource("6_7n4xk")]
 position = Vector2(412, 2530)
-hud = NodePath("../../../hud")
 
-[node name="push" parent="motion/hide" node_paths=PackedStringArray("hud") instance=ExtResource("6_7n4xk")]
+[node name="push" parent="motion/hide" instance=ExtResource("6_7n4xk")]
 position = Vector2(160, 1822)
-hud = NodePath("../../../hud")
 
-[node name="land" parent="motion/hide" node_paths=PackedStringArray("hud") instance=ExtResource("6_7n4xk")]
+[node name="land" parent="motion/hide" instance=ExtResource("6_7n4xk")]
 position = Vector2(479, 1440)
-hud = NodePath("../../../hud")
 
 [node name="group" parent="." instance=ExtResource("7_ultax")]
 position = Vector2(1433, 3490)
-
-[node name="hud" parent="." instance=ExtResource("9_ao2ku")]
-
-[node name="caves" parent="." instance=ExtResource("10_qmk0h")]
-
-[node name="transition" parent="." instance=ExtResource("10_guro6")]
-visible = false

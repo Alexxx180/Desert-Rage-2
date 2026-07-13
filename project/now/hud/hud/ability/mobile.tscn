@@ -1,0 +1,249 @@
+[gd_scene load_steps=14 format=3 uid="uid://bvsvg0dsggr2m"]
+
+[ext_resource type="PackedScene" uid="uid://dmr0fcamx7t56" path="res://addons/virtual_joystick/virtual_joystick_scene.tscn" id="1_jkom4"]
+[ext_resource type="FontFile" uid="uid://tledodlx6okb" path="res://data/font/LTSuperiorMono-Semibold.otf" id="2_uocq5"]
+[ext_resource type="FontFile" uid="uid://b37js8y80ak1k" path="res://data/font/noto_sans/NotoColorEmoji-Regular.ttf" id="3_vstaw"]
+[ext_resource type="FontFile" uid="uid://b2wbdbnkxcqv1" path="res://data/font/noto_sans/NotoEmoji-VariableFont_wght.ttf" id="4_jkom4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4chmg"]
+content_margin_left = 3.0
+content_margin_top = 5.0
+content_margin_right = 1.0
+content_margin_bottom = 0.0
+bg_color = Color(0.0196078, 0.0196078, 0.0392157, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1moid"]
+content_margin_top = 1.0
+content_margin_right = 2.0
+content_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eq6yd"]
+content_margin_left = 7.0
+content_margin_top = 7.0
+content_margin_right = 1.0
+content_margin_bottom = 0.0
+bg_color = Color(0.0196078, 0.0196078, 0.0392157, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_iy05a"]
+content_margin_right = 3.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4chmg"]
+content_margin_left = 3.0
+content_margin_top = 9.0
+content_margin_bottom = 0.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8qkor"]
+content_margin_left = 7.0
+content_margin_top = 7.0
+content_margin_right = 1.0
+content_margin_bottom = 0.0
+bg_color = Color(0.0196078, 0.0196078, 0.0392157, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tysmj"]
+content_margin_left = 7.0
+content_margin_top = 7.0
+content_margin_right = 1.0
+content_margin_bottom = 0.0
+bg_color = Color(0.0196078, 0.0196078, 0.0392157, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ok865"]
+content_margin_left = 3.0
+content_margin_top = 0.0
+content_margin_right = 1.0
+content_margin_bottom = 0.0
+bg_color = Color(0.0196078, 0.0196078, 0.0392157, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1moid"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.0196078, 0.0196078, 0.0392157, 1)
+
+[node name="mobile" type="HBoxContainer"]
+
+[node name="joystick" parent="." instance=ExtResource("1_jkom4")]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+
+[node name="space" type="Control" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="slots" type="GridContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 4
+columns = 3
+
+[node name="left" type="Button" parent="slots"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.341176, 0.341176, 0.341176, 1)
+theme_override_fonts/font = ExtResource("2_uocq5")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_4chmg")
+text = "←"
+
+[node name="bag" type="Label" parent="slots/left"]
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -15.0
+offset_top = -9.0
+offset_bottom = 9.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+theme_override_fonts/font = ExtResource("4_jkom4")
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxEmpty_1moid")
+text = "💰"
+horizontal_alignment = 2
+
+[node name="fire" type="Button" parent="slots"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.341176, 0.341176, 0.341176, 1)
+theme_override_fonts/font = ExtResource("3_vstaw")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_eq6yd")
+text = "🔥"
+
+[node name="cost" type="Label" parent="slots/fire"]
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -15.0
+offset_bottom = 17.0
+grow_horizontal = 0
+size_flags_horizontal = 8
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxEmpty_iy05a")
+text = "1"
+horizontal_alignment = 2
+
+[node name="right" type="Button" parent="slots"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.341176, 0.341176, 0.341176, 1)
+theme_override_fonts/font = ExtResource("2_uocq5")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_4chmg")
+text = "→"
+
+[node name="bag" type="Label" parent="slots/right"]
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -9.0
+offset_right = 20.0
+offset_bottom = 9.0
+grow_vertical = 2
+size_flags_horizontal = 8
+theme_override_fonts/font = ExtResource("4_jkom4")
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxEmpty_4chmg")
+text = "💰"
+horizontal_alignment = 2
+
+[node name="whip" type="Button" parent="slots"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.341176, 0.341176, 0.341176, 1)
+theme_override_fonts/font = ExtResource("3_vstaw")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_8qkor")
+text = "🎣"
+
+[node name="cost" type="Label" parent="slots/whip"]
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -15.0
+offset_bottom = 17.0
+grow_horizontal = 0
+size_flags_horizontal = 8
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxEmpty_iy05a")
+text = "1"
+horizontal_alignment = 2
+
+[node name="shot" type="Button" parent="slots"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.341176, 0.341176, 0.341176, 1)
+theme_override_fonts/font = ExtResource("3_vstaw")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_tysmj")
+text = "🎯"
+
+[node name="cost" type="Label" parent="slots/shot"]
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -15.0
+offset_bottom = 17.0
+grow_horizontal = 0
+size_flags_horizontal = 8
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxEmpty_iy05a")
+text = "1"
+horizontal_alignment = 2
+
+[node name="punch" type="Button" parent="slots"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.341176, 0.341176, 0.341176, 1)
+theme_override_fonts/font = ExtResource("3_vstaw")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_ok865")
+text = "✊"
+
+[node name="select" type="Button" parent="slots"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.341176, 0.341176, 0.341176, 1)
+theme_override_fonts/font = ExtResource("4_jkom4")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_ok865")
+text = "🧍"
+
+[node name="kick" type="Button" parent="slots"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.341176, 0.341176, 0.341176, 1)
+theme_override_fonts/font = ExtResource("3_vstaw")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_ok865")
+text = "🦶"
+
+[node name="osmose" type="Button" parent="slots"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.341176, 0.341176, 0.341176, 1)
+theme_override_fonts/font = ExtResource("4_jkom4")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_1moid")
+text = "🤠
+"

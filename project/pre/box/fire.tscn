@@ -1,24 +1,41 @@
-[gd_scene load_steps=6 format=3 uid="uid://b2b504t0v7im2"]
+[gd_scene load_steps=7 format=3 uid="uid://b2b504t0v7im2"]
 
 [ext_resource type="Script" uid="uid://vt1utuvtpkyc" path="res://script/util/world/drive/box/fire/box.gd" id="1_3tu8u"]
-[ext_resource type="Shape2D" uid="uid://cqyj3i1vf3w47" path="res://ui/geometry/interactables/box/box.tres" id="2_3c5qp"]
-[ext_resource type="PackedScene" uid="uid://3gtpqwa5afwd" path="res://now/scene/util/world/drive/box/fire/view.tscn" id="2_qippy"]
-[ext_resource type="PackedScene" uid="uid://bocuu344hsqv" path="res://now/scene/ui/util/fov.tscn" id="3_157j3"]
-[ext_resource type="PackedScene" uid="uid://dfb22mo4oqv7i" path="res://now/scene/util/world/drive/box/fire/logic/logic.tscn" id="3_utx41"]
+[ext_resource type="Shape2D" uid="uid://cqyj3i1vf3w47" path="res://data/geometry/interactables/box/box.tres" id="2_3c5qp"]
+[ext_resource type="PackedScene" uid="uid://bocuu344hsqv" path="res://now/hud/util/fov.tscn" id="3_157j3"]
+[ext_resource type="Texture2D" uid="uid://c86ltmoqjwgnr" path="res://icon/item/platform/b_fire.svg" id="3_raf85"]
+[ext_resource type="Material" uid="uid://cbf2yw7c100kv" path="res://pre/vfx/fire/torch.tres" id="4_tfpwc"]
 
-[node name="fire_box" type="CharacterBody2D"]
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_6fkw6"]
+a = Vector2(-4, 0)
+b = Vector2(4, 0)
+
+[node name="fire_box" type="AnimatableBody2D"]
 position = Vector2(0, 22)
 collision_layer = 131088
 collision_mask = 223
-motion_mode = 1
 script = ExtResource("1_3tu8u")
 
 [node name="geometry" type="CollisionShape2D" parent="."]
 shape = ExtResource("2_3c5qp")
 
-[node name="view" parent="." instance=ExtResource("2_qippy")]
+[node name="stand" type="Sprite2D" parent="."]
+position = Vector2(0, -22)
+texture = ExtResource("3_raf85")
 
-[node name="logic" parent="." instance=ExtResource("3_utx41")]
+[node name="fire" type="GPUParticles2D" parent="."]
+position = Vector2(0, -35)
+emitting = false
+amount = 15
+process_material = ExtResource("4_tfpwc")
+
+[node name="press" type="Area2D" parent="."]
+position = Vector2(0, -9)
+collision_layer = 0
+collision_mask = 32768
+
+[node name="geometry" type="CollisionShape2D" parent="press"]
+shape = SubResource("SegmentShape2D_6fkw6")
 
 [node name="fov" parent="." instance=ExtResource("3_157j3")]
 position = Vector2(9.53674e-07, -22)
