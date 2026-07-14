@@ -1,23 +1,15 @@
-[gd_scene load_steps=7 format=3 uid="uid://5t24tn3kugk0"]
+[gd_scene load_steps=5 format=3 uid="uid://5t24tn3kugk0"]
 
 [ext_resource type="Script" uid="uid://hmvns4hf7arn" path="res://script/ui/menu/sound/processor/settings/exporter/exporter.gd" id="1_wy3dq"]
-[ext_resource type="PackedScene" uid="uid://ci01rgyqff4u3" path="res://now/hud/game/menu/sound/detector/dialog/preset/save.tscn" id="2_tnj3t"]
-[ext_resource type="PackedScene" uid="uid://6eg0svsiigfj" path="res://now/hud/game/menu/sound/processor/setup/behavior.tscn" id="3_j10i0"]
-[ext_resource type="Script" uid="uid://6ruw0ycrqlbq" path="res://addons/godot-behavior-tree-plugin/blackboard/blackboard.gd" id="4_kbn27"]
+[ext_resource type="PackedScene" uid="uid://oypcngd4c1pn" path="res://now/hud/game/menu/sound/detector/dropdown/open.tscn" id="2_y2vyd"]
 [ext_resource type="Script" uid="uid://cjettqch7275a" path="res://script/ui/menu/sound/processor/settings/exporter/branch/branch.gd" id="5_sqy3d"]
 [ext_resource type="Script" uid="uid://b77i7uafr1psu" path="res://script/ui/menu/sound/processor/settings/exporter/branch/zip.gd" id="6_hw4vl"]
 
 [node name="exporter" type="Node"]
 script = ExtResource("1_wy3dq")
 
-[node name="save" parent="." instance=ExtResource("2_tnj3t")]
+[node name="open_preset" parent="." instance=ExtResource("2_y2vyd")]
 visible = false
-filters = PackedStringArray("*.zip")
-
-[node name="behavior" parent="." instance=ExtResource("3_j10i0")]
-
-[node name="board" type="Node" parent="."]
-script = ExtResource("4_kbn27")
 
 [node name="branch" type="Node" parent="."]
 script = ExtResource("5_sqy3d")

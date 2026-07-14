@@ -18,3 +18,9 @@ func selected(file: String) -> void:
 func show_dialog(feedback: Callable) -> void:
 	_feedback = feedback
 	show()
+
+class_name SavePresetDialog
+
+func selected(file: String) -> void:
+	result_file = file
+	_feedback.call(file)
