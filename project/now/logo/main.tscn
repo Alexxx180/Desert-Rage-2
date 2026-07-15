@@ -1,32 +1,12 @@
-[gd_scene load_steps=35 format=3 uid="uid://d3heya0kcph0j"]
+[gd_scene load_steps=33 format=3 uid="uid://d3heya0kcph0j"]
 
 [ext_resource type="Script" uid="uid://bkbeaeonbqp08" path="res://script/ui/menu/main/processor/processor.gd" id="1_kbp5v"]
-[ext_resource type="Shader" uid="uid://bg4dqjy6sfam7" path="res://data/shader/hole.gdshader" id="2_buuqu"]
 [ext_resource type="PackedScene" uid="uid://douakkywvhnby" path="res://pre/vfx/fire/fire.tscn" id="3_w2uiu"]
 [ext_resource type="FontFile" uid="uid://cjafv81djmqe8" path="res://data/font/Touchscreen-Regular.ttf" id="4_cbe1j"]
 [ext_resource type="Texture2D" uid="uid://r051pjb2ub4l" path="res://icon/logo/game/caption.svg" id="5_ooavg"]
 [ext_resource type="FontFile" uid="uid://b2wbdbnkxcqv1" path="res://data/font/noto_sans/NotoEmoji-VariableFont_wght.ttf" id="6_3jg7b"]
-[ext_resource type="Script" uid="uid://bdgdet1mbxhpp" path="res://script/ui/menu/main/detector/options.gd" id="7_lf00u"]
 [ext_resource type="Texture2D" uid="uid://b2v1sviankpsb" path="res://icon/help/ray/smile.png" id="8_lu7pf"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_plqjw"]
-shader = ExtResource("2_buuqu")
-shader_parameter/hole_pos = Vector2(0.77, 0.75)
-shader_parameter/hole_radius = 0.2
-shader_parameter/softness = 0.3
-shader_parameter/color = Color(0, 0, 0, 1)
-
-[sub_resource type="Gradient" id="Gradient_aswk2"]
-colors = PackedColorArray(0, 0, 0, 1, 0.27307275, 0.098829396, 3.6098065e-08, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_plqjw"]
-gradient = SubResource("Gradient_aswk2")
-width = 10
-height = 20
-fill_from = Vector2(0.5, 0)
-fill_to = Vector2(0.5, 1)
-repeat = 2
-metadata/_snap_enabled = true
+[ext_resource type="Texture2D" uid="uid://cxgk5ulbk51xo" path="res://icon/logo/logo.svg" id="10_cbe1j"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xwawd"]
 content_margin_left = 25.0
@@ -119,6 +99,17 @@ grow_begin = 0.0
 grow_end = 0.0
 vertical = true
 
+[sub_resource type="Gradient" id="Gradient_buuqu"]
+colors = PackedColorArray(0, 0, 0, 1, 0.27450982, 0.09803922, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_w2uiu"]
+gradient = SubResource("Gradient_buuqu")
+width = 10
+height = 20
+fill_from = Vector2(0.5, 0)
+fill_to = Vector2(0.5, 1)
+metadata/_snap_enabled = true
+
 [node name="menu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -127,35 +118,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_kbp5v")
-
-[node name="shadow" type="ColorRect" parent="."]
-material = SubResource("ShaderMaterial_plqjw")
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 0.99607843)
-
-[node name="cursor" type="TextureRect" parent="."]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -276.0
-offset_top = -171.0
-offset_right = -266.0
-offset_bottom = -125.0
-grow_horizontal = 0
-grow_vertical = 0
-texture = SubResource("GradientTexture2D_plqjw")
-
-[node name="particle" parent="cursor" instance=ExtResource("3_w2uiu")]
-position = Vector2(5, 2)
-emitting = false
 
 [node name="caption" type="Label" parent="."]
 custom_minimum_size = Vector2(300, 0)
@@ -245,7 +207,6 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.35
 theme_override_constants/separation = 12
-script = ExtResource("7_lf00u")
 
 [node name="start" type="Button" parent="hud/options/game"]
 custom_minimum_size = Vector2(250, 45)
@@ -291,3 +252,35 @@ theme_override_styles/fill = SubResource("StyleBoxLine_41j3w")
 value = 30.0
 fill_mode = 3
 show_percentage = false
+
+[node name="cursor" type="TextureButton" parent="hud"]
+custom_minimum_size = Vector2(10, 46)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = SubResource("GradientTexture2D_w2uiu")
+stretch_mode = 0
+
+[node name="particle" parent="hud/cursor" instance=ExtResource("3_w2uiu")]
+position = Vector2(5, 0)
+emitting = false
+
+[node name="shadow" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="logo" type="TextureRect" parent="shadow"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_cbe1j")
+expand_mode = 1

@@ -2,15 +2,14 @@ class_name SoundtrackSystem extends RefCounted
 
 signal update()
 
-var _ui: SoundtrackUI
-var ui: SoundtrackUI:
-	get: return Def.ref(self, _ui, &"_ui", new_soundtrack_ui)
+# var _ui: SoundtrackUI
+# var ui: SoundtrackUI:
+	# get: return Def.ref(self, _ui, &"_ui", new_soundtrack_ui)
 var _json: Dictionary = {
 	"COPY": "res://asset/resource/media/ost/%s.json",
 	"USER": "user://%s.json"
 }
-
-func new_soundtrack_ui() -> SoundtrackUI: return SoundtrackUI.new()
+# func new_soundtrack_ui() -> SoundtrackUI: return SoundtrackUI.new()
 
 var save: bool = false
 var _copy: Dictionary = { "music": {} }

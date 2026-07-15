@@ -149,8 +149,8 @@ const rain: StringName = &"res://pre/particle/rain/rain.tscn"
 const card: StringName = &"res://now/scene/ui/hud/detector/game/menu/priorities/topic/research/content/help/cards/card.tscn"
 
 # PRELOADS
-const sand: PackedScene = preload("res://pre/particle/sand.tscn")
-const throw: PackedScene = preload("res://pre/particle/fight/kick.tscn")
+# const sand: PackedScene = preload("res://pre/particle/sand.tscn")
+# const throw: PackedScene = preload("res://pre/particle/fight/kick.tscn")
 
 const dialog: PackedScene = preload("res://pre/ui/dialog.tscn")
 const combo: PackedScene = preload("res://pre/ui/combo.tscn")
