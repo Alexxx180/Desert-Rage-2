@@ -1,4 +1,4 @@
-extends PanelContainer
+extends Panel
 
 @onready var borders: StyleBoxFlat = get("theme_override_styles/panel")
 @onready var image: TextureRect = $image # @onready var borders: PanelContainer = $borders

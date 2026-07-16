@@ -30,7 +30,7 @@ func _change_state(path: StringName) -> void:
 	temp.tween_property(logo, ^"modulate", Color.WHITE, 1.5)
 	temp.tween_callback(func():
 		temp = create_tween()
-		temp.tween_property(logo, ^"modulate", Color.BLACK, 1).set_delay(1.0)
+		temp.tween_property(logo, ^"modulate", Color.BLACK, 1).set_delay(i)
 		temp.tween_callback(logo_show))
 	i += 1
 

@@ -14,7 +14,7 @@ func _ready() -> void: get_parent().set_script(Def.root)
 
 @onready var cooldown: Timer = $cooldown
 @onready var stats: RecoveryStats = RecoveryStats.new()
-
+"""
 func recover(hero: CharacterBody2D, type: String) -> void:
 	stats.start_recover(type, hero)
 	start()
@@ -41,3 +41,4 @@ func recover_period() -> void:
 	stop_period()
 	if stats.can_fill(): cooldown.start()
 	
+"""

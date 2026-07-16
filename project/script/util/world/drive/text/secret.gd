@@ -28,8 +28,7 @@ const OPENED: PackedStringArray = [
 func _on_open(body: PhysicsBody2D) -> void:
 	if body.is_in_group("enemy"): return
 
-	if secret.text == "":
-		secret.text = OPENED.pick_random()
+	if secret.text == "": # secret.text = OPENED.pick_random()
 		_change_state(view, Color.TRANSPARENT)
 	_change_state(secret, Color.WHITE)
 
