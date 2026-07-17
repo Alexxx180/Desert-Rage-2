@@ -1,0 +1,48 @@
+[gd_scene load_steps=12 format=3 uid="uid://djg13ffehivst"]
+
+[ext_resource type="Script" uid="uid://bhrr2y24jdgcf" path="res://script/ui/menu/settings/link/link.gd" id="1_by2gr"]
+[ext_resource type="Script" uid="uid://dav3cd3sw0r0j" path="res://script/ui/menu/settings/link/devices.gd" id="2_qed7v"]
+[ext_resource type="Script" uid="uid://bsf5ipnb1p5gp" path="res://script/ui/menu/settings/link/buttons.gd" id="3_vejfi"]
+[ext_resource type="Script" uid="uid://cnap4m4qyii3s" path="res://script/ui/menu/settings/link/t.gd" id="4_670db"]
+[ext_resource type="Script" uid="uid://dbo624b5np7nx" path="res://script/ui/menu/settings/link/logic.gd" id="5_pyv36"]
+[ext_resource type="Script" uid="uid://521sfod8l8s2" path="res://script/ui/menu/settings/link/options.gd" id="6_jiok3"]
+[ext_resource type="Script" uid="uid://ckeia2wxvsuga" path="res://script/ui/menu/settings/link/experience/experience.gd" id="7_0ygwy"]
+[ext_resource type="Script" uid="uid://dumtniekn741q" path="res://script/ui/menu/settings/link/experience/sound.gd" id="8_8uowk"]
+[ext_resource type="Script" uid="uid://cw7fxce8vd1bc" path="res://script/ui/menu/settings/link/experience/accessibility.gd" id="9_w20x5"]
+[ext_resource type="Script" uid="uid://omeg3aqt5ej1" path="res://script/ui/menu/settings/link/experience/interface.gd" id="10_glh8p"]
+[ext_resource type="Script" uid="uid://drcfasr3gv6ul" path="res://script/ui/menu/settings/link/experience/game.gd" id="11_hd44y"]
+
+[node name="link" type="Node"]
+script = ExtResource("1_by2gr")
+
+[node name="devices" type="Node" parent="."]
+script = ExtResource("2_qed7v")
+
+[node name="buttons" type="Node" parent="devices"]
+script = ExtResource("3_vejfi")
+
+[node name="t" type="Node" parent="devices/buttons"]
+script = ExtResource("4_670db")
+
+[node name="logic" type="Node" parent="devices/buttons/t"]
+script = ExtResource("5_pyv36")
+
+[node name="options" type="Node" parent="devices/buttons"]
+script = ExtResource("6_jiok3")
+
+[node name="Timer" type="Timer" parent="devices/buttons/options"]
+
+[node name="experience" type="Node" parent="."]
+script = ExtResource("7_0ygwy")
+
+[node name="sound" type="Node" parent="experience"]
+script = ExtResource("8_8uowk")
+
+[node name="accessibility" type="Node" parent="experience"]
+script = ExtResource("9_w20x5")
+
+[node name="interface" type="Node" parent="experience"]
+script = ExtResource("10_glh8p")
+
+[node name="game" type="Node" parent="experience"]
+script = ExtResource("11_hd44y")

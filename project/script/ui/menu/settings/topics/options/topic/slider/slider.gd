@@ -1,5 +1,5 @@
 class_name FocusedSlider extends HSlider
-
+"""
 signal hold_focus(status: bool)
 
 @export var text: String = ""
@@ -122,3 +122,4 @@ func _physics_process(delta: float) -> void:
 		_freeze -= delta
 	else:
 		set_slider_value()
+"""

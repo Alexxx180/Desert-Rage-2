@@ -1,5 +1,5 @@
 extends Control
-
+"""
 @onready var experience: Button = $experience
 @onready var controls: Button = $controls
 
@@ -20,3 +20,4 @@ func set_transition(options: VBoxContainer) -> void:
 	controls.pressed.connect(options.switch_experience)
 	for control in [experience, controls]:
 		control.pressed.connect(toggle_buttons)
+"""

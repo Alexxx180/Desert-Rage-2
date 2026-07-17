@@ -1,7 +1,7 @@
 extends Node
 
 class_name FocusedItems
-
+"""
 var _topics: Array[Control] = []
 var grabbed: Array[HSlider] = []
 var _items: Array[Array] = []
@@ -10,13 +10,12 @@ var _space: int = 0
 var space: int:
 	get: return _space
 
-"""
+
 func all_released() -> bool:
 	var released: bool = true
 	for slider in _grabbed:
 		released = released and slider.released
 	return released
-"""
 
 func _grab_focus(selection: int) -> void:
 	_items[_space][selection].grab_focus()
@@ -53,3 +52,4 @@ func set_transition(hud: CanvasLayer, topic: Control) -> void:
 		slider.hold_focus.connect(func(status):
 			Works.turn(_focus, status and hud.visible and topic.visible)
 		)
+"""

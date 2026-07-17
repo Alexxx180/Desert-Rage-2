@@ -1,3 +1,5 @@
+"""
+
 extends ActionsControl
 
 func new_controls(act: String) -> void:
@@ -27,3 +29,4 @@ func _ready() -> void:
 		a(ACT.PANEL_LEFT_TOGGLE): [KEY_TAB, KEY_1],
 		a(ACT.PANEL_RIGHT_TOGGLE): [KEY_TAB, KEY_4],
 	}
+"""

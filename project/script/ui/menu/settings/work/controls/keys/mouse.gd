@@ -1,3 +1,4 @@
+"""
 extends ActionsControl
 
 func get_escapes() -> Dictionary: return keys.mouses
@@ -23,3 +24,4 @@ func _ready() -> void:
 		a(ACT.UI_LMB): [MOUSE_BUTTON_LEFT]
 		#, # a.GD: MOUSE_BUTTON_LEFT, # a.GT: MOUSE_BUTTON_LEFT,
 	}
+"""
