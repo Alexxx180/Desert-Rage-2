@@ -1,22 +1,16 @@
-[gd_scene load_steps=24 format=3 uid="uid://v6stk7j8vyox"]
+[gd_scene load_steps=17 format=3 uid="uid://v6stk7j8vyox"]
 
-[ext_resource type="Script" uid="uid://cineqyu52scdk" path="res://script/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/hints/space/preview/help/content/hints/scroll.gd" id="3_sq34c"]
-[ext_resource type="Script" uid="uid://citnas3uoasqt" path="res://script/ui/hud/detector/pause/options/options.gd" id="4_psjnk"]
 [ext_resource type="Theme" uid="uid://bt30yve6tq7yu" path="res://data/theme/patterns/template/menu/hud/pause/caption.tres" id="5_sq34c"]
-[ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://data/theme/patterns/template/menu/settings/topic/footer.tres" id="6_psjnk"]
 [ext_resource type="FontFile" uid="uid://o0rgn7d13mr3" path="res://data/font/OpenSans-VariableFont_wdth,wght.ttf" id="7_csk2a"]
-[ext_resource type="Shortcut" uid="uid://3f4gd42nvfmx" path="res://data/input/short/cut/manual.tres" id="7_g6jno"]
-[ext_resource type="PackedScene" uid="uid://dvdimdxij23df" path="res://now/hud/util/hover/hooder.tscn" id="9_t8rym"]
-[ext_resource type="Shortcut" uid="uid://brjhv1uiicoq4" path="res://data/input/short/cut/pause/resume.tres" id="10_csk2a"]
+[ext_resource type="Shortcut" uid="uid://3f4gd42nvfmx" path="res://data/short/cut/manual.tres" id="7_g6jno"]
+[ext_resource type="Shortcut" uid="uid://brjhv1uiicoq4" path="res://data/short/cut/pause/resume.tres" id="10_csk2a"]
 [ext_resource type="Theme" uid="uid://dfyi7rrcrweqx" path="res://data/theme/patterns/template/menu/settings/settings.tres" id="11_cd1ao"]
 [ext_resource type="FontFile" uid="uid://b2wbdbnkxcqv1" path="res://data/font/noto_sans/NotoEmoji-VariableFont_wght.ttf" id="11_psjnk"]
-[ext_resource type="Script" uid="uid://d1qknlm4n13yx" path="res://script/ui/hud/detector/pause/options/menu/focus/menu.gd" id="12_sueuu"]
-[ext_resource type="InputEventKey" uid="uid://du8qgit35q7vo" path="res://data/input/short/device/keyboard/fast/f3.tres" id="14_s3nvl"]
-[ext_resource type="InputEventKey" uid="uid://b781lxbqi155j" path="res://data/input/short/device/keyboard/numeric/3.tres" id="15_okx01"]
-[ext_resource type="InputEventJoypadMotion" uid="uid://63e0opsahun8" path="res://data/input/short/device/gamepad/periphery/trigger/left.tres" id="16_5in2i"]
-[ext_resource type="InputEventKey" uid="uid://bsu0mw75d73w5" path="res://data/input/short/device/keyboard/numeric/4.tres" id="18_joxfe"]
-[ext_resource type="InputEventKey" uid="uid://b6kfs327b46p5" path="res://data/input/short/device/keyboard/fast/f4.tres" id="19_07la2"]
-[ext_resource type="Script" uid="uid://cvf4r0b1ew5es" path="res://script/ui/hud/detector/pause/options/menu/focus/focus.gd" id="20_ka28k"]
+[ext_resource type="InputEventKey" uid="uid://du8qgit35q7vo" path="res://data/short/device/keyboard/fast/f3.tres" id="14_s3nvl"]
+[ext_resource type="InputEventKey" uid="uid://b781lxbqi155j" path="res://data/short/device/keyboard/numeric/3.tres" id="15_okx01"]
+[ext_resource type="InputEventJoypadMotion" uid="uid://63e0opsahun8" path="res://data/short/device/gamepad/periphery/trigger/left.tres" id="16_5in2i"]
+[ext_resource type="InputEventKey" uid="uid://bsu0mw75d73w5" path="res://data/short/device/keyboard/numeric/4.tres" id="18_joxfe"]
+[ext_resource type="InputEventKey" uid="uid://b6kfs327b46p5" path="res://data/short/device/keyboard/fast/f4.tres" id="19_07la2"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_snrb0"]
 content_margin_left = 35.0
@@ -25,8 +19,7 @@ content_margin_right = 35.0
 content_margin_bottom = 35.0
 bg_color = Color(0, 0, 0, 0.78431374)
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fk5t1"]
-content_margin_left = 10.0
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kbq4y"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uebu4"]
 content_margin_left = 20.0
@@ -34,9 +27,6 @@ content_margin_top = 10.0
 content_margin_right = 20.0
 content_margin_bottom = 10.0
 bg_color = Color(0.050980393, 0.050980393, 0.050980393, 0.11764706)
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qbkko"]
-content_margin_left = 30.0
 
 [sub_resource type="Shortcut" id="Shortcut_drjsb"]
 events = [ExtResource("14_s3nvl"), ExtResource("15_okx01"), ExtResource("16_5in2i")]
@@ -51,32 +41,24 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_snrb0")
-script = ExtResource("3_sq34c")
 
 [node name="options" type="VBoxContainer" parent="."]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-script = ExtResource("4_psjnk")
 
 [node name="pause" type="HBoxContainer" parent="options"]
 layout_mode = 2
+size_flags_vertical = 2
 
-[node name="caption" type="Label" parent="options/pause"]
+[node name="caption" type="Button" parent="options/pause"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("5_sq34c")
+theme_override_fonts/font = ExtResource("7_csk2a")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxEmpty_kbq4y")
 text = "SPST"
-
-[node name="description" type="Label" parent="options/pause"]
-custom_minimum_size = Vector2(50, 0)
-layout_mode = 2
-size_flags_horizontal = 4
-theme = ExtResource("6_psjnk")
-theme_override_constants/line_spacing = -7
-theme_override_styles/normal = SubResource("StyleBoxEmpty_fk5t1")
-text = "SPSD"
-autowrap_mode = 2
 
 [node name="exit" type="Button" parent="options/pause"]
 layout_mode = 2
@@ -88,46 +70,11 @@ theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_uebu4")
 text = "❌"
 
-[node name="hooder" parent="options/pause" instance=ExtResource("9_t8rym")]
-target_path = "../hotkey"
-
-[node name="map" type="TextureRect" parent="options"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="found" type="Label" parent="options/map"]
-layout_mode = 0
-offset_left = 10.0
-offset_top = 620.0
-offset_right = 1142.0
-offset_bottom = 643.0
-size_flags_horizontal = 3
-theme_override_fonts/font = ExtResource("7_csk2a")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_qbkko")
-text = "Пещера истоков - Иголка в стоге сена — 2 Этаж"
-horizontal_alignment = 2
-
-[node name="description" type="Label" parent="options/map/found"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_top = -11.5
-offset_right = 405.0
-offset_bottom = 11.5
-grow_vertical = 2
-size_flags_horizontal = 3
-theme_override_fonts/font = ExtResource("7_csk2a")
-text = "👻 2 / 3 — 📖 3 / 6 — 📜 1 / 2 — 🔍 2 / 7"
-text_overrun_behavior = 3
-
 [node name="menu" type="HFlowContainer" parent="options"]
 layout_mode = 2
 size_flags_vertical = 8
 theme = ExtResource("11_cd1ao")
 theme_override_constants/h_separation = 10
-script = ExtResource("12_sueuu")
 
 [node name="resume" type="Button" parent="options/menu"]
 custom_minimum_size = Vector2(160, 60)
@@ -189,6 +136,3 @@ shortcut = SubResource("Shortcut_j20bp")
 shortcut_in_tooltip = false
 text = "4. SMNM"
 alignment = 0
-
-[node name="focus" type="Node" parent="options/menu"]
-script = ExtResource("20_ka28k")

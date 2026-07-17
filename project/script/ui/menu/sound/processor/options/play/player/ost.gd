@@ -1,5 +1,3 @@
-extends AudioStreamPlayer
-
 class_name OSTPlayer
 
 var _track: String = ""

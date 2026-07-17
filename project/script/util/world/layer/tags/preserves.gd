@@ -25,8 +25,7 @@ func drink_water(inventory: Node, pos: Vector2) -> void:
 
 func _get_id(tile: Dictionary) -> int:
 	var tag: Vector2i = HUD.level.execute.tile(tile.coords)
-	print("ITEM ID = ", Tile.logic_no(tag, TILE_SIZE))
-	return Def.of8(tag) - Tile.FLOOR
+	return Def.of8(tag)# - Tile.FLOOR
 
 func open_chest(tile: Dictionary) -> void:
 	var id: int = _get_id(tile)
