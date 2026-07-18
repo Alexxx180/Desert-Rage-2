@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://esjdr0frox65"]
+
+[ext_resource type="Shape2D" uid="uid://cqyj3i1vf3w47" path="res://data/geometry/interactables/box/box.tres" id="2_g4e7c"]
+[ext_resource type="Texture2D" uid="uid://kxrjc3v8k5q1" path="res://icon/item/platform/b_small.svg" id="3_bbqui"]
+[ext_resource type="PackedScene" uid="uid://bocuu344hsqv" path="res://def/hud/util/fov.tscn" id="5_r7lfd"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_8n0ma"]
+a = Vector2(-4, 0)
+b = Vector2(4, 0)
+
+[node name="small_box" type="AnimatableBody2D" groups=["box"]]
+collision_layer = 3
+collision_mask = 536870913
+sync_to_physics = false
+
+[node name="view" type="Sprite2D" parent="."]
+position = Vector2(-32, -60)
+texture = ExtResource("3_bbqui")
+centered = false
+
+[node name="geometry" type="CollisionShape2D" parent="."]
+position = Vector2(0, -7.5)
+shape = ExtResource("2_g4e7c")
+
+[node name="press" type="Area2D" parent="."]
+position = Vector2(0, -9)
+collision_layer = 0
+collision_mask = 32768
+
+[node name="geometry" type="CollisionShape2D" parent="press"]
+shape = SubResource("SegmentShape2D_8n0ma")
+
+[node name="fov" parent="." instance=ExtResource("5_r7lfd")]
+visible = false
+position = Vector2(1, -29)
+scale = Vector2(2, 2)
+rect = Rect2(-18, -19, 35, 35)

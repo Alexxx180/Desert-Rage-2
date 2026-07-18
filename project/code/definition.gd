@@ -136,8 +136,6 @@ const xp: StringName = &"res://now/hud/status/xp.tscn"
 const hits: StringName = &"res://now/hud/status/hits.tscn"
 const game: StringName = &"res://now/hud/game.tscn"
 const stats: StringName = &"res://now/hud/game/stats.tscn"
-const ray_mirror: StringName = &"res://now/see/mirror/ray.tscn"
-const rock_mirror: StringName = &"res://now/see/mirror/rock.tscn"
 const input: StringName = &"res://now/work/hero/named/%s.tscn"
 const world: StringName = &"res://now/work/hero/world/%s.tscn"
 const progress: StringName = &"user://progress.txt"
@@ -147,6 +145,8 @@ const title: StringName = &"res://pre/ui/menu/title.tscn"
 const fire: StringName = &"res://pre/particle/fire/fire.tscn"
 const rain: StringName = &"res://pre/particle/rain/rain.tscn"
 const card: StringName = &"res://now/hud/hud/priorities/card.tscn"
+
+const mirror: Array[StringName] = [&"res://now/see/mirror/ray.tscn", &"res://now/see/mirror/rock.tscn"]
 
 # PRELOADS
 # const sand: PackedScene = preload("res://pre/particle/sand.tscn")

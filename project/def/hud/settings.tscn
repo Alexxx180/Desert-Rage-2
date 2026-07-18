@@ -1,0 +1,2803 @@
+[gd_scene load_steps=78 format=3 uid="uid://b4x588yxrcok3"]
+
+[ext_resource type="Theme" uid="uid://dfyi7rrcrweqx" path="res://data/theme/patterns/template/menu/settings/settings.tres" id="1_vs08l"]
+[ext_resource type="Theme" uid="uid://0bwoefj0wlcw" path="res://data/theme/patterns/template/menu/settings/topic/option.tres" id="2_ull8j"]
+[ext_resource type="StyleBox" uid="uid://belpqiw77873x" path="res://data/theme/slider/horizontal/area-grabber.tres" id="3_j0acm"]
+[ext_resource type="StyleBox" uid="uid://cjukg7l6l1urx" path="res://data/theme/slider/horizontal/area-slider.tres" id="4_ow36w"]
+[ext_resource type="StyleBox" uid="uid://dfwghdfkosy7u" path="res://data/theme/slider/horizontal/area-highlight.tres" id="5_thq8p"]
+[ext_resource type="Theme" uid="uid://y1o83ldh4al2" path="res://data/theme/patterns/template/menu/settings/topic/header/header.tres" id="6_kbam3"]
+[ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://data/theme/patterns/template/menu/settings/topic/footer.tres" id="8_j2b4r"]
+[ext_resource type="FontFile" uid="uid://tledodlx6okb" path="res://data/font/LTSuperiorMono-Semibold.otf" id="12_jw263"]
+[ext_resource type="FontFile" uid="uid://b2wbdbnkxcqv1" path="res://data/font/noto_sans/NotoEmoji-VariableFont_wght.ttf" id="13_owwju"]
+[ext_resource type="Shortcut" uid="uid://bgd4ocokxr1wj" path="res://data/short/cut/pause.tres" id="14_n4pyq"]
+[ext_resource type="InputEventKey" uid="uid://cjlyrqdxoernq" path="res://data/short/device/keyboard/key/ctrl/tab.tres" id="16_yw7xu"]
+[ext_resource type="InputEventKey" uid="uid://d24fadfa7hd1w" path="res://data/short/device/keyboard/key/alt/two.tres" id="17_wy3ld"]
+[ext_resource type="InputEventJoypadMotion" uid="uid://lythe86smbls" path="res://data/short/device/gamepad/stick/right/right.tres" id="18_5iaie"]
+[ext_resource type="PackedScene" uid="uid://bwxmswjunrdab" path="res://def/hud/game/menu/settings/interface.tscn" id="25_dkpam"]
+[ext_resource type="FontFile" uid="uid://o0rgn7d13mr3" path="res://data/font/OpenSans-VariableFont_wdth,wght.ttf" id="48_phdgj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ohse5"]
+content_margin_left = 35.0
+content_margin_top = 30.0
+content_margin_right = 35.0
+content_margin_bottom = 30.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aers8"]
+content_margin_left = 14.0
+content_margin_top = 12.0
+content_margin_right = 14.0
+content_margin_bottom = 12.0
+bg_color = Color(0, 0, 0.0235294, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.588235, 0.588235, 0.588235, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qibg1"]
+content_margin_left = 14.0
+content_margin_top = 12.0
+content_margin_right = 14.0
+content_margin_bottom = 12.0
+bg_color = Color(0, 0, 0.0235294, 0)
+border_width_right = 2
+border_color = Color(0.588235, 0.588235, 0.588235, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jw263"]
+content_margin_left = 14.0
+content_margin_top = 12.0
+content_margin_right = 14.0
+content_margin_bottom = 12.0
+bg_color = Color(0, 0, 0.0235294, 1)
+border_width_right = 2
+border_color = Color(0.0392157, 0.0392157, 0.0392157, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1um0r"]
+content_margin_left = 14.0
+content_margin_top = 12.0
+content_margin_right = 14.0
+content_margin_bottom = 12.0
+bg_color = Color(0, 0, 0.235294, 1)
+
+[sub_resource type="Theme" id="Theme_jw263"]
+Button/constants/line_spacing = -2
+Button/font_sizes/font_size = 24
+Button/fonts/font = ExtResource("12_jw263")
+Button/styles/focus = SubResource("StyleBoxFlat_aers8")
+Button/styles/hover = SubResource("StyleBoxFlat_qibg1")
+Button/styles/normal = SubResource("StyleBoxFlat_jw263")
+Button/styles/pressed = SubResource("StyleBoxFlat_1um0r")
+
+[sub_resource type="Shortcut" id="Shortcut_xycy2"]
+events = [ExtResource("16_yw7xu"), ExtResource("17_wy3ld"), ExtResource("18_5iaie")]
+
+[sub_resource type="GDScript" id="GDScript_5q7c8"]
+script/source = "extends Button
+
+@onready var short: Node = $shortcut
+
+func feedback() -> void: pressed.emit()
+"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_owwju"]
+content_margin_left = 6.0
+content_margin_top = 9.0
+content_margin_right = 6.0
+content_margin_bottom = 9.0
+bg_color = Color(0, 0, 0.0235294, 1)
+border_width_right = 2
+border_color = Color(0.0392157, 0.0392157, 0.0392157, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0qh8n"]
+content_margin_left = 6.0
+content_margin_top = 9.0
+content_margin_right = 6.0
+content_margin_bottom = 9.0
+bg_color = Color(0, 0, 0, 1)
+border_width_right = 2
+border_color = Color(0.588235, 0.588235, 0.588235, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fmjjx"]
+content_margin_left = 6.0
+content_margin_top = 9.0
+content_margin_right = 6.0
+content_margin_bottom = 9.0
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.588235, 0.588235, 0.588235, 1)
+
+[sub_resource type="Gradient" id="Gradient_n1w43"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_o3d5i"]
+gradient = SubResource("Gradient_n1w43")
+width = 1
+
+[sub_resource type="Gradient" id="Gradient_fo1a0"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_36r8i"]
+gradient = SubResource("Gradient_fo1a0")
+width = 1
+
+[sub_resource type="Gradient" id="Gradient_c1lch"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ktnei"]
+gradient = SubResource("Gradient_c1lch")
+width = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hmqgx"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1821x"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ptro4"]
+content_margin_left = 30.0
+content_margin_right = 30.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_bottom = 2
+border_color = Color(0.588235, 0.588235, 0.588235, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5qe8d"]
+content_margin_left = 30.0
+content_margin_right = 30.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ig4ol"]
+content_margin_left = 30.0
+content_margin_right = 30.0
+bg_color = Color(0, 0, 0.235294, 1)
+
+[sub_resource type="Gradient" id="Gradient_rbsui"]
+colors = PackedColorArray(0.0392157, 0.0392157, 0.0392157, 1, 0.0235294, 0.0235294, 0.0235294, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_c2rqr"]
+gradient = SubResource("Gradient_rbsui")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_egcsm"]
+content_margin_left = 30.0
+content_margin_right = 30.0
+texture = SubResource("GradientTexture2D_c2rqr")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aujbd"]
+content_margin_left = 30.0
+content_margin_right = 30.0
+bg_color = Color(0, 0, 0.0117647, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pyihq"]
+bg_color = Color(0.27451, 0.27451, 0.27451, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wtl5k"]
+bg_color = Color(0.589096, 0.589096, 0.589096, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lkcqr"]
+bg_color = Color(0.470076, 0.470076, 0.470076, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7c0ot"]
+content_margin_left = 3.0
+content_margin_right = 3.0
+bg_color = Color(0.0196078, 0.0196078, 0.0196078, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3fmnv"]
+content_margin_left = 3.0
+content_margin_right = 3.0
+bg_color = Color(0.0196078, 0.0196078, 0.0196078, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.588235, 0.588235, 0.588235, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t7tjv"]
+content_margin_left = 30.0
+content_margin_right = 30.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_110vh"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_srttv"]
+bg_color = Color(0.27451, 0.27451, 0.27451, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kcdof"]
+bg_color = Color(0.589096, 0.589096, 0.589096, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6erlc"]
+bg_color = Color(0.470076, 0.470076, 0.470076, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tfsdq"]
+content_margin_left = 3.0
+content_margin_right = 3.0
+bg_color = Color(0.0196078, 0.0196078, 0.0196078, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_84e0e"]
+content_margin_left = 3.0
+content_margin_right = 3.0
+bg_color = Color(0.0196078, 0.0196078, 0.0196078, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.588235, 0.588235, 0.588235, 1)
+
+[sub_resource type="Theme" id="Theme_icevt"]
+Button/colors/font_color = Color(0.784314, 0.784314, 0.784314, 1)
+Button/font_sizes/font_size = 20
+Button/fonts/font = ExtResource("48_phdgj")
+Button/styles/disabled = SubResource("StyleBoxFlat_ptro4")
+Button/styles/focus = SubResource("StyleBoxFlat_5qe8d")
+Button/styles/hover = SubResource("StyleBoxFlat_ptro4")
+Button/styles/hover_pressed = SubResource("StyleBoxFlat_ig4ol")
+Button/styles/normal = SubResource("StyleBoxTexture_egcsm")
+Button/styles/pressed = SubResource("StyleBoxFlat_aujbd")
+HBoxContainer/constants/separation = 2
+HFlowContainer/constants/v_separation = 4
+HScrollBar/styles/grabber = SubResource("StyleBoxFlat_pyihq")
+HScrollBar/styles/grabber_highlight = SubResource("StyleBoxFlat_wtl5k")
+HScrollBar/styles/grabber_pressed = SubResource("StyleBoxFlat_lkcqr")
+HScrollBar/styles/scroll = SubResource("StyleBoxFlat_7c0ot")
+HScrollBar/styles/scroll_focus = SubResource("StyleBoxFlat_3fmnv")
+Label/colors/font_color = Color(0.784314, 0.784314, 0.784314, 1)
+Label/font_sizes/font_size = 23
+Label/fonts/font = ExtResource("48_phdgj")
+Label/styles/normal = SubResource("StyleBoxEmpty_t7tjv")
+MarginContainer/constants/margin_bottom = 10
+MarginContainer/constants/margin_left = 30
+MarginContainer/constants/margin_right = 30
+MarginContainer/constants/margin_top = 0
+Panel/styles/panel = SubResource("StyleBoxFlat_110vh")
+VBoxContainer/constants/separation = 8
+VScrollBar/styles/grabber = SubResource("StyleBoxFlat_srttv")
+VScrollBar/styles/grabber_highlight = SubResource("StyleBoxFlat_kcdof")
+VScrollBar/styles/grabber_pressed = SubResource("StyleBoxFlat_6erlc")
+VScrollBar/styles/scroll = SubResource("StyleBoxFlat_tfsdq")
+VScrollBar/styles/scroll_focus = SubResource("StyleBoxFlat_84e0e")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_phdgj"]
+content_margin_left = 30.0
+content_margin_right = 30.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rbsui"]
+content_margin_left = 30.0
+content_margin_right = 30.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_bottom = 2
+border_color = Color(0.588235, 0.588235, 0.588235, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c2rqr"]
+content_margin_left = 30.0
+content_margin_right = 30.0
+bg_color = Color(0, 0, 0.235294, 1)
+
+[sub_resource type="Gradient" id="Gradient_egcsm"]
+colors = PackedColorArray(0.0235294, 0.0235294, 0.0235294, 1, 0.0117647, 0.0117647, 0.0117647, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_aujbd"]
+gradient = SubResource("Gradient_egcsm")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_pyihq"]
+content_margin_left = 30.0
+content_margin_right = 30.0
+texture = SubResource("GradientTexture2D_aujbd")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t7tjv"]
+content_margin_left = 30.0
+content_margin_right = 30.0
+bg_color = Color(0, 0, 0.0117647, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_icevt"]
+bg_color = Color(0.27451, 0.27451, 0.27451, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kwa7j"]
+bg_color = Color(0.589096, 0.589096, 0.589096, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4ibhr"]
+bg_color = Color(0.470076, 0.470076, 0.470076, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6i8jf"]
+content_margin_left = 3.0
+content_margin_right = 3.0
+bg_color = Color(0.0196078, 0.0196078, 0.0196078, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_es5ao"]
+content_margin_left = 3.0
+content_margin_right = 3.0
+bg_color = Color(0.0196078, 0.0196078, 0.0196078, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.588235, 0.588235, 0.588235, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_l5pv6"]
+content_margin_left = 30.0
+content_margin_right = 30.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jbkcr"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nm3pk"]
+bg_color = Color(0.27451, 0.27451, 0.27451, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o6wu7"]
+bg_color = Color(0.589096, 0.589096, 0.589096, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ilv8b"]
+bg_color = Color(0.470076, 0.470076, 0.470076, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yi8ef"]
+content_margin_left = 3.0
+content_margin_right = 3.0
+bg_color = Color(0.0196078, 0.0196078, 0.0196078, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4bp2y"]
+content_margin_left = 3.0
+content_margin_right = 3.0
+bg_color = Color(0.0196078, 0.0196078, 0.0196078, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.588235, 0.588235, 0.588235, 1)
+
+[sub_resource type="Theme" id="Theme_5hw7m"]
+Button/colors/font_color = Color(0.784314, 0.784314, 0.784314, 1)
+Button/font_sizes/font_size = 20
+Button/fonts/font = ExtResource("48_phdgj")
+Button/styles/focus = SubResource("StyleBoxFlat_phdgj")
+Button/styles/hover = SubResource("StyleBoxFlat_rbsui")
+Button/styles/hover_pressed = SubResource("StyleBoxFlat_c2rqr")
+Button/styles/normal = SubResource("StyleBoxTexture_pyihq")
+Button/styles/pressed = SubResource("StyleBoxFlat_t7tjv")
+HBoxContainer/constants/separation = 2
+HFlowContainer/constants/v_separation = 4
+HScrollBar/styles/grabber = SubResource("StyleBoxFlat_icevt")
+HScrollBar/styles/grabber_highlight = SubResource("StyleBoxFlat_kwa7j")
+HScrollBar/styles/grabber_pressed = SubResource("StyleBoxFlat_4ibhr")
+HScrollBar/styles/scroll = SubResource("StyleBoxFlat_6i8jf")
+HScrollBar/styles/scroll_focus = SubResource("StyleBoxFlat_es5ao")
+Label/colors/font_color = Color(0.784314, 0.784314, 0.784314, 1)
+Label/font_sizes/font_size = 23
+Label/fonts/font = ExtResource("48_phdgj")
+Label/styles/normal = SubResource("StyleBoxEmpty_l5pv6")
+MarginContainer/constants/margin_bottom = 10
+MarginContainer/constants/margin_left = 30
+MarginContainer/constants/margin_right = 30
+MarginContainer/constants/margin_top = 0
+Panel/styles/panel = SubResource("StyleBoxFlat_jbkcr")
+VBoxContainer/constants/separation = 8
+VScrollBar/styles/grabber = SubResource("StyleBoxFlat_nm3pk")
+VScrollBar/styles/grabber_highlight = SubResource("StyleBoxFlat_o6wu7")
+VScrollBar/styles/grabber_pressed = SubResource("StyleBoxFlat_ilv8b")
+VScrollBar/styles/scroll = SubResource("StyleBoxFlat_yi8ef")
+VScrollBar/styles/scroll_focus = SubResource("StyleBoxFlat_4bp2y")
+
+[sub_resource type="Gradient" id="Gradient_x27hw"]
+offsets = PackedFloat32Array(0.6651376, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ah02g"]
+gradient = SubResource("Gradient_x27hw")
+fill_from = Vector2(0.5, 1)
+fill_to = Vector2(0.5, 0)
+metadata/_snap_enabled = true
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_oaat3"]
+texture = SubResource("GradientTexture2D_ah02g")
+
+[node name="see" type="Panel"]
+process_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_right = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_vs08l")
+
+[node name="content" type="ScrollContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_ohse5")
+follow_focus = true
+vertical_scroll_mode = 2
+
+[node name="options" type="VBoxContainer" parent="content"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+theme_override_constants/separation = 35
+
+[node name="title" type="HBoxContainer" parent="content/options"]
+layout_mode = 2
+
+[node name="exit" type="Button" parent="content/options/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.9
+theme = SubResource("Theme_jw263")
+shortcut = SubResource("Shortcut_xycy2")
+text = "Выйти из настроек"
+alignment = 0
+autowrap_mode = 1
+script = SubResource("GDScript_5q7c8")
+
+[node name="experience" type="Button" parent="content/options/title"]
+custom_minimum_size = Vector2(45, 45)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_stretch_ratio = 0.05
+theme_override_constants/line_spacing = -2
+theme_override_fonts/font = ExtResource("13_owwju")
+theme_override_font_sizes/font_size = 28
+theme_override_styles/normal = SubResource("StyleBoxFlat_owwju")
+theme_override_styles/hover = SubResource("StyleBoxFlat_0qh8n")
+theme_override_styles/focus = SubResource("StyleBoxFlat_fmjjx")
+shortcut = ExtResource("14_n4pyq")
+text = "🪡"
+
+[node name="interface" type="Button" parent="content/options/title"]
+custom_minimum_size = Vector2(45, 45)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_stretch_ratio = 0.05
+theme_override_constants/line_spacing = -2
+theme_override_fonts/font = ExtResource("13_owwju")
+theme_override_font_sizes/font_size = 28
+theme_override_styles/normal = SubResource("StyleBoxFlat_owwju")
+theme_override_styles/hover = SubResource("StyleBoxFlat_0qh8n")
+theme_override_styles/focus = SubResource("StyleBoxFlat_fmjjx")
+shortcut = ExtResource("14_n4pyq")
+text = "📺"
+
+[node name="mouse" type="Button" parent="content/options/title"]
+custom_minimum_size = Vector2(45, 45)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_stretch_ratio = 0.05
+theme_override_constants/line_spacing = -2
+theme_override_fonts/font = ExtResource("13_owwju")
+theme_override_font_sizes/font_size = 28
+theme_override_styles/normal = SubResource("StyleBoxFlat_owwju")
+theme_override_styles/hover = SubResource("StyleBoxFlat_0qh8n")
+theme_override_styles/focus = SubResource("StyleBoxFlat_fmjjx")
+shortcut = ExtResource("14_n4pyq")
+text = "🖱"
+
+[node name="keyboard" type="Button" parent="content/options/title"]
+custom_minimum_size = Vector2(45, 45)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_stretch_ratio = 0.05
+theme_override_constants/line_spacing = -2
+theme_override_fonts/font = ExtResource("13_owwju")
+theme_override_font_sizes/font_size = 28
+theme_override_styles/normal = SubResource("StyleBoxFlat_owwju")
+theme_override_styles/hover = SubResource("StyleBoxFlat_0qh8n")
+theme_override_styles/focus = SubResource("StyleBoxFlat_fmjjx")
+shortcut = ExtResource("14_n4pyq")
+text = "⌨️"
+
+[node name="gamepad" type="Button" parent="content/options/title"]
+custom_minimum_size = Vector2(45, 45)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_stretch_ratio = 0.05
+theme_override_constants/line_spacing = -2
+theme_override_fonts/font = ExtResource("13_owwju")
+theme_override_font_sizes/font_size = 28
+theme_override_styles/normal = SubResource("StyleBoxFlat_owwju")
+theme_override_styles/hover = SubResource("StyleBoxFlat_0qh8n")
+theme_override_styles/focus = SubResource("StyleBoxFlat_fmjjx")
+shortcut = ExtResource("14_n4pyq")
+text = "🎮"
+
+[node name="experience" type="GridContainer" parent="content/options"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 10
+theme = ExtResource("2_ull8j")
+columns = 4
+
+[node name="header" type="Button" parent="content/options/experience"]
+custom_minimum_size = Vector2(300, 45)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("6_kbam3")
+text = "SGMT"
+alignment = 0
+
+[node name="music" parent="content/options/experience" instance=ExtResource("25_dkpam")]
+layout_mode = 2
+
+[node name="sound" parent="content/options/experience" instance=ExtResource("25_dkpam")]
+layout_mode = 2
+
+[node name="interface" parent="content/options/experience" instance=ExtResource("25_dkpam")]
+layout_mode = 2
+
+[node name="system" type="Button" parent="content/options/experience"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "SDST"
+alignment = 0
+
+[node name="difficulty" type="Button" parent="content/options/experience"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "SDFT"
+alignment = 0
+
+[node name="status" type="Label" parent="content/options/experience/difficulty"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -77.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "SDFS"
+
+[node name="dcasual" type="Button" parent="content/options/experience"]
+visible = false
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "SDCS"
+alignment = 0
+
+[node name="dsuitable" type="Button" parent="content/options/experience"]
+visible = false
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "SDST"
+alignment = 0
+
+[node name="narrative" type="Button" parent="content/options/experience"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "SNRT"
+alignment = 0
+
+[node name="status" type="Label" parent="content/options/experience/narrative"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -61.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "SON"
+
+[node name="logs" type="Button" parent="content/options/experience"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "SQTS"
+alignment = 0
+
+[node name="status" type="Label" parent="content/options/experience/logs"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -61.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "SON"
+
+[node name="help" type="Button" parent="content/options/experience"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "SGMH"
+alignment = 0
+
+[node name="status" type="Label" parent="content/options/experience/help"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -61.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "SON"
+
+[node name="press" type="Button" parent="content/options/experience"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "SFIX"
+alignment = 0
+
+[node name="status" type="Label" parent="content/options/experience/press"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -61.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "SON"
+
+[node name="interface" type="GridContainer" parent="content/options"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 10
+theme = ExtResource("2_ull8j")
+columns = 4
+
+[node name="header" type="Button" parent="content/options/interface"]
+custom_minimum_size = Vector2(300, 45)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("6_kbam3")
+text = "SIFT"
+alignment = 0
+
+[node name="language" type="Button" parent="content/options/interface"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "SLNM"
+alignment = 0
+
+[node name="status" type="Label" parent="content/options/interface/language"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -104.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "SLNG"
+
+[node name="lenglish" type="Button" parent="content/options/interface"]
+visible = false
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "English"
+alignment = 0
+
+[node name="lrussian" type="Button" parent="content/options/interface"]
+visible = false
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Русский"
+alignment = 0
+
+[node name="screen" type="Button" parent="content/options/interface"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "SFSN"
+alignment = 0
+
+[node name="combo" type="Button" parent="content/options/interface"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "SCMB"
+alignment = 0
+
+[node name="status" type="Label" parent="content/options/interface/combo"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -82.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "x3"
+
+[node name="ctoggle" type="HBoxContainer" parent="content/options/interface"]
+visible = false
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="coff" type="Button" parent="content/options/interface/ctoggle"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "SOFF"
+alignment = 0
+
+[node name="con" type="Button" parent="content/options/interface/ctoggle"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "SON"
+alignment = 0
+
+[node name="ccount" type="HBoxContainer" parent="content/options/interface"]
+visible = false
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="c3" type="Button" parent="content/options/interface/ccount"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "3"
+
+[node name="c4" type="Button" parent="content/options/interface/ccount"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "4"
+
+[node name="c5" type="Button" parent="content/options/interface/ccount"]
+visible = false
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "5"
+
+[node name="c6" type="Button" parent="content/options/interface/ccount"]
+visible = false
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "6"
+
+[node name="mouse" type="GridContainer" parent="content/options"]
+layout_mode = 2
+columns = 4
+
+[node name="header" type="Button" parent="content/options/mouse"]
+custom_minimum_size = Vector2(300, 45)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("6_kbam3")
+text = "SMST"
+alignment = 0
+
+[node name="sensitivity" type="HSlider" parent="content/options/mouse"]
+visible = false
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+focus_mode = 1
+theme_override_icons/grabber = SubResource("GradientTexture1D_o3d5i")
+theme_override_icons/grabber_highlight = SubResource("GradientTexture1D_36r8i")
+theme_override_icons/grabber_disabled = SubResource("GradientTexture1D_ktnei")
+theme_override_styles/slider = ExtResource("4_ow36w")
+theme_override_styles/grabber_area = ExtResource("3_j0acm")
+theme_override_styles/grabber_area_highlight = ExtResource("5_thq8p")
+max_value = 20.0
+value = 10.0
+
+[node name="form" type="Panel" parent="content/options/mouse/sensitivity"]
+custom_minimum_size = Vector2(0, 58)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_hmqgx")
+
+[node name="caption" type="Label" parent="content/options/mouse/sensitivity/form"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -14.0
+offset_right = 236.0
+offset_bottom = 14.0
+grow_vertical = 2
+size_flags_horizontal = 3
+text = "SSVT"
+
+[node name="state" type="MarginContainer" parent="content/options/mouse/sensitivity/form"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -338.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 0
+
+[node name="manual" type="Button" parent="content/options/mouse/sensitivity/form/state"]
+custom_minimum_size = Vector2(50, 20)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_styles/normal = SubResource("StyleBoxEmpty_1821x")
+text = "10"
+
+[node name="movement" type="Button" parent="content/options/mouse"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "SMVT"
+alignment = 0
+
+[node name="status" type="Label" parent="content/options/mouse/movement"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -109.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "LMB + RMB"
+horizontal_alignment = 2
+
+[node name="skills" type="HBoxContainer" parent="content/options/mouse"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="enter" type="Button" parent="content/options/mouse/skills"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+theme = SubResource("Theme_icevt")
+text = "SSKIL"
+alignment = 0
+
+[node name="collapse" type="Button" parent="content/options/mouse/skills"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+theme = SubResource("Theme_5hw7m")
+text = "SRMB"
+alignment = 2
+
+[node name="hands" type="Button" parent="content/options/mouse"]
+visible = false
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "SHND"
+alignment = 0
+
+[node name="status" type="Label" parent="content/options/mouse/hands"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -102.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "LMB"
+horizontal_alignment = 2
+
+[node name="legs" type="Button" parent="content/options/mouse"]
+visible = false
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "SLEG"
+alignment = 0
+
+[node name="status" type="Label" parent="content/options/mouse/legs"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -104.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "RMB"
+
+[node name="skill_1" type="Button" parent="content/options/mouse"]
+visible = false
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "SAB1"
+alignment = 0
+
+[node name="status" type="Label" parent="content/options/mouse/skill_1"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -157.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "S.UP"
+horizontal_alignment = 2
+
+[node name="skill_2" type="Button" parent="content/options/mouse"]
+visible = false
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "SAB2"
+alignment = 0
+
+[node name="status" type="Label" parent="content/options/mouse/skill_2"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -157.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "S.DOWN"
+horizontal_alignment = 2
+
+[node name="subjects" type="HBoxContainer" parent="content/options/mouse"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="enter" type="Button" parent="content/options/mouse/subjects"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+theme = SubResource("Theme_icevt")
+text = "SINV"
+alignment = 0
+
+[node name="collapse" type="Button" parent="content/options/mouse/subjects"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+theme = SubResource("Theme_5hw7m")
+text = "E + R, R"
+alignment = 2
+text_overrun_behavior = 3
+
+[node name="inventory_prev" type="Button" parent="content/options/mouse"]
+visible = false
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "SPRV"
+alignment = 0
+
+[node name="status" type="Label" parent="content/options/mouse/inventory_prev"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -166.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "RMB + S.Up"
+horizontal_alignment = 2
+
+[node name="inventory_next" type="Button" parent="content/options/mouse"]
+visible = false
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "SNXT"
+alignment = 0
+
+[node name="status" type="Label" parent="content/options/mouse/inventory_next"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -166.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "RMB + S.Down"
+horizontal_alignment = 2
+
+[node name="fire" type="Button" parent="content/options/mouse"]
+visible = false
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "SFIR"
+alignment = 0
+
+[node name="status" type="Label" parent="content/options/mouse/fire"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -164.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "RMB + LMB"
+horizontal_alignment = 2
+
+[node name="combo" type="Button" parent="content/options/mouse"]
+visible = false
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "SAIM"
+alignment = 0
+
+[node name="status" type="Label" parent="content/options/mouse/combo"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -109.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "LMB + S.Up"
+horizontal_alignment = 2
+
+[node name="gestures" type="MarginContainer" parent="content/options"]
+custom_minimum_size = Vector2(300, 30)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = -30
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="pan" type="ScrollContainer" parent="content/options/gestures"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+theme = ExtResource("1_vs08l")
+scroll_vertical = 100
+vertical_scroll_mode = 2
+
+[node name="background" type="ColorRect" parent="content/options/gestures/pan"]
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 2
+size_flags_horizontal = 3
+color = Color(0, 0, 0, 1)
+
+[node name="caption" type="Label" parent="content/options/gestures"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("8_j2b4r")
+text = "Поместите сюда курсор мыши и вводите здесь!"
+horizontal_alignment = 1
+
+[node name="keyboard" type="GridContainer" parent="content/options"]
+layout_mode = 2
+columns = 4
+
+[node name="header" type="Button" parent="content/options/keyboard"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("6_kbam3")
+text = "SKDT"
+alignment = 0
+
+[node name="movement" type="HBoxContainer" parent="content/options/keyboard"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+theme_override_constants/separation = 0
+
+[node name="enter" type="Button" parent="content/options/keyboard/movement"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+action_mode = 0
+text = "SMVT"
+alignment = 0
+
+[node name="collapse" type="Button" parent="content/options/keyboard/movement"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+text = "WASD"
+alignment = 2
+text_overrun_behavior = 4
+
+[node name="forward" type="Button" parent="content/options/keyboard"]
+visible = false
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+text = "SFWD"
+alignment = 0
+
+[node name="status" type="Label" parent="content/options/keyboard/forward"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -79.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "W"
+
+[node name="backward" type="Button" parent="content/options/keyboard"]
+visible = false
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+text = "SBWD"
+alignment = 0
+
+[node name="status" type="Label" parent="content/options/keyboard/backward"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -71.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "S"
+
+[node name="left" type="Button" parent="content/options/keyboard"]
+visible = false
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+text = "SLFT"
+alignment = 0
+
+[node name="status" type="Label" parent="content/options/keyboard/left"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -73.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "A"
+
+[node name="right" type="Button" parent="content/options/keyboard"]
+visible = false
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+text = "SRHT"
+alignment = 0
+
+[node name="status" type="Label" parent="content/options/keyboard/right"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -75.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "D"
+
+[node name="skills" type="HBoxContainer" parent="content/options/keyboard"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+theme_override_constants/separation = 0
+
+[node name="enter" type="Button" parent="content/options/keyboard/skills"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+theme = SubResource("Theme_icevt")
+text = "SSKIL"
+alignment = 0
+
+[node name="collapse" type="Button" parent="content/options/keyboard/skills"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+theme = SubResource("Theme_5hw7m")
+text = "QECV"
+alignment = 2
+
+[node name="hands" type="Button" parent="content/options/keyboard"]
+visible = false
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+text = "SHND"
+alignment = 0
+
+[node name="status" type="Label" parent="content/options/keyboard/hands"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -72.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "E"
+
+[node name="legs" type="Button" parent="content/options/keyboard"]
+visible = false
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+text = "SLEG"
+alignment = 0
+
+[node name="status" type="Label" parent="content/options/keyboard/legs"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -72.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "X"
+
+[node name="skill_1" type="Button" parent="content/options/keyboard"]
+visible = false
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+text = "SAB1"
+alignment = 0
+
+[node name="status" type="Label" parent="content/options/keyboard/skill_1"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -73.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "C"
+
+[node name="skill_2" type="Button" parent="content/options/keyboard"]
+visible = false
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+text = "SAB2"
+alignment = 0
+
+[node name="status" type="Label" parent="content/options/keyboard/skill_2"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -72.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "V"
+
+[node name="quick" type="HBoxContainer" parent="content/options/keyboard"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+theme_override_constants/separation = 0
+
+[node name="enter" type="Button" parent="content/options/keyboard/quick"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+theme = SubResource("Theme_icevt")
+text = "SQCK"
+alignment = 0
+
+[node name="collapse" type="Button" parent="content/options/keyboard/quick"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+theme = SubResource("Theme_5hw7m")
+text = "E + R, R"
+alignment = 2
+text_overrun_behavior = 3
+
+[node name="team" type="Button" parent="content/options/keyboard"]
+visible = false
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+text = "SHSL"
+alignment = 0
+
+[node name="status" type="Label" parent="content/options/keyboard/team"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -72.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "T"
+
+[node name="group" type="Button" parent="content/options/keyboard"]
+visible = false
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+text = "SGRP"
+alignment = 0
+
+[node name="status" type="Label" parent="content/options/keyboard/group"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -75.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "G"
+
+[node name="quick_heal" type="Button" parent="content/options/keyboard"]
+visible = false
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+text = "SSQH"
+alignment = 0
+
+[node name="status" type="Label" parent="content/options/keyboard/quick_heal"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -73.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "R"
+
+[node name="quick_refresh" type="Button" parent="content/options/keyboard"]
+visible = false
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+text = "SSQR"
+alignment = 0
+
+[node name="status" type="Label" parent="content/options/keyboard/quick_refresh"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -73.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "R"
+
+[node name="subjects" type="HBoxContainer" parent="content/options/keyboard"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+theme_override_constants/separation = 0
+
+[node name="enter" type="Button" parent="content/options/keyboard/subjects"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+theme = SubResource("Theme_icevt")
+text = "SINV"
+alignment = 0
+
+[node name="collapse" type="Button" parent="content/options/keyboard/subjects"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+theme = SubResource("Theme_5hw7m")
+text = "E + R, R"
+alignment = 2
+text_overrun_behavior = 3
+
+[node name="inventory_prev" type="Button" parent="content/options/keyboard"]
+visible = false
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+text = "SINV"
+alignment = 0
+
+[node name="status" type="Label" parent="content/options/keyboard/inventory_prev"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -166.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "Tab + 2"
+horizontal_alignment = 2
+
+[node name="inventory_next" type="Button" parent="content/options/keyboard"]
+visible = false
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+text = "SINV"
+alignment = 0
+
+[node name="status" type="Label" parent="content/options/keyboard/inventory_next"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -166.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "Tab + 3"
+horizontal_alignment = 2
+
+[node name="fire" type="Button" parent="content/options/keyboard"]
+visible = false
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+text = "SFIR"
+alignment = 0
+
+[node name="status" type="Label" parent="content/options/keyboard/fire"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -72.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "F"
+
+[node name="combo" type="Button" parent="content/options/keyboard"]
+visible = false
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+text = "SAIM"
+alignment = 0
+
+[node name="status" type="Label" parent="content/options/keyboard/combo"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -109.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "LMB + S.Up"
+horizontal_alignment = 2
+
+[node name="luggage" type="HBoxContainer" parent="content/options/keyboard"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+theme_override_constants/separation = 0
+
+[node name="enter" type="Button" parent="content/options/keyboard/luggage"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+theme = SubResource("Theme_icevt")
+text = "SLGG"
+alignment = 0
+
+[node name="collapse" type="Button" parent="content/options/keyboard/luggage"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+theme = SubResource("Theme_5hw7m")
+text = "Ctrl + Up, Ctrl + Left"
+alignment = 2
+text_overrun_behavior = 3
+
+[node name="inventory" type="Button" parent="content/options/keyboard"]
+visible = false
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+text = "SINV"
+alignment = 0
+
+[node name="status" type="Label" parent="content/options/keyboard/inventory"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -88.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "CU"
+
+[node name="equipment" type="Button" parent="content/options/keyboard"]
+visible = false
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+text = "HEQT"
+alignment = 0
+
+[node name="status" type="Label" parent="content/options/keyboard/equipment"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -84.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "CL"
+
+[node name="ability" type="Button" parent="content/options/keyboard"]
+visible = false
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+text = "SABY"
+alignment = 0
+
+[node name="status" type="Label" parent="content/options/keyboard/ability"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -88.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "CD"
+
+[node name="priorities" type="Button" parent="content/options/keyboard"]
+visible = false
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+text = "HPST"
+alignment = 0
+
+[node name="status" type="Label" parent="content/options/keyboard/priorities"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -85.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "CR"
+
+[node name="options" type="HBoxContainer" parent="content/options/keyboard"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+theme_override_constants/separation = 0
+
+[node name="enter" type="Button" parent="content/options/keyboard/options"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+theme = SubResource("Theme_icevt")
+text = "SOPT"
+alignment = 0
+
+[node name="collapse" type="Button" parent="content/options/keyboard/options"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+theme = SubResource("Theme_5hw7m")
+text = "F2, F3, F4, F5"
+alignment = 2
+text_overrun_behavior = 3
+
+[node name="map" type="Button" parent="content/options/keyboard"]
+visible = false
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+text = "SMAP"
+alignment = 0
+
+[node name="status" type="Label" parent="content/options/keyboard/map"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -82.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "F2"
+
+[node name="settings" type="Button" parent="content/options/keyboard"]
+visible = false
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+text = "STNS"
+alignment = 0
+
+[node name="status" type="Label" parent="content/options/keyboard/settings"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -82.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "F3"
+
+[node name="main_menu" type="Button" parent="content/options/keyboard"]
+visible = false
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+text = "SMNM"
+alignment = 0
+
+[node name="status" type="Label" parent="content/options/keyboard/main_menu"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -82.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "F4"
+
+[node name="checkpoint" type="Button" parent="content/options/keyboard"]
+visible = false
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+text = "SLDC"
+alignment = 0
+
+[node name="status" type="Label" parent="content/options/keyboard/checkpoint"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -82.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "F5"
+
+[node name="fast_load" type="Button" parent="content/options/keyboard"]
+visible = false
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+text = "SFLD"
+alignment = 0
+
+[node name="status" type="Label" parent="content/options/keyboard/fast_load"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -82.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "F6"
+
+[node name="fast_save" type="Button" parent="content/options/keyboard"]
+visible = false
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+text = "SFSV"
+alignment = 0
+
+[node name="status" type="Label" parent="content/options/keyboard/fast_save"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -82.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "F7"
+
+[node name="saves" type="Button" parent="content/options/keyboard"]
+visible = false
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+text = "STRG"
+alignment = 0
+
+[node name="status" type="Label" parent="content/options/keyboard/saves"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -82.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "F9"
+
+[node name="soundtrack" type="Button" parent="content/options/keyboard"]
+visible = false
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+text = "STST"
+alignment = 0
+
+[node name="status" type="Label" parent="content/options/keyboard/soundtrack"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -82.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "F10"
+
+[node name="fullscreen" type="Button" parent="content/options/keyboard"]
+visible = false
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+text = "SFSN"
+alignment = 0
+
+[node name="status" type="Label" parent="content/options/keyboard/fullscreen"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -94.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "F11"
+
+[node name="photo_mode" type="Button" parent="content/options/keyboard"]
+visible = false
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+text = "SPHM"
+alignment = 0
+
+[node name="status" type="Label" parent="content/options/keyboard/photo_mode"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -94.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "F12"
+
+[node name="gamepad" type="GridContainer" parent="content/options"]
+layout_mode = 2
+columns = 4
+
+[node name="header" type="Button" parent="content/options/gamepad"]
+custom_minimum_size = Vector2(300, 45)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("6_kbam3")
+text = "SGDT"
+alignment = 0
+
+[node name="movement" type="HBoxContainer" parent="content/options/gamepad"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+theme_override_constants/separation = 0
+
+[node name="enter" type="Button" parent="content/options/gamepad/movement"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+theme = SubResource("Theme_icevt")
+text = "SMVT"
+alignment = 0
+
+[node name="collapse" type="Button" parent="content/options/gamepad/movement"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+theme = SubResource("Theme_5hw7m")
+text = "WASD"
+alignment = 2
+text_overrun_behavior = 3
+
+[node name="forward" type="Button" parent="content/options/gamepad"]
+visible = false
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+text = "SFWD"
+alignment = 0
+
+[node name="status" type="Label" parent="content/options/gamepad/forward"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -79.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "W"
+
+[node name="backward" type="Button" parent="content/options/gamepad"]
+visible = false
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+text = "SBWD"
+alignment = 0
+
+[node name="status" type="Label" parent="content/options/gamepad/backward"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -71.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "S"
+
+[node name="left" type="Button" parent="content/options/gamepad"]
+visible = false
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+text = "SLFT"
+alignment = 0
+
+[node name="status" type="Label" parent="content/options/gamepad/left"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -73.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "A"
+
+[node name="right" type="Button" parent="content/options/gamepad"]
+visible = false
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+text = "SRHT"
+alignment = 0
+
+[node name="status" type="Label" parent="content/options/gamepad/right"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -75.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "D"
+
+[node name="skills" type="HBoxContainer" parent="content/options/gamepad"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+theme_override_constants/separation = 0
+
+[node name="enter" type="Button" parent="content/options/gamepad/skills"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+theme = SubResource("Theme_icevt")
+text = "SSKIL"
+alignment = 0
+
+[node name="collapse" type="Button" parent="content/options/gamepad/skills"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+theme = SubResource("Theme_5hw7m")
+text = "ABXY"
+alignment = 2
+
+[node name="hands" type="Button" parent="content/options/gamepad"]
+visible = false
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+text = "SHND"
+alignment = 0
+
+[node name="status" type="Label" parent="content/options/gamepad/hands"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -73.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "A"
+
+[node name="legs" type="Button" parent="content/options/gamepad"]
+visible = false
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+text = "SLEG"
+alignment = 0
+
+[node name="status" type="Label" parent="content/options/gamepad/legs"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -73.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "B"
+
+[node name="skill_1" type="Button" parent="content/options/gamepad"]
+visible = false
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+text = "SAB1"
+alignment = 0
+
+[node name="status" type="Label" parent="content/options/gamepad/skill_1"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -72.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "X"
+
+[node name="skill_2" type="Button" parent="content/options/gamepad"]
+visible = false
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+text = "SAB2"
+alignment = 0
+
+[node name="status" type="Label" parent="content/options/gamepad/skill_2"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -72.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "Y"
+
+[node name="quick" type="HBoxContainer" parent="content/options/gamepad"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+theme_override_constants/separation = 0
+
+[node name="enter" type="Button" parent="content/options/gamepad/quick"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+theme = SubResource("Theme_icevt")
+text = "SQCK"
+alignment = 0
+
+[node name="collapse" type="Button" parent="content/options/gamepad/quick"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+theme = SubResource("Theme_5hw7m")
+text = "E + R, R"
+alignment = 2
+text_overrun_behavior = 3
+
+[node name="team" type="Button" parent="content/options/gamepad"]
+visible = false
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+text = "SHSL"
+alignment = 0
+
+[node name="status" type="Label" parent="content/options/gamepad/team"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -72.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "T"
+
+[node name="group" type="Button" parent="content/options/gamepad"]
+visible = false
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+text = "SGRP"
+alignment = 0
+
+[node name="status" type="Label" parent="content/options/gamepad/group"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -75.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "G"
+
+[node name="quick_heal" type="Button" parent="content/options/gamepad"]
+visible = false
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+text = "SSQH"
+alignment = 0
+
+[node name="status" type="Label" parent="content/options/gamepad/quick_heal"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -73.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "R"
+
+[node name="quick_refresh" type="Button" parent="content/options/gamepad"]
+visible = false
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+text = "SSQR"
+alignment = 0
+
+[node name="status" type="Label" parent="content/options/gamepad/quick_refresh"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -73.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "R"
+
+[node name="subjects" type="HBoxContainer" parent="content/options/gamepad"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+theme_override_constants/separation = 0
+
+[node name="enter" type="Button" parent="content/options/gamepad/subjects"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+theme = SubResource("Theme_icevt")
+text = "SINV"
+alignment = 0
+
+[node name="collapse" type="Button" parent="content/options/gamepad/subjects"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+theme = SubResource("Theme_5hw7m")
+text = "E + R, R"
+alignment = 2
+text_overrun_behavior = 3
+
+[node name="inventory_prev" type="Button" parent="content/options/gamepad"]
+visible = false
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+text = "SINV"
+alignment = 0
+
+[node name="status" type="Label" parent="content/options/gamepad/inventory_prev"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -166.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "RMB + S.Up"
+horizontal_alignment = 2
+
+[node name="inventory_next" type="Button" parent="content/options/gamepad"]
+visible = false
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+text = "SINV"
+alignment = 0
+
+[node name="status" type="Label" parent="content/options/gamepad/inventory_next"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -166.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "RMB + S.Down"
+horizontal_alignment = 2
+
+[node name="fire" type="Button" parent="content/options/gamepad"]
+visible = false
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+text = "SFIR"
+alignment = 0
+
+[node name="status" type="Label" parent="content/options/gamepad/fire"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -84.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "RT"
+
+[node name="combo" type="Button" parent="content/options/gamepad"]
+visible = false
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+text = "SAIM"
+alignment = 0
+
+[node name="status" type="Label" parent="content/options/gamepad/combo"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -109.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "LMB + S.Up"
+horizontal_alignment = 2
+
+[node name="luggage" type="HBoxContainer" parent="content/options/gamepad"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+theme_override_constants/separation = 0
+
+[node name="enter" type="Button" parent="content/options/gamepad/luggage"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+theme = SubResource("Theme_icevt")
+text = "SLGG"
+alignment = 0
+
+[node name="collapse" type="Button" parent="content/options/gamepad/luggage"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+theme = SubResource("Theme_5hw7m")
+text = "Ctrl + Up, Ctrl + Left"
+alignment = 2
+text_overrun_behavior = 3
+
+[node name="inventory" type="Button" parent="content/options/gamepad"]
+visible = false
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+text = "SINV"
+alignment = 0
+
+[node name="status" type="Label" parent="content/options/gamepad/inventory"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -88.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "CU"
+
+[node name="equipment" type="Button" parent="content/options/gamepad"]
+visible = false
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+text = "HEQT"
+alignment = 0
+
+[node name="status" type="Label" parent="content/options/gamepad/equipment"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -84.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "CL"
+
+[node name="ability" type="Button" parent="content/options/gamepad"]
+visible = false
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+text = "SABY"
+alignment = 0
+
+[node name="status" type="Label" parent="content/options/gamepad/ability"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -88.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "CD"
+
+[node name="priorities" type="Button" parent="content/options/gamepad"]
+visible = false
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+text = "HPST"
+alignment = 0
+
+[node name="status" type="Label" parent="content/options/gamepad/priorities"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -85.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "CR"
+
+[node name="targeting" type="Button" parent="content/options/gamepad"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+text = "STGT"
+alignment = 0
+
+[node name="status" type="Label" parent="content/options/gamepad/targeting"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -82.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "LT"
+
+[node name="preset" type="Button" parent="content/options/gamepad"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "SPRT"
+alignment = 0
+
+[node name="status" type="Label" parent="content/options/gamepad/preset"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -118.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "SLFTG"
+
+[node name="vendor" type="Button" parent="content/options/gamepad"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "SVND"
+alignment = 0
+
+[node name="status" type="Label" parent="content/options/gamepad/vendor"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -112.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "SNTD"
+
+[node name="order_a" type="Button" parent="content/options/gamepad"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "SORA"
+alignment = 0
+
+[node name="status" type="Label" parent="content/options/gamepad/order_a"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -86.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "AB"
+
+[node name="order_x" type="Button" parent="content/options/gamepad"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "SORX"
+alignment = 0
+
+[node name="status" type="Label" parent="content/options/gamepad/order_x"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -83.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "XY"
+
+[node name="reorder" type="Button" parent="content/options/gamepad"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "SROR"
+alignment = 0
+
+[node name="status" type="Label" parent="content/options/gamepad/reorder"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -83.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "XA"
+
+[node name="footer" type="Label" parent="."]
+custom_minimum_size = Vector2(0, 45)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -45.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("8_j2b4r")
+theme_override_styles/normal = SubResource("StyleBoxTexture_oaat3")
+text = "SSDD"
+horizontal_alignment = 1

@@ -1,0 +1,29 @@
+[gd_scene load_steps=8 format=3 uid="uid://be7swaji55300"]
+
+[ext_resource type="PackedScene" uid="uid://b44vswccd7un0" path="res://def/hud/game/menu/sound/processor/options/play.tscn" id="1_ou6ed"]
+[ext_resource type="Script" path="res://script/ui/menu/sound/processor/options/options.gd" id="1_vrwvh"]
+[ext_resource type="Script" path="res://script/ui/menu/sound/processor/options/drop.gd" id="2_4ydiw"]
+[ext_resource type="Script" path="res://script/ui/menu/sound/processor/options/operation.gd" id="2_tp7ku"]
+[ext_resource type="Script" path="res://script/ui/menu/sound/processor/options/add.gd" id="4_qmkud"]
+[ext_resource type="Script" path="res://script/ui/menu/sound/processor/options/search.gd" id="5_hmi3i"]
+[ext_resource type="PackedScene" uid="uid://duuc04cs8xj7t" path="res://def/hud/game/menu/sound/detector/dropdown/theme.tscn" id="8_gqe42"]
+
+[node name="options" type="Node"]
+script = ExtResource("1_vrwvh")
+
+[node name="operation" type="Node" parent="."]
+script = ExtResource("2_tp7ku")
+
+[node name="drop" type="Node" parent="."]
+script = ExtResource("2_4ydiw")
+
+[node name="play" parent="." instance=ExtResource("1_ou6ed")]
+
+[node name="add" type="Node" parent="."]
+script = ExtResource("4_qmkud")
+
+[node name="search" type="Node" parent="."]
+script = ExtResource("5_hmi3i")
+
+[node name="theme" parent="." instance=ExtResource("8_gqe42")]
+visible = false

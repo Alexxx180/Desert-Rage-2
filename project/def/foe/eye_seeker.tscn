@@ -1,0 +1,466 @@
+[gd_scene load_steps=32 format=3 uid="uid://chvprd662tx56"]
+
+[ext_resource type="Shader" uid="uid://dbon4qjo2ew5s" path="res://data/shader/aura/outline.gdshader" id="3_3f6i4"]
+[ext_resource type="SpriteFrames" uid="uid://bgbew7tx6q3gs" path="res://icon/entity/eye/set_eye_seeker.tres" id="4_btaca"]
+[ext_resource type="PackedScene" uid="uid://cb1yrr2g1a1bf" path="res://def/vfx/sand.tscn" id="5_msxpo"]
+
+[sub_resource type="GDScript" id="GDScript_7ij0u"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_d13e7"]
+radius = 40.1123
+
+[sub_resource type="GDScript" id="GDScript_6t7uk"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yj335"]
+shader = ExtResource("3_3f6i4")
+shader_parameter/line_color = Color(0, 1, 1, 0)
+shader_parameter/line_thickness = 0.0
+shader_parameter/action = false
+shader_parameter/invisible = false
+shader_parameter/ap = 5.0
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hk4pp"]
+animation = &"turn_from_dust"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ldo7a"]
+animation = &"turn_to_dust"
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_v1tmw"]
+input_0/name = "active"
+input_0/auto_advance = false
+input_0/break_loop_at_end = false
+input_0/reset = true
+input_1/name = "passive"
+input_1/auto_advance = false
+input_1/break_loop_at_end = false
+input_1/reset = true
+input_2/name = "dead"
+input_2/auto_advance = false
+input_2/break_loop_at_end = false
+input_2/reset = true
+input_3/name = "alive"
+input_3/auto_advance = false
+input_3/break_loop_at_end = false
+input_3/reset = true
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_v1tmw"]
+animation = &"eye-seeker/eye_backward_idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_11afu"]
+animation = &"eye-seeker/eye_left"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hied7"]
+animation = &"eye-seeker/eye_right"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1whyy"]
+animation = &"eye-seeker/eye_backward"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8egfw"]
+animation = &"eye-seeker/eye_forward"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_e30m2"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_11afu")
+blend_point_0/pos = Vector2(-1, 0)
+blend_point_1/node = SubResource("AnimationNodeAnimation_hied7")
+blend_point_1/pos = Vector2(1, 0)
+blend_point_2/node = SubResource("AnimationNodeAnimation_1whyy")
+blend_point_2/pos = Vector2(0, 1)
+blend_point_3/node = SubResource("AnimationNodeAnimation_8egfw")
+blend_point_3/pos = Vector2(0, -1)
+blend_mode = 1
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_hi651"]
+graph_offset = Vector2(-714.742, 208.353)
+nodes/output/position = Vector2(380, 260)
+nodes/alive/node = SubResource("AnimationNodeAnimation_hk4pp")
+nodes/alive/position = Vector2(-200, 520)
+nodes/dead/node = SubResource("AnimationNodeAnimation_ldo7a")
+nodes/dead/position = Vector2(-220, 320)
+nodes/enemy/node = SubResource("AnimationNodeTransition_v1tmw")
+nodes/enemy/position = Vector2(160, 120)
+nodes/idle/node = SubResource("AnimationNodeAnimation_v1tmw")
+nodes/idle/position = Vector2(-320, 120)
+nodes/rolling/node = SubResource("AnimationNodeBlendSpace2D_e30m2")
+nodes/rolling/position = Vector2(-240, -120)
+node_connections = [&"output", 0, &"enemy", &"enemy", 0, &"rolling", &"enemy", 1, &"idle", &"enemy", 2, &"dead", &"enemy", 3, &"alive"]
+
+[sub_resource type="GDScript" id="GDScript_w37ic"]
+
+[sub_resource type="Animation" id="Animation_v1tmw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("profile:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"forward"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("profile:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_hk4pp"]
+resource_name = "turn_from_dust"
+length = 0.7
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("profile:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"dust"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("profile:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [7, 6, 5, 4, 3, 2, 1, 0]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("animation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.7),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"live_animation_end"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_g4mn8"]
+resource_name = "turn_to_dust"
+length = 0.75
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("profile:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"dust"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("profile:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("animation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.7),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"dead_animation_end"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_11afu"]
+_data = {
+&"RESET": SubResource("Animation_v1tmw"),
+&"turn_from_dust": SubResource("Animation_hk4pp"),
+&"turn_to_dust": SubResource("Animation_g4mn8")
+}
+
+[sub_resource type="Animation" id="Animation_hied7"]
+resource_name = "eye_backward"
+length = 0.4
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("profile:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"backward"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("profile:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+
+[sub_resource type="Animation" id="Animation_e30m2"]
+resource_name = "eye_backward_idle"
+length = 0.01
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("profile:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"backward"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("profile:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_11afu"]
+resource_name = "eye_forward"
+length = 0.4
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("profile:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"forward"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("profile:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+
+[sub_resource type="Animation" id="Animation_1whyy"]
+resource_name = "eye_left"
+length = 0.4
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("profile:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"left"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("profile:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+
+[sub_resource type="Animation" id="Animation_8egfw"]
+resource_name = "eye_right"
+length = 0.4
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("profile:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"right"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("profile:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1whyy"]
+_data = {
+&"eye_backward": SubResource("Animation_hied7"),
+&"eye_backward_idle": SubResource("Animation_e30m2"),
+&"eye_forward": SubResource("Animation_11afu"),
+&"eye_left": SubResource("Animation_1whyy"),
+&"eye_right": SubResource("Animation_8egfw")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8egfw"]
+size = Vector2(52, 21)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e30m2"]
+size = Vector2(52, 52)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iv0jw"]
+size = Vector2(64, 49)
+
+[node name="eye-seeker" type="CharacterBody2D" groups=["enemy"]]
+collision_layer = 4
+collision_mask = 1048576
+script = SubResource("GDScript_7ij0u")
+
+[node name="geometry" type="CollisionShape2D" parent="."]
+position = Vector2(0, -25)
+shape = SubResource("CircleShape2D_d13e7")
+
+[node name="view" type="Node2D" parent="."]
+script = SubResource("GDScript_6t7uk")
+
+[node name="timer" type="Timer" parent="view"]
+wait_time = 0.1
+one_shot = true
+
+[node name="profile" type="AnimatedSprite2D" parent="view"]
+material = SubResource("ShaderMaterial_yj335")
+scale = Vector2(0.5, 0.5)
+sprite_frames = ExtResource("4_btaca")
+animation = &"left"
+offset = Vector2(0, -50)
+
+[node name="particle" parent="view" instance=ExtResource("5_msxpo")]
+position = Vector2(0, -35)
+
+[node name="animation" type="AnimationTree" parent="view"]
+tree_root = SubResource("AnimationNodeBlendTree_hi651")
+anim_player = NodePath("player")
+parameters/enemy/current_state = "active"
+parameters/enemy/transition_request = ""
+parameters/enemy/current_index = 0
+parameters/rolling/blend_position = Vector2(0, 0)
+script = SubResource("GDScript_w37ic")
+
+[node name="player" type="AnimationPlayer" parent="view/animation"]
+root_node = NodePath("../..")
+libraries = {
+&"": SubResource("AnimationLibrary_11afu"),
+&"eye-seeker": SubResource("AnimationLibrary_1whyy")
+}
+
+[node name="timer" type="Timer" parent="view/animation"]
+wait_time = 1.75
+one_shot = true
+
+[node name="logic" type="Node2D" parent="."]
+
+[node name="detector" type="Node2D" parent="logic"]
+
+[node name="fight" type="Node2D" parent="logic/detector"]
+
+[node name="damagebox" type="Area2D" parent="logic/detector/fight"]
+collision_layer = 0
+collision_mask = 4194304
+
+[node name="geometry" type="CollisionShape2D" parent="logic/detector/fight/damagebox"]
+position = Vector2(0, 5.5)
+shape = SubResource("RectangleShape2D_8egfw")
+debug_color = Color(0.849194, 0.346041, 0.381317, 0.42)
+
+[node name="path" type="Node2D" parent="logic/detector"]
+
+[node name="spark" type="Area2D" parent="logic/detector/path"]
+collision_layer = 0
+collision_mask = 16777216
+
+[node name="shape" type="CollisionShape2D" parent="logic/detector/path/spark"]
+position = Vector2(0, 11)
+shape = SubResource("RectangleShape2D_e30m2")
+
+[node name="obstacle" type="Area2D" parent="logic/detector/path"]
+collision_layer = 0
+collision_mask = 1329363
+
+[node name="shape" type="CollisionShape2D" parent="logic/detector/path/obstacle"]
+position = Vector2(0, 11)
+shape = SubResource("RectangleShape2D_e30m2")
+debug_color = Color(0, 0.6, 0.0901961, 0.419608)
+
+[node name="box" type="Area2D" parent="logic/detector"]
+collision_layer = 0
+collision_mask = 16
+
+[node name="geometry" type="CollisionShape2D" parent="logic/detector/box"]
+position = Vector2(0, 9.5)
+shape = SubResource("RectangleShape2D_iv0jw")
+debug_color = Color(0.628918, 0.427086, 0.81446, 0.42)
+
+[connection signal="timeout" from="view/timer" to="view" method="normalize_skew"]
+[connection signal="timeout" from="view/animation/timer" to="view/animation" method="interrogation_end"]

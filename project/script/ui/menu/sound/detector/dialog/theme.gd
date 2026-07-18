@@ -1,3 +1,0 @@
-extends OpenPresetDialog
-
-class_name OpenThemeDialog

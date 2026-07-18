@@ -1,0 +1,357 @@
+[gd_scene load_steps=37 format=3 uid="uid://trd7xarcxhy1"]
+
+[ext_resource type="Script" path="res://script/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/controls.gd" id="1_xi2lk"]
+[ext_resource type="Script" path="res://script/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/hints/bottom/talk/borders.gd" id="2_hlwdo"]
+[ext_resource type="Texture2D" uid="uid://frgf7wr5b2md" path="res://icon/help/ray/anger/1.png" id="3_2rr8j"]
+[ext_resource type="PackedScene" uid="uid://cspf6sh5v7o4v" path="res://def/hud/hud/priorities/card.tscn" id="3_mriv0"]
+[ext_resource type="Script" uid="uid://b82g80p2b6kwm" path="res://code/node/animated.gd" id="4_7xmmx"]
+[ext_resource type="FontFile" uid="uid://b37js8y80ak1k" path="res://data/font/noto_sans/NotoColorEmoji-Regular.ttf" id="4_ic24g"]
+[ext_resource type="Texture2D" uid="uid://b2ouvbea4wbsy" path="res://icon/help/ray/look.png" id="5_cw4cp"]
+[ext_resource type="FontFile" uid="uid://cjafv81djmqe8" path="res://data/font/Touchscreen-Regular.ttf" id="5_nxuw1"]
+[ext_resource type="Script" path="res://script/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/hints/space/preview/toggle.gd" id="6_hu7it"]
+[ext_resource type="Texture2D" uid="uid://dn05rbjebndmm" path="res://icon/help/ray/amaze.png" id="6_mpxsp"]
+[ext_resource type="Texture2D" uid="uid://cqtc8a5ug5prq" path="res://icon/help/ray/anger/2.png" id="7_6rp5j"]
+[ext_resource type="FontFile" uid="uid://b2wbdbnkxcqv1" path="res://data/font/noto_sans/NotoEmoji-VariableFont_wght.ttf" id="7_hu7it"]
+[ext_resource type="Texture2D" uid="uid://cb6hv8bxa6n7x" path="res://icon/help/ray/but.png" id="8_1cn67"]
+[ext_resource type="Texture2D" uid="uid://d1n3pwx2nv2pv" path="res://icon/help/ray/confirm/1.png" id="9_s68br"]
+[ext_resource type="Texture2D" uid="uid://bomc20k71dio5" path="res://icon/help/ray/confirm/2.png" id="10_nncks"]
+[ext_resource type="Texture2D" uid="uid://btc3o7m7fl5n1" path="res://icon/help/ray/diminish/1.png" id="11_engi2"]
+[ext_resource type="Texture2D" uid="uid://lpxsheaqngpx" path="res://icon/help/ray/diminish/2.png" id="12_ewgi5"]
+[ext_resource type="Texture2D" uid="uid://biwqmmitljsg4" path="res://icon/help/ray/grin.png" id="13_vf64s"]
+[ext_resource type="Texture2D" uid="uid://dfesacqesehoy" path="res://icon/help/ray/rage.png" id="14_fk01o"]
+[ext_resource type="Texture2D" uid="uid://4qf3r1n1rpww" path="res://icon/help/ray/respect/1.png" id="15_5jri1"]
+[ext_resource type="Texture2D" uid="uid://kjt0tts35qxf" path="res://icon/help/ray/respect/2.png" id="16_5ouhv"]
+[ext_resource type="Texture2D" uid="uid://c44g0ubih1ds7" path="res://icon/help/ray/scare.png" id="17_jfh0s"]
+[ext_resource type="Texture2D" uid="uid://ci1ljghsfunpo" path="res://icon/help/ray/sign/1.png" id="18_jymct"]
+[ext_resource type="Texture2D" uid="uid://cf8ahywg54pi6" path="res://icon/help/ray/sign/2.png" id="19_8mdsi"]
+[ext_resource type="Texture2D" uid="uid://b2v1sviankpsb" path="res://icon/help/ray/smile.png" id="20_kbcul"]
+[ext_resource type="Texture2D" uid="uid://jyxytt1ls61t" path="res://icon/help/ray/tired.png" id="21_p01up"]
+[ext_resource type="Texture2D" uid="uid://dxjt2gayjfhuk" path="res://icon/help/ray/untrust.png" id="22_5mha7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bjbyt"]
+content_margin_left = 10.0
+content_margin_top = 5.0
+content_margin_right = 10.0
+content_margin_bottom = 5.0
+bg_color = Color(0, 0, 0, 0.78431374)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ch3ha"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.064419165, 0.059458636, 0.040298104, 1)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ig6qi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_cw4cp")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_mpxsp")
+}],
+"loop": true,
+"name": &"r_amaze",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_2rr8j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_6rp5j")
+}],
+"loop": true,
+"name": &"r_anger",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_1cn67")
+}],
+"loop": true,
+"name": &"r_but",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_s68br")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_nncks")
+}],
+"loop": true,
+"name": &"r_confirm",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_engi2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_ewgi5")
+}],
+"loop": true,
+"name": &"r_diminish",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_vf64s")
+}],
+"loop": true,
+"name": &"r_grin",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_cw4cp")
+}],
+"loop": true,
+"name": &"r_look",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("14_fk01o")
+}],
+"loop": true,
+"name": &"r_rage",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("15_5jri1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_5ouhv")
+}],
+"loop": true,
+"name": &"r_respect",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("17_jfh0s")
+}],
+"loop": true,
+"name": &"r_scare",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("18_jymct")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_8mdsi")
+}],
+"loop": true,
+"name": &"r_sign",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("20_kbcul")
+}],
+"loop": true,
+"name": &"r_smile",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("21_p01up")
+}],
+"loop": true,
+"name": &"r_tired",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("22_5mha7")
+}],
+"loop": true,
+"name": &"r_untrust",
+"speed": 5.0
+}]
+
+[sub_resource type="Gradient" id="Gradient_jew5v"]
+offsets = PackedFloat32Array(0, 0.61255413, 1)
+colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 0.03529412, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_tnqry"]
+gradient = SubResource("Gradient_jew5v")
+fill_from = Vector2(0.5, 0)
+fill_to = Vector2(0.5, 1)
+metadata/_snap_enabled = true
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nxuw1"]
+content_margin_left = 10.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8tmk1"]
+content_margin_left = 3.0
+content_margin_top = 0.0
+bg_color = Color(0.0196078, 0.0196078, 0.0588235, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mwhg6"]
+content_margin_left = 4.0
+content_margin_top = 0.0
+bg_color = Color(0.0196078, 0.0196078, 0.0588235, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ls1ll"]
+content_margin_left = 5.0
+content_margin_right = 5.0
+
+[node name="controls" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.96
+mouse_filter = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+script = ExtResource("1_xi2lk")
+
+[node name="dialog" type="RichTextLabel" parent="."]
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 6
+theme_override_styles/normal = SubResource("StyleBoxFlat_bjbyt")
+text = "asdsdadhajdhjasdadasdadsd jdsadjasdd asdadasdda
+asdasds
+asdasds
+asdsdadhajdhjasdadasdadsd jdsadjasdd asdadasdda
+asdasds
+asdasds
+asdsdadhajdhjasdadasdadsd jdsadjasdd asdadasdda
+asdasds
+asdasds
+asdsdadhajdhjasdadasdadsd jdsadjasdd asdadasdda
+asdasds
+asdasds"
+vertical_alignment = 2
+
+[node name="talk" type="Panel" parent="dialog"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -69.0
+offset_top = -30.0
+offset_right = -9.0
+offset_bottom = 30.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ch3ha")
+script = ExtResource("2_hlwdo")
+
+[node name="image" type="TextureRect" parent="dialog/talk"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 58.0
+offset_bottom = 58.0
+texture = ExtResource("3_2rr8j")
+expand_mode = 1
+script = ExtResource("4_7xmmx")
+sprites = SubResource("SpriteFrames_ig6qi")
+current_animation = "r_anger"
+
+[node name="log" type="TextureRect" parent="."]
+clip_children = 2
+custom_minimum_size = Vector2(260, 356)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 6
+texture = SubResource("GradientTexture2D_tnqry")
+
+[node name="text" type="RichTextLabel" parent="log"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+theme_override_fonts/bold_font = ExtResource("4_ic24g")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_nxuw1")
+bbcode_enabled = true
+text = "Новый уровень!
+[table=3]
+[cell][left][b]🕵️‍♂️[/b]   [/left][/cell][cell expand][left][b]⚔[/b] 215 + 1   [/left][/cell][cell expand][left][b]🛡[/b] 234 + 2[/left][/cell]
+[cell][left][b]👨‍🏭[/b]   [/left][/cell][cell expand][left][b]🔥[/b] 215 + 2[/left][/cell][cell expand][left][b]🫧[/b] 233 + 1[/left][/cell]
+[/table]
+Новые возможности!"
+vertical_alignment = 2
+
+[node name="motion" parent="." instance=ExtResource("3_mriv0")]
+visible = false
+layout_mode = 2
+size_flags_vertical = 10
+
+[node name="fast_panel" type="HBoxContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="pause" type="Button" parent="fast_panel"]
+custom_minimum_size = Vector2(30, 26)
+layout_mode = 2
+size_flags_horizontal = 0
+focus_mode = 1
+theme_override_fonts/font = ExtResource("5_nxuw1")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_8tmk1")
+text = "||"
+alignment = 0
+script = ExtResource("6_hu7it")
+path = "../../../../../../../stats/inventory/ability/controls/hints/space/preview/help"
+
+[node name="open" type="Button" parent="fast_panel"]
+custom_minimum_size = Vector2(30, 26)
+layout_mode = 2
+focus_mode = 1
+theme_override_fonts/font = ExtResource("5_nxuw1")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_8tmk1")
+text = "🧮"
+alignment = 0
+script = ExtResource("6_hu7it")
+path = "../../../../../../../stats/inventory/ability/controls/hints/space/preview/help"
+
+[node name="analyze" type="Button" parent="fast_panel"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 4
+focus_mode = 1
+theme_override_fonts/font = ExtResource("7_hu7it")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_mwhg6")
+text = "🔍"
+alignment = 0
+script = ExtResource("6_hu7it")
+path = "../../../../../../../stats/inventory/ability/controls/hints/space/preview/help"
+
+[node name="set" type="Button" parent="fast_panel"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("4_ic24g")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ls1ll")
+text = "🔥🎣"

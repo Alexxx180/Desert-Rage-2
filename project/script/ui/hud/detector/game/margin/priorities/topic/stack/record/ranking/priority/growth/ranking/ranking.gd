@@ -1,9 +1,0 @@
-extends Label
-
-@onready var rank: Label = $rank
-@onready var title: Label = $title
-
-var status: VBoxContainer
-
-func calculate_rank() -> void:
-	pass # implement based on enemy and hero stats

@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://5t24tn3kugk0"]
+
+[ext_resource type="Script" path="res://script/ui/menu/sound/processor/settings/exporter/exporter.gd" id="1_wy3dq"]
+[ext_resource type="PackedScene" uid="uid://oypcngd4c1pn" path="res://def/hud/game/menu/sound/detector/dropdown/open.tscn" id="2_y2vyd"]
+[ext_resource type="Script" path="res://script/ui/menu/sound/processor/settings/exporter/branch/branch.gd" id="5_sqy3d"]
+[ext_resource type="Script" path="res://script/ui/menu/sound/processor/settings/exporter/zip.gd" id="6_hw4vl"]
+
+[node name="exporter" type="Node"]
+script = ExtResource("1_wy3dq")
+
+[node name="open_preset" parent="." instance=ExtResource("2_y2vyd")]
+visible = false
+
+[node name="branch" type="Node" parent="."]
+script = ExtResource("5_sqy3d")
+
+[node name="zip" type="Node" parent="branch"]
+script = ExtResource("6_hw4vl")

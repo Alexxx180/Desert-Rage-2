@@ -1,0 +1,62 @@
+[gd_scene load_steps=10 format=3 uid="uid://bwxmswjunrdab"]
+
+[ext_resource type="Texture2D" uid="uid://du3gs78ig4h1u" path="res://icon/vfx/highlight.tres" id="1_633j0"]
+[ext_resource type="StyleBox" uid="uid://cjukg7l6l1urx" path="res://data/theme/slider/horizontal/area-slider.tres" id="1_hcgs6"]
+[ext_resource type="StyleBox" uid="uid://belpqiw77873x" path="res://data/theme/slider/horizontal/area-grabber.tres" id="2_k3qow"]
+[ext_resource type="Texture2D" uid="uid://ctesdxx5kyp0k" path="res://icon/vfx/disabled.tres" id="2_og0p2"]
+[ext_resource type="StyleBox" uid="uid://dfwghdfkosy7u" path="res://data/theme/slider/horizontal/area-highlight.tres" id="3_m8qcd"]
+
+[sub_resource type="Gradient" id="Gradient_r2elq"]
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_4vasm"]
+gradient = SubResource("Gradient_r2elq")
+width = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vppco"]
+bg_color = Color(0, 0, 0, 1)
+border_width_bottom = 3
+border_color = Color(0.8, 0.8, 0.8, 0)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kb2oe"]
+content_margin_left = 25.0
+content_margin_right = 25.0
+
+[node name="interface" type="HSlider"]
+custom_minimum_size = Vector2(300, 60)
+size_flags_horizontal = 3
+size_flags_vertical = 8
+focus_mode = 1
+theme_override_icons/grabber = SubResource("GradientTexture1D_4vasm")
+theme_override_icons/grabber_highlight = ExtResource("1_633j0")
+theme_override_icons/grabber_disabled = ExtResource("2_og0p2")
+theme_override_styles/slider = ExtResource("1_hcgs6")
+theme_override_styles/grabber_area = ExtResource("2_k3qow")
+theme_override_styles/grabber_area_highlight = ExtResource("3_m8qcd")
+value = 50.0
+
+[node name="caption" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_vppco")
+text = "SIFT"
+vertical_alignment = 1
+
+[node name="manual" type="Button" parent="."]
+custom_minimum_size = Vector2(50, 20)
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -69.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+theme_override_styles/normal = SubResource("StyleBoxEmpty_kb2oe")
+text = "50"

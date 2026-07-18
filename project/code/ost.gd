@@ -255,3 +255,22 @@ func match_enemy() -> void:
 		_: _selection = 2 if _spawn else 1
 	if _selection != _previous:
 		change_danger.emit(false)
+
+
+
+
+
+@onready var detector: Control = $detector
+
+func _ready() -> void:
+	#hide()
+	# var dialog: FileDialog = FileDialog.new()
+	# print("OPTION: ", dialog.get_option_values(0))
+	$processor.set_soundtrack(detector.soundtrack)
+	SoundtrackSystem.update_ost()
+
+func set_settings_transition(settings: CanvasLayer) -> void:
+	detector.soundtrack.options.back.pressed.connect(func():
+		hide()
+		settings.show()
+	)

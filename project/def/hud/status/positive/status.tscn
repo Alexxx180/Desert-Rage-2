@@ -1,0 +1,36 @@
+[gd_scene load_steps=7 format=3 uid="uid://bkvsrkwsb03xs"]
+
+[ext_resource type="PackedScene" uid="uid://d8rt24mkevbt" path="res://def/hud/status/positive/recovery/health.tscn" id="1_db1rv"]
+[ext_resource type="Script" path="res://script/ui/hud/detector/game/margin/priorities/stats/inventory/topic/items/title/workspace/stack/item/title/effects/status.gd" id="1_g3p0l"]
+[ext_resource type="PackedScene" uid="uid://pf718lymyywh" path="res://def/hud/status/positive/recovery/influence.tscn" id="2_g3p0l"]
+[ext_resource type="PackedScene" uid="uid://cioios3hsx1io" path="res://def/hud/status/positive/no/enemy.tscn" id="3_g7ykp"]
+[ext_resource type="PackedScene" uid="uid://cqx57eq22aav" path="res://def/hud/status/positive/no/poison.tscn" id="4_oid1w"]
+[ext_resource type="PackedScene" uid="uid://df56a1dcqln6y" path="res://def/hud/status/positive/no/cough.tscn" id="5_ggly3"]
+
+[node name="status" type="HBoxContainer"]
+script = ExtResource("1_g3p0l")
+
+[node name="aura" parent="." instance=ExtResource("2_g3p0l")]
+visible = false
+layout_mode = 2
+mouse_filter = 2
+
+[node name="resource" parent="." instance=ExtResource("1_db1rv")]
+visible = false
+layout_mode = 2
+mouse_filter = 2
+
+[node name="no_enemy" parent="." instance=ExtResource("3_g7ykp")]
+visible = false
+layout_mode = 2
+mouse_filter = 2
+
+[node name="no_poison" parent="." instance=ExtResource("4_oid1w")]
+visible = false
+layout_mode = 2
+mouse_filter = 2
+
+[node name="no_cough" parent="." instance=ExtResource("5_ggly3")]
+visible = false
+layout_mode = 2
+mouse_filter = 2
