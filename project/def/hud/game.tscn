@@ -1,13 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://cel3u88abrgv3"]
+[gd_scene load_steps=7 format=3 uid="uid://cel3u88abrgv3"]
 
 [ext_resource type="Theme" uid="uid://p2br8b6ea3n6" path="res://data/theme/patterns/template/menu/hud/pause/pause.tres" id="1_xguj3"]
 [ext_resource type="Script" uid="uid://81xdi4771u0a" path="res://code/node/menu/game.gd" id="2_dtwvy"]
 [ext_resource type="Script" uid="uid://bin7ih026bhac" path="res://code/node/menu/priorities.gd" id="3_b603l"]
 [ext_resource type="StyleBox" uid="uid://cvfnqancophme" path="res://data/theme/style/solid-color-panel.tres" id="4_mfbme"]
-[ext_resource type="Script" path="res://script/ui/hud/detector/game/margin/priorities/stats/topic/topic.gd" id="5_t0t5d"]
-[ext_resource type="Script" path="res://script/ui/hud/detector/game/margin/priorities/stats/inventory/ability/topic/topic.gd" id="6_kaopp"]
 [ext_resource type="PackedScene" uid="uid://trd7xarcxhy1" path="res://def/hud/hud/ability/controls.tscn" id="7_yy184"]
-[ext_resource type="Script" path="res://script/ui/hud/detector/game/margin/priorities/topic/topic.gd" id="8_5s5pf"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l3qyh"]
 bg_color = Color(0, 0, 0, 1)
@@ -50,7 +47,6 @@ split_offset = -2000
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/panel = ExtResource("4_mfbme")
-script = ExtResource("5_t0t5d")
 
 [node name="top" type="VSplitContainer" parent="right/left"]
 layout_mode = 2
@@ -62,7 +58,6 @@ split_offset = -2000
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = ExtResource("4_mfbme")
-script = ExtResource("6_kaopp")
 
 [node name="sides" type="Panel" parent="right/left/top/inventory"]
 layout_mode = 2
@@ -76,12 +71,12 @@ split_offset = 2000
 
 [node name="controls" parent="right/left/top/bottom" instance=ExtResource("7_yy184")]
 layout_mode = 2
+script = null
 
 [node name="ability" type="PanelContainer" parent="right/left/top/bottom"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = ExtResource("4_mfbme")
-script = ExtResource("6_kaopp")
 
 [node name="sides" type="Panel" parent="right/left/top/bottom/ability"]
 layout_mode = 2
@@ -91,4 +86,3 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_l3qyh")
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/panel = ExtResource("4_mfbme")
-script = ExtResource("8_5s5pf")

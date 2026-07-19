@@ -1,145 +1,241 @@
-[gd_scene load_steps=33 format=3 uid="uid://pexl48rcyqo7"]
+[gd_scene load_steps=53 format=3 uid="uid://pexl48rcyqo7"]
 
-[ext_resource type="PackedScene" uid="uid://dql7mce31xdjg" path="res://def/hud/game/menu/sound/detector/settings/settings.tscn" id="1_1yo1r"]
-[ext_resource type="PackedScene" uid="uid://cikgtgx0up07s" path="res://def/hud/game/menu/sound/detector/dropdown/tree/tree.tscn" id="1_v2fxn"]
-[ext_resource type="Script" path="res://script/ui/menu/sound/sound.gd" id="1_xeo0l"]
 [ext_resource type="Theme" uid="uid://cnhvv2uiofw3t" path="res://data/theme/patterns/template/menu/sound/sound.tres" id="2_me7fv"]
-[ext_resource type="PackedScene" uid="uid://c85yu6373k7wr" path="res://def/hud/game/menu/sound/detector/options/options.tscn" id="2_s3j2j"]
-[ext_resource type="Script" path="res://script/ui/menu/sound/detector/detector.gd" id="2_swapw"]
-[ext_resource type="Script" path="res://script/ui/menu/sound/detector/soundtrack.gd" id="3_6cqct"]
-[ext_resource type="PackedScene" uid="uid://68ojve62yh1c" path="res://def/hud/game/menu/sound/processor/processor.tscn" id="4_gw4ot"]
+[ext_resource type="FontFile" uid="uid://b37js8y80ak1k" path="res://data/font/noto_sans/NotoColorEmoji-Regular.ttf" id="3_d5jn3"]
+[ext_resource type="Texture2D" uid="uid://dsrhfffuck7x7" path="res://data/theme/slider/vertical/highlight.tres" id="4_cisy3"]
+[ext_resource type="PackedScene" uid="uid://cqhvpod4o6lt6" path="res://def/hud/game/menu/sound/period.tscn" id="4_yfddx"]
 [ext_resource type="FontFile" uid="uid://o0rgn7d13mr3" path="res://data/font/OpenSans-VariableFont_wdth,wght.ttf" id="5_gestq"]
-[ext_resource type="Script" path="res://script/ui/menu/sound/detector/playback.gd" id="6_upsxh"]
+[ext_resource type="StyleBox" uid="uid://bwm6nj0qolmws" path="res://data/theme/slider/vertical/area-front.tres" id="5_yfddx"]
+[ext_resource type="Theme" uid="uid://b4uvs3mj2kjx2" path="res://data/theme/patterns/template/button/sound.tres" id="6_lylqp"]
+[ext_resource type="FontFile" uid="uid://drm0mr2hyapf2" path="res://data/font/EmojiOneColor.otf" id="7_jt5du"]
+[ext_resource type="PackedScene" uid="uid://blcacd33xioi" path="res://def/hud/game/menu/sound/walk.tscn" id="7_v3vw6"]
 [ext_resource type="FontFile" uid="uid://b2wbdbnkxcqv1" path="res://data/font/noto_sans/NotoEmoji-VariableFont_wght.ttf" id="8_hqe2i"]
-[ext_resource type="PackedScene" uid="uid://c5eqytdlesbjp" path="res://def/hud/game/menu/sound/detector/options/backspace/back.tscn" id="9_hotwc"]
+[ext_resource type="Shortcut" uid="uid://bgd4ocokxr1wj" path="res://data/short/cut/pause.tres" id="10_v3vw6"]
+[ext_resource type="FontFile" uid="uid://dmctrlrnfxaie" path="res://data/font/Roboto-Regular-Emoji.ttf" id="11_lylqp"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hjbks"]
-content_margin_left = 6.0
-content_margin_right = 6.0
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yfddx"]
+content_margin_left = 20.0
+content_margin_top = 20.0
+content_margin_right = 20.0
+content_margin_bottom = 20.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cisy3"]
+content_margin_left = 20.0
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 2
+border_color = Color(0.77254903, 0.14901961, 0.26666668, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sw5ve"]
+bg_color = Color(0, 0, 0, 1)
+border_width_bottom = 2
+border_color = Color(0.77254903, 0.14901961, 0.26666668, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jt5du"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jt5du"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
 bg_color = Color(0.6, 0.6, 0.6, 0)
 border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
+border_color = Color(0.77254903, 0.14901961, 0.26666668, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qebsx"]
-content_margin_left = 6.0
-content_margin_right = 6.0
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d5jn3"]
+content_margin_left = 38.0
 bg_color = Color(0.6, 0.6, 0.6, 0)
 border_width_bottom = 2
-border_color = Color(0.588235, 0.588235, 0.588235, 1)
+border_color = Color(0.21615753, 0.01423352, 0.04849548, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_waa8r"]
-content_margin_left = 6.0
-content_margin_right = 6.0
-bg_color = Color(0, 0, 0.235294, 1)
-
-[sub_resource type="Gradient" id="Gradient_j033k"]
-colors = PackedColorArray(0.0392157, 0.0392157, 0.0392157, 1, 0.0117647, 0.0117647, 0.0117647, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_a8eoj"]
-gradient = SubResource("Gradient_j033k")
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rl78j"]
-content_margin_left = 6.0
-content_margin_right = 6.0
-texture = SubResource("GradientTexture2D_a8eoj")
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kpesr"]
-content_margin_left = 6.0
-content_margin_right = 6.0
-bg_color = Color(0, 0, 0.0117647, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nscyf"]
-bg_color = Color(0.27451, 0.27451, 0.27451, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_631br"]
-bg_color = Color(0.589096, 0.589096, 0.589096, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j00fp"]
-bg_color = Color(0.470076, 0.470076, 0.470076, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rqxqw"]
-content_margin_left = 3.0
-content_margin_right = 3.0
-bg_color = Color(0.0196078, 0.0196078, 0.0196078, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ik06k"]
-content_margin_left = 3.0
-content_margin_right = 3.0
-bg_color = Color(0.0196078, 0.0196078, 0.0196078, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0.588235, 0.588235, 0.588235, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ka23t"]
-bg_color = Color(0, 0, 0, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i5h57"]
-bg_color = Color(0.27451, 0.27451, 0.27451, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kwra8"]
-bg_color = Color(0.589096, 0.589096, 0.589096, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pps06"]
-bg_color = Color(0.470076, 0.470076, 0.470076, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6ahvg"]
-content_margin_left = 3.0
-content_margin_right = 3.0
-bg_color = Color(0.0196078, 0.0196078, 0.0196078, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_74ho6"]
-content_margin_left = 3.0
-content_margin_right = 3.0
-bg_color = Color(0.0196078, 0.0196078, 0.0196078, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0.588235, 0.588235, 0.588235, 1)
-
-[sub_resource type="Theme" id="Theme_hotwc"]
-Button/colors/font_color = Color(0.784314, 0.784314, 0.784314, 1)
-Button/font_sizes/font_size = 20
+[sub_resource type="Theme" id="Theme_jt5du"]
+Button/font_sizes/font_size = 22
 Button/fonts/font = ExtResource("5_gestq")
-Button/styles/focus = SubResource("StyleBoxFlat_hjbks")
-Button/styles/hover = SubResource("StyleBoxFlat_qebsx")
-Button/styles/hover_pressed = SubResource("StyleBoxFlat_waa8r")
-Button/styles/normal = SubResource("StyleBoxTexture_rl78j")
-Button/styles/pressed = SubResource("StyleBoxFlat_kpesr")
-HBoxContainer/constants/separation = 2
-HFlowContainer/constants/v_separation = 4
-HScrollBar/styles/grabber = SubResource("StyleBoxFlat_nscyf")
-HScrollBar/styles/grabber_highlight = SubResource("StyleBoxFlat_631br")
-HScrollBar/styles/grabber_pressed = SubResource("StyleBoxFlat_j00fp")
-HScrollBar/styles/scroll = SubResource("StyleBoxFlat_rqxqw")
-HScrollBar/styles/scroll_focus = SubResource("StyleBoxFlat_ik06k")
-Label/colors/font_color = Color(0.784314, 0.784314, 0.784314, 1)
-Label/font_sizes/font_size = 23
+Button/styles/normal = SubResource("StyleBoxFlat_cisy3")
+ColorPickerButton/styles/normal = SubResource("StyleBoxFlat_sw5ve")
+FoldableContainer/colors/font_color = Color(0.39215687, 0.39215687, 0.39215687, 1)
+FoldableContainer/constants/h_separation = 3
+FoldableContainer/font_sizes/font_size = 24
+FoldableContainer/fonts/font = ExtResource("5_gestq")
+FoldableContainer/styles/panel = SubResource("StyleBoxEmpty_jt5du")
+FoldableContainer/styles/title_panel = SubResource("StyleBoxFlat_jt5du")
+Label/colors/font_color = Color(0.39215687, 0.39215687, 0.39215687, 1)
+Label/font_sizes/font_size = 24
 Label/fonts/font = ExtResource("5_gestq")
-MarginContainer/constants/margin_bottom = 10
-MarginContainer/constants/margin_left = 30
-MarginContainer/constants/margin_right = 30
-MarginContainer/constants/margin_top = 0
-Panel/styles/panel = SubResource("StyleBoxFlat_ka23t")
-VBoxContainer/constants/separation = 8
-VScrollBar/styles/grabber = SubResource("StyleBoxFlat_i5h57")
-VScrollBar/styles/grabber_highlight = SubResource("StyleBoxFlat_kwra8")
-VScrollBar/styles/grabber_pressed = SubResource("StyleBoxFlat_pps06")
-VScrollBar/styles/scroll = SubResource("StyleBoxFlat_6ahvg")
-VScrollBar/styles/scroll_focus = SubResource("StyleBoxFlat_74ho6")
+LineEdit/fonts/font = ExtResource("5_gestq")
+LineEdit/styles/normal = SubResource("StyleBoxFlat_d5jn3")
+LinkButton/font_sizes/font_size = 22
+LinkButton/fonts/font = ExtResource("3_d5jn3")
+LinkButton/styles/focus = null
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_v3vw6"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+
+[sub_resource type="Gradient" id="Gradient_fs2k3"]
+colors = PackedColorArray(0.478431, 0.25098, 0.588235, 1, 0.478431, 0.25098, 0.588235, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_v3vw6"]
+gradient = SubResource("Gradient_fs2k3")
+width = 1
+height = 45
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qjff3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cisy3"]
+content_margin_left = 10.0
+content_margin_right = 10.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fb1ce"]
 bg_color = Color(1, 1, 1, 1)
 
-[node name="sound" type="CanvasLayer"]
-process_mode = 3
-script = ExtResource("1_xeo0l")
+[sub_resource type="Gradient" id="Gradient_cisy3"]
+colors = PackedColorArray(0.0392157, 0.0392157, 0.0392157, 1, 0.0117647, 0.0117647, 0.0117647, 1)
 
-[node name="detector" type="Panel" parent="."]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_yfddx"]
+gradient = SubResource("Gradient_cisy3")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_v3vw6"]
+content_margin_left = 2.0
+content_margin_top = 6.0
+content_margin_right = 0.0
+texture = SubResource("GradientTexture2D_yfddx")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lylqp"]
+content_margin_left = 1.0
+content_margin_bottom = 4.0
+
+[sub_resource type="Theme" id="Theme_utmhd"]
+Button/colors/font_outline_color = Color(0.313726, 0.568627, 1, 1)
+Button/constants/outline_size = 10
+Button/font_sizes/font_size = 28
+Button/styles/normal = SubResource("StyleBoxTexture_v3vw6")
+Label/colors/font_outline_color = Color(0, 0, 0, 1)
+Label/constants/outline_size = 10
+Label/font_sizes/font_size = 27
+Label/fonts/font = null
+Label/styles/normal = SubResource("StyleBoxEmpty_lylqp")
+
+[sub_resource type="Gradient" id="Gradient_d5jn3"]
+colors = PackedColorArray(0.0392157, 0.0392157, 0.0392157, 1, 0.0117647, 0.0117647, 0.0117647, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_sw5ve"]
+gradient = SubResource("Gradient_d5jn3")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_cisy3"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 0.0
+texture = SubResource("GradientTexture2D_sw5ve")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_utmhd"]
+content_margin_left = 1.0
+content_margin_bottom = 4.0
+
+[sub_resource type="Theme" id="Theme_6150o"]
+Button/colors/font_outline_color = Color(0.313726, 0.568627, 1, 1)
+Button/constants/outline_size = 10
+Button/font_sizes/font_size = 28
+Button/styles/normal = SubResource("StyleBoxTexture_cisy3")
+Label/colors/font_outline_color = Color(0, 0, 0, 1)
+Label/constants/outline_size = 10
+Label/font_sizes/font_size = 27
+Label/fonts/font = null
+Label/styles/normal = SubResource("StyleBoxEmpty_utmhd")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d5jn3"]
+content_margin_left = 10.0
+
+[sub_resource type="Gradient" id="Gradient_waa8r"]
+colors = PackedColorArray(0.0392157, 0.0392157, 0.0392157, 1, 0.0117647, 0.0117647, 0.0117647, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_cbrv0"]
+gradient = SubResource("Gradient_waa8r")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qebsx"]
+content_margin_left = 2.0
+content_margin_top = 6.0
+content_margin_right = 0.0
+content_margin_bottom = 5.0
+texture = SubResource("GradientTexture2D_cbrv0")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kpesr"]
+content_margin_left = 1.0
+content_margin_bottom = 4.0
+
+[sub_resource type="Theme" id="Theme_x08p4"]
+Button/colors/font_outline_color = Color(0.313726, 0.568627, 1, 1)
+Button/constants/outline_size = 10
+Button/font_sizes/font_size = 28
+Button/styles/normal = SubResource("StyleBoxTexture_qebsx")
+Label/colors/font_outline_color = Color(0, 0, 0, 1)
+Label/constants/outline_size = 10
+Label/font_sizes/font_size = 27
+Label/fonts/font = null
+Label/styles/normal = SubResource("StyleBoxEmpty_kpesr")
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_qjff3"]
+
+[sub_resource type="Gradient" id="Gradient_jw263"]
+colors = PackedColorArray(0.0392157, 0.0392157, 0.0392157, 1, 0.0117647, 0.0117647, 0.0117647, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_owwju"]
+gradient = SubResource("Gradient_jw263")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6150o"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 0.0
+texture = SubResource("GradientTexture2D_owwju")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6150o"]
+content_margin_left = 1.0
+content_margin_bottom = 4.0
+
+[sub_resource type="Theme" id="Theme_lkusi"]
+Button/colors/font_outline_color = Color(0.313726, 0.568627, 1, 1)
+Button/constants/outline_size = 10
+Button/font_sizes/font_size = 28
+Button/styles/normal = SubResource("StyleBoxTexture_6150o")
+Label/colors/font_outline_color = Color(0, 0, 0, 1)
+Label/constants/outline_size = 10
+Label/font_sizes/font_size = 27
+Label/fonts/font = null
+Label/styles/normal = SubResource("StyleBoxEmpty_6150o")
+
+[sub_resource type="Gradient" id="Gradient_06pl3"]
+colors = PackedColorArray(0.0392157, 0.0392157, 0.0392157, 1, 0.0117647, 0.0117647, 0.0117647, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_taxqa"]
+gradient = SubResource("Gradient_06pl3")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_w14jr"]
+content_margin_left = 2.0
+content_margin_top = 6.0
+content_margin_right = 0.0
+texture = SubResource("GradientTexture2D_taxqa")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d2p8c"]
+content_margin_left = 1.0
+content_margin_bottom = 4.0
+
+[sub_resource type="Theme" id="Theme_waa8r"]
+Button/colors/font_outline_color = Color(0.313726, 0.568627, 1, 1)
+Button/constants/outline_size = 10
+Button/font_sizes/font_size = 28
+Button/styles/normal = SubResource("StyleBoxTexture_w14jr")
+Label/colors/font_outline_color = Color(0, 0, 0, 1)
+Label/constants/outline_size = 10
+Label/font_sizes/font_size = 27
+Label/fonts/font = null
+Label/styles/normal = SubResource("StyleBoxEmpty_d2p8c")
+
+[node name="detector" type="PanelContainer"]
 process_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -148,93 +244,295 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 theme = ExtResource("2_me7fv")
-script = ExtResource("2_swapw")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_yfddx")
 
-[node name="margin" type="MarginContainer" parent="detector"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
-
-[node name="soundtrack" type="VBoxContainer" parent="detector/margin"]
+[node name="soundtrack" type="VBoxContainer" parent="."]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-theme = SubResource("Theme_hotwc")
-script = ExtResource("3_6cqct")
+theme = SubResource("Theme_jt5du")
 
-[node name="unfocus" type="Control" parent="detector/margin/soundtrack"]
-layout_mode = 2
-
-[node name="ost" type="HBoxContainer" parent="detector/margin/soundtrack"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="settings" parent="detector/margin/soundtrack/ost" instance=ExtResource("1_1yo1r")]
-custom_minimum_size = Vector2(0, 45)
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 1
-
-[node name="scroll" type="ScrollContainer" parent="detector/margin/soundtrack/ost"]
+[node name="scroll" type="ScrollContainer" parent="soundtrack"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_v3vw6")
 follow_focus = true
 horizontal_scroll_mode = 0
 
-[node name="margin" type="MarginContainer" parent="detector/margin/soundtrack/ost/scroll"]
+[node name="system" type="VBoxContainer" parent="soundtrack/scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = SubResource("Theme_jt5du")
+
+[node name="title" type="Label" parent="soundtrack/scroll/system"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5882353, 0.5882353, 0.5882353, 1)
+text = "Soundtrack system"
+
+[node name="dropdown" type="GridContainer" parent="soundtrack/scroll/system"]
+custom_minimum_size = Vector2(150, 200)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/margin_left = 2
-theme_override_constants/margin_top = 2
-theme_override_constants/margin_right = 2
-theme_override_constants/margin_bottom = 2
+theme = SubResource("Theme_jt5du")
+columns = 2
 
-[node name="dropdown" parent="detector/margin/soundtrack/ost/scroll/margin" instance=ExtResource("1_v2fxn")]
-custom_minimum_size = Vector2(150, 200)
-layout_mode = 2
-size_flags_vertical = 2
-
-[node name="margin" type="MarginContainer" parent="detector/margin/soundtrack"]
-layout_mode = 2
-theme_override_constants/margin_left = 0
-theme_override_constants/margin_top = -20
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 0
-
-[node name="playback" type="HBoxContainer" parent="detector/margin/soundtrack/margin"]
-custom_minimum_size = Vector2(200, 25)
-layout_mode = 2
-
-[node name="back" parent="detector/margin/soundtrack/margin/playback" instance=ExtResource("9_hotwc")]
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="detector/margin/soundtrack/margin/playback"]
+[node name="dungeon" type="VBoxContainer" parent="soundtrack/scroll/system/dropdown"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/separation = 0
 
-[node name="status" type="RichTextLabel" parent="detector/margin/soundtrack/margin/playback/VBoxContainer"]
-custom_minimum_size = Vector2(0, 27)
+[node name="caption" type="Label" parent="soundtrack/scroll/system/dropdown/dungeon"]
 layout_mode = 2
-size_flags_vertical = 10
-theme_override_fonts/bold_font = ExtResource("8_hqe2i")
-bbcode_enabled = true
-text = "Press ▶️ to start and [b]🚩[/b] to reset playback"
-fit_content = true
-autowrap_mode = 0
-horizontal_alignment = 1
-text_direction = 2
-script = ExtResource("6_upsxh")
+text = "Dungeon"
 
-[node name="progress" type="ProgressBar" parent="detector/margin/soundtrack/margin/playback/VBoxContainer"]
+[node name="caves" type="FoldableContainer" parent="soundtrack/scroll/system/dropdown/dungeon"]
+layout_mode = 2
+title = "Caves"
+
+[node name="temple" type="FoldableContainer" parent="soundtrack/scroll/system/dropdown/dungeon"]
+layout_mode = 2
+title = "Temple"
+
+[node name="boss" type="FoldableContainer" parent="soundtrack/scroll/system/dropdown/dungeon"]
+layout_mode = 2
+title = "Boss"
+
+[node name="world" type="VBoxContainer" parent="soundtrack/scroll/system/dropdown"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="caption" type="Label" parent="soundtrack/scroll/system/dropdown/world"]
+layout_mode = 2
+text = "World"
+
+[node name="walk" type="FoldableContainer" parent="soundtrack/scroll/system/dropdown/world"]
+layout_mode = 2
+title = "Walk"
+
+[node name="scene" type="FoldableContainer" parent="soundtrack/scroll/system/dropdown/world"]
+layout_mode = 2
+title = "Scene"
+
+[node name="heroes" type="FoldableContainer" parent="soundtrack/scroll/system/dropdown/world"]
+layout_mode = 2
+title = "Hero"
+
+[node name="group" type="VBoxContainer" parent="soundtrack/scroll/system/dropdown/world/heroes"]
+layout_mode = 2
+
+[node name="mix" parent="soundtrack/scroll/system/dropdown/world/heroes/group" instance=ExtResource("4_yfddx")]
+layout_mode = 2
+
+[node name="peace" type="Button" parent="soundtrack/scroll/system/dropdown/world/heroes/group"]
+custom_minimum_size = Vector2(0, 45)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "32. Bright Mission"
+alignment = 0
+
+[node name="caption" type="Label" parent="soundtrack/scroll/system"]
+layout_mode = 2
+text = "Default"
+
+[node name="default" type="GridContainer" parent="soundtrack/scroll/system"]
+layout_mode = 2
+size_flags_horizontal = 3
+columns = 2
+
+[node name="caves" type="FoldableContainer" parent="soundtrack/scroll/system/default"]
+layout_mode = 2
+size_flags_horizontal = 3
+title = "Caves"
+
+[node name="group" type="VBoxContainer" parent="soundtrack/scroll/system/default/caves"]
+layout_mode = 2
+
+[node name="mix" type="HSlider" parent="soundtrack/scroll/system/default/caves/group"]
+custom_minimum_size = Vector2(45, 45)
+layout_mode = 2
+theme_override_icons/grabber = SubResource("GradientTexture2D_v3vw6")
+theme_override_icons/grabber_highlight = ExtResource("4_cisy3")
+theme_override_icons/grabber_disabled = ExtResource("4_cisy3")
+theme_override_icons/tick = ExtResource("4_cisy3")
+theme_override_styles/slider = SubResource("StyleBoxEmpty_qjff3")
+theme_override_styles/grabber_area = ExtResource("5_yfddx")
+theme_override_styles/grabber_area_highlight = ExtResource("5_yfddx")
+value = 50.0
+
+[node name="status" type="Label" parent="soundtrack/scroll/system/default/caves/group/mix"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -6.5
+offset_right = 542.0
+offset_bottom = 6.5
+grow_vertical = 2
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0.6666667, 0.6666667, 0.6666667, 1)
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxEmpty_cisy3")
+text = "Period"
+text_overrun_behavior = 3
+
+[node name="times" type="Label" parent="soundtrack/scroll/system/default/caves/group/mix"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -542.0
+offset_top = -6.5
+offset_bottom = 6.5
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0.66656864, 0.6665687, 0.6665685, 1)
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxEmpty_cisy3")
+text = "50%"
+horizontal_alignment = 2
+text_overrun_behavior = 3
+
+[node name="peace" type="Button" parent="soundtrack/scroll/system/default/caves/group"]
+custom_minimum_size = Vector2(0, 45)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "43. Salt Steak"
+alignment = 0
+
+[node name="temple" type="FoldableContainer" parent="soundtrack/scroll/system/default"]
+layout_mode = 2
+size_flags_horizontal = 3
+title = "Temple"
+
+[node name="group" type="VBoxContainer" parent="soundtrack/scroll/system/default/temple"]
+layout_mode = 2
+
+[node name="mix" type="HSlider" parent="soundtrack/scroll/system/default/temple/group"]
+custom_minimum_size = Vector2(45, 45)
+layout_mode = 2
+theme_override_icons/grabber = SubResource("GradientTexture2D_v3vw6")
+theme_override_icons/grabber_highlight = ExtResource("4_cisy3")
+theme_override_icons/grabber_disabled = ExtResource("4_cisy3")
+theme_override_icons/tick = ExtResource("4_cisy3")
+theme_override_styles/slider = SubResource("StyleBoxEmpty_qjff3")
+theme_override_styles/grabber_area = ExtResource("5_yfddx")
+theme_override_styles/grabber_area_highlight = ExtResource("5_yfddx")
+value = 50.0
+
+[node name="status" type="Label" parent="soundtrack/scroll/system/default/temple/group/mix"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -6.5
+offset_right = 542.0
+offset_bottom = 6.5
+grow_vertical = 2
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0.6666667, 0.6666667, 0.6666667, 1)
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxEmpty_cisy3")
+text = "Period"
+text_overrun_behavior = 3
+
+[node name="times" type="Label" parent="soundtrack/scroll/system/default/temple/group/mix"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -542.0
+offset_top = -6.5
+offset_bottom = 6.5
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0.66656864, 0.6665687, 0.6665685, 1)
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxEmpty_cisy3")
+text = "50%"
+horizontal_alignment = 2
+text_overrun_behavior = 3
+
+[node name="walk" parent="soundtrack/scroll/system/default/temple/group" instance=ExtResource("7_v3vw6")]
+layout_mode = 2
+
+[node name="scene" type="FoldableContainer" parent="soundtrack/scroll/system/default"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+title = "Scene"
+
+[node name="group" type="VBoxContainer" parent="soundtrack/scroll/system/default/scene"]
+layout_mode = 2
+
+[node name="mix" type="HSlider" parent="soundtrack/scroll/system/default/scene/group"]
+custom_minimum_size = Vector2(45, 45)
+layout_mode = 2
+theme_override_icons/grabber = SubResource("GradientTexture2D_v3vw6")
+theme_override_icons/grabber_highlight = ExtResource("4_cisy3")
+theme_override_icons/grabber_disabled = ExtResource("4_cisy3")
+theme_override_icons/tick = ExtResource("4_cisy3")
+theme_override_styles/slider = SubResource("StyleBoxEmpty_qjff3")
+theme_override_styles/grabber_area = ExtResource("5_yfddx")
+theme_override_styles/grabber_area_highlight = ExtResource("5_yfddx")
+value = 50.0
+
+[node name="status" type="Label" parent="soundtrack/scroll/system/default/scene/group/mix"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -6.5
+offset_right = 542.0
+offset_bottom = 6.5
+grow_vertical = 2
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0.6666667, 0.6666667, 0.6666667, 1)
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxEmpty_cisy3")
+text = "Period"
+text_overrun_behavior = 3
+
+[node name="times" type="Label" parent="soundtrack/scroll/system/default/scene/group/mix"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -542.0
+offset_top = -6.5
+offset_bottom = 6.5
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0.66656864, 0.6665687, 0.6665685, 1)
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxEmpty_cisy3")
+text = "50%"
+horizontal_alignment = 2
+text_overrun_behavior = 3
+
+[node name="boss" type="FoldableContainer" parent="soundtrack/scroll/system/default"]
+layout_mode = 2
+title = "Boss"
+
+[node name="group" type="VBoxContainer" parent="soundtrack/scroll/system/default/boss"]
+layout_mode = 2
+
+[node name="peace" type="Button" parent="soundtrack/scroll/system/default/boss/group"]
+custom_minimum_size = Vector2(0, 45)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "43. Gentle Gesture"
+alignment = 0
+
+[node name="progress" type="ProgressBar" parent="soundtrack"]
 custom_minimum_size = Vector2(0, 2)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -243,14 +541,190 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_fb1ce")
 max_value = 30.0
 show_percentage = false
 
-[node name="Button" type="Button" parent="detector/margin/soundtrack/margin/playback"]
+[node name="metadata" type="GridContainer" parent="soundtrack"]
+layout_mode = 2
+columns = 2
+
+[node name="caption" type="LineEdit" parent="soundtrack/metadata"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Caption"
+
+[node name="color" type="ColorPickerButton" parent="soundtrack/metadata/caption"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -30.0
+offset_right = 30.0
+grow_vertical = 0
+color = Color(0.047058824, 0.047058824, 0.047058824, 1)
+
+[node name="author" type="LineEdit" parent="soundtrack/metadata"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Author"
+
+[node name="color" type="ColorPickerButton" parent="soundtrack/metadata/author"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -30.0
+offset_right = 30.0
+grow_vertical = 0
+color = Color(0.04755766, 0.047557645, 0.047557645, 1)
+
+[node name="product" type="LineEdit" parent="soundtrack/metadata"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Product"
+
+[node name="color" type="ColorPickerButton" parent="soundtrack/metadata/product"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -30.0
+offset_right = 30.0
+grow_vertical = 0
+color = Color(0.047058824, 0.047058824, 0.047058824, 1)
+
+[node name="link" type="LineEdit" parent="soundtrack/metadata"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Link"
+
+[node name="color" type="Button" parent="soundtrack/metadata/link"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -31.0
+offset_right = 30.0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("3_d5jn3")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_sw5ve")
+text = "🔗"
+
+[node name="options" type="HBoxContainer" parent="soundtrack"]
+layout_mode = 2
+theme = SubResource("Theme_utmhd")
+
+[node name="back" type="Button" parent="soundtrack/options"]
+custom_minimum_size = Vector2(45, 45)
+layout_mode = 2
+theme = ExtResource("6_lylqp")
+shortcut = ExtResource("10_v3vw6")
+text = "✅"
+
+[node name="folder" type="Button" parent="soundtrack/options"]
+visible = false
+custom_minimum_size = Vector2(45, 45)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 2
+theme = SubResource("Theme_6150o")
+theme_override_constants/outline_size = 3
+text = "📁"
+alignment = 0
+
+[node name="caption" type="Label" parent="soundtrack/options"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.66656864, 0.6665687, 0.66656864, 1)
+theme_override_fonts/font = ExtResource("11_lylqp")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxEmpty_d5jn3")
+text = "Press ▶️ to start and hold to reset"
+vertical_alignment = 1
+
+[node name="restart" type="Button" parent="soundtrack/options"]
+visible = false
+custom_minimum_size = Vector2(45, 45)
+layout_mode = 2
+theme = SubResource("Theme_x08p4")
+theme_override_colors/font_outline_color = Color(0.176471, 0.658824, 0.294118, 1)
+theme_override_fonts/font = ExtResource("8_hqe2i")
+theme_override_font_sizes/font_size = 28
+text = "🚩"
+
+[node name="backward" type="Button" parent="soundtrack/options"]
+visible = false
+custom_minimum_size = Vector2(45, 45)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0.176471, 0.658824, 0.294118, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 26
+text = "◀I"
+
+[node name="play" type="Button" parent="soundtrack/options"]
+visible = false
+custom_minimum_size = Vector2(45, 45)
+layout_mode = 2
+theme = ExtResource("6_lylqp")
+theme_override_colors/font_outline_color = Color(0.176471, 0.658824, 0.294118, 1)
+toggle_mode = true
+button_group = SubResource("ButtonGroup_qjff3")
+text = "▶️I I"
+
+[node name="forward" type="Button" parent="soundtrack/options"]
+visible = false
+custom_minimum_size = Vector2(45, 45)
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_colors/font_outline_color = Color(0.176471, 0.658824, 0.294118, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 26
+text = "I▶️"
+
+[node name="reset" type="Button" parent="soundtrack/options"]
+visible = false
+custom_minimum_size = Vector2(45, 45)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0.654902, 0.0941176, 0.160784, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("7_jt5du")
+theme_override_font_sizes/font_size = 28
+text = "🧼"
+
+[node name="exporter" type="Button" parent="soundtrack/options"]
+visible = false
+custom_minimum_size = Vector2(45, 45)
+layout_mode = 2
+size_flags_vertical = 10
+theme = SubResource("Theme_lkusi")
+theme_override_constants/outline_size = 3
+text = "📁"
+alignment = 0
+
+[node name="copy" type="Button" parent="soundtrack/options"]
+visible = false
+custom_minimum_size = Vector2(45, 45)
+layout_mode = 2
+theme = SubResource("Theme_waa8r")
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 26
+toggle_mode = true
+text = "🖌️"
+
+[node name="up" type="Button" parent="soundtrack/options"]
+visible = false
 custom_minimum_size = Vector2(45, 45)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("8_hqe2i")
 theme_override_font_sizes/font_size = 26
-text = "🔽"
+text = "🔼"
 
-[node name="options" parent="detector/margin/soundtrack" instance=ExtResource("2_s3j2j")]
+[node name="edit" type="Button" parent="soundtrack/options"]
+custom_minimum_size = Vector2(45, 45)
 layout_mode = 2
-
-[node name="processor" parent="." instance=ExtResource("4_gw4ot")]
+theme_override_font_sizes/font_size = 26
+toggle_mode = true
+text = "📝"

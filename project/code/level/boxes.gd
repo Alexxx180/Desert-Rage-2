@@ -1,11 +1,11 @@
 class_name LevelBoxes extends Node
 
 enum { BORDERS, WORLD, ENTITY, GROUND, SLIDE = 2, POWER = 40000 } # , JUMP = 200000, GRAVITY = 700000 # CHARACTER = 3, BOX = 5
-
+"""
 const small: PackedScene = preload("res://pre/box/small.tscn")
 const large: PackedScene = preload("res://pre/box/large.tscn")
 const fire: PackedScene = preload("res://pre/box/fire.tscn")
-
+"""
 var velocity: PackedVector2Array = []
 var assets: Array[AnimatableBody2D] = []
 var height: PackedByteArray = []
@@ -33,7 +33,7 @@ func set_box(asset: PackedScene, data: PackedByteArray) -> void:
 	height.append(data[0])
 	weight.append(data[1])
 	velocity.append(Vector2.ZERO)
-
+"""
 func add_box(box_type: int, position: Vector2) -> void:
 	var no: int = assets.size()
 	match box_type:
@@ -46,7 +46,7 @@ func add_box(box_type: int, position: Vector2) -> void:
 	assets[no].position = position + Vector2(0, 28)
 	assets[no].name = str(assets[no].name, '_', no)
 	controls(assets[no])
-
+"""
 func get_box(no: int) -> AnimatableBody2D: return assets[no]
 
 func throw(box: int, motion: Vector2i) -> void: # THROW

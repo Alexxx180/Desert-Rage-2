@@ -1,6 +1,5 @@
-[gd_scene load_steps=15 format=3 uid="uid://br061ue566x82"]
+[gd_scene load_steps=13 format=3 uid="uid://br061ue566x82"]
 
-[ext_resource type="Script" path="res://script/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/hints/skills.gd" id="1_g5mgg"]
 [ext_resource type="FontFile" uid="uid://b37js8y80ak1k" path="res://data/font/noto_sans/NotoColorEmoji-Regular.ttf" id="1_w1r1c"]
 [ext_resource type="PackedScene" uid="uid://qlgo5b48kj7l" path="res://def/hud/status/slots.tscn" id="4_kw8kk"]
 
@@ -33,19 +32,13 @@ content_margin_bottom = 5.0
 content_margin_right = 30.0
 content_margin_bottom = 1.0
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uavvs"]
+content_margin_bottom = 22.0
+bg_color = Color(0, 0, 0, 1)
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vlwq6"]
 content_margin_left = 15.0
 content_margin_bottom = 8.0
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n2ro4"]
-bg_color = Color(0.03137255, 0.03137255, 0.03137255, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v3cke"]
-content_margin_left = 0.0
-content_margin_top = 0.0
-content_margin_right = 0.0
-content_margin_bottom = 0.0
-bg_color = Color(0.20511743, 0.20511743, 0.20511743, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_685r6"]
 content_margin_left = 55.0
@@ -62,7 +55,6 @@ offset_right = 1152.0
 offset_bottom = 702.0
 theme = SubResource("Theme_50ghp")
 columns = 2
-script = ExtResource("1_g5mgg")
 
 [node name="slap" type="Button" parent="."]
 custom_minimum_size = Vector2(0, 60)
@@ -118,15 +110,15 @@ anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
 offset_left = -60.0
-offset_top = -13.0
-offset_bottom = 13.0
+offset_top = -13.5
+offset_bottom = 13.5
 grow_horizontal = 0
 grow_vertical = 2
 size_flags_horizontal = 8
 theme_override_font_sizes/font_size = 18
 theme_override_styles/normal = SubResource("StyleBoxEmpty_v0un7")
-text = "       I"
-horizontal_alignment = 2
+text = " I"
+horizontal_alignment = 1
 
 [node name="kick" type="Button" parent="."]
 custom_minimum_size = Vector2(0, 60)
@@ -182,15 +174,15 @@ anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
 offset_left = -60.0
-offset_top = -13.0
-offset_bottom = 13.0
+offset_top = -13.5
+offset_bottom = 13.5
 grow_horizontal = 0
 grow_vertical = 2
 size_flags_horizontal = 8
 theme_override_font_sizes/font_size = 18
 theme_override_styles/normal = SubResource("StyleBoxEmpty_v0un7")
-text = "       I"
-horizontal_alignment = 2
+text = "I"
+horizontal_alignment = 1
 
 [node name="double" type="Button" parent="."]
 custom_minimum_size = Vector2(0, 60)
@@ -249,19 +241,23 @@ anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
 offset_left = -60.0
-offset_top = -13.0
-offset_bottom = 13.0
+offset_top = -13.5
+offset_bottom = 13.5
 grow_horizontal = 0
 grow_vertical = 2
 size_flags_horizontal = 8
 theme_override_font_sizes/font_size = 18
 theme_override_styles/normal = SubResource("StyleBoxEmpty_v0un7")
-text = "       I"
-horizontal_alignment = 2
+text = "I"
+horizontal_alignment = 1
 
 [node name="slots" parent="." instance=ExtResource("4_kw8kk")]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
+theme_override_constants/line_spacing = -8
+theme_override_styles/normal = SubResource("StyleBoxFlat_uavvs")
+text = "+ 1% доп. урона
+фывфывфылвофыловоывлофво"
 autowrap_mode = 2
 
 [node name="cure" type="Button" parent="."]
@@ -321,37 +317,17 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -73.0
-offset_top = -13.0
-offset_bottom = 13.0
+offset_left = -60.0
+offset_top = -13.5
+offset_bottom = 13.5
 grow_horizontal = 0
 grow_vertical = 2
 size_flags_horizontal = 8
 theme_override_colors/font_color = Color(0.56078434, 1, 0.5294118, 1)
 theme_override_font_sizes/font_size = 18
 theme_override_styles/normal = SubResource("StyleBoxEmpty_v0un7")
-text = "2       I"
-horizontal_alignment = 2
-
-[node name="cost" type="ProgressBar" parent="cure"]
-custom_minimum_size = Vector2(2, 0)
-layout_mode = 1
-anchors_preset = 11
-anchor_left = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -1.0
-grow_horizontal = 0
-grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 8
-theme_override_styles/background = SubResource("StyleBoxFlat_n2ro4")
-theme_override_styles/fill = SubResource("StyleBoxFlat_v3cke")
-max_value = 5.0
-step = 1.0
-value = 2.0
-fill_mode = 3
-show_percentage = false
+text = "I"
+horizontal_alignment = 1
 
 [node name="two-punch" type="Button" parent="."]
 custom_minimum_size = Vector2(0, 60)
@@ -409,17 +385,17 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -73.0
-offset_top = -13.0
-offset_bottom = 13.0
+offset_left = -60.0
+offset_top = -13.5
+offset_bottom = 13.5
 grow_horizontal = 0
 grow_vertical = 2
 size_flags_horizontal = 8
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 18
 theme_override_styles/normal = SubResource("StyleBoxEmpty_v0un7")
-text = "       I"
-horizontal_alignment = 2
+text = "I"
+horizontal_alignment = 1
 
 [node name="aid" type="Button" parent="."]
 custom_minimum_size = Vector2(0, 60)
@@ -479,37 +455,17 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -73.0
-offset_top = -13.0
-offset_bottom = 13.0
+offset_left = -60.0
+offset_top = -13.5
+offset_bottom = 13.5
 grow_horizontal = 0
 grow_vertical = 2
 size_flags_horizontal = 8
 theme_override_colors/font_color = Color(0.56078434, 1, 0.5294118, 1)
 theme_override_font_sizes/font_size = 18
 theme_override_styles/normal = SubResource("StyleBoxEmpty_v0un7")
-text = "2       I "
-horizontal_alignment = 2
-
-[node name="cost" type="ProgressBar" parent="aid"]
-custom_minimum_size = Vector2(2, 0)
-layout_mode = 1
-anchors_preset = 11
-anchor_left = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -1.0
-grow_horizontal = 0
-grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 8
-theme_override_styles/background = SubResource("StyleBoxFlat_n2ro4")
-theme_override_styles/fill = SubResource("StyleBoxFlat_v3cke")
-max_value = 5.0
-step = 1.0
-value = 2.0
-fill_mode = 3
-show_percentage = false
+text = "I"
+horizontal_alignment = 1
 
 [node name="single-shot" type="Button" parent="."]
 custom_minimum_size = Vector2(0, 60)
@@ -567,17 +523,17 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -73.0
-offset_top = -13.0
-offset_bottom = 13.0
+offset_left = -60.0
+offset_top = -13.5
+offset_bottom = 13.5
 grow_horizontal = 0
 grow_vertical = 2
 size_flags_horizontal = 8
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 18
 theme_override_styles/normal = SubResource("StyleBoxEmpty_v0un7")
-text = "       I"
-horizontal_alignment = 2
+text = "I"
+horizontal_alignment = 1
 
 [node name="fire" type="Button" parent="."]
 custom_minimum_size = Vector2(0, 60)
@@ -635,17 +591,17 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -73.0
-offset_top = -13.0
-offset_bottom = 13.0
+offset_left = -60.0
+offset_top = -13.5
+offset_bottom = 13.5
 grow_horizontal = 0
 grow_vertical = 2
 size_flags_horizontal = 8
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 18
 theme_override_styles/normal = SubResource("StyleBoxEmpty_v0un7")
-text = "1     •I•"
-horizontal_alignment = 2
+text = "•I•"
+horizontal_alignment = 1
 
 [node name="whip" type="Button" parent="."]
 custom_minimum_size = Vector2(0, 60)
@@ -703,17 +659,17 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -73.0
-offset_top = -13.0
-offset_bottom = 13.0
+offset_left = -60.0
+offset_top = -13.5
+offset_bottom = 13.5
 grow_horizontal = 0
 grow_vertical = 2
 size_flags_horizontal = 8
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 18
 theme_override_styles/normal = SubResource("StyleBoxEmpty_v0un7")
-text = "1       I"
-horizontal_alignment = 2
+text = "I"
+horizontal_alignment = 1
 
 [node name="breakfly" type="Button" parent="."]
 custom_minimum_size = Vector2(0, 60)
@@ -772,14 +728,14 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -73.0
-offset_top = -13.0
-offset_bottom = 13.0
+offset_left = -60.0
+offset_top = -13.5
+offset_bottom = 13.5
 grow_horizontal = 0
 grow_vertical = 2
 size_flags_horizontal = 8
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 18
 theme_override_styles/normal = SubResource("StyleBoxEmpty_v0un7")
-text = "3       I"
-horizontal_alignment = 2
+text = "I"
+horizontal_alignment = 1

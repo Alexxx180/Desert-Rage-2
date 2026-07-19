@@ -151,7 +151,7 @@ const mirror: Array[StringName] = [&"res://now/see/mirror/ray.tscn", &"res://now
 # PRELOADS
 # const sand: PackedScene = preload("res://pre/particle/sand.tscn")
 # const throw: PackedScene = preload("res://pre/particle/fight/kick.tscn")
-
+"""
 const dialog: PackedScene = preload("res://pre/ui/dialog.tscn")
 const combo: PackedScene = preload("res://pre/ui/combo.tscn")
 const multiply: PackedScene = preload("res://pre/multiply.tscn")
@@ -161,3 +161,4 @@ const bag: PackedScene = preload("res://pre/ui/status/items.tscn")
 const help: CompressedTexture2DArray = preload("res://icon/help/z_master.svg")
 const grabber: GradientTexture2D = preload("res://pre/ui/grabber.tres")
 const root: Script = preload("res://code/level/root.gd")
+"""

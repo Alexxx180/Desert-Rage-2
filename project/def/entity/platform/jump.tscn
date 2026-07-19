@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://cqxt80wks7rq3"]
+
+[ext_resource type="Shape2D" uid="uid://i0icy78wfk8i" path="res://data/geometry/characters/character/levels.tres" id="2_7ccwo"]
+[ext_resource type="Texture2D" uid="uid://core4cjo58407" path="res://icon/item/platform/p_jump.svg" id="2_b8cm6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_133w7"]
+size = Vector2(64, 64)
+
+[sub_resource type="Gradient" id="Gradient_e76lj"]
+colors = PackedColorArray(0, 0, 0, 0.235294, 0, 0, 0, 0.0784314)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_e76lj"]
+gradient = SubResource("Gradient_e76lj")
+height = 32
+fill_from = Vector2(0.495726, 0)
+fill_to = Vector2(0.487179, 0.995726)
+
+[node name="jump" type="CharacterBody2D"]
+position = Vector2(0, 22)
+collision_layer = 2
+motion_mode = 1
+
+[node name="placement" type="CollisionShape2D" parent="."]
+position = Vector2(0, -22)
+shape = SubResource("RectangleShape2D_133w7")
+debug_color = Color(0.909583, 0.271589, 0.324396, 0.42)
+
+[node name="stand" type="Sprite2D" parent="."]
+position = Vector2(-32, -54)
+texture = ExtResource("2_b8cm6")
+offset = Vector2(32, 32)
+
+[node name="shadow" type="Sprite2D" parent="stand"]
+position = Vector2(32, 86)
+texture = SubResource("GradientTexture2D_e76lj")
+
+[node name="direction" type="Area2D" parent="."]
+
+[node name="shape" type="CollisionShape2D" parent="direction"]
+shape = ExtResource("2_7ccwo")
