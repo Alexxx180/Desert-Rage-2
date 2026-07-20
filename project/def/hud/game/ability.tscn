@@ -1,8 +1,6 @@
 [gd_scene load_steps=13 format=3 uid="uid://bo6wehp5f8viu"]
 
-[ext_resource type="Script" path="res://script/ui/hud/detector/game/margin/priorities/stats/inventory/ability/topic/stack/stack.gd" id="1_hq6jf"]
-[ext_resource type="PackedScene" uid="uid://br061ue566x82" path="res://def/hud/hud/gameplay/skills.tscn" id="3_ogicf"]
-[ext_resource type="PackedScene" uid="uid://cq5jn6k2bwg5n" path="res://def/hud/hud/ability/status/status.tscn" id="3_uklt7"]
+[ext_resource type="PackedScene" uid="uid://cq5jn6k2bwg5n" path="res://def/hud/game/ability_status.tscn" id="3_uklt7"]
 [ext_resource type="FontFile" uid="uid://c4ygkmnbt1j7y" path="res://data/font/LTSuperiorSerif-Semibold.otf" id="5_grhtg"]
 [ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://data/theme/patterns/template/menu/settings/topic/footer.tres" id="9_xc6ys"]
 
@@ -31,9 +29,9 @@ VScrollBar/styles/scroll = SubResource("StyleBoxFlat_hq6jf")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ooq4j"]
 content_margin_left = 20.0
-content_margin_top = 5.0
+content_margin_top = 0.0
 content_margin_right = 10.0
-content_margin_bottom = 20.0
+content_margin_bottom = 0.0
 bg_color = Color(0, 0, 0, 1)
 expand_margin_left = 12.0
 expand_margin_right = 12.0
@@ -41,6 +39,16 @@ expand_margin_right = 12.0
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_grhtg"]
 content_margin_left = 5.0
 content_margin_right = 5.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e8epa"]
+content_margin_left = 55.0
+bg_color = Color(0.00351917, 0.00351917, 0.00351916, 1)
+border_width_left = 2
+border_width_right = 2
+border_color = Color(0.03137255, 0.03137255, 0.03137255, 1)
+
+[sub_resource type="Theme" id="Theme_50ghp"]
+Button/styles/normal = SubResource("StyleBoxFlat_e8epa")
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bgds4"]
 
@@ -57,12 +65,10 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_ooq4j")
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 15
-script = ExtResource("1_hq6jf")
 
 [node name="status" parent="stack" instance=ExtResource("3_uklt7")]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
-fixed = true
 
 [node name="pallete" type="HFlowContainer" parent="stack"]
 layout_mode = 2
@@ -128,8 +134,10 @@ text = "Пламя - сила, вызволяющая узников и отго
 Кнут - элемент присутствия и гибкости, позволяющий хвататься за столбы."
 autowrap_mode = 2
 
-[node name="skills" parent="stack" instance=ExtResource("3_ogicf")]
+[node name="skills" type="GridContainer" parent="stack"]
 layout_mode = 2
+theme = SubResource("Theme_50ghp")
+columns = 2
 
 [node name="title" type="RichTextLabel" parent="stack"]
 custom_minimum_size = Vector2(50, 0)

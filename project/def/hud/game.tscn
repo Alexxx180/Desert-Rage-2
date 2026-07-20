@@ -1,12 +1,22 @@
-[gd_scene load_steps=7 format=3 uid="uid://cel3u88abrgv3"]
+[gd_scene load_steps=11 format=3 uid="uid://cel3u88abrgv3"]
 
 [ext_resource type="Theme" uid="uid://p2br8b6ea3n6" path="res://data/theme/patterns/template/menu/hud/pause/pause.tres" id="1_xguj3"]
 [ext_resource type="Script" uid="uid://81xdi4771u0a" path="res://code/node/menu/game.gd" id="2_dtwvy"]
-[ext_resource type="Script" uid="uid://bin7ih026bhac" path="res://code/node/menu/priorities.gd" id="3_b603l"]
+[ext_resource type="PackedScene" uid="uid://bsgaxv8107ty" path="res://def/hud/game/inventory.tscn" id="4_61iek"]
 [ext_resource type="StyleBox" uid="uid://cvfnqancophme" path="res://data/theme/style/solid-color-panel.tres" id="4_mfbme"]
-[ext_resource type="PackedScene" uid="uid://trd7xarcxhy1" path="res://def/hud/hud/ability/controls.tscn" id="7_yy184"]
+[ext_resource type="PackedScene" uid="uid://7o2xe4bosovy" path="res://def/hud/game/stats.tscn" id="4_ni7w6"]
+[ext_resource type="PackedScene" uid="uid://bo6wehp5f8viu" path="res://def/hud/game/ability.tscn" id="6_86rwn"]
+[ext_resource type="PackedScene" uid="uid://trd7xarcxhy1" path="res://def/hud/game/controls.tscn" id="7_yy184"]
+[ext_resource type="PackedScene" uid="uid://pwqvjeffo6u5" path="res://def/hud/game/priorities.tscn" id="8_qh4xx"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l3qyh"]
+bg_color = Color(0, 0, 0, 1)
+expand_margin_left = 12.0
+expand_margin_right = 12.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_86rwn"]
+content_margin_left = 20.0
+content_margin_right = 10.0
 bg_color = Color(0, 0, 0, 1)
 expand_margin_left = 12.0
 expand_margin_right = 12.0
@@ -35,7 +45,6 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 split_offset = 2000
-script = ExtResource("3_b603l")
 
 [node name="left" type="HSplitContainer" parent="right"]
 layout_mode = 2
@@ -48,6 +57,9 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/panel = ExtResource("4_mfbme")
 
+[node name="scroll" parent="right/left/stats" instance=ExtResource("4_ni7w6")]
+layout_mode = 2
+
 [node name="top" type="VSplitContainer" parent="right/left"]
 layout_mode = 2
 size_flags_vertical = 3
@@ -57,11 +69,14 @@ split_offset = -2000
 [node name="inventory" type="PanelContainer" parent="right/left/top"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_styles/panel = ExtResource("4_mfbme")
 
 [node name="sides" type="Panel" parent="right/left/top/inventory"]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_l3qyh")
+
+[node name="scroll" parent="right/left/top/inventory" instance=ExtResource("4_61iek")]
+layout_mode = 2
+vertical_scroll_mode = 2
 
 [node name="bottom" type="VSplitContainer" parent="right/left/top"]
 layout_mode = 2
@@ -82,7 +97,14 @@ theme_override_styles/panel = ExtResource("4_mfbme")
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_l3qyh")
 
+[node name="scroll" parent="right/left/top/bottom/ability" instance=ExtResource("6_86rwn")]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_86rwn")
+
 [node name="priorities" type="PanelContainer" parent="right"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/panel = ExtResource("4_mfbme")
+
+[node name="scroll" parent="right/priorities" instance=ExtResource("8_qh4xx")]
+layout_mode = 2

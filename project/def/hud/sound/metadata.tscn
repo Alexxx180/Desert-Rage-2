@@ -1,0 +1,46 @@
+[gd_scene load_steps=4 format=3 uid="uid://bpbm3gdmg5l81"]
+
+[ext_resource type="FontFile" uid="uid://b37js8y80ak1k" path="res://data/font/noto_sans/NotoColorEmoji-Regular.ttf" id="1_587bp"]
+[ext_resource type="PackedScene" uid="uid://d3wu2m8n4tmrh" path="res://def/hud/sound/caption.tscn" id="1_lirv6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sw5ve"]
+bg_color = Color(0, 0, 0, 1)
+border_width_bottom = 2
+border_color = Color(0.77254903, 0.14901961, 0.26666668, 1)
+
+[node name="metadata" type="GridContainer"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 66.0
+grow_horizontal = 2
+columns = 2
+
+[node name="caption" parent="." instance=ExtResource("1_lirv6")]
+layout_mode = 2
+
+[node name="author" parent="." instance=ExtResource("1_lirv6")]
+layout_mode = 2
+placeholder_text = "Author"
+
+[node name="product" parent="." instance=ExtResource("1_lirv6")]
+layout_mode = 2
+placeholder_text = "Product"
+
+[node name="link" type="LineEdit" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Link"
+
+[node name="color" type="Button" parent="link"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -31.0
+offset_right = 30.0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("1_587bp")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_sw5ve")
+text = "🔗"

@@ -1,0 +1,40 @@
+[gd_scene load_steps=7 format=3 uid="uid://dycoegwvfqcpx"]
+
+[ext_resource type="FontFile" uid="uid://b2wbdbnkxcqv1" path="res://data/font/noto_sans/NotoEmoji-VariableFont_wght.ttf" id="1_ta8pe"]
+
+[sub_resource type="Gradient" id="Gradient_waa8r"]
+colors = PackedColorArray(0.0392157, 0.0392157, 0.0392157, 1, 0.0117647, 0.0117647, 0.0117647, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_cbrv0"]
+gradient = SubResource("Gradient_waa8r")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qebsx"]
+content_margin_left = 2.0
+content_margin_top = 6.0
+content_margin_right = 0.0
+content_margin_bottom = 5.0
+texture = SubResource("GradientTexture2D_cbrv0")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kpesr"]
+content_margin_left = 1.0
+content_margin_bottom = 4.0
+
+[sub_resource type="Theme" id="Theme_x08p4"]
+Button/colors/font_outline_color = Color(0.313726, 0.568627, 1, 1)
+Button/constants/outline_size = 10
+Button/font_sizes/font_size = 28
+Button/styles/normal = SubResource("StyleBoxTexture_qebsx")
+Label/colors/font_outline_color = Color(0, 0, 0, 1)
+Label/constants/outline_size = 10
+Label/font_sizes/font_size = 27
+Label/fonts/font = null
+Label/styles/normal = SubResource("StyleBoxEmpty_kpesr")
+
+[node name="restart" type="Button"]
+visible = false
+custom_minimum_size = Vector2(45, 45)
+theme = SubResource("Theme_x08p4")
+theme_override_colors/font_outline_color = Color(0.176471, 0.658824, 0.294118, 1)
+theme_override_fonts/font = ExtResource("1_ta8pe")
+theme_override_font_sizes/font_size = 28
+text = "🚩"

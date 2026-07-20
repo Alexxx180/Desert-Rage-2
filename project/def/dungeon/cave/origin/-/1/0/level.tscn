@@ -1,10 +1,8 @@
-[gd_scene load_steps=6 format=4 uid="uid://bfko3o18pnpav"]
+[gd_scene load_steps=4 format=4 uid="uid://bfko3o18pnpav"]
 
 [ext_resource type="PackedScene" uid="uid://rlwfnl6rvpkj" path="res://def/build/execute.tscn" id="2_e6c8d"]
 [ext_resource type="PackedScene" uid="uid://d0i3jl2uefg53" path="res://def/build/border/cave.tscn" id="2_r7yuq"]
-[ext_resource type="PackedScene" uid="uid://582u4do5bi2h" path="res://def/entity/secret/plot.tscn" id="7_cptql"]
 [ext_resource type="PackedScene" uid="uid://b83b7oo2fmh5h" path="res://def/build/group.tscn" id="7_hciwg"]
-[ext_resource type="PackedScene" uid="uid://dmsl1kpysta4q" path="res://def/entity/secret/secret.tscn" id="9_okwvb"]
 
 [node name="map-1-0" type="Node2D"]
 y_sort_enabled = true
@@ -18,45 +16,3 @@ tile_map_data = PackedByteArray("AAAOADwAAAAAAAAABAAFAF0AAAAAAAAABAAqAFoAAAAAAAA
 
 [node name="group" parent="." instance=ExtResource("7_hciwg")]
 position = Vector2(1414, 5485)
-
-[node name="dialog" type="Node2D" parent="."]
-visible = false
-
-[node name="entrance" parent="dialog" instance=ExtResource("7_cptql")]
-position = Vector2(1413, 5484)
-plot_text = Array[String](["Рей - Перед нами просторное место, идём дальше"])
-
-[node name="developer" parent="dialog" instance=ExtResource("7_cptql")]
-position = Vector2(1737, 6423)
-plot_text = Array[String](["Рок - Вау...", "Дид - Что у вас там?", "Рей - Похоже на какое-то скрытое сооружение, огромная комната", "Дид - Хм... Есть какие-то отличия от предыдущих мест?", "Рей - Здесь разбросаны послания, которые прогнозируют будущее", "Дид - Великолепная работа, обязательно посмотрите каждый уголок"])
-
-[node name="hero-names" parent="dialog" instance=ExtResource("7_cptql")]
-position = Vector2(1818, 8421)
-plot_text = Array[String](["Рей - Эй, Рок, тут про нас написано!", "Рок - Древние однофамильцы?", "Дид - Нет, быть такого не может, на то время был совсем другой язык.", "Дид - Возможно это послание оставил кто-то другой"])
-
-[node name="standing-here" parent="dialog" instance=ExtResource("7_cptql")]
-position = Vector2(921, 4256)
-plot_text = Array[String](["Рок - Мы теряем такое сокровище, пока остаемся здесь, так ведь?"])
-
-[node name="group-start" parent="dialog" instance=ExtResource("7_cptql")]
-position = Vector2(507, 2781)
-plot_text = Array[String](["Рей - Подсоби-ка приятель", "Рок - Не вопрос"])
-
-[node name="group-end" parent="dialog" instance=ExtResource("7_cptql")]
-position = Vector2(795, 2131)
-plot_text = Array[String](["Рок - Отличная работа!"])
-
-[node name="secrets" type="Node2D" parent="."]
-visible = false
-
-[node name="desert" parent="secrets" instance=ExtResource("9_okwvb")]
-position = Vector2(1721, 7570)
-
-[node name="rage" parent="secrets" instance=ExtResource("9_okwvb")]
-position = Vector2(1749, 7971)
-
-[node name="ray" parent="secrets" instance=ExtResource("9_okwvb")]
-position = Vector2(1304, 8540)
-
-[node name="rock" parent="secrets" instance=ExtResource("9_okwvb")]
-position = Vector2(2336, 8554)

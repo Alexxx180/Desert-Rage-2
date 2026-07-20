@@ -12,11 +12,10 @@ extends Control
 
 @onready var priorities: PanelContainer = right.get_node(^"priorities")
 @onready var stats: PanelContainer = left.get_node(^"stats")
-@onready var inventory: PanelContainer = top.get_node(^"inventory")
+@onready var inventory: PanelContainer = top.get_node(^"inventory") # PanelContainer
 @onready var ability: PanelContainer = bottom.get_node(^"ability")
 
-@onready var margin: MarginContainer = bottom.get_node(^"margin")
-@onready var controls: VBoxContainer = margin.get_node(^"controls")
+@onready var controls: MarginContainer = bottom.get_node(^"controls")
 
 @onready var help: VBoxContainer = controls.get_node(^"middle/help")
 

@@ -105,23 +105,17 @@ static func lazy_at(parent: Node, sibling: Node, path: String, caption: StringNa
 	return node
 
 # LOADS
-const first_level: StringName = &"res://now/dungeon/cave/origin/0/0/level.tscn"
-const level: StringName = &"res://now/dungeon/%s/%s/%d/level.tscn"
-const main_menu: StringName = &"res://now/credits/main/main.tscn"
+const saves: StringName = &"user://saves.bin"
+const ost: StringName = &"user://ost.bin"
+
+const first_level: StringName = &"res://def/dungeon/cave/origin/0/0/level.tscn"
+const level: StringName = &"res://def/dungeon/%s/%s/%d/level.tscn"
+const credits: StringName = &"res://def/dungeon/credits.tscn"
+const main_menu: StringName = &"res://def/hud/main.tscn"
 const fight: StringName = &"res://now/see/fight.tscn"
-const ground: StringName = &"res://now/see/ground.tscn"
-const whip: StringName = &"res://now/see/whip.tscn"
-const pull: StringName = &"res://now/see/ledges.tscn"
-const ledges: StringName = &"res://now/see/ledges.tscn"
-const health: StringName = &"res://now/work/health/%s.tscn"
-# const ability: StringName = &"res://now/work/lockers/ability/%s.tscn"
-# const activator: StringName = &"res://now/work/lockers/ability/%s.tscn"
-const music: StringName = &"res://now/work/music.tscn" # const hero: StringName = &"res://now/work/hero/%s/%s.tscn"
-const ray: StringName = &"res://now/entity/ray.tscn"
-const rock: StringName = &"res://now/entity/rock.tscn"
-const group: StringName = &"res://now/entity/group.tscn"
-const hud: StringName = &"res://now/hud/%s.tscn"
-const credits: StringName = &"res://now/credits.tscn"
+const music: StringName = &"res://now/work/music.tscn"
+const ray: StringName = &"res://def/entity/ray.tscn"
+const rock: StringName = &"res://def/entity/rock.tscn"
 const settings: StringName = &"res://now/settings.tscn"
 const sound: StringName = &"res://now/sound.tscn"
 const information: StringName = &"res://now/information.tscn"
@@ -129,7 +123,6 @@ const pause: StringName = &"res://now/hud/status/pause.tscn"
 const slots: StringName = &"res://now/hud/status/slots.tscn"
 const enemy: StringName = &"res://now/hud/status/enemy.tscn"
 const hint: StringName = &"res://now/hud/hints/hints.tscn"
-const mhealth: StringName = &"res://now/hud/markers/health.tscn"
 const items: StringName = &"res://now/hud/markers/items.tscn"
 const actions: StringName = &"res://now/work/hero/actions/%s.tscn"
 const xp: StringName = &"res://now/hud/status/xp.tscn"
@@ -138,27 +131,18 @@ const game: StringName = &"res://now/hud/game.tscn"
 const stats: StringName = &"res://now/hud/game/stats.tscn"
 const input: StringName = &"res://now/work/hero/named/%s.tscn"
 const world: StringName = &"res://now/work/hero/world/%s.tscn"
-const progress: StringName = &"user://progress.txt"
-const ability: StringName = &"res://now/hud/game/ability.tscn"
-const priorities: StringName = &"res://now/hud/game/priorities.tscn"
+const ability: StringName = &"res://def/hud/game/ability.tscn"
+const priorities: StringName = &"res://def/hud/game/priorities.tscn"
 const title: StringName = &"res://pre/ui/menu/title.tscn"
 const fire: StringName = &"res://pre/particle/fire/fire.tscn"
 const rain: StringName = &"res://pre/particle/rain/rain.tscn"
-const card: StringName = &"res://now/hud/hud/priorities/card.tscn"
+const card: StringName = &"res://def/hud/priorities_card.tscn"
+const dialog: StringName = &"res://def/hud/util/dialog.tscn"
+const combo: StringName = &"res://def/hud/util/combo.tscn"
 
 const mirror: Array[StringName] = [&"res://now/see/mirror/ray.tscn", &"res://now/see/mirror/rock.tscn"]
 
 # PRELOADS
-# const sand: PackedScene = preload("res://pre/particle/sand.tscn")
-# const throw: PackedScene = preload("res://pre/particle/fight/kick.tscn")
-"""
-const dialog: PackedScene = preload("res://pre/ui/dialog.tscn")
-const combo: PackedScene = preload("res://pre/ui/combo.tscn")
-const multiply: PackedScene = preload("res://pre/multiply.tscn")
-const ailments: PackedScene = preload("res://pre/ui/status/ailments.tscn")
-const bag: PackedScene = preload("res://pre/ui/status/items.tscn")
-
 const help: CompressedTexture2DArray = preload("res://icon/help/z_master.svg")
-const grabber: GradientTexture2D = preload("res://pre/ui/grabber.tres")
 const root: Script = preload("res://code/level/root.gd")
-"""
+# """

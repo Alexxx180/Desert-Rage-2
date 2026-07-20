@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://c83o4pewn1xfw"]
+
+[sub_resource type="Gradient" id="Gradient_06pl3"]
+colors = PackedColorArray(0.0392157, 0.0392157, 0.0392157, 1, 0.0117647, 0.0117647, 0.0117647, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_taxqa"]
+gradient = SubResource("Gradient_06pl3")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_w14jr"]
+content_margin_left = 2.0
+content_margin_top = 6.0
+content_margin_right = 0.0
+texture = SubResource("GradientTexture2D_taxqa")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d2p8c"]
+content_margin_left = 1.0
+content_margin_bottom = 4.0
+
+[sub_resource type="Theme" id="Theme_waa8r"]
+Button/colors/font_outline_color = Color(0.313726, 0.568627, 1, 1)
+Button/constants/outline_size = 10
+Button/font_sizes/font_size = 28
+Button/styles/normal = SubResource("StyleBoxTexture_w14jr")
+Label/colors/font_outline_color = Color(0, 0, 0, 1)
+Label/constants/outline_size = 10
+Label/font_sizes/font_size = 27
+Label/fonts/font = null
+Label/styles/normal = SubResource("StyleBoxEmpty_d2p8c")
+
+[node name="copy" type="Button"]
+visible = false
+custom_minimum_size = Vector2(45, 45)
+theme = SubResource("Theme_waa8r")
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 26
+toggle_mode = true
+text = "🖌️"

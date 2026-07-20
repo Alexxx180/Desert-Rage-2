@@ -41,7 +41,7 @@ func _change_state(subject: CanvasItem, tint: Color) -> void:
 
 
 
-
+"""
 extends Area2D
 
 @export_multiline var plot_text: Array[String] = []
@@ -92,3 +92,4 @@ func _on_hint_collected(_hero: CharacterBody2D) -> void:
 	hud.game.detector.game.controls.preview.help.hints.clear_progress()
 	act.call_deferred("remove_child", self)
 	call_deferred("queue_free")
+"""

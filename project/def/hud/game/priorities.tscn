@@ -1,20 +1,17 @@
-[gd_scene load_steps=52 format=3 uid="uid://pwqvjeffo6u5"]
+[gd_scene load_steps=32 format=3 uid="uid://pwqvjeffo6u5"]
 
-[ext_resource type="Script" path="res://script/ui/hud/detector/game/margin/priorities/topic/stack/stack.gd" id="1_nakaq"]
-[ext_resource type="PackedScene" uid="uid://b3pwlem0vs6ab" path="res://def/hud/hud/inventory/status/flow.tscn" id="2_3h6ma"]
-[ext_resource type="PackedScene" uid="uid://bmexdqeihycjg" path="res://def/hud/hud/priorities/record.tscn" id="4_n0ufr"]
+[ext_resource type="PackedScene" uid="uid://b3pwlem0vs6ab" path="res://def/hud/game/inventory_party.tscn" id="2_3h6ma"]
+[ext_resource type="FontFile" uid="uid://cc0l5uav5qfke" path="res://data/font/ka1.ttf" id="2_dnqic"]
 [ext_resource type="StyleBox" uid="uid://cht8hrroa75bg" path="res://data/theme/style/tag/tag-button.tres" id="5_7bc6i"]
-[ext_resource type="PackedScene" uid="uid://cdpsykqf6eaa2" path="res://def/hud/hud/priorities/help.tscn" id="6_21c2y"]
+[ext_resource type="Texture2D" uid="uid://n6yeei36r2wm" path="res://icon/help/priority_pursuit.svg" id="5_jqhaj"]
 [ext_resource type="Texture2D" uid="uid://b2ouvbea4wbsy" path="res://icon/help/ray/look.png" id="6_n0ufr"]
-[ext_resource type="Script" path="res://script/ui/hud/detector/game/margin/priorities/topic/stack/record/ranking/priority/growth/stats/stats.gd" id="7_3h6ma"]
-[ext_resource type="Script" path="res://script/ui/hud/detector/game/margin/priorities/topic/stack/record/ranking/priority/growth/heroes/hero/hero.gd" id="7_7bc6i"]
+[ext_resource type="PackedScene" uid="uid://cspf6sh5v7o4v" path="res://def/hud/game/priorities_card.tscn" id="6_vsy6a"]
+[ext_resource type="Texture2D" uid="uid://i25fsm5gv7qb" path="res://icon/help/priority_self_control.svg" id="6_wvi8k"]
+[ext_resource type="Texture2D" uid="uid://bl8c8xwwkccqq" path="res://icon/help/priority_tenacity.svg" id="7_4p7te"]
 [ext_resource type="FontFile" uid="uid://dxg5wbmrewk2p" path="res://data/font/Lato-Regular.ttf" id="8_p25km"]
 [ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://data/theme/patterns/template/menu/settings/topic/footer.tres" id="10_3h6ma"]
 [ext_resource type="FontFile" uid="uid://o0rgn7d13mr3" path="res://data/font/OpenSans-VariableFont_wdth,wght.ttf" id="10_mr8b2"]
 [ext_resource type="FontFile" uid="uid://b2wbdbnkxcqv1" path="res://data/font/noto_sans/NotoEmoji-VariableFont_wght.ttf" id="11_obv4o"]
-[ext_resource type="FontFile" uid="uid://b37js8y80ak1k" path="res://data/font/noto_sans/NotoColorEmoji-Regular.ttf" id="12_8gsmj"]
-[ext_resource type="Theme" uid="uid://dfyi7rrcrweqx" path="res://data/theme/patterns/template/menu/settings/settings.tres" id="13_fcs4u"]
-[ext_resource type="Script" path="res://script/ui/hud/detector/game/margin/priorities/topic/description.gd" id="14_c4vwr"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qw6gd"]
 bg_color = Color(0.6, 0.6, 0.6, 0.498039)
@@ -33,28 +30,52 @@ VScrollBar/styles/grabber = SubResource("StyleBoxFlat_qw6gd")
 VScrollBar/styles/scroll = SubResource("StyleBoxFlat_ccjyc")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a8msc"]
-content_margin_left = 20.0
-content_margin_top = 0.0
-content_margin_right = 0.0
-content_margin_bottom = 20.0
-bg_color = Color(0, 0, 0, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l70cx"]
 content_margin_left = 0.0
-content_margin_top = 20.0
+content_margin_top = 0.0
 content_margin_right = 0.0
 content_margin_bottom = 0.0
 bg_color = Color(0, 0, 0, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sf5h5"]
-content_margin_left = 3.0
-content_margin_top = 0.0
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_no5ti"]
+content_margin_top = 3.0
+content_margin_right = 12.0
+content_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o76in"]
+content_margin_left = 5.0
+content_margin_right = 5.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_color = Color(0.43529412, 0.43529412, 0.43529412, 1)
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_x0k1n"]
+color = Color(0.49747366, 0.49747366, 0.49747366, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2qys1"]
+content_margin_left = 10.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_om213"]
+content_margin_left = 12.0
+content_margin_top = 50.0
 content_margin_right = 3.0
+content_margin_bottom = 15.0
 bg_color = Color(0, 0, 0, 0.890196)
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_htvmv"]
-content_margin_left = 5.0
-content_margin_right = 3.0
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2v1i7"]
+content_margin_left = 190.0
+content_margin_top = 41.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_sph7f"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 7.0
+content_margin_bottom = 0.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fh63m"]
+bg_color = Color(0.6644789, 0.5251939, 0.83174413, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dnqic"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sph7f"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bmu35"]
 content_margin_left = 5.0
@@ -78,148 +99,6 @@ color = Color(0.117647, 0.117647, 0.227451, 1)
 content_margin_top = 7.0
 color = Color(0.117647, 0.117647, 0.227451, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hjbks"]
-content_margin_left = 6.0
-content_margin_right = 6.0
-bg_color = Color(0.6, 0.6, 0.6, 0)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qebsx"]
-content_margin_left = 6.0
-content_margin_right = 6.0
-bg_color = Color(0.6, 0.6, 0.6, 0)
-border_width_bottom = 2
-border_color = Color(0.588235, 0.588235, 0.588235, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_waa8r"]
-content_margin_left = 6.0
-content_margin_right = 6.0
-bg_color = Color(0, 0, 0.235294, 1)
-
-[sub_resource type="Gradient" id="Gradient_j033k"]
-colors = PackedColorArray(0.0392157, 0.0392157, 0.0392157, 1, 0.0117647, 0.0117647, 0.0117647, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_a8eoj"]
-gradient = SubResource("Gradient_j033k")
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rl78j"]
-content_margin_left = 6.0
-content_margin_right = 6.0
-texture = SubResource("GradientTexture2D_a8eoj")
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kpesr"]
-content_margin_left = 6.0
-content_margin_right = 6.0
-bg_color = Color(0, 0, 0.0117647, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nscyf"]
-bg_color = Color(0.27451, 0.27451, 0.27451, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_631br"]
-bg_color = Color(0.589096, 0.589096, 0.589096, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j00fp"]
-bg_color = Color(0.470076, 0.470076, 0.470076, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rqxqw"]
-content_margin_left = 3.0
-content_margin_right = 3.0
-bg_color = Color(0.0196078, 0.0196078, 0.0196078, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ik06k"]
-content_margin_left = 3.0
-content_margin_right = 3.0
-bg_color = Color(0.0196078, 0.0196078, 0.0196078, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0.588235, 0.588235, 0.588235, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ka23t"]
-bg_color = Color(0, 0, 0, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i5h57"]
-bg_color = Color(0.27451, 0.27451, 0.27451, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kwra8"]
-bg_color = Color(0.589096, 0.589096, 0.589096, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pps06"]
-bg_color = Color(0.470076, 0.470076, 0.470076, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6ahvg"]
-content_margin_left = 3.0
-content_margin_right = 3.0
-bg_color = Color(0.0196078, 0.0196078, 0.0196078, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_74ho6"]
-content_margin_left = 3.0
-content_margin_right = 3.0
-bg_color = Color(0.0196078, 0.0196078, 0.0196078, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0.588235, 0.588235, 0.588235, 1)
-
-[sub_resource type="Theme" id="Theme_21ixm"]
-Button/colors/font_color = Color(0.784314, 0.784314, 0.784314, 1)
-Button/font_sizes/font_size = 20
-Button/fonts/font = ExtResource("10_mr8b2")
-Button/styles/focus = SubResource("StyleBoxFlat_hjbks")
-Button/styles/hover = SubResource("StyleBoxFlat_qebsx")
-Button/styles/hover_pressed = SubResource("StyleBoxFlat_waa8r")
-Button/styles/normal = SubResource("StyleBoxTexture_rl78j")
-Button/styles/pressed = SubResource("StyleBoxFlat_kpesr")
-HBoxContainer/constants/separation = 2
-HFlowContainer/constants/v_separation = 4
-HScrollBar/styles/grabber = SubResource("StyleBoxFlat_nscyf")
-HScrollBar/styles/grabber_highlight = SubResource("StyleBoxFlat_631br")
-HScrollBar/styles/grabber_pressed = SubResource("StyleBoxFlat_j00fp")
-HScrollBar/styles/scroll = SubResource("StyleBoxFlat_rqxqw")
-HScrollBar/styles/scroll_focus = SubResource("StyleBoxFlat_ik06k")
-Label/colors/font_color = Color(0.784314, 0.784314, 0.784314, 1)
-Label/font_sizes/font_size = 23
-Label/fonts/font = ExtResource("10_mr8b2")
-MarginContainer/constants/margin_bottom = 10
-MarginContainer/constants/margin_left = 30
-MarginContainer/constants/margin_right = 30
-MarginContainer/constants/margin_top = 0
-Panel/styles/panel = SubResource("StyleBoxFlat_ka23t")
-VBoxContainer/constants/separation = 8
-VScrollBar/styles/grabber = SubResource("StyleBoxFlat_i5h57")
-VScrollBar/styles/grabber_highlight = SubResource("StyleBoxFlat_kwra8")
-VScrollBar/styles/grabber_pressed = SubResource("StyleBoxFlat_pps06")
-VScrollBar/styles/scroll = SubResource("StyleBoxFlat_6ahvg")
-VScrollBar/styles/scroll_focus = SubResource("StyleBoxFlat_74ho6")
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sc12c"]
-content_margin_left = 5.0
-content_margin_top = 1.0
-bg_color = Color(0.0196078, 0.0196078, 0.0588235, 0.72549)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ne0m5"]
-content_margin_left = 7.0
-content_margin_top = 0.0
-bg_color = Color(0.0196078, 0.0196078, 0.0588235, 0.72549)
-
-[sub_resource type="Gradient" id="Gradient_ne0m5"]
-offsets = PackedFloat32Array(0, 0.996139)
-colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_21ixm"]
-gradient = SubResource("Gradient_ne0m5")
-fill_from = Vector2(0, 0.478632)
-fill_to = Vector2(0.482906, 0.474359)
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ren3u"]
-content_margin_left = 15.0
-texture = SubResource("GradientTexture2D_21ixm")
-
 [node name="scroll" type="ScrollContainer"]
 anchors_preset = 15
 anchor_right = 1.0
@@ -229,14 +108,22 @@ grow_vertical = 2
 size_flags_horizontal = 3
 theme = SubResource("Theme_cuhdu")
 theme_override_styles/panel = SubResource("StyleBoxFlat_a8msc")
-vertical_scroll_mode = 0
 
-[node name="space" type="Control" parent="."]
+[node name="stack" type="VBoxContainer" parent="."]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 3
+theme_override_constants/separation = 7
 
-[node name="scroll" type="ScrollContainer" parent="space"]
+[node name="status" parent="stack" instance=ExtResource("2_3h6ma")]
+layout_mode = 2
+
+[node name="record" type="Control" parent="stack"]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="priority" type="VBoxContainer" parent="stack/record"]
+custom_minimum_size = Vector2(300, 0)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -244,185 +131,286 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_l70cx")
-horizontal_scroll_mode = 0
+size_flags_stretch_ratio = 0.7
 
-[node name="stack" type="VBoxContainer" parent="space/scroll"]
+[node name="title" type="Label" parent="stack/record/priority"]
 layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/separation = 7
-script = ExtResource("1_nakaq")
+theme_override_colors/font_color = Color(0.64705884, 0.64705884, 0.64705884, 1)
+theme_override_font_sizes/font_size = 20
+text = "Досье `A"
 
-[node name="status" parent="space/scroll/stack" instance=ExtResource("2_3h6ma")]
+[node name="value" type="Label" parent="stack/record/priority/title"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -62.5
+offset_top = -14.5
+offset_right = 62.5
+offset_bottom = 14.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 8
+theme_override_colors/font_color = Color(0.241156, 0.241156, 0.241156, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 10
+theme_override_fonts/font = ExtResource("2_dnqic")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxEmpty_no5ti")
+text = "23 - 1000"
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="progress" type="ProgressBar" parent="stack/record/priority"]
+custom_minimum_size = Vector2(10, 2)
 layout_mode = 2
+size_flags_vertical = 1
+size_flags_stretch_ratio = 4.0
+theme_override_styles/background = SubResource("StyleBoxFlat_o76in")
+theme_override_styles/fill = SubResource("StyleBoxLine_x0k1n")
+max_value = 10.0
+step = 1.0
+value = 5.0
+show_percentage = false
 
-[node name="record" parent="space/scroll/stack" instance=ExtResource("4_n0ufr")]
+[node name="pursuit" type="Button" parent="stack/record/priority"]
+custom_minimum_size = Vector2(0, 34)
 layout_mode = 2
+theme_override_colors/font_color = Color(0.64705884, 0.64705884, 0.64705884, 1)
+theme_override_fonts/font = ExtResource("10_mr8b2")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_2qys1")
+theme_override_styles/hover = ExtResource("5_7bc6i")
+text = "0. Стремление"
+icon = ExtResource("5_jqhaj")
+alignment = 0
 
-[node name="perks" type="HFlowContainer" parent="space/scroll/stack"]
+[node name="self_control" type="Button" parent="stack/record/priority"]
+custom_minimum_size = Vector2(0, 34)
 layout_mode = 2
-theme_override_constants/h_separation = 7
-theme_override_constants/v_separation = 0
+theme_override_colors/font_color = Color(0.64705884, 0.64705884, 0.64705884, 1)
+theme_override_fonts/font = ExtResource("10_mr8b2")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_2qys1")
+theme_override_styles/hover = ExtResource("5_7bc6i")
+text = "0. Выдержка"
+icon = ExtResource("6_wvi8k")
+alignment = 0
 
-[node name="ray" type="TextureRect" parent="space/scroll/stack/perks"]
+[node name="tenacity" type="Button" parent="stack/record/priority"]
+custom_minimum_size = Vector2(0, 34)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.64705884, 0.64705884, 0.64705884, 1)
+theme_override_fonts/font = ExtResource("10_mr8b2")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_2qys1")
+theme_override_styles/hover = ExtResource("5_7bc6i")
+text = "0. Упорство"
+icon = ExtResource("7_4p7te")
+alignment = 0
+
+[node name="stat" type="Label" parent="stack/record"]
+custom_minimum_size = Vector2(45, 0)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -99.0
+offset_right = 49.0
+grow_vertical = 0
+size_flags_horizontal = 8
+theme_override_constants/line_spacing = -3
+theme_override_fonts/font = ExtResource("10_mr8b2")
+theme_override_styles/normal = SubResource("StyleBoxFlat_om213")
+text = "⚔️+2
+🛡+2"
+
+[node name="ray" type="TextureRect" parent="stack/record/stat"]
 custom_minimum_size = Vector2(45, 45)
-layout_mode = 2
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 9.0
+offset_bottom = 45.0
+grow_horizontal = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 texture = ExtResource("6_n0ufr")
 expand_mode = 1
-script = ExtResource("7_7bc6i")
 
-[node name="priority" type="Label" parent="space/scroll/stack/perks/ray"]
+[node name="description" type="Label" parent="stack/record"]
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 1
-anchors_preset = 11
-anchor_left = 1.0
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -20.0
-grow_horizontal = 0
+grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 8
-theme_override_fonts/font = ExtResource("12_8gsmj")
-theme_override_styles/normal = SubResource("StyleBoxFlat_sf5h5")
-text = "
-📈"
-script = ExtResource("7_3h6ma")
+size_flags_horizontal = 3
+size_flags_vertical = 1
+size_flags_stretch_ratio = 0.3
+theme = ExtResource("10_3h6ma")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_2v1i7")
+text = "Направленность на результат. Определяет способности и количество слотов комбо."
+autowrap_mode = 2
 
-[node name="number" type="Label" parent="space/scroll/stack/perks/ray/priority"]
-layout_mode = 0
-offset_left = 3.0
-offset_right = 16.0
-offset_bottom = 23.0
-theme_override_colors/font_color = Color(0.99558, 0.99558, 0.99558, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 7
-theme_override_styles/normal = SubResource("StyleBoxEmpty_htvmv")
+[node name="perks2" type="ItemList" parent="stack"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/h_separation = 14
+theme_override_styles/panel = SubResource("StyleBoxEmpty_sph7f")
+theme_override_styles/hovered = SubResource("StyleBoxFlat_fh63m")
+theme_override_styles/selected = SubResource("StyleBoxFlat_dnqic")
+theme_override_styles/cursor_unfocused = SubResource("StyleBoxFlat_sph7f")
+auto_height = true
+item_count = 2
+max_columns = 0
+item_0/text = "Merchant"
+item_1/text = "Merchant 2"
 
-[node name="dealer" type="Button" parent="space/scroll/stack/perks"]
+[node name="perks" type="HFlowContainer" parent="stack"]
+layout_mode = 2
+theme_override_constants/h_separation = 7
+theme_override_constants/v_separation = 0
+
+[node name="dealer" type="Button" parent="stack/perks"]
 layout_mode = 2
 size_flags_vertical = 8
 theme_override_colors/font_color = Color(0.341176, 0.341176, 0.341176, 1)
 theme_override_styles/normal = ExtResource("5_7bc6i")
 text = "Торговец"
 
-[node name="help" parent="space/scroll/stack" instance=ExtResource("6_21c2y")]
+[node name="help" type="HFlowContainer" parent="stack"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="motion" parent="stack/help" instance=ExtResource("6_vsy6a")]
+layout_mode = 2
+
+[node name="jump" parent="stack/help" instance=ExtResource("6_vsy6a")]
+layout_mode = 2
+
+[node name="push" parent="stack/help" instance=ExtResource("6_vsy6a")]
+layout_mode = 2
+
+[node name="land" parent="stack/help" instance=ExtResource("6_vsy6a")]
+layout_mode = 2
+
+[node name="fight" parent="stack/help" instance=ExtResource("6_vsy6a")]
+layout_mode = 2
+
+[node name="books" type="VBoxContainer" parent="stack"]
 visible = false
 layout_mode = 2
 
-[node name="books" type="VBoxContainer" parent="space/scroll/stack"]
-visible = false
-layout_mode = 2
-
-[node name="notes" type="HFlowContainer" parent="space/scroll/stack/books"]
+[node name="notes" type="HFlowContainer" parent="stack/books"]
 layout_mode = 2
 theme_override_constants/h_separation = 3
 theme_override_constants/v_separation = 3
 
-[node name="note2" type="Button" parent="space/scroll/stack/books/notes"]
+[node name="note2" type="Button" parent="stack/books/notes"]
 layout_mode = 2
 theme = ExtResource("10_3h6ma")
 theme_override_styles/normal = SubResource("StyleBoxFlat_bmu35")
 text = "перемещаемым"
 
-[node name="note" type="Button" parent="space/scroll/stack/books/notes"]
+[node name="note" type="Button" parent="stack/books/notes"]
 layout_mode = 2
 theme = ExtResource("10_3h6ma")
 theme_override_styles/normal = SubResource("StyleBoxFlat_bmu35")
 text = "Попробуем сделать текст"
 
-[node name="note3" type="Button" parent="space/scroll/stack/books/notes"]
+[node name="note3" type="Button" parent="stack/books/notes"]
 layout_mode = 2
 theme = ExtResource("10_3h6ma")
 theme_override_styles/normal = SubResource("StyleBoxFlat_bmu35")
 text = "как предметы"
 
-[node name="note4" type="Button" parent="space/scroll/stack/books/notes"]
+[node name="note4" type="Button" parent="stack/books/notes"]
 layout_mode = 2
 theme = ExtResource("10_3h6ma")
 theme_override_styles/normal = SubResource("StyleBoxFlat_bmu35")
 text = "как предметы"
 
-[node name="note5" type="Button" parent="space/scroll/stack/books/notes"]
+[node name="note5" type="Button" parent="stack/books/notes"]
 layout_mode = 2
 theme = ExtResource("10_3h6ma")
 theme_override_styles/normal = SubResource("StyleBoxFlat_bmu35")
 text = "как предметы"
 
-[node name="note6" type="Button" parent="space/scroll/stack/books/notes"]
+[node name="note6" type="Button" parent="stack/books/notes"]
 layout_mode = 2
 theme = ExtResource("10_3h6ma")
 theme_override_styles/normal = SubResource("StyleBoxFlat_bmu35")
 text = "как предметы"
 
-[node name="note7" type="Button" parent="space/scroll/stack/books/notes"]
+[node name="note7" type="Button" parent="stack/books/notes"]
 layout_mode = 2
 theme = ExtResource("10_3h6ma")
 theme_override_styles/normal = SubResource("StyleBoxFlat_bmu35")
 text = "как предметы"
 
-[node name="note8" type="Button" parent="space/scroll/stack/books/notes"]
+[node name="note8" type="Button" parent="stack/books/notes"]
 layout_mode = 2
 theme = ExtResource("10_3h6ma")
 theme_override_styles/normal = SubResource("StyleBoxFlat_bmu35")
 text = "как предметы"
 
-[node name="note9" type="Button" parent="space/scroll/stack/books/notes"]
+[node name="note9" type="Button" parent="stack/books/notes"]
 layout_mode = 2
 theme = ExtResource("10_3h6ma")
 theme_override_styles/normal = SubResource("StyleBoxFlat_bmu35")
 text = "как предметы"
 
-[node name="note10" type="Button" parent="space/scroll/stack/books/notes"]
+[node name="note10" type="Button" parent="stack/books/notes"]
 layout_mode = 2
 theme = ExtResource("10_3h6ma")
 theme_override_styles/normal = SubResource("StyleBoxFlat_bmu35")
 text = "как предметы"
 
-[node name="note11" type="Button" parent="space/scroll/stack/books/notes"]
+[node name="note11" type="Button" parent="stack/books/notes"]
 layout_mode = 2
 theme = ExtResource("10_3h6ma")
 theme_override_styles/normal = SubResource("StyleBoxFlat_bmu35")
 text = "как предметы"
 
-[node name="note12" type="Button" parent="space/scroll/stack/books/notes"]
+[node name="note12" type="Button" parent="stack/books/notes"]
 layout_mode = 2
 theme = ExtResource("10_3h6ma")
 theme_override_styles/normal = SubResource("StyleBoxFlat_bmu35")
 text = "как предметы"
 
-[node name="note13" type="Button" parent="space/scroll/stack/books/notes"]
+[node name="note13" type="Button" parent="stack/books/notes"]
 layout_mode = 2
 theme = ExtResource("10_3h6ma")
 theme_override_styles/normal = SubResource("StyleBoxFlat_bmu35")
 text = "как предметы"
 
-[node name="note14" type="Button" parent="space/scroll/stack/books/notes"]
+[node name="note14" type="Button" parent="stack/books/notes"]
 layout_mode = 2
 theme = ExtResource("10_3h6ma")
 theme_override_styles/normal = SubResource("StyleBoxFlat_bmu35")
 text = "как предметы"
 
-[node name="note15" type="Button" parent="space/scroll/stack/books/notes"]
+[node name="note15" type="Button" parent="stack/books/notes"]
 layout_mode = 2
 theme = ExtResource("10_3h6ma")
 theme_override_styles/normal = SubResource("StyleBoxFlat_bmu35")
 text = "как предметы"
 
-[node name="note16" type="Button" parent="space/scroll/stack/books/notes"]
+[node name="note16" type="Button" parent="stack/books/notes"]
 layout_mode = 2
 theme = ExtResource("10_3h6ma")
 theme_override_styles/normal = SubResource("StyleBoxFlat_bmu35")
 text = "как предметы"
 
-[node name="note17" type="Button" parent="space/scroll/stack/books/notes"]
+[node name="note17" type="Button" parent="stack/books/notes"]
 layout_mode = 2
 theme = ExtResource("10_3h6ma")
 theme_override_styles/normal = SubResource("StyleBoxFlat_s1jie")
 text = "Анализ"
 
-[node name="icon" type="Label" parent="space/scroll/stack/books/notes/note17"]
+[node name="icon" type="Label" parent="stack/books/notes/note17"]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -435,7 +423,7 @@ theme_override_fonts/font = ExtResource("11_obv4o")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_pkyuj")
 text = "🔍"
 
-[node name="books" type="RichTextLabel" parent="space/scroll/stack/books"]
+[node name="books" type="RichTextLabel" parent="stack/books"]
 layout_mode = 2
 theme_override_colors/default_color = Color(0.29411766, 0.29411766, 0.29411766, 1)
 theme_override_fonts/normal_font = ExtResource("8_p25km")
@@ -447,7 +435,7 @@ K2
 K3"
 fit_content = true
 
-[node name="title" type="RichTextLabel" parent="space/scroll/stack"]
+[node name="title" type="RichTextLabel" parent="stack"]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -473,44 +461,3 @@ text = "[i]Приоритеты[/i]
 [b][i]🔍[/i][/b] Тут описывается помощь. Если не понимаете, что конкретно нужно сделать в той или иной ситуации или забыли про разные умения и базовые возмо-жности героев, заглядыв-айте сюда."
 fit_content = true
 autowrap_mode = 2
-
-[node name="tabs" type="HBoxContainer" parent="space"]
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -30.0
-grow_horizontal = 2
-grow_vertical = 0
-size_flags_vertical = 8
-theme = SubResource("Theme_21ixm")
-theme_override_constants/separation = 0
-
-[node name="analyze" type="Button" parent="space/tabs"]
-custom_minimum_size = Vector2(30, 30)
-layout_mode = 2
-size_flags_horizontal = 8
-theme_override_fonts/font = ExtResource("11_obv4o")
-theme_override_font_sizes/font_size = 16
-theme_override_styles/normal = SubResource("StyleBoxFlat_sc12c")
-text = "🔍"
-alignment = 0
-
-[node name="books" type="Button" parent="space/tabs"]
-custom_minimum_size = Vector2(30, 30)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("12_8gsmj")
-theme_override_font_sizes/font_size = 16
-theme_override_styles/normal = SubResource("StyleBoxFlat_ne0m5")
-text = "📚"
-alignment = 0
-
-[node name="caption" type="Label" parent="space/tabs"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("13_fcs4u")
-theme_override_font_sizes/font_size = 18
-theme_override_styles/normal = SubResource("StyleBoxTexture_ren3u")
-text = "Help"
-script = ExtResource("14_c4vwr")
