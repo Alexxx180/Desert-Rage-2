@@ -16,6 +16,10 @@ extends Control
 @onready var ability: PanelContainer = bottom.get_node(^"ability")
 
 @onready var controls: MarginContainer = bottom.get_node(^"controls")
+@onready var log: TextureRect = controls.get_node(^"controls/log")
+@onready var log_text: RichTextLabel = controls.get_node(^"controls/log/text")
+@onready var talk_image: RichTextLabel = controls.get_node(^"dialog/talk/image")
+
 
 @onready var help: VBoxContainer = controls.get_node(^"middle/help")
 

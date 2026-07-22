@@ -8,6 +8,18 @@ var card: Button
 
 var navigation: Array
 var hints: CompressedTexture2DArray = preload("res://icon/help/z_master.svg")
+var _pause: Control ; var _game: Control ; var _settings: Control ; var _sound: Control ; var _information: Control
+
+var game: Control:
+	get: return connect_menu(_game, Def.game, &"_game")
+var pause: Control:
+	get: return connect_menu(_pause, Def.pause, &"_pause")
+var settings: Control:
+	get: return connect_menu(_settings, Def.settings, &"_settings")
+var information: Control:
+	get: return connect_menu(_information, Def.information, &"_information")
+var sound: Control:
+	get: return connect_menu(_sound, Def.sound, &"_sound")
 
 func is_hud_opened() -> bool:
 	var result: bool = true
@@ -16,31 +28,23 @@ func is_hud_opened() -> bool:
 		result = result and (not last)
 	return not result
 
-func connect_menu(node: Control) -> Control:
+func connect_menu(node: Control, path: StringName, caption: StringName) -> Control:
+	if node != null: return node
+	node = Def.lazy(HUD, node, path, caption)
 	match node.name:
-		&"game": game_connect()
-		&"pause": pause_connect(node.options)
-		&"saves": saves_connect()
-		&"sound": sound_connect()
-		&"settings": settings_connect()
+		&"game": pass
+		&"pause":
+			node.options.resume.connect(pause_resume)
+			node.options.saves.connect(func(): toggle_menu(HUD.saves))
+			node.options.settings.connect(func(): toggle_menu(HUD.settings))
+			node.options.main.connect()
+		&"saves": HUD.saves.back.connect(_resume_level)
+		&"sound": HUD.sound.back.connect(sound_back)
+		&"settings":
+			settings = node
+			settings.back.connect(_resume_level)
+			settings.sound.connect(sound_show)
 	return node
-
-func game_connect() -> void: pass
-func settings_connect() -> void:
-	HUD.settings.back.connect(_resume_level)
-	HUD.settings.sound.connect(sound_show)
-
-func saves_connect() -> void:
-	HUD.saves.back.connect(_resume_level)
-	
-func sound_connect() -> void:
-	HUD.sound.back.connect(sound_back)
-	
-func pause_connect(options: VBoxContainer) -> void:
-	options.resume.connect(pause_resume)
-	options.saves.connect(func(): toggle_menu(HUD.saves))
-	options.settings.connect(func(): toggle_menu(HUD.settings))
-	options.main.connect()
 
 func sound_show() -> void: _sound_level(false, Node.PROCESS_MODE_INHERIT)
 func sound_back() -> void: _sound_level(true, Node.PROCESS_MODE_DISABLED)
@@ -91,9 +95,9 @@ func log_help_hide() -> void:
 func log_help(of: int) -> void:
 	if card == null:
 		card = load(Def.card).instantiate()
-		HUD.game.help.add_child(card)
+		game.help.add_child(card)
 	card.show()
-	var tween: Tween = HUD.create_tween()
+	var tween: Tween = game.create_tween()
 	tween.tween_property(card, ^"modulate", Color.WHITE, 1)
 	card.text = tr("H" + Def.hints[of] + "T") + card.MARGIN
 	card.help.text = "H" + Def.hints[of] + "D"

@@ -1,14 +1,11 @@
-[gd_scene load_steps=37 format=3 uid="uid://trd7xarcxhy1"]
+[gd_scene load_steps=34 format=3 uid="uid://trd7xarcxhy1"]
 
-[ext_resource type="Script" path="res://script/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/controls.gd" id="1_xi2lk"]
-[ext_resource type="Script" path="res://script/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/hints/bottom/talk/borders.gd" id="2_hlwdo"]
 [ext_resource type="Texture2D" uid="uid://frgf7wr5b2md" path="res://icon/help/ray/anger/1.png" id="3_2rr8j"]
 [ext_resource type="PackedScene" uid="uid://cspf6sh5v7o4v" path="res://def/hud/game/priorities_card.tscn" id="3_mriv0"]
 [ext_resource type="Script" uid="uid://b82g80p2b6kwm" path="res://code/node/animated.gd" id="4_7xmmx"]
 [ext_resource type="FontFile" uid="uid://b37js8y80ak1k" path="res://data/font/noto_sans/NotoColorEmoji-Regular.ttf" id="4_ic24g"]
 [ext_resource type="Texture2D" uid="uid://b2ouvbea4wbsy" path="res://icon/help/ray/look.png" id="5_cw4cp"]
 [ext_resource type="FontFile" uid="uid://cjafv81djmqe8" path="res://data/font/Touchscreen-Regular.ttf" id="5_nxuw1"]
-[ext_resource type="Script" path="res://script/ui/hud/detector/game/margin/priorities/stats/inventory/ability/controls/hints/space/preview/toggle.gd" id="6_hu7it"]
 [ext_resource type="Texture2D" uid="uid://dn05rbjebndmm" path="res://icon/help/ray/amaze.png" id="6_mpxsp"]
 [ext_resource type="Texture2D" uid="uid://cqtc8a5ug5prq" path="res://icon/help/ray/anger/2.png" id="7_6rp5j"]
 [ext_resource type="FontFile" uid="uid://b2wbdbnkxcqv1" path="res://data/font/noto_sans/NotoEmoji-VariableFont_wght.ttf" id="7_hu7it"]
@@ -221,13 +218,17 @@ theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
-script = ExtResource("1_xi2lk")
 
-[node name="dialog" type="RichTextLabel" parent="."]
+[node name="dialog" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+
+[node name="text" type="RichTextLabel" parent="dialog"]
 custom_minimum_size = Vector2(260, 356)
 layout_mode = 2
 size_flags_horizontal = 2
-size_flags_vertical = 6
+size_flags_vertical = 4
 theme_override_styles/normal = SubResource("StyleBoxFlat_bjbyt")
 text = "asdsdadhajdhjasdadasdadsd jdsadjasdd asdadasdda
 asdasds
@@ -245,27 +246,23 @@ vertical_alignment = 2
 
 [node name="talk" type="Panel" parent="dialog"]
 custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_ch3ha")
+
+[node name="image" type="TextureRect" parent="dialog/talk"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -69.0
-offset_top = -30.0
-offset_right = -9.0
-offset_bottom = 30.0
+offset_left = -56.0
+offset_top = -28.0
+offset_bottom = 28.0
 grow_horizontal = 0
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_ch3ha")
-script = ExtResource("2_hlwdo")
-
-[node name="image" type="TextureRect" parent="dialog/talk"]
-layout_mode = 0
-offset_left = 2.0
-offset_top = 2.0
-offset_right = 58.0
-offset_bottom = 58.0
 texture = ExtResource("3_2rr8j")
 expand_mode = 1
 script = ExtResource("4_7xmmx")
@@ -318,8 +315,6 @@ theme_override_font_sizes/font_size = 18
 theme_override_styles/normal = SubResource("StyleBoxFlat_8tmk1")
 text = "||"
 alignment = 0
-script = ExtResource("6_hu7it")
-path = "../../../../../../../stats/inventory/ability/controls/hints/space/preview/help"
 
 [node name="open" type="Button" parent="fast_panel"]
 custom_minimum_size = Vector2(30, 26)
@@ -330,8 +325,6 @@ theme_override_font_sizes/font_size = 18
 theme_override_styles/normal = SubResource("StyleBoxFlat_8tmk1")
 text = "🧮"
 alignment = 0
-script = ExtResource("6_hu7it")
-path = "../../../../../../../stats/inventory/ability/controls/hints/space/preview/help"
 
 [node name="analyze" type="Button" parent="fast_panel"]
 custom_minimum_size = Vector2(30, 30)
@@ -344,8 +337,6 @@ theme_override_font_sizes/font_size = 18
 theme_override_styles/normal = SubResource("StyleBoxFlat_mwhg6")
 text = "🔍"
 alignment = 0
-script = ExtResource("6_hu7it")
-path = "../../../../../../../stats/inventory/ability/controls/hints/space/preview/help"
 
 [node name="set" type="Button" parent="fast_panel"]
 custom_minimum_size = Vector2(0, 30)

@@ -1,31 +1,15 @@
 extends CanvasLayer
 
+var state: int = 0
+var hero: int = 0
+var _preserves: Preserves ; var _aura: AuraResource ; var _animation: CharacterAnimation
+var levels: LevelRoot ; var _interact: WorldInteraction
+#var _inventory: HeroInventory ;
+
 # @onready var ost: SoundtrackSystem = SoundtrackSystem.new()
 # @onready var stats: SessionStats = SessionStats.new(get_tree())
 
-var state: int = 0
-var hero: int = 0
-var _pause: Control ; var _game: Control ; var _settings: Control ; var _sound: Control ; var _information: Control
-var _menu: Menu ; var _preserves: Preserves ; var _aura: AuraResource
-var _animation: CharacterAnimation ; # var _inventory: HeroInventory ;
-var levels: LevelRoot ; var _interact: WorldInteraction
-func create_menu(node: Control, path: StringName, caption: StringName) -> Control:
-	return node if node != null else menu.connect_menu(Def.lazy(self, node, path, caption))
-
-var game: Control:
-	get: return create_menu(_game, Def.game, &"_game")
-var pause: Control:
-	get: return create_menu(_pause, Def.pause, &"_pause")
-"""
-var settings: Control:
-	get: return create_menu(_settings, Def.settings, &"_settings")
-var information: Control:
-	get: return create_menu(_information, Def.information, &"_information")
-var sound: Control:
-	get: return create_menu(_sound, Def.sound, &"_sound")
-"""
-var menu: Menu:
-	get: return Def.ref(self, _menu, &"_menu", new_menu)
+var menu: Menu = Menu.new()
 
 # var inventory: HeroInventory:
 # 	get: return Def.ref(self, _inventory, &"_inventory", new_hero_inventory)

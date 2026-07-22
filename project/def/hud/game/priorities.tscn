@@ -1,17 +1,15 @@
-[gd_scene load_steps=32 format=3 uid="uid://pwqvjeffo6u5"]
+[gd_scene load_steps=27 format=3 uid="uid://pwqvjeffo6u5"]
 
 [ext_resource type="PackedScene" uid="uid://b3pwlem0vs6ab" path="res://def/hud/game/inventory_party.tscn" id="2_3h6ma"]
 [ext_resource type="FontFile" uid="uid://cc0l5uav5qfke" path="res://data/font/ka1.ttf" id="2_dnqic"]
 [ext_resource type="StyleBox" uid="uid://cht8hrroa75bg" path="res://data/theme/style/tag/tag-button.tres" id="5_7bc6i"]
 [ext_resource type="Texture2D" uid="uid://n6yeei36r2wm" path="res://icon/help/priority_pursuit.svg" id="5_jqhaj"]
 [ext_resource type="Texture2D" uid="uid://b2ouvbea4wbsy" path="res://icon/help/ray/look.png" id="6_n0ufr"]
-[ext_resource type="PackedScene" uid="uid://cspf6sh5v7o4v" path="res://def/hud/game/priorities_card.tscn" id="6_vsy6a"]
 [ext_resource type="Texture2D" uid="uid://i25fsm5gv7qb" path="res://icon/help/priority_self_control.svg" id="6_wvi8k"]
 [ext_resource type="Texture2D" uid="uid://bl8c8xwwkccqq" path="res://icon/help/priority_tenacity.svg" id="7_4p7te"]
-[ext_resource type="FontFile" uid="uid://dxg5wbmrewk2p" path="res://data/font/Lato-Regular.ttf" id="8_p25km"]
 [ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://data/theme/patterns/template/menu/settings/topic/footer.tres" id="10_3h6ma"]
 [ext_resource type="FontFile" uid="uid://o0rgn7d13mr3" path="res://data/font/OpenSans-VariableFont_wdth,wght.ttf" id="10_mr8b2"]
-[ext_resource type="FontFile" uid="uid://b2wbdbnkxcqv1" path="res://data/font/noto_sans/NotoEmoji-VariableFont_wght.ttf" id="11_obv4o"]
+[ext_resource type="FontFile" uid="uid://dmctrlrnfxaie" path="res://data/font/Roboto-Regular-Emoji.ttf" id="10_vsy6a"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qw6gd"]
 bg_color = Color(0.6, 0.6, 0.6, 0.498039)
@@ -77,25 +75,11 @@ bg_color = Color(0.6644789, 0.5251939, 0.83174413, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sph7f"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bmu35"]
-content_margin_left = 5.0
-content_margin_right = 5.0
-bg_color = Color(0.0110876, 0.0110876, 0.0110876, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s1jie"]
-content_margin_left = 30.0
-content_margin_right = 5.0
-bg_color = Color(0.0110876, 0.0110876, 0.0110876, 1)
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pkyuj"]
-content_margin_left = 3.0
-content_margin_top = 1.0
-
-[sub_resource type="StyleBoxLine" id="StyleBoxLine_flm7h"]
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_vvrgj"]
 content_margin_top = 7.0
 color = Color(0.117647, 0.117647, 0.227451, 1)
 
-[sub_resource type="StyleBoxLine" id="StyleBoxLine_vvrgj"]
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_flm7h"]
 content_margin_top = 7.0
 color = Color(0.117647, 0.117647, 0.227451, 1)
 
@@ -253,9 +237,20 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_2v1i7")
 text = "Направленность на результат. Определяет способности и количество слотов комбо."
 autowrap_mode = 2
 
-[node name="perks2" type="ItemList" parent="stack"]
+[node name="title" type="Label" parent="stack"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.25
+theme = ExtResource("10_3h6ma")
+theme_override_fonts/font = ExtResource("10_vsy6a")
+text = "Здесь находятся приоритеты героев. Вы можете выбрать любой из трёх в любой момент. В ходе сражений с противниками вы получаете Очки Пытливости - опыт. 👉 Достаточное количество увеличивает выбранный приоритет на 1. ⭐️ Как только вы достигаете максимума, ваш герой меняет приоритет. При повышении уровня приоритета вы получаете прирост к определённым показателям, а также уникальные способности. Ищите книги, чтобы раздвинуть свои возможности."
+autowrap_mode = 2
+
+[node name="perks" type="ItemList" parent="stack"]
 layout_mode = 2
 size_flags_vertical = 0
+theme_override_colors/font_outline_color = Color(0.34407577, 0.34407574, 0.34407574, 1)
 theme_override_constants/h_separation = 14
 theme_override_styles/panel = SubResource("StyleBoxEmpty_sph7f")
 theme_override_styles/hovered = SubResource("StyleBoxFlat_fh63m")
@@ -264,200 +259,50 @@ theme_override_styles/cursor_unfocused = SubResource("StyleBoxFlat_sph7f")
 auto_height = true
 item_count = 2
 max_columns = 0
-item_0/text = "Merchant"
-item_1/text = "Merchant 2"
+item_0/text = "Dealer"
+item_1/text = "Merchant"
 
-[node name="perks" type="HFlowContainer" parent="stack"]
-layout_mode = 2
-theme_override_constants/h_separation = 7
-theme_override_constants/v_separation = 0
-
-[node name="dealer" type="Button" parent="stack/perks"]
-layout_mode = 2
-size_flags_vertical = 8
-theme_override_colors/font_color = Color(0.341176, 0.341176, 0.341176, 1)
-theme_override_styles/normal = ExtResource("5_7bc6i")
-text = "Торговец"
-
-[node name="help" type="HFlowContainer" parent="stack"]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="motion" parent="stack/help" instance=ExtResource("6_vsy6a")]
-layout_mode = 2
-
-[node name="jump" parent="stack/help" instance=ExtResource("6_vsy6a")]
-layout_mode = 2
-
-[node name="push" parent="stack/help" instance=ExtResource("6_vsy6a")]
-layout_mode = 2
-
-[node name="land" parent="stack/help" instance=ExtResource("6_vsy6a")]
-layout_mode = 2
-
-[node name="fight" parent="stack/help" instance=ExtResource("6_vsy6a")]
-layout_mode = 2
-
-[node name="books" type="VBoxContainer" parent="stack"]
-visible = false
-layout_mode = 2
-
-[node name="notes" type="HFlowContainer" parent="stack/books"]
-layout_mode = 2
-theme_override_constants/h_separation = 3
-theme_override_constants/v_separation = 3
-
-[node name="note2" type="Button" parent="stack/books/notes"]
-layout_mode = 2
-theme = ExtResource("10_3h6ma")
-theme_override_styles/normal = SubResource("StyleBoxFlat_bmu35")
-text = "перемещаемым"
-
-[node name="note" type="Button" parent="stack/books/notes"]
-layout_mode = 2
-theme = ExtResource("10_3h6ma")
-theme_override_styles/normal = SubResource("StyleBoxFlat_bmu35")
-text = "Попробуем сделать текст"
-
-[node name="note3" type="Button" parent="stack/books/notes"]
-layout_mode = 2
-theme = ExtResource("10_3h6ma")
-theme_override_styles/normal = SubResource("StyleBoxFlat_bmu35")
-text = "как предметы"
-
-[node name="note4" type="Button" parent="stack/books/notes"]
-layout_mode = 2
-theme = ExtResource("10_3h6ma")
-theme_override_styles/normal = SubResource("StyleBoxFlat_bmu35")
-text = "как предметы"
-
-[node name="note5" type="Button" parent="stack/books/notes"]
-layout_mode = 2
-theme = ExtResource("10_3h6ma")
-theme_override_styles/normal = SubResource("StyleBoxFlat_bmu35")
-text = "как предметы"
-
-[node name="note6" type="Button" parent="stack/books/notes"]
-layout_mode = 2
-theme = ExtResource("10_3h6ma")
-theme_override_styles/normal = SubResource("StyleBoxFlat_bmu35")
-text = "как предметы"
-
-[node name="note7" type="Button" parent="stack/books/notes"]
-layout_mode = 2
-theme = ExtResource("10_3h6ma")
-theme_override_styles/normal = SubResource("StyleBoxFlat_bmu35")
-text = "как предметы"
-
-[node name="note8" type="Button" parent="stack/books/notes"]
-layout_mode = 2
-theme = ExtResource("10_3h6ma")
-theme_override_styles/normal = SubResource("StyleBoxFlat_bmu35")
-text = "как предметы"
-
-[node name="note9" type="Button" parent="stack/books/notes"]
-layout_mode = 2
-theme = ExtResource("10_3h6ma")
-theme_override_styles/normal = SubResource("StyleBoxFlat_bmu35")
-text = "как предметы"
-
-[node name="note10" type="Button" parent="stack/books/notes"]
-layout_mode = 2
-theme = ExtResource("10_3h6ma")
-theme_override_styles/normal = SubResource("StyleBoxFlat_bmu35")
-text = "как предметы"
-
-[node name="note11" type="Button" parent="stack/books/notes"]
-layout_mode = 2
-theme = ExtResource("10_3h6ma")
-theme_override_styles/normal = SubResource("StyleBoxFlat_bmu35")
-text = "как предметы"
-
-[node name="note12" type="Button" parent="stack/books/notes"]
-layout_mode = 2
-theme = ExtResource("10_3h6ma")
-theme_override_styles/normal = SubResource("StyleBoxFlat_bmu35")
-text = "как предметы"
-
-[node name="note13" type="Button" parent="stack/books/notes"]
-layout_mode = 2
-theme = ExtResource("10_3h6ma")
-theme_override_styles/normal = SubResource("StyleBoxFlat_bmu35")
-text = "как предметы"
-
-[node name="note14" type="Button" parent="stack/books/notes"]
-layout_mode = 2
-theme = ExtResource("10_3h6ma")
-theme_override_styles/normal = SubResource("StyleBoxFlat_bmu35")
-text = "как предметы"
-
-[node name="note15" type="Button" parent="stack/books/notes"]
-layout_mode = 2
-theme = ExtResource("10_3h6ma")
-theme_override_styles/normal = SubResource("StyleBoxFlat_bmu35")
-text = "как предметы"
-
-[node name="note16" type="Button" parent="stack/books/notes"]
-layout_mode = 2
-theme = ExtResource("10_3h6ma")
-theme_override_styles/normal = SubResource("StyleBoxFlat_bmu35")
-text = "как предметы"
-
-[node name="note17" type="Button" parent="stack/books/notes"]
-layout_mode = 2
-theme = ExtResource("10_3h6ma")
-theme_override_styles/normal = SubResource("StyleBoxFlat_s1jie")
-text = "Анализ"
-
-[node name="icon" type="Label" parent="stack/books/notes/note17"]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_top = -11.5
-offset_right = 40.0
-offset_bottom = 12.5
-grow_vertical = 2
-theme_override_fonts/font = ExtResource("11_obv4o")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_pkyuj")
-text = "🔍"
-
-[node name="books" type="RichTextLabel" parent="stack/books"]
-layout_mode = 2
-theme_override_colors/default_color = Color(0.29411766, 0.29411766, 0.29411766, 1)
-theme_override_fonts/normal_font = ExtResource("8_p25km")
-theme_override_font_sizes/normal_font_size = 22
-theme_override_styles/normal = SubResource("StyleBoxLine_flm7h")
-text = "Здесь содержатся послания, которые оставляли древние в виде книг и записок. При сборе книг определенного типа вы можете открывать новые возможности и способности для разных героев. Чтобы узнать историю Древних, соберите все записи на локации и выложите их как единый связный рассказ.
-------
-K2
-K3"
-fit_content = true
-
-[node name="title" type="RichTextLabel" parent="stack"]
+[node name="skills" type="Label" parent="stack"]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.25
 theme = ExtResource("10_3h6ma")
-theme_override_constants/paragraph_separation = -5
-theme_override_font_sizes/italics_font_size = 26
-theme_override_styles/normal = SubResource("StyleBoxLine_vvrgj")
-bbcode_enabled = true
-text = "[i]Приоритеты[/i]
-
-Здесь находятся приоритеты героев. В ходе сражений с противниками вы получаете Очки Пытливости - опыт.
-
-[table=2]
-[cell expand][left][b][i]👉[/i][/b] Достаточное количество, увеличивает выбранный приоритет на 1. Вы можете выбрать любой из трёх для каждого героя в любой момент времени.[/left][/cell][cell][left][b][i]⭐️[/i][/b] Приоритеты не могут быть выше определённого уровня. Как только вы достигаете максимума, ваш герой меняет приоритет.[/left][/cell]
-[cell][/cell][cell] [/cell]
-[cell expand][left][b][i]🎖[/i][/b] Возможность - приводится в действие по событию или закреплена за персонажем насовсем. Например, дополнительный опыт при допытывании.[/left][/cell][cell][left][b][i]⚔️[/i][/b] Способность - приводится в действие во время выполнения комбо - нажатия кнопок, отвечающих за действие, движение героев и их умений.[/left][/cell]
-[/table]
-
-· При повышении уровня приоритета вы получаете прирост к определённым показателям, а также уникальные эффекты. Наличие определённых способностей помогает в конкретных ситуациях. Некоторые могут быть приобретены только после чтения книг нужного типа. Ищите книги, чтобы раздвинуть свои возможности.
-
-[b][i]📚[/i][/b] Здесь содержатся подобранные вами книги и заметки. Заметки можно собрать в единую историю и прожить её в случае успеха.
-[b][i]🔍[/i][/b] Тут описывается помощь. Если не понимаете, что конкретно нужно сделать в той или иной ситуации или забыли про разные умения и базовые возмо-жности героев, заглядыв-айте сюда."
-fit_content = true
+theme_override_fonts/font = ExtResource("10_vsy6a")
+text = "🎖Возможность - закреплена за персонажем. Например, дополнительный опыт при допытывании. ⚔️ Способность - эффект выполнения комбо. Комбо - нажатие кнопок, отвечающих за действия героев."
 autowrap_mode = 2
+
+[node name="pages" type="ItemList" parent="stack"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_colors/font_outline_color = Color(0.34407577, 0.34407574, 0.34407574, 1)
+theme_override_constants/h_separation = 14
+theme_override_styles/panel = SubResource("StyleBoxEmpty_sph7f")
+theme_override_styles/hovered = SubResource("StyleBoxFlat_fh63m")
+theme_override_styles/selected = SubResource("StyleBoxFlat_dnqic")
+theme_override_styles/cursor_unfocused = SubResource("StyleBoxFlat_sph7f")
+select_mode = 1
+auto_height = true
+item_count = 4
+max_columns = 0
+item_0/text = "перемещаемым"
+item_1/text = "Попробуем сделать текст"
+item_2/text = "как предметы"
+item_3/text = "Отрывок жизни"
+
+[node name="pages_help" type="Label" parent="stack"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.25
+theme = ExtResource("10_3h6ma")
+theme_override_styles/normal = SubResource("StyleBoxLine_vvrgj")
+text = "Здесь содержатся послания, которые оставляли древние в виде книг и записок. Чтобы узнать историю Древних, соберите все записи на локации и выложите их как единый связный рассказ."
+autowrap_mode = 2
+
+[node name="books" type="Label" parent="stack"]
+layout_mode = 2
+theme = ExtResource("10_3h6ma")
+theme_override_styles/normal = SubResource("StyleBoxLine_flm7h")
+text = "K2
+K3"

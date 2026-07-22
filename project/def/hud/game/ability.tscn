@@ -1,6 +1,7 @@
-[gd_scene load_steps=13 format=3 uid="uid://bo6wehp5f8viu"]
+[gd_scene load_steps=14 format=3 uid="uid://bo6wehp5f8viu"]
 
 [ext_resource type="PackedScene" uid="uid://cq5jn6k2bwg5n" path="res://def/hud/game/ability_status.tscn" id="3_uklt7"]
+[ext_resource type="PackedScene" uid="uid://cspf6sh5v7o4v" path="res://def/hud/game/priorities_card.tscn" id="4_6r3jo"]
 [ext_resource type="FontFile" uid="uid://c4ygkmnbt1j7y" path="res://data/font/LTSuperiorSerif-Semibold.otf" id="5_grhtg"]
 [ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://data/theme/patterns/template/menu/settings/topic/footer.tres" id="9_xc6ys"]
 
@@ -140,6 +141,7 @@ theme = SubResource("Theme_50ghp")
 columns = 2
 
 [node name="title" type="RichTextLabel" parent="stack"]
+visible = false
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -169,3 +171,22 @@ text = "[i]Способности[/i]
 ⠀·⠀Чтобы увидеть слоты, которые будут задействованы в последовательности, немного приоткройте данную панель и прокрутите её в самый верх. Для того чтобы использовать дальнобойные снаряды, нажимайте курок, когда увидите [b]🎯[/b] в слотах."
 fit_content = true
 autowrap_mode = 2
+
+[node name="help" type="HFlowContainer" parent="stack"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="motion" parent="stack/help" instance=ExtResource("4_6r3jo")]
+layout_mode = 2
+
+[node name="jump" parent="stack/help" instance=ExtResource("4_6r3jo")]
+layout_mode = 2
+
+[node name="push" parent="stack/help" instance=ExtResource("4_6r3jo")]
+layout_mode = 2
+
+[node name="land" parent="stack/help" instance=ExtResource("4_6r3jo")]
+layout_mode = 2
+
+[node name="fight" parent="stack/help" instance=ExtResource("4_6r3jo")]
+layout_mode = 2
