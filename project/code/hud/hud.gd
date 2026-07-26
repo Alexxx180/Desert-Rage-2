@@ -1,8 +1,10 @@
 class_name WorldInput extends CanvasLayer
 
 var level: LevelRoot
-var aura: Adversary ; var animation: CharacterAnimation
-var interact: WorldInteraction ; var _inventory: HeroInventory
+var aura: Adversary
+var animation: CharacterAnimation
+var interact: WorldInteraction
+var _inventory: HeroInventory
 var menu: Menu = Menu.new()
 
 var fire: GPUParticles2D ; var rain: GPUParticles2D
@@ -44,36 +46,54 @@ func load_game_logic() -> void:
 	aura = AuraResource.new()
 	inventory = HeroInventory.new()
 
-func next() -> int: return (HUD.hero + 1) & Def.ROCK
+func next_hero() -> int: return (HUD.hero + 1) & Def.ROCK
 #func _ready() -> void: layer = 2 # TODO
 func _input(event: InputEvent) -> void:
 	if HUD.level != null:
 		world.input(event)
 
 var session: PackedInt64Array = []
-var selected: int
 
-enum { SETTINGS, ACHIEVEMENTS = 2, SAVES = 3 }
-enum { LEVEL, PRIORITY, ENEMY = 3, ACCESS = 7, NOTES = 9, SECRETS = 13, BOOKS = 21,
-	AURA = 25, RESOURCE = 27, COMPLETED, POSITION, BOX, ITEMS = 31 }
-# model : L1 (SCORE)P2 E4 A2 N4 S8 B4 A2 R2 
-enum { DIFFICULTY, PART, DUNGEON, PROGRESSED }
+enum { SETTINGS, LEVEL = 1, PRIORITY, ACHIEVEMENTS = 2, SAVES, ENEMY = 3,
+	ACCESS = 7, NOTES = 9, SECRETS = 13, BOOKS = 21, AURA = 25, RESOURCE = 27,
+	COMPLETED, POSITION, BOX, ITEMS = 31 }
+enum { DIFFICULTY, PART, DUNGEON, PROGRESSED } # model : L1 (SCORE)P2 E4 A2 N4 S8 B4 A2 R2 
 
 func save_slot(no: int) -> void:
 	var slot: int = SAVES
+	var next: int = SAVES + ITEMS
+	var items: int = 0
 	for i in range(0, no):
-		slot += RESOURCE
-		pass
-	pass
+		slot += ITEMS
+		items = session[slot]
+		slot += session[slot]
+	for i in range(SAVES, ITEMS):
+		session[slot + i] = session[i]
+	for i in range(0, min(session[next], items)):
+		session[slot + next + i] = session[next + i]
+	if session[next] < items:
+		for i in range(session[next], items): session.remove_at(slot + ITEMS)
+	else:
+		for i in range(0, items - session[next]): session.insert(slot + ITEMS, session[slot + items + i])
 
-func select_slot(_no: int) -> void:
-	var 
-	session.
-	pass
+func load_slot(no: int) -> void:
+	var slot: int = SAVES
+	var next: int = SAVES + ITEMS
+	var items: int = 0
+	for i in range(0, no):
+		slot += ITEMS
+		items = session[slot]
+		slot += session[slot]
+	for i in range(SAVES, ITEMS):
+		session[i] = session[slot + i]
+	for i in range(0, min(session[next], items)):
+		session[next + i] = session[slot + next + i]
+	if session[next] > items:
+		for i in range(items, session[next]): session.remove_at(next)
+	else:
+		for i in range(items - session[next] - 1, -1, -1): session.insert(next, session[slot + items])
 
 """
-
-
 var xp: RefCounted
 var tree: SceneTree
 var level: String:
@@ -193,7 +213,7 @@ func act_enter() -> void: HUD.level.tile[Def.offset(HUD.hero, Def.LEVER)] = Def.
 func act_exit() -> void: HUD.level.tile[Def.offset(HUD.hero, Def.LEVER)] = 0
 
 func input(_event: InputEvent) -> void: # return #TODO FIXME disable after HUD test
-	if Bit.of(HUD.state, Def.OPEN_MENU) or Bit.of(HUD.state, Def.TRANSIT):
+	if Def.of(HUD.state, Def.OPEN_MENU) or Def.of(HUD.state, Def.TRANSIT):
 		menu_interaction()
 	else:
 		action_input()
@@ -210,7 +230,7 @@ func action_input() -> void:
 		HUD.level.deploy.select()
 
 func punch() -> void:
-	combo = combo << Bit.MASK3 | A
+	combo = combo << Def.MASK3 | A
 	if act(DOUBLE):
 		if act(LUNGE):
 			pass
@@ -224,7 +244,7 @@ func punch() -> void:
 	# timer.start()
 
 func kick() -> void:
-	combo = combo << Bit.MASK3 | B
+	combo = combo << Def.MASK3 | B
 	if act(SPIT_KICK):
 		pass
 	elif act(BACK_SPIT):
@@ -235,13 +255,13 @@ func kick() -> void:
 		HUD.level.chains.jump()
 
 func skill_a() -> void:
-	combo = combo << Bit.MASK3 | X
+	combo = combo << Def.MASK3 | X
 	match HUD.hero:
 		Def.RAY: HUD.interact.melt_ice()
 		Def.ROCK: HUD.interact.puddle_tile() # LevelRoot # TileDecorator
 
 func skill_b() -> void:
-	combo = combo << Bit.MASK3 | Y
+	combo = combo << Def.MASK3 | Y
 	if act(POACHING):
 		pass
 

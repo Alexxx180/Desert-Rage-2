@@ -12,6 +12,22 @@ var sizes: PackedByteArray = [0, 0, 0, 0]
 var buttons: Dictionary[int, int] = {}
 var hint: PackedInt32Array = []
 
+var lever: Array[Area2D] = []
+var lever_body: Array[CollisionShape2D] = []
+var plate: Array[Area2D] = []
+var plate_body: Array[CollisionShape2D] = []
+var profile: Array[AnimatedSprite2D] = []
+var shadow: Array[Sprite2D] = []
+var mirror: Array[AnimatedSprite2D] = [null, null]
+var weight: PackedFloat32Array = [1.0]
+var ride: PackedByteArray = [-1]
+var boxes: Array[PackedByteArray] = []
+var velocity: PackedVector2Array = []
+
+func _physics_process(_delta: float) -> void:
+	for i in range(0, len(entity)):
+		entity[i].move_and_collide(velocity[i])
+
 func add_chip(box: CharacterBody2D) -> void:
 	add_child(box)
 	box.position = HUD.level.border.get_position()
