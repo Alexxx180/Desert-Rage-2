@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://rlwfnl6rvpkj" path="res://def/build/execute.tscn" id="2_5d8pa"]
 [ext_resource type="PackedScene" uid="uid://b83b7oo2fmh5h" path="res://def/build/group.tscn" id="2_ncn64"]
 [ext_resource type="PackedScene" uid="uid://ce2y76nymo6o4" path="res://def/build/tags.tscn" id="3_rdnb3"]
-[ext_resource type="Script" uid="uid://b1v45y3lnmpkv" path="res://code/node/parallax/back.gd" id="5_aw8ni"]
+[ext_resource type="Script" uid="uid://b1v45y3lnmpkv" path="res://code/node/npc_back.gd" id="5_aw8ni"]
 
 [sub_resource type="Gradient" id="Gradient_jbehm"]
 colors = PackedColorArray(0.737255, 0.584314, 0.309804, 1, 0.722283, 0.571231, 0.299598, 1)
@@ -25,17 +25,15 @@ tile_map_data = PackedByteArray("AAADABIAAgABAAEAAAADABMAAgABAAEAAAADABQAAgABAAE
 tile_map_data = PackedByteArray("AAAcAAIAAAAAAAAABAA=")
 
 [node name="tags" parent="." instance=ExtResource("3_rdnb3")]
-script = null
 
 [node name="group" parent="." instance=ExtResource("2_ncn64")]
 position = Vector2(1700, 4223)
 
 [node name="background" type="ParallaxBackground" parent="."]
+script = ExtResource("5_aw8ni")
 
 [node name="desert" type="ParallaxLayer" parent="background"]
 motion_mirroring = Vector2(4080, 2160)
-script = ExtResource("5_aw8ni")
-speed = 0.1
 
 [node name="view" type="Sprite2D" parent="background/desert"]
 texture = SubResource("GradientTexture2D_3yij7")

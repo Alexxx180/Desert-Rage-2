@@ -1,43 +1,75 @@
-extends CanvasLayer
+class_name WorldInput extends CanvasLayer
 
-var state: int = 0
-var hero: int = 0
-var _preserves: Preserves ; var _aura: AuraResource ; var _animation: CharacterAnimation
-var levels: LevelRoot ; var _interact: WorldInteraction
-#var _inventory: HeroInventory ;
-
-# @onready var ost: SoundtrackSystem = SoundtrackSystem.new()
-# @onready var stats: SessionStats = SessionStats.new(get_tree())
-
+var level: LevelRoot
+var aura: Adversary ; var animation: CharacterAnimation
+var interact: WorldInteraction ; var _inventory: HeroInventory
 var menu: Menu = Menu.new()
 
-# var inventory: HeroInventory:
-# 	get: return Def.ref(self, _inventory, &"_inventory", new_hero_inventory)
-var interact: WorldInteraction:
-	get: return Def.ref(self, _interact, &"_interact", new_interaction)
-var preserves: Preserves:
-	get: return Def.ref(self, _preserves, &"_preserves", new_preserve)
-var aura: AuraResource:
-	get: return Def.ref(self, _aura, &"_aura", new_aura_resource)
-var animation: CharacterAnimation:
-	get: return Def.ref(self, _animation, &"_animation", new_character_animation)
+var fire: GPUParticles2D ; var rain: GPUParticles2D
 
-var level: Node2D
-var world: WorldInput = WorldInput.new()
+func new_hero(no: int) -> CharacterBody2D:
+	if entity[no] == null:
+		var hero: CharacterBody2D = load(Def.ray if no == Def.RAY else Def.rock).instantiate()
+		hero.name = &"ray" if no == Def.RAY else &"rock"
+		hero.no = no
+		add_child(hero)
+		return hero
+	return entity[no]
 
-func new_interaction() -> WorldInteraction: return WorldInteraction.new()
-func new_menu() -> Menu: return Menu.new()
-func new_character_animation() -> CharacterAnimation: return CharacterAnimation.new()
-# func new_hero_inventory() -> HeroInventory: return HeroInventory.new()
-func new_preserve() -> Preserves: return Preserves.new()
-func new_world_input() -> WorldInput: return WorldInput.new()
-func new_aura_resource() -> AuraResource: return AuraResource.new()
+func load_hero(that: int) -> void:
+	if entity[that] == null:
+		entity[that] = new_hero(that)
+
+func load_level() -> void:
+	HUD.level = self
+	if has_node(^"execute"):
+		execute = get_node(^"execute")
+		cluster.help_hint(Def.HELP, Def.HINT, cluster.hint)
+		#cluster.resize_clusters()
+	# HUD.state = Bit.to1(HUD.state, Def.TRANSIT)
+
+func _ready() -> void:
+	layer = 2
+	load_level()
+	load_hero(HUD.hero)
+	entity[HUD.hero].position = group.position
+	group.reparent(entity[HUD.hero])
+	group.position = Vector2.ZERO
+
+
+func load_game_logic() -> void:
+	if interact != null: return
+	interact = WorldInteraction.new()
+	animation = CharacterAnimation.new()
+	aura = AuraResource.new()
+	inventory = HeroInventory.new()
 
 func next() -> int: return (HUD.hero + 1) & Def.ROCK
-func _ready() -> void: layer = 2 # TODO
+#func _ready() -> void: layer = 2 # TODO
 func _input(event: InputEvent) -> void:
 	if HUD.level != null:
 		world.input(event)
+
+var session: PackedInt64Array = []
+var selected: int
+
+enum { SETTINGS, ACHIEVEMENTS = 2, SAVES = 3 }
+enum { LEVEL, PRIORITY, ENEMY = 3, ACCESS = 7, NOTES = 9, SECRETS = 13, BOOKS = 21,
+	AURA = 25, RESOURCE = 27, COMPLETED, POSITION, BOX, ITEMS = 31 }
+# model : L1 (SCORE)P2 E4 A2 N4 S8 B4 A2 R2 
+enum { DIFFICULTY, PART, DUNGEON, PROGRESSED }
+
+func save_slot(no: int) -> void:
+	var slot: int = SAVES
+	for i in range(0, no):
+		slot += RESOURCE
+		pass
+	pass
+
+func select_slot(_no: int) -> void:
+	var 
+	session.
+	pass
 
 """
 
@@ -134,3 +166,90 @@ static func set_json(path: String, value: Dictionary) -> void:
 	var json: String = JSON.stringify(value)
 	file.store_string(json)
 """
+
+
+
+
+static func a(fields: PackedByteArray) -> int: return Bit.bytes_to_int(fields, Bit.MASK3)
+func _press(name: StringName) -> bool: return Input.is_action_just_pressed(name)
+func _hold(name: StringName) -> bool: return Input.is_action_pressed(name)
+func _power(name: StringName) -> float: return Input.get_action_strength(name)
+func act(no: int) -> bool: return combo & acts[no]
+
+enum { LEFT, RIGHT, UP, DOWN, ACT1, ACT2, ACT3, ACT4, OPT_LEFT, OPT_RIGHT, OPT_UP,
+	OPT_DOWN, FIRE, AIM, MENU }
+enum { DOUBLE, LUNGE, DEAD_GRIP, LOW_KICK, BACKSTAB, FIRE_KICK,
+	SPIT_KICK, BACK_SPIT, POACHING,
+	GREEK_FIRE, STRAY_BULLET, AIR_FIGHT, AID, FIRE_DANCE, BREAKFLY, SHRAPNEL,
+	WET_CLEANING, DEFIBRILLATOR, HORIZONTAL, ROUND_ATTACK, WASHING_OUT,
+	TRANSFUSION, AIR_STRIKE, SHOCK, ELECTROCUT, THUNDER }
+enum { A, B, X, Y, T }
+var acts: PackedInt32Array = [a([A, A]), a([B, A, A]), a([A, Y, A]), a([A, B, A]),
+	a([B, B, A]), a([B, X, B]), a([B, A, B]), a([B, A, A, B]), a([A, Y, A, Y])]
+# var hero: int enum { RAY, ROCK } enum { TOOL, FIGHT, DANCE }
+var combo: int
+
+func act_enter() -> void: HUD.level.tile[Def.offset(HUD.hero, Def.LEVER)] = Def.ofmap(HUD.level.border.local_to_map(HUD.level.entity[HUD.hero].position))
+func act_exit() -> void: HUD.level.tile[Def.offset(HUD.hero, Def.LEVER)] = 0
+
+func input(_event: InputEvent) -> void: # return #TODO FIXME disable after HUD test
+	if Bit.of(HUD.state, Def.OPEN_MENU) or Bit.of(HUD.state, Def.TRANSIT):
+		menu_interaction()
+	else:
+		action_input()
+	if _hold(&"menu1"): open_menu()
+
+func action_input() -> void:
+	HUD.interact.movement(_hold(&"act1"))
+	if _press(&"act1"): punch()
+	if _press(&"act2"): kick()
+	if _press(&"act3"): skill_a()
+	if _press(&"act4"): skill_b()
+	if _hold(&"aim") and _press(&"fire"): use_item()
+	if _press(&"select") and HUD.interact.state[HUD.hero] == 0:
+		HUD.level.deploy.select()
+
+func punch() -> void:
+	combo = combo << Bit.MASK3 | A
+	if act(DOUBLE):
+		if act(LUNGE):
+			pass
+	elif act(DEAD_GRIP):
+		pass
+	elif act(LOW_KICK):
+		pass
+	elif act(BACKSTAB):
+		pass
+	# hands("Двоечка")
+	# timer.start()
+
+func kick() -> void:
+	combo = combo << Bit.MASK3 | B
+	if act(SPIT_KICK):
+		pass
+	elif act(BACK_SPIT):
+		pass
+	elif act(FIRE_KICK):
+		pass
+	if HUD.level.tile[HUD.hero] == Def.H_SPRING_OFF:
+		HUD.level.chains.jump()
+
+func skill_a() -> void:
+	combo = combo << Bit.MASK3 | X
+	match HUD.hero:
+		Def.RAY: HUD.interact.melt_ice()
+		Def.ROCK: HUD.interact.puddle_tile() # LevelRoot # TileDecorator
+
+func skill_b() -> void:
+	combo = combo << Bit.MASK3 | Y
+	if act(POACHING):
+		pass
+
+func use_item() -> void:
+	pass
+
+func open_menu() -> void:
+	pass
+
+func menu_interaction() -> void:
+	pass

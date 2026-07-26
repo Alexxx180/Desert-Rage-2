@@ -167,3 +167,238 @@ func _set_invis(invisible: bool) -> void:
 	
 func _go_behind_scene(_curtain: TileMapLayer) -> void: _set_invis(true) # MOVE & CONNECT TO LINK
 func _go_on_scene(_curtain: TileMapLayer) -> void: _set_invis(false)
+
+
+
+# PARTICLES
+
+enum { PUNCH, APPEAR = 0, KICK, TIME = 1, FIRE, DISAPPEAR = 2, DROP, OFFSET = 10, PATH = 100 }
+
+const timing: PackedFloat32Array = [0.2, 0.4, 0.6]
+
+func set_direction(pos: Vector2, direction: Vector2, type: int) -> void:
+	match type:
+		KICK: texture = preload("res://icon/vfx/kick.png")
+		PUNCH: texture = preload("res://icon/vfx/punch.png")
+		FIRE: texture = preload("res://icon/vfx/ray/fire.svg")
+		DROP: texture = preload("res://icon/vfx/rock/water.svg")
+	position = pos - Vector2(0, 32)
+	var offsets: Vector2 = Vector2(OFFSET, OFFSET)
+	var angle: float = Def.rotate(direction)
+	rotation = angle
+	var delta: Vector2 = Vector2(PATH, PATH) * direction
+	if direction.x != 0 and direction.y != 0:
+		var axis: int = randi_range(0, 2)
+		if axis != 2:
+			direction[axis] *= -1
+			position += offsets * direction
+		delta *= 0.75
+	elif direction.x != 0:
+		var track: int = randi_range(-1, 1)
+		if track != 0:
+			direction.y = track
+			position += offsets * direction * 2
+	elif direction.y != 0:
+		var track: int = randi_range(-1, 1)
+		if track != 0:
+			direction.x = track
+			position += offsets * direction * 2
+		
+	modulate = Color.TRANSPARENT
+	#modulate = Color.from_rgba8(127, 127, 127, 127)
+	set_track(position + delta)
+
+func set_track(target: Vector2) -> void:
+	var tween: Tween = create_tween()# .set_parallel(true)
+	tween.tween_property(self, "modulate", Color.from_rgba8(127, 127, 127, 200), timing[APPEAR])
+	tween.parallel().tween_property(self, "position", target, timing[TIME])
+	tween.tween_property(self, "modulate", Color.TRANSPARENT, timing[APPEAR])
+	tween.tween_callback(queue_free)
+
+
+
+class_name SandParticle extends GPUParticles2D
+
+@onready var timer: Timer = $timer
+
+func _ready() -> void:
+	emitting = false
+
+func appear() -> void:
+	emitting = true
+	timer.start()
+
+func dissapear() -> void:
+	emitting = false
+	# call_deferred("queue_free")
+
+
+
+
+class_name RainParticle extends GPUParticles2D
+
+func _ready() -> void:
+	$droplets.one_shot = true
+
+func set_pos(pos: Vector2) -> RainParticle:
+	position = pos
+	return self
+
+func set_direction(direction: Vector2) -> RainParticle:
+	position += direction * 32
+	return self
+
+func dissapear() -> void:
+	call_deferred("queue_free")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+extends CharacterBody2D
+
+@onready var lever: Area2D = $lever
+@onready var lever_body: CollisionShape2D = lever.get_node("shape")
+@onready var plate: Area2D = $plate
+@onready var plate_body: CollisionShape2D = plate.get_node("shape")
+@onready var profile: AnimatedSprite2D = $profile
+@onready var shadow: Sprite2D = $shadow
+@onready var animation: Timer = $animation
+# @onready var animation: AnimationTree = $animation
+var no: int
+var box: int = -1
+var weight: float = 1.0
+var _mirror: AnimatedSprite2D = null
+var mirror: AnimatedSprite2D:
+	get: return HUD.animation.get_mirror_sprite(self, Def.mirror[no], _mirror)
+
+var boxes: PackedByteArray = [] # var state: PackedInt32Array = [0, 0, 0]
+var is_monitoring: bool: set = set_monitoring
+
+func stop_animation() -> void:
+	HUD.animation.stop_animation()
+
+func _ready() -> void:
+	animation.timeout.connect(stop_animation)
+	plate.body_entered.connect(HUD.level.plate_encounter)
+	plate.body_exited.connect(HUD.level.plate_disappear)
+	lever.body_entered.connect(HUD.level.lever_encounter)
+	lever.body_exited.connect(HUD.level.lever_disappear)
+
+func set_monitoring(value: bool) -> void:
+	lever.monitoring = value
+	plate.monitoring = value
+
+func make_velocity(motion: Vector2) -> void: 
+	velocity = (motion * weight) # - Vector2.ONE #  * 0.5
+
+func make_position(motion: Vector2) -> void: position = motion
+func _physics_process(_delta: float) -> void: move_and_collide(velocity)
+
+
+"""
+@onready var close: Area2D = $close
+
+@onready var after_tile: Area2D = $after_tile
+@onready var straight: Area2D = $straight
+@onready var fireplace: Area2D = $fireplace
+@onready var circle: Area2D = $circle
+@onready var small_circle: Area2D = $small_circle
+@onready var sided: Area2D = $sided
+
+@onready var zone: Area2D = $zone
+
+@onready var hitbox: StaticBody2D = $hitbox
+@onready var stuck: Node2D = $stuck
+
+func set_direction(direction: Vector2) -> void:
+	if direction != Vector2.ZERO:
+		close.set_direction(direction)
+		after_tile.set_direction(direction)
+
+"""
+
+
+
+
+@tool
+class_name AnimatedTextureRect extends TextureRect
+
+@export var sprites: SpriteFrames
+@export var current_animation: String = "default"
+@export var frame_index: int = 0
+@export_range(0.0, 10, 0.001) var speed_scale: float = 1.0
+@export var auto_play: bool = false
+@export var playing: bool = false
+
+var refresh_rate: float = 1.0
+var fps: float = 30.0
+var frame_delta: float = 0.0
+
+#func _ready() -> void:
+	# sync_data()
+	#if sprites == null:
+	#	process_mode = Node.ProcessMode.PROCESS_MODE_DISABLED
+	#	assert(false, "No suitable sprite frames found, disabling")
+	#elif auto_play: play()
+
+func sync_data() -> void:
+	fps = sprites.get_animation_speed(current_animation)
+	refresh_rate = sprites.get_frame_duration(current_animation, frame_index)
+
+func play(animation: String = '') -> void:
+	frame_index = 0
+	frame_delta = 0.0
+	if animation != '': current_animation = animation
+	sync_data()
+	resume()
+
+func resume() -> void: playing = true
+func pause() -> void: playing = false
+func stop() -> void:
+	pause()
+	frame_index = 0
+
+func loop_animation() -> void:
+	if not sprites.get_animation_loop(current_animation):
+		playing = false
+
+func get_next_frame():
+	frame_index += 1
+	var frame_count = sprites.get_frame_count(current_animation)
+	if frame_index >= frame_count:
+		frame_index = 0
+		loop_animation()
+	sync_data()
+	return sprites.get_frame_texture(current_animation, frame_index)
+
+func _set_frame_delta(delta: float) -> void:
+	frame_delta += speed_scale * delta
+	if frame_delta >= refresh_rate / fps:
+		texture = get_next_frame()
+		frame_delta = 0
+
+func assert_has_animation() -> void:
+	var has: bool = sprites.has_animation(current_animation)
+	if not has: pause()
+	assert(has, "Animation %s doesn't exist" % current_animation)
+
+func _process(delta: float) -> void:
+	if playing:
+		assert_has_animation()
+		_set_frame_delta(delta)
