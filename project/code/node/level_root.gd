@@ -31,3 +31,11 @@ func _physics_process(_delta: float) -> void:
 func add_chip(box: CharacterBody2D) -> void:
 	add_child(box)
 	box.position = HUD.level.border.get_position()
+
+func _ready() -> void:
+	HUD.level = self
+	if has_node(^"execute"):
+		execute = get_node(^"execute")
+		cluster.help_hint(Def.HELP, Def.HINT, cluster.hint)
+		#cluster.resize_clusters()
+	# HUD.state = Bit.to1(HUD.state, Def.TRANSIT)

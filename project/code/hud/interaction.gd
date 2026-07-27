@@ -19,7 +19,7 @@ func on_tile(pos: Vector2) -> PackedInt32Array: return HUD.level.border.pos(pos)
 func movement(act: bool) -> void:
 	directed = Input.get_vector(&"left", &"right", &"forward", &"backward")
 	var in_place: bool = directed == Vector2.ZERO
-	if Bit.of(state[HUD.hero], JUMPING): return
+	if Def.of(state[HUD.hero], JUMPING): return
 	
 	if Bit.of(state[HUD.hero], JUMPED):
 		if hero.box == -1:
@@ -94,7 +94,7 @@ func ledge_jump(pos: Vector2, height: int = 0) -> void:
 	if jumped:
 		pos = position[HEIGHT]
 	elif f1 == f2:
-		pos = HUD.level.border.map_to_local(Def.tomap(t[Def.COORDS]))
+		pos = HUD.level.border.map_to_local(Def.map(t[Def.COORDS]))
 		jumped = t[Def.ID] == Def.LOGIC and t[Def.ATLAS] in stand
 		if jumped: off = Vector2(0, 18) ; pos -= off
 		elif t[Def.ID] == Def.FLOOR and t[Def.TYPE] == Def.FLOORS:
@@ -160,7 +160,7 @@ func trigger_encounter(body: Variant) -> void:
 		HUD.level.border.atlas(Def.GROUND).id(Def.FLOOR).type(Def.FLOORS).paint_alt() # coords(Def.GROUND)
 
 func plate_encounter(_body: Variant) -> void:
-	HUD.level.tile[Def.offset(HUD.hero, Def.PLATE)] = Def.ofmap(HUD.level.border.local_to_map(hero.position))
+	HUD.level.tile[Def.offset(HUD.hero, Def.PLATE)] = Def.join(HUD.level.border.local_to_map(hero.position))
 	HUD.level.cluster.tile_walk(hero, true)
 
 func plate_disappear(_body: Variant) -> void:
@@ -174,7 +174,7 @@ func plate_disappear(_body: Variant) -> void:
 enum { GROUND = 1, TILE_SIZE = 6 }
 
 func is_chest(atlas: Vector2i) -> bool:
-	return Def.of8(atlas) in [Def.BRONZE_OFF, Def.SILVER_OFF, Def.GOLD_OFF,
+	return Def.join8(atlas) in [Def.BRONZE_OFF, Def.SILVER_OFF, Def.GOLD_OFF,
 		Def.PLATINUM_OFF, Def.BRONZE_ON, Def.SILVER_ON, Def.GOLD_ON, Def.PLATINUM_ON]
 
 func _paint(places: Array[Vector2i]) -> void:
@@ -190,13 +190,13 @@ func setup(_casual_mode: bool) -> void:
 	# _set_casual_mode(casual_mode)
 
 func drink_water(inventory: Node, pos: Vector2) -> void:
-	match Def.of8(HUD.level.border.tpos(pos)):
+	match Def.join8(HUD.level.border.tpos(pos)):
 		Def.D_WATER:
 			inventory.logic.effect.restore() # USE WATER
 
 func _get_id(tile: Dictionary) -> int:
 	var tag: Vector2i = HUD.level.execute.tile(tile.coords)
-	return Def.of8(tag)# - Tile.FLOOR
+	return Def.join8(tag)# - Tile.FLOOR
 
 func open_chest(tile: Dictionary) -> void:
 	var id: int = _get_id(tile)
@@ -210,7 +210,7 @@ func open_chest(tile: Dictionary) -> void:
 
 func open_chests() -> void:
 	var tile: Dictionary = HUD.level.border.context # print("FOUND ID: ", id) # logic.effect.status.hero = hero
-	match Def.of8(tile.atlas):
+	match Def.join8(tile.atlas):
 		Def.BRONZE_OFF, Def.SILVER_OFF, Def.GOLD_OFF, Def.PLATINUM_OFF:
 			open_chest(tile)
 		Def.BRONZE_ON, Def.SILVER_ON, Def.GOLD_ON, Def.PLATINUM_ON:
@@ -226,18 +226,18 @@ func check_book() -> void:
 		set_page(tile.coords, [tile.atlas, manual])
 
 func set_book(tag: Vector2i) -> void:
-	match Def.of8(HUD.level.border.tile(tag)):
+	match Def.join8(HUD.level.border.tile(tag)):
 		Def.BLUE_OFF, Def.RED_OFF, Def.GREEN_OFF, Def.BLACK_OFF, Def.WHITE_OFF: check_book()
 
 func set_page(coords: Vector2i, value: Array) -> void:
 	HUD.level.execute.books[coords] = value
 
 func _manual(coords: Vector2i) -> String:
-	return Def.pages[Def.of8(HUD.level.execute.coords(coords).id().atlas().tile[Def.ATLAS])]
+	return Def.pages[Def.join8(HUD.level.execute.coords(coords).id().atlas().tile[Def.ATLAS])]
 
 func set_pages(tag: Vector2i) -> void:
 	var tile: Dictionary = HUD.level.execute.from_coords(tag).context
-	match Def.of8(tile.atlas):
+	match Def.join8(tile.atlas):
 		Def.PAGE: set_page(tile.coords, [tile.atlas, _manual(tile.coords)])
 		_: set_book(tile.coords)
 
@@ -800,7 +800,7 @@ enum { BUTTON, LEVER, SOURCE, TELEPORT, SIZE = 16, CLUSTER = 64 }
 
 func help_show(pos: Vector2i, type: PackedInt32Array) -> int:
 	for i in range(0, len(hint), 2):
-		if Def.tomap(type[i]) >= pos and pos <= Def.tomap(type[i + 1]):
+		if Def.map(type[i]) >= pos and pos <= Def.map(type[i + 1]):
 			return i
 	return -1
 
@@ -810,8 +810,8 @@ func help_hint(tag_id: int, atlas: int, type: PackedInt32Array) -> void:
 		var tiles: PackedVector2Array = HUD.level.execute.get_used_cells_by_id(Def.TAGS, Def.to8(tile), tag_id) # Def.to8(tile)
 		if tiles.size() == 0: continue
 		var i: int = int(tiles.size() == 2)
-		var a: Vector2i = tiles[0].min(tiles[i]) ; type.append(Def.ofmap(a))
-		var b: Vector2i = tiles[i].max(tiles[0]) ; type.append(Def.ofmap(b))
+		var a: Vector2i = tiles[0].min(tiles[i]) ; type.append(Def.join(a))
+		var b: Vector2i = tiles[i].max(tiles[0]) ; type.append(Def.join(b))
 		for t in tiles: HUD.level.execute.erase_cell(t)
 		for y in range(a.y, b.y + 1):
 			for x in range(a.x, b.x + 1):
@@ -843,10 +843,10 @@ func resize_clusters() -> void:
 		
 		var search: bool = true
 		for x in range(0, tiles.size()):
-			cluster[count + x] = Def.ofmap(tiles[x])
+			cluster[count + x] = Def.join(tiles[x])
 			if search:
 				search = false
-				match Def.of8(HUD.level.border.coords(tiles[x]).tile[Def.ATLAS]):
+				match Def.join8(HUD.level.border.coords(tiles[x]).tile[Def.ATLAS]):
 					Def.PLATE_OFF, Def.PLATE_ON: button.append(Def.of(tiles.size(), count))
 					Def.LEVER_OFF, Def.LEVER_ON: lever.append(Def.of(tiles.size(), count))
 					Def.SOURCE_OFF, Def.SOURCE_ON: source.append(Def.of(tiles.size(), count))
@@ -867,7 +867,7 @@ func button_press(no: int, add: int, compare: int, tag: int) -> void:
 	if buttons[coords] == compare: executes(tag)
 
 func toggle_openning(no: int, on: bool, enter: bool) -> void:
-	var tag: int = Def.of8(HUD.level.border.coords(cluster[no]).tile[Def.ATLAS])
+	var tag: int = Def.join8(HUD.level.border.coords(cluster[no]).tile[Def.ATLAS])
 	match tag:
 		Def.PLATE_OFF: button_press(no, +1, 1, Def.PLATE_ON if on else tag)
 		Def.PLATE_ON: button_press(no, +1 if enter else -1, 0, Def.PLATE_OFF if on else tag)
@@ -882,7 +882,7 @@ func executes(next: int) -> void: HUD.level.border.switch(Def.to8(next))
 func next_cluster(cursor: Vector2, count: int) -> Vector2: return Vector2(cursor.x + count, cursor.y + 1)
 
 func switch_cluster(section: int, enter: bool) -> void:
-	var c: int = get_cluster(section, Def.ofmap(HUD.level.border.tile[Def.COORDS]))
+	var c: int = get_cluster(section, Def.join(HUD.level.border.tile[Def.COORDS]))
 	var no: int = HUD.selected + HUD.COMPLETED
 	var state: bool = !Bit.of(HUD.session[no], c)
 	HUD.session[no] = Bit.to(HUD.session[no], c, state)
@@ -926,10 +926,10 @@ func tile_walk(hero: CharacterBody2D, enter: bool = true) -> void:
 	
 	var atlas: int = HUD.level.border.coords(HUD.level.tile[Def.offset(hero.no, Def.PLATE)]).atlas().tile[Def.ATLAS]
 	if atlas == Def.TELEPORT_ON:
-		var c: int = get_cluster(TELEPORT, Def.ofmap(HUD.level.border.tile[Def.COORDS]))
+		var c: int = get_cluster(TELEPORT, Def.join(HUD.level.border.tile[Def.COORDS]))
 		for i in range(Def.x(access[c]), Def.y(access[c])):
 			if HUD.level.border.coords(cluster[i]).tile[Def.ATLAS] == Def.PLACE:
-				hero.teleport(HUD.level.border.map_to_local(Def.tomap(cluster[i])))
+				hero.teleport(HUD.level.border.map_to_local(Def.map(cluster[i])))
 				break
 	elif atlas == Def.HINT and HUD.level.border.tile[Def.ID] == Def.FLOOR:
 		no = help_show(HUD.level.border.local_to_map(hero.position), hint)
@@ -1173,7 +1173,7 @@ var rain: Node2D = null
 
 func setup() -> void:
 	for coords in HUD.level.border.busy(Def.SOURCE_ON, Def.LOGIC):
-		initiate_source(Def.ofmap(coords))
+		initiate_source(Def.join(coords))
 
 func initiate_source(coords: int) -> void:
 	current.append([coords, coords])
@@ -1205,7 +1205,7 @@ func sparking(tile: int) -> void:
 		HUD.sparking.start()
 
 func activate_puddle(pos: Vector2) -> void:
-	if not _around(Def.ofmap(HUD.level.border.local_to_map(pos))): return
+	if not _around(Def.join(HUD.level.border.local_to_map(pos))): return
 	
 	if HUD.level.border.tile[Def.TYPE] == Def.PUDDLE_OFF:
 		sparking(HUD.level.border.tile[Def.COORDS])
@@ -1231,8 +1231,9 @@ func _around(tile: int) -> bool:
 		(t[Def.ID] == Def.FLOOR and t[Def.ATLAS] != Def.WALL and t[Def.TYPE] == Def.PUDDLE_ON))
 
 func contact(map_coords: int) -> void:
-	if not (_around(map_coords + Def.yof(1)) or _around(map_coords + 1) or
-		_around(map_coords - Def.yof(1)) or _around(map_coords - 1)): return
+	var y: int = 1 << Def.LEVEL
+	if not (_around(map_coords + y) or _around(map_coords + 1) or
+		_around(map_coords - y) or _around(map_coords - 1)): return
 	
 	map_coords = HUD.level.border.tile[Def.COORDS]
 	if HUD.level.border.tile[Def.TYPE] == Def.PUDDLE_OFF:
@@ -1270,8 +1271,8 @@ func get_site_to_discharge(map_coords: Vector2i) -> Vector2i:
 		tile[CHAIN] = c
 		for j in range(current[c].size(), 1, -1):
 			tile[JOINT] = j
-			var a: Vector2i = Def.tomap(current[c][j - 1])
-			var b: Vector2i = Def.tomap(current[c][j])
+			var a: Vector2i = Def.map(current[c][j - 1])
+			var b: Vector2i = Def.map(current[c][j])
 			if not (at_dimension(a, b, map_coords, Vector2.AXIS_Y) or
 				at_dimension(a, b, map_coords, Vector2.AXIS_X)):
 				return tile
@@ -1289,7 +1290,7 @@ func get_direction(a: int, b: int) -> int:
 	return clampi(Def.y(a) - Def.y(b), -1, 1) | clampi(Def.x(a) - Def.x(b), -1, 1)
 
 func discharge_unit(map_coords: int) -> void:
-	var site: Vector2i = get_site_to_discharge(Def.tomap(map_coords))
+	var site: Vector2i = get_site_to_discharge(Def.map(map_coords))
 	if site[CHAIN] == 0: return
 	
 	var direction: int = get_direction(map_coords, current[site[CHAIN]][site[JOINT] - 1])

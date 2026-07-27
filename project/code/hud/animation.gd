@@ -2,143 +2,68 @@ class_name CharacterAnimation extends RefCounted
 
 enum { POWER = 0, INFLUENCE = 1, DOUBLE_COMBO, VITALITY = 2, REACTION = 3, SPEED = 4 } # signal sync_anim(animation: String, frame: int)
 
-var tree: AnimationTree:
-	get: return HUD.level.entity[HUD.hero].animation
-var sprite: AnimatedSprite2D: # var player: AnimationPlayer
-	get: return HUD.level.entity[HUD.hero].profile
-var material: ShaderMaterial:
-	get: return sprite.material
-
 var directed: int = 0
 var frames: int = 0
 
 enum { WALK, RUN, JUMP }
-
 enum { CHAINS, GROUND, DIRECTED = 8 }
 enum { BODY, HANG, COMBO }
 enum { PULL, AIR }
 
 var state: PackedByteArray = [0, 0]
-var sprites: Array[StringName] = [
-	&"backward", &"forward", &"backward_left", &"forward_left", &"left", &"backward_right", &"forward_right", &"right",
-	&"backward_run", &"forward_run", &"backward_left_run", &"forward_left_run", &"left_run", &"backward_right_run", &"forward_right_run", &"right_run",
-	&"backward_jump", &"forward_jump", &"backward_left_jump", &"forward_left_jump", &"left_jump", &"backward_right_jump", &"forward_right_jump", &"right_jump",
-	&"backward_kick", &"forward_kick", &"backward_left_kick", &"forward_left_kick", &"left_kick", &"backward_right_kick", &"forward_right_kick", &"right_kick",
-	&"backward_punch", &"forward_punch", &"backward_left_punch", &"forward_left_punch", &"left_punch", &"backward_right_punch", &"forward_right_punch", &"right_punch",
-	&"backward_push", &"forward_push", &"backward_left_push", &"forward_left_push", &"left_push", &"backward_right_push", &"forward_right_push", &"right_push",
-	&"backward_fire", &"forward_fire", &"backward_left_fire", &"forward_left_fire", &"left_fire", &"backward_right_fire", &"forward_right_fire", &"right_fire",
-	&"backward_whip", &"forward_whip", &"backward_left_whip", &"forward_left_whip", &"left_whip", &"backward_right_whip", &"forward_right_whip", &"right_whip",
-	&"backward_stomp", &"forward_stomp", &"backward_left_stomp", &"forward_left_stomp", &"left_stomp", &"backward_right_stomp", &"forward_right_stomp", &"right_stomp",
-	&"backward_chains_move", &"forward_chains_move", &"backward_left_chains_move", &"forward_left_chains_move", &"left_chains_move", &"backward_right_chains_move", &"forward_right_chains_move", &"right_chains_move",
-	&"backward_chains_whip", &"forward_chains_whip", &"backward_left_chains_whip", &"forward_left_chains_whip", &"left_chains_whip", &"backward_right_chains_whip", &"forward_right_chains_whip", &"right_chains_whip",
-]
+var sprites: Array[StringName] = [&"b", &"f", &"bl", &"fl", &"l", &"br", &"fr", &"r",
+	&"b_run", &"f_run", &"bl_run", &"fl_run", &"l_run", &"br_run", &"fr_run", &"r_run",
+	&"b_jump", &"f_jump", &"bl_jump", &"fl_jump", &"l_jump", &"br_jump", &"fr_jump", &"r_jump",
+	&"b_kick", &"f_kick", &"bl_kick", &"fl_kick", &"l_kick", &"br_kick", &"fr_kick", &"r_kick",
+	&"b_punch", &"f_punch", &"bl_punch", &"fl_punch", &"l_punch", &"br_punch", &"fr_punch", &"r_punch",
+	&"b_push", &"f_push", &"bl_push", &"fl_push", &"l_push", &"br_push", &"fr_push", &"r_push",
+	&"b_fire", &"f_fire", &"bl_fire", &"fl_fire", &"l_fire", &"br_fire", &"fr_fire", &"r_fire",
+	&"b_whip", &"f_whip", &"bl_whip", &"fl_whip", &"l_whip", &"br_whip", &"fr_whip", &"r_whip",
+	&"b_stomp", &"f_stomp", &"bl_stomp", &"fl_stomp", &"l_stomp", &"br_stomp", &"fr_stomp", &"r_stomp",
+	&"b_c_move", &"f_c_move", &"bl_c_move", &"fl_c_move", &"l_c_move", &"br_c_move", &"fr_c_move", &"r_c_move",
+	&"b_c_whip", &"f_c_whip", &"bl_c_whip", &"fl_c_whip", &"l_c_whip", &"br_c_whip", &"fr_c_whip", &"r_c_whip"]
+@export var ui_sprites: SpriteFrames
 
-func _init() -> void:
-	state[BODY] = Bit.to0(state[BODY], RUN)
-
-func animate_fight() -> void:
-	pass
-	# sprite.animation = 
+func _init() -> void: state[BODY] = Def.to0(state[BODY], RUN)
 
 func animate_frames(type: int) -> void:
 	frames = type
-	sprite.animation = sprites[get_anim()]
+	HUD.level.profile[HUD.hero].sprite.animation = sprites[get_anim()]
 
 func stop_animation() -> void:
-	sprite.stop()
-	sprite.animation = sprites[directed]
-	sprite.frame = 0
+	HUD.level.profile[HUD.hero].sprite.stop()
+	HUD.level.profile[HUD.hero].sprite.animation = sprites[directed]
+	HUD.level.profile[HUD.hero].sprite.frame = 0
 
 func get_anim() -> int: return directed + DIRECTED * frames # if Bit.of(state[BODY], RUN):
 
-func direct(dir: Vector2i) -> void:
-	directed = Def.direct(dir) # Def.MOVE
+func direct(dir: Vector2i) -> void: directed = Def.direct(dir)
 
 var animations: PackedStringArray = ["idle-1", "walk", "run", "jump", "kick_0", "kick_1",
-		"punch_0", "punch_1", "hang_go", "hang_idle", "bash", "stomp"]
-var unique: Array[PackedStringArray] = [["fire", "whip"], ["rain", "spark"]] # "hang_whip_dash"
-var go: PackedStringArray = ["walk", "run"] ; var hang: PackedStringArray = ["hang", "stand"]
-
-func ask(caption: String) -> String: return "parameters/" + caption + "/current_state"
-func request(caption: String) -> String: return "parameters/" + caption + "/transition_request"
-func blend(caption: String) -> String: return "parameters/" + caption + "/blend_position"
+	"punch_0", "punch_1", "hang_go", "hang_idle", "bash", "stomp", "fire", "whip",
+	"rain", "spark", "hang", "stand"]
 
 func animate() -> void:# motion: Vector2
 	var anim: int = get_anim()
-	sprite.animation = sprites[anim]
-	#HUD.level.entity[HUD.hero].animation.stop()
-	if not sprite.is_playing():
-		sprite.play(sprites[anim])
+	HUD.level.profile[HUD.hero].sprite.animation = sprites[anim]
+	if not HUD.level.profile[HUD.hero].sprite.is_playing():
+		HUD.level.profile[HUD.hero].sprite.play(sprites[anim])
 	return
-	"""
-	if motion != Vector2.ZERO:
-		for pose in hang: tree.set(request(pose), &"move")
-		for animation in animations:
-			tree.set(blend(animation), motion)
-	else:
-		#sprite.play()
-		#player.play()
-		tree.set(&"parameters/stand/transition_request", &"idle")
-		#for pose in hang: tree.set(request(pose), &"idle")
-	for animation in unique[HUD.hero]: blend(animation)
-	if !Bit.of(HUD.state, Def.ACTING): blend("pull_forward")
-	"""
-
-func set_walk_speed(mach: int) -> void: tree.set(request("go"), go[(mach - 1) & 1])
-func set_move_action(stand: StringName) -> void: tree.set(request("move"), stand)
-func set_environment(stand: StringName) -> void: tree.set(request("environment"), stand)
-func set_hang(stand: String) -> void: tree.set(request("hang"), stand)
-
-func set_fighting(stand: String) -> void:
-	var combo: String = "punch_combo" if stand == "hands" else "kick_combo"
-	tree.set(request(combo), (int(tree.get(ask(combo))) + 1) & 1)
-	tree.set(request("active"), stand)
-
-func set_fight_start(stand: String) -> void:
-	tree.set(request("ground"), stand)
-	jump_start(&"move") # probably timeout to set_fight end connect
-
-func set_fight_end() -> void:
-	tree.set(request("ground"), &"passive")
-	tree.set(request("tools"), &"internal")
-
-func set_damage(multiplier: float = 1) -> void: HUD.level.fight.close_damage(HUD.hero, multiplier)
-func set_position(proportion: float) -> void: HUD.level.input.teleport(HUD.hero, proportion)
-
-func fight_tool(stand: String) -> void:
-	tree.set(request("tools"), &"external")
-	tree.set(request("external"), stand)
-
-func jump_start(action: StringName) -> void:
-	set_move_action(action)
-	for pose in hang: tree.set(request(pose), &"move")
-	HUD.level.entity[HUD.hero].is_monitoring = false
-
-func jump_end() -> void:
-	HUD.level.entity[HUD.hero].is_monitoring = true
-	set_move_action(&"go")
-	tree.set(request("hang_move"), &"go") # print("JUMP FINISHED")
-
-func pull_box(has_boxes: bool) -> void:
-	if !Bit.of(HUD.level.state[HUD.hero], Def.JUMP):
-		set_move_action(&"pull" if has_boxes else &"go")
 
 func mirror_animation() -> void:
-	var animation: String = HUD.level.entity[HUD.hero].profile.animation
-	if animation.contains("forward"):
-		animation = animation.replace("forward", "backward")
-	elif animation.contains("backward"):
-		animation = animation.replace("backward", "forward")
-	HUD.level.entity[HUD.hero].mirror.animation = animation
+	var animation: String = HUD.level.profile[HUD.hero].animation
+	if animation.contains("forward"): animation = animation.replace("forward", "backward")
+	elif animation.contains("backward"): animation = animation.replace("backward", "forward")
+	HUD.level.mirror[HUD.hero].animation = animation
 
 func mirror_frame() -> void:
-	HUD.level.entity[HUD.hero].mirror.frame = HUD.level.entity[HUD.hero].profile.frame
+	HUD.level.mirror[HUD.hero].frame = HUD.level.profile[HUD.hero].frame
 
 func set_hanging(next: bool) -> void:
-	HUD.level.entity[HUD.hero].view.shadow.position = Vector2(0, 27) if next else Vector2(0, -5)
+	HUD.level.shadow[HUD.hero].position = Vector2(0, 27) if next else Vector2(0, -5)
 
 func set_shadow(next: bool) -> void:
-	HUD.level.entity[HUD.hero].view.shadow.visible = next
+	HUD.level.shadow[HUD.hero].visible = next
 
 func get_mirror_sprite(view: CharacterBody2D, path: StringName, mirror: AnimatedSprite2D) -> AnimatedSprite2D:
 	if mirror != null: return mirror
@@ -149,202 +74,75 @@ func get_mirror_sprite(view: CharacterBody2D, path: StringName, mirror: Animated
 	view.profile.frame_changed.connect(mirror_frame)
 	return mirror
 
-func set_aura(next_color: Color, thickness: float) -> void:
-	material.set(&"shader_parameter/line_thickness", thickness)
-	material.set(&"shader_parameter/line_color", next_color)
-
-func show_ap(value: float) -> void:
-	material.set(&"shader_parameter/ability", true)
-	material.set(&"shader_parameter/ap", value)
-
-func hide_ap() -> void:
-	material.set(&"shader_parameter/ability", false)
-
-func _set_invis(invisible: bool) -> void:
-	material.set(&"shader_parameter/invisible", invisible)
-	if invisible: set_aura(Color("FFFFFF7F"), 3)
-	else: set_aura(Color("FFFFFF00"), 0)
-	
-func _go_behind_scene(_curtain: TileMapLayer) -> void: _set_invis(true) # MOVE & CONNECT TO LINK
-func _go_on_scene(_curtain: TileMapLayer) -> void: _set_invis(false)
-
-
-
+func set_aura(thickness: float, next_color: Color, resource: bool) -> void: # MOVE & CONNECT TO LINK
+	if resource:
+		HUD.level.profile[HUD.hero].material.set(&"shader_parameter/ability", thickness == 0)
+		HUD.level.profile[HUD.hero].material.set(&"shader_parameter/ap", thickness)
+	else: #Color("FFFFFF7F"), 3
+		HUD.level.profile[HUD.hero].material.set(&"shader_parameter/line_thickness", thickness)
+		HUD.level.profile[HUD.hero].material.set(&"shader_parameter/line_color", next_color)
 # PARTICLES
-
 enum { PUNCH, APPEAR = 0, KICK, TIME = 1, FIRE, DISAPPEAR = 2, DROP, OFFSET = 10, PATH = 100 }
 
 const timing: PackedFloat32Array = [0.2, 0.4, 0.6]
 
+var texture: Texture
+var sprite: Sprite2D
+
 func set_direction(pos: Vector2, direction: Vector2, type: int) -> void:
+	sprite = Sprite2D.new()
 	match type:
 		KICK: texture = preload("res://icon/vfx/kick.png")
 		PUNCH: texture = preload("res://icon/vfx/punch.png")
 		FIRE: texture = preload("res://icon/vfx/ray/fire.svg")
 		DROP: texture = preload("res://icon/vfx/rock/water.svg")
-	position = pos - Vector2(0, 32)
+	sprite.position = pos - Vector2(0, 32)
 	var offsets: Vector2 = Vector2(OFFSET, OFFSET)
 	var angle: float = Def.rotate(direction)
-	rotation = angle
+	sprite.rotation = angle
 	var delta: Vector2 = Vector2(PATH, PATH) * direction
 	if direction.x != 0 and direction.y != 0:
 		var axis: int = randi_range(0, 2)
 		if axis != 2:
 			direction[axis] *= -1
-			position += offsets * direction
+			sprite.position += offsets * direction
 		delta *= 0.75
-	elif direction.x != 0:
-		var track: int = randi_range(-1, 1)
-		if track != 0:
-			direction.y = track
-			position += offsets * direction * 2
-	elif direction.y != 0:
-		var track: int = randi_range(-1, 1)
-		if track != 0:
-			direction.x = track
-			position += offsets * direction * 2
-		
-	modulate = Color.TRANSPARENT
-	#modulate = Color.from_rgba8(127, 127, 127, 127)
-	set_track(position + delta)
+		sprite.modulate = Color.TRANSPARENT
+		set_track(sprite.position + delta)
+	for i in range(0, 2):
+		if direction.x != 0:
+			var track: int = randi_range(-1, 1)
+			if track != 0:
+				direction[i] = track
+				sprite.position += offsets * direction * 2
+			break # modulate = Color.from_rgba8(127, 127, 127, 127)
+	sprite.modulate = Color.TRANSPARENT
+	set_track(sprite.position + delta)
 
 func set_track(target: Vector2) -> void:
-	var tween: Tween = create_tween()# .set_parallel(true)
-	tween.tween_property(self, "modulate", Color.from_rgba8(127, 127, 127, 200), timing[APPEAR])
-	tween.parallel().tween_property(self, "position", target, timing[TIME])
-	tween.tween_property(self, "modulate", Color.TRANSPARENT, timing[APPEAR])
-	tween.tween_callback(queue_free)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	var tween: Tween = HUD.create_tween() # .set_parallel(true)
+	tween.tween_property(self, ^"modulate", Color.from_rgba8(127, 127, 127, 200), timing[APPEAR])
+	tween.parallel().tween_property(self, ^"position", target, timing[TIME])
+	tween.tween_property(self, ^"modulate", Color.TRANSPARENT, timing[APPEAR])
+	tween.tween_callback(sprite.queue_free)
 
 var no: int
 
 func set_interaction(hero: CharacterBody2D, no: int) -> void:
-	hero.set_meta(&"no", no)
-	animation.timeout.connect(stop_animation)
-	var plate: Area2D = hero.get_node(^"plate")
-	plate.body_entered.connect(HUD.level.plate_encounter)
-	plate.body_exited.connect(HUD.level.plate_disappear)
-	var lever: Area2D = hero.get_node(^"lever")
-	lever.body_entered.connect(HUD.level.lever_encounter)
-	lever.body_exited.connect(HUD.level.lever_disappear)
+	hero.set_meta(&"no", no) # animation.timeout.connect(stop_animation)
+	HUD.level.plate[no] = hero.get_node(^"plate")
+	HUD.level.plate[no].body_entered.connect(HUD.level.plate_encounter)
+	HUD.level.plate[no].body_exited.connect(HUD.level.plate_disappear)
+	HUD.level.lever[no] = hero.get_node(^"lever")
+	HUD.level.lever[no].body_entered.connect(HUD.level.lever_encounter)
+	HUD.level.lever[no].body_exited.connect(HUD.level.lever_disappear)
 
 func set_monitoring(no: int, value: bool) -> void:
-	level.lever[no].monitoring = value
-	level.plate[no].monitoring = value
+	HUD.level.lever[no].monitoring = value
+	HUD.level.plate[no].monitoring = value
 
 func make_velocity(no: int, motion: Vector2) -> void: 
-	velocity[no] = motion * weight
-
+	HUD.level.velocity[no] = motion * HUD.level.weight[no]
+# circle # small_circle # after_tile # sided # fireplace
 func make_position(no: int, motion: Vector2) -> void:
-	entity[no].position = motion
-
-"""
-@onready var close: Area2D = $close
-
-@onready var after_tile: Area2D = $after_tile
-@onready var straight: Area2D = $straight
-@onready var fireplace: Area2D = $fireplace
-@onready var circle: Area2D = $circle
-@onready var small_circle: Area2D = $small_circle
-@onready var sided: Area2D = $sided
-
-@onready var zone: Area2D = $zone
-
-@onready var hitbox: StaticBody2D = $hitbox
-@onready var stuck: Node2D = $stuck
-
-func set_direction(direction: Vector2) -> void:
-	if direction != Vector2.ZERO:
-		close.set_direction(direction)
-		after_tile.set_direction(direction)
-
-"""
-
-
-@export var sprites: SpriteFrames
-@export var current_animation: String = "default"
-@export var frame_index: int = 0
-@export_range(0.0, 10, 0.001) var speed_scale: float = 1.0
-@export var auto_play: bool = false
-@export var playing: bool = false
-
-var refresh_rate: float = 1.0
-var fps: float = 30.0
-var frame_delta: float = 0.0
-
-#func _ready() -> void:
-	# sync_data()
-	#if sprites == null:
-	#	process_mode = Node.ProcessMode.PROCESS_MODE_DISABLED
-	#	assert(false, "No suitable sprite frames found, disabling")
-	#elif auto_play: play()
-
-func sync_data() -> void:
-	fps = sprites.get_animation_speed(current_animation)
-	refresh_rate = sprites.get_frame_duration(current_animation, frame_index)
-
-func play(animation: String = '') -> void:
-	frame_index = 0
-	frame_delta = 0.0
-	if animation != '': current_animation = animation
-	sync_data()
-	resume()
-
-func resume() -> void: playing = true
-func pause() -> void: playing = false
-func stop() -> void:
-	pause()
-	frame_index = 0
-
-func loop_animation() -> void:
-	if not sprites.get_animation_loop(current_animation):
-		playing = false
-
-func get_next_frame():
-	frame_index += 1
-	var frame_count = sprites.get_frame_count(current_animation)
-	if frame_index >= frame_count:
-		frame_index = 0
-		loop_animation()
-	sync_data()
-	return sprites.get_frame_texture(current_animation, frame_index)
-
-func _set_frame_delta(delta: float) -> void:
-	frame_delta += speed_scale * delta
-	if frame_delta >= refresh_rate / fps:
-		texture = get_next_frame()
-		frame_delta = 0
-
-func assert_has_animation() -> void:
-	var has: bool = sprites.has_animation(current_animation)
-	if not has: pause()
-	assert(has, "Animation %s doesn't exist" % current_animation)
-
-func _process(delta: float) -> void:
-	if playing:
-		assert_has_animation()
-		_set_frame_delta(delta)
+	HUD.level.entity[no].position = motion

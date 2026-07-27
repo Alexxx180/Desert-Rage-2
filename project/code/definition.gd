@@ -52,14 +52,12 @@ static func offset(hero: int, no: int = 0) -> int: return hero * OFFSET + no
 static func y(field: int, off: int = LEVEL) -> int: return field >> off
 static func x(field: int, off: int = LEVEL) -> int: return field & ((1 << off) - 1)
 
-static func tovec(field: int, off: int) -> Vector2i: return Vector2i(x(field, off), y(field, off))
-static func tomap(field: int) -> Vector2i: return tovec(field, LEVEL)
-static func to8(field: int) -> Vector2i: return tovec(field, 3)
+static func map(field: int) -> Vector2i: return Vector2i(x(field, LEVEL), y(field, LEVEL))
+static func map8(field: int) -> Vector2i: return Vector2i(x(field, 3), y(field, 3))
 
-static func yof(y1: int, off: int = LEVEL) -> int: return y1 << off
-static func ofvec(x1: int, y1: int, off: int = LEVEL) -> int: return y1 << off | x1
-static func ofmap(pos: Vector2i) -> int: return ofvec(pos.x, pos.y, LEVEL) # CTRL + LMB - the more the LEVEL the larger the map
-static func of8(pos: Vector2i) -> int: return ofvec(pos.x, pos.y, 3)
+static func unit(x1: int, y1: int, off: int = LEVEL) -> int: return y1 << off | x1
+static func join(pos: Vector2i) -> int: return unit(pos.x, pos.y, LEVEL) # CTRL + LMB - the more the LEVEL the larger the map
+static func join8(pos: Vector2i) -> int: return unit(pos.x, pos.y, 3)
 
 static func ref(parent: Object, object: Variant, caption: StringName, feedback: Callable) -> Variant:
 	if object == null:
