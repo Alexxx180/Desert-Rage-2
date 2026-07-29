@@ -110,7 +110,8 @@ func game_exit() -> void: tree.quit()
 func game_start() -> void: load_scene(Def.first_level)
 func game_continue() -> void: if not load_progress(): load_scene(Def.first_level)
 
-static func a(fields: PackedByteArray) -> int: return Def.bytes_to_int(fields, Def.MASK3)
+func a(fields: PackedByteArray) -> int: return Def.bytes_to_int(fields, Def.MASK3)
+
 func _press(title: StringName) -> bool: return Input.is_action_just_pressed(title)
 func _hold(title: StringName) -> bool: return Input.is_action_pressed(title)
 func _power(title: StringName) -> float: return Input.get_action_strength(title)

@@ -26,17 +26,21 @@ const equip: PackedByteArray = [R, R, K, K, R, R, R, K]
 const types: PackedByteArray = [RAPIER, RAPIER, GUN, GUN]
 const spend: PackedByteArray = [0, 0, 0, 0, 0, 1, 1, 3]
 
-var storage: PackedInt64Array
-var _jars: Dictionary = { "a": [6, 8, 10], "h": [1, 2, 6, 7, 9, 11, 12] }
 var items: GameItems
-var inventory: Array = []
 var slots: TradeSlots
+
+var recipe: PackedInt32Array = [i([WATER, TUMBLEWEED]), i([WATER, OPUNTIA]), i([WATER, TAMARISK]),
+	i([WATER, YUKKA])]
+
+func i(fields: PackedByteArray) -> int: return Def.bytes_to_int(fields, Def.BYTE)
+func craft(no: int) -> bool: return crafts & recipe[no]
+
+var crafts: int
 
 var ii: int
 var craft: Dictionary
 var craft_id: int = Def.INT
 var _recipes: Array = Def.ARRAY
-var selection: Array[Dictionary] = [_cursor(), _cursor()]
 var main: Dictionary:
 	get: return selection[MAIN]
 var holder: Texture2D = null
