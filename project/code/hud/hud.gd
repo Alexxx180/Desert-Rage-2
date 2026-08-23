@@ -1,5 +1,11 @@
 class_name WorldInput extends CanvasLayer
 
+enum { LEVEL, LOGIC, BOX = 2, POS = 4, AURA = 6, RESOURCE = 7, STATUS = 8,
+	INVENTORY = 10, BESTIARY = 38, NOTES = 39, BOOKS = 40, CHESTS = 41, SECRETS = 42 }
+enum { SETTINGS, SAVES, ACHIEVEMENTS, DIFFICULTY = 0, PART, DUNGEON, PROGRESSED, BAG = 7 }
+
+var session: PackedInt64Array
+
 var level: LevelRoot
 var adversary: Adversary
 var animation: CharacterAnimation
@@ -7,7 +13,24 @@ var interact: WorldInteraction
 var _inventory: HeroInventory
 var menu: Menu = Menu.new()
 
-var fire: GPUParticles2D ; var rain: GPUParticles2D
+var fire: GPUParticles2D; var rain: GPUParticles2D
+
+func check(type: int) -> int: return session[type]
+func unlock(type: int, slot: int) -> int:
+	session[type] = Def.to1(session[type], slot)
+
+func get_stat(type: int, slot: int) -> int:
+	return Def.of_x(Def.SHORT, session[type], slot)
+
+func set_stat(type: int, slot: int, value: int) -> void:
+	session[type] = Def.to_x(Def.SHORT, session[type], slot, value)
+
+func get_item(bag: int, slot: int) -> int:
+	return Def.of_x(Def.SHORT, session[INVENTORY + BAG * bag + (slot >> Def.MASK)], slot & Def.MASK3)
+
+func set_item(bag: int, slot: int, item: int) -> void:
+	var no: int = INVENTORY + BAG * bag + (slot >> Def.MASK)
+	session[no] = Def.to_x(Def.SHORT, session[no], slot & Def.MASK3, item)
 
 func new_hero(no: int) -> CharacterBody2D:
 	if entity[no] == null:
@@ -42,48 +65,9 @@ func load_game_logic() -> void:
 func next_hero() -> int: return (HUD.hero + 1) & Def.ROCK
 
 var session: PackedInt64Array = []
-
-enum { SETTINGS, LEVEL = 1, PRIORITY, ACHIEVEMENTS = 2, SAVES, ENEMY = 3,
-	ACCESS = 7, NOTES = 9, SECRETS = 13, BOOKS = 21, AURA = 25, RESOURCE = 27,
-	COMPLETED, POSITION, BOX, ITEMS = 31 }
-enum { DIFFICULTY, PART, DUNGEON, PROGRESSED } # model : L1 (SCORE)P2 E4 A2 N4 S8 B4 A2 R2 
+ # model : L1 (SCORE)P2 E4 A2 N4 S8 B4 A2 R2 
 
 func _init() -> void: session = FileAccess.get_file_as_bytes(Def.saves).to_int64_array()
-
-func save_slot(no: int) -> void:
-	var slot: int = SAVES
-	var next: int = SAVES + ITEMS
-	var items: int = 0
-	for i in range(0, no):
-		slot += ITEMS
-		items = session[slot]
-		slot += session[slot]
-	for i in range(SAVES, ITEMS):
-		session[slot + i] = session[i]
-	for i in range(0, min(session[next], items)):
-		session[slot + next + i] = session[next + i]
-	if session[next] < items:
-		for i in range(session[next], items): session.remove_at(slot + ITEMS)
-	else:
-		for i in range(0, items - session[next]): session.insert(slot + ITEMS, session[slot + items + i])
-	FileAccess.open(Def.saves, FileAccess.WRITE).store_buffer(session.to_byte_array())
-
-func load_slot(no: int) -> void:
-	var slot: int = SAVES
-	var next: int = SAVES + ITEMS
-	var items: int = 0
-	for i in range(0, no):
-		slot += ITEMS
-		items = session[slot]
-		slot += session[slot]
-	for i in range(SAVES, ITEMS):
-		session[i] = session[slot + i]
-	for i in range(0, min(session[next], items)):
-		session[next + i] = session[slot + next + i]
-	if session[next] > items:
-		for i in range(items, session[next]): session.remove_at(next)
-	else:
-		for i in range(items - session[next] - 1, -1, -1): session.insert(next, session[slot + items])
 
 var xp: RefCounted
 @onready var tree: SceneTree = get_tree()

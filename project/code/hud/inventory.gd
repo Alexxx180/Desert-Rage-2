@@ -8,7 +8,7 @@ enum { STICKS, OPUNTIA, TUMBLEWEED, TAMARISK, YUKKA, JAR, ANTIDOTE, ANTICOUGH, G
 	ARMOR = 20, WEAPON = 28, KIT = 36, AURA = 0, RESOURCE = 1, AR = 2, CROSS = 2, BOTH = 3,
 	PREVIEW_SIZE = 72, ITEMS = 0, SLOT = 1, UNIT = 1, EMPTY = 0, MAIN = 0, CRAFTS = 25, SPACE = 26,
 	ASC = 0, DESC = 1, RANDOM = 2, NA = 0, SIZE = 2, MAX = 25, SECOND = 1, MIN = 2,
-	UP1 = 5, UP2 = 6, UP3 = 7, UP4 = 8, ID = 0, X = 1,
+	UP1 = 5, UP2 = 6, UP3 = 7, UP4 = 8, ID = 0, X = 1, B = 8,
 	SHOTGUN_COST = 0, BOUNDARY = 1, FAST_PANEL = 10,
 	ITEM_OR_SLOT = 0, SAME_ITEM = 1, EMPTY_SLOT = 2 }
 enum { R = Def.bit(Def.RAY), K = Def.bit(Def.ROCK), RK = Def.bit(Def.RAY) | Def.bit(Def.ROCK) }
@@ -29,16 +29,10 @@ const spend: PackedByteArray = [0, 0, 0, 0, 0, 1, 1, 3]
 var items: GameItems
 var slots: TradeSlots
 
-var recipe: PackedInt32Array = [i([WATER, TUMBLEWEED]), i([WATER, OPUNTIA]), i([WATER, TAMARISK]),
-	i([WATER, YUKKA])]
-
-func i(fields: PackedByteArray) -> int: return Def.bytes_to_int(fields, Def.BYTE)
-func craft(no: int) -> bool: return crafts & recipe[no]
-
-var crafts: int
+var recipe: PackedInt32Array = [WATER << B | TUMBLEWEED, WATER << B | OPUNTIA,
+	WATER << B | TAMARISK, WATER << B | YUKKA]
 
 var ii: int
-var craft: Dictionary
 var craft_id: int = Def.INT
 var _recipes: Array = Def.ARRAY
 var main: Dictionary:
@@ -52,27 +46,6 @@ var distraction_body: Array[StaticBody2D] = []
 func _init() -> void:
 	storage = [0]
 	storage.resize(SLOTS * Def.PARTY)
-
-func use_inventory(id: int) -> void:
-	match id:
-		JAR: store_water(selection)
-		WATER, TEA, ETHER: refill(aura[id - USE], resc[id - USE])
-		ANTIDOTE: HUD.adversary.nullify(Adversary.POISON)
-		ANTICOUGH: HUD.adversary.nullify(Adversary.COUGH)
-		STICKS: distract()
-		T_RAPIER, W_RAPIER: use_boomerang() ; return false
-		T_RAPIER, W_RAPIER: use_boomerang() ; return false
-		GOLD_KEY, SECRET_KEY: open_door(id) ; return false
-		_: return false
-	return true
-
-func open_door(id: int) -> void: pass
-
-func use_boomerang(): pass
-
-func refill(hp: int, ap: int) -> void:
-	if hp != 0: HUD.level.aura.add_points(HUD.hero, hp)
-	if ap != 0: HUD.level.aura.add_resource(HUD.hero, ap)
 
 func distract() -> void: # LevelRoot
 	var tile: PackedInt32Array = HUD.level.tile_at()
@@ -90,13 +63,6 @@ func store_water(slot: int) -> void:
 		produce_item(slot, WATER)
 
 func i(hero: int, no: int) -> int: return hero * Def.PARTY + no
-
-func switch_bags(a: int, b: int) -> void:
-	var i: int = i(HUD.hero, a)
-	storage[i(HUD.next(), b)] = value
-	storage[i] = EMPTY
-	for j in [[items, a], [hero, b]]:
-		j[ITEMS].ui.update_item(j[SLOT], j[ITEMS].storage[j[SLOT]])
 
 func update_ui(logic: Node, preview: Node, slots: Array) -> void:
 	var ui: Node = logic.trade.ui
@@ -121,18 +87,6 @@ func select_exact(slot: int) -> void:
 func select_shift(direction: int) -> void:
 	select_exact(posmod(selection + direction, FAST_PANEL))
 
-func ui_drop_item(slot: Button, no: int) -> void:
-	slot.image.texture = null
-	slot.number.text = ""
-	if no < FAST_PANEL: slot.bar.value = 0
-
-func ui_add_item(slot: Button, no: int) -> void:
-	var i: int = i(HUD.hero, no)
-	var count: int = _count(i)
-	slot.image.texture = _get_icon(_id(i))
-	if no < FAST_PANEL: slot.bar.value = count
-	slot.number.text = str(count)
-
 func ui_count_item(slot: Button, count: int) -> void:
 	if count == BOUNDARY: slot.image.texture = null
 	slot.number.text = "" if count <= BOUNDARY else str(next)
@@ -141,7 +95,6 @@ func ui_count_item(slot: Button, count: int) -> void:
 func update_inventory() -> void:
 	for slot in range(len(storage) - 1, Def.INT, Def.INT):
 		for ui in get_inventory(slot): ui_add_item(ui, slot)
-
 
 const cost: PackedFloat32Array = [0.33]
 
@@ -157,15 +110,7 @@ func get_fast_panel() -> Array[Node]:
 		Def.ROCK: return [HUD.game.inventory.rock.slots[slot], HUD.game.priorities.rock.slots[slot], HUD.game.fast_panel]
 	return []
 
-func get_inventory(slot: int) -> Array[Node]:
-	match HUD.hero:
-		Def.RAY: return [HUD.game.inventory.ray.slots[slot], HUD.game.priorities.ray.slots[slot]]
-		Def.ROCK: return [HUD.game.inventory.rock.slots[slot], HUD.game.priorities.rock.slots[slot]]
-	return []
-
-func _count(no: int) -> int: return Bit.of_x(Bit.SHORT, storage[no], X)
-func _id(no: int) -> int: return Bit.of_x(Bit.SHORT, storage[no], ID)
-func _offset() -> int: return SLOTS * HUD.hero
+var icon: CompressedTexture2DArray
 
 func find_item(search: int, target_id: int = MISSING_NO) -> int:
 	match search:
@@ -183,49 +128,97 @@ func find_item(search: int, target_id: int = MISSING_NO) -> int:
 				if _count(slot) == EMPTY: return slot
 	return MISSING_NO
 
-func produce_item(source: int, product_id: int) -> void:
-	var product: int = find_item(ITEM_OR_SLOT, product_id)
-	if product != MISSING_NO:
-		use_item(source)
-		put_item(product, product_id)
-	else:
+func trade_item(bag_a: int, slot_a: int, bag_b: int, slot_b: int) -> void:
+	var item_a: int = HUD.get_item(bag_a, slot_a)
+	var item_b: int = HUD.get_item(bag_a, slot_a)
+	HUD.set_item(bag_a, slot_a, item_b)
+	HUD.set_item(bag_b, slot_b, item_a)
+	show_item(bag_a, slot_a, Def.of_x(Def.BYTE, item_b, ID), 0, Def.of_x(Def.BYTE, item_b, X))
+	show_item(bag_b, slot_b, Def.of_x(Def.BYTE, item_b, ID), 0, Def.of_x(Def.BYTE, item_a, X))
+
+func put_item(bag: int, id: int) -> bool:
+	var slot: int = find_item(ITEM_OR_SLOT, id) if id < USE else find_item(EMPTY_SLOT)
+	if slot == MISSING_NO:
 		HUD.game.markers.notify(HelpMarkers.STORAGE)
+		return false # add logs message
+	
+	var item: int = HUD.get_item(HUD.hero, slot)
+	var count: int = Def.of_x(Def.BYTE, item, X)
+	item = id << Def.BYTE | count + 1
+	show_item(bag, slot, id, count, count + 1)
+	HUD.set_item(slot, item)
+	return true
 
-func store_new_item(id: int) -> int:
-	var slot: int = find_item(SAME_ITEM, id) if id < USE else find_item(EMPTY_SLOT)
-	if slot != MISSING_NO: put_item(slot, id)
-	return slot
+func show_item(bag: int, slot: int, id: int, previous: int, count: int) -> void:
+	var name: StringName = &"ray" if bag == Def.RAY else &"rock"
+	for item in [HUD.game.inventory.get(name).slots[slot], HUD.game.priorities.get(name).slots[slot]]:
+		item.count.text = "" if count > 1 else str(count)
+		if slot < FAST_PANEL: slot.bar.value = count
+		if count == 0:
+			item.image.texture = null
+		elif previous == 0:
+			item.image.texture = ImageTexture.create_from_image(icon.get_layer_data(id))
 
-func use_item(slot: int) -> void: # use_inventory
-	var i: int = i(HUD.hero, slot)
-	if use_inventory(_id(i)): return
-	if _count(i) < 1: return
-	storage[i] = Bit.edit_x(Bit.SHORT, storage[i], X, -1)
-	for ui in get_inventory(slot): ui_count_item(ui, _count(slot))
+func open_door(id: int) -> void: pass
+func use_boomerang(): pass
 
-func add_item(slot: int) -> void:
-	var i: int = i(HUD.hero, slot)
-	storage[i] = Bit.edit_x(Bit.SHORT, storage[i], X, +1)
-	for ui in get_inventory(slot): ui_add_item(ui, slot)
+func produce_item(slot: int, next: int) -> void:
+	var item: int = HUD.get_item(HUD.hero, slot)
+	if item == 0: return
+	
+	var id: int = Def.of_x(Def.BYTE, item, ID)
+	var used: bool = false
+	if WEAPON < id and id < KIT:
+		match id:
+			T_RAPIER, W_RAPIER: use_boomerang()
+			T_RAPIER, W_RAPIER: use_boomerang()
+			GOLD_KEY, SECRET_KEY: used = open_door(id)
+	elif USE < id and id < ARMOR:
+		var product_id: int = -1; 
+		match id:
+			JAR: if store_water(selection): used = put_item(bag, WATER)
+			WATER:
+				used = put_item(bag, JAR)
+				if used:
+					HUD.level.aura.add_points(HUD.hero, aura[id - USE])
+					HUD.level.aura.add_resource(HUD.hero, resc[id - USE])
+			TEA: used = put_item(bag, JAR); if used: HUD.level.aura.add_points(HUD.hero, aura[id - USE])
+			ETHER: used = put_item(bag, JAR); if used: HUD.level.aura.add_resource(HUD.hero, resc[id - USE])
+			ANTIDOTE: used = put_item(bag, JAR); if used: HUD.adversary.nullify(Adversary.POISON)
+			ANTICOUGH: used = put_item(bag, JAR); if used: HUD.adversary.nullify(Adversary.COUGH)
+			STICKS: used = true; distract()
+	if used:
+		var count: int = Def.of_x(Def.BYTE, item, X) - 1
+		item = 0 if count == 0 else id << Def.BYTE | count
+		HUD.set_item(bag, slot, item)
+		show_item(bag, slot, id, count, count)
 
-func put_item(slot: int, id: int, count: int = 1) -> void:
-	var i: int = i(HUD.hero, slot)
-	storage[i] = count << Bit.SHORT | id
-	add_item(slot)
+var crafts: int
 
+func craft_item(slot: int) -> void:
+	pass
 
-
-
+func add_slot(bag: int, slot: int) -> void:
+	var item: int = HUD.get_item(bag, slot)
+	var id: int = Def.of_x(Def.BYTE, item, ID)
+	var count: int = Def.of_x(Def.BYTE, item, X)
+	
+	if 0 <= id and id < USE:
+		crafts = crafts << Def.BYTE | id
+		if crafts & ~(Def.bit(Def.SHORT) - 1) != 0:
+			crafts = 0
+		else:
+			for r in recipe:
+				if crafts & recipe[no]: pass
+	elif WEAPON < id and id < KIT:
+		if check_weapon(id, slot):
+			description(logic.item(id))
 
 func remember(id: int) -> void: # func find(id: int) -> void: status.hero.to.chats.log.add_item(bank.get_item(id).item.name)
 	status.log.add_item(logic.item(id).item.name) #; print("REMEMBER ITEM NO = ", no)
 
 func reload_resource() -> void:
 	pass
-
-
-
-
 
 func fillable(cell: Variant, key: String) -> bool:
 	return cell.drag.ui.get_slot(cell.slot).id in _jars[key]
@@ -301,6 +294,9 @@ func add_slot(slot: int) -> void:
 	slots.operate("craft", LIMIT_CRAFT, placement.make_slot(slot))
 	workspace.update_ui(placement.search.logic, preview, slots.slots)
 
+func add_slot(slot: int) -> void:
+	select.equip.append(_equip(slot))
+
 func one_item(selected: Dictionary) -> void: pass
 func one_slot(slot: int) -> bool:
 	placement.search.put_product(slots.slots, preview.cells.craft_id, slot)
@@ -368,8 +364,6 @@ func recipe(items: Array) -> Array:
 	var first = _craft(items.front()).o
 	return first
 
-
-
 func make_slot(slot: int) -> Dictionary:
 	return search.form(slot, search.logic.slot(slot))
 
@@ -390,51 +384,6 @@ func craft(slots: Array) -> void:
 
 var item: Dictionary = Def.DICT
 var _cost: int = Def.INT
-
-func get_id(slot: int) -> int: return logic.slot(slot).id
-
-func default_message() -> void: logic.items.ui.helping()
-
-func form(no: int, cell: Dictionary) -> Dictionary:
-	return { "slot": no, "id": cell.id, "cell": cell, "item": logic.item(cell.id) }
-
-func _find_item(algorithm: String, id: int, feedback: Callable) -> bool:
-	var slot: int = logic.items.get(algorithm).call(id)
-	if logic.items.ui.have(slot):
-		feedback.call(slot)
-		return true
-	return false
-
-func same_item() -> bool:
-	return _find_item("find_same_item", item.id, func(s): item.cell = logic.slot(s))
-
-func same_slot() -> bool:
-	return logic.items.ui.same_item_search(item.id, logic.slot(item.slot))
-
-func item_slot(_item: Dictionary) -> bool:
-	item = _item
-	return same_slot() or find_item(SAME_ITEM)
-
-func _minimum(i: Dictionary) -> void:
-	if i.cell.x < _cost: _cost = i.cell.x
-
-func _put_items(i: Dictionary) -> void:
-	logic.items.put_items(i.slot, i.id, i.cell.x - _cost)
-
-func _iterate(items: Array, feedback: Callable) -> void:
-	for i in items: feedback.call(i)
-
-func min_cell(items: Array) -> int:
-	_cost = logic.items.ui.MAX
-	for f in [_minimum, _put_items]: _iterate(items, f)
-	return _cost
-
-func put_product(cells: Array, id: int, slot: int) -> void:
-	logic.items.put_items(slot, id, min_cell(cells))
-
-func put_crafted_item(cells: Array, id: int) -> void:
-	_find_item("find_item_or_slot", id, func(slot):
-		put_product(cells, id, slot))
 
 
 # CRAFT
@@ -466,9 +415,6 @@ func add_weapon(slot: int) -> void:
 	var meta: Dictionary = logic.slot(slot)
 	if logic.items.items.is_equipable(meta.id):
 		meta.x = _tail_to_bank(meta.id, _slot())
-
-func add_slot(slot: int) -> void:
-	select.equip.append(_equip(slot))
 
 func add_cross(slot: int) -> void:
 	select.cross = logic.slot(slot).duplicate()
@@ -514,7 +460,7 @@ func select_space() -> void:
 
 func _cursor() -> Dictionary: return { "bag": HUD.NODE, "slot": Def.INT }
 
-func set_selection(bag: Node, slot: int) -> void: main.bag = bag ; main.slot = slot
+func set_selection(bag: Node, slot: int) -> void: main.bag = bag; main.slot = slot
 
 func craft_selected(slot: int) -> bool: return slot == CRAFT
 
@@ -544,14 +490,6 @@ func release_item(view: Control) -> void:
 
 
 
-
-func select_to_craft(ui: Button) -> bool:
-	if not select.is_selected() or select.is_space():
-		select.from_ui(ui.margin.view)
-	else:
-		trade.craft.one_item(select.main)
-	return true
-
 func is_product(ui: Button) -> bool:
 	return ui.margin.view.slot == select.CRAFT
 
@@ -561,14 +499,21 @@ func items(ui: Button) -> bool:
 	if is_product(ui): return select_to_craft(ui)
 	return false
 
+func select_to_craft(view: Control) -> void:
+	_hold_if_selected(view, true)
+
+func select_to_craft(ui: Button) -> bool:
+	if not select.is_selected() or select.is_space():
+		select.from_ui(ui.margin.view)
+	else:
+		trade.craft.one_item(select.main)
+	return true
 
 func _release_item(view: CellDrag) -> void:
 	drag.trade(view)#select.main.bag.logic, select.main.slot)
 	select.reset_selection()
 
 func trade_items(view: Control) -> void: drag.craft.trade.trades(view)
-
-func craft_all_items() -> void: pass
 
 func craft_more_items(slot: int) -> void:
 	craft.one_slot(slot)
@@ -577,94 +522,45 @@ func craft_more_items(slot: int) -> void:
 func hold_selection(view: Control) -> void:
 	select.set_selection(view.drag.inventory, view.slot)
 
-func craft_one_item(_v) -> void: craft.one_item(select.main)
-
 func equiping_items(view: Control) -> bool:
 	if select.is_space():
 		trade_items(view)
-		return true
-	if select.is_craft():
+	elif select.is_craft():
 		craft_more_items(view.slot)
-		return true
-	return false
+	else:
+		return false
+	return true
 
 func crafting_items(view: Control) -> bool:
 	if select.is_space():
 		trade_items(view)
-		return true
-	if select.is_craft():
+	elif select.is_craft():
 		craft_more_items(view.slot)
-		return true
-	if select.craft_selected(view.slot):
+	elif select.craft_selected(view.slot):
 		select_to_craft(view)
-		return true
-	return false
+	else:
+		return false
+	return true
+	
 
-func _hold_if_selected(on_release: String, view: Control) -> void:
+func _hold_if_selected(view: Control, is_craft: bool) -> void:
 	if not select.is_selected():
 		hold_selection(view)
+	elif is_craft:
+		craft.one_item(view.main)
 	else:
-		get(on_release).call(view)
-
-func select_to_craft(view: Control) -> void:
-	_hold_if_selected("craft_one_item", view)
-
-func moving_items(view: Control) -> void:
-	_hold_if_selected("_release_item", view)
+		_release_item(view)
 
 func select_item(view: Control) -> void:
 	if crafting_items(view): return
 	if equiping_items(view): return
-	moving_items(view)
-
-
-func _get_icon(id: int) -> StringName:
-	match id:
-		JAR: return &"res://icon/item/a_jar.svg"
-		ANTIDOTE: return &"res://icon/item/a_antidote.svg"
-		GOLD_KEY: return &"res://icon/item/a_gold.svg"
-		SECRET_KEY: return &"res://icon/item/a_secret.svg"
-		OPUNTIA: return &"res://icon/item/a_opuntia.svg"
-		STICKS: return &"res://icon/item/a_saksaul.svg"
-		TAMARISK: return &"res://icon/item/a_tamarisk.svg"
-		TUMBLEWEED: return &"res://icon/item/a_tumbleweed.svg"
-		YUKKA: return &"res://icon/item/a_yukka.svg"
-		WATER: return &"res://icon/item/e_water.svg"
-		ETHER: return &"res://icon/item/e_ether.svg"
-		TEA: return &"res://icon/item/e_tea.svg"
-		CORETOOTH: return &"res://icon/item/m_coretooth.svg"
-		SHIELD: return &"res://icon/item/m_shield.svg"
-		I_ARMOR: return &"res://icon/item/m_i_armor.svg"
-		L_ARMOR: return &"res://icon/item/m_l_armor.svg"
-		I_PANTS: return &"res://icon/item/m_i_pants.svg"
-		L_PANTS: return &"res://icon/item/m_l_pants.svg"
-		I_BOOTS: return &"res://icon/item/m_i_boots.svg"
-		L_BOOTS: return &"res://icon/item/m_l_boots.svg"
-		BOOMERANG: return &"res://icon/item/n_boomerang.svg"
-		R_SCHO45: return &"res://icon/item/n_schofield45.svg"
-		R_ENLIGHT: return &"res://icon/item/n_enlighten.svg"
-		KNUCKLES: return &"res://icon/item/n_knuckles.svg"
-		SHOE: return &"res://icon/item/n_shoe.svg"
-		SHOTGUN: return &"res://icon/item/n_shotgun.svg"
-		T_RAPIER: return &"res://icon/item/n_t_rapier.svg"
-		W_RAPIER: return &"res://icon/item/n_w_rapier.svg"
-		SAW_STRING: return &"res://icon/item/n_saw_string.svg"
-	return &""
+	_hold_if_selected(view, false)
 
 func get_slot(slot: int) -> Dictionary: return logic.slot(slot)
 
 func move(e: InputEvent) -> void:
 	if (e is InputEventMouseButton and (e.button_index == MOUSE_BUTTON_LEFT) and e.is_released()):
 		reset_texture(_image)
-
-func put_item(item: Dictionary, image: TextureRect) -> void:
-	var path: String = PREVIEW.ICON
-	if item.has("item"):
-		path += item.item.icon
-	else:
-		path += logic.item(item.id).item.icon
-	var file: Image = Image.load_from_file(path)
-	image.texture = ImageTexture.create_from_image(file)
 
 func reset_holder() -> void: holder = null
 
@@ -678,7 +574,7 @@ func reset_texture(image: TextureRect) -> void:
 
 func get_preview_rect() -> TextureRect:
 	var image: TextureRect = TextureRect.new()
-	image.texture = holder
+	image.texture = holder\
 	image.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	image.size = Vector2.ONE * PREVIEW_SIZE
 	image.position -= PREVIEW_SIZE / 2
@@ -694,7 +590,6 @@ func set_preview(cell: CellDrag) -> CellDrag:
 	return cell
 
 func _input(event: InputEvent) -> void: move(event)
-
 
 func equipped() -> Dictionary:
 	return logic.item(equip.space.id)
@@ -727,20 +622,9 @@ func check_weapon(id: int, slot: int) -> bool:
 		return false
 	return true
 
-func add_slot(slot: int) -> void:
-	var id: int = logic.slot(slot).id
-	var type: int = logic.items.items.craft(id)
-	match type:
-		GameItems.CRAFT: craft.add_slot(slot)
-		GameItems.EQUIP, GameItems.ITEM:
-			if check_weapon(id, slot):
-				description(logic.item(id))
-
 func confirm_item() -> void:
 	match craft.slots.load:
 		TradeSlots.CRAFT: craft.product()
-
-
 
 var title: Array[HBoxContainer] = []
 var size: int
