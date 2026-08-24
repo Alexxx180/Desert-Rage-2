@@ -86,11 +86,6 @@ func select_exact(slot: int) -> void:
 func select_shift(direction: int) -> void:
 	select_exact(posmod(selection + direction, FAST_PANEL))
 
-func ui_count_item(slot: Button, count: int) -> void:
-	if count == BOUNDARY: slot.image.texture = null
-	slot.number.text = "" if count <= BOUNDARY else str(next)
-	if no < FAST_PANEL: slot.bar.value = next
-
 func update_inventory() -> void:
 	for slot in range(len(storage) - 1, Def.INT, Def.INT):
 		for ui in get_inventory(slot): ui_add_item(ui, slot)
@@ -235,11 +230,21 @@ func add_slot(bag: int, slot: int) -> void:
 		else:
 			for r in recipe:
 				if crafts & r:
-					product_id = r; return
+					product_id = r
+					var name: StringName = &"ray" if bag == Def.RAY else &"rock"
+					for i in [HUD.game.inventory.get(name).craft, HUD.game.priorities.get(name).craft]:
+						i.show()
+						i.image.texture = ImageTexture.create_from_image(icon.get_layer_data(id))
+					return
 			product_id = -1
 	elif WEAPON < id and id < KIT:
-		if check_weapon(id, slot):
+		var i: GameItems = logic.items.items
+		if i.is_equipable(id):
+			equip.select_weapon(slot)
 			description(logic.item(id))
+		elif equip.available and i.equip.in_items(id):
+			equip.add_slot(slot)
+			ui.equipment()
 
 func remember(id: int) -> void: # func find(id: int) -> void: status.hero.to.chats.log.add_item(bank.get_item(id).item.name)
 	status.log.add_item(logic.item(id).item.name) #; print("REMEMBER ITEM NO = ", no)
@@ -638,16 +643,6 @@ func description(item: Variant) -> void: #describe.emit(item, self)
 func trades(cell: CellDrag) -> void:
 	drag.ui.reset_texture(cell.image)
 	add_slot(cell.slot)
-
-func check_weapon(id: int, slot: int) -> bool:
-	var i: GameItems = logic.items.items
-	if i.is_equipable(id):
-		equip.select_weapon(slot)
-	elif equip.available and i.equip.in_items(id):
-		equip.add_slot(slot)
-		ui.equipment()
-		return false
-	return true
 
 func confirm_item() -> void:
 	match craft.slots.load:
