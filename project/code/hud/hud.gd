@@ -20,8 +20,8 @@ func unlock(type: int, slot: int) -> int:
 	session[type] = Def.to1(session[type], slot)
 
 func get_stat(type: int, slot: int) -> int:
-	return Def.of_x(Def.SHORT, session[type], slot)
 
+	return Def.of_x(Def.SHORT, session[type], slot)
 func set_stat(type: int, slot: int, value: int) -> void:
 	session[type] = Def.to_x(Def.SHORT, session[type], slot, value)
 

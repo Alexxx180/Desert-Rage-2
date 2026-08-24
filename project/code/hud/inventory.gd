@@ -29,12 +29,11 @@ const spend: PackedByteArray = [0, 0, 0, 0, 0, 1, 1, 3]
 var items: GameItems
 var slots: TradeSlots
 
-var recipe: PackedInt32Array = [WATER << B | TUMBLEWEED, WATER << B | OPUNTIA,
+var product: PackedByteArray = [ETHER, ANTIDOTE, TEA, ANTICOUGH]
+var recipe: PackedInt32Array = [
+	WATER << B | TUMBLEWEED, WATER << B | OPUNTIA,
 	WATER << B | TAMARISK, WATER << B | YUKKA]
 
-var ii: int
-var craft_id: int = Def.INT
-var _recipes: Array = Def.ARRAY
 var main: Dictionary:
 	get: return selection[MAIN]
 var holder: Texture2D = null
@@ -99,9 +98,10 @@ func update_inventory() -> void:
 const cost: PackedFloat32Array = [0.33]
 
 func fast_panel_cost() -> int:
+	
 	match _id(slot):
-		R_SCHO45, R_ENLIGHT: return HUD.level.aura.resource(HUD.hero)
-		SHOTGUN: return HUD.level.aura.resource(HUD.hero) * cost[SHOTGUN_COST]
+		R_SCHO45, R_ENLIGHT: return HUD.get_stat(HUD.RESOURCE, HUD.hero)
+		SHOTGUN: return HUD.get_stat(HUD.RESOURCE, HUD.hero) * cost[SHOTGUN_COST]
 	return _count(slot)
 
 func get_fast_panel() -> Array[Node]:
@@ -193,10 +193,35 @@ func produce_item(slot: int, next: int) -> void:
 		HUD.set_item(bag, slot, item)
 		show_item(bag, slot, id, count, count)
 
-var crafts: int
+var crafts: int; var product_id: int = -1; var mode: int = FULL
 
-func craft_item(slot: int) -> void:
-	pass
+enum { SINGLE, HALF, FULL }
+
+func craft_item(bag: int, slot: int) -> void:
+	var item: int = HUD.get_item(bag, slot)
+	if product_id == -1 or item != 0: return
+	var name: StringName = &"ray" if bag == Def.RAY else &"rock"
+	var id_a: int = Def.of_x(Def.BYTE, crafts, ID); var slot_a: int = -1
+	var id_b: int = Def.of_x(Def.BYTE, crafts, X); var slot_b: int = -1
+	for s in range(0, SLOTS):
+		var i: int = HUD.get_item(bag, s)
+		if slot_a == -1 and Def.of_x(Def.BYTE, i, ID) == id_a: slot_a = s
+		if slot_b == -1 and Def.of_x(Def.BYTE, i, ID) == id_b: slot_b = s
+		if slot_a != -1 and slot_b != -1: break
+	if slot_a == -1 or slot_b == -1: return
+	var count_a: int = Def.of_x(Def.BYTE, HUD.get_item(bag, slot_a), X)
+	var count_b: int = Def.of_x(Def.BYTE, HUD.get_item(bag, slot_b), X)
+	var next: int
+	if count_a < count_b:
+		next = count_a; count_b -= count_a; count_a = 0
+	else:
+		next = count_b; count_a -= count_b; count_b = 0
+	HUD.set_item(bag, slot_a, id_a << Def.BYTE | count_a)
+	HUD.set_item(bag, slot_b, id_b << Def.BYTE | count_b)
+	HUD.set_item(bag, slot, product_id << Def.BYTE | next)
+	show_item(bag, slot_a, id_a, count_a, count_a)
+	show_item(bag, slot_b, id_b, count_b, count_b)
+	show_item(bag, slot, product_id, 0, next)
 
 func add_slot(bag: int, slot: int) -> void:
 	var item: int = HUD.get_item(bag, slot)
@@ -209,7 +234,9 @@ func add_slot(bag: int, slot: int) -> void:
 			crafts = 0
 		else:
 			for r in recipe:
-				if crafts & recipe[no]: pass
+				if crafts & r:
+					product_id = r; return
+			product_id = -1
 	elif WEAPON < id and id < KIT:
 		if check_weapon(id, slot):
 			description(logic.item(id))
@@ -574,7 +601,7 @@ func reset_texture(image: TextureRect) -> void:
 
 func get_preview_rect() -> TextureRect:
 	var image: TextureRect = TextureRect.new()
-	image.texture = holder\
+	image.texture = holder
 	image.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	image.size = Vector2.ONE * PREVIEW_SIZE
 	image.position -= PREVIEW_SIZE / 2
