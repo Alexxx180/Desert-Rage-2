@@ -12,16 +12,17 @@ var animation: CharacterAnimation
 var interact: WorldInteraction
 var _inventory: HeroInventory
 var menu: Menu = Menu.new()
+var entity: Array[PhysicsBody2D] = []
 
 var fire: GPUParticles2D; var rain: GPUParticles2D
 
 func check(type: int) -> int: return session[type]
-func unlock(type: int, slot: int) -> int:
+func unlock(type: int, slot: int) -> void:
 	session[type] = Def.to1(session[type], slot)
 
 func get_stat(type: int, slot: int) -> int:
-
 	return Def.of_x(Def.SHORT, session[type], slot)
+	
 func set_stat(type: int, slot: int, value: int) -> void:
 	session[type] = Def.to_x(Def.SHORT, session[type], slot, value)
 
@@ -46,13 +47,13 @@ func load_hero(that: int) -> void:
 		entity[that] = new_hero(that)
 
 func _ready() -> void:
-	
 	layer = 2
-	load_level()
+	level.load_level()
 	load_hero(HUD.hero)
-	entity[HUD.hero].position = group.position
-	group.reparent(entity[HUD.hero])
-	group.position = Vector2.ZERO
+	if level.group:
+		entity[HUD.hero].position = level.group.position
+		level.group.reparent(entity[HUD.hero])
+		level.group.position = Vector2.ZERO
 
 
 func load_game_logic() -> void:
@@ -64,7 +65,7 @@ func load_game_logic() -> void:
 
 func next_hero() -> int: return (HUD.hero + 1) & Def.ROCK
 
-var session: PackedInt64Array = []
+#var session: PackedInt64Array = []
  # model : L1 (SCORE)P2 E4 A2 N4 S8 B4 A2 R2 
 
 func _init() -> void: session = FileAccess.get_file_as_bytes(Def.saves).to_int64_array()

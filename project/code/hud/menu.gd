@@ -249,8 +249,6 @@ func _input(_event: InputEvent) -> void:
 
 
 
-class_name DialogCursor extends RefCounted
-
 @onready var timer: Timer = $timer
 
 var level: int = 0
@@ -304,8 +302,8 @@ var face: Dictionary = {
 	"E": "anger", "Y": "play", "I": "rain", "W": "scare"
 }
 
-func set_level(value: int) -> void: cursor.set_level(value, locale.get_chat(value))
-func scroll() -> void: cursor.scroll(locale)
+func _dialog_level(value: int) -> void: cursor.set_level(value, locale.get_chat(value))
+func _scroll() -> void: scroll(locale)
 func _ready() -> void: timer.timeout.connect(talking)
 
 func add_chat(part: int) -> void:
@@ -509,7 +507,7 @@ func fade_track(that: AudioStreamPlayer) -> void:
 	tween.tween_property(players[_fade_next()], "volume_db", 0.0, DURATION)
 	tween.tween_callback(func(): that.stop() ; _end_fade())
 
-func _ready() -> void:
+func ready() -> void:
 	if is_overworld:
 		_set_level_type(_set_previous_world, func(): return mixer.record)
 	else:
@@ -639,7 +637,7 @@ var previous_state: String:
 var state: String:
 	get: return environment[_selection]
 
-func _ready() -> void: timeout.connect(sync_enemy_music)
+func ready() -> void: timeout.connect(sync_enemy_music)
 
 func add_enemy(_body) -> void:
 	_adjust.x += 1
@@ -870,32 +868,30 @@ func toggle() -> void:
 
 
 
-extends Button
+#extends Button
+#@onready var help: RichTextLabel = $help
+#@onready var image: TextureRect = $icon
+#var no: int
 
-@onready var help: RichTextLabel = $help
-@onready var image: TextureRect = $icon
-
-var no: int
+func _ready() -> void: pressed.connect(flip_the_card)
 
 const TIME: float = 0.2
 const MARGIN: String = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
 
-func translate() -> void:
-	text = tr("H" + Def.hints[no] + "T") + MARGIN
-	help.text = tr("H" + Def.hints[no] + "D") % [] # Def
+func translate(card: Button) -> void:
+	card.text = tr("H" + Def.hints[card.no] + "T") + MARGIN
+	card.help.text = tr("H" + Def.hints[card.no] + "D") % [] # Def
 
-func update_hint(next: int) -> void:
-	no = next
-	image.texture = ImageTexture.create_from_image(Def.help.get_layer_data(no))
-	translate()
+func update_hint(card: Button, next: int) -> void:
+	card.no = next
+	card.image.texture = ImageTexture.create_from_image(Def.help.get_layer_data(card.no))
+	translate(card)
 
-func _ready() -> void: pressed.connect(flip_the_card)
-
-func flip_the_card() -> void:
-	if image.visible:
-		_change_state(image, help)
+func flip_the_card(card: Button) -> void:
+	if card.image.visible:
+		_change_state(card.image, card.help)
 	else:
-		_change_state(help, image)
+		_change_state(card.help, card.image)
 
 func change_state(prev: CanvasItem, next: CanvasItem) -> Callable:
 	return func(x: float):

@@ -1,9 +1,8 @@
-[gd_scene load_steps=23 format=3 uid="uid://7o2xe4bosovy"]
+[gd_scene load_steps=22 format=3 uid="uid://7o2xe4bosovy"]
 
 [ext_resource type="FontFile" uid="uid://b37js8y80ak1k" path="res://data/font/noto_sans/NotoColorEmoji-Regular.ttf" id="3_cqb2w"]
 [ext_resource type="PackedScene" uid="uid://b8wsdeuhaqjym" path="res://def/hud/game/stats_stat.tscn" id="3_pf2c5"]
 [ext_resource type="Texture2D" uid="uid://e4utxikoeub7" path="res://icon/help/stat_defense.svg" id="4_08ayy"]
-[ext_resource type="PackedScene" uid="uid://hw20vxdse268" path="res://def/hud/game/stats_bag.tscn" id="4_b7s0k"]
 [ext_resource type="Texture2D" uid="uid://d37dqji5ybnbg" path="res://icon/help/stat_influence.svg" id="5_8w622"]
 [ext_resource type="Texture2D" uid="uid://c6ecpv75raqi8" path="res://icon/help/stat_reaction.svg" id="6_etdq7"]
 [ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://data/theme/patterns/template/menu/settings/topic/footer.tres" id="7_hejl4"]
@@ -41,17 +40,7 @@ content_margin_right = 9.0
 content_margin_bottom = 3.0
 bg_color = Color(0.0196078, 0.0196078, 0.0392157, 0)
 
-[sub_resource type="Gradient" id="Gradient_hf8md"]
-colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_lpjcv"]
-gradient = SubResource("Gradient_hf8md")
-fill_from = Vector2(1, 0)
-fill_to = Vector2(0, 0)
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_hjtod"]
-content_margin_left = 160.0
-texture = SubResource("GradientTexture2D_lpjcv")
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kj83q"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_i0ff0"]
 content_margin_bottom = 30.0
@@ -63,7 +52,17 @@ content_margin_bottom = 3.0
 content_margin_left = 18.0
 content_margin_top = 7.0
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kj83q"]
+[sub_resource type="Gradient" id="Gradient_hf8md"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_lpjcv"]
+gradient = SubResource("Gradient_hf8md")
+fill_from = Vector2(1, 0)
+fill_to = Vector2(0, 0)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_hjtod"]
+content_margin_left = 160.0
+texture = SubResource("GradientTexture2D_lpjcv")
 
 [node name="scroll" type="ScrollContainer"]
 anchors_preset = 15
@@ -86,12 +85,9 @@ theme_override_constants/margin_bottom = 15
 [node name="stack" type="VBoxContainer" parent="margin"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/separation = 20
+theme_override_constants/separation = 4
 
-[node name="equip" type="HFlowContainer" parent="margin/stack"]
-layout_mode = 2
-
-[node name="equip" type="Button" parent="margin/stack/equip"]
+[node name="equip" type="Button" parent="margin/stack"]
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_fonts/font = ExtResource("10_10kjk")
@@ -99,62 +95,47 @@ theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_rw15s")
 text = "🗡👏 Снаряжение"
 
-[node name="ray" parent="margin/stack/equip" instance=ExtResource("4_b7s0k")]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 4
-text = "Рей"
-script = null
-
-[node name="rock" parent="margin/stack/equip" instance=ExtResource("4_b7s0k")]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 4
-script = null
-
-[node name="stats" type="MarginContainer" parent="margin/stack"]
-layout_mode = 2
-theme_override_constants/margin_top = -10
-
-[node name="heroes" type="VBoxContainer" parent="margin/stack/stats"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/separation = 4
-
-[node name="power" parent="margin/stack/stats/heroes" instance=ExtResource("3_pf2c5")]
+[node name="power" parent="margin/stack" instance=ExtResource("3_pf2c5")]
 layout_mode = 2
 text = "SPWT"
 script = null
 
-[node name="influence" parent="margin/stack/stats/heroes" instance=ExtResource("3_pf2c5")]
+[node name="influence" parent="margin/stack" instance=ExtResource("3_pf2c5")]
 layout_mode = 2
 text = "SNFT"
 icon = ExtResource("4_08ayy")
 script = null
 
-[node name="vitality" parent="margin/stack/stats/heroes" instance=ExtResource("3_pf2c5")]
+[node name="vitality" parent="margin/stack" instance=ExtResource("3_pf2c5")]
 layout_mode = 2
 text = "SVTT"
 icon = ExtResource("5_8w622")
 script = null
 
-[node name="reaction" parent="margin/stack/stats/heroes" instance=ExtResource("3_pf2c5")]
+[node name="reaction" parent="margin/stack" instance=ExtResource("3_pf2c5")]
 layout_mode = 2
 text = "SRCT"
 icon = ExtResource("6_etdq7")
 script = null
 
-[node name="description" type="Label" parent="margin/stack/stats"]
+[node name="title" type="RichTextLabel" parent="margin/stack"]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 1
-size_flags_stretch_ratio = 2.0
+size_flags_stretch_ratio = 0.25
 theme = ExtResource("7_hejl4")
-theme_override_constants/line_spacing = 11
-theme_override_styles/normal = SubResource("StyleBoxTexture_hjtod")
-text = "Some Test object like this asdadadadsadadadadasdad фывфывфвыолвоыфвловофвлфыовфы фовыофлывофылв олфыфывофлыв олфыовлфовлофылвофолы офлыволфыовлфыовло офлывофлоывлфовлфо олфывофлыво офлыовлфыввофылвофы олфывофлвофылволвф офывловлывофлвоылфовфло офылвофылолофлвофыолв офылвофывлофвлофылво фыовлфоылвофылвофывофло фолвлфодволыфдодфоывдофлв фыволфывоыылфов "
-horizontal_alignment = 2
+theme_override_font_sizes/italics_font_size = 28
+theme_override_styles/normal = SubResource("StyleBoxEmpty_kj83q")
+bbcode_enabled = true
+text = "[i]Экипировка[/i]
+Здесь находится ваше снаряжение,  показатели, бестиарий и диалоги. 
+· Показатель - число, определяющее характеристики в поединке. Например живучесть определяет количество ауры, реакция количество ресурса и т.п.
+· Снаряжение - предмет, который может быть надет на героя через ячейки в инвентаре ниже и имеет дополнительный эффект на персонажа, например повышение его мощи или живучести. Нажав на заголовок, можно посмотреть как оно влияет на показатели.
+· Каждый герой может носить любой вид снаряжения, но использовать на себе далеко не каждый. Учитывайте это при построении команды.
+· В бестиарии находятся сведения о противниках, людях и исследованиях. Наведите курсор на противника чтобы получить сводку о нём.
+· В диалогах находятся сведения о ваших деловых переговорах.
+"
+fit_content = true
 autowrap_mode = 2
 
 [node name="bestiary" type="HFlowContainer" parent="margin/stack"]
@@ -237,36 +218,16 @@ visible = false
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="title" type="RichTextLabel" parent="margin/stack"]
+[node name="description" type="Label" parent="margin"]
+visible = false
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.25
+size_flags_vertical = 0
+size_flags_stretch_ratio = 2.0
 theme = ExtResource("7_hejl4")
-theme_override_font_sizes/italics_font_size = 28
-theme_override_styles/normal = SubResource("StyleBoxEmpty_kj83q")
-bbcode_enabled = true
-text = "[i]Экипировка[/i]
-Здесь находится ваше снаряжение и показатели. 
-
-· Показатель - число, определяющее конкретные характеристики в поединке. Например живучесть определяет количество ауры, реакция количество ресурса и т.п.
-
-· Снаряжение - предмет, который может быть надет на героя через ячейки в инвентаре ниже и имеет дополнительный эффект на персонажа, например повышение его мощи или живучести.
-
-[table=2]
-[cell][b][i]▒[/i][/b] Панель быстрого доступа - основное оружие, чтобы взять его, нужно выбрать слот, на котором оно лежит.[/cell]
-[cell][b][i]🗡[/i][/b] Оружие - располагается вспомогательное, редко сменяемое вооружение.[/cell]
-[cell][b][i]🛡[/i][/b] Реликвия - здесь вы можете положить особый вид снаряжения, имеющий определённый эффект в бою.[/cell]
-[cell][b][i]🧥[/i][/b] Броня - основной вид защитной экипировки, по типу курток, нагрудников.[/cell]
-[cell][b][i]👖[/i][/b] Поножи - защитная экипировка, по типу штанов, понож, пояса.[/cell]
-[cell][b][i]🥾[/i][/b] Сапоги - защитная экипировка, по типу ботинок, сапог, сандалей.[/cell]
-[/table]
-
-· Нажав на \"Снаряжение\", можно посмотреть как оно влияет на показатели. Дальнобойное оружие часто задействует %s, в то время как оружие ближнего боя использует %s и %s.
-
-· Каждый герой может носить любой вид снаряжения, но использовать далеко не каждый. Учитывайте это при построении команды.
-
-[b][i]📬[/i][/b] В диалогах находятся сведения о ваших переговорах с людьми.
-[b][i]🔬[/i][/b] В бестиарии находятся сведения о противниках, людях и исследованиях. Наведите курсор на противника чтобы получить сводку о нём."
-fit_content = true
+theme_override_constants/line_spacing = 11
+theme_override_styles/normal = SubResource("StyleBoxTexture_hjtod")
+text = "Some Test object like this asdadadadsadadadadasdad фывфывфвыолвоыфвловофвлфыовфы фовыофлывофылв олфыфывофлыв олфыовлфовлофылвофолы офлыволфыовлфыовло офлывофлоывлфовлфо олфывофлыво офлыовлфыввофылвофы олфывофлвофылволвф офывловлывофлвоылфовфло офылвофылолофлвофыолв офылвофывлофвлофылво фыовлфоылвофылвофывофло фолвлфодволыфдодфоывдофлв фыволфывоыылфов "
+horizontal_alignment = 2
 autowrap_mode = 2

@@ -279,7 +279,7 @@ var summary: Dictionary = MakeStats.summary()
 var prev: Dictionary = summary
 
 
-func _init(timer: Timer) -> void:
+func _func _init(timer: Timer) -> void:
 	multiply = timer
 	remember_progress() # func sync_points(hero: String, kind: String, value: int) -> void: summary.hero[hero].points[kind] = value
 

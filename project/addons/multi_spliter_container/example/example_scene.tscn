@@ -1,9 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://bsf5475jlmf12"]
+[gd_scene load_steps=7 format=3 uid="uid://bsf5475jlmf12"]
 
 [ext_resource type="Script" uid="uid://db6mrqis6mthu" path="res://addons/multi_spliter_container/multi_split_container.gd" id="1_erthe"]
 [ext_resource type="Script" uid="uid://beplmlbkjbofd" path="res://addons/multi_spliter_container/split_container_item.gd" id="2_jlu11"]
 [ext_resource type="Texture2D" uid="uid://cwvyucfkxwjqw" path="res://addons/multi_spliter_container/icon/MultiSpliterItem.svg" id="3_geasv"]
 [ext_resource type="Texture2D" uid="uid://bjaei3q7x2hux" path="res://addons/multi_spliter_container/icon/MultiSpliter.svg" id="4_flrsd"]
+
+[sub_resource type="Theme" id="Theme_erthe"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jlu11"]
 
 [node name="Example" type="Container"]
 anchors_preset = 15
@@ -15,9 +19,10 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_erthe")
 max_columns = 3
-separator_line_size = 23.085
+separator_line_size = 10.0
 separator_line_color = Color(0.21, 0.24, 0.29, 1)
-separators_line_offsets = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0])
+separator_line_visible = false
+separators_line_offsets = Array[float]([-379.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0])
 _rect_size_editor = Vector2(1152, 648)
 drag_button_min_opacity = 0.2
 drag_button_size = 32.0
@@ -51,6 +56,7 @@ vertical_alignment = 1
 [node name="SplitContainerItem2" type="Control" parent="."]
 clip_contents = true
 layout_mode = 2
+theme = SubResource("Theme_erthe")
 script = ExtResource("2_jlu11")
 
 [node name="ColorRect" type="ColorRect" parent="SplitContainerItem2"]
@@ -72,6 +78,17 @@ grow_vertical = 2
 text = "You can change line size and color"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Panel" type="Panel" parent="SplitContainerItem2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -10.0
+offset_right = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_jlu11")
 
 [node name="SplitContainerItem3" type="Control" parent="."]
 clip_contents = true

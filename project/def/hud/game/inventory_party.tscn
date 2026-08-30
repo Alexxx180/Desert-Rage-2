@@ -1,41 +1,73 @@
-[gd_scene load_steps=5 format=3 uid="uid://b3pwlem0vs6ab"]
+[gd_scene load_steps=7 format=3 uid="uid://b3pwlem0vs6ab"]
 
-[ext_resource type="PackedScene" uid="uid://hw20vxdse268" path="res://def/hud/game/stats_bag.tscn" id="1_cy7l1"]
-[ext_resource type="Script" path="res://script/ui/hud/detector/game/margin/priorities/stats/inventory/topic/stack/selected/status/status.gd" id="1_xcr6d"]
 [ext_resource type="PackedScene" uid="uid://bdp11gai8bk5" path="res://def/hud/game/priorities_aura.tscn" id="2_53wlp"]
+[ext_resource type="FontFile" uid="uid://c6xnr3551fg10" path="res://data/font/Izuver.otf" id="2_spnqn"]
 [ext_resource type="PackedScene" uid="uid://du2nfngsi1lpk" path="res://def/hud/game/priorities_resource.tscn" id="3_tenta"]
 
-[node name="flow" type="HBoxContainer"]
+[sub_resource type="Gradient" id="Gradient_spnqn"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_hc00q"]
+gradient = SubResource("Gradient_spnqn")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_eamwu"]
+content_margin_top = 3.0
+texture = SubResource("GradientTexture1D_hc00q")
+
+[node name="status" type="GridContainer"]
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 56.0
 grow_horizontal = 2
-
-[node name="bag" type="VBoxContainer" parent="."]
-layout_mode = 2
-
-[node name="ray" parent="bag" instance=ExtResource("1_cy7l1")]
-layout_mode = 2
-
-[node name="rock" parent="bag" instance=ExtResource("1_cy7l1")]
-layout_mode = 2
-
-[node name="status" type="GridContainer" parent="."]
-layout_mode = 2
 size_flags_horizontal = 3
 columns = 2
-script = ExtResource("1_xcr6d")
 
-[node name="ray_aura" parent="status" instance=ExtResource("2_53wlp")]
+[node name="ray" type="VBoxContainer" parent="."]
 layout_mode = 2
+size_flags_horizontal = 3
 
-[node name="ray_resource" parent="status" instance=ExtResource("3_tenta")]
+[node name="aura" parent="ray" instance=ExtResource("2_53wlp")]
+layout_mode = 2
+script = null
+
+[node name="hero" type="Label" parent="ray/aura"]
+z_index = 1
+layout_mode = 1
+offset_right = 13.0
+offset_bottom = 70.0
+theme_override_constants/line_spacing = -7
+theme_override_fonts/font = ExtResource("2_spnqn")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxTexture_eamwu")
+text = "Рей"
+autowrap_mode = 1
+
+[node name="resource" parent="ray" instance=ExtResource("3_tenta")]
 custom_minimum_size = Vector2(150, 26)
 layout_mode = 2
+script = null
 
-[node name="rock_aura" parent="status" instance=ExtResource("2_53wlp")]
+[node name="rock" type="VBoxContainer" parent="."]
 layout_mode = 2
+size_flags_horizontal = 3
 
-[node name="rock_resource" parent="status" instance=ExtResource("3_tenta")]
+[node name="aura" parent="rock" instance=ExtResource("2_53wlp")]
+layout_mode = 2
+script = null
+
+[node name="hero" type="Label" parent="rock/aura"]
+z_index = 1
+layout_mode = 0
+offset_right = 13.0
+offset_bottom = 70.0
+theme_override_constants/line_spacing = -7
+theme_override_fonts/font = ExtResource("2_spnqn")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxTexture_eamwu")
+text = "Рок"
+autowrap_mode = 1
+
+[node name="resource" parent="rock" instance=ExtResource("3_tenta")]
 custom_minimum_size = Vector2(150, 26)
 layout_mode = 2
+script = null
