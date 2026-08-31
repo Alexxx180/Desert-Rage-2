@@ -242,53 +242,77 @@ func compatible(id: int) -> PackedInt32Array:
 	else:
 		return knuckle
 
-func show_craft(bag: int, ) -> void:
+func show_craft(bag: int) -> void:
 	var name: StringName = &"ray" if bag == Def.RAY else &"rock"
 	for type in [HUD.game.inventory.get(name), HUD.game.priorities.get(name)]:
 		type.show()
 		for i in range(0, 4):
 			var slot: Control = type.craft[i]
-			slot.image.texture = ImageTexture.create_from_image(icon.get_layer_data(id))
-		type.result.texture = null if product_id == -1 else ImageTexture.create_from_image(icon.get_layer_data(product_id))
+			var id: int = Def.of_x(Def.BYTE, crafting[bag * CRAFTING + CRAFT_ID], i)
+			slot.image.texture = null if id == 0 else ImageTexture.create_from_image(icon.get_layer_data(id - 1))
+		type.result.texture = null if product_id == 0 else ImageTexture.create_from_image(icon.get_layer_data(product_id - 1))
+
+func craft_product(bag: int, slot: int) -> void:
+	var min_count: int = 30
+	var limit: int = -1
+	var next: Vector2i = _slot(bag)
+	for i in range(3, -1, -1):
+		var id: int = Def.of_x(Def.BYTE, crafting[next[CRAFT_ID]], i)
+		if id == 0: continue
+		elif limit == -1: limit = i
+		
+		var s: int = Def.of_x(Def.BYTE, crafting[next[CRAFT_SLOT]], i)
+		var count: int = Def.of_x(Def.BYTE, HUD.get_item(bag, s), i)
+		if count < min_count: min_count = count
+	for i in range(0, limit):
+		var s: int = Def.of_x(Def.BYTE, crafting[next[CRAFT_SLOT]], i)
+		var item: Vector2i = bag_slot(HUD.get_item(bag, s))
+		show_item(bag, s, item[ID], item[X], item[X] - min_count)
+		HUD.set_item(bag, s, item[ID] << Def.BYTE | item[X] - min_count)
+	HUD.set_item(bag, slot, min_count << Def.BYTE | product_id)
+	show_item(bag, slot, product_id, 0, min_count)
+	crafting[next[CRAFT_ID]] = 0
+	crafting[next[CRAFT_SLOT]] = 0
+	show_craft(bag)
 
 func add_slot(bag: int, slot: int) -> void:
 	var item: int = HUD.get_item(bag, slot)
 	var id: int = Def.of_x(Def.BYTE, item, ID)
-	var count: int = Def.of_x(Def.BYTE, item, X)
 	var mode: int = Def.of_x(Def.MASK, craft_mode, HUD.hero)
 	if mode == MODE_START:
 		if (BAG_START <= id and id < ARMOR) or (KIT <= id and id < BAG_END):
 			mode = MODE_ITEMS
-			product_id = id
+			product_id = 0
 		else:
 			mode = MODE_WEAPON
+			product_id = id
+			show_craft(bag)
 		craft_mode = Def.to_x(Def.MASK, craft_mode, HUD.hero, mode)
 	if mode == MODE_ITEMS and (BAG_START <= id and id < ARMOR):
-		var next: Vector2i = _slot()
-		if item == 0:
+		var next: Vector2i = _slot(bag)
+		if item == 0 and product_id != 0:
+			craft_product(bag, slot); return
+		elif Def.of_x(Def.BYTE, crafting[next[CRAFT_ID]], 3) != 0:
 			crafting[next[CRAFT_ID]] = 0
 			crafting[next[CRAFT_SLOT]] = 0
-			show_craft()
-			return
-		if Def.of_x(Def.BYTE, crafting[next[CRAFT_ID]], 3) != 0:
-			crafting[next[CRAFT_ID]] = 0
-			crafting[next[CRAFT_SLOT]] = 0
+			
 		crafting[next[CRAFT_ID]] = crafting[next[CRAFT_ID]] << Def.BYTE | id
 		crafting[next[CRAFT_SLOT]] = crafting[next[CRAFT_SLOT]] << Def.BYTE | slot
-		product_id = -1
+		product_id = 0
 		for material in recipe:
 			if crafting[next[CRAFT_ID]] & material == material:
-				product_id = products[material]
+				product_id = product[material]
 				break
-		show_craft()
+		show_craft(bag)
 	elif mode == MODE_WEAPON and KIT < id and id < BAG_END:
-		var cell: Vector2i = Vector2i(HUD.hero * CRAFTING + CRAFT_ID, HUD.hero * CRAFTING + CRAFT_SLOT)
+		var cell: Vector2i = _slot(bag)
 		var next: Vector2i = Vector2i(crafting[cell[CRAFT_ID]] << Def.BYTE | id, crafting[cell[CRAFT_SLOT]] << Def.BYTE | slot)
 		var kit: PackedInt32Array = compatible(id)
 		for type in kit:
 			if type & next[CRAFT_ID] == type:
 				crafting[cell[CRAFT_ID]] = next[CRAFT_ID]
 				crafting[cell[CRAFT_SLOT]] = next[CRAFT_SLOT]
+				show_craft(bag)
 				return
 		# toggle red
 
@@ -299,17 +323,18 @@ var trade_bags: PackedByteArray = [0, 0]
 # CRAFT
 enum { CRAFT_MODE, MODE_START, MODE_ITEMS, MODE_WEAPON, CRAFT_ID = 0, CRAFT_SLOT, CRAFTING, BAG = 1, NO_SLOT }
 
-func _slot() -> Vector2i:
-	var hero: int = HUD.hero * CRAFTING
-	return Vector2i(hero + CRAFT_ID, hero + CRAFT_SLOT)
+func bag_slot(item: int) -> Vector2i:
+	return Vector2i(Def.of_x(Def.BYTE, item, ID), Def.of_x(Def.BYTE, item, X))
+	
+func _slot(bag: int) -> Vector2i: return bag * CRAFTING * Vector2i.ONE + Vector2i(CRAFT_ID, CRAFT_SLOT)
 
 func _bag(type: int) -> int: return HUD.hero * CRAFTING + type
 
-func _craft() -> bool:
+func _craft(bag: int) -> bool:
 	var mode: int = Def.of_x(Def.MASK, crafting[CRAFT_MODE], _bag(CRAFT_MODE))
 	mode = MODE_START if mode == CRAFT_MODE else CRAFT_MODE
 	crafting[CRAFT_MODE] = Def.to_x(Def.MASK, crafting[CRAFT_MODE], _bag(CRAFT_MODE), mode)
-	var slot: Vector2i = _slot()
+	var slot: Vector2i = _slot(bag)
 	crafting[slot[CRAFT_ID]] = 0
 	crafting[slot[CRAFT_SLOT]] = 0
 	# toggle slots
