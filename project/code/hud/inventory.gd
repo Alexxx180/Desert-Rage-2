@@ -11,7 +11,7 @@ enum { STICKS, OPUNTIA, TUMBLEWEED, TAMARISK, YUKKA, JAR, ANTIDOTE, ANTICOUGH, G
 	UP1 = 5, UP2 = 6, UP3 = 7, UP4 = 8, ID = 0, X = 1, B = 8,
 	SHOTGUN_COST = 0, BOUNDARY = 1, FAST_PANEL = 10,
 	ITEM_OR_SLOT = 0, SAME_ITEM = 1, EMPTY_SLOT = 2 }
-enum { R = Def.bit(Def.RAY), K = Def.bit(Def.ROCK), RK = Def.bit(Def.RAY) | Def.bit(Def.ROCK) }
+enum { R = 0, K = 1, RK = 3 }
 enum { ARM, KNUCKLE, KNIFE, SWORD, RAPIER, GUN, RIFLE, LAUNCHER, DRONE, BOW, CROSSBOW, STAFF }
 
 const aura: PackedByteArray = [10, 70,  0]
@@ -26,25 +26,42 @@ const equip: PackedByteArray = [R, R, K, K, R, R, R, K]
 const types: PackedByteArray = [RAPIER, RAPIER, GUN, GUN]
 const spend: PackedByteArray = [0, 0, 0, 0, 0, 1, 1, 3]
 
-var items: GameItems
-var slots: TradeSlots
+const cost: PackedFloat32Array = [0.33]
 
 var product: PackedByteArray = [ETHER, ANTIDOTE, TEA, ANTICOUGH]
 var recipe: PackedInt32Array = [
 	WATER << B | TUMBLEWEED, WATER << B | OPUNTIA,
 	WATER << B | TAMARISK, WATER << B | YUKKA]
 
-var main: Dictionary:
-	get: return selection[MAIN]
 var holder: Texture2D = null
 var _image: TextureRect
 
+var knuckle: PackedInt32Array = []
+var sword: PackedInt32Array = []
+var pistol: PackedInt32Array = []
+var gun: PackedInt32Array = []
+var heavy: PackedInt32Array = []
+var armor: PackedInt32Array = []
+
+
+var title: Array[HBoxContainer] = []
+var size: int
+
+var craft_mode: int
+var crafting: PackedInt32Array = [0, 0, 0, 0]
+var trade_slots: PackedByteArray = [0, 0]
+var trade_bags: PackedByteArray = [0, 0]
+
 var distraction: PackedInt32Array = []
 var distraction_body: Array[StaticBody2D] = []
+var _fast_panel: Tween
+var icon: CompressedTexture2DArray
 
-func _init() -> void:
-	storage = [0]
-	storage.resize(SLOTS * Def.PARTY)
+var crafts: int; var product_id: int = -1; var trade_mode: int = FULL
+
+enum { SINGLE, HALF, FULL }
+# CRAFT
+enum { CRAFT_MODE, MODE_START, MODE_ITEMS, MODE_WEAPON, CRAFT_ID = 0, CRAFT_SLOT, CRAFTING, BAG = 1, NO_SLOT }
 
 func distract() -> void: # LevelRoot
 	var tile: PackedInt32Array = HUD.level.tile_at()
@@ -53,7 +70,7 @@ func distract() -> void: # LevelRoot
 			distraction_body[i].add_stick()
 			return
 	var body: StaticBody2D
-	distraction.append()
+	distraction.append(0)
 	distraction_body.append(body)
 
 func store_water(slot: int) -> void:
@@ -61,15 +78,11 @@ func store_water(slot: int) -> void:
 	if tile[Def.ID] == ENTRY and tile[Def.ATLAS] == Def.D_WATER:
 		produce_item(slot, WATER)
 
-func i(hero: int, no: int) -> int: return hero * Def.PARTY + no
-
 func update_ui(logic: Node, preview: Node, slots: Array) -> void:
 	var ui: Node = logic.trade.ui
 	ui.production()
 	if preview.slots(logic, slots):
 		ui.product(logic.item(preview.cells.craft_id))
-
-var _fast_panel: Tween
 
 func hide_selection() -> void:
 	_fast_panel = HUD.create_tween()
@@ -90,10 +103,7 @@ func update_inventory() -> void:
 	for slot in range(len(storage) - 1, Def.INT, Def.INT):
 		for ui in get_inventory(slot): ui_add_item(ui, slot)
 
-const cost: PackedFloat32Array = [0.33]
-
 func fast_panel_cost() -> int:
-	
 	match _id(slot):
 		R_SCHO45, R_ENLIGHT: return HUD.get_stat(HUD.RESOURCE, HUD.hero)
 		SHOTGUN: return HUD.get_stat(HUD.RESOURCE, HUD.hero) * cost[SHOTGUN_COST]
@@ -104,8 +114,6 @@ func get_fast_panel() -> Array[Node]:
 		Def.RAY: return [HUD.game.inventory.ray.slots[slot], HUD.game.priorities.ray.slots[slot], HUD.game.fast_panel]
 		Def.ROCK: return [HUD.game.inventory.rock.slots[slot], HUD.game.priorities.rock.slots[slot], HUD.game.fast_panel]
 	return []
-
-var icon: CompressedTexture2DArray
 
 func find_item(search: int, target_id: int = MISSING_NO) -> int:
 	match search:
@@ -128,8 +136,9 @@ func trade_item(from: int, bag_b: int, slot_b: int) -> void:
 		trade_bags[from] = bag_b
 		trade_slots[from] = slot_b
 		return
-	elif trade_slots[from] == bag_b:
+	elif trade_slots[from] == slot_b and trade_bags[from] == bag_b:
 		trade_slots[from] = NO_SLOT
+		# use item if supported
 		return
 	
 	var bag_a: int = trade_bags[from]
@@ -168,7 +177,7 @@ func show_item(bag: int, slot: int, id: int, previous: int, count: int) -> void:
 func open_door(id: int) -> void: pass
 func use_boomerang(): pass
 
-func produce_item(slot: int, next: int) -> void:
+func produce_item(bag: int, slot: int, next: int) -> void:
 	var item: int = HUD.get_item(HUD.hero, slot)
 	if item == 0: return
 	
@@ -199,10 +208,6 @@ func produce_item(slot: int, next: int) -> void:
 		HUD.set_item(bag, slot, item)
 		show_item(bag, slot, id, count, count)
 
-var crafts: int; var product_id: int = -1; var trade_mode: int = FULL
-
-enum { SINGLE, HALF, FULL }
-
 func craft_item(bag: int, slot: int) -> void:
 	var item: int = HUD.get_item(bag, slot)
 	if product_id == -1 or item != 0: return
@@ -228,13 +233,6 @@ func craft_item(bag: int, slot: int) -> void:
 	show_item(bag, slot_a, id_a, count_a, count_a)
 	show_item(bag, slot_b, id_b, count_b, count_b)
 	show_item(bag, slot, product_id, 0, next)
-
-var knuckle: PackedInt32Array = []
-var sword: PackedInt32Array = []
-var pistol: PackedInt32Array = []
-var gun: PackedInt32Array = []
-var heavy: PackedInt32Array = []
-var armor: PackedInt32Array = []
 
 func compatible(id: int) -> PackedInt32Array:
 	if ARMOR < id and id < WEAPON:
@@ -264,15 +262,19 @@ func craft_product(bag: int, slot: int) -> void:
 		var s: int = Def.of_x(Def.BYTE, crafting[next[CRAFT_SLOT]], i)
 		var count: int = Def.of_x(Def.BYTE, HUD.get_item(bag, s), i)
 		if count < min_count: min_count = count
+	var name: StringName = &"ray" if bag == Def.RAY else &"rock"
 	for i in range(0, limit):
 		var s: int = Def.of_x(Def.BYTE, crafting[next[CRAFT_SLOT]], i)
 		var item: Vector2i = bag_slot(HUD.get_item(bag, s))
 		show_item(bag, s, item[ID], item[X], item[X] - min_count)
 		HUD.set_item(bag, s, item[ID] << Def.BYTE | item[X] - min_count)
+		for a in [HUD.game.inventory.get(name).slots[s], HUD.game.priorities.get(name).slots[s]]:
+			a.show()
 	HUD.set_item(bag, slot, min_count << Def.BYTE | product_id)
 	show_item(bag, slot, product_id, 0, min_count)
 	crafting[next[CRAFT_ID]] = 0
 	crafting[next[CRAFT_SLOT]] = 0
+	product_id = 0
 	show_craft(bag)
 
 func add_slot(bag: int, slot: int) -> void:
@@ -295,9 +297,16 @@ func add_slot(bag: int, slot: int) -> void:
 		elif Def.of_x(Def.BYTE, crafting[next[CRAFT_ID]], 3) != 0:
 			crafting[next[CRAFT_ID]] = 0
 			crafting[next[CRAFT_SLOT]] = 0
-			
 		crafting[next[CRAFT_ID]] = crafting[next[CRAFT_ID]] << Def.BYTE | id
 		crafting[next[CRAFT_SLOT]] = crafting[next[CRAFT_SLOT]] << Def.BYTE | slot
+		for i in range(0, len(trade_bags)):
+			if i != bag and trade_bags[i] == bag:
+				trade_bags[i] = 0
+				trade_slots[i] = 0
+		
+		var name: StringName = &"ray" if bag == Def.RAY else &"rock"
+		for s in [HUD.game.inventory.get(name).slots[slot], HUD.game.priorities.get(name).slots[slot]]:
+			s.hide()
 		product_id = 0
 		for material in recipe:
 			if crafting[next[CRAFT_ID]] & material == material:
@@ -313,16 +322,11 @@ func add_slot(bag: int, slot: int) -> void:
 				crafting[cell[CRAFT_ID]] = next[CRAFT_ID]
 				crafting[cell[CRAFT_SLOT]] = next[CRAFT_SLOT]
 				show_craft(bag)
+				HUD.set_item(bag, slot, 0)
+				show_item(bag, slot, next[CRAFT_ID], 1, 0)
 				return
 		# toggle red
-
-var craft_mode: int
-var crafting: PackedInt32Array = [0, 0, 0, 0]
-var trade_slots: PackedByteArray = [0, 0]
-var trade_bags: PackedByteArray = [0, 0]
-# CRAFT
-enum { CRAFT_MODE, MODE_START, MODE_ITEMS, MODE_WEAPON, CRAFT_ID = 0, CRAFT_SLOT, CRAFTING, BAG = 1, NO_SLOT }
-
+		
 func bag_slot(item: int) -> Vector2i:
 	return Vector2i(Def.of_x(Def.BYTE, item, ID), Def.of_x(Def.BYTE, item, X))
 	
@@ -370,6 +374,3 @@ func set_preview(cell: CellDrag) -> CellDrag:
 	cell.image.set_drag_preview(preview)
 	cell.image.texture = null
 	return cell
-
-var title: Array[HBoxContainer] = []
-var size: int
