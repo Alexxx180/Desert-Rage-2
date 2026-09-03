@@ -1,13 +1,12 @@
-[gd_scene load_steps=13 format=3 uid="uid://bsgaxv8107ty"]
+[gd_scene load_steps=12 format=3 uid="uid://bsgaxv8107ty"]
 
 [ext_resource type="PackedScene" uid="uid://dqlgy3l13bibl" path="res://def/hud/game/inventory_items.tscn" id="2_01ovw"]
+[ext_resource type="FontFile" uid="uid://tledodlx6okb" path="res://data/font/LTSuperiorMono-Semibold.otf" id="3_llfcp"]
 [ext_resource type="PackedScene" uid="uid://b3pwlem0vs6ab" path="res://def/hud/game/inventory_party.tscn" id="3_u0g8n"]
-[ext_resource type="FontFile" uid="uid://o0rgn7d13mr3" path="res://data/font/OpenSans-VariableFont_wdth,wght.ttf" id="4_y87lt"]
+[ext_resource type="FontFile" uid="uid://b37js8y80ak1k" path="res://data/font/noto_sans/NotoColorEmoji-Regular.ttf" id="4_inlpd"]
+[ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://data/theme/patterns/template/menu/settings/topic/footer.tres" id="5_a14s5"]
 [ext_resource type="FontFile" uid="uid://b2wbdbnkxcqv1" path="res://data/font/noto_sans/NotoEmoji-VariableFont_wght.ttf" id="5_h4sp4"]
 [ext_resource type="PackedScene" uid="uid://b8hybaq32frfk" path="res://def/hud/game/inventory_title.tscn" id="6_2xh6b"]
-[ext_resource type="FontFile" uid="uid://qxg3lsudod7p" path="res://data/font/Championship.ttf" id="7_f0eb3"]
-[ext_resource type="Texture2D" uid="uid://b2ouvbea4wbsy" path="res://icon/help/ray/look.png" id="8_fh13w"]
-[ext_resource type="Texture2D" uid="uid://duh8yijfoivq6" path="res://icon/help/rock/diminish/2.png" id="10_w4qmt"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7o85y"]
 content_margin_left = 10.0
@@ -15,31 +14,15 @@ content_margin_top = 0.0
 content_margin_bottom = 0.0
 bg_color = Color(0, 0, 0, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e8npb"]
-content_margin_left = 10.0
-content_margin_top = 10.0
-content_margin_right = 10.0
-content_margin_bottom = 10.0
-bg_color = Color(0, 0, 0, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0.4745098, 0.4745098, 0.4745098, 1)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wm2oe"]
+content_margin_bottom = 30.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rq5j8"]
-bg_color = Color(0.25565878, 0.2556588, 0.25565875, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.06469657, 0.06469653, 0.06469646, 1)
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_425pr"]
+content_margin_bottom = 3.0
 
-[sub_resource type="Theme" id="Theme_y87lt"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_imfma"]
+content_margin_left = 18.0
+content_margin_top = 7.0
 
 [node name="scroll" type="ScrollContainer"]
 anchors_preset = 15
@@ -75,114 +58,109 @@ layout_mode = 2
 size_flags_horizontal = 1
 size_flags_vertical = 0
 
-[node name="cards" type="HFlowContainer" parent="margin/stack"]
-layout_mode = 2
-
-[node name="ray" type="RichTextLabel" parent="margin/stack/cards"]
-custom_minimum_size = Vector2(300, 130)
-layout_mode = 2
-size_flags_vertical = 4
-theme_override_colors/default_color = Color(0.3137255, 0.3137255, 0.3137255, 1)
-theme_override_fonts/normal_font = ExtResource("4_y87lt")
-theme_override_fonts/bold_font = ExtResource("5_h4sp4")
-theme_override_fonts/italics_font = ExtResource("7_f0eb3")
-theme_override_font_sizes/normal_font_size = 13
-theme_override_styles/normal = SubResource("StyleBoxFlat_e8npb")
-bbcode_enabled = true
-text = "20 лет - Он / Его - Рей Брайт
-[b]▒[/b]  Огнестрел [b]🗡[/b] Снасти
-
-\"Все деньги мира, машина? - Обесценятся\"
-- Решает вопросики
-[right][i]EVERY.CO[/i][/right]"
-scroll_active = false
-
-[node name="hero" type="PanelContainer" parent="margin/stack/cards/ray"]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -62.0
-offset_right = -13.0
-offset_bottom = 49.0
-grow_horizontal = 0
-size_flags_vertical = 8
-theme_override_styles/panel = SubResource("StyleBoxFlat_rq5j8")
-
-[node name="image" type="TextureRect" parent="margin/stack/cards/ray/hero"]
-custom_minimum_size = Vector2(45, 45)
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme = SubResource("Theme_y87lt")
-texture = ExtResource("8_fh13w")
-expand_mode = 1
-
-[node name="rock" type="RichTextLabel" parent="margin/stack/cards"]
+[node name="bestiary" type="HFlowContainer" parent="margin/stack"]
 visible = false
-custom_minimum_size = Vector2(300, 130)
 layout_mode = 2
-size_flags_vertical = 4
-theme_override_colors/default_color = Color(0.3137255, 0.3137255, 0.3137255, 1)
-theme_override_fonts/normal_font = ExtResource("4_y87lt")
-theme_override_fonts/bold_font = ExtResource("5_h4sp4")
-theme_override_fonts/italics_font = ExtResource("7_f0eb3")
-theme_override_font_sizes/normal_font_size = 13
-theme_override_styles/normal = SubResource("StyleBoxFlat_e8npb")
-bbcode_enabled = true
-text = "20 лет - Он / Его - Рок Тайт
-[b]▒[/b]  Мечи [b]🗡[/b] Метательное
+theme_override_constants/h_separation = 7
+theme_override_constants/v_separation = 7
 
-\"В компании через 100 лет? - Бессмертен.\"
-- Стажер стажировок
-[right][i]EVERY.CO[/i][/right]"
-scroll_active = false
-
-[node name="hero" type="PanelContainer" parent="margin/stack/cards/rock"]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -62.0
-offset_right = -13.0
-offset_bottom = 49.0
-grow_horizontal = 0
-size_flags_vertical = 8
-theme_override_styles/panel = SubResource("StyleBoxFlat_rq5j8")
-
-[node name="image" type="TextureRect" parent="margin/stack/cards/rock/hero"]
-custom_minimum_size = Vector2(45, 45)
+[node name="spider" type="TextureRect" parent="margin/stack/bestiary"]
+process_mode = 4
+custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
 size_flags_horizontal = 0
+
+[node name="number" type="RichTextLabel" parent="margin/stack/bestiary"]
+custom_minimum_size = Vector2(96, 0)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_colors/default_color = Color(0.3854925, 0.38549247, 0.38549247, 1)
+theme_override_constants/paragraph_separation = 0
+theme_override_fonts/normal_font = ExtResource("3_llfcp")
+theme_override_fonts/bold_font = ExtResource("4_inlpd")
+theme_override_font_sizes/normal_font_size = 14
+theme_override_font_sizes/bold_font_size = 14
+bbcode_enabled = true
+text = "[b]🕷[/b] Тип ▰▰-
+[b]🩸[/b] 65
+[b]⚔[/b] 215 ▰--
+[b]🛡[/b] 234 ▰▰--
+[b]🔥[/b] 215 ▰-
+[b]🫧[/b] 233 ▰▰-
+"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="effect" type="Label" parent="margin/stack/bestiary"]
+custom_minimum_size = Vector2(230, 0)
+layout_mode = 2
 size_flags_vertical = 0
-theme = SubResource("Theme_y87lt")
-texture = ExtResource("10_w4qmt")
-expand_mode = 1
+theme = ExtResource("5_a14s5")
+theme_override_constants/line_spacing = -7
+theme_override_constants/paragraph_spacing = -2
+theme_override_font_sizes/font_size = 17
+theme_override_styles/normal = SubResource("StyleBoxEmpty_wm2oe")
+text = "Паук - 33cm
+
+Крайне полезный противник для приключений."
+autowrap_mode = 2
+
+[node name="weak" type="Label" parent="margin/stack/bestiary/effect"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -22.0
+offset_right = 61.0
+grow_vertical = 0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme = ExtResource("5_a14s5")
+theme_override_constants/line_spacing = -7
+theme_override_fonts/font = ExtResource("5_h4sp4")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxEmpty_425pr")
+text = "🍷 🛡"
+
+[node name="skill" type="Label" parent="margin/stack/bestiary/effect/weak"]
+layout_mode = 1
+offset_right = 23.0
+offset_bottom = 29.0
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("4_inlpd")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxEmpty_imfma")
+text = "🔥 🪨"
 
 [node name="title" parent="margin/stack" instance=ExtResource("6_2xh6b")]
 layout_mode = 2
 text = "[i][color=b5b5b5]Инвентарь[/color][/i]
- Здесь находятся ваши собранные предметы с сундуков, включая снаряжение. Вы можете нажимать на \"[b][i]🎒[/i][/b]\" чтобы открыть инвентарь другого героя.
+ Здесь находятся ваши собранные предметы с сундуков, такие как ключи, расходники, снаряжение, оснастка. Вы можете нажимать на \"[b][i]🎒[/i][/b]\" чтобы открыть инвентарь другого героя.
 
 [b][i]✋[/i][/b] Чтобы переместить предмет выберите его и ячейку, куда хотите положить. Перетащите предмет восполняющий Ауру / Ресурс - АР на колбы, чтобы использовать его. Узнать больше о предмете можно в области осмотра - перетащив предмет в продолговатую тёмную ячейку в конце инвентаря. Для старта операций с предметами нажмите на область осмотра, затем на предмет.
 
 [table=3]
-[cell][left][b][i]♨[/i][/b] Готовка. Нажмите на один, затем на другой расходник. Нажмите на появившейся слот, затем на пустой слот, чтобы создать новый предмет.[/left][/cell]
-[cell expand][left][b][i]⚔️[/i][/b] Скрещивание. Нажмите на оружие. Чтобы скрестить нажмите на другое оружие. Для отмены скрещивания нажмите на появившейся слот слева.[/left][/cell][cell][left][b][i]🪛[/i][/b] Оснащение. Нажмите на экипировку затем нажмите на  обвес. Чтобы снять - нажмите на пустое место.[/left][/cell]
+[cell][left][b][i]♨[/i][/b] Готовка. Нажмите на один, затем на другой расходник. Если увидите новый предмет в области просмотра - нажмите на пустой слот чтобы создать его.[/left][/cell]
+[cell expand][left][b][i]⚔️[/i][/b] Парное оружие. Расположите два оружия на слотах находящихся близко друг к другу на быстрой панели. Если это поддерживается - герой будет использовать оба оружия.[/left][/cell]
+[cell][left][b][i]🪛[/i][/b] Оснащение. Нажмите на  на экипировку затем нажмите на  обвес. Чтобы снять - нажмите на пустое место.[/left][/cell]
 [cell][/cell][cell] [/cell][cell][/cell]
 [cell expand][left][b][i]🔼[/i][/b] Сортировка по возрастанию - полное восстановление АР с экономией предметов[/left][/cell][cell expand][left][b][i]🔽[/i][/b] Сортировка по убыванию - полное восстановление АР без экономии предметов[/left][/cell][cell][left][b][i]🔀[/i][/b] Сортировка в случайном порядке - восполнение АР первым подходящим предметом[/left][/cell]
 [/table]
 
+· Вы можете перетаскивать предметы на область осмотра, чтобы оснастить или начать готовить. Для отмены - нажмите на область просмотра.
+
 · Порядок сортировки определяют предметы, лежащие слева-направо, восполняющие число АР. При нажатии на колбы, [b][i][color=91fe90FF]🫙[/color][/i][/b](А) [b][i][color=7aa1ffFF]🫙[/color][/i][/b](Р) происходит быстрое восстановление, которое использует инвентарь выбранного персонажа. Вы также можете использовать %s и %s для быстрого доступа в ходе игры. Поведение определяется типом сортировки.
 
-· Вы также можете перетаскивать предметы на область осмотра с выбранной экипировкой, чтобы оснастить или скрестить, а также расходники, чтобы готовить. Ниже перечислены типы предметов, занимающие целый слот инвентаря.
+· В бестиарии находятся сведения о противниках, людях и исследованиях. Наведите курсор на противника чтобы получить сводку о нём.
 
-· Дополнительная информация в левой панели \"Экипировка\":
+· Снаряжение - предмет, который надевается через спец. ячейки и имеет доп. эффект на персонажа, например повышение его мощи или живучести. Каждый герой может носить любой вид снаряжения, но использовать на себе далеко не каждый. Учитывайте это при построении команды. Виды снаряжения:
 [table=2]
 [cell][b][i]▒[/i][/b] Панель быстрого доступа - основное оружие, чтобы взять его, нужно выбрать слот, на котором оно лежит.[/cell]
 [cell][b][i]🗡[/i][/b] Оружие - располагается вспомогательное, редко сменяемое вооружение.[/cell]
-[cell][b][i]🛡[/i][/b] Реликвия - здесь вы можете положить особый вид снаряжения, имеющий определённый эффект в бою.[/cell]
+[cell][b][i]🛡[/i][/b] Реликвия - особый вид снаряжения, имеющий определённый эффект.[/cell]
 [cell][b][i]🧥[/i][/b] Броня - основной вид защитной экипировки, по типу курток, нагрудников.[/cell]
-[cell][b][i]👖[/i][/b] Поножи - защитная экипировка, по типу штанов, понож, пояса.[/cell]
-[cell][b][i]🥾[/i][/b] Сапоги - защитная экипировка, по типу ботинок, сапог, сандалей.[/cell]
+[cell][b][i]👖[/i][/b] Поножи - экипировка по типу штанов, понож, пояса.[/cell]
+[cell][b][i]🥾[/i][/b] Сапоги - экипировка по типу ботинок, сапог, сандалей.[/cell]
 [/table]"

@@ -1,14 +1,11 @@
-[gd_scene load_steps=22 format=3 uid="uid://7o2xe4bosovy"]
+[gd_scene load_steps=15 format=3 uid="uid://7o2xe4bosovy"]
 
-[ext_resource type="FontFile" uid="uid://b37js8y80ak1k" path="res://data/font/noto_sans/NotoColorEmoji-Regular.ttf" id="3_cqb2w"]
 [ext_resource type="PackedScene" uid="uid://b8wsdeuhaqjym" path="res://def/hud/game/stats_stat.tscn" id="3_pf2c5"]
 [ext_resource type="Texture2D" uid="uid://e4utxikoeub7" path="res://icon/help/stat_defense.svg" id="4_08ayy"]
 [ext_resource type="Texture2D" uid="uid://d37dqji5ybnbg" path="res://icon/help/stat_influence.svg" id="5_8w622"]
 [ext_resource type="Texture2D" uid="uid://c6ecpv75raqi8" path="res://icon/help/stat_reaction.svg" id="6_etdq7"]
 [ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://data/theme/patterns/template/menu/settings/topic/footer.tres" id="7_hejl4"]
-[ext_resource type="FontFile" uid="uid://tledodlx6okb" path="res://data/font/LTSuperiorMono-Semibold.otf" id="9_rw15s"]
 [ext_resource type="FontFile" uid="uid://o0rgn7d13mr3" path="res://data/font/OpenSans-VariableFont_wdth,wght.ttf" id="10_10kjk"]
-[ext_resource type="FontFile" uid="uid://b2wbdbnkxcqv1" path="res://data/font/noto_sans/NotoEmoji-VariableFont_wght.ttf" id="11_q0nrq"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qw6gd"]
 bg_color = Color(0.6, 0.6, 0.6, 0.498039)
@@ -33,24 +30,7 @@ content_margin_right = 0.0
 content_margin_bottom = 10.0
 bg_color = Color(0, 0, 0, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rw15s"]
-content_margin_left = 9.0
-content_margin_top = 1.0
-content_margin_right = 9.0
-content_margin_bottom = 3.0
-bg_color = Color(0.0196078, 0.0196078, 0.0392157, 0)
-
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kj83q"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_i0ff0"]
-content_margin_bottom = 30.0
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7x86q"]
-content_margin_bottom = 3.0
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ryb87"]
-content_margin_left = 18.0
-content_margin_top = 7.0
 
 [sub_resource type="Gradient" id="Gradient_hf8md"]
 colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0)
@@ -87,13 +67,12 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 4
 
-[node name="equip" type="Button" parent="margin/stack"]
+[node name="equip" type="Label" parent="margin/stack"]
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_fonts/font = ExtResource("10_10kjk")
 theme_override_font_sizes/font_size = 20
-theme_override_styles/normal = SubResource("StyleBoxFlat_rw15s")
-text = "🗡👏 Снаряжение"
+text = "Снаряжение"
 
 [node name="power" parent="margin/stack" instance=ExtResource("3_pf2c5")]
 layout_mode = 2
@@ -127,91 +106,12 @@ theme = ExtResource("7_hejl4")
 theme_override_font_sizes/italics_font_size = 28
 theme_override_styles/normal = SubResource("StyleBoxEmpty_kj83q")
 bbcode_enabled = true
-text = "[i]Экипировка[/i]
-Здесь находится ваше снаряжение,  показатели, бестиарий и диалоги. 
+text = "Здесь находится ваше снаряжение,  показатели и диалоги.
 · Показатель - число, определяющее характеристики в поединке. Например живучесть определяет количество ауры, реакция количество ресурса и т.п.
-· Снаряжение - предмет, который может быть надет на героя через ячейки в инвентаре ниже и имеет дополнительный эффект на персонажа, например повышение его мощи или живучести. Нажав на заголовок, можно посмотреть как оно влияет на показатели.
-· Каждый герой может носить любой вид снаряжения, но использовать на себе далеко не каждый. Учитывайте это при построении команды.
-· В бестиарии находятся сведения о противниках, людях и исследованиях. Наведите курсор на противника чтобы получить сводку о нём.
-· В диалогах находятся сведения о ваших деловых переговорах.
+· В диалогах ниже находятся сведения о ваших деловых переговорах.
 "
 fit_content = true
 autowrap_mode = 2
-
-[node name="bestiary" type="HFlowContainer" parent="margin/stack"]
-layout_mode = 2
-theme_override_constants/h_separation = 7
-theme_override_constants/v_separation = 7
-
-[node name="spider" type="TextureRect" parent="margin/stack/bestiary"]
-process_mode = 4
-custom_minimum_size = Vector2(120, 120)
-layout_mode = 2
-size_flags_horizontal = 0
-
-[node name="number" type="RichTextLabel" parent="margin/stack/bestiary"]
-custom_minimum_size = Vector2(96, 0)
-layout_mode = 2
-size_flags_vertical = 4
-theme_override_colors/default_color = Color(0.3854925, 0.38549247, 0.38549247, 1)
-theme_override_constants/paragraph_separation = 0
-theme_override_fonts/normal_font = ExtResource("9_rw15s")
-theme_override_fonts/bold_font = ExtResource("3_cqb2w")
-theme_override_font_sizes/normal_font_size = 14
-theme_override_font_sizes/bold_font_size = 14
-bbcode_enabled = true
-text = "[b]🕷[/b] Тип ▰▰-
-[b]🩸[/b] 65
-[b]⚔[/b] 215 ▰--
-[b]🛡[/b] 234 ▰▰--
-[b]🔥[/b] 215 ▰-
-[b]🫧[/b] 233 ▰▰-
-"
-fit_content = true
-scroll_active = false
-autowrap_mode = 0
-
-[node name="effect" type="Label" parent="margin/stack/bestiary"]
-custom_minimum_size = Vector2(230, 0)
-layout_mode = 2
-size_flags_vertical = 0
-theme = ExtResource("7_hejl4")
-theme_override_constants/line_spacing = -7
-theme_override_constants/paragraph_spacing = -2
-theme_override_font_sizes/font_size = 17
-theme_override_styles/normal = SubResource("StyleBoxEmpty_i0ff0")
-text = "Паук - 33cm
-
-Крайне полезный противник для приключений."
-autowrap_mode = 2
-
-[node name="weak" type="Label" parent="margin/stack/bestiary/effect"]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -22.0
-offset_right = 61.0
-grow_vertical = 0
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme = ExtResource("7_hejl4")
-theme_override_constants/line_spacing = -7
-theme_override_fonts/font = ExtResource("11_q0nrq")
-theme_override_font_sizes/font_size = 16
-theme_override_styles/normal = SubResource("StyleBoxEmpty_7x86q")
-text = "🍷 🛡"
-
-[node name="skill" type="Label" parent="margin/stack/bestiary/effect/weak"]
-layout_mode = 1
-offset_right = 23.0
-offset_bottom = 29.0
-size_flags_horizontal = 8
-size_flags_vertical = 0
-theme_override_fonts/font = ExtResource("3_cqb2w")
-theme_override_font_sizes/font_size = 16
-theme_override_styles/normal = SubResource("StyleBoxEmpty_ryb87")
-text = "🔥 🪨"
 
 [node name="chats" type="VBoxContainer" parent="margin/stack"]
 visible = false
