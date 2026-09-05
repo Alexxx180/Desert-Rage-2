@@ -20,6 +20,12 @@ func check(type: int) -> int: return session[type]
 func unlock(type: int, slot: int) -> void:
 	session[type] = Def.to1(session[type], slot)
 
+func get_part(type: int, slot: int) -> int:
+	return Def.of_x(Def.BYTE, session[type], slot)
+
+func set_part(type: int, slot: int, value: int) -> void:
+	session[type] = Def.to_x(Def.BYTE, session[type], slot, value)
+
 func get_stat(type: int, slot: int) -> int:
 	return Def.of_x(Def.SHORT, session[type], slot)
 	

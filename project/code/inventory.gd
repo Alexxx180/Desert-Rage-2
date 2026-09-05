@@ -349,7 +349,7 @@ func reset_texture(image: TextureRect) -> void:
 		image.texture = holder
 		holder = null
 
-func set_preview(cell: Control) -> Control:
+func set_preview(cell: CellDrag) -> CellDrag:
 	_image = cell.image
 	holder = cell.image.texture
 	var preview: TextureRect = TextureRect.new()
