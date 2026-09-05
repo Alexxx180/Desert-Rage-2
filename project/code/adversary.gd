@@ -163,26 +163,26 @@ func affect(hero: int, a: int, r: int) -> void:
 
 enum { TARGET, ZONE_RADIUS, TARGET_RADIUS, ZONE_ALL,
 	DISTANCE = 1024, RADIUS_DISTANCE = 4096 }
-enum { VOID, NORMAL, FIRE, WATER, SPARK }
+enum { VOID, LIGHT, NORMAL, FIRE, WATER, SPARK }
 
 var dir: PackedVector2Array = []
 
-func damage_zone(hero: int, type: int, element: int) -> void:
+func damage_zone(hero: int, type: int, element: int, portion: float) -> void:
 	var start: int = Def.PARTY if hero < Def.PARTY else 0
 	match type:
-		ZONE_ALL: for i in range(start, entities): if hero != i: damage(hero, i, element)
+		ZONE_ALL: for i in range(start, entities): if hero != i: damage(hero, i, element, portion)
 		TARGET:
 			for i in range(start, entities):
 				if hero != i and entity[hero].distance_squared_to(entity[i].position) < DISTANCE:
-					damage(hero, i, element)
+					damage(hero, i, element, portion)
 		TARGET_RADIUS:
 			for i in range(start, entities):
 				if hero != i and (entity[hero].position + 64 * dir[hero]).distance_squared_to(entity[i].position) < RADIUS_DISTANCE:
-					damage(hero, i, element)
+					damage(hero, i, element, portion)
 		ZONE_RADIUS:
 			for i in range(start, entities):
 				if hero != i and entity[hero].position.distance_squared_to(entity[i].position) < RADIUS_DISTANCE:
-					damage(hero, i, element)
+					damage(hero, i, element, portion)
 
 enum { LOW = 128, MID1 = 172, MID = 196, MID2 = 214, HIGH = 256 }
 
@@ -209,13 +209,16 @@ func damage_throw(hero: int, box: int, direction: Vector2, element: int) -> void
 			elif immun[i] == element:
 				affect(i, min((contr << 1) - fight * portion, -10 * portion), 0)
 
-func damage(hero: int, enemy: int, element: int) -> void:
+func damage(hero: int, enemy: int, element: int, portion: float) -> void:
 	var fight: int = impac[hero]
 	var contr: int = react[enemy]
 	if element == NORMAL:
 		fight = power[hero]
 		contr = shell[enemy]
-	if weakn[enemy] == element:
+	fight = int(fight * portion)
+	if element == LIGHT:
+		affect(enemy, contr >> 1 + fight, 0)
+	elif weakn[enemy] == element:
 		affect(enemy, min(contr >> 1 - fight, -1), 0)
 	elif immun[enemy] == element:
 		affect(enemy, min(contr << 1 - fight, -1), 0)
