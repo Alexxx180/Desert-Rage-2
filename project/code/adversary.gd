@@ -39,6 +39,7 @@ const shell: PackedByteArray = [  0,   1,  5]
 const power: PackedByteArray = [  1,   2,  5]
 const impac: PackedByteArray = [  2,   1,  5]
 const react: PackedByteArray = [  2,   1,  5]
+const exper: PackedByteArray = [  0,   0,  1]
 const weakn: PackedByteArray = [NORMAL, NORMAL, NORMAL]
 const immun: PackedByteArray = [NORMAL, NORMAL, NORMAL]
 
@@ -167,22 +168,34 @@ enum { VOID, LIGHT, NORMAL, FIRE, WATER, SPARK }
 
 var dir: PackedVector2Array = []
 
-func damage_zone(hero: int, type: int, element: int, portion: float) -> void:
-	var start: int = Def.PARTY if hero < Def.PARTY else 0
+func damage_zone(hero: int, type: int, element: int, portion: float, combo: int, output: int = 0) -> void:
 	match type:
-		ZONE_ALL: for i in range(start, entities): if hero != i: damage(hero, i, element, portion)
+		ZONE_ALL:
+			var start: int = Def.PARTY if hero < Def.PARTY else 0
+			var xp: int = 0
+			for i in range(start, entities):
+				if hero != i:
+					damage(hero, i, element, portion)
+					xp += exper[i]
+			if start == Def.PARTY and xp != 0:
+				score_up(xp * combo)
 		TARGET:
-			for i in range(start, entities):
-				if hero != i and entity[hero].distance_squared_to(entity[i].position) < DISTANCE:
-					damage(hero, i, element, portion)
+			damage_output(Def.T4 * dir[hero], DISTANCE, hero, element, combo, portion, output)
 		TARGET_RADIUS:
-			for i in range(start, entities):
-				if hero != i and (entity[hero].position + 64 * dir[hero]).distance_squared_to(entity[i].position) < RADIUS_DISTANCE:
-					damage(hero, i, element, portion)
+			damage_output(Def.T8 * dir[hero], RADIUS_DISTANCE, hero, element, combo, portion, output)
 		ZONE_RADIUS:
-			for i in range(start, entities):
-				if hero != i and entity[hero].position.distance_squared_to(entity[i].position) < RADIUS_DISTANCE:
-					damage(hero, i, element, portion)
+			damage_output(Vector2.ZERO, RADIUS_DISTANCE, hero, element, combo, portion, output)
+	
+func damage_output(direction: Vector2, distance: int, hero: int, element: int, combo: int, portion: float, output: float) -> void:
+	var start: int = Def.PARTY if hero < Def.PARTY else 0
+	var xp: int = 0
+	for i in range(start, entities):
+		if hero != i and (entity[hero].position + direction).distance_squared_to(entity[i].position) < distance:
+			damage(hero, i, element, portion)
+			entity[i].velocity += dir[hero] * Def.T8 * output
+			xp += exper[i]
+	if start == Def.PARTY and xp != 0:
+		score_up(xp * combo)
 
 enum { LOW = 128, MID1 = 172, MID = 196, MID2 = 214, HIGH = 256 }
 
