@@ -4,15 +4,20 @@ enum { STICKS, OPUNTIA, TUMBLEWEED, TAMARISK, YUKKA, JAR, ANTIDOTE, ANTICOUGH, G
 	WATER, TEA, ETHER, L_PANTS, I_PANTS, L_ARMOR, I_ARMOR, L_BOOTS, I_BOOTS,
 	SHIELD, CORETOOTH, KNUCKLES, SAW_STRING, W_RAPIER, T_RAPIER, SHOE, R_SCHO45,
 	R_ENLIGHT, SHOTGUN, BOOMERANG, BUTTER, F_BUTTER, CLEANER, SHARPEN, AMMO,
-	BLADE, PUMP, AIM, MISSING_NO, SLOTS = 25, LIMIT = 30, BAG_START = 0, CRAFT = 7, USE = 10, LIMIT_CRAFT = 2,
+	BLADE, PUMP, AIM, MISSING_NO,
+	
+	SLOTS = 25, LIMIT = 30, BAG_START = 0, CRAFT = 7, USE = 10, LIMIT_CRAFT = 2,
 	ARMOR = 20, WEAPON = 28, KIT = 36, BAG_END = 50, AURA = 0, RESOURCE = 1, AR = 2, CROSS = 2, BOTH = 3,
 	PREVIEW_SIZE = 72, ITEMS = 0, SLOT = 1, UNIT = 1, EMPTY = 0, MAIN = 0, CRAFTS = 25, SPACE = 26,
 	ASC = 0, DESC = 1, RANDOM = 2, NA = 0, SIZE = 2, MAX = 25, SECOND = 1, MIN = 2,
 	UP1 = 5, UP2 = 6, UP3 = 7, UP4 = 8, ID = 0, X = 1, B = 8,
 	SHOTGUN_COST = 0, BOUNDARY = 1, FAST_PANEL = 10,
-	ITEM_OR_SLOT = 0, SAME_ITEM = 1, EMPTY_SLOT = 2 }
-enum { R = 0, K = 1, RK = 3 }
-enum { ARM, KNUCKLE, KNIFE, SWORD, RAPIER, GUN, RIFLE, LAUNCHER, DRONE, BOW, CROSSBOW, STAFF }
+	ITEM_OR_SLOT = 0, SAME_ITEM = 1, EMPTY_SLOT = 2,
+	
+	WEAPON_SLOT = 20, ARTIFACT_SLOT, ARMOR_SLOT, LEG_SLOT, FOOT_SLOT,
+	ARM = 0, KNUCKLE, KNIFE, SWORD, RAPIER, GUN, RIFLE, LAUNCHER, DRONE, BOW, CROSSBOW, STAFF,
+	
+	R = 0, K = 1, RK = 3 }
 
 const aura: PackedByteArray = [10, 70,  0]
 const resc: PackedByteArray = [10,  0, 50]
@@ -83,18 +88,18 @@ func open_door(id: int) -> void:
 		return true
 	return false
 
-func use_boomerang(): pass
+enum { NO_ITEM, ITEM_USED, ITEM_THROW, WEAPON_THROW }
 
-func produce_item(bag: int, slot: int, next: int) -> void:
+func produce_item(bag: int, slot: int) -> int:
 	var item: int = HUD.get_item(HUD.hero, slot)
-	if item == 0: return
+	if item == 0: return NO_ITEM
 	
 	var id: int = Def.of_x(Def.BYTE, item, ID)
 	var used: bool = false
 	if WEAPON < id and id < KIT:
 		match id:
-			T_RAPIER, W_RAPIER: use_boomerang()
-			T_RAPIER, W_RAPIER: use_boomerang()
+			T_RAPIER, W_RAPIER: return WEAPON_THROW
+			T_RAPIER, W_RAPIER: return WEAPON_THROW
 			GOLD_KEY, SECRET_KEY: used = open_door(id)
 	elif USE < id and id < ARMOR:
 		var product_id: int = 0
@@ -115,6 +120,7 @@ func produce_item(bag: int, slot: int, next: int) -> void:
 		item = 0 if count == 0 else id << Def.BYTE | count
 		HUD.set_item(bag, slot, item)
 		show_item(bag, slot, id, count, count)
+	return ITEM_USED
 
 func update_ui(logic: Node, preview: Node, slots: Array) -> void:
 	var ui: Node = logic.trade.ui

@@ -168,7 +168,7 @@ enum { VOID, LIGHT, NORMAL, FIRE, WATER, SPARK }
 
 var dir: PackedVector2Array = []
 
-func damage_zone(hero: int, type: int, element: int, portion: float, combo: int, output: int = 0) -> void:
+func damage_zone(type: int, hero: int, element: int, combo: int, portion: float, output: float = 0) -> void:
 	match type:
 		ZONE_ALL:
 			var start: int = Def.PARTY if hero < Def.PARTY else 0

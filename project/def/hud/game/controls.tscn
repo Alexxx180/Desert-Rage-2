@@ -1,18 +1,10 @@
-[gd_scene load_steps=16 format=3 uid="uid://trd7xarcxhy1"]
+[gd_scene load_steps=14 format=3 uid="uid://trd7xarcxhy1"]
 
 [ext_resource type="Texture2D" uid="uid://frgf7wr5b2md" path="res://icon/help/ray/anger/1.png" id="3_2rr8j"]
 [ext_resource type="PackedScene" uid="uid://cspf6sh5v7o4v" path="res://def/hud/game/priorities_card.tscn" id="3_mriv0"]
 [ext_resource type="FontFile" uid="uid://b37js8y80ak1k" path="res://data/font/noto_sans/NotoColorEmoji-Regular.ttf" id="4_ic24g"]
 [ext_resource type="FontFile" uid="uid://o0rgn7d13mr3" path="res://data/font/OpenSans-VariableFont_wdth,wght.ttf" id="4_llv8r"]
 [ext_resource type="FontFile" uid="uid://cjafv81djmqe8" path="res://data/font/Touchscreen-Regular.ttf" id="5_nxuw1"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ch3ha"]
-bg_color = Color(0, 0, 0, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.064419165, 0.059458636, 0.040298104, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bjbyt"]
 content_margin_left = 10.0
@@ -21,15 +13,13 @@ content_margin_right = 10.0
 content_margin_bottom = 5.0
 bg_color = Color(0, 0, 0, 0.78431374)
 
-[sub_resource type="Gradient" id="Gradient_jew5v"]
-offsets = PackedFloat32Array(0, 0.61255413, 1)
-colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 0.03529412, 0, 0, 0, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_tnqry"]
-gradient = SubResource("Gradient_jew5v")
-fill_from = Vector2(0.5, 0)
-fill_to = Vector2(0.5, 0.7)
-metadata/_snap_enabled = true
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ch3ha"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.064419165, 0.059458636, 0.040298104, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nxuw1"]
 content_margin_left = 10.0
@@ -67,20 +57,34 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="dialog" type="VBoxContainer" parent="."]
+[node name="dialog" type="HFlowContainer" parent="."]
 layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme_override_constants/separation = 0
 
-[node name="talk" type="Panel" parent="dialog"]
-custom_minimum_size = Vector2(60, 60)
+[node name="text" type="RichTextLabel" parent="dialog"]
+custom_minimum_size = Vector2(260, 200)
 layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_bjbyt")
+text = "				Входящая
+				передача
+				
+Ray: HEY, This is it!
+I don't  know
+Did: What are you talking bout man?
+Rock: Hey, thats' real good, I think this can help us
+"
+
+[node name="talk" type="Panel" parent="dialog/text"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 1
+offset_right = 60.0
+offset_bottom = 60.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_ch3ha")
 
-[node name="image" type="TextureRect" parent="dialog/talk"]
+[node name="image" type="TextureRect" parent="dialog/text/talk"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -95,27 +99,14 @@ grow_vertical = 2
 texture = ExtResource("3_2rr8j")
 expand_mode = 1
 
-[node name="text" type="RichTextLabel" parent="dialog"]
-custom_minimum_size = Vector2(260, 140)
-layout_mode = 2
-size_flags_horizontal = 2
-size_flags_vertical = 4
-theme_override_styles/normal = SubResource("StyleBoxFlat_bjbyt")
-text = "Ray: HEY, This is it!
-I don't  know
-Did: What are you talking bout man?
-Rock: Hey, thats' real good, I think this can help us
-"
-
-[node name="log" type="TextureRect" parent="."]
+[node name="log" type="Control" parent="dialog"]
 clip_children = 2
 custom_minimum_size = Vector2(260, 200)
 layout_mode = 2
-size_flags_horizontal = 8
+size_flags_horizontal = 10
 size_flags_vertical = 2
-texture = SubResource("GradientTexture2D_tnqry")
 
-[node name="text" type="RichTextLabel" parent="log"]
+[node name="text" type="RichTextLabel" parent="dialog/log"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -134,9 +125,9 @@ text = "Новый уровень!
 Новые возможности!"
 vertical_alignment = 2
 
-[node name="motion" parent="." instance=ExtResource("3_mriv0")]
+[node name="motion" parent="dialog/log" instance=ExtResource("3_mriv0")]
 visible = false
-layout_mode = 2
+layout_mode = 0
 size_flags_horizontal = 8
 size_flags_vertical = 2
 
