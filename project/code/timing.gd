@@ -91,7 +91,6 @@ func input(_event: InputEvent) -> void: # return #TODO FIXME disable after HUD t
 	if HUD.level == null:
 		menu_interaction()
 		return
-	
 	HUD.interact.movement(_hold(&"act1"))
 	if _hold(&"group"):
 		read_mode = false

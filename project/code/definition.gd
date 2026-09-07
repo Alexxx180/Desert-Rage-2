@@ -196,6 +196,12 @@ static func bytes_to_int(fields: PackedByteArray, mask: int) -> int:
 	var value: int = 0 ; for i in range(0, len(fields)): value |= fields[i] << (i * mask)
 	return value
 
+static func byte(item: int, slot: int) -> int:
+	return of_x(Def.BYTE, item, slot)
+
+static func short(item: int) -> Vector2i:
+	return Vector2i(byte(item, 0), byte(item, 1))
+
 """
 static func iterate_set_bits(mask: int) -> int: # Handle negative integers safely if treating as an unsigned bitmask
 	while mask != 0:

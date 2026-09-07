@@ -29,7 +29,7 @@ var last_color: Color
 enum { RAY, ROCK, EYE_SEEKER }
 enum STAT { POWER = 0, INFLUENCE = 1, VITALITY = 2, REACTION = 3, HP = 4, AP = 5, MAX = 6 }
 enum PRIORITIES { PURSUIT, SELF_CONTROL, TENACITY }
-enum { BURN, POISON }
+enum { BURN, POISON, COUGH }
 
 const color: PackedFloat32Array = [1.0, 0.8, 0.4, 0.0]
 const PRIORITY: PackedByteArray = [3, 2, 1, 1,  1, 3, 1, 2,  1, 1, 3, 2]
