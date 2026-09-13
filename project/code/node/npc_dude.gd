@@ -8,7 +8,7 @@ const TEXT: PackedStringArray = ["Это мои чуваки!", "Это сред
 
 func _ready() -> void: no = no * 2 + int(Time.get_date_dict_from_system()["weekday"] == 3)
 
-func idle() -> void: HUD.menu.hint.hide()
+func idle() -> void: HUD.hint.hide()
 
 func act(hero: CharacterBody2D) -> void:
 	HUD.menu.hint.text = TEXT[no]

@@ -8,57 +8,57 @@ var tile: PackedInt32Array = [0, 0, 0, 0, 0]
 
 func atlas(next: int = -1) -> TileDecorator:
 	if next == -1:
-		tile[Def.ATLAS] = Def.join8(get_cell_atlas_coords(Def.map(tile[Def.COORDS])))
+		tile[WorldInteraction.ATLAS] = Def.join8(get_cell_atlas_coords(Def.map(tile[WorldInteraction.COORDS])))
 	else:
-		tile[Def.ATLAS] = next
+		tile[WorldInteraction.ATLAS] = next
 	return self
 
 func id(next: int = -1) -> TileDecorator:
-	tile[Def.ID] = get_cell_source_id(Def.map(tile[Def.COORDS])) if next == -1 else next
+	tile[WorldInteraction.ID] = get_cell_source_id(Def.map(tile[WorldInteraction.COORDS])) if next == -1 else next
 	return self
 
 func type(next: int = -1) -> TileDecorator:
 	if next == -1:
-		var alt_id: int = get_cell_alternative_tile(Def.map(tile[Def.COORDS])) - 1
-		tile[Def.TYPE] = alt_id >> 2
-		tile[Def.ALT] = alt_id & 3
+		var alt_id: int = get_cell_alternative_tile(Def.map(tile[WorldInteraction.COORDS])) - 1
+		tile[WorldInteraction.TYPE] = alt_id >> 2
+		tile[WorldInteraction.ALT] = alt_id & 3
 	else:
-		tile[Def.TYPE] = next
+		tile[WorldInteraction.TYPE] = next
 	return self
 
 func alt(next: int) -> TileDecorator:
-	tile[Def.ALT] = next
+	tile[WorldInteraction.ALT] = next
 	return self
 
 func pos(p: Vector2) -> TileDecorator:
-	tile[Def.COORDS] = Def.join(local_to_map(p))
+	tile[WorldInteraction.COORDS] = Def.join(local_to_map(p))
 	return self
 
 func coords(map_coords: int) -> TileDecorator:
-	tile[Def.COORDS] = map_coords
+	tile[WorldInteraction.COORDS] = map_coords
 	return self
 
 func layer_name() -> String:
-	return tile_set.get_source(tile[Def.ID]).resource_name
+	return tile_set.get_source(tile[WorldInteraction.ID]).resource_name
 
 func busy() -> Array[Vector2i]:
-	return get_used_cells_by_id(tile[Def.ID], Def.map8(tile[Def.ATLAS]))
+	return get_used_cells_by_id(tile[WorldInteraction.ID], Def.map8(tile[WorldInteraction.ATLAS]))
 
 func paint() -> TileDecorator:
-	set_cell(Def.map(tile[Def.COORDS]), tile[Def.ID], Def.map8(tile[Def.ATLAS]))
+	set_cell(Def.map(tile[WorldInteraction.COORDS]), tile[WorldInteraction.ID], Def.map8(tile[WorldInteraction.ATLAS]))
 	return self
 
 func paint_alt() -> TileDecorator:
-	set_cell(Def.map(tile[Def.COORDS]), tile[Def.ID], Def.map8(tile[Def.ATLAS]), ((tile[Def.TYPE] << 2) | tile[Def.ALT]) + 1)
+	set_cell(Def.map(tile[WorldInteraction.COORDS]), tile[WorldInteraction.ID], Def.map8(tile[WorldInteraction.ATLAS]), ((tile[WorldInteraction.TYPE] << 2) | tile[WorldInteraction.ALT]) + 1)
 	return self
 
 func erase() -> TileDecorator:
-	erase_cell(Def.map(tile[Def.COORDS]))
+	erase_cell(Def.map(tile[WorldInteraction.COORDS]))
 	return self
 
 func position() -> Vector2:
-	return map_to_local(Def.map(tile[Def.COORDS]))
+	return map_to_local(Def.map(tile[WorldInteraction.COORDS]))
 
 func extract(no: int) -> int:
-	var at: TileData = get_cell_tile_data(Def.map(tile[Def.COORDS]))
+	var at: TileData = get_cell_tile_data(Def.map(tile[WorldInteraction.COORDS]))
 	return 0 if at == null else at.get_custom_data(data[no])
