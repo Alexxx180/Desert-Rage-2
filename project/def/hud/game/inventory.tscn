@@ -1,28 +1,64 @@
-[gd_scene load_steps=12 format=3 uid="uid://bsgaxv8107ty"]
+[gd_scene load_steps=22 format=3 uid="uid://bsgaxv8107ty"]
 
 [ext_resource type="PackedScene" uid="uid://dqlgy3l13bibl" path="res://def/hud/game/inventory_items.tscn" id="2_01ovw"]
+[ext_resource type="FontFile" uid="uid://dmctrlrnfxaie" path="res://data/font/Roboto-Regular-Emoji.ttf" id="3_a14s5"]
 [ext_resource type="FontFile" uid="uid://tledodlx6okb" path="res://data/font/LTSuperiorMono-Semibold.otf" id="3_llfcp"]
 [ext_resource type="PackedScene" uid="uid://b3pwlem0vs6ab" path="res://def/hud/game/inventory_party.tscn" id="3_u0g8n"]
-[ext_resource type="FontFile" uid="uid://b37js8y80ak1k" path="res://data/font/noto_sans/NotoColorEmoji-Regular.ttf" id="4_inlpd"]
+[ext_resource type="StyleBox" uid="uid://evyfrkamah1" path="res://data/theme/style/items/chests/hover.tres" id="4_a14s5"]
 [ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://data/theme/patterns/template/menu/settings/topic/footer.tres" id="5_a14s5"]
 [ext_resource type="FontFile" uid="uid://b2wbdbnkxcqv1" path="res://data/font/noto_sans/NotoEmoji-VariableFont_wght.ttf" id="5_h4sp4"]
+[ext_resource type="Texture2D" uid="uid://b2ouvbea4wbsy" path="res://icon/help/ray/look.png" id="5_wm2oe"]
 [ext_resource type="PackedScene" uid="uid://b8hybaq32frfk" path="res://def/hud/game/inventory_title.tscn" id="6_2xh6b"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uklt7"]
+content_margin_left = 20.0
+content_margin_right = 2.0
+bg_color = Color(0.01773239, 0.017732395, 0.017732374, 1)
+border_width_left = 15
+border_color = Color(0.8, 0.8, 0.8, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2whmr"]
+bg_color = Color(0.18000486, 0.1800049, 0.18000478, 1)
+border_width_left = 10
+border_color = Color(0.8, 0.8, 0.8, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hq6jf"]
+content_margin_left = 12.0
+bg_color = Color(0.01773239, 0.017732395, 0.017732374, 1)
+border_width_left = 15
+border_color = Color(0.8, 0.8, 0.8, 0)
+
+[sub_resource type="Theme" id="Theme_llfcp"]
+HScrollBar/styles/scroll = SubResource("StyleBoxFlat_uklt7")
+VScrollBar/styles/grabber = SubResource("StyleBoxFlat_2whmr")
+VScrollBar/styles/scroll = SubResource("StyleBoxFlat_hq6jf")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7o85y"]
 content_margin_left = 10.0
-content_margin_top = 0.0
-content_margin_bottom = 0.0
+content_margin_top = 7.0
+content_margin_right = 10.0
+content_margin_bottom = 7.0
 bg_color = Color(0, 0, 0, 1)
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wm2oe"]
-content_margin_bottom = 30.0
+[sub_resource type="Gradient" id="Gradient_425pr"]
+colors = PackedColorArray(0.196078, 0.196078, 0.196078, 0.470588, 0.176471, 0.176471, 0.176471, 0.627451)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_3g2au"]
+gradient = SubResource("Gradient_425pr")
+fill_to = Vector2(1, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_imfma"]
+texture = SubResource("GradientTexture2D_3g2au")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_a14s5"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_a14s5"]
+texture = SubResource("GradientTexture2D_3g2au")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_llfcp"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_425pr"]
 content_margin_bottom = 3.0
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_imfma"]
-content_margin_left = 18.0
-content_margin_top = 7.0
 
 [node name="scroll" type="ScrollContainer"]
 anchors_preset = 15
@@ -30,69 +66,165 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = SubResource("Theme_llfcp")
 theme_override_styles/panel = SubResource("StyleBoxFlat_7o85y")
 vertical_scroll_mode = 4
 
-[node name="margin" type="MarginContainer" parent="."]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 12
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 12
-
-[node name="stack" type="VBoxContainer" parent="margin"]
+[node name="stack" type="VBoxContainer" parent="."]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 7
 
-[node name="bag" type="HBoxContainer" parent="margin/stack"]
+[node name="bag" type="HBoxContainer" parent="stack"]
 layout_mode = 2
+theme_override_constants/separation = 7
 
-[node name="items" parent="margin/stack/bag" instance=ExtResource("2_01ovw")]
+[node name="main_items" parent="stack/bag" instance=ExtResource("2_01ovw")]
 layout_mode = 2
+size_flags_horizontal = 1
 size_flags_stretch_ratio = 1.5
 
-[node name="status" parent="margin/stack/bag" instance=ExtResource("3_u0g8n")]
+[node name="side_items" parent="stack/bag" instance=ExtResource("2_01ovw")]
+layout_mode = 2
+size_flags_horizontal = 1
+size_flags_stretch_ratio = 1.5
+
+[node name="options" type="VBoxContainer" parent="stack/bag"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 7
+
+[node name="status" parent="stack/bag/options" instance=ExtResource("3_u0g8n")]
+custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 size_flags_horizontal = 1
 size_flags_vertical = 0
 
-[node name="bestiary" type="HFlowContainer" parent="margin/stack"]
-visible = false
+[node name="bag" type="HFlowContainer" parent="stack/bag/options"]
 layout_mode = 2
 theme_override_constants/h_separation = 7
 theme_override_constants/v_separation = 7
 
-[node name="spider" type="TextureRect" parent="margin/stack/bestiary"]
+[node name="craft" type="Button" parent="stack/bag/options/bag"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_imfma")
+theme_override_styles/hover = ExtResource("4_a14s5")
+
+[node name="margin" type="TextureRect" parent="stack/bag/options/bag/craft"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+expand_mode = 1
+
+[node name="count" type="Label" parent="stack/bag/options/bag/craft/margin"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.5
+offset_top = -19.0
+offset_right = 20.5
+offset_bottom = 19.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0.588235, 0.588235, 0.588235, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = -1
+theme_override_constants/shadow_offset_y = -1
+theme_override_constants/shadow_outline_size = 6
+theme_override_fonts/font = ExtResource("5_h4sp4")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxEmpty_a14s5")
+text = "🛠"
+
+[node name="rock" type="Button" parent="stack/bag/options/bag"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_imfma")
+theme_override_styles/hover = ExtResource("4_a14s5")
+
+[node name="margin" type="TextureRect" parent="stack/bag/options/bag/rock"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("5_wm2oe")
+expand_mode = 1
+
+[node name="count" type="Label" parent="stack/bag/options/bag/rock/margin"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.5
+offset_top = -19.0
+offset_right = 20.5
+offset_bottom = 19.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0.588235, 0.588235, 0.588235, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = -1
+theme_override_constants/shadow_offset_y = -1
+theme_override_constants/shadow_outline_size = 6
+theme_override_fonts/font = ExtResource("5_h4sp4")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxEmpty_a14s5")
+text = "🛠"
+
+[node name="trade" type="Button" parent="stack/bag/options/bag"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.54901963, 0.54901963, 0.54901963, 1)
+theme_override_constants/outline_size = 9
+theme_override_fonts/font = ExtResource("3_a14s5")
+theme_override_font_sizes/font_size = 36
+theme_override_styles/normal = SubResource("StyleBoxTexture_a14s5")
+theme_override_styles/hover = ExtResource("4_a14s5")
+text = "1"
+
+[node name="bestiary" type="HFlowContainer" parent="stack"]
+layout_mode = 2
+theme_override_constants/h_separation = 7
+theme_override_constants/v_separation = 7
+
+[node name="spider" type="TextureRect" parent="stack/bestiary"]
 process_mode = 4
 custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
 size_flags_horizontal = 0
 
-[node name="number" type="RichTextLabel" parent="margin/stack/bestiary"]
-custom_minimum_size = Vector2(96, 0)
+[node name="number" type="Label" parent="stack/bestiary"]
+custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
-size_flags_vertical = 4
-theme_override_colors/default_color = Color(0.3854925, 0.38549247, 0.38549247, 1)
-theme_override_constants/paragraph_separation = 0
-theme_override_fonts/normal_font = ExtResource("3_llfcp")
-theme_override_fonts/bold_font = ExtResource("4_inlpd")
-theme_override_font_sizes/normal_font_size = 14
-theme_override_font_sizes/bold_font_size = 14
-bbcode_enabled = true
-text = "[b]🕷[/b] Тип ▰▰-
-[b]🩸[/b] 65
-[b]⚔[/b] 215 ▰--
-[b]🛡[/b] 234 ▰▰--
-[b]🔥[/b] 215 ▰-
-[b]🫧[/b] 233 ▰▰-
-"
-fit_content = true
-scroll_active = false
-autowrap_mode = 0
+theme_override_colors/font_color = Color(0.3372549, 0.3372549, 0.3372549, 1)
+theme_override_constants/line_spacing = 0
+theme_override_fonts/font = ExtResource("3_llfcp")
+text = "🕷 Тип 
+🩸 65
+⚔ 215
+🛡 234
+🔥 215
+🫧 233"
 
-[node name="effect" type="Label" parent="margin/stack/bestiary"]
+[node name="effect" type="Label" parent="stack/bestiary"]
 custom_minimum_size = Vector2(230, 0)
 layout_mode = 2
 size_flags_vertical = 0
@@ -100,13 +232,15 @@ theme = ExtResource("5_a14s5")
 theme_override_constants/line_spacing = -7
 theme_override_constants/paragraph_spacing = -2
 theme_override_font_sizes/font_size = 17
-theme_override_styles/normal = SubResource("StyleBoxEmpty_wm2oe")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_llfcp")
 text = "Паук - 33cm
 
-Крайне полезный противник для приключений."
+Крайне полезный противник для приключений.
+
+⠀  🔥⠀⠀🪨"
 autowrap_mode = 2
 
-[node name="weak" type="Label" parent="margin/stack/bestiary/effect"]
+[node name="weak" type="Label" parent="stack/bestiary/effect"]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -121,20 +255,9 @@ theme_override_constants/line_spacing = -7
 theme_override_fonts/font = ExtResource("5_h4sp4")
 theme_override_font_sizes/font_size = 16
 theme_override_styles/normal = SubResource("StyleBoxEmpty_425pr")
-text = "🍷 🛡"
+text = "🍷⠀⠀🛡"
 
-[node name="skill" type="Label" parent="margin/stack/bestiary/effect/weak"]
-layout_mode = 1
-offset_right = 23.0
-offset_bottom = 29.0
-size_flags_horizontal = 8
-size_flags_vertical = 0
-theme_override_fonts/font = ExtResource("4_inlpd")
-theme_override_font_sizes/font_size = 16
-theme_override_styles/normal = SubResource("StyleBoxEmpty_imfma")
-text = "🔥 🪨"
-
-[node name="title" parent="margin/stack" instance=ExtResource("6_2xh6b")]
+[node name="title" parent="stack" instance=ExtResource("6_2xh6b")]
 layout_mode = 2
 text = "[i][color=b5b5b5]Инвентарь[/color][/i]
  Здесь находятся ваши собранные предметы с сундуков, такие как ключи, расходники, снаряжение, оснастка. Вы можете нажимать на \"[b][i]🎒[/i][/b]\" чтобы открыть инвентарь другого героя.

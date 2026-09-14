@@ -1,5 +1,6 @@
-[gd_scene load_steps=15 format=3 uid="uid://7o2xe4bosovy"]
+[gd_scene load_steps=16 format=3 uid="uid://7o2xe4bosovy"]
 
+[ext_resource type="PackedScene" uid="uid://dqlgy3l13bibl" path="res://def/hud/game/inventory_items.tscn" id="1_fmuye"]
 [ext_resource type="PackedScene" uid="uid://b8wsdeuhaqjym" path="res://def/hud/game/stats_stat.tscn" id="3_pf2c5"]
 [ext_resource type="Texture2D" uid="uid://e4utxikoeub7" path="res://icon/help/stat_defense.svg" id="4_08ayy"]
 [ext_resource type="Texture2D" uid="uid://d37dqji5ybnbg" path="res://icon/help/stat_influence.svg" id="5_8w622"]
@@ -30,8 +31,6 @@ content_margin_right = 0.0
 content_margin_bottom = 10.0
 bg_color = Color(0, 0, 0, 1)
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kj83q"]
-
 [sub_resource type="Gradient" id="Gradient_hf8md"]
 colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0)
 
@@ -43,6 +42,8 @@ fill_to = Vector2(0, 0)
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_hjtod"]
 content_margin_left = 160.0
 texture = SubResource("GradientTexture2D_lpjcv")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kj83q"]
 
 [node name="scroll" type="ScrollContainer"]
 anchors_preset = 15
@@ -66,6 +67,11 @@ theme_override_constants/margin_bottom = 15
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 4
+
+[node name="main_items" parent="margin/stack" instance=ExtResource("1_fmuye")]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_stretch_ratio = 1.5
 
 [node name="equip" type="Label" parent="margin/stack"]
 layout_mode = 2
@@ -93,6 +99,19 @@ layout_mode = 2
 text = "SRCT"
 icon = ExtResource("6_etdq7")
 
+[node name="description" type="Label" parent="margin/stack"]
+custom_minimum_size = Vector2(50, 30)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+size_flags_stretch_ratio = 2.0
+theme = ExtResource("7_hejl4")
+theme_override_constants/line_spacing = 11
+theme_override_styles/normal = SubResource("StyleBoxTexture_hjtod")
+text = "Some Test object like this asdadadadsadadadadasdad фывфывфвыолвоыфвловофвлфыовфы"
+horizontal_alignment = 2
+autowrap_mode = 2
+
 [node name="title" type="RichTextLabel" parent="margin/stack"]
 visible = false
 custom_minimum_size = Vector2(50, 0)
@@ -112,16 +131,3 @@ autowrap_mode = 2
 [node name="chats" type="VBoxContainer" parent="margin/stack"]
 layout_mode = 2
 theme_override_constants/separation = 0
-
-[node name="description" type="Label" parent="margin"]
-custom_minimum_size = Vector2(50, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 0
-size_flags_stretch_ratio = 2.0
-theme = ExtResource("7_hejl4")
-theme_override_constants/line_spacing = 11
-theme_override_styles/normal = SubResource("StyleBoxTexture_hjtod")
-text = "Some Test object like this asdadadadsadadadadasdad фывфывфвыолвоыфвловофвлфыовфы фовыофлывофылв олфыфывофлыв олфыовлфовлофылвофолы офлыволфыовлфыовло офлывофлоывлфовлфо олфывофлыво офлыовлфыввофылвофы олфывофлвофылволвф офывловлывофлвоылфовфло офылвофылолофлвофыолв офылвофывлофвлофылво фыовлфоылвофылвофывофло фолвлфодволыфдодфоывдофлв фыволфывоыылфов "
-horizontal_alignment = 2
-autowrap_mode = 2
