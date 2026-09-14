@@ -1040,10 +1040,8 @@ func _change_state(prev: CanvasItem, next: CanvasItem) -> void:
 
 ## UI STATS
 var _stat_bar: PackedScene = null
-var _stats: PanelContainer; var stats: PanelContainer:
-	get: return _lazy(left_stats, &"_stats", &"res://def/hud/game/stats.tscn", &"_stat_bar")
 var _stats_scroll: ScrollContainer; var stats_scroll: ScrollContainer:
-	get: return _from(stats, &"_stats_scroll", ^"scroll")
+	get: return _lazy(left_stats, &"_stats_scroll", &"res://def/hud/game/stats.tscn")
 var _stats_description: ScrollContainer; var stats_description: ScrollContainer:
 	get: return _from(stats, &"_stats_description", ^"description")
 var _stats_chats: ScrollContainer; var stats_chats: ScrollContainer:
@@ -1072,6 +1070,49 @@ var _reaction_base: ProgressBar; var reaction_base: ProgressBar:
 	get: return _from(reaction_stat, &"_reaction_base", ^"base")
 var _reaction_next: ProgressBar; var reaction_next: ProgressBar:
 	get: return _lazy(reaction_stat, &"_reaction_next", &"res://def/hud/game/stats_bar.tscn", &"_stat_bar")
+
+var _priorities: ScrollContainer; var priorities: ScrollContainer:
+	get: return _lazy(right_priorities, &"_priorities", &"res://def/hud/game/priorities.tscn")
+var _priority_progress: ProgressBar; var priority_progress: ProgressBar:
+	get: return _from(priorities, &"_priority_progress", ^"stack/priority/progress")
+var _perks: ItemList; var perks: ItemList:
+	get: return _from(priorities, &"_perks", ^"stack/perks")
+var _pages: ItemList; var pages: ItemList:
+	get: return _from(priorities, &"_pages", ^"stack/pages")
+var _books: VBoxContainer; var books: VBoxContainer:
+	get: return _from(priorities, &"_books", ^"stack/books")
+var _pursuit: Button; var pursuit: Button:
+	get: return _from(priorities, &"_pursuit", ^"stack/priority/pursuit")
+var _self_control: Button; var self_control: Button:
+	get: return _from(priorities, &"_self_control", ^"stack/priority/self_control")
+var _tenacity: Button; var tenacity: Button:
+	get: return _from(priorities, &"_tenacity", ^"stack/priority/tenacity")
+
+var _ability: ScrollContainer; var ability: ScrollContainer:
+	get: return _lazy(right_ability, &"_ability", &"res://def/hud/game/ability.tscn")
+var _ability_skills: ItemList; var ability_skills: ItemList:
+	get: return _from(ability, &"_ability_skills", ^"stack/skills")
+var _ability_title: ProgressBar; var ability_title: ProgressBar:
+	get: return _from(ability, &"_ability_title", ^"stack/title")
+var _ability_effect: ProgressBar; var ability_effect: ProgressBar:
+	get: return _from(ability, &"_ability_effect", ^"stack/effect")
+var _ability_help: ProgressBar; var ability_help: ProgressBar:
+	get: return _from(ability, &"_ability_help", ^"stack/help")
+var _ability_research: Button; var ability_research: Button:
+	get: return _from(ability, &"_ability_research", ^"stack/status/research")
+var _ability_health: Button; var ability_health: Button:
+	get: return _from(ability, &"_ability_health", ^"stack/status/health")
+var _ability_health_bar: ProgressBar; var ability_health_bar: ProgressBar:
+	get: return _from(ability, &"_ability_health_bar", ^"stack/status/health/bar")
+var _ability_score: Label; var ability_score: Label:
+	get: return _from(ability, &"_ability_score", ^"stack/status/score")
+var _ability_meter: Label; var ability_meter: Label:
+	get: return _from(ability, &"_ability_meter", ^"stack/status/score/meter")
+var _ability_pallete: ItemList; var ability_pallete: ItemList:
+	get: return _from(ability, &"_ability_pallete", ^"stack/pallete")
+var _ability_pallete_hint: Label; var ability_pallete_hint: Label:
+	get: return _from(ability, &"_ability_pallete_hint", ^"stack/pallete_hint")
+
 
 @onready var help: VBoxContainer = controls.get_node(^"middle/help")
 

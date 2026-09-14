@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://pwqvjeffo6u5"]
+[gd_scene load_steps=25 format=3 uid="uid://pwqvjeffo6u5"]
 
 [ext_resource type="PackedScene" uid="uid://b3pwlem0vs6ab" path="res://def/hud/game/inventory_party.tscn" id="2_3h6ma"]
 [ext_resource type="FontFile" uid="uid://cc0l5uav5qfke" path="res://data/font/ka1.ttf" id="2_dnqic"]
@@ -33,11 +33,6 @@ content_margin_right = 0.0
 content_margin_bottom = 0.0
 bg_color = Color(0, 0, 0, 1)
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xwv1h"]
-content_margin_top = 3.0
-content_margin_right = 12.0
-content_margin_bottom = 0.0
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o76in"]
 content_margin_left = 5.0
 content_margin_right = 5.0
@@ -46,6 +41,12 @@ border_color = Color(0.43529412, 0.43529412, 0.43529412, 1)
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_x0k1n"]
 color = Color(0.49747366, 0.49747366, 0.49747366, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xwv1h"]
+content_margin_left = 12.0
+content_margin_top = 3.0
+content_margin_right = 12.0
+content_margin_bottom = 5.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2qys1"]
 content_margin_left = 10.0
@@ -63,13 +64,13 @@ bg_color = Color(0.6644789, 0.5251939, 0.83174413, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sph7f"]
 
-[sub_resource type="StyleBoxLine" id="StyleBoxLine_vvrgj"]
-content_margin_top = 7.0
-color = Color(0.117647, 0.117647, 0.227451, 1)
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vsy6a"]
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_flm7h"]
 content_margin_top = 7.0
 color = Color(0.117647, 0.117647, 0.227451, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rg7iu"]
 
 [node name="scroll" type="ScrollContainer"]
 anchors_preset = 15
@@ -84,7 +85,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_a8msc")
 [node name="stack" type="VBoxContainer" parent="."]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/separation = 7
+theme_override_constants/separation = 4
 
 [node name="status" parent="stack" instance=ExtResource("2_3h6ma")]
 layout_mode = 2
@@ -101,29 +102,6 @@ theme_override_colors/font_color = Color(0.64705884, 0.64705884, 0.64705884, 1)
 theme_override_font_sizes/font_size = 20
 text = "Досье"
 
-[node name="value" type="Label" parent="stack/priority/title"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -62.5
-offset_top = -24.0
-offset_right = 62.5
-grow_horizontal = 2
-grow_vertical = 0
-size_flags_horizontal = 8
-theme_override_colors/font_color = Color(0.241156, 0.241156, 0.241156, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_outline_size = 10
-theme_override_fonts/font = ExtResource("2_dnqic")
-theme_override_font_sizes/font_size = 18
-theme_override_styles/normal = SubResource("StyleBoxEmpty_xwv1h")
-text = "23 - 1000"
-horizontal_alignment = 2
-vertical_alignment = 2
-
 [node name="progress" type="ProgressBar" parent="stack/priority"]
 custom_minimum_size = Vector2(10, 2)
 layout_mode = 2
@@ -135,6 +113,19 @@ max_value = 10.0
 step = 1.0
 value = 5.0
 show_percentage = false
+
+[node name="value" type="Label" parent="stack/priority"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(0.241156, 0.241156, 0.241156, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 10
+theme_override_fonts/font = ExtResource("2_dnqic")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxEmpty_xwv1h")
+text = "23 - 1000"
+horizontal_alignment = 2
+vertical_alignment = 2
 
 [node name="pursuit" type="Button" parent="stack/priority"]
 custom_minimum_size = Vector2(0, 34)
@@ -169,16 +160,6 @@ text = "0. Упорство"
 icon = ExtResource("7_4p7te")
 alignment = 0
 
-[node name="title" type="Label" parent="stack"]
-custom_minimum_size = Vector2(50, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.25
-theme = ExtResource("10_3h6ma")
-theme_override_fonts/font = ExtResource("10_vsy6a")
-text = "Приоритет выше выбирается в любой момент. Вы повышаете его получая опыт. При повышении вы получаете прирост к показателям и уникальные способности."
-autowrap_mode = 2
-
 [node name="perks" type="ItemList" parent="stack"]
 layout_mode = 2
 size_flags_vertical = 0
@@ -194,6 +175,30 @@ max_columns = 0
 item_0/text = "Dealer"
 item_1/text = "Merchant"
 
+[node name="title" type="RichTextLabel" parent="stack"]
+visible = false
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.25
+theme = ExtResource("10_3h6ma")
+theme_override_font_sizes/italics_font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxEmpty_vsy6a")
+bbcode_enabled = true
+text = "Описание способности включает в себя комбо, стоимость, площадь и эффект.
+[table=2]
+[cell expand][left]⠀[b][i]✨[/i][/b]⠀Эффект - полезное действие способности[/left][/cell][cell][left]⠀[b][i]5️⃣[/i][/b]⠀Стоимость - количество ресурса для эффекта[/left][/cell]
+[cell expand][left]⠀[b][i]✊[/i][/b]⠀Комбо - набор умений - слотов, используемых для получения эффекта.[/left][/cell][cell][left]⠀[b][i]🫓[/i][/b]⠀Площадь - сколько противников может быть затронуто способностью[/left][/cell]
+[cell expand][left]⠀ .ıl  ⠀Площадь зоны попадания по сущностям определяется специальными отметками.[/left][/cell]
+[cell][left]⠀  l  ⠀ - одна сущность или колонна сущностей стоящих друг за другом[/left][/cell]
+[cell expand][left]⠀ ılı ⠀ Малая группа сущностей, импульс по небольшой площади[/left][/cell]
+[cell][left]⠀ lll ⠀ Малая группа сущностей, эффект по небольшой площади[/left][/cell]
+[cell expand][left]⠀.ılı.⠀ Большая группа сущностей, импульс по большой площади[/left][/cell]
+[cell][left]⠀lllll  Большая группа сущностей, эффект по большой площади или по всем сущностям на местности[/left][/cell]
+[/table]"
+fit_content = true
+autowrap_mode = 2
+
 [node name="skills" type="Label" parent="stack"]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
@@ -201,7 +206,8 @@ size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.25
 theme = ExtResource("10_3h6ma")
 theme_override_fonts/font = ExtResource("10_vsy6a")
-text = "Возможность - закреплена за персонажем. Способность - эффект выполнения комбо. Комбо - последовательность действий героев. Ищите и читайте книги, чтобы раздвинуть свои возможности."
+theme_override_styles/normal = SubResource("StyleBoxLine_flm7h")
+text = "Приоритет в досье выбирается в любой момент. Вы повышаете его получая опыт. При повышении даётся прирост к показателям и уникальные способности. Далее ваши возможности и способности. Возможность - закреплена за персонажем. Способность - эффект выполнения комбо. Комбо - последовательность действий героев. Записи и книги располагаются ниже. Ищите и читайте книги, чтобы раздвинуть свои возможности. Соберите записи и выложите их по порядку чтобы узнать историю."
 autowrap_mode = 2
 
 [node name="pages" type="ItemList" parent="stack"]
@@ -222,19 +228,12 @@ item_1/text = "Попробуем сделать текст"
 item_2/text = "как предметы"
 item_3/text = "Отрывок жизни"
 
-[node name="pages_help" type="Label" parent="stack"]
-custom_minimum_size = Vector2(50, 0)
+[node name="books" type="VBoxContainer" parent="stack"]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.25
-theme = ExtResource("10_3h6ma")
-theme_override_styles/normal = SubResource("StyleBoxLine_vvrgj")
-text = "Соберите записи и выложите их по порядку чтобы узнать историю. Послания, что оставили Древние в виде книг и записок располагаются ниже"
-autowrap_mode = 2
 
-[node name="books" type="Label" parent="stack"]
+[node name="books" type="Label" parent="stack/books"]
 layout_mode = 2
 theme = ExtResource("10_3h6ma")
-theme_override_styles/normal = SubResource("StyleBoxLine_flm7h")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_rg7iu")
 text = "K2
 K3"
