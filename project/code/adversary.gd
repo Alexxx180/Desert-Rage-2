@@ -351,7 +351,7 @@ func _power(title: StringName) -> float: return Input.get_action_strength(title)
 func act(no: int) -> bool: return combo & acts[no]
 
 enum { LEFT, RIGHT, UP, DOWN, ACT1, ACT2, ACT3, ACT4, OPT_LEFT, OPT_RIGHT, OPT_UP,
-	OPT_DOWN, FIRE, AIM, MENU }
+	OPT_DOWN, SHOT, AIM, MENU }
 enum { DOUBLE, LUNGE, HUG, LOW_KICK, CRACK, GRILL_KICK, SLIPPERANG,
 	SPIT_KICK, BACK_SPIT, POACHING, CURE, OK_SHOT, PIERCE, BLADE_RUN, TACKLE,
 	GREEK_FIRE, STRAY_BULLET, AIR_FIGHT, AID, FIRE_DANCE, BREAKFLY, SHRAPNEL,
@@ -429,7 +429,7 @@ var menu_select: int = 0
 var stated: bool = false
 var read_mode: bool = false
 
-func input(_event: InputEvent) -> void: # return #TODO FIXME disable after HUD test
+func input(event: InputEvent) -> void: # return #TODO FIXME disable after HUD test
 	if HUD.level == null:
 		menu_interaction()
 		return
@@ -445,13 +445,28 @@ func input(_event: InputEvent) -> void: # return #TODO FIXME disable after HUD t
 		elif _press(&"forward"): menu_select = PANEL_FORWARD
 		elif _press(&"backward"): menu_select = PANEL_BACKWARD
 	elif _out(&"group"): open_menu_panel()
-	if _press(&"act1"): punch()
+	elif _press(&"select"):
+		if HUD.interact.state[HUD.hero] == 0:
+			HUD.level.deploy.select()
+	elif _press(&"act1"): punch()
 	elif _press(&"act2"): kick()
 	elif _press(&"act3"): skill_a()
 	elif _press(&"act4"): skill_b()
-	elif _hold(&"aim") and _press(&"fire"): use_item()
-	if _press(&"select") and HUD.interact.state[HUD.hero] == 0:
-		HUD.level.deploy.select()
+	elif _hold(&"aim"):
+		if _press(&"fire"): use_item()
+		elif _press(&"item_left"): HUD.fast_panel_swap(-1)
+		elif _press(&"item_right"): HUD.fast_panel_swap(+1)
+	elif _press(&"item_left"): pass # left_pattern
+	elif _press(&"item_right"): pass # right_pattern
+	elif event is InputEventKey:
+		var no: int = event.keycode - KEY_1
+		if no >= 0 and no <= 4:
+			if Input.is_key_pressed(TAB):
+				HUD.pallete_pattern_select(no)
+			else:
+				HUD.fast_panel_select(no)
+		elif no == 5 and Input.is_key_pressed(TAB):
+			HUD.pallete_pattern_fight()
 
 func main_slot(weapon_type: int) -> bool:
 	var i: int = Def.of_x(Def.BYTE, HUD.get_item(HUD.hero, HUD.inventory.fast_panel[HUD.hero]), HeroInventory.ID) - HeroInventory.WEAPON

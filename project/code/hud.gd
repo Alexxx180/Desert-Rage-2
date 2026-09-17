@@ -63,7 +63,15 @@ func _ready() -> void:
 		entity[HUD.hero].position = level.group.position
 		level.group.reparent(entity[HUD.hero])
 		level.group.position = Vector2.ZERO
-
+		
+	get_viewport().connect(^"size_changed", resize_timer.start)
+	HUD.add_child(resize_timer)
+	resize_timer.time = 0.25
+	resize_timer.one_shot = true
+	resize_timer.connect(_on_resize_timeout)
+	resize_timer.start()
+	
+	timer.timeout.connect(talking)
 
 func load_game_logic() -> void:
 	if interact != null: return
@@ -82,7 +90,6 @@ func _init() -> void:
 	session = FileAccess.get_file_as_bytes(Def.saves).to_int64_array()
 
 var xp: RefCounted
-@onready var tree: SceneTree = get_tree()
 
 func load_scene(no: int) -> void:
 	var scene: String
@@ -135,31 +142,6 @@ func is_hud_opened() -> bool:
 func sound_show() -> void: _sound_level(false, Node.PROCESS_MODE_INHERIT)
 func sound_back() -> void: _sound_level(true, Node.PROCESS_MODE_DISABLED)
 
-func _sound_level(pause: bool, mode: Node.ProcessMode) -> void:
-	HUD.sound.visible = !pause
-	if PAUSE:
-		HUD.settings.visible = pause
-	else:
-		set_level_mode(mode)
-
-func _pause_level(pause: bool, mode: Node.ProcessMode) -> void:
-	if PAUSE:
-		HUD.pause.visible = pause
-	else:
-		set_level_mode(mode)
-
-func main_menu() -> void:
-	HUD.pause.hide()
-	HUD.stats.tree.change_scene_to_file(Def.main_menu)
-
-func pause_set() -> void: _pause_toggle(true, Node.PROCESS_MODE_DISABLED)
-func pause_resume() -> void: _pause_toggle(false, Node.PROCESS_MODE_INHERIT)
-func _pause_toggle(next: bool, mode: Node.ProcessMode) -> void:
-	HUD.pause.visible = next
-	set_level_mode(mode)
-
-func set_level_mode(mode: Node.ProcessMode) -> void: HUD.level.process_mode = mode
-
 func upload_help() -> void:
 	HUD.game.hints.motion.texture = ImageTexture.create_from_image(hints.get_layer_data(no))
 
@@ -175,8 +157,7 @@ func log_help(of: int) -> void:
 	card.show()
 	var tween: Tween = game.create_tween()
 	tween.tween_property(card, ^"modulate", Color.WHITE, 1)
-	card.text = tr("H" + Def.hints[of] + "T") + card.MARGIN
-	card.help.text = "H" + Def.hints[of] + "D"
+	card.text = tr(Def.hints[of])
 
 
 
@@ -191,7 +172,6 @@ func add_log(caption: String) -> void:
 	line.text = caption
 
 func notify(type: int) -> void: add_log(text[type])
-
 
 var main_transit: ColoreRect
 var side_transit: ColoreRect
@@ -242,12 +222,12 @@ func start_transition(level: String, _floor_diff: int = 0, type: int = LEDGE) ->
 
 
 
-extends Node
-
 enum { EMPTY = 0, KNIFE = 1 }
 
 @onready var preview: Timer = $preview
 @onready var panel: Timer = $panel
+@onready var tree: SceneTree = get_tree()
+@onready var timer: Timer = $timer
 
 var inventory: Array = []
 var markers: HFlowContainer
@@ -257,9 +237,6 @@ var selection: int = 0
 var mask: Array[int] = [0, 2]
 var items: Array[int] = [EMPTY, EMPTY, KNIFE, EMPTY, EMPTY]
 
-static func cline(value: int, length: int) -> int:
-	return length + value if value < 0 else value % length
-
 func _toggle_selection(a: int, b: int) -> void:
 	markers.items[a].hide_item()
 	markers.items[b].show_item()
@@ -267,12 +244,26 @@ func _toggle_selection(a: int, b: int) -> void:
 		element.primary[a].hide_selection()
 		element.primary[b].show_selection()
 
-func _fast_panel_selection(offset: int) -> void:
+func fast_panel_select(slot: int) -> void:
+	var result: int = -1
+	for i in range(0, 5):
+		if HUD.get_item(HUD.hero, slot) == 0: continue
+		if i == slot:
+			result = i; break
+	if result == -1: return
+	
+	HUD.inventory.fast_panel[HUD.hero] = result
+	
+	if _inventory_scroll == null: return
+	
 	if not showed:
+		HUD.get_item(HUD.hero, slot)
 		showed = true
 		for item in markers.items: item.stand.show()
 
 	var length: int = mask.size()
+	
+	 length + value if value < 0 else value % length
 	var next: int = cline(selection + offset, length)
 
 	_toggle_selection(mask[selection], mask[next])
@@ -288,18 +279,7 @@ func hide_items() -> void:
 	showed = false
 	for item in markers.items: item.stand.hide()
 
-func _input(_event: InputEvent) -> void:
-	if not Input.is_action_pressed("item_select"):
-		return
-	var axis: float = Input.get_axis("item_left", "item_right")
-	if axis != 0: _fast_panel_selection(roundi(axis))
 
-"""
-
-
-
-
-@onready var timer: Timer = $timer
 
 var level: int = 0
 var cursor: int = 0
@@ -351,7 +331,6 @@ var face: PackedStringArray = ["look", "rage", "grin", "smile", "confirm",
 
 func _dialog_level(value: int) -> void: cursor.set_level(value, locale.get_chat(value))
 func _scroll() -> void: scroll(locale)
-func _ready() -> void: timer.timeout.connect(talking)
 
 func add_chat(part: int) -> void:
 	var key: String = "L%d_%d" % [cursor.level, part]
@@ -461,12 +440,61 @@ func set_emotion(id: Dictionary) -> void:
 
 
 
+enum { STATUS_TYPE, STATUS_TIME, STATUS_X = -7, STATUS_Y = 25 }
+
+var entity_status: Array[Array] = [[],  []] # Sprite2D
+var enemy_status: PackedInt64Array = []
+var status_process: bool = false
+
+func status_feedback(type: int, entity: int) -> void:
+	match type:
+		BURN: pass
+		POISON: pass
+
+func status_drawback() -> void:
+	status_process = !status_process
+	if !status_process: return
+
+	if (entity_count + Def.PARTY) > len(hero_status):
+		for i in range(len(entity_status), entity_count + Def.PARTY):
+			hero_status.append([null, null, null, null])
+
+	for e in entity:
+		for i in range(0, 4):
+			var status: Vector2i = Def.h_byte(get_part(STATUSES + e, i) if e < Def.PARTY else enemy_status[e - Def.PARTY])
+			if status[STATUS_TIME] == 0: continue
+
+			status[STATUS_TIME] -= 1
+			if status[STATUS_TYPE] == 0:
+				entity_status[e].hide()
+				entity_status[e].position = Vector2(0, STATUS_Y * i)
+			else:
+				entity_status[e].position = Vector2(STATUS_X * status[STATUS_TIME], STATUS_Y * i)
+				status_feedback(type)
+
+			var result: int = status[STATUS_TYPE] << Def.MASK3 | status[STATUS_TIME]
+			if entity < Def.PARTY:
+				set_part(STATUSES + e, i, result)
+			else:
+				enemy_status[e - Def.PARTY] = Def.to_x(Def.BYTE, enemy_status[e - Def.PARTY], i, result)
 
 
+var debug_timer: Timer; var _debug_title: Label; var _debug_status: Label; var _debug_state: int
 
-const prefix: String = " FPS"
+enum { FPS, GPU }
 
-func _process(_delta: float) -> void: text = str(Engine.get_frames_per_second(), prefix)
+var BYTE_CLUSTER: float = 1.0 / 1048576 # 1024^2
+const FORMAT_MB: String = "\n%0.2f"
+
+func _get_vram() -> String: return FORMAT_MB % (Performance.get_monitor(Performance.RENDER_VIDEO_MEM_USED) * BYTE_CLUSTER)
+func _don(debug_type: int) -> bool: return Def.of(_debug_state, debug_type)
+func debug_drawback() -> void:
+	_debug_status.text = str(("\n" + str(Engine.get_frames_per_second())) if _don(FPS) else "",  _get_vram() if _don(GPU) else "")
+func debug_change() -> void:
+	_debug_status.text = str("\nFPS" if _don(FPS) else "", "\nVRAM" if _don(GPU) else "")
+	if debug_timer == null:
+		debug_timer.connect(debug_drawback)
+	debug_timer.start()
 
 func drawback(asset: Node2D) -> void:
 	var fov: VisibleOnScreenNotifier2D = asset.get_node(^"fov")
@@ -476,175 +504,46 @@ func drawback(asset: Node2D) -> void:
 
 
 
-@onready var ui: Control = get_parent()
-@onready var modulator: Node = $modulator
-
-func _ready():
-	if ui.has_method("disappear"):
-		timeout.connect(ui.disappear)
-	else:
-		timeout.connect(disappear)
-
-func disappear() -> Tween:
-	return modulator.disappear(ui)
-
-func appear() -> void:
-	modulator.appear(ui)
-	start()
-
-
-extends Node
-
-const TIME: float = 0.25
-const MARGIN: int = 20
-
-var appeared: bool = false
-@onready var m: MarginContainer = get_node("../content/margin")
-
-func set_margin(v: int) -> void:
-	m.add_theme_constant_override("margin_top", -v)
-	m.add_theme_constant_override("margin_bottom", v)
-
-func disappear(ui: Control) -> Tween:
-	appeared = false
-	var tween: Tween = create_tween()
-	tween.set_parallel(true)
-	tween.tween_method(set_margin, 0, MARGIN, TIME)
-	tween.tween_property(ui, "modulate", Color.TRANSPARENT, TIME)
-	return tween
-
-func appear(ui: Control) -> Tween:
-	var tween: Tween = create_tween()
-	if not appeared:
-		tween.set_parallel(true)
-		tween.tween_property(ui, "modulate", Color.WHITE, TIME)
-		tween.tween_method(set_margin, MARGIN, 0, TIME)
-		appeared = true
-	return tween
-
-
-extends Node
-
-@export_range(0.5, 4.0, 0.5) var time: float = 0.75
-
-func disappear(ui: Control) -> Tween:
-	var tween: Tween = create_tween()
-	tween.tween_property(ui, "modulate", Color.TRANSPARENT, time)
-	return tween
-
-func appear(ui: Control) -> void:
-	ui.modulate = Color.WHITE
-
-
-class_name ControlTimeHooder extends Timer
-
-const TIME: float = 0.5
-
-@export var fix_on_press: bool = false
-@export var target_path: String = ".."
-
-var state: Control
-var target: Control
-var fixed: bool = false
-
-func _ready() -> void:
-	state = get_parent()
-	target = get_node(target_path)
-	if fix_on_press: state.pressed.connect(set_fixed)
-	for s in [state.focus_entered, state.mouse_entered]: s.connect(in_focus)
-	for s in [state.focus_exited, state.mouse_exited]: s.connect(out_focus)
-	_start_hide()
-
-func _change_state(color: Color) -> void:
-	create_tween().tween_property(target, "modulate", color, TIME)
-
-func set_fixed() -> void:
-	fixed = !fixed
-	if fixed:
-		_stop_hide()
-
-func out_focus() -> void: if not fixed: _start_hide()
-func in_focus() -> void: _stop_hide()
-
-func _start_hide() -> void:
-	start()
-
-func _stop_hide() -> void:
-	stop()
-	_show_pause()
-
-func _show_pause() -> void: _change_state(Color.WHITE)
-
-func hide_pause() -> void: _change_state(Color.TRANSPARENT)
 
 
 
-extends Node
+const TIME: PackedFloat32Array = [0.2, 0.5]
+enum { TIME_FLIP, TIME_HOOD }
 
-@onready var caption: RichTextLabel = get_parent().get_locale()
-@onready var locale: String = caption.text
-@export var keys: Array[String] = ["KAL+KAU+KAD+KAR", "KB"]
+enum { MOVE, ACT, KICK }
 
-func merge_controls(help: String) -> String:
-	if not help.contains("+"): return tr(help)
-	
-	var result: String = ""
-	for text in help.split("+"): result += tr(text)
-	return result
+var card_text: Array[Button] = []
 
-func update_locale() -> void:
-	var result: Array[String] = []
-	for key in keys: result.append(merge_controls(key))
-	caption.text = tr(locale) % result
+func translate_all_cards() -> void:
+	for card in card_text:
+		translate_card(card.help, card.no)
 
-func _ready() -> void: update_locale()
+func translate_card(card: Label, no: int) -> void:
+	match no:
+		MOVE: card.text = tr(Def.hints[card.no]) % [0]
+		ACT: card.text = tr(Def.hints[card.no]) % 1
+		KICK: card.text = tr(Def.hints[card.no]) % 2
+		_: card.text = tr(Def.hints[card.no])
 
-
-
-
-
-
-
-
-
-#extends Button
-#@onready var help: RichTextLabel = $help
-#@onready var image: TextureRect = $icon
-#var no: int
-
-func _ready() -> void: pressed.connect(flip_the_card)
-
-const TIME: float = 0.2
-const MARGIN: String = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
-
-func translate(card: Button) -> void:
-	card.text = tr("H" + Def.hints[card.no] + "T") + MARGIN
-	card.help.text = tr("H" + Def.hints[card.no] + "D") % [] # Def
-
-func update_hint(card: Button, next: int) -> void:
+func load_card(next: int) -> void:
+	var card: Button = load(Def.card).instantiate()
+	ability_help.add_child(card)
 	card.no = next
-	card.image.texture = ImageTexture.create_from_image(Def.help.get_layer_data(card.no))
-	translate(card)
+	card.image.texture = ImageTexture.create_from_image(Def.help.get_layer_data(next))
+	card.help.visible_characters = 20
+	card_text.append(card)
+	translate_card(card.help, next)
 
-func flip_the_card(card: Button) -> void:
-	if card.image.visible:
-		_change_state(card.image, card.help)
-	else:
-		_change_state(card.help, card.image)
-
-func change_state(prev: CanvasItem, next: CanvasItem) -> Callable:
-	return func(x: float):
-		if -0.5 <= x and x <= 0.5 and prev.visible:
-			prev.hide()
-			next.show()
-		self.scale = Vector2(abs(x), 1)
-
-func _change_state(prev: CanvasItem, next: CanvasItem) -> void:
+func flip_card(card: Button) -> void:
+	var shown: bool = false
 	var tween: Tween = create_tween()
 	tween.set_parallel(false)
-	tween.tween_method(change_state(prev, next), -1.0, 1.0, TIME)
-
-
+	tween.tween_method(func(x: float):
+		if !shown and -0.5 <= x and x <= 0.5:
+			shown = true
+			card.image.visible = !card.image.visible
+			card.help.visible_characters = 20 if card.image.visible else -1
+		self.scale = Vector2(abs(x), 1), -1.0, 1.0, TIME[TIME_FLIP])
 
 func new_game() -> void:
 	set_game()
@@ -653,8 +552,6 @@ func new_game() -> void:
 func continue_game() -> void:
 	set_game()
 	pass
-
-@onready var tree: SceneTree = get_tree()
 
 func resume_game() -> void:
 	tree.paused = false
@@ -791,7 +688,7 @@ var _ability_title: ProgressBar; var ability_title: ProgressBar:
 	get: return _from(ability_scroll, &"_ability_title", ^"stack/title")
 var _ability_effect: ProgressBar; var ability_effect: ProgressBar:
 	get: return _from(ability_scroll, &"_ability_effect", ^"stack/effect")
-var _ability_help: ProgressBar; var ability_help: ProgressBar:
+var _ability_help: HFlowContainer; var ability_help: HFlowContainer:
 	get: return _from(ability_scroll, &"_ability_help", ^"stack/help")
 var _ability_research: Button; var ability_research: Button:
 	get: return _from(ability_scroll, &"_ability_research", ^"stack/status/research")
@@ -864,14 +761,6 @@ func _from(parent: Control, name: StringName, path: NodePath) -> Control:
 func setup_hud() -> void:
 	right.drag_ended.connect(right_mouse_drag)
 	left.drag_ended.connect(left_mouse_drag)
-
-func _ready():
-	get_viewport().connect(^"size_changed", resize_timer.start)
-	HUD.add_child(resize_timer)
-	resize_timer.time = 0.25
-	resize_timer.one_shot = true
-	resize_timer.connect(_on_resize_timeout)
-	resize_timer.start()
 
 func _on_resize_timeout():
 	if ui.size.x > ui.size.y:
