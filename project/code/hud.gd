@@ -8,10 +8,8 @@ var session: PackedInt64Array
 
 var level: LevelRoot
 var adversary: Adversary
-var animation: CharacterAnimation
 var interact: WorldInteraction
 var _inventory: HeroInventory
-var menu: Menu = Menu.new()
 var entity: Array[PhysicsBody2D] = []
 
 enum { CURRENTS, PLATFORMS, PLACES }
@@ -55,10 +53,22 @@ func load_hero(that: int) -> void:
 	if entity[that] == null:
 		entity[that] = new_hero(that)
 
+# TIMING
+var dialog_timer: Timer = Timer.new(); var resize_timer: Timer = Timer.new()
+var debug_timer: Timer
+
+@onready var tree: SceneTree = get_tree()
+@onready var ui: Window = get_window()
+
 func _ready() -> void:
 	layer = 2
 	level.load_level()
 	load_hero(HUD.hero)
+	
+	interact = WorldInteraction.new()
+	aura = Adversary.new()
+	inventory = HeroInventory.new()
+	
 	if level.group:
 		entity[HUD.hero].position = level.group.position
 		level.group.reparent(entity[HUD.hero])
@@ -70,15 +80,7 @@ func _ready() -> void:
 	resize_timer.one_shot = true
 	resize_timer.connect(_on_resize_timeout)
 	resize_timer.start()
-	
-	timer.timeout.connect(talking)
-
-func load_game_logic() -> void:
-	if interact != null: return
-	interact = WorldInteraction.new()
-	animation = CharacterAnimation.new()
-	aura = Adversary.new()
-	inventory = HeroInventory.new()
+	dialog_timer.timeout.connect(talking)
 
 func next_hero() -> int: return (HUD.hero + 1) & Def.ROCK
 
@@ -91,29 +93,44 @@ func _init() -> void:
 
 var xp: RefCounted
 
-func load_scene(no: int) -> void:
-	var scene: String
-	&"dungeon/cave/dark"
-	Def.level % [location.name, group_level(), location.part]
-	&"res://def/dungeon/%s/%s/%d.tscn"
-	var _level: int = level + diff
-	
-	var path: String = "%d"
-	if _level > 0: path = "+/%d"
-	elif _level < 0: path = "-/%d"
-	path % abs(_level)
-	
-	print_debug(tree.change_scene_to_file(scene))
+var level_path: PackedStringArray = ["_world", "_cave_origin",
+	"_cave_smoke", "_cave_spark", "_temple_ancient", "_credits"]
+var level_no: PackedByteArray = [0, 1, 8, 15, 27, 36]
+var transition_no: int = 0
+var transition_part: int = 0
 
-#var options: VBoxContainer = get_node("../hud/back/options")
-#options.continue.pressed.connect()
-#options.start.pressed.connect(game_start)
+func load_scene(no: int, part: String = "") -> void:
+	TileMapLayer
+	if part != "":
+		for i in range(0, len(level_path)):
+			if level_no[i] == no:
+				part = level_path[i]
+				break
+	print_debug(tree.change_scene_to_file("res://def/dungeon/" + str(no).pad_zeros(1) + part + ".tscn"))
+
+func load_transition(part: int = 0) -> void:
+	var scene: String = str(no).pad_zeros(1)
+	if transition_part == 0:
+		if part < 9:
+			transition_part = part
+			load_scene(no, str("_", part))
+		elif part < 14:
+			transition_part = 0
+			load_scene(no - 1)
+		else:
+			transition_part = 0
+			load_scene(no + 1)
+	else:
+		transition_part = part
+		if part < 9:
+			load_scene(no - 1, str("_", part))
+		else:
+			load_scene(no, str("_", part - 9))
 
 func game_exit() -> void: tree.quit()
-func game_start() -> void: load_scene(Def.first_level)
-func game_continue() -> void: if not load_progress(): load_scene(Def.first_level)
-
-
+func game_start() -> void: print_debug(tree.change_scene_to_file(&"res://def/dungeon/01_cave_origin.tscn"))
+func game_continue() -> void:
+	if not load_progress(): game_start()
 
 
 enum { PAUSE, GAME }
@@ -139,9 +156,6 @@ func is_hud_opened() -> bool:
 		result = result and (not last)
 	return not result
 
-func sound_show() -> void: _sound_level(false, Node.PROCESS_MODE_INHERIT)
-func sound_back() -> void: _sound_level(true, Node.PROCESS_MODE_DISABLED)
-
 func upload_help() -> void:
 	HUD.game.hints.motion.texture = ImageTexture.create_from_image(hints.get_layer_data(no))
 
@@ -163,7 +177,6 @@ func log_help(of: int) -> void:
 
 enum { IS_FULL }
 
-var logs: PackedScene
 var text: PackedStringArray = ["Полегче с этим."]
 
 func add_log(caption: String) -> void:
@@ -173,15 +186,13 @@ func add_log(caption: String) -> void:
 
 func notify(type: int) -> void: add_log(text[type])
 
-var main_transit: ColoreRect
-var side_transit: ColoreRect
 var transit_type: int = 0
 enum { LADDER_DOWN, LADDER_UP, GATE_IN, GATE_OUT }
 
 func gate_enter(from: Color, to: Color) -> void:
-	main_transit.color = from
-	main_transit.scale.y = 1.0
-	create_tween().tween_property(main_transit, ^"color", to, 0.5)
+	up_transit.color = from
+	up_transit.scale.y = 1.0
+	create_tween().tween_property(up_transit, ^"color", to, 0.5)
 
 func ladder_exit(main: ColorRect) -> void:
 	var tween: Tween = create_tween()
@@ -197,22 +208,22 @@ func exit_transit() -> void:
 	match type:
 		GATE_OUT, GATE_IN:
 			var tween: Tween = create_tween()
-			tween.tween_property(main_transit, ^"color", Color.TRANSPARENT, 0.5)
-			tween.tween_callback(func(): main_transit.hide())
-		LADDER_DOWN: ladder_exit(side_transit)
-		LADDER_UP: ladder_exit(main_transit)
+			tween.tween_property(up_transit, ^"color", Color.TRANSPARENT, 0.5)
+			tween.tween_callback(func(): up_transit.hide())
+		LADDER_DOWN: ladder_exit(down_transit)
+		LADDER_UP: ladder_exit(up_transit)
 
 const BLACK_TRANSPARENT: Color = Color(0, 0, 0, 255)
 
 func entry_transit(type: int) -> void:
-	main_transit.color = Color.BLACK
+	up_transit.color = Color.BLACK
 	match type:
 		GATE_OUT:
-			main_transit.color = Color.WHITE
+			up_transit.color = Color.WHITE
 			gate_enter(Color.TRANSPARENT, Color.WHITE)
 		GATE_IN: gate_enter(BLACK_TRANSPARENT, Color.BLACK)
-		LADDER_DOWN: ladder_enter(main_transit, side_transit)
-		LADDER_UP: ladder_enter(side_transit, main_transit)
+		LADDER_DOWN: ladder_enter(up_transit, down_transit)
+		LADDER_UP: ladder_enter(down_transit, up_transit)
 
 func start_transition(level: String, _floor_diff: int = 0, type: int = LEDGE) -> void:
 	blackout.scene = level
@@ -220,224 +231,101 @@ func start_transition(level: String, _floor_diff: int = 0, type: int = LEDGE) ->
 		WAY: blackout.as_way(self, Color.BLACK, true)
 		LEDGE: blackout.as_ledges(ledges, Color.BLACK, true)
 
+enum { FAST_MAX = 5 }
 
+var _main_marker: TextureRect
+var _side_marker: TextureRect
+var loaded_items: bool = false
 
-enum { EMPTY = 0, KNIFE = 1 }
+func set_marker(before: int, after: int) -> void:
+	if HUD.hero == Def.RAY:
+		_main_items[before].remove_child(_main_marker)
+		_main_items[after].add_child(_main_marker)
+	else:
+		_side_items[before].remove_child(_side_marker)
+		_side_items[after].add_child(_side_marker)
 
-@onready var preview: Timer = $preview
-@onready var panel: Timer = $panel
-@onready var tree: SceneTree = get_tree()
-@onready var timer: Timer = $timer
-
-var inventory: Array = []
-var markers: HFlowContainer
-
-var showed: bool = false
-var selection: int = 0
-var mask: Array[int] = [0, 2]
-var items: Array[int] = [EMPTY, EMPTY, KNIFE, EMPTY, EMPTY]
-
-func _toggle_selection(a: int, b: int) -> void:
-	markers.items[a].hide_item()
-	markers.items[b].show_item()
-	for element in inventory:
-		element.primary[a].hide_selection()
-		element.primary[b].show_selection()
+func fast_panel_swap(offset: int) -> void:
+	var before: int = HUD.inventory.fast_panel[HUD.hero]
+	var result: int = before + offset
+	if result > FAST_MAX:
+		HUD.inventory.fast_panel[HUD.hero] = 0
+	elif result < 0:
+		HUD.inventory.fast_panel[HUD.hero] = FAST_MAX - 1
+	else:
+		var target: Vector2i = Vector2i(0, -1) if offset < 0 else Vector2i(FAST_MAX - 1, FAST_MAX)
+		for i in range(HUD.inventory.fast_panel[HUD.hero] + offset, target.y, offset):
+			if i == target.x or HUD.get_item(HUD.hero, i) != 0:
+				HUD.inventory.fast_panel[HUD.hero] = i
+				if loaded_items:
+					set_marker(before, i)
+				break
 
 func fast_panel_select(slot: int) -> void:
-	var result: int = -1
-	for i in range(0, 5):
-		if HUD.get_item(HUD.hero, slot) == 0: continue
-		if i == slot:
+	if slot == HUD.inventory.fast_panel[HUD.hero]: return
+	elif slot == FAST_MAX:
+		HUD.inventory.fast_panel[HUD.hero] = slot; return
+	var result: int = 0
+	for i in range(0, FAST_MAX):
+		if HUD.get_item(HUD.hero, slot) != 0:
+			result += 1; continue
+		if result == slot:
 			result = i; break
-	if result == -1: return
-	
-	HUD.inventory.fast_panel[HUD.hero] = result
-	
-	if _inventory_scroll == null: return
-	
-	if not showed:
-		HUD.get_item(HUD.hero, slot)
-		showed = true
-		for item in markers.items: item.stand.show()
-
-	var length: int = mask.size()
-	
-	 length + value if value < 0 else value % length
-	var next: int = cline(selection + offset, length)
-
-	_toggle_selection(mask[selection], mask[next])
-	preview.start()
-	panel.start()
-	selection = next
-
-func hide_preview() -> void:
-	pass
-	# markers.items[mask[selection]].preview.hide()
-
-func hide_items() -> void:
-	showed = false
-	for item in markers.items: item.stand.hide()
+	if result == slot:
+		HUD.inventory.fast_panel[HUD.hero] = result
+		if _inventory_scroll == null:
+			set_marker(before, i)
+			_main_items[result]
 
 
 
-var level: int = 0
-var cursor: int = 0
-var backlog: int = 0
-
-var block: Node
-var queue: Array[int] = []
-var talking: bool:
-	get: return not queue.is_empty()
-var chat: int:
-	get: return queue.pop_front()
-
-func set_level(value: int, position: int) -> void: # LEVEL USUALLY set after level finish or on load
-	level = value
-	cursor = position # locale.get_chat(value)
-	backlog = cursor - 1
-
-func scroll(locale: Node) -> void:
-	if backlog == -1: return
-
-	for i in range(5):
-		if not locale.with(backlog, "L"):
-			backlog = -1 ; break
-		var key: String = locale.text(backlog)
-		block.insert_chat(block.chat(key), block.chat(key))
-		backlog -= 1
-
-func find_part(locale: Node, key: String) -> int:
-	var i: int = cursor
-	while not locale.with(i, key): i += 1
-	return i
-
-func add_queue(locale: Node, key: String) -> void:
-	var i: int = find_part(locale, key)
-	while locale.with(i, key):
-		queue.append(i)
-		i += 1
-
-
-
-
-var length: int = 0
-var locale: Node
-var nodes: Array = []
-
+var started_dialog: bool = false
+var queue: PackedByteArray = []
+var length: Vector2i = Vector2i.ZERO
 var who: PackedStringArray = ["RAY", "ROCK", "DID", "???"]
 var face: PackedStringArray = ["look", "rage", "grin", "smile", "confirm",
 	"tired", "but", "sign", "amaze", "respect", "anger", "play", "rain", "scare"]
 
-func _dialog_level(value: int) -> void: cursor.set_level(value, locale.get_chat(value))
-func _scroll() -> void: scroll(locale)
+enum { CURRENT, END_MESSAGE, DIALOG_FROM = 1, DIALOG_TO = 2, DIALOG_CURSOR = 3 }
 
-func add_chat(part: int) -> void:
-	var key: String = "L%d_%d" % [cursor.level, part]
-	cursor.add_queue(locale, key)
-	timer.start()
-
-func get_chatter(key: String) -> Dictionary:
-	var alias: String = key[-2]
-	assert(face.has(key[-1]), "Unknown emotion: %s" % key)
-	assert(who.has(alias), "Unknown character: %s" % key)
-	return { "face": face[key[-1]], "who": who[alias], "alias": alias }
-
-func _new_chat_block() -> void:
-	var key: String = locale.text(cursor.chat)
-	var id: Dictionary = get_chatter(key)
-	clear()
-	length = len(tr(key)) ; nodes.clear()
-	cursor.block.chats(id.who, nodes, key, 3)
-	cursor.block.add_chat(nodes)
-	cursor.block.set_emotion(id)
-
-func plot_speech() -> void:
-	for node in nodes: node.visible_characters += 1
-	length -= 1
-
-func clear() -> void: for node in nodes: node.visible_characters = -1
-
-func stop_speech() -> void:
-	clear()
-	cursor.block.hide_emotion()
-	timer.stop()
-
-func talking() -> void:
-	if length > 0:
-		plot_speech()
-	elif cursor.talking:
-		_new_chat_block()
+func add_dialog(from: int, to: int) -> void: # LEVEL USUALLY set after level finish or on load
+	length[END_MESSAGE] += DIALOG_CURSOR
+	if length[END_MESSAGE] >= len(queue):
+		queue.append(HUD.get_part(LEVEL))
+		queue.append(from)
+		queue.append(to)
 	else:
-		stop_speech()
+		queue[length[CURRENT]] = HUD.get_part(LEVEL)
+		queue[length[CURRENT] + DIALOG_FROM] = from
+		queue[length[CURRENT] + DIALOG_TO] = to
+	if !started_dialog:
+		started_dialog = true
+		timeout_talk()
 
+func ready_timer() -> void:
+	dialog_timer.connect(timeout_talk)
 
-
-
-
-var _locale: Array = Def.ARRAY
-var locale: Array:
-	get:
-		if _locale == Def.ARRAY: _locale = _get_locale()
-		return _locale
-
-func text(cursor: int) -> String: return locale[cursor]
-func with(cursor: int, start: String) -> bool:
-	return locale[cursor].begins_with(start)
-
-func _get_locale() -> Array: # TODOT
-	var result: Array = [] # for loc in TranslationServer.get_loaded_locales():
-	var translation: Translation = TranslationServer.get_translation_object("en")
-	if translation:
-		var message: PackedStringArray = translation.get_message_list() # get_all_scripts()
-		result.append_array(message)
-	return result
-
-func search_entry(entry: String) -> int:
-	var res: int = Def.INT
-	var size: int = len(locale)
-	var cr: Array = [[1, 2], [size - (size % 2), -2]]
-	while (cr[0][0] < size) and (cr[1][0] > 0) and (res == Def.INT):
-		for c in cr:
-			if with(c[0], entry): res = c[0]
-			c[0] += c[1]
-	return res
-
-func align_cursor(res: int, entry: String) -> int:
-	assert(res != Def.INT, "Level localization not found")
-	while (res != Def.INT and with(res, entry)): res -= 1
-	res += 1
-	return res
-
-func get_chat(level: int) -> int:
-	var entry: String = "L%d" % level
-	return align_cursor(search_entry(entry), entry)
-
-
-
-func chat(who: String, key: String):
-	var statement: Label = PreloadBus.chat.instantiate()
-	statement.say(who, key)
-	return statement
-
-func chats(who: String, result: Array, key: String, count: int) -> void:
-	for i in range(count): result.append(chat(who, key))
-
-func insert_chat(h: Label, p: Label) -> void:
-	hud.chat.insert(h)
-	panel.insert(p) # .chat
-
-func add_chat(nodes: Array) -> void:
-	hud.temp.chat.append(nodes[0])
-	hud.chat.append(nodes[1]) # add_child
-	panel.append(nodes[2]) # chat
-
-func hide_emotion() -> void: for e in emotion: e.hide_animation()
-func set_emotion(id: Dictionary) -> void:
-# id.alias.to_lower()
-	for e in emotion: e.set_animation('r' + "_" + id.face)
-
-
+func timeout_talk() -> void:
+	var message: int = queue[length[CURRENT] + DIALOG_FROM]
+	if message >= queue[length[CURRENT] + DIALOG_TO]:
+		length[CURRENT] += DIALOG_CURSOR
+		if length[CURRENT] >= length[END_MESSAGE]:
+			length = Vector2i.ZERO
+			if dialog_on: dialogs.hide()
+			return
+	else:
+		message += 1
+		queue[length[CURRENT] + DIALOG_FROM] = message
+	if dialog_on:
+		dialogs.show()
+		var key: String = "L%d_%d" % [queue[length[CURRENT]], message]
+		talk_dialog.text = key
+		talk_dialog.visible_characters = 0
+		var tween: Tween = create_tween()
+		tween.tween_property(talk_dialog, ^"visible_characters", len(tr(key)), 0.5)
+		tween.tween_callback(dialog_timer.start)
+	else:
+		dialog_timer.start()
 
 
 enum { STATUS_TYPE, STATUS_TIME, STATUS_X = -7, STATUS_Y = 25 }
@@ -479,7 +367,7 @@ func status_drawback() -> void:
 				enemy_status[e - Def.PARTY] = Def.to_x(Def.BYTE, enemy_status[e - Def.PARTY], i, result)
 
 
-var debug_timer: Timer; var _debug_title: Label; var _debug_status: Label; var _debug_state: int
+var _debug_title: Label; var _debug_status: Label; var _debug_state: int
 
 enum { FPS, GPU }
 
@@ -493,7 +381,9 @@ func debug_drawback() -> void:
 func debug_change() -> void:
 	_debug_status.text = str("\nFPS" if _don(FPS) else "", "\nVRAM" if _don(GPU) else "")
 	if debug_timer == null:
+		debug_timer = Timer.new()
 		debug_timer.connect(debug_drawback)
+		add_child(debug_timer)
 	debug_timer.start()
 
 func drawback(asset: Node2D) -> void:
@@ -626,117 +516,101 @@ var game: Control; var pause: Control; var settings: Control; var information: C
 var right: HSplitContainer; var left: HSplitContainer; var top: VSplitContainer; var bottom: VSplitContainer; var controls: MarginContainer
 var right_priorities: PanelContainer; var left_stats: PanelContainer; var top_inventory: PanelContainer; var bottom_ability: PanelContainer
 
-var fix_log: Label; var logs: RichTextLabel; var talk_border: PanelContainer; var talk_image: TextureRect; var help: Label
+var dialogs: RichTextLabel; var talk_dialog: Label; var talk_border: PanelContainer; var talk_image: TextureRect
+var fix_log: Label; var logs: RichTextLabel; var help: Label
+
+func set_stats() -> void:
+	stats_scroll = _lazy(left_stats, &"_stats_scroll", &"res://def/hud/game/stats.tscn")
+	stats_description = stats_scroll.get_node(^"description")
+	stats_chats = stats_scroll.get_node(^"stats_chats")
+	power_stat = stats_scroll.get_node(^"margin/stack/power")
+	power_base = power_stat.get_node(^"base")
+	influence_stat = stats_scroll.get_node(^"margin/stack/influence")
+	influence_base = influence_stat.get_node(^"base")
+	influence_stat = stats_scroll.get_node(^"margin/stack/influence")
+	influence_base = influence_stat.get_node(^"base")
+	vitality_stat = stats_scroll.get_node(^"margin/stack/vitality")
+	vitality_base = influence_stat.get_node(^"base")
+	reaction_stat = stats_scroll.get_node(^"margin/stack/reaction")
+	reaction_base = reaction_stat.get_node(^"base")
+	for node in stats_scroll.get_node(^"margin/stack").get_children():
+		side_items.append()
+
+func set_priorities() -> void:
+	priorities_scroll = _lazy(right_priorities, &"_priorities_scroll", &"res://def/hud/game/priorities.tscn")
+	priority_progress = priorities_scroll.get_node(^"stack/priority/progress")
+	priority_placeholder = priorities_scroll.get_node(^"stack/placeholder")
+	perks = priorities_scroll.get_node(^"stack/perks")
+	pages = priorities_scroll.get_node(^"stack/pages")
+	books = priorities_scroll.get_node(^"stack/books")
+	pursuit = priorities_scroll.get_node(^"stack/priority/pursuit")
+	self_control = priorities_scroll.get_node(^"stack/priority/self_control")
+	tenacity = priorities_scroll.get_node(^"stack/priority/tenacity")
+
+func set_ability() -> void:
+	ability_scroll = _lazy(right_ability, &"_ability_scroll", &"res://def/hud/game/ability.tscn")
+	ability_skills = ability_scroll.get_node(^"stack/skills")
+	ability_title = ability_scroll.get_node(^"stack/title")
+	ability_effect = ability_scroll.get_node(^"stack/effect")
+	ability_help = ability_scroll.get_node(^"stack/help")
+	ability_research = ability_scroll.get_node(^"stack/status/research")
+	ability_health = ability_scroll.get_node(^"stack/status/health")
+	ability_health_bar = ability_scroll.get_node(^"stack/status/health/bar")
+	ability_score = ability_scroll.get_node(^"stack/status/score")
+	ability_meter = ability_scroll.get_node(^"stack/status/score/meter")
+	ability_pallete = ability_scroll.get_node(^"stack/pallete")
+
+func set_inventory() -> void:
+	inventory_scroll = _lazy(top_inventory, &"_inventory_scroll", &"res://def/hud/game/inventory.tscn")
+	inventory_bag_placeholder = inventory_scroll.get_node(^"stack/back/placeholder")
+	inventory_bestiary = inventory_scroll.get_node(^"stack/bestiary")
+	bestiary_number = inventory_bestiary.get_node(^"number")
+	bestiary_effect = inventory_bestiary.get_node(^"effect")
+	inventory_status = inventory_scroll.get_node(^"stack/bag/status")
+	inventory_status = inventory_scroll.get_node(^"stack/bag/status")
+	for i in [^"stack/bag/ray", ^"stack/bag/rock"]:
+		main_items.append(inventory_scroll.get_node(i).get_children())
+
+var inventory_scroll: ScrollContainer; var inventory_bag_placeholder: Control
+var inventory_bestiary: HFlowContainer; var bestiary_number: Label
+var bestiary_effect: Label; var inventory_status: GridContainer
+
+var _side_equip: bool = false
+var main_items: Array[Array] = []
+var side_items: Array[Button] = []
+
+## UI ABILITY
+var ability_scroll: ScrollContainer
+var ability_skills: ItemList; var ability_title: ProgressBar
+var ability_effect: ProgressBar; var ability_help: HFlowContainer
+var ability_research: Button; var ability_health: Button
+var ability_health_bar: ProgressBar; var ability_score: Label
+var ability_meter: Label; var ability_pallete: ItemList
 
 ## UI STATS
 var _stat_bar: PackedScene = null
-var _stats_scroll: ScrollContainer; var stats_scroll: ScrollContainer:
-	get: return _lazy(left_stats, &"_stats_scroll", &"res://def/hud/game/stats.tscn")
-var _stats_description: ScrollContainer; var stats_description: ScrollContainer:
-	get: return _from(stats_scroll, &"_stats_description", ^"description")
-var _stats_chats: ScrollContainer; var stats_chats: ScrollContainer:
-	get: return _from(stats_scroll, &"_stats_chats", ^"stats_chats")
-var _power_stat: Button; var power_stat: Button:
-	get: return _from(stats_scroll, &"_power_stat", ^"margin/stack/power")
-var _power_base: ProgressBar; var power_base: ProgressBar:
-	get: return _from(power_stat, &"_power_base", ^"base")
+var stats_scroll: ScrollContainer
+var stats_description: ScrollContainer; var stats_chats: ScrollContainer
+var power_stat: Button; var power_base: ProgressBar
+var influence_stat: Button; var influence_base: ProgressBar
+var vitality_stat: Button; var vitality_base: ProgressBar
+var reaction_stat: Button; var reaction_base: ProgressBar
 var _power_next: ProgressBar; var power_next: ProgressBar:
 	get: return _lazy(power_stat, &"_power_next", &"res://def/hud/game/stats_bar.tscn", &"_stat_bar")
-var _influence_stat: Button; var influence_stat: Button:
-	get: return _from(_stats_scroll, &"_influence_stat", ^"margin/stack/influence")
-var _influence_base: ProgressBar; var influence_base: ProgressBar:
-	get: return _from(influence_stat, &"_influence_base", ^"base")
 var _influence_next: ProgressBar; var influence_next: ProgressBar:
 	get: return _lazy(influence_stat, &"_influence_next", &"res://def/hud/game/stats_bar.tscn", &"_stat_bar")
-var _vitality_stat: Button; var vitality_stat: Button:
-	get: return _from(stats_scroll, &"_vitality_stat", ^"margin/stack/vitality")
-var _vitality_base: ProgressBar; var vitality_base: ProgressBar:
-	get: return _from(vitality_stat, &"_vitality_base", ^"base")
 var _vitality_next: ProgressBar; var vitality_next: ProgressBar:
 	get: return _lazy(vitality_stat, &"_vitality_next", &"res://def/hud/game/stats_bar.tscn", &"_stat_bar")
-var _reaction_stat: Button; var reaction_stat: Button:
-	get: return _from(stats_scroll, &"_reaction_stat", ^"margin/stack/reaction")
-var _reaction_base: ProgressBar; var reaction_base: ProgressBar:
-	get: return _from(reaction_stat, &"_reaction_base", ^"base")
 var _reaction_next: ProgressBar; var reaction_next: ProgressBar:
 	get: return _lazy(reaction_stat, &"_reaction_next", &"res://def/hud/game/stats_bar.tscn", &"_stat_bar")
 
-var _priorities_scroll: ScrollContainer; var priorities_scroll: ScrollContainer:
-	get: return _lazy(right_priorities, &"_priorities_scroll", &"res://def/hud/game/priorities.tscn")
-var _priority_progress: ProgressBar; var priority_progress: ProgressBar:
-	get: return _from(priorities_scroll, &"_priority_progress", ^"stack/priority/progress")
-var _priority_placeholder: Control; var priority_placeholder: Control:
-	get: return _from(priorities_scroll, &"_priority_placeholder", ^"stack/placeholder")
-var _perks: ItemList; var perks: ItemList:
-	get: return _from(priorities_scroll, &"_perks", ^"stack/perks")
-var _pages: ItemList; var pages: ItemList:
-	get: return _from(priorities_scroll, &"_pages", ^"stack/pages")
-var _books: VBoxContainer; var books: VBoxContainer:
-	get: return _from(priorities_scroll, &"_books", ^"stack/books")
-var _pursuit: Button; var pursuit: Button:
-	get: return _from(priorities_scroll, &"_pursuit", ^"stack/priority/pursuit")
-var _self_control: Button; var self_control: Button:
-	get: return _from(priorities_scroll, &"_self_control", ^"stack/priority/self_control")
-var _tenacity: Button; var tenacity: Button:
-	get: return _from(priorities_scroll, &"_tenacity", ^"stack/priority/tenacity")
-
-var _ability_scroll: ScrollContainer; var ability_scroll: ScrollContainer:
-	get: return _lazy(right_ability, &"_ability_scroll", &"res://def/hud/game/ability.tscn")
-var _ability_skills: ItemList; var ability_skills: ItemList:
-	get: return _from(ability_scroll, &"_ability_skills", ^"stack/skills")
-var _ability_title: ProgressBar; var ability_title: ProgressBar:
-	get: return _from(ability_scroll, &"_ability_title", ^"stack/title")
-var _ability_effect: ProgressBar; var ability_effect: ProgressBar:
-	get: return _from(ability_scroll, &"_ability_effect", ^"stack/effect")
-var _ability_help: HFlowContainer; var ability_help: HFlowContainer:
-	get: return _from(ability_scroll, &"_ability_help", ^"stack/help")
-var _ability_research: Button; var ability_research: Button:
-	get: return _from(ability_scroll, &"_ability_research", ^"stack/status/research")
-var _ability_health: Button; var ability_health: Button:
-	get: return _from(ability_scroll, &"_ability_health", ^"stack/status/health")
-var _ability_health_bar: ProgressBar; var ability_health_bar: ProgressBar:
-	get: return _from(ability_scroll, &"_ability_health_bar", ^"stack/status/health/bar")
-var _ability_score: Label; var ability_score: Label:
-	get: return _from(ability_scroll, &"_ability_score", ^"stack/status/score")
-var _ability_meter: Label; var ability_meter: Label:
-	get: return _from(ability_scroll, &"_ability_meter", ^"stack/status/score/meter")
-var _ability_pallete: ItemList; var ability_pallete: ItemList:
-	get: return _from(ability_scroll, &"_ability_pallete", ^"stack/pallete")
-var _ability_pallete_hint: Label; var ability_pallete_hint: Label:
-	get: return _from(ability_scroll, &"_ability_pallete_hint", ^"stack/pallete_hint")
-
-var _inventory_scroll: ScrollContainer; var inventory_scroll: ScrollContainer:
-	get: return _lazy(top_inventory, &"_inventory_scroll", &"res://def/hud/game/inventory.tscn")
-var _inventory_bag_placeholder: Control; var inventory_bag_placeholder: Control:
-	get: return _from(inventory_scroll, &"_inventory_bag_placeholder", ^"stack/back/placeholder")
-var _inventory_bestiary: HFlowContainer; var inventory_bestiary: HFlowContainer:
-	get: return _from(inventory_scroll, &"_inventory_bestiary", ^"stack/bestiary")
-var _bestiary_number: Label; var bestiary_number: Label:
-	get: return _from(inventory_bestiary, &"_bestiary_number", ^"number")
-var _bestiary_effect: Label; var bestiary_effect: Label:
-	get: return _from(inventory_bestiary, &"_bestiary_effect", ^"effect")
-var _inventory_status: GridContainer; var inventory_status: GridContainer:
-	get: return _from(inventory_scroll, &"_inventory_status", ^"stack/bag/status")
-
-var _side_equip: bool = false
-var _main_items: Array[Button] = []
-var _side_items: Array[Button] = []
-
-var inventory_select: TextureRect = preload("res://def/hud/game/inventory_select.tscn").instantiate()
-
-var _main_inventory: GridContainer; var main_inventory: GridContainer:
-	get: return _from(inventory_scroll, &"_main_inventory", ^"stack/main_inventory")
-var _side_inventory: GridContainer; var side_inventory: GridContainer:
-	get:
-		if _side_inventory == null: _side_inventory = load(Def.items).instantiate()
-		return _side_inventory
-var _status_grid: GridContainer; var status_grid: GridContainer:
-	get:
-		if _status_grid == null: _status_grid = load(Def.status).instantiate()
-		return _status_grid
+## UI PRIORITY
+var priorities_scroll: ScrollContainer
+var priority_progress: ProgressBar; var priority_placeholder: Control
+var perks: ItemList; var pages: ItemList; var books: VBoxContainer
+var pursuit: Button; var self_control: Button; var tenacity: Button
 
 # add status
-
 func _lazy(parent: Control, name: StringName, path: StringName, cache: StringName = &"") -> void:
 	var node: Control = get(name); if node != null: return node
 	if cache != &"":
@@ -754,9 +628,6 @@ func _lazy(parent: Control, name: StringName, path: StringName, cache: StringNam
 func _from(parent: Control, name: StringName, path: NodePath) -> Control:
 	var node: Control = get(name); if node != null: return node
 	node = parent.get_node(path); set(name, node); return node
-
-@onready var ui: Window = get_window()
-@onready var resize_timer: Timer = Timer.new()
 
 func setup_hud() -> void:
 	right.drag_ended.connect(right_mouse_drag)

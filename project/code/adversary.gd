@@ -636,7 +636,7 @@ func set_aura(thickness: float, next_color: Color, resource: bool) -> void: # MO
 		HUD.level.profile[HUD.hero].material.set(&"shader_parameter/line_thickness", thickness)
 		HUD.level.profile[HUD.hero].material.set(&"shader_parameter/line_color", next_color)
 # PARTICLES
-enum { PUNCH, KICK, FIRE, DROP, APPEAR = 0, TIME, DISAPPEAR, OFFSET = 10, PATH = 100 }
+enum { PUNCH, KICK, TORCH, DROP, APPEAR = 0, TIME, DISAPPEAR, OFFSET = 10, PATH = 100 }
 
 const timing: PackedFloat32Array = [0.2, 0.4, 0.6]
 
@@ -648,7 +648,7 @@ func set_direction(pos: Vector2, direction: Vector2, type: int) -> void:
 	match type:
 		PUNCH: texture = preload("res://icon/vfx/punch.png")
 		KICK: texture = preload("res://icon/vfx/kick.png")
-		FIRE: texture = preload("res://icon/vfx/ray/fire.svg")
+		TORCH: texture = preload("res://icon/vfx/ray/fire.svg")
 		DROP: texture = preload("res://icon/vfx/rock/water.svg")
 	sprite.position = pos - Vector2(0, 32)
 	var offsets: Vector2 = Vector2(OFFSET, OFFSET)

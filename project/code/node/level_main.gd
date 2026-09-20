@@ -1,5 +1,6 @@
 extends Control
 
+@onready var exit: Button = $hud/options/game/exit
 @onready var difficulty: Button = $hud/options/game/difficulty
 @onready var settings: Button = $hud/options/game/settings
 @onready var start: Button = $hud/options/game/start
@@ -12,6 +13,7 @@ extends Control
 
 var found: int = 255
 var temp: Tween = null
+var is_start: bool = false
 
 func _input(event: InputEvent) -> void:
 	if temp == null: return
@@ -40,12 +42,13 @@ func logo_hide() -> void:
 	logo.queue_free()
 	fire.emitting = true
 	t.tween_callback(func():
-		remove_child(shadow) ; caption.add_sibling(shadow)
-		remove_child(caption) ; shadow.add_sibling(caption)
+		remove_child(shadow); caption.add_sibling(shadow)
+		remove_child(caption); shadow.add_sibling(caption)
 		shadow.color = Color.BLACK
-		settings.pressed.connect(game_continue)
+		settings.pressed.connect(HUD.game_settings)
 		start.pressed.connect(game_start)
-		difficulty.pressed.connect(game_exit))
+		difficulty.pressed.connect(difficulty_select)
+		exit.pressed.connect(HUD.game_exit))
 
 func logo_show() -> void:
 	match i:
@@ -55,7 +58,14 @@ func logo_show() -> void:
 
 func _ready() -> void: # if Bit.of(settings, LOGO): .. logo_hide()
 	logo_show()
+	exit.pressed.connect(HUD.game_exit)
+	start.pressed.connect(HUD.game_start)
+
+func game_start() -> void:
+	if is_start:
+		HUD.game_start()
+	else:
+		HUD.game_continue()
 
 func game_exit() -> void: tree.quit() # stats
-func game_start() -> void: print_debug(tree.change_scene_to_file(Def.first_level))
-func game_continue() -> void: pass # if not stats.load_progress(): stats.load_scene(Def.first_level)
+func difficulty_select() -> void: pass

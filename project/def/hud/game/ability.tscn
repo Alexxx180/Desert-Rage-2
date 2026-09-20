@@ -1,9 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://bo6wehp5f8viu"]
+[gd_scene load_steps=9 format=3 uid="uid://bo6wehp5f8viu"]
 
+[ext_resource type="PackedScene" uid="uid://b8hybaq32frfk" path="res://def/hud/game/inventory_title.tscn" id="2_347r3"]
 [ext_resource type="PackedScene" uid="uid://cq5jn6k2bwg5n" path="res://def/hud/game/ability_status.tscn" id="3_uklt7"]
 [ext_resource type="PackedScene" uid="uid://cspf6sh5v7o4v" path="res://def/hud/game/priorities_card.tscn" id="4_6r3jo"]
-[ext_resource type="FontFile" uid="uid://c4ygkmnbt1j7y" path="res://data/font/LTSuperiorSerif-Semibold.otf" id="5_grhtg"]
-[ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://data/theme/patterns/template/menu/settings/topic/footer.tres" id="9_xc6ys"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uklt7"]
 content_margin_left = 20.0
@@ -29,9 +28,9 @@ VScrollBar/styles/grabber = SubResource("StyleBoxFlat_2whmr")
 VScrollBar/styles/scroll = SubResource("StyleBoxFlat_hq6jf")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ooq4j"]
-content_margin_left = 20.0
+content_margin_left = 0.0
 content_margin_top = 0.0
-content_margin_right = 10.0
+content_margin_right = 0.0
 content_margin_bottom = 0.0
 bg_color = Color(0, 0, 0, 1)
 expand_margin_left = 12.0
@@ -55,63 +54,14 @@ theme_override_constants/separation = 15
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 
-[node name="pallete" type="ItemList" parent="stack"]
-custom_minimum_size = Vector2(0, 30)
+[node name="title" parent="stack" instance=ExtResource("2_347r3")]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("5_grhtg")
-theme_override_font_sizes/font_size = 20
-item_count = 6
-max_columns = 6
-fixed_column_width = 70
-item_0/text = "Бой"
-item_0/disabled = true
-item_1/text = "Пал. 1"
-item_2/text = "Пал. 2"
-item_3/text = "Пал. 3"
-item_4/text = "Пал. 4"
-item_5/text = "Пал. 5"
+text = "· Предмет можно использовать также перетаскивая его на АР колбы. При определенной сортировке герои могут быстро пополнять АР. Порядок сортировки определяют предметы, лежащие слева-направо, восполняющие число АР. При нажатии на колбы [color=91fe90FF][b][i]🫙[/i][/b]А[/color] [color=7aa1ffFF][b][i]🫙[/i][/b]Р[/color] герой использует инвентарь для восстановления выбранного персонажа. Для быстрого доступа используется %s и %s + %s в ходе игры. Поведение определяется типом сортировки.
 
-[node name="skills" type="ItemList" parent="stack"]
-custom_minimum_size = Vector2(0, 62)
-layout_mode = 2
-theme_override_constants/h_separation = 15
-theme_override_constants/v_separation = 7
-theme_override_fonts/font = ExtResource("5_grhtg")
-theme_override_font_sizes/font_size = 20
-item_count = 4
-max_columns = 2
-item_0/text = "Рей"
-item_0/disabled = true
-item_1/text = "🔥- 👊 -🦶 - 🔥- 👊 -🦶- 🔥- 👊 -🦶- 🔥- 👊 -🦶"
-item_2/text = "Рок"
-item_2/disabled = true
-item_3/text = "🔥- 👊 -🦶 - 🔥- 👊 -🦶- 🔥- 👊 -🦶- 🔥- 👊 -🦶"
-
-[node name="pallete_hint" type="Label" parent="stack"]
-custom_minimum_size = Vector2(50, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 1
-size_flags_stretch_ratio = 0.25
-theme = ExtResource("9_xc6ys")
-theme_override_font_sizes/font_size = 18
-text = "Боевая палитра позволяет вам выбрать слоты, которые персонаж будет использовать при тесном контакте с противником. Для активации вы должны ритмично сближаться с противником и отдаляться от него. Чтобы отключить действие боевой палитры и перейти обратно в режим близкого боя нажмите \"Бой\".
-
-Для изменения палитры выберите любой номер с \"Пал.\". Выберите слоты героя, затем вводите используя ваше устройство ввода. Для мыши - ЛКМ новый слот, колесо мыши - менять умение, ПКМ - удалить слот, задержать ПКМ - очистить. Описание способностей можно посмотреть в Досье на правой панели."
-autowrap_mode = 2
-
-[node name="effect" type="Label" parent="stack"]
-custom_minimum_size = Vector2(50, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 1
-size_flags_stretch_ratio = 0.25
-theme = ExtResource("9_xc6ys")
-theme_override_font_sizes/font_size = 18
-text = "Откройте \"Пал.\" чтобы узнать больше о боевой палитре и доступных вам комбо
-Пламя - сила, вызволяющая узников и отгоняющая злые силы. Позволяет плавить лёд и зажигать факелы.
-Кнут - элемент присутствия и гибкости, делающий хват рук дальше и крепче."
-autowrap_mode = 2
+[table=3]
+[cell expand][left][b][i]🔼[/i][/b] По возрастанию - восполнение АР с экономией предметов[/left][/cell][cell expand][left][b][i]🔽[/i][/b] По убыванию - восполнение АР без экономии предметов[/left][/cell][cell][left][b][i]🔀[/i][/b] В случайном порядке - восполнение АР первым предметом[/left][/cell]
+[/table]
+[i][color=b5b5b5]Помощь[/color][/i]"
 
 [node name="help" type="HFlowContainer" parent="stack"]
 layout_mode = 2

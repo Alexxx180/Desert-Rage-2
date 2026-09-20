@@ -1,12 +1,11 @@
-[gd_scene load_steps=16 format=3 uid="uid://7o2xe4bosovy"]
+[gd_scene load_steps=14 format=3 uid="uid://7o2xe4bosovy"]
 
 [ext_resource type="PackedScene" uid="uid://dqlgy3l13bibl" path="res://def/hud/game/inventory_items.tscn" id="1_fmuye"]
+[ext_resource type="PackedScene" uid="uid://b8hybaq32frfk" path="res://def/hud/game/inventory_title.tscn" id="2_qo7jo"]
 [ext_resource type="PackedScene" uid="uid://b8wsdeuhaqjym" path="res://def/hud/game/stats_stat.tscn" id="3_pf2c5"]
 [ext_resource type="Texture2D" uid="uid://e4utxikoeub7" path="res://icon/help/stat_defense.svg" id="4_08ayy"]
 [ext_resource type="Texture2D" uid="uid://d37dqji5ybnbg" path="res://icon/help/stat_influence.svg" id="5_8w622"]
 [ext_resource type="Texture2D" uid="uid://c6ecpv75raqi8" path="res://icon/help/stat_reaction.svg" id="6_etdq7"]
-[ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://data/theme/patterns/template/menu/settings/topic/footer.tres" id="7_hejl4"]
-[ext_resource type="FontFile" uid="uid://o0rgn7d13mr3" path="res://data/font/OpenSans-VariableFont_wdth,wght.ttf" id="10_10kjk"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qw6gd"]
 bg_color = Color(0.6, 0.6, 0.6, 0.498039)
@@ -31,19 +30,15 @@ content_margin_right = 0.0
 content_margin_bottom = 10.0
 bg_color = Color(0, 0, 0, 1)
 
-[sub_resource type="Gradient" id="Gradient_hf8md"]
-colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0)
+[sub_resource type="Gradient" id="Gradient_3g2au"]
+colors = PackedColorArray(0.196078, 0.196078, 0.196078, 0.470588, 0.176471, 0.176471, 0.176471, 0.627451)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_lpjcv"]
-gradient = SubResource("Gradient_hf8md")
-fill_from = Vector2(1, 0)
-fill_to = Vector2(0, 0)
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ubvyx"]
+gradient = SubResource("Gradient_3g2au")
+fill_to = Vector2(1, 1)
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_hjtod"]
-content_margin_left = 160.0
-texture = SubResource("GradientTexture2D_lpjcv")
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kj83q"]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fmuye"]
+texture = SubResource("GradientTexture2D_ubvyx")
 
 [node name="scroll" type="ScrollContainer"]
 anchors_preset = 15
@@ -68,65 +63,60 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 4
 
-[node name="main_items" parent="margin/stack" instance=ExtResource("1_fmuye")]
+[node name="equip" type="HBoxContainer" parent="margin/stack"]
+layout_mode = 2
+
+[node name="cook" type="Button" parent="margin/stack/equip"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_fmuye")
+
+[node name="main_items" parent="margin/stack/equip" instance=ExtResource("1_fmuye")]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_stretch_ratio = 1.5
 
-[node name="equip" type="Label" parent="margin/stack"]
+[node name="stats" type="VBoxContainer" parent="margin/stack/equip"]
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
-size_flags_horizontal = 0
-theme_override_fonts/font = ExtResource("10_10kjk")
-theme_override_font_sizes/font_size = 20
-text = "Снаряжение"
+size_flags_horizontal = 3
 
-[node name="power" parent="margin/stack" instance=ExtResource("3_pf2c5")]
+[node name="power" parent="margin/stack/equip/stats" instance=ExtResource("3_pf2c5")]
 layout_mode = 2
 text = "SPWT"
 
-[node name="influence" parent="margin/stack" instance=ExtResource("3_pf2c5")]
+[node name="influence" parent="margin/stack/equip/stats" instance=ExtResource("3_pf2c5")]
 layout_mode = 2
 text = "SNFT"
 icon = ExtResource("4_08ayy")
 
-[node name="vitality" parent="margin/stack" instance=ExtResource("3_pf2c5")]
+[node name="vitality" parent="margin/stack/equip/stats" instance=ExtResource("3_pf2c5")]
 layout_mode = 2
 text = "SVTT"
 icon = ExtResource("5_8w622")
 
-[node name="reaction" parent="margin/stack" instance=ExtResource("3_pf2c5")]
+[node name="reaction" parent="margin/stack/equip/stats" instance=ExtResource("3_pf2c5")]
 layout_mode = 2
 text = "SRCT"
 icon = ExtResource("6_etdq7")
 
-[node name="description" type="Label" parent="margin/stack"]
-custom_minimum_size = Vector2(50, 30)
+[node name="title" parent="margin/stack" instance=ExtResource("2_qo7jo")]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 0
-size_flags_stretch_ratio = 2.0
-theme = ExtResource("7_hejl4")
-theme_override_constants/line_spacing = 11
-theme_override_styles/normal = SubResource("StyleBoxTexture_hjtod")
-text = "Some Test object like this asdadadadsadadadadasdad фывфывфвыолвоыфвловофвлфыовфы"
-horizontal_alignment = 2
-autowrap_mode = 2
+text = "[i][color=b5b5b5]Снаряжение[/color][/i]
+· Предметы, которые имеют эффект для персонажа при помещении на спец. ячейки называется снаряжением. При перетаскивании предметов на спец. продолговатую ячейку слева - область осмотра, можно оснастить снаряжение или начать готовить расходники. Для отмены - нажмите на область просмотра
 
-[node name="title" type="RichTextLabel" parent="margin/stack"]
-visible = false
-custom_minimum_size = Vector2(50, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.25
-theme = ExtResource("7_hejl4")
-theme_override_font_sizes/italics_font_size = 28
-theme_override_styles/normal = SubResource("StyleBoxEmpty_kj83q")
-bbcode_enabled = true
-text = "· Показатель - число выше, определяющее характеристики в поединке. Например живучесть определяет количество ауры, реакция количество ресурса и т.п.
-· В диалогах ниже находятся сведения о ваших деловых переговорах.
-"
-fit_content = true
-autowrap_mode = 2
+Виды ячеек снаряжения: [b][i]🗡[/i][/b] Оружие [b][i]🛡[/i][/b] Реликвия [b][i]🧥[/i][/b] Броня [b][i]👖[/i][/b] Поножи [b][i]🥾[/i][/b] Сапоги [b][i]▒[/i][/b] Панель быстрого доступа - для активации нужно выбрать слот. Для огнестрельного оружия и снарядов также требуется нажатие на курок
+
+[table=2]
+[cell][left][b][i]♨[/i][/b] Готовка. Последовательно нажимайте на расходники. Если увидите новый предмет в области - нажмите на пустой слот чтобы создать его.[/left][/cell]
+[cell][left][b][i]🪛[/i][/b] Оснащение. Нажмите на экипировку, затем нажмите на обвес. Чтобы снять - нажмите на пустое место.[/left][/cell]
+[cell][left][b][i]⚔️[/i][/b] Мощь - урон физическими атаками[/left][/cell]
+[cell][left][b][i]🔥[/i][/b] Влияние - урон энергитическими атаками[/left][/cell]
+[cell][left][b][i]🛡[/i][/b] Живучесть - урон от физических атак[/left][/cell]
+[cell][left][b][i]🫧[/i][/b] Реакция - урон от энергитических атак[/left][/cell]
+[/table]
+
+· В диалогах ниже находятся сведения о ваших деловых переговорах."
 
 [node name="chats" type="VBoxContainer" parent="margin/stack"]
 layout_mode = 2
