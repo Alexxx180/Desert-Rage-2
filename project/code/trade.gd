@@ -1,4 +1,4 @@
-class_name HeroInventory extends RefCounted
+class_name Trades extends RefCounted
 
 enum { STICKS, OPUNTIA, TUMBLEWEED, TAMARISK, YUKKA, JAR, ANTIDOTE, ANTICOUGH, GOLD_KEY, SECRET_KEY,
 	WATER, TEA, ETHER, L_PANTS, I_PANTS, L_ARMOR, I_ARMOR, L_BOOTS, I_BOOTS,
@@ -57,7 +57,6 @@ var fast_panel: PackedByteArray = [0, 0]
 var product_id: int = -1
 
 var distraction: PackedInt32Array = [0, 0]
-var distraction_body: Array[StaticBody2D] = [null, null]
 var _fast_panel: Tween
 var icon: CompressedTexture2DArray
 
@@ -66,7 +65,7 @@ enum { CRAFT_MODE, MODE_START, MODE_ITEMS, MODE_WEAPON, CRAFT_ID = 0, CRAFT_SLOT
 
 func distract(bag: int) -> void: # LevelRoot
 	var tile: PackedInt32Array = HUD.level.tile_at()
-	if distraction[bag] == tile[Def.COORDS]:
+	if distraction[bag] == tile[HUD.COORDS]:
 		distraction_body[bag].add_stick()
 		return
 	#var body: StaticBody2D
@@ -75,13 +74,13 @@ func distract(bag: int) -> void: # LevelRoot
 
 func near_water() -> bool:
 	var tile: PackedInt32Array = HUD.level.tile_near()
-	return tile[Def.ID] == Def.ENTRY and tile[Def.ATLAS] == Def.D_WATER
+	return tile[HUD.ID] == HUD.ENTRY and tile[HUD.ATLAS] == HUD.D_WATER
 
 func open_door(id: int) -> bool:
 	var tile: PackedInt32Array = HUD.level.tile_near()
-	if tile[Def.ID] != Def.LOGIC: return false
-	if id == SECRET_KEY: return tile[Def.ATLAS] == Def.GOLD_OFF
-	return tile[Def.ATLAS] == Def.GOLD_OFF #FIX ME TO DOOR
+	if tile[HUD.ID] != HUD.LOGIC: return false
+	if id == SECRET_KEY: return tile[HUD.ATLAS] == HUD.GOLD_OFF
+	return tile[HUD.ATLAS] == HUD.GOLD_OFF #FIX ME TO DOOR
 
 enum { NO_ITEM, ITEM_USED, ITEM_THROW, WEAPON_THROW }
 
@@ -95,7 +94,7 @@ func produce_item(bag: int, slot: int) -> int:
 		match id:
 			T_RAPIER, W_RAPIER: return WEAPON_THROW
 			T_RAPIER, W_RAPIER: return WEAPON_THROW
-			GOLD_KEY, SECRET_KEY: used = open_door(id); if used: HUD.level.set_tile(Def.GROUND) # TODO check if it actual ground tile
+			GOLD_KEY, SECRET_KEY: used = open_door(id); if used: HUD.level.set_tile(HUD.GROUND) # TODO check if it actual ground tile
 	elif USE < id and id < ARMOR:
 		match id:
 			JAR: if near_water(): used = put_item(bag, WATER)

@@ -10,9 +10,12 @@ class_name LevelRoot extends Camera2D
 @export var enemy_proportion: PackedFloat32Array = []
 @export_flags_3d_physics var enemy: int
 @export_flags_3d_render var mode: int
-@onready var border: TileDecorator = $border; var execute: TileDecorator
+@onready var border: TileDecorator = get_node(^"../border"); var execute: TileDecorator
 
 var entity: Array[CharacterBody2D] = [null, null]
+var boxes: Array[AnimatableBody2D] = []
+var distraction_body: Array[StaticBody2D] = [null, null]
+
 var lever: Array[Area2D] = []
 var lever_body: Array[CollisionShape2D] = []
 var plate: Array[Area2D] = []
@@ -23,6 +26,9 @@ var mirror: Array[AnimatedSprite2D] = [null, null]
 var parallax: Array[ParallaxLayer] = []
 var overworld: bool = false
 var eye: Control; var magnifier: Camera2D
+
+var lever_tile: PackedInt32Array = [0, 0, 0, 0, 0,  0, 0, 0, 0, 0]
+var plate_tile: PackedInt32Array = [0, 0, 0, 0, 0,  0, 0, 0, 0, 0]
 
 func _process(_delta: float) -> void:
 	for lay in parallax: lay.motion_offset = entity[HUD.hero].position * speed

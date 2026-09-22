@@ -130,7 +130,7 @@ const help: CompressedTexture2DArray = preload("res://icon/help/z_master.svg")
 const root: Script = preload("res://code/node/level_root.gd")
 
 
-enum { MASK = 2, MASK2 = 3, MASK3 = 4, BYTE = 8, SHORT = 16, INTEGER = 32, BIG = 64 }
+enum { PART_BYTE = 2, HALF_BYTE = 4, BYTE = 8, SHORT = 16, INTEGER = 32, BIG = 64 }
 
 static func bit(no: int) -> int: return 1 << no
 static func one(n: int) -> bool: return n > 0 and (n & (n - 1)) == 0
@@ -156,36 +156,25 @@ static func b0(state: PackedByteArray, select: int, index: int) -> void:
 static func b1(state: PackedByteArray, select: int, index: int) -> void:
 	state[select] = to1(state[select], index)
 
-static func n0(state: PackedInt64Array, select: int, index: int) -> void:
-	state[select] = to0(state[select], index)
-
-static func n1(state: PackedInt64Array, select: int, index: int) -> void:
-	state[select] = to1(state[select], index)
-
-static func i0(state: PackedInt32Array, select: int, index: int) -> void:
-	state[select] = to0(state[select], index)
-
-static func i1(state: PackedInt32Array, select: int, index: int) -> void:
-	state[select] = to1(state[select], index)
-
-static func of_x(mask: int, field: int, no: int) -> int:
-	return (field >> (mask * no)) & (mask - 1)
-
-static func to_x(mask: int, field: int, no: int, next: int) -> int:
-	return field & ~((mask - 1) << (mask * no)) | (next << (mask * no))
-
 static func edit_x(mask: int, field: int, no: int, increment: int) -> int:
 	return to_x(mask, field, no, of_x(mask, field, no) + increment)
 
 static func bytes_to_int(fields: PackedByteArray, mask: int) -> int:
-	var value: int = 0 ; for i in range(0, len(fields)): value |= fields[i] << (i * mask)
+	var value: int = 0; for i in range(0, len(fields)): value |= fields[i] << (i * mask)
 	return value
 
-static func byte(item: int, slot: int) -> int:
-	return of_x(Def.BYTE, item, slot)
+static func part(item: int, slot: int) -> int: return (item >> (slot << PART_BYTE)) & 3
+static func half(item: int, slot: int) -> int: return (item >> (slot << HALF_BYTE)) & 15
+static func byte(item: int, slot: int) -> int: return (item >> (slot << BYTE)) & 255
+static func short(item: int, slot: int) -> int: return (item >> (slot << SHORT)) & 65535
+static func number(item: int, slot: int) -> int: return (item >> (slot << INTEGER)) & 4_294_967_295
+static func to_part(item: int, slot: int, next: int) -> int: return item & ~(3 << (slot << PART_BYTE)) | (next << (slot << PART_BYTE))
+static func to_half(item: int, slot: int, next: int) -> int: return item & ~(15 << (slot << PART_BYTE)) | (next << (slot << PART_BYTE))
+static func to_byte(item: int, slot: int, next: int) -> int: return item & ~(255 << (slot << PART_BYTE)) | (next << (slot << PART_BYTE))
+static func to_short(item: int, slot: int, next: int) -> int: return item & ~(65535 << (slot << PART_BYTE)) | (next << (slot << PART_BYTE))
+static func to_number(item: int, slot: int, next: int) -> int: return item & ~(4_294_967_295 << (slot << PART_BYTE)) | (next << (slot << PART_BYTE))
 
-static func short(item: int) -> Vector2i:
-	return Vector2i(byte(item, 0), byte(item, 1))
+static func short_of(item: int) -> Vector2i: return Vector2i(byte(item, 0), byte(item, 1))
 
 """
 static func iterate_set_bits(mask: int) -> int: # Handle negative integers safely if treating as an unsigned bitmask

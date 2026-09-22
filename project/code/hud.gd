@@ -1,4 +1,4 @@
-class_name WorldInput extends CanvasLayer
+class_name TheWorld extends CanvasLayer
 
 enum { LEVEL, LOGIC, BOX = 2, POS = 4, AURA = 6, RESOURCE = 7, STATUS = 8,
 	INVENTORY = 10, BESTIARY = 38, NOTES = 39, BOOKS = 40, CHESTS = 41, SECRETS = 42 }
@@ -8,9 +8,8 @@ var session: PackedInt64Array
 
 var level: LevelRoot
 var adversary: Adversary
-var interact: WorldInteraction
-var _inventory: HeroInventory
-var entity: Array[PhysicsBody2D] = []
+var action: Action
+var trades: Trades
 
 enum { CURRENTS, PLATFORMS, PLACES }
 var size: PackedByteArray = [0, 0, 0]
@@ -41,7 +40,7 @@ func set_item(bag: int, slot: int, item: int) -> void:
 	session[no] = Def.to_x(Def.SHORT, session[no], slot & Def.MASK3, item)
 
 func new_hero(no: int) -> CharacterBody2D:
-	if entity[no] == null:
+	if HUD.level.entity[no] == null:
 		var hero: CharacterBody2D = load(Def.ray if no == Def.RAY else Def.rock).instantiate()
 		hero.name = &"ray" if no == Def.RAY else &"rock"
 		hero.no = no
@@ -54,7 +53,7 @@ func load_hero(that: int) -> void:
 		entity[that] = new_hero(that)
 
 # TIMING
-var dialog_timer: Timer = Timer.new(); var resize_timer: Timer = Timer.new()
+var dialog_timer: Timer = Timer.new()
 var debug_timer: Timer
 
 @onready var tree: SceneTree = get_tree()
@@ -67,19 +66,13 @@ func _ready() -> void:
 	
 	interact = WorldInteraction.new()
 	aura = Adversary.new()
-	inventory = HeroInventory.new()
+	trade = HeroTrade.new()
 	
 	if level.group:
 		entity[HUD.hero].position = level.group.position
 		level.group.reparent(entity[HUD.hero])
 		level.group.position = Vector2.ZERO
-		
-	get_viewport().connect(^"size_changed", resize_timer.start)
-	HUD.add_child(resize_timer)
-	resize_timer.time = 0.25
-	resize_timer.one_shot = true
-	resize_timer.connect(_on_resize_timeout)
-	resize_timer.start()
+
 	dialog_timer.timeout.connect(talking)
 
 func next_hero() -> int: return (HUD.hero + 1) & Def.ROCK
@@ -91,8 +84,6 @@ func _init() -> void:
 	state[BODY] = Def.to0(state[BODY], RUN)
 	session = FileAccess.get_file_as_bytes(Def.saves).to_int64_array()
 
-var xp: RefCounted
-
 var level_path: PackedStringArray = ["_world", "_cave_origin",
 	"_cave_smoke", "_cave_spark", "_temple_ancient", "_credits"]
 var level_no: PackedByteArray = [0, 1, 8, 15, 27, 36]
@@ -100,7 +91,6 @@ var transition_no: int = 0
 var transition_part: int = 0
 
 func load_scene(no: int, part: String = "") -> void:
-	TileMapLayer
 	if part != "":
 		for i in range(0, len(level_path)):
 			if level_no[i] == no:
@@ -129,8 +119,7 @@ func load_transition(part: int = 0) -> void:
 
 func game_exit() -> void: tree.quit()
 func game_start() -> void: print_debug(tree.change_scene_to_file(&"res://def/dungeon/01_cave_origin.tscn"))
-func game_continue() -> void:
-	if not load_progress(): game_start()
+func game_continue() -> void: game_start() # TODO check save date
 
 
 enum { PAUSE, GAME }
@@ -625,20 +614,13 @@ func _lazy(parent: Control, name: StringName, path: StringName, cache: StringNam
 	set(name, node)
 	return node
 
-func _from(parent: Control, name: StringName, path: NodePath) -> Control:
-	var node: Control = get(name); if node != null: return node
-	node = parent.get_node(path); set(name, node); return node
+
 
 func setup_hud() -> void:
 	right.drag_ended.connect(right_mouse_drag)
 	left.drag_ended.connect(left_mouse_drag)
 
-func _on_resize_timeout():
-	if ui.size.x > ui.size.y:
-		if _inventory_scroll != null: status_grid.columns = 2
-	else:
-		if _inventory_scroll != null: status_grid.columns = 1
-	print("viewport size has stabilized - do performance-heavy stuff")
+
 
 var fixed_hud: bool = false
 var panel_open: int = -1

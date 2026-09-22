@@ -1,4 +1,4 @@
-class_name WorldInteraction extends RefCounted
+class_name Action extends RefCounted
 
 enum { STATIC = 1, JUMPED = 0, JUMPING, COUNT = 8, JUMP = 0, DURATION = 1,
 	CLOSE = 0, HEIGHT = 1, SHADOW = 2, PORTION = 3, JUMP_POWER = 10 }
@@ -33,7 +33,6 @@ var hero: CharacterBody2D:
 var _tile: PackedInt32Array:
 	get: return HUD.level.border.tile
 
-var boxes: Array[AnimatableBody2D] = []
 var box_height: PackedByteArray = []
 var box_hero: PackedByteArray = [0, 0]
 var directed: Vector2; var off: Vector2
@@ -58,7 +57,7 @@ func movement(act: bool) -> void:
 			HUD.direct(directed.round())
 			hero.lever.position = position[CLOSE] * directed
 		elif not in_place:
-			var box: AnimatableBody2D = boxes[hero.box]
+			var box: AnimatableBody2D = HUD.level.boxes[hero.box]
 			ledge_jump(box.position, box_height[hero.box])
 	else:
 		var motion: Vector2 = directed * Def.MOVE
@@ -121,8 +120,8 @@ func ledge_jump(pos: Vector2, height: int = 0) -> void:
 	var f2: int = HUD.level.border.extract(TileDecorator.FLOOR)
 	var jumped: bool = false
 	var no: int = -1
-	for i in range(0, len(boxes)):
-		var c: int = on_tile(boxes[i].position)[COORDS]
+	for i in range(0, len(HUD.level.boxes)):
+		var c: int = on_tile(HUD.level.boxes[i].position)[COORDS]
 		jumped = c == t[COORDS] and (f1 == (f2 + box_height[i])) 
 		if jumped: no = i; break
 	if jumped:
@@ -139,7 +138,7 @@ func ledge_jump(pos: Vector2, height: int = 0) -> void:
 	
 	Def.b(state, HUD.hero, JUMPED, jumped)
 	toggle_stuck(false)
-	if no != -1: hero.call_deferred(&"reparent", boxes[no], true)
+	if no != -1: hero.call_deferred(&"reparent", HUD.level.boxes[no], true)
 	
 	HUD.direct(d)
 	HUD.animate_frames(HUD.JUMP)
@@ -170,7 +169,7 @@ func trigger_disappear(body: Variant) -> void:
 	if body is AnimatableBody2D and body.is_in_group(&"box"):
 		for i in range(0, len(hero.boxes)):
 			if hero.boxes[i] == body.get_meta(&"no"):
-				hero.weight *= weight[i]
+				hero.weight *= box_weight[i]
 				pushes(i, Vector2.ZERO)
 				box_hero[i] = 0
 				break
@@ -178,13 +177,13 @@ func trigger_disappear(body: Variant) -> void:
 func trigger_encounter(body: Variant) -> void:
 	if body is AnimatableBody2D and body.is_in_group(&"box"):
 		var no: int = -1
-		for i in range(0, len(boxes)):
-			if body.get_instance_id() == boxes[i].get_instance_id():
+		for i in range(0, len(HUD.level.boxes)):
+			if body.get_instance_id() == HUD.level.boxes[i].get_instance_id():
 				no = i
 				break
 		if no == -1: return
 		hero.boxes.append(no)
-		var a: int = weight[no]
+		var a: int = int(box_weight[no])
 		var to: float = weight_d[a]
 		print("WEIGHT: ", hero.weight, " - TO: ", to, " - A: ", a)
 		hero.weight *= to
@@ -194,7 +193,7 @@ func trigger_encounter(body: Variant) -> void:
 	if (id == FLOOR and _tile[TYPE] == FLOORS) or (id == LOGIC and _tile[ATLAS] in stand):
 		ledge_jump(pos)
 	elif on_tile(hero.position + hero.lever.position)[ID] == LOGIC and _tile[ATLAS] in [SMALL_BOX, LARGE_BOX]:
-		HUD.level.boxes.add_box(_tile[ATLAS], HUD.level.border.position())
+		add_box(_tile[ATLAS], HUD.level.border.position())
 		HUD.level.border.atlas(GROUND).id(FLOOR).type(FLOORS).paint_alt() # coords(Def.GROUND)
 
 func plate_encounter(_body: Variant) -> void:
@@ -300,7 +299,6 @@ func resize_clusters() -> void:
 		access.append_array(types[i])
 		sizes[i] = types[i].size()
 
-var tile: PackedInt32Array = [0, 0, 0, 0]
 var cluster: PackedInt32Array = []
 var access: PackedInt32Array = []
 var sizes: PackedByteArray = [0, 0, 0, 0]
@@ -369,12 +367,12 @@ func tile_press(coords: int, type: int, enter: bool = true) -> void:
 		SOURCE_OFF: if type == SPARK: switch_cluster(SOURCE, true)
 		SOURCE_ON: if type == SPARK: switch_cluster(SOURCE, true)
 
-var no: int = -1
+var walk_no: int = -1
 
 func tile_walk(hero: CharacterBody2D, enter: bool = true) -> void:
-	if not enter and no != -1:
+	if not enter and walk_no != -1:
 		HUD.log_help_hide()
-		no = -1
+		walk_no = -1
 	
 	var atlas: int = HUD.level.border.coords(HUD.level.tile[Def.offset(hero.no, Def.PLATE)]).atlas().tile[ATLAS]
 	if atlas == TELEPORT_ON:
@@ -385,7 +383,7 @@ func tile_walk(hero: CharacterBody2D, enter: bool = true) -> void:
 				break
 	elif atlas == HINT and HUD.level.border.tile[ID] == TYPE:
 		# no = help_show(HUD.level.border.local_to_map(hero.position), hint)
-		if no != -1: HUD.log_help(no)
+		if walk_no != -1: HUD.log_help(walk_no)
 	else:
 		tile_press(HUD.level.border.tile[COORDS], PRESS, enter)
 
@@ -396,10 +394,7 @@ func secret_reveal() -> void:
 
 
 const small: PackedScene = preload("res://def/entity/platform/box_small.tscn")
-const large: PackedScene = preload("res://def/entity/platform/box_large.tscn")
-const fire: PackedScene = preload("res://def/entity/platform/box_fire.tscn")
 
-var height: PackedByteArray = []
 var grab: PackedByteArray = []
 
 const weight_d: PackedFloat32Array = [0, 1, 0.5, 0.33, 0.25]
@@ -407,8 +402,8 @@ const weight_d: PackedFloat32Array = [0, 1, 0.5, 0.33, 0.25]
 func is_sliding(no: int) -> bool: return Def.of(state[SLIDE], no)
 
 func physics_process(_delta: float) -> void:
-	for i in range(0, len(boxes)):
-		boxes[i].move_and_collide(velocity[i])
+	for i in range(0, len(HUD.level.boxes)):
+		HUD.level.boxes[i].move_and_collide(velocity[i])
 
 func toggle_slide(no: int, next: bool) -> void:
 	state[SLIDE] = Def.to(state[SLIDE], no, next)
@@ -418,31 +413,32 @@ func slide_the_box(box: CharacterBody2D) -> void:
 	# box.make_velocity(Vector2(box.velocity.x, GRAVITY)) # * delta
 
 func set_box(asset: PackedScene, data: PackedByteArray) -> void:
-	boxes.append(asset.instantiate())
-	height.append(data[0])
-	weight.append(data[1])
+	HUD.level.boxes.append(asset.instantiate())
+	box_height.append(data[0])
+	box_weight.append(data[1])
 	velocity.append(Vector2.ZERO)
 # """
 func add_box(box_type: int, position: Vector2) -> void:
-	var no: int = boxes.size()
+	var no: int = HUD.level.boxes.size()
 	match box_type:
 		SMALL_BOX: set_box(small, [1, 2])
-		LARGE_BOX: set_box(large, [2, 4])
-		FIRE_BOX: set_box(fire, [0, 2])
+		LARGE_BOX: set_box(load(&"res://def/entity/platform/box_large.tscn"), [2, 4])
+		FIRE_BOX: set_box(load(&"res://def/entity/platform/box_fire.tscn"), [0, 2])
 	print("LEVEL: ", SMALL_BOX, " - B: ", box_type)
-	HUD.level.call_deferred(&"add_child", boxes[no])
-	boxes[no].set_meta(&"no", no)
-	boxes[no].position = position + Vector2(0, 28)
-	boxes[no].name = str(boxes[no].name, '_', no)
-	var see: Area2D = boxes[no].get_node(^"press")
+	var box: AnimatableBody2D = HUD.level.boxes[no]
+	HUD.level.call_deferred(&"add_child", box)
+	box.set_meta(&"no", no)
+	box.position = position + Vector2(0, 28)
+	box.name = str(box.name, '_', no)
+	var see: Area2D = box.get_node(^"press")
 	see.body_entered.connect(encounter)
 	see.body_exited.connect(diverge)
-	var fov: VisibleOnScreenNotifier2D = boxes[no].get_node(^"fov")
-	fov.screen_entered.connect(boxes[no].show)
-	fov.screen_exited.connect(boxes[no].hide)
+	var fov: VisibleOnScreenNotifier2D = box.get_node(^"fov")
+	fov.screen_entered.connect(box.show)
+	fov.screen_exited.connect(box.hide)
 #"""
 func throw(box: int, motion: Vector2i) -> void: velocity[box] = motion # * POWER
-func pushes(box: int, motion: Vector2) -> void: velocity[box] = motion * weight_d[weight[box]]
+func pushes(box: int, motion: Vector2) -> void: velocity[box] = motion * weight_d[box_weight[box]]
 
 func fixate_box(hero: int, box: int, _add: int) -> void:
 	state[hero] = Def.to1(state[hero], box)
@@ -470,15 +466,15 @@ func chain_enter(tile: int, y: int) -> void:
 	press[HUD.hero] = tile
 	tile_motion[HUD.hero].y = y
 
-func tile_exit(border: TileDecorator) -> void:
-	match press[HUD.hero]:
+func tile_exit(_border: TileDecorator) -> void:
+	match HUD.level.press_tile[TileDecorator.TILE_DATA * HUD.hero + HUD.ATLAS]:
 		LEFT_CHAIN: chain_enter(0, 1)
 		RIGHT_CHAIN: chain_enter(0, 1)
 		H_SPRING_OFF: pass
 
 func tile_enter(border: TileDecorator) -> void:
 	var tile: PackedInt32Array = border.pos(HUD.level.entity[HUD.hero].position).id().atlas().type(PUDDLE_OFF).tile
-	match tile:
+	match tile[ATLAS]:
 		LEFT_CHAIN:
 			press_coords[HUD.hero] = tile[COORDS]
 			chain_enter(tile[ATLAS], 0)
@@ -488,6 +484,8 @@ func tile_enter(border: TileDecorator) -> void:
 		H_SPRING_ON:
 			press[HUD.hero] = tile[ATLAS]
 			HUD.level.entity[HUD.hero].velocity += Vector2(0, -60)
+		_: return
+	border.get_tile(HUD.level.press_tile, HUD.hero)
 
 enum { CHAIN = 0, STATE = 0, JOINT = 1, A = -2, B = -1, TIME = 4, LENGTH = 10, NONE = -1 }
 
@@ -496,7 +494,7 @@ var current: Array[PackedInt32Array] = [[0, 0], [0, 0], [0, 0], [0, 0]] # Vector
 var size: PackedByteArray = [LENGTH, LENGTH, LENGTH, LENGTH]
 var rain: Node2D = null
 
-var weight: PackedFloat32Array = [1.0]
+var box_weight: PackedFloat32Array = [1.0]
 var ride: PackedByteArray = [-1]
 var velocity: PackedVector2Array = []
 
@@ -525,7 +523,7 @@ func initiate_source(coords: int) -> void:
 
 func diffusion() -> void:
 	for i in range(1, 8):
-		var state: int = Def.of_x(Def.MASK3, puddles[STATE], i)
+		var state: int = Def.half(puddles[STATE], i)
 		if state == 0: continue
 		if state - 1 == 0:
 			HUD.level.border.coords(puddles[i]).id().atlas().type(PUDDLE_OFF).paint_alt()

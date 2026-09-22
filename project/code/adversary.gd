@@ -5,18 +5,13 @@ enum { BLUE, NO = 0, AURA = 0, LIFE_BORDER = 0, WAVE = 0, THICK = 0, GREEN, COLO
 	RESOURCE_VALUE = 3, LAST_THICKNESS = 3, CRITICAL = 4, BARS = 4, MAX = 10, SEMI = 100, SET = 255 }
 
 var aura_stat: PackedFloat32Array = [0.7, 0.1, 2.0, 5.0, 0.1]
-var status_time: PackedByteArray = []
-var status_type: PackedByteArray = []
+var status_time: PackedByteArray = []; var status_type: PackedByteArray = []
 var entities: int = 0
-var entity: Array[CharacterBody2D] = [null, null, null, null, null, null, null, null, null, null, null, null, null, null]
-var tweens: Array[Tween] = [null, null, null, null, null, null, null, null, null, null, null, null, null, null]
-var i_points: PackedByteArray = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-var a_portion: PackedFloat32Array = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-var r_portion: PackedFloat32Array = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-var a_points: PackedInt32Array = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-var r_points: PackedByteArray = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-var target_a: PackedInt32Array = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-var target_r: PackedByteArray = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+var entity: Array[CharacterBody2D] = [null, null]; var tweens: Array[Tween] = [null, null]
+var i_points: PackedByteArray = _number12()
+var a_portion: PackedFloat32Array = _number14(); var r_portion: PackedFloat32Array = _number14()
+var a_points: PackedInt32Array = _number12(); var r_points: PackedByteArray = _number12()
+var target_a: PackedInt32Array = _number14(); var target_r: PackedByteArray = _number14()
 
 var a_max: PackedByteArray = [0, 0]
 var r_max: PackedByteArray = [0, 0]
@@ -49,6 +44,8 @@ var status_tick: bool = false
 
 # func setup() -> void: HUD.aura_time.timeout.connect(diffusion) # burns - blink
 ## ENEMY
+func _number14() -> Array[int]: return [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+func _number12() -> Array[int]: return [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
 func status_feedback(limit: int, enemy: int, time: int, status: int) -> int:
 	for j in range(0, limit):
@@ -76,15 +73,16 @@ func status_timeout() -> void:
 			status_time[i] = status_feedback(2, i + Def.PARTY, status_time[i], status_type[i])
 	if off: HUD.aura_timer.stop()
 
-func decide(a: int, b: int, segment: float) -> float:
-	return 1.0 / (color[a] - color[b]) * (segment - color[b])
+var aura_colors: PackedFloat32Array = [1.0 / (BLUE - GREEN), 1.0 / (GREEN - YELLOW), 1.0 / (YELLOW - RED)]
 
 func color_reaction(segment: float) -> Color:
 	if segment <= color[RED]: return Color.from_rgba8(SET, NO, NO, SEMI)
 	elif segment >= color[BLUE]: return Color.from_rgba8(NO, SET, SET, SEMI)
-	elif BLUE > segment and segment >= GREEN: return Color.from_rgba8(NO, SET, int(SET * decide(BLUE, GREEN, segment)), SEMI)
-	elif GREEN > segment and segment >= YELLOW: return Color.from_rgba8(int((1.0 - decide(GREEN, YELLOW, segment)) * SET), SET, NO, SEMI)
-	return Color.from_rgba8(SET, int(SET * decide(YELLOW, RED, segment)), NO, SEMI)
+	elif BLUE > segment and segment >= GREEN:
+		return Color.from_rgba8(NO, SET, int(SET * aura_colors[0] * (segment - GREEN)), SEMI)
+	elif GREEN > segment and segment >= YELLOW:
+		return Color.from_rgba8(int((1.0 - aura_colors[1] * (segment - YELLOW)) * SET), SET, NO, SEMI)
+	return Color.from_rgba8(SET, int(SET * aura_colors[2] * (segment - RED)), NO, SEMI)
 
 func _get_ui() -> Array[Control]: return [HUD.game.inventory.points, HUD.game.priorities.points]
 
@@ -164,10 +162,10 @@ func affect(hero: int, a: int, r: int) -> void:
 		entity[hero].profile.material.set(&"shader_parameter/action", true)
 
 enum { TARGET, ZONE_RADIUS, TARGET_RADIUS, ZONE_ALL,
-	DISTANCE = 1024, RADIUS_DISTANCE = 4096 }
+	HALF_TILE = 32, TILE = 64, DISTANCE = 1024, RADIUS_DISTANCE = 4096 }
 enum { VOID, LIGHT, NORMAL, FIRE, WATER, SPARK }
 
-var dir: PackedVector2Array = []
+var directed: PackedVector2Array = []
 
 func damage_zone(type: int, hero: int, element: int, combo: int, portion: float, output: float = 0) -> void:
 	match type:
@@ -181,9 +179,9 @@ func damage_zone(type: int, hero: int, element: int, combo: int, portion: float,
 			if start == Def.PARTY and xp != 0:
 				score_up(xp * combo)
 		TARGET:
-			damage_output(Def.T4 * dir[hero], DISTANCE, hero, element, combo, portion, output)
+			damage_output(HALF_TILE * directed[hero], DISTANCE, hero, element, combo, portion, output)
 		TARGET_RADIUS:
-			damage_output(Def.T8 * dir[hero], RADIUS_DISTANCE, hero, element, combo, portion, output)
+			damage_output(TILE * directed[hero], RADIUS_DISTANCE, hero, element, combo, portion, output)
 		ZONE_RADIUS:
 			damage_output(Vector2.ZERO, RADIUS_DISTANCE, hero, element, combo, portion, output)
 	
@@ -193,7 +191,7 @@ func damage_output(direction: Vector2, distance: int, hero: int, element: int, c
 	for i in range(start, entities):
 		if hero != i and (entity[hero].position + direction).distance_squared_to(entity[i].position) < distance:
 			damage(hero, i, element, portion)
-			entity[i].velocity += dir[hero] * Def.T8 * output
+			entity[i].velocity += directed[hero] * TILE * output
 			xp += exper[i]
 	if start == Def.PARTY and xp != 0:
 		score_up(xp * combo)
@@ -208,38 +206,39 @@ func damage_throw(hero: int, box: int, direction: Vector2, element: int) -> void
 	for i in range(start, entities):
 		var delta: Vector2 = entity[box].position + entity[i].position * direction
 		if hero != i and delta >= check.position and check.size <= delta:
-			var fight: int = power[hero]
-			var contr: int = shell[i]
+			var attack: int = power[hero]
+			var countr: int = shell[i]
 			if element != NORMAL:
-				fight = (fight >> 1) + (impac[hero] >> 1)
-				contr = (contr >> 1) + (react[i] >> 1)
+				attack = (attack >> 1) + (impac[hero] >> 1)
+				countr = (countr >> 1) + (react[i] >> 1)
 			
 			var portion: float = 1.0
 			if delta >= ideal.position and ideal.size <= delta:
 				portion = 1.5
 				
 			if weakn[i] == element:
-				affect(i, min((contr >> 1) - fight * portion, -10 * portion), 0)
+				affect(i, min((countr >> 1) - attack * portion, -10 * portion), 0)
 			elif immun[i] == element:
-				affect(i, min((contr << 1) - fight * portion, -10 * portion), 0)
+				affect(i, min((countr << 1) - attack * portion, -10 * portion), 0)
 
 func damage(hero: int, enemy: int, element: int, portion: float) -> void:
-	var fight: int = impac[hero]
-	var contr: int = react[enemy]
+	var attack: int = impac[hero]
+	var countr: int = react[enemy]
 	if element == NORMAL:
-		fight = power[hero]
-		contr = shell[enemy]
-	fight = int(fight * portion)
+		attack = power[hero]
+		countr = shell[enemy]
+	attack = int(attack * portion)
 	if element == LIGHT:
-		affect(enemy, contr >> 1 + fight, 0)
+		affect(enemy, countr >> 1 + attack, 0)
 	elif weakn[enemy] == element:
-		affect(enemy, min(contr >> 1 - fight, -1), 0)
+		affect(enemy, min(countr >> 1 - attack, -1), 0)
 	elif immun[enemy] == element:
-		affect(enemy, min(contr << 1 - fight, -1), 0)
+		affect(enemy, min(countr << 1 - attack, -1), 0)
 	else:
-		affect(enemy, min(contr - fight, -1), 0)
+		affect(enemy, min(countr - attack, -1), 0)
 
 var places: PackedInt32Array
+var place_size: int
 var min_enemy: PackedByteArray = [0, 1, 2, 3, 4]
 var max_enemy: PackedByteArray = [0, 3, 5, 9, 12]
 const foe: Array[PackedScene] = [
@@ -284,16 +283,16 @@ enum { MAX_LV = 7, PRIORITY_SELECT = 7, SCORE_HALF = 1,
 	PURSUIT = 0, SELF_CONTROL = 1, TENACITY = 2, SELECT = 3, SCORE_BIT = 24 }
 
 var level: int
-var next: PackedInt32Array = [6, 12, 27, 50, 80, 115, 154,  200, 265, 340, 430,
+var next_level: PackedInt32Array = [6, 12, 27, 50, 80, 115, 154,  200, 265, 340, 430,
 	537, 650, 775,  900, 1040, 1220, 1420, 1667, 1960, 2333]
 
 func bonus(add: int, x: float) -> void: score_up(roundi(add * x))
 
 func score_up(add: int) -> void:
 	var score: int = (HUD.get_half(HUD.SCORE, SCORE_HALF) & (Def.bit(SCORE_BIT) - 1)) + add
-	if level < next.size() and score >= next[level]:
+	if level < next_level.size() and score >= next_level[level]:
 		var before: int = level
-		while level < next.size() and score >= next[level]: level += 1
+		while level < next_level.size() and score >= next_level[level]: level += 1
 		var after: int = level
 		var selection: int = HUD.get_part(HUD.SCORE, PRIORITY_SELECT)
 		for hero in range(0, Def.PARTY):
@@ -317,11 +316,11 @@ func score_up(add: int) -> void:
 			if hero == HUD.hero: HUD.game.ability.priority[select].background = Color.WHITE
 			
 		for xp in [HUD.game.ability, HUD.game.priorities]:
-			if level < next.size():
-				xp.bar.max_value = next[level]
+			if level < next_level.size():
+				xp.bar.max_value = next_level[level]
 	for xp in [HUD.game.ability, HUD.game.priorities]:
-		xp.bar.value = next[level]
-		xp.score.text = str(next[level])
+		xp.bar.value = next_level[level]
+		xp.score.text = str(next_level[level])
 
 enum { COOL, RECOVER, RESTORE }
 
@@ -342,13 +341,11 @@ func enter_station(hero: int, no: int) -> void:
 
 ## TIMING
 
-func a(fields: PackedByteArray) -> int: return Def.bytes_to_int(fields, Def.MASK3)
-
 func _press(title: StringName) -> bool: return Input.is_action_just_pressed(title)
 func _hold(title: StringName) -> bool: return Input.is_action_pressed(title)
 func _out(title: StringName) -> bool: return Input.is_action_just_released(title)
 func _power(title: StringName) -> float: return Input.get_action_strength(title)
-func act(no: int) -> bool: return combo & acts[no]
+func act(no: int) -> bool: return combo_slots & acts[no]
 
 enum { LEFT, RIGHT, UP, DOWN, ACT1, ACT2, ACT3, ACT4, OPT_LEFT, OPT_RIGHT, OPT_UP,
 	OPT_DOWN, SHOT, AIM, MENU }
@@ -361,7 +358,7 @@ enum { A, B, X, Y, S, L = 8, T = 16, M = 24, R = 32, H = 40 }
 var acts: PackedInt32Array = [A<<L|A, B<<L|A<<L|A, A<<T|Y<<L|A, A<<T|B<<L|A,
 	B<<T|B<<L|A, B<<T|X<<L|B, B<<T|A<<L|B, B<<M|A<<T|A<<L|B, A<<M|Y<<T|A<<L|Y]
 # var hero: int enum { RAY, ROCK } enum { TOOL, FIGHT, DANCE }
-var combo: int
+var combo_slots: int
 var caption: PackedStringArray = ["Двоечка"]
 var combo_color: PackedStringArray = ["[color=#00AA00]2x[/color]", "[color=#FFAA00]3x[/color]", "[color=#FFAA00]4x[/color]"]
 var logs_cache: PackedStringArray = ["", "", "", "", "", "", ""]
@@ -376,7 +373,7 @@ func book(no: int, pursuit: int = 0, control: int = 0) -> bool:
 
 func act_enter() -> void: HUD.level.tile[Def.offset(HUD.hero, Def.LEVER)] = Def.join(HUD.level.border.local_to_map(HUD.level.entity[HUD.hero].position))
 func act_exit() -> void: HUD.level.tile[Def.offset(HUD.hero, Def.LEVER)] = 0
-func reset_combo() -> void: combo = 0
+func reset_combo() -> void: combo_slots = 0
 
 func add_logs(log_text: String) -> void:
 	if HUD.game.logs.modulate == Color.TRANSPARENT:
@@ -393,7 +390,7 @@ func add_logs(log_text: String) -> void:
 func add_log(text: String) -> void: HUD.game.log.text = text
 
 func fight(combo_no: int, id: int, zone: int, element: int, portion: float, output: float) -> void:
-	add_logs(combo_color[combo - 2] + caption[id])
+	add_logs(combo_color[combo_slots - 2] + caption[id])
 	HUD.adversary.damage_zone(zone, HUD.hero, element, combo_no, portion, output)
 
 func menu_interaction() -> void:
@@ -461,19 +458,19 @@ func input(event: InputEvent) -> void: # return #TODO FIXME disable after HUD te
 	elif event is InputEventKey:
 		var no: int = event.keycode - KEY_1
 		if no >= 0 and no <= 4:
-			if Input.is_key_pressed(TAB):
+			if Input.is_key_pressed(KEY_TAB):
 				HUD.pallete_pattern_select(no)
 			else:
 				HUD.fast_panel_select(no)
-		elif no == 5 and Input.is_key_pressed(TAB):
+		elif no == 5 and Input.is_key_pressed(KEY_TAB):
 			HUD.pallete_pattern_fight()
 
 func main_slot(weapon_type: int) -> bool:
-	var i: int = Def.of_x(Def.BYTE, HUD.get_item(HUD.hero, HUD.inventory.fast_panel[HUD.hero]), HeroInventory.ID) - HeroInventory.WEAPON
+	var i: int = Def.byte(HUD.get_item(HUD.hero, HUD.inventory.fast_panel[HUD.hero]), Trades.ID) - Trades.WEAPON
 	return 0 < i and HUD.inventory.type[i] == weapon_type
 
 func fast_slot(weapon_type: int) -> bool:
-	var i: int = Def.of_x(Def.BYTE, HUD.get_item(HUD.hero, HeroInventory.WEAPON_SLOT), HeroInventory.ID) - HeroInventory.WEAPON
+	var i: int = Def.byte(HUD.get_item(HUD.hero, Trades.WEAPON_SLOT), Trades.ID) - Trades.WEAPON
 	return 0 < i and HUD.inventory.type[i] == weapon_type
 
 func empty_hand_punch() -> void:
@@ -494,7 +491,7 @@ func empty_hand_kick() -> void:
 		HUD.adversary.damage_zone(HUD.hero, Adversary.TARGET, Adversary.NORMAL, 1, 1.0, 0.1)
 
 func punch(_pallete: bool = false) -> void:
-	combo = combo << Def.MASK3 | A
+	combo_slots = combo_slots << Def.MASK3 | A
 	match HUD.hero:
 		Def.RAY:
 			empty_hand_punch()
@@ -508,7 +505,7 @@ func punch(_pallete: bool = false) -> void:
 	HUD.combo_timer.start()
 
 func kick() -> void:
-	combo = combo << Def.MASK3 | B
+	combo_slots = combo_slots << Def.MASK3 | B
 	match HUD.hero:
 		Def.RAY:
 			empty_hand_kick()
@@ -518,11 +515,11 @@ func kick() -> void:
 			else:
 				empty_hand_kick()
 	HUD.combo_timer.start()
-	if HUD.level.tile[HUD.hero] == Def.H_SPRING_OFF:
-		HUD.level.chains.jump()
+	#if HUD.level.tile[HUD.hero] == Def.H_SPRING_OFF: TODO CHANGE TO ROPE
+	#	HUD.level.chains.jump()
 
 func skill_a() -> void:
-	combo = combo << Def.MASK3 | X
+	combo_slots = combo_slots << Def.MASK3 | X
 	if act(GRILL_KICK):
 		pass
 	elif act(CRACK) and book(B_CRACK, P_CRACK, C_CRACK):
@@ -533,72 +530,59 @@ func skill_a() -> void:
 		Def.ROCK: HUD.interact.puddle_tile() # LevelRoot # TileDecorator
 
 func skill_b() -> void:
-	combo = combo << Def.MASK3 | Y
+	combo_slots = combo_slots << Def.MASK3 | Y
 	if act(POACHING):
 		pass
 	elif act(HUG):
 		fight(4, HUG, Adversary.TARGET, Adversary.NORMAL, 1.4, -0.5)
 
 func use_item() -> void:
-	var throw: bool = HUD.inventory.produce_item(HUD.hero, HUD.inventory.fast_panel[HUD.hero])  == HeroInventory.WEAPON_THROW
+	var throw: bool = HUD.inventory.produce_item(HUD.hero, HUD.trades.fast_panel[HUD.hero])  == Trades.WEAPON_THROW
 	match HUD.hero:
 		Def.ROCK:
-			if act(SLIPPERANG) and throw and main_slot(HeroInventory.BOOMERANG):
+			if act(SLIPPERANG) and throw and main_slot(Trades.BOOMERANG):
 				pass
 			else:
 				pass
 		Def.RAY:
 			if act(OK_SHOT):
 				pass
-			elif act(AID) and fast_slot(HeroInventory.GUN):
+			elif act(AID) and fast_slot(Trades.GUN):
 				pass
-
-
+				
 ## ANIMATION
 
-enum { POWER = 0, INFLUENCE = 1, DOUBLE_COMBO, VITALITY = 2, REACTION = 3, SPEED = 4 } # signal sync_anim(animation: String, frame: int)
+enum { POWER, INFLUENCE, VITALITY, REACTION, SPEED = 4, DOUBLE_COMBO = 2 } # signal sync_anim(animation: String, frame: int)
 
-var directed: int = 0
-var frames: int = 0
+enum { WALK, RUN, JUMP, A_KICK, A_PUNCH, PUSH, A_FIRE, WHIP, STOMP, MOVE, DIRECTED = 3 }
 
-enum { WALK, RUN, JUMP }
-enum { CHAINS, GROUND, DIRECTED = 8 }
-enum { BODY, HANG, COMBO }
-enum { PULL, AIR }
+var frames: PackedByteArray = [0, 0]
+var sprites: PackedStringArray = ["b", "f", "bl", "fl", "l", "br", "fr", "r",
+	"b_run", "f_run", "bl_run", "fl_run", "l_run", "br_run", "fr_run", "r_run",
+	"b_jump", "f_jump", "bl_jump", "fl_jump", "l_jump", "br_jump", "fr_jump", "r_jump",
+	"b_kick", "f_kick", "bl_kick", "fl_kick", "l_kick", "br_kick", "fr_kick", "r_kick",
+	"b_punch", "f_punch", "bl_punch", "fl_punch", "l_punch", "br_punch", "fr_punch", "r_punch",
+	"b_push", "f_push", "bl_push", "fl_push", "l_push", "br_push", "fr_push", "r_push",
+	"b_fire", "f_fire", "bl_fire", "fl_fire", "l_fire", "br_fire", "fr_fire", "r_fire",
+	"b_whip", "f_whip", "bl_whip", "fl_whip", "l_whip", "br_whip", "fr_whip", "r_whip",
+	"b_stomp", "f_stomp", "bl_stomp", "fl_stomp", "l_stomp", "br_stomp", "fr_stomp", "r_stomp",
+	"b_c_move", "f_c_move", "bl_c_move", "fl_c_move", "l_c_move", "br_c_move", "fr_c_move", "r_c_move",
+	"b_c_whip", "f_c_whip", "bl_c_whip", "fl_c_whip", "l_c_whip", "br_c_whip", "fr_c_whip", "r_c_whip"]
 
-var state: PackedByteArray = [0, 0]
-var sprites: Array[StringName] = [&"b", &"f", &"bl", &"fl", &"l", &"br", &"fr", &"r",
-	&"b_run", &"f_run", &"bl_run", &"fl_run", &"l_run", &"br_run", &"fr_run", &"r_run",
-	&"b_jump", &"f_jump", &"bl_jump", &"fl_jump", &"l_jump", &"br_jump", &"fr_jump", &"r_jump",
-	&"b_kick", &"f_kick", &"bl_kick", &"fl_kick", &"l_kick", &"br_kick", &"fr_kick", &"r_kick",
-	&"b_punch", &"f_punch", &"bl_punch", &"fl_punch", &"l_punch", &"br_punch", &"fr_punch", &"r_punch",
-	&"b_push", &"f_push", &"bl_push", &"fl_push", &"l_push", &"br_push", &"fr_push", &"r_push",
-	&"b_fire", &"f_fire", &"bl_fire", &"fl_fire", &"l_fire", &"br_fire", &"fr_fire", &"r_fire",
-	&"b_whip", &"f_whip", &"bl_whip", &"fl_whip", &"l_whip", &"br_whip", &"fr_whip", &"r_whip",
-	&"b_stomp", &"f_stomp", &"bl_stomp", &"fl_stomp", &"l_stomp", &"br_stomp", &"fr_stomp", &"r_stomp",
-	&"b_c_move", &"f_c_move", &"bl_c_move", &"fl_c_move", &"l_c_move", &"br_c_move", &"fr_c_move", &"r_c_move",
-	&"b_c_whip", &"f_c_whip", &"bl_c_whip", &"fl_c_whip", &"l_c_whip", &"br_c_whip", &"fr_c_whip", &"r_c_whip"]
-@export var ui_sprites: SpriteFrames
-
+func direct(dir: Vector2i) -> void: directed[HUD.hero] = dir
 func animate_frames(type: int) -> void:
-	frames = type
-	HUD.level.profile[HUD.hero].sprite.animation = sprites[get_anim()]
+	frames[HUD.hero] = type
+	HUD.level.profile[HUD.hero].sprite.animation = sprites[get_anim(HUD.hero)]
 
 func stop_animation() -> void:
 	HUD.level.profile[HUD.hero].sprite.stop()
-	HUD.level.profile[HUD.hero].sprite.animation = sprites[directed]
+	HUD.level.profile[HUD.hero].sprite.animation = sprites[get_anim(HUD.hero)]
 	HUD.level.profile[HUD.hero].sprite.frame = 0
 
-func get_anim() -> int: return directed + DIRECTED * frames # if Bit.of(state[BODY], RUN):
-
-func direct(dir: Vector2i) -> void: directed = Def.direct(dir)
-
-var animations: PackedStringArray = ["idle-1", "walk", "run", "jump", "kick_0", "kick_1",
-	"punch_0", "punch_1", "hang_go", "hang_idle", "bash", "stomp", "fire", "whip",
-	"rain", "spark", "hang", "stand"]
+func get_anim(hero: int) -> int: return (frames[hero] << DIRECTED) | Def.direct(directed[hero]) # if Bit.of(state[BODY], RUN):
 
 func animate() -> void:# motion: Vector2
-	var anim: int = get_anim()
+	var anim: int = get_anim(HUD.hero)
 	HUD.level.profile[HUD.hero].sprite.animation = sprites[anim]
 	if not HUD.level.profile[HUD.hero].sprite.is_playing():
 		HUD.level.profile[HUD.hero].sprite.play(sprites[anim])
@@ -613,11 +597,11 @@ func mirror_animation() -> void:
 func mirror_frame() -> void:
 	HUD.level.mirror[HUD.hero].frame = HUD.level.profile[HUD.hero].frame
 
-func set_hanging(next: bool) -> void:
-	HUD.level.shadow[HUD.hero].position = Vector2(0, 27) if next else Vector2(0, -5)
+enum { SHADOW_GROUND, SHADOW_HANG, SHADOW_FLY }
 
-func set_shadow(next: bool) -> void:
-	HUD.level.shadow[HUD.hero].visible = next
+func set_shadow(next: int) -> void:
+	HUD.level.shadow[HUD.hero].visible = next != SHADOW_FLY
+	HUD.level.shadow[HUD.hero].position = Vector2(0, 27) if next == SHADOW_HANG else Vector2(0, -5)
 
 func get_mirror_sprite(view: CharacterBody2D, path: StringName, mirror: AnimatedSprite2D) -> AnimatedSprite2D:
 	if mirror != null: return mirror
@@ -698,33 +682,3 @@ func make_velocity(no: int, motion: Vector2) -> void:
 # circle # small_circle # after_tile # sided # fireplace
 func make_position(no: int, motion: Vector2) -> void:
 	HUD.level.entity[no].position = motion
-
-func move(motion: Vector2) -> bool:
-	var turned: bool = super.move(motion)
-	if turned: request("enemy", "active")
-	#else: request("enemy", "passive")
-	return turned
-
-func direct_animations() -> Array[String]:
-	return ["rolling"]
-
-func dead_animation() -> void:
-	dead.start()
-	interrogate()
-
-func interrogate() -> void:
-	timer.start()
-
-func interrogation_end() -> void:
-	dead.health.aura.stop_blinking()
-	dead.health.aura.diffusion()
-	request("enemy", "dead")
-
-func dead_animation_end() -> void:
-	dead.effect()
-	request("enemy", "alive")
-
-func live_animation_end() -> void:
-	dead.path.ignite_motion()
-	dead.damage.monitoring = true
-	request("enemy", "active")
