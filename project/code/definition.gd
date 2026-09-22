@@ -156,9 +156,6 @@ static func b0(state: PackedByteArray, select: int, index: int) -> void:
 static func b1(state: PackedByteArray, select: int, index: int) -> void:
 	state[select] = to1(state[select], index)
 
-static func edit_x(mask: int, field: int, no: int, increment: int) -> int:
-	return to_x(mask, field, no, of_x(mask, field, no) + increment)
-
 static func bytes_to_int(fields: PackedByteArray, mask: int) -> int:
 	var value: int = 0; for i in range(0, len(fields)): value |= fields[i] << (i * mask)
 	return value

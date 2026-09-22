@@ -21,23 +21,23 @@ func unlock(type: int, slot: int) -> void:
 	session[type] = Def.to1(session[type], slot)
 
 func get_part(type: int, slot: int) -> int:
-	return Def.of_x(Def.BYTE, session[type], slot)
+	return Def.byte(session[type], slot)
 
 func set_part(type: int, slot: int, value: int) -> void:
-	session[type] = Def.to_x(Def.BYTE, session[type], slot, value)
+	session[type] = Def.to_byte(session[type], slot, value)
 
 func get_stat(type: int, slot: int) -> int:
-	return Def.of_x(Def.SHORT, session[type], slot)
+	return Def.short(session[type], slot)
 	
 func set_stat(type: int, slot: int, value: int) -> void:
-	session[type] = Def.to_x(Def.SHORT, session[type], slot, value)
+	session[type] = Def.to_short(session[type], slot, value)
 
 func get_item(bag: int, slot: int) -> int:
-	return Def.of_x(Def.SHORT, session[INVENTORY + BAG * bag + (slot >> Def.MASK)], slot & Def.MASK3)
+	return Def.short(session[INVENTORY + BAG * bag + (slot >> Def.PART_BYTE)], slot & Def.HALF_BYTE)
 
 func set_item(bag: int, slot: int, item: int) -> void:
-	var no: int = INVENTORY + BAG * bag + (slot >> Def.MASK)
-	session[no] = Def.to_x(Def.SHORT, session[no], slot & Def.MASK3, item)
+	var no: int = INVENTORY + BAG * bag + (slot >> Def.PART_BYTE)
+	session[no] = Def.to_short(session[no], slot & Def.HALF_BYTE, item)
 
 func new_hero(no: int) -> CharacterBody2D:
 	if HUD.level.entity[no] == null:

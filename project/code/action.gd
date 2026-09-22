@@ -200,14 +200,6 @@ func trigger_encounter(body: Variant) -> void:
 		add_box(_tile[ATLAS], HUD.level.border.position())
 		HUD.level.border.atlas(GROUND).id(FLOOR).type(FLOORS).paint_alt() # coords(Def.GROUND)
 
-func plate_encounter(_body: Variant) -> void:
-	HUD.level.tile[Def.offset(HUD.hero, Def.PLATE)] = Def.join(HUD.level.border.local_to_map(HUD.level.entity[HUD.hero].position))
-	HUD.level.cluster.tile_walk(HUD.level.entity[HUD.hero], true)
-
-func plate_disappear(_body: Variant) -> void:
-	HUD.level.cluster.tile_walk(HUD.level.entity[HUD.hero], false)
-	HUD.level.tile[Def.offset(HUD.hero, Def.PLATE)] = 0
-
 # TODO BOOKS
 var chest_pos: Vector2 = Vector2.ZERO
 var logic: Node
@@ -465,6 +457,14 @@ func rope_fall() -> void:
 func chain_enter(tile: int, y: int) -> void:
 	press[HUD.hero] = tile
 	tile_motion[HUD.hero].y = y
+
+func plate_encounter(_body: Variant) -> void:
+	HUD.level.tile[Def.offset(HUD.hero, Def.PLATE)] = Def.join(HUD.level.border.local_to_map(HUD.level.entity[HUD.hero].position))
+	HUD.level.cluster.tile_walk(HUD.level.entity[HUD.hero], true)
+
+func plate_disappear(_body: Variant) -> void:
+	HUD.level.cluster.tile_walk(HUD.level.entity[HUD.hero], false)
+	HUD.level.tile[Def.offset(HUD.hero, Def.PLATE)] = 0
 
 func tile_exit(_border: TileDecorator) -> void:
 	match HUD.level.press_tile[TileDecorator.TILE_DATA * HUD.hero + HUD.ATLAS]:
