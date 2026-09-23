@@ -2,7 +2,7 @@ class_name TheWorld extends CanvasLayer
 
 enum { LEVEL, LOGIC, BOX = 2, POS = 4, AURA = 6, RESOURCE = 7, STATUS = 8,
 	INVENTORY = 10, BESTIARY = 38, NOTES = 39, BOOKS = 40, CHESTS = 41, SECRETS = 42 }
-enum { SETTINGS, SAVES, ACHIEVEMENTS, DIFFICULTY = 0, PART, DUNGEON, PROGRESSED, BAG = 7 }
+enum { SETTINGS, SAVES, ACHIEVEMENTS, DIFFICULTY = 0, PART, DUNGEON, TRANSITION, PROGRESSED, BAG = 7 }
 
 var session: PackedInt64Array
 
@@ -17,43 +17,21 @@ var size: PackedByteArray = [0, 0, 0]
 var fire: GPUParticles2D; var rain: GPUParticles2D
 
 func check(type: int) -> int: return session[type]
-func unlock(type: int, slot: int) -> void:
-	session[type] = Def.to1(session[type], slot)
+func unlock(type: int, slot: int) -> void: session[type] = Def.to1(session[type], slot)
 
-func get_part(type: int, slot: int) -> int:
-	return Def.byte(session[type], slot)
+func get_part(type: int, slot: int) -> int: return Def.byte(session[type], slot)
+func set_part(type: int, slot: int, value: int) -> void: session[type] = Def.to_byte(session[type], slot, value)
 
-func set_part(type: int, slot: int, value: int) -> void:
-	session[type] = Def.to_byte(session[type], slot, value)
+func get_stat(type: int, slot: int) -> int: return Def.short(session[type], slot)
+func set_stat(type: int, slot: int, value: int) -> void: session[type] = Def.to_short(session[type], slot, value)
 
-func get_stat(type: int, slot: int) -> int:
-	return Def.short(session[type], slot)
-	
-func set_stat(type: int, slot: int, value: int) -> void:
-	session[type] = Def.to_short(session[type], slot, value)
-
-func get_item(bag: int, slot: int) -> int:
-	return Def.short(session[INVENTORY + BAG * bag + (slot >> Def.PART_BYTE)], slot & Def.HALF_BYTE)
-
+func get_item(bag: int, slot: int) -> int: return Def.short(session[INVENTORY + BAG * bag + (slot >> Def.PART_BYTE)], slot & Def.HALF_BYTE)
 func set_item(bag: int, slot: int, item: int) -> void:
 	var no: int = INVENTORY + BAG * bag + (slot >> Def.PART_BYTE)
 	session[no] = Def.to_short(session[no], slot & Def.HALF_BYTE, item)
 
-func new_hero(no: int) -> CharacterBody2D:
-	if HUD.level.entity[no] == null:
-		var hero: CharacterBody2D = load(Def.ray if no == Def.RAY else Def.rock).instantiate()
-		hero.name = &"ray" if no == Def.RAY else &"rock"
-		hero.no = no
-		add_child(hero)
-		return hero
-	return entity[no]
-
-func load_hero(that: int) -> void:
-	if entity[that] == null:
-		entity[that] = new_hero(that)
-
 # TIMING
-var dialog_timer: Timer = Timer.new()
+var dialog_timer: Timer = Timer.new(); var station_timer: Timer = Timer.new()
 var debug_timer: Timer
 
 @onready var tree: SceneTree = get_tree()
@@ -62,7 +40,6 @@ var debug_timer: Timer
 func _ready() -> void:
 	layer = 2
 	level.load_level()
-	load_hero(HUD.hero)
 	
 	interact = WorldInteraction.new()
 	aura = Adversary.new()
@@ -73,69 +50,59 @@ func _ready() -> void:
 		level.group.reparent(entity[HUD.hero])
 		level.group.position = Vector2.ZERO
 
+	station_timer.timeout.connect(action.enter_cooldown)
 	dialog_timer.timeout.connect(talking)
 
 func next_hero() -> int: return (HUD.hero + 1) & Def.ROCK
 
 #var session: PackedInt64Array = []
- # model : L1 (SCORE)P2 E4 A2 N4 S8 B4 A2 R2 
+ # model : L1 (SCORE)P2 E4 A2 N4 S8 B4 A2 R2
 
 func _init() -> void:
 	state[BODY] = Def.to0(state[BODY], RUN)
 	session = FileAccess.get_file_as_bytes(Def.saves).to_int64_array()
 
-var level_path: PackedStringArray = ["_world", "_cave_origin",
-	"_cave_smoke", "_cave_spark", "_temple_ancient", "_credits"]
+var level_path: PackedStringArray = ["_world", "_cave_origin", "_cave_smoke", "_cave_spark", "_temple_ancient", "_credits"]
 var level_no: PackedByteArray = [0, 1, 8, 15, 27, 36]
-var transition_no: int = 0
 var transition_part: int = 0
 
-func load_scene(no: int, part: String = "") -> void:
-	if part != "":
+func load_scene(no: int, part: int = 0) -> void:
+	var transit: String
+	if part == 0:
+		transit = ""
 		for i in range(0, len(level_path)):
 			if level_no[i] == no:
-				part = level_path[i]
+				transit = level_path[i]
 				break
-	print_debug(tree.change_scene_to_file("res://def/dungeon/" + str(no).pad_zeros(1) + part + ".tscn"))
+	else:
+		transit = str("_", part)
+	print_debug(tree.change_scene_to_file("res://def/dungeon/" + str(no).pad_zeros(1) + transit + ".tscn"))
 
-func load_transition(part: int = 0) -> void:
-	var scene: String = str(no).pad_zeros(1)
-	if transition_part == 0:
-		if part < 9:
-			transition_part = part
-			load_scene(no, str("_", part))
-		elif part < 14:
-			transition_part = 0
+func load_transition() -> void:
+	var no: int = get_part(LEVEL, DUNGEON)
+	if get_part(LEVEL, TRANSITION) == 0:
+		if transition_part < 9:
+			set_part(LEVEL, TRANSITION, transition_part)
+			load_scene(no, transition_part)
+		elif transition_part < 14:
+			set_part(LEVEL, TRANSITION, transition_part)
 			load_scene(no - 1)
 		else:
-			transition_part = 0
+			set_part(LEVEL, TRANSITION, transition_part)
 			load_scene(no + 1)
 	else:
-		transition_part = part
-		if part < 9:
-			load_scene(no - 1, str("_", part))
+		set_part(LEVEL, TRANSITION, transition_part)
+		if transition_part < 9:
+			load_scene(no - 1, transition_part)
 		else:
-			load_scene(no, str("_", part - 9))
+			load_scene(no, transition_part - 9)
 
-func game_exit() -> void: tree.quit()
-func game_start() -> void: print_debug(tree.change_scene_to_file(&"res://def/dungeon/01_cave_origin.tscn"))
-func game_continue() -> void: game_start() # TODO check save date
-
-
-enum { PAUSE, GAME }
-
-var no: int = 0
-var card: Button
 var state: int = 0
 
 var navigation: Array
 var hints: CompressedTexture2DArray = preload("res://icon/help/z_master.svg")
-var _pause: Control; var _game: Control; var _settings: Control; var _sound: Control; var _information: Control
 
-
-
-var up_transit: ColorRect
-var down_transit: ColorRect
+var up_transit: ColorRect; var down_transit: ColorRect; var help_card: Label
 
 
 func is_hud_opened() -> bool:
@@ -154,13 +121,13 @@ func log_help_hide() -> void:
 	tween.tween_callback(card.hide)
 
 func log_help(of: int) -> void:
-	if card == null:
-		card = load(Def.card).instantiate()
-		game.help.add_child(card)
-	card.show()
+	if help_card == null:
+		help_card = load(Def.card).instantiate()
+		game.help.add_child(help_card)
+	help_card.show()
 	var tween: Tween = game.create_tween()
-	tween.tween_property(card, ^"modulate", Color.WHITE, 1)
-	card.text = tr(Def.hints[of])
+	tween.tween_property(help_card, ^"modulate", Color.WHITE, 1)
+	help_card.text = tr(Def.hints[of])
 
 
 
@@ -175,13 +142,25 @@ func add_log(caption: String) -> void:
 
 func notify(type: int) -> void: add_log(text[type])
 
-var transit_type: int = 0
-enum { LADDER_DOWN, LADDER_UP, GATE_IN, GATE_OUT }
+var transit_type: int = GATE_IN
+enum { LADDER_DOWN, LADDER_UP, GATE_IN, GATE_OUT, GATE_BOTH }
+const BLACK_TRANSPARENT: Color = Color(0, 0, 0, 255)
+
+func gate_both(from: float, to: float) -> Tween:
+	up_transit.scale.y = from
+	down_transit.scale.y = from
+	var tween: Tween = create_tween()
+	tween.set_parallel(true)
+	tween.tween_property(up_transit, ^"scale.y", to, 0.5)
+	tween.tween_property(down_transit, ^"scale.y", to, 0.5)
+	return tween
 
 func gate_enter(from: Color, to: Color) -> void:
 	up_transit.color = from
 	up_transit.scale.y = 1.0
-	create_tween().tween_property(up_transit, ^"color", to, 0.5)
+	var tween: Tween = create_tween()
+	tween.tween_property(up_transit, ^"color", to, 0.5)
+	tween.tween_callback(load_transition)
 
 func ladder_exit(main: ColorRect) -> void:
 	var tween: Tween = create_tween()
@@ -191,10 +170,11 @@ func ladder_exit(main: ColorRect) -> void:
 func ladder_enter(main: ColorRect, side: ColorRect) -> void:
 	var tween: Tween = create_tween(); main.scale.y = 0.0
 	tween.tween_property(main, ^"scale.y", 1.0, 0.5)
-	tween.tween_callback(func(): side.scale.y = 1.0; side.show(); main.hide())
+	tween.tween_callback(func(): side.scale.y = 1.0; side.show(); load_transition())
 
 func exit_transit() -> void:
-	match type:
+	match transit_type:
+		GATE_BOTH: gate_both(0.5, 0).tween_callback(tree.reload_current_scene)
 		GATE_OUT, GATE_IN:
 			var tween: Tween = create_tween()
 			tween.tween_property(up_transit, ^"color", Color.TRANSPARENT, 0.5)
@@ -202,71 +182,17 @@ func exit_transit() -> void:
 		LADDER_DOWN: ladder_exit(down_transit)
 		LADDER_UP: ladder_exit(up_transit)
 
-const BLACK_TRANSPARENT: Color = Color(0, 0, 0, 255)
-
 func entry_transit(type: int) -> void:
+	transit_type = type
 	up_transit.color = Color.BLACK
-	match type:
-		GATE_OUT:
-			up_transit.color = Color.WHITE
-			gate_enter(Color.TRANSPARENT, Color.WHITE)
+	match transit_type:
+		GATE_BOTH: gate_both(0, 0.5).tween_callback(tree.reload_current_scene)
+		GATE_OUT: gate_enter(Color.TRANSPARENT, Color.WHITE)
 		GATE_IN: gate_enter(BLACK_TRANSPARENT, Color.BLACK)
 		LADDER_DOWN: ladder_enter(up_transit, down_transit)
 		LADDER_UP: ladder_enter(down_transit, up_transit)
 
-func start_transition(level: String, _floor_diff: int = 0, type: int = LEDGE) -> void:
-	blackout.scene = level
-	match type:
-		WAY: blackout.as_way(self, Color.BLACK, true)
-		LEDGE: blackout.as_ledges(ledges, Color.BLACK, true)
-
-enum { FAST_MAX = 5 }
-
-var _main_marker: TextureRect
-var _side_marker: TextureRect
-var loaded_items: bool = false
-
-func set_marker(before: int, after: int) -> void:
-	if HUD.hero == Def.RAY:
-		_main_items[before].remove_child(_main_marker)
-		_main_items[after].add_child(_main_marker)
-	else:
-		_side_items[before].remove_child(_side_marker)
-		_side_items[after].add_child(_side_marker)
-
-func fast_panel_swap(offset: int) -> void:
-	var before: int = HUD.inventory.fast_panel[HUD.hero]
-	var result: int = before + offset
-	if result > FAST_MAX:
-		HUD.inventory.fast_panel[HUD.hero] = 0
-	elif result < 0:
-		HUD.inventory.fast_panel[HUD.hero] = FAST_MAX - 1
-	else:
-		var target: Vector2i = Vector2i(0, -1) if offset < 0 else Vector2i(FAST_MAX - 1, FAST_MAX)
-		for i in range(HUD.inventory.fast_panel[HUD.hero] + offset, target.y, offset):
-			if i == target.x or HUD.get_item(HUD.hero, i) != 0:
-				HUD.inventory.fast_panel[HUD.hero] = i
-				if loaded_items:
-					set_marker(before, i)
-				break
-
-func fast_panel_select(slot: int) -> void:
-	if slot == HUD.inventory.fast_panel[HUD.hero]: return
-	elif slot == FAST_MAX:
-		HUD.inventory.fast_panel[HUD.hero] = slot; return
-	var result: int = 0
-	for i in range(0, FAST_MAX):
-		if HUD.get_item(HUD.hero, slot) != 0:
-			result += 1; continue
-		if result == slot:
-			result = i; break
-	if result == slot:
-		HUD.inventory.fast_panel[HUD.hero] = result
-		if _inventory_scroll == null:
-			set_marker(before, i)
-			_main_items[result]
-
-
+var markers: Array[TextureRect] = []
 
 var started_dialog: bool = false
 var queue: PackedByteArray = []
@@ -290,9 +216,6 @@ func add_dialog(from: int, to: int) -> void: # LEVEL USUALLY set after level fin
 	if !started_dialog:
 		started_dialog = true
 		timeout_talk()
-
-func ready_timer() -> void:
-	dialog_timer.connect(timeout_talk)
 
 func timeout_talk() -> void:
 	var message: int = queue[length[CURRENT] + DIALOG_FROM]
@@ -355,13 +278,8 @@ func status_drawback() -> void:
 			else:
 				enemy_status[e - Def.PARTY] = Def.to_x(Def.BYTE, enemy_status[e - Def.PARTY], i, result)
 
-
-var _debug_title: Label; var _debug_status: Label; var _debug_state: int
-
-enum { FPS, GPU }
-
-var BYTE_CLUSTER: float = 1.0 / 1048576 # 1024^2
-const FORMAT_MB: String = "\n%0.2f"
+enum { FPS, GPU }; var _debug_title: Label; var _debug_status: Label; var _debug_state: int
+const FORMAT_MB: String = "\n%0.2f"; var BYTE_CLUSTER: float = 1.0 / 1048576 # 1024^2
 
 func _get_vram() -> String: return FORMAT_MB % (Performance.get_monitor(Performance.RENDER_VIDEO_MEM_USED) * BYTE_CLUSTER)
 func _don(debug_type: int) -> bool: return Def.of(_debug_state, debug_type)
@@ -424,13 +342,24 @@ func flip_card(card: Button) -> void:
 			card.help.visible_characters = 20 if card.image.visible else -1
 		self.scale = Vector2(abs(x), 1), -1.0, 1.0, TIME[TIME_FLIP])
 
-func new_game() -> void:
-	set_game()
-	pass
+func game_exit() -> void: tree.quit()
 
-func continue_game() -> void:
+func main_menu() -> void:
+	game.hide()
+	pause.hide()
+	print(tree.change_scene_to_file(&"res://def/hud/main.tscn"))
+
+func game_start() -> void:
 	set_game()
-	pass
+	for i in range(0, SECRETS): session[i] = 0
+	# TODO RESET GAME stats like HP
+	load_scene(1)
+	gate_both(0.5, 0)
+
+func game_continue() -> void:
+	set_game()
+	load_scene(get_part(LEVEL, DUNGEON), get_part(LEVEL, TRANSITIONS))
+	gate_both(0.5, 0)
 
 func resume_game() -> void:
 	tree.paused = false
@@ -475,10 +404,6 @@ func enter_settings() -> void:
 func open_main_menu() -> void:
 	tree.load_scene(Def.main_menu)
 
-var dialog_on: bool = false
-var logs_on: bool = false
-var help_on: bool = false
-
 func set_game() -> void:
 	if game == null:
 		game = load(Def.game).instantiate()
@@ -493,13 +418,11 @@ func set_game() -> void:
 		top_inventory = top.get_node(^"inventory") # PanelContainer
 		bottom_ability = bottom.get_node(^"ability")
 		fix_log = controls.get_node(^"controls/log")
-		if dialog_on:
-			talk_border = controls.get_node(^"dialog/talk/border")
-			talk_image = controls.get_node(^"dialog/talk/border/image")
-			dialogs = controls.get_node(^"dialog/talk")
-		if logs_on: logs = controls.get_node(^"controls/logs")
-		if help_on: help = controls.get_node(^"middle/help")
-
+		talk_border = controls.get_node(^"dialog/talk/border")
+		talk_image = controls.get_node(^"dialog/talk/border/image")
+		dialogs = controls.get_node(^"dialog/talk")
+		logs = controls.get_node(^"controls/logs")
+		help = controls.get_node(^"middle/help")
 
 var game: Control; var pause: Control; var settings: Control; var information: Control; var sound: Control
 var right: HSplitContainer; var left: HSplitContainer; var top: VSplitContainer; var bottom: VSplitContainer; var controls: MarginContainer
@@ -509,24 +432,26 @@ var dialogs: RichTextLabel; var talk_dialog: Label; var talk_border: PanelContai
 var fix_log: Label; var logs: RichTextLabel; var help: Label
 
 func set_stats() -> void:
-	stats_scroll = _lazy(left_stats, &"_stats_scroll", &"res://def/hud/game/stats.tscn")
+	stats_scroll = load("res://def/hud/game/stats.tscn").instantiate()
 	stats_description = stats_scroll.get_node(^"description")
 	stats_chats = stats_scroll.get_node(^"stats_chats")
 	power_stat = stats_scroll.get_node(^"margin/stack/power")
 	power_base = power_stat.get_node(^"base")
+	power_next = power_stat.get_node(^"next")
 	influence_stat = stats_scroll.get_node(^"margin/stack/influence")
 	influence_base = influence_stat.get_node(^"base")
-	influence_stat = stats_scroll.get_node(^"margin/stack/influence")
-	influence_base = influence_stat.get_node(^"base")
+	influence_next = influence_stat.get_node(^"next")
 	vitality_stat = stats_scroll.get_node(^"margin/stack/vitality")
-	vitality_base = influence_stat.get_node(^"base")
+	vitality_base = vitality_stat.get_node(^"base")
+	vitality_next = vitality_stat.get_node(^"next")
 	reaction_stat = stats_scroll.get_node(^"margin/stack/reaction")
 	reaction_base = reaction_stat.get_node(^"base")
+	reaction_next = reaction_stat.get_node(^"next")
 	for node in stats_scroll.get_node(^"margin/stack").get_children():
 		side_items.append()
 
 func set_priorities() -> void:
-	priorities_scroll = _lazy(right_priorities, &"_priorities_scroll", &"res://def/hud/game/priorities.tscn")
+	priorities_scroll = load("res://def/hud/game/priorities.tscn").instantiate()
 	priority_progress = priorities_scroll.get_node(^"stack/priority/progress")
 	priority_placeholder = priorities_scroll.get_node(^"stack/placeholder")
 	perks = priorities_scroll.get_node(^"stack/perks")
@@ -537,7 +462,7 @@ func set_priorities() -> void:
 	tenacity = priorities_scroll.get_node(^"stack/priority/tenacity")
 
 func set_ability() -> void:
-	ability_scroll = _lazy(right_ability, &"_ability_scroll", &"res://def/hud/game/ability.tscn")
+	ability_scroll = load("res://def/hud/game/ability.tscn").instantiate()
 	ability_skills = ability_scroll.get_node(^"stack/skills")
 	ability_title = ability_scroll.get_node(^"stack/title")
 	ability_effect = ability_scroll.get_node(^"stack/effect")
@@ -550,7 +475,7 @@ func set_ability() -> void:
 	ability_pallete = ability_scroll.get_node(^"stack/pallete")
 
 func set_inventory() -> void:
-	inventory_scroll = _lazy(top_inventory, &"_inventory_scroll", &"res://def/hud/game/inventory.tscn")
+	inventory_scroll = load("res://def/hud/game/inventory.tscn").instantiate()
 	inventory_bag_placeholder = inventory_scroll.get_node(^"stack/back/placeholder")
 	inventory_bestiary = inventory_scroll.get_node(^"stack/bestiary")
 	bestiary_number = inventory_bestiary.get_node(^"number")
@@ -563,8 +488,6 @@ func set_inventory() -> void:
 var inventory_scroll: ScrollContainer; var inventory_bag_placeholder: Control
 var inventory_bestiary: HFlowContainer; var bestiary_number: Label
 var bestiary_effect: Label; var inventory_status: GridContainer
-
-var _side_equip: bool = false
 var main_items: Array[Array] = []
 var side_items: Array[Button] = []
 
@@ -584,14 +507,8 @@ var power_stat: Button; var power_base: ProgressBar
 var influence_stat: Button; var influence_base: ProgressBar
 var vitality_stat: Button; var vitality_base: ProgressBar
 var reaction_stat: Button; var reaction_base: ProgressBar
-var _power_next: ProgressBar; var power_next: ProgressBar:
-	get: return _lazy(power_stat, &"_power_next", &"res://def/hud/game/stats_bar.tscn", &"_stat_bar")
-var _influence_next: ProgressBar; var influence_next: ProgressBar:
-	get: return _lazy(influence_stat, &"_influence_next", &"res://def/hud/game/stats_bar.tscn", &"_stat_bar")
-var _vitality_next: ProgressBar; var vitality_next: ProgressBar:
-	get: return _lazy(vitality_stat, &"_vitality_next", &"res://def/hud/game/stats_bar.tscn", &"_stat_bar")
-var _reaction_next: ProgressBar; var reaction_next: ProgressBar:
-	get: return _lazy(reaction_stat, &"_reaction_next", &"res://def/hud/game/stats_bar.tscn", &"_stat_bar")
+var power_next: ProgressBar; var influence_next: ProgressBar
+var vitality_next: ProgressBar; var reaction_next: ProgressBar
 
 ## UI PRIORITY
 var priorities_scroll: ScrollContainer
@@ -600,52 +517,37 @@ var perks: ItemList; var pages: ItemList; var books: VBoxContainer
 var pursuit: Button; var self_control: Button; var tenacity: Button
 
 # add status
-func _lazy(parent: Control, name: StringName, path: StringName, cache: StringName = &"") -> void:
-	var node: Control = get(name); if node != null: return node
-	if cache != &"":
-		var cached: PackedScene = get(cache)
-		if cached == null:
-			cached = load(path)
-			set(cache, cached)
-		node = cached.instantiate()
-	else:
-		node = load(path).instantiate()
-	parent.add_child(node)
-	set(name, node)
-	return node
-
-
-
-func setup_hud() -> void:
-	right.drag_ended.connect(right_mouse_drag)
-	left.drag_ended.connect(left_mouse_drag)
-
-
-
 var fixed_hud: bool = false
 var panel_open: int = -1
 
 enum { TOP, LEFT, BOTTOM, RIGHT, T_OFF = 5, B_OFF = 5 }
 
+func setup_hud() -> void:
+	top.drag_started.connect(top_mouse_drag)
+	bottom.drag_started.connect(bottom_mouse_drag)
+	right.drag_started.connect(right_mouse_drag)
+	left.drag_started.connect(left_mouse_drag)
+
 func left_mouse_drag() -> void:
-	if left.offset == 0:
-		if _inventory_scroll != null:
-			_stats_stack.remove_child(side_inventory)
-			_inventory_placeholder.add_sibling(side_inventory)
-	else:
-		if _inventory_scroll != null:
-			_inventory_stack.remove_child(side_inventory)
-			_stats_placeholder.add_sibling(side_inventory)
+	if stats_scroll == null:
+		left.drag_started.disconnect(left_mouse_drag)
+		set_stats()
 
 func right_mouse_drag() -> void:
-	if right.offset == 0:
-		if _inventory_scroll != null:
-			_inventory_bag_placeholder.remove_child(status_grid)
-			_priority_placeholder.add_sibling(status_grid)
-	else:
-		if _inventory_scroll != null:
-			_priority_placeholder.remove_child(status_grid)
-			_inventory_bag_placeholder.add_sibling(status_grid)
+	if priority_scroll == null:
+		right.drag_started.disconnect(right_mouse_drag)
+		set_priority()
+
+func top_mouse_drag() -> void:
+	if inventory_scroll == null:
+		top.drag_started.disconnect(top_mouse_drag)
+		set_inventory()
+
+func bottom_mouse_drag() -> void:
+	if ability_scroll == null:
+		bottom.drag_started.disconnect(bottom_mouse_drag)
+		set_ability()
+
 
 func drag_hud() -> void:
 	if left.offset != 0:

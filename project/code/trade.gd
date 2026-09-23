@@ -5,16 +5,27 @@ enum { STICKS, OPUNTIA, TUMBLEWEED, TAMARISK, YUKKA, JAR, ANTIDOTE, ANTICOUGH, G
 	SHIELD, CORETOOTH, KNUCKLES, SAW_STRING, W_RAPIER, T_RAPIER, SHOE, R_SCHO45,
 	R_ENLIGHT, SHOTGUN, BOOMERANG, BUTTER, F_BUTTER, CLEANER, SHARPEN, AMMO,
 	BLADE, PUMP, AIM, MISSING_NO,
-	
-	SLOTS = 25, LIMIT = 30, BAG_START = 0, CRAFT = 7, USE = 10, LIMIT_CRAFT = 2,
-	ARMOR = 20, WEAPON = 28, KIT = 36, BAG_END = 50, AURA = 0, RESOURCE = 1, AR = 2, CROSS = 2, BOTH = 3,
-	PREVIEW_SIZE = 72, ITEMS = 0, SLOT = 1, UNIT = 1, EMPTY = 0, MAIN = 0, CRAFTS = 25, SPACE = 26,
-	ASC = 0, DESC = 1, RANDOM = 2, NA = 0, SIZE = 2, MAX = 25, SECOND = 1, MIN = 2,
-	UP1 = 5, UP2 = 6, UP3 = 7, UP4 = 8, ID = 0, X = 1, B = 8,
-	SHOTGUN_COST = 0, BOUNDARY = 1, FAST_PANEL = 10,
-	ITEM_OR_SLOT = 0, SAME_ITEM = 1, EMPTY_SLOT = 2,
-	
+
+	BAG_START = 0, CRAFT = 7, USE = 10, ARMOR = 20, WEAPON = 28, KIT = 36, BAG_END = 50,
+
+	SLOTS = 25, LIMIT = 30, LIMIT_CRAFT = 2, PREVIEW_SIZE = 72, FAST_MAX = 5, FAST_PANEL = 10,
+
 	WEAPON_SLOT = 20, ARTIFACT_SLOT, ARMOR_SLOT, LEG_SLOT, FOOT_SLOT,
+
+	AURA = 0, RESOURCE = 1, AR = 2, CROSS = 2, BOTH = 3,
+
+	ITEMS = 0, SLOT = 1, UNIT = 1, EMPTY = 0, MAIN = 0, CRAFTS = 25, SPACE = 26,
+
+	ASC = 0, DESC = 1, RANDOM = 2,
+
+	NA = 0, SIZE = 2, SECOND = 1, MIN = 2,
+
+	UP1 = 5, UP2 = 6, UP3 = 7, UP4 = 8, ID = 0, X = 1, B = 8,
+
+	SHOTGUN_COST = 0, BOUNDARY = 1,
+
+	ITEM_OR_SLOT = 0, SAME_ITEM = 1, EMPTY_SLOT = 2,
+
 	ARM = 0, KNUCKLE, KNIFE, SWORD, RAPIER, GUN, RIFLE, LAUNCHER, DRONE, BOW, CROSSBOW, STAFF,
 	
 	R = 0, K = 1, RK = 3 }
@@ -66,7 +77,7 @@ enum { CRAFT_MODE, MODE_START, MODE_ITEMS, MODE_WEAPON, CRAFT_ID = 0, CRAFT_SLOT
 func distract(bag: int) -> void: # LevelRoot
 	var tile: PackedInt32Array = HUD.level.tile_at()
 	if distraction[bag] == tile[HUD.COORDS]:
-		distraction_body[bag].add_stick()
+		HUD.level.distraction_body[bag].add_stick()
 		return
 	#var body: StaticBody2D
 	distraction[bag] = 0
@@ -88,7 +99,7 @@ func produce_item(bag: int, slot: int) -> int:
 	var item: int = HUD.get_item(HUD.hero, slot)
 	if item == 0: return NO_ITEM
 	
-	var id: int = Def.of_x(Def.BYTE, item, ID)
+	var id: int = Def.byte(item, ID)
 	var used: bool = false
 	if WEAPON < id and id < KIT:
 		match id:
@@ -109,7 +120,7 @@ func produce_item(bag: int, slot: int) -> int:
 			ANTICOUGH: used = put_item(bag, JAR); if used: HUD.adversary.nullify(Adversary.COUGH)
 			STICKS: used = true; distract(HUD.hero)
 	if used:
-		var count: int = Def.of_x(Def.BYTE, item, X) - 1
+		var count: int = Def.byte(item, X) - 1
 		item = 0 if count == 0 else id << Def.BYTE | count
 		HUD.set_item(bag, slot, item)
 		show_item(bag, slot, id, count, count)
@@ -133,14 +144,14 @@ func select_exact(slot: int, shift: bool) -> void:
 	HUD.item_select.start()
 
 func fast_panel_cost() -> int:
-	match Def.of_x(Def.BYTE, HUD.get_item(HUD.hero, fast_panel[HUD.hero]), ID):
+	match Def.byte(HUD.get_item(HUD.hero, fast_panel[HUD.hero]), ID):
 		SHOTGUN: return int(HUD.get_stat(HUD.RESOURCE, HUD.hero) * cost[SHOTGUN_COST])
 	return HUD.get_stat(HUD.RESOURCE, HUD.hero)
 
 func update_inventory(bag: int) -> void:
 	for slot in range(24, -1, -1):
 		for ui in _get_ui(bag):
-			var item: Vector2i = Def.short(HUD.get_item(bag, slot))
+			var item: Vector2i = Def.short_of(HUD.get_item(bag, slot))
 			show_item(bag, slot, item[ID], item[X], item[X])
 
 func find_item(bag: int, search: int, target_id: int = MISSING_NO) -> int:
@@ -148,7 +159,7 @@ func find_item(bag: int, search: int, target_id: int = MISSING_NO) -> int:
 		ITEM_OR_SLOT:
 			var result: int = MISSING_NO
 			for slot in range(0, SLOTS):
-				var item: Vector2i = Def.short(HUD.get_item(bag, slot))
+				var item: Vector2i = Def.short_of(HUD.get_item(bag, slot))
 				if result == MISSING_NO and item[X] == EMPTY: result = slot
 				if item[ID] == target_id and item[X] < LIMIT: return result
 		SAME_ITEM:
@@ -160,7 +171,7 @@ func find_item(bag: int, search: int, target_id: int = MISSING_NO) -> int:
 	return MISSING_NO
 
 func trade_item(from: int, bag_b: int, slot_b: int) -> void:
-	if Def.of_x(Def.MASK, craft_mode, bag_b) != CRAFT_MODE:
+	if Def.part(craft_mode, bag_b) != CRAFT_MODE:
 		add_slot(bag_b, slot_b)
 		return
 	if trade_slots[from] == NO_SLOT:
@@ -179,8 +190,8 @@ func trade_item(from: int, bag_b: int, slot_b: int) -> void:
 	var item_b: int = HUD.get_item(bag_a, slot_a)
 	HUD.set_item(bag_a, slot_a, item_b)
 	HUD.set_item(bag_b, slot_b, item_a)
-	show_item(bag_a, slot_a, Def.of_x(Def.BYTE, item_b, ID), 0, Def.of_x(Def.BYTE, item_b, X))
-	show_item(bag_b, slot_b, Def.of_x(Def.BYTE, item_b, ID), 0, Def.of_x(Def.BYTE, item_a, X))
+	show_item(bag_a, slot_a, Def.byte(item_b, ID), 0, Def.byte(item_b, X))
+	show_item(bag_b, slot_b, Def.byte(item_b, ID), 0, Def.byte(item_a, X))
 
 const BUSY: String = "Storage is full"
 
@@ -191,7 +202,7 @@ func put_item(bag: int, id: int) -> bool:
 		return false # add logs message
 	
 	var item: int = HUD.get_item(HUD.hero, slot)
-	var count: int = Def.of_x(Def.BYTE, item, X)
+	var count: int = Def.byte(item, X)
 	show_item(bag, slot, id, count, count + 1)
 	HUD.set_item(bag, slot, id << Def.BYTE | count + 1)
 	return true
@@ -209,16 +220,16 @@ func show_item(bag: int, slot: int, id: int, previous: int, count: int) -> void:
 func craft_item(bag: int, slot: int) -> void:
 	var item: int = HUD.get_item(bag, slot)
 	if product_id == -1 or item != 0: return
-	var id_a: int = Def.of_x(Def.BYTE, crafting[bag * CRAFTING + CRAFT_ID], HUD.hero); var slot_a: int = -1
-	var id_b: int = Def.of_x(Def.BYTE, crafting[bag * CRAFTING + CRAFT_SLOT], X); var slot_b: int = -1
+	var id_a: int = Def.byte(crafting[bag * CRAFTING + CRAFT_ID], HUD.hero); var slot_a: int = -1
+	var id_b: int = Def.byte(crafting[bag * CRAFTING + CRAFT_SLOT], X); var slot_b: int = -1
 	for s in range(0, SLOTS):
 		var i: int = HUD.get_item(bag, s)
-		if slot_a == -1 and Def.of_x(Def.BYTE, i, ID) == id_a: slot_a = s
-		if slot_b == -1 and Def.of_x(Def.BYTE, i, ID) == id_b: slot_b = s
+		if slot_a == -1 and Def.byte(i, ID) == id_a: slot_a = s
+		if slot_b == -1 and Def.byte(i, ID) == id_b: slot_b = s
 		if slot_a != -1 and slot_b != -1: break
 	if slot_a == -1 or slot_b == -1: return
-	var count_a: int = Def.of_x(Def.BYTE, HUD.get_item(bag, slot_a), X)
-	var count_b: int = Def.of_x(Def.BYTE, HUD.get_item(bag, slot_b), X)
+	var count_a: int = Def.byte(HUD.get_item(bag, slot_a), X)
+	var count_b: int = Def.byte(HUD.get_item(bag, slot_b), X)
 	var next: int
 	if count_a < count_b:
 		next = count_a; count_b -= count_a; count_a = 0
@@ -235,7 +246,7 @@ func _get_ui(bag: int) -> Array[Control]:
 	var name: StringName = &"ray" if bag == Def.RAY else &"rock"
 	return [HUD.game.inventory.get(name), HUD.game.priorities.get(name)]
 
-func _craft(type: int, slot: int) -> int: return Def.of_x(Def.BYTE, crafting[type], slot)
+func _craft(type: int, slot: int) -> int: return Def.byte(crafting[type], slot)
 
 func compatible(id: int) -> PackedInt32Array:
 	if ARMOR < id and id < WEAPON:
@@ -248,7 +259,7 @@ func show_craft(bag: int) -> void:
 		type.show()
 		for i in range(0, 4):
 			var slot: Control = type.craft[i]
-			var id: int = Def.of_x(Def.BYTE, crafting[bag * CRAFTING + CRAFT_ID], i)
+			var id: int = Def.byte(crafting[bag * CRAFTING + CRAFT_ID], i)
 			slot.image.texture = null if id == 0 else ImageTexture.create_from_image(icon.get_layer_data(id - 1))
 		type.result.texture = null if product_id == 0 else ImageTexture.create_from_image(icon.get_layer_data(product_id - 1))
 
@@ -262,7 +273,7 @@ func craft_product(bag: int, slot: int) -> void:
 		elif limit == -1: limit = i
 		
 		var s: int = _craft(next[CRAFT_SLOT], i)
-		var count: int = Def.of_x(Def.BYTE, HUD.get_item(bag, s), i)
+		var count: int = Def.byte(HUD.get_item(bag, s), i)
 		if count < min_count: min_count = count
 	for i in range(0, limit):
 		var s: int = _craft(next[CRAFT_SLOT], i)
@@ -279,8 +290,8 @@ func craft_product(bag: int, slot: int) -> void:
 
 func add_slot(bag: int, slot: int) -> void:
 	var item: int = HUD.get_item(bag, slot)
-	var id: int = Def.of_x(Def.BYTE, item, ID)
-	var mode: int = Def.of_x(Def.MASK, craft_mode, bag)
+	var id: int = Def.byte(item, ID)
+	var mode: int = Def.part(craft_mode, bag)
 	if mode == MODE_START:
 		if (BAG_START <= id and id < ARMOR) or (KIT <= id and id < BAG_END):
 			mode = MODE_ITEMS
@@ -289,12 +300,12 @@ func add_slot(bag: int, slot: int) -> void:
 			mode = MODE_WEAPON
 			product_id = id
 			show_craft(bag)
-		craft_mode = Def.to_x(Def.MASK, craft_mode, bag, mode)
+		craft_mode = Def.to_part(craft_mode, bag, mode)
 	if mode == MODE_ITEMS and (BAG_START <= id and id < ARMOR):
 		var next: Vector2i = _slot(bag)
 		if item == 0 and product_id != 0:
 			craft_product(bag, slot); return
-		elif Def.of_x(Def.BYTE, crafting[next[CRAFT_ID]], 3) != 0:
+		elif Def.byte(crafting[next[CRAFT_ID]], 3) != 0:
 			crafting[next[CRAFT_ID]] = 0
 			crafting[next[CRAFT_SLOT]] = 0
 		crafting[next[CRAFT_ID]] = crafting[next[CRAFT_ID]] << Def.BYTE | id
@@ -316,7 +327,7 @@ func add_slot(bag: int, slot: int) -> void:
 		var next: int
 		if item == 0:
 			if crafting[cell[CRAFT_ID]] == 0: return
-			next = Def.of_x(Def.BYTE, crafting[cell[CRAFT_ID]], 0)
+			next = Def.byte(crafting[cell[CRAFT_ID]], 0)
 
 			HUD.set_item(bag, slot, next << Def.BYTE)
 			show_item(bag, slot, next, 0, 1)
@@ -336,7 +347,7 @@ func add_slot(bag: int, slot: int) -> void:
 		# toggle red
 
 func bag_slot(item: int) -> Vector2i:
-	return Vector2i(Def.of_x(Def.BYTE, item, ID), Def.of_x(Def.BYTE, item, X))
+	return Vector2i(Def.byte(item, ID), Def.byte(item, X))
 
 func _slot(bag: int) -> Vector2i: return bag * CRAFTING * Vector2i.ONE + Vector2i(CRAFT_ID, CRAFT_SLOT)
 
@@ -362,3 +373,39 @@ func set_preview(cell: Control) -> Control:
 	cell.image.set_drag_preview(preview) # add control as root if not work
 	cell.image.texture = null
 	return cell
+
+func set_marker(before: int, after: int) -> void:
+	HUD.main_items[HUD.hero][before].remove_child(HUD.markers[HUD.hero])
+	HUD.main_items[HUD.hero][after].add_child(HUD.markers[HUD.hero])
+
+func fast_panel_swap(offset: int) -> void:
+	var before: int = HUD.inventory.fast_panel[HUD.hero]
+	var result: int = before + offset
+	if result > FAST_MAX:
+		HUD.inventory.fast_panel[HUD.hero] = 0
+	elif result < 0:
+		HUD.inventory.fast_panel[HUD.hero] = FAST_MAX - 1
+	else:
+		var target: Vector2i = Vector2i(0, -1) if offset < 0 else Vector2i(FAST_MAX - 1, FAST_MAX)
+		for i in range(HUD.inventory.fast_panel[HUD.hero] + offset, target.y, offset):
+			if i == target.x or HUD.get_item(HUD.hero, i) != 0:
+				HUD.inventory.fast_panel[HUD.hero] = i
+				if HUD.inventory_scroll != null:
+					set_marker(before, i)
+				break
+
+func fast_panel_select(slot: int) -> void:
+	var before: int = fast_panel[HUD.hero]
+	if slot == before: return
+	elif slot == FAST_MAX:
+		fast_panel[HUD.hero] = slot; return
+	var result: int = 0
+	for i in range(0, FAST_MAX):
+		if HUD.get_item(HUD.hero, slot) != 0:
+			result += 1; continue
+		if result == slot:
+			result = i; break
+	if result == slot:
+		fast_panel[HUD.hero] = result
+		if HUD.inventory_scroll != null:
+			set_marker(before, result)

@@ -15,12 +15,14 @@ enum { LOGIC = 0, FLOOR = 1, ENTRY = 2, WALLS = 3,
 	RIGHT_CHAIN, PILLAR,
 	
 	PUDDLE_OFF, PUDDLE_ON, ICE_FLOOR, ICE_THICK,
+	
+	U_WAY, D_WAY, R_WAY, L_WAY, U_WAY_OUT, D_WAY_OUT,
 
 	BLUE_OFF = 0, BLUE_ON, RED_OFF, RED_ON, GREEN_OFF, GREEN_ON, WHITE_OFF,
 	WHITE_ON, BLACK_OFF, BLACK_ON, BRONZE_OFF, BRONZE_ON, SILVER_OFF, SILVER_ON,
 	GOLD_OFF, GOLD_ON, PLATINUM_OFF, PLATINUM_ON, PLACE, TELEPORT_ON, SOURCE_OFF,
 	SOURCE_ON, LEVER_OFF, LEVER_ON, PLATE_OFF, PLATE_ON, TELEPORT_OFF, SPIKER,
-	COMFORTER, SUPPLIER, COOLER, SMALL_BOX, FIRE_BOX, LARGE_BOX, STAND_OFF, STAND_ON,
+	COMFORTER, AMPLIFIER, INSPIRER, SMALL_BOX, FIRE_BOX, LARGE_BOX, STAND_OFF, STAND_ON,
 	
 	U_WATER = 0, U_EXIT, U_WALL_OFF, U_WALL_ON, U_LADDER, D_LADDER, ENEMY, BOSS,
 	M_WATER, M_EXIT, D_WALL_OFF, D_WALL_ON, H_SPRING_OFF, H_SPRING_ON, B_SPRING_OFF,
@@ -316,15 +318,18 @@ func toggle_openning(no: int, on: bool, enter: bool) -> void:
 			PLATE_OFF: button_press(no, +1, 1, tag)
 			PLATE_ON: button_press(no, +1 if enter else -1, 0, tag)
 	else:
+		var atlas: int
 		match tag:
-			PLATE_OFF: button_press(no, +1, 1, PLATE_ON)
-			PLATE_ON: button_press(no, +1 if enter else -1, 0, PLATE_OFF)
-			U_WALL_OFF: HUD.level.border.atlas(U_WALL_ON).paint()
-			U_WALL_ON: HUD.level.border.atlas(U_WALL_OFF).paint()
-			D_WALL_OFF: HUD.level.border.atlas(D_WALL_ON).paint()
-			D_WALL_ON: HUD.level.border.atlas(D_WALL_OFF).paint()
-			STAND_OFF: HUD.level.border.atlas(STAND_OFF).paint()
-			STAND_ON: HUD.level.border.atlas(STAND_ON).paint()
+			PLATE_OFF: button_press(no, +1, 1, PLATE_ON); return
+			PLATE_ON: button_press(no, +1 if enter else -1, 0, PLATE_OFF); return
+			U_WALL_OFF: atlas = U_WALL_ON
+			U_WALL_ON: atlas = U_WALL_OFF
+			D_WALL_OFF: atlas = D_WALL_ON
+			D_WALL_ON: atlas = D_WALL_OFF
+			STAND_OFF: atlas = STAND_OFF
+			STAND_ON: atlas = STAND_ON
+			_: return
+		HUD.level.border.atlas(STAND_ON).paint()
 
 func switch_cluster(section: int, enter: bool) -> void:
 	var c: int = get_cluster(section, HUD.level.border.tile[COORDS])
@@ -344,45 +349,95 @@ func get_cluster(section: int, coords: int) -> int:
 
 enum { ACT, SPARK, FIRE, PRESS }
 
-func tile_press(coords: int, type: int, enter: bool = true) -> void:
-	if type == FIRE:
-		HUD.level.border.coords(coords).id().type() # .alt(ALT1).
-		if HUD.level.border.tile[TYPE] == ICE_FLOOR:
-			HUD.level.border.type(TYPE).paint_alt()
-		return
-
-	match HUD.level.border.coords(coords).id().atlas().tile[ATLAS]:
-		PLATE_OFF: if type == PRESS: switch_cluster(BUTTON, enter)
-		PLATE_ON: if type == PRESS: switch_cluster(BUTTON, enter)
-		LEVER_OFF: if type == ACT: switch_cluster(LEVER, true)
-		LEVER_ON: if type == ACT: switch_cluster(LEVER, true)
-		SOURCE_OFF: if type == SPARK: switch_cluster(SOURCE, true)
-		SOURCE_ON: if type == SPARK: switch_cluster(SOURCE, true)
-
 var walk_no: int = -1
 
-func tile_walk(hero: CharacterBody2D, enter: bool = true) -> void:
-	if not enter and walk_no != -1:
+func lever_inner(border: TileDecorator) -> void: border.get_tile(HUD.level.lever_tile, HUD.hero)
+func lever_outer(border: TileDecorator) -> void: border.nan_tile(HUD.level.lever_tile, HUD.hero)
+func lever_apply(type: int) -> void:
+	var atlas: int = HUD.level.lever_tile[HUD.hero * TileDecorator.TILE_DATA + ATLAS]
+	if atlas == 0: return
+	match type:
+		FIRE:
+			var t: int = HUD.level.lever_tile[HUD.hero * TileDecorator.TILE_DATA + TYPE]
+			if t == ICE_FLOOR: HUD.level.border.set_tile(HUD.level.lever_tile, HUD.hero).paint_alt()
+		PRESS:
+			match atlas:
+				PLATE_OFF: switch_cluster(BUTTON, true) # enter
+				PLATE_ON: switch_cluster(BUTTON, true)
+		ACT:
+			match atlas:
+				LEVER_OFF: switch_cluster(LEVER, true)
+				LEVER_ON: switch_cluster(LEVER, true)
+		SPARK:
+			match atlas:
+				SOURCE_OFF: switch_cluster(SOURCE, true)
+				SOURCE_ON: switch_cluster(SOURCE, true)
+
+func plate_outer(border: TileDecorator) -> void:
+	if walk_no != -1: # not enter and 
 		HUD.log_help_hide()
 		walk_no = -1
-	
-	var atlas: int = HUD.level.border.coords(HUD.level.tile[Def.offset(hero.no, Def.PLATE)]).atlas().tile[ATLAS]
-	if atlas == TELEPORT_ON:
-		var c: int = get_cluster(TELEPORT, HUD.level.border.tile[COORDS])
-		for i in range(Def.x(access[c]), Def.y(access[c])):
-			if HUD.level.border.coords(cluster[i]).tile[ATLAS] == PLACE:
-				hero.teleport(HUD.level.border.map_to_local(Def.map(cluster[i])))
-				break
-	elif atlas == HINT and HUD.level.border.tile[ID] == TYPE:
-		# no = help_show(HUD.level.border.local_to_map(hero.position), hint)
-		if walk_no != -1: HUD.log_help(walk_no)
-	else:
-		tile_press(HUD.level.border.tile[COORDS], PRESS, enter)
 
-func secret_reveal() -> void:
-	pass
+	match HUD.level.press_tile[TileDecorator.TILE_DATA * HUD.hero + HUD.ATLAS]:
+		LEFT_CHAIN: chain_enter(0, 1)
+		RIGHT_CHAIN: chain_enter(0, 1)
+		H_SPRING_OFF: pass
+	border.nan_tile(HUD.level.press_tile, HUD.hero)
 
+var transitions_part: PackedByteArray = []
+var transitions_tile: PackedInt32Array = []
+var cactus_stations: PackedByteArray = [0, 0, 0]
 
+func enter_cooldown() -> void:
+	for i in range(0, 3):
+		if cactus_stations[0] > 0:
+			cactus_stations[0] -= 1
+	if cactus_stations[0] == 0 and cactus_stations[1] == 0 and cactus_stations[2] == 0:
+		HUD.station_timer.stop()
+
+func enter_station(no: int) -> void:
+	if cactus_stations[0] == 0 and cactus_stations[1] == 0 and cactus_stations[2] == 0:
+		HUD.station_timer.start()
+	if cactus_stations[no] == 0:
+		pass # replace cactus
+	cactus_stations[no] = 24
+
+func plate_inner(border: TileDecorator) -> void:
+	border.pos(HUD.level.entity[HUD.hero].position).id().atlas().type(PUDDLE_OFF).get_tile(HUD.level.press_tile, HUD.hero)
+	match border.tile[ATLAS]:
+		INSPIRER: HUD.append_dialog(HUD.hero, randi_range(65, 90)); enter_station(0) # TODO add face checks
+		COMFORTER: HUD.adversary.affect(HUD.hero, +5, 0); enter_station(1)
+		AMPLIFIER: HUD.adversary.affect(HUD.hero, 0, +3); enter_station(2)
+		TELEPORT_ON:
+			var c: int = get_cluster(TELEPORT, border.tile[COORDS])
+			for i in range(Def.x(access[c]), Def.y(access[c])):
+				if HUD.level.border.coords(cluster[i]).tile[ATLAS] == PLACE:
+					HUD.level.entity[HUD.hero].teleport(HUD.level.border.map_to_local(Def.map(cluster[i])))
+					break
+		HINT:
+			# for hint loop
+			if border.tile[ID] == TYPE and walk_no != -1:
+				HUD.log_help(walk_no)
+			elif border.tile[ID] == ID:
+				pass
+		U_WAY, D_WAY, R_WAY, L_WAY, U_WAY_OUT, D_WAY_OUT:
+			for i in range(0, len(transitions_part)):
+				if border.tile[COORDS] == transitions_tile[i]:
+					HUD.transition_part = transitions_part[i]
+					break
+			HUD.entry_transit(HUD.GATE_IN)
+		D_LADDER:
+			HUD.set_part(HUD.LEVEL, HUD.DUNGEON, HUD.get_part(HUD.LEVEL, HUD.DUNGEON) + 1)
+			HUD.entry_transit(HUD.LADDER_DOWN)
+		U_LADDER:
+			HUD.set_part(HUD.LEVEL, HUD.DUNGEON, HUD.get_part(HUD.LEVEL, HUD.DUNGEON) - 1)
+			HUD.entry_transit(HUD.LADDER_UP)
+		LEFT_CHAIN: chain_enter(border.tile[ATLAS], 0)
+		RIGHT_CHAIN: chain_enter(border.tile[ATLAS], 0)
+		H_SPRING_ON:
+			# logic to disable collision
+			HUD.level.entity[HUD.hero].velocity += Vector2(0, 60)
+		_: return
 
 
 const small: PackedScene = preload("res://def/entity/platform/box_small.tscn")
@@ -458,34 +513,6 @@ func chain_enter(tile: int, y: int) -> void:
 	press[HUD.hero] = tile
 	tile_motion[HUD.hero].y = y
 
-func plate_encounter(_body: Variant) -> void:
-	HUD.level.tile[Def.offset(HUD.hero, Def.PLATE)] = Def.join(HUD.level.border.local_to_map(HUD.level.entity[HUD.hero].position))
-	HUD.level.cluster.tile_walk(HUD.level.entity[HUD.hero], true)
-
-func plate_disappear(_body: Variant) -> void:
-	HUD.level.cluster.tile_walk(HUD.level.entity[HUD.hero], false)
-	HUD.level.tile[Def.offset(HUD.hero, Def.PLATE)] = 0
-
-func tile_exit(_border: TileDecorator) -> void:
-	match HUD.level.press_tile[TileDecorator.TILE_DATA * HUD.hero + HUD.ATLAS]:
-		LEFT_CHAIN: chain_enter(0, 1)
-		RIGHT_CHAIN: chain_enter(0, 1)
-		H_SPRING_OFF: pass
-
-func tile_enter(border: TileDecorator) -> void:
-	var tile: PackedInt32Array = border.pos(HUD.level.entity[HUD.hero].position).id().atlas().type(PUDDLE_OFF).tile
-	match tile[ATLAS]:
-		LEFT_CHAIN:
-			press_coords[HUD.hero] = tile[COORDS]
-			chain_enter(tile[ATLAS], 0)
-		RIGHT_CHAIN:
-			press_coords[HUD.hero] = tile[COORDS]
-			chain_enter(tile[ATLAS], 0)
-		H_SPRING_ON:
-			press[HUD.hero] = tile[ATLAS]
-			HUD.level.entity[HUD.hero].velocity += Vector2(0, -60)
-		_: return
-	border.get_tile(HUD.level.press_tile, HUD.hero)
 
 enum { CHAIN = 0, STATE = 0, JOINT = 1, A = -2, B = -1, TIME = 4, LENGTH = 10, NONE = -1 }
 

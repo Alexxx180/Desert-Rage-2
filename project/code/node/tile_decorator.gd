@@ -7,7 +7,9 @@ const data: String = "PFB"
 var tile: PackedInt32Array = [0, 0, 0, 0, 0]
 
 func get_tile(saved: PackedInt32Array, from: int) -> void: for i in range(0, 5): saved[from * TILE_DATA + i] = tile[i]
-func set_tile(saved: PackedInt32Array, from: int) -> void: for i in range(0, 5): tile[i] = saved[from * TILE_DATA + i]
+func set_tile(saved: PackedInt32Array, from: int) -> TileDecorator:
+	for i in range(0, 5): tile[i] = saved[from * TILE_DATA + i]
+	return self
 
 func atlas(next: int = -1) -> TileDecorator:
 	if next == -1:

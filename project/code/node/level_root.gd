@@ -12,7 +12,7 @@ class_name LevelRoot extends Camera2D
 @export_flags_3d_render var mode: int
 @onready var border: TileDecorator = get_node(^"../border"); var execute: TileDecorator
 
-var entity: Array[CharacterBody2D] = [null, null]
+var entity: Array[CharacterBody2D] = [$ray, $rock]
 var boxes: Array[AnimatableBody2D] = []
 var distraction_body: Array[StaticBody2D] = [null, null]
 

@@ -7,7 +7,6 @@ enum { BLUE, NO = 0, AURA = 0, LIFE_BORDER = 0, WAVE = 0, THICK = 0, GREEN, COLO
 var aura_stat: PackedFloat32Array = [0.7, 0.1, 2.0, 5.0, 0.1]
 var status_time: PackedByteArray = []; var status_type: PackedByteArray = []
 var entities: int = 0
-var entity: Array[CharacterBody2D] = [null, null]; var tweens: Array[Tween] = [null, null]
 var i_points: PackedByteArray = _number12()
 var a_portion: PackedFloat32Array = _number14(); var r_portion: PackedFloat32Array = _number14()
 var a_points: PackedInt32Array = _number12(); var r_points: PackedByteArray = _number12()
@@ -322,21 +321,7 @@ func score_up(add: int) -> void:
 		xp.bar.value = next_level[level]
 		xp.score.text = str(next_level[level])
 
-enum { COOL, RECOVER, RESTORE }
 
-var station_cooldown: bool = false
-
-func enter_cooldown() -> void:
-	station_cooldown = false
-
-func enter_station(hero: int, no: int) -> void:
-	if station_cooldown: return
-	station_cooldown = true
-	HUD.station_timer.start()
-	match no:
-		COOL: HUD.game.log.append_text("SOME TEST")
-		RECOVER: affect(hero, +5, 0)
-		RESTORE: affect(hero, 0, +3)
 
 
 ## TIMING
@@ -491,7 +476,7 @@ func empty_hand_kick() -> void:
 		HUD.adversary.damage_zone(HUD.hero, Adversary.TARGET, Adversary.NORMAL, 1, 1.0, 0.1)
 
 func punch(_pallete: bool = false) -> void:
-	combo_slots = combo_slots << Def.MASK3 | A
+	combo_slots = combo_slots << Def.HALF_BYTE | A
 	match HUD.hero:
 		Def.RAY:
 			empty_hand_punch()
@@ -505,7 +490,7 @@ func punch(_pallete: bool = false) -> void:
 	HUD.combo_timer.start()
 
 func kick() -> void:
-	combo_slots = combo_slots << Def.MASK3 | B
+	combo_slots = combo_slots << Def.HALF_BYTE | B
 	match HUD.hero:
 		Def.RAY:
 			empty_hand_kick()
@@ -519,7 +504,7 @@ func kick() -> void:
 	#	HUD.level.chains.jump()
 
 func skill_a() -> void:
-	combo_slots = combo_slots << Def.MASK3 | X
+	combo_slots = combo_slots << Def.HALF_BYTE | X
 	if act(GRILL_KICK):
 		pass
 	elif act(CRACK) and book(B_CRACK, P_CRACK, C_CRACK):
@@ -530,7 +515,7 @@ func skill_a() -> void:
 		Def.ROCK: HUD.interact.puddle_tile() # LevelRoot # TileDecorator
 
 func skill_b() -> void:
-	combo_slots = combo_slots << Def.MASK3 | Y
+	combo_slots = combo_slots << Def.HALF_BYTE | Y
 	if act(POACHING):
 		pass
 	elif act(HUG):

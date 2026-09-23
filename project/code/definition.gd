@@ -44,48 +44,7 @@ static func unit(x1: int, y1: int, off: int = LEVEL) -> int: return y1 << off | 
 static func join(pos: Vector2i) -> int: return unit(pos.x, pos.y, LEVEL) # CTRL + LMB - the more the LEVEL the larger the map
 static func join8(pos: Vector2i) -> int: return unit(pos.x, pos.y, 3)
 
-static func ref(parent: Object, object: Variant, caption: StringName, feedback: Callable) -> Variant:
-	if object == null:
-		object = feedback.call()
-		parent.set(caption, object)
-	return object
 
-static func refn(parent: Node, node: Node, caption: StringName, feedback: Callable) -> Variant:
-	if node == null:
-		node = feedback.call()
-		node.name = caption
-		parent.set(caption, node)
-		parent.add_child(node)
-	return node
-
-static func add(parent: Node, path: StringName, caption: StringName) -> Variant:
-	var node: Node = load(path).instantiate()
-	node.name = caption
-	parent.set(caption, node)
-	parent.add_child(node)
-	return node
-
-static func preadd(parent: Node, path: PackedScene, caption: StringName) -> Variant:
-	var node: Node = path.instantiate()
-	node.name = caption
-	parent.set(caption, node)
-	parent.add_child(node)
-	return node
-
-static func lazy(parent: Node, node: Variant, path: StringName, caption: StringName) -> Variant:
-	return node if node != null else add(parent, path, caption)
-
-static func pre(parent: Node, node: Variant, path: PackedScene, caption: StringName) -> Variant:
-	return node if node != null else preadd(parent, path, caption)
-
-static func lazy_at(parent: Node, sibling: Node, path: String, caption: StringName) -> Variant:
-	var node: Node = parent.get(caption)
-	if node == null:
-		node = load(path).instantiate()
-		node.name = caption
-		parent.set(caption, node)
-		sibling.add_sibling(node)
-	return node
 
 # LOADS
 const saves: StringName = &"user://saves.bin"
@@ -129,36 +88,18 @@ const mirror: Array[StringName] = [&"res://def/see/mirror/ray.tscn", &"res://def
 const help: CompressedTexture2DArray = preload("res://icon/help/z_master.svg")
 const root: Script = preload("res://code/node/level_root.gd")
 
-
 enum { PART_BYTE = 2, HALF_BYTE = 4, BYTE = 8, SHORT = 16, INTEGER = 32, BIG = 64 }
 
-static func bit(no: int) -> int: return 1 << no
 static func one(n: int) -> bool: return n > 0 and (n & (n - 1)) == 0
+static func of(value: int, index: int) -> bool: return value & (1 << index) == (1 << index)
+static func to(value: int, index: int, next: bool) -> int: return value & ~(1 << index) | (int(next) << index)
+static func to1(value: int, index: int) -> int: return value | (1 << index)
+static func to0(value: int, index: int) -> int: return value & ~(1 << index)
+static func to_(value: int, index: int) -> int: return value ^ (1 << index)
 
-static func of(value: int, index: int) -> bool:
-	var state: int = bit(index)
-	return value & state == state
-
-static func to(value: int, index: int, next: bool) -> int:
-	var state: int = bit(index)
-	return value & ~state | (state * int(next))
-
-static func to1(value: int, index: int) -> int: return value | bit(index)
-static func to0(value: int, index: int) -> int: return value & ~bit(index)
-static func to_(value: int, index: int) -> int: return value ^ bit(index)
-
-static func b(state: PackedByteArray, select: int, index: int, value: int) -> void:
-	state[select] = to(state[select], index, value)
-
-static func b0(state: PackedByteArray, select: int, index: int) -> void:
-	state[select] = to0(state[select], index)
-
-static func b1(state: PackedByteArray, select: int, index: int) -> void:
-	state[select] = to1(state[select], index)
-
-static func bytes_to_int(fields: PackedByteArray, mask: int) -> int:
-	var value: int = 0; for i in range(0, len(fields)): value |= fields[i] << (i * mask)
-	return value
+static func b(state: PackedByteArray, select: int, index: int, value: int) -> void: state[select] = to(state[select], index, value)
+static func b0(state: PackedByteArray, select: int, index: int) -> void: state[select] = to0(state[select], index)
+static func b1(state: PackedByteArray, select: int, index: int) -> void: state[select] = to1(state[select], index)
 
 static func part(item: int, slot: int) -> int: return (item >> (slot << PART_BYTE)) & 3
 static func half(item: int, slot: int) -> int: return (item >> (slot << HALF_BYTE)) & 15
