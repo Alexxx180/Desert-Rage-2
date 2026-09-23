@@ -112,16 +112,14 @@ static func to_byte(item: int, slot: int, next: int) -> int: return item & ~(255
 static func to_short(item: int, slot: int, next: int) -> int: return item & ~(65535 << (slot << PART_BYTE)) | (next << (slot << PART_BYTE))
 static func to_number(item: int, slot: int, next: int) -> int: return item & ~(4_294_967_295 << (slot << PART_BYTE)) | (next << (slot << PART_BYTE))
 
+static func byte_of(item: int) -> Vector2i: return Vector2i(half(item, 0), half(item, 1))
 static func short_of(item: int) -> Vector2i: return Vector2i(byte(item, 0), byte(item, 1))
-
-"""
-static func iterate_set_bits(mask: int) -> int: # Handle negative integers safely if treating as an unsigned bitmask
+static func iterates(mask: int) -> int: # Handle negative integers safely if treating as an unsigned bitmask
 	while mask != 0:
-		var bit_index: int = ctz(mask) # 1. Find the index of the lowest set bit (0 to 63)
-		print("Found active bit at index: ", bit_index) # 2. Execute your logic with the active index
-		mask = mask & (mask - 1) # # 3. Clear the lowest set bit to move to the next one
-"""
-
+		# var bit_index: int = ctz(mask) # 1. Find the index of the lowest set bit (0 to 63)
+		# print("Found active bit at index: ", bit_index) # 2. Execute your logic with the active index
+		mask = mask & (mask - 1) # 3. Clear the lowest set bit to move to the next one
+	return mask
 
 const OPENED: PackedStringArray = [
 	"What's happening outside - То что происходит снаружи", "Breathe",

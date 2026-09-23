@@ -46,16 +46,49 @@ var status_tick: bool = false
 func _number14() -> Array[int]: return [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 func _number12() -> Array[int]: return [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
+enum { STATUS_TYPE, STATUS_TIME, STATUS_X = -7, STATUS_Y = 25 }
+
+var enemy_status: PackedInt64Array = []
+var status_process: bool = false
+
+func status_drawback() -> void:
+	status_process = !status_process
+	if !status_process: return
+
+	var party: int = entities + Def.PARTY
+	for i in range(len(HUD.level.entity_status), party): # if party > len(HUD.level.entity_status):
+		HUD.level.entity_status.append([null, null, null, null])
+
+	for e in range(0, len(HUD.level.entity)):
+		for i in range(0, 4):
+			var s: int = e - Def.PARTY; var p: int = HUD.STATUS + e
+			var status: Vector2i = Def.byte_of(HUD.get_part(p, i) if e < Def.PARTY else enemy_status[s])
+			if status[STATUS_TIME] == 0: continue
+
+			status[STATUS_TIME] -= 1
+			if status[STATUS_TYPE] == 0:
+				HUD.level.entity_status[e][i].hide()
+				HUD.level.entity_status[e][i].position = Vector2(0, STATUS_Y * i)
+			else:
+				HUD.level.entity_status[e][i].position = Vector2(STATUS_X * status[STATUS_TIME], STATUS_Y * i)
+				status_feedback(4, e, status_time[i], status_type[i])
+
+			var result: int = status[STATUS_TYPE] << Def.HALF_BYTE | status[STATUS_TIME]
+			if p < Def.PARTY:
+				HUD.set_part(p, i, result)
+			else:
+				enemy_status[s] = Def.to_byte(enemy_status[s], i, result)
+
 func status_feedback(limit: int, enemy: int, time: int, status: int) -> int:
 	for j in range(0, limit):
-		var t: int = Def.of_x(Def.MASK3, time, j)
+		var t: int = Def.half(time, j)
 		if t != 0:
-			match Def.of_x(Def.MASK3, status, j):
+			match Def.half(status, j):
 				BURN: affect(enemy, -min(1, aura[enemy] >> s_power[BURN]), 0)
 				POISON: affect(enemy, -min(1, aura[enemy] >> s_power[POISON]), 0)
 			if status_tick:
 				t -= 1
-				time = Def.to_x(Def.MASK3, time, j, t)
+				time = Def.to_half(time, j, t)
 	return time
 
 func status_timeout() -> void:
@@ -67,7 +100,7 @@ func status_timeout() -> void:
 			off = false
 			HUD.set_half(HUD.STATUS_TIME, status_feedback(4, i, time, HUD.get_half(HUD.STATUS, i)))
 	for i in range(0, len(status_time)):
-		if status_time[i] != 0: # Def.of_x(Def.MASK4, , )
+		if status_time[i] != 0:
 			off = false
 			status_time[i] = status_feedback(2, i + Def.PARTY, status_time[i], status_type[i])
 	if off: HUD.aura_timer.stop()
@@ -86,9 +119,9 @@ func color_reaction(segment: float) -> Color:
 func _get_ui() -> Array[Control]: return [HUD.game.inventory.points, HUD.game.priorities.points]
 
 func affect(hero: int, a: int, r: int) -> void:
-	if !tweens[hero] or !tweens[hero].is_valid():
-		tweens[hero] = HUD.create_tween()
-		tweens[hero].tween_method(func(value: float):
+	if !HUD.level.tweens[hero] or !HUD.level.tweens[hero].is_valid():
+		HUD.level.tweens[hero] = HUD.create_tween()
+		HUD.level.tweens[hero].tween_method(func(value: float):
 			var segment: float = a_portion[hero]
 			var h: int = hero
 			var stat: int
@@ -101,8 +134,8 @@ func affect(hero: int, a: int, r: int) -> void:
 				segment = (target_a[hero] + value * (stat - target_a[hero])) * segment
 			else:
 				segment = (target_a[hero] - value * (target_a[hero] - stat)) * segment
-			entity[hero].profile.material.set(&"shader_parameter/line_color", color_reaction(segment))
-			entity[hero].profile.material.set(&"shader_parameter/line_thickness", 7 - segment * THICKNESS)
+			HUD.level.entity[hero].profile.material.set(&"shader_parameter/line_color", color_reaction(segment))
+			HUD.level.entity[hero].profile.material.set(&"shader_parameter/line_thickness", 7 - segment * THICKNESS)
 
 			if hero < Def.PARTY:
 				stat = HUD.get_stat(HUD.RESOURCE, hero)
@@ -114,25 +147,25 @@ func affect(hero: int, a: int, r: int) -> void:
 				segment = (target_r[hero] + value * (stat - target_r[hero])) * segment
 			else:
 				segment = (target_r[hero] + value * (stat - target_r[hero])) * segment
-			entity[hero].profile.material.set(&"shader_parameter/ap", segment)
+			HUD.level.entity[hero].profile.material.set(&"shader_parameter/ap", segment)
 
 			if hero >= Def.PARTY and i_points[hero] > 0:
 				i_points[hero] -= 5
 				HUD.game.ability.health.value = i_points[h],
 		0, 1.0, 3).tween_callback(func():
-			entity[hero].profile.material.set(&"shader_parameter/line_color", Color.TRANSPARENT)
-			entity[hero].profile.material.set(&"shader_parameter/action", false)
+			HUD.level.entity[hero].profile.material.set(&"shader_parameter/line_color", Color.TRANSPARENT)
+			HUD.level.entity[hero].profile.material.set(&"shader_parameter/action", false)
 			if hero < Def.PARTY:
 				if HUD.get_stat(HUD.AURA, Def.RAY) == 0 and HUD.get_stat(HUD.AURA, Def.ROCK) == 0:
 					HUD.level.group.spectrum()
 				else:
 					HUD.level.entity[hero].animation.play_coma()
 			elif a_points[hero] == 0 and i_points[hero] == 0:
-				entity[hero].process_mode = Node.PROCESS_MODE_DISABLED
-				entity[hero].animation.transport()
+				HUD.level.entity[hero].process_mode = Node.PROCESS_MODE_DISABLED
+				HUD.level.entity[hero].animation.transport()
 				var shift: int = -1 if randi_range(0, 1) == 0 else 1
-				entity[hero].spawn_pos = posmod(entity[hero].spawn_pos + shift, len(places))
-				entity[hero].position = HUD.level.spawn[entity[hero].state[2]]
+				HUD.level.entity[hero].spawn_pos = posmod(HUD.level.entity[hero].spawn_pos + shift, len(places))
+				HUD.level.entity[hero].position = HUD.level.spawn[HUD.level.entity[hero].state[2]]
 		)
 	if a != 0:
 		if hero < Def.PARTY:
@@ -158,7 +191,7 @@ func affect(hero: int, a: int, r: int) -> void:
 			for ui in _get_ui(): ui.resource.value = stat
 		else:
 			r_points[hero] = clampi(r_points[hero] + r, 0, resc[hero])
-		entity[hero].profile.material.set(&"shader_parameter/action", true)
+		HUD.level.entity[hero].profile.material.set(&"shader_parameter/action", true)
 
 enum { TARGET, ZONE_RADIUS, TARGET_RADIUS, ZONE_ALL,
 	HALF_TILE = 32, TILE = 64, DISTANCE = 1024, RADIUS_DISTANCE = 4096 }
@@ -187,10 +220,11 @@ func damage_zone(type: int, hero: int, element: int, combo: int, portion: float,
 func damage_output(direction: Vector2, distance: int, hero: int, element: int, combo: int, portion: float, output: float) -> void:
 	var start: int = Def.PARTY if hero < Def.PARTY else 0
 	var xp: int = 0
+	var pos: Vector2 = HUD.level.entity[hero].position
 	for i in range(start, entities):
-		if hero != i and (entity[hero].position + direction).distance_squared_to(entity[i].position) < distance:
+		if hero != i and (pos + direction).distance_squared_to(pos) < distance:
 			damage(hero, i, element, portion)
-			entity[i].velocity += directed[hero] * TILE * output
+			HUD.level.entity[i].velocity += directed[hero] * TILE * output
 			xp += exper[i]
 	if start == Def.PARTY and xp != 0:
 		score_up(xp * combo)
@@ -199,11 +233,11 @@ enum { LOW = 128, MID1 = 172, MID = 196, MID2 = 214, HIGH = 256 }
 
 func damage_throw(hero: int, box: int, direction: Vector2, element: int) -> void:
 	var start: int = Def.PARTY if hero < Def.PARTY else 0
-	var check: Rect2 = Rect2(entity[box].position + LOW * direction, entity[box].position + HIGH * direction)
-	var ideal: Rect2 = Rect2(entity[box].position + MID1 * direction, entity[box].position + MID2 * direction)
+	var check: Rect2 = Rect2(HUD.level.entity[box].position + LOW * direction, HUD.level.entity[box].position + HIGH * direction)
+	var ideal: Rect2 = Rect2(HUD.level.entity[box].position + MID1 * direction, HUD.level.entity[box].position + MID2 * direction)
 	
 	for i in range(start, entities):
-		var delta: Vector2 = entity[box].position + entity[i].position * direction
+		var delta: Vector2 = HUD.level.entity[box].position + HUD.level.entity[i].position * direction
 		if hero != i and delta >= check.position and check.size <= delta:
 			var attack: int = power[hero]
 			var countr: int = shell[i]
@@ -268,14 +302,14 @@ func reload() -> void:
 	for i in range(0, foe.size()):
 		if Def.of(HUD.level.foe, i):
 			for c in mini(count * HUD.level.portion[i], 1):
-				entity[entities] = foe[i].instantiate()
-				entity[entities].no = entities
-				HUD.level.border.layer.add_child(entity[entities])
+				HUD.level.entity[entities] = foe[i].instantiate()
+				HUD.level.entity[entities].no = entities
+				HUD.level.border.layer.add_child(HUD.level.entity[entities])
 				a_points[entities - Def.PARTY] = aura[entities]
 				r_points[entities - Def.PARTY] = resc[entities]
 				a_portion[entities] = 1.0 / aura[entities]
 				r_portion[entities] = 1.0 / resc[entities]
-				entity[entities].position = Def.map(places[randi_range(0, place_size)])
+				HUD.level.entity[entities].position = Def.map(places[randi_range(0, place_size)])
 				entities += 1
 
 enum { MAX_LV = 7, PRIORITY_SELECT = 7, SCORE_HALF = 1,
@@ -288,7 +322,7 @@ var next_level: PackedInt32Array = [6, 12, 27, 50, 80, 115, 154,  200, 265, 340,
 func bonus(add: int, x: float) -> void: score_up(roundi(add * x))
 
 func score_up(add: int) -> void:
-	var score: int = (HUD.get_half(HUD.SCORE, SCORE_HALF) & (Def.bit(SCORE_BIT) - 1)) + add
+	var score: int = (HUD.get_half(HUD.SCORE, SCORE_HALF) & ((1 << SCORE_BIT) - 1)) + add
 	if level < next_level.size() and score >= next_level[level]:
 		var before: int = level
 		while level < next_level.size() and score >= next_level[level]: level += 1
@@ -299,7 +333,7 @@ func score_up(add: int) -> void:
 				HUD.get_part(HUD.PRIORITY, PURSUIT * HUD.HALF + hero),
 				HUD.get_part(HUD.PRIORITY, SELF_CONTROL * HUD.HALF + hero),
 				HUD.get_part(HUD.PRIORITY, TENACITY * HUD.HALF + hero))
-			var select: int = Def.of_x(Def.MASK2, selection, hero)
+			var select: int = Def.half(selection, hero)
 			var delta: int = after - before
 			
 			if hero == HUD.hero: HUD.game.ability.priority[select].background = Color.GRAY
@@ -554,8 +588,10 @@ var sprites: PackedStringArray = ["b", "f", "bl", "fl", "l", "br", "fr", "r",
 	"b_c_move", "f_c_move", "bl_c_move", "fl_c_move", "l_c_move", "br_c_move", "fr_c_move", "r_c_move",
 	"b_c_whip", "f_c_whip", "bl_c_whip", "fl_c_whip", "l_c_whip", "br_c_whip", "fr_c_whip", "r_c_whip"]
 
+func get_anim(hero: int) -> int: return (frames[hero] << DIRECTED) | Def.direct(directed[hero]) # if Bit.of(state[BODY], RUN):
 func direct(dir: Vector2i) -> void: directed[HUD.hero] = dir
 func animate_frames(type: int) -> void:
+	# state[BODY] = Def.to0(state[BODY], RUN)
 	frames[HUD.hero] = type
 	HUD.level.profile[HUD.hero].sprite.animation = sprites[get_anim(HUD.hero)]
 
@@ -563,8 +599,6 @@ func stop_animation() -> void:
 	HUD.level.profile[HUD.hero].sprite.stop()
 	HUD.level.profile[HUD.hero].sprite.animation = sprites[get_anim(HUD.hero)]
 	HUD.level.profile[HUD.hero].sprite.frame = 0
-
-func get_anim(hero: int) -> int: return (frames[hero] << DIRECTED) | Def.direct(directed[hero]) # if Bit.of(state[BODY], RUN):
 
 func animate() -> void:# motion: Vector2
 	var anim: int = get_anim(HUD.hero)

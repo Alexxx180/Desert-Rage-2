@@ -1,11 +1,15 @@
 class_name TheWorld extends CanvasLayer
 
 enum { LEVEL, LOGIC, BOX = 2, POS = 4, AURA = 6, RESOURCE = 7, STATUS = 8,
-	INVENTORY = 10, BESTIARY = 38, NOTES = 39, BOOKS = 40, CHESTS = 41, SECRETS = 42 }
-enum { SETTINGS, SAVES, ACHIEVEMENTS, DIFFICULTY = 0, PART, DUNGEON, TRANSITION, PROGRESSED, BAG = 7 }
+	INVENTORY = 10, BESTIARY = 38, NOTES = 39, BOOKS = 40, CHESTS = 41, SECRETS = 42,
+
+	SETTINGS = 0, SAVES, ACHIEVEMENTS, DIFFICULTY = 0, PART, DUNGEON, TRANSITION, PROGRESSED, BAG = 7,
+
+	DIALOG_ON = 0
+}
 
 var session: PackedInt64Array
-
+# model : L1 (SCORE)P2 E4 A2 N4 S8 B4 A2 R2
 var level: LevelRoot
 var adversary: Adversary
 var action: Action
@@ -13,8 +17,6 @@ var trades: Trades
 
 enum { CURRENTS, PLATFORMS, PLACES }
 var size: PackedByteArray = [0, 0, 0]
-
-var fire: GPUParticles2D; var rain: GPUParticles2D
 
 func check(type: int) -> int: return session[type]
 func unlock(type: int, slot: int) -> void: session[type] = Def.to1(session[type], slot)
@@ -31,35 +33,29 @@ func set_item(bag: int, slot: int, item: int) -> void:
 	session[no] = Def.to_short(session[no], slot & Def.HALF_BYTE, item)
 
 # TIMING
-var dialog_timer: Timer = Timer.new(); var station_timer: Timer = Timer.new()
-var debug_timer: Timer
-
 @onready var tree: SceneTree = get_tree()
 @onready var ui: Window = get_window()
+var dialog_timer: Timer = Timer.new(); var station_timer: Timer = Timer.new(); var debug_timer: Timer
+
+var fire: GPUParticles2D; var rain: GPUParticles2D
 
 func _ready() -> void:
 	layer = 2
-	level.load_level()
-	
-	interact = WorldInteraction.new()
-	aura = Adversary.new()
-	trade = HeroTrade.new()
-	
-	if level.group:
-		entity[HUD.hero].position = level.group.position
-		level.group.reparent(entity[HUD.hero])
-		level.group.position = Vector2.ZERO
-
+	action = Action.new()
+	adversary = Adversary.new()
+	trades = Trades.new()
 	station_timer.timeout.connect(action.enter_cooldown)
-	dialog_timer.timeout.connect(talking)
+	dialog_timer.timeout.connect(timeout_talk)
 
-func next_hero() -> int: return (HUD.hero + 1) & Def.ROCK
+func next_hero() -> int: return HUD.hero ^ 1
 
-#var session: PackedInt64Array = []
- # model : L1 (SCORE)P2 E4 A2 N4 S8 B4 A2 R2
+func setup_level() -> void:
+	level.entity[HUD.hero].position = level.group.position
+	level.group.reparent(level.entity[HUD.hero])
+	level.group.position = Vector2.ZERO
 
 func _init() -> void:
-	state[BODY] = Def.to0(state[BODY], RUN)
+	# 
 	session = FileAccess.get_file_as_bytes(Def.saves).to_int64_array()
 
 var level_path: PackedStringArray = ["_world", "_cave_origin", "_cave_smoke", "_cave_spark", "_temple_ancient", "_credits"]
@@ -112,13 +108,10 @@ func is_hud_opened() -> bool:
 		result = result and (not last)
 	return not result
 
-func upload_help() -> void:
-	HUD.game.hints.motion.texture = ImageTexture.create_from_image(hints.get_layer_data(no))
-
 func log_help_hide() -> void:
 	var tween: Tween = HUD.create_tween()
-	tween.tween_property(card, ^"modulate", Color.TRANSPARENT, 1)
-	tween.tween_callback(card.hide)
+	tween.tween_property(help_card, ^"modulate", Color.TRANSPARENT, 1)
+	tween.tween_callback(help_card.hide)
 
 func log_help(of: int) -> void:
 	if help_card == null:
@@ -206,11 +199,11 @@ enum { CURRENT, END_MESSAGE, DIALOG_FROM = 1, DIALOG_TO = 2, DIALOG_CURSOR = 3 }
 func add_dialog(from: int, to: int) -> void: # LEVEL USUALLY set after level finish or on load
 	length[END_MESSAGE] += DIALOG_CURSOR
 	if length[END_MESSAGE] >= len(queue):
-		queue.append(HUD.get_part(LEVEL))
+		queue.append(get_part(LEVEL, DUNGEON))
 		queue.append(from)
 		queue.append(to)
 	else:
-		queue[length[CURRENT]] = HUD.get_part(LEVEL)
+		queue[length[CURRENT]] = get_part(LEVEL, DUNGEON)
 		queue[length[CURRENT] + DIALOG_FROM] = from
 		queue[length[CURRENT] + DIALOG_TO] = to
 	if !started_dialog:
@@ -223,12 +216,12 @@ func timeout_talk() -> void:
 		length[CURRENT] += DIALOG_CURSOR
 		if length[CURRENT] >= length[END_MESSAGE]:
 			length = Vector2i.ZERO
-			if dialog_on: dialogs.hide()
+			if Def.of(check(SETTINGS), DIALOG_ON): dialogs.hide()
 			return
 	else:
 		message += 1
 		queue[length[CURRENT] + DIALOG_FROM] = message
-	if dialog_on:
+	if Def.of(check(SETTINGS), DIALOG_ON):
 		dialogs.show()
 		var key: String = "L%d_%d" % [queue[length[CURRENT]], message]
 		talk_dialog.text = key
@@ -240,43 +233,7 @@ func timeout_talk() -> void:
 		dialog_timer.start()
 
 
-enum { STATUS_TYPE, STATUS_TIME, STATUS_X = -7, STATUS_Y = 25 }
 
-var entity_status: Array[Array] = [[],  []] # Sprite2D
-var enemy_status: PackedInt64Array = []
-var status_process: bool = false
-
-func status_feedback(type: int, entity: int) -> void:
-	match type:
-		BURN: pass
-		POISON: pass
-
-func status_drawback() -> void:
-	status_process = !status_process
-	if !status_process: return
-
-	if (entity_count + Def.PARTY) > len(hero_status):
-		for i in range(len(entity_status), entity_count + Def.PARTY):
-			hero_status.append([null, null, null, null])
-
-	for e in entity:
-		for i in range(0, 4):
-			var status: Vector2i = Def.h_byte(get_part(STATUSES + e, i) if e < Def.PARTY else enemy_status[e - Def.PARTY])
-			if status[STATUS_TIME] == 0: continue
-
-			status[STATUS_TIME] -= 1
-			if status[STATUS_TYPE] == 0:
-				entity_status[e].hide()
-				entity_status[e].position = Vector2(0, STATUS_Y * i)
-			else:
-				entity_status[e].position = Vector2(STATUS_X * status[STATUS_TIME], STATUS_Y * i)
-				status_feedback(type)
-
-			var result: int = status[STATUS_TYPE] << Def.MASK3 | status[STATUS_TIME]
-			if entity < Def.PARTY:
-				set_part(STATUSES + e, i, result)
-			else:
-				enemy_status[e - Def.PARTY] = Def.to_x(Def.BYTE, enemy_status[e - Def.PARTY], i, result)
 
 enum { FPS, GPU }; var _debug_title: Label; var _debug_status: Label; var _debug_state: int
 const FORMAT_MB: String = "\n%0.2f"; var BYTE_CLUSTER: float = 1.0 / 1048576 # 1024^2
@@ -286,10 +243,10 @@ func _don(debug_type: int) -> bool: return Def.of(_debug_state, debug_type)
 func debug_drawback() -> void:
 	_debug_status.text = str(("\n" + str(Engine.get_frames_per_second())) if _don(FPS) else "",  _get_vram() if _don(GPU) else "")
 func debug_change() -> void:
-	_debug_status.text = str("\nFPS" if _don(FPS) else "", "\nVRAM" if _don(GPU) else "")
+	_debug_title.text = str("\nFPS" if _don(FPS) else "", "\nVRAM" if _don(GPU) else "")
 	if debug_timer == null:
 		debug_timer = Timer.new()
-		debug_timer.connect(debug_drawback)
+		debug_timer.timeout.connect(debug_drawback)
 		add_child(debug_timer)
 	debug_timer.start()
 
@@ -331,8 +288,10 @@ func load_card(next: int) -> void:
 	card_text.append(card)
 	translate_card(card.help, next)
 
+var shown: bool = false
+
 func flip_card(card: Button) -> void:
-	var shown: bool = false
+	shown = false
 	var tween: Tween = create_tween()
 	tween.set_parallel(false)
 	tween.tween_method(func(x: float):
@@ -358,7 +317,7 @@ func game_start() -> void:
 
 func game_continue() -> void:
 	set_game()
-	load_scene(get_part(LEVEL, DUNGEON), get_part(LEVEL, TRANSITIONS))
+	load_scene(get_part(LEVEL, DUNGEON), get_part(LEVEL, TRANSITION))
 	gate_both(0.5, 0)
 
 func resume_game() -> void:
@@ -370,10 +329,10 @@ func pause_game() -> void:
 	if pause == null:
 		pause = load(Def.pause).instantiate()
 		add_child(pause)
-		pause.get_node(^"options/resume").connect(resume_game)
-		pause.get_node(^"options/saves").connect(enter_saves)
-		pause.get_node(^"options/settings").connect(enter_settings)
-		pause.get_node(^"options/main").connect(open_main_menu)
+		pause.get_node(^"options/resume").pressed.connect(resume_game)
+		pause.get_node(^"options/saves").pressed.connect(enter_saves)
+		pause.get_node(^"options/settings").pressed.connect(enter_settings)
+		pause.get_node(^"options/main").pressed.connect(open_main_menu)
 	tree.paused = true
 	game.hide()
 	pause.show()
@@ -382,6 +341,10 @@ func enter_pause() -> void:
 	if saves != null: saves.hide()
 	if settings != null: settings.hide()
 	pause.show()
+
+func sound_show() -> void:
+	pause.hide()
+	sound_menu.show()
 
 func enter_saves() -> void:
 	if saves == null:
@@ -396,8 +359,8 @@ func enter_settings() -> void:
 	if settings == null:
 		settings = load(Def.settings).instantiate()
 		add_child(settings)
-		settings.back.connect(enter_pause)
-		settings.sound.connect(sound_show)
+		settings_back.pressed.connect(enter_pause)
+		settings_sound.pressed.connect(sound_show)
 	pause.hide()
 	settings.show()
 
@@ -424,7 +387,7 @@ func set_game() -> void:
 		logs = controls.get_node(^"controls/logs")
 		help = controls.get_node(^"middle/help")
 
-var game: Control; var pause: Control; var settings: Control; var information: Control; var sound: Control
+var game: Control; var pause: Control; var settings: Control; var saves: Control; var sound: Control
 var right: HSplitContainer; var left: HSplitContainer; var top: VSplitContainer; var bottom: VSplitContainer; var controls: MarginContainer
 var right_priorities: PanelContainer; var left_stats: PanelContainer; var top_inventory: PanelContainer; var bottom_ability: PanelContainer
 
@@ -448,7 +411,7 @@ func set_stats() -> void:
 	reaction_base = reaction_stat.get_node(^"base")
 	reaction_next = reaction_stat.get_node(^"next")
 	for node in stats_scroll.get_node(^"margin/stack").get_children():
-		side_items.append()
+		side_items.append(node)
 
 func set_priorities() -> void:
 	priorities_scroll = load("res://def/hud/game/priorities.tscn").instantiate()
@@ -485,11 +448,21 @@ func set_inventory() -> void:
 	for i in [^"stack/bag/ray", ^"stack/bag/rock"]:
 		main_items.append(inventory_scroll.get_node(i).get_children())
 
+func set_settings() -> void:
+	pass
+
 var inventory_scroll: ScrollContainer; var inventory_bag_placeholder: Control
 var inventory_bestiary: HFlowContainer; var bestiary_number: Label
 var bestiary_effect: Label; var inventory_status: GridContainer
 var main_items: Array[Array] = []
 var side_items: Array[Button] = []
+
+## UI SOUND
+var sound_menu: Control
+
+## UI SETTINGS
+var settings_back: Button
+var settings_sound: Button
 
 ## UI ABILITY
 var ability_scroll: ScrollContainer
@@ -500,7 +473,6 @@ var ability_health_bar: ProgressBar; var ability_score: Label
 var ability_meter: Label; var ability_pallete: ItemList
 
 ## UI STATS
-var _stat_bar: PackedScene = null
 var stats_scroll: ScrollContainer
 var stats_description: ScrollContainer; var stats_chats: ScrollContainer
 var power_stat: Button; var power_base: ProgressBar
@@ -520,34 +492,17 @@ var pursuit: Button; var self_control: Button; var tenacity: Button
 var fixed_hud: bool = false
 var panel_open: int = -1
 
-enum { TOP, LEFT, BOTTOM, RIGHT, T_OFF = 5, B_OFF = 5 }
+enum { TOP, LEFT, BOTTOM, RIGHT, T_OFF = 5, B_OFF = 5, L_OFF = 5, R_OFF = 5 }
 
+func left_mouse_drag() -> void: if stats_scroll == null: left.drag_started.disconnect(left_mouse_drag); set_stats()
+func right_mouse_drag() -> void: if priorities_scroll == null: right.drag_started.disconnect(right_mouse_drag); set_priorities()
+func top_mouse_drag() -> void: if inventory_scroll == null: top.drag_started.disconnect(top_mouse_drag); set_inventory()
+func bottom_mouse_drag() -> void: if ability_scroll == null: bottom.drag_started.disconnect(bottom_mouse_drag); set_ability()
 func setup_hud() -> void:
 	top.drag_started.connect(top_mouse_drag)
 	bottom.drag_started.connect(bottom_mouse_drag)
 	right.drag_started.connect(right_mouse_drag)
 	left.drag_started.connect(left_mouse_drag)
-
-func left_mouse_drag() -> void:
-	if stats_scroll == null:
-		left.drag_started.disconnect(left_mouse_drag)
-		set_stats()
-
-func right_mouse_drag() -> void:
-	if priority_scroll == null:
-		right.drag_started.disconnect(right_mouse_drag)
-		set_priority()
-
-func top_mouse_drag() -> void:
-	if inventory_scroll == null:
-		top.drag_started.disconnect(top_mouse_drag)
-		set_inventory()
-
-func bottom_mouse_drag() -> void:
-	if ability_scroll == null:
-		bottom.drag_started.disconnect(bottom_mouse_drag)
-		set_ability()
-
 
 func drag_hud() -> void:
 	if left.offset != 0:

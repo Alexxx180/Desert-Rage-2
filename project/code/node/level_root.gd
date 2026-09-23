@@ -15,6 +15,7 @@ class_name LevelRoot extends Camera2D
 var entity: Array[CharacterBody2D] = [$ray, $rock]
 var boxes: Array[AnimatableBody2D] = []
 var distraction_body: Array[StaticBody2D] = [null, null]
+var entity_status: Array[Array] = [[],  []] # Sprite2D
 
 var lever: Array[Area2D] = []
 var lever_body: Array[CollisionShape2D] = []
