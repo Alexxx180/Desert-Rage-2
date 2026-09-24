@@ -1,4 +1,9 @@
-extends CanvasLayer
+class_name Settings extends RefCounted
+
+enum {
+	
+	
+}
 
 signal update()
 
