@@ -1,8 +1,14 @@
 class_name Settings extends RefCounted
 
 enum {
+	H_RAY, H_ROCK, H_ZARAH, H_ARTHUR, TITLE, PAUSE, ENDING, DESERT, FOREST, HILLS, WATER, AIR, MOTOR, MECHA,
+	DIALOG, NIGHT, ACCENT,
 	
+	BOSSES = 64,
 	
+	C_CAVES = 128, C_TEMPLE,
+	
+	S_TEMPLE = 256, END_BYTE_FILE = 512
 }
 
 signal update()
