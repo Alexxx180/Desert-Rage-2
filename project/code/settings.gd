@@ -29,31 +29,17 @@ var playback: PackedInt32Array = [TITLE, H_RAY,
 	SP_TEMPLE, ST_TEMPLE, SF_TEMPLE, PHARAOH, ENDING]
 var _ost: PackedInt64Array
 
-enum { DEFAULTED = -1,
+enum { DEFAULTED = -1, 
 	LT_WORLD = 0, LT_ORIGIN_A = 1, LT_ORIGIN_B = 7, LT_SMOKE_A = 8,
 	LT_SMOKE_B = 14, LT_SPARK_A = 15, LT_SPARK_B = 26, LT_TEMPLE_A = 27,
 	LT_TEMPLE_B = 35, LT_CREDITS = 36,
 }
 
 func toggle_ost(type: int, next: bool) -> void:
-	_ost[type >> 64] = Def.to(_ost[type >> 64], type & ((1 << 64) - 1), next)
+	_ost[type >> 6] = Def.to(_ost[type >> 6], type & ((1 << 64) - 1), next)
 
 func check_ost(type: int) -> bool:
-	return Def.of(_ost[type >> 64], type & ((1 << 64) - 1))
-
-func level_fight(fight_mode: int) -> void:
-	var level_no: int
-	if level_no == LT_WORLD:
-		if fight_mode == 1:
-			level_theme[1] = get_hero_world_theme()
-		else:
-			level_theme[0] = P_DESERT
-	else:
-		
-	fight_mode = _fight_mode
-	
-func theme_playback_exit() -> void:
-	pass
+	return Def.of(_ost[type >> 6], type & ((1 << 64) - 1))
 
 func get_hero_world_theme() -> void:
 	if blend(HEROES_BLEND):
@@ -126,8 +112,8 @@ func set_theme(common: int, specific: int, defaulted: int, common_blend: bool, f
 func level_playback_enter(finished: bool = false) -> void:
 	if level_no == LT_WORLD:
 		if _fight_mode == 0:
-			default_no = P_DESERT
 			ost_no = P_DESERT
+			default_no = P_DESERT
 		elif _blend(HEROES_BLEND):
 			ost_no = HUD.hero
 			default_no = HUD.hero
@@ -151,7 +137,7 @@ func level_playback_enter(finished: bool = false) -> void:
 enum { P_ORIGIN = 2, P_SMOKE = 7, P_SPARK = 12, P_SHADOW = 17, P_TEMPLE = 22,
 	D_BOSSES = 8, D_COMMON = 16, D_SPECIFIC = 32 }
 
-func _theme(no: int) -> bool: return Def.of(_ost[no >> D_COMMON], no & 64)
+func _theme(no: int) -> bool: return Def.of(_ost[no >> D_COMMON], no & ((1 << 64) - 1))
 
 func set_next_playback(idx: int, blend: int,
 	common: int, specific: int, hero_blend: bool) -> void:
@@ -174,17 +160,9 @@ func finish_playback() -> void:
 	set_next_playback(P_ORIGIN, CAVES_BLEND, CP_CAVES1, SP_SMOKE, false)
 	set_next_playback(P_ORIGIN, CAVES_BLEND, CP_CAVES1, SP_SPARK, false)
 	set_next_playback(P_ORIGIN, CAVES_BLEND, CP_CAVES1, SP_SHADOW, false)
-	set_next_playback(P_ORIGIN, CAVES_BLEND, CP_CAVES1, SP_TEMPLE, false)
+	set_next_playback(P_ORIGIN, TEMPLE_BLEND, CP_CAVES1, SP_TEMPLE, false)
 
-func _blend(_type: int) -> bool:
-	ost_preferences[_type]
-	return Def.byte(_type, 9) < randi_range(0, 100)
-
-func determine_track() -> int:
-	return -0
-	
-func funish_theme() -> void:
-	pass
+func _blend(_type: int) -> bool: return Def.byte(ost_preferences[_type >> 6], _type & 64) < randi_range(0, 100)
 
 
 
