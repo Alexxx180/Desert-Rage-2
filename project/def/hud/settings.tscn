@@ -1,10 +1,7 @@
-[gd_scene load_steps=36 format=3 uid="uid://b4x588yxrcok3"]
+[gd_scene load_steps=25 format=3 uid="uid://b4x588yxrcok3"]
 
 [ext_resource type="Theme" uid="uid://dfyi7rrcrweqx" path="res://data/theme/patterns/template/menu/settings/settings.tres" id="1_vs08l"]
 [ext_resource type="Theme" uid="uid://0bwoefj0wlcw" path="res://data/theme/patterns/template/menu/settings/topic/option.tres" id="2_ull8j"]
-[ext_resource type="StyleBox" uid="uid://belpqiw77873x" path="res://data/theme/slider/horizontal/area-grabber.tres" id="3_j0acm"]
-[ext_resource type="StyleBox" uid="uid://cjukg7l6l1urx" path="res://data/theme/slider/horizontal/area-slider.tres" id="4_ow36w"]
-[ext_resource type="StyleBox" uid="uid://dfwghdfkosy7u" path="res://data/theme/slider/horizontal/area-highlight.tres" id="5_thq8p"]
 [ext_resource type="Theme" uid="uid://y1o83ldh4al2" path="res://data/theme/patterns/template/menu/settings/topic/header/header.tres" id="6_kbam3"]
 [ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://data/theme/patterns/template/menu/settings/topic/footer.tres" id="8_j2b4r"]
 [ext_resource type="FontFile" uid="uid://tledodlx6okb" path="res://data/font/LTSuperiorMono-Semibold.otf" id="12_jw263"]
@@ -41,8 +38,8 @@ content_margin_left = 14.0
 content_margin_top = 12.0
 content_margin_right = 14.0
 content_margin_bottom = 12.0
-bg_color = Color(0, 0, 0.0235294, 1)
-border_width_right = 2
+bg_color = Color(0.007843138, 0.007843138, 0.007843138, 1)
+border_width_right = 3
 border_color = Color(0.0392157, 0.0392157, 0.0392157, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1um0r"]
@@ -73,12 +70,11 @@ func feedback() -> void: pressed.emit()
 "
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_owwju"]
-content_margin_left = 6.0
+content_margin_left = 12.0
 content_margin_top = 9.0
-content_margin_right = 6.0
+content_margin_right = 12.0
 content_margin_bottom = 9.0
-bg_color = Color(0, 0, 0.0235294, 1)
-border_width_right = 2
+bg_color = Color(0.007843138, 0.007843138, 0.007843138, 1)
 border_color = Color(0.0392157, 0.0392157, 0.0392157, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0qh8n"]
@@ -101,29 +97,6 @@ border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
 border_color = Color(0.588235, 0.588235, 0.588235, 1)
-
-[sub_resource type="Gradient" id="Gradient_n1w43"]
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_o3d5i"]
-gradient = SubResource("Gradient_n1w43")
-width = 1
-
-[sub_resource type="Gradient" id="Gradient_fo1a0"]
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_36r8i"]
-gradient = SubResource("Gradient_fo1a0")
-width = 1
-
-[sub_resource type="Gradient" id="Gradient_c1lch"]
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_ktnei"]
-gradient = SubResource("Gradient_c1lch")
-width = 1
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hmqgx"]
-bg_color = Color(0, 0, 0, 1)
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1821x"]
 
 [sub_resource type="Gradient" id="Gradient_x27hw"]
 offsets = PackedFloat32Array(0.6651376, 1)
@@ -191,7 +164,35 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_owwju")
 theme_override_styles/hover = SubResource("StyleBoxFlat_0qh8n")
 theme_override_styles/focus = SubResource("StyleBoxFlat_fmjjx")
 shortcut = ExtResource("14_n4pyq")
-text = "🖱⌨️🎮"
+text = "⌨️🎮"
+
+[node name="sound_head" type="Button" parent="content/options"]
+custom_minimum_size = Vector2(300, 45)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("6_kbam3")
+text = "SSND"
+alignment = 0
+
+[node name="sound" type="GridContainer" parent="content/options"]
+layout_mode = 2
+columns = 3
+
+[node name="music" parent="content/options/sound" instance=ExtResource("25_dkpam")]
+layout_mode = 2
+
+[node name="sound" parent="content/options/sound" instance=ExtResource("25_dkpam")]
+layout_mode = 2
+
+[node name="interface" parent="content/options/sound" instance=ExtResource("25_dkpam")]
+layout_mode = 2
+
+[node name="system" type="Button" parent="content/options/sound"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "SDST"
+alignment = 0
 
 [node name="xp_head" type="Button" parent="content/options"]
 custom_minimum_size = Vector2(300, 45)
@@ -256,83 +257,8 @@ size_flags_horizontal = 8
 theme_override_font_sizes/font_size = 20
 text = "P2"
 
-[node name="system" type="Button" parent="content/options/experience"]
-custom_minimum_size = Vector2(300, 60)
+[node name="sensitivity" parent="content/options/experience" instance=ExtResource("25_dkpam")]
 layout_mode = 2
-size_flags_horizontal = 3
-text = "SDST"
-alignment = 0
-
-[node name="music" parent="content/options/experience" instance=ExtResource("25_dkpam")]
-layout_mode = 2
-
-[node name="sound" parent="content/options/experience" instance=ExtResource("25_dkpam")]
-layout_mode = 2
-
-[node name="interface" parent="content/options/experience" instance=ExtResource("25_dkpam")]
-layout_mode = 2
-
-[node name="sensitivity" type="HSlider" parent="content/options/experience"]
-custom_minimum_size = Vector2(300, 60)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 8
-focus_mode = 1
-theme_override_icons/grabber = SubResource("GradientTexture1D_o3d5i")
-theme_override_icons/grabber_highlight = SubResource("GradientTexture1D_36r8i")
-theme_override_icons/grabber_disabled = SubResource("GradientTexture1D_ktnei")
-theme_override_styles/slider = ExtResource("4_ow36w")
-theme_override_styles/grabber_area = ExtResource("3_j0acm")
-theme_override_styles/grabber_area_highlight = ExtResource("5_thq8p")
-max_value = 20.0
-value = 10.0
-
-[node name="form" type="Panel" parent="content/options/experience/sensitivity"]
-custom_minimum_size = Vector2(0, 58)
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-grow_horizontal = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.35
-mouse_filter = 1
-theme_override_styles/panel = SubResource("StyleBoxFlat_hmqgx")
-
-[node name="caption" type="Label" parent="content/options/experience/sensitivity/form"]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_top = -14.0
-offset_right = 236.0
-offset_bottom = 14.0
-grow_vertical = 2
-size_flags_horizontal = 3
-text = "SSVT"
-
-[node name="state" type="MarginContainer" parent="content/options/experience/sensitivity/form"]
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -338.0
-offset_top = -14.0
-offset_bottom = 14.0
-grow_horizontal = 0
-grow_vertical = 2
-theme_override_constants/margin_left = 0
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 25
-theme_override_constants/margin_bottom = 0
-
-[node name="manual" type="Button" parent="content/options/experience/sensitivity/form/state"]
-custom_minimum_size = Vector2(50, 20)
-layout_mode = 2
-size_flags_horizontal = 8
-theme_override_styles/normal = SubResource("StyleBoxEmpty_1821x")
-text = "10"
 
 [node name="difficulty" type="Button" parent="content/options/experience"]
 custom_minimum_size = Vector2(300, 60)
@@ -356,7 +282,7 @@ grow_vertical = 2
 size_flags_horizontal = 8
 text = "SDFS"
 
-[node name="dcasual" type="Button" parent="content/options/experience"]
+[node name="deasy" type="Button" parent="content/options/experience"]
 visible = false
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
@@ -371,6 +297,81 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "SDST"
 alignment = 0
+
+[node name="dhard" type="Button" parent="content/options/experience"]
+visible = false
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "SDST"
+alignment = 0
+
+[node name="language" type="Button" parent="content/options/experience"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "SLNM"
+alignment = 0
+
+[node name="status" type="Label" parent="content/options/experience/language"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -104.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "SLNG"
+
+[node name="lenglish" type="Button" parent="content/options/experience"]
+visible = false
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "English"
+alignment = 0
+
+[node name="lrussian" type="Button" parent="content/options/experience"]
+visible = false
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Русский"
+alignment = 0
+
+[node name="screen" type="Button" parent="content/options/experience"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "SFSN"
+alignment = 0
+
+[node name="press" type="Button" parent="content/options/experience"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "SFIX"
+alignment = 0
+
+[node name="status" type="Label" parent="content/options/experience/press"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -61.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "SON"
 
 [node name="narrative" type="Button" parent="content/options/experience"]
 custom_minimum_size = Vector2(300, 60)
@@ -438,73 +439,6 @@ grow_vertical = 2
 size_flags_horizontal = 8
 text = "SON"
 
-[node name="press" type="Button" parent="content/options/experience"]
-custom_minimum_size = Vector2(300, 60)
-layout_mode = 2
-size_flags_horizontal = 3
-text = "SFIX"
-alignment = 0
-
-[node name="status" type="Label" parent="content/options/experience/press"]
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -61.0
-offset_top = -14.0
-offset_bottom = 14.0
-grow_horizontal = 0
-grow_vertical = 2
-size_flags_horizontal = 8
-text = "SON"
-
-[node name="language" type="Button" parent="content/options/experience"]
-custom_minimum_size = Vector2(300, 60)
-layout_mode = 2
-size_flags_horizontal = 3
-text = "SLNM"
-alignment = 0
-
-[node name="status" type="Label" parent="content/options/experience/language"]
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -104.0
-offset_top = -14.0
-offset_bottom = 14.0
-grow_horizontal = 0
-grow_vertical = 2
-size_flags_horizontal = 8
-text = "SLNG"
-
-[node name="lenglish" type="Button" parent="content/options/experience"]
-visible = false
-custom_minimum_size = Vector2(300, 60)
-layout_mode = 2
-size_flags_horizontal = 3
-text = "English"
-alignment = 0
-
-[node name="lrussian" type="Button" parent="content/options/experience"]
-visible = false
-custom_minimum_size = Vector2(300, 60)
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Русский"
-alignment = 0
-
-[node name="screen" type="Button" parent="content/options/experience"]
-custom_minimum_size = Vector2(300, 60)
-layout_mode = 2
-size_flags_horizontal = 3
-text = "SFSN"
-alignment = 0
-
 [node name="keyboard_head" type="Button" parent="content/options"]
 visible = false
 custom_minimum_size = Vector2(300, 0)
@@ -524,7 +458,7 @@ custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.35
-text = "SMVT 2"
+text = "SMVT"
 alignment = 0
 
 [node name="status" type="Label" parent="content/options/keyboard/movement"]
@@ -613,7 +547,7 @@ grow_horizontal = 0
 grow_vertical = 2
 size_flags_horizontal = 8
 theme_override_font_sizes/font_size = 20
-text = "TG"
+text = "TGZ"
 
 [node name="movement2" type="Button" parent="content/options/keyboard"]
 custom_minimum_size = Vector2(300, 60)
@@ -687,15 +621,15 @@ size_flags_horizontal = 8
 theme_override_font_sizes/font_size = 20
 text = ";·'·O"
 
-[node name="fast_load" type="Button" parent="content/options/keyboard"]
+[node name="saves" type="Button" parent="content/options/keyboard"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.35
-text = "SFLD"
+text = "SFLD / SFSV"
 alignment = 0
 
-[node name="status" type="Label" parent="content/options/keyboard/fast_load"]
+[node name="status" type="Label" parent="content/options/keyboard/saves"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -709,31 +643,7 @@ grow_horizontal = 0
 grow_vertical = 2
 size_flags_horizontal = 8
 theme_override_font_sizes/font_size = 20
-text = "F6"
-
-[node name="fast_save" type="Button" parent="content/options/keyboard"]
-custom_minimum_size = Vector2(300, 60)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.35
-text = "SFSV"
-alignment = 0
-
-[node name="status" type="Label" parent="content/options/keyboard/fast_save"]
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -82.0
-offset_top = -14.0
-offset_bottom = 14.0
-grow_horizontal = 0
-grow_vertical = 2
-size_flags_horizontal = 8
-theme_override_font_sizes/font_size = 20
-text = "F7"
+text = "F2"
 
 [node name="soundtrack" type="Button" parent="content/options/keyboard"]
 custom_minimum_size = Vector2(300, 60)
@@ -758,7 +668,7 @@ grow_vertical = 2
 size_flags_horizontal = 8
 text = "F10"
 
-[node name="gamepad_header" type="Button" parent="content/options"]
+[node name="gamepad_head" type="Button" parent="content/options"]
 visible = false
 custom_minimum_size = Vector2(300, 45)
 layout_mode = 2
@@ -794,7 +704,7 @@ grow_horizontal = 0
 grow_vertical = 2
 size_flags_horizontal = 8
 theme_override_font_sizes/font_size = 20
-text = "LS, RS"
+text = "LS·RS"
 
 [node name="actions" type="Button" parent="content/options/gamepad"]
 custom_minimum_size = Vector2(300, 60)
@@ -877,3 +787,5 @@ theme_override_styles/normal = SubResource("StyleBoxTexture_oaat3")
 text = "SSDD"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

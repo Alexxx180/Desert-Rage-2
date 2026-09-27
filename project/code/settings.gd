@@ -187,3 +187,128 @@ func get_gamepad_type(device: String) -> int:
 		for j in range(types_no[i], types_no[i + 1] + 1):
 			if device.contains(types[j]): return i >> 1
 	return XBX
+
+var settings: MarginContainer
+var content: ScrollContainer
+var exit: Button; var controls: Button
+
+var sound_head: Button
+var music: HSlider; var music_manual: Button
+var sound: HSlider; var sound_manual: Button
+var interface: HSlider; var interface_manual: Button
+var ost_system: Button
+
+var xp_head: Button
+var p1: Button; var p2: Button
+var sensitivity: HSlider; var difficulty: Button
+var deasy: Button; var dsuitable: Button; var dhard: Button
+var language: Button; var screen: Button
+var lenglish: Button; var lrussian: Button
+var press: Button; var narrative: Button
+var logs: Button; var help: Button
+
+var keyboard_head: Button
+var movement: Button; var actions: Button
+var items: Button; var group: Button
+var movement2: Button; var actions2: Button
+var items2: Button; var saves: Button
+var soundtrack: Button
+
+var gamepad_head: Button
+var g_movement: Button; var g_actions: Button
+var g_items: Button; var g_group: Button
+
+func set_settings() -> void:
+	if settings == null: return
+	settings = load(Def.settings).instantiate()
+	HUD.pause.hide()
+	HUD.add_child(settings)
+	content = settings.get_node(^"content")
+	var o: VBoxContainer = content.get_node(^"options")
+	exit = o.get_node(^"title/exit"); exit.pressed.connect(back_to_pause)
+	controls = o.get_node(^"title/controls"); controls.pressed.connect(controls_focus)
+	sound_head = o.get_node(^"sound_head"); sound_head.pressed.connect(back_to_start)
+	music = o.get_node(^"sound/music"); music.drag_ended.connect(loudness_music)
+	music_manual = o.get_node(^"sound/music/manual")
+	sound = o.get_node(^"sound/sound"); sound.drag_ended.connect(loudness_sound)
+	sound_manual = o.get_node(^"sound/sound/manual")
+	interface = o.get_node(^"sound/interface"); interface.drag_ended.connect(loudness_interface)
+	interface_manual = o.get_node(^"sound/interface/manual")
+	ost_system = o.get_node(^"sound/system")
+	xp_head = o.get_node(^"xp_head"); xp_head.pressed.connect(back_to_start)
+	p1 = o.get_node(^"experience/p1")
+	p2 = o.get_node(^"experience/p2")
+	sensitivity = o.get_node(^"experience/sensitivity")
+	difficulty = o.get_node(^"experience/difficulty")
+	deasy = o.get_node(^"experience/deasy")
+	dsuitable = o.get_node(^"experience/dsuitable")
+	dhard = o.get_node(^"experience/dhard")
+	language = o.get_node(^"experience/language")
+	lenglish = o.get_node(^"experience/lenglish")
+	lrussian = o.get_node(^"experience/lrussian")
+	screen = o.get_node(^"experience/screen")
+	press = o.get_node(^"experience/press")
+	narrative = o.get_node(^"experience/narrative")
+	logs = o.get_node(^"experience/logs")
+	help = o.get_node(^"experience/help")
+	keyboard_head = o.get_node(^"keyboard_head"); keyboard_head.pressed.connect(back_to_start)
+	movement = o.get_node(^"keyboard/movement")
+	actions = o.get_node(^"keyboard/actions")
+	items = o.get_node(^"keyboard/items")
+	group = o.get_node(^"keyboard/group")
+	movement2 = o.get_node(^"keyboard/movement2")
+	actions2 = o.get_node(^"keyboard/actions2")
+	items2 = o.get_node(^"keyboard/items2")
+	saves = o.get_node(^"keyboard/saves")
+	soundtrack = o.get_node(^"keyboard/soundtrack")
+	gamepad_head = o.get_node(^"gamepad_header"); gamepad_head.pressed.connect(back_to_start)
+	g_movement = o.get_node(^"gamepad/movement")
+	g_actions = o.get_node(^"gamepad/actions")
+	g_items = o.get_node(^"gamepad/items")
+	g_group = o.get_node(^"gamepad/group")
+
+const LINEAR_SLIDER: float = 0.01; var current_loud: int = 0; var current_bus: int = 0
+enum { BUS_MUSIC, BUS_SOUND, BUS_INTERFACE }
+func back_to_start() -> void: content.scroll_vertical = 0
+func back_to_pause() -> void: settings.hide(); HUD.pause.show()
+func controls_focus() -> void: keyboard_head.grab_focus()# db_to_linear(value)
+func loudness_bus(name: StringName, that: HSlider) -> void: AudioServer.set_bus_volume_db(AudioServer.get_bus_index(name), linear_to_db(that.value * LINEAR_SLIDER))
+func loudness_music() -> void: loudness_bus(&"Master", music); music_manual.text = str(music.value)
+func loudness_sound() -> void: loudness_bus(&"Sound", sound); sound_manual.text = str(sound.value)
+func loudness_interface() -> void: loudness_bus(&"Interface", interface); interface_manual.text = str(interface.value)
+func next_loudness(that: HSlider, next: int) -> void:
+	if music.value * 10 > 100:
+		music.value = next
+	else:
+		music.value = music.value * 10 + next
+
+func manual_loudness(event: InputEvent) -> void:
+	var next: int = -1
+	if event is InputEventKey:
+		match event.keycode:
+			KEY_ESCAPE: next = current_loud
+			KEY_ENTER: next = -2
+			_:
+				next = event.keycode - KEY_0
+				if next < 0 and KEY_9 < next: next = -1
+	elif event is InputEventJoypadButton:
+		var offset: int = 5 if absf(Input.get_joy_axis(0, JOY_AXIS_TRIGGER_LEFT)) > 0.2 else 0
+		match event.button_index:
+			JOY_BUTTON_X: next = offset + 1
+			JOY_BUTTON_Y: next = offset + 2
+			JOY_BUTTON_LEFT_SHOULDER: next = offset + 3
+			JOY_BUTTON_RIGHT_SHOULDER: next = offset + 4
+	elif event is InputEventJoypadMotion and event.axis == JOY_AXIS_TRIGGER_RIGHT:
+		if absf(Input.get_joy_axis(0, JOY_AXIS_TRIGGER_LEFT)) > 0.2:
+			next = 0
+		else:
+			next = 5
+	if next == -2:
+		pass # stop operation
+	elif next != -1:
+		match current_bus:
+			BUS_MUSIC: next_loudness(music, next); loudness_music()
+			BUS_SOUND: next_loudness(sound, next); loudness_sound()
+			BUS_INTERFACE: next_loudness(interface, next); loudness_interface()
+	if next == current_loud:
+		pass # stop operation
