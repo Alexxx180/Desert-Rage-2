@@ -218,8 +218,9 @@ var gamepad_head: Button
 var g_movement: Button; var g_actions: Button
 var g_items: Button; var g_group: Button
 
+var sound_menu: Control
+
 func set_settings() -> void:
-	if settings == null: return
 	settings = load(Def.settings).instantiate()
 	HUD.pause.hide()
 	HUD.add_child(settings)
@@ -229,30 +230,30 @@ func set_settings() -> void:
 	controls = o.get_node(^"title/controls"); controls.pressed.connect(controls_focus)
 	sound_head = o.get_node(^"sound_head"); sound_head.pressed.connect(back_to_start)
 	music = o.get_node(^"sound/music"); music.drag_ended.connect(loudness_music)
-	music_manual = o.get_node(^"sound/music/manual")
+	music_manual = o.get_node(^"sound/music/manual"); music_manual.pressed.connect(manual_music)
 	sound = o.get_node(^"sound/sound"); sound.drag_ended.connect(loudness_sound)
-	sound_manual = o.get_node(^"sound/sound/manual")
+	sound_manual = o.get_node(^"sound/sound/manual"); sound_manual.pressed.connect(manual_sound)
 	interface = o.get_node(^"sound/interface"); interface.drag_ended.connect(loudness_interface)
-	interface_manual = o.get_node(^"sound/interface/manual")
-	ost_system = o.get_node(^"sound/system")
+	interface_manual = o.get_node(^"sound/interface/manual"); interface_manual.pressed.connect(manual_interface)
+	ost_system = o.get_node(^"sound/system"); ost_system.pressed.connect(back_to_ost)
 	xp_head = o.get_node(^"xp_head"); xp_head.pressed.connect(back_to_start)
 	p1 = o.get_node(^"experience/p1")
 	p2 = o.get_node(^"experience/p2")
-	sensitivity = o.get_node(^"experience/sensitivity")
-	difficulty = o.get_node(^"experience/difficulty")
-	deasy = o.get_node(^"experience/deasy")
-	dsuitable = o.get_node(^"experience/dsuitable")
-	dhard = o.get_node(^"experience/dhard")
-	language = o.get_node(^"experience/language")
-	lenglish = o.get_node(^"experience/lenglish")
-	lrussian = o.get_node(^"experience/lrussian")
-	screen = o.get_node(^"experience/screen")
-	press = o.get_node(^"experience/press")
-	narrative = o.get_node(^"experience/narrative")
-	logs = o.get_node(^"experience/logs")
-	help = o.get_node(^"experience/help")
+	sensitivity = o.get_node(^"experience/sensitivity"); sensitivity.drag_ended.connect(set_sensitivity)
+	difficulty = o.get_node(^"experience/difficulty"); difficulty.pressed.connect(show_difficulty)
+	deasy = o.get_node(^"experience/deasy"); deasy.pressed.connect(set_easy)
+	dsuitable = o.get_node(^"experience/dsuitable"); dsuitable.pressed.connect(set_suitable)
+	dhard = o.get_node(^"experience/dhard"); dhard.pressed.connect(set_hard)
+	language = o.get_node(^"experience/language"); language.pressed.connect(show_language)
+	lenglish = o.get_node(^"experience/lenglish"); lenglish.pressed.connect(set_english)
+	lrussian = o.get_node(^"experience/lrussian"); lrussian.pressed.connect(set_russian)
+	screen = o.get_node(^"experience/screen"); screen.pressed.connect(set_screen)
+	press = o.get_node(^"experience/press"); press.pressed.connect(set_press)
+	narrative = o.get_node(^"experience/narrative"); narrative.pressed.connect(set_narrative)
+	logs = o.get_node(^"experience/logs"); logs.pressed.connect(set_logs)
+	help = o.get_node(^"experience/help"); help.pressed.connect(set_help)
 	keyboard_head = o.get_node(^"keyboard_head"); keyboard_head.pressed.connect(back_to_start)
-	movement = o.get_node(^"keyboard/movement")
+	movement = o.get_node(^"keyboard/movement") # as well as game presets
 	actions = o.get_node(^"keyboard/actions")
 	items = o.get_node(^"keyboard/items")
 	group = o.get_node(^"keyboard/group")
@@ -267,21 +268,60 @@ func set_settings() -> void:
 	g_items = o.get_node(^"gamepad/items")
 	g_group = o.get_node(^"gamepad/group")
 
+func update_difficulty() -> void: pass
+func update_narrative() -> void: pass
+func update_dialog() -> void: pass
+func update_help() -> void: pass
+func update_logs() -> void: pass
+func update_language() -> void: TranslationServer.set_locale(locale_type[HUD.get_part(HUD.SETTINGS_SLIDERS, HUD.LANGUAGE)])
+func update_press() -> void: pass
+func update_screen() -> void:
+	if HUD.look(HUD.SETTINGS, HUD.SCREEN):
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+	else:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+
+const locale_type: PackedStringArray = ["en", "ru"]
 const LINEAR_SLIDER: float = 0.01; var current_loud: int = 0; var current_bus: int = 0
 enum { BUS_MUSIC, BUS_SOUND, BUS_INTERFACE }
 func back_to_start() -> void: content.scroll_vertical = 0
 func back_to_pause() -> void: settings.hide(); HUD.pause.show()
+func back_to_ost() -> void: settings.hide(); sound_menu.show()
 func controls_focus() -> void: keyboard_head.grab_focus()# db_to_linear(value)
-func loudness_bus(name: StringName, that: HSlider) -> void: AudioServer.set_bus_volume_db(AudioServer.get_bus_index(name), linear_to_db(that.value * LINEAR_SLIDER))
-func loudness_music() -> void: loudness_bus(&"Master", music); music_manual.text = str(music.value)
-func loudness_sound() -> void: loudness_bus(&"Sound", sound); sound_manual.text = str(sound.value)
-func loudness_interface() -> void: loudness_bus(&"Interface", interface); interface_manual.text = str(interface.value)
-func next_loudness(that: HSlider, next: int) -> void:
-	if music.value * 10 > 100:
-		music.value = next
-	else:
-		music.value = music.value * 10 + next
+func set_narrative() -> void: HUD.took(HUD.SETTINGS, HUD.NARRATIVE); update_narrative()
+func set_dialog() -> void: HUD.took(HUD.SETTINGS, HUD.DIALOG); update_dialog()
+func set_logs() -> void: HUD.took(HUD.SETTINGS, HUD.LOGS); update_logs()
+func set_help() -> void: HUD.took(HUD.SETTINGS, HUD.HELP); update_help()
+func set_screen() -> void: HUD.took(HUD.SETTINGS, HUD.SCREEN); update_screen()
+func set_press() -> void: HUD.took(HUD.SETTINGS, HUD.PRESS); update_press()
 
+func show_few_options(part: int, options: Array[Button]) -> void: for i in range(0, len(options)): if i != part: options[i].show()
+func get_languages() -> Array[Button]: return [lenglish, lrussian]
+func show_language() -> void: show_few_options(HUD.get_part(HUD.SETTINGS_SLIDERS, HUD.LANGUAGE), get_languages())
+func set_english() -> void: set_language(0)
+func set_russian() -> void: set_language(1)
+func set_language(no: int) -> void:
+	for l in get_languages(): l.hide()
+	HUD.set_part(HUD.SETTINGS_SLIDERS, HUD.LANGUAGE, no)
+	update_language()
+
+func get_difficulties() -> Array[Button]: return [deasy, dsuitable, dhard]
+func show_difficulty() -> void: show_few_options(HUD.get_part(HUD.SAVES, HUD.DIFFICULTY), get_difficulties())
+func set_difficulty(no: int) -> void: HUD.set_part(HUD.SAVES, HUD.DIFFICULTY, no); update_difficulty()
+func set_easy() -> void: set_difficulty(1)
+func set_suitable() -> void: set_difficulty(2)
+func set_hard() -> void: set_difficulty(3)
+
+func set_sensitivity(value: int) -> void: HUD.set_part(HUD.SETTING_SLIDERS, HUD.SENSITIVITY, int(value))
+func loudness_bus(name: StringName, that: HSlider) -> void: AudioServer.set_bus_volume_db(AudioServer.get_bus_index(name), linear_to_db(that.value * LINEAR_SLIDER))
+func loudness_music(value: int) -> void: loudness_bus(&"Master", music); music_manual.text = str(value)
+func loudness_sound(value: int) -> void: loudness_bus(&"Sound", sound); sound_manual.text = str(value)
+func loudness_interface(value: int) -> void: loudness_bus(&"Interface", interface); interface_manual.text = str(value)
+func next_loudness(that: HSlider, next: int) -> void: that.value = next if that.value * 10 > 100 else int(that.value * 10 + next)
+func manual_enable() -> void: pass
+func manual_music() -> void: current_bus = BUS_MUSIC; manual_enable()
+func manual_sound() -> void: current_bus = BUS_SOUND; manual_enable()
+func manual_interface() -> void: current_bus = BUS_INTERFACE; manual_enable()
 func manual_loudness(event: InputEvent) -> void:
 	var next: int = -1
 	if event is InputEventKey:
@@ -307,8 +347,8 @@ func manual_loudness(event: InputEvent) -> void:
 		pass # stop operation
 	elif next != -1:
 		match current_bus:
-			BUS_MUSIC: next_loudness(music, next); loudness_music()
-			BUS_SOUND: next_loudness(sound, next); loudness_sound()
-			BUS_INTERFACE: next_loudness(interface, next); loudness_interface()
+			BUS_MUSIC: next_loudness(music, next); loudness_music(int(music.value))
+			BUS_SOUND: next_loudness(sound, next); loudness_sound(int(sound.value))
+			BUS_INTERFACE: next_loudness(interface, next); loudness_interface(int(interface.value))
 	if next == current_loud:
 		pass # stop operation

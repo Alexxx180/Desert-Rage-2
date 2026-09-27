@@ -3,9 +3,11 @@ class_name TheWorld extends CanvasLayer
 enum { LEVEL, LOGIC, BOX = 2, POS = 4, AURA = 6, RESOURCE = 7, STATUS = 8,
 	INVENTORY = 10, BESTIARY = 38, NOTES = 39, BOOKS = 40, CHESTS = 41, SECRETS = 42,
 
-	SETTINGS = 0, SAVES, ACHIEVEMENTS, DIFFICULTY = 0, PART, DUNGEON, TRANSITION, PROGRESSED, BAG = 7,
+	SETTINGS = 0, SETTING_SLIDERS, SAVES, ACHIEVEMENTS, DIFFICULTY = 0, PART, DUNGEON, TRANSITION, PROGRESSED, BAG = 7,
 
-	DIALOG_ON = 0
+	SENSITIVITY = 0, MUSIC, SOUND, INTERFACE, LANGUAGE,
+	
+	NARRATIVE = 0, LOGS, HELP, DIALOG, SCREEN, PRESS
 }
 
 var session: PackedInt64Array
@@ -14,12 +16,16 @@ var level: LevelRoot
 var adversary: Adversary
 var action: Action
 var trades: Trades
+var settings: Settings
 
 enum { CURRENTS, PLATFORMS, PLACES }
 var size: PackedByteArray = [0, 0, 0]
 
 func check(type: int) -> int: return session[type]
-func unlock(type: int, slot: int) -> void: session[type] = Def.to1(session[type], slot)
+func unlock(type: int, slot: int) -> void: session[type] = Def.t1(session[type], slot)
+
+func look(type: int, slot: int) -> bool: return Def.of(session[type], slot)
+func took(type: int, slot: int) -> void: session[type] = Def.t_(session[type], slot)
 
 func get_part(type: int, slot: int) -> int: return Def.byte(session[type], slot)
 func set_part(type: int, slot: int, value: int) -> void: session[type] = Def.to_byte(session[type], slot, value)
@@ -216,12 +222,12 @@ func timeout_talk() -> void:
 		length[CURRENT] += DIALOG_CURSOR
 		if length[CURRENT] >= length[END_MESSAGE]:
 			length = Vector2i.ZERO
-			if Def.of(check(SETTINGS), DIALOG_ON): dialogs.hide()
+			if look(SETTINGS, DIALOG): dialogs.hide()
 			return
 	else:
 		message += 1
 		queue[length[CURRENT] + DIALOG_FROM] = message
-	if Def.of(check(SETTINGS), DIALOG_ON):
+	if look(SETTINGS, DIALOG):
 		dialogs.show()
 		var key: String = "L%d_%d" % [queue[length[CURRENT]], message]
 		talk_dialog.text = key
@@ -342,25 +348,17 @@ func enter_pause() -> void:
 	if settings != null: settings.hide()
 	pause.show()
 
-func sound_show() -> void:
-	pause.hide()
-	sound_menu.show()
-
 func enter_saves() -> void:
 	if saves == null:
 		saves = load(Def.saves).instantiate()
 		add_child(saves)
 		saves.back.connect(enter_pause)
-		saves.sound.connect(sound_show)
 	pause.hide()
 	saves.show()
 
 func enter_settings() -> void:
-	if settings == null:
-		settings = load(Def.settings).instantiate()
-		add_child(settings)
-		settings_back.pressed.connect(enter_pause)
-		settings_sound.pressed.connect(sound_show)
+	if settings.settings == null:
+		settings.set_settings()
 	pause.hide()
 	settings.show()
 
@@ -387,7 +385,7 @@ func set_game() -> void:
 		logs = controls.get_node(^"controls/logs")
 		help = controls.get_node(^"middle/help")
 
-var game: Control; var pause: Control; var settings: Control; var saves: Control; var sound: Control
+var game: Control; var pause: Control; var saves: Control
 var right: HSplitContainer; var left: HSplitContainer; var top: VSplitContainer; var bottom: VSplitContainer; var controls: MarginContainer
 var right_priorities: PanelContainer; var left_stats: PanelContainer; var top_inventory: PanelContainer; var bottom_ability: PanelContainer
 
