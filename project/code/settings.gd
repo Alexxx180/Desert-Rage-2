@@ -199,7 +199,14 @@ var interface: HSlider; var interface_manual: Button
 var ost_system: Button
 
 var xp_head: Button
-var p1: Button; var p2: Button
+var p1: Button
+var p1_keyboard_mouse: Button; var p1_keyboard: Button
+var p1_gamepad: Button; var p1_mouse: Button
+var p1_keyboard_mouse2: Button; var p1_keyboard2: Button
+var p2: Button
+var p2_keyboard_mouse: Button; var p2_keyboard: Button
+var p2_gamepad: Button; var p2_mouse: Button
+var p2_keyboard_mouse2: Button; var p2_keyboard2: Button
 var sensitivity: HSlider; var difficulty: Button
 var deasy: Button; var dsuitable: Button; var dhard: Button
 var language: Button; var screen: Button
@@ -237,8 +244,20 @@ func set_settings() -> void:
 	interface_manual = o.get_node(^"sound/interface/manual"); interface_manual.pressed.connect(manual_interface)
 	ost_system = o.get_node(^"sound/system"); ost_system.pressed.connect(back_to_ost)
 	xp_head = o.get_node(^"xp_head"); xp_head.pressed.connect(back_to_start)
-	p1 = o.get_node(^"experience/p1")
-	p2 = o.get_node(^"experience/p2")
+	p1 = o.get_node(^"experience/p1"); p1.pressed.connect(show_presets1)
+	p2 = o.get_node(^"experience/p2"); p2.pressed.connect(show_presets2)
+	p1_gamepad = o.get_node(^"experience/p1_gamepad"); p1_gamepad.pressed.connect(set_p1_gamepad)
+	p1_keyboard = o.get_node(^"experience/p1_keyboard"); p1_keyboard.pressed.connect(set_p1_keyboard)
+	p1_keyboard_mouse = o.get_node(^"experience/p1_keyboard_mouse"); p1_keyboard_mouse.pressed.connect(set_p1_keyboard_mouse)
+	p1_mouse = o.get_node(^"experience/p1_mouse"); p1_mouse.pressed.connect(set_p1_mouse)
+	p1_keyboard_mouse2 = o.get_node(^"experience/p1_keyboard_mouse_2"); p1_keyboard_mouse2.pressed.connect(set_p1_keyboard_mouse_2)
+	p1_keyboard2 = o.get_node(^"experience/p1_keyboard2"); p1_keyboard2.pressed.connect(set_p1_keyboard_2)
+	p2_gamepad = o.get_node(^"experience/p2_gamepad"); p2_gamepad.pressed.connect(set_p2_gamepad)
+	p2_keyboard = o.get_node(^"experience/p2_keyboard"); p2_keyboard.pressed.connect(set_p2_keyboard)
+	p2_keyboard_mouse = o.get_node(^"experience/p2_keyboard_mouse"); p2_keyboard_mouse.pressed.connect(set_p2_keyboard_mouse)
+	p2_mouse = o.get_node(^"experience/p2_mouse"); p2_mouse.pressed.connect(set_p2_mouse)
+	p2_keyboard_mouse2 = o.get_node(^"experience/p2_keyboard_mouse_2"); p2_keyboard_mouse2.pressed.connect(set_p2_keyboard_mouse_2)
+	p2_keyboard2 = o.get_node(^"experience/p2_keyboard2"); p2_keyboard2.pressed.connect(set_p2_keyboard_2)
 	sensitivity = o.get_node(^"experience/sensitivity"); sensitivity.drag_ended.connect(set_sensitivity)
 	difficulty = o.get_node(^"experience/difficulty"); difficulty.pressed.connect(show_difficulty)
 	deasy = o.get_node(^"experience/deasy"); deasy.pressed.connect(set_easy)
@@ -268,6 +287,59 @@ func set_settings() -> void:
 	g_items = o.get_node(^"gamepad/items")
 	g_group = o.get_node(^"gamepad/group")
 
+enum { KEYBOARD_MOUSE, KEYBOARD, GAMEPAD, MOUSE, KEYBOARD_MOUSE_2, KEYBOARD_2, P1 = 0, P2 }
+var presets: PackedByteArray = [KEYBOARD_MOUSE, GAMEPAD]
+var preset_text: PackedStringArray = ["KBM1", "KEY1", "GPAD", "MOUS", "KBM2", "KEY2"]
+var allow_coop: bool = true
+
+func default_preset2(p: int, corner_stone: int, defaulted: int) -> void:
+	if presets[P1] == presets[P2]: presets[p] = GAMEPAD
+	elif presets[P2] == corner_stone: presets[p] = defaulted
+
+func default_preset3(p: int, corner1: int, defaulted1: int, corner2: int, defaulted2: int) -> void:
+	if presets[P1] == presets[P2]: presets[p] = GAMEPAD
+	elif presets[P2] == corner1: presets[p] = defaulted1
+	elif presets[P2] == corner2: presets[p] = defaulted2
+
+func update_presets(p: int) -> void:
+	match presets[P1]:
+		GAMEPAD: pass
+		KEYBOARD_MOUSE:
+			if presets[P1] == presets[P2]: presets[p] = GAMEPAD
+			elif presets[P2] == MOUSE: presets[p] = KEYBOARD
+			elif presets[P2] == KEYBOARD: presets[p] = KEYBOARD_2
+			elif presets[P2] == KEYBOARD_MOUSE_2: presets[p] = KEYBOARD
+		KEYBOARD: default_preset2(p, KEYBOARD_MOUSE, KEYBOARD_2)
+		MOUSE: default_preset3(p, KEYBOARD_MOUSE, KEYBOARD, KEYBOARD_MOUSE_2, KEYBOARD_2)
+		KEYBOARD_MOUSE_2: default_preset3(p, KEYBOARD_MOUSE, KEYBOARD, KEYBOARD_2, KEYBOARD)
+		KEYBOARD_2: default_preset2(p, KEYBOARD_MOUSE_2, KEYBOARD)
+	p1.text = preset_text[presets[P1]]
+	p2.text = preset_text[presets[P2]] if allow_coop else "Add"
+
+func get_p1() -> Array[Button]: return [p1_keyboard_mouse, p1_keyboard, p1_gamepad, p1_mouse, p1_keyboard_mouse2, p1_keyboard2]
+func get_p2() -> Array[Button]: return [p2_keyboard_mouse, p2_keyboard, p2_gamepad, p2_mouse, p2_keyboard_mouse2, p2_keyboard2]
+func set_p1_presets(preset: int) -> void: presets[P1] = preset; update_presets(P2); hide_options(get_p1())
+func set_p2_presets(preset: int) -> void: presets[P2] = preset; update_presets(P1); hide_options(get_p2())
+func set_p1_keyboard() -> void: set_p1_presets(KEYBOARD)
+func set_p1_gamepad() -> void: set_p1_presets(GAMEPAD)
+func set_p1_keyboard_mouse() -> void: set_p1_presets(KEYBOARD_MOUSE)
+func set_p1_mouse() -> void: set_p1_presets(MOUSE)
+func set_p1_keyboard_mouse_2() -> void: set_p1_presets(KEYBOARD_MOUSE_2)
+func set_p1_keyboard_2() -> void: set_p1_presets(KEYBOARD_2)
+func set_p2_keyboard() -> void: set_p2_presets(KEYBOARD)
+func set_p2_gamepad() -> void: set_p2_presets(GAMEPAD)
+func set_p2_keyboard_mouse() -> void: set_p2_presets(KEYBOARD_MOUSE)
+func set_p2_mouse() -> void: set_p2_presets(MOUSE)
+func set_p2_keyboard_mouse_2() -> void: set_p2_presets(KEYBOARD_MOUSE_2)
+func set_p2_keyboard_2() -> void: set_p2_presets(KEYBOARD_2)
+func show_presets1() -> void: show_few_options(presets[HUD.hero], get_p1())
+func show_presets2() -> void:
+	if allow_coop:
+		show_few_options(presets[HUD.hero], get_p2())
+	else:
+		allow_coop = true; p2.text = preset_text[presets[P2]] 
+func disconnect_p2() -> void: allow_coop = false; p2.text = "Add"
+
 func update_difficulty() -> void: pass
 func update_narrative() -> void: pass
 func update_dialog() -> void: pass
@@ -295,15 +367,14 @@ func set_help() -> void: HUD.took(HUD.SETTINGS, HUD.HELP); update_help()
 func set_screen() -> void: HUD.took(HUD.SETTINGS, HUD.SCREEN); update_screen()
 func set_press() -> void: HUD.took(HUD.SETTINGS, HUD.PRESS); update_press()
 
+func hide_options(opts: Array[Button]) -> void: for l in opts: l.hide()
+func show_few_toggles(part: PackedByteArray, options: Array[Button]) -> void: for i in range(0, len(options)): if not i in part: options[i].show()
 func show_few_options(part: int, options: Array[Button]) -> void: for i in range(0, len(options)): if i != part: options[i].show()
 func get_languages() -> Array[Button]: return [lenglish, lrussian]
 func show_language() -> void: show_few_options(HUD.get_part(HUD.SETTINGS_SLIDERS, HUD.LANGUAGE), get_languages())
 func set_english() -> void: set_language(0)
 func set_russian() -> void: set_language(1)
-func set_language(no: int) -> void:
-	for l in get_languages(): l.hide()
-	HUD.set_part(HUD.SETTINGS_SLIDERS, HUD.LANGUAGE, no)
-	update_language()
+func set_language(no: int) -> void: hide_options(get_languages()); HUD.set_part(HUD.SETTINGS_SLIDERS, HUD.LANGUAGE, no); update_language()
 
 func get_difficulties() -> Array[Button]: return [deasy, dsuitable, dhard]
 func show_difficulty() -> void: show_few_options(HUD.get_part(HUD.SAVES, HUD.DIFFICULTY), get_difficulties())
@@ -312,6 +383,75 @@ func set_easy() -> void: set_difficulty(1)
 func set_suitable() -> void: set_difficulty(2)
 func set_hard() -> void: set_difficulty(3)
 
+var is_device_input: bool = false
+var device_codes: PackedInt32Array = [KEY_NONE, KEY_NONE, KEY_NONE, KEY_NONE]
+var device_input: PackedByteArray = [0, 0, 0, 0]
+enum { D_KEYBOARD, D_GAMEPAD,  DEVICE_TYPE = 0, KEY_COUNT, CURRENT_KEY, DEVICE_SETTING }
+
+enum { GAMEPAD_MOVEMENT, GAMEPAD_ACTIONS, GAMEPAD_ITEMS, GAMEPAD_GROUP, AXIS_BIT = 128 }
+# check about each key
+func update_input_manage(_type: int) -> void:
+	pass
+
+func interrupt_input() -> void:
+	for i in range(0, 4): device_codes[i] = KEY_NONE
+	is_device_input = false
+
+func set_next_device_code(code: int) -> void:
+	device_codes[device_input[CURRENT_KEY]] = code
+	device_input[CURRENT_KEY] += 1
+	if device_input[KEY_COUNT] == device_input[CURRENT_KEY]:
+		for i in range(0, device_input[KEY_COUNT]):
+			HUD.set_stat(device_input[DEVICE_SETTING], i, device_codes[i])
+			device_codes[i] = KEY_NONE
+		update_input_manage(device_input[DEVICE_SETTING])
+		is_device_input = false
+
+func joy_button(event: InputEventJoypadButton) -> bool:
+	return event.button_index < JOY_BUTTON_BACK or JOY_BUTTON_START < event.button_index
+
+func set_keyboard(event: InputEvent) -> void:
+	if device_input[DEVICE_TYPE] == KEYBOARD:
+		if event.is_pressed() and event is InputEventKey:
+			if event.keycode == KEY_BACKSPACE:
+				if device_input[CURRENT_KEY] == 0:
+					is_device_input = false
+				else:
+					device_input[CURRENT_KEY] -= 1
+					device_codes[device_input[CURRENT_KEY]] = KEY_NONE
+			elif event.keycode == KEY_ESCAPE:
+				interrupt_input()
+			elif event.keycode == KEY_ENTER or is_number(event.keycode) or is_k_number(event.keycode): return
+			else: set_next_device_code(event.keycode)
+		elif (event is InputEventMouseMotion) or (event is InputEventJoypadMotion): pass
+		else: interrupt_input()
+	elif device_input[DEVICE_TYPE] == GAMEPAD:
+		match device_input[DEVICE_SETTING]:
+			GAMEPAD_MOVEMENT:
+				if event is InputEventJoypadMotion:
+					set_next_device_code(event.axis)
+				elif not event is InputEventMouseMotion:
+					interrupt_input()
+			GAMEPAD_ACTIONS:
+				if event is InputEventJoypadButton and joy_button(event):
+					set_next_device_code(event.button_index)
+				elif not event is InputEventMouseMotion:
+					interrupt_input()
+			GAMEPAD_ITEMS:
+				if event is InputEventJoypadButton and joy_button(event):
+					set_next_device_code(event.button_index)
+				elif event is InputEventJoypadMotion:
+					set_next_device_code(event.axis | AXIS_BIT)
+				elif not event is InputEventMouseMotion:
+					interrupt_input()
+			GAMEPAD_GROUP:
+				if event is InputEventJoypadButton and joy_button(event):
+					set_next_device_code(event.button_index)
+				elif not event is InputEventMouseMotion:
+					interrupt_input()
+
+func is_number(code: int) -> bool: code -= KEY_0; return (0 <= code and code <= 9)
+func is_k_number(code: int) -> bool: code -= KEY_KP_0; return (0 <= code and code <= 9)
 func set_sensitivity(value: int) -> void: HUD.set_part(HUD.SETTING_SLIDERS, HUD.SENSITIVITY, int(value))
 func loudness_bus(name: StringName, that: HSlider) -> void: AudioServer.set_bus_volume_db(AudioServer.get_bus_index(name), linear_to_db(that.value * LINEAR_SLIDER))
 func loudness_music(value: int) -> void: loudness_bus(&"Master", music); music_manual.text = str(value)
@@ -329,8 +469,12 @@ func manual_loudness(event: InputEvent) -> void:
 			KEY_ESCAPE: next = current_loud
 			KEY_ENTER: next = -2
 			_:
-				next = event.keycode - KEY_0
-				if next < 0 and KEY_9 < next: next = -1
+				if is_number(event.keycode):
+					next = event.keycode - KEY_0
+				elif is_k_number(event.keycode):
+					next = event.keycode - KEY_KP_0
+				else:
+					next = -1
 	elif event is InputEventJoypadButton:
 		var offset: int = 5 if absf(Input.get_joy_axis(0, JOY_AXIS_TRIGGER_LEFT)) > 0.2 else 0
 		match event.button_index:

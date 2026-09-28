@@ -488,7 +488,7 @@ func throw(box: int, motion: Vector2i) -> void: velocity[box] = motion # * POWER
 func pushes(box: int, motion: Vector2) -> void: velocity[box] = motion * weight_d[box_weight[box]]
 
 func fixate_box(hero: int, box: int, _add: int) -> void:
-	hero_state[hero] = Def.to1(hero_state[hero], box)
+	hero_state[hero] = Def.t1(hero_state[hero], box)
 
 func encounter() -> void: pass
 func diverge() -> void: pass
