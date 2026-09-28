@@ -21,6 +21,17 @@ border_width_top = 2
 border_width_right = 2
 border_color = Color(0.12591082, 0.12591085, 0.12591073, 1)
 
+[sub_resource type="Gradient" id="Gradient_buuqu"]
+colors = PackedColorArray(0, 0, 0, 1, 0.27450982, 0.09803922, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_w2uiu"]
+gradient = SubResource("Gradient_buuqu")
+width = 10
+height = 20
+fill_from = Vector2(0.5, 0)
+fill_to = Vector2(0.5, 1)
+metadata/_snap_enabled = true
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_41j3w"]
 content_margin_left = 20.0
 content_margin_top = 10.0
@@ -99,17 +110,6 @@ grow_begin = 0.0
 grow_end = 0.0
 vertical = true
 
-[sub_resource type="Gradient" id="Gradient_buuqu"]
-colors = PackedColorArray(0, 0, 0, 1, 0.27450982, 0.09803922, 0, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_w2uiu"]
-gradient = SubResource("Gradient_buuqu")
-width = 10
-height = 20
-fill_from = Vector2(0.5, 0)
-fill_to = Vector2(0.5, 1)
-metadata/_snap_enabled = true
-
 [node name="menu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -170,6 +170,22 @@ text = "🪞"
 horizontal_alignment = 2
 vertical_alignment = 1
 
+[node name="cursor" type="TextureButton" parent="."]
+custom_minimum_size = Vector2(10, 46)
+layout_mode = 0
+offset_left = 1910.0
+offset_top = 157.0
+offset_right = 1920.0
+offset_bottom = 203.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = SubResource("GradientTexture2D_w2uiu")
+stretch_mode = 0
+
+[node name="particle" parent="cursor" instance=ExtResource("3_w2uiu")]
+position = Vector2(5, 0)
+emitting = false
+
 [node name="exit" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = 1
@@ -200,6 +216,7 @@ theme_override_constants/margin_bottom = 55
 
 [node name="options" type="HBoxContainer" parent="hud"]
 layout_mode = 2
+size_flags_vertical = 8
 
 [node name="game" type="VBoxContainer" parent="hud/options"]
 layout_mode = 2
@@ -209,7 +226,7 @@ size_flags_stretch_ratio = 0.35
 theme_override_constants/separation = 12
 
 [node name="start" type="Button" parent="hud/options/game"]
-custom_minimum_size = Vector2(250, 45)
+custom_minimum_size = Vector2(350, 45)
 layout_mode = 2
 size_flags_vertical = 10
 theme_override_styles/normal = SubResource("StyleBoxTexture_plqjw")
@@ -218,7 +235,7 @@ text = "Начать"
 alignment = 0
 
 [node name="difficulty" type="Button" parent="hud/options/game"]
-custom_minimum_size = Vector2(0, 45)
+custom_minimum_size = Vector2(350, 45)
 layout_mode = 2
 size_flags_vertical = 8
 theme_override_colors/icon_normal_color = Color(0.41215247, 0.41215247, 0.41215247, 1)
@@ -232,7 +249,7 @@ autowrap_mode = 2
 expand_icon = true
 
 [node name="settings" type="Button" parent="hud/options/game"]
-custom_minimum_size = Vector2(250, 45)
+custom_minimum_size = Vector2(350, 45)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8
@@ -252,18 +269,6 @@ theme_override_styles/fill = SubResource("StyleBoxLine_41j3w")
 value = 30.0
 fill_mode = 3
 show_percentage = false
-
-[node name="cursor" type="TextureButton" parent="hud"]
-custom_minimum_size = Vector2(10, 46)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-texture_normal = SubResource("GradientTexture2D_w2uiu")
-stretch_mode = 0
-
-[node name="particle" parent="hud/cursor" instance=ExtResource("3_w2uiu")]
-position = Vector2(5, 0)
-emitting = false
 
 [node name="shadow" type="ColorRect" parent="."]
 visible = false

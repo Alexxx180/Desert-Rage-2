@@ -124,23 +124,27 @@ theme_override_constants/margin_top = 30
 theme_override_constants/margin_right = 35
 theme_override_constants/margin_bottom = 30
 
-[node name="content" type="ScrollContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(0, 600)
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_right = 0
+
+[node name="content" type="ScrollContainer" parent="MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 follow_focus = true
-vertical_scroll_mode = 2
+horizontal_scroll_mode = 0
 
-[node name="options" type="VBoxContainer" parent="content"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/content"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 2
-theme_override_constants/separation = 15
 
-[node name="title" type="HBoxContainer" parent="content/options"]
+[node name="title" type="HBoxContainer" parent="MarginContainer/content/VBoxContainer"]
 layout_mode = 2
 
-[node name="exit" type="Button" parent="content/options/title"]
+[node name="exit" type="Button" parent="MarginContainer/content/VBoxContainer/title"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -152,7 +156,7 @@ alignment = 0
 autowrap_mode = 1
 script = SubResource("GDScript_5q7c8")
 
-[node name="controls" type="Button" parent="content/options/title"]
+[node name="controls" type="Button" parent="MarginContainer/content/VBoxContainer/title"]
 custom_minimum_size = Vector2(45, 45)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -166,7 +170,15 @@ theme_override_styles/focus = SubResource("StyleBoxFlat_fmjjx")
 shortcut = ExtResource("14_n4pyq")
 text = "⌨️🎮"
 
-[node name="sound_head" type="Button" parent="content/options"]
+[node name="options" type="GridContainer" parent="MarginContainer/content/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/content/VBoxContainer/options"]
+layout_mode = 2
+
+[node name="sound_head" type="Button" parent="MarginContainer/content/VBoxContainer/options/VBoxContainer"]
 custom_minimum_size = Vector2(300, 45)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -174,27 +186,27 @@ theme = ExtResource("6_kbam3")
 text = "SSND"
 alignment = 0
 
-[node name="sound" type="GridContainer" parent="content/options"]
+[node name="sound" type="GridContainer" parent="MarginContainer/content/VBoxContainer/options/VBoxContainer"]
 layout_mode = 2
 columns = 3
 
-[node name="music" parent="content/options/sound" instance=ExtResource("25_dkpam")]
+[node name="music" parent="MarginContainer/content/VBoxContainer/options/VBoxContainer/sound" instance=ExtResource("25_dkpam")]
 layout_mode = 2
 
-[node name="sound" parent="content/options/sound" instance=ExtResource("25_dkpam")]
+[node name="sound" parent="MarginContainer/content/VBoxContainer/options/VBoxContainer/sound" instance=ExtResource("25_dkpam")]
 layout_mode = 2
 
-[node name="interface" parent="content/options/sound" instance=ExtResource("25_dkpam")]
+[node name="interface" parent="MarginContainer/content/VBoxContainer/options/VBoxContainer/sound" instance=ExtResource("25_dkpam")]
 layout_mode = 2
 
-[node name="system" type="Button" parent="content/options/sound"]
+[node name="system" type="Button" parent="MarginContainer/content/VBoxContainer/options/VBoxContainer/sound"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 text = "SDST"
 alignment = 0
 
-[node name="xp_head" type="Button" parent="content/options"]
+[node name="xp_head" type="Button" parent="MarginContainer/content/VBoxContainer/options/VBoxContainer"]
 custom_minimum_size = Vector2(300, 45)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -202,15 +214,14 @@ theme = ExtResource("6_kbam3")
 text = "SGMT"
 alignment = 0
 
-[node name="experience" type="GridContainer" parent="content/options"]
-visible = false
+[node name="experience" type="GridContainer" parent="MarginContainer/content/VBoxContainer/options/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 10
 theme = ExtResource("2_ull8j")
 columns = 3
 
-[node name="p1" type="Button" parent="content/options/experience"]
+[node name="p1" type="Button" parent="MarginContainer/content/VBoxContainer/options/VBoxContainer/experience"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -218,7 +229,7 @@ size_flags_stretch_ratio = 0.35
 text = "Клав. 2 + мышь"
 alignment = 0
 
-[node name="status" type="Label" parent="content/options/experience/p1"]
+[node name="status" type="Label" parent="MarginContainer/content/VBoxContainer/options/VBoxContainer/experience/p1"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -234,7 +245,8 @@ size_flags_horizontal = 8
 theme_override_font_sizes/font_size = 20
 text = "P1"
 
-[node name="p1_keyboard_mouse" type="Button" parent="content/options/experience"]
+[node name="p1_keyboard_mouse" type="Button" parent="MarginContainer/content/VBoxContainer/options/VBoxContainer/experience"]
+visible = false
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -242,7 +254,8 @@ size_flags_stretch_ratio = 0.35
 text = "Клав. 1 + мышь"
 alignment = 0
 
-[node name="p1_keyboard" type="Button" parent="content/options/experience"]
+[node name="p1_keyboard" type="Button" parent="MarginContainer/content/VBoxContainer/options/VBoxContainer/experience"]
+visible = false
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -250,7 +263,8 @@ size_flags_stretch_ratio = 0.35
 text = "Клавиатура"
 alignment = 0
 
-[node name="p1_gamepad" type="Button" parent="content/options/experience"]
+[node name="p1_gamepad" type="Button" parent="MarginContainer/content/VBoxContainer/options/VBoxContainer/experience"]
+visible = false
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -258,7 +272,8 @@ size_flags_stretch_ratio = 0.35
 text = "Геймпад"
 alignment = 0
 
-[node name="p1_mouse" type="Button" parent="content/options/experience"]
+[node name="p1_mouse" type="Button" parent="MarginContainer/content/VBoxContainer/options/VBoxContainer/experience"]
+visible = false
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -266,7 +281,8 @@ size_flags_stretch_ratio = 0.35
 text = "Мышь"
 alignment = 0
 
-[node name="p1_keyboard_mouse2" type="Button" parent="content/options/experience"]
+[node name="p1_keyboard_mouse2" type="Button" parent="MarginContainer/content/VBoxContainer/options/VBoxContainer/experience"]
+visible = false
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -274,7 +290,8 @@ size_flags_stretch_ratio = 0.35
 text = "Клав. 2 + мышь"
 alignment = 0
 
-[node name="p1_keyboard2" type="Button" parent="content/options/experience"]
+[node name="p1_keyboard2" type="Button" parent="MarginContainer/content/VBoxContainer/options/VBoxContainer/experience"]
+visible = false
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -282,7 +299,7 @@ size_flags_stretch_ratio = 0.35
 text = "Клавиатура 2"
 alignment = 0
 
-[node name="p2" type="Button" parent="content/options/experience"]
+[node name="p2" type="Button" parent="MarginContainer/content/VBoxContainer/options/VBoxContainer/experience"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -290,7 +307,7 @@ size_flags_stretch_ratio = 0.35
 text = "Геймпад"
 alignment = 0
 
-[node name="status" type="Label" parent="content/options/experience/p2"]
+[node name="status" type="Label" parent="MarginContainer/content/VBoxContainer/options/VBoxContainer/experience/p2"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -306,7 +323,8 @@ size_flags_horizontal = 8
 theme_override_font_sizes/font_size = 20
 text = "P2"
 
-[node name="p2_keyboard_mouse" type="Button" parent="content/options/experience"]
+[node name="p2_keyboard_mouse" type="Button" parent="MarginContainer/content/VBoxContainer/options/VBoxContainer/experience"]
+visible = false
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -314,7 +332,8 @@ size_flags_stretch_ratio = 0.35
 text = "Клав. 1 + мышь"
 alignment = 0
 
-[node name="p2_keyboard" type="Button" parent="content/options/experience"]
+[node name="p2_keyboard" type="Button" parent="MarginContainer/content/VBoxContainer/options/VBoxContainer/experience"]
+visible = false
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -322,7 +341,8 @@ size_flags_stretch_ratio = 0.35
 text = "Клавиатура"
 alignment = 0
 
-[node name="p2_gamepad" type="Button" parent="content/options/experience"]
+[node name="p2_gamepad" type="Button" parent="MarginContainer/content/VBoxContainer/options/VBoxContainer/experience"]
+visible = false
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -330,7 +350,8 @@ size_flags_stretch_ratio = 0.35
 text = "Геймпад"
 alignment = 0
 
-[node name="p2_mouse" type="Button" parent="content/options/experience"]
+[node name="p2_mouse" type="Button" parent="MarginContainer/content/VBoxContainer/options/VBoxContainer/experience"]
+visible = false
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -338,7 +359,8 @@ size_flags_stretch_ratio = 0.35
 text = "Мышь"
 alignment = 0
 
-[node name="p2_keyboard_mouse2" type="Button" parent="content/options/experience"]
+[node name="p2_keyboard_mouse2" type="Button" parent="MarginContainer/content/VBoxContainer/options/VBoxContainer/experience"]
+visible = false
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -346,7 +368,8 @@ size_flags_stretch_ratio = 0.35
 text = "Клав. 2 + мышь"
 alignment = 0
 
-[node name="p2_keyboard2" type="Button" parent="content/options/experience"]
+[node name="p2_keyboard2" type="Button" parent="MarginContainer/content/VBoxContainer/options/VBoxContainer/experience"]
+visible = false
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -354,7 +377,8 @@ size_flags_stretch_ratio = 0.35
 text = "Клавиатура 2"
 alignment = 0
 
-[node name="p2_disconnect" type="Button" parent="content/options/experience"]
+[node name="p2_disconnect" type="Button" parent="MarginContainer/content/VBoxContainer/options/VBoxContainer/experience"]
+visible = false
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -362,20 +386,17 @@ size_flags_stretch_ratio = 0.35
 text = "Отсоединить"
 alignment = 0
 
-[node name="Button" type="Button" parent="content/options/experience"]
+[node name="sensitivity" parent="MarginContainer/content/VBoxContainer/options/VBoxContainer/experience" instance=ExtResource("25_dkpam")]
 layout_mode = 2
 
-[node name="sensitivity" parent="content/options/experience" instance=ExtResource("25_dkpam")]
-layout_mode = 2
-
-[node name="difficulty" type="Button" parent="content/options/experience"]
+[node name="difficulty" type="Button" parent="MarginContainer/content/VBoxContainer/options/VBoxContainer/experience"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 text = "SDFT"
 alignment = 0
 
-[node name="status" type="Label" parent="content/options/experience/difficulty"]
+[node name="status" type="Label" parent="MarginContainer/content/VBoxContainer/options/VBoxContainer/experience/difficulty"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -390,7 +411,7 @@ grow_vertical = 2
 size_flags_horizontal = 8
 text = "SDFS"
 
-[node name="deasy" type="Button" parent="content/options/experience"]
+[node name="deasy" type="Button" parent="MarginContainer/content/VBoxContainer/options/VBoxContainer/experience"]
 visible = false
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
@@ -398,7 +419,7 @@ size_flags_horizontal = 3
 text = "SDCS"
 alignment = 0
 
-[node name="dsuitable" type="Button" parent="content/options/experience"]
+[node name="dsuitable" type="Button" parent="MarginContainer/content/VBoxContainer/options/VBoxContainer/experience"]
 visible = false
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
@@ -406,7 +427,7 @@ size_flags_horizontal = 3
 text = "SDST"
 alignment = 0
 
-[node name="dhard" type="Button" parent="content/options/experience"]
+[node name="dhard" type="Button" parent="MarginContainer/content/VBoxContainer/options/VBoxContainer/experience"]
 visible = false
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
@@ -414,14 +435,14 @@ size_flags_horizontal = 3
 text = "SDST"
 alignment = 0
 
-[node name="language" type="Button" parent="content/options/experience"]
+[node name="language" type="Button" parent="MarginContainer/content/VBoxContainer/options/VBoxContainer/experience"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 text = "SLNM"
 alignment = 0
 
-[node name="status" type="Label" parent="content/options/experience/language"]
+[node name="status" type="Label" parent="MarginContainer/content/VBoxContainer/options/VBoxContainer/experience/language"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -436,7 +457,7 @@ grow_vertical = 2
 size_flags_horizontal = 8
 text = "SLNG"
 
-[node name="lenglish" type="Button" parent="content/options/experience"]
+[node name="lenglish" type="Button" parent="MarginContainer/content/VBoxContainer/options/VBoxContainer/experience"]
 visible = false
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
@@ -444,7 +465,7 @@ size_flags_horizontal = 3
 text = "English"
 alignment = 0
 
-[node name="lrussian" type="Button" parent="content/options/experience"]
+[node name="lrussian" type="Button" parent="MarginContainer/content/VBoxContainer/options/VBoxContainer/experience"]
 visible = false
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
@@ -452,21 +473,21 @@ size_flags_horizontal = 3
 text = "Русский"
 alignment = 0
 
-[node name="screen" type="Button" parent="content/options/experience"]
+[node name="screen" type="Button" parent="MarginContainer/content/VBoxContainer/options/VBoxContainer/experience"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 text = "SFSN"
 alignment = 0
 
-[node name="press" type="Button" parent="content/options/experience"]
+[node name="press" type="Button" parent="MarginContainer/content/VBoxContainer/options/VBoxContainer/experience"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 text = "SFIX"
 alignment = 0
 
-[node name="status" type="Label" parent="content/options/experience/press"]
+[node name="status" type="Label" parent="MarginContainer/content/VBoxContainer/options/VBoxContainer/experience/press"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -481,14 +502,14 @@ grow_vertical = 2
 size_flags_horizontal = 8
 text = "SON"
 
-[node name="narrative" type="Button" parent="content/options/experience"]
+[node name="narrative" type="Button" parent="MarginContainer/content/VBoxContainer/options/VBoxContainer/experience"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 text = "SNRT"
 alignment = 0
 
-[node name="status" type="Label" parent="content/options/experience/narrative"]
+[node name="status" type="Label" parent="MarginContainer/content/VBoxContainer/options/VBoxContainer/experience/narrative"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -503,14 +524,14 @@ grow_vertical = 2
 size_flags_horizontal = 8
 text = "SON"
 
-[node name="logs" type="Button" parent="content/options/experience"]
+[node name="logs" type="Button" parent="MarginContainer/content/VBoxContainer/options/VBoxContainer/experience"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 text = "SQTS"
 alignment = 0
 
-[node name="status" type="Label" parent="content/options/experience/logs"]
+[node name="status" type="Label" parent="MarginContainer/content/VBoxContainer/options/VBoxContainer/experience/logs"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -525,14 +546,14 @@ grow_vertical = 2
 size_flags_horizontal = 8
 text = "SON"
 
-[node name="help" type="Button" parent="content/options/experience"]
+[node name="help" type="Button" parent="MarginContainer/content/VBoxContainer/options/VBoxContainer/experience"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 text = "SGMH"
 alignment = 0
 
-[node name="status" type="Label" parent="content/options/experience/help"]
+[node name="status" type="Label" parent="MarginContainer/content/VBoxContainer/options/VBoxContainer/experience/help"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -547,21 +568,22 @@ grow_vertical = 2
 size_flags_horizontal = 8
 text = "SON"
 
-[node name="keyboard_head" type="Button" parent="content/options"]
-visible = false
-custom_minimum_size = Vector2(300, 0)
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/content/VBoxContainer/options"]
+layout_mode = 2
+
+[node name="keyboard_head" type="Button" parent="MarginContainer/content/VBoxContainer/options/VBoxContainer2"]
+custom_minimum_size = Vector2(300, 45)
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("6_kbam3")
 text = "SKDT"
 alignment = 0
 
-[node name="keyboard" type="GridContainer" parent="content/options"]
-visible = false
+[node name="keyboard" type="GridContainer" parent="MarginContainer/content/VBoxContainer/options/VBoxContainer2"]
 layout_mode = 2
 columns = 3
 
-[node name="movement" type="Button" parent="content/options/keyboard"]
+[node name="movement" type="Button" parent="MarginContainer/content/VBoxContainer/options/VBoxContainer2/keyboard"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -569,7 +591,7 @@ size_flags_stretch_ratio = 0.35
 text = "SMVT"
 alignment = 0
 
-[node name="status" type="Label" parent="content/options/keyboard/movement"]
+[node name="status" type="Label" parent="MarginContainer/content/VBoxContainer/options/VBoxContainer2/keyboard/movement"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -585,7 +607,7 @@ size_flags_horizontal = 8
 theme_override_font_sizes/font_size = 20
 text = "W·A·S·D"
 
-[node name="actions" type="Button" parent="content/options/keyboard"]
+[node name="actions" type="Button" parent="MarginContainer/content/VBoxContainer/options/VBoxContainer2/keyboard"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -593,7 +615,7 @@ size_flags_stretch_ratio = 0.35
 text = "SACT"
 alignment = 0
 
-[node name="status" type="Label" parent="content/options/keyboard/actions"]
+[node name="status" type="Label" parent="MarginContainer/content/VBoxContainer/options/VBoxContainer2/keyboard/actions"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -609,7 +631,7 @@ size_flags_horizontal = 8
 theme_override_font_sizes/font_size = 20
 text = "E·R·C·V"
 
-[node name="items" type="Button" parent="content/options/keyboard"]
+[node name="items" type="Button" parent="MarginContainer/content/VBoxContainer/options/VBoxContainer2/keyboard"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -617,7 +639,7 @@ size_flags_stretch_ratio = 0.35
 text = "SINV"
 alignment = 0
 
-[node name="status" type="Label" parent="content/options/keyboard/items"]
+[node name="status" type="Label" parent="MarginContainer/content/VBoxContainer/options/VBoxContainer2/keyboard/items"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -633,7 +655,7 @@ size_flags_horizontal = 8
 theme_override_font_sizes/font_size = 20
 text = "Q·X·F"
 
-[node name="group" type="Button" parent="content/options/keyboard"]
+[node name="group" type="Button" parent="MarginContainer/content/VBoxContainer/options/VBoxContainer2/keyboard"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -641,7 +663,7 @@ size_flags_stretch_ratio = 0.35
 text = "SGRP"
 alignment = 0
 
-[node name="status" type="Label" parent="content/options/keyboard/group"]
+[node name="status" type="Label" parent="MarginContainer/content/VBoxContainer/options/VBoxContainer2/keyboard/group"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -657,7 +679,7 @@ size_flags_horizontal = 8
 theme_override_font_sizes/font_size = 20
 text = "TGZ"
 
-[node name="movement2" type="Button" parent="content/options/keyboard"]
+[node name="movement2" type="Button" parent="MarginContainer/content/VBoxContainer/options/VBoxContainer2/keyboard"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -665,7 +687,7 @@ size_flags_stretch_ratio = 0.35
 text = "SMVT 2"
 alignment = 0
 
-[node name="status" type="Label" parent="content/options/keyboard/movement2"]
+[node name="status" type="Label" parent="MarginContainer/content/VBoxContainer/options/VBoxContainer2/keyboard/movement2"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -681,7 +703,7 @@ size_flags_horizontal = 8
 theme_override_font_sizes/font_size = 20
 text = "Up·Lt·Dn·Rt"
 
-[node name="actions2" type="Button" parent="content/options/keyboard"]
+[node name="actions2" type="Button" parent="MarginContainer/content/VBoxContainer/options/VBoxContainer2/keyboard"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -689,7 +711,7 @@ size_flags_stretch_ratio = 0.35
 text = "SACT"
 alignment = 0
 
-[node name="status" type="Label" parent="content/options/keyboard/actions2"]
+[node name="status" type="Label" parent="MarginContainer/content/VBoxContainer/options/VBoxContainer2/keyboard/actions2"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -705,7 +727,7 @@ size_flags_horizontal = 8
 theme_override_font_sizes/font_size = 20
 text = "L·P·[·\\"
 
-[node name="items2" type="Button" parent="content/options/keyboard"]
+[node name="items2" type="Button" parent="MarginContainer/content/VBoxContainer/options/VBoxContainer2/keyboard"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -713,7 +735,7 @@ size_flags_stretch_ratio = 0.35
 text = "SINV"
 alignment = 0
 
-[node name="status" type="Label" parent="content/options/keyboard/items2"]
+[node name="status" type="Label" parent="MarginContainer/content/VBoxContainer/options/VBoxContainer2/keyboard/items2"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -729,7 +751,7 @@ size_flags_horizontal = 8
 theme_override_font_sizes/font_size = 20
 text = ";·'·O"
 
-[node name="saves" type="Button" parent="content/options/keyboard"]
+[node name="saves" type="Button" parent="MarginContainer/content/VBoxContainer/options/VBoxContainer2/keyboard"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -737,7 +759,7 @@ size_flags_stretch_ratio = 0.35
 text = "SFLD / SFSV"
 alignment = 0
 
-[node name="status" type="Label" parent="content/options/keyboard/saves"]
+[node name="status" type="Label" parent="MarginContainer/content/VBoxContainer/options/VBoxContainer2/keyboard/saves"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -753,7 +775,7 @@ size_flags_horizontal = 8
 theme_override_font_sizes/font_size = 20
 text = "F2"
 
-[node name="soundtrack" type="Button" parent="content/options/keyboard"]
+[node name="soundtrack" type="Button" parent="MarginContainer/content/VBoxContainer/options/VBoxContainer2/keyboard"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -761,7 +783,7 @@ size_flags_stretch_ratio = 0.35
 text = "STST"
 alignment = 0
 
-[node name="status" type="Label" parent="content/options/keyboard/soundtrack"]
+[node name="status" type="Label" parent="MarginContainer/content/VBoxContainer/options/VBoxContainer2/keyboard/soundtrack"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -776,8 +798,7 @@ grow_vertical = 2
 size_flags_horizontal = 8
 text = "F10"
 
-[node name="gamepad_head" type="Button" parent="content/options"]
-visible = false
+[node name="gamepad_head" type="Button" parent="MarginContainer/content/VBoxContainer/options/VBoxContainer2"]
 custom_minimum_size = Vector2(300, 45)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -785,11 +806,11 @@ theme = ExtResource("6_kbam3")
 text = "SGDT"
 alignment = 0
 
-[node name="gamepad" type="GridContainer" parent="content/options"]
+[node name="gamepad" type="GridContainer" parent="MarginContainer/content/VBoxContainer/options/VBoxContainer2"]
 layout_mode = 2
 columns = 3
 
-[node name="movement" type="Button" parent="content/options/gamepad"]
+[node name="movement" type="Button" parent="MarginContainer/content/VBoxContainer/options/VBoxContainer2/gamepad"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -797,7 +818,7 @@ size_flags_stretch_ratio = 0.5
 text = "STGT"
 alignment = 0
 
-[node name="status" type="Label" parent="content/options/gamepad/movement"]
+[node name="status" type="Label" parent="MarginContainer/content/VBoxContainer/options/VBoxContainer2/gamepad/movement"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -813,7 +834,7 @@ size_flags_horizontal = 8
 theme_override_font_sizes/font_size = 20
 text = "LS·RS"
 
-[node name="actions" type="Button" parent="content/options/gamepad"]
+[node name="actions" type="Button" parent="MarginContainer/content/VBoxContainer/options/VBoxContainer2/gamepad"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -821,7 +842,7 @@ size_flags_stretch_ratio = 0.5
 text = "SSKIL"
 alignment = 0
 
-[node name="status" type="Label" parent="content/options/gamepad/actions"]
+[node name="status" type="Label" parent="MarginContainer/content/VBoxContainer/options/VBoxContainer2/gamepad/actions"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -837,7 +858,7 @@ size_flags_horizontal = 8
 theme_override_font_sizes/font_size = 20
 text = "A·B·X·Y"
 
-[node name="items" type="Button" parent="content/options/gamepad"]
+[node name="items" type="Button" parent="MarginContainer/content/VBoxContainer/options/VBoxContainer2/gamepad"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -845,7 +866,7 @@ size_flags_stretch_ratio = 0.5
 text = "SHSL"
 alignment = 0
 
-[node name="status" type="Label" parent="content/options/gamepad/items"]
+[node name="status" type="Label" parent="MarginContainer/content/VBoxContainer/options/VBoxContainer2/gamepad/items"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -861,7 +882,7 @@ size_flags_horizontal = 8
 theme_override_font_sizes/font_size = 20
 text = "LB·RB·LT·RT"
 
-[node name="group" type="Button" parent="content/options/gamepad"]
+[node name="group" type="Button" parent="MarginContainer/content/VBoxContainer/options/VBoxContainer2/gamepad"]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -869,7 +890,7 @@ size_flags_stretch_ratio = 0.5
 text = "SGRP"
 alignment = 0
 
-[node name="status" type="Label" parent="content/options/gamepad/group"]
+[node name="status" type="Label" parent="MarginContainer/content/VBoxContainer/options/VBoxContainer2/gamepad/group"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -885,7 +906,7 @@ size_flags_horizontal = 8
 theme_override_font_sizes/font_size = 20
 text = "DL·DD"
 
-[node name="footer" type="Label" parent="."]
+[node name="footer" type="Label" parent="MarginContainer"]
 custom_minimum_size = Vector2(0, 45)
 layout_mode = 2
 size_flags_vertical = 8
@@ -894,5 +915,3 @@ theme_override_styles/normal = SubResource("StyleBoxTexture_oaat3")
 text = "SSDD"
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

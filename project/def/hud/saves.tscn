@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://ce8kdx2kkhrxj"]
+[gd_scene load_steps=26 format=3 uid="uid://ce8kdx2kkhrxj"]
 
 [ext_resource type="FontFile" uid="uid://o0rgn7d13mr3" path="res://data/font/OpenSans-VariableFont_wdth,wght.ttf" id="1_44uuh"]
 [ext_resource type="Texture2D" uid="uid://oj2wuw485d4c" path="res://icon/help/preview/saves.png" id="2_pqoo0"]
@@ -57,8 +57,16 @@ content_margin_right = 20.0
 content_margin_bottom = 10.0
 texture = SubResource("GradientTexture2D_70xke")
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sygvg"]
+content_margin_left = 30.0
+content_margin_right = 30.0
+bg_color = Color(0.007843138, 0.007843138, 0.007843138, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_sygvg"]
+
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_lvclu"]
 color = Color(0.45452422, 0.45452428, 0.45452416, 1)
+vertical = true
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1u021"]
 
@@ -89,59 +97,14 @@ border_color = Color(0.06469657, 0.06469653, 0.06469646, 1)
 [sub_resource type="Theme" id="Theme_qavm4"]
 
 [node name="saves" type="HBoxContainer"]
-offset_left = 20.0
-offset_top = 20.0
-offset_right = 1132.0
-offset_bottom = 628.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 12
-
-[node name="scroll" type="ScrollContainer" parent="."]
-custom_minimum_size = Vector2(70, 0)
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="states" type="VBoxContainer" parent="scroll"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="preview" parent="scroll/states" instance=ExtResource("5_8bqtj")]
-layout_mode = 2
-size_flags_horizontal = 0
-
-[node name="preview2" parent="scroll/states" instance=ExtResource("5_8bqtj")]
-layout_mode = 2
-size_flags_horizontal = 0
-
-[node name="preview3" parent="scroll/states" instance=ExtResource("5_8bqtj")]
-layout_mode = 2
-size_flags_horizontal = 0
-
-[node name="preview4" parent="scroll/states" instance=ExtResource("5_8bqtj")]
-layout_mode = 2
-size_flags_horizontal = 0
-
-[node name="preview5" parent="scroll/states" instance=ExtResource("5_8bqtj")]
-layout_mode = 2
-size_flags_horizontal = 0
-
-[node name="preview6" parent="scroll/states" instance=ExtResource("5_8bqtj")]
-layout_mode = 2
-size_flags_horizontal = 0
-
-[node name="preview7" parent="scroll/states" instance=ExtResource("5_8bqtj")]
-layout_mode = 2
-size_flags_horizontal = 0
-
-[node name="preview8" parent="scroll/states" instance=ExtResource("5_8bqtj")]
-layout_mode = 2
-size_flags_horizontal = 0
-
-[node name="preview9" parent="scroll/states" instance=ExtResource("5_8bqtj")]
-layout_mode = 2
-size_flags_horizontal = 0
 
 [node name="preview" type="VBoxContainer" parent="."]
 layout_mode = 2
@@ -166,51 +129,163 @@ texture = ExtResource("2_pqoo0")
 expand_mode = 1
 stretch_mode = 6
 
-[node name="description" type="Label" parent="preview/scroll/level/image"]
-custom_minimum_size = Vector2(50, 0)
+[node name="TextureRect" type="Panel" parent="preview/scroll/level/image"]
+custom_minimum_size = Vector2(0, 320)
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -320.0
 grow_horizontal = 2
 grow_vertical = 0
-size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxTexture_1m88g")
+
+[node name="HFlowContainer" type="HFlowContainer" parent="preview/scroll/level"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 20
+
+[node name="cards" type="GridContainer" parent="preview/scroll/level/HFlowContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/h_separation = 20
+columns = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="preview/scroll/level/HFlowContainer/cards"]
+layout_mode = 2
+
+[node name="save" type="TextureButton" parent="preview/scroll/level/HFlowContainer/cards/VBoxContainer"]
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+tooltip_text = "Назад в игру"
+focus_neighbor_left = NodePath("../settings")
+focus_neighbor_right = NodePath("../settings")
+theme = ExtResource("6_bi66w")
+toggle_mode = true
+shortcut = ExtResource("4_pqoo0")
+shortcut_in_tooltip = false
+
+[node name="Label" type="Label" parent="preview/scroll/level/HFlowContainer/cards/VBoxContainer/save"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -32.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.50980395, 0.50980395, 0.50980395, 1)
+theme_override_fonts/font = ExtResource("1_44uuh")
+theme_override_font_sizes/font_size = 18
+text = "Сохранить"
+
+[node name="resume" type="Button" parent="preview/scroll/level/HFlowContainer/cards/VBoxContainer"]
+custom_minimum_size = Vector2(120, 30)
+layout_mode = 2
+size_flags_vertical = 10
+tooltip_text = "Назад в игру"
+focus_neighbor_left = NodePath("../settings")
+focus_neighbor_right = NodePath("../settings")
+theme = ExtResource("6_bi66w")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_sygvg")
+shortcut = ExtResource("4_pqoo0")
+shortcut_in_tooltip = false
+text = "Назад"
+alignment = 0
+
+[node name="states" type="GridContainer" parent="preview/scroll/level/HFlowContainer/cards"]
+layout_mode = 2
+theme_override_constants/h_separation = 12
+theme_override_constants/v_separation = 12
+columns = 3
+
+[node name="preview" parent="preview/scroll/level/HFlowContainer/cards/states" instance=ExtResource("5_8bqtj")]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="preview2" parent="preview/scroll/level/HFlowContainer/cards/states" instance=ExtResource("5_8bqtj")]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="preview3" parent="preview/scroll/level/HFlowContainer/cards/states" instance=ExtResource("5_8bqtj")]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="preview4" parent="preview/scroll/level/HFlowContainer/cards/states" instance=ExtResource("5_8bqtj")]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="preview5" parent="preview/scroll/level/HFlowContainer/cards/states" instance=ExtResource("5_8bqtj")]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="preview6" parent="preview/scroll/level/HFlowContainer/cards/states" instance=ExtResource("5_8bqtj")]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="preview7" parent="preview/scroll/level/HFlowContainer/cards/states" instance=ExtResource("5_8bqtj")]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="preview8" parent="preview/scroll/level/HFlowContainer/cards/states" instance=ExtResource("5_8bqtj")]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="preview9" parent="preview/scroll/level/HFlowContainer/cards/states" instance=ExtResource("5_8bqtj")]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="progress" type="ProgressBar" parent="preview/scroll/level/HFlowContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_styles/background = SubResource("StyleBoxEmpty_sygvg")
+theme_override_styles/fill = SubResource("StyleBoxLine_lvclu")
+value = 50.0
+fill_mode = 3
+show_percentage = false
+
+[node name="description" type="Label" parent="preview/scroll/level/HFlowContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
 size_flags_vertical = 1
 theme = ExtResource("3_1u021")
 theme_override_styles/normal = SubResource("StyleBoxTexture_1m88g")
-text = "Пещера истоков. Иголка в стоге сена. В этом звене пещерной цепи содержится замок, который, по видимому, открывается только одним ключом. "
+text = "Пещера истоков: Иголка в стоге сена. В этом звене пещерной цепи содержится замок, который, по видимому, открывается только одним ключом. "
 vertical_alignment = 2
 autowrap_mode = 2
 
-[node name="progress" type="ProgressBar" parent="preview/scroll/level"]
+[node name="HBoxContainer" type="HBoxContainer" parent="preview/scroll/level/HFlowContainer"]
 layout_mode = 2
-theme_override_styles/background = SubResource("StyleBoxLine_lvclu")
-show_percentage = false
 
-[node name="stats" type="ItemList" parent="preview/scroll/level"]
-custom_minimum_size = Vector2(0, 45)
+[node name="stats" type="ItemList" parent="preview/scroll/level/HFlowContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 180)
 layout_mode = 2
-size_flags_vertical = 4
+theme_override_constants/v_separation = 7
 theme_override_fonts/font = ExtResource("1_44uuh")
 theme_override_styles/panel = SubResource("StyleBoxEmpty_1u021")
 allow_search = false
 item_count = 6
-max_columns = 6
 same_column_width = true
 fixed_column_width = 115
 item_0/text = "STME 35:XX"
 item_1/text = "SCOR 123"
-item_2/text = "📖 2 / 3"
+item_2/text = "📖  2 / 3"
 item_3/text = "📜  2 / 7"
-item_4/text = "👻 3 / 6"
-item_5/text = "🔍 1 / 2"
+item_4/text = "👻  3 / 6"
+item_5/text = "🔍  1 / 2"
 
-[node name="cards" type="HFlowContainer" parent="preview/scroll/level"]
+[node name="GridContainer" type="GridContainer" parent="preview/scroll/level/HFlowContainer/HBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 4
+columns = 2
 
-[node name="ray" type="RichTextLabel" parent="preview/scroll/level/cards"]
+[node name="ray" type="RichTextLabel" parent="preview/scroll/level/HFlowContainer/HBoxContainer/GridContainer"]
 custom_minimum_size = Vector2(300, 130)
 layout_mode = 2
 size_flags_vertical = 4
@@ -234,7 +309,7 @@ text = "Рей Брайт [b]😶‍🌫️[/b] 240  [b]🫥[/b] 300
 У вас все деньги мира, ваша машина? - А потом?"
 scroll_active = false
 
-[node name="hero" type="PanelContainer" parent="preview/scroll/level/cards/ray"]
+[node name="hero" type="PanelContainer" parent="preview/scroll/level/HFlowContainer/HBoxContainer/GridContainer/ray"]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -246,7 +321,7 @@ grow_horizontal = 0
 size_flags_vertical = 8
 theme_override_styles/panel = SubResource("StyleBoxFlat_qhv6y")
 
-[node name="image" type="TextureRect" parent="preview/scroll/level/cards/ray/hero"]
+[node name="image" type="TextureRect" parent="preview/scroll/level/HFlowContainer/HBoxContainer/GridContainer/ray/hero"]
 custom_minimum_size = Vector2(45, 45)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -255,7 +330,7 @@ theme = SubResource("Theme_qavm4")
 texture = ExtResource("6_h6jo4")
 expand_mode = 1
 
-[node name="rock" type="RichTextLabel" parent="preview/scroll/level/cards"]
+[node name="rock" type="RichTextLabel" parent="preview/scroll/level/HFlowContainer/HBoxContainer/GridContainer"]
 custom_minimum_size = Vector2(300, 130)
 layout_mode = 2
 size_flags_vertical = 4
@@ -280,7 +355,7 @@ text = "Рок Тайт [b]😶‍🌫️[/b] 240  [b]🫥[/b] 300
 [right][i]EVERY.CO[/i][/right]"
 scroll_active = false
 
-[node name="hero" type="PanelContainer" parent="preview/scroll/level/cards/rock"]
+[node name="hero" type="PanelContainer" parent="preview/scroll/level/HFlowContainer/HBoxContainer/GridContainer/rock"]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -292,7 +367,7 @@ grow_horizontal = 0
 size_flags_vertical = 8
 theme_override_styles/panel = SubResource("StyleBoxFlat_qhv6y")
 
-[node name="image" type="TextureRect" parent="preview/scroll/level/cards/rock/hero"]
+[node name="image" type="TextureRect" parent="preview/scroll/level/HFlowContainer/HBoxContainer/GridContainer/rock/hero"]
 custom_minimum_size = Vector2(45, 45)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -300,52 +375,3 @@ size_flags_vertical = 0
 theme = SubResource("Theme_qavm4")
 texture = ExtResource("7_gep63")
 expand_mode = 1
-
-[node name="options" type="HFlowContainer" parent="preview"]
-layout_mode = 2
-size_flags_vertical = 8
-
-[node name="load" type="Button" parent="preview/options"]
-custom_minimum_size = Vector2(160, 30)
-layout_mode = 2
-size_flags_vertical = 4
-tooltip_text = "Назад в игру"
-focus_neighbor_left = NodePath("../settings")
-focus_neighbor_right = NodePath("../settings")
-theme = ExtResource("6_bi66w")
-theme_override_font_sizes/font_size = 20
-toggle_mode = true
-shortcut = ExtResource("4_pqoo0")
-shortcut_in_tooltip = false
-text = "Загрузить"
-alignment = 0
-
-[node name="save" type="Button" parent="preview/options"]
-custom_minimum_size = Vector2(160, 30)
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 4
-tooltip_text = "Назад в игру"
-focus_neighbor_left = NodePath("../settings")
-focus_neighbor_right = NodePath("../settings")
-theme = ExtResource("6_bi66w")
-theme_override_font_sizes/font_size = 20
-toggle_mode = true
-shortcut = ExtResource("4_pqoo0")
-shortcut_in_tooltip = false
-text = "Сохранить"
-alignment = 0
-
-[node name="resume" type="Button" parent="preview/options"]
-custom_minimum_size = Vector2(160, 30)
-layout_mode = 2
-size_flags_vertical = 4
-tooltip_text = "Назад в игру"
-focus_neighbor_left = NodePath("../settings")
-focus_neighbor_right = NodePath("../settings")
-theme = ExtResource("6_bi66w")
-theme_override_font_sizes/font_size = 20
-shortcut = ExtResource("4_pqoo0")
-shortcut_in_tooltip = false
-text = "Назад"
-alignment = 0
