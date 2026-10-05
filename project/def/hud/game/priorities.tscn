@@ -1,14 +1,14 @@
-[gd_scene load_steps=26 format=3 uid="uid://pwqvjeffo6u5"]
+[gd_scene load_steps=27 format=3 uid="uid://pwqvjeffo6u5"]
 
 [ext_resource type="PackedScene" uid="uid://b3pwlem0vs6ab" path="res://def/hud/game/inventory_party.tscn" id="2_3h6ma"]
 [ext_resource type="FontFile" uid="uid://cc0l5uav5qfke" path="res://data/font/ka1.ttf" id="2_dnqic"]
+[ext_resource type="FontFile" uid="uid://c6xnr3551fg10" path="res://data/font/Izuver.otf" id="3_vsy6a"]
 [ext_resource type="StyleBox" uid="uid://cht8hrroa75bg" path="res://data/theme/style/tag/tag-button.tres" id="5_7bc6i"]
 [ext_resource type="Texture2D" uid="uid://n6yeei36r2wm" path="res://icon/help/priority_pursuit.svg" id="5_jqhaj"]
 [ext_resource type="Texture2D" uid="uid://i25fsm5gv7qb" path="res://icon/help/priority_self_control.svg" id="6_wvi8k"]
 [ext_resource type="Texture2D" uid="uid://bl8c8xwwkccqq" path="res://icon/help/priority_tenacity.svg" id="7_4p7te"]
 [ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://data/theme/patterns/template/menu/settings/topic/footer.tres" id="10_3h6ma"]
 [ext_resource type="FontFile" uid="uid://o0rgn7d13mr3" path="res://data/font/OpenSans-VariableFont_wdth,wght.ttf" id="10_mr8b2"]
-[ext_resource type="FontFile" uid="uid://c4ygkmnbt1j7y" path="res://data/font/LTSuperiorSerif-Semibold.otf" id="10_rg7iu"]
 [ext_resource type="FontFile" uid="uid://dmctrlrnfxaie" path="res://data/font/Roboto-Regular-Emoji.ttf" id="10_vsy6a"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qw6gd"]
@@ -38,7 +38,7 @@ bg_color = Color(0, 0, 0, 1)
 content_margin_left = 12.0
 content_margin_top = 3.0
 content_margin_right = 12.0
-content_margin_bottom = 5.0
+content_margin_bottom = 3.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o76in"]
 content_margin_left = 5.0
@@ -49,12 +49,10 @@ border_color = Color(0.43529412, 0.43529412, 0.43529412, 1)
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_x0k1n"]
 color = Color(0.49747366, 0.49747366, 0.49747366, 1)
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fh63m"]
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2qys1"]
 content_margin_left = 10.0
-
-[sub_resource type="StyleBoxLine" id="StyleBoxLine_flm7h"]
-content_margin_top = 7.0
-color = Color(0.117647, 0.117647, 0.227451, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_sph7f"]
 content_margin_left = 0.0
@@ -70,6 +68,10 @@ bg_color = Color(0.6644789, 0.5251939, 0.83174413, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sph7f"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vsy6a"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_flm7h"]
+content_margin_top = 7.0
+color = Color(0.117647, 0.117647, 0.227451, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rg7iu"]
 
@@ -135,6 +137,30 @@ text = "1000"
 horizontal_alignment = 2
 vertical_alignment = 2
 
+[node name="next2" type="Label" parent="stack/priority/value"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -36.5
+offset_top = -15.0
+offset_right = 36.5
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(0.241156, 0.241156, 0.241156, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 10
+theme_override_fonts/font = ExtResource("3_vsy6a")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxEmpty_xwv1h")
+text = "Опыт"
+horizontal_alignment = 2
+vertical_alignment = 2
+
 [node name="progress" type="ProgressBar" parent="stack/priority"]
 custom_minimum_size = Vector2(10, 2)
 layout_mode = 2
@@ -151,7 +177,18 @@ show_percentage = false
 layout_mode = 2
 theme_override_colors/font_color = Color(0.64705884, 0.64705884, 0.64705884, 1)
 theme_override_font_sizes/font_size = 20
-text = "Досье"
+text = "Приоритеты"
+
+[node name="skills" type="Label" parent="stack/priority"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.25
+theme = ExtResource("10_3h6ma")
+theme_override_fonts/font = ExtResource("10_vsy6a")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_fh63m")
+text = "Выбирается в любой момент. Вы повышаете его получая опыт. Повышение даёт прирост к показателям и уникальные способности."
+autowrap_mode = 2
 
 [node name="pursuit" type="Button" parent="stack/priority"]
 custom_minimum_size = Vector2(0, 34)
@@ -160,7 +197,7 @@ theme_override_colors/font_color = Color(0.64705884, 0.64705884, 0.64705884, 1)
 theme_override_fonts/font = ExtResource("10_mr8b2")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_2qys1")
 theme_override_styles/hover = ExtResource("5_7bc6i")
-text = "0. Стремление. ⚔️✙2 🛡✙2. Определяет способности и продолжительность комбо."
+text = "0. Стремление. ⚔️✙2 🛡✙2. Способности и продолжительность комбо."
 icon = ExtResource("5_jqhaj")
 alignment = 0
 
@@ -186,6 +223,12 @@ text = "0. Упорство"
 icon = ExtResource("7_4p7te")
 alignment = 0
 
+[node name="skills_title" type="Label" parent="stack"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.64705884, 0.64705884, 0.64705884, 1)
+theme_override_font_sizes/font_size = 20
+text = "Умения"
+
 [node name="skills" type="Label" parent="stack"]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
@@ -193,8 +236,8 @@ size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.25
 theme = ExtResource("10_3h6ma")
 theme_override_fonts/font = ExtResource("10_vsy6a")
-theme_override_styles/normal = SubResource("StyleBoxLine_flm7h")
-text = "Приоритет в досье выбирается в любой момент. Вы повышаете его получая опыт. При повышении даётся прирост к показателям и уникальные способности. Ниже ваши умения, возможности и способности. Возможность - закреплена за персонажем. Способность - эффект выполнения комбо. Комбо - последовательность действий героев."
+theme_override_styles/normal = SubResource("StyleBoxEmpty_fh63m")
+text = "Приемы, влияющие на окружение. Далее представлены навыки и таланты. Талант закреплен за персонажем. Навык - эффект выполнения комбо. Комбо - последовательность действий героев."
 autowrap_mode = 2
 
 [node name="perks" type="ItemList" parent="stack"]
@@ -213,6 +256,31 @@ max_columns = 0
 item_0/text = "🔥🎣"
 item_1/text = "Dealer"
 item_2/text = "Merchant"
+
+[node name="perks_skills" type="HFlowContainer" parent="stack"]
+layout_mode = 2
+
+[node name="page_a" type="ItemList" parent="stack/perks_skills"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+auto_height = true
+item_count = 2
+max_columns = 2
+fixed_column_width = 200
+item_0/text = "Torch Fire"
+item_1/text = "ST  - ST  - ST  - ST  - ST  - ST"
+
+[node name="page_a2" type="ItemList" parent="stack/perks_skills"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+auto_height = true
+item_count = 2
+max_columns = 2
+fixed_column_width = 200
+item_0/text = "Torch Fire"
+item_1/text = "ST  - ST  - ST  - ST  - ST  - ST"
 
 [node name="title" type="RichTextLabel" parent="stack"]
 visible = false
@@ -251,26 +319,6 @@ text = "Пламя - сила, вызволяющая узников и отго
 Кнут - элемент присутствия и гибкости, делающий хват рук дальше и крепче."
 autowrap_mode = 2
 
-[node name="pallete" type="ItemList" parent="stack"]
-visible = false
-custom_minimum_size = Vector2(0, 93)
-layout_mode = 2
-theme_override_constants/h_separation = 15
-theme_override_constants/v_separation = 7
-theme_override_fonts/font = ExtResource("10_rg7iu")
-theme_override_font_sizes/font_size = 20
-item_count = 6
-max_columns = 2
-item_0/text = "Бой      "
-item_1/text = "Выкл."
-item_1/disabled = true
-item_2/text = "Пал. 1"
-item_2/disabled = true
-item_3/text = "🔥- 👊 -🦶 - 🔥- 👊 -🦶- 🔥- 👊 -🦶- 🔥- 👊 -🦶"
-item_4/text = "Пал. 2"
-item_4/disabled = true
-item_5/text = "🔥- 👊 -🦶 - 🔥- 👊 -🦶- 🔥- 👊 -🦶- 🔥- 👊 -🦶"
-
 [node name="pallete_hint" type="Label" parent="stack"]
 visible = false
 custom_minimum_size = Vector2(50, 0)
@@ -283,34 +331,22 @@ theme_override_font_sizes/font_size = 18
 text = "Боевая палитра активируется при ритмичном сближении и отдалении от противника. Чтобы отключить её нажмите \"Бой\". Для изменения палитры выберите \"Пал.\". Вводите слоты комбо, используя ваше устройство ввода. Колесо мыши - менять, ЛКМ добавить, ПКМ удалить, задержать ПКМ - очистить. Описание и комбо для активации способностей можно посмотреть выбрав их название."
 autowrap_mode = 2
 
-[node name="effect" type="Label" parent="stack"]
+[node name="books_title" type="Label" parent="stack"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.64705884, 0.64705884, 0.64705884, 1)
+theme_override_font_sizes/font_size = 20
+text = "Книги"
+
+[node name="books_description" type="Label" parent="stack"]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 1
 size_flags_stretch_ratio = 0.25
 theme = ExtResource("10_3h6ma")
-theme_override_font_sizes/font_size = 18
-text = "Записи и книги располагаются ниже. Ищите и читайте книги, чтобы раздвинуть свои возможности. Соберите записи и выложите их по порядку чтобы узнать историю."
+theme_override_fonts/font = ExtResource("10_vsy6a")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_fh63m")
+text = "Ищите и читайте книги, чтобы раздвинуть свои возможности."
 autowrap_mode = 2
-
-[node name="pages" type="ItemList" parent="stack"]
-layout_mode = 2
-size_flags_vertical = 0
-theme_override_colors/font_outline_color = Color(0.34407577, 0.34407574, 0.34407574, 1)
-theme_override_constants/h_separation = 14
-theme_override_styles/panel = SubResource("StyleBoxEmpty_sph7f")
-theme_override_styles/hovered = SubResource("StyleBoxFlat_fh63m")
-theme_override_styles/selected = SubResource("StyleBoxFlat_dnqic")
-theme_override_styles/cursor_unfocused = SubResource("StyleBoxFlat_sph7f")
-select_mode = 1
-auto_height = true
-item_count = 4
-max_columns = 0
-item_0/text = "перемещаемым"
-item_1/text = "Попробуем сделать текст"
-item_2/text = "как предметы"
-item_3/text = "Отрывок жизни"
 
 [node name="books" type="VBoxContainer" parent="stack"]
 layout_mode = 2

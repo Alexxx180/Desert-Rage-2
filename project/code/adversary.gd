@@ -410,10 +410,45 @@ func add_log(text: String) -> void: HUD.game.log.text = text
 
 func fight(combo_no: int, id: int, zone: int, element: int, portion: float, output: float) -> void:
 	add_logs(combo_color[combo_slots - 2] + caption[id])
-	HUD.adversary.damage_zone(zone, HUD.hero, element, combo_no, portion, output)
+	damage_zone(zone, HUD.hero, element, combo_no, portion, output)
+
+func horizontal_scroll(left_panel: bool) -> int:
+	if left_panel:
+		return 800
+	return 0
+
+func vertical_scroll(top_panel: bool) -> int:
+	if top_panel:
+		return 800
+	return 0
 
 func menu_interaction() -> void:
-	pass
+	if HUD.side_panel != 0:
+		if Input.is_key_pressed(KEY_PAGEDOWN):
+			HUD.scroll_controls(true)
+		elif Input.is_key_pressed(KEY_PAGEUP):
+			HUD.scroll_controls(false)
+	if _hold(&"group"):
+		if _press(&"left"):
+			HUD.left.split_offset = horizontal_scroll(true)
+		elif _press(&"right"):
+			HUD.right.split_offset = horizontal_scroll(false)
+		elif _press(&"forward"):
+			HUD.top.split_offset = vertical_scroll(true)
+		elif _press(&"backward"):
+			HUD.bottom.split_offset = vertical_scroll(false)
+	elif _press(&"left"):
+		pass
+	elif _press(&"right"):
+		pass
+	elif _press(&"forward"):
+		pass
+	elif _press(&"backward"):
+		pass
+	elif _press(&"action"):
+		pass
+	elif _press(&"act3"):
+		pass
 
 func update_ui():
 	pass

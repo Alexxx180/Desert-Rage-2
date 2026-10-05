@@ -41,7 +41,8 @@ func set_item(bag: int, slot: int, item: int) -> void:
 # TIMING
 @onready var tree: SceneTree = get_tree()
 @onready var ui: Window = get_window()
-var dialog_timer: Timer = Timer.new(); var station_timer: Timer = Timer.new(); var debug_timer: Timer
+var dialog_timer: Timer = Timer.new(); var station_timer: Timer = Timer.new()
+var debug_timer: Timer; var chats_timer: Timer; var notes_timer: Timer
 
 var fire: GPUParticles2D; var rain: GPUParticles2D
 
@@ -239,7 +240,103 @@ func timeout_talk() -> void:
 		dialog_timer.start()
 
 
+var bar: VScrollBar
+@onready var timer: Timer = $timer
+@onready var current: Sprite2D = $current
+var dialog_chats: Array[Label] = []
+var dungeon_notes: Array[Label] = []
 
+enum { C_BLOCK, C_DIALOG, C_VALUE, C_BLOCK2, C_DIALOG2, C_VALUE2,
+	C_DIALOG_KIND = 0, C_NEXT_DIALOG, C_NEXT_BAR, C_STEP1 = 1, C_STEP2 = 2,
+	MESSAGE_THICK = 50, OFFSET = 10, OFFSET_JUMP = 50, GAP_ZONE = 100, LABELS = 100 }
+
+var block_cursor: int = 0; var dialog_cursor: int = 0
+var texts: PackedStringArray = [
+	"00", "01", "02", "03", "04", "05", "06", "07", "08", "09",
+	"10", "11", "12", "13", "14", "15", "16", "17", "18", "19",
+	"20", "21", "22", "23", "24", "25", "26", "27", "28", "29",
+	"30", "31", "32", "33", "34", "35", "36", "37", "38", "39",
+	"40", "41", "42", "43", "44", "45", "46", "47", "48", "49",
+	"50", "51", "52", "53", "54", "55", "56", "57", "58", "59",
+	"60", "61", "62", "63", "64", "65", "66", "67", "68", "69",
+	"70", "71", "72", "73", "74", "75", "76", "77", "78", "79",
+	"80", "81", "82", "83", "84", "85", "86", "87", "88", "89",
+	"90", "91", "92", "93", "94", "95", "96", "97", "98", "99",
+	
+	"100", "101", "102", "103", "104", "105", "106", "107", "108", "109",
+	"110", "111", "112", "113", "114", "115", "116", "117", "118", "119",
+	"120", "121", "122", "123", "124", "125", "126", "127", "128", "129",
+	"130", "131", "132", "133", "134", "135", "136", "137", "138", "139",
+	"140", "141", "142", "143", "144", "145", "146", "147", "148", "149",
+	"150", "151", "152", "153", "154", "155", "156", "157", "158", "159",
+	"160", "161", "162", "163", "164", "165", "166", "167", "168", "169",
+	"170", "171", "172", "173", "174", "175", "176", "177", "178", "179",
+	"180", "181", "182", "183", "184", "185", "186", "187", "188", "189",
+	"190", "191", "192", "193", "194", "195", "196", "197", "198", "199",
+
+	"200", "201", "202", "203", "204", "205", "206", "207", "208", "209",
+	"210", "211", "212", "213", "214", "215", "216", "217", "218", "219",
+	"220", "221", "222", "223", "224", "225", "226", "227", "228", "229",
+	"230", "231", "232", "233", "234", "235", "236", "237", "238", "239",
+	"240", "241", "242", "243", "244", "245", "246", "247", "248", "249",
+	"250", "251", "252", "253", "254", "255", "256", "257", "258", "259",
+	"260", "261", "262", "263", "264", "265", "266", "267", "268", "269",
+	"270", "271", "272", "273", "274", "275", "276", "277", "278", "279",
+	"280", "281", "282", "283", "284", "285", "286", "287", "288", "289",
+	"290", "291", "292", "293", "294", "295", "296", "297", "298", "299",
+]
+
+var cursor: PackedByteArray = [0, 0, 0, 0, 0, 0]
+var panel_scroll: PackedInt32Array = [0, 0]
+
+func set_block_cursor(kind: int, step1: int, step2: int) -> void:
+	var step: int = step1 if Input.is_action_just_pressed(&"LMB") else step2
+	cursor[kind] = clampi(cursor[kind] + step, 0, len(texts) - 1)
+
+func set_dialog_cursor(at_bottom: bool, next: Vector3i, speech: Sprite2D, dialog_bar: VScrollBar, chats: Array[Label]) -> void:
+	if at_bottom:
+		cursor[next[C_DIALOG_KIND]] += next[C_NEXT_DIALOG]
+		speech.position = chats[cursor[next[C_DIALOG_KIND]]].position
+	else:
+		dialog_bar.value += next[C_NEXT_BAR]
+
+func is_bottom() -> bool: return (cursor[C_BLOCK] + OFFSET + LABELS) >= len(texts)
+func infinite_scroll(dialog_bar: VScrollBar) -> bool:
+	var thick: int = MESSAGE_THICK << 4
+	var trigger: int = int(dialog_bar.max_value - dialog_bar.page - thick)
+	if cursor[C_VALUE] >= trigger:
+		if is_bottom(): return false
+		set_block_cursor(C_BLOCK, +OFFSET_JUMP, +OFFSET); dialog_bar.value -= GAP_ZONE
+		return true
+	elif cursor[C_BLOCK] > 0 and cursor[C_VALUE] <= thick:
+		set_block_cursor(C_BLOCK, -OFFSET_JUMP, -OFFSET); dialog_bar.value += GAP_ZONE
+		return true
+	return false
+
+func scroll_chats() -> void: if infinite_scroll(stats_bar): for i in range(0, LABELS): dialog_chats[i].text = texts[cursor[C_BLOCK] + i]
+func scroll_notes() -> void: if infinite_scroll(priorities_bar): for i in range(0, LABELS): dungeon_notes[i].text = texts[cursor[C_BLOCK] + i]
+func scroll_dialog_cursor(block: int, list_down: bool, speech: Sprite2D, dialog_bar: VScrollBar, chats: Array[Label]) -> void:
+	if list_down:
+		var at_bottom: bool = is_bottom()
+		if at_bottom: dialog_bar.value = dialog_bar.max_value
+		set_dialog_cursor(at_bottom and cursor[block + 1] < (LABELS - 1), Vector3i(block, +1, +30), speech, dialog_bar, chats)
+	else:
+		set_dialog_cursor(cursor[block + 1] > 0 and (cursor[block] <= 0 or is_bottom()), Vector3i(block, -1, -30), speech, dialog_bar, chats)
+
+func chats_scroll(n: int) -> void: if scroll_load(C_VALUE, n, chats_timer): scroll_chats()
+func notes_scroll(n: int) -> void: if scroll_load(C_VALUE, n, chats_timer): scroll_chats()
+func scroll_load(kind: int, value: int, scroll_timer: Timer) -> bool:
+	cursor[kind] = value
+	if Input.is_action_pressed(&"LMB"):
+		scroll_timer.start(); return false
+	return true
+
+var side_panel: int = 0
+
+func scroll_controls(list_down: bool) -> void:
+	match side_panel:
+		1: scroll_dialog_cursor(C_BLOCK, list_down, stats_speech, stats_bar, dialog_chats)
+		2: scroll_dialog_cursor(C_BLOCK2, list_down, priorities_speech, priorities_bar, dungeon_notes)
 
 enum { FPS, GPU }; var _debug_title: Label; var _debug_status: Label; var _debug_state: int
 const FORMAT_MB: String = "\n%0.2f"; var BYTE_CLUSTER: float = 1.0 / 1048576 # 1024^2
@@ -394,8 +491,15 @@ var fix_log: Label; var logs: RichTextLabel; var help: Label
 
 func set_stats() -> void:
 	stats_scroll = load("res://def/hud/game/stats.tscn").instantiate()
-	stats_description = stats_scroll.get_node(^"description")
 	stats_chats = stats_scroll.get_node(^"stats_chats")
+	stats_bar = stats_scroll.get_v_scroll_bar()
+	stats_bar.value_changed.connect(chats_scroll); var i: int = 0
+	chats_timer = Timer.new(); chats_timer.timeout.connect(scroll_chats)
+	for node in stats_chats.get_children():
+		dialog_chats.append(node)
+		node.text = texts[cursor[C_BLOCK] + i]; i += 1
+	stats_speech = stats_scroll.get_node(^"stats_speech")
+	stats_description = stats_scroll.get_node(^"description")
 	power_stat = stats_scroll.get_node(^"margin/stack/power")
 	power_base = power_stat.get_node(^"base")
 	power_next = power_stat.get_node(^"next")
@@ -413,6 +517,13 @@ func set_stats() -> void:
 
 func set_priorities() -> void:
 	priorities_scroll = load("res://def/hud/game/priorities.tscn").instantiate()
+	priorities_notes = priorities_scroll.get_node(^"priorities_notes")
+	priorities_bar = priorities_scroll.get_v_scroll_bar()
+	priorities_bar.value_changed.connect(notes_scroll); var i: int = 0
+	notes_timer = Timer.new(); notes_timer.timeout.connect(scroll_notes)
+	for node in stats_chats.get_children():
+		dungeon_notes.append(node)
+		node.text = texts[cursor[C_BLOCK2] + i]; i += 1
 	priority_progress = priorities_scroll.get_node(^"stack/priority/progress")
 	priority_placeholder = priorities_scroll.get_node(^"stack/placeholder")
 	perks = priorities_scroll.get_node(^"stack/perks")
@@ -472,7 +583,8 @@ var ability_meter: Label; var ability_pallete: ItemList
 
 ## UI STATS
 var stats_scroll: ScrollContainer
-var stats_description: ScrollContainer; var stats_chats: ScrollContainer
+var stats_description: ScrollContainer; var stats_chats: VBoxContainer
+var stats_bar: VScrollBar; var stats_speech: Sprite2D
 var power_stat: Button; var power_base: ProgressBar
 var influence_stat: Button; var influence_base: ProgressBar
 var vitality_stat: Button; var vitality_base: ProgressBar
@@ -483,6 +595,7 @@ var vitality_next: ProgressBar; var reaction_next: ProgressBar
 ## UI PRIORITY
 var priorities_scroll: ScrollContainer
 var priority_progress: ProgressBar; var priority_placeholder: Control
+var priorities_notes: VBoxContainer; var priorities_bar: VScrollBar; var priorities_speech: Sprite2D
 var perks: ItemList; var pages: ItemList; var books: VBoxContainer
 var pursuit: Button; var self_control: Button; var tenacity: Button
 

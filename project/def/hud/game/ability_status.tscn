@@ -1,55 +1,120 @@
-[gd_scene load_steps=4 format=3 uid="uid://cq5jn6k2bwg5n"]
+[gd_scene load_steps=14 format=3 uid="uid://cq5jn6k2bwg5n"]
 
-[ext_resource type="PackedScene" uid="uid://bdp11gai8bk5" path="res://def/hud/game/priorities_aura.tscn" id="1_j43cs"]
-[ext_resource type="PackedScene" uid="uid://du2nfngsi1lpk" path="res://def/hud/game/priorities_resource.tscn" id="2_u7nym"]
+[ext_resource type="FontFile" uid="uid://b2wbdbnkxcqv1" path="res://data/font/noto_sans/NotoEmoji-VariableFont_wght.ttf" id="1_0abwc"]
+[ext_resource type="FontFile" uid="uid://tiyy3ojddt81" path="res://data/font/title/TASAExplorerVF.woff2" id="2_u7nym"]
+[ext_resource type="FontFile" uid="uid://cc0l5uav5qfke" path="res://data/font/ka1.ttf" id="3_u7nym"]
+[ext_resource type="FontFile" uid="uid://o0rgn7d13mr3" path="res://data/font/OpenSans-VariableFont_wdth,wght.ttf" id="4_k1mfn"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k1mfn"]
-content_margin_top = 2.0
-content_margin_right = 5.0
-bg_color = Color(0, 0, 0, 0.3372549)
-corner_radius_top_left = 12
-corner_radius_bottom_left = 12
+[sub_resource type="Gradient" id="Gradient_cd54v"]
+colors = PackedColorArray(0.392157, 0.392157, 0.686275, 0.470588, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_f8gj5"]
+gradient = SubResource("Gradient_cd54v")
+width = 256
+height = 26
+fill_from = Vector2(1, 0.491453)
+fill_to = Vector2(0, 0.491453)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_j43cs"]
+content_margin_left = 0.0
+content_margin_top = 1.0
+content_margin_right = 10.0
+content_margin_bottom = 12.0
+texture = SubResource("GradientTexture2D_f8gj5")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qyqpf"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jbptl"]
+bg_color = Color(0.18039216, 0.18039216, 0.31764707, 1)
+
+[sub_resource type="Gradient" id="Gradient_k1mfn"]
+colors = PackedColorArray(0.039215688, 0.11372549, 0.11372549, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_425pr"]
+gradient = SubResource("Gradient_k1mfn")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_cd54v"]
+texture = SubResource("GradientTexture1D_425pr")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_j43cs"]
+content_margin_left = 6.0
 
 [node name="status" type="HBoxContainer"]
-offset_right = 1152.0
-offset_bottom = 30.0
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 60.0
+grow_horizontal = 2
 size_flags_horizontal = 3
-theme_override_constants/separation = 10
+theme_override_constants/separation = 20
 
-[node name="p_ray" type="ColorRect" parent="."]
-custom_minimum_size = Vector2(2, 0)
+[node name="now" type="Label" parent="."]
+custom_minimum_size = Vector2(300, 53)
 layout_mode = 2
-color = Color(0.48934895, 0.20106292, 0, 1)
+size_flags_horizontal = 10
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 10
+theme_override_fonts/font = ExtResource("3_u7nym")
+theme_override_font_sizes/font_size = 28
+theme_override_styles/normal = SubResource("StyleBoxTexture_j43cs")
+text = "0"
+horizontal_alignment = 2
+vertical_alignment = 2
 
-[node name="ray" type="VBoxContainer" parent="."]
+[node name="meter" type="ProgressBar" parent="now"]
+custom_minimum_size = Vector2(1, 1)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -1.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_styles/background = SubResource("StyleBoxFlat_qyqpf")
+theme_override_styles/fill = SubResource("StyleBoxFlat_jbptl")
+max_value = 10.0
+step = 1.0
+value = 5.0
+fill_mode = 1
+show_percentage = false
+
+[node name="help" type="Label" parent="."]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/separation = 4
+theme_override_colors/font_color = Color(0.40832946, 0.40832946, 0.40832946, 1)
+theme_override_fonts/font = ExtResource("4_k1mfn")
+theme_override_font_sizes/font_size = 24
+text = "[WASD] Движение [АБXY] Удары [TG+-] Группа [QXFZ] Предмет"
 
-[node name="aura" parent="ray" instance=ExtResource("1_j43cs")]
+[node name="theme" type="Button" parent="."]
+custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.08855977, 0.08855999, 0.088559784, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("1_0abwc")
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxTexture_cd54v")
+text = "💿"
+alignment = 2
 
-[node name="resource" parent="ray" instance=ExtResource("2_u7nym")]
-custom_minimum_size = Vector2(150, 26)
-layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_k1mfn")
-script = null
-
-[node name="p_rock" type="ColorRect" parent="."]
-custom_minimum_size = Vector2(2, 0)
-layout_mode = 2
-color = Color(0.48934895, 0.20106292, 0, 1)
-
-[node name="rock" type="VBoxContainer" parent="."]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/separation = 4
-
-[node name="aura" parent="rock" instance=ExtResource("1_j43cs")]
-layout_mode = 2
-
-[node name="resource" parent="rock" instance=ExtResource("2_u7nym")]
-custom_minimum_size = Vector2(150, 26)
-layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_k1mfn")
-script = null
+[node name="ost" type="Label" parent="theme"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.6378432, 0.6378432, 0.63784313, 1)
+theme_override_constants/line_spacing = 0
+theme_override_fonts/font = ExtResource("2_u7nym")
+theme_override_font_sizes/font_size = 23
+theme_override_styles/normal = SubResource("StyleBoxEmpty_j43cs")
+text = "Megalovania
+Undertale | Toby Fox"
+vertical_alignment = 1

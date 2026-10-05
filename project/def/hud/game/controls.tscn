@@ -35,11 +35,11 @@ VScrollBar/styles/scroll = SubResource("StyleBoxEmpty_he46p")
 content_margin_left = 10.0
 content_margin_top = 0.0
 content_margin_right = 10.0
-content_margin_bottom = 60.0
+content_margin_bottom = 85.0
 bg_color = Color(0, 0, 0, 0.39215687)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_llv8r"]
-content_margin_left = 65.0
+content_margin_left = 85.0
 bg_color = Color(0, 0, 0, 0.69803923)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ch3ha"]
@@ -177,13 +177,14 @@ theme_override_constants/margin_bottom = 10
 layout_mode = 2
 
 [node name="text" type="RichTextLabel" parent="dialog"]
-custom_minimum_size = Vector2(260, 150)
+custom_minimum_size = Vector2(360, 205)
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 0
 theme = SubResource("Theme_ifmpt")
 theme_override_colors/default_color = Color(0.65882355, 0.65882355, 0.65882355, 1)
 theme_override_fonts/normal_font = ExtResource("1_he46p")
+theme_override_font_sizes/normal_font_size = 24
 theme_override_styles/normal = SubResource("StyleBoxFlat_bjbyt")
 text = "Ray: HEY, This is it!
 I don't  know
@@ -198,39 +199,40 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -23.0
+offset_top = -88.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_colors/font_color = Color(0.65834004, 0.6583399, 0.6583399, 1)
 theme_override_constants/line_spacing = -1
 theme_override_fonts/font = ExtResource("1_he46p")
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 24
 theme_override_styles/normal = SubResource("StyleBoxFlat_llv8r")
 text = "Ray: АУ, че творится тут народ? Вы че устроили? Мне тоже оставьте"
 autowrap_mode = 2
 
 [node name="mood" type="Panel" parent="dialog/text/talk"]
-custom_minimum_size = Vector2(60, 60)
+custom_minimum_size = Vector2(80, 80)
 layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -60.0
-offset_right = 60.0
-grow_vertical = 0
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -40.0
+offset_right = 80.0
+offset_bottom = 40.0
+grow_vertical = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_ch3ha")
 
 [node name="face" type="AnimatedSprite2D" parent="dialog/text/talk/mood"]
 position = Vector2(2, 1.9999975)
-scale = Vector2(0.93333334, 0.9333334)
+scale = Vector2(1.2666668, 1.2666667)
 sprite_frames = SubResource("SpriteFrames_amj33")
 centered = false
 
 [node name="log" type="Control" parent="dialog"]
 clip_children = 2
-custom_minimum_size = Vector2(260, 150)
+custom_minimum_size = Vector2(360, 205)
 layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 2
@@ -247,12 +249,13 @@ theme = SubResource("Theme_ifmpt")
 theme_override_colors/default_color = Color(0.66245234, 0.66245234, 0.6624523, 1)
 theme_override_fonts/normal_font = ExtResource("1_he46p")
 theme_override_fonts/bold_font = ExtResource("4_ic24g")
+theme_override_font_sizes/normal_font_size = 24
 theme_override_styles/normal = SubResource("StyleBoxFlat_he46p")
 bbcode_enabled = true
 text = "Новый уровень!
 [table=3]
-[cell][left][b]🕵️‍♂️[/b]   [/left][/cell][cell expand][left][b]⚔[/b] 215 + 1   [/left][/cell][cell expand][left][b]🛡[/b] 234 + 2[/left][/cell]
-[cell][left][b]👨‍🏭[/b]   [/left][/cell][cell expand][left][b]🔥[/b] 215 + 2[/left][/cell][cell expand][left][b]🫧[/b] 233 + 1[/left][/cell]
+[cell][left][b]🕵️‍♂️[/b]   [/left][/cell][cell expand][left][b]⚔[/b] 215[/left][/cell][cell expand][left]  [b]🛡[/b] 234[/left][/cell]
+[cell][left][b]👨‍🏭[/b]   [/left][/cell][cell expand][left][b]🔥[/b] 215[/left][/cell][cell expand][left]  [b]🫧[/b] 233[/left][/cell]
 [/table]
 + прием: 🔥 - 🔥 - 🔥"
 scroll_following = true
@@ -268,7 +271,7 @@ custom_minimum_size = Vector2(50, 30)
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_fonts/font = ExtResource("4_llv8r")
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 28
 theme_override_styles/normal = SubResource("StyleBoxTexture_ifmpt")
 text = "HEY, THIS IS IT"
 horizontal_alignment = 1
@@ -279,26 +282,24 @@ layout_mode = 2
 size_flags_vertical = 8
 
 [node name="pause" type="Button" parent="options"]
-custom_minimum_size = Vector2(30, 26)
+custom_minimum_size = Vector2(52, 26)
 layout_mode = 2
 size_flags_horizontal = 0
 focus_mode = 1
 theme_override_fonts/font = ExtResource("5_nxuw1")
-theme_override_font_sizes/font_size = 18
+theme_override_font_sizes/font_size = 28
 theme_override_styles/normal = SubResource("StyleBoxFlat_8tmk1")
 text = "||"
-alignment = 0
 
 [node name="open" type="Button" parent="options"]
-custom_minimum_size = Vector2(30, 26)
+custom_minimum_size = Vector2(52, 26)
 layout_mode = 2
 size_flags_horizontal = 0
 focus_mode = 1
 theme_override_fonts/font = ExtResource("5_nxuw1")
-theme_override_font_sizes/font_size = 18
+theme_override_font_sizes/font_size = 28
 theme_override_styles/normal = SubResource("StyleBoxFlat_8tmk1")
 text = "🧮"
-alignment = 0
 
 [node name="space" type="Control" parent="options"]
 layout_mode = 2
@@ -333,11 +334,11 @@ value = 20.0
 show_percentage = false
 
 [node name="set" type="Button" parent="options"]
-custom_minimum_size = Vector2(0, 30)
+custom_minimum_size = Vector2(0, 52)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 4
 theme_override_fonts/font = ExtResource("4_ic24g")
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 28
 theme_override_styles/normal = SubResource("StyleBoxEmpty_ls1ll")
 text = "🔥🎣"

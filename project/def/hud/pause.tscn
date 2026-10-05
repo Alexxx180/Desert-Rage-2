@@ -1,11 +1,10 @@
-[gd_scene load_steps=17 format=3 uid="uid://v6stk7j8vyox"]
+[gd_scene load_steps=15 format=3 uid="uid://v6stk7j8vyox"]
 
 [ext_resource type="Theme" uid="uid://bt30yve6tq7yu" path="res://data/theme/patterns/template/menu/hud/pause/caption.tres" id="5_sq34c"]
 [ext_resource type="FontFile" uid="uid://o0rgn7d13mr3" path="res://data/font/OpenSans-VariableFont_wdth,wght.ttf" id="7_csk2a"]
 [ext_resource type="Shortcut" uid="uid://3f4gd42nvfmx" path="res://data/short/cut/manual.tres" id="7_g6jno"]
 [ext_resource type="Shortcut" uid="uid://brjhv1uiicoq4" path="res://data/short/cut/pause/resume.tres" id="10_csk2a"]
 [ext_resource type="Theme" uid="uid://dfyi7rrcrweqx" path="res://data/theme/patterns/template/menu/settings/settings.tres" id="11_cd1ao"]
-[ext_resource type="FontFile" uid="uid://b2wbdbnkxcqv1" path="res://data/font/noto_sans/NotoEmoji-VariableFont_wght.ttf" id="11_psjnk"]
 [ext_resource type="InputEventKey" uid="uid://du8qgit35q7vo" path="res://data/short/device/keyboard/fast/f3.tres" id="14_s3nvl"]
 [ext_resource type="InputEventKey" uid="uid://b781lxbqi155j" path="res://data/short/device/keyboard/numeric/3.tres" id="15_okx01"]
 [ext_resource type="InputEventJoypadMotion" uid="uid://63e0opsahun8" path="res://data/short/device/gamepad/periphery/trigger/left.tres" id="16_5in2i"]
@@ -20,13 +19,6 @@ content_margin_bottom = 35.0
 bg_color = Color(0, 0, 0, 0.78431374)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kbq4y"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uebu4"]
-content_margin_left = 20.0
-content_margin_top = 10.0
-content_margin_right = 20.0
-content_margin_bottom = 10.0
-bg_color = Color(0.050980393, 0.050980393, 0.050980393, 0.11764706)
 
 [sub_resource type="Shortcut" id="Shortcut_drjsb"]
 events = [ExtResource("14_s3nvl"), ExtResource("15_okx01"), ExtResource("16_5in2i")]
@@ -44,14 +36,10 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_snrb0")
 
 [node name="options" type="VBoxContainer" parent="."]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
+size_flags_horizontal = 6
+size_flags_vertical = 6
 
-[node name="pause" type="HBoxContainer" parent="options"]
-layout_mode = 2
-size_flags_vertical = 2
-
-[node name="caption" type="Button" parent="options/pause"]
+[node name="caption" type="Label" parent="options"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("5_sq34c")
@@ -60,21 +48,12 @@ theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxEmpty_kbq4y")
 text = "SPST"
 
-[node name="exit" type="Button" parent="options/pause"]
+[node name="menu" type="GridContainer" parent="options"]
 layout_mode = 2
-size_flags_horizontal = 10
-size_flags_vertical = 0
-theme_override_colors/font_color = Color(0.08468998, 0.08468991, 0.08468992, 1)
-theme_override_fonts/font = ExtResource("11_psjnk")
-theme_override_font_sizes/font_size = 20
-theme_override_styles/normal = SubResource("StyleBoxFlat_uebu4")
-text = "❌"
-
-[node name="menu" type="HFlowContainer" parent="options"]
-layout_mode = 2
-size_flags_vertical = 8
+size_flags_vertical = 10
 theme = ExtResource("11_cd1ao")
 theme_override_constants/h_separation = 10
+columns = 4
 
 [node name="resume" type="Button" parent="options/menu"]
 custom_minimum_size = Vector2(160, 60)

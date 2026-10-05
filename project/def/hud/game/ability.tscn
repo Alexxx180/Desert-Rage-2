@@ -1,8 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://bo6wehp5f8viu"]
+[gd_scene load_steps=16 format=3 uid="uid://bo6wehp5f8viu"]
 
-[ext_resource type="PackedScene" uid="uid://b8hybaq32frfk" path="res://def/hud/game/inventory_title.tscn" id="2_347r3"]
+[ext_resource type="Theme" uid="uid://rpwk6imyc4t5" path="res://data/theme/patterns/template/menu/settings/topic/footer.tres" id="2_cgufp"]
+[ext_resource type="FontFile" uid="uid://dmctrlrnfxaie" path="res://data/font/Roboto-Regular-Emoji.ttf" id="3_nim5j"]
 [ext_resource type="PackedScene" uid="uid://cq5jn6k2bwg5n" path="res://def/hud/game/ability_status.tscn" id="3_uklt7"]
 [ext_resource type="PackedScene" uid="uid://cspf6sh5v7o4v" path="res://def/hud/game/priorities_card.tscn" id="4_6r3jo"]
+[ext_resource type="FontFile" uid="uid://o0rgn7d13mr3" path="res://data/font/OpenSans-VariableFont_wdth,wght.ttf" id="4_cgufp"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uklt7"]
 content_margin_left = 20.0
@@ -36,6 +38,21 @@ bg_color = Color(0, 0, 0, 1)
 expand_margin_left = 12.0
 expand_margin_right = 12.0
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oafhw"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nkkl4"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 7.0
+content_margin_bottom = 0.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nqc40"]
+bg_color = Color(0.6644789, 0.5251939, 0.83174413, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_35yl4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wf6md"]
+
 [node name="scroll" type="ScrollContainer"]
 anchors_preset = 15
 anchor_right = 1.0
@@ -54,14 +71,44 @@ theme_override_constants/separation = 15
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 
-[node name="title" parent="stack" instance=ExtResource("2_347r3")]
+[node name="pages_description" type="Label" parent="stack"]
+custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
-text = "· Предмет можно использовать также перетаскивая его на АР колбы. При определенной сортировке герои могут быстро пополнять АР. Порядок сортировки определяют предметы, лежащие слева-направо, восполняющие число АР. При нажатии на колбы [color=91fe90FF][b][i]🫙[/i][/b]А[/color] [color=7aa1ffFF][b][i]🫙[/i][/b]Р[/color] герой использует инвентарь для восстановления выбранного персонажа. Для быстрого доступа используется %s и %s + %s в ходе игры. Поведение определяется типом сортировки.
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.25
+theme = ExtResource("2_cgufp")
+theme_override_fonts/font = ExtResource("3_nim5j")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxEmpty_oafhw")
+text = "Соберите записи и выложите их по порядку чтобы узнать историю."
+autowrap_mode = 2
 
-[table=3]
-[cell expand][left][b][i]🔼[/i][/b] По возрастанию - восполнение АР с экономией предметов[/left][/cell][cell expand][left][b][i]🔽[/i][/b] По убыванию - восполнение АР без экономии предметов[/left][/cell][cell][left][b][i]🔀[/i][/b] В случайном порядке - восполнение АР первым предметом[/left][/cell]
-[/table]
-[i][color=b5b5b5]Помощь[/color][/i]"
+[node name="pages" type="ItemList" parent="stack"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0.47397572, 0.47397578, 0.4739756, 1)
+theme_override_colors/font_outline_color = Color(0.34407577, 0.34407574, 0.34407574, 1)
+theme_override_constants/h_separation = 14
+theme_override_fonts/font = ExtResource("4_cgufp")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/panel = SubResource("StyleBoxEmpty_nkkl4")
+theme_override_styles/hovered = SubResource("StyleBoxFlat_nqc40")
+theme_override_styles/selected = SubResource("StyleBoxFlat_35yl4")
+theme_override_styles/cursor_unfocused = SubResource("StyleBoxFlat_wf6md")
+select_mode = 1
+auto_height = true
+item_count = 4
+max_columns = 0
+item_0/text = "перемещаемым"
+item_1/text = "Попробуем сделать текст"
+item_2/text = "как предметы"
+item_3/text = "Отрывок жизни"
+
+[node name="title" type="Label" parent="stack"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.64705884, 0.64705884, 0.64705884, 1)
+theme_override_font_sizes/font_size = 32
+text = "Помощь"
 
 [node name="help" type="HFlowContainer" parent="stack"]
 layout_mode = 2
