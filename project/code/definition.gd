@@ -13,7 +13,7 @@ const step: PackedByteArray = [28, 28, 15, 15]
 const push: PackedByteArray = [14, 20, 20, 20]
 
 const hp: PackedByteArray = [100, 100, 93, 93]
-const ap: PackedByteArray = [ 20,  20,  2,  2]
+const ap: PackedByteArray = [020, 020, 02, 02]
 
 const power: PackedByteArray = [5, 5, 5, 5]
 const shell: PackedByteArray = [5, 5, 5, 5]

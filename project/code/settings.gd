@@ -46,6 +46,7 @@ var default_no: int
 var collection_no: int
 var fight_mode: int
 var music_player: AudioStreamPlayer
+var hero_no: int
 
 func user_file(no: int) -> String: return "user://" + str(no).pad_zeros(2) + ".ogg"
 func exists(no: int) -> bool: return check_ost(no) and _defuse(no)
@@ -60,7 +61,7 @@ func set_fight_mode(mode: int) -> void:
 	fight_mode = mode
 
 func set_hero_theme(common: int) -> void:
-	ost_no = HUD.hero if _blend(HEROES_BLEND) else common
+	ost_no = hero_no if _blend(HEROES_BLEND) else common
 
 func set_common_theme(common: int, no: int) -> bool:
 	if Def.of(no, FINISHED):
@@ -74,8 +75,8 @@ func set_common_theme(common: int, no: int) -> bool:
 		else:
 			set_hero_theme(common + 2)
 	elif Def.of(no, HEROES_BLEND):
-		ost_no = HUD.hero
-		default_no = HUD.hero
+		ost_no = hero_no
+		default_no = hero_no
 	else:
 		return false
 	return true
@@ -116,8 +117,8 @@ func level_playback_enter(finished: bool = false, specific: int = DEFAULTED) -> 
 			ost_no = P_DESERT
 			default_no = P_DESERT
 		elif _blend(HEROES_BLEND):
-			ost_no = HUD.hero
-			default_no = HUD.hero
+			ost_no = hero_no
+			default_no = hero_no
 		else:
 			default_no = T_DESERT
 			ost_no = T_DESERT
@@ -173,20 +174,16 @@ enum { XBX, PS, N }
 
 var gamepad_type: int = XBX
 const button_layout: PackedStringArray = ["△□○✖", "ABXY", "ABYX"] # ❏▣⊹❣☜☞☟
-const types: PackedStringArray = ["ps",  "xbox",  "xinput", "nintendo", "stk"]
-const types_no: PackedByteArray = [0, 0,  1, 1,  2, 4]
+const types: PackedStringArray = ["ps",  "xbox",  "xinput"] #, "nintendo", "stk"]
 
-func _input(event: InputEvent) -> void:
+func input_device_type(event: InputEvent) -> void:
 	if event is InputEventJoypadButton or event is InputEventJoypadMotion:
-		gamepad_type = get_gamepad_type(Input.get_joy_name(0).to_lower())
+		var device: String = Input.get_joy_name(0).to_lower()
+		gamepad_type = N
+		if device != "":
+			for i in range(0, len(types)): if device.contains(types[i]): gamepad_type = i; break
+		print_verbose("device name: ", device)
 		# process help hints
-
-func get_gamepad_type(device: String) -> int:
-	if device == "": return XBX
-	for i in range(0, len(types_no), 2):
-		for j in range(types_no[i], types_no[i + 1] + 1):
-			if device.contains(types[j]): return i >> 1
-	return XBX
 
 var settings: MarginContainer
 var content: ScrollContainer
@@ -287,10 +284,24 @@ func set_settings() -> void:
 	g_items = o.get_node(^"gamepad/items")
 	g_group = o.get_node(^"gamepad/group")
 
-enum { KEYBOARD_MOUSE, KEYBOARD, GAMEPAD, MOUSE, KEYBOARD_MOUSE_2, KEYBOARD_2, P1 = 0, P2 }
-var presets: PackedByteArray = [KEYBOARD_MOUSE, GAMEPAD]
+enum { GAMEPAD, MOUSE, KEYBOARD_MOUSE, KEYBOARD_MOUSE_2, KEYBOARD, KEYBOARD_2, P1 = 0, P2 }
+var presets: PackedByteArray = [KEYBOARD_MOUSE, KEYBOARD_2]
 var preset_text: PackedStringArray = ["KBM1", "KEY1", "GPAD", "MOUS", "KBM2", "KEY2"]
-var allow_coop: bool = true
+
+func is_gamepad(event: InputEvent) -> bool: return event is InputEventJoypadButton or event is InputEventJoypadMotion
+func is_mouse(event: InputEvent) -> bool: return event is InputEventMouseButton or event is InputEventMouseMotion
+func get_hero(event: InputEvent) -> int:
+	var h: int = HUD.hero
+	if !HUD.allow_coop: return h
+	if presets[P1] == GAMEPAD and presets[P2] == GAMEPAD: h ^= event.device
+	elif presets[P1] == GAMEPAD and presets[P2] >= MOUSE: h ^= 0 if is_gamepad(event) else 1
+	elif presets[P2] == GAMEPAD and presets[P1] >= MOUSE: h ^= 1 if is_gamepad(event) else 0
+	elif presets[P2] == MOUSE and presets[P1] >= KEYBOARD: h ^= 1 if is_mouse(event) else 0
+	elif presets[P1] == MOUSE and presets[P2] >= KEYBOARD: h ^= 0 if is_mouse(event) else 1
+	return h
+
+func key2() -> bool: return HUD.allow_coop and (presets[P1] == KEYBOARD_2 or presets[P2] == KEYBOARD_2)
+func key_hero() -> int: return HUD.hero ^ 1 if presets[P2] == KEYBOARD_2 else HUD.hero
 
 func default_preset2(p: int, corner_stone: int, defaulted: int) -> void:
 	if presets[P1] == presets[P2]: presets[p] = GAMEPAD
@@ -314,7 +325,7 @@ func update_presets(p: int) -> void:
 		KEYBOARD_MOUSE_2: default_preset3(p, KEYBOARD_MOUSE, KEYBOARD, KEYBOARD_2, KEYBOARD)
 		KEYBOARD_2: default_preset2(p, KEYBOARD_MOUSE_2, KEYBOARD)
 	p1.text = preset_text[presets[P1]]
-	p2.text = preset_text[presets[P2]] if allow_coop else "Add"
+	p2.text = preset_text[presets[P2]] if HUD.allow_coop else "Add"
 
 func get_p1() -> Array[Button]: return [p1_keyboard_mouse, p1_keyboard, p1_gamepad, p1_mouse, p1_keyboard_mouse2, p1_keyboard2]
 func get_p2() -> Array[Button]: return [p2_keyboard_mouse, p2_keyboard, p2_gamepad, p2_mouse, p2_keyboard_mouse2, p2_keyboard2]
@@ -332,13 +343,13 @@ func set_p2_keyboard_mouse() -> void: set_p2_presets(KEYBOARD_MOUSE)
 func set_p2_mouse() -> void: set_p2_presets(MOUSE)
 func set_p2_keyboard_mouse_2() -> void: set_p2_presets(KEYBOARD_MOUSE_2)
 func set_p2_keyboard_2() -> void: set_p2_presets(KEYBOARD_2)
-func show_presets1() -> void: show_few_options(presets[HUD.hero], get_p1())
+func show_presets1() -> void: show_few_options(presets[P1], get_p1())
 func show_presets2() -> void:
-	if allow_coop:
-		show_few_options(presets[HUD.hero], get_p2())
+	if HUD.allow_coop:
+		show_few_options(presets[P2], get_p2())
 	else:
-		allow_coop = true; p2.text = preset_text[presets[P2]] 
-func disconnect_p2() -> void: allow_coop = false; p2.text = "Add"
+		HUD.allow_coop = true; p2.text = preset_text[presets[P2]] 
+func disconnect_p2() -> void: HUD.allow_coop = false; p2.text = "Add"
 
 func update_difficulty() -> void: pass
 func update_narrative() -> void: pass
@@ -410,7 +421,7 @@ func set_next_device_code(code: int) -> void:
 func joy_button(event: InputEventJoypadButton) -> bool:
 	return event.button_index < JOY_BUTTON_BACK or JOY_BUTTON_START < event.button_index
 
-func set_keyboard(event: InputEvent) -> void:
+func input_settings(event: InputEvent) -> void:
 	if device_input[DEVICE_TYPE] == KEYBOARD:
 		if event.is_pressed() and event is InputEventKey:
 			if event.keycode == KEY_BACKSPACE:

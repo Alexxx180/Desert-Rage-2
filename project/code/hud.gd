@@ -13,13 +13,14 @@ enum { LEVEL, LOGIC, BOX = 2, POS = 4, AURA = 6, RESOURCE = 7, STATUS = 8,
 var session: PackedInt64Array
 # model : L1 (SCORE)P2 E4 A2 N4 S8 B4 A2 R2
 var level: LevelRoot
-var adversary: Adversary
-var action: Action
-var trades: Trades
-var settings: Settings
+var adversary: Adversary = Adversary.new()
+var trades: Trades = Trades.new()
+var action: Action = Action.new()
+var settings: Settings = Settings.new()
 
 enum { CURRENTS, PLATFORMS, PLACES }
 var size: PackedByteArray = [0, 0, 0]
+var hero: int = 0
 
 func check(type: int) -> int: return session[type]
 func unlock(type: int, slot: int) -> void: session[type] = Def.t1(session[type], slot)
@@ -43,6 +44,8 @@ func set_item(bag: int, slot: int, item: int) -> void:
 @onready var ui: Window = get_window()
 var dialog_timer: Timer = Timer.new(); var station_timer: Timer = Timer.new()
 var debug_timer: Timer; var chats_timer: Timer; var notes_timer: Timer
+var combo_timer: Timer = Timer.new()
+var allow_coop: bool = true
 
 var fire: GPUParticles2D; var rain: GPUParticles2D
 
@@ -55,11 +58,6 @@ func _ready() -> void:
 	dialog_timer.timeout.connect(timeout_talk)
 
 func next_hero() -> int: return HUD.hero ^ 1
-
-func setup_level() -> void:
-	level.entity[HUD.hero].position = level.group.position
-	level.group.reparent(level.entity[HUD.hero])
-	level.group.position = Vector2.ZERO
 
 func _init() -> void:
 	# 
@@ -240,9 +238,6 @@ func timeout_talk() -> void:
 		dialog_timer.start()
 
 
-var bar: VScrollBar
-@onready var timer: Timer = $timer
-@onready var current: Sprite2D = $current
 var dialog_chats: Array[Label] = []
 var dungeon_notes: Array[Label] = []
 
@@ -336,7 +331,7 @@ var side_panel: int = 0
 func scroll_controls(list_down: bool) -> void:
 	match side_panel:
 		1: scroll_dialog_cursor(C_BLOCK, list_down, stats_speech, stats_bar, dialog_chats)
-		2: scroll_dialog_cursor(C_BLOCK2, list_down, priorities_speech, priorities_bar, dungeon_notes)
+		2: scroll_dialog_cursor(C_BLOCK2, list_down, priorities_book, priorities_bar, dungeon_notes)
 
 enum { FPS, GPU }; var _debug_title: Label; var _debug_status: Label; var _debug_state: int
 const FORMAT_MB: String = "\n%0.2f"; var BYTE_CLUSTER: float = 1.0 / 1048576 # 1024^2
@@ -526,12 +521,12 @@ func set_priorities() -> void:
 		node.text = texts[cursor[C_BLOCK2] + i]; i += 1
 	priority_progress = priorities_scroll.get_node(^"stack/priority/progress")
 	priority_placeholder = priorities_scroll.get_node(^"stack/placeholder")
-	perks = priorities_scroll.get_node(^"stack/perks")
-	pages = priorities_scroll.get_node(^"stack/pages")
-	books = priorities_scroll.get_node(^"stack/books")
-	pursuit = priorities_scroll.get_node(^"stack/priority/pursuit")
-	self_control = priorities_scroll.get_node(^"stack/priority/self_control")
-	tenacity = priorities_scroll.get_node(^"stack/priority/tenacity")
+	priorities_perks = priorities_scroll.get_node(^"stack/perks")
+	priorities_pages = priorities_scroll.get_node(^"stack/pages")
+	priorities_books = priorities_scroll.get_node(^"stack/books")
+	priorities_pursuit = priorities_scroll.get_node(^"stack/priority/pursuit")
+	priorities_restraint = priorities_scroll.get_node(^"stack/priority/restraint")
+	priorities_tenacity = priorities_scroll.get_node(^"stack/priority/tenacity")
 
 func set_ability() -> void:
 	ability_scroll = load("res://def/hud/game/ability.tscn").instantiate()
@@ -540,8 +535,8 @@ func set_ability() -> void:
 	ability_effect = ability_scroll.get_node(^"stack/effect")
 	ability_help = ability_scroll.get_node(^"stack/help")
 	ability_research = ability_scroll.get_node(^"stack/status/research")
-	ability_health = ability_scroll.get_node(^"stack/status/health")
-	ability_health_bar = ability_scroll.get_node(^"stack/status/health/bar")
+	ability_aura = ability_scroll.get_node(^"stack/status/aura")
+	ability_aura_bar = ability_scroll.get_node(^"stack/status/aura/bar")
 	ability_score = ability_scroll.get_node(^"stack/status/score")
 	ability_meter = ability_scroll.get_node(^"stack/status/score/meter")
 	ability_pallete = ability_scroll.get_node(^"stack/pallete")
@@ -554,17 +549,29 @@ func set_inventory() -> void:
 	bestiary_effect = inventory_bestiary.get_node(^"effect")
 	inventory_status = inventory_scroll.get_node(^"stack/bag/status")
 	inventory_status = inventory_scroll.get_node(^"stack/bag/status")
-	for i in [^"stack/bag/ray", ^"stack/bag/rock"]:
-		main_items.append(inventory_scroll.get_node(i).get_children())
+	ray_bag = inventory_scroll.get_node(^"stack/bag/ray"); ray_items = []
+	for button in ray_bag.get_children(): ray_items.append(button)
+	rock_items = []
+	for button in inventory_scroll.get_node(^"stack/bag/rock").get_children():
+		rock_items.append(button)
 
 func set_settings() -> void:
 	pass
 
+## UI INVENTORY
 var inventory_scroll: ScrollContainer; var inventory_bag_placeholder: Control
 var inventory_bestiary: HFlowContainer; var bestiary_number: Label
 var bestiary_effect: Label; var inventory_status: GridContainer
-var main_items: Array[Array] = []
+var ray_bag: HBoxContainer
+var ray_items: Array[Button] = []; var rock_items: Array[Button] = []
+var ray_aura: Button; var rock_aura: Button
+var ray_resource: Button; var rock_resource: Button
+var ray_trade: Button; var rock_trade: Button
 var side_items: Array[Button] = []
+
+## UI PAUSE MENU
+var pause_back: Button; var pause_saves: Button
+var pause_settings: Button; var pause_main: Button
 
 ## UI SOUND
 var sound_menu: Control
@@ -577,14 +584,18 @@ var settings_sound: Button
 var ability_scroll: ScrollContainer
 var ability_skills: ItemList; var ability_title: ProgressBar
 var ability_effect: ProgressBar; var ability_help: HFlowContainer
-var ability_research: Button; var ability_health: Button
-var ability_health_bar: ProgressBar; var ability_score: Label
+var ability_hints: Array[Button]; var ability_research: Button
+var ability_aura: Button; var ability_aura_bar: ProgressBar;
+var ability_resource: Button; var ability_resource_bar: ProgressBar;
+var ability_score: Label
 var ability_meter: Label; var ability_pallete: ItemList
+var ability_track: Button
 
 ## UI STATS
 var stats_scroll: ScrollContainer
 var stats_description: ScrollContainer; var stats_chats: VBoxContainer
 var stats_bar: VScrollBar; var stats_speech: Sprite2D
+var stats_craft: Button
 var power_stat: Button; var power_base: ProgressBar
 var influence_stat: Button; var influence_base: ProgressBar
 var vitality_stat: Button; var vitality_base: ProgressBar
@@ -595,15 +606,71 @@ var vitality_next: ProgressBar; var reaction_next: ProgressBar
 ## UI PRIORITY
 var priorities_scroll: ScrollContainer
 var priority_progress: ProgressBar; var priority_placeholder: Control
-var priorities_notes: VBoxContainer; var priorities_bar: VScrollBar; var priorities_speech: Sprite2D
-var perks: ItemList; var pages: ItemList; var books: VBoxContainer
-var pursuit: Button; var self_control: Button; var tenacity: Button
+var priorities_aura: ProgressBar; var priorities_resource: ProgressBar
+var priorities_pursuit: Button; var priorities_restraint: Button
+var priorities_tenacity: Button
+var priorities_notes: VBoxContainer; var priorities_bar: VScrollBar
+var priorities_book: Sprite2D; var priorities_books: VBoxContainer
+var priorities_perks: ItemList; var priorities_pages: ItemList
 
 # add status
 var fixed_hud: bool = false
 var panel_open: int = -1
+var focus_no: PackedByteArray = [0, 0]
+var focus_timer: Timer
 
-enum { TOP, LEFT, BOTTOM, RIGHT, T_OFF = 5, B_OFF = 5, L_OFF = 5, R_OFF = 5 }
+enum { TOP, LEFT, BOTTOM, RIGHT, T_OFF = 5, B_OFF = 5, L_OFF = 5, R_OFF = 5, D_ONE = 0, D_TWO }
+
+func test_no(event: InputEvent) -> bool:
+	if event is InputEventKey:
+		var code: int = event.keycode - KEY_0
+		if 0 <= code and code <= 9:
+			focus_no[D_ONE] = code
+			focus_no[D_TWO] *= 10
+			focus_no[D_TWO] = 0 if focus_no[D_TWO] > 99 else focus_no[D_TWO] + code
+			return true
+	return false
+
+func inventory_focus(h: int, no: int) -> void:
+	if 1 <= no and no <= 15:
+		if panel_open == LEFT:
+			side_items[no - 1].grab_focus()
+		else:
+			[ray_items, rock_items][h][no - 1].grab_focus()
+	elif panel_open == LEFT:
+		if no == 0: stats_craft.grab_focus()
+	elif no == 16: [ray_aura, rock_aura][h].grab_focus()
+	elif no == 17: [ray_resource, rock_resource][h].grab_focus()
+	elif no == 18: [ray_trade, rock_trade][h].grab_focus()
+
+func game_menu_focus(event: InputEvent) -> void:
+	var no: int = focus_no[D_TWO]
+	match panel_open:
+		BOTTOM:
+			if no == 0: ability_track.grab_focus()
+			elif 1 <= no and no < (len(ability_hints) + 1): ability_hints[no - 1].grab_focus()
+		RIGHT:
+			if no == 0: priorities_aura.grab_focus()
+			elif 1 <= no and no <= 3: [priorities_pursuit, priorities_restraint, priorities_tenacity][no - 1].grab_focus()
+			elif 4 <= no and no <= 13: pass
+		_:
+			if panel_open != -1: inventory_focus(settings.get_hero(event), no)
+
+func main_menu_focus(e) -> void:
+	if !test_no(e): return
+	var no: int = focus_no[D_ONE]
+	if no == 1: level.new_game.grab_focus()
+	elif no == 2: level.saves.grab_focus()
+	elif no == 3: level.settings.grab_focus()
+
+func set_digit_focus_pause() -> void:
+	if !pause.visible: return
+	
+	match focus_no[D_ONE]:
+		1: pause_back.grab_focus()
+		2: pause_saves.grab_focus()
+		3: pause_settings.grab_focus()
+		4: pause_main.grab_focus()
 
 func left_mouse_drag() -> void: if stats_scroll == null: left.drag_started.disconnect(left_mouse_drag); set_stats()
 func right_mouse_drag() -> void: if priorities_scroll == null: right.drag_started.disconnect(right_mouse_drag); set_priorities()
@@ -647,3 +714,41 @@ func drag_specific(panel: int) -> void:
 		LEFT: left.offset = L_OFF; left_mouse_drag()
 		RIGHT: right.offset = R_OFF; right_mouse_drag()
 	panel_open = panel
+
+var settings_controls_opened: bool
+
+func _input(event: InputEvent) -> void:
+	print("DV: ", event.device, " : ")
+	
+	settings.input_device_type(event)
+	if HUD.level != null: HUD.level.input_skip(event)
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.is_released():
+		trades.reset_holder()
+	if settings_controls_opened:
+		settings.input_settings(event)
+	if HUD.level == null:
+		menu_interaction(event)
+	else:
+		adversary.input_actions(event)
+
+func horizontal_scroll(left_panel: bool) -> int:
+	if left_panel:
+		return 800
+	return 0
+
+func vertical_scroll(top_panel: bool) -> int:
+	if top_panel:
+		return 800
+	return 0
+
+func menu_interaction(_event: InputEvent) -> void:
+	if HUD.side_panel != 0:
+		if Input.is_key_pressed(KEY_PAGEDOWN): HUD.scroll_controls(true)
+		elif Input.is_key_pressed(KEY_PAGEUP): HUD.scroll_controls(false)
+	if Input.is_action_pressed(&"group"):
+		if Input.is_action_just_pressed(&"left"): HUD.left.split_offset = horizontal_scroll(true)
+		elif Input.is_action_just_pressed(&"right"): HUD.right.split_offset = horizontal_scroll(false)
+		elif Input.is_action_just_pressed(&"forward"): HUD.top.split_offset = vertical_scroll(true)
+		elif Input.is_action_just_pressed(&"backward"): HUD.bottom.split_offset = vertical_scroll(false)
+	elif Input.is_action_just_pressed(&"act3"):
+		pass

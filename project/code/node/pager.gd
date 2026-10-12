@@ -92,11 +92,3 @@ func _on_scrolled(n: int) -> void:
 		timer.start()
 	else:
 		scroll_to()
-
-func _input(_event: InputEvent) -> void:
-	if Input.is_key_pressed(KEY_PAGEDOWN):
-		var state: bool = is_bottom()
-		if state: bar.value = bar.max_value
-		set_dialog_cursor(state and dialog_cursor < (LABELS - 1), +1, +30)
-	elif Input.is_key_pressed(KEY_PAGEUP):
-		set_dialog_cursor(dialog_cursor > 0 and (block_cursor <= 0 or is_bottom()), -1, -30)

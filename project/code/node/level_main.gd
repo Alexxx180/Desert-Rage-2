@@ -15,7 +15,7 @@ var found: int = 255
 var temp: Tween = null
 var is_start: bool = false
 
-func _input(event: InputEvent) -> void:
+func input_skip(event: InputEvent) -> void:
 	if temp == null: return
 	if (event is InputEventJoypadButton or event is InputEventKey
 		or event is InputEventMouseButton) and event.pressed:

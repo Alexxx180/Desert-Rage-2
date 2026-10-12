@@ -96,7 +96,7 @@ func open_door(id: int) -> bool:
 enum { NO_ITEM, ITEM_USED, ITEM_THROW, WEAPON_THROW }
 
 func produce_item(bag: int, slot: int) -> int:
-	var item: int = HUD.get_item(HUD.hero, slot)
+	var item: int = HUD.get_item(bag, slot)
 	if item == 0: return NO_ITEM
 	
 	var id: int = Def.byte(item, ID)
@@ -112,13 +112,13 @@ func produce_item(bag: int, slot: int) -> int:
 			WATER:
 				used = put_item(bag, JAR)
 				if used:
-					HUD.level.aura.add_points(HUD.hero, aura[id - USE])
-					HUD.level.aura.add_resource(HUD.hero, resc[id - USE])
-			TEA: used = put_item(bag, JAR); if used: HUD.level.aura.add_points(HUD.hero, aura[id - USE])
-			ETHER: used = put_item(bag, JAR); if used: HUD.level.aura.add_resource(HUD.hero, resc[id - USE])
+					HUD.level.aura.add_points(bag, aura[id - USE])
+					HUD.level.aura.add_resource(bag, resc[id - USE])
+			TEA: used = put_item(bag, JAR); if used: HUD.level.aura.add_points(bag, aura[id - USE])
+			ETHER: used = put_item(bag, JAR); if used: HUD.level.aura.add_resource(bag, resc[id - USE])
 			ANTIDOTE: used = put_item(bag, JAR); if used: HUD.adversary.nullify(Adversary.POISON)
 			ANTICOUGH: used = put_item(bag, JAR); if used: HUD.adversary.nullify(Adversary.COUGH)
-			STICKS: used = true; distract(HUD.hero)
+			STICKS: used = true; distract(bag)
 	if used:
 		var count: int = Def.byte(item, X) - 1
 		item = 0 if count == 0 else id << Def.BYTE | count
@@ -132,21 +132,10 @@ func update_ui(logic: Node, preview: Node, slots: Array) -> void:
 	if preview.slots(logic, slots):
 		ui.product(logic.item(preview.cells.craft_id))
 
-func select_exact(slot: int, shift: bool) -> void:
-	if shift:
-		slot = posmod(fast_panel[HUD.hero] + slot, FAST_PANEL)
-
-	if _fast_panel.is_valid(): _fast_panel.kill()
-	for i in _get_ui(HUD.hero): i.items[fast_panel[HUD.hero]].bar.back.hide()
-	fast_panel[HUD.hero] = slot
-	for i in _get_ui(HUD.hero): i.items[fast_panel[HUD.hero]].bar.back.show()
-	HUD.game.fast_panel.modulate = Color.WHITE
-	HUD.item_select.start()
-
-func fast_panel_cost() -> int:
-	match Def.byte(HUD.get_item(HUD.hero, fast_panel[HUD.hero]), ID):
-		SHOTGUN: return int(HUD.get_stat(HUD.RESOURCE, HUD.hero) * cost[SHOTGUN_COST])
-	return HUD.get_stat(HUD.RESOURCE, HUD.hero)
+func fast_panel_cost(hero: int) -> int:
+	match Def.byte(HUD.get_item(hero, fast_panel[hero]), ID):
+		SHOTGUN: return int(HUD.get_stat(HUD.RESOURCE, hero) * cost[SHOTGUN_COST])
+	return HUD.get_stat(HUD.RESOURCE, hero)
 
 func update_inventory(bag: int) -> void:
 	for slot in range(24, -1, -1):
@@ -201,7 +190,7 @@ func put_item(bag: int, id: int) -> bool:
 		HUD.timing.add_log(BUSY)
 		return false # add logs message
 	
-	var item: int = HUD.get_item(HUD.hero, slot)
+	var item: int = HUD.get_item(bag, slot)
 	var count: int = Def.byte(item, X)
 	show_item(bag, slot, id, count, count + 1)
 	HUD.set_item(bag, slot, id << Def.BYTE | count + 1)
@@ -220,7 +209,7 @@ func show_item(bag: int, slot: int, id: int, previous: int, count: int) -> void:
 func craft_item(bag: int, slot: int) -> void:
 	var item: int = HUD.get_item(bag, slot)
 	if product_id == -1 or item != 0: return
-	var id_a: int = Def.byte(crafting[bag * CRAFTING + CRAFT_ID], HUD.hero); var slot_a: int = -1
+	var id_a: int = Def.byte(crafting[bag * CRAFTING + CRAFT_ID], bag); var slot_a: int = -1
 	var id_b: int = Def.byte(crafting[bag * CRAFTING + CRAFT_SLOT], X); var slot_b: int = -1
 	for s in range(0, SLOTS):
 		var i: int = HUD.get_item(bag, s)
@@ -277,7 +266,7 @@ func craft_product(bag: int, slot: int) -> void:
 		if count < min_count: min_count = count
 	for i in range(0, limit):
 		var s: int = _craft(next[CRAFT_SLOT], i)
-		var item: Vector2i = bag_slot(HUD.get_item(bag, s))
+		var item: Vector2i = Def.short_of(HUD.get_item(bag, s))
 		show_item(bag, s, item[ID], item[X], item[X] - min_count)
 		HUD.set_item(bag, s, item[ID] << Def.BYTE | item[X] - min_count)
 		for ui in _get_ui(bag): ui.slots[s].show()
@@ -346,17 +335,9 @@ func add_slot(bag: int, slot: int) -> void:
 				return
 		# toggle red
 
-func bag_slot(item: int) -> Vector2i:
-	return Vector2i(Def.byte(item, ID), Def.byte(item, X))
-
 func _slot(bag: int) -> Vector2i: return bag * CRAFTING * Vector2i.ONE + Vector2i(CRAFT_ID, CRAFT_SLOT)
 
-func _bag(type: int) -> int: return HUD.hero * CRAFTING + type
-
-func _input(e: InputEvent) -> void:
-	if (e is InputEventMouseButton and (e.button_index == MOUSE_BUTTON_LEFT) and e.is_released()):
-		reset_texture(_image)
-
+func reset_holder() -> void: reset_texture(_image)
 func reset_texture(image: TextureRect) -> void:
 	if holder != null:
 		image.texture = holder
@@ -374,38 +355,38 @@ func set_preview(cell: Control) -> Control:
 	cell.image.texture = null
 	return cell
 
-func set_marker(before: int, after: int) -> void:
-	HUD.main_items[HUD.hero][before].remove_child(HUD.markers[HUD.hero])
-	HUD.main_items[HUD.hero][after].add_child(HUD.markers[HUD.hero])
+func set_marker(hero: int, before: int, after: int) -> void:
+	HUD.main_items[hero][before].remove_child(HUD.markers[hero])
+	HUD.main_items[hero][after].add_child(HUD.markers[hero])
 
-func fast_panel_swap(offset: int) -> void:
-	var before: int = HUD.inventory.fast_panel[HUD.hero]
+func fast_panel_swap(hero: int, offset: int) -> void:
+	var before: int = fast_panel[hero]
 	var result: int = before + offset
 	if result > FAST_MAX:
-		HUD.inventory.fast_panel[HUD.hero] = 0
+		fast_panel[hero] = 0
 	elif result < 0:
-		HUD.inventory.fast_panel[HUD.hero] = FAST_MAX - 1
+		fast_panel[hero] = FAST_MAX - 1
 	else:
 		var target: Vector2i = Vector2i(0, -1) if offset < 0 else Vector2i(FAST_MAX - 1, FAST_MAX)
-		for i in range(HUD.inventory.fast_panel[HUD.hero] + offset, target.y, offset):
-			if i == target.x or HUD.get_item(HUD.hero, i) != 0:
-				HUD.inventory.fast_panel[HUD.hero] = i
+		for i in range(fast_panel[hero] + offset, target.y, offset):
+			if i == target.x or HUD.get_item(hero, i) != 0:
+				fast_panel[hero] = i
 				if HUD.inventory_scroll != null:
-					set_marker(before, i)
+					set_marker(hero, before, i)
 				break
 
-func fast_panel_select(slot: int) -> void:
-	var before: int = fast_panel[HUD.hero]
+func fast_panel_select(hero: int, slot: int) -> void:
+	var before: int = fast_panel[hero]
 	if slot == before: return
 	elif slot == FAST_MAX:
-		fast_panel[HUD.hero] = slot; return
+		fast_panel[hero] = slot; return
 	var result: int = 0
 	for i in range(0, FAST_MAX):
-		if HUD.get_item(HUD.hero, slot) != 0:
+		if HUD.get_item(hero, slot) != 0:
 			result += 1; continue
 		if result == slot:
 			result = i; break
 	if result == slot:
-		fast_panel[HUD.hero] = result
+		fast_panel[hero] = result
 		if HUD.inventory_scroll != null:
-			set_marker(before, result)
+			set_marker(hero, before, result)

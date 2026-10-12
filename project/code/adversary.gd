@@ -197,7 +197,7 @@ enum { TARGET, ZONE_RADIUS, TARGET_RADIUS, ZONE_ALL,
 	HALF_TILE = 32, TILE = 64, DISTANCE = 1024, RADIUS_DISTANCE = 4096 }
 enum { VOID, LIGHT, NORMAL, FIRE, WATER, SPARK }
 
-var directed: PackedVector2Array = []
+var directed: PackedVector2Array = [Vector2.ZERO, Vector2.ZERO]
 
 func damage_zone(type: int, hero: int, element: int, combo: int, portion: float, output: float = 0) -> void:
 	match type:
@@ -364,7 +364,7 @@ func _press(title: StringName) -> bool: return Input.is_action_just_pressed(titl
 func _hold(title: StringName) -> bool: return Input.is_action_pressed(title)
 func _out(title: StringName) -> bool: return Input.is_action_just_released(title)
 func _power(title: StringName) -> float: return Input.get_action_strength(title)
-func act(no: int) -> bool: return combo_slots & acts[no]
+func act(no: int) -> bool: return combo_slots[HUD.hero] & acts[no]
 
 enum { LEFT, RIGHT, UP, DOWN, ACT1, ACT2, ACT3, ACT4, OPT_LEFT, OPT_RIGHT, OPT_UP,
 	OPT_DOWN, SHOT, AIM, MENU }
@@ -377,7 +377,7 @@ enum { A, B, X, Y, S, L = 8, T = 16, M = 24, R = 32, H = 40 }
 var acts: PackedInt32Array = [A<<L|A, B<<L|A<<L|A, A<<T|Y<<L|A, A<<T|B<<L|A,
 	B<<T|B<<L|A, B<<T|X<<L|B, B<<T|A<<L|B, B<<M|A<<T|A<<L|B, A<<M|Y<<T|A<<L|Y]
 # var hero: int enum { RAY, ROCK } enum { TOOL, FIGHT, DANCE }
-var combo_slots: int
+var combo_slots: PackedInt32Array = [0, 0]
 var caption: PackedStringArray = ["Двоечка"]
 var combo_color: PackedStringArray = ["[color=#00AA00]2x[/color]", "[color=#FFAA00]3x[/color]", "[color=#FFAA00]4x[/color]"]
 var logs_cache: PackedStringArray = ["", "", "", "", "", "", ""]
@@ -392,7 +392,7 @@ func book(no: int, pursuit: int = 0, control: int = 0) -> bool:
 
 func act_enter() -> void: HUD.level.tile[Def.offset(HUD.hero, Def.LEVER)] = Def.join(HUD.level.border.local_to_map(HUD.level.entity[HUD.hero].position))
 func act_exit() -> void: HUD.level.tile[Def.offset(HUD.hero, Def.LEVER)] = 0
-func reset_combo() -> void: combo_slots = 0
+func reset_combo() -> void: combo_slots[HUD.hero] = 0
 
 func add_logs(log_text: String) -> void:
 	if HUD.game.logs.modulate == Color.TRANSPARENT:
@@ -409,46 +409,8 @@ func add_logs(log_text: String) -> void:
 func add_log(text: String) -> void: HUD.game.log.text = text
 
 func fight(combo_no: int, id: int, zone: int, element: int, portion: float, output: float) -> void:
-	add_logs(combo_color[combo_slots - 2] + caption[id])
+	add_logs(combo_color[combo_slots[HUD.hero] - 2] + caption[id])
 	damage_zone(zone, HUD.hero, element, combo_no, portion, output)
-
-func horizontal_scroll(left_panel: bool) -> int:
-	if left_panel:
-		return 800
-	return 0
-
-func vertical_scroll(top_panel: bool) -> int:
-	if top_panel:
-		return 800
-	return 0
-
-func menu_interaction() -> void:
-	if HUD.side_panel != 0:
-		if Input.is_key_pressed(KEY_PAGEDOWN):
-			HUD.scroll_controls(true)
-		elif Input.is_key_pressed(KEY_PAGEUP):
-			HUD.scroll_controls(false)
-	if _hold(&"group"):
-		if _press(&"left"):
-			HUD.left.split_offset = horizontal_scroll(true)
-		elif _press(&"right"):
-			HUD.right.split_offset = horizontal_scroll(false)
-		elif _press(&"forward"):
-			HUD.top.split_offset = vertical_scroll(true)
-		elif _press(&"backward"):
-			HUD.bottom.split_offset = vertical_scroll(false)
-	elif _press(&"left"):
-		pass
-	elif _press(&"right"):
-		pass
-	elif _press(&"forward"):
-		pass
-	elif _press(&"backward"):
-		pass
-	elif _press(&"action"):
-		pass
-	elif _press(&"act3"):
-		pass
 
 func update_ui():
 	pass
@@ -464,8 +426,9 @@ func open_menu_panel() -> void:
 			HUD.game.get(menu_navigation[(menu_select << 1)]).split_offset = menu_shift[menu_select] >> 1
 		else:
 			HUD.game.get(menu_navigation[(menu_select << 1)]).split_offset = menu_shift[menu_select]
-			HUD.game.get(menu_navigation[(menu_select << 1) + 1]).grab_focus()
+			HUD.game.get(menu_navigation[(menu_select << 1) + 1]).grab_focus() # TODO FIXME ALLOW COOP
 	else:
+		read_mode = false
 		HUD.game.no_focus.grab_focus()
 
 const menu_navigation: Array[StringName] = [
@@ -480,44 +443,37 @@ var menu_select: int = 0
 var stated: bool = false
 var read_mode: bool = false
 
-func input(event: InputEvent) -> void: # return #TODO FIXME disable after HUD test
-	if HUD.level == null:
-		menu_interaction()
-		return
-	HUD.interact.movement(_hold(&"act1"))
+func input_actions(event: InputEvent) -> void: # return #TODO FIXME disable after HUD test
+	var key2: bool = HUD.settings.key2()
+	HUD.action.movement(event, key2)
 	if _hold(&"group"):
-		read_mode = false
-		if _hold(&"left"):
-			menu_select = PANEL_LEFT
-			read_mode = _hold(&"forward") or _hold(&"backward")
-		elif _hold(&"right"):
-			menu_select = PANEL_RIGHT
-			read_mode = _hold(&"forward") or _hold(&"backward")
+		if _hold(&"left"): menu_select = PANEL_LEFT; read_mode = _hold(&"forward") or _hold(&"backward")
+		elif _hold(&"right"): menu_select = PANEL_RIGHT; read_mode = _hold(&"forward") or _hold(&"backward")
 		elif _press(&"forward"): menu_select = PANEL_FORWARD
 		elif _press(&"backward"): menu_select = PANEL_BACKWARD
 	elif _out(&"group"): open_menu_panel()
 	elif _press(&"select"):
-		if HUD.interact.state[HUD.hero] == 0:
+		if HUD.action.state[HUD.hero] == 0:
 			HUD.level.deploy.select()
-	elif _press(&"act1"): punch()
-	elif _press(&"act2"): kick()
-	elif _press(&"act3"): skill_a()
-	elif _press(&"act4"): skill_b()
-	elif _hold(&"aim"):
-		if _press(&"fire"): use_item()
-		elif _press(&"item_left"): HUD.fast_panel_swap(-1)
-		elif _press(&"item_right"): HUD.fast_panel_swap(+1)
-	elif _press(&"item_left"): pass # left_pattern
-	elif _press(&"item_right"): pass # right_pattern
+	elif _press(&"act1"): punch(HUD.settings.get_hero(event))
+	elif key2 and _press(&"act1_2"): punch(HUD.settings.key_hero())
+	elif _press(&"act2"): kick(HUD.settings.get_hero(event))
+	elif key2 and _press(&"act2_2"): kick(HUD.settings.key_hero())
+	elif _press(&"act3"): skill_a(HUD.settings.get_hero(event))
+	elif key2 and _press(&"act3_2"): skill_a(HUD.settings.key_hero())
+	elif _press(&"act4"): skill_b(HUD.settings.get_hero(event))
+	elif key2 and _press(&"act4_2"): skill_b(HUD.settings.key_hero())
+	elif _press(&"fire"): use_item()
+	elif _hold(&"aim"): pass # TODO AIM
+	elif _out(&"aim"): pass # TODO RUN
+	elif _press(&"item_left"): HUD.fast_panel_swap(HUD.settings.get_hero(event), -1)
+	elif _press(&"item_right"): HUD.fast_panel_swap(HUD.settings.get_hero(event), +1)
 	elif event is InputEventKey:
 		var no: int = event.keycode - KEY_1
 		if no >= 0 and no <= 4:
-			if Input.is_key_pressed(KEY_TAB):
-				HUD.pallete_pattern_select(no)
-			else:
-				HUD.fast_panel_select(no)
-		elif no == 5 and Input.is_key_pressed(KEY_TAB):
-			HUD.pallete_pattern_fight()
+			HUD.inventory.fast_panel_select(HUD.settings.get_hero(event), no)
+		elif no >= 5 and no <= 9:
+			HUD.inventory.fast_panel_select(HUD.settings.get_hero(event) ^ 1, no)
 
 func main_slot(weapon_type: int) -> bool:
 	var i: int = Def.byte(HUD.get_item(HUD.hero, HUD.inventory.fast_panel[HUD.hero]), Trades.ID) - Trades.WEAPON
@@ -544,8 +500,11 @@ func empty_hand_kick() -> void:
 	else:
 		HUD.adversary.damage_zone(HUD.hero, Adversary.TARGET, Adversary.NORMAL, 1, 1.0, 0.1)
 
-func punch(_pallete: bool = false) -> void:
-	combo_slots = combo_slots << Def.HALF_BYTE | A
+func new_slot(h: int, type: int) -> void:
+	combo_slots[h] = combo_slots[h] << Def.HALF_BYTE | type
+
+func punch(h: int) -> void:
+	new_slot(h, A)
 	match HUD.hero:
 		Def.RAY:
 			empty_hand_punch()
@@ -558,8 +517,8 @@ func punch(_pallete: bool = false) -> void:
 				empty_hand_punch()
 	HUD.combo_timer.start()
 
-func kick() -> void:
-	combo_slots = combo_slots << Def.HALF_BYTE | B
+func kick(h: int) -> void:
+	new_slot(h, B)
 	match HUD.hero:
 		Def.RAY:
 			empty_hand_kick()
@@ -572,19 +531,19 @@ func kick() -> void:
 	#if HUD.level.tile[HUD.hero] == Def.H_SPRING_OFF: TODO CHANGE TO ROPE
 	#	HUD.level.chains.jump()
 
-func skill_a() -> void:
-	combo_slots = combo_slots << Def.HALF_BYTE | X
+func skill_a(h: int) -> void:
+	new_slot(h, X)
 	if act(GRILL_KICK):
 		pass
 	elif act(CRACK) and book(B_CRACK, P_CRACK, C_CRACK):
 		fight(3, CRACK, Adversary.TARGET, Adversary.NORMAL, 1.2, 0.5)
 
 	match HUD.hero:
-		Def.RAY: HUD.interact.melt_ice()
-		Def.ROCK: HUD.interact.puddle_tile() # LevelRoot # TileDecorator
+		Def.RAY: HUD.action.melt_ice()
+		Def.ROCK: HUD.action.puddle_tile() # LevelRoot # TileDecorator
 
-func skill_b() -> void:
-	combo_slots = combo_slots << Def.HALF_BYTE | Y
+func skill_b(h: int) -> void:
+	new_slot(h, Y)
 	if act(POACHING):
 		pass
 	elif act(HUG):
@@ -624,38 +583,33 @@ var sprites: PackedStringArray = ["b", "f", "bl", "fl", "l", "br", "fr", "r",
 	"b_c_whip", "f_c_whip", "bl_c_whip", "fl_c_whip", "l_c_whip", "br_c_whip", "fr_c_whip", "r_c_whip"]
 
 func get_anim(hero: int) -> int: return (frames[hero] << DIRECTED) | Def.direct(directed[hero]) # if Bit.of(state[BODY], RUN):
-func direct(dir: Vector2i) -> void: directed[HUD.hero] = dir
-func animate_frames(type: int) -> void:
-	# state[BODY] = Def.to0(state[BODY], RUN)
-	frames[HUD.hero] = type
-	HUD.level.profile[HUD.hero].sprite.animation = sprites[get_anim(HUD.hero)]
+func direct(h: int, dir: Vector2) -> void: directed[h] = dir
+func animate_frames(h: int, type: int) -> void: frames[h] = type; HUD.level.profile[h].animation = sprites[get_anim(h)]
+func stop_animation(h: int) -> void:
+	HUD.level.profile[h].stop()
+	HUD.level.profile[h].animation = sprites[get_anim(h)]
+	HUD.level.profile[h].frame = 0
 
-func stop_animation() -> void:
-	HUD.level.profile[HUD.hero].sprite.stop()
-	HUD.level.profile[HUD.hero].sprite.animation = sprites[get_anim(HUD.hero)]
-	HUD.level.profile[HUD.hero].sprite.frame = 0
+func animate(h: int) -> void:# motion: Vector2
+	var anim: int = get_anim(h)
+	HUD.level.profile[h].animation = sprites[anim]
+	if not HUD.level.profile[h].is_playing():
+		HUD.level.profile[h].play(sprites[anim])
 
-func animate() -> void:# motion: Vector2
-	var anim: int = get_anim(HUD.hero)
-	HUD.level.profile[HUD.hero].sprite.animation = sprites[anim]
-	if not HUD.level.profile[HUD.hero].sprite.is_playing():
-		HUD.level.profile[HUD.hero].sprite.play(sprites[anim])
-	return
-
-func mirror_animation() -> void:
-	var animation: String = HUD.level.profile[HUD.hero].animation
+func mirror_animation(h: int) -> void:
+	var animation: String = HUD.level.profile[h].animation
 	if animation.contains("forward"): animation = animation.replace("forward", "backward")
 	elif animation.contains("backward"): animation = animation.replace("backward", "forward")
-	HUD.level.mirror[HUD.hero].animation = animation
+	HUD.level.mirror[h].animation = animation
 
-func mirror_frame() -> void:
-	HUD.level.mirror[HUD.hero].frame = HUD.level.profile[HUD.hero].frame
+func mirror_frame(h: int) -> void:
+	HUD.level.mirror[h].frame = HUD.level.profile[h].frame
 
 enum { SHADOW_GROUND, SHADOW_HANG, SHADOW_FLY }
 
-func set_shadow(next: int) -> void:
-	HUD.level.shadow[HUD.hero].visible = next != SHADOW_FLY
-	HUD.level.shadow[HUD.hero].position = Vector2(0, 27) if next == SHADOW_HANG else Vector2(0, -5)
+func set_shadow(h: int, next: int) -> void:
+	HUD.level.shadow[h].visible = next != SHADOW_FLY
+	HUD.level.shadow[h].position = Vector2(0, 27) if next == SHADOW_HANG else Vector2(0, -5)
 
 func get_mirror_sprite(view: CharacterBody2D, path: StringName, mirror: AnimatedSprite2D) -> AnimatedSprite2D:
 	if mirror != null: return mirror
@@ -666,13 +620,13 @@ func get_mirror_sprite(view: CharacterBody2D, path: StringName, mirror: Animated
 	view.profile.frame_changed.connect(mirror_frame)
 	return mirror
 
-func set_aura(thickness: float, next_color: Color, resource: bool) -> void: # MOVE & CONNECT TO LINK
+func set_aura(h: int, thickness: float, next_color: Color, resource: bool) -> void: # MOVE & CONNECT TO LINK
 	if resource:
-		HUD.level.profile[HUD.hero].material.set(&"shader_parameter/ability", thickness == 0)
-		HUD.level.profile[HUD.hero].material.set(&"shader_parameter/ap", thickness)
+		HUD.level.profile[h].material.set(&"shader_parameter/ability", thickness == 0)
+		HUD.level.profile[h].material.set(&"shader_parameter/ap", thickness)
 	else: #Color("FFFFFF7F"), 3
-		HUD.level.profile[HUD.hero].material.set(&"shader_parameter/line_thickness", thickness)
-		HUD.level.profile[HUD.hero].material.set(&"shader_parameter/line_color", next_color)
+		HUD.level.profile[h].material.set(&"shader_parameter/line_thickness", thickness)
+		HUD.level.profile[h].material.set(&"shader_parameter/line_color", next_color)
 # PARTICLES
 enum { PUNCH, KICK, TORCH, DROP, APPEAR = 0, TIME, DISAPPEAR, OFFSET = 10, PATH = 100 }
 
@@ -717,15 +671,6 @@ func set_track(target: Vector2) -> void:
 	tween.parallel().tween_property(self, ^"position", target, timing[TIME])
 	tween.tween_property(self, ^"modulate", Color.TRANSPARENT, timing[APPEAR])
 	tween.tween_callback(sprite.queue_free)
-
-func set_interaction(hero: CharacterBody2D, no: int) -> void:
-	hero.set_meta(&"no", no) # animation.timeout.connect(stop_animation)
-	HUD.level.plate[no] = hero.get_node(^"plate")
-	HUD.level.plate[no].body_entered.connect(HUD.level.plate_encounter)
-	HUD.level.plate[no].body_exited.connect(HUD.level.plate_disappear)
-	HUD.level.lever[no] = hero.get_node(^"lever")
-	HUD.level.lever[no].body_entered.connect(HUD.level.lever_encounter)
-	HUD.level.lever[no].body_exited.connect(HUD.level.lever_disappear)
 
 func set_monitoring(no: int, value: bool) -> void:
 	HUD.level.lever[no].monitoring = value
