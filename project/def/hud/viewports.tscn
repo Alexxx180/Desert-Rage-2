@@ -1,6 +1,11 @@
 [gd_scene format=3 uid="uid://bihlol1aq8js4"]
 
 [node name="viewports" type="GridContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_constants/h_separation = 0
 theme_override_constants/v_separation = 0
 columns = 2
@@ -10,8 +15,9 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="view" type="SubViewport" parent="ray"]
+[node name="port" type="SubViewport" parent="ray"]
 handle_input_locally = false
+size = Vector2i(512, 612)
 render_target_update_mode = 4
 
 [node name="rock" type="SubViewportContainer" parent="."]
@@ -19,6 +25,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="view" type="SubViewport" parent="rock"]
+[node name="port" type="SubViewport" parent="rock"]
 handle_input_locally = false
+size = Vector2i(512, 612)
 render_target_update_mode = 4

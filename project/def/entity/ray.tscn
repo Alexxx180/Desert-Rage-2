@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://wbjmq3n817nk"]
+[gd_scene load_steps=8 format=3 uid="uid://wbjmq3n817nk"]
 
 [ext_resource type="PackedScene" uid="uid://bbnm1qcgqxkpw" path="res://def/entity/hero_shadow.tscn" id="1_3pymr"]
 [ext_resource type="PackedScene" uid="uid://vjv7m7itof23" path="res://def/entity/ray_profile.tscn" id="2_v5auy"]
+[ext_resource type="PackedScene" uid="uid://d3tjn0p2bhxu4" path="res://def/entity/hero_out.tscn" id="6_n72vk"]
 [ext_resource type="PackedScene" uid="uid://btwmaeieil84m" path="res://def/entity/hero_lever.tscn" id="95_3pymr"]
 [ext_resource type="PackedScene" uid="uid://c5lqpjtw10vs1" path="res://def/entity/hero_hitbox.tscn" id="95_irkms"]
 [ext_resource type="PackedScene" uid="uid://cya0xfjy6s4p8" path="res://def/entity/hero_plate.tscn" id="96_irkms"]
@@ -9,6 +10,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_umkci"]
 
 [node name="ray" type="CharacterBody2D" groups=["player"]]
+collision_layer = 3
 motion_mode = 1
 metadata/_edit_vertical_guides_ = [-304.0]
 
@@ -33,6 +35,10 @@ position = Vector2(0, 4)
 [node name="lever" parent="." instance=ExtResource("95_3pymr")]
 
 [node name="plate" parent="." instance=ExtResource("96_irkms")]
+
+[node name="out" parent="." instance=ExtResource("6_n72vk")]
+position = Vector2(0, -11)
+rect = Rect2(-25, -101, 50, 111)
 
 [node name="animation" type="Timer" parent="."]
 wait_time = 0.25

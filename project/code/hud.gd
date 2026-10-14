@@ -44,7 +44,7 @@ func set_item(bag: int, slot: int, item: int) -> void:
 @onready var ui: Window = get_window()
 var dialog_timer: Timer = Timer.new(); var station_timer: Timer = Timer.new()
 var debug_timer: Timer; var chats_timer: Timer; var notes_timer: Timer
-var combo_timer: Timer = Timer.new()
+var combo_timer: Timer = Timer.new(); var size_timer: Timer = Timer.new()
 var allow_coop: bool = true
 
 var fire: GPUParticles2D; var rain: GPUParticles2D
@@ -56,6 +56,11 @@ func _ready() -> void:
 	trades = Trades.new()
 	station_timer.timeout.connect(action.enter_cooldown)
 	dialog_timer.timeout.connect(timeout_talk)
+	size_timer.timeout.connect(on_size_changed)
+	size_timer.wait_time = 0.15
+	size_timer.one_shot = true
+	ui.size_changed.connect(size_timer.start)
+	add_child(size_timer)
 
 func next_hero() -> int: return HUD.hero ^ 1
 
@@ -714,6 +719,45 @@ func drag_specific(panel: int) -> void:
 		LEFT: left.offset = L_OFF; left_mouse_drag()
 		RIGHT: right.offset = R_OFF; right_mouse_drag()
 	panel_open = panel
+
+var coop_viewports: GridContainer
+var ray_port: SubViewport; var ray_view: SubViewportContainer
+var rock_port: SubViewport; var rock_view: SubViewportContainer
+
+func reparent_coop() -> void:
+	HUD.level.map.reparent(ray_port)
+	HUD.level.reparent(ray_port)
+	HUD.level.camera.reparent(rock_port)
+	HUD.level.remotes[Def.ROCK].remote_path = HUD.level.camera.get_path()
+	HUD.level.remotes[Def.RAY].remote_path = HUD.level.get_path()
+
+func on_size_changed() -> void:
+	set_ports_size(ui.size)
+	var shape: RectangleShape2D = HUD.level.out_shape.shape
+	shape.size = ui.size
+	
+func set_ports_size(_size: Vector2) -> void:
+	if coop_viewports.columns == 2:
+		ray_port.size = Vector2(int(_size.x) >> 1, _size.y)
+		rock_port.size = Vector2(int(_size.x) >> 1, _size.y)
+	else:
+		if rock_view.visible:
+			ray_port.size = Vector2(_size.x, int(_size.y) >> 1)
+			rock_port.size = Vector2(_size.x, int(_size.y) >> 1)
+		else:
+			ray_port.size = _size
+
+func coop_control() -> void:
+	if coop_viewports != null: return
+	coop_viewports = load(&"res://def/hud/viewports.tscn").instantiate()
+	ray_view = coop_viewports.get_node(^"ray")
+	rock_view = coop_viewports.get_node(^"rock")
+	ray_port = ray_view.get_node(^"port")
+	rock_port = rock_view.get_node(^"port")
+	rock_port.world_2d = ray_port.world_2d
+	set_ports_size(ui.size)
+	add_child(coop_viewports)
+	call_deferred(&"reparent_coop")
 
 var settings_controls_opened: bool
 
