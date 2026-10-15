@@ -6,6 +6,7 @@ const data: String = "PFB"
 
 var tile: PackedInt32Array = [0, 0, 0, 0, 0]
 
+func nan_tile(saved: PackedInt32Array, from: int) -> void: for i in range(0, 5): saved[from * TILE_DATA + i] = 0
 func get_tile(saved: PackedInt32Array, from: int) -> void: for i in range(0, 5): saved[from * TILE_DATA + i] = tile[i]
 func set_tile(saved: PackedInt32Array, from: int) -> TileDecorator:
 	for i in range(0, 5): tile[i] = saved[from * TILE_DATA + i]

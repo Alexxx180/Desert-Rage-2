@@ -68,7 +68,7 @@ var fast_panel: PackedByteArray = [0, 0]
 var product_id: int = -1
 
 var distraction: PackedInt32Array = [0, 0]
-var _fast_panel: Tween
+# var _fast_panel: Tween
 var icon: CompressedTexture2DArray
 
 enum { SINGLE, HALF, FULL } # CRAFT

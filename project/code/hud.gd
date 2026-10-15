@@ -22,6 +22,12 @@ enum { CURRENTS, PLATFORMS, PLACES }
 var size: PackedByteArray = [0, 0, 0]
 var hero: int = 0
 
+func load_session() -> void:
+	# loading file...
+	session = [0, 0, 0, 0, 0,  0, 0, 0, 0, 0,  0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0,  0, 0, 0, 0, 0,  0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0,  0, 0, 0, 0, 0,  0, 0, 0, 0, 0]
+
 func check(type: int) -> int: return session[type]
 func unlock(type: int, slot: int) -> void: session[type] = Def.t1(session[type], slot)
 
@@ -60,7 +66,10 @@ func _ready() -> void:
 	size_timer.wait_time = 0.15
 	size_timer.one_shot = true
 	ui.size_changed.connect(size_timer.start)
+	load_session()
 	add_child(size_timer)
+	for timer in [dialog_timer, combo_timer, station_timer]:
+		size_timer.add_child(timer)
 
 func next_hero() -> int: return HUD.hero ^ 1
 
@@ -726,10 +735,10 @@ var rock_port: SubViewport; var rock_view: SubViewportContainer
 
 func reparent_coop() -> void:
 	HUD.level.map.reparent(ray_port)
-	HUD.level.reparent(ray_port)
-	HUD.level.camera.reparent(rock_port)
-	HUD.level.remotes[Def.ROCK].remote_path = HUD.level.camera.get_path()
-	HUD.level.remotes[Def.RAY].remote_path = HUD.level.get_path()
+	HUD.level.camera[Def.RAY].reparent(ray_port)
+	HUD.level.camera[Def.ROCK].reparent(rock_port)
+	HUD.level.remotes[Def.ROCK].remote_path = HUD.level.camera[Def.ROCK].get_path()
+	HUD.level.remotes[Def.RAY].remote_path = HUD.level.camera[Def.RAY].get_path()
 
 func on_size_changed() -> void:
 	set_ports_size(ui.size)

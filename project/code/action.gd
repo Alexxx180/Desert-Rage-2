@@ -127,27 +127,50 @@ func toggle_stuck(next: bool) -> void:
 	HUD.level.entity[HUD.hero].plate_body.set_deferred(&"disabled", not next)
 	toggle_collision(next)
 
-func ledge_jump(h: int, pos: Vector2, height: int = 0) -> void:
-	var d: Vector2 = directed[h].round()
-	if d == Vector2.ZERO: return
-	
-	var dir: Vector2 = Vector2.ONE * 128 * (Vector2(0, directed[h].y)
-		if directed[h].x != 0 and directed[h].y != 0 else directed[h]) ; on_tile(pos)
-	var f1: int = HUD.level.border.extract(TileDecorator.FLOOR) + height
-	var t: PackedInt32Array = on_tile(pos + dir).duplicate()
-	var f2: int = HUD.level.border.extract(TileDecorator.FLOOR)
-	var jumped: bool = false
-	var no: int = -1
+func box_jump(t: PackedInt32Array, f1: int, f2: int) -> int:
 	for i in range(0, len(HUD.level.boxes)):
 		var c: int = on_tile(HUD.level.boxes[i].position)[COORDS]
-		jumped = c == t[COORDS] and (f1 == (f2 + box_height[i])) 
-		if jumped: no = i; break
+		if c == t[COORDS] and (f1 == (f2 + box_height[i])): return i
+	return -1
+
+func jump_animate(h: int, slot: int) -> void:
+	HUD.sprite.frame = slot
+	HUD.level.entity[h].shadow.scale = slot * position[SHADOW] * position[PORTION][JUMP]
+
+func stop_jump(h: int, pos: Vector2) -> void:
+	var hero: CharacterBody2D = HUD.level.entity[h]
+	hero.make_velocity(Vector2.ZERO)
+	HUD.adversary.animate_frames(h, HUD.WALK)
+	if hero.box == -1:
+		hero.reparent(HUD.level, true)
+		if not _of(JUMPED):
+			hero.lever.position = Vector2.ZERO
+			toggle_stuck(true)
+	hero.position = pos
+	HUD.sprite.stop()
+	_t0(JUMPING)
+
+func set_to() -> void:
+	pass
+
+func get_jump_length(h: int) -> Vector2:
+	var dir: Vector2 = directed[h] * 128
+	if dir.x != 0 and dir.y != 0: dir.x = 0
+	return dir
+
+func ledge_jump(h: int, pos: Vector2, height: int = 0) -> void:
+	var dir: Vector2 = get_jump_length(h); if dir.round() == Vector2.ZERO: return
+	on_tile(pos)
+	var f1: int = HUD.level.border.extract(TileDecorator.FLOOR) + height; var t: PackedInt32Array = on_tile(pos + dir).duplicate()
+	var f2: int = HUD.level.border.extract(TileDecorator.FLOOR)
+	var no: int = box_jump(t, f1, f2); var jumped: bool = no != -1
 	if jumped:
 		pos = position[HEIGHT]
 	elif f1 == f2:
 		pos = HUD.level.border.map_to_local(Def.map(t[COORDS]))
 		jumped = t[ID] == LOGIC and t[ATLAS] in stand
-		if jumped: off = Vector2(0, 18) ; pos -= off
+		if jumped:
+			off = Vector2(0, 18); pos -= off
 		elif t[ID] == FLOOR and t[TYPE] == FLOORS:
 			pos -= off; off = Vector2.ZERO
 			jumped = t[ATLAS] == LEDGE
@@ -156,30 +179,17 @@ func ledge_jump(h: int, pos: Vector2, height: int = 0) -> void:
 	
 	Def.b(hero_state, HUD.hero, JUMPED, jumped)
 	toggle_stuck(false)
-	var hero: CharacterBody2D = HUD.level.entity[h]
-	if no != -1: hero.call_deferred(&"reparent", HUD.level.boxes[no], true)
+	if no != -1: HUD.level.entity[h].call_deferred(&"reparent", HUD.level.boxes[no], true)
 	
-	HUD.adversary.direct(h, d)
+	HUD.adversary.direct(h, directed[h])
 	HUD.adversary.animate_frames(h, HUD.JUMP)
 	_t1(JUMPING)
-	hero.make_velocity(directed[h] * Vector2.ONE * JUMP_POWER)
+	HUD.level.entity[h].make_velocity(directed[h] * Vector2.ONE * JUMP_POWER)
 	var jumping: Tween = HUD.create_tween()
-	jumping.tween_method(func(slot):
-		HUD.sprite.frame = slot
-		hero.shadow.scale = slot * position[SHADOW] * position[PORTION][JUMP],
+	jumping.tween_method(func(slot): jump_animate(h, slot),
 		0, COUNT, position[PORTION][DURATION]).set_trans(Tween.TRANS_LINEAR)
-	jumping.tween_callback(func():
-		hero.make_velocity(Vector2.ZERO)
-		HUD.adversary.animate_frames(h, HUD.WALK)
-		if hero.box == -1:
-			hero.reparent(HUD.level, true)
-			if not _of(JUMPED):
-				hero.lever.position = Vector2.ZERO
-				toggle_stuck(true)
-		hero.position = pos
-		HUD.sprite.stop()
-		_t0(JUMPING))
-	hero.box = no
+	jumping.tween_callback(func(): stop_jump(h, pos))
+	HUD.level.entity[h].box = no
 
 func box_move() -> void:
 	pass

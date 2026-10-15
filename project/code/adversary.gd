@@ -471,9 +471,9 @@ func input_actions(event: InputEvent) -> void: # return #TODO FIXME disable afte
 	elif event is InputEventKey:
 		var no: int = event.keycode - KEY_1
 		if no >= 0 and no <= 4:
-			HUD.inventory.fast_panel_select(HUD.settings.get_hero(event), no)
+			HUD.trades.fast_panel_select(HUD.settings.get_hero(event), no)
 		elif no >= 5 and no <= 9:
-			HUD.inventory.fast_panel_select(HUD.settings.get_hero(event) ^ 1, no)
+			HUD.trades.fast_panel_select(HUD.settings.get_hero(event) ^ 1, no)
 
 func main_slot(weapon_type: int) -> bool:
 	var i: int = Def.byte(HUD.get_item(HUD.hero, HUD.inventory.fast_panel[HUD.hero]), Trades.ID) - Trades.WEAPON
@@ -566,25 +566,42 @@ func use_item() -> void:
 ## ANIMATION
 
 enum { POWER, INFLUENCE, VITALITY, REACTION, SPEED = 4, DOUBLE_COMBO = 2 } # signal sync_anim(animation: String, frame: int)
-
-enum { WALK, RUN, JUMP, A_KICK, A_PUNCH, PUSH, A_FIRE, WHIP, STOMP, MOVE, DIRECTED = 3 }
-
+enum {
+	WALK, RUN, JUMP, PUSH, STOMP,
+	
+	A_PUNCH, A_KICK, A_FIRE, WHIP,
+	
+	MOVE, DIRECTED = 3,
+	
+	NO_ANIM = 0, A_ENV = 0, A_ACT, A_REACT
+}
+var state_sprites: PackedByteArray = [0, 0, 0,  0, 0, 0]
 var frames: PackedByteArray = [0, 0]
-var sprites: PackedStringArray = ["b", "f", "bl", "fl", "l", "br", "fr", "r",
-	"b_run", "f_run", "bl_run", "fl_run", "l_run", "br_run", "fr_run", "r_run",
-	"b_jump", "f_jump", "bl_jump", "fl_jump", "l_jump", "br_jump", "fr_jump", "r_jump",
-	"b_kick", "f_kick", "bl_kick", "fl_kick", "l_kick", "br_kick", "fr_kick", "r_kick",
-	"b_punch", "f_punch", "bl_punch", "fl_punch", "l_punch", "br_punch", "fr_punch", "r_punch",
-	"b_push", "f_push", "bl_push", "fl_push", "l_push", "br_push", "fr_push", "r_push",
-	"b_fire", "f_fire", "bl_fire", "fl_fire", "l_fire", "br_fire", "fr_fire", "r_fire",
-	"b_whip", "f_whip", "bl_whip", "fl_whip", "l_whip", "br_whip", "fr_whip", "r_whip",
-	"b_stomp", "f_stomp", "bl_stomp", "fl_stomp", "l_stomp", "br_stomp", "fr_stomp", "r_stomp",
-	"b_c_move", "f_c_move", "bl_c_move", "fl_c_move", "l_c_move", "br_c_move", "fr_c_move", "r_c_move",
-	"b_c_whip", "f_c_whip", "bl_c_whip", "fl_c_whip", "l_c_whip", "br_c_whip", "fr_c_whip", "r_c_whip"]
+var sprite_dir: PackedStringArray = ["bo", "fo", "bl", "fl", "ol", "br", "fr", "or"]
+var sprites: PackedStringArray = ["_run", "_jump", "_kick", "_punch", "_push",
+	"_fire", "_whip", "_stomp", "c_move", "c_whip"]
 
-func get_anim(hero: int) -> int: return (frames[hero] << DIRECTED) | Def.direct(directed[hero]) # if Bit.of(state[BODY], RUN):
+func get_anim(hero: int) -> int:
+	sprites[(frames[hero] << DIRECTED) | Def.direct(directed[hero])]
+	
+	return  # if Bit.of(state[BODY], RUN):
 func direct(h: int, dir: Vector2) -> void: directed[h] = dir
-func animate_frames(h: int, type: int) -> void: frames[h] = type; HUD.level.profile[h].animation = sprites[get_anim(h)]
+func animate_frames(h: int, type: int) -> void:
+	if state_sprites[A_REACT] != NO_ANIM: # state_sprites
+		
+	elif state_sprites[A_ACT] != NO_ANIM:
+		
+	elif state_sprites[A_ENV] != NO_ANIM:
+		
+	if type == WALK:
+		pass
+	elif type == RUN:
+		pass
+	frames[h] = type
+	HUD.level.profile[h].animation = sprites[get_anim(h)]
+
+# immediate - continuous - hurt
+
 func stop_animation(h: int) -> void:
 	HUD.level.profile[h].stop()
 	HUD.level.profile[h].animation = sprites[get_anim(h)]
