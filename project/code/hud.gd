@@ -51,7 +51,8 @@ func set_item(bag: int, slot: int, item: int) -> void:
 var dialog_timer: Timer = Timer.new(); var station_timer: Timer = Timer.new()
 var debug_timer: Timer; var chats_timer: Timer; var notes_timer: Timer
 var combo_timer: Timer = Timer.new(); var size_timer: Timer = Timer.new()
-var allow_coop: bool = true
+var anim_timer: Timer = Timer.new()
+var allow_coop: bool = false
 
 var fire: GPUParticles2D; var rain: GPUParticles2D
 
@@ -65,10 +66,13 @@ func _ready() -> void:
 	size_timer.timeout.connect(on_size_changed)
 	size_timer.wait_time = 0.15
 	size_timer.one_shot = true
+	anim_timer.timeout.connect(adversary.progress_animation)
+	anim_timer.wait_time = 0.05
+	anim_timer.autostart = true
 	ui.size_changed.connect(size_timer.start)
 	load_session()
 	add_child(size_timer)
-	for timer in [dialog_timer, combo_timer, station_timer]:
+	for timer in [dialog_timer, combo_timer, station_timer, anim_timer]:
 		size_timer.add_child(timer)
 
 func next_hero() -> int: return HUD.hero ^ 1
@@ -771,7 +775,7 @@ func coop_control() -> void:
 var settings_controls_opened: bool
 
 func _input(event: InputEvent) -> void:
-	print("DV: ", event.device, " : ")
+	# print("DV: ", event.device, " : ")
 	
 	settings.input_device_type(event)
 	if HUD.level != null: HUD.level.input_skip(event)

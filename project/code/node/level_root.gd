@@ -64,8 +64,10 @@ func bind_remotes() -> void:
 	ready_to_process = true
 	bind_remote(Def.ROCK, camera[Def.ROCK])
 
-func enter_group_view(_b: Node2D) -> void: if _b.is_in_group(&"player"): on_camera += 1; update_group_view()
-func exit_group_view(_b: Node2D) -> void: if _b.is_in_group(&"player"): on_camera -= 1; update_group_view()
+func enter_group_view(_b: Node2D) -> void: if _b.is_in_group(&"player"):
+	if on_camera < 2:
+		on_camera += 1; update_group_view()
+func exit_group_view(_b: Node2D) -> void: if _b.is_in_group(&"player") and HUD.allow_coop: on_camera -= 1; update_group_view()
 func update_group_view() -> void:
 	if on_camera >= 2:
 		HUD.coop_viewports.columns = 1

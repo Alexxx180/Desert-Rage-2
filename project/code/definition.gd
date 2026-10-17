@@ -31,7 +31,9 @@ const y_direction: PackedByteArray = [2, 0, 1]
 const rotation: PackedByteArray = [135, 0, -135, -45, -90, 135, 45, 90]
 
 static func rotate(dir: Vector2i) -> int: return rotation[direct(dir)]
-static func direct(dir: Vector2i) -> int: return x_direction[dir.x] + y_direction[dir.y] # x_direction[dir.x]
+static func direct(dir: Vector2i) -> int:
+	print("R: ", dir)
+	return x_direction[dir.x] + y_direction[dir.y] # x_direction[dir.x]
 static func offset(hero: int, no: int = 0) -> int: return hero * OFFSET + no
 
 static func y(field: int, off: int = LEVEL) -> int: return field >> off

@@ -211,9 +211,9 @@ func damage_zone(type: int, hero: int, element: int, combo: int, portion: float,
 			if start == Def.PARTY and xp != 0:
 				score_up(xp * combo)
 		TARGET:
-			damage_output(HALF_TILE * directed[hero], DISTANCE, hero, element, combo, portion, output)
+			damage_output(HALF_TILE * HUD.action.directed[hero], DISTANCE, hero, element, combo, portion, output)
 		TARGET_RADIUS:
-			damage_output(TILE * directed[hero], RADIUS_DISTANCE, hero, element, combo, portion, output)
+			damage_output(TILE * HUD.action.directed[hero], RADIUS_DISTANCE, hero, element, combo, portion, output)
 		ZONE_RADIUS:
 			damage_output(Vector2.ZERO, RADIUS_DISTANCE, hero, element, combo, portion, output)
 	
@@ -224,7 +224,7 @@ func damage_output(direction: Vector2, distance: int, hero: int, element: int, c
 	for i in range(start, entities):
 		if hero != i and (pos + direction).distance_squared_to(pos) < distance:
 			damage(hero, i, element, portion)
-			HUD.level.entity[i].velocity += directed[hero] * TILE * output
+			HUD.level.entity[i].velocity += HUD.action.directed[hero] * TILE * output
 			xp += exper[i]
 	if start == Def.PARTY and xp != 0:
 		score_up(xp * combo)
@@ -567,74 +567,62 @@ func use_item() -> void:
 
 enum { POWER, INFLUENCE, VITALITY, REACTION, SPEED = 4, DOUBLE_COMBO = 2 } # signal sync_anim(animation: String, frame: int)
 enum {
-	WALK, RUN, JUMP, PUSH, STOMP,
+	IDLE, WALK, RUN, PUSH, STOMP,
 	
-	A_PUNCH, A_KICK, A_FIRE, WHIP,
+	A_PUNCH, A_KICK, A_FIRE, WHIP, JUMP, HURT,
 	
 	MOVE, DIRECTED = 3,
 	
-	NO_ANIM = 0, A_ENV = 0, A_ACT, A_REACT
+	NO_ANIM = 0, A_ENV = 1, A_ACT
 }
-var state_sprites: PackedByteArray = [0, 0, 0,  0, 0, 0]
-var frames: PackedByteArray = [0, 0]
+var max_slot: PackedByteArray = [0, 12, 12, 12]
+var frames: PackedByteArray = [0, 0, 0,  0, 0, 0]
 var sprite_dir: PackedStringArray = ["bo", "fo", "bl", "fl", "ol", "br", "fr", "or"]
-var sprites: PackedStringArray = ["_run", "_jump", "_kick", "_punch", "_push",
-	"_fire", "_whip", "_stomp", "c_move", "c_whip"]
+var sprites: PackedStringArray = ["", "", "_run", "_jump", "_push", "_stomp",
+	"_punch", "_kick",  "_fire", "_whip", "c_move", "c_whip"] # _walk
 
-func get_anim(hero: int) -> int:
-	sprites[(frames[hero] << DIRECTED) | Def.direct(directed[hero])]
-	
-	return  # if Bit.of(state[BODY], RUN):
-func direct(h: int, dir: Vector2) -> void: directed[h] = dir
-func animate_frames(h: int, type: int) -> void:
-	if state_sprites[A_REACT] != NO_ANIM: # state_sprites
-		
-	elif state_sprites[A_ACT] != NO_ANIM:
-		
-	elif state_sprites[A_ENV] != NO_ANIM:
-		
-	if type == WALK:
-		pass
-	elif type == RUN:
-		pass
-	frames[h] = type
-	HUD.level.profile[h].animation = sprites[get_anim(h)]
+func get_anim(h: int) -> int: return h + (A_ACT if frames[A_ACT + h] != NO_ANIM else A_ENV)
+func set_anim(h: int, type: int) -> void:
+	#if HUD.action.directed[h] == Vector2.ZERO: return
+	var anim: String = sprite_dir[Def.direct(HUD.action.directed_nzero[h].round())]; var hero: int = h * 3
+	if A_PUNCH <= type and type <= HURT:
+		frames[hero + A_ACT] = type; anim += sprites[frames[get_anim(hero)]]
+	else:
+		frames[hero + A_ENV] = type; anim += sprites[type]
+	mirror_animation(h, anim)
 
-# immediate - continuous - hurt
-
-func stop_animation(h: int) -> void:
-	HUD.level.profile[h].stop()
-	HUD.level.profile[h].animation = sprites[get_anim(h)]
-	HUD.level.profile[h].frame = 0
-
-func animate(h: int) -> void:# motion: Vector2
-	var anim: int = get_anim(h)
-	HUD.level.profile[h].animation = sprites[anim]
-	if not HUD.level.profile[h].is_playing():
-		HUD.level.profile[h].play(sprites[anim])
-
-func mirror_animation(h: int) -> void:
-	var animation: String = HUD.level.profile[h].animation
-	if animation.contains("forward"): animation = animation.replace("forward", "backward")
-	elif animation.contains("backward"): animation = animation.replace("backward", "forward")
+func progress_animation() -> void:
+	for h in range(0, Def.PARTY):
+		var hero: int = h * 3
+		if frames[hero + A_ACT] == JUMP:
+			if frames[hero] >= max_slot[JUMP]:
+				HUD.action.stop_jump(h); set_anim(h, NO_ANIM) # pos
+			else:
+				HUD.action.jump_animate(h, frames[hero])
+				frames[hero] += 1
+		else:
+			frames[hero] += 1
+			if frames[hero] >= max_slot[frames[hero + A_ENV]]: frames[hero] = 0
+		HUD.level.profile[h].frame = frames[hero]
+		HUD.level.mirror[h].frame = frames[hero]
+# immediate - continuous
+func mirror_animation(h: int, animation: String) -> void:
+	HUD.level.profile[h].animation = animation
+	if animation[0] == "f": animation = "b" + animation.substr(1)
+	elif animation[0] == "b": animation = "f" + animation.substr(1)
 	HUD.level.mirror[h].animation = animation
-
-func mirror_frame(h: int) -> void:
-	HUD.level.mirror[h].frame = HUD.level.profile[h].frame
-
-enum { SHADOW_GROUND, SHADOW_HANG, SHADOW_FLY }
 
 func set_shadow(h: int, next: int) -> void:
 	HUD.level.shadow[h].visible = next != SHADOW_FLY
 	HUD.level.shadow[h].position = Vector2(0, 27) if next == SHADOW_HANG else Vector2(0, -5)
 
+enum { SHADOW_GROUND, SHADOW_HANG, SHADOW_FLY }
+
 func get_mirror_sprite(view: CharacterBody2D, path: StringName, mirror: AnimatedSprite2D) -> AnimatedSprite2D:
 	if mirror != null: return mirror
 	mirror = load(path).instantiate()
 	view.set(&"_mirror", mirror)
-	view.shadow.add_sibling(mirror)
-	view.profile.animation_changed.connect(mirror_animation)
-	view.profile.frame_changed.connect(mirror_frame)
+	view.shadow.add_sibling(mirror) #view.profile.animation_changed.connect(mirror_animation) #view.profile.frame_changed.connect(mirror_frame)
 	return mirror
 
 func set_aura(h: int, thickness: float, next_color: Color, resource: bool) -> void: # MOVE & CONNECT TO LINK
