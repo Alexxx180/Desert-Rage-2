@@ -36,6 +36,8 @@ var out_shape: CollisionShape2D; var out_zone: Area2D
 var lever_tile: PackedInt32Array = [0, 0, 0, 0, 0,  0, 0, 0, 0, 0]
 var plate_tile: PackedInt32Array = [0, 0, 0, 0, 0,  0, 0, 0, 0, 0]
 
+var boxes_tile: PackedInt32Array = [0, 0, 0, 0, 0,  0, 0, 0, 0, 0,  0, 0, 0, 0, 0,  0, 0, 0, 0, 0]
+
 func input_skip(_event: InputEvent) -> void:
 	pass
 

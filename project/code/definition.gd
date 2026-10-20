@@ -2,9 +2,12 @@ class_name Def
 
 enum { N = -1, HERO, DEPLOYED = 0, NO = 0, PLATE = 0,
 	OVERWORLD = 1,  LEVER = 1, STATUS = 1, CASUAL = 2, OFFSET = 2,  LAYER, LEVEL = 14,
-	DEPLOY_DELTA = 4096, JUMP_POWER = 200000, MOVE = 11, GRAVITY = 700000 } # 550
-enum { DEAD, OPEN_MENU = 0, FREEZE, TRANSIT = 1, BOX, ACTING, JUMP, FALL, CAMERA, GRAB } # status
-enum { PARTY = 2, RAY = 0, ROCK, EYE_SEEKER } # enemy name
+	DEPLOY_DELTA = 4096, JUMP_POWER = 200000, MOVE = 8, GRAVITY = 700000,
+	
+	DEAD = 0, OPEN_MENU = 0, FREEZE, TRANSIT = 1, BOX, ACTING, JUMP, FALL, CAMERA, GRAB, # status
+	
+	PARTY = 2, RAY = 0, ROCK, EYE_SEEKER # enemy name
+} # 550 # MOVE = 11
 
 const manual: PackedByteArray = [1, 3, 7, 10, 20, 21] ## Hints count shown
 const levels: PackedByteArray = [1, 7, 9, 13, 25, 26] ## Level number

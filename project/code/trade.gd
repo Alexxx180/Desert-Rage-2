@@ -85,13 +85,13 @@ func distract(bag: int) -> void: # LevelRoot
 
 func near_water() -> bool:
 	var tile: PackedInt32Array = HUD.level.tile_near()
-	return tile[HUD.ID] == HUD.ENTRY and tile[HUD.ATLAS] == HUD.D_WATER
+	return tile[Action.ID] == HUD.ENTRY and tile[Action.ATLAS] == HUD.D_WATER
 
 func open_door(id: int) -> bool:
 	var tile: PackedInt32Array = HUD.level.tile_near()
-	if tile[HUD.ID] != HUD.LOGIC: return false
-	if id == SECRET_KEY: return tile[HUD.ATLAS] == HUD.GOLD_OFF
-	return tile[HUD.ATLAS] == HUD.GOLD_OFF #FIX ME TO DOOR
+	if tile[Action.ID] != HUD.LOGIC: return false
+	if id == SECRET_KEY: return tile[Action.ATLAS] == Action.GOLD_OFF
+	return tile[Action.ATLAS] == Action.GOLD_OFF #FIX ME TO DOOR
 
 enum { NO_ITEM, ITEM_USED, ITEM_THROW, WEAPON_THROW }
 

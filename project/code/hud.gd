@@ -67,7 +67,7 @@ func _ready() -> void:
 	size_timer.wait_time = 0.15
 	size_timer.one_shot = true
 	anim_timer.timeout.connect(adversary.progress_animation)
-	anim_timer.wait_time = 0.05
+	anim_timer.wait_time = 0.035
 	anim_timer.autostart = true
 	ui.size_changed.connect(size_timer.start)
 	load_session()

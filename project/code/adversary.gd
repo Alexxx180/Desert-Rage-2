@@ -443,6 +443,7 @@ var menu_select: int = 0
 var stated: bool = false
 var read_mode: bool = false
 
+func reset_running(event: InputEvent) -> void: HUD.adversary.running = Def.t0(HUD.adversary.running, HUD.settings.get_hero(event))
 func input_actions(event: InputEvent) -> void: # return #TODO FIXME disable after HUD test
 	var key2: bool = HUD.settings.key2()
 	HUD.action.movement(event, key2)
@@ -455,17 +456,19 @@ func input_actions(event: InputEvent) -> void: # return #TODO FIXME disable afte
 	elif _press(&"select"):
 		if HUD.action.state[HUD.hero] == 0:
 			HUD.level.deploy.select()
-	elif _press(&"act1"): punch(HUD.settings.get_hero(event))
+	elif _press(&"act1"): punch(HUD.settings.get_hero(event)); reset_running(event)
 	elif key2 and _press(&"act1_2"): punch(HUD.settings.key_hero())
-	elif _press(&"act2"): kick(HUD.settings.get_hero(event))
+	elif _press(&"act2"): kick(HUD.settings.get_hero(event)); reset_running(event)
 	elif key2 and _press(&"act2_2"): kick(HUD.settings.key_hero())
-	elif _press(&"act3"): skill_a(HUD.settings.get_hero(event))
+	elif _press(&"act3"): skill_a(HUD.settings.get_hero(event)); reset_running(event)
 	elif key2 and _press(&"act3_2"): skill_a(HUD.settings.key_hero())
-	elif _press(&"act4"): skill_b(HUD.settings.get_hero(event))
+	elif _press(&"act4"): skill_b(HUD.settings.get_hero(event)); reset_running(event)
 	elif key2 and _press(&"act4_2"): skill_b(HUD.settings.key_hero())
 	elif _press(&"fire"): use_item()
 	elif _hold(&"aim"): pass # TODO AIM
-	elif _out(&"aim"): pass # TODO RUN
+	elif _out(&"aim"):
+		HUD.adversary.running = Def.t1(HUD.adversary.running, HUD.settings.get_hero(event))
+		pass # TODO RUN
 	elif _press(&"item_left"): HUD.fast_panel_swap(HUD.settings.get_hero(event), -1)
 	elif _press(&"item_right"): HUD.fast_panel_swap(HUD.settings.get_hero(event), +1)
 	elif event is InputEventKey:
@@ -575,11 +578,12 @@ enum {
 	
 	NO_ANIM = 0, A_ENV = 1, A_ACT
 }
-var max_slot: PackedByteArray = [0, 12, 12, 12]
+var max_slot: PackedByteArray = [0, 24, 12, 12]
 var frames: PackedByteArray = [0, 0, 0,  0, 0, 0]
 var sprite_dir: PackedStringArray = ["bo", "fo", "bl", "fl", "ol", "br", "fr", "or"]
 var sprites: PackedStringArray = ["", "", "_run", "_jump", "_push", "_stomp",
 	"_punch", "_kick",  "_fire", "_whip", "c_move", "c_whip"] # _walk
+var running: int
 
 func get_anim(h: int) -> int: return h + (A_ACT if frames[A_ACT + h] != NO_ANIM else A_ENV)
 func set_anim(h: int, type: int) -> void:

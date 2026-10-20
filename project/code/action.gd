@@ -87,15 +87,19 @@ func move_hero(h: int, act: bool, in_place: bool) -> void:
 			var box: AnimatableBody2D = HUD.level.boxes[hero.box]
 			ledge_jump(h, box.position, box_height[hero.box])
 	else:
-		var motion: Vector2 = directed[h] * Def.MOVE
-		velocity[h] = motion
-		#print("v: ", velocity[h], " - h: ", h)
+		if Def.of(HUD.adversary.running, h):
+			velocity[h] = directed[h] * (Def.MOVE << 1)
+		else:
+			velocity[h] = directed[h] * Def.MOVE
 		if not in_place and not act:
 			HUD.level.lever[h].position = position[CLOSE] * directed[h]
 	if in_place:
 		HUD.adversary.set_anim(h, Adversary.IDLE)
 	else:
-		HUD.adversary.set_anim(h, Adversary.WALK)
+		if Def.of(HUD.adversary.running, h):
+			HUD.adversary.set_anim(h, Adversary.RUN)
+		else:
+			HUD.adversary.set_anim(h, Adversary.WALK)
 	
 	#if in_place:
 	#	HUD.adversary.stop_animation(h)
@@ -210,39 +214,6 @@ func ledge_jump(h: int, pos: Vector2, height: int = 0) -> void:
 
 func box_move() -> void:
 	pass
-
-func trigger_disappear(body: Variant) -> void:
-	var hero: CharacterBody2D = HUD.level.entity[HUD.hero]
-	if body is AnimatableBody2D and body.is_in_group(&"box"):
-		for i in range(0, len(hero.boxes)):
-			if hero.boxes[i] == body.get_meta(&"no"):
-				hero.weight *= box_weight[i]
-				pushes(i, Vector2.ZERO)
-				box_hero[i] = 0
-				break
-
-func trigger_encounter(body: Variant) -> void:
-	var hero: CharacterBody2D = HUD.level.entity[HUD.hero]
-	if body is AnimatableBody2D and body.is_in_group(&"box"):
-		var no: int = -1
-		for i in range(0, len(HUD.level.boxes)):
-			if body.get_instance_id() == HUD.level.boxes[i].get_instance_id():
-				no = i
-				break
-		if no == -1: return
-		hero.boxes.append(no)
-		var a: int = int(box_weight[no])
-		var to: float = weight_d[a]
-		print("WEIGHT: ", hero.weight, " - TO: ", to, " - A: ", a)
-		hero.weight *= to
-		return
-	var pos: Vector2 = hero.position
-	var id: int = on_tile(pos)[ID]
-	if (id == FLOOR and _tile[TYPE] == FLOORS) or (id == LOGIC and _tile[ATLAS] in stand):
-		ledge_jump(HUD.hero, pos)
-	elif on_tile(hero.position + hero.lever.position)[ID] == LOGIC and _tile[ATLAS] in [SMALL_BOX, LARGE_BOX]:
-		add_box(_tile[ATLAS], HUD.level.border.position())
-		HUD.level.border.atlas(GROUND).id(FLOOR).type(FLOORS).paint_alt() # coords(Def.GROUND)
 
 # TODO BOOKS
 var chest_pos: Vector2 = Vector2.ZERO
@@ -392,11 +363,39 @@ func get_cluster(section: int, coords: int) -> int:
 enum { ACT, SPARK, FIRE, PRESS }
 
 var walk_no: int = -1
+var hero_box: PackedByteArray = [0, 0]
+var hero_weight: PackedFloat32Array = [1, 1]
 
-func lever_inner_ray(border: Node2D) -> void: if border is TileDecorator: border.get_tile(HUD.level.lever_tile, Def.RAY)
-func lever_outer_ray(border: Node2D) -> void: if border is TileDecorator: border.nan_tile(HUD.level.lever_tile, Def.RAY)
-func lever_inner_rock(border: Node2D) -> void: if border is TileDecorator: border.get_tile(HUD.level.lever_tile, Def.ROCK)
-func lever_outer_rock(border: Node2D) -> void: if border is TileDecorator: border.nan_tile(HUD.level.lever_tile, Def.ROCK)
+func lever_outer(body: Node2D, h: int) -> void:
+	var hero: CharacterBody2D = HUD.level.entity[h]
+	if body is AnimatableBody2D and body.is_in_group(&"box"):
+		for i in range(0, len(hero.boxes)):
+			if hero.boxes[i] == body.get_meta(&"no"):
+				hero.weight *= box_weight[i]
+				pushes(i, Vector2.ZERO)
+				box_hero[i] = 0
+				break
+	elif body is TileDecorator:
+		body.nan_tile(HUD.level.lever_tile, h)
+
+func lever_inner(body: Node2D, h: int) -> void:
+	var hero: CharacterBody2D = HUD.level.entity[h]
+	if body is AnimatableBody2D and body.is_in_group(&"box"):
+		var no: int = body.get_meta(&"no"); hero_box[h] = no
+		print("WEIGHT: ", hero_weight[h], " - TO: ", weight_d[int(box_weight[no])])
+		hero_weight[h] *= weight_d[int(box_weight[no])]
+	elif body is TileDecorator:
+		body.get_tile(HUD.level.lever_tile, h)
+		var pos: Vector2 = hero.position; var id: int = on_tile(pos)[ID]
+		if (id == FLOOR and _tile[TYPE] == FLOORS) or (id == LOGIC and _tile[ATLAS] in stand):
+			ledge_jump(HUD.hero, pos)
+		elif on_tile(hero.position + hero.lever.position)[ID] == LOGIC and _tile[ATLAS] in [SMALL_BOX, LARGE_BOX]:
+			add_box(_tile[ATLAS], HUD.level.border.position())
+
+func lever_outer_ray(border: Node2D) -> void: lever_outer(border, Def.RAY)
+func lever_outer_rock(border: Node2D) -> void: lever_outer(border, Def.ROCK)
+func lever_inner_ray(border: Node2D) -> void: lever_inner(border, Def.RAY)
+func lever_inner_rock(border: Node2D) -> void: lever_inner(border, Def.ROCK)
 func lever_apply(hero: int, type: int) -> void:
 	var atlas: int = HUD.level.lever_tile[hero * TileDecorator.TILE_DATA + ATLAS]
 	if atlas == 0: return
@@ -435,7 +434,7 @@ func plate_outer(hero: int, border: TileDecorator) -> void:
 		HUD.log_help_hide()
 		walk_no = -1
 
-	match HUD.level.press_tile[TileDecorator.TILE_DATA * hero + HUD.ATLAS]:
+	match HUD.level.press_tile[TileDecorator.TILE_DATA * hero + ATLAS]:
 		LEFT_CHAIN: chain_enter(hero, 0, 1)
 		RIGHT_CHAIN: chain_enter(hero, 0, 1)
 		H_SPRING_OFF: pass
@@ -515,17 +514,14 @@ func add_box(box_type: int, pos: Vector2) -> void:
 		LARGE_BOX: set_box(load(&"res://def/entity/platform/box_large.tscn"), [2, 4])
 		FIRE_BOX: set_box(load(&"res://def/entity/platform/box_fire.tscn"), [0, 2])
 	print("LEVEL: ", SMALL_BOX, " - B: ", box_type)
-	var box: AnimatableBody2D = HUD.level.boxes[no]
+	var box: AnimatableBody2D = HUD.level.boxes[no]; box.set_meta(&"no", no)
+	box.name = str(box.name, '_', no); box.position = pos + Vector2(0, 28)
 	HUD.level.call_deferred(&"add_child", box)
-	box.set_meta(&"no", no)
-	box.position = pos + Vector2(0, 28)
-	box.name = str(box.name, '_', no)
 	var see: Area2D = box.get_node(^"press")
-	see.body_entered.connect(encounter)
-	see.body_exited.connect(diverge)
-	var fov: VisibleOnScreenNotifier2D = box.get_node(^"fov")
-	fov.screen_entered.connect(box.show)
-	fov.screen_exited.connect(box.hide)
+	see.body_entered.connect(func(b: Node2D): plate_inner_box(b, no))
+	see.body_exited.connect(func(b: Node2D): plate_outer_box(b, no))
+	var fov: VisibleOnScreenNotifier2D = box.get_node(^"fov"); fov.screen_entered.connect(box.show); fov.screen_exited.connect(box.hide)
+	HUD.level.border.atlas(GROUND).id(FLOOR).type(FLOORS).paint_alt() # coords(Def.GROUND)
 #"""
 func throw(box: int, motion: Vector2i) -> void: velocity[box] = motion # * POWER
 func pushes(box: int, motion: Vector2) -> void: velocity[box] = motion * weight_d[box_weight[box]]
@@ -533,8 +529,16 @@ func pushes(box: int, motion: Vector2) -> void: velocity[box] = motion * weight_
 func fixate_box(hero: int, box: int, _add: int) -> void:
 	hero_state[hero] = Def.t1(hero_state[hero], box)
 
-func encounter() -> void: pass
-func diverge() -> void: pass
+func plate_inner_box(border: Node2D, no: int) -> void:
+	border.pos(HUD.level.boxes[no].position).id().atlas().type(PUDDLE_OFF).get_tile(HUD.level.boxes_tile, no)
+	if border.tile[ATLAS] == PLATE_OFF or border.tile[ATLAS] == PLATE_ON:
+		switch_cluster(BUTTON, true)
+
+func plate_outer_box(border: Node2D, no: int) -> void:
+	match HUD.level.boxes_tile[TileDecorator.TILE_DATA * no + ATLAS]:
+		PLATE_OFF, PLATE_ON:
+			switch_cluster(BUTTON, true)
+	border.nan_tile(HUD.level.boxes_tile, no)
 
 var press: PackedByteArray = [0, 0]
 var press_coords: PackedInt32Array = [0, 0]
