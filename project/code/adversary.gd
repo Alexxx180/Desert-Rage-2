@@ -55,14 +55,14 @@ func status_drawback() -> void:
 	status_process = !status_process
 	if !status_process: return
 
-	var party: int = entities + Def.PARTY
+	var party: int = entities + D.PARTY
 	for i in range(len(HUD.level.entity_status), party): # if party > len(HUD.level.entity_status):
 		HUD.level.entity_status.append([null, null, null, null])
 
 	for e in range(0, len(HUD.level.entity)):
 		for i in range(0, 4):
-			var s: int = e - Def.PARTY; var p: int = HUD.STATUS + e
-			var status: Vector2i = Def.byte_of(HUD.get_part(p, i) if e < Def.PARTY else enemy_status[s])
+			var s: int = e - D.PARTY; var p: int = HUD.STATUS + e
+			var status: Vector2i = D.byte_of(HUD.get_part(p, i) if e < D.PARTY else enemy_status[s])
 			if status[STATUS_TIME] == 0: continue
 
 			status[STATUS_TIME] -= 1
@@ -73,28 +73,28 @@ func status_drawback() -> void:
 				HUD.level.entity_status[e][i].position = Vector2(STATUS_X * status[STATUS_TIME], STATUS_Y * i)
 				status_feedback(4, e, status_time[i], status_type[i])
 
-			var result: int = status[STATUS_TYPE] << Def.HALF_BYTE | status[STATUS_TIME]
-			if p < Def.PARTY:
+			var result: int = status[STATUS_TYPE] << D.HALF_BYTE | status[STATUS_TIME]
+			if p < D.PARTY:
 				HUD.set_part(p, i, result)
 			else:
-				enemy_status[s] = Def.to_byte(enemy_status[s], i, result)
+				enemy_status[s] = D.to_byte(enemy_status[s], i, result)
 
 func status_feedback(limit: int, enemy: int, time: int, status: int) -> int:
 	for j in range(0, limit):
-		var t: int = Def.half(time, j)
+		var t: int = D.half(time, j)
 		if t != 0:
-			match Def.half(status, j):
+			match D.half(status, j):
 				BURN: affect(enemy, -min(1, aura[enemy] >> s_power[BURN]), 0)
 				POISON: affect(enemy, -min(1, aura[enemy] >> s_power[POISON]), 0)
 			if status_tick:
 				t -= 1
-				time = Def.to_half(time, j, t)
+				time = D.to_half(time, j, t)
 	return time
 
 func status_timeout() -> void:
 	var off: bool = true
 	status_tick = !status_tick
-	for i in range(0, Def.PARTY):
+	for i in range(0, D.PARTY):
 		var time: int = HUD.get_half(HUD.STATUS_TIME, i)
 		if time != 0:
 			off = false
@@ -102,7 +102,7 @@ func status_timeout() -> void:
 	for i in range(0, len(status_time)):
 		if status_time[i] != 0:
 			off = false
-			status_time[i] = status_feedback(2, i + Def.PARTY, status_time[i], status_type[i])
+			status_time[i] = status_feedback(2, i + D.PARTY, status_time[i], status_type[i])
 	if off: HUD.aura_timer.stop()
 
 var aura_colors: PackedFloat32Array = [1.0 / (BLUE - GREEN), 1.0 / (GREEN - YELLOW), 1.0 / (YELLOW - RED)]
@@ -125,10 +125,10 @@ func affect(hero: int, a: int, r: int) -> void:
 			var segment: float = a_portion[hero]
 			var h: int = hero
 			var stat: int
-			if hero < Def.PARTY:
+			if hero < D.PARTY:
 				stat = HUD.get_stat(HUD.AURA, hero)
 			else:
-				h -= Def.PARTY
+				h -= D.PARTY
 				stat = a_points[h]
 			if target_a[hero] < stat:
 				segment = (target_a[hero] + value * (stat - target_a[hero])) * segment
@@ -137,7 +137,7 @@ func affect(hero: int, a: int, r: int) -> void:
 			HUD.level.entity[hero].profile.material.set(&"shader_parameter/line_color", color_reaction(segment))
 			HUD.level.entity[hero].profile.material.set(&"shader_parameter/line_thickness", 7 - segment * THICKNESS)
 
-			if hero < Def.PARTY:
+			if hero < D.PARTY:
 				stat = HUD.get_stat(HUD.RESOURCE, hero)
 			else:
 				stat = r_points[h]
@@ -149,14 +149,14 @@ func affect(hero: int, a: int, r: int) -> void:
 				segment = (target_r[hero] + value * (stat - target_r[hero])) * segment
 			HUD.level.entity[hero].profile.material.set(&"shader_parameter/ap", segment)
 
-			if hero >= Def.PARTY and i_points[hero] > 0:
+			if hero >= D.PARTY and i_points[hero] > 0:
 				i_points[hero] -= 5
 				HUD.game.ability.health.value = i_points[h],
 		0, 1.0, 3).tween_callback(func():
 			HUD.level.entity[hero].profile.material.set(&"shader_parameter/line_color", Color.TRANSPARENT)
 			HUD.level.entity[hero].profile.material.set(&"shader_parameter/action", false)
-			if hero < Def.PARTY:
-				if HUD.get_stat(HUD.AURA, Def.RAY) == 0 and HUD.get_stat(HUD.AURA, Def.ROCK) == 0:
+			if hero < D.PARTY:
+				if HUD.get_stat(HUD.AURA, D.RAY) == 0 and HUD.get_stat(HUD.AURA, D.ROCK) == 0:
 					HUD.level.group.spectrum()
 				else:
 					HUD.level.entity[hero].animation.play_coma()
@@ -168,12 +168,12 @@ func affect(hero: int, a: int, r: int) -> void:
 				HUD.level.entity[hero].position = HUD.level.spawn[HUD.level.entity[hero].state[2]]
 		)
 	if a != 0:
-		if hero < Def.PARTY:
+		if hero < D.PARTY:
 			var stat: int = clampi(HUD.get_stat(HUD.AURA, hero) + a, 0, a_max[hero])
 			HUD.set_stat(HUD.AURA, hero, stat)
 			for ui in _get_ui(): ui.aura.value = stat
 		else:
-			var h: int = hero - Def.PARTY
+			var h: int = hero - D.PARTY
 			a_points[h] = clampi(a_points[h] + a, 0, aura[h])
 			if a <= 0:
 				i_points[h] = 255
@@ -185,7 +185,7 @@ func affect(hero: int, a: int, r: int) -> void:
 				HUD.game.ability.health.max_value = aura[h]
 				HUD.game.ability.health.value = a_points[h]
 	if r != 0:
-		if hero < Def.PARTY:
+		if hero < D.PARTY:
 			var stat: int = clampi(HUD.get_stat(HUD.RESOURCE, hero) + r, 0, r_max[hero])
 			HUD.set_stat(HUD.RESOURCE, hero, stat)
 			for ui in _get_ui(): ui.resource.value = stat
@@ -202,13 +202,13 @@ var directed: PackedVector2Array = [Vector2.ZERO, Vector2.ZERO]
 func damage_zone(type: int, hero: int, element: int, combo: int, portion: float, output: float = 0) -> void:
 	match type:
 		ZONE_ALL:
-			var start: int = Def.PARTY if hero < Def.PARTY else 0
+			var start: int = D.PARTY if hero < D.PARTY else 0
 			var xp: int = 0
 			for i in range(start, entities):
 				if hero != i:
 					damage(hero, i, element, portion)
 					xp += exper[i]
-			if start == Def.PARTY and xp != 0:
+			if start == D.PARTY and xp != 0:
 				score_up(xp * combo)
 		TARGET:
 			damage_output(HALF_TILE * HUD.action.directed[hero], DISTANCE, hero, element, combo, portion, output)
@@ -218,7 +218,7 @@ func damage_zone(type: int, hero: int, element: int, combo: int, portion: float,
 			damage_output(Vector2.ZERO, RADIUS_DISTANCE, hero, element, combo, portion, output)
 	
 func damage_output(direction: Vector2, distance: int, hero: int, element: int, combo: int, portion: float, output: float) -> void:
-	var start: int = Def.PARTY if hero < Def.PARTY else 0
+	var start: int = D.PARTY if hero < D.PARTY else 0
 	var xp: int = 0
 	var pos: Vector2 = HUD.level.entity[hero].position
 	for i in range(start, entities):
@@ -226,13 +226,13 @@ func damage_output(direction: Vector2, distance: int, hero: int, element: int, c
 			damage(hero, i, element, portion)
 			HUD.level.entity[i].velocity += HUD.action.directed[hero] * TILE * output
 			xp += exper[i]
-	if start == Def.PARTY and xp != 0:
+	if start == D.PARTY and xp != 0:
 		score_up(xp * combo)
 
 enum { LOW = 128, MID1 = 172, MID = 196, MID2 = 214, HIGH = 256 }
 
 func damage_throw(hero: int, box: int, direction: Vector2, element: int) -> void:
-	var start: int = Def.PARTY if hero < Def.PARTY else 0
+	var start: int = D.PARTY if hero < D.PARTY else 0
 	var check: Rect2 = Rect2(HUD.level.entity[box].position + LOW * direction, HUD.level.entity[box].position + HIGH * direction)
 	var ideal: Rect2 = Rect2(HUD.level.entity[box].position + MID1 * direction, HUD.level.entity[box].position + MID2 * direction)
 	
@@ -292,24 +292,24 @@ func reload() -> void:
 	HUD.size[HUD.PLACES] = 0
 	for i in len(pos):
 		if i < places.size():
-			places[i] = Def.join(pos[i])
+			places[i] = D.join(pos[i])
 		else:
-			places.append(Def.join(pos[i]))
+			places.append(D.join(pos[i]))
 		HUD.size[HUD.PLACES] += 1
 		
-	entities = Def.PARTY
+	entities = D.PARTY
 	var count: int = randi_range(min_enemy[DIFFICULTY], max_enemy[DIFFICULTY])
 	for i in range(0, foe.size()):
-		if Def.of(HUD.level.foe, i):
+		if D.of(HUD.level.foe, i):
 			for c in mini(count * HUD.level.portion[i], 1):
 				HUD.level.entity[entities] = foe[i].instantiate()
 				HUD.level.entity[entities].no = entities
 				HUD.level.border.layer.add_child(HUD.level.entity[entities])
-				a_points[entities - Def.PARTY] = aura[entities]
-				r_points[entities - Def.PARTY] = resc[entities]
+				a_points[entities - D.PARTY] = aura[entities]
+				r_points[entities - D.PARTY] = resc[entities]
 				a_portion[entities] = 1.0 / aura[entities]
 				r_portion[entities] = 1.0 / resc[entities]
-				HUD.level.entity[entities].position = Def.map(places[randi_range(0, place_size)])
+				HUD.level.entity[entities].position = D.map(places[randi_range(0, place_size)])
 				entities += 1
 
 enum { MAX_LV = 7, PRIORITY_SELECT = 7, SCORE_HALF = 1,
@@ -328,12 +328,12 @@ func score_up(add: int) -> void:
 		while level < next_level.size() and score >= next_level[level]: level += 1
 		var after: int = level
 		var selection: int = HUD.get_part(HUD.SCORE, PRIORITY_SELECT)
-		for hero in range(0, Def.PARTY):
+		for hero in range(0, D.PARTY):
 			var priority: Vector3i = Vector3i(
 				HUD.get_part(HUD.PRIORITY, PURSUIT * HUD.HALF + hero),
 				HUD.get_part(HUD.PRIORITY, SELF_CONTROL * HUD.HALF + hero),
 				HUD.get_part(HUD.PRIORITY, TENACITY * HUD.HALF + hero))
-			var select: int = Def.half(selection, hero)
+			var select: int = D.half(selection, hero)
 			var delta: int = after - before
 			
 			if hero == HUD.hero: HUD.game.ability.priority[select].background = Color.GRAY
@@ -364,34 +364,39 @@ func _press(title: StringName) -> bool: return Input.is_action_just_pressed(titl
 func _hold(title: StringName) -> bool: return Input.is_action_pressed(title)
 func _out(title: StringName) -> bool: return Input.is_action_just_released(title)
 func _power(title: StringName) -> float: return Input.get_action_strength(title)
-func act(no: int) -> bool: return combo_slots[HUD.hero] & acts[no]
 
 enum { LEFT, RIGHT, UP, DOWN, ACT1, ACT2, ACT3, ACT4, OPT_LEFT, OPT_RIGHT, OPT_UP,
 	OPT_DOWN, SHOT, AIM, MENU }
-enum { DOUBLE, LUNGE, HUG, LOW_KICK, CRACK, GRILL_KICK, SLIPPERANG,
-	SPIT_KICK, BACK_SPIT, POACHING, CURE, OK_SHOT, PIERCE, BLADE_RUN, TACKLE,
-	GREEK_FIRE, STRAY_BULLET, AIR_FIGHT, AID, FIRE_DANCE, BREAKFLY, SHRAPNEL,
-	WET_CLEANING, DEFIBRILLATOR, HORIZONTAL, ROUND_ATTACK, WASHING_OUT,
-	TRANSFUSION, AIR_STRIKE, SHOCK, ELECTROCUT, THUNDER }
-enum { A, B, X, Y, S, L = 8, T = 16, M = 24, R = 32, H = 40 }
-var acts: PackedInt32Array = [A<<L|A, B<<L|A<<L|A, A<<T|Y<<L|A, A<<T|B<<L|A,
-	B<<T|B<<L|A, B<<T|X<<L|B, B<<T|A<<L|B, B<<M|A<<T|A<<L|B, A<<M|Y<<T|A<<L|Y]
 # var hero: int enum { RAY, ROCK } enum { TOOL, FIGHT, DANCE }
+enum { A, B, X, Y, S, S2 = 8, S3 = 16, S4 = 24,
+	A_DOUBLE = (A<<S2)|A, A_BACK_SPIT = (B<<S4)|(A<<S3)|(A<<S2)|B,
+	A_LUNGE = (B<<S3)|(A<<S2)|A, A_PIERCE = (B<<S3)|(B<<S2)|A,
+	A_POACHING = (A<<S3)|(Y<<S2)|A, A_LOW_KICK = (A<<S3)|(B<<S2)|A,
+	A_CURE = (B<<S3)|(X<<S2)|B, A_SPIT_KICK = (B<<S3)|(A<<S2)|B,
+	A_HUG = (A<<S4)|(Y<<S3)|(A<<S2)|Y, A_CRACK = 0,
+	
+	B_LUNGE, B_CRACK, B_BACKSPIT,
+	
+	C_CRACK = 6|3<<S2, C_BACKSPIT = 4,
+	
+	D_DOUBLE, D_BACK_SPIT, D_LUNGE, D_PIERCE, D_POACHING, D_LOW_KICK,
+	D_CURE, D_SPIT_KICK, D_HUG, D_CRACK
+}
 var combo_slots: PackedInt32Array = [0, 0]
 var caption: PackedStringArray = ["Двоечка"]
 var combo_color: PackedStringArray = ["[color=#00AA00]2x[/color]", "[color=#FFAA00]3x[/color]", "[color=#FFAA00]4x[/color]"]
 var logs_cache: PackedStringArray = ["", "", "", "", "", "", ""]
 var log_line: int
 
-enum { B_CRACK, B_BACKSPIT }
-enum { P_CRACK = 6, C_CRACK = 3, P_BACKSPIT = 4 }
+func can(priorities: int) -> bool:
+	return (HUD.get_stat(HUD.STATS + HUD.hero, HUD.PURSUIT) >= D.byte(priorities, 0) and
+		HUD.get_stat(HUD.STATS + HUD.hero, HUD.CONTROL) >= D.byte(priorities, 1))
 
-func book(no: int, pursuit: int = 0, control: int = 0) -> bool:
-	return Def.of(HUD.check(HUD.BOOK), no) and (pursuit == 0 or HUD.get_stat(HUD.STATS + HUD.hero, HUD.PURSUIT) >= pursuit) and (
-		control == 0 or HUD.get_stat(HUD.STATS + HUD.hero, HUD.CONTROL) >= control)
+func book(no: int, priorities: int = 0) -> bool:
+	return D.of(HUD.check(HUD.BOOK), no) and (priorities == 0 or can(priorities))
 
-func act_enter() -> void: HUD.level.tile[Def.offset(HUD.hero, Def.LEVER)] = Def.join(HUD.level.border.local_to_map(HUD.level.entity[HUD.hero].position))
-func act_exit() -> void: HUD.level.tile[Def.offset(HUD.hero, Def.LEVER)] = 0
+func act_enter() -> void: HUD.level.tile[D.offset(HUD.hero, D.LEVER)] = D.join(HUD.level.border.local_to_map(HUD.level.entity[HUD.hero].position))
+func act_exit() -> void: HUD.level.tile[D.offset(HUD.hero, D.LEVER)] = 0
 func reset_combo() -> void: combo_slots[HUD.hero] = 0
 
 func add_logs(log_text: String) -> void:
@@ -443,7 +448,7 @@ var menu_select: int = 0
 var stated: bool = false
 var read_mode: bool = false
 
-func reset_running(event: InputEvent) -> void: HUD.adversary.running = Def.t0(HUD.adversary.running, HUD.settings.get_hero(event))
+func reset_running(event: InputEvent) -> void: HUD.adversary.running = D.t0(HUD.adversary.running, HUD.settings.get_hero(event))
 func input_actions(event: InputEvent) -> void: # return #TODO FIXME disable after HUD test
 	var key2: bool = HUD.settings.key2()
 	HUD.action.movement(event, key2)
@@ -467,7 +472,7 @@ func input_actions(event: InputEvent) -> void: # return #TODO FIXME disable afte
 	elif _press(&"fire"): use_item()
 	elif _hold(&"aim"): pass # TODO AIM
 	elif _out(&"aim"):
-		HUD.adversary.running = Def.t1(HUD.adversary.running, HUD.settings.get_hero(event))
+		HUD.adversary.running = D.t1(HUD.adversary.running, HUD.settings.get_hero(event))
 		pass # TODO RUN
 	elif _press(&"item_left"): HUD.fast_panel_swap(HUD.settings.get_hero(event), -1)
 	elif _press(&"item_right"): HUD.fast_panel_swap(HUD.settings.get_hero(event), +1)
@@ -479,91 +484,89 @@ func input_actions(event: InputEvent) -> void: # return #TODO FIXME disable afte
 			HUD.trades.fast_panel_select(HUD.settings.get_hero(event) ^ 1, no)
 
 func main_slot(weapon_type: int) -> bool:
-	var i: int = Def.byte(HUD.get_item(HUD.hero, HUD.inventory.fast_panel[HUD.hero]), Trades.ID) - Trades.WEAPON
+	var i: int = D.byte(HUD.get_item(HUD.hero, HUD.inventory.fast_panel[HUD.hero]), Trades.ID) - Trades.WEAPON
 	return 0 < i and HUD.inventory.type[i] == weapon_type
 
 func fast_slot(weapon_type: int) -> bool:
-	var i: int = Def.byte(HUD.get_item(HUD.hero, Trades.WEAPON_SLOT), Trades.ID) - Trades.WEAPON
+	var i: int = D.byte(HUD.get_item(HUD.hero, Trades.WEAPON_SLOT), Trades.ID) - Trades.WEAPON
 	return 0 < i and HUD.inventory.type[i] == weapon_type
 
-func empty_hand_punch() -> void:
-	if act(DOUBLE):
-		if act(LUNGE) and book(LUNGE, P_BACKSPIT, BACK_SPIT):
-			fight(3, LUNGE, Adversary.TARGET, Adversary.NORMAL, 1.35, 2.0)
+func empty_hand_punch(s: int) -> void:
+	if (A_DOUBLE & s)==s:
+		if (A_LUNGE & s)==s and book(B_LUNGE) and can(C_BACKSPIT):
+			fight(3, D_LUNGE, Adversary.TARGET, Adversary.NORMAL, 1.35, 2.0)
 		else:
-			fight(2, DOUBLE, Adversary.TARGET, Adversary.NORMAL, 1.15, -0.2)
+			fight(2, D_DOUBLE, Adversary.TARGET, Adversary.NORMAL, 1.15, -0.2)
 	else:
 		HUD.adversary.damage_zone(HUD.hero, Adversary.TARGET, Adversary.NORMAL, 1, 1.0, -0.1)
 
-func empty_hand_kick() -> void:
-	if act(LOW_KICK):
-		fight(2, LOW_KICK, Adversary.TARGET, Adversary.NORMAL, 1.25, 0.5)
-	elif act(SPIT_KICK) and book(B_BACKSPIT, P_BACKSPIT, BACK_SPIT):
+func empty_hand_kick(s: int) -> void:
+	if (A_LOW_KICK & s)==s:
+		fight(2, D_LOW_KICK, Adversary.TARGET, Adversary.NORMAL, 1.25, 0.5)
+	elif (A_SPIT_KICK & s)==s and book(B_BACKSPIT) and can(C_BACKSPIT):
 		pass
 	else:
 		HUD.adversary.damage_zone(HUD.hero, Adversary.TARGET, Adversary.NORMAL, 1, 1.0, 0.1)
 
-func new_slot(h: int, type: int) -> void:
-	combo_slots[h] = combo_slots[h] << Def.HALF_BYTE | type
-
 func punch(h: int) -> void:
-	new_slot(h, A)
+	var s: int = A | (combo_slots[h] << D.HALF_BYTE); combo_slots[h] = s
 	match HUD.hero:
-		Def.RAY:
-			empty_hand_punch()
-		Def.ROCK:
-			if act(PIERCE):
+		D.RAY:
+			empty_hand_punch(s)
+		D.ROCK:
+			if (A_PIERCE & s)==s:
 				pass
-			elif act(BLADE_RUN):
+			elif (A_HUG & s)==s:
 				pass
 			else:
-				empty_hand_punch()
+				empty_hand_punch(s)
 	HUD.combo_timer.start()
 
 func kick(h: int) -> void:
-	new_slot(h, B)
+	var s: int = B | (combo_slots[h] << D.HALF_BYTE); combo_slots[h] = s
 	match HUD.hero:
-		Def.RAY:
-			empty_hand_kick()
-		Def.ROCK:
-			if act(TACKLE):
+		D.RAY:
+			empty_hand_kick(s)
+		D.ROCK:
+			if (A_SPIT_KICK & s)==s:
 				pass
 			else:
-				empty_hand_kick()
+				empty_hand_kick(s)
 	HUD.combo_timer.start()
-	#if HUD.level.tile[HUD.hero] == Def.H_SPRING_OFF: TODO CHANGE TO ROPE
+	#if HUD.level.tile[HUD.hero] == D.H_SPRING_OFF: TODO CHANGE TO ROPE
 	#	HUD.level.chains.jump()
 
 func skill_a(h: int) -> void:
-	new_slot(h, X)
-	if act(GRILL_KICK):
+	var s: int = X | (combo_slots[h] << D.HALF_BYTE); combo_slots[h] = s
+	if (A_SPIT_KICK & s)==s:
 		pass
-	elif act(CRACK) and book(B_CRACK, P_CRACK, C_CRACK):
-		fight(3, CRACK, Adversary.TARGET, Adversary.NORMAL, 1.2, 0.5)
+	elif (A_CRACK & s)==s and book(B_CRACK) and can(C_CRACK):
+		fight(3, D_CRACK, Adversary.TARGET, Adversary.NORMAL, 1.2, 0.5)
 
 	match HUD.hero:
-		Def.RAY: HUD.action.melt_ice()
-		Def.ROCK: HUD.action.puddle_tile() # LevelRoot # TileDecorator
+		D.RAY: HUD.action.melt_ice()
+		D.ROCK: HUD.action.puddle_tile() # LevelRoot # TileDecorator
 
 func skill_b(h: int) -> void:
-	new_slot(h, Y)
-	if act(POACHING):
+	var s: int = Y | (combo_slots[h] << D.HALF_BYTE); combo_slots[h] = s
+	if (A_POACHING & s)==s:
 		pass
-	elif act(HUG):
-		fight(4, HUG, Adversary.TARGET, Adversary.NORMAL, 1.4, -0.5)
+	elif (A_HUG & s)==s:
+		fight(4, D_HUG, Adversary.TARGET, Adversary.NORMAL, 1.4, -0.5)
 
 func use_item() -> void:
-	var throw: bool = HUD.inventory.produce_item(HUD.hero, HUD.trades.fast_panel[HUD.hero])  == Trades.WEAPON_THROW
+	var s: int = S | (combo_slots[HUD.hero] << D.HALF_BYTE); combo_slots[HUD.hero] = s
+	var throw: bool = HUD.inventory.produce_item(HUD.hero, HUD.trades.fast_panel[HUD.hero]) == Trades.WEAPON_THROW
 	match HUD.hero:
-		Def.ROCK:
-			if act(SLIPPERANG) and throw and main_slot(Trades.BOOMERANG):
+		D.ROCK:
+			if (A_BACK_SPIT & s)==s and throw and main_slot(Trades.BOOMERANG):
 				pass
 			else:
 				pass
-		Def.RAY:
-			if act(OK_SHOT):
+		D.RAY:
+			if (A_SPIT_KICK & s)==s: # OK_SHOT
 				pass
-			elif act(AID) and fast_slot(Trades.GUN):
+			elif (A_CURE & s)==s and fast_slot(Trades.GUN): # AID
 				pass
 				
 ## ANIMATION
@@ -588,7 +591,7 @@ var running: int
 func get_anim(h: int) -> int: return h + (A_ACT if frames[A_ACT + h] != NO_ANIM else A_ENV)
 func set_anim(h: int, type: int) -> void:
 	#if HUD.action.directed[h] == Vector2.ZERO: return
-	var anim: String = sprite_dir[Def.direct(HUD.action.directed_nzero[h].round())]; var hero: int = h * 3
+	var anim: String = sprite_dir[D.direct(HUD.action.directed_nzero[h].round())]; var hero: int = h * 3
 	if A_PUNCH <= type and type <= HURT:
 		frames[hero + A_ACT] = type; anim += sprites[frames[get_anim(hero)]]
 	else:
@@ -596,7 +599,7 @@ func set_anim(h: int, type: int) -> void:
 	mirror_animation(h, anim)
 
 func progress_animation() -> void:
-	for h in range(0, Def.PARTY):
+	for h in range(0, D.PARTY):
 		var hero: int = h * 3
 		if frames[hero + A_ACT] == JUMP:
 			if frames[hero] >= max_slot[JUMP]:
@@ -653,7 +656,7 @@ func set_direction(pos: Vector2, direction: Vector2, type: int) -> void:
 		DROP: texture = preload("res://icon/vfx/rock/water.svg")
 	sprite.position = pos - Vector2(0, 32)
 	var offsets: Vector2 = Vector2(OFFSET, OFFSET)
-	var angle: float = Def.rotate(direction)
+	var angle: float = D.rotate(direction)
 	sprite.rotation = angle
 	var delta: Vector2 = Vector2(PATH, PATH) * direction
 	if direction.x != 0 and direction.y != 0:

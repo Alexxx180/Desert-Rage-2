@@ -35,9 +35,9 @@ enum { DEFAULTED = -1,
 	LT_SHADOW_B = 25, LT_TEMPLE_A = 26, LT_TEMPLE_B = 35, LT_CREDITS = 36 }
 
 func toggle_ost(type: int, next: bool) -> void:
-	_ost[type >> 6] = Def.to(_ost[type >> 6], type & ((1 << 64) - 1), next)
+	_ost[type >> 6] = D.to(_ost[type >> 6], type & ((1 << 64) - 1), next)
 
-func check_ost(type: int) -> bool: return Def.of(_ost[type >> 6], type & ((1 << 64) - 1))
+func check_ost(type: int) -> bool: return D.of(_ost[type >> 6], type & ((1 << 64) - 1))
 func _d(from: int, to: int) -> bool: return from <= level_no and level_no <= to
 
 var level_no: int
@@ -64,17 +64,17 @@ func set_hero_theme(common: int) -> void:
 	ost_no = hero_no if _blend(HEROES_BLEND) else common
 
 func set_common_theme(common: int, no: int) -> bool:
-	if Def.of(no, FINISHED):
-		no = (Def.to(no, PEACE, !check_ost(common + 0)) |
-			Def.to(no, TENSE, !check_ost(common + 1)) |
-			Def.to(no, FIGHT, !check_ost(common + 2)))
-		if fight_mode == 0 or (Def.of(no, TENSE) and Def.of(no, FIGHT)):
-			set_hero_theme(DEFAULTED if Def.of(no, PEACE) else common)
-		elif fight_mode == 1 or Def.of(no, FIGHT):
+	if D.of(no, FINISHED):
+		no = (D.to(no, PEACE, !check_ost(common + 0)) |
+			D.to(no, TENSE, !check_ost(common + 1)) |
+			D.to(no, FIGHT, !check_ost(common + 2)))
+		if fight_mode == 0 or (D.of(no, TENSE) and D.of(no, FIGHT)):
+			set_hero_theme(DEFAULTED if D.of(no, PEACE) else common)
+		elif fight_mode == 1 or D.of(no, FIGHT):
 			set_hero_theme(common + 1)
 		else:
 			set_hero_theme(common + 2)
-	elif Def.of(no, HEROES_BLEND):
+	elif D.of(no, HEROES_BLEND):
 		ost_no = hero_no
 		default_no = hero_no
 	else:
@@ -87,14 +87,14 @@ func set_theme(common: int, specific: int, defaulted: int, common_blend: bool, f
 		collection_no = randi_range(0, collection_no)
 	common += collection_no * 3
 	default_no = defaulted
-	var no: int = (Def.to(0, PEACE, !check_ost(specific + 0)) |
-		Def.to(0, TENSE, !check_ost(specific + 1)) |
-		Def.to(0, FIGHT, !check_ost(specific + 2)))
-	no = Def.to(no, FINISHED, finished and (Def.of(no, PEACE) or common_blend))
-	no = Def.to(no, HERO_BLEND, Def.of(no, TENSE) and Def.of(no, FIGHT) and _blend(HEROES_BLEND))
-	if fight_mode == 0 or (Def.of(no, TENSE) and Def.of(no, FIGHT)):
+	var no: int = (D.to(0, PEACE, !check_ost(specific + 0)) |
+		D.to(0, TENSE, !check_ost(specific + 1)) |
+		D.to(0, FIGHT, !check_ost(specific + 2)))
+	no = D.to(no, FINISHED, finished and (D.of(no, PEACE) or common_blend))
+	no = D.to(no, HERO_BLEND, D.of(no, TENSE) and D.of(no, FIGHT) and _blend(HEROES_BLEND))
+	if fight_mode == 0 or (D.of(no, TENSE) and D.of(no, FIGHT)):
 		if !set_common_theme(common, no): ost_no = specific
-	elif fight_mode == 1 or Def.of(no, FIGHT):
+	elif fight_mode == 1 or D.of(no, FIGHT):
 		if !set_common_theme(common, no): ost_no = specific + 1
 	else:
 		if !set_common_theme(common, no): ost_no = specific + 2
@@ -143,7 +143,7 @@ func level_playback_enter(finished: bool = false, specific: int = DEFAULTED) -> 
 enum { P_ORIGIN = 2, P_SMOKE = 7, P_SPARK = 12, P_SHADOW = 17, P_TEMPLE = 22,
 	D_BOSSES = 8, D_COMMON = 16, D_SPECIFIC = 32 }
 
-func _theme(no: int) -> bool: return Def.of(_ost[no >> D_COMMON], no & ((1 << 64) - 1))
+func _theme(no: int) -> bool: return D.of(_ost[no >> D_COMMON], no & ((1 << 64) - 1))
 
 func set_next_playback(idx: int, blend: int,
 	common: int, specific: int, hero_blend: bool) -> void:
@@ -168,7 +168,7 @@ func finish_playback() -> void:
 	set_next_playback(P_ORIGIN, CAVES_BLEND, CP_CAVES1, SP_SHADOW, false)
 	set_next_playback(P_ORIGIN, TEMPLE_BLEND, CP_CAVES1, SP_TEMPLE, false)
 
-func _blend(_type: int) -> bool: return Def.byte(_ost[_type >> 6], _type & 64) < randi_range(0, 100)
+func _blend(_type: int) -> bool: return D.byte(_ost[_type >> 6], _type & 64) < randi_range(0, 100)
 
 enum { XBX, PS, N }
 
@@ -225,7 +225,7 @@ var g_items: Button; var g_group: Button
 var sound_menu: Control
 
 func set_settings() -> void:
-	settings = load(Def.settings).instantiate()
+	settings = load(D.settings).instantiate()
 	HUD.pause.hide()
 	HUD.add_child(settings)
 	content = settings.get_node(^"content")

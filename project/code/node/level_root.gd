@@ -33,10 +33,10 @@ var ready_to_process: bool = false
 var eye: Control; var magnifier: Camera2D
 var out_shape: CollisionShape2D; var out_zone: Area2D
 
-var lever_tile: PackedInt32Array = [0, 0, 0, 0, 0,  0, 0, 0, 0, 0]
-var plate_tile: PackedInt32Array = [0, 0, 0, 0, 0,  0, 0, 0, 0, 0]
+var lever_tile: PackedInt32Array = [0, 0,  0, 0]
+var plate_tile: PackedInt32Array = [0, 0,  0, 0]
 
-var boxes_tile: PackedInt32Array = [0, 0, 0, 0, 0,  0, 0, 0, 0, 0,  0, 0, 0, 0, 0,  0, 0, 0, 0, 0]
+var boxes_tile: PackedInt32Array = [0, 0,  0, 0,  0, 0,  0, 0]
 
 func input_skip(_event: InputEvent) -> void:
 	pass
@@ -64,7 +64,7 @@ func bind_remote(hero: int, view: Camera2D) -> void:
 
 func bind_remotes() -> void:
 	ready_to_process = true
-	bind_remote(Def.ROCK, camera[Def.ROCK])
+	bind_remote(D.ROCK, camera[D.ROCK])
 
 func enter_group_view(_b: Node2D) -> void: if _b.is_in_group(&"player"):
 	if on_camera < 2:
@@ -74,12 +74,12 @@ func update_group_view() -> void:
 	if on_camera >= 2:
 		HUD.coop_viewports.columns = 1
 		HUD.rock_view.hide()
-		HUD.level.camera[Def.ROCK].hide()
+		HUD.level.camera[D.ROCK].hide()
 	else:
 		HUD.coop_control()
 		HUD.coop_viewports.columns = 2
 		HUD.rock_view.show()
-		HUD.level.camera[Def.ROCK].show()
+		HUD.level.camera[D.ROCK].show()
 	HUD.set_ports_size(HUD.ui.size)
 
 var on_camera: int = 0
@@ -107,21 +107,21 @@ func _ready() -> void:
 		heroes.add_child(hero)
 		hero.position = position
 		entity.append(hero)
-	out_zone = camera[Def.RAY].get_node(^"zone")
+	out_zone = camera[D.RAY].get_node(^"zone")
 	out_zone.body_entered.connect(enter_group_view)
 	out_zone.body_exited.connect(exit_group_view)
-	out_shape = camera[Def.RAY].get_node(^"zone/shape")
+	out_shape = camera[D.RAY].get_node(^"zone/shape")
 	call_deferred(&"bind_remotes")
 	HUD.coop_control()
-	bind_remote(Def.RAY, camera[Def.RAY])
-	lever[Def.RAY].body_entered.connect(HUD.action.lever_inner_ray)
-	lever[Def.RAY].body_exited.connect(HUD.action.lever_outer_ray)
-	lever[Def.ROCK].body_entered.connect(HUD.action.lever_inner_rock)
-	lever[Def.ROCK].body_exited.connect(HUD.action.lever_outer_rock)
-	plate[Def.RAY].body_entered.connect(HUD.action.plate_inner_ray)
-	plate[Def.RAY].body_exited.connect(HUD.action.plate_outer_ray)
-	plate[Def.ROCK].body_entered.connect(HUD.action.plate_inner_rock)
-	plate[Def.ROCK].body_exited.connect(HUD.action.plate_outer_rock)
+	bind_remote(D.RAY, camera[D.RAY])
+	lever[D.RAY].body_entered.connect(HUD.action.lever_inner_ray)
+	lever[D.RAY].body_exited.connect(HUD.action.lever_outer_ray)
+	lever[D.ROCK].body_entered.connect(HUD.action.lever_inner_rock)
+	lever[D.ROCK].body_exited.connect(HUD.action.lever_outer_rock)
+	plate[D.RAY].body_entered.connect(HUD.action.plate_inner_ray)
+	plate[D.RAY].body_exited.connect(HUD.action.plate_outer_ray)
+	plate[D.ROCK].body_entered.connect(HUD.action.plate_inner_rock)
+	plate[D.ROCK].body_exited.connect(HUD.action.plate_outer_rock)
 	if has_node(^"eye"):
 		eye = get_node(^"eye")
 		eye.reparent(HUD)

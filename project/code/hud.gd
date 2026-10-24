@@ -29,21 +29,21 @@ func load_session() -> void:
 		0, 0, 0, 0, 0,  0, 0, 0, 0, 0,  0, 0, 0, 0, 0]
 
 func check(type: int) -> int: return session[type]
-func unlock(type: int, slot: int) -> void: session[type] = Def.t1(session[type], slot)
+func unlock(type: int, slot: int) -> void: session[type] = D.t1(session[type], slot)
 
-func look(type: int, slot: int) -> bool: return Def.of(session[type], slot)
-func took(type: int, slot: int) -> void: session[type] = Def.t_(session[type], slot)
+func look(type: int, slot: int) -> bool: return D.of(session[type], slot)
+func took(type: int, slot: int) -> void: session[type] = D.t_(session[type], slot)
 
-func get_part(type: int, slot: int) -> int: return Def.byte(session[type], slot)
-func set_part(type: int, slot: int, value: int) -> void: session[type] = Def.to_byte(session[type], slot, value)
+func get_part(type: int, slot: int) -> int: return D.byte(session[type], slot)
+func set_part(type: int, slot: int, value: int) -> void: session[type] = D.to_byte(session[type], slot, value)
 
-func get_stat(type: int, slot: int) -> int: return Def.short(session[type], slot)
-func set_stat(type: int, slot: int, value: int) -> void: session[type] = Def.to_short(session[type], slot, value)
+func get_stat(type: int, slot: int) -> int: return D.short(session[type], slot)
+func set_stat(type: int, slot: int, value: int) -> void: session[type] = D.to_short(session[type], slot, value)
 
-func get_item(bag: int, slot: int) -> int: return Def.short(session[INVENTORY + BAG * bag + (slot >> Def.PART_BYTE)], slot & Def.HALF_BYTE)
+func get_item(bag: int, slot: int) -> int: return D.short(session[INVENTORY + BAG * bag + (slot >> D.PART_BYTE)], slot & D.HALF_BYTE)
 func set_item(bag: int, slot: int, item: int) -> void:
-	var no: int = INVENTORY + BAG * bag + (slot >> Def.PART_BYTE)
-	session[no] = Def.to_short(session[no], slot & Def.HALF_BYTE, item)
+	var no: int = INVENTORY + BAG * bag + (slot >> D.PART_BYTE)
+	session[no] = D.to_short(session[no], slot & D.HALF_BYTE, item)
 
 # TIMING
 @onready var tree: SceneTree = get_tree()
@@ -79,7 +79,7 @@ func next_hero() -> int: return HUD.hero ^ 1
 
 func _init() -> void:
 	# 
-	session = FileAccess.get_file_as_bytes(Def.saves).to_int64_array()
+	session = FileAccess.get_file_as_bytes(D.saves).to_int64_array()
 
 var level_path: PackedStringArray = ["_world", "_cave_origin", "_cave_smoke", "_cave_spark", "_temple_ancient", "_credits"]
 var level_no: PackedByteArray = [0, 1, 8, 15, 27, 36]
@@ -138,12 +138,12 @@ func log_help_hide() -> void:
 
 func log_help(of: int) -> void:
 	if help_card == null:
-		help_card = load(Def.card).instantiate()
+		help_card = load(D.card).instantiate()
 		game.help.add_child(help_card)
 	help_card.show()
 	var tween: Tween = game.create_tween()
 	tween.tween_property(help_card, ^"modulate", Color.WHITE, 1)
-	help_card.text = tr(Def.hints[of])
+	help_card.text = tr(D.hints[of])
 
 
 
@@ -355,7 +355,7 @@ enum { FPS, GPU }; var _debug_title: Label; var _debug_status: Label; var _debug
 const FORMAT_MB: String = "\n%0.2f"; var BYTE_CLUSTER: float = 1.0 / 1048576 # 1024^2
 
 func _get_vram() -> String: return FORMAT_MB % (Performance.get_monitor(Performance.RENDER_VIDEO_MEM_USED) * BYTE_CLUSTER)
-func _don(debug_type: int) -> bool: return Def.of(_debug_state, debug_type)
+func _don(debug_type: int) -> bool: return D.of(_debug_state, debug_type)
 func debug_drawback() -> void:
 	_debug_status.text = str(("\n" + str(Engine.get_frames_per_second())) if _don(FPS) else "",  _get_vram() if _don(GPU) else "")
 func debug_change() -> void:
@@ -390,16 +390,16 @@ func translate_all_cards() -> void:
 
 func translate_card(card: Label, no: int) -> void:
 	match no:
-		MOVE: card.text = tr(Def.hints[card.no]) % [0]
-		ACT: card.text = tr(Def.hints[card.no]) % 1
-		KICK: card.text = tr(Def.hints[card.no]) % 2
-		_: card.text = tr(Def.hints[card.no])
+		MOVE: card.text = tr(D.hints[card.no]) % [0]
+		ACT: card.text = tr(D.hints[card.no]) % 1
+		KICK: card.text = tr(D.hints[card.no]) % 2
+		_: card.text = tr(D.hints[card.no])
 
 func load_card(next: int) -> void:
-	var card: Button = load(Def.card).instantiate()
+	var card: Button = load(D.card).instantiate()
 	ability_help.add_child(card)
 	card.no = next
-	card.image.texture = ImageTexture.create_from_image(Def.help.get_layer_data(next))
+	card.image.texture = ImageTexture.create_from_image(D.help.get_layer_data(next))
 	card.help.visible_characters = 20
 	card_text.append(card)
 	translate_card(card.help, next)
@@ -443,7 +443,7 @@ func resume_game() -> void:
 
 func pause_game() -> void:
 	if pause == null:
-		pause = load(Def.pause).instantiate()
+		pause = load(D.pause).instantiate()
 		add_child(pause)
 		pause.get_node(^"options/resume").pressed.connect(resume_game)
 		pause.get_node(^"options/saves").pressed.connect(enter_saves)
@@ -460,7 +460,7 @@ func enter_pause() -> void:
 
 func enter_saves() -> void:
 	if saves == null:
-		saves = load(Def.saves).instantiate()
+		saves = load(D.saves).instantiate()
 		add_child(saves)
 		saves.back.connect(enter_pause)
 	pause.hide()
@@ -473,11 +473,11 @@ func enter_settings() -> void:
 	settings.show()
 
 func open_main_menu() -> void:
-	tree.load_scene(Def.main_menu)
+	tree.load_scene(D.main_menu)
 
 func set_game() -> void:
 	if game == null:
-		game = load(Def.game).instantiate()
+		game = load(D.game).instantiate()
 		add_child(game)
 		right = game.get_node(^"right")
 		left = right.get_node(^"left")
@@ -739,10 +739,10 @@ var rock_port: SubViewport; var rock_view: SubViewportContainer
 
 func reparent_coop() -> void:
 	HUD.level.map.reparent(ray_port)
-	HUD.level.camera[Def.RAY].reparent(ray_port)
-	HUD.level.camera[Def.ROCK].reparent(rock_port)
-	HUD.level.remotes[Def.ROCK].remote_path = HUD.level.camera[Def.ROCK].get_path()
-	HUD.level.remotes[Def.RAY].remote_path = HUD.level.camera[Def.RAY].get_path()
+	HUD.level.camera[D.RAY].reparent(ray_port)
+	HUD.level.camera[D.ROCK].reparent(rock_port)
+	HUD.level.remotes[D.ROCK].remote_path = HUD.level.camera[D.ROCK].get_path()
+	HUD.level.remotes[D.RAY].remote_path = HUD.level.camera[D.RAY].get_path()
 
 func on_size_changed() -> void:
 	set_ports_size(ui.size)

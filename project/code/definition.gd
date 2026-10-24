@@ -1,10 +1,13 @@
-class_name Def
+class_name D # Definitions
 
 enum { N = -1, HERO, DEPLOYED = 0, NO = 0, PLATE = 0,
 	OVERWORLD = 1,  LEVER = 1, STATUS = 1, CASUAL = 2, OFFSET = 2,  LAYER, LEVEL = 14,
 	DEPLOY_DELTA = 4096, JUMP_POWER = 200000, MOVE = 8, GRAVITY = 700000,
 	
 	DEAD = 0, OPEN_MENU = 0, FREEZE, TRANSIT = 1, BOX, ACTING, JUMP, FALL, CAMERA, GRAB, # status
+	
+	ID = 0, ATLAS, ALT = 1, # TYPE, 
+	FLOOR = 0, BREAK,
 	
 	PARTY = 2, RAY = 0, ROCK, EYE_SEEKER # enemy name
 } # 550 # MOVE = 11
@@ -35,7 +38,7 @@ const rotation: PackedByteArray = [135, 0, -135, -45, -90, 135, 45, 90]
 
 static func rotate(dir: Vector2i) -> int: return rotation[direct(dir)]
 static func direct(dir: Vector2i) -> int:
-	print("R: ", dir)
+	# print("R: ", dir)
 	return x_direction[dir.x] + y_direction[dir.y] # x_direction[dir.x]
 static func offset(hero: int, no: int = 0) -> int: return hero * OFFSET + no
 
@@ -102,20 +105,25 @@ static func t1(value: int, index: int) -> int: return value | (1 << index)
 static func t0(value: int, index: int) -> int: return value & ~(1 << index)
 static func t_(value: int, index: int) -> int: return value ^ (1 << index)
 
+static func at(mold: int, mask: int) -> int: return mask == (mask & mold)
 static func b(state: PackedByteArray, select: int, index: int, value: int) -> void: state[select] = to(state[select], index, value)
 static func b0(state: PackedByteArray, select: int, index: int) -> void: state[select] = t0(state[select], index)
 static func b1(state: PackedByteArray, select: int, index: int) -> void: state[select] = t1(state[select], index)
 
-static func part(item: int, slot: int) -> int: return (item >> (slot << PART_BYTE)) & 3
-static func half(item: int, slot: int) -> int: return (item >> (slot << HALF_BYTE)) & 15
-static func byte(item: int, slot: int) -> int: return (item >> (slot << BYTE)) & 255
-static func short(item: int, slot: int) -> int: return (item >> (slot << SHORT)) & 65535
-static func number(item: int, slot: int) -> int: return (item >> (slot << INTEGER)) & 4_294_967_295
-static func to_part(item: int, slot: int, next: int) -> int: return item & ~(3 << (slot << PART_BYTE)) | (next << (slot << PART_BYTE))
-static func to_half(item: int, slot: int, next: int) -> int: return item & ~(15 << (slot << PART_BYTE)) | (next << (slot << PART_BYTE))
-static func to_byte(item: int, slot: int, next: int) -> int: return item & ~(255 << (slot << PART_BYTE)) | (next << (slot << PART_BYTE))
-static func to_short(item: int, slot: int, next: int) -> int: return item & ~(65535 << (slot << PART_BYTE)) | (next << (slot << PART_BYTE))
-static func to_number(item: int, slot: int, next: int) -> int: return item & ~(4_294_967_295 << (slot << PART_BYTE)) | (next << (slot << PART_BYTE))
+static func part(item: int, slot: int) -> int: return (item >> (PART_BYTE * slot)) & 3
+static func half(item: int, slot: int) -> int: return (item >> (HALF_BYTE * slot)) & 15
+static func byte(item: int, slot: int) -> int: return (item >> (BYTE * slot)) & 255
+static func short(item: int, slot: int) -> int: return (item >> (SHORT * slot)) & 65535
+static func number(item: int, slot: int) -> int: return (item >> (INTEGER * slot)) & 4_294_967_295
+static func to_part(item: int, slot: int, next: int) -> int: var s: int = PART_BYTE * slot; return item & ~(3 << s) | (next << s)
+static func to_half(item: int, slot: int, next: int) -> int: var s: int = HALF_BYTE * slot; return item & ~(15 << s) | (next << s)
+static func to_byte(item: int, slot: int, next: int) -> int: var s: int = BYTE * slot; return item & ~(255 << s) | (next << s)
+static func to_short(item: int, slot: int, next: int) -> int: var s: int = SHORT * slot; return item & ~(65535 << s) | (next << s)
+static func to_number(item: int, slot: int, next: int) -> int: var s: int = INTEGER * slot; return item & ~(4_294_967_295 << s) | (next << s)
+
+static func byte8(item: int) -> PackedVector4Array: return [byte4(item), byte4(item)]
+static func byte4(item: int) -> Vector4i: return Vector4i(byte(item, 0), byte(item, 1), byte(item, 2), byte(item, 3))
+static func short4(item: int) -> Vector4i: return Vector4i(short(item, 0), short(item, 1), short(item, 2), short(item, 3))
 
 static func byte_of(item: int) -> Vector2i: return Vector2i(half(item, 0), half(item, 1))
 static func short_of(item: int) -> Vector2i: return Vector2i(byte(item, 0), byte(item, 1))

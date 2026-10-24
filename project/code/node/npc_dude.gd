@@ -14,8 +14,8 @@ func act(hero: CharacterBody2D) -> void:
 	HUD.menu.hint.text = TEXT[no]
 	if TEXT[no].contains("%s"):
 		match hero.no:
-			Def.RAY: HUD.menu.hint.text %= "RAY"
-			Def.ROCK: HUD.menu.hint.text %= "ROCK"
+			D.RAY: HUD.menu.hint.text %= "RAY"
+			D.ROCK: HUD.menu.hint.text %= "ROCK"
 	var tween = create_tween()
 	tween.tween_property(profile, ^"frame", 3, 1.0)
 	tween.tween_callback(func(): profile.frame = 0)
