@@ -2,10 +2,11 @@ class_name TileDecorator extends TileMapLayer
 
 enum { M_LEVEL = 0, M_FLOOR = 1, M_BREAK = 2, SIZE = 5, TILE_DATA = 5, MOLD = 0, COORDS = 1 }
 
-const data: String = "PFB"
+const data: String = "FB"
 var tile: PackedInt32Array = [0, 0]
 
 func mold() -> int: return tile[MOLD]
+func m_type() -> int: return D.short(tile[MOLD], D.ALT) >> 2
 func m_coords() -> int: return tile[COORDS]
 func ground() -> TileDecorator: return id().atlas().type()
 
@@ -16,13 +17,12 @@ func get_tile(saved: PackedInt32Array, from: int) -> TileDecorator:
 	for i in range(0, 2): saved[from * TILE_DATA + i] = tile[i]
 	return self
 func set_tile(saved: PackedInt32Array, from: int) -> TileDecorator:
-	for i in range(0, 5): tile[i] = saved[from * TILE_DATA + i]
+	for i in range(0, 2): tile[i] = saved[from * TILE_DATA + i]
 	return self
 
 func atlas(next: int = -1) -> TileDecorator:
 	if next == -1: next = D.join8(get_cell_atlas_coords(D.map(tile[COORDS])))
 	tile[MOLD] = D.to_byte(tile[MOLD], D.ATLAS, next)
-	print("ID.AS.TP mold: ", D.byte4(tile[MOLD]))
 	return self
 
 func id(next: int = -1) -> TileDecorator:
@@ -45,8 +45,8 @@ func pos(p: Vector2) -> TileDecorator:
 	return self
 func coords(map_coords: int) -> TileDecorator: tile[COORDS] = map_coords; return self
 
-func layer_name() -> String: return tile_set.get_source(tile[Action.ID]).resource_name
-func busy() -> Array[Vector2i]: return get_used_cells_by_id(tile[Action.ID], D.map8(tile[Action.ATLAS]))
+func layer_name() -> String: return tile_set.get_source(D.byte(tile[MOLD], D.ID)).resource_name
+func busy() -> Array[Vector2i]: return get_used_cells_by_id(D.byte(tile[MOLD], D.ID), D.map8(tile[D.ATLAS]))
 func paint() -> TileDecorator:
 	set_cell(D.map(tile[COORDS]), D.byte(tile[MOLD], D.ID), D.map8(D.byte(tile[MOLD], D.ATLAS)))
 	return self

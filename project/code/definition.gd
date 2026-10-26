@@ -100,12 +100,12 @@ enum { PART_BYTE = 2, HALF_BYTE = 4, BYTE = 8, SHORT = 16, INTEGER = 32, BIG = 6
 
 static func one(n: int) -> bool: return n > 0 and (n & (n - 1)) == 0
 static func of(value: int, index: int) -> bool: return value & (1 << index) == (1 << index)
-static func to(value: int, index: int, next: bool) -> int: return value & ~(1 << index) | (int(next) << index)
+static func to(value: int, index: int, next: int) -> int: return value & ~(1 << index) | (next << index)
 static func t1(value: int, index: int) -> int: return value | (1 << index)
 static func t0(value: int, index: int) -> int: return value & ~(1 << index)
 static func t_(value: int, index: int) -> int: return value ^ (1 << index)
 
-static func at(mold: int, mask: int) -> int: return mask == (mask & mold)
+static func m(mold: int, mask: int) -> int: return mask == (mask & mold)
 static func b(state: PackedByteArray, select: int, index: int, value: int) -> void: state[select] = to(state[select], index, value)
 static func b0(state: PackedByteArray, select: int, index: int) -> void: state[select] = t0(state[select], index)
 static func b1(state: PackedByteArray, select: int, index: int) -> void: state[select] = t1(state[select], index)

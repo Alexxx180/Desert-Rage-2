@@ -83,17 +83,9 @@ func distract(bag: int) -> void: # LevelRoot
 	distraction[bag] = 0
 	#distraction_body[bag] = body
 
-func near_water() -> bool:
-	var tile: PackedInt32Array = HUD.level.tile_near()
-	return tile[Action.ID] == HUD.ENTRY and tile[Action.ATLAS] == HUD.D_WATER
-
-func open_door(id: int) -> bool:
-	var tile: PackedInt32Array = HUD.level.tile_near()
-	if tile[Action.ID] != HUD.LOGIC: return false
-	if id == SECRET_KEY: return tile[Action.ATLAS] == Action.GOLD_OFF
-	return tile[Action.ATLAS] == Action.GOLD_OFF #FIX ME TO DOOR
-
-enum { NO_ITEM, ITEM_USED, ITEM_THROW, WEAPON_THROW }
+enum { NO_ITEM, ITEM_USED, ITEM_THROW, WEAPON_THROW,
+	THROW_RAPIER = (1<<T_RAPIER)|(1<<W_RAPIER),
+	KEYS_ID = (1<<GOLD_KEY)|(1<<SECRET_KEY) }
 
 func produce_item(bag: int, slot: int) -> int:
 	var item: int = HUD.get_item(bag, slot)
@@ -102,13 +94,12 @@ func produce_item(bag: int, slot: int) -> int:
 	var id: int = D.byte(item, ID)
 	var used: bool = false
 	if WEAPON < id and id < KIT:
-		match id:
-			T_RAPIER, W_RAPIER: return WEAPON_THROW
-			T_RAPIER, W_RAPIER: return WEAPON_THROW
-			GOLD_KEY, SECRET_KEY: used = open_door(id); if used: HUD.level.set_tile(HUD.GROUND) # TODO check if it actual ground tile
+		if D.of(THROW_RAPIER, id): return WEAPON_THROW
+		elif id == GOLD_KEY: used = HUD.level.action.open_door(bag); if used: HUD.level.set_tile(HUD.GROUND) # TODO check if it actual ground tile
+		elif id == SECRET_KEY: used = HUD.level.action.open_secret(bag); if used: HUD.level.set_tile(HUD.GROUND) # TODO check if it actual ground tile
 	elif USE < id and id < ARMOR:
 		match id:
-			JAR: if near_water(): used = put_item(bag, WATER)
+			JAR: if HUD.level.action.near_water(): used = put_item(bag, WATER)
 			WATER:
 				used = put_item(bag, JAR)
 				if used:

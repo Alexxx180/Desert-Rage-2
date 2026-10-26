@@ -2,12 +2,11 @@ class_name Action extends RefCounted
 
 enum { STATIC = 1, JUMPED = 0, JUMPING, COUNT = 8, JUMP = 0, DURATION = 1,
 	CLOSE = 0, HEIGHT = 1, SHADOW = 2, PORTION = 3, JUMP_POWER = 10 }
-
 enum { LOGIC = 0, FLOOR = 1, ENTRY = 2, WALLS = 3, 
 	HINT = 7, TAGS = 7, CHESTS = 9, GROUND = 9, # ALT
 	ALT1 = 3, ALT2 = 2, ALT3 = 1, ALT4 = 0,
 	
-	ID = 0, TYPE = 1, ALT = 2, ATLAS = 3, COORDS = 4, T4 = 16, T8 = 64,
+	COORDS = 4, T4 = 16, T8 = 64, # ID = 0, TYPE = 1, ALT = 2, ATLAS = 3, 
 	
 	FLOORS = 0, ICE_MECH = 0, HELP = 1,
 	
@@ -29,6 +28,20 @@ enum { LOGIC = 0, FLOOR = 1, ENTRY = 2, WALLS = 3,
 	B_SPRING_ON, D_WATER, D_EXIT, SLIDE, PILLAR_OLD, G_SECRET_OFF, G_SECRET_ON,
 	W_SECRET_OFF, W_SECRET_ON, PAGE,
 } # tiles
+enum { _ID, _ATLAS = 8, _ALT = 16, _TYPE = 18, # + 2 (as real type (-alt))
+	
+	BOXES = (1<<SMALL_BOX)|(1<<LARGE_BOX), STAND = BOXES | (1<<STAND_ON),
+	C_LEVER = (1<<LEVER_OFF)|(1<<LEVER_ON), C_SOURCE = (1<<SOURCE_OFF)|(1<<SOURCE_ON),
+	SOURCE_ID = LOGIC | (SOURCE_OFF << _ATLAS), F_ID = FLOOR | (FLOORS << _TYPE),
+	PUDDLE_ID = FLOOR | (PUDDLE_ON << _TYPE), ICE_ID = FLOOR | (ICE_FLOOR << _TYPE),
+	GROUND_ID = WALLS | (GROUND << _ATLAS),
+	WATER_ID = ENTRY | (D_WATER << _ATLAS),
+	
+	SECRET_ID = LOGIC | (GOLD_OFF << _ATLAS), # FIXME change both to doors
+	GOLD_ID = LOGIC | (GOLD_OFF << _ATLAS),
+	WAYS = (1<<U_WAY)|(1<<D_WAY)|(1<<R_WAY)|(1<<L_WAY)|(1<<U_WAY_OUT)|(1<<D_WAY_OUT),
+	MECH_ID = (1<<U_WALL_OFF)|(1<<U_WALL_ON)|(1<<D_WALL_OFF)|(1<<D_WALL_ON)|(1<<STAND_OFF)|(1<<STAND_ON)
+}
 
 var _tile: PackedInt32Array:
 	get: return HUD.level.border.tile
@@ -40,14 +53,12 @@ var directed_nzero: PackedVector2Array = [Vector2.ZERO, Vector2.ZERO]
 var off: Vector2
 var hero_state: PackedByteArray = [0, 0]
 
-const stand: PackedInt32Array = [STAND_ON, SMALL_BOX, LARGE_BOX]
 const position: PackedVector2Array = [Vector2(20, 22), Vector2(0, -48), Vector2(0.6, 0.72), Vector2(0.125, 0.2)]
 
 func on_tile(pos: Vector2) -> PackedInt32Array: return HUD.level.border.pos(pos).id().atlas().type().tile
-func _of(type: int) -> bool: return D.of(hero_state[HUD.hero], type)
-func _to(type: int, value: int) -> void: D.b(hero_state, HUD.hero, type, value)
-func _t0(type: int) -> void: D.b0(hero_state, HUD.hero, type)
-func _t1(type: int) -> void: D.b1(hero_state, HUD.hero, type)
+func _hero_has(h: int, type: int) -> bool: return D.of(hero_state[h], type)
+func _hero_dont(h: int, type: int) -> void: D.b0(hero_state, h, type)
+func _hero_do(h: int, type: int) -> void: D.b1(hero_state, h, type)
 
 var deployed: bool = true
 
@@ -75,10 +86,10 @@ func movement(event: InputEvent, key2: bool) -> void:
 
 func move_hero(h: int, act: bool, in_place: bool) -> void:
 	# directed2
-	if D.of(hero_state[h], JUMPING): return
+	if _hero_has(h, JUMPING): return
 	var hero: CharacterBody2D = HUD.level.entity[h]
 	
-	if D.of(hero_state[h], JUMPED):
+	if _hero_has(h, JUMPED):
 		if hero.box == -1:
 			ledge_jump(h, hero.position) # pass
 			HUD.direct(directed[h].round())
@@ -120,12 +131,10 @@ func add_particle(asset: GPUParticles2D, path: StringName, name: StringName, nex
 func puddle_tile() -> void:
 	var hero: CharacterBody2D = HUD.level.entity[HUD.hero]
 	var pos: Vector2 = hero.position + hero.lever.position
-	if on_tile(pos)[ID] == FLOOR and _tile[TYPE] == FLOORS:
-		pass
-	elif _tile[ID] == WALLS and _tile[ATLAS] == GROUND:
-		HUD.level.border.id(FLOOR).alt(ALT1)
-	else:
-		return
+	var m: int = HUD.level.border.pos(pos).ground().mold()
+	if D.m(m, F_ID): pass
+	elif D.m(m, GROUND_ID): HUD.level.border.id(FLOOR).alt(ALT1)
+	else: return
 	HUD.level.border.type(PUDDLE_OFF).paint_alt()
 	add_particle(HUD.level.rain, D.rain, &"rain", pos)
 	HUD.level.conductor.contact(_tile[COORDS])
@@ -133,7 +142,8 @@ func puddle_tile() -> void:
 func melt_ice() -> void:
 	var hero: CharacterBody2D = HUD.level.entity[HUD.hero]
 	var pos: Vector2 = hero.position + hero.lever.position
-	if on_tile(pos)[ID] == FLOOR and _tile[TYPE] == ICE_FLOOR:
+	var m: int = HUD.level.border.pos(pos).ground().mold()
+	if D.m(m, ICE_ID):
 		HUD.level.border.type(PUDDLE_OFF).paint_alt()
 		add_particle(HUD.level.fire, D.fire, &"fire", pos) # TileDecorator
 
@@ -142,8 +152,8 @@ func toggle_collision(h: int, next: bool) -> void:
 	HUD.level.entity[h].set_collision_mask_value(STATIC, next)
 
 func toggle_stuck(h: int, next: bool) -> void:
-	HUD.level.entity[h].lever_body.set_deferred(&"disabled", not next)
-	HUD.level.entity[h].plate_body.set_deferred(&"disabled", not next)
+	HUD.level.lever_body[h].set_deferred(&"disabled", not next)
+	HUD.level.plate_body[h].set_deferred(&"disabled", not next)
 	toggle_collision(h, next)
 
 func box_jump(coords: int, f1: int, f2: int) -> int:
@@ -163,12 +173,12 @@ func stop_jump(h: int) -> void:
 	HUD.adversary.animate_frames(h, HUD.WALK)
 	if hero.box == -1:
 		hero.reparent(HUD.level, true)
-		if not _of(JUMPED):
+		if not _hero_has(h, JUMPED):
 			hero.lever.position = Vector2.ZERO
 			toggle_stuck(h, true)
 	hero.position = pos
 	HUD.sprite.stop()
-	_t0(JUMPING)
+	_hero_dont(h, JUMPING)
 
 func set_to() -> void:
 	pass
@@ -180,31 +190,32 @@ func get_jump_length(h: int) -> Vector2:
 
 var jumped: bool
 
-func get_stand_pos(m: int, c: int) -> Vector2:
-	# t: PackedInt32Array
-	var pos: Vector2 = HUD.level.border.map_to_local(D.map(c))
-	var atlas: int = D.byte(m, ATLAS)
-	if D.byte(m, ID) == LOGIC and D.of(STAND, atlas):
+func get_stand_pos(h: int, m: int, c: int) -> Vector2:
+	var pos: Vector2 = HUD.level.border.map_to_local(D.map(c)); var atlas: int = D.byte(m, D.ATLAS)
+	print("M: ", D.byte4(m), " - atl: ", atlas)
+	if D.byte(m, D.ID) == LOGIC and D.of(STAND, atlas):
 		off = Vector2(0, 18); pos -= off
-		D.b1(hero_state, HUD.hero, JUMPED)
-	elif (F_ID & m)==m:
+		_hero_do(h, JUMPED)
+	elif D.m(m, F_ID):
 		pos -= off; off = Vector2.ZERO
-		D.b(hero_state, HUD.hero, JUMPED, atlas == LEDGE)
+		if atlas == LEDGE: _hero_do(h, JUMPED)
+		else: _hero_dont(h, JUMPED)
 	else:
 		pos = Vector2.ZERO
 	return pos
 
 func ledge_jump(h: int, pos: Vector2, height: int = 0) -> void:
 	var dir: Vector2 = get_jump_length(h); if dir.round() == Vector2.ZERO: return
-	var f1: int = HUD.level.border.pos(pos).ground().extract(D.FLOOR) + height
-	var m: int = HUD.level.border.pos(pos + dir).ground().mold(); var c: int = HUD.level.border.m_coords()
-	var f2: int = HUD.level.border.extract(D.FLOOR)
+	var b: TileDecorator = HUD.level.border
+	var f1: int = b.pos(pos).ground().extract(D.FLOOR) + height
+	var m: int = b.pos(pos + dir).ground().mold(); var c: int = b.m_coords()
+	var f2: int = b.extract(D.FLOOR)
 	var no: int = box_jump(c, f1, f2)
 	if no != -1:
 		pos = position[HEIGHT]
 		D.b1(hero_state, HUD.hero, JUMPED)
 	elif f1 == f2:
-		pos = get_stand_pos(m, c)
+		pos = get_stand_pos(h, m, c)
 		if pos == Vector2.ZERO: return
 	else: return
 	
@@ -212,7 +223,7 @@ func ledge_jump(h: int, pos: Vector2, height: int = 0) -> void:
 	if no != -1: HUD.level.entity[h].call_deferred(&"reparent", HUD.level.boxes[no], true)
 	
 	HUD.adversary.set_anim(h, JUMP) # HUD.adversary.animate_frames(h, HUD.JUMP) # _t1(JUMPING)
-	HUD.level.entity[h].box = no
+	# HUD.level.entity[h].box = no
 
 func box_move() -> void:
 	pass
@@ -234,13 +245,13 @@ enum { LEFT, RIGHT, TOP, DOWN, CROSS_STAY, CROSS_LEFT, CROSS_RIGHT, CROSS_TOP, C
 
 func move_platform(i: int, from: int, to: int) -> void:
 	var pos: Vector2 = platforms[i].position + directions[from] * HALF_TILE
-	if HUD.level.border.pos(platforms[i].position).id().atlas().type().tile[ATLAS] == TILE_GROUND:
+	if HUD.level.border.pos(platforms[i].position).ground().tile[D.ATLAS] == TILE_GROUND:
 		platform_dir[i] = to
 	else:
 		platforms[i].velocity += directions[from] * PLATFORM_POWER
 
 func move_cargo_platform(i: int) -> void:
-	if fallback[i] == 0 or HUD.level.border.pos(platforms[i].position).id().atlas().type().tile[ALT] == ALT1:
+	if fallback[i] == 0 or HUD.level.border.pos(platforms[i].position).ground().tile[D.ALT] == ALT1:
 		platform_dir[i] = CROSS_STAY
 		fallback[i] = 255
 	else:
@@ -264,49 +275,7 @@ func platforms_process(_delta: float) -> void:
 
 enum { BUTTON, LEVER, SOURCE, TELEPORT, SIZE = 16, CLUSTER = 64 }
 
-func resize_clusters() -> void:
-	var casual_mode: bool = true # get difficulty from vault
-	if casual_mode:
-		var platinum_off: PackedVector2Array = HUD.level.border.get_used_cells_by_id(LOGIC, D.map8(PLATINUM_OFF))
-		
-		var chests_off: PackedByteArray = [BRONZE_OFF, SILVER_OFF, GOLD_OFF, PLATINUM_OFF]
-		var chests_on: PackedByteArray = [BRONZE_ON, SILVER_ON, GOLD_ON, PLATINUM_ON]
-		for i in range(0, len(chests_on)):
-			HUD.level.border.id(LOGIC).atlas(chests_off[i])
-			for coords in HUD.level.border.get_used_cells_by_id(LOGIC, D.map8(chests_on[i])): HUD.level.border.coords(D.join(coords)).paint()
-		
-		HUD.level.border.id(LOGIC).atlas(PLATINUM_ON)
-		for coords in platinum_off: HUD.level.border.coords(D.join(coords)).paint()
-	
-	var button: PackedInt32Array = []
-	var lever: PackedInt32Array = []
-	var source: PackedInt32Array = []
-	var teleport: PackedInt32Array = []
-	
-	if len(cluster) == 0: cluster.resize(CLUSTER)
-	var count: int = 0
-	for y in range(0, T8):
-		var tiles: PackedVector2Array = HUD.level.execute.get_used_cells_by_id(TAGS, D.map8(y))
-		if tiles.size() == 0: break
-		if count + tiles.size() > cluster.size(): cluster.resize(cluster.size() * 2)
-		
-		var search: bool = true
-		for x in range(0, tiles.size()):
-			cluster[count + x] = D.join(tiles[x])
-			if search:
-				search = false
-				match HUD.level.border.coords(D.join(tiles[x])).tile[ATLAS]:
-					PLATE_OFF, PLATE_ON: button.append(D.of(tiles.size(), count))
-					LEVER_OFF, LEVER_ON: lever.append(D.of(tiles.size(), count))
-					SOURCE_OFF, SOURCE_ON: source.append(D.of(tiles.size(), count))
-					TELEPORT_ON, PLACE: teleport.append(D.of(tiles.size(), count))
-					_: search = true
-		count += tiles.size()
-	var types: Array[PackedInt32Array] = [button, lever, source, teleport]
-	access.clear()
-	for i in range(0, len(types)):
-		access.append_array(types[i])
-		sizes[i] = types[i].size()
+
 
 var cluster: PackedInt32Array = []
 var access: PackedInt32Array = []
@@ -325,13 +294,11 @@ func button_press(no: int, add: int, compare: int, tag: int) -> void:
 		HUD.level.border.atlas(tag).paint()
 
 func toggle_openning(no: int, on: bool, enter: bool) -> void:
-	var tag: int = HUD.level.border.coords(cluster[no]).atlas().tile[ATLAS]
+	var tag: int = D.byte(HUD.level.border.coords(cluster[no]).atlas().mold(), D.ATLAS)
 	if !on:
-		match tag:
-			U_WALL_OFF, U_WALL_ON, D_WALL_OFF, D_WALL_ON, STAND_OFF, STAND_ON:
-				HUD.level.border.atlas(tag).paint()
-			PLATE_OFF: button_press(no, +1, 1, tag)
-			PLATE_ON: button_press(no, +1 if enter else -1, 0, tag)
+		if D.of(MECH_ID, tag): HUD.level.border.atlas(tag).paint()
+		elif tag == PLATE_OFF: button_press(no, +1, 1, tag)
+		elif tag == PLATE_ON: button_press(no, +1 if enter else -1, 0, tag)
 	else:
 		var atlas: int
 		match tag:
@@ -378,13 +345,7 @@ func lever_outer(body: Node2D, h: int) -> void:
 	elif body is TileDecorator:
 		body.nan_tile(HUD.level.lever_tile, h)
 
-enum { _ID, _ATLAS = 8, _TYPE = 16,
-	
-	F_ID = FLOOR | (FLOORS << _TYPE),
-	BOXES = (1<<SMALL_BOX)|(1<<LARGE_BOX),
-	STAND = BOXES | (1<<STAND_ON)
-}
-
+func lever_near(h: int) -> TileDecorator: return HUD.level.border.pos(HUD.level.entity[h].position + HUD.level.lever[h].position)
 func lever_inner(body: Node2D, h: int) -> void:
 	var hero: CharacterBody2D = HUD.level.entity[h]
 	if body is AnimatableBody2D and body.is_in_group(&"box"):
@@ -394,29 +355,25 @@ func lever_inner(body: Node2D, h: int) -> void:
 	elif body is TileDecorator:
 		var m: int = body.pos(hero.position).ground().mold()
 		print("F_ID: ", F_ID, " & = ", F_ID & m, " m = ", m, " ??: ", D.byte4(m))
-		if D.at(m, F_ID) or (D.byte(m, ID) == LOGIC and D.of(STAND, D.byte(m, ATLAS))):
+		if D.m(m, F_ID) or (D.byte(m, D.ID) == LOGIC and D.of(STAND, D.byte(m, D.ATLAS))):
 			ledge_jump(h, hero.position); return
 		
-		m = body.pos(hero.position + HUD.level.lever[h].position).ground().get_tile(HUD.level.lever_tile, h).mold()
-		if D.byte(m, ID) == LOGIC and D.of(BOXES, D.byte(m, ATLAS)):
-			add_box(D.byte(m, ATLAS), body.positioned())
+		m = lever_near(h).ground().get_tile(HUD.level.lever_tile, h).mold()
+		var atlas: int = D.byte(m, D.ATLAS)
+		if D.byte(m, D.ID) == LOGIC and D.of(BOXES, atlas):
+			add_box(atlas, body.positioned())
 
 func lever_outer_ray(border: Node2D) -> void: lever_outer(border, D.RAY)
 func lever_outer_rock(border: Node2D) -> void: lever_outer(border, D.ROCK)
 func lever_inner_ray(border: Node2D) -> void: lever_inner(border, D.RAY)
 func lever_inner_rock(border: Node2D) -> void: lever_inner(border, D.ROCK)
 func lever_apply(hero: int, type: int) -> void:
-	var atlas: int = HUD.level.lever_tile[hero * TileDecorator.TILE_DATA + ATLAS]
+	var m: int = HUD.level.lever_tile[hero * 2]
+	var atlas: int = D.byte(m, D.ATLAS)
 	if atlas == 0: return
-	elif type == FIRE:
-		var t: int = HUD.level.lever_tile[hero * TileDecorator.TILE_DATA + TYPE]
-		if t == ICE_FLOOR: HUD.level.border.set_tile(HUD.level.lever_tile, hero).paint_alt()
-	elif type == ACT:
-		if atlas == LEVER_OFF: switch_cluster(LEVER, true)
-		elif atlas == LEVER_ON: switch_cluster(LEVER, true)
-	elif type == SPARK:
-		if atlas == SOURCE_OFF: switch_cluster(SOURCE, true)
-		elif atlas == SOURCE_ON: switch_cluster(SOURCE, true)
+	elif type == FIRE: if (D.short(m, D.ALT) >> 2) == ICE_FLOOR: HUD.level.border.set_tile(HUD.level.lever_tile, hero).paint_alt()
+	elif type == ACT: if D.of(C_LEVER, atlas): switch_cluster(LEVER, true)
+	elif type == SPARK: if D.of(C_SOURCE, atlas): switch_cluster(SOURCE, true)
 
 var transitions_part: PackedByteArray = []
 var transitions_tile: PackedInt32Array = []
@@ -443,7 +400,7 @@ func plate_outer(hero: int, border: TileDecorator) -> void:
 		HUD.log_help_hide()
 		walk_no = -1
 
-	match HUD.level.press_tile[TileDecorator.TILE_DATA * hero + ATLAS]:
+	match HUD.level.press_tile[hero * 2 + D.ATLAS]:
 		LEFT_CHAIN: chain_enter(hero, 0, 1)
 		RIGHT_CHAIN: chain_enter(hero, 0, 1)
 		H_SPRING_OFF: pass
@@ -452,8 +409,15 @@ func plate_outer(hero: int, border: TileDecorator) -> void:
 func plate_inner_ray(border: TileDecorator) -> void: plate_inner(D.RAY, border)
 func plate_inner_rock(border: TileDecorator) -> void: plate_inner(D.ROCK, border)
 func plate_inner(hero: int, border: TileDecorator) -> void:
-	border.pos(HUD.level.entity[hero].position).id().atlas().type(PUDDLE_OFF).get_tile(HUD.level.press_tile, hero)
-	match border.tile[ATLAS]:
+	var m: int = border.pos(HUD.level.entity[hero].position).id().atlas().type(PUDDLE_OFF).get_tile(HUD.level.press_tile, hero).mold()
+	var atlas: int = D.byte(m, D.ATLAS)
+	if D.of(WAYS, atlas):
+		for i in range(0, len(transitions_part)):
+			if border.m_coords() == transitions_tile[i]:
+				HUD.transition_part = transitions_part[i]
+				break
+		HUD.entry_transit(HUD.GATE_IN); return
+	match atlas:
 		INSPIRER: HUD.append_dialog(hero, randi_range(65, 90)); enter_station(0) # TODO add face checks
 		COMFORTER: HUD.adversary.affect(hero, +5, 0); enter_station(1)
 		AMPLIFIER: HUD.adversary.affect(hero, 0, +3); enter_station(2)
@@ -462,29 +426,23 @@ func plate_inner(hero: int, border: TileDecorator) -> void:
 		TELEPORT_ON:
 			var c: int = get_cluster(TELEPORT, border.tile[COORDS])
 			for i in range(D.x(access[c]), D.y(access[c])):
-				if HUD.level.border.coords(cluster[i]).tile[ATLAS] == PLACE:
+				if D.byte(HUD.level.border.coords(cluster[i]).mold(), D.ATLAS) == PLACE:
 					HUD.level.entity[hero].teleport(HUD.level.border.map_to_local(D.map(cluster[i])))
 					break
 		HINT:
 			# for hint loop
-			if border.tile[ID] == TYPE and walk_no != -1:
+			if walk_no != -1: # border.tile[D.ID] == TYPE and 
 				HUD.log_help(walk_no)
-			elif border.tile[ID] == ID:
+			elif D.byte(border.mold(), D.ID) == D.ID: # TODO replace did
 				pass
-		U_WAY, D_WAY, R_WAY, L_WAY, U_WAY_OUT, D_WAY_OUT:
-			for i in range(0, len(transitions_part)):
-				if border.tile[COORDS] == transitions_tile[i]:
-					HUD.transition_part = transitions_part[i]
-					break
-			HUD.entry_transit(HUD.GATE_IN)
 		D_LADDER:
 			HUD.set_part(HUD.LEVEL, HUD.DUNGEON, HUD.get_part(HUD.LEVEL, HUD.DUNGEON) + 1)
 			HUD.entry_transit(HUD.LADDER_DOWN)
 		U_LADDER:
 			HUD.set_part(HUD.LEVEL, HUD.DUNGEON, HUD.get_part(HUD.LEVEL, HUD.DUNGEON) - 1)
 			HUD.entry_transit(HUD.LADDER_UP)
-		LEFT_CHAIN: chain_enter(hero, border.tile[ATLAS], 0)
-		RIGHT_CHAIN: chain_enter(hero, border.tile[ATLAS], 0)
+		LEFT_CHAIN: chain_enter(hero, border.tile[D.ATLAS], 0)
+		RIGHT_CHAIN: chain_enter(hero, border.tile[D.ATLAS], 0)
 		H_SPRING_ON:
 			# logic to disable collision
 			HUD.level.entity[hero].velocity += Vector2(0, 60)
@@ -540,11 +498,11 @@ func fixate_box(hero: int, box: int, _add: int) -> void:
 
 func plate_inner_box(border: Node2D, no: int) -> void:
 	border.pos(HUD.level.boxes[no].position).id().atlas().type(PUDDLE_OFF).get_tile(HUD.level.boxes_tile, no)
-	if border.tile[ATLAS] == PLATE_OFF or border.tile[ATLAS] == PLATE_ON:
+	if border.tile[D.ATLAS] == PLATE_OFF or border.tile[D.ATLAS] == PLATE_ON:
 		switch_cluster(BUTTON, true)
 
 func plate_outer_box(border: Node2D, no: int) -> void:
-	match HUD.level.boxes_tile[TileDecorator.TILE_DATA * no + ATLAS]:
+	match HUD.level.boxes_tile[no * 2 + D.ATLAS]:
 		PLATE_OFF, PLATE_ON:
 			switch_cluster(BUTTON, true)
 	border.nan_tile(HUD.level.boxes_tile, no)
@@ -569,7 +527,7 @@ func chain_enter(hero: int, tile: int, y: int) -> void:
 	press[hero] = tile
 	tile_motion[hero].y = y
 
-enum { CHAIN = 0, STATE = 0, JOINT = 1, A = -2, B = -1, TIME = 4, LENGTH = 10, NONE = -1 }
+enum { CHAIN = 0, STATE = 0, JOINT = 1, A = -2, B = -1, TIME = 4, LENGTH = 10, NONE = -1, X = 1, Y = 1 << D.LEVEL }
 
 var puddles: PackedInt32Array = [0, 0, 0, 0, 0, 0, 0, 0]
 var current: Array[PackedInt32Array] = [[0, 0], [0, 0], [0, 0], [0, 0]] # Vector2i
@@ -599,7 +557,7 @@ func initiate_source(coords: int) -> void:
 	else:
 		size.append(LENGTH)
 		current.append([coords, coords])
-	HUD.level.border.coords(coords).id().atlas().type().atlas(SOURCE_ON).paint()
+	HUD.level.border.coords(coords).ground().atlas(SOURCE_ON).paint()
 	contact(coords)
 	HUD.size[HUD.CURRENTS] += 1
 
@@ -609,46 +567,45 @@ func diffusion() -> void:
 		if state == 0: continue
 		if state - 1 == 0:
 			HUD.level.border.coords(puddles[i]).id().atlas().type(PUDDLE_OFF).paint_alt()
-			puddles[STATE] = D.to_half(puddles[STATE], 0, D.half(puddles[STATE], 0) - 1)
+			puddle_diffuse()
 		puddles[STATE] = D.to_half(puddles[STATE], i, state - 1)
 	if puddles[STATE] == 0: HUD.sparking.stop()
 
+func puddle_diffuse() -> void: puddles[STATE] = D.to_half(puddles[STATE], 0, D.half(puddles[STATE], 0) - 1)
 func sparking(tile: int) -> void:
-	if puddles[STATE] & 7 == 7: return
+	if D.m(puddles[STATE], 7): return
 	for i in range(1, 8):
 		if D.half(puddles[STATE], i) == 0:
 			puddles[i] = tile
 			HUD.level.border.coords(tile).id().atlas().type(PUDDLE_ON).paint_alt()
 			puddles[STATE] = D.to_half(puddles[STATE], i, TIME)
-			puddles[STATE] = D.to_half(puddles[STATE], 0, D.half(puddles[STATE], 0) + 1)
+			puddle_diffuse()
 			break
 	if D.half(puddles[STATE], 0) == 1:
 		HUD.sparking.start()
 
 func activate_puddle(pos: Vector2) -> void:
-	if HUD.level.border.pos(pos).tile[TYPE] == PUDDLE_OFF:
-		if _around(HUD.level.border.tile[COORDS]):
-			sparking(HUD.level.border.tile[COORDS])
+	if HUD.level.border.pos(pos).m_type() == PUDDLE_OFF:
+		var coords: int = HUD.level.border.m_coords()
+		if _around(coords): sparking(coords)
 	else:
-		contact(HUD.level.border.tile[COORDS])
+		contact(HUD.level.border.m_coords())
 
 func _around(tile: int) -> bool:
-	var t: PackedInt32Array = HUD.level.border.coords(tile).id().type().tile
-	return ((t[ID] == LOGIC and t[ATLAS] == SOURCE_OFF) or (t[ID] == FLOOR and t[ATLAS] != WALL and t[TYPE] == PUDDLE_ON))
+	var m: int = HUD.level.border.coords(tile).id().type().mold()
+	return D.m(m, SOURCE_ID) or (D.m(m, PUDDLE_ID) and D.byte(m, D.ATLAS) != WALL)
 
 func contact(map_coords: int) -> void:
-	var y: int = 1 << D.LEVEL
-	if not (_around(map_coords + y) or _around(map_coords + 1) or
-		_around(map_coords - y) or _around(map_coords - 1)): return
+	if not (_around(map_coords + Y) or _around(map_coords + X) or
+		_around(map_coords - Y) or _around(map_coords - X)): return
 	
-	map_coords = HUD.level.border.tile[COORDS]
-	if HUD.level.border.tile[TYPE] == PUDDLE_OFF:
-		charge_unit(map_coords)
-		return
+	map_coords = HUD.level.border.m_coords()
+	if HUD.level.border.m_type() == PUDDLE_OFF:
+		charge_unit(map_coords); return
 	
 	initiate_source(map_coords)
 	if conduct(map_coords, current.size() - 1):
-		HUD.level.border.coords(map_coords).id().atlas().type().atlas(SOURCE_ON).paint()
+		HUD.level.border.coords(map_coords).ground().atlas(SOURCE_ON).paint()
 		contact(map_coords)
 
 func conduct(map_coords: int, chain: int) -> bool:
@@ -683,8 +640,8 @@ func get_site_to_discharge(map_coords: Vector2i) -> Vector2i:
 func charge_unit(map_coords: int) -> void:
 	for chain in range(current.size(), 0, -1):
 		var delta: int = map_coords - current[chain][B]
-		if ((D.x(delta) ^ D.y(delta)) & 1 == 1) and conduct(map_coords, chain):
-			HUD.level.border.coords(map_coords).id().atlas().type().atlas(PUDDLE_ON).paint()
+		if D.m(D.x(delta) ^ D.y(delta), 1) and conduct(map_coords, chain):
+			HUD.level.border.coords(map_coords).ground().atlas(PUDDLE_ON).paint()
 			contact(map_coords)
 			return
 
@@ -721,3 +678,7 @@ func _turn_points(coords: Vector2i, chain: int) -> void:
 		current[chain][B] = coords.y # target_coords
 	size[chain] += 1
 	contact(current[chain][B])
+
+func open_secret(h: int) -> bool: return D.m(HUD.level.lever_tile[h << 1], SECRET_ID)
+func open_door(h: int) -> bool: return D.m(HUD.level.lever_tile[h << 1], GOLD_ID)
+func near_water(h: int) -> bool: return D.m(HUD.level.lever_tile[h << 1], WATER_ID)
