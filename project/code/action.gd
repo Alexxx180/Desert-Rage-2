@@ -10,8 +10,8 @@ enum { LOGIC = 0, FLOOR = 1, ENTRY = 2, WALLS = 3,
 	
 	FLOORS = 0, ICE_MECH = 0, HELP = 1,
 	
-	WALL = 3, LEDGE = 4, TILE_GROUND = 10, LEFT_CHAIN = 61, MID_CHAIN,
-	RIGHT_CHAIN, PILLAR,
+	WALL = 3, LEDGE = 4, TILE_GROUND = 10, TRIGGER_TILE = 8, LEFT_CHAIN = 61,
+	MID_CHAIN, RIGHT_CHAIN, PILLAR,
 	
 	PUDDLE_OFF, PUDDLE_ON, ICE_FLOOR, ICE_THICK,
 	
@@ -22,25 +22,33 @@ enum { LOGIC = 0, FLOOR = 1, ENTRY = 2, WALLS = 3,
 	GOLD_OFF, GOLD_ON, PLATINUM_OFF, PLATINUM_ON, PLACE, TELEPORT_ON, SOURCE_OFF,
 	SOURCE_ON, LEVER_OFF, LEVER_ON, PLATE_OFF, PLATE_ON, TELEPORT_OFF, SPIKER,
 	COMFORTER, AMPLIFIER, INSPIRER, SMALL_BOX, FIRE_BOX, LARGE_BOX, STAND_OFF, STAND_ON,
+	NAVIGATOR,
 	
 	U_WATER = 0, U_EXIT, U_WALL_OFF, U_WALL_ON, U_LADDER, D_LADDER, ENEMY, BOSS,
 	M_WATER, M_EXIT, D_WALL_OFF, D_WALL_ON, H_SPRING_OFF, H_SPRING_ON, B_SPRING_OFF,
 	B_SPRING_ON, D_WATER, D_EXIT, SLIDE, PILLAR_OLD, G_SECRET_OFF, G_SECRET_ON,
 	W_SECRET_OFF, W_SECRET_ON, PAGE,
 } # tiles
-enum { _ID, _ATLAS = 8, _ALT = 16, _TYPE = 18, # + 2 (as real type (-alt))
+enum { CLUSTER = 64, LEVER = 0, SOURCE, BUTTON, TRANSP,
+	_ID = 0, _ATLAS = 8, _ALT = 16, _TYPE = 18, # + 2 (as real type (-alt))
 	
-	BOXES = (1<<SMALL_BOX)|(1<<LARGE_BOX), STAND = BOXES | (1<<STAND_ON),
-	C_LEVER = (1<<LEVER_OFF)|(1<<LEVER_ON), C_SOURCE = (1<<SOURCE_OFF)|(1<<SOURCE_ON),
 	SOURCE_ID = LOGIC | (SOURCE_OFF << _ATLAS), F_ID = FLOOR | (FLOORS << _TYPE),
 	PUDDLE_ID = FLOOR | (PUDDLE_ON << _TYPE), ICE_ID = FLOOR | (ICE_FLOOR << _TYPE),
 	GROUND_ID = WALLS | (GROUND << _ATLAS),
 	WATER_ID = ENTRY | (D_WATER << _ATLAS),
 	
+	TELEPORT_ID = LOGIC | (TELEPORT_ON << _ATLAS),
 	SECRET_ID = LOGIC | (GOLD_OFF << _ATLAS), # FIXME change both to doors
 	GOLD_ID = LOGIC | (GOLD_OFF << _ATLAS),
-	WAYS = (1<<U_WAY)|(1<<D_WAY)|(1<<R_WAY)|(1<<L_WAY)|(1<<U_WAY_OUT)|(1<<D_WAY_OUT),
-	MECH_ID = (1<<U_WALL_OFF)|(1<<U_WALL_ON)|(1<<D_WALL_OFF)|(1<<D_WALL_ON)|(1<<STAND_OFF)|(1<<STAND_ON)
+	
+	W_BOXES = (1<<SMALL_BOX)|(1<<LARGE_BOX), W_STANDS = (1<<STAND_OFF)|(1<<STAND_ON),
+	W_LEVER = (1<<LEVER_OFF)|(1<<LEVER_ON), W_SOURCE = (1<<SOURCE_OFF)|(1<<SOURCE_ON),
+	W_PLATE = (1<<PLATE_OFF)|(1<<PLATE_ON), W_TRANSP = (1<<TELEPORT_OFF)|(1<<PLACE),
+	W_UWALL = (1<<U_WALL_OFF)|(1<<U_WALL_ON), W_DWALL = (1<<D_WALL_OFF)|(1<<D_WALL_ON),
+	W_BOX_STAND = W_BOXES | (1<<STAND_ON),
+	
+	W_WAYS = (1<<U_WAY)|(1<<D_WAY)|(1<<R_WAY)|(1<<L_WAY)|(1<<U_WAY_OUT)|(1<<D_WAY_OUT),
+	W_MECH = (1<<U_WALL_OFF)|(1<<U_WALL_ON)|(1<<D_WALL_OFF)|(1<<D_WALL_ON)|(1<<STAND_OFF)|(1<<STAND_ON)
 }
 
 var _tile: PackedInt32Array:
@@ -128,24 +136,20 @@ func add_particle(asset: GPUParticles2D, path: StringName, name: StringName, nex
 		asset.restart()
 	asset.position = next
 
-func puddle_tile() -> void:
-	var hero: CharacterBody2D = HUD.level.entity[HUD.hero]
-	var pos: Vector2 = hero.position + hero.lever.position
-	var m: int = HUD.level.border.pos(pos).ground().mold()
+func puddle_tile(h: int) -> void:
+	var m: int = HUD.level.border.pos(HUD.level.w_lever(h)).ground().mold()
 	if D.m(m, F_ID): pass
 	elif D.m(m, GROUND_ID): HUD.level.border.id(FLOOR).alt(ALT1)
 	else: return
 	HUD.level.border.type(PUDDLE_OFF).paint_alt()
-	add_particle(HUD.level.rain, D.rain, &"rain", pos)
+	add_particle(HUD.level.rain, D.rain, &"rain", HUD.level.w_lever(h)) # source
 	HUD.level.conductor.contact(_tile[COORDS])
 
-func melt_ice() -> void:
-	var hero: CharacterBody2D = HUD.level.entity[HUD.hero]
-	var pos: Vector2 = hero.position + hero.lever.position
-	var m: int = HUD.level.border.pos(pos).ground().mold()
+func melt_ice(h: int) -> void:
+	var m: int = HUD.level.border.pos(HUD.level.w_lever(h)).ground().mold()
 	if D.m(m, ICE_ID):
 		HUD.level.border.type(PUDDLE_OFF).paint_alt()
-		add_particle(HUD.level.fire, D.fire, &"fire", pos) # TileDecorator
+		add_particle(HUD.level.fire, D.fire, &"fire", HUD.level.w_lever(h)) # TileDecorator
 
 func toggle_collision(h: int, next: bool) -> void:
 	HUD.level.entity[h].set_collision_layer_value(STATIC, next)
@@ -156,7 +160,7 @@ func toggle_stuck(h: int, next: bool) -> void:
 	HUD.level.plate_body[h].set_deferred(&"disabled", not next)
 	toggle_collision(h, next)
 
-func box_jump(coords: int, f1: int, f2: int) -> int:
+func can_box_jump(coords: int, f1: int, f2: int) -> int:
 	for i in range(0, len(HUD.level.boxes)):
 		var c: int = HUD.level.border.pos(HUD.level.boxes[i].position).ground().m_coords()
 		if c == coords and (f1 == (f2 + box_height[i])): return i
@@ -193,7 +197,7 @@ var jumped: bool
 func get_stand_pos(h: int, m: int, c: int) -> Vector2:
 	var pos: Vector2 = HUD.level.border.map_to_local(D.map(c)); var atlas: int = D.byte(m, D.ATLAS)
 	print("M: ", D.byte4(m), " - atl: ", atlas)
-	if D.byte(m, D.ID) == LOGIC and D.of(STAND, atlas):
+	if D.m(m, LOGIC) and D.of(W_BOX_STAND, atlas):
 		off = Vector2(0, 18); pos -= off
 		_hero_do(h, JUMPED)
 	elif D.m(m, F_ID):
@@ -204,26 +208,35 @@ func get_stand_pos(h: int, m: int, c: int) -> Vector2:
 		pos = Vector2.ZERO
 	return pos
 
+func boxes_jump(h: int, no: int) -> void:
+	_hero_do(h, JUMPED)
+	HUD.level.entity[h].reparent(HUD.level.boxes[no], true)
+	pass
+
+func place_jump(h: int, p: Vector2, m: int, c: int) -> void:
+	var pos: Vector2 = HUD.level.border.map_to_local(D.map(c)); var atlas: int = D.byte(m, D.ATLAS)
+	if !(D.m(m, F_ID) or (D.m(m, LOGIC) and D.of(W_BOX_STAND, atlas))): return # print("M: ", D.byte4(m), " - atl: ", atlas)
+	
+	off = Vector2(0, 18); pos -= off
+	_hero_do(h, JUMPED)
+	HUD.create_tween()
+	# if atlas == LEDGE: _hero_do(h, JUMPED)
+	# else: _hero_dont(h, JUMPED)
+
 func ledge_jump(h: int, pos: Vector2, height: int = 0) -> void:
-	var dir: Vector2 = get_jump_length(h); if dir.round() == Vector2.ZERO: return
-	var b: TileDecorator = HUD.level.border
+	var b: TileDecorator = HUD.level.border; var dir: Vector2 = get_jump_length(h); if dir.round() == Vector2.ZERO: return
 	var f1: int = b.pos(pos).ground().extract(D.FLOOR) + height
-	var m: int = b.pos(pos + dir).ground().mold(); var c: int = b.m_coords()
-	var f2: int = b.extract(D.FLOOR)
-	var no: int = box_jump(c, f1, f2)
+	var f2: int = b.pos(pos + dir).ground().extract(D.FLOOR)
+	var m: int = b.mold(); var c: int = b.m_coords()
+	var no: int = can_box_jump(c, f1, f2)
 	if no != -1:
 		pos = position[HEIGHT]
-		D.b1(hero_state, HUD.hero, JUMPED)
+		toggle_stuck(h, false); call_deferred(&"boxes_jump", h, no)
 	elif f1 == f2:
-		pos = get_stand_pos(h, m, c)
-		if pos == Vector2.ZERO: return
-	else: return
-	
-	toggle_stuck(h, false)
-	if no != -1: HUD.level.entity[h].call_deferred(&"reparent", HUD.level.boxes[no], true)
-	
-	HUD.adversary.set_anim(h, JUMP) # HUD.adversary.animate_frames(h, HUD.JUMP) # _t1(JUMPING)
-	# HUD.level.entity[h].box = no
+		toggle_stuck(h, false)
+		place_jump(h, pos, m, c)
+		HUD.adversary.set_anim(h, JUMP)
+		# HUD.adversary.animate_frames(h, HUD.JUMP) # _t1(JUMPING)
 
 func box_move() -> void:
 	pass
@@ -273,67 +286,82 @@ func platforms_process(_delta: float) -> void:
 		platforms[i].move_and_slide()
 
 
-enum { BUTTON, LEVER, SOURCE, TELEPORT, SIZE = 16, CLUSTER = 64 }
-
-
-
-var cluster: PackedInt32Array = []
-var access: PackedInt32Array = []
-var sizes: PackedByteArray = [0, 0, 0, 0]
-var buttons: Dictionary[int, int] = {}
-var hint: PackedInt32Array = []
-
-func button_press(no: int, add: int, compare: int, tag: int) -> void:
-	var coords: int = cluster[no]
-	
-	if HUD.level.buttons.has(coords):
-		HUD.level.buttons[coords] = HUD.level.buttons[coords] + add
-	else:
-		HUD.level.buttons[coords] = compare
-	if HUD.level.buttons[coords] == compare:
-		HUD.level.border.atlas(tag).paint()
-
-func toggle_openning(no: int, on: bool, enter: bool) -> void:
-	var tag: int = D.byte(HUD.level.border.coords(cluster[no]).atlas().mold(), D.ATLAS)
-	if !on:
-		if D.of(MECH_ID, tag): HUD.level.border.atlas(tag).paint()
-		elif tag == PLATE_OFF: button_press(no, +1, 1, tag)
-		elif tag == PLATE_ON: button_press(no, +1 if enter else -1, 0, tag)
-	else:
-		var atlas: int
-		match tag:
-			PLATE_OFF: button_press(no, +1, 1, PLATE_ON); return
-			PLATE_ON: button_press(no, +1 if enter else -1, 0, PLATE_OFF); return
-			U_WALL_OFF: atlas = U_WALL_ON
-			U_WALL_ON: atlas = U_WALL_OFF
-			D_WALL_OFF: atlas = D_WALL_ON
-			D_WALL_ON: atlas = D_WALL_OFF
-			STAND_OFF: atlas = STAND_OFF
-			STAND_ON: atlas = STAND_ON
-			_: return
-		HUD.level.border.atlas(STAND_ON).paint()
-
-func switch_cluster(section: int, enter: bool) -> void:
-	var c: int = get_cluster(section, HUD.level.border.tile[COORDS])
-	var no: int = HUD.selected + HUD.COMPLETED
-	var state: bool = !D.of(HUD.session[no], c)
-	HUD.session[no] = D.to(HUD.session[no], c, state)
-	for i in range(D.x(access[c]), D.y(access[c])):
-		toggle_openning(i, state, enter)
-
-func get_cluster(section: int, coords: int) -> int:
-	var from: int = 0
-	for x in range(0, section): from += sizes[x]
-	for y in range(from, from + sizes[section]):
-		for i in range(D.x(access[y]), D.y(access[y])):
-			if coords == cluster[i]: return y
+func select_coords(atlas: int) -> int:
+	match atlas:
+		PLATE_OFF: return PLATE_ON
+		PLATE_ON: return PLATE_OFF
+		LEVER_OFF: return LEVER_ON
+		LEVER_ON: return LEVER_OFF
+		SOURCE_OFF: return SOURCE_ON
+		U_WALL_OFF: return U_WALL_ON
+		U_WALL_ON: return U_WALL_OFF
+		D_WALL_OFF: return D_WALL_ON
+		D_WALL_ON: return D_WALL_OFF
+		STAND_OFF: return STAND_OFF
+		STAND_ON: return STAND_ON
 	return -1
 
-enum { ACT, SPARK, FIRE, PRESS }
+func toggle_close(header: int) -> void: var no: int = HUD.selected + HUD.COMPLETED; HUD.session[no] = D.t0(HUD.session[no], header)
+func toggle_open(header: int) -> void: var no: int = HUD.selected + HUD.COMPLETED; HUD.session[no] = D.t1(HUD.session[no], header)
+func toggle_coords(header: int) -> void:
+	for i in range(HUD.level.access[header], HUD.level.access[header + 1]):
+		var atlas: int = D.byte(HUD.level.border.coords(HUD.level.coords[i]).ground().mold(), D.ATLAS)
+		HUD.level.border.atlas(select_coords(atlas)).paint()
+
+func toggle_header(header: int) -> void:
+	if header == -1: return
+	var atlas: int = D.byte(HUD.level.border.coords(HUD.level.coords[HUD.level.access[header]]).ground().mold(), D.ATLAS)
+	match atlas:
+		PLATE_OFF: toggle_open(header); toggle_coords(header)
+		PLATE_ON: toggle_close(header); toggle_coords(header)
+		LEVER_OFF: toggle_open(header); toggle_coords(header)
+		LEVER_ON: toggle_close(header); toggle_coords(header)
+		SOURCE_OFF: toggle_open(header); toggle_coords(header)
+
+func toggle_header_in(header: int) -> void:
+	#match atlas
+		# heavy button - # HUD.level.border.atlas(atlas).paint() # for selected
+	toggle_header(header)
+func toggle_header_out(header: int) -> void: toggle_header(header)
+func search_header(coords: int) -> int: HUD.level.border.coords(coords).ground(); return search_header_mold()
+func search_header_pos(pos: Vector2, tiles: PackedInt32Array, no: int) -> int: HUD.level.border.pos(pos).ground().get_tile(tiles, no); return search_header_mold()
+func search_header_mold() -> int:
+	var m: int = HUD.level.border.mold(); if !D.m(m, LOGIC): return -1
+	var coords: int = HUD.level.border.m_coords(); var atlas: int = D.byte(m, D.ATLAS)
+	var from: int; var to: int; var full: bool
+	if D.of(W_LEVER, atlas): from = HUD.level.entry[LEVER]; to = HUD.level.entry[SOURCE]
+	elif D.of(W_SOURCE, atlas): from = HUD.level.entry[SOURCE]; to = HUD.level.entry[BUTTON]
+	elif D.of(W_PLATE, atlas): from = HUD.level.entry[BUTTON]; to = HUD.level.entry[TRANSP]
+	elif D.m(W_TRANSP, atlas): from = HUD.level.entry[TRANSP]; to = len(HUD.level.access); full = true
+	else: return -1
+	for i in range(from, to):
+		if full: for j in range(HUD.level.access[i], HUD.level.access[i + 1]): if HUD.level.coords[j] == coords: return i
+		elif HUD.level.coords[HUD.level.access[i]] == coords: return i
+	return -1
+
+var sizes: PackedByteArray = [0, 0, 0, 0]
+var hint: PackedInt32Array = []
 
 var walk_no: int = -1
 var hero_box: PackedByteArray = [0, 0]
 var hero_weight: PackedFloat32Array = [1, 1]
+
+func lever_apply(h: int, type: int) -> void:
+	var t: PackedInt32Array = HUD.level.lever_tile
+	var mold: int = t[h << 1]; var coords: int = t[h << 1 + 1]
+	if type == Adversary.X:
+		if h == D.RAY:
+			if mold == ICE_ID: HUD.level.border.set_tile(t, h).type(FLOORS).paint_alt()
+		elif h == D.ROCK:
+			if mold == PUDDLE_ID: HUD.level.border.set_tile(t, h).type(FLOORS).paint_alt()
+	elif type == Adversary.Y:
+		if mold == PUDDLE_ID:
+			HUD.level.border.set_tile(t, h).type(FLOORS).paint_alt()
+		elif D.byte(mold, D.ID) == LOGIC:
+			toggle_header(search_header(coords))
+	elif type == Adversary.A:
+		if D.byte(mold, D.ID) == LOGIC:
+			toggle_header(search_header(coords))
 
 func lever_outer(body: Node2D, h: int) -> void:
 	if body is AnimatableBody2D and body.is_in_group(&"box"):
@@ -345,7 +373,6 @@ func lever_outer(body: Node2D, h: int) -> void:
 	elif body is TileDecorator:
 		body.nan_tile(HUD.level.lever_tile, h)
 
-func lever_near(h: int) -> TileDecorator: return HUD.level.border.pos(HUD.level.entity[h].position + HUD.level.lever[h].position)
 func lever_inner(body: Node2D, h: int) -> void:
 	var hero: CharacterBody2D = HUD.level.entity[h]
 	if body is AnimatableBody2D and body.is_in_group(&"box"):
@@ -353,87 +380,72 @@ func lever_inner(body: Node2D, h: int) -> void:
 		print("WEIGHT: ", hero_weight[h], " - TO: ", weight_d[int(box_weight[no])])
 		hero_weight[h] *= weight_d[int(box_weight[no])]
 	elif body is TileDecorator:
-		var m: int = body.pos(hero.position).ground().mold()
-		print("F_ID: ", F_ID, " & = ", F_ID & m, " m = ", m, " ??: ", D.byte4(m))
-		if D.m(m, F_ID) or (D.byte(m, D.ID) == LOGIC and D.of(STAND, D.byte(m, D.ATLAS))):
+		var m: int = body.pos(hero.position).ground().mold() # print("F_ID: ", F_ID, " & = ", F_ID & m, " m = ", m, " ??: ", D.byte4(m))
+		if D.m(m, F_ID) or (D.m(m, LOGIC) and D.of(W_BOX_STAND, D.byte(m, D.ATLAS))):
 			ledge_jump(h, hero.position); return
 		
-		m = lever_near(h).ground().get_tile(HUD.level.lever_tile, h).mold()
+		m = HUD.level.border.pos(HUD.level.w_lever(h)).ground().get_tile(HUD.level.lever_tile, h).mold()
 		var atlas: int = D.byte(m, D.ATLAS)
-		if D.byte(m, D.ID) == LOGIC and D.of(BOXES, atlas):
+		if D.m(m, LOGIC) and D.of(W_BOXES, atlas):
 			add_box(atlas, body.positioned())
 
 func lever_outer_ray(border: Node2D) -> void: lever_outer(border, D.RAY)
 func lever_outer_rock(border: Node2D) -> void: lever_outer(border, D.ROCK)
 func lever_inner_ray(border: Node2D) -> void: lever_inner(border, D.RAY)
 func lever_inner_rock(border: Node2D) -> void: lever_inner(border, D.ROCK)
-func lever_apply(hero: int, type: int) -> void:
-	var m: int = HUD.level.lever_tile[hero * 2]
-	var atlas: int = D.byte(m, D.ATLAS)
-	if atlas == 0: return
-	elif type == FIRE: if (D.short(m, D.ALT) >> 2) == ICE_FLOOR: HUD.level.border.set_tile(HUD.level.lever_tile, hero).paint_alt()
-	elif type == ACT: if D.of(C_LEVER, atlas): switch_cluster(LEVER, true)
-	elif type == SPARK: if D.of(C_SOURCE, atlas): switch_cluster(SOURCE, true)
 
 var transitions_part: PackedByteArray = []
 var transitions_tile: PackedInt32Array = []
-var cactus_stations: PackedByteArray = [0, 0, 0]
+var cactuses: int = 0
 
 func enter_cooldown() -> void:
 	for i in range(0, 3):
-		if cactus_stations[0] > 0:
-			cactus_stations[0] -= 1
-	if cactus_stations[0] == 0 and cactus_stations[1] == 0 and cactus_stations[2] == 0:
-		HUD.station_timer.stop()
+		var n: int = D.byte(cactuses, i); if n == 0: continue
+		n -= 1; cactuses = D.to_byte(cactuses, i, n)
+		if n == 0: cactuses = D.to_byte(cactuses, i, n)
+	if cactuses == 0: HUD.station_timer.stop()
 
-func enter_station(no: int) -> void:
-	if cactus_stations[0] == 0 and cactus_stations[1] == 0 and cactus_stations[2] == 0:
-		HUD.station_timer.start()
-	if cactus_stations[no] == 0:
-		pass # replace cactus
-	cactus_stations[no] = 24
+func enter_station(h: int, no: int) -> void:
+	if D.byte(cactuses, 0) == 0:
+		if cactuses == 0: HUD.station_timer.start()
+		cactuses = D.to_byte(cactuses, no, 24)
+		match no:
+			0: HUD.append_dialog(h, randi_range(65, 90))
+			1: HUD.adversary.affect(h, +5, 0)
+			2: HUD.adversary.affect(h, 0, +3)
 
 func plate_outer_ray(border: TileDecorator) -> void: plate_outer(D.RAY, border)
 func plate_outer_rock(border: TileDecorator) -> void: plate_outer(D.ROCK, border)
 func plate_outer(hero: int, border: TileDecorator) -> void:
-	if walk_no != -1: # not enter and 
-		HUD.log_help_hide()
-		walk_no = -1
-
-	match HUD.level.press_tile[hero * 2 + D.ATLAS]:
+	match D.byte(HUD.level.press_tile[hero << 1], D.ATLAS):
 		LEFT_CHAIN: chain_enter(hero, 0, 1)
 		RIGHT_CHAIN: chain_enter(hero, 0, 1)
-		H_SPRING_OFF: pass
+		HINT:
+			if walk_no != -1: # not enter and 
+				HUD.log_help_hide()
+				walk_no = -1
 	border.nan_tile(HUD.level.press_tile, hero)
 
 func plate_inner_ray(border: TileDecorator) -> void: plate_inner(D.RAY, border)
 func plate_inner_rock(border: TileDecorator) -> void: plate_inner(D.ROCK, border)
-func plate_inner(hero: int, border: TileDecorator) -> void:
-	var m: int = border.pos(HUD.level.entity[hero].position).id().atlas().type(PUDDLE_OFF).get_tile(HUD.level.press_tile, hero).mold()
+func plate_inner(hero: int, border: TileDecorator) -> void: # PUDDLE_OFF
+	var m: int = border.pos(HUD.level.entity[hero].position).ground().get_tile(HUD.level.press_tile, hero).mold()
 	var atlas: int = D.byte(m, D.ATLAS)
-	if D.of(WAYS, atlas):
-		for i in range(0, len(transitions_part)):
-			if border.m_coords() == transitions_tile[i]:
-				HUD.transition_part = transitions_part[i]
-				break
+	if D.of(W_WAYS, atlas):
+		for i in range(0, len(transitions_part)): if border.m_coords() == transitions_tile[i]: HUD.transition_part = transitions_part[i]; break
 		HUD.entry_transit(HUD.GATE_IN); return
+	elif D.m(m, TELEPORT_ID):
+		var h: int = search_header(border.m_coords())
+		HUD.level.action.teleport(hero, HUD.level.border.map_to_local(D.map(HUD.level.coords[HUD.level.access[h]])))
 	match atlas:
-		INSPIRER: HUD.append_dialog(hero, randi_range(65, 90)); enter_station(0) # TODO add face checks
-		COMFORTER: HUD.adversary.affect(hero, +5, 0); enter_station(1)
-		AMPLIFIER: HUD.adversary.affect(hero, 0, +3); enter_station(2)
-		PLATE_OFF: switch_cluster(BUTTON, true) # enter
-		PLATE_ON: switch_cluster(BUTTON, true)
-		TELEPORT_ON:
-			var c: int = get_cluster(TELEPORT, border.tile[COORDS])
-			for i in range(D.x(access[c]), D.y(access[c])):
-				if D.byte(HUD.level.border.coords(cluster[i]).mold(), D.ATLAS) == PLACE:
-					HUD.level.entity[hero].teleport(HUD.level.border.map_to_local(D.map(cluster[i])))
-					break
-		HINT:
-			# for hint loop
+		INSPIRER: enter_station(hero, 0) # TODO add face checks
+		COMFORTER: enter_station(hero, 1)
+		AMPLIFIER: enter_station(hero, 2)
+		NAVIGATOR: pass
+		HINT: # for hint loop
 			if walk_no != -1: # border.tile[D.ID] == TYPE and 
 				HUD.log_help(walk_no)
-			elif D.byte(border.mold(), D.ID) == D.ID: # TODO replace did
+			elif D.m(border.mold(), D.ID): # TODO replace did
 				pass
 		D_LADDER:
 			HUD.set_part(HUD.LEVEL, HUD.DUNGEON, HUD.get_part(HUD.LEVEL, HUD.DUNGEON) + 1)
@@ -443,9 +455,6 @@ func plate_inner(hero: int, border: TileDecorator) -> void:
 			HUD.entry_transit(HUD.LADDER_UP)
 		LEFT_CHAIN: chain_enter(hero, border.tile[D.ATLAS], 0)
 		RIGHT_CHAIN: chain_enter(hero, border.tile[D.ATLAS], 0)
-		H_SPRING_ON:
-			# logic to disable collision
-			HUD.level.entity[hero].velocity += Vector2(0, 60)
 		_: return
 
 
@@ -476,6 +485,7 @@ func set_box(asset: PackedScene, data: PackedByteArray) -> void:
 # """
 func add_box(box_type: int, pos: Vector2) -> void:
 	var no: int = HUD.level.boxes.size()
+	assert(no < 4, "AVAILABLE TO SAVE ONLY 4 BOXES")
 	match box_type:
 		SMALL_BOX: set_box(small, [1, 2])
 		LARGE_BOX: set_box(load(&"res://def/entity/platform/box_large.tscn"), [2, 4])
@@ -485,10 +495,13 @@ func add_box(box_type: int, pos: Vector2) -> void:
 	box.name = str(box.name, '_', no); box.position = pos + Vector2(0, 28)
 	HUD.level.call_deferred(&"add_child", box)
 	var see: Area2D = box.get_node(^"press")
-	see.body_entered.connect(func(b: Node2D): plate_inner_box(b, no))
-	see.body_exited.connect(func(b: Node2D): plate_outer_box(b, no))
+	match no:
+		0: see.body_entered.connect(plate_inner_1); see.body_exited.connect(plate_outer_1)
+		1: see.body_entered.connect(plate_inner_2); see.body_exited.connect(plate_outer_2)
+		2: see.body_entered.connect(plate_inner_3); see.body_exited.connect(plate_outer_3)
+		3: see.body_entered.connect(plate_inner_4); see.body_exited.connect(plate_outer_4)
 	var fov: VisibleOnScreenNotifier2D = box.get_node(^"fov"); fov.screen_entered.connect(box.show); fov.screen_exited.connect(box.hide)
-	HUD.level.border.atlas(GROUND).id(FLOOR).type(FLOORS).paint_alt() # coords(D.GROUND)
+	HUD.level.border.pos(pos).atlas(GROUND).id(FLOOR).type(FLOORS).paint_alt() # coords(D.GROUND)
 #"""
 func throw(box: int, motion: Vector2i) -> void: velocity[box] = motion # * POWER
 func pushes(box: int, motion: Vector2) -> void: velocity[box] = motion * weight_d[box_weight[box]]
@@ -496,16 +509,16 @@ func pushes(box: int, motion: Vector2) -> void: velocity[box] = motion * weight_
 func fixate_box(hero: int, box: int, _add: int) -> void:
 	hero_state[hero] = D.t1(hero_state[hero], box)
 
-func plate_inner_box(border: Node2D, no: int) -> void:
-	border.pos(HUD.level.boxes[no].position).id().atlas().type(PUDDLE_OFF).get_tile(HUD.level.boxes_tile, no)
-	if border.tile[D.ATLAS] == PLATE_OFF or border.tile[D.ATLAS] == PLATE_ON:
-		switch_cluster(BUTTON, true)
-
-func plate_outer_box(border: Node2D, no: int) -> void:
-	match HUD.level.boxes_tile[no * 2 + D.ATLAS]:
-		PLATE_OFF, PLATE_ON:
-			switch_cluster(BUTTON, true)
-	border.nan_tile(HUD.level.boxes_tile, no)
+func plate_inner_1(border: Node2D) -> void: plate_inner_box(border, 0)
+func plate_inner_2(border: Node2D) -> void: plate_inner_box(border, 1)
+func plate_inner_3(border: Node2D) -> void: plate_inner_box(border, 2)
+func plate_inner_4(border: Node2D) -> void: plate_inner_box(border, 3)
+func plate_inner_box(_border: TileDecorator, no: int) -> void: toggle_header_in(search_header_pos(HUD.level.boxes[no].position, HUD.level.boxes_tile, no))
+func plate_outer_1(border: Node2D) -> void: plate_inner_box(border, 0)
+func plate_outer_2(border: Node2D) -> void: plate_inner_box(border, 1)
+func plate_outer_3(border: Node2D) -> void: plate_inner_box(border, 2)
+func plate_outer_4(border: Node2D) -> void: plate_inner_box(border, 3)
+func plate_outer_box(border: Node2D, no: int) -> void: toggle_header_out(search_header(HUD.level.boxes_tile[(no << 1) | 1])); border.nan_tile(HUD.level.boxes_tile, no)
 
 var press: PackedByteArray = [0, 0]
 var press_coords: PackedInt32Array = [0, 0]

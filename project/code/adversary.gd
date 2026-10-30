@@ -281,7 +281,23 @@ const foe: Array[PackedScene] = [
 
 enum { DIFFICULTY = 1, FROM = 0, UPTO = 1 }
 
-func teleport(enemy: CharacterBody2D) -> void:
+func teleport(h: int, pos: Vector2) -> void:
+	var tween: Tween = HUD.create_tween()
+	if h < D.PARTY:
+		tween.tween_method(func(t): 
+			if t < 0.25:
+				HUD.level.entity[h].teleport_squeze = 4 * t
+			elif t < 1.25:
+				HUD.level.entity[h].position = pos * (t - 0.25)
+			else:
+				HUD.level.entity[h].teleport_squeze = 4 * (1.5 - t)
+		, 0, 2.5, 1.5)
+		tween.tween_callback(func(): HUD.level.entity[h].position = pos)
+	else:
+		tween.tween_method(func(t): pass, 0, 1, 0.5)
+		tween.tween_callback(func(): HUD.level.entity[h].position = pos)
+
+func spawn_enemy(enemy: CharacterBody2D) -> void:
 	enemy.spawn_pos = (enemy.spawn_pos + 1) % places.size()
 	enemy.position = HUD.level.execute.get_pos(places[enemy.spawn_pos])
 

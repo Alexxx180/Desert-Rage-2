@@ -109,6 +109,7 @@ static func m(mold: int, mask: int) -> int: return mask == (mask & mold)
 static func b(state: PackedByteArray, select: int, index: int, value: int) -> void: state[select] = to(state[select], index, value)
 static func b0(state: PackedByteArray, select: int, index: int) -> void: state[select] = t0(state[select], index)
 static func b1(state: PackedByteArray, select: int, index: int) -> void: state[select] = t1(state[select], index)
+static func tip(a: PackedByteArray, no: int, size: int) -> bool: return size if no >= len(a) else a[no + 1]
 
 static func part(item: int, slot: int) -> int: return (item >> (PART_BYTE * slot)) & 3
 static func half(item: int, slot: int) -> int: return (item >> (HALF_BYTE * slot)) & 15

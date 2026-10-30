@@ -35,8 +35,11 @@ var out_shape: CollisionShape2D; var out_zone: Area2D
 
 var lever_tile: PackedInt32Array = [0, 0,  0, 0]
 var plate_tile: PackedInt32Array = [0, 0,  0, 0]
-
 var boxes_tile: PackedInt32Array = [0, 0,  0, 0,  0, 0,  0, 0]
+
+var coords: PackedInt32Array = []
+var access: PackedInt32Array = []
+var header: PackedInt32Array = []
 
 func input_skip(_event: InputEvent) -> void:
 	pass
@@ -84,6 +87,7 @@ func update_group_view() -> void:
 
 var on_camera: int = 0
 
+func w_lever(h: int) -> Vector2: return entity[h].position + lever[h].position
 func _ready() -> void:
 	HUD.level = self
 	var e: Array[CharacterBody2D] = [$ray, $rock]
