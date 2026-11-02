@@ -1,99 +1,148 @@
 class_name Adversary extends RefCounted
-
-enum { BLUE, NO = 0, AURA = 0, LIFE_BORDER = 0, WAVE = 0, THICK = 0, GREEN, COLOR = 1, AP = 1, RESOURCE_SHIFT = 1,
+enum { 
+	BLUE, NO = 0, AURA = 0, LIFE_BORDER = 0, WAVE = 0, THICK = 0, GREEN, COLOR = 1, RESOURCE_SHIFT = 1,
 	PERIOD = 1, DURATION = 1, YELLOW, BAR_TYPE = 2, TRANSPORT = 2, SUMMARY = 2, RESOURCE = 2, THICKNESS = 5, RED = 3,
-	RESOURCE_VALUE = 3, LAST_THICKNESS = 3, CRITICAL = 4, BARS = 4, MAX = 10, SEMI = 100, SET = 255 }
+	RESOURCE_VALUE = 3, LAST_THICKNESS = 3, CRITICAL = 4, BARS = 4, MAX_ = 10, SEMI = 100, SET = 255,
+# ENTITIES
+	RAY, ROCK, EYE_SEEKER,
+# STAT
+	POWER, INFLUENCE, VITALITY, REACTION, HP, AP, MAX,
+# PRIORITIES
+	PURSUIT, SELF_CONTROL, TENACITY,
+# STATUS
+	BURN, POISON, COUGH,
+# STATUS POWER & POSITION
+	BURN_POWER = 5, POISON_POWER = 6,
+# DAMAGE TYPE & DISTANCE
+	TARGET = 0, ZONE_RADIUS, TARGET_RADIUS, ZONE_ALL,
+	LOW = 128, MID1 = 172, MID = 196, MID2 = 214, HIGH = 256,
+	HALF_TILE = 32, TILE = 64, DISTANCE = 1024, RADIUS_DISTANCE = 4096,
+# ELEMENTS
+	VOID = 0, LIGHT, NORMAL, FIRE, WATER, SPARK,
+# PRIORITY
+	MAX_LV = 7, PRIORITY_SELECT = 7, SCORE_HALF = 1, SELECT = 3, SCORE_BIT = 24,
+	SPEED = 4, DOUBLE_COMBO = 2, DIFFICULTY = 1, FROM = 0, UPTO = 1,
+# ANIMATIONS
+	IDLE, WALK, RUN, PUSH, STOMP, A_PUNCH, A_KICK, A_FIRE, WHIP, JUMP, HURT,
+	MOVE, DIRECTED = 3, NO_ANIM = 0, A_ENV = 1, A_ACT, SHADOW_GROUND = 0,
+	SHADOW_HANG, SHADOW_FLY, STATUS_TYPE = 0, STATUS_TIME, STATUS_X = -7, STATUS_Y = 25,
+# MOVEMENT
+	LEFT, RIGHT, UP, DOWN, ACT1, ACT2, ACT3, ACT4, OPT_LEFT, OPT_RIGHT, OPT_UP,
+	OPT_DOWN, SHOT, AIM, MENU,
+# ACTIONS
+	A, B, X, Y, S, S2 = 8, S3 = 16, S4 = 24,
+	A_DOUBLE = (A<<S2)|A, A_BACK_SPIT = (B<<S4)|(A<<S3)|(A<<S2)|B,
+	A_LUNGE = (B<<S3)|(A<<S2)|A, A_PIERCE = (B<<S3)|(B<<S2)|A,
+	A_POACHING = (A<<S3)|(Y<<S2)|A, A_LOW_KICK = (A<<S3)|(B<<S2)|A,
+	A_CURE = (B<<S3)|(X<<S2)|B, A_SPIT_KICK = (B<<S3)|(A<<S2)|B,
+	A_HUG = (A<<S4)|(Y<<S3)|(A<<S2)|Y, A_CRACK = 0,
+# BOOKS
+	B_LUNGE, B_CRACK, B_BACKSPIT,
+# COMPETENCY
+	C_CRACK = 6|3<<S2, C_BACKSPIT = 4,
+# D
+	D_DOUBLE, D_BACK_SPIT, D_LUNGE, D_PIERCE, D_POACHING, D_LOW_KICK,
+	D_CURE, D_SPIT_KICK, D_HUG, D_CRACK,
+# ACT
+	PUNCH, KICK, TORCH, DROP, APPEAR = 0, TIME, DISAPPEAR, OFFSET = 10, PATH = 100,
+# MENU
+	PANEL_RIGHT = 0, PANEL_LEFT, PANEL_FORWARD, PANEL_BACKWARD,
+	LEFT_OFF = -2000, LEFT_ON = 0, RIGHT_OFF = 1000, RIGHT_ON = -1000,
+	FORWARD_OFF = -1000, FORWARD_ON = 1000, BACKWARD_OFF = 1000, BACKWARD_ON = -1000
+}
+
+const sprite_dir: PackedStringArray = ["bo", "fo", "bl", "fl", "ol", "br", "fr", "or"]
+const sprites: PackedStringArray = ["", "", "_run", "_jump", "_push", "_stomp", "_punch", "_kick",  "_fire", "_whip", "c_move", "c_whip"] # _walk
+const in_game: PackedStringArray = ["Гляделкинс"]
+const caption: PackedStringArray = ["Двоечка"]
+const combo_color: PackedStringArray = ["[color=#00AA00]2x[/color]", "[color=#FFAA00]3x[/color]", "[color=#FFAA00]4x[/color]"]
+const menu_navigation: Array[StringName] = [&"right_focus", &"right", &"left_focus", &"left", &"top_focus", &"top", &"bottom_focus", &"bottom"]
+
+const color: PackedFloat32Array = [1.0, 0.8, 0.4, 0.0]
+const PRIORITY: PackedByteArray = [3, 2, 1, 1,  1, 3, 1, 2,  1, 1, 3, 2]
+const aura: PackedInt32Array = [5, 7, 0] # ray, p: 5, 5  rock, p: 7, 3
+const resc: PackedInt32Array = [3, 2, 5]
+const shell: PackedByteArray = [0, 1, 5]
+const power: PackedByteArray = [1, 2, 5]
+const impac: PackedByteArray = [2, 1, 5]
+const react: PackedByteArray = [2, 1, 5]
+const exper: PackedByteArray = [0, 0, 1]
+const weakn: PackedByteArray = [NORMAL, NORMAL, NORMAL]
+const immun: PackedByteArray = [NORMAL, NORMAL, NORMAL]
+
+const timing: PackedFloat32Array = [0.2, 0.4, 0.6]
+const enemies: PackedByteArray = [0, 0,  1, 3,  2, 5,  3, 9,  4, 12]
+const menu_shift: PackedInt32Array = [RIGHT_ON, LEFT_ON, FORWARD_ON, BACKWARD_ON]
+const foe: Array[PackedScene] = [
+	preload("res://def/entity/foe/eye_seeker.tscn"),
+	preload("res://def/entity/foe/eye_seeker.tscn")
+]
+
+var max_slot: PackedByteArray = [0, 24, 12, 12]
+var frames: PackedByteArray = [0, 0, 0,  0, 0, 0]
+
+var running: int
+var next_level: PackedInt32Array = [6, 12, 27, 50, 80, 115, 154,  200, 265, 340, 430,
+	537, 650, 775,  900, 1040, 1220, 1420, 1667, 1960, 2333]
+var aura_colors: PackedFloat32Array = [1.0 / (BLUE - GREEN), 1.0 / (GREEN - YELLOW), 1.0 / (YELLOW - RED)]
 
 var aura_stat: PackedFloat32Array = [0.7, 0.1, 2.0, 5.0, 0.1]
 var status_time: PackedByteArray = []; var status_type: PackedByteArray = []
-var entities: int = 0
 var i_points: PackedByteArray = _number12()
 var a_portion: PackedFloat32Array = _number14(); var r_portion: PackedFloat32Array = _number14()
 var a_points: PackedInt32Array = _number12(); var r_points: PackedByteArray = _number12()
 var target_a: PackedInt32Array = _number14(); var target_r: PackedByteArray = _number14()
-
-var a_max: PackedByteArray = [0, 0]
-var r_max: PackedByteArray = [0, 0]
-var h_pow: PackedByteArray = [1, 2]
-var h_shl: PackedByteArray = [0, 1]
-var h_imp: PackedByteArray = [2, 1]
-var h_rct: PackedByteArray = [2, 1]
 var last_color: Color
 
-enum { RAY, ROCK, EYE_SEEKER }
-enum STAT { POWER = 0, INFLUENCE = 1, VITALITY = 2, REACTION = 3, HP = 4, AP = 5, MAX = 6 }
-enum PRIORITIES { PURSUIT, SELF_CONTROL, TENACITY }
-enum { BURN, POISON, COUGH }
+var logs_cache: PackedStringArray = ["", "", "", "", "", "", ""]
+var enemy_status: PackedInt64Array = []
 
-const color: PackedFloat32Array = [1.0, 0.8, 0.4, 0.0]
-const PRIORITY: PackedByteArray = [3, 2, 1, 1,  1, 3, 1, 2,  1, 1, 3, 2]
-const aura: PackedInt32Array = [100, 100,  0] # ray, p: 5, 5  rock, p: 7, 3
-const resc: PackedInt32Array = [ 20,  20, 50]
-const shell: PackedByteArray = [  0,   1,  5]
-const power: PackedByteArray = [  1,   2,  5]
-const impac: PackedByteArray = [  2,   1,  5]
-const react: PackedByteArray = [  2,   1,  5]
-const exper: PackedByteArray = [  0,   0,  1]
-const weakn: PackedByteArray = [NORMAL, NORMAL, NORMAL]
-const immun: PackedByteArray = [NORMAL, NORMAL, NORMAL]
+# PARTICLES
+var texture: Texture
+var sprite: Sprite2D
 
-var in_game: PackedStringArray = ["Гляделкинс"]
-var s_power: PackedByteArray = [5, 6]
-var status_tick: bool = false
+var places: PackedInt32Array
+var place_size: int
 
 # func setup() -> void: HUD.aura_time.timeout.connect(diffusion) # burns - blink
 ## ENEMY
 func _number14() -> Array[int]: return [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 func _number12() -> Array[int]: return [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+func status_drawback(e: int, i: int) -> void:
+	var s: int = e - D.PARTY; var p: int = HUD.STATUS + e
+	var status: Vector2i = D.byte_of(HUD.get_part(p, i) if e < D.PARTY else enemy_status[s])
+	if status[STATUS_TIME] == 0: return
 
-enum { STATUS_TYPE, STATUS_TIME, STATUS_X = -7, STATUS_Y = 25 }
+	status[STATUS_TIME] -= 1
+	if status[STATUS_TYPE] == 0:
+		HUD.level.entity_status[e][i].hide()
+		HUD.level.entity_status[e][i].position = Vector2(0, STATUS_Y * i)
+	else:
+		HUD.level.entity_status[e][i].position = Vector2(STATUS_X * status[STATUS_TIME], STATUS_Y * i)
+		status_feedback(4, e, status_time[i], status_type[i])
 
-var enemy_status: PackedInt64Array = []
-var status_process: bool = false
-
-func status_drawback() -> void:
-	status_process = !status_process
-	if !status_process: return
-
-	var party: int = entities + D.PARTY
-	for i in range(len(HUD.level.entity_status), party): # if party > len(HUD.level.entity_status):
-		HUD.level.entity_status.append([null, null, null, null])
-
-	for e in range(0, len(HUD.level.entity)):
-		for i in range(0, 4):
-			var s: int = e - D.PARTY; var p: int = HUD.STATUS + e
-			var status: Vector2i = D.byte_of(HUD.get_part(p, i) if e < D.PARTY else enemy_status[s])
-			if status[STATUS_TIME] == 0: continue
-
-			status[STATUS_TIME] -= 1
-			if status[STATUS_TYPE] == 0:
-				HUD.level.entity_status[e][i].hide()
-				HUD.level.entity_status[e][i].position = Vector2(0, STATUS_Y * i)
-			else:
-				HUD.level.entity_status[e][i].position = Vector2(STATUS_X * status[STATUS_TIME], STATUS_Y * i)
-				status_feedback(4, e, status_time[i], status_type[i])
-
-			var result: int = status[STATUS_TYPE] << D.HALF_BYTE | status[STATUS_TIME]
-			if p < D.PARTY:
-				HUD.set_part(p, i, result)
-			else:
-				enemy_status[s] = D.to_byte(enemy_status[s], i, result)
+	var result: int = status[STATUS_TYPE] << D.HALF_BYTE | status[STATUS_TIME]
+	if p < D.PARTY:
+		HUD.set_part(p, i, result)
+	else:
+		enemy_status[s] = D.to_byte(enemy_status[s], i, result)
 
 func status_feedback(limit: int, enemy: int, time: int, status: int) -> int:
 	for j in range(0, limit):
 		var t: int = D.half(time, j)
 		if t != 0:
 			match D.half(status, j):
-				BURN: affect(enemy, -min(1, aura[enemy] >> s_power[BURN]), 0)
-				POISON: affect(enemy, -min(1, aura[enemy] >> s_power[POISON]), 0)
-			if status_tick:
+				BURN: affect(enemy, -min(1, aura[enemy] >> BURN_POWER), 0)
+				POISON: affect(enemy, -min(1, aura[enemy] >> POISON_POWER), 0)
+			status_drawback(enemy, j)
+			if HUD.did(D.MENU, D.STATUS_TICK):
 				t -= 1
 				time = D.to_half(time, j, t)
 	return time
 
 func status_timeout() -> void:
 	var off: bool = true
-	status_tick = !status_tick
+	HUD.undo(D.MENU, D.STATUS_TICK)
 	for i in range(0, D.PARTY):
 		var time: int = HUD.get_half(HUD.STATUS_TIME, i)
 		if time != 0:
@@ -105,8 +154,6 @@ func status_timeout() -> void:
 			status_time[i] = status_feedback(2, i + D.PARTY, status_time[i], status_type[i])
 	if off: HUD.aura_timer.stop()
 
-var aura_colors: PackedFloat32Array = [1.0 / (BLUE - GREEN), 1.0 / (GREEN - YELLOW), 1.0 / (YELLOW - RED)]
-
 func color_reaction(segment: float) -> Color:
 	if segment <= color[RED]: return Color.from_rgba8(SET, NO, NO, SEMI)
 	elif segment >= color[BLUE]: return Color.from_rgba8(NO, SET, SET, SEMI)
@@ -117,7 +164,6 @@ func color_reaction(segment: float) -> Color:
 	return Color.from_rgba8(SET, int(SET * aura_colors[2] * (segment - RED)), NO, SEMI)
 
 func _get_ui() -> Array[Control]: return [HUD.game.inventory.points, HUD.game.priorities.points]
-
 func affect(hero: int, a: int, r: int) -> void:
 	if !HUD.level.tweens[hero] or !HUD.level.tweens[hero].is_valid():
 		HUD.level.tweens[hero] = HUD.create_tween()
@@ -169,7 +215,7 @@ func affect(hero: int, a: int, r: int) -> void:
 		)
 	if a != 0:
 		if hero < D.PARTY:
-			var stat: int = clampi(HUD.get_stat(HUD.AURA, hero) + a, 0, a_max[hero])
+			var stat: int = clampi(HUD.get_stat(HUD.AURA, hero) + a, 0, HUD.has(D.AURA_MAX | hero))
 			HUD.set_stat(HUD.AURA, hero, stat)
 			for ui in _get_ui(): ui.aura.value = stat
 		else:
@@ -186,57 +232,52 @@ func affect(hero: int, a: int, r: int) -> void:
 				HUD.game.ability.health.value = a_points[h]
 	if r != 0:
 		if hero < D.PARTY:
-			var stat: int = clampi(HUD.get_stat(HUD.RESOURCE, hero) + r, 0, r_max[hero])
+			var stat: int = clampi(HUD.get_stat(HUD.RESOURCE, hero) + r, 0, HUD.has(D.RESC_MAX | hero))
 			HUD.set_stat(HUD.RESOURCE, hero, stat)
 			for ui in _get_ui(): ui.resource.value = stat
 		else:
 			r_points[hero] = clampi(r_points[hero] + r, 0, resc[hero])
 		HUD.level.entity[hero].profile.material.set(&"shader_parameter/action", true)
 
-enum { TARGET, ZONE_RADIUS, TARGET_RADIUS, ZONE_ALL,
-	HALF_TILE = 32, TILE = 64, DISTANCE = 1024, RADIUS_DISTANCE = 4096 }
-enum { VOID, LIGHT, NORMAL, FIRE, WATER, SPARK }
-
-var directed: PackedVector2Array = [Vector2.ZERO, Vector2.ZERO]
-
-func damage_zone(type: int, hero: int, element: int, combo: int, portion: float, output: float = 0) -> void:
+func damage_zone(type: int, hero: int, element: int, combo: int, portion: float, output: float = 0) -> bool:
 	match type:
 		ZONE_ALL:
 			var start: int = D.PARTY if hero < D.PARTY else 0
 			var xp: int = 0
-			for i in range(start, entities):
+			for i in range(start, HUD.has(D.ENTITIES)):
 				if hero != i:
 					damage(hero, i, element, portion)
 					xp += exper[i]
 			if start == D.PARTY and xp != 0:
 				score_up(xp * combo)
+			return xp != 0
 		TARGET:
-			damage_output(HALF_TILE * HUD.action.directed[hero], DISTANCE, hero, element, combo, portion, output)
+			return damage_output(HALF_TILE * HUD.action.directed[hero], DISTANCE, hero, element, combo, portion, output)
 		TARGET_RADIUS:
-			damage_output(TILE * HUD.action.directed[hero], RADIUS_DISTANCE, hero, element, combo, portion, output)
+			return damage_output(TILE * HUD.action.directed[hero], RADIUS_DISTANCE, hero, element, combo, portion, output)
 		ZONE_RADIUS:
-			damage_output(Vector2.ZERO, RADIUS_DISTANCE, hero, element, combo, portion, output)
+			return damage_output(Vector2.ZERO, RADIUS_DISTANCE, hero, element, combo, portion, output)
+	return false
 	
-func damage_output(direction: Vector2, distance: int, hero: int, element: int, combo: int, portion: float, output: float) -> void:
+func damage_output(direction: Vector2, distance: int, hero: int, element: int, combo: int, portion: float, output: float) -> bool:
 	var start: int = D.PARTY if hero < D.PARTY else 0
 	var xp: int = 0
 	var pos: Vector2 = HUD.level.entity[hero].position
-	for i in range(start, entities):
+	for i in range(start, HUD.has(D.ENTITIES)):
 		if hero != i and (pos + direction).distance_squared_to(pos) < distance:
 			damage(hero, i, element, portion)
 			HUD.level.entity[i].velocity += HUD.action.directed[hero] * TILE * output
 			xp += exper[i]
 	if start == D.PARTY and xp != 0:
 		score_up(xp * combo)
-
-enum { LOW = 128, MID1 = 172, MID = 196, MID2 = 214, HIGH = 256 }
+	return xp != 0
 
 func damage_throw(hero: int, box: int, direction: Vector2, element: int) -> void:
 	var start: int = D.PARTY if hero < D.PARTY else 0
 	var check: Rect2 = Rect2(HUD.level.entity[box].position + LOW * direction, HUD.level.entity[box].position + HIGH * direction)
 	var ideal: Rect2 = Rect2(HUD.level.entity[box].position + MID1 * direction, HUD.level.entity[box].position + MID2 * direction)
 	
-	for i in range(start, entities):
+	for i in range(start, HUD.has(D.ENTITIES)):
 		var delta: Vector2 = HUD.level.entity[box].position + HUD.level.entity[i].position * direction
 		if hero != i and delta >= check.position and check.size <= delta:
 			var attack: int = power[hero]
@@ -270,17 +311,6 @@ func damage(hero: int, enemy: int, element: int, portion: float) -> void:
 	else:
 		affect(enemy, min(countr - attack, -1), 0)
 
-var places: PackedInt32Array
-var place_size: int
-var min_enemy: PackedByteArray = [0, 1, 2, 3, 4]
-var max_enemy: PackedByteArray = [0, 3, 5, 9, 12]
-const foe: Array[PackedScene] = [
-	preload("res://def/entity/foe/eye_seeker.tscn"),
-	preload("res://def/entity/foe/eye_seeker.tscn")
-]
-
-enum { DIFFICULTY = 1, FROM = 0, UPTO = 1 }
-
 func teleport(h: int, pos: Vector2) -> void:
 	var tween: Tween = HUD.create_tween()
 	if h < D.PARTY:
@@ -302,7 +332,7 @@ func spawn_enemy(enemy: CharacterBody2D) -> void:
 	enemy.position = HUD.level.execute.get_pos(places[enemy.spawn_pos])
 
 func reload() -> void:
-	if max_enemy[DIFFICULTY] == 0: return
+	if enemies[DIFFICULTY << 1 | 1] == 0: return
 	
 	var pos: PackedVector2Array = HUD.level.tags.layer.get_used_cells_by_id(4)
 	HUD.size[HUD.PLACES] = 0
@@ -312,9 +342,9 @@ func reload() -> void:
 		else:
 			places.append(D.join(pos[i]))
 		HUD.size[HUD.PLACES] += 1
-		
-	entities = D.PARTY
-	var count: int = randi_range(min_enemy[DIFFICULTY], max_enemy[DIFFICULTY])
+	
+	var entities: int = D.PARTY
+	var count: int = randi_range(enemies[DIFFICULTY << 1], enemies[DIFFICULTY << 1 | 1])
 	for i in range(0, foe.size()):
 		if D.of(HUD.level.foe, i):
 			for c in mini(count * HUD.level.portion[i], 1):
@@ -327,21 +357,17 @@ func reload() -> void:
 				r_portion[entities] = 1.0 / resc[entities]
 				HUD.level.entity[entities].position = D.map(places[randi_range(0, place_size)])
 				entities += 1
-
-enum { MAX_LV = 7, PRIORITY_SELECT = 7, SCORE_HALF = 1,
-	PURSUIT = 0, SELF_CONTROL = 1, TENACITY = 2, SELECT = 3, SCORE_BIT = 24 }
-
-var level: int
-var next_level: PackedInt32Array = [6, 12, 27, 50, 80, 115, 154,  200, 265, 340, 430,
-	537, 650, 775,  900, 1040, 1220, 1420, 1667, 1960, 2333]
+	HUD.having(D.ENTITIES, entities)
 
 func bonus(add: int, x: float) -> void: score_up(roundi(add * x))
 
 func score_up(add: int) -> void:
 	var score: int = (HUD.get_half(HUD.SCORE, SCORE_HALF) & ((1 << SCORE_BIT) - 1)) + add
+	var level: int = HUD.has(D.LVL)
 	if level < next_level.size() and score >= next_level[level]:
 		var before: int = level
 		while level < next_level.size() and score >= next_level[level]: level += 1
+		HUD.having(D.LVL, level)
 		var after: int = level
 		var selection: int = HUD.get_part(HUD.SCORE, PRIORITY_SELECT)
 		for hero in range(0, D.PARTY):
@@ -371,38 +397,12 @@ func score_up(add: int) -> void:
 		xp.bar.value = next_level[level]
 		xp.score.text = str(next_level[level])
 
-
-
-
 ## TIMING
 
 func _press(title: StringName) -> bool: return Input.is_action_just_pressed(title)
 func _hold(title: StringName) -> bool: return Input.is_action_pressed(title)
 func _out(title: StringName) -> bool: return Input.is_action_just_released(title)
 func _power(title: StringName) -> float: return Input.get_action_strength(title)
-
-enum { LEFT, RIGHT, UP, DOWN, ACT1, ACT2, ACT3, ACT4, OPT_LEFT, OPT_RIGHT, OPT_UP,
-	OPT_DOWN, SHOT, AIM, MENU }
-# var hero: int enum { RAY, ROCK } enum { TOOL, FIGHT, DANCE }
-enum { A, B, X, Y, S, S2 = 8, S3 = 16, S4 = 24,
-	A_DOUBLE = (A<<S2)|A, A_BACK_SPIT = (B<<S4)|(A<<S3)|(A<<S2)|B,
-	A_LUNGE = (B<<S3)|(A<<S2)|A, A_PIERCE = (B<<S3)|(B<<S2)|A,
-	A_POACHING = (A<<S3)|(Y<<S2)|A, A_LOW_KICK = (A<<S3)|(B<<S2)|A,
-	A_CURE = (B<<S3)|(X<<S2)|B, A_SPIT_KICK = (B<<S3)|(A<<S2)|B,
-	A_HUG = (A<<S4)|(Y<<S3)|(A<<S2)|Y, A_CRACK = 0,
-	
-	B_LUNGE, B_CRACK, B_BACKSPIT,
-	
-	C_CRACK = 6|3<<S2, C_BACKSPIT = 4,
-	
-	D_DOUBLE, D_BACK_SPIT, D_LUNGE, D_PIERCE, D_POACHING, D_LOW_KICK,
-	D_CURE, D_SPIT_KICK, D_HUG, D_CRACK
-}
-var combo_slots: PackedInt32Array = [0, 0]
-var caption: PackedStringArray = ["Двоечка"]
-var combo_color: PackedStringArray = ["[color=#00AA00]2x[/color]", "[color=#FFAA00]3x[/color]", "[color=#FFAA00]4x[/color]"]
-var logs_cache: PackedStringArray = ["", "", "", "", "", "", ""]
-var log_line: int
 
 func can(priorities: int) -> bool:
 	return (HUD.get_stat(HUD.STATS + HUD.hero, HUD.PURSUIT) >= D.byte(priorities, 0) and
@@ -413,67 +413,63 @@ func book(no: int, priorities: int = 0) -> bool:
 
 func act_enter() -> void: HUD.level.tile[D.offset(HUD.hero, D.LEVER)] = D.join(HUD.level.border.local_to_map(HUD.level.entity[HUD.hero].position))
 func act_exit() -> void: HUD.level.tile[D.offset(HUD.hero, D.LEVER)] = 0
-func reset_combo() -> void: combo_slots[HUD.hero] = 0
+func reset_combo(h: int) -> void: HUD.hasnt(D.COMBO_SLOTS | h)
 
+func add_log(text: String) -> void: HUD.game.log.text = text
 func add_logs(log_text: String) -> void:
+	var log_line: int = HUD.has(D.LOG_LINE)
 	if HUD.game.logs.modulate == Color.TRANSPARENT:
 		HUD.game.logs.text = ""
-		log_line = 0
+		HUD.hasnt(D.LOG_LINE)
 	elif log_line >= 50:
 		HUD.game.logs.text = "\r\n".join(logs_cache)
-		log_line = 0
+		HUD.hasnt(D.LOG_LINE)
+	else:
+		log_line += 1
+		HUD.having(D.LOG_LINE, log_line)
 	if log_line <= logs_cache.size():
 		logs_cache[log_line] = log_text
 	HUD.game.logs.append_text(log)
-	log_line += 1
 
-func add_log(text: String) -> void: HUD.game.log.text = text
-
-func fight(combo_no: int, id: int, zone: int, element: int, portion: float, output: float) -> void:
-	add_logs(combo_color[combo_slots[HUD.hero] - 2] + caption[id])
-	damage_zone(zone, HUD.hero, element, combo_no, portion, output)
+func fight(h: int, combo_no: int, id: int, zone: int, element: int, portion: float, output: float) -> bool:
+	add_logs(combo_color[HUD.has(D.COMBO_SLOTS | h) - 2] + caption[id])
+	return damage_zone(zone, HUD.hero, element, combo_no, portion, output)
 
 func update_ui():
 	pass
 
-func open_menu_panel() -> void:
-	stated = !stated
+func open_menu_panel(h: int) -> void:
+	HUD.undo(D.MENU, D.STATED)
 	HUD.game.right.split_offset = RIGHT_OFF
 	HUD.game.left.split_offset = LEFT_OFF
 	HUD.game.top.split_offset = FORWARD_OFF
 	HUD.game.bottom.split_offset = BACKWARD_OFF
-	if stated:
-		if read_mode:
+	if HUD.did(D.MENU, D.STATED):
+		var menu_select: int = HUD.has(D.MENU_SELECTED | h)
+		if HUD.did(D.MENU, D.READ_MODE):
 			HUD.game.get(menu_navigation[(menu_select << 1)]).split_offset = menu_shift[menu_select] >> 1
 		else:
 			HUD.game.get(menu_navigation[(menu_select << 1)]).split_offset = menu_shift[menu_select]
 			HUD.game.get(menu_navigation[(menu_select << 1) + 1]).grab_focus() # TODO FIXME ALLOW COOP
 	else:
-		read_mode = false
+		HUD.dont(D.MENU, D.READ_MODE)
 		HUD.game.no_focus.grab_focus()
-
-const menu_navigation: Array[StringName] = [
-	&"right_focus", &"right", &"left_focus", &"left",
-	&"top_focus", &"top", &"bottom_focus", &"bottom"]
-const menu_shift: PackedInt32Array = [RIGHT_ON, LEFT_ON, FORWARD_ON, BACKWARD_ON]
-
-enum { PANEL_RIGHT = 0, PANEL_LEFT, PANEL_FORWARD, PANEL_BACKWARD,
-	LEFT_OFF = -2000, LEFT_ON = 0, RIGHT_OFF = 1000, RIGHT_ON = -1000,
-	FORWARD_OFF = -1000, FORWARD_ON = 1000, BACKWARD_OFF = 1000, BACKWARD_ON = -1000 }
-var menu_select: int = 0
-var stated: bool = false
-var read_mode: bool = false
 
 func reset_running(event: InputEvent) -> void: HUD.adversary.running = D.t0(HUD.adversary.running, HUD.settings.get_hero(event))
 func input_actions(event: InputEvent) -> void: # return #TODO FIXME disable after HUD test
 	var key2: bool = HUD.settings.key2()
 	HUD.action.movement(event, key2)
 	if _hold(&"group"):
-		if _hold(&"left"): menu_select = PANEL_LEFT; read_mode = _hold(&"forward") or _hold(&"backward")
-		elif _hold(&"right"): menu_select = PANEL_RIGHT; read_mode = _hold(&"forward") or _hold(&"backward")
-		elif _press(&"forward"): menu_select = PANEL_FORWARD
-		elif _press(&"backward"): menu_select = PANEL_BACKWARD
-	elif _out(&"group"): open_menu_panel()
+		var h: int = HUD.settings.get_hero(event)
+		if _hold(&"left"):
+			HUD.having(D.MENU_SELECTED | h, PANEL_LEFT)
+			HUD.doing(D.MENU, D.READ_MODE, _hold(&"forward") or _hold(&"backward"))
+		elif _hold(&"right"):
+			HUD.having(D.MENU_SELECTED | h, PANEL_RIGHT)
+			HUD.doing(D.MENU, D.READ_MODE, _hold(&"forward") or _hold(&"backward"))
+		elif _press(&"forward"): HUD.having(D.MENU_SELECTED | h, PANEL_FORWARD)
+		elif _press(&"backward"): HUD.having(D.MENU_SELECTED | h, PANEL_BACKWARD)
+	elif _out(&"group"): open_menu_panel(HUD.settings.get_hero(event))
 	elif _press(&"select"):
 		if HUD.action.state[HUD.hero] == 0:
 			HUD.level.deploy.select()
@@ -485,7 +481,7 @@ func input_actions(event: InputEvent) -> void: # return #TODO FIXME disable afte
 	elif key2 and _press(&"act3_2"): skill_a(HUD.settings.key_hero())
 	elif _press(&"act4"): skill_b(HUD.settings.get_hero(event)); reset_running(event)
 	elif key2 and _press(&"act4_2"): skill_b(HUD.settings.key_hero())
-	elif _press(&"fire"): use_item()
+	elif _press(&"fire"): use_item(HUD.settings.get_hero(event))
 	elif _hold(&"aim"): pass # TODO AIM
 	elif _out(&"aim"):
 		HUD.adversary.running = D.t1(HUD.adversary.running, HUD.settings.get_hero(event))
@@ -507,71 +503,71 @@ func fast_slot(weapon_type: int) -> bool:
 	var i: int = D.byte(HUD.get_item(HUD.hero, Trades.WEAPON_SLOT), Trades.ID) - Trades.WEAPON
 	return 0 < i and HUD.inventory.type[i] == weapon_type
 
-func empty_hand_punch(s: int) -> void:
+func new_slot(h: int, s: int) -> int: var slots: int = HUD.has(D.COMBO_SLOTS); slots = s | (slots << D.HALF_BYTE); HUD.having(h, slots); return slots
+func empty_hand_punch(h: int, s: int) -> bool:
 	if (A_DOUBLE & s)==s:
 		if (A_LUNGE & s)==s and book(B_LUNGE) and can(C_BACKSPIT):
-			fight(3, D_LUNGE, Adversary.TARGET, Adversary.NORMAL, 1.35, 2.0)
+			return fight(h, 3, D_LUNGE, TARGET, NORMAL, 1.35, 2.0)
 		else:
-			fight(2, D_DOUBLE, Adversary.TARGET, Adversary.NORMAL, 1.15, -0.2)
+			return fight(h, 2, D_DOUBLE, TARGET, NORMAL, 1.15, -0.2)
 	else:
-		HUD.adversary.damage_zone(HUD.hero, Adversary.TARGET, Adversary.NORMAL, 1, 1.0, -0.1)
+		return damage_zone(HUD.hero, TARGET, NORMAL, 1, 1.0, -0.1)
 
-func empty_hand_kick(s: int) -> void:
+func empty_hand_kick(h: int, s: int) -> bool:
 	if (A_LOW_KICK & s)==s:
-		fight(2, D_LOW_KICK, Adversary.TARGET, Adversary.NORMAL, 1.25, 0.5)
+		return fight(h, 2, D_LOW_KICK, TARGET, NORMAL, 1.25, 0.5)
 	elif (A_SPIT_KICK & s)==s and book(B_BACKSPIT) and can(C_BACKSPIT):
-		pass
+		return false
 	else:
-		HUD.adversary.damage_zone(HUD.hero, Adversary.TARGET, Adversary.NORMAL, 1, 1.0, 0.1)
+		return damage_zone(HUD.hero, TARGET, NORMAL, 1, 1.0, 0.1)
 
 func punch(h: int) -> void:
-	var s: int = A | (combo_slots[h] << D.HALF_BYTE); combo_slots[h] = s
+	var s: int = new_slot(h, A); var env: bool = true
 	match HUD.hero:
 		D.RAY:
-			empty_hand_punch(s)
+			env = empty_hand_punch(h, s)
 		D.ROCK:
 			if (A_PIERCE & s)==s:
-				pass
+				env = true
 			elif (A_HUG & s)==s:
-				pass
+				env = true
 			else:
-				empty_hand_punch(s)
+				env = empty_hand_punch(h, s)
 	HUD.combo_timer.start()
+	if env: HUD.action.punch_apply(h)
 
 func kick(h: int) -> void:
-	var s: int = B | (combo_slots[h] << D.HALF_BYTE); combo_slots[h] = s
+	var s: int = new_slot(h, B)
 	match HUD.hero:
 		D.RAY:
-			empty_hand_kick(s)
+			empty_hand_kick(h, s)
 		D.ROCK:
 			if (A_SPIT_KICK & s)==s:
 				pass
 			else:
-				empty_hand_kick(s)
+				empty_hand_kick(h, s)
 	HUD.combo_timer.start()
-	#if HUD.level.tile[HUD.hero] == D.H_SPRING_OFF: TODO CHANGE TO ROPE
-	#	HUD.level.chains.jump()
 
 func skill_a(h: int) -> void:
-	var s: int = X | (combo_slots[h] << D.HALF_BYTE); combo_slots[h] = s
+	var s: int = new_slot(h, X); var env: bool = true
 	if (A_SPIT_KICK & s)==s:
 		pass
 	elif (A_CRACK & s)==s and book(B_CRACK) and can(C_CRACK):
-		fight(3, D_CRACK, Adversary.TARGET, Adversary.NORMAL, 1.2, 0.5)
+		env = fight(h, 3, D_CRACK, Adversary.TARGET, Adversary.NORMAL, 1.2, 0.5)
 
-	match HUD.hero:
-		D.RAY: HUD.action.melt_ice()
-		D.ROCK: HUD.action.puddle_tile() # LevelRoot # TileDecorator
+	if env: HUD.action.skill_a_apply(h)
 
 func skill_b(h: int) -> void:
-	var s: int = Y | (combo_slots[h] << D.HALF_BYTE); combo_slots[h] = s
+	var s: int = new_slot(h, Y); var env: bool = true
 	if (A_POACHING & s)==s:
 		pass
 	elif (A_HUG & s)==s:
-		fight(4, D_HUG, Adversary.TARGET, Adversary.NORMAL, 1.4, -0.5)
+		env = fight(h, 4, D_HUG, Adversary.TARGET, Adversary.NORMAL, 1.4, -0.5)
+	
+	if env: HUD.action.skill_b_apply(h)
 
-func use_item() -> void:
-	var s: int = S | (combo_slots[HUD.hero] << D.HALF_BYTE); combo_slots[HUD.hero] = s
+func use_item(h: int) -> void:
+	var s: int = new_slot(h, S)
 	var throw: bool = HUD.inventory.produce_item(HUD.hero, HUD.trades.fast_panel[HUD.hero]) == Trades.WEAPON_THROW
 	match HUD.hero:
 		D.ROCK:
@@ -586,28 +582,9 @@ func use_item() -> void:
 				pass
 				
 ## ANIMATION
-
-enum { POWER, INFLUENCE, VITALITY, REACTION, SPEED = 4, DOUBLE_COMBO = 2 } # signal sync_anim(animation: String, frame: int)
-enum {
-	IDLE, WALK, RUN, PUSH, STOMP,
-	
-	A_PUNCH, A_KICK, A_FIRE, WHIP, JUMP, HURT,
-	
-	MOVE, DIRECTED = 3,
-	
-	NO_ANIM = 0, A_ENV = 1, A_ACT
-}
-var max_slot: PackedByteArray = [0, 24, 12, 12]
-var frames: PackedByteArray = [0, 0, 0,  0, 0, 0]
-var sprite_dir: PackedStringArray = ["bo", "fo", "bl", "fl", "ol", "br", "fr", "or"]
-var sprites: PackedStringArray = ["", "", "_run", "_jump", "_push", "_stomp",
-	"_punch", "_kick",  "_fire", "_whip", "c_move", "c_whip"] # _walk
-var running: int
-
 func get_anim(h: int) -> int: return h + (A_ACT if frames[A_ACT + h] != NO_ANIM else A_ENV)
 func set_anim(h: int, type: int) -> void:
-	#if HUD.action.directed[h] == Vector2.ZERO: return
-	var anim: String = sprite_dir[D.direct(HUD.action.directed_nzero[h].round())]; var hero: int = h * 3
+	var anim: String = sprite_dir[D.direct(HUD.action.directed[Action.NZERO | h].round())]; var hero: int = h * 3
 	if A_PUNCH <= type and type <= HURT:
 		frames[hero + A_ACT] = type; anim += sprites[frames[get_anim(hero)]]
 	else:
@@ -618,11 +595,7 @@ func progress_animation() -> void:
 	for h in range(0, D.PARTY):
 		var hero: int = h * 3
 		if frames[hero + A_ACT] == JUMP:
-			if frames[hero] >= max_slot[JUMP]:
-				HUD.action.stop_jump(h); set_anim(h, NO_ANIM) # pos
-			else:
-				HUD.action.jump_animate(h, frames[hero])
-				frames[hero] += 1
+			continue
 		else:
 			frames[hero] += 1
 			if frames[hero] >= max_slot[frames[hero + A_ENV]]: frames[hero] = 0
@@ -639,8 +612,6 @@ func set_shadow(h: int, next: int) -> void:
 	HUD.level.shadow[h].visible = next != SHADOW_FLY
 	HUD.level.shadow[h].position = Vector2(0, 27) if next == SHADOW_HANG else Vector2(0, -5)
 
-enum { SHADOW_GROUND, SHADOW_HANG, SHADOW_FLY }
-
 func get_mirror_sprite(view: CharacterBody2D, path: StringName, mirror: AnimatedSprite2D) -> AnimatedSprite2D:
 	if mirror != null: return mirror
 	mirror = load(path).instantiate()
@@ -655,13 +626,6 @@ func set_aura(h: int, thickness: float, next_color: Color, resource: bool) -> vo
 	else: #Color("FFFFFF7F"), 3
 		HUD.level.profile[h].material.set(&"shader_parameter/line_thickness", thickness)
 		HUD.level.profile[h].material.set(&"shader_parameter/line_color", next_color)
-# PARTICLES
-enum { PUNCH, KICK, TORCH, DROP, APPEAR = 0, TIME, DISAPPEAR, OFFSET = 10, PATH = 100 }
-
-const timing: PackedFloat32Array = [0.2, 0.4, 0.6]
-
-var texture: Texture
-var sprite: Sprite2D
 
 func set_direction(pos: Vector2, direction: Vector2, type: int) -> void:
 	sprite = Sprite2D.new()

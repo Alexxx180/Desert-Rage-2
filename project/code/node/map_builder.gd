@@ -9,29 +9,29 @@ var test = setup_coords # : Callable
 @export var branching_on: PackedInt32Array # var casual_mode: bool = true; if casual_mode:
 
 func add_branching(e: TileDecorator, pillars: PackedVector2Array, branch: PackedInt32Array) -> void:
-	var no_tag: Vector2 = Vector2i(-1, -1); var e_null: bool = e == null
+	var no_tag: Vector2i = Vector2i(-1, -1); var e_null: bool = e == null
 	for pillar in pillars:
 		if e_null or (e.get_cell_atlas_coords(pillar) == no_tag):
-			branch.append(pillar)
+			branch.append(D.join(pillar))
 
 enum { CLUSTER = 64, LEVERS = 0, SOURCE, BUTTON, TRANSP,
 	LEVERS_ID = (1<<Action.LEVER_OFF)|(1<<Action.LEVER_ON),
 	SOURCE_ID = (1<<Action.SOURCE_OFF)|(1<<Action.SOURCE_ON),
 	BUTTON_ID = (1<<Action.PLATE_OFF)|(1<<Action.PLATE_ON),
-	TRANSP_ID = (1<<Action.TELEPORTS_OFF)|(1<<Action.PLACE),
-	U_WALLS = (1<<U_WALL_OFF)|(1<<U_WALL_ON),
-	D_WALLS = (1<<D_WALL_OFF)|(1<<D_WALL_ON),
-	STANDS = (1<<STAND_OFF)|(1<<STAND_ON)
+	TRANSP_ID = (1<<Action.TELEPORT_OFF)|(1<<Action.PLACE),
+	U_WALLS = (1<<Action.U_WALL_OFF)|(1<<Action.U_WALL_ON),
+	D_WALLS = (1<<Action.D_WALL_OFF)|(1<<Action.D_WALL_ON),
+	STANDS = (1<<Action.STAND_OFF)|(1<<Action.STAND_ON)
 }
 
 func setup_coords() -> void:
 	var b: TileDecorator = get_node(^"../border")
 	var e: TileDecorator = get_node(^"../execute")
-	var g: TileDecorator = get_node(^"../group")
+	var g: Node2D = get_node(^"../group")
 
 	branching_off = []; branching_on = []
-	for n in [Action.U_PILLAR_OFF, Action.D_PILLAR_OFF]: add_branching(e, b.get_used_cells_by_id(Action.LOGIC, D.map8(n)), branching_off)
-	for n in [Action.U_PILLAR_ON, Action.D_PILLAR_ON]: add_branching(e, b.get_used_cells_by_id(Action.LOGIC, D.map8(n)), branching_on)
+	for n in [Action.U_WALL_OFF, Action.D_WALL_OFF]: add_branching(e, b.get_used_cells_by_id(Action.LOGIC, D.map8(n)), branching_off)
+	for n in [Action.U_WALL_ON, Action.D_WALL_ON]: add_branching(e, b.get_used_cells_by_id(Action.LOGIC, D.map8(n)), branching_on)
 
 	if e == null: return
 
@@ -41,8 +41,12 @@ func setup_coords() -> void:
 	var button: PackedByteArray = []; var bcoord: PackedInt32Array = []
 	var source: PackedByteArray = []; var scoord: PackedInt32Array = []
 	var transp: PackedByteArray = []; var tcoord: PackedInt32Array = []
+	
+	var size: int = 64
+	if e.get_used_cells_by_id(Action.TAGS, D.map8(32)).size() == 0:
+		size = 16 if e.get_used_cells_by_id(Action.TAGS, D.map8(16)).size() == 0 else 32
 
-	for y in range(0, T8):
+	for y in range(0, size):
 		var tiles: PackedVector2Array = e.get_used_cells_by_id(Action.TAGS, D.map8(y))
 		if tiles.size() == 0: break
 		
@@ -67,14 +71,14 @@ func setup_coords() -> void:
 			SOURCE: source.append(count); scoord.append_array(part_cluster)
 			TRANSP: transp.append(count); tcoord.append_array(part_cluster)
 
-		count += tile.size()
+		count += tiles.size()
 
-	var htypes: Array[PackedInt32Array] = [levers, source, button, transp]; var sizes: int = 0
+	var htypes: Array[PackedByteArray] = [levers, source, button, transp]; var sizes: int = 0
 	var ctypes: Array[PackedInt32Array] = [lcoord, scoord, bcoord, tcoord]
-	for i in range(0, len(types)):
-		coords.append_array(ctypes[i])
-		access.append_array(htypes[i])
-		header[i] = sizes; sizes += types[i].size()
+	for i in range(0, len(ctypes)):
+		HUD.level.coords.append_array(ctypes[i])
+		HUD.level.access.append_array(htypes[i])
+		HUD.level.header.append(sizes); sizes += htypes[i].size()
 
-	g.access = access; g.coords = coords
-	g.header = header
+	g.access = HUD.level.access; g.coords = HUD.level.coords
+	g.header = HUD.level.header

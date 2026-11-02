@@ -34,12 +34,6 @@ enum { DEFAULTED = -1,
 	LT_SMOKE_B = 13, LT_SPARK_A = 14, LT_SPARK_B = 20, LT_SHADOW_A = 21,
 	LT_SHADOW_B = 25, LT_TEMPLE_A = 26, LT_TEMPLE_B = 35, LT_CREDITS = 36 }
 
-func toggle_ost(type: int, next: bool) -> void:
-	_ost[type >> 6] = D.to(_ost[type >> 6], type & ((1 << 64) - 1), next)
-
-func check_ost(type: int) -> bool: return D.of(_ost[type >> 6], type & ((1 << 64) - 1))
-func _d(from: int, to: int) -> bool: return from <= level_no and level_no <= to
-
 var level_no: int
 var ost_no: int
 var default_no: int
@@ -48,14 +42,87 @@ var fight_mode: int
 var music_player: AudioStreamPlayer
 var hero_no: int
 
+var is_device_input: bool = false
+var device_codes: PackedInt32Array = [KEY_NONE, KEY_NONE, KEY_NONE, KEY_NONE]
+var device_input: PackedByteArray = [0, 0, 0, 0]
+enum { D_KEYBOARD, D_GAMEPAD,  DEVICE_TYPE = 0, KEY_COUNT, CURRENT_KEY, DEVICE_SETTING }
+
+enum { GAMEPAD_MOVEMENT, GAMEPAD_ACTIONS, GAMEPAD_ITEMS, GAMEPAD_GROUP, AXIS_BIT = 128 }
+
+const locale_type: PackedStringArray = ["en", "ru"]
+const LINEAR_SLIDER: float = 0.01; var current_loud: int = 0; var current_bus: int = 0
+enum { BUS_MUSIC, BUS_SOUND, BUS_INTERFACE }
+
+enum { P_ORIGIN = 2, P_SMOKE = 7, P_SPARK = 12, P_SHADOW = 17, P_TEMPLE = 22,
+	D_BOSSES = 8, D_COMMON = 16, D_SPECIFIC = 32 }
+
+enum { XBX, PS, N }
+
+var gamepad_type: int = XBX
+const button_layout: PackedStringArray = ["△□○✖", "ABXY", "ABYX"] # ❏▣⊹❣☜☞☟
+const types: PackedStringArray = ["ps",  "xbox",  "xinput"] #, "nintendo", "stk"]
+
+enum { PEACE, TENSE, FIGHT, HERO_BLEND, FINISHED }
+
+enum { GAMEPAD, MOUSE, KEYBOARD_MOUSE, KEYBOARD_MOUSE_2, KEYBOARD, KEYBOARD_2, P1 = 0, P2 }
+var presets: PackedByteArray = [KEYBOARD_MOUSE, KEYBOARD_2]
+var preset_text: PackedStringArray = ["KBM1", "KEY1", "GPAD", "MOUS", "KBM2", "KEY2"]
+
+
+var settings: MarginContainer
+var content: ScrollContainer
+var exit: Button; var controls: Button
+
+var sound_head: Button
+var music: HSlider; var music_manual: Button
+var sound: HSlider; var sound_manual: Button
+var interface: HSlider; var interface_manual: Button
+var ost_system: Button
+
+var xp_head: Button
+var p1: Button
+var p1_keyboard_mouse: Button; var p1_keyboard: Button
+var p1_gamepad: Button; var p1_mouse: Button
+var p1_keyboard_mouse2: Button; var p1_keyboard2: Button
+var p2: Button
+var p2_keyboard_mouse: Button; var p2_keyboard: Button
+var p2_gamepad: Button; var p2_mouse: Button
+var p2_keyboard_mouse2: Button; var p2_keyboard2: Button
+var sensitivity: HSlider; var difficulty: Button
+var deasy: Button; var dsuitable: Button; var dhard: Button
+var language: Button; var screen: Button
+var lenglish: Button; var lrussian: Button
+var press: Button; var narrative: Button
+var logs: Button; var help: Button
+
+var keyboard_head: Button
+var movement: Button; var actions: Button
+var items: Button; var group: Button
+var movement2: Button; var actions2: Button
+var items2: Button; var saves: Button
+var soundtrack: Button
+
+var gamepad_head: Button
+var g_movement: Button; var g_actions: Button
+var g_items: Button; var g_group: Button
+
+var sound_menu: Control
+
+
+
+
+func toggle_ost(type: int, next: bool) -> void:
+	_ost[type >> 6] = D.to(_ost[type >> 6], type & ((1 << 64) - 1), next)
+
+func check_ost(type: int) -> bool: return D.of(_ost[type >> 6], type & ((1 << 64) - 1))
+func _d(from: int, to: int) -> bool: return from <= level_no and level_no <= to
+
 func user_file(no: int) -> String: return "user://" + str(no).pad_zeros(2) + ".ogg"
 func exists(no: int) -> bool: return check_ost(no) and _defuse(no)
 func _defuse(no: int) -> bool:
 	if FileAccess.file_exists(user_file(no)): return true
 	toggle_ost(no, false)
 	return false
-
-enum { PEACE, TENSE, FIGHT, HERO_BLEND, FINISHED }
 
 func set_fight_mode(mode: int) -> void:
 	fight_mode = mode
@@ -139,9 +206,6 @@ func level_playback_enter(finished: bool = false, specific: int = DEFAULTED) -> 
 		play_theme(user_file(ost_no), finished)
 	else:
 		play_theme("res://data/ost/music/" + str(default_no).pad_zeros(2) + ".ogg", finished)
-		
-enum { P_ORIGIN = 2, P_SMOKE = 7, P_SPARK = 12, P_SHADOW = 17, P_TEMPLE = 22,
-	D_BOSSES = 8, D_COMMON = 16, D_SPECIFIC = 32 }
 
 func _theme(no: int) -> bool: return D.of(_ost[no >> D_COMMON], no & ((1 << 64) - 1))
 
@@ -170,12 +234,6 @@ func finish_playback() -> void:
 
 func _blend(_type: int) -> bool: return D.byte(_ost[_type >> 6], _type & 64) < randi_range(0, 100)
 
-enum { XBX, PS, N }
-
-var gamepad_type: int = XBX
-const button_layout: PackedStringArray = ["△□○✖", "ABXY", "ABYX"] # ❏▣⊹❣☜☞☟
-const types: PackedStringArray = ["ps",  "xbox",  "xinput"] #, "nintendo", "stk"]
-
 func input_device_type(event: InputEvent) -> void:
 	if event is InputEventJoypadButton or event is InputEventJoypadMotion:
 		var device: String = Input.get_joy_name(0).to_lower()
@@ -184,45 +242,6 @@ func input_device_type(event: InputEvent) -> void:
 			for i in range(0, len(types)): if device.contains(types[i]): gamepad_type = i; break
 		print_verbose("device name: ", device)
 		# process help hints
-
-var settings: MarginContainer
-var content: ScrollContainer
-var exit: Button; var controls: Button
-
-var sound_head: Button
-var music: HSlider; var music_manual: Button
-var sound: HSlider; var sound_manual: Button
-var interface: HSlider; var interface_manual: Button
-var ost_system: Button
-
-var xp_head: Button
-var p1: Button
-var p1_keyboard_mouse: Button; var p1_keyboard: Button
-var p1_gamepad: Button; var p1_mouse: Button
-var p1_keyboard_mouse2: Button; var p1_keyboard2: Button
-var p2: Button
-var p2_keyboard_mouse: Button; var p2_keyboard: Button
-var p2_gamepad: Button; var p2_mouse: Button
-var p2_keyboard_mouse2: Button; var p2_keyboard2: Button
-var sensitivity: HSlider; var difficulty: Button
-var deasy: Button; var dsuitable: Button; var dhard: Button
-var language: Button; var screen: Button
-var lenglish: Button; var lrussian: Button
-var press: Button; var narrative: Button
-var logs: Button; var help: Button
-
-var keyboard_head: Button
-var movement: Button; var actions: Button
-var items: Button; var group: Button
-var movement2: Button; var actions2: Button
-var items2: Button; var saves: Button
-var soundtrack: Button
-
-var gamepad_head: Button
-var g_movement: Button; var g_actions: Button
-var g_items: Button; var g_group: Button
-
-var sound_menu: Control
 
 func set_settings() -> void:
 	settings = load(D.settings).instantiate()
@@ -283,10 +302,6 @@ func set_settings() -> void:
 	g_actions = o.get_node(^"gamepad/actions")
 	g_items = o.get_node(^"gamepad/items")
 	g_group = o.get_node(^"gamepad/group")
-
-enum { GAMEPAD, MOUSE, KEYBOARD_MOUSE, KEYBOARD_MOUSE_2, KEYBOARD, KEYBOARD_2, P1 = 0, P2 }
-var presets: PackedByteArray = [KEYBOARD_MOUSE, KEYBOARD_2]
-var preset_text: PackedStringArray = ["KBM1", "KEY1", "GPAD", "MOUS", "KBM2", "KEY2"]
 
 func is_gamepad(event: InputEvent) -> bool: return event is InputEventJoypadButton or event is InputEventJoypadMotion
 func is_mouse(event: InputEvent) -> bool: return event is InputEventMouseButton or event is InputEventMouseMotion
@@ -364,9 +379,6 @@ func update_screen() -> void:
 	else:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 
-const locale_type: PackedStringArray = ["en", "ru"]
-const LINEAR_SLIDER: float = 0.01; var current_loud: int = 0; var current_bus: int = 0
-enum { BUS_MUSIC, BUS_SOUND, BUS_INTERFACE }
 func back_to_start() -> void: content.scroll_vertical = 0
 func back_to_pause() -> void: settings.hide(); HUD.pause.show()
 func back_to_ost() -> void: settings.hide(); sound_menu.show()
@@ -394,12 +406,6 @@ func set_easy() -> void: set_difficulty(1)
 func set_suitable() -> void: set_difficulty(2)
 func set_hard() -> void: set_difficulty(3)
 
-var is_device_input: bool = false
-var device_codes: PackedInt32Array = [KEY_NONE, KEY_NONE, KEY_NONE, KEY_NONE]
-var device_input: PackedByteArray = [0, 0, 0, 0]
-enum { D_KEYBOARD, D_GAMEPAD,  DEVICE_TYPE = 0, KEY_COUNT, CURRENT_KEY, DEVICE_SETTING }
-
-enum { GAMEPAD_MOVEMENT, GAMEPAD_ACTIONS, GAMEPAD_ITEMS, GAMEPAD_GROUP, AXIS_BIT = 128 }
 # check about each key
 func update_input_manage(_type: int) -> void:
 	pass

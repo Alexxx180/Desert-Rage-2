@@ -38,8 +38,8 @@ var plate_tile: PackedInt32Array = [0, 0,  0, 0]
 var boxes_tile: PackedInt32Array = [0, 0,  0, 0,  0, 0,  0, 0]
 
 var coords: PackedInt32Array = []
-var access: PackedInt32Array = []
-var header: PackedInt32Array = []
+var access: PackedByteArray = []
+var header: PackedByteArray = []
 
 func input_skip(_event: InputEvent) -> void:
 	pass

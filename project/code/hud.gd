@@ -11,6 +11,9 @@ enum { LEVEL, LOGIC, BOX = 2, POS = 4, AURA = 6, RESOURCE = 7, STATUS = 8,
 }
 
 var session: PackedInt64Array
+var _state: PackedByteArray = [0, 0,  0, 0,  0, 0,  0, 0,  0, 0,  0, 0, 
+	0, 0,  0, 0,  0,  0,  0]
+var _status: PackedInt64Array = []
 # model : L1 (SCORE)P2 E4 A2 N4 S8 B4 A2 R2
 var level: LevelRoot
 var adversary: Adversary = Adversary.new()
@@ -21,6 +24,57 @@ var settings: Settings = Settings.new()
 enum { CURRENTS, PLATFORMS, PLACES }
 var size: PackedByteArray = [0, 0, 0]
 var hero: int = 0
+
+@onready var tree: SceneTree = get_tree()
+@onready var ui: Window = get_window()
+var dialog_timer: Timer = Timer.new(); var station_timer: Timer = Timer.new()
+var debug_timer: Timer; var chats_timer: Timer; var notes_timer: Timer
+var combo_timer: Timer = Timer.new(); var size_timer: Timer = Timer.new()
+var anim_timer: Timer = Timer.new()
+var allow_coop: bool = false
+
+var fire: GPUParticles2D; var rain: GPUParticles2D
+var level_path: PackedStringArray = ["_world", "_cave_origin", "_cave_smoke", "_cave_spark", "_temple_ancient", "_credits"]
+var level_no: PackedByteArray = [0, 1, 8, 15, 27, 36]
+var transition_part: int = 0
+
+var state: int = 0
+
+var navigation: Array
+var hints: CompressedTexture2DArray = preload("res://icon/help/z_master.svg")
+
+var up_transit: ColorRect; var down_transit: ColorRect; var help_card: Label
+
+enum { IS_FULL }
+
+var text: PackedStringArray = ["Полегче с этим."]
+
+var transit_type: int = GATE_IN
+enum { LADDER_DOWN, LADDER_UP, GATE_IN, GATE_OUT, GATE_BOTH }
+const BLACK_TRANSPARENT: Color = Color(0, 0, 0, 255)
+
+
+func doing(h: int, i: int, n: bool) -> void: _status[h] = D.to(_status[h], i, n)
+func undo(h: int, i: int) -> void: _status[h] = D.t_(_status[h], i)
+func do(h: int, i: int) -> void: _status[h] = D.t1(_status[h], i)
+func dont(h: int, i: int) -> void: _status[h] = D.t0(_status[h], i)
+func did(h: int, i: int) -> bool: return D.of(_status[h], i)
+func got(item: int) -> int: return _status[item]
+func give(item: int, next: int) -> void: _status[item] = next
+func byte(item: int, slot: int) -> int: return D.byte(_status[item], slot)
+func short(item: int, slot: int) -> int: return D.short(_status[item], slot)
+func number(item: int, slot: int) -> int: return D.number(_status[item], slot)
+func to_byte(item: int, slot: int, next: int) -> void: _status[item] = D.to_byte(_status[item], slot, next)
+func to_short(item: int, slot: int, next: int) -> void: _status[item] = D.to_short(_status[item], slot, next)
+func to_number(item: int, slot: int, next: int) -> void: _status[item] = D.to_number(_status[item], slot, next)
+
+func part(item: int, slot: int) -> int: return D.part(_state[item], slot)
+func half(item: int, slot: int) -> int: return D.half(_state[item], slot)
+func to_part(item: int, slot: int, next: int) -> void: _state[item] = D.to_part(_status[item], slot, next)
+func to_half(item: int, slot: int, next: int) -> void: _state[item] = D.to_half(_status[item], slot, next)
+func has(i: int) -> int: return _state[i]
+func hasnt(i: int) -> void: _state[i] = 0
+func having(i: int, s: int) -> void: _state[i] = s
 
 func load_session() -> void:
 	# loading file...
@@ -46,15 +100,6 @@ func set_item(bag: int, slot: int, item: int) -> void:
 	session[no] = D.to_short(session[no], slot & D.HALF_BYTE, item)
 
 # TIMING
-@onready var tree: SceneTree = get_tree()
-@onready var ui: Window = get_window()
-var dialog_timer: Timer = Timer.new(); var station_timer: Timer = Timer.new()
-var debug_timer: Timer; var chats_timer: Timer; var notes_timer: Timer
-var combo_timer: Timer = Timer.new(); var size_timer: Timer = Timer.new()
-var anim_timer: Timer = Timer.new()
-var allow_coop: bool = false
-
-var fire: GPUParticles2D; var rain: GPUParticles2D
 
 func _ready() -> void:
 	layer = 2
@@ -80,10 +125,6 @@ func next_hero() -> int: return HUD.hero ^ 1
 func _init() -> void:
 	# 
 	session = FileAccess.get_file_as_bytes(D.saves).to_int64_array()
-
-var level_path: PackedStringArray = ["_world", "_cave_origin", "_cave_smoke", "_cave_spark", "_temple_ancient", "_credits"]
-var level_no: PackedByteArray = [0, 1, 8, 15, 27, 36]
-var transition_part: int = 0
 
 func load_scene(no: int, part: int = 0) -> void:
 	var transit: String
@@ -116,14 +157,6 @@ func load_transition() -> void:
 		else:
 			load_scene(no, transition_part - 9)
 
-var state: int = 0
-
-var navigation: Array
-var hints: CompressedTexture2DArray = preload("res://icon/help/z_master.svg")
-
-var up_transit: ColorRect; var down_transit: ColorRect; var help_card: Label
-
-
 func is_hud_opened() -> bool:
 	var result: bool = true
 	for n in navigation:
@@ -145,22 +178,12 @@ func log_help(of: int) -> void:
 	tween.tween_property(help_card, ^"modulate", Color.WHITE, 1)
 	help_card.text = tr(D.hints[of])
 
-
-
-enum { IS_FULL }
-
-var text: PackedStringArray = ["Полегче с этим."]
-
 func add_log(caption: String) -> void:
 	var line: Label = logs.instantiate()
 	HUD.game.log.add_child(line)
 	line.text = caption
 
 func notify(type: int) -> void: add_log(text[type])
-
-var transit_type: int = GATE_IN
-enum { LADDER_DOWN, LADDER_UP, GATE_IN, GATE_OUT, GATE_BOTH }
-const BLACK_TRANSPARENT: Color = Color(0, 0, 0, 255)
 
 func gate_both(from: float, to: float) -> Tween:
 	up_transit.scale.y = from
